@@ -222,8 +222,10 @@ should catch a mistake at PR time rather than letting it fail silently.
   and the read counter moved to its own six-hourly `sync-view-counts.yml`:
   everything external here (JUG list, Champions, events) changes slowly, and
   the view count is the one thing that moves continuously. Both workflows
-  commit to `main`, so they share a `concurrency: data-sync` group and rebase
-  before pushing rather than racing -- and both then have to ASK for the deploy,
+  commit to `main`, so they share a `concurrency: data-sync` group -- which
+  serialises the two of THEM and nothing else, since `build-deploy.yml` commits
+  data too and is in another group, so each push retries rather than trusting
+  the group (see `build-deploy.yml` below). Both then have to ASK for the deploy,
   because a workflow's own push does not cause one (see
   `build-deploy.yml` below). And it **only rewrites `data/jug-events.json` when the events themselves
   changed**: `generatedAt` moves on every run, so writing unconditionally would
@@ -886,11 +888,14 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
-  GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
-  `data/java-champions.yaml` and `data/views.json` before building
-  (see `fetch/Jugs.java` above) — needs `permissions.contents:
-  write` and a `[skip ci]` commit message for exactly this reason (otherwise
-  that commit would re-trigger the same workflow).
+  GitHub Pages on push to `main`, and on `workflow_dispatch` — which is how the
+  two scheduled syncs get their data onto the site (see the next entry). Also
+  refreshes and commits `data/jugs.yaml`, `data/java-champions.yaml`,
+  `data/geocode-cache.yaml` and `data/views.json` before building (see
+  `fetch/Jugs.java` above), so it needs `permissions.contents: write` and
+  `[skip ci]` on that commit — it pushes to the very branch and event it
+  triggers on. Note the data commit runs **before** the Hugo step, so anything
+  that makes that push fail takes the deploy down with it.
 
   **`hugo-version` is PINNED, in this workflow and in `pr-check.yml`, and
   `latest` is not an option.** `peaceiris/actions-hugo` resolves `latest` through
@@ -902,14 +907,29 @@ should catch a mistake at PR time rather than letting it fail silently.
   it was developed against — a Hugo release that changes a template function is
   not something to find out about from a red `main`. Move the pin deliberately,
   in both files, having built locally on that version first.
-  GitHub Pages on push to `main`, and on `workflow_dispatch` — which is how the
-  two scheduled syncs get their data onto the site (see the next entry). Also
-  refreshes and commits `data/jugs.yaml`, `data/java-champions.yaml`,
-  `data/geocode-cache.yaml` and `data/views.json` before building (see
-  `fetch/Jugs.java` above), so it needs `permissions.contents: write` and
-  `[skip ci]` on that commit — it pushes to the very branch and event it
-  triggers on. Note the data commit runs **before** the Hugo step, so anything
-  that makes that push fail takes the deploy down with it.
+
+  **THREE workflows push to `main`, the concurrency group covers only two of
+  them, and so every push RETRIES.** `sync-external-content.yml` and
+  `sync-view-counts.yml` share `concurrency: data-sync`; this workflow cannot
+  join them — its group is `pages` and carries `cancel-in-progress: true` for the
+  deploy, and a workflow gets exactly one group. So this workflow's data commit
+  races both syncs, and it had **no `git pull` at all**, only a bare `git push`.
+
+  That is not a stale-data bug, it is a lost deploy: the push runs before Hugo,
+  so whichever job loses the race fails. It happened on **2026-08-31**, and only
+  cheaply because it happened the other way round — a hand-run
+  `sync-view-counts` pulled, this workflow pushed `421fb7b57` a second later, and
+  the sync's push was rejected. Reverse the order and the deploy dies, which is
+  the exact outcome the app token exists to prevent, arriving by another route.
+
+  All three now wrap the push in a five-attempt
+  `git pull --rebase --autostash && git push` loop with a backoff. **Don't
+  replace that with concurrency configuration**: pull-then-push is two commands,
+  and no group setting closes the window between them. And don't read a
+  rejection here as a protection failure — `! [rejected] main -> main (fetch
+  first)` is git's own fast-forward check, upstream of any ruleset, where a
+  ruleset says `GH006: Protected branch update failed`. Confusing the two sends
+  you debugging a bypass list over a race.
 
 - **A PUSH BY A WORKFLOW DOES NOT BUILD THE SITE, so the deploy is
   DISPATCHED.** GitHub's rule: *"events triggered by the `GITHUB_TOKEN` will not
@@ -941,8 +961,15 @@ should catch a mistake at PR time rather than letting it fail silently.
   timestamp — the same thing `fetch/JugEvents.java` avoids by not rewriting its
   file when only `generatedAt` moved.
 
-- **Protecting `main`.** Nothing is protected today (verified: no rulesets, no
-  classic branch protection). The blocker is not the rules, it is the token:
+- **Protecting `main`. LIVE since 2026-08-31**, as a single repository ruleset
+  named `main` (id 21934730, enforcement `active`, created 14:33:28Z) targeting
+  `~DEFAULT_BRANCH`, carrying *deletion*, *non_fast_forward*, *pull_request* and
+  *required_status_checks* (`build-and-validate`), and bypassed by the
+  `Repository admin` role and the app, both in mode `always`.
+  **`BRANCH_PROTECTION.md` is the runbook** that set this up and is where the
+  click-path lives; this entry is the reasoning and the current state.
+
+  The blocker was never the rules, it was the token:
   **`GITHUB_TOKEN` cannot be granted a bypass.** Classic protection's push
   allowlist has no entry for it, and a ruleset bypass list takes roles, teams,
   GitHub Apps and deploy keys. So a rule requiring a pull request, requiring a
@@ -956,21 +983,50 @@ should catch a mistake at PR time rather than letting it fail silently.
   already open with a `Mint a push token` step
   (`actions/create-github-app-token@v2`) whose token goes to `actions/checkout`,
   so `git push` uses it. It is guarded by `if: vars.DATA_SYNC_APP_ID != ''` and
-  falls back to `github.token`, so **it is inert until the app exists** and a
-  fork is unaffected. To switch it on: create an app under the `foojayio` org
-  with *Contents: read and write* (no webhook), install it on this repo only, put
-  the app id in a repository **variable** `DATA_SYNC_APP_ID` and the private key
-  in a **secret** `DATA_SYNC_APP_PRIVATE_KEY`, then add the app to the ruleset's
-  bypass list. The required status check to name in the ruleset is
-  **`build-and-validate`**, the job in `pr-check.yml`.
+  falls back to `github.token`, so it was inert until the app existed and a fork
+  is still unaffected. **That app now exists** — id `4781767`, *Contents: read
+  and write* only, no webhook, installed on this repo alone; `DATA_SYNC_APP_ID`
+  and `DATA_SYNC_APP_PRIVATE_KEY` were set at 14:30Z. `Require signed commits`
+  stays off, because the bots do not sign.
 
-  Two things to know before trusting it: a bypass by ROLE (Repository admin /
-  Maintain / Write) may or may not cover `github-actions[bot]` — test it with one
-  manual run rather than assuming, since the failure mode is a broken deploy; and
-  `Require signed commits` stays off, because the bots do not sign.
+  **The bypass is verified — and NOT by the run that was meant to verify it.**
+  The evidence is commit `421fb7b57`, a `foojay-bot` data commit from
+  `build-deploy.yml` pushed at 14:35:55Z, i.e. two minutes AFTER the ruleset went
+  active: a bot push landing on a protected branch is the entire claim. The
+  hand-run `Sync view counts` that was supposed to demonstrate it demonstrated
+  nothing — it printed `No view count changes.`, took the early branch of
+  `if git diff --cached --quiet`, and never reached `git push`. **A green sync run
+  is not evidence**; look for the commit itself, or for `Everything up-to-date` in
+  the log, before believing the bypass works.
+
+  That same commit is also the evidence for the `[skip ci]` half of the entry
+  above: `421fb7b57` was pushed with the app token, which *does* trigger
+  workflows where `GITHUB_TOKEN` never did, and it appears in **no**
+  `build-deploy` run — so the marker is now doing the job it was added for.
+
+  **Two things about the deployed ruleset differ from what this file and the
+  runbook recommend. Both want a decision rather than a rediscovery:**
+  - **It is ONE ruleset, not the two described below, and `Repository admin`
+    bypasses it in mode `always`** — so that role currently bypasses *deletion*
+    and *non_fast_forward* as well, i.e. `main` can be force-pushed or deleted by
+    an admin. That is precisely the trap the split below exists to avoid, and
+    splitting it is a five-minute change.
+  - **Required approvals is 1, not the 0 the runbook specifies.** With a single
+    maintainer that is not a review gate: GitHub does not let an author approve
+    their own pull request, so a contributor PR cannot be approved by whoever
+    opened it, and a merge happens through the admin bypass rather than through
+    the rule. `require_extra_approval_for_unattributed_changes` is on too. Set it
+    to 0 if the intent is "a PR must pass `build-and-validate`", which is what the
+    runbook says it is.
+
+  One thing that no longer needs testing but is worth keeping: a bypass by ROLE
+  (Repository admin / Maintain / Write) may or may not cover
+  `github-actions[bot]`. The app route sidesteps the question entirely, which is
+  why it was taken.
 
   **It wants to be TWO rulesets, because a bypass exempts an actor from every
-  rule in the ruleset it sits on.** Frank keeps pushing small fixes straight to
+  rule in the ruleset it sits on — and this is NOT what is deployed today (see
+  above).** Frank keeps pushing small fixes straight to
   `main`, which needs `Repository admin` on a bypass list — and on a single
   ruleset that would also exempt him from the force-push and deletion
   protection, i.e. from the one pair of rules that should hold for everybody.
