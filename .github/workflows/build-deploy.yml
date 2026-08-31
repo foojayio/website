@@ -113,7 +113,35 @@ jobs:
             # (Nothing rebuilds off THIS commit, and nothing needs to -- the
             # run that made it goes on to build with the refreshed files.)
             git commit -m "chore: refresh JUG list + Java Champions list + view counts [skip ci]"
-            git push
+            # PUSH WITH RETRY, because pull-then-push has a window and main has
+            # THREE writers, not two: this workflow, the other sync, and
+            # build-deploy.yml's own data commit. The `data-sync` concurrency
+            # group only serialises the two syncs -- build-deploy.yml is in group
+            # `pages`, and has to be, because that group carries
+            # cancel-in-progress for the deploy. So it can land a commit between
+            # the pull and the push below, and did: on 2026-08-31 this workflow
+            # pulled, build-deploy pushed 421fb7b57, and this push was rejected
+            # as a non-fast-forward. No amount of concurrency configuration
+            # closes a window between two commands; retrying does.
+            #
+            # THIS ONE MATTERS MOST: there was no pull here at all, only a bare
+            # push, and this step runs BEFORE Hugo -- so losing the race did not
+            # cost a stale data file, it failed the job and took the whole deploy
+            # down with it. That is the exact failure the app token exists to
+            # prevent, arriving by another route.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase --autostash && git push; then
+                pushed=true
+                break
+              fi
+              echo "Push rejected (attempt $attempt) -- main moved under us; retrying."
+              sleep $(( attempt * 3 ))
+            done
+            if [ "$pushed" != true ]; then
+              echo "::error::Could not push after 5 attempts; main is moving faster than this job can rebase."
+              exit 1
+            fi
           fi
 
       # PINNED, not "latest". `latest` makes the action resolve the version
