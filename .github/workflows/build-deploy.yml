@@ -20,8 +20,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # A GITHUB APP TOKEN RATHER THAN THE DEFAULT GITHUB_TOKEN, for when main
+      # gets a branch ruleset: the built-in Actions token cannot be let through
+      # one. A bypass list takes roles, teams, GitHub Apps and deploy keys, and
+      # there is no entry for GITHUB_TOKEN -- so the data commit below would be
+      # rejected, and in build-deploy.yml the deploy would go down with it, since
+      # that push runs before Hugo. The app goes on main's bypass list instead.
+      #
+      # UNSET TODAY, AND HARMLESS: main is not protected yet, so with no
+      # DATA_SYNC_APP_ID variable this step is skipped and checkout falls back to
+      # GITHUB_TOKEN, exactly as before. Same in a fork, and in the window
+      # between merging this and creating the app. Setup lives in CLAUDE.md
+      # under "Protecting main".
+      #
+      # One behaviour flips when it IS set, and the commit step below depends on
+      # knowing which: a push authenticated with an app token triggers
+      # workflows, where a GITHUB_TOKEN push never does.
+      - name: Mint a push token
+        id: app-token
+        if: ${{ vars.DATA_SYNC_APP_ID != '' }}
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.DATA_SYNC_APP_ID }}
+          private-key: ${{ secrets.DATA_SYNC_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v7
         with:
+          token: ${{ steps.app-token.outputs.token || github.token }}
           submodules: recursive
           # hugo.toml sets enableGitInfo, which dates every page from the last
           # commit that touched its file. The default shallow clone (depth 1)
@@ -80,9 +105,13 @@ jobs:
           if git diff --cached --quiet; then
             echo "No JUG list, Java Champions or view count changes."
           else
-            # [skip ci]: this push is to the same branch/event this workflow
-            # already triggers on -- without it, committing here would kick
-            # off another build-deploy run for every push to main.
+            # [skip ci] IS LOAD-BEARING NOW, where it used to be belt-and-
+            # braces: this push is to the same branch/event this workflow
+            # triggers on, and since it is authenticated with an app token
+            # rather than GITHUB_TOKEN it really does start workflow runs. So
+            # without this, every push to main would build and deploy twice.
+            # (Nothing rebuilds off THIS commit, and nothing needs to -- the
+            # run that made it goes on to build with the refreshed files.)
             git commit -m "chore: refresh JUG list + Java Champions list + view counts [skip ci]"
             git push
           fi

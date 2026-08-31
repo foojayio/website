@@ -31,8 +31,37 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      # For `gh workflow run` in the commit step -- dispatching a workflow is
+      # an Actions write, not a contents one.
+      actions: write
     steps:
+      # A GITHUB APP TOKEN RATHER THAN THE DEFAULT GITHUB_TOKEN, for when main
+      # gets a branch ruleset: the built-in Actions token cannot be let through
+      # one. A bypass list takes roles, teams, GitHub Apps and deploy keys, and
+      # there is no entry for GITHUB_TOKEN -- so the data commit below would be
+      # rejected, and in build-deploy.yml the deploy would go down with it, since
+      # that push runs before Hugo. The app goes on main's bypass list instead.
+      #
+      # UNSET TODAY, AND HARMLESS: main is not protected yet, so with no
+      # DATA_SYNC_APP_ID variable this step is skipped and checkout falls back to
+      # GITHUB_TOKEN, exactly as before. Same in a fork, and in the window
+      # between merging this and creating the app. Setup lives in CLAUDE.md
+      # under "Protecting main".
+      #
+      # One behaviour flips when it IS set, and the commit step below depends on
+      # knowing which: a push authenticated with an app token triggers
+      # workflows, where a GITHUB_TOKEN push never does.
+      - name: Mint a push token
+        id: app-token
+        if: ${{ vars.DATA_SYNC_APP_ID != '' }}
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.DATA_SYNC_APP_ID }}
+          private-key: ${{ secrets.DATA_SYNC_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v7
+        with:
+          token: ${{ steps.app-token.outputs.token || github.token }}
 
       - name: Set up JBang
         # Pinned to a TAG, not @main: tracking a moving branch means an upstream
@@ -48,6 +77,8 @@ jobs:
         run: jbang scripts/fetch/ViewCounts.java
 
       - name: Commit updated data
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "foojay-bot"
           git config user.email "actions@github.com"
@@ -55,7 +86,14 @@ jobs:
           if git diff --cached --quiet; then
             echo "No view count changes."
           else
-            git commit -m "chore: sync view counts"
+            git commit -m "chore: sync view counts [skip ci]"
             git pull --rebase --autostash
             git push
+            # Dispatched rather than left to the push, exactly as in
+            # sync-external-content.yml -- see the long comment there. It
+            # matters here for the same reason: a read count is baked into the
+            # HTML at build time, so a refreshed data/views.json changes nothing
+            # a reader can see until the site is rebuilt, and this workflow's
+            # own push cannot cause that.
+            gh workflow run build-deploy.yml --ref main
           fi
