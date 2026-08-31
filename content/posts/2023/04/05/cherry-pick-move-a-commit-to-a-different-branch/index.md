@@ -112,9 +112,11 @@ Now we can continue working on the new feature!
 Moving a commit to a different branch. Not nearly as scary as it sounds! Let the IDE help to turn this into a quick, low-stress task.
 
 <figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
+ <p>
+
+{{< youtube SkcvWURJkWQ >}}
+
+</p>
  <figcaption class="wp-element-caption">
   Cherry pick a commit to a different branch in any JetBrains IDE
  </figcaption>

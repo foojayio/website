@@ -33,11 +33,7 @@ Sadly there are only recordings of two of my seven talks, but all talks were exc
 
 I gave my updated QCon talk in Milan on 31st May:
 
-<figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
-</figure>
+{{< youtube DhYDzff6UCE >}}
 
 This is related to my InfoQ article [Unleash the Power of Open Source Java Profilers: Comparing VisualVM, JMC, and async-profile](https://www.infoq.com/articles/open-source-java-profilers/). I had a lot of fun giving the talk, and I hope the audience liked it.
 

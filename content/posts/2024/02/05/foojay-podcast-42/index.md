@@ -97,7 +97,7 @@ Host: Frank Delporte
  <div class="wp-block-embed__wrapper">
   <blockquote class="wp-embedded-content" data-secret="wn7VxhAt50">
    <a href="https://foojay.io/today/join-slack-com-t-foojay-signup/">Foojay Slack: bit.ly/join-foojay-slack</a>
-  </blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="“Foojay Slack: bit.ly/join-foojay-slack” — foojay" src="https://foojay.io/today/join-slack-com-t-foojay-signup/embed/#?secret=6iRnTTa19i#?secret=wn7VxhAt50" data-secret="wn7VxhAt50" width="500" height="282" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+  </blockquote>
  </div>
 </figure>
 

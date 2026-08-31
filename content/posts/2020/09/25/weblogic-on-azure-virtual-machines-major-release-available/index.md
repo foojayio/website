@@ -6,7 +6,6 @@ description: "We are delighted to announce the availability of a major release f
 canonical: "https://techcommunity.microsoft.com/t5/azure-marketplace/weblogic-on-azure-virtual-machines-major-release-available/ba-p/1681175"
 authors:
   - "m-reza-rahman"
-image: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/219398iA7387D785C15171B/image-size/large?v=1.0&px=999"
 categories:
   - "Release Notes"
 related_posts:

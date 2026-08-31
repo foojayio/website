@@ -55,6 +55,13 @@
        see partials/meta-description.html for why, and for the 470 URLs that
        used to share one boilerplate string. */}}
   {{ $desc := partial "meta-description.html" . }}
+  {{/* A pager says which page it is, for the same reason <title> does: a list
+       page and its pagers describe one archive, so without this /today/ and its
+       215 pagers -- and every category and author pager -- ship one identical
+       snippet across hundreds of URLs. The suffix goes on HERE rather than
+       inside meta-description.html because json-ld.html reads that same partial
+       for a BlogPosting description, where a page number would be nonsense. */}}
+  {{ if $pageNum }}{{ $desc = printf "%s (page %d)" $desc $pageNum }}{{ end }}
   <meta name="description" content="{{ $desc }}">
 
   {{/* .Params.canonical is for the 838 cross-posted articles that point at the

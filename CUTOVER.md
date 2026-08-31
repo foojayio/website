@@ -48,13 +48,26 @@ that silently gets worse or gets lost if cutover happens without it.
       look like consent gating): accept the banner, watch for `/g/collect` with
       `tid=G-GS21L12HYK`.
 
-- [ ] **Pre-create the three Cloudflare Redirect Rules** from
-      `cutover/legacy-redirects.md`. **312,531 recorded hits** between them —
-      more than every per-page alias combined — and `aliases:` cannot express a
-      regex. Doing it now rather than on the day is deliberate: all three
-      reproduce what WordPress's Redirection plugin already serves, so creating
-      them while WP is live changes nothing observable, and it takes the single
-      highest-traffic item off the cutover-day critical path.
+- [ ] **Pre-create the Cloudflare Redirect Rules** from
+      `cutover/legacy-redirects.md` — **five families now, not three.**
+      `aliases:` cannot express a regex, and rules 1–3 alone carry **312,531
+      recorded hits**, more than every per-page alias combined. Doing it now
+      rather than on the day is deliberate: every rule reproduces something the
+      live site already serves, so creating them while WP is up changes nothing
+      observable, and it takes the highest-traffic item off the cutover-day
+      critical path.
+
+      **Rules 4 and 5 are not in the Redirection plugin's export**, which is why
+      they were missed the first time round: the export lists redirects somebody
+      *added*, not the URLs WordPress serves by being WordPress.
+      - **4 — hierarchical category paths.** WP categories nest and Yoast
+        canonicalises to the nested form, so `/today/category/tools/maven/` is
+        the *indexed* URL while Hugo only has the flat one. 55 URLs plus their
+        `page/N/` and `feed/` variants.
+      - **5 — `/feed/`.** WP serves RSS at `/feed/` and `<archive>/feed/`; Hugo
+        serves `/index.xml`. Every existing subscriber 404s at cutover, and this
+        one cannot be an `aliases:` entry even in principle — a Hugo alias is an
+        HTML meta-refresh page, which no feed reader follows.
 
 ---
 
@@ -216,7 +229,11 @@ Fastest checks first, so a failure is caught before you have gone further.
 - [ ] **Analytics fires.** Load the site in a normal (non-private) window,
       accept the Ketch banner, confirm `/g/collect` with `tid=G-GS21L12HYK`.
 - [ ] **The regex redirects work.** Run the verification loop at the bottom of
-      `cutover/legacy-redirects.md` — `/blog/…`, `/almanac/jdk-17`, `/docs/…`.
+      `cutover/legacy-redirects.md` — `/blog/…`, `/almanac/jdk-17`, `/docs/…`,
+      a nested category path, and `/feed/`. That loop also checks the two URLs
+      rule 4a must *not* touch (`/today/category/java/page/2/` and
+      `/today/category/tools/`), since a wrong negative lookahead breaks those
+      silently.
 - [ ] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
       the three emoji-suffixed post URLs.
 - [ ] **The view counter is counting.** `curl https://foojay.io/api/views/all`

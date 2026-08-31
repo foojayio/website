@@ -89,6 +89,9 @@ public final class HtmlToMarkdown {
     private static final Pattern GALLERY_COLUMNS = Pattern.compile("\\bcolumns-([1-9])\\b");
     private static final Pattern FORMATTING_CLASS = Pattern.compile("align(?:left|right|center)|size-[\\w-]+|is-resized");
     private static final String PRESERVE_TOKEN = "PRESERVEDHTMLBLOCKZZ";
+    /** A block whose entire text is one placeholder -- i.e. an emptied wrapper. */
+    private static final Pattern PRESERVE_ONLY =
+            Pattern.compile("\\s*PRESERVEDHTMLBLOCKZZ\\d+ZZEND\\s*");
     private static final String PRESERVE_TOKEN_END = "ZZEND";
 
     // YouTube embeds are turned into Hugo's built-in {{< youtube ID >}} shortcode
@@ -242,6 +245,26 @@ public final class HtmlToMarkdown {
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             preserved.add("{{< youtube " + id + " >}}");
             el.replaceWith(new Element("p").text(token));
+        }
+
+        // ...and then the wrapper it leaves behind, which is the other half of
+        // "done first". Replacing the <iframe> does not remove the
+        // <figure class="wp-block-embed"><div class="wp-block-embed__wrapper">
+        // around it, so SELECTOR_PRESERVE still matched the figure and stored it
+        // whole -- WITH the placeholder text inside. The restore loop below is a
+        // fixed point now, so that no longer reaches the reader, but the result was
+        // still a Hugo shortcode buried in a <p> inside two divs of WordPress block
+        // markup, where an author would simply have written the shortcode.
+        //
+        // Only a wrapper holding NOTHING but the placeholder is unwrapped: an embed
+        // block with a caption, or with anything else beside the video, keeps its
+        // markup. Innermost-out, so figure > div > p collapses completely.
+        for (int depth = 0; depth < 3; depth++) {
+            for (Element el : content.select(".wp-block-embed, .wp-block-embed__wrapper")) {
+                if (el.children().size() == 1 && PRESERVE_ONLY.matcher(el.text()).matches()) {
+                    el.unwrap();
+                }
+            }
         }
 
         // EnlighterJS code blocks -> fenced Markdown. Authors write ```java, not
@@ -405,6 +428,33 @@ public final class HtmlToMarkdown {
             }
         }
 
+        // WordPress's UNFINISHED-LINK marker. Its editor writes
+        // href="_wp_link_placeholder" while the author is still picking a target,
+        // and if they never do, that string is what the page ships -- so the text
+        // renders as a link to a URL that has never existed anywhere. The live
+        // WordPress page has the same broken link, i.e. this is an authoring
+        // artefact to drop rather than a scrape to fix.
+        //
+        // The TEXT is kept and only the link goes: a reference like
+        // "[10] Value of AI knowledge: ..." still reads as a reference, whereas
+        // removing the element would silently delete a line an author wrote. An
+        // <a> holding an image keeps its content the same way.
+        for (Element a : content.select("a[href=_wp_link_placeholder]")) {
+            a.unwrap();
+        }
+
+        // WordPress's own oEmbed CARD for another foojay post: a <blockquote> with
+        // a real link, plus an <iframe> pointing at that post's /embed/ URL, which
+        // is a route WordPress generates and Hugo has no equivalent for. The
+        // iframe is styled `clip: rect(1px,1px,1px,1px)` -- invisible by design,
+        // it is the fallback the WP embed script replaces -- so dropping it costs
+        // the reader nothing and removes a link that 404s after cutover. Narrow on
+        // purpose: an iframe embedding a THIRD-PARTY site (javapro.io, omnifish.ee,
+        // cycode.com are the three in content/) is a real embed and is left alone.
+        for (Element f : content.select("iframe.wp-embedded-content[src*='foojay.io']")) {
+            f.remove();
+        }
+
         // Brand capitalization, applied LAST -- after every preserve pass above, so
         // a code fence, a widget, a gallery and a shortcode are all placeholder
         // tokens by now and none of them can be rewritten. What is left in the DOM
@@ -421,9 +471,35 @@ public final class HtmlToMarkdown {
         md = FLEXMARK_THEMATIC_BREAK.matcher(md).replaceAll("");
         md = STANDALONE_BREAK.matcher(md).replaceAll("");
 
-        for (int i = 0; i < preserved.size(); i++) {
-            md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
-                    "\n\n" + preserved.get(i) + "\n\n");
+        // Restored to a FIXED POINT, not in one ascending pass, because a token can
+        // sit inside another token's stored HTML. The passes above each use
+        // outermostMatches, so no single pass nests -- but they run in sequence, and
+        // an earlier pass can leave its placeholder inside an element a later pass
+        // then preserves whole. That is exactly what a WordPress video embed is:
+        //
+        //     <figure class="wp-block-embed"><div class="wp-block-embed__wrapper">
+        //       <iframe src="youtube..."></iframe>
+        //     </div></figure>
+        //
+        // The YouTube pass runs first and swaps the <iframe> for token 0 -- but it
+        // does not remove the wrapper, so SELECTOR_PRESERVE then stores the whole
+        // <figure> as token 1 with the text "PRESERVEDHTMLBLOCKZZ0ZZEND" inside it.
+        // Ascending, i=0 finds nothing (token 0 is not in `md` yet, it is hidden in
+        // preserved[1]) and i=1 then pastes it in, after its own turn has passed.
+        // The token reached the reader as literal text -- live on 8 posts, including
+        // a podcast episode whose video was the point of the page.
+        //
+        // Looping until nothing changes handles any nesting depth and any order
+        // between passes, so a new pass cannot reintroduce this. The bound is
+        // belt-and-braces: a token is only ever consumed, never emitted, so the
+        // loop cannot run more than preserved.size() times.
+        for (int pass = 0; pass <= preserved.size(); pass++) {
+            String before = md;
+            for (int i = 0; i < preserved.size(); i++) {
+                md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,
+                        "\n\n" + preserved.get(i) + "\n\n");
+            }
+            if (md.equals(before)) break;
         }
         // Collapse runs of blank lines (left by placeholder restoration and the
         // converter) down to a single blank line. Treats whitespace-only lines as

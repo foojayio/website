@@ -5,7 +5,6 @@ lastmod: "2024-02-07T21:59:53+00:00"
 description: "Do you want to dramatically decrease JVM startup time, from hundreds of seconds to tenths of milliseconds? Find out about Java on CRaC."
 authors:
   - "gerrit-grunwald"
-image: "https://i.ibb.co/pLg3WCb/Time-To-First-Operation.png"
 categories:
   - "Performance"
   - "Research"

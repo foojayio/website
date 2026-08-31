@@ -128,11 +128,7 @@ Keep in mind that even if you use AI Assistant to write code for you, you'll sti
 
 In this tutorial we've looked at the many ways IntelliJ IDEA can help you read and understand code. Hopefully these tips for reading code will have you reading code like a pro.
 
-<figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
-</figure>
+{{< youtube hjGVJHOLSjA >}}
 
 ## Links
 

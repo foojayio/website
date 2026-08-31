@@ -6,7 +6,6 @@ description: "Our research team found a correlation between socially trending vu
 canonical: "https://snyk.io/blog/snyk-social-trends-fix-security-vulnerabilities/"
 authors:
   - "bmvermeer"
-image: "https://snyk.io/wp-content/uploads/blog-social-trends-usage-vuln-1240x363.png"
 categories:
   - "Security"
   - "Snyk"

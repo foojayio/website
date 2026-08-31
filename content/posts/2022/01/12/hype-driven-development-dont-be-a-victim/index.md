@@ -30,8 +30,4 @@ Red flags for Rudy include:
 
 This doesn't mean the above are always the wrong choice, but that these technologies are often not suitable for smaller businesses and their unique software needs. Not every business is a Netflix or Amazon! He explains, for each technology, why rather than being a "must-have", the decision to adopt must be carefully considered. He also discusses steps you can take to avoid falling victim to hype-driven trends in general.
 
-<figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
-</figure>
+{{< youtube CronTT5PR3g >}}

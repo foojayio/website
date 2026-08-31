@@ -5,7 +5,6 @@ lastmod: "2020-12-16T14:45:46+00:00"
 description: "We are very happy to announce the availability of initial guidance to run IBM WebSphere Liberty and Open Liberty on Azure Red Hat OpenShift."
 authors:
   - "m-reza-rahman"
-image: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/237460iF9EBF07D3DE5E671/image-size/large?v=1.0&px=999"
 categories:
   - "Release Notes"
 related_posts:

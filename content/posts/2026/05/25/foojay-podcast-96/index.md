@@ -25,11 +25,7 @@ If you're a developer who wants fast local testing, a DevOps engineer writing Te
 
 ## YouTube
 
-<figure class="wp-block-embed">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
-</figure>
+{{< youtube dvyDakgeMig >}}
 
 ## Podcast Apps
 

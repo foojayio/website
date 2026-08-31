@@ -6,7 +6,6 @@ description: "One of the most read articles on my blog is on the installation of
 canonical: "https://webtechie.be/post/2020-04-08-installing-java-and-javafx-on-raspberry-pi/"
 authors:
   - "frankdelporte"
-image: "https://webtechie.be/images/2020-04-08/java-versions-on-pi.png"
 categories:
   - "JavaFX"
   - "Raspberry Pi"

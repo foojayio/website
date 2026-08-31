@@ -37,11 +37,7 @@ We've also experienced unprecedented cross-industry collaboration with software,
 
 ## New for 4.0
 
-<figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
- <div class="wp-block-embed__wrapper">
-  <p>PRESERVEDHTMLBLOCKZZ0ZZEND</p>
- </div>
-</figure>
+{{< youtube kOf29M8qFts >}}
 
 ### **Five times faster scaling operations**
 

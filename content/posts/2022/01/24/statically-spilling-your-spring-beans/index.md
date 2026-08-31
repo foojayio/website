@@ -5,7 +5,6 @@ lastmod: "2022-01-24T19:05:22+00:00"
 description: "There are some edge cases where you want to access Spring Beans in a static method, while you should always try to avoid this."
 authors:
   - "tom-cools"
-image: "https://www.tomcools.be/post/apr-2020-static-spring-bean/spilling-the-beans.jpg"
 categories:
   - "Spring"
 related_posts:

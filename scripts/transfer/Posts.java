@@ -465,6 +465,7 @@ public class Posts {
         // WordPress site that goes away at cutover. Non-foojay images are left as-is.
         String localHero = HtmlToMarkdown.localizeImage(d.image, opts, "");
         if (localHero != null) d.image = stillPoster(d.bundleDir, localHero);
+        else d.image = verifyRemoteHero(d.bundleDir, d.image, d.slug);
 
         d.authors = authorSlugs(doc);
         if (d.authors.isEmpty()) {
@@ -770,6 +771,104 @@ public class Posts {
         return hero;
     }
 
+    /**
+     * A hero that stayed a REMOTE URL, because localizeImage either declined it
+     * (not foojay-hosted) or could not download it. A hero is the card thumbnail,
+     * the og:image and the JSON-LD image, so a dead one is a broken picture at the
+     * top of the article and -- the part no fallback can cover -- a BLANK card
+     * everywhere the post is shared. post-thumb.html's onerror hides it on our own
+     * pages; LinkedIn, X and Slack just render nothing.
+     *
+     * 76 posts hotlink their hero and 10 of those URLs are already 404, so this is
+     * ordinary decay rather than a one-off. Two rules, in order:
+     *
+     *  1. A foojay-hosted hero that would not download: prefer a copy already
+     *     sitting in the bundle. WordPress mangles the name on re-upload -- a
+     *     space (really a U+00A0) becomes a dash and a duplicate gains a -N -- so
+     *     `Screenshot-...-6.50.38 PM.png` and the bundle's
+     *     `Screenshot-...-6.50.38-PM-1.png` are the same screenshot. Same shape as
+     *     stillPoster and HtmlToMarkdown.convertedSibling: the file on disk is the
+     *     evidence, so there is no manifest to keep in step. This one matters most
+     *     because the URL is GUARANTEED dead after cutover, not merely at risk --
+     *     /wp-content/ goes away with WordPress.
+     *
+     *  2. Any remote hero: drop it when the host says it is GONE. Then the derived
+     *     category tile stands in on a card and og:image falls back to the site's
+     *     social card, which is what both were built for.
+     *
+     * THE DISTINCTION THAT MAKES THIS SAFE is the one fetch/JavaChampions.java
+     * draws for its geocoder and fetch/JugEvents.java for a feed: only a
+     * definitive answer counts. 404/410 is the host saying the image does not
+     * exist. A 403 is not -- it is what a bot wall and a private S3 bucket both
+     * return, and one of the 76 is an amazonaws 403 whose picture may well be
+     * fine. A timeout or a 5xx is a bad afternoon. Anything but 404/410 keeps the
+     * hero, so a third party being briefly unreachable can never silently strip
+     * heroes off a re-scrape of the whole archive.
+     *
+     * Cost is one HEAD per hotlinked hero -- ~76 on a full crawl, against 2160
+     * page fetches -- and none at all for the ~97% that are already local.
+     */
+    static String verifyRemoteHero(Path bundleDir, String hero, String slug) {
+        if (hero == null || hero.isBlank() || !hero.startsWith("http")) return hero;
+
+        if (bundleDir != null && hero.startsWith(BASE_URL + "/")) {
+            String name = hero.substring(hero.lastIndexOf('/') + 1);
+            int dot = name.lastIndexOf('.');
+            String stem = (dot > 0 ? name.substring(0, dot) : name).replace(' ', '-').replace('\u00A0', '-');
+            String ext = dot > 0 ? name.substring(dot) : "";
+            for (String candidate : new String[]{stem + ext, stem + "-1" + ext, stem + "-2" + ext}) {
+                if (Files.isRegularFile(bundleDir.resolve(candidate))) return candidate;
+            }
+        }
+
+        if (isGone(hero)) {
+            System.out.println("  ! " + slug + ": hero " + hero + " is gone (404) -- dropped;"
+                    + " the derived category tile stands in.");
+            return "";
+        }
+        return hero;
+    }
+
+    /**
+     * True only when the host positively says the resource does not exist.
+     *
+     * HEAD first, because it costs no body. But NOT HEAD only: a fair number of
+     * servers do not implement it, and they say so with a status that looks like
+     * an answer -- techcommunity.microsoft.com returns 400 to a HEAD and 404 to
+     * the GET of the very same URL, so a HEAD-only check kept two heroes that are
+     * definitively gone. So an inconclusive HEAD (400 Bad Request, 405 Method Not
+     * Allowed, 501 Not Implemented) is re-asked as a GET, which is the request a
+     * browser would have made anyway; anything else HEAD says is believed.
+     */
+    static boolean isGone(String url) {
+        int head = status(url, org.jsoup.Connection.Method.HEAD);
+        if (head == 400 || head == 405 || head == 501) {
+            int get = status(url, org.jsoup.Connection.Method.GET);
+            return get == 404 || get == 410;
+        }
+        return head == 404 || head == 410;
+    }
+
+    /** The status of one request, or 0 when the host could not be reached at all. */
+    static int status(String url, org.jsoup.Connection.Method method) {
+        try {
+            return Jsoup.connect(url)
+                    .method(method)
+                    .userAgent(USER_AGENT)
+                    .timeout(REQUEST_TIMEOUT_MS)
+                    .ignoreHttpErrors(true)
+                    .ignoreContentType(true)
+                    // jsoup reads 0 as UNLIMITED, which on a GET fallback would
+                    // pull the whole image down to learn its status code.
+                    .maxBodySize(1)
+                    .followRedirects(true)
+                    .execute()
+                    .statusCode();
+        } catch (Exception e) {
+            return 0;   // unreachable is not the same as absent
+        }
+    }
+
     /** The post's leaf-bundle directory (content/posts/<y>/<m>/<d>/<slug>/), reused
      *  if a bundle for this slug already exists so re-runs don't move it. */
     static Path bundleDirFor(PostData d) {
@@ -798,7 +897,12 @@ public class Posts {
         }
         fm.append("authors:\n");
         for (String a : d.authors) fm.append("  - ").append(yamlString(a)).append("\n");
-        fm.append("image: ").append(yamlString(d.image)).append("\n");
+        // An empty hero means there is none -- see rescueFoojayHero. Writing
+        // `image: ""` would be a value that post-thumb.html has to special-case,
+        // where an absent key is already the "no hero" it handles.
+        if (d.image != null && !d.image.isBlank()) {
+            fm.append("image: ").append(yamlString(d.image)).append("\n");
+        }
         fm.append("categories:\n");
         for (String c : d.categories) fm.append("  - ").append(yamlString(c)).append("\n");
         fm.append("related_posts:\n");

@@ -6,7 +6,6 @@ description: "The Java 17 LTS release brings you significant improvements to pre
 canonical: "https://snyk.io/blog/new-java-17-features-for-improved-security-and-serialization/"
 authors:
   - "bmvermeer"
-image: "https://snyk.io/wp-content/uploads/blog-java-17-deserialization-1240x827.jpg"
 categories:
   - "JEPs"
   - "Security"

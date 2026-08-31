@@ -5,7 +5,6 @@ lastmod: "2021-07-06T22:22:41+00:00"
 description: "JDKMon scans your computer for installed OpenJDK distributions and uses the Disco API to check whether there are updates available!"
 authors:
   - "gerrit-grunwald"
-image: "https://github.com/HanSolo/JDKMon/raw/main/screenshot.png"
 categories:
   - "JavaFX"
   - "Tools"
