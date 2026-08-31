@@ -6,7 +6,7 @@ description: "My Journey Creating an AI-Powered Form Filler with RAG, LangChain4
 canonical: "https://bazlur.ca/2025/04/06/building-formpilot-my-journey-creating-an-ai-powered-form-filler-with-rag-langchain4j-and-ollama/"
 authors:
   - "bazlur-rahman"
-image: "https://foojay.io/wp-content/uploads/2025/05/Screenshot-2025-04-06-at-6.50.38 PM.png"
+image: "Screenshot-2025-04-06-at-6.50.38-PM-1.png"
 categories:
   - "LangChain4j"
   - "Machine Learning"

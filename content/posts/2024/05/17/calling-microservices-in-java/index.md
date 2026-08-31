@@ -5,7 +5,6 @@ lastmod: "2024-05-17T19:48:22+00:00"
 description: "This article explores various approaches to calling microservices in Java, from simple RESTful APIs to advanced. Learn more!"
 authors:
   - "abo-saad-muaath"
-image: "https://foojay.io/wp-content/uploads/2024/05/Screenshot-1445-10-05-at-7.23.37 AM.png"
 categories:
   - "Java"
   - "Microservices"

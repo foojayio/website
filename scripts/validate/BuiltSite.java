@@ -73,6 +73,21 @@ public class BuiltSite {
 
     static final Pattern REFRESH_URL = Pattern.compile("url\\s*=\\s*['\"]?([^'\"]+)", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Where a dead link is somebody's prose rather than this repo's bug -- see the
+     * class comment for why only the second kind may stop a deploy.
+     *
+     * `.prose` is where .Content renders. `.legacy-comment__body` is the archived
+     * WordPress comment bodies, and they belong on this side for a STRONGER reason
+     * than article text does: an article is a file a maintainer can edit, whereas a
+     * comment is a quote from a stranger in 2020 and "correcting" one is not a
+     * thing that exists (see transfer/Comments.java). One of them links to
+     * foojay.io/java-8/, which 404s on the live WordPress site too -- so treating
+     * it as a build bug would block every future deploy on a reader's dead link
+     * that nobody is allowed to fix.
+     */
+    static final String AUTHORED = ".prose, .legacy-comment__body";
+
     /** A link found on a page: where it points, and whether an author wrote it. */
     record Link(String url, boolean authored) {}
 
@@ -100,13 +115,14 @@ public class BuiltSite {
             walk.filter(Files::isRegularFile).forEach(p -> files.add(rel(publicDir, p)));
         }
 
-        String basePath = deriveBasePath(publicDir);
+        Site site = deriveSite(publicDir);
+        String basePath = site.basePath();
         System.out.println("Built site: " + files.size() + " files under " + publicDir
-                + ", served at base path " + basePath);
+                + ", served at " + site.host() + basePath);
 
         List<String> blocking = new ArrayList<>(checkExpectedPages(files, basePath));
         List<String> authored = new ArrayList<>();
-        checkLinks(publicDir, files, basePath, max, blocking, authored);
+        checkLinks(publicDir, files, site, max, blocking, authored);
 
         if (!authored.isEmpty()) {
             System.out.println("\n--- " + authored.size() + " dead link(s) inside article text ---");
@@ -219,8 +235,9 @@ public class BuiltSite {
 
     // ---------------------------------------------------------------- check 2
 
-    static void checkLinks(Path publicDir, Set<String> files, String basePath, int max,
+    static void checkLinks(Path publicDir, Set<String> files, Site site, int max,
                            List<String> blocking, List<String> authoredOut) throws IOException {
+        String basePath = site.basePath();
         List<Path> html;
         try (Stream<Path> walk = Files.walk(publicDir)) {
             html = walk.filter(Files::isRegularFile)
@@ -246,7 +263,7 @@ public class BuiltSite {
                 return;
             }
             for (Link link : linksIn(doc)) {
-                Target t = resolve(link.url(), page, publicDir, basePath);
+                Target t = resolve(link.url(), page, publicDir, site);
                 if (t == null) continue;                       // external, or not a link at all
                 counted.increment();
                 if (t.escapesBasePath()) {
@@ -296,7 +313,7 @@ public class BuiltSite {
     static List<Link> linksIn(Document doc) {
         List<Link> out = new ArrayList<>();
         for (Element el : doc.select(LINK_QUERY)) {
-            boolean authored = el.closest(".prose") != null;
+            boolean authored = el.closest(AUTHORED) != null;
             if (el.hasAttr("srcset")) {
                 for (String candidate : el.attr("srcset").split(",")) {
                     String url = candidate.trim().split("\\s+")[0];
@@ -319,7 +336,8 @@ public class BuiltSite {
      * A raw attribute value -> the file under public/ it must resolve to, or
      * null when it is not ours to check.
      */
-    static Target resolve(String raw, Path page, Path publicDir, String basePath) {
+    static Target resolve(String raw, Path page, Path publicDir, Site site) {
+        String basePath = site.basePath();
         String url = raw.trim();
         if (url.isEmpty() || url.startsWith("#")) return null;
         if (url.startsWith("//")) return null;                  // protocol-relative: another host
@@ -332,11 +350,18 @@ public class BuiltSite {
             // Absolute, and only interesting when it points back at us. The site
             // emits absolute URLs by contract in canonical, og:url and the feeds,
             // and those go through the same resolution as everything else.
+            //
+            // The HOST is what decides that, not the path -- see deriveSite. A
+            // path test alone silently reclassifies every external link on the
+            // site as internal the moment the base path is `/`, which is only
+            // ever true on a production build.
             int sep = url.indexOf("//");
             String after = sep < 0 ? "" : url.substring(sep + 2);
             int firstSlash = after.indexOf('/');
+            String host = firstSlash < 0 ? after : after.substring(0, firstSlash);
             String path = firstSlash < 0 ? "/" : after.substring(firstSlash);
-            if (!path.startsWith(basePath)) return null;        // another host, or the production URL
+            if (!host.equalsIgnoreCase(site.host())) return null;   // another site entirely
+            if (!path.startsWith(basePath)) return null;            // ours, but outside this build
             url = path;
         }
 
@@ -367,11 +392,24 @@ public class BuiltSite {
     // ----------------------------------------------------------------- helpers
 
     /**
-     * The path the site is served at, read from the home page's own canonical --
-     * so this works for a /website/ trial build and a / production build with
-     * nothing to configure and nothing to remember to change at cutover.
+     * Where the site is served -- host and path -- read from the home page's own
+     * canonical, so this works for a /website/ trial build and a / production
+     * build with nothing to configure and nothing to change at cutover.
+     *
+     * THE HOST IS HALF THE ANSWER, and leaving it out was a bug that could only
+     * ever fire on a production build. `resolve` decides "is this URL ours?", and
+     * with only a path to go on it asked whether the path starts with the base
+     * path. During the trial that reads `/website/`, so an absolute
+     * https://youtube.com/watch became `/watch`, failed the test and was
+     * correctly skipped -- by accident. In production the base path is `/`, which
+     * EVERY path starts with, so every external link on the site turned into an
+     * internal one: 21,023 "dead" links against 1, and a blocked deploy on the
+     * one build where that has never been rehearsed. Comparing the host is what
+     * makes "another site" mean another site rather than another prefix.
      */
-    static String deriveBasePath(Path publicDir) throws IOException {
+    record Site(String host, String basePath) {}
+
+    static Site deriveSite(Path publicDir) throws IOException {
         Path home = publicDir.resolve("index.html");
         if (Files.isRegularFile(home)) {
             Element link = Jsoup.parse(home.toFile(), "UTF-8").selectFirst("link[rel=canonical]");
@@ -381,12 +419,13 @@ public class BuiltSite {
                 if (i >= 0) {
                     String after = href.substring(i + 2);
                     int s = after.indexOf('/');
+                    String host = s < 0 ? after : after.substring(0, s);
                     String path = s < 0 ? "/" : after.substring(s);
-                    return path.endsWith("/") ? path : path + "/";
+                    return new Site(host, path.endsWith("/") ? path : path + "/");
                 }
             }
         }
-        return "/";
+        return new Site("", "/");
     }
 
     static String rel(Path publicDir, Path p) {

@@ -1,7 +1,7 @@
 ---
 title: "Jakarta Faces, Java Web Framework, Stateless Edition: Marketplace AliFaces"
 date: "2026-08-29T19:22:52+00:00"
-lastmod: "2026-08-30T00:54:13+00:00"
+lastmod: "2026-08-31T12:20:55+00:00"
 description: "A Fully Stateless Jakarta Faces Marketplace with Server-Side Rendering — No HttpSession, No Saved ViewState, No Sticky Sessions (see the poc on: AliFaces…"
 authors:
   - "angelo-rubini"
@@ -24,16 +24,9 @@ related_posts:
 frozen: false
 ---
 
-### Author (1)
-
-![Avatar photo](cropped-angelo-rubini-80x80.jpg)  
-[#### Angelo Rubini](https://foojay.io/today/author/angelo-rubini/)
-
-* [](https://www.linkedin.com/in/angelo-rubini-1754379/)
-
 ### A Fully Stateless Jakarta Faces Marketplace with Server-Side Rendering — No HttpSession, No Saved ViewState, No Sticky Sessions
 
-(see the poc on: [AliFaces POC Run On Oracle OCI(Nanos Unikernel)](http://89.168.28.199:8080/alifaces/ "AliFaces POC Run On Oracle OCI"))
+(see the poc on: [AliFaces POC Run On Oracle OCI(Nanos Unikernel)](http://129.152.31.253:8080/alifaces "AliFaces POC Run On Oracle OCI"))
 
 Jakarta Faces still carries a few persistent assumptions: it is stateful, it requires `HttpSession`, it needs sticky sessions to scale horizontally, and its server-side rendering model belongs to an older generation of web applications.
 

@@ -15,7 +15,7 @@ related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "context-is-code-a-tour-of-apm-and-agentrc"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-frozen: false
+frozen: true
 ---
 
 Hola Java developers! 👋
@@ -87,7 +87,7 @@ claude mcp add sonarqube \
 
 Once this is running, Claude will have [25 SonarQube tools](https://github.com/SonarSource/sonarqube-mcp-server?tab=readme-ov-file#tools) in its belt that will allow the Agent to interact with SonarQube to get issues, quality gate status, analyze snippets, and more.
 
-![](https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-15.46.22-700x470.png)
+![](Screenshot-2026-02-02-at-15.46.22.png)
 
 ### **Step 2: The Action (Java Example) ☕**
 

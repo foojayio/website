@@ -190,6 +190,18 @@ public class Authors {
     static void classifySocial(AuthorData d, String href) {
         if (href == null || href.isBlank()) return;
         String h = href.toLowerCase(Locale.ROOT);
+        // A social link that lands back on foojay.io is not a social link. The
+        // card's href is resolved with absUrl, so a RELATIVE one -- which is what
+        // WordPress stores when somebody types a bare handle into the field --
+        // resolves against the author's own page instead of failing. Tom Cools's
+        // card really does carry href="@tomcools.be", and that became
+        // mastodon: "https://foojay.io/today/author/tom-cools/@tomcools.be",
+        // matching isMastodon on the "/@" rule and rendering as a dead link on
+        // his profile, on the HTML sitemap and on every post he wrote. The live
+        // WordPress page has the same broken href, so this is an upstream typo we
+        // must not copy through, not something a selector can be fixed to read.
+        if (h.startsWith(BASE_URL.toLowerCase(Locale.ROOT))
+                || h.startsWith("https://www.foojay.io")) return;
         if (h.contains("bsky.app") || h.contains("bluesky")) { if (d.bluesky == null) d.bluesky = href; }
         else if (h.contains("linkedin.com")) { if (d.linkedin == null) d.linkedin = href; }
         else if (h.contains("github.com")) { if (d.github == null) d.github = href; }
