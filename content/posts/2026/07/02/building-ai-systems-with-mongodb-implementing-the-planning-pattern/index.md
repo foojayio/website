@@ -4,7 +4,7 @@ date: "2026-07-02T10:00:00+00:00"
 description: "Artificial Intelligence has swiftly evolved from a niche research topic to a technology that impacts nearly every aspect of the software industry. Developers now use AI to generate code, review pull requests, create documentation, and accelerate workflows through methods like vibe coding and specification-driven development. While these applications position AI as an engineering tool, a new trend is emerging: integrating AI directly into business workflows within applications. by Otavio Santana"
 authors:
   - "otavio-santana"
-image: "Favicon-3-2.png"
+image: "Technical_ACTION_Build1_Spot.svg"
 categories:
   - "AI"
 related_posts:

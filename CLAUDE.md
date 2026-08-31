@@ -1765,6 +1765,39 @@ should catch a mistake at PR time rather than letting it fail silently.
   `foojay-logo.png` itself to make one of them (see the logo note below for what
   padding does to the header).
 
+  **A hero of `Favicon-3-2.png` is a MIGRATION ARTEFACT, not a design choice, and
+  an SVG hero is deliberately kept off `og:image`.** Yoast refuses to emit an SVG
+  or AVIF as `og:image` and serves the site favicon instead -- so in the page HTML
+  a post whose featured image is one of those is indistinguishable from a post
+  with no featured image at all, and `transfer/Posts.java` stored the favicon for
+  both. **48 posts lost their real hero that way** (35 SVG, 12 AVIF, 1 PNG),
+  rendering the foojay logo on their card, at the top of the article and in every
+  link preview. Nothing reported it, because the value scraped was present, valid
+  and downloadable -- the failure mode this file keeps warning about.
+
+  No selector can recover it: foojay's theme renders **no featured image on a
+  single post page** (0 `wp-post-image` elements there), and
+  `SELECTOR_FEATURED_IMAGE_FALLBACK` would grab the first *body* image, which is a
+  different thing. `Posts.heroImage` therefore treats `DEFAULT_OG_IMAGE_FILENAME`
+  as "ask somewhere else" and reads `featured_media` from the open REST API --
+  **only** on that placeholder, so it costs two extra requests on ~8% of posts and
+  none on the rest. When REST says there is genuinely no featured image (131 of
+  the 179) the placeholder is **kept**: that is what WordPress itself shows, and
+  promoting a mid-article screenshot to hero would silently restyle 131 posts on a
+  re-scrape. Fixing the scraper rather than the 48 files is what stops the next
+  re-scrape undoing it -- the `frozen: true` lesson from the cross-post
+  canonicals, avoided rather than paid again.
+
+  `baseof.html` skips an SVG hero for `og:image` **and only there**. No
+  link-preview scraper renders SVG (Facebook, LinkedIn, X and Slack all show
+  nothing), so those posts would preview as a blank card -- worse than the foojay
+  one. It stays the hero on the page and the thumbnail on a card, where a browser
+  draws it fine. Yoast makes the same call upstream, which is exactly why it
+  served the favicon and why the REST lookup has to exist. **AVIF is left
+  through**, a knowingly softer case: platform support there is patchy rather than
+  absent, and 5 posts carried an AVIF hero before any of this.
+
+
 - **Structured data covers three page kinds, and nothing else.**
   `partials/json-ld.html`: a post -> an `@graph` of `BlogPosting` +
   `Organization` + `BreadcrumbList` (each credited author a full `Person` with

@@ -1,13 +1,14 @@
 ---
 title: "Embedding DuckDB in a Maven App (and Using It for Things That Aren't Databases)"
 date: "2026-08-06T08:46:28+00:00"
-lastmod: "2026-08-11T13:52:51+00:00"
+lastmod: "2026-08-31T06:27:35+00:00"
 description: "DuckDB is described as \"SQLite for analytics,\" which is true: it's an in-process database engine that runs inside your application, with no server to…"
 authors:
   - "geertjan-wielenga"
-image: "Favicon-3-2.png"
+image: "duckdb-square-icon.svg"
 categories:
   - "Databases"
+  - "DuckDB"
   - "Java"
   - "Performance"
 related_posts:

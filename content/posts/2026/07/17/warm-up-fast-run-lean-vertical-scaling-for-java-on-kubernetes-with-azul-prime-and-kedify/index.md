@@ -5,7 +5,7 @@ description: "Autoscaling on Kubernetes has evolved significantly, but many prod
 authors:
   - "jiri-holusa"
   - "zbynek-roubalik"
-image: "Favicon-3-2.png"
+image: "prime-kedify-jvm-warm-up.avif"
 categories:
   - "Cloud"
   - "Java"

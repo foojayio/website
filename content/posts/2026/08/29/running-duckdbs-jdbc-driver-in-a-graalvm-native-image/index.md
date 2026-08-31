@@ -1,13 +1,14 @@
 ---
 title: "Running DuckDB's JDBC Driver in a GraalVM Native Image"
 date: "2026-08-29T16:22:10+00:00"
-lastmod: "2026-08-30T03:30:26+00:00"
+lastmod: "2026-08-31T06:26:09+00:00"
 description: "DuckDB is an in-process analytical database. You add one JAR to a Java project and get a SQL engine that reads CSV, Parquet, and JSON files directly, with…"
 authors:
   - "geertjan-wielenga"
-image: "Favicon-3-2.png"
+image: "duckdb-square-icon.svg"
 categories:
   - "Developer Tools"
+  - "DuckDB"
   - "Java"
   - "Performance"
 related_posts:

@@ -159,6 +159,25 @@ public class Posts {
             ".related-articles a[href*=/today/], div.related-posts a, .jp-relatedposts a, .related_post a";
     static final String SELECTOR_FEATURED_IMAGE_FALLBACK = "article img, .entry-content img";
 
+    /**
+     * Yoast's SITE-DEFAULT og:image -- what foojay.io serves when a post has no
+     * featured image OF A KIND YOAST WILL EMIT. It refuses SVG and AVIF, so in the
+     * page HTML a post whose featured image is one of those is indistinguishable
+     * from a post with no featured image at all: og:image is the foojay favicon
+     * either way. That silently cost 48 posts their hero (35 SVG, 12 AVIF, 1 PNG) --
+     * they render the foojay logo on their card, at the top of the post and in
+     * every link preview, and nothing reported it, because the value scraped was
+     * present, valid and downloadable.
+     *
+     * No selector can recover it: the theme renders no featured image on a single
+     * post page (0 `wp-post-image` elements), and SELECTOR_FEATURED_IMAGE_FALLBACK
+     * would grab the first BODY image, which is a different thing. The open REST
+     * API is the only source -- /wp/v2/posts?slug= gives featured_media, /wp/v2/media/<id>
+     * gives its URL -- and it is asked ONLY when og:image is this placeholder, so
+     * it costs two extra requests on the ~8% of posts that need it and none on the rest.
+     */
+    static final String DEFAULT_OG_IMAGE_FILENAME = "Favicon-3-2.png";
+
     static final ObjectMapper JSON = new ObjectMapper();
 
     public static void main(String[] args) throws Exception {
@@ -421,7 +440,7 @@ public class Posts {
         d.canonical = (canon != null && !canon.contains("foojay.io")) ? canon : "";
 
         d.image = firstNonBlank(
-                metaContent(doc, "og:image"),
+                heroImage(doc, d.slug),
                 attrSrc(doc.selectFirst(SELECTOR_FEATURED_IMAGE_FALLBACK)));
 
         JsonNode ld = findArticleJsonLd(doc);
@@ -837,6 +856,58 @@ public class Posts {
      * The backoff is linear and short (2s, 4s): this is one client walking a site
      * politely, not a thundering herd that needs jitter.
      */
+    /**
+     * The post's hero: og:image, unless that is the site-default placeholder --
+     * see DEFAULT_OG_IMAGE_FILENAME for why that value means "ask somewhere else".
+     *
+     * When the REST API says there is genuinely no featured image (131 of the 179
+     * posts carrying the placeholder today) the placeholder is KEPT rather than
+     * falling through to the first body image: the favicon is what WordPress
+     * itself shows for those posts, and promoting a mid-article screenshot to hero
+     * would silently restyle 131 posts on a re-scrape.
+     */
+    static String heroImage(Document doc, String slug) {
+        String og = metaContent(doc, "og:image");
+        if (og == null || !og.contains(DEFAULT_OG_IMAGE_FILENAME)) return og;
+        String featured = featuredImageUrl(slug);
+        return featured != null ? featured : og;
+    }
+
+    /**
+     * The post's real featured image, from the open WordPress REST API, or null
+     * when it has none. Never throws: a hero is worth two requests but not a
+     * failed post, so a REST hiccup leaves the placeholder in place and says so --
+     * the same posture as fetch/ViewCounts.java never failing a build over a count.
+     */
+    static String featuredImageUrl(String slug) {
+        try {
+            JsonNode posts = fetchJson(BASE_URL + "/wp-json/wp/v2/posts?slug="
+                    + java.net.URLEncoder.encode(slug, java.nio.charset.StandardCharsets.UTF_8)
+                    + "&_fields=featured_media");
+            if (!posts.isArray() || posts.isEmpty()) return null;
+            int mediaId = posts.get(0).path("featured_media").asInt(0);
+            if (mediaId == 0) return null;   // genuinely no featured image
+            JsonNode media = fetchJson(BASE_URL + "/wp-json/wp/v2/media/" + mediaId + "?_fields=source_url");
+            String src = media.path("source_url").asText(null);
+            return (src == null || src.isBlank()) ? null : src;
+        } catch (Exception e) {
+            System.err.println("  WARNING: could not resolve the featured image for " + slug
+                    + " (" + e.getClass().getSimpleName() + "); keeping the placeholder hero");
+            return null;
+        }
+    }
+
+    /** A JSON GET against the same host, with the same UA and timeout as fetch(). */
+    static JsonNode fetchJson(String url) throws IOException {
+        String body = Jsoup.connect(url)
+                .userAgent("foojay-hugo-migration-bot/1.0 (+https://github.com/foojayio/website)")
+                .timeout(REQUEST_TIMEOUT_MS)
+                .ignoreContentType(true)
+                .maxBodySize(0)
+                .execute().body();
+        return JSON.readTree(body);
+    }
+
     static Document fetch(String url) throws IOException {
         IOException last = null;
         for (int attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {

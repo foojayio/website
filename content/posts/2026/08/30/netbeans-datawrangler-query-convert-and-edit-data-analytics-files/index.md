@@ -1,14 +1,16 @@
 ---
 title: "NetBeans DataWrangler: Query, Convert, and Edit Data Analytics Files"
 date: "2026-08-30T10:25:43+00:00"
-lastmod: "2026-08-30T16:16:46+00:00"
+lastmod: "2026-08-31T06:25:29+00:00"
 description: "Apache NetBeans DataWrangler brings the file formats of data analytics into Apache NetBeans 31: CSV, Apache Parquet, JSON and Excel, the formats exchanged…"
 authors:
   - "geertjan-wielenga"
-image: "Favicon-3-2.png"
+image: "duckdb-square-icon.svg"
 categories:
   - "Data Engineering"
+  - "Databases"
   - "Developer Tools"
+  - "DuckDB"
   - "NetBeans"
 related_posts:
 frozen: false

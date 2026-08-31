@@ -92,8 +92,20 @@
        themes/foojay/static/images/foojay-social-card.png -- 1200x630, the
        wordmark on --surface-navy, because the logo is light-blue-on-transparent
        and vanishes on a white ground. */}}
+  {{/* An SVG hero is skipped here and ONLY here: no link-preview scraper
+       renders SVG (Facebook, LinkedIn, X and Slack all show nothing), so a post
+       whose featured image is one would preview as a blank card -- worse than
+       the foojay one. It stays the hero on the page and the thumbnail on a card,
+       where a browser draws it fine. 10 posts are in this state, all of them
+       vendor logos WordPress had as their featured image; Yoast makes the same
+       call upstream, which is exactly why it served the site favicon for them
+       and why transfer/Posts.java has to ask the REST API instead. */}}
   {{ $ogImage := "" }}
-  {{ with .Params.image }}{{ $ogImage = partial "resource-url.html" (dict "page" $ "src" . "abs" true) }}{{ end }}
+  {{ with .Params.image }}
+    {{ if not (strings.HasSuffix (lower .) ".svg") }}
+      {{ $ogImage = partial "resource-url.html" (dict "page" $ "src" . "abs" true) }}
+    {{ end }}
+  {{ end }}
   {{ if not $ogImage }}{{ $ogImage = "images/foojay-social-card.png" | absURL }}{{ end }}
   <meta property="og:image" content="{{ $ogImage }}">
   <meta name="twitter:card" content="summary_large_image">
