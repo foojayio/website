@@ -2154,6 +2154,38 @@ should catch a mistake at PR time rather than letting it fail silently.
   `.Destination`/`.Title`, because those arrive raw and CommonMark decodes
   entities in a destination, so `?a=1&amp;b=2` otherwise renders as a query
   param literally named `amp;b` (~90 posts). Check both when editing a hook.
+- **A HEADERLESS TABLE IS STORED WITH AN EMPTY HEADER ROW, and the render hook
+  takes it back out.** GFM cannot express a table without a header -- the
+  delimiter row is what makes a table a table, and it only comes after a header.
+  WordPress has no such rule: its table block emits `<th>` only when the author
+  ticked "header section", and most did not. Flexmark, handed a
+  `<table><tbody><tr><td>`, emits the delimiter row with **nothing above it**,
+  which Goldmark does not recognise as a table at all -- so the reader got a wall
+  of literal pipes. **111 tables across 54 posts were live in that state**, and
+  nothing reported it; the build is perfectly happy to render a paragraph full of
+  `|`.
+
+  `HtmlToMarkdown` now gives such a table an empty header row, and
+  `_markup/render-table.html` omits the `<thead>` when every header cell is
+  blank, so the page matches what WordPress serves. Derived at both ends -- no
+  flag, and a table with a real header keeps it (202 pages still render a
+  `<thead>`; 54 render headerless).
+
+  **An empty header rather than promoting the first row, which is the tempting
+  fix and is wrong here.** Of the 111, only 25 have a first row that is actually
+  a header (every cell bold). The rest are legends (`| 1 | Indicates the
+  configured 30s recording is ongoing. |`) and WordPress note boxes (an empty
+  icon cell, then the note) -- promoting those turns a data row into a heading
+  and states something the author never wrote. The empty header keeps every row a
+  row. Note the blank `<thead>` is not merely redundant: `.prose th` carries a
+  bottom border and heading weight, so leaving it in draws a visible empty strip.
+
+  **The cleanup script pads its empty header to the delimiter's own column
+  widths**, because Flexmark pads every cell in a table and a narrow header would
+  be the one row out of line -- which shows up as whitespace churn the next time
+  `transfer/Posts.java` rewrites the post. Verified: for a cleaned file, the
+  scraper's table lines are byte-identical to the script's.
+
 - **Headings are stored as ATX (`##`), not setext underlines.** Levels map 1:1
   to WordPress's `<h1>`–`<h6>`, so nesting is exactly what the author wrote —
   verified by diffing the built site: across 3543 pages, **zero** changed their
