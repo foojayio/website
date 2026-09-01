@@ -1100,6 +1100,32 @@ public class Frontmatter {
                             + " 31 days -- check the year");
                 }
             }
+
+            // A TIME OF DAY ON A MULTI-DAY EVENT SILENTLY EATS DAYS, which is the
+            // one way this file can be wrong and still look right in review.
+            // calendar-events.html derives the number of days as
+            // (end.Unix - start.Unix) / 86400 in INTEGER arithmetic, so an
+            // 11:00 start against a date-only end leaves 13 hours short of a
+            // whole day and the division floors: a two-day conference draws one
+            // cell and the last day disappears off the grid. Nothing errors, and
+            // the agenda still reads "8-9 September", so the entry looks correct
+            // everywhere except the month view.
+            //
+            // The template invites exactly this mistake -- it says to add a time
+            // when the event is an online session, which a two-day online
+            // conference is. IntelliJ IDEA Conf 2026 (11:00-17:00 CEST across
+            // 8-9 September) is the entry that found it.
+            //
+            // A time is still right for a SINGLE-day event: that is the only case
+            // where the layout renders the clock at all.
+            boolean startHasTime = String.valueOf(e.get("start")).trim().length() > 10;
+            if (startHasTime && start != null && end != null && end.isAfter(start)) {
+                problems.add(file + ": start carries a time of day AND the event runs to " + end
+                        + ". The month grid counts whole days between start and end, so a partial"
+                        + " first day rounds the span down and the last day vanishes."
+                        + " Use a date-only start (\"" + start + "\") for a multi-day event"
+                        + " -- the clock is only rendered for single-day ones anyway.");
+            }
         }
         return problems;
     }

@@ -302,8 +302,8 @@ it is the part I would most want back if we ever moved again.
 ## Every podcast episode is now readable
 
 The Foojay Podcast had exactly one way in: press play and listen for the next
-forty-five minutes. **99 episodes now carry a transcript on the page**, roughly
-800,000 words of conversation you can read, skim, `Ctrl-F` through, or quote
+forty-five minutes. **100 episodes now carry a transcript on the page**, roughly
+824,000 words of conversation you can read, skim, `Ctrl-F` through, or quote
 from.
 
 Nobody transcribed anything to make that happen. Every episode sits on Foojay's
@@ -337,10 +337,73 @@ episode and your name comes out wrong, every transcript carries a **Suggest a
 correction** link that opens that episode's transcript file in an editor. The
 script never overwrites a corrected transcript again.
 
-One deliberate omission: **transcripts stay out of the search index.** 800,000
+One deliberate omission: **transcripts stay out of the search index.** 824,000
 words against the article archive's 115,000 would make every episode a hit for
 any word anyone happened to say out loud, and bury the thing you were actually
 searching for.
+
+## The calendar fills itself now
+
+Finding out what your nearest Java User Group has planned used to depend on
+somebody remembering to tell Foojay. The old calendar was a table in the
+WordPress database, and every line on it arrived because a person added the JUG into a database list, and a scripted fetched the events from a Meetup link based on a weekly scheduled task. 
+
+This has been improved for the new Foojay using the list of JUGs also used as a source for the [Java User Groups page](/jugs/). **That list of groups is not ours to maintain either.** It comes from
+[GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs), the
+community-run directory that already tracks which JUGs exist and where, and a
+JBang script pulls it into the site at every deploy. A JUG lead who wants to
+correct their entry opens a pull request against that repository, not this one.
+Once a day a second script walks that list and reads the calendar feed each
+group already publishes, which is no longer restricted to Meetup-only. **100 JUGs sit in the directory and 68 of them publish a
+feed we can read, and 52 upcoming meetups sit on the calendar as I write this.**
+
+Both screenshots below show September 2026, taken on the first of the month:
+
+{{< gallery cols="1" >}}
+calendar-september-old.png | The old calendar. 11 entries for the month, each one typed into WordPress by hand.
+calendar-september-new.png | The same month on the new site. 23 entries, none of them typed in.
+{{< /gallery >}}
+
+Same month, twice the community. The old calendar carried 11 entries. The new
+one carries 23, from 19 different JUGs across 15 cities, and it knows the start
+time and the venue for 17 of them because the feeds carry that too.
+
+**Reading iCal instead of talking to Meetup is what unlocked the rest of the
+world.** The first version of this script posted to Meetup's GraphQL API, which
+needs a Meetup Pro subscription and an OAuth client. That is a paid dependency
+for reading events Meetup already publishes to anyone, and it capped the
+calendar at the groups who use Meetup at all. Every JUG in the directory that
+records a calendar publishes iCal instead: Google Calendar, a file on the
+group's own site, or Meetup's own export. One format covers all three, and Luma,
+Eventbrite, Tito, Bevy and Mobilizon export the same thing. A group that changes
+platform keeps working without anyone here touching a line.
+
+**A broken feed says so on the page.** Eight groups currently fail. Seven answer
+with a 404, because the address in the directory points at a group that moved or
+got renamed, and the eighth serves an ordinary web page where a feed should be.
+The calendar names those eight underneath itself rather than showing an empty
+month and letting you conclude that nothing is happening in Kaiserslautern. Each
+one is a two-line fix upstream by whoever knows the new address.
+
+**Conferences work the other way round, because a conference has no feed.**
+Nobody subscribes to Devoxx in their calendar app the way they subscribe to a
+JUG, so those entries live in the repository as one small YAML file each, and
+anyone can add one with a pull request. Copy `template/event.yaml`, fill in the
+name, the URL and the dates, open the PR. The frontmatter check reads it at
+review time and fails on a key it does not recognise, so `website:` instead of
+`url:` gets caught before a human looks at it rather than rendering an event
+with a piece missing. One file per event also means two people adding two
+conferences in the same week never touch the same bytes, so they never collide.
+
+Nothing has to be deleted afterwards either. The page drops an event the day
+after it ends, so a stale file is inert, and a calendar whose upkeep is a chore
+is a calendar that rots.
+
+Both routes are on [the calendar page](https://foojay.io/calendar/) itself.
+**Add an event** opens the events folder in this repository. **Add your JUG**
+opens the directory upstream. The bottleneck moved from "does somebody at Foojay
+know about your meetup" to "does your group publish a feed", and that second one
+is a question you can answer yourself.
 
 ## Your old comments are still there
 

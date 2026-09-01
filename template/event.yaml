@@ -27,9 +27,16 @@ name: "Devoxx Belgium 2026"
 # The event's own site -- where the calendar sends a reader.
 url: "https://devoxx.be/"
 
-# First day, YYYY-MM-DD. Add a time only when it matters (a single evening or
-# an online session): "2026-10-05T19:00:00+02:00", with the event's own UTC
-# offset. Without one, the event is shown as running all day.
+# First day, YYYY-MM-DD.
+#
+# A time of day belongs here ONLY on a SINGLE-day event -- an evening meetup or
+# a one-afternoon online session: "2026-10-05T19:00:00+02:00", with the event's
+# own UTC offset. The calendar renders the clock for those and for nothing else.
+#
+# On a multi-day event a time is worse than useless: the month grid counts whole
+# days from start to end, so a start at 11:00 leaves the span 13 hours short of
+# two full days, rounds down, and the last day disappears from the grid. Use a
+# plain date. The PR check catches this, but it is easier not to write it.
 start: "2026-10-05"
 
 # Where it is. Both required unless `online: true` below.
