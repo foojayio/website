@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-08-31T07:06:10Z",
+  "generatedAt" : "2026-09-01T06:18:18Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -295,7 +295,15 @@
     "jug" : "FrankfurtMainJUG",
     "source" : "calendar",
     "url" : "http://jugf.de/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "A Java 8 lambda and JobRunr is all you need for distributed (batch) processing (Ronald Dehuysser)",
+      "url" : "",
+      "startTime" : "2026-10-05T16:30:00Z",
+      "endTime" : "2026-10-05T18:00:00Z",
+      "venue" : null,
+      "city" : null,
+      "online" : null
+    } ]
   }, {
     "slug" : "Java-User-Group-Freiburg",
     "name" : "Java User Group Freiburg",
@@ -650,7 +658,15 @@
     "jug" : "JUGNoord",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-noord/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "September 2026: From Wedding Optimization to Framework Freedom",
+      "url" : "https://www.meetup.com/jug-noord/events/316350341/",
+      "startTime" : "2026-09-15T17:00:00+02:00",
+      "endTime" : "2026-09-15T20:00:00+02:00",
+      "venue" : "Dienst Uitvoering Onderwijs (DUO)-IB-Groep",
+      "city" : "Groningen",
+      "online" : false
+    } ]
   }, {
     "slug" : "KnoxJava",
     "name" : "KnoxJava",
@@ -736,7 +752,15 @@
     "jug" : "NijmegenJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/nijmegen-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "NijmegenJUG - September Meetup",
+      "url" : "https://www.meetup.com/nijmegen-java-user-group/events/316351451/",
+      "startTime" : "2026-09-17T17:30:00+02:00",
+      "endTime" : "2026-09-17T21:00:00+02:00",
+      "venue" : "First8 Conclusion",
+      "city" : "Nijmegen",
+      "online" : false
+    } ]
   }, {
     "slug" : "NisJUG",
     "name" : "NisJUG - Niš Java User Group (Niš, Serbia)",
