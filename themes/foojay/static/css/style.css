@@ -114,6 +114,17 @@
 
   /* Metrics */
   --max-width: 1240px;
+  /* The article READING MEASURE -- the cap on .post-single / .page-single and
+     on a board member page. Sized to fill the sidebar layout's article column
+     rather than to a round number of characters: 1240 - 2*40 gutter - 330
+     sidebar - 52 gap = 778px of column, against 96ch = 770px at the 17px body
+     size, so the cap no longer leaves ~70px of empty gutter beside the text on
+     a desktop article. It is still doing work below 960px, where the sidebar
+     collapses and the column becomes the full 1160px -- ~145 characters to a
+     line, which is what this token exists to prevent. (`ch` resolves against
+     the element's own font-size, so an article that is also `.prose` caps a
+     shade wider; the two were already 88ch apart in the same way.) */
+  --measure: 96ch;
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --radius: 10px;
   --radius-sm: 6px;
@@ -947,9 +958,9 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* ------------------------------------------------------------- article --- */
 
-.post-single, .page-single { max-width: 88ch; }
-/* Opt out of the 88ch reading measure. That cap is right for prose -- a line
-   longer than ~90 characters is hard to track back to the next line -- but
+.post-single, .page-single { max-width: var(--measure); }
+/* Opt out of the reading measure (--measure). That cap is right for prose --
+   a very long line is hard to track back to the next one -- but
    wrong for pages whose content is a grid or table rather than paragraphs,
    which just get a wide empty gutter on the right instead. */
 .page-single--wide { max-width: none; }
@@ -2723,9 +2734,9 @@ body.lightbox-open { overflow: hidden; }
 .board-logo--large { width: 180px; height: 130px; flex: 0 0 auto; }
 .board-logo--mini { width: 52px; height: 52px; padding: .35rem; flex: 0 0 auto; border-radius: 8px; }
 
-/* Same 88ch reading measure as .page-single: a member page is mostly prose
+/* Same reading measure as .page-single: a member page is mostly prose
    (the About text and the quote), and the mini-list at the foot wraps. */
-.board-single { max-width: 88ch; }
+.board-single { max-width: var(--measure); }
 
 .board-back { margin: 0 0 1.25rem; }
 .board-back a { font-weight: 600; font-size: .95rem; }
