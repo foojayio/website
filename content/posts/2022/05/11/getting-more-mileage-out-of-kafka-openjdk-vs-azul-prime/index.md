@@ -38,7 +38,7 @@ We found that a 5-node cluster on OpenJDK could reach a max throughput of 333,87
 
 If you run your cluster on AWS r4x machines, your cost and ROI breakdown looks like this:
 
-|   |   |
+|                                 |            |
 |---------------------------------|------------|
 | AWS r4x hourly price            | $1.008     |
 | Yearly price (1 node)           | $8,830.08  |

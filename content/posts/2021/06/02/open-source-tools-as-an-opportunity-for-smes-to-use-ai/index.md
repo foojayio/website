@@ -24,7 +24,7 @@ The goal of my research at [Hochschule Pforzheim](https://www.hs-pforzheim.de/en
 
 Small and medium-sized enterprises play a key role in the German economy. More than 99% of all German companies are SMEs. In addition, more than half of all employees in Germany are employed in these companies. ^\[2\]^
 
-|   |   |   |   |   |   |
+|                    |                         |     |                     |    |                        |
 |--------------------|-------------------------|-----|---------------------|----|------------------------|
 | **Company Size**   | **Number of employees** | and | **Turnover €/year** | or | **Balance Sum €/year** |
 | Micro enterprises  | Up to 9                 |     | Up to 2 millions    |    | Up to 2 millions       |
@@ -84,7 +84,7 @@ But how can SMEs integrate AI into their business model? Around 40% of all SMEs 
 
 The Open Source Tools are classified in the following table based on the categories AI area, framework and license model. The order of the tools is irrelevant, as they are sorted alphabetically:
 
-|   |   |   |   |   |
+|                                                              |                                                                           |                                                                                            |                                                  |                                            |
 |--------------------------------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------|--------------------------------------------|
 | **Open Source Tools**                                        | **Provider**                                                              | **AI Areas**                                                                               | **Framework**                                    | **Licence** **model**                      |
 | Accord.NET ^\[13\]^                                          | César Souza                                                               | - Computer Vision - Machine Learning                                                       | C#                                               | GNU „Lesser" General Public License (LGPL) |

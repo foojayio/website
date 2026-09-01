@@ -206,7 +206,7 @@ Additionally, Lombok's `@SneakyThrows` annotation enables throwing checked excep
 
 We can sum this up in the following table:
 
-|   |   |   |
+|                          |        |          |
 |--------------------------|--------|----------|
 |                          | Lombok | Manifold |
 | Data \& Value            | ✅      | ❌        |

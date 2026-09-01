@@ -23,7 +23,7 @@ You may be using one of the terminal applications installed on your operating sy
 
 Not all shells are included in your IDE. Here is a list of shells by default supported for the IDE's based on my **Windows** computer.
 
-|   |   |   |   |
+|                                   |               |         |                 |
 |-----------------------------------|---------------|---------|-----------------|
 | **Shell**                         | IntelliJ IDEA | Eclipse | Apache NetBeans |
 | Command Prompt                    | ✅             | ✅       |                 |
@@ -112,7 +112,7 @@ There is also a [pro version of Applet Runner](https://www.japplis.com/applet-ru
 * **Dropping file** or directory to the panel will print the full path to the terminal
 * And [more features](https://www.japplis.com/applet-runner/pro/#features)
 
-|   |   |   |
+|                  |                                                       |           |
 |------------------|-------------------------------------------------------|-----------|
 | *Parameter name* | *Description*                                         | *Example* |
 | Background       | Background color of the shell Red-Green-Blue (rrggbb) | 000000    |

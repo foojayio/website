@@ -48,7 +48,7 @@ TornadoVM SDKs come as ZIP archives tailored for different operating systems, CP
 
 You can choose a backend-specific build:
 
-|   |   |
+|              |                        |
 |--------------|------------------------|
 | Backend      | SDKMAN! Latest Version |
 | OpenCL       | 2.2.0-opencl (default) |

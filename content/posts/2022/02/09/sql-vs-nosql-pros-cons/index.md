@@ -28,7 +28,7 @@ The best choice? Well, it depends on a whole slew of factors, including your que
 
 #### SQL vs. NoSQL Comparison Chart
 
-|   |   |   |   |
+|                      |                            |                         |                                   |
 |----------------------|----------------------------|-------------------------|-----------------------------------|
 | SQL                  | NoSQL                      |
 | **Pros**             | **Cons**                   | **Pros**                | **Cons**                          |

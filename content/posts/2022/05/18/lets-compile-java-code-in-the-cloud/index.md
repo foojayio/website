@@ -87,7 +87,7 @@ Azul Platform Prime's highly optimized Falcon compiler is already capable of pro
 
 Here are some numbers on Falcon vs Hotspot on popular Java performance benchmarks.
 
-|   |   |
+|               |                                               |
 |---------------|-----------------------------------------------|
 | **Benchmark** | **Azul Platform Prime Throughput vs OpenJDK** |
 | Cassandra     | 135%                                          |

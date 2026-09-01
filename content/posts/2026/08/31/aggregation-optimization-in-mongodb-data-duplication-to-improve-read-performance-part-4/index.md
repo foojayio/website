@@ -28,7 +28,7 @@ In this series, we've described our steps to improve the performance of a slow r
 
 Following our first two rounds of improvements involving [removing unnecessary unwind stages](https://medium.com/mongodb/aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2-50bff2e1006c) and [using embedding to more efficiently model the many-to-many relationship](https://medium.com/mongodb/aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3-fccdf603ddc8), we had seen a 75% improvement in performance. However, we were still well short of our target sub-one second query response.
 
-|   |   |   |
+|                                      |                        |                                                                  |
 |--------------------------------------|------------------------|------------------------------------------------------------------|
 | Pipeline Description                 | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial design                       | 11.8 seconds           | 260 seconds                                                      |
@@ -134,7 +134,7 @@ The complete pipeline now looked like this:
 
 With this latest set of changes in place, retesting the pipeline revealed a *dramatic* increase in performance. Individual queries were now averaging 51 *milliseconds* with the total elapsed time for 300 query iterations reduced to 1.2 seconds.
 
-|   |   |   |
+|                                      |                        |                                                                  |
 |--------------------------------------|------------------------|------------------------------------------------------------------|
 | Pipeline Description                 | Average time per query | Total elapsed time (150 query iterations, 15 concurrent threads) |
 | Initial design                       | 11.8 seconds           | 260 seconds                                                      |

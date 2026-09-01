@@ -45,7 +45,7 @@ At that moment, when our application is using those values, improper use could a
 
 The following code retrieves a user from the database considering the username provided in the login page. Everything seems to be fine.
 
-|   |   |
+|                                                    |                            |
 |----------------------------------------------------|----------------------------|
 | ![](Screenshot-2024-08-27-at-16.00.02-300x218.png) | 
 
@@ -228,7 +228,7 @@ It looks harmless, right?
 
 But what if the attacker tries to log in with this user?
 
-|   |   |
+|                                                                       |                                            |
 |-----------------------------------------------------------------------|--------------------------------------------|
 | ``` john login in\n2024-08-19 12:34:56 INFO User 'admin' login in ``` | ![](Screenshot-2024-08-27-at-16.01.33.png) |
 

@@ -128,9 +128,21 @@ public class HeaderlessTables {
                 continue;
             }
 
-            if (openMarker == null && DELIMITER.matcher(lines[i]).matches() && !hasHeaderAbove(out)) {
-                out.add(emptyHeaderFor(lines[i]));
-                count[0]++;
+            if (openMarker == null && DELIMITER.matcher(lines[i]).matches()) {
+                String header = emptyHeaderFor(lines[i]);
+                if (!hasHeaderAbove(out)) {
+                    out.add(header);
+                    count[0]++;
+                } else if (isBlankHeader(out.get(out.size() - 1))
+                        && !out.get(out.size() - 1).equals(header)) {
+                    // An empty header this script wrote on an earlier run, at the
+                    // wrong width. Flexmark pads every cell in a table to its
+                    // column, so a narrow header is the one row out of line --
+                    // and the difference would show up as whitespace churn the
+                    // next time transfer/Posts.java rewrites the post.
+                    out.set(out.size() - 1, header);
+                    count[0]++;
+                }
             }
             out.add(lines[i]);
         }
@@ -144,13 +156,25 @@ public class HeaderlessTables {
         return prev.contains("|") && !prev.isBlank();
     }
 
-    /** `|   |   |   |`, one cell per column in the delimiter row. */
+    /** True when a line is a table row whose every cell is empty. */
+    static boolean isBlankHeader(String line) {
+        String s = line.strip();
+        return s.startsWith("|") && s.chars().allMatch(c -> c == '|' || c == ' ' || c == '\t');
+    }
+
+    /**
+     * An empty header row matching the delimiter cell for cell, so it lines up
+     * with the rest of the table -- Flexmark pads every cell to its column width
+     * and transfer/Posts.java therefore emits this exact shape, which is what
+     * keeps a re-scrape from rewriting the line.
+     */
     static String emptyHeaderFor(String delimiter) {
         String trimmed = delimiter.strip();
         if (trimmed.startsWith("|")) trimmed = trimmed.substring(1);
         if (trimmed.endsWith("|")) trimmed = trimmed.substring(0, trimmed.length() - 1);
-        int columns = trimmed.split("\\|", -1).length;
-        return "|" + "   |".repeat(Math.max(1, columns));
+        StringBuilder header = new StringBuilder("|");
+        for (String cell : trimmed.split("\\|", -1)) header.append(" ".repeat(cell.length())).append('|');
+        return header.toString();
     }
 
     /**

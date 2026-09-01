@@ -315,7 +315,7 @@ Now that we know the `id` field is never `null`, we can use this implementation:
 
 We just use `id` for `equals()`, and we can relay on `id` as well for `hashCode()`
 
-|   |   |
+|      |                                                                                                                                                                                                                                                                               |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Note | If you like to use early primary key generation, then check out my open-source library [JPearl](https://github.com/wimdeblauwe/jpearl). It has base classes and a Maven plugin that makes [the implementation of this a breeze](https://github.com/wimdeblauwe/jpearl#usage). |
 
@@ -373,7 +373,7 @@ And write the test:
 
 This will test if `equals()` is reflexive, symmetric, transitive and consistent. It also tests if `hashCode()` adheres to the contract defined in the `java.lang.Object` API.
 
-|   |   |
+|      |                                                                                                                                                                                                                                                                                                                                             |
 |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Note | When writing the blog entry, the test pointed out equals of `Temperature` was not `final` (See <https://jqno.nl/equalsverifier/errormessages/subclass-equals-is-not-final/>). The best fix was to make the whole class final as the class was not intended to be subclassed anyway. So verifying your implementation is certainly worth it. |
 

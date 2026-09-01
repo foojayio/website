@@ -28,7 +28,7 @@ It's an alternative to REST, SOAP, or gRPC, and supports calls over HTTP, WebSoc
 
 We can use it to query \& mutate our data, and in the case of Spring Webflux/WebSocket/RSocket to set up subscriptions.
 
-|   |   |
+|           |                                                                                                               |
 |-----------|---------------------------------------------------------------------------------------------------------------|
 | **Note:** | Spring GraphQL is the successor of [GraphQL Java Spring](https://github.com/graphql-java/graphql-java-spring) |
 
@@ -63,7 +63,7 @@ To get started we just need the following dependencies in our pom.xml:
 </dependencies>
 ```
 
-|   |   |
+|           |                                                                                                                                                                                                           |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | We're using Spring MVC here, but we could also use web/webflux/rsocket here (see for reference: [possible starters](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.graphql)) |
 
@@ -106,7 +106,7 @@ Below that we can see our `Book` and `Author` type with their fields. In this ca
 
 More information on how to define a `Schema` can be found on the [GraphQL schema](https://graphql.org/learn/schema/) page.
 
-|   |   |
+|           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | * We can change the supported file type(s) by changing: `spring.graphql.schema.file-extensions` * The default schema location can be adapted using `spring.graphql.schema.locations`, we can even include files in our dependencies by using the `classpath*:` prefix * field introspection is enabled by default since tools like GraphiQL require it. If you do not want to expose your schema, set `spring.graphql.schema.introspection.enabled` to `false` |
 
@@ -132,7 +132,7 @@ spring.graphql.websocket.path=/graphql
 
 Using the default [GraphiQL](http://localhost:8080/graphiql) path.
 
-|   |   |
+|           |                                                          |
 |-----------|----------------------------------------------------------|
 | **Note:** | This can be adapted by configuring `spring.graphql.path` |
 
@@ -289,7 +289,7 @@ public Author createAuthor(
 
 As you can see, our inputs are annotated with `@Argument`.
 
-|   |   |
+|           |                                                                                                                                                                                                                                                                                                                                                                                                  |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | `@Argument` does not have a `required` flag, nor the option to specify a default value. These can be specified in the GraphQL schema, and are enforced by GraphQL Java.If the distinction between `Null` and Omitted is important, one can instead declare an `ArgumentValue` parameter which is a container for the resulting value alongside a flag to indicate whether the input was omitted. |
 
@@ -313,7 +313,7 @@ mutation addAuthor {
 
 In case we want to stay up to date, we can also set up a subscription.
 
-|   |   |
+|           |                                                                          |
 |-----------|--------------------------------------------------------------------------|
 | **Note:** | Keep in mind that we need WebSocket/RSocket transports for this support. |
 
@@ -354,7 +354,7 @@ So it's quite easy to set up our GraphQL API, but what about the testing?
 
 Spring makes it easy for us to test our application using `GraphQLTester` which offers us an easy way to test agnostic of the underlying transport.
 
-|   |   |
+|           |                                                                                                                                                                                                                                                                                    |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | To perform requests through a client we need one of the following extensions: HttpGraphQLTester/WebSocketGraphQLTester/RSocketGraphQLTester To perform server-side testing without a client we need either the ExecutionGraphQLServiceTester or WebGraphQLServiceTester extension. |
 
@@ -536,7 +536,7 @@ Unmapped registrations: {}
 Skipped types: []
 ```
 
-|   |   |
+|              |                                                                                                                                      |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Warning:** | Introspected should be disabled in production as it exposes quite a bit of information about your API which might not be desireable. |
 

@@ -11,8 +11,8 @@ categories:
 related_posts:
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"
   - "fantastic-jvms-and-where-to-find-them"
+  - "aggregation-optimization-in-mongodb-data-duplication-to-improve-read-performance-part-4"
   - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
-  - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
 frozen: false
 ---
 
@@ -22,7 +22,7 @@ I wasn't satisfied with the official documentation and other blog posts as they 
 
 ## Migrating the GC logging (continued)
 
-|   |   |
+|      |                                |
 |------|--------------------------------|
 | Note | These log are based on JDK11u. |
 
@@ -80,7 +80,7 @@ In a lesser way I used the official [`java` documentation](https://docs.oracle.c
 | `VerifySilently`                            | `gc+verify=debug`                                                                                          | Do not print the verification progress                                                                                                                               |
 [Table 1. Exhaustive GC logging option translation table (with some caveats)]
 
-|   |   |
+|                     |          |
 |---------------------|----------|
 | `PrintGCDateStamps` | `time`   |
 | `PrintGCTimeStamps` | `uptime` |
@@ -181,7 +181,7 @@ One thing I used to log is about classes, particularly during development. Espec
 
 Some of the `Trace*` flags are still present, even in JDK 14, although they output a warning encouraging to switch to unified logging.
 
-|   |   |
+|                             |                                           |
 |-----------------------------|-------------------------------------------|
 | `TraceClassInitialization`  | `class+init=info`                         |
 | `TraceClassLoading`         | `class+load=info` (`debug)`               |

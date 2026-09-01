@@ -72,7 +72,7 @@ As there are multiple Raspberry Pi versions since 2013 ([full history on Wikiped
 
 The architecture can be checked with the `uname` command and these are some of the outputs:
 
-|   |   |   |
+|                     |                  |            |
 |---------------------|------------------|------------|
 | Board               | Operating System | `uname -m` |
 | Raspberry Pi Zero 1 | 32-bit           | armv6l     |

@@ -34,7 +34,7 @@ In order to make the example code a bit more tangible, we will be using the Curi
 
 The values listed below are used in the code and configuration examples throughout this article. They are example values, so remember to tailor them according to your implementation details and deployment setup.
 
-|   |   |
+|                        |                                                         |
 |------------------------|---------------------------------------------------------|
 | **Parameter Name**     | **Value used in the tutorial**                          |
 | Authorization Endpoint | https://idsvr.example.com/oauth/v2/oauth-authorize      |

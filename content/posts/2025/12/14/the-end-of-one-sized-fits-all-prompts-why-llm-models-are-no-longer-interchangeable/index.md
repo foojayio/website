@@ -55,7 +55,7 @@ At CodeRabbit, we take a methodical approach to model evaluation and characteriz
 
 These qualitative differences translate into hard, operational differences.
 
-|   |   |   |
+|                          |                                                                                                                                           |                                                                                                                            |
 |--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | Dimension                | Claude Sonnet 4.5                                                                                                                         | GPT-5-Codex                                                                                                                |
 | Default Word Choice      | "Critical," "Add," "Remove," "Consider"                                                                                                   | "Fix," "Guard," "Prevent," "Restore," "Drop"                                                                               |

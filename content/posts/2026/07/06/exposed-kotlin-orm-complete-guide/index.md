@@ -331,7 +331,7 @@ Thanks to the Exposed Spring Boot Starter, you never have to write a manual `tra
 
 **The Exposed Features in Action**
 
-|   |   |   |
+|                     |                                    |                                      |
 |---------------------|------------------------------------|--------------------------------------|
 | **Operation**       | **Exposed Code**                   | **What It Does**                     |
 | Get all rows        | CourseEntity.selectAll()           | SELECT \* FROM course                |
@@ -367,7 +367,7 @@ Note this uses *@Controller* , not *@RestController.* That's intentional—most 
 
 Serving Pages (View-Based Endpoints)
 
-|   |   |
+|                               |                                                           |
 |-------------------------------|-----------------------------------------------------------|
 | **Route**                     | **Purpose**                                               |
 | **GET /courses/new**          | Shows a blank "add course" form                           |

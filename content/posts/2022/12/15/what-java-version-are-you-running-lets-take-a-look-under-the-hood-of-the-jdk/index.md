@@ -155,7 +155,7 @@ If you ever faced the problem of an unsupported Java version 59 (are similar), y
 
 It's an internal number used by Java to define the version.
 
-|   |   |   |   |   |   |   |   |   |   |   |   |   |
+|                   |    |    |    |    |    |    |    |    |    |    |    |    |
 |-------------------|----|----|----|----|----|----|----|----|----|----|----|----|
 | **Java release**  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
 | **Class version** | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 |

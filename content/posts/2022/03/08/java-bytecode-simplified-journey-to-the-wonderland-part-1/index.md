@@ -106,7 +106,7 @@ JVM can understand these byte series and then convert them to appropriate machin
 
 Let's see another example -
 
-|   |   |   |   |
+|                            |                                     |                    |                                                |
 |----------------------------|-------------------------------------|--------------------|------------------------------------------------|
 | java source code           | opcode                              | hex                | binary                                         |
 | 

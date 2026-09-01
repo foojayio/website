@@ -86,7 +86,7 @@ As this implementation will use the _id field for its operations, it won't need 
 
 Inserting the 500 million event documents for the initial scenario in the collections appV5R0 and appV5R1 with the schema and Bulk Upsert function presented above, and also presenting the values from the previous versions, we have the following collection stats:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -98,7 +98,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the event stats for appV5R0 and appV5R1 and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -198,7 +198,7 @@ As this implementation will use the _id field for its operations, it won't need 
 
 Inserting the 500 million event documents for the initial scenario in the collections appV5R2 with the schema and Bulk Upsert function presented above, and also presenting the values from the previous versions, we have the following collection stats:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -211,7 +211,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the event stats for appV5R2 and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -296,7 +296,7 @@ The third stage, $group, will have a logic similar to the one that we have been 
 
 Inserting the 500 million event documents for the initial scenario in the collections appV5R3 with the schema and Bulk Upsert function presented above, and also presenting the values from the previous versions, we have the following collection stats:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -310,7 +310,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the event stats for appV5R3 and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -392,7 +392,7 @@ Most of the above aggregation pipeline logic is equal to the one for appV5R3. Th
 
 Inserting the 500 million event documents for the initial scenario in the collections appV5R4 with the schema and Bulk Upsert function presented above, and also presenting the values from the previous versions, we have the following collection stats:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -407,7 +407,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the event stats for appV5R3 and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |

@@ -47,7 +47,7 @@ Using the information provided in the [release notes for each Java update](https
 
 Firstly, here is a list of the highest-scoring CVSS in updates since April 2019. This was when Oracle stopped providing free public updates to either JDK 8 or JDK 11. (Technically, free updates are still available for Oracle JDK 8 but only for personal or development use. Commercial use outside of approved Oracle applications or the Oracle Cloud requires the purchase of a Java SE Subscription).
 
-|   |   |   |
+|               |                 |                       |
 |---------------|-----------------|-----------------------|
 | **Date**      | **CVSS**        | **Versions Impacted** |
 | April 2021    | 5.9             | 7, 8, 11, 13, 15, 16. |

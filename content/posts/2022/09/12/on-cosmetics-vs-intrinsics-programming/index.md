@@ -27,7 +27,7 @@ This being said, my point is not to bash M. Odersky but to highlight the sheer v
 
 The scope goes well beyond OOP vs. FP. Consider the following snippets:
 
-|   |   |
+|                            |                            |
 |----------------------------|----------------------------|
 | 
 
@@ -68,7 +68,7 @@ It can be even more confusing if `repo.findAll()` is updated from blocking to no
 
 You can rewrite both above snippets using annotations instead of handlers.
 
-|   |   |
+|                            |                            |
 |----------------------------|----------------------------|
 | 
 

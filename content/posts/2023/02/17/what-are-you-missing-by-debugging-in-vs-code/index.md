@@ -37,7 +37,7 @@ But there's a price that comes with simplicity.
 
 As you can see in the following table there are many missing features that are available in IntelliJ. These are all features I covered in blog posts or videos. Notice that the video links in the following table are direct links to the specific time within the video.
 
-|   |   |   |   |
+|                             |             |                                |                                                                                                                                      |
 |-----------------------------|-------------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Feature**                 | **VS Code** | **Comments**                   | **Links**                                                                                                                            |
 | Breakpoint                  | ✅           |                                | [Video](https://www.youtube.com/watch?v=eXRqKqSp7x0), [Post](https://debugagent.com/the-massive-hidden-power-of-breakpoints)         |

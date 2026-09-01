@@ -52,7 +52,7 @@ Use jcmd 6 JFR.start to start a recording.
 -rw-r--r--   1 root root 57M May  6 22:35 /var/log/jfr/app-startup.jfr
 ```
 
-|   |   |
+|   |                                                    |
 |---|----------------------------------------------------|
 | 1 | Indicates the configured 30s recording is ongoing. |
 | 2 | No more recording once the duration is over.       |
@@ -80,7 +80,7 @@ Recording 1: name=post-startup maxage=10m (delayed) [1]
 Recording 1: name=app-startup maxage=10m (running) [2]
 ```
 
-|   |   |
+|   |                                                                            |
 |---|----------------------------------------------------------------------------|
 | 1 | Indicates there's a recording that will start at some point in the future. |
 | 2 | Indicates the configured continuous recording is ongoing.                  |

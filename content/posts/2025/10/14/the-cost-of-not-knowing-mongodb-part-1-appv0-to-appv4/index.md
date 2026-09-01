@@ -114,14 +114,14 @@ For those wondering why we need an extra index in the fields of the embedded doc
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV1\` with the schema and \`Bulk Upsert\` function presented above, we have the following \`collection stats\`:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
 
 Another interesting metric that we can keep an eye on through the application versions is the storage size needed, data, and index, to store one of the 500 million events—let's call it \`event stats\`. We can obtain this value by dividing the Data Size and Index Size of the initial scenario stats by the amount of events documents. For the \`appV1\`, we have the following \`event stats\`:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -183,7 +183,7 @@ To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV2\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -191,7 +191,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the \`event stats\` for \`appV2\` and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -266,7 +266,7 @@ To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV3\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -275,7 +275,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the \`event stats\` for \`appV3\` and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
@@ -363,7 +363,7 @@ As this implementation will use the \`_id\` field for its operations, it won't n
 
 Inserting the 500 million event documents for the initial scenario in the collection \`appV4\` with the schema and \`Bulk Upsert\` function presented above, and also presenting the values from the previous versions, we have the following \`collection stats\`:
 
-|   |   |   |   |   |   |   |
+|            |             |           |               |              |         |            |
 |------------|-------------|-----------|---------------|--------------|---------|------------|
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
@@ -373,7 +373,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 
 Calculating the \`event stats\` for \`appV4\` and also presenting the values from the previous versions, we have the following:
 
-|   |   |   |   |
+|            |                  |                   |                   |
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
 | appV1      | 85B              | 43.1B             | 128.1B            |
