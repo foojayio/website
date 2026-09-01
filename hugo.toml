@@ -509,20 +509,20 @@ enableGitInfo = true
     desc = "Foojay is not only this website, but a lot more..."
 
 [[menu.main]]
+    name = "Authors"
+    parent = "About"
+    url = "/today/author/"
+    weight = 43
+    [menu.main.params]
+        desc = "Everyone who writes for foojay.io"
+
+[[menu.main]]
   name = "Meet the Team"
   parent = "About"
   url = "/meet-the-team/"
-  weight = 43
-  [menu.main.params]
-    desc = "The team that keeps foojay.io running"
-
-[[menu.main]]
-  name = "Authors"
-  parent = "About"
-  url = "/today/author/"
   weight = 44
   [menu.main.params]
-    desc = "Everyone who writes for foojay.io"
+    desc = "The team that keeps foojay.io running"
 
 [[menu.main]]
   name = "Our Sponsors"
