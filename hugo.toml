@@ -262,10 +262,18 @@ enableGitInfo = true
     desc = "Conversations with the people building and using Java"
 
 [[menu.main]]
+  name = "Event Calendar"
+  parent = "News"
+  url = "/calendar/"
+  weight = 13
+  [menu.main.params]
+    desc = "JUG meetups, conferences, and other events"
+
+[[menu.main]]
   name = "JC-AI Newsletter"
   parent = "News"
   url = "/today/category/jc-ai-newsletter/"
-  weight = 13
+  weight = 14
   [menu.main.params]
     desc = "AI Newsletter curated by Miro Wengner"
 
@@ -273,17 +281,9 @@ enableGitInfo = true
   name = "Foojay.io AI Portal"
   parent = "News"
   url = "/ai/"
-  weight = 14
-  [menu.main.params]
-    desc = "Java and AI: guides, tutorials and machine learning on the JVM"
-
-[[menu.main]]
-  name = "Event Calendar"
-  parent = "News"
-  url = "/calendar/"
   weight = 15
   [menu.main.params]
-    desc = "JUG meetups, conferences, and other events"
+    desc = "Java and AI: guides, tutorials and machine learning on the JVM"
 
 [[menu.main]]
   name = "All Categories"

@@ -94,6 +94,8 @@
         "country"    $country
         "hue"        $hue
         "sort"       $start.Unix
+        "offset"     ($start.Format "-0700")
+        "offsetLabel" (partial "utc-offset.html" $start)
         "date"       ($start.Format "2006-01-02")
         "endDate"    $endDate
         "day"        ($start.Format "2")
@@ -213,6 +215,8 @@
           "country"    ($c.country | default "")
           "hue"        (mod (hash.FNV32a $slug) 360)
           "sort"       $start.Unix
+          "offset"     ($start.Format "-0700")
+          "offsetLabel" (partial "utc-offset.html" $start)
           "date"       ($start.Format "2006-01-02")
           "endDate"    $endDate
           "day"        ($start.Format "2")
@@ -237,6 +241,62 @@
 {{ $conferences = sort $conferences "sort" }}
 
 {{ $events = sort $events "sort" }}
+
+{{/* ---------------------------------------------------------------------
+     A ZONE LABEL, BUT ONLY ON A DAY THAT ACTUALLY NEEDS ONE.
+
+     Every event is sorted on `sort`, which is the real instant, so the order is
+     always right. What is not obvious is that each row prints the time in its
+     OWN offset, which is what the JUG means by "18:30" and what Meetup shows.
+     Put those two together on a day that spans continents and a correctly
+     ordered column reads as a broken one:
+
+       18:00  Philip Riecks           Germany   (16:00 UTC)
+       18:00  Softwarearchitektur     Jena      (16:00 UTC)
+       19:00  Java, Spring Boot...    Hamburg   (17:00 UTC)
+       18:30  An Engineer's Guide     USA       (23:30 UTC)  <- genuinely last
+
+     Re-sorting on the printed clock would "fix" the column by lying: it would
+     put an event starting at half past midnight European time above one that
+     starts at seven in the evening. Restating every time in the reader's own
+     zone is the other tempting fix and is ruled out on the same grounds the
+     times are server-rendered in the first place -- 19:00 is the thing the JUG
+     announced.
+
+     So the ORDER stays and the ambiguity gets named. A day whose events do not
+     all share one UTC offset gets the offset printed next to each of its times;
+     every other day is untouched. Measured on the current feed that is 5 days
+     out of 41, so this is a label that turns up where it explains something and
+     nowhere else.
+
+     Offsets come off the events rather than from a list of zones, so a JUG in a
+     region nobody thought about is handled by arithmetic.
+
+     ONLY CLOCK-BEARING EVENTS COUNT, on both sides of this. An all-day entry has
+     no time to qualify, and a date-only `start` in data/events/*.yaml parses as
+     UTC midnight -- so counting those would (a) hang a meaningless "UTC" on a
+     conference that shows "8-9 September" rather than a clock, and (b) make a day
+     look mixed because of a phantom +0000 that is not a timezone claim at all.
+     IntelliJ IDEA Conf 2026 does exactly this to 8 September, a day with one
+     clock on it and nothing to disambiguate. ------------------------------- */}}
+{{ $offsetsByDay := dict }}
+{{ range $e := $events }}
+  {{ if and (not $e.allDay) (eq (len $e.days) 1) }}
+    {{ $seen := index $offsetsByDay $e.date | default slice }}
+    {{ if not (in $seen $e.offset) }}
+      {{ $offsetsByDay = merge $offsetsByDay (dict $e.date ($seen | append $e.offset)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $labelled := slice }}
+{{ range $e := $events }}
+  {{ $zone := "" }}
+  {{ if and (not $e.allDay) (eq (len $e.days) 1) }}
+    {{ if gt (len (index $offsetsByDay $e.date | default slice)) 1 }}{{ $zone = $e.offsetLabel }}{{ end }}
+  {{ end }}
+  {{ $labelled = $labelled | append (merge $e (dict "zone" $zone)) }}
+{{ end }}
+{{ $events = $labelled }}
 
 {{ return (dict
     "events"      $events

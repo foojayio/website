@@ -809,8 +809,46 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 .post-card--lead .post-card-image { aspect-ratio: 16 / 9; }
-.post-card--lead .post-card-title { font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.1rem); }
-.post-card--lead .post-card-excerpt { font-size: 1.05rem; }
+
+/* THE TWO COLUMNS CANNOT AGREE ON A HEIGHT, and these two rules are what keeps
+   the disagreement small. The image is locked to 16/9, so its height follows its
+   column width and nothing else; the text column -- the NARROWER of the two --
+   holds everything and grows. align-items:center then splits the difference, so
+   the image floats in the middle of a tinted band.
+
+   It is not a long-title bug. Measured against the real archive, the text column
+   runs 1.46x the image height at the median 48-character title and 1.88x at 90,
+   and 10% of the 2161 posts are over 70 characters -- so it comes round about
+   every tenth lead post, and a long title only makes it obvious.
+
+   Shrinking the image is the tempting fix and it makes things WORSE: a narrower
+   column loses height at 9/16 of the width it gives up while the text saves a
+   single line, taking 1.88x to 2.16x. Stretching the image to fill the row does
+   equalise them, at the cost of cropping -- 55% of a 700x307 banner, and a great
+   many foojay heroes are wide screenshots where the crop is destructive.
+
+   So the height comes off the TEXT instead, and the title size is the real
+   culprit: 2.1rem in a 326px column is about 19 characters per line, far too
+   narrow for display type. 1.75rem gives 23 and drops a 90-character title from
+   5 lines to 4. With the excerpt clamped the gap roughly halves (92px to 43px at
+   a 1240px window) with nothing cropped, no conditional, and no threshold for an
+   author to fall either side of. */
+.post-card--lead .post-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1rem + 1vw, 1.75rem);
+  /* A 4-line headline should not end on one orphan word. */
+  text-wrap: balance;
+}
+.post-card--lead .post-card-excerpt {
+  font-size: 1.05rem;
+  /* The excerpt is a summary and is the expendable half: a long title takes its
+     space rather than stretching the card. -webkit-line-clamp is unprefixed
+     nowhere yet, and every engine we serve supports the -webkit- form. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 
 
 /* ------------------------------------------------------------- sidebar --- */
@@ -1441,6 +1479,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   font-size: .78em; text-transform: uppercase; letter-spacing: .06em;
 }
 .cal-row__time { font-variant-numeric: tabular-nums; }
+/* The UTC offset beside a time, rendered only on a day whose events do not all
+   share one -- see partials/calendar-events.html. It is a qualifier on the time,
+   not a second fact, so it sits back a step rather than competing with it. */
+.cal-row__zone { font-size: .85em; color: var(--ink-muted); font-variant-numeric: normal; }
 .cal-row__sep { opacity: .5; }
 /* An online event has no venue to name, so say so rather than leaving the
    place silently blank. */

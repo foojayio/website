@@ -147,12 +147,30 @@ public class JugEvents {
                 }
                 group.put("url", source.groupUrl());
 
+                ZoneId calZone = calendarZone(ics);
+
                 List<Map<String, Object>> groupEvents = new ArrayList<>();
                 int recurring = 0;
+                int floating = 0;
                 for (Map<String, String> ve : parseVEvents(ics)) {
                     if (ve.containsKey("RRULE")) recurring++;
-                    Map<String, Object> event = toEvent(ve);
+                    if (calZone == null && isFloating(ve.get("DTSTART"), ve.get("DTSTART.params"))) floating++;
+                    Map<String, Object> event = toEvent(ve, calZone);
                     if (event != null) groupEvents.add(event);
+                }
+                if (floating > 0) {
+                    // RFC 5545 calls a DTSTART with neither a Z nor a TZID a
+                    // FLOATING time: "19:00 wherever you are". A JUG never means
+                    // that -- they mean 19:00 where the meetup is -- but nothing
+                    // in the feed says where that is, and the calendar has to
+                    // store some offset to sort on. Guessing one from the JUG's
+                    // country is the kind of inference this repo does not make,
+                    // so those keep UTC and get named here instead: it is one
+                    // line for the JUG to fix (a TZID on DTSTART, or an
+                    // X-WR-TIMEZONE on the calendar) and unfixable from here.
+                    System.out.println("    note: " + floating + " event(s) carry a floating time"
+                            + " (no Z, no TZID) and the feed declares no X-WR-TIMEZONE"
+                            + " -- stored as UTC, ask the JUG to add a zone");
                 }
                 if (recurring > 0) {
                     // Nothing in the feeds seen so far repeats, so rather than
@@ -355,6 +373,38 @@ public class JugEvents {
         return out;
     }
 
+    /**
+     * THE ZONE THE WHOLE CALENDAR IS KEPT IN, which is the only thing that says
+     * what a UTC-stamped or floating event actually means locally.
+     *
+     * Google Calendar writes every DTSTART as a UTC instant ("20260909T160000Z")
+     * and declares the calendar's zone once, at the top, as X-WR-TIMEZONE. Read
+     * the events alone and a Paderborn meetup announced for 18:00 is stored as
+     * 16:00 and rendered as 16:00 -- the right instant with the wrong clock on
+     * it, which is worse than an obvious error because it looks like a time.
+     * Four events across two JUGs were in that state, and both feeds are Google
+     * Calendar ones.
+     *
+     * X-WR-TIMEZONE is not in RFC 5545. It is what Google, Apple and most
+     * exporters emit anyway, and it is the publisher's own statement about their
+     * calendar rather than an inference of ours, which is the whole reason it is
+     * safe to act on. An unparseable value is ignored rather than guessed at.
+     */
+    static ZoneId calendarZone(String ics) {
+        for (String line : unfold(ics)) {
+            if (line.startsWith("X-WR-TIMEZONE:")) {
+                String tzid = line.substring("X-WR-TIMEZONE:".length()).trim();
+                try {
+                    return ZoneId.of(tzid);
+                } catch (Exception ignored) {
+                    System.err.println("    unknown X-WR-TIMEZONE '" + tzid + "', ignoring");
+                }
+                return null;
+            }
+        }
+        return null;
+    }
+
     /** The calendar's own display name, where the feed carries one. */
     static String calendarName(String ics) {
         for (String line : unfold(ics)) {
@@ -364,17 +414,18 @@ public class JugEvents {
         return null;
     }
 
-    /** One VEVENT -> the event shape data/jug-events.json holds, or null to skip it. */
-    static Map<String, Object> toEvent(Map<String, String> ve) {
+    /** One VEVENT -> the event shape data/jug-events.json holds, or null to skip it.
+     *  calZone is the feed's X-WR-TIMEZONE, or null when it declares none. */
+    static Map<String, Object> toEvent(Map<String, String> ve, ZoneId calZone) {
         if (ve.getOrDefault("STATUS", "").equalsIgnoreCase("CANCELLED")) return null;
 
-        OffsetDateTime start = parseIcalDate(ve.get("DTSTART"), ve.get("DTSTART.params"));
+        OffsetDateTime start = parseIcalDate(ve.get("DTSTART"), ve.get("DTSTART.params"), calZone);
         if (start == null) return null;
         // A JUG's own feed is its whole history -- one Google Calendar here
         // holds 170 events back to 2014 -- so this filter is what makes it an
         // upcoming-events list at all.
         if (start.isBefore(OffsetDateTime.now().minusDays(1))) return null;
-        OffsetDateTime end = parseIcalDate(ve.get("DTEND"), ve.get("DTEND.params"));
+        OffsetDateTime end = parseIcalDate(ve.get("DTEND"), ve.get("DTEND.params"), calZone);
 
         Map<String, Object> event = new LinkedHashMap<>();
         event.put("title", unescapeText(ve.getOrDefault("SUMMARY", "Untitled event")));
@@ -410,20 +461,45 @@ public class JugEvents {
     }
 
     /**
-     * iCal dates come in three shapes: a UTC instant ("...Z"), a local time
-     * with a TZID parameter naming an IANA zone, and a bare date (VALUE=DATE)
-     * for an all-day event. All three end up as an offset date-time so the
-     * stored string carries the event's own local time, which is what the
-     * calendar page renders.
+     * iCal dates come in four shapes: a UTC instant ("...Z"), a local time with
+     * a TZID parameter naming an IANA zone, a FLOATING local time with neither,
+     * and a bare date (VALUE=DATE) for an all-day event. All of them end up as
+     * an offset date-time, because the stored string has to carry the event's
+     * own local clock -- that is what the calendar page renders, and what the
+     * JUG announced.
+     *
+     * THE CALENDAR'S ZONE OUTRANKS UTC, and that is the whole point of calZone.
+     * A "Z" time is an unambiguous instant, so no information is lost either
+     * way -- but rendering it needs a zone, and UTC is only the right one if the
+     * calendar is actually kept in UTC. Google Calendar exports every event as Z
+     * and states the real zone once, at the top, in X-WR-TIMEZONE. Ignoring that
+     * is how a Paderborn meetup announced for 18:00 came out as "16:00" on the
+     * calendar: the same instant, displayed with a clock nobody recognises.
+     * Converting with withZoneSameInstant keeps the instant identical and only
+     * changes which wall clock it is shown against.
+     *
+     * A FLOATING time (no Z, no TZID) is the opposite case: the wall clock is
+     * the fact and the instant is unknown. Interpreting it in the calendar's own
+     * zone is right when the feed declares one. When it does not, UTC is a
+     * fallback rather than a claim, and the caller reports it -- see the
+     * floating note in the sync loop.
      */
-    static OffsetDateTime parseIcalDate(String value, String params) {
+    static OffsetDateTime parseIcalDate(String value, String params, ZoneId calZone) {
         if (value == null || value.isBlank()) return null;
         try {
             if (value.endsWith("Z")) {
-                return LocalDateTime.parse(value.substring(0, value.length() - 1),
+                OffsetDateTime utc = LocalDateTime.parse(value.substring(0, value.length() - 1),
                         DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss")).atOffset(ZoneOffset.UTC);
+                return calZone == null ? utc
+                        : utc.atZoneSameInstant(calZone).toOffsetDateTime();
             }
-            ZoneId zone = zoneOf(params);
+            // TZID on the property wins over the calendar's default: an event
+            // can legitimately sit in another zone from the calendar holding it.
+            ZoneId zone = zoneOf(params, calZone);
+            // Floating, with no calendar zone either: UTC keeps the wall clock
+            // as written and gives the sort something to work with. The caller
+            // reports it rather than pretending it is a zone claim.
+            if (zone == null) zone = ZoneOffset.UTC;
             if (value.length() == 8) { // VALUE=DATE
                 return LocalDate.parse(value, DateTimeFormatter.BASIC_ISO_DATE)
                         .atStartOfDay(zone).toOffsetDateTime();
@@ -436,7 +512,15 @@ public class JugEvents {
         }
     }
 
-    static ZoneId zoneOf(String params) {
+    /** True for a DTSTART that names no zone at all -- neither Z nor TZID. */
+    static boolean isFloating(String value, String params) {
+        if (value == null || value.isBlank() || value.endsWith("Z")) return false;
+        if (value.length() == 8) return false;   // an all-day date, not a time
+        return zoneOf(params, null) == null;
+    }
+
+    /** The property's own TZID, else the calendar's zone, else `fallback`. */
+    static ZoneId zoneOf(String params, ZoneId fallback) {
         if (params != null) {
             for (String part : params.split(";")) {
                 if (part.regionMatches(true, 0, "TZID=", 0, 5)) {
@@ -444,12 +528,13 @@ public class JugEvents {
                     try {
                         return ZoneId.of(tzid);
                     } catch (Exception ignored) {
-                        System.err.println("    unknown TZID '" + tzid + "', falling back to UTC");
+                        System.err.println("    unknown TZID '" + tzid + "', falling back to "
+                                + (fallback == null ? "UTC" : fallback));
                     }
                 }
             }
         }
-        return ZoneOffset.UTC;
+        return fallback;
     }
 
     /** RFC 5545 text escaping: \n \, \; \\ */

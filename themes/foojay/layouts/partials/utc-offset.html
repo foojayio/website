@@ -1,0 +1,26 @@
+{{- /* A time's UTC offset, written the way a reader can act on it: "UTC+2",
+       "UTC-5", "UTC+5:30", or plain "UTC" at zero.
+
+       Used by partials/calendar-events.html, and only on the days that need it
+       -- see the zone-label block there for why an offset is printed at all.
+
+       DERIVED FROM THE TIME, not from a table of zone names. The feed gives us
+       an offset (`2026-09-10T18:30:00-05:00`) and Go's own "MST" layout renders
+       nothing useful for it: a time parsed from a numeric offset carries no zone
+       NAME, so it would print "-0500" where "CDT" is wanted. Arithmetic on the
+       offset needs no table, cannot go stale, and is right for a JUG in a region
+       nobody here has thought about -- including the half-hour and
+       three-quarter-hour offsets (India, Nepal, Chatham) that a naive "UTC+N"
+       would silently round away.
+
+       Takes a Time (the `time.AsTime` value), returns a string. */ -}}
+{{- $raw := .Format "-0700" -}}
+{{- $sign := substr $raw 0 1 -}}
+{{- $h := int (substr $raw 1 2) -}}
+{{- $m := int (substr $raw 3 2) -}}
+{{- $out := "UTC" -}}
+{{- if or (gt $h 0) (gt $m 0) -}}
+  {{- $out = printf "UTC%s%d" $sign $h -}}
+  {{- if gt $m 0 }}{{ $out = printf "%s:%02d" $out $m }}{{ end -}}
+{{- end -}}
+{{- return $out -}}

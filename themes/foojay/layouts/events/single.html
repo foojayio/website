@@ -222,7 +222,13 @@
                            meetup, "5-9 October" for a multi-day conference, and
                            empty for a single all-day one -- where the date
                            beside the row already says everything. */}}
-                      {{ with $e.when }}<span class="cal-row__sep">&middot;</span><span class="cal-row__time">{{ . }}</span>{{ end }}
+                      {{/* `zone` is set only on a day whose events do NOT all
+                           share one UTC offset -- see calendar-events.html. The
+                           rows are ordered by the real instant, so on such a day
+                           an 18:30 in Chicago correctly sits below a 19:00 in
+                           Hamburg, and without the offset that reads as a broken
+                           sort rather than as two different afternoons. */}}
+                      {{ with $e.when }}<span class="cal-row__sep">&middot;</span><span class="cal-row__time">{{ . }}{{ with $e.zone }} <span class="cal-row__zone">{{ . }}</span>{{ end }}</span>{{ end }}
                       {{/* Only a meetup gets the "until" tail: a conference's
                            span is already in `when`, and repeating it would read
                            as two different facts. */}}
@@ -356,6 +362,13 @@
                 var span = (e.days && e.days.length) || 1;
                 var nth = e.days ? e.days.indexOf(k) + 1 : 1;
                 var lead = span > 1 ? 'Day ' + nth + '/' + span : (e.allDay ? 'All day' : e.time);
+                // `zone` is set only where a day mixes UTC offsets. The cells are
+                // ordered by the real instant, so without it a correctly sorted
+                // day that spans continents reads as an unsorted one: 18:00,
+                // 18:00, 19:00 (all Europe), then 18:30 in Chicago, which really
+                // does start six hours after the 19:00. Multi-day chips say
+                // "Day 2/5" instead of a clock, so there is nothing to qualify.
+                if (e.zone) { lead += ' ' + e.zone; }
                 html += '<li><' + tag + ' class="cal-chip' + (e.kind === 'meetup' ? '' : ' cal-chip--event') + '"' + attrs +
                         ' data-cal-event="' + e.index + '"' +
                         ' style="--cal-dot: hsl(' + e.hue + ' 62% 46%)"' +
