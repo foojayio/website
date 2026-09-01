@@ -72,6 +72,7 @@ http://service_host:8080/search?q=purple%20rain&limit=5&skip=0&project=title,gen
 
 These parameters, along with a \`debug\` parameter, are detailed in the following table:
 
+|   |   |
 |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **parameter** | **description**                                                                                                                                                                   |
 | **q**         | This is a full-text query, typically the value entered by the user into a search box.                                                                                             |

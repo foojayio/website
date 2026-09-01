@@ -60,6 +60,7 @@ Exception in thread "main" java.lang.InternalError: Cannot find requested resour
 
 Let's try to find the difference between the two boards by executing a few commands...
 
+|   |   |   |
 |---------------------|--------------------------------------------------------|--------------------------------|
 | **Command**         | **RPi Zero 2**                                         | **RPi 4**                      |
 | `cat /proc/cpuinfo` | Raspberry Pi Zero 2 W Rev 1.0                          | Raspberry Pi 4 Model B Rev 1.2 |

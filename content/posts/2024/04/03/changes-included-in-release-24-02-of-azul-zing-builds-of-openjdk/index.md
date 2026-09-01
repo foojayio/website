@@ -62,6 +62,7 @@ JRE builds are ideal in containerized environments, where local file size is lim
 
 The Zing JRE distributions still fully support [Azul Optimizer Hub](https://docs.azul.com/optimizer-hub/) and [Azul Intelligence Cloud](https://docs.azul.com/intelligence-cloud/) (formerly known as Azul Vulnerability Detection).
 
+|   |   |   |   |   |
 |------------------------------------------------------------|-------------------------|------------------------------|-------------------------|------------------------------|
 |                                                            | **JDK**                                               || **JRE**                                               ||
 | Distribution and artifact name (\*)                        | Compressed archive (MB) | Unpackaged distribution (MB) | Compressed archive (MB) | Unpackaged distribution (MB) |

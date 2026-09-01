@@ -73,6 +73,7 @@ As the names suggest, a **soft requirement** is a replaceable version with the c
 
 A **hard requirement** is a pattern that restricts the version to be selected. A hard requirement uses ***square brackets*** (inclusion) and ***parenthesis*** (exclusion) to determine allowed version values. A few examples of hard requirements are tabulated below.
 
+|   |   |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Range           | Notes                                                                                                                         |
 | \[1.0\]         | Use exactly version 1.0.                                                                                                      |

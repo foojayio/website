@@ -72,6 +72,7 @@ public class JfrUnitTest {
 }
 ```
 
+|   |   |
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | `@JfrEventTest` marks this as a JfrUnit test, activating its extension                                                                                                                                           |
 | *2* | All JFR event types to be recorded must be enabled via `@EnableEvent`                                                                                                                                            |
@@ -173,6 +174,7 @@ public void retrieveTodoBaseline() throws Exception {
 }
 ```
 
+|   |   |
 |-----|-------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` JFR events                                               |
 | *2* | Every 10,000 events, wait for all the JFR events produced so far                                                                          |
@@ -240,6 +242,7 @@ public void retrieveTodo() throws Exception {
 }
 ```
 
+|   |   |
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Warm-up phase                                                                                                                                                                                                                                                                               |
 | *2* | The actual test phase                                                                                                                                                                                                                                                                       |
@@ -376,6 +379,7 @@ private long getBytesReadOrWritten(RecordedEvent re) { // 5
 }
 ```
 
+|   |   |
 |-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.SocketRead` and `jdk.SocketWrite` event types; by default, those don't contain the stacktrace for the events, so that needs to be enabled explicitly |
 | *2* | There should be four events per invocation of the API method                                                                                                         |
@@ -424,6 +428,7 @@ public class Todo extends PanacheEntity {
 }
 ```
 
+|   |   |
 |-----|------------------------|
 | *1* | This looks suspicious! |
 

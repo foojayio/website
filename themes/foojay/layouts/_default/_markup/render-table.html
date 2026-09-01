@@ -1,0 +1,47 @@
+{{- /* A TABLE WHOSE HEADER ROW IS ENTIRELY EMPTY IS RENDERED WITHOUT ONE.
+
+       GFM has no way to write a headerless table -- the delimiter row is what
+       makes a table a table, and it only comes after a header. WordPress has no
+       such rule, and most of its tables here are headerless: legends, note
+       boxes, numbered annotations. So shared/HtmlToMarkdown.java stores those
+       with an EMPTY header row (the only valid GFM shape that keeps every data
+       row a data row -- see the long comment there for why promoting the first
+       row was rejected), and this hook takes it back out again.
+
+       Without it the reader gets a blank strip above the table: `.prose th`
+       carries a bottom border and the theme's heading weight, so an empty
+       header is visible furniture rather than nothing.
+
+       Derived from the content -- a table with a real header keeps it, a table
+       with a blank one loses it, and no frontmatter or shortcode chooses. The
+       rest of the markup is what Goldmark's own table renderer emits, so
+       `.prose table` styling is unaffected. */ -}}
+{{- $hasHeader := false -}}
+{{- range .THead -}}
+  {{- range . -}}
+    {{- if gt (len (strings.TrimSpace (.Text | plainify))) 0 -}}{{- $hasHeader = true -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+<table
+  {{- range $k, $v := .Attributes }} {{ $k | safeHTMLAttr }}="{{ $v }}"{{ end }}>
+  {{- if $hasHeader }}
+  <thead>
+    {{- range .THead }}
+    <tr>
+      {{- range . }}
+      <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </thead>
+  {{- end }}
+  <tbody>
+    {{- range .TBody }}
+    <tr>
+      {{- range . }}
+      <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </tbody>
+</table>

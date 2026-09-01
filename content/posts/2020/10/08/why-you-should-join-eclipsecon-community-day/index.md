@@ -21,6 +21,7 @@ We have a packed agenda centered on the Jakarta EE, MicroProfile and Cloud Nativ
 
 Myself, Werner Keil and Thodoris Bais are organizing on behalf of the community. We are grateful to have a very strong line-up both in terms of speakers and content. Below is a very good snapshot. Please note that all times are Central European Time (CET).
 
+|   |   |   |
 |---------------------------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Session**                                 | **Time**                 | **Speakers**                                                                                                                                          |
 | Jakarta EE Community State of the Union     | 10/19/2020 14:30 – 15:15 | Steve Millidge                                                                                                                                        |

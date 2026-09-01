@@ -57,6 +57,7 @@ This results in:
 
 ### What Changes Compared to Kubernetes
 
+|   |   |
 |-------------------------------------|--------------------------------------------|
 | ##### Kubernetes Model ![](k8s.png) | ##### Nanos Unikernel Model ![](nanos.png) |
 
@@ -104,6 +105,7 @@ This not only increases security but also enables **higher application density**
 
 ### CI/CD: GitHub Actions for Building Azul 25 + Payara 7 on Nanos Images
 
+|   |   |   |
 |---------------|---------------|------------------------------|
 | ![](logo.png) | ![](logo.svg) | ![](Payara_Logo-700x365.jpg) |
 
@@ -179,6 +181,7 @@ Container security is configuration-based (seccomp, AppArmor, SELinux, Kubernete
 
 Nanos security is **architectural**.
 
+|   |   |
 |-------------------------------------------------|-------------------------------------------------|
 | ![](https://nanovms.com/static/images/img2.png) | ![](https://nanovms.com/static/images/img3.png) |
 

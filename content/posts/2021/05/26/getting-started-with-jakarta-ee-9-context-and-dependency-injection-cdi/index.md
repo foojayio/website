@@ -35,6 +35,7 @@ Most of the time, an annotation is placed on the class to indicate when the bean
 
 The typical annotations are:
 
+|   |   |
 |-----------------------------------------------|---------------------------------------------------------------------------|
 | @jakarta.enterprise.context.ApplicationScoped | one instance for the entire application                                   |
 | @jakarta.enterprise.context.SessionScoped     | an instance is typically linked with a user Session like the HTTP Session |

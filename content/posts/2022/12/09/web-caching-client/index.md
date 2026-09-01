@@ -103,6 +103,7 @@ The most recent way to cache on the client side is via the [Cache API](https://d
 
 Here are the provided methods:
 
+|   |   |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Cache.match(request, options)`    | Returns a `Promise` that resolves to the response associated with the first matching request in the `Cache` object.                                                                                                |
 | `Cache.matchAll(request, options)` | Returns a `Promise` that resolves to an array of all matching responses in the `Cache` object.                                                                                                                     |

@@ -34,6 +34,7 @@ This is problematic on short builds (like building maven itself in 30s), as the 
 
 We can use the information by async-profiler to get the cpu-time proportions for significant parts of the built:
 
+|   |   |   |
 |----------------------------------------|---------------------|---------|
 | Part                                   | cpu-time percentage | samples |
 | Launcher.main                          | 38 %                | 3200    |
@@ -45,6 +46,7 @@ The whole maven build took 44s (82s cpu-time) on two cores of my ThreadRipper 39
 
 The proportions are as expected:
 
+|   |   |   |
 |----------------------------------------|---------------------|---------|
 | Part                                   | cpu-time percentage | samples |
 | Launcher.main                          | 71 %                | 3700    |
@@ -65,6 +67,7 @@ Take, for example, [quarkus](https://quarkus.io/): A clean build on two cores ru
 
 The runtime proportions are less skewed in the direction of C2:
 
+|   |   |   |
 |----------------------------------------|---------------------|---------|
 | Part                                   | cpu-time percentage | samples |
 | MavenWrapperMain.main                  | 45 %                | 39200   |
@@ -73,6 +76,7 @@ The runtime proportions are less skewed in the direction of C2:
 
 The built without C2 runs in comparison for 880s (1000s cpu-time), so it doesn't make any sense to disable C2 with this build. For completeness, the proportion table:
 
+|   |   |   |
 |----------------------------------------|---------------------|---------|
 | Part                                   | cpu-time percentage | samples |
 | MavenWrapperMain.main                  | 57 %                | 52700   |

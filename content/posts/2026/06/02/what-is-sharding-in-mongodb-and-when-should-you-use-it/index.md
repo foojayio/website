@@ -109,6 +109,7 @@ For example, imagine an application storing millions of users.
 
 Instead of keeping all users on one server:
 
+|   |   |
 |-----------|----------------------|
 | **Shard** | **Data**             |
 | Shard 1   | Users with IDs 1–1M  |
@@ -267,6 +268,7 @@ Sharding should usually be considered **after other scaling strategies have been
 
 Developers sometimes confuse these two concepts.
 
+|   |   |   |
 |-------------|-------------------------|-------------------------|
 | **Feature** | **Replication**         | **Sharding**            |
 | Purpose     | High availability       | Horizontal scaling      |

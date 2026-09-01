@@ -74,6 +74,7 @@ An offline tool is available for applying transformations to a local ReadyNow fi
 
 Several methods have been added to Zing MXBean extensions, which can request several metrics from a running JVM. The following methods have been added to Zing MXBeans:
 
+|   |   |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | MXBean                      | Method                                                                                                                                                                                                                                                               |
 | **CompilationMXBean**       | getTotalOutstandingCompiles() getTotalPerformedTier1Compiles() getTotalPerformedTier2Compiles() This can return the total number of enqueued and in-progress compilations, and can return the total number of tier 1 and tier 2 compilations at the time of request. |

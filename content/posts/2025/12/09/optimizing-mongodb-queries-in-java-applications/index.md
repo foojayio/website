@@ -711,6 +711,7 @@ This creates a capped collection limited to 10MB or 5,000 documents, whichever l
 
 Many teams benefit from using a query performance checklist that developers can quickly run through before shipping new features:
 
+|   |   |
 |--------------------|--------------------------------------------|
 | **Check**          | **Description**                            |
 | Index coverage     | Verify all frequent queries use indexes    |

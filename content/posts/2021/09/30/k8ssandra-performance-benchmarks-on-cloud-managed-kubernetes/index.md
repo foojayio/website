@@ -52,6 +52,7 @@ sysbench cpu --threads=8 --time=120 run
 
 For disk performance benchmarking, we used [Cassandra inspired fio profiles](https://github.com/ibspoof/cassandra-fio) that attempt to emulate Leveled Compaction Strategy and Size Tiered Compaction Strategy behaviors (the numbers below are only representative in the context of these profiles, they're not absolute performance numbers):
 
+|   |   |   |   |   |
 |----------------------------------------------------------|---------|----------|---------------------|---------------------------|
 |                                                          | **CPU** | **IOPS** | **Disk Throughput** | **Disk p99 read latency** |
 | **AWS i3.2xlarge**                                       | 5422    | 15775    | 672 MiB/s           | 4.9ms                     |
@@ -72,6 +73,7 @@ In Azure, the **E8s** _**v4** instances offered a performance that was similar t
 
 The latency of Azure Standard and Premium SSD volumes doesn't reach the performance of AWS EBS gp2 and GCP PD volumes. We had to use Azure Ultra Disks to make our instances fast enough to match the competition. With Ultra Disks, performance was inline with other cloud providers, but at almost twice the cost:
 
+|   |   |   |
 |----------------------------------------------------------------------|--------------------|----------------------|
 | **Instance**                                                         | **Cost per month** | **k8s cluster cost** |
 | **AWS EKS r5.2xlarge + EBS gp2 3TB**                                 | $777               | $73                  |
@@ -291,6 +293,7 @@ Note that the latency test uses a **striderate** instead of a **cyclerate** . A 
 
 ### Throughput test
 
+|   |   |   |   |   |   |
 |--------------------------------|----------------|----------------|----------------|----------------------------|---------------------------|
 |                                | **AWS EC2 r5** | **AWS EKS r5** | **GCP GKE n2** | **Azure AKS** **UltraSSD** | **Azure AKS** **premium** |
 | **Average Throughput (ops/s)** | 22,864         | 22,239         | 23,022         | **25,957**                 | 20,983                    |
@@ -306,6 +309,7 @@ Such results are expected given the r5 instances have slower CPU cores as establ
 
 ### Latency test
 
+|   |   |   |   |   |   |
 |----------|----------------|----------------|----------------|------------------------|-----------------------|
 |          | **AWS EC2 r5** | **AWS EKS r5** | **GCP GKE n2** | **Azure AKS UltraSSD** | **Azure AKS premium** |
 | **p50**  | 2.20           | 2.63           | 1.54           | **1.18**               | 5.71                  |

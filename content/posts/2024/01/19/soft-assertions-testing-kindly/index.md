@@ -68,6 +68,7 @@ I dislike flaky tests, and having to run the same test multiple times just to fi
 
 Some of the most commonly used Assertion libraries have out of the box support for soft assertions, sadly, not all of them do.
 
+|   |   |
 |-----------|-----------|
 | Framework | Supported |
 | JUnit     | \[x\]     |
@@ -78,9 +79,11 @@ Some of the most commonly used Assertion libraries have out of the box support f
 
 As of the moment of writing Truth does have an open pull request for this, but it's been in that state for a couple of years.
 
+|   |   |
 |-----|------------------------------------------------------------------------------------------------------------------------|
 | Tip | In case you know of another library that supports soft assertions, please do let me know and I'll add it to this list. |
 
+|   |   |
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Tip | To focus more on the functionality itself the testcase is very basic. We're testing the mapper, and mapping 2 objects. Let's say we're a smidge sleep-deprived, and just copied the first assertions rather than extracting them to a method, and forgot to replace some references. With hard assertions we would get a failure on each individual error. |
 

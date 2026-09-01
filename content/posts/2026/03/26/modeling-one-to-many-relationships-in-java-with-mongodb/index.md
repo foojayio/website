@@ -186,6 +186,7 @@ Use embedding when:
 * The child array is **bounded in size** (e.g., a handful of comments per post, not millions of log entries).
 * You don't need to query or update the child documents **independently** of their parent.
 
+|   |   |
 |-------------------------------------|--------------------------------------------|
 | **Pros**                            | **Cons**                                   |
 | Single read to fetch everything     | Document can grow very large               |
@@ -393,6 +394,7 @@ Use references when:
 * Children are **queried or updated independently** of their parent.
 * **Multiple parents** could reference the same child (e.g., a user who authors many posts and comments).
 
+|   |   |
 |---------------------------------------|-----------------------------------------------|
 | **Pros**                              | **Cons**                                      |
 | Keeps documents small and predictable | Requires multiple reads (no JOINs by default) |

@@ -33,6 +33,7 @@ In Part 1, we broke down what each stage of the pipeline was designed to do. If 
 
 So far, our efforts to improve the pipeline had involved removing unnecessary unwind stages, and, as a result, we had seen a 60% improvement in performance. However, we were still well short of our target sub-one second query response time.
 
+|   |   |   |
 |----------------------|------------------------|------------------------------------------------------------------|
 | Pipeline description | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial Design       | 11.8 seconds           | 260 seconds                                                      |
@@ -163,6 +164,7 @@ The overall pipeline now looked like this:
 
 Working with our test data set, the removal of the first $lookup stage meant that—in the example of profile documents where "city" was equal to Austin—a series of lookups for 6763 matching profile documents had been eliminated. Retesting the pipeline now showed a 75% reduction in both the average individual query time, and the time to complete 300 query iterations. This was a significant change and a great illustration of how the flexibility and options MongoDB provides when it comes to modelling relationships, including options that aren't available in relational databases, can have a significant positive impact on performance. It could be argued that MongoDB is better at modelling relationships than "relational" databases are.
 
+|   |   |   |
 |------------------------------------------|------------------------|------------------------------------------------------------------|
 | Pipeline description                     | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial design                           | 11.8 seconds           | 260 seconds                                                      |

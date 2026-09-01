@@ -72,6 +72,7 @@ Let's compare Fast JMS for Apache Pulsar with JMS using a traditional message br
 
 When considering a JMS solution, there are two dimensions to consider: how well it supports the JMS specification and the capabilities of the underlying platform. First we'll take a look at support JMS features.
 
+|   |   |   |   |
 |-------------------------|------------|----------------------|-------------------|
 | JMS Feature             | ActiveMQ   | Confluent JMS        | DataStax Fast JMS |
 | 1.1 Compatible          | Yes        | Yes                  | Yes               |
@@ -88,6 +89,7 @@ As you can see, Fast JMS for Apache Pulsar is able to support a complete set of 
 
 Now, let's look at platform capabilities.
 
+|   |   |   |   |
 |---------------------------|------------|------------|------------|
 | Feature                   | ActiveMQ   | Kafka      | Pulsar     |
 | High Performance          | No         | Yes        | Yes        |

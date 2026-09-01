@@ -370,6 +370,46 @@ public final class HtmlToMarkdown {
             el.replaceWith(new Element("p").text(token));
         }
 
+        // A TABLE WITH NO HEADER ROW GETS AN EMPTY ONE, because GFM cannot express
+        // a headerless table and Flexmark does not paper over it: handed a
+        // <table><tbody><tr><td>, it emits the delimiter row FIRST and no header
+        // above it --
+        //
+        //     |------|------|
+        //     | Pipeline description | Average time per query |
+        //
+        // which is not a table at all. Goldmark renders the pipes as literal text
+        // and the reader sees a wall of them. 111 tables across 54 posts were live
+        // in that state, because the WordPress table block only emits <th> when
+        // the author ticked "header section" and most did not.
+        //
+        // AN EMPTY HEADER RATHER THAN PROMOTING THE FIRST ROW, which is the
+        // tempting fix and is wrong here: of the 111, only 25 have a first row
+        // that is actually a header (every cell bold). The rest are legends
+        // (`| 1 | Indicates the configured 30s recording is ongoing. |`) and
+        // WordPress's note boxes (an empty icon cell, then the note) -- promoting
+        // those turns a data row into a heading and states something the author
+        // did not. An empty header keeps every row a row.
+        //
+        // Nothing empty reaches the reader: layouts/_default/_markup/render-table.html
+        // omits the <thead> when every header cell is blank, so the rendered table
+        // matches what WordPress serves. Derived from the content, no flag.
+        for (Element table : content.select("table")) {
+            if (!table.select("th").isEmpty()) continue; // already has a header
+            Element firstRow = table.selectFirst("tr");
+            if (firstRow == null) continue;
+            int columns = 0;
+            for (Element cell : firstRow.children()) {
+                int span = 1;
+                try { span = Integer.parseInt(cell.attr("colspan").trim()); } catch (NumberFormatException ignored) { }
+                columns += Math.max(1, span);
+            }
+            if (columns == 0) continue;
+            Element head = new Element("thead").appendChild(new Element("tr"));
+            for (int i = 0; i < columns; i++) head.child(0).appendChild(new Element("th"));
+            table.prependChild(head);
+        }
+
         // EVERY id goes, on every element, and this is deliberately not a list of
         // the ones we have seen. Flexmark carries an id over as Markdown attribute
         // syntax (`{#id}`), and WordPress stamps ids on anything: headings

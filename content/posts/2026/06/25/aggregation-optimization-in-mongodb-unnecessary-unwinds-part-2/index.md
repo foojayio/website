@@ -50,6 +50,7 @@ In Part 1 of this series, we broke down what each stage of the pipeline was desi
 
 With this design, a test run of 300 iterations of the query pipeline split up and executed by 15 concurrent threads gave the following results:
 
+|   |   |   |
 |--------------------------|----------------------------|----------------------------------------------------------------------|
 | **Pipeline Description** | **Average time per query** | **Total elapsed time (300 query iterations, 15 concurrent threads)** |
 | Initial design           | 11.8 seconds               | 260 seconds                                                          |
@@ -276,6 +277,7 @@ One final thing to note in the refactored pipeline was that because we were no l
 
 With these changes in place, retesting the performance of the pipeline showed a 60% improvement in both the performance of individual queries and the total time to complete 300 query iterations.
 
+|   |   |   |
 |--------------------------|----------------------------|----------------------------------------------------------------------|
 | **Pipeline Description** | **Average time per query** | **Total elapsed time (300 query iterations, 15 concurrent threads)** |
 | Initial Design           | 11.8 seconds               | 260 seconds                                                          |

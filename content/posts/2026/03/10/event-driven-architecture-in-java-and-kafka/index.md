@@ -80,6 +80,7 @@ This code uses a non-blocking version of the WebClient class and wraps its call 
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Mono\<String\> sleepMono = webClient.get() .uri("/sleep/{seconds}", sleepSeconds) .accept(MediaType.APPLICATION_JSON) .retrieve() .bodyToMono(Map.class) .map(response -\> (String) response.get("status")); |
 
+|   |   |   |   |   |
 |-----------|----------------------------------------------------|-----------------------|-----------------------|--------------------------------------------------------------------------------|
 | **Stage** | **Method**                                         | **Input Types(s)**    | **Output Type**       | **Purpose**                                                                    |
 | 1         | webClient.get()                                    | —                     | RequestHeadersUriSpec | defines a GET request                                                          |
@@ -177,6 +178,7 @@ The Reactive code version uses Project Reactor, including its reactive KafkaRece
 
 The interesting thing with Reactive pipelines like this is that the output of each stage becomes the input to the following stage. In the case of our pipeline, each stage produces a flux allowing asynchronous, non-blocking processing of each message in the stream:
 
+|   |   |   |
 |------------------|------------------------------------------|------------------------------------------|
 | **Stage**        | **Input type**                           | **Output type**                          |
 | receive()        | —                                        | Flux\<ReceiverRecord\<String, String\>\> |

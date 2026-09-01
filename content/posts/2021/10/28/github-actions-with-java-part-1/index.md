@@ -129,6 +129,7 @@ This is often good practice when you test both a fixed (major) release and the l
 
 The following describes each entry when defining a job:
 
+|   |   |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | runs-on      | builds software on a particular operating system. Values such as ubuntu-latest, macOS-latest, windows-latest.                                                                                                                                                                                  |
 | strategy     | is a locally defined lookup table (dictionary) to provide enumerated values to be substituted using \`${{ matrix.some_variable }}\`                                                                                                                                                            |

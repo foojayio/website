@@ -32,6 +32,7 @@ In this article, we'll write a program (**The Reloader**) to easily play with Ja
 The code will be automatically (re)compiled, (re)loaded, (re)executed and (re)printed to the output when the .java file is saved.  
 ![](hot-reload-code-ant-commander-pro-1024x391.png) On the left side, the Java file that I edited and saved. On the right side, the code re-executed.
 
+|   |   |   |   |   |
 |------------------------------|------------|--------------|--------------------------------|--------------|
 |                              | **JShell** | **Java 11+** | **Java 21 (--enable-preview)** | **Reloader** |
 | Execute java files           | ❌(.jsh)    | ✅            | ✅                              | ✅            |

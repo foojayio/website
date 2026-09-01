@@ -16,6 +16,7 @@ frozen: false
 
 Java Flight Recorder is the profiler you can use in production, continuously. Flight Recorder has been available before in the JDK, e.g., it shipped as part of the JDK 8, but to use it, it required that you set specific commercial VM flags to unlock Flight Recorder, this is not anymore necessary from Java 11 onwards.
 
+|   |   |
 |---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   | This page assumes JDK 11, that means there is no need to set `-XX:+UnlockCommercialFeatures`, `-XX:+FlightRecorder` flags. Or, more particular to JFR, the use of `-XX:+UnlockDiagnosticVMOptions` and `-XX:+DebugNonSafepoints` [source](https://github.com/openjdk/jmc/blob/bacb448fd4ed1a9a5d887c50aebff4e854d3512a/core/org.openjdk.jmc.common/src/main/java/org/openjdk/jmc/common/version/JavaVersionSupport.java#L59-L60) |
 
@@ -80,6 +81,7 @@ Started recording 2. The result will be written to:
 
 In production, you'll be most likely using `duration`, `maxsize`, `filename` and `settings` options. We'll briefly look at other JFR commands after discussing the `settings`.
 
+|   |   |
 |---|---------------------------------------------------------------------------------------------------------------|
 |   | Later in this series we'll see how to start recording from the command line using `-XX:StartFlightRecording`. |
 
@@ -232,6 +234,7 @@ drwxr-xr-x 3 43514 root 4.0K Jun 26 16:03 ..
 
 Careful however as some of these options are not well documented, and may not expose what we'd expect, e.g. `dumppath` only affects dump created when the app crashes and only if the `dumponexit` recording option is true.
 
+|   |   |
 |---|----------------------------------------------------------------------------------------------------------------------|
 |   | These options are also available at startup via `-XX:FlightRecorderOptions`, we'll see later how to use this option. |
 
@@ -288,6 +291,7 @@ Total: reserved=5324939KB, committed=3600539KB
 ...
 ```
 
+|   |   |
 |---|-----------------------------------------|
 |   | JFR's `Tracing` memory zone uses \~74MB |
 

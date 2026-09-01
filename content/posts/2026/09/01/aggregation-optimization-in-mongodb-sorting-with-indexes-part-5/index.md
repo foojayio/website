@@ -28,6 +28,7 @@ In this series, we've described our steps to improve the performance of a slow r
 
 Following our first three rounds of improvements involving [removing unnecessary unwind stages](https://medium.com/mongodb/aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2-50bff2e1006c), using embedding to more efficiently [model the many-to-many relationship](https://medium.com/mongodb/aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3-fccdf603ddc8), and [using duplication to improve read performance](https://medium.com/mongodb/aggregation-optimization-in-mongodb-data-duplication-to-improve-read-performance-part-4-fb704cbaafef), we had successfully updated our query to beat our SLA target with a 230X increase in performance over the initial design.
 
+|                                      |                        |                                                                  |
 |--------------------------------------|------------------------|------------------------------------------------------------------|
 | Pipeline description                 | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial design                       | 11.8 seconds           | 260 seconds                                                      |
@@ -113,6 +114,7 @@ Updating the index definition in this way allowed us to eliminate the $sort stag
 
 Testing this pipeline version showed a further improvement in performance. Individual queries were now averaging under 15ms and the total time to complete 300 query iterations was 655 milliseconds:
 
+|                                      |                        |                                                                  |
 |--------------------------------------|------------------------|------------------------------------------------------------------|
 | Pipeline description                 | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial design                       | 11.8 seconds           | 260 seconds                                                      |

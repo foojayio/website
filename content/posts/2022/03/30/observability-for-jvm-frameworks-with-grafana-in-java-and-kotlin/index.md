@@ -207,6 +207,7 @@ Of course, Micrometer contains more wrappers such as: ***Gauge, Clock, Timers, L
 
 Each application exposes the following endpoint (Tab.1). Some of them provide a custom counter which serves data to the previously initiated registry.
 
+|   |   |   |   |
 |-----------------|------------|-----------------|---------------------------------------------------------|
 | **Method Type** | **Path**   | **Http Status** | **Note**                                                |
 | GET             | /          | 200             | Root, displays message, root**-** tag**: main-counter** |

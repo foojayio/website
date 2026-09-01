@@ -432,6 +432,7 @@ As always, when investigating slow running queries in MongoDB, our first step wa
 
 With missing indexes eliminated as the source of the slow performance, we turned our attention to both the design of the pipeline itself and how well it was supported by the underlying data model. This proved to be far more fruitful and by the time we were finished optimizing the data model and query pipeline, and with only relatively simple changes to both, we were able to reduce this to an average of ***14 milliseconds per query*** and ***655 milliseconds total elapsed time*** for all 300 query executions. This included round-trip network latency between our application server and the MongoDB Atlas cluster.
 
+|   |   |   |
 |----------------------|------------------------|------------------------------------------------------------------|
 | Pipeline Description | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial Design       | 11.8 seconds           | 260 seconds                                                      |
