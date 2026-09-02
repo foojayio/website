@@ -36,8 +36,8 @@ title: "Your Article Title Here"
 # might be the following day. The PR check rejects a time on a future date for
 # exactly that reason.
 #
-# A date in the FUTURE schedules the article: it is not published, not listed
-# anywhere and not searchable until that morning. Until then it appears in
+# A date in the FUTURE schedules the article: it is not published and not 
+# searchable until that morning. Until then, it appears in
 # "Coming soon" on the home page, by title, date and author.
 date: "2026-01-01"
 
