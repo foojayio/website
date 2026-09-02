@@ -952,12 +952,16 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    overrides. */
 .coming-soon-side,
 .sidebar .coming-soon-side { display: grid; gap: 1rem; }
-.coming-soon-side__item {
-  padding-left: .7rem;
-  /* Dashed, and the only dashed rule on the site: it is the visual difference
-     between "here is an article" and "there will be one". */
-  border-left: 2px dashed var(--brand-accent);
-}
+/* NO MARKER DOWN THE SIDE OF AN ITEM. It was a dashed accent rule, on the
+   reasoning that a dash is the visual difference between "here is an article"
+   and "there will be one" -- Frank's call, and the rule was carrying the idea
+   badly: it was the only dashed border on the site, so it read as an artefact
+   rather than as a tense, and it indented the titles out of line with every
+   other widget in the aside. The section heading already says "Coming soon",
+   and a title that is plain text rather than a link is the other half of
+   saying it. So an item is a plain row and the gap above does the separating.
+   If these ever need dividing more firmly, a hairline `border-top` on
+   `__item + __item` is the shape to reach for -- not a rule beside each one. */
 .coming-soon-side__title {
   margin: 0;
   font-family: var(--font-display); font-weight: 700;
