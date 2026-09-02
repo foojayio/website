@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-01T09:07:03Z",
+  "generatedAt" : "2026-09-02T05:55:56Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -153,14 +153,6 @@
     "url" : "https://www.meetup.com/jug-bb/",
     "events" : [ {
       "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
-      "url" : "https://www.meetup.com/jug-bb/events/316084501/",
-      "startTime" : "2026-09-01T18:30:00+02:00",
-      "endTime" : "2026-09-01T21:00:00+02:00",
-      "venue" : "Da Vinci",
-      "city" : "Berlin",
-      "online" : false
-    }, {
-      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
       "url" : "https://www.meetup.com/jug-bb/events/315816842/",
       "startTime" : "2026-10-06T18:30:00+02:00",
       "endTime" : "2026-10-06T21:00:00+02:00",
@@ -228,6 +220,14 @@
       "url" : "https://www.meetup.com/jug-bb/events/kvnqltykchbgb/",
       "startTime" : "2027-05-04T18:30:00+02:00",
       "endTime" : "2027-05-04T21:00:00+02:00",
+      "venue" : "Da Vinci",
+      "city" : "Berlin",
+      "online" : false
+    }, {
+      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+      "url" : "https://www.meetup.com/jug-bb/events/kvnqltykcjbcb/",
+      "startTime" : "2027-06-01T18:30:00+02:00",
+      "endTime" : "2027-06-01T21:00:00+02:00",
       "venue" : "Da Vinci",
       "city" : "Berlin",
       "online" : false
@@ -781,7 +781,15 @@
     "jug" : "OrlandoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/orlando-jug-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Knowns and Unknowns: Testing AI Generated Code",
+      "url" : "https://www.meetup.com/orlando-jug-java-user-group/events/316364809/",
+      "startTime" : "2026-09-23T18:30:00-04:00",
+      "endTime" : "2026-09-23T20:30:00-04:00",
+      "venue" : "Tech Hub",
+      "city" : "Orlando",
+      "online" : false
+    } ]
   }, {
     "slug" : "ottawa-java-user-group",
     "name" : "Ottawa Java User Group",
