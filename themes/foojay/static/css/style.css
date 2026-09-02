@@ -940,8 +940,18 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* A full row of gap, not the .1rem the link-list widgets use: an item here is
    two lines (title + meta), so at a tight gap the second title crowds the first
    item's date and the two dashed rules read as one continuous list rather than
-   two entries. */
-.coming-soon-side { display: grid; gap: 1rem; }
+   two entries.
+
+   BOTH SELECTORS ARE NEEDED, and the bare one never won on its own. `.sidebar
+   ul` above is (0,1,1) and sets `gap: .1rem`, so a lone `.coming-soon-side`
+   (0,1,0) lost the gap whatever the source order -- the widget shipped at
+   1.6px, i.e. exactly the crowding this comment claims to have fixed, with
+   nothing to say so. The list form keeps ONE declared value while giving the
+   in-sidebar case (0,2,0), the way `.sidebar .coming-soon-side__meta a` below
+   restates only what collides. Same trap as the `.prose` and `.sitemap-table`
+   overrides. */
+.coming-soon-side,
+.sidebar .coming-soon-side { display: grid; gap: 1rem; }
 .coming-soon-side__item {
   padding-left: .7rem;
   /* Dashed, and the only dashed rule on the site: it is the visual difference
