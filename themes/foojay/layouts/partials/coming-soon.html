@@ -96,48 +96,51 @@
 
 {{/* Renders NOTHING when nothing is scheduled, the way upcoming-events.html and
      the podcast band do. That is the normal state, and an empty "Coming soon"
-     heading is worse than no section. */}}
+     heading is worse than no section.
+
+     A SIDEBAR WIDGET, not a band. It began as a full-width band under the
+     article grid and that was too much furniture for a queue that is usually
+     one or two items: an empty-looking band on a wide screen, and a whole
+     screen-height section on a phone, for two lines of text. In the aside it
+     sits where a reader already looks for "what else is on", it costs the
+     article stream no vertical space, and one or five items look equally at
+     home. */}}
 {{ with sort $scheduled "date" }}
-<section class="band coming-soon">
-  <div class="shell">
-    <div class="section-head">
-      <div>
-        <h2>Coming soon</h2>
-        <p>Already written, already scheduled &mdash; {{ if eq (len .) 1 }}publishing{{ else }}publishing over the coming days{{ end }} on Foojay.</p>
-      </div>
-    </div>
-    <ul class="coming-soon__list">
-      {{ range . }}
-        {{ $when := time.AsTime (printf "%sT00:00:00Z" .date) }}
-        <li class="coming-soon__item">
-          {{/* Plain text, not a link: the page does not exist yet, and a
-               "coming soon" whose title 404s is worse than no teaser. */}}
-          <p class="coming-soon__title">{{ .title }}</p>
-          <p class="coming-soon__meta">
-            <time datetime="{{ .date }}">{{ $when.Format "2 January 2006" }}</time>
-            {{ with .authors }}
-              {{/* The same lookup and the same classes byline.html uses, so a
-                   byline here cannot look or resolve differently from one on a
-                   card. It is not byline.html itself because that takes a Page
-                   and the whole point of this partial is that there isn't one.
-                   An author bundle that does not exist yet degrades to the slug
-                   rather than failing the build -- Frontmatter is what fails a
-                   PR over it. */}}
-              <span class="coming-soon__by">by <span class="byline-group">
-                {{- range $i, $slug := . -}}
-                  {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
-                  {{- with partial "author-page.html" $slug -}}
-                    <a class="byline" href="{{ .RelPermalink }}">{{ .Title }}</a>
-                  {{- else -}}
-                    <span class="byline">{{ $slug }}</span>
-                  {{- end -}}
+<section class="widget widget-coming-soon">
+  <h2>Coming soon</h2>
+  <ul class="coming-soon-side">
+    {{ range . }}
+      {{ $when := time.AsTime (printf "%sT00:00:00Z" .date) }}
+      <li class="coming-soon-side__item">
+        {{/* Plain text, not a link: the page does not exist yet, and a "coming
+             soon" whose title 404s is worse than no teaser. */}}
+        <p class="coming-soon-side__title">{{ .title }}</p>
+        <p class="coming-soon-side__meta">
+          {{/* "1 Oct 2026", not "1 October 2026": the column is ~300px and the
+               long month name pushed the byline onto a line of its own. */}}
+          <time datetime="{{ .date }}">{{ $when.Format "2 Jan 2006" }}</time>
+          {{ with .authors }}
+            {{/* The same lookup and the same classes byline.html uses, so a
+                 byline here cannot look or resolve differently from one on a
+                 card. It is not byline.html itself because that takes a Page
+                 and the whole point of this partial is that there isn't one.
+                 An author bundle that does not exist yet degrades to the slug
+                 rather than failing the build -- Frontmatter is what fails a
+                 PR over it. */}}
+            <span class="coming-soon-side__by">by <span class="byline-group">
+              {{- range $i, $slug := . -}}
+                {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
+                {{- with partial "author-page.html" $slug -}}
+                  <a class="byline" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                {{- else -}}
+                  <span class="byline">{{ $slug }}</span>
                 {{- end -}}
-              </span></span>
-            {{ end }}
-          </p>
-        </li>
-      {{ end }}
-    </ul>
-  </div>
+              {{- end -}}
+            </span></span>
+          {{ end }}
+        </p>
+      </li>
+    {{ end }}
+  </ul>
 </section>
 {{ end }}

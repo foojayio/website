@@ -15,6 +15,20 @@
        why it survives the TOC-height cull below. */}}
   {{ partial "sidebar-sponsors.html" . }}
 
+  {{/* Home page only, and gated HERE rather than inside the partial, the way
+       featured-authors-widget.html is. Two reasons it is not site-wide: the
+       queue is a home-page thing (it is what WordPress carries there), and the
+       partial SCANS THE FILESYSTEM -- on one page that is four directory
+       listings, on all 4200 it would be four thousand. If it is ever wanted
+       site-wide, wrap it in partialCached: the result does not depend on the
+       page it renders on.
+
+       Above Categories rather than below, because it expires: what is out
+       tomorrow is worth a glance before a list of 123 categories that is the
+       same every day. It renders nothing when nothing is scheduled, so on the
+       ordinary day the aside is exactly what it was. */}}
+  {{ if .IsHome }}{{ partial "coming-soon.html" . }}{{ end }}
+
   <section class="widget widget-categories">
     <h2>Categories</h2>
     <ul>

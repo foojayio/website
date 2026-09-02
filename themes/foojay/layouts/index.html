@@ -83,14 +83,6 @@
   {{ partial "sidebar.html" . }}
 </div>
 
-{{/* Scheduled but not yet published -- read off disk, because Hugo does not
-     build a future-dated post at all. Directly under the article stream,
-     because that is what it is a continuation of, and it renders nothing on
-     the ordinary day when nothing is queued. Plain .band, not sunken: the
-     Podcasts band below is sunken, and two sunken bands in a row read as one
-     block with two headings. */}}
-{{ partial "coming-soon.html" . }}
-
 {{ $podcasts := where $posts "Params.categories" "intersect" (slice "Podcast" "podcast") }}
 {{ with $podcasts }}
 <section class="band band--sunken">
