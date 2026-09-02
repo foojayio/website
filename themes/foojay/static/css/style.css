@@ -107,6 +107,14 @@
   --border:         #ebeded;
   --border-strong:  #d6dcde;
 
+  /* The RSS mark on partials/feed-link.html. Not the canonical #f26522: that
+     measures 2.77 on --page-head-bg, where most of these links live, and 1.4.11
+     asks 3:1 of a graphic that carries meaning. This is the same orange walked
+     down until it clears 3:1 on every light ground (3.15 on the page head, 3.58
+     on --surface); the dark scheme takes it back up. It is deliberately not
+     --tier-gold: that token means "gold sponsor" and nothing else. */
+  --feed:           #e8590c;
+
   /* Type */
   --font-display: "Barlow", "Segoe UI", system-ui, sans-serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -1781,7 +1789,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .post-card-body { display: grid; gap: .55rem; align-content: center; }
 .post-card--lead .post-card-meta .eyebrow { margin: 0; }
 
-.section-more { margin: 2rem 0 0; }
+/* A row, not a line of text: it carries the "view all" button and (on the home
+   page and /ai/) the feed link beside it. */
+.section-more {
+  margin: 2rem 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
 
 .chip-row--lg { gap: .6rem; }
 .chip-row--lg a { font-size: .85rem; padding: .45rem 1rem; }
@@ -1806,6 +1818,38 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    baseline, which is what /calendar/ shipped. Cheap guard, because the symptom
    is a small vertical offset that is easy to miss in review. */
 .page-head__meta .page-head__views { margin-top: 0; }
+/* THE FEED LINK (partials/feed-link.html) -- one look, wherever a feed is
+   offered. Typographically it is the read count's sibling: same .9rem, same
+   --ink-soft, so it sits on a meta line beside "52,391 views" without shouting.
+   What separates it from a statistic is the border, the RSS mark and the
+   pointer -- a bare orange word next to a bare grey word reads as two labels,
+   not as a link and a number.
+
+   Sized in `em` off its own font-size (icon included) rather than in rem, so
+   the same partial drops onto a section footer next to a .btn without a second
+   size rule. */
+.feed-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: var(--font-display); font-size: .9rem; font-weight: 700;
+  line-height: 1.3; color: var(--ink-soft); white-space: nowrap;
+  padding: .25rem .7rem .25rem .55rem;
+  border: 1px solid var(--border-strong); border-radius: 999px;
+}
+.feed-link:hover, .feed-link:focus-visible {
+  color: var(--ink); border-color: var(--feed);
+  background: var(--surface); text-decoration: none;
+}
+/* The mark keeps its own colour on hover: it is the thing a reader recognises
+   from every other site, and --feed is the one token here that is not part of
+   the brand palette for exactly that reason. */
+.feed-link__icon { width: 1em; height: 1em; color: var(--feed); flex: 0 0 auto; }
+/* The count and the feed link share ONE line -- .page-head__views holds either,
+   or both, so it is a flex row rather than two stacked blocks. `flex-wrap` for
+   a narrow screen, where the pill drops under the count instead of pushing the
+   page head sideways. */
+.page-head__views {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .8rem;
+}
 .author-profile .author-meta { grid-column: 2; margin: 0 0 .8rem; font-size: .9rem; }
 .pedia-card .views { display: block; margin-top: .55rem; font-size: .82rem; }
 .featured-author__count .views::before {
@@ -2116,6 +2160,9 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   --page-head-bg:   #1d292f;
   --border:         #2e3f48;
   --border-strong:  #435a65;
+
+  /* 6.66 on --page-head-bg, 7.74 on --surface. */
+  --feed:           #ff922b;
 
   --footer-bg:     #0a1114;
   --footer-fg:     #a9b9c1;

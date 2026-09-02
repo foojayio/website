@@ -1,0 +1,52 @@
+{{- /*
+  A sponsor's feed: the articles attributed to that sponsor, newest first.
+
+  Every sponsor profile has had a feed since [outputs] in hugo.toml gave one to
+  every `section`, and a sponsor bundle became a section so .Paginate would take
+  it -- but a sponsor section has no child pages, so Hugo's embedded RSS template
+  ranged over nothing and shipped an EMPTY <channel>, advertised in <head> on all
+  7 profiles. A reader could subscribe and receive nothing, for ever. Verified
+  before this template existed: 0 <item>s in every one of them.
+
+  So the feed lists what the PAGE lists. partials/sponsor-posts.html is the one
+  definition of "a sponsor's articles" -- it resolves the `authors:` list,
+  including the from:/till: windows for people who have changed employer -- so
+  the feed cannot credit the sponsor with an article their page does not show,
+  which on a page with money attached is the failure that matters.
+
+  Same shape and the same [services.rss] limit as layouts/author/section.rss.xml
+  next door; that one is worth reading for why a per-page feed needs a template
+  at all.
+*/ -}}
+{{- $posts := partial "sponsor-posts.html" . -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 }}{{ $posts = $posts | first $limit }}{{ end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Articles from {{ .Title }} on {{ site.Title }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
+    {{- with (index $posts 0) }}
+    <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType.Type | safeHTML }}
+    {{- end }}
+    {{- range $posts }}
+    <item>
+      <title>{{ .Title | transform.XMLEscape | safeHTML }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- range .Params.categories }}
+      <category>{{ . | transform.XMLEscape | safeHTML }}</category>
+      {{- end }}
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ partial "meta-description.html" . | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

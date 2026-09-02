@@ -97,7 +97,15 @@
          number from the ones beside it: those describe the calendar, this
          describes the page, and running them together invited reading it as a
          fifth calendar statistic. */}}
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{/* The read count and the feed link share this line -- .page-head__views is
+         a flex row (style.css). The feed belongs next to the count rather than
+         on the stats row above for the same reason the count does: both are
+         about this PAGE, where the numbers up there describe the calendar. */}}
+    {{ $views := partial "views.html" . }}
+    {{ $feed := partial "feed-link.html" . }}
+    {{ if or $views $feed }}
+    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
+    {{ end }}
   </div>
 </div>
 

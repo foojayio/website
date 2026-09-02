@@ -70,7 +70,14 @@
       {{ end }}
     </div>
 
-    <p class="section-more"><a class="btn btn--ghost" href="{{ "today/" | relURL }}">View all articles</a></p>
+    {{/* The site feed sits beside "View all articles" because that is where a
+         reader who wants MORE of this looks, and the two are the same offer by
+         different means: the archive, or a subscription to it. /index.xml is
+         posts-only (layouts/index.rss.xml), i.e. exactly what this grid is. */}}
+    <p class="section-more">
+      <a class="btn btn--ghost" href="{{ "today/" | relURL }}">View all articles</a>
+      {{ partial "feed-link.html" . }}
+    </p>
   </div>
 
   {{ partial "sidebar.html" . }}

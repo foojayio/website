@@ -5,11 +5,12 @@
     <h1>{{ .Title }}</h1>
     <div class="page-head__meta">
       <p>{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }} in this {{ .Data.Singular }}.</p>
-      {{/* Category/tag RSS is enabled site-wide via hugo.toml's [outputs] term
-           config, so every term page automatically gets a feed -- link to it. */}}
-      {{ with .OutputFormats.Get "rss" }}
-      <a class="btn btn--ghost btn--sm" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
-      {{ end }}
+      {{/* Category RSS is enabled site-wide via hugo.toml's [outputs] term
+           config, so every term page automatically gets a feed -- link to it.
+           Through partials/feed-link.html since this page's hand-rolled button
+           was the only visible feed offer on the site; it is now the same
+           control the home page, /today/, /pedia/ and /calendar/ show. */}}
+      {{ partial "feed-link.html" . }}
     </div>
   </div>
 </div>

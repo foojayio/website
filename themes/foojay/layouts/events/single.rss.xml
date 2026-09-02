@@ -1,0 +1,103 @@
+{{- /*
+  /calendar/'s feed: the next N events, soonest first.
+
+  The calendar was the one page on the site with something worth subscribing to
+  and no feed at all -- it is a `page` kind, and hugo.toml's [outputs] hands RSS
+  to home/section/taxonomy/term as CLASSES of page, which cannot single out one
+  page. So content/pages/calendar.md turns `rss` on for itself, and this is the
+  template that fills it (Hugo's embedded one ranges over .Pages, which a page
+  kind does not have -- it would have shipped an empty <channel>, the same trap
+  layouts/author/section.rss.xml documents).
+
+  N is [services.rss] limit in hugo.toml, the same 30 the site, section, term
+  and author feeds honour -- one number for every feed here.
+
+  EVERY EVENT COMES FROM partials/calendar-events.html, the single definition of
+  what an event is, so the feed cannot disagree with the page it is a feed of
+  about a date, a place or a group. The upcoming filter is the same `end >= today`
+  OVERLAP partials/upcoming-events.html uses, not `start >= today`: a five-day
+  conference that opened yesterday is still on, and dropping it because its start
+  is behind us is exactly the bug a reader would notice.
+
+  TWO THINGS ABOUT AN EVENT FEED THAT AN ARTICLE FEED NEVER FACES:
+
+  1. pubDate is the SYNC TIME, one value for every item, and deliberately NOT
+     the event's own start. A reader sorts by pubDate descending, so dating each
+     item by its start puts the event furthest in the future at the top and
+     buries next week's meetup at the bottom -- the exact opposite of what "the
+     next 30 events" means. It is also honest: an item's pubDate is when the news
+     was published, and the news here is that the event is on the calendar, which
+     happened when data/jug-events.json was last synced. Every reader dedupes on
+     <guid>, so re-stamping pubDate cannot make a seen item unread again.
+
+  2. So WHEN it is has to be in the item itself. The title leads with the date
+     and the description spells it out in full, INCLUDING THE UTC OFFSET -- on
+     the page a day's other rows give a reader the context to read "19:00", and
+     in a feed reader on another continent there is none.
+*/ -}}
+{{- $cal := partialCached "calendar-events.html" . -}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $upcoming := slice -}}
+{{- range $cal.events -}}
+  {{- $end := .endDate | default .date -}}
+  {{- if ge $end $today -}}{{- $upcoming = $upcoming | append . -}}{{- end -}}
+{{- end -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 }}{{ $upcoming = $upcoming | first $limit }}{{ end -}}
+{{- /* The JUG sync stamp when there is one, so the feed says when it was last
+       true rather than when this build ran; `now` only on a build with no synced
+       data at all (a fork, or a first run before the sync). */ -}}
+{{- $synced := now -}}
+{{- with $cal.generatedAt }}{{ $synced = time.AsTime . }}{{ end -}}
+{{- $pubDate := $synced.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ partial "meta-description.html" . }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
+    <lastBuildDate>{{ $pubDate | safeHTML }}</lastBuildDate>
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType.Type | safeHTML }}
+    {{- end }}
+    {{- range $upcoming }}
+    {{- /* When it is, in words. A multi-day event names both ends; a timed one
+           names the clock and its offset; an all-day one has only its date, and
+           the date already says it. */ -}}
+    {{- $when := .dateLabel -}}
+    {{- if gt (len .days) 1 -}}
+      {{- $when = printf "%s – %s" .dateLabel ((time.AsTime .endDate).Format "Monday, 2 January 2006") -}}
+    {{- else if not .allDay -}}
+      {{- $when = printf "%s, %s (%s)" .dateLabel .when .offsetLabel -}}
+    {{- end -}}
+    {{- $where := .place | default .placeShort | default .country -}}
+    {{- $parts := (slice $when) -}}
+    {{- with $where }}{{ $parts = $parts | append . }}{{ end -}}
+    {{- /* The group, i.e. WHOSE event it is -- but only for a meetup, where that
+           is the JUG's name. A hand-added entry's `group` is its own type, which
+           the <category> above already carries, so appending it here would end
+           every conference's description with "... Conference · Conference". */ -}}
+    {{- if eq .kind "meetup" }}{{ with .group }}{{ $parts = $parts | append . }}{{ end }}{{ end -}}
+    {{- /* An event's own page (Meetup, the conference site) is the useful
+           destination, so it is the <link>. A hand-added entry may carry no
+           url at all (data/events/README.md has it optional), and then the
+           calendar itself is where a reader can act on the item. */ -}}
+    {{- $link := .url | default $.Permalink -}}
+    <item>
+      <title>{{ printf "%s · %s" .dateShort .title | transform.XMLEscape | safeHTML }}</title>
+      <link>{{ $link }}</link>
+      <pubDate>{{ $pubDate | safeHTML }}</pubDate>
+      {{- /* NOT the url: two entries can share one (a conference with no url of
+             its own falls back to the calendar, above), and a guid has to be
+             unique per item and stable across builds. The instant plus the
+             destination is both. */}}
+      <guid isPermaLink="false">{{ printf "%s#%s" $link .startISO | transform.XMLEscape | safeHTML }}</guid>
+      <category>{{ cond (eq .kind "meetup") "Meetup" (.type | default "Conference") }}</category>
+      <description>{{ delimit $parts " · " | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

@@ -1871,6 +1871,96 @@ should catch a mistake at PR time rather than letting it fail silently.
   section, term and per-author feeds -- `authors/page.rss.xml` already read the
   same value.
 
+- **A feed a reader cannot find does not exist, so `partials/feed-link.html` is
+  the single definition of how one is OFFERED.** Every feed here was advertised
+  only as a `<link rel="alternate">` in `<head>` -- which no browser has surfaced
+  a button for in years -- so 484 working feeds were, in practice, unreachable.
+  The one exception was a category page's hand-rolled "Subscribe via RSS" ghost
+  button, and that wording is now this partial. It renders an RSS mark plus a
+  visible label, sized off its own font-size so the same control drops onto a
+  page-head meta line or next to a `.btn` with no second rule, and it renders
+  **nothing** when the page has no `rss` output -- so no caller guards, and a
+  page that loses its feed loses the link with it.
+
+  Where it goes, and why those places: the home page and `/ai/` next to their
+  "view all" button (the archive and a subscription to it are the same offer),
+  `/today/`, `/pedia/`, a category term and `/calendar/` on the page-head meta
+  line beside the read count, and a sponsor profile beside the heading of the
+  articles the feed carries. An author profile already had a visible "RSS" pill
+  in `partials/author-social.html` and keeps it.
+
+  **The page passed in need not be the page being rendered**, which is why the
+  partial takes one: `/ai/` is a portal over one category and has no feed of its
+  own, so it offers the Machine Learning term's feed right beside the link to
+  that term.
+
+  `--feed` is its own colour token in both schemes and deliberately **not** the
+  canonical `#f26522`: that measures 2.77 on `--page-head-bg`, where most of
+  these links live, against the 3:1 WCAG 1.4.11 asks of a meaningful graphic. It
+  is that orange walked down to 3.15/3.58 in light and back up to 6.66/7.74 in
+  dark. It is not `--tier-gold` either -- that token means "gold sponsor".
+
+- **`/calendar/` has a feed of the next 30 events, and it needed a template
+  because it is a `page`.** `[outputs]` in `hugo.toml` hands RSS to
+  `home`/`section`/`taxonomy`/`term` as CLASSES of page and cannot single out one
+  page, so `content/pages/calendar.md` declares `outputs: [html, rss]` for itself
+  and `layouts/events/single.rss.xml` fills it. The 30 is `[services.rss] limit`,
+  the same number every other feed honours. Events come from
+  `partials/calendar-events.html`, so the feed cannot disagree with the page it is
+  a feed of, and "upcoming" is the same `end >= today` OVERLAP
+  `partials/upcoming-events.html` uses -- a five-day conference that opened
+  yesterday is still on.
+
+  **Two things an event feed faces that an article feed never does:**
+  - **`pubDate` is the sync time, one value for every item, and NOT the event's
+    own start.** A reader sorts by pubDate descending, so dating each item by its
+    start puts the event furthest in the future at the top and buries next week's
+    meetup at the bottom -- the exact inverse of "the next 30 events". It is also
+    the honest reading: an item's pubDate is when the news was published, and the
+    news is that the event is on the calendar, which happened when
+    `data/jug-events.json` was last synced. Readers dedupe on `<guid>`, so
+    re-stamping pubDate cannot make a seen item unread again.
+  - **So WHEN it is has to be in the item.** The title leads with the date
+    ("5-9 Oct - Devoxx Belgium 2026") and the description spells it out
+    **including the UTC offset** -- on the page a day's other rows give a reader
+    the context to read "19:00"; in a feed reader on another continent there is
+    none. `calendar-events.html` gained one key for this, `startISO`: every other
+    key on an event is a formatted string for reading, and rebuilding an instant
+    from `date` + `time` + `offset` in the caller is three keys and a printf to
+    say what one says.
+
+- **A section whose children are BRANCH bundles has an EMPTY feed, and three
+  were shipping one.** Hugo's embedded RSS template ranges over a section's
+  regular pages, and authors, sponsors and each sponsor profile hold none -- so
+  `/today/author/index.xml`, `/our-sponsors/index.xml` and all 7
+  `/sponsor/<slug>/index.xml` were a `<channel>` with no `<item>`, advertised in
+  `<head>`, where a reader could subscribe and receive nothing for ever. Measured
+  at 0 items each, not assumed. Fixed the way each one wants: a sponsor profile
+  gained `layouts/sponsor/section.rss.xml` over `partials/sponsor-posts.html`
+  (the one definition of "a sponsor's articles", `from:`/`till:` windows
+  included, so the feed cannot credit a sponsor with an article their page does
+  not show), while the two LISTING pages set `outputs: [html]` in their
+  `_index.md` -- a feed of "new author profiles" is not a thing anyone wants.
+  The 10 empty feeds left are authors and sponsors with no articles yet, which
+  fill themselves; the visible link on a sponsor page is gated on having posts.
+
+  **The same conversion note applies as everywhere else in this file:** the
+  branch-bundle move is what emptied these, and it did so silently -- the
+  template still parsed, still ran, and matched nothing. `partials/author-posts.html`
+  is the single definition of an author's articles, and
+  `layouts/author/section.rss.xml` still re-derives that with its own `where` over
+  `site.RegularPages`; worth collapsing next time that file is touched.
+
+- **An XML declaration is only a declaration at byte 0, and 348 feeds were
+  failing that.** `layouts/author/section.rss.xml` opened with template actions
+  each followed by a newline, so every author feed shipped a blank line above
+  `<?xml ...?>` and a strict parser rejected the whole file -- invisible, because
+  a lenient reader takes it anyway. All four feed templates now write the
+  declaration with `{{-`. Verified by parsing every built feed: 348 of 484
+  malformed before, 0 after. Re-run that check after editing a feed template,
+  because nothing else looks at these files -- `validate/BuiltSite.java` reads
+  HTML attributes and would only catch a feed URL that 404s.
+
 - **`enableGitInfo` dates the pages that have no date, and sits BELOW `date:`.**
   441 URLs shipped without `<lastmod>` (the Quick Start steps, install-java, the
   board members) because those pages carry no `date:`. The `[frontmatter]` chains

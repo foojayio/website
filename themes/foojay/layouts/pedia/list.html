@@ -4,6 +4,7 @@
     <span class="eyebrow">Friends Of OpenJDK</span>
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    {{ with partial "feed-link.html" . }}<div class="page-head__views">{{ . }}</div>{{ end }}
   </div>
 </div>
 <div class="content-col full-width">

@@ -8,6 +8,13 @@
      it for free. Same reasoning as partials/sponsor-posts.html and
      partials/board-members.html.
 
+     Every key on an event is a formatted STRING for reading, with two
+     exceptions: `sort` (the instant, for ordering) and `startISO` (the instant,
+     for a consumer that has to format it in a way nothing on the page needs --
+     /calendar/'s RSS feed wants an RFC-1123 pubDate). Rebuilding that from
+     `date` + `time` + `offset` in the caller is three keys and a printf to say
+     what one key says.
+
      Returns a dict:
        events      every upcoming event, sorted by start time
        conferences just the hand-added ones, sorted (the /calendar/ legend)
@@ -94,6 +101,7 @@
         "country"    $country
         "hue"        $hue
         "sort"       $start.Unix
+        "startISO"   ($start.Format "2006-01-02T15:04:05-07:00")
         "offset"     ($start.Format "-0700")
         "offsetLabel" (partial "utc-offset.html" $start)
         "date"       ($start.Format "2006-01-02")
@@ -215,6 +223,7 @@
           "country"    ($c.country | default "")
           "hue"        (mod (hash.FNV32a $slug) 360)
           "sort"       $start.Unix
+          "startISO"   ($start.Format "2006-01-02T15:04:05-07:00")
           "offset"     ($start.Format "-0700")
           "offsetLabel" (partial "utc-offset.html" $start)
           "date"       ($start.Format "2006-01-02")

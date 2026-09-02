@@ -20,7 +20,12 @@ page shows.
 {{- $written = $written.ByDate.Reverse }}
 {{- $limit := .Site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}{{ $written = $written | first $limit }}{{ end }}
-{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- /* `{{-`, not `{{`: an XML declaration is only a declaration at byte 0 of
+       the document, and every line above this one is a template action followed
+       by a newline. Without the trim the feed opens with a blank line and a
+       strict parser rejects the whole file -- which is what all 348 author feeds
+       shipped, invisibly, since a lenient reader takes them anyway. */ -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{{ .Title }} on {{ .Site.Title }}</title>

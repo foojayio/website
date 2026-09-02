@@ -1,0 +1,45 @@
+{{- /* A VISIBLE "subscribe by RSS" link -- the single definition of how a feed
+       is offered to a reader, so the home page, /today/, a category, /pedia/,
+       /calendar/ and a sponsor profile cannot each invent their own wording,
+       icon or placement.
+
+       Every one of those pages has had a feed all along and advertised it only
+       as a <link rel="alternate"> in <head> -- which a browser stopped showing
+       a button for years ago, so in practice the feeds existed and nobody could
+       find them. The one exception was a category page, which had a
+       "Subscribe via RSS" ghost button; that wording and this partial are now
+       the same thing.
+
+       Context (.) is either the page whose feed to link, or a dict:
+
+         page   the page whose `rss` output format to link (required)
+         label  the visible text, default "RSS feed"
+
+       Renders NOTHING when that page has no rss output, so a caller never has
+       to guard -- and a page that loses its feed loses the link with it rather
+       than shipping a dead one. Note the page passed in need not be the page
+       being rendered: /ai/ is a portal over one category, so it links THAT
+       term's feed, the same way it links the term page itself.
+
+       The icon is inline SVG rather than a font glyph or an <img>: it is one
+       shape, it inherits its size from the text, and it must not be a network
+       request on 4000 pages. It is `aria-hidden`, with the visible label
+       carrying the accessible name -- an icon-only feed link is the thing this
+       partial exists to stop. */ -}}
+{{- $page := . -}}
+{{- $label := "RSS feed" -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- with .label }}{{ $label = . }}{{ end -}}
+{{- end -}}
+{{- with $page.OutputFormats.Get "rss" -}}
+<a class="feed-link" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">
+  {{- /* Material's RSS mark: the dot plus two arcs, at 24x24. */ -}}
+  <svg class="feed-link__icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56z"/>
+    <path d="M4 10.1v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+  </svg>
+  <span>{{ $label }}</span>
+</a>
+{{- end -}}

@@ -18,6 +18,15 @@ aliases:
 # layout -- an empty "0 articles" page where the A-Z grid should be. An explicit
 # value always beats a cascaded one.
 type: "authors"
+# NO FEED FOR THIS PAGE. It gets one for free from hugo.toml's [outputs] section
+# config, and it was EMPTY: Hugo's embedded RSS template ranges over a section's
+# regular pages, and every child here is a branch bundle, so /today/author/index.xml
+# shipped a <channel> with no items and <head> advertised it. A reader could
+# subscribe and receive nothing for ever. There is nothing to fix by filling it
+# either -- a feed of "new author profiles" is not a thing anyone wants, and the
+# feed a reader wants is the per-author one the cascade below turns on.
+outputs:
+  - html
 # Each author bundle is a BRANCH bundle (_index.md), i.e. a Hugo section rather
 # than a page. Not cosmetic: .Paginate refuses a page kind ("pagination not
 # supported for this page"), and a prolific author has 290+ articles, which was

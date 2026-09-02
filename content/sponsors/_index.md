@@ -6,6 +6,11 @@ title: "Our Sponsors"
 # sponsor-profile layout instead of the tier listing. An explicit value always
 # beats a cascaded one.
 type: "sponsors"
+# NO FEED FOR THIS PAGE -- same empty-channel trap as content/authors/_index.md:
+# every child is a branch bundle, so the section feed [outputs] hands out had no
+# items in it. The per-sponsor feeds are real (layouts/sponsor/section.rss.xml).
+outputs:
+  - html
 heroTitle: "Who Keeps Foojay Running"
 # Served from static/images/sponsors/ and resolved through resource-url.html,
 # which strips the leading slash so the baseURL subpath applies.

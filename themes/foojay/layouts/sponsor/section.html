@@ -122,6 +122,12 @@
       {{ $pager := partial "paginator.html" . }}
       <div class="section-head">
         <h2 id="{{ $articlesSec.id }}">{{ $articlesSec.label }}</h2>
+        {{/* The sponsor's own feed (layouts/sponsor/section.rss.xml), beside the
+             heading of the articles it carries. Gated on $posts: a sponsor with
+             no attributed articles yet has an empty feed, and offering one is
+             how this page came to advertise an empty channel in the first
+             place. */}}
+        {{ if $posts }}{{ partial "feed-link.html" . }}{{ end }}
       </div>
       {{ if $posts }}
       {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" $articlesSec.id) }}

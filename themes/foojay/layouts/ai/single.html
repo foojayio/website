@@ -71,8 +71,15 @@
       </div>
     {{ end }}
 
+    {{/* The feed is the CATEGORY's, not this page's -- /ai/ is a portal over one
+         category and has no feed of its own, so it offers the one that carries
+         its articles, right beside the link to that category. feed-link.html
+         takes the page whose feed to link precisely so a page can do this. */}}
     {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
-    <p class="section-more"><a class="btn btn--ghost" href="{{ .RelPermalink }}">Browse the {{ .Title }} category</a></p>
+    <p class="section-more">
+      <a class="btn btn--ghost" href="{{ .RelPermalink }}">Browse the {{ .Title }} category</a>
+      {{ partial "feed-link.html" (dict "page" . "label" (printf "%s RSS feed" .Title)) }}
+    </p>
     {{ end }}
   </div>
   {{ partial "sidebar.html" . }}

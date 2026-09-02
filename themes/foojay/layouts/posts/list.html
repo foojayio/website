@@ -4,6 +4,10 @@
     <span class="eyebrow">Friends Of OpenJDK</span>
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    {{/* The section's own feed -- every article, newest first. Visible, because
+         a <link rel="alternate"> in <head> is not an offer any browser still
+         surfaces. partials/feed-link.html is the one definition of the look. */}}
+    {{ with partial "feed-link.html" . }}<div class="page-head__views">{{ . }}</div>{{ end }}
   </div>
 </div>
 
