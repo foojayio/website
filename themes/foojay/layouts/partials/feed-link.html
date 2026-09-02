@@ -28,6 +28,23 @@
        being rendered: /ai/ is a portal over one category, so it links THAT
        term's feed, the same way it links the term page itself.
 
+       IT OPENS IN A NEW TAB, which is not the usual same-origin rule but is
+       the right one here: the destination is not a page. Chrome and Firefox
+       render a feed as a wall of raw XML and Safari hands it to a reader app or
+       downloads it -- so in the same tab a curious click destroys the reader's
+       place on a 2000-word article or halfway down a table of 422 champions,
+       with the back button as the only way out. This repo already made that
+       call for the other same-origin non-HTML resource it links: the
+       sponsorship PDF (sponsors/list.html) opens in a new tab too. Copying the
+       URL into a reader -- the other way this link gets used, and probably the
+       commoner one -- is unaffected either way.
+
+       `noopener` is written out although every current browser implies it for
+       target="_blank", matching how the PDF and the GitHub edit link are
+       written. There is no "opens in a new tab" hint in the label, which is a
+       WCAG 3.2.5 (AAA) nicety the site does not claim and none of its other
+       new-tab links carry either.
+
        The icon is inline SVG rather than a font glyph or an <img>: it is one
        shape, it inherits its size from the text, and it must not be a network
        request on 4000 pages. It is `aria-hidden`, with the visible label
@@ -36,7 +53,7 @@
 {{- $page := . -}}
 {{- if reflect.IsMap . }}{{ $page = .page }}{{ end -}}
 {{- with $page.OutputFormats.Get "rss" -}}
-<a class="feed-link" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">
+<a class="feed-link" href="{{ .RelPermalink }}" rel="alternate noopener" type="application/rss+xml" target="_blank">
   {{- /* Material's RSS mark: the dot plus two arcs, at 24x24. */ -}}
   <svg class="feed-link__icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">
     <circle cx="6.18" cy="17.82" r="2.18"/>

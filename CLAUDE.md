@@ -1899,6 +1899,16 @@ should catch a mistake at PR time rather than letting it fail silently.
   re-verifying the same way after touching the partial: the rendered `<a>` is
   **byte-identical on all 11 page types that carry one**, href aside.
 
+  **IT OPENS IN A NEW TAB** -- not the usual same-origin rule, and deliberate:
+  the destination is not a page. Chrome and Firefox render a feed as raw XML and
+  Safari hands it to a reader app or downloads it, so in the same tab a curious
+  click destroys the reader's place on a 2000-word article or halfway down a
+  table of 422 champions. The precedent is already in the repo -- the
+  sponsorship PDF, the other same-origin non-HTML thing the site links, opens in
+  a new tab too. The footer's own RSS entry does the same now (`footer-link.html`
+  gave `target` to http(s) only, so the one feed link in the footer behaved
+  differently from the eleven everywhere else).
+
   **The page passed in need not be the page being rendered**, which is why the
   partial takes one: `/ai/` is a portal over one category and has no feed of its
   own, so its meta line offers the Machine Learning term's feed.
