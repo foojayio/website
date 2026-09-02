@@ -3,7 +3,11 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ $views := partial "views.html" . }}
+    {{ $feed := partial "feed-link.html" . }}
+    {{ if or $views $feed }}
+    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
+    {{ end }}
   </div>
 </div>
 

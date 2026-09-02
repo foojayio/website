@@ -1875,24 +1875,41 @@ should catch a mistake at PR time rather than letting it fail silently.
   the single definition of how one is OFFERED.** Every feed here was advertised
   only as a `<link rel="alternate">` in `<head>` -- which no browser has surfaced
   a button for in years -- so 484 working feeds were, in practice, unreachable.
-  The one exception was a category page's hand-rolled "Subscribe via RSS" ghost
-  button, and that wording is now this partial. It renders an RSS mark plus a
-  visible label, sized off its own font-size so the same control drops onto a
-  page-head meta line or next to a `.btn` with no second rule, and it renders
-  **nothing** when the page has no `rss` output -- so no caller guards, and a
-  page that loses its feed loses the link with it.
+  There were three hand-rolled offers, in three different shapes: a category
+  page's "Subscribe via RSS" ghost button, the SAME wording as a `btn--sm` on
+  `/ai/`, and a plain "RSS" text pill in the author socials row. All three are
+  this partial now. It renders the RSS mark plus the label, and **nothing** when
+  the page has no `rss` output -- so no caller guards, and a page that loses its
+  feed loses the link with it.
 
-  Where it goes, and why those places: the home page and `/ai/` next to their
-  "view all" button (the archive and a subscription to it are the same offer),
-  `/today/`, `/pedia/`, a category term and `/calendar/` on the page-head meta
-  line beside the read count, and a sponsor profile beside the heading of the
-  articles the feed carries. An author profile already had a visible "RSS" pill
-  in `partials/author-social.html` and keeps it.
+  **THE LABEL IS NOT A PARAMETER, because it was one for a day.** `/ai/` passed
+  "Machine Learning RSS feed" where every other caller said "RSS feed", and the
+  one control a reader learns to look for read as a different control on that
+  page -- which is what Frank spotted, comparing `/ai/` against
+  `/today/category/ai/`. One wording, decided in the partial. That is what "the
+  single definition of how a feed is offered" has to mean, and it is the
+  no-knob rule this file opens with, applied to a knob that had already been
+  set to a different value once.
+
+  **ONE PLACEMENT RULE: the page's own meta line, beside the read count.**
+  `/today/`, `/pedia/`, `/calendar/`, `/jugs/`, `/java-champions/`, `/ai/` and a
+  category term all put it there; a sponsor profile puts it beside the heading of
+  the articles the feed carries, and the home page -- which has no page head at
+  all -- beside "View all articles". Verified after the fact, and worth
+  re-verifying the same way after touching the partial: the rendered `<a>` is
+  **byte-identical on all 11 page types that carry one**, href aside.
 
   **The page passed in need not be the page being rendered**, which is why the
   partial takes one: `/ai/` is a portal over one category and has no feed of its
-  own, so it offers the Machine Learning term's feed right beside the link to
-  that term.
+  own, so its meta line offers the Machine Learning term's feed.
+
+  **In the author socials row it is deliberately the SAME pill as its
+  neighbours** -- `.feed-link` carries `.author-social a`'s size, weight,
+  padding and border on purpose, so a row of eight links does not grow a ninth
+  that shouts. Two overrides are needed there and no more: `.author-social a` is
+  0-1-1 and outranks `.feed-link` (0-1-0), so it wins on `display: inline-block`
+  and drops the icon onto the text baseline, and its hover would repaint the
+  border blue. Restate what collides, not the pill.
 
   `--feed` is its own colour token in both schemes and deliberately **not** the
   canonical `#f26522`: that measures 2.77 on `--page-head-bg`, where most of
@@ -1928,6 +1945,37 @@ should catch a mistake at PR time rather than letting it fail silently.
     key on an event is a formatted string for reading, and rebuilding an instant
     from `date` + `time` + `offset` in the caller is three keys and a printf to
     say what one says.
+
+- **`/jugs/` and `/java-champions/` carry their WHOLE list, and that is the one
+  place `[services.rss] limit` is deliberately ignored.** Same page-kind
+  plumbing as `/calendar/` (an `outputs:` line in the page file plus
+  `layouts/jugs/single.rss.xml` / `layouts/champions/single.rss.xml`), but a
+  different question underneath: these two lists barely change, so what a reader
+  subscribes for is an ADDITION -- a JUG joining the directory, someone new
+  recognised. Cut to 30 that fails outright: A-Z at 30 hides every JUG from H
+  onwards for good, and the next one added is overwhelmingly likely to be in the
+  hidden two thirds. A complete list cannot miss one. Frank's call, and the cost
+  is 32 KB for 100 JUGs and 167 KB for 422 champions, on a poll GitHub Pages
+  answers with a 304 when nothing moved. Everything else stays at 30.
+
+  **Their pubDates differ, because their data does.** A champion's `year` is the
+  intake they were named in, so it is a real per-item date: the feed orders
+  `year` descending (NOT the page's A-Z, which is how you look someone up) and
+  dates each item 1 January of that year -- a convention for a year-granular
+  fact, since RSS has no year-only date, built through `time.AsTime` so the
+  weekday name is right. A JUG has no such date at all: `founded_date` is when
+  the group started, is missing for 38 of 100, and comes at inconsistent
+  precision the page already refuses to parse -- and it is not when the JUG
+  appeared here. So a JUG item carries **no pubDate**, which is legal RSS 2.0 and
+  better than the alternative: stamping the build time would claim all 100 were
+  published today, on every deploy. A reader stamps a dateless item on arrival,
+  which is exactly "this JUG is new to the directory", and `<guid>` is what keeps
+  the ones it already has read.
+
+  `partials/champion-url.html` came out of this: the map popup and the feed each
+  need exactly ONE link per champion, and a champion who adds a website must not
+  move in one and not the other. The table still lists every link they have --
+  that is a different question.
 
 - **A section whose children are BRANCH bundles has an EMPTY feed, and three
   were shipping one.** Hugo's embedded RSS template ranges over a section's

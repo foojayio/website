@@ -3,7 +3,11 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ $views := partial "views.html" . }}
+    {{ $feed := partial "feed-link.html" . }}
+    {{ if or $views $feed }}
+    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
+    {{ end }}
   </div>
 </div>
 
@@ -57,12 +61,10 @@
     {{ range $champions }}
       {{ if and .latitude .longitude }}
         {{/* First profile the champion actually has, so a popup name is a link
-             wherever possible. Ordered most-canonical first, matching the
-             Connect column's own order. */}}
-        {{ $url := "" }}
-        {{ range (slice .website .linkedin .github .bluesky .mastodon .twitter) }}
-          {{ if and (not $url) . }}{{ $url = . }}{{ end }}
-        {{ end }}
+             wherever possible. partials/champion-url.html defines that pick --
+             shared with the RSS feed, so the two cannot disagree about which of
+             a champion's links is the canonical one. */}}
+        {{ $url := partial "champion-url.html" . }}
         {{ $points = $points | append (dict
              "name" .name
              "lat" .latitude

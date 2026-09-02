@@ -15,11 +15,13 @@
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
     <div class="page-head__meta">
       <p>{{ len $posts }} article{{ if ne (len $posts) 1 }}s{{ end }} on AI and machine learning in Java.</p>
-      {{/* The portal has no feed of its own; the category it curates does. */}}
+      {{/* The portal has no feed of its own; the category it curates does --
+           which is what feed-link.html taking a page is for. It was a
+           `btn--ghost btn--sm` reading "Subscribe via RSS" here, i.e. the same
+           offer as every other page in a different shape, on the one page that
+           sits right next to its own category page for comparison. */}}
       {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
-        {{ with .OutputFormats.Get "rss" }}
-        <a class="btn btn--ghost btn--sm" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">Subscribe via RSS</a>
-        {{ end }}
+        {{ partial "feed-link.html" . }}
       {{ end }}
     </div>
     {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
@@ -71,15 +73,8 @@
       </div>
     {{ end }}
 
-    {{/* The feed is the CATEGORY's, not this page's -- /ai/ is a portal over one
-         category and has no feed of its own, so it offers the one that carries
-         its articles, right beside the link to that category. feed-link.html
-         takes the page whose feed to link precisely so a page can do this. */}}
     {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
-    <p class="section-more">
-      <a class="btn btn--ghost" href="{{ .RelPermalink }}">Browse the {{ .Title }} category</a>
-      {{ partial "feed-link.html" (dict "page" . "label" (printf "%s RSS feed" .Title)) }}
-    </p>
+    <p class="section-more"><a class="btn btn--ghost" href="{{ .RelPermalink }}">Browse the {{ .Title }} category</a></p>
     {{ end }}
   </div>
   {{ partial "sidebar.html" . }}

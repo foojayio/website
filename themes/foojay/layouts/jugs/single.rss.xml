@@ -1,0 +1,61 @@
+{{- /*
+  /jugs/'s feed: every Java User Group in the directory, A-Z.
+
+  Same page-kind plumbing as layouts/champions/single.rss.xml next door (an
+  `outputs:` line in content/pages/java-user-groups-jugs.md plus this template),
+  and the same reason for existing: what a reader subscribes for is an ADDITION
+  -- a JUG joining the directory -- so the feed carries the WHOLE list, all 100,
+  deliberately ignoring [services.rss] limit. A-Z cut to 30 would hide
+  everything from H onwards for good, and the JUG that gets added next is
+  overwhelmingly likely to be in the hidden two thirds.
+
+  NO pubDate ON AN ITEM, and that is the honest answer rather than an omission.
+  A directory entry has no publication date: `founded_date` is when the group
+  started (missing for 38 of 100, and at inconsistent precision -- see the
+  Founded column in single.html for why it is never parsed as a date), which is
+  not when it appeared here, and stamping every item with the build time would
+  claim all 100 JUGs were published today, every deploy. pubDate is optional in
+  RSS 2.0, and a reader that meets a dateless item stamps it on arrival -- which
+  is exactly "this JUG is new to the directory". Items are told apart by <guid>,
+  so the 100 a reader already has stay read.
+*/ -}}
+{{- $jugs := sort hugo.Data.jugs "name" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ partial "meta-description.html" . }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType.Type | safeHTML }}
+    {{- end }}
+    {{- range $jugs }}
+    {{- /* The group's own site, then its Meetup page, then the directory entry
+           on GitHub -- which every JUG has, so the item always leads somewhere
+           about that group rather than back to this page. */ -}}
+    {{- $link := .website | default .meetup_url | default .source_url -}}
+    {{- $parts := slice -}}
+    {{- with .country }}{{ $parts = $parts | append . }}{{ end -}}
+    {{- /* Year only: the source mixes "2013-01-01" with "2009-11", which Hugo's
+           date parser rejects outright, so the first four characters are taken
+           directly -- the same trick the Founded column uses. */ -}}
+    {{- with .founded_date }}{{ if ge (len .) 4 }}{{ $parts = $parts | append (printf "founded %s" (slicestr . 0 4)) }}{{ end }}{{ end -}}
+    {{- /* Whether their meetups reach /calendar/, which is the one thing this
+           site knows about a JUG that its own page does not say. */ -}}
+    {{- if or .calendar .meetup_slug }}{{ $parts = $parts | append "events on the foojay calendar" }}{{ end -}}
+    <item>
+      <title>{{ .name | transform.XMLEscape | safeHTML }}</title>
+      <link>{{ $link }}</link>
+      {{- /* The upstream slug, which is the directory's own identifier for the
+             group and survives a rename of the group's name or website. */}}
+      <guid isPermaLink="false">{{ printf "%s#%s" $.Permalink .slug | transform.XMLEscape | safeHTML }}</guid>
+      <category>{{ .country | transform.XMLEscape | safeHTML }}</category>
+      <description>{{ delimit $parts " · " | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

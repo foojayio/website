@@ -1,0 +1,20 @@
+{{- /* The one link that best stands for a Java Champion, or "" if they record
+       none.
+
+       Ordered most-canonical first -- their own site, then the profiles that
+       are an identity rather than a feed of posts -- and that order matches the
+       Connect column on /java-champions/, so the map popup, the RSS feed and
+       the table cannot each pick a different "primary" link for the same
+       person.
+
+       Extracted when the feed became a third caller: the map block and the feed
+       both need exactly one URL per champion, and a champion who adds a website
+       must not move in one of them and not the other. The table keeps listing
+       every link they have -- that is a different question.
+
+       Param: a champion entry from data/java-champions.yaml. */ -}}
+{{- $url := "" -}}
+{{- range (slice .website .linkedin .github .bluesky .mastodon .twitter) -}}
+  {{- if and (not $url) . }}{{ $url = . }}{{ end -}}
+{{- end -}}
+{{- return $url -}}

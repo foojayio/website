@@ -1,0 +1,73 @@
+{{- /*
+  /java-champions/'s feed: every Java Champion, newest class first.
+
+  A `page` kind, so it needs both an `outputs:` line in
+  content/pages/java-champions.md and this template -- see
+  layouts/events/single.rss.xml for why config cannot hand a feed to one page,
+  and layouts/author/section.rss.xml for what Hugo's embedded template would do
+  instead (an empty <channel>).
+
+  WHAT IS SUBSCRIBABLE HERE IS AN ADDITION. The list itself barely changes: a
+  champion is named once and stays. So the news a reader wants is "someone new
+  was recognised", which is why:
+
+  - EVERY CHAMPION IS IN THE FEED, all 422, deliberately ignoring
+    [services.rss] limit. Frank's call, and the arithmetic backs it: capped at
+    30 the feed would be the last two intakes, and a champion added upstream
+    with an earlier year -- a backfill, which happens -- would never appear in
+    it at all. A complete list cannot miss one. It costs ~120 KB, and GitHub
+    Pages answers an unchanged poll with a 304.
+  - pubDate IS THE YEAR THEY WERE NAMED, so a reader sorting newest-first shows
+    the 2026 intake at the top and every reader agrees with the document order.
+    1 January is a convention for a year-granular fact, not a claim about the
+    day: RSS has no year-only date, and the alternative -- stamping every item
+    with the build time, as /calendar/ has to -- would put 422 identical dates
+    on facts that genuinely happened in different years. Built through
+    time.AsTime rather than printf so the weekday name is correct.
+
+  Ordering is `year` descending then name, which is the intake order and NOT the
+  table's: the page sorts A-Z because that is how you look someone up, and a feed
+  is read the other way round.
+*/ -}}
+{{- $champions := index hugo.Data "java-champions" -}}
+{{- $champions = sort (sort $champions "name") "year" "desc" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ partial "meta-description.html" . }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.Locale }}</language>
+    {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType.Type | safeHTML }}
+    {{- end }}
+    {{- range $champions }}
+    {{- /* Their own site or profile, so the item leads somewhere that is about
+           them. partials/champion-url.html makes that the same pick the map
+           popup uses; the directory page is the fallback for the handful who
+           record no link at all. */ -}}
+    {{- $link := partial "champion-url.html" . | default $.Permalink -}}
+    {{- $where := cond (ne (printf "%v" (.city | default "")) "") (printf "%s, %v" .city .country) (printf "%v" .country) -}}
+    {{- $parts := slice (printf "Java Champion since %v" .year) -}}
+    {{- with $where }}{{ $parts = $parts | append . }}{{ end -}}
+    {{- /* status is a LIST upstream (emeritus, for instance) and is on 38 of
+           422; the table shows it beside the name, so the feed says it too
+           rather than presenting a retired champion as a current one. */ -}}
+    {{- with .status }}{{ $parts = $parts | append (delimit . ", ") }}{{ end -}}
+    <item>
+      <title>{{ .name | transform.XMLEscape | safeHTML }}</title>
+      <link>{{ $link }}</link>
+      <pubDate>{{ (time.AsTime (printf "%v-01-01" .year)).Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- /* NOT the link: a champion with no profile falls back to this page's
+             URL, which several would then share. Name plus year is unique and
+             does not move when someone adds a website. */}}
+      <guid isPermaLink="false">{{ printf "%s#%v-%s" $.Permalink .year (.name | urlize) | transform.XMLEscape | safeHTML }}</guid>
+      <category>{{ .country | transform.XMLEscape | safeHTML }}</category>
+      <description>{{ delimit $parts " · " | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

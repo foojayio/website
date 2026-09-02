@@ -10,10 +10,17 @@
        "Subscribe via RSS" ghost button; that wording and this partial are now
        the same thing.
 
-       Context (.) is either the page whose feed to link, or a dict:
+       Context (.) is the page whose `rss` output format to link -- or a dict
+       with `page` set to it, which is the same thing spelled for a caller that
+       is linking a feed other than its own.
 
-         page   the page whose `rss` output format to link (required)
-         label  the visible text, default "RSS feed"
+       THE LABEL IS NOT A PARAMETER. It was, and one caller promptly said
+       "Machine Learning RSS feed" while every other said "RSS feed", so the
+       same control read as a different control on /ai/. One wording, decided
+       here, is what "the single definition of how a feed is offered" has to
+       mean -- and a per-page label is the kind of knob this repo deletes
+       (a flag always set to the same value is a chore, and this one was set to
+       a DIFFERENT value once, which is worse).
 
        Renders NOTHING when that page has no rss output, so a caller never has
        to guard -- and a page that loses its feed loses the link with it rather
@@ -27,11 +34,7 @@
        carrying the accessible name -- an icon-only feed link is the thing this
        partial exists to stop. */ -}}
 {{- $page := . -}}
-{{- $label := "RSS feed" -}}
-{{- if reflect.IsMap . -}}
-  {{- $page = .page -}}
-  {{- with .label }}{{ $label = . }}{{ end -}}
-{{- end -}}
+{{- if reflect.IsMap . }}{{ $page = .page }}{{ end -}}
 {{- with $page.OutputFormats.Get "rss" -}}
 <a class="feed-link" href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml">
   {{- /* Material's RSS mark: the dot plus two arcs, at 24x24. */ -}}
@@ -40,6 +43,6 @@
     <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56z"/>
     <path d="M4 10.1v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
   </svg>
-  <span>{{ $label }}</span>
+  <span>RSS feed</span>
 </a>
 {{- end -}}
