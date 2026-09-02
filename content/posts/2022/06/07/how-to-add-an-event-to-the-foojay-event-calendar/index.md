@@ -6,7 +6,7 @@ description: "If you want to add an event to our calendar or advertize your even
 authors:
   - "bazlur-rahman"
   - "frankdelporte"
-image: "Screen-Shot-2022-05-30-at-1.01.58-AM.png"
+image: "calendar-october-2026.png"
 categories:
   - "Events"
   - "Foojay"
@@ -27,6 +27,8 @@ You will find all the events in the following link:
 
 *Updated: foojay.io no longer runs on WordPress, so events are no longer added
 through a login. The steps below are the current ones.*
+
+![Foojay Event Calendar October 2026](calendar-october-2026.png)
 
 If you want to add an event to our calendar or advertise your event on
 Foojay.io, there are two routes, and which one you need depends on whether your
