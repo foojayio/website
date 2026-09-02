@@ -232,6 +232,86 @@ should catch a mistake at PR time rather than letting it fail silently.
   commit, and therefore deploy, on a timestamp. `--dry-run` / `--limit N` /
   `--jug <slug>` print the JSON instead of writing a file that would be missing
   every group they skipped; `--no-venues` skips the JSON-LD pass.
+- **`scripts/fetch/JvmWeekly.java`**: writes `data/jvm-weekly.yaml`, the monthly
+  Foojay roundup Artur Skowronski publishes in his JVM Weekly newsletter,
+  rendered at `/jvm-weekly/` ("Foojay Monthly Review") and linked from the News
+  menu. Runs once a day from `sync-external-content.yml` and makes **one**
+  request.
+
+  **LinkedIn is a republication, not the source.** The newsletter is announced
+  as a LinkedIn newsletter and that is where Frank found it, but LinkedIn
+  publishes no feed and serves a logged-out client a wall. Its home is Substack
+  at `www.jvm-weekly.com`, which emits an ordinary RSS feed carrying the **full
+  body** of the 20 most recent editions -- roughly five months of monthly
+  roundups, against a newsletter that has paused for seven months before now
+  (Aug 2025 - Feb 2026), so the window is not tight. Don't reach for Substack's
+  `/api/v1/` endpoints instead: they are undocumented internals and the per-post
+  one **429s after ~20 calls** (measured -- 25 consecutive fetches were
+  rate-limited), where the feed never has.
+
+  **Identifying the Foojay edition is the whole problem, and the answer belongs
+  upstream.** JVM Weekly is weekly and mostly about the wider JVM; the *first
+  edition of each month* is the Foojay roundup. Artur has already created a
+  Substack **section** for it -- "Foojay.io Community Newsletter", id `194419`,
+  "Monthly Highlights: What's Happening in the Foojay.io Community" -- and has
+  **never filed a post under it**: every edition reports `section_id: null` and
+  the section's own feed 404s. The script queries that section on every run and
+  treats it as authoritative when it is non-empty, so the moment Artur starts
+  ticking it the heuristic below retires itself -- the same self-retiring shape
+  as `fetch/JavaChampions.java` preferring an upstream `location:` over
+  geocoding. **Asking him for that one dropdown is the single highest-value
+  follow-up here.** Until then, two derived tiers:
+
+  1. **The edition's TITLE IS a Foojay article's title.** Artur leads each
+     roundup with one article and titles the edition after it, so "How to Create
+     a Spring Boot Fraud Scoring Service with Geertjan Wielenga and Zoran
+     Sevarac" is our own post's title plus a byline. That post is the main
+     article. 4 of 5.
+  2. **The edition title NAMES THE AUTHOR of a Foojay article it links.**
+     `"Diagnosing Your Leyden AOT Cache" with María Arias de Reyna Domínguez` is
+     no post's title, but María wrote the Leyden series it links. 1 of 5.
+
+  Measured over the 20 editions the feed carries: **5 roundups, all 5 found, 0
+  false positives** -- every regular edition and every monthly "The Rest of the
+  Story" wrap-up scores zero on both tiers. Three rules were tried and
+  **rejected**, so nobody re-derives them:
+
+  - *"the description mentions Foojay"* -- the wording is different every time
+    ("Best of Foojay.io", "Another Foojay editon", "Next Foojay.io edition is
+    here!") and two of the five say nothing at all.
+  - *"it links at least N Foojay articles"* -- separates, but only just: the
+    August roundup links **3** and a regular edition links **2**, one link of
+    headroom on a rule that would silently drop a month. It survives only as the
+    NEAR-MISS report, never as an inclusion rule.
+  - *"the first Foojay link is the lead"* -- wrong twice. An edition does not
+    necessarily link its own lead article **at all** ("Where Production Policy
+    Belongs: Building Eliya in Public" never links the Eliya post), and the May
+    edition's first link is background reading.
+
+  Four behaviours are load-bearing:
+  - **What is stored is a REFERENCE, not a republication.** A title, a date, a
+    link back to the edition, Artur's own subtitle, and the **slugs** of the
+    Foojay posts it covered. The summary, byline, thumbnail and read count on
+    the page are all derived at build time from our own copy of the post, so no
+    description is stored twice and a retitled article updates itself. The feed
+    is `Copyright Artur Skowronski`; republishing an edition's body would need
+    his explicit permission and is deliberately not what this does.
+  - **Posts are keyed by BUNDLE FOLDER NAME**, the key `related_posts` and
+    `partials/post-index.html` use -- not by `slug:` frontmatter, even though
+    `:slugorcontentbasename` would prefer it. No post carries a differing one
+    (checked, 0 of 2163), and keying on it here while the layout keys on the
+    folder would put a slug in the file that the page silently cannot resolve.
+  - **A linked URL is resolved through `aliases:`.** An edition links whatever
+    foojay.io served it, which is sometimes the long WordPress slug
+    (`/today/foojay-podcast-94-more-than-a-blog-.../`) rather than the bundle
+    (`foojay-podcast-94`). Without that pass those articles silently drop out.
+  - **No timestamp in the file, and it is rewritten only when the editions
+    changed** -- the `fetch/JugEvents.java` lesson: a "generated at" field moves
+    on every run, so every run would commit and therefore deploy on nothing.
+    Verified: the second run reports `already up to date`.
+
+  `--dry-run` prints the YAML instead of writing it; `--all` also reports the
+  editions it skipped.
 - **`scripts/fetch/DiscoverJugCalendars.java`**: run by hand, never in CI. Reports
   JUGs whose own website advertises a calendar their GlobalWWJugs entry doesn't
   record — 45 of the 90 have neither `calendar:` nor `meetup_slug:`, so they
@@ -1043,6 +1123,12 @@ should catch a mistake at PR time rather than letting it fail silently.
   Rendered at `/jugs/` (`content/pages/java-user-groups-jugs.md`, `type:
   "jugs"` → `themes/foojay/layouts/jugs/single.html`), including the shared
   clustered world map — see "the world map" below.
+- **`data/jvm-weekly.yaml`**: auto-generated by `scripts/fetch/JvmWeekly.java` --
+  see above. Never hand-edit it. Rendered at `/jvm-weekly/`
+  (`content/pages/jvm-weekly.md`, `type: "jvm-weekly"` ->
+  `themes/foojay/layouts/jvm-weekly/single.html`), and read through
+  `index hugo.Data "jvm-weekly"` -- a dash cannot be a field selector, same as
+  `jug-events`.
 - **`data/views.json`**: auto-generated by `scripts/fetch/ViewCounts.java` —
   `slug -> total reads`, the numbers rendered on posts and cards. Never
   hand-edit it. Seeded from `data/legacy-views.json` so the counts are live on

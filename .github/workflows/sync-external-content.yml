@@ -1,9 +1,11 @@
 name: Sync external content
 
-# The three lists that come from OTHER people's repositories and sites: the
-# World Wide JUGs directory, the Java Champions list, and the JUG event feeds.
-# All three move slowly -- a JUG is added, a Champion edits their entry, an
-# event is announced days or weeks ahead -- so this runs once a day.
+# The four lists that come from OTHER people's repositories and sites: the
+# World Wide JUGs directory, the Java Champions list, the JUG event feeds, and
+# the monthly Foojay roundup in Artur Skowronski's JVM Weekly newsletter.
+# All four move slowly -- a JUG is added, a Champion edits their entry, an
+# event is announced days or weeks ahead, a roundup is published once a month
+# -- so this runs once a day.
 #
 # View counts are the opposite (they move continuously, from our own Worker)
 # and live in sync-view-counts.yml on a six-hourly schedule.
@@ -86,6 +88,14 @@ jobs:
       - name: Fetch JUG events
         run: jbang scripts/fetch/JugEvents.java
 
+      # ONE public request: the JVM Weekly RSS feed. Artur publishes a Foojay
+      # roundup as the first edition of each month, so this changes monthly at
+      # most -- it rides the daily sync rather than earning a workflow, and the
+      # script rewrites data/jvm-weekly.yaml only when an edition actually
+      # changed. Needs no credential; see the script.
+      - name: Fetch the JVM Weekly Foojay roundups
+        run: jbang scripts/fetch/JvmWeekly.java
+
       - name: Commit updated data
         env:
           GH_TOKEN: ${{ github.token }}
@@ -95,11 +105,11 @@ jobs:
           # data/geocode-cache.yaml is committed for the same reason the data
           # files are: it is the only copy, and it is what keeps the champions
           # geocoding down to zero requests on a normal run.
-          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/jug-events.json
+          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/jug-events.json data/jvm-weekly.yaml
           if git diff --cached --quiet; then
-            echo "No JUG list, Java Champions or event changes."
+            echo "No JUG list, Java Champions, event or JVM Weekly changes."
           else
-            git commit -m "chore: sync JUG list + Java Champions + JUG events [skip ci]"
+            git commit -m "chore: sync JUG list + Java Champions + JUG events + JVM Weekly [skip ci]"
             # PUSH WITH RETRY, because pull-then-push has a window and main has
             # THREE writers, not two: this workflow, the other sync, and
             # build-deploy.yml's own data commit. The `data-sync` concurrency

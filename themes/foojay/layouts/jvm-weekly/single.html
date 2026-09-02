@@ -1,0 +1,131 @@
+{{ define "main" }}
+{{/* /jvm-weekly/ -- the monthly Foojay roundup in Artur Skowronski's JVM Weekly
+     newsletter, from data/jvm-weekly.yaml (scripts/fetch/JvmWeekly.java, synced
+     daily).
+
+     WHAT IS STORED IS A REFERENCE AND WHAT IS SHOWN IS DERIVED. The data file
+     holds an edition's date, title, volume, link and subtitle -- Artur's own
+     words about his own newsletter -- plus the SLUGS of the Foojay posts it
+     covered. Everything a reader sees about those posts (summary, byline,
+     thumbnail, read count) is resolved from our own copy here, so no
+     description is stored twice and an article that is retitled or gains a hero
+     image updates on the next build with nothing to re-sync. It is also why
+     this page republishes nothing of Artur's beyond what his feed publishes.
+
+     `main` is the article the edition led with and `articles` the rest, already
+     de-duplicated by the script -- so the lead is never listed twice.
+
+     A slug that no longer resolves renders NOTHING rather than a dead link:
+     posts get renamed, and the data file is refreshed on a schedule rather than
+     on our edits, so the two can be briefly out of step. The edition itself
+     still renders -- the link to Artur's newsletter is the part that must
+     always work. */}}
+
+{{ $editions := index hugo.Data "jvm-weekly" }}
+{{ $index := partialCached "post-index.html" "posts" }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <span class="eyebrow"><a href="{{ "today/" | relURL }}">News</a></span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    <div class="page-head__meta">
+      <p>
+        {{ len $editions }} edition{{ if ne (len $editions) 1 }}s{{ end }}, written by
+        {{/* The profile is the site's own page about Artur; the newsletter is
+             his. Both are offered, because a reader here wants one or the
+             other and neither substitutes for the other. */}}
+        <a href="{{ "today/author/artur-skowronski/" | relURL }}">Artur Skowronski</a>.
+      </p>
+      {{ with partial "views.html" . }}{{ . | safeHTML }}{{ end }}
+    </div>
+  </div>
+</div>
+
+<div class="content-col full-width">
+  {{ range $editions }}
+  {{ $main := index $index .main }}
+  <article class="review-edition">
+
+    <header class="review-edition__head">
+      <time datetime="{{ .date }}">{{ (time .date).Format "2 January 2006" }}</time>
+      {{ with .volume }}<span class="review-edition__vol">JVM Weekly vol. {{ . }}</span>{{ end }}
+    </header>
+
+    {{/* The edition title links OUT, and opens in a new tab. Same rule the feed
+         links follow (partials/feed-link.html): the destination is not a page
+         of this site, and a reader part-way down a list of editions should not
+         lose their place to a click. */}}
+    <h2 class="review-edition__title">
+      <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+    </h2>
+    {{ with .subtitle }}<p class="review-edition__subtitle">{{ . }}</p>{{ end }}
+
+    {{ with $main }}
+    <div class="review-main">
+      {{/* A DIV, not a link: post-thumb.html emits its own <a class="post-card-image">
+           (already tabindex="-1" aria-hidden), and wrapping that in a second
+           anchor is nested-anchor markup no browser parses as written. This
+           only supplies the column width. */}}
+      <div class="review-main__thumb">
+        {{ partial "post-thumb.html" (dict "page" .) }}
+      </div>
+      <div class="review-main__body">
+        <p class="review-main__label">The article this edition led with</p>
+        <h3 class="review-main__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="review-main__meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          {{ partial "byline.html" . }}
+          {{ partial "views.html" . }}
+        </div>
+        {{/* The post's OWN description -- the same string that is its meta
+             description and its card summary, so this page cannot describe an
+             article differently from everywhere else on the site. */}}
+        {{ with .Description }}<p class="review-main__summary">{{ . }}</p>{{ end }}
+        <p class="review-main__read"><a href="{{ .RelPermalink }}">Read it on Foojay</a></p>
+      </div>
+    </div>
+    {{ end }}
+
+    {{ with .articles }}
+    {{ $also := slice }}
+    {{ range . }}{{ with index $index . }}{{ $also = $also | append . }}{{ end }}{{ end }}
+    {{ with $also }}
+    <div class="review-also">
+      <h4 class="review-also__label">Also covered in this edition</h4>
+      <ul class="review-also__list">
+        {{ range . }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="review-also__by">{{ partial "byline.html" (dict "page" . "maxNames" 2) }}</span>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <p class="review-edition__out">
+      <a href="{{ .url }}" target="_blank" rel="noopener">Read the full edition on JVM Weekly</a>
+    </p>
+  </article>
+  {{ end }}
+
+  {{ if not $editions }}
+  {{/* Not an error state worth hiding: JVM Weekly has paused before (seven
+       months, Aug 2025 to Feb 2026), and an empty page that says why is better
+       than a page that looks broken. */}}
+  <p class="review-empty">No editions are listed yet. JVM Weekly publishes at
+    <a href="https://www.jvm-weekly.com/" target="_blank" rel="noopener">jvm-weekly.com</a>.</p>
+  {{ end }}
+
+  <p class="review-source">
+    Editions are collected automatically from
+    <a href="https://www.jvm-weekly.com/" target="_blank" rel="noopener">JVM Weekly</a>'s
+    public feed. The newsletter is written and owned by Artur Skowronski; the
+    summaries above are Foojay's own descriptions of the linked articles.
+  </p>
+
+  {{ partial "page-source.html" . }}
+</div>
+{{ end }}

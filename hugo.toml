@@ -278,10 +278,18 @@ enableGitInfo = true
     desc = "AI Newsletter curated by Miro Wengner"
 
 [[menu.main]]
+  name = "Foojay Monthly Review"
+  parent = "News"
+  url = "/jvm-weekly/"
+  weight = 15
+  [menu.main.params]
+    desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
+
+[[menu.main]]
   name = "Foojay.io AI Portal"
   parent = "News"
   url = "/ai/"
-  weight = 15
+  weight = 16
   [menu.main.params]
     desc = "Java and AI: guides, tutorials and machine learning on the JVM"
 
@@ -289,7 +297,7 @@ enableGitInfo = true
   name = "All Categories"
   parent = "News"
   url = "/today/category/"
-  weight = 16
+  weight = 17
   [menu.main.params]
     desc = "Every topic the community writes about, A-Z"
 

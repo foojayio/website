@@ -30,8 +30,18 @@ write are **generated — never hand-edit them**; fix the entry upstream.
 | `JavaChampions.java` | `data/java-champions.yaml`, `data/geocode-cache.yaml` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions), plus [geocode.maps.co](https://geocode.maps.co) for the map coordinates |
 | `JugEvents.java` | `data/jug-events.json` | the iCal feed each JUG publishes (its own site, Google Calendar, Meetup) |
 | `ViewCounts.java` | `data/views.json` | our own read counter (`worker/views/`) |
+| `JvmWeekly.java` | `data/jvm-weekly.yaml` | the public RSS feed of [JVM Weekly](https://www.jvm-weekly.com/), for the monthly Foojay roundup shown at `/jvm-weekly/` |
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
 | `PodcastTranscripts.java` | `transcript.md` in each podcast episode's bundle | the automatic captions on foojay's own YouTube channel, via `yt-dlp` |
+
+`JvmWeekly.java` makes **one** request per run — Artur Skowronski's newsletter
+feed — and keeps only the editions that are the monthly Foojay roundup. Which
+edition that is has no upstream marker today (he has a Substack section for it
+but has never filed a post under it), so it is derived: the edition's title is
+the lead Foojay article's title, or failing that names that article's author.
+`--dry-run` prints the YAML, `--all` reports the editions it skipped. Anything
+that looks like a roundup but resolves no main article is **reported, never
+guessed at** — see the script header for the rules that were tried and rejected.
 
 `DiscoverJugCalendars.java` is run **by hand, never in CI** — it exists to
 produce an upstream pull request, not to change anything here.
