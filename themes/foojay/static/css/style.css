@@ -1915,7 +1915,21 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 /* Long-form body copy */
-.prose { font-size: 1.09rem; }
+
+/* A LONG UNBREAKABLE TOKEN IN AN ARTICLE BODY HAS TO BREAK, because the body
+   is 2000 imported WordPress posts and what is in them is not ours to choose.
+   `.layout-with-sidebar` is `minmax(0, 1fr) 330px`, so an over-wide word does
+   not stretch the column -- it spills out of it and runs UNDER the sidebar,
+   which is what a 220-character query string did on
+   /today/mongodb-search-server-improved/ (a URL in bold, no spaces to break
+   at). `overflow-wrap` inherits, so this one declaration also covers a long
+   token inside `<code>`, a table cell or a list item; `<pre>` is unaffected,
+   since `white-space: pre` forbids wrapping outright and those scroll
+   sideways in their own box instead. `break-word` rather than `anywhere`:
+   both break only a word that cannot fit on a line of its own, but `anywhere`
+   also feeds the break back into min-content sizing, which would let a table
+   or a flex item quietly reflow around a URL. */
+.prose { font-size: 1.09rem; overflow-wrap: break-word; }
 
 /* A LINK IN RUNNING TEXT IS UNDERLINED, and this is not a style preference.
    `a { text-decoration: none }` up in the base leaves colour as the only thing
