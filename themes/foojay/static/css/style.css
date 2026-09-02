@@ -949,8 +949,16 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   font-family: var(--font-display); font-weight: 700;
   font-size: .95rem; line-height: 1.3; color: var(--ink);
 }
+/* A flex row with a gap, like .event-strip__meta and .post-card-meta -- the
+   site's other meta lines -- rather than relying on template whitespace for the
+   space between the date and the byline. That is also what makes the
+   __by wrapper load-bearing: a flex container makes EVERY child its own item,
+   so without it "by" and the author's name would be two items with the gap
+   applied between them, rendering "by  Frank Delporte". Same reason
+   byline.html wraps its own output in .byline-group. */
 .coming-soon-side__meta {
   margin: .15rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0 .4rem;
   font-size: .82rem; color: var(--ink-muted); line-height: 1.4;
 }
 .coming-soon-side__meta time { font-weight: 600; color: var(--ink-soft); }

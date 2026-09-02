@@ -3050,14 +3050,30 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   1. **`partials/coming-soon.html` reads the pending posts OFF DISK**, because
      Hugo deliberately cannot see them -- no template can `range` for a page
-     that was never built. It is the home page's "Coming soon" band, the one
-     WordPress carries. `os.ReadDir` over the current month and the next three,
-     day folders from today onwards only, then `partials/frontmatter.html` on
-     the handful of files that can possibly be pending: ~4 directory listings
-     per build, not a walk of 2163 posts. Titles are PLAIN TEXT, not links --
-     the page does not exist yet, and a "coming soon" whose title 404s is worse
-     than no teaser. Renders nothing when nothing is queued, like the podcast
-     and events bands.
+     that was never built. It is the "Coming soon" widget in the HOME PAGE
+     ASIDE, between the sponsors and the categories -- the section WordPress
+     carries on its home page. `os.ReadDir` over the current month and the next
+     three, day folders from today onwards only, then
+     `partials/frontmatter.html` on the handful of files that can possibly be
+     pending: ~4 directory listings per build, not a walk of 2163 posts. Titles
+     are PLAIN TEXT, not links -- the page does not exist yet, and a "coming
+     soon" whose title 404s is worse than no teaser. Renders nothing when
+     nothing is queued, like the podcast and events bands.
+
+     **It was a full-width band under the article grid first**, and that was too
+     much furniture for a queue that is usually one or two items: an
+     empty-looking band on a wide screen, a whole screen-height section on a
+     phone. In the aside it costs the article stream no vertical space and one
+     or five items look equally at home.
+
+     **`.IsHome` is checked in `sidebar.html`, not in the partial** -- the same
+     place `featured-authors-widget.html` is gated, and here it also bounds the
+     cost: the aside renders on all 4200 pages, so an ungated call would turn
+     four directory listings into four thousand. Reach for `partialCached` if it
+     is ever wanted site-wide; the result does not depend on the page. And note
+     `.sidebar li a` is (0,1,2) and makes every link in a widget list a padded
+     BLOCK, which drops the byline onto its own line -- the meta line's override
+     has to outrank it.
 
      **`buildFuture = true` was the alternative and is the trap.** It would put
      the pages back in reach of an ordinary `range`, at the price of a
