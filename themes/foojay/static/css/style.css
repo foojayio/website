@@ -666,35 +666,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .event-strip__where { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .event-strip__time { font-variant-numeric: tabular-nums; }
 
-/* ---------------------------------------------------- home: coming soon -- */
-/* The scheduled-but-unpublished queue (partials/coming-soon.html).
-
-   ROWS, NOT CARDS. A card implies something to click and these titles are
-   deliberately not links -- the page does not exist yet. Rows also read the
-   same at any length, where a grid of one card is a full-width slab and the
-   queue is usually one or two items. */
-.coming-soon__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
-.coming-soon__item {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem;
-  padding: .8rem 1rem; border-radius: var(--radius);
-  /* Sunken on a plain band, matching .event-strip__item -- see the note there
-     for why this band is not itself sunken. */
-  background: var(--surface-sunken); border: 1px solid var(--border);
-  /* Dashed, and the one place on the site that is: it is the visual difference
-     between "here is an article" and "there will be one". */
-  border-left: 3px dashed var(--brand-accent);
-}
-.coming-soon__title {
-  margin: 0; flex: 1 1 18rem; min-width: 0;
-  font-family: var(--font-display); font-weight: 700; font-size: 1.02rem;
-  line-height: 1.35; color: var(--ink);
-}
-.coming-soon__meta {
-  margin: 0; display: flex; flex-wrap: wrap; gap: .2rem .5rem;
-  font-size: .86rem; color: var(--ink-muted); line-height: 1.4;
-}
-.coming-soon__meta time { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink-soft); }
-
 /* ------------------------------------------------------------ post grid -- */
 
 .post-grid {
@@ -958,6 +929,36 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .sponsor-side--gold   .sponsor-logo--side { width: 62px; height: 62px; }
 .sponsor-side--silver .sponsor-logo--side { width: 50px; height: 50px; }
 .sponsor-side--bronze .sponsor-logo--side { width: 42px; height: 42px; }
+
+/* Sidebar "Coming soon" widget (partials/coming-soon.html) -- the posts that
+   are written and scheduled but not published yet. Home page only, and it
+   renders nothing when the queue is empty, so on most days the aside is exactly
+   what it was.
+
+   Rows of plain text rather than the link list every other widget here is,
+   because the titles deliberately are NOT links: the page does not exist yet. */
+.coming-soon-side { display: grid; gap: .7rem; }
+.coming-soon-side__item {
+  padding-left: .7rem;
+  /* Dashed, and the only dashed rule on the site: it is the visual difference
+     between "here is an article" and "there will be one". */
+  border-left: 2px dashed var(--brand-accent);
+}
+.coming-soon-side__title {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: .95rem; line-height: 1.3; color: var(--ink);
+}
+.coming-soon-side__meta {
+  margin: .15rem 0 0;
+  font-size: .82rem; color: var(--ink-muted); line-height: 1.4;
+}
+.coming-soon-side__meta time { font-weight: 600; color: var(--ink-soft); }
+/* `.sidebar li a` is (0,1,2) and turns every link inside a widget list into a
+   PADDED BLOCK -- so the author link dropped onto its own line and spaced
+   itself out like a nav item. Restated at (0,2,1) so the meta line stays one
+   sentence. Colour and hover are deliberately left to that rule. */
+.sidebar .coming-soon-side__meta a { display: inline; padding: 0; font-size: inherit; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */
@@ -3625,7 +3626,10 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   border-radius: 14px;
   object-fit: contain;
 }
+/* Stays a ROW on a phone rather than stacking, which is what it did first: the
+   mark belongs beside the title, and above it the page opened with a lone logo
+   and pushed the heading down the fold. It only gets smaller. */
 @media (max-width: 40rem) {
-  .jvmw-head { flex-direction: column; gap: .9rem; }
-  .jvmw-head__logo { width: 64px; height: 64px; }
+  .jvmw-head { gap: .85rem; }
+  .jvmw-head__logo { width: 56px; height: 56px; padding: .4rem; border-radius: 10px; }
 }
