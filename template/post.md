@@ -142,7 +142,7 @@ $ ./gradlew build
 
 ### Images
 
-Put the image file in THIS folder, then reference it by filename:
+Put the image file in THIS folder where your content lives, then reference it by filename:
 
 ![Describe the image for accessibility](my-image.png)
 
