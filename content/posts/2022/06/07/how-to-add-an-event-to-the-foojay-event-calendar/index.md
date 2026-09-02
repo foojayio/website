@@ -2,9 +2,10 @@
 title: "How to Add an Event to the Foojay Event Calendar"
 date: "2022-06-07T09:34:47+00:00"
 lastmod: "2022-06-07T09:39:02+00:00"
-description: "If you want to add an event to our calendar or advertize your event on Foojay.io, you can follow the following steps! "
+description: "If you want to add an event to our calendar or advertize your event on Foojay.io, you can follow the following steps!"
 authors:
   - "bazlur-rahman"
+  - "frankdelporte"
 image: "Screen-Shot-2022-05-30-at-1.01.58-AM.png"
 categories:
   - "Events"
@@ -16,11 +17,9 @@ related_posts:
 frozen: true
 ---
 
-Foojay.io, the place for **f** riends of **O** pen**J**DK, is a friendly community of users of the OpenJDK, such as Java developers and Kotlin developers.
+Foojay.io, the place for **F**riends **O**f **O**pen**J**DK, is a friendly community of users of the OpenJDK, such as Java developers and Kotlin developers. It is a collaborative community with tips and insights being shared on a daily basis on [Foojay Today](https://foojay.io/today/).
 
-It is a collaborative community with tips and insights being shared on a daily basis on [Foojay Today](https://foojay.io/today/).
-
-At Foojay, we maintain a list of past and upcoming Java events. It helps the worldwide OpenJDK community find events and participate in them easily.
+At Foojay, we maintain a list of upcoming Java-related events. It helps the worldwide OpenJDK community find events and participate in them easily.
 
 You will find all the events in the following link:
 
@@ -43,7 +42,7 @@ to be kept in step.
 All that is needed is that your JUG is listed in the community-run
 [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs),
 with a `calendar:` or `meetup_slug:` entry. That list is maintained by the JUG
-leads themselves, and foojay reads it once a day.
+leads themselves, and Foojay reads it once a day.
 
 ## A conference, workshop or one-off — one small file
 
