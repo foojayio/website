@@ -34,7 +34,7 @@ If you want to add an event to our calendar or advertise your event on
 Foojay.io, there are two routes, and which one you need depends on whether your
 event already publishes a calendar feed.
 
-## A JUG meetup — nothing to do
+## A JUG meetup: Fully automated!
 
 If you run a Java User Group, foojay picks your meetups up **automatically** from
 the calendar your group already publishes: your own site's iCal feed, a Google
@@ -46,7 +46,7 @@ All that is needed is that your JUG is listed in the community-run
 with a `calendar:` or `meetup_slug:` entry. That list is maintained by the JUG
 leads themselves, and Foojay reads it once a day.
 
-## A conference, workshop or one-off — one small file
+## A conference, workshop,...: One small file
 
 A conference publishes no feed anyone can subscribe to, so those are added by
 hand — as a pull request against the site, which is also how articles are
