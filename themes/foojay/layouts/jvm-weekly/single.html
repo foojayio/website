@@ -56,7 +56,11 @@
 
 <div class="content-col full-width">
   {{ range $editions }}
-  {{ $main := index $index .main }}
+  {{/* `with`, not a bare index: nine editions have no `main` at all (the flat
+       2024 roundups, and the two whose lead was a guest post never published
+       here), and `index` on a nil key is a build ERROR, not an empty value. */}}
+  {{ $main := "" }}
+  {{ with .main }}{{ $main = index $index . }}{{ end }}
   <article class="review-edition">
 
     <header class="review-edition__head">

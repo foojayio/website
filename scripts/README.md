@@ -34,14 +34,21 @@ write are **generated — never hand-edit them**; fix the entry upstream.
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
 | `PodcastTranscripts.java` | `transcript.md` in each podcast episode's bundle | the automatic captions on foojay's own YouTube channel, via `yt-dlp` |
 
-`JvmWeekly.java` makes **one** request per run — Artur Skowronski's newsletter
-feed — and keeps only the editions that are the monthly Foojay roundup. Which
-edition that is has no upstream marker today (he has a Substack section for it
-but has never filed a post under it), so it is derived: the edition's title is
-the lead Foojay article's title, or failing that names that article's author.
-`--dry-run` prints the YAML, `--all` reports the editions it skipped. Anything
-that looks like a roundup but resolves no main article is **reported, never
-guessed at** — see the script header for the rules that were tried and rejected.
+`JvmWeekly.java` keeps only the editions that are the monthly Foojay roundup —
+24 of the archive's 197. It reads the archive listing (titles, ~5 requests) plus
+the RSS feed (bodies, but only for the newest 20), and fetches an individual
+edition's body **only when it is both a candidate and not already known**:
+`data/jvm-weekly.yaml` doubles as the cache, so a warm run makes a handful of
+requests and a cold rebuild about 24, paced — that endpoint rate-limits.
+
+Which edition is a roundup has no upstream marker today (Artur has a Substack
+section for it but has never filed a post under it), so it is derived in two
+steps: the title looks like one (`"<Article>" with <Foojay author>`, or `Best of
+Foojay.io <Month> Edition`) **and** the body links at least one Foojay article.
+Neither is sufficient alone — see the script header for the rules that were
+tried and rejected, and for the archive paging bug that made 27 editions look
+like a seven-month pause in the newsletter. `--dry-run` prints the YAML, `--all`
+reports what was skipped and dropped, `--refetch` ignores the cache.
 
 `DiscoverJugCalendars.java` is run **by hand, never in CI** — it exists to
 produce an upstream pull request, not to change anything here.
