@@ -937,7 +937,11 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
    Rows of plain text rather than the link list every other widget here is,
    because the titles deliberately are NOT links: the page does not exist yet. */
-.coming-soon-side { display: grid; gap: .7rem; }
+/* A full row of gap, not the .1rem the link-list widgets use: an item here is
+   two lines (title + meta), so at a tight gap the second title crowds the first
+   item's date and the two dashed rules read as one continuous list rather than
+   two entries. */
+.coming-soon-side { display: grid; gap: 1rem; }
 .coming-soon-side__item {
   padding-left: .7rem;
   /* Dashed, and the only dashed rule on the site: it is the visual difference

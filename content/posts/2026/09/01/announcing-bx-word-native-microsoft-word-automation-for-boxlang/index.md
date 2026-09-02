@@ -20,9 +20,9 @@ related_posts:
 frozen: false
 ---
 
-Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements of work. Legal memos. Today, we are incredibly proud to announce **bx-word 1.0.0**, a first-class, fluent, production-ready module for creating, populating, and transforming Microsoft Word documents natively in BoxLang. This is not a wrapper. This is not a converter. This is a real document builder designed for the way enterprise teams actually work.
-
 ![](bx-word-1-700x373.jpg)
+
+Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements of work. Legal memos. Today, we are incredibly proud to announce **bx-word 1.0.0**, a first-class, fluent, production-ready module for creating, populating, and transforming Microsoft Word documents natively in BoxLang. This is not a wrapper. This is not a converter. This is a real document builder designed for the way enterprise teams actually work.
 
 ## Why This Matters for the Enterprise
 

@@ -1,7 +1,7 @@
 ---
 title: "Aggregation Optimization in MongoDB: Data Duplication to Improve Read Performance (Part 4)"
 date: "2026-08-31T14:45:04+00:00"
-lastmod: "2026-08-31T14:45:05+00:00"
+lastmod: "2026-09-02T09:27:15+00:00"
 description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice…"
 authors:
   - "graeme-robinson"
