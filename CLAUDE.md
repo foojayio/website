@@ -232,86 +232,101 @@ should catch a mistake at PR time rather than letting it fail silently.
   commit, and therefore deploy, on a timestamp. `--dry-run` / `--limit N` /
   `--jug <slug>` print the JSON instead of writing a file that would be missing
   every group they skipped; `--no-venues` skips the JSON-LD pass.
-- **`scripts/fetch/JvmWeekly.java`**: writes `data/jvm-weekly.yaml`, the monthly
-  Foojay roundup Artur Skowronski publishes in his JVM Weekly newsletter,
+- **`scripts/fetch/JvmWeekly.java`**: writes `data/jvm-weekly.yaml`, every
+  edition of Artur Skowronski's JVM Weekly newsletter that is a Foojay roundup,
   rendered at `/jvm-weekly/` ("Foojay Monthly Review") and linked from the News
-  menu. Runs once a day from `sync-external-content.yml` and makes **one**
-  request.
+  menu. Runs once a day from `sync-external-content.yml`.
 
-  **LinkedIn is a republication, not the source.** The newsletter is announced
-  as a LinkedIn newsletter and that is where Frank found it, but LinkedIn
-  publishes no feed and serves a logged-out client a wall. Its home is Substack
-  at `www.jvm-weekly.com`, which emits an ordinary RSS feed carrying the **full
-  body** of the 20 most recent editions -- roughly five months of monthly
-  roundups, against a newsletter that has paused for seven months before now
-  (Aug 2025 - Feb 2026), so the window is not tight. Don't reach for Substack's
-  `/api/v1/` endpoints instead: they are undocumented internals and the per-post
-  one **429s after ~20 calls** (measured -- 25 consecutive fetches were
-  rate-limited), where the feed never has.
+  **LinkedIn is a republication, not the source.** Frank found it as a LinkedIn
+  newsletter, but LinkedIn publishes no feed and serves a logged-out client a
+  wall. Its home is Substack at `www.jvm-weekly.com`.
 
-  **Identifying the Foojay edition is the whole problem, and the answer belongs
-  upstream.** JVM Weekly is weekly and mostly about the wider JVM; the *first
-  edition of each month* is the Foojay roundup. Artur has already created a
-  Substack **section** for it -- "Foojay.io Community Newsletter", id `194419`,
-  "Monthly Highlights: What's Happening in the Foojay.io Community" -- and has
-  **never filed a post under it**: every edition reports `section_id: null` and
-  the section's own feed 404s. The script queries that section on every run and
-  treats it as authoritative when it is non-empty, so the moment Artur starts
-  ticking it the heuristic below retires itself -- the same self-retiring shape
-  as `fetch/JavaChampions.java` preferring an upstream `location:` over
-  geocoding. **Asking him for that one dropdown is the single highest-value
-  follow-up here.** Until then, two derived tiers:
+  **TWO SOURCES, BECAUSE THE FEED IS A WINDOW -- and getting this wrong shipped
+  5 roundups out of 24.** The RSS feed carries the full body of the **20 most
+  recent** editions, which reaches five roundups. The archive holds **197**
+  editions back to April 2022, **24** of them roundups. So the archive LISTING
+  (`/api/v1/archive`) supplies title/date/subtitle/URL for every edition, and
+  the feed supplies bodies for the newest 20.
 
-  1. **The edition's TITLE IS a Foojay article's title.** Artur leads each
-     roundup with one article and titles the edition after it, so "How to Create
-     a Spring Boot Fraud Scoring Service with Geertjan Wielenga and Zoran
-     Sevarac" is our own post's title plus a byline. That post is the main
-     article. 4 of 5.
-  2. **The edition title NAMES THE AUTHOR of a Foojay article it links.**
-     `"Diagnosing Your Leyden AOT Cache" with María Arias de Reyna Domínguez` is
-     no post's title, but María wrote the Leyden series it links. 1 of 5.
+  **A body is fetched only when it is both needed and unknown**, because the
+  per-post endpoint 429s under load (measured -- 25 consecutive fetches were
+  rate-limited). `data/jvm-weekly.yaml` **is the cache**: an edition already in
+  it keeps its stored articles and is never re-fetched, exactly as
+  `data/geocode-cache.yaml` stops `fetch/JavaChampions.java` re-geocoding. A
+  warm run makes ~5 listing/feed requests plus a handful; a cold rebuild ~24,
+  paced at 1.7s. Deleting an entry is the documented way to re-read it.
 
-  Measured over the 20 editions the feed carries: **5 roundups, all 5 found, 0
-  false positives** -- every regular edition and every monthly "The Rest of the
-  Story" wrap-up scores zero on both tiers. Three rules were tried and
-  **rejected**, so nobody re-derives them:
+  **ARCHIVE PAGING: ADVANCE BY WHAT THE PAGE RETURNED, NEVER BY THE REQUESTED
+  LIMIT.** Substack answers `offset=0` with **23** rows for `limit=50`, then 50
+  rows for every later offset -- so stepping by 50 requests 0, 50, 100 and never
+  asks for rows 23-49. That silently swallowed **27 consecutive editions**,
+  which looked exactly like a seven-month pause in the newsletter (2025-08 to
+  2026-02) and **was written into this file as one**. There was no pause.
+  `offset=23` returns them. Don't infer a gap in a publication from a gap in
+  what a paged API handed back.
 
-  - *"the description mentions Foojay"* -- the wording is different every time
-    ("Best of Foojay.io", "Another Foojay editon", "Next Foojay.io edition is
-    here!") and two of the five say nothing at all.
-  - *"it links at least N Foojay articles"* -- separates, but only just: the
-    August roundup links **3** and a regular edition links **2**, one link of
-    headroom on a rule that would silently drop a month. It survives only as the
-    NEAR-MISS report, never as an inclusion rule.
-  - *"the first Foojay link is the lead"* -- wrong twice. An edition does not
-    necessarily link its own lead article **at all** ("Where Production Policy
-    Belongs: Building Eliya in Public" never links the Eliya post), and the May
-    edition's first link is background reading.
+  **Identifying a roundup, and why the answer belongs upstream.** The FIRST
+  edition of each month is the Foojay roundup. Artur has already created a
+  Substack **section** for exactly this -- "Foojay.io Community Newsletter", id
+  `194419` -- and has **never filed a post under it**: every edition reports
+  `section_id: null` and the section's own feed 404s. The script queries it on
+  every run and takes it as authoritative when non-empty, so the moment he ticks
+  it the heuristic retires itself -- the same self-retiring shape as
+  `fetch/JavaChampions.java` preferring an upstream `location:` over geocoding.
+  **Asking him for that one dropdown is the highest-value follow-up here.**
+  Until then, two steps, and **neither is sufficient alone**:
 
-  Four behaviours are load-bearing:
-  - **What is stored is a REFERENCE, not a republication.** A title, a date, a
-    link back to the edition, Artur's own subtitle, and the **slugs** of the
-    Foojay posts it covered. The summary, byline, thumbnail and read count on
-    the page are all derived at build time from our own copy of the post, so no
-    description is stored twice and a retitled article updates itself. The feed
-    is `Copyright Artur Skowronski`; republishing an edition's body would need
-    his explicit permission and is deliberately not what this does.
+  1. **A candidate, from the title alone** (so it costs no request). Artur
+     titles these to a formula: `"<Article Title>" with <Author Name>` where the
+     author is a Foojay author (17 editions), or `Best of Foojay.io <Month>
+     Edition` (the 2024 series, 7).
+  2. **Confirmation: the body must link at least one Foojay article.** Form (1)
+     also fires on four *old* editions that are not roundups -- a 2023 edition
+     sharing three words with "2023 in retrospective", and similar -- and every
+     one of those links **zero** Foojay articles, where all 24 real roundups
+     link 3 to 9.
+
+  **The main article is resolved in two tiers, and the fallback that was there
+  first had to be removed for inventing leads.** Tier 1 scores the edition title
+  against every post at 80%. Tier 2 uses the author the title names to narrow
+  the field to that person's posts, then scores **in both directions** at 60% --
+  Artur quotes the article's headline, which is often shorter than ours ("Stream
+  Gatherers" for our "Introduction to Intermediate Operations Modeler: Stream
+  Gatherers"), so one-directional scoring drops exactly the editions whose
+  headline he trimmed. The removed fallback was "the first linked post by that
+  author": it credited the October 2025 edition to Miro Wengner's
+  design-patterns article when the edition is titled after his energy-consumption
+  research, purely because that one was linked first.
+
+  **Nine of the 24 get NO main article, and that is the right answer for all
+  nine** -- the seven 2024 "Best of Foojay.io" editions are flat roundups with
+  nothing leading, and two lead with a guest post written *for the newsletter*
+  and never published on Foojay ("Diagnosing Your Leyden AOT Cache", "Buzzers
+  Over Blocking"). The layout renders their articles and no lead, and says
+  "Foojay articles in this edition" rather than "Also covered".
+
+  Rules tried and **rejected**, so nobody re-derives them: *"the description
+  mentions Foojay"* (the wording differs every time and several say nothing);
+  *"it links at least N Foojay articles"* as an inclusion rule (the August 2026
+  roundup links 3 and an ordinary edition links 2 -- one link of headroom, so it
+  is only ever used to confirm a title candidate); and *"the first Foojay link
+  is the lead"* (an edition does not necessarily link its lead article at all).
+
+  Two more behaviours are load-bearing:
+  - **What is stored is a REFERENCE, not a republication** -- a title, a date, a
+    link back, Artur's own subtitle, and the **slugs** of the Foojay posts
+    covered. Summary, byline, thumbnail and read count are all derived at build
+    time from our own copy of the post. The feed is `Copyright Artur
+    Skowronski`; republishing an edition's body would need his permission and is
+    deliberately not what this does.
   - **Posts are keyed by BUNDLE FOLDER NAME**, the key `related_posts` and
-    `partials/post-index.html` use -- not by `slug:` frontmatter, even though
-    `:slugorcontentbasename` would prefer it. No post carries a differing one
-    (checked, 0 of 2163), and keying on it here while the layout keys on the
-    folder would put a slug in the file that the page silently cannot resolve.
-  - **A linked URL is resolved through `aliases:`.** An edition links whatever
-    foojay.io served it, which is sometimes the long WordPress slug
-    (`/today/foojay-podcast-94-more-than-a-blog-.../`) rather than the bundle
-    (`foojay-podcast-94`). Without that pass those articles silently drop out.
-  - **No timestamp in the file, and it is rewritten only when the editions
-    changed** -- the `fetch/JugEvents.java` lesson: a "generated at" field moves
-    on every run, so every run would commit and therefore deploy on nothing.
-    Verified: the second run reports `already up to date`.
+    `partials/post-index.html` use, and a linked URL is resolved through
+    `aliases:` -- an edition links whatever foojay.io served it, sometimes the
+    long WordPress slug (`/today/foojay-podcast-94-more-than-a-blog-.../`).
 
-  `--dry-run` prints the YAML instead of writing it; `--all` also reports the
-  editions it skipped.
+  `--dry-run` prints the YAML, `--all` reports what it skipped and dropped,
+  `--refetch` ignores the cache, `--body-limit N` caps per-post fetches.
+
 - **`scripts/fetch/DiscoverJugCalendars.java`**: run by hand, never in CI. Reports
   JUGs whose own website advertises a calendar their GlobalWWJugs entry doesn't
   record — 45 of the 90 have neither `calendar:` nor `meetup_slug:`, so they
@@ -3019,6 +3034,102 @@ should catch a mistake at PR time rather than letting it fail silently.
   It sits on a plain band with sunken cards rather than the reverse, because
   the podcast band below it is sunken and two sunken bands in a row read as one
   block with two headings.
+
+- **Scheduling a post is a future `date:`, and nothing else.** Hugo's
+  `buildFuture` is false (its default, and unset in `hugo.toml`), so a
+  future-dated post is skipped **entirely** -- no page, and no entry in
+  `site.Pages`, any list, any term page, the feeds, `sitemap.xml` or the
+  Pagefind index. That is already the right semantics: the article genuinely
+  does not exist on the site until its day. So there is no `scheduled:` flag,
+  no `draft:` mechanism and nothing to unset once the post is out -- publishing
+  a submission is a maintainer moving `draft/<slug>/` into
+  `content/posts/<y>/<m>/<d>/` and setting the date to match.
+
+  Four pieces make that work, and three of them are there because the default
+  behaviour breaks something:
+
+  1. **`partials/coming-soon.html` reads the pending posts OFF DISK**, because
+     Hugo deliberately cannot see them -- no template can `range` for a page
+     that was never built. It is the home page's "Coming soon" band, the one
+     WordPress carries. `os.ReadDir` over the current month and the next three,
+     day folders from today onwards only, then `partials/frontmatter.html` on
+     the handful of files that can possibly be pending: ~4 directory listings
+     per build, not a walk of 2163 posts. Titles are PLAIN TEXT, not links --
+     the page does not exist yet, and a "coming soon" whose title 404s is worse
+     than no teaser. Renders nothing when nothing is queued, like the podcast
+     and events bands.
+
+     **`buildFuture = true` was the alternative and is the trap.** It would put
+     the pages back in reach of an ordinary `range`, at the price of a
+     `where .Date "lt" now` in every list, term, feed and JSON-LD template plus
+     the Pagefind body -- and ONE missed spot publishes an embargoed article
+     early, silently. A dozen filters that must all agree is exactly the tax
+     this file opens by refusing.
+
+  2. **`validate/BuiltSite.java` would otherwise BLOCK THE DEPLOY.** It walks
+     every `content/posts/**/index.md` and asserts a built page exists, so a
+     post queued for Friday reports as `MISSING PAGE` and the gate refuses to
+     deploy -- i.e. scheduling a post would take the site down from the moment
+     it was merged. `isScheduled()` skips future-dated sources, comparing the
+     INSTANT (which is exactly Hugo's own rule) rather than the day. The count
+     is printed next to the built one, because "2163 built" with no mention of
+     the two held back reads as a complete site, and a post that never
+     publishes because its date was typed wrong would look identical.
+
+  3. **`Frontmatter.checkPostDates` enforces two rules**, both silent failures
+     otherwise. A post's `date:` must MATCH its `<yyyy>/<mm>/<dd>/` folder --
+     the folder is the visible half of publishing but the `date:` is what Hugo
+     publishes off, so a draft moved into October with August still in its
+     frontmatter goes live immediately, filed eight weeks back in the archive
+     where nobody sees it, with every check green. Verified to hold across all
+     2163 posts before being required. And a FUTURE-dated post carries **no
+     time**: see below.
+
+  4. **`.github/workflows/publish-scheduled.yml` is what actually causes the
+     build.** Nothing on a static site rebuilds it on a date, so without this a
+     post queued for Friday goes live whenever somebody next happens to push --
+     on a quiet week, Monday. Daily at 07:00 UTC it works out whether a post
+     came due and, only then, `gh workflow run build-deploy.yml`. See below for
+     the window.
+
+  **THE PUBLISH TIME IS NOT THE AUTHOR'S TO CHOOSE, and a time in `date:` does
+  not mean what it looks like.** Everything goes out on the one daily build, so
+  a scheduled post is dated `YYYY-MM-DD` with no time -- midnight UTC, which
+  gives that build **seven hours of slack**. It needs them: Actions cron is
+  best-effort (GitHub's own docs say a run may be delayed under load), delays of
+  tens of minutes are routine, and it never fires EARLY. A time cannot make a
+  post publish sooner and can only make it LATER --
+  `date: "2026-09-05T09:00:00+00:00"` is still in the future when the 07:00
+  build runs, so the article misses that morning and lands at whatever unrelated
+  deploy happens next, possibly the following day, with nothing reporting it.
+  Hence a hard PR failure rather than a warning. **Don't move the cron earlier
+  to make publication "more punctual"**: it cannot be, and the slack is the only
+  thing stopping a late run from publishing on the wrong date. `template/post.md`
+  is where this is explained to authors; `draft/README.md` to maintainers.
+
+  **The dispatch window starts at the LAST SUCCESSFUL `build-deploy` RUN, not
+  24 hours ago, and that is what makes it self-healing.** If a scheduled run is
+  skipped -- GitHub does drop them under load -- the next window still reaches
+  back past the post that was missed. Equally, if somebody pushed at 03:00, that
+  deploy already published the day's post and the window contains nothing, so
+  the site is not rebuilt twice for one article. It is bounded to 14 days so a
+  repository with no deploy history scans a fortnight of day folders rather than
+  the archive back to 2020, and it **says out loud** when it decides nothing is
+  due, because "nothing was due" and "the scan is broken" are otherwise the same
+  green run that deploys nothing. It commits nothing, which makes it the
+  cheapest workflow here: no GitHub App token, no place on `main`'s bypass list,
+  no shared concurrency group and no toolchain.
+
+  Two smaller things worth not rediscovering. **A frontmatter reader must stop
+  at the closing `---`** -- `content/posts/2025/10/01/jc-ai-newsletter-6/index.md`
+  has eleven `date:` lines in its BODY at column 0, so a `grep` over the file
+  takes a date out of the prose; both `frontmatter.html` and
+  `Frontmatter.frontmatterLine` do. And **YAML erases the distinction the
+  no-time rule polices**: unquoted `2026-09-05` and unquoted
+  `2026-09-05T09:00:00+00:00` both parse to a date object, so the check reads
+  the RAW line, and `coming-soon.html` takes the first ten characters of
+  `printf "%v"` to cover quoted date-only, quoted ISO and the unquoted
+  `time.Time` alike.
 
 - **`/calendar/` is two views of its events, and only one of them is
   content.** `themes/foojay/layouts/events/single.html` flattens

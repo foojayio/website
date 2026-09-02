@@ -22,13 +22,27 @@
 # Required.
 title: "Your Article Title Here"
 
-# Publish date (ISO 8601). 
-# Only fill in when you want to have it published on a specific date.
-# Foojay admins will fill this in once the post gets published.
-date: 2026-01-01T09:00:00+00:00
+# Publish date, as a plain day: YYYY-MM-DD.
+#
+# LEAVE THIS AS IT IS unless you want your article out on a particular day. A
+# maintainer sets it when the article is published, and moves your folder into
+# content/posts/<year>/<month>/<day>/ to match, so you never have to pick either.
+#
+# DON'T ADD A TIME. Foojay is a static site: it only exists after a build, and
+# there is one scheduled build a day, at 07:00 UTC. That is when articles go
+# out, and a time here cannot make it earlier. It can make it LATER -- a post
+# dated 09:00 is still in the future when the 07:00 build runs, so it misses
+# that morning and turns up whenever the site next happens to be rebuilt, which
+# might be the following day. The PR check rejects a time on a future date for
+# exactly that reason.
+#
+# A date in the FUTURE schedules the article: it is not published, not listed
+# anywhere and not searchable until that morning. Until then it appears in
+# "Coming soon" on the home page, by title, date and author.
+date: "2026-01-01"
 
 # Optional: last-updated date, if you revise the article later.
-# lastmod: 2026-01-02T09:00:00+00:00
+# lastmod: "2026-01-02"
 
 # One or two sentences (keep it below 160 characters). 
 # Shown on cards/listings and used for SEO and social previews. 

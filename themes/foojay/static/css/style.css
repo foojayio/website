@@ -666,6 +666,35 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .event-strip__where { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .event-strip__time { font-variant-numeric: tabular-nums; }
 
+/* ---------------------------------------------------- home: coming soon -- */
+/* The scheduled-but-unpublished queue (partials/coming-soon.html).
+
+   ROWS, NOT CARDS. A card implies something to click and these titles are
+   deliberately not links -- the page does not exist yet. Rows also read the
+   same at any length, where a grid of one card is a full-width slab and the
+   queue is usually one or two items. */
+.coming-soon__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.coming-soon__item {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem;
+  padding: .8rem 1rem; border-radius: var(--radius);
+  /* Sunken on a plain band, matching .event-strip__item -- see the note there
+     for why this band is not itself sunken. */
+  background: var(--surface-sunken); border: 1px solid var(--border);
+  /* Dashed, and the one place on the site that is: it is the visual difference
+     between "here is an article" and "there will be one". */
+  border-left: 3px dashed var(--brand-accent);
+}
+.coming-soon__title {
+  margin: 0; flex: 1 1 18rem; min-width: 0;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.02rem;
+  line-height: 1.35; color: var(--ink);
+}
+.coming-soon__meta {
+  margin: 0; display: flex; flex-wrap: wrap; gap: .2rem .5rem;
+  font-size: .86rem; color: var(--ink-muted); line-height: 1.4;
+}
+.coming-soon__meta time { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink-soft); }
+
 /* ------------------------------------------------------------ post grid -- */
 
 .post-grid {
@@ -3576,4 +3605,27 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .review-main__thumb { flex: 0 0 auto; max-width: 260px; }
   .review-edition { padding: 1.15rem; }
   .review-edition__title { font-size: 1.15rem; }
+}
+
+/* The JVM Weekly mark beside the /jvm-weekly/ page title. A WHITE tile in both
+   schemes, not a token: the artwork is black-on-transparent (Duke in red
+   glasses), so on the dark theme it would be a pair of floating glasses over a
+   near-black ground. --surface-sunken is pale in light and dark-navy in dark,
+   which is exactly the trap partials/board-logo.html's `logoBackground`
+   escape hatch exists for; here there is one logo, so the ground is stated
+   once rather than made configurable. */
+.jvmw-head { display: flex; align-items: flex-start; gap: 1.25rem; }
+.jvmw-head__text { min-width: 0; }
+.jvmw-head__logo {
+  flex: 0 0 auto;
+  width: 88px; height: 88px;
+  padding: .6rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  object-fit: contain;
+}
+@media (max-width: 40rem) {
+  .jvmw-head { flex-direction: column; gap: .9rem; }
+  .jvmw-head__logo { width: 64px; height: 64px; }
 }

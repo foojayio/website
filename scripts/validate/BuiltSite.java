@@ -167,7 +167,7 @@ public class BuiltSite {
 
         for (Section s : sections) {
             if (!Files.isDirectory(s.dir())) continue;
-            int found = 0, missing = 0;
+            int found = 0, missing = 0, scheduled = 0;
             try (Stream<Path> walk = Files.walk(s.dir())) {
                 for (Path src : walk.filter(Files::isRegularFile)
                         .filter(p -> p.getFileName().toString().endsWith(".md"))
@@ -176,6 +176,13 @@ public class BuiltSite {
                         .sorted().toList()) {
                     String slug = slugOf(src);
                     if (slug == null) continue;
+                    // A SCHEDULED POST HAS NO BUILT PAGE, AND MUST NOT BLOCK THE
+                    // DEPLOY. `buildFuture` is false, so Hugo skips a future-dated
+                    // post entirely -- which is the whole scheduling mechanism (see
+                    // partials/coming-soon.html). Without this the gate reports it as
+                    // MISSING PAGE and refuses to deploy, i.e. queueing a post for
+                    // Friday would take the site down from the moment it was merged.
+                    if (isScheduled(src)) { scheduled++; continue; }
                     if (files.contains(s.urlPrefix() + slug + "/index.html")) {
                         found++;
                     } else if (++missing <= 10) {
@@ -184,7 +191,7 @@ public class BuiltSite {
                 }
             }
             if (missing > 10) problems.add("MISSING PAGE  ... and " + (missing - 10) + " more " + s.label());
-            report(s.label(), found, missing);
+            report(s.label(), found, missing, scheduled);
         }
 
         // Pages carry an explicit `url:` -- all of them do, because they are
@@ -210,7 +217,7 @@ public class BuiltSite {
                     }
                 }
             }
-            report("pages", found, missing);
+            report("pages", found, missing, 0);
         }
         return problems;
     }
@@ -220,8 +227,41 @@ public class BuiltSite {
         return n.equals("index.md") || n.equals("_index.md");
     }
 
-    static void report(String label, int found, int missing) {
-        System.out.printf("  %-14s %5d built%s%n", label + ":", found, missing == 0 ? "" : "   " + missing + " MISSING");
+    static void report(String label, int found, int missing, int scheduled) {
+        // Scheduled is PRINTED, not silent: "2163 built" with no mention of the
+        // two posts deliberately held back reads as a complete site, and a post
+        // that never publishes because its date was typed wrong would look
+        // exactly the same. See isScheduled.
+        System.out.printf("  %-14s %5d built%s%s%n", label + ":", found,
+                scheduled == 0 ? "" : "   " + scheduled + " scheduled",
+                missing == 0 ? "" : "   " + missing + " MISSING");
+    }
+
+    /**
+     * Is this source file dated in the future, i.e. deliberately not built?
+     *
+     * Compared as an INSTANT rather than a day, because that is exactly Hugo's
+     * own rule -- `date > now` is what `buildFuture = false` withholds -- and
+     * this check's whole job is to expect precisely the pages Hugo produced. A
+     * scheduled post is dated `YYYY-MM-DD` with no time (Frontmatter
+     * .checkPostDates enforces it), which is midnight UTC; the 2163 imported
+     * posts carry a full WordPress timestamp, and both are read here so the two
+     * forms cannot disagree about a post published earlier today.
+     *
+     * Unreadable dates are treated as NOT scheduled, so a typo surfaces as the
+     * missing page it is instead of quietly excusing the post from the check.
+     */
+    static boolean isScheduled(Path src) throws IOException {
+        String raw = frontmatterValue(src, "date");
+        if (raw == null) return false;
+        try {
+            java.time.Instant when = raw.length() == 10
+                    ? java.time.LocalDate.parse(raw).atStartOfDay(java.time.ZoneOffset.UTC).toInstant()
+                    : java.time.OffsetDateTime.parse(raw).toInstant();
+            return when.isAfter(java.time.Instant.now());
+        } catch (java.time.format.DateTimeParseException e) {
+            return false;
+        }
     }
 
     /** The URL slug of a content file: `slug:` frontmatter, else the bundle folder name. */

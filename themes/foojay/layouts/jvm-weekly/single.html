@@ -25,7 +25,18 @@
 {{ $index := partialCached "post-index.html" "posts" }}
 
 <div class="page-head">
-  <div class="page-head__inner">
+  <div class="page-head__inner jvmw-head">
+    {{/* JVM Weekly's own mark, stored in static/images/pages/jvm-weekly/ rather
+         than hotlinked from Substack's CDN -- a third-party image URL can die
+         or change at any time and no build step here would see it, which is the
+         same reason post-thumb.html exists. `alt` is EMPTY on purpose: the
+         artwork says "JVM Weekly" and so does the heading and the sentence
+         beside it, so a screen reader announcing it a third time is noise. It
+         is decoration next to text that already carries the meaning. */}}
+    <img class="jvmw-head__logo"
+         src="{{ partial "resource-url.html" (dict "page" . "src" "/images/pages/jvm-weekly/jvm-weekly-logo.png") }}"
+         alt="" width="88" height="88" decoding="async">
+    <div class="jvmw-head__text">
     <span class="eyebrow"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
@@ -38,6 +49,7 @@
         <a href="{{ "today/author/artur-skowronski/" | relURL }}">Artur Skowronski</a>.
       </p>
       {{ with partial "views.html" . }}{{ . | safeHTML }}{{ end }}
+    </div>
     </div>
   </div>
 </div>
@@ -92,7 +104,12 @@
     {{ range . }}{{ with index $index . }}{{ $also = $also | append . }}{{ end }}{{ end }}
     {{ with $also }}
     <div class="review-also">
-      <h4 class="review-also__label">Also covered in this edition</h4>
+      {{/* "Also" only when there IS a lead above. Nine of the editions have no
+           lead article on Foojay -- the flat 2024 "Best of Foojay.io" roundups,
+           and the two whose guest post was written for the newsletter rather
+           than published here -- and on those "Also covered" reads as though a
+           section went missing. */}}
+      <h4 class="review-also__label">{{ if $main }}Also covered in this edition{{ else }}Foojay articles in this edition{{ end }}</h4>
       <ul class="review-also__list">
         {{ range . }}
         <li>
@@ -112,9 +129,8 @@
   {{ end }}
 
   {{ if not $editions }}
-  {{/* Not an error state worth hiding: JVM Weekly has paused before (seven
-       months, Aug 2025 to Feb 2026), and an empty page that says why is better
-       than a page that looks broken. */}}
+  {{/* Not an error state worth hiding: an empty page that says why beats a
+       page that merely looks broken. */}}
   <p class="review-empty">No editions are listed yet. JVM Weekly publishes at
     <a href="https://www.jvm-weekly.com/" target="_blank" rel="noopener">jvm-weekly.com</a>.</p>
   {{ end }}

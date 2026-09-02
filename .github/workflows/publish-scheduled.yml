@@ -1,0 +1,158 @@
+name: Publish scheduled posts
+
+# THE MISSING HALF OF SCHEDULING. A post with a future `date:` is not built at
+# all (`buildFuture` is false), so it publishes itself on the first build on or
+# after its date -- but nothing on a static site causes that build. Without this
+# workflow a post queued for Friday goes live whenever somebody next happens to
+# push, which on a quiet week is Monday.
+#
+# So: once a day, work out whether a post has come due, and if one has, ask
+# build-deploy.yml to run. Every post therefore publishes at ~07:00 UTC on its
+# own date, which is why a scheduled post is dated `YYYY-MM-DD` with no time --
+# see scripts/validate/Frontmatter.java's checkPostDates, which fails a PR that
+# carries one, and partials/coming-soon.html, which lists what is queued.
+#
+# 07:00 UTC AND A MIDNIGHT-DATED POST, i.e. seven hours of slack, ON PURPOSE.
+# Actions cron is best-effort -- GitHub's own docs say a run "may be delayed
+# during periods of high load" and delays of tens of minutes are routine -- and
+# it never fires EARLY. Dating posts at midnight and building at 07:00 means
+# even a badly delayed run still publishes on the right day. Do not move the
+# cron earlier to make publication "more punctual": it cannot be, and the slack
+# is what stops a late run publishing on the wrong date.
+#
+# It DISPATCHES rather than deploying, so there is exactly one definition of how
+# this site is built. And it dispatches rather than relying on a push, for the
+# same reason the two data syncs do: an event triggered by GITHUB_TOKEN does not
+# start a workflow run, and workflow_dispatch is the documented exception.
+#
+# NOTHING HERE PUSHES A COMMIT, which is what makes this the cheapest workflow
+# in the repo: no GitHub App token, no place on main's bypass list, no
+# concurrency group shared with the syncs, and no toolchain -- just a checkout
+# and some date arithmetic. On the ~majority of days it decides nothing is due
+# and exits in seconds.
+
+on:
+  schedule:
+    # Kept off the hour boundary GitHub's cron queue is busiest on, like the
+    # other two schedules here.
+    - cron: "7 7 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Deploy even if no post came due (publish something now)"
+        type: boolean
+        default: false
+
+# Its own group: this commits nothing, so it cannot race the data syncs the way
+# they race each other.
+concurrency:
+  group: publish-scheduled
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # `gh run list` to find the last deploy, and `gh workflow run` to ask for
+      # the next one. Dispatching a workflow is an Actions write, not a
+      # contents one.
+      actions: write
+    steps:
+      # Shallow is right here: this reads the `date:` line out of files in the
+      # working tree and needs no history. (build-deploy.yml checks out with
+      # fetch-depth: 0 because enableGitInfo dates the pages that carry no
+      # `date:` of their own -- nothing in this job builds anything.)
+      - uses: actions/checkout@v7
+
+      - name: Is a post due?
+        id: due
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # Through the environment rather than interpolated into the script
+          # body: a ${{ }} expression is pasted in as TEXT before bash sees it,
+          # so a workflow input belongs in env even when -- as here -- it is a
+          # boolean GitHub validates. It also makes this step runnable outside
+          # Actions, which is how the date arithmetic below was tested.
+          FORCE: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+
+          # THE WINDOW STARTS AT THE LAST SUCCESSFUL DEPLOY, not 24 hours ago,
+          # and that is what makes this self-healing. If yesterday's run was
+          # skipped -- GitHub does drop scheduled runs under load -- the window
+          # still reaches back past the post that was missed. Equally, if
+          # somebody pushed at 03:00 this morning, that deploy already published
+          # today's post and the window (03:00 -> now) correctly contains
+          # nothing, so this does not build the same site twice.
+          #
+          # createdAt rather than the moment the deploy finished: erring early
+          # can only cost one redundant build, where erring late drops a post.
+          SINCE="$(gh run list --workflow=build-deploy.yml --status=success --limit=1 \
+                     --json createdAt --jq '.[0].createdAt // empty' 2>/dev/null || true)"
+
+          # Bounded, so a repository with no successful deploy in its history --
+          # or a `gh` that failed -- scans a fortnight of day folders and not
+          # the whole archive back to 2020.
+          FLOOR="$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)"
+          if [ -z "$SINCE" ] || [ "$(date -u -d "$SINCE" +%s)" -lt "$(date -u -d "$FLOOR" +%s)" ]; then
+            echo "No recent successful deploy found; falling back to $FLOOR."
+            SINCE="$FLOOR"
+          fi
+
+          since_epoch="$(date -u -d "$SINCE" +%s)"
+          now_epoch="$(date -u +%s)"
+          today="$(date -u +%Y-%m-%d)"
+          days="$(( (now_epoch - since_epoch) / 86400 + 1 ))"
+
+          echo "Window: $SINCE -> $(date -u -d "@$now_epoch" +%Y-%m-%dT%H:%M:%SZ) (${days} day folder(s))"
+
+          due=""
+          for off in $(seq 0 "$days"); do
+            dir="content/posts/$(date -u -d "$today -$off day" +%Y/%m/%d)"
+            [ -d "$dir" ] || continue
+            for f in "$dir"/*/index.md; do
+              [ -f "$f" ] || continue
+
+              # Read the FRONTMATTER date, stopping at the closing `---`.
+              # content/posts/2025/10/01/jc-ai-newsletter-6/index.md has eleven
+              # `date:` lines in its body at column 0, so a plain grep over the
+              # file takes a date out of the prose.
+              raw="$(awk 'NR==1 && $0 !~ /^---/ {exit}
+                          NR>1 && /^---/ {exit}
+                          /^date:/ {sub(/^date:[ \t]*/, ""); print; exit}' "$f" \
+                     | tr -d "\"'" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+              [ -n "$raw" ] || continue
+
+              # A date-only value is midnight UTC, which is what `date -d` makes
+              # of it; the imported archive's full ISO timestamps parse too, so
+              # both forms are compared as the same instant Hugo compares.
+              post_epoch="$(date -u -d "$raw" +%s 2>/dev/null || true)"
+              [ -n "$post_epoch" ] || continue
+
+              if [ "$post_epoch" -gt "$since_epoch" ] && [ "$post_epoch" -le "$now_epoch" ]; then
+                echo "  due: $f ($raw)"
+                due="yes"
+              fi
+            done
+          done
+
+          if [ -n "$due" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            echo "A post came due -- asking for a deploy." | tee -a "$GITHUB_STEP_SUMMARY"
+          elif [ "${FORCE:-}" = "true" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            echo "Nothing came due, but this run was forced." | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            # Said out loud, because "nothing was due" and "the scan was broken"
+            # otherwise look identical: both are a green run that deploys
+            # nothing.
+            echo "Nothing came due since $SINCE. No deploy." | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Ask for a deploy
+        if: steps.due.outputs.deploy == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build-deploy.yml --ref main

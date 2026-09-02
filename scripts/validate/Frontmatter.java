@@ -76,6 +76,7 @@ public class Frontmatter {
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
+        problems.addAll(checkPostDates(postsDir));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
         problems.addAll(checkEvents(Path.of("data/events")));
         problems.addAll(checkAds(Path.of("content/ads")));
@@ -1246,6 +1247,143 @@ public class Frontmatter {
             }
         }
         return lines;
+    }
+
+    /* ---------------------------------------------------------------------
+       Post dates and scheduling
+       ---------------------------------------------------------------------
+
+       Scheduling a post is giving it a future `date:`. Hugo's `buildFuture` is
+       false, so it is not built at all until that day -- no page, and no entry
+       in any list, feed, sitemap or search index -- and the home page's "Coming
+       soon" band reads it off disk in the meantime (partials/coming-soon.html).
+       There is no `scheduled:` flag, and nothing to unset once it is out.
+
+       TWO RULES, AND THE FIRST ONE IS WHY PUBLISHING A DRAFT WORKS AT ALL.
+
+       1. A post's `date:` must match the <yyyy>/<mm>/<dd>/ folder it sits in.
+          Publishing is a maintainer moving draft/<slug>/ into
+          content/posts/<y>/<m>/<d>/, and the folder is the visible, obvious
+          half of that -- but it is the `date:` Hugo actually publishes off. Move
+          a draft into October and leave August in its frontmatter and the post
+          does not get scheduled at all: it goes live at the next deploy, filed
+          eight weeks back in the archive where nobody will see it, and every
+          check passes. The folder is also how coming-soon.html finds pending
+          posts cheaply (it only opens the day folders from today onwards), so a
+          mismatched post is missing from "Coming soon" as well.
+
+          Verified to hold across all 2163 posts in content/ before being
+          required, the same way the required-field list was.
+
+       2. A SCHEDULED post carries no time. The publish time is not the author's
+          to choose: the site is static and only exists after a GitHub Actions
+          run, so everything goes out on the one daily build
+          (.github/workflows/publish-scheduled.yml, 07:00 UTC). A date-only post
+          is midnight UTC, which gives that build seven hours of slack -- and it
+          needs them, because Actions cron is best-effort and routinely late.
+
+          So a time is not merely redundant, it silently MOVES the post:
+          `date: "2026-09-05T09:00:00+00:00"` is still in the future when the
+          07:00 build runs, so the article does not appear that morning and
+          lands at whatever unrelated deploy happens next, possibly the
+          following day. Nothing would report that; the post simply is not
+          there. Hence a failure rather than a warning.
+
+          Only FUTURE-dated posts are checked, because the imported archive
+          carries a full WordPress timestamp on every one of its 2163 posts and
+          those are history, not a schedule. A rule that cannot hold for what is
+          already in the tree is one somebody switches off.
+
+       Both quoted and unquoted dates are accepted. `date: "2026-09-05"` matches
+       the archive and is what template/post.md shows, but a bare
+       `date: 2026-09-05` is the same instant to Hugo and reads the same to a
+       contributor, so rejecting it would be a rule with no failure behind it. */
+
+    static final Pattern DATE_ONLY = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+
+    static List<String> checkPostDates(Path postsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(postsDir)) return problems;
+        LocalDate today = LocalDate.now(ZoneOffset.UTC);
+
+        try (Stream<Path> files = Files.walk(postsDir)) {
+            for (Path file : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+                String raw = frontmatterLine(file, "date");
+                if (raw == null) continue;
+
+                LocalDate date;
+                try {
+                    date = LocalDate.parse(raw.substring(0, Math.min(10, raw.length())));
+                } catch (DateTimeParseException | IndexOutOfBoundsException e) {
+                    problems.add(file + ": date '" + raw + "' is not a date Hugo can read"
+                            + " -- a post is dated YYYY-MM-DD");
+                    continue;
+                }
+
+                // content/posts/undated/ has no day folder to agree with, and is
+                // the one place a post legitimately has none.
+                String folder = folderDate(postsDir, file);
+                if (folder != null && !folder.equals(date.toString())) {
+                    problems.add(file + ": date " + date + " does not match its folder (" + folder + ")."
+                            + " Hugo publishes off the DATE, so this post goes out on " + date
+                            + ", not on " + folder + ". Set the date to \"" + folder + "\" to schedule it,"
+                            + " or move the bundle to content/posts/" + date.toString().replace('-', '/') + "/.");
+                }
+
+                // Which posts rule 2 applies to is decided on the DAY, so a post
+                // going out this morning is never half-checked: it is either in
+                // the future (scheduled, and the rule binds) or it is not.
+                // Comparing instants would make the answer depend on what time
+                // of day the check happened to run.
+                if (date.isAfter(today) && !DATE_ONLY.matcher(raw).matches()) {
+                    problems.add(file + ": scheduled post carries a time (date: " + raw + ")."
+                            + " Write the day only -- date: \"" + date + "\" -- because every post"
+                            + " publishes at the one daily build (07:00 UTC) and a time later than"
+                            + " that silently holds the post back past its own date.");
+                }
+            }
+        }
+        return problems;
+    }
+
+    /** `content/posts/2026/09/05/<slug>/index.md` -> "2026-09-05", else null. */
+    static String folderDate(Path postsDir, Path index) {
+        Path rel = postsDir.relativize(index);              // <y>/<m>/<d>/<slug>/index.md
+        if (rel.getNameCount() != 5) return null;
+        String date = rel.getName(0) + "-" + rel.getName(1) + "-" + rel.getName(2);
+        if (!DATE_ONLY.matcher(date).matches()) return null;
+        try {
+            return LocalDate.parse(date).toString();
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * A frontmatter value as it is WRITTEN, quotes stripped -- where
+     * readFrontmatter gives it as YAML understood it.
+     *
+     * Needed because SnakeYAML erases the distinction this check exists to
+     * police: unquoted `2026-09-05` and unquoted `2026-09-05T09:00:00+00:00`
+     * both arrive as a java.util.Date, so the parsed value cannot say whether
+     * the author wrote a time. It also stops at the closing `---`, which is not
+     * defensive tidiness -- content/posts/2025/10/01/jc-ai-newsletter-6/index.md
+     * has eleven `date:` lines in its BODY at column 0.
+     */
+    static String frontmatterLine(Path file, String key) throws IOException {
+        List<String> lines = Files.readAllLines(file);
+        if (lines.isEmpty() || !lines.get(0).startsWith("---")) return null;
+        for (int i = 1; i < lines.size(); i++) {
+            if (lines.get(i).startsWith("---")) break;
+            if (!lines.get(i).startsWith(key + ":")) continue;
+            String v = lines.get(i).substring(key.length() + 1).trim();
+            if (v.length() >= 2 && ((v.startsWith("\"") && v.endsWith("\""))
+                    || (v.startsWith("'") && v.endsWith("'")))) {
+                v = v.substring(1, v.length() - 1).trim();
+            }
+            return v.isBlank() ? null : v;
+        }
+        return null;
     }
 
     static Map<String, Object> readFrontmatter(Path file) throws IOException {
