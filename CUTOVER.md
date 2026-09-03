@@ -13,7 +13,7 @@ Legend: **[BLOCKER]** must be done or decided before cutover day.
 
 ---
 
-## Phase 0 — Before you schedule a date
+## Phase 0 — Before the switch
 
 These are open items in the repo, not cutover mechanics. Each one is something
 that silently gets worse or gets lost if cutover happens without it.
@@ -70,6 +70,19 @@ that silently gets worse or gets lost if cutover happens without it.
         HTML meta-refresh page, which no feed reader follows.
 
 ---
+
+- [ ] **Verify the domain on the GitHub org** —
+  <https://github.com/organizations/foojayio/settings/pages> 
+  - [X] Add domain in GitHub Foojay Settings Pages → `foojay.io`. 
+  - [ ] Add a `TXT` record at `_github-pages-challenge-foojayio.foojay.io`. It prevents anyone else claiming the domain on GitHub Pages later; it does not affect serving, so
+    it can be done any time before the switch.
+  - [ ] Check if GitHub could verify the `TXT` record at https://github.com/organizations/foojayio/settings/pages
+
+```
+1. Create a TXT record in your DNS configuration for the following hostname: _github-pages-challenge-foojayio.foojay.io
+2. Use this code for the value of the TXT record: d2b3d7045480075a08c5a52c5fd6a2
+3. Wait until your DNS configuration changes. This could take up to 24 hours to propagate.
+```
 
 ## Phase 1 — Final WordPress harvest
 
@@ -130,19 +143,6 @@ rather than failing loudly. Finish this phase before touching DNS.
 - [ ] **Lower the TTL** on foojay.io's A/AAAA records and on
       `www.foojay.io` to 60 seconds, so a rollback propagates in a minute
       instead of a day.
-
-- [ ] **Verify the domain on the GitHub org** —
-      <https://github.com/organizations/foojayio/settings/pages> → *Add a
-      domain* → `foojay.io`. This adds a `TXT` record at
-      `_github-pages-challenge-foojayio.foojay.io`. It prevents anyone else
-      claiming the domain on GitHub Pages later; it does not affect serving, so
-      it can be done any time before the switch.
-
-```
-1. Create a TXT record in your DNS configuration for the following hostname: _github-pages-challenge-foojayio.foojay.io
-2. Use this code for the value of the TXT record: d2b3d7045480075a08c5a52c5fd6a2
-3. Wait until your DNS configuration changes. This could take up to 24 hours to propagate.
-```
 
 - [ ] **Add `wordpress.foojay.io`** pointing at WP Engine's current IP, **DNS
       only (grey cloud)**, and confirm it actually serves the site *before* you
