@@ -3604,6 +3604,34 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   border-radius: var(--radius);
 }
 .review-main__thumb { flex: 0 0 220px; }
+/* THE LEAD THUMBNAIL IS NOT IN A GRID HERE, SO IT DOES NOT HAVE TO BE CROPPED.
+   post-thumb.html's box is `object-fit: cover` at 3:2 because a card GRID has
+   to be one shape -- a row of cards each keeping its own ratio is a ragged row,
+   which is the whole reason that partial exists. This page shows one thumbnail
+   per edition, beside its text, so there is no rhythm to hold and the crop buys
+   nothing.
+
+   What it cost was measured, not guessed: the 15 leading articles carry heroes
+   from 0.65:1 (a portrait logo) to 5.54:1 (a wordmark) and only 3 are within
+   10% of 3:2. Five lose more than 40% of the image and the worst loses 73%,
+   which is a sponsor's wordmark reduced to two unreadable letters.
+
+   `contain` letterboxes instead of cropping, and the bars are invisible: the
+   <img> paints its own opaque --surface-sunken (see .post-card-image img) and
+   so does .review-main, so the artwork simply floats in the panel. The box
+   keeps its 3:2, so the row height does not jump from edition to edition, and
+   the derived fallback tile is untouched -- it still shows exactly when the
+   <img> removes itself in onerror. */
+.review-main__thumb .post-card-image img { object-fit: contain; }
+/* And the dark-mode dim comes OFF here, which the cover version never needed.
+   `filter` applies to an element's own background as well as its content, so
+   brightness(.92) on a letterboxed image darkens the bars too -- painting a
+   visibly darker rectangle (#1b262b) inside the #1d292f panel, which is the one
+   artefact `contain` could introduce. The filter is there to stop bright card
+   artwork glaring out of a dark grid; on this page the image sits on a sunken
+   panel, at full brightness, exactly like the white JVM Weekly tile in the page
+   head above it. */
+:root[data-theme="dark"] .review-main__thumb .post-card-image img { filter: none; }
 .review-main__body { flex: 1 1 auto; min-width: 0; }
 .review-main__label {
   margin: 0; color: var(--ink-muted);
