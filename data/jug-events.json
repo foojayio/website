@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-02T05:55:56Z",
+  "generatedAt" : "2026-09-03T05:55:34Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -525,6 +525,14 @@
       "venue" : null,
       "city" : null,
       "online" : true
+    }, {
+      "title" : "JCON USA 2026 at IBM TechXchange",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/316383834/",
+      "startTime" : "2026-10-26T09:00:00+01:00",
+      "endTime" : "2026-10-29T18:00:00+01:00",
+      "venue" : "Georgia World Congress Center",
+      "city" : "Atlanta",
+      "online" : false
     }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",

@@ -127,6 +127,16 @@
   latitude: 44.84044
   longitude: -0.5805
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/BordeauxJUG.md
+- slug: BostonJavaUsersACMChapter
+  name: Boston Java Users ACM Chapter
+  country: USA
+  website: https://www.meetup.com/nejug1/
+  twitter: BostonJavaUsers
+  founded_date: '1995'
+  contact: bjuacm-board@googlegroups.com
+  latitude: 42.5048
+  longitude: -71.1956
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/BostonJavaUsersACMChapter.md
 - slug: BrabantJUG
   name: Brabant Java User Group
   country: The Netherlands
