@@ -48,28 +48,13 @@ that silently gets worse or gets lost if cutover happens without it.
       look like consent gating): accept the banner, watch for `/g/collect` with
       `tid=G-GS21L12HYK`.
 
-- [ ] **Pre-create the Cloudflare Redirect Rules** from
-      `cutover/legacy-redirects.md` — **five families now, not three.**
-      `aliases:` cannot express a regex, and rules 1–3 alone carry **312,531
-      recorded hits**, more than every per-page alias combined. Doing it now
-      rather than on the day is deliberate: every rule reproduces something the
-      live site already serves, so creating them while WP is up changes nothing
-      observable, and it takes the highest-traffic item off the cutover-day
-      critical path.
-
-      **Rules 4 and 5 are not in the Redirection plugin's export**, which is why
-      they were missed the first time round: the export lists redirects somebody
-      *added*, not the URLs WordPress serves by being WordPress.
-      - **4 — hierarchical category paths.** WP categories nest and Yoast
-        canonicalises to the nested form, so `/today/category/tools/maven/` is
-        the *indexed* URL while Hugo only has the flat one. 55 URLs plus their
-        `page/N/` and `feed/` variants.
-      - **5 — `/feed/`.** WP serves RSS at `/feed/` and `<archive>/feed/`; Hugo
-        serves `/index.xml`. Every existing subscriber 404s at cutover, and this
-        one cannot be an `aliases:` entry even in principle — a Hugo alias is an
-        HTML meta-refresh page, which no feed reader follows.
-
----
+- [ ] **[BLOCKER] Pre-create the Cloudflare Redirect Rules** — the five
+      families in [Redirect rules](#redirect-rules) below. `aliases:` cannot
+      express a regex, and rules 1–3 alone carry **312,531 recorded hits**, more
+      than every per-page alias combined. Doing it now rather than on the day is
+      deliberate: every rule reproduces something the live site already serves,
+      so creating them while WP is up changes nothing observable, and it takes
+      the highest-traffic item off the cutover-day critical path.
 
 - [ ] **Verify the domain on the GitHub org** —
   <https://github.com/organizations/foojayio/settings/pages> 
@@ -228,10 +213,10 @@ Fastest checks first, so a failure is caught before you have gone further.
       'foojayio.github.io\|/website/'` → `0`.
 - [ ] **Analytics fires.** Load the site in a normal (non-private) window,
       accept the Ketch banner, confirm `/g/collect` with `tid=G-GS21L12HYK`.
-- [ ] **The regex redirects work.** Run the verification loop at the bottom of
-      `cutover/legacy-redirects.md` — `/blog/…`, `/almanac/jdk-17`, `/docs/…`,
-      a nested category path, and `/feed/`. That loop also checks the two URLs
-      rule 4a must *not* touch (`/today/category/java/page/2/` and
+- [ ] **The regex redirects work.** Run the verification loop in
+      [Redirect rules](#redirect-rules) — `/blog/…`, `/almanac/jdk-17`,
+      `/docs/…`, a nested category path, and `/feed/`. That loop also checks the
+      two URLs rule 4a must *not* touch (`/today/category/java/page/2/` and
       `/today/category/tools/`), since a wrong negative lookahead breaks those
       silently.
 - [ ] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
@@ -270,6 +255,162 @@ paid for at least that long.
       itself is harmless once `baseURL` and `productionBaseURL` agree.
 - [ ] **Retire WordPress**, keeping `data/legacy-views.json` (the only surviving
       copy of the WordPress view counts) and a final database/file backup.
+
+---
+
+## Redirect rules
+
+Everything the WordPress Redirection plugin serves has been carried into the
+repo, and **86 of its 89 concrete rules are `aliases:` in `content/`** — per-URL,
+so Hugo emits a redirect page for each, nothing to configure and nothing to
+forget. What follows is only what an alias cannot do: three regexes from the
+plugin export, plus two families the export never knew about.
+
+**Rules 4 and 5 were not in the export**, which is why they were missed the
+first time round: it lists redirects somebody *added*, not the URLs WordPress
+serves by virtue of being WordPress. They are invisible in a sitemap comparison
+too, because Yoast lists only the canonical form. Both still 200 on the live
+site (re-checked 2026-09-03).
+
+**These are for INBOUND traffic, and that is the whole reason they matter.**
+`HtmlToMarkdown.normalizeLegacyUrls` applies rules 1–3 at scrape time, so a post
+stored in `content/` already links to `/today/…` — our own markup does not depend
+on them. What does is the 312,531 hits arriving from other sites, search results
+and bookmarks.
+
+Cloudflare → Rules → Redirect Rules → Create, one per block, `301`/permanent.
+The plugin matches **case-insensitively and ignores a trailing slash**
+(`flag_case: false`, `flag_trailing: false`), so the replacements should too.
+
+```
+# 1. the old blog scheme -- 209,365 hits, foojay's original URL scheme. Also
+#    covers /blog/author/…, /blog/category/…, /blog/page/2/ and the feeds, which
+#    per-post aliases could not.
+When:  (starts_with(http.request.uri.path, "/blog/"))
+Then:  concat("/today/", substring(http.request.uri.path, 6))     dynamic, 301
+
+# 2. the almanac -- 102,636 hits. Off-site: never foojay's own content.
+When:  (http.request.uri.path matches "^/almanac/(jdk|java)-([0-9]+)")
+Then:  regex_replace(http.request.uri.path, "^/almanac/(jdk|java)-([0-9]+).*$", "https://javaalmanac.io/jdk/${2}")
+                                                                  dynamic, 301
+
+# 3. the retired docs section -- 530 hits; everything under it collapses to the
+#    article index.
+When:  (starts_with(http.request.uri.path, "/docs/"))
+Then:  "/today/"                                                  static, 301
+
+# 4a. WP categories NEST and Yoast canonicalises to the nested form, so
+#     /today/category/tools/maven/ is the INDEXED url while Hugo has only the
+#     flat one -- 55 URLs plus their page/N/ and feed/ variants. 41 of them
+#     differ only by the parent segment, so one rule covers the lot.
+When:  (http.request.uri.path matches "^/today/category/[^/]+/(?!page/|feed/)[^/]+/")
+Then:  regex_replace(http.request.uri.path, "^/today/category/[^/]+/", "/today/category/")
+                                                                  dynamic, 301
+
+# 5. every WordPress feed URL -> its Hugo equivalent. WP serves a feed at /feed/
+#    and at <any archive>/feed/; Hugo serves index.xml beside every one of those
+#    pages, so this single rule covers /feed/, /today/feed/,
+#    /today/author/<slug>/feed/ and a category feed.
+When:  (http.request.uri.path matches "^(/.*)?/feed/?$")
+Then:  regex_replace(http.request.uri.path, "^(.*?)/feed/?$", "${1}/index.xml")
+                                                                  dynamic, 301
+```
+
+**Order matters in three places.** Rule 1 before any catch-all, and none of 1–3
+may fire for `/today/…` itself. The 14 renames below **before** 4a, or 4a strips
+the parent off the six `tools/…` ones and lands them on a term that does not
+exist. Rule 5 **after** 1 and 4, so `/blog/feed/` and
+`/today/category/tools/maven/feed/` are normalised first.
+
+**Three traps, each of which fails silently.**
+
+- The `(?!page/|feed/)` in 4a is load-bearing: without it
+  `/today/category/tools/feed/` rewrites to `/today/category/feed/` and
+  `/today/category/java/page/2/` to `/today/category/page/2/` — breaking two URL
+  shapes that work today in the course of fixing a third. Because the
+  replacement only strips a prefix, a pager or feed under a *nested* category
+  still lands correctly on `/today/category/maven/page/2/`.
+- **A feed URL cannot be an `aliases:` entry even in principle.** A Hugo alias is
+  an HTML page carrying `<meta http-equiv="refresh">`: a browser follows it, a
+  feed reader does not, so every subscriber would get HTML where XML belongs —
+  worse than a 404, because it looks like a working response. The traffic is also
+  invisible in advance, a feed reader not being a page view.
+- `/comments/feed/` has no equivalent — there is no site-wide comment feed here —
+  so let it fall through to the 404 rather than aiming it at something that is
+  not what it claims.
+
+**The other 14 nested-category URLs are renames**: the slug itself changed, so no
+pattern derives them and each needs its own rule (or one rule with a lookup
+map). Both columns are under `/today/category/` unless shown otherwise:
+
+| WordPress | here |
+|---|---|
+| `ai-ml/` | `/ai/` — see below |
+| `books/book-reviews/` | `book-review/` |
+| `game/` | `game-development/` |
+| `interview/` | `interviews/` |
+| `jakartaee/` | `jakarta-ee/` |
+| `survey/` | `surveys/` |
+| `tools/cassandra/` | `apache-cassandra/` |
+| `tools/deepnetts/` | `deep-netts/` |
+| `tools/idea/` | `intellij-idea/` |
+| `tools/pulsar/` | `apache-pulsar/` |
+| `tools/tomcat/` | `apache-tomcat/` |
+| `tools/vscode/` | `vs-code/` |
+| `tutorial/` | `tutorials/` |
+| `uncategorized/` | `/today/` |
+
+`ai-ml` is WordPress's **"Machine Learning"** category, so the literal
+equivalent is `/today/category/machine-learning/`. It points at `/ai/` because
+that page renders exactly that category (`list_category: "Machine Learning"`,
+the same 66 articles) with an editorial introduction on top — the same post set
+on the better page. Repoint it at the term page if the portal ever stops
+tracking the category.
+
+### Verifying, after cutover
+
+Each should answer `301` with the destination above. Run the same loop against
+the live WordPress site first if you want the expected output — it is what these
+rules were copied from.
+
+```sh
+for u in /blog/log4j-cve/ /blog/author/hirt/ /blog/category/java/ \
+         /almanac/jdk-17 /almanac/java-8 /docs/anything/ \
+         /today/category/tools/maven/ /today/category/tools/maven/page/2/ \
+         /today/category/jeps/records/ /today/category/tools/vscode/ \
+         /today/category/ai-ml/ /today/category/tutorial/ \
+         /feed/ /today/feed/ /today/author/frankdelporte/feed/ \
+         /today/category/java/feed/ /today/category/tools/maven/feed/ ; do
+  printf '%-42s ' "$u"
+  curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}\n' "https://foojay.io$u"
+done
+
+# The two that must NOT move. 4a is written to leave them alone and a wrong
+# negative lookahead is invisible otherwise -- both must stay 200.
+for u in /today/category/java/page/2/ /today/category/tools/ ; do
+  printf '%-42s ' "$u"
+  curl -s -o /dev/null -w '%{http_code} (expect 200)\n' "https://foojay.io$u"
+done
+```
+
+### What was deliberately NOT carried over
+
+**17 plugin rules point at pages that 404 on the live WordPress site too** — the
+rule outlived its target, and recreating one would mint a redirect to a missing
+page, which is worse than a 404 for readers and crawlers alike. Recorded here so
+nobody rediscovers that they were skipped on purpose: `/command-line-arguments/`
+and its six `openjdk-NN-command-line-arguments` variants (3,725 hits) plus
+`/cli` (6), the section being gone from WordPress; the six China JUG aliases
+(`/china/`, `/china-jug/`, `/jugchina/`, `/jugs-china/`, `/jugs/china-jug/`,
+`/china-java-user-group/`, 1,529 hits), which chain to `/jugs/china/` — per-JUG
+pages exist on neither site, `/jugs/` being one directory page built from
+`data/jugs.yaml`; `/foojay-day-live/` and `/foojaydaylive/` (2), which chain to
+a gone `/foojayday2022live/`; and
+`/java-learning-trail/learn-more-on-foojay/` (0).
+
+One export rule is **disabled** (`/calendar/` → `/all-events/`) and was skipped
+for that reason; this site resolves that pair the other way round anyway (see the
+calendar note in `CLAUDE.md`).
 
 ---
 

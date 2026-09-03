@@ -986,7 +986,7 @@ public final class HtmlToMarkdown {
      * it in.
      *
      * It is also the durable fix rather than a tidy-up. These three are the rules
-     * that CANNOT become `aliases:` (see cutover/legacy-redirects.md: they are
+     * that CANNOT become `aliases:` (see CUTOVER.md "Redirect rules": they are
      * regexes, so they have to be configured on Cloudflare), which means a stored
      * `/blog/` link is the one kind of internal link that depends on host config
      * surviving cutover. The 89 concrete rules are deliberately NOT resolved here:

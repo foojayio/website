@@ -1491,7 +1491,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   `HtmlToMarkdown.normalizeLegacyUrls` applies the three rules at scrape time
   (`/blog/<rest>` → `/today/<rest>`, `/docs/<rest>` → `/today/`,
   `/almanac/(jdk|java)-<n>` → javaalmanac.io, plus `http` → `https` on foojay's own
-  host), taken from `cutover/legacy-redirects.md` rather than guessed.
+  host), taken from `CUTOVER.md`'s "Redirect rules" rather than guessed.
 
   **It resolves those three and deliberately not the other 89.** The three are the
   regexes, which cannot be `aliases:` and have to be configured on Cloudflare — so a
@@ -1535,16 +1535,17 @@ should catch a mistake at PR time rather than letting it fail silently.
 
      17 rules were **deliberately skipped**: their targets 404 on the live
      WordPress site too, so recreating them would mint a redirect to a missing
-     page. `cutover/legacy-redirects.md` lists them, so nobody rediscovers that
-     they were skipped on purpose.
+     page. `CUTOVER.md`'s "Redirect rules" lists them, so nobody rediscovers
+     that they were skipped on purpose.
 
   2. **The 3 regexes cannot be aliases and must be configured on the host.**
      `^/blog/(.*)` -> `/today/$1` (209,365 hits -- foojay's original URL scheme,
      and it covers `/blog/author/…`, `/blog/category/…` and the feeds, which
      per-post aliases could not), `^/almanac/(jdk|java)-([0-9+])` ->
      javaalmanac.io (102,636) and `^/docs/(.*)` -> `/today/` (530).
-     **`cutover/legacy-redirects.md` has them as ready-to-paste Cloudflare
-     Redirect Rules plus a verification script.** 312,531 hits between them, so
+     **`CUTOVER.md`'s "Redirect rules" has them as ready-to-paste Cloudflare
+     Redirect Rules plus a verification script**, together with the two families
+     the plugin export never knew about (nested category paths, and `/feed/`). 312,531 hits between them, so
      this is the one item on the cutover list that is bigger than everything the
      aliases cover put together.
 

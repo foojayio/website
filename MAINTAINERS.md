@@ -10,7 +10,7 @@ Four other documents carry the detail this one only points at:
 |---|---|
 | [`scripts/README.md`](scripts/README.md) | Every script, grouped by whether it survives cutover |
 | [`worker/views/README.md`](worker/views/README.md) | The read counter: Worker + D1 setup and deploy |
-| [`cutover/legacy-redirects.md`](cutover/legacy-redirects.md) | Redirect rules that must be on the host before cutover |
+| [`CUTOVER.md`](CUTOVER.md) | The ordered runbook for going live, including the redirect rules that must be on the host first |
 | [`CLAUDE.md`](CLAUDE.md) | Why things are built the way they are — read before changing a convention |
 
 ## Repository layout
@@ -28,7 +28,6 @@ Four other documents carry the detail this one only points at:
 | `themes/foojay/` | The theme: layouts, partials, CSS, JS. | maintainers |
 | `scripts/` | jbang/Java tooling, grouped by lifetime. | maintainers |
 | `worker/views/` | The read counter (Cloudflare Worker + D1). | maintainers |
-| `cutover/` | Things that must happen on the day the domain moves. | maintainers |
 
 ## Generated files — never hand-edit these
 
@@ -150,10 +149,10 @@ numbers, which is why the counts are already on the site.
 
 The domain move is not just a DNS change. In rough order:
 
-1. **Redirects.** [`cutover/legacy-redirects.md`](cutover/legacy-redirects.md) —
-   the 3 regex rules WordPress serves that Hugo `aliases:` cannot express,
-   including `/blog/*` → `/today/*`. Re-export the plugin's rules first in case
-   any were added.
+1. **Redirects.** [`CUTOVER.md`](CUTOVER.md#redirect-rules) — the five families
+   of URL WordPress serves that Hugo `aliases:` cannot express, including
+   `/blog/*` → `/today/*` and every `/feed/`. Re-export the plugin's rules first
+   in case any were added.
 2. **Re-run the catch-up scripts** against the still-live WordPress site:
    `transfer/LegacyViews.java` for the final view counts, `transfer/Comments.java`
    for comments posted in the meantime.
