@@ -58,7 +58,28 @@ authors:
   - "your-author-slug"
 
 # Preview / hero image. Put the file in THIS folder and reference it by name.
-# Required as it is used in the preview card of your post and when sharing your post on social media.
+# It is your article's card on the home page and in the article overviews, and
+# the picture that shows when your post is shared on social media.
+#
+# BEST FORMAT: 1600 x 900 (16:9), JPEG, under 300 KB.
+#   - 16:9 is exactly the big card on the home page, and it crops cleanly to
+#     the smaller cards (3:2) and to the social preview (1.91:1). All of those
+#     crop from the CENTRE outwards, so keep whatever has to stay readable --
+#     text, logos, faces -- away from the edges.
+#   - 1600 px wide is for the social preview, which wants at least 1200. The
+#     site itself never needs more, so bigger only costs your readers time.
+#     Anything over 4 MB fails the pull request check.
+#   - JPEG for photos and screenshots. PNG only for hard-edged line art that
+#     JPEG makes look fuzzy. Not SVG: social platforms will not render one, so
+#     your post would preview with the generic Foojay card instead of your
+#     image.
+#   - A STILL image: the card and the social preview do not animate. Point this
+#     at a still frame and put the animated version in the article body.
+#   - A SOLID background, not a transparent one. Cards paint their own colour
+#     behind the image and dim it slightly in dark mode, so a transparent logo
+#     can disappear.
+# You do not write a description for this image -- the site derives one.
+# Required.
 image: ""
 
 # Categories (see categories.md for the existing list — prefer existing ones). 
