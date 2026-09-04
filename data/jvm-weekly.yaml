@@ -14,6 +14,16 @@
 # An entry with no `main` is a flat "Best of Foojay.io" roundup, which has
 # no lead article. Newest edition first.
 
+- date: '2026-09-03'
+  title: Why I Prefer Trunk-Based Development with Trisha Gee
+  volume: 190
+  url: https://www.jvm-weekly.com/p/why-i-prefer-trunk-based-development
+  subtitle: First edition of the month, so this is the Foojay roundup. The centrepiece is an evergreen this time, on purpose.
+  main: why-i-prefer-trunk-based-development
+  articles:
+  - scripting-in-small-apps-you-dont-need-a-container-for-a-macro
+  - running-duckdbs-jdbc-driver-in-a-graalvm-native-image
+  - azul-august-2026-release-javas-first-monthly-cspu
 - date: '2026-08-06'
   title: How to Create a Spring Boot Fraud Scoring Service with Geertjan Wielenga and Zoran Sevarac
   volume: 187
