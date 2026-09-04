@@ -44,8 +44,12 @@
         <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]">{{ .Date.Format "Jan 2, 2006" }}</time>
         {{/* Wrapped so the "·" separator (.post-meta > * + *::before) attaches to
              this span, not to the author <a> inside -- otherwise the dot becomes
-             part of the clickable, underlined link. */}}
-        {{ partial "byline.html" . }}
+             part of the clickable, underlined link.
+
+             pagefindMeta: this byline is the post's OWN, so it becomes the
+             "author" meta key search/single.html shows beside the date. Only
+             here -- see byline.html for why the flag is opt-in. */}}
+        {{ partial "byline.html" (dict "page" . "pagefindMeta" true) }}
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>

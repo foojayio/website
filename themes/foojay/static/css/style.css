@@ -2362,10 +2362,26 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .search-result .thumb-ph { padding: .5rem; }
 .search-result .thumb-ph__label { font-size: .68rem; letter-spacing: .06em; }
 .search-result h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
-.search-result__date {
-  display: block; margin: 0 0 .4rem;
-  color: var(--ink-muted); font-size: .85rem; font-variant-numeric: tabular-nums;
+/* The date and the byline on one row, with the "·" between them coming from
+   the same `> * + *::before` idiom .post-meta and .post-card-meta use -- so
+   the separator appears only when there IS a byline, and the date alone still
+   renders as one plain line. `flex-wrap` because a podcast episode can credit
+   a dozen people and the result body is only ~500px wide.
+
+   The row is a <div> and not a <p> for a specificity reason: `.search-result p`
+   below is (0,1,1) and later in this file, so it would beat this single class
+   on both counts and render the line in the excerpt's colour and size. */
+.search-result__meta {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0;
+  margin: 0 0 .4rem;
+  color: var(--ink-muted); font-size: .85rem;
 }
+.search-result__meta > * + *::before {
+  content: "·"; margin: 0 .5rem; color: var(--border-strong);
+}
+/* tabular-nums on the date only: it aligns digits down a list of results, and
+   applying it to a byline would space the numerals in a name like "Java 21". */
+.search-result__date { font-variant-numeric: tabular-nums; }
 .search-result p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .search-result mark { background: var(--brand-accent-soft); color: var(--ink); border-radius: 2px; }
 /* A <button> needs the UA's grey ground cleared -- .btn--ghost sets only the

@@ -156,19 +156,44 @@
       img + '</a>';
   }
 
-  function renderResult(d, sectionLabel) {
-    var dateLabel = '';
+  // The date and the byline share one meta line, the way .post-meta and
+  // .post-card-meta do everywhere else on the site -- so a post reads the same
+  // in a result list as it does on a card. Both come from the meta keys
+  // posts/single.html stamps (date[datetime] and author), so a result with
+  // neither -- a page, a pedia entry, an author profile -- renders no line at
+  // all rather than an empty one.
+  //
+  // The byline is TEXT, not a link. Pagefind records the names, not the author
+  // slugs, so there is no URL here to point at; the result's own title link
+  // goes to the post that credits them. Escaped for the same reason the title
+  // is not: `excerpt` is Pagefind's own markup, everything else is data.
+  function metaLine(d) {
+    var parts = [];
     if (d.meta && d.meta.date) {
       var parsed = new Date(d.meta.date);
-      dateLabel = isNaN(parsed) ? d.meta.date
+      var dateLabel = isNaN(parsed) ? d.meta.date
         : parsed.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      parts.push('<time class="search-result__date">' + escapeHtml(dateLabel) + '</time>');
     }
+    if (d.meta && d.meta.author) {
+      parts.push('<span class="search-result__byline">' + escapeHtml(d.meta.author) + '</span>');
+    }
+    // A <div>, deliberately not a <p>: `.search-result p` (0,1,1) styles the
+    // excerpt in --ink-soft at .95rem and outranks a single class, so a <p>
+    // here would render the meta line in the excerpt's styling instead of the
+    // date's -- the specificity trap the sitemap tables hit.
+    return parts.length
+      ? '<div class="search-result__meta">' + parts.join('') + '</div>'
+      : '';
+  }
+
+  function renderResult(d, sectionLabel) {
     return '' +
       '<article class="search-result">' +
       thumb(d, sectionLabel) +
       '<div class="search-result__body">' +
       '<h3><a href="' + d.url + '">' + (d.meta && d.meta.title ? d.meta.title : d.url) + '</a></h3>' +
-      (dateLabel ? '<time class="search-result__date">' + dateLabel + '</time>' : '') +
+      metaLine(d) +
       '<p>' + d.excerpt + '</p>' +
       '</div>' +
       '</article>';

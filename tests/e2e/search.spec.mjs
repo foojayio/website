@@ -62,6 +62,49 @@ test('the first result opens the page it promises', async ({ page }) => {
   if (title) await expect(page.locator('h1').first()).toContainText(title.slice(0, 30));
 });
 
+test('an article result shows its byline on the date\'s line, in the date\'s styling', async ({ page }) => {
+  const results = await search(page, QUERY);
+  await expect(results.locator('.search-result').first()).toBeVisible({ timeout: 20_000 });
+
+  // Only an ARTICLE carries a byline -- an author profile, a pedia entry and a
+  // page have no author, so those rows are absent rather than empty. Found by
+  // filtering rather than by taking the first result, since which section
+  // ranks first is a property of the query.
+  const withByline = results.locator('.search-result')
+    .filter({ has: page.locator('.search-result__byline') });
+  expect(await withByline.count(),
+    'at least one article result should carry a byline').toBeGreaterThan(0);
+
+  const row = withByline.first().locator('.search-result__meta');
+  const date = row.locator('.search-result__date');
+  const byline = row.locator('.search-result__byline');
+  await expect(date).toBeVisible();
+  await expect(byline).toBeVisible();
+  expect((await byline.innerText()).trim(), 'the byline should name somebody').not.toBe('');
+
+  // ONE LINE, which is the whole point of the change: two boxes sharing a
+  // baseline, not a byline wrapped under the date.
+  const [d, b] = [await date.boundingBox(), await byline.boundingBox()];
+  expect(Math.abs(d.y - b.y), 'the byline should sit on the date\'s line').toBeLessThan(4);
+  expect(b.x, 'the byline should follow the date, not precede it').toBeGreaterThan(d.x);
+
+  // SAME STYLING. Asserted on the computed values rather than trusting that
+  // both inherit, because `.search-result p` is (0,1,1) and later in the
+  // stylesheet -- so this row rendered as a <p> would silently take the
+  // excerpt's colour and size instead (see style.css).
+  const styleOf = (l) => l.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { color: s.color, fontSize: s.fontSize, fontFamily: s.fontFamily, fontWeight: s.fontWeight };
+  });
+  expect(await styleOf(byline)).toEqual(await styleOf(date));
+
+  // The separator is drawn by CSS on the byline, so it exists only when there
+  // IS a byline and a date alone still renders as one plain line.
+  expect(await byline.evaluate((el) => getComputedStyle(el, '::before').content))
+    .toContain('\u00b7');
+  expectClean(page);
+});
+
 test('Show more extends a section without replacing it', async ({ page }) => {
   const results = await search(page, QUERY);
   await expect(results.locator('.search-result').first()).toBeVisible({ timeout: 20_000 });
