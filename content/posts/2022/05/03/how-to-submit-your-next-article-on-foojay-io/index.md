@@ -1,7 +1,7 @@
 ---
 title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-09-03T00:00:00+00:00"
+lastmod: "2026-09-04T00:00:00+00:00"
 description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"
@@ -24,9 +24,18 @@ In September 2026, Foojay.io moved from a WordPress system to a static site buil
 
 Every article needs at least one author, and each author has a profile folder named with the author **slug**: `content/authors/<slug>/`. Your post's `authors:` frontmatter uses that slug. For example the profile `content/authors/frankdelporte/` is referenced as `authors: ["frankdelporte"]`.
 
-First, check whether your profile folder already exists under `content/authors/` (look in the folder for the first letter of your slug). If it does, use that folder name as your slug and move on to the next step.
+First, check whether your profile folder already exists under `content/authors/` — they are all listed there, one folder per author. If it does, use that folder name as your slug and move on to the next step.
 
-**If it doesn't exist yet, create it and include it in the same submission.** Make a folder `content/authors/<your-slug>/` (e.g. `content/authors/jane-doe/`) containing an `_index.md` — note the underscore, which is what lets the profile paginate a long article list. Start from `template/author.md`, which lists every field with a comment. At a minimum set `title` (your name) and a short `bio`, and add your social links (Bluesky, Mastodon, LinkedIn, GitHub, YouTube, website). For an avatar, drop a square photo into the folder and reference it by filename: put the small version in `avatar:` and, optionally, a larger version in `avatarFull:`. Then use that folder name as the slug in your article's `authors:` list.
+**If it doesn't exist yet, create it and include it in the same submission.** Make a folder `content/authors/<your-slug>/` (e.g. `content/authors/jane-doe/`) containing an `_index.md` — note the underscore, which is what lets the profile paginate a long article list. Start from `template/author.md`, which lists every field with a comment. At a minimum set `title` (your name) and a short `bio`, and add your social links (Bluesky, Mastodon, LinkedIn, GitHub, YouTube, website). Then use that folder name as the slug in your article's `authors:` list.
+
+For your **profile picture**, drop the photo into the same folder and reference it by filename in the `avatar:` field. Everywhere the site shows one it is cropped to a **circle, from the middle of the image outwards**, so the ideal file is **square, 192 x 192 pixels, JPEG, under 30 KB**:
+
+- **Square**, because the crop keeps the middle and discards the rest — on a portrait photo it is the top of your head and your shoulders that go. Crop it square yourself and you decide what stays, and leave a little room around your face, as the circle trims the corners too.
+- **JPEG** for a photo, and PNG only for a drawn or logo-style avatar with hard edges that JPEG makes look fuzzy. Not an SVG: your picture also goes into the page's structured data, which the tools that read it won't render.
+- **On a solid background**, not a transparent one. A circle cut out of a transparent image lets the page show through, and dark artwork on a transparent background all but disappears in dark mode.
+- Nothing is resized when the site is built, so the file you commit is the file every reader downloads. 192 pixels is twice the size the biggest circle on the site is drawn at, which is what keeps it sharp on a high-resolution screen without being heavy — the author overview page shows all 350+ of them at once.
+
+The `avatarFull:` field next to it is **optional**: set it only if you have a larger portrait than the small one, ideally **400 x 400, under 100 KB**. It is used where your picture is shown on its own — your profile page, the monthly featured-authors spotlight, and your thumbnail in the site search — and falls back to `avatar:` when it is empty. `avatar:` is the one that always needs filling in: leave *it* empty and you are missing from the author overview and the sidebar widget even if `avatarFull:` is set.
 
 ## 2. Prepare your article folder
 

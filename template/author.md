@@ -17,10 +17,23 @@
 # ============================================================================
 title: "Your Name"
 
-# Square avatar image(s) placed in THIS folder, referenced by bare filename.
-# `avatar` (small) is used in cards, grids and the author box; `avatarFull`
-# (larger) on the profile page. If only one exists, set `avatar` — the layouts
-# fall back to it. e.g. avatar: "avatar.jpg"
+# Your profile picture, in THIS folder, referenced by name. Always shown as a
+# circle cropped from the middle outwards.
+#
+# BEST FORMAT: square, JPEG, solid background.
+#   - SQUARE, with room around your face -- the crop discards the edges.
+#   - JPEG for a photo; PNG only for hard-edged line art. Not SVG: it also
+#     feeds the page's structured data, which does not render SVG.
+#   - SOLID background. A transparent one lets the page show through the
+#     circle, and dark artwork on it vanishes in dark mode.
+#   - Nothing is resized at build time, so size it yourself. Over 4 MB fails
+#     the pull request check.
+#
+# avatar      Required. 192 x 192, under 30 KB. Author grid (350+ at once),
+#             sidebar widget, author box. Leave it empty and you are missing
+#             from the first two even if avatarFull is set.
+# avatarFull  Optional. 400 x 400, under 100 KB. Profile page, featured-author
+#             spotlight, search thumbnail. Falls back to `avatar`.
 avatar: ""
 avatarFull: ""
 
