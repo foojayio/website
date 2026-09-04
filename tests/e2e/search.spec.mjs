@@ -98,6 +98,21 @@ test('an article result shows its byline on the date\'s line, in the date\'s sty
   });
   expect(await styleOf(byline)).toEqual(await styleOf(date));
 
+  // AND the row must carry the meta styling rather than the EXCERPT's, which is
+  // the assertion that actually catches that trap -- comparing the date and the
+  // byline to each other cannot, because both inherit from the row and so are
+  // wrong together. Measured: as a <p> the row rendered 15.2px in --ink-soft,
+  // byte-identical to the excerpt below it; as a <div> it is 13.6px in
+  // --ink-muted. Asserted as a relationship, not as those numbers, so a
+  // deliberate restyle of either does not go red.
+  const excerpt = withByline.first().locator('p:not(.search-result__meta)').first();
+  const [rowStyle, excerptStyle] = [await styleOf(row), await styleOf(excerpt)];
+  expect(parseFloat(rowStyle.fontSize),
+    'the meta line should be smaller than the excerpt it sits above')
+    .toBeLessThan(parseFloat(excerptStyle.fontSize));
+  expect(rowStyle.color, 'the meta line should not take the excerpt\'s colour')
+    .not.toBe(excerptStyle.color);
+
   // The separator is drawn by CSS on the byline, so it exists only when there
   // IS a byline and a date alone still renders as one plain line.
   expect(await byline.evaluate((el) => getComputedStyle(el, '::before').content))
