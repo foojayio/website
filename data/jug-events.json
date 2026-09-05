@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-04T06:01:12Z",
+  "generatedAt" : "2026-09-05T05:51:47Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -338,6 +338,14 @@
       "venue" : "msg nexinsure ag",
       "city" : "Hamburg",
       "online" : false
+    }, {
+      "title" : "Renovate – Dein Freund und Helfer für Dependency Updates",
+      "url" : "https://www.meetup.com/jug-hamburg/events/316419369/",
+      "startTime" : "2026-09-24T19:00:00+02:00",
+      "endTime" : "2026-09-24T20:30:00+02:00",
+      "venue" : "adesso SE",
+      "city" : "Hamburg",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Hannover",
@@ -414,6 +422,14 @@
       "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykchblc/",
       "startTime" : "2027-05-28T19:00:00+02:00",
       "endTime" : "2027-06-04T22:00:00+02:00",
+      "venue" : "Pizza Unica",
+      "city" : "Hannover",
+      "online" : false
+    }, {
+      "title" : "Java Stammtisch",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcjbhc/",
+      "startTime" : "2027-06-25T19:00:00+02:00",
+      "endTime" : "2027-07-02T22:00:00+02:00",
       "venue" : "Pizza Unica",
       "city" : "Hannover",
       "online" : false
@@ -794,7 +810,7 @@
       "url" : "https://www.meetup.com/orlando-jug-java-user-group/events/316364809/",
       "startTime" : "2026-09-23T18:30:00-04:00",
       "endTime" : "2026-09-23T20:30:00-04:00",
-      "venue" : "Tech Hub",
+      "venue" : "Dr. Phillips Academic Commons (UCF Downtown)",
       "city" : "Orlando",
       "online" : false
     } ]
