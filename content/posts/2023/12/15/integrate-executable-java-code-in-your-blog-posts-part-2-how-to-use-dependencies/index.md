@@ -15,7 +15,7 @@ related_posts:
   - "join-slack-com-t-foojay-signup"
   - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 jdoodle: true
-frozen: false
+frozen: true
 ---
 
 In a previous post, we [explained how you can add executable Java code to your posts here on Foojay](https://foojay.io/today/integrate-executable-java-code-in-your-blog-posts/), by using JDoodle. In this post, you will learn how you can extend this with one or more libraries.
@@ -112,10 +112,62 @@ Will produce the following output. Hit the "Execute" button to run the code.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="4" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-libs="com.fasterxml.jackson.core:jackson-annotations:2.16.0,com.fasterxml.jackson.core:jackson-core:2.16.0,com.fasterxml.jackson.core:jackson-databind:2.16.0">
  <div data-type="script">
-  <xmp>
-   import com.fasterxml.jackson.annotation.JsonCreator; import com.fasterxml.jackson.annotation.JsonIgnore; import com.fasterxml.jackson.annotation.JsonValue; import com.fasterxml.jackson.databind.ObjectMapper; import java.io.IOException; import java.time.Instant; import java.time.ZoneId; import java.time.ZonedDateTime; import java.util.Arrays; public class JsonParsing { public static void main (String[] args) { var json = """ [ { "level": 0, "timestamp": 1675867184342, "message": "Program started" }, { "level": 5, "timestamp": 1675867185921, "message": "File X not found" }, { "level": 9, "timestamp": 1675867186357, "message": "Error at line Y" } ] """; try { ObjectMapper objectMapper = new ObjectMapper(); LogMessage[] logMessages = objectMapper.readValue(json, LogMessage[].class); System.out.println("Data loaded from JSON:\n"); for (LogMessage logMessage : logMessages) { System.out.println("Log message at " + logMessage.timestamp() + "\n\tSeverity: " + logMessage.level() + "\n\tMessage: " + logMessage.message()); } } catch (IOException ex) { System.err.println("Json processing exception: " + ex.getMessage()); } } record LogMessage(int level, Long timestamp, String message) { } }
-  </xmp>
- </div>
+
+<pre>
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Arrays;
+
+public class JsonParsing {
+    public static void main (String[] args) {
+        var json = """
+                [
+                    { 
+                        "level": 0,
+                        "timestamp": 1675867184342,
+                        "message": "Program started"
+                    },
+                    {
+                        "level": 5,
+                        "timestamp": 1675867185921,
+                        "message": "File X not found"
+                    },
+                    {
+                        "level": 9,
+                        "timestamp": 1675867186357,
+                        "message": "Error at line Y"
+                    }
+                ]
+                """;
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            LogMessage[] logMessages = objectMapper.readValue(json, LogMessage[].class);
+
+            System.out.println("Data loaded from JSON:\n");
+
+            for (LogMessage logMessage : logMessages) {
+                System.out.println("Log message at " + logMessage.timestamp()
+                        + "\n\tSeverity: " + logMessage.level()
+                        + "\n\tMessage: " + logMessage.message());
+            }
+        } catch (IOException ex) {
+            System.err.println("Json processing exception: " + ex.getMessage());
+        }
+    }
+
+    record LogMessage(int level, Long timestamp, String message) { }
+}
+</pre>
+
+</div>
 </div>
 
 **Notice you can also select Java 21 now to execute this code!**

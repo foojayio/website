@@ -2567,6 +2567,69 @@ should catch a mistake at PR time rather than letting it fail silently.
   for authors — it is the single definition of what a contributor can write, and
   `CONTRIBUTING.md` deliberately points there rather than repeating it.
 
+- **A JDoodle runnable snippet keeps its indentation ONLY because the code is
+  wrapped in a `<pre>`, and that `<pre>` has to be its own Markdown block.**
+  These 17 embeds are raw HTML in `content/` -- `<div data-pym-src=...>` with the
+  code as the div's text, which `jdoodle-pym.min.js` reads as
+  `element.textContent` and sends to the compiler. `hugo --minify` collapses a
+  whitespace run in ordinary flow content to a single character, so **every
+  leading space was stripped from every snippet on the site**: newlines survived
+  (the run contains one, so a newline is what it collapses to), indentation did
+  not. The Quick Start tutorial's "Hello World" step literally has a numbered
+  paragraph about indentation next to a block that had none. Not fixable with
+  `[minify.tdewolff.html] keepWhitespace = true` -- measured: it keeps the
+  newlines it already kept and still strips the indentation, for +1.9 MB of HTML.
+  The minifier preserves `<pre>` verbatim, so `<pre>` is the fix, and pym clears
+  the element (`removeChild` until empty) before inserting its iframe, so the
+  wrapper leaves nothing behind and doubles as the fallback when jdoodle.com is
+  blocked.
+
+  Three things are load-bearing, each of which was a live failure:
+
+  - **The `<pre>` needs a BLANK LINE above it, so it starts a CommonMark type-1
+    HTML block** (`<pre` ... `</pre>`, which blank lines cannot interrupt) instead
+    of sitting inside the `<div>`'s type-6 block, **which a blank line ENDS**. Put
+    it tight against the div and the first blank line in the code hands the rest
+    of the snippet back to Goldmark: the December 2023 dependencies post came out
+    with its `"""` smart-quoted and its text block dead. Blank lines between
+    import groups are ordinary Java, so this is not an edge case.
+  - **EXCEPT for a `data-type="file"` block, where the `<pre>` must be TIGHT**
+    against the div. There the payload is a CSV, so a leading blank line is a
+    record, and `/using-streams/` threw `NumberFormatException: For input string:
+    ""` on load. Padding is harmless in Java and fatal in data; a CSV has no blank
+    lines of its own, so the tight form is safe exactly where it is needed.
+  - **`<xmp>` is NOT a `<pre>` and never was one here.** It is a RAWTEXT element,
+    so entities are not decoded -- and the scraper stored `List&lt;Person&gt;`, so
+    what reached the compiler was that literal text. All of them are `<pre>` now,
+    which decodes and keeps the indentation.
+
+  Two of the embeds also had scrape damage that only surfaced once the payload was
+  extracted and run: the November 2023 post's live embed was **truncated at a bare
+  `<` in `i < args.length`** (Jsoup read it as a tag) and, being left unclosed,
+  **swallowed the rest of the article into the div** -- so pym's `removeChild`
+  loop deleted the screenshot, two sections and the conclusion the moment the
+  script loaded. Its sibling post's embed had been collapsed to one line. Both
+  were restored from the fenced copy of the same code printed above them in the
+  post, and both are now `frozen: true`, because `transfer/Posts.java` rebuilds a
+  post's body and would put the damage straight back -- the lesson already paid
+  for by the cross-post canonicals.
+
+  **The verification is worth repeating rather than re-deriving**: extract each
+  embed's payload from the BUILT, MINIFIED HTML exactly as pym does (`textContent`
+  of the div, or of its `[data-type=script]` / `[data-type=file]` children when
+  `data-has-files`, remembering that a browser drops the one newline right after
+  `<pre>`), then `javac` and run it. All 11 live embeds compile and run today; the
+  Jackson one needs its three `data-libs` jars from Maven Central. Nothing static
+  can check this -- indentation loss, an undecoded entity and a truncated snippet
+  all build green and all fail only inside somebody else's iframe.
+
+  **A `{{< jdoodle >}}` shortcode is the durable version of all of the above** and
+  is deliberately not built yet: it would make the `<pre>`, the escaping and the
+  block-boundary rules a template's problem rather than 17 hand-written copies
+  that have already drifted into four shapes, and `jdoodle: true` could then be
+  derived with `.HasShortcode` the way the EnlighterJS and mermaid loaders are.
+  Worth doing the next time one of these pages is touched.
+
 - **Email addresses are decoded on the way in, never left obfuscated.**
   foojay.io is behind Cloudflare with Email Address Obfuscation on, so every
   address in the HTML it serves is a placeholder plus an XOR-encoded copy that

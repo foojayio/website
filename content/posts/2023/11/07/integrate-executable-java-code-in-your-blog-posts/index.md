@@ -16,7 +16,7 @@ related_posts:
   - "join-slack-com-t-foojay-signup"
   - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 jdoodle: true
-frozen: false
+frozen: true
 ---
 
 While developing the [Foojay Quickstart Java Tutorial](https://foojay.io/java-quick-start/), I was looking for an easy way to integrate runnable Java code examples into the Foojay pages and blogs. That's when I discovered [jdoodle.com](https://www.jdoodle.com/). I started by using their online editor, but with this blog I want to show you an even easier method to integrate runnable code here on Foojay.
@@ -60,8 +60,23 @@ public class MainArguments {
 Will produce the following output. Hit the "Execute" button to run the code.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="4">
- public class MainArguments { public static void main (String[] args) { System.out.println("Number of arguments: " + args.length); if (args.length &gt; 0) { System.out.println("First argument: " + args[0]); } for (int i = 0; i 
- <p class="wp-block-paragraph"></p>
+
+<pre>
+public class MainArguments {
+    public static void main (String[] args) {
+        System.out.println("Number of arguments: " + args.length);
+        if (args.length &gt; 0) {
+            System.out.println("First argument: " + args[0]);
+        }
+        for (int i = 0; i &lt; args.length; i++) {
+            System.out.println("Argument " + (i + 1) + ": " + args[i]);
+        }
+    }
+}
+</pre>
+
+</div>
+
  <p class="wp-block-paragraph">As you can see, the reader of your Foojay post can modify the code, execute it, and even add CommandLine Arguments to change the behavior of the code as you can see in this screenshot:</p>
  <figure class="wp-block-image size-medium">
   <img fetchpriority="high" decoding="async" width="629" height="510" src="jdoodle-example-629x510.png" alt="" class="wp-image-102637">
@@ -129,4 +144,3 @@ public class ReadTextFile {
  <h2 class="wp-block-heading" id="h2-3-conclusion">Conclusion</h2>
  <p class="wp-block-paragraph">JDoodle allows to experiment with code in the browser and provides many other easy tools. Thanks to JDoodle you can now also add executable code to your Foojay content!</p>
  <p class="wp-block-paragraph">In a next post that will be published soon, we'll talk with the creator of JDoodle, <a target="_blank" href="https://www.linkedin.com/in/gokulchandrasekaran-jdoodle?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAANJfEYBcRBniUXnKroUIsiftQzJwkwXl4I">Gokul Chandrasekaran</a>.</p>
-</div>

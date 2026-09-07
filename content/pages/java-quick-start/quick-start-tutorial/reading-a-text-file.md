@@ -27,7 +27,7 @@ The file in the source code contains comma-separated values for counter, firstna
 We can read this CSV-file line by line and convert each line to an object which is added to a list of persons:
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-version-index="6" data-language="java" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-has-files="true">
- <div data-type="file" data-file-name="testdata.csv">
+ <div data-type="file" data-file-name="testdata.csv"><pre>
 1,Ada,Gomez,40,Mabvob Pike,Radafso,LA,60500
 2,Bernard,Jordan,28,Dotcu Court,Cewbufbim,MS,17422
 3,Mittie,Vaughn,64,Nandac Mill,Patunif,RI,81182
@@ -128,67 +128,69 @@ We can read this CSV-file line by line and convert each line to an object which 
 98,Charlotte,Scott,26,Nanli Extension,Mucihuv,TN,24687
 99,Alexander,McCoy,46,Huvahi Drive,Oljenbek,NH,19102
 100,Callie,Fitzgerald,32,Maduv Circle,Socoeji,NJ,14602
- </div>
+</pre></div>
  <div data-type="script">
-  <xmp>
-   import java.io.File;
-   import java.io.FileNotFoundException;
-   import java.util.ArrayList;
-   import java.util.List;
-   import java.util.Scanner;
-   public class ReadTextFile {
-       public static void main (String[] args) {
-           List&lt;Person&gt; persons = loadPersons();
-           System.out.println("Number of persons loaded from CSV file: " + persons.size());
-           for (Person person : persons) {
-               System.out.println(person.getFullName() + ", age: " + person.getAge());
-           }
-       }
-       public static List&lt;Person&gt; loadPersons() {
-           List list = new ArrayList&lt;&gt;();
-           File file = new File("/uploads/testdata.csv");
-           try (Scanner scanner = new Scanner(file)) {
-               while (scanner.hasNextLine()) {
-                   list.add(new Person(scanner.nextLine()));
-               }
-           } catch (FileNotFoundException ex) {
-               System.err.println("Could not find the file to be loaded");
-           }
-           return list;
-       }
-       public static class Person {
-           private int id;
-           private String firstName;
-           private String lastName;
-           private int age;
-           private String street;
-           private String city;
-           private String state;
-           private int zip;
-           public Person(String csvLine) {
-               String[] data = csvLine.split(",");
-               this.id = Integer.valueOf(data[0]);
-               this.firstName = data[1];
-               this.lastName = data[2];
-               this.age = Integer.valueOf(data[3]);
-               this.street = data[4];
-               this.city = data[5];
-               this.state = data[6];
-               this.zip = Integer.valueOf(data[7]);
-           }
-           public String getFirstName() {
-               return firstName;
-           }
-           public String getFullName() {
-               return firstName + " " + lastName;
-           }
-           public int getAge() {
-               return age;
-           }
-       }
-   }
-  </xmp>
- </div>
+
+<pre>
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class ReadTextFile {
+    public static void main (String[] args) {
+        List&lt;Person&gt; persons = loadPersons();
+        System.out.println("Number of persons loaded from CSV file: " + persons.size());
+        for (Person person : persons) {
+            System.out.println(person.getFullName() + ", age: " + person.getAge());
+        }
+    }
+    public static List&lt;Person&gt; loadPersons() {
+        List list = new ArrayList&lt;&gt;();
+        File file = new File("/uploads/testdata.csv");
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                list.add(new Person(scanner.nextLine()));
+            }
+        } catch (FileNotFoundException ex) {
+            System.err.println("Could not find the file to be loaded");
+        }
+        return list;
+    }
+    public static class Person {
+        private int id;
+        private String firstName;
+        private String lastName;
+        private int age;
+        private String street;
+        private String city;
+        private String state;
+        private int zip;
+        public Person(String csvLine) {
+            String[] data = csvLine.split(",");
+            this.id = Integer.valueOf(data[0]);
+            this.firstName = data[1];
+            this.lastName = data[2];
+            this.age = Integer.valueOf(data[3]);
+            this.street = data[4];
+            this.city = data[5];
+            this.state = data[6];
+            this.zip = Integer.valueOf(data[7]);
+        }
+        public String getFirstName() {
+            return firstName;
+        }
+        public String getFullName() {
+            return firstName + " " + lastName;
+        }
+        public int getAge() {
+            return age;
+        }
+    }
+}
+</pre>
+
+</div>
 </div>
 
 Just like in the UsingObjects-example, we use an object to store the data of each line in the CSV file, in this case, the object `Person`.
