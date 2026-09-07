@@ -5,6 +5,8 @@
                          (default 2, so a card stays a card)
          compact         the card is NARROW; drop what does not survive it
                          (default false)
+         eager            this card's image is the page's LCP element
+                         (default false -- every card in a listing is lazy)
        The AI portal passes maxCategories 0: there the category chips ARE the
        navigation, so a post's full topic list is the point rather than clutter.
 
@@ -25,19 +27,21 @@
 {{- $p := . -}}
 {{- $maxCategories := 2 -}}
 {{- $compact := false -}}
+{{- $eager := false -}}
 {{- if reflect.IsMap . -}}
   {{- $p = .page -}}
   {{/* isset, not `default`: 0 is a meaningful value here and `default` would
        read it as "unset" and fall back to 2. */}}
   {{- if isset . "maxCategories" -}}{{- $maxCategories = .maxCategories -}}{{- end -}}
   {{- if isset . "compact" -}}{{- $compact = .compact -}}{{- end -}}
+  {{- if isset . "eager" -}}{{- $eager = .eager -}}{{- end -}}
 {{- end -}}
 {{- with $p -}}
 <article class="post-card">
   {{/* Always rendered -- post-thumb.html falls back to a derived tile when the
        post has no image or its image fails to load, so every card in a grid is
        the same shape. */}}
-  {{ partial "post-thumb.html" (dict "page" $p) }}
+  {{ partial "post-thumb.html" (dict "page" $p "eager" $eager) }}
 
   <div class="post-card-meta">
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>

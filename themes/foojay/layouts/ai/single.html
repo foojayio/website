@@ -65,7 +65,12 @@
          shows every article beats one that hides two thirds of them behind
          pages Hugo can't build here. The category page below paginates. */}}
     {{ with $posts }}
-      {{ partial "post-card-lead.html" (index . 0) }}
+      {{/* A one-item slice: the home page hands lead-posts.html every post of
+           the newest day, but this portal is a single category's stream and the
+           grid below it is not paginated, so nothing here needs the grouping --
+           it wants the same panel, label and lead card the home page shows on a
+           one-post day. */}}
+      {{ partial "lead-posts.html" (first 1 .) }}
       <div class="post-grid">
         {{/* maxCategories 0 -> every category, not the usual first two: on a
              portal the chips are how a reader narrows down. */}}

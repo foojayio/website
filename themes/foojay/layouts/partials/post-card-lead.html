@@ -1,4 +1,12 @@
-<article class="post-card post-card--lead highlight-panel">
+{{- /* The full-width, two-column lead card -- one post given the whole width
+       of the content column.
+
+       It is the CARD only: the tinted panel and the "Most recent post" label
+       around it belong to lead-posts.html, which is the single definition of how
+       the newest articles are spotlighted and which also has to label a GROUP of
+       same-day posts. Rendering it through anything else gives an untinted,
+       unlabelled wide card, which is a shape the site does not use. */ -}}
+<article class="post-card post-card--lead">
   {{/* eager=true: this is the LCP element of the home page, so post-thumb.html
        gives it fetchpriority="high" and no loading="lazy" -- without the hint
        the browser gives it the same default priority as the ten card images
@@ -11,10 +19,8 @@
        right-hand half of the home page's first screen simply empty. */}}
   {{ partial "post-thumb.html" (dict "page" . "eager" true) }}
   <div class="post-card-body">
-    <div class="post-card-meta">
-      <span class="eyebrow">Most recent post</span>
-    </div>
-    <h2 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{/* h3: the panel's label is the <h2> this card sits under. */}}
+    <h3 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 210 }}</p>{{ end }}
     <div class="post-card-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>

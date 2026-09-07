@@ -1,7 +1,34 @@
 {{ define "main" }}
 
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
-{{ $lead := index $posts 0 }}
+
+{{/* THE MOST RECENT POSTS -- everything published on the newest publish DATE,
+     not just the single newest page.
+
+     Scheduled posts carry a date with no time (see CLAUDE.md), so a day's
+     articles all land at the same instant and Hugo's sort falls through to the
+     file path: whichever one the old `index $posts 0` spotlighted was picked by
+     its folder name, and its same-day siblings dropped into the grid below
+     looking a week old. 523 of the archive's 1497 publishing days carry more
+     than one post, so that was a third of them. lead-posts.html labels the
+     whole set instead.
+
+     The day comes from THE NEWEST POST, never from `now`: foojay does not
+     publish every day, so keying on today would empty the panel on a quiet one.
+     $posts is date-descending, so the same-day posts are the prefix of it --
+     hence the loop with a break rather than a `where`, which cannot compare two
+     dates a calendar day at a time across the offsets content/ carries. */}}
+{{ $leads := slice }}
+{{ with $posts }}
+  {{ $day := (index . 0).Date.Format "2006-01-02" }}
+  {{ range . }}
+    {{ if eq (.Date.Format "2006-01-02") $day }}
+      {{ $leads = $leads | append . }}
+    {{ else }}
+      {{ break }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 
 {{/* The home page had no <h1> at all -- it opens straight into the lead card,
      so its first heading was the <h2> on the "Podcasts" band and the most
@@ -54,7 +81,7 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
 
-    {{ with $lead }}{{ partial "post-card-lead.html" . }}{{ end }}
+    {{ partial "lead-posts.html" $leads }}
 
     {{/* Directly under the most recent post, above the grid -- the paid slot the
          sponsor tiers actually sell (10 banners a year for gold, 6 silver, 3
@@ -64,8 +91,12 @@
     <div class="post-grid">
       {{/* 10, not 9: with the lead card above taking the full width, the grid
            below is 2 columns in the sidebar layout at common window widths, and
-           9 left the last row half empty. */}}
-      {{ range first 10 (after 1 $posts) }}
+           9 left the last row half empty.
+
+           `after (len $leads)`, not `after 1`: the panel above holds every post
+           of the newest day, so a fixed 1 would repeat all but one of them
+           here. */}}
+      {{ range first 10 (after (len $leads) $posts) }}
         {{ partial "post-card.html" . }}
       {{ end }}
     </div>

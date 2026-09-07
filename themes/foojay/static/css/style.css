@@ -824,8 +824,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: clamp(1.25rem, 3vw, 2.25rem);
   align-items: center;
-  padding: clamp(1.1rem, 2.5vw, 1.75rem);
-  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 .post-card--lead .post-card-image { aspect-ratio: 16 / 9; }
 
@@ -867,6 +865,39 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+/* The most-recent-posts panel (lead-posts.html) -- the box the lead card and the
+   label now live INSIDE, rather than the card being the box itself.
+
+   It carries the padding and the bottom margin the lead card used to, because
+   the card is no longer the only thing in here: on a day that published several
+   articles the panel holds a grid of ordinary cards instead, and both shapes
+   want the same ground, the same inset and the same gap to the grid below. The
+   tint, border and radius come from .highlight-panel, which CLAUDE.md's rule
+   makes the single definition of "look at this one" -- so this class must not
+   restate any of them. */
+.lead-panel {
+  padding: clamp(1.1rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+/* The label. An <h2> in the markup for the heading order (see the partial), so
+   its own margin has to be set rather than inherited from the h2 rule, which is
+   in `em` of a font-size .eyebrow has already overridden. */
+.lead-panel > .eyebrow { margin: 0 0 .9rem; }
+
+/* auto-FIT, not the auto-fill .post-grid uses: this grid holds 2 to 5 cards
+   rather than a full row of 10, and auto-fill leaves the tracks it could not
+   fill standing at 1fr each -- so two same-day posts would sit in the left two
+   thirds of the panel with an empty third beside them. auto-fit collapses the
+   empty tracks, so however many there are they share the width. The 255px floor
+   is .post-grid's, deliberately: these are the same cards as the grid below and
+   comparing them is the point, so the panel is what marks them out, not a size
+   nothing else on the page uses. */
+.lead-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
 }
 
 
@@ -1843,7 +1874,6 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 /* --------------------------------------------------- added components ---- */
 
 .post-card-body { display: grid; gap: .55rem; align-content: center; }
-.post-card--lead .post-card-meta .eyebrow { margin: 0; }
 
 /* A row, not a line of text: it carries the "view all" button and (on the home
    page and /ai/) the feed link beside it. */

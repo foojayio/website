@@ -3322,8 +3322,8 @@ should catch a mistake at PR time rather than letting it fail silently.
   `--brand-accent` (bright logo blue): the two FAMILIES, not two steps of one.
 
 - **`.highlight-panel` is the single definition of "this block is the one to
-  look at".** Two users: the most recent post on the home page
-  (`post-card-lead.html`) and the monthly featured authors at the top of
+  look at".** Two users: the most recent posts on the home page
+  (`lead-posts.html`) and the monthly featured authors at the top of
   `/today/author/` (`featured-authors-band.html`). A third gets it by adding the
   class — which is why it is a class and not a selector list: the site has ONE
   highlight treatment, not one per section. Before it, the lead card was
@@ -3343,6 +3343,57 @@ should catch a mistake at PR time rather than letting it fail silently.
   there. An `.eyebrow` inside the panel likewise becomes a solid chip, because
   `--brand-accent-strong` on `--brand-accent-soft` is 4.22 (it was **2.80** under
   amber) and a chip reads as the label it is anyway.
+
+- **The home page spotlights a DAY, not a post, and `partials/lead-posts.html`
+  is the single definition of it.** It takes a slice of posts, renders one
+  `.highlight-panel` with one label over them, and picks its shape from the
+  count: **1 post -> the full-width two-column lead card** (`post-card-lead.html`,
+  which is now the card ALONE -- the panel and the label are the partial's), **2+
+  -> the same standard cards the grid below uses**, in an `auto-fit` grid inside
+  the panel.
+
+  `index.html` derives the set as *every post sharing the newest post's publish
+  DATE*. That matters because posts on one day cannot be ranked: a scheduled post
+  carries a date with **no time**, so a day's articles land at the same instant
+  and Hugo's sort falls through to the file path -- so the old
+  `index $posts 0` was spotlighting whichever one won on folder name and quietly
+  filing its same-day siblings among the week-old ones in the grid. Not an edge
+  case either: **523 of the archive's 1497 publishing days carry more than one
+  post, and five carry five**, so it was a third of them, and scheduling makes
+  same-day batches the norm rather than an accident.
+
+  Four things are load-bearing:
+  - **The day comes from the NEWEST POST, never from `now`.** foojay does not
+    publish daily, so keying on today would empty the panel -- and with it the
+    home page's whole first screen -- on a quiet one. "Most recent" is a fact
+    about the archive, not about the calendar.
+  - **The selection is a loop with a `break`, not a `where`.** `$posts` is
+    date-descending so the same-day posts are its prefix, and `where` cannot
+    compare two dates a calendar day at a time across the UTC offsets `content/`
+    carries -- a post at 00:30+02:00 is on the previous UTC day, so any
+    midnight-boundary comparison drops it from its own day.
+  - **The grid below is `after (len $leads)`, not `after 1`.** A fixed 1 repeats
+    all but one of the panel's posts immediately underneath it.
+  - **`.lead-panel__grid` is `auto-fit`, where `.post-grid` is `auto-fill`.**
+    auto-fill leaves the tracks it could not fill standing at `1fr`, so two
+    same-day posts would sit in the left two thirds of the panel with an empty
+    third beside them. The 255px floor is `.post-grid`'s on purpose: these are
+    the same cards as the grid below and comparing them is the point, so the
+    panel marks them out, not a size nothing else uses.
+
+  **Equal cards rather than one big card plus siblings**, which was the tempting
+  shape: keeping the anchor means keeping the arbitrary pick, which is the bug.
+  The label is not a parameter (same rule as `feed-link.html`) -- only its plural
+  is derived. It is an `<h2>` styled as an eyebrow, because the cards inside are
+  `<h3>`s and without it the home page went from its hidden `<h1>` straight to an
+  `<h3>` (WCAG 1.3.1); `post-card-lead.html`'s title dropped to `<h3>` for the
+  same reason, which is invisible since `.post-card--lead .post-card-title` sets
+  the size.
+
+  **`/ai/` calls it with a one-item slice** (`first 1 .`) and so renders exactly
+  what a one-post day does. Its lead has the same arbitrariness in principle, but
+  its grid below is unpaginated and shows every article anyway, so there is
+  nothing hidden by the pick; it can opt in by passing more.
 
 - **The logo file is cropped to its artwork, and sized in CSS.**
   `themes/foojay/static/images/foojay-logo.png` was a 1500x500 export whose mark

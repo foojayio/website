@@ -1,0 +1,48 @@
+{{- /* The "most recent post(s)" spotlight -- the single definition of how the
+       newest articles are given focus, used by the home page and by /ai/.
+
+       Takes a SLICE of posts, every one of which is treated as equally new, and
+       renders one panel with ONE label over them. Two shapes, keyed on how many
+       there are and on nothing else:
+
+         1 post   -> the full-width two-column lead card (post-card-lead.html).
+                     The home page opens straight into it -- there is no hero and
+                     the <h1> is visually hidden -- so on a one-post day this is
+                     the page's only visual anchor.
+         2+ posts -> the same standard cards the grid below uses, in a grid of
+                     their own inside the panel.
+
+       WHY EQUAL CARDS RATHER THAN ONE BIG ONE PLUS SIBLINGS: posts published on
+       the same day cannot be ranked. A scheduled post carries a date with no
+       time (see CLAUDE.md), so several land at the same instant and Hugo's sort
+       falls through to the file path -- i.e. whichever one got the big card
+       would be picked by its folder name. That is not a small edge case: of the
+       1497 publishing days in the archive, 523 carry more than one post and five
+       carry five, so a third of the time the old layout spotlighted one article
+       and quietly filed its same-day siblings among the week-old ones. The panel
+       and its label are what carry the focus here, not the size of one card.
+
+       The label is not a parameter (same rule as feed-link.html): a reader
+       learns one wording for one control. Only its plural is derived.
+
+       An <h2>, because the panel now groups several articles and the cards
+       inside it are <h3>s -- without it the home page went from its hidden <h1>
+       straight to an <h3> (WCAG 1.3.1). It is styled as an eyebrow, so nothing
+       about the page's look depends on the tag. */ -}}
+{{- $leads := . -}}
+{{- with $leads }}
+<div class="lead-panel highlight-panel">
+  <h2 class="eyebrow">Most recent post{{ if gt (len .) 1 }}s{{ end }}</h2>
+  {{- if eq (len .) 1 }}
+  {{ partial "post-card-lead.html" (index . 0) }}
+  {{- else }}
+  <div class="lead-panel__grid">
+    {{- range $i, $p := . }}
+    {{/* eager on the first card only: with the panel at the top of the page its
+         image is the LCP element, and the rest are cards like any other. */}}
+    {{ partial "post-card.html" (dict "page" $p "eager" (eq $i 0)) }}
+    {{- end }}
+  </div>
+  {{- end }}
+</div>
+{{ end -}}
