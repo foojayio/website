@@ -6,19 +6,29 @@ name: Publish scheduled posts
 # workflow a post queued for Friday goes live whenever somebody next happens to
 # push, which on a quiet week is Monday.
 #
-# So: once a day, work out whether a post has come due, and if one has, ask
-# build-deploy.yml to run. Every post therefore publishes at ~07:00 UTC on its
-# own date, which is why a scheduled post is dated `YYYY-MM-DD` with no time --
-# see scripts/validate/Frontmatter.java's checkPostDates, which fails a PR that
-# carries one, and partials/coming-soon.html, which lists what is queued.
+# So: twice a day, work out whether a post has come due, and if one has, ask
+# build-deploy.yml to run. A date-only post is midnight UTC, so it goes out on
+# the MORNING run of its own date -- which is why a scheduled post is dated
+# `YYYY-MM-DD` with no time; see scripts/validate/Frontmatter.java's
+# checkPostDates, which fails a PR that carries one, and
+# partials/coming-soon.html, which lists what is queued.
 #
-# 07:00 UTC AND A MIDNIGHT-DATED POST, i.e. seven hours of slack, ON PURPOSE.
+# THE AFTERNOON RUN IS A SAFETY NET, NOT A SECOND PUBLISHING SLOT -- today.
+# GitHub does drop scheduled runs under load, and the window below reaches back
+# to the last successful deploy rather than 24 hours, so a morning run that
+# never fired is recovered the same afternoon instead of the next day. It
+# publishes nothing NEW unless a post's date falls between the two runs, and no
+# post can carry such a date while checkPostDates rejects a time on a future
+# date. Allowing one is a deliberate change in three places (that check,
+# template/post.md, CONTRIBUTING.md) and not something to infer from this cron.
+#
+# MIDNIGHT-DATED POSTS AND A MORNING BUILD, i.e. hours of slack, ON PURPOSE.
 # Actions cron is best-effort -- GitHub's own docs say a run "may be delayed
 # during periods of high load" and delays of tens of minutes are routine -- and
-# it never fires EARLY. Dating posts at midnight and building at 07:00 means
-# even a badly delayed run still publishes on the right day. Do not move the
-# cron earlier to make publication "more punctual": it cannot be, and the slack
-# is what stops a late run publishing on the wrong date.
+# it never fires EARLY. Dating posts at midnight and building at 07:00 local
+# means even a badly delayed run still publishes on the right day. Do not move
+# the cron earlier to make publication "more punctual": it cannot be, and the
+# slack is what stops a late run publishing on the wrong date.
 #
 # It DISPATCHES rather than deploying, so there is exactly one definition of how
 # this site is built. And it dispatches rather than relying on a push, for the
@@ -33,9 +43,13 @@ name: Publish scheduled posts
 
 on:
   schedule:
-    # Kept off the hour boundary GitHub's cron queue is busiest on, like the
-    # other two schedules here.
-    - cron: "7 7 * * *"
+    # Around 07:00 AND 14:00 IN BRUSSELS
+    # There is no timezone field: GitHub's scheduler is UTC only
+    #
+    # Minute 7 keeps these off the hour boundary GitHub's cron queue is busiest
+    # on, like the other two schedules here.
+    - cron: "7 5 * * *"     # 07:07 CEST
+    - cron: "7 12 * * *"    # 14:07 CEST
   workflow_dispatch:
     inputs:
       force:
@@ -65,8 +79,62 @@ jobs:
       # `date:` of their own -- nothing in this job builds anything.)
       - uses: actions/checkout@v7
 
+      # WHICH SEASON THIS CRON BELONGS TO, so the four entries above behave as
+      # two. Keyed on `github.event.schedule` -- the cron expression that
+      # actually triggered this run -- and NOT on the current clock: a run
+      # delayed by half an hour is still the 07:07 run and must still publish,
+      # where an `is it 07:00 now?` test would silently drop it. That is the one
+      # failure this workflow exists to prevent.
+      #
+      # An unexpected offset or an unrecognised cron RUNS rather than skips: a
+      # redundant run costs one build that the due-check below will decline
+      # anyway, where a wrongly skipped run costs a post its publication day.
+      - name: Is this the right run for the season?
+        id: slot
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SCHEDULE:-}" ]; then
+            echo "Manual run -- no season check."
+            echo "go=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # +0200 while CEST is in force, +0100 while CET is. tzdata on the
+          # runner owns the transition dates, so nothing here has to know them.
+          offset="$(TZ=Europe/Brussels date +%z)"
+          case "$offset" in
+            +0200) season="summer" ;;
+            +0100) season="winter" ;;
+            *)     echo "Unexpected Brussels offset $offset -- running anyway."
+                   echo "go=true" >> "$GITHUB_OUTPUT"; exit 0 ;;
+          esac
+
+          case "$SCHEDULE" in
+            "7 5 * * *"|"7 12 * * *")  want="summer" ;;
+            "7 6 * * *"|"7 13 * * *")  want="winter" ;;
+            *) echo "Unrecognised schedule '$SCHEDULE' -- running anyway."
+               echo "go=true" >> "$GITHUB_OUTPUT"; exit 0 ;;
+          esac
+
+          local_now="$(TZ=Europe/Brussels date '+%H:%M %Z')"
+          if [ "$want" = "$season" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+            echo "Brussels is $local_now ($season); '$SCHEDULE' is this season's slot." \
+              | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "go=false" >> "$GITHUB_OUTPUT"
+            # Said out loud for the same reason the due-check says its own
+            # verdict: a green run that did nothing should say which nothing.
+            echo "Brussels is $local_now ($season); '$SCHEDULE' is the $want slot. Skipping." \
+              | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Is a post due?
         id: due
+        if: steps.slot.outputs.go == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           # Through the environment rather than interpolated into the script

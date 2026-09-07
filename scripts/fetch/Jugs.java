@@ -53,13 +53,43 @@ public class Jugs {
 
     static final String REPO = "World-Wide-JUGs/GlobalWWJugs";
     static final String BRANCH = "master";
-    static final String DIR = "_jugs";
-    static final String API_LIST_URL =
-            "https://api.github.com/repos/" + REPO + "/contents/" + DIR + "?ref=" + BRANCH;
-    static final String RAW_BASE =
-            "https://raw.githubusercontent.com/" + REPO + "/" + BRANCH + "/" + DIR + "/";
-    static final String SOURCE_BLOB_BASE =
-            "https://github.com/" + REPO + "/blob/" + BRANCH + "/" + DIR + "/";
+
+    /**
+     * WHERE THE JUG FILES LIVE UPSTREAM, primary first -- and there are two
+     * entries because upstream MOVED them, which cost this site its whole JUG
+     * list for one deploy.
+     *
+     * GlobalWWJugs migrated from Jekyll to Roq on 2026-09-07 (their PR #105),
+     * which moved 100 of the 101 JUG files from `_jugs/` to `content/jugs/`.
+     * The listing of `_jugs/` still answered 200 with one file in it -- the
+     * Boston chapter, added three days earlier while that migration was in
+     * flight, so the merge left it behind in the old folder. So this script
+     * found 1 JUG, wrote 1 JUG, and the deploy gate caught it on the only
+     * assertion that could: tests/e2e's "the jugs map is wired to real points"
+     * saw a single marker where it wanted more than five.
+     *
+     * Reading both folders is not carrying upstream's mistake around forever:
+     * the stranded file belongs in `content/jugs/` and the fix is a PR there,
+     * and until it lands this is what keeps that JUG on the map. Once the
+     * folder is empty the second listing costs one API call and contributes
+     * nothing, so this retires itself with nothing to switch off -- the same
+     * shape as fetch/JavaChampions.java preferring an upstream `location:`.
+     * The frontmatter schema did NOT change in the migration (name, country,
+     * website, meetup, twitter, location), which is why only the path moved.
+     */
+    static final List<String> DIRS = List.of("content/jugs", "_jugs");
+
+    static String apiListUrl(String dir) {
+        return "https://api.github.com/repos/" + REPO + "/contents/" + dir + "?ref=" + BRANCH;
+    }
+
+    static String rawUrl(String dir, String file) {
+        return "https://raw.githubusercontent.com/" + REPO + "/" + BRANCH + "/" + dir + "/" + file;
+    }
+
+    static String blobUrl(String dir, String file) {
+        return "https://github.com/" + REPO + "/blob/" + BRANCH + "/" + dir + "/" + file;
+    }
 
     static final Path OUTPUT_FILE = Path.of("data/jugs.yaml");
 
@@ -77,14 +107,33 @@ public class Jugs {
     static final HttpClient HTTP = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build();
 
     public static void main(String[] args) throws Exception {
-        List<String> files = listJugFiles();
-        System.out.println("Found " + files.size() + " JUG files in " + REPO + "/" + DIR);
+        boolean allowShrink = List.of(args).contains("--allow-shrink");
+
+        // File name -> the folder it was found in. Keyed on the name because
+        // that IS the JUG's identity here (the slug is the file name), so a
+        // file present in both folders resolves to the primary one.
+        Map<String, String> found = new LinkedHashMap<>();
+        for (String dir : DIRS) {
+            List<String> files = listJugFiles(dir);
+            System.out.println("Found " + files.size() + " JUG files in " + REPO + "/" + dir);
+            int only = 0;
+            for (String file : files) {
+                if (found.putIfAbsent(file, dir) == null && !dir.equals(DIRS.get(0))) only++;
+            }
+            // Named rather than silently absorbed: a file outside the primary
+            // folder is an upstream leftover somebody has to move, and the only
+            // way anyone learns of it is this line.
+            if (only > 0) {
+                System.out.println("  " + only + " of these are ONLY in " + dir
+                        + " -- they belong in " + DIRS.get(0) + " upstream (open a PR there).");
+            }
+        }
 
         ExecutorService pool = Executors.newFixedThreadPool(8);
         try {
             List<Future<Map<String, Object>>> futures = new ArrayList<>();
-            for (String file : files) {
-                futures.add(pool.submit(() -> fetchJug(file)));
+            for (Map.Entry<String, String> e : found.entrySet()) {
+                futures.add(pool.submit(() -> fetchJug(e.getValue(), e.getKey())));
             }
 
             List<Map<String, Object>> jugs = new ArrayList<>();
@@ -99,17 +148,45 @@ public class Jugs {
             pool.shutdown();
 
             jugs.sort(Comparator.comparing(j -> String.valueOf(j.get("name")), String.CASE_INSENSITIVE_ORDER));
-            System.out.println("Parsed " + jugs.size() + " JUGs, writing " + OUTPUT_FILE);
 
+            // A COLLAPSE IS NEVER NEWS ABOUT THE JUG DIRECTORY, so it does not
+            // get to overwrite the only good copy -- the same guard, and the
+            // same reasoning, as fetch/ViewCounts.java keeping the committed
+            // file when the counter answers with fewer pages than it holds.
+            // This is what the folder move above would have cost nothing if it
+            // had existed: a 100-to-1 answer is a moved folder, a renamed
+            // branch or a bad listing, never 99 JUGs disbanding overnight.
+            //
+            // HALF, rather than "any drop": a JUG genuinely leaving the
+            // directory is an ordinary one-entry change, and a guard that
+            // froze the file on that is one nobody trusts. The two cases are
+            // not close -- a restructure lands at 1%, a removal at 99%.
+            //
+            // And it KEEPS THE FILE and exits 0 rather than failing. This runs
+            // before the Hugo step in build-deploy.yml, so a hard failure here
+            // would take a deploy down over the JUG map; the stale-but-correct
+            // list is the better answer, and the message is the report.
+            int existing = countExisting();
+            if (!allowShrink && existing >= 10 && jugs.size() < existing / 2) {
+                System.err.println("REFUSING TO WRITE " + OUTPUT_FILE + ": upstream answered with "
+                        + jugs.size() + " JUG(s) where the committed file holds " + existing + ".");
+                System.err.println("  That is a broken source, not a smaller directory -- check whether "
+                        + DIRS.get(0) + " still exists in " + REPO + " on branch " + BRANCH + ".");
+                System.err.println("  The committed file is kept as-is. Re-run with --allow-shrink once you"
+                        + " have confirmed the drop is real.");
+                return;
+            }
+
+            System.out.println("Parsed " + jugs.size() + " JUGs, writing " + OUTPUT_FILE);
             writeYaml(jugs);
         } finally {
             pool.shutdownNow();
         }
     }
 
-    static List<String> listJugFiles() throws IOException, InterruptedException {
+    static List<String> listJugFiles(String dir) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_LIST_URL))
+                .uri(URI.create(apiListUrl(dir)))
                 .header("Accept", "application/vnd.github+json")
                 .header("User-Agent", "foojay-website-jugs-sync")
                 .timeout(Duration.ofSeconds(20))
@@ -129,9 +206,9 @@ public class Jugs {
         return files;
     }
 
-    static Map<String, Object> fetchJug(String file) throws IOException, InterruptedException {
+    static Map<String, Object> fetchJug(String dir, String file) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(RAW_BASE + file))
+                .uri(URI.create(rawUrl(dir, file)))
                 .timeout(Duration.ofSeconds(20))
                 .build();
         HttpResponse<String> response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
@@ -193,7 +270,7 @@ public class Jugs {
 
         // Lets the /jugs/ page link each row straight back to its own source
         // file, so "found an error? edit it here" is a one-click affair.
-        jug.put("source_url", SOURCE_BLOB_BASE + file);
+        jug.put("source_url", blobUrl(dir, file));
 
         return jug;
     }
@@ -235,6 +312,28 @@ public class Jugs {
         return value;
     }
 
+    /**
+     * How many JUGs the committed data/jugs.yaml holds, or 0 when there is no
+     * file yet (a fresh clone, or a fork that has never run this) -- which is
+     * why the guard also requires a floor of its own before it fires.
+     *
+     * Counted from the parsed YAML rather than by grepping `- slug:`, so a
+     * comment in the header that happens to start that way cannot inflate it.
+     */
+    @SuppressWarnings("unchecked")
+    static int countExisting() {
+        if (!Files.isRegularFile(OUTPUT_FILE)) return 0;
+        try {
+            Object parsed = new Yaml().load(Files.readString(OUTPUT_FILE));
+            return parsed instanceof List<?> l ? l.size() : 0;
+        } catch (Exception e) {
+            // An unreadable file is not evidence of anything, so it must not be
+            // read as "the directory shrank" -- fall through and write.
+            System.err.println("Could not read " + OUTPUT_FILE + " to compare counts: " + e);
+            return 0;
+        }
+    }
+
     static void writeYaml(List<Map<String, Object>> jugs) throws IOException {
         String header = """
                 # Java User Groups -- generated automatically by scripts/fetch/Jugs.java
@@ -246,8 +345,8 @@ public class Jugs {
                 # (.github/workflows/sync-external-content.yml), and any manual change here is
                 # overwritten the next time either runs.
                 #
-                # To add, fix, or remove a JUG, open a PR against that repo's _jugs/
-                # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
+                # To add, fix, or remove a JUG, open a PR against that repo's content/jugs/
+                # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs
                 #
                 # meetup_slug/meetup_url are set only when a JUG's file has an explicit
                 # `meetup` field (never inferred from `website`); scripts/fetch/JugEvents.java
