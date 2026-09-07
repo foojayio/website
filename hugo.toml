@@ -86,7 +86,8 @@ enableGitInfo = true
   # This is an editorial pick that rotates monthly.
   # Values are author slugs, the same identifiers posts and sponsors use.
   # The list isn't limited to two, but the layouts are designed for that.
-  featuredAuthors = ["cristobal-escobar", "shai-almog"]
+  featuredAuthors = ["marit-van-dijk", "graeme-robinson"]
+  # 2026-09 ["marit-van-dijk", "graeme-robinson"]
   # 2026-08 ["cristobal-escobar", "shai-almog"]
   # 2026-07 ["igor-de-souza", "steve-poole"]
 
