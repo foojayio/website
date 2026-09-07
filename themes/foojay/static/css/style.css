@@ -1214,6 +1214,20 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 }
 .author-card:hover { border-color: var(--brand-accent); text-decoration: none; }
 .author-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; }
+/* The tile's article count and latest year (authors/list.html). Body font at
+   normal weight, because .author-card sets --font-display at 600 for the NAME
+   and a sub-line in the same face reads as a second name.
+   --ink-muted measures 4.61 on --surface-sunken in light and 5.35 in dark, so
+   it clears the 4.5:1 WCAG 1.4.3 asks of small text in both schemes.
+   The negative margin is against .author-card's own `gap: .6rem`, which is the
+   right distance between the avatar and the name and far too much between the
+   name and its own sub-line -- a single grid `gap` cannot differ per row, and
+   the alternative is a wrapper element around the two text lines. */
+.author-card__meta {
+  margin-top: -.3rem;
+  font-family: var(--font-body); font-weight: 400; font-size: .8rem;
+  color: var(--ink-muted);
+}
 
 /* Featured authors: the monthly editorial spotlight (params.featuredAuthors).
    Two shapes, one source -- a two-up band at the top of /today/author/

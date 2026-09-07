@@ -24,9 +24,36 @@
   <div class="author-grid" id="author-grid">
     {{ range partialCached "authors-all.html" "authors" }}
       {{ $author := . }}
+      {{/* HOW MUCH, AND HOW RECENTLY -- both derived, neither stored. The count
+           alone would not earn its line: the median author here has TWO posts,
+           so half the grid would read "2 articles" and tell a reader nothing
+           about who to click. The year is what separates the 104 authors who
+           published in 2026 from the 138 whose last piece predates 2024.
+
+           Through author-posts.html, which is the single definition of "this
+           author's articles" -- so a tile cannot disagree with the heading on
+           the profile it links to, and older posts' singular `author:` key is
+           matched as well as `authors:`. It returns newest-first, hence
+           index 0 for the latest. /sitemap/ already runs this partial for all
+           353 authors AND sums their views on one page, so the cost here is
+           settled.
+
+           Read counts are deliberately NOT here: a number beside 353 faces
+           turns a directory into a leaderboard, and /sitemap/'s Authors table
+           is where that question is answered (sortably, which this A-Z grid is
+           not). Same for the bio -- 0 to 600 characters, and 21 authors have
+           none, so it belongs on the profile. */}}
+      {{ $written := partial "author-posts.html" $author }}
       <a class="author-card" href="{{ .RelPermalink }}" data-name="{{ lower $author.Title }}">
         {{ with .Params.avatar }}<img src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <span>{{ $author.Title }}</span>
+        <span class="author-card__meta">
+          {{- with len $written -}}
+            {{ . }} article{{ if ne . 1 }}s{{ end }} &middot; {{ (index $written 0).Date.Format "2006" }}
+          {{- else -}}
+            No articles yet
+          {{- end -}}
+        </span>
       </a>
     {{ end }}
   </div>
