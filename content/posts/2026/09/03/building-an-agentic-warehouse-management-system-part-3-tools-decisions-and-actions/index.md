@@ -1,7 +1,7 @@
 ---
 title: "Building an Agentic Warehouse Management System — Part 3: Tools, Decisions, and Actions"
 date: "2026-09-03T16:50:36+00:00"
-lastmod: "2026-09-03T19:29:23+00:00"
+lastmod: "2026-09-04T15:26:41+00:00"
 description: "In this third and final part, we will build on the execution plan created in Part 2 and focus on the remaining stages of the agent workflow. We will see how each task is executed using controlled tools, how operational and business context is gathered, how the replenishment decision is made, and how the agent acts on that decision when necessary."
 authors:
   - "ricardo-mello"
@@ -23,7 +23,7 @@ In this third and final part, we will build on the execution plan created in [Pa
 A live version of the Agentic WMS is available[here](https://agentic-wms-39763860545.southamerica-west1.run.app/), and the complete source code is available[here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
 
 Let's revisit the complete agent flow. The first stages: **Define the Agent, Trigger the Agent, and Plan,** were covered in the previous article. Now we will focus on executing the tasks, using the available tools, gathering context, and making the replenishment decision.  
-![](Screenshot-2026-09-03-at-11.44.18-AM.png)
+![](p3-flow-765x1024.png)
 
 With the execution plan created in [Part 2](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-2-java-and-spring-ai/), the [AgentRunner](https://github.com/mongodb-developer/mongodb-jvm-showcase/blob/ea5c87c042867a0ea0c71f9ca80c41b466bd2981/java/use-cases/agentic-wms/src/main/java/com/devrel/wms/agent/AgentRunner.java#L56) starts processing the tasks one at a time. For each task, the runner reads its description and capability, executes it, stores the result, and then continues with the next task:
 

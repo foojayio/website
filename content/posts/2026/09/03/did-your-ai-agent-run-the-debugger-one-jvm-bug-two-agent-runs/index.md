@@ -1,6 +1,7 @@
 ---
 title: "Did Your AI Agent Run the Debugger? One JVM Bug, Two Agent Runs"
 date: "2026-09-03T13:48:32+00:00"
+lastmod: "2026-09-04T14:06:45+00:00"
 description: "Java developers reach for the debugger without thinking about it. Set a breakpoint, run the failing test, look at the variables, then decide what to…"
 authors:
   - "viktoria-evdokimova"

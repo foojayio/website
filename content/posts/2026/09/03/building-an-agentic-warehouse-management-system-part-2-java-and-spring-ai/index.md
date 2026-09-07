@@ -1,7 +1,7 @@
 ---
 title: "Building an Agentic Warehouse Management System — Part 2: Java and Spring AI"
 date: "2026-09-03T16:39:59+00:00"
-lastmod: "2026-09-03T19:22:30+00:00"
+lastmod: "2026-09-04T14:05:01+00:00"
 description: "We will look at how the agent is built with Java and Spring AI, how its capabilities and boundaries are defined, how it is triggered by the WMS, and how the planner turns the agent’s goal into an execution plan."
 authors:
   - "ricardo-mello"
@@ -31,7 +31,7 @@ From this point on, we will focus on the main parts of the agent implementation 
 In [Part 1](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-1-where-ai-agents-add-value/), we established an important boundary: the WMS defines what the agent is allowed to do, while the agent decides what to do within those boundaries. Now we can translate that design into code.
 
 Before diving into the implementation, the following diagram summarizes the complete agent flow across Parts 2 and [3](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions/). In this part, we will focus on **defining the agent, triggering its execution, and creating the plan.**  
-![](Screenshot-2026-09-03-at-11.35.41-AM.png)
+![](p2-flow-745x1024.png)
 
 ## Define the Agent
 
