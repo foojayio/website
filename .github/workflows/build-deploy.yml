@@ -39,7 +39,7 @@ jobs:
       - name: Mint a push token
         id: app-token
         if: ${{ vars.DATA_SYNC_APP_ID != '' }}
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.DATA_SYNC_APP_ID }}
           private-key: ${{ secrets.DATA_SYNC_APP_PRIVATE_KEY }}
@@ -241,7 +241,7 @@ jobs:
       # locally, and they are worthless once the run is old.
       - name: Upload the failing traces
         if: failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
