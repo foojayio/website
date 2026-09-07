@@ -2440,6 +2440,24 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 /* --- Click-to-enlarge lightbox (js/lightbox.js) --- */
+/* THE HEADSHOT BESIDE A NAMED EXPERT'S PULL-QUOTE. WordPress served these as
+   its 300x300 thumbnail with nothing capping them, so a byline portrait
+   rendered at four times the 72px the author cards use and at three times the
+   96px here -- it read as a hero image interrupting the article rather than as
+   the face of the person being quoted. Round, to match every other face on the
+   site (.author-card img, .author-avatar).
+   The width/height attributes in the markup carry the same numbers, so the box
+   is reserved before the image decodes and the size is still right if this
+   rule is ever missed; `height` needs the class to outrank the global
+   `img { height: auto }`. One post uses this today
+   (content/posts/2023/02/03/what-should-i-know-about-garbage-collection-...),
+   and a survey of content/ found the pattern -- a square portrait between a
+   bold headline and a bold "Name, Role" line -- in no other. */
+.prose .quote-portrait {
+  width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+  margin: .35rem 0;
+}
+
 .prose img.is-zoomable, img.post-hero.is-zoomable { cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); padding: 2rem; }
 .lightbox.is-open { display: flex; }
