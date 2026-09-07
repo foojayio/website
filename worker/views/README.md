@@ -10,7 +10,7 @@ it stores a slug and two integers, so there is no personal data to protect in
 the first place; and the WordPress numbers load in as the counter's starting
 value, so the site shows one number instead of adding two together in a
 template. The longer version is in the header comment of `src/index.js` and in
-the repo's `CLAUDE.md`.
+the repo's `AGENTS.md`.
 
 ## Status
 

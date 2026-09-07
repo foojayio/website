@@ -1,4 +1,4 @@
-# Project context for Claude Code
+# Project context for Claude and other LLM Coding tools
 
 This repo replaces the foojay.io WordPress site with a static Hugo site,
 scaffolded to run in parallel with the live WordPress site during a

@@ -14,7 +14,7 @@
   EVERYTHING HERE IS DERIVED, so there is no second list to keep in step with
   the site:
 
-    - the navigation sections are the [[menu.footer]] columns, which CLAUDE.md
+    - the navigation sections are the [[menu.footer]] columns, which AGENTS.md
       already makes the single definition of the site's own navigation. Adding a
       page to the footer adds it here, with nothing to remember.
     - the one page named explicitly is /ai-instructions/, and it is named
@@ -33,7 +33,7 @@
   Two things are deliberate:
 
   URLs are ABSOLUTE (.Permalink / absURL). This is the "absolute by contract"
-  exception in CLAUDE.md's relative-links rule and the clearest case of it: the
+  exception in AGENTS.md's relative-links rule and the clearest case of it: the
   file is read off-site by something that has no notion of our origin, so a
   root-relative path here resolves against whatever host is asking.
 

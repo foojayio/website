@@ -926,7 +926,7 @@ public class Posts {
         // triple-dash JavaFX slugs -- and because WordPress still serves those
         // redirects today, nothing was observably broken. They would simply have
         // started 404ing at cutover, months later, with no diff to point at.
-        // "URLs are load-bearing" is the rule this broke (see CLAUDE.md).
+        // "URLs are load-bearing" is the rule this broke (see AGENTS.md).
         //
         // Same posture, and same reason, as Sponsors.java's `authors:` block.
         for (String line : existingAliases(bundleDir)) fm.append(line).append("\n");

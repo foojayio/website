@@ -87,7 +87,7 @@ rather than failing loudly. Finish this phase before touching DNS.
       - Re-check the 790 remaining cross-post `canonical:` URLs.
         `transfer/Posts.java` copies `link[rel=canonical]` through blindly, so a
         re-scrape puts back any dead one it finds — which is why the 48 already
-        known dead are `frozen: true` (see CLAUDE.md). Freezing covers those 48;
+        known dead are `frozen: true` (see AGENTS.md). Freezing covers those 48;
         it does nothing for the 790 that are alive today and can die before
         cutover. Probe each URL four times across two HTTP clients and treat a
         403/410 flip-flop as a bot wall, not a deleted page.
@@ -246,11 +246,11 @@ paid for at least that long.
 
 - [ ] **Delete `scripts/transfer/` and `scripts/cleanup/` entirely.** Both
       folders exist only to read or repair WordPress content, which is the
-      question the `scripts/` layout is organised around — see `CLAUDE.md`.
+      question the `scripts/` layout is organised around — see `AGENTS.md`.
       `scripts/fetch/`, `validate/` and `shared/` stay.
 - [ ] **Simplify `sync-view-counts.yml`** back to a single six-hourly cron
       entry, now that the bridge step is gone.
-- [ ] **Prune `CLAUDE.md`** of the sections describing scripts that no longer
+- [ ] **Prune `AGENTS.md`** of the sections describing scripts that no longer
       exist, and of the trial/`$isTrial` reasoning — though note the derivation
       itself is harmless once `baseURL` and `productionBaseURL` agree.
 - [ ] **Retire WordPress**, keeping `data/legacy-views.json` (the only surviving
@@ -410,7 +410,7 @@ a gone `/foojayday2022live/`; and
 
 One export rule is **disabled** (`/calendar/` → `/all-events/`) and was skipped
 for that reason; this site resolves that pair the other way round anyway (see the
-calendar note in `CLAUDE.md`).
+calendar note in `AGENTS.md`).
 
 ---
 

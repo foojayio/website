@@ -107,5 +107,5 @@ small first-party Cloudflare Worker.
 
 Maintainers: [`MAINTAINERS.md`](MAINTAINERS.md) for how to run it,
 [`scripts/README.md`](scripts/README.md) for the tooling, and
-[`CLAUDE.md`](CLAUDE.md) for why any of it is built the way it is — worth reading
+[`AGENTS.md`](AGENTS.md) for why any of it is built the way it is — worth reading
 before changing a convention.

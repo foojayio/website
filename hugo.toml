@@ -148,7 +148,7 @@ enableGitInfo = true
 # hosted analytics service. It stores a slug and an integer and nothing else,
 # and because it is first-party no adblocker can distinguish it from the rest
 # of the site, which a third-party tracker script very much cannot say.
-# See worker/views/README.md to deploy it, and CLAUDE.md for the design.
+# See worker/views/README.md to deploy it, and AGENTS.md for the design.
 #
 # Setting `endpoint` is what switches counting on: partials/views-beacon.html
 # renders nothing without it, so an unconfigured or local build never posts a

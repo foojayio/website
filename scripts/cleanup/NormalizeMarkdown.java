@@ -37,7 +37,7 @@ import java.util.stream.Stream;
  *    WordPress bodies use a bare `<br />` as a vertical spacer -- after an
  *    image, after a video embed, at the end of the body. It renders as an empty
  *    <br> between paragraphs, styling this theme doesn't need. Exactly the same
- *    case as the decorative <hr>s already dropped (see CLAUDE.md), and dropped
+ *    case as the decorative <hr>s already dropped (see AGENTS.md), and dropped
  *    for the same reason -- 1,152 of them, every one on a line of its own.
  *    Trailing blank lines go too, so every file WITH A BODY ends in a single
  *    newline. (Frontmatter-only files -- `_index.md`, `search.md` and the like

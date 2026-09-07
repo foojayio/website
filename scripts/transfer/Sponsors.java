@@ -490,7 +490,7 @@ public class Sponsors {
         fm.append("wpSlug: ").append(yamlString(d.slug)).append("\n");
 
         // If the folder was renamed, the WP URL must keep working -- URLs are
-        // load-bearing here (see CLAUDE.md). Hugo's permalink follows the FOLDER
+        // load-bearing here (see AGENTS.md). Hugo's permalink follows the FOLDER
         // name, so the old path is preserved as an alias. Emitted automatically
         // rather than left to whoever does the rename to remember.
         String folder = d.bundleDir.getFileName().toString();

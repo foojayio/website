@@ -11,7 +11,7 @@ Four other documents carry the detail this one only points at:
 | [`scripts/README.md`](scripts/README.md) | Every script, grouped by whether it survives cutover |
 | [`worker/views/README.md`](worker/views/README.md) | The read counter: Worker + D1 setup and deploy |
 | [`CUTOVER.md`](CUTOVER.md) | The ordered runbook for going live, including the redirect rules that must be on the host first |
-| [`CLAUDE.md`](CLAUDE.md) | Why things are built the way they are — read before changing a convention |
+| [`AGENTS.md`](AGENTS.md) | Why things are built the way they are — read before changing a convention |
 
 ## Repository layout
 
@@ -166,4 +166,4 @@ The domain move is not just a DNS change. In rough order:
 5. **Security headers** on Cloudflare — `X-Content-Type-Options`,
    `Referrer-Policy`, `Permissions-Policy`, CSP. GitHub Pages cannot set them.
 
-`CLAUDE.md`'s "Known gaps" section carries the detail on each.
+`AGENTS.md`'s "Known gaps" section carries the detail on each.

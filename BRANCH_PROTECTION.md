@@ -97,7 +97,7 @@ Both syncs now dispatch the deploy explicitly
 token, and their commits carry `[skip ci]` so that once the App token is in
 place you don't get two builds per sync.
 
-Full reasoning is in `CLAUDE.md` under "Protecting main" and the entry above it.
+Full reasoning is in `AGENTS.md` under "Protecting main" and the entry above it.
 
 ## Keeping your own direct pushes to main
 

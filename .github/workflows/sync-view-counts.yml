@@ -45,7 +45,7 @@ jobs:
       # UNSET TODAY, AND HARMLESS: main is not protected yet, so with no
       # DATA_SYNC_APP_ID variable this step is skipped and checkout falls back to
       # GITHUB_TOKEN, exactly as before. Same in a fork, and in the window
-      # between merging this and creating the app. Setup lives in CLAUDE.md
+      # between merging this and creating the app. Setup lives in AGENTS.md
       # under "Protecting main".
       #
       # One behaviour flips when it IS set, and the commit step below depends on
