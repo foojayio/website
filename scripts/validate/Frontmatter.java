@@ -1,6 +1,14 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS org.yaml:snakeyaml:2.2
-//JAVA 17+
+// 21, NOT 17: checkTitleEmoji's TITLE_EMOJI uses \p{IsExtended_Pictographic},
+// and Java's Unicode emoji properties (that one and the \p{IsEmoji} the comment
+// there rejects) only arrived in JDK 21. On 17 the pattern does not fail where it
+// is used -- it throws PatternSyntaxException from the static initialiser, so the
+// WHOLE check dies before running a single rule. jbang honours this line, so a 17
+// here provisions exactly the JDK that cannot compile the pattern; that is what
+// red-flagged PR #59, on a script that had been passing locally on 26 all along.
+// Verified both ways: `jbang --java 17` reproduces the crash, `--java 21` passes.
+//JAVA 21+
 
 import org.yaml.snakeyaml.Yaml;
 

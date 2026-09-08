@@ -775,6 +775,24 @@ should catch a mistake at PR time rather than letting it fail silently.
   catches the near-miss of copying `template/post.md` to `draft/<slug>.md`
   instead of `draft/<slug>/index.md`, and leftover template placeholder text.
 
+  **`//JAVA 21+`, and NOT the 17 it declared for months.** `TITLE_EMOJI` uses
+  `\p{IsExtended_Pictographic}`, and Java's Unicode emoji properties -- that one
+  and the `\p{IsEmoji}` its comment rejects -- only arrived in JDK 21. On 17 the
+  pattern does not fail at the line that uses it: it throws
+  `PatternSyntaxException` from the static initialiser, so the whole check dies
+  before a single rule runs. jbang honours the `//JAVA` line, so declaring 17
+  provisioned exactly the JDK that cannot compile the pattern.
+
+  **It stayed hidden because this script only runs on a PULL REQUEST**, and
+  pushes to `main` go through `build-deploy.yml`, which runs
+  `validate/BuiltSite.java` and not this. Frank pushes most fixes straight to
+  `main`, so the first PR in a long while (#59) was the first thing to execute
+  it in CI -- passing locally the whole time on JDK 26. Reproduced and fixed
+  deliberately rather than by guesswork: `jbang --java 17` crashes,
+  `--java 21` passes. Checked the other 19 `//JAVA 17+` scripts for the same
+  property; none uses it, and `transfer/Posts.java`, which shares the character
+  class by design, already declared 21+.
+
   This is why **`.github/PULL_REQUEST_TEMPLATE.md` is not a checklist.** It was
   one, unchanged since the scaffold commit, and every item had rotted: it asked
   for `tags` (no such taxonomy), for images under `static/images/` with absolute
