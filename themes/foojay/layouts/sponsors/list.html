@@ -98,11 +98,17 @@
       {{ $ctaEpisodes := 0 }}
       {{ with index site.Taxonomies.categories "podcast" }}{{ $ctaEpisodes = len .Pages }}{{ end }}
       {{ $ctaReads := partial "views-total.html" $ctaPosts }}
-      <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already reads:
-        {{ lang.FormatNumberCustom 0 (len $ctaPosts) }} articles from {{ len $ctaAuthors }} authors{{ with $ctaEpisodes }},
-        {{ . }} podcast episodes{{ end }}{{ with $ctaReads }} and
-        {{ printf "%.1f" (div (math.Floor (div . 100000.0)) 10.0) }} million reads to date{{ end }},
-        plus a community events calendar.</p>
+      <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already reads:</p>
+      {{/* Each `with` drops its own bullet rather than printing a zero: a local
+           build has no data/views.json, and "0 million reads" on the sponsor
+           page is worse than one bullet fewer. */}}
+      <ul class="sponsors-cta__stats">
+        <li>{{ lang.FormatNumberCustom 0 (len $ctaPosts) }} articles</li>
+        <li>{{ len $ctaAuthors }} authors</li>
+        {{ with $ctaEpisodes }}<li>{{ . }} podcast episodes</li>{{ end }}
+        {{ with $ctaReads }}<li>{{ printf "%.1f" (div (math.Floor (div . 100000.0)) 10.0) }} million reads to date</li>{{ end }}
+        <li>A <a href="/calendar">calendar</a> full of community events</li>
+      </ul>
       <p class="sponsors-cta__links">
         {{ with $page.Params.prospectus }}<a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Read the sponsorship prospectus</a>{{ end }}
         {{ with $page.Params.contactEmail }}<a class="sponsors-button sponsors-button--outline" href="mailto:{{ . }}?subject=Foojay%20sponsorship">Get in touch</a>{{ end }}
