@@ -80,8 +80,29 @@
 
     <section class="sponsors-cta">
       <h2>Support the Java Community</h2>
-      <p>Join our sponsors and reach hundreds of thousands of Java &amp; OpenJDK developers every day through
-        articles, podcasts, events and more.</p>
+      {{/* NOT A CLAIM ABOUT AUDIENCE SIZE, and that is deliberate.
+           GA4 -- the only thing that would
+           even try to count people -- is blocked for a large and unknowable
+           share of an audience of Java developers (see partials/analytics.html,
+           which measures exactly that).
+
+           So every figure below is DERIVED from what the site already shows
+           elsewhere: the post list, authors-all.html, the Podcast category, and
+           views-total.html over data/views.json -- the same source as the count
+           printed on each individual post. Nothing to keep in step, nothing to
+           go stale, and no number here can disagree with the page it links to.
+           The reads total is FLOORED rather than rounded, so the printed figure
+           is never above the truth. */}}
+      {{ $ctaPosts := where site.RegularPages "Section" "posts" }}
+      {{ $ctaAuthors := partialCached "authors-all.html" "authors" }}
+      {{ $ctaEpisodes := 0 }}
+      {{ with index site.Taxonomies.categories "podcast" }}{{ $ctaEpisodes = len .Pages }}{{ end }}
+      {{ $ctaReads := partial "views-total.html" $ctaPosts }}
+      <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already reads:
+        {{ lang.FormatNumberCustom 0 (len $ctaPosts) }} articles from {{ len $ctaAuthors }} authors{{ with $ctaEpisodes }},
+        {{ . }} podcast episodes{{ end }}{{ with $ctaReads }} and
+        {{ printf "%.1f" (div (math.Floor (div . 100000.0)) 10.0) }} million reads to date{{ end }},
+        plus a community events calendar.</p>
       <p class="sponsors-cta__links">
         {{ with $page.Params.prospectus }}<a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Read the sponsorship prospectus</a>{{ end }}
         {{ with $page.Params.contactEmail }}<a class="sponsors-button sponsors-button--outline" href="mailto:{{ . }}?subject=Foojay%20sponsorship">Get in touch</a>{{ end }}
