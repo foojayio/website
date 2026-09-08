@@ -6,7 +6,7 @@ description: "Let's demystify the concepts behind memory management, taking a de
 canonical: "https://deepu.tech/memory-management-in-programming/"
 authors:
   - "deepu-sasidharan"
-image: "https://i.imgur.com/R0mdaId.png"
+image: "R0mdaId-c5de449a.png"
 categories:
   - "Java Core"
 related_posts:
@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Cover](https://i.imgur.com/R0mdaId.png "Cover")
+![Cover](R0mdaId-c5de449a.png "Cover")
 
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages.
 
@@ -51,7 +51,7 @@ The stack is used for **static memory allocation** and as the name suggests it i
 * This is where you would encounter **stack overflow errors** as the size of the stack is limited compared to the Heap.
 * There is a **limit on the size** of value that can be stored on the Stack for most languages.
 
-![stack in JavaScript](https://i.imgur.com/7KpvEn1.gif)  
+![stack in JavaScript](7KpvEn1-f55720c6.gif)  
 
 Stack used in JavaScript, objects are stored in Heap and referenced when needed. [Here](https://youtu.be/95_CAUC9nvE) is a video of the same.
 
@@ -93,7 +93,7 @@ Automatic management of heap memory by freeing unused memory allocations. GC is 
 
 **JVM (Java/Scala/Groovy/Kotlin)** , **JavaScript** , **C#** , **Golang** , **OCaml** , and **Ruby** are some of the languages that use Garbage collection for memory management by default.
 
-![Mark &amp; sweep GC](https://i.imgur.com/AZaR0LP.gif)
+![Mark &amp; sweep GC](AZaR0LP-dffec787.gif)
 
 * **Mark \& Sweep GC** : Also known as Tracing GC. Its generally a two-phase algorithm that first marks objects that are still being referenced as "alive" and in the next phase frees the memory of objects that are not alive. **JVM** , **C#** , **Ruby** , **JavaScript** , and **Golang** employ this approach for example. In JVM there are different GC algorithms to choose from while JavaScript engines like V8 use a Mark \& Sweep GC along with Reference counting GC to complement it. This kind of GC is also available for C \& C++ as an [external library](https://en.wikipedia.org/wiki/Boehm_garbage_collector).
 * **Reference counting GC** : In this approach, every object gets a reference count which is incremented or decremented as references to it change and garbage collection is done when the count becomes zero. It's not very preferred as it cannot handle cyclic references. **PHP** , **Perl** , and **Python**, for example, uses this type of GC with workarounds to overcome cyclic references. This type of GC can be enabled for C++ as well.
@@ -114,7 +114,7 @@ It combines RAII with an ownership model, any value must have a variable as its 
 
 It is used by [**Rust**](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html), in my research I couldn't find any other language using this exact mechanism.
 
-![Ownership in Rust](https://thepracticaldev.s3.amazonaws.com/i/cxs080wnnykflkmsfo9p.png)
+![Ownership in Rust](cxs080wnnykflkmsfo9p-3462e69b.jpg)
 
 We have just scratched the surface of memory management.
 

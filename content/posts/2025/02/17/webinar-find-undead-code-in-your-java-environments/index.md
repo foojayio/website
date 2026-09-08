@@ -54,7 +54,7 @@ In this webinar, you will learn how to:
 [Azul Code Inventory](https://www.azul.com/products/components/code-inventory/)®, a service of [Azul Intelligence Cloud](https://www.azul.com/products/intelligence-cloud), is the only solution that precisely catalogs what code runs in production across all of an enterprise's Java workloads. It slashes the time and burden of maintaining and testing unused code, significantly improving developer productivity and saving money. Code Inventory collects and aggregates detailed information from the Java Virtual Machine (JVM) of what code actually runs in production over time. It provides highly accurate, strong signals to confidently identify and prioritize unused code for removal. It helps reduce clutter so teams can work only on active code, lowering maintenance effort and increasing development velocity.
 
 In December, Azul Intelligence Cloud won InfoWorld's Technology of the Year Award for analytics solutions. InfoWorld judges said, in part, "Azul Intelligence Cloud is … like a smart assistant that watches how your Java programs work and suggests ways to improve them. It's a new and exciting way to optimize Java programs, using real-time data to make smart decisions."
-![LOGO: InfoWorld Technology of the Year 2024 Award - Azul Intelligence Cloud](https://www.azul.com/wp-content/uploads/InfoWorld-TOTY-IC-2024.png)
+![LOGO: InfoWorld Technology of the Year 2024 Award - Azul Intelligence Cloud](InfoWorld-TOTY-IC-2024-094c654f.png)
 
 [Click here to watch the on-demand webinar!](https://www.azul.com/webinar/your-undead-code-is-a-time-vampire/)
 

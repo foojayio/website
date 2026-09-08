@@ -108,7 +108,7 @@ I also use DaVinci Resolve for podcast editing, as I bought the additional **[Sp
 
 {{< gallery >}}
 podcast-editing-audacity-1024x695.png
-podcast-editing-davinci-1024x614.png
+podcast-editing-davinci-1024x614.jpg
 IMG_20230316_162046-1024x768.jpg
 {{< /gallery >}}
 

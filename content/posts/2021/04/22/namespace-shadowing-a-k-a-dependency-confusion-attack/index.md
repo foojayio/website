@@ -5,7 +5,7 @@ lastmod: "2021-04-22T06:31:55+00:00"
 description: "The npm Registry is vulnerable to supply chain namespace shadowing, also known as “Dependency Confusion” attacks!"
 authors:
   - "jbaruch"
-image: "https://media.jfrog.com/wp-content/uploads/2021/02/08172937/Common-Configuration-Include-and-Exclude-Patterns.png.webp"
+image: "Common-Configuration-Include-and-Exclude-e6bc66c2.webp"
 categories:
   - "DevOps"
   - "Security"
@@ -25,7 +25,7 @@ The npm Registry is vulnerable to supply chain namespace shadowing, also known a
 
 I remember the first JFrog customer training I delivered in February 2012. This slide was the one where I explained the importance of setting exclude patterns on your repositories (you can see it is 2012 by the slide design, right? Also, Ant was a thing.):
 
-![Old training slide](https://media.jfrog.com/wp-content/uploads/2021/02/08172937/Common-Configuration-Include-and-Exclude-Patterns.png.webp)
+![Old training slide](Common-Configuration-Include-and-Exclude-e6bc66c2.webp)
 
 The story went like this: Your company, Acme, has JFrog Artifactory installed. It has the usual set of remote repositories (which proxy various central repositories like Maven Central), local repositories (which host your company's internal artifacts), and a virtual repository (which aggregates locals and remotes under a single URL), simplifying the configuration of your build tool (in 2012, that would be Maven, duh).
 

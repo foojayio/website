@@ -74,7 +74,7 @@ To use an operator that produces a new Publisher instance, you must subscribe to
 
 You can use code that might cause a delay or pause in a program where it's not supposed to. IntelliJ IDEA provides the *Possibly blocking call in non-blocking context* inspection that looks for situations like this.
 
-![](image1.png)
+![](image1.jpg)
 
 It is convenient to annotate code blocks with @Blocking and @NonBlocking annotations﻿ from the JetBrains annotations collection. This helps IntelliJ IDEA detect blocking calls in non-blocking contexts. To get the annotations, add org.jetbrains:annotations version 22.0.0 or later to your project's dependencies.
 

@@ -4,7 +4,7 @@ date: "2026-09-04T05:51:45+00:00"
 description: "From Spec-Driven Development to Living Specifications in Java Projects Coding agents have changed the speed at which we can produce software. But…"
 authors:
   - "maximillian-arruda"
-image: "https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/sldd-flow-en.png"
+image: "sldd-flow-en-f997f58a.png"
 categories:
   - "AI"
   - "Developer Tools"
@@ -42,7 +42,7 @@ What caught my attention was the idea of bringing engineering discipline to AI-a
 
 The cycle progressed incrementally from product intent to implementation and verification:
 
-![](https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/sldd-flow-en.png)
+![](sldd-flow-en-f997f58a.png)
 
 Instead of giving the agent an isolated prompt and immediately asking for code, each step produced context for the next one.
 
@@ -118,7 +118,7 @@ That does not make the specification useless. It simply means that it represents
 
 This leads us to a model that became increasingly important:
 
-![](https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/spec-test-code-en.png)
+![](spec-test-code-en-25ee1006.png)
 
 And yes, the arrows matter, because software evolves in both directions:
 
@@ -169,7 +169,7 @@ we can express something observable:
 
 By assigning a stable identifier to that requirement, we can establish a relationship such as:
 
-![](https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/req-test-comp-en.png)
+![](req-test-comp-en-bf7cacc8.png)
 
 The agent still has the freedom to reason about the implementation, but the expected behavior now has a deterministic verification boundary.
 
@@ -218,7 +218,7 @@ Instead of making the main specification workflow understand every possible arch
 
 Conceptually:
 
-![](https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/sdd4j-arch-adapter.png)
+![](sdd4j-arch-adapter-7c65b88d.png)
 
 The core remains concerned with specifications, testable requirements, traceability, and convergence.
 
@@ -254,7 +254,7 @@ The same requirement presented earlier could therefore be expressed in an SDD4J 
 
 We preserve the same intent:
 
-![](https://raw.githubusercontent.com/dearrudam/articles/refs/heads/main/sdd/sdd4j/req-test-comp-en.png)
+![](req-test-comp-en-bf7cacc8.png)
 
 but in the language configured for the project.
 

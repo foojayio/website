@@ -55,4 +55,4 @@ Winners will be spotlighted across our platforms, earn money prizes, and present
 5. You have up to 31 March midnight GMT to deploy your app to Payara Cloud and submit your entry details – all final submission info will be emailed to you on Day 1 of the Hackathon.
 6. Winners will be notified via email and publically announced by the end of April 2024.
 
-[![](image-1024x576.png)](https://www.payara.fish/page/payara-hackathon-2024/)
+[![](image-1024x576.jpg)](https://www.payara.fish/page/payara-hackathon-2024/)

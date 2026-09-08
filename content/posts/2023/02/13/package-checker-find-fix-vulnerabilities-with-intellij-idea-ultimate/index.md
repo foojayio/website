@@ -71,7 +71,7 @@ We can also open the Vulnerable Dependencies tool window without having to open 
 
 To open the Vulnerable Dependencies tool window straight from the main menu, go to **Code** \> **Analyze Code** \> **Show Vulnerable Dependencies**.
 
-[![Open Vulnerable Dependencies tool window from menu](open-from-menu.png "Open Vulnerable Dependencies tool window from menu")](open-from-menu.png "Open Vulnerable Dependencies tool window from menu")
+[![Open Vulnerable Dependencies tool window from menu](open-from-menu.jpg "Open Vulnerable Dependencies tool window from menu")](open-from-menu.jpg "Open Vulnerable Dependencies tool window from menu")
 
 The Vulnerable Dependencies tool window shows all the vulnerable dependencies for the project. For each vulnerability, we can see an indication of the severity.
 

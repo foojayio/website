@@ -125,7 +125,7 @@ Once it's running, we can open the project in the IDE. I'll show the rest in Int
 
 As you recall from the code above, we can decode XML with the JAXB unmarshaller and encode it with marshaller. Our first step is to look for the marshaller. Using the Control-O shortcut (or Command-O on Mac) we can open the find class dialog and look for the Marshal interface:
 
-![Screen Shot 2022-01-27 at 15.14.04.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648536541148/GffXo6YTV.png)
+![Screen Shot 2022-01-27 at 15.14.04.png](GffXo6YTV-43000d2f.png)
 
 This is why naming is so important. We can see that the JAXB runtime jar has a class that looks like the right implementation of the JAXB API. When we open it, we get the download source prompt (which you must click).
 
@@ -133,7 +133,7 @@ Browsing through the code, we find the marshal methods that we invoke normally. 
 
 Before we can see this happening, we need to create a new database user which we can do using the following curl command:
 
-![Screen Shot 2022-01-27 at 15.18.42.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648536726722/EXR0PHzNg.png)
+![Screen Shot 2022-01-27 at 15.18.42.png](EXR0PHzNg-c5086446.jpg)
 
 ```
 curl -X PUT -H "Content-Type: application/json" -d '{"login":"shai","password":"123456"}' http://localhost:8080/addUser
@@ -149,17 +149,17 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: 46d37d7a-598
 
 After that command is sent, you will see the snapshot representing the XML marshaling:
 
-![Screen Shot 2022-01-27 at 15.21.56.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537102216/ogc6F0iMM.png)
+![Screen Shot 2022-01-27 at 15.21.56.png](ogc6F0iMM-cd6923ee.jpg)
 
 In the variables view, you can deeply inspect every property, including the state of the JAXB reference implementation and every aspect of the request. The really cool thing is that you can go up the stack and see how you got there, literally inspect the object you passed into the JAXB API:
 
-![Screen Shot 2022-01-27 at 15.28.29.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537232346/iNvT4AX2X.png)
+![Screen Shot 2022-01-27 at 15.28.29.png](iNvT4AX2X-1de127fc.png)
 
 ## JAXB Unmarshaller
 
 The reading process is practically identical to the writing process. We open a class file and type Unmarshall into it (I didn't even need to finish typing):
 
-![Screen Shot 2022-01-27 at 15.30.29.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537466786/_kiT_rZj4.png)
+![Screen Shot 2022-01-27 at 15.30.29.png](_kiT_rZj4-44572ec6.png)
 
 The UnmarshallerImpl class includes a similar internal implementation method, specifically unmarshal0, which uses the SAX approach to parse the XML file.
 
@@ -171,11 +171,11 @@ curl -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8
 
 You need to update authorization like before. Notice you can set the value for the ID parameter from the values we saw in the previous stack:
 
-![Screen Shot 2022-01-27 at 16.06.26.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537592431/5eqDoijKv.png)
+![Screen Shot 2022-01-27 at 16.06.26.png](5eqDoijKv-05a4a3c2.jpg)
 
 Once we have that in place, we can add a snapshot and see the resulting stack:
 
-![Screen Shot 2022-01-27 at 16.04.41.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537705035/i3mstdc2B.png)
+![Screen Shot 2022-01-27 at 16.04.41.png](i3mstdc2B-36719a81.jpg)
 
 We can dig deeper similarly into the sax parser content tree and inspect an individual XML element. This approach makes it much easier to debug applications with XML.
 

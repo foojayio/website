@@ -44,7 +44,7 @@ Using multiples of 10 for the shift makes them easier to read.
 ```
 
 The virtual memory size of the above process is just over 8192 GiB at 8200.7 GiB, but the RSS (Resident Set Size) is only 122,060 KB, or 122 MB.  
-![](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.png)  
+![](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.jpg)  
 *Figure 2. RES for Test 1*
 
 On disk, the extents reported are 8 TiB, however the amount of disk (and memory) actually used is just 20 KiB.
@@ -59,7 +59,7 @@ The following test displays the main point of this article more clearly. In the 
 
 The RSS (Resident Set Size) is only 129,272 KB, or 122 MB and the disk usage is only 4.0 MiB which indicates that only touched pages use memory. Although it seems the size of data is 16 KiB *1000 = 16 MiB but only 1 out of 4 pages have been touched so the actual disk usage is 4KiB* 1000 = 4.0 MiB
 
-![](Screen-Shot-2023-03-06-at-11.15.11-AM-1024x422.png)  
+![](Screen-Shot-2023-03-06-at-11.15.11-AM-1024x422.jpg)  
 *Figure 5. RES for Test 2*
 
 ![](Screen-Shot-2023-03-06-at-11.15.39-AM-1024x299.png)  

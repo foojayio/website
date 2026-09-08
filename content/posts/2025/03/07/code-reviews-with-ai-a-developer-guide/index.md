@@ -32,17 +32,17 @@ I will discuss the use and impact of AI on the different phases of the SDLC from
 
 AI-powered generative code assistants take the power of AI even further by automatically generating code based on your inputs. This can dramatically reduce the time and effort required to write code, especially for repetitive or boilerplate tasks.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fe9vrkg0g1bvt44ta8uqo.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fe9vrkg0g1bvt44ta8uqo.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-f1b8cd6b.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-f1b8cd6b.png)
 
 Generative code assistants can also help you explore different design options and identify potential problems before you start coding. By leveraging these tools, you can focus on the creative and strategic aspects of software development, while the AI handles the tedious and mechanical tasks.
 
 AI adoption
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F9eeleowba6m6fzxh00o1.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F9eeleowba6m6fzxh00o1.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e9085767.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e9085767.png)
 
 There's a long list of AI code assistants providing different features, with different ranking rates considering 5 different categorizations:
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F2yrk2ycgk1jpl68874ae.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F2yrk2ycgk1jpl68874ae.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e159fd4d.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e159fd4d.png)
 
 *\*Codiumate is now Qodo Gen*
 
@@ -54,9 +54,9 @@ The local free open-source approach ....
 
 Other completely open-source options are also available. This option involves hosting the model to generate code locally or in your network. There are tons of free and open-source models that you can use, and you can only serve those models by installing the free tool Ollama on a machine in your network or locally.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Frdd5jkpaeqq6av617m0q.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Frdd5jkpaeqq6av617m0q.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-df29f66d.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-df29f66d.jpg)
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Feg0hnl2g99ry4nwfrvwv.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Feg0hnl2g99ry4nwfrvwv.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-ba41bf30.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-ba41bf30.png)
 
 I've tried with the IntelliJ plugin "[Continue](https://plugins.jetbrains.com/plugin/22707-continue/reviews)", [Ollama](https://ollama.com/), and the models "codellama" and "deepseek-coder" and the experience was not bad at all. With this solution also you are sure your code, and [your prompts are not going anywhere out of your domains](https://github.com/ollama/ollama/blob/main/docs/faq.md#does-ollama-send-my-prompts-and-answers-back-to-ollamacom).
 
@@ -66,7 +66,7 @@ While generative AI holds immense promise, it is not without its pitfalls. One m
 
 AI-generated code correctness
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8q4kodirhxscuyxj7rrd.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8q4kodirhxscuyxj7rrd.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-95cf718e.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-95cf718e.png)
 
 Additionally, generative AI systems may not fully understand the context or intent of the code they generate, leading to nonsensical or even harmful output. Furthermore, there is a risk that generative AI could not use the full code base context in order to generate the most aligned code with our current content. It is crucial for developers to carefully review and test code generated by AI and to employ robust security measures to mitigate these risks.
 
@@ -110,9 +110,9 @@ For this task, there are static analyzers in the form of IDE linters, like Sonar
 
 Imagine catching potential bugs and best practices before they even make it to a code review.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F74qlnrbowbyj92k3iwsu.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F74qlnrbowbyj92k3iwsu.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-4eba458e.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-4eba458e.png)
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fuuqq7d2rylzfx49t6xe8.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fuuqq7d2rylzfx49t6xe8.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-f266291e.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-f266291e.png)
 
 These linters use static analysis, and different functions, to detect code smells, bugs, and security vulnerabilities directly in your IDE, empowering you to write cleaner and safer code from  
 
@@ -122,7 +122,7 @@ However, this includes not only bugs and vulnerabilities but **also best practic
 
 In this case, GitHub Copilot didn't suggest an approach using a feature introduced 7 years ago.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fsfmsfajraaskhs529t4b.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fsfmsfajraaskhs529t4b.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e38eec89.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-e38eec89.png)
 
 Generated by Github Copilot  
 
@@ -147,7 +147,7 @@ Manual approach considering Java's new Teeing collector, introduced in Java 12, 
 
 or even not using the latest new features of a language. In this case, Virtual Threads were introduced in Java 21, a year and a half ago.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fe2cdrdg8sadnh9dadgbl.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fe2cdrdg8sadnh9dadgbl.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-70de7c27.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-70de7c27.png)
 
 Code generated by Github Copilot, using platform threads  
 
@@ -169,7 +169,7 @@ Manual approach using Virtual Threads, being able to create thousands of threads
 
 Luckily these linters will also warn us about the lack of best practices usage while we code and during the CI full analysis.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ficzv32sihtsevac0av9c.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ficzv32sihtsevac0av9c.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c5219758.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c5219758.png)
 
 A particular benefit of some linters over others (like SonarQube IDE) is that they can analyze multiple types of files at the same time in the same project. This is not only restricted to programming languages like Java, Python, JScript, Kotlin, etc. but also to Cloud deployment files like Docker, Kubernetes, Ansible, Terraform, CloudFormation, etc., and even Secrets vulnerabilities.
 
@@ -181,11 +181,11 @@ In this area, we can find tools like Qodo Gen, among others, that specialize in 
 
 I've installed it in my IntelliJ IDE and tried it with my AI project. The result is impressive, considering several test use cases in the happy path or edge cases. As with most code assistants, we can select which remote-hosted model we want to use.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxp2q0rp6ggm3m2qimv9e.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxp2q0rp6ggm3m2qimv9e.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7d8684f8.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7d8684f8.png)
 
 Tools like Qodo will take a class method and create its tests. We will have a dashboard to see the tests and executions, and also a plan for the test generation in the Qodo plugin :
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4rthxjobjagon0djfr70.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4rthxjobjagon0djfr70.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-65008009.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-65008009.jpg)
 
 **3. Pull Request creation**
 
@@ -209,7 +209,7 @@ A typical workflow would usually imply:
 
 Several guides ([GitHub](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests), [pull request](https://www.pullrequest.com/blog/writing-a-great-pull-request-description/)) can help you write good descriptions, but we can leverage AI for this. One of the tools we can use for this is Github Copilot, which analyzes the code in the PR to provide a more detailed description.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4itg64llbnym02iolrlj.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4itg64llbnym02iolrlj.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-1b8bbf88.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-1b8bbf88.jpg)
 
 In these two images, we see how we can ask Github Copilot to generate a summary for the PR.
 
@@ -233,7 +233,7 @@ This allows developers to focus on the most critical problems first, making the 
 
 Connecting this step with the previous PR workflow, the tools we connect to our repository can help us to check for all the scenarios that can make our code fail, before anyone invests time in reviewing it, to just focus on working changes that need experienced review.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fpzok2w9t2i1jfgu23i9q.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fpzok2w9t2i1jfgu23i9q.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c13927fb.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c13927fb.jpg)
 
 **5. Pull Request changes explanation**
 
@@ -241,7 +241,7 @@ Now it's the turn of the reviewers. They should start by reading the ticket that
 
 For this, we can use several tools. I've tried [Github Copilot](https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/asking-github-copilot-questions-in-github#asking-copilot-chat-questions-about-specific-pieces-of-code) and [Qodo PR-Agent](https://github.com/qodo-ai/pr-agent?tab=readme-ov-file#try-it-now) (you can find a comparison [here](https://dev.to/danielrendox/ai-powered-pull-requests-codiumai-vs-github-copilot-35d0)) :
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fu4zonrisjz2uyrqlao5g.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fu4zonrisjz2uyrqlao5g.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-2804a77d.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-2804a77d.jpg)
 
 While Copilot has an explanation feature per changed file, Qodo can create a description for the entire PR. This will help the reviewers understand the details applied to files and focus on those that require more attention. It's important to reduce the time a PR needs to be merged, and definitely, the usage of AI tools can help us with that.
 
@@ -255,7 +255,7 @@ Some AI tools, like Qodo PR-Agent, can also implement the improvements and chang
 
 Like all the changes, they need to be analyzed and checked with tools like SonarQube. If there are any issues, these tools will fail, preventing those changes from being merged into the main branch.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F44xvo4z9i73fhk40zrsp.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F44xvo4z9i73fhk40zrsp.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-9d1ae302.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-9d1ae302.png)
 
 **Addressing the Challenges with AI**
 

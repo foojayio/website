@@ -39,7 +39,7 @@ Dynamic assets are data that get generated, or are collected, at runtime as a si
 
 Finally, they include training data, created as a training run progresses to track what the JVM has done and why. Training data identify what JVM assets need to be stored into the cache when it is created. They are also installed in the cache, indexing the other assets and helping identify how to use them in production.
 
-![Types of assets on the AOT Cache](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9d94n4orpjxb2gyr6tgy.png)
+![Types of assets on the AOT Cache](9d94n4orpjxb2gyr6tgy.png)
 
 We can also distinguish two types of data depending on their purpose:
 
@@ -95,7 +95,7 @@ The first thing we need to do is to compile this application on the root folder:
 
 ***$ mvn clean package***
 
-![mvn clean package](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tm6pz4hlp6od2017a0s7.gif)
+![mvn clean package](tm6pz4hlp6od2017a0s7-ca7451ce.webp)
 
 ## Training the application
 
@@ -113,7 +113,7 @@ The arguments we are going to use are the following:
 
 ***$ oha --urls-from-file src/main/resources/urls.txt -n 100***
 
-![Training run](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vwsfv1ms80rzxo5rrkxg.gif)
+![Training run](vwsfv1ms80rzxo5rrkxg-cd7f2c34.gif)
 
 Now that we have trained the application, let's stop it with *ctrl+c*. It will take some time to stop while it builds the cache. It will do both the training and assembly steps at once.
 
@@ -134,7 +134,7 @@ The arguments we are going to use are the following:
 
   And we can use the application normally. Let's play a bit on <http://localhost:8080/>
 
-![Production Run](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g6z2lwbnno5gy8jti0wj.gif)
+![Production Run](g6z2lwbnno5gy8jti0wj-5758d589.webp)
 
 On this run, we created the *production.log* file.
 
@@ -150,27 +150,27 @@ The first step is loading all the information into the tool, to run a proper ana
 
 \***\\\> load productionLog --background target/production.log\*\***
 
-![Analysis](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v72kofa8l5sqihzox336.gif)
+![Analysis](v72kofa8l5sqihzox336-0d481502.webp)
 
 Now we are ready to start our analysis. A good place to start is the info command that shows a summarized version of what is inside the cache:
 
-![Info](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2uiwzejfxl06c1s6j52n.png)
+![Info](2uiwzejfxl06c1s6j52n-8a6045d1.jpg)
 
 ### Are we training the right thing?
 
 The first thing that should catch our attention is that there's more than 10% of classes that were used on the production run but were not cached. That's not usual, so let's dig into whatImage description those classes are. There are hundreds of them, so if we filter by our package name, that would make our exploration easier:
 
-![ls --loaded=production](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1qy162x59wrvcednnvj6.png)
+![ls --loaded=production](1qy162x59wrvcednnvj6-f6ff78b5.png)
 
 What does this mean? Let's take a closer look:
 
-![describe -i org.cutecats.rest.json.CatPhotoGenerator -hints](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/auqd1030lo0ywgyksi9k.png)  
+![describe -i org.cutecats.rest.json.CatPhotoGenerator -hints](auqd1030lo0ywgyksi9k-b9934104.jpg)  
 
 This class was not loaded during training but it was loaded during production. Something went wrong with our training.
 
 We can explore the class *org.cutecats.rest.json.CatPhotoGenerator* by looking at the source code. There, we discover that it should be used by *org.cutecats.rest.json.CatResource*.
 
-![describe -i org.cutecats.rest.json.CatResource](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tsmt7f8c5m6drge89zlu.png)
+![describe -i org.cutecats.rest.json.CatResource](tsmt7f8c5m6drge89zlu-f3f0fd7a.jpg)
 
 So, this class was loaded both on training and production runs, and the metadata is included in the AOT Cache. But for some reason, none of its methods were profiled during the training run. This means that our training run did not make extensive use of this class. Maybe we should take a look at our training run.
 
@@ -180,13 +180,13 @@ Let's run again the training, changing the url to the Java endpoints instead of 
 
 Don't forget to remove the log and aot files from target/ after each try to have clean runs (the clean on the maven command should do that).
 
-![Training 2](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/itlu30hylyznb4tf4kez.gif)
+![Training 2](itlu30hylyznb4tf4kez-51f4674f.gif)
 
 If we analyze the results again with our tool, we should see a different result:
 
-![Analysis 2](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/touldogey5247oofxhzh.gif)
+![Analysis 2](touldogey5247oofxhzh-ffe9c6a9.gif)
 
-![Info](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/odglwgkgke1f6iylhqqv.png)
+![Info](odglwgkgke1f6iylhqqv-df9b376a.jpg)
 
 We have increased the percentage of the classes used (96%) in production that were cached compared to our last attempt (89%). That's an improvement.
 
@@ -194,13 +194,13 @@ We have increased the percentage of the classes used (96%) in production that we
 
 Let's check again for classes loaded in production that were not cached:
 
-![ls --loaded=production](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6giwwa05hkx45hzjgcao.png)
+![ls --loaded=production](6giwwa05hkx45hzjgcao-f895c434.png)
 
 Something is still not working as intended. Maybe we should approach this from the other side: are we executing some testing code that replaces the real production code that should be executed during training?
 
 Let's check if there's something being stored in the cache that we don't really need:
 
-![ls -pn=org.cutecats.rest.json -t=Class](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nc8op283birg0li59uue.png)
+![ls -pn=org.cutecats.rest.json -t=Class](nc8op283birg0li59uue-78a469d0.jpg)
 
 We can see a suspicious class called *DummyPhotoGenerator*. That's supposed to be used only for testing purposes, not for real training and production. Using DummyPhotoGenerator instead of the CatPhotoGenerator class is making the code and classes used by CatPhotoGenerator not being used. If we explore our source code, we will discover that there is a "test" argument on the /cats endpoint that distinguishes between testing and production.
 
@@ -210,7 +210,7 @@ The training run has to be as close to production as possible. If we use test cl
 
 Let's try again, now using <http://localhost:8080/cats?test=false> in the urls.txt file.
 
-![Analysis 3](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ap5aht7vkwb5z6ndw9ec.png)  
+![Analysis 3](ap5aht7vkwb5z6ndw9ec-1eea071a.jpg)  
 
 We have increased a bit more the percentage of classes loaded, which is always a good sign.  
 
@@ -220,7 +220,7 @@ Do we have any other classes loaded during production that were not cached durin
 
 Are there any testing classes loaded during training or production runs?
 
-![Looking for classes](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/03a6piohlhtpe6o9pxu2.png)
+![Looking for classes](03a6piohlhtpe6o9pxu2-8e5b2851.jpg)
 
 We made sure that:
 
@@ -236,18 +236,18 @@ Maybe you already noticed another important information we have been ignoring un
 
 Profiling is done on each method independently, so let's take a look at one of our methods that we know should be well trained. The describe command is pretty self explanatory on this case:
 
-![describe -t=Method](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/d0x89ecm3c7yfyxv17dh.png)
+![describe -t=Method](d0x89ecm3c7yfyxv17dh-7f0ec28c.jpg)
 
 Let's follow the recommendation and do more requests during the training run.
 
 ***$ oha --urls-from-file src/main/resources/urls.txt -n 10k***
 
-![Training](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/afd4p3y0b33anyhdphn3.gif)
+![Training](afd4p3y0b33anyhdphn3-d3a90f80.webp)
 
 And with 10 000 requests done, we can see that we got our method completely profiled and compiled to the higher level:
 
-![Info](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/o7cys8sp4ut7i9pj4lvy.png)
+![Info](o7cys8sp4ut7i9pj4lvy-0f689f9d.jpg)
 
-![describe trained method](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9p8uizqz0ykh6yhxhd6b.png)
+![describe trained method](9p8uizqz0ykh6yhxhd6b-ba2994ef.jpg)
 
 There's still more improvements that can be done to the training that will greatly depend on your application, but now we have all the basics covered.

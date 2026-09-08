@@ -81,7 +81,7 @@ For example, the Apache ShardingSphere project provides a JVM database driver wi
 
 The proxy approach is similar to the library/framework approach above; the difference comes from the former running inside the application, while the latter is a dedicated component.
 
-![](decide-proxy-system-1024x744.png)
+![](decide-proxy-system-1024x744.jpg)
 
 The responsibility of keeping track of the databases falls now on the proxy's shoulders.
 

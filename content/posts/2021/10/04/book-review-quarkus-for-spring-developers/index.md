@@ -38,7 +38,7 @@ The book provides many annotated and numbered examples of how common development
 
 Where applicable, the authors make side-by-side tables that can steer developers towards where to look for certain capabilities:
 
-![](https://lh6.googleusercontent.com/FEvZPayj2pPNSZjXu6QMGef4AEQnnLT04_UGZ_rTVSpsD0MMxZb8zFnHkpbEvzUkKwgNX6VFd_Uxy6qcETCJfPU53kNXl-4cPjyVmvQtKT8YBvcYNtzm2X98Mamc10FxX_iMl784=s0)
+![](FEvZPayj2pPNSZjXu6QMGef4AEQnnLT04_UGZ_rT-a8e9081b.jpg)
 
 The book additionally explains how developers can use [an optional automated migration tool](https://developers.redhat.com/products/mta/overview) that analyzes existing Spring applications, using analysis techniques that narrow down specifically which Quarkus features can help in which components.
 
@@ -56,7 +56,7 @@ The chapter articulates the way that Quarkus' support for reactive programming s
 
 Chapter 5 on Event Driven Services discusses the role of libraries like Spring Event Handling (with **@ServiceActivator)** compared against Quarkus Event Handler (with **@ConsumeEvent**).
 
-![](https://lh3.googleusercontent.com/vyTdejqa7k2ElQKEvjm6iVZCDrnTx4QzcLR8DbVaFqqn3SX_R3-kplx4abGh3ZqCmptzD8pASEDIPvuDKv5KnFZhP6LGZZ8DDCuZyt1TEa2YNXpcv4DuMLa24kuPZEvPlBv2Dh6H=s0)
+![](vyTdejqa7k2ElQKEvjm6iVZCDrnTx4QzcLR8DbVa-5f09bbec.jpg)
 
 ## Focus on Details and Testing
 

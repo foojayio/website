@@ -30,7 +30,7 @@ Docker Init was introduced in Docker Desktop 4.27, before LLMs became the defaul
 
 What makes it valuable is that it's deterministic—not a probabilistic guess. It produces the same correct output every time, following Docker's own best practices.
 
-![Docker Commandos setting up the command center](https://dockersecurity.io/commandos-asgard/asgard-init.png)
+![Docker Commandos setting up the command center](asgard-init-57a9971e.jpg)
 
 ## Technical Requirements
 

@@ -6,7 +6,7 @@ description: "An explanation of dependency coordinates and \"distinguishers\" as
 canonical: "https://cguntur.me/2020/05/26/understanding-apache-maven-part-3/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/05/mavenhierarchies.png?w=1024"
+image: "mavenhierarchies-8c37200a.png"
 categories:
   - "Maven"
 related_posts:
@@ -88,7 +88,7 @@ A combination of GAV coordinates and distinguishers can be used to locate the ex
 ## POM Hierarchies
 
 This section describes the hierarchy in Maven POMs.
-![](https://cgunturme.files.wordpress.com/2020/05/mavenhierarchies.png?w=1024)
+![](mavenhierarchies-8c37200a.png)
 
 ### Parent POM
 

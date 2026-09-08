@@ -44,9 +44,9 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
 
 As the **first runtime to pass the full TCK**, GlassFish played a critical role in finalizing the Jakarta EE 11 Web Profile specification:
 
-* ![✅](https://s.w.org/images/core/emoji/15.0.3/svg/2705.svg) **Full TCK compliance** for [Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/)
-* ![🧪](https://s.w.org/images/core/emoji/15.0.3/svg/1f9ea.svg) Used to **ratify and validate** the Jakarta EE 11 Web Profile specifications on both [Java 17](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-JDK17-M10/web-8.0.0-JDK17-M10.zip) and [Java 21](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-M10/web-8.0.0-M10.zip)
-* ![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Delivered support for updated APIs across multiple layers of the runtime, even [beyond the scenarios](https://github.com/eclipse-ee4j/glassfish/issues?q=is%3Aissue%20state%3Aclosed%20label%3A8.0) covered by the TCK
+* ✅ **Full TCK compliance** for [Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/)
+* 🧪 Used to **ratify and validate** the Jakarta EE 11 Web Profile specifications on both [Java 17](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-JDK17-M10/web-8.0.0-JDK17-M10.zip) and [Java 21](https://repo1.maven.org/maven2/org/glassfish/main/distributions/web/8.0.0-M10/web-8.0.0-M10.zip)
+* 🚀 Delivered support for updated APIs across multiple layers of the runtime, even [beyond the scenarios](https://github.com/eclipse-ee4j/glassfish/issues?q=is%3Aissue%20state%3Aclosed%20label%3A8.0) covered by the TCK
 
 ### OmniFish Engineering Contributions
 

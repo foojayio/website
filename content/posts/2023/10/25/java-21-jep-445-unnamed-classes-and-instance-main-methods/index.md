@@ -34,7 +34,7 @@ It's ideal for students or anyone who wants to start experimenting with Java. It
 The video above and this post are inspired by [a post by Tom Cools](https://www.tomcools.be/post/april-2023-onboarding-now/), and to be honest, I stole a bit of his approach as I first want to show you the older [JEP 330: "Launch Single-File Source-Code Programs"](https://openjdk.org/jeps/330).
 
 Thanks to this feature, introduced in Java 11 you can already execute a single Java-file without the need to compile the code to byte code with `javac` as visiualized in this diagram:
-![](jep330.png)
+![](jep330.jpg)
 
 With the changes brought by JEP 330, the conversion from Java code to byte code, is "hidden". It still happens, but you, as a user, don't need to take care of it.
 

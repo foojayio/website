@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Header Image](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes.jpg)
+![Header Image](liquid-glass-material-3-modern-native-th-99b7f8fd.jpg)
 
 It has been one of those weeks where the diff is bigger than the headline. The headline is short — Codename One now ships modern native themes: an iOS "liquid glass" look and an Android Material 3 look, bundled into the iOS and Android ports, on by default in the Playground, and selectable from a brand new menu in the simulator. The diff behind that headline is several thousand lines across the platform ports, the simulator, the GUI plumbing, and a small army of screenshot tests.
 
@@ -43,7 +43,7 @@ The shipping CSS sources sit in the repo at [native-themes/ios-modern/theme.css]
 
 ### iOS Modern
 
-![iOS Modern theme — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/showcase-ios.png)
+![iOS Modern theme — light and dark](showcase-ios-3e46a508.png)
 
 This is the `ShowcaseTheme` capture from the new screenshot suite, run on iOS in light and dark. Same Form, same components, swap `Display.setDarkMode(...)` and re-resolve. The form is built like this:
 
@@ -82,19 +82,19 @@ The full screen source is [DarkLightShowcaseThemeScreenshotTest.java](https://gi
 
 ### Android Material 3
 
-![Android Material 3 theme — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/showcase-android.png)
+![Android Material 3 theme — light and dark](showcase-android-1fe51f30.jpg)
 
 Same `ShowcaseTheme` source on Android. The Material 3 baseline palette gives `Default` the primary container color and `Raised` the elevated-surface tone, with the dark variant flipping the relationship correctly via the dark color-role mapping. Padding and font sizing follow Material density, which you can see in how compact the same Form lays out compared to iOS.
 
 ### Translucent surfaces
 
-![Dialog over a textured backdrop — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/dialog-translucent.png)
+![Dialog over a textured backdrop — light and dark](dialog-translucent-8c62c8fe.png)
 
 This is the `DialogTheme` capture against the screenshot suite's textured diagonal-stripe backdrop. The backdrop is intentional — it lets reviewers see whether anything that is *supposed* to be translucent actually is. The iOS Modern `Dialog` uses an `rgba` surface fill (0.78 alpha in light, 0.95 in dark — dark needs more opacity because bright stripes bleed through) and its `DialogBody`, `DialogTitle`, `ContentPane`, `CommandArea` sub-UIIDs are transparent so the rounded corners read cleanly. The same trick is applied to `TabsContainer` and the iOS `MultiButton`.
 
 ### Runtime palette overrides
 
-![Magenta palette layered over iOS Modern — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/palette-override.png)
+![Magenta palette layered over iOS Modern — light and dark](palette-override-bbf26dd1.png)
 
 The native theme is meant to be a starting point — you can layer your own palette on top without forking the theme. Above is the `PaletteOverrideTheme` capture: the base is iOS Modern, but the test layers a magenta palette on top at runtime via `UIManager.addThemeProps(...)`. `RaisedButton`, `FlatButton`, the disabled tone, and the body-copy span all pick up the override in both light and dark — the override seam works at the resource-bundle layer, exactly the same mechanism a user theme uses to override the native theme on a real app.
 
@@ -119,7 +119,7 @@ The HTML5 port has the runtime support for the modern themes but does not bundle
 ## Sticky headers
 
 The other piece of look-and-feel that we want to highlight is `StickyHeaderContainer`, which finally has a proper home in the framework. It is the iOS-contacts-list / sectioned-material-list component: scroll past a section boundary and the previous header is replaced by the next one. New this week, the swap is animated. A directional slide moves the outgoing header up on a forward scroll and down on a reverse scroll, or you can pick a cross-fade.
-![Sticky header sectioned scroll](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/sticky-header-slide.gif)
+![Sticky header sectioned scroll](sticky-header-slide-69f04c57.gif)
 
 Above is a six-frame sweep from the screenshot test — the user scrolls through sections A, B, C, D, E and the pinned header recolors to whichever section is currently active at the top of the viewport.
 
@@ -147,10 +147,10 @@ form.add(BorderLayout.CENTER, sticky);
 Every screenshot in this post is captured by a test that runs the app on a real iOS device, an Android emulator, and headless Chrome, then diffs each capture against a stored golden image. The diff *is* the test — if the rendered pixels drift, the run fails.
 
 For animations the test grabs a series of frames over a fixed-duration transition, then composites them into a single index image. That is how the dual-appearance shots end up as one side-by-side picture per test:
-![Dialog over a textured backdrop — light and dark](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/dialog-translucent.png)
+![Dialog over a textured backdrop — light and dark](dialog-translucent-8c62c8fe.png)
 
 …and how the sticky-header animation ends up as a six-frame strip stitched into a GIF:
-![Sticky header sectioned scroll](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/sticky-header-slide.gif)
+![Sticky header sectioned scroll](sticky-header-slide-69f04c57.gif)
 
 If you want to read the source, the suite lives at [scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests/](https://github.com/codenameone/CodenameOne/tree/master/scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests).
 

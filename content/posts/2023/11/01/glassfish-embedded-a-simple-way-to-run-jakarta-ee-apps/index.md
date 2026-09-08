@@ -24,7 +24,7 @@ I've been asked by the Eclipse GlassFish project to say a few words about how I 
 
 I started using GlassFish while GlassFish was in Oracle's hands as a reference implementation of Java EE. Some time ago, there were suggestions that GlassFish was not being actively maintained. Since Oracle's donation of GlassFish to the Eclipse Foundation, with support from the Foundation's GlassFish team, and the OmniFish team (that also provides commercial support), the GlassFish project is very active and the community around it is certainly present and responsive. That's one more reason for me to continue using GlassFish in the future.  
 
-{{< img src="https://omnifish.ee/wp-content/uploads/2023/09/GlassFish-embedded.png" class="aligncenter size-full is-resized" width="264" height="135" style="width:264px;height:135px" >}}
+{{< img src="GlassFish-embedded-6db74999.jpg" class="aligncenter size-full is-resized" width="264" height="135" style="width:264px;height:135px" >}}
 
 ## Overview of the APILoader Project
 

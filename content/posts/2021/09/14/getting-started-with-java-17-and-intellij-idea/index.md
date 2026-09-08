@@ -6,7 +6,7 @@ description: "In this article, I will limit the coverage of Java 17 to its langu
 canonical: "https://blog.jetbrains.com/idea/2021/09/java-17-and-intellij-idea/"
 authors:
   - "mala-gupta"
-image: "Java17_blog_Blog_1280x720.png"
+image: "Java17_blog_Blog_1280x720.jpg"
 categories:
   - "IntelliJ IDEA"
   - "JEPs"
@@ -30,7 +30,7 @@ In this article, I will limit the coverage of Java 17 to its language features �
 * **Pattern matching for switch statements** . Pattern matching for switch is introduced as a [preview feature](https://openjdk.java.net/jeps/12). As the name suggests, it adds patterns to the case labels in the switch statements *and* switch expressions. The type of the *selector expression* that can be used with a switch is expanded to any reference value. Also, case labels are no longer limited to constant values. It also helps replace if-else statement chains with switch, improving code readability.
 
 Let's start with pattern matching.
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/Java17_blog_Blog_1280x720.png)
+![](Java17_blog_Blog_1280x720.jpg)
 
 Before we dive into pattern matching for switch, let's ensure we have the basic IntelliJ IDEA configuration set up.
 
@@ -39,15 +39,15 @@ Before we dive into pattern matching for switch, let's ensure we have the basic 
 Basic support for Java 17 is available in [IntelliJ IDEA 2021.2.1](https://blog.jetbrains.com/idea/2021/08/intellij-idea-2021-2-1/). More support is on the way in future IntelliJ IDEA releases.
 
 To use pattern matching for switch with Java 17, go to *ProjectSettings \| Project* , set the *Project SDK* to 17 and set *Project language level* to '*17 (Preview) - Pattern matching for switch*':
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img1.png)
+![](java17-img1-b43409f2.png)
 
 You can use any version of the JDK that has already been downloaded on your system, or download another version by clicking on '*Edit* ' and then selecting '*Add SDK \>* ', followed by '*Download JDK…*'. You can choose the JDK version to download from a list of vendors.
 
 On the modules tab, ensure the same language level is selected for the modules - *17 (Preview) - Pattern matching for switch*:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img2.png)
+![](java17-img2-14a696a4.png)
 
 Once you select this, you might see the following pop-up which informs you that IntelliJ IDEA might discontinue the support for the Java preview language features in its next versions. Since a preview feature is not permanent (yet), and it is possible that it could change (or even be dropped) in a future Java release.
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img3.png)
+![](java17-img3-95384406.png)
 
 Ok, now we are ready to start with the Java 17 language features.
 
@@ -90,12 +90,12 @@ void outputValueInUppercase(Object obj) {
 ```
 
 In IntelliJ IDEA, you can invoke context-sensitive actions on the variable s (by using Alt+Enter or by clicking the light bulb icon) and selecting *Replace 's' with pattern variable* to use pattern matching for instanceof:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-1.gif)
+![](java17-1-9d24984d.gif)
 
 The scope of the pattern variable (a local variable) is limited to the `if`-block because it makes no sense to be able to access the pattern variable if the test fails.
 
 The simplicity of pattern matching of instanceof might be deceptive. If you are thinking it doesn't matter much since it only removes one line of code, think again. Removal of just one line of code can open up a number of possibilities in which you can modify your code. For example, aside from using pattern matching for instanceof, the following code merges `if` statements, introduces a pattern variable, and replaces a for loop with `Collection.removeIf()`:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-2.gif)
+![](java17-2-c3872a8c.webp)
 
 Now, let me brief you on the enhancements to the switch statement with the switch expressions (covered in detail [here](https://blog.jetbrains.com/idea/2019/02/java-12-and-intellij-idea), with Java 12, and [here](https://blog.jetbrains.com/idea/2019/11/java-13-and-intellij-idea/) with changes in Java 13). As I mentioned before, if you are already familiar with switch expressions, please feel free to jump to the section 'Welcome to pattern matching for switch'.
 
@@ -133,7 +133,7 @@ public class Planet {
 ```
 
 Let's see how switch expressions can help. The following gif demonstrates some of the benefits of switch expressions such as concise code, improved code semantics, no redundant break statements, exhaustive iteration, and more:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-3.gif)
+![](java17-3-8c636578.webp)
 
 With a basic understanding of pattern matching, pattern matching for instanceof, and switch expressions, let's look at what pattern matching is and why you need it?
 
@@ -197,7 +197,7 @@ public class MyEarth {
 ```
 
 Let's look at how we can use switch expressions and IntelliJ IDEA to make this code more concise:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-4.gif)
+![](java17-4-757733ff.webp)
 
 Here's the final (concise) code for reference:
 
@@ -219,10 +219,10 @@ The power of this construct lies in how often it helps to reduce the cognitive c
 ### **Reducing cognitive complexity with pattern matching for switch**
 
 An if-else statement chain *seems* complex to read and understand – each condition should be *carefully* read together with its then-and-else code blocks. If we consider the if statement chain from the preceding section, it can be represented roughly as follows:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img4.png)
+![](java17-img4-a009ddb2.png)
 
 Now let me represent the switch construct from the preceding section:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img5.png)
+![](java17-img5-477031a4.png)
 
 Even by looking at both these images, the switch logic (though similar) looks simpler to read and understand. An if statement chain *seems* to represent a *long* , *complex* path, in which the next turn *seems* to be unknown. But this isn't the case with the switch construct.
 
@@ -237,12 +237,12 @@ One approach has been to add a `@NotNull` annotation to the variable accepted by
 Of course, if you do not explicitly check for null values and the selector expression is null, it throws a `NullPointerExpression`. For backward compatibility, `null` selector expression won't match the default label.
 
 Now, you can define null as one of the valid case labels – so that you can define what to do if the selector expression is null.
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-5.gif)
+![](java17-5-5971849a.gif)
 
 ### **Does IntelliJ IDEA convert your if-statement to a switch expression or a switch statement?**
 
 In the preceding example, the if-else construct was converted to a switch expression. However, if you'd have selected this conversion, *before* using pattern matching for instanceof, you would have got a switch statement, as shown in the following gif:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-6.gif)
+![](java17-6-5b920d1e.gif)
 
 Since the code block for if-else in the original code snippet defined multiple lines of code, it made sense to convert it to a switch statement rather than a switch expression.
 
@@ -253,7 +253,7 @@ This brings us to another interesting question – what is the relation between 
 A switch is classified as a statement or an expression depending on whether it returns a value or not. If it returns a value, it is a switch expression, otherwise a statement. Switch can also use either a colon or an arrow syntax.
 
 Interestingly, the switch style (statement or expression) and arrow/colon syntax are orthogonally related, as shown in the following image:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img6.png)
+![](java17-img6-65957ef9.png)
 
 The preceding matrix is not just limited or specific to switch statements or expressions that define a pattern in their case labels. It applies to switch statements and expressions that define constants too.
 
@@ -279,7 +279,7 @@ Pattern variables are local variables, which are casted and initialized when a t
 ### **When do missing break statements in a switch statement become a compilation error?**
 
 In the following example, the pattern variable `d` is limited to the case label `Discrimination`. When patterns, instead of constants, are used in case labels for switch statements or expressions, missing `break` statements is a compilation error because it can result in a default fall-through to a case label that did not pass the test:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-7-1.gif)
+![](java17-7-1-449e6d3b.gif)
 
 ### **Guarded patterns – conditions that follow test patterns**
 
@@ -363,12 +363,12 @@ So far, the necessity of parenthesized patterns is very low. It's only to distin
 What happens if the types being checked in switch case labels have an inheritance relationship? You should check for the most specific case, prior to checking for the general type.
 
 Failing to do so would be a compilation error – as shown in the following image, when the code in method `getDamageForDifferentPollutionTypes` compares its method parameter `obj` with class `AirPollution` and `Pollution` (class `AirPollution` extends `Pollution`).
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-img7.png)
+![](java17-img7-5835c7c1.png)
 
 An interesting observation is that with a similar logic it isn't a compilation error for an if-else statement.
 
 However, in such cases, IntelliJ IDEA would not offer you the option to convert it to a switch. You get the option, when you remove checking a superclass before its subclass, or, perhaps checking for unrelated types:
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-8.gif)
+![](java17-8-a0834340.webp)
 
 ### **Should you care about handling all possible values for the selector expression in switch?**
 
@@ -508,7 +508,7 @@ It can be time-consuming to look for if-else constructs in your code and check i
 With this inspection, you can convert *most* of the if-statements to switch. I stated 'most' of the if-statements and not 'all', for a reason. As demonstrated using a lot of examples in the preceding section, you'll notice that at times IntelliJ IDEA won't offer you an option to convert an if-else statement to switch, or it might not convert it the way you have assumed it would. This is due to missing adherence to the multiple rules we talked about in this blog.
 
 To run the inspection 'if can be replaced with switch', you can use the feature – Run inspection by name, using the shortcut Ctrl+Alt+Shift+I or ⌥⇧⌘I. Enter the inspection name, followed by selecting the scope and other options. The Problems Tool window will show you where you can apply this inspection. You can choose to apply or ignore the suggested changes as you browse the list in the Problems View Window.
-![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-9.gif)
+![](java17-9-4944cd40.webp)
 
 We have talked a lot about the pattern matching for switch. Now let's cover sealed classes and interfaces. Added as a standard language feature in Java 17, they haven't changed from Java 16.
 

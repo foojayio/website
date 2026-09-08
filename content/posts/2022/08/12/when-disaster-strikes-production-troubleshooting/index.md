@@ -5,7 +5,7 @@ lastmod: "2022-08-12T11:06:37+00:00"
 description: "Production is failing and everything is lost? That used to be the case. Fail whale, hysteria and panic. Developer observability fixes this!"
 authors:
   - "shai-almog"
-image: "Lightrun-developer-productivity-dark-29.png"
+image: "Lightrun-developer-productivity-dark-29.jpg"
 categories:
   - "Spring"
   - "sql"
@@ -29,7 +29,7 @@ Production doesn't go down in flames as much. Thanks to staging, QA, CI/CD and D
 
 So we have all of these things in place. We passed QA, staging and everything's perfect. Right?
 
-![](5m9Wd26e.png)
+![](5m9Wd26e.jpg)
 
 Well… Not exactly.
 

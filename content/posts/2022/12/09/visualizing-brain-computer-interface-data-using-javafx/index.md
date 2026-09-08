@@ -30,8 +30,8 @@ Based on many inputs, Trinity helps evaluate whether machine learning models pro
 Trinity allows users to navigate and explore hundreds of layers in AI models and hyper-dimensional data by visualizing them in 3D.
 
 {{< gallery >}}
-trinity-skyline-1024x576.png | Trinity intro and main menu
-trinity-hyperspace-1024x576.png | Trinity Hyperspace Tool
+trinity-skyline-1024x576.jpg | Trinity intro and main menu
+trinity-hyperspace-1024x576.jpg | Trinity Hyperspace Tool
 trinity-hypersurface-1024x576.png | Trinity Hypersurface Tool
 {{< /gallery >}}
 

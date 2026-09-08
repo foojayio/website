@@ -45,7 +45,7 @@ Kubernetes, while often discussed in the context of cloud computing and large-sc
 
 Before Kubernetes, the deployment landscape was markedly different. Understanding this evolution helps appreciate the challenges Kubernetes aims to solve. The image below represents the road to Kubernetes and the technologies we passed along the way.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aiu16ve9133ga7tw5pvw.png)
+![Image description](aiu16ve9133ga7tw5pvw-eeb4a196.png)
 
 In the image we can see that initially, applications were deployed directly onto physical servers. This process was manual, error-prone, and difficult to replicate across multiple environments. For instance, if a company needed to scale its application, it involved procuring new hardware, installing operating systems, and configuring the application from scratch. This could take weeks or even months, leading to significant downtime and operational inefficiencies.
 
@@ -106,7 +106,7 @@ There used to be a site called "doyouneedkubernetes.com" when you visited that s
 
 Understanding Kubernetes architecture is crucial for debugging and troubleshooting. The following image shows the high level view of a Kubernetes deployment. There are far more details in most tutorials geared towards DevOps engineers, but for a developer the point that matters is just "Your Code": that tiny corner at the edge.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6r4k4akhaq4d0n0ir73b.png)
+![Image description](6r4k4akhaq4d0n0ir73b-d0ae889a.png)
 
 In the image above we can see:
 

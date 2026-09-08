@@ -36,7 +36,7 @@ This year, Azul will be bringing the following swag and activities at **booth #3
 * *[Keeping Your Java Hot by Solving the JVM Warmup Problem](https://devoxx.be/talk/?id=70107?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content=&utm_term=)* from **13h05 to 13h50**, presented by Simon Ritter in room 4.
 * *[Wargames – Java vulnerabilities and why you should care](https://devoxx.be/talk/?id=2902?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content=&utm_term=)* from **14h00 to 14h50**, presented by Gerrit Grunwald in room 3.
 
-[![OpenJDK Migration for Dummies](https://www.azul.com/wp-content/uploads/e7d0aa5d-dummies-book-final_10ee0fq000000000000028_big-275x300.jpg)](https://www.azul.com/openjdk-migration-for-dummies/?utm_medium=event&utm_campaign=20231004-HEV-Dummies%20Launch%20Party%20at%20Devoxx%20BE&utm_source=unbounce&utm_content=&utm_term=)
+[![OpenJDK Migration for Dummies](e7d0aa5d-dummies-book-final_10ee0fq00000-e9c9cee9.jpg)](https://www.azul.com/openjdk-migration-for-dummies/?utm_medium=event&utm_campaign=20231004-HEV-Dummies%20Launch%20Party%20at%20Devoxx%20BE&utm_source=unbounce&utm_content=&utm_term=)
 
 **Last but not least, join the [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/?utm_medium=event&utm_campaign=20231004-HEV-Dummies%20Launch%20Party%20at%20Devoxx%20BE&utm_source=unbounce&utm_content=&utm_term=) book signing party!**
 

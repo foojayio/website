@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1655" height="995" xml:space="preserve" overflow="hidden">
+  <defs>
+    <clipPath id="clip0">
+      <rect x="224" y="4711" width="1655" height="995"></rect>
+    </clipPath>
+    <clipPath id="clip1">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip2">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="532" y1="5174" x2="532" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill3">
+      <stop offset="0" stop-color="#F18C55" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#F67B28" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E56B17" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip4">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="1242.5" y1="5412" x2="1242.5" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill5">
+      <stop offset="0" stop-color="#F18C55" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#F67B28" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E56B17" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip6">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="686" y1="4985" x2="686" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill7">
+      <stop offset="0" stop-color="#AFAFAF" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#A5A5A5" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#929292" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip8">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="1396.5" y1="5269" x2="1396.5" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill9">
+      <stop offset="0" stop-color="#AFAFAF" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#A5A5A5" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#929292" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip10">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="840" y1="4954" x2="840" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill11">
+      <stop offset="0" stop-color="#FFC746" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#FFC600" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E5B600" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip12">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="1550.5" y1="5260" x2="1550.5" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill13">
+      <stop offset="0" stop-color="#FFC746" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#FFC600" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E5B600" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip14">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="994" y1="4927" x2="994" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill15">
+      <stop offset="0" stop-color="#6083CB" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#3E70CA" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#2E61BA" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip16">
+      <rect x="407" y="4898" width="1425" height="588"></rect>
+    </clipPath>
+    <linearGradient x1="1704.5" y1="5232" x2="1704.5" y2="5483" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill17">
+      <stop offset="0" stop-color="#6083CB" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#3E70CA" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#2E61BA" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip18">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip19">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip20">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip21">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip22">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip23">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip24">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip25">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip26">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip27">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip28">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip29">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip30">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <linearGradient x1="565" y1="5622" x2="565" y2="5646" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill31">
+      <stop offset="0" stop-color="#F18C55" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#F67B28" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E56B17" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip32">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip33">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <linearGradient x1="786" y1="5622" x2="786" y2="5646" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill34">
+      <stop offset="0" stop-color="#AFAFAF" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#A5A5A5" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#929292" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip35">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip36">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <linearGradient x1="1067" y1="5622" x2="1067" y2="5646" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill37">
+      <stop offset="0" stop-color="#FFC746" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#FFC600" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#E5B600" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip38">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <clipPath id="clip39">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+    <linearGradient x1="1348" y1="5622" x2="1348" y2="5646" gradientUnits="userSpaceOnUse" spreadMethod="reflect" id="fill40">
+      <stop offset="0" stop-color="#6083CB" stop-opacity="1"></stop>
+      <stop offset="0.5" stop-color="#3E70CA" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#2E61BA" stop-opacity="1"></stop>
+    </linearGradient>
+    <clipPath id="clip41">
+      <rect x="229" y="4711" width="1650" height="990"></rect>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip0)" transform="translate(-224 -4711)">
+    <rect x="229" y="4712" width="1650" height="990" fill="#FFFFFF" fill-opacity="1"></rect>
+    <g clip-path="url(#clip1)">
+      <path d="M407.5 5365.68 1828.5 5365.68M407.5 5248.67 1828.5 5248.67M407.5 5131.67 1828.5 5131.67M407.5 5014.66 1828.5 5014.66M407.5 4898.5 1828.5 4898.5" stroke="#E0E5EB" stroke-width="3.4375" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" fill="none" fill-rule="nonzero"></path>
+    </g>
+    <g clip-path="url(#clip2)">
+      <rect x="470" y="5174" width="124" height="309" fill="url(#fill3)"></rect>
+    </g>
+    <g clip-path="url(#clip4)">
+      <rect x="1180" y="5412" width="125" height="71" fill="url(#fill5)"></rect>
+    </g>
+    <g clip-path="url(#clip6)">
+      <rect x="624" y="4985" width="124" height="498" fill="url(#fill7)"></rect>
+    </g>
+    <g clip-path="url(#clip8)">
+      <rect x="1334" y="5269" width="125" height="214" fill="url(#fill9)"></rect>
+    </g>
+    <g clip-path="url(#clip10)">
+      <rect x="778" y="4954" width="124" height="529" fill="url(#fill11)"></rect>
+    </g>
+    <g clip-path="url(#clip12)">
+      <rect x="1488" y="5260" width="125" height="223" fill="url(#fill13)"></rect>
+    </g>
+    <g clip-path="url(#clip14)">
+      <rect x="932" y="4927" width="124" height="556" fill="url(#fill15)"></rect>
+    </g>
+    <g clip-path="url(#clip16)">
+      <rect x="1642" y="5232" width="125" height="251" fill="url(#fill17)"></rect>
+    </g>
+    <g clip-path="url(#clip18)">
+      <path d="M407.5 5482.5 1828.5 5482.5" stroke="#E0E5EB" stroke-width="3.4375" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" fill="none" fill-rule="evenodd"></path>
+    </g>
+    <g clip-path="url(#clip19)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 281.44 5495)">0.0%</text>
+    </g>
+    <g clip-path="url(#clip20)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 281.44 5378)">5.0%</text>
+    </g>
+    <g clip-path="url(#clip21)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 258.958 5261)">10.0%</text>
+    </g>
+    <g clip-path="url(#clip22)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 258.958 5144)">15.0%</text>
+    </g>
+    <g clip-path="url(#clip23)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 258.958 5027)">20.0%</text>
+    </g>
+    <g clip-path="url(#clip24)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 258.958 4910)">25.0%</text>
+    </g>
+    <g clip-path="url(#clip25)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 653.366 5553)">1ms interval</text>
+    </g>
+    <g clip-path="url(#clip26)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 1352.59 5553)">10ms interval</text>
+    </g>
+    <g clip-path="url(#clip27)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="73" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 464.864 4821)">renaissance dotty user</text>
+    </g>
+    <g clip-path="url(#clip28)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="73" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 1166.14 4821)">-</text>
+    </g>
+    <g clip-path="url(#clip29)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="73" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 1192.54 4821)">time overhead</text>
+    </g>
+    <g clip-path="url(#clip30)">
+      <rect x="553" y="5622" width="24.0001" height="24" fill="url(#fill31)"></rect>
+    </g>
+    <g clip-path="url(#clip32)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 587.603 5646)">original</text>
+    </g>
+    <g clip-path="url(#clip33)">
+      <rect x="774" y="5622" width="23.9997" height="24" fill="url(#fill34)"></rect>
+    </g>
+    <g clip-path="url(#clip35)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 808.024 5646)">approach 1</text>
+    </g>
+    <g clip-path="url(#clip36)">
+      <rect x="1055" y="5622" width="24.0001" height="24" fill="url(#fill37)"></rect>
+    </g>
+    <g clip-path="url(#clip38)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 1089.36 5646)">approach 2</text>
+    </g>
+    <g clip-path="url(#clip39)">
+      <rect x="1336" y="5622" width="23.9998" height="24" fill="url(#fill40)"></rect>
+    </g>
+    <g clip-path="url(#clip41)">
+      <text fill="#44546A" fill-opacity="1" font-family="PT Sans,PT Sans_MSFontService,sans-serif" font-style="normal" font-variant="normal" font-weight="400" font-stretch="normal" font-size="41" text-anchor="start" direction="ltr" writing-mode="lr-tb" text-decoration="none" transform="matrix(1 0 0 1 1370.69 5646)">experiment</text>
+    </g>
+  </g>
+</svg>

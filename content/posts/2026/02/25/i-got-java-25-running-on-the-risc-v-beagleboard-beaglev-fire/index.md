@@ -37,7 +37,7 @@ As described on the [BeagleBoard Documentation \> Boards \> BeagleV-Fire \> Quic
 {{< gallery >}}
 beaglev-fire-serial.jpg
 beaglev-fire-connected.jpg
-beaglev-fire-usb-disc.png
+beaglev-fire-usb-disc.jpg
 {{< /gallery >}}
 
 You also need a USB-to-USB cable to connect the board to your computer.
@@ -82,7 +82,7 @@ $ sudo screen /dev/ttyUSB0 115200
 ```
 
 With the serial connection established, check the board output in the `screen` session and wait for the message `Press a key to enter CLI` to appear. You have one second to react, so be fast! 🙂
-![](beaglev-fire-boot-interrupt.png)
+![](beaglev-fire-boot-interrupt.jpg)
 
 Then type in the following two commands:
 

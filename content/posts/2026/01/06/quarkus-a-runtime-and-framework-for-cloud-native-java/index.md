@@ -45,7 +45,7 @@ In this sense, Quarkus is a development framework and runtime for cloud-native J
 Beyond staple traits of modern frameworks, Quarkus introduces two platform-defining features: buildtime optimization and deep extensibility.
 
 * **Buildtime optimization** : Quarkus shifts work from runtime to build time wherever possible.  
-  This approach reduces startup overhead and memory usage, resulting in a lean, fast, and efficient application tailored for production.![Buildtime principle in Quarkus: being fast by doing less at runtime](2-build-time-principle.png)
+  This approach reduces startup overhead and memory usage, resulting in a lean, fast, and efficient application tailored for production.![Buildtime principle in Quarkus: being fast by doing less at runtime](2-build-time-principle.jpg)
 
   Figure 1. Quarkus performs at build time what traditional frameworks do at runtime: reading configuration files, scanning annotations, and building a model of the application.
 

@@ -5,7 +5,7 @@ lastmod: "2021-08-05T08:29:47+00:00"
 description: "In this article, we're going to look at the differences between the various cybersecurity defence techniques!"
 authors:
   - "sven-ruppert"
-image: "http://img.youtube.com/vi/sW7mTNVIUhE/mqdefault.jpg"
+image: "mqdefault-ef018420.jpg"
 categories:
   - "DevOps"
   - "Security"
@@ -29,7 +29,7 @@ What exactly happens now with the SAST procedure? SAST is available in two forms
 
 When using SAST, it makes a lot more sense to deal with all the other components first. Therefore, all binary files of the entire application environment are meant here. This also includes all elements that play a role in the development, such as the CI server and the other tools used.
 > Tip: You can see the Blogpost as Youtube Video here:  
-> [![DevSecOps - What is SAST DAST IAST and RASP - english - 4k](http://img.youtube.com/vi/sW7mTNVIUhE/mqdefault.jpg)](https://youtu.be/sW7mTNVIUhE "DevSecOps - What is SAST DAST IAST and RASP - english - 4k")
+> [![DevSecOps - What is SAST DAST IAST and RASP - english - 4k](mqdefault-ef018420.jpg)](https://youtu.be/sW7mTNVIUhE "DevSecOps - What is SAST DAST IAST and RASP - english - 4k")
 
 **DAST: Dynamic Application Security Testing**
 

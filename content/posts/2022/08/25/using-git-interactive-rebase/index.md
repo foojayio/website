@@ -133,7 +133,7 @@ In vi, we can do so as follows:
 * Move the cursor to the line where you want to reinsert this commit (in this example, the end of the file) and type `p`.
 * Note: you do **not** need to switch to edit mode to do so.
 
-![](change-order-700x483.png)
+![](change-order-700x483.jpg)
 
 Once we're sure about the order, we need to save the file. Press `esc` to exit edit mode and type `:wq` to save the file.  
 

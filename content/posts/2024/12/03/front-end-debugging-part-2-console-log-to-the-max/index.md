@@ -58,7 +58,7 @@ One of the hidden gems of the browser console is its support for log levels, whi
 
 While log and debug can be indistinguishable, these levels allow for a more organized and filtered debugging experience. Browsers enable filtering the output based on these levels, mirroring the capabilities of server-side logging systems and allowing you to focus on relevant messages.
 
-![Log Levels](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jma0r3v5y0pfqbiipmdd.png)
+![Log Levels](jma0r3v5y0pfqbiipmdd-3418d796.png)
 
 ## **Customizing Console Output with CSS**
 
@@ -73,7 +73,7 @@ console.customLog("Dazzle")
 
 This approach is helpful when you need to make specific logs stand out or organize output visually. You can use multiple `%c` substitutions to apply various styles to different parts of a log message.
 
-![CSS Styling](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h2lr6p4dj2t67lyqt37y.png)
+![CSS Styling](h2lr6p4dj2t67lyqt37y-3cd9872b.png)
 
 ## **Stack Tracing with console.trace()**
 
@@ -89,7 +89,7 @@ console.assert(x > 0, 'x must be greater than zero');
 
 In the browser, a failed assertion appears as an error, similar to console.error. An added benefit is that assertions can be stripped from production builds, removing any performance impact. This makes assertions a great tool for enforcing design contracts during development without compromising production efficiency.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/py7ikkhsp14yr95g3ptp.png)
+![Image description](py7ikkhsp14yr95g3ptp-d49764c6.png)
 
 ## **Printing Tables for Clearer Data Visualization**
 
@@ -101,7 +101,7 @@ console.table(["Simple Array", "With a few elements", "in line"])
 
 This method is especially handy when debugging arrays of objects, presenting a clear, tabular view of the data and making complex data structures much easier to understand.
 
-![Tables](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n5ki2d0rsggehjtq2ans.png)
+![Tables](n5ki2d0rsggehjtq2ans-6c392bf3.jpg)
 
 ## **Copying Objects to the Clipboard**
 
@@ -111,7 +111,7 @@ Debugging often involves inspecting objects, and the `copy(object)` method allow
 
 The `console.dir()` method provides a more detailed view of objects, showing their properties as you'd see in a debugger. This is particularly helpful for inspecting DOM elements or exploring API responses. Meanwhile, `console.dirxml()` allows you to view objects as XML, which can be useful when debugging HTML structures.
 
-![Console Dir](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pkdbguve69cnlocorjqm.png)
+![Console Dir](pkdbguve69cnlocorjqm-f5c5d36e.jpg)
 
 ## **Counting Function Calls**
 
@@ -125,7 +125,7 @@ function myFunction() {
 
 You can reset the counter using `console.countReset()`. This simple tool can help you catch performance issues or confirm the correct execution flow.
 
-![Count Function Calls](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jehd0jyc638vmmw8e6sn.png)
+![Count Function Calls](jehd0jyc638vmmw8e6sn-c6112032.png)
 
 ## **Organizing Logs with Groups**
 
@@ -140,21 +140,21 @@ console.groupEnd();
 
 Grouping makes it easier to navigate complex logs and keeps your console clean.
 
-![Grouping](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1466uy16dzgwwxoahnna.png)
+![Grouping](1466uy16dzgwwxoahnna-f2bf456a.png)
 
 ## **Chrome-Specific Debugging Features**
 
 **Monitoring Functions** : Chrome's `monitor()` method logs every call to a function, showing the arguments and enabling a method-tracing experience.
 
-![Monitoring](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/28jrdvvty36tn97l0r6q.png)
+![Monitoring](28jrdvvty36tn97l0r6q-9465f79c.png)
 
 **Monitoring Events** : Using `monitorEvents()`, you can log events on an element. This is useful for debugging UI interactions. For example, `monitorEvents(window, 'mouseout')` logs only `mouseout` events.
 
-![Monitoring Events](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u6neqp6pwwrfntkb2o3q.png)
+![Monitoring Events](u6neqp6pwwrfntkb2o3q-56179a9c.jpg)
 
 **Querying Object Instances** : `queryObjects(Constructor)` lists all objects created with a specific constructor, giving you insights into memory usage and object instantiation.
 
-![Query Object Instance](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/alfl1l1zy3zxzs8pfjih.png)
+![Query Object Instance](alfl1l1zy3zxzs8pfjih-875417ba.png)
 
 ## **Final Word**
 

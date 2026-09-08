@@ -20,7 +20,7 @@ Oh, and the whole thing is written in BoxLang itself. 🥊 Dogfooding at its fin
 
 ## What Is BoxLings?
 
-![](https://www.ortussolutions.com/__media/contentbox:2026/boxlang/boxlings-intro.png)
+![](boxlings-intro-77fe84fb.png)
 
 BoxLings gives you **129 progressive exercises across 28 topics** — from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development.
 

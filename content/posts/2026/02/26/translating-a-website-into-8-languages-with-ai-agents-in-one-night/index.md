@@ -98,7 +98,7 @@ The most impressive moment was the Arabic translation ([PR #91](https://github.c
 
 This was a genuinely thoughtful architectural change that I hadn't explicitly requested. The agent understood that Arabic support implies RTL layout and acted on it.
 
-![Arabic localization on the Java Evolved website](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w3itxwxcyyoksvae22m3.png)
+![Arabic localization on the Java Evolved website](w3itxwxcyyoksvae22m3-ac168c38.png)
 
 ### The One Bug
 

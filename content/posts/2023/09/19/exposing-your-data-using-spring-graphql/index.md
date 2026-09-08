@@ -128,7 +128,7 @@ And since we want to use Subscriptions in GraphIQL we'll also add:
 spring.graphql.websocket.path=/graphql
 ```
 
-![graphiql.png](https://github.com/SimonVerhoeven/spring-graphql-demo/blob/main/raw/graphiql.png?raw=true)
+![graphiql.png](graphiql-00775084.jpg)
 
 Using the default [GraphiQL](http://localhost:8080/graphiql) path.
 

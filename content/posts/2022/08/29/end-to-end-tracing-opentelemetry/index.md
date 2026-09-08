@@ -41,7 +41,7 @@ A tracing solution should provide a standard format to work across heterogeneous
 
 One needs to understand that a specification rarely appears from nowhere. In general, the market already has a couple of distinct implementations. Most of the time, a new specification leads to an additional implementation, as the famous XKCD comic describes:
 
-![](https://imgs.xkcd.com/comics/standards.png)
+![](standards-d3945873.png)
 
 Sometimes, however, a miracle happens: the market adheres to the new specification. Here, Trace Context is a W3C specification, and it seems to have done the trick:
 > This specification defines standard HTTP headers and a value format to propagate context information that enables distributed tracing scenarios. The specification standardizes how context information is sent and modified between services. Context information uniquely identifies individual requests in a distributed system and also defines a means to add and propagate provider-specific context information.

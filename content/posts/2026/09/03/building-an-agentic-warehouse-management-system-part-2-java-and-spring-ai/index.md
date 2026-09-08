@@ -5,7 +5,7 @@ lastmod: "2026-09-04T14:05:01+00:00"
 description: "We will look at how the agent is built with Java and Spring AI, how its capabilities and boundaries are defined, how it is triggered by the WMS, and how the planner turns the agent’s goal into an execution plan."
 authors:
   - "ricardo-mello"
-image: "Screenshot-2026-09-03-at-11.35.41-AM.png"
+image: "Screenshot-2026-09-03-at-11.35.41-AM.jpg"
 categories:
   - "AI"
 related_posts:

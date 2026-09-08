@@ -6,7 +6,7 @@ description: "This e-book introduces Jakarta EE as the modern foundation for bui
 canonical: "https://payara.fish/blog/scalable-enterprise-java-for-the-cloud/"
 authors:
   - "dominika-tasarz"
-image: "Scalable-Enterprise-Java-for-the-Cloud-05.png"
+image: "Scalable-Enterprise-Java-for-the-Cloud-05.jpg"
 categories:
   - "Jakarta EE"
   - "Java"
@@ -25,7 +25,7 @@ We're excited to introduce [*Scalable Enterprise Java for the Cloud*,](https://p
 
 [**Download the free eBook here**](https://payara.fish/resource/scalable-enterprise-java-for-the-cloud/ "**Download the free eBook here**") (no form fill necessary).
 
-[![Scalable Enterprise Java for the Cloud](Scalable-Enterprise-Java-for-the-Cloud-cover-small.png "Scalable Enterprise Java for the Cloud")](https://payara.fish/blog/scalable-enterprise-java-for-the-cloud/ "Scalable Enterprise Java for the Cloud")
+[![Scalable Enterprise Java for the Cloud](Scalable-Enterprise-Java-for-the-Cloud-cover-small.jpg "Scalable Enterprise Java for the Cloud")](https://payara.fish/blog/scalable-enterprise-java-for-the-cloud/ "Scalable Enterprise Java for the Cloud")
 
 The eBook focuses on Jakarta EE as the foundation for scalable enterprise Java, showing how it continues to evolve to meet today's cloud requirements. It walks through running Jakarta EE in the cloud with Payara Micro, simplifying development workflows, and aligning enterprise Java with container-based and Kubernetes-friendly architectures.
 

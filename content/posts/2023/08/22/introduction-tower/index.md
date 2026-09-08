@@ -42,7 +42,7 @@ The `Layer` trait allows composing `Service`s together.
 
 Here's a slightly more detailed diagram:
 
-![](tower-api-diagram-1024x891.png)
+![](tower-api-diagram-1024x891.jpg)
 
 A typical `Service` implementation will wrap an underlying component; the component may be a service itself. Hence, you can chain multiple features by composing various functions.
 

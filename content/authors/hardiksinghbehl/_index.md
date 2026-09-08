@@ -1,7 +1,7 @@
 ---
 title: "Hardik Singh Behl"
 avatar: "hardiksinghbehl.png"
-avatarFull: "hardiksinghbehl-full.png"
+avatarFull: "hardiksinghbehl-full.jpg"
 bio: "Backend developer | Technical writer"
 bluesky: ""
 mastodon: ""

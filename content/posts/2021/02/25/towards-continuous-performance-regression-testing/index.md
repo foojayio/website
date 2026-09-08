@@ -6,7 +6,7 @@ description: "Introduction to the JfrUnit open-source project, providing asserti
 canonical: "https://www.morling.dev/blog/towards-continuous-performance-regression-testing/"
 authors:
   - "gunnarmorling"
-image: "https://www.morling.dev/images/continuous_perf_testing_tlab_in_jmc.png"
+image: "continuous_perf_testing_tlab_in_jmc-473cbc19.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
@@ -270,10 +270,10 @@ dev.morling.demos.quarkus.TodoResourcePerformanceTest-retrieveTodo.jfr
 Let's open the \*.jfr file for the failing test in JDK Mission Control (JMC) in order to analyse all the recorded events (note that the recording will always contain some JfrUnit-internal events which are needed for synchronizing the recording stream and the events exposed to the test).
 
 When taking a look at the TLAB events of the application's executor thread, the culprit is identified quickly; a lot of the sampled TLAB allocations contain this stack trace (click on the image to enlarge):  
-[![TLAB allocations in JDK Mission Control](https://www.morling.dev/images/continuous_perf_testing_tlab_in_jmc.png "TLAB allocations in JDK Mission Control")](https://www.morling.dev/images/continuous_perf_testing_tlab_in_jmc.png "TLAB allocations in JDK Mission Control")
+[![TLAB allocations in JDK Mission Control](continuous_perf_testing_tlab_in_jmc-473cbc19.png "TLAB allocations in JDK Mission Control")](continuous_perf_testing_tlab_in_jmc-473cbc19.png "TLAB allocations in JDK Mission Control")
 
 Interesting, REST Assured loading a Jackson object mapper, what's going on there? Here's the full stacktrace:  
-[![Complete stacktrace of the TLAB allocation](https://www.morling.dev/images/continuous_perf_testing_tlab_stacktrace.png "Complete stacktrace of the TLAB allocation")](https://www.morling.dev/images/continuous_perf_testing_tlab_stacktrace.png)  
+[![Complete stacktrace of the TLAB allocation](continuous_perf_testing_tlab_stacktrace-675a719d.png "Complete stacktrace of the TLAB allocation")](continuous_perf_testing_tlab_stacktrace-675a719d.png)  
 
 So it seems a REST call to another service is made from within the `TodoResource#get(long)` method! At this point we know where to look into the source code of the application:
 
@@ -319,10 +319,10 @@ public void retrieveTodo() throws Exception {
 Note that the pre-defined configurations imply minimum durations for certain event types; e.g. the I/O events discussed in the next section will only be recorded if they have a duration of 20 ms or longer. Depending on your testing requirements, you may have to adjust and tweak the configuration to be used.
 
 Open the recording in JMC, and you'll see there's a substantial amount of GC activity happening:  
-[![Garbage collections after the performance regression](https://www.morling.dev/images/continuous_perf_testing_gc_regression.png "Garbage collections after the performance regression")](https://www.morling.dev/images/continuous_perf_testing_gc_regression.png)
+[![Garbage collections after the performance regression](continuous_perf_testing_gc_regression-83ab6f14.png "Garbage collections after the performance regression")](continuous_perf_testing_gc_regression-83ab6f14.png)
 
 The difference to the GC behavior before this code change is striking:  
-[![Garbage collections before the performance regression](https://www.morling.dev/images/continuous_perf_testing_gc_original.png "Garbage collections before the performance regression")](https://www.morling.dev/images/continuous_perf_testing_gc_original.png)
+[![Garbage collections before the performance regression](continuous_perf_testing_gc_original-11947f94.png "Garbage collections before the performance regression")](continuous_perf_testing_gc_original-11947f94.png)
 
 Pause times are worse, directly impacting the application's latency, and the largely increased GC volume means the production environment will be able to serve less concurrent requests when reaching its capacity limits, meaning you'd have to provision another machine earlier on as your load increases.
 > *****Memory Leak in the JFR Event Streaming API*****  
@@ -409,7 +409,7 @@ to be less than:
 ```
 
 That's definitely something to look into. So let's open the recording of the failed test in Flight Recorder and take a look at the socket read and write events. Thanks to enabling stacktraces for the two JFR event types we can quite quickly identify the events asssociated to an invocation of the `GET /todo/{id}` API:  
-[![Socket read and write events after the performance regression](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png "Socket read and write events after the performance regression")](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png)
+[![Socket read and write events after the performance regression](continuous_perf_testing_socket_regressio-b00cb97d.png "Socket read and write events after the performance regression")](continuous_perf_testing_socket_regressio-b00cb97d.png)
 
 At this point, some familiarity with the application in question will come in handy to identify suspicous events. But even without that, we could compare previous recordings of successful test runs with the recording from the failing one in order to see where differences are. In the case at hand, the `BlobInputStream` and Hibernate's `BlobTypeDescriptor` in the call stack seem pretty unexpected, as our `User` entity didn't have any `BLOB` attribute before.
 

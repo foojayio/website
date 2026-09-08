@@ -41,7 +41,7 @@ Neo4j is a graph database and it is an excellent choice for applications that re
 
 The Neo4j documentation for running on Kubernetes is quite detailed and helpful, but I want to walk through a couple steps and then go beyond the docs by running an application alongside the database. First, here is a helpful diagram from the Neo4j documentation showing the components involved in running a database (Neo4j) on Kubernetes.
 
-![Components of Neo4j on Kubernetes](neo4j-k8s-components.png)
+![Components of Neo4j on Kubernetes](neo4j-k8s-components.jpg)
 
 There are config maps, stateful set, persistent volume, and services containers. Now, we could run each of these containers, but handling scaling and management of all these indivdual pieces every time you want a database can get complicated and redundant. This is where Helm comes in.
 

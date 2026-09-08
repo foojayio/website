@@ -36,7 +36,7 @@ To begin, you'll need to install the Manifold plugin, which is currently only av
 
 We can install the plugin from IntelliJ/IDEAs settings UI by navigating to the marketplace and searching for Manifold. The plugin makes sure the IDE doesn't collide with the work done by the Maven/Gradle plugin.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wj7zcz7c66ggh6fcvlu7.png)
+![Image description](wj7zcz7c66ggh6fcvlu7-9b86b9c9.jpg)
 
 Manifold consists of multiple smaller projects, each offering a custom language extension. Today, we'll discuss one such extension, but there's much more to explore.
 

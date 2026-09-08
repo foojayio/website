@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-![](image1-700x272.png)
+![](image1-700x272.jpg)
 
 It's hard to grasp that it's been about a year since Chat GPT and other generative AI tools burst onto the scene. We're all still grappling with, well, everything about them. Whatever equilibrium we eventually find, it's clear that the world is changing. The whole world mind, not just the IT industry.
 

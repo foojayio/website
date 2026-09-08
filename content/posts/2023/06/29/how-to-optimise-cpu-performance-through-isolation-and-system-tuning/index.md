@@ -45,7 +45,7 @@ csets is a utility that is used specifically to manage CPU affinity and placemen
 
 This can be especially useful in high-performance computing environments, where minimising contention and maximising performance is critical. Both cgroups and csets enable specific cpuset groupings to be defined, with processes confined to run within one particular group.
 
-![](Screenshot-2023-06-20-at-2.12.53-PM-1024x632.png)
+![](Screenshot-2023-06-20-at-2.12.53-PM-1024x632.jpg)
 
 *Figure 1. A comparison of how threads can be managed with isolcpus and cgroups. isolcpus allows the management of individual threads but prevents the use of flexible CPU groups.*
 

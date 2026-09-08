@@ -51,7 +51,7 @@ HAT stands for "Hardware Attached on Top" which is a new hardware specification 
 
 You can check Igor's blog post with additional info on the Sense HAT [here](http://www.igfasouza.com/blog/sense-hat/).  
 
-{{< img src="http://www.igfasouza.com/blog/wp-content/uploads/2020/09/IMG-20200928-WA0001.jpg" class="alignleft is-resized" width="150" height="200" >}}
+{{< img src="IMG-20200928-WA0001-85334a8a.jpg" class="alignleft is-resized" width="150" height="200" >}}
 
 ## Idea
 

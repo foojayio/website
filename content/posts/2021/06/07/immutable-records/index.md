@@ -6,7 +6,7 @@ description: "Records help remove repetitive error-prone code, increasing develo
 canonical: "https://jfeatures.com/blog/immutable_records"
 authors:
   - "vipin-sharma"
-image: "https://jfeatures.com/img/ebook_upd.png"
+image: "ebook_upd-ee1842a7.png"
 categories:
   - "Records"
 related_posts:
@@ -70,7 +70,7 @@ Records help you remove repetitive and error-prone code, and increases developer
 
 If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Jobs](https://jfeatures.com/). You can download this step-by-step guide for free!
 
-[![](https://jfeatures.com/img/ebook_upd.png)](https://jfeatures.com/)
+[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

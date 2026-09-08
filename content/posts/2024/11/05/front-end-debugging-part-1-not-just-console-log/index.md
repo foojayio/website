@@ -63,7 +63,7 @@ DOM breakpoints are an advanced feature in Chrome and Firebug (Firefox plugin) t
 
 To use it we can right-click on the desired DOM element, select "Break On," and choose the specific mutation type you are interested in (e.g., subtree modifications, attribute changes, etc.).
 
-![Subtree modification](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tnhcf65djlyctm44fjxr.png)
+![Subtree modification](tnhcf65djlyctm44fjxr-a488419f.jpg)
 
 DOM breakpoints are extremely powerful for tracking down issues where DOM manipulation causes unexpected results, such as dynamic content loading or changes in the user interface that disrupt the intended layout or functionality. Think of them like field breakpoints we discussed in the past.
 
@@ -73,7 +73,7 @@ These breakpoints complement traditional line and conditional breakpoints, provi
 
 Understanding who initiates specific network requests can be challenging, especially in large applications with multiple sources contributing to a request. XHR (`XMLHttpRequest`) breakpoints provide a solution to this problem.
 
-![XHR Breakpoint](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g7ojrpu5d225e69qoc46.png)
+![XHR Breakpoint](g7ojrpu5d225e69qoc46-5b9f8052.png)
 
 In Chrome or Firebug, set an XHR breakpoint by specifying a substring of the URI you wish to monitor. When a request matching this pattern is made, the execution stops, allowing you to investigate the source of the request.
 
@@ -95,7 +95,7 @@ These are things that are normally very difficult to reproduce. E.g. touch relat
 
 CSS and HTML bugs can be particularly tricky, often requiring a detailed examination of how elements are rendered and styled.
 
-![Inspect element](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n1u9cdoost95glyce2it.png)
+![Inspect element](n1u9cdoost95glyce2it-53cc5aaa.jpg)
 
 **Inspect Element:** The "inspect element" tool is the cornerstone of front-end debugging, allowing you to view and manipulate the DOM and CSS in real-time. As you make changes, the page updates instantly, providing immediate feedback on your tweaks.
 

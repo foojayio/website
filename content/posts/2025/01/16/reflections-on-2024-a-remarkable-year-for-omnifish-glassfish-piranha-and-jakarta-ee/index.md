@@ -51,7 +51,7 @@ As the most active contributor to the GlassFish project, we've continued to lead
 
 {{< img src="GlassFish-Admin-Command-Logger.png" class="size-full is-resized" width="874" height="275" style="width:836px;height:auto" >}}
 
-![](Runnable-GlassFish-Embedded-1-1024x399-1.png)
+![](Runnable-GlassFish-Embedded-1-1024x399-1.jpg)
 
 * **Progress on GlassFish 8:**
   * Released eight milestones, closely tracking Jakarta EE 11 developments.

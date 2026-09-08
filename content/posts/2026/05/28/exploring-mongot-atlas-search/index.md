@@ -6,7 +6,7 @@ description: "MongoT is a wrapper around the amazing Java search engine: Lucene.
 canonical: "https://tech-blog.luketn.com/exploring-mongot-atlas-search"
 authors:
   - "luke-thompson"
-image: "Screenshot-2026-05-08-at-3.17.36-PM.png"
+image: "Screenshot-2026-05-08-at-3.17.36-PM.jpg"
 categories:
   - "Databases"
   - "Java"
@@ -137,7 +137,7 @@ idea .
       - 5005:5005    # Debug port
 ```
 
-![](Screenshot-2026-05-27-at-12.43.57-PM.png)
+![](Screenshot-2026-05-27-at-12.43.57-PM.jpg)
 
 This will allow us to connect and debug the locally built mongot code over the 5005 debugger port.
 
@@ -179,7 +179,7 @@ If you want to dig into the code for that, there's a walkthrough here: <https://
 <https://tech-blog.luketn.com/java-faceted-full-text-search-api-using-mongodb-atlas-search>
 
 Here's the Atlas Search Coco sample project serving up queried data from the Coco image dataset through a locally debugged MongoT:  
-![](Screenshot-2026-05-08-at-3.29.10-PM-1024x706.png)
+![](Screenshot-2026-05-08-at-3.29.10-PM-1024x706.jpg)
 
 And here is the index that was built in the local MongoT through Compass:  
 ![](Screenshot-2026-05-08-at-3.34.11-PM-1024x476.png)
@@ -265,7 +265,7 @@ Here you can see the fully composed BooleanQuery, combining the string-type Term
 This is interesting just for learning the (somewhat obtuse) Java library API for Lucene queries.
 
 The results from Lucene include the docs matched and the facets:  
-![](Screenshot-2026-05-08-at-3.38.24-PM-1024x965.png)
+![](Screenshot-2026-05-08-at-3.38.24-PM-1024x965.jpg)
 
 You can keep digging around and see all the ways the wrapper is marshaling documents from Lucene indexes.
 
@@ -375,7 +375,7 @@ This is a super deep topic, and I won't cover all of it here, but there are grea
 #### Multiple-index searching with merged results
 
 MongoDB can't do multiple-index searching. MongoDB uses a single index per query, and if there is further filtering to be done, it will be done directly on the documents. A MongoDB query for multiple indexed fields looks broadly like this:  
-![](Screenshot-2026-05-08-at-3.41.23-PM-1024x923.png)
+![](Screenshot-2026-05-08-at-3.41.23-PM-1024x923.jpg)
 
 (Gross oversimplification of MongoDB's query engine)
 
@@ -390,7 +390,7 @@ In a typical text field index, Lucene analyzes text into terms. It stores those 
 You can also have simpler 1-1 indexes over fields that don't need the text extracted, like integers, floating point numbers, dates, enums, and keywords.
 
 You can think of Lucene indexes like a set of maps between Term Ids to a list of Document Ids.  
-![](Screenshot-2026-05-08-at-3.41.49-PM-1024x428.png)
+![](Screenshot-2026-05-08-at-3.41.49-PM-1024x428.jpg)
 
 Lucene is very efficient at performing index intersection, because of the basic structure and sort order of the data and ordinal indexes, and several optimization techniques like:
 
@@ -403,7 +403,7 @@ MongoT creates Lucene documents to match MongoDB documents, mapping every Atlas 
 Depending on the preferences you choose for each field in the Atlas Search field mappings, MongoT will store the values of the MongoDB document differently in the Lucene document. It may store a single value using multiple Lucene document field types in order to support filtering, sorting, and faceting:
 
 <https://lucene.apache.org/core/9_10_0/core/org/apache/lucene/index/package-summary.html#field_types>  
-![](Screenshot-2026-05-08-at-3.42.22-PM-1024x157.png)
+![](Screenshot-2026-05-08-at-3.42.22-PM-1024x157.jpg)
 
 For this reason, it is probably worth taking some time tuning the Atlas Search index field mappings to ensure you are only selecting the options you really need. The bigger and more complex the field mappings and types are, the worse the performance and the heavier the resource requirements.
 
@@ -503,7 +503,7 @@ db.image.aggregate([{$vectorSearch: {
 Behind the scenes, MongoT computes the embedding for the query text 'circular flying', uses Voyage API to compute a semantic meaning as an array of floats, then uses Lucene to find the nearest matches semantically in the index.
 
 You can put a breakpoint on EmbeddingServiceManager.embed() and take a look at how the query path works:  
-![](Screenshot-2026-05-08-at-3.44.42-PM-1024x595.png)
+![](Screenshot-2026-05-08-at-3.44.42-PM-1024x595.jpg)
 
 So cool. There is obviously a real financial cost to this, but it is the ultimate in convenience.
 
@@ -542,7 +542,7 @@ And then ran a K6 load test script to see what sort of performance MongoT was pr
 Here you can see the end- to- end performance of a Java Atlas Search API.
 
 As represented by the MongoT performance dashboard in Grafana:  
-![](Screenshot-2026-05-08-at-3.45.34-PM-1024x513.png)
+![](Screenshot-2026-05-08-at-3.45.34-PM-1024x513.jpg)
 
 And as seen by the K6 client:
 
@@ -567,7 +567,7 @@ k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
 What does this mean? Well, the full round-trip of a Java HTTP Atlas Search API call as measured by the K6 client had a median response time of 12.8ms (using a large range of data scenarios drawn from the COCO image dataset).
 
 If I add some tracing to each request, I can see the overheads of Java vs the MongoT-\>MongoD end-to-end query command:  
-![](Screenshot-2026-05-08-at-3.46.50-PM-1024x481.png)
+![](Screenshot-2026-05-08-at-3.46.50-PM-1024x481.jpg)
 
 ```
 k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
@@ -584,10 +584,10 @@ I have to admit getting a bit deep down in the rabbit hole here, and spending mo
 <https://github.com/luketn/mongot/pull/2/changes>
 
 With these traces, you can see that the actual Lucene index query part of the whole system is a tiny fraction of the overall query time.  
-![](Screenshot-2026-05-08-at-3.47.30-PM-1024x663.png)
+![](Screenshot-2026-05-08-at-3.47.30-PM-1024x663.jpg)
 
 And over a K6 load client run:  
-![](Screenshot-2026-05-08-at-3.47.56-PM-1024x797.png)
+![](Screenshot-2026-05-08-at-3.47.56-PM-1024x797.jpg)
 
 (Note times are slowed by additional tracing)
 
@@ -598,10 +598,10 @@ If you look at the breakdown of timings within MongoT, only a small fraction of 
 All that said, the overall performance for Atlas Search is amazing, and as a pairing, they are a rock-solid, high-performance search engine, tightly coupled (in a good way!) between the transactional data and the search index.
 
 I really like a visual representation of performance, and being able to pull out traces:  
-![](Screenshot-2026-05-08-at-3.49.33-PM-1024x663.png)
+![](Screenshot-2026-05-08-at-3.49.33-PM-1024x663.jpg)
 
 And then walk through the spans in a search trace:
-![](Screenshot-2026-05-08-at-3.49.59-PM-1024x807.png)
+![](Screenshot-2026-05-08-at-3.49.59-PM-1024x807.jpg)
 
 Really helps me understand the code and how it works. Of course, the additional tracing severely impacts performance, but if you want to, check out the branch and play with the Grafana dashboards!
 

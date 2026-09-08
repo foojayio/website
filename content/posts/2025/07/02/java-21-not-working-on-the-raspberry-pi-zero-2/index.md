@@ -100,4 +100,4 @@ Hello World
 ## Compare Boards
 
 To help identify these kinds of issues that behave differently on different types of Raspberry Pi boards, the Board Info Service has been extended with a [Compare view](https://api.pi4j.com/board-compare?board2=MODEL_4_B&board1=ZERO_V2) where you can easily see the differences between two boards.
-![](compare-boards-1024x600.png)
+![](compare-boards-1024x600.jpg)

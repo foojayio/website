@@ -6,7 +6,7 @@ description: "This is the first JavaFX LinksOfTheMonth review for 2024, an overv
 canonical: "https://webtechie.be/post/2024-01-26-javafx-links-of-january-2024/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

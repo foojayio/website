@@ -5,7 +5,7 @@ lastmod: "2021-09-16T14:46:22+00:00"
 description: "Find out about Tomcat and TomEE auto-clustering in Jelastic PaaS, as well as how to get these scalable clusters up and running!"
 authors:
   - "tetiana-fydorenchyk"
-image: "image3.png"
+image: "image3.jpg"
 categories:
   - "Jakarta EE"
   - "Jelastic"
@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image11.png" class="alignleft" alt="Tomcat TomEE Automatic Clustering" >}}
+{{< img src="image11-379fd649.png" class="alignleft" alt="Tomcat TomEE Automatic Clustering" >}}
 
 Apache [Tomcat](https://tomcat.apache.org/) is an open-source application server maintained by the Apache community. It is one of the most popular solutions for hosting Java applications due to its ease-of-use and lightweight yet versatile functionality. However, if you run the projects based on [Jakarta EE](https://jakarta.ee/) 8 (or higher), you may be interested to use [TomEE](https://tomee.apache.org/) server with built-in required enterprise technology that isn't found in Tomcat.
 
@@ -35,20 +35,20 @@ Below, you can find out more about the implementation of Tomcat and TomEE auto-c
 There are multiple tutorials on how to set up Tomcat clusters, but the configuration is relatively complex and includes many tweaks, which makes it seem like a lot. However, with the Jelastic [Auto-Clustering](https://docs.jelastic.com/what-is-auto-clustering/) feature, we went further and automated the whole process, making it as simple as flipping a switch.
 
 1. Log in to your Jelastic account and click **New Environment** at the top.
-![Tomcat and TomEE environments](https://jelastic.com/blog/wp-content/uploads/2021/08/image6.png)
+![Tomcat and TomEE environments](image6-7370ebb1.png)
 
 2. In the open [topology wizard](https://docs.jelastic.com/setting-up-environment/), choose **Tomcat** or **TomEE** among **Java** application servers and turn on the **Auto-Clustering** switcher. Make any other necessary adjustments and click **Create**.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image4.png" class="is-resized" alt="tomcat environment" width="695" height="433" >}}
+{{< img src="image4-62fc91ef.png" class="is-resized" alt="tomcat environment" width="695" height="433" >}}
 
 3. In a few minutes, your Tomcat cluster will appear within the dashboard.
-![tomcat cluster topology](https://jelastic.com/blog/wp-content/uploads/2021/08/image10.png)
+![tomcat cluster topology](image10-e198b9c4.png)
 
 ## Tomcat / TomEE Cluster Topology and Specifics
 
 The topology of the highly available Tomcat cluster is straightforward and efficient, without any unnecessary elements to complicate it or reduce performance. The default cluster topology looks like below:  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image2.png" class="aligncenter is-resized" alt="tomee tomcat cluster topology" width="406" height="490" >}}
+{{< img src="image2-5c4597d7.png" class="aligncenter is-resized" alt="tomee tomcat cluster topology" width="406" height="490" >}}
 
 Such topology ensures that performance and fault tolerance requirements are met. [**NGINX** load balancer](https://docs.jelastic.com/nginx-load-balancer/) in front of the cluster handles workload distribution. Also, it automatically registers any changes in the cluster, reacting to the compute nodes' addition, deletion, or failure. You can follow our [load balancing test](https://docs.jelastic.com/testing-load-balancing/) tutorial to get an evaluation of workload distribution.
 
@@ -71,20 +71,20 @@ You can check and adjust it if necessary via the built-in [Configuration File Ma
 
 * The instance itself is added to the configuration as **LocalMember**. Other Tomcat nodes in the layer are added by their IPs and uniqueId, which are generated using the containers' IP addresses and IDs.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image5.png" class="is-resized" alt="tomcat cluster configurations" width="757" height="492" >}}
+{{< img src="image5-2537cca4.png" class="is-resized" alt="tomcat cluster configurations" width="757" height="492" >}}
 
 * The DeltaManager is used for replicating sessions. As a result, the session data is spread across all the layer nodes (from all to all).
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image9.png" class="is-resized" alt="tomcat session replication" width="755" height="223" >}}
+{{< img src="image9-b6807d67.png" class="is-resized" alt="tomcat session replication" width="755" height="223" >}}
 
 * [Static membership](https://tomcat.apache.org/tomcat-9.0-doc/config/cluster-interceptor.html#Static_Membership) is used for discovering the cluster peers - the whole and exact list of all the cluster members is listed in the ***server.xml*** on every node.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image7-1024x310.png" class="is-resized" alt="tomcat cluster members" width="756" height="229" >}}
+{{< img src="image7-1024x310-302594e3.jpg" class="is-resized" alt="tomcat cluster members" width="756" height="229" >}}
 
 * Interconnection is done through port *4004* using the TCP protocol - an appropriate rule is added to the [firewall](https://docs.jelastic.com/custom-firewall/) during the cluster configuration.
 * Also, in the ***/opt/tomcat/conf/context.xml*** configuration file, the *[org.apache.catalina.ha.context.ReplicatedContext](https://tomcat.apache.org/tomcat-9.0-doc/config/cluster.html)* class is used for the context implementation to provide replication.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image1.png" class="is-resized" alt="tomcat server replication" width="760" height="232" >}}
+{{< img src="image1-8acd6e83.png" class="is-resized" alt="tomcat server replication" width="760" height="232" >}}
 
 All these settings are done automatically during creation and do not require manual maintenance during the cluster lifecycle.
 
@@ -94,7 +94,7 @@ It's evident that high availability is demanded almost for any application, so i
 
 1. Go to **Settings \> Auto Horizontal Scaling** for your Tomcat / TomEE cluster environment.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/08/image8-1024x601.png" class="is-resized" alt="tomcat horizontal scaling" width="759" height="445" >}}
+{{< img src="image8-1024x601-8df389c2.jpg" class="is-resized" alt="tomcat horizontal scaling" width="759" height="445" >}}
 
 2. Set up scaling triggers for the required resources (RAM, CPU, Network, Disk).  
 

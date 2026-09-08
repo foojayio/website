@@ -1,7 +1,7 @@
 ---
 title: "Wei Lin"
 avatar: "wei-lin.png"
-avatarFull: "wei-lin-full.png"
+avatarFull: "wei-lin-full.jpg"
 bio: "Wei Lin is an ed-tech entrepreneur. He has been teaching Java to students of various ages and backgrounds, and decided that interactive autograded labs are the best way to learn programming."
 bluesky: ""
 mastodon: ""

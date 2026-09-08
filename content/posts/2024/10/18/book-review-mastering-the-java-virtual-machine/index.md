@@ -5,7 +5,7 @@ lastmod: "2024-10-18T13:54:50+00:00"
 description: "Discover the bleak of beauty of Java Virtual Machine (JVM) which provides greater insights for Java Developers, packed with intriguing topics."
 authors:
   - "mahendra1413"
-image: "mastering.png"
+image: "mastering.jpg"
 categories:
   - "Book Review"
   - "Books"
@@ -40,7 +40,7 @@ As we explore the details of **"Mastering the Java Virtual Machine"** in this re
 Author: Otávio Santana
 Genre: Technical Fiction*
 
-{{< img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Imp1YF-K_d6Ytwc43qfHIg.jpeg" class="size-medium" alt="Mastering the Java Virtual Machine" width="396" height="510" >}}
+{{< img src="1-Imp1YF-K_d6Ytwc43qfHIg-cb13e038.jpeg" class="size-medium" alt="Mastering the Java Virtual Machine" width="396" height="510" >}}
 
 Mastering the Java Virtual Machine
 

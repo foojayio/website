@@ -47,7 +47,7 @@ To quickly enable the preview features on an existing Java project, you can righ
 
 When a preview feature is used in the code, a default warning is provided by the compiler that the preview feature may not be supported in a future release. You can choose to ignore this problem or set it to Info by changing its severity level on the Java Compiler preference page:
 
-![](Preview-features-severity.png)
+![](Preview-features-severity.jpg)
 
 ### Sealed Classes
 
@@ -101,7 +101,7 @@ The indentation of a text block can be configured in the formatter profile:
 
 Eclipse IDE provides you a Quick Assist (Ctrl/Cmd + 1) and clean up option to convert eligible switch statements into switch expressions:
 
-![](Convert-to-switch-expression.png)
+![](Convert-to-switch-expression.jpg)
 
 Many quick fixes, quick assists, and templates are also provided to help you in writing code with switch improvements. For example, there are quick fixes to add the `default` case or the missing case statements in a switch expression:
 
@@ -147,7 +147,7 @@ You can go to the project's properties and add libraries to its modulepath on th
 
 You can also configure the properties of its module graph on the Java Build Path \> Module Dependencies tab:
 
-![](Configure-module-dependencies.png)
+![](Configure-module-dependencies.jpg)
 
 Quick Fixes are provided to identify the used types and add the required modules to module-info.java file:
 
@@ -155,7 +155,7 @@ Quick Fixes are provided to identify the used types and add the required modules
 
 You can create and export a new non-empty package directly from the module-info.java file using the provided Quick Fixes:
 
-![](Create-and-export-package.png)
+![](Create-and-export-package.jpg)
 
 You can also provide a service implementation from module-info.java with the help of the provided Quick Fixes:
 

@@ -45,7 +45,7 @@ But the exception breakpoint support will still break for this and many other ex
 
 The solution is simple. Filter out the catching classes if they are in the java or sun root packages. We can do this in the current breakpoint dialog using the filter `-java.* -sun.*`, notice the `-` character used to filter out the packages. This one small class filter will remove that redundant noise and let you focus on exceptions that you catch or don't. An uncaught exception is almost always useful in the debugger, as it can lead to an application fatal error.
 
-![Catch Filter](https://cdn.hashnode.com/res/hashnode/image/upload/v1647961656999/QcNWaF2o9.png)
+![Catch Filter](QcNWaF2o9-55615320.jpg)
 
 You can add additional filters to cover other libraries and your own classes as needed. This is a remarkable feature!
 
@@ -55,11 +55,11 @@ Of all the breakpoint types, I feel these have the most untamed potential. I hop
 
 This limits the breakpoint to the current object. This is something I would normally use a conditional breakpoint for. The problem is that conditions might cause a mistake, e.g. in a case where instances are harder to differentiate. Conditions also require more work.
 
-![Instance Filter](https://cdn.hashnode.com/res/hashnode/image/upload/v1647961947086/yEkujOydu.png)
+![Instance Filter](yEkujOydu-48219363.jpg)
 
 When applying an instance filter, you need to get the object ID from the watch and use that for the field.
 
-![Instance Id](https://cdn.hashnode.com/res/hashnode/image/upload/v1647961990933/Hj4VQTvII.png)
+![Instance Id](Hj4VQTvII-0a91dfa0.jpg)
 
 ### Class
 
@@ -79,7 +79,7 @@ You may recall I mentioned you shouldn't use method breakpoints... They're usual
 
 But there's another approach. You can add a breakpoint using filters/names, e.g. you can add a breakpoint to all the methods starting with the word "is" in all the classes starting with the word "Prime" as we can see here.
 
-![Add Method Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1647962190063/qKvRw0YC6.png)
+![Add Method Breakpoint](qKvRw0YC6-f6f8a81d.png)
 
 This might sound excessive, but there's a common and valid use case.  
 
@@ -97,7 +97,7 @@ When you right click an Object in the IntelliJ watch you can ask to show "all ob
 
 When you do that on a `Thread` object, you see the JIT compiler thread. You can see internal JVM const message strings when doing it on a `String` array. When you're looking at a specific object and wondering "is this the right instance", well... You can review all instances and verify with a right click.
 
-![Show Objects](https://cdn.hashnode.com/res/hashnode/image/upload/v1647962321726/3NZY07XDa.png)
+![Show Objects](3NZY07XDa-96505594.jpg)
 
 You can even narrow down that list with an expression statement to make it even more useful for a larger list of objects.
 

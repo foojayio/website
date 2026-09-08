@@ -25,7 +25,7 @@ DevOps culture revolutionized our industry. Continuous Delivery and Continuous I
 
 Before DevOps practices were commonplace, production used to fail. A lot. We don't want to go back to the time before DevOps tools were commonplace…
 
-![The Twitter Fail Whale Demonstrated the need for DevOps](https://cdn.hashnode.com/res/hashnode/image/upload/v1646648317259/r4Exr4vOY.png)
+![The Twitter Fail Whale Demonstrated the need for DevOps](r4Exr4vOY-0117f210.png)
 
 ## Everything's Perfect in our Development Process, Right?
 

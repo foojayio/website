@@ -277,7 +277,7 @@ Next, we can test all of our endpoints.
 * Neo4j database: ensure [AuraDB instance is running](https://console.neo4j.io/) (free instances are automatically paused after 3 days).
 * Goodreads-svc4: `curl localhost:8083/neo`, `curl localhost:8083/neo/reviews`, and `curl localhost:8083/neo/reviews/178186` or web browser with only URL.
 
-![Test Eureka server and clients](eureka-server-final.png)
+![Test Eureka server and clients](eureka-server-final.jpg)
 
 Bring everything back down again with the below command.
 

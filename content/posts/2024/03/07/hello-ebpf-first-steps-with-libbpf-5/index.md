@@ -5,7 +5,7 @@ lastmod: "2024-03-07T13:51:36+00:00"
 description: "Learn why using libbcc is not the best idea and start working with the newer libbpf."
 authors:
   - "johannes-bechberger"
-image: "bcc_vs_bpf-1-2000x1125-1.png"
+image: "bcc_vs_bpf-1-2000x1125-1.jpg"
 categories:
   - "Tools"
 related_posts:
@@ -49,7 +49,7 @@ Additionally, the libbcc binaries in the official Ubuntu package repositories ar
 ## BPF-based Library
 
 So what is the alternative? We compile the embedded C code in our application to eBPF bytecode at build time using a custom annotation processor and load the bytecode using libbpf at run-time:
-![](https://mostlynerdless.de/wp-content/uploads/2024/02/bcc_vs_bpf-1-2000x1125.png)
+![](bcc_vs_bpf-1-2000x1125-4a510a39.jpg)
 
 This allows us to create self-contained JARs that will eventually neatly package our eBPF application.
 
@@ -152,4 +152,4 @@ Using libbpf instead of libbcc has many advantages: Smaller, self-contained JARs
 Thanks for joining me on this journey to create a proper Java API for eBPF. I'll see you in two weeks for the next installment in this series, and possibly before for a trip report on my current travels.
 
 *This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone, first published on my personal blog [mostlynerdless.de](https://mostlynerdless.de/blog/2024/02/26/hello-ebpf-first-steps-with-libbpf-5/). This article was written in Canada, thanks to [ConFoo](https://confoo.ca/) and Theresa Mammarella, who made this trip possible. Inspiration came from [Ansil H's series on eBPF](https://ansilh.com/posts/08-ebpf-for-linux-admins-part8/).*  
-![](https://mostlynerdless.de/wp-content/uploads/2024/02/IMG_2772-2000x690.jpeg)
+![](IMG_2772-2000x690-80241264.jpeg)

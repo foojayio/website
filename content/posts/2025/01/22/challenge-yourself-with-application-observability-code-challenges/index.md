@@ -124,7 +124,7 @@ The setup looks like this:
 ![Setup](full_setup.png)
 
 After running one of the scripts you can get more details in a Grafana dashboard like this:  
-![K6 dashboard](k6_highload_dashboard.png)
+![K6 dashboard](k6_highload_dashboard.jpg)
 
 In this screenshot you can see that the application is **reaching a limit for some reason** , more load does not give more requests per second and **with more load the response times increase** a lot.
 

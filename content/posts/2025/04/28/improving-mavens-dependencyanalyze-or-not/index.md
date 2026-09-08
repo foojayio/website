@@ -25,7 +25,7 @@ Recently, my good friend Richard Fichtner advised using the `mvn dependency:anal
 >
 > It can show you the dependencies you use in your code but have not declared in your pom.xml. This works because you have a transitive dependency on your classpath. Either don't use the dependency or declare it.
 >
-> [![](https://cdn.bsky.app/img/feed_thumbnail/plain/did:plc:cc2k5egfzqpf3nbjrs5xox4r/bafkreibztkdlkhrkyydfdntdkktrdw7qqr4t54mbwoazf6rkulcawhqkj4@jpeg)](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
+> [![](bafkreibztkdlkhrkyydfdntdkktrdw7qqr4t54m-0653ea62.jpg)](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
 >
 > — [Richard Fichtner 💻☕ @richard.fichtner.dev](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r?ref_src=embed)  
 > [December 10, 2024 at 2:00 PM](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)

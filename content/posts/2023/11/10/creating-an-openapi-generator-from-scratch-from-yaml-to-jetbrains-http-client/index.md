@@ -20,7 +20,7 @@ frozen: false
 
 ### **In this article, I'll be implementing an OpenAPI generator from scratch so you can too! We'll be creating a very simple generator for the Jetbrains HTTP Client.**
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lengrand.fr/content/images/2023/11/F9_7HZZW4AEvcHF.jpeg)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](F9_7HZZW4AEvcHF.jpeg)
 
 This is the online version of the article with the same name I wrote for the Dutch Java Magazine.
 
@@ -76,7 +76,7 @@ Each of those is illustrated by a method, and takes separate objects as inputs:
 
 You can find [the actual source file on GitHub](https://github.com/OpenAPITools/openapi-generator/blob/78f3b19b58df699ef883b89a7a44531407377719/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultGenerator.java?ref=lengrand.fr#L433). The objects for each of those methods are large `Map` classes that contain the necessary data in a semi-structured format. Here is an example of how `allModels` looks like:
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/NVgYf1bDqjbDEuvOkdmDReLlE0pVj2M3A64JpNQncZmFvosFOlA4tGzb1idJWD8cWexTV-tlzd18VJwJ0lgkqHYi80GZFqmj3S-oJtXwa9Y2LrRG1mU-gdlKfBIV0hZsIBm2arP9QlVTQlfIvuwS_Tc)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](NVgYf1bDqjbDEuvOkdmDReLlE0pVj2M3A64JpNQn-d9d384e4.jpg)
 
 *A debug view of the allModels object*
 
@@ -125,7 +125,7 @@ $ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
 
 Let's see what the generated output looks like:
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/QdjBEGu-dpqVoX_EMfZ5DZPG9ND4g3KjY1HR6Yo0LvChQmnRAPQBpBV-MAp6HNteXRbAb4ZOjQkQs9LhxBkj9KiZ7iRFdVKNTwNyNzNjCAQUWoc4RnipISl2kJcsKpauctW-D-Atkq7J5jEOyXcsA98)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](QdjBEGu-dpqVoX_EMfZ5DZPG9ND4g3KjY1HR6Yo0-7a3c36a8.jpg)
 
 *A tree view of the generated client*
 
@@ -189,8 +189,8 @@ If we look at the data object available for operations, we end up with this, whe
 
 We can see it clearly if we look at the object during processing.
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/LW_g2JLAtaj1yq2LJeg0LBb0yTOy4ufSyurPNWW6XjKcdsv5GhVSASr6yWS7vYv3vmEuS9xmbZqzBa4Mqt76dg_Bv47gMoifUjxInC0-z1WkJYJRU3grz4RBApXJAZl4ZCx1irLQ69axWx5CQAe1fM0)  
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/HL2UN4ZvPrLgENa7ergdKqrLfcLFEp_N8I46e973y1QsKWO7nzaiqSyjypk-YAdA7_fA_HdjIJR2PwI9zWAym9tVMtSLksXMMZYVmWj6oJbr84V4A90PfMWjqQZ468lQmc9eN8CJEY8h3L4apRAGcgw)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](LW_g2JLAtaj1yq2LJeg0LBb0yTOy4ufSyurPNWW6-b959d007.jpg)  
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](HL2UN4ZvPrLgENa7ergdKqrLfcLFEp_N8I46e973-bf4ea0e4.png)
 
 *Note: Unfortunately, to my knowledge the best way to dive into the data model is still to go pause at runtime, I haven't yet found a complete data model documentation online. If you do, let me know!*
 
@@ -201,7 +201,7 @@ $ ./mvnw package
 $ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
 ```
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/hJ-53Q53ibGC0DuCaqu7yuoWpnLJB3d6g9SYUQ26-XeAVLW5JgavLfljBo08hnuyMwUsQo4Hgz5aBthp8L8jqFCpq1RBFWCz-PWFvpdofXDgR4o7QI_iyFKYMz4Afbet38-rEnzAuCXL4aCaL7ZUnZE)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](hJ-53Q53ibGC0DuCaqu7yuoWpnLJB3d6g9SYUQ26-b007ec31.jpg)
 
 *The result of the generation of our client*
 
@@ -224,7 +224,7 @@ Looks great to me! Let's try to run one of the calls
 
 Looks great to me! Let's try to run one of the calls.
 
-![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/LrHrgXoLj4y9_lyYCzAbtLGle6eDCqv-eyDWOVQLkCkdsb2LskNOrdhBEO0c0wDMuRb9EHbh3i21TpLEcntMyd_qhHqeYgIsQDzDOD7FCrf6VNsaxe3RY1OzrzB21uqo1SxwzlF7lXZ7oqyno3FAGSo)
+![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](LrHrgXoLj4y9_lyYCzAbtLGle6eDCqv-eyDWOVQL-e41657d3.png)
 
 *Running one of the calls that's just been generated*
 

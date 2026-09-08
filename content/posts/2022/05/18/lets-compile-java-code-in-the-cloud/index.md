@@ -36,10 +36,10 @@ The combination of Cloud Native Compiler with the Azul Platform Prime runtime pr
 The effect on the warm-up time and the client-side CPU spend when starting a new Java program is dramatic. Look what happens when we run Renaissance's finagle-http workload on an extremely constrained 2 vCore machine.
 
 Doing heavier optimizations means spending more resources, as shown by the long warm-up curve of Azul Platform Prime with local JIT. When we offload to Cloud Native Compiler, this long warmup time comes down to the same levels as OpenJDK, while the optimized Falcon code continues to run at a faster throughput.
-![](https://www.azul.com/wp-content/uploads/finagle-throughput-1024x248.png)
+![](finagle-throughput-1024x248-ba846b67.png)
 
 Meanwhile, CPU use on the client remains low and steady, allowing you to allocate more power to running your application logic even during warmup.
-![](https://www.azul.com/wp-content/uploads/finagle-cpu-1024x248.png)
+![](finagle-cpu-1024x248-9c894c85.png)
 
 In this article we will look at:
 
@@ -96,12 +96,12 @@ Here are some numbers on Falcon vs Hotspot on popular Java performance benchmark
 | Disruptor     | 132%                                          |
 | Kafka         | 145%                                          |
 
-![](https://www.azul.com/wp-content/uploads/rennaisance3-1024x515.png)
+![](rennaisance3-1024x515-862c6540.png)
 
 We've already shown above how Cloud Native Compiler reduces warm-up time and CPU spend when running the finagle-http workload on a resource-starved machine. But it's not just extremely resource constrained machines that benefit from Cloud Native Compiler.
 
 Let's look at a more realistic workload – running a three-node Cassandra cluster on an 8 vCore r5.2xlarge AWS instance. With optimization set to the highest level, resulting in high and consistent throughput, warm-up time goes from 20 minutes with local JIT to less than two minutes with Cloud Native Compiler.
-![](https://www.azul.com/wp-content/uploads/cassandra-throughput-1024x405.png)
+![](cassandra-throughput-1024x405-07ae23d8.png)
 
 ## Conclusion
 

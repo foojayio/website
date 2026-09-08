@@ -5,7 +5,7 @@ lastmod: "2023-08-02T10:27:28+00:00"
 description: "Have you ever wondered how safepoints are implemented in the OpenJDK? Follow me down the rabbit hole into the inner workings of the JVM."
 authors:
   - "johannes-bechberger"
-image: "safepoint-2000x726-1.png"
+image: "safepoint-2000x726-1.jpg"
 categories:
   - "Java Core"
 related_posts:
@@ -40,7 +40,7 @@ if (thread->at_safepoint()) {
 ```
 
 to every location where a safepoint check should occur. The main problem is its performance. We either add lots of code or wrap it in a function and have a function call for every check. We can do better by exploiting the fact that the check often fails, so we can optimize for the fast path of "thread not at safepoint". The OpenJDK does this by exploiting the page protection mechanisms of modern CPUs ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L45)) in JIT compiled code:
-![](https://mostlynerdless.de/wp-content/uploads/2023/07/safepoint-2000x726.png)
+![](safepoint-2000x726-e022f9ab.jpg)
 
 The JVM creates a *good* and a *bad* page/memory area for every thread before a thread executes any Java code ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L67)):
 

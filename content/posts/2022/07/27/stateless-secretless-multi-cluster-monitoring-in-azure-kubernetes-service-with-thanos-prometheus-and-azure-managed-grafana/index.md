@@ -5,7 +5,7 @@ lastmod: "2022-07-27T08:36:47+00:00"
 description: "For cloud native engineers facing the challenge of observing multiple Azure Kubernetes Clusters and needing a flexible, stateless solution!"
 authors:
   - "alessandro-vozza"
-image: "cover.png"
+image: "cover.jpg"
 categories:
   - "Developer Tools"
 related_posts:
@@ -39,7 +39,7 @@ This article was inspired by several sources, most importantly this two articles
 
 We will deploy all components of Thanos and Prometheus in a single cluster, but since they are couple only via the ingress they don't need to be co-located.
 
-![Diagram](https://raw.githubusercontent.com/ams0/ams0/deddfb117c95f739fda88c00a963604b9df3dd59/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/images/stateless_thanos.png)
+![Diagram](stateless_thanos-399587bc.png)
 
 ### Cluster-wide services
 
@@ -237,13 +237,13 @@ To start, head to the Azure Portal and deploy AME; then, get the endpoint from t
 
 Add a new source of type Prometheus and basic authentication (the same we created before):
 
-![Datasource](https://raw.githubusercontent.com/ams0/ams0/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/images/datasource.png)
+![Datasource](datasource-edd705f2.png)
 
 Congratulations! We can now visualize the data flowing from Prometheus, we only need a dashboard to properly display the data.
 
 Go to (on the left side navigation bar) Dashboards-\> Browse and click on Import; import the "Kubernetes / Views / Global" (ID: 15757) into your Grafana and you'll be able to see the metrics from the cluster:
 
-![Dashboard](https://github.com/ams0/ams0/raw/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/images/dashboard.png)
+![Dashboard](dashboard-f5440f04.jpg)
 
 The imported dashboard has no filter for cluster or region, thus will show all cluster metrics aggregated. We will show in a future post how to add a variable to a Grafana dashboard to properly select and filter cluster views.
 

@@ -35,7 +35,7 @@ We are excited to announce our roadmap for the next few months.
 
 Here is a picture that summarizes our investment areas:
 
-![Toolkit roadmap 2022](Toolkit-roadmap-2022-1024x576.png)
+![Toolkit roadmap 2022](Toolkit-roadmap-2022-1024x576.jpg)
 
 ## What is upcoming?
 

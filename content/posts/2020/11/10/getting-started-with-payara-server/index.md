@@ -6,7 +6,7 @@ description: "The following four short videos will take you step-by-step through
 canonical: "https://www.payara.fish/learn/getting-started-with-payara/"
 authors:
   - "jadon-ortlepp"
-image: "Introduction-1150x647-1.png"
+image: "Introduction-1150x647-1.jpg"
 categories:
   - "Microservices"
   - "Tutorials"

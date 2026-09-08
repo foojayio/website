@@ -112,14 +112,14 @@ In many cases, the Old generation is larger than the Young generation, but not a
 In region-based generational collectors (C4 and G1), the size of the generations is fluid and elastic. Most of the regions could be the Young generation, or most could be the Old generation. In collectors like CMS, Parallel, and Serial, the boundary between the two generations was fixed, and the ratio between new and old generation sizes may have to be tuned.
 
 The following diagram illustrates how a typical Young generation GC cleans and moves objects when the Eden space gets filled up. New objects get allocated into the Eden space until it fills up. During the GC, live objects (reachable objects) in the Eden and Survivor space are copied to the other Survivor space. If any objects become "old enough," they are copied to the Old generation (i.e. they are tenured).
-![Diagram: how a typical Young generation GC cleans and moves objects when the Eden space gets filled up. New objects get allocated into the Eden space until it fills up.](https://www.azul.com/wp-content/uploads/2022-Nov-Performance-Young-Old-Generation.jpg)
+![Diagram: how a typical Young generation GC cleans and moves objects when the Eden space gets filled up. New objects get allocated into the Eden space until it fills up.](2022-Nov-Performance-Young-Old-Generatio-e909aece.jpg)
 
 You can take advantage of the young generation system by focusing on local variables within methods that have a short lifetime so the GC can focus on a subset of the heap that can quickly be handled.
 
 ## Types of Java Garbage Collectors
 
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
-![](https://www.azul.com/wp-content/uploads/garbage-collectors-table.png) Table overview of the different Garbage Collectors in Java
+![](garbage-collectors-table-a4b7857b.png) Table overview of the different Garbage Collectors in Java
 
 {{< img src="deepak-sreedhar.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
 
@@ -185,7 +185,7 @@ In IT project management, there is a famous rule: "You need to choose between sp
 * Very high throughput
 * Lowest resource usage (CPU and memory)
 
-![You need to pick two of the following: very low latency, very high throughput, or lowest resource usage.](https://www.azul.com/wp-content/uploads/2022-Nov-Performance-TwoOutOfThree.jpg)
+![You need to pick two of the following: very low latency, very high throughput, or lowest resource usage.](2022-Nov-Performance-TwoOutOfThree-7643e571.jpg)
 
 But there is actually a fourth element we should add here: "Good Engineering!" Azul Platform Prime is living proof that there is no need to make those trade-offs. Only one example is the concurrency in the [C4 Garbage Collector](https://www.azul.com/products/components/pgc/), which is fundamentally more efficient compared to the traditional Stop-The-World GCs.
 

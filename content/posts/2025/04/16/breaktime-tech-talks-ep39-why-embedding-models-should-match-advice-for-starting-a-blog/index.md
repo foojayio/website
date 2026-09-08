@@ -5,7 +5,7 @@ lastmod: "2025-04-22T08:07:51+00:00"
 description: "This week I talk through my hands-on experience of what happens when embedding models for creating vectors and searching them don’t match."
 authors:
   - "jennifer-reif"
-image: "techtalks.png"
+image: "techtalks.jpg"
 categories:
   - "Databases"
   - "Graph"

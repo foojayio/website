@@ -54,7 +54,7 @@ Most of what it means is that we need to make several big changes to the way we 
 
 In an ideal world, all our operations will be simple and contained in a small microservice. The service mesh framework surrounding our microservices will handle all the global complexities and manage our individual services for us. But that isn't the real world. In reality, our Microservices might have a transactional state that carries between the services. External services might fail and for that, we need to take some unique approaches.
 
-[![Copyright @forrestbrazeal licensed as Creative Commons BY-NC-ND](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aj4tjmm940wtoyc7acqc.png)](https://www.goodtechthings.com/marco-polo/)
+[![Copyright @forrestbrazeal licensed as Creative Commons BY-NC-ND](aj4tjmm940wtoyc7acqc-dd992d16.jpg)](https://www.goodtechthings.com/marco-polo/)
 
 ### Reliance on the DevOps Team
 
@@ -101,7 +101,7 @@ That is a successful transaction. With a regular database, this would be one tra
 * If deducting the funds fails we need to restore the funds, remove the recipient and remove the allocation.
 * Finally if adding the funds to the recipient fails we need to run all the undo operations!
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qi9pxeg2pamioeymurcs.png)
+![Image description](qi9pxeg2pamioeymurcs-c13932c5.png)
 
 Another problem in Saga is illustrated in the CAP theorem. CAP stands for Consistency, Availability and Partition Tolerance. The problem is we need to pick any two… Don't get me wrong, you might have all three. But in a case of a failure you can only guarantee two.
 
@@ -111,7 +111,7 @@ Consistency means that every read receives the most recent write on an error.
 
 Tolerance means that everything will keep working even if many messages get dropped along the way.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rexzy211esbry0eu2m03.png)
+![Image description](rexzy211esbry0eu2m03-7a112026.png)
 
 This differs greatly from our historic approach to failure with transactions.
 
@@ -179,7 +179,7 @@ Microservices will cost more. There's no way around that. There are special case
 
 The trade-offs of monolith vs. microservice are illustrated nicely in the following radar chart. Notice that this chart was designed with a large project in mind. The smaller the project, the better the picture is for the Monolith.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f9a6wz5o78jdpdkob49e.png)
+![Image description](f9a6wz5o78jdpdkob49e-1952943a.jpg)
 
 Notice that Microservices deliver a benefit in larger projects in fault tolerance and team independence. But they pay a price in cost. They can reduce R\&D spend but they mostly shift it to DevOps so that isn't a major benefit.
 

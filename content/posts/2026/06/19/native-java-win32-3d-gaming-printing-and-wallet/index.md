@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![Native Java Win32, 3D Gaming, Printing and Wallet](https://www.codenameone.com/blog/weekly.jpg)
+![Native Java Win32, 3D Gaming, Printing and Wallet](weekly-4df2ff44.jpg)
 
 This week we're introducing native Windows support (no JVM!), a 3D graphics API, a gaming API, support for Apple Wallet, printing and more in what is probably our biggest update ever… But that's not the thing that excites me the most.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -58,7 +58,7 @@ public void onFrame(GraphicsDevice device) {
 ```
 
 And it isn't limited to primitives. A binary glTF model authored in any 3D tool loads with one call and renders with its own textures. This is the Khronos BoomBox sample model rendering on the native Mac target:
-![A glTF model rendered by the portable 3D API on the native Mac target](https://www.codenameone.com/blog/portable-3d-graphics-api/boombox-mac.png)
+![A glTF model rendered by the portable 3D API on the native Mac target](boombox-mac-77d96835.png)
 
 On iOS the vertex buffers are SIMD-aligned so the data is handed to Metal with no copy in between. The `RenderView` hosting all of this is a regular component, so a 3D view drops into a normal form next to buttons and text. We walk through the whole API in .
 
@@ -82,7 +82,7 @@ protected void update(double dt) {
 ```
 
 No render code in sight: the linked sprites track their physics bodies and the scene draws itself. Here it is running in the simulator:
-![The gaming API physics demo, Box2D bodies driving sprites](https://www.codenameone.com/blog/game-development-api-box2d/gaming-demo.gif)
+![The gaming API physics demo, Box2D bodies driving sprites](gaming-demo-e6653b0e.webp)
 
 The physics engine is JBox2D repackaged under `com.codename1.gaming.physics.box2d`, with an idiomatic wrapper that keeps your code in screen pixels and hides the meters and the flipped y-axis. Because everything is pure Java where it matters, it runs unchanged on every target, including iOS. For years we said no to gaming APIs in Codename One; also explains what changed our mind.
 
@@ -92,7 +92,7 @@ The new Windows target translates your Java/Kotlin bytecode to C through ParparV
 > **Edit:** Since publishing this post we found the binaries were carrying their debug and stack-unwind tables inline. We now split that data into a separate symbol file (kept only to symbolize crashes) and dead-strip code the app never reaches, which brings the sizes down further -- the figures above reflect the leaner build.
 
 To be clear about what this is, because "Java on Windows" carries old associations: there is no Swing here, no AWT, no JavaFX, and no bundled runtime. It is the full Codename One framework compiled to native code, and everything in it works there, including the new printing API and the 3D layer. This is the same app from the same code base, rendered by Direct2D and DirectWrite on Windows:
-![A Codename One app rendering natively on Windows via Direct2D](https://www.codenameone.com/blog/native-windows-port-no-jvm/chatview-windows.png)
+![A Codename One app rendering natively on Windows via Direct2D](chatview-windows-a31571fe.png)
 
 People have been asking how to turn Java into a real `.exe` since the late nineties, and the modern answer, GraalVM, is a tool designed for a different purpose. The architecture, the history, and how this completes the native desktop story the Mac target started are all in .
 

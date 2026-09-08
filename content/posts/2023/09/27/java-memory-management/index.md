@@ -54,7 +54,7 @@ To note, as long as an object is "reachable", it is 'live' and the garbage colle
 
 The root set includes all local variables and method parameters that are currently on all thread stacks. If two objects referenced each other, but could not be reached by the root set, they would be garbage collected.
 
-![](Screenshot-2023-09-22-at-5.39.32-PM-1024x489.png)  
+![](Screenshot-2023-09-22-at-5.39.32-PM-1024x489.jpg)  
 *Figure 2. Object Reachability*
 
 The time between an object's creation and the time it is destroyed is encapsulated by the term '[object lifetime](https://en.wikipedia.org/wiki/Object_lifetime "object lifetime")'. With 'short-lived' objects, these remain in a part of the heap memory known as the '[Nursery](https://docs.oracle.com/cd/E15289_01/JRSDK/garbage_collect.htm#i1087437 "Nursery")', this is also known as the 'Young Space', or as 'Eden'. With longer living objects, typically these are moved to the part of the heap known as 'Tenured' (the 'Old Space') in order to free up the nursery for new objects to be allocated.

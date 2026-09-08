@@ -38,7 +38,7 @@ This is **Part 1** of our series. Today, we focus on the **Standalone Mode** —
 We are busy. We don't want to spend 2 hours configuring a linter script or messing with XML files.
 
 **The Solution:** [SonarQube for IDE](https://www.sonarsource.com/products/sonarqube/ide/) is plug-and-play. It works locally, analyzing your code *as you type*.
-![](Screenshot-2025-12-12-at-15.52.44.png)
+![](Screenshot-2025-12-12-at-15.52.44.jpg)
 
 1. Open **IntelliJ IDEA**.
 2. Go to **Settings** -\> **Plugins**.
@@ -101,7 +101,7 @@ This is the main reason developers uninstall quality tools. You open a class wri
 In the tool settings window, enable the setting **"Focus on New Code"**. This is a mental health saver. It ignores technical debt older than 30 days (this is the default time window when not using the Connected Mode).
 
 Then in the analysis
-![](Screenshot-2025-12-12-at-15.53.14.png)
+![](Screenshot-2025-12-12-at-15.53.14.jpg)
 
 ## **Problem #6: "I know it's bad, but how do I fix it?"**
 
@@ -124,7 +124,7 @@ String name = user.get().getName();
 ```
 
 **The Educational Fix:** When you select an issue, SonarQube for IDE opens a **Rule Description** tab. This is my favorite part. It doesn't just say "fix this." It gives you a mini-article explaining **why** this is an issue and provides clear "Non-Compliant" vs "Compliant" code examples. It effectively trains you to be a better developer while you work.
-![](Screenshot-2025-12-12-at-15.53.22.png)
+![](Screenshot-2025-12-12-at-15.53.22.jpg)
 
 **The Quick Fix:** Once you understand the issue, you can often (applicable to a subgroup of rules) just hit Alt + Enter (or Option + Enter) and let the tool rewrite the code for you.
 
@@ -171,7 +171,7 @@ You can go to **Settings** -\> **Tools** -\> **SonarQube for IDE** -\> **Rules**
 * **Disable** rules that don't make sense for you.
 * **Configure thresholds** (e.g., allow 15 lines instead of 10).
 
-![](Screenshot-2025-12-12-at-15.53.31.png)
+![](Screenshot-2025-12-12-at-15.53.31.jpg)
 
 ## **Summary**
 

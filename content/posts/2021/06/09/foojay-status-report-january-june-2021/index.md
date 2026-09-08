@@ -29,7 +29,7 @@ Only from February onwards has real promotion of Foojay.io begun, since that's w
 
 Here's a map of the [20+ JUG visits across March and April](https://foojay.io/today/schedule-for-foojay-virtual-jug-tour/), all done virtually, of course, with [a large cross-section of the Java community and its technologies involved](https://foojay.io/today/virtual-foojay-jug-tour/):
 
-{{< img src="image-15-1024x576.png" class="size-large is-resized" width="678" height="381" >}}
+{{< img src="image-15-1024x576.jpg" class="size-large is-resized" width="678" height="381" >}}
 
 After that there were a number of significant spikes, in the graph above, which can also be explained: the big spike towards the end of April is because of Wim Deblauwe's brilliant and very well received "[Better Error Handling for Your Spring Boot REST APIs](https://foojay.io/today/better-error-handling-for-your-spring-boot-rest-apis/)", while the massive spike in May is because of Deepu Sasidharan's fantastically explained and comprehensive "[Demystifying JVM Memory Management](https://foojay.io/today/demystifying-jvm-memory-management/)", these two articles were extremely well received, really popular on Reddit, for example, as well as elsewhere, drawing a lot of traffic to Foojay.io, not to mention the hot discussions around JEP 411 and the deprecation of the SecurityManager, with Peter Firmstone providing great content around this theme, such as "[The Principle of Least Privilege and How JEP 411 Will Have a Negative Impact on Java Security](https://foojay.io/today/why-jep-411-will-have-a-negative-impact-on-java-security/)".
 

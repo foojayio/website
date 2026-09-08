@@ -146,9 +146,9 @@ The "[Vanilla JavaScript](http://vanilla-js.com/)" (= no libraries, just HTML/CS
 The dashboard pulls the latest summary and other data files from the repository, so it's a living comparison that grows as more test reports become available.
 
 {{< gallery >}}
-sbc-benchmarks-filters-1024x555.png
-sbc-benchmarks-overall-1024x612.png
-sbc-benchmarks-tests-1024x789.png
+sbc-benchmarks-filters-1024x555.jpg
+sbc-benchmarks-overall-1024x612.jpg
+sbc-benchmarks-tests-1024x789.jpg
 {{< /gallery >}}
 
 These are screenshots from a first test round. Check the [actual last status at webtechie.be/sbc/](https://webtechie.be/sbc/).

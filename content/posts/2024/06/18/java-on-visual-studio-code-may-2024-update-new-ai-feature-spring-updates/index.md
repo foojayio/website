@@ -31,7 +31,7 @@ With the [release of various AI products](https://blogs.microsoft.com/blog/2024/
 
 Here's how the feature works, on your Java class, a new CodeLens text will appear above the name of the class: "Rewrite with new Java syntax". Once the user clicks on this, it will trigger an inspection on the current Java class. Once the inspection is complete, Visual Studio Code will show several improvement suggestions and point users to the location.
 
-![](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/trigger.gif)
+![](trigger-8ce33757.gif)
 
 For each suggestion, additional CodeLens will appear and shows what the solution is (and what needs to be improved).
 
@@ -41,13 +41,13 @@ The user can then see the code diff, and will be offered the choice of "Accept o
 
 If the user accepts the suggestion, then the workflow is over. Let's see the first example where the for-loop can be refactored using IntStream.
 
-![For loop to instream](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/intstream.gif)
+![For loop to instream](intstream-276fb073.gif)
 
 For loop to instream, image
 
 Let's look at another example, where our feature suggests that a multiple if and else-if logic can be directly re-written as a switch expression. By clicking on the CodeLens text, the code can be directly re-written as the improved code.
 
-![Switch to if](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/06/switchtoif.gif)
+![Switch to if](switchtoif-179bf6a9.gif)
 
 Switch to if, image
 
@@ -55,7 +55,7 @@ Switch to if, image
 
 Sometimes, we may not want inspect the whole class because the code is too complex. The feature above also supports inspecting the part of the code. We just need select the code we want to inspect, and then click on the lightbulb on the left, select "Rewrite with Java syntax". Here's an example:
 
-![Partial inspection](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/06/partial.gif)
+![Partial inspection](partial-9b8d1f9d.gif)
 
 Partial inspection, image
 
@@ -71,25 +71,25 @@ To use this feature, developer needs to install both Insider (Pre-release) versi
 
 The Spring Boot Tools extension now features syntax highlighting for JPQL query strings. The syntax highlighting works for @Query annotations inside of Java source files as well as for named query property files. This makes reading those query strings much easier. (screenshot JPQL query syntax highlighting)
 
-#### [![JPQL Syntax highlighting](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/jpql-syntax-highlighting.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/jpql-syntax-highlighting.png)
+#### [![JPQL Syntax highlighting](jpql-syntax-highlighting-299550e3.jpg)](jpql-syntax-highlighting-299550e3.jpg)
 
 #### Add Starters directly from within `pom.xml` files
 
 We added a clickable hint to pom.xml files of Spring Boot projects, directly in their dependency section. This clickable hint directly invokes the support to add additional Spring Boot starter modules. This improves discoverability and usability of this feature and makes it super easy to find and use. (screenshot add pom starters)
 
-[![Image thumbnail hint add starters](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/thumbnail_hint-add-starters.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/thumbnail_hint-add-starters.png)
+[![Image thumbnail hint add starters](thumbnail_hint-add-starters-df4bf29e.png)](thumbnail_hint-add-starters-df4bf29e.png)
 
 #### Dashboard shows active profiles
 
 The Spring Boot Dashboard now shows the active profiles of a running Spring Boot application directly side by side with the port the app runs on. This is available in the pre-release version. (screenshot active profiles in dashboard)
 
-#### [![Dashboard profiles](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/dashboard-profiles.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/dashboard-profiles.gif)
+#### [![Dashboard profiles](dashboard-profiles-fc3a7445.webp)](dashboard-profiles-fc3a7445.webp)
 
 #### Automatically convert application properties to YAML and back
 
 The Spring Boot tools now offer actions to automatically convert `application.properties` files to YAML format and the other way around. This makes the switch to your (newly) preferred format super easy. (screenshot property conversion
 
-### [![Convert properties](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2024/05/convert-properties.gif)
+### [![Convert properties](convert-properties-d9de9a50.webp)](convert-properties-d9de9a50.webp)
 
 #### Performance and footprint improvements
 
@@ -113,11 +113,11 @@ If you want to reset the coverage data before every coverage execution, you can 
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 ### Feedback and suggestions
 

@@ -5,7 +5,7 @@ lastmod: "2023-10-04T07:13:41+00:00"
 description: "Read how you can help create a community certification for Java Developers as part of the Foojay community"
 authors:
   - "janhendrik-kuperus"
-image: "Community-Process.png"
+image: "Community-Process.jpg"
 categories:
   - "Foojay"
   - "Java"
@@ -32,7 +32,7 @@ There is an inherent contradiction between open sourcing the creation of a certi
 
 The diagram below outlines this process and visualizes it as an outside-in flow. Each circle is a smaller context of people with access to the source and with each advancement, the task comes closer to incorporation into the actual testing environment.
 
-![Visualisation of the process an idea for a task will follow to increasingly tighter regulation before inclusion in a test.](Community-Process-473x510.png)
+![Visualisation of the process an idea for a task will follow to increasingly tighter regulation before inclusion in a test.](Community-Process-473x510.jpg)
 
 To bring your idea into the certification exams, it will have to go through these steps:
 

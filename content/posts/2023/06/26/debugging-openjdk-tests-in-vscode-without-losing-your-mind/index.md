@@ -47,19 +47,19 @@ Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses
 
 You're now able to select "ASGCT debug" in "Run and Debug":  
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-04-38.png" class="aligncenter size-full is-resized" width="767" height="218" >}}
+{{< img src="Screenshot-from-2023-06-21-15-04-38-927eb7df.png" class="aligncenter size-full is-resized" width="767" height="218" >}}
 
 You can choose the launch config and run the jtreg test with a debugger:  
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-07-40.png" class="aligncenter size-full is-resized" width="765" height="544" >}}
+{{< img src="Screenshot-from-2023-06-21-15-07-40-db962b16.jpg" class="aligncenter size-full is-resized" width="765" height="544" >}}
 
 The debugger pauses on a segfault, but there are always a few at the beginning of the execution that can safely be ignored. We can use the program's pause to add a break-point at an interesting line. After hitting the break-point, we're able to inspect the local variables...  
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-11-51.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
+{{< img src="Screenshot-from-2023-06-21-15-11-51-c8e1dd69.jpg" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ... and do things like stepping over a line:  
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-13-18.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
+{{< img src="Screenshot-from-2023-06-21-15-13-18.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ## Recompilation
 

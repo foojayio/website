@@ -99,6 +99,6 @@ There's also [Java Serialization Filtering](https://docs.oracle.com/en/java/java
 
  <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="image-950x1024.png" alt="" width="436" height="469" >}}</a>
 
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="kryptos-1024x1000.png" alt="" width="438" height="428" >}}</a>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="kryptos-1024x1000.jpg" alt="" width="438" height="428" >}}</a>
 
  <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="checking-1024x802.png" alt="" width="440" height="345" >}}</a>

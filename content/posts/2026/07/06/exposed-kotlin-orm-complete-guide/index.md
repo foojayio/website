@@ -31,7 +31,7 @@ For quite some time, I have been a huge fan of and fascinated by JetBrains produ
 Even more excitingly, JetBrains Java Annotated Monthly newsletters have featured most of the technical articles I wrote for Foojay on topics such as Java, Spring, Spring Boot 4, and OpenRewrite.
 
 Recently, one Kotlin Domain-Specific Language (DSL) library caught my attention. I immediately tried converting my existing Spring Boot 4 application from Java to Kotlin using Exposed, an ORM framework for Kotlin.
-![Exposed](Exposed-1024x683.png) Kotlin SQL Libary
+![Exposed](Exposed-1024x683.jpg) Kotlin SQL Libary
 
 Before diving into the Exposed library, let's first understand some fundamentals and prerequisites.
 

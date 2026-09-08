@@ -30,7 +30,7 @@ Every time you select something, the selected text will be colored in a specific
 
 First of all, I extended a JavaFX Label which is made from a Labeled container that wraps a LabeledText. In the following screenshot the dashed rectangle represents the border of the Labeled container and the Text represents the LabeledText.
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-13-08-700x473.png)
+![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-13-08-700x473.jpg)
 
 In the SelectableLabel class I've added a Region to the Label using the setGraphics() method and aligned it to the right by calling setContentDisplay(ContentDisplay.RIGHT) as you can see in the following code snippet:
 
@@ -80,19 +80,19 @@ The "magic" is in the -fx-background-insets entry, here we stretch the shape in 
 
 Because it is easier to understand when looking at a picture, here are some screenshots that hopefully explain it. So let's assume the background color of our columns is blue and the border color is red. So let's first take a look at the triangle:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-34-44-700x473.png)
+![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-34-44-700x473.jpg)
 
 Here you can see that the triangle will stand out on the right side of our SelectableLabel and because of the stretching and compressing it looks like it has only a red border on the left side. If we now add the column with it's blue background and red border it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-37-46-700x473.png)
+![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-37-46-700x473.jpg)
 
 Ok so if we now add the next column on the right side and make sure that it will be added to the scene graph after the first column it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-39-49-700x473.png)
+![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-39-49-700x473.jpg)
 
 And here we go, now it looks like we wanted it to look. If we adjust the colors to the real ones it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-43-25-700x473.png)
+![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-43-25-700x473.jpg)
 
 With this technique one can create interesting effects by just tweaking the CSS code without the need of creating complex custom controls. So the take away here is that you should keep in mind that background-insets can also be negative which enables a lot of things.
 

@@ -94,7 +94,7 @@ Micronaut provides two HTTP clients: a declarative one and a low-level one. Both
 
 The declarative client is for simple use-cases, while the low-level is for more complex ones. Passing parameters belongs to the complex category, so I chose the low-level one. Here's a sample of its API:
 
-{{< img src="client-api-700x415.png" class="aligncenter size-medium" alt="Micronaut Client API class diagram" width="700" height="415" >}}
+{{< img src="client-api-700x415.jpg" class="aligncenter size-medium" alt="Micronaut Client API class diagram" width="700" height="415" >}}
 
 The usage is straightforward:
 
@@ -116,7 +116,7 @@ fun characters(
 
 It's not possible to use Kotlin's string interpolation as these parameters are optional. Fortunately, Micronaut provides an `UriBuilder` abstraction, which follows the Builder pattern principles.
 
-{{< img src="uribuilder-api-700x455.png" class="aligncenter size-medium" alt="Micronaut URI Builder class diagram" width="700" height="455" >}}
+{{< img src="uribuilder-api-700x455.jpg" class="aligncenter size-medium" alt="Micronaut URI Builder class diagram" width="700" height="455" >}}
 
 We can use it like this:
 

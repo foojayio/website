@@ -57,7 +57,7 @@ Once your free Atlas cluster is ready, download the [SQL schema script](https://
 ### Analysing the Postgres schema
 
 In this section, we will understand an example of a library management system where we have nine different tables, and the relationship between them is shown in the diagram below:
-[![Image representing the relational schema diagram for the database](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ftjz0onokqk2qp839418n.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ftjz0onokqk2qp839418n.png)
+[![Image representing the relational schema diagram for the database](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-10eb25ef.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-10eb25ef.png)
 
 The ER diagram above also depicts the relationship between these tables. Relational databases often require intricate joins, nested subqueries, and multiple layers of aggregation to retrieve even moderately complex data relationships. As a result, what might seem like a simple query can quickly escalate into a large, complex, and unwieldy SQL statement. This not only increases the cognitive load for developers but also makes the code harder to maintain and prone to errors.
 
@@ -78,7 +78,7 @@ This leads to the joining of two different tables using the foreign key constrai
 The nine different tables in the relational schema need to be converted into five different collections using the [mapping technique](https://www.mongodb.com/docs/relational-migrator/mapping-rules/mapping-rules/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) given by MongoDB. These techniques follow the [design patterns](https://www.mongodb.com/docs/manual/data-modeling/design-patterns/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) followed by MongoDB in data modelling concepts.
 
 After the mappings have been applied to the tables, the MongoDB schema would like the following:
-[![Image representing the desired MongoDB schema](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8dycmqr8zxtnpi6ovgtq.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F8dycmqr8zxtnpi6ovgtq.png)
+[![Image representing the desired MongoDB schema](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fc6db0de.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fc6db0de.jpg)
 
 Let's try to convert the above SQL query into the equivalent MongoDB query:
 
@@ -121,7 +121,7 @@ The tool's Code Converter feature is designed to simplify your journey further b
 ## Code generation with Relational Migrator
 
 To create an application with migrated data using Relational Migrator, you should click on the "Code Generation" tab and select the language and template as Java and Spring Data, respectively. The below screenshot from the Relational Migrator tools explains the steps for the code generation.
-[![Screenshot from Relational Migrator tool performing the code generation](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgftcazognj7pfmnk7clw.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fgftcazognj7pfmnk7clw.png)
+[![Screenshot from Relational Migrator tool performing the code generation](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-35ae87c3.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-35ae87c3.png)
 
 Once you select the framework, you are all set to download/copy the code in the editor of your choice for further processing.
 
@@ -134,7 +134,7 @@ In this tutorial, we are using IntelliJ as the IDE and copying all the code prov
 Depending on the data model that has been selected, the Relational Migrator tools create the [entity](https://spring.io/guides/gs/accessing-data-jpa) and the [repository](https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html) files for the application.
 
 Once the entity and the repository files are all copied/downloaded, all you need to do is create the service and the controller to perform the business logic of the applications. After all the files are copied, the project will look like this:
-[![Screenshot from InteliJ representing the project structure of the application](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fjq1djs4ewlxkux75y8id.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fjq1djs4ewlxkux75y8id.png)
+[![Screenshot from InteliJ representing the project structure of the application](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-aa1c0fce.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-aa1c0fce.jpg)
 
 The controller has all the REST API calls, and the service files are where we need to write the aggregate pipelines.
 

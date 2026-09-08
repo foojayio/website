@@ -165,7 +165,7 @@ You can select the TornadoVM-Tests configuration file and run. This should run a
 
 The outcome of running the unit-tests should be similar to this image:  
 
-{{< img src="Run-Tests-1024x943.png" class="aligncenter size-large is-resized" width="1024" height="943" style="width:604px;height:auto" >}}
+{{< img src="Run-Tests-1024x943.jpg" class="aligncenter size-large is-resized" width="1024" height="943" style="width:604px;height:auto" >}}
 
 ## 6. Run TornadoVM Examples/Applications from IntelliJ
 
@@ -239,11 +239,11 @@ You can add any values that will be selected as arguments for your class. In our
 
 You can click Apply and Run your application.  
 
-{{< img src="Configure-Application-1024x787.png" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
+{{< img src="Configure-Application-1024x787.jpg" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
 
 The output should be similar to the following image, which is executed on Apple M1 silicon.  
 
-{{< img src="Run-Application-1024x502.png" class="aligncenter size-large is-resized" width="1024" height="502" style="width:628px;height:auto" >}}
+{{< img src="Run-Application-1024x502.jpg" class="aligncenter size-large is-resized" width="1024" height="502" style="width:628px;height:auto" >}}
 
 ## *Summary*
 

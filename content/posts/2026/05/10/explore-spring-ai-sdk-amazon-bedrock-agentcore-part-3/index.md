@@ -5,7 +5,7 @@ lastmod: "2026-05-18T05:55:12+00:00"
 description: "Explore how to use built-in tools in Spring AI SDK with Amazon Bedrock AgentCore, including Browser and Code Interpreter capabilities. Learn how AI agents can browse web content, execute code, automate reasoning tasks, and build intelligent workflows using Spring AI and Amazon Bedrock AgentCore."
 authors:
   - "mahendra1413"
-image: "AgentcoreBrowser-2.png"
+image: "AgentcoreBrowser-2.jpg"
 categories:
   - "AI"
   - "IntelliJ IDEA"
@@ -18,7 +18,7 @@ frozen: false
 
 In [Part 1](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/) and [Part 2](https://foojay.io/today/explore-spring-ai-sdk-amazon-bedrock-agentcore-part-2/), we explored the Spring AI SDK and Amazon Bedrock AgentCore features, including the agentcore runtime starter and integration of agentcore memory. In this article, we will explore the integration of AgentCore built-in tools, including the Browser and Code Interpreter features.
 > **Repository containing the companion code for the tutorial. [Go to GitHub](https://github.com/bsmahi/simple-spring-boot-agent).**
-> ![AgentCore Built-In Tool Browser](AgentcoreBrowser.png) Built-In Tool Browser
+> ![AgentCore Built-In Tool Browser](AgentcoreBrowser.jpg) Built-In Tool Browser
 
 *The use case I am trying to build here is for the given URL; it navigates the entire website and retrieves the content and gives key points and the summary of the page using **the AgentCore Browser** tool.*
 

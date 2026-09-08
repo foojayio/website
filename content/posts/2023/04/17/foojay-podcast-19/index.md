@@ -8,7 +8,7 @@ authors:
   - "lukas-eder"
   - "mthmulders"
   - "timtebeek"
-image: "podcast-guests-rich-and-famous-1024x577-1.png"
+image: "podcast-guests-rich-and-famous-1024x577-1.jpg"
 categories:
   - "Developer Tools"
   - "Interviews"
@@ -60,7 +60,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-rich-and-famous-1024x577.png)
+![](podcast-guests-rich-and-famous-1024x577.jpg)
 
 ## Content
 

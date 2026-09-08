@@ -19,13 +19,13 @@ frozen: false
 
 [Thorntail](https://thorntail.io/), originally [WildFly Swarm](https://wildfly-swarm.io/), is most suitable for packaging applications as *JAR* , *WAR,* or *EAR* files. The most important value is in the functional agility the Thorntail provides. You can start with the stripped down version of Thorntail, adding the required parts and application code on top.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/jvm-microservice.png" class="aligncenter is-resized" alt="microservices" width="329" height="411" >}}
+{{< img src="jvm-microservice-8f10b230.png" class="aligncenter is-resized" alt="microservices" width="329" height="411" >}}
 
 Below we will describe how to build and deploy Thorntail based applications using Fat, Thin and Skinny approaches. The application will be packaged in the Jar/War format automatically with the help of [Builder add-ons](https://github.com/jelastic-jps/thorntail) prepared by Jelastic. The topology will consist of Maven build node and JVM containers for running microservices.
 
 ## Thorntail Fat Jar Builder Installation
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-fat-jar-builder-e1536655546281.png" class="aligncenter is-resized" alt="wildfly swarm" width="524" height="350" >}}
+{{< img src="instal-thorntail-fat-jar-builder-e153665-61cc1da9.jpg" class="aligncenter is-resized" alt="wildfly swarm" width="524" height="350" >}}
 
 To get started, log in to Jelastic dashboard, find the *Thorntail Fat* *Jar Builder* in the **Marketplace** and click **Install**.
 
@@ -33,72 +33,72 @@ Or you can import *Thorntail Fat* [JPS](https://docs.jelastic.com/jps/) manifest
 
 <https://github.com/jelastic-jps/thorntail/blob/master/microservice-fat-jar/manifest.jps>  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/thorntail-fat-jps-manifest-e1536657417543.png" class="aligncenter is-resized" alt="maven java" width="525" height="377" >}}
+{{< img src="thorntail-fat-jps-manifest-e153665741754-bb1bdb9d.png" class="aligncenter is-resized" alt="maven java" width="525" height="377" >}}
 
 To do that, open the **Import** window, paste the link and confirm installation by clicking **Import** button in the opened window.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/install-fat-jar-package-e1536655468391.png" class="aligncenter is-resized" alt="jar war file" width="461" height="381" >}}
+{{< img src="install-fat-jar-package-e1536655468391-c9fe2d84.jpg" class="aligncenter is-resized" alt="jar war file" width="461" height="381" >}}
 
 If required, change installation settings such as environment name or GitHub repository link to a custom *Thorntail Fat* project. Then press **Install** *.*  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/open-fat-jar-builder-in-browser-e1536655748988.png" class="aligncenter is-resized" alt="jar war file" width="486" height="247" >}}
+{{< img src="open-fat-jar-builder-in-browser-e1536655-8cfbabe9.png" class="aligncenter is-resized" alt="jar war file" width="486" height="247" >}}
 
 When the installation and building of the project are completed, a corresponding message appears. You still need to wait a few minutes for deploy to be finished (feel free to track the process in *Tasks* panel). In the default implementation, it is done under **api/greeting**context.  
-![wildfly swarm plugin](https://jelastic.com/blog/wp-content/uploads/2018/09/wildfly-swarm-fat-jar-greeting.png)
+![wildfly swarm plugin](wildfly-swarm-fat-jar-greeting-34221fbc.png)
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
 ## Thorntail Skinny Jar Builder Installation
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-skinny-jar-builder.png" class="aligncenter is-resized" alt="build jar" width="599" height="401" >}}
+{{< img src="instal-thorntail-skinny-jar-builder-a64541d3.png" class="aligncenter is-resized" alt="build jar" width="599" height="401" >}}
 
 Find the *Thorntail (WildFly Swarm) Skinny* *Jar Builder* in the **Marketplace** and click **Install**.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/thorntail-skinny-jps-manifest.png" class="aligncenter is-resized" alt="microservice application" width="525" height="322" >}}
+{{< img src="thorntail-skinny-jps-manifest-eeb4873c.png" class="aligncenter is-resized" alt="microservice application" width="525" height="322" >}}
 
 Or import *Thorntail (WildFly Swarm) Skinny* JPS manifest using GitHub link: <https://github.com/jelastic-jps/thorntail/blob/master/microservice-skinny-jar/manifest.jps>  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/install-skinny-jar-package.png" class="aligncenter is-resized" alt="build jar" width="525" height="456" >}}
+{{< img src="install-skinny-jar-package-d413f91f.png" class="aligncenter is-resized" alt="build jar" width="525" height="456" >}}
 
 If required, change installation settings such as environment name or GitHub repository link to a custom *Thorntail Skinny* project*.* Then press **Install** *.*  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/open-skinny-jar-builder-in-browser.png" class="aligncenter is-resized" alt="wildfly swarm" width="403" height="224" >}}
+{{< img src="open-skinny-jar-builder-in-browser-168f173c.png" class="aligncenter is-resized" alt="wildfly swarm" width="403" height="224" >}}
 
 When the installation and building of the project are completed, a corresponding message appears. You still need to wait a few minutes for deploy to be finished (feel free to track the process in *Tasks* panel). In the default implementation, it is done under **api/greeting**context.  
-![build jar](https://jelastic.com/blog/wp-content/uploads/2018/09/wildfly-swarm-skinny-jar-greeting.png)
+![build jar](wildfly-swarm-skinny-jar-greeting-b1225ba5.png)
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
 ## Thorntail Thin War Builder Installation
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/instal-thorntail-thin-jar-builder.png" class="aligncenter is-resized" alt="thin jar" width="597" height="397" >}}
+{{< img src="instal-thorntail-thin-jar-builder-9eead1f8.png" class="aligncenter is-resized" alt="thin jar" width="597" height="397" >}}
 
 Find the *Thorntail (WildFly Swarm) Thin* *War Builder* in the **Marketplace** and click **Install**.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/thorntail-thin-jps-manifest-e1536657454702.png" class="aligncenter is-resized" alt="build web application" width="525" height="326" >}}
+{{< img src="thorntail-thin-jps-manifest-e15366574547-4d32e401.jpg" class="aligncenter is-resized" alt="build web application" width="525" height="326" >}}
 
 Or you can import *Thorntail(WildFly Swarm) Thin* JPS manifest using GitHub link: <https://github.com/jelastic-jps/thorntail/blob/master/microservice-thin-war/manifest.jps>  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/install-thin-war-package.png" class="aligncenter is-resized" alt="thin jar" width="534" height="443" >}}
+{{< img src="install-thin-war-package-7f74b9c1.png" class="aligncenter is-resized" alt="thin jar" width="534" height="443" >}}
 
 If required, change installation settings such as environment name or GitHub repository link to a custom *Thorntail Thin* project*.* Then press **Install** *.*  
-![maven app](https://jelastic.com/blog/wp-content/uploads/2018/09/open-thin-war-builder-in-browser.png)
+![maven app](open-thin-war-builder-in-browser-5e4c7c0d.png)
 
 When the installation and building of the project are completed, a corresponding message appears. You still need to wait a few minutes for deploy to be finished (feel free to track the process in *Tasks* panel). In the default implementation, it is done under **api/greeting**context.  
-![build war](https://jelastic.com/blog/wp-content/uploads/2018/09/wildfly-swarm-thin-war-greeting.png)
+![build war](wildfly-swarm-thin-war-greeting-bfb5a932.png)
 
 Afterward, you can make sure, that application is up and running by pressing **Open in browser** button.
 
 ## Multiple Thorntail Projects with Microservices
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/multiple-thorntail-projects-with-microservices.png" class="aligncenter is-resized" alt="thorntail wildfly swarm" width="683" height="341" >}}
+{{< img src="multiple-thorntail-projects-with-microse-98dd4126.png" class="aligncenter is-resized" alt="thorntail wildfly swarm" width="683" height="341" >}}
 
 You can use just created *Maven* node for building extra projects and deploying them to different environments to get a set of distributed microservices.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/09/separate-environment-with-java-engine.png" class="aligncenter is-resized" alt="thorntail wildfly swarm" width="732" height="454" >}}
+{{< img src="separate-environment-with-java-engine-03b6620c.jpg" class="aligncenter is-resized" alt="thorntail wildfly swarm" width="732" height="454" >}}
 
 First of all, create a separate environment with *Java Engine*.  
-![maven java](https://jelastic.com/blog/wp-content/uploads/2018/09/add-project-to-the-maven-node.png)
+![maven java](add-project-to-the-maven-node-a007525c.png)
 
 Then click **Add Project** next to the *Maven* node in the initial environment.
 

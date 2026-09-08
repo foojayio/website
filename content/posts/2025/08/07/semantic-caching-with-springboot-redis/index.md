@@ -26,7 +26,7 @@ frozen: false
 >
 > It works by storing query-response pairs as vector embeddings in Redis, allowing your application to retrieve cached answers for similar questions without calling the expensive LLM, reducing both latency and costs.
 
-![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*f0R9gBDSJQk8872lh2QMDQ.png)
+![](1-f0R9gBDSJQk8872lh2QMDQ-4762b875.png)
 
 LLMs are powerful but expensive. Every API call costs money and takes time. When users ask similar questions like "What beer goes with grilled meat?" and "Which beer pairs well with barbecue?", traditional systems would make separate LLM calls even though these queries are essentially asking the same thing.
 
@@ -290,19 +290,19 @@ This will start:
 
 When all services are running, go to `localhost:8080` to access the demo. You'll see a beer recommendation interface:
 
-![](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Fiq0hLEwAAh-Raij.png)
+![](0-Fiq0hLEwAAh-Raij-d086f912.png)
 
 If you click on `Start Chat`, it may be that the embeddings are still being created, and you get a message asking for this operation to complete. This is the operation where the documents we'll search through will be turned into vectors and then stored in the database. It is done only the first time the app starts up and is required regardless of the vector database you use.
 
-![](https://miro.medium.com/v2/resize:fit:1108/format:webp/0*Q31EboPeCOEkT8hB.png)
+![](0-Q31EboPeCOEkT8hB-15ceba35.png)
 
 Once all the embeddings have been created, you can start asking your chatbot questions. It will semantically search through the documents we have stored, try to find the best answer for your questions, and cache the responses semantically in Redis:
 
-![](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6H8Qyn7gZW-fI-dE.gif)
+![](0-6H8Qyn7gZW-fI-dE-3fe94eb0.webp)
 
 If you ask something similar to a question had already been asked, your chatbot will retrieve it from the cache instead of sending the query to the LLM. Retrieving an answer much faster now.
 
-![](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*qe0eDWFW6VoJHQvM.gif)
+![](0-qe0eDWFW6VoJHQvM-6ac57570.webp)
 
 RedisInsight provides a visual interface for exploring the cached data in Redis. Access it at `localhost:5540` to see:
 
@@ -310,11 +310,11 @@ RedisInsight provides a visual interface for exploring the cached data in Redis.
 2. **Vector Index Schema**: The schema used for similarity search
 3. **Performance Metrics**: Monitor cache hit rates and response times
 
-![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mXjME1KfaR6i1ZCDpI9wdA.png)
+![captionless image](1-mXjME1KfaR6i1ZCDpI9wdA-72a73049.png)
 
 If you run the `FT.INFO semanticCachingIdx` command in the RedisInsight workbench, you'll see the details of the vector index schema that enables efficient semantic matching.
 
-![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*eCSGHnfvU1obVePLTjQDuA.png)
+![captionless image](1-eCSGHnfvU1obVePLTjQDuA-0ec0c6b6.png)
 
 And that's it — you now have a working semantic caching system using Spring Boot and Redis.
 

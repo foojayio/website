@@ -6,7 +6,7 @@ description: "Over the last couple of days (and nights) I’ve been studying the
 canonical: "https://www.royvanrijn.com/blog/2021/12/log4j2-rce-problem/"
 authors:
   - "roy-van-rijn"
-image: "https://www.royvanrijn.com/images/leak4j1.png"
+image: "leak4j1-db2f246e.jpg"
 categories:
   - "Security"
 related_posts:
@@ -28,7 +28,7 @@ The payload can be delivered in a LOT of ways, as long as it gets in a log state
 After writing some code (a malicious embedded LDAP server) I was able to reproduce the RCE ("Remote Code Execution") attack on even the most basic project.
 
 Here is an example: a simple REST endpoint in a Spring Boot starter project with a single line of logging
-![Leak4J](https://www.royvanrijn.com/images/leak4j1.png)
+![Leak4J](leak4j1-db2f246e.jpg)
 
 As you can see it downloads and executes a classfile I'm serving from the malicious LDAP server (running seperately) printing a message.
 
@@ -83,7 +83,7 @@ I've seen suggestions online that 'newer' Java versions are not affected, but th
 It might be *slightly* harder/safer on a newer Java version, but it's definitely **NOT** a fix.
 
 To show this I've taken the latest version of Java 8 (1.8.311) and I'm using the log4j2 deserialization to craft something that opens the Calculator on my MacBook using other classes known to the vulnerable target:
-![Leak4J with latest Java](https://www.royvanrijn.com/images/leak4j2.png)
+![Leak4J with latest Java](leak4j2-bc22e1d1.jpg)
 
 Again: The payload is still being deserialized, on the latest Java version.
 

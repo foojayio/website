@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![Native Linux, Apple Watch, A Game Builder And Crash Protection](https://www.codenameone.com/blog/native-linux-apple-watch-game-builder-crash-protection.jpg)
+![Native Linux, Apple Watch, A Game Builder And Crash Protection](native-linux-apple-watch-game-builder-cr-ec6e2f86.jpg)
 
 This week brings a native Linux desktop port, an Apple Watch and Wear OS port, a visual Game Builder with a high-level gaming API, and a new crash-protection system, with a tutorial following each one over the coming days. There is also a large piece of work that you mostly should not have noticed: we rebuilt the build cloud, and that rebuild caused a few failed builds along the way. More on that below.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -28,7 +28,7 @@ This week brings a native Linux desktop port, an Apple Watch and Wear OS port, a
 
 We expected this to be painful, and parts of it were, but Linux turned out to be mostly developer friendly. A non-trivial app fits in 5MB, and on my Linux machine it started faster than most of the GNOME native apps already installed; thanks to the default material design theme it tends to look better too:
 
-![A Codename One app rendering natively on Linux via GTK3 and Cairo](https://www.codenameone.com/blog/java-to-a-native-linux-app/chatview-linux.png)
+![A Codename One app rendering natively on Linux via GTK3 and Cairo](chatview-linux-fd4d1722.png)
 
 Most things just work, including the camera and 3D. The hard part of Linux is not the rendering, it is packaging and dependencies. We deliberately stayed out of the package-manager rabbit hole and ship one native binary you launch directly, the same model as Windows. The other classic Linux problem is glibc; if that sentence means nothing to you, consider yourself fortunate. We solved it by compiling against a very old glibc (around `GLIBC_2.17`, from 2013) and linking GTK3 dynamically, both of which are present on essentially every desktop. We also support **musl for Alpine** , and both **x64 and arm64**. Like the other ports, this is not a local-only path: the Linux target builds on the build cloud, and new projects from the Initializr come wired for it. The architecture and the build are covered in .
 
@@ -38,7 +38,7 @@ Most things just work, including the camera and 3D. The hard part of Linux is no
 
 The answer is that reuse still happens. Many well known apps skip the watch entirely because it is such a chore, yet the amount of work a watch UI actually needs is small, and smaller still with Codename One. watchOS has no UIKit views, no OpenGL ES and no Metal, so the port ships a dedicated **Core Graphics rendering backend** and hosts the Codename One runtime inside a SwiftUI shell. The same Java code, branched with `CN.isWatch()`, renders real Codename One UI on the watch:
 
-![A Codename One UI rendered on the Apple Watch simulator through the Core Graphics backend](https://www.codenameone.com/blog/native-apple-watch-and-wear/watch-bezel.png)
+![A Codename One UI rendered on the Apple Watch simulator through the Core Graphics backend](watch-bezel-4ec346dc.png)
 
 That is a screenshot from our test framework, which was never designed for a watch: it still has a text field. Because that is a Codename One text field it renders correctly and "just works" right up until you try to edit in it, which on a watch would not give the result you want; a real watch UI would simply leave it out.
 
@@ -50,7 +50,7 @@ Wear OS is simpler: a Wear OS app is an ordinary Android app, so the existing An
 
 This is the special case in this week's release. Tuesday's post is a full overview of the editor, the data model, and the streaming engine for large worlds, and then **a three-part tutorial series starts Thursday** rather than a single follow-up. The first tutorial builds a playable 2D platformer, "Duke's Coffee Run", from an empty scene to a running game, including the part most tutorials skip: bringing in real art and slicing an animated sprite sheet for Duke.
 
-![Duke's Coffee Run, a 2D platformer built with the Game Builder](https://www.codenameone.com/blog/gamebuilder/game-platformer.gif)
+![Duke's Coffee Run, a 2D platformer built with the Game Builder](game-platformer-d8e82357.gif)
 
 Two more parts follow on the next Thursdays: a blackjack card game, then a first-person 3D dungeon that scales up to large streaming worlds. The full picture of what the builder is and how it fits together is in . One important caveat: **the Game Builder and its high-level APIs are beta** . We are actively improving them and we want your feedback on the editor, the API shape, and the asset workflow. Tell us what works and what gets in your way through the [issue tracker](https://github.com/codenameone/CodenameOne/issues).
 
@@ -60,7 +60,7 @@ Two more parts follow on the next Thursdays: a blackjack card game, then a first
 
 It is seamless in three senses. You do not wire up anything complex: the build servers do the heavy lifting. It connects to GitHub issues instead of sending a barrage of emails. And it symbolicates native crashes on every operating system we support, so a faulting address on iOS, Android, Windows or Linux comes back as a readable stack. On the device, reports are written to storage before they are sent and only deleted after the server confirms receipt, so nothing is lost to a flaky connection; a failed send is retried on the next launch and the server deduplicates it.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRECiAgICBBWyJBcHAgY3Jhc2hlcyBvbiBkZXZpY2UiXSAtLT4gQlsiV3JpdGUgcmVwb3J0IHRvIFN0b3JhZ2Ugd2l0aCBldmVudElkIl0KICAgIEIgLS0-IENbIlBPU1QgdG8gdGhlIGNyYXNoIGVuZHBvaW50Il0KICAgIEMgLS0-fDJ4eCBjb25maXJtZWR8IERbIkRlbGV0ZSB0aGUgc3RvcmVkIHJlcG9ydCJdCiAgICBDIC0tPnxvZmZsaW5lIG9yIGZhaWxlZHwgRVsiUmV0cnkgb24gbmV4dCBsYXVuY2gsIHNlcnZlciBkZWR1cHMgYnkgZXZlbnRJZCJdCiAgICBGWyJSZWxlYXNlIGJ1aWxkIG9uIHRoZSBjbG91ZCJdIC0tPiBHWyJVcGxvYWQgbWFwcGluZy50eHQgLyBkU1lNIHN5bWJvbHMiXQogICAgQyAtLT4gSFsiU2VydmVyIHN5bWJvbGljYXRlcyB0aGUgbmF0aXZlIHN0YWNrIl0KICAgIEcgLS0-IEgKICAgIEggLS0-IElbIkEgR2l0SHViIGlzc3VlLCBub3QgYW4gZW1haWwiXQ==?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRECiAgICBBWyJBcHAgY3Jhc2hl-18cd1d66.png)
 
 Personal data is scrubbed on the device before anything leaves it: emails are partially redacted and long digit runs are collapsed, with rules you can override. It is opt-in and off by default; turning it on is two lines, and the full walkthrough is in .
 

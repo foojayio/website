@@ -86,7 +86,7 @@ https://192.168.64.3:8443/console
 
 Now you are good to go and browse the Minishift web console, which is accessible by default using this URL <https://192.168.64.3:8443/console>. Since there is no authentication/authorization enabled by default, you can create your own username and password when logging in for the first time.
 
-![Minishift Login page](https://cdn-images-1.medium.com/max/2000/1*wKabH8L0A5lmkN5N-r45NA.png)*Minishift Login page*
+![Minishift Login page](1-wKabH8L0A5lmkN5N-r45NA-6e458b65.png)*Minishift Login page*
 
 ### Creating Project
 
@@ -195,7 +195,7 @@ Following is the output.
 
 As you can see that there is one pod running. You can view the same status on the web console also. You should see the following.
 
-![](https://cdn-images-1.medium.com/max/2384/1*mc5CF_MgjHChXK7-zMvZFw.png)
+![](1-mc5CF_MgjHChXK7-zMvZFw-01e28fbb.png)
 
 If you carefully observe, we have not exposed the application to the outside world yet because we have not created a route. Let's do that now and see if we can access the application.
 
@@ -215,11 +215,11 @@ route.route.openshift.io/springboot-demo-openshift exposed
 
 Similarly, if you goto web console applications\>routes. You can see that route is created. Now our application is exposed to the outside world. Cool.
 
-![Route created](https://cdn-images-1.medium.com/max/2370/1*3o_FgsGJxscaBSIG4YBWdA.png)*Route created*
+![Route created](1-3o_FgsGJxscaBSIG4YBWdA-d388c863.png)*Route created*
 
 Let's hit the URL and access our spring boot demo application.
 
-![](https://cdn-images-1.medium.com/max/2000/1*7xA0K3gOjXvMSy6VYxu0AQ.png)
+![](1-7xA0K3gOjXvMSy6VYxu0AQ-0c97f3e8.png)
 
 We have successfully deployed our first Spring boot demo application to Openshift locally.
 
@@ -237,7 +237,7 @@ It's a wrap for now. Happy coding!
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)
 
 ## Further reading
 

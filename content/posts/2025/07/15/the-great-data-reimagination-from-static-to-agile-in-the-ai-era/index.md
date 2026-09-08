@@ -31,7 +31,7 @@ These changes are driving the great data reimagination, where companies must thi
 Organizations are currently facing [$1.52 trillion in technical debt](https://www.architectureandgovernance.com/elevating-ea/new-research-suggests-architectural-technical-debt-is-most-damaging-to-applications-amid-1-52-trillion-technical-debt-crisis/?utm_source=chatgpt.com), and according to Gartner, by 2026, [80% of that debt](https://vfunction.com/blog/technical-debt-vs-architectural-technical-debt-what-to-know/?utm_source=chatgpt.com) will be due to architectural issues. For developers, technical debt consumes up to [42% of their time](https://thenewstack.io/technical-debt-continues-to-mount-heres-how-to-solve-it/), hurting morale, contributing to turnover and slowing innovation, all of which hinder competitiveness in areas like AI, personalization and Internet of Things (IoT) usage.
 
 "Today's developers are building [AI agents](https://thenewstack.io/ai-agents-a-comprehensive-introduction-for-developers/) that need to remember conversations, search through millions of documents semantically and scale across multiple clouds simultaneously," said [Han Heloir](https://www.linkedin.com/in/hanheloiryan/), EMEA generative AI solutions architect at MongoDB. "Much of the architectural debt developers are facing stems from mismatches between object and relations systems, which kills agility, speed and performance."
-![](https://cdn.thenewstack.io/media/f9c3c06e-mongodb.svg)
+![](f9c3c06e-mongodb-9a81de3f.svg)
 
 [](https://www.mongodb.com/cloud/atlas/?utm_content=sponsor+module)
 

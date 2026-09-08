@@ -23,7 +23,7 @@ Our [GraphAcademy](https://graphacademy.neo4j.com) is teaching folks starting ou
 
 And for developers, there are [courses for using our drivers](https://graphacademy.neo4j.com/categories/developer/) and building the backend of a fullstack app in JavaScript, Go, Python, Java, and soon .Net.
 
-![OzxHfAx](https://i.imgur.com/OzxHfAx.png)
+![OzxHfAx](OzxHfAx-a314796a.jpg)
 
 The application is an IMDB clone based on the [MovieLens recommendation](https://github.com/neo4j-graph-examples/recommendations) dataset augmented with movie and cast data from [themoviedb.org](https://themoviedb.org).
 
@@ -31,7 +31,7 @@ The front-end is written in vue.js and looks pretty slick.
 
 It calls a number of REST API endpoints to serve the different views and functionalities.
 
-![as0CeWJ](https://i.imgur.com/as0CeWJ.png)
+![as0CeWJ](as0CeWJ-00799f0b.jpg)
 
 Basic functions are:
 
@@ -55,7 +55,7 @@ During the interactive course a lot of quizzes check understanding, let you run 
 
 The course also automatically integrates with the [Neo4j Sandbox](https://sandbox.neo4j.com) so you can run the test queries and also the app against your personal instance hosting the movies dataset.
 
-![model](https://github.com/neo4j-graph-examples/recommendations/raw/main/documentation/img/model.png)
+![model](model-6cbc5afc.png)
 
 ## Setup
 

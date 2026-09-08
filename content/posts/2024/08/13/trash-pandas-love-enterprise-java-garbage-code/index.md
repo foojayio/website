@@ -40,7 +40,7 @@ A similar IEEE study of an industrial software system found that [up to 50 perce
 
 ## Unused and dead code in Java
 
-[![Find your garbage code with Azul Vulnerability Detection](https://www.azul.com/wp-content/uploads/blog-2024-06-27-teaser-253x300.jpg)](https://www.azul.com/wp-content/uploads/Azul-Code-Inventory-Infographic.pdf) Find your garbage code with Azul Vulnerability Detection. See the infographic
+[![Find your garbage code with Azul Vulnerability Detection](blog-2024-06-27-teaser-253x300-e4362b87.jpg)](https://www.azul.com/wp-content/uploads/Azul-Code-Inventory-Infographic.pdf) Find your garbage code with Azul Vulnerability Detection. See the infographic
 
 Java engineers can treat unused and dead code detection similar to garbage collection – choose your setting and let the JVM do the rest. Whether code is used in production is answered by whether the method is ever called (or inlined). The recording of this decision is made in one of three places: the bytecode interpreter, AppCDS (Application Class Data Sharing), or the ReadyNow feature of Azul Platform Prime. If the method is used again, there's no need to impact performance beyond recording the first call. The method was used in production, so the code is not dead. In this scenario JVM runs are tagged with the "application environment" to help record which application called the method for a given environment. Keeping these environments separate helps identify cases where the code and unit tests only serve to keep each other alive.
 

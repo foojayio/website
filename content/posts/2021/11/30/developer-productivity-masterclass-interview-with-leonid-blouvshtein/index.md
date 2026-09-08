@@ -23,7 +23,7 @@ frozen: true
 
 [
 
-{{< img src="devprodmaster-700x227.png" class="size-medium" width="700" height="227" >}}
+{{< img src="devprodmaster-700x227.jpg" class="size-medium" width="700" height="227" >}}
 
 ](https://www.linkedin.com/events/developerproductivitymasterclas6870717107772907520/)
 

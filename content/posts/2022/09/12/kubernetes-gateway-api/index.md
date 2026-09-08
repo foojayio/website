@@ -71,7 +71,7 @@ The idea behind the Gateway API is to have a clean separation between standard o
 
 The above definition also mentions an organizational concern: different roles should manage a different set of objects.
 
-![Gateway API Model](https://gateway-api.sigs.k8s.io/images/api-model.png)
+![Gateway API Model](api-model-bb4e5c02.jpg)
 
 *Picture from gateway-api.sigs.k8s.io*
 

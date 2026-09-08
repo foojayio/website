@@ -5,7 +5,7 @@ lastmod: "2024-03-15T14:09:35+00:00"
 description: "Increase readability, reduce cognitive complexity, and avoid bugs that are hard to spot with Java's Pattern Matching."
 authors:
   - "jonathan-vila"
-image: "instanceof.png"
+image: "instanceof.jpg"
 categories:
   - "Java"
   - "Java Core"

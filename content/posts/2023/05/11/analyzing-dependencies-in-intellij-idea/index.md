@@ -58,13 +58,13 @@ We can view the dependencies as a tree by clicking the **Show as Tree** button a
 
 We can also click the **View Options** button and toggle **Show GroupId**, to show the GroupId for dependencies or not.
 
-![View Options](view-options.png)
+![View Options](view-options.jpg)
 
 ## Finding a specific dependency
 
 To see where we are getting a specific version of a particular library, we can search for that dependency. For example, when we search for "log4j" we see that we are only getting it via this spring-boot-starter, and it's a version newer than the one where log4shell was fixed.
 
-![Search for a specific dependency](search.png)
+![Search for a specific dependency](search.jpg)
 
 ## Finding conflicts
 
@@ -76,7 +76,7 @@ Fortunately, it's been resolved; we see that one version is greyed out. If we go
 
 ![Show Conflicts Only result](show-conflicts-only-result.png)
 
-![Omitted for conflict](omitted-for-conflict.png)
+![Omitted for conflict](omitted-for-conflict.jpg)
 
 ## Selecting scopes
 
@@ -108,7 +108,7 @@ We can hide all tool windows (**⇧⌘F12** on macOS / **Control+Shift+F12** on 
 
 ![Diagrams | Show Diagrams](show-diagram.png)
 
-![Gradle Dependencies](gradle-dependencies.png)
+![Gradle Dependencies](gradle-dependencies.jpg)
 
 ## Zoom in
 
@@ -146,7 +146,7 @@ This will give you several options. In this example, we'll look at both directio
 
 ![Focus View On Node Neighbourhood](focus-view.png)
 
-![Drop Focus](drop-focus.png)
+![Drop Focus](drop-focus.jpg)
 
 ## Select scopes
 

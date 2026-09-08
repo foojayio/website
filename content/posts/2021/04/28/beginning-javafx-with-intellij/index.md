@@ -141,7 +141,7 @@ Here you'll notice two things, a generated JavaFX class and no errors from missi
 
 The final project in IntelliJ should look like the following:
 
-{{< img src="Final-project-editor-1024x797.png" class="size-large is-resized" width="1024" height="797" style="width:775px;height:603px" caption="Figure 18. The completed HelloWorldFX project in the IntelliJ IDE." >}}
+{{< img src="Final-project-editor-1024x797.jpg" class="size-large is-resized" width="1024" height="797" style="width:775px;height:603px" caption="Figure 18. The completed HelloWorldFX project in the IntelliJ IDE." >}}
 
 **Step 15:** Executing the HelloWorldFX application project.
 
@@ -181,7 +181,7 @@ Next, you'll be specifying Maven coordinates GroupId, ArtifactId and Version as 
 Click on **Finish**.
 
 The project will output as shown below in Figure 24.
-![](03-Empty-Project-1024x357.png) Figure 24. An empty Maven Java project.
+![](03-Empty-Project-1024x357.jpg) Figure 24. An empty Maven Java project.
 
 Step 4: Add Plugins and dependencies into **pom.xml**file
 

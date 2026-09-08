@@ -6,7 +6,7 @@ description: "IntelliJ IDEA supports working with GitLab Merge Requests. See Mer
 canonical: "https://maritvandijk.com/gitlab-merge-requests/"
 authors:
   - "marit-van-dijk"
-image: "logo-1.png"
+image: "logo-1.jpg"
 categories:
   - "GitLab"
   - "IntelliJ IDEA"
@@ -24,21 +24,21 @@ When reviewing Merge Requests in a web interface, we don't have the same support
 
 IntelliJ IDEA has support for reviewing and merging GitLab Merge Requests. These features are available if the IntelliJ IDEA project has a remote that points to GitLab.
 
-![Remote](remote.png)
+![Remote](remote.jpg)
 
 We can open the GitLab Merge Requests using the **GitLab** logo on the left, or from the menu by going to **Git \> Gitlab \> Show Gitlab Merge Request**.
 
-![Open Merge Requests from logo](logo.png)
+![Open Merge Requests from logo](logo.jpg)
 
 ![Open Show GitLab Merge Requests from menu](menu.jpg)
 
 If we aren't already logged in to GitLab via IntelliJ IDEA, the GitLab Merge Requests tool window will prompt us to **Log In**.
 
-![Log In](login.png)
+![Log In](login.jpg)
 
 We can log into GitLab with a token. When we click **Generate** , this will take us to the GitLab page where a token with the right scopes can be generated for us. Click the button **Create personal access token** to create the token. When the token is generated, click the button to copy the token.
 
-![Generate a token](generate.png)
+![Generate a token](generate.jpg)
 
 ![Create Personal Access Token](personal-access-token.jpg)
 
@@ -46,7 +46,7 @@ We can log into GitLab with a token. When we click **Generate** , this will take
 
 We can copy the token into the **Token** field in the popup and click **Log In**.
 
-![Paste the token into the Token field](token.png)
+![Paste the token into the Token field](token.jpg)
 
 Alternatively, we can use an existing token, as long as it has the required scopes.
 
@@ -66,9 +66,9 @@ Once we're logged in, the GitLab Merge Requests tool window will show all open M
 
 We can change the search criteria to look for specific Merge Requests. We can use predefined filters, or search for something more specific.
 
-![Filter](filter.png)
+![Filter](filter.jpg)
 
-![Search](search.png)
+![Search](search.jpg)
 
 If the Merge Request has assignees and/or reviewers assigned, we can see them here.
 
@@ -78,7 +78,7 @@ If the Merge Request has assignees and/or reviewers assigned, we can see them he
 
 We can see the details of a specific Merge Request by double-clicking on it.
 
-![Merge Request details](mr-details.png)
+![Merge Request details](mr-details.jpg)
 
 We can go back to the list of search results by clicking the project name in the top left of the Merge Requests tool window. We can see that the Merge Request we just looked at still has a tab open here, in case we want to go back.
 
@@ -118,7 +118,7 @@ Alternatively, we can open the Merge Request in our browser by right-clicking it
 
 IntelliJ IDEA also shows if there are any conflicts, so we know if this request is safe to merge or not.
 
-![Conflicts](conflicts.png)
+![Conflicts](conflicts.jpg)
 
 We can open any of the files that make up the Merge Request, and IntelliJ IDEA will show them in the diff viewer, so we can have a closer look at the changes that make up the Merge Request. Inline comments will be displayed in the diff view too.
 

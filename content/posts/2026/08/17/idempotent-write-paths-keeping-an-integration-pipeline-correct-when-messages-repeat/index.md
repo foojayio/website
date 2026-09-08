@@ -155,7 +155,7 @@ Merge is the most complex: you combine the old and new data. It suits incrementa
 Anyone who does integration has probably hit this: different systems have different IDs for the same entity. A customer is CRM-00123 in CRM, becomes ERP-C456 in ERP, and WMS-CUST-789 in WMS, and our platform has its own internal ID on top of that.
 
 When an event flows from CRM to ERP, you need to know which record CRM-00123 maps to in ERP. Inside the integration platform we keep an ID mapping table that uses a platform-internal internal_id to string together each system's external_id:
-![SQL schema for the entity_id_mapping table plus a cross-system ID lookup query](A1_sql_entity_id_mapping.png)
+![SQL schema for the entity_id_mapping table plus a cross-system ID lookup query](A1_sql_entity_id_mapping.jpg)
 
 The first thing an event does when it enters the pipeline is look up the mapping table to get the target system's ID. If it's not found (say a create event, where the downstream has no matching record yet), it's marked "to be created", and once the downstream finishes creating it, we write the mapping back.
 

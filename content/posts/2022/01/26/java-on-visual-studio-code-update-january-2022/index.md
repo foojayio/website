@@ -5,7 +5,7 @@ lastmod: "2022-01-26T09:47:52+00:00"
 description: "Since this is our first blog post of the new year, we are going to look back on highlights of 2021 and take a look at our roadmap for 2022."
 authors:
   - "nick-zhu"
-image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/roadmap2022-1.png"
+image: "roadmap2022-1-69012954.png"
 categories:
   - "VS Code"
 related_posts:
@@ -71,7 +71,7 @@ This is the result of continuous feedback from our users and it wouldn't have be
 
 Now onto the exciting part, let us talk about our roadmap for year 2022. Here is a picture that summarizes our investment areas.
 
-[![VS Code Java roadmap 2022](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/roadmap2022-1.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/roadmap2022-1.png)
+[![VS Code Java roadmap 2022](roadmap2022-1-69012954.png)](roadmap2022-1-69012954.png)
 
 For the year of 2022, we are going to focus on the following:
 
@@ -143,15 +143,15 @@ To address the formatting needs, we have previously introduced a view where deve
 
 First option -- Simply bring up the command palette (Ctrl+Shift+P), and run "Java: Open Formatter Settings with Preview" command
 
-[![Formatter with preview](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatterpreview.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatterpreview.png)
+[![Formatter with preview](formatterpreview-3280e096.png)](formatterpreview-3280e096.png)
 
 Second option -- Use the "Java: Help Center" (Ctrl+Shift+P, and run "Java: Help Center" command). This will bring up the Java help center page which contains a list of very useful features and shortcuts. On this page, simply click on "Configure Formatter Settings".
 
-[![Help Center](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/helpcenter-1.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/helpcenter-1.png)
+[![Help Center](helpcenter-1-2865d4c9.png)](helpcenter-1-2865d4c9.png)
 
 Doing either one of the options above will lead you to the formatter settings view, where you can easily change and preview the formatter settings within Visual Studio Code.
 
-[![Formatter](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatter.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/formatter.png)
+[![Formatter](formatter-88fb1c03.png)](formatter-88fb1c03.png)
 
 ### Feedback and suggestions
 

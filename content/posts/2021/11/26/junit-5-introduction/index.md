@@ -6,7 +6,7 @@ description: "Many of us have been used to JUnit 4 as a formidable unit testing 
 canonical: "https://cguntur.me/2019/07/07/using-junit5-part-1/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2019/07/dukejunit5.png"
+image: "dukejunit5-70c1f16e.png"
 categories:
   - "Testing"
 related_posts:
@@ -23,7 +23,7 @@ Nothing stresses repeatability more than unit tests. Code Katas thus, in many ca
 Many of us have been long used to JUnit 4 as a formidable unit testing framework. This article is not going to be a comparison between JUnit 4 and JUnit 5, but you will notice some differences as italicized text.
 
 Let us explore JUnit 5 as it was used for a recent code kata, that is, this is how I learnt using JUnit 5 !  
-![JUnit5 Logo](https://cgunturme.files.wordpress.com/2019/07/dukejunit5.png "JUnit5")
+![JUnit5 Logo](dukejunit5-70c1f16e.png "JUnit5")
 
 ## JUnit 5 dependencies
 

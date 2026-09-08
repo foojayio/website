@@ -6,7 +6,7 @@ description: "There are challenges with Java profiling, and the need for profili
 authors:
   - "frankdelporte"
   - "hirt"
-image: "podcast-guests-profiling-and-performance-1024x404-1.png"
+image: "podcast-guests-profiling-and-performance-1024x404-1.jpg"
 categories:
   - "DevOps"
   - "Java Core"

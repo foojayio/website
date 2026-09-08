@@ -146,12 +146,12 @@ Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c79241
 
 Now that we have generated a report, we can inspect the generated `report/index.html` and look for coverage on some suspected legacy code. We are looking for red lines, which means the code is not covered. Let's dive into some examples.
 
-{{< img src="https://miro.medium.com/v2/resize:fit:473/0*qYvVZekF-qruyoxt" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
+{{< img src="0-qYvVZekF-qruyoxt-98ddb8af.png" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
 
 This bit of legacy code has been around for a few years already and has been marked as deprecated for a few months already. When searching for usages of this method across organization repositories, we find that it is indeed unused apart from tests!
 
 Time to drop it and leave our codebase cleaner. The planned migration for this service may have become easier now too, given that we have less functionality to take into account. It's time to have our developers revisit that migration.
-![](https://miro.medium.com/v2/resize:fit:700/0*sWaFg5jfWYPtTZct) Part of a deserializer with support for legacy ArticleDeliveryIssue instances, still being dependent upon.
+![](0-sWaFg5jfWYPtTZct-067d8205.png) Part of a deserializer with support for legacy ArticleDeliveryIssue instances, still being dependent upon.
 
 Another example: take this deserializer with some logic for handling legacy data. We wondered whether we could already drop support for these legacy objects, but apparently, it still needs to deserialize some of these instances! It's good that we didn't just ask around or do some code searches and just delete it; it could've been quite the *issue*!
 
@@ -162,7 +162,7 @@ To see whether this is the case, we usually perform code searches to look at the
 Every time we introduce new tooling in production environments, we should understand its effect on application performance. This holds especially when instrumenting our code, as this can add quite some overhead in executing instructions. To understand its performance impact, we first ran it on staging environments to find any immediate problems with resource usage. This allowed us to tweak the settings accordingly.
 
 To determine the performance in production, we kept an eye out for the average duration of the request. We selected two 24-hour periods, covering different loads for this application. One period with running JaCoCo, and one without.
-![](https://miro.medium.com/v2/resize:fit:700/0*neVQTAom_1QPLD6V) Average request duration in service while running with JaCoCo (red) and without (grey).
+![](0-neVQTAom_1QPLD6V-297c1968.png) Average request duration in service while running with JaCoCo (red) and without (grey).
 
 From this, we observed an average overhead of 0.03%. As that is such a small overhead in the context of Picnic, we found this an acceptable price to pay for the insights we gain.
 

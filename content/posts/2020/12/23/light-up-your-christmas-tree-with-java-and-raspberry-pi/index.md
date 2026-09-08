@@ -85,7 +85,7 @@ This product reminded me of my very first computer 35 years ago, the Commodore 6
 {{< gallery cols="3" caption="Raspberry Pi 400 versus Commodore 64" >}}
 pi_400_front.jpg
 pi_400_back.jpg
-commodore64.png
+commodore64.jpg
 {{< /gallery >}}
 
 ### **Install additional tools**

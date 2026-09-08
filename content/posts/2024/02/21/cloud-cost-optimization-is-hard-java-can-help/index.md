@@ -33,7 +33,7 @@ Users see the potential benefits immediately. There is no capital expenditure to
 ## Controlling overspending is hard
 
 Unfortunately, many users never realize those cost savings, and cloud costs often prove even more expensive.
-![Cloud Cost Optimization is hard for Java Workloads: reasons for overspending](https://www.azul.com/wp-content/uploads/Screenshot-2023-12-13-at-9.49.27%E2%80%AFAM-1024x592.png) Source: S\&P Global
+![Cloud Cost Optimization is hard for Java Workloads: reasons for overspending](Screenshot-2023-12-13-at-9.49.27-E2-80-A-88401ed5.png) Source: S\&P Global
 
 In fact, in a [recent survey by S\&P Global Market Research](https://www.youtube.com/watch?v=nAP3bYxdsZw&t=1s), 27% of respondents said scaling up resources to address unanticipated demand and spend was the biggest reason for overspending on IaaS/PaaS/[public cloud](https://www.azul.com/glossary/public-cloud/) in 2022. Another 15% cited over-provisioning – or committing more resources than needed.
 
@@ -54,7 +54,7 @@ With JVM-based applications, when new service instances start, the warmup time d
 ## Switching your Java runtime helps reduce cloud waste
 
 The good news is that Azul is adapting the Java platform to make applications run faster and address these issues.
-![Cloud Cost Optimization is hard for Java Workloads: ReadyNow Latency Line Chart](https://www.azul.com/wp-content/uploads/Latency-Line-Chart-min.jpg)
+![Cloud Cost Optimization is hard for Java Workloads: ReadyNow Latency Line Chart](Latency-Line-Chart-min.jpg)
 
 We've developed a high-performance version of the JVM called Azul Platform Prime. This Java runtime addresses users' frequent pain points regarding cloud cost optimization for Java workloads and JVM performance: latency associated with garbage collection (GC), throughput of transactions, and warmup time.
 
@@ -66,7 +66,7 @@ Azul Platform Prime includes three areas of change:
 * [The Falcon JIT compiler](https://www.azul.com/products/components/falcon-jit-compiler/). Based on the open-source LLVM project, Falcon delivers superior transaction throughput via enhanced optimizations tailored to the hardware microarchitecture. This is another way to deliver cloud cost reductions. For example, you can process up to 40% more transactions per second when running the Kafka event streaming platform. You can reduce the size of nodes in your cluster, the number of nodes, or both while still meeting your SLA. Fewer nodes and smaller nodes equal less cloud spend.
 * [ReadyNow warmup elimination technology](https://www.azul.com/products/components/readynow). When you have run your application or service until all frequently used code has been compiled and optimized, ReadyNow records a profile that includes all information about the compilation that has been performed, including the code generated. When the application or service starts again, the JVM uses the profile to ensure all code is compiled and ready to go before the application code starts to execute.
 
-![Cloud Cost Optimization is hard for Java Workloads: Unused operational compute capacity](https://www.azul.com/wp-content/uploads/CCO-Blog-Chart-2-768x668.png)
+![Cloud Cost Optimization is hard for Java Workloads: Unused operational compute capacity](CCO-Blog-Chart-2-768x668-e2b91fb6.jpg)
 
 ## Ready for a deeper dive?
 

@@ -5,7 +5,7 @@ lastmod: "2022-01-12T13:46:44+00:00"
 description: "Learn how to make WebService calls (RESTful) from your JavaFX application to retrieve weather data based on geographic locations."
 authors:
   - "carldea"
-image: "JFX-World-Clock-Part-6.png"
+image: "JFX-World-Clock-Part-6.jpg"
 categories:
   - "JavaFX"
   - "Tutorials"
@@ -24,7 +24,7 @@ Hello, and welcome to the last part of this series of articles on creating a Jav
 In this part, I will show you how to make WebService calls (RESTful) to retrieve weather data based on geographic locations.
 
 If you remember, [in Part 5](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-5/) you learned how to use the JavaFX WebView and the popular mapping library Leaflet JS enabling the user to discover geographic locations. In Part 6, I will show you how I used Java 11's Http Client to retrieve and display weather content. If you are new to this series, you can visit Part [1](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-1/ "1")-[5](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-5/ "5").  
-![JFX World Clock Part 6](JFX-World-Clock-Part-6.png)
+![JFX World Clock Part 6](JFX-World-Clock-Part-6.jpg)
 
 JFX World Clock Part 6
 

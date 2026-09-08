@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![OpenAPI, ORM, SVG and Lottie](https://www.codenameone.com/blog/build-time-codegen.jpg)
+![OpenAPI, ORM, SVG and Lottie](build-time-codegen.jpg)
 
 This is the third follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). Saturday's was about how you iterate; yesterday's was about new platform APIs in the core; today's is about a run of pieces that change how you write the structural parts of an app.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -204,7 +204,7 @@ src/main/css/
 After the next build, every SVG is a regular Codename One `Image`. **An SVG handled by the transcoder is a vector image, but it is still an `Image`.** Everywhere a raster `Image` works (`Label.setIcon`, `Button.setIcon`, `BorderLayout.NORTH`, the toolbar, a `MultiButton`'s leading icon, a CSS `background: url(...)` rule), the SVG works too. The difference is that it stays crisp at any size: the same source file is sharp at a 16-point list-row icon, a 64-point hero header, and a 256-point launch screen, on every DPI bucket.
 
 A grid of the static SVGs from the hellocodenameone fixture, rendered through the new pipeline:
-![Static SVGs rendered by the build-time transcoder on iOS Metal: filled star, gradient-filled circle, path arrow, rounded button, two stroked wave paths, gradient-filled PRO badge, clipped badge](https://www.codenameone.com/blog/build-time-codegen/svg-static.png)
+![Static SVGs rendered by the build-time transcoder on iOS Metal: filled star, gradient-filled circle, path arrow, rounded button, two stroked wave paths, gradient-filled PRO badge, clipped badge](svg-static-c3be1344.png)
 
 ### Sizing in millimeters
 
@@ -265,7 +265,7 @@ form.add(pulse).add(spinner);
 ```
 
 Animation runs against wall-clock time on every paint, with no `Timer` and no allocation in the hot path. A capture of the hellocodenameone Lottie fixture in motion:
-![Animated Lottie playback: a red bar that pulses and rotates next to a blue ellipse that scales up and down](https://www.codenameone.com/blog/build-time-codegen/lottie-pulse-spinner.gif)
+![Animated Lottie playback: a red bar that pulses and rotates next to a blue ellipse that scales up and down](lottie-pulse-spinner-314f115b.gif)
 
 The Lottie transcoder lives in `maven/lottie-transcoder/`. It parses Bodymovin JSON with no external dependencies (the framework's built-in JSON parser carries the load) and lowers each file into the same `SVGDocument` model the SVG path uses. The same `JavaCodeGenerator` emits the same `GeneratedSVGImage` subclass, and the same `SVGRegistry` registers it under the source filename. **No new `Image` base class, no new registry, no per-port wiring**, since the SVG path's JavaSE reflective load and iOS / Android Stub weaving already cover the new format.
 

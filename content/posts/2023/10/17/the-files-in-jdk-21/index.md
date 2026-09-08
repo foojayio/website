@@ -32,7 +32,7 @@ For this article, Eclipse Temurin [JDK 21](https://foojay.io/today/java-21-is-av
 * Number of class files: 27,929 (was 27,064 in JDK 20)
 * Number of Java files (in src.zip): 15,404 (was 15,044 in JDK 20)
 
-![](jdk21-all-files.png)
+![](jdk21-all-files.jpg)
 
 ### Modules
 
@@ -65,7 +65,7 @@ Most of the largest class files are related to the internationalization with cha
 Contrary to what I said in the introduction, even if the JDK has grown size since 1.0, this hasn't been the case in the recent years. Post JDK 8, the largest JDK was JDK 9 (JavaFX, Nashorn) with 500 MB and the smallest was JDK 17 with 297 MB.
 
 When comparing new files in the *java.base* module with JDK 20, you see that a lot of new files are related to a new *jdk.internal.classfile* package.
-![](jdk-21-diff-base-1024x649.png)
+![](jdk-21-diff-base-1024x649.jpg)
 
 ## Conclusion
 

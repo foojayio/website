@@ -94,7 +94,7 @@ The tool consists of two main parts:
 * Instrumenting Agent: This agent is similar to the Instrumenter but is implemented as an instrumenting Java agent. Both instrumentation methods have advantages and disadvantages, which I will explain later.
 
 This leads us to the following workflow:
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/dead-code-workflow.png) Workflow of the dead-code analyzer
+![](dead-code-workflow-f1b005fb.png) Workflow of the dead-code analyzer
 
 ## Usage
 

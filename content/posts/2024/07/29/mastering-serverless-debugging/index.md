@@ -174,7 +174,7 @@ This command pauses the application and waits for a debugger to connect.
 
 Next we need to configure the IDE for remote debugging. We start by setting up the IDE to connect to the local host for remote debugging. This typically involves creating a new run configuration that matches the remote debugging settings.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0mlv7ij1mypsmg0rzlsk.png)
+![Image description](0mlv7ij1mypsmg0rzlsk-9fbd4ed6.jpg)
 
 We can now set breakpoints in the code where we want the execution to pause. This allows us to step through the code and inspect variables and application state just like in any other local application.
 
@@ -186,7 +186,7 @@ curl http://localhost:3000/hello
 
 The application will pause at the breakpoints you set, allowing you to step through the code.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzpgf6da5rpw332ednvm.png)
+![Image description](yzpgf6da5rpw332ednvm-d18987e3.jpg)
 
 ### Handling Debugger Timeouts
 

@@ -131,12 +131,12 @@ These policies can be organized in multiple .tf files and integrated into CI pip
 Once Resource Policies are applied via Terraform, it's possible to validate their enforcement using the Atlas UI or the administration API.
 
 Below is an example of a Terraform plan applying several policies to the organization:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeNb5LNgWiKsljTH10PIxaBJqNFg2eFq7m7LeRetHRfVW989P2iJRIuyXS5J9BQ1m7gthdAMoq73t_OxaIb8md6IRdT5yNZpwaYA6FqOB2Rj-EDx6rYSeOqfq9cpsQQBkQM53O1bw?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXeNb5LNgWiKsljTH10PIxaBJqNFg2eFq7m7-5fcc0b13.jpg)
 
 Resource Policies plan
 
 Once applied, the policies become visible in the MongoDB Atlas UI:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd3-33_1s0eUd8ZiqnKDJIlw7m23iGaylNHo3LJRF7OaAPdalIVeVnhsbxNwHMXNknrF8cZxfQQS4efyQe-Anuab0MIFqGatv1cl7ULqLBifFKowSg2PrMFy0Dax-QVBfAjkEH-Qw?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXd3-33_1s0eUd8ZiqnKDJIlw7m23iGaylNH-0edfa94b.jpg)
 
 Resource Policies in Atlas UI
 
@@ -155,10 +155,10 @@ This endpoint returns a list of projects, clusters, or networks that violate cur
 *⚠️ Important: MongoDB Atlas does not automatically fix or block existing resources. If a resource is out of compliance, it will remain unchanged — the system only reports the violation, enabling visibility without disruption.*
 
 In the example below, a public IP was already configured in the project. After applying the policy that blocks 0.0.0.0/0, the resource was not removed, but it was flagged as non-compliant:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeU1lUV71qq91DLAL39ZWmISnJR0xV7DClHUNbT-mnuKPLog1cbHEQpT79-UQnoS_V7oJxyhvqnNlGGhb8rUvteHC6mq48-rQoOr7VQngPk2y3Pr6ow-N_14XjF44wAbg4FL5Gx?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXeU1lUV71qq91DLAL39ZWmISnJR0xV7DClH-717da03a.png)
 
 Network Access List in Atlas UI
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdujOcrNYgocscIEtbLBPYjwE6VJ7Y4Ieb9Do_OBos74927nNq8djW64_Imo2HdyRAGdI34rJ7qeCfkWJmVbvPgEIbAdRU-KEk5ERrynohTDCs3qteJjD75sNmpGxNQYVJmphGl9A?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXdujOcrNYgocscIEtbLBPYjwE6VJ7Y4Ieb9-ae9145f1.png)
 
 Non-compliant resources in Atlas
 
@@ -167,14 +167,14 @@ Below are some visual examples of tests performed:
 ### **🚫 Attempt to create a cluster on Google Cloud Platform (GCP)**
 
 The policy allowed only AWS clusters. The operation was blocked as expected:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcq2s-go-k5tgvDUQ6HPSTLjtUNUEzQhYS0CGN_5fVErasvVtVEoFxyyBNZRJbKbYOo8_dHuux8qAifvsQtfqd-S03PVXPPqC0L95O3IkZBiyz9lSYVhiZUXV8V4r0fhjJQoxPbqA?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXcq2s-go-k5tgvDUQ6HPSTLjtUNUEzQhYS0-48b1937c.jpg)
 
 Cluster creation blocked by policy
 
 ### **🔒 Attempt to add a public IP (0.0.0.0/0)**
 
 The policy prevented the addition of a wildcard IP to the access list:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcPPLQVyrfCrA2YBUDLgj_MDv7hQa1gpTpEvub9UTJf6-eBptrjoZaFKu4GHo2oUuwi1gnyXBzH516lr17-4HyqqUmlsOdL5Nu_AJ1yqlp4TRl2mb0AqLYoA88Q1clCfJ91fZSr?key=FOpKAlLwLhYVlHz_DCq4KA)
+![](AD_4nXcPPLQVyrfCrA2YBUDLgj_MDv7hQa1gpTpE-b9cfe036.png)
 
 Blocked: 0.0.0.0/0 not allowed
 

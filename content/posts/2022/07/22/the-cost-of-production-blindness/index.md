@@ -5,7 +5,7 @@ lastmod: "2022-07-22T08:11:04+00:00"
 description: "Cloud rose to fame on the banner of cutting costs but with its tremendous growth, spend is rocketing. Learn how you can cut down overspend!"
 authors:
   - "shai-almog"
-image: "Cost-Saving-with-Lightrun.png"
+image: "Cost-Saving-with-Lightrun.jpg"
 categories:
   - "Opinion"
   - "Performance"

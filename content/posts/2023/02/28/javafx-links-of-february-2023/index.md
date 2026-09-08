@@ -5,7 +5,7 @@ lastmod: "2023-02-28T11:25:04+00:00"
 description: "A lot of game and 3D development, releases, interesting ongoing development, and so much more to read. Enjoy reading and clicking!"
 authors:
   - "frankdelporte"
-image: "newreleases.png"
+image: "newreleases.jpg"
 categories:
   - "JavaFX"
   - "Release Notes"

@@ -69,7 +69,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [@FrankDelporte](https://twitter.com/FrankDelporte)
   * [foojay.social/@frankdelporte](https://foojay.social/@frankdelporte)
 
-![](podcast-versioncontrol-guests-1024x383.png)
+![](podcast-versioncontrol-guests-1024x383.jpg)
 
 ## Content
 

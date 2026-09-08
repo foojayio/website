@@ -5,7 +5,7 @@ lastmod: "2024-08-21T09:51:22+00:00"
 description: "Since about a year ago, the Foojay community has a group of people that are working on a book with tips and information on Sustainable Software Engineering."
 authors:
   - "janhendrik-kuperus"
-image: "itsustainability-1.png"
+image: "itsustainability-1.jpg"
 categories:
   - "Books"
   - "FinOps"
@@ -33,7 +33,7 @@ ven you or your organization does not do anything, we still want to ask you to f
 
 [
 
-{{< img src="itsustainability-630x510.png" class="size-medium" width="630" height="510" >}}
+{{< img src="itsustainability-630x510.jpg" class="size-medium" width="630" height="510" >}}
 
 ](https://opnform.com/forms/it-sustainability-goals-ewq3yc)
 

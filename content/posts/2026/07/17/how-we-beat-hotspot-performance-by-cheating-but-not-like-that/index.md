@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![How We Beat HotSpot Performance (By Cheating, But Not Like That)](https://www.codenameone.com/blog/beating-hotspot-performance.jpg)
+![How We Beat HotSpot Performance (By Cheating, But Not Like That)](beating-hotspot-performance.jpg)
 
 No, we didn't cheat in the benchmark. At least I hope we didn't. Every optimization in this story was gated on bit identical output checksums against HotSpot, and the harness refuses to print a ratio when a checksum differs. If anything, this post is about how good HotSpot actually is. We tilted the table in our favor in every way we could, we hand tuned C code, and we still only beat it on some benchmarks. Getting there was a genuine struggle. If you want to understand the nuts and bolts of what your Java code costs, and the tradeoffs each runtime picks, I hope this is a good read.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -70,7 +70,7 @@ Geomean 1.00x. Below 1.0 means we beat warmed HotSpot C2. Same Java source, same
 
 One methodology note before you ask: the comparison runs on macOS because HotSpot doesn't run on iOS. The same generated C ships to every Apple target, so the codegen wins carry over to devices where the JIT can't follow.
 
-![Diagram](https://mermaid.ink/img/eHljaGFydC1iZXRhCiAgICB0aXRsZSAiRmluYWwgdGltZSByYXRpbyB2cyB3YXJtZWQgSmF2YSAyNSIKICAgIHgtYXhpcyBbc3RyaW5nQiwgYXJyU2VxLCBxc29ydCwgaGFzaE1hcCwgbWF0aFQsIGFyclJhbmQsIGludEEsIGxvbmdBLCBvYmpBbGxvYywgcmVjdXJzZV0KICAgIHktYXhpcyAiUGFycGFyVk0gdGltZSAvIEhvdFNwb3QgdGltZSIgMCAtLT4gMS44CiAgICBiYXIgWzAuNjcsIDAuODIsIDAuOTIsIDAuOTUsIDAuOTYsIDAuOTYsIDEuMDcsIDEuMTIsIDEuMTksIDEuNl0=?type=png&bgColor=ffffff)
+![Diagram](eHljaGFydC1iZXRhCiAgICB0aXRsZSAiRmluYWwg-5d1f6706.png)
 
 Lower is better and 1.0 is HotSpot; everything left of intArithmetic finishes ahead of it. The starting ratios wouldn't fit on this chart. hashMapChurn began at 36.
 
@@ -84,7 +84,7 @@ Speed is only half the report, and for client apps it's the less important half.
 | Memory floor (no-op app)       | 2.2 MB        | 2.4 MB            | \~40 MB |
 | Peak memory (allocation churn) | 1.4 to 2.1 GB | **290 to 390 MB** | 508 MB  |
 
-![Diagram](https://mermaid.ink/img/eHljaGFydC1iZXRhCiAgICB0aXRsZSAiUGVhayBtZW1vcnkgdW5kZXIgYWxsb2NhdGlvbiBjaHVybiAoTUIpIgogICAgeC1heGlzIFsibWFzdGVyICh0cmlnZ2VyIGJ1ZykiLCAidGhpcyBQUiIsICJKYXZhIDI1Il0KICAgIHktYXhpcyAiTUIiIDAgLS0-IDIyMDAKICAgIGJhciBbMjEwMCwgMzkwLCA1MDhd?type=png&bgColor=ffffff)
+![Diagram](eHljaGFydC1iZXRhCiAgICB0aXRsZSAiUGVhayBt-8114ea7e.png)
 
 Master's gigabyte peaks were a real GC bug this work exposed: the allocated-since-last-collection counter was a 32-bit int counting bytes. Workloads that allocate gigabytes per cycle wrapped it negative, the "am I allocating fast?" check answered no, and the collector slept through the storm while dead pages piled up. With the trigger fixed, heavy churn peaks *below* the JVM on the same workload, and the idle floor stays where a phone wants it: 2.4 MB. Sit with that pair for a second, because it's the whole thesis of this VM. Trading blows with warmed HotSpot on speed while holding a 2.4 MB floor against its \~40 MB.
 
@@ -199,7 +199,7 @@ This is where the two philosophies meet in the middle. We borrowed the part of H
 
 ParparVM's GC never stops the world. Your app's threads keep running while a background collector thread walks the object graph and marks everything reachable, then sweeps what wasn't marked. The threads cooperate: each thread either checks in at safe points, or the collector briefly interrupts it with a signal, captures its registers and stack for scanning, and lets it continue.
 
-![Diagram](https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFudCBVSSBhcyBBcHAgdGhyZWFkIChFRFQpCiAgICBwYXJ0aWNpcGFudCBHQyBhcyBDb2xsZWN0b3IgdGhyZWFkCiAgICBVSS0-PlVJOiBhbGxvY2F0ZSwgcmVuZGVyLCByZXNwb25kCiAgICBHQy0-PkdDOiBtYXJrIHJlYWNoYWJsZSBvYmplY3RzIChjb25jdXJyZW50KQogICAgR0MtLT4-VUk6IGJyaWVmIHNpZ25hbDogc25hcHNob3QgcmVnaXN0ZXJzICsgc3RhY2sKICAgIFVJLT4-VUk6IGtlZXBzIHJ1bm5pbmcKICAgIEdDLT4-R0M6IHN3ZWVwIHVubWFya2VkIG9iamVjdHMKICAgIE5vdGUgb3ZlciBVSSxHQzogbm8gc3RvcC10aGUtd29ybGQgcGF1c2UsIG5vIGZyYW1lIGRyb3A=?type=png&bgColor=ffffff)
+![Diagram](c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFu-2f0579a6.png)
 
 Why build it this way? Because on a client, pause time is the only GC metric users can feel. A 30ms collection pause during a scroll animation is two dropped frames, and users see it. A concurrent collector trades throughput for the guarantee that the animation never stutters.
 

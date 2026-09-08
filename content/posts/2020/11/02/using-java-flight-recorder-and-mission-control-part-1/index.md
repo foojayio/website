@@ -6,7 +6,7 @@ description: "Java Flight Recorder is the profiler you can use in production, co
 canonical: "https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/"
 authors:
   - "brice-dutheil"
-image: "https://blog.arkey.fr/assets/jfr/java-flight-recorder-big-picture2.svg"
+image: "java-flight-recorder-big-picture2-dc6f4fb7.svg"
 categories:
   - "JDK Flight Recorder"
   - "Tools"
@@ -31,7 +31,7 @@ At some point, BEA/Appeal engineers needed insight in their JVM, in production, 
 Mission Control, on the other hand, is a software that will analyze these events and build consolidated views for us to analyze.
 
 JFR with Mission Control together are similar to architectures as [*Event Sourcing*](https://martinfowler.com/eaaDev/EventSourcing.html) systems.
-![java flight recorder big picture2](https://blog.arkey.fr/assets/jfr/java-flight-recorder-big-picture2.svg) JFR Big Picture
+![java flight recorder big picture2](java-flight-recorder-big-picture2-dc6f4fb7.svg) JFR Big Picture
 
 I won't dive in, but most profilers do have a bias when profiling and don't report accurate results. The issue lies in how profilers handle JVM safepoints, most don't account properly the time spent in safepoints. Some great profilers, like the great [async-profiler](https://github.com/jvm-profiling-tools/async-profiler), are not subject to these biases, JFR is also not subject to it.
 

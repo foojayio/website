@@ -6,7 +6,7 @@ description: "Pi4J is an ideal way to introduce the Java language into experimen
 canonical: "https://pi4j.com/blog/2023/20230731_pi4j_os/"
 authors:
   - "frankdelporte"
-image: "desktop-with-ip-info-1024x577-1.png"
+image: "desktop-with-ip-info-1024x577-1.jpg"
 categories:
   - "Embedded"
   - "Java"
@@ -38,8 +38,8 @@ As the FHNW University uses this OS in different courses, and the Pi4J project p
 For all the info about what's included in each version, check the overview on [pi4j.com/pi4j-os](https://pi4j.com/pi4j-os/).
 
 {{< gallery >}}
-desktop-with-ip-info-1024x577.png
-pure-javafx-example-1024x396.png
+desktop-with-ip-info-1024x577.jpg
+pure-javafx-example-1024x396.jpg
 pure-javafx-kiosk-1024x768.jpg
 {{< /gallery >}}
 

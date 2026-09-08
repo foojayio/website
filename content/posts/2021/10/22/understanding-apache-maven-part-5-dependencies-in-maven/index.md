@@ -6,7 +6,7 @@ description: "In this, part 5 of the series on Apache Maven, a walkthrough of th
 canonical: "https://cguntur.me/2020/06/03/understanding-apache-maven-part-5/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/06/mavendependencygraph.png?w=1024"
+image: "mavendependencygraph-62214412.png"
 categories:
   - "Maven"
 related_posts:
@@ -108,7 +108,7 @@ An anecdotal example of depending on a ***metrics*** library: The current projec
 
 ### A graphical representation
 
-![A graphical representation of a dependency tree showing different depths of transitive dependencies as well as possible exclusions and non-inclusion via an optional attribute on a sample transitive.](https://cgunturme.files.wordpress.com/2020/06/mavendependencygraph.png?w=1024) Basic dependency graph example
+![A graphical representation of a dependency tree showing different depths of transitive dependencies as well as possible exclusions and non-inclusion via an optional attribute on a sample transitive.](mavendependencygraph-62214412.png) Basic dependency graph example
 
 ## How to view the dependency tree
 
@@ -150,7 +150,7 @@ POM **P1** has a few dependencies listed below **(** with dummy **Group** , **Ar
 * Dependency D4 (G4:A4:V4) `->` **Dx (Gx:Ax:V1.5.0)**.
 
 Maven creates a dependency tree during its ***effective POM*** generation that is illustrated below:
-![Graphical representation of determining a transitive dependency to be nearest in depth and first in resolution.](https://cgunturme.files.wordpress.com/2020/06/maventransitiveresolution.png?w=1024)
+![Graphical representation of determining a transitive dependency to be nearest in depth and first in resolution.](maventransitiveresolution-19192dc0.png)
 
 the above example shows V1.2.0 of Dx as the transitive dependency of choice since it is ***nearest in depth and first in resolution in this dependency tree***.
 

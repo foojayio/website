@@ -123,7 +123,7 @@ Deadlocks, where two or more threads indefinitely wait for each other to release
 
 In contrast, livelocks present a more deceptive problem. Threads involved in a livelock are technically operational, but they're caught in a loop of actions that render them effectively unproductive. Debugging this requires meticulous observation, often stepping through each thread's operations to spot a potential loop or repeated resource contention without progress.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfars6yfnwxn2v9gwpmj.png)
+![Image description](nfars6yfnwxn2v9gwpmj-4fd6a931.jpg)
 
 ### Race Conditions: The Ever-Present Ghost
 

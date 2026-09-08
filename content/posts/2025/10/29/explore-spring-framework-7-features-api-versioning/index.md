@@ -5,7 +5,7 @@ lastmod: "2025-10-29T06:45:54+00:00"
 description: "Discover how Spring Framework 7 introduces powerful API versioning support. Learn configuration options to manage multiple API versions effectively in your Spring Boot applications."
 authors:
   - "mahendra1413"
-image: "apiversioning.png"
+image: "apiversioning.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Java"

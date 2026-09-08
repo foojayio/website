@@ -108,7 +108,7 @@ Notice that bisect isn't linear. Bisect doesn't scan through the revisions in a 
 
 This is where the non-linear, binary search pattern starts, as Git divides the search space in half instead of examining each commit sequentially. This means fewer revisions get scanned and the process is faster.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rf7xc1qn53lztck18jue.png)
+![Image description](rf7xc1qn53lztck18jue-748ea13c.png)
 
 ## Advanced Usage and Tips
 

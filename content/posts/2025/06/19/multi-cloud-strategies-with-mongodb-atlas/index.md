@@ -45,11 +45,11 @@ Setting up a new cluster in MongoDB Atlas to be multi-cloud is very simple but l
 1. Inside MongoDB Atlas, click the button to create a new cluster.
 2. In the new cluster wizard, ensure you toggle the switch to enable multi-cloud.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeNRKpE7oevY6xtrhkRhfIsizzDXqyPkdWw1IhOdQDPSvo1zxr6X9MKrkwobbeTLLfVXiKche9qbww_eozosc2OL_ATjlxeSRdLAhXbs5hh_SgDoBpZSWEMBlMhu1KiMxYXTf8AYQ?key=XVCJ7AwFRtBzbiRuAEWj9A)
+![](AD_4nXeNRKpE7oevY6xtrhkRhfIsizzDXqyPkdWw-75c32b1c.png)
 
 3. The next selections in the wizard allow you to add cloud providers and regions for extra write, read, and analytic nodes.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdVG2u0jyq6NHuZlKPDTKhpvSLBGnx-OlZcQsbI466GexVlO_RLoTZqv2elAYiLeaQq3Km8MOAIyr2DqoDiSlw7eiTdvYma77N818H8M1jakroSP_uCWV372FN20jti7hBbByWKew?key=XVCJ7AwFRtBzbiRuAEWj9A)
+![](AD_4nXdVG2u0jyq6NHuZlKPDTKhpvSLBGnx-OlZc-223683ca.png)
 
 4. You can then pick what cluster tier you want to use, give it a name, and then click \`Create Cluster\`, and it will go ahead and deploy a multi-cloud cluster.
 

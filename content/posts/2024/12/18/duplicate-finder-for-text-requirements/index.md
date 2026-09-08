@@ -108,7 +108,7 @@ Here's the meaning of the parameters that the interface accepts:
 * `fileExtensions` – file extension mask for filtering out irrelevant files
 
 When the function completes, it will return a [map](https://en.wikipedia.org/wiki/Associative_array), where the keys are `Chunk` objects, and the associated values are lists of their duplicates.
-![Diagram illustrating the structure of the duplicate finder's output in the program](https://flounder.dev/img/duplicate-finder-tests/duplicates-map-diagram-dark.png)
+![Diagram illustrating the structure of the duplicate finder's output in the program](duplicates-map-diagram-dark-eba399a0.png)
 
 Actually, the definition above is unnecessarily verbose. Introducing an interface just for a single function and a few callers is too much. Kotlin has an elegant way of handling this with first-class functions:
 

@@ -31,7 +31,7 @@ Nanos images are not just an alternative to containers: they are **lighter, fast
 
 VMs vs. Containers vs. Unikernels
 
-{{< img src="https://nanos.org/static/img/vms-vs-unikernels.png" class="size-medium" width="600" height="379" >}}
+{{< img src="vms-vs-unikernels.png" class="size-medium" width="600" height="379" >}}
 
 The Key Point: Cloud hypervisors already have everything you need...
 
@@ -113,7 +113,7 @@ This not only increases security but also enables **higher application density**
 
 The CI/CD pipeline plays the same role it would with containers, but the final output is a **lightweight, immutable Unikernel Nanos Image**.
 
-![](https://raw.githubusercontent.com/AngeloRubens/ci-cd-nanos-unikernel/main/cloud_deploy_diagram.svg)
+![](cloud_deploy_diagram-816f1eb6.svg)
 
 The repository *AngeloRubens/ci-cd-nanos-unikernel* demonstrates how to:
 * build Nanos images with Azul JRE and Payara7 Full by GithubAction Pipeline
@@ -183,7 +183,7 @@ Nanos security is **architectural**.
 
 |                                                 |                                                 |
 |-------------------------------------------------|-------------------------------------------------|
-| ![](https://nanovms.com/static/images/img2.png) | ![](https://nanovms.com/static/images/img3.png) |
+| ![](img2-b8ee2e2c.png) | ![](img3-7ec84f40.png) |
 
 And because there are no system processes, **all resources are dedicated to the JVM**, increasing performance and reducing costs.
 

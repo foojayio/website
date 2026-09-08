@@ -218,7 +218,7 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
 
 {{< gallery >}}
 index-before-1024x539.png
-index-after-1024x567.png
+index-after-1024x567.jpg
 {{< /gallery >}}
 
 ### htmx with websocket
@@ -243,7 +243,7 @@ In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp fr
 
 {{< gallery >}}
 websocket-before-1024x302.png
-websocket-after-1024x366.png
+websocket-after-1024x366.jpg
 {{< /gallery >}}
 
 ## Running the Application

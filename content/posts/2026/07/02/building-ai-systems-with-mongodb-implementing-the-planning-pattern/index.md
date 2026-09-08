@@ -68,7 +68,7 @@ For example, when a user executes any question, this will be the flow that the a
 Begin by generating a new Jakarta EE project using the [Jakarta EE starter](https://start.jakarta.ee/). For this example, we will use Glassfish version 8.0.3.
 
 Select Jakarta EE 11 as the version, Platform as the profile, and Java 21 as the Java version. Refer to the image below for these options. After selecting them, click "Generate Project" to download your project.
-![](foojay4-1024x741.png)
+![](foojay4-1024x741.jpg)
 
 Next, add the required libraries. Jakarta Data streamlines MongoDB integration with Java and supports the Java Enterprise standard. For AI integration, we will use langchain4j with CDI.
 

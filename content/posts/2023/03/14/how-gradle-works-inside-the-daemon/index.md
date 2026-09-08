@@ -48,7 +48,7 @@ The daemon then starts running the build and sends build output (logging, stdout
 
 The communication happens via a local socket connection.
 
-![](https://blog.gradle.org/images/how-gradle-works/client-connects-to-daemon.png)
+![](client-connects-to-daemon-2726db30.png)
 
 But what exactly happens inside the daemon?
 
@@ -66,7 +66,7 @@ The configuration required to configure the project hierarchy is represented by 
 
 There is a [Project](https://github.com/gradle/gradle/blob/6121fa83ce4ac07a27ee043d8e69b0f5f99d1c49/subprojects/core-api/src/main/java/org/gradle/api/Project.java) instance corresponding to each project we're trying to build.
 
-![](https://blog.gradle.org/images/how-gradle-works/creating-build-instances.png)
+![](creating-build-instances-40546b7f.jpg)
 
 `Gradle`, `Settings` and `Project` are also the default delegation of init, settings and build script.
 
@@ -92,7 +92,7 @@ Don't worry if you don't fully understand build script execution at this stage. 
 
 For now, we can simply understand Gradle as [an interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)) that executes the build script line by line, top to bottom.
 
-![](https://blog.gradle.org/images/how-gradle-works/configuration-build-script-execution.png)
+![](configuration-build-script-execution-de5f9f21.jpg)
 
 The build script populates the data structures for the build inside the daemon JVM.
 
@@ -118,7 +118,7 @@ After the configuration phase, Gradle has all the necessary data for the build s
 
 Then, it determines the subset of tasks to be executed by the arguments passed to the `gradle` command and executes each of the selected tasks.
 
-![](https://blog.gradle.org/images/how-gradle-works/daemon-execution-phase.png)
+![](daemon-execution-phase-493a3af5.jpg)
 
 Each `Task` has a list of actions made up of chunks of code to be executed.
 
@@ -145,7 +145,7 @@ Another example of custom task actions forking extra JVMs is [`Test` task](https
 
 The `Test` task action is executed in the daemon JVM but during the execution, it forks a few JVMs and runs the test code inside the forked JVMs to avoid the test code interfering with the daemon JVM.
 
-![](https://blog.gradle.org/images/how-gradle-works/daemon-forks-test-jvms.png)
+![](daemon-forks-test-jvms-c6d35982.png)
 
 At the end of the build, the daemon will do some extra stuff, like executing callbacks, reporting errors, if any, publishing build scans, etc.
 

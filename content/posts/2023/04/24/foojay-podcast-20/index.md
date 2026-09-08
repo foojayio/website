@@ -8,7 +8,7 @@ authors:
   - "deepu-sasidharan"
   - "frankdelporte"
   - "ties-van-de-ven"
-image: "guests-podcast-functional-programming-1024x575-1.png"
+image: "guests-podcast-functional-programming-1024x575-1.jpg"
 categories:
   - "Opinion"
   - "Podcast"
@@ -58,7 +58,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](guests-podcast-functional-programming-1024x575.png)
+![](guests-podcast-functional-programming-1024x575.jpg)
 
 ## Links
 

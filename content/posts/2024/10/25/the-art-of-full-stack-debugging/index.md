@@ -67,15 +67,15 @@ The debugger allows developers to set breakpoints, step through code, and inspec
 
 We can launch the browser tools on Firefox using this menu:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/egm0deq97u05j8tr1ikj.png)
+![Image description](egm0deq97u05j8tr1ikj-2cf09d6e.jpg)
 
 On Chrome we can use this option:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lsi1y1om76prwf8gdob4.png)
+![Image description](lsi1y1om76prwf8gdob4-3ef943ce.jpg)
 
 I prefer working with Firefox, I find their developer tools more convenient but both browsers have similar capabilities. Both have fantastic debuggers (as you can see with the Firefox debugger below), unfortunately many developers limit themselves to console printing instead of exploring this powerful tool.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0elcqadckt63igxjlzso.png)
+![Image description](0elcqadckt63igxjlzso-ff9406d5.jpg)
 
 ### Tackling Code Obfuscation
 
@@ -91,7 +91,7 @@ You can use code like this in the JavaScript file to point at the sourcemap file
 
 For this to work in Chrome we need to ensure that "Enable JavaScript source maps" is checked in the settings. Last I checked it was on by default but it doesn't hurt to verify:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3l1ixd5iuyunrvh9ru15.png)
+![Image description](3l1ixd5iuyunrvh9ru15-2799b443.jpg)
 
 ## Debugging Across Layers
 

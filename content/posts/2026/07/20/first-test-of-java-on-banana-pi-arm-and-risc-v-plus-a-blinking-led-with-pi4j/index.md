@@ -253,7 +253,7 @@ The Banana Pi BPI-F3 boots in desktop mode! So that's a lot nicer for a first te
 ## Benchmark Results
 
 To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](https://webtechie.be/sbc/), where you can compare them with the other boards I tested before.
-![](sbc-benchmarks-bananapi-1024x526.png)
+![](sbc-benchmarks-bananapi-1024x526.jpg)
 
 Some highlights:
 

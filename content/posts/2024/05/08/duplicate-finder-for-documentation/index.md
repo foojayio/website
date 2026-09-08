@@ -66,7 +66,7 @@ The idea that advocates against duplication is commonly known as [DRY Principle]
 Modern authoring tools typically have features for content reuse, making technical constraints less of a concern. The real problem, on the other hand, lies in spotting duplicates. Before you extract something to a reusable chunk, you need to know what to extract.
 
 If you are a programmer, your IDE might highlight duplicate code for you:
-![IntelliJ IDEA hightlights duplicated code](https://flounder.dev/img/duplicates-idea-dark.png "IntelliJ IDEA hightlights duplicated code")
+![IntelliJ IDEA hightlights duplicated code](duplicates-idea-dark-e94109d1.png "IntelliJ IDEA hightlights duplicated code")
 
 Unfortunately, the same feature is not suitable for documentation, as it relies on comparing abstract syntax trees ([AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree)). This approach doesn't work well with text.
 

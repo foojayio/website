@@ -137,7 +137,7 @@ Here is what you get as extra for the terminal shells (Command line, Powershell,
 * Shell in an external window always on top (<kbd>Shift + F12</kbd>) and translucent (<kbd>Shift + Ctrl + F12</kbd> and <kbd>Shift + Alt + Mouse wheel</kbd>)
 * Plus all the [other features](https://www.antcommander.com/#features) of Ant Commander Pro
 
-[![Applet Runner running Ant Commander Pro file manager](shell-ant-commander-pro-intellij-1024x576.png)](shell-ant-commander-pro-intellij.png) *Applet Runner running Ant Commander Pro file manager*
+[![Applet Runner running Ant Commander Pro file manager](shell-ant-commander-pro-intellij-1024x576.jpg)](shell-ant-commander-pro-intellij.png) *Applet Runner running Ant Commander Pro file manager*
 
 ## Conclusion
 

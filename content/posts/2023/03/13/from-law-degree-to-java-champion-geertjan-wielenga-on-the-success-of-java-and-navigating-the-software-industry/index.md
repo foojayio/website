@@ -5,7 +5,7 @@ lastmod: "2023-03-13T17:13:57+00:00"
 description: "Discover insights from Geertjan Wielenga, a Java Champion and developer advocate, on how to succeed in the software industry and the importance of community involvement in the Java ecosystem."
 authors:
   - "bazlur-rahman"
-image: "Wielenga.png"
+image: "Wielenga.jpg"
 categories:
   - "Interviews"
 related_posts:

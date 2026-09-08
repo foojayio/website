@@ -1,7 +1,7 @@
 ---
 title: "Gilbert Kwan"
 avatar: "gilbert-kwan.png"
-avatarFull: "gilbert-kwan-full.png"
+avatarFull: "gilbert-kwan-full.jpg"
 bio: "Advisory Software Developer at IBM"
 bluesky: ""
 mastodon: ""

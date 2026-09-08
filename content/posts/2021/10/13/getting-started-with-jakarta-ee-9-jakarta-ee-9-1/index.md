@@ -7,7 +7,7 @@ canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-jakarta-e
 authors:
   - "jadon-ortlepp"
   - "rudy-de-busscher"
-image: "jakarta-ee-9.1.png"
+image: "jakarta-ee-9.1.jpg"
 categories:
   - "Jakarta EE"
 related_posts:

@@ -153,7 +153,7 @@ From a high-level here are the ingredients and steps to create a JavaFX UI Form.
 
 Once the controller and CSS files exist (created) you can reference them in Scene Builder tool as shown below:
 
-![Referencing Controller and CSS files](References-to-controller-css.png)
+![Referencing Controller and CSS files](References-to-controller-css.jpg)
 
 On the left (1) shows the controller class referencing the `com.carlfx.worldclock.ConfigLocationsController.java` class. And on the right (2) you'll notice the references to the CSS files for styling the UI Form (AnchorPane).
 

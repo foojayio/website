@@ -40,7 +40,7 @@ If no plugin fits your requirements, writing your own is possible.
 
 You can leverage APISIX on Kubernetes as an Ingress Controller. APISIX provides a Helm Chart for this.
 
-## [![](flow-software-architecture-1024x438.png)](flow-software-architecture.png)
+## [![](flow-software-architecture-1024x438.jpg)](flow-software-architecture.jpg)
 
 ## Apache ShardingSphere
 
@@ -88,7 +88,7 @@ SeaTunnel comes with a web UI, which provides visual management of jobs, schedul
 * The **storage** offers an interface over a supported backend. Supported backends include ElasticSearch, H2, MySQL, TiDB, and BanyanDB, a custom storage engine developed for SkyWalking
 * Finally, a web **UI** allows visualizing SkyWalking's data
 
-[![](ui_ServiceMesh-1024x527.png)](ui_ServiceMesh.png)
+[![](ui_ServiceMesh-1024x527.jpg)](ui_ServiceMesh.png)
 
 Skywalking supports a couple of formats, including OpenTelemetry. Given the industry's current focus on OpenTelemetry, I recommend seriously considering this option.
 

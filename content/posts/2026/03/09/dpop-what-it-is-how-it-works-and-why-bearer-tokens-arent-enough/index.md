@@ -5,7 +5,7 @@ lastmod: "2026-03-09T08:08:08+00:00"
 description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have…"
 authors:
   - "huseyin-akdogan"
-image: "Screenshot-2026-03-09-at-09.33.06-scaled.png"
+image: "Screenshot-2026-03-09-at-09.33.06-scaled.jpg"
 categories:
   - "Security"
 related_posts:

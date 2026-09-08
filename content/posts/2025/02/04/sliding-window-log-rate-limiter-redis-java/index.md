@@ -6,7 +6,7 @@ description: "Build a sliding window log rate limiter with Redis and Java. Track
 canonical: "https://raphaeldelio.com/2025/01/22/sliding-window-log-rate-limiter-redis-java/"
 authors:
   - "raphael-delio"
-image: "Redis_Video_RateLimiterImplementations_Part4_YoutubeThumbnail.png"
+image: "Redis_Video_RateLimiterImplementations_Part4_YoutubeThumbnail.jpg"
 categories:
   - "Java"
   - "Java Beginner"
@@ -29,7 +29,7 @@ By checking how many requests were made within that time frame, it ensures limit
 
 ## How It Works
 
-![](https://cdn-images-1.medium.com/max/2160/1*tmaCfNHgzaAJNop4Aa2afA.gif)
+![](1-tmaCfNHgzaAJNop4Aa2afA-bed82bc8.webp)
 
 ### 1. **Define a Time Window**
 

@@ -49,7 +49,7 @@ struct event {
 ```
 
 This means that the know also knows how to transform member accesses to this struct and can adequately place the event in the allocated memory:  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/struct_layout-2000x760.png)
+![](struct_layout-2000x760-12a53b33.jpg)
 
 You've actually seen the layouting information before, as the [hello-ebpf](https://github.com/parttimenerd/hello-ebpf/) project requires you to hand layout all structs manually:
 
@@ -79,7 +79,7 @@ private static final BPFStructType<Event> eventType =
 ## Alignment Rules
 
 But where do these alignment rules come from? They come from how your CPU works. Your CPU usually only allows/is optimized for certain types of accesses. So, for example, x86 CPUs are optimized for accessing 32-bit integers that lay at addresses in memory that are a multiple of four. The rules are defined in the Application Binary Interface (ABI). The alignment rules for x86 (64-bit) on Linux are specified in the [System V ABI Specification](https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf):
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/image-2-2000x1623.png)
+![](image-2-2000x1623-6ba84f89.png)
 
 And more, but in general, scalar types are aligned by their size. Structs, unions, and arrays are, on the other hand, aligned based on their members:
 > Structures and unions assume the alignment of their most strictly aligned component. Each member is assigned to the lowest available offset with the appropriate alignment. The size of any object is always a multiple of the object's alignment.  
@@ -153,7 +153,7 @@ struct padded_event {
 ```
 
 Pahole tells us that it had to introduce 11 bytes of padding. We can visualize this as follows:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/struct_layout2-2000x772.png)
+![](struct_layout2-2000x772-500d58c6.png)
 
 This means that we're essentially wasting memory. I recommend reading [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/) by Eric S. Raymond to learn more about this. If we really want to save memory, we could reorder the int with the long member, thereby only needing the padding after the char, leading to an object with 24 bytes and only 3 bytes of padding. This is really important when storing many of these structs in arrays, where the wasted memory accumulates.
 

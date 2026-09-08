@@ -35,7 +35,7 @@ Due to the JIT compilation, Java Virtual Machines, and thus Java applications, d
 
 ###### **Diagram #1: Relationship between application lifecycle, CPU spend by the JIT compiler, and performance**
 
-![](https://azul.imgix.net/wp-content/uploads/Image-2-1-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=3894c42765e21a1cc44c4d8df8c979a5)
+![](Image-2-1-scaled-cb60d7ab.png)
 
 Warm-up happens every time the application is newly started. In the modern Kubernetes world, this is more than common – horizontal autoscaling, spawning new instances and stopping the unnecessary ones dynamically based on load, has become the new standard of running things cost efficiently.
 
@@ -47,7 +47,7 @@ The right model is simple and intuitive: **allocate more CPU during warm-up, the
 
 ###### **Diagram #2: Warm-up phase vs steady state**
 
-![](https://azul.imgix.net/wp-content/uploads/Image-3-1-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=d624f67d80430309f25ce340c3f5151f)
+![](Image-3-1-scaled-673d3369.png)
 
 Azul Zing, the JVM at the heart of Azul Prime, is the first JVM on the market to integrate directly with Kedify, making this kind of lifecycle-aware right-sizing seamless and trivial to use.
 > **What is Azul Prime?**
@@ -199,7 +199,7 @@ kubectl get po -lapp=heavy-workload \
 
 ###### **Diagram #3: Resource transition timeline**
 
-![](https://azul.imgix.net/wp-content/uploads/Image-4-2-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=07e91025e7e8553103fdb5a66db5fd4e)
+![](Image-4-2-scaled-7a48318f.png)
 
 ## Metrics: What This Achieves
 
@@ -242,7 +242,7 @@ In practice, the flow looks like this:
 3. Shrink resources after warm-up to avoid long lived overprovisioning .
 4. Run the real workload efficiently across multiple optimized replicas.
 
-![](https://azul.imgix.net/wp-content/uploads/Image-5-1-scaled.png?auto=format&crop=faces,entropy&fit=max&q=80&w=739&s=5202a8c01a0ddbd87a0da47a64ef6a14)
+![](Image-5-1-scaled-5df6c3ed.jpg)
 
 ## Try It Yourself
 

@@ -40,7 +40,7 @@ But why am I telling this story here on a technical, Java blog? Because we almos
 In 2023, I wrote the blog post "[Time Zone and Currency Database in JDK](https://www.azul.com/blog/time-zone-and-currency-database-in-jdk/)" for the Azul website. In that post, I explained how the OpenJDK sources contain a full database with information and the full history of timezones, daylight savings, and currencies. I even gave the example of the change in January 2023 with the currency of Croatia changing from the Kuna to the Euro.
 
 Apparently, something similar happened when [IANA database 2024a](https://www.iana.org/time-zones) got integrated into OpenJDK with JDK-8325150: "(tz) Update Timezone Data to 2024a". That ticket contains several changes, including: "Kazakhstan unifies on UTC+5 beginning 2024-03-01." Indeed, Kazakhstan changed their timezone on March 1st of this year! You can find the [changed data here](https://github.com/openjdk/jdk/blame/master/src/java.base/share/data/tzdata/asia#L2507), modified by [commit 917838e](https://github.com/openjdk/jdk/commit/917838e0a564b1f2cbfb6cc214ccbfd1a237019f).
-![](commit-change.png)
+![](commit-change.jpg)
 
 Because we wanted to be sure of a good price for our plane tickets, we bought them well in advance, in January. For our flight back, we had a departure time of **05:20** . But because of the time zone change, that flight actually departed at **04:20**, an hour earlier. Because of delays, we didn't notice that change in the arriving flight...
 

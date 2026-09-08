@@ -34,7 +34,7 @@ In our latest release, we have supported the parallel testing feature in Visual 
 
 To learn about more about parallel testing in JUnit 5, you can visit the [official documentation.](https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-parallel-execution) Here's a demo of this feature.
 
-![Parallel Testing](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/02/parallel-test.gif)
+![Parallel Testing](parallel-test.gif)
 
 #### Filter Widget in Spring Boot Dashboard Extension
 
@@ -44,7 +44,7 @@ You can either use the exact filter or "fuzzy match" to search for the phrase yo
 
 Overall, the filter widget allows developers to efficiently manage their application's endpoints and improve their development process. Here's a demo for this feature.
 
-![Spring Boot filter](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/02/filter.gif)
+![Spring Boot filter](filter-43f3c857.gif)
 
 #### GitHub Copilot AI Tech Upgraded and Generates 61% of Java Code
 
@@ -56,11 +56,11 @@ Even though Java is a verbose programming languages, it sill shows that Java dev
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 Feedback and suggestions
 

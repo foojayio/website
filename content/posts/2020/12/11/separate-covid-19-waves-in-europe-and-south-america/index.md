@@ -27,7 +27,7 @@ This week, we are going to compare Europe with South America.
 ### Europe
 
 During the summer months of 2020, the pandemic paused throughout Europe. This applies to all countries, except for Russia. Russia had 100+ Covid-19 related deaths/day during the summer months July and August.  
-[![Daily deaths in Europe (excluding Russia) related to Covid-19](https://foojay.io/?attachment_id=36582)](https://foojay.io/?attachment_id=36582)
+[![Daily deaths in Europe (excluding Russia) related to Covid-19](foojay-io-2f099a2a.jpg)](foojay-io-2f099a2a.jpg)
 
 *Daily deaths in Europe (excluding Russia) related to Covid-19*
 
@@ -40,7 +40,7 @@ The strong oscillation of the curves can be observed in a weekly rhythm for all 
 Except for Russia, the number of deaths decreased and almost reached zero during summer. However, in autumn, the second wave started in Europe.
 
 In Software-ECG COVID-19 Edition, you can create an aggregated view of all these values. The result will look as shown in the following graph:  
-[![Total deaths (sum) in Europe related to Covid-19](https://foojay.io/?attachment_id=36583)](https://foojay.io/?attachment_id=36583)
+[![Total deaths (sum) in Europe related to Covid-19](foojay-io-de3cf28b.jpg)](foojay-io-de3cf28b.jpg)
 
 *Total deaths (sum) in Europe related to Covid-19*
 
@@ -51,7 +51,7 @@ The seasonal component cannot be ignored as it is not surprising for a disease t
 Now, we would like to ask the following question—can the same behavior also be seen in South America?
 
 Let us surprise you with the following graph:  
-[![Total deaths in South America related to Covid-19](https://foojay.io/?attachment_id=36584)](https://foojay.io/?attachment_id=36584)
+[![Total deaths in South America related to Covid-19](foojay-io-e200b6dd.jpg)](foojay-io-e200b6dd.jpg)
 
 *Total deaths in South America related to Covid-19*
 
@@ -60,7 +60,7 @@ A wave is most likely to be seen in Brazil (brown line) during the winter months
 In some countries, there are significant outliers in the curves. Such data anomalies probably are due to adjustments and corrections that were combined into one corrected value later.
 
 In sum, it looks less like a wave than a continuous event. For this purpose, you can add up all curves with the Combine Metrics -\> Add up (exact) function of the ECG:  
-[![Total deaths (sum) in Europe related to Covid-19](https://foojay.io/?attachment_id=36585)](https://foojay.io/?attachment_id=36585)
+[![Total deaths (sum) in Europe related to Covid-19](foojay-io-c8d8b55c.jpg)](foojay-io-c8d8b55c.jpg)
 
 *Total deaths (sum) in Europe related to Covid-19*
 

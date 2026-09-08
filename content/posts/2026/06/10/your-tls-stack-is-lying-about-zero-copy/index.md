@@ -47,7 +47,7 @@ That matters because I am not trying to reduce heap pressure only statistically 
 What `SSLEngine` gives you is different. It relies on buffer exchange through a JDK object contract and state transitions expressed through JVM return objects. Its cleanup is not shaped around the same explicit ownership model as the rest of the kernel.
 
 In a conventional stack, delayed cleanup is usually acceptable because the whole system already tolerates a lot of deferred work. In an off-heap-first runtime, "cleanup later" is not neutral. It means native TLS state can survive beyond the point where the runtime is logically done with it. Once I noticed this mismatch in ownership semantics clearly, I stopped thinking of `SSLEngine` as a component to tune and started seeing it as a boundary that belonged to the wrong architecture.
-![SSLEngine memory contract vs. Exeris Arena ownership model.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig1_tls_boundary.png) Figure 1: SSLEngine memory contract vs. Exeris Arena ownership model.
+![SSLEngine memory contract vs. Exeris Arena ownership model.](fig1_tls_boundary-47eb7dea.png) Figure 1: SSLEngine memory contract vs. Exeris Arena ownership model.
 
 ## The Netty Question
 
@@ -117,7 +117,7 @@ I tested four distinct architectural models:
 | Exeris FD Owner   | Direct Socket OS boundary | **\~367k ops/s** | **0 B/op**                  |
 
 *(Methodology: JMH `gc` phase, Oracle JDK 26 GA, ZGC, commit [`f778683`](https://github.com/exeris-systems/exeris-benchmarks/commit/f778683bf1d343d0c6a3a595d2d3b754c44a696c), 2026-05-01. The Memory BIO profile phase additionally confirmed via JFR: zero `jdk.GarbageCollection` events recorded — ZGC never ran a single collection during the entire benchmark run. Full suite in [`exeris-benchmarks`](https://github.com/exeris-systems/exeris-benchmarks).)*
-![The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig2_fd_owner_path.png) Figure 2: The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.
+![The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.](fig2_fd_owner_path-bbe97a15.png) Figure 2: The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.
 
 Let's unpack what these numbers actually mean, because context matters more than raw digits.
 
@@ -136,7 +136,7 @@ To process a standard 1024-byte payload, `SSLEngine` allocates over **2.5 Kiloby
 By contrast, the Exeris FFM paths drop the normalized allocation rate to **strict zero**. (The profiler registers \~0.01 B/op with zero actual GC counts, which is standard JMH measurement noise for absolute zero).
 
 This is the core definition of "No Waste Compute." By eliminating the intermediate buffer tier completely, the kernel fundamentally changes the garbage collector's job. It stops doing TLS cleanup entirely. ZGC is no longer forced to clean up after the cryptography layer.
-![Allocation rate (garbage generated) per 1KB payload across different TLS architectures.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig3_gc_allocation_rate.png) Figure 3: Allocation rate (garbage generated) per 1KB payload across different TLS architectures.
+![Allocation rate (garbage generated) per 1KB payload across different TLS architectures.](fig3_gc_allocation_rate-abbc2a91.jpg) Figure 3: Allocation rate (garbage generated) per 1KB payload across different TLS architectures.
 
 ## Where SSLEngine Still Wins
 

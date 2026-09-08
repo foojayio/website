@@ -43,7 +43,7 @@ Azul Platform Prime changes the game by making your Java apps more efficient at 
 * **Cloud Native Compiler** **–** [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) offloads JIT compilation to a remote service, freeing up local CPU cycles and improving resource efficiency, especially in containers.
 
 This means your Java applications do more, with less. Less compute. Less memory. Less electricity.
-![DIAGRAM: Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.](https://azul.imgix.net/wp-content/uploads/2025-07-01-green-diagram-1024x503.jpg?auto=format&crop=faces,entropy&fit=max&q=80&s=8b8f9c85ac4a7bf6cc6a795def64b890) Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.
+![DIAGRAM: Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.](2025-07-01-green-diagram-1024x503-b2b3bfea.jpg) Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.
 
 ## Sustainable engineering in action
 

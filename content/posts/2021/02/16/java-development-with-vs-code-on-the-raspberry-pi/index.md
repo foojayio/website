@@ -64,7 +64,7 @@ $ sudo apt install ./code_1.50.1-1602600638_arm64.deb
 ```
 
 Also here you'll now find Visual Studio Code in the Programming list in the start menu. Let's also here add the "Java Extension Pack" (or one from the others mentioned in [the previous post](https://foojay.io/today/welcome-to-vs-code-for-java/)), so we can test a Java application.
-![](visualstudiocode-64bit-java-extension-pack.png) Visual Studio Code running on Raspberry Pi OS (64bit)
+![](visualstudiocode-64bit-java-extension-pack.jpg) Visual Studio Code running on Raspberry Pi OS (64bit)
 
 Maven and BellSoft JDK with JavaFX are already installed on my board:
 
@@ -83,7 +83,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)
 ```
 
 Without any further installation, we can now try out [this demo application which you can get from GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_07_JavaFX/javafx-dashboard).
-![](visualstudiocode-64bit-java-testing.png) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
+![](visualstudiocode-64bit-java-testing.jpg) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
 
 ### Is Microsoft Spying On You?
 

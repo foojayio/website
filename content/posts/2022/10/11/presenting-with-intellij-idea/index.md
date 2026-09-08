@@ -64,7 +64,7 @@ We can use **Quick Switch Scheme** again to **Exit Presentation Mode**.
 
 To enable mouse zoom, you need to turn it on explicitly. Go to **Preferences \> Editor \> General** and select **Change font size with Command+Mouse Wheel** (on Mac) or **Change font size with Control+Mouse** (on Windows/Linux). Click **OK** to apply the changes and close the dialog or click **Apply** to keep the dialog open.
 
-{{< img src="enable-mouse-zoom-698x510.png" class="size-medium" alt="Enable Mouse Zoom in IntelliJ IDEA Preferences" width="698" height="510" >}}
+{{< img src="enable-mouse-zoom-698x510.jpg" class="size-medium" alt="Enable Mouse Zoom in IntelliJ IDEA Preferences" width="698" height="510" >}}
 
 Now we can use **Command+Mouse Wheel** (on Mac) or **Control+Mouse Wheel** (on Windows/Linux) to zoom in or out. While we are using mouse zoom, a popup appears containing the current font size on the left and a link to reset to the original font size on the right. Click the link to reset the font size.
 
@@ -89,7 +89,7 @@ Select the UI theme from the Theme list:
 * **Darcula** is the default dark theme that we're using here
 * **High contrast** is a theme designed for users with color vision deficiency
 
-{{< img src="theme-700x507.png" class="size-medium" alt="Selecting a Theme in IntelliJ IDEA Preferences" width="700" height="507" >}}
+{{< img src="theme-700x507.jpg" class="size-medium" alt="Selecting a Theme in IntelliJ IDEA Preferences" width="700" height="507" >}}
 
 Which theme to use depends on your personal preference. When presenting in front of an audience, you may want to take into account how light or dark the room is. If possible, try different themes and walk to the back of the room to see which one works best before your presentation. When sharing your screen during an online meeting, you may also want to check with teammates which theme works best.
 

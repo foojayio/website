@@ -34,7 +34,7 @@ To achieve our goal, we will create a Kotlin Spring Boot application that commun
 The application will use a pre-imported database in Atlas called sample_airbnb, utilizing the listingsAndReviews collection, which contains information about various Airbnbs.
 
 To identify the best Airbnb listings, we will create an endpoint that returns information about these listings. This endpoint will use the summary field from the collection to perform a full-text search with the fuzzy parameter in text operator. Additionally, we will filter the documents based on a minimum number of reviews, utilizing the search functionalities provided by MongoDB Search.  
-![](Screenshot-2026-03-27-at-9.30.27-AM-1024x572.png)
+![](Screenshot-2026-03-27-at-9.30.27-AM-1024x572.jpg)
 
 ## Pre-requisites
 
@@ -62,20 +62,20 @@ Before starting, you'll need to import the sample dataset, which includes severa
 ![](Screenshot-2026-03-27-at-9.31.10-AM-1024x751.jpg)
 
 If everything goes smoothly, after the import, you will see our databases and collections displayed as shown in the image.  
-![](Screenshot-2026-03-27-at-9.31.42-AM-1024x751.png)
+![](Screenshot-2026-03-27-at-9.31.42-AM-1024x751.jpg)
 
 ## Creating the MongoDB Search index
 
 After importing the collections, the next step is to create an index for the Airbnb collection. To do this, select "Database" from the side menu under "Deployment," go to the "MongoDB Search" tab, and click on "JSON Editor," as shown in the image.  
-![](Screenshot-2026-03-27-at-9.32.30-AM-1024x764.png)
+![](Screenshot-2026-03-27-at-9.32.30-AM-1024x764.jpg)
 
 In the next step, select the **sample_airbnb** database and the **listingsAndReviews** collection (the Airbnb collection). Then, name your index "searchPlaces":  
-![](Screenshot-2026-03-27-at-9.32.54-AM-1024x733.png)
+![](Screenshot-2026-03-27-at-9.32.54-AM-1024x733.jpg)
 
 Note that we are using Dynamic Mappings for simplicity, which allows MongoDB Search to automatically index the fields of supported types in each document. For more details, I suggest checking out[Define Field Mappings](https://www.mongodb.com/docs/atlas/atlas-search/define-field-mappings/#std-label-static-dynamic-mappings).
 
 If everything goes well, the "searchPlaces" index will be created successfully, and you can view it here.  
-![](Screenshot-2026-03-27-at-9.33.20-AM-1024x514.png)
+![](Screenshot-2026-03-27-at-9.33.20-AM-1024x514.jpg)
 
 ## Testing our index in MongoDB Compass
 
@@ -137,7 +137,7 @@ Let's break down each stage:
 3. **$project**: This specifies which fields to include or exclude in the final result.
 
 Simply run this pipeline to obtain the results. See:  
-![](Screenshot-2026-03-27-at-9.34.18-AM-1024x593.png)
+![](Screenshot-2026-03-27-at-9.34.18-AM-1024x593.jpg)
 
 ## Building a Kotlin application
 
@@ -146,7 +146,7 @@ Our application will be developed in Kotlin with Spring. It's important to note 
 ## Creating the project
 
 To do this, we'll use the [Spring Initializer official page](https://start.spring.io/) to create our project:  
-![](Screenshot-2026-03-27-at-9.34.49-AM-1024x662.png)
+![](Screenshot-2026-03-27-at-9.34.49-AM-1024x662.jpg)
 
 As you can see, I have only added the **Spring Web** dependency.
 
@@ -160,7 +160,7 @@ dependencies {
 }
 ```
 
-![](Screenshot-2026-03-27-at-9.35.18-AM-1024x768.png)
+![](Screenshot-2026-03-27-at-9.35.18-AM-1024x768.jpg)
 
 ## Establishing a connection
 
@@ -405,7 +405,7 @@ class AirbnbController(
 ## Final application structure
 
 Great. If all the steps have been followed, our folder structure should look similar to the one in the image:  
-![](Screenshot-2026-03-27-at-9.38.48-AM-744x1024.png)
+![](Screenshot-2026-03-27-at-9.38.48-AM-744x1024.jpg)
 
 ## *Application structure*
 
@@ -417,7 +417,7 @@ Simply run the application and access the endpoint provided at 'http://localhost
 curl --location 'http://localhost:8080/airbnb/search?query=Istambun&minNumberReviews=50'
 ```
 
-![](Screenshot-2026-03-27-at-9.39.25-AM-1024x668.png)
+![](Screenshot-2026-03-27-at-9.39.25-AM-1024x668.jpg)
 
 ## Conclusion
 

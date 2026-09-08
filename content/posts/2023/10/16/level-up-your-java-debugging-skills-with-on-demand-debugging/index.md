@@ -5,7 +5,7 @@ lastmod: "2023-10-16T14:21:25+00:00"
 description: "Learn about onthrow and onjcmd and more that can improve the performance of on-demand debugging, as this allows us to trigger the start of the debugging session from outside the debugger."
 authors:
   - "johannes-bechberger"
-image: "ondemanddebug.png"
+image: "ondemanddebug.jpg"
 categories:
   - "Debugging"
 related_posts:
@@ -29,7 +29,7 @@ Before I tell you more about the specific options, I want to start with the basi
 ## Option Application
 
 When you debug remotely in your IDE (IntelliJ IDEA in my case), the "Debug Configurations" dialog tells you which options you should pass to your remote JVM:
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/image.png)
+![](image-8a05efa0.jpg)
 
 Just append more options by adding them to the `-agentlib` option, or by setting the `_JAVA_JDWP_OPTIONS` environment variable, which is comma-appended to the options.
 
@@ -56,7 +56,7 @@ Address : *:5005
 [jps](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jps.html) is your friend if you want to find the process id of an already running JVM.
 
 I created a sample class in my [java-dbg](https://github.com/parttimenerd/java-dbg) repository on GitHub with [a small sample program](https://github.com/parttimenerd/java-dbg/blob/main/src/test/java/OnThrowAndJCmd.java) for this article. To use JCmd triggered with our IDE, we first have to create a remote debug configuration (see previous section); we can then start the sample program in the shell and trigger the start of the debugging session. Then, we start the remote debug configuration in the IDE and debug our program:
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-1.png)
+![](image-1-f9a95020.jpg)
 
 A similar feature [long existed](https://mail.openjdk.org/pipermail/serviceability-dev/2019-May/028227.html) [in the SAPJVM](https://help.sap.com/docs/btp/sap-business-technology-platform/debug-application-running-on-sap-jvm). In 2019 [Christoph Langer](https://www.linkedin.com/in/christoph-langer-764280208) from SAP decided to [add it to the OpenJDK](https://bugs.openjdk.org/browse/JDK-8223456), where it was implemented in JDK 12 and has been there ever since. It is one of the many [significant contributions](https://github.com/SAP/SapMachine/wiki/Features-Contributed-by-SAP) of the SapMachine team.
 
@@ -94,10 +94,10 @@ We run our application using the JDWP agent with the `onthrow=Ex,launch=sh tmux_
 ➜ tmux attach -t jdb
 ```
 
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-3.png)
+![](image-3-1b809dff.jpg)
 
 Where we can explore the current state of the application:
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-4.png)
+![](image-4-df0c17e0.jpg)
 
 Debugging a specific exception has never been easier.
 

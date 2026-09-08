@@ -1133,7 +1133,7 @@ Markdown documentation comments use the `///` prefix instead of the familiar `/*
 #### Example of the Differences
 
 To illustrate how documentation comments can change now that Markdown is supported, here's an example diff screenshot from the JEP:
-![Differences between regular documentation comment and Markdown documentation comment](https://cr.openjdk.org/~jjg/Object-hashcode-diff-3.png)
+![Differences between regular documentation comment and Markdown documentation comment](Object-hashcode-diff-3-3231dc18.jpg)
 
 #### Syntax
 

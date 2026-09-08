@@ -6,7 +6,7 @@ description: "Ever wondered if AI can localize an entire project? Let’s walk t
 canonical: "https://flounder.dev/posts/localize-apps-with-ai/"
 authors:
   - "igor-kulakov"
-image: "localized-nl.png"
+image: "localized-nl.jpg"
 categories:
   - "Java Beginner"
   - "Spring"
@@ -31,7 +31,7 @@ In this article, we will walk through one such experiment. We will choose an ope
 If you've never dealt with localization and would like to learn, it might be a good idea to start here. Except for a few technical details, the approach is largely universal, and you can apply it in other types of projects.
 
 If you're already familiar with the basics, and just want to see AI in action, you might want to skip to [Translate texts](#translate-texts) or clone [my fork](https://github.com/flounder4130/spring-petclinic) to skim over the commits and evaluate the results.
-![Localize Apps with AI - post banner](https://flounder.dev/img/localize-apps-with-ai-banner.png)
+![Localize Apps with AI - post banner](localize-apps-with-ai-banner-5c10f034.jpg)
 
 ## Get the project
 
@@ -408,7 +408,7 @@ Let's relaunch the application and test it using different `lang` parameter valu
 * <http://localhost:8080/?lang=fr>
 
 Personally, I find it very satisfying to see each page correctly localized. We've put in some effort, and now it's paying off:
-![Spring Petclinic Find Owners page in Dutch](https://flounder.dev/img/localized-nl.png)
+![Spring Petclinic Find Owners page in Dutch](localized-nl.jpg)
 
 ## Address the issues
 

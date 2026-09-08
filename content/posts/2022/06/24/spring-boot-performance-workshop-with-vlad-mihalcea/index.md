@@ -6,7 +6,7 @@ description: "Learn how to improve the performance of a Spring application and d
 canonical: "https://lightrun.com/tutorials/spring-boot-performance-workshop-with-vlad-mihalcea/"
 authors:
   - "shai-almog"
-image: "1200x625A.png"
+image: "1200x625A.jpg"
 categories:
   - "Performance"
   - "Spring"

@@ -208,7 +208,7 @@ Open JProfiler.
 
 ![immagine](jprofiler0-700x279.png)
 
-![immagine](jprofiler1-694x510.png)
+![immagine](jprofiler1-694x510.jpg)
 
 The GUI will attach to remote JVM running inside the unikernel(or connect to remote jvm running in you cloud provider or onprem).
 

@@ -39,7 +39,7 @@ Or install directly from the marketplace:
 
 👉 <https://plugins.jetbrains.com/plugin/30311-boxlang-ide>
 
-![](plugin-web-view-695x510.png)
+![](plugin-web-view-695x510.jpg)
 
 ## Key Features
 
@@ -55,7 +55,7 @@ Features include:
 * Language-aware formatting
 * Support for modern BoxLang syntax
 
-![](hyper-in-intellij-700x439.png)
+![](hyper-in-intellij-700x439.jpg)
 
 ### 🧰 BoxLang Project Creation
 

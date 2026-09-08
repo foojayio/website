@@ -36,7 +36,7 @@ Here's where we are now:
 ![](0_C2mWeh5HM5olXxEt.png) Existing deployment of our cloud database.
 
 The goal is to have two regions, each with a Cassandra data center. In our cloud-managed K8s deployment here, this translates to two K8s clusters — each with a separate control plane, but utilizing a common virtual private cloud (VPC) network. By expanding our Cassandra cluster into multiple data centers, we have redundancy in case of a regional outage, as well as improved response times and latencies to our client applications given local access to data.
-![](0_T5EBFr918S-sJOSr.png) *This is our goal: to have two regions, each with their own Cassandra data center.*
+![](0_T5EBFr918S-sJOSr.jpg) *This is our goal: to have two regions, each with their own Cassandra data center.*
 
 On the surface, it would seem like we could achieve this by simply spinning up another K8s cluster deploying the same K8s [YAML](https://www.redhat.com/en/topics/automation/what-is-yaml). Then just add a couple tweaks for [Availability Zone](https://cloud.google.com/about/locations#network) names and we can call it done, right? Ultimately the shape of the resources is *very* similar, and it's all K8s objects. So, shouldn't this just work? Well, *maybe* . Depending on your environment, this approach *might* work.
 
@@ -65,7 +65,7 @@ If you have a cluster that has one IP space, and then you have another cluster f
 By default there really is no hint here. There are some ways around this; but at a high level, if you're overlapping, you're asking for a bad time. The point here is that you need to understand your address space for each cluster and then carefully plan the assignment and usage of those IPs. This allows for the Linux kernel (where K8s routing happens) and the VPC network layer to forward and route packets as appropriate.
 
 But, what if you don't have enough IPs? In some cases, you can't give every pod its own IP address. So, in this case, you would need to take a step back and determine what services absolutely must have a unique address and what services can be running together in the same address space. For example, if your database here needs to be able to talk to each and every other pod, it probably needs its own unique address. But if your application tiers in the East Coast and in the West Coast are just talking to their local data layer, they can have their own dedicated K8s clusters with the same address range and avoid conflict.
-![](0_5cFYbL4l-uYKrxdA.png) *Flattening out the network.*
+![](0_5cFYbL4l-uYKrxdA.jpg) *Flattening out the network.*
 
 In our reference deployment, we dedicated non-overlapping ranges in K8s clusters for the layers of infrastructure that MUST be unique and overlapping CIDR ranges where services will not communicate. Ultimately, what we're doing here is flattening out the network.
 

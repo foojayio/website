@@ -6,7 +6,7 @@ description: "Did you know? In Gradle 7.3, released November 2021, the Gradle te
 canonical: "https://blog.gradle.org/introducing-test-suites"
 authors:
   - "tom-tresansky"
-image: "https://blog.gradle.org/images/introducing-test-suites/default-test-layout.png"
+image: "default-test-layout-97a5ef80.png"
 categories:
   - "Gradle"
   - "Java Core"
@@ -35,7 +35,7 @@ Normally - whether or not you're practicing strict Test Driven Development - as 
 
 By convention, for a Java project, these tests live in `src/test/java`:
 
-[![layout](https://blog.gradle.org/images/introducing-test-suites/default-test-layout.png "layout")](http:/https://blog.gradle.org/images/introducing-test-suites/default-test-layout.png/ "layout")
+[![layout](default-test-layout-97a5ef80.png "layout")](http:/default-test-layout-97a5ef80.png/ "layout")
 
 These unit tests ensure your classes behave correctly in isolation from the very beginning of your project's lifecycle.
 
@@ -53,7 +53,7 @@ Varied test goals often involve different and incompatible patterns.
 
 At a minimum you'll want to organize your test code by separating tests into different directories for each goal:
 
-[![other tests](https://blog.gradle.org/images/introducing-test-suites/adding-other-tests.png "other tests")](https://blog.gradle.org/images/introducing-test-suites/adding-other-tests.png "other tests")
+[![other tests](adding-other-tests-fdc45b5b.png "other tests")](adding-other-tests-fdc45b5b.png "other tests")
 
 But separating the source files is only the beginning.
 
@@ -85,7 +85,7 @@ Before diving in, take a moment to think about how you would create a separate s
 
 Before Gradle 7.2, the proper way to set up integration tests went like this (note that while this example is written in the Gradle Kotlin DSL, the Groovy setup is very similar):
 
-[![proper set up](https://blog.gradle.org/images/introducing-test-suites/proper-integration-test-setup.png "proper set up")](http://https://blog.gradle.org/images/introducing-test-suites/proper-integration-test-setup.png "proper set up")
+[![proper set up](proper-integration-test-setup-74a0ef9a.jpg "proper set up")](http://proper-integration-test-setup-74a0ef9a.jpg "proper set up")
 
 1. We need to create a `SourceSet` that will in turn create the associated `Configuration`s we'll need later. This is low-level plumbing that we shouldn't have to focus on.
 2. We wire the new test configurations to the test existing configurations, to re-use their dependency declarations. We might not always want to do this.
@@ -121,7 +121,7 @@ Congratulations!
 
 Here is the previous example, rewritten to take advantage of Test Suites:
 
-[![integration tests](https://blog.gradle.org/images/introducing-test-suites/integration-tests-with-suites.png "integration tests")](https://blog.gradle.org/images/introducing-test-suites/integration-tests-with-suites.png "integration tests")
+[![integration tests](integration-tests-with-suites-d6bf2ea4.png "integration tests")](integration-tests-with-suites-d6bf2ea4.png "integration tests")
 
 1. All Test Suite configuration is co-located within a new `testing` block, of type [TestingExtension](https://docs.gradle.org/7.5.1/dsl/org.gradle.testing.base.TestingExtension.html#org.gradle.testing.base.TestingExtension).
 2. Maintaining backwards compatibility with existing builds that already use the `test` task was an important requirement for us when implementing Test Suites. We've associated the existing `test` task with a default Test Suite that you can use to contain your unit tests.
@@ -168,7 +168,7 @@ For a new project, the easiest way to get started is to use the [Gradle Init tas
 
 The rationale behind Test Suites, just like Gradle in general, is to abstract the details of configuration and use sensible conventions as defaults - but to also allow you to change those defaults as necessary.
 
-[![custom set up](https://blog.gradle.org/images/introducing-test-suites/customizing-test-suites.png "custom set up")](https://blog.gradle.org/images/introducing-test-suites/customizing-test-suites.png "custom set up")
+[![custom set up](customizing-test-suites-0f84bae1.png "custom set up")](customizing-test-suites-0f84bae1.png "custom set up")
 
 1. Configure the built-in Test Suite to use a different testing framework using one of [several convenience methods available](https://docs.gradle.org/7.5.1/javadoc/org/gradle/api/plugins/jvm/JvmTestSuite.html#useJUnitJupiter--).\[\^4\]
 2. Add a non-project dependency for use in compiling and running a Test Suite.

@@ -64,7 +64,7 @@ Instead of the traditionally centralized event streaming architectures, Kafka ta
 A Kafka cluster can have many brokers that supply high availability and redundancy for producers and consumers. Each broker holds zero or more topics, and each topic can be split up into one-to-many partitions.
 
 For increased performance and availability, the partitions are replicated across brokers. What's great about brokers is they each do not have to be in the same geographic region.
-![Kafka architecture](https://www.azul.com/wp-content/uploads/Kafka-architecture-1-1024x655.png)
+![Kafka architecture](Kafka-architecture-1-1024x655-dbd891e4.jpg)
 
 Microservice applications (producers) can push messages (events) to topics and other applications (consumers) can pull messages from topics. The consumers of topics can process, transform, and enrich data streams. It can also dynamically create a new stream of data for other consumers.
 
@@ -99,10 +99,10 @@ The following is the JDK version to download:
 * x86 64-bit
 
 The following is the download page of the Azul Zulu Prime Builds of OpenJDK:
-[![](https://www.azul.com/wp-content/uploads/Platform-Prime-1024x613.png)](https://www.azul.com/products/prime/stream-download/)
+[![](Platform-Prime-1024x613-76a049e8.png)](https://www.azul.com/products/prime/stream-download/)
 
 The following is the download page of the Azul Zulu Builds of OpenJDK:
-[![](https://www.azul.com/wp-content/uploads/Zulu-builds-of-OpenJDK-1024x400.png)](https://www.azul.com/downloads/?package=jdk#download-openjdk)
+[![](Zulu-builds-of-OpenJDK-1024x400-e2382cc1.png)](https://www.azul.com/downloads/?package=jdk#download-openjdk)
 
 After downloading the binaries you'll want to decompress the files to a local directory.
 

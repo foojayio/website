@@ -39,7 +39,7 @@ Then, you can try it out with the little sample UI:
 ![](Screenshot-2026-03-24-at-12.49.46-PM.png)
 
 Or directly use the API: http://localhost:8222/image/search?text=kite\&animal=dog  
-![](Screenshot-2026-03-12-at-1.39.50-PM.png)
+![](Screenshot-2026-03-12-at-1.39.50-PM.jpg)
 
 ## Let's build!
 
@@ -631,7 +631,7 @@ Save this as a new record in your project alongside Image and Category. This rec
 ![](Screenshot-2026-03-12-at-2.01.11-PM.png)
 
 Knowing this would allow you to further filter the results like: [](http://localhost:8080/images?caption=dog&sports=surfboard)[http://localhost:8080/images?caption=dog\&sports=surfboard](http://localhost:8080/images?caption=dog&sports=surfboard)  
-![](Screenshot-2026-03-12-at-2.01.40-PM.png)
+![](Screenshot-2026-03-12-at-2.01.40-PM.jpg)
 
 Or at least, it will! Let's implement the image search API. Because there is a bit of complexity in this query, let's create a new method in the Main class to handle the search. Insert the following after your main method:
 
@@ -749,7 +749,7 @@ ImageSearchResult images = search(imageCollection,
 ```
 
 This will take the query parameters passed to the API and call our search function. Let's give it a spin, and then we'll come back and break down the search method piece by piece. You can now start to see how the facets work. Let's search for the term "riding" in our image caption, and further filter down to only images having a horse and a suitcase: [](http://localhost:8080/images?caption=riding&accessory=suitcase&animal=horse)[http://localhost:8080/images?caption=riding\&accessory=suitcase\&animal=horse](http://localhost:8080/images?caption=riding&accessory=suitcase&animal=horse)  
-![](Screenshot-2026-03-12-at-2.02.28-PM.png)
+![](Screenshot-2026-03-12-at-2.02.28-PM.jpg)
 
 Amazing. 🙂 If you had any trouble following the steps, [refer to the tutorial code](https://github.com/luketn/atlas-search-coco-tutorial). So, let's go through the search method and explain each part piece by piece. Our aggregate search on the image MongoDB collection will have the following stages:
 

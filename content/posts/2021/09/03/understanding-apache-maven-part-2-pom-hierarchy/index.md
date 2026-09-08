@@ -6,7 +6,7 @@ description: "Following on from the first article covering the Maven basics, the
 canonical: "https://cguntur.me/2020/05/24/understanding-apache-maven-part-2/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/05/maveneffectivepom.png?w=1024"
+image: "maveneffectivepom-5c2ea620.png"
 categories:
   - "Maven"
 related_posts:
@@ -52,7 +52,7 @@ An effective POM is:
 
 ### How does Maven assemble the effective POM?
 
-![A set of boxes representing the maven internal defaults -> maven super pom -> maven global settings -> maven user settings -> Parent/bill-of-material poms -> project pom that finally results in an effective POM.](https://cgunturme.files.wordpress.com/2020/05/maveneffectivepom.png?w=1024)
+![A set of boxes representing the maven internal defaults -> maven super pom -> maven global settings -> maven user settings -> Parent/bill-of-material poms -> project pom that finally results in an effective POM.](maveneffectivepom-5c2ea620.png)
 
 Maven *assembles* its effective POM by traversing the layers that act as building blocks. Each layer used has the ability to override or enrich the content of what will become an **effective POM**. Maven internal defaults and the super POM are built-in to the maven installation, so ideally not subject to customization. The layers below, the global settings and user settings are, as their name suggests, inclined towards hosting and overriding any settings for maven. The parent, bill-of-material and project POM files are where maven instructions can be customized. Default values from above layers are utilized if no customization is made.
 

@@ -1,7 +1,7 @@
 ---
 title: "Mohibul Hassan Chowdhury"
 avatar: "mohibul-chowdhury.png"
-avatarFull: "mohibul-chowdhury-full.png"
+avatarFull: "mohibul-chowdhury-full.jpg"
 bio: "Software Engineer. Aiming to become Software Craftsman. Java | Spring boot | Javascript | VueJS | NuxtJS | MySQL An AI enthusiast. Avid self learner."
 bluesky: ""
 mastodon: ""

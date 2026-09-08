@@ -6,7 +6,7 @@ description: "Maven uses the version as a coordinate in identifying an artifac
 canonical: "https://cguntur.me/2020/07/05/understanding-apache-maven-part-9/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/07/mavenversionstrategy.png?w=1024"
+image: "mavenversionstrategy-f93e0aaa.png"
 categories:
   - "Maven"
 related_posts:
@@ -57,7 +57,7 @@ Link to the goals page for the `maven-release-plugin`: <https://maven.apache.org
 Ideally, since a POM is modified during development, it is best to use the -SNAPSHOT suffix in the POM. A project during its release can shed the -SNAPSHOT through many means, two of which were covered above. In addition, the above mentioned plugins also support bumping the version number to the next SNAPSHOT for a future development cycle right after the build for the release completes.
 
 Typically projects start with a `0.0.1-SNAPSHOT` or a `1.0.0-SNAPSHOT`. Following **Semver 2.0** rules is heavily recommended for the numeric portion of the POM, since it provides visual cues for a developer's understanding.
-![Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.](https://cgunturme.files.wordpress.com/2020/07/mavenversionstrategy.png?w=1024) Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.
+![Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.](mavenversionstrategy-f93e0aaa.png) Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.
 
 ## Controlling Versions in Maven
 

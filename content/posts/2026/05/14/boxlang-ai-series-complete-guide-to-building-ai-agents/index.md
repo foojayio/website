@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-![](Guide-to-Building-AI-Agents-2-700x365.png)
+![](Guide-to-Building-AI-Agents-2-700x365.jpg)
 
 The world of AI development is moving fast, but building real, production-ready AI agents doesn't have to be complex.
 

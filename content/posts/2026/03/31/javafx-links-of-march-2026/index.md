@@ -5,7 +5,7 @@ description: "Here are the JavaFX LinksOfTheMonth of March 2026. You can find th
 canonical: "https://webtechie.be/post/2026-03-27-javafx-links-of-march-2026/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

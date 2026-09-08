@@ -115,10 +115,10 @@ $ java -Dcom.sun.management.jmxremote \
 I waited two minutes before taking each screenshot below.
 
 {{< gallery cols="2" >}}
-java-11-spring-1024x610.png |  | Spring with Java 11
-java-11-quarkus-1024x612.png |  | Quarkus with Java 11
-java-15-spring-1024x610.png |  | Spring with Java 15
-java-15-quarkus-1024x609.png |  | Quarkus with Java 15
+java-11-spring-1024x610.jpg |  | Spring with Java 11
+java-11-quarkus-1024x612.jpg |  | Quarkus with Java 11
+java-15-spring-1024x610.jpg |  | Spring with Java 15
+java-15-quarkus-1024x609.jpg |  | Quarkus with Java 15
 {{< /gallery >}}
 
 #### Profiling Conclusions
@@ -137,6 +137,6 @@ Quarkus seems to need less memory on Java 15 and both Spring and Quarkus have a 
 Do you need to switch from OpenJDK 11 to 15? No, not really, based on these results.
 
 But each new version has bug and security fixes, new features, and generic improvements:
-![](Screenshot-2020-09-21-at-09.32.17-1024x557.png)
+![](Screenshot-2020-09-21-at-09.32.17-1024x557.jpg)
 
 [Click here](https://javaalmanac.io/jdk/15/) to see all the details and vote on your favorite new features and fixes!

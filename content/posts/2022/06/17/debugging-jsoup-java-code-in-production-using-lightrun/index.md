@@ -161,11 +161,11 @@ And it led me to the Element class. In it I ctrl-clicked the Selector "select" m
 
 Here, I could place a conditional snapshot to see every case where an "a\[href\]" query is made:
 
-![image1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650367462176/h8Wqwl1Yk.png)
+![image1.png](h8Wqwl1Yk-73b817ce.jpg)
 
 This can show me the methods/lines that perform that query:
 
-![image4.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465643162/RMkm_mRVG.png)
+![image4.png](RMkm_mRVG-8dac44fc.jpg)
 
 This can help a lot in narrowing down the general problematic area in the document object hierarchy.
 
@@ -179,7 +179,7 @@ First, we add a log with the following text:
 "Executing query {query}"
 ```
 
-![image2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465598568/jjkSGCvVa.png)
+![image2.png](jjkSGCvVa-be908031.jpg)
 
 Then, to find out how many entries we returned, we just go to the caller (which we know thanks to the stack in the snapshot) and add the following log there:
 
@@ -214,7 +214,7 @@ Lightrun provides the ability to pipe all of Lightrun's injected logging to the 
 
 To send logs only to the plugin, select the piping mode as "plugin".
 
-![image3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465790348/J8eYWzZC4.png)
+![image3.png](J8eYWzZC4-c45c46c6.png)
 
 ### PII Reduction/Blocklists
 

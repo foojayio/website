@@ -113,7 +113,7 @@ The simple "Hello World" example ran perfectly. There's also an extended example
 Since I installed the Java version from Azul with JavaFX included, I could also run a JavaFX demo application. It uses Pi4J to detect the board type, though this only contains methods to detect Raspberry Pi board versions at this moment, so it didn't recognize the LattePanda.
 
 But the application **ran smoothly**! It showed we're running on a Linux 64-bit system with Java 25. The board wasn't recognized yet as expected, maybe we can in the future add detection tools in the Pi4J library to show the brand or manufacturer information.
-![](javafx-demo-1024x576.png)
+![](javafx-demo-1024x576.jpg)
 
 Without any extra work, we have a JavaFX application running very smoothly on this board!
 

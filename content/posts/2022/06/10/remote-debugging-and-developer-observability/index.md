@@ -149,7 +149,7 @@ APMs provide some insight, but they provide very coarse grained information. For
 
 Counter works just like that, without the hassle and without deploying. You can use conditional counters as you can with every action to count fine grained usage.
 
-![](counter.png)
+![](counter.jpg)
 
 ### TicToc \& Method Duration
 

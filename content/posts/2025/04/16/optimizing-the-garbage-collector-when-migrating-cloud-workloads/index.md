@@ -5,7 +5,7 @@ lastmod: "2025-04-17T12:57:24+00:00"
 description: "You might associate Arm primarily with smartphones and the Java-based Android runtime. But no more after this article!"
 authors:
   - "kieran-hejmadi"
-image: "arm.png"
+image: "arm.jpg"
 categories:
   - "Arm"
   - "Cloud"

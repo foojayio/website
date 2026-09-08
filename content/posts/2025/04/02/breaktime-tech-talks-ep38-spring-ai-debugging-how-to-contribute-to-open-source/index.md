@@ -5,7 +5,7 @@ lastmod: "2025-04-11T07:29:01+00:00"
 description: "In this episode, I focus on continuing my journey with vector databases, integrating Pinecone, Neo4J , and Spring AI."
 authors:
   - "jennifer-reif"
-image: "techtalks.png"
+image: "techtalks.jpg"
 categories:
   - "Debugging"
   - "Spring"

@@ -7,7 +7,7 @@ canonical: "https://www.linkedin.com/pulse/deep-learning-drug-discovery-new-fron
 authors:
   - "oscar-bastidas"
   - "zoran-sevarac"
-image: "deepnetts.png"
+image: "deepnetts.jpg"
 categories:
   - "Deep Netts"
   - "Machine Learning"

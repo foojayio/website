@@ -5,7 +5,7 @@ lastmod: "2024-06-30T11:17:04+00:00"
 description: "Learn how to migrate to OpenJDK and get tips on how to select the right Java partner to assist with your migration and provide suppoer."
 authors:
   - "geertjan-wielenga"
-image: "dummies.png"
+image: "dummies.jpg"
 categories:
   - "Book Announcement"
   - "Books"
@@ -25,7 +25,7 @@ But if you have a variety of specialized Java applications, created at different
 
 But, worry no more, Java Champion Simon Ritter has you covered in a new (free) book.
 
-{{< img src="image-764x1024.png" class="size-large is-resized" width="372" height="499" >}}
+{{< img src="image-764x1024.jpg" class="size-large is-resized" width="372" height="499" >}}
 
 This handy book offers a concise, fun-to-read overview of OpenJDK migration:
 

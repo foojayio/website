@@ -33,7 +33,7 @@ The homepage provides links to the [GitHub projects of JFX Central](https://gith
 {{< gallery >}}
 homepage-intro-1024x769.jpg |  | Homepage of JFX Central
 homepage-highlights.jpg |  | Some of the highlights on the homepage
-homepage-lotw.png |  | The most recent Links Of The Week on the homepage
+homepage-lotw.jpg |  | The most recent Links Of The Week on the homepage
 {{< /gallery >}}
 
 ### Resources
@@ -42,15 +42,15 @@ The Resources section of the JFX Central website contains an overview of librari
 
 {{< gallery >}}
 books-1024x890.jpg |  | Books on JFX Central
-tools-1024x912.png |  | Tools on JFX Central
+tools-1024x912.jpg |  | Tools on JFX Central
 videos-1024x1003.jpg |  | Videos on JFX Central
 {{< /gallery >}}
 
 The icons are a new part of version 2 of JFX Central, allowing you to search and explore many icon packs.
 
 {{< gallery >}}
-icons-overview-1024x780.png |  | Overview of the icons on JFX Central
-icons-devicons-1024x832.png |  | All the icons in the Devicons pack
+icons-overview-1024x780.jpg |  | Overview of the icons on JFX Central
+icons-devicons-1024x832.jpg |  | All the icons in the Devicons pack
 icons-details-1024x282.png |  | Details of a selected icon
 {{< /gallery >}}
 
@@ -77,7 +77,7 @@ showcase-nerstar-941x1024.jpg |  | The NERstar showcase
 ### Documentation
 
 The Documentation section is also a new addition to version 2 of JFX Central. The goal is to provide links to various sources that explain how to start with JavaFX and related topics.
-![Documentation on JFX Central](documentation-1024x623.png)
+![Documentation on JFX Central](documentation-1024x623.jpg)
 
 ### Downloads
 
@@ -87,14 +87,14 @@ This section shows the power (and a bit of its weakness) of JFX Central, as it i
 
 {{< gallery >}}
 downloads-956x1024.jpg |  | Downloads on JFX Central
-download-gluostatusfx-info-1024x774.png |  | GlucoStatusFX download page
+download-gluostatusfx-info-1024x774.jpg |  | GlucoStatusFX download page
 download-gluostatusfx-links.png |  | GlucoStatusFX links
 {{< /gallery >}}
 
 ### Search
 
 The search box helps you to jump to the correct section of the website for all the different parts of the content.
-![Search box with an example search](search.png)
+![Search box with an example search](search.jpg)
 
 ## **Conclusion**
 

@@ -28,10 +28,10 @@ In Europe, the number of people who tested positive is now declining. For this p
 The input string in the editable dropdown has the form "country1 \| country2 \| countryN". The pipe operator is a logical OR which than selects all data from country1 and countryN.
 
 As a result, the ECG then shows all the countries selected. With the mouse, you can now zoom into the interesting parts. Here is the data from 07/07/2020 until today (11/25/2020).
-[![](ekg-2-2.png)](ekg-2-2.png) #New Positive tests per day: Netherlands, Switzerland, France, Austria, Italy, Germany, Spain   
+[![](ekg-2-2.jpg)](ekg-2-2.jpg) #New Positive tests per day: Netherlands, Switzerland, France, Austria, Italy, Germany, Spain   
 
 The number of positive tests correlates directly with the total number of tests. Dividing the number of positive tests by the total number gives the infection rate. In the Our World in Data Covid-19 data, this metric is called the "positive rate". In the ECG you can see it directly:
-[![](ekg-2-3.png)](ekg-2-3.png) "positive_rate" = number of positive tests / total number of tests   
+[![](ekg-2-3.jpg)](ekg-2-3.jpg) "positive_rate" = number of positive tests / total number of tests   
 
 The data shows also here a flattening or breaking of the 2nd wave. Since at the present time, the data for the Netherlands (purple line) is available only up to 10/25/20, and the data for Germany (blue line) up to 11/15/20, one cannot make a clear statement here. (In next week's blog we will take another look at the curve and investigate whether the curve flattens or breaks.)
 
@@ -41,7 +41,7 @@ A very useful feature is the date selection. The date period can be set by zoomi
 ### Some Countries Already Have Constant Or Even Falling Mortality Rates
 
 The number of people who have died of or with Covid-19 is also flattening out in all countries except Italy and Germany.
-[![](ekg-2-5.png)](ekg-2-5.png) Number of deceased people (2nd wave)   
+[![](ekg-2-5.jpg)](ekg-2-5.jpg) Number of deceased people (2nd wave)   
 
 It is interesting to note that Italy has almost three times as high a death rate as Germany.
 

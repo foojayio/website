@@ -29,7 +29,7 @@ But first...
 ## A Personal Story
 
 I've always been fascinated by sound and light equipment. As a teenager (over 30 years ago...), I built two disco bars and used them as "DJ Franky" to bring ambiance to many weddings and other parties. I loved the DJ-ing, but I loved even more the technique of getting all the devices together and finding the best way to connect them, building custom housing, and creating the best possible connections. But there was one problem with this hobby, it all cost a lot of money...
-![](https://webtechie.be/images/2025/dmx/djfranky-1.jpg)
+![](djfranky-1-139270d8.jpg)
 
 Fast forward to now. Thanks to modern technology and improved production processes, prices have decreased significantly, allowing you to purchase marvelous pieces of technology at an affordable price. However, most of these can still be controlled by an "ancient" standard: DMX512.
 
@@ -42,7 +42,7 @@ Let's start by explaining the standards used in this project.
 ### What is DMX512
 
 [DMX512](https://en.wikipedia.org/wiki/DMX512) is a digital communication protocol, based on [RS-485](https://en.wikipedia.org/wiki/RS-485), widely used in professional lighting and stage equipment to control dimmers, moving lights, fog machines, and other effects. The protocol transmits data in a serial format over standard XLR cables, with each "universe" capable of controlling up to 512 channels of information. Each channel can carry values from 0 to 255, allowing for precise control of parameters such as brightness, color, position, and speed across multiple fixtures simultaneously. DMX512 has become the industry standard because it's reliable, relatively simple to implement, and allows complex lighting shows to be programmed and synchronized from a central console.
-![](https://webtechie.be/images/2025/dmx/dmx-fixtures.png)
+![](dmx-fixtures-0c323cd4.jpg)
 
 #### DMX512 Data Example
 
@@ -75,7 +75,7 @@ But none of these are based on Java...
 ### What is Open Fixture Library
 
 The [Open Fixture Library (OFL)](https://open-fixture-library.org/) is a collaborative, open-source platform that addresses a persistent issue in lighting control: fixture definitions that are tied to specific software platforms.
-![](https://webtechie.be/images/2025/dmx/ofl-picospot.png)
+![](ofl-picospot-e8dd87df.jpg)
 
 The project emerged when lighting professionals wanted to switch between different software controllers, but discovered their fixture definitions couldn't be easily transferred. This meant recreating all their work from scratch – a time-consuming process the entire lighting community had been dealing with for years.
 
@@ -116,7 +116,7 @@ I have the following fixtures connected to it:
 * Address 1 and 12: [PicoSpot 20 LED](https://www.thomann.de/intl/fun_generation_picospot_20_led.htm) with 11 channels.
 * Address 23 and 28 : [LED PARty TCL Spot](https://www.steinigke.de/en/mpn42110193-eurolite-led-party-tcl-spot.html) with 5 channels.
 
-![](https://webtechie.be/images/2025/dmx/test-setup-2.jpg)
+![](test-setup-2-15714e0b.jpg)
 
 ### Minimal Code Example
 
@@ -213,7 +213,7 @@ List<DMXIPDevice> ipDevices = DMXIPDiscoverTool.discoverDevices();
 ## DMX512 JavaFX Demo Project
 
 To demonstrate how the DMX data can be controlled from a user interface and what gets loaded from the OFL JSON files, a separate project has been created. It's also [available as open-source on GitHub](https://github.com/codewriterbv/DMX512-Demo).
-![](https://webtechie.be/images/2025/dmx/demo-app-picospot-channels.png)
+![](demo-app-picospot-channels-ce878674.jpg)
 
 ## Next Steps
 

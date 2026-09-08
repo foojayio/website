@@ -5,7 +5,7 @@ lastmod: "2023-06-29T06:38:44+00:00"
 description: "Upload a JAR, search for YAML, create a DOT, convert this to a PNG, all taking place behind the scenes, with just a click of a button."
 authors:
   - "jasmine-taylor"
-image: "chronicle-sd-tool.png"
+image: "chronicle-sd-tool.jpg"
 categories:
   - "Chronicle Software"
   - "Cloud"

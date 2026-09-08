@@ -665,7 +665,7 @@ Another tool that many Java developers are not familiar with is the HotSpot Debu
 
 You can also start the hsdb ui via: `java -m jdk.hotspot.agent/sun.jvm.hotspot.HSDB`.  
 
-{{< img src="java-hsdb-700x445.png" class="size-medium" alt="Hot Spot Debugger UI" width="700" height="445" >}}
+{{< img src="java-hsdb-700x445.jpg" class="size-medium" alt="Hot Spot Debugger UI" width="700" height="445" >}}
 
 HotSpot Debugger UI
 

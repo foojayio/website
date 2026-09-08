@@ -116,7 +116,7 @@ The first three fields keep default values (Maven project, Java language, Spring
 
 In the `Dependencies` area, we need to add 3 things - `Spring Reactive Web`, `Lombok`, and `Spring Data Reactive MongoDB`. The use of Lombok is personal preference, as well, but I wanted to use it here to trim some code. Next, click the `Generate` button at the bottom of the screen and pick a location to save it.
 
-![springio svc3](springio-svc3.png)
+![springio svc3](springio-svc3.jpg)
 
 *Note: the Spring Initializr displays in dark mode or light mode via the moon or sun icons in the right column of the page. The image above is in dark mode.*
 

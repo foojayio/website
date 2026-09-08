@@ -6,7 +6,7 @@ description: "Running a community website is a bit like maintaining a codebase: 
 authors:
   - "dominika-tasarz"
   - "frankdelporte"
-image: "foojay_linkedin_banner.png"
+image: "foojay_linkedin_banner.jpg"
 categories:
   - "Foojay"
 related_posts:

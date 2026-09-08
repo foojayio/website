@@ -5,7 +5,7 @@ lastmod: "2025-12-08T22:31:32+00:00"
 description: "beetRoot is a slim and rapid Java web development as well as a full & secure client-server framework ready to run."
 authors:
   - "michael-gasche"
-image: "https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-login.webp"
+image: "autumo-beetroot-login-833f1cc3.webp"
 categories:
   - "Developer Tools"
   - "Release Notes"
@@ -25,7 +25,7 @@ Over the years, I have struggled with various Java web development frameworks an
 A few years ago, I evaluated around 10 of these frameworks for a project for a Swedish company. Nothing really impressed me at the time.
 
 It was only later that [SpringBoot](https://spring.io/projects/spring-boot) came along, which seemed to fulfill all the requirements and there was actually very little to criticize about it. Then came microservices such as [Quarkus](https://quarkus.io/) or [Micronaut](https://micronaut.io/), which are often compiled into native code for small web service applications, but which can then rarely be embedded in a more mature architecture.
-![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-login.webp)
+![beetRoot starting on console](autumo-beetroot-login-833f1cc3.webp)
 
 ## The "Buts"
 
@@ -44,7 +44,7 @@ However, none of this prevents you from customizing the dependencies in the Mave
 The quick start setup is also effortless and very fast!
 
 If you know CakePHP for web development, you'll like beetRoot. It is based on the same principles and comes with a full CRUD generator generating all views, the model specification and controllers (handlers in beetRoot's terminology) based on the database model! The client-server framework supports encrypted communication (SSL) as well as HTTP/HTTPS-tunneling, provides a file download and upload interface and it can be extended with own (distributed) modules.
-![beetRoot website after login](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-screen.webp)
+![beetRoot website after login](autumo-beetroot-screen-87f06621.webp)
 
 autumo beetRoot is open source ([Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)) and is now available in version 3.1.5. It also largely forms the basis for the product [autumo ifaceX](https://products.autumo.ch/ifacex/overview).
 
@@ -83,7 +83,7 @@ del %PACKAGE%.zip
 ```
 
 autumo beetRoot starting up:
-![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-console.webp)
+![beetRoot starting on console](autumo-beetroot-console-86d51795.webp)
 
 Now go to <http://localhost:8778> and log in:
 
@@ -93,7 +93,7 @@ Now go to <http://localhost:8778> and log in:
 ## QuickStart Video
 
 Take a look at the QuickStart Video if you want to play around with the framework.
-[![Quickstart Video](https://i3.ytimg.com/vi/X2_FVYiMnIE/hqdefault.jpg)](https://youtu.be/X2_FVYiMnIE)
+[![Quickstart Video](hqdefault-3c6ae754.jpg)](https://youtu.be/X2_FVYiMnIE)
 
 ## Full Feature List
 

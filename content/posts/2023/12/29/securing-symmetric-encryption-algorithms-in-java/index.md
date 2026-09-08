@@ -94,7 +94,7 @@ Now that we've built a known insecure encryption algorithm into a project, we'll
 First, [++sign up for a free Snyk account++](https://app.snyk.io/login/). You can easily get started using your GitHub, Bitbucket, Azure AD, or Docker account.
 
 I then connected my GitHub repository to Snyk. Snyk Code's static analysis immediately warns me that my application uses a Broken or Risky Cryptographic Algorithm. This is spot on since I have multiple references to DES in the service above. The Snyk Code engine also advises me to consider using AES, which aligns with the advice from OWASP.
-![blog-secure-encryption-priotity-score](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1697638240%2Fblog-secure-encryption-priotity-score.jpg&w=2560&q=75)
+![blog-secure-encryption-priotity-score](snyk-io-56b9d005.jpg)
 
 Despite using AES in the short snippet below, I am using the CBC mode which is not considered secure.
 
@@ -109,7 +109,7 @@ Despite using AES in the short snippet below, I am using the CBC mode which is n
 ```
 
 Snyk will also identify the use of insecure modes, among other things. The screenshot below is taken from the [++Snyk plugin++](https://plugins.jetbrains.com/plugin/10972-snyk-security--code-open-source-container-iac-configurations) that scans my code inside of InteliJ IDEA and provides useful information, like external fix examples.
-![blog-secure-encryption-vuln-broken](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1697638242%2Fblog-secure-encryption-vuln-broken.jpg&w=2560&q=75)
+![blog-secure-encryption-vuln-broken](snyk-io-85e85c79.jpg)
 
 Changing the `EncryptionService` to a version that uses `AES/GCM/NoPadding`, like below, is a far better solution than I had before and is in line with the current advice that OWASP provides.
 

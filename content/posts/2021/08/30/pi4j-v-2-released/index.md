@@ -38,7 +38,7 @@ Pi4J V.2 is a complete rewrite and **does not maintain API compatibility** with 
 * Hardware PWM Support
 * Java 11
 
-![](https://raw.githubusercontent.com/Pi4J/pi4j-v2/master/assets/draw.io/pi4j-v2-architecture.jpg) P4J V.2 architecture diagram
+![](pi4j-v2-architecture-1f6d8aff.jpg) P4J V.2 architecture diagram
 
 In addition to the features listed above, Pi4J version 2.0 also abandons the old WiringPi pin numbering scheme in favor of the more traditional and commonly used Broadcom pin numbering scheme. This pin numbering scheme has been a source of confusion for a number of years, especially with beginners and is somewhat cumbersome to maintain as new Raspberry Pi models are introduces with differing or added GPIO pins. Moving forward, Pi4J will only use the Broadcom (BCM) pin numbering scheme.
 

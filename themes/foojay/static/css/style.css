@@ -2873,6 +2873,37 @@ body.lightbox-open { overflow: hidden; }
 .sponsors-cta h2 { margin: 0 0 .5rem; font-size: 1.35rem; }
 .prose .sponsors-cta h2 { margin-top: 0; }
 .sponsors-cta p { color: var(--ink-soft); }
+/* The derived reach figures, as a bullet list inside a CENTRED card. Two
+   things make that work rather than look broken: the <ul> is inline-block, so
+   the list as a whole centres while its lines stay left-aligned (centred
+   bullet text is unreadable at three items), and the marker is drawn by
+   ::before rather than left to list-style, which cannot be positioned.
+   Both selectors are class-on-class because .prose ul and .prose li + li are
+   (0,1,1) and beat a single class -- the specificity trap that has already
+   bitten the series nav and the sitemap tables. */
+.prose .sponsors-cta__stats {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+  color: var(--ink-soft);
+}
+.prose .sponsors-cta__stats li {
+  position: relative;
+  margin: .3rem 0;
+  padding-left: 1.35rem;
+}
+.prose .sponsors-cta__stats li::before {
+  content: "";
+  position: absolute;
+  left: .3rem;
+  top: .62em;
+  width: .4rem;
+  height: .4rem;
+  border-radius: 50%;
+  background: var(--brand-accent);
+}
 .sponsors-cta__links { margin-bottom: 0; }
 
 .sponsor-mini-list { display: flex; flex-direction: column; gap: .85rem; }

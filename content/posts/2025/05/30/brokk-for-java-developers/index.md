@@ -38,7 +38,7 @@ Brokk is built with Java Swing for the UI, [Joern](https://docs.joern.io/) for a
 
 When you start Brokk, you'll see five main areas:
 
-![Brokk Interface Overview](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcSbbNxObiIqzkcDI2CSRLj5Wnca7Kt-YHnokuKoMD-BWtBqE9U09viBQI_2Weds_XsDu8USUPO26fgxyincMI5apjNHG8z9Dij_TQkq9l73XqLelI9v96ZseE5wK-NFWcHSLpZ2A?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Brokk Interface Overview](AD_4nXcSbbNxObiIqzkcDI2CSRLj5Wnca7Kt-YHn-3e9d1455.jpg)  
 *Brokk main interface showing the five key areas: Instructions panel on the left, Output panel in the center, Activity panel on the right, Workspace panel on the far right, and Git panel at the bottom*
 
 From left to right, starting at the top, these are:
@@ -51,7 +51,7 @@ From left to right, starting at the top, these are:
 
 The Workspace is the core of Brokk's approach to managing context. Here's an example of (most of) the different types of context that Brokk can manipulate:
 
-![Workspace Context Types](https://lh7-rt.googleusercontent.com/docsz/AD_4nXevPQ03ftq_gYGoR7LsFT9zrACMkckkFqnKdEkIAgFSDvdOkRsTnK-gvNu-3_KladCH0Es9YBAZjS8l-oROYIAexWljFVrvGzULcrROE0fVgtw1nP2lPdFRrD91ie9wtR2VpndwVg?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Workspace Context Types](AD_4nXevPQ03ftq_gYGoR7LsFT9zrACMkckkFqnK-77353935.jpg)  
 *Workspace panel showing various types of context including image files, source files, library summaries, stacktraces, Git diffs, documentation, and method usages*
 
 From top to bottom, these are:
@@ -70,14 +70,14 @@ You can right-click on any of the referenced files on the right to add them indi
 
 Brokk also enriches context with what it knows about your code. Here, I've double-clicked on the stacktrace (on the left) and the getTrackedFiles usages (on the right) to show their contents:
 
-![Context Enrichment](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcR84k2iNjH2EWBYN1LO_l8rpl5EB21_blpQNXorhRI-4otDCYsyjV_X1aYVqbV8dEXbVz-KnfG0P8SmtdH9FAwtaS2MI8Gsq1fxSKDfJqjZ6hOVYuyp57JShpLVULorl6r515nNQ?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Context Enrichment](AD_4nXcR84k2iNjH2EWBYN1LO_l8rpl5EB21_blp-d09027b5.png)  
 *Split view showing expanded stacktrace details on the left with full source code of methods in the stack, and expanded method usages on the right showing calling method source code*
 
 For the stacktrace, Brokk includes the full source of any method in your project. For the usages, it similarly shows not just the call site but the source of each calling method. This lets Brokk perform refactoring across your codebase without having to load entire files into the Workspace. Smaller contexts mean faster and cheaper calls to the LLM.
 
 The other main tool that Brokk uses to slim down the Workspace is summarization. Here is what a Brokk summary of a source file looks like:
 
-![File Summarization](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeaqRSFqPlMVJdJXwBrdva4a5YHiCzV9XDMkopZIS8uq3VRTRVkfogN-V5EgEqO5JlDO6RarVMQYdV1DmnR9ZW9s4nIk4Oynp_Gk8xRdKx7k_pRTv_Ly955P9jvR-b5ZdBuIHp6dA?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![File Summarization](AD_4nXeaqRSFqPlMVJdJXwBrdva4a5YHiCzV9XDM-30fa9c93.png)  
 *Example of Brokk's file summarization showing class signatures, method declarations, and private fields without full implementation details*
 
 Brokk extracts the signatures and declarations to show the LLM how to use this class without hallucinating. Brokk also includes private fields and methods to give a hint of how the implementation works under the hood. This means that you almost never need to include full source files in the Workspace unless they are going to be actively edited.
@@ -88,12 +88,12 @@ Brokk's goal is to make context management *explicit* (you always know what's in
 
 We already covered how Brokk links referenced files in the Workspace so you can easily add related code. Brokk also offers similar recommendations as you type your instructions in realtime.
 
-![Quick Context Recommendations](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe6lCZqHaNq1k3HWfjb1Jf6xLFFQyX7-JZAJfiVdQf_-J0IyvAoeJAoEV06J2ytgG1Ls8O3YEnS_Kugavngyd3kFqne4-u_n9rZ0jDG1RjaO8fzIQ88y-Age8Xt1CyZhzFkTyAoXA?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Quick Context Recommendations](AD_4nXe6lCZqHaNq1k3HWfjb1Jf6xLFFQyX7-JZA-9b010303.png)  
 *Quick Context recommendations panel showing suggested files to add to the workspace based on the current instruction being typed*
 
 This is called Quick Context, and it's optimized for speed. If you want to trade that speed away for a more in-depth analysis, click on Deep Scan:
 
-![Deep Scan Results](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdwRWOIsd5Ojljil2DoUI9s50TqbpG8EcDtY-gkl1b-ueedX9M-sA4zBClkmmvkp3TOqz6Fm_PJNK4CsZheVIB1V3OnWQ-ruDDbxoq8cWsrI5gEa8TrD-inP_UnK4_9VxLJw1z1fA?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Deep Scan Results](AD_4nXdwRWOIsd5Ojljil2DoUI9s50TqbpG8EcDt-3190940a.jpg)  
 *Deep Scan results dialog showing recommended files for a serialization refactor task, with options to Edit, Summarize, or Add files to the workspace*
 
 This is a solid set of recommendations for the serialization refactor, although not perfect; I would change Json.java and ContextFragment.java from Summarize to Edit.
@@ -102,14 +102,14 @@ This is a solid set of recommendations for the serialization refactor, although 
 
 The Git Panel, located at the bottom of the Brokk interface, is your primary interface to bring Git-based historical context into the Workspace. It's divided into two main tabs: Log and Commit. The Commit tab is fairly self-explanatory, so we'll focus on the operations available in the Log.
 
-![Git Panel](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdfpsNuQXEs_FfFCzSkl8ge3vTCdMC2XyI7Ch-wqQFyGj2p7F1_V2kzwD_Oq5KUdFAJDItzjB7t4RF-pMI-B8P1bpgjHboyUhxN3e9-6SFrqsNpgzp2Myn70zyPMu5YuWgQnXn6ow?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Git Panel](AD_4nXdfpsNuQXEs_FfFCzSkl8ge3vTCdMC2XyI7-bc2cc101.png)  
 *Git Log panel showing commit history with right-click context menu options for capturing diffs and viewing file revisions*
 
 * **Capture Diff:** This is the most commonly used integration point, useful for asking questions, troubleshooting regressions, and performing merges.
   * **How it works:** Right-click any set of commits or file changes, in the log and select Capture Diff. This adds a unified diff of the selected changes to your Workspace.
   * **Best for:** Providing the LLM with focused context about a past bug fix, feature implementation, or refactor. You can also right-click on the diff to add all (or some) of the affected files to the Workspace in their entirety or as summaries.
 
-![Git Diff Context](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfFi_tpV133_o_NcWdaXwsAvWrrElDw_sbRBP5QI8mzl9S2RRzBCMrvVRDMX4s_sDfpOggoRLLLjqmVAdigEnUrfstYgzyOYvv5aymxlj-vjVy8-nR6nmlPO_6URp3SnJSbcjgR?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Git Diff Context](AD_4nXfFi_tpV133_o_NcWdaXwsAvWrrElDw_sbR-8f23ace4.jpg)  
 *Git diff context menu showing options to add affected files to workspace as summaries or full files*
 
 * **Capturing Older Revisions:** Primarily used to give the LLM an anchor point for a particularly complex diff.
@@ -147,10 +147,10 @@ The Instructions panel is where you provide your textual input to Brokk. The but
 
 Brokk allows configuring both default models for each of the main actions, and a selection of commonly-used overrides. This allows the best of both worlds with a default you use most frequently, without having to reconfigure things (or worse, restart) when you want to use a different option.
 
-![Model Configuration 1](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdc1t53Ju-31AtsUVbkEHGYjukOOcrcWxFLLw1wk_3vIIgMe5rwnNluJEMVHoFrMV3I80hkMtZrBUZV1mcMPL64ogawAu8hYDxtbM4qYMRkN4C0ca0jkIGHQIMvwLD5lsq6WmgJsQ?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Model Configuration 1](AD_4nXdc1t53Ju-31AtsUVbkEHGYjukOOcrcWxFL-463b6d4f.jpg)  
 *Model configuration dialog showing default model settings for different actions like Code, Ask, Search, and Architect*
 
-![Model Configuration 2](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdadu97agADtWToJ1Fb06p0v8GtfTqBv3606NLDo-sD7M-0XSmEAbZ3IYCjZCt71fpqYz05cwnYWF-JUnpiU_WWTPjVIiZmgncnOauw4YnBEjX_-E6c6q2FReygI0ztPqxSatI67A?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Model Configuration 2](AD_4nXdadu97agADtWToJ1Fb06p0v8GtfTqBv360-6f9ddea6.jpg)  
 *Model override selection interface showing commonly-used model options for quick switching without reconfiguration*
 
 See [this article](https://brokk.ai/blog/the-best-llm-for-code) for more on how to choose which models to use.
@@ -163,14 +163,14 @@ To do this effectively, Brokk asks the LLM to infer details about your build whe
 
 By default, Brokk runs only the tests in the Workspace after each set of changes to your code; if your test suite runs quickly enough, you can change that to run all tests instead, in `File -> Settings -> Build`:
 
-![Build Settings](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdFz3jXmgLdtmqrghO4R5PU2e9utpTP82p2SvCmwO4Ee84cGIKkAJozfBAWLeHA_OCF4MUkE2hkoocLbzbA9dzsC16pq4kIAg7aP8k4s4Y-zzGkMH19HfZoq6CEixt0oNNVmJrDnw?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Build Settings](AD_4nXdFz3jXmgLdtmqrghO4R5PU2e9utpTP82p2-45d6c28b.png)  
 *Build settings dialog showing options for test execution, including running only workspace tests vs all tests, and custom shell command configuration*
 
 You can also (ab)use the Run All Tests option to specify an arbitrary shell command; any non-zero exit code will be treated as a failure and sent to the coding LLM for revision. For example, when I was debugging tree-sitter parsing I changed it to `tree-sitter query … && sbt "testOnly …"`
 
 The Activity panel is designed to allow you to solve side quests, like a quick refactor or a bug fix, and come back to where you were without losing your flow or confusing the AI with irrelevant context. There are three options when you right-click on an earlier state:
 
-![Activity History Options](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcOj9vfq5QasaTLeQUSk7c34967Gb6gx-5ei4nEflx4LT5RDGFOXpy3WuYmfZBL3Z7v9yoLtI1MGh9vKbnfKrHn2kfmnMEItb1QlJRJ9K2dGFyWJFRW3Wh3jSBPibboEllT-wzc?key=uP1lqs1lPqiVB7uD01Ypkg)  
+![Activity History Options](AD_4nXcOj9vfq5QasaTLeQUSk7c34967Gb6gx-5e-d6b1b001.png)  
 *Activity history context menu showing three options: Undo to Here, Copy Workspace, and Copy Workspace with History*
 
 1. **Undo to Here**: This action reverts both your file changes on disk and the Workspace to the state they were in at that selected point in history. Any file modifications made after that point will be undone. (But Git history is not touched.)

@@ -1,7 +1,7 @@
 ---
 title: "Nataliia Dziubenko"
 avatar: "nataliia.png"
-avatarFull: "nataliia-full.png"
+avatarFull: "nataliia-full.jpg"
 bio: "Senior Software Engineer at Azul"
 bluesky: ""
 mastodon: ""

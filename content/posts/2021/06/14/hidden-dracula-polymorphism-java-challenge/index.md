@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:29:05+00:00"
 description: "Polymorphism, the ability of an object to take on forms, one of the important Java concepts, decouples responsibilities, adding flexibility."
 authors:
   - "rafael-del-nero"
-image: "dracula_polymorphism.png"
+image: "dracula_polymorphism.jpg"
 categories:
   - "Tutorials"
 related_posts:

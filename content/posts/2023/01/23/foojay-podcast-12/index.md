@@ -8,7 +8,7 @@ authors:
   - "geertjan-wielenga"
   - "helenjoscott"
   - "nick-zhu"
-image: "ide-podcast-guests-1024x396-1.png"
+image: "ide-podcast-guests-1024x396-1.jpg"
 categories:
   - "Deep Netts"
   - "Eclipse"

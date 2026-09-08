@@ -5,7 +5,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of July 2025. Y
 canonical: "https://webtechie.be/post/2025-07-28-javafx-links-of-july-2025/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

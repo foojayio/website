@@ -68,7 +68,7 @@ These embeddings are stored in a **vector database**. When a user asks a questio
 ### 2. Generation
 
 The most relevant content is retrieved and combined with the original question to form a complete prompt. This prompt is then passed to the language model, such as GPT-4 or Claude, which uses this context to generate a response that is better in line with your intentions.
-![Diagram illustrating the Retrieval-Augmented Generation (RAG) process for language models.](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1744901930/Screenshot_2025-04-17_at_10.56.16_AM_j9yhif.png)
+![Diagram illustrating the Retrieval-Augmented Generation (RAG) process for language models.](Screenshot_2025-04-17_at_10.56.16_AM_j9y-22832cfa.png)
 
 *Image Source: docs.langchain4j.dev*
 

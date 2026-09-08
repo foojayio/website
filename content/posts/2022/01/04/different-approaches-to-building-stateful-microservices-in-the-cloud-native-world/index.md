@@ -6,7 +6,7 @@ description: "How can systems be able to manage and track the flow of data in a 
 canonical: "https://www.javaadvent.com/2021/12/different-approaches-to-building-stateful-microservices-in-the-cloud-native-world.html"
 authors:
   - "mgrygles"
-image: "https://www.javaadvent.com/content/uploads/2021/11/pexels-photo-164170.jpeg"
+image: "pexels-photo-164170-7a0a6049.jpeg"
 categories:
   - "Cloud"
   - "Kubernetes"
@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-![Snow-capped mountains and landscape with clouds](https://www.javaadvent.com/content/uploads/2021/11/pexels-photo-164170.jpeg)Cloud Native computing is all about working with stateless data and serverless systems. But we all live in a stateful world, in which data flows through systems interconnected with one another through complex networks.
+![Snow-capped mountains and landscape with clouds](pexels-photo-164170-7a0a6049.jpeg)Cloud Native computing is all about working with stateless data and serverless systems. But we all live in a stateful world, in which data flows through systems interconnected with one another through complex networks.
 
 So how can systems be able to manage and track the flow of data in a coherent fashion and in a stateless world?
 
@@ -91,7 +91,7 @@ JSON Web Token (JWT) offers a compact and self-contained way to securely transmi
 
 The [12-Factor App methodology](https://12factor.net/) from Heroku provides a set of guidelines for designing cloud native systems.
 
-![undefined](https://www.javaadvent.com/content/uploads/2021/12/12-factor-app.png)
+![undefined](12-factor-app-65cd2a07.jpg)
 
 As we can see, #6 and #9 epitomize the need for highly efficient and very lightweight, stateless processes.
 
@@ -169,7 +169,7 @@ This form of the pattern uses an event-driven approach, in which the local trans
 
 *An simplified example design of an order processing system illustrating the concept of the choreography pattern:*
 
-![undefined](https://www.javaadvent.com/content/uploads/2021/12/Prototype-Design-SAGA-demo.png)
+![undefined](Prototype-Design-SAGA-demo-50d1adc4.jpg)
 
 * *An order gets generated when Kafka publishes an event to the topic, of which the Order microservice is a listener.*
 * *Upon creating the order entry into the database, the Order microservice generates an OrderCreated event of which the InventoryCheck and the CreditCheck microservices are the subscribers.*

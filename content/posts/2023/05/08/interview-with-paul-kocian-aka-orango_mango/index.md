@@ -26,7 +26,7 @@ aliases:
 {{< gallery >}}
 rubikscube-319x510.png
 3dcar-415x510.png
-minecraft-645x510.png
+minecraft-645x510.jpg
 {{< /gallery >}}
 
 ***Let's start with the first mystery... Who is behind the @Orango_Mango account? Can you introduce yourself?***
@@ -58,7 +58,7 @@ For example, Minecraft is made in Java, and was my inspiration for a 3D engine. 
 {{< gallery >}}
 minecraft-trees.png
 minecraft-water.png
-3dgraphics-970x1024.png
+3dgraphics-970x1024.jpg
 {{< /gallery >}}
 
 ***Java and JavaFX on mobile is indeed a very nice approach and doesn't get the amount of attention it deserves. I guess you know the work Gluon is doing on this topic? If not, please take a look at [their docs](https://docs.gluonhq.com/#platforms_android).***

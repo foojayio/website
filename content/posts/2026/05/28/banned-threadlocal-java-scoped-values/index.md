@@ -6,7 +6,7 @@ description: "Why ThreadLocal kills performance under Project Loom and how the E
 canonical: "https://blog.arkstack.dev/en/blog/why-i-banned-threadlocal-from-the-exeris-kernel"
 authors:
   - "arkadiusz-przychocki"
-image: "Screenshot-2026-06-03-at-09.05.15.png"
+image: "Screenshot-2026-06-03-at-09.05.15.jpg"
 categories:
   - "Java"
   - "JavaPro"
@@ -38,7 +38,7 @@ Treating Virtual Threads like OS threads discards most of their scalability adva
 ### 1. The Spaghetti State (Unconstrained Mutability)
 
 Any code deep in the call stack that can read a `ThreadLocal` can also call `.set()` on it. If a nested library mutates the `SecurityContext` mid-flight, tracking down who changed it and when is a debugging nightmare. Data flow becomes completely unpredictable.
-![Figure 1: The uncontrolled mutability of ThreadLocal versus the strict, read-only data flow guarantees of a lexically bounded Scoped Value.](https://blog.arkstack.dev/blog/scopedvalue/fig1_spaghetti_state.png)  
+![Figure 1: The uncontrolled mutability of ThreadLocal versus the strict, read-only data flow guarantees of a lexically bounded Scoped Value.](fig1_spaghetti_state-9fe986e4.png)  
 
 ### 2. The Memory Leak Trap (Unbounded Lifetime)
 
@@ -49,7 +49,7 @@ A `ThreadLocal` survives until the thread dies or someone explicitly calls `.rem
 This is the fatal blow. To share context with child threads, frameworks use `InheritableThreadLocal`. When a parent thread creates a child, the JVM must **eagerly clone** the parent's `ThreadLocalMap`. This typically allocates between **32 and 128 bytes** per entry on the heap, depending on the load factor and key distribution.
 
 Now, imagine a single HTTP request where your logic forks **50 concurrent sub-tasks** (Virtual Threads) to fetch data. You just triggered **50 expensive map allocations** . Multiply that by 10,000 concurrent requests, and your Garbage Collector stalls your application just to clean up useless context clones. This becomes a **pure GC tax with no business value**.
-![Figure 2: The O(N) memory copy penalty of InheritableThreadLocal compared to the O(1) constant-time pointer inheritance introduced in JEP 506.](https://blog.arkstack.dev/blog/scopedvalue/fig2_inheritance_tax.png)  
+![Figure 2: The O(N) memory copy penalty of InheritableThreadLocal compared to the O(1) constant-time pointer inheritance introduced in JEP 506.](fig2_inheritance_tax-95f7d4eb.png)  
 
 ## The Missing Link: Structured Concurrency Incompatibility
 
@@ -73,7 +73,7 @@ Instead of a globally mutable variable, a `ScopedValue` defines a **Dynamic Scop
 ## Exhibit B: "Show, Don't Tell" — The Exeris Implementation
 
 In the Exeris Kernel, context propagation is strictly separated. The Security module authenticates, and the Persistence module applies Row-Level Security. They never talk directly. They communicate purely through an **"Invisible Wall"** using `ScopedValue`.
-![Figure 3: Context propagation in the Exeris Kernel. Security and Persistence modules remain completely decoupled, sharing identity strictly through an immutable dynamic scope.](https://blog.arkstack.dev/blog/scopedvalue/fig3_context_scope.png)
+![Figure 3: Context propagation in the Exeris Kernel. Security and Persistence modules remain completely decoupled, sharing identity strictly through an immutable dynamic scope.](fig3_context_scope-b2531cbc.png)
 
 Here is how identity is injected at the gateway. Notice the complete absence of `.set()` methods:
 

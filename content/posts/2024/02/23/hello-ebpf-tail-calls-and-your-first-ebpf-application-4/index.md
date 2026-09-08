@@ -5,7 +5,7 @@ lastmod: "2024-02-23T08:44:52+00:00"
 description: "This week, we use tail calls and create our first application using hello-ebpf as a library."
 authors:
   - "johannes-bechberger"
-image: "image-1-1.png"
+image: "image-1-1.jpg"
 categories:
   - "Tools"
 related_posts:
@@ -29,7 +29,7 @@ Regular C programs are divided into functions that call each other; so far in th
 > [bpf: introduce function calls](https://lwn.net/Articles/741773/) by Alexei Starovoitov
 
 Before this change, you had to inline the functions essentially. There is just one problem with this approach: Every new function call takes space on the stack for its call frame that contains its parameters and local variables:
-![](https://mostlynerdless.de/wp-content/uploads/2024/02/tail_call-2000x599.png)
+![](tail_call-2000x599-e54ab6e9.jpg)
 
 The maximum stack size is limited to [512 bytes](https://github.com/torvalds/linux/blob/841c35169323cd833294798e58b9bf63fa4fa1de/tools/include/linux/filter.h#L28), so every call frame counts for larger eBPF programs. Modern compilers will, therefore, try to inline the function calls and save space. To reduce the required stack memory, we have essentially two options besides inlining: We can either use static variables or tail calls. Andrii Nakryiko describes the former:
 > Starting with Linux 5.2, [d8eca5bbb2be ("bpf: implement lookup-free direct value access for maps")](https://github.com/torvalds/linux/commit/d8eca5bbb2be9) adds support for BPF global (and static) variables, which we are going to use here to get rid of on-the-stack array.
@@ -40,7 +40,7 @@ Declaring a variable as static, e.g. `static int x`, means that the value is sto
 ## Tail Calls
 
 Now to tail calls. If the function calls another function directly before returning (or as an argument to the return statement), then the call frames can be replaced. This is called a tail call and avoids growing the stack. In eBPF, it is possible to tail call one eBPF program (entry function that gets passed a context) from another program:
-![](https://mostlynerdless.de/wp-content/uploads/2024/02/image-1.png) From [ebpf.io](https://ebpf.io/what-is-ebpf/#tail--function-calls)'s section on tail calls
+![](image-1-c98b0758.jpg) From [ebpf.io](https://ebpf.io/what-is-ebpf/#tail--function-calls)'s section on tail calls
 
 A tail call is achieved by storing the other program in a program array, which maps a 4-byte int to an eBPF program. The kernel function **bpf_tail_call**`(ctx, program_array, index)` can then be used to call a specific program:
 > This special helper is used to trigger a "tail call", or in other words, to jump into another eBPF program. The same stack frame is used (but values on stack and in registers for the caller are not accessible to the callee). This mechanism allows for program chaining, either for raising the maximum number of available eBPF instructions, or to execute given programs in conditional blocks. For security reasons, there is an upper limit to the number of successive tail calls that can be performed.

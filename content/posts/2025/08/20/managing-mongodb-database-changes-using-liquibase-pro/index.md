@@ -59,7 +59,7 @@ Liquibase supports MongoDB versions starting from 5.0 onwards: 5.x, 6.x, 7.x, 8.
 
 2. Place the above four JAR files in the specified path C:\\Program Files\\liquibase\\lib:
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdHZO7Y0SQdS3eA5oISfMG9kpkWJbaziO9O4s6cB34yOit-MbJY5i5sYcwkyz4GYUAqZ-U_sYTLvqDShXiVwx4xQHGpazKkYG1CZHwe8X-QKVpiwjjvz7sp-3yv0l_FY2wfViPA?key=kYj68YH2LkWKvX_ueHC8rQ)list of jarfiles required for this project
+![](AD_4nXdHZO7Y0SQdS3eA5oISfMG9kpkWJbaziO9O-73dd8169.png)list of jarfiles required for this project
 
 ### Connection configuration
 
@@ -98,7 +98,7 @@ Initialized empty Git repository in E:/temp/liquibase-mdb-demo/.git/
 PS E:\temp\liquibase-mdb-demo>
 ```
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdSDi6L2En8Oa8a3OlIRlT9ZdzXYA6woZwVhuPNpNwt-NSaWS4hsTcCm3j0qxuc4VpkvWXFfOWO4ouHaly5DstFEBVwnMWvIAxwc06JQ4dWLX41P1kPOIVJknGJ8AtZvUASrawfhA?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXdSDi6L2En8Oa8a3OlIRlT9ZdzXYA6woZwV-7f759932.jpg)
 
 Figure: Git project structure and its files
 
@@ -206,12 +206,12 @@ PS E:\temp\liquibase-mdb-demo
 After successful execution, you will be redirected to HTML report generation for the same execution process for detailed audit process.
 
 This screenshot shows a **Liquibase Update Report** , confirming a successful database update. The report indicates that **two change sets** were executed with **no previous runs, no filters, and no deployment failures**, meaning all intended changes were applied cleanly. The message "Rows affected: 0" suggests schema-level updates (e.g., table creation or modification) rather than data changes. This ensures the changelog is working as expected and keeps the database schema version-controlled and consistent.
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeVuZv0c29tZDdyYL4dNeMZ1vgSsm6DokhJB76uM8hguICmDqseOUPi-QaXdKZKm8cy42gGmHrU2usnIjAXUL9bGlBOuQVilelJnYXjY34QI-Hpv06dEgTEpIhZZ0JvR5BSOdvyew?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXeVuZv0c29tZDdyYL4dNeMZ1vgSsm6DokhJ-a79a03fa.png)
 
 Figure: Post deployment HTML report generated regarding deployed change.
 
 This Liquibase report shows that **two changesets** were successfully executed with **zero failures or skips** . The changeset with ID 2025062202 inserted multiple documents into a MongoDB collection named person, adding sample data. These changes were defined in a JSON changelog file (changelog.json) and executed by user *Ravindar*. It confirms that Liquibase is being used to version and track NoSQL schema/data changes reliably.
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXevi6FN-4B5bR-LTWGjefrehLaoUnhblU-blEyp2rlcb-fkcc9EiQvZHb52sxn3tVa6KH2CipygGwV3F2Rzd3EydHDUHYdu3fcvBk8IN6zomvn45G6rDbO58-kbbrosGYIt1Y8HBA?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXevi6FN-4B5bR-LTWGjefrehLaoUnhblU-b-289c7aab.png)
 
 Figure: HTML report with Changelog information
 
@@ -220,7 +220,7 @@ It creates the collection named as **person**and inserts data as provided in the
 Log in to the MongoDB database and check the collection and data inside the collection for newly created ones.
 
 This screenshot from **MongoDB Compass** shows the successful insertion of four documents into the person collection in the testdb database. The data was pushed using **Liquibase**, as verified by the earlier changeset execution report, demonstrating how Liquibase can manage and apply structured NoSQL data changes to MongoDB collections in a controlled, versioned manner.
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXezzrF-a6Yfbnrw0mIh1hRoZOyEh_35iyroRND48O2wbsrzq62KqhBTOUyY5lRo97Hn-vXD4_6bM5sczubd1aXSFj9XroFManhkzfDrsWXc0zRCaLU1RmiMFMDxkxwTXcWCTbPesA?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXezzrF-a6Yfbnrw0mIh1hRoZOyEh_35iyro-d4a22339.png)
 
 Figure: Post deployment, documents reflected in the Person collection of testdb database.
 
@@ -258,19 +258,19 @@ PS E:\temp\liquibase-mdb-demo>
 
 This screenshot demonstrates a successful **Liquibase rollback** operation and its effect on the **MongoDB** **person** **collection**. It confirms that one changeset (2025062202) was rolled back successfully using the rollbackCount command. This changeset originally inserted multiple documents into the person collection.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcHBlrf0iwb_08sugNXRXYFkOBN3AAn5kYbaQV4YKDkRY9W4PVsDsZ5Ujcwu2HZFNWGAeO1lJgFgIRKGOZcMfICTRBbLtfQKx3FUv2eAz2Hl32Rv-ta1PcO953cDJRpDmKUY-Fb8g?key=kYj68YH2LkWKvX_ueHC8rQ)Figure: HTML report after rollback changes completed
+![](AD_4nXcHBlrf0iwb_08sugNXRXYFkOBN3AAn5kYb-b7885c8f.png)Figure: HTML report after rollback changes completed
 
 This screenshot from **MongoDB Compass** shows that the person collection is now empty, verifying that the rollback removed the inserted documents. This highlights how Liquibase can manage and reverse schema or data changes in MongoDB with precision and traceability.
 
 The database changes reflect in Compass for the same as shown below:
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfoiUUy1S50hNIUGC05dgOEn0cWFCiRNPTnPZbNN2Bm-akFJcfyWfVsLF0vm8yhrmOF22Pf5jKgkGv8VY0pe64d-TeChkOwT_FO5pMPjjSX5gL_s_Trc_35ZgzN8FG_TIT1P_kqUA?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXfoiUUy1S50hNIUGC05dgOEn0cWFCiRNPTn-46661f16.png)
 
 Figure: Post rollback, collection is empty.
 
 In Liquibase with MongoDB, two special collections are automatically created and managed by Liquibase to track and control database changes:
 
 This table explains two important internal collections used by **Liquibase in MongoDB** to manage database change tracking and ensure safe deployments. The **databasechangelog** collection keeps a record of all applied changesets, including details like the id, author, filename, and dateExecuted, so Liquibase knows what has already been executed. The **databasechangeloglock** collection is used to **prevent concurrent updates** by managing a locking mechanism. It includes fields like locked, lockGranted, and lockedBy, ensuring that only one process can apply changes at a time, avoiding conflicts or duplicate executions.
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcOUJFtdcQjSY7m6B_S5OZMFTnbkfiGE_aV9GOUbWfvdmVsxWyUIDYfmurFa8zSDFsUryBqv9z2BwoDwRmO-17tyBerjUVncma4G5y5QJZ3W1dKrk4Enf04484GvHCjDOFZ9GI1Ww?key=kYj68YH2LkWKvX_ueHC8rQ)
+![](AD_4nXcOUJFtdcQjSY7m6B_S5OZMFTnbkfiGE_aV-18a6f385.png)
 
 Figure: Liquibase generated collections inside the MongoDB database.
 
@@ -279,7 +279,7 @@ Figure: Liquibase generated collections inside the MongoDB database.
 * databasechangelog = "What changes have been applied?"
 * databasechangeloglock = "Is someone already running Liquibase right now?"
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfg_G5VO7eKsxhOgrBV1hY6PsfJCvs8wptKh3qnWsoFTpgdl1OuTubRQrE0GXKJP138ldkVylVp5jJkPPIbEjtlqgY44gSzTPLuhC9Vw5kgQgVww9hiFDNfBXhVV0S7hTewwgokgw?key=kYj68YH2LkWKvX_ueHC8rQ)Figure: Databasechangelog collection documents![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcXSEPB_M1PoAwHIF8KAds4wjFry4fnyhG89JF_pNQcDwFAE-lG1NWAVu6Ix6Mp5Eu9uSv6YAWoAV-uxQQE17lL6B2KOUETl8-HXjFdMVAB0_SFFKOXvrBONuuJ3WVfF-SCmffryA?key=kYj68YH2LkWKvX_ueHC8rQ)Figure: Databasechangeloglock collection document
+![](AD_4nXfg_G5VO7eKsxhOgrBV1hY6PsfJCvs8wptK-ef0ed9e2.jpg)Figure: Databasechangelog collection documents![](AD_4nXcXSEPB_M1PoAwHIF8KAds4wjFry4fnyhG8-0b0811d8.jpg)Figure: Databasechangeloglock collection document
 
 ### **5. Scripts used for this project**
 

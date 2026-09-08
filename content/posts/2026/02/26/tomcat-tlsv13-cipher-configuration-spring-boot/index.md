@@ -6,7 +6,7 @@ description: "A Tomcat update splits TLSv1.3 cipher configuration into a new att
 canonical: "https://www.herodevs.com/blog-posts/tomcats-tls-cipher-change-and-what-it-means-for-spring-boot-apps"
 authors:
   - "joe-kuhel"
-image: "tomcat.png"
+image: "tomcat.jpg"
 categories:
   - "Apache Tomcat"
   - "Java"

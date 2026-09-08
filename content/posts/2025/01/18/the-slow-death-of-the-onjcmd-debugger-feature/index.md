@@ -5,7 +5,7 @@ lastmod: "2025-01-20T08:14:47+00:00"
 description: "Learn about the rise and fall of the onjcmd Java debugger feature, from its inception to its eventual removal."
 authors:
   - "johannes-bechberger"
-image: "https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-2-2000x1500.png"
+image: "Figure_1-2-2000x1500-3124717d.png"
 categories:
   - "Debugging"
   - "Java"
@@ -28,7 +28,7 @@ To quote my own article:
 > A similar feature [long existed](https://mail.openjdk.org/pipermail/serviceability-dev/2019-May/028227.html) [in the SAPJVM](https://help.sap.com/docs/btp/sap-business-technology-platform/debug-application-running-on-sap-jvm). In 2019 [Christoph Langer](https://www.linkedin.com/in/christoph-langer-764280208) from SAP decided to [add it to the OpenJDK](https://bugs.openjdk.org/browse/JDK-8223456), where it was implemented in JDK 12 and has been there ever since.
 
 The alternative to using this feature is to start the debugging session at the beginning and only connect to the JDWP agent when you want to start debugging. But this was, for a time, significantly slower than using the onjcmd feature ([source](https://mostlynerdless.de/blog/2024/02/09/is-jdwps-onjcmd-feature-worth-using/)):
-![This image has an empty alt attribute; its file name is Figure_1-2-2000x1500.png](https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-2-2000x1500.png)
+![This image has an empty alt attribute; its file name is Figure_1-2-2000x1500.png](Figure_1-2-2000x1500-3124717d.png)
 
 After the feature had been merged, it was decided that it needed a [CSR](https://wiki.openjdk.java.net/display/csr/CSR+FAQs) because it was user-facing. But the feature wasn't it without its opponents, and the CSR was only accepted because the feature had already been merged:
 > After consultation with others including [Alan Bateman](https://bugs.openjdk.org/secure/ViewProfile.jspa?name=alanb) and [Mark Reinhold](https://bugs.openjdk.org/secure/ViewProfile.jspa?name=mr), I've concluded there is lack of technical consensus on this appropriateness of the feature in its current state to the platform.
@@ -64,7 +64,7 @@ This is probably one of the major reasons nobody wrote about it: nobody outside 
 
 So this feature was a hidden gem for a while, but as discussed in my article [Is JDWP's onjcmd feature worth using?](https://mostlynerdless.de/blog/2024/02/09/is-jdwps-onjcmd-feature-worth-using/), this feature is not worth using anymore:
 > Between JDK 11.0.3 and JDK 21, there have been improvements to the OpenJDK, some of which drastically improved the performance of the JVM in debugging mode. Most notable is the fix for [JDK-8227269](https://bugs.openjdk.org/browse/JDK-8227269) by Roman Kennke. \[...\]
-> ![This image has an empty alt attribute; its file name is Figure_1.png](https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1.png)
+> ![This image has an empty alt attribute; its file name is Figure_1.png](Figure_1-621d6cb9.png)
 >
 > This clearly shows the significant impact of the change. 11.0.3 came out on Apr 18, 2019, and 11.0.9 on Jul 15, 2020, so the onjcmd improved on-demand debugging for almost a year.
 
@@ -78,7 +78,7 @@ So, the feature has been hidden and has offered no benefits since mid-2020. It's
 > > Remove the onjcmd option from the JDWP agent and eliminate the corresponding VM.start_java_debugging command in the JVM. This will clean up the agent code and remove obsolete functionality that is no longer needed or used.
 
 For such CSRs, one also needs to state the compatibility risks. As explained before, there are possibly none outside of SAP. Together with my related [PR](https://github.com/openjdk/jdk/pull/21387), this will remove the feature from the OpenJDK, and JDK 24 will most probably be the first JDK since JDK 12 without the onjcmd debugger feature. RIP.
-![This image has an empty alt attribute; its file name is image.png](https://mostlynerdless.de/wp-content/uploads/2024/10/image.png)
+![This image has an empty alt attribute; its file name is image.png](image-91b0acc7.jpg)
 
 ## Conclusion
 
@@ -89,4 +89,4 @@ But what do you think? Do you have a use for onjcmd and will miss it? Whatever y
 *This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone. Thank you to Christopher Langer and Cris Plummer for the help with the CSR, and the PR.* *The article first appeared in October 2024 on my [personal blog](https://mostlynerdless.de).*
 
 P.S: Stuart Marks, aka Dr. Deprecator, likes the removal of unused features. I managed to meet him at Devoxx Belgium this week:
-![This image has an empty alt attribute; its file name is IMG_3764-2-2000x2000.jpeg](https://mostlynerdless.de/wp-content/uploads/2024/10/IMG_3764-2-2000x2000.jpeg)
+![This image has an empty alt attribute; its file name is IMG_3764-2-2000x2000.jpeg](IMG_3764-2-2000x2000-8b34ade4.jpeg)

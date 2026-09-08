@@ -33,14 +33,14 @@ In order to follow along with this article, it is assumed that you have already 
 **In order to connect to the Cassandra database hosted by DataStax Astra via CQL, we need to download the "Secure Connect Bundle".** This is a zip file containing SSL certificates and connection details for this exact database, allowing the connection to be made securely.
 
 This is available from the Astra dashboard, found under the "Connect" tab for our exact database, and then the "Java" option under "Connect using a driver":
-![](astra-secure-connect-1024x560.png)
+![](astra-secure-connect-1024x560.jpg)
 
 For pragmatic reasons, we're going to put this file into *src/main/resources* so that we can access it from the classpath. In a normal deployment situation, you would need to be able to provide different files to connect to different databases – for example, to have different databases for development and production environments.
 
 ### **2.2. Creating Client Credentials**
 
 **We also need to have some client credentials in order to connect to our database.** Unlike the APIs that we've used in previous articles, which use an access token, the CQL API requires a "username" and "password". These are actually a Client ID and Client Secret that we generate from the "Manage Tokens" section under "Organizations":
-![](astra-client-credentials-1024x610.png)
+![](astra-client-credentials-1024x610.jpg)
 
 Once this is done, we need to add the generated Client ID and Client Secret to our *application.properties*:
 
@@ -385,7 +385,7 @@ Once we've written our controller, we need a template to actually render the HTM
 We are injecting the data retrieved from Cassandra, as well as some other details. Thymeleaf automatically handles converting the objects within the *script* block into valid JSON. Once this is done, our JavaScript then renders a map using the Google Maps API and adds some routes and markers onto it to show our selected data.
 
 **At this point, we have a fully working application. Into this we can select some avengers to display, date and time ranges of interest, and see what was happening with our data:**
-![](avengers-map-1024x519-1.png)
+![](avengers-map-1024x519-1.jpg)
 
 ## **6. Conclusion**
 

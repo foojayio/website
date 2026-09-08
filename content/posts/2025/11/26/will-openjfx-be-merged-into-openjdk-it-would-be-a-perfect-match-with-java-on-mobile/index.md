@@ -5,7 +5,7 @@ description: "While looking for articles for the JFX Central Links Of The Week, 
 canonical: "https://webtechie.be/post/2025-11-05-openjfx-returning-to-openjdk/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

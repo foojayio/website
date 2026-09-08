@@ -82,7 +82,7 @@ This loop looks for the next possible timestamp (with the hostId) and attempts t
 
 With JMH, benchmarking this utility in a single-threaded manner is pretty easy.
 
-![](Screenshot-2023-06-06-at-1.19.15-PM-1013x1024.png)
+![](Screenshot-2023-06-06-at-1.19.15-PM-1013x1024.jpg)
 
 After less than five minutes, we get the following result on a windows laptop. You can get better results on a high-end server or desktop.
 

@@ -28,7 +28,7 @@ This includes the beans and endpoints mapping view, more live information displa
 
 We hope that these improvements make it easier to develop Spring applications and observe the state of application when it's running.
 
-[![Spring Boot dashboard smaller](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/06/springbootdashboard-1.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/06/springbootdashboard-1.png)
+[![Spring Boot dashboard smaller](springbootdashboard-1.png)](springbootdashboard-1.png)
 
 #### Fundamental Coding Experience Improvements
 
@@ -114,11 +114,11 @@ There will be many great updates coming in 2023, so please stay tuned, and see y
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 Feedback and suggestions
 

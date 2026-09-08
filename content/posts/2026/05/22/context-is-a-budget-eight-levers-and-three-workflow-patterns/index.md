@@ -55,7 +55,7 @@ A few things to notice:
 
 In a Copilot context, you can't see token counts directly — but you can see the symptom. Open **Output → "GitHub Copilot Chat"** and watch the `ccreq` lines: each one shows the model, latency, and request type per turn. When the same question takes three times longer in chat #2 than chat #1, you've just watched your token meter the entire time.
 
-![VS Code Output panel showing Copilot Chat ccreq lines — your free token meter](ccreq-log-650x510.png)
+![VS Code Output panel showing Copilot Chat ccreq lines — your free token meter](ccreq-log-650x510.jpg)
 
 ## The Eight Levers
 

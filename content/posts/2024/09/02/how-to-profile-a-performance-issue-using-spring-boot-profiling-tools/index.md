@@ -28,7 +28,7 @@ In this article, we explore the tools available for profiling performance issues
 ## Understanding Various Aspects of Profiling Performance Issues
 
 Profiling a Spring Boot performance issue involves analyzing the application's runtime behavior to identify and diagnose inefficiencies, bottlenecks, and resource constraints. This includes **monitoring CPU** and **memory usage** , **thread activity** , **garbage collection** , and **database interactions**. Profiling tools collect data on method execution times, resource usage, and other performance metrics to help pinpoint the root causes of performance issues.  
-![How to profile a performance issue using Spring Boot profiling tools - 1*YcY6m7k2T 2AD ymmgYq1w](https://miro.medium.com/v2/resize:fit:720/format:webp/1*YcY6m7k2T-2AD_ymmgYq1w.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
+![How to profile a performance issue using Spring Boot profiling tools - 1*YcY6m7k2T 2AD ymmgYq1w](1-YcY6m7k2T-2AD_ymmgYq1w-8df0123c.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
 Visualizing Spring Boot Performance Profiling Process
 
@@ -224,7 +224,7 @@ Run your Spring Boot application and test the endpoints. You can use a tool like
 > Simulate high traffic using [Jmeter](https://jmeter.apache.org/usermanual/get-started.html).
 
 Use load testing tools like Apache JMeter, Gatling, or Locust to generate a high volume of requests to your endpoints. This will help us to generate insight into Digma.
-![testing tools like Apache JMeter, Gatling, or Locust to generate a high volume of requests to your endpoints.](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*RJdOontfwrBFbzak7B2VAQ.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
+![testing tools like Apache JMeter, Gatling, or Locust to generate a high volume of requests to your endpoints.](1-RJdOontfwrBFbzak7B2VAQ-fb35b51b.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
 Let's look at Digma's features for understanding performance issues and analyzing our application.
 
@@ -234,7 +234,7 @@ The [duration](https://docs.digma.ai/digma-developer-guide/digma-features/analyt
 
 In observability, we can see all recent calls, and by clicking on calls we get to see the insights.
 
-{{< img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*OViVway4sDw2tYTuEfriiQ.png" class="size-large is-resized" alt="Duration" >}}
+{{< img src="1-OViVway4sDw2tYTuEfriiQ-d5ebcd9c.png" class="size-large is-resized" alt="Duration" >}}
 
 **Last Call Duration:**   
 
@@ -268,11 +268,11 @@ The [bottleneck](https://docs.digma.ai/digma-developer-guide/digma-features/insi
 By distinguishing between synchronous and asynchronous executions, it ensures that only blocking assets are marked as bottlenecks, allowing developers to focus on critical paths that directly impact user experience.
 
 We can add another method that simulates a more time-consuming process:
-![How to profile a performance issue using Spring Boot profiling tools - 1* vITaeRHSieVNTBaRVNMnw](https://miro.medium.com/v2/resize:fit:720/format:webp/1*-vITaeRHSieVNTBaRVNMnw.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
+![How to profile a performance issue using Spring Boot profiling tools - 1* vITaeRHSieVNTBaRVNMnw](1-vITaeRHSieVNTBaRVNMnw-4c71353d.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
 The bottleneck feature helps identify parts of your system that are causing delays by taking up a lot of processing time during a request. It points out which components are slowing things down and could potentially impact the overall performance of your application.
 
-![How to profile a performance issue using Spring Boot profiling tools - 1*itY7Ter9yVO1vNPmLmSoFA](https://miro.medium.com/v2/resize:fit:700/1*itY7Ter9yVO1vNPmLmSoFA.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
+![How to profile a performance issue using Spring Boot profiling tools - 1*itY7Ter9yVO1vNPmLmSoFA](1-itY7Ter9yVO1vNPmLmSoFA-e99e98ac.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
 **Performance Metrics:**
 

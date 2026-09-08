@@ -40,11 +40,11 @@ Using Build Server for Gradle is straightforward. You can follow these simple st
 
 #### Step 1 -- Install the "Extension Pack for Java" extension.
 
-[![Image javaext](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/javaext.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/javaext.png)
+[![Image javaext](javaext-280d47cf.png)](javaext-280d47cf.png)
 
 #### Step 2 -- Install the "Gradle for Java" extension. (Currently, Build Server for Gradle is integrated into [Gradle for Java extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle))
 
-[![](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/gradleext.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/gradleext.png)
+[![](gradleext.png)](gradleext.png)
 
 After installing this extension, you can enable Build Server for Gradle for import your Gradle projects.
 
@@ -52,7 +52,7 @@ By default, Build Server for Gradle will only import newly opened Gradle project
 
 If you wish to disable Build Server for Gradle, you can go to the settings and set '**java.gradle.buildServer.enable** d' to '**off.**'
 
-[![Turning build server for gradle off](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/11/bsg.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/11/bsg.png)
+[![Turning build server for gradle off](bsg-6e008410.png)](bsg-6e008410.png)
 
 ### Future Plans
 

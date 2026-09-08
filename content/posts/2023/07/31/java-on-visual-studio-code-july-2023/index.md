@@ -32,7 +32,7 @@ Previously, users have reported that our extensions did not have good support of
 
 With this decompiler, our extension allows you to directly click into libraries and it will automatically decompile the bytecode into readable source code. Inside the decompiled code, you can debug like what you do normally. We hope this feature will greatly boost your productivity during development. Here's a simple demo.
 
-![Decompiler experience upgrade](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/decompile_debugging.gif)
+![Decompiler experience upgrade](decompile_debugging.webp)
 
 Decompiler experience upgrade, image
 
@@ -46,13 +46,13 @@ However, we have heard from Java developers that sometimes these inline markers 
 
 Actually, Visual Studio Code has a setting that allows you to toggle inlay hints on the fly so you can turn it on/off as you are typing the code, easily tuning your experience. The setting can be found by searching for "inlay hints" and selecting the options from the image below.
 
-[![Toggling Inlay Hints on the fly](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/inlayhints.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/inlayhints.png)
+[![Toggling Inlay Hints on the fly](inlayhints-3e319c50.jpg)](inlayhints-3e319c50.jpg)
 
 Toggling Inlay Hints on the fly
 
 Here's a simple demo.
 
-![Toggle inlay hints on the fly demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/07/inlayhints.gif)
+![Toggle inlay hints on the fly demo](inlayhints-d95bd848.gif)
 
 Toggle inlay hints on the fly demo, image
 
@@ -106,11 +106,11 @@ In addition to code completion, we will continue to refine and optimize the reli
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 ## Feedback and suggestions
 

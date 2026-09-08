@@ -218,7 +218,7 @@ Virtual Threads enhance scalability and efficiency in cloud-native and serverles
 ## **Enhancements in the current APIs**
 
 Here's the full list of APIs that received updates:
-![](image-4-1024x707-1.png)
+![](image-4-1024x707-1.jpg)
 
 We'll quickly go through some of the most interesting enhancements.
 

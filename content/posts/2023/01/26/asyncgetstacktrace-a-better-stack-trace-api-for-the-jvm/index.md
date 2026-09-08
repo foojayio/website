@@ -71,7 +71,7 @@ He never implemented anything into his async-profiler.
 ## AsyncGetCallTrace
 
 The only other option left is to use `AsyncGetCallTrace`, an API added on the 19th of November 2002 in the JVMTI draft and removed two months later. This API is the asynchronous, non-safepoint-biased ([kind-of](https://jpbempel.github.io/2022/06/22/debug-non-safepoints.html)) version of `GetStackTrace`, called from signal handlers at any point of time:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgct_2-2000x1125.png)
+![](asgct_2-2000x1125-c8c811ba.jpg)
 
 ```cpp
 void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
@@ -122,7 +122,7 @@ These discussions eventually led to the proposal of `AsyncGetStackTrace` that is
 ## AsyncGetStackTrace
 
 The proposed API is essentially an extended, official, and well-tested version of `AsyncGetCallTrace`:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgst-2000x1125.png)
+![](asgst-2000x1125-f319748f.jpg)
 
 * it has its own `profile.h` header, so using it is easy
 * it returns much more information on individual frames, like compilation level (interpreted, C1, C2, ...) and info on inlining

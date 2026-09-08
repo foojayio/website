@@ -5,7 +5,7 @@ lastmod: "2023-05-30T12:42:36+00:00"
 description: "Combining the strengths of vector databases and real-time stream processing is an efficient way of processing data in real-time at scale."
 authors:
   - "fawaz-ghali"
-image: "qdrant.png"
+image: "qdrant.jpg"
 categories:
   - "Hazelcast"
   - "Tutorials"

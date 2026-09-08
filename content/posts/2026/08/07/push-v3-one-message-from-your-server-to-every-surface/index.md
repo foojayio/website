@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Push V3 connects one typed message to phones, widgets, and live surfaces](https://www.codenameone.com/blog/push-v3-new-cloud.jpg)
+![Push V3 connects one typed message to phones, widgets, and live surfaces](push-v3-new-cloud.jpg)
 
 Push notifications should be application infrastructure, not a pile of expiring certificates and provider-specific JSON.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -116,7 +116,7 @@ A lock-screen notification is only one destination. Widgets, Live Activities, th
 
 V3 reserves a typed `surface` object in the same envelope. Native bootstrap code can route a Surface command before the main application UI is running.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJQdXNoIFYzIGVudmVsb3BlIl0gLS0-IEJ7IlBheWxvYWQga2luZCJ9CiAgICBCIC0tPiBDWyJWaXNpYmxlIG5vdGlmaWNhdGlvbiJdCiAgICBCIC0tPiBEWyJBcHBsaWNhdGlvbiBkYXRhIl0KICAgIEIgLS0-IEVbIlN1cmZhY2UgY29tbWFuZCJdCiAgICBFIC0tPiBGWyJXaWRnZXQgdGltZWxpbmUiXQogICAgRSAtLT4gR1siTGl2ZSBBY3Rpdml0eSJdCiAgICBFIC0tPiBIWyJEeW5hbWljIElzbGFuZCBvciBjb21wbGljYXRpb24iXQogICAgQyAtLT4gSVsiUHVzaExpc3RlbmVyIG9uIHRoZSBDb2RlbmFtZSBPbmUgRURUIl0KICAgIEQgLS0-IEk=?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRCCiAgICBBWyJQdXNoIFYzIGVu-0037ac81.png)
 
 Consider a delivery application that is not running while the customer waits for a courier. A server push can update its Live Activity and Dynamic Island to say "Driver is 2 minutes away" without launching the main Codename One UI. On a platform without that Surface, the same campaign can deliver a normal notification instead.
 
@@ -128,7 +128,7 @@ The old arrangement often made an application team generate a push certificate, 
 
 The new console stores provider credentials for each application and environment. APNs can use a `.p8` signing key, which does not have the annual expiry cycle of the old certificate workflow. The push service signs provider requests and isolates credentials from campaign users.
 
-![Push application settings and provider credentials](https://www.codenameone.com/blog/push-v3-new-cloud/push-v3-console-settings.png)
+![Push application settings and provider credentials](push-v3-console-settings-e8f17dbe.jpg)
 
 Credentials are encrypted at rest and treated as write-only secrets in the console. Reading application settings does not return the secret value. This removes certificate hosting from your application server, but it does not remove normal secret hygiene: use a narrowly scoped provider key, rotate it when a team member or system boundary changes, and separate production from development.
 
@@ -136,11 +136,11 @@ Credentials are encrypted at rest and treated as write-only secrets in the conso
 
 The console separates applications, environments, subscriptions, audiences, messages, campaigns, and analytics.
 
-![Push applications, environments, and operational state in the console](https://www.codenameone.com/blog/push-v3-new-cloud/push-v3-console-overview.png)
+![Push applications, environments, and operational state in the console](push-v3-console-overview-f324f117.jpg)
 
 A device can register its provider token through the public client endpoint. It cannot declare an external user identity or attach arbitrary tags to itself. Those operations require the authenticated server API. Otherwise a modified client could simply label itself `premium`, `administrator`, or `patient-high-risk` and enter a segment it did not belong in.
 
-![A saved push audience built from server-assigned subscription data](https://www.codenameone.com/blog/push-v3-new-cloud/push-v3-console-audience.png)
+![A saved push audience built from server-assigned subscription data](push-v3-console-audience-d68e4312.jpg)
 
 Saved segments are evaluated on the server against application-scoped subscription data. A segment might select a locale, application version, platform, or a tag assigned by your backend. The audience is resolved when the message is sent, so a corrected tag does not require rebuilding a static mailing list.
 
@@ -152,7 +152,7 @@ Never place a password, access token, medical result, or other secret in a notif
 
 The new message view exposes queued, accepted, failed, and dead targets, including provider error information.
 
-![Per-message push state and provider outcomes](https://www.codenameone.com/blog/push-v3-new-cloud/push-v3-console-messages.png)
+![Per-message push state and provider outcomes](push-v3-console-messages-bebe3b33.jpg)
 
 This makes several operational checks possible:
 
@@ -185,13 +185,13 @@ We have also merged [phase one of a move from Maven Central to a Codename One re
 
 Maven Central has every right to set commercial usage limits and charge for infrastructure. Codename One also has a workload that is difficult to fit inside those limits. One release currently publishes enough duplicated fat-jar content that our dashboard reports 2.12 GB against an 80 MB storage guideline, 19,962 files against 1,000, and 27 releases against 7.
 
-![Maven Central publishing usage shows Codename One far beyond the soft guidelines](https://www.codenameone.com/blog/maven-central-cloudflare-r2/maven-central-limit.png)
+![Maven Central publishing usage shows Codename One far beyond the soft guidelines](maven-central-limit-2270580b.jpg)
 
 Those limits are soft guidelines, and the dashboard offers both open-source adjustments and a commercial plan. We are not leaving because Sonatype is doing something wrong. We are leaving because our weekly, multi-platform release shape is expensive to host there, while we can provide the same Maven layout free to users on infrastructure that fits it better.
 
 Phase one reduced a measured release payload from 229.5 MB to 76.9 MB. The release pipeline now copies the signed Central staging tree to R2, so it does not perform a second build with potentially different bytes.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJKdWx5IDMxPGJyLz5TaHJpbmsgYW5kIGR1YWwgcHVibGlzaCJdIC0tPiBCWyJBdWd1c3QgNzxici8-R2VuZXJhdGVkIFBPTXMgdXNlIFIyIl0KICAgIEIgLS0-IENbIlRocmVlLXdlZWsgb2JzZXJ2YXRpb24gd2luZG93Il0KICAgIEMgLS0-IERbIkF1Z3VzdCAyODxici8-TmV3IHJlbGVhc2VzIG9uIFIyIG9ubHkiXQogICAgQSAtLT4gRVsiTWF2ZW4gQ2VudHJhbCByZW1haW5zIGF1dGhvcml0YXRpdmUiXQogICAgQiAtLT4gRQogICAgRSAtLT4gRlsiRXhpc3RpbmcgQ2VudHJhbCB2ZXJzaW9ucyByZW1haW4gYXZhaWxhYmxlIl0=?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IExSCiAgICBBWyJKdWx5IDMxPGJy-35b61d0b.png)
 
 Existing projects can prepare for post-cutover versions by adding the repository to both Maven resolution paths:
 

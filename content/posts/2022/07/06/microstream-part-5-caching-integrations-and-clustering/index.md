@@ -5,7 +5,7 @@ lastmod: "2022-07-06T07:13:35+00:00"
 description: "In this article, we discuss MicroStream caching and clustering functionality. We also indicate the available integrations."
 authors:
   - "rudy-de-busscher"
-image: "microstream.png"
+image: "microstream.jpg"
 categories:
   - "Databases"
   - "DataEngineering"

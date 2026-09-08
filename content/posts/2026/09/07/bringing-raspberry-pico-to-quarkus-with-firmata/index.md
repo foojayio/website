@@ -5,7 +5,7 @@ lastmod: "2026-09-07T06:08:21+00:00"
 description: "Java applications are usually associated with APIs, databases, messaging systems, and cloud infrastructure. But Java can also interact with the physical…"
 authors:
   - "igor-de-souza"
-image: "pico_led_on_off-1024x683.png"
+image: "pico_led_on_off-1024x683.jpg"
 categories:
   - "Embedded"
   - "Quarkus"
@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-![](pico_top-1024x267.png)
+![](pico_top-1024x267.jpg)
 
 Java applications are usually associated with APIs, databases, messaging systems, and cloud infrastructure. But Java can also interact with the physical world—reading sensors, controlling LEDs, driving motors, and communicating with microcontrollers.
 
@@ -166,7 +166,7 @@ public class PicoService {
 ```
 
 ConfigurableFirmata identifies the Pico's built-in LED as logical pin 25.
-![](pico_led_on_off-1024x683.png)
+![](pico_led_on_off-1024x683.jpg)
 
 It is important to distinguish logical GPIO numbers from physical header positions. The RP2040 support documentation describes 30 logical pins, four analog inputs, and 16 PWM-capable pins. The analog inputs use logical indexes 26 through 29. See the official [ConfigurableFirmata board-support documentation](https://github.com/firmata/ConfigurableFirmata/blob/master/BoardSupport.md "ConfigurableFirmata board-support documentation") for the complete mapping.
 ![](pico_gpio.jpg)

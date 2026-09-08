@@ -5,7 +5,7 @@ lastmod: "2025-01-24T10:42:32+00:00"
 description: "If OpenJDK is the background source for your livelihood, you might want to contribute to future development of the OpenJDK. Find out how!"
 authors:
   - "kevinfarnham"
-image: "agreatmany.png"
+image: "agreatmany.jpg"
 categories:
   - "Java"
   - "Java Core"

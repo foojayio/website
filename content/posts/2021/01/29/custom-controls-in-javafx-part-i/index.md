@@ -165,7 +165,7 @@ And voilá here is the checkmark that you find in a JavaFX CheckBox control. But
 
 So in our case the new shape for the path should look as follows.
 
-![](Affinity-Designer-Untitled-Modified-3051.8-2021-01-15-16-45-35-630x510.png)
+![](Affinity-Designer-Untitled-Modified-3051.8-2021-01-15-16-45-35-630x510.jpg)
 
 And the CSS with the SVG path will look like follows:
 
@@ -236,7 +236,7 @@ But that's not all, because you can not only define the inset for all four sides
 
 The order of the four sides is defined as follows: top, right, bottom and left. Here is a little drawing that shows the example above and also the CSS style of the box in the CheckBox for the standard and "selected:focused" state:
 
-![](css-1-705x1024.png)
+![](css-1-705x1024.jpg)
 
 Now, with the insets in place, you can define a paint ("color" or "gradient") for each layer that was defined in the insets and put these paints in the -fx-background-color variable, separated by commas.
 

@@ -5,7 +5,7 @@ lastmod: "2023-05-03T07:43:19+00:00"
 description: "Pitting a seasoned Java developer against the all-knowing generative AI to find out... can AI generate a Java microservice end-to-end?"
 authors:
   - "roni-dover"
-image: "grid_0-700x350-1.png"
+image: "grid_0-700x350-1.jpg"
 categories:
   - "Cloud"
   - "Microservices"

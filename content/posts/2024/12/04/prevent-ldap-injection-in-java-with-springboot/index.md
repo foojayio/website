@@ -228,7 +228,7 @@ Entries in LDAP
 ### 🍃 Spring Boot part
 
 * **I created a Spring Boot** application using Spring Initializer, **including** dependencies for**Web, LDAP, and Thymeleaf** .  
-  [![Spring Boot dependencies](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&id=4207982 "Spring Boot dependencies")](https://uploads.strikinglycdn.com/files/6d011c45-5775-4276-9d55-af400cd5a7ef/ladp-3.png?t=1733143487&id=4207982 "Spring Boot dependencies")  
+  [![Spring Boot dependencies](ladp-3-bd4812f5.png "Spring Boot dependencies")](ladp-3-bd4812f5.png "Spring Boot dependencies")  
   This **lets me input the filter** and distinguished names (DN)**in the** Thymeleaf **form** . The form **then directs to a Spring Boot endpoint** , **which initiates the search** **in the** Open **LDAP** server.
 
 <!-- -->

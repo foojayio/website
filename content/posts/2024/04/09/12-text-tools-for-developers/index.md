@@ -46,7 +46,7 @@ In this example removing the '*\\b*' would find more matches.
 ## 4️⃣ Find Regular Expression
 
 Regular expressions are also useful to extract text. Japplis Toolbox has tools to keep lines containing the regular expression or just to extract the regular expression from the lines.  
-[![](toolbox-extract-regexp-netbeans-1024x576.png)](toolbox-extract-regexp-netbeans.png) *Japplis Toolbox Keep regexp tool running inside Apache NetBeans using the [NetBeans Applet Runner plugin](https://plugins.netbeans.apache.org/catalogue/?id=57)*
+[![](toolbox-extract-regexp-netbeans-1024x576.jpg)](toolbox-extract-regexp-netbeans.png) *Japplis Toolbox Keep regexp tool running inside Apache NetBeans using the [NetBeans Applet Runner plugin](https://plugins.netbeans.apache.org/catalogue/?id=57)*
 
 Note that it can also run embedded in Eclipse using the [Eclipse Applet Runner plugin](https://marketplace.eclipse.org/content/applet-runner-eclipse/) and that all tools mentioned in this article are available in the bookmarks of Applet Runner.
 

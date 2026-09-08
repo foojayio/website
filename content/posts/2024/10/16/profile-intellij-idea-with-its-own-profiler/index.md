@@ -6,7 +6,7 @@ description: "Analyzing a curious bottleneck in IntelliJ IDEA using the built-in
 canonical: "https://flounder.dev/posts/profile-idea-with-idea/"
 authors:
   - "igor-kulakov"
-image: "selfprofilingin.png"
+image: "selfprofilingin.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
@@ -27,13 +27,13 @@ This might be useful if you are writing an [IntelliJ IDEA plugin](https://plugin
 
 Also, regardless of whether you are a plugin author, the described case might be interesting to you because the profiling strategy that I'll cover is not exclusive to IntelliJ IDEA – you can use it to troubleshoot similar bottlenecks in other types of projects and using other tools.
 
-{{< img src="https://flounder.dev/img/profile-idea-with-idea/banner.png" class="size-medium" alt="Self-profiling IntelliJ IDEA – post banner" width="2400" height="1260" >}}
+{{< img src="banner-941a31d0.jpg" class="size-medium" alt="Self-profiling IntelliJ IDEA – post banner" width="2400" height="1260" >}}
 
 ## The problem
 
 In this post, we'll look at a rather interesting performance bottleneck I stumbled upon a couple of years ago. While working on a side project in IntelliJ IDEA, I noticed that finding tests (**Navigate** \| **Test** ) for classes with certain short names, such as `A`, was surprisingly slow, often taking 2 minutes or longer.
 
-![A dialog saying 'Searching for tests for class...'](https://flounder.dev/img/profile-idea-with-idea/go-to-test-dark.png)
+![A dialog saying 'Searching for tests for class...'](go-to-test-dark-23595b75.png)
 
 The presence of the bottleneck didn't seem to depend on the size of the project – even in projects consisting of a single class named `A`, the navigation would still take very long. I have never experienced delays related to this feature even in the huge IntelliJ IDEA monorepo, so the slowdown in an almost empty project seemed especially curious.
 
@@ -68,7 +68,7 @@ For this, go to the **Profiler** tool window and find the corresponding process 
 
 All these tools are covered in the [documentation](https://www.jetbrains.com/help/idea/profiler-intro.html), and in this post we will focus specifically on the profiler.
 
-![Clicking on the process in the 'Profiler' tool window reveals a menu with the 'Attach IntelliJ Profiler' option](https://flounder.dev/img/profile-idea-with-idea/attach-dark.png)
+![Clicking on the process in the 'Profiler' tool window reveals a menu with the 'Attach IntelliJ Profiler' option](attach-dark-b9dd5106.png)
 
 We need to attach the profiler *before* the problem happens. For example, if the problem arises as the result of calling some API, attach the profiler to the process first, then reproduce the events that cause the problem.
 
@@ -82,21 +82,21 @@ To analyze the snapshots, you have several [views](https://www.jetbrains.com/hel
 
 For the problem at hand, let's start with the **Timeline** view to see if we can spot anything unusual:
 
-![The 'Timeline' tab in the 'Profiler' tool window has a lot of green bars in one of the threads](https://flounder.dev/img/profile-idea-with-idea/timeline-dark.png)
+![The 'Timeline' tab in the 'Profiler' tool window has a lot of green bars in one of the threads](timeline-dark-99fb3057.png)
 
 Indeed, the timeline indicates that one of the threads was extraordinarily busy. The green bars correspond to the samples collected for a particular thread. By clicking any of these bars, we can see the corresponding stack trace for the sample.
 
-![Clicking a colored bar shows the stack trace in the right-hand side of the tool window](https://flounder.dev/img/profile-idea-with-idea/timeline-with-stack-trace-dark.png)
+![Clicking a colored bar shows the stack trace in the right-hand side of the tool window](timeline-with-stack-trace-dark-20dd72fb.png)
 
 The stack traces from individual samples suggest that the thread's activity is associated with finding tests. However, we still don't see the big picture. Let's navigate to the busy thread on the flame graph:
 
-![Flame graph with two highlighted methods that occupy almost the entire graph's width](https://flounder.dev/img/profile-idea-with-idea/flame-graph-dark.png)
+![Flame graph with two highlighted methods that occupy almost the entire graph's width](flame-graph-dark-5c53ce64.png)
 
 The methods that might be of interest to us, `JavaTestFinder.findTestsForClass()` and `KotlinTestFinder.findTestsForClass()`, are right at the bottom of the graph. We don't take into account the folded methods below them, as they don't have significant self-time or branching. They control flow rather than perform intense computations.
 
 To verify whether these methods are indeed related to the slowdown, we can profile a non-problematic case: search for tests for a class with a more realistic name, for example, `ClassWithALongerName`. Then, we'll see what happens to these methods using the [diff view](https://flounder.dev/posts/get-started-with-profiling/#snapshots-diff).
 
-![Method list tab with 'findTestsForClass' query shows the corresponding methods with 93-95% difference](https://flounder.dev/img/profile-idea-with-idea/method-list-diff-dark.png)
+![Method list tab with 'findTestsForClass' query shows the corresponding methods with 93-95% difference](method-list-diff-dark-7d1e9754.png)
 
 The newer snapshot contains 93-95% fewer samples with `JavaTestFinder.findTestsForClass()` and `KotlinTestFinder.findTestsForClass()`. The runtime of the other methods doesn't differ that much. It seems like we are going in the right direction.
 
@@ -123,11 +123,11 @@ The code is filtering the short names that are currently in the cache using a re
 
 By [logging](https://flounder.dev/posts/logpoints-tricks/#logging-breakpoints) the class names after the condition, we get all the classes that pass it.
 
-![Breakpoints dialog with the following condition: "Searching for class:" + eachName and the Suspend checkbox cleared](https://flounder.dev/img/profile-idea-with-idea/logging-breakpoint-dark.png)
+![Breakpoints dialog with the following condition: "Searching for class:" + eachName and the Suspend checkbox cleared](logging-breakpoint-dark-c4255f79.png)
 
 When I executed the program, it logged about 25000 classes, a surprisingly large number for an empty project!
 
-![Console displays lots of lines saying Searching for class: followed by a class name](https://flounder.dev/img/profile-idea-with-idea/log-classes-dark.png)
+![Console displays lots of lines saying Searching for class: followed by a class name](log-classes-dark-c421227e.png)
 
 The logged class names are clearly coming from somewhere else, not my 'Hello World' project. The mystery is solved: IntelliJ IDEA takes so long to find tests for class `A`, because it checks *all* the cached classes, including dependencies, JDKs, and even classes from other projects. Too many of them pass the filter because they [all have](https://en.wikipedia.org/wiki/Letter_frequency) the letter `A` in their names. With longer and more realistic class names, this inefficiency would have remained unnoticed, just because most of these names would have been filtered out by the regex.
 

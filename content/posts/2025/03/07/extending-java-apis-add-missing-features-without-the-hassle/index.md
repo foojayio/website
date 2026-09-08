@@ -72,11 +72,11 @@ Manifold has ready-made extensions for many built-in Java classes. In fact, all 
 
 To understand this and some of the other capabilities around this feature we first need to understand how it works. Manifold can't add a method to an existing Java class. The JVM doesn't allow it. Instead, it does something very simple, it replaces the call to the class with a call to the extension. Since this is done during compile time the call is static and very efficient. There's no inherent runtime overhead.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/a6xlwj10os1j8f59xiqm.jpeg)
+![Image description](a6xlwj10os1j8f59xiqm-5657cd84.jpeg)
 
 If during this process Manifold notices that a method with that signature already exists, it uses the actual method. This is important, if we want to use a feature that isn't yet available in the current version of Java, we can mock it with Manifold and then when we finally upgrade the transition would be seamless. We won't even need to remove Manifold!
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fjqpna2nwtszbwemp5kh.jpeg)
+![Image description](fjqpna2nwtszbwemp5kh-020bd266.jpeg)
 
 The extension libraries include too many features to cover here. String is extended with many common methods such as `substringAfterLast(delimiter)`, `removePrefix(String)`, `padStart(length, char)`, etc. Code like this does what you would expect:
 

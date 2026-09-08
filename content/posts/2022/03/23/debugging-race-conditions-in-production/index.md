@@ -52,7 +52,7 @@ This is pretty easy to do with Lightrun. We can log the thread that is in the su
 
 The easiest thing we can do is add a log entry such as this:
 
-![Create Log](https://cdn.hashnode.com/res/hashnode/image/upload/v1647171179152/m6wbPhDJb.png)
+![Create Log](m6wbPhDJb-d7f238a9.jpg)
 
 The log prints "Thread {`Thread.currentThread().getName()`} entered", we can add the corresponding "exited" version at the end of the piece of code. But this brings us to a fresh problem.
 
@@ -62,7 +62,7 @@ The solution is a multi-part solution. First, we can use logs as we did above to
 
 Next, we need to verify that there's a large volume of requests. For that, we can add a counter:
 
-![Create Counter](https://cdn.hashnode.com/res/hashnode/image/upload/v1647171229573/7UuAgc5oc.png)
+![Create Counter](7UuAgc5oc-77bb44b9.jpg)
 
 We can also narrow this further by limiting the counting to a specific thread e.g. for "Thread 1" we can set the condition to:
 
@@ -72,7 +72,7 @@ Thread.currentThread().getName().equals("Thread 1")
 
 Finally, we can use a snapshot with multiple captures:
 
-![Create Snapshot](https://cdn.hashnode.com/res/hashnode/image/upload/v1647171271171/YlIQ34Aa1.png)
+![Create Snapshot](YlIQ34Aa1-f3990930.jpg)
 
 Notice the "Max Hit Count" below. It will trigger 20 separate hits. We can then review them and see the corresponding stack traces. If the path doesn't include synchronization or includes a bad monitor, there could be a problem here.
 
@@ -88,7 +88,7 @@ Here we add a multi-hit snapshot when the setter method is invoked with a differ
 
 The condition is:
 
-![Snapshot with different condition](https://cdn.hashnode.com/res/hashnode/image/upload/v1647171321596/8YPXrjo3W.png)
+![Snapshot with different condition](8YPXrjo3W-cdd71c3b.png)
 
 ```java
 !Thread.currentThread().getName().equals("Thread 1")

@@ -152,7 +152,7 @@ val otel = GlobalOpenTelemetry.get()
 
 At runtime, the agent will work its magic to return the instance. Here's a simplified class diagram focused on tracing:
 
-![](otel-tracer-api-1024x527.png)
+![](otel-tracer-api-1024x527.jpg)
 
 In turn, the flow goes something like this:
 

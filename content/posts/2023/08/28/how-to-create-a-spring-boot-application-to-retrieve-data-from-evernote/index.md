@@ -37,7 +37,7 @@ First, I wanted to make use of the Maven dependency to access the functionality 
 
 The starting place for all of my Spring Boot applications is the [Spring Initializr](https://start.spring.io/). I only changed a couple of description fields and didn't add any dependencies yet, as I'll only need one dependency added manually for now.
 
-![Spring](spring-initializr.png)
+![Spring](spring-initializr.jpg)
 
 After downloading the project, I opened it in my IDE and added the Evernote dependency to the `pom.xml` file.
 

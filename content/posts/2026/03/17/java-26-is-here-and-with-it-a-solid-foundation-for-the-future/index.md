@@ -939,7 +939,7 @@ For more information on this feature, read [JEP 500](https://openjdk.org/jeps/50
 ### JEP 504: Remove the Applet API
 
 When the Java Platform rose to fame in the late 1990s and early 2000s, one of its main catalysts were Java applets and the Applet API. Java applets were small Java programs that could be embedded in web pages and run in a web browser, allowing developers to create interactive web applications. They were widely used for things like games, animations, and other interactive content on the web. People who weren't Java programmers at all at least knew the name 'Java' from their browser because of applets! (in roughly the same way as kids these days know about Java's existence because of a game called Minecraft.)
-![Hello! I am an applet!](https://hanno.codes/assets/images/blog/java-applet.png)
+![Hello! I am an applet!](java-applet-a1600453.png)
 
 However, over time, Java applets became less popular due to security concerns and the rise of alternative technologies such as JavaScript and HTML5. As a result, many browser vendors have removed support for them. This is why the Applet API [was deprecated in Java 9](https://openjdk.org/jeps/289), [deprecated for removal in Java 17](https://openjdk.org/jeps/398) and it's one of the reasons why it will be removed in its entirety in Java 26. On top of that, a necessary foundation for running applets by sandboxing untrusted code, the Security Manager, [was permanently disabled in Java 24](https://openjdk.org/jeps/486), providing another reason to finally sunset the Applet API.
 

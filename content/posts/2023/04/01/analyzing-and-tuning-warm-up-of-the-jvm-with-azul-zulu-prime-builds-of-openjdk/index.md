@@ -122,7 +122,7 @@ This test application is run on a small machine to see the impact of threads on 
 
 ### System Information
 
-Let's look at an example GC log. Open the log by running `java -jar GCLogAnalyzer2.jar gc.log`. Click the ![](https://docs.azul.com/prime/images/warmup/button-information.png) button to see the overall information about the process:
+Let's look at an example GC log. Open the log by running `java -jar GCLogAnalyzer2.jar gc.log`. Click the ![](button-information-d15fa965.png) button to see the overall information about the process:
 ![](screenshot-system-info-1024x242.png) System information of an application without additional flags.
 
 You can see that the process is running on 6 threads overall. Scrolling down to the bottom, you see the following for the test without additional parameters:

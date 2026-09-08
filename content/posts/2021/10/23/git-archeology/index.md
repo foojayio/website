@@ -51,11 +51,11 @@ Usually, this allows to hide some of the more trivial commits but requires `git`
 
 Luckily, this can also easily be achieved by the various editors by moving backward commit-wise. Looking at the history on GitHub, you can use the "View blame prior to this change" feature:
 
-![GitHub prior commits](github_prior.png)
+![GitHub prior commits](github_prior.jpg)
 
 Similarly, IntelliJ-based IDEs allow you to do the same using "Annotate Previous Revision":
 
-![IntelliJ Annotate Previous Commit](annotate_previous.png)
+![IntelliJ Annotate Previous Commit](annotate_previous.jpg)
 
 In case you're using Visual Studio Code, the excellent "GitLense" extension offers similar commands:
 

@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![More Surfaces, Same Deal: Cars, Sensors, Commerce, Video And Builds](https://www.codenameone.com/blog/one-codebase-more-surfaces.jpg)
+![More Surfaces, Same Deal: Cars, Sensors, Commerce, Video And Builds](one-codebase-more-surfaces.jpg)
 
 Last week's release post was about funding open source without the bait and switch. This week's release tests that idea again, because two of the new features touch paid infrastructure directly: Commerce and versioned builds.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -35,9 +35,9 @@ Here is what shipped.
 
 [PR #5281](https://github.com/codenameone/CodenameOne/pull/5281) adds a portable `com.codename1.car` API for Apple CarPlay and Google Android Auto. The important caveat is that car platforms are template-based. They do not allow an app to draw an arbitrary Codename One `Form` on the dashboard. You describe a driver-safe list, grid, message, pane, navigation, or now-playing template, and Codename One maps that to `CPTemplate` on CarPlay and `androidx.car.app` templates on Android Auto.
 
-![CarPlay list template rendered by the Codename One car API](https://www.codenameone.com/blog/carplay-android-auto-codename-one/carplay-list.png)
+![CarPlay list template rendered by the Codename One car API](carplay-list-2ff85766.png)
 
-![Android Auto grid template rendered by the Codename One car API](https://www.codenameone.com/blog/carplay-android-auto-codename-one/android-auto-grid.png)
+![Android Auto grid template rendered by the Codename One car API](android-auto-grid-0747322d.png)
 
 The API is zero cost when unused. Referencing `com.codename1.car` is what tells the build to inject CarPlay scenes, entitlements, Android Auto services, and the AndroidX dependency. Apps that never touch the package do not carry that code. Tomorrow's post walks through the template model, the simulator head unit, and the approvals you still need from Apple and Google.
 
@@ -72,9 +72,9 @@ The Secrets API has deliberately lower volume and is enabled for everyone. It fe
 
 Monday's post is mostly a failure-mode pass over Commerce: what it does, what it refuses to do, what happens when quota is exhausted, and why optional validation is not an IAP tax.
 
-![Commerce dashboard for receipt validation and entitlement tracking](https://www.codenameone.com/blog/commerce-secrets-without-iap-tax/commerce.png)
+![Commerce dashboard for receipt validation and entitlement tracking](commerce-14925472.jpg)
 
-![Secrets dashboard for cloud-managed app secrets](https://www.codenameone.com/blog/commerce-secrets-without-iap-tax/secrets.png)
+![Secrets dashboard for cloud-managed app secrets](secrets-3b1c282a.jpg)
 
 ## Versioned Builds Are Back
 
@@ -94,7 +94,7 @@ Subscription tiers limit versioned build access because old versions create supp
 
 [PR #5317](https://github.com/codenameone/CodenameOne/pull/5317) adds a sample-accurate `AudioMixer` for combining PCM tracks on one clock. [PR #5319](https://github.com/codenameone/CodenameOne/pull/5319) adds timed Whisper transcription, so generated videos can get SRT or VTT captions instead of plain text transcripts.
 
-![Frame-accurate VideoIO decode output from the Codename One test app](https://www.codenameone.com/blog/videoio-audio-mixer-whisper/videoio-decoded-frames.png)
+![Frame-accurate VideoIO decode output from the Codename One test app](videoio-decoded-frames-282e5493.jpg)
 
 Wednesday's post shows how these pieces fit: render frames, mix audio, encode a video, decode frames back out, and attach timed captions.
 

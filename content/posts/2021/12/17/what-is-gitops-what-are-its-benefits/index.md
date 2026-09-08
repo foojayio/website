@@ -6,7 +6,7 @@ description: "Let's understand what GitOps is and its benefits and learn how Arg
 canonical: "https://ashishtechmill.com/what-is-gitops-and-what-are-its-benefits"
 authors:
   - "yrashish"
-image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbqm_y.jpeg"
+image: "qHmKbqm_y-72a1bef0.jpeg"
 categories:
   - "Books"
   - "DevOps"
@@ -18,7 +18,7 @@ frozen: false
 
 The following article is an excerpt from my book **Effortless Cloud-Native App Development Using Skaffold** from Packt Publishing.
 
-![B17385_Mockup Cover_High Res.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbqm_y.jpeg)
+![B17385_Mockup Cover_High Res.jpg](qHmKbqm_y-72a1bef0.jpeg)
 
 It is available for order from [Amazon.com](https://www.amazon.com/Effortless-Cloud-Native-Development-using-Skaffold/dp/1801077118) and directly from [Packt](https://www.packtpub.com/product/effortless-cloud-native-apps-development-using-skaffold/9781801077118). This excerpt comes from chapter 9: Creating a Production-Ready CI/CD Pipeline with Skaffold:
 

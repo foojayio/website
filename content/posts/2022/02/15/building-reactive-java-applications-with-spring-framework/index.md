@@ -47,7 +47,7 @@ The steps we will take you through are:
 Follow the [step-by-step instructions](https://github.com/datastaxdevs/workshop-spring-reactive) to [create your Astra database](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), and once your database is ready, you can copy your credentials over to [GitHub](https://github.com/datastaxdevs/workshop-spring-reactive).
 
 Most Java developers use **synchronous programming**. When you initiate a session, you execute quickly and you will get a response. Then you send the parameter to the API, and the driver will create a query. You bind the parameter that simply maps the parameter to the query. You execute the query and get back an object called a ResultSet.
-![](0_SI3IRVrpySGMTkGT.png) Figure 3: Synchronous queries weaknesses.
+![](0_SI3IRVrpySGMTkGT.jpg) Figure 3: Synchronous queries weaknesses.
 
 The issue with synchronous programming is that you need to wait. It can take a lot of time if you are querying for a lot of data, or a big cluster. Although synchronous programming is very simple, it can block communication. This means that nothing else in the application proceeds until the result from the query is returned. The application blocks for the entire round trip, from when the query is first sent to the database until the results are retrieved and returned to the application.
 

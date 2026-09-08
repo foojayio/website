@@ -104,13 +104,13 @@ You can inspect images created by Jib using the [Dive](https://github.com/wagood
 
 /apps/classes,/apps/libs,/apps/resources
 
-![Screenshot 2021-01-08 at 7.30.23 PM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611246809879/6BWAJwpEI.png)  
+![Screenshot 2021-01-08 at 7.30.23 PM.png](6BWAJwpEI-d880144a.jpg)  
 
 Dive Image Layer screenshot.
 
 Dive also tells you if you are wasting any space and, if you are, then you can discover ways to shrink the size of your Docker/OCI image. However, in our case, no space is wasted! You can view the content of an image with a docker history command as well. Let's see what it looks like in the image below:
 
-![Screenshot 2021-01-09 at 1.15.58 PM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611168829601/xK66ceNKF.png)  
+![Screenshot 2021-01-09 at 1.15.58 PM.png](xK66ceNKF-476a4b8d.png)  
 
 Docker History Command screenshot.
 
@@ -139,7 +139,7 @@ In this article, we have covered some internals about Jib .i.e. image layering, 
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)
 
 ### Further Reading
 

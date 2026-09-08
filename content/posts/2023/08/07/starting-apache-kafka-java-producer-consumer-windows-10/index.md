@@ -5,7 +5,7 @@ lastmod: "2023-08-07T09:40:48+00:00"
 description: "Learn how to configure Kafka topics and create a Java-based Kafka Consumer and Producer, withApache Kafka v3.4 on Windows 10."
 authors:
   - "sumith-puri"
-image: "techila_shots_kafka_java_001.png"
+image: "techila_shots_kafka_java_001.jpg"
 categories:
   - "Kafka"
   - "Tutorials"
@@ -39,7 +39,7 @@ This article also provides the Maven Dependencies required to create, build and 
 
 Before you begin, [read the first article in this series](https://foojay.io/today/starting-apache-kafka-on-windows-10-kafka-v3-4/).
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2nkv25xSy_NUgdrbgmJi7wrcI1qvNHmd4nRDvGoMId_oMFjarwE89SV6KTDeaQ8lbjH5UPb40HGWwN2Cy8I5Cgv7PpI5bRhQDXrivE1tLbHpsiBrEmdfufTABWrRCdmQUMzHM5PITnglwHwrEmu7qLNFbjE9e6SPoxAFVYYvBKr1n2wMF0Oe7zUKbJoDi/w640-h360/techila_shots_kafka_java_001.png)
+![](techila_shots_kafka_java_001-396cc739.png)
 
 #### Maven Project (Eclipse) and Dependencies
 
@@ -249,7 +249,7 @@ Run the Above Application in your IDE or Command-Line.
 
 #### Typical Output from Running the Kafka Producer Consumer PoC
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEglbg9GBBUrvZY1epMjYK2RUmaw-bhLSgjQ4aRyZ25CnVPULdIu0OfxFSg9xqgKoy2SMEQHzGrTpLzNn3xSrjNSDDRwGOgxJKL6qlj9yeoYG07r2gp58e8P5si6-BrB0KA2l7j0kaTDfQiOcu4qBakQe7UScmejLrF5DXwtnS_1hqmq_JE8xpcIZ-CZR7rh=s16000)
+![](AVvXsEglbg9GBBUrvZY1epMjYK2RUmaw-bhLSgjQ-d63c8d09.png)
 
 The next article in this series will be the Spring Boot Kafka Consumer Producer Integration that is planned to be used in a real world Product.
 

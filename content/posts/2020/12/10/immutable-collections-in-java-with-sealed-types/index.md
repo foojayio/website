@@ -5,7 +5,7 @@ lastmod: "2021-07-12T05:11:09+00:00"
 description: "JDK 15 was released on September 15, 2020. JEP 360 Sealed Types was included as a preview feature in this release, with its second preview in JDK 16.  Sealed Types is part of Project Amber. Sealed classes or interfaces can be used to restrict the interfaces or classes that are allowed to extend them. Also learn about the source code for an experimental implementation of a collections framework can be found in the Deck of Cards Kata repo."
 authors:
   - "don-raab"
-image: "foojay-don-1-1-469x510.png"
+image: "foojay-don-1-1-469x510.jpg"
 categories:
   - "Sealed Classes"
   - "Tutorials"
@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="foojay-don-1-1-469x510.png" class="size-medium" width="469" height="510" >}}
+{{< img src="foojay-don-1-1-469x510.jpg" class="size-medium" width="469" height="510" >}}
 
 *Designing Immutable Collection using Sealed Types in JDK 15*
 
@@ -75,7 +75,7 @@ Experimenting with Sealed Types in JDK 15 has been interesting and encouraging. 
 The source code for an experimental implementation of a collections framework can be found in the [Deck of Cards Kata repo](https://github.com/BNYMellon/CodeKatas/tree/master/deck-of-cards-kata). The Deck of Cards Kata can be taken to become familiar with multiple collections frameworks including the latest versions of the[Java Collections + Streams framework](https://medium.com/javarevisited/7-best-java-collections-and-stream-api-courses-for-beginners-in-2020-3ad18d52c38), Apache Commons Collections, Google Guava and Eclipse Collections.
 
 The custom collections framework interfaces and implementations can be browsed online [here](https://github.com/BNYMellon/CodeKatas/tree/master/deck-of-cards-kata/src/main/java/bnymellon/codekatas/deckofcards/custom/collections). The following class diagram shows the interfaces in the framework, including the immutable collection interfaces that leverage Sealed Types.
-![](foojay-don-5-1024x592.png) A Custom Collections framework in the Deck of Cards Kata   
+![](foojay-don-5-1024x592.jpg) A Custom Collections framework in the Deck of Cards Kata   
 
 The experimental collections framework in the kata has been evolving to use [Project Amber](https://openjdk.java.net/projects/amber/) features as they become available as preview features in the JDK. The kata was upgraded to JDK 15 the day it was released. The framework now uses the following features from Project Amber:
 

@@ -43,7 +43,7 @@ I like to approach development incrementally.
 
 Here's an excerpt of the API:
 
-![Extract from the API model](playwright_api-1024x530.png)
+![Extract from the API model](playwright_api-1024x530.jpg)
 
 It translates into the following code:
 

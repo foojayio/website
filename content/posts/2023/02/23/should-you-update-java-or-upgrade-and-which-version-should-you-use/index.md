@@ -187,7 +187,7 @@ But once you have deployed a particular release, updating to newer versions beco
 Andrew Brygin, Staff Software Engineer, Azul
 
 Let's take a look at an example based on the [October 2022 Release Notes of Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/zulu-openjdk/release-notes/october-2022).
-![CHART: Quarterly release update for Azul Zulu Builds of OpenJDK version 19, 17, 15 13, 11, 8, 7, and 6.](https://www.azul.com/wp-content/uploads/FY23-Q4-Oracle-Compete-Educate-Java-Maintenance-pt2-table.png) *Versions info for Java 11 till 19 in the Azul Zulu Builds of OpenJDK Release Notes of October 2022*
+![CHART: Quarterly release update for Azul Zulu Builds of OpenJDK version 19, 17, 15 13, 11, 8, 7, and 6.](FY23-Q4-Oracle-Compete-Educate-Java-Main-9ad031ef.jpg) *Versions info for Java 11 till 19 in the Azul Zulu Builds of OpenJDK Release Notes of October 2022*
 
 ## The Shortest Path to Deploying CVE Fixes in Your Environment
 

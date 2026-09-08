@@ -229,7 +229,7 @@ services:
 
 Let's try to access the application via Apache APISIX. When we browse to , Apache APISIX redirects us to the Keycloak login page:
 
-![](keycloak-authentication-1024x804.png)
+![](keycloak-authentication-1024x804.jpg)
 
 If we log in successfully, we are allowed to access the app. Notice that we display the username of the person who logged in:
 

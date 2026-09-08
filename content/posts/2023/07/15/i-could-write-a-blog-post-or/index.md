@@ -23,7 +23,7 @@ This doesn't mean that these blog posts are terrible, just that they could need 
 Having a rather strict schedule pushes me to create content early and often, helping me to finalize and write down my ideas on a regular basis.
 
 But sometimes... Well sometimes I'm behind schedule (didn't write a blog post this week and the week before) and I could force myself to write a blog post, or ...  
-![](https://mostlynerdless.de/wp-content/uploads/2023/07/IMG_1480-2000x1500.jpg)
+![](IMG_1480-2000x1500-b4d66c37.jpg)
 
 ... just climb up a castle and enjoy being around friends, looking into the sunset. A blog post can wait a week, but life can't:
 > Life is what happens to us while we are making other plans.

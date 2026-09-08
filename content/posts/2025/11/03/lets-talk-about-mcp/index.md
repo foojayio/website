@@ -5,7 +5,7 @@ lastmod: "2025-11-03T17:30:09+00:00"
 description: "MCP overview, benefits and challenges and a concrete example of creation of an MCP server using Quarkus and using it from the IDE."
 authors:
   - "jonathan-vila"
-image: "Screenshot-2025-11-03-at-15.07.27-1024x484.png"
+image: "Screenshot-2025-11-03-at-15.07.27-1024x484.jpg"
 categories:
   - "AI"
   - "Java"

@@ -6,7 +6,7 @@ description: "Equifax had numerous firewalls in place that would have done all t
 canonical: "https://www.azul.com/blog/the-importance-of-java-security-updates/"
 authors:
   - "simonritter"
-image: "image-1024x679.png"
+image: "image-1024x679.jpg"
 categories:
   - "Security"
 related_posts:
@@ -61,7 +61,7 @@ Firstly, here is a list of the highest-scoring CVSS in updates since April 2019.
 | April 2019    | 9.0             | 8                     |
 
 For a full view on CVEs per update of the JDK, see [Foojay.io](https://javaalmanac.io/jdk/16/):
-[![](image-1024x679.png)](https://javaalmanac.io/jdk/16/)
+[![](image-1024x679.jpg)](https://javaalmanac.io/jdk/16/)
 
 As you can see, recently, things have been relatively quiet with only medium-level vulnerabilities being addressed, but there have been some high and one critical.
 

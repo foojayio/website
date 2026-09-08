@@ -29,4 +29,4 @@ These are the 8 best practices we discuss in [this article](https://snyk.io/blog
 8. Be careful with stored procedures
 
 [Read the full article](https://snyk.io/blog/sql-injection-cheat-sheet/).
-[![](8-best-practices-to-prevent-SQL-injection-attacks-1-1024x724.png)](https://snyk.io/blog/sql-injection-cheat-sheet/)
+[![](8-best-practices-to-prevent-SQL-injection-attacks-1-1024x724.jpg)](https://snyk.io/blog/sql-injection-cheat-sheet/)

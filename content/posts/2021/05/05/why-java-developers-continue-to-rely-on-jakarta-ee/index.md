@@ -5,7 +5,7 @@ lastmod: "2021-08-23T15:33:08+00:00"
 description: "Eclipse Foundation spoke to Java developers to discuss why they rely on Jakarta EE and the unique benefits of using Jakarta EE technologies."
 authors:
   - "ivar-grimstad"
-image: "https://www.agilejava.eu/wp-content/uploads/2021/03/JakartaEEWhitepaper.png"
+image: "JakartaEEWhitepaper-09e55960.jpg"
 categories:
   - "Jakarta EE"
   - "Kubernetes"
@@ -20,7 +20,7 @@ frozen: false
 
 Over the past year, the Eclipse Foundation spoke to leading Java developers around the world to discuss why they rely on[Jakarta EE](https://jakarta.ee/) and the unique benefits of using Jakarta EE technologies. Their input is captured in our white paper, which describes the important advantages Jakarta EE offers today and for the future.  
 
-{{< img src="https://www.agilejava.eu/wp-content/uploads/2021/03/JakartaEEWhitepaper.png" class="aligncenter size-large is-resized" width="222" height="288" >}}
+{{< img src="JakartaEEWhitepaper-09e55960.jpg" class="aligncenter size-large is-resized" width="222" height="288" >}}
 
 [Download the Jakarta EE white paper!](https://outreach.jakartaee.org/white-paper-java-applications)
 

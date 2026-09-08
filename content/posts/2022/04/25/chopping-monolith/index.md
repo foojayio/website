@@ -171,7 +171,7 @@ The biggest issue is regarding clients. Migrating an HTTP endpoint to a differen
 
 Just route the request to the new endpoint location, and you're done.
 
-{{< img src="chop-monolith-700x246.png" class="size-medium aligncenter" width="700" height="246" >}}
+{{< img src="chop-monolith-700x246.jpg" class="size-medium aligncenter" width="700" height="246" >}}
 
 ## Conclusion
 

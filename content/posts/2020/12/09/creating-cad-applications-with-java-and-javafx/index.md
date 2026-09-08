@@ -5,7 +5,7 @@ lastmod: "2021-01-21T12:02:33+00:00"
 description: "Some days ago I finished a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment. I believe, having a good UX, features users have been dying to have, good, well structured code that lets you continuously evolve and better maintain what you already have and finally topping all that with a nice looking user interface, are the markers to a successful application. I think we’ve been able to score high in all those markers."
 authors:
   - "pedro-vieira"
-image: "showcase-model-view-1024x555.png"
+image: "showcase-model-view-1024x555.jpg"
 categories:
   - "JavaFX"
   - "Use Cases"
@@ -16,7 +16,7 @@ frozen: false
 I'm a [Java (JavaFX) freelance consultant, Software Engineer and Software Designer](http://www.pixelduke.com/) and a few months ago I finished a CAD application for a client.
 
 This is a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment.
-![](showcase-model-view-1024x555.png)
+![](showcase-model-view-1024x555.jpg)
 
 After about one year of development, my client (he himself an energy rater) and I were able to finish the project within a much smaller time frame and a much smaller budget than other similar projects from competing companies. It wouldn't be an exaggeration to say that its cost was about 30 times less and it took at least less than half the time.
 
@@ -32,14 +32,14 @@ The purpose of the tool, called HERO, is to do the energy efficiency assessment 
 
 ### High Level View
 
-![](showcase-model-view2-1024x555.png)
+![](showcase-model-view2-1024x555.jpg)
 
 If you follow my [blog](http://www.pixelduke.com), you've probably noticed from the picture that the application is using [JMetro](https://www.pixelduke.com/java-javafx-theme-jmetro/).
 
 The picture above is from the Model view. In this view you create the project and enter all its data. The pane to the left is where you can view the visuals, and create the floor plan (visually). The pane to the right is the Datagrid where you see and enter data for all the objects of the project (walls, windows, floors, top lights, etc) in a table like format. All these views are inside a Dockpane like container that allows you to resize, restore and maximize each pane.
 
 There are also other views, inside the Model view, not shown in the picture. Like the library where you can create and manage the materials that you can use throughout your project, your custom assemblies for walls, the different types of windows, etc.
-![](showcase-results-view-1024x555.png)
+![](showcase-results-view-1024x555.jpg)
 
 After you run the simulation, you can also see the results of your energy efficiency modelling (picture above). The Results View shows a dashboard, with charts, tables, etc, that lets the user view at a glance how efficient the dwelling or dwellings are and quickly notice what might need to be readjusted.
 

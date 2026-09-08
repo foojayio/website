@@ -6,7 +6,7 @@ description: "Hidden classes allow frameworks to define classes as non-discovera
 canonical: "https://jfeatures.com/blog/HiddenClass"
 authors:
   - "vipin-sharma"
-image: "https://jfeatures.com/img/ebook_upd.png"
+image: "ebook_upd-ee1842a7.png"
 categories:
   - "JEPs"
   - "Tutorials"
@@ -270,7 +270,7 @@ Knowing language features like this helps you get the best java jobs, that's why
 
 Download this step by step guide for free!
 
-[![](https://jfeatures.com/img/ebook_upd.png)](https://jfeatures.com/)
+[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

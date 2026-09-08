@@ -26,7 +26,7 @@ The book is obviously written by a vendor, but it's very honest about that. It d
 There were also quite a few things that might not have crossed my mind, such as support for NTLM authentication or the availability of the Lucida fonts.
 
 The only errors I spotted were for the URLs in the book. There were several places (mostly near the front) where the .com was omitted from [openjdk-migration.com](http://www.openjdk-migration.com/) and once where the .com was .con instead.
-[![](image-1-1024x385.png)](https://www.azul.com/openjdk-migration/)
+[![](image-1-1024x385.jpg)](https://www.azul.com/openjdk-migration/)
 
 Also, as someone who used Java on Linux in the late 1990s, I think the History section should have at least mentioned Blackdown Java (which is kind of the primordial OpenJDK IMHO), because some of us remember volunteers stepped up to deliver Java on Linux when Sun ignored that platform.
 

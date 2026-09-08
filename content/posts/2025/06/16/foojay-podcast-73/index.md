@@ -10,7 +10,7 @@ authors:
   - "jens-knipper"
   - "karl-heinz-marbaise"
   - "miro-wengner"
-image: "episode-73-jcon-part-2.png"
+image: "episode-73-jcon-part-2.jpg"
 categories:
   - "Java"
   - "Java Core"

@@ -108,7 +108,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 * Performance both raw speed and resource usage
 * Application instrumentation and core telemetry
 
-![](image-4.png)
+![](image-4.jpg)
 
 ### [](https://info.payara.fish/hubfs/payara%20Core.png)Payara Server
 

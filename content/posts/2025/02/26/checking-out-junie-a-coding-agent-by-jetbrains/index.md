@@ -6,7 +6,7 @@ description: "Checking out Junie, a newly announced coding agent by JetBrains by
 canonical: "https://flounder.dev/posts/trying-out-junie/"
 authors:
   - "igor-kulakov"
-image: "banner-1.png"
+image: "banner-1.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Kotlin"
@@ -26,14 +26,14 @@ Recently, I talked about [Duplicate Finder](https://flounder.dev/duplicate-finde
 We agreed to think about adding the support soon. At the same time I got access to [Junie](https://www.jetbrains.com/junie/), a newly announced coding agent by JetBrains, which is currently in early access. After a while, a thought came to me that this is a great opportunity to try it in action.
 
 Coding agents are known to solve typical tasks well. But what about a project that is not based on a well-known framework and is outside a very common domain? As somewhat of a coding-agent skeptic, my expectations were mixed.
-![Post banner](https://flounder.dev/img/trying-out-junie/banner-1.png "Post banner")
+![Post banner](banner-1-5302c117.jpg "Post banner")
 
 Here is how it went.
 
 ## Installation and overview
 
 Junie is an IntelliJ IDEA plugin. Its UI adopts a familiar vertical tool window, similar to that of JetBrains AI Assistant or GitHub Copilot. Here's what it looks like:
-![Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox](https://flounder.dev/img/trying-out-junie/overview.png "Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox")
+![Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox](overview-ee42d00d.png "Junie UI consising of a text field, the 'add context' button, and the 'Brave Mode' checkbox")
 
 The minimalistic design only features a prompt field, a button for adding context, and a checkbox titled **Brave Mode**. This option controls whether Junie can run commands without double-checking with you. I'm not that brave yet, so I'll try that next time.
 
@@ -42,33 +42,33 @@ The minimalistic design only features a prompt field, a button for adding contex
 Before giving Junie the coding task, I downloaded a topic from AsciiDoctor guide  
 
 and placed it under `src/test/resources/` for Junie to use as test data and a reference.
-![Initial prompt (Implement AsciiDoc support)](https://flounder.dev/img/trying-out-junie/initial-prompt.png "Initial prompt (Implement AsciiDoc support)")
+![Initial prompt (Implement AsciiDoc support)](initial-prompt-6db658c6.png "Initial prompt (Implement AsciiDoc support)")
 
 For debugging purposes, I asked Junie to add the parsed blocks to a separate collection. This is because the actual index is structured in multiple levels, which makes it inconvenient to debug. For simplicity, I'd rather view the parsed elements as a flat structure if I need to check the results at runtime.
 
 ## 'Coding'
 
 After you enter the prompt, Junie breaks the task down into smaller items and starts to implement them. For adding the AsciiDoc support, it came up with the following plan:
-![Initial plan consisting of several sub-items](https://flounder.dev/img/trying-out-junie/initial-plan.png "Initial plan consisting of several sub-items")
+![Initial plan consisting of several sub-items](initial-plan-881b8b5c.png "Initial plan consisting of several sub-items")
 
 As Junie executes each item, it gives you the summary of the changes. You can review them right away, without having to wait for the entire workflow to complete:
-![Changes appearing in the chat dialog](https://flounder.dev/img/trying-out-junie/first-changes.png "Changes appearing in the chat dialog")
+![Changes appearing in the chat dialog](first-changes-614d20b8.png "Changes appearing in the chat dialog")
 
 By clicking the filenames, you can track the changes in the IntelliJ IDEA's diff view in a similar way to viewing Git changes or Local History.
-![Diff view](https://flounder.dev/img/trying-out-junie/diff.png "Diff view")
+![Diff view](diff-1ceb78b4.png "Diff view")
 
 After all items are completed, Junie proceeds with writing the tests and then prompts you to run them:
-![Junie reasons about how to test the changes, creates the tests, and prompts to run them](https://flounder.dev/img/trying-out-junie/tests.png "Junie reasons about how to test the changes, creates the tests, and prompts to run them")
+![Junie reasons about how to test the changes, creates the tests, and prompts to run them](tests-56ac2b8d.png "Junie reasons about how to test the changes, creates the tests, and prompts to run them")
 
 In this task, I gave Junie test data and explicitly requested tests. However, it appears that Junie generates them along with the test data by default. I experimented by running tasks without mentioning tests, and Junie created them anyway.
 
 After running the tests, which were successful in this case, Junie provides the summary of what has been done:
-![Junie gives the summary of the changes together with the list of changed files](https://flounder.dev/img/trying-out-junie/summary.png "Junie gives the summary of the changes together with the list of changed files")
+![Junie gives the summary of the changes together with the list of changed files](summary-a972b341.png "Junie gives the summary of the changes together with the list of changed files")
 
 ## Code quality
 
 Upon reviewing the code and tests, I found them well-structured and neat. What I really liked is that Junie changed not just the code required for the project to compile, but also took the extra step to introduce other meaningful changes in the context of the task.
-![Diff view](https://flounder.dev/img/trying-out-junie/diff-2.png "Diff view")
+![Diff view](diff-2-3401eb58.png "Diff view")
 
 **Tip:** **Evaluate Expression** has a lot of interesting use-cases beyond exploring collections. For example, you can use it to [prototype and apply fixes without restarting the program](https://flounder.dev/posts/efficient-debugging-exceptions/) or [arbitrarily modify its state](https://flounder.dev/posts/debugger-god-mode/)
 
@@ -81,7 +81,7 @@ Everything's good so far, but it appears that more work still needs to be done.
 ## Correcting the implementation
 
 One area where coding agents are not yet fully autonomous is identifying potential problems at runtime. Technically, the implementation is correct, and it passes all the tests. The results of the parsing are consistent, as seen in the **Evaluate** dialog.
-![The debugger's evaluate dialog showing the list of parsed blocks](https://flounder.dev/img/trying-out-junie/evaluate.png "The debugger's evaluate dialog showing the list of parsed blocks")
+![The debugger's evaluate dialog showing the list of parsed blocks](evaluate-d620a384.png "The debugger's evaluate dialog showing the list of parsed blocks")
 
 **Tip** : **Evaluate Expression** has a lot of interesting use-cases beyond exploring collections. For example, [here's how](https://flounder.dev/posts/efficient-debugging-exceptions/) you can use it to prototype fixes and apply them to a running application.
 
@@ -90,14 +90,14 @@ Everything looks fine, except processing a single file is taking a surprisingly 
 Of course, this guess might not be accurate, giving us a fascinating opportunity for [profiling](https://flounder.dev/posts/get-started-with-profiling/) (or reading documentation). Anyway, changing a JRuby dependency for a simple Kotlin implementation would very likely speed things up. So, I decided to ask Junie to rewrite the code using a custom parser.
 
 Rather than starting a new task, I used the **Follow up** prompt for that:
-![A follow-up prompt that says 'Could you replace the asciidoctorj library with a homemade no-frills implementation? It should pass the same test'](https://flounder.dev/img/trying-out-junie/follow-up.png "A follow-up prompt that says 'Could you replace the asciidoctorj library with a homemade no-frills implementation? It should pass the same test'")
+![A follow-up prompt that says 'Could you replace the asciidoctorj library with a homemade no-frills implementation? It should pass the same test'](follow-up-89f7a588.png "A follow-up prompt that says 'Could you replace the asciidoctorj library with a homemade no-frills implementation? It should pass the same test'")
 
 ## Results
 
 Junie revised the implementation as requested. Although I'm not very familiar with the AsciiDoc format, the parsing seems to be largely correct at the first glance. There is some room for improvement in parsing of the preamble, and likely something else, but it does its job.
 
 Running the updated Duplicate Finder on AsciiDoctor's own help detected some duplicates! The analysis took 350 milliseconds on my laptop:
-![Duplicate Finder UI showing duplicates in AsciiDoctor help](https://flounder.dev/img/trying-out-junie/results.png "Duplicate Finder UI showing duplicates in AsciiDoctor help")
+![Duplicate Finder UI showing duplicates in AsciiDoctor help](results-b741a83c.png "Duplicate Finder UI showing duplicates in AsciiDoctor help")
 
 The project with the [committed changes](https://github.com/flounder4130/duplicate-finder/compare/0530670ed98a5815394944f28446ca47e983dfba...f10dd6ac8e3cddb3ec5fb0cac45f56cd4a9bcbc9) is on my [GitHub](https://github.com/flounder4130/duplicate-finder). To try the new version of the app, you can find the instructions and the download link on the [Duplicate Finder page](https://flounder.dev/duplicate-finder/). Overall, the implementation might not be perfect, and it definitely requires more thorough checking, but still I'm very impressed by what you can get done in 5 minutes nowadays.
 

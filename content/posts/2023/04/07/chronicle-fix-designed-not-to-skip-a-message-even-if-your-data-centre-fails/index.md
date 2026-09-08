@@ -5,7 +5,7 @@ lastmod: "2024-01-09T12:59:47+00:00"
 description: "High availability is achieved in Chronicle FIX by failover, where workload is transferred in the event of a primary engine failure."
 authors:
   - "forough-goudarzi"
-image: "Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888-1.png"
+image: "Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888-1.jpg"
 categories:
   - "Jakarta EE"
   - "JavaFX"
@@ -40,7 +40,7 @@ Outgoing messages and sequence numbers from the acceptor are logged in a Chronic
 
 Since the secondary acceptor already has the state of the failed session, it can continue to exchange messages with the initiator from the state before the failure.
 
-![](Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888.png)  
+![](Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888.jpg)  
 *Figure 1. A high-level view of the Chronicle FIX failover mechanism and components*
 
 As Figure 1. shows, all the necessary components for failover are provided natively by Chronicle Software.

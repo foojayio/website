@@ -6,7 +6,7 @@ description: "The software bill of materials (SBOM) is quickly becoming an essen
 canonical: "https://snyk.io/blog/creating-sboms-snyk-cli/"
 authors:
   - "bmvermeer"
-image: "https://res.cloudinary.com/snyk/image/upload/f_auto,w_960,q_auto/v1738787589/Creating_SBOMs_with_the_SNyk_CLI_-_original_fu9ead.png"
+image: "Creating_SBOMs_with_the_SNyk_CLI_-_origi-928c6946.png"
 categories:
   - "Security"
   - "Snyk"
@@ -133,7 +133,7 @@ At the time of writing, this is still an experimental feature hence the \`--expe
 * SPDX: JSON version 2.3
 
 Please take a look at the [++Snyk CLI SBOM Test Documentation++](https://docs.snyk.io/snyk-cli/commands/sbom-test) for the latest updates on this feature and other available options.
-![](https://res.cloudinary.com/snyk/image/upload/f_auto,w_960,q_auto/v1738787589/Creating_SBOMs_with_the_SNyk_CLI_-_original_fu9ead.png)
+![](Creating_SBOMs_with_the_SNyk_CLI_-_origi-928c6946.png)
 
 #### Bomber
 
@@ -163,7 +163,7 @@ bomber scan --provider snyk --token xxx mysbom.json
 ```
 
 The output will show you all known vulnerabilities on your screen.
-![Bomber SBOM scanner with the Snyk integration provider for Java Maven dependencies.](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1707410787/blog-creating-sboms-bomber.jpg)
+![Bomber SBOM scanner with the Snyk integration provider for Java Maven dependencies.](blog-creating-sboms-bomber-03bfb7f8.jpg)
 
 ## Supplying up-to-date SBOMs with Snyk
 

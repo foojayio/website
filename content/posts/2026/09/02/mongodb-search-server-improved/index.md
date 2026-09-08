@@ -4,7 +4,7 @@ date: "2026-09-02T10:00:00+00:00"
 description: "The MongoDB Search Server for Java adds faceting, sorting, highlighting, weighted fields, and negative filters, with BSON pipeline tips and Docker deployment."
 authors:
   - "erik-hatcher"
-image: "Screenshot-2026-09-01-at-13.48.21-scaled.png"
+image: "Screenshot-2026-09-01-at-13.48.21-scaled.jpg"
 categories:
   - "Mongo"
 related_posts:
@@ -145,7 +145,7 @@ Dates are faceted using the same style as numbers, using boundaries and an optio
 Two features covered in one request, sorting and highlighting; the digested/default parameters are shown in the request section of the response:
 
 **/search?q=sunshine\&project=title,plot,year\&search=title,plot\&sort=year%20asc\&highlight=title,plot**
-![](unnamed-6-1024x1022.png)
+![](unnamed-6-1024x1022.jpg)
 
 The highlight parameter is a comma-separated list of field names used to highlight query terms. Highlighting snippets are returned in a _highlights section of each returned document. See commit [ea58891](https://github.com/mongodb-developer/mongodb-search-java-server/commit/e7ea5889114e58ccf6b677d5bab6683a9e8aa5e6) for details.
 

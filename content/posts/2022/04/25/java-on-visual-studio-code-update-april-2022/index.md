@@ -52,11 +52,11 @@ Once enabled, Visual Studio Code will show a hint on the parameter name in the m
 
 You can change this setting at any time by going to the "inlay" setting under Java
 
-[![Inlay Setting](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/inlaysetting.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/inlaysetting.png)
+[![Inlay Setting](inlaysetting-41f33145.png)](inlaysetting-41f33145.png)
 
 Here is a demo of the feature in action:
 
-![Inlay demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/inlay.gif)
+![Inlay demo](inlay-e04b6df4.webp)
 
 ### New Java Language Server Status UX
 
@@ -70,7 +70,7 @@ If you update to the latest version of Visual Studio Code and [Extension Pack fo
 
 Here is a demo:
 
-![LS demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/languageserverstatus.gif)
+![LS demo](languageserverstatus-e6d9a707.gif)
 
 As you can see from the demo above, currently the language status item provides the following information and action:
 
@@ -84,7 +84,7 @@ As you can see from the demo above, currently the language status item provides 
 
 If there is an issue or error, you will see an indicator on the status icon and you can click on "Show problems" to reveal the error details.
 
-[![Language Server Error](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/languageservererror.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/languageservererror.png)
+[![Language Server Error](languageservererror-069a2e7d.png)](languageservererror-069a2e7d.png)
 
 We hope this improvement will provide better user experience about the state of the Java language server and please share your feedback with us so we can continue to improve this area.
 
@@ -92,7 +92,7 @@ We hope this improvement will provide better user experience about the state of 
 
 As a minor feature update, we have also added a code action (from Quick Fix) to allow developers to easily extract lambda body to a method. Here is a quick demo:
 
-![Lambda demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/lambda.gif)
+![Lambda demo](lambda.gif)
 
 ### Lambda expression evaluation support in debugging
 
@@ -100,7 +100,7 @@ Lastly, we wanted to provide an update on lambda expression support in debugging
 
 Here is a quick demo of evaluating a variable from enclosing methods when using lambda in a chain call:
 
-![Debugging demo](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/04/debugginglambda.gif)
+![Debugging demo](debugginglambda-c0c2e486.gif)
 
 For complete list of supported case, please visit the [original issue](https://github.com/microsoft/vscode-java-debug/issues/754).
 

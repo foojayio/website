@@ -190,9 +190,8 @@ def rewrite_in_bundle(folder, old, new):
     """Repoint every reference to `old` at `new`, in this bundle's index only.
 
     Bundle images are referenced by BARE FILENAME (resource-url.html resolves a
-    name against the page's own folder), which is what makes a text replacement
-    safe -- the name is distinctive, and it appears in exactly these shapes, all
-    of which are live in content/:
+    name against the page's own folder), so a text replacement is the right
+    shape -- the name appears in exactly these four ways, all live in content/:
 
         ![alt](shot.gif)          markdown image
         image: "shot.gif"         the hero in frontmatter
@@ -200,13 +199,31 @@ def rewrite_in_bundle(folder, old, new):
         <img src="shot.gif">      raw HTML in a preserved block
 
     Scoped to this bundle, so a same-named image in another post is never touched.
+
+    WHOLE FILENAMES ONLY, and this is not defensive tidiness -- a plain
+    text.replace() corrupted two posts. One bundle holds both `dummies.png` and
+    `image-764x1024-dummies.png`; converting the first rewrote the SUFFIX of the
+    second, so its hero pointed at `image-764x1024-dummies.jpg`, a file nothing
+    ever wrote. `add-mnemonic-bookmark.png` went the same way. Nothing reported
+    it either: Hugo publishes a bundle resource that no longer matches a
+    reference without a word, and the hero is a card thumbnail and og:image on
+    every listing page -- validate/BuiltSite.java is what caught it, from eight
+    pages at once.
+
+    The lookbehind blocks a match preceded by another filename character, which
+    is exactly the `-dummies.png` case, while still matching every shape a real
+    reference takes: `](name.png)`, `image: "name.png"`, `name.png | caption`
+    and `src="name.png"`. The lookahead blocks `name.png2` without blocking a
+    filename at the end of a sentence.
     """
+    pattern = re.compile(r"(?<![A-Za-z0-9_.-])" + re.escape(old) + r"(?![A-Za-z0-9_-])")
     n = 0
     for md in index_files(folder):
         text = md.read_text(encoding="utf-8")
-        if old not in text:
+        replaced = pattern.sub(new, text)
+        if replaced == text:
             continue
-        md.write_text(text.replace(old, new), encoding="utf-8")
+        md.write_text(replaced, encoding="utf-8")
         n += 1
     return n
 
@@ -568,7 +585,7 @@ def main():
                     help="per-file target; matches Frontmatter.MAX_IMAGE_BYTES")
     ap.add_argument("--jpeg-quality", type=int, default=82,
                     help="re-encode quality for images that are ALREADY jpeg")
-    ap.add_argument("--png-min", type=int, default=300_000,
+    ap.add_argument("--png-min", type=int, default=100_000,
                     help="convert PNGs above this to JPEG")
     ap.add_argument("--png-jpeg-quality", type=int, default=85)
     ap.add_argument("--dry-run", action="store_true")

@@ -80,7 +80,7 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
 5. Disable "Add to ID token"
 
 The configuration must look like this:
-![](https://martinelli.ch/wp-content/uploads/2022/11/image-1024x723.png)
+![](image-1024x723-ac6f6f14.png)
 
 ## Vaadin Application with Security Configuration
 
@@ -139,15 +139,15 @@ spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_us
 ```
 
 Now you can start the application and open <http://localhost:8080>.
-![](https://martinelli.ch/wp-content/uploads/2022/11/image-1.png)
+![](image-1-8a4d5e94.png)
 
 As you can see in the menu on the left, there is only one entry, "Index".
 
 Click on the "Sign in" button in the lower left corner. This will direct you to the Keycloak login screen.
-![](https://martinelli.ch/wp-content/uploads/2022/11/image-2.png)
+![](image-2-1dce7fe8.png)
 
 Sign in with admin/admin, and you'll be redirected to the app:
-![](https://martinelli.ch/wp-content/uploads/2022/11/image-3.png)
+![](image-3-975eafca.png)
 
 Now you have access to all views.
 

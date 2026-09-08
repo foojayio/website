@@ -35,10 +35,10 @@ In this article, we would like to show how to deploy the Jakarta EE projects to 
 ## Kubernetes Installation
 
 First, let's create a Kubernetes cluster from the Jelastic marketplace. It's a fully automated process, so just follow our tutorial [Kubernetes Cluster Setup with Automated Scaling and Pay-per-Use Pricing](https://jelastic.com/blog/kubernetes-cluster-scaling-pay-per-use-hosting/).
-![Kubernetes Cluster installation](https://jelastic.com/blog/wp-content/uploads/2021/06/k8s-install.png)
+![Kubernetes Cluster installation](k8s-install-4f20bd9e.png)
 
 The topology of a simple development cluster can look like as follows:
-![Kubernetes Cluster](https://jelastic.com/blog/wp-content/uploads/2021/06/image6-1.png)
+![Kubernetes Cluster](image6-1-55b379bd.png)
 
 ## Jakarta EE Project Deployment
 
@@ -48,10 +48,10 @@ The topology of a simple development cluster can look like as follows:
 * The **postgres.yaml** will create a PostgreSQL database.
 * The **cargo-tracker.yaml** will deploy highly available topology of Jakarta EE application which consists of 2 replicas.
 
-![Jakarta EE Project Deployment](https://jelastic.com/blog/wp-content/uploads/2021/06/image9-1.png)
+![Jakarta EE Project Deployment](image9-1-7cfdd8dc.png)
 
 2. Use a configuration file manager to create these files on the Control plane node (formerly known as Master) of Kubernetes cluster.
-![Jakarta EE Deployment to Kubernetes](https://jelastic.com/blog/wp-content/uploads/2021/06/image1-1.png)
+![Jakarta EE Deployment to Kubernetes](image1-1-828e8ac6.png)
 
 With help of these files you will create the K8s resources:
 
@@ -69,7 +69,7 @@ To do this Issue:
 **$ kubectl get ing**
 
 As we can observe the **helloworld** application's ingress is holding the "/" context path.
-![kubernetes web shh](https://jelastic.com/blog/wp-content/uploads/2021/06/image10-1.png)
+![kubernetes web shh](image10-1-655090a4.png)
 
 Let's release the path for Cargo-tracker application deleting an existing ingress resource:
 
@@ -80,28 +80,28 @@ After ingress deletion, apply all of the mentioned files in the order as follows
 **$ kubectl apply -f postgres-secret.yaml**   
 **$ kubectl apply -f postgres.yaml**   
 **$ kubectl apply -f cargo-tracker.yaml**
-![kubernetes files](https://jelastic.com/blog/wp-content/uploads/2021/06/image5-1.png)
+![kubernetes files](image5-1-95a26568.png)
 
 ## Jakarta EE Project Testing
 
 Wait for a minute and check whether the mentioned above resources have been created and are running:
 
 **$ kubectl get secrets**
-![Jakarta EE Project Testing](https://jelastic.com/blog/wp-content/uploads/2021/06/image12-1.png)
+![Jakarta EE Project Testing](image12-1-00b31b7a.png)
 
 **$ kubectl get deploy**
-![jakarta ee inside kubernetes](https://jelastic.com/blog/wp-content/uploads/2021/06/image13-1.png)
+![jakarta ee inside kubernetes](image13-1-cfbb34aa.png)
 
 **$ kubectl get svc**
-![cargo tracker files](https://jelastic.com/blog/wp-content/uploads/2021/06/image8-1.png)
+![cargo tracker files](image8-1-9ccddc98.png)
 
 Finally, press the **Open in Browser** button to get to your application and check its workability.
-![open in browser jakarta ee application](https://jelastic.com/blog/wp-content/uploads/2021/06/image11-1.png)
+![open in browser jakarta ee application](image11-1-657f5265.png)
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/06/image2-1.png" class="is-resized" alt="cargo tracker" width="647" height="512" >}}
+{{< img src="image2-1-edb9acdd.jpg" class="is-resized" alt="cargo tracker" width="647" height="512" >}}
 
 You can check how the system works using demo Tracking ID **ABC123**.
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/06/image3-1.png" class="is-resized" alt="cargo tracker testing" width="645" height="600" >}}
+{{< img src="image3-1-91f08dc7.jpg" class="is-resized" alt="cargo tracker testing" width="645" height="600" >}}
 
 Congratulations! Application setup is finished successfully. Feel free to run your Jakarta EE projects inside Kubernetes clusters with [Jelastic PaaS Providers](https://jelastic.cloud/).

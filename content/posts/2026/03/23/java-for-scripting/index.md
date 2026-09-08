@@ -6,7 +6,7 @@ description: "Discover how Java has evolved into a powerful scripting language, 
 canonical: "https://lomagnette.github.io/posts/javascript-no-not-that-one-modern-automation-with-java/"
 authors:
   - "loic-magnette"
-image: "java-script-cover-700x467-1.png"
+image: "java-script-cover-700x467-1.jpg"
 categories:
   - "Java"
   - "Java Core"
@@ -21,7 +21,7 @@ related_posts:
 frozen: false
 ---
 
-![](java-script-cover-700x467.png)
+![](java-script-cover-700x467.jpg)
 
 ## The Scripting Dilemma
 

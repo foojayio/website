@@ -5,7 +5,7 @@ lastmod: "2026-08-31T12:20:55+00:00"
 description: "A Fully Stateless Jakarta Faces Marketplace with Server-Side Rendering — No HttpSession, No Saved ViewState, No Sticky Sessions (see the poc on: AliFaces…"
 authors:
   - "angelo-rubini"
-image: "alifaces-overview-1.png"
+image: "alifaces-overview-1.jpg"
 categories:
   - "Apache Tomcat"
   - "Arm"
@@ -37,7 +37,7 @@ The stack is deliberately mainstream: **Jakarta Faces 4.1, Mojarra 4.1.14, Prime
 
 The goal is simple: **any web node should be able to serve the next request, regardless of which node served the previous one.**
 
-[![](alifaces-overview.png)](alifaces-overview.png)
+[![](alifaces-overview.jpg)](alifaces-overview.jpg)
 
 ## Stateless Faces: an old idea, revisited
 
@@ -80,7 +80,7 @@ This is not a return to an obsolete architecture. Large e-commerce experiences s
 SSR remains useful for meaningful initial HTML, public content, SEO, reduced mandatory client-side work and caching. Jakarta Faces already starts from the server-rendered side; AliFaces combines it with stateless web nodes, CDN-delivered assets, potential edge caching and selective PrimeFaces Ajax.
 > **Server-Side Rendering is not the opposite of a modern frontend. It is one of the tools modern frontends use.**
 
-[![](alifaces-ssr-flow.png)](alifaces-ssr-flow.png)
+[![](alifaces-ssr-flow.jpg)](alifaces-ssr-flow.jpg)
 
 ## Modern UI is independent of the rendering model
 
@@ -110,7 +110,7 @@ One boundary is intentionally visible: with `InMemorySharedStore`, the cart can 
 
 Replace that adapter with Redis, a database or a data grid and both nodes use shared, persistent and atomic state. Faces pages and application services do not change.
 
-[![](alifaces-architecture-poster.png)](alifaces-architecture-poster.png)
+[![](alifaces-architecture-poster.jpg)](alifaces-architecture-poster.jpg)
 
 ## Takeaway
 

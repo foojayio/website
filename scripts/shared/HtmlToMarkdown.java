@@ -16,6 +16,9 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Shared body conversion for the WordPress -> Hugo migration scripts. Now used
@@ -159,8 +163,11 @@ public final class HtmlToMarkdown {
             .set(FlexmarkHtmlConverter.SETEXT_HEADINGS, false)
             .set(FlexmarkHtmlConverter.TYPOGRAPHIC_SMARTS, false);
 
-    // Images hosted on foojay.io die at cutover, so they are pulled local.
-    // Third-party images (youtube thumbs, badges, ...) are left untouched.
+    // EVERY image in a body is pulled local, whatever host serves it -- see
+    // localizeImages. Images on foojay.io die at cutover; a third-party image
+    // dies whenever its host feels like it, which is not a hypothetical: of the
+    // 1549 distinct external image URLs content/ referenced, 129 already 404 and
+    // render as a broken glyph on 46 posts today.
     private static final Pattern IMAGE_HREF =
             Pattern.compile("(?i)\\.(jpe?g|png|gif|webp|svg|avif)(?:[?#].*)?$");
 
@@ -176,6 +183,15 @@ public final class HtmlToMarkdown {
         // "WordPress genuinely serves both foo.png and foo.jpg". An Options is built
         // per content item and never shared across threads, so no synchronization.
         final Set<String> fetchedThisItem = new HashSet<>();
+        // Absolute URL -> the filename it was stored under, for THIS item. Two
+        // jobs, both of which only exist now that any host is localized:
+        // several references to one URL share one file, and two DIFFERENT URLs
+        // can never end up sharing one. Third-party basenames collide constantly
+        // -- content/ references `image.png` from four hosts and `unnamed-4.png`
+        // from two -- and a collision here is silent: Files.exists() would
+        // short-circuit and the second reference would quietly display the first
+        // host's picture. Same per-item, single-threaded lifetime as the set.
+        final Map<String, String> localizedThisItem = new HashMap<>();
 
         public Options(Path imageBaseDir, String imageUrlPrefix, String localHostSuffix,
                        String userAgent, int timeoutMs) {
@@ -1251,12 +1267,30 @@ public final class HtmlToMarkdown {
     // ---- image localization ---------------------------------------------
 
     /**
-     * Downloads every foojay-hosted image referenced in the body into this item's
-     * own image directory (imageBaseDir/itemSubpath/) and rewrites the reference
-     * to the local path. Covers both <img src>/srcset and <a href> lightbox links
-     * to image files. Third-party images (kept working after cutover) are left as-is.
+     * Downloads every image referenced in the body -- on ANY host -- into this
+     * item's own image directory (imageBaseDir/itemSubpath/) and rewrites the
+     * reference to the local path. Covers both <img src>/srcset and <a href>
+     * lightbox links to image files.
+     *
+     * IT USED TO LOCALIZE ONLY foojay.io, AND THAT WAS THE BUG. The reasoning was
+     * that a third-party image "keeps working after cutover" -- but a host we do
+     * not control is exactly the one that can stop serving without telling us,
+     * and the audit says it already has: 393 posts reference 1710 external
+     * images, and 129 of them across 46 posts are dead NOW. Hotlinking also
+     * spends someone else's bandwidth on every page view and leaks every reader's
+     * IP to whoever owns the host.
+     *
+     * A localized image is also one the site can SHRINK. cleanup/images.py caps
+     * the long edge and re-encodes, which is what keeps the build inside GitHub
+     * Pages' 1 GB artifact limit; a hotlink is 330 KB on average and outside
+     * anything this repo can measure or fix.
+     *
+     * Two exclusions, both because localizing would freeze something that is
+     * meant to be live rather than preserve something that is meant to be
+     * permanent -- see SKIP_LOCALIZING.
      */
     static void localizeImages(Element content, Options opts, String itemSubpath) {
+        restoreWordPressEmoji(content);
         for (Element img : content.select("img[src]")) {
             String local = localizeImage(img.absUrl("src"), opts, itemSubpath);
             if (local != null) {
@@ -1277,39 +1311,246 @@ public final class HtmlToMarkdown {
     }
 
     /**
+     * WordPress's emoji replacement, undone: it rewrites an emoji CHARACTER an
+     * author typed into `<img src="s.w.org/images/core/emoji/15.0.3/svg/1f680.svg"
+     * alt="\uD83D\uDE80">`, and the alt is the character itself -- so the original is
+     * recoverable exactly rather than approximated.
+     *
+     * Run before localization, so these become text instead of 23 emoji SVGs
+     * downloaded into eight post bundles. It is also what content/ should hold on
+     * its own terms: this file already treats an emoji in a BODY as the author's
+     * writing (see stripEmoji, which takes them out of titles only), and a
+     * contributor writing the same post today would type the character.
+     */
+    static void restoreWordPressEmoji(Element content) {
+        for (Element img : content.select("img[src*=/images/core/emoji/]")) {
+            String alt = img.attr("alt");
+            if (alt.isBlank()) continue;   // nothing to put back; localize it instead
+            img.replaceWith(new TextNode(alt));
+        }
+    }
+
+    /**
+     * Left hotlinked on purpose: a URL that is a live SERVICE rather than a
+     * picture. A GitHub Actions `badge.svg` reports whether a build passes right
+     * now (5 of these in content/), so a frozen copy would assert a two-year-old
+     * CI result for ever -- preserving it is the opposite of being accurate.
+     *
+     * Deliberately short. Everything else is localized, including the 15
+     * mermaid.ink diagrams (9 of which are already dead, which is the argument
+     * rather than against it -- though the real fix for those is a ```mermaid
+     * fence, which this site renders itself).
+     */
+    private static final Pattern SKIP_LOCALIZING = Pattern.compile(
+            "(?i)^https?://(?:[^/]+\\.)?github\\.com/[^?#]*/badge\\.svg(?:[?#]|$)");
+
+    /** A URL path that already names its own image format. */
+    private static final Pattern URL_IMAGE_EXTENSION =
+            Pattern.compile("(?i)\\.(jpe?g|png|gif|webp|svg|avif|bmp)$");
+
+    /** Content-Type -> the extension to store it under. */
+    private static final Map<String, String> EXTENSION_FOR_TYPE = new LinkedHashMap<>();
+    static {
+        EXTENSION_FOR_TYPE.put("image/jpeg", ".jpg");
+        EXTENSION_FOR_TYPE.put("image/jpg", ".jpg");
+        EXTENSION_FOR_TYPE.put("image/png", ".png");
+        EXTENSION_FOR_TYPE.put("image/gif", ".gif");
+        EXTENSION_FOR_TYPE.put("image/webp", ".webp");
+        EXTENSION_FOR_TYPE.put("image/avif", ".avif");
+        EXTENSION_FOR_TYPE.put("image/svg+xml", ".svg");
+        EXTENSION_FOR_TYPE.put("image/bmp", ".bmp");
+    }
+
+    /** Downloaded bytes above which cleanup/images.py has real work to do --
+     *  Frontmatter.MAX_IMAGE_BYTES is 4 MB, so this warns well before the check
+     *  fails rather than after. */
+    private static final int SHRINK_ABOVE_BYTES = 1_000_000;
+
+    /**
      * Localizes one image URL into this item's image directory, returning its new
-     * site-absolute path, or null to leave the reference unchanged (not a
-     * foojay-hosted image, or the download failed). Idempotent: an already-
-     * downloaded file is not fetched again, and an already-RE-ENCODED one is
-     * recognised under its new extension rather than fetched back (see
-     * convertedSibling).
+     * site-absolute path, or null to leave the reference unchanged (a data: URI,
+     * a live badge, something that turned out not to be an image, or a download
+     * that failed).
+     *
+     * IDEMPOTENT, and that is the whole difficulty now that any host is in scope:
+     *
+     *  - A foojay-hosted image keeps the exact behaviour it always had -- stored
+     *    under its own basename, so not one byte of what is already in content/
+     *    moves, and convertedSibling still recognises a file cleanup/images.py
+     *    re-encoded.
+     *  - AN EXTERNAL IMAGE IS STORED UNDER `<stem>-<hash of its URL>.<ext>`, and
+     *    the hash is not decoration. Third-party basenames collide constantly:
+     *    content/ has 58 bundles where an external URL's basename is ALREADY the
+     *    name of a file sitting in that bundle (`lambda.gif`, `layers.png`,
+     *    `banner-1.png`). Without the hash, Files.isRegularFile() sees that file,
+     *    short-circuits, and the reference silently displays a picture from a
+     *    different source -- the one failure mode this store cannot have, because
+     *    nothing downstream would ever report it. With it, "the file exists"
+     *    provably means "this URL was already downloaded".
+     *  - The lookup is by STEM, ignoring the extension, so a file images.py later
+     *    re-encoded (`foo-3f2a1b7c.png` -> `.jpg`) is found rather than
+     *    re-downloaded, and so a URL that carries no extension at all (221 of
+     *    content/'s external references -- Medium, Hashnode and Google
+     *    user-content serve images from extension-less paths) costs no request on
+     *    a re-run either. That is transfer/Authors.java's avatar rule, which is
+     *    why 203 converted avatars survive a re-scrape.
      */
     static String localizeImage(String absoluteUrl, Options opts, String itemSubpath) {
-        String filename = localImageFilename(absoluteUrl, opts.localHostSuffix);
-        if (filename == null) return null;
-        String dirRel = (itemSubpath == null || itemSubpath.isBlank()) ? "" : itemSubpath + "/";
-        Path out = opts.imageBaseDir.resolve(dirRel + filename);
+        if (absoluteUrl == null || absoluteUrl.isBlank() || absoluteUrl.startsWith("data:")) return null;
+        if (SKIP_LOCALIZING.matcher(absoluteUrl).find()) return null;
+
+        URI uri;
         try {
-            if (!Files.exists(out)) {
-                String converted = convertedSibling(out.getParent(), filename, opts);
-                if (converted != null) {
-                    System.out.println("  keeping " + converted + " (cleanup/images.py re-encoded "
-                            + filename + "); not re-downloading");
-                    return opts.imageUrlPrefix + dirRel + converted;
+            uri = URI.create(absoluteUrl);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        if (uri.getHost() == null) return null;
+
+        String dirRel = (itemSubpath == null || itemSubpath.isBlank()) ? "" : itemSubpath + "/";
+        Path dir = opts.imageBaseDir.resolve(dirRel.isEmpty() ? "" : dirRel);
+
+        // Same URL twice in one body -- one file, one download.
+        String seen = opts.localizedThisItem.get(absoluteUrl);
+        if (seen != null) return opts.imageUrlPrefix + dirRel + seen;
+
+        boolean onLocalHost = uri.getHost().endsWith(opts.localHostSuffix);
+        String stem = null;
+        String filename;
+        if (onLocalHost) {
+            filename = localImageFilename(absoluteUrl, opts.localHostSuffix);
+            if (filename == null) return null;
+        } else {
+            stem = externalStem(absoluteUrl, uri);
+            String ext = urlExtension(uri);
+            filename = ext == null ? null : stem + ext;   // null until the fetch names the format
+        }
+
+        try {
+            // Already on disk? Then nothing is fetched. For an external image the
+            // stem carries the URL hash, so this is an identity check and not a
+            // guess about two files that happen to share a name.
+            String onDisk = onLocalHost
+                    ? (Files.isRegularFile(dir.resolve(filename)) ? filename : convertedSibling(dir, filename, opts))
+                    : findByStem(dir, stem, opts);
+            if (onDisk != null) {
+                if (!onDisk.equals(filename)) {
+                    System.out.println("  keeping " + onDisk + " (already localized; not re-downloading)");
                 }
-                Connection.Response res = Jsoup.connect(absoluteUrl)
-                        .userAgent(opts.userAgent)
-                        .timeout(opts.timeoutMs)
-                        .ignoreContentType(true)
-                        .maxBodySize(0)
-                        .execute();
-                Files.createDirectories(out.getParent());
-                Files.write(out, res.bodyAsBytes());
-                opts.fetchedThisItem.add(filename);
+                opts.localizedThisItem.put(absoluteUrl, onDisk);
+                return opts.imageUrlPrefix + dirRel + onDisk;
+            }
+
+            Connection.Response res = Jsoup.connect(absoluteUrl)
+                    .userAgent(opts.userAgent)
+                    .timeout(opts.timeoutMs)
+                    .ignoreContentType(true)
+                    .maxBodySize(0)
+                    .execute();
+
+            // WHAT CAME BACK HAS TO BE AN IMAGE. A dead third-party URL rarely
+            // 404s cleanly -- it serves a login wall, a "post not found" page or
+            // a placeholder, all of them HTML with a 200. Writing that to
+            // foo.png would replace a broken image with a file that is broken
+            // for ever and looks localized.
+            String type = res.contentType() == null ? "" : res.contentType().toLowerCase(Locale.ROOT);
+            String baseType = type.contains(";") ? type.substring(0, type.indexOf(';')).trim() : type.trim();
+            if (!baseType.startsWith("image/")) {
+                System.err.println("  NOT an image, left hotlinked: " + absoluteUrl
+                        + " (Content-Type: " + (baseType.isEmpty() ? "none" : baseType) + ")");
+                return null;
+            }
+            if (filename == null) {
+                String ext = EXTENSION_FOR_TYPE.get(baseType);
+                if (ext == null) {
+                    System.err.println("  unknown image type, left hotlinked: " + absoluteUrl
+                            + " (" + baseType + ")");
+                    return null;
+                }
+                filename = stem + ext;
+            }
+
+            byte[] bytes = res.bodyAsBytes();
+            Path out = dir.resolve(filename);
+            Files.createDirectories(out.getParent());
+            Files.write(out, bytes);
+            opts.fetchedThisItem.add(filename);
+            opts.localizedThisItem.put(absoluteUrl, filename);
+            if (!onLocalHost) {
+                System.out.println("  localized " + absoluteUrl + " -> " + filename
+                        + " (" + bytes.length / 1024 + " KB)");
+            }
+            if (bytes.length > SHRINK_ABOVE_BYTES) {
+                System.out.printf("  %s is %.1f MB -- run cleanup/images.py before committing%n",
+                        filename, bytes.length / 1e6);
             }
             return opts.imageUrlPrefix + dirRel + filename;
         } catch (IOException e) {
             System.err.println("  image download failed: " + absoluteUrl + " -> " + e.getMessage());
+            return null;
+        }
+    }
+
+    /** `.png` etc. when the URL path names its format, else null. */
+    private static String urlExtension(URI uri) {
+        String path = uri.getPath();
+        if (path == null) return null;
+        Matcher m = URL_IMAGE_EXTENSION.matcher(path);
+        return m.find() ? m.group().toLowerCase(Locale.ROOT) : null;
+    }
+
+    /**
+     * The stem an external image is stored under: a readable piece of its own
+     * name plus 8 hex characters of its URL (see localizeImage for why the hash
+     * is mandatory). A URL with no usable name -- `.../max/1400/0*QMIuX6OHkdz`
+     * -- falls back to its host, so the file is still recognisable in a bundle.
+     */
+    static String externalStem(String absoluteUrl, URI uri) {
+        String path = uri.getPath() == null ? "" : uri.getPath();
+        String name = path.substring(path.lastIndexOf('/') + 1);
+        int dot = name.lastIndexOf('.');
+        if (dot > 0) name = name.substring(0, dot);
+        name = name.replaceAll("[^A-Za-z0-9._-]", "-").replaceAll("-{2,}", "-");
+        name = name.replaceAll("^[-.]+", "").replaceAll("[-.]+$", "");
+        if (name.length() > 40) name = name.substring(0, 40).replaceAll("[-.]+$", "");
+        if (name.isBlank() || name.chars().noneMatch(Character::isLetter)) {
+            String host = uri.getHost().toLowerCase(Locale.ROOT);
+            if (host.startsWith("www.")) host = host.substring(4);
+            name = host.replaceAll("[^a-z0-9]+", "-");
+        }
+        return name + "-" + shortHash(absoluteUrl);
+    }
+
+    /** First 8 hex characters of the SHA-256 of a URL. Stable across runs, which
+     *  is what makes the existence check above a no-fetch fast path. */
+    static String shortHash(String value) {
+        try {
+            byte[] d = MessageDigest.getInstance("SHA-256").digest(value.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder(8);
+            for (int i = 0; i < 4; i++) sb.append(String.format("%02x", d[i]));
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 is required by every JDK", e);
+        }
+    }
+
+    /**
+     * A file in dir whose name is `stem` plus any extension, or null. Extension-
+     * blind on purpose: it finds the file cleanup/images.py re-encoded (the stem
+     * never moves, only the suffix) and it answers for a URL whose own path
+     * carried no extension to begin with. A sibling fetched in THIS run is not a
+     * match, the same guard convertedSibling makes.
+     */
+    static String findByStem(Path dir, String stem, Options opts) {
+        if (stem == null || !Files.isDirectory(dir)) return null;
+        try (Stream<Path> entries = Files.list(dir)) {
+            return entries
+                    .map(p -> p.getFileName().toString())
+                    .filter(n -> n.startsWith(stem + ".") && !opts.fetchedThisItem.contains(n))
+                    .sorted()
+                    .findFirst()
+                    .orElse(null);
+        } catch (IOException e) {
             return null;
         }
     }

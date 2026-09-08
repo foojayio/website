@@ -17,7 +17,7 @@ related_posts:
 frozen: true
 ---
 
-![kaffeemuehle](https://www.dieckmann-aroma-kaffee.de/images/blog/kaffeemuehle.jpg)
+![kaffeemuehle](kaffeemuehle-2f2e0d93.jpg)
 
 In the book "[97 Things every Java Programmer should know](https://medium.com/97-things)" (I contributed 2 of the 97 tips) there is a chapter about some command line tools in the JDK.
 
@@ -376,7 +376,7 @@ Unfortunately this is not possible with summary or metadata, only with `print`.
 
 The better tool to evaluate JFR records is of course [JDK Mission Control (JMC)](https://adoptopenjdk.net/jmc.html), which was released as OpenSource since Java 11 and is also offered [by other vendors like Azul](https://www.azul.com/products/zulu-mission-control/).
 
-![VE3MaNh](https://i.imgur.com/VE3MaNh.png)
+![VE3MaNh](VE3MaNh-6319ad35.png)
 
 ## jdeprscan
 

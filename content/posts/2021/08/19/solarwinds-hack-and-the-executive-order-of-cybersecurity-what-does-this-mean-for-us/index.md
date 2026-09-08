@@ -5,7 +5,7 @@ lastmod: "2021-08-19T08:19:58+00:00"
 description: "New attack vectors are becoming more and more sophisticated and are directed more and more against the value chain in general!"
 authors:
   - "sven-ruppert"
-image: "http://img.youtube.com/vi/ClYhATBlBl0/mqdefault.jpg"
+image: "mqdefault-f6be976c.jpg"
 categories:
   - "DevOps"
   - "JFrog Artifactory"
@@ -28,7 +28,7 @@ Let's start with the story that got all of this rolling and made sure that the g
 
 We're talking about the SolarWinds Hack, of course. What happened here, exactly, and what is more critical: What are the lessons learned from this incident?
 > This blogpost is available as video as well!  
-> [![Executive Order and the SolarWinds Hack - what das it mean for us? - english - 4k](http://img.youtube.com/vi/ClYhATBlBl0/mqdefault.jpg)](https://youtu.be/ClYhATBlBl0 "Executive Order and the SolarWinds Hack - what das it mean for us? - english - 4k")
+> [![Executive Order and the SolarWinds Hack - what das it mean for us? - english - 4k](mqdefault-f6be976c.jpg)](https://youtu.be/ClYhATBlBl0 "Executive Order and the SolarWinds Hack - what das it mean for us? - english - 4k")
 
 It is essential to know that the SolarWinds company produces software that is used to manage network infrastructure. With the name "Orion Platform", this software helps manage and administer network components efficiently.
 
@@ -126,12 +126,12 @@ Cheers Sven
 
 Youtube Channel - Outdoor Nerd - English
 
-[![Youtube Channel English](https://yt3.ggpht.com/ytc/AAUvwniR1nyALB7XJIAL49WrhFCMjf39ALwQiAbUoOF1=s176-c-k-c0x00ffffff-no-rj)](https://bit.ly/Outdoor-Nerd "Youtube Channel - Outdoor Nerd")
+[![Youtube Channel English](AAUvwniR1nyALB7XJIAL49WrhFCMjf39ALwQiAbU-39df74d9.jpg)](https://bit.ly/Outdoor-Nerd "Youtube Channel - Outdoor Nerd")
 
 Youtube Channel - Sven Ruppert - German
 
-[![Youtube Channel German](https://yt3.ggpht.com/ytc/AAUvwnikcyASO4g2KHeCbCouznJ7oxIdBfUimaAVOC3CGFc=s176-c-k-c0x00ffffff-no-rj)](https://www.youtube.com/user/svenruppert "Youtube Channel - Sven Ruppert")
+[![Youtube Channel German](AAUvwnikcyASO4g2KHeCbCouznJ7oxIdBfUimaAV-6799bbc1.jpg)](https://www.youtube.com/user/svenruppert "Youtube Channel - Sven Ruppert")
 
 Youtube Channel - Sven Ruppert - Outdoor
 
-[![Youtube Channel German](https://yt3.ggpht.com/ytc/AAUvwnhZCtF1ebTwYW849Uu3l8VdQj62T_eaLsRJy6w2uA=s176-c-k-c0x00ffffff-no-rj)](https://www.youtube.com/channel/UCwFH8F7TNzY5Qi2K98ddNgw "Youtube Channel - Sven Ruppert private")
+[![Youtube Channel German](AAUvwnhZCtF1ebTwYW849Uu3l8VdQj62T_eaLsRJ-7867e37f.jpg)](https://www.youtube.com/channel/UCwFH8F7TNzY5Qi2K98ddNgw "Youtube Channel - Sven Ruppert private")

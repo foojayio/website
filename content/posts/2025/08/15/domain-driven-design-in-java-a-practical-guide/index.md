@@ -41,7 +41,7 @@ Result: We would create a glossary for your domain (ubiquitous language) with te
 ## Modeling the core Airport domain in Java
 
 Open a new Spring Boot project (use Spring Initializr) in your IDE (like IntelliJ IDEA) and name it \`airport-domain-demo\` as a Maven project.  
-![Creating new Java Project using Spring Initializr](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdV6QfcM9LjeZjnl09UlO_xaD_oP1Mmei_aR_qUGhqGN1IAk0_vEAEDC_cOyh9LzE_In8_s4zZMBhTVt5m3-waXWiiOHwCWivEuFBYnmmqVW6RzqqXtLlcfsx3g96NJlno1hwLsXA?key=EKoTlsiGwMVY6pWycWj_Pg)  
+![Creating new Java Project using Spring Initializr](AD_4nXdV6QfcM9LjeZjnl09UlO_xaD_oP1Mmei_a-b881c16d.jpg)  
 
 For the purpose of this demo, we will curtail our domain objects to a minimum, but in a real-world scenario, you would have a broader glossary of domain objects, their fields, and implementation than what's showcased in the demo.
 

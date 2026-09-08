@@ -67,13 +67,13 @@ Download the appropriate source file and add it as the main source file in a new
 
 First we need to debug the app. In IDEs from JetBrains, we just right click the executable file and select debug as such:
 
-![Screen Shot 2021-10-19 at 15.16.43.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1634756719807/8jHNnemXB.png)
+![Screen Shot 2021-10-19 at 15.16.43.png](8jHNnemXB-bb9ad404.jpg)
 
 Please notice you might need to wait for the IDE to finish scanning and indexing the files so it will show the appropriate debug action.
 
 The same is true for VSCode. Select the debug view on the left of the IDE and click the "Run and Debug" button.
 
-![Screen Shot 2021-10-19 at 16.27.39.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1634756764983/VKGY3QpPI.png)
+![Screen Shot 2021-10-19 at 16.27.39.png](VKGY3QpPI-d4eba484.jpg)
 
 You will be prompted with an environment to use, pick Node.js to continue.
 
@@ -81,10 +81,10 @@ Once you start debugging you can set a breakpoint by clicking once on the "gutte
 
 ## Running
 
-![Running on JetBrains IntelliJ/IDEA](https://cdn.hashnode.com/res/hashnode/image/upload/v1634756909711/3Ynut12B6.png)  
+![Running on JetBrains IntelliJ/IDEA](3Ynut12B6-94bf4e6f.jpg)  
 **Running on JetBrains IntelliJ/IDEA**
 
-![Running on VSCode](https://cdn.hashnode.com/res/hashnode/image/upload/v1634756974344/r-c89Vbb6.png)  
+![Running on VSCode](r-c89Vbb6-e6d34b90.jpg)  
 **Running on VSCode**
 
 We place a breakpoint on line in the file. Notice that the Java file is more elaborate than the other Prime Main files:
@@ -100,27 +100,27 @@ On the bottom right (for JetBrains) or the top left for VSCode, you can see the 
 
 We can change the values of variables using the "Set Value" feature:
 
-![Setting Value in JetBrains](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757073584/Thl0eRQkk.png)  
+![Setting Value in JetBrains](Thl0eRQkk-0387b30f.jpg)  
 **Setting Value in JetBrains**
 
-![Setting Value in VSCode](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757271261/Z4hmrkhLZ.png)  
+![Setting Value in VSCode](Z4hmrkhLZ-d6eea4f8.png)  
 **Setting Value in VSCode**
 
 This is extremely helpful for debugging edge cases. Just set the variable to the value you're having trouble with and reproduce the issue.
 
 A nice JetBrains feature lets you view a value differently e.g. as hex, binary etc.:
 
-![Screen Shot 2021-10-19 at 16.18.44.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757331027/tXxN9mt5p.png)
+![Screen Shot 2021-10-19 at 16.18.44.png](tXxN9mt5p-d2ede3d2.jpg)
 
 Finally we can right click on the breakpoint to edit it. We can set a condition for the breakpoint which will make execution stop only if the condition is met:
 
-![Conditional Breakpoint in JetBrains on IntelliJ/IDEA](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757365298/aZkAgUrSe.png)  
+![Conditional Breakpoint in JetBrains on IntelliJ/IDEA](aZkAgUrSe-1c60cea0.jpg)  
 **Conditional Breakpoint in JetBrains on IntelliJ/IDEA**
 
-![Conditional Breakpoint is added via Edit Breakpoint in VSCode](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757413237/ylJ4nUfvk.png)  
+![Conditional Breakpoint is added via Edit Breakpoint in VSCode](ylJ4nUfvk-10f2ace5.png)  
 **Conditional Breakpoint is added via Edit Breakpoint in VSCode**
 
-![Conditional Breakpoint Editing in VSCode](https://cdn.hashnode.com/res/hashnode/image/upload/v1634757443176/ZgYwCDMR9.png)  
+![Conditional Breakpoint Editing in VSCode](ZgYwCDMR9-ff9f43d4.png)  
 **Conditional Breakpoint Editing in VSCode**
 
 Since the Java code is a bit different I used `primesToTest[0] == 2` which will always be true. You can try setting it to 3 which will take a long while and you can see that it will only stop at that point.

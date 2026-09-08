@@ -5,7 +5,7 @@ lastmod: "2020-10-21T06:35:28+00:00"
 description: "The OpenJDK sources are now fully available and developed on GitHub, thanks to Project Skara. We can build it from sources on any device."
 authors:
   - "frankdelporte"
-image: "compiling-java-1024x357.png"
+image: "compiling-java-1024x357.jpg"
 categories:
   - "Raspberry Pi"
 related_posts:
@@ -79,7 +79,7 @@ With all the required tools being available and configured, we can start the com
 $ make images
 ```
 
-![](compiling-java-1024x357.png)
+![](compiling-java-1024x357.jpg)
 
 In my case (Raspberry Pi 4 with 8 GB memory and 64-bit Raspbian OS) this took just under 60 minutes. For reference, on a Ubuntu 20.04 PC with Intel Core i7 with 16GB memory it takes about 15 minutes.
 
@@ -93,4 +93,4 @@ OpenJDK 64-Bit Server VM (build 16-internal+0-adhoc.pi.jdk, mixed mode, sharing)
 ```
 
 Yep, there it is: **the cutting edge, not yet released, straight from the sources, freshly baked and served "**Java JDK 16-internal**" on a Raspberry Pi**! 🙂
-![](java-16-internal-on-raspberrypi-1024x646.png)
+![](java-16-internal-on-raspberrypi-1024x646.jpg)

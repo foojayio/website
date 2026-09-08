@@ -59,7 +59,7 @@ No more surprises in the pipeline. You see the error *before* you commit.
 
 Open IntelliJ **Settings** (or Preferences) -\> **Tools** -\> **SonarQube for IDE** . Click the **+** icon under "Connections" to start, or on the SonarQube IDE plugin window click on the **configure** button.
 
-{{< img src="Screenshot-2025-12-16-at-10.22.56.png" class="size-full is-resized" width="660" height="606" style="width:369px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.22.56.jpg" class="size-full is-resized" width="660" height="606" style="width:369px;height:auto" >}}
 
 Click on the tool icon to open the settings dialog.
 ![](Screenshot-2025-12-16-at-10.23.05-1024x265.png)
@@ -115,7 +115,7 @@ Your IDE needs to be snappy. If the plugin paused your typing to trace how userN
 1. **IDE:** Catches logic errors and local code smells instantly.
 2. **SonarQube Cloud:** Performs complex issue detection, such as **Taint Analysis,** to detect that userName is an untrusted input ending up in a SQL query (Sink).
 
-![](Screenshot-2025-12-16-at-10.24.13-1024x675.png)
+![](Screenshot-2025-12-16-at-10.24.13-1024x675.jpg)
 
 ## **Problem #3: "I hate switching windows to check why the build failed"**
 
@@ -126,10 +126,10 @@ You pushed your code. The GitHub Actions build failed. Now you have to log in to
 When you use SonarQube Cloud, it talks directly to your Git provider. If your Quality Gate fails, SonarQube will **post a comment** right inside your PR conversation, exactly on the line of code that failed.
 
 It feels like a senior Java dev reviewing your code: *"Hey, this concatenation allows SQL Injection. Use parameters instead."*
-![](Screenshot-2025-12-16-at-10.24.23.png)
+![](Screenshot-2025-12-16-at-10.24.23.jpg)
 
 SonarQube Cloud checks on the CI/CD
-![](Screenshot-2025-12-16-at-10.24.33.png)
+![](Screenshot-2025-12-16-at-10.24.33.jpg)
 
 Comments from SonarQube Cloud directly appearing in the PR changes
 
@@ -146,14 +146,14 @@ SonarQube Cloud allows you to define what "New Code" means for *your* specific s
    * *Result:* You can merge if *your* changes are tested, even if the rest of the app is a mess.
 2. **Custom Profiles:** Your Tech Lead can clone the "Sonar way (Java)" profile and disable rules that don't fit your style (e.g., maybe you don't care about "Trailing comments" or specific naming conventions).
 
-{{< img src="Screenshot-2025-12-16-at-10.24.44.png" class="size-full is-resized" width="910" height="570" style="width:581px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.24.44.jpg" class="size-full is-resized" width="910" height="570" style="width:581px;height:auto" >}}
 
 We can inherit the Sonar default profile, and modify it
-![](Screenshot-2025-12-16-at-10.24.53.png)
+![](Screenshot-2025-12-16-at-10.24.53.jpg)
 
 We see in our profile we have one more rule activated
 
-{{< img src="Screenshot-2025-12-16-at-10.25.03.png" class="size-full is-resized" width="804" height="628" style="width:618px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.25.03.jpg" class="size-full is-resized" width="804" height="628" style="width:618px;height:auto" >}}
 
 By tuning the gate, the tool becomes a helper, not a blocker. We can define our thresholds that resonate better with our maturity and goals.
 ![](Screenshot-2025-12-16-at-10.25.14-1024x703.png)

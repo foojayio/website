@@ -5,7 +5,7 @@ lastmod: "2024-10-31T09:41:21+00:00"
 description: "JEP-476 is another great example of Java platform evolution while enabling internal project stability, transparency and security."
 authors:
   - "miro-wengner"
-image: "jep476.png"
+image: "jep476.jpg"
 categories:
   - "Java"
   - "Java Beginner"

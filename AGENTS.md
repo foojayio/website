@@ -775,6 +775,24 @@ should catch a mistake at PR time rather than letting it fail silently.
   catches the near-miss of copying `template/post.md` to `draft/<slug>.md`
   instead of `draft/<slug>/index.md`, and leftover template placeholder text.
 
+  **`//JAVA 21+`, and NOT the 17 it declared for months.** `TITLE_EMOJI` uses
+  `\p{IsExtended_Pictographic}`, and Java's Unicode emoji properties -- that one
+  and the `\p{IsEmoji}` its comment rejects -- only arrived in JDK 21. On 17 the
+  pattern does not fail at the line that uses it: it throws
+  `PatternSyntaxException` from the static initialiser, so the whole check dies
+  before a single rule runs. jbang honours the `//JAVA` line, so declaring 17
+  provisioned exactly the JDK that cannot compile the pattern.
+
+  **It stayed hidden because this script only runs on a PULL REQUEST**, and
+  pushes to `main` go through `build-deploy.yml`, which runs
+  `validate/BuiltSite.java` and not this. Frank pushes most fixes straight to
+  `main`, so the first PR in a long while (#59) was the first thing to execute
+  it in CI -- passing locally the whole time on JDK 26. Reproduced and fixed
+  deliberately rather than by guesswork: `jbang --java 17` crashes,
+  `--java 21` passes. Checked the other 19 `//JAVA 17+` scripts for the same
+  property; none uses it, and `transfer/Posts.java`, which shares the character
+  class by design, already declared 21+.
+
   This is why **`.github/PULL_REQUEST_TEMPLATE.md` is not a checklist.** It was
   one, unchanged since the scaffold commit, and every item had rotted: it asked
   for `tags` (no such taxonomy), for images under `static/images/` with absolute
@@ -1457,6 +1475,123 @@ should catch a mistake at PR time rather than letting it fail silently.
   animated source in the bundle, so the hero resolves with no download either.
   **Keep the substitution list in step with `images.py`** — a new renaming pass
   there silently reverts on the next re-scrape otherwise, and nothing reports it.
+
+  **`rewrite_in_bundle` matches WHOLE FILENAMES, and a plain `str.replace`
+  corrupted two posts before it did.** Its docstring used to argue the
+  replacement was safe because "the name is distinctive". It is not: one bundle
+  holds both `dummies.png` and `image-764x1024-dummies.png`, so converting the
+  first rewrote the SUFFIX of the second and pointed its hero at
+  `image-764x1024-dummies.jpg`, a file nothing ever wrote.
+  `add-mnemonic-bookmark.png` went the same way. **This was latent long before it
+  fired** — any earlier run could have hit it — and nothing reported it, because
+  Hugo publishes a bundle resource that no longer matches a reference without a
+  word. `validate/BuiltSite.java` is what caught it, and it caught it *eight
+  times over*: a hero is the card thumbnail on every listing page the post
+  appears on. The guard is a lookbehind that refuses a match preceded by another
+  filename character, which still matches all four reference shapes. **Audit
+  every local image reference after any bulk image pass** — a reference to a file
+  that is not there is invisible in a build log.
+
+- **EVERY IMAGE A POST REFERENCES IS PULLED LOCAL, whatever host serves it, and
+  that is a change of policy rather than a tidy-up.** `HtmlToMarkdown.localizeImages`
+  used to localise only foojay-hosted images, on the reasoning that a third-party
+  URL "keeps working after cutover". The audit says otherwise: **393 posts
+  reference 1710 images on 115 hosts, and 129 of them across 46 posts are dead
+  now** -- a broken glyph mid-article on the live site today. A host nobody here
+  controls is exactly the one that stops serving without telling us; hotlinking
+  also spends a stranger's bandwidth on every page view, leaks each reader's IP
+  to whoever owns the host, and puts 455 MB of pictures outside anything this
+  repo can measure or shrink.
+
+  Two halves, and they agree on the filename by construction:
+  the scraper (so a re-scrape produces local files and nothing needs freezing)
+  and **`scripts/cleanup/external_images.py`**, the one-off sweep over what is
+  already in `content/`.
+
+  **AN EXTERNAL IMAGE IS STORED AS `<stem>-<8 hex of its URL>.<ext>`, and the
+  hash is not decoration.** Third-party basenames collide constantly: **58
+  bundles reference an external URL whose basename is ALREADY the name of a file
+  sitting in that bundle** (`lambda.gif`, `layers.png`, `banner-1.png`). Without
+  the hash, `Files.exists` short-circuits and the reference silently displays a
+  picture from a different source -- the one failure this store cannot have,
+  because nothing downstream would report it. With it, "the file exists" provably
+  means "this URL was already downloaded". A **foojay-hosted** image keeps its
+  bare basename exactly as before, so not one byte of what is already in
+  `content/` moves (verified: `twitter-362x510.png`, not a hashed name).
+
+  Four more behaviours are load-bearing:
+  - **The lookup is by STEM, ignoring the extension** (`findByStem`), which does
+    two jobs: it finds a file `images.py` later re-encoded (`.png` -> `.jpg`)
+    instead of re-downloading it, and it makes a re-run free for the **221
+    external URLs that carry no extension at all** -- Medium, Hashnode and Google
+    user-content serve images from extension-less paths, so the format is only
+    known from the response's `Content-Type`. Same rule as
+    `transfer/Authors.java`'s avatar matching, which is why 203 converted avatars
+    already survive a re-scrape.
+  - **What came back has to BE an image.** A dead third-party URL rarely 404s
+    cleanly -- it serves a login wall, a "post not found" page or a placeholder,
+    all of them HTML with a 200. Writing that as `foo.png` turns a visibly broken
+    image into a file that is broken for ever and *looks* localised.
+  - **WordPress's emoji images are restored to the CHARACTER**, not localised.
+    WP rewrites an emoji an author typed into `<img
+    src="s.w.org/images/core/emoji/.../1f680.svg" alt="🚀">`, and the alt is the
+    character itself -- so the original is recoverable exactly. 23 of these across
+    eight bundles become text instead of 23 downloaded SVGs, which is also what
+    this file already says a body should hold (`stripEmoji` takes emoji out of
+    titles only).
+  - **A GitHub Actions `badge.svg` stays hotlinked** (5 in `content/`): it reports
+    whether a build passes *now*, so a frozen copy would assert a stale CI result
+    for ever. That is the whole exclusion list. The 15 `mermaid.ink` diagrams ARE
+    localised -- 9 of them are already dead, which is the argument for it rather
+    than against, though the real fix there is a ```mermaid fence, which this site
+    renders itself.
+
+  **The sweep shrinks BEFORE the file enters the repo, and that ordering is the
+  point.** The originals average 330 KB and reach 15.5 MB; 455 MB of them would
+  put the built site past GitHub Pages' 1 GB artifact limit, whose warning arrives
+  on a run that is otherwise GREEN. Downloading into `content/` and shrinking
+  afterwards would also leave the full-size blob in git history for ever -- and
+  nothing here rewrites history. So the download lands in a temp directory, is
+  re-encoded there with `cleanup/images.py`'s own measured rules (imported, not
+  re-derived), and only the result is moved in. It also finishes each bundle
+  before starting the next, which is `images.py`'s first hard-won lesson, and it
+  leaves a reference alone and REPORTS it when a fetch fails -- a 403 is a bot
+  wall, not proof of deletion, so those stay hotlinked rather than being rewritten
+  to a file that is not there.
+
+  **DONE, all 393 posts: external image references went from 1710 to 212**, and
+  the 212 are the unrecoverable remainder rather than a backlog -- 44 dead
+  (404/400), 9 behind a bot wall (403, kept because a 403 is about the client),
+  4 mermaid.ink 503s, 3 connection failures, and the 5 live CI badges. Every one
+  is named with its post in the script's own report. 6257 local image references
+  resolve; the only 3 that do not are prose EXAMPLES that never had a file
+  (`diagram.png` in the submit guide, `ai-generated.jpg` in a code sample).
+
+  **THE IMPORT COST ALL THE HEADROOM, AND THAT IS THE PART TO REMEMBER.** 216 MB
+  of images on top of a 773 MB build is **0.99 GB** -- against a 1 GB limit whose
+  warning arrives on a run that is otherwise green. Three things bought it back,
+  in the order they were worth doing:
+
+  1. **48 images were being stored TWICE** (13.2 MB). The URL hash correctly
+     refused to reuse a same-named file, but where a bundle already held foojay's
+     copy of the same picture the sweep fetched the author's copy as well. They
+     are de-duplicated on *identical name plus identical pixel dimensions inside
+     one bundle* -- a strong enough signal, where the name alone was not.
+  2. **`--png-min` dropped from 300 KB to 100 KB, site-wide** (Frank's call, with
+     before/after crops at reading size). 983 of 1263 candidate PNGs converted;
+     content media 798 -> 685 MB. The other 280 kept their PNG for real
+     transparency or because JPEG did not win by 10%. **That floor is what makes
+     the policy self-selecting**: a flame graph -- 58 colours, small labels, i.e.
+     JPEG's worst case -- was measured and DECLINED, because flat line art
+     genuinely compresses better as PNG.
+  3. Two posts had an animated REMOTE hero. Localising made them visible to
+     `checkHeroImageStill`, which failed them immediately; `images.py` wrote still
+     posters. That check was always right and simply could not see a hotlink.
+
+  Result: **864 MB, 136 MB of headroom.** 40 of the imported GIFs legitimately
+  refuse to shrink -- WebP cannot beat them by 10%, exactly as `convert_gif`'s own
+  comment predicts for flat-colour UI recordings where GIF's palette+LZW is
+  efficient. That is 28.8 MB that stays.
 
 - **Idempotency everywhere**: any script touching `content/` must be safe
   to re-run without duplicating or destroying hand edits (the `frozen: true`

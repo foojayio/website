@@ -44,10 +44,10 @@ Note that we can still search the code when it is collapsed, and if needed the r
 *Search Collapsed Code*
 
 Alternatively, we can look at the **File Structure** for a file using **⌘ F12** on macOS or **Ctrl+F12** on Windows/Linux. We can navigate to the section of the code we're interested in from here.
-![](FileStructure-1024x576.png) *File Structure*
+![](FileStructure-1024x576.jpg) *File Structure*
 
 We can get the same information by opening the **Structure** tool window, using **⌘ 7** on macOS or **Alt+7** on Windows/Linux.
-![](StructureToolWindow-1024x576.png) *Structure tool window*
+![](StructureToolWindow-1024x576.jpg) *Structure tool window*
 
 ## **Searching**
 

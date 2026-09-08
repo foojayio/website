@@ -6,7 +6,7 @@ description: "Learn from Simon Ritter how pattern matching in Java can make your
 canonical: "https://www.azul.com/blog/use-pattern-matching-to-simplify-java/"
 authors:
   - "simonritter"
-image: "pattern-matching-image-li.png"
+image: "pattern-matching-image-li.jpg"
 categories:
   - "Java Core"
 related_posts:
@@ -185,7 +185,7 @@ As you can see, pattern matching is a powerful addition to the Java language tha
 It also provides several ways to help detect errors at compile time rather than at runtime when your code is in production.
 
 Why not try using pattern matching in your next Java application?
-[![Webinar: The Art of Java Language Pattern Matching](https://www.azul.com/wp-content/uploads/pattern-matching-image-li.png)](https://www.azul.com/resources-hub/webinars-2/the-art-of-java-language-pattern-matching-on-demand-webinar)
+[![Webinar: The Art of Java Language Pattern Matching](pattern-matching-image-li.jpg)](https://www.azul.com/resources-hub/webinars-2/the-art-of-java-language-pattern-matching-on-demand-webinar)
 
 Want to learn more about pattern matching in JDK 18? Watch our on-demand webinar from June 2022, [The Art of Java Language Pattern Matching](https://www.azul.com/resources-hub/webinars-2/the-art-of-java-language-pattern-matching-on-demand-webinar).
 

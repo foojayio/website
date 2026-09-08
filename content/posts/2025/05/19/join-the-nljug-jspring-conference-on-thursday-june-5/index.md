@@ -20,7 +20,7 @@ frozen: false
 **Join the Dutch Java community at [J-Spring 2025](https://jspring.nl/), the premier Java conference in the Netherlands, taking place Thursday, June 5th at Jaarbeurs Utrecht.**
 
 This international event, organized by the NLJUG (Dutch Java User Group), will be bigger than ever before, offering attendees [a comprehensive program](https://jspring.nl/timetable-2025/) featuring world-class speakers from across the globe. Dive deep into the world of Java with expert speakers from leading tech companies such as Uber, Spotify, Azul, Oracle and more, guaranteeing captivating talks and valuable industry insights.
-[![](nljugjspring2025-1024x576.png)](https://jspring.nl)
+[![](nljugjspring2025-1024x576.jpg)](https://jspring.nl)
 
 J-Spring 2025 aims to create a truly community-driven conference where developers can learn new techniques, share knowledge, and network with peers. The program will cover essential Java-related topics across various tracks including **Architecture, Dev Practices, Security, UX \& UI, and emerging** technologies. Whether you're interested in technical sessions, hands-on labs, or keynote presentations, this event offers a perfect blend of practical knowledge and theoretical insights to enhance your Java development skills.  
 

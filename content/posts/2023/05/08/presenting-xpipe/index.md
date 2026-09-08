@@ -177,7 +177,7 @@ The initial work went into a remote connection management feature that allows yo
 
 Any stored sensitive login information is encrypted and can also be locked behind a master password, similar to password managers.
 
-![Connection manager](https://user-images.githubusercontent.com/72509152/230098966-000596ca-8167-4cb8-8ada-f6b3a7d482e2.png)
+![Connection manager](230098966-000596ca-8167-4cb8-8ada-f6b3a7-9cbb5fc0.jpg)
 
 ### Remote file management
 
@@ -187,7 +187,7 @@ For this reason, there are already plenty of established remote file managers ou
 
 So why not take our remote process handling implementation and also try to apply it to file management? By using file system related commands such as `ls`, `rm`, `touch`, etc. and its equivalents, we can realize a functional file manager that can connect to essentially every system and doesn't require any setup. This is exactly what you can see in action here:
 
-![Remote file explorer](https://user-images.githubusercontent.com/72509152/230100929-4476f76c-ea81-43d9-ac4a-b3b02df2334e.png)
+![Remote file explorer](230100929-4476f76c-ea81-43d9-ac4a-b3b02d-28c4c83b.png)
 
 ### Integrating with the user's toolbox
 

@@ -4,7 +4,7 @@ date: "2026-08-06T08:26:00+00:00"
 description: "Last week I introduced Sheetmusic4J, a Java(FX) library to render and interact with sheet music. That first 0.0.1 release was really a question more than…"
 authors:
   - "frankdelporte"
-image: "stripdemo-0.0.3.png"
+image: "stripdemo-0.0.3.jpg"
 categories:
   - "JavaFX"
 related_posts:

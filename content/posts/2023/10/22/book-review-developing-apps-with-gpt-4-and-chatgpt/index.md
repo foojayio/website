@@ -24,7 +24,7 @@ Now, given the rapid shift in this field, a lot of us are left with a lot of que
 
 That's where this useful book by [Olivier Caelen](https://www.linkedin.com/in/oliviercaelen) and [Marie-Alice Blete](https://www.linkedin.com/in/mblete) comes in particularly handy. It offers us some interesting insights into the various models, and how to make use of these using the ChatGPT Python library.  
 
-{{< img src="https://m.media-amazon.com/images/I/910nFKaAHeL._SL1500_.jpg" class="aligncenter is-resized" style="width:320px;height:420px" >}}
+{{< img src="910nFKaAHeL._SL1500_.jpg" class="aligncenter is-resized" style="width:320px;height:420px" >}}
 
 **price** : €59.99 for the eBook  
 **publication date** : September 2023  

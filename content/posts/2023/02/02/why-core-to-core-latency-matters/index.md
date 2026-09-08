@@ -5,7 +5,7 @@ lastmod: "2023-02-03T10:43:06+00:00"
 description: "An initial goal of Java was to “write once, run anywhere”, but does that mean we should not be sympathetic to the hardware?"
 authors:
   - "rob-austin"
-image: "Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507-1.png"
+image: "Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507-1.jpg"
 categories:
   - "Performance"
 related_posts:
@@ -45,13 +45,13 @@ AMD architecture differs from Intel by introducing core complexes (CCX) which ar
 The following heatmaps show the latency when exchanging data between a pair of threads running on different cores, colour-coded with the lowest numbers green, and moving through yellow to red for the highest numbers. All three heatmaps use the same scale.
 
 **Intel Xeon Gold 6346 (2×16 core)**   
-![](Screen-Shot-2023-01-24-at-9.29.52-AM-1024x506.png)
+![](Screen-Shot-2023-01-24-at-9.29.52-AM-1024x506.jpg)
 
 **AMD EPYC 7343 (2×16 core, 4-core CCX)**   
-![](Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507.png)
+![](Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507.jpg)
 
 **AMD EPYC 73F3 (2×16 core, 2-core CCX)**   
-![](Screen-Shot-2023-01-24-at-9.30.57-AM-1024x508.png)
+![](Screen-Shot-2023-01-24-at-9.30.57-AM-1024x508.jpg)
 
 ### Conclusion
 

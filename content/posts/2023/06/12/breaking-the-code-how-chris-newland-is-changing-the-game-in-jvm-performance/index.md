@@ -6,7 +6,7 @@ description: "Dive into an exclusive interview with Chris Newland, the creator o
 authors:
   - "bazlur-rahman"
   - "chriswhocodes"
-image: "chris.png"
+image: "chris.jpg"
 categories:
   - "Interviews"
   - "Performance"
@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="chris.png" class="alignright size-full is-resized" width="384" height="384" >}}
+{{< img src="chris.jpg" class="alignright size-full is-resized" width="384" height="384" >}}
 
 We're excited to introduce you to Chris Newland, an industry veteran and dedicated JVM performance specialist.
 
@@ -117,7 +117,7 @@ The steady progress of the Java ecosystem through the OpenJDK project, Java Comm
 **Chris:** One of my favourites was an issue someone raised on JITWatch, where they reported that the PrintAssembly native code for a Java method was missing. After some investigation, it turned out that the method in question (a series of mathematical operations on its inputs) was being tested with parameters such that the HotSpot C2 JIT compiler was able to reduce the entire method down to **mov $0xe, eax** (return 14).  
 
 **Bazlur: That's fascinating! Speaking of JIT optimizations, could you tell us how these optimizations actually work? And what are some of the most common optimizations that the JIT compiler performs?
-Chris:** You can learn all about how the JVM achieves excellent runtime performance in the book Optimizing Java ([https://optimizingjava.com](https://optimizingjava.com/)) by Ben Evans, James Gough, and Chris Newland ![:wink:](https://lh5.googleusercontent.com/rb3I4_IQDF4B9jr_Wez3Sll7XFgn7IK957K3LGkOiffPcciWWmhuKdBvE7JM8PFIb0wns2JIpyyua5X2X1DE9VX6s161r2dcyZIDrhQOvwa7CGpN6_upbpDiGsa8Hq29oK8lHJaLuNWTzLBt4Kepd7w) but in a nutshell, the JVM builds a profile of the running bytecode and looks for frequently executed "hot spots" (hence the name of the HotSpot JVM) by counting method invocations and loop back-edges. When these counters cross a threshold, the method (or loop) is queued for compilation.
+Chris:** You can learn all about how the JVM achieves excellent runtime performance in the book Optimizing Java ([https://optimizingjava.com](https://optimizingjava.com/)) by Ben Evans, James Gough, and Chris Newland ![:wink:](rb3I4_IQDF4B9jr_Wez3Sll7XFgn7IK957K3LGkO-85a48b96.png) but in a nutshell, the JVM builds a profile of the running bytecode and looks for frequently executed "hot spots" (hence the name of the HotSpot JVM) by counting method invocations and loop back-edges. When these counters cross a threshold, the method (or loop) is queued for compilation.
 
 The JIT compilers (HotSpot contains two compilers; one simple, one advanced) take methods from the compilation queue and, using the collected profile, transform the bytecode into optimized native code. HotSpot JIT optimizations include ***method call devirtualisation, method inlining, dead code elimination, common subexpression elimination, branch prediction, lock coarsening and lock elision, escape analysis and many more***. The native code is stored in a special memory region of the JVM called the code cache, and further calls to the method will execute the optimized native code and not the interpreted bytecode.
 

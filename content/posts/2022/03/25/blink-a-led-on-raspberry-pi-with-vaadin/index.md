@@ -6,7 +6,7 @@ description: "Thanks to Vaadin, you can get a fully running application with a f
 canonical: "https://dzone.com/articles/blink-a-led-on-a-raspberry-pi-with-vaadin"
 authors:
   - "frankdelporte"
-image: "https://dz2cdn1.dzone.com/storage/temp/15731206-screenshot-2022-03-17-at-164350.jpg"
+image: "15731206-screenshot-2022-03-17-at-164350-5d31f992.jpg"
 categories:
   - "Embedded"
   - "Pi4J"
@@ -36,7 +36,7 @@ But JavaFX has one missing piece: running it in the browser... Yes, [**JPRO**](h
 And yes, there are some projects ongoing to bring JavaFX fully to the browser, but they are ongoing and not mature yet...
 
 Let's look at another approach: Vaadin Flow and run it on a Raspberry Pi to control a LED and show the state of a button.
-![](https://dz2cdn1.dzone.com/storage/temp/15731206-screenshot-2022-03-17-at-164350.jpg)
+![](15731206-screenshot-2022-03-17-at-164350-5d31f992.jpg)
 
 ## About Vaadin
 
@@ -75,7 +75,7 @@ And one final pro for the Raspberry Pi: its power! The 4-version is fast and has
 ## Example Spring + Vaadin + Pi4J application
 
 Let's create a Spring-based demo project to illustrate how a Vaadin User Interface (website) can interact with the GPIOs of a Raspberry Pi by using the [Pi4J library](https://www.pi4j.com). The GPIO interaction is based on the [Pi4J minimal example application](https://pi4j.com/getting-started/minimal-example-application/) and uses a button and a LED to demonstrate the digital input and output interaction. The wiring is very simple and only needs a few components.
-![Wiring diagram](https://dz2cdn1.dzone.com/storage/temp/15731188-led-button-bb.png) Breadboard wiring
+![Wiring diagram](15731188-led-button-bb-1efc1a47.png) Breadboard wiring
 
 The base code was generated on [start.vaadin.com/app](https://start.vaadin.com/app) with the following selections:
 
@@ -84,7 +84,7 @@ The base code was generated on [start.vaadin.com/app](https://start.vaadin.com/a
 * Flow (Java only)
 * Extra page and custom icons
 
-![Start Vaadin website](https://dz2cdn1.dzone.com/storage/temp/15731189-startvaadin.png) Start Vaadin website
+![Start Vaadin website](15731189-startvaadin-fe92e18f.jpg) Start Vaadin website
 
 Download the sources, unzip and open in your preferred IDE. It's a Maven project, so you can immediately run it and check the code that was generated automatically. When you start it, the application will be available on \[http://localhost:8080\](http://localhost:8080).
 
@@ -221,7 +221,7 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 }
 ```
 
-![](https://dz2cdn1.dzone.com/storage/temp/15731191-ui-led.png)
+![](15731191-ui-led-8303d034.png)
 
 ### UI to see the state of the button
 
@@ -255,7 +255,7 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 }
 ```
 
-![](https://dz2cdn1.dzone.com/storage/temp/15731192-ui-button.png)
+![](15731192-ui-button-13d3157f.png)
 
 An additional change is needed in the main class. Because we want to send changes from the `backend` to the `user interface` we need to add the [@Push attribute](https://vaadin.com/docs/latest/flow/advanced/server-push). This tiny change, allows you to update the UI from the server, without the user explicitly requesting updates. This is based on a client-server connection (WebSocket if supported, or alternative) which the client establishes and the server can then use to send updates to the client.
 
@@ -290,7 +290,7 @@ public class AboutView extends VerticalLayout {
 }
 ```
 
-![](https://dz2cdn1.dzone.com/storage/temp/15731197-ui-about.png)
+![](15731197-ui-about-34c99337.jpg)
 
 ## Build and upload to Raspberry Pi
 

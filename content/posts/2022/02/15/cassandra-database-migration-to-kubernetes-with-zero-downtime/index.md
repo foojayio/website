@@ -6,7 +6,7 @@ description: "Learn how to migrate existing Cassandra clusters to K8ssandra with
 canonical: "https://k8ssandra.io/blog/tutorials/cassandra-database-migration-to-kubernetes-zero-downtime/"
 authors:
   - "alexander-dejanovski"
-image: "image-1536x722-1.png"
+image: "image-1536x722-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"

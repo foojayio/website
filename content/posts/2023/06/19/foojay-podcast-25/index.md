@@ -8,7 +8,7 @@ authors:
   - "chengen-zhao"
   - "frankdelporte"
   - "gerrit-grunwald"
-image: "episode-25-guests.png"
+image: "episode-25-guests.jpg"
 categories:
   - "JavaFX"
   - "Podcast"

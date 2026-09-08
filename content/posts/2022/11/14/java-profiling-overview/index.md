@@ -5,7 +5,7 @@ lastmod: "2022-12-06T15:32:49+00:00"
 description: "When I ask Java devs whether they profile, the answer is usually \"no\". A reason is the lack of info and knowledge for everyday developers."
 authors:
   - "johannes-bechberger"
-image: "Screenshot-2022-10-24-at-11.46.10.png"
+image: "Screenshot-2022-10-24-at-11.46.10.jpg"
 categories:
   - "Developer Tools"
   - "JDK Flight Recorder"

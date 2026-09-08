@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="https://carlfx.files.wordpress.com/2020/08/duke_azul_jfx_shirt.png?w=174" class="alignleft is-resized" alt="Duke's shirt with Azul and JavaFX." width="174" height="313" >}}
+{{< img src="duke_azul_jfx_shirt.png" class="alignleft is-resized" alt="Duke's shirt with Azul and JavaFX." width="174" height="313" >}}
 
 Most Java developers probably know by now that [Oracle](https://www.oracle.com/) has open sourced the Java JDK and hosted its source code on [Github](https://github.com/openjdk) (aka [Project Skara](https://openjdk.java.net/projects/skara/)).
 
@@ -42,7 +42,7 @@ Before we start the stopwatch (60 seconds), let's install the ZuluFX distributio
 
 [Azul](https://www.azul.com/downloads/zulu-community) creates a free and user-friendly distribution of the JDK bundled with JavaFX. Azul provides a simple user interface shown in figure 1 that allows you to pick and choose an appropriate version of the JDK and JavaFX in one compressed file to be downloaded. To get paid commercial Java support check out Azul's [support](https://www.azul.com/products/zulu-enterprise/) subscriptions.
 
-{{< img src="https://carlfx.files.wordpress.com/2020/08/download-zulu-builds-of-openjdk.png?w=1024" class="is-resized" alt="Azul System's Download of OpenJDK" width="668" height="327" caption="Figure 1. https://www.azul.com/downloads/zulu-community" >}}
+{{< img src="download-zulu-builds-of-openjdk-a79c0093.png" class="is-resized" alt="Azul System's Download of OpenJDK" width="668" height="327" caption="Figure 1. https://www.azul.com/downloads/zulu-community" >}}
 
 Download **ZuluFX** (JDK \& JavaFX bundle) from:   
 [https://www.azul.com/downloads/zulu-community](https://www.azul.com/downloads/zulu-community/?package=jdk-fx)
@@ -136,7 +136,7 @@ mkdir src/com.mycompany.helloworld
 ```
 
 ***Step 3:*** Create the directory structure **com/mycompany/helloworld** that follows a package namespaces for ***`HelloWorld.java`***
-![](https://carlfx.files.wordpress.com/2020/08/project_directories.png?w=285) Figure 2. Project Directory structure for HelloWorld.java file.
+![](project_directories-89c468ff.png) Figure 2. Project Directory structure for HelloWorld.java file.
 
 Under the directory **com.mycompany.helloworld** you will create the following directory structure **com/mycompany/helloworld**. This directory will later contain the **Helloworld.java** file created in Step 5.
 
@@ -174,7 +174,7 @@ The **exports** keyword exposes the **com.mycompany.helloworld** module to the r
 
 The file will be created in the directory **src/com.mycompany.helloworld/com/mycompany/helloworld** as shown in figure 4 below.
 
-{{< img src="https://carlfx.files.wordpress.com/2020/08/helloworld.java_.png?w=279" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
+{{< img src="helloworld.java_-31cfb833.png" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
 
 Use **[vim](https://www.vim.org/)** for those who despise those other wimpy editors 😉
 
@@ -237,7 +237,7 @@ javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.
 
 After compiling your code the class files the mods directory should look like the following:
 
-{{< img src="https://carlfx.files.wordpress.com/2020/08/compiled-classes.png?w=310" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
+{{< img src="compiled-classes-5076aa43.png" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
 
 ***Step 7:***Execute the JavaFX HelloWorld application!
 
@@ -249,7 +249,7 @@ java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.Hel
 
 The following is the output of the previous command:
 
-{{< img src="https://carlfx.files.wordpress.com/2016/04/screen-shot-2016-04-26-at-1-42-13-am.png?w=625" class="is-resized" alt="Output of a JavaFX Hello World Application" width="333" height="302" caption="Figure 6. The output of a JavaFX Hello World application." >}}
+{{< img src="screen-shot-2016-04-26-at-1-42-13-am-aca06d98.png" class="is-resized" alt="Output of a JavaFX Hello World Application" width="333" height="302" caption="Figure 6. The output of a JavaFX Hello World application." >}}
 
 ## Conclusion
 

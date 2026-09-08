@@ -5,7 +5,7 @@ lastmod: "2025-05-06T10:50:02+00:00"
 description: "Explore how to combine Quarkus with Ollama, a platform for running AI models locally. We’ll also demonstrate how tools like Testcontainers and Quarkus Dev Services simplify development and testing workflows"
 authors:
   - "jonathan-vila"
-image: "https___dev-to-uploads.s3.amazonaws.com_uploads_articles_defv9j6s88xk87tot29t.png"
+image: "https___dev-to-uploads.s3.amazonaws.com_uploads_articles_defv9j6s88xk87tot29t.jpg"
 categories:
   - "Java"
   - "LangChain4j"

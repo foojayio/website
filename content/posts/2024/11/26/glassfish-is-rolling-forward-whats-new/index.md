@@ -6,7 +6,7 @@ description: "The Evolution Continues. GlassFish, which used to be a popular ap
 canonical: "https://omnifish.ee/2024/09/12/glassfish-is-rolling-forward-whats-new/"
 authors:
   - "ondro-mihalyi"
-image: "GlassFish-commits-1024x437-1.png"
+image: "GlassFish-commits-1024x437-1.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"
@@ -35,7 +35,7 @@ For those dabbling in microservices, GlassFish now natively supports **MicroProf
 [Get started with GlassFish
 with this guide](https://omnifish.ee/developer-resources/)
 
-![](https://omnifish.ee/wp-content/uploads/2024/09/Screenshot-from-2024-09-06-16-08-30-1024x393.png)
+![](Screenshot-from-2024-09-06-16-08-30-1024-2625f222.png)
 
 **A Developer's Best Friend**
 
@@ -69,7 +69,7 @@ Thanks to OmniFish, GlassFish isn't just an application server alone. Our contri
 * [Arquillian containers for GlassFish](https://omnifish.ee/developers/glassfish-server/arquillian-containers/)
 * [IDE plugins for GlassFish](https://omnifish.ee/developers/glassfish-server/ide-plugins-for-glassfish/)
 
-![](https://omnifish.ee/wp-content/uploads/2024/09/GlassFish-commits-1024x437.png) 3 of the 4 top GlassFish contributors from OmniFish
+![](GlassFish-commits-1024x437-4062f14c.jpg) 3 of the 4 top GlassFish contributors from OmniFish
 
 **Commercial support gets you covered**
 

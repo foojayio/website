@@ -6,7 +6,7 @@ description: "Learn how to implement a Sliding Window Counter Rate Limiter using
 canonical: "https://medium.com/redis-with-raphael-de-lio/sliding-window-counter-rate-limiter-redis-java-1ba8901c02e5"
 authors:
   - "raphael-delio"
-image: "Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.png"
+image: "Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.jpg"
 categories:
   - "Databases"
   - "Java"
@@ -38,7 +38,7 @@ Though not as precise as the Sliding Window Log, the Sliding Window Counter requ
 
 ## How It Works
 
-![](https://cdn-images-1.medium.com/max/2160/1*XLeoFFYwU1uzvLuMFu-tAw.gif)
+![](1-XLeoFFYwU1uzvLuMFu-tAw-8ccca08f.gif)
 
 ### 1. Define a Time Window
 

@@ -39,12 +39,12 @@ Even if you would like to build your application inside a Docker container, you 
 I want to create a Docker Java image for my java-code-workshop application. It is a spring-boot based application build with maven that needs Java version 8.
 
 The naive way to create this Docker Java image would be something like this:
-![](https://lh6.googleusercontent.com/DMJ7VOymBspNHSqlFxyOC-FyOSweRv5mzfln4Z__XTqI17A5BaCk9cQICri-u55ETYVO9XEjQmp83w2a687IVQjF7vR_L1N0WetHTTzFxpas7k7qqrEbh9dFPAZ_7rIzsogKWgsj)
+![](DMJ7VOymBspNHSqlFxyOC-FyOSweRv5mzfln4Z__-7c85eed4.png)
 
 I picked a base image that includes maven and openjdk8, copy my source into the image, and call maven to build and run my application. This example works perfectly fine. My application will launch and runs smoothly. However, the Docker image that I just created has a size of 631 MB.
 
 Let's change this Dockerfile and use a multi-stage build:
-![](https://lh4.googleusercontent.com/pxZ5K5IuS4i9HCwAucIBvg6j67kKHrs_ASAAR9sTJQbt_-yP15Llam0ZVXe_sH9kPunc-Lo0HflytCYgIxQUnY3iRU8dwdSMt8eglIum6wIPyNMmFTLHwO0DG4l_4hJuZiCnddBp)
+![](pxZ5K5IuS4i9HCwAucIBvg6j67kKHrs_ASAAR9sT-3ada583d.png)
 
 What happens now is that I still use the maven-openjdk8 image to build my project. However, this will not be the output. I create a new image based on a significantly smaller java 8 JRE image and copy only the executable spring-boot jar. Now I just have to execute the `jar-file`, and I am done! The result is a Docker image that does not include the JDK or maven but only the JRE. The image size reduces dramatically to 132 MB.
 
@@ -57,7 +57,7 @@ You can also use this when you have to include secrets for accessing a private r
 When creating a Docker container, by default, you will run it as root. Although this is convenient for development, you do not want this in your production images. Suppose, for whatever reason, an attacker has access to a terminal or can execute code. In that case, it has significant privileges over that running container, as well as potentially accessing host filesystems via filesystem bind mounts with inappropriately high access rights.  
 
 The easiest way to do to prevent this is to create a specific user like here:
-![](https://lh5.googleusercontent.com/Ppz8LxO_-sLRcdqC12-gDuXAhmN-E6WiGFZAfjxIQ5My_u6gqTXJJdM0zOEAgSQ_bL1WYMFhdxjntP1pXN2MTjJb6T4R2sDiddUKMwtPyloMw5tv6LQ6UXx2FCsq4PpdPih5kYYB)
+![](Ppz8LxO_-sLRcdqC12-gDuXAhmN-E6WiGFZAfjxI-edc21519.png)
 
 On the third line, I am creating a new group and adding a user. This user is a system user (-r) without a password and home directory. I am also adding it to the newly created group.
 
@@ -77,7 +77,7 @@ If I want to scan an `adoptopenjdk` image as I mentioned in the first section, t
     $ snyk container test adoptopenjdk/opendjdk11:latest
 
 Output:
-![](https://lh6.googleusercontent.com/xrnalf7_hXKJ9wddZ8l2cAV6DlxwVbNipgr31sDdnBmOGG-PvWIXaZwHv2vWDtgKGe5cZQu3lSJi80jXi_dl3VAO6jKl6IFu8AAoz-RTHbFfMla9QICBWRTCS-z4rIFin9vxiUi3)
+![](xrnalf7_hXKJ9wddZ8l2cAV6DlxwVbNipgr31sDd-10328bff.png)
 
 You can both test and monitor the Docker image. For monitoring, you use `snyk container monitor <image>`. Monitoring takes a snapshot and monitors if new vulnerabilities or fixes are available for your image over time.
 
