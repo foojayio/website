@@ -7,7 +7,7 @@ canonical: "https://k8ssandra.io/blog/articles/the-search-for-a-cloud-native-dat
 authors:
   - "cedrick-lunven"
   - "jeff-carpenter"
-image: "cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.png"
+image: "cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -31,7 +31,7 @@ Here's how the Cloud Native Computing Foundation (CNCF) [defines the term](https
 > These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil."
 
 This is a rich definition, but it can be a challenge to use this to define what a cloud-native database is, as evidenced by the **Database** section of the CNCF Landscape Map:
-![](cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.png)
+![](cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.jpg)
 
 Databases are just a small portion of a crowded cloud computing landscape
 

@@ -155,7 +155,7 @@ The response from the model is parsed, and each record is validated before being
 An unclear conversation, full of imprecise intermediate commands and inaccurate assumptions, will produce a significantly less useful output. As usual, the quality and attention paid to this type of activity is directly proportional to the future quality of the assistant's responses.
 
 Below is a sequence diagram summarizing the interaction just presented:
-![](Screenshot-2026-06-10-at-2.22.17-PM.png)
+![](Screenshot-2026-06-10-at-2.22.17-PM.jpg)
 
 ## The Advisor Chain and Why Order Matters
 

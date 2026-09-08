@@ -142,7 +142,7 @@ To reduce the likelihood of stumbling over a coincidence or a measuring error, I
 * [The detailed measurement result](https://github.com/khmarbaise/performance-concat/blob/52480c0648a97e89d0e5007db01212baf7c80536/docs/result-ii.text)
 
 The `getElements()` results always in 49 elements whereas the number of `FancyStuff` elements varies (see `count`). The following result shows that the version with `stream_concat` is always faster.
-![](Screenshot-2020-08-26-at-22.24.23-1024x320.png)
+![](Screenshot-2020-08-26-at-22.24.23-1024x320.jpg)
 
 Interestingly, this is not only the case for larger number of elements. It is also for a small number of elements the case.
 
@@ -154,7 +154,7 @@ So, finally, I ran all solutions (1+2+3+4) with different numbers (count, elemen
 * [The Code](https://github.com/khmarbaise/performance-concat/blob/e5dd257660a93670b203016fddb9a3ac2975f399/src/main/java/com/soebes/performance/streams/BenchmarkStreamConcat.java)
 
 I just picked up some examples of the measured times here:
-![](Screenshot-2020-08-26-at-22.25.43-1024x300.png)
+![](Screenshot-2020-08-26-at-22.25.43-1024x300.jpg)
 
 #### Another run
 
@@ -163,7 +163,7 @@ So I ran also a solution with all possible options im JMH which took very long (
 * [The detailed measurement result](https://raw.githubusercontent.com/khmarbaise/performance-concat/master/docs/result-v.text)
 
 So I will pick up some examples of the measured times here:
-![](Screenshot-2020-08-26-at-22.26.48-1024x306.png)
+![](Screenshot-2020-08-26-at-22.26.48-1024x306.jpg)
 
 So finally the question comes — what do the numbers actually mean?
 

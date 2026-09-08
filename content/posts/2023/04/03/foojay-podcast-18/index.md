@@ -5,7 +5,7 @@ lastmod: "2025-11-13T09:10:57+00:00"
 description: "Today we travel back to the US to learn more about the Atlanta JUG, mainly because this week, they are organizing the DevNexus conference!"
 authors:
   - "frankdelporte"
-image: "atlantajug-screenshot-zoom-1024x577-1.png"
+image: "atlantajug-screenshot-zoom-1024x577-1.jpg"
 categories:
   - "JUGs"
   - "Podcast"
@@ -49,7 +49,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](atlantajug-screenshot-zoom-1024x577.png)
+![](atlantajug-screenshot-zoom-1024x577.jpg)
 
 ## Links
 

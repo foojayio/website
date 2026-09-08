@@ -1,7 +1,7 @@
 ---
 title: "Aicha Laafia"
 avatar: "aicha-laafia.png"
-avatarFull: "aicha-laafia-full.png"
+avatarFull: "aicha-laafia-full.jpg"
 bio: "Java Developer ☕ | Green Tech Advocate 🌍 | WomenTechmakers Ambassador | Oracle Ace Associate | JetBrains Community Contributor | International Speaker & Writer"
 bluesky: "https://bsky.app/profile/aichalaafia.bsky.social"
 mastodon: ""

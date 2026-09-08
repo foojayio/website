@@ -69,7 +69,7 @@ JNI has been around since Java 1.1, and while it works, it has a few critical dr
 * **Complex implementation** requiring C headers and compilation steps.
 * **Hard to use by design**: As I learned from Simon Ritter, a Sun engineer once said JNI was deliberately made difficult to discourage people from using it!
 
-![](ffm-quote-simon-ritter-1024x390.png)
+![](ffm-quote-simon-ritter-1024x390.jpg)
 
 There were attempts to improve this situation with libraries such as JNA and [Java Native Runtime (JNR)](https://github.com/jnr), but they came with their own overhead and limitations.
 
@@ -216,7 +216,7 @@ Also, for this example, you can find a more extended example [here in `FFMNative
 #### Performance Comparison Example
 
 I like demos that have a visual output. So I created a simple benchmark that generates moving gradients, which involves many memory writes. In both Java 11 and 25, I try to refresh the gradient every 5 milliseconds.
-![](ffm-gradient-demo.png)
+![](ffm-gradient-demo.jpg)
 
 The results speak for themselves (tested on a MacOS M2 with Azul Zulu 25):
 

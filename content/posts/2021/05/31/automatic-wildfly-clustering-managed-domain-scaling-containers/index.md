@@ -21,7 +21,7 @@ As a result, developers go with standalone nodes as the only available productio
 But what developers should do if they are looking for a solution to migrate from VMs to containers already existing and nicely working Jakarta EE clusters in managed domain mode?
 
 Until now, there have been very few examples (e.g., for [GlassFish](https://jelastic.com/blog/glassfish-payara-auto-clustering-cloud-hosting/?utm_source=blog-wildfly-managed-domain) and [WebLogic](https://jelastic.com/blog/migration-from-vms-to-containers/?utm_source=blog-wildfly-managed-domain)) how to run and scale Java application servers in managed domain mode within containers correctly. In most cases, lack of knowledge or even the absence of a working solution for the domain mode in containers leads to the loss of integrated Jakarta EE clustering features that just become obsolete.  
-![wildfly admin panel ui](https://jelastic.com/blog/wp-content/uploads/2018/05/admin-console-hal.png)
+![wildfly admin panel ui](admin-console-hal-3e122f19.png)
 
 But managed domain mode is still awesome! A vast portion of mission-critical and large-scale applications such as banking and billing are still running on Jakarta EE in VMs. Integrated [Jakarta EE](https://jakartablogs.ee/) clustering provides functionality that people are interested in, including high-availability and automated deployment among distributed Java application servers regardless of underlying infrastructure, and, of course, Admin Panel to manage your cluster using a nice UI. To get familiar with benefits of natively integrated clustering technology please refer to a good article "[Under the Hood of J2EE Clustering](https://www.theserverside.com/news/1364410/Under-the-Hood-of-J2EE-Clustering)". Merging this rich functionality with ready-to-go containers provides a huge benefit by saving time and efforts of the team, and enables fast iterations as the majority of developers do not deal with containers or VMs if environment setup is fully automated.
 
@@ -36,8 +36,8 @@ We can easily run one big service or several small interrelated services per clu
 
 ## Complexity of Managed Domain Topology
 
-![complex managed domain topology](https://jelastic.com/blog/wp-content/uploads/2018/05/complexity-of-managed-domain-topology.png)  
-![java processes inside VM](https://jelastic.com/blog/wp-content/uploads/2018/05/java-processes-inside-each-VM-or-bare-metal-host.png)
+![complex managed domain topology](complexity-of-managed-domain-topology-dd95a099.png)  
+![java processes inside VM](java-processes-inside-each-VM-or-bare-me-4576a679.png)
 
 Let's have a look at the topology of WildFly cluster in managed domain mode, which is illustrated in the [official documentation](https://docs.jboss.org/author/display/WFLY/Operating+modes). The illustration below provides a sense of the complexity of managed domain architecture. This scheme is considered as a classical Jakarta EE topology in VMs, or so-called "legacy dragon" which should be tamed and decomposed properly into containers. We adjusted this illustration for a little bit better view of the topology, as well as to show additional "hidden" Java processes inside each VM or bare metal host. This will help us during the further decomposition.
 
@@ -66,7 +66,7 @@ Moreover, system containers provide a better resource and security isolation com
 
 ## Decomposition and Building Modified Topology
 
-![resource usage efficiency](https://jelastic.com/blog/wp-content/uploads/2018/05/decomposition-and-building-modified-topology.png)
+![resource usage efficiency](decomposition-and-building-modified-topo-9ca32dd5.png)
 
 We are ready to start our decomposition journey. The first rule is in the spirit of microservices - it is always better to put only one Worker Server per one container. Also, we create only one server group per domain for all containers inside the cluster. Such simple adjustments will give tremendous and desired flexibility for scaling each Worker Server vertically, gaining [resource usage efficiency](https://jelastic.com/blog/stop-overpaying-for-java-cloud-hosting-resources/?utm_source=blog-wildfly-managed-domain), and scaling the group of containers horizontally by adding new instances on demand. Please note that each container for handling incoming requests runs 3 Java processes: Worker Server (WS), Host Controller (HC) and Process Controller (PC). And admin container that manages the cluster runs 2 Java processes: Domain Controller (DC) and Process Controller (PC).
 
@@ -81,7 +81,7 @@ Below you'll see how standalone WildFly transforms into the cluster by means of 
 ## Create Standalone WildFly
 
 With Jelastic, the required topology can be built using a convenient wizard:  
-![create new wildfly environment](https://jelastic.com/blog/wp-content/uploads/2018/05/create-new-wildfly-environment.png)
+![create new wildfly environment](create-new-wildfly-environment-89528537.png)
 
 1. Create a new environment
 
@@ -89,14 +89,14 @@ With Jelastic, the required topology can be built using a convenient wizard:
 * Set up vertical scaling limits
 * Change the name of environment if needed (e.g. **wildfly**)
 
-![standalone wildfly via wizard](https://jelastic.com/blog/wp-content/uploads/2018/05/new-env.png)  
-![add wildfly node](https://jelastic.com/blog/wp-content/uploads/2018/05/mail.png)
+![standalone wildfly via wizard](new-env-38da1483.png)  
+![add wildfly node](mail-82121608.png)
 
 You will receive an email confirmation of environment creation with the credentials to the Admin Panel. 2. Now, you are ready to deploy the application to the just provisioned standalone server.  
-![deploy the application](https://jelastic.com/blog/wp-content/uploads/2018/05/deployment-manager-1.png)  
-![deploy java application](https://jelastic.com/blog/wp-content/uploads/2018/05/deploy.png)  
-![create wildfly environment](https://jelastic.com/blog/wp-content/uploads/2018/05/oib.png)  
-![web ssh client](https://jelastic.com/blog/wp-content/uploads/2018/05/ssh1.png)
+![deploy the application](deployment-manager-1-6e0360c6.png)  
+![deploy java application](deploy-64f84b1e.png)  
+![create wildfly environment](oib-de35dc34.png)  
+![web ssh client](ssh1-93555ae4.png)
 
 In the Deployment manager, click **Deploy to…** button. Specify the **Context** as required or just leave default ROOT value. Make sure that your application is up and running, pressing **Open in browser** near the created environment. If you log in to your container via built-in [Web SSH client](https://docs.jelastic.com/web-ssh-client?utm_source=blog-wildfly-managed-domain), you'll see only one running process of **Standalone** server.
 
@@ -106,14 +106,14 @@ WildFly clustering with domain mode is configured automatically by means of Auto
 
 * **Manually**
 
-![change wildfly environment topology](https://jelastic.com/blog/wp-content/uploads/2018/05/change-topology.png)  
-![wildfly horizontal scaling](https://jelastic.com/blog/wp-content/uploads/2018/05/autocluster11.png)
+![change wildfly environment topology](change-topology-1213806e.png)  
+![wildfly horizontal scaling](autocluster11-4f2b39b8.jpg)
 
 Add new servers via wizard while creating the environment or by [changing its topology](https://docs.jelastic.com/jelastic-dashboard-guide?utm_source=blog-wildfly-managed-domain). Just refer to the application server layer within the left-side environment panel, enable Auto-Clustering mode and add **(+)** nodes within the [Horizontal Scaling](https://docs.jelastic.com/horizontal-scaling?utm_source=blog-wildfly-managed-domain) frame.
 
 * **Automatically**
 
-![wildfly horizontal scaling](https://jelastic.com/blog/wp-content/uploads/2018/05/triggers1.png)
+![wildfly horizontal scaling](triggers1-b34d9157.png)
 
 The number of servers can be changed automatically by setting up [scaling triggers](https://docs.jelastic.com/automatic-horizontal-scaling?utm_source=blog-wildfly-managed-domain) based on the resource consumption within **Settings \> Auto Horizontal Scaling** . **Note**:
 
@@ -124,34 +124,34 @@ The number of servers can be changed automatically by setting up [scaling trigge
 Afterwards, as the scaling is completed (manual or automatic), all WildFly instances will join the cluster, working in operation mode of WildFly Managed Domain. Domain Controller and Load Balancer are added automatically as required components of the cluster.
 
 Upon this scaling, the previously deployed application is also automatically redeployed to the rest of WildFly instances of the cluster. Also, database connection pool configurations and other config customizations, previously made via WildFly admin console, are replicated across the whole application server layer.  
-![wildfly environment running](https://jelastic.com/blog/wp-content/uploads/2018/05/clsuter-topology.png)
+![wildfly environment running](clsuter-topology-78f51b4a.png)
 
 You can check how WildFly topology is changed from standalone mode to managed domain cluster: Worker Nodes run 3 processes instead of one as it was in standalone mode:
 
 * Server:worker
 * Process Controller
-* Host Controller ![web ssh wildfly node](https://jelastic.com/blog/wp-content/uploads/2018/05/processes.png)
+* Host Controller ![web ssh wildfly node](processes-18f3ac77.png)
 
 And Domain Controller node has two processes running:
 
 * Process Controller
-* Host Controller ![Domain Controller node](https://jelastic.com/blog/wp-content/uploads/2018/05/domain-processes.png)
+* Host Controller ![Domain Controller node](domain-processes-0b91bd4c.png)
 
-![wildfly admin panel](https://jelastic.com/blog/wp-content/uploads/2018/05/clsuter-topology-adminka.png)
+![wildfly admin panel](clsuter-topology-adminka-3d002ebc.png)
 
 Also, the topology changes are synchronized and shown within WildFly Admin Panel. In this way you get a ready-to-use WildFly cluster that can be scaled out and in, making hosting of your applications extremely flexible and cost-effective.
 
 ## Application Availability among Workers
 
-![application availability among workers](https://jelastic.com/blog/wp-content/uploads/2018/05/clsuter-topology-deployment-app.png)  
-![restart wildfly nodes](https://jelastic.com/blog/wp-content/uploads/2018/05/clsuter-topology-restart.png)
+![application availability among workers](clsuter-topology-deployment-app-bf6348a0.png)  
+![restart wildfly nodes](clsuter-topology-restart-b7cb812b.png)
 
 The application deployed to the standalone server is redeployed to all server instances during transformation to the cluster. To check this you can click **Open in browser** at each Worker. Also, you can make sure that the cluster provides high availability. For this, press **Restart node** button for one or even two nodes and try to access your application via **Open in browser** for the whole cluster. The application will be up and running without any interruptions.
 
 ## Cloning Cluster in Domain Mode
 
-![clone wildfly environment](https://jelastic.com/blog/wp-content/uploads/2018/05/cloning.png)  
-![running wildfly environment](https://jelastic.com/blog/wp-content/uploads/2018/05/2-env.png)
+![clone wildfly environment](cloning-f6681875.png)  
+![running wildfly environment](2-env-0af64a68.png)
 
 When releasing new application version or just applying some essential adjustments, it's a good practice to check how the newly implemented changes could affect the service work. The Jelastic PaaS allows you to accomplish such testing 'on-fly' (i.e. without service downtime and implicitly for your customers) with the **Clone Environment** option. A cloned environment is a ready-to-work cluster copy with all the required modifications already applied. The newly provisioned Domain Controller node operates with the appropriate cloned Workers, which are already listed within its admin panel. And the application from the original environment is deployed to the cloned one. Thus, the only thing that remains is to recheck your application's code and custom server configurations for the hardcoded IPs/domains and fix them accordingly (if there are any issues). This way, you can apply the implied changes to your environment copy without affecting the actual production. To increase the high availability of the system, Jelastic uses **several synchronized Load-Balancers**, placed at different nodes, for handling requests simultaneously. All of them work with a single data storage, which makes them fully interchangeable in case of any issue occurs at one of the instances.
 

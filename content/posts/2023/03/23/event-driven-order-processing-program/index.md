@@ -85,7 +85,7 @@ Using the queues in an asynchronous mode achieves similar latencies to in memory
 
 *Comparing using tmpfs as in-memory and ext4 on an M.2 NVMe drive.*
 
-![](Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651.png)
+![](Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651.jpg)
 
 ### Chronicle Enterprise Extensions
 

@@ -4,7 +4,7 @@ date: "2026-07-31T08:00:37+00:00"
 description: "When you build a search API, you usually start with HTTP GET, the natural choice for a read operation: it is safe, idempotent, and cacheable. Then the…"
 authors:
   - "huseyin-akdogan"
-image: "article-cover-scaled.png"
+image: "article-cover-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

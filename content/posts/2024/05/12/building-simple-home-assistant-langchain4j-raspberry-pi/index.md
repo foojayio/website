@@ -166,7 +166,7 @@ For external smart device integration, I used [Home Assistant](https://www.home-
 
 It can be installed on Raspberry Pi via the HomeAssistant OS, a Docker container, or a Python virtual environment, allowing users to manage everything from lighting and climate to security systems directly from their Raspberry Pi. In this project, we utilized a Docker container.
 
-![Home Assistant Integration](https://smart-assistant-langchain4j-blog.s3.amazonaws.com/homeassistant+integration+2.jpg)
+![Home Assistant Integration](homeassistant-integration-2-d779a0f2.jpg)
 
 After starting the HomeAssistant Docker container, we integrate the smart device using HomeAssistant's extensive device integration options. In this instance, I integrated a TP-Link Kasa Smart Strip via the Home Assistant UI.
 
@@ -285,7 +285,7 @@ public class DocumentRetriever {
 
 ## Revisiting the Current Architecture
 
-![Model Bottleneck](https://smart-assistant-langchain4j-blog.s3.amazonaws.com/smart+assistant+archi+bottleneck.PNG)
+![Model Bottleneck](smart-assistant-archi-bottleneck-2f771ef4.png)
 
 Our model currently processes all queries, determining if a tool can be used while also querying our database. This isn't very efficient. To improve, we split the workload: one LLM handles conversational queries and another manages commands. This requires another LLM to classify the intent of each query as conversational or actionable. We define these intents with an enum and use the `@Description` annotation to inform the LLM.
 

@@ -16,7 +16,7 @@ frozen: false
 
 SKP's Agile Cheatsheet is a three part series of articles focused on daily agile terminology, ideal to be printed out and pinned up near your workstation. Part 1 of this article is available [here](https://foojay.io/today/skps-agile-cheatsheet-part-01 "Here") and you can download the PDF of this cheatsheet [here](https://rebrand.ly/skp-agile-cheat-sheet-all "Here").  
 
-![](https://imgur.com/3Fzra1d.jpg)  
+![](3Fzra1d-597ea79e.jpg)  
 
 **Epic.**An epic is a large user story. \[Type – Agile Estimation / Agile Product Management\]
 
@@ -24,7 +24,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Fishbone Diagram**. The Fishbone Diagram (also called Ishikawa Diagram, Cause and Effect Diagram) got its name from its similarity of its shape to that of a fish skeleton. The Ishikawa Diagram relates to the seven basic tools of measurement, evaluation, control, and improvement of a production processes. Fishbone Diagrams are used to study, to display graphically, and analyze multiplicity of causes that influence the occurrence of a problem being solved and their impact. \[Type – Agile Root Cause Analysis\]  
 
-![](https://imgur.com/s8vD5bH.jpg)  
+![](s8vD5bH-18b52140.jpg)  
 
 **Information Radiator**. "Information radiator" is the generic term for any of a number of handwritten, drawn, printed or electronic displays which a team places in a highly visible location, so that all team members as well as passers-by can see the latest information at a glance: count of automated tests, velocity, incident reports, continuous integration status, and so on. \[Type – Agile Project Management\]
 
@@ -34,7 +34,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Kano Model**. The Kano Model (pronounced "Kah-no") is an approach to prioritizing features on a product roadmap based on the degree to which they are likely to satisfy customers. ... Product managers often use the Kano Model to prioritize potential new features by grouping them into categories. \[Type – Agile Product Management\]  
 
-![](https://imgur.com/vUF6lp0.jpg)  
+![](vUF6lp0-b5ade1f4.jpg)  
 
 **Large Scale Scrum (LeSS)**. LeSS is a lightweight (agile) framework for scaling Scrum to more than one team. It was extracted out of the experiences of Bas Vodde and Craig Larman while Scaling Agile development in many different types of companies, products, and industries over the last ten years. LeSS consists of the LeSS Principles, the framework, the guides, and a set of experiments. The LeSS framework is divided into two frameworks: Basic LeSS for 2-8 teams and LeSS Huge for 8+ teams. \[Type – Agile for Large Teams\]
 
@@ -44,7 +44,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Managed Agile Development** . The Managed Agile Development Framework described in this chapter is a project-level framework that is intended to provide a balance of agility combined with some level of predictability and control. It is intended for companies that are unable or not ready to move to a more complete top-to-bottom agile model such as the Scaled Agile Framework. It is a hybrid software development lifecycle model consisting of a blend of an adaptive agile development approach based on Scrum at the micro-level and a more traditional plan-driven approach at the macro-level, as shown below (Credits to O'Reilly Publishers) \[Type – Hybrid Agile\]  
 
-![](https://imgur.com/W1EHH41.jpg)  
+![](W1EHH41-31884328.jpg)  
 
 **Milestone**. An Agile milestone is a specific point in an Agile project that marks a significant stage of development. When you use milestones in Agile projects, there is a higher likelihood of your deliverables being on time — therefore they are an important feature in project management software. ( Credits: www.wrike.com ) \[Type – Agile Project Management / Agile Product Management / Agile Development\]
 
@@ -52,15 +52,15 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **MoSCoW Technique** . The Moscow method is a prioritization technique used in management, business analysis, project management, and software development to reach a common understanding with stakeholders on the importance they place on the delivery of each requirement; it is also known as MoSCoW prioritization or MoSCoW analysis. \[Type – Agile Project/Product Management\]
 
-![](https://imgur.com/Lr9PGrt.jpg)
+![](Lr9PGrt-8e6eeeb8.jpg)
 
 **Pair Programming**. Pair programming is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer or navigator, reviews each line of code as it is typed in. The two programmers switch roles frequently. \[Type – Agile Development\]  
 
-![](https://imgur.com/lQ4XFQ8.jpg)
+![](lQ4XFQ8-38269261.jpg)
 
 **Pareto Chart**. One of the core principles of Agile development is the Pareto Principle. It basically says 80% of the impact can be generated by focusing on 20% of the problems. Rapidly iterate on the set of problems by focusing on solving only the 20% that provide 80% impact each iteration quickly, faster and faster every time. Minimum effort maximum returns. The secret to success by achieving more with less. Do more by doing less. 80-20 rule helps move away from chaos and bring clarity part by part. Keeps you moving fast. (Credits – LinkedIn, Suhas Manangi) \[Type – Agile Project Management, Agile Product Management\]  
 
-![](https://imgur.com/fbWiy14.jpg)
+![](fbWiy14-8f658827.jpg)
 
 **Payback Period** . Payback period is the amount of time required to recover the initial cost of an investment. Let's say for example you make an investment of $100,000 and you will gain a profit of $10,000 per month once the feature is released. Then the payback period is 10 months. ( Credits to www.agilepm.se ) \[Type – Agile Product Management\]
 
@@ -74,7 +74,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Relative Sizing in Agile** . Relative estimation is one of the several distinct flavors of estimation used in Agile teams, and consists of estimating tasks or user stories, not separately and in absolute units of time, but by comparison or by grouping of items of equivalent difficulty. \[Type – Agile Estimation\]
 
-![](https://imgur.com/xpFw0Yj.jpg)
+![](xpFw0Yj-79bb9688.jpg)
 
 First, the size of a task or story is what must be estimated. It's made up of three factors:
 

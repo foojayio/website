@@ -170,7 +170,7 @@ However, different libraries work in different ways:
 
 Thanks to [Sébastien Deleuze](https://mastodon.online/@sdeleuze) for mentioning [JSpecify](https://jspecify.dev/), which I didn't know previously. It's an [industry-wide effort](https://jspecify.dev/about) to deal with the current mess. Of course, the famous XKCD comic immediately comes to mind:
 
-![How standards proliferate by XKCD](https://imgs.xkcd.com/comics/standards.png)
+![How standards proliferate by XKCD](standards-d3945873.png)
 
 I still hope it will work out!
 

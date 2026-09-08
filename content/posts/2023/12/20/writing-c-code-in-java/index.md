@@ -5,7 +5,7 @@ lastmod: "2023-12-20T09:21:57+00:00"
 description: "The Foreign Function & Memory API (also called Project Panama) has come a long way since it started."
 authors:
   - "johannes-bechberger"
-image: "panama-2000x981-1.png"
+image: "panama-2000x981-1.jpg"
 categories:
   - "Java"
   - "Java Core"
@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/panama-2000x981.png)
+![](panama-2000x981-0ceeab3a.jpg)
 
 **The Foreign Function \& Memory API (also called Project Panama) has come a long way since it started. You can find the latest version implemented in JDK 21 as a preview feature (use `--enable-preview` to enable it) which is specified by the [JEP 454](https://openjdk.org/jeps/454):**
 > By efficiently invoking foreign functions (i.e., code outside the JVM), and by safely accessing foreign memory (i.e., memory not managed by the JVM), the API enables Java programs to call native libraries and process native data without the brittleness and danger of JNI.

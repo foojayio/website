@@ -96,7 +96,7 @@ And for reasons mainly of ethical consideration and on how to engage with whole 
 
 Mostly now, the access and usage of an AI systems is managed by individual or additional license restriction.
 
-![](llama-2-700x458.png)
+![](llama-2-700x458.jpg)
 
 But this imposes barriers against use, difficulties to adopt and improve, problem in control over the technology and weak oversight and transparency.
 
@@ -111,7 +111,7 @@ What we need is:
 
 Open-Source shows that when you eliminate the obstacles to learning, using, sharing and enhancing software systems, everyone benefits. These benefits come from using licenses that follow the Open-Source Definition. The benefits can be expressed as autonomy, transparency, and cooperative improvement. They are necessary for everyone in AI. We need basic freedoms to help users create and use AI systems that are trustworthy and clear.(Reference #4)
 
-![](ai-spec-700x492.png)
+![](ai-spec-700x492.jpg)
 
 The current draft version is here \> [The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-5/ "The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative") and it follows the definition of AI system adopted by the Organization for Economic and Co-operation Development (OECD).  
 
@@ -125,11 +125,11 @@ For each AI systems (such as Pythia, Llama, BLOOM, Mistral, Phi2, Olmo etc.) the
 
 The plan and schedule of Open Initiative about this spec is to have a release candidate (RC) at the end of October'24.
 
-![](timeline-700x390.png)
+![](timeline-700x390.jpg)
 
 Stakeholders engaged in this varies from system and license creators, regulators, end users and the subject.
 
-![](stakeholders-700x392.png)
+![](stakeholders-700x392.jpg)
 
 Ongoing and following tasks of this spec for Open-Source Initiative are:
 

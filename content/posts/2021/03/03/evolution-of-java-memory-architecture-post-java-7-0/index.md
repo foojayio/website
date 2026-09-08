@@ -64,7 +64,7 @@ The most impactful change to Java has been the movement from PermGen to MetaSpac
 12. PermGen had a fixed size, but MetaSpace can Auto-Tune and Auto-Increase depending on the underlying OS. \[MetaSpace Size Efficiency\].
 13. Classes can be de-allocated concurrently without GC pauses. It is more efficient than in PermGen, as that required frequent GC pauses. \[MetaSpace Performance\].
 
-![Image title](https://4.bp.blogspot.com/-03r1GS2jWlk/WPzruNno57I/AAAAAAAANQU/EghKET29INkXMH3Nrd_zNlOsF93T5xmdACLcB/s640/permgen_to_metaspace.jpg)  
+![Image title](permgen_to_metaspace-24d72e05.jpg)  
 
 **\[Note\]**  
 Many authors have erroneously stated that PermGen is part of the Java Heap. You have to note this fact that PermGen was/is never a part of the Java Heap. It was only allocated as part of **Contiguous Memory as the Java Heap**. In the case of Metaspace, such a Contiguous Allocation does not exist, Metaspace lies in or is allocated in the native memory of the operating system.

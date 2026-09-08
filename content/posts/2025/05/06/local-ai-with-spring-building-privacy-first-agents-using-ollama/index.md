@@ -41,7 +41,7 @@ ollama serve
 
 This will spin up a client on your machine and you should see something like below:
 
-[![3wm66Vp.md.png](https://iili.io/3wm66Vp.md.png)](https://freeimage.host/i/3wm66Vp)
+[![3wm66Vp.md.png](3wm66Vp.md-e5f656a1.png)](https://freeimage.host/i/3wm66Vp)
 
 This means that your Ollama client is up and running, and, it will be accessible on port 11434.
 

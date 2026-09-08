@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:15:26+00:00"
 description: "Foojay is a one stop solution for everything related to Java. The Dashboard offers analysis, highlights, and categorized lists of updates by Java users."
 authors:
   - "geertjan-wielenga"
-image: "Screenshot-2020-08-20-at-17.19.43-1-1024x647.png"
+image: "Screenshot-2020-08-20-at-17.19.43-1-1024x647.jpg"
 categories:
   - "Release Notes"
 related_posts:
@@ -41,7 +41,7 @@ A great example of this difference in perspective can be found in [JDK-8146115](
 Going forward, a clearer perspective of what changes a Java update contains is now provided at [foojay.io](https://foojay.io/). Foojay's user-focused Java and OpenJDK update descriptions offer a dashboard with updated analysis, selected highlights, and categorized lists of updates arranged for consumption by Java users.
 
 Working together with Java enthusiasts around the world, the foojay team works to identify critical aspects of each new OpenJDK update when it is released and bring to the fore precisely the issues that have value and relevance to those that use Java throughout the industry.
-![](Screenshot-2020-08-20-at-17.19.43-1-1024x647.png)
+![](Screenshot-2020-08-20-at-17.19.43-1-1024x647.jpg)
 
 For example, in the April 2020 update, foojay chose to highlight two P4 issues that might otherwise not be given the prominence they deserve and be lost in the noise:
 

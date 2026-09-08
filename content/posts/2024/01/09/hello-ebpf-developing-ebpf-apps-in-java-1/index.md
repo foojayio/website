@@ -21,7 +21,7 @@ frozen: false
 This has historically been used for writing custom package filters in firewalls. Still, nowadays, it is used for monitoring and tracing, becoming an ever more critical building block of modern observability tools. To quote from [ebpf.io](https://ebpf.io/what-is-ebpf/):
 > 
 
-{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/12/image-20.png" class="aligncenter size-full is-resized" style="width:524px;height:auto" >}}
+{{< img src="image-20-e3856a18.png" class="aligncenter size-full is-resized" style="width:524px;height:auto" >}}
 
 >
 > Historically, the operating system has always been an ideal place to implement observability, security, and networking functionality due to the kernel's privileged ability to oversee and control the entire system. At the same time, an operating system kernel is hard to evolve due to its central role and high requirement towards stability and security. The rate of innovation at the operating system level has thus traditionally been lower compared to functionality implemented outside of the operating system.[](https://ebpf.io/static/e293240ecccb9d506587571007c36739/f2674/overview.png)
@@ -39,12 +39,12 @@ But there are none for Java, which is a pity. So... I decided to write bindings 
 *That's why I wrote [From C to Java Code using Panama](https://mostlynerdless.de/blog/2023/12/11/from-c-to-java-code-using-panama/) a few weeks ago.*
 
 Anyway, I'm starting my new blog series and eBPF library [hello-ebpf](https://github.com/parttimenerd/hello-ebpf):  
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/text2102.png)
+![](text2102.png)
 
 Let's discover eBPF together. Join me on the journey to write all examples from the [Learning eBPF book](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) (get it also from [Bookshop.org](https://bookshop.org/p/books/learning-ebpf-programming-the-linux-kernel-for-enhanced-observability-networking-and-security-liz-rice/19244244?ean=9781098135126), [Amazon](https://www.amazon.com/Learning-eBPF-Programming-Observability-Networking/dp/1098135121), or [O'Reilly](https://www.oreilly.com/library/view/learning-ebpf/9781098135119/)) by Liz Rice and more in Java, implementing a Java library for eBPF along the way, with a blog series to document the journey. I highly recommend reading the book alongside my articles; for this blog post, I read the book till page 18.
 
 The project is still in its infancy, but I hope that we can eventually extend the overview image from [ebpf.io](https://ebpf.io/what-is-ebpf/) with a [duke](https://wiki.openjdk.org/display/duke/Main):
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-23.png)
+![](image-23-b8a15636.png)
 
 ## Goals
 

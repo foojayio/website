@@ -5,7 +5,7 @@ lastmod: "2022-06-01T20:12:43+00:00"
 description: "Continue with the JUnit 5 series on how to customize test classes and test method names to produce more meaningful output."
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2019/07/junitnodisplayname.png?w=840"
+image: "junitnodisplayname-b3e91507.png"
 categories:
   - "Testing"
 related_posts:
@@ -24,14 +24,14 @@ Below, we will cover some customization of names for tests. First, a justificati
 ## Why Customize Names?
 
 When test class with a few test methods is run with JUnit, the output produced lists the name of the class and a status of execution for each method. The name of the class is used as the top level identifier:
-![JUnitNoDisplayName](https://cgunturme.files.wordpress.com/2019/07/junitnodisplayname.png?w=840)
+![JUnitNoDisplayName](junitnodisplayname-b3e91507.png)
 
 As is visible from the image above, a JUnit test was run on a class STestSolution3PeriodsAndDurations. This has four test methods that were tested and they all verify something. All tests passed. However, one really has to peer into the names of all the tests to understand what they executed.
 
 For instance, the second test verifies creation of a Period using fluent methods. This was inferred and hopefully most developers name their test methods to convey meaningful intent to anyone who looks at the result.
 
 Let's compare that to the next image:
-![JUnitWithDisplayName](https://cgunturme.files.wordpress.com/2019/07/junitwithdisplayname-1.png?w=840)
+![JUnitWithDisplayName](junitwithdisplayname-1-234836fe.png)
 
 Clearly the latter image communicates a lot better about what was tested and what the intent was. The test class is replaced with a meaningful text of what the overall theme for all test methods enclosed was : "**Periods (days, months, years) and Durations (hours, minutes, seconds)**". Also individual test methods had proper space-separated words rather than a camel-cased name.
 

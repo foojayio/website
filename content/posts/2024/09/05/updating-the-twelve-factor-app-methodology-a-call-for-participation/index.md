@@ -5,7 +5,7 @@ lastmod: "2024-09-05T07:44:56+00:00"
 description: "The 12 factor app methodology is being updated and we need your help with it! Contribute your ideas and help us modernize 12-Factor."
 authors:
   - "grace-jansen"
-image: "Screenshot-2024-08-29-at-13.07.44.png"
+image: "Screenshot-2024-08-29-at-13.07.44.jpg"
 categories:
   - "Cloud"
   - "Tools"

@@ -72,7 +72,7 @@ To achieve this, your Java code needs to be converted to bytecode. This is your 
 To achieve this, the JVM bytecode has to be "translated" for each of the supported operating systems and platforms where specific native code is required. This means all the different implementations you, as a developer, would need to write to support different platforms are already handled by the developers of the Java system.
 
 You can take a look at the source code to see how this is done within the Java project. All this code is freely available on GitHub. For example, on [this link](https://github.com/openjdk/jdk/tree/master/src/hotspot), you can find the different implementations of the HotSpot, as shown in a few screenshots of the project below.
-![Screenshot: JVMbytecode on GitHub](https://www.azul.com/wp-content/uploads/openjdk_sources_hotspot_os-1024x287.png) ![Screenshot: JVMbytecode on GitHub](https://www.azul.com/wp-content/uploads/openjdk_hotspot_cpu-1024x345.png)
+![Screenshot: JVMbytecode on GitHub](openjdk_sources_hotspot_os-1024x287-4a7f013d.png) ![Screenshot: JVMbytecode on GitHub](openjdk_hotspot_cpu-1024x345-e80f12dc.png)
 
 ### 2. Just-In-Time compilation
 
@@ -92,7 +92,7 @@ But simultaneously, the JVM immediately tracks how often each method is called. 
 When looking at the graph below, we can see how the speed of the application improves when shifting from interpreted bytecode (yellow), to the first optimized code (C1, green), resulting in the best performance with the optimized code (C2, blue).
 
 More info about this topic and how an application can be "tuned" to improve these different steps is available on "[Analyzing and Tuning Warm-up](https://docs.azul.com/prime/analyzing-tuning-warmup#an-introduction-to-jit-compilation)".
-![CHART: the speed of an application improves when shifting from interpreted bytecode (yellow), to the first optimized code (C1, green), resulting in the best performance with the optimized code (C2, blue).](https://www.azul.com/wp-content/uploads/chart-speed-optimization-level-1024x538.png)
+![CHART: the speed of an application improves when shifting from interpreted bytecode (yellow), to the first optimized code (C1, green), resulting in the best performance with the optimized code (C2, blue).](chart-speed-optimization-level-1024x538-8ad0e1a4.jpg)
 
 JIT is the opposite of **Ahead-Of-Time (AOT)** and typically behaves better when the produced native code gets optimized for what it exactly needs to do.
 
@@ -108,7 +108,7 @@ Another responsibility of the JVM is automated **memory management**. In other p
 The Garbage Collector (GC) is that part of the JVM that will handle this for you. It frees you as a developer entirely from the worries of managing the use of the memory. The GC will periodically look up the objects that are no longer needed and referenced them from the code and free memory space so they can be reused.
 
 You can find an entire article about the Garbage Collector here: [What Should I Know About Garbage Collection as a Java Developer?](https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/)
-[![What Should I Know About Garbage Collection as a Java Developer?](https://www.azul.com/wp-content/uploads/11-23-garbage-1024x400.jpg)](https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/)
+[![What Should I Know About Garbage Collection as a Java Developer?](11-23-garbage-1024x400-9e55d6e6.jpg)](https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/)
 
 ### 4. Thread management
 

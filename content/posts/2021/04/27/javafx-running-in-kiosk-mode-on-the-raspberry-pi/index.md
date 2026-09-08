@@ -127,7 +127,7 @@ slf4j-api-2.0.0-alpha0.jar
 slf4j-simple-2.0.0-alpha0.jar
 ```
 
-![](maven-build-finished-1024x675.png)
+![](maven-build-finished-1024x675.jpg)
 
 ## Run Modes
 
@@ -160,7 +160,7 @@ $ sudo bash run.sh
 </figure>
 
 As you can see in the video, because we are using an example application from the Pi4J project, we are able to control a LED with the button in the application.
-![](running-application-1024x626.png)
+![](running-application-1024x626.jpg)
 
 ### Kiosk Mode
 

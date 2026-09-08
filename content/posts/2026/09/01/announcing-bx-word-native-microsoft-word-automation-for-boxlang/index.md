@@ -5,7 +5,7 @@ lastmod: "2026-09-01T11:31:19+00:00"
 description: "Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements…"
 authors:
   - "cristobal-escobar"
-image: "Imagen2-1024x978.png"
+image: "Imagen2-1024x978.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"

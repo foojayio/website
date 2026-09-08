@@ -59,11 +59,11 @@ I wrote about this extensively in a previous post about the [Tong motion needed 
 
 Observability is somewhat resistant to examples, everything I try to come up with feels a bit synthetic and unrealistic when I examine it after the fact. Having said that, I looked at my modified version of the venerable Spring Pet Clinic demo using [digma.ai](http://digma.ai). Running it showed several interesting concepts taken by Digma.
 
-![Digma](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7u8t3xrcqant5csbca8q.png)
+![Digma](7u8t3xrcqant5csbca8q-343078b1.png)
 
 Probably the most interesting feature is the ability to look at what's going on in the server at this moment. This is an amazing exploratory tool that provides a holistic view for a moment in-time. But the thing I want to focus on is the "Insights" column on the right. Digma tries to combine the separate traces into a coherent narrative. It's not bad at it but it's still a machine, some of that value should probably still be done manually since it can't understand the why, only the what. It seems it can detect the venerable Spring [N+1 problem](https://digma.ai/blog/n1-query-problem-and-how-to-detect-it/) seamlessly.
 
-![Digma Trace View](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/asos6n5teuwhx95u4r3a.png)
+![Digma Trace View](asos6n5teuwhx95u4r3a-9a1cc70a.jpg)
 
 But this is only the start. One of my favorite things is the ability to look at tracing data next to a histogram and list of errors in a single view. Is performance impacted because there are errors?
 

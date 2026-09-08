@@ -43,7 +43,7 @@ Unfortunately, over-investing in unit tests has its downturns. I have seen huge,
 
 The fact that it was easy to produce so many unit tests turned out to be a two-edged sword. The tests often induced a 'false sense of confidence' that did not take into account the many biases that these tests fall into. Each test would look at a very narrow scope and validate only one happy path in a complex distributed system. A developer, reviewing thousands of green tests in the build would assume that his code change is well tested, often being surprised when real-world issues started occurring soon after merging the code.  
 
-{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.png" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
+{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.jpg" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
 
 To complicate matters, in some programming languages, injecting dependencies to allow mocking at every level, as unit tests require, entails complex changes, which do not necessarily lead to better design. The practice of 'refactoring for better testability', once vaunted as advantageous in producing less closely coupled components, soon became an obstacle as the cost of that abstraction became clear. Modern dev practices often favor simplicity over multi-layered modular designs and unit tests unfortunately strictly require the latter.
 
@@ -167,7 +167,7 @@ One of the tragedies of integration tests is that they produce a wealth of usefu
 Thankfully, this too is an area where the technology landscape is different today. [OpenTelemetry](https://opentelemetry.io/docs/instrumentation/java/automatic/) has made it easy to collect data produced by testing, even without making any code changes. To make that raw data into something more practical that we can use to assess our code changes, we can use tools that can digest and analyze that data.
 
 One such project that I am personally involved in is [Digma](https://digma.ai/), a free tool for developers, which focuses on analyzing the code by studying this type of observability data. It is a simple IDE plugin that runs locally on your machine and completely abstracts the logistics around OTEL and collecting and analyzing metrics and traces. We can set Digma up by installing it into the IDE via the [plugin marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback):
-![](1_G1pamm4hBqnJwPshTp-N_A-1024x638.png)
+![](1_G1pamm4hBqnJwPshTp-N_A-1024x638.jpg)
 
 #### Trace-based testing, continuously
 

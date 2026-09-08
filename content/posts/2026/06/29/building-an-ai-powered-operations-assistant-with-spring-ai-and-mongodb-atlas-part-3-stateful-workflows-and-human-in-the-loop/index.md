@@ -5,7 +5,7 @@ lastmod: "2026-06-29T09:40:43+00:00"
 description: "This is the third and final article in the series. Part 1 covered the RAG foundation — loading runbooks into a vector store and grounding model answers in real documentation. Part 2 added short-term and long-term conversational memory. This article introduces stateful workflow checkpointing, tool calls, and a pause/resume mechanism that lets multi-step investigations survive session boundaries."
 authors:
   - "matteo-rossi"
-image: "fri1.png"
+image: "fri1.jpg"
 categories:
   - "AI"
 related_posts:

@@ -5,7 +5,7 @@ lastmod: "2022-04-30T03:38:36+00:00"
 description: "I would like to show you how I created a \"sci-fi\" looking world clock that happens to be a cross-platform Java desktop application."
 authors:
   - "carldea"
-image: "Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png"
+image: "Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.jpg"
 categories:
   - "IntelliJ IDEA"
   - "JavaFX"
@@ -24,7 +24,7 @@ frozen: false
 
 Welcome to *Creating a JavaFX World Clock from Scratch (Part 1)*! In this series of blog entries I would like to show you how I created a "sci-fi" looking world clock that happens to be a cross-platform Java desktop application.
 
-{{< img src="Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png" class="size-medium" alt="A JavaFX based World Clock" width="286" height="510" >}}
+{{< img src="Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.jpg" class="size-medium" alt="A JavaFX based World Clock" width="286" height="510" >}}
 
 Here I will explain my thought process, development workflow, and of course JavaFX code details. Since it's still in the early stages, you can tune in by commenting or joining foojay's Slack channel at foojay.slack.com [\[2\]](https://foojay.slack.com/archives/C01GEEGDCHJ "foojay Slack channel #openjfx"), where I and others (Java experts \& Friends Of OpenJDK/OpenJFX) can offer advice.
 
@@ -199,7 +199,7 @@ The hour hand tip is a glowing orange colored ball shape with a radial gradient 
 
 When experimenting with Scene Builder, you get to play with changing a shapes fill color, stroke color, width, and much more. Below shows how to change the hour hand's tip (circle node) to appear as a spherical glowing ball.  
 
-{{< img src="Screen-Shot-2020-12-08-at-12.48.07-PM-499x510.png" class="size-medium" alt="Scene Builder Altering fill color" width="499" height="510" >}}
+{{< img src="Screen-Shot-2020-12-08-at-12.48.07-PM-499x510.jpg" class="size-medium" alt="Scene Builder Altering fill color" width="499" height="510" >}}
 
 Scene Builder's fill color process
 

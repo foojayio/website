@@ -6,7 +6,7 @@ description: "How to use Testcontainers for your project to create a stable and 
 canonical: "https://blog.payara.fish/jakarta-ee-integration-testing-with-testcontainers"
 authors:
   - "jadon-ortlepp"
-image: "https://lh4.googleusercontent.com/JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0I5AWQ_lgIrvDlik5_hP8mpWqInLR3ajhRQHaogg82q6RgNj3qrDo6yRKrI-GvU9iEq_t-xsAFSbmjAUJ_WUjANDPzGMjdEZW"
+image: "JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0-f970aabb.png"
 categories:
   - "Developer Tools"
   - "Jakarta EE"
@@ -630,11 +630,11 @@ Testcontainers Cloud is currently in a private beta and you can [get access by s
 2. Install the client on your development environment: Windows, Linux, and macOS are supported.
 3. Run the client software. The client software will automatically open a browser window pointing to [https://app.testcontainers.cloud](https://app.testcontainers.cloud/downloads) to retrieve the token needed to link your user account:  
 
-   ![](https://lh4.googleusercontent.com/JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0I5AWQ_lgIrvDlik5_hP8mpWqInLR3ajhRQHaogg82q6RgNj3qrDo6yRKrI-GvU9iEq_t-xsAFSbmjAUJ_WUjANDPzGMjdEZW)
+   ![](JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0-f970aabb.png)
 4. You're good to go! Testcontainers Cloud is ready to power your Testcontainers based tests.
 
 Here's how the Testcontainers Cloud client looks in a Windows environment:
-![](https://lh4.googleusercontent.com/M6Uz4DKM4i0oHTx-HfJn4Lv2CtDv-LZjpzShZs_hKyliRt8ZL_QViqhKhhuyj7R0UjTvBUAJRboocbUvkqp-scd5vaOBdajtZWLWKl0N-MzVAPPxwzXSC_MIlFhGzCMNBj4VsdkN)
+![](M6Uz4DKM4i0oHTx-HfJn4Lv2CtDv-LZjpzShZs_h-2e085a20.png)
 
 Now, when running the same test suite that we created in the previous sections, we'll see that when the Testcontainers engine connects to the Docker environment it will use a "leased" environment courtesy of your cloud account:
 

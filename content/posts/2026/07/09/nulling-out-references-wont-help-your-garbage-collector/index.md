@@ -5,7 +5,7 @@ lastmod: "2026-07-09T13:53:17+00:00"
 description: "Learn how intricate and amazing the JVM is and how much cognitive load that it takes on so you rarely have to think about things that steal your focus away from application logic."
 authors:
   - "kirk-pepperdine"
-image: "Screenshot-2026-07-09-at-15.41.30.png"
+image: "Screenshot-2026-07-09-at-15.41.30.jpg"
 categories:
   - "Performance"
 related_posts:

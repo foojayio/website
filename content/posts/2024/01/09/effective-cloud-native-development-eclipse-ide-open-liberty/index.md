@@ -51,7 +51,7 @@ Liberty Tools automatically detects Liberty Maven or Gradle projects. These proj
 
 If you're used to using actions in the Eclipse IDE through the project explorer **Run As** option, this can also be done for the same set of actions offered through the Liberty Tools plugin (if you'd rather use this approach instead of using the dashboard).
 
-![Screenshot of Liberty Tools run as options in the Eclipse IDE](EclipseLibertyTools3-700x429.png)
+![Screenshot of Liberty Tools run as options in the Eclipse IDE](EclipseLibertyTools3-700x429.jpg)
 
 ### Rapid, iterative development with Liberty dev mode
 

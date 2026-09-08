@@ -232,7 +232,7 @@ No other place will contain more valuable information than the release notes of 
 #### Check the driver compatibility
 
 Before upgrading anything MongoDB related, it's crucial to check the compatibility tables in the documentation for your driver. To **avoid** **breaking your application**, you should ensure that the MongoDB version is compatible with the MongoDB driver that you plan to use. Take a look at this image:  
-![](Screenshot-2025-12-30-at-10.22.59-PM.png)
+![](Screenshot-2025-12-30-at-10.22.59-PM.jpg)
 
 *MongoDB Java Driver Compatibility Table*
 

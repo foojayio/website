@@ -5,7 +5,7 @@ lastmod: "2025-11-13T09:15:59+00:00"
 description: "Last month we were in Dubai... and now we are on the other side of the world in the US to meet the people behind the Denver and Boulder JUG."
 authors:
   - "frankdelporte"
-image: "denver-and-boulder-jug-guests-1024x394-1.png"
+image: "denver-and-boulder-jug-guests-1024x394-1.jpg"
 categories:
   - "JUGs"
   - "Podcast"

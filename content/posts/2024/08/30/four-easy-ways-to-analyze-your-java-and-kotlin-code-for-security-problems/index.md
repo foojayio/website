@@ -63,7 +63,7 @@ snyk code test
 This command will analyze your source code for vulnerabilities and provide a detailed report of any issues it finds.
 
 The Snyk CLI is versatile and can be used in several ways depending on your needs. For instance, if you want to scan your code each time you commit changes, you can integrate the CLI commands into your pre-commit hooks. Alternatively, you can include the CLI commands in your Continuous Integration/Continuous Deployment (CI/CD) pipelines to ensure your code is analyzed for vulnerabilities before it's deployed.
-![blog-java-kotlin-snyk-cli-test](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566844%2Fblog-java-kotlin-snyk-cli-test.jpg&w=2560&q=75)
+![blog-java-kotlin-snyk-cli-test](snyk-io-e43611f8.jpg)
 
 Remember, the earlier you find and fix security vulnerabilities, the safer your application will be. So why not start on your local machine before even committing the code? All you have to do is create a (free) Snyk account and install the Snyk CLI
 
@@ -76,14 +76,14 @@ As a developer, your Integrated Development Environment (IDE) is your primary wo
 ### Snyk IntelliJ plugin
 
 The Snyk IntelliJ plugin is a powerful tool that provides real-time feedback on your Java code's security. Once you've installed the plugin, you can scan your project by right-clicking on it and selecting **Snyk** , then **Scan Project**. The plugin will then analyze your code and provide a list of potential vulnerabilities, their severity, and even suggestions for how to fix them.
-![blog-java-kotlin-sql-injection](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566843%2Fblog-java-kotlin-sql-injection.jpg&w=2560&q=75)
+![blog-java-kotlin-sql-injection](snyk-io-3f4663e3.jpg)
 
 In the above example, the Snyk IntelliJ plugin would detect that the SQL query is susceptible to SQL Injection attacks.
 
 ### Snyk VS Code plugin
 
 The Snyk VS Code plugin is another excellent tool for analyzing Java code for security vulnerabilities. To use it, you need to install the Snyk extension from the VS Code marketplace. Once installed, you can right-click on your project in the **Explorer** view and select **Scan with Snyk**. The plugin will then perform a detailed analysis of your Java and Kotlin code for any recognized security vulnerabilities, providing you with a list of issues and suggested remediation steps.
-![blog-java-kotlin-xss](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566844%2Fblog-java-kotlin-xss.jpg&w=2560&q=75)
+![blog-java-kotlin-xss](snyk-io-75b56b60.jpg)
 
 In the above example, the Snyk VS Code plugin would detect that the HTML output is vulnerable to cross-site scripting (XSS) attacks.
 
@@ -92,7 +92,7 @@ By integrating Snyk into your IDE, you can ensure the security of your Java code
 ## Option 3: Connect your Git repository to Snyk and enable code scanning
 
 Connecting your Git repository to Snyk is a fundamental step in your journey to enhance Java code and application security. Thankfully, Snyk integrates seamlessly with popular source control repositories, including GitHub, GitLab, Azure Repo, and BitBucket. This integration allows your Java code to be continuously scanned for vulnerabilities, enhancing your application security.
-![blog-java-kotlin-code-analysis](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1723566843%2Fblog-java-kotlin-code-analysis.jpg&w=2560&q=75)
+![blog-java-kotlin-code-analysis](snyk-io-9c93ca01.jpg)
 
 With the above Java code snippet as an example, once your Git repository is linked to Snyk, Snyk Code will automatically analyze the code using Static Application Security Testing (SAST). This analysis detects security vulnerabilities, such as SQL injection, cross-site scripting (XSS), and insecure deserialization, among others, and displays them in the Snyk User Interface (UI).
 

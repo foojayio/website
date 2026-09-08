@@ -64,7 +64,7 @@ In the cases where your traffic requires low level protocol information or is ou
 
 To begin with Wireshark, visit their [official website](https://www.wireshark.org/) for the download. The installation process is straightforward, but attention should be paid to the installation of command-line tools, which may require separate steps. Upon launching Wireshark, users are greeted with a selection of network interfaces as seen below. Choosing the correct interface, such as the loopback for local server debugging, is crucial for capturing relevant data.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxcemosuv8pf8qwm0hxd.png)
+![Image description](jxcemosuv8pf8qwm0hxd-10ac3ed5.jpg)
 
 When debugging a Local Server (localhost) use the loopback interface. Remote servers will probably fit with the en0 network adapter. You can use the activity graph next to the network adapter to identify active interfaces for capture.
 
@@ -72,11 +72,11 @@ When debugging a Local Server (localhost) use the loopback interface. Remote ser
 
 One of the challenges of using Wireshark is the overwhelming amount of data captured, including irrelevant "background noise" as seen in the following image.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ndr05sp01wmg4t7r0yop.png)
+![Image description](ndr05sp01wmg4t7r0yop-841037b0.jpg)
 
 Wireshark addresses this with powerful display filters, allowing users to hone in on specific ports, protocols, or data types. For instance, filtering TCP traffic on port 8080 can significantly reduce unrelated data, making it easier to debug specific issues.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mqg6mr5nja5tyld405cw.png)
+![Image description](mqg6mr5nja5tyld405cw-016e54c3.jpg)
 
 Notice that the there is a completion widget on top of the Wireshark UI that lets you find out the values more easily.
 
@@ -84,13 +84,13 @@ In this case we filter by port `tcp.port == 8080` which is the port used typical
 
 But this isn't enough as HTTP is more concise. We can filter by protocol by adding `http` to the filter which narrows the view to HTTP requests and responses as shown in the following image.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ia7jokyzd3q7jgf3sdj9.png)
+![Image description](ia7jokyzd3q7jgf3sdj9-2473e84e.png)
 
 ## Deep Dive into Data Analysis
 
 Wireshark excels in its ability to dissect and present network data in an accessible manner. For example, HTTP responses carrying JSON data are automatically parsed and displayed in a readable tree structure as seen below. This feature is invaluable for developers and analysts, providing insights into the data exchanged between clients and servers without manual decoding.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t6qzof6cealb3invscne.png)
+![Image description](t6qzof6cealb3invscne-f742f2aa.jpg)
 
 Wireshark parses and displays JSON data within the packet analysis pane. It offers both hexadecimal and ASCII views for raw packet data.
 

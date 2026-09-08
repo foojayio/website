@@ -5,7 +5,7 @@ lastmod: "2023-08-21T07:53:10+00:00"
 description: "Learn how you can simplify your application testing and local development workflow using Testcontainers Desktop app."
 authors:
   - "siva-katamreddy"
-image: "tcd-switch-runtimes-700x259-1.png"
+image: "tcd-switch-runtimes-700x259-1.jpg"
 categories:
   - "Testcontainers"
   - "Testing"
@@ -112,7 +112,7 @@ Let's explore various features of Testcontainers Desktop and how it helps while 
 
 Testcontainers Desktop will automatically detect your locally installed Docker runtime(s) and is configured to use it. You can choose which Docker runtime to use by the Testcontainers libraries by selecting from the menu options as shown below:
 
-![Testcontainers Desktop switch container runtime](tcd-switch-runtimes-700x259.png)
+![Testcontainers Desktop switch container runtime](tcd-switch-runtimes-700x259.jpg)
 
 You can also create your free [Testcontainers Cloud](https://testcontainers.com/cloud/) account and choose to save local resources by running your containers in the cloud instead of running them on your computer.
 
@@ -155,7 +155,7 @@ During the development, you would like to quickly change the code and verify the
 
 Since you are using the **Testcontainers Desktop** , the `testcontainers.reuse.enable` flag is set automatically for your dev environment. You can enable or disable it by clicking on **Enable reusable containers** option under **Preference**s.
 
-![Testcontainers Desktop Enable Reuse](tcd-reuse.png)
+![Testcontainers Desktop Enable Reuse](tcd-reuse.jpg)
 
 When the reuse feature is enabled, you only need to configure which containers should be reused using the Testcontainers API. While using **Testcontainers for Java** you can achieve this using `.withReuse(true)` as follows:
 

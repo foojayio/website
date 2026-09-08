@@ -19,7 +19,7 @@ frozen: false
 
 ## Key Takeaways
 
-![](https://raw.githubusercontent.com/jjfumero/jjfumero.github.io/master/files/blog/24-02-prog-model/back.jpg)
+![](back-c8acc920.jpg)
 
 * [TornadoVM](https://github.com/beehive-lab/TornadoVM/) offers an API for parallel programming on modern hardware that tackles data parallel, task parallel and pipeline parallel applications.
 * TornadoVM offers different abstractions to developers to be able to express parallel applications in Java, identify the methods to offload, and dispatch the application on the corresponding accelerators.
@@ -39,7 +39,7 @@ This API contains the building blocks to be used by developers to express parall
 
 This API is the main content of this blog post.
 
-![Alt text](https://raw.githubusercontent.com/jjfumero/jjfumero.github.io/master/files/blog/24-02-prog-model/progModel.jpg)
+![Alt text](progModel.jpg)
 
 Under the hoods, the TornadoVM runtime system and the Just-In-Time compiler, optimise, compile and dispatch the input application on heterogeneous hardware.
 
@@ -273,7 +273,7 @@ Cool, isn't it? If you want to know more about dynamic reconfiguration, [this pa
 
 There are more methods in the `TornadoExecutionPlan` class. We covered just two of them. If you are interested, I invite you to read the documentation and the examples. Additionally, I recorded a video showing, step by step, some of these functions in action.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/R3gwI0qijGk)](https://youtu.be/R3gwI0qijGk)
+[![](R3gwI0qijGk-819f33b6.jpg)](https://youtu.be/R3gwI0qijGk)
 
 ## Summary
 

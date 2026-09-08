@@ -5,7 +5,7 @@ lastmod: "2021-09-04T07:45:39+00:00"
 description: "This is another book that I can warmly recommend to Java programmers who have learned to code and strive to code well!"
 authors:
   - "cay-horstmann"
-image: "https://horstmann.com/unblog/2021-07-05/Faella-SGS-HI.jpeg"
+image: "Faella-SGS-HI-8fd9184e.jpeg"
 categories:
   - "Book Review"
   - "Books"
@@ -16,7 +16,7 @@ related_posts:
 frozen: true
 ---
 
-![Cover](https://horstmann.com/unblog/2021-07-05/Faella-SGS-HI.jpeg)
+![Cover](Faella-SGS-HI-8fd9184e.jpeg)
 
 I recently [reviewed the book "Java by Comparison"](/today/book-review-java-by-comparison/) by Simon Harrer, Jörg Lenhard, and Linus Dietz. That book is intended for programmers who know the basics of the Java language, perhaps from a university curriculum. The book teaches programmers to improve their Java language and library usage through seventy "before and after" examples, covering topics such as coding style, naming, exceptions, streams, and class design.
 
@@ -63,7 +63,7 @@ In my review of "Java by Comparison", I wrote: "Here is one more thing I like. I
 
 I liked the annotated figures, rendered in a minimalistic style that reminded me of [Edward Tufte](//www.edwardtufte.com/tufte'). (OK, Tufte might have removed the borders around the nodes.)
 
-![Image Sample](https://horstmann.com/unblog/2021-07-05/faella-image-sample.png)
+![Image Sample](faella-image-sample-446f6927.png)
 
 And **I loved the code annotations**. Marco puts the emphasis where it belongs: on the annotations.
 
@@ -75,7 +75,7 @@ Why do blogs do what they do? Because it's easy, not because it's good. You can'
 
 That's not what Marco does. Look at this sample.
 
-![Code Sample](https://horstmann.com/unblog/2021-07-05/faella-code-sample.png)
+![Code Sample](faella-code-sample-df05a8b2.png)
 
 Note how the annotations are *not in monospace*. They use a font that is easy to read (except they revert to monospace for actual code, as they should). Just like you write about code in the main text.
 

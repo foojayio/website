@@ -37,7 +37,7 @@ Mongot has two responsibilities:
 * First, it follows the change stream of any collection you choose to index and builds Lucene indexes asynchronously.
 * Second, when you run the $search aggregation stage in a MongoDB query, mongot will be invoked to perform a Lucene query on the index and return a stream of document ids for further processing and data retrieval.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdH3ab-XATCrN5-LLJCvpbECaU-yIa91oAvqb0TmfmYlyEgp--tM6m3g11X-gZBA2zFm82mkBt1Rv1OCFgsgQqkTYplnfzTCqSvYhKsR1_qn5zWgA-eJWccH3QxMBg_XVCtg4VOTg?key=xtuklWIXthgOT-_RVHPDsg)
+![](AD_4nXdH3ab-XATCrN5-LLJCvpbECaU-yIa91oAv-b11f2b07.jpg)
 
 Lucene and MongoDB Atlas Search support many index types which are very different to the excellent, efficient, and super-fast [b-tree based MongoDB indexes](https://www.mongodb.com/docs/manual/indexes/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant#details).
 
@@ -583,7 +583,7 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
 ### Loading a *mongodump* BSON database and index
 
 Let's create some seed data and MongoDB Atlas Search indexes, which we'll store in a resource directory /seed-data.
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdlQGT-Gx9KjXh62fBIazUC4WwMXa3Ti--NVjGkt3YqlpAsQoIpGl_rQiqtz7Db-xAgDfYx71au5tzv3yIO35ipy04k7I_f4wkepw2RoSM-qdeBF59W_0A1YbeOce3zcvzqzEiH_g?key=xtuklWIXthgOT-_RVHPDsg)
+![](AD_4nXdlQGT-Gx9KjXh62fBIazUC4WwMXa3Ti-NV-6b33b0f0.png)
 
 I've built a little test dataset of 15,000 Person documents in MongoDB and used mongodump to export it. Just for fun, I used a [local LLM](https://github.com/luketn/generate-person-data) to generate it.
 

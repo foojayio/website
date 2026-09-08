@@ -26,7 +26,7 @@ You can find all the interviews [in this YouTube playlist](https://www.youtube.c
 {{< youtube 31bhIAR_oc4 >}}
 
 What was also great is that Digma, in the form of [Lee Sheinberg](https://www.linkedin.com/in/leesheinberg/), actively participated in the Foojay.io booth too, i.e., Foojay.io is a global network of enthusiastic Java and, more broadly, OpenJDK developers, which was reflected in the participation at the booth.
-[![](digmafoojay-1024x697.png)](https://x.com/Digma_ai/status/1855967865175785896)
+[![](digmafoojay-1024x697.jpg)](https://x.com/Digma_ai/status/1855967865175785896)
 
 It was also an opportunity for [Nataliia Dziubenko](http://Nataliia Dziubenko), new engineer at Azul, to meet several of her new colleagues in person, such as Gerrit, Frank, and myself.
 ![](IMG_8951-1024x791.jpg)

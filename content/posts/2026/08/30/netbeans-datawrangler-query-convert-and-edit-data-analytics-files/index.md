@@ -29,7 +29,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 ## File support
 
 **Parquet.** A Parquet file opens in a window with a Visual tab and a Query tab.
-![](Screenshot-2026-08-30-at-11.54.48-1024x483.png)
+![](Screenshot-2026-08-30-at-11.54.48-1024x483.jpg)
 
 * The Visual tab shows the number of rows and row groups, the writer and format version, and a table of columns with their SQL type, physical type, encoding, compression codec, compressed and uncompressed size, minimum, maximum and null count.
 * A bar in the size column shows each column's share of the file.
@@ -37,7 +37,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 * The Query tab is an SQL editor over the file, pre-filled with a `read_parquet` query and commented examples.
 
 **Excel.** A workbook opens as a spreadsheet: lettered columns, numbered rows, a name box and formula bar above the grid, and one tab per sheet along the bottom.
-![](Screenshot-2026-08-30-at-11.54.27-1024x504.png)
+![](Screenshot-2026-08-30-at-11.54.27-1024x504.jpg)
 
 * Header cells have a dropdown with Sort A to Z, Sort Z to A and a filter by value, sorting renumbers the rows, filtering hides rows and shows their original numbers in blue, as Excel does.
 * Columns can be dragged to reorder and resized.
@@ -92,7 +92,7 @@ After `s.` it lists the columns of `s`, which may be a table, a view, a common t
 **Documentation.** As seen above, DuckDB keywords and types are colored, and hovering shows a summary, the syntax and an example, with a link to the DuckDB documentation. Standard keywords such as `FROM`, `GROUP BY` and `INSERT` are documented for what DuckDB adds to them. Hovering a function shows its signature and description. The same text appears in the completion documentation pane.
 
 **Code templates.** Thirty-one templates cover common patterns, such as `dqual` for top-N per group, `dpiv` for a cross-tab, `dasof` for a time-series join, `dcsv` and `dpq` for reading files, `dcopy` for writing Parquet, `dmacro` for macros and `dvals` for inline data.
-![](Screenshot-2026-08-30-at-18.07.44-1024x340.png)
+![](Screenshot-2026-08-30-at-18.07.44-1024x340.jpg)
 
 Type the abbreviation and press Tab. They can be edited under Tools › Options › Editor › Code Templates › SQL, and [the full list is in the repository README](https://github.com/geertjanw/Apache-NetBeans-Data-Wrangler#code-templates).
 

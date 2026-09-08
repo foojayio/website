@@ -6,7 +6,7 @@ description: "Rewriting applications is easy. Doing it while preserving compatib
 canonical: "https://lightrun.com/best-practices/modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing/"
 authors:
   - "shai-almog"
-image: "Blog---20.png"
+image: "Blog---20.jpg"
 categories:
   - "DevOps"
   - "Tutorials"

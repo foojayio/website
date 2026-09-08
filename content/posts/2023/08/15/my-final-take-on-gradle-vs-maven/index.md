@@ -22,7 +22,7 @@ frozen: false
 
 I attended the JavaLand conference in March, stumbled upon the Gradle booth, and found this gem:
 
-[![](Screenshot-2023-08-05-at-10.03.59-754x1024.png)](https://twitter.com/nicolas_frankel/status/1638549568957861889)
+[![](Screenshot-2023-08-05-at-10.03.59-754x1024.jpg)](https://twitter.com/nicolas_frankel/status/1638549568957861889)
 
 Of course, at some point, a fanboy hijacked the thread and claimed the so-called superiority of Gradle. In this post, I'd like to shed some light on my stance, so I can direct people to it instead of debunking the same "reasoning" repeatedly.
 

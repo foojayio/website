@@ -5,7 +5,7 @@ lastmod: "2022-02-22T10:55:03+00:00"
 description: "Hi everyone, welcome to the February update of Visual Studio Code Java and this time we have a special edition for education!"
 authors:
   - "nick-zhu"
-image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/enabletest.png"
+image: "enabletest-f796dd68.png"
 categories:
   - "Release Notes"
   - "VS Code"
@@ -30,7 +30,7 @@ To address this, we have added a new feature in our extensions so that if your p
 
 To use this feature, simply go to the "Testing" view and select "Enable Java Tests" (shown in the picture below).
 
-[![Enable test button](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/enabletest.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/enabletest.png)
+[![Enable test button](enabletest-f796dd68.png)](enabletest-f796dd68.png)
 
 This button will do two things for you:
 
@@ -39,7 +39,7 @@ This button will do two things for you:
 
 Here is a demo of the feature:
 
-![](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/enable-tests.gif)
+![](enable-tests-7a570e49.gif)
 
 After this step is done, simply create a Java file and start writing unit tests! You can get this feature in the latest update of [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
 
@@ -51,11 +51,11 @@ GUI-based Java applications are quite common in school projects. The most common
 
 We have added built-in support to create a JavaFX based project with Maven archetype in our Java extensions. To use this new feature, simply bring up the Command Palette (Ctrl+Shift+P) and run command "Java: Create Java Project". From the drop-down list, select "JavaFX". After selecting this item, a JavaFX project based on Maven will be created for you.
 
-[![create javafx](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/create-javafx.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/create-javafx.png)
+[![create javafx](create-javafx-8d652aee.png)](create-javafx-8d652aee.png)
 
 To run the JavaFX application, you can open the Maven view, expand `hellofx` \> `Plugins` \> `javafx` and run the Maven goal: `javafx:run`.
 
-![](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/run-javafx.gif)
+![](run-javafx-84576e28.gif)
 
 #### More Visual Studio Code sample projects for JavaFX
 
@@ -67,7 +67,7 @@ AWT is another framework that is popular among Java GUI application development.
 
 To enable the code completion for AWT, you can open the Command Palette (Ctrl+Shift+P) and then select the command Java: Help Center. Go to the Student section and select Enable AWT Development. Please note that this action will update a setting at the workspace level, so please make sure a workspace is opened in Visual Studio Code. Here is a demo of this feature:
 
-![](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/enableawt-1.gif)
+![](enableawt-1-f3abfa14.gif)
 
 After the setting is enabled, code completion will work on AWT applications! You can use [this basic sample code](https://code.visualstudio.com/docs/java/java-gui#_develop-awt-applications) to test your AWT on Visual Studio Code.
 
@@ -85,11 +85,11 @@ In addition to unit testing and GUI applications, we are also seeing that Gradle
 
 This feature will help you to bootstrap a simple Gradle project with just a few steps. To use this feature, simply bring up the command palette (Ctrl+Shift+P), then run the "Java: Create Java Project", and select "Gradle" from the list. Currently this workflow supports both Groovy and Kotlin as your Domain Specific Language (DSL).
 
-[![Create gradle project](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/gradle.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/gradle.png)
+[![Create gradle project](gradle-17bcbaa8.png)](gradle-17bcbaa8.png)
 
 You can also click the "Create Java Project" button to use this feature.
 
-[![Create Java Project](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/createjavaproject.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/createjavaproject.png)
+[![Create Java Project](createjavaproject-18241329.png)](createjavaproject-18241329.png)
 
 Note that you will need to install the [Gradle for Java extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) to use this feature. To use all the new features mentioned above, please download the latest version of [Extension Pack for Java.](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 

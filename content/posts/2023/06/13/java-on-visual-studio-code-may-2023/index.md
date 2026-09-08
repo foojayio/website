@@ -26,7 +26,7 @@ frozen: false
 * Java General -- Provides a good starting point for all general Java work.
 * Java Spring -- Provides a good starting point for Spring developers
 
-[![Profile template dropdown](https://code.visualstudio.com/assets/updates/1_78/profile-template-dropdown.png)](https://code.visualstudio.com/assets/updates/1_78/profile-template-dropdown.png)
+[![Profile template dropdown](profile-template-dropdown-8784ff13.png)](profile-template-dropdown-8784ff13.png)
 
 Once you switch to these profiles, you can easily get started for your Java projects and customize the profiles further. Please let us know if these templates can be improved at [https://github.com/Microsoft/vscode-java-pack.](https://github.com/Microsoft/vscode-java-pack)
 
@@ -42,7 +42,7 @@ We introduced our new Java Project Explorer UI last month, and we have been maki
 
 Here's a demo that covers all the features above. Please let us know if you have any [feedback](https://github.com/Microsoft/vscode-java-pack) regarding these UI updates.
 
-![Java Project Explorer New UX](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/05/projectexplorer.gif)
+![Java Project Explorer New UX](projectexplorer.webp)
 
 #### Whitelist for exception types
 
@@ -50,7 +50,7 @@ We have also added a debugging feature that allows you to specify a white list o
 
 You can set these exception types using this setting: "java.debug.settings.exceptionBreakpoint.exceptionTypes". Here's a quick demo.
 
-![Excpetion Type](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/05/whitelist.gif)
+![Excpetion Type](whitelist-e3935a43.webp)
 
 #### Project import time improvement using Maven parallel download
 
@@ -71,17 +71,17 @@ Lastly, we want to share an update for Spring Boot dashboard. Profiles are a cor
 
 In our latest release, we have supported starting a Spring Boot application with a selected Spring profile from the Spring Boot dashboard directly using the UI. The way to use this feature is to right click on a Spring application in the Apps panel and select "Run with Profile". Here's a demo.
 
-![Spring profile](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/05/springprofile.gif)
+![Spring profile](springprofile-43812cf9.gif)
 
 #### Install Extension Pack for Java
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 Feedback and suggestions
 

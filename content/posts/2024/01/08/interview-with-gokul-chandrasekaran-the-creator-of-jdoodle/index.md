@@ -29,7 +29,7 @@ Certainly! I'm Gokul the founder of JDoodle, and I have over 20 years of experie
 Over the years, I've transitioned through diverse roles, from engineering management and IT architecture to management consulting. Each of these positions has given me a unique perspective. I'm glad we can help Foojay with this initiative.
 
 ***Example of executable code integration with JDoodle into the [Foojay Java Quickstart Tutorial](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/):***
-![](foojay-java-tutorial-1-973x1024.png)
+![](foojay-java-tutorial-1-973x1024.jpg)
 
 ***What was your initial goal when you started with JDoodle?***
 
@@ -48,7 +48,7 @@ Furthermore, in our constant quest to offer more value to our users, we've intro
 ***JDoodle supports 80+ languages and 2 databases. Those are big numbers! How did you achieve this?***
 
 Achieving support for 76+ languages and 2 databases on JDoodle was predominantly user-driven. As I mentioned earlier, the platform's growth and direction have been significantly influenced by the needs and feedback of our users. Whenever a user reached out with a request for a new language or a feature, we took it upon ourselves to find a way to accommodate it.
-![](jdoodle-supported-languages-1024x695.png)
+![](jdoodle-supported-languages-1024x695.jpg)
 
 This commitment to our community's requirements and our relentless drive to cater to them led us to the extensive list of languages and databases we support today. And our mission doesn't stop here. We're continuously working to expand our offerings, and I'm excited to share that we're on track to support more than 100 languages soon. This journey is a testament to the symbiotic relationship between JDoodle and its users, where their needs shape our growth, and our platform empowers their coding journey.
 

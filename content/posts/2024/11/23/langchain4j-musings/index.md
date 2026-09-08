@@ -20,7 +20,7 @@ frozen: false
 
 I'm coming relatively late to the LLM party, but I rarely come very early in the hype cycle.
 
-![Gartner hype cycle](https://upload.wikimedia.org/wikipedia/commons/9/94/Gartner_Hype_Cycle.svg)
+![Gartner hype cycle](Gartner_Hype_Cycle-2428adb1.svg)
 
 For example, I never bought into blockchain, the solution still searching for problems to solve, nor in microservices, the latest in the cargo cult IT trends. Despite my late arrival at the LLM party, I have been a regular user of LLMs. I use OpenAI for non-controversial questions outside my cone of knowledge, *e.g*., linguistics or legal; I use GitHub Copilot in my IDE to improve my code.
 

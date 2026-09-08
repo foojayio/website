@@ -36,7 +36,7 @@ FetchType.LAZY
 .
 
 Our old code for the entity was below:
-![Domain model with fetch type EAGER](1_Tr3xvq9hSvqoK3LHNaib6g-445x510.png)
+![Domain model with fetch type EAGER](1_Tr3xvq9hSvqoK3LHNaib6g-445x510.jpg)
 
 After using FetchType.LAZY our new code will be like below:
 ![Domain model with fetch type LAZY](1_Tr3xvq9hSvqoK3LHNaib6g-1-441x510.png)
@@ -70,7 +70,7 @@ Notice that here we have only used the attributes owner and locations in our @Na
 **Calling the named entity graph:**
 
 To call this named entity graph in our query, we have added the following additional lines (line 96, 97 and 101) in our existing code.
-![Calling the named entity graph](1_Tr3xvq9hSvqoK3LHNaib6g-4-700x433.png)
+![Calling the named entity graph](1_Tr3xvq9hSvqoK3LHNaib6g-4-700x433.jpg)
 
 ## **Using Spring Data JPA Provided @EntityGraph Annotation**
 

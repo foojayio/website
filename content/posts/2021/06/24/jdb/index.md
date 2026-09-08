@@ -309,4 +309,4 @@ Knowing features like this helps you get the best java jobs, that's why to help 
 
 Download this step-by-step guide for free!
 
-![](https://jfeatures.com/img/ebook_upd.png)
+![](ebook_upd.png)

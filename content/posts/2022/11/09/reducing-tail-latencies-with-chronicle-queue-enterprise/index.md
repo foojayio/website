@@ -5,7 +5,7 @@ lastmod: "2022-11-09T15:08:08+00:00"
 description: "Fed up with pauses at the high percentiles in your application? You may want to consider Chronicle Queue Enterprise!"
 authors:
   - "jerry-shea"
-image: "Screen-Shot-2022-10-31-at-11.20.54-AM.png"
+image: "Screen-Shot-2022-10-31-at-11.20.54-AM.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"

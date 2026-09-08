@@ -130,7 +130,7 @@ I ran the same JBang examples that worked on the OrangePi 5 Ultra. Plain Java co
 [Phoronix](https://www.phoronix.com/) conducted comprehensive benchmarks comparing the OrangePi RV2 with Raspberry Pi boards. Their [Java SciMark 2.2 tests](https://www.phoronix.com/review/orange-pi-rv2-benchmarks/5) show the RV2 is 2-7 times slower than the Raspberry Pi 5 depending on the workload.
 
 The [overall benchmark results](https://www.phoronix.com/review/orange-pi-rv2-benchmarks/7) paint a clearer picture:
-![Phoronix benchmark results](https://phoronix.com/benchmark/result/orange-pi-rv2-risc-v-ky-x1-cpu-benchmarks/geometric-mean-of-all-test-results-result-composite-oprrvkxcb.svgz)
+![Phoronix benchmark results](geometric-mean-of-all-test-results-resul-22d2e7a7.svg)
 
 The RV2 scores lower than both the Raspberry Pi 4 and 5 across most tests. This isn't a surprise because RISC-V is still maturing, and the Ky X1 is an early implementation. The 8 cores help with parallel workloads, but single-threaded performance lags behind ARM equivalents.
 

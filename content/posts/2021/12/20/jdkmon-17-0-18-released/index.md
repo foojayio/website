@@ -66,10 +66,10 @@ JDKMon will check for all version numbers of the OpenJDK distributions it finds 
 There is NO guarantee that the distribution you use is affected but at least you will be aware that there might be a CVE (Common Vulnerability and Exposure).
 
 The yellow circle in the screenshot below indicates that there are known vulnerabilities for OpenJDK 16.0.1.  
-![](https://i.ibb.co/LZkshY8/Vulnerability.png)  
+![](Vulnerability-c84d23ab.jpg)  
 
 When you click on the yellow circle another window will pop up which shows you the related CVE's.  
-![](https://i.ibb.co/wr7yCkr/Vulnerabilities-found.png)  
+![](Vulnerabilities-found-1e936394.png)  
 
 The CVE entries in that window are links that when clicked will open the clicked CVE in your standard browser with a more detailed description.
 

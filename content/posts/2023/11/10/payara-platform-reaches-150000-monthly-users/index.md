@@ -24,7 +24,7 @@ Designed for mission-critical systems in production and containerized Jakarta EE
 
 Developers from diverse regions and industries have embraced the platform, leveraging its capabilities to build and deploy enterprise-grade applications. The community-driven nature of Payara Platform additionally fosters collaboration and innovation, which has led to its sustained growth and development.
 
-[![150,000 Blog Downloads](https://info.payara.fish/hubfs/blog-image-uploads/150000%20downloads.png "150,000 Blog Downloads")](https://info.payara.fish/hubfs/blog-image-uploads/150000%20downloads.png "150,000 Blog Downloads")
+[![150,000 Blog Downloads](150000-20downloads-b0e33269.jpg "150,000 Blog Downloads")](150000-20downloads-b0e33269.jpg "150,000 Blog Downloads")
 
 CEO and Founder, Steve Millidge, Payara, comments:
 > *"**We are immensely proud of the global adoption of Payara Platform, which serves as a testament to the hard work and dedication of our community members and the excellence of our product. With more than 150,000 monthly users and counting, Payara Platform has become the go-to choice for those seeking a powerful, aggressively compatible, open source application server.*** ***This milestone demonstrates our commitment to delivering high-quality solutions that meet the evolving needs of the software development community and enterprises. We have also recently launched Payara Cloud, a fully managed cloud infrastructure management solution that fully eliminates the need of Kubernetes, and brings significant cost savings for businesses.***"

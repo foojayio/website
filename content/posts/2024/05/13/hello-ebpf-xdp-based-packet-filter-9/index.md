@@ -5,7 +5,7 @@ lastmod: "2024-05-13T07:13:39+00:00"
 description: "Learn about new support for XDP to create a simple package blocker for eBPF."
 authors:
   - "johannes-bechberger"
-image: "xdp_filter-1-2000x1005-1.png"
+image: "xdp_filter-1-2000x1005-1.jpg"
 categories:
   - "Tools"
 related_posts:
@@ -29,7 +29,7 @@ This blocks all incoming IPv4 packages from `twitter.com`. We see how it works i
 ## Network Packet
 
 All networking is packet-based, with multiple layers of protocol from shared medium (e.g., Ethernet) to application level (e.g., HTTP):
-![](https://mostlynerdless.de/wp-content/uploads/2024/04/network_stack-2000x517.png)
+![](network_stack-2000x517-e3edcfd7.png)
 
 [Ethernet](https://en.wikipedia.org/wiki/Ethernet) is the lowest-level protocol, with all packets coming to and from network interfaces being ethernet packets. The ethernet header contains the "physical" MAC address of both the source and destination of the package, combined with the protocol number of the next level protocol. We can represent it in C as follows:
 
@@ -113,7 +113,7 @@ Armed with this knowledge, we can now create a package filter:
 ## Writing a Packet Filter
 
 The basic structure of our packet filter application consists of a Java part that handles the configuration and logging and an eBPF part that uses an XDP hook that is called for every received packet. As explained above, The XDP hook decides what to do with every packet. So the structures are as follows:
-![](https://mostlynerdless.de/wp-content/uploads/2024/04/xdp_filter-1-2000x1005.png)
+![](xdp_filter-1-2000x1005-0e7749c3.jpg)
 
 We start with the definition of eBPF for collecting statistics, blocked packets per IP address, and the configuration of the blocked IP addresses:
 

@@ -45,7 +45,7 @@ Development and DevOps teams utilize an array of tools, often perceived as compl
 
 Such capabilities, although not always necessary for smaller scales, offer significant advantages in application management. Advanced management tools facilitate the navigation and control over multiple machines, making them indispensable for developers seeking to optimize application performance and reliability.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5ca4duiw3l3hqipsolap.png)
+![Image description](5ca4duiw3l3hqipsolap-01f29e6c.png)
 
 ### Introduction to JMX (Java Management Extensions)
 

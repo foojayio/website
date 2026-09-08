@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Metal and Skins](https://www.codenameone.com/blog/metal-and-skins.jpg)
+![Metal and Skins](metal-and-skins.jpg)
 
 This post has a lot to cover. Before we get to any of it I want to take on the uncomfortable subject first: quality. Two incidents from the past two weeks deserve a public explanation, one was a bug that fits into our normal iteration loop and one was a serious mistake on my part. Both deserve the kind of explanation I would want if I were on the other side of the import.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -85,17 +85,17 @@ Everything else stays the same. The Java surface is unchanged, your existing cod
 
 The most user-visible improvement from the Metal port is text. Here is the `ShowcaseTheme` capture from the Metal screenshot suite:
 
-{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-light.png" class="is-resized" alt="Metal showcase, light" style="width:200px" >}}
+{{< img src="metal-showcase-light-5d28716f.jpg" class="is-resized" alt="Metal showcase, light" style="width:200px" >}}
 
-{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-dark.png" class="is-resized" alt="Metal showcase, dark" style="width:200px" >}}
+{{< img src="metal-showcase-dark-a31d2e3a.jpg" class="is-resized" alt="Metal showcase, dark" style="width:200px" >}}
 
 And the `SpanLabelTheme` capture, which is the real test for body-copy rendering, multiple lines, variable widths, the kind of paragraphs that show up in real apps:
 
-{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-spanlabel-light.png" class="is-resized" alt="Metal SpanLabel theme" style="width:200px" >}}
+{{< img src="metal-spanlabel-light-6a0ad75c.jpg" class="is-resized" alt="Metal SpanLabel theme" style="width:200px" >}}
 
 The Metal `Dialog` capture is also worth showing because the translucent surface composites correctly against the textured backdrop:
 
-{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-dialog-light.png" class="is-resized" alt="Metal Dialog over textured backdrop" style="width:200px" >}}
+{{< img src="metal-dialog-light-56192190.jpg" class="is-resized" alt="Metal Dialog over textured backdrop" style="width:200px" >}}
 
 ## The end of the skin downloader
 
@@ -119,7 +119,7 @@ The Skin Designer turns a device specification (resolution, PPI, fonts, safe-are
 If you only want a skin and don't care how it is built, pick a device, accept the defaults, click *Finish* , then *Download skin* . The file is ready to load via *Add* in the simulator's *Skins* menu.
 
 **Stage 1, pick a device.** The first step shows a card per device from the bundled catalog. The search box filters by name (it matches both the model and the brand) and the chips below narrow by form factor: All / Phones / Tablets / Foldables. Picking a device pulls in its resolution, PPI, screen size, default safe-area insets, and the iOS or Android system font names from the catalog, then seeds a sensible starting frame: notch, island, or hole presets are applied automatically based on the device's hardware. The catalog is large, the grid is capped to the most recent matches by default, type into the search field to find older or less-common devices.
-![Skin Designer stage 1, device picker](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-1-device.png)
+![Skin Designer stage 1, device picker](skin-designer-stage-1-device-84516a1d.png)
 
 **Stage 2, pick a starting source.** There are three ways to seed the skin's body image:
 
@@ -127,21 +127,21 @@ If you only want a skin and don't care how it is built, pick a device, accept th
 * *Upload an image* opens an image picker. The wizard scales the image into the device's resolution, then carves the screen rect and cutouts on top. Use this when you have a marketing render of the specific device you are targeting.
 * *Blank rectangle* collapses the bezel and corner radius to almost nothing, drops every cutout, and turns the home indicator off. The screen fills the entire skin. Useful for desktop or web simulators where the device frame would just be visual noise.
 
-![Skin Designer stage 2, source picker](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-2-source.png)
+![Skin Designer stage 2, source picker](skin-designer-stage-2-source-caa9b78d.png)
 
 **Stage 3, the editor.** The editor is split into two panes: a live preview on the left that paints the device frame, screen tint, cutouts, and home indicator, and a sidebar on the right with three tabs.
 
 The *Shape* tab shows a preset grid (Rounded rect, Notch, Dynamic Island, Punch-hole, Corner hole, Classic home) and dimension fields for corner radius, bezel thickness, and a toggle for the bottom home indicator. iPhones from X onward and most modern Androids should leave the indicator on, classic devices with a hardware home button should turn it off.
-![Skin Designer stage 3, Shape tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-shape.png)
+![Skin Designer stage 3, Shape tab](skin-designer-stage-3-editor-shape-0998c52c.png)
 
 The *Cutouts* tab lists every cutout currently on the skin. Tap a row to expand its width, height, and offset fields. The three add buttons at the bottom seed a sensible default of each type. *Notch* (180 x 30 viewbox px) is a physical hardware cutout drawn in the device frame above the screen rect, mirroring iPhone X / 11 / 12 / 13 hardware. *Island* (120 x 35) is a Dynamic Island, software-reserved space rendered as an opaque pill inside the screen rect, floating on top of the iOS status bar. *Hole* (28 x 28) is an Android punch-hole camera, rendered like the island. When the wizard generates the `.skin`, it automatically extends `safePortraitTop` to cover any in-screen cutouts so app content lands below the floating shape.
-![Skin Designer stage 3, Cutouts tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-cutouts.png)
+![Skin Designer stage 3, Cutouts tab](skin-designer-stage-3-editor-cutouts-8f333de0.png)
 
 The *Info* tab is mostly read-only and shows what is about to be written into `skin.properties`: name, width, height, PPI, pixels-per-millimeter, and the user-editable safe-area insets. The wizard intentionally does *not* write `smallFontSize`, `mediumFontSize`, or `largeFontSize`, when those are absent the simulator auto-derives them from `pixelMilliRatio`, which is what you want on high-PPI screens.
-![Skin Designer stage 3, Info tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-info.png)
+![Skin Designer stage 3, Info tab](skin-designer-stage-3-editor-info-94698fea.png)
 
 **Stage 4, finish and download.** Clicking *Finish* renders the portrait skin image at the device's actual resolution with rounded corners, transparent screen, opaque cutouts, and a home indicator if enabled. It synthesises the landscape skin by 90-degree rotation, writes the `skin_map.png` overlays that mark the screen rectangle for the simulator's screen-position detection, bundles the appropriate native theme inside the skin zip, and writes `skin.properties` with the platform metadata, safe-area, PPI, and display rect. Clicking *Download skin* hands the file to the browser's download dialog. After the file is on disk, drop it into your simulator's skins folder (or use the *Add* command in the simulator's *Skins* menu) and your new device should appear in the picker.
-![Skin Designer stage 4, finish and download](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-4-done.png)
+![Skin Designer stage 4, finish and download](skin-designer-stage-4-done-2b1d8fa5.png)
 
 A generated `.skin` is just a renamed zip:
 

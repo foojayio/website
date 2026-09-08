@@ -3,7 +3,7 @@ title: "Free eBook: Sustainability for Java Developers"
 description: "Towards an understanding of sustainable software development, written by and for the friends of OpenJDK"
 link: "https://leanpub.com/sustainabilityforjavadevelopers"
 cta: "Get it on Leanpub"
-image: "sustainability-ebook.png"
+image: "sustainability-ebook.jpg"
 background: "#29184e"
 
 # A second button, because this banner has somewhere on foojay to send a reader

@@ -22,14 +22,14 @@ JFR (JDK Flight Recorder) is the default profiler for OpenJDK (see [my other blo
 What makes JFR stand out from the other profilers is the ability to log many, many different events that contain lots of information, like information on class loading, JIT compilation, and garbage collection.
 
 You can see a list of all available events on my [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents/) website:
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-10-2000x1604.png)
+![](image-10-2000x1604-8922453a.jpg)
 
 This website gives an overview of the events, with descriptions from the OpenJDK, their properties, examples, configurations, and the JDK versions in which every event is present. However, few descriptions are available, and the available texts are mostly single sentences.
 
 **TL:DR: I used GPT3.5 to create a description for every event by giving it the part of the OpenJDK source code that creates the event.**
 
 For most events, I state the lack of a description, coupled with a request that the knowledgeable reader might contribute one:
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-11.png)
+![](image-11-85ef6031.png)
 
 But as you can see, there is not really any progress in creating documentation. So, I have some options left:
 
@@ -40,7 +40,7 @@ But as you can see, there is not really any progress in creating documentation. 
 With 1. and 2. infeasible, I started working on the AI approach, implementing it in my [JFR event collector tool](https://github.com/parttimenerd/jfreventcollector) that collects the information displayed on the website.
 
 I tried to use local AI models for this project but failed, so I started using GPT3.5-turbo and testing it on the [OpenAI ChatGPT](https://chat.openai.com/) website. The main structure of my endeavor is as follows:
-![](https://mostlynerdless.de/wp-content/uploads/2023/12/ai_descriptions-2000x903.png)
+![](ai_descriptions-2000x903-ba3beb9c.jpg)
 
 For every event, I first collect all usages and creations in the OpenJDK source, and then I construct a prompt of the following form that includes the surrounding context of the source locations:
 > Explain the JFR event \<event\> concisely so that the reader, proficient in JFR, knows the meaning and relevance of the event to profiling and its fields, without giving code snippets or referencing the code directly, take the following code as the context of its usage and keep it short and structured  
@@ -115,7 +115,7 @@ But this event has also a description:
 Why did I choose this event, then? Because it allows you to compare the LLM generated and the OpenJDK developer's written description. Keep in mind that the LLM did not get passed the event description. The generated version is similar, yet more text.
 
 You can find my implementation on [GitHub](https://github.com/parttimenerd/jfreventcollector/blob/main/src/main/kotlin/me/bechberger/collector/AIDescriptionAdder.kt) (GPLv2.0 licensed) and the generated documentation on the [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents/):
-[![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-12.png)](https://sap.github.io/SapMachine/jfrevents/index.html#reservedstackactivation)
+[![](image-12-831f3459.jpg)](https://sap.github.io/SapMachine/jfrevents/index.html#reservedstackactivation)
 
 ## Conclusion
 

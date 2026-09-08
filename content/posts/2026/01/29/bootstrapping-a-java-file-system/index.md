@@ -28,7 +28,7 @@ In this post, I'll explain the basics of Java's file systems to get you started.
 ## History of File Systems Within Java
 
 A short, flippant, perhaps not even completely correct history of the Java APIs for [file systems](https://en.wikipedia.org/wiki/File_system). Not required reading, jump ahead if you're getting antsy to start actual work!
-> ![](gosling-507x510.png)
+> ![](gosling-507x510.jpg)
 >
 > *The initial release of [Java 1.0](https://en.wikipedia.org/wiki/Java_version_history#JDK_1.0) provided access to the operating system's file system via [java.io.File](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html), a simple implementation built on blocking I/O and single-threaded operations. Usable but limited, adequate performance but definitely not scalable. Acceptable for a small target audience, perhaps viewed as more proof-of-concept than anything; doubtful that [James Gosling](https://computerhistory.org/profile/james-gosling/) or anyone at [Sun](https://www.britannica.com/money/Sun-Microsystems-Inc) envisioned the boheimeth Java has since become.*
 >

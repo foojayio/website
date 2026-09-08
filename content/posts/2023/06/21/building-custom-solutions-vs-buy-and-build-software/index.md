@@ -5,7 +5,7 @@ lastmod: "2023-06-29T06:46:52+00:00"
 description: "Sometimes time spent reinventing the wheel results in a revolutionary new rolling device. But sometimes not!"
 authors:
   - "rob-austin"
-image: "Screenshot-2023-06-12-at-5.05.20-PM-1024x705-1.png"
+image: "Screenshot-2023-06-12-at-5.05.20-PM-1024x705-1.jpg"
 categories:
   - "Chronicle Software"
   - "Developer Tools"
@@ -71,7 +71,7 @@ My problem would have been if later this was to be upgraded to another FIX versi
 
 At this point, it becomes a serious undertaking; and it starts to make more sense to turn to a tried and tested solution, already with all these bells and whistles. To use products with the ability to search historic fix messages:
 
-![](Screenshot-2023-06-12-at-5.05.20-PM-1024x705.png)  
+![](Screenshot-2023-06-12-at-5.05.20-PM-1024x705.jpg)  
 *Image 3. Searching for all FIX messages with a given client order id.*
 
 ...and which raise alerts when sessions disconnect:

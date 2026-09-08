@@ -5,7 +5,7 @@ lastmod: "2023-12-13T08:48:41+00:00"
 description: "In this article we continue diving into TestContainers and Supabase, and run unit tests against a full local self-hosted Supabase."
 authors:
   - "jlengrand"
-image: "Screenshot-2023-10-11-at-23.57.36-1.png"
+image: "Screenshot-2023-10-11-at-23.57.36-1.jpg"
 categories:
   - "Kotlin"
   - "Testing"

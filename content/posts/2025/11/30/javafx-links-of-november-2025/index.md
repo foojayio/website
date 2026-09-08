@@ -5,7 +5,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of November 202
 canonical: "https://webtechie.be/post/2025-11-28-javafx-links-of-november-2025/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

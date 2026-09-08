@@ -6,7 +6,7 @@ description: "Here is the overview of the JavaFX LinksOfTheMonth of July 2024, p
 canonical: "https://webtechie.be/post/2024-07-26-javafx-links-of-july-2024/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "Desktop"
   - "Game Development"

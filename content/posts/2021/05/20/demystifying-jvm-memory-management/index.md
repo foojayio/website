@@ -6,7 +6,7 @@ description: "I aim to demystify the concepts behind memory management and take 
 canonical: "https://deepu.tech/memory-management-in-jvm/"
 authors:
   - "deepu-sasidharan"
-image: "https://i.imgur.com/Kv9ichJ.gif"
+image: "Kv9ichJ-5fd29799-poster.png"
 categories:
   - "Java Core"
   - "Performance"
@@ -20,7 +20,7 @@ aliases:
   - "/today/🚀-demystifying-jvm-memory-management/"
 ---
 
-![cover-image](https://i.imgur.com/Kv9ichJ.gif)
+![cover-image](Kv9ichJ-5fd29799.gif)
 
 In [this multi-part series](https://deepu.tech/memory-management-in-programming/), I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages, in particular Java, Kotlin, Scala, Groovy, and Clojure.
 
@@ -30,7 +30,7 @@ If you haven't read the [first part](https://foojay.io/today/demystifying-memory
 
 First, let us see what the memory structure of JVM is. This is based on **JDK 11** onwards. Below is the memory available to a JVM process and is allocated by the Operating System (OS).
 
-![JVM Memory structure](https://i.imgur.com/8uh8SPy.png)
+![JVM Memory structure](8uh8SPy-d33a37bf.png)
 
 This is the native memory allocated by the OS and the amount depends on OS, processor, and JRE.
 
@@ -126,7 +126,7 @@ Now that we know how JVM allocates memory, let us see how it automatically manag
 
 JVM manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.
 
-![GC Roots](https://i.imgur.com/RbnjDWX.png)
+![GC Roots](RbnjDWX-af34cff6.png)
 
 The garbage collector in JVM is responsible for:
 
@@ -141,7 +141,7 @@ JVM garbage collectors are generational(Objects in Heap are grouped by their age
 
 JVM uses a separate daemon thread that runs in the background for garbage collection and the process runs when certain conditions are met. Mark \& Sweep GC generally involves two phases and sometimes there is an optional third phase depending on the algorithm used.
 
-![Mark &amp; sweep GC](http://i.imgur.com/AZaR0LP.gif)
+![Mark &amp; sweep GC](AZaR0LP-abaf216a.gif)
 
 * **Marking**: First step where garbage collector identifies which objects are in use and which ones are not in use. The objects in use or reachable from GC roots(Stack pointers) recursively are marked as alive.
 * **Sweeping**: The garbage collector traverses the heap and removes any object that is not marked alive. This space is now marked as free.

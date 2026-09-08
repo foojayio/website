@@ -41,7 +41,7 @@ The core components of our HCR implementation include:
 
 Below is a simplified flow diagram illustrating the HCR process:
 
-![HCR Flowchart](https://res.cloudinary.com/dlsxyts6o/image/upload/v1727932300/image_2024-10-03_111134341_fwi3rh.png)
+![HCR Flowchart](image_2024-10-03_111134341_fwi3rh.png)
 
 1. **Source Changes**: Developers modify Java source files in the specified directory.
 2. **File Watcher**: Detects changes and triggers the compilation process.

@@ -5,7 +5,7 @@ lastmod: "2021-04-27T07:48:32+00:00"
 description: "How to make a simple clone of Pong using the JavaFX FXGL game engine. We will be using the latest (currently 11.15) version of FXGL."
 authors:
   - "almasbaimagambetov"
-image: "https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/fxgl_pong.png"
+image: "fxgl_pong-d6286394.png"
 categories:
   - "Game Development"
   - "JavaFX"
@@ -28,7 +28,7 @@ We will be using the latest (currently 11.15) version of FXGL via Maven (or Grad
 
 The full source code is available at the end of this page. The game will look like this:
 
-![](https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/fxgl_pong.png)
+![](fxgl_pong-d6286394.png)
 
 Whilst this tutorial is meant to teach basic concepts, building on them will allow us to produce much more [complex examples](https://youtu.be/yhr1b4061os?t=496).
 

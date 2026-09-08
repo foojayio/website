@@ -40,15 +40,15 @@ I talked about a [different type of filters](https://talktotheduck.dev/exception
 
 This is a minor feature that's actually on by default. Yet most developers don't even notice it. When you expand an array of objects, you might have noticed that the IDE hides null values. This is a filter that's on by default, you can also add your own…
 
-![filter-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148290119/n2LvCUt8c.png)
+![filter-1.png](n2LvCUt8c-718d0c90.jpg)
 
 We can start by selecting an array or collection in the watch and right clicking it. Then clicking the "Filter" option.
 
-![filter-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148311196/HNamrDhlJ.png)
+![filter-2.png](HNamrDhlJ-addf950e.jpg)
 
 We can then input any condition we want where "this" stands for the current element. When we press enter, the filter will be applied and we'll only see the applicable elements. Notice that in this case, I used method calls and their results as part of the filter.
 
-![filter-3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148325901/QHZVYjcud.png)
+![filter-3.png](QHZVYjcud-20b4a932.jpg)
 
 Here we see the filter in action. We can clear it by pressing the "clear" button next to it. We can edit it by clicking on it too.
 
@@ -58,11 +58,11 @@ While I use the Java 8 stream API frequently, I still prefer the old for loops f
 
 JetBrains understood that problem and introduced the stream debugger, initially as a plugin and currently as a built-in tool in the IDE. You can see the button to launch the stream debugger when the current breakpoint is stopped on a stream.
 
-![stream-debugger-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148355554/95PP378tf.png)
+![stream-debugger-1.png](95PP378tf-8d393658.png)
 
 When you press this button, the stream debugger is launched. It's one tool where watching the video will probably explain it better, but I'll try…
 
-![stream-debugger-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148370843/CaCvAtL5U.png)
+![stream-debugger-2.png](CaCvAtL5U-41c17f58.jpg)
 
 This tool represents every stream function as a stage. You can go back and forth between the stages where you can see how elements in one stage map to their counterparts in the next stage. E.g. a map operation can convert the type of element to a new type. So you would see the elements before the mapping and an arrow to the post mapping instance.
 
@@ -84,15 +84,15 @@ Pressing step over and just waiting forever for something to happen is very frus
 
 There are many reasons a debugger can be slow. Some of them relate to the application we're debugging, but quite a few of them relate to features we turn on/off. Renderers fall into this category. They can be VERY expensive when we have many watch elements or if the process for rendering them is slow.
 
-![mute-renderers-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148417300/DW3AVv7BX.png)
+![mute-renderers-1.png](DW3AVv7BX-22e09db2.jpg)
 
 Luckily JetBrains provides a simple workaround: mute renderers. You can enable this by right clicking on the watch area.
 
-![mute-renderers-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148435368/2KJtGOrMU.png)
+![mute-renderers-2.png](2KJtGOrMU-5497d1e0.jpg)
 
 Once we mute the renderers, they appear as a short form rendering. Just the object ID next to a button. Clicking on this entry automatically performs the rendering lazily. In this case, the rendering will just invoke the `toString()` method, as indicated here.
 
-![mute-renderers-3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148451051/HIOIjanMn.png)
+![mute-renderers-3.png](HIOIjanMn-34537cc7.jpg)
 
 Once clicked, we can see the correct value in the renderer and we can inspect the result only for this value. Other values might still be "unrendered".
 
@@ -100,11 +100,11 @@ Once clicked, we can see the correct value in the renderer and we can inspect th
 
 `toString()` is great for many things, but it might not represent what we want to know about an object. Especially 3rd party objects where we can't control the `toString()` implementation for cases where performance is an issue. `toString()` must be efficient since we might use it when logging an object in production. We can't overburden it with data.
 
-![custom-rendering-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148478174/n5cS0GFMU.png)
+![custom-rendering-1.png](n5cS0GFMU-b7f668e7.jpg)
 
 The "Customize Data Views…" menu item launches the renderer customization menu. This is a pretty powerful feature that lets us control many nuanced capabilities in the default renderer.
 
-![custom-rendering-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148493174/rYtalVVGH.png)
+![custom-rendering-2.png](rYtalVVGH-ef7f2158.png)
 
 There are many options in this dialog that let you customize the way elements are rendered in the watch. One of my favorite options is the one to show hex values for integers, which is pretty useful for some of the low level stuff I do.
 
@@ -116,7 +116,7 @@ For simple cases, `toString()` works really well. But there are complex cases wh
 
 But when we debug, this might be pretty valuable.
 
-![custom-rendering-3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1649148514466/m7lBiOlfO.png)
+![custom-rendering-3.png](m7lBiOlfO-6e9e395a.jpg)
 
 First off, we need to select the right type for renderer. Notice you can use a base type to select the appropriate objects. In this case, JpaRepository is the base interface. By using the expression:
 

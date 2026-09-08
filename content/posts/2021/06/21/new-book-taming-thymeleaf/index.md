@@ -24,7 +24,7 @@ The book [Taming Thymeleaf](https://www.wimdeblauwe.com/books/taming-thymeleaf/)
 
 You will also learn how to integrate libraries like Tailwind CSS that need some npm based processing. The book also shows a nice live-reload setup for maximum productivity during the development of your application.
 
-![hero2x?1602161070](https://d2sofvawe08yqg.cloudfront.net/taming-thymeleaf/hero2x?1602161070)
+![hero2x?1602161070](hero2x-59a9324a.png)
 
 The book is available as [e-book](https://leanpub.com/taming-thymeleaf) or in [paperback](https://www.lulu.com/en/us/shop/wim-deblauwe/taming-thymeleaf/paperback/product-mgpezn.html?page=1&pageSize=4) format. See <https://www.wimdeblauwe.com/books/taming-thymeleaf/> for more information and some screenshots of the application you will build during the course of the book.
 

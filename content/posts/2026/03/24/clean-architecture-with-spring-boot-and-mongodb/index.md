@@ -5,7 +5,7 @@ lastmod: "2026-03-24T16:43:15+00:00"
 description: "In this article, you will build a product catalog with orders. Products have names, prices, and stock quantities. Orders reference products and enforce rules like \"you can't order more than what's in stock.\" The domain is small enough to follow in one sitting, but it has real business rules that benefit from the architecture. The tech stack is Java 17+, Spring Boot 3.x, and Spring Data MongoDB. By the end, you will have a project structure where the domain and application layers compile without Spring or MongoDB on the classpath."
 authors:
   - "farhan-chowdhury"
-image: "Screenshot-2026-03-18-at-8.36.30-AM.png"
+image: "Screenshot-2026-03-18-at-8.36.30-AM.jpg"
 categories:
   - "Databases"
   - "Java"
@@ -35,7 +35,7 @@ Robert C. Martin introduced Clean Architecture to keep business rules independen
 
 The architecture is usually drawn as four concentric rings. Each ring is a layer. Dependencies always point inward, from the outermost frameworks ring toward the innermost domain ring:  
 
-{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.png" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
+{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.jpg" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
 
 Starting from the inside:
 

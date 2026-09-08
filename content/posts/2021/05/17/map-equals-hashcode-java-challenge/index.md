@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:22:47+00:00"
 description: "Understanding deeply how to use a Map, equals, and hashcode in Java will be a massive help for you to create high-quality code!"
 authors:
   - "rafael-del-nero"
-image: "map_equals.png"
+image: "map_equals.jpg"
 categories:
   - "Tutorials"
 related_posts:

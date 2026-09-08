@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![A visual editor connecting project forms, CSS, Java source, and a live Codename One canvas](https://www.codenameone.com/blog/third-generation-gui-builder.jpg)
+![A visual editor connecting project forms, CSS, Java source, and a live Codename One canvas](third-generation-gui-builder.jpg)
 
 We have rebuilt the Codename One GUI Builder again. This is its third generation. The interesting part is not another drag-and-drop surface. It is what we kept, what Maven broke, and why a visual editor must understand the whole project instead of opening one generated form at a time.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -41,11 +41,11 @@ The second generation separated a form into readable `.gui` XML and companion Ja
 
 That last assumption became painful after the Maven migration. A Maven project has forms under `src/main/guibuilder`, Java under `src/main/java`, and styling in `src/main/css/theme.css`. Launching a separate editor for every generated form turned navigation into the slow part of a visual tool.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBW0dlbmVyYXRpb24gMTxici8-cmVzb3VyY2UgZmlsZSBhbmQgc3RhdGUgbWFjaGluZV0gLS0-IEJbR2VuZXJhdGlvbiAyPGJyLz5vbmUgLmd1aSBmb3JtIGFuZCBndWlkZWQgbGF5b3V0XQogICAgQiAtLT4gQ1tHZW5lcmF0aW9uIDM8YnIvPm9uZSBNYXZlbiBwcm9qZWN0IHdvcmtzcGFjZV0KICAgIEMgLS0-IERbRm9ybXNdCiAgICBDIC0tPiBFW0xpdmUgQ1NTXQogICAgQyAtLT4gRltQcm90ZWN0ZWQgSmF2YSByZWdpb25zXQogICAgQyAtLT4gR1tSZXNwb25zaXZlIGNhbnZhc10=?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IExSCiAgICBBW0dlbmVyYXRpb24g-7e691408.png)
 
 The third generation changes the unit of work from a file to a project. It scans every `.gui` file, keeps them in the left panel, renders the selected form in the center, and shows its properties, layout, and events on the right.
 
-![The third-generation GUI Builder with project forms, component palette, live canvas, and inspector](https://www.codenameone.com/blog/third-generation-gui-builder/workspace.png)
+![The third-generation GUI Builder with project forms, component palette, live canvas, and inspector](workspace-c5a48835.png)
 
 ## One Maven goal opens the project
 
@@ -81,11 +81,11 @@ Those names matter. A guide stored as an object pointer would disappear after a 
 
 The canvas adds the relationship while you drag. It can align edges, centers, and text baselines. Resizing can keep a preferred size, fill the parent, stay fixed, or match another component. The same canvas can switch from phone portrait to desktop width, which makes a bad relationship visible before it reaches a device.
 
-![Moving the primary action beside the description updates its guided-layout relationship](https://www.codenameone.com/blog/third-generation-gui-builder/guided-layout-drag.gif)
+![Moving the primary action beside the description updates its guided-layout relationship](guided-layout-drag-b2e2091a.gif)
 
 The move above is not stored as a new set of absolute coordinates. It changes the relationship between `primary` and `description`, then lets `LayeredLayout` resolve the result for the current canvas.
 
-![The same guided layout switching between phone portrait and desktop canvases](https://www.codenameone.com/blog/third-generation-gui-builder/responsive-canvas.gif)
+![The same guided layout switching between phone portrait and desktop canvases](responsive-canvas-4ec97782.gif)
 
 ## CSS belongs beside the canvas
 
@@ -93,7 +93,7 @@ The second-generation builder and the old resource editor were separate tools. A
 
 Click **CSS** and the project stylesheet opens beside the live form:
 
-![Editing the project CSS beside the live form preview](https://www.codenameone.com/blog/third-generation-gui-builder/css-editor.png)
+![Editing the project CSS beside the live form preview](css-editor-4d1725b9.png)
 
 The pane edits the real `src/main/css/theme.css`. After the edit debounce, the CSS compiler installs the new theme and rebuilds the preview. A selector change is visible where it matters:
 
@@ -113,7 +113,7 @@ There is no second theme model to keep in sync. The stylesheet that colors the c
 
 The **Code** button opens the companion Java source in the same workspace:
 
-![The companion Java source with generated and user-owned regions](https://www.codenameone.com/blog/third-generation-gui-builder/code-editor.png)
+![The companion Java source with generated and user-owned regions](code-editor-0f058704.png)
 
 Generated code and user code have different ownership:
 

@@ -5,7 +5,7 @@ lastmod: "2026-08-08T11:43:51+00:00"
 description: "You are invited to IntelliJ IDEA Conf 2026, a free virtual event on March 26-27, 2026. Learn about topics relevant to modern Java and Kotlin."
 authors:
   - "marit-van-dijk"
-image: "intellij-idea-conf-2026.png"
+image: "intellij-idea-conf-2026.jpg"
 categories:
   - "AI"
   - "IntelliJ IDEA"

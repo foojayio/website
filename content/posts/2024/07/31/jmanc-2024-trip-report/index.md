@@ -29,7 +29,7 @@ See you next year! 😀
 ## intro
 
 In January this year we decided to test the interest of the Manchester Java Community on whether they were up for another edition of the [JManc Unconference](https://jmanc.org/). We sent out a survey to our members and from the responses received there was unanimous support for to us to run it again. This gave [Jon Bullock](https://www.linkedin.com/in/jsbullock/), [Dave Underwood](https://www.linkedin.com/in/david-underwood-6b929858/) and I the motivation we needed to put plans into motion for the 3rd edition of JManc Unconference!
-![JManc 2024](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/jmanc-2024.png)
+![JManc 2024](jmanc-2024-d172c29c.jpg)
 
 ## planning
 
@@ -44,18 +44,18 @@ Another key decision came down to whether we would charge people to attend or no
 With this in mind we decided to release 70 tickets with the hope that 40 or so of them would turn up on the day. If 70 people did turn up on the day then it wouldn't have been a problem, maybe just a little more chaotic that we'd been planning for 😬
 
 One part of JManc that's a little unconventional for an unconference is to have a keynote speaker. With a carefully chosen speaker we believe it adds a little more value for the attendees. This year we invited [Helen Scott](https://www.helenjoscott.com/) from JetBrains to join us which she enthusiastically accepted. Huge thanks to Helen for offering her time to help JManc be a success.
-![Helen Scott](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/helenscott.jpg)
+![Helen Scott](helenscott-3d89f6ae.jpg)
 
 The last aspect we had to consider that's been really successful in previous years was the evening social. The social provides a great way to relax and reflect following an intense day of discussions. We were delighted to partner with [ECOM Recruitment](https://www.interquestgroup.com/brands/ecom/about-us) on this with them agreeing to sponsor the social by putting some cash behind the bar at [Home](https://homemcr.org/) to cover a few drinks and nibbles for everyone.
 
 After all the planning it then boils down to promotion! With the help of our partners and friends of the MJC (such as the [JUnconference Alliance](https://junconf.org/), [ReframeIT](https://www.reframe-wit.com/) and [Foojay](https://foojay.io/)) we started to spread the word with the hope reaching a diverse range of people who might be interested in attending an event such as this.
-![JManc Promo](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/jmanc-promo.jpeg)
+![JManc Promo](jmanc-promo-fd6bc563.jpeg)
 
 Something that's really important for us as organisers is to keep things simple but there's an essential level of complexity that comes with running an event like this. Huge thanks to [Claire Isherwood](https://www.linkedin.com/in/claireisherwood/) (and team at Auto Trader), [Gareth Pike](https://www.linkedin.com/in/garethpike/) and [Rob Sugden](https://www.linkedin.com/in/robertsugden/) for helping manage this complexity and reducing the stress during the run up to the day.
 
 ## the day
 
-![Welcome](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/welcome.jpg)
+![Welcome](welcome-230687dd.jpg)
 
 Our predictions on the number of attendees were pretty much spot on with just under 40 people attending. My main concern with the attendee drop-off rate comes down to waste. The last thing we wanted it was for Auto Trader to plan catering for 70 people and the only half of that number turn up. Fortunately we were able to confirm the exact numbers to the catering team at Auto Trader on the morning of the conference so this wasn't a problem.
 
@@ -64,39 +64,39 @@ We only really had full access to the event space on the morning of the conferen
 ### the marketplace \& discussion spaces
 
 We created a main space where attendees would congregate on arrival for coffee and pastries. This space was also where we created "The Marketplace", a key area for the unconference where attendees could propose their topic ideas, vote on their favourites and we could create the schedule. Throughout the day attendees revisited The Marketplace to connect with others, propose new topics and choose their next sessions.
-![The Marketplace](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/marketplace-0.jpeg)
+![The Marketplace](marketplace-0-922513e7.jpeg)
 
 On attendees arriving the first role of the *"dis-organisers"* was to get the new arrivals straight into the mindset of an unconference and thinking about what they would either like to share or learn about. This was some attendees first unconference experience so we led by example by proposing some topics for discussion and encouraged others to do the same.
-![The Marketplace](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/marketplace-1.jpg)
+![The Marketplace](marketplace-1-d4985a55.jpg)
 
 We also created 4 spaces where the actual unconference sessions would happen. One of the spaces already had a name in the Auditorium but for the others we naturally channelled our inner geek and called them Hot Spot, The Heap and Garbage Collection.
-![The Heap](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/IMG_1807.jpeg)
+![The Heap](IMG_1807-c5a82996.jpeg)
 
 Immediately before the keynote we did our first round of dot voting on the topics proposed so far. This approach ensures that it's the attendees who democratically decide the schedule for the day.
-![dot voting](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-018.jpg)
+![dot voting](JMac_2023-018-b1debbc6.jpg)
 
 ### keynote
 
 The Auditorium also provided the perfect setting for our keynote session.
-![auditorium](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/auditorium.jpg)
+![auditorium](auditorium-514f67bc.jpg)
 
 The dis-organisers first gave a brief intro JManc and set the scene for how we were hoping the day would go.
-![intro](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-039.jpg)
+![intro](JMac_2023-039-4e6cd236.jpg)
 
 Helen then took attendees on a tour of AI, tooling and ways of working covering some of the history and then focusing in on the practical reality of AI today with some predictions for the future.
-![keynote](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-051.jpg)
+![keynote](JMac_2023-051-83ea137e.jpg)
 
 Unfortunately for myself, Jon and Dave we had to the leave the keynote half way through to go and create the morning schedule out the sessions that had been voted on. This part is easier said than done with there often being various competing topics that are highly voted.
 
 ### the schedule
 
 As an attendee, the nature of any conference is that, unless it's single track, you are more than likely going to have a clash between multiple sessions with topics you are interested in happening at the same time. We tried our best to avoid clashes between the most popular topics and I hope we managed to make most people happy.
-![schedule](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/schedule.jpeg)
+![schedule](schedule-0e8cae13.jpeg)
 
 Based on the actual number of people on the day we decided to stick with 3 tracks using the Auditorium for the most popular session in each slot.
 
 Following the keynote and a short break we kicked off the unconference style sessions.
-![GC Session](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-091.jpg) ![GC Session](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-110.jpg) ![Auditorium Session](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/JMac_2023-117.jpg)
+![GC Session](JMac_2023-091-89e1d8f9.jpg) ![GC Session](JMac_2023-110-b7e1011f.jpg) ![Auditorium Session](JMac_2023-117-27150387.jpg)
 
 The sessions on the day covered a wide variety of topics such as:
 
@@ -113,7 +113,7 @@ The sessions on the day covered a wide variety of topics such as:
 * ways or working handling distractions, how to focus, teams/slack etiquette
 
 As you can see this is a diverse range of content, and not all Java/JVM specific.
-![session-01](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-01.jpeg) ![session-02](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-02.jpeg) ![session-03](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/session-03.jpeg)
+![session-01](session-01-2e52ee5d.jpeg) ![session-02](session-02-18c166f9.jpeg) ![session-03](session-03-5901d617.jpeg)
 
 ### evening social
 
@@ -122,7 +122,7 @@ The day was super busy and was over before we knew it and the evening social pro
 ## retro
 
 In previous years we've ran a more structured retro session which has been a really nice touch however this year we kept it simple and just asked for feedback on post-its as people left at the end. I think this worked well, and thankfully almost 100% of feedback was positive.
-![feedback](https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/feedback.jpeg)
+![feedback](feedback-8464b4b8.jpeg)
 
 The organising group of JManc plan to run a retro in the coming weeks to review what worked and what didn't across all aspects. A few things that come to mind for me that will feed into this are:
 

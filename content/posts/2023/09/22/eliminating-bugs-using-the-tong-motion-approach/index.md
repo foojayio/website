@@ -80,7 +80,7 @@ One common pitfall is neglecting one prong of the tongs or misplacing the other.
 
 In a real-world scenario, while tackling a server performance issue, I employed the 'Tong Motion' technique. By replacing web calls with curl requests, I shifted focus to the problematic area. At the same time, I enhanced database logging to monitor its output as problematic SQL was replicated through curl. This dual-sided approach helped unearth a bug in the Object Relational Mapping layer.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/m121zs8x7buo7ulnxqgs.png)
+![Image description](m121zs8x7buo7ulnxqgs-c641f8ee.jpg)
 
 This concrete example comprises of the following stages:
 

@@ -42,7 +42,7 @@ Method breakpoints stop when you enter a method and potentially when you exit it
 
 There is an interesting use case of method breakpoints which I will discuss in the next blog post on the subject. So [make sure you follow](https://twitter.com/debugagent)... It's an interesting one!
 
-![Method Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852333339/P4t7kgylN.png)
+![Method Breakpoint](P4t7kgylN-72479abf.png)
 
 ### Field Watchpoint
 
@@ -50,7 +50,7 @@ This isn't a breakpoint since the execution never stops at the field. It stops i
 
 This is a remarkably useful feature that very few developers use. "Who changed this field" is a debugging cliché, yet developers still aren't aware of this feature (or forget it exists).
 
-![Field Watchpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852372466/EaanAUH2v.png)
+![Field Watchpoint](EaanAUH2v-38b67fec.png)
 
 ### Exception Breakpoint
 
@@ -74,7 +74,7 @@ This effectively means I will stop only if this method is invoked using a differ
 
 This is an amazing tool…
 
-![Conditional Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852537167/ek78x3KEy.png)
+![Conditional Breakpoint](ek78x3KEy-f8b53e3e.png)
 
 ## Managing Breakpoints
 
@@ -90,11 +90,11 @@ You can add a description to a breakpoint to remind you why it's there. E.g. if 
 
 But if you're like me, you might see it in the breakpoint window and forget what it's there. Then just delete it. By editing the description, you can remind yourself why you added that breakpoint in the first place. It's also very useful for pair debugging. Making sure we're on the same page…
 
-![Naming Breakpoints](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852690499/USe1wFdYi.png)
+![Naming Breakpoints](USe1wFdYi-8f7829ef.jpg)
 
 Grouping takes this to the next level. You can place several breakpoints in a group. E.g. "Debug Issue 333". Then you can disable or enable the group as a whole. This is something I use for context switching. I sometimes need to work on a different task while I'm in the midst of debugging. I don't remember "where I was". So I can just group the applicable breakpoints and disable them until I "get back".
 
-![Grouping Breakpoints](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852715883/stfGtUZaa.png)
+![Grouping Breakpoints](stfGtUZaa-8fdae2f8.jpg)
 
 ### Disable Until
 
@@ -110,7 +110,7 @@ This is something I see people doing manually all the time. Setting the low traf
 
 We can use a breakpoint as an ad hoc log that doesn't suspend execution. You can just add printouts which can include expressions, etc. While this has some limitations, it's still a pretty cool feature.
 
-![Tracepoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852640259/g7bVJy9ie.png)
+![Tracepoint](g7bVJy9ie-30b3e0b8.jpg)
 
 ## TL;DR
 

@@ -40,7 +40,7 @@ Multi-threading represents a very intriguing topic, even after years of research
 
 **Reentrancy:** When a method or subroutine can be reentered without completing its previous invocation.
 
-![Image title](https://dzone.com/storage/temp/4926946-4.png)
+![Image title](dzone-com-cefc94ac.png)
 
 ### Thread Interfaces or Classes or in Java
 

@@ -69,7 +69,7 @@ Another project of Daniel, called "[OpenSourceLogger](https://github.com/DanielM
 {{< gallery cols="3" >}}
 Radio.jpg
 opensourcelogger-1024x711.png
-opensourcelogger-wiring-1024x753.png
+opensourcelogger-wiring-1024x753.jpg
 {{< /gallery >}}
 
 #### [Frank Delporte](https://twitter.com/frankdelporte) - Drumbooth controller

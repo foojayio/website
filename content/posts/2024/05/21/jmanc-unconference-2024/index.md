@@ -5,7 +5,7 @@ lastmod: "2024-05-22T10:58:36+00:00"
 description: "The Manchester Java Community are delighted to announce the return of JManc Unconference on Friday 28th June 2024!"
 authors:
   - "nick-ebbitt"
-image: "https://jmanc.org/assets/images/jmanc-logo.png"
+image: "jmanc-logo-9875160f.png"
 categories:
   - "Conference"
   - "Events"
@@ -18,7 +18,7 @@ related_posts:
 frozen: true
 ---
 
-[![JManc Unconferece](https://jmanc.org/assets/images/jmanc-logo.png "JManc Unconferece")](https://www.jmanc.org "JManc Unconferece")
+[![JManc Unconferece](jmanc-logo-9875160f.png "JManc Unconferece")](https://www.jmanc.org "JManc Unconferece")
 
 **The Manchester Java Community are delighted to announce the return of JManc Unconference on Friday 28th June 2024!**
 

@@ -7,7 +7,7 @@ authors:
   - "bazlur-rahman"
   - "frankdelporte"
   - "geertjan-wielenga"
-image: "foojay-categories.png"
+image: "foojay-categories.jpg"
 categories:
   - "Foojay"
 related_posts:

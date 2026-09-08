@@ -6,7 +6,7 @@ description: "Use the debugger to find out how a Java application works under th
 canonical: "https://flounder.dev/posts/debugger-god-mode/"
 authors:
   - "igor-kulakov"
-image: "banner.png"
+image: "banner.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
@@ -28,7 +28,7 @@ Read in other languages: [中文](https://flounder.dev/zh/posts/debugger-god-mod
 
 Cheat codes were sequences of keys that would give you something extraordinary, such as infinite ammo or the ability to walk through walls. The most common and powerful of them was 'god mode' – it made you invincible.
 
-![Screenshot of the marine from Doom with 'god mode' enabled](https://flounder.dev/img/debugger-god-mode/iddqd.png)
+![Screenshot of the marine from Doom with 'god mode' enabled](iddqd-96742d64.png)
 
 This is what your character would look like when you entered 'IDDQD' – the key combination for 'god mode' in [Doom](https://en.wikipedia.org/wiki/Doom_(1993_video_game)). In fact, this particular key sequence was so popular that it became a [meme](https://www.urbandictionary.com/define.php?term=iddqd) and gained popularity beyond the game itself.
 
@@ -40,7 +40,7 @@ To illustrate my point, I'd like to bring in a fun scenario right here. Even if 
 
 My friend and colleague, [Eugene](https://www.linkedin.com/in/eugene-nizienko-016a153a/), has written an [IntelliJ IDEA plugin](https://plugins.jetbrains.com/plugin/19383-space-invaders), which lets you play this game right in the editor – a great way to spend some time while waiting for indexing to complete.
 
-![Space Invaders in IntelliJ IDEA's editor](https://flounder.dev/img/debugger-god-mode/space-invaders-dark.png)
+![Space Invaders in IntelliJ IDEA's editor](space-invaders-dark-f0730c62.png)
 
 There's no god mode in this game, but if we are very determined, can we add it ourselves? Let's bring back the classic tradition of hacking programs with a debugger and find out!
 
@@ -58,7 +58,7 @@ To manage several IDE instances, I will be using [JetBrains Toolbox](https://www
 
 Let's install two instances of IntelliJ IDEA:
 
-![JetBrains Toolbox shows several JetBrains IDEs including two instances of IntelliJ IDEA called Space Invaders and Debug](https://flounder.dev/img/debugger-god-mode/jb-toolbox-dark.png)
+![JetBrains Toolbox shows several JetBrains IDEs including two instances of IntelliJ IDEA called Space Invaders and Debug](jb-toolbox-dark-d2beb03b.png)
 
 If you are using the same IDE version for both instances, make sure to specify a different system, config, and logs directories in **Tool actions** \| **Settings** \| **Configuration**. On this page, you can also assign names to the IDE instances for convenience.
 
@@ -66,7 +66,7 @@ To be able to debug the 'Space Invaders' instance, click **More** near it, then 
 
     -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
-![The file with VM options that are going to be passed to the IDE instance](https://flounder.dev/img/debugger-god-mode/toolbox-add-vm-options-dark.png)
+![The file with VM options that are going to be passed to the IDE instance](toolbox-add-vm-options-dark-390d4abf.png)
 
 This will make the target JVM run with the debug agent and listen to incoming debugger connections on port `5005`.
 
@@ -74,7 +74,7 @@ This will make the target JVM run with the debug agent and listen to incoming de
 
 Run the `Space Invaders` instance, [install the game](https://www.jetbrains.com/help/idea/managing-plugins.html), and launch it by running the **Space Invaders** action. To find the action, hit Shift twice, and start typing `Space Invaders`:
 
-![Running the Space Invaders action through the dialog that opens on hitting double Shift](https://flounder.dev/img/debugger-god-mode/space-invaders-action-dark.png)
+![Running the Space Invaders action through the dialog that opens on hitting double Shift](space-invaders-action-dark-c2c28802.png)
 
 Let's play for a while and observe the behavior that we want to fix: when enemy missiles hit the spaceship, the health bar in the top-left corner of the screen goes down.
 
@@ -86,7 +86,7 @@ Additionally, IntelliJ IDEA includes the Java/Kotlin standard library in the new
 
 After creating the project, go to the main menu and select **Run** \| **Attach to Process**. This will show the list of local JVMs listening for debugger attach requests. Select the other running IDE from the list.
 
-![A popup with the list of locally running JVMs](https://flounder.dev/img/debugger-god-mode/attach-dark.png)
+![A popup with the list of locally running JVMs](attach-dark-f2b25f5b.png)
 
 We should see the following message in the console confirming that the debugger has successfully attached to the target VM.
 
@@ -98,7 +98,7 @@ Typically, one would set a breakpoint in the application code, but in this case,
 
 Luckily for us, IntelliJ IDEA has a feature known as [Pause](https://flounder.dev/posts/debug-without-breakpoints/). It allows you to suspend the program at any arbitrary point in time, without needing to specify the corresponding line of code. You can find it in the debugger toolbar or in the main menu: **Run** \| **Debugging Actions** \| **Pause**.
 
-![The Debug tool window for the suspended Space Invaders instance](https://flounder.dev/img/debugger-god-mode/invaders-paused-dark.png)
+![The Debug tool window for the suspended Space Invaders instance](invaders-paused-dark-15c5469e.png)
 
 The application gets suspended. This gives us a starting point for debugging.
 
@@ -113,33 +113,33 @@ If we look at our goal in programming terms, it boils down to preventing the spa
 
 Since we don't know anything about the plugin code, we can directly inspect the heap using the IntelliJ IDEA debugger's **Memory** view:
 
-![A menu appears on clicking Layout Settings in the top-right corner of the Debug tool window](https://flounder.dev/img/debugger-god-mode/open-memory-view-dark.png)
+![A menu appears on clicking Layout Settings in the top-right corner of the Debug tool window](open-memory-view-dark-157e14e1.png)
 
 This feature gives you information about all objects that are currently alive. Let's type `invaders` and see if we can find anything:
 
-![Typing 'invaders' in the Memory view's search field shows objects of classes that belong to the 'spaceinvaders' package](https://flounder.dev/img/debugger-god-mode/search-in-heap-dark.png)
+![Typing 'invaders' in the Memory view's search field shows objects of classes that belong to the 'spaceinvaders' package](search-in-heap-dark-7a3619a6.png)
 
 Apparently, the plugin classes come under the package `com.github.nizienko.spaceinvaders`. Within this package, there is `GameState` class with several live instances. It looks like what we need.
 
 Double-clicking `GameState` shows all the instances of this class:
 
-![A dialog opens showing live GameState instances](https://flounder.dev/img/debugger-god-mode/instances-of-enum-dark.png)
+![A dialog opens showing live GameState instances](instances-of-enum-dark-5c0bc55b.png)
 
 As it turns out, it's an enum – which isn't exactly what we were looking for. Continuing our search, we stumble upon a single instance of `Game`.
 
 Expanding the node lets us inspect the instance's fields:
 
-![Memory view with an expanded object node showing the object's fields](https://flounder.dev/img/debugger-god-mode/fields-in-memory-view-dark.png)
+![Memory view with an expanded object node showing the object's fields](fields-in-memory-view-dark-d96f3807.png)
 
 The `health` property appears to be the one of interest here. Among its fields, we can find `_value`. In my case, it was `100`, which correlates with the health bar being full when I suspended the game. So, it's likely the correct field to consider, and its value seems to range from `0` to `100`.
 
 Let's put this hypothesis to the test. Right-click `_value`, then select **Set Value** . Choose a value that is different from your current one. For instance, I chose `50`.
 
-![Memory view with a text field against the 'health' field containing the user-entered value of 50](https://flounder.dev/img/debugger-god-mode/memory-view-set-value-dark.png)
+![Memory view with a text field against the 'health' field containing the user-entered value of 50](memory-view-set-value-dark-d2327847.png)
 
 At this step, we bump into an error that reads **Cannot evaluate methods after Pause action**:
 
-![An error message saying 'Cannot evaluate methods after Pause'](https://flounder.dev/img/debugger-god-mode/cannot-evaluate-after-pause-dark.png)
+![An error message saying 'Cannot evaluate methods after Pause'](cannot-evaluate-after-pause-dark-1f346189.png)
 
 The problem arises because we used **Pause** instead of breakpoints, and this feature comes with [some limitations](https://flounder.dev/posts/debug-without-breakpoints/#limitations). However, we can turn to a little trick to work around this.
 
@@ -153,17 +153,17 @@ So we've located the object that holds the relevant state. At the very least, we
 
 Now that we have identified the object to focus on, it would be handy to [mark](https://www.jetbrains.com/help/idea/examining-suspended-program.html#use-labels) it. For those unfamiliar with debug labels, this is what a marked object looks like:
 
-![Variables tab showing an array of User objects, with one of them marked with a debug label saying User_Charlie](https://flounder.dev/img/debugger-god-mode/labeled-object-dark.png)
+![Variables tab showing an array of User objects, with one of them marked with a debug label saying User_Charlie](labeled-object-dark-bde7f1b5.png)
 
 Labels can be beneficial in many ways. Within the context of this article, marking the relevant object ensures that we can directly use it in features like **Evaluate Expression** without being dependent on the current execution context.
 
 Unfortunately, it's not possible to direcly mark `_value`, but we can mark the object that encloses it. To do this, right-click `health`, select **Mark Object**, then give it a name.
 
-![Select Object Label dialog prompting the user to enter a name for the object](https://flounder.dev/img/debugger-god-mode/mark-health-object-dark.png)
+![Select Object Label dialog prompting the user to enter a name for the object](mark-health-object-dark-c5ecaa52.png)
 
 We can now test how the label works elsewhere. Open the [Evaluate Expression](https://www.jetbrains.com/help/idea/examining-suspended-program.html#evaluate-arbitrary-expression) dialog, a [great tool for prototyping fixes and altering the program flow](https://flounder.dev/posts/efficient-debugging-exceptions/#prototype-the-fix), and enter `health_object_DebugLabel` as the expression. As you can see, the object is accessible from any place in the program through the **Evaluate** dialog:
 
-![Evaluate dialog with debug label entered as the expression](https://flounder.dev/img/debugger-god-mode/evaluate-label-dark.png)
+![Evaluate dialog with debug label entered as the expression](evaluate-label-dark-2423df16.png)
 
 What about changing the spaceship's health from **Evaluate** ?  
 `health_object_DebugLabel._value = 100` does not work.
@@ -172,7 +172,7 @@ At the same time, `_value` appears to be a backing field of a Kotlin property. I
 
 The **Evaluate** dialog doesn't think this is valid code, but we'll try anyway:
 
-![Referencing a property through a debug label in the Evaluate dialog](https://flounder.dev/img/debugger-god-mode/evaluate-property-dark.png)
+![Referencing a property through a debug label in the Evaluate dialog](evaluate-property-dark-142c8c13.png)
 
 The expression returns the current spaceship's health, so this approach works!  
 
@@ -192,13 +192,13 @@ To maintain simplicity, we didn't specify a particular JDK version and initializ
 
 There are numerous locations suitable for setting a breakpoint. I decided to set a method breakpoint in `java.awt.event.KeyListener::keyPressed`. This will trigger the side effect every time we press a key:
 
-![Breakpoints dialog showing a logging breakpoint for java.awt.event.KeyListener::keyPressed](https://flounder.dev/img/debugger-god-mode/key-pressed-breakpoint-dark.png)
+![Breakpoints dialog showing a logging breakpoint for java.awt.event.KeyListener::keyPressed](key-pressed-breakpoint-dark-9675ac9f.png)
 
 Setting a method breakpoint in hot code [might significantly slow down](https://flounder.dev/posts/troubleshoot-slow-debugging/#conditional-breakpoints-in-hot-code) the target application.
 
 Let's return to Space Invaders and see if our home-cooked IDDQD works. It does!
 
-![Playing Space Invaders in IntelliJ IDEA – every time that the spaceship gets hit, its health bar automatically refills](https://flounder.dev/img/debugger-god-mode/success.gif)
+![Playing Space Invaders in IntelliJ IDEA – every time that the spaceship gets hit, its health bar automatically refills](success-b78fbef1.gif)
 
 ## Conclusion
 

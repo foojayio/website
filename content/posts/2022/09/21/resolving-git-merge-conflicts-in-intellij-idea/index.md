@@ -5,7 +5,7 @@ lastmod: "2022-09-21T11:12:42+00:00"
 description: "At some point in your career, probably many points, you'll have to resolve merge conflicts. Learn how on Foojay.io!"
 authors:
   - "helenjoscott"
-image: "merge-feature-into-main-1.png"
+image: "merge-feature-into-main-1.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
@@ -29,7 +29,7 @@ You can do this by selecting the feature branch in the *Git* tool window which y
 
 Select the feature branch and then choose *Merge feature into main*.
 
-![Merge feature branch into main IntelliJ IDEA popup](merge-feature-into-main.png)
+![Merge feature branch into main IntelliJ IDEA popup](merge-feature-into-main.jpg)
 
 When you press **⏎** (macOS), or **Enter** (Windows/Linux), IntelliJ IDEA opens a popup telling us there are merge conflicts.
 
@@ -65,7 +65,7 @@ Back on the *Conflicts* dialog, there are changes on both branches that we want 
 
 Here you can see the changes to our current branch (`main`) on the left, and the changes that we want to merge from the `feature` branch on the right. There is a fully-functional editor in the middle.
 
-![Merge Non Conflicting Changes](merge-non-conflicting-changes.png)
+![Merge Non Conflicting Changes](merge-non-conflicting-changes.jpg)
 
 There are several changes:
 
@@ -98,7 +98,7 @@ When you choose **Resolve using Left** or **Resolve using Right**, the changes f
 
 At this point, IntelliJ IDEA has concluded that all changes have been processed, so we can click **Apply** to save the changes and finish merging which will close this dialog.
 
-![Apply changes and finish merging](save-changes-finish-merging.png)
+![Apply changes and finish merging](save-changes-finish-merging.jpg)
 
 However, as we can see from the error highlighting this doesn't look quite right. The reason here is that both branches have added fields to this record, so we need to fix the brackets.
 

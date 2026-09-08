@@ -25,7 +25,7 @@ When I released [Lottie4J 1.1.0](https://lottie4j.com/releases/#2026-03-10-110),
 The core challenge with Lottie4J is correctness. The Lottie format is complex with a lot of nested data, and my JavaFX renderer has to produce output that matches what a JavaScript player would show. Pixel-perfect is too ambitious, but "is this a close enough match" is a reasonable bar.
 
 During development, I use a separate application within the Lottie4J project: [LottieFileDebugViewer](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/main/java/com/lottie4j/fxfileviewer/LottieFileDebugViewer.java). This is a JavaFX application that loads a Lottie file and renders it both with the JavaFX player, and inside a Webview with the official Lottie player. This makes it easy to compare the result and debug differences by diving into the data structure and different layers.
-![](manual-comparison-1024x342.png)
+![](manual-comparison-1024x342.jpg)
 
 Based on this debug viewer, I created a unit-test approach with two steps:
 

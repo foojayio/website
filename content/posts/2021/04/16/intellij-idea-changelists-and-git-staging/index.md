@@ -46,7 +46,7 @@ This means that when you commit your files to Git, all the changes in the file t
 
 Alternatively, if you want to commit some, but not all, of that file, you can double-click the file from the *Default Changelist* to open the *diff* view. This view shows the last known version that Git has on the left and then your local copy on the right in blue, which you can edit. You can select the checkboxes adjacent to each code change you have made on the right to specifically say that you only want to commit changes in that range, not the whole file.
 
-![Default changelist - partial file selected](intellij-idea-default-changelist-partial-commit-1.png)
+![Default changelist - partial file selected](intellij-idea-default-changelist-partial-commit-1.jpg)
 
 Note that if you only select part of the file to be committed as in this example, the *Default Changelist* will indicate that the file will be partially committed with a line through the checkbox adjacent to the filename in the Default Changelist as you can see above.
 
@@ -89,7 +89,7 @@ You can also move changes between Changelists using the coloured bars in the gut
 
 Lastly, we've already shown you how to set a new Changelist to be the active one, but it's worth mentioning that IntelliJ IDEA needs to know which Changelist to use for new changes; you always need one Changelist that is the active one. You can choose which Changelist is the active one when you have more than one by right-clicking on the Changelist and selecting **Set Active Changelist**. If you don't see this option, it's because the Changelist you have selected is already the active Changelist.
 
-![Set Active IntelliJ IDEA Changelist](set-active-changelist.png)
+![Set Active IntelliJ IDEA Changelist](set-active-changelist.jpg)
 
 When you commit any new changes, they will be placed in your *Active* IntelliJ IDEA Changelist by default.
 
@@ -109,7 +109,7 @@ IntelliJ IDEA 2020.3 introduced support for [Git staging](https://git-scm.com/do
 
 You can then turn it on:
 
-![Enable git staging](enable-git-staging-1.png)
+![Enable git staging](enable-git-staging-1.jpg)
 
 You can also enable Git staging from the Settings/Preferences dialog with **⌘,** on macOS, or **Ctrl** +**Alt** +**S** to display and then type in *git staging*.
 
@@ -123,7 +123,7 @@ With Git Staging you'll see two folders as opposed to the one IntelliJ IDEA Chan
 
 When you make a change to a file it will appear in your *Unstaged* folder initially as a diff that you can stage. You can stage the whole file by dragging it up to the Staged folder, by using the ***+*** icon in the tree, or right-click and select ***+Stage*** . IntelliJ IDEA will run a `git add` command when you do this:
 
-![Staging a whole file](stage-whole-file.png)
+![Staging a whole file](stage-whole-file.jpg)
 
 `Git add` modifies the file content in the index (the staged content). If you subsequently modify content inside that same range, it will not be committed until it's staged. You can use the staging area to change what is going to be committed independently of any modifications to the local files. With IntelliJ Changelists, any change inside of that same range will be committed.
 
@@ -131,7 +131,7 @@ When you make a change to a file it will appear in your *Unstaged* folder initia
 
 Alternatively, you can add part of a file by double-clicking on the file from the *Unstaged* folder and using the `<>` arrows on the Staged version on the left-hand side:
 
-![Reverting part of a file](reverting-changes.png)
+![Reverting part of a file](reverting-changes.jpg)
 
 You can also rollback a whole file by selecting it from the *Unstaged* area and selecting **Rollback** (or **Revert** prior to version 2021.1). This rollback the file to the state in the index, not the HEAD.
 
@@ -141,7 +141,7 @@ Let's take a look at the functionality in the *Staged* area. Changes in the *Sta
 
 You may change your mind and decide you want to unstage a whole file that you've previously staged. As with staging a file, you can either drag it from the *Staged* folder into the *Unstaged* folder, click the \***-\*\*** icon in the tree, or right-click and select 'Unstage':
 
-![Unstage a file](unstage-a-whole-file.png)
+![Unstage a file](unstage-a-whole-file.jpg)
 
 When you unstage a file, or part of a file, IntelliJ IDEA runs a `git reset` for the change.
 
@@ -149,7 +149,7 @@ When you unstage a file, or part of a file, IntelliJ IDEA runs a `git reset` for
 
 You can also unstage a change in a file if you need to. To do that, you need to open the file that contains the change that you want to unstage from the *Staged* folder *diff* view. You can then use the `>>` arrows from the staged portion on the left-hand side to *Unstage* the change. This will unstage that specific change and again, IntelliJ IDEA will run a Git command to reflect the change. You can also type into the editor if you prefer.
 
-![Unstage part of a file](unstage-part-file.png)
+![Unstage part of a file](unstage-part-file.jpg)
 
 ### Staging or Unstaging Individual Changes Using the Gutter Icons
 

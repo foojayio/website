@@ -6,7 +6,7 @@ description: "This is the first of a series on how Gradle works! For example, ho
 canonical: "https://blog.gradle.org/how-gradle-works-1"
 authors:
   - "bo-zhang"
-image: "local-distribution-startup.png"
+image: "local-distribution-startup.jpg"
 categories:
   - "Gradle"
   - "Java Core"
@@ -55,7 +55,7 @@ So the script's job is simple: it finds the `java` command, determines the param
 
 `exec` executes a command in the same process, i.e. replaces the current process with a JVM process.
 
-![](https://blog.gradle.org/images/how-gradle-works/local-distribution-startup.png)
+![](local-distribution-startup.jpg)
 
 The entry point of `Gradle Client JVM` is [`org.gradle.launcher.GradleMain` class](https://github.com/gradle/gradle/blob/acc6044325b11874e9626d98dec976a0e495cb62/subprojects/bootstrap/src/main/java/org/gradle/launcher/GradleMain.java).
 
@@ -71,17 +71,17 @@ Later,
 2. The `Gradle Daemon JVM` runs the build, and sends output (stdout/stderr) back to the `Gradle Client JVM`.
 3. After the build finishes, the `Gradle Client JVM` will exit, but the `Gradle Daemon JVM` may stay running for some time.
 
-![](https://blog.gradle.org/images/how-gradle-works/client-daemon.png)
+![](client-daemon-3d484e1a.png)
 
 However, there is one exception for this workflow. If you pass `--no-daemon` to the Gradle build, the client JVM may convert itself into a daemon JVM if it is [compatible with build requirements](https://docs.gradle.org/current/userguide/gradle_daemon.html#compatibility).
 
 In this case, there is no daemon, no communication, no input/output forwarding at all - the build happens inside the single JVM:
 
-![](https://blog.gradle.org/images/how-gradle-works/no-daemon.png)
+![](no-daemon-51ddc5f4.png)
 
 But if `--no-daemon` is present and the client JVM is not compatible with build requirements, a new disposable JVM will still be started for the build and exit at the end of the build:
 
-![](https://blog.gradle.org/images/how-gradle-works/no-daemon-not-compatible.png)
+![](no-daemon-not-compatible-f89eb7bc.png)
 
 This is how local Gradle distribution starts up on UNIX OSes. On Windows, the mechanism is very similar - the only difference is that we invoke `/path/to/distribution/bin/gradle.bat` instead of `/path/to/distribution/bin/gradle`.
 
@@ -95,7 +95,7 @@ If you open `gradlew` in a text editor, you'll find it very similar to what we h
 
 This JVM will locate or download a specific version of Gradle distribution declared in `gradle/wrapper/gradle-wrapper.properties`, then it will start Gradle inside the same JVM via Java reflection. After that, this tiny JVM acts as the `Gradle Client JVM `in the way explained in the last section.
 
-![](https://blog.gradle.org/images/how-gradle-works/wrapper-daemon.png)
+![](wrapper-daemon-19584a15.png)
 
 The entry point of `Gradle Wrapper JVM` is the [`org.gradle.wrapper.GradleWrapperMain` class](https://github.com/gradle/gradle/blob/acc6044325b11874e9626d98dec976a0e495cb62/subprojects/wrapper/src/main/java/org/gradle/wrapper/GradleWrapperMain.java).
 
@@ -109,7 +109,7 @@ Gradle client can be a part of another JVM, i.e. a JVM that loads some Gradle ja
 
 This programmatic API is called [Tooling API](https://docs.gradle.org/current/userguide/third_party_integration.html#embedding).
 
-![](https://blog.gradle.org/images/how-gradle-works/ide-tapi-daemon.png)
+![](ide-tapi-daemon-5ca5f9cc.png)
 
 For example, when you click `Gradle Sync` button in IntelliJ IDEA, IDEA will start a special Gradle build to fetch necessary information (project structure, dependencies, tasks, etc.) of the project via the Tooling API.
 

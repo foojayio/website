@@ -6,7 +6,7 @@ description: "Java serialization—and specifically deserialization—is “the 
 canonical: "https://snyk.io/blog/serialization-and-deserialization-in-java/"
 authors:
   - "bmvermeer"
-image: "image-7-1024x433.png"
+image: "image-7-1024x433.jpg"
 categories:
   - "Security"
 related_posts:
@@ -62,10 +62,10 @@ fileOut.close();
 ```
 
 When reading the file `ValueObject.ser` containing the serialized object with a hex-editor the output is this:
-![](image-7-1024x433.png)
+![](image-7-1024x433.jpg)
 
 Now I can easily manipulate the string value. Below I change it from `Hi` to `Hallo`:
-![](image-8-1024x411.png)
+![](image-8-1024x411.jpg)
 
 ```java
 FileInputStream fileIn = new FileInputStream("ValueObject2.ser");

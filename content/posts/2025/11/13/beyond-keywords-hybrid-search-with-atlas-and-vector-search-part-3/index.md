@@ -5,7 +5,7 @@ lastmod: "2025-12-12T21:19:43+00:00"
 description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching.Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
 authors:
   - "ricardo-mello"
-image: "Screenshot-2025-11-11-at-1.58.35-PM.png"
+image: "Screenshot-2025-11-11-at-1.58.35-PM.jpg"
 categories:
   - "AI"
   - "Databases"
@@ -541,7 +541,7 @@ Open your browser at[**http://localhost:8080**](http://localhost:8080), and appl
 * **Genres** = (Drama, Action)
 
 Just like in the screenshot below:  
-![](Screenshot-2025-11-11-at-1.58.35-PM.png)
+![](Screenshot-2025-11-11-at-1.58.35-PM.jpg)
 
 If we look closely at the results, we notice that some movies don't satisfy the pre-filters—for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980–2003.
 
@@ -707,7 +707,7 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 #### Case 1: Including genres
 
 Let's run the same query again with our new pipeline.  
-![](Screenshot-2025-11-11-at-2.01.23-PM.png)
+![](Screenshot-2025-11-11-at-2.01.23-PM.jpg)
 
 As you can see in the results, the filters look correct.
 
@@ -843,7 +843,7 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 ```
 
 Then, run the search again with the same inputs:  
-![](Screenshot-2025-11-11-at-2.05.52-PM.png)
+![](Screenshot-2025-11-11-at-2.05.52-PM.jpg)
 
 Now, we can see that the top results make more sense for this descriptive query. Try yourself by changing the weights and boost, and see the results.
 

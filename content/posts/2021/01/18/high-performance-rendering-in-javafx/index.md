@@ -5,7 +5,7 @@ lastmod: "2021-01-26T13:30:59+00:00"
 description: "Different rendering techniques in JavaFX using Canvas API, AWT Graphics2D, PixelBuffer and PixelBuffer GPU."
 authors:
   - "almasbaimagambetov"
-image: "https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/javafx_render_particles.png"
+image: "javafx_render_particles-ecf6b228.jpg"
 categories:
   - "JavaFX"
   - "Performance"
@@ -31,7 +31,7 @@ The evaluation suggests the following order of approaches from fastest to slowes
 
 All of the source code developed for this article can be found on [GitHub](https://github.com/AlmasB/FXGL-FastRender). An example demo with 1 000 000 particles looks like this:
 
-![1M Particles in JavaFX](https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/javafx_render_particles.png)
+![1M Particles in JavaFX](javafx_render_particles-ecf6b228.jpg)
 
 ## Introduction
 

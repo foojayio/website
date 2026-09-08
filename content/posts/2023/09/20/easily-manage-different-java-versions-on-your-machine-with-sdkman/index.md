@@ -7,7 +7,7 @@ canonical: "https://blog.payara.fish/easily-manage-different-java-versions-on-yo
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "sdkman.png"
+image: "sdkman.jpg"
 categories:
   - "Java"
   - "Java Beginner"

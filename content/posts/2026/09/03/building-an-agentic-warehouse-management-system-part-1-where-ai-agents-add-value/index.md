@@ -5,7 +5,7 @@ lastmod: "2026-09-03T19:18:50+00:00"
 description: "With this project, I am not trying to build a complete WMS. Instead, I want to use a logistics scenario I know well to explore how an AI agent can become part of a real business workflow and where it can add value. In this first part, we will introduce the WMS scenario and identify where an AI agent can help. In Part 2, we will define and connect the agent using Java and Spring AI. Finally, in Part 3, we will execute the plan, gather context, make the replenishment decision, and act when necessary."
 authors:
   - "ricardo-mello"
-image: "Screenshot-2026-09-03-at-11.21.04-AM.png"
+image: "Screenshot-2026-09-03-at-11.21.04-AM.jpg"
 categories:
   - "AI"
 related_posts:
@@ -41,7 +41,7 @@ You can start with the Overview page, which walks through the main WMS flow and 
 The complete source code is available [here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
 
 A Warehouse Management System, or simply WMS, is a software system used to manage and control the movement of products inside a warehouse. It typically handles processes such as receiving goods, tracking inventory, shipping products, replenishment, and many others. A warehouse may store products owned by the company operating it, but it may also store products for other companies. In this article, we will call these companies **depositors**:  
-![](p1-00_wms-flow-1024x732.png)
+![](p1-00_wms-flow-1024x732.jpg)
 
 A depositor owns the products stored in the warehouse, while the warehouse is responsible for receiving, storing, managing, and shipping them. A single warehouse may serve multiple depositors at the same time. For example, products from *Amazon* , *Nike* , or *Walmart* could be stored and managed in the same warehouse, while the inventory of each depositor remains separated. A real WMS can support many more processes, but for our application, we will focus on a smaller part of this flow:
 ![](p1-01_-flow-1024x250.png)
@@ -207,7 +207,7 @@ The important point is that the agent does not replace the existing WMS services
 Instead, the agent acts as an **orchestrator**, deciding which available tools to use based on the goal and the context it gathers.
 
 The following diagram shows where the agent becomes part of the WMS flow:
-![](p1-03_agent_flow-1024x671.png)
+![](p1-03_agent_flow-1024x671.jpg)
 
 The diagram may look like a sequence of steps, but this is not a traditional hard-coded workflow where the application defines every decision in advance.
 

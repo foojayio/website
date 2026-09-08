@@ -5,7 +5,7 @@ lastmod: "2021-10-29T08:22:31+00:00"
 description: "Not meant as a full dissection of the Apache Maven pom.xml, this article will go through some of its common portions."
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/06/mavenpomproject.png?w=1024"
+image: "mavenpomproject-78cc1ede.png"
 categories:
   - "Maven"
 related_posts:
@@ -26,7 +26,7 @@ With the assumption that the above linked content has been read *and bookmarked 
 
 ## The `project`
 
-![POM Contents. The dark background elements have complex structures while the light background are simple elements. Build and Profiles have additional diagrams](https://cgunturme.files.wordpress.com/2020/06/mavenpomproject.png?w=1024) POM contents. The dark background elements have complex structures while the light background is for simple elements. Build and Profiles have additional diagrams
+![POM Contents. The dark background elements have complex structures while the light background are simple elements. Build and Profiles have additional diagrams](mavenpomproject-78cc1ede.png) POM contents. The dark background elements have complex structures while the light background is for simple elements. Build and Profiles have additional diagrams
 
 This is the root element of a POM (Project Object Model). All convention overrides of a maven project are listed under the `project` element in the XML. A parent is identified by its coordinates (**groupId** , **artifactId** and **version** ) and an optional **relativePath** . The **relativePath** by convention expects a parent to exist one directory above. This relativePath value can be overridden to point to relative alternate locations (such as same directory) or an empty value, to ignore searching locally and only search in configured repositories.
 
@@ -129,7 +129,7 @@ Link: <https://maven.apache.org/ref/3.6.3/maven-model/maven.html#class_exclusion
 
 ### The build instructions
 
-![Build element contents. The dark background elements have complex structures while the light background is for simple elements.](https://cgunturme.files.wordpress.com/2020/06/mavenpombuild.png?w=1024) Build element contents. The dark background elements have complex structures while the light background is for simple elements.
+![Build element contents. The dark background elements have complex structures while the light background is for simple elements.](mavenpombuild-5b6ec032.png) Build element contents. The dark background elements have complex structures while the light background is for simple elements.
 
 Most of the instructions to chain build configuration together are all defined under a **build** element. A few elements of note are listed below.
 
@@ -171,7 +171,7 @@ Link: <https://maven.apache.org/ref/3.6.3/maven-model/maven.html#class_pluginMan
 
 #### Customizing the entire POM based on `profiles`
 
-![Profiles/profile content. The dark background elements have complex structures while the light background is for simple elements.](https://cgunturme.files.wordpress.com/2020/06/mavenpomprofiles-1.png?w=1024) Profiles/profile content. The dark background elements have complex structures while the light background is for simple elements.
+![Profiles/profile content. The dark background elements have complex structures while the light background is for simple elements.](mavenpomprofiles-1-1d62e8fb.png) Profiles/profile content. The dark background elements have complex structures while the light background is for simple elements.
 
 **Profiles** will require an entire blog post by themselves. Maven offers build **profiles** which can be activated ***either*** by default, ***or*** when certain conditions are met ***or*** by flagging them in a command line to maven execution. Build profiles contain many of the sections already present under the **project** element but are only executed when the profile is activated.
 

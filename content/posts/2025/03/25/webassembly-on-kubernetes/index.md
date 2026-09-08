@@ -6,7 +6,7 @@ description: "Like a couple of innovative technologies, different people have di
 canonical: "https://www.loft.sh/blog/webassembly-on-kubernetes"
 authors:
   - "nicolas-frankel"
-image: "cover_blog_WebAssembly_Kubernetes_dark.png"
+image: "cover_blog_WebAssembly_Kubernetes_dark.jpg"
 categories:
   - "Research"
 related_posts:

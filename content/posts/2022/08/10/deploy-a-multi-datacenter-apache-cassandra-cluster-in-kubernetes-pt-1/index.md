@@ -6,7 +6,7 @@ description: "Today let's examine different Kubernetes deployment patterns and s
 canonical: "https://k8ssandra.io/blog/tutorials/deploy-a-multi-datacenter-apache-cassandra-cluster-in-kubernetes/"
 authors:
   - "jeff-carpenter"
-image: "k8ssandra-docs-architecture-Multi-cluster-1.png"
+image: "k8ssandra-docs-architecture-Multi-cluster-1.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -261,7 +261,7 @@ UN  10.120.3.7   158.64 KiB  256          17.8%             9e686277-9a78-49f6-b
 ```
 
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes:
-![](k8ssandra-docs-architecture-Multi-cluster-1.png)
+![](k8ssandra-docs-architecture-Multi-cluster-1.jpg)
 
 ## Multiple Cassandra datacenters in a single K8ssandra install?
 

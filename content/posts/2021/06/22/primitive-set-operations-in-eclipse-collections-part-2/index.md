@@ -37,7 +37,7 @@ Method signature: `setA.symmetricDifference(setB)`
 
 This operation returns a set that contains elements that are in either one of the two sets but not **both**. In other words, (Set A — Set B) U (Set B — Set A).
 
-{{< img src="https://cdn-images-1.medium.com/max/450/1*n6jDbl59hZRjqlJTElHOKA.png" class="alignleft" alt="Symmetric Difference " width="310" height="305" >}}
+{{< img src="1-n6jDbl59hZRjqlJTElHOKA-26dcb6f8.png" class="alignleft" alt="Symmetric Difference " width="310" height="305" >}}
 
 Set A — 1, 2, 3.
 
@@ -84,7 +84,7 @@ Method signature: `setA.isSubsetOf(setB)`
 
 This operation returns true if all elements from Set A are present in Set B.
 
-{{< img src="https://cdn-images-1.medium.com/max/450/1*Ge_-WW6p36ypRkKo_ARUow.png" class="alignleft" alt="Set A is a subset of Set B" width="216" height="280" >}}
+{{< img src="1-Ge_-WW6p36ypRkKo_ARUow-5f415ce7.png" class="alignleft" alt="Set A is a subset of Set B" width="216" height="280" >}}
 
 Set A — 1, 2.
 
@@ -160,7 +160,7 @@ Method Signature: `setA.cartesianProduct(setB)`
 
 Cartesian Product of Set A and Set B is the set of all possible ordered pairs where the first element of the pair is from Set A and the second element from Set B.
 
-{{< img src="https://cdn-images-1.medium.com/max/450/1*dIfPbw3i4Vm8Z_nSJc-Bpg.png" class="alignleft" alt="Cartesian Product A x B" width="270" height="273" >}}
+{{< img src="1-dIfPbw3i4Vm8Z_nSJc-Bpg-9472a73a.png" class="alignleft" alt="Cartesian Product A x B" width="270" height="273" >}}
 
 Set A — 1, 3.
 

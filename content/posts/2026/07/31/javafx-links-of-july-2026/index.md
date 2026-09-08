@@ -5,7 +5,7 @@ description: "Here are the JavaFX LinksOfTheMonth of July 2026. You can find the
 canonical: "https://webtechie.be/post/javafx-links-of-july-2026/"
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
 related_posts:

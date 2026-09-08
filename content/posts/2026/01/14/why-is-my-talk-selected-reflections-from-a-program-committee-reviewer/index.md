@@ -5,7 +5,7 @@ lastmod: "2026-01-15T13:44:23+00:00"
 description: "If you are like me, get the adrenaline rush of getting up on stage and can’t wait to share things that you experienced and learned, then submitting talks…"
 authors:
   - "soham-dasgupta"
-image: "why.png"
+image: "why.jpg"
 categories:
   - "Conference"
   - "Events"

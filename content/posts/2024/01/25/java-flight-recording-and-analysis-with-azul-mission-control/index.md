@@ -25,7 +25,7 @@ frozen: false
 By utilizing JFR, you gain valuable insights into the runtime behavior of your Java applications. It helps you to optimize performance, identify and troubleshoot issues, and ensure better overall reliability. JFR is designed with very low overhead, allowing its use in production environments with minimal impact on the performance of your application.
 
 You can use a JFR recording to examine your application with various tools, such as Azul Mission Control.
-![](azul-mission-control-screenshot-1024x534.png)
+![](azul-mission-control-screenshot-1024x534.jpg)
 
 ## Azul Mission Control
 

@@ -6,7 +6,7 @@ description: "Many Something-Driven Developments are available nowadays! Which a
 canonical: "https://webtechie.be/post/2023-07-25-domain-deadline-dog-driven-development/"
 authors:
   - "frankdelporte"
-image: "dogdriven.png"
+image: "dogdriven.jpg"
 categories:
   - "Opinion"
 related_posts:

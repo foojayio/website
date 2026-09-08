@@ -32,7 +32,7 @@ The bucket has a maximum capacity, so it can handle bursts of traffic as long as
 
 ## How It Works
 
-![](https://cdn-images-1.medium.com/max/2160/1*7cDKq5yh5RD0ygvb3mVwfQ.gif)
+![](1-7cDKq5yh5RD0ygvb3mVwfQ-384353f7.webp)
 
 ### 1. **Define a Token Refill Rate**
 

@@ -5,7 +5,7 @@ lastmod: "2026-04-27T15:56:38+00:00"
 description: "Explore how to integrate AgentCore Memory in the Spring AI SDK with Amazon Bedrock. Learn how to add short-term to AI agents for improved context awareness, conversation continuity, and smarter responses in real-world applications."
 authors:
   - "mahendra1413"
-image: "https://a.b.cdn.console.awsstatic.com/a/v1/ACHOUHHJ3XZF7J5AYP2XIR2NCZIPH56WAM33AFJA44HJSRMAO4DA/assets/images/Overview/ac_overviewchart_04_07.png"
+image: "ac_overviewchart_04_07-7f591d25.png"
 categories:
   - "AI"
   - "GenAI"
@@ -21,10 +21,10 @@ frozen: false
 *Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/)*
 
 In this article, we explore one of the AgentCore capabilities i.e., ***memory***
-![](https://a.b.cdn.console.awsstatic.com/a/v1/ACHOUHHJ3XZF7J5AYP2XIR2NCZIPH56WAM33AFJA44HJSRMAO4DA/assets/images/Overview/ac_overviewchart_04_07.png) ***Source: Amazon***
+![](ac_overviewchart_04_07-7f591d25.png) ***Source: Amazon***
 
 To begin, enable **AgentCore memory** for the agent you built earlier.  
-![SpringAI SDK](SpringAISDK.png)
+![SpringAI SDK](SpringAISDK.jpg)
 
 ### Step 1: Add the Ai model and AgentCore memory dependencies
 
@@ -42,7 +42,7 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
 ### Step 2: Create Short/Long Term in AWS Management Console
 
 *Navigate to **Amazon Bedrock AgentCore \> Memory** to create short/long-term memories.*
-![AgentCore Memory](AgentCoreMemory-1024x441.png) AgentCore Memory
+![AgentCore Memory](AgentCoreMemory-1024x441.jpg) AgentCore Memory
 
 ### Step 3: Add the following memory-related properties.
 

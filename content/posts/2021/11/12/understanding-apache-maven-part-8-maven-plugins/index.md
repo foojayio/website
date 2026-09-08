@@ -5,7 +5,7 @@ lastmod: "2021-11-20T11:36:10+00:00"
 description: "Maven is a plugin-execution framework: plugins are an assembly of goals, code written as MOJOs (Maven’s plain Old Java Objects)."
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/07/mavenplugins.png?w=1024"
+image: "mavenplugins-13f5b8fd.png"
 categories:
   - "Maven"
 related_posts:
@@ -29,7 +29,7 @@ A quick recap:
 ## What are plugins?
 
 Maven is a plugin-execution framework. Plugins are an assembly of goals, code written as MOJOs (*Maven's plain Old Java Objects, Modern MOJOs are not restricted to being written in Java*). Goals have names and can be bound to phases. A MOJO declares its goal name and optionally, a phase association, which binds the class to a part of a lifecycle.
-![Image displays a plugin-lifecycle relationship. Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.](https://cgunturme.files.wordpress.com/2020/07/mavenplugins.png?w=1024) Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.
+![Image displays a plugin-lifecycle relationship. Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.](mavenplugins-13f5b8fd.png) Plugins define goals. Goals can be bound to phases. Goals from multiple plugins can be bound to a single phase.
 
 A plugin is typically a `.jar` file which contains the MOJO classes and a `META-INF/maven/plugins.xml`. This `plugins.xml` is generated as a part of the maven execution of the plugin code.
 
@@ -92,7 +92,7 @@ The **dependencies** is a complex element and contains a set of **dependency** e
 ### Configuration
 
 The **configuration** is a complex element which allows for a free-form DOM configuration used by the plugin. The configuration specifics are typically listed (*and recommended, in case of custom plugins*) in the Usage page for a given plugin.
-![](https://cgunturme.files.wordpress.com/2020/07/mavenpomplugins-1.png?w=1024) A visual of the plugin element
+![](mavenpomplugins-1-6d5482ba.png) A visual of the plugin element
 
 ## Plugin Inheritance
 

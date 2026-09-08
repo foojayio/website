@@ -5,7 +5,7 @@ lastmod: "2023-09-25T08:39:43+00:00"
 description: "Chronicle Services presents an opinionated view of several of the specialised libraries we have developed to support low-latency applications."
 authors:
   - "george-ball"
-image: "Screenshot-2023-09-08-at-3.15.36-PM.png"
+image: "Screenshot-2023-09-08-at-3.15.36-PM.jpg"
 categories:
   - "Chronicle Software"
   - "Performance"
@@ -120,7 +120,7 @@ Detailed functional testing is available through a powerful testing framework, w
 Each Service is defined in terms of its implementation class and the Chronicle Queues that are used for the transmission of Events. There is enough information here for the Chronicle Services runtime to create and start each service.
 
 Diagrammatically, the application described in the above file would appear like this:
-![](Screenshot-2023-09-25-at-9.37.26-AM-1024x256.png)
+![](Screenshot-2023-09-25-at-9.37.26-AM-1024x256.jpg)
 
 **Deploying a Service**
 

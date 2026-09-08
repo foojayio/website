@@ -165,7 +165,7 @@ If we want to see only Kotlin multiplatform dependencies, we can select the **Ko
 
 When we click **Add** to the right of the Ktor dependency, we see that Ktor is added to the list of dependencies and to the pom.xml for the Kotlin module.
 
-[![Add Ktor](add-ktor.png "Add Ktor")](add-ktor.png "Add Ktor")
+[![Add Ktor](add-ktor.jpg "Add Ktor")](add-ktor.jpg "Add Ktor")
 
 We will also need to keep our dependencies up to date.
 

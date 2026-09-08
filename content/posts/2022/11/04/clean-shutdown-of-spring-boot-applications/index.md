@@ -43,7 +43,7 @@ netstat -ao
 ```
 
 You will get a screen such as the below. Locate the port on which you had started the Tomcat Server.  
-![](https://blogger.googleusercontent.com/img/a/AVvXsEgHTALnmpA7DEvZj6QxKQmwqKdjPPKLhKlZsw8ZnXz5r9ZiZqF6AIRO2IPSBmH5nhEmheRyCoJiiMOQJ0u9zehkl4XPav7aezTSiU8bQAoH8xu3lMzQQNQIIWvM6c-k7_owyzWB1D-KdnHA6467-79vdiNRC34ZKGf1zIlWj-7Pe9u7HiUOZoHt4ETlLw)
+![](AVvXsEgHTALnmpA7DEvZj6QxKQmwqKdjPPKLhKlZ-1e4230f5.png)
 
 Go ahead and locate the PID and kill the task (Windows/MS-DOS)
 
@@ -51,7 +51,7 @@ Go ahead and locate the PID and kill the task (Windows/MS-DOS)
 taskkill /F /PID 14836
 ```
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEiS0214rgPJ0H8qP9HK8Eciiy9RNiE3qtqL9wOIXAO4hDX9x98oXi-BwPqyA7E0H0d2HUJOEZbnpfFTv_ed6_kUl39TjmCgHnI_UK1ktyx_FSOIKoEtYoKQMRzLZFYJJicBhKg9MhyRIOxVWg2WPoxbqXsd9F1iktbdc2xwUVY-eK2LH1LTYaDvegG5ow)
+![](AVvXsEiS0214rgPJ0H8qP9HK8Eciiy9RNiE3qtqL-76d1822b.png)
 
 Note that if you were running the application from the command-line, You can just press \[Ctrl+C\] to terminate the application. In most cases, it will also kill the process. But if it does not kill the process, you should proceed with the above mentioned steps.  
 **\[1a\]** ++Automate the writing of Process Id to a File++
@@ -67,7 +67,7 @@ Note that if you were running the application from the command-line, You can jus
 **2. Terminate the Application, Kill the Process (TCPView)**
 
 There is one another way to immediately kill the process via the TCPView tool that is made available by Microsoft. It is available at this [link](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) to download.
-![](https://blogger.googleusercontent.com/img/a/AVvXsEjL9aie5-WPDlJOWLxVGPRzWlekHbKfkrEscRetmCcaL3OUOLq-txmjYPHeuBsl3s1DO1o8Pr_th2NcpT4HNH0GQsb0Py2luN3WZAXwqxN6jcuLB0m6AMWC4JgxXPHvpLu1kooRWx7Mk15q_SHjXV8LGstOtEZJXvTxln1IAwqpuWUV_qruJpzI7HAgGA=w640-h306)
+![](AVvXsEjL9aie5-WPDlJOWLxVGPRzWlekHbKfkrEs-b227eee2.jpg)
 
 The next simple method is proposed by me. Beginby clicking on the \[Terminate - Red Square in Eclipse on the Console Tab\] button. You will observer that the application immediately shuts down. But infact at the background, the tomcat server will still be running on the port that it was started!
 
@@ -79,14 +79,14 @@ This is a very convenient way especially if you are a Software Architect or an E
 
 The most 'cleanest' way among the ones I described until now is the usage of Actuator to shutdown the spring boot applications. You will begin this by making sure to the include the following in your **pom.xml**
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEjMGD_-_KVzJC1S-8yY9xlkHawwdDSmQOEGGyJqG5M4w4GCqe1Hb1loq3cJK5ha6_lWkAGbdx79hzEXe7anYhn8ZOQKGw34ag9UCEjs3lNevzhEun_OjV8ZXijPAEfe42HLjGdJbqXVuVM8s8xWGglp3xwshOIPWbhDRQ_Q-PidNZUQRNkMoO4dtwHWBA=w400-h55)
+![](AVvXsEjMGD_-_KVzJC1S-8yY9xlkHawwdDSmQOEG-93d9f173.png)
 
 Next make sure that you have enabled the shutdown endpoint via actuator using the properties as shown below.
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEg4yZyksyu3xqAbAj44fheHcemCgQZNjGKqEjyrUtOyupBEGwmK5iWkORjloBSMlRnvrzkR_F-67CzLy2G3WS1j3GrVM_iwNqfGDaLZuvAsFdATgQOKxDChPkcwY-M8atwhl6tBo8jLDJFNucVGR5IlLq5MP8LmGfdW29cpM-4LQUpnbXlY8roNWYV9Ag=w640-h144)
+![](AVvXsEg4yZyksyu3xqAbAj44fheHcemCgQZNjGKq-8e140e85.png)
 
 Once you have to shutdown the application, the actuator endpoint /shutdown will also kill the associated process. This is a very clean way to shutdown the Spring Boot applications. You have to make sure that you invoke the actuator endpoint /shutdown via a \[POST\] request only.
-![](https://blogger.googleusercontent.com/img/a/AVvXsEjELC9xnk-jTPNkpKG4JHvEX64fM33ZNJPYh2K9uk0aF1nDfCpM1B_6TdYDehsaSdtuODU7eqBczYFciTj4IMj76oxYrnK2RGbNxDJ20a8BUxE9-XKxjYro056BO1jPeAXysyF75ydWPxLhcI-t3RJCps1j218jEq_avpiuI7bPElYFBPAT3Rl4xqdwRg=w640-h130)
+![](AVvXsEjELC9xnk-jTPNkpKG4JHvEX64fM33ZNJPY-2794152d.png)
 
 If Spring Boot is the root context of your spring boot application, then the invocation will look like the following. The above diagram shows the response from the request sent via Postman.
 
@@ -143,11 +143,11 @@ You may then use the following controller method to close the context asynchrono
 
 Once the above has been done, built and deployed. You may then close the spring boot using the following browser request.
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEh3qfActZG-2gu9LjZ3e73WemtzCttIziJ3f181kiRhpCEGrtCGqjofhAjRJ8g4kN66KT_R5Ds2YurtYvb4sIHfpht0oT0vvpNnwlRVoHAKTJIlTjuOCM3E25AP9D6U_DevgY88dkj6GHxSzVnmhGsb2MmOj0fiJNMbKqEyVjMNfkBz69D_t-3W4K5cCg=w640-h122)
+![](AVvXsEh3qfActZG-2gu9LjZ3e73WemtzCttIziJ3-1c4eeeb5.png)
 
 You will notice that the application has been shutdown when you see the console and also the process has been removed from the operating system processes.
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwooWQgGZkL8VyoA6LJ6Lzc51_Nq9KHvfveWJifqWK4Qm_24FzXOlfWVW0aqLHV8i7BB03IvsKmidWAnf83DUeyWP1wg1o5pG1o9eY7r7vUfLN8X4fRxzeSnD428cEak97SWoaUF0zxwOmSrFBfspKGx9GXVyhmK09NTG6H-RxtmkT548DPJV4ZiG3Qg/w640-h70/skp_ts_blog_001.png)
+![](skp_ts_blog_001-257c8527.png)
 
 **5. Exit using SpringApplication.exit()**
 
@@ -180,11 +180,11 @@ The other way is use the exit() method of the SpringApplication class, it will a
 
 The controller will look similar to what we had written previously. Once your application is running and you want to shutdown the application 'cleanly', then you may use the following:
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEhj9fdgrxzUzjulgrIX5hosG0H-nC0SgPcICf29E5Ld4p-R7omRSHNol4bAVVpClQ_B2dNYyLuD1rrCvSgQqWRKJGF5SbzM3_8VMNcKnDb3rJuH5_tg1w4DwGBPVHyIq0DfVlGGH4iy-RWhB1hKuxw6jxHF8MCd7yHzAcq3yCPkgTkwULetJ_nNQzWM9g=w640-h96)
+![](AVvXsEhj9fdgrxzUzjulgrIX5hosG0H-nC0SgPcI-07ebcb35.png)
 
 You will notice that the application has been shutdown when you see the console and also the process has been removed from the operating system processes.
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEjEMWmzL03e0bjpDwxNE6sdx_-UnSfXugAZ1VNCNYucL1d35gmNJTZfCSQm1OUu8IOEAnkuvx4CHuuO4V7i6GzelBuq6AGzRqApL1OjwRlL5cj5HwYWig-OtAcXG2kceyPtMO9P5nd5sZTlkWZKtbTXl68n7bvBkdujThsxRsnSTTvBaDTNNwe81j5yXw=w640-h62)
+![](AVvXsEjEMWmzL03e0bjpDwxNE6sdx_-UnSfXugAZ-44e2d20d.png)
 
 **\[Reference\]**   
 <https://www.javadevjournal.com/spring-boot/shutdown-spring-boot-application/>

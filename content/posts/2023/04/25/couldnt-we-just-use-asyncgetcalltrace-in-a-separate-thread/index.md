@@ -20,10 +20,10 @@ frozen: false
 I'm keenly interested in everything related to profiling on the JVM, especially if it is related to AsyncGetCallTrace, this tiny unofficial API that powers most profilers out there, heck, I'm even in the process of adding an [improved version to the OpenJDK](https://mostlynerdless.de/blog/2023/01/19/asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm/), AsyncGetStackTrace.
 
 During the discussions on the related JDK enhancement proposal and PRs fixing AsyncGetCallTrace bugs, one thing often arises: Why is AsyncGetCallTrace always called in the signal handler on top of the stack that we want to walk (like in my [Writing a Profiler from Scratch](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) series)?  
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence.drawio-1.svg) Interaction between the wall-clock sampler thread and the different signal handlers, as currently implemented in async-profiler.
+![](wall-clock-sampling-sequence.drawio-1-9a4c0a1c.svg) Interaction between the wall-clock sampler thread and the different signal handlers, as currently implemented in async-profiler.
 
 JDK Flight Recorder (JFR) does not do this; it instead [walks the stack in the sampler thread](https://github.com/openjdk/jdk/blob/d8af7a6014055295355a1242db6c2872299c6398/src/hotspot/share/jfr/recorder/stacktrace/jfrStackTrace.cpp#L232) while pausing the sampled thread (implemented with a [SuspendedThreadTask](https://github.com/openjdk/jdk/blob/4539899c55c77771b951d005c17550ef9ac94819/src/hotspot/os/posix/signals_posix.cpp#L1833)).  
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence-Page-2.drawio-1.svg) Interaction between the sampler thread and the signal handlers, as currently implemented in JFR.
+![](wall-clock-sampling-sequence-Page-2.draw-a9a45d92.svg) Interaction between the sampler thread and the signal handlers, as currently implemented in JFR.
 
 *Update after talks on the JEP: The recommended way to use AsyncGetStackTrace will be to call it in a separate thread.*
 
@@ -246,7 +246,7 @@ This ensures that the `_thread_data` is only set if it is null. Such operations 
 Coming back to the signal handler implementation: The `waitWhile` method is a helper method that busy waits until the passed predicate does return false or the optional timeout is exhausted, ensuring that the profiler does not hang if something goes wrong.
 
 The implementation uses the `_thread_data` variable to implement its synchronization protocol:  
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence-Page-3.drawio1.svg) Interaction between the sampler thread and the signal handler.
+![](wall-clock-sampling-sequence-Page-3.draw-8cc5c75a.svg) Interaction between the sampler thread and the signal handler.
 
 You can find the implementation in my [async-profiler fork](https://github.com/parttimenerd/async-profiler/tree/dont_use_thread_current), but as with my OpenJDK fork: It's only a rough implementation.
 
@@ -397,20 +397,20 @@ This prevents all crashes related to walking the stack from crashing the JVM, wh
 Back to this peculiar case: The implementation in async-profiler is slightly more complex than just removing the busy waiting at the end. First, we must copy the ucontext in the signal handler because the ucontext pointer only points to a valid ucontext while the thread is stopped. Furthermore, we have to disable the native stack walking in the async-profiler, as it isn't wrapped in code that catches crashes. We also have, for unknown reasons, to set the `safemode` option of async-profiler to 0.
 
 The implementation of the signal handler is simple (just remove the wait from the previous version). It results in the following sequence diagram:  
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence-Copy-of-Page-3.drawio.svg) Interaction between the sampler thread and the signal handlers when not blocking the sampled thread during the stack walking.
+![](wall-clock-sampling-sequence-Copy-of-Pag-ffbd8ce2.svg) Interaction between the sampler thread and the signal handlers when not blocking the sampled thread during the stack walking.
 
 You can find the implementation on [GitHub](https://github.com/parttimenerd/async-profiler/tree/dont_use_thread_current2_experimental), albeit with known concurrency problems, but these are out-of-scope for this blog post and related to copying the ucontext atomically.
 
 And now to the important question: How often did AsyncGetCallTrace crash? In the renaissance finagle-http benchmark (with a sampling interval of 10ms), it crashed in 592 of around 808000 calls, a crash rate of 0.07% and far better than expected.
 
 The main problem can be seen when we look at the flame graphs (set the environment variable `SKIP_WAIT` to enable the modification):
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/image.png)
+![](image-d169e5c3.png)
 
 Which looks not too dissimilar to the flame graph with busy waiting:
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/image-1.png)
+![](image-1-fd7a5009.jpg)
 
 Many traces (the left part of the graph) are broken and do not appear in the second flame graph. Many of these traces seem to be aborted:
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/image-2.png)
+![](image-2-666fcf0e.jpg)
 
 But this was an interesting experiment, and the implementation seems to be possible, albeit creating a safe and accurate profiler would be hard and probably not worthwhile: Catching the segmentation faults seems to be quite expensive: The runtime for the renaissance finagle-http benchmark is 83 seconds for the version with busy waiting and 84 seconds without, despite producing worse results.
 
@@ -427,10 +427,10 @@ java -agentpath:./build/lib/libasyncProfiler.so=start,\
 ```
 
 The shorter interval will make the performance impact of changes to the profiling more impactful. I'm profiling with my Threadripper 3995WX on Ubuntu using [hyperfine](https://github.com/sharkdp/hyperfine) (one warm-up run and ten measured runs each). The standard deviation is less than 0.4% in the following diagram, which shows the wall-clock time:
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/re_dotty_wc-2.svg)
+![](re_dotty_wc-2-c6dee35e.svg)
 
 The number of obtained samples is roughly the same overall profiler runs, except for the experimental implementation, which produces around 12% fewer samples. All approaches seem to have a comparable overhead when considering wall-clock time. It's different considering the user-time:
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/re_dotty_ut-1.svg)
+![](re_dotty_ut-1-e521db68.svg)
 
 This shows that there is a significant user-time performance penalty when not using the original approach. This is expected, as we're engaging two threads into one during the sampling of a specific threadTherefore, the wall-clock timings might.
 

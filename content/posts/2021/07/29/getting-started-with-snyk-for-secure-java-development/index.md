@@ -6,7 +6,7 @@ description: "Learn how to begin with Snyk for secure Java development so that
 canonical: "https://snyk.io/blog/snyk-for-secure-java-development/"
 authors:
   - "bmvermeer"
-image: "https://res.cloudinary.com/snyk/images/w_1240,h_221,c_scale/f_auto,q_auto/v1/wordpress-sync/blog-secure-java-development-repo/blog-secure-java-development-repo-1240x221.png?_i=AA"
+image: "blog-secure-java-development-repo-1240x2-599df2c1.png"
 categories:
   - "Security"
   - "Snyk"
@@ -51,7 +51,7 @@ Next, you can connect your Git repository. If you connect your Java repository, 
 The example below shows a pom file from a demo project that contains known security vulnerabilities. Every time Snyk finds a new issue, it will be visible in your dashboard, explaining the vulnerability and possible remediation advice.  
 
 In addition, the get integration can also scan Dockerfiles and perform Snyk Code analyses. If you want more information about the Snyk Code analyses for Java applications with the Snyk Git integration, check out this [Solving Java security issues in my Spring MVC application](https://snyk.io/blog/java-code-analysis-solving-java-security-issues-in-spring-mvc-app/) blog post.
-![Develop secure Java code with Snyk](https://res.cloudinary.com/snyk/images/w_1240,h_221,c_scale/f_auto,q_auto/v1/wordpress-sync/blog-secure-java-development-repo/blog-secure-java-development-repo-1240x221.png?_i=AA)
+![Develop secure Java code with Snyk](blog-secure-java-development-repo-1240x2-599df2c1.png)
 
 ## Maven and Gradle plugins
 

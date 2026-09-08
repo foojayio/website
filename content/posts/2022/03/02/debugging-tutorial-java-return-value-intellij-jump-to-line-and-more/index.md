@@ -48,7 +48,7 @@ The reason is performance. The more elements you inspect, the slower the applica
 
 If the application feels slow, disable such instrumentations. If possible, invest in newer hardware. Especially more RAM. Also, make sure we allocate enough of that RAM for the IDE!
 
-![Show Method Return Values](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613449451/H9UUmLn9w.png)
+![Show Method Return Values](H9UUmLn9w-71220acb.png)
 
 ## IntelliJ Jump to Line
 
@@ -74,7 +74,7 @@ E.g. when you're debugging and want to make sure that the object you're looking 
 
 You can use this in conditional breakpoints to stop at the right location. It's an amazingly useful feature.
 
-![Mark Objects Menu](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613600378/Ajtf6FNyK.png)
+![Mark Objects Menu](Ajtf6FNyK-46a8defe.jpg)
 
 ## Return Immediately
 
@@ -84,13 +84,13 @@ We can "just" force a return from a point before the errors occur and provide a 
 
 This is a pretty niche feature, but when you need it, it's cool!
 
-![Return Immediately](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613199855/m3wMBWi1M.png)
+![Return Immediately](m3wMBWi1M-63680384.jpg)
 
 ## Drop Frame
 
 This is something I didn't have time for. I plan to cover it in a future video. It's essentially an "undo" of a step into operation. The stack is just unwinded by it. It doesn't restore the state though, so it isn't an exact "undo" operation.
 
-![Drop Frame](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613256588/V3jr2ulab.png)
+![Drop Frame](V3jr2ulab-b9eaa668.jpg)
 
 Eagle eyed readers will also notice a feature called "Throw Exception" which does exactly that. Its useful for some edge cases as validating code robustness and failure behavior. I'll try to address that too in the future.
 

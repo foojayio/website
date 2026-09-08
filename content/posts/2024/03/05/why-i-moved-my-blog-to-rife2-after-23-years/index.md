@@ -29,7 +29,7 @@ Needless to say, I was hooked, line, and sinker.
 
 The blog is more complicated than it looks; many behind-the-scenes features have been added over the years.
 
-![](erik.thauvin.net_blog_admin_editor_typepostid9739-1-638x510.png)
+![](erik.thauvin.net_blog_admin_editor_typepostid9739-1-638x510.jpg)
 
 It supports numerous APIs, like [MetaWeblog](https://en.wikipedia.org/wiki/MetaWeblog), [WebSub](https://en.wikipedia.org/wiki/WebSub), and [Pushover](https://pushover.net/)… It can automatically cross-post to social networks like [Mastodon](https://mastodon.social/@ethauvin), [BlueSky](https://bsky.app/profile/erik.thauvin.net), [X](https://twitter.com/ethauvin), [Facebook](https://www.facebook.com/ethauvin), and [LinkedIn](https://www.linkedin.com/in/ethauvin/)…
 

@@ -17,7 +17,7 @@ frozen: false
 Here's a super awesome prompt (e.g., for Claude Code) that you can use with <https://github.com/dash0hq/agent-skills>, the free collection of skills for AI coding agents to make applications observable with OpenTelemetry, such as with [Dash0](https://www.dash0.com/).
 
 And the end result is this, a view into the traces of your application (without anything at all at the start of the process).
-![](dash0-foojay-2-1024x545.png)
+![](dash0-foojay-2-1024x545.jpg)
 
 ## **The Super Awesome Prompt**
 
@@ -65,7 +65,7 @@ for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; 
 ```
 
 Then in Dash0 go to the **Trace Explorer** — filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10–30 seconds.
-![](dash0-foojay-2-1024x545.png)
+![](dash0-foojay-2-1024x545.jpg)
 
 Next, go to **Integrations → Java → Install all dashboards** if you haven't yet, then open **JVM Metrics** for the heap/GC/thread charts.
 

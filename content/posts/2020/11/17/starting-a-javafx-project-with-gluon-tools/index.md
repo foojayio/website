@@ -5,7 +5,7 @@ lastmod: "2021-08-23T13:01:07+00:00"
 description: "Here on foojay.io you can already find two posts by Carl Dea to get you started with JavaFX. In this post, I want to show you yet another approach that uses the tools provided by Gluon, who are the maintainers, and the driving force behind OpenJFX. The Gluon start website and the plugin allow you to get started with a new JavaFX project in a few clicks. Thanks to the amazing work done by the Gluon team this also gives you a quick-start for the creation of a mobile application which can be built for both Android and iOS."
 authors:
   - "frankdelporte"
-image: "Screenshot-from-2020-11-16-08-33-50-1024x434.png"
+image: "Screenshot-from-2020-11-16-08-33-50-1024x434.jpg"
 categories:
   - "Gluon"
   - "IntelliJ IDEA"
@@ -92,7 +92,7 @@ In that case you'll need to follow these steps:
 3. In the "Project structure" dialog in IntelliJ IDEA add the location including the "lib" in the "Modules \> Dependencies" screen, e.g. `/opt/javafx-sdk-16/lib`. By doing this, your IDE will be able to provide you the correct syntax highlighting.
 4. To run your application, we also need to add the startup arguments to point to the javafx-modules. Open the Configurations dialog and provide the "VM options", including all the modules required for your project, e.g. `--module-path /opt/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml`.
 
-![](Screenshot-from-2020-11-16-08-33-50-1024x434.png) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
+![](Screenshot-from-2020-11-16-08-33-50-1024x434.jpg) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
 
 ### Create a New Project with start.gluon.io
 
@@ -130,7 +130,7 @@ In the next windows, you can select different options, Maven or Gradle, names of
 
 {{< gallery cols="3" >}}
 intellij-new-project-1.png
-intellij-new-project-run-1024x666.png
+intellij-new-project-run-1024x666.jpg
 intellij-new-project-views.png
 {{< /gallery >}}
 

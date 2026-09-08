@@ -6,7 +6,7 @@ description: "Google's fully managed Kubernetes services, GKE Autopilot, is a co
 canonical: "https://ashishtechmill.com/introducing-the-gke-autopilot-cluster"
 authors:
   - "yrashish"
-image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbqm_y.jpeg"
+image: "qHmKbqm_y-72a1bef0.jpeg"
 categories:
   - "Books"
   - "Kubernetes"
@@ -21,7 +21,7 @@ frozen: false
 
 The following is an excerpt from my book **Effortless Cloud-Native App Development Using Skaffold** from Packt Publishing.
 
-![B17385_Mockup Cover_High Res.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbqm_y.jpeg)
+![B17385_Mockup Cover_High Res.jpg](qHmKbqm_y-72a1bef0.jpeg)
 
 **The book is available for order from [Amazon.com](https://www.amazon.com/Effortless-Cloud-Native-Development-using-Skaffold/dp/1801077118) and directly from [Packt](https://www.packtpub.com/product/effortless-cloud-native-apps-development-using-skaffold/9781801077118). The excerpt below comes from chapter 8: "Deploying a Spring Boot Application to the Google Kubernetes Engine Using Skaffold".**
 

@@ -46,7 +46,7 @@ The postfix shortcuts we currently support are the following:
 
 Here's a demo for this feature:
 
-[![Postfix Completion](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/postfix.gif)
+[![Postfix Completion](postfix.webp)](postfix.webp)
 
 We plan to continue adding more postfix shortcuts so stay tuned.
 
@@ -68,7 +68,7 @@ Another way to add all missing imports to right click to pull out the context me
 
 Here's a demo for all features mentioned above
 
-[![Organize import](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/organizeimport.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/organizeimport.gif)
+[![Organize import](organizeimport-5ee8eb12.webp)](organizeimport-5ee8eb12.webp)
 
 We are continuing to add more improvements around "organize import" scenarios and you can find all our future plans in [this GitHub issue](https://github.com/redhat-developer/vscode-java/issues/2748). Feel free to leave your feedback or comments there.
 
@@ -82,7 +82,7 @@ In our latest Extension Pack for Java, we have started to support this feature.
 
 When debugging has stopped on a statement, you can select "Step Into Target" from the context menu, which allows you to directly step into the function or target you are interested in. Here's a demo for this feature:
 
-[![Step into target](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/stepintotarget.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/stepintotarget.gif)
+[![Step into target](stepintotarget-54c42bca.webp)](stepintotarget-54c42bca.webp)
 
 #### **Gutter Icons for Spring Components**
 
@@ -92,17 +92,17 @@ With the latest release of Spring Boot Extension Pack, you will find gutter icon
 
 This gives you visual clues that this is a Spring entity. When hovering on these components, a tooltip will pop up and you will see details about this component as well as a link to open it in Spring Boot dashboard. Here is a quick demo for this feature.
 
-[![Spring gutter icon](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/springguttericon.gif)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/11/springguttericon.gif)
+[![Spring gutter icon](springguttericon-8af8bba9.gif)](springguttericon-8af8bba9.gif)
 
 #### **Install Extension Pack for Java**
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 **Feedback and suggestions**
 

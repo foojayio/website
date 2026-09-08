@@ -62,7 +62,7 @@ It is my opinion that unit tests should be excluded from coverage metrics due to
 
 The debug-fix cycle is a structured approach that integrates testing into the debugging process. The stages include identifying the bug, creating a test that reproduces the bug, fixing the bug, verifying the fix with the test, and finally, running the application to ensure the fix works in the live environment. This cycle emphasizes the importance of testing in not only identifying but also in preventing the recurrence of bugs.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zyjfmzm6mq9jd0xu3mue.png)
+![Image description](zyjfmzm6mq9jd0xu3mue-a466d7d3.png)
 
 Notice that this is a simplified version of the cycle with a focus on the testing aspect only. The full cycle includes discussion of the issue tracking and versioning as part of the whole process. I discuss this more in-depth in other posts in the series and my book.
 
@@ -74,7 +74,7 @@ Increasing test coverage is about more than hitting a percentage; it's about ens
 
 In this case you will notice that the next line in the body is a rejectValue call which will throw an exception. I don't want an exception thrown as I still want to test all the permutations of the method. I can drag the execution pointer (arrow on the left) and place it back at the start of the method.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e68vok14tqn9irjxbkl8.png)
+![Image description](e68vok14tqn9irjxbkl8-00815ecd.jpg)
 
 ## Test-Driven Development
 

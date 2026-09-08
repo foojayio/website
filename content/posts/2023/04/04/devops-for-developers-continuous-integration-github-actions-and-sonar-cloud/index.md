@@ -148,15 +148,15 @@ This product is a relatively new contender in the field, it is not as flexible a
 
 To test GitHub Actions, we need a new project which in this case I generated using [JHipster](https://www.jhipster.tech/) with the configuration seen here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fewyrpheterrdpqxz4c0.png)
+![Image description](fewyrpheterrdpqxz4c0-3134c481.jpg)
 
 I created a separate project that demonstrates the use of GitHub Actions here. Notice you can follow this with any project, although we include maven instructions in this case, the concept is very simple. Once the project is created, we can open the project page on GitHub and move to the actions tab. We will see something like this:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r3rftiu9dl2k4jj8ei3n.png)
+![Image description](r3rftiu9dl2k4jj8ei3n-03394933.jpg)
 
 In the bottom right corner, we can see the Java with Maven project type. Once we pick this type, we move to the creation of a `maven.yml` file as shown here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/owxs0cycqo2ehw0z0ust.png)
+![Image description](owxs0cycqo2ehw0z0ust-ff66d119.jpg)
 
 Unfortunately, the default maven.yml suggested by GitHub includes a problem. This is the code we see in this image:
 
@@ -200,19 +200,19 @@ This is effectively a standard unix command line. Sometimes it makes sense to cr
 
 We can see the [successful pull request](https://github.com/shai-almog/HelloJHipster/pull/4) here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6b3ztzm2vzv1qqs7ylvw.png)
+![Image description](6b3ztzm2vzv1qqs7ylvw-5336c895.jpg)
 
 To test this out, we can add a bug to the code by [changing the `"/api"` endpoint to `"/myapi"`](https://github.com/shai-almog/HelloJHipster/pull/7). This produces the failure shown below. It also triggers an error email sent to the author of the commit.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4zcw8x9ewk46fiscbsh0.png)
+![Image description](4zcw8x9ewk46fiscbsh0-de9492ee.jpg)
 
 When such a failure occurs, we can click the "Details" link on the right side. This takes us directly to the error message you see here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t2m7zx4phijajmp7tvr2.png)
+![Image description](t2m7zx4phijajmp7tvr2-547057cd.jpg)
 
 Unfortunately, this is typically a useless message that does not provide help in the issue resolution. However, scrolling up will show the actual failure which is usually conveniently highlighted for us as seen here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kxzfbfx3tk37ovnnrihn.png)
+![Image description](kxzfbfx3tk37ovnnrihn-c3b92c0a.jpg)
 
 Note that there are often multiple failures so it would be prudent to scroll up further. In this error, we can see the failure was an assertion in line `394` of AccountResourceIT which you can see here, note that the line numbers do not match. In this case, line `394` is the last line of the method:
 
@@ -249,27 +249,27 @@ On the other hand, SonarQube is an open-source platform that provides static cod
 
 Both SonarCloud and SonarQube provide similar functionalities, but SonarCloud is a cloud-based service and requires a subscription, while SonarQube is an open-source platform that can be installed on-premise or on a cloud server. For simplicity's sake, we will use SonarCloud but SonarQube should work just fine. To get started we go to [sonarcloud.io](https://sonarcloud.io), and sign up. Ideally with our GitHub account. We are then presented with an option to add a repository for monitoring by Sonar Cloud as shown here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5slo646yq76r6seezn8x.png)
+![Image description](5slo646yq76r6seezn8x-d9a99bc5.png)
 
 When we select the Analyze new page option, we need to authorize access to our GitHub repository. The next step is selecting the projects we wish to add to Sonar Cloud as shown here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/b7wqwjiadkmpwlrdc9dd.png)
+![Image description](b7wqwjiadkmpwlrdc9dd-04b58893.jpg)
 
 Once we select and proceed to the setup process, we need to pick the analysis method. Since we use GitHub Actions, we need to pick that option in the following stage as seen here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uumt6h0rl9hayjtivhr4.png)
+![Image description](uumt6h0rl9hayjtivhr4-ba1b2d7c.jpg)
 
 Once this is set, we enter the final stage within the Sonar Cloud wizard as seen in the following image. We receive a token that we can copy (entry 2 that is blurred in the image), we will use that shortly. Notice there are also default instructions to use with maven that appear once you click the button labeled "Maven".
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kctu5kbc7fnq4bmpo86r.png)
+![Image description](kctu5kbc7fnq4bmpo86r-f90d52c4.jpg)
 
 Going back to the project in GitHub we can move to the project settings tab (not to be confused with the account settings in the top menu). Here we select "Secrets and variables" as shown here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/86xva5t54e1sqt8a5uxo.png)
+![Image description](86xva5t54e1sqt8a5uxo-6dfc88bb.jpg)
 
 In this section we can add a new repository secret, specifically the SONAR_TOKEN key and value we copied from the SonarCloud as you can see here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rwo75glyurcn0haj3i4s.png)
+![Image description](rwo75glyurcn0haj3i4s-bf16051e.png)
 
 GitHub Repository Secrets are a feature that allows developers to securely store sensitive information associated with a GitHub repository, such as API keys, tokens, and passwords, which are required to authenticate and authorize access to various third-party services or platforms used by the repository.
 
@@ -300,11 +300,11 @@ After this we can replace the "Build with Maven" portion of the `maven.yml` file
 
 Once we do that, SonarCloud will provide reports for every pull request merged into the system as shown here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5fw44ovhuu1vxc1fi78s.png)
+![Image description](5fw44ovhuu1vxc1fi78s-2575a439.jpg)
 
 We can see a report that includes the list of bugs, vulnerabilities, smells, and security issues. Clicking every one of those issues leads us to something like this:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zzzmx9vbqt3gikp2wa76.png)
+![Image description](zzzmx9vbqt3gikp2wa76-0a33aa6d.jpg)
 
 Notice that we have tabs that explain exactly why the issue is a problem, how to fix it and more. This is a remarkably powerful tool that serves as one of the most valuable code reviewers in the team.
 

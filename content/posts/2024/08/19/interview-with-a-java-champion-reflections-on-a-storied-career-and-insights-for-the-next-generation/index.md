@@ -5,7 +5,7 @@ lastmod: "2024-08-19T07:52:20+00:00"
 description: "Java Champion Ben Evans shares his journey, insights on Java's evolution, and advice for developers in this insightful interview."
 authors:
   - "bazlur-rahman"
-image: "Ben-Evans-.png"
+image: "Ben-Evans-.jpg"
 categories:
   - "Interviews"
 related_posts:

@@ -5,7 +5,7 @@ lastmod: "2024-03-06T11:01:56+00:00"
 description: "Immutability in Java with creational patterns Builders and Withers, along with a new type of immutable object in Java: Records."
 authors:
   - "jonathan-vila"
-image: "sonarlint.png"
+image: "sonarlint.jpg"
 categories:
   - "Java"
   - "Java Core"

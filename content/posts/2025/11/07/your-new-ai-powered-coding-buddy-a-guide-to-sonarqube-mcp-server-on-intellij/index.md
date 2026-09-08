@@ -4,7 +4,7 @@ date: "2025-11-07T17:00:24+00:00"
 description: "You have an AI-powered assistant to help you out. SonarQube MCP Server comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀."
 authors:
   - "jonathan-vila"
-image: "Screenshot-2025-11-07-at-17.57.47-1024x709.png"
+image: "Screenshot-2025-11-07-at-17.57.47-1024x709.jpg"
 categories:
   - "AI"
   - "GenAI"
@@ -90,7 +90,7 @@ The Agent will follow a series of steps in order to create the code but also to 
 ![](Screenshot-2025-11-07-at-16.53.16.png)
 
 At the end, the Agent will show (using the model GTP5-mini) a list of tasks done, and we see the result of the SonarQube analysis to specifically the snippet created :  
-![](Screenshot-2025-11-07-at-16.53.24.png)
+![](Screenshot-2025-11-07-at-16.53.24.jpg)
 
 Yes, I know, you are thinking 🤔 `Do I have to explicitly tell the agent to use SonarQube every time?` And I totally understand you…. Well, the answer is no 🥳
 
@@ -142,7 +142,7 @@ But before you continue with your work, let's analyze the code and dependencies,
 
 We will get a summarized answer with the dependencies in our project and the vulnerabilities included, with a reference to the CVEs and the rate for each vulnerability.
 
-![](Screenshot-2025-11-07-at-16.53.43.png)
+![](Screenshot-2025-11-07-at-16.53.43.jpg)
 
 Eyy ‼️Do you see that our new Jackson dependency that we added above appears here and includes several HIGH and MEDIUM vulnerabilities in multiple CVEs 😱?. Well, fortunately enough we have our friend SonarQube MCP server that is warning us 🙏
 
@@ -198,7 +198,7 @@ And in a very natural way, we will ask the Assistant to do whatever is needed to
 ![](Screenshot-2025-11-07-at-16.54.34.png)
 
 And the Assistant with the help of the MCP Server will bring a nice table to reflect the issues we have in the Pull Request :  
-![](Screenshot-2025-11-07-at-16.54.39.png)![](Screenshot-2025-11-07-at-16.54.45.png)
+![](Screenshot-2025-11-07-at-16.54.39.jpg)![](Screenshot-2025-11-07-at-16.54.45.png)
 
 **Tips and tricks : how to get the best out of Agent-MCP relationship 🤝**
 

@@ -52,9 +52,9 @@ The Disco API is a Java project (of course...) you can find on [GitHub](https://
 These endpoints are fully documented in the [README of the GitHub project](https://github.com/foojayio/discoapi) and can be called directly from a [Swagger UI](https://api.foojay.io/swagger-ui).
 
 {{< gallery >}}
-swagger-apis-802x1024.png |  | Overview of all the APIs in Swagger
+swagger-apis-802x1024.jpg |  | Overview of all the APIs in Swagger
 swagger-major-versions-1024x678.png |  | Swagger result with all major versions
-swagger-packages-1024x623.png |  | Swagger result of package search
+swagger-packages-1024x623.jpg |  | Swagger result of package search
 {{< /gallery >}}
 
 Let's look at a few examples.
@@ -186,7 +186,7 @@ There are several plugins and extensions available that already make use of the 
 JDKMon is another little tool written in JavaFX that tries to detect all JDKs installed on your machine and will inform you about new updates and vulnerabilities of each OpenJDK distribution it has found. In addition, JDKMon is also able to monitor JavaFX SDK versions that are installed on your machine. You can download the latest version from the [GitHub repository](https://github.com/HanSolo/JDKMon/releases).
 
 {{< gallery >}}
-jdkmon-found.png |  | JDKMon showing all the found OpenJDK distributions on the machine
+jdkmon-found.jpg |  | JDKMon showing all the found OpenJDK distributions on the machine
 jdkmon-vulnerabilities-300x260.png |  | Alert showing the vulnerabilities in an OpenJDK package
 jdkmon-download.png |  | Dark/Light view of the download screen
 {{< /gallery >}}
@@ -211,9 +211,9 @@ To be able to use any OpenJDK distribution in a GitHub Action, you can't use the
 You can check all available combinations on the [Disco Testing Matrix](https://github.com/foojayio/discoTestingMatrix). It verifies JDK tests on various distros and versions using Github Actions.
 
 {{< gallery >}}
-matrix-overview.png |  | Part of the overview, the actual page is much longer...
+matrix-overview.jpg |  | Part of the overview, the actual page is much longer...
 matrix-workflows-1024x928.jpg |  | A part of the GitHub Actions
-matrix-action-1024x638.png |  | One of the GitHub Actions
+matrix-action-1024x638.jpg |  | One of the GitHub Actions
 {{< /gallery >}}
 
 ## Conclusion

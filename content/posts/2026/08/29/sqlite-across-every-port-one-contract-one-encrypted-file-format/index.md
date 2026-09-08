@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![A locked SQLite database connected to mobile, web, desktop, and watch applications](https://www.codenameone.com/blog/sqlite-portable-encrypted.jpg)
+![A locked SQLite database connected to mobile, web, desktop, and watch applications](sqlite-portable-encrypted.jpg)
 
 The original `com.codename1.db` implementation delegated SQLite calls to the database supplied by each operating system. We knew this was less portable than the rest of Codename One, but fixing it meant taking ownership of SQLite on every target. That looked like a deep rabbit hole, so we exposed escape hatches instead. The [pluggable SpatiaLite work we described in 2018](https://www.codenameone.com/blog/spatial-pluggable-sqlite/) is one example.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -45,7 +45,7 @@ These were not edge cases around a working abstraction. They meant a query teste
 
 The new `DatabaseConformanceSuite` defines the contract once. Seven device tests exercise lifecycle, statements, cursors, transactions, encryption, and legacy behavior on every port-status target. The current reports show those tests passing on Android, both iOS renderers, JavaScript, native Linux, native Windows, macOS, tvOS, and watchOS.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRECiAgICBBW0FwcGxpY2F0aW9uIGNvZGU8YnIvPmNvbS5jb2RlbmFtZTEuZGJdIC0tPiBCW1BvcnRhYmxlIGRhdGFiYXNlIGNvbnRyYWN0XQogICAgQiAtLT4gQ1tBbmRyb2lkPGJyLz5wbGF0Zm9ybSBTUUxpdGUgb3IgU1FMQ2lwaGVyXQogICAgQiAtLT4gRFtpT1MgYW5kIEFwcGxlIHRhcmdldHM8YnIvPnN5c3RlbSBTUUxpdGUgb3IgY2lwaGVyIGVuZ2luZV0KICAgIEIgLS0-IEVbSmF2YVNjcmlwdDxici8-U1FMaXRlIGluIFdlYkFzc2VtYmx5XQogICAgQiAtLT4gRltXaW5kb3dzIGFuZCBMaW51eDxici8-bmF0aXZlIFNRTGl0ZV0KICAgIEIgLS0-IEdbU2ltdWxhdG9yPGJyLz5TUUxpdGUgSkRCQ10KICAgIEhbT25lIGNvbmZvcm1hbmNlIHN1aXRlXSAtLT4gQwogICAgSCAtLT4gRAogICAgSCAtLT4gRQogICAgSCAtLT4gRgogICAgSCAtLT4gRw==?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRECiAgICBBW0FwcGxpY2F0aW9u-72376f2d.png)
 
 Cursor navigation now derives from two primitives, `rewind()` and `stepForward()`, instead of being reimplemented on every port. Transactions return to autocommit after either commit or rollback. Blobs and typed parameters behave consistently. Windows and Linux finally open a database instead of returning `null`.
 

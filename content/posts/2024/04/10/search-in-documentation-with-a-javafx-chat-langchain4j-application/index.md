@@ -6,7 +6,7 @@ description: "Let's use an existing documentation set as the data for a ChatGPT-
 canonical: "https://webtechie.be/post/2024-03-18-search-documentation-javafx-chat-langchain4j/"
 authors:
   - "frankdelporte"
-image: "langchain4j-question-story.png"
+image: "langchain4j-question-story.jpg"
 categories:
   - "Java"
   - "Machine Learning"
@@ -113,9 +113,9 @@ public class CustomStreamingResponseHandler {
 ```
 
 {{< gallery >}}
-langchain4j-code-1024x566.png
-langchain4j-question-javafx-1024x372.png
-langchain4j-question-story-1024x371.png
+langchain4j-code-1024x566.jpg
+langchain4j-question-javafx-1024x372.jpg
+langchain4j-question-story-1024x371.jpg
 {{< /gallery >}}
 
 ## Chat With the Azul Documentation
@@ -286,8 +286,8 @@ void ask(SearchAction action) {
 
 {{< gallery >}}
 langchain4j-docs-azul-home-1024x722.jpg
-langchain4j-docs-azul-json-1024x486.png
-langchain4j-docs-what-is-prime-1024x609.png
+langchain4j-docs-azul-json-1024x486.jpg
+langchain4j-docs-what-is-prime-1024x609.jpg
 {{< /gallery >}}
 
 ## Conclusion

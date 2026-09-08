@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![Mac Native Builds, Live Protocols, And Open Issues Under 350](https://www.codenameone.com/blog/weekly.jpg)
+![Mac Native Builds, Live Protocols, And Open Issues Under 350](weekly.jpg)
 
 Our focus was all over the place this week with work that targeted many different directions: desktop, monetization, communication, media, and more. This fits with our roadmap of one platform that delivers the promise Java never delivered: WORA for Everything Everywhere.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -37,7 +37,7 @@ Every one of the bigger items has its own deep-dive tutorial. Here is the tour, 
 ### Your app is now a native Mac app
 
 Your existing Codename One app can ship as a **100% native Mac app today, with zero porting effort**. No rewrite, no bundled JVM, no Electron shell: the project you already have produces a lean native Mac binary the same way it produces your iPhone app, on the same Metal renderer and battle-tested native pipeline. And it arrives feeling like a real Mac app, not a phone in a window: native title bar, native menu bar, interactive scrollbars, and desktop notifications come with it. Two of this week's features in one shot: the sample below uses the new advertising API covered later in this post, running as a native Mac app from the same Java code that produces the iOS and Android builds:
-![The advertising API sample running as a native Mac app](https://www.codenameone.com/blog/mac-native-builds-and-desktop-integration/mac-app.png)
+![The advertising API sample running as a native Mac app](mac-app-3ef7dddb.png)
 
 The full tutorial, including the new desktop menu and shortcut APIs and the Mac signing hints, is in [Your Codename One App, Now A Native Mac App](https://www.codenameone.com/blog/mac-native-builds-and-desktop-integration/).
 
@@ -132,7 +132,7 @@ The hard part of that task was that the agent had no objective measure of how cl
 Agents can now automatically update the skills to the latest versions and also describe the content of Codename One GUIs. This is valuable as they review their work and don't need to use vision which is both more expensive and not as accurate. We also added the ability to check component alignment, which is often a problem that LLMs find difficult. There is also a new linter that I think we should expose to the human developers as well in the future. Right now you can see all of these tools and use them just as an agent would, but they are more CLI oriented.
 
 [PR #5168](https://github.com/codenameone/CodenameOne/pull/5168) also rebuilt the Initializr, the tool that scaffolds a new project, around the Codename One design language, and trimmed it so it is easier to approach. It leads with the essentials (main class, package, and a Java or Kotlin toggle) and tucks IDE, localization, Java version, and current settings into collapsible cards, with a live preview and a single generate bar at the bottom. The four-template picker became the Java/Kotlin toggle, and the accent, rounded-buttons, and custom-CSS controls were dropped. The project model behind it is unchanged, so generated projects are the same; this is purely about lowering the barrier to getting started.
-![The redesigned Initializr](https://www.codenameone.com/blog/mac-native-grpc-graphql-and-fewer-open-issues/initializr.png)
+![The redesigned Initializr](initializr-17773c6d.png)
 
 ## Smaller fixes worth knowing about
 

@@ -461,8 +461,12 @@ public class Posts {
         HtmlToMarkdown.Options opts = new HtmlToMarkdown.Options(
                 d.bundleDir, "", "foojay.io", USER_AGENT, REQUEST_TIMEOUT_MS);
 
-        // Pull the hero (og:image) local too, so it isn't hotlinked from the
-        // WordPress site that goes away at cutover. Non-foojay images are left as-is.
+        // Pull the hero (og:image) local too, so it isn't hotlinked -- from the
+        // WordPress site that goes away at cutover, or from a third-party host
+        // that can drop it whenever it likes. 60 posts hotlink their hero today
+        // and 10 of those URLs already 404, which on a hero means a blank card
+        // wherever the post is shared. localizeImage handles any host now, so
+        // verifyRemoteHero below is reached only when the download DIDN'T work.
         String localHero = HtmlToMarkdown.localizeImage(d.image, opts, "");
         if (localHero != null) d.image = stillPoster(d.bundleDir, localHero);
         else d.image = verifyRemoteHero(d.bundleDir, d.image, d.slug);

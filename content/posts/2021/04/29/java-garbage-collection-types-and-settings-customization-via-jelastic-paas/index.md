@@ -5,7 +5,7 @@ lastmod: "2021-09-16T14:49:21+00:00"
 description: "What types of garbage collection is available at the market, what GC does for Java applications and how it works within Jelastic PaaS."
 authors:
   - "tetiana-fydorenchyk"
-image: "java-garbage-collection-choice.png"
+image: "java-garbage-collection-choice.jpg"
 categories:
   - "Jakarta EE"
   - "Jelastic"
@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-gc.png" class="alignleft is-resized" alt="java gc" width="250" >}}
+{{< img src="java-gc-bcf84d7a.png" class="alignleft is-resized" alt="java gc" width="250" >}}
 
 Performance and price are two big considerations in application hosting that always matter. And, often, we question ourselves on how to decrease the spends, without affecting the performance of your apps at the same time. In this article, we'd like to address automatic memory management for Java applications hosted with Jelastic using garbage collection.
 
@@ -28,7 +28,7 @@ The created object uses some memory that remains allocated until there are refer
 
 We've [tested different kinds of Garbage Collectors (GC)](https://jelastic.com/blog/tuning-garbage-collector-java-memory-usage-optimization/) and defined the most appropriate ones for the Java applications hosted in our cloud, taking into consideration the automatic vertical scaling that Jelastic provides. As a result of our investigations, we adjusted the default settings of Garbage Collectors in Jelastic in order to increase the benefits for our users.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collector-types.png" class="aligncenter is-resized" alt="java-garbage-collector-types" width="600" >}}
+{{< img src="java-garbage-collector-types-199385f3.png" class="aligncenter is-resized" alt="java-garbage-collector-types" width="600" >}}
 
 Jelastic supports the following GCs:
 
@@ -62,7 +62,7 @@ For JVM 12+ versions, the platform provides [integrated vertical scaling](https:
   Custom multiplier to flexibly adjust the G1PeriodicGCSystemLoadThreshold value
 * **G1PERIODIC_GC_SYS_LOAD_THRESHOLD={CPU_cores_number}\*GC_SYS_LOAD_THRESHOLD_RATE** Activates garbage collection, if the average one-minute system load is below the set value. This condition is ignored if set as zero.
 
-![java garbage collection variables for scaling](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-variables-for-scaling.png)
+![java garbage collection variables for scaling](java-garbage-collection-variables-for-sc-944bc9c7.png)
 
 You can always check current settings of your Java process by executing ***ps -ax \| grep java*** *.*You will see something like this:
 
@@ -89,7 +89,7 @@ For more details, you can review the following script that manages [automatic co
 If you believe that customization of default settings can improve performance or memory consumption, you can tune them according to the requirements of your application. We recommend customizing these configurations only if you fully understand the impact of such changes on your application behaviour.
 
 You can set a custom GC parameter based on your application requirements via [Environment Variables](https://docs.jelastic.com/environment-variables) (please do not mix them with Java options).  
-![java garbage collection variables](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-variables.png)
+![java garbage collection variables](java-garbage-collection-variables-51dd69bb.png)
 
 * **_JAVA_OPTIONS and JAVA_TOOL_OPTIONS** - please [read more about these options](https://stackoverflow.com/questions/28327620/difference-between-java-options-java-tool-options-and-java-opts).  
   Java options can be used for changing default GC type, for example:  
@@ -124,22 +124,22 @@ All of the paths to config, executable or log files can differ based on the Java
 | Jetty                            | /opt/jetty/etc/variables.confor/opt/shared/conf/etc/variables.conf                                                                         |
 
 1. Open **Conf** files to configure your Java server.  
-![java garbage collection configurations](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-configurations.png)
+![java garbage collection configurations](java-garbage-collection-configurations-95e85e3c.png)
 
 2. For Tomcat, navigate to the **opt** \>**tomcat** \>**conf** \>**variables.conf**file.  
-![java garbage collection configurations](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-configurations2.png)
+![java garbage collection configurations](java-garbage-collection-configurations2-15b1f15e.png)
 
 3. In the opened **variables.conf** file you can override garbage collector default settings or even add another GC to replace the default one *(G1)* ***.*** So if you want to use *ShenandoahGC* instead, simply add it to the *variables.conf* as stated in the example below:
 
 ***-XX:+UseShenandoahGC***  
-![java garbage collection change GC](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-change-gc-1.png)
+![java garbage collection change GC](java-garbage-collection-change-gc-1-bba675c1.png)
 
 4. After this, only the specified garbage collector will be used while starting your Java server without taking into consideration the amount of allocated resources.
 
 5. Also, you can control how JVM handles its heap memory with other JAVA options stated in this file.  
-![java garbage collection heap memory](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-heap-memory-1.png)
+![java garbage collection heap memory](java-garbage-collection-heap-memory-1-51628e82.png)
 
 As a result of properly configured options, the GC can be observed in action via the [Statistics](https://docs.jelastic.com/view-app-statistics) tab.  
-![java garbage collection statistics](https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collection-statistics.png)
+![java garbage collection statistics](java-garbage-collection-statistics-017bdfbb.png)
 
 That's it! Enjoy resource efficiency while running your Java applications in the cloud. Try it yourself with [Jelastic Multi-Cloud PaaS](https://jelastic.cloud/).

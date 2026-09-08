@@ -68,7 +68,7 @@ That's it! All that remains now is to launch your application and run some traff
 
 It is tempting to look at the ability to quickly navigate from the code to the relevant trace as the holy grail of leveraging tracing and observability while coding. However, if you try to go down that path you'll soon find that the individual trace is just not that important.
 
-![](digma-trace.png)
+![](digma-trace.jpg)
 
 Traces are a great way to understand code behavior and provide a good "request handling anatomy" as a reference or guide for any developer working on a piece of code. However, the granularity level of the individual trace runs a serious risk of spamming and cluttering our view with irrelevant data. More importantly, we may end up missing critical data such as errors, bad performance, or issues with the flow of control simply because that specific chosen trace does not contain them.
 

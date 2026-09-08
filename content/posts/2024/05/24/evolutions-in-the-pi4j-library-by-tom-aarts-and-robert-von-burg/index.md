@@ -5,7 +5,7 @@ lastmod: "2024-09-12T15:24:56+00:00"
 description: "Multiple improvements have been implemented in the new release, V2.6.0 (2024-04-29) of Pi4J, a friendly object-oriented I/O API and implementation…"
 authors:
   - "frankdelporte"
-image: "pi4j.png"
+image: "pi4j.jpg"
 categories:
   - "Embedded"
   - "Interviews"
@@ -49,7 +49,7 @@ This new class is already used as the basis for the website [api.pi4j.com](https
 
 {{< gallery >}}
 api-boards-915x1024.jpg
-api-system-information-1024x813.png
+api-system-information-1024x813.jpg
 {{< /gallery >}}
 
 ## Interview with Robert von Burg
@@ -99,7 +99,7 @@ These devices, as they become more powerful with each generation, make it easier
 {{< gallery >}}
 tom-808x1024.jpg
 desk-1024x768.jpg
-pi4j-example-devices-1024x812.png
+pi4j-example-devices-1024x812.jpg
 {{< /gallery >}}
 
 ***Can you introduce yourself? What is your history in software (Java) development?***

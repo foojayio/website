@@ -134,7 +134,7 @@ Or even easier, using the free extension [SonarQube for IDE](https://docs.sonars
 ## **Example: Analyzing a snippet with** **analyze_code_snippet** **tool**
 
 Once the SonarQube MCP server is active, Windsurf has a new "tool" called analyze_code_snippet, among other 24 tools to interact with SonarQube.You can highlight a Java method and tell Cascade: *"@Utils.java#L22-31 Analyze this with Sonar and fix it."*
-![](Screenshot-2026-02-16-at-09.06.32-1024x381.png)
+![](Screenshot-2026-02-16-at-09.06.32-1024x381.jpg)
 
 **The Agent does the following:**
 

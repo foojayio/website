@@ -6,7 +6,7 @@ description: "Announcement of a new open-source utility: JmFrX, a tool for captu
 canonical: "https://www.morling.dev/blog/introducing-jmfrx-a-bridge-from-jmx-to-jdk-flight-recorder"
 authors:
   - "gunnarmorling"
-image: "https://www.morling.dev/images/jmfrx_mission_control_configuration.png"
+image: "jmfrx_mission_control_configuration-53a5a33a.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
@@ -91,19 +91,19 @@ Now start your application and create a JFR configuration file which enables the
 * Expand the *JMX* and *JMX Dump* nodes
 * Make sure the *JMX Dump* event type is *Enabled* ; choose a period for dumping the chosen JMX MBeans (by default 60 s) and specify the MBeans whose data should be captured; that's done by means of a regular expression, which matches one or more JMX object names, for instance `.*OperatingSystem.*`:
 
-![Configuring JmFrX in JMC](https://www.morling.dev/images/jmfrx_mission_control_configuration.png)
+![Configuring JmFrX in JMC](jmfrx_mission_control_configuration-53a5a33a.png)
 
 * Close the two last dialogues by clicking *OK* and *OK*
 * Important: Make sure that the template you edited is selected under *Event settings*
 * Click *Finish* to begin the recording
 
 Once the recording is complete, open the recording file in JDK Mission Control and go to the *Event Browser* . You should see periodic events corresponding to the selected MBeans under the *JMX* node:
-![JmFrX Events in JDK Mission Control](https://www.morling.dev/images/jmfrx_events.png)
+![JmFrX Events in JDK Mission Control](jmfrx_events-500897e3.png)
 
 When not using JDK Mission Control to initiate recordings, but the [*jcmd*](https://docs.oracle.com/en/java/javase/13/docs/specs/man/jcmd.html) utility on the command line, also follow the same steps as above for creating a configuration as described above. But then, instead of starting the recording, export the configuration file from the template manager and specify its name to *jcmd* via the *settings=/path/to/settings.jfc* parameter.
 
 Now using JmFrX to observe JMX data from for the `java.lang` MBeans like `Runtime` and `OperatingSystem` in JFR isn't too exciting yet, as there's dedicated JFR event types which contain most of that information. But things get more interesting when capturing data from custom MBean types, as e.g. here for the stream threads metrics from a [Kafka Streams](https://kafka.apache.org/26/documentation/streams/) application:
-![JmFrX Events for Kafka Streams in JDK Mission Control](https://www.morling.dev/images/jmfrx_kafka_streams.png)
+![JmFrX Events for Kafka Streams in JDK Mission Control](jmfrx_kafka_streams-85104d00.png)
 
 ### Customizing Event Formats
 

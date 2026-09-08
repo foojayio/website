@@ -57,7 +57,7 @@ This feature is released as part of [Java Extension Pack](https://marketplace.vi
 
 [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug "Debugger for Java") extension is now able to show variable values inline in editor when stepping through source code:
 
-![](inlineValues.png)
+![](inlineValues.jpg)
 
 You can enable this feature by selecting **Files** -\>**Preferences** -\>**Settings** menu, searching for "**debug.inlineValues**" on settings view, and selecting the option.
 
@@ -67,7 +67,7 @@ You can enable this feature by selecting **Files** -\>**Preferences** -\>**Setti
 
 You can right-clicking the view to bring up customization menu.
 
-![](variablesViewCustomization.png)
+![](variablesViewCustomization.jpg)
 
 Debugging enhancements were demonstrated at [VS Code 1.56 Release Party](https://channel9.msdn.com/Shows/VS-Code-Livestreams/1-56-Release-Party#time=20m55s "VS Code 1.56 Release Party").
 

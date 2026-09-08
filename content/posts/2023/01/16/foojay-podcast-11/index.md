@@ -5,7 +5,7 @@ lastmod: "2025-11-13T09:17:59+00:00"
 description: "In this Foojay Podcast episode, we talk about Ted Neward's predictions, and an analogy between Twitter and Java!"
 authors:
   - "frankdelporte"
-image: "ted-frank-zoom-1.png"
+image: "ted-frank-zoom-1.jpg"
 categories:
   - "Interviews"
   - "Opinion"

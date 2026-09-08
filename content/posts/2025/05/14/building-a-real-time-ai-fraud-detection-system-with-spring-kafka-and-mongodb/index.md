@@ -37,7 +37,7 @@ Our real-time fraud detection pipeline will work like this:
    * No similar transactions exist for that user.
    * Any of the returned similar transactions are already flagged as fraud.
 
-![Diagram showing the architecture of the app](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfECBrr0rIhDHXp15Bq9Ar87X3rNst_DTzzVF_9EmJ-Q7U4Pxi89RsEIdroQm5Et5lvZ-XtQj7K0JeUX_qvk-h7xHXOGTl6CqWkU0CjxyveFR7FogazKF4vEmJWoWtY7fIIzLUtbg?key=80Ot0rEJoJhzoI8RA3iUIw)
+![Diagram showing the architecture of the app](AD_4nXfECBrr0rIhDHXp15Bq9Ar87X3rNst_DTzz-d9167cd8.png)
 
 This pipeline ensures real-time anomaly detection using AI-powered embeddings and vector search.
 
@@ -65,7 +65,7 @@ For this simple demo, we are just going to create basic collections because, as 
 We are going to create a [vector search index](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant) on our transactions collection. This will allow us to find semantically similar documents, to help us identify anomalies in our customer transactions, and mark these as fraud.
 
 How does this work? Well, we create [vector embeddings](https://www.mongodb.com/resources/basics/vector-embeddings/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant) (numerical representations of our data) of our transactions, to store in our vector store, the transactions collection. We get these by sending the information from our transactions to an embedding model, like OpenAI's text-embedding-3-small. These embeddings look like an array of floating point numbers, e.g., \[2.0457, -3.1417895, ...\].
-![Diagram showing how vector embeddings are created](https://lh7-rt.googleusercontent.com/docsz/AD_4nXftuWZcypBpxatRlnmpzAYft5VBjg7Ek0USF5zTry7RSP7xYARX586r_0pFKP-bo-a3PP4t0MysGJXODL4b6n2HYIxWoCzL03tObSj0Pa6vZvQN3OE7oPpTEHBc26vdLjfV-r6diA?key=80Ot0rEJoJhzoI8RA3iUIw)
+![Diagram showing how vector embeddings are created](AD_4nXftuWZcypBpxatRlnmpzAYft5VBjg7Ek0US-7fe654b5.jpg)
 
 We then use MongoDB's Atlas Vector Search, which uses a nearest neighbour algorithm to decide what transactions are semantically similar. These transactions are returned, and if the new transaction does not match any past transactions for that user, or if it matches transactions marked fraud, it could be an anomaly (potential fraud).
 

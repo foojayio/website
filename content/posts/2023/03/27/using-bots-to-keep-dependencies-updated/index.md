@@ -141,7 +141,7 @@ Snyk Open Source is available from [Snyk](https://snyk.io/). There are more step
 
 You will need to **Authorize snyk** on your GitHub profile, select repository access (either **Public and private repos** or **Public repos only** ), select other available features you want to use, and provide a **Personal access token** on GitHub.
 
-![Snyk Open Source Start free](Snyk-Open-Source-Start-free.png)
+![Snyk Open Source Start free](Snyk-Open-Source-Start-free.jpg)
 
 ## Features
 

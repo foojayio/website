@@ -5,7 +5,7 @@ lastmod: "2023-11-14T10:54:08+00:00"
 description: "I had an epiphany: Aren't virtual threads with Loom just a version of HyperThreading on the JVM?"
 authors:
   - "johannes-bechberger"
-image: "ht_vs_vt_pyramid-1-2000x1125-1.png"
+image: "ht_vs_vt_pyramid-1-2000x1125-1.jpg"
 categories:
   - "Java"
 related_posts:
@@ -17,10 +17,10 @@ frozen: false
 ---
 
 While sitting in [Cay Horstmann](https://horstmann.com/unblog/2023-09-19/index.html)'s ["Looming Changes in Java Concurrency" talk at BaselOne](https://baselone.ch/speech.html?id=BEB1A232-BA37-4619-A7F9-33802755DFEB), I had an epiphany: Aren't virtual threads with Loom just a version of HyperThreading on the JVM?  
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/ht_vs_vt_pyramid-1-2000x1125.png)
+![](ht_vs_vt_pyramid-1-2000x1125-02652af5.jpg)
 
 Both try to utilize a computation resource fully, be it hardware core or platform thread, by multiplexing multiple tasks onto it, despite many tasks waiting regularly for IO operations to complete:
-![](https://mostlynerdless.de/wp-content/uploads/2023/10/ht_vs_vt_interleaving-2000x560.png)
+![](ht_vs_vt_interleaving-2000x560-22833803.jpg)
 
 When one task waits, another can be scheduled, improving overall throughput. This works especially well when longer IO operations follow short bursts of computation.
 

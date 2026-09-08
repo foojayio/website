@@ -5,7 +5,7 @@ lastmod: "2023-03-21T11:35:42+00:00"
 description: "Discover insights from seasoned Java developer Steve Poole on the ever-evolving software landscape, career growth, and lessons learned throughout his remarkable journey in the tech industry."
 authors:
   - "bazlur-rahman"
-image: "Steve-Poole.png"
+image: "Steve-Poole.jpg"
 categories:
   - "Interviews"
 related_posts:
@@ -152,7 +152,7 @@ For weeks and weeks, we tried different things to capture the problem until some
 
 Unfortunately, we just made assumptions before we'd even started about the problem - rather than stepping back and understanding the situation, we just allowed a rogue screen saver to eat all the CPU right in front of us! That taught me a great deal about how to really diagnose problems and avoid pre-emptive guessing and assumptions.  
 
-{{< img src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.png" class="alignright size-full is-resized" width="256" height="256" >}}
+{{< img src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.jpg" class="alignright size-full is-resized" width="256" height="256" >}}
 
 **Editor's note:** *Steve's anecdote emphasizes the importance of thorough diagnosis and avoiding assumptions when tackling problems. This lesson highlights the need to step back, understand the situation, and remain open to possibilities, which is applicable across various problem-solving contexts.*
 

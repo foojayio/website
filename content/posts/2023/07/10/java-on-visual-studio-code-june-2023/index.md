@@ -39,11 +39,11 @@ In latest release of [Test Runner for Java](https://marketplace.visualstudio.com
 
 Settings.json
 
-[![Settings](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/settings.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/settings.png)
+[![Settings](settings.png)](settings.png)
 
 Tasks.json
 
-[![Tasks](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/tasks.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/tasks.png)
+[![Tasks](tasks-42297a4d.png)](tasks-42297a4d.png)
 
 Notice that these are just examples and you can configure the tasks the way whichever way you prefer.
 
@@ -55,17 +55,17 @@ For more about postDebugTask, you can [read more here](https://code.visualstudio
 
 Thanks to contribution from the community ([PR #765](https://github.com/microsoft/vscode-java-dependency/pull/765) and [PR#757](https://github.com/microsoft/vscode-java-dependency/pull/757)). Project Manager for Java now supports creating Micronaut and Graal Cloud Native Projects, you can now create those projects from the command palette (Java: Create Java Project) or just using "Create Java Project" button on the UI. Here's a demo. Notice: you will need to install the corresponding extensions for these to work.
 
-[![New project type](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/project.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/06/project.png)
+[![New project type](project-379be4e9.jpg)](project-379be4e9.jpg)
 
 #### Install Extension Pack for Java
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 Feedback and suggestions
 

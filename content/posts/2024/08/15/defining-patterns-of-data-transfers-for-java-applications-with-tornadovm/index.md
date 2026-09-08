@@ -66,7 +66,7 @@ executionResult.transferToHost(matrixC);
 
 **Note:** The **executionPlan.execute()** is a blocking call that performs all the steps (see the screenshot from the Java editor) in the executionPlan as defined by the programmer.  
 
-{{< img src="TornadoExecutionPlan-configurations.png" class="aligncenter size-full is-resized" width="963" height="292" style="width:676px;height:auto" >}}
+{{< img src="TornadoExecutionPlan-configurations.jpg" class="aligncenter size-full is-resized" width="963" height="292" style="width:676px;height:auto" >}}
 
 ## Pattern 2. Data do not fit into the GPU memory
 
@@ -92,7 +92,7 @@ executionResult.transferToHost(dataRange.withSize(1).withOffset(0));
 
 An example of this API call is shown in one of the TornadoVM unit-tests, [here](https://github.com/beehive-lab/TornadoVM/blob/faffab7ee2fc9c9f06ece7f7e5f075fc056f379a/tornado-unittests/src/main/java/uk/ac/manchester/tornado/unittests/api/TestAPI.java#L283). Several variations of the above code snippet are shown in the following image.  
 
-{{< img src="DataRange-Scheme-1024x786.png" class="aligncenter size-large is-resized" width="1024" height="786" style="width:676px;height:auto" >}}
+{{< img src="DataRange-Scheme-1024x786.jpg" class="aligncenter size-large is-resized" width="1024" height="786" style="width:676px;height:auto" >}}
 
 ## Summary
 

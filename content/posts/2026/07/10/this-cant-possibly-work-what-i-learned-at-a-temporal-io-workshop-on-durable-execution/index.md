@@ -56,7 +56,7 @@ The **Temporal Service** sits separately, managing task queues and event histori
 ## Seeing is believing
 
 The Temporal Web UI got singled out as "worth the price of admission." Every workflow execution — running or long finished — is inspectable: inputs, outputs, timelines, per-activity details down to which process on which machine executed each step.
-![](Timeline1-1024x590.png)
+![](Timeline1-1024x590.jpg)
 
 In the live demo, Tom killed the inventory service mid-order. The UI showed the reserve-inventory activity failing and retrying — attempt six, seven, eight — while the rest of the workflow simply waited.
 

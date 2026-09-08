@@ -20,7 +20,7 @@ frozen: false
 *This blog post is the base for the second half of my upcoming talk at FOSDEM 2023 on the topic "[Firefox Profiler beyond the web: Using Firefox Profiler to view Java profiling data](http://%22https://fosdem.org/2023/schedule/event/mozilla_firefox_profiler_beyond_the_web/)."*
 
 I detailed in [my last blog post](https://mostlynerdless.de/?p=628) how the Firefox Profiler can be used to view Java profiling data:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.34.45-1-2000x1201.png)
+![](Screenshot-2023-01-27-at-12.34.45-1-2000-1c2d7b87.jpg)
 
 But I'm of course not the only one who uses Firefox Profiler beyond the web because using it has many advantages: You're essentially getting a prototypical visualization for your data in an afternoon.
 
@@ -57,7 +57,7 @@ There are also non-open source uses of Firefox Profiler, Luís Oliveira, for exa
 I hope I convinced you that the Firefox Profiler is really great for visualizing profiling data, even if this data comes from the world beyond web UIs. If not, please read [my previous article](https://mostlynerdless.de/?p=628). The main part of adapting to Firefox Profiler is to convert your data into the profiler format. The data is stored as JSON in a (optionally zipped) file and can be loaded into Firefox Profiler. See [Loading in profiles from various sources](https://github.com/firefox-devtools/profiler/blob/main/docs-developer/loading-in-profiles.md) for more information.
 
 The basic structure of a tool using Firefox Profiler can be as follows, using my plugin as an example:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/structure2-2000x1123.png)
+![](structure2-2000x1123-a3bc6c3e.jpg)
 
 You have a converter from your profile format to the Firefox Profiler format. The converted file is then passed to the Firefox Profiler, either from [profiler.firefox.com](https://profiler.firefox.com) or a custom fork. You typically then wrap your UI and the converter, hosting both on a small webserver. This web server runs then on e.g. localhost. Hosting your own Firefox Profiler instance has two main advantages: First, you have always a tested combination of Firefox Profiler and Converter. Second, it works offline. The web server can then be embedded into a larger application, showing the UI using an embedded browser.
 
@@ -68,14 +68,14 @@ The type definitions are written with flow. It is helpful to read its documentat
 ### Layout
 
 A short interlude: The layout of Firefox Profiler consists basically of a timeline view and a methods and timing view:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/layout.png)
+![](layout-00f5a821.jpg)
 
 The timeline allows you to select specific threads and a time slice to view the details in the detail section below the timeline.
 
 ### Overview
 
 The following shows the main components of the profile format, omitting and summarizing many properties. This diagram should give a rough overview of what comes next:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/file_format.png)
+![](file_format-3eed3975.jpg)
 
 ### Profile
 
@@ -170,7 +170,7 @@ type Category = {|
 Categories are referenced by their index in the category list of the `ProfileMeta` data structure and subcategories by their index in the field of their parent category.
 
 The categories are used to assign a color to the squares in front of the method names and give more information on every call tree node in the sidebar:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-3-2000x309.png)
+![](image-3-2000x309-e9b25063.jpg)
 
 Now to the individual threads:
 
@@ -247,7 +247,7 @@ SamplesTable = {
 ```
 
 Filling the `threadCPUDelta` property allows you to specify the CPU time a thread has used since the last sample. The Firefox Profiler uses this property to show the CPU usage curves in the timeline:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-4-2000x64.png)
+![](image-4-2000x64-5e579778.png)
 
 ### Stack Table
 

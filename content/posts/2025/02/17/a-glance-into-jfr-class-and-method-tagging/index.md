@@ -44,7 +44,7 @@ In a world without any concurrency, the tag could just be a single bit, telling 
 ## Tagging
 
 We can visualize the whole life cycle of a tag for a given entity:
-![](https://mostlynerdless.de/wp-content/uploads/2025/02/tag-1-2000x1086.png)
+![](tag-1-2000x1086-48e50069.jpg)
 
 In this example, the entity, a class, is brought into JFR by the method sampler ([link](https://github.com/openjdk/jdk/blob/5f5ed961db8462b0e01ca83194722d4456ba2372/src/hotspot/share/jfr/recorder/stacktrace/jfrStackTrace.cpp#L262)) while walking another thread's stack. This causes the class to be tagged and enqueued in the internal entity queue (and is therefore known to the JFR writer) if it hasn't been tagged before ([source](https://github.com/openjdk/jdk/blob/5f5ed961db8462b0e01ca83194722d4456ba2372/src/hotspot/share/jfr/recorder/checkpoint/types/traceid/jfrTraceIdLoadBarrier.inline.hpp#L73)):
 

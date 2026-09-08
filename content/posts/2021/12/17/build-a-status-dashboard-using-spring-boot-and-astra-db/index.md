@@ -84,7 +84,7 @@ This article is focused on the *statuses* collection, and accessing it using the
 ## **How to Set Up DataStax Astra**
 
 Before we can start our application, we need a store for our data. We are going to use the Cassandra offering from DataStax Astra. **To get started, we need to [register a free account with Astra](https://astra.dev/3BJ1lmW) and create a new database.** This needs to be given a reasonable name for both the database and the keyspace within:
-![](db-setup-1024x582.png)
+![](db-setup-1024x582.jpg)
 
 (Note – screens are accurate at the time of publication but might have changed since)
 

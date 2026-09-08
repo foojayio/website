@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![A shield between a mobile application and a protected server API](https://www.codenameone.com/blog/app-shield-server-attestation.jpg)
+![A shield between a mobile application and a protected server API](app-shield-server-attestation.jpg)
 
 Any security check that runs only on a phone can be patched out on that phone. [App Shield](https://github.com/codenameone/CodenameOne/pull/5486) moves the final decision to your server by attaching a short-lived, server-verified attestation token to protected requests.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -54,7 +54,7 @@ The distinction in the last row is the point. A modified app can force a local `
 
 App Shield joins the platform attestation provider, the Codename One verification service, and your backend:
 
-![Diagram](https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFudCBBcHAgYXMgQ29kZW5hbWUgT25lIGFwcAogICAgcGFydGljaXBhbnQgU2hpZWxkIGFzIEF0dGVzdGF0aW9uIHNlcnZpY2UKICAgIHBhcnRpY2lwYW50IFBsYXRmb3JtIGFzIEFwcCBBdHRlc3Qgb3IgUGxheSBJbnRlZ3JpdHkKICAgIHBhcnRpY2lwYW50IEFQSSBhcyBZb3VyIGJhY2tlbmQKICAgIEFwcC0-PlNoaWVsZDogUmVxdWVzdCBhIG9uZS10aW1lIGNoYWxsZW5nZQogICAgU2hpZWxkLS0-PkFwcDogTm9uY2UKICAgIEFwcC0-PlBsYXRmb3JtOiBBdHRlc3QgYXBwIGFuZCBkZXZpY2UgYWdhaW5zdCBub25jZQogICAgUGxhdGZvcm0tLT4-QXBwOiBIYXJkd2FyZS1iYWNrZWQgc3RhdGVtZW50CiAgICBBcHAtPj5TaGllbGQ6IFN0YXRlbWVudCBhbmQgcnVudGltZSBzaWduYWxzCiAgICBTaGllbGQtLT4-QXBwOiBTaG9ydC1saXZlZCBFUzI1NiB0b2tlbiBhbmQgcGluIHNldAogICAgQXBwLT4-QVBJOiBSZXF1ZXN0IHdpdGggWC1DTjEtQXR0ZXN0CiAgICBBUEktPj5BUEk6IFZlcmlmeSBzaWduYXR1cmUsIGFwcCwgdmVyZGljdCwgcG9saWN5LCBhbmQgZXhwaXJ5CiAgICBBUEktLT4-QXBwOiBTZXJ2ZSBvciByZWplY3QgdGhlIG9wZXJhdGlvbg==?type=png&bgColor=ffffff)
+![Diagram](c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFu-fe4dd7bb.png)
 
 The nonce prevents a captured platform statement from becoming a permanent replay credential. The token identifies the expected package and platform, carries the policy decision, and can bind to one request body. The service can also include signals for root, jailbreak, hooking frameworks, emulators, debuggers, repackaging, or untrusted accessibility services.
 

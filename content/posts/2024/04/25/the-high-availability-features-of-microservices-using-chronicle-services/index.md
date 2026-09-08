@@ -5,7 +5,7 @@ lastmod: "2024-04-25T13:37:04+00:00"
 description: "Learn how Chronicle Services, a Java-based framework optimised for low-latency microservices, meets critical requirements by integrating HA, performance, and data persistence."
 authors:
   - "rob-austin"
-image: "Screenshot-2024-04-16-at-17.51.31-1024x588-1.png"
+image: "Screenshot-2024-04-16-at-17.51.31-1024x588-1.jpg"
 categories:
   - "Chronicle Software"
   - "Java"
@@ -54,7 +54,7 @@ If there is an issue either with the service or a queue, then it can be restarte
 
 [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") Replication operates in the context of a cluster of hosts. Within the cluster, one host is set to host the Primary queue instance, sometimes referred to as the source or leader queue, and the others host Secondary queues, sometimes referred to as sink or follower queues. A service will read and post messages only from/to the source queue.
 
-![](Screenshot-2024-04-16-at-17.51.31-1024x588.png)  
+![](Screenshot-2024-04-16-at-17.51.31-1024x588.jpg)  
 *Diagram 3: Queue Replication*
 
 An optional acknowledgement mechanism ensures events are received and stored by at least one secondary host before the replication is deemed successful, thus preventing data loss in the event of a host failure.

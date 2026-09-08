@@ -5,7 +5,7 @@ lastmod: "2026-02-03T07:20:29+00:00"
 description: "Over the past decades, Java has proven itself to be one of the most reliable, versatile, and widely used programming languages in the world. From…"
 authors:
   - "igor-de-souza"
-image: "catalog.png"
+image: "catalog.jpg"
 categories:
   - "Campaigns"
   - "Java"

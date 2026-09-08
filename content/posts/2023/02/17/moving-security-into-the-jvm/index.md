@@ -28,7 +28,7 @@ For those who attack Java applications, their job has actually become easier. [E
 These modern attack payloads target the libraries themselves, not just the JVM. As [applets and client technologies have been deprecated](https://www.testingdocs.com/questions/java-applets-are-depricated/), the JVM's overall attack surface has gone down while the attack surface of libraries has gone up.
 
 Examples of Java library and application vulnerabilities in the last year include [OGNL injection](https://securitynews.sonicwall.com/xmlpost/atlassian-confluence-and-data-center-ognl-injection-vulnerability/#:~:text=An%20OGNL%20injection%20vulnerability%20exists%20in%20Atlassian%20Confluence.,string%20literal%20and%20append%20an%20arbitrary%20OGNL%20expression.) against a major application, [Log4J JNDI injections](https://www.cisa.gov/uscert/apache-log4j-vulnerability-guidance) against many application, and [Psychic Signatures](https://neilmadden.blog/2022/04/19/psychic-signatures-in-java/) attacks against cryptographic trust.
-![Graphic: Existing approaches are valuable but leave a critical security in the JVM gap in secure supply chain strategy.](https://www.azul.com/wp-content/uploads/Screen-Shot-2022-10-25-at-8.33.15-PM-1024x516.png) Existing approaches are valuable but leave a critical gap in secure supply chain strategy.
+![Graphic: Existing approaches are valuable but leave a critical security in the JVM gap in secure supply chain strategy.](Screen-Shot-2022-10-25-at-8.33.15-PM-102-64913526.jpg) Existing approaches are valuable but leave a critical gap in secure supply chain strategy.
 
 After more than 26 years of Java, there are so many active Java applications that organizations have difficulty tracking them. With the rise of attacks against libraries, teams are being asked to track and inventory the libraries that each application uses.
 
@@ -81,7 +81,7 @@ The ultimate goal is to answer three questions:
 Using Azul Vulnerability Detection is simple – it's part of the JDK so there's nothing additional to install. You can turn it on locally via command flags or environment variables, or at scale through DNS.
 
 Flags offer direct control, DNS offers scale to engage JVMs that you cannot easily touch, such as vendor applications or existing containers.
-![How Azul Vulnerability Detection works to provide security in the JVM.](https://www.azul.com/wp-content/uploads/avd-how-it-works-cropped-1024x706.png)
+![How Azul Vulnerability Detection works to provide security in the JVM.](avd-how-it-works-cropped-1024x706-a572fd91.jpg)
 
 Each Azul JVM contains a low-overhead worker that communicates JVM-level information to a local connection manager (the Forwarder). The Forwarder helps encrypt all information and offloads cloud-connection overhead and firewall tuning from the JVMs, allowing them to operate at peak speed.
 

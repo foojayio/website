@@ -29,7 +29,7 @@ If you have not read Part 1[\[2\]](https://foojay.io/today/creating-a-javafx-wor
 
 In Part 2, I will show you how I animate the clock face's hands using basic trigonometry. If you want to skip the tutorial and go straight to the source code head over to GitHub WorldClock [\[4\]](https://github.com/carldea/worldclock "JavaFX WorldClock")  
 
-{{< img src="Screen-Shot-2020-12-19-at-9.35.09-PM-280x510.png" class="size-medium" alt="Creating a JavaFX World Clock from Scratch (Part 2)" width="280" height="510" >}}
+{{< img src="Screen-Shot-2020-12-19-at-9.35.09-PM-280x510.jpg" class="size-medium" alt="Creating a JavaFX World Clock from Scratch (Part 2)" width="280" height="510" >}}
 
 *Creating a JavaFX World Clock from Scratch (Part 2)*
 
@@ -61,7 +61,7 @@ To change the length of the arc position around the clock face you will need to 
 | startAngle | 0.0   | Start angle (in degrees). Zero is at the 3'o clock position moving counter clockwise     |
 | length     | 90.0  | Extent angle (in degrees). The angle offset from the start angle going counter clockwise |
 
-{{< img src="Screen-Shot-2020-12-19-at-10.23.06-PM-626x510.png" class="size-medium" alt="Drawing the Hour Hand Arc" width="626" height="510" >}}
+{{< img src="Screen-Shot-2020-12-19-at-10.23.06-PM-626x510.jpg" class="size-medium" alt="Drawing the Hour Hand Arc" width="626" height="510" >}}
 
 *Drawing the Hour Hand*
 
@@ -136,7 +136,7 @@ int extentAngle = extentAngleHour.apply(1); // 30 degrees
 ```
 
 The following is an example of step-by-step calculations using the above equations to determine the **startAngle** and **extentAngle** at 1:00, 2:00, and 3:00 o'clock.  
-![Calculating Start and Length angles for Hour Hand Arc](Screen-Shot-2020-12-21-at-12.18.03-AM.png)
+![Calculating Start and Length angles for Hour Hand Arc](Screen-Shot-2020-12-21-at-12.18.03-AM.jpg)
 
 *Calculating Start and Length angles for Hour Hand Arc*
 

@@ -5,7 +5,7 @@ lastmod: "2022-02-04T16:55:30+00:00"
 description: "Let's continue learning design patterns by implementing the Adapter, Facade, Template, Iterator, and State patterns using Java."
 authors:
   - "sumith-puri"
-image: "https://1.bp.blogspot.com/-hKI50AxF4-E/YTtUtL05bfI/AAAAAAAA-cc/WHuoaObj0W0uErR_5nwcEBIG33ggDqtKQCLcBGAsYHQ/s16000/W3sDesign_Adapter_Design_Pattern_UML.jpg"
+image: "W3sDesign_Adapter_Design_Pattern_UML-74a9dbd9.jpg"
 categories:
   - "Tutorials"
 related_posts:
@@ -24,7 +24,7 @@ frozen: false
 
 What can one do if he needs to use an Asian Hairdryer in a European Country, each with different socket types? I would seek an Adapter! As in real life, when we want to plug and play with similar but incompatible interfaces we use the Adapter. The Adapter adapts the Adaptee to the desired interface, by composing the Adaptee object and inheriting the desired interface or by multiple inheritance.
 
-![](https://1.bp.blogspot.com/-hKI50AxF4-E/YTtUtL05bfI/AAAAAAAA-cc/WHuoaObj0W0uErR_5nwcEBIG33ggDqtKQCLcBGAsYHQ/s16000/W3sDesign_Adapter_Design_Pattern_UML.jpg)  
+![](W3sDesign_Adapter_Design_Pattern_UML-74a9dbd9.jpg)  
 Fig. 1 : Adapter (Structural) Design Pattern - Class and Sequence Diagram   
 \[Source : Wikipedia\]
 
@@ -38,13 +38,13 @@ PCAssembler is the main class here. Try adding your own device and its adapter t
 
 Consider a scenario where we require multiple method invocations on various classes, to achieve the desired functionality. Also, consider that this set of functionality is repeatedly being used in your code. If you are thinking of an option where you will perform direct invocations, you are bound to end up with code maintenance issues and tightly coupled code. If these invocations are remote, it is going to be worse with respect to the performance.
 
-![](https://1.bp.blogspot.com/-SHSmFHwnIgg/YTtcN2xnWmI/AAAAAAAA-dM/3FIRsJgIMmUz2eOwRunZjbAanXl_eVlqACLcBGAsYHQ/w400-h400/300px-Facade_Design_Pattern_Class_Diagram_UML.svg.jpg)  
+![](300px-Facade_Design_Pattern_Class_Diagra-02210247.jpg)  
 Fig. 2 : Facade (Structural) Design Pattern - Class Diagram   
 \[Source : Wikipedia\]
 
 Under the above mentioned conditions is where the facade comes into play. Herein multiple method invocations are encapsulated into a single method of the facade class, to achieve the desired functionality. It provides us with a single point of change and looser coupling, with respect to the individual implementations. Remote method invocation patterns like SessionFacade (EJB) adapt from here to improve the overall performance and lower complexity.
 
-![](https://1.bp.blogspot.com/-hr0nOY5U8v8/YTtcXbH6s5I/AAAAAAAA-dQ/gtgj5dW2B3UqEVukjPE83BYjaSqeUo0RwCLcBGAsYHQ/w400-h343/1024px-Facade_Design_Pattern_Sequence_Diagram_UML.svg.jpg)  
+![](1024px-Facade_Design_Pattern_Sequence_Di-ec755d7a.jpg)  
 Fig. 3 : Facade (Structural) Design Pattern - Sequence Diagram   
 \[Source : Wikipedia\]
 
@@ -56,7 +56,7 @@ AccountsCentral is the main class. Try adding your own method to the facade clas
 
 Imagine a real-world scenario where a factory is creating both aluminium nails and screws. Though the machine has to create both of them through similar processes, the way some steps are implemented may vary in each of these. When we think of such scenarios in software, we utilize the template pattern. Template pattern defines a way to re-use algorithms for various implementations with different or slightly different outcomes.
 
-![](https://1.bp.blogspot.com/-JKo6kpXHhrw/YTtXG7Q3BiI/AAAAAAAA-c0/hSlaAhn5r64zCl64KJopOS-sOzDg7WCZwCLcBGAsYHQ/s16000/W3sDesign_Template_Method_Design_Pattern_UML.jpg)  
+![](W3sDesign_Template_Method_Design_Pattern-d35917df.jpg)  
 Fig. 4 : Template (Structural) Design Pattern - Sequence Diagram   
 \[Source : Wikipedia\]
 
@@ -67,7 +67,7 @@ SoftwareConsultants can be used to run this example. Try adding your own process
 
 The need to have a handle to a collection of elements, without exposing its internal implementation is met by the Iterator Pattern. I would term this as a pure programming pattern, in its own right. By utilising this handle (Iterator), the client using the collection can easily process the same without any dependency on the internal logic.
 
-![](https://1.bp.blogspot.com/-wuCHJ2bZwbE/YTtawLGUBRI/AAAAAAAA-c8/Zrfn01Drx8oZPWae69FPYp5GwjZDWNxiACLcBGAsYHQ/s16000/W3sDesign_Iterator_Design_Pattern_UML.jpg)  
+![](W3sDesign_Iterator_Design_Pattern_UML-bbcac109.jpg)  
 Fig. 5 : Iterator (Behavioral) Design Pattern - Class and Sequence Diagram   
 \[Source : Wikipedia\]
 
@@ -79,7 +79,7 @@ The example can be run using ProductMenuTester.
 
 State Pattern defines a way to maintain various steps or states of the same machine or class. The word machine comes to the mind easily, because it is the simplest example of a real-world scenario where there is a need for operating the same object in steps or set states, with the transition from one step to the next defined by a single action (or multiple actions).
 
-![](https://1.bp.blogspot.com/-WUhotKRBznc/YTtbFuTg6XI/AAAAAAAA-dE/GLfK33tzQbgGIfr71pJTqGQiKXd4pmp7ACLcBGAsYHQ/s16000/W3sDesign_State_Design_Pattern_UML.jpg)  
+![](W3sDesign_State_Design_Pattern_UML-94a801d8.jpg)  
 Fig. 6 : State (Behavioral) Design Pattern - Class and Sequence Diagram   
 \[Source : Wikipedia\]  
 The example attached is a very crude but helpful one, that of an OnlineShopping site. The limitation of the site being that at any given point only a single item can be purchased and processed. The various states during the purchase and processing are SelectionState, PurchaseState, AuthoriseState, AssembleState (optional) and DispatchState. Each of these states is processed and followed in a sequential manner.

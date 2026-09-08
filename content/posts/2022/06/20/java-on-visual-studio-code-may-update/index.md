@@ -33,7 +33,7 @@ Here is a demonstration of this feature
 
 The settings to control how you would like to customize the signature help behavior can be found in the following screenshot:
 
-[![Signature Help Setting](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/05/signaturehelp.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/05/signaturehelp.png)
+[![Signature Help Setting](signaturehelp.png)](signaturehelp.png)
 
 If you are interested, you can also see a more detailed list of how you can utilize these improvements in the [original PR](https://github.com/eclipse/eclipse.jdt.ls/pull/2039) here
 
@@ -47,7 +47,7 @@ In our latest release, we have made some changes so now it fully works with our 
 
 The setting to set this preference can be found here:
 
-[![Insert replace code completion](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/05/insertreplace.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/05/insertreplace.png)
+[![Insert replace code completion](insertreplace-4e2ffeed.png)](insertreplace-4e2ffeed.png)
 
 We hope these user experience improvements can really help to speed up your coding productivity!
 

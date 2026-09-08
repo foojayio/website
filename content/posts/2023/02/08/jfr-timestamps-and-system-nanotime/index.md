@@ -5,7 +5,7 @@ lastmod: "2023-02-08T15:33:35+00:00"
 description: "Did you ever wonder whether JFR timestamps use the same time source as System.nanoTime? Come down the rabbit hole with me!"
 authors:
   - "johannes-bechberger"
-image: "jfr.png"
+image: "jfr.jpg"
 categories:
   - "JDK Flight Recorder"
   - "Performance"

@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="image-2.png" class="alignright size-full" width="460" height="460" >}}
+{{< img src="image-2.jpg" class="alignright size-full" width="460" height="460" >}}
 
 In a recent insightful interview, Simon Martinelli, an Oracle ACE associate and veteran Java developer, shares his career experiences, software development philosophies, and views on mentoring. With over two decades in the industry, Martinelli offers a perspective that combines the wisdom of experience with a focus on simplicity and constant learning.
 

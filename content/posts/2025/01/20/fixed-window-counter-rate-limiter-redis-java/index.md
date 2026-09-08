@@ -6,7 +6,7 @@ description: "Learn how to implement a Fixed Window Rate Limiter with Redis and 
 canonical: "https://raphaeldelio.com/2024/12/30/fixed-window-counter-rate-limiter-redis-java/"
 authors:
   - "raphael-delio"
-image: "Redis_Video_RateLimiterImplementations_Part2_YoutubeThumbnail.png"
+image: "Redis_Video_RateLimiterImplementations_Part2_YoutubeThumbnail.jpg"
 categories:
   - "Databases"
   - "Java"
@@ -24,7 +24,7 @@ The **Fixed Window Counter** is the simplest and most straightforward rate-limit
 
 ## **How It Works**
 
-![](https://cdn-images-1.medium.com/max/2160/1*VsdNn5KGd1A0rIfbczGy8Q.gif)
+![](1-VsdNn5KGd1A0rIfbczGy8Q-648478b9.gif)
 
 ### **1. Define a Window Interval**
 

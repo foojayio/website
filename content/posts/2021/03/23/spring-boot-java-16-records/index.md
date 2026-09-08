@@ -76,7 +76,7 @@ class Point {
 
 Another option that we developers use most often is to leave the handling of the boilerplate to the IDE. For example, with Intellij, you can generate constructors, getters, setters, equals, hashCode, and toString, etc., by simply pressing Command + N shortcut key. But the boilerplate code is still there.
 
-![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1616085356856/X6aLicL5f.png)
+![image.png](X6aLicL5f-68d4cc5e.png)
 
 With Java 16 Records, it's just one line of code. Cool, isn't it:
 
@@ -288,7 +288,7 @@ public record State(String name, String capital) {
 
 Then I took the help of the IntelliJ feature to generate the constructor for this record class. It provided me with the following options.
 
-![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1616100878502/6syBh6OHq.png)
+![image.png](6syBh6OHq-842e94e5.png)
 
 I tried these options but got the same result. I already knew that these options wouldn't work, but I tried my luck, which makes me wonder how to use records with `BeanPropertyRowMapper.` I don't have an answer for this right now, but I will dig this further. If you see any issue with the code or have a better answer, then let me know.
 
@@ -307,4 +307,4 @@ In the last section, we discovered that Records are good for use in cases such a
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)

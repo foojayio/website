@@ -39,7 +39,7 @@ As a side note, if you like the content of this and the other posts in this seri
 
 Modern browsers come equipped with developer tools that rival standalone IDE debuggers in capability and convenience. Both Chrome and Firefox have robust network monitoring features that allow developers to observe/analyze requests and responses without leaving the browser.
 
-![](image18-firefox-network-monitor-700x429.png)
+![](image18-firefox-network-monitor-700x429.jpg)
 
 On the basic level, which you're probably familiar with, these tools include:
 
@@ -49,7 +49,7 @@ On the basic level, which you're probably familiar with, these tools include:
 
 While this post focuses on debugging techniques, it's worth noting that these tools are invaluable for performance optimization as well, though that topic warrants its own discussion.
 
-![](image19-chrome-network-monitor-614x510.png)
+![](image19-chrome-network-monitor-614x510.jpg)
 
 ## **Re-Issuing and Modifying Requests**
 
@@ -73,7 +73,7 @@ If you prefer Postman, you can copy request headers and payloads from the browse
 
 Network throttling is a highly underrated feature that can be a game-changer for debugging specific classes of bugs. Both Chrome and Firefox allow developers to simulate various network speeds, from 2G connections to fast 4G.
 
-![](image21-throttling-700x411.png)
+![](image21-throttling-700x411.jpg)
 
 ### Why Throttling Matters:
 
@@ -103,7 +103,7 @@ Understanding the exact state of a user's local storage can provide insight into
 
 In Firefox the dedicated **Storage** tab in Developer Tools makes it easy to inspect, edit, and delete data from local storage, session storage, cookies, and indexedDB.
 
-![](image22-firefox-storage-tab-700x324.png)
+![](image22-firefox-storage-tab-700x324.jpg)
 
 In Chrome the **Application** tab consolidates all storage options, including the ability to clear specific caches or edit entries manually.
 

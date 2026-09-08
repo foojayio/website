@@ -6,7 +6,7 @@ description: "A Lottie library is only as good as its output looks. If an animat
 canonical: "https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/"
 authors:
   - "frankdelporte"
-image: "20260702-lottie4j-after.png"
+image: "20260702-lottie4j-after.jpg"
 categories:
   - "JavaFX"
 related_posts:
@@ -22,7 +22,7 @@ A Lottie library is only as good as its output looks. If an animation renders di
 Within the `fxfileviewer`, there is an app to visually compare the result of the JavaFX player and a webview using the official JavaScript player. Problem is that I was using the JavaFX Web component for this and this doesn't fully support the latest/best version of this player. Based on this app for manual checks, I also created a unit test which is able to loop over a set of files and compare the differences to make sure changes in the code don't break the existing renderer. But I kept struggling with the same test file [interactive_mood_selector_ui.json](https://github.com/lottie4j/lottie4j/tree/main/fxfileviewer/src/test/resources/json/interactive_mood_selector_ui.json) which didn't render correctly, both in the JavaFX view and my web-based view to compare it with.
 
 Over the last weeks the focus has been exactly there: **making the JavaFX output match the reference renderer, pixel for pixel** (if possible).
-![](20260702-lottie4j-after.png)
+![](20260702-lottie4j-after.jpg)
 
 ## Improved Comparison Workflow
 
@@ -83,9 +83,9 @@ Where are we now? Check the images below.
 3. The third screenshot is the **"after"** which shows a lot of improvements. First and most important, the comparison images from the webview are now pixel-perfect as they get rendered based on the latest version of the official Lottie web player. And you can also see that the JavaFX result is now a really close match! The background gradients are not pixel-perfect yet, and I still see small differences in the text, which confirms the 95% similarity score. But overall, I'm very happy with the improvements!
 
 {{< gallery >}}
-20260702-lottie4j-previewer.png
-20260702-lottie4j-before.png
-20260702-lottie4j-after.png
+20260702-lottie4j-previewer.jpg
+20260702-lottie4j-before.jpg
+20260702-lottie4j-after.jpg
 {{< /gallery >}}
 
 ## The Cost

@@ -48,7 +48,7 @@ JDBC statement caching involves storing frequently executed SQL statements, such
 ### Connection pool configuration
 
 You can configure connection pools in the Admin Console as follows:
-![](blog-conn-pool-size-idle.png) ![](image-1.png)
+![](blog-conn-pool-size-idle.png) ![](image-1.jpg)
 
 Or set the following properties (using the `set` admin command or as Embedded GlassFish properties):
 

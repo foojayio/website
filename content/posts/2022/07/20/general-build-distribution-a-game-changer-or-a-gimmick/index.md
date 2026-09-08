@@ -5,7 +5,7 @@ lastmod: "2022-07-28T17:34:17+00:00"
 description: "Understand the performance potential of remote and distributed builds and explore how to improve build feedback times."
 authors:
   - "kyle-moore"
-image: "1_0FUueLptBTH-g9orqUngWg.png"
+image: "1_0FUueLptBTH-g9orqUngWg.jpg"
 categories:
   - "DevOps"
   - "Performance"
@@ -55,7 +55,7 @@ Thus, we encourage skepticism at claims of building large projects "from scratch
 
 The key to understanding the maximum speed potential of any build (locally built, hosted remotely or distributed) is to visualize the interdependencies of its outputs. Imagine a relatively small software project having three subprojects: A, B and C. If compiling subproject C requires the outputs of subprojects A and B, then C *depends on* A and B. Most importantly, we cannot begin building C until both A and B are complete; therefore the best-case build-time scenario can be denoted as ***max(A, B) + C*** . Given a local or remote build host with unlimited CPU cores, or a pool of unlimited distributed build agents, the build *cannot* be parallelized further than this bottleneck.
 
-[![Project structure](https://miro.medium.com/max/1400/1*423NV_D5lKEF1wFxBQ3zQg.png "Project structure")](// "Project structure")  
+[![Project structure](1-423NV_D5lKEF1wFxBQ3zQg-591c3045.png "Project structure")](// "Project structure")  
 *Figure 1.: Project structure*
 
 As we see that this bottleneck is dependency-based and not performance-based, we now have the ability to predict the potential benefit of remote or distributed builds.
@@ -68,7 +68,7 @@ To put this theory to the test, we've performed some analysis of the *paralleliz
 
 This last point is critical: tasks that operate as a single process - with no other processes executing simultaneously - are indicative of a bottleneck, like subproject C in the above example. Single-process tasks are proof that further optimization via distribution is not possible. It *is* possible that a more powerful remote CPU would finish the compilation task more quickly, but this benefit could easily be negated by the overhead of sending bits back and forth.
 
-[![Time V Threads](https://miro.medium.com/max/1400/1*h6-tkIIyMb0YUmqg5uR4jg.png "Time V Threads")](http://https://miro.medium.com/max/1400/1*h6-tkIIyMb0YUmqg5uR4jg.png "Time V Threads")  
+[![Time V Threads](1-h6-tkIIyMb0YUmqg5uR4jg-89c69092.png "Time V Threads")](http://1-h6-tkIIyMb0YUmqg5uR4jg-89c69092.png "Time V Threads")  
 *Figure 2.: Cumulative work time, grouped by number of concurrent workers. Half of the work was executed with no other busy processes running in parallel.*
 
 Setting aside test execution (addressed by Test Distribution, see [above](#test-execution-is-the-bottleneck)), and focusing on the remaining CPU-intensive 10-20% portion of build times, we find that the potential for optimization is low. The failure of half these tasks to execute in parallel with other processes means that, at best, a general distribution solution could expedite only 5-10% of overall build time, while incurring significant costs in terms of build complexity and management overhead.

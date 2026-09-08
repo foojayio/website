@@ -42,7 +42,7 @@ The same application was developed in both Spring and Quarkus:
 Both projects are available on GitHub in "[JavaOnRaspberryPi \> Chapter_10_Spring \> java-spring-rest-db](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_10_Spring/java-spring-rest-db)" and "[JavaQuarkusRestDb](https://github.com/FDelporte/JavaQuarkusRestDb)". If you like to get more information of the code itself, you can check the blog post links at the bottom of this page.
 
 {{< gallery cols="3" >}}
-spring-db-swagger-1024x814.png
+spring-db-swagger-1024x814.jpg
 spring-db-swagger-measurement-post-1024x484.png
 spring-db-swagger-sensor-post-error-1024x173.png
 spring-db-swagger-sensor-post-1024x320.png

@@ -68,17 +68,17 @@ Again everything else matches the content and result we saw in the previous duck
 
 The primary focus of this post is the memory debugging capabilities. By default, JetBrains disables most of these capabilities to boost program execution performance. We can enable the memory debugger view by checking it on the right-hand side of the bottom tool window.
 
-![memory-debugging-1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984733258/GIZp2-ogJ.png)
+![memory-debugging-1.png](GIZp2-ogJ-c8015bc7.png)
 
 Worse. This has such an impact on performance that IntelliJ doesn't load the actual content of this class until we explicitly click the "Load Classes" button in the center of the memory monitor:
 
-![memory-debugging-2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984741434/KqTfJtrSW.png)
+![memory-debugging-2.png](KqTfJtrSW-adcb9f40.png)
 
-![memory-debugging-3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984748815/CvRs-FN9m.png)
+![memory-debugging-3.png](CvRs-FN9m-e30a2e19.jpg)
 
 As you can imagine, this gets old fast. If your machine is slow, then this is a great thing. But if you have an exceptionally powerful machine, then you might want to turn on "Update Loaded Classes on Debugger Stop":
 
-![memory-debugging-4.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984760974/wEfiGwUTX.png)
+![memory-debugging-4.png](wEfiGwUTX-c5515520.jpg)
 
 This effectively disables the requirement to click at the cost of slower step over execution. But what do we get as a result?
 
@@ -90,7 +90,7 @@ The diff column is especially useful in tracking issues such as memory leaks. Yo
 
 But there's more. We can double click every object on the list and see this:
 
-![memory-debugging-5.jpeg](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984775597/5YhGuNfeq.jpeg)
+![memory-debugging-5.jpeg](5YhGuNfeq-0501192c.jpeg)
 
 Here we can see all the objects of this type that were allocated in the entire heap. We can get a sense of what's really held in a memory location and again gain deeper insight into potential memory leaks.
 
@@ -98,11 +98,11 @@ Here we can see all the objects of this type that were allocated in the entire h
 
 "Track New Instances" enables even more tracking of heap allocations. We can enable this on a per object type basis. Notice this only applies to "proper object" and not arrays. You can enable it through the right click:
 
-![memory-debugging-6.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984788667/AP9SSjUSK.png)
+![memory-debugging-6.png](AP9SSjUSK-952bc077.jpg)
 
 Once we enable this, heap allocations are tracked everywhere. We get backtraces for memory allocations that we can use to narrow down the exact line of code that allocated every object in the heap!
 
-![memory-debugging-7.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650984800338/mwYQ4Caq_.png)
+![memory-debugging-7.png](mwYQ4Caq_-c15cbc95.jpg)
 
 The real benefit though is in the enhanced diff capability. When this is enabled, we can differentiate the specific objects allocated at this point. Say you have a block of code that leaks an object of type `MyObject`. If you enable tracking on `MyObject` and run between the two breakpoints, you can see every allocation of `MyObject` performed only in this block of code...
 

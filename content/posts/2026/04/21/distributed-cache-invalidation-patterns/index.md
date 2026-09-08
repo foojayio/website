@@ -5,7 +5,7 @@ lastmod: "2026-04-21T13:52:05+00:00"
 description: "Caching is one of the most powerful tools developers have at their disposal for optimizing application performance. Caching systems can significantly reduce latency and reduce the load on databases or external systems by storing frequently accessed data as close as possible to the application layer. The result? Improved responsiveness and overall system usability."
 authors:
   - "matteo-rossi"
-image: "Screenshot-2026-04-10-at-1.03.56-PM.png"
+image: "Screenshot-2026-04-10-at-1.03.56-PM.jpg"
 categories:
   - "Databases"
   - "Java"

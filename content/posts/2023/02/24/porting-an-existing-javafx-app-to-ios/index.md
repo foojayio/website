@@ -24,7 +24,7 @@ To give you an idea, I will take my little game called JArkanoid (a clone of the
 
 Here is a screenshot from one level to give you an idea:
 
-![Games](https://github.com/HanSolo/jarkanoid/blob/main/resources/level1.png?raw=true)
+![Games](level1-a2775c36.png)
 
 I wrote this game mainly by watching a video on YouTube that showed the original game from 1986.
 

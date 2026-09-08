@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Funding Open Source Without The Bait And Switch](https://www.codenameone.com/blog/funding-open-source-without-the-bait-and-switch.jpg)
+![Funding Open Source Without The Bait And Switch](funding-open-source-without-the-bait-and-da742f04.jpg)
 
 Years ago I wrote a piece called [Open Source Bait and Switch](https://debugagent.com/open-source-bait-and-switch). The short version: a project is released as open source while it has no business model, a community forms around it, and then the bill comes due. The project either rots into abandonware because nobody can afford to maintain it, or it sprouts a home-grown "source available" license that quietly takes back the freedoms it was given on. You have watched this happen. So have I.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -35,7 +35,7 @@ That second answer is **optional services that sit on top of the open source pro
 
 Crash protection last week was the first example of that depth. Analytics this week adds a second pattern: a paid provider that sits behind an open Service Provider Interface, so the same code can target a third-party backend just as easily as ours.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRECiAgICBBWyJZb3VyIGFwcCBjYWxscyBBbmFseXRpY3MuZXZlbnQoKSJdIC0tPiBCeyJDb25zZW50IGdhdGU8YnIvPihvcHQtaW4gYnkgZGVmYXVsdCkifQogICAgQiAtLT58Z3JhbnRlZHwgQ1siQW5hbHl0aWNzUHJvdmlkZXIgU1BJIl0KICAgIEIgLS0-fGRlbmllZHwgWlsiTm90aGluZyBsZWF2ZXMgdGhlIGRldmljZSJdCiAgICBDIC0tPiBEWyJHb29nbGVBbmFseXRpY3NQcm92aWRlciAoR0E0KSJdCiAgICBDIC0tPiBFWyJNYXRvbW9BbmFseXRpY3NQcm92aWRlciJdCiAgICBDIC0tPiBGWyJGaXJlYmFzZUFuYWx5dGljc1Byb3ZpZGVyIl0KICAgIEMgLS0-IEdbIkNvZGVuYW1lT25lQW5hbHl0aWNzUHJvdmlkZXI8YnIvPihmaXJzdC1wYXJ0eSwgaW5jbHVkZWQgd2l0aCBhIHN1YnNjcmlwdGlvbikiXQogICAgc3R5bGUgRyBmaWxsOiMxZjZmZWIsY29sb3I6I2ZmZg==?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRECiAgICBBWyJZb3VyIGFwcCBj-844901c9.png)
 
 You can wire the analytics facade to Google Analytics, to Matomo, to Firebase, or to your own `AnalyticsProvider`, and the framework does not care which. If you pick our first-party provider you get a privacy-oriented analytics backend with the consent handling already done, and you also fund the next port, the next API, the next year of this. That is the entire pitch. It is not a tax on the open source project; it is a better default that happens to also pay for the open source project.
 
@@ -62,7 +62,7 @@ Five providers ship in the box: our first-party `CodenameOneAnalyticsProvider` (
 
 [PR #5264](https://github.com/codenameone/CodenameOne/pull/5264) brings mapping back into core and modernizes it, retiring the old tile-based `MapComponent` and the external Google Maps cn1lib. Two components share one `MapSurface` API. The one I am most excited about is `MapView`, a **pure-vector map rendered entirely through `Graphics`** , with a Mapbox Vector Tile engine built on the framework's own `ProtoReader` and `GeneralPath`. There is no native peer, which means no z-order fights, no snapshot-during-animation compromise, and identical rendering everywhere including the simulator and the web. You host your own tile data and metadata, pick a light or dark style, and you control every pixel that gets drawn.
 
-![A pure-vector OpenStreetMap render and the same area in the built-in dark style, both drawn entirely through the Codename One Graphics pipeline with no native peer](https://www.codenameone.com/blog/vector-and-native-maps/maps-vector.png)
+![A pure-vector OpenStreetMap render and the same area in the built-in dark style, both drawn entirely through the Codename One Graphics pipeline with no native peer](maps-vector-3b51b09e.jpg)
 
 The second component, `NativeMap`, gives you a real native map from a provider like Apple MapKit or Google Maps, wired through an SPI selected by a build hint rather than code. The old Google Maps cn1lib tied you to one vendor; this does not. Because the provider is injected at build time, the core and ports carry no map SDK, unused providers cost zero project size, and a device without Google Play, a Huawei phone for instance, is one build hint away from a working native map instead of a porting dead end. When no provider is configured, `NativeMap` falls back to an embedded `MapView`. The engine and the provider model are covered in .
 
@@ -87,7 +87,7 @@ That work also finished wiring `@media` for the existing watch port, which never
 
 [PR #5272](https://github.com/codenameone/CodenameOne/pull/5272) adds two visual editors. `RichTextArea` is a WYSIWYG HTML editor, bold, italic, lists, links, colors, headings, with `getHtml` and `setHtml`. `CodeEditor` is an IDE-style editor with syntax highlighting for eight languages, a line-number gutter, light and dark themes, bracket and quote auto-close, asynchronous code completion, and diagnostics that render as squiggly underlines with gutter markers and tooltips.
 
-![The CodeEditor with Java syntax highlighting, a gutter, and an async code-completion popup, and the RichTextArea WYSIWYG editor with a formatting toolbar](https://www.codenameone.com/blog/rich-text-and-code-editing/components-codeeditor.png)
+![The CodeEditor with Java syntax highlighting, a gutter, and an async code-completion popup, and the RichTextArea WYSIWYG editor with a formatting toolbar](components-codeeditor-38f1f08d.png)
 
 Both sit on a single `AbstractEditorComponent` with two interchangeable backends: a fully cross-platform engine made of self-contained HTML and JS inside the core jar, and an optional richer native backend a port can supply. The `CodeEditor` is not a toy demo: the Playground already uses it. The deep dive is in .
 
@@ -95,7 +95,7 @@ Both sit on a single `AbstractEditorComponent` with two interchangeable backends
 
 Two smaller APIs round out the week, both built in core rather than as cn1libs. [PR #5277](https://github.com/codenameone/CodenameOne/pull/5277) adds `DeviceIntegrity`, a portable runtime self-protection API for high-security apps: Play Integrity and iOS App Attest attestation, root, jailbreak and Frida detection, and an accessibility-service abuse guard, most of it driven by build hints with a runtime API on top. We already have several customers in banking and payments, and Codename One is hardened to meet the requirements they bring; this API is part of that work. [PR #5268](https://github.com/codenameone/CodenameOne/pull/5268) adds `AppReview`, which uses the platform's native store-review prompt where it exists and falls back to a built-in widget everywhere else, with a feedback split that quietly routes unhappy users to you instead of to a one-star public review.
 
-![The AppReview fallback rating widget, used on platforms without a native in-app review prompt](https://www.codenameone.com/blog/device-integrity-and-app-review/app-review-sheet.png)
+![The AppReview fallback rating widget, used on platforms without a native in-app review prompt](app-review-sheet-4b1ca1e1.png)
 
 Both are covered in .
 

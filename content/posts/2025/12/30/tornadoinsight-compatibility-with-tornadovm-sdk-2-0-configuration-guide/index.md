@@ -44,7 +44,7 @@ TornadoInsight supports using the JDK defined in the IntelliJ project settings.
 
 When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.
 
-{{< img src="https://plugins.jetbrains.com/files/23309/screenshot_bd38c017-be77-49d6-a5b0-f9ca54069cd9" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
+{{< img src="screenshot_bd38c017-be77-49d6-a5b0-f9ca5-628e5f31.jpg" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
 
 ## TornadoVM SDK Configuration (Recommended)
 
@@ -126,7 +126,7 @@ If the variable is present, TornadoInsight will automatically detect the Tornado
 ## **Summary**
 
 If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.
-![](https://plugins.jetbrains.com/files/23309/screenshot_aa1940fc-c2d6-4120-95fc-2df46fc3d67f)
+![](screenshot_aa1940fc-c2d6-4120-95fc-2df46-bb9c5e73.jpg)
 
 Some common issues are listed here:
 

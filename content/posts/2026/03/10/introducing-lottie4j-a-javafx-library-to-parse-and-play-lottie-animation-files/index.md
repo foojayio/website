@@ -45,7 +45,7 @@ Lottie4J is organized into three main modules:
 {{< gallery >}}
 json-parsing.png
 fxfileviewer-1024x457.png
-github-repo-1024x793.png
+github-repo-1024x793.jpg
 {{< /gallery >}}
 
 ## Making Sense of the JSON

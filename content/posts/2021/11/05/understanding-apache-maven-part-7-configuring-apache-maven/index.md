@@ -6,7 +6,7 @@ description: "Maven can depend on constraints external to what is packaged. Exam
 canonical: "https://cguntur.me/2020/06/27/understanding-apache-maven-part-7/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/06/mavenconfiguration.png?w=1024"
+image: "mavenconfiguration-a4181173.png"
 categories:
   - "Maven"
 related_posts:
@@ -139,6 +139,6 @@ Link: <https://maven.apache.org/plugins/maven-toolchains-plugin/>
 > **toolchains.xml** **excerpt** : <https://github.com/c-guntur/jvms-compare/blob/master/toolchains.xml#L44-L54>  
 > **pom.xml excerpt** : <https://github.com/c-guntur/jvms-compare/blob/master/pom.xml#L401-L420>  
 > (The configuration in the pom `maven-toolchains-plugin` looks for an AdoptOpenJDK Hotspot Java 11)
-![Three different means of configuring Maven: Environment variables, .mvn Config files and XML configurations](https://cgunturme.files.wordpress.com/2020/06/mavenconfiguration.png?w=1024) Three different means of configuring Maven: environment variables, Maven config files, and XML configurations.
+![Three different means of configuring Maven: Environment variables, .mvn Config files and XML configurations](mavenconfiguration-a4181173.png) Three different means of configuring Maven: environment variables, Maven config files, and XML configurations.
 
 That's a wrap on configuring Maven!

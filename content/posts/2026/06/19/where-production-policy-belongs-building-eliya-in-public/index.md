@@ -18,7 +18,7 @@ frozen: false
 ---
 
 This is an argument about where production intent belongs in a managed runtime, and the OpenJDK distribution we built to act on it - Eliya, an opinionated, compliance-conscious OpenJDK distribution. This is the first article in a series. The later parts are engineering: reproducible builds, the glibc floor, release signing, the one source patch we shipped. This part is the thesis they all serve.
-![](https://root.asymm.systems/images/jvm-behaviour-space.png)
+![](jvm-behaviour-space-8d14d74a.png)
 
 Every configurable system has two spaces. The configuration space: every behaviour you can reach by setting the knobs the system already exposes. And there's the implementation space: behaviour that only exists if someone goes in and changes the internals.
 

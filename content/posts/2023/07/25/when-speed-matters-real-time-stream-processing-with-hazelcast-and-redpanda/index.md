@@ -6,7 +6,7 @@ description: "Explore the combination of Hazelcast and Redpanda for high-perform
 authors:
   - "dunith-danushka"
   - "fawaz-ghali"
-image: "hazelcast-redpanda.png"
+image: "hazelcast-redpanda.jpg"
 categories:
   - "Hazelcast"
   - "Performance"
@@ -39,7 +39,7 @@ There are actually multiple options, but for this blog post, we'll show you how 
 
 Here's a quick diagram of what this solution looks like.
 
-![](https://dz2cdn1.dzone.com/storage/temp/17079264-hazelcast-redpanda.png)
+![](17079264-hazelcast-redpanda-bff5c138.jpg)
 
 ### Tutorial: real-time stream processing with Redpanda and Hazelcast
 

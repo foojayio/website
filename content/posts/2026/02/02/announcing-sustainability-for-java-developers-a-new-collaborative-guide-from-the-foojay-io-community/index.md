@@ -27,7 +27,7 @@ Java developers from around the world are writing a book about a question that's
 
 *Sustainability for Java Developers: Towards an Understanding of Sustainable Java Software Development* is now freely available on Leanpub, bringing together Java Champions, architects, and technical writers to look at sustainability from every angle.
 
-{{< img src="sustainabilitybook-793x1024.png" class="size-large is-resized" width="793" height="1024" style="width:277px;height:auto" >}}
+{{< img src="sustainabilitybook-793x1024.jpg" class="size-large is-resized" width="793" height="1024" style="width:277px;height:auto" >}}
 
 The book covers everything from the environmental footprint of our data centers to the ethics of open source supply chains, from efficient data formats to the often-overlooked topic of career longevity.
 

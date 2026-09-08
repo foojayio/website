@@ -57,7 +57,7 @@ After you have upgraded or installed the latest of the toolkit, it will automati
 
 Once your click one of these two samples, our plugin will guide you to finish an end-to-end process. You can have an overview of all steps (as the screenshot shows below).
 
-![](overview2.png)
+![](overview2.jpg)
 
 When you're done, you will have your first application successfully running on Azure. Next, you could click the button "View in Azure Explorer" to focus on your app resources in Azure Explorer. Here is a short demonstration for it.
 

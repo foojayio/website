@@ -25,7 +25,7 @@ So... today we're announcing a new section: [Java Quick Start](https://foojay.io
 
 {{< gallery >}}
 foojay-menu-quick-start.png
-foojay-playlist-getting-started-942x1024.png
+foojay-playlist-getting-started-942x1024.jpg
 {{< /gallery >}}
 
 ## What You Will Learn

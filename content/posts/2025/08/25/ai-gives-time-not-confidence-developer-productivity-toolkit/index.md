@@ -46,7 +46,7 @@ Now, what about pointing the AI at a specific issue ticket and your actual codeb
 * **AI Tool integration**: MCP servers (more details below) connect your AI assistant directly to servers in order to add capabilities to the Agent. In this case it's the Github API that will give read or write information regarding the current repository issues.
 
 As an example, you can use Github Code Spaces [with Copilot Agent Mode](https://github.blog/changelog/2025-04-11-vscode-copilot-agent-mode-in-codespaces/) , and it will give us an explanation of the ticket and the changes to do.
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxwmiiobapci559gq7ddv.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxwmiiobapci559gq7ddv.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-635765cc.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-635765cc.jpg)
 
 **Important Caveats:**
 
@@ -61,7 +61,7 @@ Okay, let's talk about actually producing Java code. This is where tools like `G
 * **Generating Snippets and Methods:** Write a clear method signature and the AI will generate a surprisingly decent implementation. You can use different methods to generate code:.
   * **Inline chats** Ask the assistant to generate `"Java method to fetch data from API endpoint XYZ and parse the JSON response"` and wait a bit. The AI might suggest the entire method body using `HttpClient` or `RestTemplate`.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F1oou6ymc7jo5n6egojjf.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F1oou6ymc7jo5n6egojjf.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-dc47bc3c.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-dc47bc3c.jpg)
 
 * **Ghost text** : Start typing a typical Spring Boot controller method like `@GetMapping("/products/{id}") public ResponseEntity<Product> getProductById` ... The AI will likely suggest the code to call a service and return the response.
 
@@ -73,7 +73,7 @@ These tools use the **context of your project** to tailor suggestions. But how d
 * **Chat \& Explicit Prompts:** Mentioning specific class/method names from your project or pasting relevant snippets guides the AI. For example: *"Using our `CustomerService` class, generate the boilerplate code for a new method `findCustomerByEmail(String email)` that calls the `customerRepository`."*
 * **Codebase Awareness:** Specialized tools using Agents can be set up to index your entire codebase. This allows for much deeper context, potentially leading to suggestions that understand your project's specific patterns even if the relevant files aren't currently open.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fy0zb3f80h0vgnr5vf9vz.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fy0zb3f80h0vgnr5vf9vz.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fd7012e7.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fd7012e7.png)
 
 List of context elements to add in a chat
 
@@ -97,7 +97,7 @@ It takes a little getting used to, and you absolutely ***must*** review the gene
 **Integrating Specialized Agents and Reasoning in Agentic IDEs:** Agentic IDEs can significantly enhance code generation by employing various specialized agents, each tailored for specific tasks like API interaction, database querying, or UI component creation. Moreover, these IDEs can provide detailed reasoning behind the generated code, outlining the steps taken improving developer understanding and trust in the AI's output.
 
 In tools like *`VS Code with Github Copilot`* or *`Cursor`*, we can even tailor the behaviour of the agents when they generate code.
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fd16gjevpo423gmqu7ra7.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fd16gjevpo423gmqu7ra7.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-02027ac4.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-02027ac4.png)
 
 Here we can specify to use the latest Java 24 features, or a specific version of Quarkus, or even which front end frameworks to use, among other particularities of your code.
 
@@ -110,10 +110,10 @@ For instance, using an MCP server connected to a database tool, the assistant ca
 There are several places where we can get MCP servers for specific tasks and with a very easy installation process : <https://mcpservers.org/> , <https://mcpmarket.com/>, <https://mcp.so/> , etc.
 
 This is an example of installation of a Docker MCP server implementing the GitHub tools, that will allow our assistant to connect to our GitHub repository and get issues, branches, PRs, etc.
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ft61rxfndt7g65xyyk6ob.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ft61rxfndt7g65xyyk6ob.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c0212e7d.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c0212e7d.png)
 
 These MCP servers expose tools to be used by the agent. In this case the Github MCP Server share 36 tools :
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fj1khjqdbiw4benug1ae0.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fj1khjqdbiw4benug1ae0.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-62811c72.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-62811c72.png)
 
 Okay, so your Java code is looking good. Now, how about actually shipping it? Getting applications deployed to the cloud involves writing a *lot* of configuration – Dockerfiles to containerize your app, Kubernetes YAML for orchestration, and CI/CD pipeline definitions (`GitHub Actions`, `GitLab CI`, etc.).
 
@@ -128,7 +128,7 @@ This is another area where AI assistants can save you significant time and effor
 **Agentic MCP AI is your friend:** Getting the logs or the configuration for running apps in your cluster can be crucial to produce more aligned code. For instance, getting the CRDs in your cluster can help you create a better Kubernetes operator that reacts to changes on them.
 
 You can rely on the multiple MCP servers with your Agentic AI assistant to consider that information when you are chatting with it. [Kubernetes MCP server](https://github.com/manusa/kubernetes-mcp-server) is a clear example of this and it gives you 15 tools to interact with your K8s cluster.
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffesa1qjyfk42sibu1u7r.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffesa1qjyfk42sibu1u7r.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-89609a67.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-89609a67.jpg)
 
 VS Code with Github Copilot using Kubernetes MCP to interact with a local cluster
 
@@ -161,10 +161,10 @@ Ah, testing. We all know it's crucial for catching regressions, ensuring correct
 * **Creating Mock Objects:** Setting up mocks can be tedious. AI assistants can often generate the necessary `@Mock` annotations, injection points (`@InjectMocks`), and `when(...).thenReturn(...)` statements based on how your class interacts with its dependencies. For example: *"Generate a JUnit test for this `OrderService` method, mocking the `ProductRepository`"*
 
 Copilot chat asking it to generate the test methods
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvhr6k7k2vst9u1cxqlnm.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvhr6k7k2vst9u1cxqlnm.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-b9cfb119.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-b9cfb119.jpg)
 
 Tests generated by Copilot for this method
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffypfw3639irjd6a4ceun.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffypfw3639irjd6a4ceun.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-6d0bcc27.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-6d0bcc27.png)
 
 **⚠️ HUGE WARNING: Review Generated Tests Like Crazy! ⚠️**
 
@@ -174,7 +174,7 @@ This is possibly even more critical than reviewing generated application code: *
 
 * **AI Doesn't Understand Intent:** AI tests the code *as it's written* . It doesn't know the *business requirements* or the *intended behavior*. If your code has a bug, the AI might happily generate a test that confirms the buggy behavior!. In this case it doesn't make any sense to have a total tax of -1000 , and AI has tested that the test is really verifying what the code is doing, including the bug.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fx1b191ybskalf6niaerx.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fx1b191ybskalf6niaerx.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7fb1c1e3.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7fb1c1e3.png)
 
 * **Trivial and Meaningless Tests:** AI often generates tests for simple getters/setters or very basic logic that might not provide much value. It might miss the truly complex or critical paths.
 * **Incorrect Assertions:** The assertions generated might be wrong, incomplete, or nonsensical. Don't assume they are correct.
@@ -189,7 +189,7 @@ This is possibly even more critical than reviewing generated application code: *
 * **Don't Chase Coverage Blindly:** AI can quickly increase test coverage numbers, but coverage isn't the same as quality. A few meaningful tests are better than hundreds of trivial ones.
 * **Provide the right context:** including functional testing information, or feature requirements will help AI assistants to tailor the test to what it's supposed to be tested and not what it is written in the code. In this case we are asking to create the tests but considering the requirements specified in a github issue.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fh0r1h1w4wg7usbkpwqji.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fh0r1h1w4wg7usbkpwqji.png) [![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Flb3lnc9f7bshzjxtajpi.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Flb3lnc9f7bshzjxtajpi.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-101a6589.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-101a6589.jpg) [![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-212a920a.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-212a920a.png)
 
 **Don't Forget Static Analysis for Test Code:**
 
@@ -209,7 +209,7 @@ Alright, let's talk about pull requests (PRs) and code reviews. They're super im
 
 * **Quick Summaries:** Tools like `GitHub Copilot` can automatically generate summaries of the changes in a PR. This helps reviewers quickly grasp the purpose and scope of the changes before diving into the code details.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxwvjw8eqlk26i4lx5su6.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxwvjw8eqlk26i4lx5su6.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d2147212.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d2147212.png)
 
 They can even interact with the PR using extensions in order to provide functionalities that are out of the scope of the LLM like creating Mermaid diagrams for the classes.
 
@@ -227,7 +227,7 @@ This is crucial: **AI is a code review *assistant*, not a replacement for human 
 
 * **Context is King:** AI often lacks the deep understanding of the project's history, overall architecture, business requirements, and long-term goals that experienced human reviewers bring. Add the proper context for each prompt. You can even guide AI answers with the Personal instructions directly in the Github Pull Request page.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F24d93kyk1yodjq1jyvie.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F24d93kyk1yodjq1jyvie.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d1c4aa41.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d1c4aa41.png)
 
 * **Design \& Logic Still Need Humans:** AI is generally poor at evaluating the *appropriateness* of a design choice or the correctness of complex business logic. That requires human critical thinking.
 * **Knowledge Sharing:** Code reviews are vital for team learning and knowledge sharing – something AI assistance doesn't replace.
@@ -246,7 +246,7 @@ Where AI *can* be a valuable assistant is in helping *you*, the developer, under
 * **Learning Best Practices:** Use AI to ask questions about secure coding practices (`"What are common pitfalls with Java serialization?"`) .
 
 **⚠️ THE GIANT RED FLAG: AI IS NOT RELIABLE FOR ISSUE DETECTION ⚠️**
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F9y1fj6ey71lony7m4yg2.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F9y1fj6ey71lony7m4yg2.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d7b2bedb.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d7b2bedb.png)
 
 <https://dl.acm.org/doi/pdf/10.1145/3558489.3559072>
 
@@ -263,17 +263,17 @@ Because AI cannot be trusted for reliable issue detection, you **must** use dedi
 * **Best practices:**
   * Use tooling as soon as possible in your SDLC. Incorporate these SAST tools in the IDE to analyze the quality of your code at the same time you are introducing new changes.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F7j0nqcmad39jj7wc3umu.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F7j0nqcmad39jj7wc3umu.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-59e9523f.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-59e9523f.png)
 
 SonarQube IDE view with an issue and its explanation
 
 * Connect your CI/CD pipeline with a Quality Gate tool in order to ensure no bad code is going to be merged to your main branch.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fhvfup7i13i8gfv4jxz0t.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fhvfup7i13i8gfv4jxz0t.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-08df74d7.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-08df74d7.png)
 
 * Use Quality Gate messages in your Pull Requests through PR decoration.
 
-[![Image description](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F6tlhpzwolf8lmsa54n40.png)](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F6tlhpzwolf8lmsa54n40.png)
+[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c340a674.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c340a674.png)
 
 **Essential Supporting Pillars: Testing and Reviews using Human skills**
 

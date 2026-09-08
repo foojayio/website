@@ -5,7 +5,7 @@ lastmod: "2021-03-05T08:21:13+00:00"
 description: "Drawing on the Canvas node will directly go down to the graphics hardware, making it really fast. Of course, this also comes with drawbacks!"
 authors:
   - "gerrit-grunwald"
-image: "Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.png"
+image: "Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.jpg"
 categories:
   - "JavaFX"
 related_posts:
@@ -42,13 +42,13 @@ So, you should only use the Canvas node for controls if the control is so comple
 
 The control we are building today does not necessarily make sense but clearly shows what I've tried to explain above. It will be a simple button that should look similar to the aqua style buttons that we saw in older Mac OS X versions. And as always... first we create a graphical prototype in a vector drawing program. Here is my prototype:
 
-![](Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.png)
+![](Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.jpg)
 
 The control is made out of several shapes, the main shape is a rounded rectangle, in the center there is another rounded rectangle which will be filled with a radial gradient just for the lighter color in the bottom center. On top you will see the other shape that will give us the reflection. And finally in the center there is the text itself.
 
 Because some of these shapes are hard to identify on the above screenshot I've created a version that shows the shapes withouth effects but only filled with a color and with this it's more clear what I'm talking about:
 
-![](Affinity-Designer-AquaButton-Modified-200.0-2021-02-04-10-53-40-680x510.png)
+![](Affinity-Designer-AquaButton-Modified-200.0-2021-02-04-10-53-40-680x510.jpg)
 
 These are the exact same shapes just without making use of gradients and transparency. The idea is to draw these shapes in a Canvas node and fill them with the appropriate gradients and apply effects like drop shadows, inner shadows etc.
 
@@ -246,7 +246,7 @@ Now we only have to make sure that the clipping rectangle always has the exact s
 
 With such a clipping shape in place it would like like this:
 
-![](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-54-29-647x510.png)
+![](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-54-29-647x510.jpg)
 
 Here you see that the particles will be clipped at the border of the rounded rectangle.
 

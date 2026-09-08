@@ -44,7 +44,7 @@ The program was split more or less into sections, the initial topics focusing mo
 
 There were also stickers, which hundreds must have received, they were going around the room, and there were none left by the end of it, designed by Gerrit Grunwald...
 
-{{< img src="image-2-870x1024.png" class="size-large is-resized" width="277" height="325" >}}
+{{< img src="image-2-870x1024.jpg" class="size-large is-resized" width="277" height="325" >}}
 
 ...and maybe next time there should be hats and t-shirts too!
 

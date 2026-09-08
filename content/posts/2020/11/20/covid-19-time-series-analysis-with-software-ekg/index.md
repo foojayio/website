@@ -5,7 +5,7 @@ lastmod: "2020-11-20T10:55:47+00:00"
 description: "Our goal is to provide you with raw data on COVID-19, with a tool that lets you analyze, visualize, and interpret the impact of the pandemic."
 authors:
   - "johannes-weigend"
-image: "software-ekg-covid-01-1024x555.png"
+image: "software-ekg-covid-01-1024x555.jpg"
 categories:
   - "JavaFX"
   - "Release Notes"
@@ -16,7 +16,7 @@ frozen: false
 Software-EKG is a powerful tool for time series analysis developed by [QAware Software Engineering](http://www.qaware.de/)*.* Using a highly efficient search index and optimized algorithms, the tool enables you to both visualize and analyze time series containing billions of values.
 
 Our special COVID-19 Edition provides you with the latest data on COVID-19 from all countries worldwide. Not only can you get a detailed overview of the Coronavirus pandemic in a single country, it is also possible to compare different countries with each other using a plethora of metrics like positive test rate, population density or even hospital beds available.
-![](software-ekg-covid-01-1024x555.png)
+![](software-ekg-covid-01-1024x555.jpg)
 
 The software was developed with Java 11 and JavaFX. The window management is based on Stagediver.fx, the framework that emulates basic parts of the NetBeans Platform for JavaFX.
 

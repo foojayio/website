@@ -27,7 +27,7 @@ Here, I'd like to focus on improvements in Java garbage collection that Cassandr
 
 In 2012, I gave a talk titled, "Dealing with JVM Limitations in Apache Cassandra." Here is the first slide from that presentation:
 
-{{< img src="paintpointsforjavadatabases.png" class="size-full is-resized" width="734" >}}
+{{< img src="paintpointsforjavadatabases.jpg" class="size-full is-resized" width="734" >}}
 
 On the one hand, garbage collection is a primary reason that Java is so much more productive than traditional systems languages like C++. As JVM architect Cliff Click once wrote, "Many concurrent algorithms are very easy to write with a GC and totally hard to downright impossible using explicit free." Cassandra takes full advantage of this power.
 

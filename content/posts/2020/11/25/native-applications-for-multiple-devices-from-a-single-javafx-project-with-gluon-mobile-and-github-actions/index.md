@@ -41,11 +41,11 @@ resistorcalculator-maven.png
 Based on a "Gluon Mobile Multiview" project, it was only a matter of hours to create a working application with two calculation views and one "About" view. Many thanks to [José Pereda](https://twitter.com/JPeredaDnr) of Gluon who was so kind to improve my ugly proof-of-concept to a much better-looking layout with some clever tweaks and CSS improvements.
 
 {{< gallery cols="6" >}}
-app-about.png
+app-about.jpg
 app-colors.png
 app-led.png
 app-menu.png
-github-project-1-1024x672.png
+github-project-1-1024x672.jpg
 intellij-app.png
 {{< /gallery >}}
 
@@ -196,8 +196,8 @@ And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copi
 When I started working on this post and project, I just wanted to reach successful native builds for all platforms. But then Gluon stepped in and pushed this a lot further and guess what? This application is now on both "[Google Play](https://play.google.com/store/apps/details?id=be.webtechie.resistorcalculatorapp)" and the "[Apple App Store](https://apps.apple.com/us/app/gluon-resistor-calculator/id1540638756)" thanks to the work of [Erwin Morrhey](https://twitter.com/erwin1).
 
 {{< gallery cols="3" caption="The app in the stores and a QR code to install on your phone" >}}
-apple-app-store.png
-google-play-1024x849.png
+apple-app-store.jpg
+google-play-1024x849.jpg
 onlink_to_resistorcalc_small.png
 {{< /gallery >}}
 
@@ -212,7 +212,7 @@ Action file: [maven-ios.yml](https://github.com/FDelporte/ResistorCalculatorApp/
 Additional settings are required which you can hide from your script by defining them in the secrets-section of your GitHub project, just like we already did with the Gluon license key.
 
 {{< gallery cols="2" >}}
-ios-setting-new-secret-1024x410.png
+ios-setting-new-secret-1024x410.jpg
 ios-succeeded.png
 {{< /gallery >}}
 

@@ -5,7 +5,7 @@ lastmod: "2023-05-04T11:45:22+00:00"
 description: "AP-Loader wraps async-profiler and its tools with an API in a cross-platform JAR. This article is about the API."
 authors:
   - "johannes-bechberger"
-image: "Untitled2.png"
+image: "Untitled2.jpg"
 categories:
   - "Performance"
   - "Tools"
@@ -22,7 +22,7 @@ Using [async-profiler](https://github.com/jvm-profiling-tools/async-profilerhttp
 It gets worse if you want to embed it into your library, agent, or application. Library developers cannot just use maven dependency but have to create wrapper code and build scripts that deal with packaging the binaries themselves, or worse, they depend on a preinstalled version which they do not control.
 
 In November 2022, I started the ap-loader project to remedy this situation: I wrapped async-profiler and jattach in a platform-independent JAR which can be pulled from maven central. I already wrote an article on its essential features: [AP-Loader: A new way to use and embed async-profiler](https://mostlynerdless.de/blog/2022/11/21/ap-loader-a-new-way-to-use-and-embed-async-profiler/).
-![Flamegraph for a recording of profiling data for the dacapo benchmark suite](https://mostlynerdless.de/wp-content/uploads/2022/11/Untitled2.png)
+![Flamegraph for a recording of profiling data for the dacapo benchmark suite](Untitled2.jpg)
 
 In this article, I'm focusing on its programmatic usage: Async-profiler can be used in a library to gather profiling data of the current or a different process, but the profiler distribution contains more: It contains converters to convert from JFR to flamegraphs, and [jattach](https://github.com/jattach/jattach) to attach a native agent dynamically to (potentially the current) JVM and send commands to it.
 

@@ -94,24 +94,24 @@ Here is a summary of those commands: <https://gist.github.com/yrashish/0fb966ef0
 
 JDK Mission Control aka JMC is a GUI tool for examining the recording created by JFR. Not just that with JMC you can start recording events of a running java process. As shown in the following screenshot from the left-hand side navigation bar in JMC first you have to choose a running java process. Then right-click and choose **Start Flight Recording**.
 
-![Start Flight Recording](https://cdn-images-1.medium.com/max/2000/1*bU9AqwnDP7rv8Rvi_3Dh8w.png)  
+![Start Flight Recording](1-bU9AqwnDP7rv8Rvi_3Dh8w-204b2f8b.png)  
 *Start Flight Recording*
 
 In the next window, you can go with default options or tweak them as per your needs. Then click on **Finish** to start the recording of events for the Spring Boot application.
 
-![](https://cdn-images-1.medium.com/max/2000/1*ch1rdvwiz4slOBij7uuLnQ.png)
+![](1-ch1rdvwiz4slOBij7uuLnQ-7f6b6fe5.png)
 
 Once the recording is finished automated analysis results are shown.
 
-![Automated Analysis Results](https://cdn-images-1.medium.com/max/2880/1*COJ7cW5Hs9S0AbJv48FNiw.png)  
+![Automated Analysis Results](1-COJ7cW5Hs9S0AbJv48FNiw-29994fae.jpg)  
 *Automated Analysis Results*
 
 As shown in the following screenshots you can also view Java application Threads, Heap, and CPU-related details. Moreover, you can also view JVM Internals and Environment related details.
 
-![Options to view results by different categories](https://cdn-images-1.medium.com/max/2000/1*JjPtgol4Q0STKymKJdoTRg.png)  
+![Options to view results by different categories](1-JjPtgol4Q0STKymKJdoTRg-3023c0ab.png)  
 *Options to view results by different categories*
 
-![Java Application Thread, CPU and Heap Usage](https://cdn-images-1.medium.com/max/2880/1*RmDxQ1MX-_b-sO6z9SFjhw.png)  
+![Java Application Thread, CPU and Heap Usage](1-RmDxQ1MX-_b-sO6z9SFjhw-cf86186d.jpg)  
 *Java Application Thread, CPU and Heap Usage*
 
 That's it we are done.

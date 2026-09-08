@@ -250,7 +250,7 @@ $ sudo java --module-path /home/pi/armv6hf-sdk/lib
 ```
 
 And there we have it! JavaFX running on an ARMv6 Raspberry Pi B+ 1.2!!!
-![](javafx-on-armv6-raspberrypi-1024x422.png)
+![](javafx-on-armv6-raspberrypi-1024x422.jpg)
 
 ## Conclusion
 

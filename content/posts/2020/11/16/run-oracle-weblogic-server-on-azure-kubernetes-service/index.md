@@ -5,7 +5,7 @@ lastmod: "2021-07-05T20:06:45+00:00"
 description: "We are delighted to announce the initial release of solutions to run Oracle WebLogic Server on the Azure Kubernetes Service."
 authors:
   - "m-reza-rahman"
-image: "weblogic-architecture-aks.png"
+image: "weblogic-architecture-aks.jpg"
 categories:
   - "Kubernetes"
   - "Release Notes"
@@ -27,7 +27,7 @@ The WLS on AKS solutions allow a high degree of configuration and customization.
 ![wls-on-aks-short.gif](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/231206i54179B2C8A13F19B/image-size/large?v=1.0&px=999 "wls-on-aks-short.gif")
 
 The solutions enable a wide range of production-ready deployment architectures with relative ease, and you have complete flexibility to customize your deployments. After deploying your applications, you can take advantage of a range of Azure resources for additional functionality.
-![weblogic-architecture-aks.png](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/231200i8605B915905C4CBF/image-size/large?v=1.0&px=999 "weblogic-architecture-aks.png")
+![weblogic-architecture-aks.jpg](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/231200i8605B915905C4CBF/image-size/large?v=1.0&px=999 "weblogic-architecture-aks.jpg")
 
 The solutions currently assume deploying the domain outside the Docker image and using the standard Docker images from Oracle; we will enable custom images with your domain inside a Docker image in the next few months. Further ease-of-use and Azure service integrations will be possible next year via Marketplace offerings mirroring the WLS on Azure Virtual Machines solutions.
 

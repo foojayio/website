@@ -1,0 +1,459 @@
+<svg viewBox="0 0 1400 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="gitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F05032;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c9372d;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="ciGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2088FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0969da;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="buildGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9945FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7928CA;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="awsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9900;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec7211;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="gcpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a73e8;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="azureGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#005a9e;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="aliGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6A00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc5500;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="ociGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F80000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c60000;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="doGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0080FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066cc;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="hetznerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D50C2D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#aa0a24;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="ibmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#054ADA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#043bae;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="scalewayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F0599;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3f047a;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="upcloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B00FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6200cc;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="vultrGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007BFC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0062ca;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#555" />
+    </marker>
+    
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="1200" fill="#0d1117"/>
+  
+  <!-- Title -->
+  <text x="700" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    GitOps Nanos Unikernel → Multi-Cloud Deployment Pipeline
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="700" y="70" font-family="Arial, sans-serif" font-size="14" fill="#8b949e" text-anchor="middle">
+    Build once • Deploy everywhere • Immutable • Secure by design
+  </text>
+  
+  <!-- ======================== GIT SOURCE ======================== -->
+  <g id="git-source">
+    <rect x="50" y="120" width="180" height="120" rx="10" fill="url(#gitGradient)" opacity="0.9"/>
+    <!-- Git Icon -->
+    <path d="M 130,145 L 150,145 L 150,165 L 130,165 Z M 135,150 L 145,150 M 140,145 L 140,165" 
+          stroke="#ffffff" stroke-width="2" fill="none"/>
+    <text x="140" y="185" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Git Repository
+    </text>
+    <text x="140" y="205" font-family="monospace" font-size="10" fill="#ffffff" text-anchor="middle">
+      config.json
+    </text>
+    <text x="140" y="220" font-family="monospace" font-size="10" fill="#ffffff" text-anchor="middle">
+      workflow.yml
+    </text>
+  </g>
+  
+  <!-- Arrow Git → CI -->
+  <line x1="230" y1="180" x2="320" y2="180" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="275" y="170" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">push</text>
+  
+  <!-- ======================== CI/CD ======================== -->
+  <g id="github-actions">
+    <rect x="320" y="120" width="200" height="120" rx="10" fill="url(#ciGradient)" opacity="0.9"/>
+    <!-- GitHub Actions Icon -->
+    <circle cx="420" cy="155" r="15" fill="#ffffff"/>
+    <text x="420" y="190" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      GitHub Actions
+    </text>
+    <text x="420" y="210" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">
+      QEMU • ops CLI
+    </text>
+    <text x="420" y="225" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">
+      Download App Server
+    </text>
+  </g>
+  
+  <!-- Arrow CI → Build -->
+  <line x1="520" y1="180" x2="610" y2="180" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- ======================== BUILD ======================== -->
+  <g id="build-unikernel">
+    <rect x="610" y="100" width="220" height="160" rx="10" fill="url(#buildGradient)" opacity="0.9" filter="url(#glow)"/>
+    <text x="720" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      🧱 Build Unikernel
+    </text>
+    <text x="720" y="155" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      ☕ Java Runtime
+    </text>
+    <text x="720" y="175" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      📦 App Server
+    </text>
+    <text x="720" y="195" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      🔐 Minimal filesystem
+    </text>
+    <text x="720" y="215" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      🚀 ops image create
+    </text>
+    <text x="720" y="240" font-family="monospace" font-size="11" fill="#ffeb3b" text-anchor="middle">
+      → image.img
+    </text>
+  </g>
+  
+  <!-- ======================== ARTIFACT STORAGE ======================== -->
+  <g id="artifact">
+    <rect x="610" y="300" width="220" height="80" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="720" y="330" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#58a6ff" text-anchor="middle">
+      📦 GitHub Artifact
+    </text>
+    <text x="720" y="355" font-family="monospace" font-size="11" fill="#8b949e" text-anchor="middle">
+      payara-azul.img
+    </text>
+  </g>
+  
+  <!-- Arrow Build → Artifact -->
+  <line x1="720" y1="260" x2="720" y2="300" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- ======================== DEPLOYMENT HUB ======================== -->
+  <g id="deploy-hub">
+    <rect x="620" y="420" width="200" height="80" rx="10" fill="#21262d" stroke="#30363d" stroke-width="2"/>
+    <text x="720" y="450" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      🚀 Deploy Stage
+    </text>
+    <text x="720" y="475" font-family="Arial, sans-serif" font-size="12" fill="#8b949e" text-anchor="middle">
+      Convert e Upload
+    </text>
+  </g>
+  
+  <!-- Arrow Artifact → Deploy Hub -->
+  <line x1="720" y1="380" x2="720" y2="420" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- ======================== CLOUD PROVIDERS - ROW 1 ======================== -->
+  
+  <!-- AWS EC2 -->
+  <g id="aws">
+    <rect x="50" y="580" width="180" height="110" rx="8" fill="url(#awsGradient)" opacity="0.9"/>
+    <!-- AWS Icon - Cube -->
+    <rect x="130" y="595" width="20" height="20" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <path d="M 130,595 L 140,587 L 160,587 L 150,595" fill="#ffffff" opacity="0.5"/>
+    <path d="M 150,595 L 160,587 L 160,607 L 150,615" fill="#ffffff" opacity="0.3"/>
+    <text x="140" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      AWS EC2
+    </text>
+    <text x="140" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      AMI • S3
+    </text>
+    <text x="140" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Launch instance
+    </text>
+  </g>
+  
+  <!-- GCP Compute -->
+  <g id="gcp">
+    <rect x="260" y="580" width="180" height="110" rx="8" fill="url(#gcpGradient)" opacity="0.9"/>
+    <!-- GCP Icon - Hexagon -->
+    <path d="M 340,605 L 350,600 L 360,605 L 360,615 L 350,620 L 340,615 Z" 
+          fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="350" cy="610" r="3" fill="#ffffff"/>
+    <text x="350" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      GCP Compute
+    </text>
+    <text x="350" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      GCE • GCS
+    </text>
+    <text x="350" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Deploy VM
+    </text>
+  </g>
+  
+  <!-- Azure VM -->
+  <g id="azure">
+    <rect x="470" y="580" width="180" height="110" rx="8" fill="url(#azureGradient)" opacity="0.9"/>
+    <!-- Azure Icon - Window panes -->
+    <rect x="550" y="597" width="10" height="10" fill="#ffffff"/>
+    <rect x="550" y="609" width="10" height="10" fill="#ffffff"/>
+    <rect x="562" y="597" width="10" height="10" fill="#ffffff"/>
+    <rect x="562" y="609" width="10" height="10" fill="#ffffff"/>
+    <text x="560" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Azure VM
+    </text>
+    <text x="560" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      VHD • Blob
+    </text>
+    <text x="560" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Create VM
+    </text>
+  </g>
+  
+  <!-- Alibaba Cloud -->
+  <g id="alibaba">
+    <rect x="680" y="580" width="180" height="110" rx="8" fill="url(#aliGradient)" opacity="0.9"/>
+    <!-- Alibaba Icon - Smile -->
+    <circle cx="770" cy="610" r="12" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="765" cy="607" r="2" fill="#ffffff"/>
+    <circle cx="775" cy="607" r="2" fill="#ffffff"/>
+    <path d="M 763,613 Q 770,617 777,613" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <text x="770" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Alibaba ECS
+    </text>
+    <text x="770" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Image • OSS
+    </text>
+    <text x="770" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Launch ECS
+    </text>
+  </g>
+  
+  <!-- Oracle Cloud -->
+  <g id="oracle">
+    <rect x="890" y="580" width="180" height="110" rx="8" fill="url(#ociGradient)" opacity="0.9"/>
+    <!-- Oracle Icon - Database cylinders -->
+    <ellipse cx="980" cy="600" rx="12" ry="4" fill="#ffffff"/>
+    <rect x="968" y="600" width="24" height="8" fill="#ffffff"/>
+    <ellipse cx="980" cy="608" rx="12" ry="4" fill="#ffffff"/>
+    <rect x="968" y="608" width="24" height="8" fill="#ffffff"/>
+    <ellipse cx="980" cy="616" rx="12" ry="4" fill="#ffffff"/>
+    <text x="980" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Oracle Cloud
+    </text>
+    <text x="980" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      OCI Image
+    </text>
+    <text x="980" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Compute
+    </text>
+  </g>
+  
+  <!-- Digital Ocean -->
+  <g id="digitalocean">
+    <rect x="1100" y="580" width="180" height="110" rx="8" fill="url(#doGradient)" opacity="0.9"/>
+    <!-- DigitalOcean Icon - Shark fin -->
+    <path d="M 1180,600 L 1190,615 L 1200,600 L 1195,605 L 1190,600 L 1185,605 Z" 
+          fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="1190" cy="610" r="6" fill="#ffffff"/>
+    <text x="1190" y="630" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      DigitalOcean
+    </text>
+    <text x="1190" y="650" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Custom • Spaces
+    </text>
+    <text x="1190" y="670" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Droplet
+    </text>
+  </g>
+  
+  <!-- ======================== CLOUD PROVIDERS - ROW 2 ======================== -->
+  
+  <!-- Hetzner -->
+  <g id="hetzner">
+    <rect x="155" y="720" width="180" height="110" rx="8" fill="url(#hetznerGradient)" opacity="0.9"/>
+    <!-- Hetzner Icon - H letter styled -->
+    <text x="245" y="750" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      H
+    </text>
+    <text x="245" y="770" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Hetzner Cloud
+    </text>
+    <text x="245" y="790" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Snapshot
+    </text>
+    <text x="245" y="810" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Create server
+    </text>
+  </g>
+  
+  <!-- IBM Cloud -->
+  <g id="ibm">
+    <rect x="365" y="720" width="180" height="110" rx="8" fill="url(#ibmGradient)" opacity="0.9"/>
+    <!-- IBM Icon - Stripes -->
+    <rect x="445" y="735" width="20" height="3" fill="#ffffff"/>
+    <rect x="445" y="741" width="20" height="3" fill="#ffffff"/>
+    <rect x="445" y="747" width="20" height="3" fill="#ffffff"/>
+    <text x="455" y="770" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      IBM Cloud
+    </text>
+    <text x="455" y="790" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      VPC Image
+    </text>
+    <text x="455" y="810" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Virtual Server
+    </text>
+  </g>
+  
+  <!-- Scaleway -->
+  <g id="scaleway">
+    <rect x="575" y="720" width="180" height="110" rx="8" fill="url(#scalewayGradient)" opacity="0.9"/>
+    <!-- Scaleway Icon - Triangles -->
+    <path d="M 655,735 L 665,750 L 645,750 Z" fill="#ffffff"/>
+    <path d="M 670,735 L 680,750 L 660,750 Z" fill="#ffffff" opacity="0.7"/>
+    <text x="665" y="770" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Scaleway
+    </text>
+    <text x="665" y="790" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Instance Image
+    </text>
+    <text x="665" y="810" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Deploy
+    </text>
+  </g>
+  
+  <!-- UpCloud -->
+  <g id="upcloud">
+    <rect x="785" y="720" width="180" height="110" rx="8" fill="url(#upcloudGradient)" opacity="0.9"/>
+    <!-- UpCloud Icon - Arrow up with cloud -->
+    <path d="M 875,748 L 875,735 M 870,740 L 875,735 L 880,740" stroke="#ffffff" stroke-width="2" fill="none"/>
+    <ellipse cx="875" cy="748" rx="8" ry="4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="875" y="770" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      UpCloud
+    </text>
+    <text x="875" y="790" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Template
+    </text>
+    <text x="875" y="810" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Launch Server
+    </text>
+  </g>
+  
+  <!-- Vultr -->
+  <g id="vultr">
+    <rect x="995" y="720" width="180" height="110" rx="8" fill="url(#vultrGradient)" opacity="0.9"/>
+    <!-- Vultr Icon - Lightning bolt -->
+    <path d="M 1090,735 L 1085,745 L 1088,745 L 1083,755 L 1092,745 L 1089,745 Z" 
+          fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
+    <text x="1085" y="770" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">
+      Vultr
+    </text>
+    <text x="1085" y="790" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      ISO/Snapshot
+    </text>
+    <text x="1085" y="810" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">
+      Deploy Instance
+    </text>
+  </g>
+  
+  <!-- Arrows from Deploy Hub to Cloud Providers - Row 1 -->
+  <line x1="650" y1="500" x2="140" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="680" y1="500" x2="350" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="500" x2="560" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="720" y1="500" x2="770" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="750" y1="500" x2="980" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="780" y1="500" x2="1190" y2="580" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrows from Deploy Hub to Cloud Providers - Row 2 -->
+  <line x1="660" y1="500" x2="245" y2="720" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="690" y1="500" x2="455" y2="720" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="720" y1="500" x2="665" y2="720" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="740" y1="500" x2="875" y2="720" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="760" y1="500" x2="1085" y2="720" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- ======================== BENEFITS BOX ======================== -->
+  <g id="benefits">
+    <rect x="50" y="880" width="1300" height="150" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="700" y="910" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#58a6ff" text-anchor="middle">
+      ✨ Key Benefits
+    </text>
+    
+    <text x="200" y="945" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">
+      ⚡ Fast boot times
+    </text>
+    <text x="200" y="965" font-family="Arial, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+      &lt; 100ms startup
+    </text>
+    
+    <text x="450" y="945" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">
+      🔒 Minimal attack surface
+    </text>
+    <text x="450" y="965" font-family="Arial, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+      No shell, no SSH
+    </text>
+    
+    <text x="700" y="945" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">
+      📦 Immutable deployment
+    </text>
+    <text x="700" y="965" font-family="Arial, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+      Git = source of truth
+    </text>
+    
+    <text x="950" y="945" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">
+      ☁️ Cloud agnostic
+    </text>
+    <text x="950" y="965" font-family="Arial, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+      11 providers supported
+    </text>
+    
+    <text x="1200" y="945" font-family="Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">
+      🎯 Simple rollback
+    </text>
+    <text x="1200" y="965" font-family="Arial, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+      Boot previous image
+    </text>
+    
+    <text x="700" y="1000" font-family="Arial, sans-serif" font-size="12" fill="#8b949e" text-anchor="middle" font-style="italic">
+      🧠 One image • 11 clouds • Zero containers • Pure hypervisor power
+    </text>
+  </g>
+  
+  <!-- Footer -->
+</svg>

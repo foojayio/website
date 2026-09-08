@@ -26,7 +26,7 @@ Fun fact - Records was voted the most popular Java 16 language feature by 1158 d
 
 In this blog post, I will limit coverage of Java 16 to its language features, why you need them, and how you can start using them in [IntelliJ IDEA](https://www.jetbrains.com/idea/nextversion/). You can use [this link](https://openjdk.java.net/projects/jdk/16/) for a comprehensive list of the new Java 16 features. Let's get started.
 
-![Java 16 and IntelliJ IDEA](https://blog.jetbrains.com/wp-content/uploads/2021/03/Java16_blog.png)  
+![Java 16 and IntelliJ IDEA](Java16_blog-e688b224.jpg)  
 
 Records introduce a new type declaration that simplifies the task of modeling your immutable data. Though it helps cut down on boilerplate code significantly, that isn't the primary reason for its introduction. Here's an example:
 
@@ -36,7 +36,7 @@ record Person(String name, int age) {}
 
 With just one line of code, the preceding example defines a record `Person` with two components `name` and `age`. To create a record using IntelliJ IDEA 2021.1, select Record in the New Java Class dialog box. Fill in the name and you are good to go.
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-6-cover.png)
+![](java16-6-cover-a755f786.png)
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
@@ -44,7 +44,7 @@ Let's quickly check the configuration of IntelliJ IDEA on your system to ensure 
 
 Java 16 features are supported in IntelliJ IDEA 2021.1, which is scheduled to be released this March. The early access versions of 2021.1 are already available. You can configure it to use Java 16 by selecting 16 as the Project SDK and choosing *16 (Preview) – Sealed types* in the Project language level for your Project and Modules settings.
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-config.png)
+![](java16-config-6966cd25.png)
 
 You can also download Java 16 directly from IntelliJ IDEA. To do so, go to *Platform Settings* and click on *SDKs* , then click the '+' sign at the top, choose *Download JDK*, then select the Vendor and version and the directory to download the JDK to.
 
@@ -64,11 +64,11 @@ Imagine you want to persist the details of, say, a person to a file. Before the 
 
 The following gif demonstrates how you can declare class `Person` as a regular class, generate code for it, implement the interface `Serializable` and run it to verify you can write it to a file and read from it:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-7-cover.png)
+![](java16-7-cover-1bd7ce60.png)
 
 Now, let's declare `Person` as a record using just one line of code with components `name` (String) and `age` (int). It implements the interface `Serializable` since we need to persist its instances to a file. Note that you can still use the same methods to persist it to a text file. Also, there are no changes in how you instantiate it (by using the new operator):
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-15-cover.png)
+![](java16-15-cover-839c0edc.png)
 
 Record `Person` is just one example on how you can use Records. You can use records to model your data, without additional overhead of defining additional methods.
 
@@ -96,13 +96,13 @@ IntelliJ IDEA lets you insert a compact, canonical, or custom constructor in a r
 
 Let's see how you can insert a compact constructor using the Alt+Insert shortcut in IntelliJ IDEA, and add validation code to it:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-8-cover.png)
+![](java16-8-cover-321c0775.png)
 
 You can also add a canonical constructor to a record. This defines a parameter list – which must have the same names and order as those of the components of a record. A mismatch would result in a compilation error.
 
 By invoking context actions in IntelliJ IDEA (with Alt+Enter), you can easily convert a canonical constructor to a compact constructor:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-9-cover.png)
+![](java16-9-cover-7cbc6705.png)
 
 ## Truly immutable data
 
@@ -205,19 +205,19 @@ new Table(), 200, 100, 55, 136.88);
 
 If you are working with records but need to transition it to the codebase of an older Java version that doesn't support records, you can quickly convert a record to a regular class by using the context action Convert record to class or vice-versa by using the context action Convert to a record:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-10-cover.png)
+![](java16-10-cover-138300c9.png)
 
 ## Records as components of record
 
 A record component can be another record. In the following example, record `Automobile` defines one of its components as `Engine`, another record:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-11-cover.png)
+![](java16-11-cover-8dcfd7ed.png)
 
 ## Adding annotations to record components
 
 You can add an appropriate annotation to the components of a record, say, `@NotNull`, as demonstrated in the following gif:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-12-cover.png)
+![](java16-12-cover-60723fae.png)
 
 Developers often use third-party libraries like Jackson to persist value objects. Jackson supports records too. However, depending on the Jackson library version you are using (say, 2.11.3), you might need to annotate the components of your records using the annotation `@JsonProperty`, as follows:
 
@@ -337,7 +337,7 @@ public class ReadWriteObj {
 
 You can refactor a Record and modify the order of its components or types, modify their names, and add new or remove existing ones. IntelliJ IDEA has simplified how you apply Rename or Change Signature Refactorings. The changes would reflect in a record's canonical constructor and its instance creation:
 
-![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-13-cover.png)
+![](java16-13-cover-d127d075.png)
 
 ## A restricted identifier
 

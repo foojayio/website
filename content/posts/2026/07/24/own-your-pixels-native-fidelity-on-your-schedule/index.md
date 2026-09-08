@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Own Your Pixels: Native Fidelity on Your Schedule](https://www.codenameone.com/blog/pixel-perfect-is-a-test.jpg)
+![Own Your Pixels: Native Fidelity on Your Schedule](pixel-perfect-is-a-test.jpg)
 
 An iOS or Android update can change a screen you shipped without you changing a line of code. If your app builds its UI from UIKit, SwiftUI, Compose, or Material widgets, Apple or Google owns those widget implementations. Codename One does something different. It statically links our lightweight component implementation into your native app. The UI you test is the UI your users keep after the next OS update. An update can still break a platform API or permission contract, but it cannot swap our button implementation for a new one.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -37,11 +37,11 @@ We introduced the [iOS Modern and Android Material 3 themes](https://www.codenam
 
 This is the Android floating action button before and after the fidelity pass. The older render is on the left. The current Material 3 render is on the right.
 
-![Android Material 3 floating action button before and after the fidelity pass](https://www.codenameone.com/blog/pixel-perfect-is-a-test/android-fab-before-after.jpg)
+![Android Material 3 floating action button before and after the fidelity pass](android-fab-before-after-76f98939.jpg)
 
 The iOS theme changed just as visibly. Buttons became full capsules, state glyphs moved to SF Symbols, and the sizes and spacing moved toward the iOS 26 references. The May render is on the left and the current render is on the right.
 
-![iOS Modern light theme before and after the fidelity pass](https://www.codenameone.com/blog/pixel-perfect-is-a-test/ios-showcase-before-after.jpg)
+![iOS Modern light theme before and after the fidelity pass](ios-showcase-before-after-d142855c.jpg)
 
 Why is the floating action button still circular on iOS? iOS has no native floating action button equivalent. Importing Material's rounded rectangle into the iOS theme would make it less native, not more. Android follows Material 3. iOS keeps the established circular accent action until there is an iOS component we can target.
 
@@ -64,7 +64,7 @@ scripts/fidelity-app/goldens/
 
 CI never invents the native side. It renders the Codename One component under the matching theme, compares it with the committed native image, and reports both visual and geometric differences. A one-way gate fails if a score drops below its recorded baseline.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJVSUtpdCByZWZlcmVuY2UgYXBwPGJyLz5pT1MgMjYgc2ltdWxhdG9yIl0gLS0-IEJbIlZlcnNpb25lZCBuYXRpdmUgZ29sZGVucyJdCiAgICBDWyJNYXRlcmlhbCByZWZlcmVuY2UgYXBwPGJyLz5BUEkgMzYgZW11bGF0b3IiXSAtLT4gQgogICAgRFsiQ29kZW5hbWUgT25lIGZpZGVsaXR5IGFwcDxici8-cmVuZGVyZWQgaW4gQ0kiXSAtLT4gRVsiUGl4ZWwgY29tcGFyaXNvbiJdCiAgICBCIC0tPiBFCiAgICBFIC0tPiBGWyJWaXN1YWwgc2NvcmUiXQogICAgRSAtLT4gR1siR2VvbWV0cnkgbWV0cmljcyJdCiAgICBFIC0tPiBIWyJGaXhlZCBhbmltYXRpb24gZnJhbWVzIl0KICAgIEYgLS0-IElbIk9uZS13YXkgYmFzZWxpbmUgZ2F0ZSJdCiAgICBHIC0tPiBJCiAgICBIIC0tPiBJ?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IExSCiAgICBBWyJVSUtpdCByZWZl-e897f042.png)
 
 The iOS golden set is pinned to iOS 26. The Android set is pinned to Material 3 on API 36 at 160dpi. When iOS 27 arrives, we will capture a new `ios-27` set, add a theme variant and a CI matrix row, then test both generations until we deliberately retire the older one. We will not silently replace the iOS 26 answer sheet and call the movement an improvement.
 
@@ -80,11 +80,11 @@ We changed the suite in response. It now reports bounding-box offsets, width and
 
 Here are four current iOS pairs from the automated report. Native is on the left. Codename One is on the right, separated by the thin vertical line. The dark picker makes the limitation obvious: the selected row is close, but the off-row contrast still needs work.
 
-![Native iOS controls beside Codename One iOS Modern controls](https://www.codenameone.com/blog/pixel-perfect-is-a-test/ios-native-vs-cn1.jpg)
+![Native iOS controls beside Codename One iOS Modern controls](ios-native-vs-cn1-fa46af54.jpg)
 
 The Android report uses the same layout and divider. The floating action button now has Material 3 geometry, while the tab typography and outlined button still show smaller differences that the baseline tracks.
 
-![Native Material 3 controls beside Codename One Android Material controls](https://www.codenameone.com/blog/pixel-perfect-is-a-test/android-native-vs-cn1.jpg)
+![Native Material 3 controls beside Codename One Android Material controls](android-native-vs-cn1-fae81fe5.jpg)
 
 The suite deliberately stops at the component boundary. Screen spacing, hierarchy, and composition are application design decisions whether you use SwiftUI, Compose, or Codename One. The themes should provide sensible defaults that work across devices. The final layout still belongs to the developer building the product.
 
@@ -94,11 +94,11 @@ The iOS 26 tab selection is not a tinted pill sliding under icons. During a touc
 
 This animation compares the native references with Codename One. The top row is light appearance and the bottom row is dark. Native is on the left. Codename One is on the right.
 
-![Native and Codename One iOS 26 tab lens animations in light and dark appearance](https://www.codenameone.com/blog/pixel-perfect-is-a-test/tab-morph-native-vs-cn1.gif)
+![Native and Codename One iOS 26 tab lens animations in light and dark appearance](tab-morph-native-vs-cn1-2a1e9218.webp)
 
 The static comparison below freezes the useful stages so you can inspect the geometry.
 
-![Fixed stages of the iOS 26 native and Codename One tab selection morph](https://www.codenameone.com/blog/pixel-perfect-is-a-test/tab-morph-fidelity.png)
+![Fixed stages of the iOS 26 native and Codename One tab selection morph](tab-morph-fidelity-42bc8afc.jpg)
 
 The first native recording sent us in the wrong direction. We changed `selectedIndex` automatically and captured a flat platter sliding across the bar. That is what UIKit shows for a programmatic selection. The full Liquid Glass lens only appears after a real touch. We eventually caught the difference and built a small XCUITest driver that taps the actual tab bar while the simulator records it. The animation above comes from that touch-driven reference.
 

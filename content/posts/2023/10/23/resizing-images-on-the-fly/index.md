@@ -155,7 +155,7 @@ services:
 
 1. Simple web server hosting the HTML and the main image
 
-We can now test the above setup with the browser's Developer Tools, emulating small screen devices, *i.e.* , iPhone SE. The result is the following: [![](test-set-up-result.png)](test-set-up-result.png)
+We can now test the above setup with the browser's Developer Tools, emulating small screen devices, *i.e.* , iPhone SE. The result is the following: [![](test-set-up-result.jpg)](test-set-up-result.jpg)
 
 * Because of the screen resolution, the image requested is the 400px width, not the original one. You can see it in the request's URL
 * The returned image is in WebP format; its weight is 14.4kb

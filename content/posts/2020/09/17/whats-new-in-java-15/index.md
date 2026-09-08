@@ -5,7 +5,7 @@ lastmod: "2020-09-21T21:05:21+00:00"
 description: "Here on foojay, the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories."
 authors:
   - "geertjan-wielenga"
-image: "new-java-15-foojay-1024x617.png"
+image: "new-java-15-foojay-1024x617.jpg"
 categories:
   - "Release Notes"
 related_posts:
@@ -19,7 +19,7 @@ frozen: true
 Now that Java 15 has been released, let's take a look at what's new!
 
 [Here on foojay](https://javaalmanac.io/jdk/15/), the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories, with the invitation for you to vote on those that are most relevant to you:
-[![](new-java-15-foojay-1024x617.png)](https://javaalmanac.io/jdk/15/)
+[![](new-java-15-foojay-1024x617.jpg)](https://javaalmanac.io/jdk/15/)
 
 ### New Features
 

@@ -25,7 +25,7 @@ Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around
 
 The diagram below is the Java Memory Model for the Heap as well as the PermGen for any Java Application running in the Java Virtual Machine (JVM). The ratios are also provided to get a fair understanding of how the distribution of allowed memory is done across each of the generation types. All of the info is completely applicable up to Java 1.7 (inclusive). This diagram is also known as the 'Managed Area' of the memory model.  
 
-![Image title](https://dzone.com/storage/temp/544006-untitled.jpg)  
+![Image title](544006-untitled-4f68f8ba.jpg)  
 In addition to the above, there is a Stack Area, which can be configured using the -Xss option. This area holds the references on the heap, native references, pc registers, code cache, and local variables for all threads. This is also known as the 'Native Area' of the memory model.
 
 ## → Managed Area of the Java Memory Model

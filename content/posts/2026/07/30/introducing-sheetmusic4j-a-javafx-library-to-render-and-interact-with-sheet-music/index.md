@@ -5,7 +5,7 @@ description: "I'm building MelodyMatrix with my son, an application to look at a
 canonical: "https://webtechie.be/post/introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music/"
 authors:
   - "frankdelporte"
-image: "screenshot-melodymatrix.png"
+image: "screenshot-melodymatrix.jpg"
 categories:
   - "JavaFX"
   - "Release Notes"
@@ -18,7 +18,7 @@ frozen: false
 ---
 
 I'm building [MelodyMatrix](https://melodymatrix.rocks/) with my son, an application to look at and play along with music. The app already shows a song in different views: falling blocks, chords, guitar views, and many more. Now we want a Learn section, a view that helps someone practice piano by following the actual sheet music while it plays.
-![](screenshot-melodymatrix-1024x641.png)
+![](screenshot-melodymatrix-1024x641.jpg)
 
 A static PDF of the sheet doesn't work for that. Great PDF viewer components exist for JavaFX, but a PDF has no connection to what's playing. Nothing highlights the current note, nothing marks the current position in the song. I looked for a JavaFX library that renders sheet music and lets code interact with it: jump to a position, highlight a note, follow playback. I couldn't find one, so I built it.
 
@@ -35,7 +35,7 @@ To be clear, this isn't vibe coding. I define the tasks, describe what I want to
 Sheetmusic4J reads [MusicXML](https://www.w3.org/2021/06/musicxml40/), an open standard for representing sheet music. MIDI stores notes and timing, MusicXML stores a lot more: how a piece is structured, how it should look on the page, lyrics under a melody line for a song with a singer. MusicXML also ships an official set of example files, and I use those to compare what Sheetmusic4J renders against the reference PDF for each file.
 
 Notation itself follows the [SMuFL](https://www.smufl.org/) standard for music fonts. Sheetmusic4J currently renders with the Bravura font. I haven't wired up font swapping yet, that's still on the list, but SMuFL makes it possible to support other notation fonts later.
-![](notation-elements-annotated-1024x447.png)
+![](notation-elements-annotated-1024x447.jpg)
 
 The image above comes straight from the library and maps MusicXML terms to the class names in the Java model and to the layout terms used internally. I'm not a musician, despite years at music school long ago, so I built this reference for myself first. It also gives anyone reporting an issue a shared vocabulary to point at the exact element that's wrong. Check the [NOTATION_ELEMENTS.md file on GitHub](https://github.com/sheetmusic4j/sheetmusic4j/blob/main/docs/NOTATION_ELEMENTS.md) for more info and a table showing the link between MusicXML elements and how they are used in the library code.
 
@@ -50,7 +50,7 @@ Everything lives in the [sheetmusic4j](https://github.com/sheetmusic4j) organiza
 * **FX Viewer**: the JavaFX component applications use to show a sheet, including a full-page sheet view and a horizontal strip view.
 * **Demo**: a test application for the other three modules.
 
-![](screenshot-demo-app-1024x544.png)
+![](screenshot-demo-app-1024x544.jpg)
 
 The demo app renders the same MusicXML file two ways side by side: a static PDF (using [Derek Lemmerman's PDF viewer component](https://github.com/dlsc-software-consulting-gmbh/PDFViewFX)) next to the Sheetmusic4J FX Viewer. The PDF stays fixed to its page size. The FX Viewer reflows the layout as the window resizes, which occasionally shifts a line differently than the PDF does. The demo also includes tools to simulate playback and highlight notes, without any sound, purely to test the visual sync. A diff tab compares the FX Viewer output pixel by pixel against the reference PDF. It surfaces real differences, though I'm still figuring out how useful that comparison is given that a static PDF and an interactive viewer solve different problems.
 

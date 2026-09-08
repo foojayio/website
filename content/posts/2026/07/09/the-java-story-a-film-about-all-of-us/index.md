@@ -43,4 +43,4 @@ If you have time to take part in the live online premiere, here are a few practi
 
 If Java, OpenJDK or Jakarta EE has been part of your career (as you're reading this on Foojay, it probably has 😉 ) - take some time on July 17th if you're around, to watch this with the rest of us. Set your reminder, show up for the live chat and share it with the developers who came up through this same community. Stories like this don't get told very often and - as Java Community - this one's about all of us.  
 
-[![](Java-Documentary-snap-1024x615.png)](https://www.youtube.com/watch?v=ZqGSg4b_cZA)
+[![](Java-Documentary-snap-1024x615.jpg)](https://www.youtube.com/watch?v=ZqGSg4b_cZA)

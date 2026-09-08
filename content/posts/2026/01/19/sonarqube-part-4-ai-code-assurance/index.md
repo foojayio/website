@@ -49,13 +49,13 @@ Whether you are in IntelliJ (via Connected Mode) or reviewing a Pull Request in 
 * **Your Job:** You just review the diff and click **"Apply"**.
 
 What used to take 20 minutes of refactoring now takes 10 seconds of reviewing.
-![](Screenshot-2026-01-19-at-15.23.11.png)
+![](Screenshot-2026-01-19-at-15.23.11.jpg)
 
 We can see here the issue and the execution flow, and the "Generate AI Fix" button
-![](Screenshot-2026-01-19-at-15.24.02.png)
+![](Screenshot-2026-01-19-at-15.24.02.jpg)
 
 And the solution suggested by SonarQube AI CodeFix feature
-![](Screenshot-2026-01-19-at-15.24.15.png)
+![](Screenshot-2026-01-19-at-15.24.15.jpg)
 
 And finally this is the way we see the change coming from SonarQube AI CodeFix in IntelliJ IDE
 
@@ -97,7 +97,7 @@ The "Black Box" of AI code is a major anxiety for Tech Leads.
 **The Solution:** [AI Code Assurance](https://www.sonarsource.com/solutions/ai/ai-code-assurance/).
 
 SonarQube allows you to tag projects that use Generative AI or Autodetects AI-generated content (at the moment only considering Github Copilot projects). It then enforces a specific, stricter **"AI Code Assurance"** process.
-![](Screenshot-2026-01-19-at-15.24.38.png)
+![](Screenshot-2026-01-19-at-15.24.38.jpg)
 
 It will assign the "Sonar way" quality profile to the project, that checks for:
 

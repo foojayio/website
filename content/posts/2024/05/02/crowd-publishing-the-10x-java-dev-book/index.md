@@ -27,7 +27,7 @@ That's the question Steve Poole and Olimpiu Pop embarked on to respond. And, wha
 
 [
 
-{{< img src="10xdev-700x465.png" class="size-medium" width="700" height="465" >}}
+{{< img src="10xdev-700x465.jpg" class="size-medium" width="700" height="465" >}}
 
 ](https://10xjava.dev/)
 

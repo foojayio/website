@@ -6,7 +6,7 @@ description: "Is API mocking in unit tests important or does it do nothing? The 
 canonical: "https://debugagent.com/api-mocking-essential-and-redundant"
 authors:
   - "shai-almog"
-image: "DALL-E-2022-10-25-19.40.58-Mocking-bird-standing-on-a-computer.png"
+image: "DALL-E-2022-10-25-19.40.58-Mocking-bird-standing-on-a-computer.jpg"
 categories:
   - "Testing"
 related_posts:

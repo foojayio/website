@@ -6,7 +6,7 @@ description: "Actionable strategies for error management modeling in Apache NiFi
 canonical: "https://dzone.com/articles/best-practices-for-data-pipeline-error-handling-in"
 authors:
   - "pieter-humphrey"
-image: "14772514-queue.png"
+image: "14772514-queue.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -85,7 +85,7 @@ To see how to do this analysis, we will consider four possible strategies: one e
 External sources are outside our control. Therefore, we neither know the root cause of the problem nor can we try to solve it. As a result, the best approach is to ask the source if it is back to normal or not. We will call this the retry approach.
 
 An example would be when our model receives information from a database or data API service located on the cloud, such as [DataStax Astra DB](https://dtsx.io/3wcjyor) (which is powered by Cassandra), and suddenly we face an interrupted Internet connection. A self-solving strategy could involve using a retry, such as it is shown in the figure below:
-![](14772500-querycassandra-1024x487.png)
+![](14772500-querycassandra-1024x487.jpg)
 
 *Simple retry in Apache NiFi.*
 
@@ -106,7 +106,7 @@ Another tool complementing back pressure is "Back Pressure Prediction". This fun
 ![](14772503-back-pressure-prediction-1024x138.png)
 
 In order to monitor the queue, we must hover over the scroll line on the connector. We will see two important values: predicted queue and estimated time to back pressure. The first value gives the estimated percentage use of the queue and the second the predicted time to back pressure activation. The figure below shows an example where random files are generated and the queue reaches the object threshold of 10000.
-![](14772514-queue.png)
+![](14772514-queue.jpg)
 
 *Back pressure queue monitoring in Apache NiFi.*
 

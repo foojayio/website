@@ -25,7 +25,7 @@ Of course, I wanted to support them and started to use my Twitter account to fig
 
 With the acquisition of Twitter by Elon Musk, I'm afraid it's going to get much worse - case in point:
 
-[![](Screenshot-2022-12-11-at-17.59.21-782x1024.png)](https://twitter.com/SarahKSilverman/status/1589418271308386304)
+[![](Screenshot-2022-12-11-at-17.59.21-782x1024.jpg)](https://twitter.com/SarahKSilverman/status/1589418271308386304)
 
 Some (most?) people I know planned or already had moved away. The target seems to be Mastodon, an alternate decentralized Open Source using the [ActivityPub](https://en.wikipedia.org/wiki/ActivityPub) protocol:
 > Mastodon is free and open-source software for running self-hosted social networking services. It has microblogging features similar to the Twitter service, which are offered by a large number of independently run Mastodon nodes (technically known as instances), each with its own code of conduct, terms of service, privacy options, and moderation policies.

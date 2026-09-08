@@ -27,7 +27,7 @@ That's INSANE!
 
 Even internally it's a HUGE risk with [60% of breaches originating from inside the organization](https://www.idwatchdog.com/insider-threats-and-data-breaches/). Well...
 
-![drew-scream.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1634113444886/ChPfwGtMr.jpeg)
+![drew-scream.jpg](ChPfwGtMr-f9ca1351.jpeg)
 
 This isn't just a security risk, that could essentially give every hacker the "keys" to your server and full access to your server code… It's also a serious stability hazard that could easily crash your production servers.
 
@@ -71,7 +71,7 @@ The problem is that even unintentional actions can demolish a server. A simple c
 
 ## Information Sifting
 
-![office-space.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1634113633044/LJZGiwg5X.jpeg)
+![office-space.jpg](LJZGiwg5X-9029460e.jpeg)
 
 In the cult classic office space the heroes sift pennies from transactions. Big organizations block a lot of this access and rightly so.
 

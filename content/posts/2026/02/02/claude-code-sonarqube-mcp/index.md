@@ -87,7 +87,7 @@ claude mcp add sonarqube \
 
 Once this is running, Claude will have [25 SonarQube tools](https://github.com/SonarSource/sonarqube-mcp-server?tab=readme-ov-file#tools) in its belt that will allow the Agent to interact with SonarQube to get issues, quality gate status, analyze snippets, and more.
 
-![](Screenshot-2026-02-02-at-15.46.22.png)
+![](Screenshot-2026-02-02-at-15.46.22.jpg)
 
 ### **Step 2: The Action (Java Example) ☕**
 

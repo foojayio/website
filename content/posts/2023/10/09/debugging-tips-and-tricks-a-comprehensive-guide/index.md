@@ -162,7 +162,7 @@ Every debugging session is a learning opportunity. It allows developers to deepe
 
 You either love something or you don't and a lot of developers feel that they don't love debugging. I get that. It's frustrating. In fact, I often start my talks with the universal debugging gesture…
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dmnmcjp5t4050yfqrxgj.jpg)
+![Image description](dmnmcjp5t4050yfqrxgj-af20a44b.jpg)
 
 However, since you made it here and are a software developer I think the potential for love is there. You just need to see debugging for what it is: a process. I think people don't hate debugging, we're frustrated by our work environment, by the fact that we make bugs and by the fact we feel stupid. Debugging is just the process we use, it's here to help.
 

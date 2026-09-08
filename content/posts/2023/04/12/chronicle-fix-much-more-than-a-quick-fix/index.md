@@ -55,7 +55,7 @@ Chronicle FIX is trusted by some of the world's largest financial institutions, 
 
 The below diagram speaks for itself and shows Chronicle FIX multiple times faster than QuickFIX/J, with the ratio particularly noticeable at higher percentiles.
 
-![](Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614.png)
+![](Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614.jpg)
 
 Note: the benchmark exercises a full round trip i.e. it generates a NewOrderSingle (NOS) and sends it out from one FIX engine to another engine over localhost.
 
@@ -69,7 +69,7 @@ Chronicle FIX has support for transparent session failover for initiators and ac
 
 We have customers who – as part of their standard deployment process, failover between FIX engines in milliseconds with no message loss.
 
-![](Screen-Shot-2023-04-03-at-2.04.38-PM-1024x706.png)
+![](Screen-Shot-2023-04-03-at-2.04.38-PM-1024x706.jpg)
 
 Additionally, there is a lightweight proxy component which supports common patterns such as load-balancing, transparent SSL etc.
 
@@ -79,7 +79,7 @@ Chronicle FIX leverages Chronicle Queue Enterprise replication to achieve HA/DR,
 
 The below graph shows the send/ack round-trip/latency impact on the sender as the number of outstanding messages (u) varies. u=0 is fully synchronous replication.
 
-![](Screen-Shot-2023-04-03-at-2.05.05-PM-1024x639.png)
+![](Screen-Shot-2023-04-03-at-2.05.05-PM-1024x639.jpg)
 
 ### Features
 
@@ -105,7 +105,7 @@ And all FIX messages are stored, indexed and are searchable with a sophisticated
 
 All important metrics, including latency numbers, are exposed via the monitoring features and can be surfaced in your monitoring tool of choice, e.g. [Grafana](https://grafana.com/ "Grafana")
 
-![](Screen-Shot-2023-04-03-at-2.08.13-PM-1024x678.png)
+![](Screen-Shot-2023-04-03-at-2.08.13-PM-1024x678.jpg)
 
 ### Commercial Support
 

@@ -48,7 +48,7 @@ It could be any of the following:
 Either way, your MongoDB client silently dies with a MongoDB Connection Timeout exception and you are left to wonder why your perfect Java API code won't talk to MongoDB, until your eyes land on the network logs.
 
 Here, you can see log snippets for an exception for connection refused in a Java Spring Boot application when we are trying to connect to the database on port `27018`.
-![socket exception](https://dz2cdn1.dzone.com/storage/temp/18398896-1747072041430.png)
+![socket exception](dz2cdn1-dzone-com-93c0f56f.jpg)
 
 This is similar to a connection timeout as it leads to exception at the driver end in application and results in an immediate connection rejection and socket exception. In case of a MongoDB timeout exception, which can be due to a host/port misconfiguration, there would be a similar exception happening only after a small duration until it reaches the network issue of unable to find the database instance.
 
@@ -83,7 +83,7 @@ Similarly, if the server's RAM is insufficient—say, the working set of data ex
 Here's a real-world parallel from your Spring Boot app: Imagine a microservice managing the wedding's guest list, running on a shared host. Each guest lookup opens a new MongoDB connection, but sloppy cleanup—failing to close `MongoClient` instances properly—leaves connections lingering. Over time, the microservice hits the server's ulimit on file descriptors (e.g., 1024 open files), and MongoDB starts rejecting new connections.
 
 Below is a screenshot from [Java Visual VM](https://visualvm.github.io/download.html) showing the high memory usage by Java threads for the Spring Boot application, leading to `MongoDBConnectionTimeoutException`.
-![Java Visual VM](https://dz2cdn1.dzone.com/storage/temp/18398887-1747071135135.png)
+![Java Visual VM](dz2cdn1-dzone-com-1d763dac.jpg)
 
 ## Connection Pool Misconfiguration
 
@@ -140,7 +140,7 @@ Some of the common mistakes in the MongoDB URI that disrupts connectivity are:
 * Missing credentials: Omitting the `user:pass` portion for a MongoDB instance that requires authentication causes an authentication failure. The server rejects the connection, and the app logs a `MongoSecurityException` or `MongoTimeoutException`, depending on the driver's timeout settings.
 
 A frequent issue arises when the MongoDB URI in your application's configuration points to an outdated server. In a Spring Boot application, the `application.properties` file typically defines the URI. If the URI refers to a server that is no longer running—perhaps decommissioned during a system migration—the application cannot connect. After the default timeout period (e.g., five seconds), the MongoDB Java driver throws a `MongoTimeoutException: "Timed out after 5000 ms while waiting to connect."` This error disrupts all database operations, causing user-facing errors and application failures until the URI is updated to point to the correct server (e.g., `mongodb://user:pass@prod-server:27017/test`).
-![Port mismatch connection exception](https://dz2cdn1.dzone.com/storage/temp/18398897-1747072179481.png)
+![Port mismatch connection exception](dz2cdn1-dzone-com-78619f63.jpg)
 
 A correct way to connect to a replica set cluster would be to provide the right pattern for the MongoDB URI. For example :  
 `mongodb://user:host1:port1,host2:port2,host3:port3/mydb?replicaSet=myReplicaSet`

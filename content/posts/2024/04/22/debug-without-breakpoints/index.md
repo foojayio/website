@@ -6,7 +6,7 @@ description: "Learn how to use IntelliJ IDEA's Pause – a lesser known feature 
 canonical: "https://flounder.dev/posts/debug-without-breakpoints/"
 authors:
   - "igor-kulakov"
-image: "debug-without-breakpoints-banner-1024x538-1.png"
+image: "debug-without-breakpoints-banner-1024x538-1.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
@@ -26,7 +26,7 @@ Read in other languages: [中文](https://flounder.dev/zh/posts/debug-without-br
 In a typical debugging scenario, you would set breakpoints to tell the debugger when to suspend your program. A breakpoint usually corresponds to the moment that marks the starting point of the further investigation.
 
 However, in some situations you aren't certain about where to set a breakpoint. Other times, you might prefer to suspend the program at a particular *time* rather than aiming at a specific *line*.
-![post banner](debug-without-breakpoints-banner-1024x538.png)
+![post banner](debug-without-breakpoints-banner-1024x538.jpg)
 
 In this article, we'll look at IntelliJ IDEA's **Pause** – a lesser known debugging technique,  
 
@@ -78,7 +78,7 @@ For a hands-on example of this scenario, see [Debugger.godMode()](https://flound
 
 If you suspect a synchronization problem, such as a deadlock or a livelock, **Pause** might help you find exact threads and monitors that are causing the issue.
 
-{{< img src="debug-locks-with-pause-dark-1024x441.png" class="size-large is-resized" alt="The list of threads shows which threads have ended up in a deadlock" width="1024" height="441" style="width:692px" >}}
+{{< img src="debug-locks-with-pause-dark-1024x441.jpg" class="size-large is-resized" alt="The list of threads shows which threads have ended up in a deadlock" width="1024" height="441" style="width:692px" >}}
 
 Pause the program and inspect the thread list. It will show which threads are blocked.  
 

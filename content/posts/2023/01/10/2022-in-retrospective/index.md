@@ -97,7 +97,7 @@ It's interesting to see that though I thought dev.to focused on web and front-en
 
 ## Public speaking
 
-[![](Screenshot-2023-01-02-at-15.32.08-752x1024.png)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
+[![](Screenshot-2023-01-02-at-15.32.08-752x1024.jpg)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
 
 Indeed, 2022 was not my best year in terms of conference attendance. Here's a comparison of the previous years:
 

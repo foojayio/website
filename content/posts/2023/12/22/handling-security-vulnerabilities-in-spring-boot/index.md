@@ -27,10 +27,10 @@ One critical aspect of Spring Boot dependency management is security. Software v
 Software composition analysis (SCA) tools are a very useful tool for developers. They cover an easy solution to managing dependencies, handling security vulnerabilities, navigating licensing issues, and ensuring compliance in your software projects. By using [++Snyk Open Source++](https://snyk.io/product/open-source-security-management/) as your SCA, you can easily find out if your Spring Boot packages contain vulnerabilities.
 
 In the case of my example project, I found multiple vulnerabilities. The first is a high-severity security issue in \`netty-codec-http2\`. This is a transitive dependency brought in by my \`spring-boot-start-webflux\`, as you can see below.
-![blog-sprint-boot-dos-vuln](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273846%2Fblog-sprint-boot-dos-vuln.jpg&w=2560&q=75)
+![blog-sprint-boot-dos-vuln](snyk-io-c70cd66c.jpg)
 
 The second vulnerability I would like to discuss is a medium severity arbitrary code execution issue brought in via the \`snakeyaml\` package. This is also a transitive dependency, this time brought in by \`spring-boot-starter-security\`.
-![blog-spring-boot-ACE-vuln](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273846%2Fblog-spring-boot-ACE-vuln.jpg&w=2560&q=75)
+![blog-spring-boot-ACE-vuln](snyk-io-2ef4d031.jpg)
 
 I won't go into the actual problem of individual vulnerabilities today, but you can check out the dedicated [++blog post++](https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/) for more information on the \`snakeyaml\` problem. Let's focus on solving the problem and implementing the best solution.
 
@@ -132,7 +132,7 @@ plugins {
 ```
 
 I would advise everyone to go the extra mile and update their entire spring boot version to the latest appropriate version. To find out what that is, simply go to https://start.spring.io.
-![blog-sprint-boot-initializer](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-sprint-boot-initializer.jpg&w=2560&q=75)
+![blog-sprint-boot-initializer](snyk-io-ae153397.jpg)
 
 ### Updating transitive dependencies
 
@@ -214,10 +214,10 @@ Regularly scanning your codebase proactively addresses security issues and reduc
 Below, I scanned my application with the [++Snyk CLI++](https://snyk.io/platform/snyk-cli/) both before and after remediation. The remediation path I chose was updating the general Spring Boot version and updating the specific version property for \`snakeyaml\`.
 
 Before:
-![blog-spring-boot-21-paths](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-spring-boot-21-paths.jpg&w=2560&q=75)
+![blog-spring-boot-21-paths](snyk-io-f7bdfd42.jpg)
 
 After:
-![blog-sprint-boot-6-paths](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-sprint-boot-6-paths.jpg&w=2560&q=75)
+![blog-sprint-boot-6-paths](snyk-io-1072c619.jpg)
 
 So, remember, when you find a vulnerability with Snyk related to a dependency in your Spring Boot application, follow these steps:
 

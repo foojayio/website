@@ -6,7 +6,7 @@ description: "Every year, I look forward to our State of Java Survey & Report 
 canonical: "https://www.azul.com/blog/what-2000-professionals-told-us-about-the-state-of-java-ai-cloud-costs-and-the-future-of-the-java-ecosystem/"
 authors:
   - "scott-sellers"
-image: "SoJ26-Download.png"
+image: "SoJ26-Download.jpg"
 categories:
   - "Java"
   - "Java Core"
@@ -22,7 +22,7 @@ Every year, I look forward to our [State of Java Survey \& Report](https://www.a
 > ***Java is evolving faster than ever. AI is accelerating that shift. And the pressure to optimize cloud spending and avoid unpredictable Java licensing costs is now shaping strategic decisions across the enterprise.***
 
 As the only company 100% focused on Java, we get to see these changes up close.
-![](SofJ26-Infographic-1024x576.png)
+![](SofJ26-Infographic-1024x576.jpg)
 
 Here are the key takeaways and what they mean for your business.
 
@@ -135,4 +135,4 @@ Today, 36% of the Fortune 100 and many of the world's most respected brands rely
 And we're just getting started.
 
 I invite you to [dive deeper into the full report](https://www.azul.com/state-of-java-2026/) and join the conversation about where Java is heading next.
-[![](SoJ26-Download.png)](https://www.azul.com/state-of-java-2026/)
+[![](SoJ26-Download.jpg)](https://www.azul.com/state-of-java-2026/)

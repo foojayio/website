@@ -126,7 +126,7 @@ The 1BRC project includes a [weather_stations.csv](https://github.com/gunnarmorl
 ## My implementation
 
 My strategy here was to start with the K.I.S.S. (Keep It Simple Stupid) optimization first and profile for bottlenecks. Using JFR to profile gave me some ideas on where to profile but it didn't result in the expected win quite often.  
-![](1brc-flameview2-1024x421.png) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
+![](1brc-flameview2-1024x421.jpg) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
 And *-Dorg.eclipse.swt.browser.DefaultType=edge* in jmc.ini on Windows
 
 What you don't see in the proposed solutions are also the many attempts and code that were producing less performance.

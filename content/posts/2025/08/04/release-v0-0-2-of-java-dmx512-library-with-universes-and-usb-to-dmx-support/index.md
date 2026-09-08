@@ -117,7 +117,7 @@ The library I created is open-source with its [sources on GitHub](https://github
 ## DMX512 JavaFX Demo Project
 
 The JavaFX user interface demo application has been updated to use V0.0.2 of the library and has proven to work identically with IP-to-DMX and USB-to-DMX. Check the [sources on GitHub](https://github.com/codewriterbv/DMX512-Demo).
-![](https://webtechie.be/images/2025/dmx/demo-app-picospot-channels.png)
+![](demo-app-picospot-channels-ce878674.jpg)
 
 ## Next Steps
 

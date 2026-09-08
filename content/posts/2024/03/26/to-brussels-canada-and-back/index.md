@@ -22,20 +22,20 @@ It was at times quite arduous but at the same time energizing, as you can read i
 And I got accepted at a few of them, which was really great because I started missing traveling after almost three months of being home. In this article, I'll cover my first three conferences this year: [FOSDEM](https://fosdem.org/2024) in Brussels, [ConFoo](https://confoo.ca/en/2024) in Montreal, and [Voxxed Days Zurich](https://voxxeddays.com/zurich/); they all happened between early February and early March.
 
 It was the most travel, distance (and continent) wise, that I ever did before, by quite some margin:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/image-1-2000x745.png) [Read more: To Brussels, Canada and Back](https://foojay.io/today/to-brussels-canada-and-back/)
+![](image-1-2000x745-10a57ed5.jpg) [Read more: To Brussels, Canada and Back](https://foojay.io/today/to-brussels-canada-and-back/)
 
 ## FOSDEM
 
 Every good journey starts with taking a train far too early:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2674-Large.jpeg)
+![](IMG_2674-Large-03c554e9.jpeg)
 
 I took the train at 3:30 am on the 2nd of February from Karlsruhe to Schwetzingen so one of my [SapMachine](https://sapmachine.io) colleagues, Christoph Langer, could pick me up for the first conference of the year: [FOSDEM in Brussel](https://fosdem.org/2024). But before FOSDEM, which happened over the weekend, there was the [JDK Committers Workshop](https://openjdk.org/workshop) nearby, where I chaired a session on modernizing JFR with Andrei Pangin:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2675-2000x1500.jpeg)
+![](IMG_2675-2000x1500-8b613210.jpeg)
 
 Ron Pressler was also present, making the discussions quite worthwhile. This eventually led to my current work on implementing a CPU profiler in JFR with Andrei.
 
 After the workshop day, the conference came. Last year, I was in Brussels, too, but I never really took the time to explore the city. Instead, I sat at the conference all day. My talk in the Java room was Saturday evening, so I took the opportunity to visit the main cathedral and some parks together with [Alexander Wert](https://www.linkedin.com/in/alexanderwert) and his wife:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2679-1500x2000.jpeg)
+![](IMG_2679-1500x2000-899498ab.jpeg)
 
 My first talk at FOSDEM was titled [Inner Workings of Safepoints](https://fosdem.org/2024/schedule/event/fosdem-2024-1675-inner-workings-of-safepoints/), in which I explained what safepoints are, why they are important, and how they are implemented, all based on my article, [The Inner Workings of Safepoints](https://mostlynerdless.de/blog/2023/07/31/the-inner-workings-of-safepoints/):
 
@@ -52,79 +52,79 @@ After these conferences, I had two weeks without any conference, which was great
 ## ConFoo
 
 I've never been to another continent, let alone visited Canada, so I was pretty happy when I got accepted to ConFoo in Montreal. Being 8 hours on a plane on the 19th of February and having Jetlag, both for the first time, was quite tiring, but hey, at least the conference paid for it:
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2724-2000x1500.jpeg)
+![](IMG_2724-2000x1500-e086f5a6.jpeg)
 
 After arriving in Montreal, I explored the city, [Mount Royal](https://montrealvisitorsguide.com/mount-royal-mont-royal/), and the [underground](https://www.mtl.org/en/experience/guide-underground-city-shopping) for an evening and a whole day, meeting [Theresa Mammarella](https://www.linkedin.com/in/tmammarella/) and her husband for dinner in [China Town](https://www.mtl.org/en/experience/discover-neighbourhood-montreal-chinatown):
 
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2738-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2743-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2745-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2748-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2791-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2792-1-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2738-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2743-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2745-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2748-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2791-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2792-1-1500x2000.jpeg)
+![](IMG_2738-1500x2000-11b86b92.jpeg)  
+![](IMG_2743-1500x2000-a8584a0c.jpeg)  
+![](IMG_2745-2000x1500-748a8a48.jpeg)  
+![](IMG_2748-2000x1500-8c29ac42.jpeg)  
+![](IMG_2791-2000x1500-d55f5727.jpeg)  
+![](IMG_2792-1-1500x2000-f0c86429.jpeg)  
+![](IMG_2738-1500x2000-11b86b92.jpeg)  
+![](IMG_2743-1500x2000-a8584a0c.jpeg)  
+![](IMG_2745-2000x1500-748a8a48.jpeg)  
+![](IMG_2748-2000x1500-8c29ac42.jpeg)  
+![](IMG_2791-2000x1500-d55f5727.jpeg)  
+![](IMG_2792-1-1500x2000-f0c86429.jpeg)
 
 The days at the conference flew by, especially because of the great food there. I was also glad to meet [Sam](https://snugug.com/me/), [Jessie](https://www.linkedin.com/in/newmanjessie/), and [Jonatan](https://www.linkedin.com/in/jonatan-ivanov/overlay/about-this-profile/), joining them to eat bagels from both [St. Viateur](https://www.stviateurbagel.com/) (pictured) and [Fairmount Bagel](https://fairmountbagel.com/), as well as eating [poutine](https://en.wikipedia.org/wiki/Poutine) at [Chez Claudette](https://montreal.eater.com/maps/meilleure-best-poutine-montreal):  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2839-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2814-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2821-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2832-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2839-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2814-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2821-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2832-2000x1500.jpeg)
+![](IMG_2839-2000x1500-ab196bf7.jpeg)  
+![](IMG_2814-2000x1500-ab51720e.jpeg)  
+![](IMG_2821-2000x1500-c8146039.jpeg)  
+![](IMG_2832-2000x1500-e78e6232.jpeg)  
+![](IMG_2839-2000x1500-ab196bf7.jpeg)  
+![](IMG_2814-2000x1500-ab51720e.jpeg)  
+![](IMG_2821-2000x1500-c8146039.jpeg)  
+![](IMG_2832-2000x1500-e78e6232.jpeg)
 
 While the traveling aspect of this journey was great, I also gave two talks: One on writing a profiler in pure Java and another on debugging, but they are sadly not available publicly (yet). I stayed in Montreal till Saturday, the 23rd.
 
 Then, I traveled by train to Toronto for almost a week with Theresa and her husband Charles before I returned to Montreal to take the plane back to Europe. I first met Theresa at JavaZone in Oslo (see [trip report](https://mostlynerdless.de/blog/2023/09/29/report-of-my-trip-to-javazone-and-northern-germany/)) in September last year...
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2968-2000x1500.jpeg)
+![](IMG_2968-2000x1500-349039d1.jpeg)
 
 Where Montreal was icy cold, Toronto felt welcoming, almost warm. I explored the city, went up the [CN Tower](https://www.cntower.ca/), down into the [underground](https://www.toronto.ca/explore-enjoy/visitor-toronto/path-torontos-downtown-pedestrian-walkway/), to Niagra Falls, and enjoyed Charles' blueberry pancakes with dark maple syrup:  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2974-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3013-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3069-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3074-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3076-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3089-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3127-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3161-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3200-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2974-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3013-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3069-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3074-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3076-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3089-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3127-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3161-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3200-2000x1500.jpeg)
+![](IMG_2974-2000x1500-515fb126.jpeg)  
+![](IMG_3013-2000x1500-160b0190.jpeg)  
+![](IMG_3069-2000x1500-3a78592a.jpeg)  
+![](IMG_3074-2000x1500-d1e8171c.jpeg)  
+![](IMG_3076-2000x1500-a9cf3493.jpeg)  
+![](IMG_3089-2000x1500-ef9bd729.jpeg)  
+![](IMG_3127-2000x1500-71fd4945.jpeg)  
+![](IMG_3161-2000x1500-3d350053.jpeg)  
+![](IMG_3200-2000x1500-f4656453.jpeg)  
+![](IMG_2974-2000x1500-515fb126.jpeg)  
+![](IMG_3013-2000x1500-160b0190.jpeg)  
+![](IMG_3069-2000x1500-3a78592a.jpeg)  
+![](IMG_3074-2000x1500-d1e8171c.jpeg)  
+![](IMG_3076-2000x1500-a9cf3493.jpeg)  
+![](IMG_3089-2000x1500-ef9bd729.jpeg)  
+![](IMG_3127-2000x1500-71fd4945.jpeg)  
+![](IMG_3161-2000x1500-3d350053.jpeg)  
+![](IMG_3200-2000x1500-f4656453.jpeg)
 
 Being in Canada was great, and I'm looking forward to returning to North America for [KCDC](https://www.kcdc.info/) in June. I came back to Europe Saturday morning with quite some jetlag and four bagels from St. Viateur, spending my weekend with a friend close to the airport before going to Zurich in the following week:
 
 ## VoxxedDays Zurich
 
 I actually flew to and from Canada via Zurich, so I was at home in Karlsruhe for just three days before going back for the [VoxxedDays](https://www.flickr.com/photos/bejug/albums/72177720315384585/with/53581963697), meeting new and old acquaintances and giving a talk called [Instrument to Remove: Using Java agents for fun and profit](https://voxxeddays.com/zurich/schedule/talk/?id=1754) (related [blog post](https://mostlynerdless.de/blog/2023/04/06/instrumenting-java-code-to-find-and-handle-unused-classes/)):
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/53581958507_5e78d36869_o-2000x1334.jpg) Photo by the great [Dimitris Doutsiopoulos](https://ddphotography.gr/)
+![](53581958507_5e78d36869_o-2000x1334-6fa0b725.jpg) Photo by the great [Dimitris Doutsiopoulos](https://ddphotography.gr/)
 
 {{< youtube JnJgvcZo7b8 >}}
 
 I had the opportunity to reconnect with [Mario Fusco](https://www.linkedin.com/in/mario-fusco-3467213/) (pictured), [Matthias Häussler](https://www.linkedin.com/in/matthiashaeussler/), [Anja Kunkel](https://www.linkedin.com/in/anja-kunkel-236534135), and many more and to meet new people like [Myriam Jessier](https://myriamjessier.com).
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3267-2-2000x1500.jpeg)
+![](IMG_3267-2-2000x1500-dc34e957.jpeg)
 
 After the one-day conference, I met someone the next day, someone I had first met at ConFoo. By pure coincidence, [Marcus Boerger](https://www.linkedin.com/in/marcusboerger/overlay/about-this-profile/) lives close to Zurich with his family, so I joined him for lunch at his home, using the rest of the day to explore the city:  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3270-2000x790.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3272-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3274-2-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3279-1500x2000.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3270-2000x790.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3272-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3274-2-2000x1500.jpeg)  
-![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3279-1500x2000.jpeg)
+![](IMG_3270-2000x790-8475e6c4.jpeg)  
+![](IMG_3272-2000x1500-dffbf1d6.jpeg)  
+![](IMG_3274-2-2000x1500-4691bfcc.jpeg)  
+![](IMG_3279-1500x2000-e8822c85.jpeg)  
+![](IMG_3270-2000x790-8475e6c4.jpeg)  
+![](IMG_3272-2000x1500-dffbf1d6.jpeg)  
+![](IMG_3274-2-2000x1500-4691bfcc.jpeg)  
+![](IMG_3279-1500x2000-e8822c85.jpeg)
 
 ## Conclusion
 

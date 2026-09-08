@@ -6,7 +6,7 @@ description: "By taking a proactive approach to XSS prevention and using the rig
 canonical: "https://snyk.io/blog/preventing-xss-snyk-code/"
 authors:
   - "bmvermeer"
-image: "snykvulnxxcode-1.png"
+image: "snykvulnxxcode-1.jpg"
 categories:
   - "Security"
   - "Snyk"
@@ -68,17 +68,17 @@ When closely looking at the function above, you might already recognize at least
 There are multiple ways to leverage Snyk Code. Let's take a look at three different examples. The most direct way of getting feedback from Snyk Code to a developer is by installing a plugin in the IDE. We have plugins for many different IDE's available. In the following example, I show how the IntelliJ plugin helps me find XSS problems during development.
 
 Intellij plugin output:
-![blog-preventing-xss-product-controller](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-product-controller.jpg&w=2560&q=75)
+![blog-preventing-xss-product-controller](snyk-io-19d60081.jpg)
 
 Another option is to run Snyk Code using the Snyk CLI. Running command `snyk code test` from the terminal will give you an output like below. This method is useful on your local machine or as part of your automatic build in a CI/CD pipeline.
 
 CLI output:
-![blog-preventing-xss-high-vulns](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-high-vulns.jpg&w=2560&q=75)
+![blog-preventing-xss-high-vulns](snyk-io-0c433204.jpg)
 
 The third option I want to show you, is the web UI. For this output I used the git integration with Snyk and connected my GitHub repository to the Snyk Web UI using the dashboard at [++https://app.snyk.io++](https://app.snyk.io/). This solution scan's the code that is committed to my repository for security vulnerabilities.
 
 Web UI output:
-![blog-preventing-xss-snyk-code-report](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-snyk-code-report.jpg&w=2560&q=75)
+![blog-preventing-xss-snyk-code-report](snyk-io-48e9ee38.jpg)
 
 All three different scanning options show me that there are two distinct XSS security issues I need to address — with Snyk Code pinpointing their exact location in my code. Let's break them down and see how we can mitigate them.
 
@@ -109,7 +109,7 @@ Snyk Code pointed out this potential XSS problem on line 103, where we insert th
 ## Mitigating XSS vulnerabilities with Snyk Code
 
 To prevent XSS vulnerabilities, it is important to properly validate and sanitize user input before writing it to the response. Snyk Code already helps us by pointing out possible solutions. One way to do this is to use a library like [++Apache Commons Text++](https://commons.apache.org/proper/commons-text/)to encode the input and prevent malicious code from being executed.
-![blog-preventing-xss-string-path](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-string-path.jpg&w=2560&q=75)
+![blog-preventing-xss-string-path](snyk-io-4662ff86.jpg)
 
 Using the `escapeHtml4()` function, we can make sure that code in both reflective and stored XSS is escaped so that it will not be executed when loading the page.  
 

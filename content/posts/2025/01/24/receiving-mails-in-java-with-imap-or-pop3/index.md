@@ -6,7 +6,7 @@ description: "There is a lot of documentation for sending mails, but gathering i
 canonical: "https://jensknipper.de/blog/receiving-emails-in-java/"
 authors:
   - "jens-knipper"
-image: "mailusage.png"
+image: "mailusage.jpg"
 categories:
   - "Java"
 related_posts:

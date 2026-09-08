@@ -36,7 +36,7 @@ Java is used on embedded platforms for in-car infotainment and information displ
 An essential but not well-known fact is the energy efficiency Java delivers compared to other programming languages. This is another important fact in today's economy, where ecological and energy costs become increasingly critical. According to the study [Energy Efficiency across Programming Languages: How does Energy, Time and Memory Relate?](https://sites.google.com/view/energy-efficiency-languages/results#h.p_nggWE5Z-iDZ0), Java is, for example, up to 38 times more energy-efficient than Python!
 
 With modern, powerful systems based on ARMv7 or newer, the exact same Java runtime used in big cloud environments or on powerful machines runs just as smoothly on the smallest Linux systems. Azul provides builds of OpenJDK for various platforms, as you can see on the [download page](https://www.azul.com/downloads/?package=jdk#zulu). If your system is not on the list of downloads, you can contact Azul as they have other builds available for customers who are not listed on the free download page.
-![](azul-downloads-embedded-screenshot.png)
+![](azul-downloads-embedded-screenshot.jpg)
 
 ## Use cases for Java on Embedded
 

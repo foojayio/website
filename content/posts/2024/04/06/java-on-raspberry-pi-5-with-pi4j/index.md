@@ -6,7 +6,7 @@ description: "Alexander Liggesmeyer contributed a new plugin to Pi4J: GpioDPlugi
 canonical: "https://pi4j.com/blog/2024/20240318_interview_alexander_liggesmeyer/"
 authors:
   - "frankdelporte"
-image: "pi4jplugin.png"
+image: "pi4jplugin.jpg"
 categories:
   - "Embedded"
   - "Pi4J"
@@ -78,7 +78,7 @@ Pi4J allows me to control the Raspberry Pi's GPIO interfaces directly from Java.
 
 {{< gallery >}}
 alexander.jpg
-cocktailmaker_circuit-1024x732.png
+cocktailmaker_circuit-1024x732.jpg
 screen-cocktail-1024x475.jpg
 {{< /gallery >}}
 

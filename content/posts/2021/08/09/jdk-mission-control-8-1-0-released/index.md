@@ -44,7 +44,7 @@ There are more than 80 fixes and improvements in this release. Check out the JMC
 **New Serializers Core Bundle**   
 
 There is now a new core bundle making it easy to serialize flight recording data to DOT (Graphviz) and JSon. This bundle will be expanded upon in future versions.
-![](image-4.png)
+![](image-4.jpg)
 
 **Improved JFR parser performance**   
 

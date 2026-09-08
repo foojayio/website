@@ -6,7 +6,7 @@ description: "In Part 4 of the series, a walkthrough of the Apache Maven lifecyc
 canonical: "https://cguntur.me/2020/05/29/understanding-apache-maven-part-4/"
 authors:
   - "c-guntur"
-image: "https://cgunturme.files.wordpress.com/2020/05/mavenlifecycles.png?w=1024"
+image: "mavenlifecycles-a6d7fafd.png"
 categories:
   - "Maven"
 related_posts:
@@ -35,7 +35,7 @@ Lifecycles in Maven comprise of **phases**. Each standard lifecycle is made up o
 **Phases are sequentially executed**.
 
 Invoking a phase **implies all prior phases in that lifecycle are executed**.
-![A tree structure of the standard lifecycles and phases in each.](https://cgunturme.files.wordpress.com/2020/05/mavenlifecycles.png?w=1024) Maven standard lifecycles and their respective phases
+![A tree structure of the standard lifecycles and phases in each.](mavenlifecycles-a6d7fafd.png) Maven standard lifecycles and their respective phases
 
 ## Exploring phases
 
@@ -158,6 +158,6 @@ Convention standards for plugin prefixes:
 ## Something Something – Personal Learning
 
 Here is a **very crude and unscientific pictorial** of the my understanding of lifecycles, phases, goals and plugins. This is not meant to be accurate in terms of either human lifecycles or in explaining maven's lifecycles. This picture is absolutely a personal means of illustrating how I went about learning these concepts.
-![Possibly inaccurate analogy of a young human lifecycle with phases such as terrible twos and adoloscence, with goals associated with each and soe external influences as plugins.](https://cgunturme.files.wordpress.com/2020/05/mavenhumananalogy.png?w=1024) Highly unscientific, possibly inaccurate lifecycle of a young human from Age 0 to Age 18. Time ranges also not distributed proportionally.
+![Possibly inaccurate analogy of a young human lifecycle with phases such as terrible twos and adoloscence, with goals associated with each and soe external influences as plugins.](mavenhumananalogy-90d44713.png) Highly unscientific, possibly inaccurate lifecycle of a young human from Age 0 to Age 18. Time ranges also not distributed proportionally.
 
 That's a wrap on this article. Have fun with Maven!

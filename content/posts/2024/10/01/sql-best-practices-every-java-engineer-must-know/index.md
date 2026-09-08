@@ -5,7 +5,7 @@ lastmod: "2024-10-09T09:33:23+00:00"
 description: "This comprehensive guide dives into the best practices for SQL query optimization, tailored specifically for Java engineers."
 authors:
   - "abo-saad-muaath"
-image: "1.png"
+image: "1.jpg"
 categories:
   - "Databases"
   - "Java"

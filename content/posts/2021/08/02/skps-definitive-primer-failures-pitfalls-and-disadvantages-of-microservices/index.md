@@ -61,7 +61,7 @@ The communication between External World and Microservices or within Microservic
 
 So, Once the Initial Part is Over - Even If the Microservices Strategy and Implementation Turns out to be a Success - It still means a Heavy Hit on the Pocket for Maintenance. Even though all of the Current Generation Organizations Rely on an External Cloud Provider, It still means more Expenditure on Hardware, 'Software', Cloud, DevOps Engineers. Also, the Total Cost of Ownership (TCO) of Such an Infrastructural Masterpiece is only bound to Increase as More Abstractions are added over Time - Also, the Maintenance itself could be a complicated process.
 
-[![](https://1.bp.blogspot.com/-sQgs_D2r0gM/YNb_PUeOkYI/AAAAAAAA9dU/TcRqW71TP6wYIN78FBDsVLO4_qyzTmlwQCLcBGAsYHQ/w640-h350/skp_microservices_complexity_001.png)](https://1.bp.blogspot.com/-sQgs_D2r0gM/YNb_PUeOkYI/AAAAAAAA9dU/TcRqW71TP6wYIN78FBDsVLO4_qyzTmlwQCLcBGAsYHQ/w640-h350/skp_microservices_complexity_001.png)
+[![](skp_microservices_complexity_001-9c1b0f81.png)](skp_microservices_complexity_001-9c1b0f81.png)
 
 **FIG. 1** : INDICATIVE COMPLEXITY OF MICROSERVICES ARCHITECTURE IN THE ENTERPRISE
 
@@ -131,7 +131,7 @@ So, Once the Initial Part is Over - Even If the Microservices Strategy and Imple
 
 Let us take a look a Uber's Microservices Dependency Graph (Source : Online Presentation by an Uber Engineer - All Rights Reserved by Uber - Solely Used to Demostrate Complexity). It seems like an Outer Space Image from a Hubble Telescope! 🙂
 
-[![](https://dzone.com/storage/temp/14889462-skp-uber-microservices-depedency-graph-2021-compre.jpg)](https://dzone.com/storage/temp/14889462-skp-uber-microservices-depedency-graph-2021-compre.jpg)
+[![](14889462-skp-uber-microservices-depedenc-8e918f47.jpg)](14889462-skp-uber-microservices-depedenc-8e918f47.jpg)
 
 **FIG. 2** : REAL-WORLD MICROSERVICES DEPENDENCY GRAPH FROM UBER ENGINEERING
 

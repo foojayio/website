@@ -42,11 +42,11 @@ That `NullPointerException` probably happened due to a null in the list. Assumin
 
 This isn't hard to find out, let's assume that the List is of the `ArrayList` type, in that case just open the `ArrayList` class (which you can do with Control-O in IntelliJ) and place a conditional breakpoint on the `add()` method. You can test if the value is null and that will stop at a breakpoint if someone tries to add null to the list.
 
-![Check for null condition](https://cdn.hashnode.com/res/hashnode/image/upload/v1632981604570/sDVYkrmcU.png)
+![Check for null condition](sDVYkrmcU-2a053627.png)
 
 Now this won't catch all the cases of `null` sneaking into the list. It can do so via the stream API, via `addAll()` and a couple of other methods. The nice thing is that we can grab pretty much any one of those methods:
 
-![Grabbing addAll Calls](https://cdn.hashnode.com/res/hashnode/image/upload/v1632982095589/nDT6BmG5m.png)
+![Grabbing addAll Calls](nDT6BmG5m-a0068cf6.jpg)
 
 Since `addAll()` accepts a `Collection` we can use the standard `contains()` method to check if we have a `null` element in the `Collection` and if so stop.
 
@@ -58,7 +58,7 @@ So we press continue and the breakpoint hits again and again and again. Each tim
 
 So there are several ways around this problem. The most ideal one is to avoid that specific list. If you have a way of recognizing that list e.g. a global instance or the first element might be a specific value you can simply augment the original conditional breakpoint e.g. in this case we assume the first element in the `null` is OK list is 77 in which case this condition will workaround the problem:
 
-![Hacking the Exception](https://cdn.hashnode.com/res/hashnode/image/upload/v1632982223058/W16VFVW_0r.png)
+![Hacking the Exception](W16VFVW_0r-e8271247.png)
 
 This isn't ideal but it works around the problem assuming it's localized enough.
 

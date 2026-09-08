@@ -5,7 +5,7 @@ lastmod: "2021-11-01T08:51:57+00:00"
 description: "Covering the new release of Gradle extension, more convenient Code Actions and the recent 1.0 language server release!"
 authors:
   - "nick-zhu"
-image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/dependency.png"
+image: "dependency-fa3b3090.png"
 categories:
   - "Release Notes"
   - "VS Code"
@@ -46,7 +46,7 @@ Another exciting new feature is the project dependency view. Developers can now 
 
 To view the dependencies of a project, simply click on the "Dependencies" item and all dependencies of a project is shown below. These dependencies are grouped by Gradle configurations and you can expand each configuration to see the dependencies in detail. For omitted dependency (marked with a (\*)), you can click on the inline button on the right to reveal the previously listed dependency.
 
-[![Gradle dependency](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/dependency.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/dependency.png)
+[![Gradle dependency](dependency-fa3b3090.png)](dependency-fa3b3090.png)
 
 ### Gradle Authoring Experience (Groovy)
 
@@ -78,7 +78,7 @@ The Gradle language server will provide the document outline for the current Gra
 
 The Gradle language server will use Groovy compile engine to analyze the Gradle build file and report syntax errors if exist. It will also get script classpaths from Gradle Build so that it can report compilation errors. The [Gradle default imports](https://docs.gradle.org/current/userguide/writing_build_scripts.html#script-default-imports) are supported.
 
-[![Gradle error reporting](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/erroreporting.jpg)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/erroreporting.jpg)
+[![Gradle error reporting](erroreporting-9a47c22e.jpg)](erroreporting-9a47c22e.jpg)
 
 There are many more features in this extension. Please visit [the GitHub documentation](https://github.com/microsoft/vscode-gradle#feature-overview) to see the full list of features! You can follow [this link](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) to get this Gradle extension.
 

@@ -6,7 +6,7 @@ description: "Learn how to debug unresponsive Java/JVM applications, then reload
 canonical: "https://flounder.dev/posts/debug-unresponsive-apps/"
 authors:
   - "igor-kulakov"
-image: "debug-unresponsive-apps-banner.png"
+image: "debug-unresponsive-apps-banner.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Java"
@@ -23,7 +23,7 @@ frozen: false
 Read in other languages: [中文](https://flounder.dev/zh/posts/debug-unresponsive-apps/) [Español](https://flounder.dev/es/posts/debug-unresponsive-apps/) [Português](https://flounder.dev/pt/posts/debug-unresponsive-apps/)
 
 **There are a lot of debugger tutorials out there that teach you how to set line breakpoints, log values, or evaluate expressions. While this knowledge alone gives you a lot of tools for debugging your application, real-world scenarios may be somewhat trickier and require a more advanced approach.**
-![Debug Unresponsive Apps – post banner](https://flounder.dev/img/debug-unresponsive-apps-banner.png)
+![Debug Unresponsive Apps – post banner](debug-unresponsive-apps-banner-3e5418c2.jpg)
 
 In this article, we will learn how to locate code that causes a UI freeze without much prior knowledge of the project and fix faulty code on the fly.
 

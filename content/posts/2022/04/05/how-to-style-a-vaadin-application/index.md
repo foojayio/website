@@ -88,7 +88,7 @@ One easy way to customize the look and feel of our application requires us to ov
 
 For example, suppose our application has a bunch of TextField, ComboBox, DatePicker, and Button components. By default, they will look as follows:
 
-![A Vaadin TextField, ComboBox, DatePicker, and Button with default look and feel.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gle8hdd9f89lwqus4mb8.png)
+![A Vaadin TextField, ComboBox, DatePicker, and Button with default look and feel.](gle8hdd9f89lwqus4mb8-a6d27f23.png)
 
 Suppose that we want to increase the roundedness of their corners. By default, the Lumo theme provides these components with a small rounded corner whose value is defined in the `--lumo-border-radius-m` variable.
 
@@ -102,7 +102,7 @@ html {
 
 This style will increase the corner roundedness of many components at once, so that they will look similar to the following screenshot:
 
-![A Vaadin TextField, ComboBox, DatePicker, and Button with increased corner roundedness.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jlqwo3qrr1gac3s94i6g.png)
+![A Vaadin TextField, ComboBox, DatePicker, and Button with increased corner roundedness.](jlqwo3qrr1gac3s94i6g-889426f6.png)
 
 But what if one wants to override the defaults for only a subset of components? No problem; simply use the name of the components as the CSS selector.
 
@@ -116,7 +116,7 @@ vaadin-text-field, vaadin-combo-box {
 
 This will change the defaults for the TextField and ComboBox only, leaving other components, such as the DatePicker and Button, with their default values.
 
-![A Vaadin TextField, ComboBox with increased corner roundedness. A Vaadin DatePicker, and Button with default look and feel.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lrjca5ijn3rdfa2szh66.png)
+![A Vaadin TextField, ComboBox with increased corner roundedness. A Vaadin DatePicker, and Button with default look and feel.](lrjca5ijn3rdfa2szh66-6c821527.png)
 
 ## How to selectively style views and components
 
@@ -199,7 +199,7 @@ p {
 
 Now after the selective styling is applied, `MyView` will look as follows:
 
-![MyView after selective styling](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ij7493vc0zx9vxhoza3p.png)
+![MyView after selective styling](ij7493vc0zx9vxhoza3p.png)
 
 ## When to add CSS under the `/components` directory
 
@@ -209,11 +209,11 @@ Custom styling of the internals of Vaadin components, such as the Grid or ComboB
 
 For example, let's assume we want to increase the size of the toggle icon that opens the dropdown menu of a ComboBox.
 
-![ComboBox with an arrow pointing at toggle](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4i8koa51nx4fol9sko1i.png)
+![ComboBox with an arrow pointing at toggle](4i8koa51nx4fol9sko1i-dedf6bd8.png)
 
 If we inspect this toggle in Chrome (right-click on the toggle and select the **Inspect** option), we will see that it has an attribute called `part` whose value is equal to `toggle-button`.
 
-![A screenshot of a div Element in the DOM with a highlighted part attribute whose value is equal to toggle-button](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ta1xltpw3emxd76521cu.png)
+![A screenshot of a div Element in the DOM with a highlighted part attribute whose value is equal to toggle-button](ta1xltpw3emxd76521cu-ddfeac65.png)
 
 To style this part, we need to create a file called `vaadin-combo-box.css` and place it under the `frontend/themes/myapp/components/` directory. In this file, we can do something like the following to increase the size of the ComboBox toggle.
 
@@ -294,7 +294,7 @@ Suppose that we want to change the background color of the drop-down list of ite
 
 This background color is controlled by the `background-color` property of the `overlay` part of the `vaadin-combo-box-overlay` element. This `overlay` part in the DOM is highlighted in the following screenshot.
 
-![Vaadin combo-box-overlay element in the DOM with the overlay part highlighted](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/50ek9lzuxks0rvt39y6n.png)
+![Vaadin combo-box-overlay element in the DOM with the overlay part highlighted](50ek9lzuxks0rvt39y6n-d9759ffb.png)
 
 To selectively style the background of the overlay of the two ComboBox components, we can first give each one of them a theme name using the Java API as follows:
 

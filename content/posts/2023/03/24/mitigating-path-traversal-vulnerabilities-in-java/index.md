@@ -53,7 +53,7 @@ public String uploadImage (Model model, @RequestParam("image") MultipartFile fil
 Web forms are a very common to upload images. When uploading, we use the `originalFilename` from the incoming `MultipartFile`.
 
 If we intercept and inspect the HTTP post call, we see that `filename` is just metadata in this HTTP request shown on line 24.
-![blog-mitigating-path-traversal-jsession-id](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1678125740%2Fblog-mitigating-path-traversal-jsession-id.jpg&w=960&q=75)
+![blog-mitigating-path-traversal-jsession-id](snyk-io-1d57dc7c.jpg)
 
 With the right tools, it is easy to change the filename to anything we want! When we change the filename to `../../../../../../../etc/passwd`, our code will upload the file to `images/profiles/../../../../../../../etc/passwd`.
 
@@ -64,7 +64,7 @@ The path will be traversed to the root, and the file will be overwriting `/etc/p
 Snyk Code is a real-time SAST tool that helps Java developers identify vulnerabilities in their applications — including path traversal in file uploads. The tool uses a static analysis based on an advanced machine learning model to scan your code and identify potential security risks.
 
 Regarding path traversal, [++Snyk Code++](https://docs.snyk.io/scan-application-code/snyk-code) can help you identify places in your code where user-specified file paths are used and proper validation is not in place. For example, when connecting my GitHub repository to Snyk, Snyk Code found the path traversal issue for me in [++the Web UI++](https://docs.snyk.io/scan-application-code/snyk-code/exploring-and-working-with-the-snyk-code-results).
-![blog-mitigating-path-traversal-snyk-code-ui](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1678125740%2Fblog-mitigating-path-traversal-snyk-code-ui.jpg&w=2560&q=75)
+![blog-mitigating-path-traversal-snyk-code-ui](snyk-io-094e2de7.jpg)
 
 Next, I'm using the [++Snyk plugin for IntelliJ IDEA++](https://docs.snyk.io/ide-tools/jetbrains-plugins) with Snyk Code enabled. Scanning on my local machine during development already pinpointed the path traversal problem in my file upload.
 

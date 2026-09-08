@@ -52,7 +52,7 @@ Using Kafka for the same test, but at a lower throughput of 100k msg/s the 99%il
 
 To use the same analogy as above, this is the time it takes for a signal to travel 526 km. If you walk this distance from London, you will for example end up in Dumfries in Scotland and you will need to walk for over 100 hours.
 
-![](Screen-Shot-2022-11-22-at-9.26.21-AM-889x1024.png)
+![](Screen-Shot-2022-11-22-at-9.26.21-AM-889x1024.jpg)
 
 ### Log Aggregation
 
@@ -101,7 +101,7 @@ As can be seen, the typical latency to publish is comparable. However, the outli
 
 In each case, the events published were 512-byte JSON messages. Two fields were added to trace when the message was sent.
 
-![](Screen-Shot-2022-11-22-at-11.11.19-AM.png)
+![](Screen-Shot-2022-11-22-at-11.11.19-AM.jpg)
 
 ### Microservice Messaging Transport
 
@@ -200,7 +200,7 @@ The Kafka benchmark of 250k/s messages for 10 minutes (300 million messages tota
 
 This can be run with a 128 MB heap size but results in over 139k GCs which is sub-optimal.
 
-![](Screen-Shot-2022-11-22-at-11.29.14-AM-1024x563.png)
+![](Screen-Shot-2022-11-22-at-11.29.14-AM-1024x563.jpg)
 
 ### Conclusion
 

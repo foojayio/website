@@ -20,7 +20,7 @@ frozen: false
 
 Java 18 was released last month (March 2022), and with it comes the second incubator of the Foreign Function \& Memory API, so let us look at the state of Foreign Function Interface (FFI) in Java.
 
-![cover image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c1kwxzrhvt40nuulijge.png)
+![cover image](c1kwxzrhvt40nuulijge-d97c8eda.jpg)
 
 If you would prefer to follow along by watching a video, here's the recording of my FOSDEM'22 talk on this topic, from the [the OktaDev YouTube channel](https://youtu.be/lW69_AtAXzE).
 
@@ -204,7 +204,7 @@ Let's take a simple example of calling the `getpid` function from the standard C
 
 ### JNI
 
-![getpid with JNI](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5jdqdni0gvv6zubwzq8f.png)
+![getpid with JNI](5jdqdni0gvv6zubwzq8f-49c0be71.jpg)
 
 As you can see here, there are precisely six steps to make this simple native call using JNI. You start by writing a Java class that declares the native method. Then you use `javac` to generate a header file and a C class for this. These are the native bindings.
 
@@ -220,7 +220,7 @@ Ooof! This was just a simple `getpid` call; imagine writing something like an Op
 
 ### Panama
 
-![getpid with panama](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3hj2rlctq3rnhi1o0mp4.png)
+![getpid with panama](3hj2rlctq3rnhi1o0mp4-78f0b7b2.jpg)
 
 Using the new Panama APIs, you can do the same thing in two different ways, either by manually looking up and loading the native function or using the jextract tool.
 

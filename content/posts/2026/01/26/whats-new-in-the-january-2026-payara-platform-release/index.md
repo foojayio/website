@@ -5,7 +5,7 @@ description: "As we begin 2026, we’re pleased to announce new releases across 
 authors:
   - "dominika-tasarz"
   - "luqman-saeed"
-image: "Payara-New-Release-Image-Square.png"
+image: "Payara-New-Release-Image-Square.jpg"
 categories:
   - "Jakarta EE"
   - "Java"

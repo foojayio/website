@@ -70,7 +70,7 @@ Open in a browser the URL [https://console-openshift-console.apps-crc.testing](h
 Log in using the `kubeadmin` username and password, as used above with the `oc login …` command. You might need to try a few times because of the self-signed certificate used.
 
 Once OpenShift has started and is running you should see the following webpage
-![](https://dzone.com/storage/temp/14977909-65ps3ym4omipxy6bypbo.png)
+![](14977909-65ps3ym4omipxy6bypbo-c96ef485.png)
 
 Some commands to help check status and the startup process are
 
@@ -86,7 +86,7 @@ View details with 'oc describe <resource>/<name>' or list resources with 'oc get
 ```
 
 Before continuing, go to the CodeReady Containers Preferences dialog. Increase CPUs and Memory to \>12 and \>14GB correspondingly.
-![](https://dzone.com/storage/temp/14977914-xfya19mfue6tcsuyuvl4.png)
+![](14977914-xfya19mfue6tcsuyuvl4-4273405b.png)
 
 ## Create the OpenShift Local Volumes
 

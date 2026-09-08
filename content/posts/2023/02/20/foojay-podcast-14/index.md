@@ -9,7 +9,7 @@ authors:
   - "marit-van-dijk"
   - "shai-almog"
   - "ties-van-de-ven"
-image: "podcast-debugging-guests.png"
+image: "podcast-debugging-guests.jpg"
 categories:
   - "Developer Tools"
   - "Java Core"

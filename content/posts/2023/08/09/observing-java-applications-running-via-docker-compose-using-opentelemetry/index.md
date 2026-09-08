@@ -73,7 +73,7 @@ Start your application with the `docker-composer.override.otel.yml` file.
 
 After running a few actions on your application, open the Jaeger interface to see the traces at [http://localhost:166868](http://localhost:16686/)
 
-![](1_cIrJepyqUHnnTxbhc5TFfw-1024x558.png)
+![](1_cIrJepyqUHnnTxbhc5TFfw-1024x558.jpg)
 
 Traces provide a good means to see into the working of your app and services and understand exactly what the code is doing, without having to actively debug it.
 
@@ -120,9 +120,9 @@ After running our application and triggering some actions, we'll be able to see 
 
 The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)between code and observability so that you're always aware of how your changes affect the application.
 
-![](0_RpOJWYz_jV1P4y0V-1024x677.png)
+![](0_RpOJWYz_jV1P4y0V-1024x677.jpg)
 
-![](0_2fYOaC2TR6hdT6cd.png)
+![](0_2fYOaC2TR6hdT6cd.jpg)
 
 ### Now what?
 

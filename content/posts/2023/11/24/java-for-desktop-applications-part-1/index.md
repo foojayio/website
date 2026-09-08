@@ -5,7 +5,7 @@ lastmod: "2023-11-24T09:21:13+00:00"
 description: "Improve your desktop applications with easy-to-apply tips!"
 authors:
   - "christopher-schnick"
-image: "permission.png"
+image: "permission.jpg"
 categories:
   - "Desktop"
   - "Java"

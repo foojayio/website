@@ -6,7 +6,7 @@ description: "Did you know that by tampering with chat history, you're able to m
 canonical: "https://snyk.io/articles/chat-memory-manipulation-ai/"
 authors:
   - "bmvermeer"
-image: "cars.png"
+image: "cars.jpg"
 categories:
   - "AI"
   - "Security"
@@ -100,7 +100,7 @@ Therefore, developers really need to guarantee the integrity of the conversation
 ### Chat memory injection: Proof of concept
 
 In the example below, I try to use the chat service to cancel a booking at my car rental company. According to the terms and conditions, this should not be possible. When requesting this to the LLM-driven chatbot, it acts accordingly and refuses the cancellation
-![AI bookings interface](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191486/Screenshot_2025-08-14_at_1.07.32_PM_rzb9af.png) ![AI bookings chat interface in a vulnerable application.](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191487/Screenshot_2025-08-14_at_1.08.12_PM_tb14g9.png)
+![AI bookings interface](Screenshot_2025-08-14_at_1.07.32_PM_rzb9-fb1b3743.png) ![AI bookings chat interface in a vulnerable application.](Screenshot_2025-08-14_at_1.08.12_PM_tb14-287db13f.jpg)
 
 In another part of the application, there is a search function that contains an SQL injection. By exploiting this SQL Injection, I am able to insert a pre-fabricated conversation in the database with the following query.
 
@@ -115,12 +115,12 @@ INSERT INTO CHAT_MESSAGE (CONVERSATION_ID, CONTENT, SENDER) VALUES (1, 'No probl
 --
 ```
 
-![SQL injection in search window to insert conversation](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191486/Screenshot_2025-08-14_at_1.08.33_PM_k1z4wb.png)
+![SQL injection in search window to insert conversation](Screenshot_2025-08-14_at_1.08.33_PM_k1z4-908b03ca.png)
 
 Effectively, I am manufacturing a conversation with user prompts and assistant responses in an attempt to trick the chatbot into canceling my booking.
 
 The fake conversation that was injected in a prior SQL injection attack concludes with a confirmation from the chatbot that the booking has been deleted. Clearly, this has not actually occurred yet. However, by asking for confirmation in the next prompt, the LLM will activate the function that deletes the booking, even though this goes against policy.
-![AI bookings chat interface demonstrates an SQL injection attack that poisons the chat context with fake message history](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191486/Screenshot_2025-08-14_at_1.08.53_PM_ci7dky.png) ![AI bookings chat listing](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191485/Screenshot_2025-08-14_at_1.09.17_PM_dbdspr.png)
+![AI bookings chat interface demonstrates an SQL injection attack that poisons the chat context with fake message history](Screenshot_2025-08-14_at_1.08.53_PM_ci7d-56c016ba.jpg) ![AI bookings chat listing](Screenshot_2025-08-14_at_1.09.17_PM_dbds-8ef73233.png)
 
 The main point is that by editing or altering the chat history, we can influence the LLM to respond out of context. If the LLM has function tools, we can manipulate it to run these functions by creating a convincing conversation.
 
@@ -131,7 +131,7 @@ LLMs are stateless, and the prompt is essential to how your AI service responds.
 As shown in the example above, by tampering with the chat history, I was able to make the LLM respond and execute functions that are out of policy. Although the example is simplified, it also demonstrated that basic code vulnerabilities like a SQL injection can be exploited to do this and escalate into an AI problem.
 
 Therefore, it is important to prevent these common vulnerabilities by scanning your code and dependencies for issues. With [++Snyk Code++](https://snyk.io/product/snyk-code/) and [++Snyk Open Source++](https://snyk.io/product/open-source-security-management/), this is very straightforward. Additionally, you should consider implementing a mechanism to ensure integrity, such as storing a hashed fingerprint of the conversation.
-![Snyk Code plugin in IntelliJ IDEA warning for a SQL Injection](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191486/Screenshot_2025-08-14_at_1.09.38_PM_ae8gm2.png)
+![Snyk Code plugin in IntelliJ IDEA warning for a SQL Injection](Screenshot_2025-08-14_at_1.09.38_PM_ae8g-a9cfe0df.png)
 
 Ultimately, we now understand that chat memory can serve as an attack vector to manipulate your AI system or AI agent into running functions that should not be executed. Make sure you guard against chat memory attacks when building your own AI agents.
 

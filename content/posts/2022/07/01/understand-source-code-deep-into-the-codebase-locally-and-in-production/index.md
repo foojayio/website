@@ -5,7 +5,7 @@ lastmod: "2022-07-22T14:24:50+00:00"
 description: "Learn a new codebase by diving into it with debuggers to understand the full extent of internal semantics and interactions in the project."
 authors:
   - "shai-almog"
-image: "Code-exploration.png"
+image: "Code-exploration.jpg"
 categories:
   - "Tutorials"
 related_posts:

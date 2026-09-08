@@ -5,7 +5,7 @@ lastmod: "2021-03-09T08:19:15+00:00"
 description: "What are the quick wins or low hanging fruits if you want to deal more with the topic of security in software development?"
 authors:
   - "sven-ruppert"
-image: "http://img.youtube.com/vi/lNqADishl8w/mqdefault.jpg"
+image: "mqdefault-c839bb56.jpg"
 categories:
   - "DevOps"
   - "Security"
@@ -18,7 +18,7 @@ frozen: false
 The question I am asked is almost always: "What are the quick wins or low hanging fruits if you want to deal more with the topic of security in software development? And I want you to answer this question right **now!**"
 > For the lazy ones, you can see it in a YouTube video as well, the low hanging fruits of DevSecOps:  
 >
-> [![Low hanging Fruits of DevSecOps - english](http://img.youtube.com/vi/lNqADishl8w/mqdefault.jpg)](https://youtu.be/lNqADishl8w "DevSecOps - What are the Low hanging Fruits? - english - 4k")
+> [![Low hanging Fruits of DevSecOps - english](mqdefault-c839bb56.jpg)](https://youtu.be/lNqADishl8w "DevSecOps - What are the Low hanging Fruits? - english - 4k")
 
 Let's start with the definition of a phrase that often used in the business world.
 
@@ -72,7 +72,7 @@ Until now, the only thing you can do to speed up the information flow is spendin
 But even more critical is excellent and robust test coverage. Good test coverage will allow you, to switch dependency versions immediately and push this change after a green test run into production. I recommend using a more substantial test coverage as pure line-coverages. The technique called "mutation test coverage" is a powerful one.
 > If you want to know more about Mutation Test Coverage, check out my YouTube channel. I have a video that explains the theoretical part and the practical one for Java and Kotlin.  
 >
-> [![Mutation Testing - english](http://img.youtube.com/vi/6Vej7YEOF8g/mqdefault.jpg)](https://youtu.be/6Vej7YEOF8g "Mutation Testing - english - 4k")
+> [![Mutation Testing - english](mqdefault-590ea734.jpg)](https://youtu.be/6Vej7YEOF8g "Mutation Testing - english - 4k")
 
 The need for a single point that understands all repo-types  
 
@@ -93,7 +93,7 @@ The fastest way to get feedback regarding your dependencies is the **JFrog IDE P
 If you add a dependency to your project, the IDE Plugin can understand this information based on the used package manager. The IDE Plugin is connected to your JFrog Xray instance and will be queried if there is a change inside your project's dependency definition. The information provided by Xray includes the known vulnerabilities of the added dependency. If there is a fixed version of the dependency available, the new version number will be shown.
 > If you want to see the IDE Plugin in Action without registering for a Free Tier, have a look at my youtube video:  
 >
-> [![JFrog IDE Plugin - english](http://img.youtube.com/vi/PsghzAf-ODU/mqdefault.jpg)](https://youtu.be/PsghzAf-ODU "JFrog IDE Plugin - english - 4k")
+> [![JFrog IDE Plugin - english](mqdefault-1b4f0f70.jpg)](https://youtu.be/PsghzAf-ODU "JFrog IDE Plugin - english - 4k")
 
 ### Conclusion
 

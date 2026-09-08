@@ -5,7 +5,7 @@ lastmod: "2026-05-05T15:23:49+00:00"
 description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-04-29-125804.png"
+image: "Captura-de-pantalla-2026-04-29-125804.jpg"
 categories:
   - "AI"
   - "Developer Tools"

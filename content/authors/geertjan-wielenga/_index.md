@@ -1,7 +1,7 @@
 ---
 title: "Geertjan Wielenga"
 avatar: "geertjan-wielenga.png"
-avatarFull: "geertjan-wielenga-full.png"
+avatarFull: "geertjan-wielenga-full.jpg"
 bio: "Geertjan is an open source and Java enthusiast, Java Champion, Apache Member, and leader of the Amsterdam Java User Group."
 bluesky: ""
 mastodon: ""

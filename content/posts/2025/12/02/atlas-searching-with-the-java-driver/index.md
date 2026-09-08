@@ -49,13 +49,13 @@ Here's what the Search section should now look like for you:
 ![Search indexes](Screenshot-2025-11-18-at-9.10.47-AM.png)
 
 Voila, now you've got the movie data indexed into Atlas Search and can perform sophisticated full text queries against it. Go ahead and give it a try using the handy Search Tester, by clicking the "Query" button. Try typing in some of your favorite movie titles or actor names, or even words that would appear in the plot or genre.
-![Search Tester](Screenshot-2025-11-18-at-9.11.26-AM.png)
+![Search Tester](Screenshot-2025-11-18-at-9.11.26-AM.jpg)
 
 Behind the scenes of the Search Tester lurks the $search pipeline stage. Clicking "Edit $search Query" exposes the full $search stage in all its JSON glory, allowing you to experiment with the syntax and behavior.
-![Search Tester Query Editor](Screenshot-2025-11-18-at-9.12.21-AM.png)
+![Search Tester Query Editor](Screenshot-2025-11-18-at-9.12.21-AM.jpg)
 
 This is our first glimpse into the $search syntax. The handy "copy" (the top right of the code editor side panel) button copies the code to your clipboard so you can paste it into your favorite MongoDB aggregation pipeline tools like Compass, [MongoDB shell](https://www.mongodb.com/products/shell/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim), or the Atlas UI aggregation tool (shown below). There's an "aggregation pipeline" link there that will link you directly to the aggregation tool on the current collection.
-![Using $search in Compass](Screenshot-2025-11-18-at-9.12.53-AM.png)
+![Using $search in Compass](Screenshot-2025-11-18-at-9.12.53-AM.jpg)
 
 At this point, your environment is set up and your collection is Atlas search-able. Now it's time to do some coding!
 
@@ -99,7 +99,7 @@ At this point, go ahead and copy the above JSON aggregation pipeline and paste i
 {{< img src="Screenshot-2026-01-23-at-4.24.49-PM.png" class="aligncenter size-full is-resized" width="164" height="50" style="width:208px;height:auto" >}}
 
 Here's what the results should look like for you:
-![three-stage aggregation pipeline in Compass](Screenshot-2025-11-18-at-9.14.25-AM.png)
+![three-stage aggregation pipeline in Compass](Screenshot-2025-11-18-at-9.14.25-AM.jpg)
 
 As we adapt the three-stage aggregation pipeline to Java, we'll explain things in more detail.
 

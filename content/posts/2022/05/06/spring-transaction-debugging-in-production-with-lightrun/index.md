@@ -80,19 +80,19 @@ Annotations aren't magic, though. Spring uses a proxy object, as we discussed ab
 ### Finding the Actual Transaction Class
 
 The first thing we need to do is look for the class that implements transaction functionality. Opening the IntelliJ/IDEA class view (Command-O or CTRL-O) lets us locate a class by name. Typing in "Transaction" resulted in the following view:
-![image1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650896120559/eRLIMjgCA.png)
+![image1.png](eRLIMjgCA-bd20dd39.png)
 
 This might seem like a lot, but we need a concrete public class. So annotations and interfaces can be ignored. Since we only care about Spring classes, we can ignore other packages. Still, the class we are looking for was relatively low in the list, so it took me some time to find it.
 
 In this case, the interesting class is `TransactionAspectSupport`. Once we open the class, we need to select the option to download the class source code.
 
 Once this is done, we can look for an applicable public method. `getTransactionManager` seemed perfect, but it's a bit too bare. Placing a snapshot there provided me a hint:
-![image2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650896165493/Fmw8Sgc45.png)
+![image2.png](Fmw8Sgc45-4208ee9e.png)
 
 I don't have much information here but the `invokeWithinTransaction` method up the stack is perfect!
 
 Moving on to that method, I would like to track information specific to a transaction on the `findById` method:
-![image3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650905124053/1atfNFEx2j.png)
+![image3.png](1atfNFEx2j-704bc579.png)
 
 To limit the scope only to `findById` we add the condition:
 

@@ -8,7 +8,7 @@ authors:
   - "frankdelporte"
   - "jakob-jenkov"
   - "thanos-stratikopoulos"
-image: "podcast-guests-tornadovm-1024x384-1.png"
+image: "podcast-guests-tornadovm-1024x384-1.jpg"
 categories:
   - "Performance"
   - "Podcast"
@@ -63,7 +63,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-tornadovm-1024x384.png)
+![](podcast-guests-tornadovm-1024x384.jpg)
 
 ## **Content**
 

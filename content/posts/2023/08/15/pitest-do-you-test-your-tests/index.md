@@ -5,7 +5,7 @@ lastmod: "2023-08-15T14:53:37+00:00"
 description: "A brief introduction with code to mutation testing using Pitest. Now you too can get started testing your tests!"
 authors:
   - "simon-verhoeven"
-image: "report5-1024x601-1.png"
+image: "report5-1024x601-1.jpg"
 categories:
   - "Testing"
   - "Tutorials"
@@ -93,7 +93,7 @@ A mutation can have the following states:
 
 \* Run error (akin to non-viable, some of these can lead to a run error)
 
-![A mutation coverage report](report2-1024x878.png)
+![A mutation coverage report](report2-1024x878.jpg)
 
 Now we know which holes in our testing remain, we can work towards fixing these and after these steps, we can rerun the Pitests to verify how many mutations remain alive.
 
@@ -136,7 +136,7 @@ void decays() {
 
 And rerun our tests we'll see that 2 more mutations have joined the choir invisible:
 
-![A mutation coverage report with even more killed mutations](report4-1024x607.png)
+![A mutation coverage report with even more killed mutations](report4-1024x607.jpg)
 
 **Note**: hovering over a covered mutation will show you which testcase(s) have killed it:
 
@@ -168,7 +168,7 @@ void aliveWithNiceWeatherAndNormalGrowth() {
 
 And as we can see after our run:
 
-![A mutation coverage report with even more killed mutations](report5-1024x601.png)
+![A mutation coverage report with even more killed mutations](report5-1024x601.jpg)
 
 In this manner, we can keep eliminating the gaps in our test coverage.
 

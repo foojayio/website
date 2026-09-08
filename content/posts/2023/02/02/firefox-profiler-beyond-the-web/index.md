@@ -45,15 +45,15 @@ public void testEvaluateSwitchStatement() {
 ```
 
 I wanted to use an open-source profiler, as I had no access to the paid version of [IntelliJ](https://www.jetbrains.com/idea/), which includes profiling support. Multiple tools are available, but it essentially boils down to [async-profiler](https://krzysztofslusarski.github.io/2022/12/12/async-manual.html) and [JMC](https://github.com/openjdk/jmc). Both tools have their advantages and disadvantages regarding their UI, but it essentially boils down to ease of use vs. available features:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/FOSDEM-FirefoxProfiler-1-2000x888.png)
+![](FOSDEM-FirefoxProfiler-1-2000x888-3351e695.jpg)
 
 Async-profiler and its profiling visualizations are easy to use but do not have that many features. The only available visualization is flamegraphs with minimal interactivity, just zooming is supported. Flamegraphs are the bread-and-butter of profiling:
-[![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-2.png)](https://twitter.com/mariofusco/status/1618928328613974018)
+[![](image-2-63d3ad24.jpg)](https://twitter.com/mariofusco/status/1618928328613974018)
 
 If you want more visualizations, like a tree view, timelines, or a JFR event view, you can export your profile into JFR format (or use JFR to record your profile directly) and view it in JMC. But the difference between the ease of use of both is vast: Whereas the flamegraphs of async-profiler are usable by anyone with a short introduction, using JMC has a steep learning curve, it is currently more a tool for experts to dig deep into the profiling data. This observation leads us to the first problem: There is, to my knowledge, no open-source tool that offers more visualizations than just flamegraphs and is as easy to use.
 
 Another problem with both async-profiler and JFR is the missing integration into IDEs. I would like to just click on a button in a context menu to profile an individual test case:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/jfrplugin_context_menu.png)
+![](jfrplugin_context_menu-397c6365.jpg)
 
 Without the hassle of creating a main method that just calls this method: I want to be able to profile it by modifying the JVM options of a run configuration.
 
@@ -79,16 +79,16 @@ Just keep in mind that you'll have to map your data onto the profile data struct
 ## My Java Profiler IntelliJ Plugin
 
 My [Java JFR profiler](https://github.com/parttimenerd/intellij-profiler-plugin) plugin is the result of all my efforts:
-[![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.32.55-2000x1201.png)](https://plugins.jetbrains.com/plugin/20937-java-jfr-profiler)
+[![](Screenshot-2023-01-27-at-12.32.55-2000x1-16f7d89a.jpg)](https://plugins.jetbrains.com/plugin/20937-java-jfr-profiler)
 
 It uses my [Firefox Profiler fork](https://github.com/parttimenerd/firefox-profiler), which includes additions not yet in the upstream repository and has a modular implementation so that you can use the JFR to Firefox Profiler converter independently. The plugin supports gathering profiles using JFR and async-profiler (via ap-loader), the previous image with the different run configurations is from my plugin, and opening arbitrary JFR files (as long as they are not too large):
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.31.55-2000x1201.png)
+![](Screenshot-2023-01-27-at-12.31.55-2000x1-1533b4a6.jpg)
 
 The plugin integrates with your IDE, navigating to a method in the source code when you double-click a method in the profile view. Shift double-click, and it shows you the code with the profiling information on the side:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.34.45-1-2000x1201.png)
+![](Screenshot-2023-01-27-at-12.34.45-1-2000-1c2d7b87.jpg)
 
 Besides that, it has support for showing information on all JFR events:
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-12.33.49-2000x1201.png)
+![](Screenshot-2023-01-27-at-12.33.49-2000x1-cc7af2a0.jpg)
 
 The Firefox Profiler view contains a *Function Table* , *Flame Graph* , and *Stack Chart* view, combined with a timeline on top, so it truly solves the first problem of visualizations. And it solves the second problem, as profiling with JFR or async-profiler can't be more accessible than clicking a single button.
 

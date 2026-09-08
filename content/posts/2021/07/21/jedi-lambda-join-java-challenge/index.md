@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:17:12+00:00"
 description: "Are you ready for the next Java Challenge? Less introduction, more action, and master Java concepts by having fun!"
 authors:
   - "rafael-del-nero"
-image: "lambda_join.png"
+image: "lambda_join.jpg"
 categories:
   - "Tutorials"
 related_posts:

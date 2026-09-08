@@ -6,7 +6,7 @@ description: "In this article, I will try to explain the new feature, from Java 
 canonical: "https://ashishtechmill.com/local-variable-type-inference-declare-var-not-war"
 authors:
   - "yrashish"
-image: "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+image: "default-yellow-8f95b1d6.png"
 categories:
   - "JEPs"
 related_posts:
@@ -120,7 +120,7 @@ In this article, we have covered what is the Local-Variable Type Inference new J
 #### Support me
 
 If you like what you've just read, you can buy me a coffee! 🙂  
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)
 
 #### Further Reading
 

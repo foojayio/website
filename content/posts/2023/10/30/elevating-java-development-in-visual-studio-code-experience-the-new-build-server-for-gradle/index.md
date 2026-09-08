@@ -5,7 +5,7 @@ lastmod: "2023-11-01T08:04:30+00:00"
 description: "Microsoft and Gradle Enterprise have joined forces to explore a novel approach to Gradle project import and building, based on the Build Server Protocol (BSP)."
 authors:
   - "nick-zhu"
-image: "build-server-gradle.png"
+image: "build-server-gradle.jpg"
 categories:
   - "Gradle"
   - "Tools"
@@ -50,11 +50,11 @@ If you want to explore the new Gradle project development experience based on th
 
 #### Step 1 -- Install the "Extension Pack for Java" extension.
 
-[![Image javaext](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/javaext.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/javaext.png)
+[![Image javaext](javaext-280d47cf.png)](javaext-280d47cf.png)
 
 #### Step 2 -- Install the "Gradle for Java" extension.
 
-[![Gradle extension pack](https://devblogs.microsoft.com/java-ch/wp-content/uploads/sites/59/2023/09/gradle.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/gradle.png)
+[![Gradle extension pack](gradle-d63d0fa1.jpg)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/gradle.png)
 
 #### Step 3 -- Open your Gradle project in VS Code. If the project has been opened in VS Code before, open the command palette (F1) and execute the command "Java: Clean Java Language Server Workspace \> Reload and delete."
 
@@ -62,7 +62,7 @@ If you want to explore the new Gradle project development experience based on th
 
 #### Step 4 -- Checking Gradle Build Server Status Output
 
-[![Image buildserver](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/buildserver.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2023/09/buildserver.png)
+[![Image buildserver](buildserver-00803d1c.jpg)](buildserver-00803d1c.jpg)
 > If you encounter any issues during your trial or have any suggestions, please feel free to let us know by [creating a GitHub Issue](https://github.com/microsoft/vscode-gradle/issues).
 
 ### Future Plans
@@ -75,11 +75,11 @@ This way, even if users have customized complex build processes for testing or r
 
 To use all features mentioned above, please download and install [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) on Visual Studio Code.
 
-[![Extension pack for Java](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/09/javapack.png)
+[![Extension pack for Java](javapack-892c0338.png)](javapack-892c0338.png)
 
 If you are a Spring developer working on a Spring Boot application, you can also download the [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack) for specialized Spring experience.
 
-[![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
+[![Spring boot extension pack](spring-ac42cb4c.png)](spring-ac42cb4c.png)
 
 ### Feedback and suggestions
 

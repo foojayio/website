@@ -85,6 +85,6 @@ Maven commands execute parts of its Project Object Model.
 A Project Object Model is *usually* described as an XML document. A POM description is NOT limited to XML. Other formats can be used to describe the Project Object Model, however, XML was the first format used.
 
 A picture to illustrate a typical maven execution:
-![A pictorial overview of how maven interacts with a project's Project Object Model. Includes assembling, download of dependencies and plugins, execution of build lifecycles and an upload of build artifacts to either a local repository or to a maven repository on a network](https://cgunturme.files.wordpress.com/2020/05/maven.png?w=840) Maven – A pictorial overview
+![A pictorial overview of how maven interacts with a project's Project Object Model. Includes assembling, download of dependencies and plugins, execution of build lifecycles and an upload of build artifacts to either a local repository or to a maven repository on a network](maven-58e6db6b.png) Maven – A pictorial overview
 
 The next article in this series will dig into details of a Project Object Model (POM). [Have fun with Apache Maven!](https://maven.apache.org/)

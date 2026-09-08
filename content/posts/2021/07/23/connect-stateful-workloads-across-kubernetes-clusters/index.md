@@ -6,7 +6,7 @@ description: "How we utilize off-the-shelf functionality and components to set u
 canonical: "https://www.datastax.com/blog/how-connect-stateful-workloads-across-kubernetes-clusters"
 authors:
   - "roman-chernobelskiy"
-image: "multi-cluster-overlay-networking.png"
+image: "multi-cluster-overlay-networking.jpg"
 categories:
   - "Apache Cassandra"
   - "Databases"
@@ -38,7 +38,7 @@ So the idea of making our own virtual IPs and exposing them just to the relevant
 ## Lightweight overlay network to the rescue
 
 Overlay networks differ in their capabilities and implementations, but one thing that unites them is that they run on top of other networks. Each link connecting two nodes of an overlay network corresponds to a path of one or more links on the underlying network. While overlay networks usually serve traffic for multiple different apps, the overlay network described here will be single tenant and dedicated to one app. It will consist of two logical components: routing and transport. For routing, we need a way to route connections to a given stateful pod (virtual IP) that survives pod IP changes during pod restart. For transport, we'll need to communicate the source and destination virtual IP addresses across the connection and to secure the data stream.
-![](image-2-1024x450.png)
+![](image-2-1024x450.jpg)
 
 The basic premise behind routing is simple. First, we select a subnet for our overlay network, let's say [10.0.0.0/8](https://tailscale.com/kb/1015/100.x-addresses/). Then, we assign our app in each Kubernetes cluster an ordinal. So for example, app in cluster 1 is assigned ordinal 1, and app in cluster 2 is assigned ordinal 2. This ordinal becomes the second octet of the virtual IP, giving the app in cluster 1 a virtual subnet of 10.1.0.0/16, and the app in cluster 2 a virtual subnet of 10.2.0.0/16.
 

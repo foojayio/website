@@ -27,7 +27,7 @@ It is a known fact that developing applications with Kubernetes is cumbersome. T
 
 As I said earlier developing applications with Kubernetes is not so easy task and that's where Skaffold comes into play as it eases the development and deployment of your applications running on Kubernetes. It manages the entire workflow and you get instant feedback while developing and deploying your application locally or on a remote Kubernetes cluster.
 
-![Image for post](https://miro.medium.com/max/1288/1*EaQd3mLLRO9rjuUuW4v8mw.png)
+![Image for post](1-EaQd3mLLRO9rjuUuW4v8mw-f28c708d.png)
 
 Following are some of the benefits of using Skaffold.
 
@@ -307,7 +307,7 @@ Just run following commands and that's it. Make sure docker and minikube are up 
 
 Following are the screenshots from Cloud Shell.
 
-![Cloud shell output](Screenshot-2021-01-16-at-2.48.04-AM-700x408.png)
+![Cloud shell output](Screenshot-2021-01-16-at-2.48.04-AM-700x408.jpg)
 
 {{< img src="Screenshot-2021-01-16-at-2.48.36-AM-700x92.png" class="size-medium" alt="curl output" width="700" height="92" >}}
 
@@ -322,7 +322,7 @@ In this article, I have just covered a handful of features that Skaffold provide
 #### Support me
 
 If you like what you just read then you can buy me a coffee  
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)
 
 **Further reading**
 

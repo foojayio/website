@@ -48,7 +48,7 @@ What we would see on the APM is the slow performance of a web service. We can na
 
 Note: Before we proceed, I assume you're familiar with the basics of Lightrun and have it installed. If not, please check out [this introduction](https://docs.lightrun.com/).
 
-![Metrics Menu](https://cdn.hashnode.com/res/hashnode/image/upload/v1647872819348/bBAQdRv-m.png)
+![Metrics Menu](bBAQdRv-m-0becdd43.jpg)
 
 Lightrun includes the ability to set several metric types:
 
@@ -61,7 +61,7 @@ Notice that you can use conditions on all metrics. If performance overhead impac
 
 We can now use these tools to narrow down performance problems and find the root cause, e.g. here I can check if these two lines in the method are at fault:
 
-![Adding a TicToc](https://cdn.hashnode.com/res/hashnode/image/upload/v1647872936169/rjeROuI1U.png)
+![Adding a TicToc](rjeROuI1U-2575bbf8.png)
 
 Adding this tictoc provides us with periodical printouts like this:
 
@@ -95,7 +95,7 @@ E.g. in a key values store, if a separate thread mutates the key, the store migh
 
 The simplest way to do this is log the current thread using the condition Current thread is: `{Thread.currentThread().getName()}`:
 
-![Debug threading issue](https://cdn.hashnode.com/res/hashnode/image/upload/v1647873079232/Te7eFefiM.png)
+![Debug threading issue](Te7eFefiM-137179b5.png)
 
 The problem is that a condition like this can trigger output that's hard to follow, you might see hundreds of printouts. So once we find out the name of the thread, we can add a condition:
 

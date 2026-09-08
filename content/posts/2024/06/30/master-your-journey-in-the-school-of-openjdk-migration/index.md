@@ -26,7 +26,7 @@ Azul has led so many OpenJDK migrations, we could write a book. Like, seriously,
 
 For many smaller organizations with less complex infrastructures, an OpenJDK migration can be very straightforward. **"In fact, migrating to certified builds of OpenJDK can be very straightforward and simple for the vast majority of enterprises,"** I wrote in [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/). **"If you're migrating server applications, you're not likely to encounter any challenges."**
 
-![](dummies.png)
+![](dummies.jpg)
 
 But as anyone with experience in big software projects knows, things rarely go as simply as teams hope they will. It's good to know what to expect before starting a migration.
 

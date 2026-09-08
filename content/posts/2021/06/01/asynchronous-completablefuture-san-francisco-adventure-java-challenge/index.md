@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:35:13+00:00"
 description: "Solving the limitations of the Future interface, we have the CompletableFuture API with methods to build reliable high-performant software."
 authors:
   - "rafael-del-nero"
-image: "completable_future-1024x801-1.png"
+image: "completable_future-1024x801-1.jpg"
 categories:
   - "Tutorials"
 related_posts:

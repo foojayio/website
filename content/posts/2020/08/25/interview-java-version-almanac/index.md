@@ -5,7 +5,7 @@ lastmod: "2020-09-01T14:07:55+00:00"
 description: "The Java Version Almanac provides details per release on OpenJDK distributions, new features, and differences between APIs across releases."
 authors:
   - "geertjan-wielenga"
-image: "Screenshot-2020-08-25-at-08.35.09-1024x559.png"
+image: "Screenshot-2020-08-25-at-08.35.09-1024x559.jpg"
 categories:
   - "Interviews"
 related_posts:
@@ -13,7 +13,7 @@ frozen: true
 ---
 
 From this week, we're happy to announce that we're hosting Marc Hoffmann's [Java Version Almanac](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing details per release on OpenJDK distributions, new features, and differences between APIs across releases.
-![](Screenshot-2020-08-25-at-08.35.09-1024x559.png)
+![](Screenshot-2020-08-25-at-08.35.09-1024x559.jpg)
 
 {{< legacy-notice >}}
 

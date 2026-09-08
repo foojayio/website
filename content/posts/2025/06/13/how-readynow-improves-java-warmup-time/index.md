@@ -123,8 +123,8 @@ understanding_readynow_tier2_with_readynow-1024x547.png
 The chart with the code waiting in a queue to be compiled also shows a big difference. In the first run, we can see a huge spike starting at around second 26, when the actual Dacapo-test starts, which causes a lot of load on the application. Thanks to the profile log, this queue is moved to the start of the application. As described before, ReadyNow uses the decisions of the previous run to immediately compile most of the native code and have it available when needed. As a result, we only see a small peak at 26 seconds.
 
 {{< gallery >}}
-understanding_readynow_compiler_queu_no_readynow-1-1024x547.png
-understanding_readynow_compiler_queu_with_readynow-1-1024x547.png
+understanding_readynow_compiler_queu_no_readynow-1-1024x547.jpg
+understanding_readynow_compiler_queu_with_readynow-1-1024x547.jpg
 {{< /gallery >}}
 
 ## Conclusion

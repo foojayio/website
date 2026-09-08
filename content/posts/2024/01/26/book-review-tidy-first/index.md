@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![Tidy first](https://learning.oreilly.com/library/cover/9781098151232/250w/)
+![Tidy first](learning-oreilly-com-a8475420.jpg)
 
 price: €39.99 for the eBook  
 

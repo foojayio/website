@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![We Will Not Sabotage Your Code](https://www.codenameone.com/blog/we-will-not-sabotage-your-code.jpg)
+![We Will Not Sabotage Your Code](we-will-not-sabotage-your-code.jpg)
 
 This is a very low bar. I am genuinely saddened that I need to write it down at all, because until last week it seemed too obvious to say out loud.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

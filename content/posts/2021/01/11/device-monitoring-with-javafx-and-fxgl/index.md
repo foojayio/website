@@ -261,7 +261,7 @@ When the application starts, you have the choice to select between an IP address
 
 {{< gallery cols="3" caption=`Screenshots of the application with "Mock Data"` >}}
 mock-selection-1024x462.png
-mock-overview-1024x599.png
+mock-overview-1024x599.jpg
 mock-cpu-graph-1024x659.png
 {{< /gallery >}}
 

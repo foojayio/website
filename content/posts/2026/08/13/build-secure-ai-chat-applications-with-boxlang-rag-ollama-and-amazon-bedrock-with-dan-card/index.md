@@ -22,7 +22,7 @@ related_posts:
 frozen: false
 ---
 
-![](dancardWorkshop-700x394.png)
+![](dancardWorkshop-700x394.jpg)
 
 ## Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock
 

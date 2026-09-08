@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-![Metal Default, A New Build Cloud, And A New Format](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format.jpg)
+![Metal Default, A New Build Cloud, And A New Format](metal-default-new-build-cloud-and-a-new-af830751.jpg)
 
 This week's release post looks different on purpose. The Friday omnibus has been getting longer and longer, and that has been working against us in two ways. SEO ignores 5,000 word pages that cover twelve unrelated topics, so the actual material gets buried instead of indexed against the queries that should find it. And when a single release post covers ten things, it becomes hard to point a colleague at "that one Codename One change from a few weeks ago" without scrolling for ten minutes.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

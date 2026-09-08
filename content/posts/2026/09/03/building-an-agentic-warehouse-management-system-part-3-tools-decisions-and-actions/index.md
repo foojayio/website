@@ -23,7 +23,7 @@ In this third and final part, we will build on the execution plan created in [Pa
 A live version of the Agentic WMS is available[here](https://agentic-wms-39763860545.southamerica-west1.run.app/), and the complete source code is available[here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
 
 Let's revisit the complete agent flow. The first stages: **Define the Agent, Trigger the Agent, and Plan,** were covered in the previous article. Now we will focus on executing the tasks, using the available tools, gathering context, and making the replenishment decision.  
-![](p3-flow-765x1024.png)
+![](p3-flow-765x1024.jpg)
 
 With the execution plan created in [Part 2](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-2-java-and-spring-ai/), the [AgentRunner](https://github.com/mongodb-developer/mongodb-jvm-showcase/blob/ea5c87c042867a0ea0c71f9ca80c41b466bd2981/java/use-cases/agentic-wms/src/main/java/com/devrel/wms/agent/AgentRunner.java#L56) starts processing the tasks one at a time. For each task, the runner reads its description and capability, executes it, stores the result, and then continues with the next task:
 
@@ -236,7 +236,7 @@ private boolean decidedToStop(String capability, String result) {
 ```
 
 If replenishment is not required, the remaining REPLENISHMENT and NOTIFICATION tasks are marked as SKIPPED, and the execution is completed:
-![](p3-07_skipped-1024x492.png)
+![](p3-07_skipped-1024x492.jpg)
 
 The runner marks those tasks as SKIPPED and completes the execution:
 
@@ -317,7 +317,7 @@ At this point, the agent has made the decision and performed the actions require
 ## Complete
 
 When there are no more tasks to execute, the agent run is completed and a summary is generated:
-![](p3-08_draft-1024x607.png)
+![](p3-08_draft-1024x607.jpg)
 
 If a replenishment request was created, it is now available on the[Replenishments](https://agentic-wms-39763860545.southamerica-west1.run.app/#replenishment) page for review:
 ![](p3-09_replenishment-1024x467.png)

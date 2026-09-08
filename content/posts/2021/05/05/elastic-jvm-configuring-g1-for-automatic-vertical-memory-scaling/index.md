@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/12/elastic-jvm-e1545213859238.png" class="alignleft" alt="Automatic Vertical Memory Scaling" >}}
+{{< img src="elastic-jvm-e1545213859238-2b2c265b.png" class="alignleft" alt="Automatic Vertical Memory Scaling" >}}
 
 Nowadays, JVM-based applications can benefit from elasticity and density of container technology. However, there are still some issues that may prevent from unleashing the full potential of Java and containers "marriage."
 
@@ -29,7 +29,7 @@ There is a necessity to rethink the Garbage Collection (GC) policies that contro
 
 As a result, in most cases, the Java heap will not be released unless forced externally. Such behavior is particularly disadvantageous in scalable container environments when the JVM uses a fraction of assigned memory resources due to inactivity or a small load. This results in customers overpaying for unused resources, and cloud providers not being able to fully utilize their hardware.  
 
-{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/12/jdk-9-e1545213845349.png" class="alignright" alt="Automatic Vertical Memory Scaling of Java" >}}
+{{< img src="jdk-9-e1545213845349-bdd1e188.png" class="alignright" alt="Automatic Vertical Memory Scaling of Java" >}}
 
 In order to overcome this issue, we have introduced additional logic into the JVM to trigger a heap reduction whenever the amount of unused memory is significant. It can be performed at any time by configurable options, not only during regular GC cycles.
 

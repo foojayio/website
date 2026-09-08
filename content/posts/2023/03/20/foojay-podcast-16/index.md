@@ -7,7 +7,7 @@ authors:
   - "frankdelporte"
   - "miro-wengner"
   - "simonritter"
-image: "podcast-java-20-guests-1024x576-1.png"
+image: "podcast-java-20-guests-1024x576-1.jpg"
 categories:
   - "Java Core"
   - "Podcast"

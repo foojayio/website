@@ -23,7 +23,7 @@ aliases:
 
 ## AWS Nitro and CPU Graviton Meets Unikernels: Java and Quarkus on ARM64 AWS Graviton with Nanos Unikernel
 
-![image](https://github.com/user-attachments/assets/2c957ea8-2c6b-4caa-86f8-5adeb9e8bedc)
+![image](2c957ea8-2c6b-4caa-86f8-5adeb9e8bedc-619d4e1c.jpg)
 
 ## Java and Jakarta EE Truly Meet Unikernels
 
@@ -103,13 +103,13 @@ This demonstrates that Nanos unikernels are **hypervisor-agnostic** and cloud-in
 
 ## Architectural Diagram of the PoC
 
-![image](https://github.com/user-attachments/assets/3d2ee606-59e5-4287-af6f-78d04ffbcef1)
+![image](3d2ee606-59e5-4287-af6f-78d04ffbcef1-cde1e925.jpg)
 
 The application runs as a single unikernel image directly on top of the AWS Nitro hypervisor, without a guest operating system, container runtime, or Kubernetes node.
 
 ## Containers vs Unikernels: A Stack Comparison
 
-![image](https://github.com/user-attachments/assets/2462ae08-9dc9-40b6-ae49-d9123294cdae)
+![image](2462ae08-9dc9-40b6-ae49-d9123294cdae-8b063006.jpg)
 
 ### Container Stack
 
@@ -131,7 +131,7 @@ By removing unnecessary layers, unikernels reduce boot time, memory footprint, a
 
 ## Quarkus, Semeru, and Nanos on AWS Nitro Graviton
 
-![image](https://github.com/user-attachments/assets/5abe0556-690e-4e39-827b-a6090a64dc32)
+![image](5abe0556-690e-4e39-827b-a6090a64dc32-4ecff4c0.jpg)
 
 Quarkus is particularly well suited for this model thanks to its fast startup and low memory usage, while IBM Semeru provides a production-grade OpenJDK runtime. Combined with Nanos, the result is a highly efficient Java unikernel.
 

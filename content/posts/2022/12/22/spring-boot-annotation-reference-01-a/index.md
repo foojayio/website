@@ -24,7 +24,7 @@ Though I had worked on a 'similar architecture' way back in 2007-'08 while worki
 
 This includes building 'executable applications' for windows much easier!
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-XqD0czmugSGjJGEVYDe1cVOxHKRyK9G5jM8V03LJfxUWL5O0cdKgAB-PjoBOPu-1z6Ctv-uMZqP7ygj0J_mTdDL5CqVLZKGAP2SgG-fwGfqpWgoIMGZJv3hbX5swfCm9Snmp_nA4zui3bdm_3Q09TPtFA)
+![](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
 
 Anyways, the topic of our discussion is Spring Boot Annotations. Recently, in August 2022 while training a team of 10, I realized that though even though I know most of the Spring Boot Annotations, I may not be aware of all of them. So, I decided to write this article.
 
@@ -167,7 +167,7 @@ package xyz.sumithpuri.spring.boot.annotation.configuration;
 
 With Spring DevTools Enabled, you will see one such log on the console that are the debug statements showing the matches or evaluations against the conditions.
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEh_YHALIvRTyRrUibkYVbv4T6wajr7lTequVrbA6XybZubtdP61FHgch9J84jsHrPcvXmlTmoo0_Q4CFzo9SRYompQJgGkuZWWHcP3MBtJKfoSI4ByS7-VuG7Jpf2tbMKqHi-fgivNuWH76fWzHjLGsfGp3OYhY5s0JhilC5kDne9a-BJCqIzkuy1k_3A)
+![](AVvXsEh_YHALIvRTyRrUibkYVbv4T6wajr7lTequ-b49c69f3.png)
 
 **@ConditionalOnProperty**
 
@@ -206,7 +206,7 @@ Please go ahead and add the property 'mode=false' in your application.properties
 
 If this property is not present or has a different value, your server will refuse to start as there will be not property present to inject for an autowired bean. (Refer to the code in the GitHub Repository).
 
-![](https://blogger.googleusercontent.com/img/a/AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-XqD0czmugSGjJGEVYDe1cVOxHKRyK9G5jM8V03LJfxUWL5O0cdKgAB-PjoBOPu-1z6Ctv-uMZqP7ygj0J_mTdDL5CqVLZKGAP2SgG-fwGfqpWgoIMGZJv3hbX5swfCm9Snmp_nA4zui3bdm_3Q09TPtFA)
+![](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
 
 **@ConfigurationProperties**   
 **@ConfigurationPropertiesScan**

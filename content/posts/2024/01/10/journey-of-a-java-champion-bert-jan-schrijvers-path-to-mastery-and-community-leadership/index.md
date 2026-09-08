@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-{{< img src="image.png" class="alignright size-full" width="400" height="400" >}}
+{{< img src="image.jpg" class="alignright size-full" width="400" height="400" >}}
 
 Bert Jan is CTO at [OpenValue](https://www.openvalue.eu/) and focuses on Java, software architecture, Continuous Delivery and DevOps.   
 
@@ -58,7 +58,7 @@ Obviously, community events like J-Fall, Devoxx and JavaZone play a big part the
 
 **Bert:** Do whatever works for you, but be prepared to spend time regularly catching up with the latest new developments. Personally, my main sources for this are my Twitter feed and tech conferences. Via Twitter, I get daily updates on what's new in tech. When something big is happening, this is typically tweeted about by multiple people, so big things become hard to miss.
 
-At conferences, I try to focus on visiting talks about new things I'd like to learn about and on catching up with old and new friends, and hearing what they're working on. I think JUGs and conferences play a major role in helping developers keep up with new technology. But be aware - technology is not always about the latest, greatest and newest; it's also about delivering value with boring tech ![😉](https://lh7-us.googleusercontent.com/3QKuapgd38k12XDJB7Z-xXttOfcFE-2KjPOtsfL5_NAYa2xNtPe9UXm0v0tUiIlRReCvTmIKi-QyEJhBGd5zNBMiv0gGuyNmP0rtpBAYsUMsy2XIeIT-3RSUsBhJ8oZ3NKbinkrSMd5KvsHc03Qnnuw)
+At conferences, I try to focus on visiting talks about new things I'd like to learn about and on catching up with old and new friends, and hearing what they're working on. I think JUGs and conferences play a major role in helping developers keep up with new technology. But be aware - technology is not always about the latest, greatest and newest; it's also about delivering value with boring tech ![😉](3QKuapgd38k12XDJB7Z-xXttOfcFE-2KjPOtsfL5-62036c08.png)
 
 That's why I love talks about projects leveraging a piece of technology to fulfill business goals. Everyone can get to a "hello world" stage with a new piece of tech, but when someone is sharing a year or more of experience with using a piece of tech in production, that's where I really find value in those types of talks.
 > *Do whatever works for you, but be prepared to spend time regularly catching up with the latest new developments.*

@@ -37,17 +37,17 @@ He proposed that walking Java threads only at safepoints while obtaining some in
 ## Idea
 
 The current interaction between a sampler of the profiler and the Java Threads looks like the following:  
-![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence.drawio.svg)
+![](wall-clock-sampling-sequence.drawio-6a31e77e.svg)
 
 The sampler thread signals every Java thread using POSIX signals and then obtains the full trace directly in the signal handler while the thread is paused at an arbitrary location. I explored variations of this approach in my post [Couldn't we just Use AsyncGetCallTrace in a Separate Thread?](https://mostlynerdless.de/blog/2023/04/21/couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread/)
 
 My new approach, on the contrary, walks the Java thread in a signal handler till we find the first bytecode-backed Java frame, stores this in the thread-local queue, triggers a safepoint, and then walks the full Java stack at these safepoints for all enqueued top-frames.
 
 We, therefore, have a two-step process:
-![](https://mostlynerdless.de/wp-content/uploads/2023/08/sig_safe-2000x1176.png)
+![](sig_safe-2000x1176-9fba9b01.jpg)
 
 Instead of just walking the stack in the signal handler:
-![](https://mostlynerdless.de/wp-content/uploads/2023/08/iterators2-2000x1100.png)
+![](iterators2-2000x1100-fbbdfe02.jpg)
 
 The new API exploits a few implementation details of the OpenJDK:
 
@@ -297,7 +297,7 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
 ```
 
 This assumes that you use the [modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). [MathParser](https://github.com/parttimenerd/writing-a-profiler/blob/iterative_safepoint_profiler/samples/math/MathParser.java) is a demo program that generates and evaluates simple mathematical expressions. The resulting flame graph should look something like this:
-![](https://mostlynerdless.de/wp-content/uploads/2023/08/Screenshot-2023-08-10-at-02.54.56-2000x931.png)
+![](Screenshot-2023-08-10-at-02.54.56-2000x9-6129bbc3.jpg)
 
 ## Conclusion
 
@@ -325,6 +325,6 @@ I want to come back to the quote from Erik that I wrote in the beginning, answer
 Thank you for joining me on my API journey; I'm open to any suggestions; please reach me using the typical channels.
 
 Just keep in mind:  
-![](https://mostlynerdless.de/wp-content/uploads/2023/08/no2.png)
+![](no2-f2143aa8.png)
 
 *This project is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com), making profiling easier for everyone.* *This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de).* *Thanks to Erik Österlund for the basic idea, and to Jaroslav Bachorik for all the feedback and help on the JEP.*

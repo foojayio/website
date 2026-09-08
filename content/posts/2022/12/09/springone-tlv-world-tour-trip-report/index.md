@@ -6,7 +6,7 @@ description: "Got a chance to meet & talk to many interesting members of the Spr
 canonical: "https://debugagent.com/springone-tlv-world-tour-trip-report"
 authors:
   - "shai-almog"
-image: "cover-image.png"
+image: "cover-image.jpg"
 categories:
   - "Cloud"
   - "Spring"

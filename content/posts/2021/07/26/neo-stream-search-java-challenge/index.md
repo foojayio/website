@@ -5,7 +5,7 @@ lastmod: "2021-08-23T12:16:36+00:00"
 description: "In this challenge, we explore important key methods when we work with a Java Stream so that it becomes clear for you what they do."
 authors:
   - "rafael-del-nero"
-image: "neo.png"
+image: "neo.jpg"
 categories:
   - "Tutorials"
 related_posts:

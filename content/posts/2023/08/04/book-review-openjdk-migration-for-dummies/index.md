@@ -5,7 +5,7 @@ lastmod: "2024-06-30T11:16:33+00:00"
 description: "Not just a technical manual, Simon Ritter's new book is a companion on a journey through the complexities of OpenJDK migration."
 authors:
   - "bazlur-rahman"
-image: "dummies.png"
+image: "dummies.jpg"
 categories:
   - "Book Review"
   - "Books"

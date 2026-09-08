@@ -34,7 +34,7 @@ Even for enterprises that have done a good job of building out their EDAs, the o
 One of the most common challenges enterprise architects are struggling with in the EDA space is the proliferation of messaging and streaming technologies. Aging technologies such as JMS and various MQ implementations are deeply entrenched throughout the application landscape. When developers modernize on-prem apps and move them into the cloud, they often swap out legacy messaging systems for cloud native ones like GCP Pub/Sub or AWS Kinesis. Developers and architects focused on greenfield development of new digital experiences often find that platforms like JMS and MQ can no longer keep up with the scale and performance requirements needed to create an engaging customer experience. This, coupled with the desire to retain streams of events for use by data scientists, often leads to the adoption of other specialized platforms such as Kafka. While each of these individual decisions makes sense in a vacuum, when combined they result in a fragmented architecture with limited interoperability and unreasonably high costs that impose both Capex and Opex (capital expenditures and operational expenditures) drawbacks.
 
 The result of all this is an architecture that starts to resemble an abomination of bolted-on technology that hinders, rather than aids, the core tenets of EDA.
-![](a4a34537-image1-1024x814.png)
+![](a4a34537-image1-1024x814.jpg)
 
 ## Creating a Unified EDA
 

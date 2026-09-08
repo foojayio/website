@@ -41,7 +41,7 @@ Work is ongoing for a totally refactored V2 which will bring modules and improve
 Robert is the founding father of the Pi4J project. He started in 2012 and quickly got a lot of attention from the Java community. Pi4J is now actively in use in a lot of projects. He also presented his work in the Devoxx 2014 and Oracle Code One 2019 conferences.
 
 {{< gallery cols="3" >}}
-github-pi4j-search-1024x901.png
+github-pi4j-search-1024x901.jpg
 robert-savage-devoxx-2014-1024x768.jpg
 robert-savage.jpg
 {{< /gallery >}}

@@ -174,7 +174,7 @@ This prints a list of events like:
 ```
 
 You can find more information on this and other events in my [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents):  
-[![](https://mostlynerdless.de/wp-content/uploads/2023/10/Screenshot-2023-10-19-at-12.28.35-2000x1509.png)](https://sap.github.io/SapMachine/jfrevents/#fileread)
+[![](Screenshot-2023-10-19-at-12.28.35-2000x1-27c5707b.jpg)](https://sap.github.io/SapMachine/jfrevents/#fileread)
 
 There are, of course, other events, but in our file server example, we're only interested in file events for now (this might change as Jaroslav adds more features to his fork).
 

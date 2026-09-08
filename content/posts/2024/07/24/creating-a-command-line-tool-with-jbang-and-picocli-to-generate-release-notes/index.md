@@ -372,7 +372,7 @@ Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
 
 It will print on the terminal if we don't want to save it in any file.
 
-{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.png" class="size-medium" width="700" height="290" >}}
+{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.jpg" class="size-medium" width="700" height="290" >}}
 
 That's it.
 

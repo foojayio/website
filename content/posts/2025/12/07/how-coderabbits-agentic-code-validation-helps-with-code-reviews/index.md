@@ -20,7 +20,7 @@ frozen: false
 ---
 
 The [2025 Stack Overflow survey](https://survey.stackoverflow.co/2025/) reveals a paradox: while 84% of developers express confidence in adopting AI tools, nearly half (48%) still distrust the accuracy of their outputs. This tension between optimism and skepticism has reshaped how teams think about quality assurance.
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764049813672/6ad5aea0-625a-4f7f-bf4c-a0b3c8a4903f.png?auto=compress,format&format=webp)
+![](6ad5aea0-625a-4f7f-bf4c-a0b3c8a4903f-67920532.png)
 
 ## **From PRD to PR in days (not weeks)**
 
@@ -34,7 +34,7 @@ Reviewing AI-generated code also takes much more time. The bottleneck isn't writ
 
 ## **The AI-generated code crisis nobody's talking about**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050727379/470609c8-ac04-40f4-8406-efdd62c734f2.png?auto=compress,format&format=webp)
+![](470609c8-ac04-40f4-8406-efdd62c734f2-0e92b886.jpg)
 
 Engineers are right to be skeptical, since [**over 40% of AI-generated code still contains security flaws**](https://cyber.nyu.edu/2021/10/15/ccs-researchers-find-github-copilot-generates-vulnerable-code-40-of-the-time/) and here is what AI-generated code often gets wrong:
 
@@ -63,16 +63,16 @@ To effectively counter that, we developed techniques to engineer and manage the 
 Here are some examples from the open-source PRs.
 
 **Static analysis**: AST parsing with tools like ast-grep to understand code smells.
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764049990279/6dc6960a-397f-45eb-bc56-1e206c895ee9.png?auto=compress,format&format=webp) ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764049974691/04467ffa-0ffa-40c8-aaa9-2e39f3729048.png?auto=compress,format&format=webp)
+![](6dc6960a-397f-45eb-bc56-1e206c895ee9-073066f4.jpg) ![](04467ffa-0ffa-40c8-aaa9-2e39f3729048-497f4709.png)
 
 **Incremental analysis**: Only validating wAgentiAgenhat changed, not your entire codebase.
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050007622/669a2b39-d1b7-453d-90bb-d1c0304394a5.png?auto=compress,format&format=webp) ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050040318/39ea9e7c-da40-4bb2-9462-011aea5f5855.png?auto=compress,format&format=webp)
+![](669a2b39-d1b7-453d-90bb-d1c0304394a5-f9f39405.png) ![](39ea9e7c-da40-4bb2-9462-011aea5f5855-d0ba23e2.jpg)
 
 **Security issues**: Prompt injection attacks and edge case generation.
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050064236/1e13090d-cb04-467a-97d1-0e39a48a584d.png?auto=compress,format&format=webp)
+![](1e13090d-cb04-467a-97d1-0e39a48a584d-4cd4f8c0.jpg)
 
 **Name refactoring**: Suggesting better variable and function names based on usage.
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1764050080527/7993c838-7e2a-40c2-8a9a-6f7c5fe7bcbb.png?auto=compress,format&format=webp)
+![](7993c838-7e2a-40c2-8a9a-6f7c5fe7bcbb-0aa4f962.jpg)
 
 The "agentic" part means the AI decides which tools to run, interprets the results, and takes action. Think of it like having a senior engineer who knows when to dig deeper and when something is *not* fine.
 

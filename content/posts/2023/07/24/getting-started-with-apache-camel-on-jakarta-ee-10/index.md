@@ -7,7 +7,7 @@ canonical: "https://blog.payara.fish/getting-started-with-apache-camel-on-jakart
 authors:
   - "jadon-ortlepp"
   - "luqman-saeed"
-image: "camelcase.png"
+image: "camelcase.jpg"
 categories:
   - "Developer Tools"
   - "Jakarta EE"

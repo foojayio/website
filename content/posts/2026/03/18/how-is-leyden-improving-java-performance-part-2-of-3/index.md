@@ -105,7 +105,7 @@ By using the [Java AOT Cache Diagnostics Tool](https://github.com/Delawen/leyden
 
 |                                                   1000 requests training                                                   |                                                  60 000 requests training                                                  |
 |----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| ![Summary of the contents of the cache](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tgqbt6fjhvzn9hg4tuh9.png) | ![Summary of the contents of the cache](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0gsxbnd1s0wp17s6qpvh.png) |
+| ![Summary of the contents of the cache](tgqbt6fjhvzn9hg4tuh9-83c6c159.jpg) | ![Summary of the contents of the cache](0gsxbnd1s0wp17s6qpvh-95dcb25e.jpg) |
 
 As expected, both trainings seem to have cached the same amount of metadata (slightly above 99% of classes used), because the code loaded into memory on both cases should be more or less the same (some timeout or runtime exception thrown may explain differences). This means that the startup time using any of the generated caches should be similar.
 
@@ -113,7 +113,7 @@ The training with 60 000 requests has many more methods that are profiled and co
 
 Anyway, we should notice an improvement on startup time compared to the regular Java deployment, because we have a lot of metadata, profile and linkage data and some heap data already cached during AOT. And as we can see on the following graph, time to first response (which includes initialization) is already cut in half.
 
-![Graph showing startup times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qygejm886j7mbi7hmyeq.png)
+![Graph showing startup times](qygejm886j7mbi7hmyeq-55f2d758.jpg)
 
 The other interesting measurement is how much and for how long response times are disrupted during the early stages of application execution. There is always some small variation in response times even when an app is fully warmed up – often referred to as *jitter*.
 
@@ -121,7 +121,7 @@ However, during warmup the housekeeping work that the JVM has to do can signific
 
 In theory, this is where longer training sessions should have a bigger impact. Better training results in more cached classes and heap objects needed in production, more pre-linking of calls and accesses, more method profile data to allow earlier and better informed compilation. So, we should see not only an improvement compared to the regular java version, but also a difference between the two trained caches.
 
-![Graph showing response times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ye2msxg4ad4qtpx87949.png)
+![Graph showing response times](ye2msxg4ad4qtpx87949-edb12a4a.jpg)
 
 The graph above shows individual response times for requests for each of the three deployments, Traditional Java (no AOT), AOT trained with 1000 requests, and AOT trained with 60 000 requests.
 
@@ -132,9 +132,9 @@ However, it is also very clear that
 1. There is a lot more JVM housework being performed in the non-AOT case than when using AOT, reaching peak performance later.
 2. The well trained cache suffers less jitter, i.e. removes a lot more housework, than the weakly trained app.
 
-![Response Peak Times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/29sbgmnsw6ssl24c07nu.png)
+![Response Peak Times](29sbgmnsw6ssl24c07nu-19c0328e.jpg)
 
-![Response Peak Times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kw0edxat8cv5ye1vgedq.png)
+![Response Peak Times](kw0edxat8cv5ye1vgedq-cb0f73d6.jpg)
 
 Note that JDK26 does store training data on the cache, but does not store compiled code. This means, future versions of the JDK will show a much larger difference between weak and strong training regimes.
 
@@ -146,13 +146,13 @@ We use a single training run with 10 000 requests, executing a test that calls t
 
 Let's take a look at the time to first response to see if it is improved by Leyden AOT:
 
-![Graph with startup times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4f0m21ugh7r831whoo7u.png)
+![Graph with startup times](4f0m21ugh7r831whoo7u-e939b97e.jpg)
 
 Startup time in this example is slower than in the previous example because we have to initialize connections to the database and load the database model.
 
 Now, let's take a look at the response times and see if the warmup time is also improved thanks to the AOT cache.
 
-![Response Times](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dtk9g9m66vas1r9kjei7.png)
+![Response Times](dtk9g9m66vas1r9kjei7-9265a707.jpg)
 
 Both runs suffer jitter during the first requests, at which point most of the housekeeping work is completed. The dramatic drop off in jitter for the AOT run around request 45 indicates that at this point almost all loading, initialization and linking costs have been met and the necessary compiled code has been delivered. By contrast the non-AOT run is still suffering jitter even after 100 requests i.e. it has still not warmed up to reach peak performance.
 

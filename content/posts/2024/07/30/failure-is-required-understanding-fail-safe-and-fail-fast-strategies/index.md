@@ -58,7 +58,7 @@ However, fail-fast systems carry their own risks, particularly in production env
 
 Fail-safe systems take a different approach, aiming to recover and continue even in the face of unexpected conditions. This makes them particularly suited for uncertain or volatile environments.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ibwgr51u71mcwstp6s4t.png)
+![Image description](ibwgr51u71mcwstp6s4t-8c0c4acf.png)
 
 Microservices are a prime example of fail-safe systems, embracing resiliency through their architecture. Circuit breakers, both physical and software-based, disconnect failing functionality to prevent cascading failures, helping the system continue operating.
 
@@ -88,7 +88,7 @@ A balanced approach also requires clear and consistent implementation throughout
 
 This is where things get interesting. It isn't about choosing between fail-safe and fail-fast. It's about choosing the right layer for them. E.g. if an error is handled in a deep layer using a fail-safe approach, it won't be noticed. This might be OK, but if that error has adverse impact (performance, garbage data, corruption, security, etc.) then we will have a problem later on and won't have a clue.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qz6psox2d9bm4r5kmnol.png)
+![Image description](qz6psox2d9bm4r5kmnol-0621955c.png)
 
 The right solution is to handle all errors in a single layer, in modern systems the top layer is the OPS layer and it makes the most sense. It can report the error to the engineers who are most qualified to deal with the error. But they can also provide immediate mitigation such as restarting a service, allocating additional resources or reverting a version.
 

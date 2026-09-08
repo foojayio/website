@@ -5,7 +5,7 @@ lastmod: "2024-02-27T08:21:01+00:00"
 description: "We are back and excited to invite you to IntelliJ IDEA Conf 2024, a developer-focused, live, online event that is free for all to attend!"
 authors:
   - "irina-maryasova"
-image: "Featured_1280x720_x2-1200x675-2-700x394-1.png"
+image: "Featured_1280x720_x2-1200x675-2-700x394-1.jpg"
 categories:
   - "Developer Tools"
   - "Events"
@@ -27,7 +27,7 @@ You'll be able to learn about a variety of topics, like Core Java, Kotlin, Java 
 
 You'll also learn more about IntelliJ IDEA performance enhancements, JetBrains AI Assistant, IntelliJ IDEA's database support, and tips and tricks to make you more productive.
 
-![](Featured_1280x720_x2-1200x675-2-700x394.png)
+![](Featured_1280x720_x2-1200x675-2-700x394.jpg)
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf "Conference Details and Registration")
 

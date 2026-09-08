@@ -5,7 +5,7 @@ lastmod: "2022-06-06T08:06:10+00:00"
 description: "MicroStream is the high-performance Java-Native-Persistence framework to overcome database impedance mismatches."
 authors:
   - "rudy-de-busscher"
-image: "impedanceMismatch-567x510-1.png"
+image: "impedanceMismatch-567x510-1.jpg"
 categories:
   - "Databases"
   - "DataEngineering"
@@ -34,7 +34,7 @@ That is the main idea of the [MicroStream framework](https://microstream.one/), 
 
 In the most simple cases, the structure of the data within memory matches the data structure in the database relatively well. We have Entities that map to tables and properties that match fields in the database. But sometimes the ideal structure in both systems does not match. And in all cases, the data needs to be retrieved from the relational system using a specific protocol.
 
-![Shows mismatch between Java Object Graph and Database table storage](impedanceMismatch-567x510.png)
+![Shows mismatch between Java Object Graph and Database table storage](impedanceMismatch-567x510.jpg)
 
 Retrieving a single record is relatively straightforward. But all the required data is seldom included in a single record in the external system. So we need to execute a complex multi-table query with many relations and restrictions. The alternative is executing many simple queries but these roundtrips to the other system are also very time-consuming. The ORM (Object Relational Mapping) frameworks relieved the developer from writing database queries, but these generic frameworks are not super fast, and often many tweaks need to be applied to retrieve the data with an acceptable speed.
 

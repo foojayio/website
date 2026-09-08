@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![The Codename One JavaScript Port Is Now Free and Open Source](https://www.codenameone.com/blog/javascript-free-open-source.jpg)
+![The Codename One JavaScript Port Is Now Free and Open Source](javascript-free-open-source.jpg)
 
 The Codename One JavaScript port is now open source and available on every plan, including Free. You can also build the JavaScript target locally without a Codename One account.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -95,7 +95,7 @@ javascript.proxy.allowedTargets=https://api.example.com,*.services.example.org
 
 Available targets are `jakarta-servlet`, `javax-servlet`, `node`, `php`, `aws-lambda`, `google-cloud-functions`, `cloudflare-workers`, and `none`. Jakarta Servlet is the default.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJDb2RlbmFtZSBPbmUgd2ViIGFwcCByZXF1ZXN0cyAvY24xLWNvcnMtcHJveHkiXSAtLT4gQlsiU2FtZS1vcmlnaW4gcHJveHkgY2hlY2tzIHRoZSBVUkwgc2NoZW1lIGFuZCBhbGxvd2xpc3QiXQogICAgQiAtLT4gQ1siUHJveHkgZm9yd2FyZHMgdGhlIHJlcXVlc3QgdG8gdGhlIGFwcHJvdmVkIHJlbW90ZSBBUEkiXQogICAgQyAtLT4gRFsiUmVtb3RlIEFQSSByZXR1cm5zIHN0YXR1cywgaGVhZGVycywgYW5kIGJvZHkiXQogICAgRCAtLT4gRVsiUHJveHkgcmV0dXJucyBhIGJyb3dzZXItcmVhZGFibGUgcmVzcG9uc2UgdG8gdGhlIGFwcCJd?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRCCiAgICBBWyJDb2RlbmFtZSBP-675893ae.png)
 
 Set `javascript.proxy.allowedTargets` before public deployment. An omitted allowlist produces a build warning because an open forwarding proxy is not a safe default for production. You can also point at an existing proxy with `javascript.proxy.url` or disable generation with `javascript.proxy.target=none`.
 
@@ -148,7 +148,7 @@ Thanks, Dave. I needed the bump on the head.
 
 > **TL;DR:** `com.codename1.calendar` provides one API for device calendars, Google, Microsoft, CalDAV, and `.ics` files. It includes recurrence, tasks, provider versions, incremental sync, offline mutation queues, and conflict handling.
 
-![Calendar API with local and cloud synchronization](https://www.codenameone.com/blog/calendar-is-not-add-event.jpg)
+![Calendar API with local and cloud synchronization](calendar-is-not-add-event-8cf26a8b.jpg)
 
 A request to add an event often grows into recurrence, edits from another device, offline changes, and a stale write that could overwrite a newer provider copy. The new API keeps those cases in one model and exposes the operations supported by each source.
 
@@ -167,7 +167,7 @@ The simulator uses an isolated in-memory calendar, so tests never touch the deve
 
 > **TL;DR:** The new core Bluetooth API supports every Codename One target, including JavaScript. It covers BLE central and peripheral roles, GATT, L2CAP streams, classic RFCOMM, browser Web Bluetooth, real desktop radios, and a scriptable simulator.
 
-![Bluetooth simulator with a virtual device tree and characteristic editor](https://www.codenameone.com/blog/bluetooth-beyond-ble/bluetooth-simulator-devices.png)
+![Bluetooth simulator with a virtual device tree and characteristic editor](bluetooth-simulator-devices-b81d10b9.png)
 
 Bluetooth is larger than BLE scanning. A medical sensor might need notifications over GATT. A scanner or printer might use classic RFCOMM. Tests need to reproduce a failed connection or a callback that never arrives.
 
@@ -179,7 +179,7 @@ The API reports capabilities instead of pretending every role works everywhere. 
 
 > **TL;DR:** `EditField`, `RichTextArea`, and `CodeEditor` can now edit and paint text entirely inside the Codename One component layer. The operating system supplies keyboard and input-method operations without placing a native field over the component.
 
-![Rich text and code editors painted by the lightweight editing engine](https://www.codenameone.com/blog/text-input-without-native-overlay/editors-overview.png)
+![Rich text and code editors painted by the lightweight editing engine](editors-overview-26913d1f.png)
 
 Codename One traditionally places a native text field over a lightweight field while the user edits. That route remains the default for `TextField` and `TextArea`. It works well for ordinary forms, but it cannot paint syntax colors, inline objects, application-defined masks, or custom selections inside the Codename One surface.
 
@@ -202,7 +202,7 @@ This work also replaces the text-only clipboard assumption. A `ClipboardContent`
 
 > **TL;DR:** `RichTextComponent` renders HTML, Markdown, AsciiDoc, RTF, and styled Java runs inside ordinary Codename One layouts. It shares its document model and painter with `RichTextArea` but has no editing session or browser peer.
 
-![Rich text with headings, emphasis, and a list](https://www.codenameone.com/blog/rich-text-without-webview/editors-richtext.png)
+![Rich text with headings, emphasis, and a list](editors-richtext-9824ae77.png)
 
 A `SpanLabel` gives wrapped text one style. A `BrowserComponent` provides a complete browser. `RichTextComponent` fills the space between them for formatted application content.
 
@@ -221,7 +221,7 @@ The component measures its content inside the Codename One layout. Link handling
 
 > **TL;DR:** Strings now store their characters in a `byte[]` when every character fits. Text that needs wider code units continues to use `char[]`. This halves the character storage for common strings without adding a second array pointer to every `String`.
 
-![Compact strings cut character storage in half](https://www.codenameone.com/blog/compact-strings-parparvm.jpg)
+![Compact strings cut character storage in half](compact-strings-parparvm-38fc3977.jpg)
 
 URLs, JSON keys, class names, numbers, log messages, and much Western European text need one byte per character. ParparVM previously stored all of them in a two-byte `char[]`.
 

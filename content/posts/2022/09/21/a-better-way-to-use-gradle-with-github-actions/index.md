@@ -40,7 +40,7 @@ Each of these features is described in more detail below.
 
 It's easy to take advantage of the `gradle-build-action` by adding a setup step to your existing GitHub Actions workflow, similar to the way you would use the [actions/setup-java](https://github.com/actions/setup-java#setup-java) action to configure a JVM for your workflow.
 
-![gh-actions1](https://user-images.githubusercontent.com/51727488/189988870-04497d32-65d2-47e5-b197-94f4e34c5b75.png)
+![gh-actions1](189988870-04497d32-65d2-47e5-b197-94f4e3-5a66e14d.jpg)
 
 For details on how to use the `gradle-build-action` in your workflow, check out the [Gradle Build Tool documentation](https://docs.gradle.org/current/userguide/github-actions.html#sec:configure_github_actions) or the [README](https://github.com/gradle/gradle-build-action#use-the-action-to-setup-gradle).
 
@@ -68,7 +68,7 @@ However, by using the `gradle-build-action` and by configuring each Gradle invoc
 
 The `gradle-build-action` instruments all Gradle build invocations, capturing details such as tasks executed, build outcome and the link to any Build Scan produced. And the linked Gradle Build Scan provides a complete view of a build execution, including all build logs, a complete task timeline, test outputs, dependencies resolved and performance characteristics of your build.
 
-![gh-actions2](https://user-images.githubusercontent.com/51727488/189988848-386c3d6b-d93d-4b4b-8c76-3f62a13ba3bf.png)
+![gh-actions2](189988848-386c3d6b-d93d-4b4b-8c76-3f62a1-1eac8a69.jpg)
 
 For more details, read about [how the Google AndroidX team leverages the gradle-build-action and Gradle Build Scans](https://gradle.com/blog/determine-the-root-cause-of-github-actions-failures-faster-with-gradle-enterprise/) to help them troubleshoot build and test failures faster in their GitHub Actions CI environment.
 

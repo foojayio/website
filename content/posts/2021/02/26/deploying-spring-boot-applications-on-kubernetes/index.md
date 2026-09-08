@@ -161,35 +161,35 @@ Lens IDE for Kubernetes is a desktop application for macOS, Windows, and Linux t
 
 After installing it you can first add a cluster. Lens connects to your Kubernetes cluster using the kubeconfig file which is typically located in your `$HOME/.kube` directory. You have the option to paste it as a text file also. Now select the kubeconfig file, context, and click on Add cluster.
 
-![Screenshot 2021-02-11 at 2.09.54 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612989621325/x13sR5GgY.png)
+![Screenshot 2021-02-11 at 2.09.54 AM.png](x13sR5GgY-f3e0beaf.png)
 
 After adding the cluster you can see it on the left side navigation bar. For demo purposes, I have redeployed the Spring Boot application. Under events, you can see that our application image is getting pulled.
 
-![Screenshot 2021-02-11 at 12.49.32 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612985782109/D9-yjMS5D.png)
+![Screenshot 2021-02-11 at 12.49.32 AM.png](D9-yjMS5D-a94d3289.jpg)
 
 We can also view the logs of the deployment we just completed. As you can see that application is deployed and running.
 
-![Screenshot 2021-02-11 at 1.05.33 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612985998835/mDUZ2ngCw.png)
+![Screenshot 2021-02-11 at 1.05.33 AM.png](mDUZ2ngCw-d0a4b78e.png)
 
 You can scale, restart, edit and remove Kubernetes manifests from Lens IDE itself.
 
-![Screenshot 2021-02-11 at 1.12.58 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612986254526/gr3QKnsAa.png)
+![Screenshot 2021-02-11 at 1.12.58 AM.png](gr3QKnsAa-63d42ff6.png)
 
 Under networks, you can also view Kubernetes services.
 
-![Screenshot 2021-02-11 at 1.31.12 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612987519015/8sizkbmJ4.png)
+![Screenshot 2021-02-11 at 1.31.12 AM.png](8sizkbmJ4-2d1cb625.png)
 
 Lens has a feature where it allows you to install Prometheus stack in your cluster so that you can gather metrics about the cluster and its nodes. For installation, right-click on the cluster icon in the Lens UI's top-left corner and select Settings.
 
-![Screenshot 2021-02-11 at 1.49.32 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612988900910/iGVa450rS.png)
+![Screenshot 2021-02-11 at 1.49.32 AM.png](iGVa450rS-01709eae.png)
 
 On the Settings page, under features, you can see a Metrics section and a button to install Prometheus. Click Install to deploy the Prometheus stack to your cluster.
 
-![Screenshot 2021-02-11 at 1.50.13 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612989251651/U5NjQtWkT.png)
+![Screenshot 2021-02-11 at 1.50.13 AM.png](U5NjQtWkT-e655c89f.png)
 
 Lens will start displaying metrics after a minute or so.
 
-![Screenshot 2021-02-11 at 2.08.04 AM.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1612989549853/4GltJdQil.png)
+![Screenshot 2021-02-11 at 2.08.04 AM.png](4GltJdQil-c67fed45.jpg)
 
 We have only covered a handful of features that Lends IDE for Kubernetes provides. It's a wrap for now.
 
@@ -204,7 +204,7 @@ Go containerize and share your applications!
 ### Support me
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:  
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
+[![Buy Me A Coffee](default-yellow-8f95b1d6.png)](https://www.buymeacoffee.com/meashish)
 
 ### Further Reading
 

@@ -46,7 +46,7 @@ My advice...use a vector drawing program, in this case this is like visual codin
 
 After that little advice let's go back to our LED control, here is a drawing that shows the LED in it's final state:
 
-![](Affinity-Designer-LED-Modified-110.0-2021-01-29-13-50-29-636x510.png)
+![](Affinity-Designer-LED-Modified-110.0-2021-01-29-13-50-29-636x510.jpg)
 
 In principle the whole LED is just made from three circles, filled with different gradients. Here is a little drawing that hopefully explains it better:
 

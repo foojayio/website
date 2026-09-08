@@ -63,7 +63,7 @@ The `ci.yml` file will build the native packages for each platform on GitHub aft
 
 The project in this repository uses a multi-module Maven setup with a parent module containing three child modules. One of these child modules is the "main" module as it contains the main class. This module also contains the build scripts and its target directory will contain the results of the build. The JavaFX application consists of a single-window displaying three labels. The first one shows the currently configured locale and the other two labels get imported from module 1 and module 2 respectively.
 
-{{< img src="https://github.com/dlemmermann/JPackageScriptFX/raw/master/app.png" class="is-resized" alt="alt text" width="216" height="216" caption="The second template application" >}}
+{{< img src="app-b9a95407.png" class="is-resized" alt="alt text" width="216" height="216" caption="The second template application" >}}
 
 The platform-specific versions are created with Maven and this whole process is very well and detailed explained [in the README file of the GitHub project](https://github.com/dlemmermann/JPackageScriptFX/blob/master/README.md).
 

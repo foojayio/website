@@ -5,7 +5,7 @@ lastmod: "2023-10-01T15:21:26+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheWeek that got published on jfx-central.com during September."
 authors:
   - "frankdelporte"
-image: "jfxcentral.png"
+image: "jfxcentral.jpg"
 categories:
   - "JavaFX"
   - "JDK21"

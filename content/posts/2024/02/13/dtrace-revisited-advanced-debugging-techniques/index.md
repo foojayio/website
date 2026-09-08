@@ -232,11 +232,11 @@ Let's say you're facing elevated disk write issues that are causing the performa
 
 rwbypid.d can help you with that, it can generate a list of processes and the number of calls they have for read/write based on the process id as seen in the following screenshot:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qb5v35jg9mtqp8ianffx.png)
+![Image description](qb5v35jg9mtqp8ianffx-bef98094.png)
 
 We can use this information to better understand IO issues in our code or even in 3rd party applications/libraries. `iosnoop` is another tool that helps us track IO operations but with more details:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mhsosdd39vgz5mzu70ge.png)
+![Image description](mhsosdd39vgz5mzu70ge-ca522b83.png)
 
 In diagnosing elusive system issues, DTrace shines by enabling detailed observation of system calls, file operations, and network activities. For instance, it can be used to uncover the root cause of unexpected system behaviors or to trace the origin of security breaches, offering a level of detail that is often unattainable with other debugging tools.
 

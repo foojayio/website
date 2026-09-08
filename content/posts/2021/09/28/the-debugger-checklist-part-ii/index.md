@@ -44,7 +44,7 @@ I'll try to get into more of these sorts of tricks in a future "tips and tricks"
 
 ### The Simplest Assumptions
 
-![If something doesn't make sense. One of your assumptions has to wrong, because if something doesn't make sense then it can't be real. But what if the faulty assumption is that it's real. - House](https://cdn.hashnode.com/res/hashnode/image/upload/v1632369682209/IrVcETgk5.jpeg)  
+![If something doesn't make sense. One of your assumptions has to wrong, because if something doesn't make sense then it can't be real. But what if the faulty assumption is that it's real. - House](IrVcETgk5-58c3d0f7.jpeg)  
 
 (image source: <https://weheartit.com/entry/59844817>)
 
@@ -85,7 +85,7 @@ Assuming you can, try overriding it within your breakpoint by setting a value of
 
 If this isn't helping, try identifying specific fields that might be problematic. Most debuggers will let you place a breakpoint on the field in order to watch modifications to said field… I used that feature a couple of times while consulting and people were always surprised you can do that...
 
-![Field Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1632370150204/87OTJS1zH.png)
+![Field Breakpoint](87OTJS1zH-389e8cd6.png)
 
 In IntelliJ the icon looks different for a field breakpoint. But it's a breakpoint like any other, you can apply a condition to it and see the stack etc.
 
@@ -103,7 +103,7 @@ You can also get a thread dump during a breakpoint, that's a feature of pretty m
 
 Specifically in IntelliJ/IDEA I recommend right clicking the debug tab and enabling the thread view. Then enabling thread groups by right clicking within the tab and selecting `Customize Thread View` like this:
 
-![Customize Thread View in IntelliJ/IDEA](https://cdn.hashnode.com/res/hashnode/image/upload/v1632370285245/CQNO-Z1Ef.png)
+![Customize Thread View in IntelliJ/IDEA](CQNO-Z1Ef-00a44ac4.png)
 
 It provides a much "cleaner" view of the threads as a hierarchy instead of the default look in IntelliJ which is better geared towards single thread debugging.
 

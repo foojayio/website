@@ -6,7 +6,7 @@ description: "Pattern matching is a language feature where you can test for a sp
 canonical: "https://deepu.tech/state-of-pattern-matching-java/"
 authors:
   - "deepu-sasidharan"
-image: "https://i.imgur.com/M6xKDas.jpeg"
+image: "M6xKDas-2e32f482.jpeg"
 categories:
   - "Java Core"
 related_posts:
@@ -26,7 +26,7 @@ Pattern matching can be classified into two types.
 * **Sequence patterns**: pattern matching on character sequence or strings. Also known as our beloved Regular Expressions 😉 — I still wish I could write RegEx without cursing and looking up the syntax.
 * **Tree patterns**: testing for patterns on a data structure. This is what we are going to talk about today.
 
-![regex meme](https://i.imgur.com/M6xKDas.jpeg)
+![regex meme](M6xKDas-2e32f482.jpeg)
 
 ## Why Pattern Matching?
 

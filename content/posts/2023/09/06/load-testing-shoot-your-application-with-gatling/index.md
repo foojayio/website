@@ -107,7 +107,7 @@ For this example, we'll be making use of the [Gatling sample application](https:
 
 We start by configuring the recorder
 
-[![recorder](https://github.com/SimonVerhoeven/gatling-demo/raw/main/raw/recorder.png)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/recorder.png)
+[![recorder](recorder-158da42b.png)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/recorder.png)
 
 And we configure the following settings
 
@@ -120,7 +120,7 @@ And we configure the following settings
 
 Then we need to configure our proxy so that we can record the scenario:
 
-[![proxy](https://github.com/SimonVerhoeven/gatling-demo/raw/main/raw/proxy.png)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/proxy.png)
+[![proxy](proxy-e9dc0b9d.png)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/proxy.png)
 
 After this, we can `start` our recording
 
@@ -220,7 +220,7 @@ After the execution, we will find our report in `target` or `build` respectively
 
 And we might end up with a report like this:
 
-[![result](https://github.com/SimonVerhoeven/gatling-demo/raw/main/raw/result.png)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/result.png)
+[![result](result-9b514a87.jpg)](https://github.com/SimonVerhoeven/gatling-demo/blob/main/raw/result.png)
 
 This shows us:
 

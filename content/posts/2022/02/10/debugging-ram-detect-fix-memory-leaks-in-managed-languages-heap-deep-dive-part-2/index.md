@@ -58,7 +58,7 @@ I won't be discussing:
 
 You can get VisualVM [here](https://visualvm.github.io/). Once installed, you can launch VisualVM and connect it to our running application to see the process.
 
-![VisualVM Inspecting Itself](https://cdn.hashnode.com/res/hashnode/image/upload/v1643109969739/aqwLommi-.png)
+![VisualVM Inspecting Itself](aqwLommi-5f427bc9.png)
 
 In the image above VisualVM is monitoring itself, that's pretty meta. You can perform manual garbage collection, which is very important to get a sense of the size of a leak. The heap graph provides you a bird's-eye view of the amount of memory over time and the trend.
 
@@ -66,7 +66,7 @@ In the image above VisualVM is monitoring itself, that's pretty meta. You can pe
 
 If you did front end work with Chrome, surely you ran into the "everything but the kitchen sink" debugging tools that are integrated into Chrome. Personally, I prefer the Firefox equivalents. They can connect pretty seamlessly to Node where they can provide many of the standard debugging capabilities, such as snapshots.
 
-![Chrome Dev Tools](https://cdn.hashnode.com/res/hashnode/image/upload/v1643110058053/wtfbmQZ07.png)
+![Chrome Dev Tools](wtfbmQZ07-10c887d9.png)
 
 ## How to detect Leaks?
 
@@ -116,17 +116,17 @@ This is never the case. Something is happening in the background, and this backg
 
 The most important tool in our arsenal is the heap dump. In VisualVM, you can grab a dump by pressing the button on the top right side. It looks like this:
 
-![VisualVM Snapshot](https://cdn.hashnode.com/res/hashnode/image/upload/v1643113586022/UE81nUtic.png)
+![VisualVM Snapshot](UE81nUtic-578803a8.png)
 
 At the bottom you can see the classes sorted by number of instances, size of instances. This can help in narrowing a memory leak. Just grab two dumps. Then compare the RAM taken by a specific class to determine whether this class can be the one that leaked.
 
 With Chrome DevTools, you can grab a snapshot using the main UI:
 
-![Taking a snapshot with Chrome DevTools](https://cdn.hashnode.com/res/hashnode/image/upload/v1643113676022/KLdY28nFM.png)
+![Taking a snapshot with Chrome DevTools](KLdY28nFM-dce1c5fe.png)
 
 You can then use view, sort, and filter the resulting objects in the snapshots:
 
-![Chrome Dev Tools Snapshot View](https://cdn.hashnode.com/res/hashnode/image/upload/v1643113641116/aQPvPTkgo.png)
+![Chrome Dev Tools Snapshot View](aQPvPTkgo-ce066590.png)
 
 This is a very similar process to the one in VisualVM or pretty much any monitoring tool. You can narrow down the references and even see the stack matching a specific allocation in the code.
 

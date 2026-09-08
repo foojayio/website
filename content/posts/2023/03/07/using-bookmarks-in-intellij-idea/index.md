@@ -33,15 +33,15 @@ This shortcut creates an anonymous line bookmark, marked with a Bookmark icon.
 
 If we don't remember the shortcut, we can right-click the gutter next to the line of code we want to bookmark and select **Add Bookmark**.
 
-![Anonymous Bookmark](anonymous-bookmark.png)
+![Anonymous Bookmark](anonymous-bookmark.jpg)
 
-![Add bookmark from the gutter](gutter-menu.png)
+![Add bookmark from the gutter](gutter-menu.jpg)
 
 We can also bookmark files, packages, folders, and modules. We can open the Project Tool Window (**⌘1** on macOS, or **Alt+1** on Windows/Linux) and add an anonymous bookmark.
 
 We can use the shortcut (**F3** on macOS, or **F11** on Windows/Linux) or we can also right-click the item we want to bookmark, and select **Bookmarks \| Add Bookmark**. Note that anonymous bookmarks don't have an identifier, and we can create as many anonymous bookmarks as we like.
 
-![Bookmark project item](bookmark-project-item.png)
+![Bookmark project item](bookmark-project-item.jpg)
 
 ## Add mnemonic bookmarks
 
@@ -57,11 +57,11 @@ Optionally, we can provide a description for the new bookmark. We can double-cli
 
 Lines marked with mnemonic bookmarks have the corresponding digit or letter icon in a frame.
 
-![Mnemonic Bookmark](mnemonic-bookmark.png)
+![Mnemonic Bookmark](mnemonic-bookmark.jpg)
 
 If the selected digit or letter is already in use, IntelliJ IDEA will ask you whether you want to overwrite an existing bookmark with the new one. When we select the **Don't ask again** option, the IDE will silently overwrite mnemonics.
 
-![Rewrite Mnemonic Bookmark](rewrite-mnemonic.png)
+![Rewrite Mnemonic Bookmark](rewrite-mnemonic.jpg)
 
 ## Navigate to bookmarks
 
@@ -71,15 +71,15 @@ There are several options to navigate to the bookmarks we have created.
 
 To see all **line** bookmarks that we have in the code, we can open the **Bookmarks** popup by pressing **⌘ F3** (on macOS) or **Shift+F11** (on Windows/Linux) or go to **Edit \| Bookmarks \| Show Line Bookmarks**.
 
-![Show Line Bookmarks shortcut](show-line-bookmarks-shortcut.png)
+![Show Line Bookmarks shortcut](show-line-bookmarks-shortcut.jpg)
 
-![Show Line Bookmarks menu](show-line-bookmarks-menu.png)
+![Show Line Bookmarks menu](show-line-bookmarks-menu.jpg)
 
 Notice that this list does not contain any project items like files or classes that we have bookmarked.
 
 We can select the bookmark we want to navigate to, either with up and down arrows and pressing **Return** (on macOS) or **Enter** (on Windows/Linux), or by double-clicking it with our mouse. For mnemonic bookmarks, we can select the corresponding digit or letter.
 
-![Bookmark popup](bookmark-popup.png)
+![Bookmark popup](bookmark-popup.jpg)
 
 ### Jump to mnemonic bookmark
 
@@ -89,17 +89,17 @@ This doesn't work with anonymous bookmarks, but we can assign a mnemonic to an e
 
 This works in the **Bookmarks** popup too!
 
-![Go to Bookmark](go-to-bookmark.png)
+![Go to Bookmark](go-to-bookmark.jpg)
 
-![Assign Mnemonic](assign-mnemonic.png)
+![Assign Mnemonic](assign-mnemonic.jpg)
 
 ### Bookmarks tool window
 
 To see all our bookmarks, we can open the **Bookmarks** tool window by pressing **⌘ 2** (on macOS) or **Alt+2** (on Windows/Linux), or by selecting **View \| Tool Windows \| Bookmarks** from the main menu.
 
-![Open Bookmark Tool Window shortcut](open-bookmarks-tool-window-shortcut.png)
+![Open Bookmark Tool Window shortcut](open-bookmarks-tool-window-shortcut.jpg)
 
-![Open Bookmark Tool Window menu](open-bookmarks-tool-window-menu.png)
+![Open Bookmark Tool Window menu](open-bookmarks-tool-window-menu.jpg)
 
 IntelliJ IDEA adds your bookmarks to the predefined list in the Bookmarks tool window that is created automatically and has the same name as the project. In this example, multiple bookmarks in the same file are grouped together.
 
@@ -113,23 +113,23 @@ Another option we do want to show you here is that you can create more lists.
 
 We can add a new list using the shortcut (**⌘ N** on macOS or **Alt+Insert** on Windows/Linux) or by clicking the **Create Bookmark List** button. We can add a name for the new list.
 
-![Create Bookmark List](create-bookmark-list.png)
+![Create Bookmark List](create-bookmark-list.jpg)
 
 If there are multiple lists, and we create a new bookmark, we can select which list to add it to in the **Add Bookmark** popup.
 
 We can also select the list to use as the default by checking the option **Use as default list**.
 
-![Select Bookmark List](select-bookmark-list.png)
+![Select Bookmark List](select-bookmark-list.jpg)
 
 In the Bookmarks tool window, we can move bookmarks to another list by dragging them to the other list.
 
 And we can sort bookmarks by selecting a bookmark and using Move down (**⌥ ⌘ ↓** on macOS, or **Control+Alt+↓** on Windows/Linux) or Move up (**⌥ ⌘ ↑** on macOS, or **Control+Alt+↑** on Windows/Linux).
 
-![Move down](move-down.png)
+![Move down](move-down.jpg)
 
 **Fun fact:** The Bookmarks tool window also shows all breakpoints that are automatically added to the dedicated list once you place them in your code.
 
-![Breakpoints](breakpoints.png)
+![Breakpoints](breakpoints.jpg)
 
 ### Bookmark editor tabs
 
@@ -137,9 +137,9 @@ Finally, we can also bookmark editor tabs. Click the **...** to the right of the
 
 We can enter a name for this list in the **Create Bookmark List** popup.
 
-![Bookmark Open Tabs](bookmark-open-tabs.png)
+![Bookmark Open Tabs](bookmark-open-tabs.jpg)
 
-![Create Bookmark List popup](create-bookmark-list-popup.png)
+![Create Bookmark List popup](create-bookmark-list-popup.jpg)
 
 ## Summary and Shortcuts
 

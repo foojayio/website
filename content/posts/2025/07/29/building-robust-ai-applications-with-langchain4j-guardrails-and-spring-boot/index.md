@@ -6,7 +6,7 @@ description: "Learn how to build secure AI applications using LangChain4j guardr
 canonical: "https://bazlur.ca/2025/06/21/building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot/"
 authors:
   - "bazlur-rahman"
-image: "u6131494527_1._Shield__AI_Brain_Concept__A_modern_minimalist__c6366e07-45bb-4d60-8f31-a4380e8e1bd8_0.png"
+image: "u6131494527_1._Shield__AI_Brain_Concept__A_modern_minimalist__c6366e07-45bb-4d60-8f31-a4380e8e1bd8_0.jpg"
 categories:
   - "AI"
   - "Java"
@@ -946,7 +946,7 @@ open http://localhost:8080
 > The demo application includes all the guardrails discussed in this article, pre-configured and ready to test. Simply clone, run, and navigate to localhost:8080 to see them in action.
 
 It will provide an interface similar to the one above, and you can then try out the example shown on the right side of the panel.
-![](https://bazlur.ca/wp-content/uploads/2025/06/Screenshot-2025-06-21-at-12.17.07%E2%80%AFPM-1024x832.png)
+![](Screenshot-2025-06-21-at-12.17.07-E2-80-201125cf.png)
 
 ## Conclusion
 

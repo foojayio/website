@@ -77,15 +77,15 @@ Digma has a simple and well-integrated setup wizard for IntelliJ/IDEA. You need 
 
 Once it is installed, we can run our application, in my case I just ran the JPA unit test from my [latest book](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) and it produced standard traces which are already pretty cool, we can see them listed below:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/d5bu18yhph5ncppny5a5.png)
+![Image description](d5bu18yhph5ncppny5a5-4208e831.png)
 
 When we click a trace for one of these, we get the standard trace view, this is nothing new, but it's really nice to see this information directly in the IDE and readily accessible. I can imagine the immense value this will have for figuring out CI execution issues:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xzfbdivmtnh28f2zft3e.png)
+![Image description](xzfbdivmtnh28f2zft3e-c91e6d28.png)
 
 But the real value and where Digma becomes a "Developer Observability" tool instead of an Observability tool, is with the tool window here:
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cduln90t5es22zhc33h7.png)
+![Image description](cduln90t5es22zhc33h7-ec6ad5b0.jpg)
 
 There is a strong connection to the code directly from the observability data and deeper analysis which doesn't show in my particular overly simplistic hello world. This Toolwindow highlights problematic traces, errors and helps understand [real-world issues](https://digma.ai/blog/coding-with-java-observability/).
 

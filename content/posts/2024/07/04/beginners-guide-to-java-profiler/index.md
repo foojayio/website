@@ -92,7 +92,7 @@ First, we need to collect profiling data, which is also referred to as a snapsho
 
 To attach the profiler from IntelliJ IDEA, choose a run configuration that you would normally use to run the application, and select **Profile** from the menu.
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/launch-run-configuration-dark.png" class="is-resized" alt="A menu in the run widget shows the Profile option" style="width:407px" >}}
+{{< img src="launch-run-configuration-dark-454eda10.png" class="is-resized" alt="A menu in the run widget shows the Profile option" style="width:407px" >}}
 
 When the app has finished running, a popup will appear, prompting us to open the snapshot. If we dismiss the popup by mistake, the snapshot will still be available in the **Profiler** tool window.
 
@@ -102,19 +102,19 @@ Let's open the report and see what's in it.
 
 The first thing we see after opening the report is the flame graph. This is essentially a summary of all sampled stacks. The more samples with the same stack the profiler has collected, the wider this stack grows on the flame graph. So, the width of the frame is roughly equivalent to the share of time spent in this state.
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-dark.png" class="is-resized" alt="Flame graph displays after opening snapshot" style="width:674px" >}}
+{{< img src="flame-graph-dark-dba11829.png" class="is-resized" alt="Flame graph displays after opening snapshot" style="width:674px" >}}
 
 To our surprise, the `createDirectories()` method did not account for the most execution time. Our homemade benchmark took about the same amount of time to execute!
 
 Furthermore, if we look at the frame above, we see that this is primarily because of the `removeIf()` method, which accounts for almost all the time of its caller, `update()`.
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-removeif-dark.png" class="is-resized" alt="Pointing at the removeIf() frame on the flame graph" style="width:674px" >}}
+{{< img src="flame-graph-removeif-dark-fec1d90d.png" class="is-resized" alt="Pointing at the removeIf() frame on the flame graph" style="width:674px" >}}
 
 This clearly needs some looking into.
 
 **Tip**: Alongside traditional tools like the flame graph, IntelliJ Profiler provides performance hints right in the editor, which works great for quick reference and simple scenarios:
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/hints-dark.png" class="is-resized" alt="Profiler hints in the editor's gutter" style="width:774px" >}}
+{{< img src="hints-dark-3561aec8.png" class="is-resized" alt="Profiler hints in the editor's gutter" style="width:774px" >}}
 
 ## Optimize the benchmark
 
@@ -131,7 +131,7 @@ while (events.peekFirst() < nanos - interval) {
 
 Let's change the code, then profile our app once again and look at the result:
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-after-dark.png" class="is-resized" alt="Pointing at createDirectories() in the new snapshot shows '96.49% of all'" style="width:674px" >}}
+{{< img src="flame-graph-after-dark-a4b6b83d.png" class="is-resized" alt="Pointing at createDirectories() in the new snapshot shows '96.49% of all'" style="width:674px" >}}
 
 The overhead from the benchmark logic is now minimal as it should be, and the `createDirectories()` frame now occupies approximately 95% of the entire execution time.
 
@@ -147,7 +147,7 @@ Spent time: 639 ms
 Having solved the problem in the benchmark, we could stop here and pat ourselves on the back. But what's going on with our `createDirectories()` method? Is it too slow?
 
 There seems little room for optimization here, since this is a library method, and we don't have control over its implementation. Still, the profiler can give us a hint. By expanding the folded library frames, we can inspect what's happening inside.
-![Expanding a node in the flame graph shows additional library nodes that were folded](https://flounder.dev/img/get-started-with-profiling/flame-graph-expand-dark.png)
+![Expanding a node in the flame graph shows additional library nodes that were folded](flame-graph-expand-dark-a1df6a1d.png)
 
 This part of the flame graph shows that the main contributor to the execution time of `createDirectories()` is `sun.nio.fs.UnixNativeDispatcher.mkdir0`. A large portion of this frame has nothing on top of it. This is referred to as method's self-time and indicates that there is no Java code beyond that point. There might be native code, though.
 
@@ -156,7 +156,7 @@ Since we are trying to create a directory, which requires calling the operating 
 Let's enable native profiling (**Settings** \| **Build, Execution, Deployment** \| **Java Profiler** \| **Collect native calls**):
 
 Rerunning the application with native profiling enabled shows us the full picture:
-![Now there are blue native frames on top of Java ones](https://flounder.dev/img/get-started-with-profiling/flame-graph-native-dark.png)
+![Now there are blue native frames on top of Java ones](flame-graph-native-dark-fe04d4c4.png)
 
 Here's the catch. The documentation for the `createDirectories()` method says:
 > <br />
@@ -189,7 +189,7 @@ If you are using IntelliJ Profiler, there is a handy tool that lets you visually
 
 Here's a brief rundown of the results the diff shows:
 
-{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-diff-dark.png" class="is-resized" alt="The differences in the snapshots are reflected with different colors" style="width:674px" >}}
+{{< img src="flame-graph-diff-dark-b9034ce6.png" class="is-resized" alt="The differences in the snapshots are reflected with different colors" style="width:674px" >}}
 
 Frames missing from the newer snapshot are highlighted in green, while the new ones are colored red. If a frame has several colors, this means the frame is present in both snapshots, but its overall runtime has changed.
 

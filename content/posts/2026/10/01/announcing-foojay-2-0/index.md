@@ -360,8 +360,8 @@ feed we can read, and 52 upcoming meetups sit on the calendar as I write this.**
 Both screenshots below show September 2026, taken on the first of the month:
 
 {{< gallery cols="1" >}}
-calendar-september-old.png | The old calendar. 11 entries for the month, each one typed into WordPress by hand.
-calendar-september-new.png | The same month on the new site. 23 entries, none of them typed in.
+calendar-september-old.jpg | The old calendar. 11 entries for the month, each one typed into WordPress by hand.
+calendar-september-new.jpg | The same month on the new site. 23 entries, none of them typed in.
 {{< /gallery >}}
 
 Same month, twice the community. The old calendar carried 11 entries. The new

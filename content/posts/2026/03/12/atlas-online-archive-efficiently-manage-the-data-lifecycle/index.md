@@ -100,10 +100,10 @@ In this example, we are not purging any data as per business rules.
 Schedule archiving window: This feature enables you to customize schedules. For example, you can run archive jobs during non-business hours or downtime windows to make sure it has a low impact on applications.
 
 Step 4: You can add any further partition fields required.  
-![Configure online archive – partition query fields](Screenshot-2026-03-10-at-2.01.48-PM.png)
+![Configure online archive – partition query fields](Screenshot-2026-03-10-at-2.01.48-PM.jpg)
 
 Step 5: Once the rule configuration is completed, the wizard prompts a detailed review of your archival rule. You can observe Namespace, service provider (AWS), Storage Region (Mumbai), Archive Field, Age Limit, etc.  
-![configure an online archive – Review and Confirm page](Screenshot-2026-03-10-at-2.02.23-PM.png)
+![configure an online archive – Review and Confirm page](Screenshot-2026-03-10-at-2.02.23-PM.jpg)
 
 Step 6: Once the steps are reviewed, click on BeginArchiving to create data federation instances in the [DataFederation](https://www.mongodb.com/docs/atlas/data-federation/tutorial/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim) tab. Then, it will start archiving data based on the validation rule and move to [AWS S3 storage](https://www.mongodb.com/docs/atlas/billing/data-federation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim#data-federation-costs). One of the best features is you can modify, pause, and delete online archival rules any time around the clock. For instance, your archival criteria can change at any time.  
 ![configure an online archive – Begin Archiving confirm page](Screenshot-2026-03-10-at-2.02.51-PM.png)
@@ -199,10 +199,10 @@ Alternatively, with all three of these connection strings, you can fetch from th
 ![Three separate connection strings after online archive setup completed](Screenshot-2026-03-10-at-2.08.24-PM.png)
 
 MongoShell prompt: To connect both archived data from the Data Federation tab, you can view the difference between both archived data in the form of READ-ONLY mode.  
-![ShellPrompt → The left side is only an archived database view; the right side is an Atlas online archive cluster databases view.](Screenshot-2026-03-10-at-2.08.53-PM.png)
+![ShellPrompt → The left side is only an archived database view; the right side is an Atlas online archive cluster databases view.](Screenshot-2026-03-10-at-2.08.53-PM.jpg)
 
 MongoShell prompt: Here in the main cluster, you can view a list of databases where you can access, read, and write frequent data through a cluster connection string.  
-![ShellPrompt → Base cluster list of databases where CRUD operations are performed from the application](Screenshot-2026-03-10-at-2.09.17-PM.png)
+![ShellPrompt → Base cluster list of databases where CRUD operations are performed from the application](Screenshot-2026-03-10-at-2.09.17-PM.jpg)
 
 ## Conclusion
 

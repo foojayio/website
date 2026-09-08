@@ -6,7 +6,7 @@ description: "Let's explore how custom, application-specific JFR events are used
 canonical: "https://www.morling.dev/blog/rest-api-monitoring-with-custom-jdk-flight-recorder-events"
 authors:
   - "gunnarmorling"
-image: "https://www.morling.dev/images/jfr_todo_app.png"
+image: "jfr_todo_app-9c0ce0ec.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
@@ -202,15 +202,15 @@ This builds the project using Maven and spins up the following services using Do
 * *prometheus* and *grafana*: For monitoring live events later on
 
 Then go to <http://localhost:8080/todo>, where you should see the Todo web application:
-![jfr todo app](https://www.morling.dev/images/jfr_todo_app.png)
+![jfr todo app](jfr_todo_app-9c0ce0ec.png)
 
 Now fire up Mission Control. The example service run via Docker Compose is configured so you can connect to it on localhost. In the JVM Browser, create a new connection with host "localhost" and port "1898". Hit "Test connection", which should yield "OK", then click "Finish".
-![jfr new connection](https://www.morling.dev/images/jfr_new_connection.png)
+![jfr new connection](jfr_new_connection-36ad3dc7.png)
 
 Create a new recording by expanding the localhost:1898 node in the JVM Explorer, right-clicking on "Flight Recorder" and choosing "Start Flight Recording…​". Confirm the default settings, which will create a recording with a duration of one minute. Go back to the Todo web application and perform a few tasks like creating some new todos, editing and deleting them, or filtering the todo list.
 
 Either wait for the recording to complete or stop it by right-clicking on the recording name and selecting "Stop". Once the recording is done, it will be opened automatically. Now you could dive into all the logged events for the OS, the JVM etc, but as we're interested in our custom JAX-RS events, Choose "Event Browser" in the outline view and expand the "JAX-RS" category. You will see the events for all your REST API invocations, including information such as duration of the request, the HTTP method, the resource path and much more:
-![jfr jax rs events](https://www.morling.dev/images/jfr_jax_rs_events.png)
+![jfr jax rs events](jfr_jax_rs_events-bf49fb73.png)
 
 In a real-world use case, you could now use this information for instance to identify long-running requests and correlate these events with other data points in the Flight Recording, such as method profiling and memory allocation data, or sub-optimal SQL statements in your database.
 
@@ -295,21 +295,21 @@ This method will be invoked by the JFR runtime during the `shouldCommit()` call.
 We also could use such setting to control the inclusion or exclusion of specific event attributes. For that, the setting definition method would always have to return `true`, but depending on the actual setting it might set particular attributes of the event class to `null`. For instance this might come in handy if we wanted to log the entire request/response body of our REST API. Doing this all the time might be prohibitive in terms of recording size, but it might be enabled for a particlar short-term recording for analyzing some bug.
 
 Now let's see how the path filter can be applied when creating a new recording in Mission Control. The option is a bit hidden, but here's how you can enable it. First, create a new Flight Recording, then choose "Template Manager" in the dialogue:
-![jfr filtering 1](https://www.morling.dev/images/jfr_filtering_1.png)
+![jfr filtering 1](jfr_filtering_1-eb444c74.png)
 
 Duplicate the "Continuous" template and edit it:
-![jfr filtering 2](https://www.morling.dev/images/jfr_filtering_2.png)
+![jfr filtering 2](jfr_filtering_2-d5142e75.png)
 
 Click "Advanced":
-![jfr filtering 3](https://www.morling.dev/images/jfr_filtering_3.png)
+![jfr filtering 3](jfr_filtering_3-16712514.png)
 
 Expand "JAX-RS" → "JAX-RS Invocation" and put `.*(new|edit).*` into the Path Filter control:
-![jfr filtering 4](https://www.morling.dev/images/jfr_filtering_4.png)
+![jfr filtering 4](jfr_filtering_4-43fb0b6b.png)
 
 Now close the last two dialogues. In the "Start Flight Recording" dialogue make sure to select your new template under "Event Settings"; although you've edited it before, it won't be selected automatically. I lost an hour or so wondering why my settings were not applied…​ .
 
 Lastly, click "Finish" to begin the recording:
-![jfr filtering 5](https://www.morling.dev/images/jfr_filtering_5.png)
+![jfr filtering 5](jfr_filtering_5-0bdb887d.png)
 
 Perform some tasks in the Todo web app and stop the recording. You should see only the REST API calls for the new and edit operations, whereas no events should be shown for the list and delete operations of the API.
 
@@ -400,12 +400,12 @@ MicroProfile Metrics exposes any application-provided metrics in the Prometheus 
 * total invocation count
 * duration of 75th, 95th, 99th etc. percentiles
 
-![jfr metrics endpoint](https://www.morling.dev/images/jfr_metrics_endpoint.png)
+![jfr metrics endpoint](jfr_metrics_endpoint-b81ff18d.png)
 
 Once the endpoint is provided, it's not difficult to set up a scraping process for ingesting the metrics into the [Prometheus](https://prometheus.io/) time-series database. You can find the required [Prometheus configuration](https://github.com/gunnarmorling/jfr-custom-events/blob/master/prometheus.yml) in the accompanying source code repository.
 
 While Prometheus provides some visualization capabilities itself, it is often used together with [Grafana](https://grafana.com/), which allows to build nicely looking dashboards via a rather intuitive UI. Here's an example dashboard showing the duration and invocation numbers for the different methods in the Todo REST API:
-![jfr grafana](https://www.morling.dev/images/jfr_grafana.png)
+![jfr grafana](jfr_grafana-f134b719.png)
 
 Again you can find the complete configuration for Grafana including the [definition of that dashboard](https://github.com/gunnarmorling/jfr-custom-events/blob/master/grafana-todo-dashboard.json) in the example repo. It will automatically be loaded when using the Docker Compose set-up shown above. Based on that you could easily expand the dashboard for other metrics and set up alerts, too.
 

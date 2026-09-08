@@ -38,7 +38,7 @@ npx @vaadin/cli init --hilla my-hilla-app
 ```
 
 Or use [start.vaadin.com](https://start.vaadin.com). Make sure that you delete all views and add one of those
-![](https://martinelli.ch/wp-content/uploads/2022/06/image.png)
+![](image-1754a3fb.png)
 
 ## The Endpoint
 

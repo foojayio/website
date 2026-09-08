@@ -103,7 +103,7 @@ After, the changes have been committed let's validate to see the workflow jobs h
 ![succesfully job run](Successful-Job-run.png)
 
 Next, click on the `Create a workflow using a JDK distribution` workflow to see the JDK versions built on. As shown in the following:  
-![JDK versions build on](JDKVersions-built.png)
+![JDK versions build on](JDKVersions-built.jpg)
 
 ### Step 6 Success!
 

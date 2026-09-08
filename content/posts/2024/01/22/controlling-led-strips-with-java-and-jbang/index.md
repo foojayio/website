@@ -278,7 +278,7 @@ Closing /dev/ttyS0
 This is only a short introduction, the [Pi4J website offers more detailed information and extra examples](https://pi4j.com/examples/jbang/), including the use of LED matrixes and a JavaFX user interface to define the colors being displayed on a LED strip.
 
 {{< gallery >}}
-javafx-ui-1024x589.png
+javafx-ui-1024x589.jpg
 matrix-line-1024x473.jpg
 matrix-test-1024x473.jpg
 {{< /gallery >}}

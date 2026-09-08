@@ -5,7 +5,7 @@ lastmod: "2023-07-03T11:00:52+00:00"
 description: "Great big overview of Foojay.io, plus its subprojects and related insights and statistics, as well as upcoming plans."
 authors:
   - "geertjan-wielenga"
-image: "image-1-1024x631-1.png"
+image: "image-1-1024x631-1.jpg"
 categories:
   - "Events"
   - "Foojay"
@@ -119,7 +119,7 @@ Join in with the above [at the OpenValue meetup here](https://www.meetup.com/ope
 ## OpenJDK Information
 
 The first impulse for the creation of Foojay.io back in April 2020 was the absence of a clear place listing all the issues making it into a quarterly update or LTS release. That content continues to be added to the site each quarter, [as shown below](https://javaalmanac.io/jdk/17/), with the option for anyone to vote on their favorite fixes for addition to the Highlights tab.
-[![](image-12-1024x601.png)](https://javaalmanac.io/jdk/17/)
+[![](image-12-1024x601.jpg)](https://javaalmanac.io/jdk/17/)
 
 A key collaborator with Foojay.io is Chris Newland, whose range of tools on [chriswhocodes.com](https://chriswhocodes.com/) are gradually being transitioned to Foojay.io, most recently his collection of command line arguments reference materials, though the display and user interface continue to be enhanced and expanded.
 ![](image-13-1024x612.png)

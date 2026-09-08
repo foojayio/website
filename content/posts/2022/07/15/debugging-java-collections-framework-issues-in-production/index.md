@@ -107,7 +107,7 @@ vet.getFirstName().equals("Shai")
 
 If it's met I can print out the full details for the entry: `Current vet is {newVet}`.
 
-![](Screen-Shot-2022-03-28-at-14.59.23-700x414.png)
+![](Screen-Shot-2022-03-28-at-14.59.23-700x414.jpg)
 
 ## Preparation
 

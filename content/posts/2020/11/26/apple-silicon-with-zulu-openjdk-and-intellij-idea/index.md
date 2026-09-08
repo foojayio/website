@@ -16,7 +16,7 @@ frozen: false
 Azul has been leading the OpenJDK community effort ([JEP 391](http://openjdk.java.net/jeps/391)) initiated in August 2020 to add support for Apple Silicon, Arm-based Macs, in future versions of OpenJDK.
 
 In addition to targeting future Java versions, Azul has made OpenJDK builds of currently popular Java versions, including Zulu builds of OpenJDK 8, 11, and 13, as well as 16-ea, widely available for use on Apple Silicon, Arm-based Macs.
-[![](image-1024x761.png)](https://www.azul.com/downloads/zulu-community/?os=macos&architecture=arm-64-bit&package=jdk)
+[![](image-1024x761.jpg)](https://www.azul.com/downloads/zulu-community/?os=macos&architecture=arm-64-bit&package=jdk)
 
 In June 2020, Apple announced a two-year plan to transition the CPUs in its Macintosh line of computers from Intel's x86-64 processors to Apple-designed chips that use the ARM64 architecture. At its "One More Thing" event on November 10 2020, Apple followed through on its promise and debuted new MacBook Air, MacBook Pro and Mac Mini Arm-based models powered by Apple Silicon.
 

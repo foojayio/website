@@ -5,7 +5,7 @@ lastmod: "2026-08-18T14:15:51+00:00"
 description: "Learning a new AI API usually means jumping between scattered documentation pages, guessing at imports, and copy-pasting code that may or may not still…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-08-18-160901.png"
+image: "Captura-de-pantalla-2026-08-18-160901.jpg"
 categories:
   - "AI"
   - "BoxLang"

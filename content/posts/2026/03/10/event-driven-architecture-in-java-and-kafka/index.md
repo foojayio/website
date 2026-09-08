@@ -31,7 +31,7 @@ As a key part of global initiatives to modernize national airspace systems, many
 The data is used both by ground based air-traffic controllers, and by pilots to display the location, direction, speed and altitude of nearby aircraft on moving map displays, providing a level of situational awareness that wasn't available with older, ground radar based systems.
 
 One of the coolest things for me, the pilot of a small private propeller aircraft, about the rollout of ADS-B has been that I have more location data of nearby aircraft than most commercial jet pilots had just 10 years ago, and I am only using an iPad app and a cheap data receiver (built using a Raspberry Pi, a USB radio receivers ordered from Amazon, and software from the excellent [Stratux](https://github.com/stratux/stratux) open-source project). This has been a huge boost for safety, helping to avoid aircraft collisions both in the air and on the ground at airports.  
-![iPad running the ForeFlight aviation application displaying nearby aircraft data received from a Raspberry Pi based ADS-B receiver.](Screenshot-2026-03-06-at-12.27.45-PM.png)
+![iPad running the ForeFlight aviation application displaying nearby aircraft data received from a Raspberry Pi based ADS-B receiver.](Screenshot-2026-03-06-at-12.27.45-PM.jpg)
 
 From a data processing standpoint, ADS-B data is typical of modern streaming, event-driven systems. The messages themselves are relatively small and simple in structure, and are typically translated to JSON by most receiver systems, making MongoDB ideally suited to working with them. The following is an example message:
 

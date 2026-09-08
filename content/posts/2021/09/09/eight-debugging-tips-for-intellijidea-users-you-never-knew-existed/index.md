@@ -7,7 +7,7 @@ canonical: "https://lightrun.com/blog/eight-debugging-tips-for-intellijidea-user
 authors:
   - "noga-badhav"
   - "shai-almog"
-image: "Debugging-tips_comp.png"
+image: "Debugging-tips_comp.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"

@@ -36,7 +36,7 @@ I focus here on the AsyncGetCallTrace and GetStackTrace API, but due to the simi
 ## AsyncGetCallTrace and GetStackTrace
 
 A short recap from my series ["Writing a Profiler from Scratch"](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) -- both APIs return the stack trace for a given thread at a given point in time (A called B, which in turn called C, ...):
-![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgct_2-2000x1125.png) AsyncGetCallTrace
+![](asgct_2-2000x1125-c8c811ba.jpg) AsyncGetCallTrace
 
 The only difference is that AsyncGetCallTrace (ASGCT) returns the stack trace at any point in the execution of the program and GetStackTrace (GST) only at specific safe points, where the state of the JVM is defined.
 
@@ -61,7 +61,7 @@ This makes the correctness definition easier to test, as it lets us make the tra
 The idea is now to build our oracle in different layers. We are starting with basic assumptions and writing tests to verify that the layer above is probably correct too. This is leading us to our combined test of asynchronous AsyncGetCallTrace.
 
 This has the advantage that every check is relatively simple, which is essential because the whole oracle depends on how much we trust the basic assumptions and the tests that verify that a layer is correct. I describe the layers and checks in the following:
-![](https://mostlynerdless.de/wp-content/uploads/2023/03/layers.png) Different layers of trace_validation
+![](layers.png) Different layers of trace_validation
 
 ## Ground layer
 
@@ -120,7 +120,7 @@ We aim to convince ourselves that AsyncGetCallTrace is safe at non-safepoints, a
 The trace stack data structure allows the pushing and popping of stack traces on method entry and exit. It consists of a large frames array that contains the current frames: the index 0 has the bottom frame, and the index top contains the top most frame (the reverse order compared to AsyncGetCallTrace).
 
 The array is large enough, here 1024 entries, to store stack traces of all relevant sizes. It is augmented by a `previous` array that contains the index of the top frame of the most recent transitive caller frame of the current top frame.
-![](https://mostlynerdless.de/wp-content/uploads/2023/03/trace_stack.png) Trace stack data structure used to store the stack of stack traces
+![](trace_stack-fe6718b5.png) Trace stack data structure used to store the stack of stack traces
 
 We assume here that the caller trace is a sub-trace of the current trace, with only the caller frame differing in the location (`lineno` here). This is due to the caller frame location being the beginning of the method where we obtained the trace. The calls to other methods have different locations. Therefore, we mark the top frame location with a magic number to state that this information changes during the execution of the method.
 

@@ -85,7 +85,7 @@ When you think through the application of these technologies and how you might b
 Having the right people together to hash out your approach before you wade in will help you identify any limits in your system and other important factors that need to be considered. For example, maybe you have a scarcity of IP addresses. Maybe you're running one big cluster, and now you're talking about many small clusters. Or maybe you run clusters more along business lines or for certain Ops teams.
 
 How are you going to start to venture into this multi-cluster multi-region space and ultimately, how are you going to build the plumbing and the pipes between those systems so they can communicate with each other?
-![](0_H8-xQlbhx0kxOwA_.png)
+![](0_H8-xQlbhx0kxOwA_.jpg)
 
 Theoretically, a single team could do this planning. But, that's probably not going to turn out well. It's far more likely that you'll need to involve several teams, including people from operations and people that run the cloud accounts. If you're operating in a hybrid or multi-cloud environment, you'll probably also have some network people involved, too. For example, there may be some firewalls that need to be adjusted in certain ways.
 

@@ -8,7 +8,7 @@ authors:
   - "gail-anderson"
   - "johan-vos"
   - "pedro-vieira"
-image: "podcast-javafx-guests-1024x393.png"
+image: "podcast-javafx-guests-1024x393.jpg"
 categories:
   - "JavaFX"
   - "Podcast"

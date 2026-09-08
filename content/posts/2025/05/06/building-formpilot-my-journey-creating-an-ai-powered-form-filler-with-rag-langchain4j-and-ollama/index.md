@@ -99,7 +99,7 @@ ollama list
 
 ```
 
-### ![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-9.48.13%E2%80%AFPM-1024x448.png)
+### ![](Screenshot-2025-04-05-at-9.48.13-E2-80-A-5244e7a7.png)
 
 ### **Part 2: Creating the Spring Boot Project via Spring Initializr**
 
@@ -691,7 +691,7 @@ Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 * Click the extension icon in your Chrome toolbar
 * Right-click on the page and select "Smart Form Filler" from the context menu, then choose "Fill Forms"
 
-![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-06-at-6.38.24%E2%80%AFPM-713x1024.png)
+![](Screenshot-2025-04-06-at-6.38.24-E2-80-A-48dd9c3b.jpg)
 
 ## **Testing with a Demo Form**
 

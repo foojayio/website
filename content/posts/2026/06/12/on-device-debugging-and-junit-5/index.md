@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-![On-Device Debugging And JUnit 5](https://www.codenameone.com/blog/developer-workflow-debug-and-junit.jpg)
+![On-Device Debugging And JUnit 5](developer-workflow-debug-and-junit.jpg)
 
 This is the first follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/) and it covers the two changes from this release that affect how you iterate on a Codename One app rather than what the app itself does. On-device debugging that treats Java as Java on a real iPhone or a real Android device, and standard JUnit 5 against the JavaSE simulator. The first is the one we have been wanting for a long time, and is the one that takes the most explaining, so most of the post is about it.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
@@ -47,7 +47,7 @@ The Android attach uses standard `adb`, so you need the Android SDK platform too
 ### What it looks like
 
 A breakpoint inside an iOS app, hit on the iOS Simulator next to IntelliJ IDEA:
-![IntelliJ stopped at a breakpoint inside a Codename One iOS app, with locals and the running simulator visible](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-debugger-on-device.png)
+![IntelliJ stopped at a breakpoint inside a Codename One iOS app, with locals and the running simulator visible](intellij-debugger-on-device-8d0beb31.jpg)
 
 The same Debug tool window you use for any other Java project. Frames panel on the left has the full Java call stack. The Variables panel shows `this` and the locals as Java values, with the same drill-down you would get on a regular JVM. The simulator on the right is the real iOS app, paused at the breakpoint, waiting for the next step.
 
@@ -193,10 +193,10 @@ class GreetingFormTest {
 That is more useful than constructing a `Form` directly in the test because it exercises the same startup path the simulator runs. The assertions check the form your app opens, not a form the test wrote.
 
 The natural way to run it is from the IntelliJ gutter. Click the green ▶ icon next to the class declaration:
-![IntelliJ gutter run menu showing Run, Debug, Run with Coverage for GreetingFormTest](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-gutter-run-menu.png)
+![IntelliJ gutter run menu showing Run, Debug, Run with Coverage for GreetingFormTest](intellij-gutter-run-menu-5984ab5d.jpg)
 
 The results land in the standard Run tool window:
-![IntelliJ test results showing GreetingFormTest passed, 1 test total, 520 ms](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-test-results.png)
+![IntelliJ test results showing GreetingFormTest passed, 1 test total, 520 ms](intellij-test-results-dfbea22c.jpg)
 
 Click the green icon next to a specific `@Test` method to run just that method. The same flow works in VS Code's Test Explorer and in Eclipse's JUnit view.
 
