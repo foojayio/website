@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-{{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized" width="666" height="681" style="width:300px" >}}
+{{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized on-light" width="666" height="681" style="width:300px" >}}
 
 Foojay.io, the website for **F** riends **O** f **O** pen**J**DK, is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community. 
 

@@ -2023,6 +2023,16 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 /* Contain floated images (alignleft/alignright) so a trailing float can't
    escape the article and overlap the footer. */
 .prose::after { content: ""; display: block; clear: both; }
+/* ...but on layouts/_default/single.html the end matter lives INSIDE .prose,
+   so that ::after only clears once the comments are already laid out and a
+   trailing alignleft image runs straight through them -- /who-we-are/ ends on
+   two floated logos, and they overlapped "Edit this page on GitHub" and the
+   giscus box, squeezing that text into a two-character column. Each end-matter
+   block clears for itself; the article's own ::after still handles the footer. */
+.prose > .series-nav,
+.prose > .page-source,
+.prose > .giscus-section,
+.prose > .legacy-comments { clear: both; }
 .prose > * + * { margin-top: 1.1em; }
 .prose h2 { margin-top: 2.25rem; }
 .prose h3 { margin-top: 1.75rem; }
@@ -2341,6 +2351,19 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose figure { margin: 1.5rem 0; }
 .prose figure img, .prose img.alignleft, .prose img.alignright { height: auto; max-width: 100%; }
 .prose figcaption, .prose .wp-element-caption { font-size: 0.85em; opacity: 0.72; text-align: center; margin-top: 0.4rem; }
+
+/* Artwork drawn FOR a white page -- black linework on transparency -- loses its
+   outlines on the dark scheme: Duke's cap on /who-we-are/ becomes an invisible
+   black wedge and the illustration reads as a floating bird. Transparency is not
+   something CSS can test for, so this is opt-in per image: add `on-light` to the
+   {{< img >}} `class` and the image gets back the ground it was drawn against.
+   Same reasoning as the per-sponsor `logoBackground` on the sponsor tiles.
+
+   The padding and radius apply in BOTH schemes so switching theme doesn't move
+   the surrounding text; only the fill is dark-mode-only, since on the light
+   scheme the page already is the plate. */
+.prose .on-light img { padding: .6rem; border-radius: 10px; }
+:root[data-theme="dark"] .prose .on-light img { background: #fff; }
 
 /* --- {{< gallery >}} shortcode (layouts/shortcodes/gallery.html) ------------
    Every gallery on the site, migrated or new. auto-fit means --gallery-cols is
