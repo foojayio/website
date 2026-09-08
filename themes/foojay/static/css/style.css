@@ -2873,37 +2873,49 @@ body.lightbox-open { overflow: hidden; }
 .sponsors-cta h2 { margin: 0 0 .5rem; font-size: 1.35rem; }
 .prose .sponsors-cta h2 { margin-top: 0; }
 .sponsors-cta p { color: var(--ink-soft); }
-/* The derived reach figures, as a bullet list inside a CENTRED card. Two
-   things make that work rather than look broken: the <ul> is inline-block, so
-   the list as a whole centres while its lines stay left-aligned (centred
-   bullet text is unreadable at three items), and the marker is drawn by
-   ::before rather than left to list-style, which cannot be positioned.
-   Both selectors are class-on-class because .prose ul and .prose li + li are
-   (0,1,1) and beat a single class -- the specificity trap that has already
+/* The derived reach figures: number over label, in a centred row. It was a
+   bullet list first, and five one-line fragments in a centred card read as a
+   shopping list -- the figure is the thing a sponsor weighs, so the figure is
+   what gets the size. Still a <ul> in the markup, so it is still a list of five
+   to a screen reader.
+   auto-fit rather than a fixed column count: four items sit in one row on a
+   desktop and fold to 2x2 on a phone with nothing to declare, and a figure that
+   drops out (no data/views.json locally) re-centres the rest instead of leaving
+   a hole. Both selectors are class-on-class because .prose ul and .prose li + li
+   are (0,1,1) and beat a single class -- the specificity trap that has already
    bitten the series nav and the sitemap tables. */
 .prose .sponsors-cta__stats {
-  display: inline-block;
-  margin: 0 0 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: 1rem 1.25rem;
+  max-width: 34rem;
+  margin: 1.4rem auto 1.6rem;
   padding: 0;
-  text-align: left;
   list-style: none;
-  color: var(--ink-soft);
 }
 .prose .sponsors-cta__stats li {
-  position: relative;
-  margin: .3rem 0;
-  padding-left: 1.35rem;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .1rem;
 }
-.prose .sponsors-cta__stats li::before {
-  content: "";
-  position: absolute;
-  left: .3rem;
-  top: .62em;
-  width: .4rem;
-  height: .4rem;
-  border-radius: 50%;
-  background: var(--brand-accent);
+.prose .sponsors-cta__stats strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
+.prose .sponsors-cta__stats span {
+  font-size: .82rem;
+  color: var(--ink-muted);
+  text-align: center;
+  text-wrap: balance;
+}
+
 .sponsors-cta__links { margin-bottom: 0; }
 
 .sponsor-mini-list { display: flex; flex-direction: column; gap: .85rem; }

@@ -98,16 +98,31 @@
       {{ $ctaEpisodes := 0 }}
       {{ with index site.Taxonomies.categories "podcast" }}{{ $ctaEpisodes = len .Pages }}{{ end }}
       {{ $ctaReads := partial "views-total.html" $ctaPosts }}
-      <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already reads:</p>
-      {{/* Each `with` drops its own bullet rather than printing a zero: a local
+      {{/* THE CALENDAR LINK IS RESOLVED, NOT TYPED. A literal href="/calendar"
+           was live here and pointed at foojayio.github.io/calendar -- off the
+           site entirely -- because the trial deploy serves everything under
+           /website/ and a root-relative path skips it. .RelPermalink carries
+           the base path in both worlds, and going through site.GetPage means a
+           renamed page breaks the BUILD rather than the link. (Nothing caught
+           the literal: this card sits inside .prose, so validate/BuiltSite.java
+           read a template's dead link as an author's typo and only reported
+           it.) */}}
+      {{ $calendar := site.GetPage "/pages/calendar.md" }}
+      <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already
+        reads: the articles, the podcast{{ with $calendar }}, and a
+        <a href="{{ .RelPermalink }}">calendar</a> full of community events{{ end }}.</p>
+      {{/* FIGURES, NOT BULLETS. Five one-line fragments ("353 authors") in a
+           centred card read as a shopping list; the same five as number-plus-
+           label read as credentials, which is what a sponsor is here to weigh.
+           Still a <ul>, so a screen reader still hears a list of five.
+           Each `with` drops its own figure rather than printing a zero: a local
            build has no data/views.json, and "0 million reads" on the sponsor
-           page is worse than one bullet fewer. */}}
+           page is worse than one figure fewer. */}}
       <ul class="sponsors-cta__stats">
-        <li>{{ lang.FormatNumberCustom 0 (len $ctaPosts) }} articles</li>
-        <li>{{ len $ctaAuthors }} authors</li>
-        {{ with $ctaEpisodes }}<li>{{ . }} podcast episodes</li>{{ end }}
-        {{ with $ctaReads }}<li>{{ printf "%.1f" (div (math.Floor (div . 100000.0)) 10.0) }} million reads to date</li>{{ end }}
-        <li>A <a href="/calendar">calendar</a> full of community events</li>
+        <li><strong>{{ lang.FormatNumberCustom 0 (len $ctaPosts) }}</strong><span>articles</span></li>
+        <li><strong>{{ lang.FormatNumberCustom 0 (len $ctaAuthors) }}</strong><span>authors</span></li>
+        {{ with $ctaEpisodes }}<li><strong>{{ . }}</strong><span>podcast episodes</span></li>{{ end }}
+        {{ with $ctaReads }}<li><strong>{{ printf "%.1f" (div (math.Floor (div . 100000.0)) 10.0) }}M</strong><span>reads to date</span></li>{{ end }}
       </ul>
       <p class="sponsors-cta__links">
         {{ with $page.Params.prospectus }}<a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Read the sponsorship prospectus</a>{{ end }}
