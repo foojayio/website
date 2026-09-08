@@ -513,6 +513,12 @@ public class Posts {
             System.err.println("  WARNING: no content matched for " + url);
         }
 
+        // A picture the page carries TWICE, from two hosts, leaves a second file
+        // that nothing points at -- see HtmlToMarkdown.dropUnreferenced. Run
+        // here, once the body and the hero are both settled, and scoped to what
+        // this run downloaded, so it can only ever remove its own leftovers.
+        HtmlToMarkdown.dropUnreferenced(d.bundleDir, opts, d.body, d.image);
+
         return d;
     }
 

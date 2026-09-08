@@ -1,11 +1,11 @@
 ---
 title: "Did Your AI Agent Run the Debugger? One JVM Bug, Two Agent Runs"
 date: "2026-09-03T13:48:32+00:00"
-lastmod: "2026-09-04T14:06:45+00:00"
+lastmod: "2026-09-07T11:39:12+00:00"
 description: "Java developers reach for the debugger without thinking about it. Set a breakpoint, run the failing test, look at the variables, then decide what to…"
 authors:
   - "viktoria-evdokimova"
-image: "Favicon-3-2.png"
+image: "generated-image-2026-09-04T160504.935-1-e1788858160830.jpg"
 categories:
   - "AI"
   - "GenAI"
@@ -38,9 +38,9 @@ A small function with one unguarded NIO call and more than one way to fail. A go
 
 A systematic debugging method has four steps: gather facts, form a hypothesis, run an experiment, change the code. The order matters, and the third step is the one I see agents skip.
 
-[Superpowers](http://https://github.com/obra/superpowers "Superpowers"), a skills collection created by [Jesse Vincent](http:/https://blog.fsck.com/ "Jesse Vincent") and the [Prime Radiant](http://https://primeradiant.com "Prime Radiant") team and popularized by Matt Pocock, ships a [systematic-debugging skill](http://https://www.skills.sh/obra/superpowers/systematic-debugging "systematic-debugging skill") that encodes exactly those steps as instructions for the model.
+[Superpowers](github.com/obra/superpowers), a skills collection created by [Jesse Vincent](blog.fsck.com) and the [Prime Radiant](primeradiant.com) team and popularized by Matt Pocock, ships a [Caveman test](http:https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/// "Caveman test") [systematic-debugging skill](http://https://www.skills.sh/obra/superpowers/systematic-debugging "systematic-debugging skill")matic-debugging) that encodes exactly those steps as instructions for the model.
 
-[Explyt, the JetBrains plugin](https://explyt.ai/t/l/vzJhcPvhttp:// "Explyt, the JetBrains plugin") I work on, has a built-in Debug skill that gives the model the IDE debugger as a tool: it can set breakpoints, run a test under the debugger, and read variables and call stacks.
+[Explyt, the JetBrains plugin](https://plugins.jetbrains.com/plugin/27979-explyt-ai-agenthttp:// "Explyt, the JetBrains plugin") I work on, has a built-in Debug skill that gives the model the IDE debugger as a tool: it can set breakpoints, run a test under the debugger, and read variables and call stacks.
 
 **Setup for both runs:**
 
@@ -97,7 +97,7 @@ Which shape is right depends on the caller. That is the decision the first run m
 Two small reminders while we are here. Files.list returns a Stream that holds a directory handle, so close it with try-with-resources. And AccessDeniedException extends FileSystemException, which extends IOException, so a bare catch (IOException e) will swallow it together with everything else unless you order the clauses.
 
 **What the token counts say, and what they do not**   
-[Explyt](http://https://explyt.ai/t/l/vzJhcPv "Explyt ")finished this case in about 67k tokens. The Superpowers run used about 132k.
+[Explyt](https://explyt.ai/en/download)finished this case in about 67k tokens. The Superpowers run used about 132k.
 
 The transcripts explain the gap. In run two the decisive fact arrived early, from the debugger. In run one the same budget went into speculative code, a skipped test, a second test, and a constructor refactor.
 
@@ -105,11 +105,11 @@ Read that as one measurement of one bug. Generalizing from it to either tool wou
 
 JetBrains has been publishing paired A/B tests on "token-saving" skills, and the pattern there is worth knowing before you trust any single number:
 
-The [Caveman test](http://https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/ "Caveman test"): a README claim of 65% fewer tokens turned into 8.5% fewer output tokens on real agentic tasks, with activation forced.  
+The [Caveman test](http:https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/// "Caveman test"): a README claim of 65% fewer tokens turned into 8.5% fewer output tokens on real agentic tasks, with activation forced.  
 
 The [rtk test](http:https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/// "rtk test"): the with-rtk arm cost a median 7.6% more per task at low reasoning effort, and nothing changed at high effort.  
 
-The [Ponytail test](// "Ponytail test"): a 10.3% cost reduction on its own benchmark.  
+The [Ponytail test](https://blog.jetbrains.com/ai/2026/07/ponytail-skill-claude-tested/): a 10.3% cost reduction on its own benchmark.  
 
 Their conclusion, and mine: measure the whole agent run, on your own bugs, and treat a skill's self-reported counter as marketing until you do.
 
@@ -133,4 +133,4 @@ Where Explyt fits, and a disclosure
 
 I work at Explyt, so weigh this paragraph accordingly. Explyt is an AI agent that runs inside JetBrains IDEs. Its Debug workflow starts the code under the IDE debugger and reads breakpoints, variables, call stacks, and execution paths before editing. The IDE supplies the evidence; you still review the hypothesis and the diff.
 
-Supported IDE, language, and run-configuration combinations are listed in the feature matrix. If you want to reproduce this kind of comparison, take a failing test you already have, ask the agent to confirm the cause at a breakpoint before it edits anything, and read the diff with the checklist above.
+Supported IDE, language, and run-configuration combinations are listed in the [feature matrix.](https://explyt.ai/docs/explyt-test/overview/feature-matrix?_highlight=feature&_highlight=matrix#:~:text=ExplytOverviewFeature%20matrix-,Feature%20matrix,-This%20is%20a) If you want to reproduce this kind of comparison, take a failing test you already have, ask the agent to confirm the cause at a breakpoint before it edits anything, and read the diff with the checklist above.

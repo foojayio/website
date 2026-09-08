@@ -43,8 +43,10 @@ Specifically, if you're indexing 1536-dimension vectors (the size of ada002 or o
 
 <!-- -->
 
-1. Check out the project:  
-   $ git clone <https://github.com/jbellis/coherepedia-jvector>$ cd coherepedia-jvector
+1. Check out the project:
+```bash
+$ git clone <https://github.com/jbellis/coherepedia-jvector>$ cd coherepedia-jvector
+```
 2. Edit *config.properties* to set the locations for the dataset and the index.
 3. Run *pip install datasets* . (Setting up a [venv](https://docs.python.org/3/library/venv.html) or conda environment first is recommended but not strictly necessary.)
 4. Run *python download.py.*This downloads the 180 GB dataset to the location you configured. For me that took about half an hour.
@@ -102,6 +104,7 @@ You can look at [the full source](https://github.com/jbellis/coherepedia-jvector
 
 When the build completes, you should see files like this:
 
+```bash
 $ ls -lh \~/coherepedia
 
 -rw-rw-r-- 1 jonathan jonathan 48G May 20 15:53 coherepedia.ann
@@ -113,6 +116,7 @@ $ ls -lh \~/coherepedia
 -rw-rw-r-- 1 jonathan jonathan 4.1K May 17 23:04 coherepedia.lvq
 
 -rw-rw-r-- 1 jonathan jonathan 1.1M May 17 23:04 coherepedia.pq
+```
 
 These are respectively
 

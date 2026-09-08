@@ -1491,6 +1491,76 @@ public final class HtmlToMarkdown {
         }
     }
 
+    /**
+     * Deletes files THIS RUN downloaded that the emitted content does not
+     * reference, and says which. Returns how many went.
+     *
+     * WHY IT IS NEEDED. A WordPress page can carry the same picture twice, from
+     * two hosts: the copy WP uploaded (used by the <img>) and the author's own
+     * copy (the <a href> the lightbox opens). localizeImages localises both --
+     * correctly, since either could be the one that survives -- but Flexmark
+     * renders that pair as a bare image and drops the wrapping link, so the
+     * second file lands in the bundle with nothing pointing at it. Measured on
+     * one import: 8 files, byte-identical to a sibling, plus 2 mermaid.ink
+     * diagrams in the same shape. Nothing reported them, and nothing would: an
+     * unreferenced bundle resource is not an error to Hugo, it is just weight.
+     *
+     * Scoped to fetchedThisItem, which is the whole safety property: a file that
+     * was already in the bundle is never a candidate, so this cannot delete a
+     * hand-added image, a still poster, or anything an earlier run localised and
+     * a later edit stopped referencing. It only ever removes what it has just
+     * created and then found no use for.
+     *
+     * THE GALLERY EXEMPTION IS LOAD-BEARING. shortcodes/gallery.html derives the
+     * full-size original from a thumbnail's name (`shot-1024x768.png` ->
+     * `shot.png`) rather than storing it, so the original is referenced
+     * IMPLICITLY and a naive sweep would delete exactly the file the lightbox
+     * opens. A candidate is kept when its stem matches the de-thumbnailed stem
+     * of anything referenced.
+     */
+    public static int dropUnreferenced(Path dir, Options opts, String... referencing) {
+        if (opts.fetchedThisItem.isEmpty()) return 0;
+        StringBuilder all = new StringBuilder();
+        for (String text : referencing) if (text != null) all.append('\n').append(text);
+        String content = all.toString();
+
+        Set<String> referencedStems = new HashSet<>();
+        for (String name : opts.localizedThisItem.values()) {
+            if (content.contains(name)) referencedStems.add(deThumbnailedStem(name));
+        }
+        // Anything else in the bundle that the content names -- a file an earlier
+        // run localized, a hand-added image -- counts too, for the exemption.
+        Matcher m = Pattern.compile("[\\w.,()\\[\\]/-]+?\\.(?:png|jpe?g|gif|webp|svg|avif)").matcher(content);
+        while (m.find()) {
+            String name = m.group();
+            referencedStems.add(deThumbnailedStem(name.substring(name.lastIndexOf('/') + 1)));
+        }
+
+        int removed = 0;
+        for (String name : new ArrayList<>(opts.fetchedThisItem)) {
+            if (content.contains(name)) continue;
+            if (referencedStems.contains(deThumbnailedStem(name))) continue;  // gallery original
+            try {
+                if (Files.deleteIfExists(dir.resolve(name))) {
+                    System.out.println("  dropped " + name + " -- downloaded, then not referenced"
+                            + " (the page carries this picture twice, from two hosts)");
+                    removed++;
+                }
+            } catch (IOException e) {
+                System.err.println("  could not remove the unreferenced " + name + ": " + e.getMessage());
+            }
+        }
+        return removed;
+    }
+
+    /** `shot-1024x768.png` -> `shot`, so a thumbnail and its full-size original
+     *  share one stem -- see the gallery exemption in dropUnreferenced. */
+    private static String deThumbnailedStem(String filename) {
+        int dot = filename.lastIndexOf('.');
+        String stem = dot > 0 ? filename.substring(0, dot) : filename;
+        return stem.replaceAll("-\\d+x\\d+$", "").replaceAll("-scaled$", "");
+    }
+
     /** `.png` etc. when the URL path names its format, else null. */
     private static String urlExtension(URI uri) {
         String path = uri.getPath();

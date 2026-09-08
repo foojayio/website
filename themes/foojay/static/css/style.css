@@ -2886,9 +2886,15 @@ body.lightbox-open { overflow: hidden; }
    bitten the series nav and the sitemap tables. */
 .prose .sponsors-cta__stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  /* ONE ROW OF FOUR ON A DESKTOP, and the arithmetic has to allow it: auto-fit
+     fits floor((width + gap) / (min + gap)) columns, so the previous
+     8.5rem min inside a 34rem box worked out at THREE and dropped the fourth
+     figure onto a line of its own. 7rem min in a 40rem box gives 5 slots for 4
+     items, so all four sit in one row; at 390px the same rule folds them to
+     2x2 with nothing declared. */
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
   gap: 1rem 1.25rem;
-  max-width: 34rem;
+  max-width: 40rem;
   margin: 1.4rem auto 1.6rem;
   padding: 0;
   list-style: none;

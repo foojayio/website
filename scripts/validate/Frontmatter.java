@@ -12,6 +12,10 @@
 
 import org.yaml.snakeyaml.Yaml;
 
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -90,6 +94,8 @@ public class Frontmatter {
         problems.addAll(checkAds(Path.of("content/ads")));
         problems.addAll(checkImageWeight(Path.of("content")));
         problems.addAll(checkHeroImageStill(Path.of("content")));
+        problems.addAll(checkHeroWeight(Path.of("content/posts")));
+        problems.addAll(checkBundleWeight(Path.of("content/posts")));
         problems.addAll(checkRawHtml(Path.of("content")));
         problems.addAll(checkRawHtml(Path.of("draft")));
 
@@ -791,6 +797,120 @@ public class Frontmatter {
             }
         }
         return problems;
+    }
+
+    /**
+     * The biggest a post's HERO may be, and the biggest a whole BUNDLE may be.
+     *
+     * MAX_IMAGE_BYTES above catches one egregious file. These two catch the shape
+     * the site actually drifts in, which is neither: a hero that is nobody's
+     * emergency at 1.3 MB, and a bundle of forty holiday photos each of which
+     * passes the per-file budget on its own. Both were live findings, not
+     * hypotheticals -- an import brought in a 1.34 MB PNG hero that
+     * cleanup/images.py took to 0.18 MB, and the month a trip report landed added
+     * 33 MB where an average month adds 9.4.
+     *
+     * A HERO IS THE ONE IMAGE THAT IS ALWAYS FETCHED. It is the card thumbnail in
+     * every grid the post appears in, the og:image a link preview downloads, and
+     * the LCP element on the article page -- so it is paid for by readers who
+     * never scroll. 800 KB rather than something tighter because a 1600px photo
+     * legitimately weighs 400-600 KB at a quality worth having, and squeezing the
+     * most visible image on the page is a bad trade for a megabyte. Measured: no
+     * hero on the site exceeds it today except the four this check exempts.
+     *
+     * A TRANSPARENT PNG IS EXEMPT, because nothing can be done about it
+     * automatically: JPEG has no alpha, so cleanup/images.py correctly refuses to
+     * convert one, and failing a PR over a fix that does not exist is how a gate
+     * gets switched off. All four heroes over the limit are exactly that. (They
+     * are a content problem of their own -- template/post.md asks for a solid
+     * background, since a card paints its own colour behind the image -- but that
+     * is a judgement for a human, not a build failure.) Anything ImageIO cannot
+     * read -- WebP, AVIF, which Java has no decoder for -- fails OPEN and is
+     * skipped, the same posture as checkHeroImageStill.
+     *
+     * The bundle budget is 15 MB against a worst case of 13.0 MB today, and that
+     * gap is deliberate: the four heaviest bundles are screen-recording posts
+     * whose GIFs genuinely refuse to shrink (WebP cannot beat them by 10%), so a
+     * tighter number would fail four posts nobody can fix. It still catches a
+     * bundle twice as heavy as anything here.
+     */
+    static final long MAX_HERO_BYTES = 800_000L;
+    static final long MAX_BUNDLE_BYTES = 15_000_000L;
+
+    static List<String> checkHeroWeight(Path postsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(postsDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(postsDir)) {
+            for (Path index : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+                String hero = frontmatterLine(index, "image");
+                if (hero == null || hero.isBlank() || hero.startsWith("http")) continue;
+                Path file = index.getParent().resolve(hero);
+                if (!Files.isRegularFile(file)) continue;   // checkDrafts owns "missing"
+                long size = Files.size(file);
+                if (size <= MAX_HERO_BYTES) continue;
+                if (hasTransparency(file)) continue;
+                problems.add(String.format(
+                        "%s: hero image '%s' is %.0f KB, over the %.0f KB budget -- a hero is the card"
+                        + " thumbnail, the og:image and the LCP element, so every reader pays for it."
+                        + " `python3 scripts/cleanup/images.py --path %s` re-encodes it",
+                        index, hero, size / 1024.0, MAX_HERO_BYTES / 1024.0, index.getParent()));
+            }
+        }
+        return problems;
+    }
+
+    static List<String> checkBundleWeight(Path postsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(postsDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(postsDir)) {
+            for (Path index : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+                Path dir = index.getParent();
+                long total = 0;
+                try (Stream<Path> inBundle = Files.list(dir)) {
+                    for (Path f : inBundle.filter(Files::isRegularFile).toList()) {
+                        String n = f.getFileName().toString().toLowerCase();
+                        int dot = n.lastIndexOf('.');
+                        if (dot >= 0 && IMAGE_EXTS.contains(n.substring(dot))) total += Files.size(f);
+                    }
+                }
+                if (total <= MAX_BUNDLE_BYTES) continue;
+                problems.add(String.format(
+                        "%s: the images in this post total %.1f MB, over the %.0f MB budget --"
+                        + " no single file is the problem, the count is."
+                        + " `python3 scripts/cleanup/images.py --path %s` resizes and re-encodes them",
+                        index, total / 1e6, MAX_BUNDLE_BYTES / 1e6, dir));
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * Whether an image really uses its alpha channel, or false when that cannot
+     * be established -- no decoder (WebP, AVIF), or an unreadable file.
+     *
+     * "Has an alpha channel" is NOT the question: a great many of these WordPress
+     * PNGs are RGBA with every pixel opaque, which converts to JPEG perfectly
+     * well. So this reads the channel's actual minimum, which is what
+     * cleanup/images.py's has_real_transparency does -- the two have to agree, or
+     * this check would demand a conversion that script refuses to perform.
+     */
+    static boolean hasTransparency(Path file) {
+        try (var in = Files.newInputStream(file)) {
+            BufferedImage img = ImageIO.read(in);
+            if (img == null || !img.getColorModel().hasAlpha()) return false;
+            Raster alpha = img.getAlphaRaster();
+            if (alpha == null) return false;
+            for (int y = 0; y < alpha.getHeight(); y++) {
+                for (int x = 0; x < alpha.getWidth(); x++) {
+                    if (alpha.getSample(x, y, 0) < 255) return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;   // cannot inspect -> not our call to make
+        }
     }
 
     static List<String> checkBoardMembers(Path boardDir) throws IOException {
