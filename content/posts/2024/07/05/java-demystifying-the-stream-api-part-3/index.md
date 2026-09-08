@@ -23,6 +23,8 @@ This article delves into a crucial aspect, namely the Stream API, which JDK1.8 i
 
 So,
 
+## What is Stream API?
+
 Succinctly, In Java, **a Stream is a collection of data that developers can process on in a declarative and functional approach**.
 
 The **Collections Framework** closely links to the stream API. The Collections Framework stores and organizes data in the JVM's memory, while the Stream API serves as an additional framework that aids in efficiently processing the data.
@@ -48,6 +50,8 @@ Unlike the verbose nature of iterator or imperative approach, StreamAPI enables 
 Generally, loops are more efficient from a performance standpoint compared to streams. However, this dynamic may shift in scenarios involving parallelism.
 
 In intricate situations necessitating custom thread management and coordination, we use for-loops because they provide manual concurrency control.
+
+## Internals of Streams
 
 The `java.util.stream` package includes the Stream interface, which encompasses numerous `intermediate and terminal operations`.
 
@@ -214,6 +218,8 @@ System.out.println("Filtered Names: " + filteredNames);
 Furthermore, there are various other terminal operations such as **min** , **max** , and **count()** available.
 
 Some of these approaches involve *short-circuiting terminal operations* , such as **allMatch(), findFirst()** , and **findAny()**.
+
+## Final Thoughts
 
 In a nutshell, Stream API facilitates a functional programming approach for handling collections. It enables chaining pipeline using**map-filter-reduce algorithm**.
 

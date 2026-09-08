@@ -20,6 +20,8 @@ frozen: false
 **Updated December 28, 2025 (**originally published August 10**, 2021, republished January 1, 2026):** This article now features Java 25 and the Foreign Function \& Memory (FFM) API, which has been a standard feature since JDK 22.
 ![Java's Project Panama](duke_and_panama.png)
 
+## Introduction
+
 In this series of articles, we will explore the APIs from OpenJDK's [Project](https://openjdk.java.net/projects/panama/) [Panama](http://jdk.java.net/panama/). My intent is to show you how to be proficient in using the Foreign Function and Memory Access APIs as it relates to Java interoperability with native code. After FFI (foreign function interface) \& FFM (foreign function memory) have been finalized in JDK 22 the APIs currently reside in the following package namespaces.
 
 ```
@@ -105,6 +107,8 @@ To acquire **jextract**, you can either build it from source or download a pre-c
 * **Download pre-built releases:** For a more convenient setup, download the latest early-access binaries for your operating system (Windows, macOS, or Linux) directly from [jdk.java.net/jextract](https://jdk.java.net/jextract/).
 
 As we explore further, we will learn that the `jextract` tool is responsible for generating Java (code) bindings derived from C header files (`.h`) and their associated native library files. Library files with the extension `.dll`, `.so` and `.dylib` are used on the Windows, Linux, and MacOS operating systems respectively.
+
+## Getting Started
 
 Let us make sure your environment is setup before we begin. The following are the install instructions for your respective OS.
 
@@ -710,9 +714,13 @@ Output is shown below:
  15.000000  18.000000  21.000000  24.000000
 ```
 
+## Conclusion
+
 In Part 1, we learned about the what, where, and whys regarding project Panama. Next, we examined the anotomy of a typical Hello World C program. After learning how to use `jextract` to generate Java code from `stdio.h`, we were able to create a Java Hello World to access the C function `printf()`. Lastly, we learned how to create C primitive data types including arrays.
 
 If you're still interested,[in Part 2 we will continue our journey into Project Panama](https://foojay.io/today/project-panama-for-newbies-part-2/), by looking at C's concept of **structs** and **pointers**.
+
+## Resources
 
 * Panama4Newbies: <https://github.com/carldea/panama4newbies>
 * Panama4Newbies part 1 source: <https://github.com/carldea/panama4newbies/tree/main/part01>

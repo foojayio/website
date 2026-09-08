@@ -10,6 +10,7 @@ categories:
   - "Jakarta EE"
   - "Java"
 related_posts:
+  - "jakarta-faces-java-web-framework-stateless-edition-marketplace-alifaces"
 frozen: false
 ---
 
@@ -449,3 +450,5 @@ The Slider display now uses the same precision as the configured step.
 #### JavaBook👇
 
 <https://bit.ly/jroadmap>
+
+## ✌️😎

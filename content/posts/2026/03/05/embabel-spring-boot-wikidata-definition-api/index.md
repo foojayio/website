@@ -24,6 +24,8 @@ frozen: false
 
 {{< youtube TiuYS6K3HaU >}}
 
+## No Keys, No LLM: Building a Wikidata Definition API with Embabel
+
 I wanted a demo that is **simple** , **reproducible** , and still **shows agentic orchestration** in a way that's easy to explain on video.
 
 So I built a small Spring Boot 4 app that exposes a single endpoint:

@@ -26,6 +26,8 @@ In **[Part 3](https://foojay.io/today/building-an-agentic-warehouse-management-s
 
 A live version of the Agentic WMS is available[here](https://agentic-wms-39763860545.southamerica-west1.run.app/), and the complete source code is available[here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
 
+## Designing the agent
+
 From this point on, we will focus on the main parts of the agent implementation using Java and Spring AI. Rather than covering Spring AI from the ground up, we will concentrate on the components directly relevant to this part of our agent: prompts, capabilities, triggering, and planning. For a broader introduction to Spring AI, see this [article](https://dev.to/mongodb/how-to-build-rag-applications-with-spring-ai-and-mongodb-5gaj) by my colleague [Tim Kelly](https://timotheekelly.com/).
 
 In [Part 1](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-1-where-ai-agents-add-value/), we established an important boundary: the WMS defines what the agent is allowed to do, while the agent decides what to do within those boundaries. Now we can translate that design into code.
@@ -404,6 +406,8 @@ This gives us a persistent representation of the execution from the beginning, i
 ```
 
 The plan is now ready, and the execution has been registered.
+
+## Conclusion
 
 In this second part, we translated the agent design into the first pieces of the implementation. We defined its responsibilities and capabilities, connected it to the WMS workflow, and used the planner to turn the agent goal into a persistent execution plan.
 

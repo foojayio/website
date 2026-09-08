@@ -38,9 +38,13 @@ application running inside a Nanos unikernel using **JProfiler** and
 
 No special hacks. Just standard JVM tooling.
 
+## Prerequisites
+
 * Ops (<https://ops.city/>)
 * JProfiler (<https://www.ej-technologies.com/jprofiler>)
 * A Quarkus application packaged as a runnable JAR
+
+## 1. Project Structure
 
 We start from a clean Proof of Concept directory:
 
@@ -55,6 +59,8 @@ Directory breakdown:
 * `jprofiler15/` → extracted JProfiler distribution
 * `myQuarkusApp/` → packaged Quarkus runnable JAR
 * `tmp/` → writable directory inside the unikernel
+
+## 2. Ops Nanos Configuration
 
 Below is the complete `config.json` used for this setup:
 
@@ -128,6 +134,8 @@ We expose:
 
 Allocates 300 MB for the unikernel filesystem.
 
+## 3. Starting the Unikernel
+
 From the project root directory, run:
 
 ```bash
@@ -144,6 +152,8 @@ ops pkg load AngeloRubens/SemeruJREx64Linux:25.0.1 --nightly -c config.json
 There is no separate container or VM runtime.\\  
 
 The JVM runs directly inside the unikernel.
+
+## 4. Boot Log Analysis
 
 When the unikernel starts, you will see:
 
@@ -197,6 +207,8 @@ At this point:
 
 The profiling infrastructure inside the unikernel is fully operational.
 
+## 5. Connecting JProfiler GUI
+
 Open JProfiler.
 
 1. Click **New Session**
@@ -238,6 +250,8 @@ Live Objects
 
 ![immagine](jprofiler5LiveMemory-700x344.png)
 
+## Why This Works
+
 Unikernels do not remove JVM capabilities.
 
 JProfiler uses:
@@ -255,6 +269,8 @@ As long as:
 Profiling works.
 
 The environment (VM, container, unikernel) does not change the JVM instrumentation model.
+
+## Conclusion
 
 Profiling a Java application inside a unikernel is straightforward.
 

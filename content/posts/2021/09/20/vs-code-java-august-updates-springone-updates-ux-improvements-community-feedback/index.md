@@ -21,6 +21,8 @@ Hi everyone, welcome to the August edition of the Visual Studio Code Java update
 
 In this article, we are going to share some exciting updates from the SpringOne 2021 conference, as well as various user experience improvements.
 
+## SpringOne 2021 Updates
+
 When it comes to Java development, we always keep Spring developers in mind. In this year's [SpringOne conference](https://devblogs.microsoft.com/java/join-microsoft-at-springone-2021/ "SpringOne conference"), we shared an update on our Spring tooling support in Visual Studio Code, and showcased various Spring related features in two breakout sessions.
 
 ## Spring Support on GitHub Codespaces
@@ -36,6 +38,8 @@ We had a full demo-focused session at SpringOne to talk about Spring on GitHub C
 In addition to Spring support on GitHub Codespaces, we have also delivered a session to talk about how various Spring tools are supported in Visual Studio Code in general. This includes a full demonstration of how to start a Spring Boot application from scratch as well as opening and running an existing sample project such as Spring PetClinic. We also touched upon Visual Studio Code's rich extension selection that allows developer to deploy Spring applications to cloud directly. You can watch the complete session [using this link](https://aka.ms/Bootiful-Tools "using this link").
 
 Spring ecosystem is a critical part of the Java application development and we will continue to invest in this area and make sure Spring developers have an awesome experience in Visual Studio Code.
+
+## Feature Improvements
 
 Apart from Spring updates, we have made various improvements on user experience in the latest release. To see those new features, please make sure to have the [latest Expansion Pack](https://foojay.io/ "latest Expansion Pack") for Java installed.
 
@@ -59,11 +63,15 @@ In the "File" menu of Visual Studio Code, you will see a new option called "New 
 
 ![](New-File.webp)
 
+## Community Feedback
+
 As part of product improvement process, we recently launched a [Twitter poll](https://twitter.com/foojayio/status/1427179687948734464 "Twitter poll") via [Foojay.io](https://foojay.io/ "Foojay.io"). We really appreciate all the comments and feedback regarding Visual Studio Code Java development experience. There are a few areas we'd like to call out here:
 
 * **Support for large projects.** We are aware of the performance issues when it comes to complicated project strcture, and we have been working diligently to identify those performance bottlenecks. As we shared in our roadmap in June, this is one of our areas of focus for the next few months.
 * **Gradle support.** Gradle is one of the top asks from the community. We are close to a milestone that aims to provide much better Gradle support. Please stay tuned.
 * **Kotlin.** We are excited to learn that developers are using Visual Studio Code for Kotin development. While we do not have immediate plan to support Kotlin officially, we do already have some great choices from the community (Such as [Code Runner extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner "Code Runner extension") and [Kotlin Language extension](https://marketplace.visualstudio.com/items?itemName=mathiasfrohlich.Kotlin "Kotlin Language extension")). You can see more Kotlin related extensions[via this link](https://marketplace.visualstudio.com/search?term=kotlin&target=VSCode&category=All%20categories&sortBy=Relevance " via this link").
+
+## Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 

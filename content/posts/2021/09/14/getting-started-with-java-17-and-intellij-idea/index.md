@@ -30,7 +30,7 @@ In this article, I will limit the coverage of Java 17 to its language features â
 * **Pattern matching for switch statements** . Pattern matching for switch is introduced as a [preview feature](https://openjdk.java.net/jeps/12). As the name suggests, it adds patterns to the case labels in the switch statements *and* switch expressions. The type of the *selector expression* that can be used with a switch is expanded to any reference value. Also, case labels are no longer limited to constant values. It also helps replace if-else statement chains with switch, improving code readability.
 
 Let's start with pattern matching.
-![](Java17_blog_Blog_1280x720.jpg)
+![](Java17_blog_Blog_1280x720-c0d423fa.jpg)
 
 Before we dive into pattern matching for switch, let's ensure we have the basic IntelliJ IDEA configuration set up.
 
@@ -50,6 +50,8 @@ Once you select this, you might see the following pop-up which informs you that 
 ![](java17-img3-95384406.png)
 
 Ok, now we are ready to start with the Java 17 language features.
+
+## **Pattern matching for switch (a preview feature)**
 
 Pattern matching is a big topic and it is being rolled out in batches in the Java language. It started with [pattern matching for instanceof](https://openjdk.java.net/jeps/394) (previewed in Java 14, and becoming a standard feature in Java 16). Pattern matching for switch is included in Java 17, and we are already looking at deconstructing records and arrays with [record patterns and array patterns](https://openjdk.java.net/jeps/405) in Java 18.
 
@@ -512,6 +514,8 @@ To run the inspection 'if can be replaced with switch', you can use the feature 
 
 We have talked a lot about the pattern matching for switch. Now let's cover sealed classes and interfaces. Added as a standard language feature in Java 17, they haven't changed from Java 16.
 
+## **Sealed classes and interfaces (now a standard feature)**
+
 The language syntax of Sealed types enables you to restrict the classes or interfaces that can extend or implement them. The goal of this language feature is to let you define the possible hierarchies in your business domain in a declarative manner. But why would you ever need to create restricted hierarchies?
 
 ## **Need for creating restricted hierarchies**
@@ -701,11 +705,15 @@ The following gif demonstrates it in IntelliJ IDEA:
 
 I mentioned that Pattern Matching for switch is introduced as a preview language feature in Java 17. Just in case you are unaware of what preview features mean, I've covered it in the next section.
 
+## **Preview Features**
+
 With Java's new release cadence of six months, new language features are released as preview features. They may be reintroduced in later Java versions in the second or third preview, with or without changes. Once they are stable enough, they may be added to Java as a standard language feature.
 
 Preview language features are complete but not permanent, which essentially means that these features are ready to be used by developers, although their finer details could change in future Java releases depending on developer feedback. Unlike an API, language features can't be deprecated in the future. So, if you have feedback about any of the preview language features, feel free to share it on the [JDK mailing list](https://mail.openjdk.java.net/mailman/listinfo/amber-dev) (free registration required).
 
 Because of how these features work, IntelliJ IDEA is committed to only supporting preview features for the current JDK. Preview language features can change across Java versions, until they are dropped or added as a standard language feature. Code that uses a preview language feature from an older release of the Java SE Platform might not compile or run on a newer release. For example, Switch Expressions in Java 12 were released with the usage of break to return a value from its branch, which was later changed to yield. Support for using break to return a value from Switch Expressions has already been dropped in IntelliJ IDEA.
+
+## **Summary**
 
 IntelliJ IDEA is not only committed to supporting new Java features, but also to ensuring that our existing intentions and inspections work with them.
 

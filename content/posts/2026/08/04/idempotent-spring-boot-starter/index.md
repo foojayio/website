@@ -22,6 +22,10 @@ related_posts:
 frozen: false
 ---
 
+## Idempotent REST Endpoints Without the Boilerplate
+
+## Stop Charging Your Users Twice: Idempotent REST Endpoints with One Annotation
+
 ## The problem nobody talks about until production
 
 A user taps "Pay." The request times out. Their app retries. Your server charges them twice.

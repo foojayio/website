@@ -24,6 +24,8 @@ frozen: false
 
 For a long time, Quartz, also known as Quartz Scheduler, was the only viable open-source task scheduler in Java. In fact, the official Quartz documentation still suggests that there is [no real alternative](https://www.quartz-scheduler.org/documentation/2.3.1-SNAPSHOT/faq.html "no real alternative"). In this article, we will list a few different **Quartz alternatives that offer a similar set of features while being easier and more enjoyable to use.**
 
+## Quartz Scheduler: how good is it really?
+
 Similar to its alternatives, **Quartz Scheduler can be integrated into almost any Java application to schedule and process any task implemented in Java**. In its decades of existence, Quartz has evolved into a feature-rich framework for persisting task states, automatically retrying tasks on failure, defining complex schedules, prioritizing tasks, achieving distributed processing, and more.
 
 The fact that Quartz has been around for so long has two major advantages: **the library is battle-tested and has a large community** , which makes it easier to find help. All these elements together make it the most popular job scheduling library in Java. Despite all these strengths, **choosing Quartz is no longer so obvious due to some glaring issues**.
@@ -56,6 +58,8 @@ Quartz has the ability to handle the tasks in a distributed fashion, but this fe
 
 The last non-beta release of Quartz dates back to October 23, 2019. While development was on hold, **the ecosystem around it didn't stop evolving** . This hiatus led to a pile of unresolved issues. The users of the library are still suffering from the `javax` to `jakarta` namespace change, along with many bugs and security issues. They also **cannot use newer Java features such as virtual threads**, that may benefit background job processing, for instance to increase throughput…
 > **Update:** there is good news for Quartz users! The recent acquisition by IBM led to a spark in activity, with the community helping to fix some of the major issues. It is still unclear what this acquisition means for the future of Quartz but a new version of Quartz Scheduler - version 2.5 - was released on November 13, 2024.
+
+## Modern alternatives to Quartz Scheduler
 
 If you're looking for a Quartz alternative for your Java application, there are **several modern open-source schedulers that offer similar features**, more developer-friendly APIs, and more robust support for distributed and cloud-based environments.
 
@@ -149,6 +153,8 @@ Kestra **provides a UI for writing or configuring workflows**. This UI can also 
 
 Kestra also has all the **essential features required for job scheduling**: reliable distributed system, retries, delayed and recurring executions, etc.
 
+## Conclusion
+
 For a long time, there was no real alternative to Quartz for job scheduling in Java. This is no longer the case, as there are several modern tools available to developers. These tools are simpler to use while providing the essential building blocks to achieve reliable and distributed scheduling.
 
 You may be looking for a persistent task scheduling library that integrates seamlessly into a Java application. In this case, we highly recommend trying out JobRunr. DB Scheduler is another great option.
@@ -156,6 +162,8 @@ You may be looking for a persistent task scheduling library that integrates seam
 You can also take a look at workflow engines such as Temporal or Kestra. These are especially useful if your tasks are written in different programming languages.
 
 With these diverse tools at their disposal, Java developers can now select the one that best meets their needs, rather than relying on a single option.
+
+## References and extra resources
 
 * Quartz Scheduler
   * [Quartz Scheduler website](https://www.quartz-scheduler.org/)

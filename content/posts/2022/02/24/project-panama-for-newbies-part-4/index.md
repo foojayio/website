@@ -100,6 +100,8 @@ As a Java developer you can think of a C function as a first class citizen as a 
 
 Now that you know what a callback is and how it behaves in the C language, let's create a C native library containing C function **callbacks** that receive **function pointers** as a parameter.
 
+## Creating a Native Shared Library
+
 Before getting into Java code let's look at a simple example of creating a native library in C. This library will be used later by our `PanamaCallback.java` example. When creating a shared library you will need the following:
 
 * **C compiler** - Most compilers will have options to generate a shared library such as GCC or Clang
@@ -205,6 +207,8 @@ libmylib.dylib
 ```
 
 Later, you'll use the name `mylib` as the library name for `jextract` to be able to generate code that will load the library during runtime.
+
+## Java goes Native
 
 After creating a native library in C let's use Project Panama's `jextract` tool to generate classes and source code. Later, you will see how to access `mylib` native library purely in Java code.
 
@@ -394,6 +398,8 @@ The output:
 The output above shows the code execution path by displaying `[Java]`or `[C]` prefixed each line to denote code being run inside the Java world or in the native C world (library).
 
 There you have it, Java Panama and C callbacks for newbies!
+
+## Conclusion
 
 You've now had a chance to learn about C function pointers and how they relate to callback behaviors in the C language.
 

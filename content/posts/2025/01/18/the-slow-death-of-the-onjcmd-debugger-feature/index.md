@@ -69,11 +69,18 @@ So this feature was a hidden gem for a while, but as discussed in my article [Is
 > This clearly shows the significant impact of the change. 11.0.3 came out on Apr 18, 2019, and 11.0.9 on Jul 15, 2020, so the onjcmd improved on-demand debugging for almost a year.
 
 So, the feature has been hidden and has offered no benefits since mid-2020. It's just sitting in the OpenJDK, likely unused and unknown by most developers. The last thing to do is remove the feature. For this, I created the [CSR](https://bugs.openjdk.org/browse/JDK-8341406) with the help of Christoph:
+> >
+> > ## Summary
+> >
 > > Remove the onjcmd option from the jdwp agent, because it is considered obsolete and unused.
+> >
+> > ## Problem
 > >
 > > \[...\]
 > >
 > > However, it is not needed anymore, as the performance issue has been fixed, and the networking/open port topic can easily be handled by infrastructure. Furthermore, the option is rarely used due to being hidden via JDK-8227078. So, we should remove the feature along with its coding to reduce complexity.
+> >
+> > ## Solution
 > >
 > > Remove the onjcmd option from the JDWP agent and eliminate the corresponding VM.start_java_debugging command in the JVM. This will clean up the agent code and remove obsolete functionality that is no longer needed or used.
 

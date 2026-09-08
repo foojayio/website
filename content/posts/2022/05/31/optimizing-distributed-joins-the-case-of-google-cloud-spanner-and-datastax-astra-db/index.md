@@ -25,6 +25,8 @@ frozen: false
 
 Distributed joins are commonly considered to be too expensive to use for real-time transaction processing. That is because, besides joining data, they also frequently require moving or shuffling data between nodes in a cluster, which can significantly affect query response times and database throughput. However, there are certain optimizations that can completely eliminate the need to move data to enable faster joins. In this article, we first review the four types of distributed joins, including shuffle join, broadcast join, co-located join, and pre-computed join. We then demonstrate how leading fully managed Relational and NoSQL databases, namely [Google Cloud Spanner](https://cloud.google.com/spanner) and [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), support optimized joins that are suitable for real-time applications.
 
+## Four types of distributed joins
+
 Joins are used in databases to combine related data from one or more tables or datasets. Data is usually combined based on some condition that relates columns from participating tables. Hereafter, we refer to columns used in a join condition as *join keys* and assume that they are always related by *equality* operators.
 
 Distributed joins are joins in distributed databases, where data from each table is partitioned into smaller chunks — usually called *partitions* — that are stored on different nodes in a cluster. While distributing data helps with managing large datasets, it also makes joins harder to perform and scale because table rows that can be joined may reside in different partitions on different nodes.
@@ -44,6 +46,8 @@ Shuffle and broadcast joins are more suitable for batch or near real-time analyt
 
 In the rest of this article, our focus is on co-located and pre-computed joins, and how they can be used in representative cloud-native Relational and NoSQL databases. For co-located joins, we choose [Google Cloud Spanner](https://cloud.google.com/spanner), which is a fully-managed relational database service. For pre-computed joins, we use [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), which is a serverless NoSQL database service. Both database services can be tried for free if you prefer to follow our examples.
 
+## Running example: Managing users, accounts, and transactions
+
 Let's define a running example that we can implement in both Google Cloud Spanner and [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome).
 ![](0_yCIUmUfvSkKp6I_r.png) Figure 2: Example of relational database schema and SQL queries
 
@@ -52,6 +56,8 @@ Figure 2 depicts the relational database schema with three tables and two SQL qu
 The first query retrieves all accounts for a specified user by joining tables `users` and `accounts`. The second query finds all transactions for a given account by joining tables `accounts` and `transactions`; transactions are also ordered by transaction dates in the result.
 
 This data model and queries can be readily instantiated in any relational database, including Google Cloud Spanner (see [this SQL script](https://github.com/ArtemChebotko/distributed-joins/blob/main/spanner-foreign-keys.sql) as an example), but that would not result in the join optimizations we are looking to implement. We show how to do much better in the next two sections.
+
+## **Co-located joins and interleaved tables in Google Cloud Spanner**
 
 Co-located joins can perform significantly faster than shuffle and broadcast joins because they avoid moving data between nodes in a cluster. To use co-located joins, a distributed database needs to have a mechanism to specify which related data entities must be stored together on the same node. In [Google Cloud Spanner](https://cloud.google.com/spanner), this mechanism is called *table* *interleaving*.
 
@@ -64,6 +70,8 @@ The SQL queries are unchanged when compared to our original running example. The
 To try this example in [Google Cloud Spanner](https://cloud.google.com/spanner), we share [our SQL script](https://github.com/ArtemChebotko/distributed-joins/blob/main/spanner-interleaved-tables.sql) for Co-Located Joins.
 ![](1_dxpTk2l6aVR-7QdCPkrdWA.png) *Figure 3: Co-located joins in Google Cloud Spanner*
 
+## **Pre-computed joins and tables with multi-row partitions in DataStax Astra DB**
+
 Pre-computed joins are the fastest joins in our toolbox. They are significantly faster than shuffle and broadcast joins because they avoid moving data between nodes in a cluster. They are also faster than co-located joins because they do not need to compute joins dynamically. To store and serve pre-computed join results effectively, a distributed database needs to have a mechanism to nest related data entities together. In [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), this mechanism is called *tables with multi-row partitions*.
 
 Tables in Astra DB are defined and queried using CQL, an SQL-like language. They are similar to tables in relational databases as they have columns, rows, and primary keys. The important difference is that a table primary key consists of a mandatory *partition key* and an optional *clustering key*. A partition key uniquely identifies a partition in a table, and a clustering key uniquely identifies a row in a partition. When both partition and clustering keys are defined, a table can store multiple rows in each partition. Tables with multi-row partitions are used to store and retrieve related entities together very efficiently. In our case, we can store pre-joined entities in such tables.
@@ -75,9 +83,13 @@ The CQL queries are much simplified when compared to their SQL counterparts. The
 To try this example in [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), we share [our CQL script](https://github.com/ArtemChebotko/distributed-joins/blob/main/astra-db.cql). If you are new to CQL, it stands for Cassandra Query Language and is used in both [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome) and [Apache Cassandra](https://cassandra.apache.org/). Astra DB is a serverless and multi-region database service that is based on Apache Cassandra, an open-source NoSQL database. To learn more about CQL and tables with multi-row partitions, the hands-on [Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals) learning series is highly recommended. For more advanced data modeling, there is also the collection of [data modeling example](https://www.datastax.com/learn/data-modeling-by-example)s from various domains.
 ![](1_C9pQNOHe4FpOwctfNZubaw.png) *Figure 4: Pre-computed joins in DataStax Astra DB*
 
+## Conclusion
+
 Having fast distributed joins is an important consideration when it comes to selecting a scalable database that can support real-time, high-throughput, data-driven applications. In this article, we discussed how shuffle, broadcast, co-located, and pre-computed joins work. We explained that shuffle and broadcast joins are more suitable for batch or near real-time analytics because they may require moving data among nodes in a cluster, which is expensive. Co-located and pre-computed joins are faster and can do well with real-time applications. Using [Google Cloud Spanner](https://cloud.google.com/spanner), we demonstrated how a fully managed, cloud-native relational database can take advantage of fast co-located joins. Using [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), we demonstrated how a serverless, cloud-native NoSQL database can take advantage of even faster pre-computed joins.
 
 *Follow the* [*DataStax Tech Blog*](https://datastax.medium.com/)*for more developer stories. Check out our* [*YouTube channel*](https://www.youtube.com/channel/UCqA6zOSMpQ55vvguq4Y0jAg)*for tutorials and here for* [*DataStax Developers on Twitter*](https://twitter.com/DataStaxDevs)*for the latest news about our developer community.*
+
+## References
 
 1. [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome) — a serverless, cloud-native NoSQL database
 2. [Apache Cassandra](https://cassandra.apache.org/) — open source NoSQL database

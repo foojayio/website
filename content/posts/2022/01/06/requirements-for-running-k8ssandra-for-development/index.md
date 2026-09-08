@@ -21,6 +21,8 @@ related_posts:
 frozen: false
 ---
 
+## Managing expectations
+
 The K8ssandra [Quick start](https://k8ssandra.io/get-started/) is a excellent guide for doing a full installation of K8ssandra on a dev laptop and trying out the various components of the K8ssandra stack. While this is a great way to get your first hands-on experience with K8ssandra, let's state the obvious: running K8ssandra locally on a dev laptop is not aimed at performance. In this blog post, we will start Apache Cassandra® locally then explain how to run benchmarks to help evaluate what level of performance (especially throughput) you can expect from a dev laptop deployment.
 
 Our goal was to achieve the following:
@@ -41,6 +43,8 @@ Our goal was to achieve the following:
 * Achieve reasonable startup times
 * Specify a dev setup stable enough to sustain moderate workloads (50 to 100 ops/s)
 * Come up with some minimum requirements and recommended K8ssandra settings
+
+## Using the right settings
 
 Cassandra can run with fairly limited resources as long as you don't put too much pressure on it. For example, for the Reaper project, we run our integration tests with [CCM (Cassandra Cluster Manager)](https://github.com/riptano/ccm), configured at [256MB of heap size](https://github.com/thelastpickle/cassandra-reaper/blob/master/.github/scripts/configure-ccm.sh#L22). This allows the JVM to allocate an additional 256MB of off heap memory, allowing Cassandra to use up to 512MB of RAM.
 
@@ -124,6 +128,8 @@ As Stargate serves as coordinator, it is likely to hold objects for longer on he
 
 During our tests, we observed that 256MB was a good initial value to have stable Stargate pods. In production you might want to tune this value for optimal performance.
 
+## Benchmark Environment
+
 Our setup for running benchmarks was the following:
 
 * Apple MacBook Pro 2019 – i7 (6 cores) – 32GB RAM – 512GB SSD
@@ -141,6 +147,8 @@ Docker Desktop allows to tune its allocated resources by clicking on its icon in
 
 Then click on "Resources" in the left menu, which will allow you to set the number of cores and the amount of RAM Docker can use overall:
 ![Docker Desktop local resources](https://k8ssandra.io/wp-content/uploads/2021/04/docker-resources-1024x590.png)
+
+## Running the benchmarks
 
 We used [NoSQLBench](https://github.com/nosqlbench/nosqlbench) to perform moderate load benchmarks. It comes with a convenient Docker image that we could use straight away to run stress jobs in our k8s cluster.
 
@@ -281,6 +289,8 @@ Which should output something like this:
 
 As Cassandra operators, we usually focus on p99 latencies: `p99=263397.375`. That's 263ms at p99, which is fine considering our environment (a laptop) and our performance requirements (very low).
 
+## Benchmark results
+
 We ran our benchmarks with the following matrix of settings:
 
 * Cores: 4 and 8
@@ -294,6 +304,8 @@ Running the full stack with three Cassandra nodes, one Stargate node and 4GB all
 
 Latencies are very reasonable for all settings when using a 100 ops/s rate. Trying to achieve higher throughput requires using at least 8 cores, allowing to reach 1000 ops/s with 290ms p99 latencies. None of our tests allowed us to reach a sustained throughput of 1500 ops/s as shown by the response times that go over 9 seconds per operation.
 ![Local Cassandra p99 Latencies](https://k8ssandra.io/wp-content/uploads/2021/04/p99-latencies.png)
+
+## Conclusion
 
 Getting the full K8ssandra experience on a laptop will require at least 4 cores and 8GB of RAM available to Docker and appropriate heap sizes for Cassandra and Stargate. If you don't have those resources available for Docker on your development machine, you can avoid deploying features such as monitoring, Reaper and Medusa, and also reduce the number of Cassandra nodes. Using heap sizes of 500MB for Cassandra and 300MB for Stargate proved to be enough to sustain workloads between 100 and 500 operations per second, which should be sufficient for development purposes.
 

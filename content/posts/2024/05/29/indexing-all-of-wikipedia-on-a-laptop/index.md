@@ -27,6 +27,8 @@ Here's what we're building:
 
 You can try searching the completed index [on a public demo instance here](https://jvectordemo.com:8443/).
 
+## Why this is hard
+
 Sure, the dataset is big (180GB for the English corpus), but that's not the obstacle per se. We've been able to build full-text indexes on larger datasets for a long time.
 
 The obstacle is that until now, off-the-shelf vector databases could not index a dataset larger than memory, because both the full-resolution vectors and the index (edge list) needed to be kept in memory during index construction. Larger datasets could be split into [segments](https://stackoverflow.com/questions/2703432/what-are-segments-in-lucene), but this means that at query time they need to search each segment separately, then combine the results, turning an O(log N) search per segment into O(N) overall. (In their latest release, [Lucene attempts to mitigate this by processing segments in parallel with multiple threads](https://www.elastic.co/search-labs/blog/elasticsearch-lucene-vector-database-gains), but obviously (1) this only gives you a constant factor of improvement before you run out of CPU cores and (2) this does not improve throughput.)
@@ -36,22 +38,24 @@ Specifically, if you're indexing 1536-dimension vectors (the size of ada002 or o
 
 [JVector](https://github.com/jbellis/jvector/), the library that powers [DataStax Astra](https://www.datastax.com/products/datastax-astra) vector search, now supports indexing larger-than-memory datasets by performing construction-related searches with compressed vectors. This means that the edge lists need to fit in memory, but the uncompressed vectors do not, which gives us enough headroom to index Wikipedia-en on a laptop.
 
+## Requirements
+
 1. Linux or MacOS. It will not work on Windows because ChronicleMap, which we are going to use for the non-vector data, is limited to a 4GB size there. (If you are interested enough, you could shard the Map by vector id to keep each shard under 4GB and still have O(1) lookup times.)
 2. About 180GB of free space for the dataset, and 90GB for the completed index.
 3. Enough RAM to run a JVM with 36GB of heap space during construction (\~28GB for the index, 8GB for GC headroom).
 4. Disable swap before building the index. Linux will aggressively try to cache the index being constructed to the point of swapping out parts of the JVM heap, which is obviously counterproductive. In my test, building with swap enabled was almost twice as slow as with it off.
 
-<!-- -->
+## Building and searching the index
 
-1. Check out the project:
-```bash
-$ git clone <https://github.com/jbellis/coherepedia-jvector>$ cd coherepedia-jvector
-```
+1. Check out the project:  
+   $ git clone <https://github.com/jbellis/coherepedia-jvector>$ cd coherepedia-jvector
 2. Edit *config.properties* to set the locations for the dataset and the index.
 3. Run *pip install datasets* . (Setting up a [venv](https://docs.python.org/3/library/venv.html) or conda environment first is recommended but not strictly necessary.)
 4. Run *python download.py.*This downloads the 180 GB dataset to the location you configured. For me that took about half an hour.
 5. Run *./mvnw compile exec:exec@buildindex.* This took about 5 and a half hours on my machine (with an i9-12900 CPU).
 6. Run *./mvnw compile exec:exec@serve* and open a browser to [http://localhost:4567](http://localhost:4567/). Search away!
+
+## How it works
 
 We're using [JVector](https://github.com/jbellis/jvector) for the vector index and [Chronicle Map](https://github.com/OpenHFT/Chronicle-Map) for the article data. There are [several](https://github.com/OpenHFT/Chronicle-Map/issues/533) [things](https://github.com/OpenHFT/Chronicle-Map/issues/537) I don't love about Chronicle Map, but nothing else touches it for simple disk-based key/value performance.
 
@@ -104,7 +108,6 @@ You can look at [the full source](https://github.com/jbellis/coherepedia-jvector
 
 When the build completes, you should see files like this:
 
-```bash
 $ ls -lh \~/coherepedia
 
 -rw-rw-r-- 1 jonathan jonathan 48G May 20 15:53 coherepedia.ann
@@ -116,7 +119,6 @@ $ ls -lh \~/coherepedia
 -rw-rw-r-- 1 jonathan jonathan 4.1K May 17 23:04 coherepedia.lvq
 
 -rw-rw-r-- 1 jonathan jonathan 1.1M May 17 23:04 coherepedia.pq
-```
 
 These are respectively
 
@@ -151,6 +153,8 @@ There are four "paragraphs" of code here, containing
 That's it! We've indexed all of Wikipedia with high performance, parallel code in about 150 loc, and created a simple search server in another 100.
 
 On my machine, searches (which each run in a single thread) take about 50ms. We would expect it to take over twice as long if this were split across multiple segments. We would also expect it to lose significant accuracy if searches were performed only with compressed vectors without reranking.
+
+## Conclusion
 
 Indexing the entirety of English Wikipedia on a laptop has become a practical reality thanks to recent advances in the JVector library that will be part of the imminent 3.0 release. ([Star the repo](https://github.com/jbellis/jvector) and stand by!) This article demonstrates how to do exactly that using JVector in conjunction with Chronicle Map, while also showcasing the use of [LVQ](https://arxiv.org/abs/2402.02044) to reduce index size while preserving [accurate reranking](https://thenewstack.io/why-vector-size-matters/).
 

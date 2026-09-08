@@ -27,6 +27,8 @@ Similarly, while a screenshot may be worth more than a thousand words, they are 
 
 As such, you often end up with to a series of calls between the customer, the support team and the development team. A very inefficient process, which is accompanied by a lot of frustration. WireQuery aims to solve this problem.
 
+## Introducing WireQuery
+
 WireQuery is a tool that allows you to combine Session Replay with capturing network requests between (micro)services, including their payload and optionally supplemented with logs, metrics and other types of information. By doing so, you get a complete picture of happened during an issue. Not just on the frontend OR on the backend, but on every part of your entire stack.
 
 In other words: WireQuery provides complete visibility of what happened during an issue.  
@@ -37,6 +39,8 @@ Depending on your needs, the recording can either be started by the end user or 
 When the engineer opens the recording, the engineer is welcomed by a video player of the interactions of the end user. On the side, the frontend console logs are shown, together with the network calls.
 
 If the problem turns out to be upstream or downstream, the developer can easily share that same link with the relevant team. By clicking on a network call, the developers that receive the ticket can drill down to see what their service received and responded. Instead of ping ponging between different teams, this stimulates and enables collaboration.
+
+## Getting Started
 
 The only real way to experience the power of WireQuery is by giving it a try. As such, let's do a deep dive into WireQuery by setting up a demo environment. This demo environment will simulate a microservice environment of a webshop, consisting of three applications:
 
@@ -113,6 +117,8 @@ When you click on the purple bars at the bottom of the screen, a modal should op
 
 In many cases, these screens should provide you with all the information you need to fix most user-reported issues.
 
+## How it Works
+
 Now that we've seen how to set up a demo environment, let's take a closer look into how the demo applications were set up to communicate with WireQuery.
 
 ## Backend
@@ -174,6 +180,8 @@ And when the recording ends, the following logic is executed:
 ```javascript
 recorder.stopRecording()
 ```
+
+## Conclusion
 
 In this article, we covered the main use case of WireQuery: debugging user-reported incidents in distributed systems. However, there is a lot more to cover.
 

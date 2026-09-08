@@ -30,6 +30,8 @@ Source: OpenReWrite
 
 So,
 
+## What is OpenRewrite?
+
 The [OpenRewrite documentation](https://docs.openrewrite.org/ "OpenRewrite") defines itself as follows:
 > OpenRewrite enables large-scale distributed source code refactoring for framework migrations, vulnerability patches, and API migrations.
 

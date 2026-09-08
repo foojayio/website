@@ -23,6 +23,8 @@ However, the story doesn't end with the Java heap. In fact, it is just the begin
 
 In this article, we will create a simple Java application that uses a relational database for the user data and solid-state drives (SSDs) as a storage device. From here, we'll explore how the application generates garbage at the database and SSD levels, while executing the application logic.
 
+## Why Should You Care?
+
 Before we start, let me address a question that some of you might have: "Why should I care?"
 
 First, there is a practical reason. If your Java app experiences performance issues and all looks good from the app and JVM standpoint then this might be due to your database or SSD garbage collection cycles.
@@ -31,11 +33,15 @@ Second, curiosity. Software engineers usually love to explore what happens beyon
 
 Finally, remember when Java was mocked for using garbage collection? I heard opinions like, "why would you use Java and not C++? Java apps are slow by design with their dependency on garbage collection and bytecode interpretation in runtime." Well, now we can oppose that by saying that garbage collection != slow. Other technologies (databases and SSDs) use garbage collection effectively, and nobody usually refers to them as "slow by design."
 
+## Selecting an RBMS for Testing
+
 We'll start with [PostgreSQL](https://www.postgresql.org/ "PostgreSQL"), the fastest-growing relational database [according to the DB Engines](https://db-engines.com/en/ranking_trend/system/Microsoft+SQL+Server%3BMySQL%3BOracle%3BPostgreSQL "according to the DB Engines") website. Many Java apps use PostgreSQL as the go-to database, so it's reasonable to start with it.
 
 ![DB Engines Ranke](image3-700x370.png)
 
 I'll be sharing easy-to-follow instructions for those who want to reproduce the behavior at home. It's also fine just to read the article. You can choose whatever suits you best.
+
+## Starting PostgreSQL and App
 
 Our [sample app](https://github.com/dmagda/java-litters-everywhere "sample app") is a Spring Boot RESTful service for a pizzeria. The app tracks pizza orders.
 
@@ -102,6 +108,8 @@ postgres=# select * from pizza_order;
 ----+--------+------------
 (0 rows)
 ```
+
+## Generating Garbage in the Database
 
 Now it's time to put the first order in the pizzeria queue. For that we're going to use the app's REST `putNewOrder` endpoint:
 
@@ -241,6 +249,8 @@ There are four versions in the storage for our pizza order with `id=1`. The only
 
 There is a good reason why the database engine stores the deleted and updated records. Your application can run a bunch of transactions against PostgreSQL in parallel. Some of those transactions start earlier than others. But, if a transaction deletes or updates a record that still might be of interest to transactions started earlier, then the record needs to be kept in the database in its original state (until the point in time when all earlier started transactions finish). This is how PostgreSQL implements [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control "MVCC") (multi-version concurrency protocol).
 
+## Garbage Collection in the Database
+
 It's clear that PostgreSQL can't and doesn't want to keep the dead row versions forever. This is why the database has its own garbage collection process called [vacuum](https://www.postgresql.org/docs/current/sql-vacuum.html "vacuum").
 
 There are two types of VACUUM — the standard one and the full one. The standard VACUUM works in parallel with your application workloads and doesn't block your queries. This type of vacuuming marks the space occupied by dead rows as free, making it available for the new data that your app will add to the same table later.
@@ -254,6 +264,8 @@ In contrast, the full VACUUM defragments the storage space and can reclaim the f
 ![Full Vacuum](image2-700x308.png)
 
 Think of the full vacuum as Java's "stop-the-world" garbage collection pause. It's only in PostgreSQL that this pause can last for hours (depends on the database size). So, database admins try their best to prevent the full VACUUM from happening at all and ensure the autovacuum daemon (that does the standard vacuum) gets the garbage cleaned in a timely manner.
+
+## Wrapping Up
 
 Next time someone asks you to explain the inner workings of Java garbage collection, go ahead and surprise them by expanding on the topic to include relational databases.
 

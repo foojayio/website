@@ -26,6 +26,8 @@ Five years ago, [Hielke](https://medium.com/@Frevib) and I wrote one of the firs
 
 After a few years outside of the company, I joined back a few months ago to lead the Developer Relations program. Being just as big of a fan of Kotlin as I was five years ago, one of the first thing I did was help build the storyline when JetBrains contacted us to be one of the main case studies of [their KotlinConf 2025 Keynote](https://youtu.be/F5NaqGF9oT4?si=pn1e9dC0Vhb31W1-&t=3397) 🎉. Now, this seems like the perfect time to investigate what the internal picture looks like now! Let's dive into it together 😊.
 
+## The ecosystem
+
 Before looking into the code, let's look at the Kotlin ecosystem of ING! There is quite a lot to say, which is why I start by this. For reference, there are about 20000 people working in the Tech structure of ING. This includes developers, but also many other technical roles (e.g DevOps, product, machine learning, ….).
 
 First, ING is one of the driving forces of the Kotlin community in a few places. For example, the [ING Kotlin Summit](https://www.meetup.com/tech-meetups-ing/events/306698283/?eventOrigin=group_upcoming_events) that is yearly organised in June (today, actually) with over 300 participants and an impressive lineup of speakers! You can find many of the talks on [our Youtube channel](https://www.youtube.com/@weareINGtech). The event is fully hosted by ING, but registration was open to the public too. This year is even co-sponsored by Google and Xebia.
@@ -38,6 +40,8 @@ Internally, things have evolved as well. Our major internal frameworks have adde
 
 Alright, by now you can see that ING clearly has interest in Kotlin. But let's look at the reality of the field. How much of the internal codebase contains Kotlin by now? That's the real question we want an answer for!
 
+## The analysis
+
 The analysis below was created using [this Azure API endpoint](https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/projectlanguageanalytics). Note that we added custom values to the API call. For example, *isSlumbering* is a custom value we have defined as "180 days since last change" (which coincides with our migration to Azure Repos). It returns a huge JSON array that looks like this:
 
 ![Output of the Azure API request](Screenshot-2025-06-24-at-10.26.26-331x510.png)
@@ -47,6 +51,8 @@ In the rest of that post, we will assume that the results that are being sent to
 Using a minimum amount of Kotlin code, we can easily parse this output and start diving into patterns. Here is a minimal example:
 
 ![Parsing the Azure API response for further processing](Screenshot-2025-06-24-at-10.28.22-404x510.png)
+
+## Diving into the Kotlin code!
 
 In the rest of this article, I will define a Kotlin repository as any Git repository that contains Kotlin code. I've spent the past weeks investigating the entirety of our codebase, to look just how strong is the Kotlin adoption within the company. Let's put some bases in place first: **The ING organisation totals just over 90k internal repositories.** (That's A LOT of code by the way! Over four repositories per engineer in the company 😅).
 

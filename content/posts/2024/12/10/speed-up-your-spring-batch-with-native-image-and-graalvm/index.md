@@ -33,6 +33,8 @@ In this article, you'll learn how to build a Spring Batch application that reads
 
 🔵⚪⚪⚪⚪⚪⚪⚪
 
+## 1️⃣ Definitions
+
 ## What is a Native Image?
 
 **A Native Image is a standalone executable** that includes everything the application needs to run *(classes, libraries, and the JVM itself)* in one package. Unlike JVM-based JAR files, **native images do not require a JVM at runtime**, which means:
@@ -48,6 +50,8 @@ In this article, you'll learn how to build a Spring Batch application that reads
 When you compile a Spring Boot application into a native image, you remove the need for the JVM, which leads to instant start times and minimal resource usage.
 
 🔵🔵⚪⚪⚪⚪⚪⚪
+
+## 2️⃣ Requirement
 
 Before starting, ensure you have the following tools installed on your machine:
 
@@ -71,6 +75,8 @@ Run a PostgreSQL container with Docker
 `docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres`
 
 🔵🔵🔵⚪⚪⚪⚪⚪
+
+## 3️⃣ Create a Spring Batch Application
 
 ### Spring Initializr:
 
@@ -190,6 +196,8 @@ Full complete code: <https://github.com/vinny59200/spring-batch-native-image>
 
 🔵🔵🔵🔵⚪⚪⚪⚪
 
+## 4️⃣ Compile it into a Native Image
+
 Commands to Compile
 
 1. Open Visual Code, open a terminal
@@ -197,6 +205,8 @@ Commands to Compile
 3. Compile to Native Image: `./mvnw -Pnative native:compile -DskipTests`*(It is a bit long --1 or 2min)*
 
 🔵🔵🔵🔵🔵⚪⚪⚪
+
+## 5️⃣ Benchmark
 
 ### Without Native Image
 
@@ -228,6 +238,8 @@ Run it using the compiled native image:
 
 🔵🔵🔵🔵🔵🔵⚪⚪
 
+## 📣 Conclusion
+
 **For Spring Batch** applications, **Native Images are a game-change**r.
 
 1. **Instantaneous** startup: From 4 seconds to 0.2 seconds.
@@ -241,9 +253,13 @@ By **using GraalVM Native Imag** e, you can build **batch jobs** that **are fast
 
 🔵🔵🔵🔵🔵🔵🔵⚪
 
+## 📺 Video
+
 {{< youtube kFVwJSKVckA >}}
 
 🔵🔵🔵🔵🔵🔵🔵🔵
+
+## 🌐 More
 
 * <https://foojay.io/today/prevent-ldap-injection-in-java-with-springboot/>
 * <https://foojay.io/today/a-simple-service-with-spring-boot/>

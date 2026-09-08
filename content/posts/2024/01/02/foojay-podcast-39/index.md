@@ -33,6 +33,8 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
+## Guests
+
 ### Brayan Muñoz Vargas
 
 * <https://twitter.com/Brayanmnz_>
@@ -43,10 +45,14 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://twitter.com/eudriscabrera>
 * <https://www.linkedin.com/in/eudriscabrera/>
 
+## Podcast
+
 ### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
+
+## Content
 
 00:00 Introduction  
 

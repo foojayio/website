@@ -77,6 +77,7 @@ Let's answer this question from our movies data:
 
 Yes, we could answer this particular question knowing the **precise** case and spelling of each field value in a direct lookup fashion, using this aggregation pipeline:
 
+|                                                                                                       |
 |-------------------------------------------------------------------------------------------------------|
 | \[ { $match: { cast: { $in: \["Keanu Reeves"\], }, genres: { $all: \["Drama", "Romance"\], }, }, } \] |
 
@@ -91,6 +92,7 @@ Ultimately, regardless of the coding language, environment, or driver that we us
 
 Rather than incrementally building up to our final example, here's the complete aggregation pipeline so you have it available as we adapt this to Java code. This aggregation pipeline performs a search query, filtering results to movies that are categorized as both Drama and Romance genres, that have "keanu reeves" in the cast field, returning only a few fields of the highest ranked first 10 documents.
 
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | \[ { "$search": { "compound": { "filter": \[ { "compound": { "must": \[ { "text": { "query": "Drama", "path": "genres" } }, { "text": { "query": "Romance", "path": "genres" } } \] } } \], "must": \[ { "phrase": { "query": "keanu reeves", "path": { "value": "cast" } } } \] }, "scoreDetails": true } }, { "$project": { "_id": 0, "title": 1, "cast": 1, "genres": 1, "score": { "$meta": "searchScore" }, "scoreDetails": { "$meta": "searchScoreDetails" } } }, { "$limit": 10 } \] |
 
@@ -115,11 +117,13 @@ The full code for this tutorial is available on [GitHub](https://github.com/mong
 
 You'll need a modern version of Java, something like:
 
+|                                                                                                                                                                          |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | $ java --version openjdk 17.0.7 2023-04-18 OpenJDK Runtime Environment Homebrew (build 17.0.7+0) OpenJDK 64-Bit Server VM Homebrew (build 17.0.7+0, mixed mode, sharing) |
 
 Now grab the code from our repository using \`git clone\` and go to the working directory:
 
+|                                                                                                           |
 |-----------------------------------------------------------------------------------------------------------|
 | git clone https://github.com/mongodb-developer/getting-started-search-java cd getting-started-search-java |
 
@@ -127,6 +131,7 @@ Once you clone that code, copy the connection string from the Atlas UI (the "Con
 
 Now open a command-line prompt to the directory where you placed the code, and run:
 
+|                                                                      |
 |----------------------------------------------------------------------|
 | ATLAS_URI="\<\<insert your connection string here\>\>" ./gradlew run |
 
@@ -136,6 +141,7 @@ Using the \`run\` command from Gradle is a convenient way to run the Java \`main
 
 Ideally, at this point, the code ran successfully, performing the search query that we have been describing, printing out these results:
 
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Sweet November Cast: \[Keanu Reeves, Charlize Theron, Jason Isaacs, Greg Germann\] Genres: \[Drama, Romance\] Score:6.011996746063232 Something's Gotta Give Cast: \[Jack Nicholson, Diane Keaton, Keanu Reeves, Frances McDormand\] Genres: \[Comedy, Drama, Romance\] Score:6.011996746063232 A Walk in the Clouds Cast: \[Keanu Reeves, Aitana Sènchez-Gijèn, Anthony Quinn, Giancarlo Giannini\] Genres: \[Drama, Romance\] Score:5.7239227294921875 The Lake House Cast: \[Keanu Reeves, Sandra Bullock, Christopher Plummer, Ebon Moss-Bachrach\] Genres: \[Drama, Fantasy, Romance\] Score:5.7239227294921875 |
 
@@ -145,6 +151,7 @@ So there are four movies that match our criteria — our initial mission has bee
 
 Let's now go through our project and code, pointing out the important pieces you will be using in your own project. First, our build.gradle file specifies that our project depends on the MongoDB Java driver, down to the specific version of the driver. There's also a convenient \`application\` plugin so that we can use the \`run\` target as we just did.
 
+|                                                                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | plugins { id 'java' id 'application' } group 'com.mongodb.atlas' version '1.0-SNAPSHOT' repositories { mavenCentral() } dependencies { implementation 'org.mongodb:mongodb-driver-sync:4.10.1' implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1' } application { mainClass = 'com.mongodb.atlas.FirstSearchExample' } |
 
@@ -154,24 +161,29 @@ In typical Gradle project structure, our Java code resides under \`src/main/java
 
 Let's walk through this code, section by section, in a little bit backward order. First, we open a connection to our collection, pulling the connection string from the \`ATLAS_URI\` environment variable:
 
+|                                                                                                                                                                                                                                                                                                                                                         |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | // Set ATLAS_URI in your environment String uri = System.getenv("ATLAS_URI"); if (uri == null) { throw new Exception("ATLAS_URI must be specified"); } MongoClient mongoClient = MongoClients.create(uri); MongoDatabase database = mongoClient.getDatabase("sample_mflix"); MongoCollection\<Document\> collection = database.getCollection("movies"); |
 
 Our ultimate goal is to call \`collection.aggregate()\` with our list of pipeline stages: search, project, and limit. There are driver convenience methods in \`com.mongodb.client.model.Aggregates\` for each of these.
 
+|                                                                                                                                                                                                                                                          |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AggregateIterable\<Document\> aggregationResults = collection.aggregate(Arrays.asList( searchStage, project(fields(excludeId(), include("title", "cast", "genres"), metaSearchScore("score"), meta("scoreDetails", "searchScoreDetails"))), limit(10))); |
 
 The [\`$project\`](https://www.mongodb.com/docs/upcoming/reference/operator/aggregation/project/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim#mongodb-pipeline-pipe.-project) and [\`$limit\`](https://www.mongodb.com/docs/v6.0/reference/operator/aggregation/limit/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim) stages are both specified fully inline above. We'll define \`searchStage\` in a moment. The \`project\` stage uses \`metaSearchScore\`, a Java driver convenience method, to map the Atlas Search computed score (more on this below) to a pseudo-field named \`score\`. Additionally, Atlas Search can provide the score explanations, which itself is a performance hit to generate so only use for debugging and experimentation. Score explanation details must be requested as an option on the \`search\` stage for them to be available for projection here. There is not a convenience method for projecting scoring explanations, so we use the generic \`meta()\` method to provide the pseudo-field name and the key of the meta value Atlas Search returns for each document. The Java code above generates the following aggregation pipeline, which we had previously done manually above, showing it here to show the Java code and the corresponding generated aggregation pipeline pieces.
 
+|                                                                                                                                                                                                          |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | \[ { "$search": { ... } }, { "$project": { "_id": 0, "title": 1, "cast": 1, "genres": 1, "score": { "$meta": "searchScore" }, "scoreDetails": { "$meta": "searchScoreDetails" } } }, { "$limit": 10 } \] |
 
 The \`searchStage\` consists of a search operator and an additional option. We want the relevancy scoring explanation details of each document generated and returned, which is enabled by the \`scoreDetails\` setting that was developed and released after the Java driver version was released. Thankfully, the Java driver team built in pass-through capabilities to be able to set arbitrary options beyond the built-in ones to future-proof it. \`SearchOptions.searchOptions().option()\` allows us to set the \`scoreDetails\` option on the $search stage to true. Reiterating the note from above, generating score details is a performance hit on Lucene, so only enable this setting for debugging or experimentation while inspecting but do not enable it in performance sensitive environments.
 
+|                                                                                                                                                                      |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Bson searchStage = search( compound() .filter(List.of(genresClause)) .must(List.of(SearchOperator.of(searchQuery))), searchOptions().option("scoreDetails", true) ); |
 
+|                                                                                                 |
 |-------------------------------------------------------------------------------------------------|
 | "$search": { "compound": { "filter": \[ . . . \], "must": \[ . . . \] }, "scoreDetails": true } |
 
@@ -186,9 +198,11 @@ We've left a couple of variables to fill in: \`filters\` and \`searchQuery\`.
 
 Our (non-scoring) filter is a single search operator clause that combines required criteria for genres Drama and Romance:
 
+|                                                                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | SearchOperator genresClause = SearchOperator.compound() .must(Arrays.asList( SearchOperator.text(fieldPath("genres"),"Drama"), SearchOperator.text(fieldPath("genres"), "Romance") )); |
 
+|                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------|
 | "compound": { "must": \[ { "text": { "query": "Drama", "path": "genres" } }, { "text": { "query": "Romance", "path": "genres" } } \] } |
 
@@ -196,6 +210,7 @@ Notice how we nested the \`genresClause\` within our \`filter\` array, which tak
 
 Last but not least is the primary (scoring!) \`phrase\` search operator clause to search for "keanu reeves" within the \`cast\` field. Alas, this is one search operator that currently does not have built-in SearchOperator support. Again, kudos to the Java driver development team for building in a pass-through for arbitrary BSON objects, provided we know the correct JSON syntax. Using \`SearchOperator.of()\`, we create an arbitrary operator out of a BSON document. Note: This is why it was emphasized early on to become savvy with the JSON structure of the aggregation pipeline syntax.
 
+|                                                                                                               |
 |---------------------------------------------------------------------------------------------------------------|
 | Document searchQuery = new Document("phrase", new Document("query", "keanu reeves") .append("path", "cast")); |
 
@@ -203,10 +218,13 @@ Last but not least is the primary (scoring!) \`phrase\` search operator clause t
 
 So now we've built the aggregation pipeline. To show the results, we simply iterate through \`aggregationResults\`:
 
+|                                                                                                                                                                                                                                                                                                                                           |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | aggregationResults.forEach(doc -\> { System.out.println(doc.get("title")); System.out.println(" Cast: " + doc.get("cast")); System.out.println(" Genres: " + doc.get("genres")); System.out.println(" Score:" + doc.get("score")); // printScoreDetails(2, doc.toBsonDocument().getDocument("scoreDetails")); System.out.println(""); }); |
 
 The results are ordered in descending score order. Score is a numeric factor based on the relationship between the query and each document. In this case, the only scoring component to our query was a phrase query of "keanu reeves". Curiously, our results have documents with different scores! Why is that? If we covered everything, this article would never end, so addressing the scoring differences is beyond this scope, but we'll explain a bit below for bonus and future material.
+
+## Conclusion
 
 You're now an Atlas Search-savvy Java developer — well done! You're well on your way to enhancing your applications with the power of full-text search. With just the steps and code presented here, even without additional configuration and deeper search understanding, the power of search is available to you.
 
@@ -216,6 +234,7 @@ This is only the beginning. And it is important, as we refine our application to
 
 We finish our code with some insightful diagnostic output. An aggregation pipeline execution can be [\*explain\*ed](https://www.mongodb.com/docs/atlas/atlas-search/explain/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-search-foojay&utm_term=tony.kim), dumping details of execution plans and performance timings. In addition, the Atlas Search process, \`mongot\`, provides details of \`$search\` stage interpretation and statistics.
 
+|                                                                                                            |
 |------------------------------------------------------------------------------------------------------------|
 | System.out.println("Explain:"); System.out.println(format(aggregationResults.explain().toBsonDocument())); |
 

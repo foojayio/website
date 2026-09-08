@@ -162,6 +162,8 @@ If you're ready to explore an easier way to build an application with a NoSQL da
 
 *Follow the* [*DataStax Tech Blog*](https://datastax.medium.com/)*for more developer stories. Check out our* [*YouTube*](https://www.youtube.com/channel/UCqA6zOSMpQ55vvguq4Y0jAg)*channel for tutorials and here for DataStax Developers on* [*Twitter*](https://twitter.com/DataStaxDevs)*for the latest news about our developer community.*
 
+## References
+
 1. [What is NoSQL? Non-Relational Databases Explained](https://www.datastax.com/what-is/nosql)
 2. [What are ACID properties in a database?](https://www.educative.io/edpresso/what-are-acid-properties-in-a-database?https://www.educative.io/courses/grokking-the-object-oriented-design-interview?aid=5082902844932096&affiliate_id=5082902844932096&utm_source=google&utm_medium=cpc&utm_campaign=grokking-ci&utm_term=&utm_campaign=Grokking+Coding+Interview+-+USA%2B&utm_source=adwords&utm_medium=ppc&hsa_acc=5451446008&hsa_cam=1871092258&hsa_grp=84009716779&hsa_ad=396821895536&hsa_src=g&hsa_tgt=dsa-1287243227899&hsa_kw=&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQiA-K2MBhC-ARIsAMtLKRulyN-g-obXdyG8_GyviiXCBcmYibBaR9otJ9w3NaR5T_klYt1GbboaAl-YEALw_wcB)
 3. [The basics of NoSQL databases — and why we need them](https://www.freecodecamp.org/news/nosql-databases-5f6639ed9574/)

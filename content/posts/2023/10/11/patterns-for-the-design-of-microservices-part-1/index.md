@@ -34,6 +34,8 @@ Patterns for the design of Microservices has been broadly divided into five cate
 * Observability Patterns
 * Cross-cutting Concern Patterns
 
+## 1. Decomposition Patterns
+
 The decomposition patterns can be further categorized into four distinct patterns, namely:
 
 1. Decomposition based on business capability
@@ -79,6 +81,8 @@ Currently, a majority of enterprise applications operate on Agile Methodologies 
 
 This approach enables the attainment of high-performance, loosely coupled, small team, autonomous, and cross-functional capabilities.
 
+## 2. Integration Patterns
+
 The Integration Patterns can be further categorized into three distinct patterns, namely:
 
 1. API Gateway Pattern
@@ -106,5 +110,7 @@ In the microservices architecture, the majority of applications are constructed 
 By utilizing React/Angular technologies, we are able to construct screens/pages based on components, which internally communicate with multiple backend services and present the aggregated outcomes in user interface interfaces.
 
 In the subsequent article, we will delve into the remaining microservice design patterns.
+
+## Reference
 
 <https://microservices.io/>

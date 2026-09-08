@@ -31,6 +31,8 @@ This article covers an example of the latter kind of bug. When one of the daily 
 
 As you'll see below, Fallout was instrumental in being able to quickly iterate and gather new data to validate and invalidate my guesses about the underlying bug.
 
+## The original bug report
+
 At [DataStax](https://www.datastax.com/?) we run a variety of nightly functional and performance tests against [Cassandra](https://cassandra.apache.org/_/index.html), and one morning we noticed that one of our write-throughput benchmarks failed to complete after 16 hours. Normally, this test would complete within four, so something was clearly wrong. Like all good engineers, we checked to see what had changed since the test last passed, and sure enough we found a commit in our git repository that could potentially explain the failure.
 
 Since the most important thing after discovering a test failure is to get the tests passing again, we reverted the suspected commit and re-ran the tests. They passed. So with the tests now passing we figured that even if we hadn't analysed the commit to understand *how* the test could be failing, we'd at least narrowed down the cause of the issue to a single commit. High-fives were exchanged and we all went back to work leaving the author of the reverted commit to understand the root cause of the failure.
@@ -39,11 +41,15 @@ Only the test failed again the next day, even with the reverted commit. Clearly 
 
 But this begged the question: if the commit we reverted didn't originally cause the test to fail, why had it suddenly started failing? It dawned on us that we were dealing with an intermittent failure and our task now was to figure out how to reproduce it more reliably.
 
+## Reproducing the failure
+
 Intermittent failures are a pain to debug because they take so much longer to analyze when you can't trigger the conditions for the bug on every test run. Sometimes there's no telling how many runs you'll need to hit it. Worse, you have to gather much more data to be confident that you've actually solved the bug once you apply your fix.
 
 Almost all of the performance tests at [DataStax](https://www.datastax.com/) run using [Fallout](https://github.com/datastax/fallout), our distributed systems testing service. Tests are described in a single YAML file and Fallout takes care of scheduling tests on available hardware and collecting the results for later analysis. Our team figured out we could normally hit this bug at least once every five runs. We initially looked at trying to increase the reproducibility of this bug but simply couldn't make the failure happen more regularly. Fortunately, there was one way we could reduce the time to trigger it — by running multiple tests in parallel. Since Fallout can automatically queue test runs and execute them once hardware becomes available, I fired up five runs of the same test and waited for the results to come in. Instead of having to wait up to 20 hours to see if I had hit the bug, I now only needed to wait around four hours. Still not ideal, but it meant that I could make progress every day.
 
 But we were still using the "does the test run for longer than four hours" symptom to detect when we'd run into a problem. Finding a less time-consuming way to know when we'd triggered the bug required understanding the side effects of the bug at the Cassandra level. In other words, we had to know what Cassandra was doing to cause the test to timeout in the first place.
+
+## The side effects of the bug
 
 [Cassandra](https://cassandra.apache.org/_/index.html) has a number of tools to understand what's happening internally as it serves data to clients. A lot of this is tracked as metrics in monitoring tools such as [Prometheus](https://prometheus.io/) or [Grafana](https://grafana.com/) which integrate with Fallout. Checking those metrics showed that request throughput (requests per second) dropped off to near zero whenever we triggered the bug. To understand what was happening on the server side, I waited for the bug to occur and then took a look at the output of [nodetool](https://cassandra.apache.org/doc/latest/cassandra/tools/nodetool/nodetool.html) tpstats.
 
@@ -67,11 +73,15 @@ This showed that `Native-Transport-Requests-2 `was currently in the SPINNING sta
 
 This finally explained why throughput dropped whenever we hit the bug. The next step was understanding how `parkNanos()` was behaving.
 
+## Understanding the parkNanos() implementation
+
 First of all, I wanted to make sure that Cassandra wasn't somehow passing a really big value to `parkNanos()` which could make it appear that it was blocked indefinitely when in actual fact it was just sleeping for a very long time. Now that I had more of an idea of what to look for, it was easy to verify the values passed to `parkNanos()` by printing a log message every time this code path was executed. All of the values looked within the expected range so I concluded that we definitely weren't calling `parkNanos()` incorrectly.
 
 Next, I turned my attention to the implementation of `parkNanos()`. `parkNanos()` uses the timeout feature of `pthread`'s conditional variables to sleep for a specified time. Internally, `pthread `uses the kernel to provide the timeout facility, specifically by using the `futex()` system call. As a quick recap, the `futex()` (or fast userspace `mutex`) system call allows application threads to sleep, waiting for the value at a memory address to change. The thread is woken up when either the value changes or the timeout expires.
 
 The `parkNanos()` call was putting the Native-Transport-Requests thread to sleep expecting the timer to expire within 10 microseconds or so but it was starting to look like that never happened. Two questions came to mind: did the thread somehow miss the signal to wake up from the expiring timer or did the timer never actually expire? I couldn't see anything obviously wrong with the code, and I didn't want to deal with building a custom version of the Java SE Development Kit (JDK) to pursue that line further. Instead, I decided to switch gears and [write a BPF script](https://gist.github.com/mfleming/7c6cfd225c305c0e44cc7357cdc481f3) to explore the problem from the kernel side first
+
+## Tracing kernel timers with BPF
 
 [BPF](https://lwn.net/Articles/740157/) is an in-kernel virtual machine that's capable of dynamically running kernel code injected from userspace. The beauty of BPF is that you can run these scripts without needing to recompile your kernel or even reboot your machine. Among other things, BPF allows you to insert probes or hooks at the entry and exit of kernel functions, effectively allowing you to run your own kernel code. Tracing through the kernel's `futex` code I could see that if I hooked my script into the return path of the internal functions, I could display the timer details when the thread returned from the `futex` call. The next trick was getting the stuck thread to return.
 
@@ -88,9 +98,13 @@ Sending SIGSTOP
 
 The expires value for high-resolution timers in the kernel is in nanoseconds since boot. Doing a quick bit of math (5880730777795/1000000000 / 60 = 98.012 or 98 minutes of uptime) I could tell that the expire value looked correct because it was within the four hours that the test usually took. And the real issue was that a wakeup had never been sent to the sleeping `Native-Transport-Requests` thread. At this point, I was convinced that our test was hitting a kernel bug.
 
+## How are timers implemented in the Linux kernel?
+
 [High-resolution timers](https://lwn.net/Articles/167897/), or [hrtimers](https://www.kernel.org/doc/Documentation/timers/highres.txt), is the in-kernel infrastructure responsible for programming the timer hardware in your CPU. At the application level, `hrtimers` are programming using system calls such as `clock_nanosleep()` and `nanosleep()`. Each CPU maintains its own tree of `hrtimers` grouped by `clock ID` (`CLOCK_MONOTONIC`, `CLOCK_REALTIME`, etc). Each tree is implemented using a red-black tree data structure. Timers are inserted into the red-black tree and sorted based on their expiration time. The kernel's red-black tree implementation also maintains a pointer to the smallest entry in the tree which enables the kernel to lookup the next expiring timer in O(1).
 
 I modified my BPF script to display the location in the red-black tree for the `hrtimer `our `Native-Transport-Requests` thread was waiting on and discovered that it never reached the leftmost spot. This explained why the thread was never awakened! This is also a violation of the way that red-black trees are supposed to work: it's normally expected that the entries in the tree are in sorted order, smallest to highest, at all times.
+
+## Tracing the behavior of the kernel's red-black trees
 
 Tracing the workings of these red-black trees was beyond anything I could achieve with a BPF script. I resorted to writing a kernel patch to print a warning message and dump the contents of the `hrtimer` red-black trees whenever the auxiliary pointer to the leftmost entry no longer pointed to the timer that expired next.
 
@@ -115,9 +129,13 @@ Before I started this part, I wasn't even sure that Fallout would allow me to bo
 
 After rebooting into my custom kernel I saw the warnings triggering immediately on startup so I naturally assumed that something was broken with my patch. But after a closer look, I realized that it was possible to trigger my bug within two minutes of booting the VM! I no longer had to wait up to four hours to see if I had reproduced the issue. What was even better was that I was able to hit this warning every single time I booted the VM. With the reproduction time cut by around 99%, I quickly made progress understanding the kernel bug that caused the red-black tree to become inconsistent.
 
+## The real bug and the fix
+
 The kernel bug underlying this whole ordeal was already [fixed upstream](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=156ec6f42b8d300dbbf382738ff35c8bad8f4c3a) in February this year in Linux 5.12 but not yet pulled into Ubuntu's kernel. What was happening was that some of the kernel's scheduler code was modifying the expiration time of a `hrtimer` it had previously inserted into the red-black tree without first removing it from the tree. This violated the red-black tree property that all entries in the tree need to be sorted by their expiration time and resulted in `hrtimers` not firing. This meant that threads waiting on those timers were never woken up.
 
 But why had no one else hit this kernel bug? The reason is because of a little-known or documented scheduler tunable that we were using. We were using the kernel's `HRTICK` feature in order to improve scheduler latency. Unfortunately, it's not widely used and a number of bugs have been fixed over the years. What's worse is that `HRTICK` fixes are not being backported to stable kernels. So Linux distributions need to take them in an ad-hoc fashion. Rather than waiting for this to happen or rolling our own kernels, we decided to disable the feature altogether to avoid any future multi-week kernel debugging.
+
+## Conclusion
 
 It's helpful when debugging these multi-layered issues to have a bag of tools and techniques you can use to understand the behavior of your app at various levels of the stack. Even if you don't know how to instrument the code at a particular point (or don't want to), remember how I didn't want to build a custom version of the JDK? You can still infer the location of a bug by using tools to understand the behavior above and below a layer. And when you don't know exactly how a piece of code works, having a mental model or a rough idea of what goes on inside can help you to make forward progress by skipping layers that are unlikely to contain the bug.
 
@@ -130,6 +148,8 @@ If any of this sounds like the kind of problem you'd enjoy working on, check out
   https://gist.github.com/mfleming/7c6cfd225c305c0e44cc7357cdc481f3
  </div>
 </figure>
+
+## Resources
 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3x2nSJ4) for the fastest setup.
 

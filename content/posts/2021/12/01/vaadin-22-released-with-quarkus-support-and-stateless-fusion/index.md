@@ -18,6 +18,8 @@ frozen: false
 
 ![Vaadin 22 released](1200x630-vaadin-release-v22-700x368.jpg)
 
+## Vaadin 22.0.0
+
 Vaadin is an open source development platform for building modern web applications on Java backends. It includes:
 
 * A large set of [UI components](https://vaadin.com/docs/latest/ds/components).
@@ -82,6 +84,8 @@ Vaadin 22 is supported for one month after Vaadin 23 has been released. The late
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
+## Getting Started with Vaadin
+
 ## App starters
 
 The best way to get started with Vaadin is to go to <https://start.vaadin.com> and configure your new application by setting up your views, entities, styles, and the technology stack you're interested in.
@@ -131,11 +135,19 @@ Add the following dependency to dependencyManagement in pom.xml.
 
 Read more about upgrading to Vaadin 22 from [vaadin.com](https://vaadin.com/docs/latest/guide/upgrading).
 
+## Migrating from Vaadin 8
+
 See [the migration guide](https://vaadin.com/docs/v14/guide/upgrading/v8/)
+
+## Migrating from Vaadin 10-14
 
 See [the migration guide](https://vaadin.com/docs/v14/guide/upgrading/v10-13/)
 
+## Migrating from Vaadin 15
+
 See [the migration guide](https://vaadin.com/docs/latest/flow/guide/upgrading)
+
+## Reporting Issues
 
 We appreciate if you try to find the most relevant repository to report the issue in. If it is not obvious which project to add issues to, you are always welcome to report any issue at <https://github.com/vaadin/platform/issues>.
 

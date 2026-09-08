@@ -19,6 +19,8 @@ related_posts:
 frozen: false
 ---
 
+## BoxLang CouchBase Module: Enterprise Caching, Distributed Locking, and AI Vector Memory
+
 **Ortus Solutions** is thrilled to announce the official release of **bx-couchbase v1.0** , a groundbreaking module that brings native enterprise-grade Couchbase capabilities to the BoxLang language and ecosystem. Designed for modern distributed applications, **bx-couchbase** unifies high-performance caching, resilient distributed locking, and advanced AI vector memory—empowering developers to build scalable, intelligent, fault-tolerant systems with unprecedented ease.
 
 ## **Couchbase + BoxLang: A High-Performance Combination**
@@ -29,6 +31,8 @@ The new **bx-couchbase v1.0** module exposes all this power through an elegant, 
 
 📘 **Documentation:**   
 <https://boxlang.ortusbooks.com/boxlang-framework/boxlang-plus/modules/bx-couchbase>
+
+## **WHAT'S IN bx-couchbase v1.0**
 
 ## 🚀 **Enterprise-Grade Distributed Caching**
 
@@ -185,11 +189,15 @@ this.sessionStorage = "couchbase"
 session.user = userObject;
 ```
 
+## **PERFORMANCE \& SCALING**
+
 * Sub-millisecond KV speed
 * Automatic sharding
 * Replication \& HA built-in
 * Memory-first architecture
 * Global multi-cluster support
+
+## **GETTING STARTED**
 
 Install BoxLang OS, or chose a web runtime, then install the couchbase module. (www.boxlang.io)
 
@@ -217,6 +225,8 @@ this.caches[ "default" ] = {
 }
 ```
 
+## **REAL-WORLD APPLICATIONS**
+
 ### **E-Commerce Inventory Protection**
 
 ```
@@ -243,6 +253,8 @@ return agent.run(message)
 ```
 couchbaseLock("default", "payment-#orderId#", 5, 30, () => { ... })
 ```
+
+## **JOIN THE COMMUNITY**
 
 * 📘 Docs: <https://boxlang.ortusbooks.com/boxlang-framework/boxlang-plus/modules/bx-couchbase>
 * 🐞 Issues: <https://ortussolutions.atlassian.net>

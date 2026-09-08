@@ -16,9 +16,11 @@ Welcome to the special mid-year edition for Visual Studio Code Java updates.
 
 As the highlight of this post, we are going to take a look at our product roadmap for the next few months.
 
-We will also showcase some important new features \& improvements as we did [in previous blog posts](/today/category/vs-code/).
+We will also showcase some important new features \& improvements as we did [in previous blog posts](https://foojay.io/today/category/tools/vscode/).
 
 So let's get right into it!
+
+## July to December 2021 Roadmap
 
 Visual Studio Code Java has come a long way since the initial launch, and we couldn't have done it without your support, so thank you for all the suggestions and feedback, and please keep them coming! 🙂
 
@@ -60,6 +62,8 @@ For Java projects, we already started to work on supporting those new security f
 
 The picture above summarizes our focus for July to December. Please let us know if you have any further comments or suggestions.
 
+## New Features in June
+
 In addition to our roadmap, we also have several new features to showcase for this month.
 
 ## Limited Java Language Support in Untrusted Workspace
@@ -73,6 +77,8 @@ In our roadmap sharing above, we have emphasized how important security is for o
 We have now enabled Java 16 in our dev container for remote development. To use this feature, simply bring up Command Palette (Ctrl+Shift+P) and run "\>remote-containers: Add Development Container Configuration Files", then select "Java" and "16" in order.
 
 ![](Java16_devcontainer.gif)<https://docs.github.com/en/codespaces/about-codespaces>
+
+## Feedback and Suggestions
 
 Please don't hesitate to try our product!
 

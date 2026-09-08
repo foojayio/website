@@ -20,7 +20,11 @@ related_posts:
 frozen: false
 ---
 
+## Introducing the Brokk Power Ranking
+
 The Brokk Power Ranking is a [new open-source coding benchmark](https://github.com/BrokkAi/powerrank "new open-source coding benchmark"), featuring 93 tasks from large, real-world codebases. You can check out the current Power Ranking [here](https://brokk.ai/power-rankings?ref=blog.brokk.ai "here").
+
+## Why a New Benchmark?
 
 SWE-bench is the closest thing we have to a standard, objective benchmark for LLM coding performance, but it has a bunch of issues, the largest of which are that it's Python-only, and it's old enough that almost certainly some labs are now training to the test. (Epoch AI has a great writeup on [the more subtle problems with SWE-bench](https://epoch.ai/blog/what-skills-does-swe-bench-verified-evaluate?ref=blog.brokk.ai "the more subtle problems with SWE-bench") if you want to go deeper.)
 
@@ -29,6 +33,8 @@ As Jack Morris put it:
 ![](unnamed-700x209.png)
 
 But if the big labs have better benchmarks they haven't released them, so it has fallen to small teams like [Aider](https://aider.chat/docs/leaderboards/ "Aider") and now Brokk to step up and move the industry forward with independent evaluations.
+
+## Findings
 
 ### GPT-5 is on top at every performance level and every price point
 
@@ -76,6 +82,8 @@ This also means that context length isn't the primary reason that newer models a
 * Build noise matters. No model did well with JGit in particular until we special-cased its Maven build to be less noisy. Besides the standard -quiet mvn flag, we added -DskipScriptExecution=true to mvn and a special BRK_SUPPRESS_STDERR flag to the test harness to keep the pollution down to a level that they weren't overwhelming the build results with chaff.
 * Test quality also matters. If you have a flaky test that sometimes passes and sometimes fails, it will confuse the hell out of your LLM assistant. It's pretty confusing for humans, too. Fix your tests!
 
+## Under the hood
+
 We wanted to build a benchmark that wasn't saturated, that would have meaningful gaps between the models, even at the top. We also wanted to be able to tell the difference between models down a rung, at the "intelligence too cheap to measure" level or close to it. We were able to deliver on both counts.
 
 You can think of the Power Ranking as halfway between AiderBench ("toy" problems, usually in a single file) and SWEBench ("here's the repo and the issue description, good luck"). Like SWEBench, the Power Ranking uses real code from real repositories. But like AiderBench, the Power Ranking tells the model which files it will need to edit (but not which external-to-those-files APIs it will need, it is left to the model to determine those using Brokk's [Scan Project](https://brokk.ai/documentation/actions-toolkit?ref=blog.brokk.ai#sub-commands-of-search "Scan Project")).
@@ -110,5 +118,7 @@ The Brokk Power Ranking is open source at *<https://github.com/BrokkAI/powerrank
 ### A Note on Reasoning
 
 A bare model name indicates that it was run with default reasoning tokens for most thinking models; the exception is the Claude models, where the API defaults to no reasoning at all. These were set to "medium", with the -nothink variants for thinking disabled.
+
+## What's next for the Power Ranking
 
 We will update the Power Ranking every six months. If you know an actively maintained, open source Java repo that we should include in our task sources, give us a shout!

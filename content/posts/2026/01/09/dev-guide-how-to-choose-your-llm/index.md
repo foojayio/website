@@ -16,6 +16,8 @@ related_posts:
 frozen: false
 ---
 
+## The LLM ecosystem
+
 Let's be honest: when we try a new AI model, the first thing we look at is if the code compiles and does what we asked. But if you have been in the Java world for a while, you know that **"working" is just level 1**. The real final boss is reliability, maintenance and security. 💀
 
 I have been analyzing the latest [**Sonar Leaderboard**](https://www.sonarsource.com/the-coding-personalities-of-leading-llms/leaderboard/) (with fresh data from late 2025/2026 on 4,444 tasks) and there are big surprises.

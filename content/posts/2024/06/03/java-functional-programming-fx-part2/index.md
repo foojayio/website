@@ -29,6 +29,8 @@ In this article, we delve deeper into the essential aspects of Functional Progra
 
 And we will discuss about the relationship between each of the features.
 
+## 1. Lambda Expressions
+
 JSR 335 has greatly facilitated programming in a multicore environment by introducing Lambda Expressions/closures/anonymous method, and related features.
 
 If Lambda Expressions had been integrated into the Collections API from the beginning, their development could have taken a different path. However, they have enriched the Collections API by introducing new methods to current interfaces and introducing new Interfaces such as **'Stream'**.
@@ -322,6 +324,8 @@ System.out.println("The length of the string is: " + length);
 * Increasing Efficiency: Writing less code accelerates the development process.
 * Enhancing Maintainability: Concise code facilitates easier debugging and maintenance.
 * Optimizing Parallel Processing: It seamlessly integrates with parallel processing frameworks such as the Stream API.
+
+## Conclusion
 
 Understanding and learning, **Lambda Expressions, Method References, and Functional Interfaces** can enhance the efficiency and readability of your Java code.
 

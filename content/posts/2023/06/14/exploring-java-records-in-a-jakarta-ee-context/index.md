@@ -121,6 +121,8 @@ The REST resource method calls the getOrderSummariesByStatus method on the Persi
 
 As you can see, the REST resource directly uses the OrderSummary record as the return type, without the need for an extra DTO or any other abstraction.
 
+## Conclusion
+
 Java Records are a powerful feature introduced in Java 16 that can simplify the creation of data transfer and projection objects, and help reduce much of the boilerplate code needed for mapping data in a Jakarta EE application.
 
 By using this construct, you can create more concise and immutable classes that are easy to read and write in your Jakarta EE application.

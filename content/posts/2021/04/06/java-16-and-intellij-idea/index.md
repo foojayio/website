@@ -28,6 +28,8 @@ In this blog post, I will limit coverage of Java 16 to its language features, wh
 
 ![Java 16 and IntelliJ IDEA](Java16_blog-e688b224.jpg)  
 
+## Records
+
 Records introduce a new type declaration that simplifies the task of modeling your immutable data. Though it helps cut down on boilerplate code significantly, that isn't the primary reason for its introduction. Here's an example:
 
 ```java
@@ -405,6 +407,8 @@ void test(int input) {
 ```
 
 ***You can read about Sealed Classes and Interfaces as well as Pattern Matching for `instanceof` on the [main JetBrains IntelliJ IDEA blog](https://blog.jetbrains.com/idea/2021/03/java-16-and-intellij-idea/).***
+
+## Summary
 
 IntelliJ IDEA is not only committed to supporting new Java features, but also to ensuring that our existing intentions and inspections work with them.
 

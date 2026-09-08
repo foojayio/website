@@ -26,6 +26,8 @@ From the SonarLint telemetry for the last 2 years, with more than 2.5 million is
 
 Although some issues may seem trivial, they can have a huge impact on the software delivered in terms of security, performance, and maintenance. Most of these issues are easy to follow, so it shouldn't be an issue to not implement them, considering the huge benefit of it and the low effort to put in.
 
+## The top most common issues
+
 And here they are...
 
 ## 1. Code commented out

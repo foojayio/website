@@ -130,6 +130,8 @@ $ cd panama-polyglot/python
 
 Above you'll notice the `-p` of `mkdir` to create multiple (nested) directories all at once. If you are on the Windows OS you'll want to create each individually. To run examples you'll want to reside in the `panama-polyglot/python` directory. Later you will create a Java application named `PythonMain.java` that will reside in the `src` directory.
 
+## Example Hello World
+
 Before creating and executing our **Hello World**example lets look at the following steps.
 
 1. Generate Panama binding Java classes using `jextract`

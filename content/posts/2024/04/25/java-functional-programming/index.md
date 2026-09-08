@@ -19,6 +19,8 @@ related_posts:
 frozen: false
 ---
 
+## Java: Functional Programming f(x) – Part1
+
 **Mathematics serves as the driving force behind significant advancements in computer science from my perspective. We deeply root the fundamental principles that we utilize in our daily programming tasks and application development in mathematical concepts. I am constantly intrigued by the opportunity to incorporate mathematical ideas into the programming languages I work with as a student of Mathematics.**
 
 *Many other programming paradigms, like functional programming, take inspiration from Mathematics to address challenges related to concurrency and parallelism. Computing shifts towards utilizing multiple cores and distributed systems, which makes this increasingly important.*
@@ -34,6 +36,8 @@ This foundational component for computation leads us to delve into *imperative p
 However, in *Functional Programming(FP)* , which revolves around the fundamental abstraction of *function* and we will be writing using *declarative programming* , which is all about defining **what to do and NOT how to do it**.
 
 So let's discuss about functional programming and its advantages in this article.
+
+## Introduction
 
 As I mentioned, Functional Programming has its roots in Mathematics and it draws most of the features from its mathematical concepts i.e., **[Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus "Lambda Calculus")**. Programming languages can view functional programming constructs as realizations or expansions of lambda calculus.
 
@@ -96,6 +100,8 @@ A *function* is a fundamental concept that represents a mapping from input value
 4. Streams(map-filter-reduce)
 
 We will delve into the features of functional programming in great detail, providing numerous examples in the upcoming article.
+
+## Conclusion
 
 Functional programming, which draws inspiration from mathematics, centers around the utilization of functions as fundamental components of code. Its primary objectives are clarity and efficiency, particularly when dealing with concurrent operations or large datasets.
 

@@ -27,6 +27,8 @@ You'll be able to learn about a variety of topics, including Core Java, Kotlin, 
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf)
 
+## Agenda
+
 IntelliJ IDEA Conf 2025 will be held on two days, June 3–4, with 15 sessions in total. The conference has a single track on both days.
 
 Find the detailed conference schedule, session descriptions, and speaker bios on the [conference website](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "conference website").  
@@ -54,11 +56,15 @@ Here's a brief overview of the sessions which will be live streamed on the secon
 
 Please check out the detailed agenda for speaker and session details.
 
+## Community partnership
+
 For user group (UG) leaders, if you think these sessions will benefit your members, we invite you to become an IntelliJ IDEA Conf community partner and share the event details with your group members. The registration process is simple and only requires submitting a few details about your UG and one of its leaders.
 
 Click [here](https://lp.jetbrains.com/intellij-idea-conf-2025-partners "here") to register as a community partner.
 
 Once your registration form is processed, you will be listed as one of our community partners and your logo will be displayed on our event page. Community partners will also receive free JetBrains IDE licenses.
+
+## Attending sessions – logistics
 
 The first step is to [register for the event](https://lp.jetbrains.com/intellij-idea-conf-2025/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#register "register")!
 
@@ -68,7 +74,11 @@ None of the sessions at this conference are prerecorded. Sessions will be presen
 
 All of the sessions will be recorded and made available for you to watch again or catch up on after the event. Don't forget to subscribe to [IntelliJ IDEA's YouTube](https://www.youtube.com/intellijidea) channel to view them.
 
+## Hashtags
+
 Don't miss the chance to connect with us on social media! Use the hashtag #IntelliJIDEAConf on X (formerly Twitter), Bluesky, LinkedIn, and Facebook throughout the event.
+
+## A special thanks to our speakers
 
 This conference wouldn't be possible without the fantastic speakers and presenters who all strive to assist developers throughout their learning journey. At JetBrains, we are very thankful for all the speakers who graciously accepted our invitation to participate in this event.
 

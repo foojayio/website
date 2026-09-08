@@ -23,6 +23,8 @@ frozen: false
 
 **Generative Artificial Intelligence (Gen AI) disrupted enterprises with the introduction of GPT-4 foundation model by Open AI in the late 2022 to early 2023 triggering big tech to release their own Gen AI platform and foundation models. Among them are Google, Microsoft, AWS and IBM. In this article, we will deal with the Gen AI platform and model of IBM called watsonx and integrate it with Spring AI to create a custom chat application using the IBM Granite Foundation Model.**
 
+## What are foundation models?
+
 Large-scale machine learning models trained on massive and diversed dataset to perform general-purpose tasks. One of the use-cases of foundation models are natural language processing tasks which augments the daily activities of human such as the ff:
 
 * Summarization
@@ -45,6 +47,8 @@ In this article, we will focus on Language Models and Chat applications. Resurfa
 
 {{< youtube videoseries >}}
 
+## IBM watsonx.ai
+
 The flagship AI and machine learning platform by IBM. It is designed to empower business to build, deploy, scale AI models effectively. This technology is not the foundation model of IBM rather a platform that incorporates multiple foundation models plus the IBM's flagship model called IBM Granite.
 
 To see the table of all supported foundation models, you can check it out [here](https://www.ibm.com/products/watsonx-ai/foundation-modelshttp:// "here").
@@ -52,6 +56,8 @@ To see the table of all supported foundation models, you can check it out [here]
 ## Pricing
 
 If you're an organization interested in trying IBM watsonx.ai, you can check-out its [pricing table](https://www.ibm.com/products/watsonx-ai/pricing "pricing table")
+
+## IBM Granite Models
 
 IBM Granite is the IBM's flagship family of foundation models developed for Generative AI. It is part of the IBM watsonx.ai platform and focuses in giving solutions to enterprises. One of the advantage of using Granite models is that it is optimized for business users, making enterprise organizations competitive using the platform.
 
@@ -61,6 +67,8 @@ Articles related to the capabilities of IBM Granite can be read below:
 * [IBM's New Granite 3.0 Generative AI Models Are Small, Yet Highly Accurate and Efficient](https://developer.nvidia.com/blog/ibms-new-granite-3-0-generative-ai-models-are-small-yet-highly-accurate-and-efficient/ "IBM’s New Granite 3.0 Generative AI Models Are Small, Yet Highly Accurate and Efficient")
 
 The platform will be used to integrate a IBM Granite Model with Spring AI. For this demonstration we will be using a language model for chat applications using [IBM granite-13b-chat-v2](https://www.ibm.com/docs/en/watsonx/w-and-w/2.1.x?topic=models-granite-13b-chat-v2-model-card "IBM granite-13b-chat-v2")
+
+## What is Spring AI?
 
 Streamlines the creation of generative artificial intelligence in a Java application without unnecessary complexities. The project main focus is to connect your enteprise data and APIs to foundation models.
 
@@ -316,11 +324,17 @@ The streaming chat responds by chunks and prevents frustration to the end user.
 
 ![](watsonx-streaming-chat.webp)
 
+## Summary
+
 watsonx.ai can seamlessly connected to Spring AI and build a chat application with minimal coding changes. Using this platform, we used the IBM Granite model as the foundation model and generated both a basic and streaming response.
 
 For future demonstrations, watsonx.ai can be used for RAG, Function Calling (via MistralAI) and Embeddings.
 
+## GitHub
+
 You can access my watsonx.ai Chat application [here](https://github.com/rjtmahinay/watsonx-spring-ai-hilla "here")
+
+## References
 
 1. **Spring AI Documentation** - <https://docs.spring.io/spring-ai/reference/index.html>
 2. **watsonx.ai Documentation** - [https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx\&locale=en\&audience=wdp](https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/welcome-main.html?context=wx&locale=en&audience=wdp)

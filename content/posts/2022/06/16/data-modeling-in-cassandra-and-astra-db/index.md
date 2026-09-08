@@ -27,6 +27,8 @@ In this post, we present a high-level overview of the data modeling methodology 
 
 As a side note, if you are new to Cassandra or if the terms [single-row partitions](https://www.datastax.com/learn/cassandra-fundamentals/tables-single-row-partitions) and [multi-row partitions](https://www.datastax.com/learn/cassandra-fundamentals/tables-multi-row-partitions) sound unfamiliar, we recommend taking a closer look at [Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals) before deep diving into data modeling.
 
+## **Data modeling and the methodology**
+
 *Data modeling* is a process that involves many activities:
 
 * Collecting and analyzing data requirements
@@ -70,6 +72,8 @@ In many aspects, the transitions are the most interesting and profound component
 
 You can find more information about the Cassandra data modeling methodology in the [original paper](https://www.dropbox.com/s/4bu0dy0ayrqygei/cassandra-data-modeling-methodology-paper.pdf), [conference presentation](https://www.dropbox.com/s/3cul3hqzr84bark/cassandra-data-modeling-methodology-presentation.pdf), or [DataStax Academy video course DS220](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/saml/clients/absorb).
 
+## **Data modeling in action**
+
 One of the best ways to become skilled in data modeling is to explore concrete examples. We maintain [this growing collection of data modeling examples](https://www.datastax.com/learn/data-modeling-by-example) from various domains to help you get started with Cassandra and Astra DB data modeling. Each example applies the Cassandra data modeling methodology to produce and visualize four important artifacts: conceptual data model, application workflow model, logical data model, and physical data model.
 
 Moreover, each example has a hands-on portion with practice questions and solutions. The hands-on scenarios make it straightforward to implement a data model in Cassandra, express data access patterns as CQL queries and run the queries against our sample datasets.
@@ -85,6 +89,8 @@ Go ahead and explore these data models, and execute real queries against them in
 * [Shopping cart data model](https://www.datastax.com/learn/data-modeling-by-example/shopping-cart): Modeling users, items, and shopping carts. The resulting database schema has three tables and one materialized view supporting seven data access patterns, including updates that use batches and lightweight transactions.
 * [Order management data model](https://www.datastax.com/learn/data-modeling-by-example/order-management): Modeling users, payment methods, addresses, items, shopping carts, orders, delivery options, and order statuses. The resulting database schema has four tables supporting five data access patterns, including multi-step updates that use lightweight transactions.
 
+## **Data modeling and Astra DB**
+
 [Astra DB](https://astra.dev/3z6AFNd) is a cloud database service built on Apache Cassandra. It is a serverless and multi-region service that works in AWS, Azure and GCP. If you haven't already, you should take advantage of [Astra DB's free tier](https://astra.dev/3z6AFNd) to create your own fully managed Cassandra database in the cloud. After all, how many multi-cloud, multi-region, serverless databases built on open-source technologies do you know? Astra DB is the first one.
 
 Astra DB databases are Cassandra databases. The same data modeling methodology applies and the above example data models can be instantiated in Astra DB. However, there are a couple of minor differences that you may want to be aware of:
@@ -95,9 +101,13 @@ Astra DB databases are Cassandra databases. The same data modeling methodology a
 
 The Astra DB and Cassandra differences with respect to materialized views, user-defined functions, and secondary indexes should not have any profound effect on data modeling.
 
+## Data modeling and K8ssandra
+
 [K8ssandra](https://k8ssandra.io/) is a cloud-native distribution of Cassandra that runs on Kubernetes. Besides Cassandra, the distribution also includes several integrated components that enable richer data APIs, and provide better automation for observability, metrics monitoring, backup and restore, and data anti-entropy services.
 
 K8ssandra is open-source, free to use, and data modeling in K8ssandra is identical to data modeling in Cassandra.
+
+## **Data modeling and Stargate**
 
 [Stargate](https://stargate.io/) is an open-source data gateway deployed between applications and a database. It supports different API options for an application to interact with Cassandra, Astra DB, and K8ssandra. Stargate's API extensions include CQL, REST, GraphQL, and Document APIs.
 
@@ -105,9 +115,13 @@ The use of CQL, REST, and GraphQL APIs has no effect on data modeling: the same 
 
 The use of Document API has a significant impact on data modeling. With Document API, the focus shifts from organizing data as rows, columns, and partitions to structuring data as JSON documents. Stargate then uses the [predefined mapping](https://stargate.io/2020/10/19/the-stargate-cassandra-documents-api.html) to shred JSON documents and store them as rows in Cassandra tables. The topic of data modeling for document databases is beyond the scope of this article.
 
+## **Conclusion**
+
 Data modeling in Cassandra and Astra DB is a very important topic and we just scratched the surface in this post. We presented a high-level overview of the Cassandra data modeling methodology and urged you to sharpen your skills by exploring the [data modeling examples](https://www.datastax.com/learn/data-modeling-by-example). We also established that data modeling in Cassandra, Astra DB, and K8ssandra are practically identical; with [Astra DB](https://astra.dev/3z6AFNd) having a significant advantage of being serverless and fully managed. Finally, we briefly discussed how Stargate APIs — namely CQL, REST, GraphQL, and Document APIs — can affect data modeling.
 
 *Explore* [*DataStax Academy*](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/saml/clients/absorb)*to get certified in Apache Cassandra with hands-on courses. You can also* [*subscribe to our event alert*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about our latest developer workshops. Lastly, follow* [*DataStax on Medium*](https://datastax.medium.com/)*for exclusive posts on all things Cassandra, streaming, Kubernetes, and more.*
+
+## **Resources**
 
 1. [Apache Cassandra](https://cassandra.apache.org/)
 2. [Astra DB](https://astra.dev/3z6AFNd)

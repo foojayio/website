@@ -39,6 +39,8 @@ In this article, we'll explore when NoSQL use cases make sense.
 
 First, let's take a closer look at NoSQL.
 
+## What is NoSQL?
+
 NoSQL is short for "not only SQL," or "non-SQL." It's a term used to describe databases that are not relational. To better understand NoSQL databases, let's first take a look at their alternative, SQL databases.
 
 Developed in the early 1970s, a time when data storage was extremely expensive, SQL databases attempt to minimize data duplication between tables. While extremely organized, this also makes them extremely inflexible and difficult to modify.
@@ -56,8 +58,12 @@ NoSQL comes with many benefits, including:
 
 [**Learn more about NoSQL**](http://www.datastax.com/nosql).
 
+## Comparing NoSQL to SQL
+
 While NoSQL databases have many advantages, they're not the right choice for every situation. Sometimes sticking with a tried-and-true SQL database is the way to go. Let's compare SQL and NoSQL databases across several factors. Think about how each would apply to your data profile and use cases.
 ![](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![](1_tJO9HgZyaAjFSseYzjG1Og.png)
+
+## NoSQL use cases
 
 As you can see, making the choice between a SQL and NoSQL database is not always a straightforward decision. Each has its advantages and disadvantages. Making the right choice depends on your organization's specific data environment, along with your current needs and future goals. Many development teams actually use both within their cloud data architecture, sometimes even within the same application — deploying each to cover the areas they handle best.
 
@@ -74,6 +80,8 @@ So, what are the non-relational use cases? Here are several where NoSQL has been
 * Digital and media management
 
 Let's look at the first three NoSQL use cases more closely.
+
+## Fraud detection and identity authentication
 
 Protecting sensitive personal data and ensuring only real customers have access to applications is understandably a top priority. Of course, this is only heightened in areas such as financial services, banking, payments, and insurance.
 
@@ -95,6 +103,8 @@ Using [**DataStax Enterprise**](https://www.datastax.com/products/datastax-enter
 
 [**Read more about how ACI is battling fraud with a NoSQL solution**](https://www.datastax.com/enterprise-success/aci).
 
+## Inventory and catalog management
+
 NoSQL databases are known for their high availability and predictable, cost-effective, horizontal scalability. This makes them a great match for e-commerce companies with massive, growing online catalogs and loads of inventory to manage.
 
 These organizations need the flexibility to quickly update their product mix, without volume limits. And the worst thing imaginable for them would be to have their site or application go down on Black Friday or during the Christmas holiday season.
@@ -110,6 +120,8 @@ With their NoSQL database setup, Macy's can now:
 * Analyze its catalog and inventory in real time
 
 [**Learn more about Macy's move to NoSQL**](https://www.datastax.com/enterprise-success/macys).
+
+## Personalization, recommendations, and customer experience
 
 Providing a fast, personalized experience is no longer a differentiator. Today, it's table stakes. Customers expect a consistent, high-quality, tailored experience from your brand, 24/7, across all devices.
 
@@ -127,6 +139,8 @@ That's because NoSQL databases:
 By focusing on providing intuitive, superior online customer experiences from the start, [**Macquarie Bank**](https://www.macquarie.com.au/), an Australian financial services company, was able to move from no retail banking presence to a top contender in the digital banking space in less than two years. Their focus on truly understanding customer behavior and prioritizing personalization has been a key to their success. So, it's no surprise they use a NoSQL database (Apache Cassandra with DataStax Enterprise) to provide their customers with near real-time recommendations, interactions, and insights.
 
 [**Read more about how MacQuarie uses NoSQL to provide personalization for their customers**](https://www.datastax.com/enterprise-success/macquarie-bank).
+
+## Do you have a NoSQL use case?
 
 Hopefully, this post and the non-relational database examples above have provided some guidance about when using a NoSQL database would be the smart move. So, what's the next step if you determine your company does indeed have NoSQL use cases?
 

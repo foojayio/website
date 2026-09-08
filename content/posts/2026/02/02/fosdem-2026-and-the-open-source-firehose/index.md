@@ -14,6 +14,8 @@ related_posts:
 frozen: false
 ---
 
+## FOSDEM 2026: A Live Snapshot of Open Source
+
 *(a.k.a. "So… what did you do this weekend?")*
 
 I'm back from four days in Brussels and the uniquely exhausting experience that is FOSDEM. Mentally fried. Physically wrecked. Entirely glad I went.

@@ -25,6 +25,8 @@ Whether you prefer reading or watching, let's review how to start using the Open
 
 {{< youtube 8bpIXrz7xJw >}}
 
+## Budget Journey App
+
 Imagine you want to visit a city and have a specific budget in mind. How should you spend the money and make your trip memorable? This is an excellent question to delegate to the OpenAI engine.
 
 Let's help users get the most out of their trips by building a simple Java application called [BudgetJourney](https://github.com/YugabyteDB-Samples/budget-journey-gpt "BudgetJourney"). The app can suggest multiple points of interest within a city, tailored to fit specific budget constraints.
@@ -38,6 +40,8 @@ The architecture of the BudgetJourney app looks as follows:
 4. Otherwise, Spring Boot connects to the OpenAI APIs to get recommendations from the neural network. The response is stored in YugabyteDB for future reference and sent back to the user.
 
 Now, let's see how the app communicates with the Open AI engine (step 4) and how using the database (step 3) makes the solution scalable and cost-effective.
+
+## OpenAI Java Library
 
 The OpenAI engine can be queried via the HTTP API. You need to create an account, get your token (i.e., API key) and use that token while sending requests to one of the OpenAI models.
 
@@ -65,6 +69,8 @@ OpenAiService openAiService = new OpenAiService(
 ```
 
   Easy! Next, let's see how you can work with the GPT-3.5 model via the `OpenAiService` instance.
+
+## Sending Prompts to GPT-3.5 Model
 
 You communicate with the OpenAI models by sending text [prompts](https://platform.openai.com/docs/introduction/prompts "prompts") that tell what you expect a model to do. The model behaves best when your instructions are clear and include examples.
 
@@ -154,6 +160,8 @@ This JSON is then converted into a list of different points of interest. It is t
 
 **NOTE:** The GPT-3.5 model was trained on the Sep 2021 data set. Therefore, it can't provide 100% accurate and relevant trip recommendations. However, this inaccuracy can be improved with the help of OpenAI plugins that give models access to real-time data. For instance, once the [Expedia plugin for OpenAI](https://openai.com/blog/chatgpt-plugins "Expedia plugin for OpenAI") becomes publicly available as an API, this will let you improve this BudgetJourney app further.
 
+## Scaling With a Database
+
 As you can see, it's straightforward to integrate the neural network into your Java applications and communicate with it in a way similar to other 3rd party APIs. You can also tune the API behavior, such as adding a desired output format.
 
 But, this is still a 3rd party API that charges you for every request. The more prompts you send and the longer they are, the more you pay. Nothing comes for free.
@@ -208,5 +216,7 @@ public class CityTrip {
 ```
 
 So, all you need to do is to make a call to the database first, then revert to the OpenAI API if relevant suggestions are not yet available in the database. As your application increases in popularity, more and more local recommendations will be available, making this approach even more cost-effective over time.
+
+## Wrapping Up
 
 A ChatGPT web-based chatbot is an excellent way to demonstrate the OpenAI engine's capabilities. Explore the engine's powerful models and start building new types of Java applications. Just make sure you do it in a scalable way!

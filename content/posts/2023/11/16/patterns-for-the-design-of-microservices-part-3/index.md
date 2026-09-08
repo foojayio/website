@@ -30,6 +30,8 @@ This blog post will cover the subsequent design patterns.
 
 Microservice Architecture Patterns
 
+## Observability Patterns
+
 Undoubtedly, the logging mechanism benefits troubleshooting issues that arise when executing operations or transactions on multiple deployed microservices.
 
 We can further categorize the observability patterns into six distinct patterns.
@@ -97,6 +99,8 @@ In the microservice architecture, a service may be incapable of processing a req
 
 In the Spring Boot framework, we can validate the application's health by utilizing the **spring-boot-starter-actuator** dependency. The [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints) module creates an /health endpoint, which captures various metrics that aid developers in regularly monitoring the application.
 
+## Cross-cutting Concern Patterns
+
 We can further categorize the cross-cutting concern patterns into four distinct patterns.
 
 * External Configuration
@@ -157,5 +161,7 @@ Customers are already utilizing the current and operational application, and thi
 ### Green Deployment
 
 This is the updated version of your application that you desire to deploy and evaluate.
+
+## Reference
 
 <https://microservices.io/>

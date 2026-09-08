@@ -21,7 +21,11 @@ frozen: false
 
 The [K8ssandra](https://k8ssandra.io/) team is pleased to announce the release of [Reaper 3.1](http://cassandra-reaper.io/). Let's dive into the features and improvements that 3.0 recently introduced (along with some notable removals) and how the newest update to 3.1 builds on that.
 
+## JDK11 support
+
 Starting with 3.1.0, Reaper can now compile and run with jdk11. Note that jdk8 is still supported at runtime.
+
+## Storage backends
 
 Over the years, we regularly discussed dropping support for Postgres and H2 with the [The Last Pickle](https://thelastpickle.com/reaper.html) (TLP) team, now part of [DataStax](https://www.datastax.com/company), the organization leading the open-source development of Reaper. Despite our lack of expertise in Postgres, the effort required to maintain support for these storage backends was moderate as long as Reaper's architecture was simple. However, complexity grew with more deployment options, culminating with the addition of the sidecar mode.
 
@@ -32,6 +36,8 @@ In order to allow building new features faster, while providing a consistent exp
 [Apache Cassandra](https://cassandra.apache.org/_/index.html) and the managed [DataStax Astra DB](https://astra.dev/3xWMrbx) are now the only production storage backends for Reaper. The free tier of Astra DB will be more than sufficient for most deployments.
 
 Reaper does not generally require high availability – even complete data loss has mild consequences. Where Astra is not an option, a single Cassandra server can be started on the instance that hosts Reaper, or an existing cluster can be used as a backend data store.
+
+## Adaptive Repairs and Schedules
 
 One of the pain points we observed when people start using Reaper is understanding the segment orchestration and knowing how the default timeout impacts the execution of repairs.
 
@@ -59,6 +65,8 @@ The rules are the following:
 
 This feature is disabled by default and is configurable on a per schedule basis. The timeout can now be set differently for each schedule, from the UI or the REST API, instead of having to change the Reaper config file and restart the process.
 
+## Incremental Repair Triggers
+
 As we celebrate the long awaited [improvements in incremental repairs](https://thelastpickle.com/blog/2018/09/10/incremental-repair-improvements-in-cassandra-4.html) brought by Cassandra 4.0, it was time to embrace them with more appropriate triggers. One metric that incremental repair makes available is the percentage of repaired data per table. When running against too much unrepaired data, incremental repair can put a lot of pressure on a cluster due to the heavy anti-compaction process.
 
 The best practice is to run it on a regular basis so that the amount of unrepaired data is kept low. Since your throughput may vary from one table/keyspace to the other, it can be challenging to set the right interval for your incremental repair schedules.
@@ -70,10 +78,14 @@ Those triggers are complementary to the interval in days, which could still be n
 
 These new features will allow you to securely optimize tombstone deletions by enabling the `only_purge_repaired_tombstones `compaction subproperty in Cassandra, permitting it to reduce `gc_grace_seconds` [down to three hours](https://thelastpickle.com/blog/2018/03/21/hinted-handoff-gc-grace-demystified.html) without the concern that deleted data will reappear.
 
+## Schedules can be edited
+
 That may sound like an obvious feature but previous versions of Reaper didn't allow for editing of an existing schedule. This led to an annoying procedure where you had to delete the schedule (which isn't made easy by Reaper either) and recreate it with the new settings.
 
 Version 3.0 fixed that embarrassing situation and adds an edit button to schedules, which allows you to change the mutable settings of schedules:
 ![](reaper-3_0-edit-schedule-1024x847.png "Edit Repair Schedule") Figure 3: Reaper now has the ability to edit the settings for scheduled actions.
+
+## CVE fixes
 
 With the release of Reaper 3.1.0, we were able to fix more than 80 reported CVEs by upgrading several dependencies to more current versions:
 
@@ -87,6 +99,8 @@ With the release of Reaper 3.1.0, we were able to fix more than 80 reported CVEs
 
 This allows Reaper to be more secure and future proof as it now enables us to migrate from the deprecated [dropwizard-cassandra](https://github.com/composable-systems/dropwizard-cassandra) bundle to the [officially supported one](https://github.com/dropwizard/dropwizard-cassandra), along with upgrading the Cassandra driver to the latest 4.x.
 
+## More improvements
+
 In order to protect clusters from running mixed incremental and full repairs in older versions of Cassandra, Reaper would disallow the creation of an incremental repair run/schedule if a full repair had been created on the same set of tables in the past (and vice versa).
 
 Now that incremental repair is safe for production use, it is necessary to allow such mixed repair types. In case of conflict, Reaper 3.0 displays a pop-up informing you and allowing you to force create the schedule/run:
@@ -98,11 +112,15 @@ We've also added a special "schema migration mode" for Reaper, which will exit a
 
 There are many other improvements and we invite all users to check the changelog in the GitHub repo.
 
+## Upgrade Now
+
 We encourage all Reaper users to upgrade to 3.1.0, while recommending users to carefully prepare their migration out of Postgres or H2. Note that there is no export/import feature and schedules will need to be recreated after the migration.
 
 All instructions to download, install, configure, and use Reaper 3.1.0 are available on the [Reaper website](https://cassandra-reaper.io/docs/download/).
 
 *Let us know what you think of Reaper 3.1 by joining us on the* [*K8ssandra Discord*](https://discord.com/invite/qP5tAt6Uwt)*or* [*K8ssandra Forum*](https://forum.k8ssandra.io/)*today. For exclusive posts on all things data, follow [DataStax on Medium](https://datastax.medium.com/).*
+
+## Resources
 
 1. [Reaper](http://cassandra-reaper.io/)
 2. [Reaper Documentation: Downloads and Installation](http://cassandra-reaper.io/docs/download/)

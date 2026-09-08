@@ -23,6 +23,8 @@ In this tutorial, following on from [viewing dependencies](https://foojay.io/tod
 
 We'll look at different ways to add dependencies to your project, and how to add, upgrade and remove dependencies using Package Search.
 
+## Add dependencies
+
 There are several ways to add new dependencies to your project.
 
 ## From the build file using copy-paste
@@ -167,6 +169,8 @@ When we click **Add** to the right of the Ktor dependency, we see that Ktor is a
 
 [![Add Ktor](add-ktor.jpg "Add Ktor")](add-ktor.jpg "Add Ktor")
 
+## Upgrade dependencies
+
 We will also need to keep our dependencies up to date.
 
 To show you how IntelliJ IDEA can help, we are using this extremely outdated project as an example.
@@ -203,6 +207,8 @@ Or, we can even upgrade all our dependencies at once, by clicking the **Upgrade 
 
 [![Upgrade all dependencies](upgrade-all.png "Upgrade all dependencies")](upgrade-all.png "Upgrade all dependencies")
 
+## Remove dependencies
+
 Finally, we can remove dependencies we no longer need. In the Dependencies tool window, let's remove jackson-databind from the Java module.
 
 We select the dependency we want to remove (jackson-databind) and in the Dependency details pane on the right, click the **More** button (three dots) and select **Remove**.
@@ -210,6 +216,8 @@ We select the dependency we want to remove (jackson-databind) and in the Depende
 [![Remove Dependency](remove-dependency.png "Remove Dependency")](remove-dependency.png "Remove Dependency")
 
 We will see that the dependency is removed from the pom.xml and the dependency list. To remove a dependency from the whole project, select **All Modules** on the left.
+
+## Summary and Shortcuts
 
 Now we know the different ways in which we can view our project's dependencies in IntelliJ IDEA, and the different focus for each view.
 

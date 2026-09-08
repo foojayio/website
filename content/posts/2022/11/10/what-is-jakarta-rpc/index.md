@@ -30,6 +30,8 @@ At Payara, we are Strategic Members of the [Jakarta EE](https://jakarta.ee/) Wor
 
 In this blog, I'll help you understand this specification in this very early stage - and how you can get involved!
 
+## What Is gRPC?
+
 gRPC is an open source Remote Procedure Call framework; an alternative to [REST.](https://blog.payara.fish/getting-started-with-jakarta-ee-9-how-to-create-a-rest-api-with-jakarta-ee-9)
 
 It has become a de-facto standard for inter-service communication, widely adopted by enterprises, startups, and open source projects. It gives to the developer the option to implement services with the following advantages. You can:
@@ -40,6 +42,8 @@ It has become a de-facto standard for inter-service communication, widely adopte
 * Enable bidirectional streaming out-of-the-box.
 
 As part of the wide acceptance of the gRPC framework, vendors have been providing their own implementations. Payara created [its own gRPC extension](https://docs.payara.fish/community/docs/documentation/extensions/grpc/README.html#what-is-grpc) in response to a customer request; you can see an example [here](https://blog.payara.fish/grpc-example-in-payara-server).
+
+## Jakarta RPC: The Story So Far
 
 #### Background
 
@@ -73,6 +77,8 @@ So, by enabling and giving more options for the serialization format and removin
 
 The initiative is still new, but we are working on releasing the first version for the Jakarta EE ecosystem.
 
+## How Is Payara Involved?
+
 As members of the Jakarta EE Working Group, we are actively review initiatives and of course Jakarta-RPC is one of them. As members of the project group, we are going to work on the following tasks:
 
 * Making code contributions.
@@ -81,6 +87,8 @@ As members of the Jakarta EE Working Group, we are actively review initiatives a
 * Creating documentation.
 * Documentation review.
 * Participating in analysis and design meetings.
+
+## Join Us!
 
 Follow the the following links to find out more information about the project and how to contribute:
 

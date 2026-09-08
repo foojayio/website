@@ -53,6 +53,8 @@ For instance, we shall employ the following recipes:
 
 We can make a spring boot app and use the recipes for moving and fixing issues with static analysis.
 
+## Migrate SpringBoot Application with OpenRewrite
+
 The primary modifications entailed in transitioning from Spring Boot 2.X to Spring Boot 3.X encompass the migration from Java 8/11 to Java 17 and the shift from the `javax` to the `jakarta` namespace.
 
 Consequently, our objective is to construct a Spring Boot 2.X application on Java 11, featuring an embedded Tomcat server, and to compose some poorly written code that alludes to classes from the `javax` namespace.

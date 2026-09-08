@@ -27,9 +27,13 @@ You know the drill. Someone opens a PR and half the review comments are about ta
 
 You can find the docs here: <https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter>
 
+## What Is It?
+
 The BoxLang Formatter is a built-in code formatting tool that ships with BoxLang. It enforces consistent style across `.bx`, `.bxs`, `.bxm`, `.cfm`, `.cfc`, and `.cfs` files — automatically.
 
 It's not a linter. It doesn't just complain. It *fixes* your code, or tells CI to fail when style drift sneaks in.
+
+## Getting Started in 60 Seconds
 
 If you have BoxLang installed, you already have the formatter. No extra install needed.
 
@@ -56,6 +60,8 @@ Multiple paths at once (v1.14+):
 ```java
 boxlang format --source commands,models,services
 ```
+
+## Configure Your Style
 
 The formatter works great out of the box with sensible defaults, but you can customize it with a `.bxformat.json` file in your project root.
 
@@ -84,6 +90,8 @@ This drops a starter config in your current directory. From there, tweak what yo
 
 You've got control over indentation, line length, brace style, struct/array formatting, operator style, SQL keyword casing, import sorting, and a lot more. Only override what you need — everything else uses sensible defaults.
 
+## Lock It Down in CI
+
 This is where it gets really useful. Run the formatter in check mode as a quality gate:
 
 ```java
@@ -102,6 +110,8 @@ Drop that into your CI pipeline and pull requests with messy formatting simply w
 * PRs that fail must reformat before merge
 
 No more style debates in code review. The formatter wins.
+
+## Format on Save in VS Code
 
 If you want formatting to happen automatically as you work, the BoxLang LSP supports experimental format-on-save.
 
@@ -138,6 +148,8 @@ If you want formatting to happen automatically as you work, the BoxLang LSP supp
 
 Save a `.bx` file and it just formats. Local fast feedback, CI enforcement as the source of truth.
 
+## Coming from cfformat?
+
 Already using cfformat in your project? Migration is a two-step process, and your existing style intent is preserved.
 
 **Step 1 - Convert your config:**
@@ -156,6 +168,8 @@ boxlang format --check --source ./
 
 See what (if anything) drifted. Run the formatter once in a cleanup commit, then turn on `--check` in CI and you're done.
 
+## A Few Other Handy Options
+
 **Preview without rewriting files** — pipe output to stdout instead:
 
 ```java
@@ -173,6 +187,8 @@ boxlang format --source . --excludes generated,vendor
 ```java
 boxlang format --config ./config/.bxformat.json --source ./
 ```
+
+## The Bottom Line
 
 Stop spending review cycles on style. The formatter handles it — in your editor, in your pre-commit hook, in CI. One command, consistent output, zero arguments about semicolons ever again.
 

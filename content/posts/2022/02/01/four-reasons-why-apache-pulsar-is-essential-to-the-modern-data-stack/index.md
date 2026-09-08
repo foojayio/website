@@ -37,6 +37,8 @@ There is no current messaging solution that satisfies these requirements, so we'
 
 Apache Pulsar solves all of these problems to our satisfaction. Let's look at each of these in more detail.
 
+## Geo-replication
+
 Cassandra supports synchronous and asynchronous replication within or across data centers. Most often, Cassandra is configured for synchronous replication within a region, and asynchronous replication across regions. This enables [**Cassandra users like Netflix**](https://www.slideshare.net/VinayKumarChella/cassandra-serving-netflix-scale) to serve customers everywhere with local latency, to comply with data sovereignty regulations, and to survive infrastructure failures. (When AWS rebooted 218 Cassandra nodes to patch a security vulnerability, [**Netflix experienced zero downtime**](https://www.infoq.com/news/2014/10/netflix-cassandra/).)
 
 Kafka is designed to run in a single region and does not support cross-datacenter replication. Clients outside the region where Kafka is deployed must simply tolerate the increased latency. There are several projects that attempt to add cross-datacenter replication to Kafka at the client level, but these are necessarily difficult to operate and prone to failure.
@@ -45,6 +47,8 @@ Like Cassandra, Pulsar builds geo-replication into the core server. Also like Ca
 ![](0_Dbqqk2AVJgQCw6B4.png)
 
 Splunk wrote up a good overview of Pulsar geo-replication in two parts: [**one**](https://www.splunk.com/en_us/blog/it/geo-replication-in-apache-pulsar-part-1-concepts-and-features.html), [**two**](https://www.splunk.com/en_us/blog/devops/geo-replication-in-apache-pulsar-part-2-patterns-and-practices.html).
+
+## Scaling
 
 In Kafka, the unit of storage is a segment file, but the unit of replication is all the segment files in a partition. Each partition is owned by a single leader broker, which replicates to several followers. So when you need to add capacity to your Kafka cluster, some partitions have to be copied to the new node before it can participate in reducing the load on the existing nodes.
 ![](0_JYM19WUDoUpYM6oj.png)
@@ -55,6 +59,8 @@ Pulsar adds a layer of indirection. (Pulsar also splits apart compute and storag
 ![](0_JhvLbXvXI016-V3H.png)
 
 See [**Jack Vanlightly's blog**](https://jack-vanlightly.com/blog/2018/10/2/understanding-how-apache-pulsar-works) for an in-depth explanation of Pulsar's architecture and storage model.
+
+## Multi-tenancy
 
 Multi-tenant infrastructure can be shared across multiple users and organizations while isolating them from each other. The activities of one tenant should not be able to affect the security or the SLAs of other tenants.
 
@@ -80,6 +86,8 @@ Pulsar supports the pub/sub model, but it also supports the queuing model, where
 ![](0_incy3S0DEesRblfH.png)
 
 This (and queuing-oriented features like "dead letter queue" and negative acknowledgment with redelivery) means that Pulsar can often replace AMQP and JMS use cases as well as Kafka-style pub/sub, offering a further opportunity for cost reduction to enterprises adopting Pulsar.
+
+## Learn more
 
 Pulsar's architecture gives it important advantages over Kafka in geo-replication, scaling, multi-tenancy, and queuing. DataStax joined the Pulsar community earlier this year when we [acquired Kesque](https://www.datastax.com/press-release/datastax-delivers-scale-out-enterprise-event-streaming-modern-data-apps) and open-sourced the management and monitoring tools built by the Kesque team in our [Luna Streaming](https://www.datastax.com/products/luna-streaming) distribution of Pulsar.
 

@@ -30,6 +30,8 @@ So, if a particular value has been written and deleted several times, there may 
 
 After a tombstone has been in the system for a certain period of time, which is determined by a table's `gc_grace_seconds` (10 days is the default), it is usually removed during the next compaction cycle on that table.
 
+## Avoid creating tombstones
+
 Of course, the best way to deal with tombstones is to not create them in the first place. There are several ways to accomplish this, and most of them happen in the data model.
 
 ## No DELETEs
@@ -39,6 +41,8 @@ The simplest way to avoid tombstones is to never do the one operation guaranteed
 ## No writing NULL values
 
 Writing a NULL value into Cassandra creates a tombstone. Having a NULL in a pre-built query variable is probably the most common way that tombstones are inadvertently created in the system. This used to be a bigger problem until the DataStax Java Driver "unset" all NULL values by default in a prepared statement with its driver version 3 and CQL protocol (sometimes referred to as the "native binary" protocol) version 4. With the most recent versions of the [DataStax Java drivers](https://docs.datastax.com/en/developer/java-driver/index.html%20rel=), this stands as a good reminder to always write with [prepared statements](https://docs.datastax.com/en/developer/java-driver/3.0/manual/statements/prepared/).
+
+## Mitigating the impact of tombstones
 
 In some use cases, delete operations and their resulting tombstones are unavoidable. The best path forward, in this case, is to adjust the data model and usage pattern so that the fewest possible tombstones are returned.
 
@@ -71,6 +75,8 @@ The [TimeWindowCompactionStrategy](https://thelastpickle.com/blog/2016/12/08/TWC
 A popular alternative to `SizeTieredCompactionStrategy` is `LeveledCompactionStrategy`. The `LeveledCompactionStrategy` makes sense when read/write patterns are performing reads much more often. Its design is built around providing a very high probability that a read should happen from a single SSTable file. Without getting too deep into the nuances of `LeveledCompactionStrategy`, it tends to remove tombstones easier as the deleted data works its way up through the levels.
 > Note: The decision to change the compaction strategy of a table is not to be taken lightly. It's not something that will mitigate tombstones by itself. The [compaction strategies](https://cassandra.apache.org/doc/latest/cassandra/operating/compaction/index.html) mentioned above were designed for specific use cases and access patterns, and not adhering to those patterns may cause additional problems.
 
+## Removing tombstones
+
 So let's say that you're at a point where a table has a large number of tombstones. Queries are noticeably slowing down and an occasional `TombstoneOverwhelmingException` is being returned. At this point, what can you do?
 
 ## `Compaction options`
@@ -97,9 +103,13 @@ One obvious way to cycle through tombstones faster is to lower the table's value
 Be **very careful** with this setting. The idea with a 10 day waiting period is that it coincides with the recommendation of running repair operations on a weekly basis. This gives the tombstones ample time to replicate to the nodes responsible for the specific, deleted replicas. If this period is set too low, it is quite possible that not all replicas will receive the tombstone. This is a [common cause of deleted data](https://thelastpickle.com/blog/2016/07/27/about-deletes-and-tombstones.html) (Rodriguez, 2016) "ghosting" it's way back into a result set.
 > Note: Never set `gc_grace_seconds` to zero! There is no other way to prevent compaction from cleaning up tombstones before they have had time to properly replicate.
 
+## Summary
+
 Effectively dealing with tombstones requires upfront planning and an understanding of (both) the business use case and how Cassandra handles deletes internally. After all, the best way to not be affected by tombstone issues is to not create them in the first place.
 
 Removing problematic tombstones manually can be a challenging task, replete with nuances and without guarantees of success. The organic running of the compaction process is the best way to remove expired data (including tombstones). If possible, letting Cassandra handle this on its own is always the best plan.
+
+## Key Takeaways
 
 * Be sure that the app code is not writing NULL values.
 * Clustering a table by timestamp (in descending order) makes it easier to avoid querying expired or TTL'd data.
@@ -108,6 +118,8 @@ Removing problematic tombstones manually can be a challenging task, replete with
 * Try to avoid manually running compaction tasks.
 
 *Follow the* [*DataStax Tech Blog*](https://datastax.medium.com/)*for more developer stories. Check out our* [*YouTube*](https://www.youtube.com/channel/UCqA6zOSMpQ55vvguq4Y0jAg)*channel for tutorials and here for DataStax Developers on* [*Twitter*](https://twitter.com/DataStaxDevs)*for the latest news about our developer community.*
+
+## References
 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/38tAKzB) free plan for the fastest setup.
 

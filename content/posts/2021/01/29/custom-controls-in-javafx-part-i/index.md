@@ -16,6 +16,8 @@ related_posts:
 frozen: false
 ---
 
+## Before we start...
+
 JavaFX is now already some years out in the wild and even if it is not as widely used as web applications, it has its place. It mainly is used in internal applications only, which leads to the impression that nobody is using it.
 
 As long as you only would like to create a simple form-based application, the available UI controls in JavaFX will work totally fine. You need to take a look at how to style the controls using CSS, but from the coding point of view it's pretty straight forward.

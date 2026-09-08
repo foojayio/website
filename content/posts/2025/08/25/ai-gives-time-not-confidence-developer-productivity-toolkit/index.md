@@ -28,6 +28,8 @@ This article is all about cutting through the buzz and looking at how AI-powered
 * **Increasing Code Quality and Security**
 * **Improving Code Review**
 
+## Using AI to Understand Complex Tasks
+
 Okay, first up: wrapping your head around the job at hand. You know those moments where you need to implement a feature based on requirements that feel a bit… fuzzy. Traditionally, this means lots of reading, maybe drawing diagrams, and asking clarifying questions.
 
 Here's where AI can lend a hand. Think of tools like `GitHub Copilot, Windsurf and Cursor ,`among others, as smart summarizers and brainstorming partners.
@@ -46,7 +48,7 @@ Now, what about pointing the AI at a specific issue ticket and your actual codeb
 * **AI Tool integration**: MCP servers (more details below) connect your AI assistant directly to servers in order to add capabilities to the Agent. In this case it's the Github API that will give read or write information regarding the current repository issues.
 
 As an example, you can use Github Code Spaces [with Copilot Agent Mode](https://github.blog/changelog/2025-04-11-vscode-copilot-agent-mode-in-codespaces/) , and it will give us an explanation of the ticket and the changes to do.
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-635765cc.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-635765cc.jpg)
+[![Image description](xwmiiobapci559gq7ddv-635765cc.jpg)](xwmiiobapci559gq7ddv-635765cc.jpg)
 
 **Important Caveats:**
 
@@ -55,13 +57,15 @@ As an example, you can use Github Code Spaces [with Copilot Agent Mode](https://
 
 Using AI this way is about accelerating the initial investigation phase. It helps you form a hypothesis about *where* to look and *what* might be involved so you can jump into the interesting design and coding parts sooner.
 
+## Accelerating Code Creation
+
 Okay, let's talk about actually producing Java code. This is where tools like `GitHub Copilot` in `VS Code` really shine. Think of them as having a pair programmer who types *really* fast and knows a ton of standard library calls, common patterns and the company's codebase.
 
 * **Killing Boilerplate:** We all know Java can be a bit verbose sometimes. Need to write constructors, accessors, `equals()`, `hashCode()` for a POJO? These tools can generate them based on the fields you've declared.
 * **Generating Snippets and Methods:** Write a clear method signature and the AI will generate a surprisingly decent implementation. You can use different methods to generate code:.
   * **Inline chats** Ask the assistant to generate `"Java method to fetch data from API endpoint XYZ and parse the JSON response"` and wait a bit. The AI might suggest the entire method body using `HttpClient` or `RestTemplate`.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-dc47bc3c.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-dc47bc3c.jpg)
+[![Image description](1oou6ymc7jo5n6egojjf-dc47bc3c.jpg)](1oou6ymc7jo5n6egojjf-dc47bc3c.jpg)
 
 * **Ghost text** : Start typing a typical Spring Boot controller method like `@GetMapping("/products/{id}") public ResponseEntity<Product> getProductById` ... The AI will likely suggest the code to call a service and return the response.
 
@@ -73,7 +77,7 @@ These tools use the **context of your project** to tailor suggestions. But how d
 * **Chat \& Explicit Prompts:** Mentioning specific class/method names from your project or pasting relevant snippets guides the AI. For example: *"Using our `CustomerService` class, generate the boilerplate code for a new method `findCustomerByEmail(String email)` that calls the `customerRepository`."*
 * **Codebase Awareness:** Specialized tools using Agents can be set up to index your entire codebase. This allows for much deeper context, potentially leading to suggestions that understand your project's specific patterns even if the relevant files aren't currently open.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fd7012e7.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-fd7012e7.png)
+[![Image description](y0zb3f80h0vgnr5vf9vz-fd7012e7.png)](y0zb3f80h0vgnr5vf9vz-fd7012e7.png)
 
 List of context elements to add in a chat
 
@@ -97,7 +101,7 @@ It takes a little getting used to, and you absolutely ***must*** review the gene
 **Integrating Specialized Agents and Reasoning in Agentic IDEs:** Agentic IDEs can significantly enhance code generation by employing various specialized agents, each tailored for specific tasks like API interaction, database querying, or UI component creation. Moreover, these IDEs can provide detailed reasoning behind the generated code, outlining the steps taken improving developer understanding and trust in the AI's output.
 
 In tools like *`VS Code with Github Copilot`* or *`Cursor`*, we can even tailor the behaviour of the agents when they generate code.
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-02027ac4.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-02027ac4.png)
+[![Image description](d16gjevpo423gmqu7ra7-02027ac4.png)](d16gjevpo423gmqu7ra7-02027ac4.png)
 
 Here we can specify to use the latest Java 24 features, or a specific version of Quarkus, or even which front end frameworks to use, among other particularities of your code.
 
@@ -110,10 +114,12 @@ For instance, using an MCP server connected to a database tool, the assistant ca
 There are several places where we can get MCP servers for specific tasks and with a very easy installation process : <https://mcpservers.org/> , <https://mcpmarket.com/>, <https://mcp.so/> , etc.
 
 This is an example of installation of a Docker MCP server implementing the GitHub tools, that will allow our assistant to connect to our GitHub repository and get issues, branches, PRs, etc.
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c0212e7d.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c0212e7d.png)
+[![Image description](t61rxfndt7g65xyyk6ob-c0212e7d.png)](t61rxfndt7g65xyyk6ob-c0212e7d.png)
 
 These MCP servers expose tools to be used by the agent. In this case the Github MCP Server share 36 tools :
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-62811c72.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-62811c72.png)
+[![Image description](j1khjqdbiw4benug1ae0-62811c72.png)](j1khjqdbiw4benug1ae0-62811c72.png)
+
+## Streamlining Cloud Deployment
 
 Okay, so your Java code is looking good. Now, how about actually shipping it? Getting applications deployed to the cloud involves writing a *lot* of configuration – Dockerfiles to containerize your app, Kubernetes YAML for orchestration, and CI/CD pipeline definitions (`GitHub Actions`, `GitLab CI`, etc.).
 
@@ -128,7 +134,7 @@ This is another area where AI assistants can save you significant time and effor
 **Agentic MCP AI is your friend:** Getting the logs or the configuration for running apps in your cluster can be crucial to produce more aligned code. For instance, getting the CRDs in your cluster can help you create a better Kubernetes operator that reacts to changes on them.
 
 You can rely on the multiple MCP servers with your Agentic AI assistant to consider that information when you are chatting with it. [Kubernetes MCP server](https://github.com/manusa/kubernetes-mcp-server) is a clear example of this and it gives you 15 tools to interact with your K8s cluster.
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-89609a67.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-89609a67.jpg)
+[![Image description](fesa1qjyfk42sibu1u7r-89609a67.jpg)](fesa1qjyfk42sibu1u7r-89609a67.jpg)
 
 VS Code with Github Copilot using Kubernetes MCP to interact with a local cluster
 
@@ -154,6 +160,8 @@ Beyond manual review, remember that specialized **static analysis tools can also
 
 Integrating these IaC scanners into your CI/CD pipeline adds an essential automated check. It complements manual reviews and helps catch issues in both human-written *and* AI-generated configurations *before* they potentially impact your deployed environment.
 
+## Creating Effective Tests
+
 Ah, testing. We all know it's crucial for catching regressions, ensuring correctness, and enabling confident refactoring. But it can also be time-consuming. Good news! AI can lend a hand here, helping you generate tests faster.
 
 * **Generating Unit Test Scaffolding:** You can ask to generate tests to your AI assistant on a Java class or method. The AI will attempt to create a test class (e.g., using JUnit 5) with basic test methods covering the public methods of your source class.
@@ -161,10 +169,10 @@ Ah, testing. We all know it's crucial for catching regressions, ensuring correct
 * **Creating Mock Objects:** Setting up mocks can be tedious. AI assistants can often generate the necessary `@Mock` annotations, injection points (`@InjectMocks`), and `when(...).thenReturn(...)` statements based on how your class interacts with its dependencies. For example: *"Generate a JUnit test for this `OrderService` method, mocking the `ProductRepository`"*
 
 Copilot chat asking it to generate the test methods
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-b9cfb119.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-b9cfb119.jpg)
+[![Image description](vhr6k7k2vst9u1cxqlnm-b9cfb119.jpg)](vhr6k7k2vst9u1cxqlnm-b9cfb119.jpg)
 
 Tests generated by Copilot for this method
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-6d0bcc27.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-6d0bcc27.png)
+[![Image description](fypfw3639irjd6a4ceun-6d0bcc27.png)](fypfw3639irjd6a4ceun-6d0bcc27.png)
 
 **⚠️ HUGE WARNING: Review Generated Tests Like Crazy! ⚠️**
 
@@ -174,7 +182,7 @@ This is possibly even more critical than reviewing generated application code: *
 
 * **AI Doesn't Understand Intent:** AI tests the code *as it's written* . It doesn't know the *business requirements* or the *intended behavior*. If your code has a bug, the AI might happily generate a test that confirms the buggy behavior!. In this case it doesn't make any sense to have a total tax of -1000 , and AI has tested that the test is really verifying what the code is doing, including the bug.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7fb1c1e3.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-7fb1c1e3.png)
+[![Image description](x1b191ybskalf6niaerx-7fb1c1e3.png)](x1b191ybskalf6niaerx-7fb1c1e3.png)
 
 * **Trivial and Meaningless Tests:** AI often generates tests for simple getters/setters or very basic logic that might not provide much value. It might miss the truly complex or critical paths.
 * **Incorrect Assertions:** The assertions generated might be wrong, incomplete, or nonsensical. Don't assume they are correct.
@@ -189,7 +197,7 @@ This is possibly even more critical than reviewing generated application code: *
 * **Don't Chase Coverage Blindly:** AI can quickly increase test coverage numbers, but coverage isn't the same as quality. A few meaningful tests are better than hundreds of trivial ones.
 * **Provide the right context:** including functional testing information, or feature requirements will help AI assistants to tailor the test to what it's supposed to be tested and not what it is written in the code. In this case we are asking to create the tests but considering the requirements specified in a github issue.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-101a6589.jpg)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-101a6589.jpg) [![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-212a920a.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-212a920a.png)
+[![Image description](h0r1h1w4wg7usbkpwqji-101a6589.jpg)](h0r1h1w4wg7usbkpwqji-101a6589.jpg) [![Image description](lb3lnc9f7bshzjxtajpi-212a920a.png)](lb3lnc9f7bshzjxtajpi-212a920a.png)
 
 **Don't Forget Static Analysis for Test Code:**
 
@@ -203,13 +211,15 @@ One more point on test quality: don't forget that **static analysis tools can al
 
 Running these analyzers on your test suites is another good practice, especially when incorporating AI-generated tests.
 
+## Improving Code Reviews
+
 Alright, let's talk about pull requests (PRs) and code reviews. They're super important for team health and code quality, but they can also be time-consuming and sometimes frustrating. Understand a massive PR, catching subtle issues and providing constructive feedback. And if you're the author, waiting for reviews and addressing comments takes time too.
 
 **How AI Helps Reviewers:**
 
 * **Quick Summaries:** Tools like `GitHub Copilot` can automatically generate summaries of the changes in a PR. This helps reviewers quickly grasp the purpose and scope of the changes before diving into the code details.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d2147212.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d2147212.png)
+[![Image description](xwvjw8eqlk26i4lx5su6-d2147212.png)](xwvjw8eqlk26i4lx5su6-d2147212.png)
 
 They can even interact with the PR using extensions in order to provide functionalities that are out of the scope of the LLM like creating Mermaid diagrams for the classes.
 
@@ -227,13 +237,15 @@ This is crucial: **AI is a code review *assistant*, not a replacement for human 
 
 * **Context is King:** AI often lacks the deep understanding of the project's history, overall architecture, business requirements, and long-term goals that experienced human reviewers bring. Add the proper context for each prompt. You can even guide AI answers with the Personal instructions directly in the Github Pull Request page.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d1c4aa41.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d1c4aa41.png)
+[![Image description](24d93kyk1yodjq1jyvie-d1c4aa41.png)](24d93kyk1yodjq1jyvie-d1c4aa41.png)
 
 * **Design \& Logic Still Need Humans:** AI is generally poor at evaluating the *appropriateness* of a design choice or the correctness of complex business logic. That requires human critical thinking.
 * **Knowledge Sharing:** Code reviews are vital for team learning and knowledge sharing – something AI assistance doesn't replace.
 * **Evaluate AI Output:** Reviewers need to critically assess any summaries or issues flagged by AI.
 
 Think of AI in code review as handling the first-pass checks, summarizing changes, and assisting with implementation details. This frees up valuable human reviewer time to focus on the deeper aspects of code quality, design, and correctness.
+
+## Increasing Code Quality and Security
 
 Writing high-quality, secure Java code is crucial, going beyond just making things work. It's vital to understand AI limitations, especially regarding reliability. Let's explore how AI can help refine code and how traditional tools remain essential for verification.
 
@@ -246,7 +258,7 @@ Where AI *can* be a valuable assistant is in helping *you*, the developer, under
 * **Learning Best Practices:** Use AI to ask questions about secure coding practices (`"What are common pitfalls with Java serialization?"`) .
 
 **⚠️ THE GIANT RED FLAG: AI IS NOT RELIABLE FOR ISSUE DETECTION ⚠️**
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d7b2bedb.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-d7b2bedb.png)
+[![Image description](9y1fj6ey71lony7m4yg2-d7b2bedb.png)](9y1fj6ey71lony7m4yg2-d7b2bedb.png)
 
 <https://dl.acm.org/doi/pdf/10.1145/3558489.3559072>
 
@@ -263,17 +275,17 @@ Because AI cannot be trusted for reliable issue detection, you **must** use dedi
 * **Best practices:**
   * Use tooling as soon as possible in your SDLC. Incorporate these SAST tools in the IDE to analyze the quality of your code at the same time you are introducing new changes.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-59e9523f.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-59e9523f.png)
+[![Image description](7j0nqcmad39jj7wc3umu-59e9523f.png)](7j0nqcmad39jj7wc3umu-59e9523f.png)
 
 SonarQube IDE view with an issue and its explanation
 
 * Connect your CI/CD pipeline with a Quality Gate tool in order to ensure no bad code is going to be merged to your main branch.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-08df74d7.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-08df74d7.png)
+[![Image description](hvfup7i13i8gfv4jxz0t-08df74d7.png)](hvfup7i13i8gfv4jxz0t-08df74d7.png)
 
 * Use Quality Gate messages in your Pull Requests through PR decoration.
 
-[![Image description](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c340a674.png)](https-3A-2F-2Fdev-to-uploads.s3.amazonaw-c340a674.png)
+[![Image description](6tlhpzwolf8lmsa54n40-c340a674.png)](6tlhpzwolf8lmsa54n40-c340a674.png)
 
 **Essential Supporting Pillars: Testing and Reviews using Human skills**
 
@@ -284,6 +296,8 @@ Alongside reliable SAST, robust engineering practices remain critical:
 * **Pair Programming:** This practice inherently includes collaborative review and discussion, promoting higher quality code, especially when integrating any new tool or technique like AI assistance.
 
 **In Summary:** Leverage AI assistants carefully for tasks where they excel – helping you understand, refactor, and learn. But for the critical task of identifying bugs and security vulnerabilities, **trust deterministic SAST tools.** Combine this with rigorous testing and thorough code reviews to build truly high-quality, secure Java applications.
+
+## Conclusion
 
 So, what's the bottom line here? Is AI going to take over Java development? Not anytime soon. But is it becoming a genuinely useful, practical tool that can make our lives as developers easier and more productive? Absolutely.
 

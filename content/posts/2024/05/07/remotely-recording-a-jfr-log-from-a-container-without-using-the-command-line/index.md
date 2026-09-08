@@ -25,6 +25,8 @@ But what if you don't have access to the command line or terminal directly on th
 
 Don't worry. In this quick guide, you can learn how to do just that with a little configuration using JVM's JMX connector and Azul Mission Control.
 
+## Setting up JMX on your JVM
+
 Before you can access your JVM outside of the command line / terminal, you must set up your JVM to be discoverable and accessible over remote connections. You can accomplish this simply by enabling the JVM's JMX connector.
 
 Configure your Java application with the following VM parameters:

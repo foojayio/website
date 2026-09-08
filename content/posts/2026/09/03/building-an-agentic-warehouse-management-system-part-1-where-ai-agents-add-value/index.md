@@ -28,6 +28,8 @@ With this project, I am not trying to build a complete WMS. Instead, I want to u
 
 In this first part, we will introduce the WMS scenario and identify where an AI agent can help. In **[Part 2](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-2-java-and-spring-ai/)** , we will define and connect the agent using Java and Spring AI. Finally, in **[Part 3](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions/)**, we will execute the plan, gather context, make the replenishment decision, and act when necessary.
 
+## Try the application
+
 A live version of the Agentic WMS is available [here](https://agentic-wms-39763860545.southamerica-west1.run.app/).
 
 You can start with the Overview page, which walks through the main WMS flow and shows how to interact with the application. The application is built with:
@@ -39,6 +41,8 @@ You can start with the Overview page, which walks through the main WMS flow and 
 * MongoDB for operational data, agent runs, and vector search
 
 The complete source code is available [here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
+
+## The Warehouse Management System
 
 A Warehouse Management System, or simply WMS, is a software system used to manage and control the movement of products inside a warehouse. It typically handles processes such as receiving goods, tracking inventory, shipping products, replenishment, and many others. A warehouse may store products owned by the company operating it, but it may also store products for other companies. In this article, we will call these companies **depositors**:  
 ![](p1-00_wms-flow-1024x732.jpg)
@@ -148,6 +152,8 @@ These are deterministic rules, and they work well when the decision can be clear
 
 At some point, the challenge is no longer just adding another condition.
 
+## When the decision becomes contextual
+
 The problem becomes more interesting when deciding what to do requires more than evaluating a predefined condition. Let's go back to the same example.
 
 Amazon sent 1,500 units of BR01, and the warehouse has been shipping 300 units per day. After three days, only 600 units remain.
@@ -188,6 +194,8 @@ It becomes:
 
 That is the role of the agent in our WMS: gather the relevant information, understand the current situation, decide whether replenishment is necessary, and determine what should happen next, while keeping well-defined business operations in deterministic code.
 
+## Where does the agent fit?
+
 In our application, the agent enters the flow after an outbound operation is successfully completed. At that point, the inventory has already been updated, and the agent receives a goal:
 
 *Determine whether this outbound operation created a need for replenishment.*
@@ -223,6 +231,8 @@ Once the outbound invoice is completed, the OUTBOUND_INVOICE_COMPLETED event tri
 2. **Analyze:** The agent uses read-only tools to inspect information such as inventory, stock movements, pending replenishments, and depositor policies.
 3. **Decide:** Using the information collected, the agent determines whether replenishment is actually necessary.
 4. **Act:** If action is required, the agent can use controlled tools to create the replenishment request and prepare the depositor notification. If no action is required, the workflow ends without changing anything.
+
+## Conclusion
 
 In this first part, we focused on where an AI agent can add value inside a Warehouse Management System and, just as importantly, where it should not replace deterministic application logic.
 

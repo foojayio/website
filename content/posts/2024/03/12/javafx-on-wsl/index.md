@@ -155,6 +155,8 @@ And of course, the .ttf font file itself. You can switch this up any way you lik
 
 It might also be useful for debugging to make the font loader print verbose output. You can do that by passing the property `-Dprism.debugfonts=true`. That will tell you which font is loaded from where.
 
+## Conclusion
+
 With all that, we now have created a JavaFX application that can handle situations where no font is installed. This application is then packaged into an installer which lists all required dependency packages for it to work. You can then ship this application to your users knowing that they shouldn't have any trouble running your application even in atypical Linux environments like WSL distributions or embedded systems.
 
 The newly gained flexibility of running your JavaFX application in a Linux environment on a Windows host system without any issues can be a big plus, depending on your use cases. Your application requires some kind of POSIX environment and tooling to realize some functionality, but you don't want to discount Windows users? Follow these steps and tell your Windows users to quickly set it up in a WSL distribution of their choice.

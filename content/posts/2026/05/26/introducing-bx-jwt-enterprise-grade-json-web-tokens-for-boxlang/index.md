@@ -27,6 +27,8 @@ JWT authentication is everywhere. But rolling it correctly — with proper algor
 
 **bx-jwt** is part of the [BoxLang+ and BoxLang++ subscription tiers](https://www.boxlang.io/plans "BoxLang+ and BoxLang++ subscription tiers") — our enterprise-grade module collection built for teams that take security seriously.
 
+## What is bx-jwt?
+
 **bx-jwt** is a full implementation of the JWT/JWE specification stack for BoxLang:
 
 * **JWS** (JSON Web Signature) — HMAC, RSA, and Elliptic Curve signing
@@ -35,6 +37,8 @@ JWT authentication is everywhere. But rolling it correctly — with proper algor
 * **RFC 7519** — JSON Web Token
 
 It ships with two APIs that serve different tastes: a **fluent builder** for expressive, chainable token construction, and a suite of **BIF functions** for direct, functional-style usage. Both share the same engine, key registry, and security model.
+
+## Two APIs, One Module
 
 ### The Fluent Builder — `jwtNew()`
 
@@ -68,6 +72,8 @@ For teams that prefer a direct, functional style, all operations are available a
 | `jwtDecrypt()`         | Decrypt a JWE token and return claims                            |
 | `jwtGenerateSecret()`  | Cryptographically random HMAC secret (Base64-encoded)            |
 | `jwtGenerateKeyPair()` | RSA or EC key pair as PEM strings                                |
+
+## Get Started in Seconds
 
 ### HMAC Sign and Verify
 
@@ -113,6 +119,8 @@ encryptedToken = jwtEncrypt( signedToken, outerPubKey, {
     encAlgorithm : "A256GCM"
 } );
 ```
+
+## Enterprise Key Management with the Key Registry
 
 This is where `bx-jwt` separates from basic JWT libraries. The **Key Registry** lets you define named keys once in configuration and reference them by name throughout your entire application. Keys never appear in application logic. Rotation is a config change, not a code change.
 
@@ -160,6 +168,8 @@ jwtService = getBoxContext().getRuntime().getGlobalService( "JWTService" );
 jwtService.registerKey( "session-key", { algorithm: "HS256", secret: generateSecureKey() } );
 ```
 
+## Security by Default — Not by Configuration 🛡️
+
 `bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** — they cannot be turned off:
 
 ### `alg:none` Rejection
@@ -198,6 +208,8 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 0 } );
 // Distributed system with known drift
 payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
 ```
+
+## Real-World Patterns
 
 ### Authentication Middleware
 
@@ -250,6 +262,8 @@ function verifyWithKeyRotation( token ) {
 }
 ```
 
+## Full Algorithm Support
+
 ### Signing (JWS)
 
 |      Algorithm      |      Type      |                    Notes                    |
@@ -265,6 +279,8 @@ function verifyWithKeyRotation( token ) {
 | RSA-OAEP-256  | A256GCM            | RSA key pair             |
 | dir           | A256GCM            | 256-bit symmetric secret |
 
+## Installation
+
 ```java
 # CommandBox
 box install bx-jwt
@@ -277,6 +293,8 @@ install-bx-module bx-jwt
 
 This module ships as part of our enterprise module collection — a growing library of production-ready, security-focused, professionally maintained modules available exclusively to BoxLang+ subscribers.
 
+## BoxLang+/++/Starter
+
 bx-jwt is one of many enterprise modules available under BoxLang+/++/Starter. When you subscribe, you get:
 
 * 🔐 **bx-jwt** and the full enterprise module library
@@ -285,7 +303,7 @@ bx-jwt is one of many enterprise modules available under BoxLang+/++/Starter. Wh
 * ❤️ You fund the continued development of BoxLang as a community-supported open source project  
   View Plans \& Subscribe → [boxlang.io/plans](https://www.boxlang.io/plans "boxlang.io/plans")
 
-<!-- -->
+## Resources
 
 * 📖 [bx-jwt Documentation](https://boxlang.ortusbooks.com/boxlang-+-++/modules/bx-jwt "bx-jwt Documentation")
 * 📦 [ForgeBox Listing](https://forgebox.io/view/bx-jwt "ForgeBox Listing")

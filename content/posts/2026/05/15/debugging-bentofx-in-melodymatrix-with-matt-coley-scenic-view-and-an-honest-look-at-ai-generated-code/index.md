@@ -20,6 +20,8 @@ There are bugs you can solve by yourself, and bugs where you just need to sit do
 
 {{< youtube grwzIWWZMNw >}}
 
+## When Your Layout Library Misbehaves, Call the Person Who Wrote It
+
 So I asked [Matt Coley](https://www.coley.software/) if he had time to take a look. Matt is the creator of BentoFX, but he is also known for [Recaf](https://www.jfx-central.com/showcases/recaf), a bytecode editor for Java that itself uses BentoFX heavily as its UI framework. That means when Matt looks at a BentoFX integration. He wrote the library and uses it heavily in his own project. If you want the full background on his work, there is an earlier interview: [JavaFX In Action #22 with Matt Coley](https://webtechie.be/post/2025-10-30-jfxinaction-matt-coley-recaf-bentofx-treemapfx-glcanvasfx/).
 
 ## What BentoFX Actually Does
@@ -46,6 +48,8 @@ The broader cleanup was straightforward once Matt explained how BentoFX manages 
 
 BentoFX did something unexpected with divider modes when re-opening a panel that had been closed. Matt looked at his own source and said he suspected something was not right there. It is a 0.x library, but it is actively maintained and used in production in Recaf. Matt's response was immediate: file a ticket with reproduction steps.
 
+## Timeline
+
 * 00:00 Introduction: Matt Coley, Recaf, BentoFX
 * 02:19 How BentoFX is used in MelodyMatrix
 * 04:18 Visual problems with the BentoFX integration
@@ -56,7 +60,7 @@ BentoFX did something unexpected with divider modes when re-opening a panel that
 * 34:53 Cleaning up unneeded code: let BentoFX handle leaf widths, removing animations
 * 41:33 We probably found a bug in BentoFX, and a look into the BentoFX source
 
-<!-- -->
+## Links
 
 * [JavaFX In Action #22 with Matt Coley, diving into bytecode and JARs with Recaf and JavaFX libraries](https://webtechie.be/post/2025-10-30-jfxinaction-matt-coley-recaf-bentofx-treemapfx-glcanvasfx/)
 * Matt Coley:

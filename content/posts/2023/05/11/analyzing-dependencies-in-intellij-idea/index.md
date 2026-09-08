@@ -28,6 +28,8 @@ For example, you may want to find out how a particular version of a dependency e
 
 Let's take a look at how IntelliJ IDEA can help you to analyze dependencies.
 
+## Using the Dependency Analyzer
+
 We can view our dependencies in the Maven or Gradle tool window.
 
 Here, we can expand dependencies to show their transitive dependencies, or collapse them again.
@@ -96,6 +98,8 @@ For more context, we can click a specific dependency and select **Open Maven Con
 
 ![Open Maven Config](open-maven-config.png)
 
+## Using the Dependency Diagram
+
 If you are using IntelliJ IDEA Ultimate, you can also view your dependencies as a diagram.
 
 ## Show Diagrams
@@ -155,6 +159,8 @@ We can change the visibility level, by clicking the **Change Visibility Level** 
 ![Change Visibility Level](change-visibility-level.png)
 
 ![Visibility Levels](visibility-levels.png)
+
+## Summary and Shortcuts
 
 Now we know several ways to analyze our project's dependencies in IntelliJ IDEA.
 

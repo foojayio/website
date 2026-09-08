@@ -22,6 +22,8 @@ frozen: false
 
 **A 1-Day Modern Java Bootcamp for students, early professionals and career shifters with minimal Java programming or general programming experience.**
 
+## Modern Java Development Bootcamp
+
 The Java User Group Philippines (JUG PH) in partnership with Developer Connect (DEVCON) Philippines/Manila executed its 1st Modern Java Development Bootcamp.
 
 The bootcamp was organized by the JUG Leaders and Volunteers and DEVCON Volunteers.

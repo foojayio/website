@@ -23,6 +23,8 @@ related_posts:
 frozen: false
 ---
 
+## Tiberius: A Security Testing Framework for LLM Applications in Java
+
 *How do you write a regression test for a system that is non-deterministic by design?*
 
 ## 1. The Problem

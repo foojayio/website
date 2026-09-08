@@ -21,6 +21,8 @@ frozen: false
 
 Java developers are particularly spoiled when using Hazelcast. Because Hazelcast is developed in Java, it's available as a JAR, and we can integrate it as a library in our application. Just add it to the application's classpath, start a node, and we're good to go. However, I believe that once you start relying on Hazelcast as a critical infrastructure component, embedding limits your options. In this post, I'd like to dive a bit deeper into the subject.
 
+## Starting with embedded
+
 As mentioned above, the easiest way for Java developers to start their journey using Hazelcast is to embed it in their application like any other library. During the application startup lifecycle, we just have to call `Hazelcast.newHazelcastInstance()`: this will start a new Hazelcast node in the currently running JVM. Because of Hazelcast auto-discovery capabilities, without further configuration, nodes will discover each other and form a cluster. In a couple of minutes of development time, we can create a distributed In-Memory Data Grid. Hard to do better in terms of Developer Experience!
 
 ![Embedded deployment model](embedded.png)
@@ -37,6 +39,8 @@ In all of those cases, the coupling of the application and Hazelcast limits the 
 
 To avoid those problems, the next logical step is to migrate to a client-server deployment model.
 
+## Client-Server Deployment
+
 The principle underlying Client-Server deployment is the separation of concerns: decoupling the application from the Hazelcast node.
 
 ![Client-Server deployment model](client-server-700x381.png)
@@ -51,6 +55,8 @@ As an additional benefit, we can now use any (or all!) other languages that Haze
 
 Unfortunately, there's no such thing as a free lunch. While moving from embedded to client-server makes it possible to scale quickly, new pitfalls have cropped up.
 
+## Pitfall #0: Launching
+
 The first pitfall is not a true one but a simple question. How do we launch Hazelcast now that it's not embedded anymore?
 
 The easiest way to launch Hazelcast is to use the command line. [Install it. Run it](https://docs.hazelcast.com/imdg/4.1.2/getting-started.html#installing). It's the fastest path to get you started, but this is not recommended for production. Alternatively, you can also [download the Hazelcast distribution](https://docs.hazelcast.com/imdg/4.1.2/installation/installing-using-download-archives.html) and run the start script. The command line is intended for development purposes: it's not fit for production usage unless you build a custom operations layer on top - and we don't recommend it.
@@ -58,6 +64,8 @@ The easiest way to launch Hazelcast is to use the command line. [Install it. Run
 If you're using containerization technologies, we offer [Docker images](https://hub.docker.com/r/hazelcast/hazelcast). If you run your workload on Kubernetes, check our [Helm chart](https://github.com/hazelcast/charts).
 
 This section is only a summary. Please be sure to check [the documentation](https://docs.hazelcast.com/imdg/4.1.2/installation/installing-upgrading.html) for all available options and their respective details.
+
+## Pitfall #1: Classpath
 
 In embedded mode, the JVM runs both the application and Hazelcast. If you want to add any of the provided extension points, you just need to register it, and it will work out of the box as the application and Hazelcast share the same classpath: this is not true anymore for client-server.
 
@@ -76,6 +84,8 @@ To cope with that, we have two solutions:
 1. The legacy path is [user code deployment](https://docs.hazelcast.com/imdg/4.1.2/clusters/deploying-code-from-clients.html). It allows to "send" code from a client member to the cluster. This way, no restart is needed. On the flip side, the cluster needs to accept that an external component can change the code it runs. It extends the attack surface of your system. With user code deployment, you're trading less security for more agility. Therefore, you need to weigh the pros and cons before walking this path.
 2. With Hazelcast 4.1, we provide an alternative in the form of [generic records](https://docs.hazelcast.com/imdg/4.1.2/clusters/accessing-domain-objects.html). As its name implies, such a record is generic, meaning you can access the data without the class on the member's classpath. Generic records come with some limitations as well. For example, while you can read data, you cannot write it. Note that generic records are considered BETA at the time of this writing.
 
+## Pitfall #2: Serialization
+
 While running embedded, domain objects are straightforward: implement `Serializable` without a second thought and "it just works." If you migrate to a client-server deployment, provided that you curate the members' classpath as mentioned above, it will work as well. Note that even in that case, Java serialization is not very performant, wastes space, and is a [security concern](https://snyk.io/blog/serialization-and-deserialization-in-java/).
 
 However, the client-server deployment model opens new doors: the cluster data is suddenly more visible. Other developers, teams, or departments in your organization might be interested in using this newly-found source of data. But maybe you don't want to couple your teams by providing them a JAR of your domain classes so they can deserialize the domain objects? Or perhaps their technology stack might not be based on the JVM, so they cannot deserialize the data at all? In all cases, it opens an interesting debate regarding which format you should use to store data.
@@ -83,6 +93,8 @@ However, the client-server deployment model opens new doors: the cluster data is
 Hazelcast offers a couple of out-of-the-box formats and can integrate with virtually anything. But in embedded mode, we limit ourselves unnecessarily. Imagine a Hazelcast cluster that needs to serve both Java clients and Python clients. Each stack manages items with its class representation.
 
 The [Portable serialization mechanism](https://docs.hazelcast.com/imdg/4.2/serialization/implementing-portable-serialization.html) allows us to store data in one stack and to access it from the other - and the other way around. Its main benefit is that it doesn't require reflection. Even if you don't use multiple languages, you can not only store the representation of your data on the server-side without having the classes on the members' classpath, but you can also query it. Did you have a look at our [new SQL API](https://docs.hazelcast.com/imdg/4.2/sql/distributed-sql.html) by the way? Given that business classes' lifecycle is bound to be short, it's one less concern during deployment.
+
+## Pitfall #3: Embed During Development, Client in Production
 
 The final problem is how to manage Hazelcast during the development process.
 
@@ -94,6 +106,8 @@ In Java, it's unnecessary to embed a node during development and run it as a cli
 * Finally, you can combine the options above.
 
 Those are great options if you're developing in Java, but all is not lost if you aren't. Containerization can help us a lot! For example, the [TestContainers](https://www.testcontainers.org/) project is available in all stack that Hazelcast support: Python developers can easily leverage the [Python project](https://github.com/testcontainers/testcontainers-python) to set up a local Hazelcast cluster quickly, Go developers the [Go project](https://github.com/testcontainers/testcontainers-go), C# developers the [.Net project](https://github.com/testcontainers/testcontainers-dotnet), etc.
+
+## Conclusion
 
 While it's easier to start Hazelcast if you're a Java developer, the embedded deployment model is limited compared to the Client-Server one. Migrating to the later deployment model allows you to "free" your data and make it available across the organization.
 

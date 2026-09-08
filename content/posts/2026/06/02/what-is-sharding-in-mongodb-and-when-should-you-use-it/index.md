@@ -49,6 +49,8 @@ In this article, we'll walk through:
 * How MongoDB implements sharding
 * When you should (and shouldn't) use it
 
+## **The Scaling Problem Most Databases Face**
+
 Imagine your application stores user data in a database.
 
 Initially, the architecture looks like this:  
@@ -79,6 +81,8 @@ Instead of making one machine bigger, the better approach is to **add more machi
 
 This approach is called **horizontal scaling**.
 
+## **What is Horizontal Scaling?**
+
 Horizontal scaling means **distributing data across multiple servers rather than relying on a single server**.
 
 Instead of storing all data on a single machine:  
@@ -101,6 +105,8 @@ Each server stores only **part of the dataset**.
 
 This is exactly what **sharding** does.
 
+## **What is Sharding in MongoDB?**
+
 Sharding is the process of **splitting large datasets across multiple database servers**.
 
 Each server stores a **portion of the data** , called a **shard**.
@@ -121,6 +127,8 @@ Each shard contains only **a subset of the collection**.
 When queries come in, MongoDB determines which shard contains the relevant data.
 
 This allows the database to handle **massive datasets and high traffic efficiently**.
+
+## **MongoDB Sharded Cluster Architecture**
 
 A sharded cluster in [**MongoDB**](https://www.mongodb.com/docs/manual/sharding/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=sharding-mongodb-devto&utm_term=hugh.murray) consists of three main components: shards, config servers, and MongoDB routers
 
@@ -168,6 +176,8 @@ A simplified architecture looks like this:
 
 This abstraction means the application **does not need to know where the data is stored**.
 
+## **Choosing a Shard Key**
+
 A **shard key** determines how data is distributed across shards.
 
 For example:
@@ -187,6 +197,8 @@ A good shard key should:
 For example, if most queries are based on `userId`, using it as the shard key makes sense.
 
 However, choosing something like `country` might create **imbalanced shards** if most users are from one region.
+
+## **Creating a Sharded Collection**
 
 Let's look at a simple example.
 
@@ -210,6 +222,8 @@ sh.shardCollection(
 
 MongoDB will now automatically distribute documents across shards.
 
+## **Querying Data in a Sharded Cluster**
+
 One of the nice things about sharding in **MongoDB** is that application queries remain the same.
 
 For example:
@@ -225,6 +239,8 @@ db.employees.find(
 ```
 
 The **mongos router** determines which shard contains the relevant documents and routes the query to that shard.From the application's perspective, it still feels like **one database**.
+
+## **When Should You Use Sharding?**
 
 Sharding is powerful, but it should be introduced only when needed.
 
@@ -254,6 +270,8 @@ Examples include:
 
 If you expect your dataset to grow rapidly, designing the system with sharding in mind early can save major architectural changes later.
 
+## **When Sharding Might Be Overkill**
+
 Despite its benefits, sharding adds operational complexity.
 
 You probably **don't need sharding** if:
@@ -265,6 +283,8 @@ You probably **don't need sharding** if:
 Many applications run perfectly fine with **replication and proper indexing**.
 
 Sharding should usually be considered **after other scaling strategies have been exhausted**.
+
+## **Sharding vs Replication**
 
 Developers sometimes confuse these two concepts.
 
@@ -279,6 +299,8 @@ Developers sometimes confuse these two concepts.
 In practice, MongoDB often uses **both together**.
 
 Each shard is typically configured as a **replica set**, ensuring both scalability and fault tolerance.
+
+## **Final Thoughts**
 
 Sharding is one of the most powerful scaling mechanisms available in **MongoDB**.
 

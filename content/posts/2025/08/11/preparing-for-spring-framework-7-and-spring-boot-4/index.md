@@ -29,6 +29,8 @@ In this blog post, we will discuss some key features enhanced as part of Spring 
 
 To start with,
 
+## Spring Framework 7 Perspective
+
 ### 1. Built-in Resilience Feature
 
 Spring Framework 7 introduces powerful resilience tools directly into its core:
@@ -115,6 +117,8 @@ Spring Framework now supports **Jackson 3.x** and provides migration guidance fo
 ### 10. Null Safety using JSpecify
 
 Introduces **JSpecify** for null safety that certainly replaces the former `org.springframework.lang.*` annotation. This is going to be the standard annotation approach for ***nullness*** . For more details, see <https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away>
+
+## Spring Boot Perspective
 
 Spring Boot 4 is a significant leap forward in modernizing how Spring applications are developed, configured, and deployed. This milestone marks the beginning of a more modular, extensible, and developer-friendly version of the framework. Let's understand some of the significant enhancements in Spring Boot 4 and how they impact developers.
 

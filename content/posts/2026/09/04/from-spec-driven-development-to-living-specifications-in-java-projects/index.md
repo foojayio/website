@@ -16,6 +16,8 @@ related_posts:
 frozen: false
 ---
 
+## From Spec-Driven Development to Living Specifications in Java Projects
+
 Coding agents have changed the speed at which we can produce software. But producing code faster does not automatically mean producing better software.
 
 As I started using agents more frequently in real-world software development, one question became increasingly important: **how do we give an agent enough freedom to be useful without losing engineering intent?**

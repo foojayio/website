@@ -47,6 +47,8 @@ I am pleased to present the following features that I offer:
 8. Severell
 9. http4k
 
+## How will I operate internally?
+
 The respective build tools need to integrate the following dependency in the `pom.xml` and `build.gradle`. For,
 
 ### Maven
@@ -243,7 +245,7 @@ public record Page(String title, String description) {
 The next step involves creating a template **index.jte** within the **/src/main/jte** folder, a directory that is established during the generation process at start.spring.io.  
 
 ```
- 
+ 
 ```
 
 ```

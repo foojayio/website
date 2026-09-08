@@ -37,6 +37,8 @@ In this post, we'll set the scene with an introduction to Pulsar and guide you t
 
 Let's dig in.
 
+## A quick introduction to Apache Pulsar
+
 For a bit of background, Pulsar was originally developed by Yahoo! and open-sourced in 2016 as a cloud-native, distributed messaging and streaming platform. Today, it's a top-level [Apache Software Foundation](https://www.apache.org/) and is used by dozens of companies worldwide, including Comcast, Verizon Media, and (yours truly) DataStax.
 
 Pulsar is largely favored by enterprises and developers for its superior resilience and lightweight compute process, which makes Pulsar ideal for real-time apps and streaming data between sensors and IoT devices. On a slightly more technical level, anyone using Pulsar will likely gush over the following features:
@@ -55,6 +57,8 @@ Additionally:
 
 These features not only make Pulsar a good fit for Cassandra, but also with any cloud-native architecture. Speaking of which, let's take a look at Pulsar's unique architecture.
 
+## Understanding the architecture behind Pulsar
+
 Pulsar is a tiered, distributed system comprised of three components:
 
 * [Apache BookKeeper](http://bookkeeper.apache.org/)[®](https://cassandra.apache.org/_/index.html): An open-source storage service that handles persistent storage of messages.
@@ -68,6 +72,8 @@ In the upper right of Figure 1, Zookeeper manages the metadata and you can use i
 In the middle of the diagram, we have the Pulsar brokers themselves, which are what talk to the producers and consumers. These basically take a logical model of topics and messages and turn them into storage that can be assigned to the bookies.
 
 Now that you have some background, let's move on to the workshop where you'll learn how to use Pulsar and get familiar with the free technologies you can use to simplify your streaming setup.
+
+## The workshop: Four labs. One mission.
 
 In this workshop, we give you four simple "labs" that will show you how to connect Pulsar with Cassandra for streaming. Each lab is explained in detail on our [DataStax Developers GitHub](https://github.com/datastaxdevs/workshop-pulsar), and you can also follow along with our [YouTube Pulsar workshop video](https://www.youtube.com/watch?v=nF502PmFi_w).
 
@@ -128,11 +134,15 @@ So, in this last lab you will:
 
 Follow the instructions for [Lab 4 on GitHub](https://github.com/datastaxdevs/workshop-pulsar/wiki/LAB4_Streaming).
 
+## Follow the full workshop on YouTube and keep learning
+
 By the end of this workshop, you will have used completely free technologies to successfully stream from Pulsar to Cassandra. Congratulations!
 
 Remember: if you need more guidance during this workshop, you can follow the whole thing step-by-step with the [workshop video on YouTube](https://www.youtube.com/watch?v=nF502PmFi_w) (skip to minute 19 for the labs). Lastly, if you get stuck or just want to chat with our generous community, [join the conversation on Discord](https://discord.com/invite/pPjPcZN).
 
 *Explore more free tutorials on our* [*DataStax Developers YouTube channel*](https://www.youtube.com/c/DataStaxDevs/featured)*, and* [*sign up to our mailing list*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about upcoming community events and workshops. You can also follow* [*DataStax on Medium*](https://datastax.medium.com/)*to keep up with the latest in all things data, Cassandra, Pulsar, streaming, and more.*
+
+## Resources
 
 1. [YouTube: Bring Streaming to Cassandra with Apache Pulsar](https://www.youtube.com/watch?v=nF502PmFi_w)
 2. [GitHub: Workshop Apache Cassandra and Apache Pulsar](https://github.com/datastaxdevs/workshop-pulsar)

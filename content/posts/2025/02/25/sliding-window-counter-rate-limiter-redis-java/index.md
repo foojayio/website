@@ -271,6 +271,8 @@ public class SlidingWindowCounterRateLimiter {
 
 And we're ready to start testing its behavior!
 
+## Testing our Rate Limiter
+
 To ensure our Sliding Window Counter Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
 1. **Redis TestContainers**: This library spins up an isolated Redis container for testing. This means we don't need to rely on an external Redis server during our tests. Once the tests are done, the container is stopped, leaving no leftover data.

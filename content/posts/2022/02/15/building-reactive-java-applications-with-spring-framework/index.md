@@ -46,6 +46,8 @@ The steps we will take you through are:
 
 Follow the [step-by-step instructions](https://github.com/datastaxdevs/workshop-spring-reactive) to [create your Astra database](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), and once your database is ready, you can copy your credentials over to [GitHub](https://github.com/datastaxdevs/workshop-spring-reactive).
 
+## **Synchronous vs. asynchronous vs. reactive programming**
+
 Most Java developers use **synchronous programming**. When you initiate a session, you execute quickly and you will get a response. Then you send the parameter to the API, and the driver will create a query. You bind the parameter that simply maps the parameter to the query. You execute the query and get back an object called a ResultSet.
 ![](0_SI3IRVrpySGMTkGT.jpg) Figure 3: Synchronous queries weaknesses.
 
@@ -64,8 +66,12 @@ Now, coming to the [reactive manifesto](https://www.reactivemanifesto.org/), the
 When it comes to huge volumes of data or multi-users, we often need asynchronous processing to make our systems fast and responsive. In Java, a representative of old object-oriented programming, asynchronicity can become really troublesome and make the code hard to understand and maintain. So, reactive programming is especially beneficial for this 'purely' object-oriented environment as it simplifies dealing with asynchronous flows.
 ![](0_fqSkaGYcLnlgRlVR.png) *Figure 6: Reactive Queries.*
 
+## Using the GitPod platform
+
 Gitpod is an open-source Kubernetes application providing prebuilt, collaborative development environments in your browser. Gitpod provides step-by-step screenshots to launch and build the Spring PetClinic Reactive backend application, created by our special workshop guest, Moritz Eysholdt from [TypeFox](https://www.typefox.io/).
 ![](0_XGlsf8kG9qUyPWd8.png) *Figure 7: When Gitpod finishes building the app, a new tab will open in your browser showing the following.*
+
+## Introducing the Spring Boot and WebFlux frameworks
 
 With its simple abstraction, Spring Reactor is a popular framework for Java from Spring developers. Spring Framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring enables you to build applications from "plain old Java objects" (POJOs) and to apply enterprise services non-invasively to POJOs.
 ![](0_GjnyqjsGfFBzoZMb.png) *Figure 8: What Spring can do.*
@@ -79,6 +85,8 @@ At the heart of the Spring Framework are two fundamental features: inversion of 
 
 ![](0_k-fjVybBZyrmbQto.png) *Figure 9: How Spring Boot works.*
 
+## Reviewing backend code
+
 Let's have a look inside the main component `spring-petclinic-reactive` to see which libraries and frameworks have been used.
 ![](0_JzQKikxBUVJGXWG9.png) *Figure 10: Understanding the architecture.*
 
@@ -91,6 +99,9 @@ Let's have a look inside the main component `spring-petclinic-reactive` to see w
 * **SpringFox *(Swagger)*** : Annotation-based rest documentation generation and test client generation (`swagger-ui`).
 
 To understand the underlying data model implemented in Apache Cassandra, check out our Gitpod guide.
+
+## Starting frontend application
+
 ![](0_Q7degYIlhNIUVZZR.png) *Figure 11: Frontend of Spring PetClinic.*
 
 Once you configure and run the application, you can also test CRUD with Swagger as a hands-on exercise as follows:
@@ -99,6 +110,8 @@ Once you configure and run the application, you can also test CRUD with Swagger 
 And with that, we conclude our workshop on a reactive implementation of Spring PetClinic with Cassandra. To keep learning about open-source technologies and how to use them, simply register for any of our free [DataStax Workshops](https://www.datastax.com/workshops) to get started on your next big app.
 
 *Explore more tutorials on our* [*DataStax Developers YouTube channel*](https://www.youtube.com/c/DataStaxDevs/videos)*and* [*subscribe to our event alert*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about new developer workshops. For exclusive posts on all things data: Cassandra, streaming, Kubernetes, and more; follow* [*DataStax on Medium*](https://datastax.medium.com/)*.*
+
+## Resources
 
 1. [Build a Reactive app in Apache Cassandra™ with Spring Framework](https://www.youtube.com/watch?v=1aRbndIcXV4)
 2. [Github Workshop Spring Reactive](https://github.com/datastaxdevs/workshop-spring-reactive)

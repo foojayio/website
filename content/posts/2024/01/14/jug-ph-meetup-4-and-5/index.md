@@ -17,6 +17,8 @@ related_posts:
 frozen: false
 ---
 
+## JUG PH: ING Partnership, Certification and Generative AI
+
 **Continuing the connection with the Java Enthusiasts and the efforts of Java User Group Philippines (JUG PH), we held our 4th and 5th meetup last September and November 2023.**
 
 The speakers of these meetups were composed of [Jansen Ang](https://www.linkedin.com/in/jansen-ang/ "Jansen Ang"), one of the JUG PH Leader, [Kenneth Penarada](https://www.linkedin.com/in/kenpe%C3%B1aranda/ "Kenneth Penarada"), Senior Enterprise Engineer at Orange and Bronze Philippines and [Bang Iguana](https://www.linkedin.com/in/ma-minerva-l-iguana/ "Bang Iguana"), Senior Java Engineer at ING Hubs Philippines.
@@ -34,6 +36,8 @@ Presentation of the JUG PH Leaders to ING Hubs Philippines by Tristan Mahinay
 The Java attendees in the event!
 
 ![](jugph-meetup-4-attendees-680x510.jpg)
+
+## Meetup #5
 
 The 5th meetup discussed the topics of Spring Certification and Generative AI using Java. This is the 1st event of JUG PH with 2 speakers in a day.
 
@@ -59,9 +63,13 @@ The Java attendees in the event!
 
 ![](jugph-meetup-5-attendees-700x347.jpg)
 
+## Continuing the initiative
+
 As of today the JUG PH already completed a total of 5 meetups using a hybrid setup.
 
 These meetups were essential as it gives our Filipino Technical Enthusiasts the knowledge of Modern Java Development. Addtionally, with the use of AI in Java, it attracted the students to join these sessions.
+
+## JUG PH Socials
 
 To connect with the Java User Group Leaders and enthusiasts, join us in our social account!
 

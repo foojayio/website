@@ -25,6 +25,8 @@ Disclaimer: **this article is only valid for Raspberry Pi's with an ARMv7 or ARM
 * Model B, version 2, 3 and 4
 * Compute Module, version 3
 
+## Raspbian OS with Java 11
+
 In the [release notes of Raspbian](http://downloads.raspberrypi.org/raspbian/release_notes.txt) you can see that the version of 2019-06-20 includes OpenJDK 11:
 
 ```
@@ -43,6 +45,8 @@ OpenJDK Server VM (build 11.0.3+7-post-Raspbian-5, mixed mode)
 ```
 
 This means we are already good to start any Java 11 based program!
+
+## Liberica JDK to Run JavaFX
 
 As JavaFX is no longer part of the Java JDK, since version 11, running a JavaFX program on the Raspberry Pi will not work out of the box.
 

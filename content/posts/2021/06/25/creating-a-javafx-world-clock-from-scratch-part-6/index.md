@@ -188,6 +188,8 @@ Lastly, (step 5) is applying the temperature info into a simple JavaFX Text node
 
 Well, there you have it a sci-fi looking, JavaFX World Clock created from scratch! While I did use one 3rd party dependency (Jackson) and an API key from a weather service, it at least is easy to maintain with low complexity.
 
+## Conclusion
+
 It was fun working with Java 11's HttpClient API to make web requests. I found it a little challenging but very important to get familiar with Java's `CompletableFutures` API. CompletableFutures are often used when making Http requests asynchronously (non-blocking calls to a web service). By making asynchronous calls this most inevitably enhance the user experience of UI applications.
 
 While I've only touched the surface (so to speak) on the daily forecast APIs from OpenWeatherMap.org, I did notice other APIs that provided even more weather data. All in all, I had a lots of fun sharing this project with others.

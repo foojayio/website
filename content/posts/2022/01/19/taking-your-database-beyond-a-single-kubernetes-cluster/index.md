@@ -42,9 +42,13 @@ On the surface, it would seem like we could achieve this by simply spinning up a
 
 If you're really lucky, you may be a firewall rule away from a fully distributed database deployment. Unfortunately, it's rarely that simple. Even if some of these hurdles are easily cleared, there are plenty of other innocuous things that can go wrong and lead to a degraded state. Your choice of cloud provider, K8s distro, command-line flag, and yes, even DNS — these can all potentially lead you down a dark and stormy path. So, let's explore some of the most common issues you might run into, so you can avoid them.
 
+## Common hurdles on the race to scale
+
 Even if some of your deployment seems to be working well initially, you will likely encounter a hurdle or two as you grow into a multicloud environment, upgrade to another K8s version, or begin working with different distributions and complimentary tooling.
 
 When it comes to distributed databases there's a lot more under the hood. Understanding what K8s is doing to enable running containers across a fleet of hardware will help you develop advanced solutions — and ultimately, something that fits your exact needs.
+
+## The need for unique IP addresses for your Cassandra nodes
 
 One of the first hurdles you might run into involves basic networking. Going back to our first cluster, let's take a look at the layers of networking involved.
 
@@ -71,6 +75,8 @@ In our reference deployment, we dedicated non-overlapping ranges in K8s clusters
 
 With non-overlapping IP ranges, we can now move on to routing packets to pods in each cluster. In the figure above, you can see the West Coast is 10.100, and the East Coast is 10.150, with the K8s pods receiving IPs from those ranges. The K8s clusters have their own IP space, 200 versus 250, and the pods are sliced off just like they were previously.
 
+## How to handle routing between the Cassandra data centers
+
 So, we have a bunch of IP addresses and we have uniqueness to those addresses. Now, how do we handle the routing of this data and the communication and discovery of all of this? There's no way for the packets destined for cluster A to know how they need to be routed to cluster B. When we attempt to send a packet across cluster boundaries, the local Linux networking stack sees that this is not local to this host or any of the hosts within the local K8s cluster. It then forwards the packet on to the VPC network. From here, our cloud provider must have a routing table entry to understand where this packet needs to go.
 
 In some cases this will just work out of the box. The VPC routing table is updated with the pod and service CIDR ranges, informing which hosts packets should be routed. In other environments, including hybrid and on-premises, this may take the form of advertising the routes via BGP to the networking layer. Yahoo! Japan has a great [article](https://kubernetes.io/blog/2016/10/kubernetes-and-openstack-at-yahoo-japan/) covering this exact deployment method.
@@ -78,6 +84,8 @@ In some cases this will just work out of the box. The VPC routing table is updat
 However, these options might not always be the best answer, depending on what your multi-cluster architecture looks like within a single cloud provider. Is it hybrid- or multi-cloud, with a combination of on-prem, with two different cloud providers?
 
 While you could certainly instrument all that across all those different environments, you can count on it requiring a lot of time and upkeep.
+
+## Some solutions to consider
 
 ## 1. Overlay networks
 

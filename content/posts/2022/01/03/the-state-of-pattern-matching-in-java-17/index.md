@@ -368,6 +368,8 @@ Of course, it's a baby step and not as powerful as deconstruction in Rust or JS,
 
 Hopefully, this would be extended to switch as well. That would make pattern matching in Java closer to complete, with only normal classes remaining to be accounted for. If the normal classes can specify how they should be deconstructed, that issue will be solved, and we will have powerful pattern matching in Java.
 
+## Conclusion
+
 So based on what we saw so far, the state of pattern matching in Java is as below.
 
 * Enum matching in switch statements ✅

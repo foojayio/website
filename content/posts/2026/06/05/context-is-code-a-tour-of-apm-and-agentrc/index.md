@@ -18,6 +18,8 @@ related_posts:
 frozen: false
 ---
 
+## Context Is Code: A Tour of APM and AgentRC
+
 If you've shipped an AI agent into a real codebase in the last twelve months, you've felt this: every agent, every developer, every machine — different setup. A README that says "install these extensions." A `copilot-instructions.md` somebody copy-pasted from another repo. MCP server configs in three different files. The same skills duplicated for Copilot, Claude, Cursor, and Codex.  
 
 No version pinning.  

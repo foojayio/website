@@ -23,6 +23,8 @@ When it is *actually* not used anymore, it is oftentimes because of historical r
 
 *This post was originally written by [Pieter Dirk Soels](https://medium.com/@p.d.soels?source=post_page-----d167c8f22838--------------------------------).*
 
+## Code coverage
+
 There's an interesting relation between the problem of finding dead code and another widespread practice: measuring code coverage for tests. Let's find out how these two worlds may converge!
 
 At Picnic, we use one of the tools that almost every Java developer has, directly or indirectly, interacted with: the [Java Code Coverage Library](https://www.jacoco.org/jacoco/) (JaCoCo). This tool is mostly used to report code coverage on automated test suites to gain more confidence that a test covers what it should. It collects coverage metrics by instrumenting the bytecode through a Java agent when the Java class loader loads the classes. In a future blog post, we will further dive into how it works under the hood.
@@ -30,6 +32,8 @@ At Picnic, we use one of the tools that almost every Java developer has, directl
 In principle, a Java agent can run in any environment, not just during development — as is typically the case with JaCoCo. Why not run it also in production to see actual code coverage?
 
 Carlos Becker^[1](#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0)^ and Markus Harrer^[2](#90d3d782-1949-4ee2-adf5-14f96c7f0444)^ also brought this up before. We wanted to follow in their footsteps but instead fetch the coverage at any time in an ephemeral context, that is, Kubernetes. So let's get started!
+
+## Setting up JaCoCo in Kubernetes
 
 First, we need to get the JaCoCo Java agent JAR. We can retrieve it from the latest [release](https://github.com/jacoco/jacoco/releases/latest) or the central Maven repository. There are several ways to get this JAR in your Kubernetes pod, such as copying it into the container's image or making it available through a mounted volume. Once it's available, it's time to start configuring the JVM. We can configure the agent using the `-javaagent` JVM argument. There are plenty of [configuration options](https://www.eclemma.org/jacoco/trunk/doc/agent.html). At Picnic, we run it as follows:
 
@@ -39,6 +43,8 @@ First, we need to get the JaCoCo Java agent JAR. We can retrieve it from the lat
 
 This enables the JaCoCo Java agent and configures it to only instrument classes in our `tech.picnic.*` packages. The more specific we are here, the less performance overhead we will have, as fewer classes will be instrumented. We also configure JaCoCo to write to incoming TCP connections through `tcpserver`, which we will use to interact with the agent. Using the server, we can fetch the data anytime while the pod is alive.
 > *Note: As we expose a server here, security is important. By default, the JaCoCo server listens on port 6300. By setting `address=*` we only allow connections from local addresses. We do not expose port 6300 in our containers and services. We will later show that we perform Kubernetes port-forwarding when interacting with the JaCoCo Java agent.*
+
+## **Extracting and aggregating reports**
 
 Now that we have JaCoCo running in production, it's time to gather data! As Kubernetes pods are ephemeral, we need to dump data to a persistent volume on termination or periodically fetch our data and accept the risk of data loss. As this data is not critical to us and only applies to that particular revision of the service anyway, we choose the latter.
 
@@ -144,6 +150,8 @@ popd
 
 Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c792416535940e0#file-jacoco_generate_report-sh)
 
+## **Time for some cleaning!**
+
 Now that we have generated a report, we can inspect the generated `report/index.html` and look for coverage on some suspected legacy code. We are looking for red lines, which means the code is not covered. Let's dive into some examples.
 
 {{< img src="0-qYvVZekF-qruyoxt-98ddb8af.png" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
@@ -159,12 +167,16 @@ As you can see, this analysis can help you get a clearer picture of what code is
 
 To see whether this is the case, we usually perform code searches to look at the age and commits for surrounding code. We identify whether code is exceptionally new — maybe this is a feature in development or old and forgotten. Finding connected API endpoints and their documentation might also help to get an understanding of why this code is around. We also search our ticket and communication systems for any references and, of course, simply ask around.
 
+## **What about performance?**
+
 Every time we introduce new tooling in production environments, we should understand its effect on application performance. This holds especially when instrumenting our code, as this can add quite some overhead in executing instructions. To understand its performance impact, we first ran it on staging environments to find any immediate problems with resource usage. This allowed us to tweak the settings accordingly.
 
 To determine the performance in production, we kept an eye out for the average duration of the request. We selected two 24-hour periods, covering different loads for this application. One period with running JaCoCo, and one without.
 ![](0-neVQTAom_1QPLD6V-297c1968.png) Average request duration in service while running with JaCoCo (red) and without (grey).
 
 From this, we observed an average overhead of 0.03%. As that is such a small overhead in the context of Picnic, we found this an acceptable price to pay for the insights we gain.
+
+## What is next?
 
 With our codebase in a better place, we will continue to periodically scan it for code we can delete. However, this does not stop us from thinking about what more we can do with JaCoCo.
 

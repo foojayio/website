@@ -278,6 +278,8 @@ We create a new map by aggregating trades and companies into ingest_trades map.
 
 We used SQL but you can send results to a web server/client.
 
+## Summary
+
 So here you have it, Hazelcast can be used to enrich Kafka applications with contextual data, this can be done programmatically, using the command line, or through SQL as demonstrated in this article.
 
 Hazelcast can process real-time data and batch data in one platform, making it the right platform to use with Kafka applications by providing "context" to your Kafka applications.

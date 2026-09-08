@@ -13,6 +13,8 @@ related_posts:
 frozen: false
 ---
 
+## Live Templates in IntelliJ IDEA
+
 Okay, I did the math. If you use all 38 of the Live Templates for Java that are available out of the box in IntelliJ IDEA 2020.2, you will save your finger pads approximately 2092 presses of wear and tear, and that's just each one once, the reality is likely to be substantially higher.
 
 I will caveat this by saying that I counted the unresolved variables, yours may be longer or shorter. Still, it's impressive!

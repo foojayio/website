@@ -527,6 +527,33 @@ public class Posts {
             System.err.println("  WARNING: no content matched for " + url);
         }
 
+        // A BODY THIS SHORT IS A PARSE FAILURE, NOT A SHORT POST. One post in the
+        // archive imported as literally zero words: its own content carries
+        // malformed HTML, and jsoup -- unlike a browser, which recovers
+        // differently -- closes .article__main-content early, so the selector
+        // matched a 309-character stub and everything after it fell outside.
+        // The scrape reported success; only comparing word counts against
+        // WordPress found it. So: when the body comes out implausibly small, ask
+        // the REST API for the post's own content and convert THAT instead. It is
+        // the same source WordPress renders from, minus the theme, and the same
+        // route featuredImageUrl already uses for the hero.
+        //
+        // Never silent, either way: taking the fallback is printed, and so is a
+        // body that stays tiny, because a genuinely 20-word post and a parse
+        // failure look identical in a diff.
+        if (wordCount(d.body) < MIN_PLAUSIBLE_BODY_WORDS) {
+            String viaRest = bodyFromRest(d, opts);
+            if (viaRest != null && wordCount(viaRest) > wordCount(d.body)) {
+                System.out.printf("  body was %d word(s) from the page (malformed markup?);"
+                        + " used the REST content instead: %d words%n",
+                        wordCount(d.body), wordCount(viaRest));
+                d.body = viaRest;
+            } else {
+                System.err.printf("  WARNING: body is only %d word(s) and REST offered nothing better"
+                        + " -- check %s by hand%n", wordCount(d.body), d.url);
+            }
+        }
+
         // A picture the page carries TWICE, from two hosts, leaves a second file
         // that nothing points at -- see HtmlToMarkdown.dropUnreferenced. Run
         // here, once the body and the hero are both settled, and scoped to what
@@ -598,6 +625,75 @@ public class Posts {
         var large = small == wa ? wb : wa;
         long hits = small.stream().filter(large::contains).count();
         return (double) hits / small.size();
+    }
+
+    /**
+     * Escapes an UNCLOSED &lt;style&gt;/&lt;script&gt;/&lt;textarea&gt;/&lt;xmp&gt;
+     * opener, because one of those swallows the rest of the document.
+     *
+     * This is not defensive decoration -- it is the bug that lost a whole post.
+     * `creating-a-javafx-world-clock-from-scratch-part-5` has a heading called
+     * "Styling WebView CSS &lt;style&gt; BODY", and WordPress's table-of-contents
+     * plugin copied that heading text into the TOC markup WITHOUT escaping it. So
+     * the content carries a literal `&lt;style&gt;` with no closing tag, and every
+     * parser -- ours and the browser's alike -- then reads the remaining 24,362
+     * characters as CSS. The post imported as ZERO words, and it is unreadable on
+     * foojay.io for the same reason. The real fix is upstream (rename the heading
+     * or fix the plugin's escaping); this makes our copy survive it.
+     *
+     * Only the unmatched openers are escaped, counted from the end, so a post
+     * with a genuine stylesheet block keeps it. Applied on the REST fallback path
+     * alone, where a body is already known to be implausibly short.
+     */
+    static String neutralizeStrayRawText(String html) {
+        String out = html;
+        for (String tag : new String[]{"style", "script", "textarea", "xmp"}) {
+            Matcher open = Pattern.compile("(?i)<" + tag + "(?=[\\s>])").matcher(out);
+            List<Integer> at = new ArrayList<>();
+            while (open.find()) at.add(open.start());
+            int closes = out.split("(?i)</" + tag + ">", -1).length - 1;
+            for (int i = at.size() - 1; i >= closes; i--) {
+                int pos = at.get(i);
+                out = out.substring(0, pos) + "&lt;" + out.substring(pos + 1);
+                System.out.println("  escaped an unclosed <" + tag + "> in the post content"
+                        + " -- it would swallow everything after it (WordPress TOC plugin?)");
+            }
+        }
+        return out;
+    }
+
+    /** Below this, a body is treated as a parse failure rather than a short post.
+     *  The shortest real post in the archive is comfortably above it. */
+    static final int MIN_PLAUSIBLE_BODY_WORDS = 40;
+
+    static int wordCount(String text) {
+        if (text == null || text.isBlank()) return 0;
+        return text.trim().split("\\s+").length;
+    }
+
+    /**
+     * The post's body converted from the WordPress REST API instead of the
+     * rendered page, or null when REST has nothing usable. Never throws: a
+     * fallback that fails must leave the page-derived body alone.
+     */
+    static String bodyFromRest(PostData d, HtmlToMarkdown.Options opts) {
+        try {
+            JsonNode posts = fetchJson(BASE_URL + "/wp-json/wp/v2/posts?slug="
+                    + java.net.URLEncoder.encode(d.slug, java.nio.charset.StandardCharsets.UTF_8)
+                    + "&_fields=content");
+            if (!posts.isArray() || posts.isEmpty()) return null;
+            String html = posts.get(0).path("content").path("rendered").asText("");
+            if (html.isBlank()) return null;
+            // Parsed with the post's own URL as the base, so a relative image or
+            // link resolves exactly as it would on the page.
+            Element content = Jsoup.parseBodyFragment(neutralizeStrayRawText(html), d.url).body();
+            resolveBodyHeadings(content, d.title);
+            content.select(SELECTOR_CONTENT_NOISE).remove();
+            return HtmlToMarkdown.convert(content, opts, "").markdown;
+        } catch (Exception e) {
+            System.err.println("  REST body fallback failed for " + d.slug + ": " + e);
+            return null;
+        }
     }
 
     static JsonNode findArticleJsonLd(Document doc) {

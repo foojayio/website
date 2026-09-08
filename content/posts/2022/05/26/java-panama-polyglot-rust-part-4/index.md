@@ -5,7 +5,7 @@ lastmod: "2022-05-26T08:33:05+00:00"
 description: "By exposing native Rust functions, you can be easily accessed from Java code using Project Panama's Foreign Function Access APIs."
 authors:
   - "carldea"
-image: "Favicon-3-2.png"
+image: "rust-logo-blk.svg"
 categories:
   - "JEPs"
   - "Project Panama"
@@ -228,6 +228,8 @@ Rust getting process id = 36396
 ```
 
 If you've gotten this far you deserve a high five! Way to go!
+
+## Conclusion
 
 You've now had a chance to build and create a Rust based native library using `cargo`.
 

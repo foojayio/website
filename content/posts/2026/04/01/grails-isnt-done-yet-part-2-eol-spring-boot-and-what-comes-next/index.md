@@ -4,12 +4,14 @@ date: "2026-04-01T08:48:56+00:00"
 description: "Grails graduated to a Top-Level Apache project in 2025. Here's what the 18-month migration, Grails 7 release, and Spring Boot alignment mean for teams still running it."
 authors:
   - "steve-poole"
-image: "Favicon-3-2.png"
+image: "grails-banner.svg"
 categories:
   - "Spring"
 related_posts:
 frozen: false
 ---
+
+## Grails Isn't Done Yet (Part 2): EOL, Spring Boot, and What Comes Next
 
 In the [companion article](https://foojay.io/today/grails-isnt-done-yet-part-1-inside-the-asf-reboot/) to this one, I looked at the revitalisation of Grails under the Apache Software Foundation: the 18-month migration, the technical modernisation, and the release of Grails 7 as a Top-Level ASF Project. That is the good-news story, and it is a genuinely impressive piece of community engineering.
 
@@ -72,6 +74,8 @@ Upgrading Grails means upgrading Spring Boot, which means upgrading Java, which 
 For teams with a single application, that is manageable. For teams with a portfolio of services, some of which were built by people who have since left the organisation, it is a multi-quarter programme of work.
 
 Pretending otherwise does not make the problem smaller. It just makes the plan worse.
+
+## What to actually do about it
 
 #### Know what you're running
 

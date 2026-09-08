@@ -22,8 +22,12 @@ In this third and final part, we will build on the execution plan created in [Pa
 
 A live version of the Agentic WMS is available[here](https://agentic-wms-39763860545.southamerica-west1.run.app/), and the complete source code is available[here](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/use-cases/agentic-wms).
 
+## From Plan to Execution
+
 Let's revisit the complete agent flow. The first stages: **Define the Agent, Trigger the Agent, and Plan,** were covered in the previous article. Now we will focus on executing the tasks, using the available tools, gathering context, and making the replenishment decision.  
 ![](p3-flow-765x1024.jpg)
+
+## Execute tasks with controlled tools
 
 With the execution plan created in [Part 2](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-2-java-and-spring-ai/), the [AgentRunner](https://github.com/mongodb-developer/mongodb-jvm-showcase/blob/ea5c87c042867a0ea0c71f9ca80c41b466bd2981/java/use-cases/agentic-wms/src/main/java/com/devrel/wms/agent/AgentRunner.java#L56) starts processing the tasks one at a time. For each task, the runner reads its description and capability, executes it, stores the result, and then continues with the next task:
 
@@ -213,6 +217,8 @@ String filter =
 
 Together with the results from the ANALYSIS tasks, these policies give the agent the operational and business context required to decide whether replenishment is needed.
 
+## Decide
+
 After the ANALYSIS and POLICY tasks are completed, the DECISION task uses the collected context to determine whether replenishment is required. The result ends with one of two tokens:
 
 ```
@@ -324,6 +330,8 @@ If a replenishment request was created, it is now available on the[Replenishment
 
 This completes the flow: the agent gathers context through controlled tools, decides whether replenishment is necessary, and acts only when required.
 
+## Next steps
+
 During a single execution, the agent uses the results of previous tasks as context for the tasks that follow. A natural next step would be to give the agent memory across different executions.
 
 For example, before creating a new replenishment request, the agent could look at previous AgentRun records and use relevant outcomes from similar situations:
@@ -333,6 +341,8 @@ For example, before creating a new replenishment request, the agent could look a
 This would allow the agent to use not only the context of the current execution, but also relevant information from previous ones. One possible evolution would be to retrieve similar past executions and add them to the agent context before making a new decision.
 
 There are many other directions in which this agent could evolve, but this is a good example of how the same design can gradually become more context-aware over time.
+
+## Conclusion
 
 The main goal of this series was to show how an AI agent can add value in scenarios where business decisions depend on multiple sources of context and increasingly complex rules. Our replenishment example is only a small glimpse of what this approach can support in a real Warehouse Management System.
 

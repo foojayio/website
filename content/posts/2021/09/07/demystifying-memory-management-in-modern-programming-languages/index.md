@@ -127,7 +127,7 @@ You can read the remaining parts of this series via the links below:
 * [Part 4: Memory management in Go](https://deepu.tech/memory-management-in-golang/)
 * [Part 5: Memory management in Rust](https://deepu.tech/memory-management-in-rust/)
 
-<!-- -->
+## References
 
 * [homepages.inf.ed.ac.uk](http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf)
 * [javarevisited.blogspot.com](https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1)

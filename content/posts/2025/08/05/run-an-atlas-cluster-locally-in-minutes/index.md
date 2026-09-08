@@ -17,6 +17,8 @@ related_posts:
 frozen: false
 ---
 
+## **Run an Atlas cluster locally in minutes**
+
 You no longer need a cloud account to try [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay-blog-atlas&utm_term=tony.kim) Atlas features. Spin up a fully compatible local cluster in seconds, with no login, no credit card, and no friction.
 
 🕒 Reading time: 2-3 min

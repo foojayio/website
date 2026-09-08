@@ -16,6 +16,8 @@ Hi everyone and welcome to the July 2021 edition of the Visual Studio Code Java 
 
 In this article, we are going to share the progress of our overall product roadmap, and highlight improved user experience of our features for testing, Maven dependency management, and project management.
 
+## Testing
+
 Our Java extensions are among the first to adopt the [new Testing API](https://code.visualstudio.com/updates/v1_59#_testing-apis "new Testing API") from Visual Studio Code to provide for a better testing experience.
 
 With the recent release of [Visual Studio Code 1.59](https://code.visualstudio.com/updates/v1_59 "Visual Studio Code 1.59"), as well as our [Java Test Runner](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test "Java Test Runner") extension (included in the [Java Extension pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "Java Extension pack")), we have made significant improvements to the Java testing experience in terms of features, capabilities, and ease of use.
@@ -64,6 +66,8 @@ Besides testing and dependency management, we have also made improvements to pro
 * When I save the file, "EXPLORER" will automatically expand and display (Issue [#430](https://github.com/microsoft/vscode-java-dependency/issues/430 "#430"))
 * Observe exceptions when opening a file which is not on the classpath (Issue [#494](https://github.com/microsoft/vscode-java-dependency/issues/494 "#494"))
 
+## Roadmap Progress Update
+
 Last month, we s[hared our roadmap for the next few months](https://devblogs.microsoft.com/java/java-on-visual-studio-code-update-june-2021/ "hared our roadmap for the next few months"). In specific, we mentioned several areas as our focus.
 
 * Fundamental Experience Improvement
@@ -79,10 +83,14 @@ We will continue our journey by adding more features such as test coverage in th
 
 For other items mentioned in the roadmap, we are actively working on those areas and will provide an update when important progress is made
 
+## Feedback and Suggestions
+
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 
 * Leave your comment on this blog post
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose "Open an issue ")on our GitHub Issues page
+
+## Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

@@ -29,7 +29,7 @@ In this tutorial, we will send logs of Hazelcast Viridian Dedicated Clusters to 
 * The Hazelcast Viridian Dedicated is a licensed version of the cloud-managed service. Dedicated means that you have a specific server (cloud instance) all dedicated to you, so there is no risk of interruption from other tenants. Hazelcast Viridian Dedicated is ideal for long-running, continuous production environments where workloads are generally predictable.
 * Amazon OpenSearch Service to securely unlock real-time search, monitoring, and analysis of business and operational data. Amazon OpenSearch Service makes it easy to perform interactive log analysis, real-time application monitoring, website searches, and more.
 
-<!-- -->
+## Step 1: Set Up an Amazon OpenSearch Domain
 
 * Create a Hazelcast Viridian Dedicated account: <https://viridian.hazelcast.com/sign-in>
 * Create an AWS account: <https://portal.aws.amazon.com/billing/signup#/start/email>
@@ -38,7 +38,7 @@ In this tutorial, we will send logs of Hazelcast Viridian Dedicated Clusters to 
 * Search for and select Amazon OpenSearch Service. The Dashboard opens ready for you to start the configuration.
 * Click Create domain.
 
-<!-- -->
+## Step 2. Configure Your OpenSearch Domain
 
 * In the Domain name field, enter a short name for your OpenSearch domain. For example, hazelcast-cloud-logs.
 * In the Deployment type section:
@@ -53,7 +53,7 @@ In this tutorial, we will send logs of Hazelcast Viridian Dedicated Clusters to 
 * Kibana URL
 * Domain endpoint
 
-<!-- -->
+## Step 3. Configure Logging Integration in Hazelcast Viridian
 
 * Configure your Viridian Dedicated cluster to send log files to the OpenSearch domain.
 * You'll need the master user credentials and domain endpoint that you created when you configured OpenSearch.
@@ -66,7 +66,7 @@ In this tutorial, we will send logs of Hazelcast Viridian Dedicated Clusters to 
 * OpenSearch supports HTTPS over port 443.
 * Click Create Integration. Within 30 seconds, Hazelcast starts to send log files to OpenSearch, which are made available in Kibana.
 
-<!-- -->
+## Step 4. Set Up a Kibana Dashboard
 
 * From your domain details page in OpenSearch, click the Kibana URL.
 * Log in to Kibana, using your master user credentials.
@@ -78,6 +78,8 @@ In this tutorial, we will send logs of Hazelcast Viridian Dedicated Clusters to 
 * When Kibana finds the Viridian cluster logs, click Next step.
 * From the Time field list, select updated_at so that you'll be able to filter your log file data by time.
 * Click Create index pattern. Your log file data is ready to view. Simply select Kibana \> Discover from the main menu.
+
+## Summary
 
 In this tutorial, you've learned how to do the following:
 

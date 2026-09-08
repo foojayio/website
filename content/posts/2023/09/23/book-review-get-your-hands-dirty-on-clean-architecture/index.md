@@ -35,6 +35,8 @@ One of the most noteworthy characteristics of "Get Your Hands Dirty on Clean Arc
 
 The exemplary organization of the book is noteworthy. It commences with an exposition on the deficiencies of Layered architecture, subsequently delving into the intricacies of Single Responsibility Principle (SRP), Dependency Injection (DI), Clean Architecture, and the Hexagonal Architecture, which collectively constitute a clean architecture. The seamless transition from one chapter to the next facilitates comprehension for readers.
 
+## The abstract levels that are discussed in each chapter are presented below.
+
 * **Chapter 1:** The issues pertaining to the layered architecture were deliberated upon.
 * **Chapter 2:** The topic of Inverting Dependencies was deliberated upon, with a detailed explanation of the Single Responsibility Principle, the implementation of the Dependency Inversion Principle, Clean Architecture, and Hexagonal Architecture. The discussion centered on how these principles aid in the development of software that is easily maintainable.
 * **Chapter 3:** The topic of discussion pertained to the appropriate organization of code, package structure, and the significance of dependency injection.

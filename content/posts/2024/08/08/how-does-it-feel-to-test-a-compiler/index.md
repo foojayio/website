@@ -22,9 +22,13 @@ frozen: false
 
 I'll briefly talk about my path to compiler testing, the Kotlin/Native compiler, the specifics of the tasks, the tools I use, and the knowledge that helps me in my work.
 
+## About me
+
 I graduated with a bachelor's and master's degree in Software Engineering and then spent ten years in backend automation testing, including testing email backends (IMAP, POP3 protocols, email storage system, etc.), leading a testing team, and building test processes and test automation from scratch.
 
 In addition, I was involved in testing infrastructure and a bit of backend building — I believe that a tester needs to know what path a product takes from the code stage in the repository to the production service. By the way, I found a few bugs in the [linking](https://en.wikipedia.org/wiki/Linker_(computing) "linking") of services written in C that no one had noticed for years, and now I work with linking quite often.
+
+## Why Kotlin/Native?
 
 As it often happens, it was a matter of chance. At the time, I was considering a career change, and I stumbled upon a job opening at JetBrains. I decided to give it a shot, went through several interview stages, and received an offer.
 
@@ -32,17 +36,23 @@ What I liked about the position was that it was a niche product, and working wit
 
 The test assignment, by the way, was to build and test an interpreter written in C++. Even at that stage, I could roughly assess whether I liked doing this or not.
 
+## Compilers
+
 What is a compiler and what does it consist of? A compiler is a program that translates text written in a programming language into another language (the target language). Typically, a compiler translates software modules into equivalent software modules in a low-level language (or directly into machine language), and then assembles them into a program, taking into account static and dynamic linking (often with the help of a separate linker, such as [ld](https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_chapter/ld_1.html#SEC1 "ld")).
 
 Compilers consist of two parts: frontend and backend. The frontend is responsible for lexical, syntactic, and semantic analysis. For example, if you try to assign a string value to a variable of type Int, an error will be generated — this is what the frontend is responsible for. The backend, on the other hand, is responsible for generating target language (i.e. machine code).
 
 ![A simplified compiler design scheme](Untitled-4-scaled.jpg)
 
+## Kotlin/Native
+
 Kotlin/Native is a technology for compiling Kotlin code to native binaries which can run without a virtual machine. Kotlin/Native includes an [LLVM](https://llvm.org/ "LLVM")-based backend for the Kotlin compiler and a native implementation of the Kotlin standard library.
 
 Kotlin/Native is primarily designed to allow compilation for platforms on which virtual machines are not desirable or possible, such as embedded devices or iOS. It is ideal for situations when a developer needs to produce a self-contained program that does not require an additional runtime or virtual machine.
 
 Kotlin/Native is also used in [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html "Kotlin Multiplatform").
+
+## Compiler testing
 
 How does compiler testing differ from backend or mobile app testing? If we abstract away from the product aspect of a compiler, technically it's a program, i. e. an executable file, that can be launched, passed various parameters, and that will output some result based on some logic (in the case of a compiler, this will most likely be a library or executable file).
 
@@ -88,6 +98,8 @@ The typical workflow for tasks looks something like this:
 5. If necessary, automated tests are added (this can be done by the tester or the developer).
 6. If there are bugs, then tasks are created.
 7. A decision is made on whether the task is ready for release.
+
+## A few examples
 
 A question may arise: what exactly did you have to deal with, what kind of tasks can you encounter?
 
@@ -229,6 +241,8 @@ I also encountered automated tests as part of the task to improve Objective-C in
 
 These are just a few examples, but even from them you can see that the tasks can be very diverse: from testing on different code examples to setting up integration automated tests and performance testing.
 
+## Tools
+
 In fact, there are no specific tools — I use the console, bash scripts, vim, IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/ "IntelliJ IDEA")), Gradle, I read documentation and specifications.
 
 Since the Kotlin/Native compiler has many different parameters, we're facing a problem of choosing the optimal set of tests that would not cover all combinations of parameters (this would be a huge test suite), but would find potential bugs at the intersection of using some parameters. I think it's already clear that I'm hinting at [pairwise testing](https://en.wikipedia.org/wiki/All-pairs_testing "pairwise testing") 🙂 We use this test design technique, and the [pict](https://github.com/microsoft/pict "pict") utility helps us with this. Our automated test configuration repository contains a test model for the compiler, and there is a script that generates the necessary methods for the [Kotlin DSL](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html "Kotlin DSL") of TeamCity automated test build configurations.
@@ -236,6 +250,8 @@ Since the Kotlin/Native compiler has many different parameters, we're facing a p
 Sometimes I use [lldb](https://lldb.llvm.org/ "lldb") for debugging — my experience with [gdb](https://sourceware.org/gdb/ "gdb") at one of my previous jobs helps. In general, my experience with Linux, with setting up infrastructure and building services written in various programming languages (C, C++, Java, Go and even Perl) is very helpful in my work. Specific tools may change, but there is always a basic theory, basic approaches on which everything is built.
 
 In my opinion, it is very important to have and maintain knowledge of this rather than knowledge of specific tools. Today you're testing an HTTP API, and tomorrow they will implement a new service using a custom binary protocol. The QA engineer should not be daunted by this, because the essence remains the same — you're still testing a service that receives and sends bytes organized according to some specification.
+
+## Conclusions
 
 This article is just a brief overview of the work of a QA engineer in a compiler development team.
 

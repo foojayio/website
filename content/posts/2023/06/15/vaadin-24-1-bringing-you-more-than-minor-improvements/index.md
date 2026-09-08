@@ -65,11 +65,15 @@ This release also adds support for lazy rendering of columns for faster loading 
 
 [Read more about lazy column rendering →](https://vaadin.com/docs/latest/components/grid#lazy-column-rendering "Read more -&gt;")
 
+## Side Navigation menu
+
 [![Vaadin SideNav Component](sidenav-24.1-700x379.png)](https://vaadin.com/docs/latest/components/side-nav)
 
 New SideNav component provides a vertical list of navigation links with support for collapsible hierarchy, icons and notification badges.
 
 [Read more about SideNav component →](https://vaadin.com/docs/latest/components/side-nav "Read more -&gt;")
+
+## WCAG 2.1 standards
 
 Added ARIA label APIs needed by screen readers as well as a number of other accessibility improvements to conform with Web Content Accessibility Guidelines.
 

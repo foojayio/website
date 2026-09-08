@@ -22,6 +22,8 @@ frozen: false
 
 The Java GitHub Action that Rules them all - Disco API
 
+## Introduction
+
 When we ended Part 2 of this blog series Lights, Camera, Action: GitHub Actions with Java [Part 2](https://foojay.io/today/github-actions-with-java-part-2 "Part 2"), I talked about the near future of GitHub Actions. Well, today the future is now, so let's get into this!
 
 Welcome back to the series of articles on GitHub Actions with Java Part 3. If you didn't catch Part 1 \& 2 head over here: [Part 1](https://foojay.io/today/github-actions-with-java-part-1 "Part 1") \& [Part 2](https://foojay.io/today/github-actions-with-java-part-2 "Part 2")
@@ -29,6 +31,8 @@ Welcome back to the series of articles on GitHub Actions with Java Part 3. If yo
 In this article we will talk about the new JDK distributions added to the default GitHub actions **setup-java@v2** and the **New** **setup-java@disco** GitHub Actions from our very own Foojay.io. This new Disco GitHub Action uses the flexible and powerful [Discovery API](https://github.com/foojayio/discoapi "Discovery API") created by Gerrit Grunwald ([@hansolo_](https://twitter.com/hansolo_ "@hansolo_")). As you will see later, the Discover API is able to download any JDK/JRE distribution available from any vendor.
 
 For the impatient the example code (yml) for this article is on GitHub [ci.yml](https://github.com/carldea/HelloWorldGHActions/blob/main/.github/workflows/ci.yml#L27-L42 "ci.yml").
+
+## Using actions/setup-java@v2
 
 New to GitHub Actions `setup-java@v2` are additional Java build distributions from the vendors Microsoft and Liberica. To keep an eye on their progress you can see the link below:  
 <https://github.com/actions/setup-java#supported-distributions>
@@ -79,6 +83,8 @@ Above you'll notice the workflow will build and test the repo for JDK 17 on Linu
 
 To see the example workflow head over to github here  
 <https://github.com/carldea/HelloWorldGHActions/blob/main/.github/workflows/ci.yml#L10-L25>
+
+## Using foojayio/setup-java@disco
 
 **New** to GitHub Actions `foojayio/setup-java@v2` is the ability to specify **any** Java build distribution from any vendor such as the following:
 
@@ -150,6 +156,8 @@ When the GitHub action workflows are run successfully the summary should look li
 ![GitHub Actions workflows run successfully](GitHubActionJobsRunSuccessfully.png)
 
 GitHub Actions workflows run successfully
+
+## Conclusion
 
 You got a chance to see the new distributions added to `actions/setup-java@v2` for you to choose from. Also, you were shown the **New** `foojayio/setup-java@disco` GitHub Actions that enables you to specify **ANY** build distribution! When using this action you can remove the `distribution` attribute it will default to using `zulu` as a distribution. And lastly you saw the GitHub Actions CI/CD job run successfully.
 

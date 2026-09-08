@@ -20,6 +20,8 @@ We all have some hobby, be it sports, fishing, playing games or building compile
 
 One of my hobbies is regularly searching the JDK for new Java classes with executable main methods.
 
+## How come?
+
 Many years ago, during my forays through the JDK sources, I first encountered a class with a main-method I didn't know about. That was in 2007 (oh boy).
 
 The class was Class2HTML from the BCEL (Bytecode Engineering Library) library embedded in the JDK back then.
@@ -29,6 +31,8 @@ With this class, you could create a clear HTML representation of the bytecode of
 Of course, that was many moons ago, in the meantime, BCEL has been replaced in the JDK by the ASM bytecode analysis library.
 
 Since then, I've been looking for new unknown tools and possibilities in the JDK :).
+
+## Available Tools in the JDK
 
 Many binary tools from the
 
@@ -64,6 +68,8 @@ $JDK_HOME/bin
 ```
 
 directory.
+
+## How to find hidden Tools in the JDK?
 
 There are different approaches to searching the JDK for classes with main methods.  
 
@@ -519,6 +525,8 @@ If you want to try it yourself, take a look at [this Github Gist](https://gist.g
 
 Now let's see the tool in action!
 
+## Detected Tools in JDK 21
+
 Thanks to the support for single-file source-code programs from Java 11 onwards, we can call the tool with the following command without explicitly compiling the example first.
 
 ```
@@ -668,6 +676,8 @@ You can also start the hsdb ui via: `java -m jdk.hotspot.agent/sun.jvm.hotspot.H
 {{< img src="java-hsdb-700x445.jpg" class="size-medium" alt="Hot Spot Debugger UI" width="700" height="445" >}}
 
 HotSpot Debugger UI
+
+## Detected Tools in JDK 8
 
 Tip: If we want to analyze an older JDK, e.g., JDK8 we can do it like this:
 
@@ -826,6 +836,8 @@ OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/lib/tools.jar sun.tools.serialver.SerialVer
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/jre/lib/ext/zipfs.jar com.sun.nio.zipfs.ZipInfo
 ```
+
+## Conclusion
 
 In this article we have learned that the JDK contains many more programmes than the
 

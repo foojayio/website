@@ -44,6 +44,8 @@ Genre: Technical Fiction*
 
 Mastering the Java Virtual Machine
 
+## Summary of Each Section
+
 ## Part 1: Understanding the JVM
 
 In **Chapter 1**, he primarily discussed the evolution of Java, introduced the JVM, and explained how the JVM works internally.

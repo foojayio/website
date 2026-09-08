@@ -22,6 +22,8 @@ A lot, if not all, data science projects require some data visualization front-e
 
 In this article I will describe how you can benefit from such a data visualization front-end without writing a single line of code.
 
+## The use case: changes from Wikipedia
+
 I infer that you are already familiar with [Wikipedia](https://wikipedia.org/). If you do not, Wikipedia is an online encyclopedia curated by the community. In their own words:
 > Wikipedia is a free content, multilingual online encyclopedia written and maintained by a community of volunteer contributors through a model of open collaboration, using a wiki-based editing system.
 
@@ -34,6 +36,8 @@ Even with this in place, it would be easy to overflow the reviewing capacity of 
 Now, my use-case is about visualizing worldwide, anonymous contributions. I'll first read the data from Wikipedia, filter out changes by authenticated accounts, infer the location of the change, infer the language of the change, and then display them on a worldwide map. From this point, I'd explore the changes visually and say that language and location match somehow.
 
 We are going to achieve that by following a step-by-step process.
+
+## Waiting On the World to Change
 
 The first step on our hands is actually to get data in, *i.e.* , to get the changes from Wikipedia into our data store. It's pretty straightforward, as Wikipedia itself provides its changes on a [dedicated Recent Changes page](https://en.wikipedia.org/wiki/Special:RecentChanges). If you press the "Live Update" button, you can see the list is updated in real-time (or very close to). Here's a screenshot of the changes at the time of the writing of this post:
 
@@ -57,6 +61,8 @@ Here's an excerpt from the POM:
     <version>2.3.2</version>
 </dependency>
 ```
+
+## Getting data in
 
 Hazelcast data pipelines work by regularly polling the source. With an HTTP endpoint, that's straightforward, but with SSE, not so much as SSE relies on subscription. Hence, we need to implement a custom `Source` and design it around an internal queue to store the changes as they arrive, while polling will dequeue and send them further down the pipeline.
 
@@ -131,6 +137,8 @@ Here's the last entry, but formatted for better understanding:
 }
 ```
 
+## Kibana for data visualization
+
 As I mentioned in the introduction, we have a fantastic tool at our disposal for data visualization that doesn't require writing code, and that tool is Kibana. Kibana is part of the so-called ELK stack:
 
 * Elasticsearch provides the storage and indexing part
@@ -188,6 +196,8 @@ You should see something like this:
 ![Wikipedia change events displayed via Kibana](Screenshot-2021-07-28-at-15.05.34-700x510.png)
 
 Within this view, you can see all ingested documents. To explore further, you can choose the fields you want to see (on the right) and filter out documents based on their structure (in the Search bar above).
+
+## Curating "wrong" data
 
 If you tried executing the job with the code at this step, you might have noticed that after some time, Elasticsearch stops ingesting data. Looking at the Hazelcast logs, you may notice a similar stack trace:
 
@@ -253,6 +263,8 @@ val pipeline = Pipeline.create().apply {
 5. Map each item in the pipeline using the previously-defined `FunctionEx`
 
 Rerunning the pipeline now works without any glitch!
+
+## Making it more readable and "operable"
 
 Because the pipeline is stable, it's time to refactor to build upon solid foundations. The refactoring goes along two axes:
 
@@ -357,6 +369,8 @@ digraph DAG {
 }
 ```
 
+## Geo-locating data
+
 Looking at the existing data, we can notice two types of contributions:
 
 1. Contributions by authenticated users, *e.g.* , `GeographBot`
@@ -415,6 +429,8 @@ val pipeline = Pipeline.create().apply {
 4. Geo-locate the IP
 5. Add the data to the JSON
 6. Add the step to the pipeline
+
+## Our first data visualization
 
 With geo-located data, we would like to display changes on a world map. The good news, Kibana offers such a widget out-of-the-box.
 
@@ -501,11 +517,15 @@ Let's start the pipeline again. Now, we can try to repeat the steps to create a 
 
 Click on the Add layer button on the bottom right corner. You can already enjoy some data points displayed on the map.
 
+## Exploring data
+
 Data points are excellent, but not enough. Suppose that we want to understand the entries by their location. For that, we need to add fields, *i.e.* , `meta.uri` and `comment`. Don't forget to name the layer and save it. It's now possible to click on a data point to display the related data:
 
 ![](Screenshot-2021-10-21-at-16-700x419.png)
 
 Wikipedia is a source of information for millions of users around the world. Because contributions can be anonymous (and remember those are geo-located), a malicious user can update an article not to benefit the community but to further a geopolitical agenda. We could ask the data whether the triplet article-language-location seems ok and does it raise some red flags. We already have the article via the `meta.uri` and the location, we need to add the language.
+
+## Adding derived data
 
 Two main options are available to get the language:
 
@@ -581,6 +601,8 @@ On the map, go to the Filtering section and add a KQL filter that filters out da
 
 ![](Screenshot-2021-10-22-at-09-700x312.png)
 
+## Refining data
+
 It's already better, though we can notice some discrepancies:
 
 * "Ngfn" is not Sotho but more like somebody didn't find a good comment
@@ -623,6 +645,8 @@ Note that depending on the first data point of the pipeline, you might end up wi
 At this point, you can display the language confidence and update the filter to filter out data points with low confidence, *e.g.* , `language.name : * and language.confidence > 0.2`. Here's the result:
 
 ![](Screenshot-2021-10-22-at-10-700x313.png)
+
+## Conclusion
 
 In this post, we have described how you could visualize and explore a data set with the help of the Hazelcast Platform for the pipelining part and Kibana for the visualization part. The latter doesn't need any front-end coding skills - or any coding skills whatsoever. You don't need to be a Pythonista nor a graphical library expert to start exploring your data sets now: being a developer on the JVM is enough.
 

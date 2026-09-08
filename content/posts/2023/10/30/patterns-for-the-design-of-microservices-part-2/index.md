@@ -26,6 +26,8 @@ In the [previous article](https://foojay.io/today/patterns-for-the-design-of-mic
 
 Database Patterns
 
+## 1. Data Management
+
 There are seven distinct patterns that further categorize the data management.
 
 * **Database per Service**
@@ -132,5 +134,7 @@ A service utilizing the Saga Pattern is required to update business entities and
 This pattern can significantly enhance its effectiveness by utilizing **Event Sourcing** and **CQRS**.
 
 In the upcoming article, we will delve into the patterns of **observability** and **cross-cutting concerns**.
+
+## Reference
 
 <https://microservices.io/>

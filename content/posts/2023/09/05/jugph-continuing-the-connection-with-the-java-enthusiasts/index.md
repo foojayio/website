@@ -17,11 +17,15 @@ related_posts:
 frozen: false
 ---
 
+## JUG PH: Continuing the Connection with the Java Enthusiasts
+
 **Continuing the connection with the Java Enthusiasts and the efforts of [Java User Group Philippines](https://www.meetup.com/java-user-group-ph/ "Java User Group Philippines") (JUG PH), we finished our 2nd and 3rd meetup last June and August 2023.**
 
 This is the JUG PH Continuation Report of the revitalized report here: <https://foojay.io/today/java-user-group-ph-report-2023/>.
 
 The speakers of these meetups were composed of [Tristan Mahinay](https://www.linkedin.com/in/rjtmahinay/ "Tristan Mahinay"), the JUG PH Leader and [Yee Kang Chang](https://www.linkedin.com/in/ykchang/ "Yee Kang Chang"), an IBM Architect and Developer Advocate.
+
+## Announcements
 
 Every meetup the JUG PH Leaders will introduce its sponsors. The sponsors for these meetups as always were [Azul Systems](https://www.azul.com/ "Azul Systems"), [Orange and Bronze Philippines](https://www.orangeandbronze.com/ "Orange and Bronze Philippines") and [JetBrains](https://www.jetbrains.com/ "JetBrains").
 
@@ -33,6 +37,8 @@ The JUG PH is very thankful for these sponsors as they are vital to the continua
 The meetup announced the availability of [Incub8 Space](https://incub8space.com/ "Incub8 Space") by [Kerby Martino](https://www.linkedin.com/in/kerbymartino/ "Kerby Martino") as a meetup place in the Souther Luzon Area. The coworking space is headquartered at Kawit, Cavite, Philippines. In the future, the user group will have events in this area catering in-person or online
 
 ![](incub8_space_introduction-1024x768.jpg)
+
+## Meetup #2 and #3
 
 ## Quarkus and OpenShift Development
 
@@ -67,6 +73,8 @@ Below is the official speaker poster for this event.
 ![](jugph_3_YK-Chang-469x510.jpeg)
 
 You can check the presentation of this meetup here: [Cloud-native Java innovations that matter with Open Liberty](https://github.com/JUGPH/java-presentations/tree/main/event-3 "Cloud-native Java innovations that matter with Open Liberty")
+
+## Continuing the initiative
 
 As of today the JUG PH already completed a total of 3 meetups using a hybrid setup.
 

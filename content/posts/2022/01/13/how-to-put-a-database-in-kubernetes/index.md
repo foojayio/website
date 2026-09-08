@@ -36,6 +36,8 @@ Let's demystify the deployment of databases and stateful workloads in K8s. Basic
 
 This article dives into the key steps of deploying databases and stateful workloads in K8s. You can learn more about them in the [upcoming O'Reilly book](https://twitter.com/JessHaberman/status/1425898298959859712): Managing Cloud Native Data on Kubernetes.
 
+## 1. Get to Know the Kubernetes Primitives
+
 Simply put: databases are just applications composed of compute, network, and storage. We can deploy them like any other K8s application and take advantage of resources that it provides: StatefulSets, Services, StorageClasses, PersistentVolumes, and PersistentVolumeClaims, and more.
 ![](0_xoPr_TvmecLWjIbC.png) Figure 1: Kubernetes resources help us think of applications in terms of compute, network, and storage.
 
@@ -46,6 +48,8 @@ For more great examples of using these primitives online, check the reference ex
 
 Once you've familiarized yourself with the basic building blocks of Kubernetes, there are three main considerations when setting up the right database for your application.
 
+## 2. Pick a Database
+
 To start, you'll want to think about what *kind* of database your application needs. To help you make the right choice, consider the following factors:
 
 * **Database language:** does your application need SQL, NoSQL, developer-friendly data APIs?
@@ -54,6 +58,8 @@ To start, you'll want to think about what *kind* of database your application ne
 
 Deciding on a database isn't entirely independent from other decisions in your application design, and we'll see more of this below. Note that your needs may also change as your application evolves.
 
+## 3. Pick a Storage Provider
+
 Unless the database you choose is just a cache holding ephemeral data, you'll need to configure your database to use persistent storage. If you're using one of the public clouds, you'll have storage options available such as Elastic Block Storage (EBS) volumes in AWS.
 
 However, there are many other options that are cloud-vendor independent. You can find a thriving ecosystem of K8s providers in the [Cloud-Native Storage category](https://landscape.cncf.io/card-mode?category=cloud-native-storage&grouping=category) of the CNCF Landscape.
@@ -61,17 +67,25 @@ However, there are many other options that are cloud-vendor independent. You can
 
 These include a number of options for managing both local and networked storage, in formats such as block, file, and object storage. You'll likely be able to find sample code that shows how to configure your selected database to use your chosen storage provider. For example, here's a [tutorial on running Apache Cassandra on OpenEBS](https://docs.openebs.io/docs/next/cassandra.html), a popular open-source storage provider for K8s that you can run in a variety of environments.
 
+## 4. Pick an Operator
+
 If you intend on running more than a small handful of nodes of your selected database, you'll benefit from automating your operations by using a K8s Operator. You can find a wide variety of operators for databases and other applications at the [OperatorHub](https://operatorhub.io/?category=Database). When selecting an operator, you'll want to make sure it's open-source, and also check how actively it's maintained.
 
 There are operators for most popular databases, such as the Zalando [Postgres-operator](https://postgres-operator.readthedocs.io/en/latest/), or [Cass-operator](https://github.com/k8ssandra/cass-operator), which the Apache Cassandra community [has recently banded around](https://cassandra.apache.org/_/blog/Cassandra-and-Kubernetes-SIG-Update-2.html). Cass-operator is actually part of a larger project called [K8ssandra](https://k8ssandra.io/), which builds on that operator to create a more comprehensive data platform around Cassandra. This includes tooling for maintenance and backups, along with an open-source data gateway called [Stargate](https://stargate.io/) that supports a variety of developer-friendly APIs.
+
+## 5. An Alternate Approach: Pick a Managed Service
 
 Of course, even with an operator, running a database in K8s yourself may be more than you want to take on, especially if you're a smaller team looking to maximize your leverage.
 
 If this is you, you can still take advantage of one of the many managed database services available. If you need a highly scalable database combined with a great developer experience, [DataStax Astra DB](https://astra.dev/3ARx46y) is a great choice. Astra DB is a managed Cassandra service that itself happens to be built on top of Kubernetes, and the Stargate APIs are available by default — even with a [free Astra DB account](https://astra.dev/3ARx46y).
 
+## 6. Meet a Community of Cloud-Native Data Practitioners
+
 No matter what choices you end up making for your K8s-deployed applications, you can find a group of passionate developers pushing the state of the art forward in the [Data on Kubernetes Community](https://dok.community/) (DoKC). If you're attending KubeCon North America, join us for [DoK Day](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/program/colocated-events/#data-on-kubernetes-day) on Tuesday, October 12.
 
 *Register* [*here*](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/)*to join KubeCon North America 2021 and* [*subscribe to our event alert*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about new DataStax workshops for developers, by developers. For exclusive posts on Cassandra, streaming, Kubernetes, and more; follow* [*DataStax on Medium*](https://datastax.medium.com/)*.*
+
+## Resources
 
 1. [Astra DB — Managed Apache Cassandra as a Service](https://astra.dev/3ARx46y)
 2. [Stargate APIs \| GraphQL, REST, Document](https://stargate.io/)

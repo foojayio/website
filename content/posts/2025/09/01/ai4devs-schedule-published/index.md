@@ -16,6 +16,8 @@ related_posts:
 frozen: false
 ---
 
+## 🚀 The AI4Devs Amsterdam 2025 Schedule is Live!
+
 The wait is over—**AI4Devs Amsterdam has just published its official schedule**, and it's packed with talks that every developer working with (or curious about) AI will want to catch.
 
 From live coding sessions to hands-on workshops, from security insights to multi-agent architectures—the program is designed to keep things practical, technical, and deeply relevant.

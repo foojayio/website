@@ -30,6 +30,8 @@ The security defaults applied by [K8ssandra](https://k8ssandra.io/) are about to
 
 The default values are based on Kubernetes' security best practices because Kubernetes does a great job of these and includes many of them in their core APIs. We'll detail them in this post.
 
+## The four layers of Kubernetes security
+
 As a security-conscious Kubernetes user, you'll need a trusted environment to run your Kubernetes clusters. Kubernetes security best practices recommend a layered methodology to augment a highly regarded[defense-in-depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) practice.
 
 The four layers described by Kubernetes for cloud-native security include artifacts that span application code to cloud.
@@ -39,13 +41,19 @@ K8ssandra security practices will follow this layered approach to give users ful
 
 Before we dive into K8ssandra's security offerings, it's worth noting that a [**Kubernetes Pod Security Policy**](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)**(PSP)** is being re-worked in the near future for the Kubernetes community.
 
+## Kubernetes is using a new approach to pod security
+
 You may be aware of the PodSecurityPolicy (PSP) as part of the [Kubernetes API](https://kubernetes.io/docs/concepts/overview/kubernetes-api/). The API had usability issues during its expansion. The path forward by Kubernetes now includes a new approach to replace the PodSecurityPolicy.
 
 In a nutshell, various parties are working on a["PSP replacement policy"](https://github.com/kubernetes/enhancements/issues/2579). They are targeting an Alpha release in Kubernetes 1.22.
 
+## Moving forward with K8ssandra
+
 Unless you've included PodSecurityPolicy (PSP) APIs or features on your own, you can move forward using K8ssandra without migrating any of them. None of them were used in past versions of K8ssandra.
 
 Future releases of K8ssandra won't include PSP features either. Instead, they'll include open and flexible security configurations that assist with secured deployments.
+
+## Pods and containers to support Kubernetes SecurityContext
 
 In an upcoming release, K8ssandra will include access and permission control settings for pods and containers. The pods and containers will support the Kubernetes SecurityContext, which encapsulates a wide range of security controls.
 ![](0_M9zl97g_QS0C4FTh.png) **Figure 2:**The container scope security.
@@ -60,6 +68,8 @@ The *rendered* pod configuration with those values applied will now include **re
 Below is an example of a pod-scoped SecurityContext. Its container-scoped SecurityContext defaults are applied. It's important to note that container SecurityContext settings will be isolated with settings unique to each container.
 ![](0_3S5FsrhzGXseoYlf.png) **Figure 4:**SecurityContext with defaults applied.
 
+## There will be no K8ssandra specific types
+
 Attribute compositions differ slightly in the Kubernetes documentation when it comes to the available `SecurityContext` attributes for pods and containers. This is because they are different types. A container's context is typed as `SecurityContext `and a pod's context as `PodSecurityContext`.
 
 The setting of the same attributes of the two types is possible within a K8ssandra `podSpec` configuration. When included, the container's security values will take precedence.
@@ -70,6 +80,8 @@ In Kubernetes version 1.22, the `PodSecurityContext`appears in `PodSpec` (core/v
 
 With these security features offered in K8ssandra, there will be no K8ssandra-specific types to support the pod and container runtime privileges. K8ssandra will fully reference the Kubernetes `SecurityContext` and `PodSecurityContext` APIs and types. All of those supported attributes will be available for use.
 
+## Users can customize the security in each container
+
 If you need to override or customize security, K8ssandra lets you do it at the pod or container level. There are placeholders in the K8ssandra `values.yaml` file to add or remove supported attributes as defined by the Kubernetes core API.
 
 A container's `SecurityContext` will include a `readOnlyRootFilesystem: true` setting by default. Users can override that value in each of the containers where it is not allowed.
@@ -79,6 +91,8 @@ However, overriding current and future K8ssandra security defaults will impact t
 Below is an example of `SecurityContext` customization for the Reaper container. This illustrates where the user could use container `SecurityContext` features other than the default set by K8ssandra. Only the single Reaper container will inherit the unique `SecurityContext` settings. No other containers will be impacted.
 ![](0_AKMkhU9y731mWVDj.png) **Figure 5:**Reaper container: SecurityContext example.
 
+## Future K8ssandra versions will expand security
+
 The `SecurityContext` features mentioned will be included in both the v1.x (post v1.3) and upcoming v2.x release streams. The intent is to continue the same level of security configurations in both versions until the 1.x release stream is retired.
 
 Additional defense-in-depth security practices will be included for K8ssandra. This will continue to reduce attack surfaces and expand on the cluster and container-level security. Rest assured, those features will continue to adhere to the Kubernetes security best practices and APIs.
@@ -86,6 +100,8 @@ Additional defense-in-depth security practices will be included for K8ssandra. T
 Discussions are underway for the addition of more `SecurityContext` defaults at the pod and container levels. Along with them come measures to harden the container images involved with K8ssandra.
 
 *We would love to hear about the functions you're missing in K8ssandra and Kubernetes. You can open a ticket on the* [*K8ssandra GitHub*](https://github.com/k8ssandra/k8ssandra)*or join the discussion in our* [*K8ssandra Community*](https://discord.com/invite/qP5tAt6Uwt)*on Discord.*
+
+## **Resources**
 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3LUzt1X) free plan for the fastest setup.
 

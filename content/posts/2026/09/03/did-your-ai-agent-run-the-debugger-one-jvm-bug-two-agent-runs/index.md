@@ -25,6 +25,8 @@ Most AI coding agents I have watched skip that step. They read the stack trace, 
 
 I wanted to know what that guess costs. So I took one real JVM bug, one model, one prompt, and ran it twice with two debugging workflows. Here is what the two transcripts show.
 
+## The bug: `Files.list` on a directory you cannot read
+
 The failure came from a Kotlin project running inside a JetBrains IDE on Windows. If you write Java, every line of the trace will look familiar, because it is plain `java.nio.file`:  
 ![](----------------2026-09-03---16.35.35-700x96.png)
 
@@ -84,6 +86,8 @@ At that point the hypothesis stopped being a hypothesis. The directory check pas
 The fix stayed at the filesystem boundary, kept the normal listing path unchanged, and came with a focused regression test. It needed no `println` calls, no new constructor parameter, and no change to the mention protocol. It passed review and is in production.
 
 It also used a try/catch. The difference was timing. The catch came after the agent had watched the failure and knew which exception to expect and what the caller needed from the result.
+
+## **The Java lesson hiding in the trace**
 
 Strip away the agents for a moment. The bug itself is a classic NIO trap that applies to any JVM language.
 

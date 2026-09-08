@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Space+Mono:wght@400;700&amp;display=swap');
+    </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e0c09"/>
+      <stop offset="100%" stop-color="#060504"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle horizontal grid -->
+  <g stroke="#E8831A" stroke-width="0.5" opacity="0.05">
+    <line x1="0" y1="90"  x2="1200" y2="90"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+  </g>
+
+  <!-- Vertical panel divider -->
+  <line x1="700" y1="0" x2="700" y2="630" stroke="#E8831A" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- RIGHT PANEL: LEAF / FLOWER MOTIF  -->
+  <!-- Center: 960, 315                  -->
+  <!-- ═══════════════════════════════════ -->
+
+  <!-- Background guide circles -->
+  <circle cx="960" cy="315" r="255" fill="none" stroke="#E8831A" stroke-width="0.5" opacity="0.09"/>
+  <circle cx="960" cy="315" r="188" fill="none" stroke="#E8831A" stroke-width="0.5" opacity="0.06"/>
+  <circle cx="960" cy="315" r="125" fill="none" stroke="#E8831A" stroke-width="0.5" opacity="0.04"/>
+
+  <!-- Faint watermark G behind everything -->
+  <text x="845" y="500"
+    font-family="'Playfair Display', Georgia, serif"
+    font-size="300" font-weight="900"
+    fill="#E8831A" opacity="0.045">G</text>
+
+  <!-- Leaf 4: straight up -->
+  <path d="M 960 315 Q 1005 207 960 135 Q 915 207 960 315 Z" fill="#E8831A" opacity="0.72"/>
+
+  <!-- Leaf 2: pointing right -->
+  <path d="M 960 315 Q 1068 360 1140 315 Q 1068 270 960 315 Z" fill="#E8831A" opacity="0.65"/>
+
+  <!-- Leaf 1: up-right (45°) -->
+  <path d="M 960 315 Q 1068 271 1087 188 Q 1004 207 960 315 Z" fill="#F2B259" opacity="0.56"/>
+
+  <!-- Leaf 5: up-left (135°) -->
+  <path d="M 960 315 Q 916 207 833 188 Q 852 271 960 315 Z" fill="#F2B259" opacity="0.46"/>
+
+  <!-- Leaf 3: down-right (−45°) -->
+  <path d="M 960 315 Q 1004 423 1087 442 Q 1068 359 960 315 Z" fill="#E8831A" opacity="0.40"/>
+
+  <!-- Leaf 6: pointing left -->
+  <path d="M 960 315 Q 852 270 780 315 Q 852 360 960 315 Z" fill="#E8831A" opacity="0.34"/>
+
+  <!-- Vein lines -->
+  <line x1="960" y1="315" x2="960"  y2="135" stroke="#FFD580" stroke-width="0.8" opacity="0.22"/>
+  <line x1="960" y1="315" x2="1140" y2="315" stroke="#FFD580" stroke-width="0.8" opacity="0.18"/>
+  <line x1="960" y1="315" x2="1087" y2="188" stroke="#FFD580" stroke-width="0.6" opacity="0.16"/>
+  <line x1="960" y1="315" x2="833"  y2="188" stroke="#FFD580" stroke-width="0.6" opacity="0.13"/>
+
+  <!-- Stem down -->
+  <line x1="960" y1="315" x2="960" y2="595" stroke="#E8831A" stroke-width="1.5" opacity="0.32"/>
+
+  <!-- Center dot -->
+  <circle cx="960" cy="315" r="13" fill="#E8831A" opacity="0.45"/>
+  <circle cx="960" cy="315" r="7"  fill="#F2B259" opacity="0.95"/>
+  <circle cx="960" cy="315" r="2.5" fill="#FFD580"/>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- LEFT PANEL: TYPOGRAPHY        -->
+  <!-- ═══════════════════════════════ -->
+
+  <!-- Top label -->
+  <text x="70" y="84"
+    font-family="'Space Mono', 'Courier New', monospace"
+    font-size="12" fill="#E8831A" opacity="0.85" letter-spacing="4">PART 1  ·  APACHE GRAILS</text>
+
+  <!-- Amber rule under label -->
+  <line x1="70" y1="97" x2="530" y2="97" stroke="#E8831A" stroke-width="1" opacity="0.4"/>
+
+  <!-- Main title -->
+  <text x="62" y="268"
+    font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+    font-size="152" font-weight="900"
+    fill="#F4EFE6" letter-spacing="-5">GRAILS</text>
+
+  <!-- Sub-headline -->
+  <text x="70" y="334"
+    font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+    font-size="50" font-weight="700"
+    fill="#E8831A" letter-spacing="-1">ISN&#x27;T DONE YET</text>
+
+  <!-- Divider rule -->
+  <line x1="70" y1="362" x2="658" y2="362" stroke="#F4EFE6" stroke-width="0.7" opacity="0.11"/>
+
+  <!-- Subtitle -->
+  <text x="70" y="402"
+    font-family="'Space Mono', 'Courier New', monospace"
+    font-size="19" fill="#F4EFE6" opacity="0.48" letter-spacing="0.5">Part 1: Inside the ASF Reboot</text>
+
+  <!-- Author rule -->
+  <line x1="70" y1="548" x2="658" y2="548" stroke="#E8831A" stroke-width="0.7" opacity="0.18"/>
+
+  <!-- Author credit -->
+  <text x="70" y="568"
+    font-family="'Space Mono', 'Courier New', monospace"
+    font-size="13" fill="#F4EFE6" opacity="0.27" letter-spacing="2">STEVE POOLE  ·  WITH JAMES FREDLEY</text>
+
+</svg>

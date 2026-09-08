@@ -21,6 +21,8 @@ related_posts:
 frozen: false
 ---
 
+## Introduction
+
 *Consider a bustling restaurant environment. The kitchen receives a flood of orders, waitstaff dart between tables, and patrons anxiously glance at their watches. Each time a waiter takes an order, he or she must verify it with the kitchen and wait for the kitchen to prepare the meal before attending to another table. This cumbersome method hampers efficiency, leaving the restaurant unable to meet customer demand.*
 
 *Now envision an alternative situation. Instead of enduring delays, waitstaff enter orders into a centralized system, prompting the kitchen to begin meal preparation immediately upon receipt. As soon as the kitchen prepares the food, waiters receive instant notifications, enabling them to serve customers promptly without any delays. This exemplifies event-driven architecture: a fluid, real-time system where they exchange information asynchronously, promoting scalability and quick responsiveness.*

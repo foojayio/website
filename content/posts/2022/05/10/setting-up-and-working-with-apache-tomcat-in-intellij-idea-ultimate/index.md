@@ -70,6 +70,8 @@ Now you will be able to see Hello World printed out in your browser:
 
 ![Hello World in browser](hello_world.png)
 
+## Using an Existing Application with Tomcat
+
 If you're not creating a new project from scratch and instead have an existing project that runs on Tomcat, you can configure IntelliJ IDEA Ultimate to connect to your existing Tomcat installation. Let's work with [this application](https://github.com/helenjoscott/MyWebApp) from GitHub:
 
 1. Clone the Project in IntelliJ IDEA and then go to **Run \> Edit Configurations**.

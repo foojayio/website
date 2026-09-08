@@ -24,6 +24,8 @@ frozen: false
 
 ![](daydreams-2-scaled.jpg)
 
+## **x402, ERC-8004, A2A, and The Next Wave of AI Commerce: Do AI Agents Dream of Electric Langoustines?**
+
 ***A Blade Runner riff for a world where the lobster ships paid endpoints while humans still argue about the roadmap.***
 
 ## The shift that matters for agent commerce - From "Crypto AI" to general AI

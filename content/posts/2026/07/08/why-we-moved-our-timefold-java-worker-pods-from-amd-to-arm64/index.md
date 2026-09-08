@@ -34,11 +34,15 @@ Half. For what amounted to a config tweak.
 
 That's the kind of anomaly that makes you stop and ask: why?
 
+## What Caused the Performance Gap?
+
 Our first instinct was to look for differences in the data that was sent to our platform. After digging through the inputs, we found some configuration noise, but even after controlling for that and running the two jobs with truly identical settings, the gap remained.
 
 One run was consistently twice as fast as the other.
 
 [Timefold Solver](https://github.com/TimefoldAI/timefold-solver "Timefold Solver") is deterministic. Given the same CPU time, it follows the exact same path. So if you're seeing different move calculation speeds on identical inputs, the variable isn't the solver, it's the machine underneath it.
+
+## The Culprit: Hyperthreading
 
 Here's what we found: the nodes running our solver workloads on GCP were AMD-based machines with 8 physical cores and 16 vCPUs. The "extra" cores come from hyperthreading, Intel and AMD's technique for running two instruction streams on one physical core simultaneously, sharing execution units, cache, and memory bandwidth between them.
 
@@ -60,6 +64,8 @@ The difference comes down to a deliberate architectural choice: ARM processors u
 
 It's a well-documented characteristic of compute-intensive, single-threaded workloads (but who reads documentation, right?). When a workload needs the full resources of a core things like registers, cache, execution units and hyperthreading becomes a liability rather than an asset.
 
+## Why ARM Also Wins on Cost
+
 There's another angle that seals the case: cost.
 
 An AMD (x86-64) node with 8 physical cores and 16 vCPUs, when you account for the performance penalty under concurrent load, effectively doesn't allow you to run 16 workloads with high CPU load. To maintain the same throughput, you'd need to reduce concurrency, essentially treating a 16-vCPU machine like a much smaller one. One engineer on our team pointed out that the effective utilization could be as low as 0.5 workloads per vCPU before hitting the degradation cliff.
@@ -67,6 +73,8 @@ An AMD (x86-64) node with 8 physical cores and 16 vCPUs, when you account for th
 Meanwhile, the ARM (ARM64) equivalent (16 physical cores, 16 vCPUs) handles 16 concurrent jobs cleanly. It's also priced competitively. Once you factor in the utilization reality of AMD under load, **ARM ends up being roughly twice as cost-effective** for this workload.
 
 This is consistent with what the broader industry has found. AWS's [own benchmarks](https://aws.amazon.com/blogs/compute/how-potential-performance-upside-with-aws-graviton-helps-reduce-your-costs-further/ "own benchmarks") and independent testing consistently show meaningful price-performance gains for compute-bound workloads. GCP's own [ARM offerings](https://docs.cloud.google.com/compute/docs/instances/arm-on-compute "ARM offerings") show similar patterns.
+
+## Hyperthreading is not your friend
 
 If you're running compute-intensive workloads in the cloud, optimization solvers, simulation engines, tight data processing loops, **hyperthreading is not your friend under concurrent load**. It creates the illusion of having more cores than you do, and the penalty for that illusion is paid at the worst possible time: when your nodes are actually busy.
 

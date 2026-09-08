@@ -32,6 +32,8 @@ Apache Camel is especially suited for building integrations with and migrations 
 
 Though full of features, Apache Camel is easy to use and get started with. As a Java library, it can be used standalone or integrated with the major development platforms like [Jakarta EE](https://jakarta.ee/) and Spring. In this blog post, we take a quick look at getting started with Apache Camel on the Jakarta EE Platform.
 
+## The Apache Camel Model
+
 Apache Camel is broken up into components. A component in Camel is a self contained function that does a single thing. For instance the file component reads and writes files. The JDBC component enables you to access databases through JDBC and so on. There are 300+ components available for almost any imaginable task. In the unlikely event none of those meets your needs, you can easily write one.
 
 To keep the download as small as possible, the project ships with a "core" that contains a subset of the available components. You can always add components as their need arises in your projects. To get started, first add the dependencyManagement block to your pom.xml file.
@@ -73,6 +75,8 @@ To keep the download as small as possible, the project ships with a "core" that 
 
 The camel-core dependency is the core camel project. The camel-endpointdsl gives you a nice, typesafe DSL for crafting your Camel routes. Then camel-cdi is a CDI integration (which doesn't fully work at the moment however).
 
+## Your First Camel Route
+
 With those in place, let's take a look at a first, "hello world" example . This example reads files and moves files from one folder into the other. Though reading and writing files on the Java Platform has improved significantly over the last few years, using the file component of Apache Camel makes it even better. The following FileRoute.java class shows a simple read and move file operation.
 
 ```
@@ -97,6 +101,8 @@ public class FileRoute extends EndpointRouteBuilder {
 The above class is a Camel Route that reads a file, does some processing on the read content, and then sends it to another place. This is a summary of how Camel works. This route processes a org.apache.camel.Message, wrapped in a org.apache.camel.Exchange. A lot of your Camel use will revolve around taking messages from one place, optionally doing something with the message, and then transferring the result to another place.
 
 Camel routes are designed to be read. So in the FileRoute above, you can read it as read as get a message from the file in the /data/inbox folder, process that message, then route the file to the /data/outbox folder. In between we also logged the name of the file. With just these few lines of code, we have a file watcher that will watch the folder/data/inbox and any new files will go through the same process.
+
+## Your Camel Context
 
 With your route in place, you will need to tell Camel about it. In the absence of the full functionality of the camel-cdi bridge, we can easily register our route as shown below.
 
@@ -136,6 +142,8 @@ CamelBootstrap is a singleton EJB that starts on application boot. Within it, we
 The addRoutes method takes a org.apache.camel.RoutesBuilder. In our above example, we injected our FileRoute class, and passed that CDI managed instance to the addRoutes method. You will also note that we didn't explicitly give a scope to the FileRoute.java bean. As it, it has the @Dependent pseudo-scope. This is well and good and should work fine, as we have no special reason to give our routes explicit scopes.
 
 Now you may be wondering, OK what is a CamelContext and why do you need it? Think of a CamelContext instance as a grouping of a given collection of routes (remember our FileRoute.java?) and the policies applicable to them during a given run. Your Camel routes will be associated with contexts to which they belong. In the above example, calling the stop() method on the CamelContext instance all routes/components/endpoints etc. associated with the context and clears internal state/cache.
+
+## Conclusion
 
 As you can see, we injected the CdiCamelContext. This is provided by the [camel-cdi](https://github.com/astefanutti/camel-cdi) context, which is currently not fully functional in Jakarta EE 10. I will be working on updating it to CDI 4.0 and Jakarta EE 10. But of course all help welcome to get it done faster. Once fully functional, all your routes would automatically be registered to the CdiCamelContext, and also have a bridge between CDI features like events and Camel. However, the current state is still more than enough to get you started with playing around with Apache Camel on the Jakarta EE Platform if you are new to it.
 

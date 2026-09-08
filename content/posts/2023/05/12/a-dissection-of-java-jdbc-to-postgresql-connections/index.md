@@ -735,6 +735,8 @@ The idea of having the ability to use Java PreparedStatement objects using the s
 
 A commonly overlooked fact is that prepared statements should be closed after they will no longer be reused. During development this is simply good housekeeping. But, in real life with lots of prepared statements and database connections, the memory taken in the Java heap, as well as in the database backend, can be significant, or when used in a loop ever increasing. Not closing obsolete closed statements will appear in a real life application as a memory leak, because if a prepared statement is not closed, the memory it is using cannot be released.
 
+## Conclusion
+
 The PostgreSQL JDBC driver uses the extended query protocol by default. The extended query protocol splits query execution into Parse, Bind and Execute, which are sent as independent messages, unlike the simple query protocol. This is not a problem, because these messages are sent within the same network packet, and do not require network roundtrips between these messages.
 
 The alternative is the simple query protocol, which can be set using a connection property. It sends a single message to the database for query execution.

@@ -32,6 +32,8 @@ We can open the GitLab Merge Requests using the **GitLab** logo on the left, or 
 
 ![Open Show GitLab Merge Requests from menu](menu.jpg)
 
+## Logging in to GitLab from IntelliJ IDEA
+
 If we aren't already logged in to GitLab via IntelliJ IDEA, the GitLab Merge Requests tool window will prompt us to **Log In**.
 
 ![Log In](login.jpg)
@@ -60,6 +62,8 @@ Click **Add Account** (**⌘N** on macOS \| **Alt+Insert** on Windows/Linux) to 
 
 ![Account added in Settings](settings-account.jpg)
 
+## GitLab Merge Request tool window
+
 Once we're logged in, the GitLab Merge Requests tool window will show all open Merge Requests for the GitLab repository.
 
 ![GitLab Merge Requests tool window](mr-tool-window.jpg)
@@ -87,6 +91,8 @@ We can go back to the list of search results by clicking the project name in the
 Usually, you'll want to look for open Merge Requests, since these are the ones that need attention. Let's double-click, or press **Enter**, on one of these Merge Requests.
 
 ![Open Merge Requests](open.jpg)
+
+## View GitLab Merge Requests inside IntelliJ IDEA
 
 If the Merge Request does not have a reviewer assigned, we can assign one from the Merge Request tool window in IntelliJ IDEA.
 
@@ -146,6 +152,8 @@ Alternatively, we can reopen the Merge Requests window by opening the Recent Fil
 
 ![Recent files](recent-files.jpg)
 
+## Adding comments from GitLab and IntelliJ IDEA
+
 Let's look at comments on our Merge Request.
 
 We can add comments to the GitLab conversation. Comments on this page are comments that apply to the Merge Request as a whole, and not a specific piece of code.
@@ -173,6 +181,8 @@ We can edit or delete comments. We can also reply to comments or resolve a comme
 From the diff viewer, we can submit our review and approve the Merge Request if we think it's ready to be merged.
 
 ![Submit Review and Approve](approve.jpg)
+
+## Reviewing GitLab Merge Requests inside IntelliJ IDEA
 
 One feature that's really helpful when we're reviewing a Merge Request is that we can check out the code that is in the Merge Request. In this project, I'm currently on the `main` branch. Let's check out the branch for this Merge Request.
 
@@ -205,6 +215,8 @@ The Merge Request will be merged, and if we do a **Fetch** we can see the update
 We can see in our browser that the Merge Request has been closed.
 
 ![Merged](merged.jpg)
+
+## Summary and shortcuts
 
 As we've seen, we can work with GitLab Merge Requests right inside IntelliJ IDEA.
 

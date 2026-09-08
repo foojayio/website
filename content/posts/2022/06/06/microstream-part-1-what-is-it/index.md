@@ -18,6 +18,8 @@ related_posts:
 frozen: false
 ---
 
+## MicroStream – Part 1: What is it?
+
 Within every application, data plays a very important role.
 
 In every industry, you have data, such as customer or product information, analysis results, patient data, or account data is a vital part of the business and the applications that support your business processes.
@@ -87,6 +89,8 @@ Since your data is in memory, within Java objects, you can access it extremely f
 The Storage Manager is responsible for writing the Object Graph to a persistent medium, like disk or even as BLOBs in a database, in a binary format that is built upfront the ground to avoid the security vulnerabilities the standard Java Persistence has.
 
 It runs wherever Java runs and so can be used in a monolith, microservice, Java Serverless function, Android device, in combination with any JVM language like Kotlin and Scala.
+
+## Conclusion
 
 Data are a required resource in any application of a company, regardless of the industry.
 

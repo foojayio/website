@@ -19,6 +19,8 @@ related_posts:
 frozen: false
 ---
 
+## Java User Group Philippines 1st Half Meetup 2024
+
 Summary of the meetups done in the 1st half of 2024. We discussed a variety of topics which was useful to our Java enthusiasts and members.
 
 ## 2024 Meetup Kickoff

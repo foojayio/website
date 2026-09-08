@@ -36,6 +36,8 @@ Part of effective supervision is being able to understand why the AI (inevitably
 
 Brokk is built with Java Swing for the UI, [Joern](https://docs.joern.io/) for advanced code analysis, [Jlama](https://github.com/tjake/Jlama) for local inference, and [langchain4j](https://docs.langchain4j.dev/) to access LLM APIs. Read more about what makes Brokk tick [here](https://brokk.ai/blog/brokk-under-the-hood), or check out the source [on GitHub](https://github.com/BrokkAi/brokk).
 
+## A Quick Introduction to Brokk
+
 When you start Brokk, you'll see five main areas:
 
 ![Brokk Interface Overview](AD_4nXcSbbNxObiIqzkcDI2CSRLj5Wnca7Kt-YHn-3e9d1455.jpg)  
@@ -48,6 +50,8 @@ From left to right, starting at the top, these are:
 3. **Activity**: A chronological list of your actions. Can undo changes to the Workspace as well as to your code.
 4. **Workspace**: Lists active files and code fragments. Manipulated through the right-click menu or the top-level Workspace menu.
 5. **Git**: The Log tab allows viewing diffs or adding them to context; Commit tab allows committing or stashing your changes
+
+## The Workspace
 
 The Workspace is the core of Brokk's approach to managing context. Here's an example of (most of) the different types of context that Brokk can manipulate:
 
@@ -120,6 +124,8 @@ The Git Panel, located at the bottom of the Brokk interface, is your primary int
 
 With these tools, Brokk allows you to easily pull Git's knowledge of your code's history into the Workspace to improve the LLM's ability to solve problems.
 
+## Actions
+
 The Instructions panel is where you provide your textual input to Brokk. The buttons below it (and related features like Deep Scan) determine how Brokk interprets and acts upon those instructions.
 
 1. **Code:** Executes your instructions to directly modify the code files currently in the Workspace.
@@ -168,6 +174,8 @@ By default, Brokk runs only the tests in the Workspace after each set of changes
 
 You can also (ab)use the Run All Tests option to specify an arbitrary shell command; any non-zero exit code will be treated as a failure and sent to the coding LLM for revision. For example, when I was debugging tree-sitter parsing I changed it to `tree-sitter query … && sbt "testOnly …"`
 
+## Activity History
+
 The Activity panel is designed to allow you to solve side quests, like a quick refactor or a bug fix, and come back to where you were without losing your flow or confusing the AI with irrelevant context. There are three options when you right-click on an earlier state:
 
 ![Activity History Options](AD_4nXcOj9vfq5QasaTLeQUSk7c34967Gb6gx-5e-d6b1b001.png)  
@@ -176,6 +184,8 @@ The Activity panel is designed to allow you to solve side quests, like a quick r
 1. **Undo to Here**: This action reverts both your file changes on disk and the Workspace to the state they were in at that selected point in history. Any file modifications made after that point will be undone. (But Git history is not touched.)
 2. **Copy Workspace**: This option reverts only the Workspace to the selected point. Critically, this action does not affect any changes made to your files on disk. This is ideal for scenarios where you've completed a side quest, committed those file changes, and now want the AI to refocus on your main task as it was before the diversion, while keeping the code from your side quest intact.
 3. **Copy Workspace with History**: Copies the Workspace contents and also the Task History from the previous state; useful for when you need to continue building on your conversation thread from the main development line.
+
+## Dependencies
 
 Often, you'll work with dependencies that are poorly documented or for which your LLM lacks sufficient version-specific knowledge, leading to API hallucinations. Brokk addresses this by allowing you to pull these dependencies into your project, where they can be manipulated like any other source file.
 
@@ -193,9 +203,13 @@ Once reopened, the decompiled source code from the dependency is available to Br
 
 The key benefit is that the LLM (and Brokk's code intelligence features) gain access to the precise API and structure of the *exact version* of the library you are using. The decompiled source is highly effective for LLM comprehension—often 99% as useful as the original source would be—and this drastically reduces the chances of the AI hallucinating non-existent or incorrectly used APIs from the dependency. That said, automating the download of sources jars to avoid decompilation is on the roadmap as well.
 
+## Putting it all together
+
 Lutz Leonhardt has recorded a video showing his workflow using Brokk to solve a "live fire" issue in jbang. Check out how he uses Deep Scan to get a foothold in the code, then Ask and Search to refine his plan of attack before executing it with Code:
 
 <https://www.youtube.com/watch?v=t_7MqowT638>
+
+## Conclusion
 
 Today's models are already smart enough to work in your codebase and make you 2x to 5x more productive; the reason that it doesn't feel that way is because they doesn't know your specific codebase. Brokk fixes this. It's a standalone Java application, not an IDE plugin, designed to let you find and feed the LLM *only* the relevant context (files, summaries, diffs) via its Workspace. This makes the AI faster, cheaper, and less prone to hallucinating or writing awkward code. Tools like Deep Scan, agentic Search, Git integration, and dependency decompilation help you build this focused context efficiently.
 

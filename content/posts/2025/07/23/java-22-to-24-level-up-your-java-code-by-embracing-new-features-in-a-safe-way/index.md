@@ -5,7 +5,7 @@ lastmod: "2025-07-23T15:42:47+00:00"
 description: "By embracing the new features in Java 22, 23, and 24—such as unnamed variables and patterns, Markdown in Javadoc, the Class-File API, and Stream Gatherers—developers can write more efficient, and more maintainable code resulting in a higher-quality code."
 authors:
   - "jonathan-vila"
-image: "Favicon-3-2.png"
+image: "sonar-logo-horizontal-dark-bg.svg"
 categories:
   - "Developer Tools"
   - "Java"
@@ -26,6 +26,8 @@ We'll cover several new Java features, with new rules in SonarQube:
 * Java 22 : Unnamed variables
 * Java 23 : JavaDoc and Markdown
 * Java 24 : Class-File API and Stream Gatherers
+
+## Java 22: Unnamed variables and patterns
 
 A significant and welcome addition in Java 22 is the finalization of unnamed variables and patterns, officially detailed in [JEP 456](https://openjdk.java.net/jeps/456). This feature enhances code clarity by allowing developers to use an underscore (`_`) for variables and patterns that are intentionally left unused.
 
@@ -142,6 +144,8 @@ if (obj instanceof ColoredPoint(Point p, _)) {
 
 This approach makes the code more focused on the relevant data, improving maintainability.
 
+## Java 23: JavaDoc and Markdown
+
 Java 23 introduces an enhancement to JavaDoc, allowing comments that begin with three slashes \\`///\` to be interpreted as JavaDoc comments using Markdown syntax.
 
 This subtle yet significant change aims to simplify the process of writing rich and readable documentation directly within the code.
@@ -235,6 +239,8 @@ public class StringManipulator {
 ```
 
 By adopting a consistent Markdown style, your documentation becomes cleaner, easier to write, and future-proof.
+
+## Java 24 : Class-File API
 
 Java 24 introduces the Class-File API ([JEP 457](https://openjdk.org/jeps/457)), a significant enhancement for parsing, generating, and transforming Java class files. This API provides a programmatic way to work with class files at a low level, offering more flexibility and control than existing bytecode manipulation libraries.
 
@@ -382,6 +388,8 @@ public static void transformClassFile(Path path) throws IOException {
 
 The compliant solution uses `transformClass`, which handles the iteration implicitly. The provided lambda is applied to each `ClassElement`, allowing the developer to focus solely on the transformation logic. The resulting code is more concise, readable, and less error-prone.
 
+## Java 24: Stream Gatherers
+
 Java 24 also introduces Stream Gatherers ([JEP 461](https://openjdk.org/jeps/461)), a new feature designed to enhance the Stream API by allowing for custom intermediate stream operations. Unlike existing \\`map\`, \\`filter\`, or \\`reduce\` operations, Gatherers enable more complex, stateful, and flexible transformations of stream elements.
 
 This allows developers to implement operations like grouping, windowing, or de-duplication directly within the stream pipeline, leading to more expressive, efficient, and readable code for advanced data processing scenarios.
@@ -483,6 +491,8 @@ private static Gatherer inRange(int start, int end) {
 ```
 
 The compliant solution uses the appropriate `Gatherer.ofSequential` overload that does not require an initializer. This removes the redundant code and clearly signals to anyone reading it that the gatherer is stateless by design.
+
+## Java and SonarQube
 
 By embracing the new features in Java 22, 23, and 24—such as unnamed variables and patterns, Markdown in Javadoc, the Class-File API, and Stream Gatherers—developers can write more efficient, and more maintainable code resulting in a higher-quality code.
 

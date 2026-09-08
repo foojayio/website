@@ -34,6 +34,8 @@ One of the many reasons we chose to develop a new operator was to enable a simpl
 
 Let's take a look at what that means and how this new operator helps enable multi-cluster deployments.
 
+## Introducing the K8ssandraCluster
+
 Meet the [K8ssandra Operator](https://github.com/k8ssandra/k8ssandra-operator). In this initial release, we're introducing a new custom resource: the *K8ssandraCluster*. This new resource will encompass all of the aspects necessary to install a production-ready, multi-cluster K8ssandra deployment.
 
 Figure 1 below shows what a configuration might look like. This example would create a cluster with two data centers deployed across two different Kubernetes clusters.
@@ -82,11 +84,15 @@ So, what's different? How does this add anything to the current K8ssandra experi
 
 One key element of this new configuration is the *k8sContext*, which is the connection between the CassandraDatacenter and the Kubernetes cluster that is to be its home. With this small yet powerful setting, you can simply define a remote Kubernetes cluster that a particular data center should be deployed to.
 
+## Specifying remote clusters
+
 You know you can tell the K8ssandraCluster what remote cluster to install a data center within — but how? The association of a remote cluster is made possible through the addition of another new custom resource: the *ClientConfig*.
 
 A ClientConfig is essentially the definition of a remote cluster a `kubeconfig` that the K8ssandra Operator can use to remotely access it. Deploying a data center onto the local Kubernetes cluster, where the "control plane" operator is deployed, doesn't require any additional settings.
 
 Next, we'll take a look at the overall architecture of a K8ssandra Operator deployed system. This will show you how the K8ssandra Operator works within each cluster, and also help you understand the difference between a "control plane" and "data plane" deployment.
+
+## Deployment architecture
 
 What happens when you deploy a K8ssandraCluster?
 
@@ -120,6 +126,8 @@ The control plane has also taken care of the configuration necessary within the 
 
 In addition to coordinating the distribution of resources to remote clusters and configuration, the control plane is also responsible for the collection and rollup of status across the complete cluster. This is another benefit of the K8ssandra Operator that wasn't possible before in K8ssandra.
 
+## What's next
+
 What we've described in this post noticeably doesn't include some of the critical components that K8ssandra 1.x provides, notably backup/restore via Medusa and entropy repair via Reaper. Not to worry, those elements haven't been taken away. They're still a critical part of the overall production landscape for Cassandra and will continue to be components of K8ssandra.
 
 In this alpha release of the K8ssandra Operator, we focused on the core database functionality, providing control and delegation for Cassandra itself and [Stargate](https://stargate.io/). Our initial focus was on establishing multi-cluster functionality. With that basic goal achieved, next, we'll start migrating the functionality provided in the Medusa and Reaper Operator components into new controllers within the K8ssandra Operator. For insight into some of the design choices we're making, check out this blog post on how [we pushed Helm to the limit, then built a Kubernetes operator](https://thenewstack.io/we-pushed-helm-to-the-limit-then-built-a-kubernetes-operator/).
@@ -127,6 +135,8 @@ In this alpha release of the K8ssandra Operator, we focused on the core database
 To learn even more about the K8ssandra Operator, give it a spin, and get involved with the K8ssandra community, check out the [K8ssandra Operator repo on GitHub](https://github.com/k8ssandra/k8ssandra-operator).
 
 *Follow* [*DataStax on Medium*](https://datastax.medium.com/)*for exclusive posts and the latest announcements about Cassandra, Kubernetes, streaming, and much more.*
+
+## Resources
 
 1. [k8ssandra-operator: The Kubernetes operator for K8ssandra](https://github.com/k8ssandra/k8ssandra-operator)
 2. [K8ssandra — Apache Cassandra® on Kubernetes](https://k8ssandra.io/)

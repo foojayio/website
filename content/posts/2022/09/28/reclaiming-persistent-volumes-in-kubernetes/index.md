@@ -36,6 +36,8 @@ This mechanism, however, relies on certain naming conventions involving the STS 
 
 In this article, we'll show you how to manually reassign a PV from one STS to another. We'll also explain the STS, PV, and PVC API resources in greater detail, and present step-by-step instructions for the reassignment of PVs, including the `kubectl` commands for each step. We'll use [Azure Kubernetes Service](https://azure.microsoft.com/en-gb/services/kubernetes-service/) (AKS) for the given examples, but they're easily transferable to other cloud providers.
 
+## Concepts
+
 ## Persistent Volumes
 
 In Kubernetes, pods can request resources such as CPU, memory, and (persistent) storage. While CPU and memory are provided by nodes, storage can be provided by PVs. Just like nodes, PVs have a life cycle that's independent of the pods that use them. The PV resource captures all the details of the storage implementation. Examples are NFS, Azure File, AWS, and EBS.
@@ -73,6 +75,8 @@ STSs can be used instead of deployments if pods need to have stable network name
 
 Now that we have all the necessary theory at hand, let's take a look at the required steps to rename an STS while keeping the previously assigned storage.
 
+## Steps to reclaim a PV
+
 For demonstration purposes, we will use an example STS deployed to an AKS cluster that consists of two replicas. Renaming a given STS while reassigning the given PVCs can be accomplished with the following steps:
 
 1. Retain PVs.
@@ -86,6 +90,8 @@ For demonstration purposes, we will use an example STS deployed to an AKS cluste
 The steps are illustrated in this video on [Reassigning a Persistent Volume in Kubernetes](https://www.youtube.com/watch?v=8CSTdrPsOu4). The next sections will go through the process step by step, providing the respective `kubectl` commands needed for each step.
 
 {{< youtube 8CSTdrPsOu4 >}}
+
+## Preparation
 
 Before we start, let's define a few variables for our own convenience. We will need the following:
 
@@ -118,6 +124,8 @@ NEW_PVC_MANIFEST_FILE_1="$NEW_PVC_NAME_1.yaml"
 Alternatively to specifying the resource names directly, you can also use label selectors and use the index in the JSON path `{.items[i]}` to access individual results.
 
 To avoid code duplication, we will use a short-hand pseudocode notation to indicate that commands should be repeated for each replica. E.g. `kubectl get pvc $OLD_PVC_NAME_i` needs to be expanded to `kubectl get pvc $OLD_PVC_NAME_0` and `kubectl get pvc $OLD_PVC_NAME_1`.
+
+## Execution
 
 ## Retain PVs
 
@@ -244,6 +252,8 @@ spec:
 
 The new STS should now use the newly created PVCs and mount the data from the existing PVs.
 
+## Summing up
+
 In this post, we saw how PVs, PVCs, and STSs can be used to manage stateful applications on Kubernetes. We also saw that by changing the reclaim policy of a PV it can be reclaimed manually, and creating PVCs that match the naming scheme of a new STS lets us mount existing PVs into the STS replicas.
 
 This technique is not only useful when renaming an existing STS, but can also be used to mount existing cloud storage volumes to an application that is deployed to Kubernetes for the first time.
@@ -251,6 +261,8 @@ This technique is not only useful when renaming an existing STS, but can also be
 Note that when using this method to rename an STS, there will be downtime. Zero-downtime migrations require more sophisticated methods, such as keeping the new and old STS active at the same time, streaming data, and potentially controlling live traffic through a higher level proxy. This requires application-specific knowledge though and is beyond the scope of this post.
 
 *Explore more free tutorials on our* [*DataStax Developers YouTube channel*](https://www.youtube.com/c/DataStaxDevs/videos)*and* [*subscribe to our event alert*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about new developer workshops. Follow* [*DataStax on Medium*](https://datastax.medium.com/)*for exclusive posts on all things Kubernetes, Cassandra, streaming, and much more.*
+
+## Resources
 
 1. [YouTube: Reassigning a Persistent Volume in Kubernetes](https://www.youtube.com/watch?v=8CSTdrPsOu4)
 2. [Azure Kubernetes Service](https://azure.microsoft.com/en-gb/services/kubernetes-service/)

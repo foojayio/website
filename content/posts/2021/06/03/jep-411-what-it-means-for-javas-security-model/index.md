@@ -15,6 +15,8 @@ frozen: false
 
 ![](Swiss_cheese_model-47912861.svg)
 
+## Java's Existing Layers of Security
+
 Java, like most platforms or languages has layers of security, this article intends to look at Java's Authorization layer, which is unlike in other languages, and to distinguish between two different ways this layer is typically utilized, why one is effective while the other isn't and investigate why JEP 411 only considers the least effective method and hopefully increase awareness of the Principle of Least Privilege as it's applied to Java Authorization, improve adoption, encourage people to take advantage of the improved security it provides, as well as prolong its support and possibly even improve it in future.
 
 ## Each security layer is intended to prevent an attacker gaining access to information or obtaining control of the JVM
@@ -60,6 +62,8 @@ Software developers can also create their own permissions.
 
 #### Uniquely, Java doesn't only check user authorization, but also authorization of code.
 
+## Why the Principle of Least Privilege Is important to Java
+
 1. It authorizes only the privileges (permissions) required and no more. Should other security layers fail, it is the last line of defense. Nothing that is unauthorized by policy is allowed to occur.
 2. Tooling can generate policy files, by simply running a program through it's intended functionality.
 3. Simplest method of auditing authorization, to see what permissions code requires and condenses it down to around 1,000 line items for a codebase with 250,000 lines of code.
@@ -97,6 +101,8 @@ https://youtu.be/2rCgA3IbTg4
 2. The Principle of Least Privilege (POLP) combined with tooling significantly reduces complexity, improves auditability and significantly increases the effectiveness of the Authorization layer to constrain an application to its intended function, significantly restricting the attack surface of applications and their dependencies (it doesn't reduce the attack surface of the JVM as this typically runs with AllPermission).
 3. High performance and high scaling Policy provider and SecurityManager implementations are freely available.
 4. Security isn't free, it does have a development cost.
+
+## What's Java's new Security Model Philosophy after JEP 411?
 
 Java's new security model is based on the Castle and moat approach, which focuses on defending the perimeter.
 

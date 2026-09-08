@@ -1593,6 +1593,59 @@ should catch a mistake at PR time rather than letting it fail silently.
   comment predicts for flat-colour UI recordings where GIF's palette+LZW is
   efficient. That is 28.8 MB that stays.
 
+- **A BODY `<h1>` IS THE AUTHOR'S HEADING, AND STRIPPING h1 THREW 503 OF THEM
+  AWAY.** `Posts.SELECTOR_CONTENT_NOISE` opened with a bare `h1`, to remove the
+  post title the theme renders inside the content area. It removed every OTHER
+  h1 with it -- and `#` in the WordPress editor writes an h1. The text under a
+  deleted heading STAYS, so the article silently loses its structure and reads as
+  one slab; nothing downstream can tell a heading was ever there, which is why it
+  survived the whole migration until a reader noticed one post missing "File
+  written".
+
+  Measured against WordPress's own REST API rather than guessed at: **137 posts,
+  503 headings**, up to 12 in a single article. `resolveBodyHeadings` now removes
+  only the h1 that repeats the TITLE (normalised text, with a word-overlap
+  fallback for the first one) and **demotes the rest to h2**, printing each
+  demotion. Demoted rather than kept because `title:` is already the page's h1
+  and a second one is what `template/post.md` tells contributors not to write;
+  the cost is that a post using h1 for sections and h2 for subsections comes out
+  flat, which is still far better than losing the headings.
+
+  All 137 are repaired -- 487 headings recovered by re-scrape, plus the three
+  `frozen: true` ones handled by hand (unfreeze, re-scrape, then drop the dead
+  canonical the re-scrape re-added and re-freeze; two of them are in the
+  cross-post-canonical 48, so that step was load-bearing). **Verified against
+  WordPress with punctuation normalised** -- Goldmark's typographer rewrites
+  quotes, so a raw string comparison reported 8 false failures.
+
+  Three more defects surfaced from the same one post, all fixed at the source:
+  - **`stripBylineSuffix` now also cuts a MID-STRING byline**, because on a long
+    post Yoast writes `<excerpt> - by <Author> <categories> <title>` and the
+    endsWith rule could only report it. The title is what makes the cut safe: the
+    tail goes only when the text after the author's name contains the post's own
+    headline, so "…- by Emily Wilson" written as prose is still untouched.
+  - **A WordPress slug the folder name cannot hold now yields an `aliases:`
+    entry automatically.** This post's live URL carries a Cyrillic `и`
+    (`%d0%b8`), which `sanitizeSlug` collapsed to a dash -- so foojay.io's URL
+    404'd here. Same class as the three emoji slugs, which were fixed by hand;
+    unlike a FORMER slug (which genuinely cannot be derived) this one is in the
+    URL being scraped.
+  - **An implausibly short body falls back to the REST API**, and one post needed
+    it: `creating-a-javafx-world-clock-from-scratch-part-5` imported as ZERO
+    words. Its own content has a heading called "Styling WebView CSS `<style>`
+    BODY", and WordPress's table-of-contents plugin copied that text into the TOC
+    markup UNESCAPED -- so a literal unclosed `<style>` swallows the remaining
+    24,362 characters for every parser, ours and the browser's alike. **The post
+    is unreadable on foojay.io for the same reason; the real fix is upstream.**
+    `neutralizeStrayRawText` escapes unmatched `<style>`/`<script>`/`<textarea>`/
+    `<xmp>` openers on the fallback path only, which recovered all 2,484 words.
+    A body that stays tiny is now reported rather than written out silently.
+
+  **The audit is the reusable part**: comparing our word count per post against
+  `/wp-json/wp/v2/posts?_fields=slug,content` costs 22 requests for the whole
+  archive and is how both of these were found. It reports **1 empty and 0
+  truncated** bodies now. Run it after any change to the conversion pipeline.
+
 - **Idempotency everywhere**: any script touching `content/` must be safe
   to re-run without duplicating or destroying hand edits (the `frozen: true`
   flag pattern). This matters because these scripts get re-run repeatedly

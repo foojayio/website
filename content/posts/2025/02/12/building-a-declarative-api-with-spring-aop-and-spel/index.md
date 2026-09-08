@@ -258,6 +258,8 @@ One other possible improvement is that if the process exits after the advised me
 
 The method `asStringCollection` checks the types of all the elements returned by the expression. If you have [Apache Commons Collections](https://commons.apache.org/proper/commons-collections/) in your dependencies, you can use `CollectionUtils.typedCollection(Collection, Class)` to abstract this away.
 
+## Conclusion
+
 In this article, I showed how we can leverage SpEL and Spring AOP to create a declarative auditing API that is expressive, flexible, and non-invasive. This pattern can be used for other cross-cutting requirements such as tracing, metrics, logging, or security. In fact, Spring Security already provides `@PreAuthorize`, `@PostAuthorize`, `@PreFilter`, and `@PostFilter` annotations that follow this pattern.
 
 One final thing I would like to stress is that such an API should be tested just as much as anything written in imperative Java. It is easy to make mistakes, such as annotating an interface instead of its implementation (not supported by the AspectJ language), forgetting to enable aspects with `@EnableAspectJAutoProxy` in a non-Boot application, or annotating a method that's not intercepted by a JDK proxy (see the note in  

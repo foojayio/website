@@ -32,6 +32,8 @@ For Java, we currently have three options: Dependabot, Renovate, and Snyk Open S
 
 *Sidenote: In order to try out and compare these bots, I've added them one by one to my personal GitHub profile and will describe here how to add them to your GitHub profile, as well as link to information about other integration options.*
 
+## Dependabot
+
 The first bot we will look at is Dependabot. Since Dependabot is [GitHub](https://github.com/) native, we can enable most of its features from the **Settings \> Security \> Code security and analysis**. Here we can enable (or disable) the available features, and select which ones we would like to automatically enable for new repositories.
 
 ![Dependabot settings on GitHub](Dependabot-settings.png)
@@ -73,6 +75,8 @@ For more information on configuration options, see the [Dependabot documentation
 ## Integration
 
 While Dependabot is [GitHub](https://github.com/) native, it is possible to run it [locally](https://mikebifulco.com/posts/run-dependabot-locally) or [on GitLab](https://blog.jdriven.com/2021/03/running-dependabot-on-gitlab/) too.
+
+## Renovate
 
 Like Dependabot, Renovate offers security updates and version updates. In addition, Renovate will also create a project dashboard listing all updates needed on a particular project.
 
@@ -137,6 +141,8 @@ In addition, Renovate provides a general dashboard with all projects \& jobs run
 
 Note: If you are not using GitHub, Renovate currently also supports other platforms. For more information, see the [Renovate documentation on supported platforms](https://docs.renovatebot.com/#supported-platforms).
 
+## Snyk Open Source
+
 Snyk Open Source is available from [Snyk](https://snyk.io/). There are more steps to enable it for your GitHub Profile, but it also offers more features. To enable Snyk Open Source, go to <https://snyk.io/product/open-source-security-management/> and select **Start free**.
 
 You will need to **Authorize snyk** on your GitHub profile, select repository access (either **Public and private repos** or **Public repos only** ), select other available features you want to use, and provide a **Personal access token** on GitHub.
@@ -195,6 +201,8 @@ The dashboards provide an overview of known vulnerabilities found in your reposi
 
 You can use Snyk Open Source in the Snyk Web UI, with the Snyk CLI, in your IDE, or with an API. For more information, see the [Snyk Open Source documentation](https://docs.snyk.io/scan-application-code/snyk-open-source).
 
+## Conclusion
+
 As we have seen, the different bots offer different features.
 
 All of the options discussed here can automatically open pull requests for vulnerable dependencies and version upgrades.
@@ -202,6 +210,8 @@ All of the options discussed here can automatically open pull requests for vulne
 The information they provide with these PRs differs, as do the number and type of configuration options.
 
 Which bot is right for you will depend on your needs and preferences!
+
+## Links / sources:
 
 * [Dependabot documentation on GitHub](https://docs.github.com/en/code-security/dependabot)
 * [Dependabot on GitLab](https://dependabot-gitlab.gitlab.io/dependabot/)

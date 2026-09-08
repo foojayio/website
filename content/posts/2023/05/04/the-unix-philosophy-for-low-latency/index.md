@@ -212,6 +212,8 @@ mvn exec:java@tailf -Dqueue=agg-out
 mvn exec:java@tailf -Dqueue=strat-out
 ```
 
+## Conclusion
+
 We can see that it is possible to realise the Unix Philosophy in Enterprise IT using a strongly-typed Enterprise language (Java), a suitable component technology (microservices) and an appropriate mechanism to glue them together (Chronicle Queue \& Wire).
 
 Note that if you want more features you can talk to [info@chronicle.software](mailto:info@chronicle.software) about commercial extensions – [Chronicle Services](https://chronicle.software/services-2/) – which provide the following features:

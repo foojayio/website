@@ -28,9 +28,14 @@ frozen: false
 
 ![](1-f0R9gBDSJQk8872lh2QMDQ-4762b875.png)
 
+## The Problem with Traditional LLM Applications
+
 LLMs are powerful but expensive. Every API call costs money and takes time. When users ask similar questions like "What beer goes with grilled meat?" and "Which beer pairs well with barbecue?", traditional systems would make separate LLM calls even though these queries are essentially asking the same thing.
 
 Traditional exact-match caching only works if users ask the identical question word-for-word. But in real applications, users phrase questions differently while seeking the same information.
+
+## How Semantic Caching Works
+
 > Video: [What is a semantic cache?](https://www.youtube.com/watch?v=AtVTT_s8AGc&t=1s)
 
 Semantic caching solves this by understanding the ***meaning*** behind queries rather than matching exact text. When a user asks a question:
@@ -45,6 +50,9 @@ Behind the scenes, this works thanks to vector similarity search. It turns text 
 Today, we're gonna build a semantic caching system for a beer recommendation assistant. It will remember previous responses to similar questions, dramatically improving response times and reducing API costs.
 
 To do that, we'll build a Spring Boot app from scratch and use Redis as our semantic cache store. It'll handle vector embeddings for similarity matching, enabling our application to provide lightning-fast responses for semantically similar queries.
+
+## Redis as a Semantic Cache for AI Applications
+
 > Video: [What's a vector database](https://www.youtube.com/watch?v=Yhv19le0sBw&t=1s)
 
 Redis Open Source 8 not only turns the community version of Redis into a Vector Database, but also makes it the fastest and most scalable database in the market today. Redis 8 allows you to scale to one billion vectors without penalizing latency.
@@ -55,6 +63,8 @@ For semantic caching, Redis serves as:
 * A metadata store for cached responses and additional context
 * A high-performance search engine for finding semantically similar queries
 
+## Spring AI and Redis
+
 > Video: [What's an embedding model?](https://www.youtube.com/watch?v=0U1S0WSsPuE&t=1s)
 
 Spring AI provides a unified API for working with various AI models and vector stores. Combined with Redis, it allows developers to easily build semantic caching systems that can:
@@ -63,6 +73,8 @@ Spring AI provides a unified API for working with various AI models and vector s
 * Cache LLM responses with semantic similarity matching
 * Reduce API costs by avoiding redundant LLM calls
 * Improve response times for similar queries
+
+## Building the Application
 
 Our application will be built using Spring Boot with Spring AI and Redis. It will implement a beer recommendation assistant that caches responses semantically, providing fast answers to similar questions about beer pairings.
 
@@ -257,6 +269,8 @@ Key features of the integrated RAG service:
 * Automatically caches new responses for future use
 * Provides detailed performance metrics including cache hit indicators
 
+## Running the Demo
+
 The easiest way to run the demo is with Docker Compose, which sets up all required services in one command.
 
 ## Step 1: Clone the repository
@@ -304,6 +318,8 @@ If you ask something similar to a question had already been asked, your chatbot 
 
 ![](0-qe0eDWFW6VoJHQvM-6ac57570.webp)
 
+## Exploring the Data in Redis Insight
+
 RedisInsight provides a visual interface for exploring the cached data in Redis. Access it at `localhost:5540` to see:
 
 1. **Semantic Cache Entries**: Stored as JSON documents with vector embeddings
@@ -315,6 +331,8 @@ RedisInsight provides a visual interface for exploring the cached data in Redis.
 If you run the `FT.INFO semanticCachingIdx` command in the RedisInsight workbench, you'll see the details of the vector index schema that enables efficient semantic matching.
 
 ![captionless image](1-eCSGHnfvU1obVePLTjQDuA-0ec0c6b6.png)
+
+## Wrapping up
 
 And that's it — you now have a working semantic caching system using Spring Boot and Redis.
 

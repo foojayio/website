@@ -17,6 +17,8 @@ related_posts:
 frozen: false
 ---
 
+## The Cost of Not Knowing MongoDB – Part 1: appV0 to appV4
+
 The primary focus of this series is to show how much performance you can gain, and as a consequence, the cost you can save when using [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim) properly, following the best practices, studying your application needs, and using it to model your data.
 
 To show these possible gains, a dummy application will be presented, and many possible implementations of it using MongoDB will be developed and load-tested. There will be implementations for all levels of MongoDB knowledge: beginner, intermediate, senior, and mind-blowing (🤯) .
@@ -29,6 +31,7 @@ The application goal is to identify fraudulent behavior in a financial transacti
 
 The application will receive the transaction status through an \`event\` document. An \`event\` will always provide information for one transaction for one user on a specific day, and because of that, it will always have only one of the possible status fields, and this status field will have the numeric value 1. As an example, the following \`event\` document represents a transaction with the status of \`pending\` for the user with identification \`key\` of \`...0001\` that happened on the \`date\`/day \`2022-02-01\`:
 
+|                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------|
 | const event = { key: '0000000000000000000000000000000000000000000000000000000000000001', date: new Date('2022-02-01'), pending: 1, }; |
 
@@ -36,6 +39,7 @@ The statuses of the transactions will be analyzed by comparing the totals of sta
 
 The following document is an example of a \`reports\` document for the user of \`key\` \`...0001\` and an end date of \`2022-06-15\`:
 
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | export const reports = \[ { id: 'oneYear', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2021-06-15T00:00:00.000Z'), totals: { approved: 4, noFunds: 1, pending: 1, rejected: 1 }, }, { id: 'threeYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2019-06-15T00:00:00.000Z'), totals: { approved: 8, noFunds: 2, pending: 2, rejected: 2 }, }, { id: 'fiveYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2017-06-15T00:00:00.000Z'), totals: { approved: 12, noFunds: 3, pending: 3, rejected: 3 }, }, { id: 'sevenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2015-06-15T00:00:00.000Z'), totals: { approved: 16, noFunds: 4, pending: 4, rejected: 4 }, }, { id: 'tenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2012-06-15T00:00:00.000Z'), totals: { approved: 20, noFunds: 5, pending: 5, rejected: 5 }, }, \]; |
 
@@ -84,6 +88,7 @@ To take advantage of the \`_id\` obligatory field and index, the developer decid
 
 The application implementation presented above would have the following TypeScript document schema denominated \`ScemaV1\`:
 
+|                                                                                                                                   |
 |-----------------------------------------------------------------------------------------------------------------------------------|
 | type SchemaV1 = { _id: { key: string; date: Date; }; approved?: number; noFunds?: number; pending?: number; rejected?: number; }; |
 
@@ -91,6 +96,7 @@ The application implementation presented above would have the following TypeScri
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
+|                                                                                                                                                                                                                                          |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { _id: { date: event.date, key: event.key }, }, update: { $inc: { approved: event.approved, noFunds: event.noFunds, pending: event.pending, rejected: event.rejected, }, }, upsert: true, }, }; |
 
@@ -98,6 +104,7 @@ Based on the specification presented, we have the following bulk \`updateOne\` o
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`_id.date\` range in the \`$match\` filter being different:
 
+|                                                                                                                                                                                                                                                                                             |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { '_id.key': request.key, '_id.date': { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$approved' }, noFunds: { $sum: '$noFunds' }, pending: { $sum: '$pending' }, rejected: { $sum: '$rejected' }, }, }, \]; |
 
@@ -105,6 +112,7 @@ Five aggregation pipelines, one for each date interval, will be needed to fulfil
 
 As presented in the introduction of this application implementation, the main goal of embedding the fields \`key\` and \`date\` in the \`_id\` field was to take advantage of its obligatory existence and index. But, after some preliminary testing and research, it was discovered that the index on the \`_id\` field wouldn't support the filtering/match criteria in the \`Get Reports\` function. With that, the following extra index was created:
 
+|                                                                                                                      |
 |----------------------------------------------------------------------------------------------------------------------|
 | const keys = { '_id.key': 1, '_id.date': 1 }; const options = { unique: true }; db.appV1.createIndex(keys, options); |
 
@@ -155,6 +163,7 @@ The second application version and the improvements to get to it would still hav
 
 The application implementation presented above would have the following TypeScript document schema denominated \`SchemaV2\`:
 
+|                                                                                                                                        |
 |----------------------------------------------------------------------------------------------------------------------------------------|
 | type SchemaV2 = { _id: ObjectId; key: string; date: Date; approved?: number; noFunds?: number; pending?: number; rejected?: number; }; |
 
@@ -162,6 +171,7 @@ The application implementation presented above would have the following TypeScri
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
+|                                                                                                                                                                                                                                |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { key: event.key, date: event.date }, update: { $inc: { approved: event.approved, noFunds: event.noFunds, pending: event.pending, rejected: event.rejected, }, }, upsert: true, }, }; |
 
@@ -169,6 +179,7 @@ Based on the specification presented, we have the following bulk \`updateOne\` o
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`date\` range in the \`$match\` filter being different:
 
+|                                                                                                                                                                                                                                                                                 |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { key: request.key, date: { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$approved' }, noFunds: { $sum: '$noFunds' }, pending: { $sum: '$pending' }, rejected: { $sum: '$rejected' }, }, }, \]; |
 
@@ -176,6 +187,7 @@ Five aggregation pipelines, one for each date interval, will be needed to fulfil
 
 To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the following index was created in the \`appV2\` collection:
 
+|                                                                                                          |
 |----------------------------------------------------------------------------------------------------------|
 | const keys = { key: 1, date: 1 }; const options = { unique: true }; db.appV2.createIndex(keys, options); |
 
@@ -214,6 +226,7 @@ Comparing the two versions, we can see that \`appV2\` performed better than \`ap
 
 The following document is a sample from the collection \`appV2\`:
 
+|                                                                                                                                                                                                                                         |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const document = { _id: ObjectId('6685c0dfc2445d3c5913008f'), key: '0000000000000000000000000000000000000000000000000000000000000001', date: new Date('2022-06-25T00:00:00.000Z'), approved:10, noFunds: 3, pending: 1, rejected: 1, }; |
 
@@ -229,6 +242,7 @@ As discussed in the issues and improvements of \`appV2\`, to reduce the document
 
 To convert the \`key\` value from string to binary/buffer, the following TypeScript function was created:
 
+|                                                                                 |
 |---------------------------------------------------------------------------------|
 | const buildKey = (key: string): Buffer =\> { return Buffer.from(key, 'hex'); }; |
 
@@ -238,6 +252,7 @@ The third application version has two improvements compared to the second versio
 
 The application implementation presented above would have the following TypeScript document schema denominated \`SchemaV3\`:
 
+|                                                                                                              |
 |--------------------------------------------------------------------------------------------------------------|
 | type SchemaV3 = { _id: ObjectId; key: Buffer; date: Date; a?: number; n?: number; p?: number; r?: number; }; |
 
@@ -245,6 +260,7 @@ The application implementation presented above would have the following TypeScri
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
+|                                                                                                                                                                                                                |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { key: buildKey(event.key), date: event.date }, update: { $inc: { a: event.approved, n: event.noFunds, p: event.pending, r: event.rejected, }, }, upsert: true, }, }; |
 
@@ -252,6 +268,7 @@ Based on the specification presented, we have the following bulk \`updateOne\` o
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the \`date\` range in the \`$match\` filter being different:
 
+|                                                                                                                                                                                                                                                               |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { key: buildKey(event.key), date: { $gte: Date.now() - oneYear, $lt: Date.now() }, }, }, { $group: { _id: null, approved: { $sum: '$a' }, noFunds: { $sum: '$n' }, pending: { $sum: '$p' }, rejected: { $sum: '$r' }, }, }, \]; |
 
@@ -259,6 +276,7 @@ Five aggregation pipelines, one for each date interval, will be needed to fulfil
 
 To support the filter/match criteria of \`Bulk Upsert\` and \`Get Reports\`, the following index was created in the \`appV3\` collection:
 
+|                                                                                                          |
 |----------------------------------------------------------------------------------------------------------|
 | const keys = { key: 1, date: 1 }; const options = { unique: true }; db.appV3.createIndex(keys, options); |
 
@@ -303,6 +321,7 @@ Going back to the idea from \`appV1\` of trying to take advantage of the obligat
 
 Let's take a look at our filtering criteria in the \`Get Report\` and \`Bulk Upsert\` functions:
 
+|                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const bulkUpsertFilter = { key: event.key, date: event.date, }; const getReportsFilter = { key: request.key, date: { $gte: new Date('2021-06-15'), $lt: new Date('2022-06-15'), }, }; |
 
@@ -324,11 +343,13 @@ To store the \`date\` field in a binary/hexadecimal type, we have some options. 
 
 For our case, let's use the second option and store the \`date\` value as \`YYYYMMDD\` because it'll help in future implementation/improvements. Considering a \`key\` field with the value \`0001\` and a \`date\` field with the value \`2022-01-01\`, we would have the following \`_id\` field:
 
+|                                                 |
 |-------------------------------------------------|
 | const _id = Buffer.from('000120220101', 'hex'); |
 
 To concatenate and convert the \`key\` and \`date\` fields to their desired format and type, the following TypeScript function was created:
 
+|                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const buildId = (key: string, date: Date): Buffer =\> { const day = date.toISOString().split('T')\[0\].replace(/-/g, ''); // YYYYMMDD return Buffer.from(\`${key}${day}\`, 'hex'); }; |
 
@@ -338,6 +359,7 @@ Each document would still register the status totals for one user in one day, sp
 
 The application implementation presented above would have the following TypeScript document schema denominated\`SchemaV4\`:
 
+|                                                                                   |
 |-----------------------------------------------------------------------------------|
 | type SchemaV4 = { _id: Buffer; a?: number; n?: number; p?: number; r?: number; }; |
 
@@ -345,6 +367,7 @@ The application implementation presented above would have the following TypeScri
 
 Based on the specification presented, we have the following bulk \`updateOne\` operation for each \`event\` generated by the application:
 
+|                                                                                                                                                                                                         |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const operation = { updateOne: { filter: { _id: buildId(event.key, event.date) }, update: { $inc: { a: event.approved, n: event.noFunds, p: event.pending, r: event.rejected, }, }, upsert: true, }, }; |
 
@@ -352,6 +375,7 @@ Based on the specification presented, we have the following bulk \`updateOne\` o
 
 Five aggregation pipelines, one for each date interval, will be needed to fulfill the \`Get Reports\` operation. Each date interval will have the following pipeline, with just the date used in the function \`buildId\` being different:
 
+|                                                                                                                                                                                                                                                                                 |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | const pipeline = \[ { $match: { _id: { $gte: buildId(request.key, Date.now() - oneYear), $lt: buildId(request.key, Date.now()), }, }, }, { $group: { _id: null, approved: { $sum: '$a' }, noFunds: { $sum: '$n' }, pending: { $sum: '$p' }, rejected: { $sum: '$r' }, }, }, \]; |
 
@@ -418,12 +442,15 @@ So far, none of our applications have gotten even close to the desired rates, bu
 
 For any further questions, you can go to the[MongoDB Community Forum](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim), or if you want to build your application using MongoDB, the MongoDB Developer Center has lots of examples in many different programming languages.
 
+## Appendices
+
 ## Index on Embedded Documents
 
 Let's take a look at how MongoDB indexes a field with a value of type document and see why we need an extra index for the \`appV1\` implementation.
 
 First, let's check if the index on the \`_id\` field won't be used for our queries by executing a \`find\` operation with the same filtering criterias used in the \`Bulk Upsert\` and \`Get Reports\` functions and applying the \`[explain](https://www.mongodb.com/docs/manual/reference/command/explain/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim)\` functionality to it:
 
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | // A sample document const doc = { _id: { key: '0001', date: new Date('2020-01-01') }, approved: 2, rejected: 1, }; // Making sure we have an empty collection db.appV1.drop(); // Inserting the document in the \`appV1\` collection db.appV1.insertOne(doc); // Finding a document using \`Bulk Upsert\` filtering criteria const bulkUpsertFilter = { _id: { key: '0001', date: new Date('2020-01-01') }, }; db.appV1.find(bulkUpsertFilter).explain('executionStats'); /\*{ ... executionStats: { nReturned: 1, totalKeysExamined: 1, totalDocsExamined: 1, ... executionStages: { stage: 'EXPRESS_IXSCAN', ... } ... }, ... }\*/ // Finding a document using \`Get Reports\` filtering criteria const getReportsFilter = { '_id.key': '0001', '_id.date': { $gte: new Date('2019-01-01'), $lte: new Date('2021-01-01') }, }; db.appV1.find(getReportsFilter).explain('executionStats'); /\*{ ... executionStats: { nReturned: 1, totalKeysExamined: 0, totalDocsExamined: 1, ... executionStages: { stage: 'COLLSCAN', ... } ... }, ... }\*/ |
 
@@ -431,6 +458,7 @@ As shown by the output of the explainable queries, we have a collection scan (\`
 
 Most data types supported in MongoDB will be directly indexed without any special treatment or conversion. The special cases are fields of type array or documents. The array case is not our current focus, but it can be seen in [Create an Index on an Array Field](https://www.mongodb.com/docs/manual/core/indexes/index-types/index-multikey/create-multikey-index-basic/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim). The document or embedded document case can be seen in [Create an Index on an Embedded Document](https://www.mongodb.com/docs/manual/core/indexes/index-types/index-single/create-embedded-object-index/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim). Using the knowledge of the document case in our implementation, we could say that the value of the field \`_id\` in the index structure would be a stringified version of the embedded document.
 
+|                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------|
 | const documentValue = { key: '0001', date: 2010-01-01T00:00:00.000Z }; const indexValue = "{key:0001,date:2010-01-01T00:00:00.000Z}"; |
 

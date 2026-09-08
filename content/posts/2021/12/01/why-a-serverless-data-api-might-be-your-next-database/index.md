@@ -29,6 +29,8 @@ Serverless data offers enticing benefits, but market offerings are limited. What
 
 Okay, so there is a lot of unpack there. Let's take it easy and greet these concepts one at a time, giving these new guests the time and space they deserve. Besides, it's been a while since they all got together.
 
+## Party in the front - FaaS
+
 Functions as a service (FaaS), are excellent for data access and business logic alike. But like any middleware, functions are in constant conversation with their friends around them. Speaking of friends, let's be inclusive and recap for a moment on FaaS:
 
 * Runs backend code without managing any infrastructure whatsoever.
@@ -38,7 +40,11 @@ Functions as a service (FaaS), are excellent for data access and business logic 
 
 This sounds great, but where does the application state go? FaaS has significant limitations on holding state of any kind. Sure, you can run an in-process cache, session store, or use the modest filesystem allocated to the function, but they will be as short-lived as the function: inherently ephemeral / volatile.
 
+## Business in the back - BaaS/mBaaS
+
 Backend as a Service (BaaS) / Mobile Backend as a Service was a popular concept at first: being able to independently scale the backend from frontend has clear value. So why don't we hear as much about it as we used to? Well, once the initial cloud service euphoria passed, it's probably for the same reason that Model-View-Controller (MVC) frameworks evolved in monolithic applications. Coupling frontend clients directly to backend service APIs is fast, easy, and has a valid time and place. However, the separation of the presentation logic, business logic, and model (data access layer) is important. Otherwise, it's easy to end up with a brittle application that's difficult to add new features to. Cloud services today are more popular than ever, so clearly something changed to avoid the BaaS/mBaaS concerns described here. What is it?
+
+## Bringing business to the party
 
 API gateways and service meshes are useful, but can be dangerous. When they play host to too much custom code, they can become monoliths in and of themselves. When used properly, for the core features they provide, they are an elegant way to solve tough problems, service discovery, load balancing, (m)TLS termination/origination, auth token validation, request routing, rate limiting and much more.
 
@@ -58,6 +64,8 @@ Providing API access via SDKs, in addition to drivers, can make data more access
 As it turns out, there are other benefits to re-architecting a database engine so that the functions of a database aren't all performed in a single process. Using specialized hardware for individual database subsystems improves performance and lowers costs since they run more efficiently. Before Stargate, Apache Cassandra nodes had peer-to-peer architecture - no specialized node types. Stargate effectively introduces compute (query coordination) node and data (persistent storage) [node types](https://www.youtube.com/watch?v=K0sQvaxiDH0).
 
 There is no free lunch of course—breaking things into separate processes creates new issues. However, the benefits, like with FaaS, may very well outweigh the drawbacks in the long run. Besides, new techniques emerge every day to mitigate those drawbacks.
+
+## Bringing everyone together - DBaaS
 
 DBaaS hasn't historically been considered serverless, but that has been changing. An increasing number of public cloud services are either offering serverless alternatives, or moving to this architecture altogether. As one might expect, stateless services like compute are a bit more straightforward to make serverless, relative to stateful ones. It's only recently that databases and data services have begun to move in this direction.
 
@@ -142,6 +150,8 @@ So what business problems can such a system solve? With the storage engines [sup
 
 You can test drive it locally with a download, but it's much easier with [Docker](https://stargate.io/docs/stargate/1.0/developers-guide/install/install_overview.html), and easiest as-a-service on [astra.datastax.com](https://dtsx.io/3r6FOke) - a serverless DBaaS API built on [Apache Cassandra](http://cassandra.apache.org/), [K8ssandra](https://k8ssandra.io/), [Stargate](https://stargate.io/), [Apache Pulsar](https://pulsar.apache.org/), [Envoy](https://www.envoyproxy.io/) and other modern open source.
 
+## Planning the next event
+
 So what happens as we start seeing more major components of our architecture that are event driven, end-to-end? Meaning, FaaS as the container for the business logic, in between the client and backend service, with serverless BaaS and DBaaS options? Returning to CAP theorem for a moment, we know that's a world where partition tolerance is not negotiable. With the stateful aspects of these systems, the focus of innovation today is therefore about the role of availability and performance in:
 
 * Transactions, data consistency
@@ -151,6 +161,8 @@ So what happens as we start seeing more major components of our architecture tha
 * Improving the FaaS programming model by offering a wider range of data APIs
 
 Monoliths will always have a place, and not everything needs to be event driven. Yet, as more and more DBaaS follow suit and offer a serverless model (or option), we are likely to see an increase in event driven thinking. The economic benefits of paying strictly for usage are certainly clear.
+
+## Learn more about Serverless Data APIs
 
 * Jim McCollom's [blog series](https://www.datastax.com/blog/2021/02/datastax-serverless-what-we-did-and-why-its-game-changer) on the Astra engineering journey to Serverless
 * [Apollo GraphQL Federation router](https://www.apollographql.com/blog/unblocking-teams-to-go-faster-with-apollo-federation/) for Stargate announcement

@@ -24,6 +24,8 @@ In my previous [article](https://foojay.io/today/preparing-for-spring-framework-
 In this series of articles, we will explore these features in detail using a pragmatic approach. To begin, I will deep dive into the ***API*** ***versioning*** feature introduced in Spring Framework 7.
 ![API Versioning](Sb4version_1.png)
 
+## Why API Versioning?
+
 Any architectural or feature change stems from evolving business requirements, and API versioning is no exception. In today's app-driven ecosystem, APIs are central to product integration and user experience.   
 
 We must ensure backward compatibility with every new feature release so that existing consumers remain unaffected and new users can benefit from the enhancements.
