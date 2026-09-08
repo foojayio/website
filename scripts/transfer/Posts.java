@@ -136,8 +136,16 @@ public class Posts {
     //   .section-teaser / .teaser / .homepage-today__guide
     //                              - "Sponsored Content" promo cards / CTAs
     //   .article__details/tags/... - the title/date/read-time/author meta
+    // NOTE h1 IS NOT IN HERE, and must not be put back. It was, to strip the
+    // post title the theme renders inside the content area -- and it took every
+    // OTHER h1 with it. An author who writes `#` in the WordPress editor writes
+    // an h1, and this deleted the heading and left the text under it in place:
+    // one post lost eight section titles ("File written", "Tests pass", "TL;DR",
+    // ...) and read as one undifferentiated wall. Nothing reported it, because a
+    // body with fewer headings is not an error to anything downstream.
+    // resolveBodyHeadings below handles the title h1 specifically.
     static final String SELECTOR_CONTENT_NOISE =
-            "h1, .article__details, .article__tags, .article__author, .article-stats-container,"
+            ".article__details, .article__tags, .article__author, .article-stats-container,"
             + " .article__table, .section-teaser, .teaser, .homepage-today__guide, script, style";
     // Scope to the post's own taxonomy block (.article__tags). A bare
     // a[href*=/today/category/] also matches the nav/sidebar menu (every post
@@ -487,8 +495,13 @@ public class Posts {
         // The link text in the .article__author block IS the display name, which
         // is the form the suffix uses. Keeps a re-scrape in step with what
         // cleanup/Descriptions.java already wrote into content/.
+        // The title goes in as well, because Yoast does not always STOP at the
+        // byline: on a long post it appends the categories and the headline after
+        // it, so the marker lands mid-string. The title is the evidence that what
+        // follows is generated rather than the author's prose -- see
+        // HtmlToMarkdown.stripBylineSuffix.
         d.description = HtmlToMarkdown.stripBylineSuffix(
-                d.description, linksToNames(doc, SELECTOR_AUTHOR_LINKS));
+                d.description, linksToNames(doc, SELECTOR_AUTHOR_LINKS), d.title);
         // Reported rather than force-stripped: a name the page does not credit is
         // how a HUMAN writes "...- by Emily Wilson", so removing it on the strength
         // of the shape alone would edit someone's own description. This is the
@@ -504,6 +517,7 @@ public class Posts {
 
         Element content = doc.selectFirst(SELECTOR_ARTICLE_CONTENT);
         if (content != null) {
+            resolveBodyHeadings(content, d.title);
             content.select(SELECTOR_CONTENT_NOISE).remove();
             HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, opts, "");
             d.body = r.markdown;
@@ -520,6 +534,70 @@ public class Posts {
         HtmlToMarkdown.dropUnreferenced(d.bundleDir, opts, d.body, d.image);
 
         return d;
+    }
+
+    /**
+     * Sorts out the h1s inside a post body: the one that repeats the TITLE is
+     * removed, and any others are demoted to h2.
+     *
+     * The theme renders the post title as an h1 inside the content area, which is
+     * why h1 used to be in SELECTOR_CONTENT_NOISE -- and that threw away the
+     * author's own `#` headings along with it. Deleting a heading is the worst of
+     * the available outcomes: the text that belonged under it stays, so the
+     * article silently loses its structure and reads as one slab, and no check
+     * downstream can tell that a heading was ever there.
+     *
+     * DEMOTED RATHER THAN KEPT, because this site renders `title:` as the page's
+     * h1 -- a body h1 would be a second one on the page (WCAG 1.3.1, and the
+     * thing template/post.md tells contributors not to write). The cost is that a
+     * post using h1 for sections and h2 for subsections comes out with both at
+     * h2; that is a real flattening, and it is still far better than losing the
+     * headings outright. The post that exposed this mixes h1 and h2 for peer
+     * sections anyway, so for it the demotion is exactly right.
+     *
+     * MATCHING THE TITLE is done on aggressively normalised text -- the rendered
+     * h1 carries the curly quotes, em dashes and entity forms the scraped title
+     * has already been through stripSiteName/stripEmoji for -- with a word-overlap
+     * fallback for the first h1 only. Both the removal and each demotion are
+     * PRINTED, so a wrong call is visible in the run rather than silent in the
+     * diff, which is how the original bug survived.
+     */
+    static void resolveBodyHeadings(Element content, String title) {
+        boolean titleRemoved = false;
+        for (Element h1 : content.select("h1")) {
+            String text = h1.text();
+            boolean isTitle = !titleRemoved
+                    && (normalizeHeading(text).equals(normalizeHeading(title))
+                        || (h1.equals(content.selectFirst("h1")) && wordOverlap(text, title) >= 0.8));
+            if (isTitle) {
+                h1.remove();
+                titleRemoved = true;
+                continue;
+            }
+            h1.tagName("h2");
+            System.out.println("  body <h1> demoted to <h2>: " + text.substring(0, Math.min(60, text.length())));
+        }
+    }
+
+    /** Heading text reduced to comparable words: case, punctuation and the curly
+     *  quote / em dash / entity variants WordPress renders all collapse away. */
+    static String normalizeHeading(String value) {
+        if (value == null) return "";
+        return value.toLowerCase(java.util.Locale.ROOT)
+                .replaceAll("[\\p{Pd}\\p{Pi}\\p{Pf}\\p{Po}]", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
+    }
+
+    /** Fraction of the shorter text's words that the other one also has. */
+    static double wordOverlap(String a, String b) {
+        var wa = new java.util.HashSet<>(java.util.List.of(normalizeHeading(a).split(" ")));
+        var wb = new java.util.HashSet<>(java.util.List.of(normalizeHeading(b).split(" ")));
+        if (wa.isEmpty() || wb.isEmpty()) return 0;
+        var small = wa.size() <= wb.size() ? wa : wb;
+        var large = small == wa ? wb : wa;
+        long hits = small.stream().filter(large::contains).count();
+        return (double) hits / small.size();
     }
 
     static JsonNode findArticleJsonLd(Document doc) {
@@ -939,7 +1017,30 @@ public class Posts {
         // "URLs are load-bearing" is the rule this broke (see AGENTS.md).
         //
         // Same posture, and same reason, as Sponsors.java's `authors:` block.
-        for (String line : existingAliases(bundleDir)) fm.append(line).append("\n");
+        List<String> aliasLines = existingAliases(bundleDir);
+        // AN ALIAS THE SCRIPT *CAN* DERIVE: the one sanitizeSlug threw away.
+        // A WordPress slug may hold characters a folder name here cannot -- this
+        // post's real URL carries a Cyrillic "и" (%d0%b8), and three older ones
+        // end in an emoji. sanitizeSlug replaces the run with a dash and
+        // collapses it, so the bundle serves a DIFFERENT URL from the one
+        // foojay.io serves, and the live one 404s here. That is the one thing
+        // "URLs are load-bearing" cannot tolerate, and unlike a former slug (see
+        // the note above) this one is right there in the URL being scraped.
+        // Written as the literal character, because that is what the
+        // percent-escapes decode to and what a browser sends.
+        String wpSlug = decodePercent(lastPathSegment(d.url));
+        if (!wpSlug.isBlank() && !wpSlug.equals(d.slug)) {
+            String alias = "  - \"/today/" + wpSlug + "/\"";
+            boolean known = aliasLines.stream().anyMatch(l -> l.contains("/today/" + wpSlug + "/"));
+            if (!known) {
+                if (aliasLines.isEmpty()) aliasLines = new ArrayList<>(List.of("aliases:"));
+                else aliasLines = new ArrayList<>(aliasLines);
+                aliasLines.add(alias);
+                System.out.println("  alias added for the WordPress slug this folder name cannot hold:"
+                        + " /today/" + wpSlug + "/");
+            }
+        }
+        for (String line : aliasLines) fm.append(line).append("\n");
 
         fm.append("---\n\n");
         fm.append(d.body).append("\n");
@@ -1170,6 +1271,18 @@ public class Posts {
     /** Cleans a WordPress slug into a safe URL/folder slug: lowercases, replaces
      *  anything outside [a-z0-9_-] (emoji, spaces, punctuation) with a dash,
      *  collapses/trims dashes. Keeps existing dashes and underscores. */
+    /** Percent-escapes decoded to the characters they stand for, as a browser
+     *  would -- so a Cyrillic or emoji slug becomes the literal text that an
+     *  `aliases:` entry has to carry. Left as-is if it is not valid UTF-8. */
+    static String decodePercent(String s) {
+        if (s == null || !s.contains("%")) return s == null ? "" : s;
+        try {
+            return java.net.URLDecoder.decode(s, java.nio.charset.StandardCharsets.UTF_8);
+        } catch (IllegalArgumentException e) {
+            return s;
+        }
+    }
+
     static String sanitizeSlug(String s) {
         if (s == null) return "";
         return s.toLowerCase(Locale.ROOT)

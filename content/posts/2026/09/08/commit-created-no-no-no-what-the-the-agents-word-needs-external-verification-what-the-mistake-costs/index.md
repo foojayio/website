@@ -2,7 +2,7 @@
 title: "“Commit created” — but it isn’t: why the agent’s word needs external verification, and what the mistake costs"
 date: "2026-09-08T08:54:03+00:00"
 lastmod: "2026-09-08T09:08:20+00:00"
-description: "A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with - by Viktoria Evdokimova ai “Commit created” — but it isn’t: why the agent’s word needs external verification, and what the mistake costs"
+description: "A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with…"
 authors:
   - "viktoria-evdokimova"
 image: "Frame-2147236862-e1788858255231.jpg"
@@ -19,6 +19,8 @@ categories:
   - "Machine Learning"
 related_posts:
 frozen: false
+aliases:
+  - "/today/commit-created-no-no-no-what-the-the-agents-word-needs-external-verification-и-what-the-mistake-costs/"
 ---
 
 *![](Frame-2147236862-700x451.jpg)*
@@ -28,6 +30,8 @@ A detailed report reads like proof. The agent lists the files it touched, names 
 The report is model output. The commit, if it exists, lives in .git. The file, if it exists, lives on disk. The build result lives in a process exit code and a run log. The chat window is none of those places, and it can only vouch for itself.
 
 I am the product manager at Explyt, where we build an AI agent for JetBrains IDEs, and before that I led the team that built it. Before Explyt I spent years on tools that generate tests by symbolic execution, at JetBrains Research and Huawei, so I have a professional habit of distrusting any statement about a program until something has run and produced evidence. User interviews are part of my job now, and one line from a senior developer stuck with me because it was so plain: "The agent told me the commit was created. It wasn't." I wanted to know whether that was one unlucky session or a pattern, so I went through public issue trackers and whatever vendor and research posts described the same failure. It is a pattern, and it has a mechanism. This article applies to any JetBrains AI agent you might run: Junie, Copilot in agent mode, Claude Code attached to IntelliJ IDEA, a local model behind a plugin, or Explyt.
+
+## TL;DR
 
 * I went through public issues on Claude Code, Codex and Copilot, plus a Cursor forum thread about Gemini. They document agents reporting commits that exist on no branch, files that were never written and test runs that never happened. Anthropic's own docs and a METR post describe the same failure mode, so I stopped treating it as bad luck.
 * The three false claims I saw most often are "committed", "file written" and "tests pass". For each one I give the independent check I run myself; none takes more than a minute.
@@ -45,12 +49,18 @@ Every item below is a public report with a link. Each one is a documented incide
 
 The reverse also happens. [In openai/codex #22219](https://github.com/openai/codex/issues/22219 "In openai/codex #22219") the agent committed correctly and then, in its final message, "listed files as "currently uncommitted" even though those files were the ones it had just committed and git status --short was clean." A report that disagrees with the repository in either direction is a report you cannot use.
 
+## "File written"
+
 [anthropics/claude-code #23801](https://github.com/anthropics/claude-code/issues/23801 "anthropics/claude-code #23801") (February 2026, Windows): a copy command failed silently, and the model said the file was saved. "Claude Code reports "Done. The file has been saved" without checking if the file actually exists". The file turned up missing only after the user asked twice and the model finally ran a directory listing.
+
+## "Tests pass"
 
 [microsoft/vscode-cmake-tools #4915](https://github.com/microsoft/vscode-cmake-tools/issues/4915 "microsoft/vscode-cmake-tools #4915 ")(April 2026) is the cleanest mechanism I found, because the maintainers diagnosed and fixed it. The Copilot agent called the ctest tool with a test name that matched nothing. ctest ran zero tests and exited 0. The agent "then told me that all tests pass. But it didn't actually run any tests." Maintainer comment: "Because ctest returns exit code 0 both when tests pass and when no tests match, the tool reports success and the agent can't tell the difference." The fix went into the tool.  
 [openai/codex #41626](https://github.com/openai/codex/issues/41626 "openai/codex #41626") (August 2026): the agent asked for permission to run a hardware suspend/resume test, the user never granted it, and the auto-generated session summary later "claimed the HDMI suspend/resume test had passed and the task was complete."
 
 Two personal accounts round this out. On Hacker News, in the Claude Opus 4.8 launch thread (comment, May 2026), a user wrote that the previous model "reported that it had created the auth feature, that everything was secure, and that the tests passed. The issue was that it hadn't actually implemented the auth feature." In [r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/comments/1m9wn51/claude_lied_about_pushing_an_update/ "r/ClaudeAI") (July 2025) someone describes a Supabase migration the agent said it pushed: "This time, it said it did it... but didn't."
+
+## What the mistake costs
 
 The cheapest outcome is lost work. The edits sit unstaged in the working copy; the next branch switch, stash or agent run takes them away, and the developer finds out when the "finished" change is missing from the branch. [In #63870](https://github.com/anthropics/claude-code/issues/63870 "In #63870 ")the missing pieces were the commit, the push, the PR and the cleanup, and the developer had already moved on.  
 
@@ -59,6 +69,8 @@ The next level is other people's time. A reviewer opens the PR the agent describ
 Then there is the hotfix that never shipped. If "build passed" came from Gradle or Maven cache for a module that did not change, the artifact in production may not contain the fix, and the incident comes back after it was marked resolved. The HN account about the auth feature is the sharp end of this: the agent reported the feature as implemented, secure and tested, and none of the three was true. Nobody looks for a hole in a door that the report says is closed.  
 
 The systemic cost is the one Anthropic names in its own docs: you become the verification loop, and every mistake waits for you to notice it. Whatever the agent saved you on the task, you pay back on checking its report, or you skip the check and pay later, in production or in someone else's review. And #89765 adds the mirror image: when the transcript is treated as fact, it is unreliable in both directions, as a record of what was done and as a record of what you agreed to.
+
+## Why the narration and the side effect come apart
 
 The reports above are filed against different products and models, so the cause sits in how agents work and shows up in every vendor's bug list. When I read the maintainer comments and the attached session logs, the same mechanisms kept coming back.  
 
@@ -77,6 +89,8 @@ Anthropic says the same thing in its own docs. From the Claude Code best practic
 The research goes further. OpenAI's March 2025 paper on monitoring reasoning models found that during training, coding "agents quickly learn that it is easier to modify the testing framework such that tests trivially pass rather than implement a genuine solution". METR's June 2025 post reports that "the most recent frontier models have engaged in increasingly sophisticated reward hacking, attempting (often successfully) to get a higher score by modifying the tests or scoring code". Anthropic's Claude 4 announcement claims a 65% reduction in shortcut and loophole behavior relative to Sonnet 3.7, which is good news and also confirms how much of it there was to reduce.  
 
 Simon Willison put the practical consequence in one line in his "Vibe engineering" post: "Without tests? Your agent might claim something works without having actually tested it at all". Birgitta Böckeler, running TDD inside agent loops for martinfowler.com, saw the same thing from the other side: "agents still sometimes skipped or faked the red step, or implemented ahead of the test so that it passed immediately."
+
+## Three claims, three independent checks
 
 Independent means: performed by you or by the IDE, against the artifact itself, without going through the model's summary.
 
@@ -97,6 +111,8 @@ Claim: "Build passed" or "tests passed." Check the process that produced the res
 
 Each check costs less than a minute.
 
+## Traps where the check itself is fake
+
 Once you start verifying, the agent, or your own habits, will offer shortcuts.  
 
 The first one is the agent pasting the verification for you. "Here is git log to confirm:" followed by a code block. That block is model output. Unless the harness shows raw tool results separately from the model's text, treat pasted command output as a claim and run the command yourself.  
@@ -110,6 +126,8 @@ The fourth is an empty test selection, and its cousin, a test count without a te
 The fifth is a branch mismatch. The commit exists, on a branch nobody asked for. git log --all --oneline -5 catches it.  
 
 The last is partial success reported as full. Three of five files written, two rejected by a permissions rule, message says "updated the files". Compare the claimed list to the diff list, item by item.
+
+## Make "done" mean something in the agent's rules
 
 You can shift part of this work back to the agent with a rule that changes what "done" is allowed to mean. Most agents that run in a JetBrains IDE read a repository-level instruction file (`AGENTS.md` or a vendor equivalent), and many support reusable skills. A rule I use:
 

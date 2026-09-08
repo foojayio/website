@@ -739,16 +739,58 @@ public final class HtmlToMarkdown {
      *                    empty or null collection means nothing is stripped.
      */
     public static String stripBylineSuffix(String description, java.util.Collection<String> authorNames) {
+        return stripBylineSuffix(description, authorNames, null);
+    }
+
+    /**
+     * As above, plus the case where Yoast did not stop at the byline.
+     *
+     * On a long post it writes `&lt;excerpt&gt; - by &lt;Author&gt; &lt;categories&gt;
+     * &lt;title&gt;`, so the marker sits MID-STRING and the endsWith() rule above
+     * cannot fire -- which is why that case was only ever reported. The title is
+     * what makes it safe to cut anyway: prose that happens to read "- by Emily
+     * Wilson" is not followed by the article's own headline, and Yoast's stamp
+     * always is. So the tail goes only when what follows the author's name
+     * contains the post's title; without a title to check against, the behaviour
+     * is exactly what it was.
+     */
+    public static String stripBylineSuffix(String description, java.util.Collection<String> authorNames,
+                                           String title) {
         if (description == null || description.isBlank() || authorNames == null) return description;
         for (String name : authorNames) {
             if (name == null || name.isBlank()) continue;
-            String tail = " - by " + name.trim();
-            if (!description.endsWith(tail)) continue;
-            String head = description.substring(0, description.length() - tail.length()).stripTrailing();
-            if (head.isBlank()) return description;   // the byline was the whole thing
+            String marker = " - by " + name.trim();
+            if (description.endsWith(marker)) {
+                String head = description.substring(0, description.length() - marker.length()).stripTrailing();
+                if (head.isBlank()) return description;   // the byline was the whole thing
+                return endsSentence(head) ? head : head + "…";
+            }
+            int at = description.indexOf(marker);
+            if (at <= 0 || title == null || title.isBlank()) continue;
+            String after = description.substring(at + marker.length());
+            if (!containsTitle(after, title)) continue;
+            String head = description.substring(0, at).stripTrailing();
+            if (head.isBlank()) return description;
             return endsSentence(head) ? head : head + "…";
         }
         return description;
+    }
+
+    /** Whether `text` carries the post's own title -- the evidence that what
+     *  follows a byline marker is Yoast's generated tail and not prose. Compared
+     *  on a normalised prefix, because the rendered title and the stored one
+     *  differ in quote and dash characters. */
+    private static boolean containsTitle(String text, String title) {
+        String t = normalizeForTitleMatch(text);
+        String head = normalizeForTitleMatch(title);
+        if (head.length() > 40) head = head.substring(0, 40);
+        return head.length() >= 12 && t.contains(head);
+    }
+
+    private static String normalizeForTitleMatch(String value) {
+        return value.toLowerCase(Locale.ROOT)
+                .replaceAll("[\\p{Pd}\\p{Pi}\\p{Pf}\\p{Po}\\s]+", " ")
+                .trim();
     }
 
     /** True when the text already closes on sentence punctuation or a quote. */
