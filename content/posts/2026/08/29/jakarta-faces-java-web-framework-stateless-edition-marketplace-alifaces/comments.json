@@ -1,0 +1,16 @@
+[
+  {
+    "id": 97534,
+    "depth": 0,
+    "author": "Vladimir Bychkov",
+    "date": "2026-08-31T12:01:50",
+    "html": "<p>Looks great!<br>\n  What is the next step? Deploy JSF application as serverless on AWS Lambda/Fargate? With CRAC the aim seems achieveable.</p>"
+  },
+  {
+    "id": 97863,
+    "depth": 1,
+    "author": "Angelo Rubini",
+    "date": "2026-09-04T17:43:46",
+    "html": "<p>Hi, if you look at the example, it runs on a new method for distributing and executing cloud applications—one that is much more secure, cost-effective, and high-performing. It uses Nanos unikernel… you can see the benefits here: <a href=\"https://foojay.io/today/java-jakarta-ee-and-the-evolution-of-the-cloud-with-nanos-unikernel/\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://foojay.io/today/java-jakarta-ee-and-the-evolution-of-the-cloud-with-nanos-unikernel/</a></p>"
+  }
+]

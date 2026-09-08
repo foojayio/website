@@ -1,0 +1,9 @@
+[
+  {
+    "id": 97200,
+    "depth": 0,
+    "author": "Lourdes",
+    "date": "2026-08-27T10:20:36",
+    "html": "<p>Great article. The allocation-free parsing and deterministic replay parts are the most interesting to me. In crypto trading, latency matters, but being able to replay the exact market data stream after a bad decision is just as valuable for debugging a strategy.</p>\n<p>I also like the point about separating the market data connector from the trading logic. That makes it easier to swap feeds, compare exchange behavior, and test execution assumptions without rewriting the whole system.</p>\n<p>I’ve been looking at BYDFi from the trading side, and the same engineering concerns apply there too: order book quality, WebSocket stability, partial fills, timestamps, and how cleanly the API handles volatile markets. A strategy can look good in theory, but bad data handling or unreliable execution will break it very quickly.</p>"
+  }
+]

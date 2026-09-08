@@ -5,5 +5,12 @@
     "author": "buggester",
     "date": "2026-09-04T13:08:49",
     "html": "<p>finally. print debugging agents were killing me, burning tokens on console.logs they never clean up. this is the way</p>"
+  },
+  {
+    "id": 97855,
+    "depth": 1,
+    "author": "Viktoria Evdokimova",
+    "date": "2026-09-04T13:50:34",
+    "html": "<p>Thanks! Agreed on the cleanup: a breakpoint is gone the moment the session ends, a println has a way of surviving into the PR.</p>\n<p>Small caveat so nobody over-reads it: this is one bug and two runs. The pattern held here (fact first, then a narrow fix), but I’d want to see it on your own bugs before calling it “the way”.</p>"
   }
 ]
