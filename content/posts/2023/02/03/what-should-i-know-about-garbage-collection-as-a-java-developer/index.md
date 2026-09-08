@@ -43,8 +43,9 @@ So it is clear the GC is at the center of memory management for Java application
 
 ## How Does a Garbage Collector Work?
 
+{{< img src="john-cuthbertson.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+
 **A managed language like Java hides the complexity for you**  
-<img class="quote-portrait" src="https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png" alt="" width="96" height="96" loading="lazy">  
 **John Cuthbertson, Principal Engineer, C4 GC team**
 
 *I've been working on the Garbage Collectors in Java since version 1.1, initially on the G1 GC and later on the others. The most important message I want to share with developers is that the whole idea of a managed language – like Java – is that the complexity of such an essential and extensive implementation as a GC is actually "hidden" for you.*
@@ -120,8 +121,9 @@ You can take advantage of the young generation system by focusing on local varia
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
 ![](https://www.azul.com/wp-content/uploads/garbage-collectors-table.png) Table overview of the different Garbage Collectors in Java
 
+{{< img src="deepak-sreedhar.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+
 **Some tips for older GC generations are no longer applicable**  
-<img class="quote-portrait" src="https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DeepakSreedhar-300x300.png" alt="" width="96" height="96" loading="lazy">  
 **Deepak Sreedhar, Principal Software Engineer, GC Specialist**
 
 *GCs have evolved a lot in recent decades. As a Java developer or DevOps, you need to be aware that some tips for older GC generations or not applicable anymore. C4, ZGC, and Shenandoah are truly concurrent.*
@@ -140,8 +142,9 @@ As should be clear by now, "The Garbage Collector" doesn't exist; but depending 
 
 Do you just go for the default option, or do you want to use another one? The specialists at Azul are always available to guide new customers when they want to evaluate Azul Zulu Prime versus OpenJDK or other distributions, and they have a lot of experience in comparing different use cases.
 
+{{< img src="michael-roeschter.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+
 ***Certain coding practices can have an impact on how Java uses memory***  
-<img class="quote-portrait" src="https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-MichaelRoeschter-300x300.png" alt="" width="96" height="96" loading="lazy">  
 ***Michael Roeschter, Sales Engineer***
 
 *The GC has a significant impact on how your application behaves. Still, as a developer, you should also be aware that certain coding practices can have an impact on how Java uses memory, and some problems can get also get fixed with a code change! One of the examples where we have seen such wins is in statistics and parser applications, where a lot of data is copied and only used once.*
@@ -161,8 +164,9 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 Azul also has other technologies on top of OpenJDK that improve the performance of Java applications as this is not always only related to the behavior of the application itself but can also be impacted by the environment, cluster, or resources used within the organization.
 
+{{< img src="daniel-witkowski.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+
 **Always consider the most urgent problem to solve**  
-<img class="quote-portrait" src="https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DanielWitkowski-300x300.png" alt="" width="96" height="96" loading="lazy">  
 **Daniel Witkowski, Sales Engineer**
 
 *When we guide potential customers while evaluating Azul Zulu Prime, we always consider the most urgent problem to solve. Depending on that starting point, we will look at how Falcon, ReadyNow, or our C4 GC will provide the most significant win from the start. For specific projects, it is clear that the heap size is causing long pauses in the application execution caused by the Garbage Collector.*
@@ -210,8 +214,9 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 * [Analyze live data with Java Flight Recorder](https://docs.azul.com/prime/Java-Flight-Recorder)
 * [Analyze log files (post-mortem) with GC Log Analyzer](https://docs.azul.com/prime/diagnosing-java-performance-problems-with-gc-log-analyzer)
 
+{{< img src="john-cuthbertson.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+
 **There is still much to learn**  
-<img class="quote-portrait" src="https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png" alt="" width="96" height="96" loading="lazy">  
 **John Cuthbertson (Principal Engineer, C4 GC team)**
 
 *Like with Just-In-Time compilation and other significant components of Java, there is still much to learn. Although the GC is a mature technology, we, as the developers of it, are always looking at the best solutions between implementation changes and how they impact the behavior of both the GC itself and the applications using it.*
