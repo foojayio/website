@@ -38,7 +38,7 @@ that silently gets worse or gets lost if cutover happens without it.
       thing and are **not** imported into Discussions; see "Final comment
       archive" in the next phase.
 
-- [ ] **Resolve the Ketch / Consent Mode question.** `partials/analytics.html`
+- [X] **Resolve the Ketch / Consent Mode question.** `partials/analytics.html`
       emits Google Consent Mode defaults of `denied` and depends on Ketch
       issuing a standard `gtag('consent', 'update', …)`. If Ketch's Google
       Consent Mode plugin is not enabled on the `foojay_io` property, GA4 goes
@@ -56,7 +56,7 @@ that silently gets worse or gets lost if cutover happens without it.
       so creating them while WP is up changes nothing observable, and it takes
       the highest-traffic item off the cutover-day critical path.
 
-- [ ] **Verify the domain on the GitHub org** —
+- [ ] **[BLOCKER] Verify the domain on the GitHub org** —
   <https://github.com/organizations/foojayio/settings/pages> 
   - [X] Add domain in GitHub Foojay Settings Pages → `foojay.io`. 
   - [ ] Add a `TXT` record at `_github-pages-challenge-foojayio.foojay.io`. It prevents anyone else claiming the domain on GitHub Pages later; it does not affect serving, so
@@ -121,10 +121,6 @@ rather than failing loudly. Finish this phase before touching DNS.
       into `data/views.json` and push it. Delete the step and the `50 3 * * *`
       cron entry, leaving the six-hourly counter refresh.
 
----
-
-## Phase 2 — The day before
-
 - [ ] **Lower the TTL** on foojay.io's A/AAAA records and on
       `www.foojay.io` to 60 seconds, so a rollback propagates in a minute
       instead of a day.
@@ -145,7 +141,7 @@ rather than failing loudly. Finish this phase before touching DNS.
 
 ---
 
-## Phase 3 — Cutover day
+## Phase 2 — Cutover day
 
 **[ORDER] This entire phase is sequence-critical.** The awkward part is that
 GitHub Pages and Cloudflare want opposite things:
@@ -202,7 +198,7 @@ window short: during it, the three Redirect Rules do not fire.
 
 ---
 
-## Phase 4 — Verify, in this order
+## Phase 3 — Verify, in this order
 
 Fastest checks first, so a failure is caught before you have gone further.
 
@@ -239,7 +235,7 @@ Fastest checks first, so a failure is caught before you have gone further.
 
 ---
 
-## Phase 5 — After it has settled
+## Phase 4 — After it has settled
 
 Give it a week or two before deleting anything, and keep WordPress running and
 paid for at least that long.
