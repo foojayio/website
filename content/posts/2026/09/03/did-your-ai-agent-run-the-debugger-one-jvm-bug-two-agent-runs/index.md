@@ -40,9 +40,9 @@ A small function with one unguarded NIO call and more than one way to fail. A go
 
 A systematic debugging method has four steps: gather facts, form a hypothesis, run an experiment, change the code. The order matters, and the third step is the one I see agents skip.
 
-[Superpowers](github.com/obra/superpowers), a skills collection created by [Jesse Vincent](blog.fsck.com) and the [Prime Radiant](primeradiant.com) team and popularized by Matt Pocock, ships a [Caveman test](http:https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/// "Caveman test") [systematic-debugging skill](http://https://www.skills.sh/obra/superpowers/systematic-debugging "systematic-debugging skill")matic-debugging) that encodes exactly those steps as instructions for the model.
+[Superpowers](https://github.com/obra/superpowers), a skills collection created by [Jesse Vincent](https://blog.fsck.com) and the [Prime Radiant](https://primeradiant.com) team and popularized by Matt Pocock, ships a [systematic-debugging skill](https://www.skills.sh/obra/superpowers/systematic-debugging "systematic-debugging skill") that encodes exactly those steps as instructions for the model.
 
-[Explyt, the JetBrains plugin](https://plugins.jetbrains.com/plugin/27979-explyt-ai-agenthttp:// "Explyt, the JetBrains plugin") I work on, has a built-in Debug skill that gives the model the IDE debugger as a tool: it can set breakpoints, run a test under the debugger, and read variables and call stacks.
+[Explyt, the JetBrains plugin](https://plugins.jetbrains.com/plugin/27979-explyt-ai-agent "Explyt, the JetBrains plugin") I work on, has a built-in Debug skill that gives the model the IDE debugger as a tool: it can set breakpoints, run a test under the debugger, and read variables and call stacks.
 
 **Setup for both runs:**
 
@@ -101,7 +101,7 @@ Which shape is right depends on the caller. That is the decision the first run m
 Two small reminders while we are here. Files.list returns a Stream that holds a directory handle, so close it with try-with-resources. And AccessDeniedException extends FileSystemException, which extends IOException, so a bare catch (IOException e) will swallow it together with everything else unless you order the clauses.
 
 **What the token counts say, and what they do not**   
-[Explyt](https://explyt.ai/en/download)finished this case in about 67k tokens. The Superpowers run used about 132k.
+[Explyt](https://explyt.ai/en/download) finished this case in about 67k tokens. The Superpowers run used about 132k.
 
 The transcripts explain the gap. In run two the decisive fact arrived early, from the debugger. In run one the same budget went into speculative code, a skipped test, a second test, and a constructor refactor.
 
@@ -109,9 +109,9 @@ Read that as one measurement of one bug. Generalizing from it to either tool wou
 
 JetBrains has been publishing paired A/B tests on "token-saving" skills, and the pattern there is worth knowing before you trust any single number:
 
-The [Caveman test](http:https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/// "Caveman test"): a README claim of 65% fewer tokens turned into 8.5% fewer output tokens on real agentic tasks, with activation forced.  
+The [Caveman test](https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/ "Caveman test"): a README claim of 65% fewer tokens turned into 8.5% fewer output tokens on real agentic tasks, with activation forced.  
 
-The [rtk test](http:https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/// "rtk test"): the with-rtk arm cost a median 7.6% more per task at low reasoning effort, and nothing changed at high effort.  
+The [rtk test](https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/ "rtk test"): the with-rtk arm cost a median 7.6% more per task at low reasoning effort, and nothing changed at high effort.  
 
 The [Ponytail test](https://blog.jetbrains.com/ai/2026/07/ponytail-skill-claude-tested/): a 10.3% cost reduction on its own benchmark.  
 

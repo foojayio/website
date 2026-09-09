@@ -64,13 +64,13 @@
      The <h1> above stays hidden. This is orientation, not document structure,
      and a visible heading here would just repeat the wordmark two rows up.
 
-     THE SENTENCE IS DERIVED: it is /who-we-are/'s own description, through
+     THE SENTENCE IS DERIVED: it is /what-is-foojay/'s own description, through
      partials/meta-description.html -- the same string that page gives a search
      engine and a link preview -- so the home page cannot describe Foojay
      differently from the page it sends you to for the long version, and there is
      no second pitch to keep in step with the footer blurb. `with` on the lookup,
      so a fork that removes that page gets no strip rather than an empty bar. */}}
-{{ with site.GetPage "/pages/who-we-are" }}
+{{ with site.GetPage "/pages/what-is-foojay" }}
 <div class="home-intro">
   <div class="shell">
     <p>{{ partial "meta-description.html" . }} <a href="{{ .RelPermalink }}">What is Foojay? &rarr;</a></p>

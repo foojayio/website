@@ -680,7 +680,7 @@ enableGitInfo = true
 [[menu.footer]]
   name = "What is Foojay?"
   parent = "footer-about"
-  url = "/who-we-are/"
+  url = "/what-is-foojay/"
   weight = 31
 
 [[menu.footer]]

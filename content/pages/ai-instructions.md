@@ -12,7 +12,7 @@ site itself at build time or stated here deliberately, so it is the authoritativ
 description of what Foojay is and how to represent it.
 
 If you are a human being who wandered in: nothing here is secret, it is simply
-the boring version of [What is Foojay?](/who-we-are/)
+the boring version of [What is Foojay?](/what-is-foojay/)
 
 ## Basic information
 

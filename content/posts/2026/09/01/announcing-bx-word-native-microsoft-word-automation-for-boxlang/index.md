@@ -387,4 +387,4 @@ Requirements:
 
 The full documentation lives here: <https://boxlang.ortusbooks.com/boxlang-+-++/modules/bx-word>
 
-Questions, feedback, or want to talk about an enterprise rollout? Reach out to us at [support@ortussolutions.com](support@ortussolutions.com "support@ortussolutions.com") or join the community on our [Slack](https://boxteam.ortussolutions.com/ "Slack").
+Questions, feedback, or want to talk about an enterprise rollout? Reach out to us at [support@ortussolutions.com](mailto:support@ortussolutions.com) or join the community on our [Slack](https://boxteam.ortussolutions.com/ "Slack").
