@@ -5,7 +5,7 @@ lastmod: "2026-09-08T11:25:22+00:00"
 description: "If you've spent years in Spring Boot, Micronaut, or Jakarta EE, \"web framework\" usually means a servlet container, an embedded Tomcat or Netty, a build…"
 authors:
   - "cristobal-escobar"
-image: "Captura-de-pantalla-2026-09-08-132152.png"
+image: "Captura-de-pantalla-2026-09-08-132152.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"

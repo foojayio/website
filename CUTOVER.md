@@ -100,6 +100,25 @@ rather than failing loudly. Finish this phase before touching DNS.
       This is the last chance — the WordPress counts vanish with the site and
       `data/legacy-views.json` is the only copy.
 
+      **Then confirm it landed**, which matters more here than anywhere else in
+      this runbook: `/seed` has no sanity check of its own. `fetch/ViewCounts.java`
+      refuses a counter holding fewer pages than the committed file, but `/seed`
+      sets `legacy` to whatever it is handed, one key at a time — so a crawl that
+      half-failed writes a half-baseline and reports success. Two checks, in order:
+      - `/seed` answers `{"seeded":N,"rejected":[]}`. `N` must equal the key count
+        of `data/legacy-views.json` (`python3 -c 'import json;print(len(json.load(open("data/legacy-views.json"))))'`)
+        and `rejected` must be empty. A non-empty `rejected` is a malformed key or
+        a negative count, and those pages are simply not in the counter.
+      - No imported page may be missing from the counter. `gh workflow run
+        sync-view-counts.yml` and check the run: its **"Warn if the counter is
+        missing seeded pages"** step compares `data/legacy-views.json` against the
+        refreshed `data/views.json` and annotates the run if anything is absent.
+        A clean run prints `All N imported pages are in the counter.`
+
+      Both of these are what the 2026-09-09 import needed and did not have: 13
+      posts worth 1,914 views sat uncounted for a day because the import updated
+      the file and nothing pushed it to the Worker.
+
 - [ ] **Final comment archive:** `jbang scripts/transfer/Comments.java`, then
       commit whatever it changed. Run it again here even if it ran earlier, to
       pick up comments posted on WordPress in the meantime — **this is the last
