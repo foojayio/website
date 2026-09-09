@@ -504,7 +504,7 @@ enableGitInfo = true
 [[menu.main]]
   name = "What is Foojay?"
   parent = "About"
-  url = "/who-we-are/"
+  url = "/what-is-foojay/"
   weight = 41
   [menu.main.params]
     desc = "About Foojay, it's history, and logo"
