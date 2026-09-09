@@ -225,6 +225,26 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
+      # Both install steps below shell out to `apt-get update`, and apt exits
+      # 100 if ANY configured repo serves a bad index -- including repos nothing
+      # here uses. The runner image ships Google's Chrome repo, and on
+      # 2026-09-09 it served a Packages.gz whose hash did not match the Release
+      # file published alongside it, failing two deploys in a row on an error
+      # that had nothing to do with the site.
+      #
+      # Nothing in these tests touches system Chrome: the config is
+      # `devices['Desktop Chrome']` with no `channel`, so Playwright drives its
+      # own bundled chromium from ~/.cache/ms-playwright, and the packages
+      # install-deps wants (libnss3, libasound2t64 and friends) all come from the
+      # Ubuntu archives. So drop the source instead of waiting for Google to fix
+      # their mirror -- the same reasoning as stubbing third-party requests in
+      # the tests above, one layer down. Widen the pattern if another
+      # third-party repo on the image starts doing the same thing.
+      - name: Drop apt sources the browser install does not need
+        run: |
+          sudo grep -rlE 'dl\.google\.com' /etc/apt/sources.list.d/ 2>/dev/null \
+            | sudo xargs -r rm -f
+
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
