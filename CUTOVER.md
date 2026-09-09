@@ -48,20 +48,36 @@ that silently gets worse or gets lost if cutover happens without it.
       look like consent gating): accept the banner, watch for `/g/collect` with
       `tid=G-GS21L12HYK`.
 
-- [ ] **[BLOCKER] Pre-create the Cloudflare Redirect Rules** — the five
-      families in [Redirect rules](#redirect-rules) below. `aliases:` cannot
-      express a regex, and rules 1–3 alone carry **312,531 recorded hits**, more
-      than every per-page alias combined. Doing it now rather than on the day is
-      deliberate: every rule reproduces something the live site already serves,
-      so creating them while WP is up changes nothing observable, and it takes
-      the highest-traffic item off the cutover-day critical path.
+- [x] **[BLOCKER] Pre-create the Cloudflare Redirect Rules** — done 2026-09-09
+      by IT: all five families in [Redirect rules](#redirect-rules) below, in one
+      ruleset (Rules → Redirect Rules → "Foojay cutover redirects"), **as `302`
+      rather than `301`**. A browser caches a 301 more or less permanently, so a
+      wrong one is very hard to walk back; they get flipped to `301` once the
+      move has settled (Phase 4). `aliases:` cannot express a regex, and rules
+      1–3 alone carry **312,531 recorded hits**, more than every per-page alias
+      combined. Doing it early takes the highest-traffic item off the
+      cutover-day critical path.
 
-- [ ] **[BLOCKER] Verify the domain on the GitHub org** —
+      Two deviations from the spec below:
+      - Rule 4a's `(?!page/|feed/)` negative lookahead is **not supported by
+        Cloudflare's regex engine** and was rewritten as a plain `and not`
+        condition. Verified equivalent — the two URLs that must not move still
+        answer 200 (second loop under [Verifying](#verifying-after-cutover)).
+      - **The 14 nested-category renames are not in the ruleset**, only the five
+        families are. They are still outstanding, and they have to be ordered
+        **before** rule 4a or the six `tools/…` ones land on a term that does not
+        exist.
+
+- [X] **[BLOCKER] Verify the domain on the GitHub org** —
   <https://github.com/organizations/foojayio/settings/pages> 
   - [X] Add domain in GitHub Foojay Settings Pages → `foojay.io`. 
-  - [ ] Add a `TXT` record at `_github-pages-challenge-foojayio.foojay.io`. It prevents anyone else claiming the domain on GitHub Pages later; it does not affect serving, so
-    it can be done any time before the switch.
-  - [ ] Check if GitHub could verify the `TXT` record at https://github.com/organizations/foojayio/settings/pages
+  - [X] Add a `TXT` record at `_github-pages-challenge-foojayio.foojay.io` —
+    created by IT 2026-09-09. It prevents anyone else claiming the domain on
+    GitHub Pages later; it does not affect serving, so it could be done any time
+    before the switch.
+  - [X] Check if GitHub could verify the `TXT` record at
+    <https://github.com/organizations/foojayio/settings/pages> — `foojay.io`
+    shows **Verified** there as of 2026-09-09. Nothing left on this item.
 
 ```
 1. Create a TXT record in your DNS configuration for the following hostname: _github-pages-challenge-foojayio.foojay.io
@@ -140,20 +156,36 @@ rather than failing loudly. Finish this phase before touching DNS.
       into `data/views.json` and push it. Delete the step and the `50 3 * * *`
       cron entry, leaving the six-hourly counter refresh.
 
-- [ ] **Lower the TTL** on foojay.io's A/AAAA records and on
-      `www.foojay.io` to 60 seconds, so a rollback propagates in a minute
-      instead of a day.
+- [x] **Lower the TTL** on foojay.io's A/AAAA records and on `www.foojay.io` to
+      60 seconds — **attempted 2026-09-09, and it cannot be done while they are
+      proxied.** Cloudflare pins TTL to "Auto" on any orange-cloud record and
+      accepts the edit without applying it. This does not hurt the rollback
+      goal as things stand: a proxied name resolves to Cloudflare's anycast IPs
+      either way, so there is no stale resolver cache to wait out and a rollback
+      takes effect at the edge.
 
-- [ ] **Add `wordpress.foojay.io`** pointing at WP Engine's current IP, **DNS
-      only (grey cloud)**, and confirm it actually serves the site *before* you
-      need it. Two things bite here:
-      - WP Engine will not serve a hostname that is not added to the install —
-        add it in the WP Engine dashboard, or you get someone else's site or a
-        cert error.
-      - WordPress canonical-redirects to its configured `home`/`siteurl`, so
-        `wordpress.foojay.io` may bounce straight back to `foojay.io`. If it
-        does, that has to be fixed WP-side (or via a `HOME`/`SITEURL` override)
-        or the backup is not actually readable.
+      It does mean the TTL starts mattering **the moment Phase 2 step 1 turns
+      the proxy off**. Check what TTL the records pick up when they go grey, set
+      it to 60s there, and treat the grey-cloud window as the one stretch where a
+      rollback is not instant.
+
+- [ ] **Add `wordpress.foojay.io`** — created 2026-09-09 as a `CNAME` to
+      `wp.wpenginepowered.com`, **DNS only (grey cloud)**, along with the
+      pre-validation record WP Engine's panel asks for:
+      `_cf-custom-hostname.wordpress.foojay.io` =
+      `258d3943-71ac-43bc-bca8-40c10c9e03e7`. WP Engine also offers two `A`
+      records (`141.193.213.10` / `.11`) but recommends the `CNAME` because it
+      survives their server changes. Both of the things that bite here were
+      checked the same day, and it is **half working**:
+      - The hostname *is* added to the install: TLS verifies and a post
+        (`/log4j-cve/`) answers 200 with no redirect. Nothing further needed.
+      - **The homepage is not readable — `https://wordpress.foojay.io/` 301s to
+        `https://foojay.io/`.** That is the WordPress canonical redirect, and it
+        fails in exactly the situation the fallback exists for: during a
+        rollback, `foojay.io` is the thing that is broken. Inner pages serve
+        fine, so the content is reachable if you know a URL, but nobody lands on
+        one first. Fix WP-side (a `HOME`/`SITEURL` override) before cutover, or
+        accept that rollback is DNS-only with no readable backup in the meantime.
 
 - [ ] **Announce a freeze** on publishing to WordPress, so nothing is written
       after the final harvest that would then be lost.
@@ -175,7 +207,8 @@ GitHub Pages and Cloudflare want opposite things:
 So it is grey cloud first, then orange. foojay.io is proxied today (Cloudflare's
 Email Address Obfuscation is a proxy-level feature and the WP HTML shows it), so
 this is a change from the current state and back again. Keep the grey-cloud
-window short: during it, the three Redirect Rules do not fire.
+window short: during it, none of the five Redirect Rules fire — and, per Phase
+1, it is also the only stretch where DNS TTL genuinely delays a rollback.
 
 1. [ ] **Switch the web records to GitHub Pages, DNS only (grey cloud).**
        Leave every other record alone — see the DNS table below; touching `MX`
@@ -208,8 +241,11 @@ window short: during it, the three Redirect Rules do not fire.
        debugging the Pages API on the day.
 
 5. [ ] **Turn the proxy back on (orange cloud)** for `foojay.io` and
-       `www.foojay.io`, and set **SSL/TLS → Full (strict)**. Confirm the three
-       Redirect Rules and the `/api/views/*` Worker route are live again.
+       `www.foojay.io`, and set **SSL/TLS → Full (strict)**. Then
+       **re-enable rules 4a and 5**, which were switched off in Phase 0 because
+       they break the live WordPress site, and confirm all five Redirect Rules
+       and the `/api/views/*` Worker route are live. They are still `302` at this
+       point; that is deliberate — see Phase 4.
 
 6. [ ] **Purge the Cloudflare cache** (Caching → Configuration → Purge
        Everything). Otherwise cached WordPress HTML keeps being served over the
@@ -232,8 +268,8 @@ Fastest checks first, so a failure is caught before you have gone further.
       [Redirect rules](#redirect-rules) — `/blog/…`, `/almanac/jdk-17`,
       `/docs/…`, a nested category path, and `/feed/`. That loop also checks the
       two URLs rule 4a must *not* touch (`/today/category/java/page/2/` and
-      `/today/category/tools/`), since a wrong negative lookahead breaks those
-      silently.
+      `/today/category/tools/`), since a wrong exclusion condition breaks those
+      silently. Expect `302`, not `301`, until Phase 4.
 - [ ] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
       the three emoji-suffixed post URLs.
 - [ ] **The view counter is counting.** `curl https://foojay.io/api/views/all`
@@ -258,6 +294,14 @@ Fastest checks first, so a failure is caught before you have gone further.
 
 Give it a week or two before deleting anything, and keep WordPress running and
 paid for at least that long.
+
+- [ ] **Flip the five Redirect Rules from `302` to `301`.** They went live as
+      302 so a wrong one could be walked back — a browser caches a 301 more or
+      less permanently. Re-run both verification loops in
+      [Verifying](#verifying-after-cutover) first, then edit the ruleset. Until
+      this is done, search engines treat every one of the 312,531 inbound hits as
+      a temporary move and keep the old URLs indexed, so do not leave it for
+      months.
 
 - [ ] **Delete `scripts/transfer/` and `scripts/cleanup/` entirely.** Both
       folders exist only to read or repair WordPress content, which is the
@@ -285,7 +329,8 @@ plugin export, plus two families the export never knew about.
 first time round: it lists redirects somebody *added*, not the URLs WordPress
 serves by virtue of being WordPress. They are invisible in a sitemap comparison
 too, because Yoast lists only the canonical form. Both still 200 on the live
-site (re-checked 2026-09-03).
+site (re-checked 2026-09-03) — which is precisely why they are the two rules that
+must stay **disabled until cutover**; see the second Phase 0 blocker.
 
 **These are for INBOUND traffic, and that is the whole reason they matter.**
 `HtmlToMarkdown.normalizeLegacyUrls` applies rules 1–3 at scrape time, so a post
@@ -293,34 +338,40 @@ stored in `content/` already links to `/today/…` — our own markup does not d
 on them. What does is the 312,531 hits arriving from other sites, search results
 and bookmarks.
 
-Cloudflare → Rules → Redirect Rules → Create, one per block, `301`/permanent.
-The plugin matches **case-insensitively and ignores a trailing slash**
-(`flag_case: false`, `flag_trailing: false`), so the replacements should too.
+Cloudflare → Rules → Redirect Rules, one per block. They exist as of 2026-09-09
+in the ruleset "Foojay cutover redirects", **all five as `302`/temporary** — the
+blocks below say `302` for that reason. Flip them to `301`/permanent in Phase 4,
+not before. The plugin matches **case-insensitively and ignores a trailing
+slash** (`flag_case: false`, `flag_trailing: false`), so the replacements should
+too.
 
 ```
 # 1. the old blog scheme -- 209,365 hits, foojay's original URL scheme. Also
 #    covers /blog/author/…, /blog/category/…, /blog/page/2/ and the feeds, which
 #    per-post aliases could not.
 When:  (starts_with(http.request.uri.path, "/blog/"))
-Then:  concat("/today/", substring(http.request.uri.path, 6))     dynamic, 301
+Then:  concat("/today/", substring(http.request.uri.path, 6))     dynamic, 302
 
 # 2. the almanac -- 102,636 hits. Off-site: never foojay's own content.
 When:  (http.request.uri.path matches "^/almanac/(jdk|java)-([0-9]+)")
 Then:  regex_replace(http.request.uri.path, "^/almanac/(jdk|java)-([0-9]+).*$", "https://javaalmanac.io/jdk/${2}")
-                                                                  dynamic, 301
+                                                                  dynamic, 302
 
 # 3. the retired docs section -- 530 hits; everything under it collapses to the
 #    article index.
 When:  (starts_with(http.request.uri.path, "/docs/"))
-Then:  "/today/"                                                  static, 301
+Then:  "/today/"                                                  static, 302
 
 # 4a. WP categories NEST and Yoast canonicalises to the nested form, so
 #     /today/category/tools/maven/ is the INDEXED url while Hugo has only the
 #     flat one -- 55 URLs plus their page/N/ and feed/ variants. 41 of them
 #     differ only by the parent segment, so one rule covers the lot.
-When:  (http.request.uri.path matches "^/today/category/[^/]+/(?!page/|feed/)[^/]+/")
+#     Cloudflare's regex engine has no negative lookahead, so the page/ and
+#     feed/ exclusion is a second, negated condition rather than "(?!page/|feed/)".
+When:  (http.request.uri.path matches "^/today/category/[^/]+/[^/]+/"
+        and not http.request.uri.path matches "^/today/category/[^/]+/(page|feed)/")
 Then:  regex_replace(http.request.uri.path, "^/today/category/[^/]+/", "/today/category/")
-                                                                  dynamic, 301
+                                                                  dynamic, 302
 
 # 5. every WordPress feed URL -> its Hugo equivalent. WP serves a feed at /feed/
 #    and at <any archive>/feed/; Hugo serves index.xml beside every one of those
@@ -328,18 +379,20 @@ Then:  regex_replace(http.request.uri.path, "^/today/category/[^/]+/", "/today/c
 #    /today/author/<slug>/feed/ and a category feed.
 When:  (http.request.uri.path matches "^(/.*)?/feed/?$")
 Then:  regex_replace(http.request.uri.path, "^(.*?)/feed/?$", "${1}/index.xml")
-                                                                  dynamic, 301
+                                                                  dynamic, 302
 ```
 
 **Order matters in three places.** Rule 1 before any catch-all, and none of 1–3
 may fire for `/today/…` itself. The 14 renames below **before** 4a, or 4a strips
 the parent off the six `tools/…` ones and lands them on a term that does not
-exist. Rule 5 **after** 1 and 4, so `/blog/feed/` and
+exist — **and those 14 are not created yet**, so this ordering constraint is
+still live work, not a done deal. Rule 5 **after** 1 and 4, so `/blog/feed/` and
 `/today/category/tools/maven/feed/` are normalised first.
 
 **Three traps, each of which fails silently.**
 
-- The `(?!page/|feed/)` in 4a is load-bearing: without it
+- The `page/|feed/` exclusion in 4a is load-bearing (written as an `and not`
+  condition, since Cloudflare has no negative lookahead): without it
   `/today/category/tools/feed/` rewrites to `/today/category/feed/` and
   `/today/category/java/page/2/` to `/today/category/page/2/` — breaking two URL
   shapes that work today in the course of fixing a third. Because the
@@ -352,7 +405,10 @@ exist. Rule 5 **after** 1 and 4, so `/blog/feed/` and
   invisible in advance, a feed reader not being a page view.
 - `/comments/feed/` has no equivalent — there is no site-wide comment feed here —
   so let it fall through to the 404 rather than aiming it at something that is
-  not what it claims.
+  not what it claims. **Rule 5 as built does catch it**, sending it to
+  `/comments/index.xml`, which 404s anyway; the outcome is the same status code
+  by a worse route. Add a `/comments/feed/` exclusion to rule 5 if it is worth
+  the tidiness.
 
 **The other 14 nested-category URLs are renames**: the slug itself changed, so no
 pattern derives them and each needs its own rule (or one rule with a lookup
@@ -384,9 +440,11 @@ tracking the category.
 
 ### Verifying, after cutover
 
-Each should answer `301` with the destination above. Run the same loop against
-the live WordPress site first if you want the expected output — it is what these
-rules were copied from.
+Each should answer `302` with the destination above (`301` once Phase 4 has
+flipped them). The rules are already live, so this loop runs today too — but
+against WordPress the *destinations* of rules 4a and 5 do not exist, which is
+what the second Phase 0 blocker is about. Add `-L` and check the final code, not
+just the hop, or a redirect to a 404 reads as a pass.
 
 ```sh
 for u in /blog/log4j-cve/ /blog/author/hirt/ /blog/category/java/ \
@@ -397,7 +455,8 @@ for u in /blog/log4j-cve/ /blog/author/hirt/ /blog/category/java/ \
          /feed/ /today/feed/ /today/author/frankdelporte/feed/ \
          /today/category/java/feed/ /today/category/tools/maven/feed/ ; do
   printf '%-42s ' "$u"
-  curl -s -o /dev/null -w '%{http_code} -> %{redirect_url}\n' "https://foojay.io$u"
+  curl -s -o /dev/null -w '%{http_code} -> %{redirect_url} ' "https://foojay.io$u"
+  curl -sL -o /dev/null -w '(ends %{http_code})\n' "https://foojay.io$u"
 done
 
 # The two that must NOT move. 4a is written to leave them alone and a wrong
@@ -440,8 +499,14 @@ on the day — GitHub has changed them before.
 | `foojay.io` | `A` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | grey → orange (Phase 3) |
 | `foojay.io` | `AAAA` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` | grey → orange |
 | `www.foojay.io` | `CNAME` | `foojayio.github.io` | grey → orange |
-| `wordpress.foojay.io` | `A` | WP Engine's current IP | **grey, permanently** |
-| `_github-pages-challenge-foojayio.foojay.io` | `TXT` | from the org verification page | n/a |
+| `wordpress.foojay.io` | `CNAME` | `wp.wpenginepowered.com` | **grey, permanently** |
+| `_cf-custom-hostname.wordpress.foojay.io` | `TXT` | `258d3943-71ac-43bc-bca8-40c10c9e03e7` | n/a |
+| `_github-pages-challenge-foojayio.foojay.io` | `TXT` | `d2b3d7045480075a08c5a52c5fd6a2` | n/a |
+
+The bottom three exist as of 2026-09-09. `wordpress.foojay.io` is a `CNAME`
+rather than WP Engine's two-`A` alternative (`141.193.213.10` / `.11`) on WP
+Engine's own recommendation: the `CNAME` survives their server changes. The
+`_cf-custom-hostname` `TXT` is the pre-validation record their panel asks for.
 
 **Leave `MX` and the `SPF`/`DKIM`/`DMARC` `TXT` records untouched.**
 
@@ -455,14 +520,23 @@ change. Either works.
 ## Rollback
 
 WordPress stays untouched and reachable at `wordpress.foojay.io` throughout, so
-recovery is a DNS change:
+recovery is a DNS change. Note the caveat from Phase 1: that hostname's
+**homepage currently 301s back to `foojay.io`**, so until that is fixed WP-side
+the fallback is only usable via direct post URLs.
 
-1. Point `foojay.io`'s `A`/`AAAA` back at WP Engine's IP, proxy **on**.
+1. Point `foojay.io`'s `A`/`AAAA` back at WP Engine, proxy **on**.
 2. Purge the Cloudflare cache.
 3. Remove the custom domain from the Pages settings, so GitHub stops answering
    for it.
+4. Disable rules 4a and 5 again — they point at Hugo URLs WordPress does not
+   serve, so leaving them on means a rolled-back site with dead feeds.
 
-With the TTL lowered in Phase 2 this takes about a minute to propagate.
+Propagation is about a minute, but not for the reason originally written here:
+the TTL could not be lowered (see Phase 1), and it does not need to be while the
+records are proxied — clients resolve to Cloudflare either way and the change
+takes effect at the edge. The exception is a rollback attempted **during the
+grey-cloud window** in Phase 2, where real TTLs apply; that is the one case worth
+turning the proxy back on first.
 
 One thing does **not** roll back, which is why it is ordered the way it is: any
 view counts accumulated in the Worker's `live` column stay there (harmless —
