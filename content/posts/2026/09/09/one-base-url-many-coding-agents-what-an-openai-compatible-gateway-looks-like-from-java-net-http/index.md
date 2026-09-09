@@ -22,8 +22,6 @@ related_posts:
 frozen: false
 ---
 
-## One Base URL, Many Coding Agents: What an OpenAI-Compatible Gateway Looks Like From java.net.http
-
 Somewhere in every coding agent there is an HTTP client. Claude Code, Codex, Cursor, Cline, OpenCode: strip away the terminal UI or the editor pane and each of them serializes a conversation into JSON, POSTs it to a base URL with an API key in a header, and streams the answer back. The client owns the prompt assembly, the tool loop and the rendering; the model sits on the far side of that socket.
 
 That framing is worth holding on to, because "OpenAI-compatible" is a phrase that gets thrown around loosely. For a Java developer it has a precise meaning: the server accepts the request shape the OpenAI SDKs emit, under paths the SDKs expect, with `Authorization: Bearer `. If a vendor lets you swap the base URL, you can point the client at any server that speaks that shape.
