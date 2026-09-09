@@ -23,11 +23,21 @@
            2147 post pages for the browser to throw away.
          - the author NAMES, above one. foojay-podcast-94 credits twelve
            people; see byline.html for why that becomes "12 authors" rather
-           than a truncated list. */ -}}
+           than a truncated list.
+         - the author FACES. They follow from the same width: a 20px portrait
+           in front of a byline that has already collapsed to a count is a
+           picture of whoever sorted first, labelled as twelve people.
+
+       `avatars` can also be passed explicitly, and author/section.html is the
+       one caller that turns it off on a full-width card: there every post has
+       the same author, whose portrait is already at the top of the page. */ -}}
 {{- $p := . -}}
 {{- $maxCategories := 2 -}}
 {{- $compact := false -}}
 {{- $eager := false -}}
+{{- /* Default derived from $compact rather than a flat false, so a caller
+       states the WIDTH and the faces follow -- one knob, per the note above. */ -}}
+{{- $avatars := true -}}
 {{- if reflect.IsMap . -}}
   {{- $p = .page -}}
   {{/* isset, not `default`: 0 is a meaningful value here and `default` would
@@ -35,6 +45,8 @@
   {{- if isset . "maxCategories" -}}{{- $maxCategories = .maxCategories -}}{{- end -}}
   {{- if isset . "compact" -}}{{- $compact = .compact -}}{{- end -}}
   {{- if isset . "eager" -}}{{- $eager = .eager -}}{{- end -}}
+  {{- if isset . "compact" -}}{{- $avatars = not .compact -}}{{- end -}}
+  {{- if isset . "avatars" -}}{{- $avatars = .avatars -}}{{- end -}}
 {{- end -}}
 {{- with $p -}}
 <article class="post-card">
@@ -44,8 +56,10 @@
   {{ partial "post-thumb.html" (dict "page" $p "eager" $eager) }}
 
   <div class="post-card-meta">
+    {{/* Author first, then date, then views: the face and the name are what
+         make a card feel like it was written by somebody, so they lead. */}}
+    {{ partial "byline.html" (dict "page" . "maxNames" (cond $compact 1 0) "avatars" $avatars) }}
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-    {{ partial "byline.html" (dict "page" . "maxNames" (cond $compact 1 0)) }}
     {{ partial "views.html" . }}
   </div>
 

@@ -736,15 +736,188 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 }
 .post-card-meta a { color: var(--ink-muted); font-weight: 600; }
 .post-card-meta a:hover { color: var(--brand-accent-strong); }
-/* `time + .byline-group`, not `time + a`: byline.html wraps its output in that
-   span so the flex row treats a multi-author byline as ONE item (see the
-   partial), and the old selector additionally only matched when the byline
-   happened to be an <a> -- which it is not for a legacy slug with no author
-   bundle, nor for the collapsed "12 authors" a compact card renders. Both of
-   those silently lost their separator, leaving the date run together with the
-   name while the view count kept its own dot. */
-.post-card-meta time + .byline-group::before,
+/* The dot goes on whatever FOLLOWS the byline, because the byline now leads the
+   meta line (post-card.html). `.byline-group + time`, not `time + a`: byline.html
+   wraps its output in that span so the flex row treats a multi-author byline as
+   ONE item (see the partial), and a selector keyed on <a> would additionally
+   only match when the byline happens to be a link -- which it is not for a
+   legacy slug with no author bundle, nor for the collapsed "N authors" form.
+   Both of those silently lost their separator before. */
+.post-card-meta .byline-group + time::before,
 .post-card-meta .views::before { content: "·"; margin-right: .5rem; color: var(--border-strong); }
+
+/* THE FACE IN FRONT OF A BYLINE (byline.html, `avatars`). Round, like every
+   other face on the site (.author-card img, .author-avatar).
+
+   THE IMAGE IS INSIDE THE <a>, NOT BESIDE IT, and that is load-bearing.
+   .post-card-meta is a flex row with a .5rem gap, so an <img> placed as a
+   sibling of the name would become its own flex item and take that gap on both
+   sides -- the same failure .byline-group exists to fix for the comma between
+   two names. Nested in the link it is the link's business, and the outer row
+   still sees one item.
+
+   The LINK is the flex container, which is what lets the circle be bigger than
+   the .85rem text: `align-items: center` centres the name against the portrait
+   whatever size it is, where a `vertical-align` offset has to be re-tuned every
+   time the size changes and still drifts as the line box grows. inline-flex, so
+   several authors still flow as text with the commas between them, and so it
+   works unchanged on the plain <span> form (a legacy slug with no bundle, or
+   the collapsed "12 authors") where there is no image at all.
+
+   The background is a placeholder for the moment before a lazy image decodes,
+   so a card does not flicker as faces arrive. */
+.byline { display: inline-flex; align-items: center; gap: .4rem; }
+.byline-avatar {
+  width: 1.9rem; height: 1.9rem;
+  border-radius: 50%; object-fit: cover;
+  background: var(--surface-sunken);
+  /* A hairline, so a light-background portrait still reads as a disc against
+     the card rather than bleeding into it. */
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+/* THREE OR MORE AUTHORS: the faces overlap into a row and the names collapse to
+   a count (the $pile branch in byline.html). The overlap is what keeps twelve
+   credits inside a 255px card -- laid out end to end, four portraits and a
+   count are already wider than the card.
+
+   The ring is --surface rather than --border here: each disc has to read
+   against the DISC BEHIND IT, not against the card, so the ring is the card's
+   own background punching a gap between neighbours. Drawn with box-shadow, not
+   a border, so it sits outside the 1.9rem box and the circles keep their size.
+
+   The FIRST author is the face on top, via descending z-index rather than a
+   `direction: rtl` flip. The flip does put the first child in front -- painting
+   order follows the DOM -- but it also reverses the row, which lands the "+N"
+   chip at the LEFT end where it reads as part of the first face instead of as
+   the overflow of the last. Five children at most, so five rules is the whole
+   ladder. */
+.byline-faces { display: inline-flex; }
+.byline-faces > * { position: relative; }
+.byline-faces > :nth-child(1) { z-index: 5; }
+.byline-faces > :nth-child(2) { z-index: 4; }
+.byline-faces > :nth-child(3) { z-index: 3; }
+.byline-faces > :nth-child(4) { z-index: 2; }
+/* A little over a tenth of a face tucked behind its neighbour: enough to read
+   as a stack, little enough that each portrait is still a recognisable person. */
+.byline-faces > * + * { margin-left: -.4rem; }
+.byline-faces .byline-avatar { box-shadow: 0 0 0 2px var(--surface); display: block; }
+.byline-face { display: inline-flex; border-radius: 50%; }
+/* HOVER DOES NOT RESTACK, and that is a fix rather than an omission. A link
+   box is a SQUARE around a round portrait, so in the overlap strip two boxes
+   are under the pointer at once. Raising the hovered one to the top moved its
+   square over its neighbour, which handed the pointer to the other face, which
+   raised THAT one -- the two swapped back and forth for as long as the cursor
+   sat in the overlap, flickering the ring and the label between two people.
+
+   Leaving the nth-child ladder alone settles it: the face drawn on top in a
+   given strip is also the one that receives the pointer there, so what you
+   point at is what you see, and nothing moves. The cost is that the ring on a
+   partly-covered face is clipped by the disc in front of it, which is what a
+   stack of overlapping things should look like anyway. */
+.byline-faces .byline-face:hover .byline-avatar,
+.byline-faces .byline-face:focus-visible .byline-avatar { box-shadow: 0 0 0 2px var(--brand-accent-strong); }
+
+/* THE NAME ON HOVER. A pile shows faces and a count, so this is the only place
+   a reader is told which portrait is whom -- hence :focus-visible too, and
+   hence the name staying on the <img> as alt regardless.
+
+   It sits ABOVE the row, which is also why it survives the no-restack rule: the
+   label never overlaps a sibling face, so it does not matter that a later face
+   sits lower in the ladder. The only overflow: hidden on a card is on
+   .post-card-image, which this is not inside, so nothing clips it. */
+.byline-face::after,
+.byline--count[data-name]::after {
+  content: attr(data-name);
+  position: absolute; bottom: calc(100% + .4rem); left: 50%;
+  transform: translateX(-50%) translateY(.15rem);
+  padding: .2rem .45rem; border-radius: .35rem;
+  background: var(--ink); color: var(--surface);
+  font-size: .72rem; font-weight: 600; line-height: 1.3; white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.byline-face:hover::after,
+.byline-face:focus-visible::after,
+.byline--count[data-name]:hover::after,
+.byline--count[data-name]:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* THE COUNT ANSWERS "WHO ELSE?". Only four faces fit, so on a twelve-author
+   post eight people are represented by the word "authors" alone -- hovering the
+   count spells all of them out. It wraps, unlike a single name: twelve names on
+   one nowrap line is wider than the viewport. max-content up to a cap, so two
+   names stay on one line and twelve become a readable block rather than a
+   column one name wide.
+
+   `cursor: help` because this is the one hoverable thing in the byline that is
+   not a link, and nothing else would say so. tabindex is deliberately NOT set:
+   the faces beside it are already focusable and carry the same names, so making
+   the count a fifth stop would repeat them for no gain. */
+.byline--count[data-name] { position: relative; cursor: help; }
+.byline--count[data-name]::after {
+  white-space: normal; width: max-content; max-width: 16rem; text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .byline-face::after,
+  .byline-face:hover::after,
+  .byline-face:focus-visible::after { transition: none; transform: translateX(-50%); }
+}
+/* Initial-in-a-disc, for an author bundle with no `avatar:`. All 354 have one
+   today, so this is a safety net for the next one added rather than something
+   on screen -- but it has to hold the row's shape if it ever fires, hence the
+   same disc and the .byline-faces prefix to outrank the `display: block`
+   above. */
+.byline-faces .byline-avatar--initial {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 700; color: var(--ink-muted);
+}
+/* WITH FACES ON, THE GROUP SPACES ITSELF and byline.html emits no comma between
+   names -- a portrait already shows where one author ends and the next starts.
+   That makes this the one case where .byline-group is itself a flex container,
+   which is safe for the reason the wrapper exists at all: .post-card-meta sees
+   the group as a single item either way, so the row's own .5rem gap still never
+   reaches the names inside it. It also feeds the gap between the face row and
+   the "N authors" count in the pile branch, which is why that has no margin of
+   its own. flex-wrap, so two long names on a narrow card break to a second line
+   rather than overflowing the card. */
+.byline-group--avatars {
+  display: inline-flex; flex-wrap: wrap; align-items: center;
+  column-gap: .6rem; row-gap: .15rem;
+}
+
+/* A NARROW CARD DROPS THE VIEW COUNT, because a face costs horizontal room the
+   meta line does not have to spare. Cards are not all one width: the grid beside
+   the sidebar gives 379px, the full-width bands on the home page ("Podcasts",
+   4 across) give 269px. At 269 the line wants 314 -- and that is with ONE
+   author, so it is the avatar, not the pile, that does it. Shrinking the
+   portrait to fit needs 1.25rem, which is back below the size this was raised
+   to, so the fix is to drop a field instead: the date says more about a post
+   than its view count, and a fresh post has no count to show anyway.
+
+   A CONTAINER query, not a media query, and that distinction is the whole point:
+   both grids exist at the same viewport width, so only the card's OWN width can
+   tell them apart. 330px is between the two, with room for the longer names.
+
+   `container-type: inline-size` on the card is what makes it queryable. It
+   contains layout and inline size, which is safe here -- a card is a grid item
+   whose width comes from the grid, and nothing inside it is positioned against
+   the page. */
+.post-card { container-type: inline-size; }
+/* THE META LINE PAINTS ABOVE THE THUMBNAIL, so a hover label can rise into it.
+   .post-card-image is position: relative, which puts it in the positioned layer;
+   a label growing upward out of the byline was drawn UNDER it and lost its top
+   edge -- visible only on the multi-line "N authors" list, since a single name
+   is short enough to clear the image's bottom edge.
+
+   The lift goes on the whole meta row, NOT on the hovered face. Raising the
+   hovered face is what caused the pointer to oscillate between two portraits in
+   their overlap strip (see the no-restack note below); lifting their shared
+   parent moves the whole row above the image and leaves the faces' order among
+   themselves exactly as it was. */
+.post-card-meta { position: relative; z-index: 1; }
+@container (max-width: 330px) {
+  .post-card-meta .views { display: none; }
+}
 
 .post-card-categories, .post-categories, .chip-row {
   display: flex; flex-wrap: wrap; gap: .4rem;
@@ -2321,6 +2494,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 :root[data-theme="dark"] .post-card-image img,
 :root[data-theme="dark"] .author-card img,
 :root[data-theme="dark"] .author-avatar,
+:root[data-theme="dark"] .byline-avatar,
 :root[data-theme="dark"] .featured-side__head img,
 :root[data-theme="dark"] .post-single img { filter: brightness(.92); }
 /* The placeholder tile is generated colour, not artwork, so it is retuned for

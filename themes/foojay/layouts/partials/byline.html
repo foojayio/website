@@ -9,6 +9,9 @@
        pagefindMeta  stamp data-pagefind-meta="author" on the wrapper, so the
                      names become the "author" meta key of this page's search
                      result (see below)
+       avatars       show each author's face before their name (default false).
+                     Above ONE author this becomes a row of overlapping faces
+                     plus a count instead -- see the $pile branch.
 
      `maxNames 1` is what the related-posts cards pass. A podcast episode can
      credit a dozen people -- foojay-podcast-94 credits twelve -- and in a
@@ -32,6 +35,24 @@
      used to add this wrapper itself, which is exactly why the post header looked
      right and the cards did not.
 
+     `avatars` PUTS THE FACE INSIDE THE LINK, not beside it. The picture and
+     the name are one person, so they should be one hover target and one tab
+     stop; a sibling <a> would give a keyboard user two stops that go to the
+     same page. It carries alt="" for the same reason -- the name is right
+     there in the same link, so a described image would have a screen reader
+     announce the person twice.
+
+     It is opt-in because a face is not always the useful thing. The related-
+     posts strip does not take it -- see `compact` in post-card.html: at ~178px
+     the byline is already collapsing to "12 authors". The single post page does
+     not either, having the author callout at the foot of the article instead.
+
+     An author's OWN page does take it, which is worth saying because the
+     opposite looks right at first: every card there is by the same person, so
+     the portrait beside each one repeats what the profile at the top already
+     shows. It earns its place on the co-authored posts, where the pile is the
+     only thing on the page that says who else was involved.
+
      `pagefindMeta` IS OPT-IN, and must stay opt-in -- the same shape as
      sponsor-logo.html / board-logo.html's `pagefindImage`, and for the same
      reason. Pagefind takes the LAST element carrying a given meta key on a
@@ -43,25 +64,98 @@
 {{ $p := . }}
 {{ $maxNames := 0 }}
 {{ $pagefindMeta := false }}
+{{ $avatars := false }}
 {{ if reflect.IsMap . }}
   {{ $p = .page }}
   {{ if isset . "maxNames" }}{{ $maxNames = .maxNames }}{{ end }}
   {{ if isset . "pagefindMeta" }}{{ $pagefindMeta = .pagefindMeta }}{{ end }}
+  {{ if isset . "avatars" }}{{ $avatars = .avatars }}{{ end }}
 {{ end }}
 {{ with $p }}
 {{ $authors := .Params.authors }}
 {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
-<span class="byline-group"{{ if $pagefindMeta }} data-pagefind-meta="author"{{ end }}>
-{{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) }}
+<span class="byline-group{{ if $avatars }} byline-group--avatars{{ end }}"{{ if $pagefindMeta }} data-pagefind-meta="author"{{ end }}>
+{{- $pile := and $avatars (ge (len $authors) 2) -}}
+{{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) (not $pile) }}
   {{- /* "N authors", never "N author": the branch only runs above maxNames,
          which is at least 1, so the plural always holds. */ -}}
   <span class="byline">{{ len $authors }} authors</span>
+{{- else if $pile -}}
+  {{- /* MORE THAN ONE, WITH FACES: a row of overlapping portraits and a count,
+         never a list. 161 posts are in this branch and one of them credits
+         twelve people: spelled out with a portrait each, that byline was three
+         wrapped lines pushing the title off the card, which is the same problem
+         `maxNames` was added for and the reason the collapsed form exists.
+
+         THE THRESHOLD IS TWO, NOT THREE, AND IT IS MEASURED RATHER THAN GUESSED.
+         In a 379px card, two faces with both names needs 428px and wraps the
+         view count onto a second line; piling the faces first still needs 408px.
+         The count form needs 265px. Since whether the name form fits depends on
+         how long the two names happen to be, keeping it for two authors means
+         some cards wrap and some do not, for no reason a reader can see -- so
+         two collapses like twelve does. The lead card is no exception: its text
+         column is a 1fr half of a 1.15fr/1fr split, narrower still than a grid
+         card.
+
+         The faces are individually linked, so unlike the plain "12 authors"
+         this does not cost the reader a way through to each person -- it is
+         MORE navigable than the text form, not less. Each carries the name as
+         its alt, so a screen reader announces the person, and again in
+         `data-name`, which is what the hover label prints. `title` would show a
+         name too, but only after the browser's own delay, in chrome that cannot
+         be styled, and it would then double up with the styled label. The count
+         beside the faces is decoration once the names are reachable, so it is
+         aria-hidden.
+
+         Four faces at most: beyond that the discs stop being recognisable
+         faces at 30px and just widen the row. There is deliberately no "+N"
+         chip on the end -- the count next to the row already says five, and a
+         chip repeating it is a second circle in the pile that is not a face. */ -}}
+  <span class="byline-faces">
+    {{- range $i, $slug := first 4 $authors -}}
+      {{- $author := partial "author-page.html" $slug -}}
+      {{- if $author -}}
+        <a class="byline-face" href="{{ $author.RelPermalink }}" data-name="{{ $author.Title }}">
+          {{- with $author.Params.avatar -}}
+            <img class="byline-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}"
+                 alt="{{ $author.Title }}" loading="lazy" decoding="async" width="60" height="60">
+          {{- else -}}
+            <span class="byline-avatar byline-avatar--initial" aria-hidden="true">{{ substr $author.Title 0 1 }}</span>
+          {{- end -}}
+        </a>
+      {{- end -}}
+    {{- end -}}
+  </span>
+  {{- /* The count carries the FULL list, not just the four that fit as faces,
+         so hovering it answers "who are the other eight?" -- the one question
+         the pile cannot answer by itself. Same data-name/::after mechanism as a
+         face; the CSS lets this one wrap onto several lines. */ -}}
+  {{- $names := slice -}}
+  {{- range $authors -}}
+    {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
+    {{- else -}}{{- $names = $names | append . -}}{{- end -}}
+  {{- end -}}
+  <span class="byline byline--count" data-name="{{ delimit $names ", " }}" aria-hidden="true">{{ len $authors }} authors</span>
 {{- else -}}
   {{ range $i, $slug := $authors }}
-    {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
+    {{- /* The comma is for the text-only byline. With faces on, each portrait
+           already marks where one author ends and the next begins, and the
+           group's own flex gap does the spacing -- a comma there reads as
+           punctuation floating between two pictures. */ -}}
+    {{- if and $i (not $avatars) }}<span class="byline-sep">, </span>{{ end -}}
     {{- $author := partial "author-page.html" $slug -}}
     {{- if $author -}}
-      <a class="byline" href="{{ $author.RelPermalink }}">{{ $author.Title }}</a>
+      <a class="byline" href="{{ $author.RelPermalink }}">
+        {{- if $avatars }}{{ with $author.Params.avatar -}}
+          {{/* width/height are the 2x pixels of the ~30px CSS box, so the space
+               is reserved before the image decodes and the card does not reflow
+               its title as the faces arrive. The source is 192x192 for every
+               one of the 354 author bundles, so there is headroom above this. */}}
+          <img class="byline-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}"
+               alt="" loading="lazy" decoding="async" width="60" height="60">
+        {{- end }}{{ end -}}
+        {{- $author.Title -}}
+      </a>
     {{- else -}}
       <span class="byline">{{ $slug }}</span>
     {{- end -}}

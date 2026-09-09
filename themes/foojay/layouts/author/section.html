@@ -51,6 +51,11 @@
     {{ if $written }}
     {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" "articles") }}
     <div class="post-grid">
+      {{/* Faces ON here, like every other listing. The obvious argument against
+           -- every post is by the author whose portrait is already at the top --
+           only holds for the posts they wrote alone. A co-authored one shows who
+           they wrote it WITH, which is information this page has nowhere else,
+           and the pile makes those posts findable at a glance while scrolling. */}}
       {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
     </div>
     {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" "articles") }}

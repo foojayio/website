@@ -23,8 +23,9 @@
     <h3 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     {{ with .Params.description }}<p class="post-card-excerpt">{{ . | truncate 210 }}</p>{{ end }}
     <div class="post-card-meta">
+      {{/* Author first -- see post-card.html. */}}
+      {{ partial "byline.html" (dict "page" . "avatars" true) }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-      {{ partial "byline.html" . }}
       {{ partial "views.html" . }}
     </div>
   </div>
