@@ -20,11 +20,15 @@ authors:
 # Fallback only -- sponsor/section.html derives the topic list from the tags of
 # this sponsor's own articles as soon as there are any, and only falls back to
 # this list while there are none.
+#
+# EVERY ENTRY MUST BE AN EXISTING CATEGORY: the template renders each one as a
+# link to /today/category/<urlized>/, so an invented topic ("API",
+# "Documentation", "Open Source" -- none of which are categories here) is a dead
+# link that validate/BuiltSite.java blocks the deploy on.
 topics:
   - "Java"
-  - "API"
-  - "Documentation"
-  - "Open Source"
+  - "library"
+  - "tools"
   - "Maven"
 # Never on WordPress -- APIdia joined after the Hugo migration, so the folder
 # name IS the only URL and there is no legacy /sponsor/<wpSlug>/ to alias.
