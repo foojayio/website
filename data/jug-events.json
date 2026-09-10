@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-09T06:05:55Z",
+  "generatedAt" : "2026-09-10T06:05:28Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -7,7 +7,15 @@
     "jug" : "AlmatyJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/almaty-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Какие бесы живут в JVM",
+      "url" : "https://www.meetup.com/almaty-java-community/events/316481757/",
+      "startTime" : "2026-09-16T18:30:00+05:00",
+      "endTime" : "2026-09-16T20:30:00+05:00",
+      "venue" : "улица Байзакова 280",
+      "city" : "Almaty",
+      "online" : false
+    } ]
   }, {
     "slug" : "amsterdam-java-user-group",
     "name" : "Amsterdam Java User Group",
@@ -886,8 +894,8 @@
     "events" : [ {
       "title" : "Workshop Hands-On: Kiro Express — Desarrollo de Software Impulsado por IA",
       "url" : "https://www.meetup.com/peru-java-user-group/events/316327933/",
-      "startTime" : "2026-09-09T19:00:00-05:00",
-      "endTime" : "2026-09-09T21:00:00-05:00",
+      "startTime" : "2026-09-23T19:00:00-05:00",
+      "endTime" : "2026-09-23T21:00:00-05:00",
       "venue" : "Edificio Soho Plus",
       "city" : "Lima",
       "online" : false
