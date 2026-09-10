@@ -1,14 +1,22 @@
 ---
 # A sponsored banner in the home page carousel.
 #
-# Copy this WHOLE FOLDER shape to content/ads/<ad-slug>/index.md and drop the
-# creative in next to it:
+# Copy this WHOLE FOLDER shape to content/ads/<yyyy>-<mm>-<campaign>/index.md
+# and drop the creative in next to it:
 #
-#     content/ads/coderabbit-ai-code-review/index.md
-#     content/ads/coderabbit-ai-code-review/coderabbit.png
+#     content/ads/2026-09-coderabbit-ai-code-review/index.md
+#     content/ads/2026-09-coderabbit-ai-code-review/coderabbit.png
 #
-# Name the folder after the advertiser and the campaign -- lowercase letters,
-# digits and dashes only. It is a page BUNDLE (index.md, not _index.md) so the
+# Name the folder for the MONTH IT RUNS and then the campaign -- lowercase
+# letters, digits and dashes only.
+#
+# THE DATE PREFIX IS NOT DECORATION and is not a duplicate of publishDate
+# below. A banner past its expiryDate is dropped from the build entirely, so
+# /ad-stats/ -- the report you hand a sponsor -- cannot ask Hugo about a
+# finished campaign at all. The folder name is what the view counter keys on,
+# what sorts that report chronologically, and what a row falls back to once the
+# bundle is gone. validate/Frontmatter.java requires the prefix and requires it
+# to agree with publishDate when that is set. It is a page BUNDLE (index.md, not _index.md) so the
 # creative lives beside the copy, which is the same shape a post, an author and
 # a sponsor use, and the reason a banner is content rather than a data file:
 # there is one folder per campaign instead of a YAML file in one tree and an
@@ -84,6 +92,13 @@ secondaryLink: "/sustainability-for-java-developers/"
 #
 # Leave both out for a banner that runs until someone removes it. With them set
 # you never have to come back: the campaign ends on its own at the next build.
+#
+# LET A FINISHED CAMPAIGN EXPIRE; DO NOT DELETE ITS FOLDER. Expiring drops the
+# banner from the built site but leaves the bundle on disk, which is where
+# /ad-stats/ reads the headline, the sponsor and the dates from for every
+# campaign that is no longer running. Delete the folder and the counts survive
+# -- nothing is lost from the totals -- but the row loses its title and its
+# sponsor, and drops out of that sponsor's yearly figures.
 publishDate: "2026-09-01"
 expiryDate: "2026-10-01"
 
@@ -91,6 +106,16 @@ expiryDate: "2026-10-01"
 # are not paid placements. Defaults to true, so a paid banner is labelled
 # "Sponsored Content" without anyone having to remember to say so.
 sponsored: true
+
+# Who this campaign belongs to: the FOLDER NAME of their profile under
+# content/sponsors/ ("azul", "coderabbit"), or "foojay" for a house promotion.
+# Checked against that directory, so a typo is a failed PR rather than a
+# sponsor who quietly splits into two rows on /ad-stats/.
+#
+# The one field here that is genuinely new information: a sponsor runs several
+# campaigns a year, each its own folder, and "how did Azul do this year" cannot
+# be derived from a folder name. Without it the report can only count banners.
+sponsor: "coderabbit"
 
 # Nothing else: the rotation order, the arrows, the label and the text colour are
 # the layout's job, and the "Do you want your ad here?" button is site chrome

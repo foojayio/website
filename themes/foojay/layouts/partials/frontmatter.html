@@ -1,10 +1,11 @@
 {{- /* Path to a content file (string) in -> its frontmatter as a map out, or an
        empty map if there is none.
 
-       This exists for coming-soon.html, which has to read posts Hugo has
-       deliberately not built (see the comment there). Nothing else should need
-       it: a page Hugo DID build exposes its frontmatter as .Params, which is
-       always the right way round.
+       This exists for the two places that have to read content Hugo has
+       deliberately NOT built: coming-soon.html (posts dated in the future) and
+       ad-stats/single.html (banners past their expiryDate). Nothing else should
+       need it -- a page Hugo DID build exposes its frontmatter as .Params,
+       which is always the right way round.
 
        IT STOPS AT THE CLOSING `---`, and that is not defensive tidiness --
        content/posts/2025/10/01/jc-ai-newsletter-6/index.md has eleven `date:`

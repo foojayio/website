@@ -1036,7 +1036,29 @@ public class Frontmatter {
 
     static final Set<String> AD_KEYS = Set.of(
             "title", "description", "link", "cta", "image", "background", "sponsored",
-            "secondaryCta", "secondaryLink", "publishDate", "expiryDate");
+            "secondaryCta", "secondaryLink", "publishDate", "expiryDate", "sponsor");
+
+    /**
+     * A banner folder is `<yyyy>-<mm>-<campaign>`. The month is not decoration
+     * and not a duplicate of publishDate: an expired banner is dropped from the
+     * Hugo build entirely, so by the time anyone reads /ad-stats/ the folder
+     * name is the only thing about a finished campaign that is guaranteed to
+     * still be in reach -- it is what the counter keys on, what sorts the
+     * report chronologically, and what a row falls back to when the bundle has
+     * been deleted rather than left to expire.
+     */
+    static final Pattern AD_FOLDER = Pattern.compile("(\\d{4})-(\\d{2})-[a-z0-9][a-z0-9-]*");
+
+    /**
+     * `sponsor:` names a profile under content/sponsors/, or is "foojay" for the
+     * house promotions that carry `sponsored: false` (the eBook, a call for
+     * articles). Checked against the directory rather than taken on trust,
+     * because the only thing a typo here breaks is the per-sponsor total on
+     * /ad-stats/ -- a page nobody looks at until a sponsor asks for numbers,
+     * which is the worst moment to discover that "code-rabbit" and "coderabbit"
+     * have been two advertisers all year.
+     */
+    static final String HOUSE_SPONSOR = "foojay";
 
     static final Pattern HEX_COLOUR = Pattern.compile("#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
 
@@ -1072,7 +1094,17 @@ public class Frontmatter {
             if (!SLUG_FMT.matcher(slug).matches()) {
                 problems.add(dir + ": folder name '" + slug + "' is not a clean slug"
                         + " (lowercase letters, digits and dashes only,"
-                        + " e.g. coderabbit-ai-code-review)");
+                        + " e.g. 2026-09-coderabbit-ai-code-review)");
+            }
+
+            Matcher folder = AD_FOLDER.matcher(slug);
+            boolean dated = folder.matches();
+            if (!dated) {
+                problems.add(dir + ": folder name '" + slug + "' has no <yyyy>-<mm>- prefix"
+                        + " -- a banner is filed by the month it runs"
+                        + " (e.g. 2026-09-" + slug + "), because that prefix is what"
+                        + " orders /ad-stats/ and what identifies a campaign there"
+                        + " after the bundle itself has expired out of the build");
             }
 
             Map<String, Object> fm = readFrontmatter(index);
@@ -1098,6 +1130,35 @@ public class Frontmatter {
             }
 
             problems.addAll(checkRequired(index, fm, List.of("title", "link", "cta", "image", "background")));
+
+            // Same shape as checkPostDates' folder rule, and the same failure it
+            // prevents: two places say when this runs, so they must not be able
+            // to disagree. Hugo schedules off publishDate, the report orders off
+            // the folder -- a banner filed under 2026-09- that publishes in
+            // November would sort into the wrong quarter of a sponsor's report
+            // with nothing else noticing. Only the MONTH is compared: the folder
+            // has no day in it, deliberately.
+            if (dated && fm.get("publishDate") != null) {
+                String raw = frontmatterLine(index, "publishDate");
+                String month = raw == null ? "" : raw.substring(0, Math.min(7, raw.length()));
+                String folderMonth = folder.group(1) + "-" + folder.group(2);
+                if (!month.isEmpty() && !month.equals(folderMonth)) {
+                    problems.add(index + ": publishDate " + raw + " is not in the month its"
+                            + " folder names (" + folderMonth + "). Hugo publishes off"
+                            + " publishDate and /ad-stats/ sorts off the folder, so these two"
+                            + " must agree -- rename the folder to " + month + "-... or fix"
+                            + " the date.");
+                }
+            }
+
+            if (fm.get("sponsor") instanceof String sponsor && !sponsor.isBlank()
+                    && !sponsor.equals(HOUSE_SPONSOR)
+                    && !Files.isDirectory(Path.of("content/sponsors", sponsor))) {
+                problems.add(index + ": sponsor '" + sponsor + "' has no profile at"
+                        + " content/sponsors/" + sponsor + " -- use the folder name of the"
+                        + " sponsor's own page, or \"" + HOUSE_SPONSOR + "\" for a house"
+                        + " promotion that is not a paid placement");
+            }
 
             if (fm.get("link") instanceof String link && !link.isBlank() && !link.startsWith("http")) {
                 problems.add(index + ": link '" + link + "' should be the advertiser's"
