@@ -44,7 +44,7 @@ FOSDEM is an open-source conference where a lot of different open-source communi
 The best thing about FOSDEM was meeting all the lovely [Foojay](https://foojay.io/) people at the Foojay dinner, many of whom I met again at countless other conferences, like [JavaZone](https://2023.javazone.no/) in September:
 ![](IMG_2100-44c46405.jpg) In a bar with my fellow speakers
 
-But more on Oslo later. Speaking at QCon London and FOSDEM was frightening, but I learned a lot in the process, so I started submitting my talks to a few conferences and user groups, resulting in my first [Tour](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/)d'Europe in May/June this year:
+But more on Oslo later. Speaking at QCon London and FOSDEM was frightening, but I learned a lot in the process, so I started submitting my talks to a few conferences and user groups, resulting in my first [Tour](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/) d'Europe in May/June this year:
 ![](image-6-40b237b8.jpg)
 
 I originally just wanted to give a talk at the JUG Milano while I was there any way on holiday with two friends. Sadly, the vacation fell through due to medical reasons, but Mario Fusco offered me a stay at his place in beautiful Gorgonzola/Milan so I could visit Milan and give my talk:  

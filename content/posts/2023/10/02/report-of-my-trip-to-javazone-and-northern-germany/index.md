@@ -93,7 +93,7 @@ The next day was full of talks, including mine and eating great food. I now unde
 
 *Thank you to [Inna Belyantseva](https://www.linkedin.com/in/inna-belyantseva-08542a288/) for the great Math-as-a-Service logo and valuable feedback on my presentation style in the weeks before the conference.*
 
-Later in the day, I went to [Theresa](https://www.linkedin.com/in/tmammarella/)Mammarella's [talk](https://2023.javazone.no/program/5cde4f58-77f2-4295-9cd5-00ee65c410f0) on CVEs:
+Later in the day, I went to [Theresa](https://www.linkedin.com/in/tmammarella/) Mammarella's [talk](https://2023.javazone.no/program/5cde4f58-77f2-4295-9cd5-00ee65c410f0) on CVEs:
 
 <figure class="wp-block-embed aligncenter is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">

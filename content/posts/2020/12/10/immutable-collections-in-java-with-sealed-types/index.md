@@ -25,7 +25,7 @@ How to define contractual, structural, and verifiable immutable Java collections
 
 ## Introducing Sealed Types
 
-JDK 15 was released on September 15, 2020. [JEP 360](https://openjdk.java.net/jeps/360)Sealed Types was included as a preview feature in this release, with its second preview in JDK 16. Sealed Types is part of [Project Amber](https://openjdk.java.net/projects/amber/). Sealed classes or interfaces can be used to restrict the interfaces or classes that are allowed to extend them. This is accomplished by using the `sealed`, `non-sealed`, and `permits` modifiers.
+JDK 15 was released on September 15, 2020. [JEP 360](https://openjdk.java.net/jeps/360) Sealed Types was included as a preview feature in this release, with its second preview in JDK 16. Sealed Types is part of [Project Amber](https://openjdk.java.net/projects/amber/). Sealed classes or interfaces can be used to restrict the interfaces or classes that are allowed to extend them. This is accomplished by using the `sealed`, `non-sealed`, and `permits` modifiers.
 
 ### What is contractual immutability?
 

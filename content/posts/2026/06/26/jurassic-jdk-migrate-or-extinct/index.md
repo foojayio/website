@@ -198,7 +198,7 @@ If you're on Hibernate 5, you need to move to [Hibernate 6](https://hibernate.or
 
 [Java 25](https://openjdk.org/projects/jdk/25/) is the latest LTS, released in September 2025. If you're reading this before having any idea about what's there, this section is your preview of what you will be dealing with.
 
-The OpenRewrite [`UpgradeToJava25`](https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-java-25)recipe covers the mechanical changes. Among them:
+The OpenRewrite [`UpgradeToJava25`](https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-java-25) recipe covers the mechanical changes. Among them:
 
 * `process.waitFor(5000, TimeUnit.MILLISECONDS)` becomes `process.waitFor(Duration.ofSeconds(5))` ⏱️
 * `new java.io.StringReader("x")` becomes `Reader.of("x")`

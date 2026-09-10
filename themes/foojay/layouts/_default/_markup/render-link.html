@@ -46,3 +46,11 @@
   {{- end -}}
 {{- end -}}
 <a href="{{ $dest }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /* NO TRAILING NEWLINE, and the `{{-` above is the only thing removing it.
+       A link is INLINE: goldmark drops this hook's output straight into the
+       paragraph, so a newline after </a> lands between the link and whatever
+       follows it and HTML collapses it to a space. Every link followed by
+       punctuation rendered as "the Java Version Almanac ." -- site-wide, on
+       every page with a link mid-sentence, which is most of them. An editor
+       that re-adds a final newline to this file brings the space back; the
+       chomp is what makes that harmless. */ -}}

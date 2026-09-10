@@ -139,7 +139,7 @@ Please take a look at the [++Snyk CLI SBOM Test Documentation++](https://docs.sn
 
 Bomber is an open source application that scans SBOMs for security vulnerabilities. Snyk is one of the integrated providers in `bomber` to scan SBOMs.
 
-To install `bomber`, download the [++latest release++](https://github.com/devops-kung-fu/bomber/releases)from the official GitHub repository, use Homebrew for macOS, or the `dpkg` tool for Linux.  
+To install `bomber`, download the [++latest release++](https://github.com/devops-kung-fu/bomber/releases) from the official GitHub repository, use Homebrew for macOS, or the `dpkg` tool for Linux.  
 
 **Homebrew (macOS):**
 

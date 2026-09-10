@@ -176,7 +176,7 @@ Now to the individual threads:
 
 ### Thread
 
-The [thread](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L610)data structure combines all information related to a single thread. There can be multiple threads per process Id. The thread with the name GeckoMain is handled differently than the others. It is the main thread that is shown in the process timeline.
+The [thread](https://github.com/firefox-devtools/profiler/blob/d960fc68ab0ccd04759bbaeef228adc76f41b300/src/types/profile.js#L610) data structure combines all information related to a single thread. There can be multiple threads per process Id. The thread with the name GeckoMain is handled differently than the others. It is the main thread that is shown in the process timeline.
 
 ```javascript
 type Thread = {|

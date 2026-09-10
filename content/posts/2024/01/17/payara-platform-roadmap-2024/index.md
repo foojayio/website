@@ -120,7 +120,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 * Managing and Monitoring capabilities
 * Adapting to new architectures and deployment infrastructure such as cloud and containers
 
-## ![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg)Jakarta EE 11
+## ![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg) Jakarta EE 11
 
 Previous work on Jakarta EE has focused on establishing a framework and foundation for future innovation so as to make Jakarta EE a solid basis for open source developers to build on. ​
 

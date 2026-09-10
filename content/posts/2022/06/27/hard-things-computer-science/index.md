@@ -21,7 +21,7 @@ If you've more than a couple of years of experience in IT, you probably have stu
 
 Then, because it's such a great quote, it evolved:
 
-[![](Screenshot-2022-06-26-at-10.28.24.png)](https://twitter.com/codinghorror/status/506010907021828096)However, I think that the initial quote is misleading. A lot of things are hard in computer science. This post aims to describe some of them.
+[![](Screenshot-2022-06-26-at-10.28.24.png)](https://twitter.com/codinghorror/status/506010907021828096) However, I think that the initial quote is misleading. A lot of things are hard in computer science. This post aims to describe some of them.
 
 ## Cache invalidation
 

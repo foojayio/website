@@ -141,7 +141,7 @@ private void getWeather() {
 
 You need to select `The weather is ` and then you can use **⌘⌥F** on macOS, or **Ctrl** +**Alt** +**F** on Windows and Linux, to extract it to a field. In the Introduce Field dialog, we can select to initialise this field in the Field declaration, give it a name such as `theWeatherIs` and select to replace all four occurrences of it in the code.
 
-![Introduce Field dialog](introduce-field.png)When we press **OK**, IntelliJ IDEA creates a new field at the top of our class:
+![Introduce Field dialog](introduce-field.png) When we press **OK**, IntelliJ IDEA creates a new field at the top of our class:
 
 `String theWeatherIs = "The weather is";`
 

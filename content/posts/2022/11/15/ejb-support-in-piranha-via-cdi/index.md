@@ -28,7 +28,7 @@ Enterprise Beans features not currently present in Jakarta EE, such as the poole
 
 An overview of the mappings is depicted in the following diagram:
 
-![](omnibeans-1024x363-1.png)OmniBeans primarily consists out of a CDI extension, that observes the `ProcessAnnotatedType` event. When it encounters say the `@Stateless` annotation on a bean it adds `@Pooled` from OmniServices, and depending on any `@jakarta.ejb.TransactionAttribute` and/or `@jakarta.ejb.TransactionManagement` annotation the `@jakarta.transaction.Transactional` annotation from Jakarta Transactions.
+![](omnibeans-1024x363-1.png) OmniBeans primarily consists out of a CDI extension, that observes the `ProcessAnnotatedType` event. When it encounters say the `@Stateless` annotation on a bean it adds `@Pooled` from OmniServices, and depending on any `@jakarta.ejb.TransactionAttribute` and/or `@jakarta.ejb.TransactionManagement` annotation the `@jakarta.transaction.Transactional` annotation from Jakarta Transactions.
 
 Piranha Cloud uses the standalone and pluggable Jakarta Transactions implementation [Tr](https://github.com/OmniFish-EE/omni-transact)[a](https://github.com/OmniFish-EE/omni-transact)[nsact](https://github.com/OmniFish-EE/omni-transact) (which originates from GlassFish) for the code behind the `@Transactional` annotation. For the `@Asynchronous` annotation OmniServices is currently used, but in the future a pluggable Jakarta Concurrency implementation should be used for this. The "[Concurrency RI](https://github.com/eclipse-ee4j/concurrency-ri)" project is a likely candidate to base such an implementation on (with the proposed name Concurro).
 

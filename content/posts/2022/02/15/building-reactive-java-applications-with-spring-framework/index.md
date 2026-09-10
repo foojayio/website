@@ -23,7 +23,7 @@ frozen: false
 
 ![](1_bAqotS_F1PipZLOHx_Tcww-1024x403.jpeg)
 
-*In one of our many free tutorials on* [*DataStax Developers YouTube channel*](https://www.youtube.com/c/DataStaxDevs/videos)*, we walked you through* [*how to build a reactive implementation of Spring PetClinic*](https://www.youtube.com/watch?v=1aRbndIcXV4)in *Apache Cassandra® using Spring WebFlux. The full series is* [*available on YouTube*](https://github.com/datastaxdevs/workshop-spring-reactive)*.*
+*In one of our many free tutorials on* [*DataStax Developers YouTube channel*](https://www.youtube.com/c/DataStaxDevs/videos)*, we walked you through* [*how to build a reactive implementation of Spring PetClinic*](https://www.youtube.com/watch?v=1aRbndIcXV4) in *Apache Cassandra® using Spring WebFlux. The full series is* [*available on YouTube*](https://github.com/datastaxdevs/workshop-spring-reactive)*.*
 
 If you're a Java developer who uses the Spring ecosystem, you've probably seen the [Spring Pet Clinic](https://github.com/datastaxdevs/workshop-spring-reactive). In this workshop, we will walk you through a new reactive implementation of the Pet Clinic backend that uses Spring WebFlux and Apache [Cassandra](https://www.datastax.com/what-is/cassandra)® (via [DataStax Astra DB](https://astra.dev/3lSpuQp)).
 

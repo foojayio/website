@@ -481,7 +481,7 @@ public ResponseEntity<BookResponse> createBook(@RequestBody @Valid BookRequest r
 
 When we annotate a method argument with @Valid, Spring will automatically validate the request using our BookRequest annotations, and throw a MethodArgumentNotValidException if validation fails with a 400 Bad Request response. But the default error response isn't very nice. It's often verbose and not very readable for clients.
 
-[@RestControllerAdvice](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)is a nice way to customize the validation error response, and is recommended. Adding a package exception and a the class GlobalExceptionHandler, we can add the following code:
+[@RestControllerAdvice](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc) is a nice way to customize the validation error response, and is recommended. Adding a package exception and a the class GlobalExceptionHandler, we can add the following code:
 
 ```
 package com.mongodb.springrest.exception;

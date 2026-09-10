@@ -85,7 +85,7 @@ Adding tags is a simple but powerful way to organize your MongoDB Atlas resource
 
 To add a tag:
 
-1. Open your [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello)dashboard.  
+1. Open your [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) dashboard.  
 2. Go to **Database → Cluster → Add Tag** .  
 3. Click **Add Tag** and use the key/value above.  
 4. Save your changes.  

@@ -15,7 +15,7 @@ frozen: false
 
 Java natively supplies many different options to parse XML. However, all available parsers in Java have XML eXternal Entity (XXE) enabled by default. This makes Java XML libraries particularly vulnerable to XXE injection.
 
-We already briefly went into XXE injection problem in an earlier [blog post](https://foojay.io/today/how-to-configure-your-java-xml-parsers-to-prevent-xxe-attacks/)on foojay.io. However, let's go a little deeper. In the video below, I explain and demonstrate how an XXE injection attack works by extracting system data that should not be exposed. I also show you how you can solve this in your Java code in multiple ways.
+We already briefly went into XXE injection problem in an earlier [blog post](https://foojay.io/today/how-to-configure-your-java-xml-parsers-to-prevent-xxe-attacks/) on foojay.io. However, let's go a little deeper. In the video below, I explain and demonstrate how an XXE injection attack works by extracting system data that should not be exposed. I also show you how you can solve this in your Java code in multiple ways.
 
 {{< youtube 2fLPIWK5W7k >}}
 

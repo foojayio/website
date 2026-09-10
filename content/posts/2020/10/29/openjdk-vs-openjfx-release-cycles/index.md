@@ -30,7 +30,7 @@ If you're in doubt if you should move to a newer JDK version, make sure to read 
 
 ## OpenJFX
 
-In the past, JavaFX has been bundled with the Oracle JDK (until JDK 11), but it was always a project on its own as [openjfx.io](https://openjfx.io/), with its [sources on GitHub](https://github.com/openjdk/jfx). [Gluon](https://gluonhq.com/)builds and distributes the OpenJFX releases, following the same 6-month release cycle.
+In the past, JavaFX has been bundled with the Oracle JDK (until JDK 11), but it was always a project on its own as [openjfx.io](https://openjfx.io/), with its [sources on GitHub](https://github.com/openjdk/jfx). [Gluon](https://gluonhq.com/) builds and distributes the OpenJFX releases, following the same 6-month release cycle.
 ![](history_javafx-1.png) JavaFX history
 
 You can find them in the [Maven Central Repository](https://search.maven.org/search?q=org.openjfx) or on the [Gluon website](https://gluonhq.com/products/javafx/).

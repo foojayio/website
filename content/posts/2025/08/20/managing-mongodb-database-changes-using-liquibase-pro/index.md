@@ -59,7 +59,7 @@ Liquibase supports MongoDB versions starting from 5.0 onwards: 5.x, 6.x, 7.x, 8.
 
 2. Place the above four JAR files in the specified path C:\\Program Files\\liquibase\\lib:
 
-![](AD_4nXdHZO7Y0SQdS3eA5oISfMG9kpkWJbaziO9O-73dd8169.png)list of jarfiles required for this project
+![](AD_4nXdHZO7Y0SQdS3eA5oISfMG9kpkWJbaziO9O-73dd8169.png) list of jarfiles required for this project
 
 ### Connection configuration
 
@@ -258,7 +258,7 @@ PS E:\temp\liquibase-mdb-demo>
 
 This screenshot demonstrates a successful **Liquibase rollback** operation and its effect on the **MongoDB** **person** **collection**. It confirms that one changeset (2025062202) was rolled back successfully using the rollbackCount command. This changeset originally inserted multiple documents into the person collection.
 
-![](AD_4nXcHBlrf0iwb_08sugNXRXYFkOBN3AAn5kYb-b7885c8f.png)Figure: HTML report after rollback changes completed
+![](AD_4nXcHBlrf0iwb_08sugNXRXYFkOBN3AAn5kYb-b7885c8f.png) Figure: HTML report after rollback changes completed
 
 This screenshot from **MongoDB Compass** shows that the person collection is now empty, verifying that the rollback removed the inserted documents. This highlights how Liquibase can manage and reverse schema or data changes in MongoDB with precision and traceability.
 
@@ -279,7 +279,7 @@ Figure: Liquibase generated collections inside the MongoDB database.
 * databasechangelog = "What changes have been applied?"
 * databasechangeloglock = "Is someone already running Liquibase right now?"
 
-![](AD_4nXfg_G5VO7eKsxhOgrBV1hY6PsfJCvs8wptK-ef0ed9e2.jpg)Figure: Databasechangelog collection documents![](AD_4nXcXSEPB_M1PoAwHIF8KAds4wjFry4fnyhG8-0b0811d8.jpg)Figure: Databasechangeloglock collection document
+![](AD_4nXfg_G5VO7eKsxhOgrBV1hY6PsfJCvs8wptK-ef0ed9e2.jpg) Figure: Databasechangelog collection documents![](AD_4nXcXSEPB_M1PoAwHIF8KAds4wjFry4fnyhG8-0b0811d8.jpg) Figure: Databasechangeloglock collection document
 
 ### **5. Scripts used for this project**
 

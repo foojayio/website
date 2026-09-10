@@ -68,7 +68,7 @@ Among these classes, `Flowable` is the only class that implements Reactive Strea
 
 To cope with that, RxJava offers two main strategies to handle "overproduced" items:
 
-1. Store items in a buffer![](bp.obp.buffer.v3-00de21c7.jpg)Note that if you set no upper bound to the buffer, it might cause `OutOfMemoryError`.
+1. Store items in a buffer![](bp.obp.buffer.v3-00de21c7.jpg) Note that if you set no upper bound to the buffer, it might cause `OutOfMemoryError`.
 2. Drop items![](bp.obp.drop.v3-4fb967a4.jpg)
 
 The following diagram summarizes the different methods that implement those strategies:

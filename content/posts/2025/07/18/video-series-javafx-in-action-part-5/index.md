@@ -92,7 +92,7 @@ JFX Central, the home to anything JavaFX related, is a website, desktop applicat
 * [JFX Central, sources](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2)
 * [JFX Central, data sources](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data)
 
-### [](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-home.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-showcases.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-videos.png)Senapt Applications
+### [](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-home.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-showcases.png)[](https://webtechie.be/images/2025/jfx-in-action/dirk/jfx-videos.png) Senapt Applications
 
 [Senapt](https://www.senapt.co.uk/) provides "Energy-as-a-Service Platform", by providing an energy transactions platform for energy sellers and energy buyers in the UK. As the energy landscape has continued to change, retail electricity providers have been looking for strategies to meet the ever-growing, ever-changing demands for their customers. Senapt's products have been designed to help energy suppliers to facilitate this changing relationship and allow them to seize the opportunities of the smart grid.
 

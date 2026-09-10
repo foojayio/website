@@ -45,7 +45,7 @@ The above has arguably never really translated to Enterprise IT – an Enterpris
 These open source technologies not only provide the benefits of Unix tools plus pipes, but also
 
 * Are low latency and low garbage, and thus are suitable for building systems that require high throughput, microsecond response times and predictable latencies.
-* Persist all data that is sent between modules, facilitating debugging, troubleshooting and [out-of-band](https://en.wikipedia.org/wiki/Out-of-band)reporting
+* Persist all data that is sent between modules, facilitating debugging, troubleshooting and [out-of-band](https://en.wikipedia.org/wiki/Out-of-band) reporting
 * Allow individual modules to be stopped/restarted/upgraded without interrupting others
 
 ### Example

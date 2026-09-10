@@ -23,7 +23,7 @@ In this article, I'll explain how to use the web application framework [Hilla](h
 
 > Hilla integrates a Spring Boot Java back end with a reactive TypeScript front end. It helps you build apps faster with type-safe server communication, including UI components, and integrated tooling. -- From [hilla.dev](https://hilla.dev/)
 
-Hilla uses TypeScript with [Lit](https://lit.dev/)and [Webcomponents](https://developer.mozilla.org/de/docs/Web/Web_Components) in the frontend and Spring Boot in the backend. In the backend you'll create endpoints from which the API and the TypeScript will be generated. This makes the access to the backend much easier and it's also typesafe and compile-time-checked.
+Hilla uses TypeScript with [Lit](https://lit.dev/) and [Webcomponents](https://developer.mozilla.org/de/docs/Web/Web_Components) in the frontend and Spring Boot in the backend. In the backend you'll create endpoints from which the API and the TypeScript will be generated. This makes the access to the backend much easier and it's also typesafe and compile-time-checked.
 
 ## How to Start?
 

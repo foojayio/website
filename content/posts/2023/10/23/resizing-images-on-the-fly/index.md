@@ -112,7 +112,7 @@ With this approach, the above HTML becomes much more straightforward:
 
 Apache APISIX intercepts requests starting with `/resize`, rewrites the URL for `imgproxy`, and forwards the rewritten URL to `imgproxy`. Here's the overall flow:
 
-[![](imgproxy-flow-1024x479.png)](imgproxy-flow.png)The corresponding Apache APISIX configuration looks like the following:
+[![](imgproxy-flow-1024x479.png)](imgproxy-flow.png) The corresponding Apache APISIX configuration looks like the following:
 
 ```yaml
 routes:

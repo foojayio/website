@@ -20,7 +20,7 @@ frozen: false
 
 Most Java developers probably know by now that [Oracle](https://www.oracle.com/) has open sourced the Java JDK and hosted its source code on [Github](https://github.com/openjdk) (aka [Project Skara](https://openjdk.java.net/projects/skara/)).
 
-Oracle encourages companies to get paid [support](https://www.oracle.com/java/java-se-subscription.html)for their LTS (Long-term support) versions of the JDK, however for the mass majority of developers (like myself), who still want to enjoy free versions of the latest JDK and JavaFX, we can now get distributions from third-party vendors or build it ourselves ([OpenJDK](https://github.com/openjdk) / [OpenJFX](https://github.com/openjdk/jfx)).
+Oracle encourages companies to get paid [support](https://www.oracle.com/java/java-se-subscription.html) for their LTS (Long-term support) versions of the JDK, however for the mass majority of developers (like myself), who still want to enjoy free versions of the latest JDK and JavaFX, we can now get distributions from third-party vendors or build it ourselves ([OpenJDK](https://github.com/openjdk) / [OpenJFX](https://github.com/openjdk/jfx)).
 
 In this article, I will show you how to use a popular distribution from [Azul](https://www.azul.com/) to build a JavaFX HelloWorld Application in 60 seconds!
 

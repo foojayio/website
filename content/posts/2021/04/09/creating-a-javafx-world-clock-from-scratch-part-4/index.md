@@ -99,7 +99,7 @@ $ ./bach/bin/bach build
 
 You're probably wondering, "I don't remember installing Bach!", Where did it come from? Well it was checked into the world clock git repo project. A little more on that later, but for now it just works when you are sitting in the `worldclock` directory.
 
-What's really cool about Bach is that you don't need to use build tools like [Maven](https://maven.apache.org) or [Gradle](https://gradle.org)to handle dependencies and to generate artifacts such as jar, exe, dmg, etc.
+What's really cool about Bach is that you don't need to use build tools like [Maven](https://maven.apache.org) or [Gradle](https://gradle.org) to handle dependencies and to generate artifacts such as jar, exe, dmg, etc.
 
 So, what's the catch? No catch, well except one thing…You gotta go modular! Bach is really designed for Java projects that are pure modular apps and libraries.
 

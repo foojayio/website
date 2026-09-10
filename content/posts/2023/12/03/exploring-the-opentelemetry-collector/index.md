@@ -173,7 +173,7 @@ service:
 
 With the Prometheus exporter configured, we can visualize metrics in Grafana.
 
-[![](raw-metrics-1024x437.jpg)](raw-metrics.jpg)Note that receivers and exporters specify their type **and** every one of them must be unique. To comply with the last requirement, we can append a qualifier to distinguish between them, *i.e.* , `prometheus/foo` and `prometheus/bar.`
+[![](raw-metrics-1024x437.jpg)](raw-metrics.jpg) Note that receivers and exporters specify their type **and** every one of them must be unique. To comply with the last requirement, we can append a qualifier to distinguish between them, *i.e.* , `prometheus/foo` and `prometheus/bar.`
 
 ## Intermediary data processing
 

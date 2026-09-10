@@ -38,7 +38,8 @@ Twitter: @[FrankDelporte](https://twitter.com/FrankDelporte) 🐦
 
 Mastodon: [@frankdelporte@foojay.social](https://foojay.social/@frankdelporte) 🐘  
 
-GitHub: [FDelporte](https://github.com/FDelporte)LinkedIn: [frankdelporte/](https://www.linkedin.com/in/frankdelporte/) 🔗
+GitHub: [FDelporte](https://github.com/FDelporte)  
+LinkedIn: [frankdelporte/](https://www.linkedin.com/in/frankdelporte/) 🔗
 
 ## Key Takeaways
 

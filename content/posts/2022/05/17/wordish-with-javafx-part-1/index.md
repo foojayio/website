@@ -88,7 +88,7 @@ When running the desktop version of Wordish, the user can resize the top window,
 
 Normally, when you increase the width of a TilePane or FlowPane control, the layout manager rearranges its child nodes to fill in the added width. However, we don't want the container to modify the number of rows and columns in either the TilePane or FlowPane. You can prevent changes to the layout by setting the minimum, maximum, and preferred width to be the same value. You can determine the correct values by looking at the layout properties in Scene Builder and selecting the calculated value in the width property. Then, if the user resizes the window, the contents of the layout container remain unaltered.
 
-**Note** : See file [**wordish.fxml**](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/wordish.fxml)in the github repository for the above UI code.
+**Note** : See file [**wordish.fxml**](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/wordish.fxml) in the github repository for the above UI code.
 
 ## **Controller Class**
 

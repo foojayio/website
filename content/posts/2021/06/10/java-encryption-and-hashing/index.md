@@ -73,4 +73,4 @@ Boolean match = encoder.matches(password, hash));
 
 What is a strong encryption algorithm today, might be a weak algorithm a year from now. Therefore, encryption needs to be reviewed regularly to make sure you use the right algorithm for the job. Use vetted security libraries for these tasks and keep your libraries up to date. Furthermore, make sure to scan your open source libraries for security vulnerabilities often with a tool like [Snyk Open Source](https://snyk.io/product/open-source-security-management/) to prevent unpleasant surprises.
 
-Check out the [10 Java Security Best Practices Cheat Sheet](https://snyk.io/blog/10-java-security-best-practices/)for more Java security tips.
+Check out the [10 Java Security Best Practices Cheat Sheet](https://snyk.io/blog/10-java-security-best-practices/) for more Java security tips.

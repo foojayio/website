@@ -429,7 +429,7 @@ Download the script.js file from [this repository](https://github.com/mongodb-de
 
 ### Step 3: CSS
 
-Finally, download the styles.css file from [this repository](https://github.com/mongodb-developer/spring-data-mongodb-hybrid-search/blob/main/src/main/resources/static/styles.css)and place it in the same folder.
+Finally, download the styles.css file from [this repository](https://github.com/mongodb-developer/spring-data-mongodb-hybrid-search/blob/main/src/main/resources/static/styles.css) and place it in the same folder.
 
 ## Running the frontend
 

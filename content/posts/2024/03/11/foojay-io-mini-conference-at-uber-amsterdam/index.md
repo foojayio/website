@@ -42,7 +42,7 @@ This meetup will be hosted by Uber Tech, in their office at Uber, Burgerweeshuis
 
 **Information about the talks:**
 
-## **Talk 1: Asynchronous Programming in Java: The Era of Virtual Threads (by [Horia Burca](https://www.linkedin.com/in/hcburca/)and [Grigory Panov](https://www.linkedin.com/in/gri/))**
+## **Talk 1: Asynchronous Programming in Java: The Era of Virtual Threads (by [Horia Burca](https://www.linkedin.com/in/hcburca/) and [Grigory Panov](https://www.linkedin.com/in/gri/))**
 
 As Java continues to evolve, the release of Java 21 has ushered in a new era for asynchronous programming with the introduction of virtual threads.
 

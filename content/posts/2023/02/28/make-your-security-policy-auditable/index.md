@@ -272,7 +272,7 @@ internal class OpaAuthenticationManager(
 
 The flow is now the following:
 
-[![](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png)At this point, we moved the authorization logic from the code to OPA.
+[![](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png) At this point, we moved the authorization logic from the code to OPA.
 
 ## Moving authentication to the API Gateway
 

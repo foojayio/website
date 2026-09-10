@@ -45,7 +45,7 @@ Now that we have explored what Kubernetes is, we can come to the question of why
 
 As mentioned above, Kubernetes is in alignment with typical microservices architecture, where you have many applications that work together and might need some complex initialisation and setup.
 
-Therefore, container orchestration platforms are successful for large companies like [Netflix](https://www.google.com/search?q=netflix&rlz=1C1CHBD_en-GBGB919GB919&sxsrf=ALeKk02Z3vqud0J08J-9lb8KC-01iGqsIw%3A1623073256589&ei=6CG-YOm_I46lUur7lhA&oq=netflix&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEMyBAgAEEMyCggAELEDEIMBEEMyBQgAELEDMgUIABCxAzIFCAAQsQMyBQgAELEDMgUIABCxAzIFCAAQsQMyBQgAELEDOgQIIxAnOg4ILhCxAxCDARDHARCjAjoICAAQsQMQgwE6BwgAELEDEENQn-4LWNPzC2CX9gtoAHACeACAAW2IAagFkgEDNy4xmAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=gws-wiz&ved=0ahUKEwjp05yH04XxAhWOkhQKHeq9BQIQ4dUDCA4&uact=5)and [Amazon,](https://www.amazon.co.uk/)which operate a huge microservices environment. But most of us do not work for one of the world's biggest organisations with colossal software systems to match; where there are a vast amount of different workflows and independent applications, as well as armies of developers to work on them.
+Therefore, container orchestration platforms are successful for large companies like [Netflix](https://www.google.com/search?q=netflix&rlz=1C1CHBD_en-GBGB919GB919&sxsrf=ALeKk02Z3vqud0J08J-9lb8KC-01iGqsIw%3A1623073256589&ei=6CG-YOm_I46lUur7lhA&oq=netflix&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEMyBAgAEEMyCggAELEDEIMBEEMyBQgAELEDMgUIABCxAzIFCAAQsQMyBQgAELEDMgUIABCxAzIFCAAQsQMyBQgAELEDOgQIIxAnOg4ILhCxAxCDARDHARCjAjoICAAQsQMQgwE6BwgAELEDEENQn-4LWNPzC2CX9gtoAHACeACAAW2IAagFkgEDNy4xmAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=gws-wiz&ved=0ahUKEwjp05yH04XxAhWOkhQKHeq9BQIQ4dUDCA4&uact=5) and [Amazon,](https://www.amazon.co.uk/) which operate a huge microservices environment. But most of us do not work for one of the world's biggest organisations with colossal software systems to match; where there are a vast amount of different workflows and independent applications, as well as armies of developers to work on them.
 
 Instead, you probably have a handful of developers that create and maintain the one or few applications that are critical for your business.
 
@@ -63,7 +63,7 @@ However, using Kubernetes directly on the cloud provider isn't a good idea in ma
 
 Recently, several tools emerged that are built on top of Kubernetes, which bring you the capabilities and power provided by Kubernetes but with an easier to use interface for users and developers.
 
-This is also the philosophy behind our new product, [Payara Cloud,](https://www.payara.fish/products/payara-cloud/)to be launched in the fall of 2021.
+This is also the philosophy behind our new product, [Payara Cloud,](https://www.payara.fish/products/payara-cloud/) to be launched in the fall of 2021.
 
 Perhaps you are interested in just configuring and running your application without wanting to learn the concepts of Kubernetes deployments, services, and other tasks like SSL certificate management, routing, and setting up the monitoring. Tools such as Payara Cloud use Kubernetes to bring your application to the cloud in a way that you are familiar with, without you having to retrain developers and make it all work yourself - it's handled for you. Deploying an application to Payara Cloud is very similar to deploying an application on a runtime that you have running locally.
 

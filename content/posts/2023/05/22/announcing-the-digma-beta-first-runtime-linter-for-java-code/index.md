@@ -43,7 +43,7 @@ We have 20 slots currently open for the beta.
 
 ## Requirements to apply ✅
 
-1. Using [Jebtrains](https://www.jetbrains.com/)IDEA (any edition)
+1. Using [Jebtrains](https://www.jetbrains.com/) IDEA (any edition)
 2. Developing in Java, on most platforms except for Quarkus (currently not supported)
 3. Passion for innovation and new coding tools and practices
 

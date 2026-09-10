@@ -30,7 +30,7 @@ Maven uses the [Plexus compiler wrapper](https://codehaus-plexus.github.io/plexu
 ## Small builds
 
 This is problematic on short builds (like building maven itself in 30s), as the C2 JIT does cost a significant amount of cpu-time, more than is saved by the faster execution of the jitted code. The maven self-built, for example, spent more than half of its cpu-time in the C2 compiler:
-[![](image-7-2000x462-5969c05e.jpg)](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html) Maven 4 (f24266eb64) was built with maven 3.8.7 on SapMachine 17.0.8.1 and profiled with [async-profiler](https://github.com/jvm-profiling-tools/async-profiler); click to view the [full](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html)flame graph
+[![](image-7-2000x462-5969c05e.jpg)](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html) Maven 4 (f24266eb64) was built with maven 3.8.7 on SapMachine 17.0.8.1 and profiled with [async-profiler](https://github.com/jvm-profiling-tools/async-profiler); click to view the [full](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html) flame graph
 
 We can use the information by async-profiler to get the cpu-time proportions for significant parts of the built:
 
@@ -42,7 +42,7 @@ We can use the information by async-profiler to get the cpu-time proportions for
 | Compiler::compile_method (C1 compiler) | 8 %                 | 650     |
 
 The whole maven build took 44s (82s cpu-time) on two cores of my ThreadRipper 3995WX. Compare this to a run with a disabled C2 which took 41s (50s cpu-time):
-![](image-8-2000x463-52d133e0.jpg) Maven 4 (f24266eb64) built with maven 3.8.7 on SapMachine 17.0.8.1 and `MVN_OPTS="`*-XX:TieredStopAtLevel=1*`"` (*but stopping at a higher C1 level is unusual, see [dzone](https://dzone.com/articles/complication-compilers-and-java)* ) profiled with [async-profiler](https://github.com/jvm-profiling-tools/async-profiler), click to view the [full](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-stop.html)flame graph
+![](image-8-2000x463-52d133e0.jpg) Maven 4 (f24266eb64) built with maven 3.8.7 on SapMachine 17.0.8.1 and `MVN_OPTS="`*-XX:TieredStopAtLevel=1*`"` (*but stopping at a higher C1 level is unusual, see [dzone](https://dzone.com/articles/complication-compilers-and-java)* ) profiled with [async-profiler](https://github.com/jvm-profiling-tools/async-profiler), click to view the [full](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-stop.html) flame graph
 
 The proportions are as expected:
 

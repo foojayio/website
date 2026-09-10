@@ -86,7 +86,7 @@ The provisioning of the Kubernetes resources, setting up the routing, networking
 
 Some other Platform As a Service solutions come close to this concept, but with Payara Cloud, the entire infrastructure is shielded away from the user:
 
-## ![](https://blog.payara.fish/hubfs/Benefits%20of%20Payara%20Cloud-png.png)Jakarta EE + Payara Cloud Lets You Focus on Functionality
+## ![](https://blog.payara.fish/hubfs/Benefits%20of%20Payara%20Cloud-png.png) Jakarta EE + Payara Cloud Lets You Focus on Functionality
 
 For an end-user, the provided functionality of an application is the most important aspect. Traditionally, Jakarta EE developers could focus on the most important aspect of development, which is the business logic that supplies the functionality of the finished application, while keeping the operations and deployments separated from the development task.
 

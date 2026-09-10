@@ -155,7 +155,7 @@ When it comes to monitoring and maintaining the performance of Spring Boot appli
 **Requirements**
 
 * Set up your spring boot application
-* Add the [Digma plugin](https://docs.digma.ai/digma-developer-guide/installation/readme-1)to your development environment.
+* Add the [Digma plugin](https://docs.digma.ai/digma-developer-guide/installation/readme-1) to your development environment.
 * Add [observability](https://docs.digma.ai/digma-developer-guide/instrumentation/spring-spring-boot-dropwizard-and-default/covering-more-of-your-code-with-observability) to your code
 * Install and set up JMeter.
 

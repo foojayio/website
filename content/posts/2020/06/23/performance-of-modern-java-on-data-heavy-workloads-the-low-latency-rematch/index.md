@@ -36,7 +36,7 @@ Here are our main conclusions:
 
 ### The JDK We Tested
 
-Since this is all so fresh, we couldn't use an existing JDK release, not even EA, to see the effects of the fix. JDK version 14.0.2 is slated to be released on July 14. To nevertheless make progress, we took the source code from the jdk14u tree, at the changeset number [57869:e9d41bbaea38](http://hg.openjdk.java.net/jdk-updates/jdk14u/rev/e9d41bbaea38), and applied the changeset number [59746:29b4bb22b5e2](https://hg.openjdk.java.net/jdk/jdk/rev/29b4bb22b5e2)from the main jdk tree on top of it. The jdk14u tree is where JDK 14.0.2 will be released from and the changeset 59746:29b4bb22b5e2 applies the patch resolving the mentioned Shenandoah issue.
+Since this is all so fresh, we couldn't use an existing JDK release, not even EA, to see the effects of the fix. JDK version 14.0.2 is slated to be released on July 14. To nevertheless make progress, we took the source code from the jdk14u tree, at the changeset number [57869:e9d41bbaea38](http://hg.openjdk.java.net/jdk-updates/jdk14u/rev/e9d41bbaea38), and applied the changeset number [59746:29b4bb22b5e2](https://hg.openjdk.java.net/jdk/jdk/rev/29b4bb22b5e2) from the main jdk tree on top of it. The jdk14u tree is where JDK 14.0.2 will be released from and the changeset 59746:29b4bb22b5e2 applies the patch resolving the mentioned Shenandoah issue.
 
 ### The JVM Options
 

@@ -37,3 +37,9 @@
   {{- end -}}
 {{- end -}}
 <img src="{{ $dest }}" alt="{{ .Text | htmlUnescape }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if and $w $h }} width="{{ $w }}" height="{{ $h }}"{{ end }} loading="lazy" decoding="async">
+{{- /* NO TRAILING NEWLINE -- same reason as render-link.html, which had the
+       same bug: an image is inline, so a newline after the tag lands between
+       it and whatever follows and HTML collapses it to a space. Rarer to see
+       than on links (most images sit alone in a paragraph), but a caption
+       written as `![](shot.png)When we press OK` rendered with a space that
+       is not in the Markdown. */ -}}

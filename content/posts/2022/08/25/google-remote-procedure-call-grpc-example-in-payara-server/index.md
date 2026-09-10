@@ -111,7 +111,7 @@ At this point, we have the service defined. Then we can create the Stubs and wor
 
 Once we have `.proto` file, we will create the gRPC client and server interfaces from it. We can do this using Maven as described here: <https://github.com/grpc/grpc-java/blob/master/README.md>[](https://github.com/grpc/grpc-java/blob/master/README.md)
 
-We created a module in our[gRPC example](https://github.com/payara/Payara-Examples/tree/master/grpc)called grpc-stubs, as shown in picture below. The `.proto` file was copied into `proto` folder.
+We created a module in our[gRPC example](https://github.com/payara/Payara-Examples/tree/master/grpc) called grpc-stubs, as shown in picture below. The `.proto` file was copied into `proto` folder.
 ![](image-png-Apr-13-2022-10-21-10-20-PM-648c3e15.png)
 
 In `grpc-stubs->pom.xml` we included the gRPC dependencies and protobuf-maven-plugin that can generate the code during the Maven build. If the user clones [Payara-Examples](https://github.com/payara/Payara-Examples/) project, then he just need to run the following Maven command from `grpc-stubs` directory:

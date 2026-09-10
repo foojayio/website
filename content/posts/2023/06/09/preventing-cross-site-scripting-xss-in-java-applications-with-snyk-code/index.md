@@ -108,7 +108,7 @@ Snyk Code pointed out this potential XSS problem on line 103, where we insert th
 
 ## Mitigating XSS vulnerabilities with Snyk Code
 
-To prevent XSS vulnerabilities, it is important to properly validate and sanitize user input before writing it to the response. Snyk Code already helps us by pointing out possible solutions. One way to do this is to use a library like [++Apache Commons Text++](https://commons.apache.org/proper/commons-text/)to encode the input and prevent malicious code from being executed.
+To prevent XSS vulnerabilities, it is important to properly validate and sanitize user input before writing it to the response. Snyk Code already helps us by pointing out possible solutions. One way to do this is to use a library like [++Apache Commons Text++](https://commons.apache.org/proper/commons-text/) to encode the input and prevent malicious code from being executed.
 ![blog-preventing-xss-string-path](snyk-io-4662ff86.jpg)
 
 Using the `escapeHtml4()` function, we can make sure that code in both reflective and stored XSS is escaped so that it will not be executed when loading the page.  

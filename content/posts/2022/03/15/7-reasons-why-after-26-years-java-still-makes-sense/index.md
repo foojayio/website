@@ -22,7 +22,7 @@ Java has been and continues to be the most popular language over the last two de
 
 However, in recent years, with the popularity of microservices and data science, other programming languages, such as Python, have gained in popularity. Some developers may view this as concerning news, as it may indicate the decline of Java, while others would argue differently.
 
-Java Champion [Nicolai Parlog](https://twitter.com/nipafx)contends that the number of people coding increases every year. If we think of it as a cake, then the size of the cake is expanding. Though the Java share may dwindle slightly in the TIOBE index, the overall size of the Java share of the cake continues to increase. So there will always be more Java developers than those moving on to alternatives.
+Java Champion [Nicolai Parlog](https://twitter.com/nipafx) contends that the number of people coding increases every year. If we think of it as a cake, then the size of the cake is expanding. Though the Java share may dwindle slightly in the TIOBE index, the overall size of the Java share of the cake continues to increase. So there will always be more Java developers than those moving on to alternatives.
 
 Now, the question is, still, should we be concerned about any apparent decline? While most java developers don't necessarily find this to be a relevant question, the most pertinent question I would ask is: "Why do they like Java as much as they do in the first place, and especially to those Java developers who have been working with it for over two decades: Why have they stuck with Java for all these many years?"
 
@@ -72,7 +72,7 @@ Even if we have to move from one implementation to another at some point, we can
 
 Here is the list of the Quality Outreach program of free and open source Java libraries that you could learn from and contribute to:<https://wiki.openjdk.java.net/display/quality/Quality+Outreach>
 
-Besides these standards and libraries, many open source frameworks, such as [Spring](https://spring.io/), and particularly, [Spring Boot](https://spring.io/projects/spring-boot), has made our lives super easy when writing web services. Similarly, many other frameworks, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/)and [Helidon](https://helidon.io/) are getting traction, too. There is an immense amount of content on the Web, and books are available on all of these frameworks, making learning easy.
+Besides these standards and libraries, many open source frameworks, such as [Spring](https://spring.io/), and particularly, [Spring Boot](https://spring.io/projects/spring-boot), has made our lives super easy when writing web services. Similarly, many other frameworks, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/) and [Helidon](https://helidon.io/) are getting traction, too. There is an immense amount of content on the Web, and books are available on all of these frameworks, making learning easy.
 
 Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no means the only provides of the OpenJDK. Although every OpenJDK provider has its own implementation and unique sauces, if they're doing things right, they're complying with the shared [Technology Compatibility Kit (TCK)](https://foojay.io/pedia/tck/).
 

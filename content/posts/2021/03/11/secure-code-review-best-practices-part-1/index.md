@@ -72,7 +72,7 @@ Authentication verifies that a user, service, or entity (internal or external) i
 
 ### Coming Up Next
 
-This was part 1 of a two-part series on Secure code review. Check out [part 2](https://foojay.io/today/secure-code-review-best-practices-part-2/)right away.
+This was part 1 of a two-part series on Secure code review. Check out [part 2](https://foojay.io/today/secure-code-review-best-practices-part-2/) right away.
 
 You can [download the handy one-pager](https://snyk.io/wp-content/uploads/Snyk-Secure-Code-Review-Cheat-Sheet.pdf) with all the tips and hang it above your bed.
 

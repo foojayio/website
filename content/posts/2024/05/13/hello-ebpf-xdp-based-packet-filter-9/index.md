@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-**Welcome back to my [series on ebpf](https://mostlynerdless.de/blog/tag/hello-ebpf/). In the last blog post, we learned how [annotation processors can](https://mostlynerdless.de/blog/2024/04/09/hello-ebpf-generating-c-code-8/)generate C code, simplifying writing eBPF applications.**
+**Welcome back to my [series on ebpf](https://mostlynerdless.de/blog/tag/hello-ebpf/). In the last blog post, we learned how [annotation processors can](https://mostlynerdless.de/blog/2024/04/09/hello-ebpf-generating-c-code-8/) generate C code, simplifying writing eBPF applications.**
 
 This week, we'll use this work together with new support for XDP to create a simple package blocker for eBPF ([GitHub](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/XDPPacketFilter.java)):
 

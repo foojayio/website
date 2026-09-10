@@ -394,7 +394,7 @@ This release boosts productivity by cutting down on boilerplate code and improvi
 
 For enterprises, Jakarta EE 11 offers flexibility to support both cloud-native microservices and traditional enterprise systems. Its standard APIs guarantee consistency and portability across implementations. This creates a strong foundation for future advancements.
 
-Looking ahead, [**Jakarta EE 12**](https://jakartaee.github.io/platform/jakartaee12/JakartaEE12ReleasePlan)is scheduled for 2026. It promises support for Java SE 21 and 25, and it plans to focus on unification of aspects like Java modules (JPMS) support, and improved consistency between APIs by introducing common specifications for query languages, HTTP protocol to Java bindings, etc. It's also expected that MicroProfile will blend into Jakarta EE, which will bring a common configuration API to Jakarta EE as well as reunite some APIs that naturally fit together and could be better integrated if under the same Jakarta EE roof (e.g. MicroProfile REST Client and Jakarta RESTful WEb Services).
+Looking ahead, [**Jakarta EE 12**](https://jakartaee.github.io/platform/jakartaee12/JakartaEE12ReleasePlan) is scheduled for 2026. It promises support for Java SE 21 and 25, and it plans to focus on unification of aspects like Java modules (JPMS) support, and improved consistency between APIs by introducing common specifications for query languages, HTTP protocol to Java bindings, etc. It's also expected that MicroProfile will blend into Jakarta EE, which will bring a common configuration API to Jakarta EE as well as reunite some APIs that naturally fit together and could be better integrated if under the same Jakarta EE roof (e.g. MicroProfile REST Client and Jakarta RESTful WEb Services).
 
 ## **FAQs**
 

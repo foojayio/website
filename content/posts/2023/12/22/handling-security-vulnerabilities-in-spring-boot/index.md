@@ -138,7 +138,7 @@ I would advise everyone to go the extra mile and update their entire spring boot
 
 For the second issue, Snyk discovered that there is no clear remediation advice in my appliation. Currently, there is also no available version of a \`spring-boot-starter\` that does not have this insecure transitive dependency. What we do know is that there is an updated version of the transitive dependency available. Updating to \`snakeyaml\` 2.0 will solve the problem.  
 
-Once again, I want to emphasize that this is just an example. There might already be an updated version of a \`spring-boot-starter\` available by the time you read this, so be sure to double-check. To learn about the SnakeYaml vulnerability, please check our [++dedicated blog post++](https://snyk.io/blog/snakeyaml-unsafe-deserialization-vulnerability/)on this topic.
+Once again, I want to emphasize that this is just an example. There might already be an updated version of a \`spring-boot-starter\` available by the time you read this, so be sure to double-check. To learn about the SnakeYaml vulnerability, please check our [++dedicated blog post++](https://snyk.io/blog/snakeyaml-unsafe-deserialization-vulnerability/) on this topic.
 
 #### Version parameter update
 
@@ -180,7 +180,7 @@ For Maven, it's most commonly added to the \`dependencyManagement\` block. This 
 </dependencyManagement>
 ```
 
-Since we use the [++dependency-management++](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/)plugin for Spring in our Gradle file, we have pretty similar capabilities for Gradle available. Note that this plugin was inserted by the Spring Boot initializer when scaffolding my project.
+Since we use the [++dependency-management++](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/) plugin for Spring in our Gradle file, we have pretty similar capabilities for Gradle available. Note that this plugin was inserted by the Spring Boot initializer when scaffolding my project.
 
 **Gradle:**
 

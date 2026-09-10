@@ -118,7 +118,7 @@ services:
 
 After running our application and triggering some actions, we'll be able to see the observability info in the IDE, closely integrated with your code:
 
-The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)between code and observability so that you're always aware of how your changes affect the application.
+The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) between code and observability so that you're always aware of how your changes affect the application.
 
 ![](0_RpOJWYz_jV1P4y0V-1024x677.jpg)
 

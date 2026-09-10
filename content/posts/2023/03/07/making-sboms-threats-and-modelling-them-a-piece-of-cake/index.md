@@ -41,7 +41,7 @@ They aren't going anywhere and we need to find ways in our software development 
 
 I'm sure I'm not the only one here that worked relentlessly two years ago when Log4Shell hit to make sure our Log4J versions were up to date FIVE DIFFERENT TIMES before we were back to terra firma.  
 
-Even if you do everything right, [Sonatype's 8th Annual State of The Software Supply Chain report](https://www.sonatype.com/state-of-the-software-supply-chain/introduction)tells us that 6 out of 7 project vulnerabilities will be from transitive dependencies.
+Even if you do everything right, [Sonatype's 8th Annual State of The Software Supply Chain report](https://www.sonatype.com/state-of-the-software-supply-chain/introduction) tells us that 6 out of 7 project vulnerabilities will be from transitive dependencies.
 
 That's a statistic that I read as saying, assuming you do everything right, it is likely that your project will contain vulnerable codepaths.
 
@@ -94,7 +94,7 @@ Some of you may be thinking that this might be the job of a security team, I dis
 
 You can also get people involved that are not in development or security to help. Not only should this happen because security is for everyone, but they may have experienced things that gives them a hacker mentality, for example they might have been the unfortunate victim of a crime which means they now understand how the criminal mind works in some way.   
 
-Over the past few weeks I have delivered talks on threat modelling from both a developer and application security perspective to [Open UK State of Open Con](https://www.youtube.com/watch?v=bqNSb32trEI), [OWASP London Chapter](https://www.youtube.com/watch?v=S1UXqPQs2Sw&t=2s)and a webinar to the [London Java Community JUG](https://www.youtube.com/@LondonJavaCommunity/videos). If you would like to know more then please follow the video links.   
+Over the past few weeks I have delivered talks on threat modelling from both a developer and application security perspective to [Open UK State of Open Con](https://www.youtube.com/watch?v=bqNSb32trEI), [OWASP London Chapter](https://www.youtube.com/watch?v=S1UXqPQs2Sw&t=2s) and a webinar to the [London Java Community JUG](https://www.youtube.com/@LondonJavaCommunity/videos). If you would like to know more then please follow the video links.   
 
 One thing to say is that threat modelling can be incredibly time consuming and sometimes building the diagrams can be a pain. How do we make our life easier here? Well…. The same as we do with the other layers! Tools!   
 

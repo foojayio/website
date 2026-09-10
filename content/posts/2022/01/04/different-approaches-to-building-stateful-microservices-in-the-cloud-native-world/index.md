@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-![Snow-capped mountains and landscape with clouds](pexels-photo-164170-7a0a6049.jpeg)Cloud Native computing is all about working with stateless data and serverless systems. But we all live in a stateful world, in which data flows through systems interconnected with one another through complex networks.
+![Snow-capped mountains and landscape with clouds](pexels-photo-164170-7a0a6049.jpeg) Cloud Native computing is all about working with stateless data and serverless systems. But we all live in a stateful world, in which data flows through systems interconnected with one another through complex networks.
 
 So how can systems be able to manage and track the flow of data in a coherent fashion and in a stateless world?
 
@@ -187,7 +187,7 @@ This form of the pattern uses an event-driven approach, in which the local trans
 
 The orchestration saga relies on the *orchestrator* to tell the relevant microservices to start their local transactions accordingly.
 
-Chris Richardson has [a great blog post that explains the choreography vs orchestration patterns](https://chrisrichardson.net/post/sagas/2019/08/04/developing-sagas-part-2.html)with examples.
+Chris Richardson has [a great blog post that explains the choreography vs orchestration patterns](https://chrisrichardson.net/post/sagas/2019/08/04/developing-sagas-part-2.html) with examples.
 
 **No rollbacks but undo's**
 
@@ -197,7 +197,7 @@ The Saga pattern does not have the same concept as a traditional database transa
 
 The [MicroProfile Long Running Action 1.0 (LRA)](https://download.eclipse.org/microprofile/microprofile-lra-1.0/microprofile-lra-spec-1.0.html), an Eclipse Foundation project, was released in April of 2021. The model it uses to support long-running distributed transaction, [the Long Running Action model](https://www.oasis-open.org/committees/document.php?document_id=12794), is based on the Saga Interaction Pattern.
 
-[Open Liberty](https://openliberty.io)implements MicroProfile LRA by way of a transaction manager that acts as a coordinator. This coordinator handles one or more participant services so that the execution of their business logic is organized in a predictable way.
+[Open Liberty](https://openliberty.io) implements MicroProfile LRA by way of a transaction manager that acts as a coordinator. This coordinator handles one or more participant services so that the execution of their business logic is organized in a predictable way.
 
 ## Closing thoughts
 

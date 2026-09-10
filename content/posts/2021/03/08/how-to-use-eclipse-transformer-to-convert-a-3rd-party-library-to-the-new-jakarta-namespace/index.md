@@ -52,7 +52,7 @@ But in most cases, a bit of extra work is required. So in the next paragraph we 
 
 ### MicroProfile
 
-When you need some MicroProfile functionality in your application, you typically add the following dependency to your project and run it on a compatible runtime like [Payara Server](https://www.payara.fish/products/payara-server/)or [Payara Micro](https://www.payara.fish/products/payara-micro/):
+When you need some MicroProfile functionality in your application, you typically add the following dependency to your project and run it on a compatible runtime like [Payara Server](https://www.payara.fish/products/payara-server/) or [Payara Micro](https://www.payara.fish/products/payara-micro/):
 
 ```xml
 <dependency>
@@ -112,6 +112,6 @@ Jakarta EE 9 is released and it contains the change from the *javax* namespace t
 
 These versions will be released in the coming months and will allow the developers to prepare their application for Jakarta EE 9 and later. For those who want to start experimenting today, you can use the Eclipse Transformer project to convert any compiled Java code, including JAR and entire WAR files to the *jakarta* namespace. In addition to the conversion, you also need to create specific POM files so that all dependencies are managed correctly. This article gives an overview of how you can do this.
 
-Once your application is ready, you can try it out on [Payara Server](https://www.payara.fish/products/payara-server/) and [Payara Micro](https://www.payara.fish/products/payara-micro/)which already have support for Jakarta EE 9 and which we will certify in the coming months.
+Once your application is ready, you can try it out on [Payara Server](https://www.payara.fish/products/payara-server/) and [Payara Micro](https://www.payara.fish/products/payara-micro/) which already have support for Jakarta EE 9 and which we will certify in the coming months.
 
 Originally written by Rudy De Busscher

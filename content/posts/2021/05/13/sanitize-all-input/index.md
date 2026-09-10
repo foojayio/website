@@ -17,7 +17,7 @@ Cross-site scripting (XSS) is a well-known issue and mostly utilized in JavaScri
 
 Make sure that input validation relies on allow-listing and not blocklisting. The blocklist approach sets up a collection of rules that define vulnerable input. If the input meets these rules, then the request gets blocked. However, if the ruling is too weak, then a malicious entry will still be effective. If it is too strong, it will block a valid entry. Instead, try to create a rule that describes all allowed patterns with, for instance, a regular expression, or use a well-maintained library for this.
 
-In some cases, sanitization can be achieved by enforcing specific encoding for user input. For example, you can encode an untrusted value specifically for HTML. This way, inserting a JavaScript string will not have any effect. A good starting point is the [OWASP Java encoding library](https://github.com/OWASP/owasp-java-encoder)that provides you with a lot of encoders.
+In some cases, sanitization can be achieved by enforcing specific encoding for user input. For example, you can encode an untrusted value specifically for HTML. This way, inserting a JavaScript string will not have any effect. A good starting point is the [OWASP Java encoding library](https://github.com/OWASP/owasp-java-encoder) that provides you with a lot of encoders.
 
 ```xml
 <dependency>

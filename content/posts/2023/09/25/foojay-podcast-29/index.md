@@ -73,7 +73,8 @@ You can listen and subscribe to the Foojay Podcast on:
 06:30 How ChatGPT and LLMs works  
 
 07:50 AI with Java and DeepNetts  
-[https://www.deepnetts.com/](https://www.deepnetts.com/%0A)10:42 NYJavaSIG and how AI and ML are influencing the content  
+[https://www.deepnetts.com/](https://www.deepnetts.com/)  
+10:42 NYJavaSIG and how AI and ML are influencing the content  
 
 13:06 LLM is pattern matching, not a search tool  
 
