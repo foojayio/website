@@ -18,6 +18,12 @@ images, and delivering it (pull request, fork, or zip).
 - Each post is a folder under `content/posts/<year>/<month>/<day>/<your-slug>/`
   with the text in `index.md` and its images in the same folder. Copy
   `template/post.md` as your starting point.
+- **Markdown or AsciiDoc.** Name the file `index.adoc` and write AsciiDoc
+  instead, starting from `template/post.adoc`. Everything else is the same —
+  same folder shape, same frontmatter, same checks. Markdown is shorter for
+  ordinary prose and what most articles use; AsciiDoc is worth it for captions
+  on code blocks, numbered callouts inside a snippet, admonitions, and tables
+  that span cells.
 - New author? Add yourself as `content/authors/<your-slug>/_index.md` in the same
   PR (note the underscore — see `template/author.md`).
 - `date:` is a plain day (`date: "2026-01-01"`), and it has to match the folder
@@ -32,6 +38,10 @@ images, and delivering it (pull request, fork, or zip).
   `hugo server -D` will not show it. Copy your folder to
   `content/posts/<year>/<month>/<day>/<your-slug>/`, run `hugo server`, and open
   `http://localhost:1313/website/today/<your-slug>/`.
+  Previewing an **AsciiDoc** post locally also needs the `asciidoctor` binary
+  (`gem install asciidoctor`); without it Hugo stops with
+  `failed to execute binary "asciidoctor"`. Nothing extra is needed for
+  Markdown, and the PR check installs it either way.
 
 See the guide linked above for the details.
 

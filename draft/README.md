@@ -9,6 +9,10 @@ folder named with your article's URL slug, containing an `index.md` (start from
         index.md
         an-image.png
 
+To write in AsciiDoc instead, name the file `index.adoc` and start from
+`template/post.adoc`. The folder shape, the frontmatter and the checks are the
+same either way.
+
 Then open a pull request. A maintainer reviews it and moves the folder into
 `content/posts/<year>/<month>/<day>/your-article-slug/` to publish it.
 

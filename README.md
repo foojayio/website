@@ -1,15 +1,15 @@
 # foojay.io — a place for Friends Of OpenJDK
 
 This repository **is** [foojay.io](https://foojay.io). Every article, author
-profile and page on the site is a Markdown file in here, and the site rebuilds
+profile and page on the site is a Markdown (or AsciiDoc) file in here, and the site rebuilds
 and redeploys itself whenever something lands on `main`.
 
 Which means the way to get published on foojay is to open a pull request.
 
 ## Write for foojay
 
-foojay is written by the Java community, for the Java community: 2,100+ articles
-from 340+ authors — JUG leads, Java Champions, library maintainers, and a lot of
+Foojay is written by the Java community, for the Java community: thousands of articles
+from hundreds of authors — JUG leads, Java Champions, library maintainers, and a lot of
 people who simply worked something out and wrote it down.
 
 **We would like that to include you.**
@@ -28,8 +28,8 @@ A few things worth knowing before you start:
 - **Already published it on your own blog? Post it here too.** Set `canonical:`
   to your original and search engines keep crediting your site, while your
   article reaches foojay's readers. Around 800 articles here are cross-posts.
-- **No paywall, no ads in your article, no sign-up wall for readers.**
-- **You write Markdown, not Hugo.** If you can write a `README`, you can publish
+- **No paywall, no ads inside your article, no sign-up wall for readers.**
+- **You write Markdown or AsciiDoc, not Hugo.** If you can write a `README`, you can publish
   here. Nothing in the build needs to be understood or configured by you.
 
 ### Publishing, in three steps
@@ -37,8 +37,8 @@ A few things worth knowing before you start:
 1. **Add yourself as an author** — copy [`template/author.md`](template/author.md)
    to `content/authors/<your-slug>/_index.md` and drop your photo beside it.
    Once, before your first article.
-2. **Write the article** — copy [`template/post.md`](template/post.md) to
-   `draft/<your-article-slug>/index.md`, put any images in that same folder, and
+2. **Write the article** — copy [`template/post.md`](template/post.md) or [`template/post.adoc`](template/post.adoc) to
+   `draft/<your-article-slug>/index.md` or `.../index.adoc`, put any images in that same folder, and
    write. The file's own comments explain every field; the required ones are
    `title`, `date`, `description`, `authors`, `image` (the card and social
    preview) and `categories` (pick from
@@ -48,7 +48,7 @@ A few things worth knowing before you start:
    a minute rather than after review. A maintainer then moves your folder into
    `content/posts/` and it is live.
 
-No write access needed — fork the repo. If a pull request is not your thing at
+Ask for write access in the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or fork this repo. If a pull request is not your thing at
 all, the guide below covers sending a zip instead.
 
 > **📖 Full walkthrough:
@@ -79,8 +79,8 @@ all, the guide below covers sending a zip instead.
 
 ## Questions
 
-Ask in the [foojay Slack](https://bit.ly/join-foojay-slack) or open an
-issue. If you are unsure whether an idea fits, propose it — the answer is
+Ask in the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or [open an
+issue](https://github.com/foojayio/website/issues). If you are unsure whether an idea fits, propose it — the answer is
 usually yes, and it is much easier to say so early than to review a finished
 draft that needed a different shape.
 
@@ -103,7 +103,7 @@ it.
 A [Hugo](https://gohugo.io/) static site, deployed by GitHub Actions.
 Search is [Pagefind](https://pagefind.app), comments are
 [giscus](https://giscus.app) over GitHub Discussions, and the read counter is a
-small first-party Cloudflare Worker.
+small first-party, privacy-friendly, Cloudflare Worker.
 
 Maintainers: [`MAINTAINERS.md`](MAINTAINERS.md) for how to run it,
 [`scripts/README.md`](scripts/README.md) for the tooling, and
