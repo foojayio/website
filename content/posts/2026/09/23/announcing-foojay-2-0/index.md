@@ -1,6 +1,6 @@
 ---
 title: "Announcing Foojay 2.0"
-date: "2026-10-01"
+date: "2026-09-23"
 description: "Foojay has a new home: a static, open-source site where publishing an article is a pull request. Same URLs, same archive, faster, and new features."
 authors:
   - "frankdelporte"
