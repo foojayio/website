@@ -92,9 +92,36 @@
 {{ range $rows }}{{ with .sponsor }}{{ $sponsors = $sponsors | append . }}{{ end }}{{ end }}
 {{ $sponsors = $sponsors | uniq | sort }}
 
-<article class="prose">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+{{/* THE SHELL, which this page had none of: `<article class="prose">` on its
+     own sits directly in .site-main (display: block), so it took the whole
+     viewport with no max-width, no gutter and no top margin -- the one page on
+     the site that did.
+
+     page-head + .content-col.full-width, i.e. what /sitemap/ uses, rather than
+     the .layout-with-sidebar + .page-single that an ordinary page uses. Two
+     reasons, and the second is the real one:
+
+       1. It is a data page. Six columns of figures read better in the 1240px
+          shell than folded into the 96ch reading measure meant for prose.
+       2. A SIDEBAR HERE WOULD CORRUPT THE NUMBERS. partials/ads-widget.html
+          renders the live banners in that column, and static/js/ad-carousel.js
+          counts an impression for each one that comes into view. Opening the
+          report to check a sponsor's figures would add to them. A page that
+          changes what it measures by being read is worse than a page that is
+          the wrong width. */}}
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{/* .Content only, not `description` as well -- /sitemap/'s head does the
+         same. The frontmatter description is written for the gallery card and
+         the social preview; printing it here too would open the page by saying
+         nearly the same thing twice. */}}
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <div class="prose">
 
   {{ with $rows }}
   <h2>By campaign</h2>
@@ -196,7 +223,8 @@
      third-party script &mdash; so these are indicative totals rather than audited
      ad-server figures. Readers with JavaScript disabled are not counted at all,
      which means the true impression count is a little higher than the one shown.</p>
-</article>
+  </div>
+</div>
 {{/* Loaded here rather than from baseof.html, the same reasoning as /sitemap/'s
      two scripts and ad-carousel-js.html: this is one page, and the other ~4000
      have no sortable table to enhance. */}}
