@@ -2282,6 +2282,33 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   .prose .site-table th[scope="row"] { width: auto; }
 }
 
+/* /ad-stats/: the banner report (themes/foojay/layouts/ad-stats/single.html).
+   Both tables are .site-table, so the width, padding, borders and the
+   right-aligned tabular figures come from the rules above and only what is
+   genuinely different is written here.
+
+   The sort ARROWS need nothing: .sort-btn and the th[aria-sort] rules further
+   down are generic rather than scoped to .sitemap-table. The active-column
+   colour IS scoped there, so it is restated for this table -- a header whose
+   arrow has changed but whose colour has not reads as a control that did not
+   take. `.prose .site-table` to outrank `.prose th`, the specificity trap the
+   .site-table and .sitemap-table rules both document. */
+.prose .site-table thead th[aria-sort="ascending"],
+.prose .site-table thead th[aria-sort="descending"] { color: var(--ink); }
+.prose .site-table tbody tr:hover { background: var(--surface-sunken); }
+/* The slug under a headline: present because it is the identity the counter
+   and the folder use, but secondary to the headline it sits under -- and
+   `overflow-wrap` because 2026-09-azul-jvm-drag-ai-infrastructure has no
+   break opportunity of its own on a narrow screen. */
+.prose .site-table .ad-stats__slug {
+  font-size: .82em; color: var(--ink-muted); overflow-wrap: anywhere;
+}
+.prose .site-table .ad-stats__sponsor { white-space: nowrap; }
+/* Dates, so tabular figures line the two ISO days up either side of the arrow. */
+.prose .site-table .ad-stats__ran {
+  white-space: nowrap; color: var(--ink-muted); font-variant-numeric: tabular-nums;
+}
+
 /* /jugs/ page: data/jugs.yaml source note + table (themes/foojay/layouts/jugs/single.html) */
 .jugs-source-note { font-size: .92rem; color: var(--ink-muted); }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }

@@ -98,16 +98,26 @@
 
   {{ with $rows }}
   <h2>By campaign</h2>
-  <div style="overflow-x:auto">
-  <table>
+  {{/* .table-scroll + .site-table + .site-table__num, the same three classes
+       the derived tables on /ai-instructions/ use: a focusable scroll box on a
+       narrow screen, and tabular figures right-aligned so a column of counts
+       lines up digit under digit. Nothing new was needed here -- a fourth
+       table style would be a fourth place to fix a padding bug. */}}
+  {{/* data-sortable + data-sort-type is the whole opt-in; static/js/sortable-table.js
+       turns those headers into buttons and is otherwise generic -- /sitemap/ was
+       its only caller until now, and it needed no change to take a second one.
+       aria-sort on Campaign declares the order the server already rendered, so
+       the first click on it flips rather than re-applying what is on screen. */}}
+  <div class="table-scroll" tabindex="0">
+  <table class="site-table" data-sortable>
     <thead>
       <tr>
-        <th scope="col">Campaign</th>
-        <th scope="col">Sponsor</th>
-        <th scope="col">Ran</th>
-        <th scope="col">Impressions</th>
-        <th scope="col">Clicks</th>
-        <th scope="col">CTR</th>
+        <th scope="col" data-sort-type="text" data-sort-first="descending" aria-sort="descending">Campaign</th>
+        <th scope="col" data-sort-type="text">Sponsor</th>
+        <th scope="col" data-sort-type="text">Ran</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">Impressions</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">Clicks</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">CTR</th>
       </tr>
     </thead>
     <tbody>
@@ -115,12 +125,18 @@
       <tr>
         {{/* A deleted bundle has no headline left, so `title` falls back to the
              slug -- printing both would say the same thing twice. */}}
-        <td>{{ if ne .title .slug }}{{ .title }}<br>{{ end }}<code>{{ .slug }}</code></td>
-        <td>{{ with .sponsor }}{{ . }}{{ else }}&mdash;{{ end }}</td>
-        <td>{{ if .from }}{{ .from }}{{ if .till }} &rarr; {{ .till }}{{ end }}{{ else }}&mdash;{{ end }}</td>
-        <td>{{ lang.FormatNumberCustom 0 .views }}</td>
-        <td>{{ lang.FormatNumberCustom 0 .clicks }}</td>
-        <td>{{ if gt .views 0 }}{{ lang.FormatNumberCustom 2 .ctr }}%{{ else }}&mdash;{{ end }}</td>
+        {{/* Sorts on the SLUG, not on the headline shown above it: the slug
+             carries the <yyyy>-<mm>- prefix, so a text sort of this column is
+             chronological -- which is the order a campaign list is actually
+             read in. A headline sort would be alphabetical by advertising copy. */}}
+        <td data-sort-value="{{ .slug }}">{{ if ne .title .slug }}{{ .title }}<br>{{ end }}<code class="ad-stats__slug">{{ .slug }}</code></td>
+        <td class="ad-stats__sponsor">{{ with .sponsor }}{{ . }}{{ else }}&mdash;{{ end }}</td>
+        <td class="ad-stats__ran" data-sort-value="{{ .from }}">{{ if .from }}{{ .from }}{{ if .till }} &rarr; {{ .till }}{{ end }}{{ else }}&mdash;{{ end }}</td>
+        <td class="site-table__num" data-sort-value="{{ .views }}">{{ lang.FormatNumberCustom 0 .views }}</td>
+        <td class="site-table__num" data-sort-value="{{ .clicks }}">{{ lang.FormatNumberCustom 0 .clicks }}</td>
+        {{/* The raw ratio, so a row with no impressions sorts as 0 rather than
+             on the em-dash it displays. */}}
+        <td class="site-table__num" data-sort-value="{{ .ctr }}">{{ if gt .views 0 }}{{ lang.FormatNumberCustom 2 .ctr }}%{{ else }}&mdash;{{ end }}</td>
       </tr>
       {{ end }}
     </tbody>
@@ -129,15 +145,15 @@
 
   {{ with $sponsors }}
   <h2>By sponsor</h2>
-  <div style="overflow-x:auto">
-  <table>
+  <div class="table-scroll" tabindex="0">
+  <table class="site-table" data-sortable>
     <thead>
       <tr>
-        <th scope="col">Sponsor</th>
-        <th scope="col">Campaigns</th>
-        <th scope="col">Impressions</th>
-        <th scope="col">Clicks</th>
-        <th scope="col">CTR</th>
+        <th scope="col" data-sort-type="text" aria-sort="ascending">Sponsor</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">Campaigns</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">Impressions</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">Clicks</th>
+        <th scope="col" class="site-table__num" data-sort-type="number" data-sort-first="descending">CTR</th>
       </tr>
     </thead>
     <tbody>
@@ -149,16 +165,21 @@
           {{ end }}
         {{ end }}
       <tr>
-        <td>{{ $sponsor }}</td>
-        <td>{{ $n }}</td>
-        <td>{{ lang.FormatNumberCustom 0 $v }}</td>
-        <td>{{ lang.FormatNumberCustom 0 $c }}</td>
-        <td>{{ if gt $v 0 }}{{ lang.FormatNumberCustom 2 (mul (div (float $c) (float $v)) 100.0) }}%{{ else }}&mdash;{{ end }}</td>
+        {{ $sctr := 0.0 }}{{ if gt $v 0 }}{{ $sctr = mul (div (float $c) (float $v)) 100.0 }}{{ end }}
+        <td class="ad-stats__sponsor">{{ $sponsor }}</td>
+        <td class="site-table__num" data-sort-value="{{ $n }}">{{ $n }}</td>
+        <td class="site-table__num" data-sort-value="{{ $v }}">{{ lang.FormatNumberCustom 0 $v }}</td>
+        <td class="site-table__num" data-sort-value="{{ $c }}">{{ lang.FormatNumberCustom 0 $c }}</td>
+        <td class="site-table__num" data-sort-value="{{ $sctr }}">{{ if gt $v 0 }}{{ lang.FormatNumberCustom 2 $sctr }}%{{ else }}&mdash;{{ end }}</td>
       </tr>
       {{ end }}
     </tbody>
   </table>
   </div>
+  <p class="site-table__asof">
+    Baked in when this page was built, on {{ now.Format "2 January 2006" }}, from
+    counts the site refreshes every six hours.
+  </p>
   {{ end }}
   {{ else }}
   <p>No banner has been counted yet. Impressions start appearing once
@@ -176,4 +197,8 @@
      ad-server figures. Readers with JavaScript disabled are not counted at all,
      which means the true impression count is a little higher than the one shown.</p>
 </article>
+{{/* Loaded here rather than from baseof.html, the same reasoning as /sitemap/'s
+     two scripts and ad-carousel-js.html: this is one page, and the other ~4000
+     have no sortable table to enhance. */}}
+<script src="{{ "js/sortable-table.js" | relURL }}" defer></script>
 {{ end }}
