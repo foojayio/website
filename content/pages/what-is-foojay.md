@@ -10,18 +10,20 @@ frozen: false
 
 {{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized on-light" width="666" height="681" style="width:300px" >}}
 
-Foojay.io, the website for **F** riends **O** f **O** pen**J**DK, is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community. 
+Foojay.io, the website for **F**riends **O**f **O**pen**J**DK, is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community.
 
 Rather than one single blog or one vendor's view, Foojay collates news, technical deep-dives, release data, podcasts, and community voices into one place. It's a free and vendor-neutral place for the Java community.
 
 On Foojay, you can find the following content (and more!):
 
-* **Daily News** - a daily stream of blog posts, tutorials and news from Java developers, JDK engineers and industry contributors around the world.
-* **The Foojay Podcast** - conversations with the people building and shaping the Java platform.
-* **OpenJDK Update Release Details** - community-curated tracking of fixes and CVEs in recent OpenJDK updates.
-* **Glossary \& Java Quick Start** - reference material and guided tutorials for developers learning Java or getting oriented in the ecosystem.
-* **JC-AI Newsletter** - a regular briefing at the intersection of Java and AI.
-* **Event Calendar** - Java events happening worldwide.
+* **[Daily News](/today/)** - a daily stream of blog posts, tutorials and news from [Java developers, JDK engineers and industry contributors around the world](/today/author/).
+* **[The Foojay Podcast](/today/category/podcast/)** - conversations with the people building and shaping the Java platform.
+* **[OpenJDK Release Details](/java-almanac/)** - the Java Version Almanac: every JDK release with its docs, specs and API diffs, so you can see exactly what changed between two versions.
+* **[Glossary](/pedia/) \& [Java Quick Start](/java-quick-start/)** - reference material and guided tutorials for developers learning Java or getting oriented in the ecosystem.
+* **[JC-AI Newsletter](/today/category/jc-ai-newsletter/)** - a regular briefing at the intersection of Java and AI.
+* **[Event Calendar](/calendar/)** - Java events happening worldwide.
+* **[Java User Groups](/jugs/)** - a world map of the JUGs near you, sourced live from the community-run World Wide JUGs directory.
+* **[Java Champions](/java-champions/)** - the community members recognized by the Java Champions program, sourced live from the official directory.
 
 ## Why we're here?
 
@@ -29,11 +31,11 @@ Java developers shouldn't have to piece together useful information from many di
 
 ## Where the name comes from?
 
-Foojay is the place to be for the **F** riends **O** f **O** pen**J**DK. But what is the history behind this name?
+Foojay is the place to be for the **F**riends **O**f **O**pen**J**DK. But what is the history behind this name?
 
-"Foo", as we know, is a placeholder in demo apps. This site and community is, likewise, a placeholder for your content, of all kinds. In particular, it is "Foo" for "J", i.e., "Java". The name should really be "FooJ" but then it would be weird to pronounce. "Jay" is the right way to pronounce the J in "FooJ", which at the same time is the name of a bird, and gave us a nice base for a logo. The initial logo was created by a designer, and used as the basis for several variations by [Gerrit Grunwald](https://foojay.io/today/author/gerrit-grunwald/).
+"Foo", as we know, is a placeholder in demo apps. This site and community is, likewise, a placeholder for your content, of all kinds. In particular, it is "Foo" for "J", i.e., "Java". The name should really be "FooJ" but then it would be weird to pronounce. "Jay" is the right way to pronounce the J in "FooJ", which at the same time is the name of a bird, and gave us a nice base for a logo. The initial logo was created by a designer, and used as the basis for several variations by [Gerrit Grunwald](/today/author/gerrit-grunwald/).
 
-Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those names freely ofr initiatives like Foojay. So that's how "Foojay" became the name for the place for Friends Of OpenJDK.
+Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those names freely for initiatives like Foojay. So that's how "Foojay" became the name for the place for Friends Of OpenJDK.
 
 ## Logo
 
