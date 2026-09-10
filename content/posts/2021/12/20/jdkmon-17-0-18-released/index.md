@@ -90,7 +90,7 @@ JDKMon is available for the following platforms:
 
 **Download** :  
 
-You can download the latest version from [github relases](https://github.com/HanSolo/JDKMon/releases "github relases")or from [JFX Central](https://www.jfx-central.com/downloads "JFX Central").
+You can download the latest version from [github relases](https://github.com/HanSolo/JDKMon/releases "github relases") or from [JFX Central](https://www.jfx-central.com/downloads "JFX Central").
 
 **More info:**   
 [JDKMon Home](https://harmoniccode.blogspot.com/p/jdkmon.html "JDKMon page")

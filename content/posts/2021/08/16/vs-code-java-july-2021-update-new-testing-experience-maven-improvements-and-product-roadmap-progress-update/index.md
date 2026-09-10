@@ -88,7 +88,7 @@ For other items mentioned in the roadmap, we are actively working on those areas
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 
 * Leave your comment on this blog post
-* [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose "Open an issue ")on our GitHub Issues page
+* [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose "Open an issue ") on our GitHub Issues page
 
 ## Resources
 

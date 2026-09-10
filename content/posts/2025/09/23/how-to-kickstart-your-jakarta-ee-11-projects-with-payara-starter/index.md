@@ -25,7 +25,7 @@ frozen: false
 
 With Jakarta EE 11 now [officially released](https://blog.payara.fish/jakarta-ee-11-is-here-and-its-ready-for-the-cloud "officially released"), you are likely eager to explore its new capabilities but setting up your first application may take longer than you want. That's where the latest version of Payara Starter steps in, giving you a fast, hassle-free way to get a fully functional Jakarta EE 11 project up and running. Read more to learn how!
 
-The latest updates to Payara Starter [entity relationship diagram (ERD)](https://blog.payara.fish/accelerate-app-development-with-ai "entity relationship diagram (ERD) ")and code generator brings two major enhancements, which are designed to make life easier for Java developers:
+The latest updates to Payara Starter [entity relationship diagram (ERD)](https://blog.payara.fish/accelerate-app-development-with-ai "entity relationship diagram (ERD) ") and code generator brings two major enhancements, which are designed to make life easier for Java developers:
 
 * Full Jakarta EE 11 support
 * A Jakarta Faces project generator

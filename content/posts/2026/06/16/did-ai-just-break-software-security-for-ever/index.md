@@ -55,7 +55,7 @@ For years, security advice came with an implicit escape clause: best practice, s
 
 Look at these numbers
 
-1. Unit 42's 2026 Global Incident Response [Report](https://www.paloaltonetworks.com/blog/2026/02/unit-42-global-ir-report/ "Report ")found attackers now start scanning for newly disclosed CVEs within 15 minutes of publication. In the fastest cases they investigated, initial access to full data exfiltration took 72 minutes. Four times faster than the previous year.
+1. Unit 42's 2026 Global Incident Response [Report](https://www.paloaltonetworks.com/blog/2026/02/unit-42-global-ir-report/ "Report ") found attackers now start scanning for newly disclosed CVEs within 15 minutes of publication. In the fastest cases they investigated, initial access to full data exfiltration took 72 minutes. Four times faster than the previous year.
 2. The median time to fully patch a vulnerability is now 43 days and rising, per Verizon's 2026 [DBIR](https://www.verizon.com/business/resources/reports/dbir/ "DBIR").
 3. The CRA gives you 24 hours to notify ENISA.
 
@@ -83,7 +83,7 @@ End-of-life versions sit largely outside that loop. No maintainer. No upstream f
 
 Attackers know that most bugs in current versions are present in older versions too. The codebase may have diverged, but the vulnerabilities travelled with it.
 
-CISA added 245 vulnerabilities to its KEV [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ")in 2025 — more than 30% above the previous two-year trend. Of those, 94 were from 2024 and earlier, a 34% increase in exploitation of older vulnerabilities. The oldest dated back to 2007. (CISA KEV catalogue, 2025.)
+CISA added 245 vulnerabilities to its KEV [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ") in 2025 — more than 30% above the previous two-year trend. Of those, 94 were from 2024 and earlier, a 34% increase in exploitation of older vulnerabilities. The oldest dated back to 2007. (CISA KEV catalogue, 2025.)
 
 ### Current versions get patched. EOL versions get exploited.
 

@@ -48,10 +48,10 @@ As part of our ongoing investment in Java technologies, we are providing IBM Sem
 
 If you want to learn more about how OpenJ9 JVM innovation has been helping to optimize Java workloads running in containers for many years, take a look at this [recent post](https://blog.openj9.org/2021/06/15/innovations-for-java-running-in-containers/ "recent post") on the OpenJ9 Blog. The blog post explains some of the container-awareness features of OpenJ9, such as portable ahead-of-time (AOT) compilation and multi-layer embedded shared-class cache (SCC) for fast startup times and low memory footprint.
 
-You can also learn about the significant [performance advantages](https://www.eclipse.org/openj9/performance/ "performance advantages ")OpenJ9 provides for different kinds of Java workloads.
+You can also learn about the significant [performance advantages](https://www.eclipse.org/openj9/performance/ "performance advantages") OpenJ9 provides for different kinds of Java workloads.
 
 ## Give it a try
 
-Hybrid clouds need the flexibility of open and no-cost runtimes, and IBM Semeru Runtimes are a great choice. Whether you need a stable no-cost environment for developing Java workloads in the cloud, the performance benefits of a runtime deeply integrated across a broad set of platforms, or the experience of a mature Java provider for a large estate of critical Java workloads, we welcome you to [download](https://www.ibm.com/semeru-runtimes/downloads "download ")and try IBM Semeru Runtimes.
+Hybrid clouds need the flexibility of open and no-cost runtimes, and IBM Semeru Runtimes are a great choice. Whether you need a stable no-cost environment for developing Java workloads in the cloud, the performance benefits of a runtime deeply integrated across a broad set of platforms, or the experience of a mature Java provider for a large estate of critical Java workloads, we welcome you to [download](https://www.ibm.com/semeru-runtimes/downloads "download ") and try IBM Semeru Runtimes.
 
 We look forward to continuing to openly innovate with Java and to support all Java communities with OpenJ9 and our IBM Semeru Runtimes.

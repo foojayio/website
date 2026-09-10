@@ -70,7 +70,7 @@ In this benchmark, each test instance will create six distinct Kafka topics, and
 
 ### Chronicle Queue
 
-Open-source [Chronicle Queue](https://chronicle.software/queue/ "Chronicle Queue ")is a persisted low-latency messaging framework for high-performance and critical applications. Interestingly, Chronicle Queue uses off-heap memory and memory-mapping to reduce memory pressure and garbage collection impacts, making the product popular within the fintech area where deterministic low latency messaging is crucial.
+Open-source [Chronicle Queue](https://chronicle.software/queue/ "Chronicle Queue ") is a persisted low-latency messaging framework for high-performance and critical applications. Interestingly, Chronicle Queue uses off-heap memory and memory-mapping to reduce memory pressure and garbage collection impacts, making the product popular within the fintech area where deterministic low latency messaging is crucial.
 
 In this other benchmark, each test instance will create six Chronicle Queue instances, named topicXXXX0, topicXXXX1, … , topicXXXX5 where XXXXX is a random number.
 

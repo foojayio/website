@@ -26,7 +26,7 @@ This is an article summarising different approaches to the development of IT sol
 
 ### Business Driven Development
 
-[Business-driven development](https://en.wikipedia.org/wiki/Business-driven_development "Business-driven development ")is a meta-methodology for developing IT solutions that directly satisfy [business requirements](https://en.wikipedia.org/wiki/Requirement "business requirements"). This leads to increased flexibility and shorter turnaround times when changing the business and adapting the IT systems.
+[Business-driven development](https://en.wikipedia.org/wiki/Business-driven_development "Business-driven development ") is a meta-methodology for developing IT solutions that directly satisfy [business requirements](https://en.wikipedia.org/wiki/Requirement "business requirements"). This leads to increased flexibility and shorter turnaround times when changing the business and adapting the IT systems.
 
 This is achieved by adopting a [model-driven](https://en.wikipedia.org/wiki/Model-driven_engineering "model-driven") approach that starts with the business strategy, requirements and goals and then refines and transforms them into an IT solution. Due to the alignment of the business and IT layers, it is possible to propagate changes in the business automatically to the IT systems.
 

@@ -84,7 +84,7 @@ The sum of this provides a completely deterministic and decoupled event-driven m
 
 ### Reusing Objects in Chronicle Queue
 
-In a [previous article](https://chronicle.software/creating-terabyte-sized-queues-with-low-latency-2/ "previous article"), [open-source Chronicle Queue](https://chronicle.software/queue/ "open-source Chronicle Queue ")was benchmarked and demonstrated to have high performance. One objective of this article is to take a closer look at how this is possible and how object reuse works under the hood in Chronicle Queue (using version 5.22ea6).
+In a [previous article](https://chronicle.software/creating-terabyte-sized-queues-with-low-latency-2/ "previous article"), [open-source Chronicle Queue](https://chronicle.software/queue/ "open-source Chronicle Queue ") was benchmarked and demonstrated to have high performance. One objective of this article is to take a closer look at how this is possible and how object reuse works under the hood in Chronicle Queue (using version 5.22ea6).
 
 As in the previous article, the same simple data object is used:
 

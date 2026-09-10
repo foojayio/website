@@ -43,7 +43,7 @@ For high frequency or ultra low latency trading groups needing the absolute lowe
 
 ### Chronicle's approach to microservices
 
-[Chronicle's approach to microservices](http://https://chronicle.software/services/ "Chronicle’s approach to microservices ")with queue replication can provide both on box latencies rivaling some of the best shared-memory implementations on the market, as well as low and predictable latency off box. [Chronicle Queue](http://https://chronicle.software/queue-enterprise/ "Chronicle Queue") (the underlying messaging system of the microservices framework) solves many of the issues that plague legacy middleware by not sacrificing flexibility, allowing both point-to-point and topic-based pub/sub communication patterns.
+[Chronicle's approach to microservices](http://https://chronicle.software/services/ "Chronicle’s approach to microservices ") with queue replication can provide both on box latencies rivaling some of the best shared-memory implementations on the market, as well as low and predictable latency off box. [Chronicle Queue](http://https://chronicle.software/queue-enterprise/ "Chronicle Queue") (the underlying messaging system of the microservices framework) solves many of the issues that plague legacy middleware by not sacrificing flexibility, allowing both point-to-point and topic-based pub/sub communication patterns.
 
 Slow consumers combined with ultra-fast producers do not cause back pressure-induced pauses, and messages are reliably delivered in order with no data loss. State is easily recovered following an outage or failover using the persistence features of Chronicle Queue, and by leveraging Chronicle Services, this can be done seamlessly.
 

@@ -40,7 +40,7 @@ In the case of a 'stateless' service, state is not required for the service to h
 
 ## Persistence in Chronicle Services Applications
 
-Service-to-service interactions in[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") applications is facilitated by [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), a persistent shared memory-based model for inter-process communication. [Chronicle Services](https://chronicle.software/services/ "Chronicle Services ")utilises [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") to provide a "store everything" model, optionally interleaved with periodic checkpointing, ensuring comprehensive logging of all system activities and state modifications.
+Service-to-service interactions in[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") applications is facilitated by [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), a persistent shared memory-based model for inter-process communication. [Chronicle Services](https://chronicle.software/services/ "Chronicle Services ") utilises [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") to provide a "store everything" model, optionally interleaved with periodic checkpointing, ensuring comprehensive logging of all system activities and state modifications.
 
 [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") can persist approximately 1 million messages per second, combining efficiency with high throughput.
 

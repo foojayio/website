@@ -62,7 +62,7 @@ Two personal accounts round this out. On Hacker News, in the Claude Opus 4.8 lau
 
 ## What the mistake costs
 
-The cheapest outcome is lost work. The edits sit unstaged in the working copy; the next branch switch, stash or agent run takes them away, and the developer finds out when the "finished" change is missing from the branch. [In #63870](https://github.com/anthropics/claude-code/issues/63870 "In #63870 ")the missing pieces were the commit, the push, the PR and the cleanup, and the developer had already moved on.  
+The cheapest outcome is lost work. The edits sit unstaged in the working copy; the next branch switch, stash or agent run takes them away, and the developer finds out when the "finished" change is missing from the branch. [In #63870](https://github.com/anthropics/claude-code/issues/63870 "In #63870 ") the missing pieces were the commit, the push, the PR and the cleanup, and the developer had already moved on.  
 
 The next level is other people's time. A reviewer opens the PR the agent described, searches for the hash, and finds it in no branch and no object store (#19520). The task board says done, the standup said done, and the repository disagrees with both. Somebody now has to reconstruct what actually landed.  
 

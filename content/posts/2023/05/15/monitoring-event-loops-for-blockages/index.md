@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-Chronicle's open source [Chronicle Threads](https://github.com/OpenHFT/Chronicle-Threads "Chronicle Threads ")library has a little known feature which is one of the first tools I get from my bag if a client reports that they are seeing latency outliers.
+Chronicle's open source [Chronicle Threads](https://github.com/OpenHFT/Chronicle-Threads "Chronicle Threads ") library has a little known feature which is one of the first tools I get from my bag if a client reports that they are seeing latency outliers.
 
 The usual way that a developer will measure their system for latency hotspots is to use a profiler, and modern profilers are amazing; there are numerous commercially available, but I generally find myself using Java Flight Recorder, async-profiler, or honest-profiler. These three are engineered to avoid the [safepoint bias](https://stackoverflow.com/questions/17839933/what-are-safe-points-and-safe-point-polling-in-context-of-profiling "safepoint bias"), and thus give very accurate results.
 

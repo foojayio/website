@@ -30,7 +30,7 @@ June 30th is coming. In a few weeks, Spring Boot 3.5 reaches end of open-source 
 
 Good. I expect that migration wasn't as easy as you expected. One thing worth saying though: crossing to 4.0 doesn't mean you've left the zombie problem behind. Your new dependency tree has its own EOL packages lurking in the transitive layers.
 
-Running the [HeroDevs EOL CLI](https://www.herodevs.com/eol-dataset/eol-data?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs EOL CLI ")against your new build now is a sensible first step.
+Running the [HeroDevs EOL CLI](https://www.herodevs.com/eol-dataset/eol-data?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs EOL CLI ") against your new build now is a sensible first step.
 
 ## If You're Still on 3.5
 
@@ -46,7 +46,7 @@ The migration is expensive. That's why you need time.
 
 The migration from 3.5 to 4.0 isn't a version bump. Fifty-plus breaking changes, 36 deprecated classes removed, eight major dependencies changing simultaneously. [I wrote a detailed guide to what it actually costs](https://www.herodevs.com/ebooks/spring-boot-4-0-migration-guide?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "I wrote a detailed guide to what it actually costs ")
 
-[HeroDevs' own analysis](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs' own analysis ")of equivalent Spring major migrations puts a small codebase at around six weeks. A medium one, 30,000 to 80,000 lines across five microservices, at 12 to 14 weeks. Large codebases take significantly longer.
+[HeroDevs' own analysis](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs' own analysis ") of equivalent Spring major migrations puts a small codebase at around six weeks. A medium one, 30,000 to 80,000 lines across five microservices, at 12 to 14 weeks. Large codebases take significantly longer.
 
 The Spring community's own guidance recommends starting nine to twelve *months* before EOL. For Spring Boot 3.5, that window opened in July 2025.
 
@@ -62,7 +62,7 @@ A full vulnerability notification follows within 72 hours. A final report is due
 
 The trigger is active exploitation, not CVE assignment, not a particular severity score.
 
-The CISA Known Exploited Vulnerabilities [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ")is a useful proxy for knowing what's being actively exploited, but the CRA obligation is broader: it applies whenever you become aware that a vulnerability in your product is being exploited, whether or not it's on any particular list.
+The CISA Known Exploited Vulnerabilities [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ") is a useful proxy for knowing what's being actively exploited, but the CRA obligation is broader: it applies whenever you become aware that a vulnerability in your product is being exploited, whether or not it's on any particular list.
 
 Then you have a broader obligation to address it *without undue delay.*
 
@@ -156,4 +156,4 @@ Sonatype Lifecycle incorporates EPSS and its own exploitation data from monitori
 
 OSV Scanner doesn't surface exploitation status directly, but cross-referencing its output with the CISA KEV catalogue gives you the combination.
 
-Steve Poole is a Developer Advocate at [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")and a Java Champion. [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")provides Never-Ending Support for EOL open-source software including Spring Boot 3.5. This article follows Crossing the River Styx: Spring Boot 3.5 and the Zombie Dependency Problem.
+Steve Poole is a Developer Advocate at [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ") and a Java Champion. [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ") provides Never-Ending Support for EOL open-source software including Spring Boot 3.5. This article follows Crossing the River Styx: Spring Boot 3.5 and the Zombie Dependency Problem.

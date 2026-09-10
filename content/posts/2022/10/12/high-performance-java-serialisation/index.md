@@ -38,7 +38,7 @@ Likewise, If we want to send the data stored in our java object, over the networ
 
 ### About Chronicle Wire
 
-[Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire ")is an Open Source library that was originally written to support Chronicle Queue and Chronicle Map. However, the library is useful in any code that uses serialisation. Chronicle Wire differs from native Java serialisation in that it actually supports a number of different formats, for example, binary, YAML, JSON, Raw binary data, and CSV.
+[Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire ") is an Open Source library that was originally written to support Chronicle Queue and Chronicle Map. However, the library is useful in any code that uses serialisation. Chronicle Wire differs from native Java serialisation in that it actually supports a number of different formats, for example, binary, YAML, JSON, Raw binary data, and CSV.
 
 The real innovation behind Chronicle Wire is that you don't have to change your code to change the encoding. The library abstracts away the implementation of the serialisation to a pluggable Wire implementation. The idea is that your objects need only describe what is to be serialised not how it should be serialised.
 

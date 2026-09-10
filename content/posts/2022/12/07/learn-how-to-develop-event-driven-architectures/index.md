@@ -20,7 +20,7 @@ frozen: false
 
 Previously, I wrote [an article on Open source Chronicle Wire](https://foojay.io/today/high-performance-java-serialisation/ "an article on Open source Chronicle Wire"), that discusses how we could serialise an application's state into different message formats.
 
-Now in this article, I'm going to look at how we can use Open source [Chronicle Queue](https://chronicle.software/queue/ "Chronicle Queue ")and [Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire") to structure applications to use Event-Driven Architecture (EDA).
+Now in this article, I'm going to look at how we can use Open source [Chronicle Queue](https://chronicle.software/queue/ "Chronicle Queue ") and [Chronicle Wire](https://chronicle.software/wire/ "Chronicle Wire") to structure applications to use Event-Driven Architecture (EDA).
 
 EDA is a design pattern in which decoupled components (often microservices) can asynchronously publish and subscribe to events.
 

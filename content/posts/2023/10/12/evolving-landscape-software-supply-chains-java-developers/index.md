@@ -52,7 +52,7 @@ Also, as the report says: you could save up to 6 weeks of effort a year per appl
 
 It's not all doom and gloom though - there are signs that we're acknowledging the problem and beginning to change our behaviour. How we're modernising the software supply chain is a strong theme across the report.
 
-[Chapter 2's Open Source Security Practises](https://www.sonatype.com/state-of-the-software-supply-chain/open-source-security-practices "Chapter 2’s Open Source Security Practises ")explains more about what the OpenSSF and others have been doing to help us all in this area.
+[Chapter 2's Open Source Security Practises](https://www.sonatype.com/state-of-the-software-supply-chain/open-source-security-practices "Chapter 2’s Open Source Security Practises ") explains more about what the OpenSSF and others have been doing to help us all in this area.
 
 ## Software Supply Chain Maturity
 
@@ -81,7 +81,7 @@ While the EU
 * Product Liability Directive (PLD)
 * Network and Information Security Directive (NIS2)
 
-Take a look at [chapter 5](https://www.sonatype.com/state-of-the-software-supply-chain/establishment-and-expansion-of-software-supply-chain-regulations-and-standards "chapter 5 ")of the report as governments around the world grapple with the sober fact that the compromise of software supply chains through software dependencies is the foremost emerging threat.
+Take a look at [chapter 5](https://www.sonatype.com/state-of-the-software-supply-chain/establishment-and-expansion-of-software-supply-chain-regulations-and-standards "chapter 5 ") of the report as governments around the world grapple with the sober fact that the compromise of software supply chains through software dependencies is the foremost emerging threat.
 
 #### Bath and the Open Source Baby
 
