@@ -163,7 +163,7 @@ themselves.** A dead link inside an article renders perfectly.
   otherwise goes green. The same 52 MB animated GIF was the header image of
   three different articles.
 
-**The part that keeps running.** One question groups the `scripts/` folders,
+**The part that keeps running.** One question groups the `../../../../../../scripts` folders,
 *does this still exist after cutover?*, because two of them disappear whole. The
 scrapers and the one-off repairs go in the bin the day we switch WordPress off.
 What stays behind is the Java that does the ongoing work:
@@ -229,7 +229,7 @@ automatically, and they are worth describing because they catch different
 classes of mistake.
 
 **On a pull request: your frontmatter and a full site build.** The check reads
-the article you added, including one still sitting in `draft/`, which nothing
+the article you added, including one still sitting in `../../../../../../draft`, which nothing
 else would look at. It fails on the things that otherwise fail *silently*: an
 author slug with no matching profile (the article renders, but never appears on
 your author page), a hero image naming a file you forgot to commit, two articles
@@ -388,7 +388,7 @@ one is a two-line fix upstream by whoever knows the new address.
 **Conferences work the other way round, because a conference has no feed.**
 Nobody subscribes to Devoxx in their calendar app the way they subscribe to a
 JUG, so those entries live in the repository as one small YAML file each, and
-anyone can add one with a pull request. Copy `template/event.yaml`, fill in the
+anyone can add one with a pull request. Copy `../../../../../../template/event.yaml`, fill in the
 name, the URL and the dates, open the PR. The frontmatter check reads it at
 review time and fails on a key it does not recognise, so `website:` instead of
 `url:` gets caught before a human looks at it rather than rendering an event
@@ -597,7 +597,7 @@ not need to be a Java Champion, and it does not need to be 3,000 words.
 - **Start here:**
   [How To Submit Your Next Article On Foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/)
 - **Or just read the templates:** the
-  [`template/` folder](https://github.com/foojayio/website/tree/main/template)
+  [`../../../../../../template` folder](https://github.com/foojayio/website/tree/main/template)
   holds everything you need. Copy a file, fill it in, open a pull request.
 - **Questions, or not sure your idea fits?** Ask in the
   [Foojay Slack](https://bit.ly/join-foojay-slack). The answer is usually yes.
