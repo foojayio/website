@@ -17,8 +17,9 @@
      THE NUMBERS come from data/views.json, refreshed from the Worker every six
      hours by .github/workflows/sync-view-counts.yml -- the same source as the
      view count on an article, so the two can never disagree. Keys are
-     `ad/<slug>/view` and `ad/<slug>/click` (worker/views/src/index.js AD_KEY),
-     posted by static/js/ad-carousel.js.
+     `ad-view/<slug>` and `ad-click/<slug>`, posted by static/js/ad-carousel.js
+     and accepted by the Worker's existing KEY rule -- banner counting needed no
+     change to worker/views/ and no redeploy. See the comment there.
 
      A ROW SURVIVES ITS FOLDER TOO. If a bundle is deleted outright rather than
      left to expire, its counts are still in the table and would otherwise
@@ -35,8 +36,8 @@
     {{ if $entry.IsDir }}
       {{ $slug := $entry.Name }}
       {{ $fm := partial "frontmatter.html" (printf "%s/%s/index.md" $dir $slug) }}
-      {{ $views := int (index $data (printf "ad/%s/view" $slug) | default 0) }}
-      {{ $clicks := int (index $data (printf "ad/%s/click" $slug) | default 0) }}
+      {{ $views := int (index $data (printf "ad-view/%s" $slug) | default 0) }}
+      {{ $clicks := int (index $data (printf "ad-click/%s" $slug) | default 0) }}
       {{ $ctr := 0.0 }}
       {{ if gt $views 0 }}{{ $ctr = mul (div (float $clicks) (float $views)) 100.0 }}{{ end }}
 
@@ -61,11 +62,14 @@
 
 {{/* Counted, but no folder left to describe it. */}}
 {{ range $key, $count := $data }}
-  {{ if hasPrefix $key "ad/" }}
-    {{ $slug := path.Dir (strings.TrimPrefix "ad/" $key) }}
-    {{ if not (in $seen $slug) }}
-      {{ $views := int (index $data (printf "ad/%s/view" $slug) | default 0) }}
-      {{ $clicks := int (index $data (printf "ad/%s/click" $slug) | default 0) }}
+  {{ $slug := "" }}
+  {{ if hasPrefix $key "ad-view/" }}{{ $slug = strings.TrimPrefix "ad-view/" $key }}{{ end }}
+  {{ if hasPrefix $key "ad-click/" }}{{ $slug = strings.TrimPrefix "ad-click/" $key }}{{ end }}
+  {{ with $slug }}
+    {{ if not (in $seen .) }}
+      {{ $slug := . }}
+      {{ $views := int (index $data (printf "ad-view/%s" $slug) | default 0) }}
+      {{ $clicks := int (index $data (printf "ad-click/%s" $slug) | default 0) }}
       {{ $ctr := 0.0 }}
       {{ if gt $views 0 }}{{ $ctr = mul (div (float $clicks) (float $views)) 100.0 }}{{ end }}
       {{ $rows = $rows | append (dict

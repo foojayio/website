@@ -24,14 +24,11 @@
  *                                site. Read at build time by
  *                                scripts/fetch/ViewCounts.java -> data/views.json.
  *   GET  /api/views/<key>        one page's total. Debugging convenience.
- *   POST /api/views/hit/ad/<slug>/view   one banner impression (see AD_KEY).
- *   POST /api/views/hit/ad/<slug>/click  one banner click-through.
  *   POST /api/views/seed         { "<key>": <count>, ... } -> the `legacy`
  *                                column. Bearer SEED_TOKEN. Re-runnable; see
  *                                scripts/transfer/LegacyViews.java --seed.
  *
- * A <key> is `<section>/<slug>` -- see KEY below. Banner counters are the one
- * exception, `ad/<slug>/view` and `ad/<slug>/click` -- see AD_KEY.
+ * A <key> is `<section>/<slug>` -- see KEY below.
  */
 
 /**
@@ -48,32 +45,6 @@
  * unbounded key would let anyone fill the table with junk rows.
  */
 const KEY = /^[a-z][a-z0-9-]{0,30}\/[a-z0-9][a-z0-9_-]{0,190}$/;
-
-/**
- * The home page and sidebar banners, counted in the SAME table as everything
- * else -- a banner impression and a page read are both "a thing happened once",
- * and a second table would be a second thing to back up, seed and reason about
- * for no gain. `ad/<slug>/view` and `ad/<slug>/click`, where <slug> is the
- * banner's folder under content/ads/.
- *
- * THREE SEGMENTS, which KEY does not allow, hence a regex of its own rather
- * than a loosening of that one: KEY bounds the shape of a PAGE key, and letting
- * it match anything with two slashes would quietly let `posts/a/b` into the
- * table as well. Two narrow rules beat one wide one where the table is
- * permanent and public.
- *
- * WHY view AND click ARE SEPARATE ROWS rather than two columns: `views` has one
- * integer per key and every reader of it -- /all, ViewCounts.java,
- * data/views.json, partials/views.html -- assumes exactly that. A second column
- * would have to be threaded through all four; a second row is understood by all
- * four today, and the ad-stats layout simply looks up two keys.
- *
- * A FINISHED CAMPAIGN KEEPS ITS ROWS. Hugo drops an expired banner from the
- * build entirely, so the numbers outlive the content they describe -- which is
- * exactly what a report to a sponsor needs, and why /ad-stats/ reads the data
- * rather than ranging over content/ads/.
- */
-const AD_KEY = /^ad\/[a-z0-9][a-z0-9_-]{0,190}\/(view|click)$/;
 
 const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
@@ -98,7 +69,7 @@ export default {
     if (request.method === "POST" && path.startsWith("hit/")) {
       return hit(request, env, path.slice(4));
     }
-    if (request.method === "GET" && (KEY.test(path) || AD_KEY.test(path))) return one(env, path);
+    if (request.method === "GET" && KEY.test(path)) return one(env, path);
 
     return json({ error: "not found" }, 404);
   },
@@ -106,7 +77,7 @@ export default {
 
 /** Count one view. Always 204: a beacon has nobody to report an error to. */
 async function hit(request, env, key) {
-  if (!KEY.test(key) && !AD_KEY.test(key)) return noContent();
+  if (!KEY.test(key)) return noContent();
   if (!originAllowed(request, env)) return noContent();
 
   await env.DB.prepare(

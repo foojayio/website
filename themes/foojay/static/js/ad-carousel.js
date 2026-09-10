@@ -153,7 +153,18 @@
   }
 
   /* IMPRESSIONS AND CLICKS, posted to the counter in worker/views/ under
-   * `ad/<slug>/view` and `ad/<slug>/click`.
+   * `ad-view/<slug>` and `ad-click/<slug>`.
+   *
+   * TWO PSEUDO-SECTIONS RATHER THAN `ad/<slug>/view`, which reads better but
+   * has three segments and would not match the Worker's KEY. That is not an
+   * oversight there: KEY deliberately bounds the SHAPE of a key instead of
+   * allow-listing section names, precisely so a new kind of counter needs no
+   * Worker change and no redeploy. Keeping to two segments is taking that
+   * offer -- banner counting went live against the Worker already running on
+   * foojay.io, with nothing to deploy and no window where a beacon is silently
+   * dropped. The cost is cosmetic: data/views.json groups all the impressions
+   * together and all the clicks together rather than pairing them per
+   * campaign.
    *
    * SEPARATE FROM init(), and called even when init() bails out. init()
    * returns early for a single-banner carousel (nothing to page through, so no
@@ -182,7 +193,7 @@
     if (!endpoint) return;                     /* unconfigured or local build */
 
     function post(key, event) {
-      var url = endpoint + '/hit/ad/' + encodeURIComponent(key) + '/' + event;
+      var url = endpoint + '/hit/ad-' + event + '/' + encodeURIComponent(key);
       if (navigator.sendBeacon) navigator.sendBeacon(url);
       else fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true }).catch(function () {});
     }
