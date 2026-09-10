@@ -96,6 +96,11 @@ Any block takes a caption: a line starting with a dot, directly above it.
 
 Numbered markers in the code, explained underneath. Markdown has no equivalent.
 
+Write the marker inside a comment for the language of the snippet -- `//` for
+Java, `#` for a shell or Python, `--` for SQL -- and the comment goes away in
+the rendered article, leaving a circled number in its place. Line the markers
+up in a column if you like; the padding in front of the comment is kept.
+
 [source,java]
 ----
 var list = new ArrayList<String>();   // <1>

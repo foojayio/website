@@ -85,8 +85,12 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {  // <1>
 <3> `join` waits for all of them, and rethrows the first failure.
 ------
 
-The markers line up with the explanation, and neither can drift out of step with
-the other when you edit the snippet later. The result looks like this:
+The marker goes inside a comment for the language of the snippet — `//` here,
+`#` in a shell or Python snippet, `--` in SQL — which is what keeps the file
+compiling if you paste the snippet back into an IDE to check it. The comment
+itself does not reach the reader: it becomes a circled number, and the markers
+line up with the explanation underneath, where neither can drift out of step
+with the other when you edit the snippet later. The result looks like this:
 
 [source,java]
 ----

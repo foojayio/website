@@ -2366,24 +2366,45 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 /* CALLOUTS: the <1> markers in a source block and the numbered list under it.
-   The marker is `<b class="conum">(1)</b>` -- plain text, parentheses included.
+   BOTH SIDES ARE DRAWN AS THE SAME CIRCLED DIGIT, and neither of them is drawn
+   here -- the point of this block is that one of them cannot be.
 
-   LEFT AS "(1)" RATHER THAN DRAWN AS A CIRCLED DIGIT. The circled form needs
-   the number in a `data-value` attribute to put back with ::after, and
-   asciidoctor only emits that attribute under `icons=font` -- which in the
-   same pass replaces every admonition's "Note"/"Warning" label with a Font
-   Awesome <i>, an icon font this site does not load and would have to start
-   loading on every article carrying a callout. A parenthesised number that is
-   legible everywhere beats a circled one that costs a webfont, so this only
-   colours what asciidoctor already wrote. */
-.prose .conum {
-  color: var(--brand-accent-strong);
-  font-family: var(--font-body); font-weight: 700;
+   INSIDE THE CODE BLOCK the marker is already the character ① by the time it
+   reaches the browser: partials/article-html.html swaps asciidoctor's
+   `<b class="conum">(1)</b>` for the glyph, because EnlighterJS rebuilds a
+   block from its textContent and no element survives that. So there is nothing
+   to style -- it inherits the code font like every other character in the
+   snippet -- and no `.conum` rule below, because no .conum element reaches the
+   page. (There was one, colouring the parenthesised form. It never matched.)
+
+   THE CIRCLE ASCIIDOCTOR DRAWS ITSELF IS NOT AVAILABLE EITHER WAY. It needs
+   the number in a `data-value` attribute to put back with ::after inside a
+   CSS-drawn circle, and asciidoctor only writes that attribute under
+   `icons=font` -- which in the same pass replaces every admonition's
+   "Note"/"Warning" label with a Font Awesome <i>, an icon font this site does
+   not load and would have to start loading on every article with a callout.
+
+   THE LIST THAT EXPLAINS THE MARKERS is numbered with the same glyphs rather
+   than with "1.", so the reader matches a shape to a shape instead of a shape
+   to a digit. @counter-style is unsupported on Safari before 17: there this
+   declaration is dropped and the list renders `decimal`, which is what it
+   showed until now and still lines up with the markers. Past ⑳ the fixed
+   system runs out and falls back to decimal on its own -- see the same limit,
+   and why it is not worth extending, in article-html.html. */
+@counter-style foojay-callout {
+  system: fixed;
+  symbols: "①" "②" "③" "④" "⑤" "⑥" "⑦" "⑧" "⑨" "⑩"
+           "⑪" "⑫" "⑬" "⑭" "⑮" "⑯" "⑰" "⑱" "⑲" "⑳";
+  suffix: " ";
 }
-/* The list that explains them: tighter than a prose list, and numbered to
-   match the markers rather than restarting the page's own numbering. */
 .prose .colist { font-size: .96rem; }
-.prose .colist > ol { padding-left: 1.6rem; }
+.prose .colist > ol { padding-left: 1.6rem; list-style-type: foojay-callout; }
+/* The same character comes out visibly smaller here than in the code block,
+   because the two resolve through different font stacks (--font-mono has the
+   glyph; --font-body falls through to whatever the system offers). Nudged up
+   so the marker and the thing it points at read as one pair. ::marker takes
+   font properties and little else, which is all this needs. */
+.prose .colist > ol > li::marker { font-size: 1.2em; }
 .prose .colist p { margin-bottom: 0; }
 .prose .colist li + li { margin-top: .35rem; }
 

@@ -25,11 +25,11 @@
        silently unrendered. Both callers go through partialCached on the same
        key, so the regex work happens once per page rather than twice.
 
-       WHAT IS LOST: a source block carrying AsciiDoc callouts keeps its <1>
-       markers as plain text inside the highlighted block rather than as
-       coloured .conum elements -- EnlighterJS re-renders from textContent and
-       drops the markup inside. The numbers still line up with the list beneath,
-       which is the part that carries the meaning. */ -}}
+       WHAT IS LOST: a source block carrying AsciiDoc callouts gets its <1>
+       markers as PLAIN TEXT -- a circled digit -- rather than as the .conum
+       elements asciidoctor writes, because EnlighterJS re-renders a block from
+       its textContent and drops any markup inside. See the callout section at
+       the bottom for what that costs and what it buys. */ -}}
 
 {{- $page := . -}}
 {{- $html := $page.Content -}}
@@ -93,27 +93,58 @@
     {{- $html = replaceRE `href="/([^/"])` (printf `href="%s$1` $base) $html -}}
   {{- end -}}
 
-  {{- /* CALLOUT MARKERS BACK TO PLAIN TEXT, across the whole article rather
-         than per block -- an untagged `----` block carries them too, and doing
-         it in one of the branches above left the other rendering the raw tag.
+  {{- /* CALLOUTS: `// <1>` AT THE END OF A CODE LINE BECOMES A CIRCLED DIGIT,
+         the way every other AsciiDoc-rendered site draws one. Done across the
+         whole article rather than per block -- an untagged `----` block carries
+         callouts too, and doing it inside one of the branches above left the
+         other one printing raw markup.
 
-         Asciidoctor writes a <1> marker as `<b class="conum">(1)</b>` INSIDE
-         the code. EnlighterJS does not read a block as text: it escapes the
+         Asciidoctor writes the marker as `<b class="conum">(1)</b>` INSIDE the
+         code, and EnlighterJS does not read a block as HTML: it escapes the
          markup it finds and prints it, so the reader saw a literal
-         `// <b class="conum">(1)</b>` at the end of the line. Reduced to
-         `(1)`, which is what the marker says anyway and what the numbered list
-         underneath refers to.
+         `// <b class="conum">(1)</b>` at the end of the line. A CHARACTER is
+         therefore the only form that survives -- U+2460 and up, which is the
+         glyph asciidoctor's own stylesheet imitates with a CSS circle, and
+         which the counter style on .colist reuses so the marker and the list
+         entry that explains it are the same shape.
 
-         The alternative was to leave callout blocks unhighlighted so the
-         markers keep their colour. Not worth it: it would make the one
-         construct AsciiDoc is most often reached for the one that does not
-         look like the rest of the site's code.
+         THE COMMENT MARKER IN FRONT OF IT GOES TOO. Asciidoctor drops `//`,
+         `#`, `--`, `;;` and an XML `<!--1-->` wrapper when it draws callouts as
+         icons, and dropping them here is what the AsciiDoc spec promises an
+         author who "types a comment according to the snippet language": the
+         comment is what hides the marker from a compiler reading the source,
+         not something to show the reader. Only the marker and one space go, so
+         a snippet that pads its callouts into a column stays in that column.
+
+         The cost is that a snippet copied out of a callout block pastes with a
+         circled digit where a comment used to be. Asciidoctor has the same
+         problem and solves it with `user-select: none` on the .conum element --
+         not available to us, since there is no element left by the time
+         EnlighterJS is done. A reader copying an ANNOTATED snippet is taking
+         the annotations with them either way.
 
          Safe to apply site-wide within the article: asciidoctor uses .conum
-         only inside a verbatim block, and the explanatory list underneath is a
-         plain <ol> with no conum in it (checked against the rendered page, not
-         assumed). */ -}}
-  {{- $html = replaceRE `<b class="conum">\(([0-9]+)\)</b>` "($1)" $html -}}
+         only inside a verbatim block, and the list underneath is a plain <ol>
+         with no conum in it (checked against the rendered page, not assumed).
+
+         XML FIRST, because `&lt;!--` ends in `--` and the line-comment rule
+         below would otherwise eat half of it and leave `&lt;!` behind. */ -}}
+  {{- $html = replaceRE `&lt;!--(<b class="conum">\([0-9]+\)</b>)--&gt;` "$1" $html -}}
+  {{- $html = replaceRE `(?://|#|--|;;) ?(<b class="conum">)` "$1" $html -}}
+
+  {{- /* ①-⑳, indexed by the marker's own number. Past 20 the parenthesised
+         form stays: a snippet with 21 annotations has a bigger problem than its
+         markers, and Unicode's circled digits stop being one uninterrupted run
+         of the same design shortly after (⑴ and ⒈ are separate series). */ -}}
+  {{- $circled := split "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳" "" -}}
+  {{- range $marker := findRE `<b class="conum">\([0-9]+\)</b>` $html -}}
+    {{- $n := int (replaceRE `[^0-9]` "" $marker) -}}
+    {{- if and (ge $n 1) (le $n (len $circled)) -}}
+      {{- $html = replace $html $marker (index $circled (sub $n 1)) -}}
+    {{- else -}}
+      {{- $html = replace $html $marker (printf "(%d)" $n) -}}
+    {{- end -}}
+  {{- end -}}
 
 {{- end -}}
 
