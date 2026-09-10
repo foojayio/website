@@ -5,4 +5,5 @@ link: "https://www.azul.com/jvm-drag-ai-infrastructure/"
 cta: "Download Now"
 image: "azul-jvm-drag.png"
 background: "#29184e"
+sponsor: "azul"
 ---

@@ -16,5 +16,6 @@ secondaryLink: "/sustainability-for-java-developers/"
 # foojay's own promotion, not a paid placement -- so no "Sponsored Content"
 # label. The live homepage renders the label on the other two slides and leaves
 # this one's empty.
+sponsor: "foojay"
 sponsored: false
 ---

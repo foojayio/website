@@ -5,4 +5,5 @@ link: "https://coderabbit.link/foojay-banner"
 cta: "Get Started!"
 image: "coderabbit.png"
 background: "#EEEEE3"
+sponsor: "coderabbit"
 ---
