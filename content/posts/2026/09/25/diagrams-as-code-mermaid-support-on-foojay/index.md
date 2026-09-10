@@ -1,5 +1,5 @@
 ---
-title: "Diagrams as Code: Mermaid Support on Foojay"
+title: "Diagrams as Code: Mermaid Support on the new Foojay"
 date: "2026-09-25"
 description: "Foojay articles now render Mermaid diagrams from a fenced code block. Write the diagram in Markdown, get a real diagram, and keep it reviewable in the pull request."
 authors:
