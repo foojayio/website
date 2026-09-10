@@ -152,6 +152,88 @@
     start();
   }
 
+  /* IMPRESSIONS AND CLICKS, posted to the counter in worker/views/ under
+   * `ad/<slug>/view` and `ad/<slug>/click`.
+   *
+   * SEPARATE FROM init(), and called even when init() bails out. init()
+   * returns early for a single-banner carousel (nothing to page through, so no
+   * arrows and no autoplay) -- but a lone banner is still shown and still
+   * clicked, and folding the counting into init() would report zero for
+   * exactly the case foojay runs most often between campaigns.
+   *
+   * AN IMPRESSION IS A SLIDE THE READER ACTUALLY SAW, not a page that happened
+   * to contain one. Posting for every banner on load would hand each sponsor
+   * the same number -- the page's own view count -- which says nothing about
+   * their campaign and is already on /ad-stats/ as the site total. So: at least
+   * half the slide in the viewport, held for a second, in a tab that is
+   * actually in front. The one-second hold is what keeps a fast scroll past the
+   * band from counting, and the visibility check keeps a backgrounded tab from
+   * counting a carousel that autoplayed to itself.
+   *
+   * ONCE PER SLIDE PER PAGE LOAD. The autoplay comes back around every seven
+   * seconds and would otherwise turn one reader into an impression a minute.
+   * Deliberately NOT the sessionStorage dedup partials/views-beacon.html uses:
+   * a reader who opens ten articles saw the banner ten times, and those are ten
+   * impressions -- what that guard exists to stop is one article counting twice
+   * on a refresh, which is not the same thing.
+   */
+  function counted(root) {
+    var endpoint = root.dataset.adEndpoint;
+    if (!endpoint) return;                     /* unconfigured or local build */
+
+    function post(key, event) {
+      var url = endpoint + '/hit/ad/' + encodeURIComponent(key) + '/' + event;
+      if (navigator.sendBeacon) navigator.sendBeacon(url);
+      else fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true }).catch(function () {});
+    }
+
+    var slides = root.querySelectorAll('[data-ad-key]');
+    for (var i = 0; i < slides.length; i++) {
+      (function (slide) {
+        var key = slide.dataset.adKey;
+        if (!key) return;
+
+        /* The primary CTA only. The optional second button is an INTERNAL link
+           (partials/ad-slide.html), so counting it would mix "went to the
+           advertiser" with "went to a foojay page" in the one number a sponsor
+           reads as click-through. */
+        var cta = slide.querySelector('.ad__btn:not(.ad__btn--ghost)');
+        if (cta) {
+          cta.addEventListener('click', function () { post(key, 'click'); });
+        }
+
+        /* No IntersectionObserver (a browser old enough that it also lacks
+           sendBeacon) means no impression rather than a guessed one. An
+           undercount is a number a sponsor can trust the direction of; a
+           guess is not. */
+        if (!window.IntersectionObserver) return;
+
+        var seen = false, hold = null;
+        var io = new IntersectionObserver(function (entries) {
+          for (var e = 0; e < entries.length; e++) {
+            var showing = entries[e].isIntersecting && entries[e].intersectionRatio >= 0.5;
+            if (showing && !seen && !hold) {
+              hold = setTimeout(function () {
+                hold = null;
+                if (seen || document.visibilityState !== 'visible') return;
+                seen = true;
+                io.disconnect();
+                post(key, 'view');
+              }, 1000);
+            } else if (!showing && hold) {
+              clearTimeout(hold);
+              hold = null;
+            }
+          }
+        }, { threshold: [0, 0.5, 1] });
+        io.observe(slide);
+      })(slides[i]);
+    }
+  }
+
   var roots = document.querySelectorAll('[data-ad-carousel]');
-  for (var i = 0; i < roots.length; i++) init(roots[i]);
+  for (var i = 0; i < roots.length; i++) {
+    counted(roots[i]);
+    init(roots[i]);
+  }
 })();

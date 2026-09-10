@@ -1,7 +1,7 @@
 {{- /* The carousel itself: the scroll-snap track, the slides and the controls.
 
        Params: ads (slice of ad Pages), variant ("wide" for the home page band,
-       "side" for the sidebar column).
+       "side" for the sidebar column), shuffle (bool -- see below).
 
        ONE definition, two placements. The home page band and the sidebar column
        are the same mechanism at two widths -- same snap behaviour, same arrows,
@@ -22,15 +22,64 @@
 
 {{- $ads := .ads -}}
 {{- $variant := .variant | default "wide" -}}
+{{- $shuffle := .shuffle | default false -}}
+{{- /* The endpoint is what switches banner counting on: unset in hugo.toml (a
+       local or unconfigured build) and no attribute is written, so
+       ad-carousel.js finds nothing to post to and a `hugo server` session never
+       inflates a sponsor's numbers. Same guard, and the same reason, as
+       partials/views-beacon.html. */ -}}
+{{- $endpoint := site.Params.views.endpoint -}}
 {{- with $ads }}
-<div class="ad-carousel ad-carousel--{{ $variant }}" data-ad-carousel>
+<div class="ad-carousel ad-carousel--{{ $variant }}" data-ad-carousel
+     {{- with $endpoint }} data-ad-endpoint="{{ . }}"{{ end }}
+     {{- if $shuffle }} data-ad-shuffle{{ end }}>
   <ul class="ad-carousel__track" data-ad-track>
     {{- range . }}
-    <li class="ad-carousel__slide">
+    {{- /* The banner's folder under content/ads/, which is what the counter
+           keys on -- NOT the title, which an editor rewrites mid-campaign, and
+           not a number, which nobody could read in data/views.json. The same
+           slug the ad-stats page turns back into a row. */}}
+    <li class="ad-carousel__slide" data-ad-key="{{ .File.ContentBaseName }}">
       {{ partial "ad-slide.html" (dict "page" . "class" (printf "ad--%s" $variant)) }}
     </li>
     {{- end }}
   </ul>
+  {{- if and $shuffle (gt (len .) 1) }}
+  {{- /* FAIRNESS ON THE ONE PAGE THAT CANNOT BE ROTATED SERVER-SIDE.
+         partials/ads-widget.html gives every post a different leading banner by
+         hashing its URL, so across ~2150 posts each campaign leads an even
+         share -- no JavaScript, correct in the HTML. The home page has ONE URL,
+         so that trick has nothing to vary on: whichever banner is first in
+         .Pages order leads every single home page impression, and with the
+         track only ever showing one slide at a time that is the difference
+         between a campaign being seen and not.
+
+         INLINE AND SYNCHRONOUS, immediately after the track it reorders, rather
+         than in static/js/ad-carousel.js (which is `defer` and therefore runs
+         after the parser is done and possibly after first paint). Here it runs
+         while the parser is still inside this <div>, so the shuffled order is
+         the FIRST thing painted -- no flash of the unshuffled order.
+
+         IT MOVES THE NODES rather than setting flex `order`, because
+         ad-carousel.js reads position out of DOM index and scroll offset: with
+         `order` the two would disagree and the arrows would jump.
+
+         With JavaScript off nothing runs and the static order stands, which is
+         a fair fallback rather than a broken one -- it is the same order the
+         sidebar would have used. */}}
+  <script>
+  (function () {
+    var track = document.currentScript.previousElementSibling;
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.children);
+    for (var i = slides.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = slides[i]; slides[i] = slides[j]; slides[j] = tmp;
+    }
+    for (var k = 0; k < slides.length; k++) track.appendChild(slides[k]);
+  })();
+  </script>
+  {{- end }}
 
   {{- /* One banner needs no arrows. */}}
   {{- if gt (len .) 1 }}

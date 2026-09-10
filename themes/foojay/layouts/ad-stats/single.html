@@ -1,0 +1,103 @@
+{{ define "main" }}
+{{/* Banner impressions and click-throughs, per campaign.
+
+     BUILT FROM THE DATA, NOT FROM content/ads/. Hugo drops a banner whose
+     expiryDate has passed out of the build entirely (see template/ad.md), so
+     ranging over the ad pages would show only what is running right now --
+     and the report a sponsor asks for is almost always for a campaign that has
+     already finished. The counter's rows outlive the content, so the rows are
+     what this page ranges over, and content/ads/ is consulted only to put a
+     headline next to a slug where one is still available.
+
+     data/views.json is refreshed from the Worker every six hours by
+     .github/workflows/sync-view-counts.yml, so these numbers are baked in at
+     build time and are at most a few hours behind. Same source as the "1.2k
+     views" on an article, so the two can never disagree.
+
+     Keys are `ad/<slug>/view` and `ad/<slug>/click` -- worker/views/src/index.js
+     AD_KEY, written by static/js/ad-carousel.js. */}}
+
+{{ $data := hugo.Data.views }}
+
+{{/* Both halves collected, so a banner with clicks but no recorded impressions
+     (possible with JavaScript partly blocked) is still a row rather than a
+     silent omission. */}}
+{{ $slugs := slice }}
+{{ range $key, $count := $data }}
+  {{ if hasPrefix $key "ad/" }}
+    {{ $rest := strings.TrimPrefix "ad/" $key }}
+    {{ if or (hasSuffix $rest "/view") (hasSuffix $rest "/click") }}
+      {{ $slug := path.Dir $rest }}
+      {{ $slugs = $slugs | append $slug }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $slugs = $slugs | uniq }}
+
+{{ $rows := slice }}
+{{ range $slugs }}
+  {{ $slug := . }}
+  {{ $views := int (index $data (printf "ad/%s/view" $slug) | default 0) }}
+  {{ $clicks := int (index $data (printf "ad/%s/click" $slug) | default 0) }}
+
+  {{/* The banner's own page while the campaign is live; nothing once it has
+       expired -- which is why the slug is the identity on this page and the
+       headline is only a nicety. */}}
+  {{ $title := $slug }}
+  {{ with site.GetPage (printf "/ads/%s" $slug) }}{{ $title = .Title }}{{ end }}
+
+  {{/* Not `cond`: it evaluates BOTH arms, so the zero-impression case would
+       still divide by zero and fail the build. */}}
+  {{ $ctr := 0.0 }}
+  {{ if gt $views 0 }}{{ $ctr = mul (div (float $clicks) (float $views)) 100.0 }}{{ end }}
+
+  {{ $rows = $rows | append (dict "slug" $slug "title" $title
+      "views" $views "clicks" $clicks "ctr" $ctr) }}
+{{ end }}
+{{ $rows = sort $rows "views" "desc" }}
+
+<article class="prose">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  {{ with $rows }}
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Campaign</th>
+        <th scope="col">Impressions</th>
+        <th scope="col">Clicks</th>
+        <th scope="col">CTR</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range . }}
+      <tr>
+        {{/* A finished campaign has no bundle left in the build, so its
+             headline is gone and `title` falls back to the slug -- printing
+             both would just say the same thing twice. */}}
+        <td>{{ if ne .title .slug }}{{ .title }}<br>{{ end }}<code>{{ .slug }}</code></td>
+        <td>{{ lang.FormatNumberCustom 0 .views }}</td>
+        <td>{{ lang.FormatNumberCustom 0 .clicks }}</td>
+        <td>{{ if gt .views 0 }}{{ lang.FormatNumberCustom 2 .ctr }}%{{ else }}&mdash;{{ end }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+  {{ else }}
+  <p>No banner has been counted yet. Impressions start appearing once
+     <code>[params.views] endpoint</code> is set and a banner has been on screen.</p>
+  {{ end }}
+
+  <h2>How these are counted</h2>
+  <p>An <strong>impression</strong> is a banner that was at least half on screen
+     for a full second, in a tab in the foreground, counted once per campaign per
+     page load. A <strong>click</strong> is a press of the banner's own call-to-action
+     button; the optional second button, which links to a foojay page rather than
+     to the advertiser, is not counted.</p>
+  <p>The counter stores a key and an integer &mdash; no cookie, no identifier, no
+     third-party script &mdash; so these are indicative totals rather than audited
+     ad-server figures. Readers with JavaScript disabled are not counted at all,
+     which means the true impression count is a little higher than the one shown.</p>
+</article>
+{{ end }}

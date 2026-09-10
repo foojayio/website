@@ -75,8 +75,12 @@
           compete with foojay.io for its own rankings.
        2. The search page has no server-rendered content of its own to rank on.
        3. The 404 -- GitHub Pages serves it with a 404 status, but it is
-          reachable at /404.html too. */}}
-  {{ $noindex := or $isTrial (eq .Type "search") (eq .Kind "404") }}
+          reachable at /404.html too.
+       4. /ad-stats/, the banner numbers. `build.list: never` already keeps it
+          out of sitemap.xml and the /sitemap/ page, but that only stops us
+          ADVERTISING the URL -- a crawler that reaches it from a referrer or a
+          shared link would index a page of sponsors' campaign results. */}}
+  {{ $noindex := or $isTrial (eq .Type "search") (eq .Kind "404") (eq .Type "ad-stats") }}
   {{ if $noindex }}<meta name="robots" content="noindex, nofollow">{{ end }}
 
   <meta property="og:site_name" content="foojay">

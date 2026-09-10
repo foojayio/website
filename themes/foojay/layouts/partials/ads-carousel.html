@@ -35,7 +35,9 @@
        carousel behind a modal, but the reader it interrupts is here for the
        articles, and /our-sponsors/ (linked from the footer, the nav and the
        sidebar) is where the prospectus and the contact address already live. */}}
-  {{ partial "ad-track.html" (dict "ads" . "variant" "wide") }}
+  {{/* shuffle: the home page is a single URL, so it cannot rotate the leading
+       banner the way ads-widget.html does per post. See ad-track.html. */}}
+  {{ partial "ad-track.html" (dict "ads" . "variant" "wide" "shuffle" true) }}
 </section>
 {{ partial "ad-carousel-js.html" . }}
 {{ end -}}
