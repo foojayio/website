@@ -1,0 +1,270 @@
+---
+title: "AsciiDoc Support on the new Foojay"
+date: "2026-09-27"
+description: "Foojay articles can now be written in AsciiDoc as well as Markdown. Named blocks, real tables, source callouts and admonitions — the things Markdown has no syntax for."
+authors:
+  - "frankdelporte"
+image: "asciidoc-support-on-foojay.svg"
+categories:
+  - "Foojay"
+related_posts:
+  - "diagrams-as-code-mermaid-support-on-foojay"
+  - "how-to-submit-your-next-article-on-foojay-io"
+---
+
+Markdown is a good default. It is easy to write, everybody already knows it, and
+for most articles it is exactly enough.
+
+For some articles it is not. If you have ever wanted to put a caption on a code
+block, number the interesting lines and explain them underneath, or set a
+warning apart from the paragraph before it, you have run into the edges of what
+Markdown can say — and reached for a pile of raw HTML instead.
+
+Large parts of the Java ecosystem document in
+https://asciidoc.org/[AsciiDoc] for exactly this reason. So posts here on the new Hugo-driven Foojay, can now be written in it too.
+Thanks to link:/today/author/brice-dutheil/[Brice Dutheil] for requesting
+this feature, and for naming exactly which parts of it he uses.
+
+== The short version
+
+Name your file `index.adoc` instead of `index.md`. That is the whole switch.
+
+[source]
+---
+content/posts/2026/10/09/my-article/
+├── index.adoc
+└── screenshot.png
+---
+
+The frontmatter block is identical — same `title`, `date`, `authors`,
+`categories`, same `---` fences. Images still sit next to the article. The same
+checks run on your pull request. Nothing else about submitting an article
+changes.
+
+== Named blocks
+
+A block can carry a title, written as a line starting with a dot:
+
+[source]
+------
+.Wiring the executor
+[source,java]
+----
+var executor = Executors.newVirtualThreadPerTaskExecutor();
+----
+------
+
+which renders as:
+
+.Wiring the executor
+[source,java]
+----
+var executor = Executors.newVirtualThreadPerTaskExecutor();
+----
+
+Any block takes one — tables, images, quotes — so a reader scrolling for "the
+one with the executor in it" has something to scroll for.
+
+== Callouts in source code
+
+This is the one that has no Markdown equivalent at all. Put numbered markers in
+the code and explain them beneath it:
+
+[source,subs="-callouts"]
+------
+[source,java]
+----
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {  // <1>
+    var user  = scope.fork(() -> findUser(id));                  // <2>
+    scope.join().throwIfFailed();                                // <3>
+    return user.get();
+}
+----
+<1> The scope owns every task forked inside it.
+<2> `fork` returns immediately; nothing has run yet.
+<3> `join` waits for all of them, and rethrows the first failure.
+------
+
+The markers line up with the explanation, and neither can drift out of step with
+the other when you edit the snippet later. The result looks like this:
+
+[source,java]
+----
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {  // <1>
+    var user  = scope.fork(() -> findUser(id));                  // <2>
+    scope.join().throwIfFailed();                                // <3>
+    return user.get();
+}
+----
+<1> The scope owns every task forked inside it.
+<2> `fork` returns immediately; nothing has run yet.
+<3> `join` waits for all of them, and rethrows the first failure.
+
+== Admonitions
+
+Admonitions are the labelled boxes that set a remark apart from the paragraph
+around it — AsciiDoc's word for them, and the one to search the docs with.
+Five kinds, each written as one word followed by a colon:
+
+[source,text]
+----
+NOTE: Virtual threads are not faster threads. They are cheaper threads.
+
+TIP: `jcmd <pid> Thread.dump_to_file` gives you every virtual thread.
+
+WARNING: A `synchronized` block still pins the carrier thread before JDK 24.
+
+CAUTION: Don't over-use these kind of blocks...
+
+IMPORTANT: This message gets really highlighted!
+----
+
+NOTE: Virtual threads are not faster threads. They are cheaper threads.
+
+TIP: `jcmd <pid> Thread.dump_to_file` gives you every virtual thread.
+
+WARNING: A `synchronized` block still pins the carrier thread before JDK 24.
+
+CAUTION: Don't over-use these kind of blocks...
+
+IMPORTANT: This message gets really highlighted!
+
+The text has to start on the same line as the label. It may then wrap over as
+many lines as it likes — but a label sitting alone on its line is not an
+admonition at all, it is a paragraph that happens to begin with the word "TIP:".
+
+So for anything with a blank line in it, use the other form: the label in
+square brackets on its own line, above a `====` block.
+
+[source]
+------
+[TIP]
+====
+Virtual threads are cheap to create but not free to block on. A thread parked
+on a `synchronized` monitor before JDK 24 pins its carrier thread, so a pool of
+platform threads underneath can still be exhausted by code that looks
+non-blocking.
+
+Reach for `ReentrantLock` where you would have written `synchronized`, and
+measure with `jcmd <pid> Thread.dump_to_file -format=json` before assuming
+which one you have.
+====
+------
+
+[TIP]
+====
+Virtual threads are cheap to create but not free to block on. A thread parked
+on a `synchronized` monitor before JDK 24 pins its carrier thread, so a pool of
+platform threads underneath can still be exhausted by code that looks
+non-blocking.
+
+Reach for `ReentrantLock` where you would have written `synchronized`, and
+measure with `jcmd <pid> Thread.dump_to_file -format=json` before assuming
+which one you have.
+====
+
+== Tables that do more than a grid
+
+Markdown tables are a grid of cells and nothing else. AsciiDoc tables set column
+widths, span cells, and align per column:
+
+[source]
+----
+.Garbage collectors at a glance
+[cols="<1,^1,>1,2", options="header"]
+|===
+| Collector | Generational | Typical pause | Best suited to
+
+| Serial | yes | 100ms+ | small heaps, single core
+| G1     | yes | ~200ms | the general case
+| ZGC    | yes | 1ms | large heaps, latency-sensitive services
+|===
+----
+
+.Garbage collectors at a glance
+[cols="<1,^1,>1,2", options="header"]
+|===
+| Collector | Generational | Typical pause | Best suited to
+
+| Serial | yes | 100ms+ | small heaps, single core
+| G1     | yes | ~200ms | the general case
+| ZGC    | yes | 1ms | large heaps, latency-sensitive services
+|===
+
+The `cols` attribute is doing all of it. The numbers are relative widths, so
+the last column is twice the width of the others because it holds twice the
+text. The symbol in front of each one sets the alignment: `<` left, `^` centre,
+`>` right — which is how the numbers line up under each other while the prose
+stays left.
+
+Cells span, too, which is the part Markdown has no answer for at all. A prefix
+before the `|` says how far a cell reaches: `3+|` spans three columns, `.2+|`
+spans two rows, and `2.2+|` does both.
+
+[source]
+----
+.JDK support windows
+[cols="1,1,2,1", options="header"]
+|===
+| Release | Type | Vendor support | Ends
+
+| Java 21 | LTS  .2+| every major vendor | 2031
+| Java 25 | LTS | 2035
+3+| Java 26 and 27 — non-LTS, six months each | 2027
+|===
+----
+
+.JDK support windows
+[cols="1,1,2,1", options="header"]
+|===
+| Release | Type | Vendor support | Ends
+
+| Java 21 | LTS  .2+| every major vendor | 2031
+| Java 25 | LTS | 2035
+3+| Java 26 and 27 — non-LTS, six months each | 2027
+|===
+
+"Every major vendor" is one cell spanning two rows, and the last row is one
+cell spanning three columns. Both cost a couple of characters.
+
+== Everything else stays the same
+
+Everything the site does around an article works the same way. The "On this
+page" navigation is built from your `==` headings. Images go in the article
+folder and are checked for weight and for alternative text. The frontmatter
+rules are the same rules, enforced by the same check on your pull request.
+Foojay's own shortcodes work too.
+
+Code is highlighted by the same highlighter, with the same language names, so
+`[source,kotlin]` here and a ```` ```kotlin ```` fence in a Markdown article
+come out looking identical.
+
+And link:/today/diagrams-as-code-mermaid-support-on-foojay/[Mermaid diagrams]
+work, as a source block like any other:
+
+[source]
+------
+[source,mermaid]
+----
+graph LR
+    A[Source] --> B[javac]
+    B --> C[Bytecode]
+----
+------
+
+[source,mermaid]
+----
+graph LR
+    A[Source] --> B[javac]
+    B --> C[Bytecode]
+----
+
+== Which should you use?
+
+Markdown, unless you have a reason. It is shorter for ordinary prose and a bit easier to review.
+
+Reach for AsciiDoc when the article is carrying real technical weight: a
+walkthrough where the code needs annotating line by line, a comparison that
+wants a proper table, a piece with enough warnings in it that they should look
+like warnings. That is what the format is for, and it is now one file extension
+away.

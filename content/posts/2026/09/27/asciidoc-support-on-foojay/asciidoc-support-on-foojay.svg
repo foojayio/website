@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img"
+     aria-label="An AsciiDoc source block with a callout marker and a NOTE admonition on the left, and the rendered result on the right.">
+  <title>AsciiDoc on foojay.io</title>
+  <!-- Hero for the AsciiDoc announcement post. Hand-authored SVG in the site's
+       own brand values (surface navy #0d1d2f ground, accent #50c2f7, amber
+       #f2951b for the admonition rule), deliberately the same construction and
+       the same palette as mermaid-support-on-foojay.svg: the two posts announce
+       the same kind of thing and should read as a pair in the article grid.
+       Not a screenshot, so it stays sharp at any size and carries no
+       theme-specific background of its own. -->
+  <defs>
+    <style>
+      .code { fill: #7fd3fb; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 24px; }
+      .dim  { fill: #5c87a6; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 24px; }
+      .conum{ fill: #f2951b; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 24px; font-weight: 700; }
+      .body { fill: #e9f6fe; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 24px; }
+      .lbl  { fill: #f2951b; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+              font-size: 19px; font-weight: 700; letter-spacing: .1em; }
+      .e    { stroke: #5c87a6; stroke-width: 2.5; fill: none; }
+      .kicker { fill: #50c2f7; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+                font-size: 24px; font-weight: 700; letter-spacing: .14em; }
+      .head { fill: #ffffff; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+              font-size: 62px; font-weight: 800; }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5c87a6"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0d1d2f"/>
+
+  <text class="kicker" x="80" y="96">DOCS-GRADE MARKUP</text>
+  <text class="head" x="80" y="168">AsciiDoc on foojay.io</text>
+
+  <!-- what an author types -->
+  <rect x="80" y="212" width="480" height="300" rx="12" fill="#08161f" stroke="#1f4160" stroke-width="2"/>
+  <text class="dim"   x="108" y="256">[source,java]</text>
+  <text class="dim"   x="108" y="292">----</text>
+  <text class="code"  x="108" y="328">var p = new Point(1, 2); <tspan class="conum">&lt;1&gt;</tspan></text>
+  <text class="dim"   x="108" y="364">----</text>
+  <text class="conum" x="108" y="400">&lt;1&gt; <tspan class="code">A record.</tspan></text>
+  <text class="dim"   x="108" y="452">NOTE: Worth knowing.</text>
+
+  <path class="e" d="M 588 362 H 648" marker-end="url(#a)"/>
+
+  <!-- what a reader gets -->
+  <rect x="676" y="212" width="444" height="300" rx="12" fill="#122b3f" stroke="#1f4160" stroke-width="2"/>
+  <rect x="700" y="240" width="396" height="112" rx="8" fill="#08161f" stroke="#1f4160" stroke-width="2"/>
+  <text class="code"  x="722" y="288">var p = new Point(1, 2);</text>
+  <circle cx="1058" cy="280" r="15" fill="#f2951b"/>
+  <text x="1058" y="288" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#0d1d2f">1</text>
+  <text class="body" x="700" y="392">1. A record.</text>
+  <rect x="700" y="418" width="396" height="70" rx="6" fill="#16334a"/>
+  <rect x="700" y="418" width="4" height="70" fill="#f2951b"/>
+  <text class="lbl"  x="722" y="446">NOTE</text>
+  <text class="body" x="722" y="476">Worth knowing.</text>
+</svg>

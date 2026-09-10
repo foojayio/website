@@ -160,6 +160,13 @@ public class BuiltSite {
                 // index.md/_index.md is a PAGE. Every other .md beside it is a
                 // resource -- 98 podcast episodes ship a transcript.md, and
                 // Hugo renders none of them as a page of their own.
+                //
+                // .adoc counts as a content file throughout: an AsciiDoc
+                // article builds a page like any other, so leaving it out
+                // would put a hole in THIS gate specifically -- the one that
+                // refuses a deploy when a source file produced no page. A
+                // .adoc post that failed to render would have deployed
+                // silently, which is the failure this class exists to stop.
                 new Section("posts", Path.of("content/posts"), "today/", true),
                 new Section("authors", Path.of("content/authors"), "today/author/", true),
                 new Section("sponsors", Path.of("content/sponsors"), "sponsor/", true),
@@ -170,7 +177,7 @@ public class BuiltSite {
             int found = 0, missing = 0, scheduled = 0;
             try (Stream<Path> walk = Files.walk(s.dir())) {
                 for (Path src : walk.filter(Files::isRegularFile)
-                        .filter(p -> p.getFileName().toString().endsWith(".md"))
+                        .filter(BuiltSite::isContentFile)
                         .filter(p -> !p.equals(s.dir().resolve("_index.md")))   // the section landing page
                         .filter(p -> s.bundles() == isBundleIndex(p))
                         .sorted().toList()) {
@@ -202,7 +209,7 @@ public class BuiltSite {
             int found = 0, missing = 0;
             try (Stream<Path> walk = Files.walk(pagesDir)) {
                 for (Path src : walk.filter(Files::isRegularFile)
-                        .filter(p -> p.getFileName().toString().endsWith(".md"))
+                        .filter(BuiltSite::isContentFile)
                         .filter(p -> !p.getFileName().toString().equals("_index.md"))
                         .sorted().toList()) {
                     String url = frontmatterValue(src, "url");
@@ -224,7 +231,14 @@ public class BuiltSite {
 
     static boolean isBundleIndex(Path p) {
         String n = p.getFileName().toString();
-        return n.equals("index.md") || n.equals("_index.md");
+        return n.equals("index.md") || n.equals("_index.md")
+                || n.equals("index.adoc") || n.equals("_index.adoc");
+    }
+
+    /** A file Hugo builds a page from: Markdown or AsciiDoc. */
+    static boolean isContentFile(Path p) {
+        String n = p.getFileName().toString();
+        return n.endsWith(".md") || n.endsWith(".adoc");
     }
 
     static void report(String label, int found, int missing, int scheduled) {
@@ -269,8 +283,11 @@ public class BuiltSite {
         String explicit = frontmatterValue(src, "slug");
         if (explicit != null) return explicit;
         if (isBundleIndex(src)) return src.getParent().getFileName().toString();
+        // The extension, whichever it is -- a hard-coded `- 3` was right only
+        // for ".md" and would have turned "term.adoc" into the slug "term.a".
         String name = src.getFileName().toString();
-        return name.substring(0, name.length() - 3);
+        int dot = name.lastIndexOf('.');
+        return dot > 0 ? name.substring(0, dot) : name;
     }
 
     // ---------------------------------------------------------------- check 2

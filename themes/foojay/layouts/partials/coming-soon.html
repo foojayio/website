@@ -60,7 +60,15 @@
           {{ $dayDir := printf "%s/%s" $monthDir $day.Name }}
           {{ range $bundle := os.ReadDir $dayDir }}
             {{ if $bundle.IsDir }}
-              {{ with partial "frontmatter.html" (printf "%s/%s/index.md" $dayDir $bundle.Name) }}
+              {{/* Either content file: an AsciiDoc article schedules exactly
+                   like a Markdown one, and reading only index.md would leave
+                   it out of "Coming soon" while it still publishes on its own
+                   date -- a silent inconsistency between the two formats. */}}
+              {{ $file := printf "%s/%s/index.md" $dayDir $bundle.Name }}
+              {{ if not (fileExists $file) }}
+                {{ $file = printf "%s/%s/index.adoc" $dayDir $bundle.Name }}
+              {{ end }}
+              {{ with partial "frontmatter.html" $file }}
                 {{/* The post's own `date:` decides, never the folder -- the
                      folder only narrows which files are worth opening. They
                      agree (checkPostDates enforces it), and if they ever did

@@ -1,0 +1,120 @@
+{{- /* A page's rendered body, with asciidoctor's code blocks translated into
+       the markup the rest of the site already uses.
+
+       Param: the Page. Returns: HTML. For a Markdown page it returns .Content
+       untouched and costs nothing.
+
+       WHY THIS EXISTS. Hugo's render hooks are a Goldmark feature. AsciiDoc
+       goes out to the asciidoctor binary instead, so _markup/render-codeblock.html
+       -- which is what turns ```java into an EnlighterJS block and ```mermaid
+       into a diagram -- never sees a .adoc article. The visible result was two
+       bugs with one cause: `[source,java]` rendered as unhighlighted grey text
+       while the same snippet in Markdown was coloured, and `[source,mermaid]`
+       rendered as a listing of its own diagram source.
+
+       Rewriting asciidoctor's HTML afterwards is the only hook available, and
+       it is a narrow one: three shapes in, the site's own two shapes out. The
+       LANGUAGE NAME is resolved through partials/code-language.html, the same
+       registry the Markdown hook uses, so `[source,kt]` and ```kt land on the
+       same lexer and cannot drift apart.
+
+       CALLED FROM baseof.html TOO, and that is not optional: baseof decides
+       whether to load mermaid.js by looking for `<pre class="mermaid">`, and
+       on a .adoc page that element does not exist until this partial has run.
+       Reading .Content there would find nothing and the diagram would sit
+       silently unrendered. Both callers go through partialCached on the same
+       key, so the regex work happens once per page rather than twice.
+
+       WHAT IS LOST: a source block carrying AsciiDoc callouts keeps its <1>
+       markers as plain text inside the highlighted block rather than as
+       coloured .conum elements -- EnlighterJS re-renders from textContent and
+       drops the markup inside. The numbers still line up with the list beneath,
+       which is the part that carries the meaning. */ -}}
+
+{{- $page := . -}}
+{{- $html := $page.Content -}}
+
+{{- if and $page.File (eq $page.File.Ext "adoc") -}}
+
+  {{- /* Diagrams first, for the same reason the Markdown hook takes them
+         first: mermaid is not a language and must not reach the highlighter. */ -}}
+  {{- range $block := findRE `(?s)<pre class="highlight"><code class="language-mermaid"[^>]*>.*?</code></pre>` $html -}}
+    {{- $inner := replaceRE `(?s)^<pre[^>]*><code[^>]*>(.*?)</code></pre>$` "$1" $block -}}
+    {{- $html = replace $html $block (printf `<pre class="mermaid">%s</pre>` $inner) -}}
+  {{- end -}}
+
+  {{- /* Then every other tagged block. */ -}}
+  {{- range $block := findRE `(?s)<pre class="highlight"><code class="language-[^"]+"[^>]*>.*?</code></pre>` $html -}}
+    {{- $tag := replaceRE `(?s)^<pre[^>]*><code class="language-([^"]+)".*$` "$1" $block -}}
+    {{- $inner := replaceRE `(?s)^<pre[^>]*><code[^>]*>(.*?)</code></pre>$` "$1" $block -}}
+    {{- $lang := partial "code-language.html" $tag -}}
+    {{- $html = replace $html $block (printf `<pre class="EnlighterJSRAW" data-enlighter-language="%s">%s</pre>` $lang $inner) -}}
+  {{- end -}}
+
+  {{- /* And the untagged ones. A `----` block with no [source] attribute gets
+         no <code> wrapper and no class at all -- just a bare <pre> inside the
+         listingblock -- so it needs its own rule, anchored on that wrapper so
+         the pattern cannot reach a <pre> anywhere else on the page. `generic`
+         is what an untagged ``` fence gets in Markdown, so the two agree. */ -}}
+  {{- $html = replaceRE `(?s)<pre class="highlight"><code>(.*?)</code></pre>` `<pre class="EnlighterJSRAW" data-enlighter-language="generic">$1</pre>` $html -}}
+  {{- $html = replaceRE `(?s)(<div class="listingblock">\s*<div class="content">\s*)<pre>(.*?)</pre>` `${1}<pre class="EnlighterJSRAW" data-enlighter-language="generic">$2</pre>` $html -}}
+
+  {{- /* LINKS. _markup/render-link.html is a Goldmark hook too, so an AsciiDoc
+         article gets none of it -- and one of its four jobs is load-bearing:
+         a root-relative `/today/...` link needs the baseURL subpath, or it
+         points at the host root and 404s on every deploy served under a path
+         (the trial site at foojayio.github.io/website/, and any preview).
+         An author writing the same link in Markdown gets it rewritten, so
+         without this the two formats disagree about what `/today/x/` means.
+
+         Absolute foojay.io links -- what a contributor gets by copying a URL
+         out of the address bar -- are folded into the same rewrite rather than
+         left pointing at the live WordPress site, matching job 1 of the hook.
+
+         Only when there IS a subpath: in production relURL "/" is "/" and
+         every link is already correct, so the whole block is skipped rather
+         than rewriting hrefs to identical values on 4000 pages.
+
+         RE2 has no negative lookahead, hence `([^/"])` to hold the character
+         after the slash -- it is what keeps a protocol-relative `//host/path`
+         from being mangled into the site's own base path.
+
+         NOT DONE HERE: target/rel on external links, the hook's job 3.
+         AsciiDoc says that at the source with a `^` suffix -- `https://x[text^]`
+         -- which is the author's choice to make and is what template/post.adoc
+         documents. */ -}}
+  {{- /* relURL "" and NOT relURL "/": relURL leaves a path that already starts
+         with a slash alone, so relURL "/" is "/" on every deploy and the guard
+         below would never fire. The link hook hits the same trap and works
+         around it the same way (`strings.TrimPrefix "/" | relURL`). */ -}}
+  {{- $base := relURL "" -}}
+  {{- if ne $base "/" -}}
+    {{- $html = replaceRE `href="(?:https?:)?//(?:www\.)?foojay\.io/` (printf `href="%s` $base) $html -}}
+    {{- $html = replaceRE `href="/([^/"])` (printf `href="%s$1` $base) $html -}}
+  {{- end -}}
+
+  {{- /* CALLOUT MARKERS BACK TO PLAIN TEXT, across the whole article rather
+         than per block -- an untagged `----` block carries them too, and doing
+         it in one of the branches above left the other rendering the raw tag.
+
+         Asciidoctor writes a <1> marker as `<b class="conum">(1)</b>` INSIDE
+         the code. EnlighterJS does not read a block as text: it escapes the
+         markup it finds and prints it, so the reader saw a literal
+         `// <b class="conum">(1)</b>` at the end of the line. Reduced to
+         `(1)`, which is what the marker says anyway and what the numbered list
+         underneath refers to.
+
+         The alternative was to leave callout blocks unhighlighted so the
+         markers keep their colour. Not worth it: it would make the one
+         construct AsciiDoc is most often reached for the one that does not
+         look like the rest of the site's code.
+
+         Safe to apply site-wide within the article: asciidoctor uses .conum
+         only inside a verbatim block, and the explanatory list underneath is a
+         plain <ol> with no conum in it (checked against the rendered page, not
+         assumed). */ -}}
+  {{- $html = replaceRE `<b class="conum">\(([0-9]+)\)</b>` "($1)" $html -}}
+
+{{- end -}}
+
+{{- return ($html | safeHTML) -}}

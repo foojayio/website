@@ -23,41 +23,10 @@
        EnlighterJS name here, and anything unrecognised degrades to `generic`
        rather than breaking the block. */ -}}
 
-{{- $alias := dict
-      "sh" "shell" "bash" "shell" "zsh" "shell" "console" "shell" "shell-session" "shell"
-      "js" "javascript" "node" "javascript" "mjs" "javascript"
-      "ts" "typescript"
-      "py" "python"
-      "kt" "kotlin" "kts" "kotlin"
-      "rb" "ruby"
-      "cs" "csharp" "c#" "csharp"
-      "golang" "go"
-      "c" "cpp" "c++" "cpp" "cc" "cpp" "h" "cpp" "hpp" "cpp"
-      "md" "markdown"
-      "bat" "batch" "cmd" "batch"
-      "gradle" "groovy"
-      "properties" "ini" "conf" "ini" "toml" "ini"
-      "asm" "assembly" "nasm" "assembly"
-      "docker" "dockerfile"
-      "ps" "powershell" "ps1" "powershell"
-      "postgres" "postgresql" "psql" "postgresql" "mysql" "mariadb"
-      "html" "xml" "htm" "xml" "xhtml" "xml" "svg" "xml" "xsl" "xml" "xsd" "xml"
-      "pom" "xml" "yml" "yaml"
-      "vb" "visualbasic" "vbnet" "visualbasic" "vba" "visualbasic"
--}}
 
 {{- /* EnlighterJS's own registry -- a fence tag in this list is passed straight
        through. Anything else (yaml, xml, html, json5, cypher, ...) becomes
        `generic`. */ -}}
-{{- $supported := slice
-      "abap" "apache" "assembly" "avrassembly" "batch" "cordpro" "cpp" "csharp"
-      "css" "cython" "dart" "diff" "dockerfile" "generic" "go" "groovy" "ini"
-      "java" "javascript" "json" "jsx" "kotlin" "latex" "less" "lighttpd" "lua"
-      "mariadb" "markdown" "matlab" "mssql" "nginx" "nsis" "oracledb" "php"
-      "postgresql" "powershell" "prolog" "purebasic" "python" "qml" "r" "raw"
-      "routeros" "ruby" "rust" "scala" "scss" "shell" "sql" "squirrel" "swift"
-      "typescript" "verilog" "vhdl" "visualbasic" "xml" "yaml"
--}}
 
 {{- $tag := lower (trim (.Type | default "") " ") -}}
 
@@ -82,8 +51,7 @@
 <pre class="mermaid">{{ htmlEscape .Inner | safeHTML }}</pre>
 {{- else -}}
 
-{{- $lang := index $alias $tag | default $tag -}}
-{{- if not (in $supported $lang) }}{{ $lang = "generic" }}{{ end -}}
+{{- $lang := partial "code-language.html" $tag -}}
 
 {{- /* .Inner is the raw code. htmlEscape is what keeps a snippet containing
        </pre> or <script> from escaping the block; EnlighterJS un-escapes it

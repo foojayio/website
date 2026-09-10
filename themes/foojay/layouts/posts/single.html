@@ -37,26 +37,34 @@
       <h1>{{ .Title }}</h1>
 
       <div class="post-meta">
+        {{/* AUTHOR FIRST, THEN DATE, matching post-card.html's meta line -- the
+             byline here and the byline on this post's own card are the same
+             partial with the same options, so they should not also be in a
+             different order. The card puts the face and the name first because
+             they are what make a post feel written by somebody; that holds just
+             as well under the title.
+
+             Wrapped so the "·" separator (.post-meta > * + *::before) attaches
+             to this span, not to the author <a> inside -- otherwise the dot
+             becomes part of the clickable, underlined link.
+
+             pagefindMeta: this byline is the post's OWN, so it becomes the
+             "author" meta key search/single.html shows beside the date. Only
+             here -- see byline.html for why the flag is opt-in, and for why the
+             collapsed multi-author form has to stamp the names explicitly. */}}
+        {{ partial "byline.html" (dict "page" . "pagefindMeta" true "avatars" true) }}
         {{/* data-pagefind-meta captures the ISO datetime attribute as the
              "date" meta key (see search/single.html), so search results can
              show/sort by date without Pagefind having to parse the display
              text. */}}
         <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]">{{ .Date.Format "Jan 2, 2006" }}</time>
-        {{/* Wrapped so the "·" separator (.post-meta > * + *::before) attaches to
-             this span, not to the author <a> inside -- otherwise the dot becomes
-             part of the clickable, underlined link.
-
-             pagefindMeta: this byline is the post's OWN, so it becomes the
-             "author" meta key search/single.html shows beside the date. Only
-             here -- see byline.html for why the flag is opt-in. */}}
-        {{ partial "byline.html" (dict "page" . "pagefindMeta" true) }}
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>
     </header>
 
     <div class="prose">
-      {{ .Content }}
+      {{ partialCached "article-html.html" . .RelPermalink }}
     </div>
 
     {{/* THE EPISODE TRANSCRIPT, and it is here because the FILE is here: a
@@ -99,6 +107,10 @@
            index.md to fix it would be sending them to the wrong file. That is
            what source-url.html's "file" argument is for. */}}
       <p class="transcript__note">Automatically generated from the audio, so it can contain errors in names and technical terms.{{ with partial "source-url.html" (dict "page" $ "file" "transcript.md") }} <a href="{{ . }}" target="_blank" rel="nofollow noopener">Suggest a correction</a>.{{ end }}</p>
+      {{/* .Content directly, NOT partials/article-html.html: inside this `with`
+           the dot is the transcript RESOURCE, not a Page. The partial takes a
+           Page (it reads .File.Ext), and a transcript is always Markdown
+           anyway, so there is nothing here for it to translate. */}}
       {{ .Content }}
     </section>
     {{ end }}

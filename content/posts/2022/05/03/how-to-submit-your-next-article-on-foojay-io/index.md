@@ -1,7 +1,7 @@
 ---
 title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-09-04T00:00:00+00:00"
+lastmod: "2026-09-10T00:00:00+00:00"
 description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"
@@ -42,9 +42,9 @@ The `avatarFull:` field next to it is **optional**: set it only if you have a la
 Each article lives in its own folder that holds an `index.md` file (your article) and any images it uses, all together.
 
 1. **Create a folder** named with the URL "slug" you want for your article — lowercase, words separated by dashes. For example a folder called `my-first-java-record` becomes the URL `/today/my-first-java-record/`.
-2. **Copy `template/post.md`** (from the repository's `template/` folder) into your new folder and rename it to `index.md`. It contains every frontmatter field with comments explaining how to fill it in.
-3. **Fill in the frontmatter** at the top of `index.md`: `title`, `date`, `description`, your `authors` slug(s), and `categories`. The `template/categories.md` file lists the categories already in use — please reuse an existing one where it fits.
-4. **Write your article** below the frontmatter in [Markdown](https://www.markdownguide.org/basic-syntax/). Start your section headings at `##` — do **not** add a top-level `#` heading, because the `title` is already shown as the page heading. The template includes examples of headings, code blocks, images, tables, and shortcodes (for example `{{</* youtube VIDEO_ID */>}}` to embed a video).
+2. **Copy a starter template** (from the repository's `template/` folder) into your new folder. Either format works: copy `template/post.md` and rename it to `index.md` to write in Markdown, or copy `template/post.adoc` and rename it to `index.adoc` to write in AsciiDoc. Both contain every frontmatter field with comments explaining how to fill it in. Markdown is the shorter of the two and what most articles use; AsciiDoc is worth it when you want captions on code blocks, numbered callouts inside a snippet, admonitions, or tables that span cells.
+3. **Fill in the frontmatter** at the top of the file: `title`, `date`, `description`, your `authors` slug(s), and `categories`. This part is identical in both formats — same fields, same `---` fences, whether the file is `index.md` or `index.adoc`. The `template/categories.md` file lists the categories already in use — please reuse an existing one where it fits.
+4. **Write your article** below the frontmatter, in [Markdown](https://www.markdownguide.org/basic-syntax/) or in [AsciiDoc](https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/) depending on the template you started from. Start your section headings at `##` in Markdown, or at `==` in AsciiDoc — in neither case add a top-level heading of your own, because the `title` is already shown as the page heading. Each template includes examples of headings, code blocks, images, tables and shortcodes (for example `{{</* youtube VIDEO_ID */>}}` to embed a video) written in its own syntax.
 5. **Add your images** into the same folder and reference them by filename, e.g. `![The Ports view in IntelliJ, showing the app on port 8080](diagram.png)`. The text in the square brackets is the image's *description*, not a caption: it is the only part of the image a reader using a screen reader gets, so write what the image shows.
 6. **Set the preview image.** The `image:` field in the frontmatter is your article's card on the home page and in the article overviews, and the picture that appears when your post is shared on social media, so every article needs one. Put the file in the same folder and reference it by filename. The ideal file is **1600 x 900 pixels (16:9), JPEG, under 300 KB**:
     - **16:9** is exactly the shape of the large card on the home page, and it crops cleanly to the smaller cards and to the social preview. All of those crop from the centre outwards, so keep anything that has to stay readable — text, logos, faces — away from the edges. The 1600 pixel width is for the social preview; the site itself never needs more than that.

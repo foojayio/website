@@ -14,7 +14,7 @@
     {{ with partial "views.html" . }}<div class="post-meta">{{ . | safeHTML }}</div>{{ end }}
 
     <div class="prose">
-      {{ .Content }}
+      {{ partialCached "article-html.html" . .RelPermalink }}
     </div>
 
     {{ partial "page-source.html" . }}

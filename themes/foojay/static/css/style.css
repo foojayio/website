@@ -115,6 +115,23 @@
      --tier-gold: that token means "gold sponsor" and nothing else. */
   --feed:           #e8590c;
 
+  /* THE TWO ADMONITION SEVERITIES THAT HAD NO COLOUR OF THEIR OWN. An AsciiDoc
+     article has five (NOTE, TIP, IMPORTANT, WARNING, CAUTION) and the palette
+     had four usable accents, so WARNING and CAUTION were both mapped to --feed
+     and rendered identically -- two different severities the reader could not
+     tell apart, which is the one thing an admonition exists to do.
+     Semantic rather than single-use names: any future alert or banner wants
+     the same two.
+
+     MEASURED AGAINST THE ADMONITION GROUND (--surface-sunken #edf9fe), not
+     against white, because that is what the label actually sits on:
+     --warning 5.13, --caution 5.50, both clear of 4.5. Reusing --feed would
+     have measured 3.34 there -- it is tuned for the RSS mark on
+     --page-head-bg, a different ground and a different job, which is the same
+     reason its own comment gives for not being --tier-gold. */
+  --warning:        #b34700;
+  --caution:        #8b5a00;
+
   /* Type */
   --font-display: "Barlow", "Segoe UI", system-ui, sans-serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -1240,6 +1257,23 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .post-single .post-hero, .post-single img {
   width: 100%; border-radius: var(--radius); margin: 1.5rem 0;
 }
+/* THE BYLINE PORTRAIT IS NOT AN ARTICLE IMAGE. The rule above is for pictures
+   in the body, but `.post-single img` is a class PLUS a type selector (0,1,1)
+   and reaches every <img> on the page -- including the author face in the
+   header, whose own `.byline-avatar` is only (0,1,0). So the portrait lost its
+   1.9rem box, stretched to the full width of its flex item and took a 1.5rem
+   margin with it.
+
+   BOTH FORMS BROKE, not just the single-author one it was reported on.
+   `.byline-faces .byline-avatar` (0,2,0) does outrank the broad rule, but it
+   declares only box-shadow and display -- the SIZE still came from the plain
+   `.byline-avatar`, so the pile's faces stretched as well. Hence this override
+   is on `.byline-avatar` inside .post-single rather than on the single-author
+   case alone: one rule, both bylines. The same specificity trap the
+   .sitemap-table, .site-table and .tableblock rules each document. */
+.post-single .byline-avatar {
+  width: 1.9rem; height: 1.9rem; margin: 0; border-radius: 50%;
+}
 .post-single h2, .post-single h3 { margin-top: 2rem; }
 .post-single .post-categories { margin-top: 1.75rem; }
 
@@ -2236,6 +2270,123 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose th, .prose td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); }
 .prose th { font-family: var(--font-display); color: var(--ink); }
 
+/* --------------------------------------------------------------------------
+   ASCIIDOC OUTPUT (.adoc articles, rendered by asciidoctor -- see hugo.toml
+   [security.exec] for why the binary is named there).
+
+   Asciidoctor emits its own class vocabulary, and none of it is Goldmark's.
+   Everything here exists because a real block came out looking wrong without
+   it -- checked against a probe article carrying the four constructs the
+   feature was actually asked for: named blocks, tables, callouts and
+   admonitions.
+
+   SPACING FIRST, because it is the one that looks like nothing is wrong.
+   Asciidoctor wraps every section in `.sect1 > .sectionbody`, so `.prose > * +
+   *` (the rule that spaces a Markdown article out) only ever sees a stack of
+   .sect1 divs -- everything INSIDE a section is a grandchild and got no
+   spacing at all. Paragraphs survived on the global `p { margin-bottom }`;
+   code blocks, tables and admonitions, which are bare <div>s, did not.
+   -------------------------------------------------------------------------- */
+.prose .sectionbody > * + *,
+.prose .sect1 + .sect1,
+.prose .sect2 + .sect2 { margin-top: 1.1em; }
+
+/* AN ADMONITION IS A <table> IN ASCIIDOCTOR'S HTML -- two cells, label and
+   body. Left alone it inherits `.prose table` (full width, collapsed borders)
+   and `.prose td` (a bottom rule on every cell), i.e. it renders as a bordered
+   two-column data table containing the word "Note". Unpicking that is what
+   most of this block is.
+
+   Laid out as BLOCKS rather than as a table: the label sits above the body
+   instead of in a narrow first column, which needs no width guess, cannot
+   squeeze the text into a ribbon on a phone, and reads in the right order when
+   a screen reader linearises it. */
+.prose .admonitionblock {
+  border-left: 3px solid var(--admonition-accent, var(--brand-accent-strong));
+  background: var(--surface-sunken);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: .9rem 1.1rem;
+}
+.prose .admonitionblock table,
+.prose .admonitionblock tbody,
+.prose .admonitionblock tr,
+.prose .admonitionblock td { display: block; width: auto; }
+/* The bottom rule `.prose th, .prose td` puts on every cell, and its padding:
+   both are for data tables and neither belongs on a callout. */
+.prose .admonitionblock td { border-bottom: 0; padding: 0; }
+.prose .admonitionblock td.icon { margin-bottom: .35rem; }
+.prose .admonitionblock td.icon .title {
+  font-family: var(--font-display); font-size: .78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--admonition-accent, var(--brand-accent-strong));
+}
+.prose .admonitionblock td.content > :last-child { margin-bottom: 0; }
+/* One custom property per severity rather than five near-identical rule sets.
+   All five differ: WARNING and CAUTION shared --feed at first, on the reasoning
+   that the palette had no severity colours and inventing one would be an accent
+   nobody else could reuse -- but two severities rendering identically defeats
+   the point of labelling them separately, so --warning and --caution are now
+   real palette tokens. See their definition for the contrast measurements. */
+.prose .admonitionblock.note      { --admonition-accent: var(--brand-accent-strong); }
+.prose .admonitionblock.tip       { --admonition-accent: var(--tag-text); }
+.prose .admonitionblock.important { --admonition-accent: var(--brand-secondary); }
+.prose .admonitionblock.warning   { --admonition-accent: var(--warning); }
+.prose .admonitionblock.caution   { --admonition-accent: var(--caution); }
+
+/* TABLE CELL ALIGNMENT. `[cols="<1,^1,>1"]` makes asciidoctor put
+   halign-left / halign-center / halign-right (and valign-*) on every cell --
+   and then nothing happened, because `.prose th, .prose td` sets
+   `text-align: left` and is a class PLUS a type selector, which outranks a
+   bare `.halign-center`. The same specificity trap the .sitemap-table and
+   .site-table rules document, hit for the third time.
+
+   Written class-on-class, and scoped to .tableblock so these generic-sounding
+   names cannot reach anything else. */
+.prose .tableblock.halign-left   { text-align: left; }
+.prose .tableblock.halign-center { text-align: center; }
+.prose .tableblock.halign-right  { text-align: right; }
+.prose .tableblock.valign-top    { vertical-align: top; }
+.prose .tableblock.valign-middle { vertical-align: middle; }
+.prose .tableblock.valign-bottom { vertical-align: bottom; }
+
+/* The caption on a named block -- `.A named code block` above a source block,
+   which is half of why people reach for AsciiDoc. Scoped to the block types
+   that carry one: `.title` is far too generic a class to style loose, and
+   asciidoctor also uses it for the admonition label handled above. */
+.prose .listingblock > .title,
+.prose .exampleblock > .title,
+.prose .imageblock > .title,
+.prose .literalblock > .title {
+  font-family: var(--font-display); font-size: .9rem; font-weight: 600;
+  color: var(--ink-muted); margin-bottom: .4rem;
+}
+.prose table.tableblock > caption.title {
+  text-align: left; font-family: var(--font-display); font-size: .9rem;
+  font-weight: 600; color: var(--ink-muted); margin-bottom: .4rem;
+}
+
+/* CALLOUTS: the <1> markers in a source block and the numbered list under it.
+   The marker is `<b class="conum">(1)</b>` -- plain text, parentheses included.
+
+   LEFT AS "(1)" RATHER THAN DRAWN AS A CIRCLED DIGIT. The circled form needs
+   the number in a `data-value` attribute to put back with ::after, and
+   asciidoctor only emits that attribute under `icons=font` -- which in the
+   same pass replaces every admonition's "Note"/"Warning" label with a Font
+   Awesome <i>, an icon font this site does not load and would have to start
+   loading on every article carrying a callout. A parenthesised number that is
+   legible everywhere beats a circled one that costs a webfont, so this only
+   colours what asciidoctor already wrote. */
+.prose .conum {
+  color: var(--brand-accent-strong);
+  font-family: var(--font-body); font-weight: 700;
+}
+/* The list that explains them: tighter than a prose list, and numbered to
+   match the markers rather than restarting the page's own numbering. */
+.prose .colist { font-size: .96rem; }
+.prose .colist > ol { padding-left: 1.6rem; }
+.prose .colist p { margin-bottom: 0; }
+.prose .colist li + li { margin-top: .35rem; }
+
 /* A wide data table scrolls INSIDE ITS OWN BOX rather than taking the page
    with it (see the templates for the measurements). Only below 60rem: on a
    desktop both tables fit, and a scroll container there would needlessly clip
@@ -2497,6 +2648,10 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
   /* 6.66 on --page-head-bg, 7.74 on --surface. */
   --feed:           #ff922b;
+  /* Lifted off the dark ground the same way every other accent here is:
+     6.66 and 7.65 on --surface-sunken #1d292f. */
+  --warning:        #ff922b;
+  --caution:        #e3b341;
 
   --footer-bg:     #0a1114;
   --footer-fg:     #a9b9c1;

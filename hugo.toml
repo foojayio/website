@@ -71,7 +71,29 @@ enableGitInfo = true
 [taxonomies]
   category = "categories"
 
+# AsciiDoc is rendered by the `asciidoctor` binary, which Hugo runs as an
+# external process -- and Hugo refuses to run any binary not named here. The
+# default list is sass/go/git/node/postcss; naming one REPLACES that list
+# rather than adding to it, so all five are repeated below. Without the entry
+# the build does not silently skip .adoc files, it FAILS with "access denied"
+# -- the loud failure is the right one and is why this is config rather than a
+# flag someone has to remember.
+#
+# GEM_HOME/GEM_PATH are in osEnv because Hugo hands the child process a
+# FILTERED environment, and the default filter drops them. CI installs the gem
+# to the default location and does not need it, but a developer machine with
+# rbenv or a user gem dir does: without it asciidoctor starts and then cannot
+# find its own gem, which reads as a broken Ruby rather than a Hugo setting.
+[security]
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^asciidoctor$']
+    osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|PROGRAMDATA|GEM_(HOME|PATH))$']
+
 [markup]
+  [markup.asciidocExt]
+    [markup.asciidocExt.attributes]
+      toc = "auto"
+
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true

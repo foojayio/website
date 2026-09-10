@@ -1,0 +1,53 @@
+{{- /* A code-fence tag -> the language name the vendored EnlighterJS build
+       knows, or "generic".
+
+       EXTRACTED SO THERE IS ONE COPY. It was inline in render-codeblock.html
+       until AsciiDoc arrived: asciidoctor does not go through Hugo's render
+       hooks, so partials/article-html.html has to resolve `[source,kt]` to the
+       same lexer that ```kt resolves to. Two copies of a 57-language registry
+       would disagree the first time anyone added an alias to one of them.
+
+       Takes the raw tag (string), returns a lowercase language name.
+
+       `mermaid` is NOT special-cased here -- it is a diagram, not a language,
+       and it comes back as "generic" like anything else unknown. Both callers
+       branch on it BEFORE asking this partial, which is the same order
+       render-codeblock.html has always used. */ -}}
+
+{{- $alias := dict
+      "sh" "shell" "bash" "shell" "zsh" "shell" "console" "shell" "shell-session" "shell"
+      "js" "javascript" "node" "javascript" "mjs" "javascript"
+      "ts" "typescript"
+      "py" "python"
+      "kt" "kotlin" "kts" "kotlin"
+      "rb" "ruby"
+      "cs" "csharp" "c#" "csharp"
+      "golang" "go"
+      "c" "cpp" "c++" "cpp" "cc" "cpp" "h" "cpp" "hpp" "cpp"
+      "md" "markdown"
+      "bat" "batch" "cmd" "batch"
+      "gradle" "groovy"
+      "properties" "ini" "conf" "ini" "toml" "ini"
+      "asm" "assembly" "nasm" "assembly"
+      "docker" "dockerfile"
+      "ps" "powershell" "ps1" "powershell"
+      "postgres" "postgresql" "psql" "postgresql" "mysql" "mariadb"
+      "html" "xml" "htm" "xml" "xhtml" "xml" "svg" "xml" "xsl" "xml" "xsd" "xml"
+      "pom" "xml" "yml" "yaml"
+      "vb" "visualbasic" "vbnet" "visualbasic" "vba" "visualbasic"
+-}}
+
+{{- $supported := slice
+      "abap" "apache" "assembly" "avrassembly" "batch" "cordpro" "cpp" "csharp"
+      "css" "cython" "dart" "diff" "dockerfile" "generic" "go" "groovy" "ini"
+      "java" "javascript" "json" "jsx" "kotlin" "latex" "less" "lighttpd" "lua"
+      "mariadb" "markdown" "matlab" "mssql" "nginx" "nsis" "oracledb" "php"
+      "postgresql" "powershell" "prolog" "purebasic" "python" "qml" "r" "raw"
+      "routeros" "ruby" "rust" "scala" "scss" "shell" "sql" "squirrel" "swift"
+      "typescript" "verilog" "vhdl" "visualbasic" "xml" "yaml"
+-}}
+
+{{- $tag := lower (trim (. | default "") " ") -}}
+{{- $lang := index $alias $tag | default $tag -}}
+{{- if not (in $supported $lang) }}{{ $lang = "generic" }}{{ end -}}
+{{- return $lang -}}

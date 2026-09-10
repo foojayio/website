@@ -36,7 +36,7 @@
          gets the navigation by adding one number per page, and every other page
          using this template is untouched. */}}
     {{ partial "series-progress.html" . }}
-    {{ .Content }}
+    {{ partialCached "article-html.html" . .RelPermalink }}
     {{ partial "series-nav.html" . }}
     {{ partial "page-source.html" . }}
     {{/* Renders nothing unless partials/comments-term.html gives this page a

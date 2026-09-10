@@ -44,8 +44,22 @@
 
      It is opt-in because a face is not always the useful thing. The related-
      posts strip does not take it -- see `compact` in post-card.html: at ~178px
-     the byline is already collapsing to "12 authors". The single post page does
-     not either, having the author callout at the foot of the article instead.
+     the byline is already collapsing to "12 authors".
+
+     THE ARTICLE PAGE TAKES IT, and takes it whole -- pile included -- so the
+     byline under a post title is the SAME element as the byline on that post's
+     card, not a variant of it. An earlier attempt suppressed the pile there,
+     reasoning that a full-width header has room for every name; that made the
+     two places differ for a reason no reader can see, which is worse than
+     either choice on its own.
+
+     Keeping the pile there did need the metadata fixed. posts/single.html is
+     the one caller passing `pagefindMeta`, and the collapsed form's visible
+     text is "2 authors" -- which would otherwise become the author metadata of
+     all 161 co-authored posts in site search. So the pile branch stamps the
+     names EXPLICITLY (`author:<names>`) instead of letting Pagefind read them
+     off the element. What the eye gets and what the index gets may differ
+     here; what the index gets must still be the authors.
 
      An author's OWN page does take it, which is worth saying because the
      opposite looks right at first: every card there is by the same person, so
@@ -74,8 +88,16 @@
 {{ with $p }}
 {{ $authors := .Params.authors }}
 {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
-<span class="byline-group{{ if $avatars }} byline-group--avatars{{ end }}"{{ if $pagefindMeta }} data-pagefind-meta="author"{{ end }}>
 {{- $pile := and $avatars (ge (len $authors) 2) -}}
+{{- /* Resolved before the wrapper, because the WRAPPER carries them when the
+       names are not in the visible text -- see the metadata note above. */ -}}
+{{- $names := slice -}}
+{{- range $authors -}}
+  {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
+  {{- else -}}{{- $names = $names | append . -}}{{- end -}}
+{{- end -}}
+<span class="byline-group{{ if $avatars }} byline-group--avatars{{ end }}"
+  {{- if $pagefindMeta }} data-pagefind-meta="author{{ if $pile }}:{{ delimit $names ", " }}{{ end }}"{{ end }}>
 {{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) (not $pile) }}
   {{- /* "N authors", never "N author": the branch only runs above maxNames,
          which is at least 1, so the plural always holds. */ -}}
@@ -130,11 +152,6 @@
          so hovering it answers "who are the other eight?" -- the one question
          the pile cannot answer by itself. Same data-name/::after mechanism as a
          face; the CSS lets this one wrap onto several lines. */ -}}
-  {{- $names := slice -}}
-  {{- range $authors -}}
-    {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
-    {{- else -}}{{- $names = $names | append . -}}{{- end -}}
-  {{- end -}}
   <span class="byline byline--count" data-name="{{ delimit $names ", " }}" aria-hidden="true">{{ len $authors }} authors</span>
 {{- else -}}
   {{ range $i, $slug := $authors }}

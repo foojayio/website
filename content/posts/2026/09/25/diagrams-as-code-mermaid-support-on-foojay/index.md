@@ -24,7 +24,8 @@ nobody can correct a typo in, and nobody can update without finding the original
 file again — assuming they still have it.
 
 So Foojay articles now support [Mermaid](https://mermaid.js.org/): you write a
-diagram as a fenced code block, and it renders as an actual diagram.
+diagram as a fenced code block, and it renders as an actual diagram. Thanks to
+[Maximillian Arruda](/today/author/maximillian-arruda/) for requesting it.
 
 ## The short version
 

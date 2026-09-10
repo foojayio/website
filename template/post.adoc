@@ -1,0 +1,163 @@
+---
+# ============================================================================
+#  New foojay.io article, in AsciiDoc — starter template
+# ----------------------------------------------------------------------------
+#  Same article, different markup. Use this one INSTEAD of post.md when you
+#  want what AsciiDoc has and Markdown does not: captions on blocks, numbered
+#  callouts in source code, admonitions, and tables that span cells.
+#  If you don't need those, `template/post.md` is shorter to write and more
+#  people can review it without looking anything up.
+#
+#  HOW TO USE
+#   1. Copy this file to  draft/<your-article-slug>/index.adoc
+#      (the FOLDER name is the URL slug, exactly as for a Markdown article).
+#   2. Fill in the frontmatter, write the article, drop images in the SAME
+#      folder next to this file.
+#   3. See `categories.md` next to this file for the category list.
+#
+#  THE FRONTMATTER IS IDENTICAL to template/post.md -- same keys, same rules,
+#  same `---` fences, checked by the same job on your pull request. The notes
+#  below are deliberately short; post.md carries the full reasoning for each
+#  field (especially `date`, which decides when the article publishes and must
+#  not carry a time). Read it there rather than trusting a second copy here.
+# ============================================================================
+
+# Rendered as the page H1 -- do NOT repeat it as a "= " heading in the body.
+# Start your sections at "== ". Required.
+title: "Your Article Title Here"
+
+# YYYY-MM-DD, no time. Leave as-is unless you need a particular day; a
+# maintainer sets it and moves the folder to match. See post.md. Required.
+date: "2026-01-01"
+
+# One or two sentences, under 160 characters. Required.
+description: "A short, one- or two-sentence summary of the article."
+
+# The FOLDER name of your profile in content/authors/. Required.
+authors:
+  - "your-author-slug"
+
+# Preview / hero image: a file in THIS folder, referenced by name.
+# image: "my-hero.png"
+
+# See categories.md for the existing list.
+categories:
+  - "Java"
+---
+
+Open with a paragraph that says what the reader will get. No "= Title" heading
+here -- the title above is already the page's H1.
+
+== A section heading
+
+Sections start at `==`. Sub-sections use `===`. They become the "On this page"
+navigation automatically.
+
+Inline markup: *bold*, _italic_, `monospace`, and a
+https://foojay.io[link with its text in brackets].
+
+* A bullet
+* Another one
+** Nested, with two stars
+
+. A numbered item
+. The next one
+
+== Code
+
+A source block is a `[source,<language>]` line followed by a `----` fence. It is
+syntax-highlighted by the same highlighter Markdown articles use, so the
+language names are the same ones -- `java`, `bash`, `yaml`, `xml`, `kotlin`,
+`json`, `python`, `sql` and so on. An unknown one renders unhighlighted rather
+than broken.
+
+[source,java]
+----
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, foojay!");
+    }
+}
+----
+
+A `----` fence with no `[source]` line gives plain, unhighlighted output.
+
+=== Block titles
+
+Any block takes a caption: a line starting with a dot, directly above it.
+
+.What the build does
+[source,bash]
+----
+./gradlew build
+----
+
+=== Callouts
+
+Numbered markers in the code, explained underneath. Markdown has no equivalent.
+
+[source,java]
+----
+var list = new ArrayList<String>();   // <1>
+list.add("foojay");                   // <2>
+----
+<1> Create the list.
+<2> Add to it.
+
+== Admonitions
+
+The labelled boxes that set a remark apart from the text around it. One word,
+then a colon:
+
+NOTE: Something worth knowing.
+
+TIP: A shortcut the reader may not know.
+
+IMPORTANT: Something they should not skip.
+
+WARNING: Something that will bite them.
+
+CAUTION: Something that could lose data.
+
+== Tables
+
+`cols` sets the relative column widths; `options="header"` makes the first row
+a header. A `2+|` prefix spans two columns and `.2+|` spans two rows.
+
+.An optional caption
+[cols="1,2", options="header"]
+|===
+| Column | What goes in it
+
+| First | Something short
+| Second | Something longer, which is why this column is twice as wide
+|===
+
+== Images
+
+Put the file in THIS folder and reference it by name. The text in the brackets
+is the DESCRIPTION, and it is the only part of an image a reader using a screen
+reader gets -- write what it shows, the way you would say it out loud. Leave it
+empty only when the image is decoration; the PR check reports empty ones so you
+can confirm that was deliberate, and never fails your pull request over it.
+
+image::my-image.png[The Ports view in IntelliJ, showing the app on port 8080]
+
+Every image in an article is click-to-enlarge automatically.
+
+Foojay's own shortcodes work here too, for a floated or captioned image and for
+a gallery -- see template/post.md for what each one takes:
+
+{{< img src="my-image.png" alt="The Ports view in IntelliJ" class="alignright" width="320" caption="An optional caption" >}}
+
+== One thing that is Markdown-only
+
+Nothing else differs, but this does: Mermaid diagrams work in AsciiDoc as well,
+written as a `mermaid` source block.
+
+[source,mermaid]
+----
+graph LR
+    A[Source] --> B[javac]
+    B --> C[Bytecode]
+----

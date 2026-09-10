@@ -157,6 +157,20 @@ jobs:
           hugo-version: "0.165.0"
           extended: true
 
+      # AsciiDoc articles (content/**/index.adoc) are rendered by asciidoctor,
+      # which Hugo shells out to -- see hugo.toml [security.exec]. The runner
+      # image ships Ruby but not this gem, and a missing binary is NOT a soft
+      # failure: Hugo reports "failed to execute binary" and the build dies, so
+      # every job that runs `hugo` needs this whether or not the branch happens
+      # to touch a .adoc file.
+      #
+      # Pinned for the same reason the Hugo version is: asciidoctor's HTML is
+      # what themes/foojay/static/css/style.css styles by class name, and a
+      # major bump changing that markup should be a deliberate upgrade rather
+      # than a Tuesday.
+      - name: Set up Asciidoctor
+        run: gem install asciidoctor -v 2.0.26 --no-document
+
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v6

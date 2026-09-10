@@ -55,7 +55,7 @@ public class Frontmatter {
         if (Files.isDirectory(postsDir)) {
             List<Path> indexes;
             try (Stream<Path> files = Files.walk(postsDir)) {
-                indexes = files.filter(p -> p.getFileName().toString().equals("index.md")).toList();
+                indexes = files.filter(Frontmatter::isIndexFile).toList();
             }
             for (Path idx : indexes) {
                 String slug = idx.getParent().getFileName().toString();
@@ -222,7 +222,7 @@ public class Frontmatter {
         if (!Files.isDirectory(dir)) return problems;
 
         try (Stream<Path> files = Files.walk(dir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
                 // Skip only the SECTION's own _index.md, not every _index.md in the
                 // tree. Author and sponsor profiles are branch bundles now
                 // (content/authors/<slug>/_index.md -- .Paginate refuses a page kind),
@@ -254,10 +254,13 @@ public class Frontmatter {
      * a check failing on a file that is not the kind of thing it checks.
      */
     static boolean isPageResource(Path file) {
-        String name = file.getFileName().toString();
-        if (name.equals("index.md") || name.equals("_index.md")) return false;
+        if (isAnyIndexFile(file)) return false;
         Path parent = file.getParent();
-        return parent != null && Files.exists(parent.resolve("index.md"));
+        if (parent == null) return false;
+        // Either shape of bundle: a transcript sitting beside an AsciiDoc
+        // article is as much a page resource as one beside a Markdown article.
+        return Files.exists(parent.resolve("index.md"))
+                || Files.exists(parent.resolve("index.adoc"));
     }
 
     /**
@@ -351,10 +354,15 @@ public class Frontmatter {
 
         for (Path dir : bundles) {
             String slug = dir.getFileName().toString();
-            Path index = dir.resolve("index.md");
+            // Resolved in one expression rather than reassigned: `index` is
+            // captured by the PLACEHOLDERS lambda below, which needs it
+            // effectively final.
+            Path markdown = dir.resolve("index.md");
+            Path index = Files.isRegularFile(markdown) ? markdown : dir.resolve("index.adoc");
             if (!Files.isRegularFile(index)) {
-                problems.add(dir + ": no index.md (the article itself goes in"
-                        + " draft/" + slug + "/index.md, images alongside it)");
+                problems.add(dir + ": no index.md or index.adoc (the article itself"
+                        + " goes in draft/" + slug + "/index.md -- or index.adoc if you"
+                        + " write AsciiDoc -- with images alongside it)");
                 continue;
             }
             if (!SLUG_FMT.matcher(slug).matches()) {
@@ -461,7 +469,7 @@ public class Frontmatter {
         if (!Files.isDirectory(postsDir)) return problems;
 
         try (Stream<Path> files = Files.walk(postsDir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
                 // Posts are LEAF bundles (index.md), so any _index.md under
                 // content/posts/ is a section index and never an article.
                 if (file.getFileName().toString().equals("_index.md")) continue;
@@ -485,7 +493,7 @@ public class Frontmatter {
         if (!Files.isDirectory(postsDir)) return problems;
 
         try (Stream<Path> files = Files.walk(postsDir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
                 // Posts are LEAF bundles (index.md), so any _index.md under
                 // content/posts/ is a section index and never an article.
                 if (file.getFileName().toString().equals("_index.md")) continue;
@@ -684,10 +692,7 @@ public class Frontmatter {
         if (!Files.isDirectory(contentDir)) return problems;
 
         try (Stream<Path> files = Files.walk(contentDir)) {
-            for (Path md : files.filter(p -> {
-                String n = p.getFileName().toString();
-                return n.equals("index.md") || n.equals("_index.md");
-            }).toList()) {
+            for (Path md : files.filter(Frontmatter::isAnyIndexFile).toList()) {
                 Map<String, Object> fm = readFrontmatter(md);
                 if (fm == null) continue;
                 if (!(fm.get("image") instanceof String hero) || hero.isBlank()) continue;
@@ -842,7 +847,7 @@ public class Frontmatter {
         if (!Files.isDirectory(postsDir)) return problems;
 
         try (Stream<Path> files = Files.walk(postsDir)) {
-            for (Path index : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+            for (Path index : files.filter(Frontmatter::isIndexFile).sorted().toList()) {
                 String hero = frontmatterLine(index, "image");
                 if (hero == null || hero.isBlank() || hero.startsWith("http")) continue;
                 Path file = index.getParent().resolve(hero);
@@ -865,7 +870,7 @@ public class Frontmatter {
         if (!Files.isDirectory(postsDir)) return problems;
 
         try (Stream<Path> files = Files.walk(postsDir)) {
-            for (Path index : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+            for (Path index : files.filter(Frontmatter::isIndexFile).sorted().toList()) {
                 Path dir = index.getParent();
                 long total = 0;
                 try (Stream<Path> inBundle = Files.list(dir)) {
@@ -918,7 +923,7 @@ public class Frontmatter {
         if (!Files.isDirectory(boardDir)) return problems;
 
         try (Stream<Path> files = Files.walk(boardDir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
                 Map<String, Object> fm = readFrontmatter(file);
                 if (fm == null) continue;
                 if (!"board".equals(String.valueOf(fm.get("type")))) {
@@ -1374,10 +1379,11 @@ public class Frontmatter {
         if (!Files.isDirectory(dir)) return warnings;
 
         try (Stream<Path> files = Files.walk(dir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).sorted().toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).sorted().toList()) {
                 if (touched != null && !touched.contains(file.normalize())) continue;
                 if (isPageResource(file)) continue;
-                List<Integer> lines = imagesWithoutAlt(Files.readString(file));
+                List<Integer> lines = imagesWithoutAlt(Files.readString(file),
+                        file.toString().endsWith(".adoc"));
                 if (lines.isEmpty()) continue;
                 String where = lines.size() > 6
                         ? lines.subList(0, 6) + " and " + (lines.size() - 6) + " more"
@@ -1390,14 +1396,32 @@ public class Frontmatter {
         return warnings;
     }
 
+    /** `image::file.png[alt]` and the inline `image:file.png[alt]`. */
+    static final Pattern ADOC_IMAGE = Pattern.compile("image::?[^\\[\\]\\s]+\\[([^\\]]*)\\]");
+
     /** Line numbers (1-based) of images carrying no description, body only. */
     static List<Integer> imagesWithoutAlt(String content) {
+        return imagesWithoutAlt(content, false);
+    }
+
+    /**
+     * As above, for either format. AsciiDoc writes an image as
+     * `image::file.png[alt]` (block) or `image:file.png[alt]` (inline), where
+     * the FIRST positional attribute is the alt text -- so `[]` and
+     * `[,width=600]` are both undescribed.
+     *
+     * Worth having rather than leaving AsciiDoc out: /accessibility/ states a
+     * standard for the whole site, and a check that quietly stops applying to
+     * half the articles is a standard that quietly stops being true.
+     */
+    static List<Integer> imagesWithoutAlt(String content, boolean asciidoc) {
         List<Integer> lines = new ArrayList<>();
         String[] all = content.split("\\n", -1);
 
         boolean inFrontmatter = all.length > 0 && all[0].trim().equals("---");
         boolean inFence = false;
         boolean inGallery = false;
+        String adocFence = null;
 
         for (int i = 0; i < all.length; i++) {
             String line = all[i];
@@ -1409,6 +1433,19 @@ public class Frontmatter {
             }
             if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) { inFence = !inFence; continue; }
             if (inFence) continue;
+
+            // AsciiDoc's own delimited blocks, closed on an exact match the way
+            // inertStripped does it -- an article ABOUT AsciiDoc shows an
+            // `image::` macro inside a listing block, and that is an example,
+            // not an undescribed image.
+            if (asciidoc) {
+                if (trimmed.matches("(-{4,}|\\.{4,})") && line.equals(trimmed)) {
+                    if (adocFence == null) adocFence = trimmed;
+                    else if (adocFence.equals(trimmed)) adocFence = null;
+                    continue;
+                }
+                if (adocFence != null) continue;
+            }
 
             // A gallery's items are one per line between the tags, and an item's
             // alt text is the caption after the first `|` (or the third field
@@ -1428,6 +1465,16 @@ public class Frontmatter {
             }
 
             if (MD_IMAGE_NO_ALT.matcher(line).find()) lines.add(i + 1);
+
+            if (asciidoc) {
+                Matcher adocImg = ADOC_IMAGE.matcher(line);
+                while (adocImg.find()) {
+                    // The first positional attribute, i.e. up to the first comma.
+                    String attrs = adocImg.group(1);
+                    String alt = attrs.split(",", -1)[0].trim();
+                    if (alt.isBlank()) lines.add(i + 1);
+                }
+            }
 
             Matcher shortcode = IMG_SHORTCODE.matcher(line);
             while (shortcode.find()) {
@@ -1488,6 +1535,43 @@ public class Frontmatter {
        `date: 2026-09-05` is the same instant to Hugo and reads the same to a
        contributor, so rejecting it would be a rule with no failure behind it. */
 
+    /**
+     * A page bundle's own content file: `index.md` OR `index.adoc`.
+     *
+     * AsciiDoc articles are built exactly like Markdown ones -- same bundle
+     * shape, same frontmatter, same folder rules -- so every check in this file
+     * has to see them. Before this existed each check filtered on the literal
+     * "index.md", which meant a .adoc post was not merely unchecked in one
+     * place: it had NO required fields, NO date/folder agreement, NO clean-slug
+     * rule and NO hero-weight limit, and nothing said so. A contributor writing
+     * AsciiDoc would have had a quieter, laxer path through review than one
+     * writing Markdown, which is the opposite of what adding a second format
+     * should mean.
+     *
+     * Frontmatter is read the same way for both: readFrontmatter() and
+     * frontmatterLine() key on the `---` fences, and an AsciiDoc page in Hugo
+     * carries the identical YAML block.
+     */
+    static boolean isIndexFile(Path p) {
+        String n = p.getFileName().toString();
+        return n.equals("index.md") || n.equals("index.adoc");
+    }
+
+    /**
+     * Any content file Hugo will build a page from: Markdown or AsciiDoc.
+     * Used by the checks that walk a whole tree rather than a bundle.
+     */
+    static boolean isContentFile(Path p) {
+        String n = p.toString();
+        return n.endsWith(".md") || n.endsWith(".adoc");
+    }
+
+    /** As isIndexFile, plus the `_index.md`/`_index.adoc` a branch bundle uses. */
+    static boolean isAnyIndexFile(Path p) {
+        String n = p.getFileName().toString();
+        return isIndexFile(p) || n.equals("_index.md") || n.equals("_index.adoc");
+    }
+
     static final Pattern DATE_ONLY = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
 
     static List<String> checkPostDates(Path postsDir) throws IOException {
@@ -1496,7 +1580,7 @@ public class Frontmatter {
         LocalDate today = LocalDate.now(ZoneOffset.UTC);
 
         try (Stream<Path> files = Files.walk(postsDir)) {
-            for (Path file : files.filter(p -> p.getFileName().toString().equals("index.md")).sorted().toList()) {
+            for (Path file : files.filter(Frontmatter::isIndexFile).sorted().toList()) {
                 String raw = frontmatterLine(file, "date");
                 if (raw == null) continue;
 
@@ -1677,14 +1761,16 @@ public class Frontmatter {
         List<String> problems = new ArrayList<>();
         if (!Files.isDirectory(dir)) return problems;
         try (Stream<Path> files = Files.walk(dir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
-                String[] lines = inertStripped(Files.readString(file)).split("\n", -1);
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
+                String[] lines = inertStripped(Files.readString(file),
+                        file.toString().endsWith(".adoc")).split("\n", -1);
                 for (int i = 0; i < lines.length; i++) {
                     for (HtmlRule rule : EXECUTABLE_HTML) {
                         if (rule.pattern().matcher(lines[i]).find()) {
                             problems.add(file + ":" + (i + 1) + ": raw " + rule.label()
                                     + " in article text -- " + rule.why()
-                                    + ". If this is a code SAMPLE, put it in a ``` fenced block"
+                                    + ". If this is a code SAMPLE, put it in a "
+                                    + (file.toString().endsWith(".adoc") ? "---- listing block" : "``` fenced block")
                                     + " (it will render as text and this check will pass).");
                         }
                     }
@@ -1708,9 +1794,10 @@ public class Frontmatter {
         List<String> warnings = new ArrayList<>();
         if (!Files.isDirectory(dir)) return warnings;
         try (Stream<Path> files = Files.walk(dir)) {
-            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
                 if (touched != null && !touched.contains(file.normalize())) continue;
-                String[] lines = inertStripped(Files.readString(file)).split("\n", -1);
+                String[] lines = inertStripped(Files.readString(file),
+                        file.toString().endsWith(".adoc")).split("\n", -1);
                 for (int i = 0; i < lines.length; i++) {
                     Matcher m = IFRAME.matcher(lines[i]);
                     while (m.find()) {
@@ -1740,13 +1827,31 @@ public class Frontmatter {
          - INLINE CODE SPANS, which Goldmark escapes.
          - BACKSLASH ESCAPES, because \<script\> is markdown for the literal
            characters. This is not hypothetical -- it is the only <script> string
-           in the whole archive. */
+           in the whole archive.
+
+       AND, IN AN ASCIIDOC FILE, ITS DELIMITED BLOCKS. `----` (listing) and
+       `....` (literal) are asciidoctor's fenced code, and it escapes their
+       contents exactly as render-codeblock.html does -- but they are not
+       backticks, so without this an .adoc article whose Java sample contains
+       `<script>` or an onclick= attribute would be reported as executable HTML
+       and the pull request would fail on a code example. A false positive on a
+       security gate is worse than it sounds: it trains the next person to
+       argue with the gate.
+
+       `++++` (passthrough) is deliberately NOT stripped. That block is the one
+       place AsciiDoc emits raw, unescaped HTML, which makes it the exact thing
+       these rules exist to look at. */
     static String inertStripped(String markdown) {
+        return inertStripped(markdown, false);
+    }
+
+    static String inertStripped(String markdown, boolean asciidoc) {
         String[] lines = markdown.split("\n", -1);
         StringBuilder out = new StringBuilder();
         boolean inFrontmatter = lines.length > 0 && lines[0].trim().equals("---");
         String fence = null;          // the open fence's run of ` or ~, if any
         int fenceIndent = 0;
+        String adocFence = null;      // the open `----`/`....` delimiter, if any
 
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
@@ -1757,6 +1862,28 @@ public class Frontmatter {
                 if (i > 0 && trimmed.equals("---")) inFrontmatter = false;
                 out.append('\n');
                 continue;
+            }
+            if (asciidoc) {
+                // A delimiter line is the run and nothing else. Four or more,
+                // which is what keeps `---` (frontmatter) and a `...` ellipsis
+                // out of it.
+                boolean delim = trimmed.matches("(-{4,}|\\.{4,})") && line.equals(trimmed);
+                if (delim) {
+                    // EXACT match to close, which is asciidoctor's own rule and
+                    // is what lets a block be nested inside a longer one -- the
+                    // shape an article explaining AsciiDoc necessarily uses to
+                    // show a `----` block inside a `------` one. Closing on any
+                    // delimiter would end the outer block at the inner one and
+                    // hand the rest of the example to the scanners as prose.
+                    if (adocFence == null) adocFence = trimmed;
+                    else if (adocFence.equals(trimmed)) adocFence = null;
+                    out.append('\n');
+                    continue;
+                }
+                if (adocFence != null) {
+                    out.append('\n');
+                    continue;
+                }
             }
             Matcher f = Pattern.compile("^(`{3,}|~{3,})").matcher(trimmed);
             if (f.find() && indent <= 3 + fenceIndent) {
