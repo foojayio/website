@@ -1,7 +1,7 @@
 {
-  "ad-view/2026-09-azul-jvm-drag-ai-infrastructure" : 11,
-  "ad-view/2026-09-coderabbit-ai-code-review" : 8,
-  "ad-view/2026-09-foojay-sustainability-ebook" : 13,
+  "ad-view/2026-09-azul-jvm-drag-ai-infrastructure" : 14,
+  "ad-view/2026-09-coderabbit-ai-code-review" : 11,
+  "ad-view/2026-09-foojay-sustainability-ebook" : 17,
   "authors/aaron-ploetz" : 1,
   "authors/abo-saad-muaath" : 1,
   "authors/adam-warski" : 1,
@@ -658,6 +658,7 @@
   "posts/code-reviews-with-ai-a-developer-guide" : 14952,
   "posts/codename-one-ai-oauth-and-other-platform-apis-in-the-core" : 317,
   "posts/coderabbit-tutorial-for-java-developers" : 14904,
+  "posts/come-for-java-get-a-whole-lot-more" : 1,
   "posts/command-completion-intellij-idea" : 2654,
   "posts/commit-created-no-no-no-what-the-the-agents-word-needs-external-verification-what-the-mistake-costs" : 70,
   "posts/compact-strings-reclaim-25-of-java-heap-memory-lower-your-cloud-bills" : 5277,
