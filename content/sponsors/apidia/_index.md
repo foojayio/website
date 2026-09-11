@@ -26,8 +26,8 @@ authors:
 # link that validate/BuiltSite.java blocks the deploy on.
 topics:
   - "Java"
-  - "library"
-  - "tools"
+  - "Library"
+  - "Tools"
   - "Maven"
 # Never on WordPress -- APIdia joined after the Hugo migration, so the folder
 # name IS the only URL and there is no legacy /sponsor/<wpSlug>/ to alias.

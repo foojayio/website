@@ -107,7 +107,7 @@
     <section class="sponsor-section">
       <h2 id="{{ $topicsSec.id }}">{{ $topicsSec.label }}</h2>
       <div class="sponsor-topics">
-        {{ range . }}<a class="sponsor-topic" href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+        {{ range . }}<a class="sponsor-topic" href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ partialCached "category-name.html" . . }}</a>{{ end }}
       </div>
     </section>
     {{ end }}

@@ -30,7 +30,7 @@
              post looks the same in a card grid and in a result list. First,
              not all, for the same reason the breadcrumb trail follows the
              first category -- a post carries up to eight. */}}
-        {{ range $i, $cat := first 2 . }}<a href="{{ printf "today/category/%s/" ($cat | urlize) | relURL }}"{{ if eq $i 0 }} data-pagefind-meta="category"{{ end }}>{{ $cat }}</a>{{ end }}
+        {{ range $i, $cat := first 2 . }}<a href="{{ printf "today/category/%s/" ($cat | urlize) | relURL }}"{{ if eq $i 0 }} data-pagefind-meta="category"{{ end }}>{{ partialCached "category-name.html" $cat $cat }}</a>{{ end }}
       </div>
       {{ end }}
 

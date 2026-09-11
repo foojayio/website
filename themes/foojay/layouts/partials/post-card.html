@@ -71,7 +71,7 @@
   {{ $cats := . }}
   {{ if gt $maxCategories 0 }}{{ $cats = first $maxCategories $cats }}{{ end }}
   <div class="post-card-categories">
-    {{ range $cats }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ . }}</a>{{ end }}
+    {{ range $cats }}<a href="{{ printf "today/category/%s/" (. | urlize) | relURL }}">{{ partialCached "category-name.html" . . }}</a>{{ end }}
   </div>
   {{ end }}
 </article>

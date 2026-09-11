@@ -51,7 +51,7 @@
         <h2>Topics covered</h2>
         <div class="chip-row">
           {{ range . }}
-          <a href="{{ printf "today/category/%s/" (.name | urlize) | relURL }}">{{ .name }} <span class="chip-count">{{ .n }}</span></a>
+          <a href="{{ printf "today/category/%s/" (.name | urlize) | relURL }}">{{ partialCached "category-name.html" .name .name }} <span class="chip-count">{{ .n }}</span></a>
           {{ end }}
         </div>
       </div>

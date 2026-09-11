@@ -1,0 +1,39 @@
+{{- /* One category string -> the name to DISPLAY for it.
+
+       Param: the raw category as written in a post's `categories:` (or in a
+       sponsor's `topics:`). Returns: a string.
+
+       WHY THIS EXISTS. A category is displayed in two different ways on this
+       site and they disagreed. Its own TERM PAGE takes its heading from Hugo,
+       which title-cases the term, so /today/category/nosql/ is headed "Nosql".
+       Every chip, tile label and topic pill, though, printed the RAW frontmatter
+       string -- so the same category read "nosql" on a card and "Nosql" on the
+       page the card links to. 4 of 125 categories are written lowercase in
+       post frontmatter (nosql, sql, reactive, jOOQ) and a sponsor's `topics:`
+       list is hand-written, so the mismatch showed up wherever those appeared.
+
+       Fixing it in CONTENT would mean editing `categories:` in ~45 posts and
+       relying on everyone writing the next one in the same case. Fixing it HERE
+       means the display name is derived, once, from the term page -- the thing
+       the chip already links to -- so a chip cannot disagree with its own
+       destination again.
+
+       THE TERM PAGE IS THE SINGLE SOURCE OF TRUTH, which also makes the
+       acronyms fixable: Hugo's title-casing produces "Nosql", "Sql" and "JOOQ",
+       and a term with a content file at content/categories/<slug>/_index.md
+       uses that file's `title:` instead ("NoSQL", "SQL", "jOOQ"). Three such
+       files exist for exactly that reason; every other term needs none.
+
+       URLS ARE UNAFFECTED. Callers still build the href from `urlize` of the
+       raw string, and urlize("nosql") == urlize("NoSQL"), so nothing here can
+       move a page or break a link.
+
+       Falls back to the raw string when there is no term page -- a sponsor
+       `topics:` entry naming a category that does not exist yet still renders
+       as written rather than as an empty chip. */ -}}
+{{- $raw := . -}}
+{{- $name := $raw -}}
+{{- with site.GetPage (printf "/categories/%s" ($raw | urlize)) -}}
+  {{- $name = .LinkTitle -}}
+{{- end -}}
+{{- return $name -}}

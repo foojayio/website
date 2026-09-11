@@ -29,8 +29,12 @@
 {{- $p := .page -}}
 {{- $eager := .eager | default false -}}
 {{- $label := "" -}}
-{{- with $p.Params.categories }}{{ $label = index . 0 }}{{ end -}}
+{{- with $p.Params.categories }}{{ $label = partialCached "category-name.html" (index . 0) (index . 0) }}{{ end -}}
 {{- if not $label }}{{ $label = site.Title }}{{ end -}}
+{{- /* The hue is hashed from the LOWERCASED label, which is what makes the
+       display-name lookup above safe to add: lower("NoSQL") and lower("nosql")
+       are the same string, so every existing placeholder tile keeps the colour
+       it had. Change this to hash the raw label and they all shift. */ -}}
 {{- $hue := mod (hash.FNV32a (lower $label)) 360 -}}
 <a href="{{ $p.RelPermalink }}" class="post-card-image" tabindex="-1" aria-hidden="true">
   <span class="thumb-ph" style="--ph-hue: {{ $hue }}"><span class="thumb-ph__label">{{ $label }}</span></span>
