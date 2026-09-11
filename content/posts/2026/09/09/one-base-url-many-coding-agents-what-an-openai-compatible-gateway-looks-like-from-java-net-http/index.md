@@ -1,7 +1,8 @@
 ---
 title: "One Base URL, Many Coding Agents: What an OpenAI-Compatible Gateway Looks Like From java.net.http"
 date: "2026-09-09T16:09:53+00:00"
-description: "One Base URL, Many Coding Agents: What an OpenAI-Compatible Gateway Looks Like From java.net.http Somewhere in every coding agent there is an HTTP client."
+lastmod: "2026-09-10T15:07:25+00:00"
+description: "Somewhere in every coding agent there is an HTTP client. Claude Code, Codex, Cursor, Cline, OpenCode: strip away the terminal UI or the editor pane and…"
 authors:
   - "viktoria-evdokimova"
 image: "generated-image-2026-09-09T181859.166-e1788970136304.jpg"

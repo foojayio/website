@@ -231,7 +231,7 @@ Inference sessions keep an application-owned model loaded across multiple runs. 
 
 [PR #5472](https://github.com/codenameone/CodenameOne/pull/5472) takes the existing semantic MCP server beyond JavaSE. On loopback-capable ports, an LLM can read the component tree, find a button by semantic identity, set text, activate an action, and inspect the resulting state in the actual application.
 
-![Diagram](https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFudCBEZXYgYXMgRGV2ZWxvcGVyIGFuZCBMTE0gY2xpZW50CiAgICBwYXJ0aWNpcGFudCBQb3J0IGFzIERldmljZSBwb3J0IGZvcndhcmQKICAgIHBhcnRpY2lwYW50IE1DUCBhcyAxMjcuMC4wLjEgTUNQIHNlcnZlcgogICAgcGFydGljaXBhbnQgVUkgYXMgQ29kZW5hbWUgT25lIEVEVAogICAgRGV2LT4-UG9ydDogQ29ubmVjdCB0byBkZWJ1ZyBkZXZpY2UKICAgIFBvcnQtPj5NQ1A6IEZvcndhcmQgcG9ydCA4NjQyCiAgICBEZXYtPj5NQ1A6IHVpX3NuYXBzaG90CiAgICBNQ1AtPj5VSTogUmVhZCBzZW1hbnRpYyBjb21wb25lbnQgdHJlZQogICAgVUktLT4-RGV2OiBSb2xlcywgdGV4dCwgc3RhdGUsIGFuZCBhY3Rpb25zCiAgICBEZXYtPj5NQ1A6IEFjdGl2YXRlIHNlbWFudGljIHRhcmdldAogICAgTUNQLT4-VUk6IFBlcmZvcm0gY29tcG9uZW50IGFjdGlvbgogICAgVUktLT4-RGV2OiBVcGRhdGVkIHN0YXRl?type=png&bgColor=ffffff)
+![Diagram](c2VxdWVuY2VEaWFncmFtCiAgICBwYXJ0aWNpcGFu-ab6d89d2.png)
 
 This replaces coordinate guessing with application semantics. It also creates a control channel. Binding to `127.0.0.1` prevents accidental exposure to the local network, but it does not authenticate other processes on the device or workstation.
 
@@ -275,7 +275,7 @@ if (availability == HealthAvailability.NOT_SUPPORTED) {
 HealthStore store = health.getStore();
 ```
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IFRCCiAgICBBWyJBcHBsaWNhdGlvbiJdIC0tPiBCWyJIZWFsdGgiXQogICAgQiAtLT4gQ1siSGVhbHRoU3RvcmUiXQogICAgQiAtLT4gRFsiV29ya291dE1hbmFnZXIiXQogICAgQiAtLT4gRVsiSGVhbHRoU2Vuc29ycyJdCiAgICBDIC0tPiBGWyJIZWFsdGhLaXQiXQogICAgQyAtLT4gR1siSGVhbHRoIENvbm5lY3QiXQogICAgQyAtLT4gSFsiTG9jYWwgYW5kIHNpbXVsYXRlZCBzdG9yZSJdCiAgICBFIC0tPiBJWyJFaWdodCBCbHVldG9vdGggTEUgcHJvZmlsZXMiXQogICAgSSAtLT4gRAogICAgSSAtLT4gQw==?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IFRCCiAgICBBWyJBcHBsaWNhdGlv-9f6ab082.png)
 
 Some of the API looks cautious because the platform contracts are cautious. HealthKit does not reveal whether a user denied read access. A completed authorization sheet means the user was asked, not that the application can read the category. The shared API therefore has no `hasReadPermission()` method that would lie on iOS.
 
@@ -304,7 +304,7 @@ Routing.showRoute(
 
 The call returns immediately. The active `RouteService` finds a route, then the API draws its geometry and frames the map on the Codename One EDT.
 
-![Diagram](https://mermaid.ink/img/Zmxvd2NoYXJ0IExSCiAgICBBWyJPcmlnaW4sIGRlc3RpbmF0aW9uLCBhbmQgd2F5cG9pbnRzIl0gLS0-IEJbIlJvdXRlUmVxdWVzdCJdCiAgICBCIC0tPiBDWyJSb3V0ZVNlcnZpY2UiXQogICAgQyAtLT4gRFsiUm9hZCBuZXR3b3JrIGNhbGN1bGF0aW9uIl0KICAgIEQgLS0-IEVbIlJvdXRlIGFsdGVybmF0aXZlcyJdCiAgICBFIC0tPiBGWyJHZW9tZXRyeSBhbmQgYm91bmRzIl0KICAgIEUgLS0-IEdbIkRpc3RhbmNlLCBkdXJhdGlvbiwgbGVncywgYW5kIHN0ZXBzIl0KICAgIEYgLS0-IEhbIk1hcFN1cmZhY2UiXQogICAgRyAtLT4gSVsiQXBwbGljYXRpb24gVUkiXQ==?type=png&bgColor=ffffff)
+![Diagram](Zmxvd2NoYXJ0IExSCiAgICBBWyJPcmlnaW4sIGRl-5ce6e6f8.png)
 
 The default service is OSRM, so the first driving route needs no provider signup. It points to the public OSRM demonstration server, which has no production SLA and uses a car profile. A `WALKING` request does not turn that graph into a pedestrian route.
 

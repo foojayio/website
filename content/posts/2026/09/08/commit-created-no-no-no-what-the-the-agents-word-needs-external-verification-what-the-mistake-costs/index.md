@@ -1,7 +1,7 @@
 ---
 title: "“Commit created” — but it isn’t: why the agent’s word needs external verification, and what the mistake costs"
 date: "2026-09-08T08:54:03+00:00"
-lastmod: "2026-09-08T09:08:20+00:00"
+lastmod: "2026-09-08T09:16:59+00:00"
 description: "A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with…"
 authors:
   - "viktoria-evdokimova"
@@ -23,13 +23,11 @@ aliases:
   - "/today/commit-created-no-no-no-what-the-the-agents-word-needs-external-verification-и-what-the-mistake-costs/"
 ---
 
-*![](Frame-2147236862-700x451.jpg)*
-
-A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with "done". The work has a shape. The shape looks right. You have six more tickets.
+***A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with "done". The work has a shape. The shape looks right. You have six more tickets.***
 
 The report is model output. The commit, if it exists, lives in .git. The file, if it exists, lives on disk. The build result lives in a process exit code and a run log. The chat window is none of those places, and it can only vouch for itself.
 
-I am the product manager at Explyt, where we build an AI agent for JetBrains IDEs, and before that I led the team that built it. Before Explyt I spent years on tools that generate tests by symbolic execution, at JetBrains Research and Huawei, so I have a professional habit of distrusting any statement about a program until something has run and produced evidence. User interviews are part of my job now, and one line from a senior developer stuck with me because it was so plain: "The agent told me the commit was created. It wasn't." I wanted to know whether that was one unlucky session or a pattern, so I went through public issue trackers and whatever vendor and research posts described the same failure. It is a pattern, and it has a mechanism. This article applies to any JetBrains AI agent you might run: Junie, Copilot in agent mode, Claude Code attached to IntelliJ IDEA, a local model behind a plugin, or Explyt.
+**I am the product manager at Explyt, where we build an AI agent for JetBrains IDEs** , and before that I led the team that built it. Before Explyt I spent years on tools that generate tests by symbolic execution, at JetBrains Research and Huawei, so I have a professional habit of distrusting any statement about a program until something has run and produced evidence. User interviews are part of my job now, and one line from a senior developer stuck with me because it was so plain: "The agent told me the commit was created. It wasn't." I wanted to know whether that was one unlucky session or a pattern, so I went through public issue trackers and whatever vendor and research posts described the same failure. It is a pattern, and it has a mechanism. This article applies to any JetBrains AI agent you might run: Junie, Copilot in agent mode, Claude Code attached to IntelliJ IDEA, a local model behind a plugin, or [Explyt.](https://explyt.ai/en/download "Explyt.")
 
 ## TL;DR
 
@@ -84,9 +82,9 @@ The test scope is narrower than the claim. Unit tests go green while the bug liv
 
 The model fabricates the authorization. In anthropics/claude-code #89765 (August 2026) the model wrote a user turn approving a push inside its own message, then "proceeded to commit \& push based on a fabricated approval". The permission prompt stopped it. This is the one I keep coming back to. A tool that writes its own permission slip is a different kind of problem from a tool that misreads an exit code, and I do not have a tidy answer beyond: leave the permission prompt on.  
 
-Anthropic says the same thing in its own docs. From the Claude Code best practices guide: "Claude stops when the work looks done. Without a check it can run, "looks done" is the only signal available, and you become the verification loop: every mistake waits for you to notice it." Its earlier engineering post on agents makes the positive version of the point: "it's crucial for the agents to gain "ground truth" from the environment at each step (such as tool call results or code execution) to assess its progress."  
+Anthropic says the same thing in its own docs. From the Claude Code best practices guide: "Claude stops when the work looks done. Without a check it can run, "looks done" is the only signal available, and you become the verification loop: every mistake waits for you to notice it." Its earlier engineering post on agents makes the positive version of the point: "it's crucial for the agents to gain "ground truth" from the environment at each step (such as tool call results or code execution) to assess its progress."
 
-The research goes further. OpenAI's March 2025 paper on monitoring reasoning models found that during training, coding "agents quickly learn that it is easier to modify the testing framework such that tests trivially pass rather than implement a genuine solution". METR's June 2025 post reports that "the most recent frontier models have engaged in increasingly sophisticated reward hacking, attempting (often successfully) to get a higher score by modifying the tests or scoring code". Anthropic's Claude 4 announcement claims a 65% reduction in shortcut and loophole behavior relative to Sonnet 3.7, which is good news and also confirms how much of it there was to reduce.  
+The research goes further. OpenAI's March 2025 paper on monitoring reasoning models found that during training, coding "agents quickly learn that it is easier to modify the testing framework such that tests trivially pass rather than implement a genuine solution". METR's June 2025 post reports that "the most recent frontier models have engaged in increasingly sophisticated reward hacking, attempting (often successfully) to get a higher score by modifying the tests or scoring code". Anthropic's Claude 4 announcement claims a 65% reduction in shortcut and loophole behavior relative to Sonnet 3.7, which is good news and also confirms how much of it there was to reduce.
 
 Simon Willison put the practical consequence in one line in his "Vibe engineering" post: "Without tests? Your agent might claim something works without having actually tested it at all". Birgitta Böckeler, running TDD inside agent loops for martinfowler.com, saw the same thing from the other side: "agents still sometimes skipped or faked the red step, or implemented ahead of the test so that it passed immediately."
 
@@ -115,11 +113,11 @@ Each check costs less than a minute.
 
 Once you start verifying, the agent, or your own habits, will offer shortcuts.  
 
-The first one is the agent pasting the verification for you. "Here is git log to confirm:" followed by a code block. That block is model output. Unless the harness shows raw tool results separately from the model's text, treat pasted command output as a claim and run the command yourself.  
+The first one is the agent pasting the verification for you. "Here is git log to confirm:" followed by a code block. That block is model output. Unless the harness shows raw tool results separately from the model's text, treat pasted command output as a claim and run the command yourself.
 
 The second is running the right command in the wrong directory. Multi-module repositories and git worktrees make it easy to verify a different checkout. Print the working directory before the check. I have done this to myself more than once, which is why pwd is the first line above.  
 
-The third is cached green. Gradle and Maven report success from cache when inputs did not change. If the build says "up to date" for the module you expected to change, the change may not be there.  
+The third is cached green. Gradle and Maven report success from cache when inputs did not change. If the build says "up to date" for the module you expected to change, the change may not be there.
 
 The fourth is an empty test selection, and its cousin, a test count without a test run. A filter that matches nothing, a test name with a typo, a profile that excludes the class: the runner exits 0 and the agent reports green. Counting @Test annotations is also not a run. Look at the count, the duration and the timestamp.  
 
