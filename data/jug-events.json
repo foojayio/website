@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-10T06:05:28Z",
+  "generatedAt" : "2026-09-11T06:07:57Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -379,14 +379,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "Java, Spring Boot, GitOps & Kubernetes: Dein Weg in die Cloud",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316226960/",
-      "startTime" : "2026-09-10T19:00:00+02:00",
-      "endTime" : "2026-09-10T20:30:00+02:00",
-      "venue" : "msg nexinsure ag",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
       "title" : "Renovate – Dein Freund und Helfer für Dependency Updates",
       "url" : "https://www.meetup.com/jug-hamburg/events/316419369/",
       "startTime" : "2026-09-24T19:00:00+02:00",
@@ -558,15 +550,7 @@
     "jug" : "NuernbergJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Nurnberg/",
-    "events" : [ {
-      "title" : "Philip Riecks: Testing Spring Boot Applications Demystified",
-      "url" : "https://www.meetup.com/jug-nurnberg/events/316164312/",
-      "startTime" : "2026-09-10T18:00:00+02:00",
-      "endTime" : "2026-09-10T21:00:00+02:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "jug-oberpfalz",
     "name" : "JUG Oberpfalz",
@@ -574,14 +558,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "Java Can't Scale to Zero? This Quarkus App Says Otherwise.",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316473636/",
-      "startTime" : "2026-09-10T20:00:00+02:00",
-      "endTime" : "2026-09-10T22:00:00+02:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226991/",
       "startTime" : "2026-10-07T18:00:00+02:00",
@@ -636,14 +612,6 @@
     "source" : "calendar",
     "url" : "https://jug-pb.gitlab.io/",
     "events" : [ {
-      "title" : "Spring AI",
-      "url" : "",
-      "startTime" : "2026-09-09T18:00:00+02:00",
-      "endTime" : "2026-09-09T19:00:00+02:00",
-      "venue" : "adesso SE",
-      "city" : "Deutschland",
-      "online" : null
-    }, {
       "title" : "Maven/Open Source  (Sandra Parsick)",
       "url" : "",
       "startTime" : "2026-09-30T18:00:00+02:00",
@@ -766,6 +734,14 @@
       "startTime" : "2026-10-01T18:00:00+01:00",
       "endTime" : "2026-10-01T21:00:00+01:00",
       "venue" : "Engine by Starling",
+      "city" : "London",
+      "online" : false
+    }, {
+      "title" : "LJC Roundtable: The JCP, Java Community & The Future of Java",
+      "url" : "https://www.meetup.com/londonjavacommunity/events/316499024/",
+      "startTime" : "2026-10-05T18:00:00+01:00",
+      "endTime" : "2026-10-05T21:00:00+01:00",
+      "venue" : "The Marquis Cornwallis",
       "city" : "London",
       "online" : false
     }, {
@@ -921,14 +897,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/GatewayJUG/",
     "events" : [ {
-      "title" : "An Engineer's Guide to the Semantic Layer (Critical Infrastructure)",
-      "url" : "https://www.meetup.com/gatewayjug/events/316071736/",
-      "startTime" : "2026-09-10T18:30:00-05:00",
-      "endTime" : "2026-09-10T20:00:00-05:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    }, {
       "title" : "Agentic AI Workflows with Embabel",
       "url" : "https://www.meetup.com/gatewayjug/events/315894186/",
       "startTime" : "2026-10-08T18:30:00-05:00",
