@@ -3202,7 +3202,6 @@ body.lightbox-open { overflow: hidden; }
 .sponsor-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .sponsor-logo__fallback { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--ink-muted); }
 .sponsor-logo--large { width: 160px; height: 120px; flex: 0 0 auto; }
-.sponsor-logo--mini { width: 48px; height: 48px; padding: .35rem; flex: 0 0 auto; border-radius: 8px; }
 
 .sponsor-badge {
   display: inline-block;
@@ -3338,11 +3337,6 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .sponsors-cta__links { margin-bottom: 0; }
-
-.sponsor-mini-list { display: flex; flex-direction: column; gap: .85rem; }
-.sponsor-mini { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: inherit; }
-.sponsor-mini strong { display: block; font-size: .95rem; }
-.sponsor-mini em { color: var(--ink-muted); font-size: .82rem; font-style: normal; }
 
 @media (max-width: 560px) {
   .sponsor-profile__head { flex-direction: column; align-items: flex-start; }

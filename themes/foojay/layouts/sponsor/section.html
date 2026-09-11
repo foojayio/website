@@ -185,7 +185,7 @@
       <p class="sponsor-authors-note">
         No articles yet. {{ $names }}
         {{ if eq (len $named) 1 }}writes{{ else }}write{{ end }} for foojay.io on behalf of
-        {{ .Title }} — their articles will appear here as they publish.
+        {{ .Title }} — new articles will appear here once published.
       </p>
       {{ else }}
       <p>No articles are linked to this sponsor yet. Articles are attributed by listing the sponsor's
@@ -231,30 +231,12 @@
          campaign is running, and nothing on the home page. */}}
     {{ partial "ads-widget.html" . }}
 
-    <div class="widget">
-      <h2>More sponsors</h2>
-      <div class="sponsor-mini-list">
-        {{/* Same order as everywhere else sponsors are listed: gold, silver,
-             bronze, alphabetical within each tier -- not Hugo's default page
-             order. */}}
-        {{ range first 6 (where (partial "sponsors-ordered.html" .) "Permalink" "!=" .Permalink) }}
-        <a class="sponsor-mini" href="{{ .RelPermalink }}">
-          {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--mini") }}
-          <span>
-            <strong>{{ .Title }}</strong>
-            {{ with .Params.tier }}<em>{{ title . }}</em>{{ end }}
-          </span>
-        </a>
-        {{ end }}
-      </div>
-      {{/* .view-all, not a bare <p><a> -- same footer link treatment as the
-           categories/authors/JUGs widgets in partials/sidebar.html. */}}
-      <a class="view-all" href="{{ $section.RelPermalink }}">View all sponsors</a>
-    </div>
-  
     {{/* See _default/single.html: a hand-built rail must still carry the
          sponsor list. On a sponsor's own profile it doubles as the way across
-         to the others. */}}
+         to the others -- which is why the "More sponsors" widget that used to
+         sit here was removed rather than kept: it listed the same sponsors, in
+         the same order, directly above this one. Its .sponsor-mini /
+         .sponsor-logo--mini CSS went with it. */}}
     {{ partial "sidebar-sponsors.html" . }}
   </aside>
 </div>
