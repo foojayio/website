@@ -129,12 +129,6 @@
              place. */}}
         {{ if $posts }}{{ partial "feed-link.html" . }}{{ end }}
       </div>
-      {{ if $posts }}
-      {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" $articlesSec.id) }}
-      <div class="post-grid">
-        {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
-      </div>
-      {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" $articlesSec.id) }}
       {{/* Resolved through the cached slug->author index (author-page.html), the
            same lookup posts' bylines and the JSON-LD use -- so this works whatever
            shape content/authors/ has, and there is one definition of author
@@ -158,19 +152,40 @@
         {{- with $page }}{{ $name = .Title }}{{ end -}}
         {{- $named = $named | append (dict "slug" .slug "page" $page "name" $name "key" (lower $name)) -}}
       {{- end -}}
+      {{- /* Built ONCE, into a string, because both branches below print the
+             same comma-separated list of names and a `define` here would be
+             file-scoped template plumbing for three lines of markup. */ -}}
+      {{- $authorLinks := slice -}}
+      {{- range sort $named "key" -}}
+        {{- with .page -}}
+          {{- $authorLinks = $authorLinks | append (printf `<a href="%s">%s</a>` .RelPermalink (htmlEscape .Title)) -}}
+        {{- else -}}
+          {{/* No author page for this slug: a typo in the sponsor's `authors:`
+               list, or an author who hasn't been converted yet. Shown plainly
+               rather than silently dropped so it's noticeable. */}}
+          {{- $authorLinks = $authorLinks | append (printf `<span class="sponsor-authors-note__missing" title="No author page found for &quot;%s&quot;">%s</span>` (htmlEscape .slug) (htmlEscape .slug)) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $names := delimit $authorLinks ", " | safeHTML -}}
+      {{ if $posts }}
+      {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" $articlesSec.id) }}
+      <div class="post-grid">
+        {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
+      </div>
+      {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" $articlesSec.id) }}
       <p class="sponsor-authors-note">
-        All articles by
-        {{ range $i, $e := sort $named "key" }}
-          {{- if $i }}, {{ end -}}
-          {{- with $e.page -}}
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          {{- else -}}
-            {{/* No author page for this slug: a typo in the sponsor's
-                 `authors:` list, or an author who hasn't been converted yet.
-                 Shown plainly rather than silently dropped so it's noticeable. */}}
-            <span class="sponsor-authors-note__missing" title="No author page found for &quot;{{ $e.slug }}&quot;">{{ $e.slug }}</span>
-          {{- end -}}
-        {{ end }}.
+        All articles by {{ $names }}.
+      </p>
+      {{ else if $named }}
+      {{/* AUTHORS BUT NO ARTICLES YET -- a new sponsor, which is exactly when
+           someone checks the page. Naming the people anyway is the point: the
+           `authors:` list is already filled in, the author profiles already
+           exist, and hiding them until the first article publishes made the
+           page look like nothing had been set up. */}}
+      <p class="sponsor-authors-note">
+        No articles yet. {{ $names }}
+        {{ if eq (len $named) 1 }}writes{{ else }}write{{ end }} for foojay.io on behalf of
+        {{ .Title }} — their articles will appear here as they publish.
       </p>
       {{ else }}
       <p>No articles are linked to this sponsor yet. Articles are attributed by listing the sponsor's

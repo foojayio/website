@@ -1139,17 +1139,32 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .sponsor-tier--gold   .sponsor-tier__label { color: var(--tier-gold); }
 .sponsor-tier--silver .sponsor-tier__label { color: var(--tier-silver); }
 .sponsor-tier--bronze .sponsor-tier__label { color: var(--tier-bronze); }
-/* Wraps rather than scrolls: a tier gaining a sponsor should make the row two
-   lines, not hide one off the edge of a 300px column. */
-.sponsor-tier__row { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+/* A GRID OF WIDE TILES, not a flex row of square ones, and the reason is what a
+   sponsor logo actually is: most are WORDMARKS, two to four times wider than
+   they are tall. `object-fit: contain` in a SQUARE tile therefore fits them to
+   the tile's WIDTH and leaves two thirds of the height empty -- a 42px bronze
+   tile rendered the adesso and APIdia wordmarks about 32x11px, which is not a
+   readable logo, it is a smudge. Tier still sets the size, but only the HEIGHT;
+   the width comes from the column.
+
+   The track max is 92px because the widget's content box is 330px of sidebar
+   less 1.25rem of padding each side, and three gold logos plus two .35rem gaps
+   have to fit on one line: 3*92 + 2*5.6 = 287 <= 288. auto-fit then does the
+   rest -- a tier with 4+ sponsors shrinks its tracks instead of overflowing,
+   and a tier with one gets one 92px tile rather than a stretched one. */
+.sponsor-tier__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(56px, 92px));
+  align-items: center; gap: .35rem;
+}
 .sponsor-side { display: block; color: var(--ink-soft); }
 .sponsor-side:hover { color: var(--brand-accent-strong); }
-/* Sized per tier. The tile is square-ish and the logo is object-fit: contain
-   (see .sponsor-logo), so wordmarks and icon marks stay comparable. */
-.sponsor-logo--side { width: 44px; height: 44px; padding: .3rem; flex: 0 0 auto; border-radius: 8px; }
-.sponsor-side--gold   .sponsor-logo--side { width: 62px; height: 62px; }
-.sponsor-side--silver .sponsor-logo--side { width: 50px; height: 50px; }
-.sponsor-side--bronze .sponsor-logo--side { width: 42px; height: 42px; }
+/* Width from the grid track, height per tier -- so gold still reads largest
+   while every tier gets the full column width to show its wordmark in. */
+.sponsor-logo--side { width: 100%; height: 46px; padding: .3rem; border-radius: 8px; }
+.sponsor-side--gold   .sponsor-logo--side { height: 60px; }
+.sponsor-side--silver .sponsor-logo--side { height: 52px; }
+.sponsor-side--bronze .sponsor-logo--side { height: 46px; }
 
 /* Sidebar "Coming soon" widget (partials/coming-soon.html) -- the posts that
    are written and scheduled but not published yet. Home page only, and it
