@@ -9,9 +9,8 @@ website: "https://apidia.net/"
 websiteLabel: "apidia.net"
 linkedin: ""
 youtube: ""
-bluesky: ""
-mastodon: "https://jvm.social/@APIdia"
-twitter: "https://x.com/apidia_net"
+bluesky: "https://bsky.app/profile/apidia.net"
+mastodon: "https://mastodon.social/@APIdia"
 github: "https://github.com/APIdia-net"
 # Hand-maintained: author slugs (content/authors/<slug>/) whose posts
 # are this sponsor's articles. transfer/Sponsors.java preserves this block verbatim.
