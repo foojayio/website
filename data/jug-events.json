@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-11T06:07:57Z",
+  "generatedAt" : "2026-09-12T05:55:59Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -31,11 +31,27 @@
       "city" : "Amsterdam",
       "online" : false
     }, {
+      "title" : "Amsterdam JUG Meetup at Picnic",
+      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316510873/",
+      "startTime" : "2026-09-24T18:00:00+02:00",
+      "endTime" : "2026-09-24T21:00:00+02:00",
+      "venue" : "Picnic HQ",
+      "city" : "Amsterdam",
+      "online" : false
+    }, {
       "title" : "Amsterdam JUG OTel Workshop at Dash0",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316455984/",
       "startTime" : "2026-09-30T18:00:00+02:00",
       "endTime" : "2026-09-30T21:00:00+02:00",
       "venue" : "Nieuwezijds Voorburgwal 162",
+      "city" : "Amsterdam",
+      "online" : false
+    }, {
+      "title" : "Amsterdam JUG Meetup at Mollie",
+      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316510908/",
+      "startTime" : "2026-10-05T18:00:00+02:00",
+      "endTime" : "2026-10-05T21:00:00+02:00",
+      "venue" : "Mollie",
       "city" : "Amsterdam",
       "online" : false
     } ]
@@ -574,6 +590,14 @@
       "city" : "Atlanta",
       "online" : false
     }, {
+      "title" : "AI Trends That Actually Matter: Lessons from 100+ Hours of AI Live Coding",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/316514677/",
+      "startTime" : "2026-10-27T17:30:00+01:00",
+      "endTime" : "2026-10-27T19:00:00+01:00",
+      "venue" : "IHK-Akademie in Ostbayern GmbH",
+      "city" : "Weiden in der Oberpfalz",
+      "online" : false
+    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
       "startTime" : "2026-11-11T18:00:00+01:00",
@@ -641,15 +665,7 @@
     "jug" : "SaxonyJUG",
     "source" : "calendar",
     "url" : "https://jugsaxony.org",
-    "events" : [ {
-      "title" : "Softwarearchitektur im Team in Eigenregie bewerten. Mit LASR an einem Nachmittag. (Stefan Zörner)",
-      "url" : "https://jugsaxony.org/timeline/2026/9/10/LASR",
-      "startTime" : "2026-09-10T18:00:00+02:00",
-      "endTime" : "2026-09-10T20:00:00+02:00",
-      "venue" : "Xceptance Software Technologies GmbH",
-      "city" : "Jena",
-      "online" : null
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "jugstuttgart",
     "name" : "Java User Group Stuttgart",
