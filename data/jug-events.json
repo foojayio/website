@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-12T05:55:59Z",
+  "generatedAt" : "2026-09-13T06:19:13Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -930,12 +930,35 @@
       "online" : false
     } ]
   }, {
+    "slug" : "tampa-jug",
+    "name" : "Tampa Java User Group",
+    "jug" : "TampaJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/tampa-jug/",
+    "events" : [ {
+      "title" : "Known and Unknowns: Testing AI Generated Code",
+      "url" : "https://www.meetup.com/tampa-jug/events/316348039/",
+      "startTime" : "2026-09-24T17:45:00-04:00",
+      "endTime" : "2026-09-24T19:45:00-04:00",
+      "venue" : "Hillsborough Community College",
+      "city" : "Tampa",
+      "online" : false
+    } ]
+  }, {
     "slug" : "toronto-java-users-group",
     "name" : "Toronto Java Users Group",
     "jug" : "TorontoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/toronto-java-users-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Choose Your Own AI Adventure: Java, agents, and rabbit holes",
+      "url" : "https://www.meetup.com/toronto-java-users-group/events/316529380/",
+      "startTime" : "2026-09-24T18:30:00-04:00",
+      "endTime" : "2026-09-24T20:30:00-04:00",
+      "venue" : "Free Times Cafe",
+      "city" : "Toronto",
+      "online" : false
+    } ]
   }, {
     "slug" : "utrecht-java-user-group",
     "name" : "Utrecht Java User Group",
