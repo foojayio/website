@@ -1,19 +1,25 @@
 ---
 title: "VoIP, VPN, and the Build System Behind Them"
-date: "2026-09-11"
+date: "2026-09-24"
 description: "Codename One adds native call management and VPN APIs, while its builders generate the platform services, frameworks, permissions, and extension plumbing..."
 authors: ["shai-almog"]
 image: "voip-vpn-builders-bdff9b8012.jpg"
 categories: ["Java"]
+related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "sqlite-across-every-port-one-contract-one-encrypted-file-format"
+  - "app-shield-your-server-should-not-trust-the-app-calling-it"
+  - "mac-native-builds-live-protocols-and-open-issues-under-350"
+  - "codename-one-ai-oauth-and-other-platform-apis-in-the-core"
+  - "nfc-crypto-biometrics-and-a-new-build-cloud"
 canonical: "https://www.codenameone.com/blog/voip-vpn-builders/"
 ---
 
-![A phone, secure tunnel, and native build pipeline](voip-vpn-builders-bdff9b8012.jpg)
-
 In 2019, a reader asked whether our WhatsApp clone included VoIP. [I said no](https://www.codenameone.com/blog/whatsapp-clone-ga/#comment-24081). It would require native integration, and the setup was too much for that project. For years, that was the line.
 
-<aside style="border-left: 4px solid #007aff; background: #f6f8fa; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
+![A phone, secure tunnel, and native build pipeline](voip-vpn-builders-bdff9b8012.jpg)
 
+<aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
 
 VPN sat behind the same line. These features do not live neatly inside the application process. On iOS, a VoIP push can arrive before the application installs a Java listener, yet CallKit expects the incoming call to reach the lock screen on its deadline. A Call Directory integration is a separate extension executable with its own lifecycle and signing identity. Managed VPN adds Network Extension entitlements and profile rules. Android solves the same jobs through `ConnectionService`, `VpnManager`, `VpnService`, manifest declarations, and foreground-service rules.
 
