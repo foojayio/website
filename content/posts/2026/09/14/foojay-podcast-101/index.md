@@ -95,4 +95,4 @@ You can listen and subscribe to the Foojay Podcast on:
 * 48:26 LTS releases every 1, 2, or 3 years?
 * 49:55 [JEP 541](https://openjdk.org/jeps/541): Deprecate macOS/x64
 * 51:53 [JEP 540](https://openjdk.org/jeps/540): Simple JSON API (Incubator)
-* 55:30 Conclusion, what to remember from the 28 release
+* 55:30 Conclusion, what to remember from this release
