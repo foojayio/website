@@ -426,11 +426,13 @@ should catch a mistake at PR time rather than letting it fail silently.
     is counted and printed at the end of a run, so none of it has to be taken on
     trust.
 
-  Transcripts carry **`data-pagefind-ignore`**: 99 of them is ~800k words
-  against the site's 115k-word index, so indexing them would make every episode
-  a hit for any word anyone said out loud and bury the article archive. Worth
-  revisiting deliberately -- the search page already gives each section its own
-  quota -- rather than by default.
+  Transcripts carry **`data-pagefind-ignore`**: an episode is ~10k words of
+  speech, so the transcripts together run to several times the site's ~115k-word
+  article index, and indexing them would make every episode a hit for any word
+  anyone said out loud and bury the article archive. The margin only widens with
+  each new episode, so it does not need re-measuring. Worth revisiting
+  deliberately -- the search page already gives each section its own quota --
+  rather than by default.
 - **`scripts/transfer/Sponsors.java`**: converts the sponsor section from the live
   WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
   local as a bundle resource, About text through `HtmlToMarkdown`). Reads the
