@@ -350,12 +350,7 @@ management:
 
 1. **Build the image** : `docker build -t my-spring-boot-app:latest .`
 2. **Run the app** : `docker-compose up -d`
-3. **Create the topic:** <http://localhost:8080/ui/clusters/local/all-topics/create-new-topic> named
-
-```
-burger.orders
-```
-
+3. **Create the topic:** <http://localhost:8080/ui/clusters/local/all-topics/create-new-topic> named `burger.orders`
 4. **Send a few orders:**
    * `curl -X POST "http://localhost:8080/orders?burger=DukeBurger`
    * `curl -X POST "http://localhost:8080/orders?burger=Veggie`

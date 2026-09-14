@@ -111,7 +111,7 @@ At this point, we have the service defined. Then we can create the Stubs and wor
 
 Once we have `.proto` file, we will create the gRPC client and server interfaces from it. We can do this using Maven as described here: <https://github.com/grpc/grpc-java/blob/master/README.md>[](https://github.com/grpc/grpc-java/blob/master/README.md)
 
-We created a module in our[gRPC example](https://github.com/payara/Payara-Examples/tree/master/grpc) called grpc-stubs, as shown in picture below. The `.proto` file was copied into `proto` folder.
+We created a module in our [gRPC example](https://github.com/payara/Payara-Examples/tree/master/grpc) called grpc-stubs, as shown in picture below. The `.proto` file was copied into `proto` folder.
 ![](image-png-Apr-13-2022-10-21-10-20-PM-648c3e15.png)
 
 In `grpc-stubs->pom.xml` we included the gRPC dependencies and protobuf-maven-plugin that can generate the code during the Maven build. If the user clones [Payara-Examples](https://github.com/payara/Payara-Examples/) project, then he just need to run the following Maven command from `grpc-stubs` directory:
@@ -128,7 +128,7 @@ The results can be found in `target->generated-sources`. The main files generate
 
 ## Server Creation
 
-The RouteGuide server is implemented in our example by class[RouteGuideService.](https://github.com/payara/Payara-Examples/blob/master/grpc/grpc-web/src/main/java/fish/payara/example/grpc/RouteGuideService.java) It overrides the methods defined in `RouteGuideGrpc.RouteGuideImplBase` giving the actual behavior to the service.
+The RouteGuide server is implemented in our example by class`RouteGuideService.` It overrides the methods defined in `RouteGuideGrpc.RouteGuideImplBase` giving the actual behavior to the service.
 
 In the [official gRPC example](https://github.com/grpc/grpc-java/blob/master/examples/src/main/java/io/grpc/examples/routeguide/RouteGuideServer.java), specific methods are included for running the gRPC Server and responding to requests from clients. These methods are not necessary in the Payara example since we created a web project to be deployed in Payara Server. Therefore, we will now look into our RouteGuide implementation.
 

@@ -15,7 +15,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-functional-programming-techniques-in-java-a-primer"
   - "building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot"
-frozen: false
+frozen: true
 ---
 
 **FEPCOS-J implements a model-based Java language extension that provides the annotation *@Part*, which enables a developer to declaratively compose networked systems. This post introduces the concept and gives you an example of how to use it.**
@@ -63,43 +63,7 @@ class SY {
 }
 ```
 
-Within the fragment of a system declaration above,
-
-```java
-@Part(ip = "10.0.0.1", port = 8001) foo.S bar;
-```
-
-declares a system's part named
-
-```java
-bar
-```
-
-, accessible via internet socket 10.0.0.1:8001 by using the ***fjp*** -generated system interface
-
-```java
-foo.S
-```
-
-. Further,
-
-```java
-@Cap AY usePart;
-```
-
-declares a capability
-
-```java
-usePart
-```
-
-realized by the activity specification
-
-```java
-AY
-```
-
-to demonstrate how to access the part in the following.
+Within the fragment of a system declaration above, `@Part(ip = "10.0.0.1", port = 8001) foo.S bar;` declares a system's part named `bar`, accessible via internet socket 10.0.0.1:8001 by using the ***fjp*** -generated system interface `foo.S`. Further, `@Cap AY usePart;` declares a capability `usePart` realized by the activity specification `AY` to demonstrate how to access the part in the following.
 
 ### Declared parts are accessible within activity specifications
 
@@ -120,57 +84,9 @@ class AY {
 }
 ```
 
-Within the fragment of the activity specification above, the method
+Within the fragment of the activity specification above, the method `@Behavior() void go(SY sy) throws Exception { … }` accepts the system declaration `SY sy` as a parameter.
 
-```java
-@Behavior() void go(SY sy) throws Exception { … }
-```
-
-accepts the system declaration
-
-```java
-SY sy
-```
-
-as a parameter.
-
-As described above,
-
-```java
-sy.bar
-```
-
-is the member variable of the part, which has the type
-
-```java
-foo.S
-```
-
-, a ***fjp*** -generated system interface. Thus,
-
-```java
-sy.bar
-```
-
-provides blocking access via
-
-```java
-sy.bar.b
-```
-
-and concurrent access via
-
-```java
-sy.bar.c
-```
-
-. In this example, the part's assumed capability is
-
-```java
-doSth(/* … */)
-```
-
-.
+As described above, `sy.bar` is the member variable of the part, which has the type `foo.S`, a ***fjp*** -generated system interface. Thus, `sy.bar` provides blocking access via `sy.bar.b` and concurrent access via `sy.bar.c`. In this example, the part's assumed capability is `doSth(/* … */)`.
 
 ### The developer declares a system, and FEPCOS-J generates code for him
 
@@ -323,22 +239,7 @@ The composed system *calculator* uses the basic systems *adder* and *multiplier*
 
 #### System declaration: *SY.java*
 
-The class SY belongs to the
-
-*
-
-```
-package calculator.spec
-```
-
-*
-and imports
-
-```java
-fepcos.sy.*
-```
-
-, which contains the annotations *@SYDec* , *@Cap* , and *@Part* . The following explains their usage.
+The class SY belongs to the *`package calculator.spec`* and imports `fepcos.sy.*`, which contains the annotations *@SYDec* , *@Cap* , and *@Part*. The following explains their usage.
 
 ```java
 package calculator.spec;
@@ -355,81 +256,15 @@ class SY {
 }
 ```
 
-*@SYDec* specifies that the annotated
+*@SYDec* specifies that the annotated `class SY` is the system declaration. ***fjp*** generates the system documentation by using the String of the annotation.
 
-```java
-class SY
-```
+*@Cap* declares the capabilities `Add add` and `Multiply mul`. The next subsection describes these classes' source code.
 
-is the system declaration. ***fjp*** generates the system documentation by using the String of the annotation.
-
-*@Cap* declares the capabilities
-
-```java
-Add add
-```
-
-and
-
-```java
-Multiply mul
-```
-
-. The next subsection describes these classes' source code.
-
-*@Part* is used to declare the parts of calculator. In detail:
-
-```java
-@Part(ip = "10.1.0.1", port = 8001) adder.S adder;
-```
-
-declares a part
-
-```java
-adder
-```
-
-. It is accessible via internet socket 10.1.0.1:8001 by using
-
-```java
-adder.S
-```
-
-, which is the system interface ***fjp*** has generated. Analogous to the previous expression,
-
-```java
-@Part(ip = "10.1.0.2", port = 8001) multiplier.S multiplier;
-```
-
-declares part
-
-```java
-multiplier
-```
-
-. It is accessible via internet socket 10.1.0.2:8001 by using
-
-```java
-multiplier.S
-```
-
-, which is the system interface ***fjp*** has generated.
+*@Part* is used to declare the parts of calculator. In detail: `@Part(ip = "10.1.0.1", port = 8001) adder.S adder;` declares a part `adder`. It is accessible via internet socket 10.1.0.1:8001 by using `adder.S`, which is the system interface ***fjp*** has generated. Analogous to the previous expression, `@Part(ip = "10.1.0.2", port = 8001) multiplier.S multiplier;` declares part `multiplier`. It is accessible via internet socket 10.1.0.2:8001 by using `multiplier.S`, which is the system interface ***fjp*** has generated.
 
 #### Activity specifications: *Add.java* and *Multiply.java*
 
-The following code of activity specifications
-
-```java
-Add
-```
-
-and
-
-```java
-Multiply
-```
-
-essentially correspond to each other. For that reason, the next paragraph points out the similarities. Details of the activities are described afterwards.
+The following code of activity specifications `Add` and `Multiply` essentially correspond to each other. For that reason, the next paragraph points out the similarities. Details of the activities are described afterwards.
 
 ```java
 package calculator.spec;
@@ -473,175 +308,25 @@ class Multiply {
 }
 ```
 
-Both activity specifications are in the
+Both activity specifications are in the `package calculator.spec` and import the package `fepcos.ay.*`, which contains annotations *@AYSpec* , *@In* , *@Out* , and *@Behavior* . Further, *@AYSpec* expresses that the annotated class is the activity specification.
 
-```java
-package calculator.spec
-```
-
-and import the package
-
-```java
-fepcos.ay.*
-```
-
-, which contains annotations *@AYSpec* , *@In* , *@Out* , and *@Behavior* . Further, *@AYSpec* expresses that the annotated class is the activity specification.
-
-Both
-
-```java
-Add
-```
-
-and
-
-```java
-Multiply
-```
-
-have two input parameters,
-
-```java
-x
-```
-
-and
-
-```java
-y
-```
-
-, as the annotation *@In* declares. In addition, both activities have an output parameter
-
-```java
-z
-```
-
-, as the annotation *@Out* declares.
+Both `Add` and `Multiply` have two input parameters, `x` and `y`, as the annotation *@In* declares. In addition, both activities have an output parameter `z`, as the annotation *@Out* declares.
 
 At this point, it is important to consider the Strings-parameters of the annotations, as they are the input for the generated interface documentation and express important aspects of the semantics.
 
-Finally, *@Behavior* annotates the method
+Finally, *@Behavior* annotates the method `void go(SY sy) throws Exception{…}`.
 
-```java
-void go(SY sy) throws Exception{…}
-```
+In other words, `go(SY sy)` specifies the desired behavior of the activity. The method accepts the system declaration `SY sy`. Hence, it is possible to access the declared parts of the composed system. This is necessary, as the parts actually have to execute the activity.
 
-.
+`z = res.z;` sets the output parameter. The `throws Exception` expression passes any exceptions that may occur to FEPCOS-J so that it can handle them.
 
-In other words,
+The activity `Add` causes *calculator* to blockingly access the capability `add(x,y)` of its part `adder`, specified by the following expression: `var res = sy.adder.b.add(x,y);`.
 
-```java
-go(SY sy)
-```
+In detail, the instance of the ***fjp*** -generated system interface `sy.adder` provides a blocking access `b` to the activity `add(x,y)`.
 
-specifies the desired behavior of the activity. The method accepts the system declaration
+The activity `Multiply` causes *calculator* to blockingly access the capability `mul(x,y)` of its part `multiplier`, analogous to Add. The following expression specifies this: `var res = sy.multiplier.b.mul(x,y);`.
 
-```java
-SY sy
-```
-
-. Hence, it is possible to access the declared parts of the composed system. This is necessary, as the parts actually have to execute the activity.
-
-```java
-z = res.z;
-```
-
-sets the output parameter. The
-
-```java
-throws Exception
-```
-
-expression passes any exceptions that may occur to FEPCOS-J so that it can handle them.
-
-The activity
-
-```java
-Add
-```
-
-causes *calculator* to blockingly access the capability
-
-```java
-add(x,y)
-```
-
-of its part
-
-```java
-adder
-```
-
-, specified by the following expression:
-
-```java
-var res = sy.adder.b.add(x,y);
-```
-
-In detail, the instance of the ***fjp***-generated system interface
-
-```java
-sy.adder
-```
-
-provides a blocking access
-
-```java
-b
-```
-
-to the activity
-
-```java
-add(x,y)
-```
-
-.
-
-The activity
-
-```java
-Multiply
-```
-
-causes *calculator* to blockingly access the capability
-
-```java
-mul(x,y)
-```
-
-of its part
-
-```java
-multiplier
-```
-
-, analogous to Add. The following expression specifies this:
-
-```java
-var res = sy.multiplier.b.mul(x,y);
-```
-
-In detail, the instance of the ***fjp***-generated system interface
-
-```java
-sy.multiplier
-```
-
-provides a blocking access
-
-```java
-b
-```
-
-to the activity
-
-```java
-mul(x,y)
-```
-
-.
+In detail, the instance of the ***fjp*** -generated system interface `sy.multiplier` provides a blocking access `b` to the activity `mul(x,y)`.
 
 #### Processing
 
@@ -688,19 +373,7 @@ It requires the ***fjp*** -generated system import module *calculator.imp*.
 
 #### Application: *Main.java*
 
-The application is realized in
-
-```java
-package app
-```
-
-by the
-
-```java
-class Main
-```
-
-.
+The application is realized in `package app` by the `class Main`.
 
 ```java
 package app;
@@ -725,169 +398,25 @@ public class Main {
 }
 ```
 
-```java
-Main
-```
+`Main` defines two constants `X` and `Y` and accesses the composed system `calculator` in the method `public static void main(String[] args) {…}`.
 
-defines two constants
+The ***fjp*** -generated system interface `calculator.S` implements the *AutoCloseable* interface [\[4\]](#references), thus it is instantiated within a *try-with-resources* block.
 
-```java
-X
-```
-
-and
-
-```java
-Y
-```
-
-and accesses the composed system
-
-```java
-calculator
-```
-
-in the method
-
-```java
-public static void main(String[] args) {…}
-```
-
-The ***fjp***-generated system interface
-
-```java
-calculator.S
-```
-
-implements the *AutoCloseable* interface [\[4\]](#references), thus it is instantiated within a *try-with-resources* block.
-
-```java
-try(var myCalc = new calculator.S("10.0.0.1", 8001)) { … } catch(Exception e) { … }
-```
+`try(var myCalc = new calculator.S("10.0.0.1", 8001)) { … } catch(Exception e) { … }`
 
 The system interface accepts the IPv4 address 10.0.0.1 and the port 8001 as parameters due to the addressing of the internet socket at which *calculator* is listening for incoming requests.
 
-The variable
+The variable `var myCalc` holds the instance of the system interface and provides blocking access to *calculator* via `myCalc.b`. The code `var r1 = myCalc.b.add(X,Y);` causes *app* to blockingly access calculator's capability add via the network, passing the parameters `X` and `Y`. It is important to realize that this causes *calculator* to access *adder's* capability add via the network. The variable `r1` holds the result.
 
-```java
-var myCalc
-```
+Analogous to this, the code `var r2 = myCalc.b.mul(X,Y);` causes *app* to blockingly access calculator's capability `mul` via the network, passing the parameters `X` and `Y`. This time, *calculator* accesses *multiplier's* capability `mul` via the network. The variable `r2` holds the result.
 
-holds the instance of the system interface and provides blocking access to *calculator* via
-
-```
-myCalc.b
-```
-
-. The code
-
-```java
-var r1 = myCalc.b.add(X,Y);
-```
-
-causes *app* to blockingly access calculator's capability add via the network, passing the parameters
-
-```java
-X
-```
-
-and
-
-```java
-Y
-```
-
-. It is important to realize that this causes *calculator* to access *adder's* capability add via the network. The variable
-
-```java
-r1
-```
-
-holds the result.
-
-Analogous to this, the code
-
-```java
-var r2 = myCalc.b.mul(X,Y);
-```
-
-causes *app* to blockingly access calculator's capability
-
-```java
-mul
-```
-
-via the network, passing the parameters
-
-```java
-X
-```
-
-and
-
-```java
-Y
-```
-
-. This time, *calculator* accesses *multiplier's* capability
-
-```java
-mul
-```
-
-via the network. The variable
-
-```java
-r2
-```
-
-holds the result.
-
-Finally, the results
-
-```java
-r1.z
-```
-
-, which is the sum, and
-
-```java
-r2.z
-```
-
-, which is the product, are printed by using
-
-```java
-System.out.println(…)
-```
-
-. Any exceptions thrown are also printed using
-
-```
-System.out.println(…)
-```
-
-.
+Finally, the results `r1.z`, which is the sum, and `r2.z`, which is the product, are printed by using `System.out.println(…)`. Any exceptions thrown are also printed using `System.out.println(…)`.
 
 #### Processing
 
-The module path for compiling
+The module path for compiling `MP=mlib:${FEPCOS_HOME}/mlib` contains both the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
 
-```
-MP=mlib:${FEPCOS_HOME}/mlib
-```
-
-contains both the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
-
-After compiling the source code by using the command
-
-```
-javac -p ${MP} -d build `find src -name "*.java"`
-```
-
-,
-
-the subdirectory *build* contains the compiled Java classes.
+After compiling the source code by using the command ``javac -p ${MP} -d build `find src -name "*.java"```, the subdirectory *build* contains the compiled Java classes.
 
 ```
 app/build/
@@ -930,47 +459,17 @@ As shown in **Fig. 6** , both the composed networked system *calculator* and the
 
 ### Exporting the systems: *adder* , *multiplier* , and *calculator*
 
-Executed in the project directory *adder*, the command
+Executed in the project directory *adder*, the command `fjx tgt adder.exp 10.1.0.1:8001` causes *adder* to listen at internet socket 10.1.0.1:8001 for incoming requests.
 
-```
-fjx tgt adder.exp 10.1.0.1:8001
-```
+Executed in the project directory *multiplier*, the command `fjx tgt multiplier.exp 10.1.0.2:8001` causes *multiplier* to listen at internet socket 10.1.0.2:8001 for incoming requests.
 
-causes *adder* to listen at internet socket 10.1.0.1:8001 for incoming requests.
-
-Executed in the project directory *multiplier*, the command
-
-```
-fjx tgt multiplier.exp 10.1.0.2:8001
-```
-
-causes *multiplier* to listen at internet socket 10.1.0.2:8001 for incoming requests.
-
-Executed in the project directory *calculator*, the command
-
-```
-fjx tgt calculator.exp 10.0.0.1:8001
-```
-
-causes *calculator* to listen at internet socket 10.0.0.1:8001 for incoming requests.
+Executed in the project directory *calculator*, the command `fjx tgt calculator.exp 10.0.0.1:8001` causes *calculator* to listen at internet socket 10.0.0.1:8001 for incoming requests.
 
 ### Executing the system user: *app*
 
-The system user is executed in the project directory *app*. Thus, the module path for the execution
+The system user is executed in the project directory *app*. Thus, the module path for the execution `MP=build:mlib:${FEPCOS_HOME}/mlib` contains the the *app's* compiled Java classes in the directory *build* , the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
 
-```
-MP=build:mlib:${FEPCOS_HOME}/mlib
-```
-
-contains the the *app's* compiled Java classes in the directory *build* , the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
-
-The execution of app by using the command
-
-```
-java -p ${MP} -m app/app.Main
-```
-
-returns the output as depicted in **Fig .7**.  
+The execution of app by using the command `java -p ${MP} -m app/app.Main` returns the output as depicted in **Fig .7**.  
 ![](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
 
 ## Conclusion

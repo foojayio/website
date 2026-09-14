@@ -41,7 +41,7 @@ To get started, you'll first need to install SDKMan! on your system, with the fo
 
 After the installation is complete, open a new terminal window and type the following to ensure that SDKMan! has been installed:
 
-```
+```bash
 sdk version
 ```
 

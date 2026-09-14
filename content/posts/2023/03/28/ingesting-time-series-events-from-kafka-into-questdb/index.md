@@ -37,13 +37,7 @@ Let's see how the integration works.
 Make sure you already have:
 
 * A [Kafka installation](https://kafka.apache.org/documentation/#quickstart%22)
-* A running QuestDB (for example, 
-
-```
-docker run --add-host=host.docker.internal:host-gateway -p 9000:9000 -p 9009:9009 -p 8812:8812 -p 9003:9003 questdb/questdb:latest
-```
-
-  )
+* A running QuestDB (for example, `docker run --add-host=host.docker.internal:host-gateway -p 9000:9000 -p 9009:9009 -p 8812:8812 -p 9003:9003 questdb/questdb:latest`)
 * A local [JDK installation](https://foojay.io/java-quick-start/install-java/)
 
 ## Adding the QuestDB Sink Connector to Kafka

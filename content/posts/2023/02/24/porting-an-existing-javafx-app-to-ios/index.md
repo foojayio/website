@@ -218,13 +218,7 @@ To make the project work, you will need some specific settings for iOS.
 
 You will find things like icons and so called plist files for iOS in the `jarkanoid/src/ios/` folder.
 
-If I need to port a new JavaFX project to iOS, I usually copy this folder the new project in the
-
-```
-project/src
-```
-
-folder and modify the content of it's files (e.g., icons and plist files).
+If I need to port a new JavaFX project to iOS, I usually copy this folder the new project in the `project/src` folder and modify the content of it's files (e.g., icons and plist files).
 
 For JArkanoid, I copied the ios folder from my [SpaceFX](https://github.com/HanSolo/SpaceFX/tree/mobile) game that I wrote some time ago.
 

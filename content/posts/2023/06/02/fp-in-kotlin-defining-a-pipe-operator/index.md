@@ -76,19 +76,7 @@ Where:
   **operator argument** . So, we have:
   * The constant (LHS) is given by `X`.
   * The function (RHS) to be applied is given by `f:X \to Y`.
-* `---` **returns** `Y` —result of applying
-
-```
-f
-```
-
-  to some
-
-```
-x
-```
-
-  .
+* `---` **returns** `Y` —result of applying `f` to some `x`.
 * `---`'s **image is defined as `f(this)`** where `this` is an element of `X`.
 
 That was the definition of the pipe operator.

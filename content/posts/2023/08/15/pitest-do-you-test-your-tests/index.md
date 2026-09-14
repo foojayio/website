@@ -47,13 +47,7 @@ It can also help us find issues if there were gaps in our **T** est **D** riven 
 
 ## A short demo
 
-If you want to run the code yourself, please make sure you have
-
-```
-Maven
-```
-
-installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
+If you want to run the code yourself, please make sure you have `Maven` installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 
 The actual application itself doesn't entail much, it just contains a simple function that's sensitive to mutations.
 

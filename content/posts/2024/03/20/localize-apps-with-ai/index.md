@@ -37,11 +37,7 @@ If you're already familiar with the basics, and just want to see AI in action, y
 
 Creating an application just for a localization experiment would be overkill, so let's fork some open-source project. I chose [Spring Petclinic](https://github.com/spring-projects/spring-petclinic), an example web app that is used to showcase the [Spring](https://spring.io) framework for Java.
 
-Fork and clone Petclinic (requires GitHub CLI):
-
-```bash
-gh repo fork https://github.com/spring-projects/spring-petclinic --clone=true
-```
+Fork and clone Petclinic (requires GitHub CLI): `gh repo fork https://github.com/spring-projects/spring-petclinic --clone=true`
 
 If you haven't used Spring before, some code snippets might not look familiar to you, but, as I already mentioned, this discussion is technology-agnostic. The steps are roughly the same regardless of the language and framework.
 

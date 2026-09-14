@@ -96,13 +96,7 @@ The application uses Quarkus 3.32.2 with the following key extension: **OpenId C
 </dependency>
 ```
 
-The
-
-```
-quarkus.oidc.auth-server-url
-```
-
-property specifies the base URL of the OpenID Connect (OIDC) server, which points to the Keycloak instance in this case:
+The `quarkus.oidc.auth-server-url` property specifies the base URL of the OpenID Connect (OIDC) server, which points to the Keycloak instance in this case:
 
 ```ini
 quarkus.http.port=8180

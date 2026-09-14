@@ -59,13 +59,7 @@ And then go to the run configuration. Select the modify options and Mark the Add
 
 ![](Screen-Shot-2022-05-08-at-5.04.39-AM.png)
 
-You need to add
-
-```
---enable-preview
-```
-
-there as well.
+You need to add `--enable-preview `there as well.
 
 ![](Screen-Shot-2022-05-08-at-5.11.43-AM.png)
 

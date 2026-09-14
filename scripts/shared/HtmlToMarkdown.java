@@ -316,6 +316,31 @@ public final class HtmlToMarkdown {
         // were live in that state, each with everything after its final code
         // sample shown as one grey slab.
         for (Element el : outermostMatches(content, SELECTOR_ENLIGHTERJS)) {
+            // THE PLUGIN MARKS INLINE SPANS WITH THE SAME CLASS, and those are
+            // not code blocks. WordPress emits a BLOCK as
+            // `<pre class="EnlighterJSRAW">` and an INLINE snippet as a bare
+            // `<code class="EnlighterJSRAW">` sitting inside a paragraph -- same
+            // class, same data-enlighter-language, different tag. Fencing the
+            // inline one cuts the sentence into pieces:
+            //
+            //     Valid values for the protocol are
+            //     ```java
+            //     imap
+            //     ```
+            //     ,
+            //
+            // which is four block elements where the author wrote one sentence.
+            // Reported by the author of `receiving-mails-in-java-with-imap-or-pop3`
+            // (it has four in a row, so the sentence rendered as seven blocks).
+            //
+            // Skipping it here is the whole fix: the loop below this one already
+            // handles every other inline `<code>` -- it repairs the entities and
+            // lets Flexmark emit a backtick span -- and it no longer has to
+            // exclude the EnlighterJS ones, because they are still standing when
+            // it runs. The language attribute is dropped with the tag, which is
+            // right: Markdown has no inline-code language and the site does not
+            // highlight a span.
+            if (isInlineCode(el)) continue;
             String token = PRESERVE_TOKEN + preserved.size() + PRESERVE_TOKEN_END;
             // Climbing rather than checking the immediate parent, because the
             // nesting goes two deep on some posts:
@@ -347,7 +372,9 @@ public final class HtmlToMarkdown {
             target.replaceWith(new Element("p").text(token));
         }
 
-        // Inline <code> spans left over (the EnlighterJS ones are gone by now).
+        // Inline <code> spans -- the ones the loop above deliberately left
+        // standing (isInlineCode) as well as the plain ones. Only the BLOCKS are
+        // gone by now, replaced by fence tokens.
         // Flexmark turns these into backtick spans, where -- exactly as in a
         // fence -- an entity is never what the author typed, it is WordPress's
         // double-escaping. Without this a span reading `DESCRIBE KEYSPACE
@@ -357,7 +384,24 @@ public final class HtmlToMarkdown {
             if (code.parent() != null && "pre".equals(code.parent().tagName())) continue;
             String text = code.wholeText();
             String fixed = resolveDoubleEscaped(normalizeCodeDashes(normalizeCodeSpaces(text)));
-            if (!fixed.equals(text)) code.text(fixed);
+            // ALWAYS re-set the text, even when the entity repair changed
+            // nothing: `text()` also FLATTENS any child markup, and a code span
+            // that still has children is one Flexmark will tear in half.
+            //
+            // WordPress's own editor is what puts them there. `fuchs-2023-fepcos-j-02`
+            // stores an inline snippet as
+            //
+            //     <code ...>doSth(/*<em> … *</em>/)</code>
+            //
+            // -- it read the `* … *` in a C comment as emphasis and wrote the
+            // <em> INTO the code element. Left standing, the emphasis is
+            // rendered as Markdown `*` and closes the backtick span early:
+            // `doSth(/*`*… **`/)`. Nothing inside a code span can be marked up
+            // in Markdown anyway, so flattening is the only faithful reading.
+            //
+            // This never mattered while every EnlighterJS span became a fence,
+            // because codeFence() takes wholeText() and drops the tags for free.
+            code.text(fixed);
         }
 
         // Galleries -> {{< gallery >}}. Before both passes below, so a gallery's
@@ -1121,6 +1165,27 @@ public final class HtmlToMarkdown {
      * WordPress -- see the EnlighterJS pass in toMarkdown for why it wins over
      * the plugin's attribute when the two disagree.
      */
+    /**
+     * True when an EnlighterJS-tagged element is an INLINE span rather than a
+     * code block -- i.e. a bare {@code <code class="EnlighterJSRAW">} with no
+     * {@code <pre>} above it. WordPress's own markup is the signal: the plugin
+     * wraps a block in {@code <pre>} (sometimes as {@code <pre><code>}, the
+     * nested shape the fence loop climbs) and leaves an inline snippet as a
+     * {@code <code>} inside the paragraph.
+     *
+     * A span holding a NEWLINE is treated as a block anyway. Nothing in the
+     * archive does that today, but a multi-line backtick span is not something
+     * Markdown can represent, so the fence is the safer reading of it.
+     */
+    static boolean isInlineCode(Element el) {
+        if (!"code".equals(el.tagName())) return false;
+        if (el.wholeText().contains("\n")) return false;
+        for (Element p = el.parent(); p != null; p = p.parent()) {
+            if ("pre".equals(p.tagName())) return false;
+        }
+        return true;
+    }
+
     static String languageClass(Element el) {
         for (String cls : el.classNames()) {
             String c = cls.toLowerCase(Locale.ROOT);

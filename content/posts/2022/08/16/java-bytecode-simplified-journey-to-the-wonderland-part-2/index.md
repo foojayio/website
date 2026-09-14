@@ -13,7 +13,7 @@ related_posts:
   - "what-is-jvm-bytecode"
   - "hardware-acceleration-for-java-tornadovm-can-do-it"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-3"
-frozen: false
+frozen: true
 ---
 
 Our [previous article](https://foojay.io/today/java-bytecode-simplified-journey-to-the-wonderland-part-1/) introduced Bytecode and discussed what it includes.
@@ -144,7 +144,7 @@ Now, this becomes significantly more intriguing, and we can observe the presence
 
 In addition to this, the code has other locations with numbers such as #1, #2, etc. These are the constant pool's reference values. If we wish to view the constant pool, we must use an additional switch, `-v`.
 
-```
+```bash
 javap -v Lamp
 ```
 

@@ -306,7 +306,7 @@ According to the Javadoc documentation:
 > A `VarHandle` is a dynamically strongly typed reference to a variable, or to a parametrically-defined family of variables, including static fields, non-static fields, array elements, or components of an off-heap data structure. Access to such variables is supported under various *access modes*, including plain read/write access, volatile read/write access, and compare-and-set.
 > [Javadoc documentation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/invoke/VarHandle.html)
 
-In layman's (newbie) terms a `VarHandle` can reference or access to sequences, structs and fields from memory. This API has been used beginning with Java 9. The goal of [VarHandle](https://openjdk.java.net/jeps/193) was to define a standard way to invoke the equivalents of various`java.util.concurrent.atomic` and `sun.misc.Unsafe` operations.
+In layman's (newbie) terms a `VarHandle` can reference or access to sequences, structs and fields from memory. This API has been used beginning with Java 9. The goal of `VarHandle` was to define a standard way to invoke the equivalents of various`java.util.concurrent.atomic` and `sun.misc.Unsafe` operations.
 
 Important Note: the API to get and set values in structs or sequence are enhanced to allow a base offset from the memory address. Prior to the final release of var handles didn't have the second parameter to specify the base offset. This allows the developer to nest structs or retrieve memory at any offset. Since we are simply holding ints for x and y the base offset is 0L (zero long).
 

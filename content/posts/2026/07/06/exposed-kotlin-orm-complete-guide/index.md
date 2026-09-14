@@ -223,7 +223,7 @@ tasks.withType<Test> {
 }
 ```
 
-The **Exposed Spring Boot Starter** bundles the latest version of Exposed, the custom SpringTransactionManager from the **spring7-transaction** module, and the **Spring Boot Starter JDBC** dependency. This starter simplifies Exposed integration by providing the essential components out of the box.
+The **Exposed Spring Boot Starter** bundles the latest version of Exposed, the custom SpringTransactionManager from the `spring7-transaction` module, and the **Spring Boot Starter JDBC** dependency. This starter simplifies Exposed integration by providing the essential components out of the box.
 
 The **Exposed Spring Boot Starter** builds on top of `spring-boot-starter-jdbc`, so Spring Boot requires a configured data source. To establish a connection to the database, add the following properties to your `application.properties` file:
 

@@ -1289,6 +1289,23 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .post-single .byline-avatar {
   width: 1.9rem; height: 1.9rem; margin: 0; border-radius: 50%;
 }
+
+/* A RELATED-POST THUMBNAIL IS NOT AN ARTICLE IMAGE EITHER -- the same (0,1,1)
+   trap, one section further down the page. `.post-card-image img` (line ~701)
+   is also (0,1,1), so it TIES with `.post-single img` and loses on source
+   order alone; `height: 100%` survives only because the broad rule never
+   declares a height. What does land is `margin: 1.5rem 0`, which pushes the
+   thumbnail down inside a box that is `aspect-ratio: 300 / 200` with
+   `overflow: hidden` -- so the card clips the bottom of the image and exposes
+   a 1.5rem band of the .thumb-ph placeholder along the TOP, which reads as a
+   coloured stripe above every related thumbnail (green on a Java post, since
+   --ph-hue is hashed from the first category). Reported on
+   /today/voip-vpn-builders/.
+
+   Scoped to the image inside the card link rather than re-scoping the broad
+   rule to `.prose`: the hero and a handful of body images sit outside .prose,
+   so narrowing it there would be a much wider change than the bug needs. */
+.post-single .post-card-image img { margin: 0; }
 .post-single h2, .post-single h3 { margin-top: 2rem; }
 .post-single .post-categories { margin-top: 1.75rem; }
 

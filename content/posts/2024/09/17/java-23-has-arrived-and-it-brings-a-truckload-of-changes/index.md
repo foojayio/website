@@ -999,7 +999,7 @@ When `Stream::gather` is called, it roughly performs the following steps:
 
 * Create a [`Downstream`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.Downstream.html) object which, when given an element of the gatherer's output type, passes it to the next stage in the pipeline.
 * Obtain the gatherer's private state object by invoking the `get()` method of its initializer.
-* Obtain the gatherer's integrator by invoking its [integrator()](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.html#integrator()) method.
+* Obtain the gatherer's integrator by invoking its `integrator()` method.
 * While there are more input elements, invoke the integrator's [`integrate(...)`](https://cr.openjdk.org/~vklang/gatherers/api/java.base/java/util/stream/Gatherer.Integrator.html#integrate(A,T,java.util.stream.Gatherer.Downstream)) method, passing it the state object, the next element, and the downstream object. Terminate if that method returns false.
 * Obtain the gatherer's finisher and invoke it with the state and downstream objects.
 

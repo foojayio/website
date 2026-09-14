@@ -106,13 +106,7 @@ We can extract the number 365 to a constant in this line of code because the ear
 System.out.println("Number of times the planet rotates around the sun is " + 365);
 ```
 
-We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as
-
-```java
-NUMBER_OF_DAYS_IN_A_YEAR
-```
-
-. IntelliJ IDEA creates a new public static final constant at the start of our class:
+We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as `NUMBER_OF_DAYS_IN_A_YEAR`. IntelliJ IDEA creates a new public static final constant at the start of our class:
 
 ```java
 public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;
@@ -141,7 +135,9 @@ private void getWeather() {
 
 You need to select `The weather is ` and then you can use **⌘⌥F** on macOS, or **Ctrl** +**Alt** +**F** on Windows and Linux, to extract it to a field. In the Introduce Field dialog, we can select to initialise this field in the Field declaration, give it a name such as `theWeatherIs` and select to replace all four occurrences of it in the code.
 
-![Introduce Field dialog](introduce-field.png) When we press **OK**, IntelliJ IDEA creates a new field at the top of our class:
+![Introduce Field dialog](introduce-field.png)
+
+When we press **OK**, IntelliJ IDEA creates a new field at the top of our class:
 
 `String theWeatherIs = "The weather is";`
 

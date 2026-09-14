@@ -38,7 +38,7 @@ The ap-loader library allows you to depend on a specific version of async-profil
 </dependency>
 ```
 
-There are multiple maven artifacts: [ap-loader-all](https://central.sonatype.com/artifact/me.bechberger/ap-loader-all) which contains the native libraries for all platforms for which async-profiler has pre-built libraries and artifacts that only support a single platform like [`ap-loader-macos`](https://central.sonatype.com/artifact/me.bechberger/ap-loader-macos). I recommend using the `ap-loader-all` if you don't know what you're doing, the current release is still tiny, with 825KB.
+There are multiple maven artifacts: `ap-loader-all` which contains the native libraries for all platforms for which async-profiler has pre-built libraries and artifacts that only support a single platform like [`ap-loader-macos`](https://central.sonatype.com/artifact/me.bechberger/ap-loader-macos). I recommend using the `ap-loader-all` if you don't know what you're doing, the current release is still tiny, with 825KB.
 
 The version number consists of the async-profiler version and the version (here 2.9) of the ap-loader support libraries (here 5). I'm typically only publishing the newest ap-loader version for the latest async-profiler. The changes in ap-loader are relatively minimal, and I keep the API stable between versions.
 
@@ -82,7 +82,7 @@ If you want to merely get the path to the extracted libAsyncProfiler, then use t
 
 ## Execute Profiler
 
-The async-profiler project contains the [profiler.s](https://github.com/jvm-profiling-tools/async-profiler#profiler-options)`h` script (will be replaced by `asprof` starting with async-profiler 2.10):
+The async-profiler project contains the `profiler.sh` script (will be replaced by `asprof` starting with async-profiler 2.10):
 > To run the agent and pass commands to it, the helper script `profiler.sh` is provided. A typical workflow would be to launch your Java application, attach the agent and start profiling, exercise your performance scenario, and then stop profiling. The agent's output, including the profiling results, will be displayed in the Java application's standard output.
 > [Async-Profiler documentation](https://github.com/async-profiler/async-profiler/commit/e3b7bfca227ae5c916f00abfacf0e61291df3a67)
 
@@ -146,7 +146,7 @@ AsyncProfilerLoader.executeJattach(
 
 But this use case can, of course, be accomplished by using the `executeProfiler` method, which internally uses jattach.
 
-A great use case for jattach is to attach a custom native agent to the currently running JVM. Starting with JVM 9 doing this via [VirtualMachine#attach](https://docs.oracle.com/en/java/javase/17/docs/api/jdk.attach/com/sun/tools/attach/VirtualMachine.html#attach(java.lang.String)) [throws](https://stackoverflow.com/questions/50498102/how-to-set-jdk-attach-allowattachself-true-globally) an IOException if you try this without setting `-Djdk.attach.allowAttachSelf=true`. The `boolean jattach(Path agentPath[, String arguments])` methods simplify this, constructing the command line arguments for you and returning true if jattach succeeded, e.g.:
+A great use case for jattach is to attach a custom native agent to the currently running JVM. Starting with JVM 9 doing this via `VirtualMachine#attach` [throws](https://stackoverflow.com/questions/50498102/how-to-set-jdk-attach-allowattachself-true-globally) an IOException if you try this without setting `-Djdk.attach.allowAttachSelf=true`. The `boolean jattach(Path agentPath[, String arguments])` methods simplify this, constructing the command line arguments for you and returning true if jattach succeeded, e.g.:
 
 ```java
 AsyncProfilerLoader.jattach("libjni.so")

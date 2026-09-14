@@ -13,7 +13,7 @@ related_posts:
   - "java-thread-programming-part-10"
   - "java-thread-programming-part-11"
   - "relearning-java-thread-primitives"
-frozen: false
+frozen: true
 ---
 
 In our [previous article](https://foojay.io/today/java-thread-programming-part-13/), we discussed the thread pool's sizing. We stipulated that if work is computational, we don't need more threads than the available number of processors. We will discuss this idea a bit further in this article.
@@ -86,11 +86,7 @@ Then we created a **Callable** with a lambda expression and passed it to the thr
 
 As we know, fibonacci series is - 0, 1,1, 2,3,5,8….
 
-Which is mathmatically-
-
-```
-f(n) = f(n-1) + f(n-2)
-```
+Which is mathematically: `f(n) = f(n-1) + f(n-2)`.
 
 We usually use recursion for that. We know recursion must have a base case; over here, it is - if the n is less than 2, then we return n.
 
@@ -134,7 +130,7 @@ Because CachedThreadPool creates a thread on the fly whenever it requires one. T
 
 So it's a genuine problem. And we concluded that a thread while performing a task in the executors cannot create a child task and wait for the child task to finish.
 
-However, when there is a problem, there is a solution. Precisely for this sort of problem, we have a unique factory method in Executors—
+However, when there is a problem, there is a solution. Precisely for this sort of problem, we have a unique factory method in Executors:
 
 ```java
 var threadPool = Executors.newWorkStealingPool();

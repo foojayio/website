@@ -391,19 +391,7 @@ This configuration is tricky. It's useful for verification of the GPG signature,
 
 Read more about this plugin at [GPG Plugin \| Maven](https://maven.apache.org/plugins/maven-gpg-plugin). This plugin allows us to deploy signed artifacts.
 
-The
-
-```
-pinentry-mode
-```
-
-argument set to
-
-```
-loopback
-```
-
-passed to the GPG program allows to enter the passphrase via terminal instead of via the Pinentry GUI.
+The `pinentry-mode` argument set to `loopback` passed to the GPG program allows to enter the passphrase via terminal instead of via the Pinentry GUI.
 
 I have also read that you have to use the Pinentry GUI to enter your passphrase, and do not enter it on the terminal, so take this into account. As documented above, the GPG passphrase is stored in the \`settings.xml\` file, so this should not concern here.
 

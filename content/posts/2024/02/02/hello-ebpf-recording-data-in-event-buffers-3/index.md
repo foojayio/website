@@ -128,7 +128,7 @@ static final BPFType.BPFStructType<Data> DATA_TYPE =
 
 *You might recognize that the BPF types now have the matching Java type in their type signature. I added this to have more type safety and less casting.*
 
-To retrieve the events from the buffer, we first have [to open it and pass in a call-back](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFTable.java#L971C34-L971C50). This call-back is called for every available event when we call [PerfEventArray](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFTable.java#L887)`#`[perf_buffer_poll](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPF.java#L955):
+To retrieve the events from the buffer, we first have [to open it and pass in a call-back](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/main/java/me/bechberger/ebpf/bcc/BPFTable.java#L971C34-L971C50). This call-back is called for every available event when we call `PerfEventArray#perf_buffer_poll`:
 
 ```
 try (var b = BPF.builder("""                                                                                                    
@@ -161,7 +161,7 @@ try (var b = BPF.builder("""
 
 ## Tests
 
-I'm happy to announce that [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) now has its own test runner, which uses [virtme](https://github.com/amluto/virtme) and docker to run all tests in their own runtime with their own kernel. All this is wrapped in my [testutil/bin/java](https://github.com/parttimenerd/hello-ebpf/blob/main/testutil/bin/java) wrapper so that you can run the tests using `mvn test`:
+I'm happy to announce that [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) now has its own test runner, which uses [virtme](https://github.com/amluto/virtme) and docker to run all tests in their own runtime with their own kernel. All this is wrapped in my `testutil/bin/java` wrapper so that you can run the tests using `mvn test`:
 
 ```bash
 mvn -Djvm=testutil/bin/java

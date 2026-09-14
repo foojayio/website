@@ -21,7 +21,7 @@ frozen: false
 
 **Updated December 31, 2025:** This article now features Java 25 and the Foreign Function \& Memory (FFM) API, which has been a standard feature since JDK 22.
 
-Welcome to Part 4 of Java's Project Panama for newbies! If you've been following [this](https://foojay.io/today/project-panama-for-newbies-part-1/) [series](https://foojay.io/today/project-panama-for-newbies-part-2/) of [posts](https://foojay.io/today/project-panama-for-newbies-part-3/) on how to use Java's Project Panama APIs you probably have noticed that all of the examples thus far demonstrate how Java code can execute C code by using the [linker](https://github.com/openjdk/panama-foreign/blob/d8c0fe5918cb1c6c744eb26797ea4fa04142c237/doc/panama_ffi.md#c-linker)'s `downCall()` method.
+Welcome to Part 4 of Java's Project Panama for newbies! If you've been following [this](https://foojay.io/today/project-panama-for-newbies-part-1/) [series](https://foojay.io/today/project-panama-for-newbies-part-2/) of [posts](https://foojay.io/today/project-panama-for-newbies-part-3/) on how to use Java's Project Panama APIs you probably have noticed that all of the examples thus far demonstrate how Java code can execute C code by using the `linker`'s `downCall()` method.
 
 But, did you know that you can go in the opposite direction (C code executes Java Code)?
 
@@ -29,7 +29,7 @@ But, did you know that you can go in the opposite direction (C code executes Jav
 
 Why is this capablity amazing, you ask? Well, imagine C code capable of performing a computation and after its completion the C code will notify Java code to perform updates to JavaFX UI components.
 
-In this article you will learn about **callbacks** and how to create them in both **Java** and in **C** . In principle, you will learn how to create Java code that can be executed from C code using [linker](https://github.com/openjdk/panama-foreign/blob/d8c0fe5918cb1c6c744eb26797ea4fa04142c237/doc/panama_ffi.md#c-linker)'s `upcallStub()` method.
+In this article you will learn about **callbacks** and how to create them in both **Java** and in **C** . In principle, you will learn how to create Java code that can be executed from C code using `linker`'s `upcallStub()` method.
 ![](part4_upCallStub.png)
 
 In addition to this article I will show you how to create a native library written in C that will be later accessed using Java's newer Foreign Access APIs
@@ -105,19 +105,19 @@ Now that you know what a callback is and how it behaves in the C language, let's
 Before getting into Java code let's look at a simple example of creating a native library in C. This library will be used later by our `PanamaCallback.java` example. When creating a shared library you will need the following:
 
 * **C compiler** - Most compilers will have options to generate a shared library such as GCC or Clang
-* **Header file** ([mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h))- Declares the functions to be implemented.
-* **C file** ([mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c))- Implementation code.
+* **Header file** (`mylib.h`)- Declares the functions to be implemented.
+* **C file** (`mylib.c`)- Implementation code.
 
 The diagram below shows how to compile a C program into a native library for the MacOS platform. Use the the `-o` switch to name your output binary for the respective OS. eg: Linux `-o libmylib.so`, Windows `-o mylib.dll`
 ![](part4_dynamic_library-2.png)
 
-You'll notice the naming convention for the Mac OS where the name of the library is `mylib` but the file name is `libmylib.dylib`. This is good to know because in `jextract` you will generate code that under the hood calls the `System.`*loadLibrary* `(`**"mylib"**`);` . That way it will load the library in a similar way for all OS platforms. This will allow the library to be distributed with the application co-located with your Java code or specified in Java property `java.library.path`.
+You'll notice the naming convention for the Mac OS where the name of the library is `mylib` but the file name is `libmylib.dylib`. This is good to know because in `jextract` you will generate code that under the hood calls the `System.loadLibrary("mylib");` . That way it will load the library in a similar way for all OS platforms. This will allow the library to be distributed with the application co-located with your Java code or specified in Java property `java.library.path`.
 
 To make things simple I used the C examples from the popular site [Tutorials Point.com on C callbacks](https://www.tutorialspoint.com/callback-function-in-c). I modified the examples slightly to show program flow between Java and C.
 
 ## C header file [mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h)
 
-Let's examine the [mylib.h](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.h) file that consists of function declarations. These functions are exported or public to callers of the native library. Later, you will see the [mylib.c](https://github.com/carldea/panama4newbies/blob/jdk19-ea/part04/mylib.c) file that will implement the declared functions from the `mylib.h` file.
+Let's examine the `mylib.h` file that consists of function declarations. These functions are exported or public to callers of the native library. Later, you will see the `mylib.c` file that will implement the declared functions from the `mylib.h` file.
 
 The following are three functions signatures are declared.
 
@@ -239,7 +239,7 @@ jextract --output src \
 
 Above you'll notice the `-I .` is to let `jextract` know about the `mylib.h` in the working directory. Also, you should notice `-l mylib` as we mentioned earlier when the `System.loadLibrary()` method is called to locate the library based on the `java.library.path` property.
 
-Now, that you've successfully generated binding code let's see how to reference these C functions manually as opposed to the convenience methods created by `jextract`. Instead of using the generated code such as: `foo_h.`*my_callback_function*`()` I will be showing you how to do things in a lower level way. This helps you understand what is going on under the hood.
+Now, that you've successfully generated binding code let's see how to reference these C functions manually as opposed to the convenience methods created by `jextract`. Instead of using the generated code such as: `foo_h.my_callback_function()` I will be showing you how to do things in a lower level way. This helps you understand what is going on under the hood.
 
 ## Obtaining Native Symbols
 

@@ -19,21 +19,9 @@ frozen: false
 
 ### Background
 
-Using
+Using `FetchType.EAGER` is a very bad practice, since our services may not require all the data of the mapped entities in all cases. And moreover, it is a bad idea to fetch so much data in a single session and makes the session heavy.
 
-```
-FetchType.EAGER
-```
-
-is a very bad practice, since our services may not require all the data of the mapped entities in all cases. And moreover, it is a bad idea to fetch so much data in a single session and makes the session heavy.
-
-Therefore we will refactor the code and use
-
-```
-FetchType.LAZY
-```
-
-.
+Therefore we will refactor the code and use `FetchType.LAZY`.
 
 Our old code for the entity was below:
 ![Domain model with fetch type EAGER](1_Tr3xvq9hSvqoK3LHNaib6g-445x510.jpg)

@@ -274,13 +274,7 @@ struct CallTrace {
 
 We still use the pre-defined frame data structure in this example for brevity, but the profiler could customize this too. This allows the profiler only to store the relevant information.
 
-We fill the related
-
-```
-global_traces
-```
-
-entries in the signal handler. Previously we just called:
+We fill the related `global_traces` entries in the signal handler. Previously we just called:
 
 ```cpp
 static void signalHandler(int signo, siginfo_t* siginfo, 

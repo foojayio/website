@@ -247,11 +247,7 @@ The following is the naming convention for the MacOS operating system:
 
 * MacOS - `lib<name>.dylib`
 
-**Note:** When running the Java application specify the `java.library.path` property to the location of the library. If not set correctly you can get the following runtime exception:
-
-```
-java.lang.UnsatisfiedLinkError
-```
+**Note:** When running the Java application specify the `java.library.path` property to the location of the library. If not set correctly you can get the following runtime exception: `java.lang.UnsatisfiedLinkError`.
 
 ### Java talking to Swift functions as (C functions)
 

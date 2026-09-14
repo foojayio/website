@@ -178,7 +178,7 @@ And for a KeyButton control in a FlowPane, style class `.matching-letter` in sta
 }
 ```
 
-**Note** : Colors `-fx-match-color` and **-**`fx-text-fill-alt-color` are defined elsewhere in the CSS file.
+**Note** : Colors `-fx-match-color` and `-fx-text-fill-alt-color` are defined elsewhere in the CSS file.
 
 There are similar style classes defined for states `plain`, `displaying`, `partialmatch`, and `nomatch` for controls in TilePane. We also have classes defined for states `plain`, `partialmatch`, and `nomatch` with controls in FlowPane. We assign these style classes to our customized controls in the LetterLabel and KeyButton constructors with the following (for example).
 

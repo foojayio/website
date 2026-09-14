@@ -80,7 +80,7 @@ The look-up returns the memory address at which the looked-up function is locate
 
 We can proceed with the address of `fopen` and use it to create a [MethodHandle](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html) that calls down from the JVM into native code. For this, we also have to specify the descriptor of the function so that the JVM knows how to call the `fopen` handle properly.
 
-But how do we use this handle? Every handle has an [invokeExact](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html#invokeExact(java.lang.Object...)) function (and an [invoke](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html#invoke(java.lang.Object...)) function that allows the JVM to convert data) that we can use. The only problem is that we want to pass strings to the `fopen` call. We cannot pass the strings directly but instead have to allocate them onto the C heap, copying the chars into a C string:
+But how do we use this handle? Every handle has an `invokeExact` function (and an `invoke` function that allows the JVM to convert data) that we can use. The only problem is that we want to pass strings to the `fopen` call. We cannot pass the strings directly but instead have to allocate them onto the C heap, copying the chars into a C string:
 
 ```java
 public static MemorySegment fopen(String filename, String mode) {
@@ -197,7 +197,7 @@ try (var arena = Arena.ofConfined()) {
 }
 ```
 
-To convert this error number into a string, we can use the [char* strerror(int errno)](https://www.man7.org/linux/man-pages/man3/strerror.3.html) function:
+To convert this error number into a string, we can use the `char* strerror(int errno)` function:
 
 ```java
 // returned char* require this specific type
@@ -232,7 +232,7 @@ This is as expected, as we hard-coded a non-existent file in the `fopen` call.
 
 Creating all the MethodHandles manually can be pretty tedious and error-prone. JExtract can parse header files, generating MethodHandles and more automatically. You can download [jextract](https://jdk.java.net/jextract/) on the project page.
 
-For our example, I wrote a small wrapper around jextract that automatically downloads the latest version and calls it on the [misc/headers.h](https://github.com/parttimenerd/panama-examples/blob/main/misc/headers.h) file to create MethodHandles in the class `Lib`. The headers file includes all the necessary headers to run examples:
+For our example, I wrote a small wrapper around jextract that automatically downloads the latest version and calls it on the `misc/headers.h` file to create MethodHandles in the class `Lib`. The headers file includes all the necessary headers to run examples:
 
 ```c
 #include <errno.h>

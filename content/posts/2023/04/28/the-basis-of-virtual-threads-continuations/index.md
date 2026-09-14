@@ -192,13 +192,7 @@ When executing the above example, we will get the following output.
 Continuation running
 ```
 
-When we change the
-
-```
-continuation.run();
-```
-
-line as below and run the code again, we get a different output.
+When we change the `continuation.run();` line as below and run the code again, we get a different output.
 
 ```java
 while (!continuation.isDone()){

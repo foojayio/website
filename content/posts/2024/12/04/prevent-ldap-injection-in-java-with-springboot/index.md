@@ -51,18 +51,8 @@ For example, when you log into a corporate network, LDAP plays a crucial role in
 
 **Imagine LDAP as a tree**:
 
-* Roots: e.g., 
-
-```
-dc=example, dc=com
-```
-
-* Branches: Like departments 
-
-```
-cn=readers
-```
-
+* Roots: e.g., `dc=example, dc=com`
+* Branches: Like departments `cn=readers`
 * Leaves: Entries like users, printers, or shared resources
 
 LDAP organizes data hierarchically, making it easy to query and retrieve specific information efficiently.
@@ -80,28 +70,12 @@ LDAP Injection is a**type of injection attack that exploits user input**. If the
 
 ### How Does LDAP Injection Work?
 
-You typically input a filter like this:
-
-```
-cn=readers
-```
-
-. If the input is
-
-```
-cn=*
-```
-
-, you get access to all the data, potentially **exposing sensitive information** .
+You typically input a filter like this: `cn=readers`. If the input is `cn=*` , you get access to all the data, potentially **exposing sensitive information**.
 
 ### How to Prevent LDAP Injection?
 
 * **Sanitize User Input**
-* **Escape special** LDAP **characters** like
-
-```
-*, (, ), and .
-```
+* **Escape special** LDAP **characters** like `*, (, ), and .`
 
 ## 3️⃣ OWASP Recommendations
 
@@ -204,10 +178,6 @@ OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>
 ### 🧪 Testing the LDAP Server
 
 #### Open a terminal session to the OpenLDAP container
-
-```
-
-```
 
 `docker exec -it -u root openldap5 /bin/bash`
 

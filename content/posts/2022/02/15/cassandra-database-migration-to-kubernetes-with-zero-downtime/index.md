@@ -190,7 +190,7 @@ Once the VPC peering connection is created and the route tables are updated in b
 
 ![](image-1.png) Original Cassandra cluster
 
-When expanding a Cassandra cluster to another DC, and assuming you haven't created your cluster with the [SimpleSnitch](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/architecture/archSnitchSimple.html) (otherwise you first have to [switch snitches first](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/operations/opsSwitchSnitch.html)), you need to make sure your keyspaces use the [NetworkTopologyStrategy](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/architecture/archDataDistributeReplication.html?hl=replication%2Cstrategy#archDataDistributeReplication__nts) (NTS). This replication strategy is the only one that is DC and rack aware. The default [SimpleStrategy](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/architecture/archDataDistributeReplication.html?hl=replication%2Cstrategy#archDataDistributeReplication__simpleStrategy) will not consider DCs and will behave as if all nodes were collocated in the same DC and rack.
+When expanding a Cassandra cluster to another DC, and assuming you haven't created your cluster with the `SimpleSnitch` (otherwise you first have to [switch snitches first](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/operations/opsSwitchSnitch.html)), you need to make sure your keyspaces use the `NetworkTopologyStrategy` (NTS). This replication strategy is the only one that is DC and rack aware. The default `SimpleStrategy` will not consider DCs and will behave as if all nodes were collocated in the same DC and rack.
 
 We'll use `cqlsh` on one of the EC2 Cassandra nodes to list the existing keyspaces and update their replication strategy.
 

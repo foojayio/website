@@ -52,7 +52,7 @@ Rest assured I believe you know enough to call many 3rd party libraries (maybe?)
 
 Before diving deeper into calling 3rd party libraries, I want to talk about `MethodHandle`s. In [Part 2](https://foojay.io/today/project-panama-for-newbies-part-2/) we talked about `VarHandle`s to access data stored as ValueLayouts and MemoryLayouts in a low-level way, in the next section we will explore `MethodHandle`s to also access C functions in a low-level way. This is yet another tool to add to your arsenal that will upgrade your abilities to talk to native libraries.
 
-**Note:** Throughout this article when referencing the word *function* I'm referring to C functions and when referencing the word *method* it's a Java class or object's function (member).
+**Note:** Throughout this article when referencing the word `function` I'm referring to C functions and when referencing the word `method` it's a Java class or object's function (member).
 
 ## What is a `MethodHandle`?
 
@@ -67,7 +67,7 @@ A method handle is essentially a Java object that references a native C function
 In C the compiler has an object linker step where symbols are organized in a modular (object files) way before finally creating an executable (or linked library). This concept is very similar to Java's jar files where classes are available on the classpath. In Panama you can access C symbols in two places:
 
 * Default symbols area - Symbols loaded from the platform OS and Ansi-C functions.
-  * `Linker.nativeLinker().defaultLookup().findOrThrow(``"some symbol name"``)`  
+  * `Linker.nativeLinker().defaultLookup().findOrThrow("some symbol name")`  
 * Symbol Lookup area - 3rd party libraries added to the `java.library.path` or dynamically loaded into the `SymbolLookup`.
   * `SymbolLookup.loaderLookup().findOrThrow("some symbol name")`
 
@@ -110,17 +110,11 @@ When looking at the function signiture above you're probably wondering what is a
 
 In regards to the type `pid_t` you can examine closer by looking inside of the C header file `sys/types.h`. Inside you'll see the `typedef` `pid_t` defined as an unsigned C `int` type. While it's safe to say it is a C `int` it can vary depending on the platform such as a 16 or 32 bit integer. On Mac/Windows/Linux it is a type C `int`(32 bit).
 
-Next lets look at what is a void parameter. In the definition you'll notice the
-
-```
-getpid(void)
-```
-
-function parameter signiture is a type **void** . This means there are no parameters to pass into the function.
+Next lets look at what is a void parameter. In the definition you'll notice the `getpid(void)` function parameter signiture is a type **void**. This means there are no parameters to pass into the function.
 
 ### Let's create a MethodHandle
 
-To invoke the function `getpid(void)` we first need to create a `MethodHandle` instance via `Linker`'s [downcallHandle()](https://download.java.net/java/early_access/panama/docs/api/jdk.incubator.foreign/jdk/incubator/foreign/CLinker.html#downcallHandle(jdk.incubator.foreign.Addressable,jdk.incubator.foreign.SegmentAllocator,java.lang.invoke.MethodType,jdk.incubator.foreign.FunctionDescriptor)) method as shown below:
+To invoke the function `getpid(void)` we first need to create a `MethodHandle` instance via `Linker`'s `downcallHandle()` method as shown below:
 
 ```java
 import java.lang.foreign.Linker;
@@ -138,16 +132,16 @@ MethodHandle getpidMethodHandle = linker.downcallHandle(getpidSymbol, funcDef);
 
 The following are descriptions of each parameter for the `downcallHandle()` method.
 
-* **[MemorySegment](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/MemorySegment.html)** symbolMemSeg - `Linker.nativeLinker().defaultLookup()``.findOrThrow("some symbol");` contains all symbols of system library such as functions, variables, structs, etc. Dynamically loaded libraries or 3rd party libraries can be looked up by using the following: `SymbolLookup.loaderLookup().``findOrThrow``("some symbol name")`
+* `MemorySegment` symbolMemSeg - `Linker.nativeLinker().defaultLookup().findOrThrow("some symbol");` contains all symbols of system library such as functions, variables, structs, etc. Dynamically loaded libraries or 3rd party libraries can be looked up by using the following: `SymbolLookup.loaderLookup().findOrThrow("some symbol name")`
 
 **Note:** When initializing a C pointer to `NULL` you can use the `MemoryAddress.NULL` value.
 
-* **[FunctionDescriptor](https://download.java.net/java/early_access/panama/docs/api/jdk.incubator.foreign/jdk/incubator/foreign/FunctionDescriptor.html)** `functionDescr` - A function descriptor is made up of zero or more argument layouts and zero or one return layout. A function descriptor is used to model the signature of foreign functions. Unless otherwise specified, passing a `null` argument, or an array argument containing one or more `null` elements to a method in this class causes a [`NullPointerException`](https://download.java.net/java/early_access/panama/docs/api/java.base/java/lang/NullPointerException.html) to be thrown. More on predefined and jextract generated memory layouts.   
-* [Linker.Option](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Linker.Option.html) `options` - Variable arguments of `Linker.Option` objects -*the linker options associated with this linkage request*.
+* `FunctionDescriptor` `functionDescr` - A function descriptor is made up of zero or more argument layouts and zero or one return layout. A function descriptor is used to model the signature of foreign functions. Unless otherwise specified, passing a `null` argument, or an array argument containing one or more `null` elements to a method in this class causes a [`NullPointerException`](https://download.java.net/java/early_access/panama/docs/api/java.base/java/lang/NullPointerException.html) to be thrown. More on predefined and jextract generated memory layouts.   
+* `Linker.Option` `options` - Variable arguments of `Linker.Option` objects -*the linker options associated with this linkage request*.
 
 ### MemoryLayouts/ValueLayouts
 
-Like we've seen in Part 1 all C datatypes can be of type [ValueLayout](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html)`.OfXxx` or other types of [`MemoryLayout`](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/MemoryLayout.html) objects (`ValueLayout` inherits from `MemoryLayout`). Static instances of C primitive type are already defined as `ValueLayout`s in the `Linker` class such as [JAVA_INT](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_INT), [JAVA_LONG](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_LONG), [ADDRESS](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/ValueLayout.html#JAVA_ADDRESS) etc.   
+Like we've seen in Part 1 all C datatypes can be of type `ValueLayout.OfXxx` or other types of [`MemoryLayout`](https://download.java.net/java/early_access/jdk19/docs/api/java.base/java/lang/foreign/MemoryLayout.html) objects (`ValueLayout` inherits from `MemoryLayout`). Static instances of C primitive type are already defined as `ValueLayout`s in the `Linker` class such as `JAVA_INT`, `JAVA_LONG`, `ADDRESS` etc.   
 
 And when using jextract it will create the following: `C_INT`, `C_LONG`, `C_POINTER` etc. to represent layouts that map specific to the native C primitives. If you aren't using jextract you can use the value layouts mention above. To create a `FunctionDescriptor` you will call the static `of()` method as shown below:
 
@@ -201,13 +195,7 @@ Outputs the following:
 MethodHandle calling getpid() (16514)
 ```
 
-Of course if you use the
-
-```
-jextract
-```
-
-tool the `getpid() `method would only be a one liner like the following code snippet:
+Of course if you use the `jextract` tool the `getpid() `method would only be a one liner like the following code snippet:
 
 ```java
 // Using Jextract's getpid method.
@@ -374,7 +362,7 @@ The code listing above performs the following steps:
 
     static final  OfLong C_LONG_LONG$LAYOUT= JAVA_LONG.withBitAlignment(64); // OfLong extends ValueLayout
 
-2.) Invoke `time()` to populate the `MemorySegment` object **now** that will contain the epoch time in **seconds**   
+2.) Invoke `time()` to populate the `MemorySegment` object `now` that will contain the epoch time in **seconds**   
 
 3.) Allocate space and a pointer for a struct `tm`.  
 
@@ -642,7 +630,7 @@ Then we can try to render something on the window like what's on the original tu
 
 The program can run already but it will close almost immediately, even if the code renders some OpenGL. It's usual to have a loop that wait for some events to happen. With SDL the idea is to wait for events via `SDL_PollEvent`, also it is needed to tell SDL that keyboard event are allowed.
 
-The [SDL_PollEvent](https://wiki.libsdl.org/SDL_PollEvent) accepts a pointer to an [SDL_Event](https://wiki.libsdl.org/SDL_Event), which is an interesting data structure a **union**. In C a union is a special data type that allows to encode several types in the same memory location. While different members are defined in a union only one member can contain a value at any time.
+The `SDL_PollEvent` accepts a pointer to an `SDL_Event`, which is an interesting data structure a `union`. In C a union is a special data type that allows to encode several types in the same memory location. While different members are defined in a union only one member can contain a value at any time.
 
 The following code adds two nested loops, the outer one that will continue as long as the `quit` boolean is `false`, the inner one that will handle actual events. In order to receive events and read events the code needs to allocate the necessary space. The maximum size of this union datatype is available via the generated `SDL_Event.sizeof()`, then we allocate this memory via `MemorySegment.allocateNative(SDL_Event.sizeof(), scope)`. In [part 2](https://foojay.io/today/project-panama-for-newbies-part-2/) you might remember that a `MemorySegment` implements `MemoryAddress`, consequently this variable can be used as a parameter of `SDL_PollEvent`. This is roughly equivalent to
 
@@ -690,7 +678,7 @@ Here's the modified code, this code awaits for the user to click the close butto
 
 The above code defines a memory zone, the sdlEvent, that is reused for each loop iteration. In C++, one just have to declare `SDL_Event e`, but with panama it is necessary to reserve the memory for the whole data type. Which is done by this statement `allocateNative(SDL_Event.sizeof(), scope)`, it can be even simplified to `SDL_Event.allocate(scope)` or a an overload of this method using a `SegmentAllocator`.
 
-The `SDL_Event` is a union data type, it is defined in a way such as the field member `type` is always present and can be used to identify the kind of event (and the actual data structure of this even). The code checks the type via the generated method `SDL_Event.type$get(MemorySegment event)`. However there's some differences in how union types are accessed in C and Panama. In this tutorial, the code needs to read the [SDL_TextInputEvent](https://wiki.libsdl.org/SDL_TextInputEvent), in C this would be written like this
+The `SDL_Event` is a union data type, it is defined in a way such as the field member `type` is always present and can be used to identify the kind of event (and the actual data structure of this even). The code checks the type via the generated method `SDL_Event.type$get(MemorySegment event)`. However there's some differences in how union types are accessed in C and Panama. In this tutorial, the code needs to read the `SDL_TextInputEvent`, in C this would be written like this
 
 ```c
 if(event.type == SDL_TEXTINPUT) {

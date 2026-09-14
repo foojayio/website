@@ -24,11 +24,7 @@ The last section covers the takeaways.
 
 ### Union: What Does This Operation Do?
 
-Method signature:
-
-```java
-setA.union(setB)
-```
+Method signature: `setA.union(setB)`
 
 Union as the name indicates, it takes elements from two sets and combines them into one.
 
@@ -109,11 +105,7 @@ public void union()
 
 ### Intersect: What Does This Operation Do?
 
-Method signature:
-
-```java
-setA.intersect(setB)
-```
+Method signature: `setA.intersect(setB)`
 
 Intersect takes two elements from two sets and only retains the common elements in the resulting set.
 
@@ -150,20 +142,13 @@ default MutableIntSet intersect(IntSet set)
 
 Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse-collections/blob/00557933f648e2c3a2112bcfc7cfb349a7609844/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L502) for equal-sized, unequal-sized, and empty sets.
 
-### Difference: What Does This Operation Do?
+### Difference: What Does This Operation Do?
 
-Method signature:
-
-```java
-setA.difference(setB)
-```
-
-```java
-
-```
+Method signature: `setA.difference(setB)`
 
 Difference takes elements that are unique to Set A only and not Set B.  
 ![Difference - Green](foojay-prim-difference.png)  
+
 Set A — 1, 2, 3, 4.
 
 Set B — 3, 4, 5, 6.

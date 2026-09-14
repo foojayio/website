@@ -17,6 +17,8 @@ related_posts:
 frozen: false
 ---
 
+## FEPCOS-J: Implementing a Java Server and a Rust Client without Manual Network Programming
+
 **FEPCOS-J allows declaratively implementing a Java server and generating its profile, which, for example, can be used to generate the networking code of a Rust client.**
 
 ## Introduction
@@ -47,36 +49,12 @@ For this purpose, a developer uses FEPCOS-J and the working draft of FEPCOS-R, w
 The developer:
 
 * firstly uses the FEPCOS-J annotations to implement the server's system specification in Java.
-* secondly runs 
-
-```bash
-fjp --profile
-```
-
-  , which generates the server's system export module (*server.exp*, a modular Jar file) and the server's system profile.
-* thirdly runs 
-
-```bash
-frg
-```
-
-  to generate the server's system import module (*server_imp*), a Rust library.
+* secondly runs `fjp --profile`, which generates the server's system export module (*server.exp*, a modular Jar file) and the server's system profile.
+* thirdly runs `frg` to generate the server's system import module (*server_imp*), a Rust library.
 * fourthly implements the client using the Rust programming language.
-* fifthly uses 
+* fifthly uses `rustc` to compile the Rust client into an executable binary.
 
-```bash
-rustc
-```
-
-  to compile the Rust client into an executable binary.
-
-To start the Java server, the developer runs
-
-```bash
-fjx
-```
-
-utilizing *server.exp* . After that, the developer can run the Rust client's executable binary.
+To start the Java server, the developer runs `fjx` utilizing *server.exp*. After that, the developer can run the Rust client's executable binary.
 
 As a result, the Rust client accesses the Java server via the ***frg*** -generated *server_imp* Rust library, the Rust library provided by FEPOCS-R, the network, the Java modules provided by FEPCOS-J, and the ***fjp*** -generated *server.exp* Java module.
 
@@ -103,42 +81,14 @@ Secondly, the developer uses FEPCOS-J's annotations to program the server in Jav
 
 Finally, the developer runs
 
-```bash
-fjp --profile
-```
-
-.
+`fjp --profile`.
 
 As a result, the *tgt* directory contains:
 
-* the server's system profile, 
-
-```
-test.server.fsp
-```
-
-  ;
-* the server's system export module, 
-
-```
-test.server.exp.jar
-```
-
-  ;
-* the server's system import module, 
-
-```
-test.server.imp.jar
-```
-
-  ;
-* the server's system documentation 
-
-```
-test.server.imp-doc.zip
-```
-
-  .
+* the server's system profile, `test.server.fsp`;
+* the server's system export module, `test.server.exp.jar`;
+* the server's system import module, `test.server.imp.jar`;
+* the server's system documentation `test.server.imp-doc.zip`.
 
 As I have shown in my [previous post](https://foojay.io/today/fuchs-2024-fepcos-j-multithreaded-server/) \[1\], the *test.server.imp.jar* and *test-server.imp-doc.zip* files could be used to implement a Java client. But as this post focuses on programming a Rust client, it ignores these files in the following.
 
@@ -167,11 +117,7 @@ module test.server {
 }
 ```
 
-```
-module-info.java
-```
-
-is the module descriptor. It specifies the server's name, *test.server* .
+`module-info.java` is the module descriptor. It specifies the server's name, *test.server*.
 
 ```java
 package test.server;
@@ -185,11 +131,7 @@ public class Server {
 }
 ```
 
-```
-Server.java
-```
-
-is the server's system declaration. It declares the *add()* and *greet()* services to be implemented as *AddService* class or *GreetService* class, respectively.
+`Server.java` is the server's system declaration. It declares the *add()* and *greet()* services to be implemented as *AddService* class or *GreetService* class, respectively.
 
 ```java
 package test.server;
@@ -208,17 +150,7 @@ class AddService {
 }
 ```
 
-```
-AddService.java
-```
-
-is the *add()* service's activity specification. It specifies the input parameters, *int x* and *int y* . Further, it specifies the output parameter, *int z* , to be calculated as
-
-```java
-z=x+y
-```
-
-.
+`AddService.java` is the *add()* service's activity specification. It specifies the input parameters, *int x* and *int y* . Further, it specifies the output parameter, *int z* , to be calculated as `z=x+y`.
 
 ```java
 package test.server;
@@ -240,27 +172,11 @@ class GreetService {
 }
 ```
 
-```
-GreetService.java
-```
-
-is the *greet()* service's activity specification.
+`GreetService.java` is the *greet()* service's activity specification.
 
 It specifies the input parameter, *String user*.
 
-Further, it specifies the output parameters, *String greet_en* , and *String greet_de*. The first becomes the English greet:
-
-```java
-greet_en = "Hello, " + user + "!"
-```
-
-. The second becomes the German greet:
-
-```java
-greet_de = "Hallo " + user + "!"
-```
-
-.
+Further, it specifies the output parameters, *String greet_en* , and *String greet_de* . The first becomes the English greet: `greet_en = "Hello, " + user + "!"`. The second becomes the German greet: `greet_de = "Hallo " + user + "!"`.
 
 ### Implementing the Rust client
 
@@ -298,117 +214,33 @@ fn main() {
 
 To implement the Rust client, the developer requires the previously generated
 
-```rust
-extern crate test_server_imp;
-```
+`extern crate test_server_imp;`
 
 to
 
-```rust
-use test_server_imp::S;
-```
+`use test_server_imp::S;`
 
 which is the server's system interface.
 
-Within the main function
+Within the main function `fn main() { … }`, the line
 
-```rust
-fn main() { … }
-```
+`let sy : S = S{ addr: "10.0.0.6:8888" };`
 
-, the line
+firstly instantiates this system interface, specifying the socket address `10.0.0.6:8888` at which the server listens for incoming requests. Next,
 
-```rust
-let sy : S = S{ addr: "10.0.0.6:8888" };
-```
+`let r1 = sy.add(14, 23).unwrap();`
 
-firstly instantiates this system interface, specifying the socket address
+requests the server's `add()` service, specifying the input parameters `x=14` and `y=23`. The result is stored in the variable `r1`, a struct with the filed `r1.z`, the service's *z* output parameter, printed afterwards. Finally,
 
-```
-10.0.0.6:8888
-```
+`let r2 = sy.greet(String::from("Bob")).unwrap();`
 
-at which the server listens for incoming requests. Next,
-
-```rust
-let r1 = sy.add(14, 23).unwrap();
-```
-
-requests the server's
-
-```
-add()
-```
-
-service, specifying the input parameters
-
-```
-x=14
-```
-
-and
-
-```
-y=23
-```
-
-. The result is stored in the variable
-
-```
-r1
-```
-
-, a struct with the filed
-
-```
-r1.z
-```
-
-, the service's *z* output parameter, printed afterwards. Finally,
-
-```rust
-let r2 = sy.greet(String::from("Bob")).unwrap();
-```
-
-requests the server's
-
-```
-greet()
-```
-
-service, specifying the input parameter
-
-```
-user="Bob"
-```
-
-. The result is stored in the variable
-
-```
-r2
-```
-
-, a struct with the
-
-```
-r2.greet_en
-```
-
-and
-
-```
-r2.greet_de
-```
-
-fields. These fields represent the corresponding output parameters of the service and are then printed.
+requests the server's `greet()` service, specifying the input parameter `user="Bob"`. The result is stored in the variable `r2`, a struct with the `r2.greet_en` and `r2.greet_de` fields. These fields represent the corresponding output parameters of the service and are then printed.
 
 ### Executing the client-server application
 
 First, the developer starts the Java server on a computer named *lumo* by executing
 
-```bash
-fjx tgt test.server.exp 10.0.0.6:8888
-```
+`fjx tgt test.server.exp 10.0.0.6:8888`
 
 in the project directory, as shown in Fig. 5.
 
