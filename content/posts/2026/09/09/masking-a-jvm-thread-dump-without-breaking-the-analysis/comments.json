@@ -1,0 +1,17 @@
+[
+  {
+    "id": 98473,
+    "depth": 0,
+    "author": "Nils Breunese",
+    "date": "2026-09-14T00:12:49",
+    "html": "<p>Cool tool. The article says: “This is pseudonymization reversible by its owner, not irreversible anonymization”. So maybe rename threadmine-anonymizer to threadmine-pseudomizer? 😉</p>"
+  },
+  {
+    "id": 98477,
+    "depth": 1,
+    "author": "Felipe Maschio",
+    "authorUrl": "https://threadmine.dev/en",
+    "date": "2026-09-14T02:05:49",
+    "html": "<p>Fair point, and you’re right on the terminology. It’s pseudonymization, and the THREAT_MODEL.md in the repo says exactly that in its first paragraph, because being able to reverse it is the whole point: the report is useless until you get your real class names back. For anyone without the vault, the analysis service included, the tokens are keyed HMAC, so there’s nothing to reverse without the key. The name is just the word people type when their security team blocks an upload. I’d bet nobody has ever searched for “thread dump pseudonymizer” 😉</p>"
+  }
+]

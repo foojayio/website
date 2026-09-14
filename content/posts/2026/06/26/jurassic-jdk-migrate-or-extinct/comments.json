@@ -1,0 +1,9 @@
+[
+  {
+    "id": 98384,
+    "depth": 0,
+    "author": "Todd Jonker",
+    "date": "2026-09-12T18:06:36",
+    "html": "<p>Great article! I was tech lead for Amazon’s internal build system for a decade, and have felt every bit of pain you mention. My mantra is “update early, update often”, both to stay up-to-date and to keep the team’s update skills sharp. From my experience, your approach is well considired and wise. I suggest two more things for the audience to consider.</p>\n<p>First, I’d emphasize the _security_ risk of remaining on old dependencies, especially heavyweight frameworks and libraries. If your team isn’t agile with respect to updates, you’re betting that you won’t be hit by a CVE in some ancient library release and forced to update their JDK under duress in order to pick up the modern patched release. Seen this, it’s not pretty.</p>\n<p>Second, I’d add Phase 2.5: update your run-time JDK version as one migration, full to production bake, before updating the build-time JDK. That forces a smaller subset of the necessary code and library changes, allowing you to test/deploy/bake in baby steps, getting the new JDK’s performance wins earlier even while reducing risk.</p>\n<p>This distinction is _especially_ important for large enterprise code bases, where other teams vend libraries you consume. Deep dependency graphs can become especially problematic with the inherently cascading nature of JDK updates, both up and down the graph. In some cases, applications that lag on run-time JDK can prevent libraries from updating their build-time JDK, which in turn can block other libraries and applications. IMO applications should update eagerly, so their colleagues vending libraries can have modern tools without needing to maintain multiple versions for late-updaters.</p>\n<p>Thanks again for a great article, it’s a keeper. 😀</p>"
+  }
+]
