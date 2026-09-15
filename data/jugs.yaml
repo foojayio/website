@@ -973,6 +973,16 @@
   latitude: 37.368832
   longitude: -122.036346
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/content/jugs/SunnyvaleJUG.md
+- slug: TaiwanJUG
+  name: Taiwan Java User Group
+  country: Taiwan
+  website: https://www.twjug.org/
+  meetup_slug: taiwanjug
+  meetup_url: https://www.meetup.com/taiwanjug/
+  twitter: taiwanjug
+  latitude: 25.040237
+  longitude: 121.520502
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/content/jugs/TaiwanJUG.md
 - slug: TampaJUG
   name: Tampa Java User Group
   country: USA
