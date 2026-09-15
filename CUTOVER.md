@@ -187,7 +187,7 @@ rather than failing loudly. Finish this phase before touching DNS.
         one first. Fix WP-side (a `HOME`/`SITEURL` override) before cutover, or
         accept that rollback is DNS-only with no readable backup in the meantime.
 
-- [ ] **Announce a freeze** on publishing to WordPress, so nothing is written
+- [X] **Announce a freeze** on publishing to WordPress, so nothing is written
       after the final harvest that would then be lost.
 
 ---
