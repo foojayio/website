@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-14T06:27:08Z",
+  "generatedAt" : "2026-09-15T06:14:21Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -330,6 +330,14 @@
       "endTime" : "2026-09-17T20:30:00+02:00",
       "venue" : "MaibornWolff GmbH",
       "city" : "Darmstadt",
+      "online" : null
+    }, {
+      "title" : "JUG DA: Double Feature: Value Objects and Project Valhalla + Java for AI (Nicolai Parlog, Zoran Sevarac)",
+      "url" : "https://www.jug-da.de/2026/10/JCP-Meeting/",
+      "startTime" : "2026-10-01T18:30:00+02:00",
+      "endTime" : "2026-10-01T21:30:00+02:00",
+      "venue" : "Room S3",
+      "city" : "Walldorf",
       "online" : null
     } ]
   }, {
@@ -937,6 +945,13 @@
       "city" : null,
       "online" : false
     } ]
+  }, {
+    "slug" : "taiwanjug",
+    "name" : "Taiwan Java User Group",
+    "jug" : "TaiwanJUG",
+    "source" : "meetup",
+    "url" : "https://www.meetup.com/taiwanjug/",
+    "events" : [ ]
   }, {
     "slug" : "tampa-jug",
     "name" : "Tampa Java User Group",
