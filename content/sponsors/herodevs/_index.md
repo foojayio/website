@@ -1,6 +1,6 @@
 ---
 title: "HeroDevs"
-tier: "silver"
+tier: "gold"
 tagline: "Never-Ending Support for End-of-Life Open Source"
 description: "HeroDevs provides secure, never-ending support for deprecated open source software, trusted by more than 900 companies including nearly half of the Fortune 100."
 logo: "herodevs.svg"
