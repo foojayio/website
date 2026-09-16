@@ -10,7 +10,9 @@
   </a>
   {{ with .Params.tagline }}<p class="sponsor-card__tagline">{{ . }}</p>{{ end }}
   <div class="sponsor-card__meta">
-    {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ title . }}</span>{{ end }}
+    {{/* The tier's own label (see partials/sponsor-tier.html) -- `title` on the
+         slug reads "Community-partner" once a tier is two words. */}}
+    {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ (partial "sponsor-tier.html" .).label }}</span>{{ end }}
     {{ with len $posts }}<span class="sponsor-card__count">{{ . }} article{{ if ne . 1 }}s{{ end }}</span>{{ end }}
   </div>
   <div class="sponsor-card__actions">

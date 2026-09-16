@@ -1,0 +1,33 @@
+{{- /* One tier from the `tiers` list in content/sponsors/_index.md, looked up
+       by its name. Takes the tier STRING (a sponsor's `tier:` value); returns
+       the whole dict, with `label`, `groupTitle`, `badge` and `noun` always
+       filled in so a caller never has to write the fallback itself.
+
+       WHY A LOOKUP AND NOT `title .`. The listing iterates the tiers list and
+       has each dict in hand, but a sponsor PAGE and a sponsor CARD know only
+       the string -- so both used to derive their label with `title .`, which
+       works for one-word tiers and breaks the moment a tier has two:
+       "community-partner" came out as "Community-partner", and the word
+       "Sponsor" was hardcoded beside it, which is the one thing a non-paying
+       tier must not be called. One lookup means the listing, the card and the
+       page cannot disagree about what a tier is called.
+
+       An UNKNOWN tier still gets a sensible dict rather than an empty one --
+       same posture as the "Other Sponsors" group in sponsors/list.html and the
+       untiered row in sidebar-sponsors.html: a tier renamed upstream must
+       degrade to an odd-looking label, never to a blank badge or a build
+       error. */ -}}
+{{- $slug := . -}}
+{{- $label := replace (replace $slug "-" " ") "_" " " | title -}}
+{{- $tier := dict "name" $slug "label" $label -}}
+{{- with site.GetPage "/sponsors" -}}
+  {{- range .Params.tiers -}}
+    {{- if eq .name $slug -}}{{- $tier = . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $label = $tier.label | default $label -}}
+{{- return merge $tier (dict
+      "label"      $label
+      "groupTitle" ($tier.groupTitle | default (printf "%s Sponsors" $label))
+      "badge"      ($tier.badge      | default (printf "%s Sponsor" $label))
+      "noun"       ($tier.noun       | default "sponsor")) -}}

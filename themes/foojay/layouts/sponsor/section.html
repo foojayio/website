@@ -65,7 +65,10 @@
       <div class="sponsor-profile__head"{{ if not .Params.logo }} data-pagefind-meta="image:"{{ end }}>
         {{ partial "sponsor-logo.html" (dict "page" . "class" "sponsor-logo--large" "pagefindImage" true) }}
         <div class="sponsor-profile__intro">
-          {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ title . }} Sponsor</span>{{ end }}
+          {{/* `badge` from the tiers list, not `title .` + the word "Sponsor":
+               a two-word tier came out as "Community-partner Sponsor", wrong
+               twice over. See partials/sponsor-tier.html. */}}
+          {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ (partial "sponsor-tier.html" .).badge }}</span>{{ end }}
           <h1>{{ .Title }}</h1>
           {{ with .Params.tagline }}<p class="sponsor-profile__tagline">{{ . }}</p>{{ end }}
         </div>

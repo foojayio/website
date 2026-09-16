@@ -1,5 +1,5 @@
 ---
-title: "Our Sponsors"
+title: "Our Sponsors and Partners"
 # EXPLICIT, and load-bearing: Hugo applies a cascade to the page that declares it
 # as well as to its descendants, so without this the cascaded `type: "sponsor"`
 # landed on THIS page too and /our-sponsors/ silently rendered with the
@@ -22,7 +22,7 @@ heroTitle: "Who Keeps Foojay Running"
 # the original and it will need cropping again; the artwork's bounding box is
 # x 320..530, y 0..308.
 heroImage: "/images/sponsors/sponsors-banner.png"
-description: "The organisations funding foojay.io — the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day."
+description: "The organisations funding and promoting foojay.io — the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day."
 # The section listing lives at the WordPress path, not at /sponsors/. Individual
 # sponsor pages keep /sponsor/<slug>/ via hugo.toml's [permalinks].
 url: "/our-sponsors/"
@@ -41,6 +41,15 @@ contactEmail: "hello@foojay.io"
 # tooltip modal; here they're just text, which reads better and needs no JS.
 # No `icon:` — the tier marker is a CSS disc tinted per tier, because the 🥈/🥉
 # medal emoji render with a literal 2 and 3 in most fonts.
+#
+# `groupTitle`, `badge` and `noun` are OPTIONAL and exist for a tier that is not
+# a sponsorship. They default to "<label> Sponsors", "<label> Sponsor" and
+# "sponsor", which is what the three paid tiers want and why those three carry
+# none of them. Community Partner sets all three, because a partner who pays
+# nothing must not be labelled a sponsor anywhere a reader can see — the tier
+# exists precisely to keep that line visible. Resolved by
+# partials/sponsor-tier.html, which is also what lets a sponsor PAGE (which
+# knows only its own tier string) print the same words as the listing.
 tiers:
   - name: "gold"
     label: "Gold"
@@ -51,6 +60,12 @@ tiers:
   - name: "bronze"
     label: "Bronze"
     blurb: "The essential package: prominent logo placement on the sponsor page and 3 homepage banner displays per year, with unlimited author accounts and published articles so your engineering team can share insights freely."
+  - name: "community-partner"
+    label: "Community Partner"
+    groupTitle: "Community Partners"
+    badge: "Community Partner"
+    noun: "partner"
+    blurb: "Not a paid tier: the conferences, JUGs, newsletters, podcasts and open-source projects we promote each other with. Partners get a profile page, a logo across the site and author accounts for their team; in return they link to Foojay, share our content with their audience, or open their event to us."
 frozen: true
 # Each sponsor bundle is a BRANCH bundle (_index.md), i.e. a Hugo section rather
 # than a page -- that is the only page kind .Paginate accepts, and a sponsor with
@@ -66,3 +81,5 @@ cascade:
 ---
 
 Foojay.io is built by the Java community, for the Java community — and kept free for everyone. Our sponsors make that possible. By supporting Foojay, these organisations help fund the platform, podcast, events and content that hundreds of thousands of Java and OpenJDK developers rely on every day. In return, our sponsors become a visible, trusted part of the ecosystem they're investing in.
+
+Our community partners support Foojay differently. They are the conferences, Java User Groups, newsletters, podcasts and open-source projects we promote each other with: no money changes hands in either direction, and the exchange is reach — their audience hears about Foojay, and ours hears about them.

@@ -1,6 +1,6 @@
 ---
 title: "APIdia"
-tier: "bronze"
+tier: "community-partner"
 tagline: "Java API documentation made efficient, clean and enjoyable"
 description: ""
 logo: "logo.svg"

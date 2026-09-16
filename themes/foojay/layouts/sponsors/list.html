@@ -55,8 +55,13 @@
           {{/* The tier marker is a CSS ::before disc tinted by the heading's
                own colour (see .sponsors-tier__head h2::before) rather than an
                emoji — decorative, so it needs no alt text or aria handling. */}}
-          <h2>{{ $tier.label }} Sponsors</h2>
-          <span class="sponsors-tier__count">{{ len . }} sponsor{{ if ne (len .) 1 }}s{{ end }}</span>
+          {{/* groupTitle/noun rather than "<label> Sponsors" and a hardcoded
+               "sponsor": Community Partners is not a sponsorship, and both
+               strings default to the sponsor wording for every tier that is.
+               See partials/sponsor-tier.html. */}}
+          {{ $t := partial "sponsor-tier.html" $tier.name }}
+          <h2>{{ $t.groupTitle }}</h2>
+          <span class="sponsors-tier__count">{{ len . }} {{ $t.noun }}{{ if ne (len .) 1 }}s{{ end }}</span>
         </div>
         {{ with $tier.blurb }}<p class="sponsors-tier__blurb">{{ . }}</p>{{ end }}
         <div class="sponsors-grid">
