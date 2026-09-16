@@ -1,6 +1,7 @@
 ---
 title: "Hello Java 27! Have You Been Working Out?"
 date: "2026-09-15T08:00:00+00:00"
+lastmod: "2026-09-16T07:03:53+00:00"
 description: "Java 27 is like that friend that you haven't seen all summer, and when you finally see them again it's clear that they spent a lot of time in the gym. Bringing numerous improvements to performance and security, this version of Java seems to be in top shape. This post has all the info!"
 authors:
   - "hanno-embregts"
@@ -17,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-It's been six months since we saw a new Java release, and this new edition is seems to be ready to flex its muscles. With numerous improvements to performance and security, Java 27 is like that friend that you haven't seen all summer, and when you finally see them again it's clear that they spent a lot of time in the gym!
+It's been six months since we saw a new Java release, and this new edition seems to be ready to flex its muscles. With numerous improvements to performance and security, Java 27 is like that friend that you haven't seen all summer, and when you finally see them again it's clear that they spent a lot of time in the gym!
 
 This post focuses on everything that has been added in this release, giving you a brief introduction to each of the features. Where applicable the differences with Java 26 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 
@@ -43,7 +44,7 @@ Let's start with the JEPs that add brand-new features to Java 27.
 
 ### JEP 527: Post-Quantum Hybrid Key Exchange for TLS 1.3
 
-The advancements in the field of quantum computing threatens today's public-key based encryption algorithms, like Rivest-Shamir-Adelman (RSA) and Elliptic-Curve Diffie-Hellman (ECDH). Through "harvest now, decrypt later" attacks, adversaries can store encrypted data now and decrypt it once quantum hardware matures. The Internet Engineering Task Force (IETF) TLS Working Group created a hybrid key exchange framework for TLS 1.3 that pairs a quantum-resistant algorithm with a traditional one, remaining secure as long as *either* algorithm holds. Java is progressively enabling this: [the KEM API landed in Java 21](https://hanno.codes/2023/09/19/java-21-release-day/#jep-452-key-encapsulation-mechanism-api) and [ML-KEM in Java 24](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-496-quantum-resistant-module-lattice-based-key-encapsulation-mechanism), making hybrid key exchange for TLS the logical next step in Java's post-quantum cryptography support.
+The advancements in the field of quantum computing threatens today's public-key based encryption algorithms, like Rivest-Shamir-Adleman (RSA) and Elliptic-Curve Diffie-Hellman (ECDH). Through "harvest now, decrypt later" attacks, adversaries can store encrypted data now and decrypt it once quantum hardware matures. The Internet Engineering Task Force (IETF) TLS Working Group created a hybrid key exchange framework for TLS 1.3 that pairs a quantum-resistant algorithm with a traditional one, remaining secure as long as *either* algorithm holds. Java is progressively enabling this: [the KEM API landed in Java 21](https://hanno.codes/2023/09/19/java-21-release-day/#jep-452-key-encapsulation-mechanism-api) and [ML-KEM in Java 24](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-496-quantum-resistant-module-lattice-based-key-encapsulation-mechanism), making hybrid key exchange for TLS the logical next step in Java's post-quantum cryptography support.
 
 JEP 527 proposes to enhance the JDK's TLS 1.3 implementation to support [three new post-quantum hybrid key exchange schemes](https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem) that combine ML-KEM with the traditional Ephemeral ECDH algorithms:
 
@@ -55,7 +56,7 @@ The TLS specification refers to these key exchange schemes as "named groups". Ac
 
 #### Using Hybrid Key Exchange Schemes
 
-To benefit from quantum-resistant TLS no changes to existing code are necessary, as the JDK's TLS 1.3 implementation places the `X255119MLKEM768` hybrid scheme at the front of its priority list. Setting specific schemes is possible by calling the [SSLParameters::setNamedGroups](https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/net/ssl/SSLParameters.html#setNamedGroups(java.lang.String%5B%5D)) method, like so:
+To benefit from quantum-resistant TLS no changes to existing code are necessary, as the JDK's TLS 1.3 implementation places the `X25519MLKEM768` hybrid scheme at the front of its priority list. Setting specific schemes is possible by calling the [SSLParameters::setNamedGroups](https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/net/ssl/SSLParameters.html#setNamedGroups(java.lang.String%5B%5D)) method, like so:
 
 ```java
 SSLSocket tlsSock = (SSLSocket)(SSLContext.getDefault().
@@ -464,7 +465,7 @@ The API [was changed significantly in Java 26](https://hanno.codes/2026/03/17/ja
 The minor changes applied in Java 27 have a similar purpose–they include:
 
 * Removing the low-level methods `isInitialized` and `orElse`, as these could be used in ways not consistent with the design goals of the API.
-* Adding a new factory method, `Set.ofLazy(...)`, that can create a stable `Set` of pre-defined element candidates. With this addition, there lazy versions of the three fundamental collection types now exist: `List`, `Set`, and `Map`.
+* Adding a new factory method, `Set.ofLazy(...)`, that can create a stable `Set` of pre-defined element candidates. With this addition, the lazy versions of the three fundamental collection types now exist: `List`, `Set`, and `Map`.
 
 #### More Information
 
@@ -865,7 +866,7 @@ To solve this problem, JEP 538 introduces an API that can encode objects to the 
 
 [`PEM`](https://cr.openjdk.org/~ascarpino/pem27/api/java.base/java/security/PEM.html)  
 
-: A class that implements `BinaryEncodable`, which can hold any type of PEM data. It allows you to encode and decode PEM tests yielding cryptographic objects for which no Java representation currently exists.
+: A class that implements `BinaryEncodable`, which can hold any type of PEM data. It allows you to encode and decode PEM text yielding cryptographic objects for which no Java representation currently exists.
 
 ##### Typical Usage
 
