@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-15T06:14:21Z",
+  "generatedAt" : "2026-09-16T06:09:18Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -92,14 +92,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/atlantajug/",
     "events" : [ {
-      "title" : "Near Real-Time Retrieval-Augmented Generation (RAG) pipelines at Scale in Java",
-      "url" : "https://www.meetup.com/atlantajug/events/316037094/",
-      "startTime" : "2026-09-15T18:30:00-04:00",
-      "endTime" : "2026-09-15T20:30:00-04:00",
-      "venue" : "Roam",
-      "city" : "Atlanta",
-      "online" : false
-    }, {
       "title" : "Building a 4,000-Component Monorepo: How Spotify Uses AI to Scale Backend Dev",
       "url" : "https://www.meetup.com/atlantajug/events/316037276/",
       "startTime" : "2026-10-20T18:30:00-04:00",
@@ -590,6 +582,14 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
+      "title" : "Three Coding Agents, One Java Project. Take a look at biomelab.",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/316571500/",
+      "startTime" : "2026-09-17T20:00:00+02:00",
+      "endTime" : "2026-09-17T22:00:00+02:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226991/",
       "startTime" : "2026-10-07T18:00:00+02:00",
@@ -730,15 +730,7 @@
     "jug" : "JUGNoord",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-noord/",
-    "events" : [ {
-      "title" : "September 2026: From Wedding Optimization to Framework Freedom",
-      "url" : "https://www.meetup.com/jug-noord/events/316350341/",
-      "startTime" : "2026-09-15T17:00:00+02:00",
-      "endTime" : "2026-09-15T20:00:00+02:00",
-      "venue" : "Dienst Uitvoering Onderwijs (DUO)-IB-Groep",
-      "city" : "Groningen",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "KnoxJava",
     "name" : "KnoxJava",
