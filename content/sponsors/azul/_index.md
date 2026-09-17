@@ -24,6 +24,7 @@ github: "https://github.com/AzulSystems"
 authors:
   - "anthony-layton"
   - "betsy"
+  - "dana-crane"
   - "daniel-witkowski"
   - "dominika-tasarz"
   - "luqman-saeed"

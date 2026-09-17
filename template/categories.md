@@ -87,6 +87,7 @@ frontmatter.
 - NetBeans
 - nosql
 - Observability
+- OpenJDK 
 - OpenJDK Migration
 - OpenRewrite
 - OpenShift

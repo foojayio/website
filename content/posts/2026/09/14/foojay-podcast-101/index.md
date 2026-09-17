@@ -10,6 +10,7 @@ image: "episode-101-java-27.jpg"
 categories:
   - "Java"
   - "Java Core"
+  - "OpenJDK"
   - "Podcast"
 related_posts:
   - "foojay-podcast-100"
