@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-16T06:09:18Z",
+  "generatedAt" : "2026-09-17T06:13:14Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -7,15 +7,7 @@
     "jug" : "AlmatyJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/almaty-java-user-group/",
-    "events" : [ {
-      "title" : "Какие бесы живут в JVM",
-      "url" : "https://www.meetup.com/almaty-java-community/events/316481757/",
-      "startTime" : "2026-09-16T18:30:00+05:00",
-      "endTime" : "2026-09-16T20:30:00+05:00",
-      "venue" : "улица Байзакова 280",
-      "city" : "Almaty",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "amsterdam-java-user-group",
     "name" : "Amsterdam Java User Group",
@@ -23,14 +15,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG + More: Agentic AI in the Wild",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316455379/",
-      "startTime" : "2026-09-16T17:00:00+02:00",
-      "endTime" : "2026-09-16T20:00:00+02:00",
-      "venue" : "Adyen",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
       "title" : "Amsterdam JUG Meetup at Picnic",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316510873/",
       "startTime" : "2026-09-24T18:00:00+02:00",
@@ -402,6 +386,14 @@
       "venue" : "adesso SE",
       "city" : "Hamburg",
       "online" : false
+    }, {
+      "title" : "Java auf Diät: Schlankere Spring Boot Container für mehr Sicherheit",
+      "url" : "https://www.meetup.com/jug-hamburg/events/316580306/",
+      "startTime" : "2026-10-29T19:00:00+01:00",
+      "endTime" : "2026-10-29T20:30:00+01:00",
+      "venue" : "Kühne + Nagel",
+      "city" : "Hamburg",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Hannover",
@@ -730,7 +722,15 @@
     "jug" : "JUGNoord",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-noord/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "October 2026: Snake in 10 Lines and the Identity of AI Agents",
+      "url" : "https://www.meetup.com/jug-noord/events/315496239/",
+      "startTime" : "2026-10-01T17:00:00+02:00",
+      "endTime" : "2026-10-01T20:00:00+02:00",
+      "venue" : "Reviusstraat 2",
+      "city" : "Leeuwarden",
+      "online" : false
+    } ]
   }, {
     "slug" : "KnoxJava",
     "name" : "KnoxJava",
@@ -980,15 +980,7 @@
     "jug" : "UtrechtJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/utrecht-java-user-group/",
-    "events" : [ {
-      "title" : "Utrecht JUG Meetup – September 16th: From Stream Gatherers to Constraint AI",
-      "url" : "https://www.meetup.com/utrecht-java-user-group/events/316243514/",
-      "startTime" : "2026-09-16T17:30:00+02:00",
-      "endTime" : "2026-09-16T22:00:00+02:00",
-      "venue" : "Yoink!",
-      "city" : "Utrecht",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "ValenciaJUG",
     "name" : "ValenciaJUG",
