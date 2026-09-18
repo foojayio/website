@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-17T06:13:14Z",
+  "generatedAt" : "2026-09-18T06:02:09Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -278,7 +278,15 @@
     "jug" : "BielefeldJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Bielefeld/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "dev connect OWL 2026",
+      "url" : "https://www.meetup.com/java-user-group-bielefeld/events/316594278/",
+      "startTime" : "2026-09-29T14:30:00+02:00",
+      "endTime" : "2026-09-29T19:00:00+02:00",
+      "venue" : "Wissenswerkstadt Bielefeld",
+      "city" : "Bielefeld",
+      "online" : false
+    } ]
   }, {
     "slug" : "JUG-Bonn",
     "name" : "JUG Bonn",
@@ -322,15 +330,7 @@
     "jug" : "DortmundJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Dortmund/",
-    "events" : [ {
-      "title" : "Java User Group meets Digitale Woche",
-      "url" : "https://www.meetup.com/jug-dortmund/events/316266462/",
-      "startTime" : "2026-09-17T17:30:00+02:00",
-      "endTime" : "2026-09-17T22:00:00+02:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "rheinJUG",
     "name" : "Java User Group Duesseldorf Rhein",
@@ -574,14 +574,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "Three Coding Agents, One Java Project. Take a look at biomelab.",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316571500/",
-      "startTime" : "2026-09-17T20:00:00+02:00",
-      "endTime" : "2026-09-17T22:00:00+02:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226991/",
       "startTime" : "2026-10-07T18:00:00+02:00",
@@ -783,15 +775,7 @@
     "jug" : "MadridJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/madridjug/",
-    "events" : [ {
-      "title" : "What's New in Micronaut 5",
-      "url" : "https://www.meetup.com/madridjug/events/316404047/",
-      "startTime" : "2026-09-17T19:00:00+02:00",
-      "endTime" : "2026-09-17T20:30:00+02:00",
-      "venue" : "Oficinas de Oracle, Madrid",
-      "city" : "Madrid",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "ManchesterUK-Java-Community",
     "name" : "Manchester Java Community",
@@ -832,15 +816,7 @@
     "jug" : "NijmegenJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/nijmegen-java-user-group/",
-    "events" : [ {
-      "title" : "NijmegenJUG - September Meetup",
-      "url" : "https://www.meetup.com/nijmegen-java-user-group/events/316351451/",
-      "startTime" : "2026-09-17T17:30:00+02:00",
-      "endTime" : "2026-09-17T21:00:00+02:00",
-      "venue" : "First8 Conclusion",
-      "city" : "Nijmegen",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "NisJUG",
     "name" : "NisJUG - Niš Java User Group (Niš, Serbia)",
@@ -971,6 +947,14 @@
       "startTime" : "2026-09-24T18:30:00-04:00",
       "endTime" : "2026-09-24T20:30:00-04:00",
       "venue" : "Free Times Cafe",
+      "city" : "Toronto",
+      "online" : false
+    }, {
+      "title" : "Building Intelligent Java Apps: Agent Patterns, MCP, and the Future of AI Native",
+      "url" : "https://www.meetup.com/toronto-java-users-group/events/316595726/",
+      "startTime" : "2026-10-05T18:30:00-04:00",
+      "endTime" : "2026-10-05T20:30:00-04:00",
+      "venue" : "16 York St",
       "city" : "Toronto",
       "online" : false
     } ]
