@@ -283,21 +283,21 @@ this is a change from the current state and back again. Keep the grey-cloud
 window short: during it, none of the five Redirect Rules fire — and, per Phase
 1, it is also the only stretch where DNS TTL genuinely delays a rollback.
 
-1. [ ] **Switch the web records to GitHub Pages, DNS only (grey cloud).**
+1. [X] **Switch the web records to GitHub Pages, DNS only (grey cloud).**
        Leave every other record alone — see the DNS table below; touching `MX`
        or the `TXT` records breaks mail for the domain.
 
-2. [ ] **Set the custom domain in Pages settings** —
+2. [X] **Set the custom domain in Pages settings** —
        <https://github.com/foojayio/website/settings/pages> → *Custom domain* →
        `foojay.io` → Save. Note the repo has **no `CNAME` file** and does not
        need one: this repo deploys via GitHub Actions, where the Pages settings
        hold the domain rather than a file in the artifact.
 
-3. [ ] **Wait for the certificate**, then tick **Enforce HTTPS**. This can take
+3. [X] **Wait for the certificate**, then tick **Enforce HTTPS**. This can take
        anything from a few minutes to a while; the checkbox stays greyed out
        until GitHub has issued the cert.
 
-4. [ ] **[ORDER] Re-run the `Build and deploy` workflow.** This is the step
+4. [X] **[ORDER] Re-run the `Build and deploy` workflow.** This is the step
        that is easiest to miss and it is the one that actually flips the site to
        production. `build-deploy.yml` builds with
        `--baseURL "${{ steps.pages.outputs.base_url }}/"`, and that value comes
