@@ -1006,6 +1006,16 @@
   avatar: https://javachampions.org/img/avatars/ensode.png
   latitude: 38.8950368
   longitude: -77.0365427
+- name: David Pilato
+  year: 2026
+  country: France
+  city: Paris
+  twitter: https://twitter.com/dadoonet
+  bluesky: https://bsky.app/profile/pilato.fr
+  linkedin: https://www.linkedin.com/in/dadoonet/
+  avatar: https://javachampions.org/img/avatars/dadoonet.png
+  latitude: 48.8588897
+  longitude: 2.320041
 - name: Deepak Alur
   year: 2006
   country: USA
