@@ -330,9 +330,12 @@ window short: during it, none of the five Redirect Rules fire — and, per Phase
 
 Fastest checks first, so a failure is caught before you have gone further.
 
-**Run 2026-09-21.** Everything below passes except the 14 category renames, which
-have their own item at the end of this phase. One thing to know before reading a
-failure here: the first pass of these checks ran while `foojay.io` was still
+**Run 2026-09-21. Re-run the same day, after the renames went in.** Everything
+below passes except `/almanac/`, which has its own item at the end of this
+phase; the 14 category renames now pass and their blocker is closed. The second
+run also went wider than the loops ask for, and that is where the one failure
+came from — see that item before trusting a narrow pass again. One thing to know
+before reading a failure here: the first pass of these checks ran while `foojay.io` was still
 **grey cloud**, and every Cloudflare-dependent check failed at once — all 17
 redirect URLs 404, `/api/views/all` 404. Neither Redirect Rules nor Worker routes
 run on an unproxied hostname. `curl -sI https://foojay.io/` answering
@@ -351,25 +354,71 @@ debugging the rules.
       it, and the alias pages emit `canonical href=https://foojay.io/…`.
 - [ ] **Analytics fires.** Load the site in a normal (non-private) window,
       accept the Ketch banner, confirm `/g/collect` with `tid=G-GS21L12HYK`.
-      The tag id **is** in the served HTML. The banner and the beacon still need
-      a real browser, so this stays open.
+      The banner and the beacon need a real browser, so this stays open — but
+      **the Phase 0 worry behind it is now answered.** That item asked whether
+      Ketch's Google Consent Mode plugin is enabled on the `foojay_io` property,
+      because without it GA4 falls back to cookieless pings and the numbers
+      collapse. It is enabled, and the property config says so:
+
+      ```sh
+      curl -s https://global.ketchcdn.com/web/v3/config/azul/foojay_io/config.json \
+        | python3 -c 'import json,sys; print(json.load(sys.stdin)["plugins"])'
+      # {'googletag': {}, 'gpc': {...}, 'lanyard': {}}
+      ```
+
+      `googletag` is the Consent Mode plugin, and the config maps `_ga` / `_gid`
+      to the `analytics` purpose. The served HTML holds the other half: the
+      `gtag('consent','default', …)` block with everything `denied` except
+      `security_storage`, `wait_for_update: 500`, the Ketch boot script, and
+      `gtag/js?id=G-GS21L12HYK`. What is left to confirm in a browser is only
+      that accepting the banner produces the `consent update` and the beacon.
 - [x] **The regex redirects work.** Run the verification loop in
       [Redirect rules](#redirect-rules) — `/blog/…`, `/almanac/jdk-17`,
       `/docs/…`, a nested category path, and `/feed/`. That loop also checks the
       two URLs rule 4a must *not* touch (`/today/category/java/page/2/` and
       `/today/category/tools/`), since a wrong exclusion condition breaks those
       silently. Expect `302`, not `301`, until Phase 4.
-      Verified: rules 1, 2, 3, 4a and 5 all answer `302` and end `200`, and both
-      must-not-move URLs stay `200`. The renames are the exception, below.
+      Verified: rules 1, 3, 4a, 4b and 5 all answer `302` and end `200`, and both
+      must-not-move URLs stay `200`.
       `/today/category/tools/maven/feed/` takes two hops (4a, then 5) and lands
       right, which is worth knowing but not worth a rule.
-- [x] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
-      the three emoji-suffixed post URLs. Verified: four aliases and both emoji
-      URLs serve a meta-refresh page with the correct canonical. These are Hugo
-      output, not Cloudflare, so they survived the grey-cloud window.
+      **Rule 2 passes only for the shapes this loop tests** — see the
+      `/almanac/` item at the end of this phase.
+- [x] **Aliases work.** Spot-check a few of the per-URL redirects and one of
+      the three emoji-suffixed post URLs. These are Hugo output, not Cloudflare,
+      so they survived the grey-cloud window.
+
+      **The re-run tested all 75 of them rather than a sample** — every enabled
+      non-regex rule in the plugin's `wp_redirection_items`, minus the 17
+      deliberately dropped below. 73 end `200`; the two that do not are the
+      `/almanac/` item at the end of this phase. Worth doing this way: a
+      four-URL spot check would have missed it. The list comes straight from the
+      dump, so it is reproducible:
+
+      ```sql
+      SELECT url, action_data, last_count FROM wp_redirection_items
+      WHERE regex = '0' AND status = 'enabled';
+      ```
+
+      The 11 aliases added from `_wp_old_slug` were checked the same way and all
+      11 serve a meta-refresh with the right canonical. A 46-URL sample of
+      `/today/` posts drawn from the live sitemap, and all 22 top-level pages
+      and feeds, answer `200`.
 - [x] **The view counter is counting.** `curl https://foojay.io/api/views/all`
       returns data, and a page view increments its key. Verified, once the proxy
-      was back on.
+      was back on: 2,593 keys / 14,070,823 views.
+
+      **Incrementing is testable without a browser**, which the first run did not
+      realise — `partials/views-beacon.html` just `sendBeacon`s a POST, so
+      `curl -X POST https://foojay.io/api/views/hit/posts/<slug>` is the same
+      request. It answers `204` and the key goes up by one. Measured on
+      `posts/container-awareness-for-java`: 5052 -> 5053.
+
+      The dump-based re-import landed: **every post key now matches the database
+      exactly** (0 below, against 2,169 before). The only legacy views with
+      nowhere to go are `works-with-openjdk`'s 5,573 — that post redirects to
+      the home page here, so it has no key — plus a trashed post and five
+      drafts, none of which exist on this site.
 - [x] **Comments load.** Two separate things on a post that has both (e.g.
       `/today/why-i-prefer-trunk-based-development/`, 12 archived comments):
       the giscus widget appears and can take a new comment, and the
@@ -381,42 +430,78 @@ debugging the rules.
 - [x] **Search works** — `/search/?q=java`. Pagefind's index is built by the
       workflow (`npx -y pagefind --site public`), so this is the first time it
       is exercised against the real domain. Page and `/pagefind/pagefind.js`
-      both `200`. Running a query is client-side, so it needs a browser.
+      both `200`, and `/pagefind/pagefind-entry.json` reports **2,861 pages
+      indexed** for `en` — which is the part that could silently be empty.
+      Running a query is client-side, so that still needs a browser.
 - [x] **`www.foojay.io`** redirects to the apex over HTTPS. Verified: `301` to
       `https://foojay.io/`.
-- [ ] **Mail still works.** Send a test to `hello@foojay.io`.
+- [ ] **Mail still works.** Send a test to `hello@foojay.io`. Still worth doing
+      end to end, but **the records cutover could have broken are intact**,
+      which is what the "touching `MX` or the `TXT` records breaks mail"
+      warning in Phase 2 step 1 is about:
+
+      ```
+      MX   0 foojay-io.mail.protection.outlook.com
+      SPF  v=spf1 a:foojay.io include:us._netblocks.mimecast.com
+           include:sendgrid.net include:mailgun.org
+           include:spf.protection.outlook.com -all
+      ```
+
+      Unrelated to cutover and pre-existing, so noted rather than raised:
+      **there is no `_dmarc.foojay.io` record**, and the site sends no HSTS
+      header.
 - [ ] **Resubmit `sitemap.xml`** in Google Search Console and watch coverage
       over the following days.
 
-- [ ] **[BLOCKER] The 14 category renames are not deployed.** Every one of the
-      renames in the table under [Redirect rules](#redirect-rules) ends `404` on
-      the live site, measured 2026-09-21 with the proxy on. The table says each
-      "needs its own rule (or one rule with a lookup map)", and that rule set was
-      never added to Cloudflare. The failure splits by shape:
+- [x] **The 14 category renames are deployed.** Rule 4b is live. All 14 answer
+      `302` and end `200`, checked one by one rather than trusting the three the
+      loop covers:
 
-      - **The 7 nested ones** (`books/book-reviews/`, `tools/cassandra/`,
-        `tools/deepnetts/`, `tools/idea/`, `tools/pulsar/`, `tools/tomcat/`,
-        `tools/vscode/`) are caught by the generic rule 4a, which strips the
-        parent segment and nothing else. They redirect `302` to a slug that does
-        not exist: `tools/vscode/` → `/today/category/vscode/` → 404, where the
-        page is `/today/category/vs-code/`. **A rename rule has to run before
-        4a**, or 4a sends it somewhere plausible and wrong.
-      - **The 7 flat ones** (`ai-ml/`, `game/`, `interview/`, `jakartaee/`,
-        `survey/`, `tutorial/`, `uncategorized/`) have no parent to strip, match
-        no rule at all, and 404 directly.
+      | | |
+      |---|---|
+      | flat (7) | `ai-ml/` → `/ai/`, `game/`, `interview/`, `jakartaee/`, `survey/`, `tutorial/`, `uncategorized/` → `/today/` |
+      | nested (7) | `books/book-reviews/`, `tools/{cassandra,deepnetts,idea,pulsar,tomcat,vscode}/` |
 
-      All the destinations exist and are correct as documented — `/ai/`,
-      `vs-code/`, `tutorials/`, `machine-learning/` all answer 200 — so this is
-      purely the missing rule, not a wrong mapping.
+      The three things the rule was written to get right all hold:
+      `tutorial/page/2/` and `tools/vscode/page/2/` carry the tail through;
+      `tutorial/feed/` and `interview/feed/` take the second hop into rule 5;
+      and `ai-ml/` splits correctly — bare to `/ai/`, `ai-ml/page/2/` and
+      `ai-ml/feed/` to `machine-learning/`. **The cascade guard holds too**:
+      `surveys/`, `interviews/`, `tutorials/`, `game-development/`, `vs-code/`
+      and `machine-learning/` all answer `200` and are not re-matched by the
+      rule that produced them.
 
-      This is the exact trap the loop's own instructions warn about: seven of
-      the fourteen answer `302` and read as a pass unless you follow the
-      redirect and check the final code.
+- [ ] **[BLOCKER] `/almanac/` and `/almanac` 404.** Both redirected to
+      `https://javaalmanac.io/` on WordPress (plugin rules 69 and 70, **644 and
+      23 recorded hits, the first used as recently as 2026-09-19**) and neither
+      was carried. Rule 2 only matches `^/almanac/(jdk|java)-([0-9]+)`, so the
+      section's own front door misses it, and so does anything else under
+      `/almanac/` — `/almanac/anything/` 404s as well.
 
-      **The fix is written and waiting:** "Rule 4b, the renames" under
-      [Redirect rules](#redirect-rules) carries the finished expression, where
-      it has to sit in the list, and why. It needs someone with Cloudflare
-      access to paste it in.
+      They are not in "What was deliberately NOT carried over" either: this is
+      an oversight, not a decision. An `aliases:` entry cannot fix it — a Hugo
+      alias resolves against `baseURL` and cannot point off-site — so it has to
+      be Cloudflare.
+
+      **The fix is to widen rule 2 rather than add a sixth rule**, since one
+      nested pair covers every shape. Same settings as today (Dynamic, `302`
+      until Phase 4, preserve query string):
+
+      ```
+      When:  http.host eq "foojay.io" and http.request.uri.path matches "^/almanac(/.*)?$"
+      Then:  concat("https://javaalmanac.io", regex_replace(regex_replace(http.request.uri.path, "^/almanac/(jdk|java)-([0-9]+).*$", "/jdk/${2}"), "^/almanac(/.*)?$", "/"))
+      ```
+
+      The inner replace handles a versioned path exactly as rule 2 does today;
+      the outer one cannot then re-match it, because `/jdk/17` does not begin
+      with `/almanac`, so it passes through untouched. Anything else under
+      `/almanac/` lands on the site root, which is where a reader of a dead
+      almanac URL wants to be.
+
+      **Add both bare forms to the verification loop** while you are there. The
+      loop tests `/almanac/jdk-17` and `/almanac/java-8` and nothing else, which
+      is precisely why 667 hits' worth of redirect went missing in a phase whose
+      own instructions warn about reading a narrow pass as a broad one.
 
 ---
 
@@ -654,7 +739,7 @@ just the hop, or a redirect to a 404 reads as a pass.
 
 ```sh
 for u in /blog/log4j-cve/ /blog/author/hirt/ /blog/category/java/ \
-         /almanac/jdk-17 /almanac/java-8 /docs/anything/ \
+         /almanac/jdk-17 /almanac/java-8 /almanac/ /almanac /docs/anything/ \
          /today/category/tools/maven/ /today/category/tools/maven/page/2/ \
          /today/category/jeps/records/ /today/category/tools/vscode/ \
          /today/category/ai-ml/ /today/category/tutorial/ \
