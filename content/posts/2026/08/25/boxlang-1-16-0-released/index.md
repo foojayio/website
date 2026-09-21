@@ -8,6 +8,10 @@ authors:
 image: "boxlang-v1.16.0-700x467.jpg"
 categories:
   - "BoxLang"
+  - "Developer Tools"
+  - "Java"
+  - "Java Core"
+  - "Release Notes"
 related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"

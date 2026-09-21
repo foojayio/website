@@ -1,7 +1,7 @@
 ---
 title: "What's New In The September 2026 Azul Payara Release?"
 date: "2026-09-16T16:46:54+00:00"
-lastmod: "2026-09-16T16:46:56+00:00"
+lastmod: "2026-09-17T08:40:00+00:00"
 description: "MicroProfile 7.1 lands on the commercial lines, OpenTracing is removed, and Jakarta Agentic AI reaches Payara Micro in the September Azul Payara release."
 authors:
   - "dominika-tasarz"
@@ -32,8 +32,47 @@ On the Community side, the Jakarta Agentic AI preview that debuted in August now
 | Azul Payara Server and Micro 5.91.0       | 8              | 4.1              | JSON access log, payara- descriptors, protobuf 4.35.1               |
 | Azul Payara Server and Micro 4.1.2.191.59 | —              | —                | Security fixes, Jackson 2.18.10                                     |
 
-## **Before You Upgrade:**
-**MicroProfile OpenTracing Has Been Removed**
+## **A Security Fix Patched Across Every Branch**
+
+Two security items ship across the whole cycle.
+
+* **CVE-2026-68497** , a resource exhaustion vulnerability in `jackson-databind`, is fixed in Azul Payara Server and Micro 7.4.0, 6.42.0, 5.91.0, and 4.1.2.191.59, and in Payara Community 7.2026.9.
+
+<!-- -->
+
+* Separately, the **Hazelcast implementation has been upgraded to use shaded Jackson 2.18.6 or later**, closing off the same class of exposure inside the clustering and data grid layer. This also lands on every branch.
+
+Shipping the patch across the full supported lifecycle, not only the latest major release, is the practice long-running Azul customers rely on. Azul is a registered CVE Numbering Authority (CNA) under CISA and DHS oversight, with patches backported to every supported version on a published monthly schedule. There is no reason to delay upgrading based on the major-version line you run.
+
+## **What's New In Payara Community 7.2026.9**
+
+![](Email-Header-Payara-Community-September-2026-1024x341.jpg)
+
+Payara Community 7.2026.9 ([download here](https://www.azul.com/downloads/azul-payara-community-edition)) is the open-source distribution that tracks the Payara 7 development line, shipping Jakarta EE 11 and MicroProfile 7.1.
+
+It carries the same security fixes, bug fixes, and component upgrades as Azul Payara Server and Micro 7.4.0 - including Hazelcast 5.7.0, the JSON-formatted HTTP access log, the descriptor work, and the Docker JDK 25.0.4.1 and 21.0.12.1 refreshes - plus one item of its own that is the most interesting thing in this month's release.
+
+### **Jakarta Agentic AI Comes To Payara Micro And Embedded**
+
+In August, Payara Community 7.2026.8 shipped a first preview of the Jakarta Agentic AI 1.0 API, the vendor-neutral specification for building AI agents on Jakarta EE runtimes, where an agent is simply a CDI bean annotated with `@Agent` and a LargeLanguageModel is injected like any other dependency.
+
+September extends that preview to **Payara Micro and Payara Embedded**.
+
+The August preview put agents inside a full application server. Bringing the API to Micro means an agent can ship in the same single-JAR, container-first footprint that cloud-native Payara deployments already use - the natural home for a service whose job is to call a model and act on the answer. Bringing it to Embedded means you can exercise agents from a test harness or an embedded runtime without standing up a server at all, which is what makes the programming model practical to iterate on.
+
+The specification is still a standalone Jakarta EE release at Milestone 1 (1.0.0-M1) and out for early feedback, so the API may change. That is precisely the point of a preview: building against it now, in a real Jakarta EE 11 runtime and in the deployment shape you actually use, is how the specification gets shaped before it is finalised. Feedback on the Payara GitHub repository (github.com/payara/Payara) and through the specification's own channels is what decides how quickly this reaches the commercial lines.
+
+### **Community Contributions**
+
+Thanks to community contributor lprimak for the fix to the leaking "injection manager found in the current thread" log messages, included in this release and in Azul Payara Server and Micro 7.4.0.
+
+Every fix in the Community release links to its pull request [in the release notes](https://docs.azul.com/payara-community/release-notes/release-notes-7.2026.9.html), if you want to read the change itself.
+
+## **What's New In Azul Payara Server and Micro**
+
+![](Email-Header-Azul-Payara-September-2026-1024x341.jpg)
+
+### **Before You Upgrade: MicroProfile OpenTracing Has Been Removed**
 
 Support for MicroProfile OpenTracing is gone from Azul Payara Server and Micro 7.4.0 and 6.42.0.
 
@@ -52,22 +91,6 @@ If your applications use the MicroProfile OpenTracing APIs, they need re-instrum
 Azul Payara Server and Micro 5.91.0 stays on MicroProfile 4.1 and is unaffected. And Payara Community moved to MicroProfile 7.1 in the August release, so Community users have already made this transition.
 
 If you are planning the switch, the OpenTelemetry work in this release helps: the OpenTelemetry SDK moves to 1.65.0, the instrumentation annotations to 2.31.1, and the semantic conventions to 1.43.0 on the 7 line. That SDK move is larger than it looks: on the 7 line OpenTelemetry advances from 1.48.0 to 1.65.0 within this single cycle, so teams re-instrumenting off OpenTracing land on a substantially newer OpenTelemetry than the 7 line shipped with last month.
-
-## **A Security Fix Patched Across Every Branch**
-
-Two security items ship across the whole cycle.
-
-* **CVE-2026-68497** , a resource exhaustion vulnerability in `jackson-databind`, is fixed in Azul Payara Server and Micro 7.4.0, 6.42.0, 5.91.0, and 4.1.2.191.59, and in Payara Community 7.2026.9.
-
-<!-- -->
-
-* Separately, the **Hazelcast implementation has been upgraded to use shaded Jackson 2.18.6 or later**, closing off the same class of exposure inside the clustering and data grid layer. This also lands on every branch.
-
-Shipping the patch across the full supported lifecycle, not only the latest major release, is the practice long-running Azul customers rely on. Azul is a registered CVE Numbering Authority (CNA) under CISA and DHS oversight, with patches backported to every supported version on a published monthly schedule. There is no reason to delay upgrading based on the major-version line you run.
-
-## **What's New In Azul Payara Server and Micro**
-
-![](Email-Header-Azul-Payara-September-2026-1024x341.jpg)
 
 ### **Azul Payara 7.4.0**
 
@@ -138,30 +161,6 @@ This release picks up both security items, the JSON-formatted HTTP access log, t
 Azul Payara 4.1.2.191.59 receives the `jackson-databind` CVE fix, the Hazelcast shaded Jackson upgrade, and the SSH node fix, with Jackson moving from 2.18.8 to 2.18.10 and the Docker image refreshing to JDK 8u504.
 
 Customers on the 4 branch without contracted Lifetime Support can still access existing binaries but receive no new releases beyond security patches.
-
-## **What's New In Payara Community 7.2026.9**
-
-![](Email-Header-Payara-Community-September-2026-1024x341.jpg)
-
-Payara Community 7.2026.9 ([download here](https://www.azul.com/downloads/azul-payara-community-edition)) is the open-source distribution that tracks the Payara 7 development line, shipping Jakarta EE 11 and MicroProfile 7.1.
-
-It carries the same security fixes, bug fixes, and component upgrades as Azul Payara Server and Micro 7.4.0 - including Hazelcast 5.7.0, the JSON-formatted HTTP access log, the descriptor work, and the Docker JDK 25.0.4.1 and 21.0.12.1 refreshes - plus one item of its own that is the most interesting thing in this month's release.
-
-### **Jakarta Agentic AI Comes To Payara Micro And Embedded**
-
-In August, Payara Community 7.2026.8 shipped a first preview of the Jakarta Agentic AI 1.0 API, the vendor-neutral specification for building AI agents on Jakarta EE runtimes, where an agent is simply a CDI bean annotated with `@Agent` and a LargeLanguageModel is injected like any other dependency.
-
-September extends that preview to **Payara Micro and Payara Embedded**.
-
-The August preview put agents inside a full application server. Bringing the API to Micro means an agent can ship in the same single-JAR, container-first footprint that cloud-native Payara deployments already use - the natural home for a service whose job is to call a model and act on the answer. Bringing it to Embedded means you can exercise agents from a test harness or an embedded runtime without standing up a server at all, which is what makes the programming model practical to iterate on.
-
-The specification is still a standalone Jakarta EE release at Milestone 1 (1.0.0-M1) and out for early feedback, so the API may change. That is precisely the point of a preview: building against it now, in a real Jakarta EE 11 runtime and in the deployment shape you actually use, is how the specification gets shaped before it is finalised. Feedback on the Payara GitHub repository (github.com/payara/Payara) and through the specification's own channels is what decides how quickly this reaches the commercial lines.
-
-### **Community Contributions**
-
-Thanks to community contributor lprimak for the fix to the leaking "injection manager found in the current thread" log messages, included in this release and in Azul Payara Server and Micro 7.4.0.
-
-Every fix in the Community release links to its pull request [in the release notes](https://docs.azul.com/payara-community/release-notes/release-notes-7.2026.9.html), if you want to read the change itself.
 
 ## **Looking Ahead**
 

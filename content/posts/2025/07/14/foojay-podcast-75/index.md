@@ -1,12 +1,13 @@
 ---
 title: "Foojay Podcast #75: JCON Report, Part 4 - Tips and Tricks for Java Devs"
 date: "2025-07-14T06:47:00+00:00"
-lastmod: "2025-11-13T08:35:49+00:00"
+lastmod: "2026-08-31T06:28:36+00:00"
 description: "This is the final part of the JCON 2025 interviews with a lot of tips and tricks! In the three previous podcasts, we featured interviews from the JCON…"
 authors:
   - "frankdelporte"
 image: "episode-75-jcon-part-4.jpg"
 categories:
+  - "DuckDB"
   - "Java Beginner"
   - "Java Core"
   - "Podcast"

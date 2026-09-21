@@ -1,7 +1,7 @@
 ---
 title: "Getting Started With Hibernate ORM and MongoDB"
 date: "2025-11-04T17:06:26+00:00"
-lastmod: "2025-12-12T21:20:53+00:00"
+lastmod: "2026-09-01T21:50:19+00:00"
 description: "For years, Hibernate ORM has been one of the most popular frameworks in the Java ecosystem. It was built to simplify data persistence by letting developers work with Java objects instead of SQL statements, a technique known as object-relational mapping (ORM).Traditionally, Hibernate ORM has been tightly associated with relational databases like PostgreSQL, MySQL, and Oracle. It manages connections, transactions, and entity state behind the scenes, and even provides Hibernate Query Language (HQL) so you can query your data using Java entity names rather than table names. Now, that same simplicity is available in the document-oriented world. With the MongoDB Extension for Hibernate ORM, developers can use familiar annotations such as @Entity and @Id, and the same Session.persist() and HQL queries they already know, but backed by MongoDB’s flexible schema architecture. This integration introduces a new MongoDB extension that allows Hibernate to translate entity operations and HQL queries into MongoDB commands, combining the ease of JPA with the scalability of MongoDB.In this article, we’ll walk through the setup and first steps to get Hibernate ORM running with MongoDB, from configuration to a simple CRUD example."
 authors:
   - "ricardo-mello"
@@ -106,16 +106,7 @@ The goal is to understand how the MongoDB Dialect works behind the scenes and ex
 
 This first part focuses entirely on the Book entity to keep things simple and hands-on. Later, we'll extend the same project to include a second entity called **Review** , introducing a **one-to-many relationship** between books and reviews, but that's for another article.
 
-If you'd like to follow along or check the complete code, it's all available on [GitHub](https://github.com/mongodb-developer/mongodb-hibernate-crud):
-
-The project uses **tags** to separate each stage of development:
-
-* [**Tag v1.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v1.0): includes only the content covered in this article (the Book CRUD operations)  
-* [**Tag v2.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v2.0): adds the Review entity and relationship examples discussed later  
-* [**Tag v3.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v3.0): extracts the Review model into its own collection to prevent unbounded array growth inside the Book document; introduces a new approach, where each review stores the bookId it belongs to  
-* [**Tag v4.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v4.0): implements the subset pattern, keeping all reviews in a separate reviews collection while storing only the three most recent reviews inside each Book document under a recentReview field  
-
-With that overview out of the way, let's set up the environment and add the necessary dependencies.
+If you'd like to follow along or check the complete code, it's all available on [GitHub](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/hibernate/mongodb-hibernate-crud):
 
 ## Setting up the project
 
@@ -534,4 +525,4 @@ And now, with the new MongoDB extension for Hibernate ORM, that same convenience
 
 This integration bridges two worlds: the stability and maturity of Hibernate with the scalability and agility of MongoDB.
 
-It's a great way for teams already invested in Hibernate to start exploring the benefits of document databases without changing how they write persistence code. The complete project is available on[GitHub](https://github.com/mongodb-developer/mongodb-hibernate-crud).
+It's a great way for teams already invested in Hibernate to start exploring the benefits of document databases without changing how they write persistence code. The complete project is available on [GitHub](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/hibernate/mongodb-hibernate-crud).
