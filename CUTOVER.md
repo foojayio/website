@@ -330,36 +330,93 @@ window short: during it, none of the five Redirect Rules fire — and, per Phase
 
 Fastest checks first, so a failure is caught before you have gone further.
 
-- [ ] **The site is indexable.** `curl -s https://foojay.io/ | grep -i noindex`
+**Run 2026-09-21.** Everything below passes except the 14 category renames, which
+have their own item at the end of this phase. One thing to know before reading a
+failure here: the first pass of these checks ran while `foojay.io` was still
+**grey cloud**, and every Cloudflare-dependent check failed at once — all 17
+redirect URLs 404, `/api/views/all` 404. Neither Redirect Rules nor Worker routes
+run on an unproxied hostname. `curl -sI https://foojay.io/` answering
+`server: GitHub.com` with no `cf-ray`, and the apex resolving to
+`185.199.108-111.153` instead of Cloudflare anycast, is the two-second way to
+tell. Check that first when a batch of these fails together, rather than
+debugging the rules.
+
+- [x] **The site is indexable.** `curl -s https://foojay.io/ | grep -i noindex`
       → no output. `curl -s https://foojay.io/robots.txt` → **not**
       `Disallow: /`, and the sitemap line present.
-- [ ] **No trial URLs leaked.** `curl -s https://foojay.io/ | grep -c
-      'foojayio.github.io\|/website/'` → `0`.
+      Verified: empty `Disallow:` and `Sitemap: https://foojay.io/sitemap.xml`.
+- [x] **No trial URLs leaked.** `curl -s https://foojay.io/ | grep -c
+      'foojayio.github.io\|/website/'` → `0`. Verified `0`, even though
+      `hugo.toml`'s `baseURL` still carries the trial URL — the build overrides
+      it, and the alias pages emit `canonical href=https://foojay.io/…`.
 - [ ] **Analytics fires.** Load the site in a normal (non-private) window,
       accept the Ketch banner, confirm `/g/collect` with `tid=G-GS21L12HYK`.
-- [ ] **The regex redirects work.** Run the verification loop in
+      The tag id **is** in the served HTML. The banner and the beacon still need
+      a real browser, so this stays open.
+- [x] **The regex redirects work.** Run the verification loop in
       [Redirect rules](#redirect-rules) — `/blog/…`, `/almanac/jdk-17`,
       `/docs/…`, a nested category path, and `/feed/`. That loop also checks the
       two URLs rule 4a must *not* touch (`/today/category/java/page/2/` and
       `/today/category/tools/`), since a wrong exclusion condition breaks those
       silently. Expect `302`, not `301`, until Phase 4.
-- [ ] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
-      the three emoji-suffixed post URLs.
-- [ ] **The view counter is counting.** `curl https://foojay.io/api/views/all`
-      returns data, and a page view increments its key.
-- [ ] **Comments load.** Two separate things on a post that has both (e.g.
+      Verified: rules 1, 2, 3, 4a and 5 all answer `302` and end `200`, and both
+      must-not-move URLs stay `200`. The renames are the exception, below.
+      `/today/category/tools/maven/feed/` takes two hops (4a, then 5) and lands
+      right, which is worth knowing but not worth a rule.
+- [x] **Aliases work.** Spot-check a few of the 89 per-URL redirects and one of
+      the three emoji-suffixed post URLs. Verified: four aliases and both emoji
+      URLs serve a meta-refresh page with the correct canonical. These are Hugo
+      output, not Cloudflare, so they survived the grey-cloud window.
+- [x] **The view counter is counting.** `curl https://foojay.io/api/views/all`
+      returns data, and a page view increments its key. Verified, once the proxy
+      was back on.
+- [x] **Comments load.** Two separate things on a post that has both (e.g.
       `/today/why-i-prefer-trunk-based-development/`, 12 archived comments):
       the giscus widget appears and can take a new comment, and the
       "Discussions on the previous Foojay site" section below it lists the
       archived ones. The archive is baked into the HTML, so if it is missing the
       build is at fault, not the network.
-- [ ] **Search works** — `/search/?q=java`. Pagefind's index is built by the
+      Verified in the served HTML: giscus loader present, archive heading and
+      comment blocks present. Posting a new comment needs a browser.
+- [x] **Search works** — `/search/?q=java`. Pagefind's index is built by the
       workflow (`npx -y pagefind --site public`), so this is the first time it
-      is exercised against the real domain.
-- [ ] **`www.foojay.io`** redirects to the apex over HTTPS.
+      is exercised against the real domain. Page and `/pagefind/pagefind.js`
+      both `200`. Running a query is client-side, so it needs a browser.
+- [x] **`www.foojay.io`** redirects to the apex over HTTPS. Verified: `301` to
+      `https://foojay.io/`.
 - [ ] **Mail still works.** Send a test to `hello@foojay.io`.
 - [ ] **Resubmit `sitemap.xml`** in Google Search Console and watch coverage
       over the following days.
+
+- [ ] **[BLOCKER] The 14 category renames are not deployed.** Every one of the
+      renames in the table under [Redirect rules](#redirect-rules) ends `404` on
+      the live site, measured 2026-09-21 with the proxy on. The table says each
+      "needs its own rule (or one rule with a lookup map)", and that rule set was
+      never added to Cloudflare. The failure splits by shape:
+
+      - **The 7 nested ones** (`books/book-reviews/`, `tools/cassandra/`,
+        `tools/deepnetts/`, `tools/idea/`, `tools/pulsar/`, `tools/tomcat/`,
+        `tools/vscode/`) are caught by the generic rule 4a, which strips the
+        parent segment and nothing else. They redirect `302` to a slug that does
+        not exist: `tools/vscode/` → `/today/category/vscode/` → 404, where the
+        page is `/today/category/vs-code/`. **A rename rule has to run before
+        4a**, or 4a sends it somewhere plausible and wrong.
+      - **The 7 flat ones** (`ai-ml/`, `game/`, `interview/`, `jakartaee/`,
+        `survey/`, `tutorial/`, `uncategorized/`) have no parent to strip, match
+        no rule at all, and 404 directly.
+
+      All the destinations exist and are correct as documented — `/ai/`,
+      `vs-code/`, `tutorials/`, `machine-learning/` all answer 200 — so this is
+      purely the missing rule, not a wrong mapping.
+
+      This is the exact trap the loop's own instructions warn about: seven of
+      the fourteen answer `302` and read as a pass unless you follow the
+      redirect and check the final code.
+
+      **The fix is written and waiting:** "Rule 4b, the renames" under
+      [Redirect rules](#redirect-rules) carries the finished expression, where
+      it has to sit in the list, and why. It needs someone with Cloudflare
+      access to paste it in.
 
 ---
 
@@ -529,6 +586,63 @@ that page renders exactly that category (`list_category: "Machine Learning"`,
 the same 66 articles) with an editorial introduction on top — the same post set
 on the better page. Repoint it at the term page if the portal ever stops
 tracking the category.
+
+#### Rule 4b, the renames — one rule, ready to hand to Ed
+
+Not deployed as of 2026-09-21, which is the `[BLOCKER]` in Phase 3: all 14 end
+404 today. What follows is the whole rule. It was simulated against every source
+URL and each destination was checked live, so it needs typing in, not designing.
+
+**Where it goes: FIRST in the Single Redirects list, above 4a and above 5.**
+That position is the rule, not a preference. Redirect rules stop at the first
+match, and 4a strips the parent segment off any nested category path, so with 4b
+second `tools/vscode/` becomes `/today/category/vscode/` and 404s before 4b is
+ever consulted. Rule 5 has to stay below for the same reason, otherwise
+`tutorial/feed/` turns into `/today/category/tutorial/index.xml`.
+
+**Settings:** type `Dynamic`, status `302` (`301` at Phase 4, with the others),
+**Preserve query string ON**. Regex needs the Business plan or above, which 4a
+already relies on.
+
+**When incoming requests match:**
+
+```
+http.host eq "foojay.io" and http.request.uri.path matches "^/today/category/(ai-ml|books/book-reviews|game|interview|jakartaee|survey|tools/(cassandra|deepnetts|idea|pulsar|tomcat|vscode)|tutorial|uncategorized)(/.*)?$"
+```
+
+**Target URL, as an expression:**
+
+```
+concat("https://foojay.io", regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(http.request.uri.path, "^/today/category/ai-ml/?$", "/ai/"), "^/today/category/ai-ml/(.+)$", "/today/category/machine-learning/${1}"), "^/today/category/books/book-reviews(/.*)?$", "/today/category/book-review${1}"), "^/today/category/game(/.*)?$", "/today/category/game-development${1}"), "^/today/category/interview(/.*)?$", "/today/category/interviews${1}"), "^/today/category/jakartaee(/.*)?$", "/today/category/jakarta-ee${1}"), "^/today/category/survey(/.*)?$", "/today/category/surveys${1}"), "^/today/category/tools/cassandra(/.*)?$", "/today/category/apache-cassandra${1}"), "^/today/category/tools/deepnetts(/.*)?$", "/today/category/deep-netts${1}"), "^/today/category/tools/idea(/.*)?$", "/today/category/intellij-idea${1}"), "^/today/category/tools/pulsar(/.*)?$", "/today/category/apache-pulsar${1}"), "^/today/category/tools/tomcat(/.*)?$", "/today/category/apache-tomcat${1}"), "^/today/category/tools/vscode(/.*)?$", "/today/category/vs-code${1}"), "^/today/category/tutorial(/.*)?$", "/today/category/tutorials${1}"), "^/today/category/uncategorized(/.*)?$", "/today${1}"))
+```
+
+Fifteen `regex_replace` calls for fourteen renames, nested so each one feeds the
+next. A path only ever matches one of them, and the order between them does not
+matter, with one exception noted below.
+
+**Three things in there that look odd and are deliberate:**
+
+- **`(/.*)?$` carries the rest of the path through**, so `tutorial/page/3/`
+  reaches `tutorials/page/3/` and `tutorial/feed/` reaches `tutorials/feed/`,
+  which rule 5 then turns into `index.xml` on the client's second request. That
+  second hop is how `tools/maven/feed/` already behaves, measured.
+- **It is also what stops a rewrite cascading.** `survey` → `surveys` cannot be
+  re-matched by the `survey` pattern afterwards, because the group demands `/`
+  or end-of-string and finds `s`. The same holds for `interview` and
+  `tutorial`. Loosen those anchors and the chain eats its own output.
+- **`ai-ml` gets two lines, and they are the one ordered pair.** The bare
+  category goes to `/ai/`, the editorial page chosen above. Anything deeper goes
+  to `/today/category/machine-learning/`, the literal term page, because `/ai/`
+  has no `page/2/` and no feed. The bare-path line runs first so the subtree
+  line cannot claim it.
+
+**Verifying it, after Ed saves the rule:** run the loop in the section above.
+All 14 have to answer `302` **and** end `200`. Seven of them redirect today and
+still end 404, so checking the hop alone proves nothing.
+
+Prefer a Bulk Redirect list instead? It takes the same 14 rows and is easier to
+edit later, but it cannot carry `page/N/` and `feed/` without a row each, which
+is what the expression above buys.
 
 ### Verifying, after cutover
 
