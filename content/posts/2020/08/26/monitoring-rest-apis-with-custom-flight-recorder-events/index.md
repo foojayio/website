@@ -16,6 +16,8 @@ related_posts:
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "jmc-8-0-1-released"
 frozen: false
+aliases:
+  - "/today/monitoring-rest-apis-with-custom-jdk-flight-recorder-events/"
 ---
 
 The [Java Flight Recorder](https://openjdk.java.net/jeps/328) (JFR) is an invaluable tool for gaining deep insights into the performance characteristics of Java applications. Open-sourced in JDK 11, JFR provides a low-overhead framework for collecting events from Java applications, the JVM and the operating system.

@@ -15,6 +15,8 @@ related_posts:
   - "creating-mobile-apps-with-javafx-part-1"
   - "jdkmon-your-friendly-jdk-distribution-updater"
 frozen: false
+aliases:
+  - "/today/beginning-javafx-applications-using-intellij-ide/"
 ---
 
 {{< img src="duke-intellij-shirt.png" class="alignleft size-large" width="174" height="313" caption="JavaFX in IntelliJ IDE" >}}

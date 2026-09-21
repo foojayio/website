@@ -16,6 +16,8 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing"
 frozen: true
+aliases:
+  - "/today/cloud-native-skaffold-book-review/"
 ---
 
 I'm a developer who cares deeply about production. But I'm not a devops and unfortunately I'm pretty bad at that. That's why when I heard about Skaffold it instantly piqued my interest. Write Kubernetes cloud native apps without well… Writing Kubernetes native apps… Sign me up!

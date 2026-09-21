@@ -12,6 +12,8 @@ categories:
   - "Security"
 related_posts:
 frozen: false
+aliases:
+  - "/today/37675/"
 ---
 
 Especially on IoT devices, file corruption on shutdown is a common concern. This article discusses how to write to disk safely in Java, combining disk sync, shutdown hooks, and atomic renaming of files.
