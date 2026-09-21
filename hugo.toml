@@ -1,4 +1,4 @@
-baseURL = "https://foojayio.github.io/website/"
+baseURL = "https://foojay.io/"
 #"https://foojay.io/"
 locale = "en-us"
 title = "foojay.io - Friends Of OpenJDK"
