@@ -112,21 +112,45 @@ public class Jugs {
         // File name -> the folder it was found in. Keyed on the name because
         // that IS the JUG's identity here (the slug is the file name), so a
         // file present in both folders resolves to the primary one.
+        // AN UNREACHABLE LISTING IS THE SAME ANSWER AS A COLLAPSED ONE, and gets
+        // the same treatment as the guard below: keep the committed file, say
+        // why, exit 0. The guard there only catches an upstream that ANSWERS
+        // with too little -- a GitHub outage, a 500 or a DNS failure throws
+        // straight out of here instead, and this script runs before Hugo in
+        // build-deploy.yml, so that threw a deploy away over somebody else's
+        // API. It also runs first in sync-external-content.yml, where it took
+        // the Champions, event and JVM Weekly steps down with it before any of
+        // them ran. Neither is news about the JUG directory.
         Map<String, String> found = new LinkedHashMap<>();
-        for (String dir : DIRS) {
-            List<String> files = listJugFiles(dir);
-            System.out.println("Found " + files.size() + " JUG files in " + REPO + "/" + dir);
-            int only = 0;
-            for (String file : files) {
-                if (found.putIfAbsent(file, dir) == null && !dir.equals(DIRS.get(0))) only++;
+        try {
+            for (String dir : DIRS) {
+                List<String> files = listJugFiles(dir);
+                System.out.println("Found " + files.size() + " JUG files in " + REPO + "/" + dir);
+                int only = 0;
+                for (String file : files) {
+                    if (found.putIfAbsent(file, dir) == null && !dir.equals(DIRS.get(0))) only++;
+                }
+                // Named rather than silently absorbed: a file outside the primary
+                // folder is an upstream leftover somebody has to move, and the only
+                // way anyone learns of it is this line.
+                if (only > 0) {
+                    System.out.println("  " + only + " of these are ONLY in " + dir
+                            + " -- they belong in " + DIRS.get(0) + " upstream (open a PR there).");
+                }
             }
-            // Named rather than silently absorbed: a file outside the primary
-            // folder is an upstream leftover somebody has to move, and the only
-            // way anyone learns of it is this line.
-            if (only > 0) {
-                System.out.println("  " + only + " of these are ONLY in " + dir
-                        + " -- they belong in " + DIRS.get(0) + " upstream (open a PR there).");
-            }
+        } catch (IOException | InterruptedException e) {
+            if (e instanceof InterruptedException) Thread.currentThread().interrupt();
+            System.err.println("COULD NOT LIST " + REPO + " (" + e + ") -- keeping " + OUTPUT_FILE
+                    + " exactly as committed, and exiting cleanly so the build and the rest of the"
+                    + " sync carry on with the last good list. Check that " + REPO + " still exists"
+                    + " on branch " + BRANCH + " and that the GitHub API is up.");
+            return;
+        }
+        if (found.isEmpty()) {
+            System.err.println("The listing came back with no JUG files at all -- keeping "
+                    + OUTPUT_FILE + " exactly as committed. That is a moved folder or a renamed"
+                    + " branch upstream, not an empty directory.");
+            return;
         }
 
         ExecutorService pool = Executors.newFixedThreadPool(8);

@@ -43,6 +43,21 @@ import java.util.stream.Stream;
  * republication: it publishes no feed and serves a logged-out client a wall.
  * The newsletter's home is Substack at www.jvm-weekly.com.
  *
+ * THAT DOMAIN CAN GO DARK, AND DID. jvm-weekly.com lapsed on 2026-09-18: the
+ * registrar repointed it at ns{1,2}-expired.netart-registrar.com and a parking
+ * host that refuses :443, so every request below threw a ConnectException and
+ * the daily sync went red before its commit step. main() now treats an
+ * unreachable archive as "keep the committed file and exit 0" -- Artur's
+ * newsletter being offline is not a Foojay build failure.
+ *
+ * IF IT STAYS DARK, the publication is Substack id 862586, subdomain `vived`.
+ * vived.substack.com is NOT a drop-in replacement: while the custom domain is
+ * still configured upstream it 301s every path back to the dead host. What
+ * does answer is the platform-level profile feed,
+ * substack.com/api/v1/reader/feed/profile/73551664?types[]=post -- every
+ * edition's title, date and canonical_url, no custom domain involved. Ask
+ * Artur first: renewing the domain restores everything here unchanged.
+ *
  * TWO SOURCES, BECAUSE THE FEED IS A WINDOW. The RSS feed carries the full body
  * of the 20 most recent editions -- about five months, which reaches five
  * roundups. The newsletter has run since April 2022 and the archive holds 197
@@ -227,11 +242,45 @@ public class JvmWeekly {
         System.out.println(site.titles.size() + " posts and " + site.authorNames.size()
                 + " authors in content/");
 
-        List<Edition> editions = archive();
+        // UPSTREAM DOWN IS NOT OUR FAILURE, and this is the loud version of the
+        // reasoning in sectionEditions(). The archive listing is the one
+        // request this script cannot do without, and it hangs off somebody
+        // else's domain: on 2026-09-18 jvm-weekly.com expired, its delegation
+        // was swapped for the registrar's parking nameservers, and :443 on the
+        // parking host refuses the connection -- so every request here died
+        // with a ConnectException. That must not take the whole daily sync
+        // down before its commit step, discarding the JUG, Champion and event
+        // work that already succeeded. Keep the committed file and say why.
+        List<Edition> editions;
+        try {
+            editions = archive();
+        } catch (IOException e) {
+            System.out.println("UPSTREAM UNREACHABLE (" + e + ") -- keeping " + OUTPUT_FILE
+                    + " exactly as committed, and exiting cleanly so the rest of the sync"
+                    + " still commits. Check that www.jvm-weekly.com resolves and answers"
+                    + " on 443; if the newsletter has moved for good, the endpoint"
+                    + " constants at the top of this script are what change.");
+            return;
+        }
+        if (editions.isEmpty()) {
+            System.out.println("The archive listing came back empty -- keeping " + OUTPUT_FILE
+                    + " exactly as committed.");
+            return;
+        }
         System.out.println(editions.size() + " editions in the JVM Weekly archive ("
                 + editions.get(editions.size() - 1).date + " to " + editions.get(0).date + ")");
 
-        Map<String, String> feedBodies = feedBodies();
+        // The feed is an optimisation, not a source: it supplies bodies free
+        // for the newest 20. Without it the cache and the per-post endpoint
+        // still resolve every candidate, so a feed that moves or breaks costs
+        // requests, never the run.
+        Map<String, String> feedBodies;
+        try {
+            feedBodies = feedBodies();
+        } catch (Exception e) {
+            feedBodies = Map.of();
+            System.out.println("  (could not read the RSS feed: " + e + ")");
+        }
         System.out.println(feedBodies.size() + " of them carry a full body in the RSS feed");
 
         Map<String, Cached> cache = refetch ? new HashMap<>() : readCache();

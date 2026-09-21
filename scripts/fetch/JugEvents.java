@@ -81,6 +81,12 @@ public class JugEvents {
     /** How many upcoming events to keep per JUG. Google feeds hold years. */
     static final int EVENTS_PER_GROUP = 10;
 
+    /**
+     * Below this, the committed file is too small for "halved" to mean
+     * anything -- 3 events becoming 1 is an ordinary week, not an outage.
+     */
+    static final int MIN_EVENTS_TO_GUARD = 10;
+
     /** Attributable rather than disguised: who this is, and where to complain. */
     static final String USER_AGENT =
             "foojay.io-calendar/1.0 (+https://foojay.io/calendar/; Java User Group events, refreshed daily)";
@@ -106,6 +112,7 @@ public class JugEvents {
 
     public static void main(String[] args) throws Exception {
         boolean dryRun = has(args, "--dry-run");
+        boolean allowShrink = has(args, "--allow-shrink");
         boolean withVenues = !has(args, "--no-venues");
         int limit = intArg(args, "--limit", Integer.MAX_VALUE);
         String onlyJug = arg(args, "--jug");
@@ -232,6 +239,35 @@ public class JugEvents {
             System.out.println(json);
             System.out.println(dryRun ? "--dry-run: " + OUTPUT_FILE + " not written"
                     : "--jug/--limit run: " + OUTPUT_FILE + " not written");
+            return;
+        }
+
+        // A COLLAPSE IS NEVER NEWS ABOUT THE JUGS' CALENDARS -- the same guard,
+        // and the same reasoning, as fetch/Jugs.java refusing a directory that
+        // shrank by half. This script is the soft-failing one: every feed error
+        // is caught per source and recorded on the group, which is right for
+        // one dead feed and exactly wrong for all of them at once. A runner
+        // network blip during these ~150 requests fails every source, and
+        // without this the file was rewritten with every group carrying an
+        // `error` and zero events -- an EMPTY /calendar/, published, with a
+        // green build. Stale events beat no events.
+        //
+        // AND IT IS AN `AND`: the count alone would freeze the file on a quiet
+        // month, and a failure count alone trips on the two or three feeds that
+        // are chronically 404 upstream. Halved AND something actually failed is
+        // an outage; halved with everything fetched is news.
+        // `sources.isEmpty()` rides along because it is the same accident with
+        // no failures to count: nothing to fetch means nothing fetched, and an
+        // unreadable or truncated data/jugs.yaml must not empty the calendar.
+        int existingEvents = countExistingEvents();
+        if (!allowShrink && (failed > 0 || sources.isEmpty())
+                && existingEvents >= MIN_EVENTS_TO_GUARD && events < existingEvents / 2) {
+            System.err.println("REFUSING TO WRITE " + OUTPUT_FILE + ": " + events + " event(s) where"
+                    + " the committed file holds " + existingEvents + ", with " + failed
+                    + " feed(s) unavailable.");
+            System.err.println("  That is an outage, not an empty calendar -- the committed file is"
+                    + " kept as-is. Re-run with --allow-shrink once you have confirmed the drop is"
+                    + " real.");
             return;
         }
 
@@ -650,6 +686,25 @@ public class JugEvents {
     }
 
     // ----------------------------------------------------------------- misc --
+
+    /**
+     * Events in the committed file, for the collapse guard above. An
+     * unreadable or absent file returns 0 -- "we have nothing to compare
+     * against", which must not read as a collapse.
+     */
+    static int countExistingEvents() {
+        if (!Files.isRegularFile(OUTPUT_FILE)) return 0;
+        try {
+            int n = 0;
+            for (var group : JSON.readTree(Files.readString(OUTPUT_FILE)).path("groups")) {
+                n += group.path("events").size();
+            }
+            return n;
+        } catch (Exception e) {
+            System.err.println("Could not read " + OUTPUT_FILE + " to compare counts: " + e);
+            return 0;
+        }
+    }
 
     /** True when two renderings of data/jug-events.json differ only in generatedAt. */
     static boolean sameEvents(String existing, String fresh) {

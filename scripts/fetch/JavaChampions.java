@@ -125,19 +125,49 @@ public class JavaChampions {
             }
         }
 
+        // THE SOURCE BEING DOWN IS NOT A BUILD FAILURE. Geocoding already fails
+        // soft (see below) because a geocoder outage must not cost a deploy --
+        // and the same is far truer of the fetch itself, which ran unguarded:
+        // an unreachable github.com, a 500 or a 404 on a moved file threw out
+        // of main, and this script runs before Hugo in build-deploy.yml and
+        // mid-way through sync-external-content.yml, so it took a deploy or a
+        // whole sync down with it. The committed list is a day old at worst;
+        // that beats a red build every time.
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(SOURCE_URL))
                 .timeout(Duration.ofSeconds(20))
                 .build();
-        HttpResponse<String> response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response;
+        try {
+            response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            System.err.println("COULD NOT REACH " + SOURCE_URL + " (" + e + ") -- keeping "
+                    + OUTPUT_FILE + " exactly as committed, and exiting cleanly.");
+            return;
+        }
         if (response.statusCode() != 200) {
-            throw new IOException("HTTP " + response.statusCode() + " fetching " + SOURCE_URL);
+            System.err.println("HTTP " + response.statusCode() + " fetching " + SOURCE_URL
+                    + " -- keeping " + OUTPUT_FILE + " exactly as committed, and exiting cleanly."
+                    + " A 404 means the file moved upstream: fix SOURCE_URL.");
+            return;
         }
 
-        @SuppressWarnings("unchecked")
-        Map<String, Object> root = new Yaml().load(response.body());
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> rawMembers = (List<Map<String, Object>>) root.get("members");
+        // A FILE THAT PARSES IS NOT A FILE THAT SAYS ANYTHING. `members` missing
+        // was an NPE one line down, and `members: []` would have overwritten the
+        // only good copy with nothing -- both of them somebody else's editing
+        // accident, neither of them 400 Champions resigning.
+        Object parsed = new Yaml().load(response.body());
+        List<Map<String, Object>> rawMembers = null;
+        if (parsed instanceof Map<?, ?> root && root.get("members") instanceof List<?> list) {
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> members = (List<Map<String, Object>>) list;
+            rawMembers = members;
+        }
+        if (rawMembers == null || rawMembers.isEmpty()) {
+            System.err.println("REFUSING TO WRITE " + OUTPUT_FILE + ": " + SOURCE_URL
+                    + " parsed but holds no `members` list. Keeping the committed file.");
+            return;
+        }
         System.out.println("Found " + rawMembers.size() + " Java Champions in the source file");
 
         // A place is either resolved (Coords) or definitively unresolvable
