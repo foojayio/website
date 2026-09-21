@@ -313,14 +313,14 @@ window short: during it, none of the five Redirect Rules fire — and, per Phase
        `https://foojay.io/`, hardcode it in `build-deploy.yml` rather than
        debugging the Pages API on the day.
 
-5. [ ] **Turn the proxy back on (orange cloud)** for `foojay.io` and
+5. [X] **Turn the proxy back on (orange cloud)** for `foojay.io` and
        `www.foojay.io`, and set **SSL/TLS → Full (strict)**. Then
        **re-enable rules 4a and 5**, which were switched off in Phase 0 because
        they break the live WordPress site, and confirm all five Redirect Rules
        and the `/api/views/*` Worker route are live. They are still `302` at this
        point; that is deliberate — see Phase 4.
 
-6. [ ] **Purge the Cloudflare cache** (Caching → Configuration → Purge
+6. [X] **Purge the Cloudflare cache** (Caching → Configuration → Purge
        Everything). Otherwise cached WordPress HTML keeps being served over the
        new site for hours.
 
