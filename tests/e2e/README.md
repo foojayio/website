@@ -3,9 +3,10 @@
 Everything else that checks this site is static: `validate/Frontmatter.java`
 reads `content/`, `validate/BuiltSite.java` reads `public/`. Neither can see the
 parts of foojay that **only exist once JavaScript runs** — search results,
-the two world maps, the lightbox, the sortable sitemap tables, syntax
-highlighting, mermaid diagrams. All of those fail *silently*: the page still
-returns 200, still has its content, and simply stops doing the thing.
+the two world maps, the lightbox, the sortable sitemap tables, the calendar's
+month grid, syntax highlighting, mermaid diagrams. All of those fail
+*silently*: the page still returns 200, still has its content, and simply
+stops doing the thing.
 
 So these run a real browser over the built site, in
 `.github/workflows/build-deploy.yml`, **between the build and the deploy**.
@@ -25,7 +26,7 @@ download leaves a `chromium_headless_shell-*` folder missing or a few hundred KB
 short, and every test then fails with "Executable doesn't exist"), the suite
 runs unchanged against a locally installed Chrome — add
 `use: { channel: 'chrome' }` on top of this config in a throwaway config file
-and point `--config` at it. Same 37 tests, same result; CI always uses the
+and point `--config` at it. Same 41 tests, same result; CI always uses the
 pinned browser.
 
 ## The "staging environment" is localhost
@@ -124,7 +125,7 @@ Two different questions, and only one belongs in a gate:
 ## What skips, and why
 
 A skip here is a statement about the build, not a disabled test. One today, out
-of 38:
+of 41:
 
 | skipped | why | what would un-skip it |
 | --- | --- | --- |
@@ -179,7 +180,7 @@ answers yes: `canPlayType` returns `""` for avc1 and `"probably"` for vp9.
 | `pages.spec.mjs` | one page of every kind renders cleanly; nav, 404, theme toggle, the legacy comment archive |
 | `search.spec.mjs` | Pagefind: grouping, per-section counts, Show more, empty state, the header box |
 | `media.spec.mjs` | self-hosted video decodes; embeds survive; no broken same-origin images |
-| `interactive.spec.mjs` | highlighting, lightbox, both maps, sitemap tables, mermaid, the view beacon |
+| `interactive.spec.mjs` | highlighting, lightbox, both maps, sitemap tables, mermaid, the calendar grid, the view beacon |
 
 ## The gate must not count itself
 

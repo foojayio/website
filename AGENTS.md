@@ -3448,15 +3448,41 @@ should catch a mistake at PR time rather than letting it fail silently.
   instead of the script reading `date`/`endDate`: those same broken Stammtisch
   entries would otherwise smear an upstream typo across seven cells.
 
+  **The calendar has no past, so neither does the grid.** Nothing on this page
+  can start before today -- `JugEvents.java` drops a meetup once it is a day old
+  and a `data/events/` entry disappears the day after it ends -- so every month
+  behind the current one is guaranteed blank, and the grid says so in two
+  places rather than letting a reader find out by clicking. The **back arrow
+  stops at the current month** (`floorKey`), and the **current month's grid
+  begins at the Monday of today's week** rather than on the 1st: weeks that are
+  wholly over are not rendered at all. In the third week of a month that was
+  half a grid of empty cells -- September 2026 drew rows for the 1st-6th,
+  7th-13th and 14th-20th with not one chip between them. A **week**, not the
+  day itself, because the columns are weekdays: starting a row mid-week would
+  put every date under the wrong heading. The few days before today in the week
+  it starts on are therefore still drawn, marked `.is-past` and dimmed like an
+  out-of-month cell -- and any chip on one is still drawn too, so the grid and
+  the agenda cannot disagree about a meetup that ran yesterday and has not yet
+  aged out of the feed. Forward has no such limit: an empty future month is a
+  month nobody has added an event to yet, which is worth being able to look at.
+  `interactive.spec.mjs` checks all of it (today in the first row, no whole past
+  week, the arrow disabled and then re-enabled a month forward), because the
+  grid only exists once the script runs and both failures are silent -- the page
+  still returns 200 and still lists every event in the agenda.
+
   **The month arrows work in both views, and they mean different things.** In
-  the grid they step a month, empty or not. In the list they step to the
-  previous/next month **that has events** and scroll its section into view --
-  the agenda has no section for an empty month, so stepping into one is a
-  button that visibly does nothing, which is what they did before. An arrow at
-  either end is `disabled`, not silently inert. The toolbar is `position:
+  the grid they step a month, empty or not (forwards; see above for backwards).
+  In the list they step to the previous/next month **that has events** and
+  scroll its section into view -- the agenda has no section for an empty month,
+  so stepping into one is a button that visibly does nothing, which is what
+  they did before. An arrow at either end is `disabled`, not silently inert. The toolbar is `position:
   sticky` under the site header for the same reason: a 40-event agenda is
   several screens, so a toolbar that scrolled away would let you step forward
-  exactly once. `Today` stays in the view the reader chose rather than forcing
+  exactly once. Its controls are **inset `.7rem`, matching the table's column
+  headings** rather than sitting flush on the content column's edge -- every
+  cell in the grid below is padded, so flush at 0 the two round buttons were the
+  only things on the page touching that line and the left one read as hanging
+  off it. `Today` stays in the view the reader chose rather than forcing
   the grid -- forcing it dropped a phone, which opens on the agenda, into the
   one view that does not fit on it.
 

@@ -174,3 +174,78 @@ test('the read counter is wired, and counts nothing from here', async ({ page })
     expect(url.startsWith('http://127.0.0.1:'), `${url} left the runner`).toBe(false);
   }
 });
+
+/**
+ * THE CALENDAR GRID HAS NO PAST, and the grid is the half of /calendar/ that
+ * only exists once JavaScript runs -- so this is the only place that rule can
+ * be checked at all. Nothing on the calendar starts before today (the JUG fetch
+ * drops a meetup a day after it runs, a data/events/ entry the day after it
+ * ends), which is why the month arrows stop at the current month and the
+ * current month opens on today's week rather than on the 1st. Both failures are
+ * silent in the way this file exists for: the page still returns 200, still
+ * lists every event in the agenda, and simply wastes three blank rows or pages
+ * backwards for ever.
+ */
+test('the calendar grid opens on today and will not page into the past', async ({ page }) => {
+  test.skip(!PAGES.calendar, 'no calendar page');
+  await page.goto(PAGES.calendar);
+
+  // The toolbar is `hidden` in the markup and the script switches it on, so its
+  // visibility IS the evidence the grid was built -- there is no dead button to
+  // find if the script never ran.
+  const toolbar = page.locator('[data-cal-toolbar]');
+  await expect(toolbar).toBeVisible({ timeout: 10_000 });
+  await expect(page.locator('[data-cal-grid] .cal-table')).toBeVisible();
+
+  // Desktop opens on the grid; a phone-width viewport opens on the agenda and
+  // this test would be asserting about a hidden table.
+  await expect(page.locator('[data-cal-view="grid"]')).toHaveAttribute('aria-pressed', 'true');
+
+  const label = page.locator('[data-cal-label]');
+  const thisMonth = await page.evaluate(() => new Date()
+    .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }));
+  await expect(label).toHaveText(thisMonth);
+
+  // Today is in the FIRST row. Whole weeks that are over are not rendered; the
+  // few days before today in the week it starts on are, because the columns are
+  // weekdays and a row cannot begin mid-week -- so they are marked past, and
+  // there can never be seven of them.
+  await expect(page.locator('.cal-table tbody tr').first().locator('.cal-cell.is-today'))
+    .toHaveCount(1);
+  expect(await page.locator('.cal-cell.is-past').count(),
+    'a whole past week should not be rendered').toBeLessThan(7);
+
+  // Backwards from the current month goes nowhere, and says so rather than
+  // absorbing the click.
+  const prev = page.locator('[data-cal-prev]');
+  const next = page.locator('[data-cal-next]');
+  await expect(prev).toBeDisabled();
+  await expect(next).toBeEnabled();
+
+  // Forward still works, and once forward the arrow comes back -- a limit, not
+  // a dead button.
+  await next.click();
+  await expect(label).not.toHaveText(thisMonth);
+  await expect(prev).toBeEnabled();
+  // A future month is drawn IN FULL, from the 1st: the limit is today, not a
+  // rule about where a grid starts. Counted as "every cell belonging to the
+  // month on show", which is the whole month exactly when none of it was
+  // trimmed. (Cells before today can still appear in a NEXT month's grid --
+  // page forward on the 30th and the row holding the 1st reaches back into this
+  // one -- so an is-past count of zero is not the thing to assert here.)
+  const shown = await page.evaluate(() => {
+    const [month, year] = document.querySelector('[data-cal-label]').textContent.trim().split(' ');
+    const m = new Date(`${month} 1, ${year}`).getMonth();
+    return {
+      cells: document.querySelectorAll('.cal-cell:not(.is-outside)').length,
+      days: new Date(Number(year), m + 1, 0).getDate(),
+    };
+  });
+  expect(shown.cells, 'a future month should be drawn in full').toBe(shown.days);
+
+  await prev.click();
+  await expect(label).toHaveText(thisMonth);
+  await expect(prev).toBeDisabled();
+
+  expectClean(page);
+});

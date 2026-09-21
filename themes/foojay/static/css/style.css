@@ -1702,7 +1702,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;
   position: sticky; top: var(--header-h); z-index: 5;
-  background: var(--surface); padding: .75rem 0;
+  background: var(--surface);
+  /* Inset to the same .7rem the table's column headings sit at, so the arrow
+     and the Month/List switch line up with MON and FRI rather than with the
+     table's outer border. Flush at 0 they were technically on the content
+     column's edge and looked wrong for it: every cell in the grid below is
+     padded, so the only things on the page touching that line were two round
+     buttons, and the left one read as hanging off the page. */
+  padding: .75rem .7rem;
 }
 .cal-nav { display: flex; align-items: center; gap: .5rem; }
 .cal-nav__btn {
@@ -1754,8 +1761,15 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 }
 .cal-cell:last-child { border-right: 0; }
 .cal-table tbody tr:last-child .cal-cell { border-bottom: 0; }
-.cal-cell.is-outside { background: var(--surface-sunken); }
-.cal-cell.is-outside .cal-cell__day { opacity: .45; }
+/* A day that is not part of the month on show, and a day that has already
+   gone, read the same way: there is nothing on it and nothing can be. The grid
+   leaves out the weeks of the current month that are wholly past, so `is-past`
+   only ever covers the few days before today in the week it starts on -- a row
+   cannot begin mid-week, because the columns are weekdays. See the layout. */
+.cal-cell.is-outside,
+.cal-cell.is-past { background: var(--surface-sunken); }
+.cal-cell.is-outside .cal-cell__day,
+.cal-cell.is-past .cal-cell__day { opacity: .45; }
 .cal-cell__day {
   display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem;
   font-size: .82rem; font-weight: 600; color: var(--ink-muted);
