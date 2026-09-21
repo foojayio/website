@@ -86,6 +86,20 @@ A minimal Maven test setup looks like this:
   <version>3.9.2</version>
   <scope>test</scope>
 </dependency>
+
+<dependency>
+  <groupId>org.assertj</groupId>
+  <artifactId>assertj-core</artifactId>
+  <version>3.26.3</version>
+  <scope>test</scope>
+</dependency>
+
+<dependency>
+  <groupId>org.awaitility</groupId>
+  <artifactId>awaitility</artifactId>
+  <version>4.3.0</version>
+  <scope>test</scope>
+</dependency>
 ```
 
 Then start Kafka in a JUnit 5 test:
@@ -131,6 +145,7 @@ void duplicateEventDoesNotUpdateProjectionTwice() throws Exception {
     try (RecoveringOrderConsumer consumer = consumer("duplicate-contract", false)) {
         await().atMost(Duration.ofSeconds(10)).untilAsserted(() -> {
             consumer.pollAndProcessAvailable();
+            assertThat(consumer.consumedRecordCount()).isEqualTo(2);
             assertThat(projectionStore.totalFor("order-1")).isEqualTo(1299);
             assertThat(projectionStore.appliedEventCount("evt-1")).isEqualTo(1);
         });
@@ -138,8 +153,10 @@ void duplicateEventDoesNotUpdateProjectionTwice() throws Exception {
 }
 ```
 
-The assertion is the contract. The consumer may see two records, but the
-projection should accept the event ID once for this contract.
+The consumed-record assertion matters. Without it, the test might pass after the
+first record and never prove that the duplicate path was exercised. The consumer
+may see two records, but the projection should accept the event ID once for this
+contract.
 
 ## Test Malformed Records
 
@@ -192,14 +209,19 @@ void crashAfterSideEffectIsRecoveredByIdempotencyKey() throws Exception {
     try (RecoveringOrderConsumer firstAttempt = consumer("restart-contract", true)) {
         await().atMost(Duration.ofSeconds(10)).untilAsserted(() -> {
             firstAttempt.pollAndProcessAvailable();
+            assertThat(firstAttempt.consumedRecordCount()).isEqualTo(1);
+            assertThat(firstAttempt.lastConsumedEventId()).isEqualTo("evt-2");
             assertThat(projectionStore.totalFor("order-1")).isEqualTo(2500);
             assertThat(projectionStore.appliedEventCount("evt-2")).isEqualTo(1);
+            assertThat(committedOffset("restart-contract")).isNull();
         });
     }
 
     try (RecoveringOrderConsumer secondAttempt = consumer("restart-contract", false)) {
         await().atMost(Duration.ofSeconds(10)).untilAsserted(() -> {
             secondAttempt.pollAndProcessAvailable();
+            assertThat(secondAttempt.consumedRecordCount()).isEqualTo(1);
+            assertThat(secondAttempt.lastConsumedEventId()).isEqualTo("evt-2");
             assertThat(projectionStore.totalFor("order-1")).isEqualTo(2500);
             assertThat(projectionStore.appliedEventCount("evt-2")).isEqualTo(1);
         });
@@ -208,8 +230,9 @@ void crashAfterSideEffectIsRecoveredByIdempotencyKey() throws Exception {
 ```
 
 The first consumer writes the projection and simulates a crash before committing
-the offset. The second consumer uses the same group ID, receives the record
-again, and relies on the idempotency key to avoid a duplicate business effect.
+the offset, so the committed offset should still be absent for that group and
+topic. The second consumer uses the same group ID, receives `evt-2` again, and
+relies on the idempotency key to avoid a duplicate business effect.
 
 ## Avoid Sleep-Based Tests
 
