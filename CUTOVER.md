@@ -117,7 +117,7 @@ hashes and commenter IPs): `Foojay/WordPress backup/`, with a `README.md` next t
 it covering provenance, table inventory, a loader script and the queries behind
 each number above.
 
-- [ ] **Re-scrape anything outstanding**, then re-run the repair passes that a
+- [X] **Re-scrape anything outstanding**, then re-run the repair passes that a
       re-scrape can undo:
       - `jbang scripts/cleanup/CloudflareEmails.java` — it repairs from the
         *live HTML*, because the stored files kept only Cloudflare's placeholder
@@ -143,7 +143,7 @@ each number above.
         every `image:` value starting with a scheme. 76 posts hotlink a hero and
         11 were already dead.
 
-- [ ] **Final view-count import:**
+- [X] **Final view-count import:**
       `VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed`.
 
       **Rebuild `data/legacy-views.json` from the database dump before seeding,
@@ -185,7 +185,7 @@ each number above.
       posts worth 1,914 views sat uncounted for a day because the import updated
       the file and nothing pushed it to the Worker.
 
-- [ ] **Final comment archive:** `jbang scripts/transfer/Comments.java`, then
+- [X] **Final comment archive:** `jbang scripts/transfer/Comments.java`, then
       commit whatever it changed. Run it again here even if it ran earlier, to
       pick up comments posted on WordPress in the meantime. Needs no credential.
       It rewrites a file only when that file's content changed, so a run with
@@ -205,15 +205,31 @@ each number above.
       class comment. It writes `content/posts/**/comments.json` instead, which
       `partials/legacy-comments.html` renders under the giscus widget.
 
-- [ ] **[ORDER] Delete the WordPress bridge from
-      `.github/workflows/sync-view-counts.yml` — before or with the DNS switch,
-      not after.** The step marked `BRIDGE, DELETE WITH THE REST OF transfer/ AT
-      CUTOVER` runs `LegacyViews.java --write-views` daily at 03:50 UTC and
-      **commits the result**. Pointed at the Hugo site it will write nonsense
-      into `data/views.json` and push it. Delete the step and the `50 3 * * *`
-      cron entry, leaving the six-hourly counter refresh.
+- [x] **[ORDER] Delete the WordPress bridge from
+      `.github/workflows/sync-view-counts.yml`** — **already done on 2026-08-24,
+      in `7b8a24937`**, the commit that deployed and first seeded the Worker.
+      Nothing was left to delete when this was checked on 2026-09-21.
 
-- [x] **Lower the TTL** on foojay.io's A/AAAA records and on `www.foojay.io` to
+      That commit removed the `Refresh view counts from WordPress (bridge)` step
+      (`LegacyViews.java --write-views`) and collapsed the two cron entries —
+      `50 3 * * *` (bridge + counter) and `50 9,15,21 * * *` (counter only) —
+      into the single `50 3,9,15,21 * * *` the file carries now. The bridge is
+      no longer capable of writing `data/views.json`, so the DNS-order
+      constraint this item existed to enforce no longer applies.
+
+      It was stale the day it was written: the `[BLOCKER] Deploy the view
+      counter Worker` item above already records the same deletion in its own
+      wording. Two entries describing one change is how a done item survives to
+      be "done" twice, so this one now points at the commit instead.
+
+      **What is still WordPress-shaped in that workflow, and is NOT this item:**
+      the `Warn if the counter is missing seeded pages` step, which compares
+      `data/legacy-views.json` against `data/views.json`. It makes no request,
+      holds no credential and cannot write anything — it only warns — so it is
+      harmless after the switch. It retires with `data/legacy-views.json` under
+      "Delete `scripts/transfer/`" in the post-cutover list.
+
+- [X] **Lower the TTL** on foojay.io's A/AAAA records and on `www.foojay.io` to
       60 seconds — **attempted 2026-09-09, and it cannot be done while they are
       proxied.** Cloudflare pins TTL to "Auto" on any orange-cloud record and
       accepts the edit without applying it. This does not hurt the rollback
@@ -364,8 +380,10 @@ paid for at least that long.
       folders exist only to read or repair WordPress content, which is the
       question the `scripts/` layout is organised around — see `AGENTS.md`.
       `scripts/fetch/`, `validate/` and `shared/` stay.
-- [ ] **Simplify `sync-view-counts.yml`** back to a single six-hourly cron
-      entry, now that the bridge step is gone.
+- [x] **Simplify `sync-view-counts.yml`** back to a single six-hourly cron
+      entry, now that the bridge step is gone — **done in `7b8a24937`**
+      (2026-08-24) along with the bridge step itself; the file has carried one
+      `50 3,9,15,21 * * *` entry ever since. See the `[ORDER]` item above.
 - [ ] **Prune `AGENTS.md`** of the sections describing scripts that no longer
       exist, and of the trial/`$isTrial` reasoning — though note the derivation
       itself is harmless once `baseURL` and `productionBaseURL` agree.
