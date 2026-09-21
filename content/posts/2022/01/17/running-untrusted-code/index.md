@@ -171,7 +171,7 @@ Thanks to Peter Firmstone and [Geertjan Wielenga](https://twitter.com/GeertjanW)
 * [The Principle of Least Privilege and How JEP 411 Will Have a Negative Impact on Java Security](https://foojay.io/today/why-jep-411-will-have-a-negative-impact-on-java-security/)
 * [JVM Security Focus](https://blog.frankel.ch/focus/jvm-security/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/running-unsecured-code/) on January 22^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/running-unsecured-code/) on January 22th, 2022*
 
 *[JNDI]: Java Naming and Directory Interface
 *[NFR]: Non-Functional Requirement

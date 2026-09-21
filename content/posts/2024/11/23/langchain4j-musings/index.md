@@ -351,4 +351,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Ollama](https://ollama.com/)
 * [Streaming with REST API for LangChain Applications](https://chalise-arun.medium.com/streaming-with-rest-api-for-langchain-applications-f3a164a207d7)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings/) on November 10^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings/) on November 10th, 2024*

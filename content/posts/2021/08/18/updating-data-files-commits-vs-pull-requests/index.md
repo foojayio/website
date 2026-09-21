@@ -103,4 +103,4 @@ As I mentioned in the introduction, I'm not sure this post can help many people.
 
 The complete source code for this post can be found on [Github](https://github.com/hazelcast/jet-train).
 
-*Originally publish at [A Java Geek](https://blog.frankel.ch/data-files-commits-vs-pull-requests) on August 15^th^, 2021*
+*Originally publish at [A Java Geek](https://blog.frankel.ch/data-files-commits-vs-pull-requests) on August 15th, 2021*

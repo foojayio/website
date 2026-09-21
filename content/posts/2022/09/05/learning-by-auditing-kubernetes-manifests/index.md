@@ -177,6 +177,6 @@ On a more general note, running an analysis/audit tool is a great way to get ins
 * [10 Kubernetes Security Context settings you should understand](https://snyk.io/blog/10-kubernetes-security-context-settings-you-should-understand/)
 * [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 
-*Initially published at [A Java Geek](https://blog.frankel.ch/learning-auditing-kubernetes-manifests/) on July 4^th^, 2022*
+*Initially published at [A Java Geek](https://blog.frankel.ch/learning-auditing-kubernetes-manifests/) on July 4th, 2022*
 
 *[TIL]: Things I Learned

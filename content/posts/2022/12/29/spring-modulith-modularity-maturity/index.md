@@ -178,6 +178,6 @@ You can find the source code on [GitHub](https://github.com/ajavageek/spring-mod
 * [Quick start](https://spring.io/projects/spring-modulith)
 * [Reference documentation](https://docs.spring.io/spring-modulith/docs/0.1.0-M1/reference/html/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/spring-modulith-modularity-maturity/) on November 13^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/spring-modulith-modularity-maturity/) on November 13th, 2022*
 
 *[DI]: Dependency Injection

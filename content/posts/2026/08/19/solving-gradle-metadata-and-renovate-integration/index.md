@@ -201,4 +201,4 @@ I started using Renovate on projects I didn't initiate. It allows me to learn ab
 * [Understanding Verification Methods](https://docs.gradle.org/current/userguide/dependency_verification.html)
 * [Renovate configuration options](https://docs.renovatebot.com/configuration-options/#postupgradetasksinstalltools)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/gradle-metadata-renovate-integration/) on August 16^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/gradle-metadata-renovate-integration/) on August 16th, 2026.*

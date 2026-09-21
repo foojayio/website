@@ -324,4 +324,4 @@ I've described several items I added to improve my OpenTelemetry demo in this po
 
 The complete source code for this post can be found on [GitHub](https://github.com/nfrankel/opentelemetry-tracing).
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/improve-otel-demo/) on January 28^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/improve-otel-demo/) on January 28th, 2024*

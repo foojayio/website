@@ -366,7 +366,7 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Integration service discovery registry](https://apisix.apache.org/docs/apisix/discovery/)
 * [Lua Nginx module](https://github.com/openresty/lua-nginx-module)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/own-service-discovery-client-apisix/) on July 17^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/own-service-discovery-client-apisix/) on July 17th, 2022*
 
 *[CNCF]: Cloud Native Computing Foundation
 *[DNS]: Domain Name Server

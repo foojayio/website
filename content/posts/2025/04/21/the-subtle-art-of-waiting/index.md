@@ -162,4 +162,4 @@ Kubernetes startup probes are a great way to avoid unnecessary restarts when you
 * [wait4x](https://github.com/wait4x/wait4x#wait4x)
 * [So you need to wait for some Kubernetes resources?](https://vadosware.io/post/so-you-need-to-wait-for-some-kubernetes-resources/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/subtle-art-waiting/) on April 20^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/subtle-art-waiting/) on April 20th, 2025*

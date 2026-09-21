@@ -192,7 +192,7 @@ API Gateways, such as [Apache APISIX](https://apisix.apache.org/), are a perfect
 * [Content Security Policy Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
 * [HTTP Security Headers: The Best Practices](https://kerkour.com/http-security-headers)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/secure-webapps-api-gateway/) on July 12^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/secure-webapps-api-gateway/) on July 12th, 2022*
 
 *[MITM]: Man-In-The-Middle
 *[CSP]: Content Security Policy

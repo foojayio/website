@@ -54,4 +54,4 @@ The only thing I would like to see for the next edition is for the developers to
 
 If you use AI agents and want to understand what happens when you use them, this is the book for you. I think it should belong in the library of any engineer worthy of the name.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/building-ai-agent-from-scratch/) on September 6^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/building-ai-agent-from-scratch/) on September 6th, 2026.*

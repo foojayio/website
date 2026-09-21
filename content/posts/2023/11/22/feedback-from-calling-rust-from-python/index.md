@@ -178,4 +178,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [PyO3 user guide](https://pyo3.rs/v0.20.0/)
 * [maturin](https://github.com/PyO3/maturin)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/feedback-rust-from-python/) on October 29^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/feedback-rust-from-python/) on October 29th, 2023*

@@ -135,4 +135,4 @@ Happy Apache APISIX!
 * [Default configuration](https://github.com/apache/apisix/blob/master/conf/config-default.yaml)
 * [Configuration file switching based on environment variables](https://apisix.apache.org/docs/apisix/profile/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ops-friendly-apisix/) on August 13^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ops-friendly-apisix/) on August 13th, 2023*

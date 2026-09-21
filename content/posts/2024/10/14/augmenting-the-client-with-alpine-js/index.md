@@ -217,4 +217,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [Alpine.js](https://alpinejs.dev/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/4/) on September 29^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/4/) on September 29th, 2024*

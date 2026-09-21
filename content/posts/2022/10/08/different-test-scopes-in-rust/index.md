@@ -457,6 +457,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Rust by example: testing](https://doc.rust-lang.org/rust-by-example/testing.html)
 * [Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/different-test-scopes-rust/) on October 9^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/different-test-scopes-rust/) on October 9th, 2022*
 
 *[DI]: Dependency Injection

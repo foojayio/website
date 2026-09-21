@@ -100,7 +100,7 @@ I had this project in mind for ages. However, only Claude Code allowed me to mak
 
 Have I joined the dark side?
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/3/) on June 7^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/3/) on June 7th, 2026.*
 
 *[RANSAC]: RANdom SAmple Consensus
 *[EXIF]: Exchangeable image file format

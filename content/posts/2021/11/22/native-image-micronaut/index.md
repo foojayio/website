@@ -359,6 +359,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Micronaut HTTP client](https://guides.micronaut.io/latest/micronaut-http-client-maven-kotlin.html)
 * [Creating your first Micronaut Graal application](https://guides.micronaut.io/latest/micronaut-creating-first-graal-app-maven-kotlin.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/native/micronaut/) on November 21^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/native/micronaut/) on November 21th, 2021*
 
 *[CLI]: Command-Line Interface

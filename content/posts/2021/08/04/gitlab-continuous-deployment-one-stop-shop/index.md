@@ -61,7 +61,7 @@ It has several drawbacks:
 
 ## Updating, the smart way
 
-I recently stumbled upon the excellent [series of GitLab cheatsheets](https://dev.to/jphi_baconnais/series/12928). In the [6^th^ part](https://dev.to/zenika/gitlabcheatsheet-6-registry-2bjo), the author mentions [Kaniko](https://github.com/GoogleContainerTools/kaniko):
+I recently stumbled upon the excellent [series of GitLab cheatsheets](https://dev.to/jphi_baconnais/series/12928). In the [6th part](https://dev.to/zenika/gitlabcheatsheet-6-registry-2bjo), the author mentions [Kaniko](https://github.com/GoogleContainerTools/kaniko):
 > kaniko is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster.
 >
 > kaniko doesn't depend on a Docker daemon and executes each command within a Dockerfile completely in userspace. This enables building container images in environments that can't easily or securely run a Docker daemon, such as a standard Kubernetes cluster.

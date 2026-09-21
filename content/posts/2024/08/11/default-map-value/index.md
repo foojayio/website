@@ -226,4 +226,4 @@ This post explored how to provide default values when querying absent keys acros
 | Ruby                 | ❎        | ❌       | ❎      | ❎    |
 | Lua                  | ❌        | ❎       | ❎      | ❌    |
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/default-map-value/) on August 11^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/default-map-value/) on August 11th, 2024*

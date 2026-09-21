@@ -246,7 +246,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [WebJars Instructions for Spring Boot](https://www.webjars.org/documentation#springboot)
 * [Introduction to WebJars](https://www.baeldung.com/maven-webjars)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/2/) on September 15^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/2/) on September 15th, 2024*
 
 *[JSP]: Java Server Pages
 *[JSF]: Java Server Faces

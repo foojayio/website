@@ -188,4 +188,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [The Anatomy of a macOS App](https://eclecticlight.co/2025/12/04/the-anatomy-of-a-macos-app/)
 * [jpackage](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jpackage.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/jar-to-macos-app/) on January 25^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/jar-to-macos-app/) on January 25th, 2025*

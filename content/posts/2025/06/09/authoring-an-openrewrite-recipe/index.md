@@ -189,4 +189,4 @@ The complete source code for this post can be found on GitHub.
 * [Introduction to OpenRewrite](https://docs.openrewrite.org/)
 * [Writing a Java refactoring recipe](https://docs.openrewrite.org/authoring-recipes/writing-a-java-refactoring-recipe)
 
-*Originally published on [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/1/) on June 8^th^, 2025*
+*Originally published on [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/1/) on June 8th, 2025*

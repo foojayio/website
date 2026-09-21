@@ -206,7 +206,7 @@ Keeping Claude Code while hosting the model local is a great cost-savvy alternat
 * [Mixture of Experts Explained](https://huggingface.co/blog/moe)
 * [Qwen3 Coder Next](https://openrouter.ai/qwen/qwen3-coder-next)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/tokensparsamkeit-coding-assistants/) on May 10^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/tokensparsamkeit-coding-assistants/) on May 10th, 2026.*
 
 *[MoE]: Mixture of Experts
 *[GDPR]: General Data Protection Regulation

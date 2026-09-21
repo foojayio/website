@@ -172,4 +172,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [What is Flow?](https://vaadin.com/docs/latest/flow/what-is-flow)
 * [More Vaadin](https://morevaadin.com/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/6/) on October 13^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/6/) on October 13th, 2024*

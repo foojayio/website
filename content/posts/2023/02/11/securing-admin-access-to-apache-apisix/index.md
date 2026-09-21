@@ -156,6 +156,6 @@ Finally, I've described how you could make it without the Admin API via the dedi
 * [mTLS: Protect Admin API](https://apisix.apache.org/docs/apisix/mtls/#protect-admin-api)
 * [Standalone mode](https://apisix.apache.org/docs/apisix/deployment-modes/#standalone)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/secure-apisix-admin/) on February 5^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/secure-apisix-admin/) on February 5th, 2023*
 
 *[TLS]: Transport Layer Security

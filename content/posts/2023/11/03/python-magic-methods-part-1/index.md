@@ -333,6 +333,6 @@ print(foo2.lazy)                                      #9
 
 This concludes the first part of Python magic methods. The [second part](https://foojay.io/today/python-magic-methods-part-2/) will focus on class, container, and number-related methods.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/1/) on October 15^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/1/) on October 15th, 2023*
 
 *[OOP]: Object-Oriented Programming

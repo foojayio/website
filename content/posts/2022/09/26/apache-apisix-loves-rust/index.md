@@ -193,7 +193,7 @@ The source code is available on [GitHub](https://github.com/ajavageek/apisix-rus
 * [WebAssembly for Proxies (Rust SDK)](https://github.com/proxy-wasm/proxy-wasm-rust-sdk)
 * [Apache APISIX WASM](https://apisix.apache.org/docs/apisix/wasm/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/rust-apisix/1/) on September 25^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/rust-apisix/1/) on September 25th, 2022*
 
 *[ABI]: Application Binary Interface
 *[API]: Application Programmer Interface

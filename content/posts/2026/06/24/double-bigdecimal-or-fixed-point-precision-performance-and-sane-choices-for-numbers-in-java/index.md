@@ -683,6 +683,6 @@ The real engineering mistake is not choosing `double` over `BigDecimal`. It is c
 * [Apache Commons Numbers](https://commons.apache.org/proper/commons-numbers/)
 * [Joda-Money](https://www.joda.org/joda-money/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/bigdecimal-vs-double/) on June 14^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/bigdecimal-vs-double/) on June 14th, 2026.*
 
 *[JMH]: Java Microbenchmark Harness

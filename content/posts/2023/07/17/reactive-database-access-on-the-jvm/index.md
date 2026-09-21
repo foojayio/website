@@ -321,4 +321,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 * [Comment bien s'entendre avec avec Spring Data R2DBC... ou pas](https://blog.ippon.fr/2022/03/02/comment-bien-sentendre-avec-avec-r2dbc-ou-pas/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/reactive-database-access/) on July 9^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/reactive-database-access/) on July 9th, 2023*

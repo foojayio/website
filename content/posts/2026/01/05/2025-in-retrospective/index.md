@@ -55,4 +55,4 @@ Regardless of the bleak context, I still have a couple of personal wins this yea
 
 On a personal level, I feel confident enough: I have built some marketable skills over the years. On a global level, though, I'm very worried about the next decade. My advice to you is: never stop learning and be very agile. Take care.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/2025-retrospective/) on January 4^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/2025-retrospective/) on January 4th, 2025*

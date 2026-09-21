@@ -119,6 +119,6 @@ For real-world applications, you'll probably create a self-executing JAR. You'll
 * [Separate @Entity Definitions from Spring Configuration](https://docs.spring.io/spring-boot/docs/2.6.x/reference/htmlsingle/#howto.data-access.separate-entity-definitions-from-spring-configuration)
 * [Importing Additional Configuration Classes](https://docs.spring.io/spring-boot/docs/2.6.x/reference/htmlsingle/#using.configuration-classes.importing-additional-configuration)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/multiple-spring-boot-apps-same-project/) on December 5^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/multiple-spring-boot-apps-same-project/) on December 5th, 2021*
 
 *[CQRS]: Command Query Responsibility Segregation

@@ -523,7 +523,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [docker/metadata-action](https://github.com/docker/metadata-action)
 * [docker/build-push-action](https://github.com/docker/build-push-action)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/2/) on February 16^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/2/) on February 16th, 2025*
 
 *[GKE]: Google Kubernetes Engine
 *[SA]: Service Account

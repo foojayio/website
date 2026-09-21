@@ -151,6 +151,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Dall.E webapp](https://labs.openai.com/)
 * [Image generation API](https://platform.openai.com/docs/guides/images)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/server-side-rendering-rust/) on April 30^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/server-side-rendering-rust/) on April 30th, 2023*
 
 *[JSP]: Java Server Pages

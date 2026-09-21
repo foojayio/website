@@ -84,4 +84,4 @@ At this point, each change triggers the build: the image building job runs befor
 * [only:changes / except:changes examples](https://docs.gitlab.com/ee/ci/jobs/job_control.html#onlychanges--exceptchanges-examples)
 * [GitHub: Running your workflow only when a push affects specific files](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-only-when-a-push-affects-specific-files)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/conditional-build-gitlab/) on May 8^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/conditional-build-gitlab/) on May 8th, 2022*

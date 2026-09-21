@@ -258,4 +258,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Match statement in Python](https://docs.python.org/3.10/tutorial/controlflow.html?highlight=match#match-statements)
 * [Pattern matching in Rust](https://doc.rust-lang.org/book/ch19-01-all-the-places-for-patterns.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/pattern-matching-different-languages/) on July 20^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/pattern-matching-different-languages/) on July 20th, 2025*

@@ -135,4 +135,4 @@ On the JVM, I'd recommend to stick to the Java Agent as much as possible, but if
 * [Maven - Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 * [Effective Rust - Item 25: Manage your dependency graph](https://effective-rust.com/dep-graph.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-gotchas/) on August 10^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-gotchas/) on August 10th, 2025*

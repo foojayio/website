@@ -185,4 +185,4 @@ We can track the change precisely in Java 12: the [version 11](https://code.yawk
 * [What does the sun.reflect.CallerSensitive annotation mean?](https://stackoverflow.com/questions/22626808/what-does-the-sun-reflect-callersensitive-annotation-mean)
 * [Secure Coding Guidelines for Java SE](https://www.oracle.com/java/technologies/javase/seccodeguide.html#9-8)
 
-*Orginally published at [A Java Geek](https://blog.frankel.ch/changing-field-type-recent-jdks/) on April 4^th^, 2021*
+*Orginally published at [A Java Geek](https://blog.frankel.ch/changing-field-type-recent-jdks/) on April 4th, 2021*

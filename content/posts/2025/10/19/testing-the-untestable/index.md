@@ -57,4 +57,4 @@ In this post, I showed how one can test legacy code not built on Dependency Inje
 
 This is a pretty straightforward way to test untestable code.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/testing-untestable/) on October 19^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/testing-untestable/) on October 19th, 2025*

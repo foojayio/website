@@ -65,7 +65,7 @@ I plan to explore these technologies in this focused series by implementing a sm
 * [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming))
 * [SSR](https://en.wikipedia.org/wiki/Server-side_scripting)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/1/) on September 8^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/1/) on September 8th, 2024*
 
 *[SSR]: Server-Side Rendering
 *[SEO]: Search Engine Optimization

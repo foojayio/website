@@ -193,7 +193,7 @@ The more years you have behind you, the more mistakes you'll probably have made.
 * [Are you guilty of overengineering?](https://blog.frankel.ch/are-you-guilty-of-overengineering/)
 * [Alternatives to DTOs](https://blog.frankel.ch/alternatives-dto/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/lessons-learned-previous-projects/) on March 13^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/lessons-learned-previous-projects/) on March 13th, 2022*
 
 *[DAO]: Data Access Object
 *[ORM]: Object-Relational Mapping

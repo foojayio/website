@@ -268,7 +268,7 @@ With JPA 2.1+, we have the option to (and I believe we should!) use entity graph
 * [Entity Graphs section in Jakarta EE specifications](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.html#a2397)
 * [JPA Entity Graph](https://www.baeldung.com/jpa-entity-graph)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/guide-lazyinitializationexception) on March 28^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/guide-lazyinitializationexception) on March 28th 2021*
 
 *[JPQL]: Java Persistence Query Language
 *[OSIV]: Open-Session-In-View

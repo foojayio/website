@@ -200,4 +200,4 @@ The complete source code for this article can be found on [GitHub](https://githu
 * [Content Negotiation in RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation)
 * [Routing in Apache APISIX](https://apisix.apache.org/docs/apisix/router-radixtree/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/api-versioning/) on November 5^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/api-versioning/) on November 5th, 2023*

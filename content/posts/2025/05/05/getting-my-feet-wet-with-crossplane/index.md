@@ -191,7 +191,7 @@ In this post, I used Crossplane to create a simple GKE cluster. Using Kubernetes
 * [GCP Quickstart](https://docs.crossplane.io/latest/getting-started/provider-gcp/)
 * [Crossplane provider-family-gcp](https://marketplace.upbound.io/providers/upbound/provider-family-gcp/v1.12.1)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/feet-wet-crossplane/) on May 4^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/feet-wet-crossplane/) on May 4th, 2025*
 
 *[GKE]: Google Kubernetes Engine
 *[GCP]: Google Cloud Platform

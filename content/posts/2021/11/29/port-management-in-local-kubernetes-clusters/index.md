@@ -91,4 +91,4 @@ At this point, everything works as expected!
 * [VirtualHost examples](https://httpd.apache.org/docs/2.4/vhosts/examples.html)
 * [Running Spring Boot behind a front-end proxy server](https://docs.spring.io/spring-boot/docs/2.6.x/reference/html/howto.html#howto.webserver.use-behind-a-proxy-server)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/port-management-local-kubernetes/) on November 28^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/port-management-local-kubernetes/) on November 28th, 2021*

@@ -143,7 +143,7 @@ In this post, I showed how to make a step toward greater privacy by using Pi-hol
 * [Pi-hole V6 Integration for Home Assistant](https://github.com/bastgau/ha-pi-hole-v6)
 * [Pi-hole card for Home Assistant](https://github.com/homeassistant-extras/pi-hole-card)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/pi-hole-tailscale/) on March 8^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/pi-hole-tailscale/) on March 8th, 2026.*
 
 *[DNS]: Domain Name Server
 *[HACS]: Home Assistant Community Store

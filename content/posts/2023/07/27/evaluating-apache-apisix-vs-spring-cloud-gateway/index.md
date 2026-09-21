@@ -240,4 +240,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
 * [Spring Cloud Gateway reference guide](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/spring-cloud-gateway-apache-apisix/) on June 18^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/spring-cloud-gateway-apache-apisix/) on June 18th, 2023*

@@ -59,4 +59,4 @@ The only con is more complex logic.
 
 It's precisely how JDK developers handled the legacy mutable `java.util.Calendar` class. Check the `complete()` method [source code](https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/Calendar.java#L1555-L1563) for more details.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/timely-computation-derived-values/) on May 16^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/timely-computation-derived-values/) on May 16th, 2021*

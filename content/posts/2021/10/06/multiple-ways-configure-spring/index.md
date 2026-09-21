@@ -295,7 +295,7 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Annotation-based Container Configuration](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config)
 * [The BeanFactory](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/multiple-ways-configure-spring/) on September 26^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/multiple-ways-configure-spring/) on September 26th, 2021*
 
 *[IoC]: Inversion of Control
 *[DSL]: Domain-Specific Language

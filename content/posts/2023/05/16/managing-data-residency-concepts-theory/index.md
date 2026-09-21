@@ -135,7 +135,7 @@ In this post, we looked at data residency and designed a draft architecture to i
 * [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
 * [Apache ShardingSphere](https://shardingsphere.apache.org/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/data-residency/1/) on May 5^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/data-residency/1/) on May 5th, 2023*
 
 *[FISA]: Foreign Intelligence Surveillance Act
 *[GDPR]: General Data Protection Regulation

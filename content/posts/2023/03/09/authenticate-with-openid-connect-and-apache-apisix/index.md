@@ -200,7 +200,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Use Keycloak with API Gateway to secure APIs](https://apisix.apache.org/blog/2022/07/06/use-keycloak-with-api-gateway-to-secure-apis/)
 * [How to Use Apache APISIX Auth With Okta](https://api7.ai/blog/how-to-use-apisix-auth-with-okta)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/authenticate-openid-connect/) on March 5^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/authenticate-openid-connect/) on March 5th, 2023*
 
 *[IETF]: Internet Engineering Task Force
 *[OIDC]: OpenID Connect

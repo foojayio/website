@@ -259,6 +259,6 @@ As a JVM developer, I've been using exceptions since the beginning of my career.
 * ["Go: Return and handle an error"](https://go.dev/doc/tutorial/handle-errors)
 * ["Rust: Recoverable Errors with Result"](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/error-handling/) on March 20^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/error-handling/) on March 20th, 2022*
 
 *[FP]: Functional Programming

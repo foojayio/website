@@ -17,14 +17,14 @@ related_posts:
 frozen: false
 ---
 
-On July 7^th^, 2011, eleven years ago, [JDK 7 was released](https://openjdk.org/projects/jdk7/). In some ways, it was one of the more significant releases of Java. Indeed, there were some excellent technical features: [Project Coin](https://openjdk.org/projects/coin/) gave us things like try-with-resources, strings in switch and multi-catch.
+On July 7th, 2011, eleven years ago, [JDK 7 was released](https://openjdk.org/projects/jdk7/). In some ways, it was one of the more significant releases of Java. Indeed, there were some excellent technical features: [Project Coin](https://openjdk.org/projects/coin/) gave us things like try-with-resources, strings in switch and multi-catch.
 
 However, it was two non-technical aspects of JDK 7 that made it important.
 
 1. The first was that it was the first release since [Oracle acquired Sun Microsystems](https://www.oracle.com/corporate/pressrelease/oracle-buys-sun-042009.html). The Java community had been unsure how Java would fare under Oracle, so this release showed a solid commitment to the platform (which has been maintained since then).  
 2. The second was even more important: the fact that a [Java SE specification](https://www.jcp.org/en/jsr/detail?id=336) was published through the [Java Community Process](https://www.jcp.org/en/home/index). Due to [issues around the availability of the TCK](https://en.wikipedia.org/wiki/Apache_Harmony#Difficulties_to_obtain_a_TCK_license_from_Sun) and the [Apache Harmony project](https://harmony.apache.org/), new versions of OpenJDK had been stalled since December 2006. To put this into context, the time between JDK 6 and JDK 7 (one release) was one month longer at four years and seven months than between JDK 9 and JDK 18 (nine releases). Getting things moving again was vital to keeping Java relevant to developers as applications and architectures evolved.
 
-Another significant date for JDK 7 is July 19^th^ this year. That is when the [last update will be made available from Oracle](https://www.oracle.com/java/technologies/java-se-support-roadmap.html), even for commercially supported users. It is the end of what Oracle terms Extended Support.
+Another significant date for JDK 7 is July 19th this year. That is when the [last update will be made available from Oracle](https://www.oracle.com/java/technologies/java-se-support-roadmap.html), even for commercially supported users. It is the end of what Oracle terms Extended Support.
 
 However, it turns out that there are still a significant number of people who are using JDK 7. In almost all cases, this is not because users don't want to move to a newer version; they're just not in a position to be able to do so.
 

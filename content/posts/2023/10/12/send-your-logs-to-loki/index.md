@@ -194,4 +194,4 @@ Options are virtually unlimited. Be careful to choose the one that fits your con
 * [Push log entries to Loki via API](https://grafana.com/docs/loki/latest/api/#push-log-entries-to-loki)
 * [Loki Clients](https://grafana.com/docs/loki/latest/clients/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/logs-loki/) on August 27^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/logs-loki/) on August 27th, 2023*

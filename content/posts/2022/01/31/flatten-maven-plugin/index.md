@@ -92,7 +92,7 @@ The Maven Flatten plugin separates between build and consumer POMs. You don't ne
 * [Flatten Maven Plugin](https://www.mojohaus.org/flatten-maven-plugin/)
 * [Flatten Mojo description and configuration](https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/maven-flatten-plugin/) on January 30^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/maven-flatten-plugin/) on January 30th, 2022*
 
 *[BOM]: Bill Of Material
 *[DRY]: Don't Repeat Yourself

@@ -138,7 +138,7 @@ All in all, RxJava, Project Reactor, and Kotlin coroutines all provide backpress
 * [How (not) to use Reactive Streams in Java 9+](https://blog.softwaremill.com/how-not-to-use-reactive-streams-in-java-9-7a39ea9c2cb3)
 * [RxJava Backpressure](https://github.com/ReactiveX/RxJava/blob/3.x/docs/Backpressure.md)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/backpressure-reactive-systems/) on March 14^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/backpressure-reactive-systems/) on March 14th 2021*
 
 *[TCK]: Test Compatibility Kit
 *[TTL]: Time-To-Live

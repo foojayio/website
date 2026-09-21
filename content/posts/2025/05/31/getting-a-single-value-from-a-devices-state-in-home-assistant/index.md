@@ -75,4 +75,4 @@ You can use this approach for every State. Check them, and I'm sure you'll get n
 * [Netatmo integration](https://www.home-assistant.io/integrations/netatmo/)
 * [Sensor entity](https://developers.home-assistant.io/docs/core/entity/sensor/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/7/) on May 18^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/7/) on May 18th, 2025*

@@ -222,4 +222,4 @@ In this post, I tackled the issue of integrating checked exceptions with lambdas
 * [Say Goodbye to Checked Exceptions](http://manifold.systems/articles/unchecked.html)
 * [Revisiting Resolving the Scourge of Java's Checked Exceptions](https://substack.com/home/post/p-181624168)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/checked-exceptions-lambdas/) on January 18^th^, 2026*
+*Originally published at [A Java Geek](https://blog.frankel.ch/checked-exceptions-lambdas/) on January 18th, 2026*

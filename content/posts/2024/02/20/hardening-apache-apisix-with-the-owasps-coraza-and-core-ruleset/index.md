@@ -214,4 +214,4 @@ We can harden Apache APISIX against the OWASP Top 10 by using Coraza and the Cor
 
 The complete source code for this post can be found on [GitHub](https://github.com//ajavageek/apisix-coraza).
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/) on February 4^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/) on February 4th, 2024*

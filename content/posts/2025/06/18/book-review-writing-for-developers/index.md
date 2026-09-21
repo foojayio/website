@@ -84,4 +84,4 @@ If you're a technical writer, a Developer Advocate tasked with technical writing
 
 The exhaustive description of common patterns is a huge asset for beginning writers and can help even seasoned ones.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/writing-for-developers/) on May 25^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/writing-for-developers/) on May 25th, 2025*

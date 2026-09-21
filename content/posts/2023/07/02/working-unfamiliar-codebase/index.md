@@ -105,4 +105,4 @@ I like UML diagrams because I'm familiar with them, and they offer shared semant
 
 Hence, if you want to understand a codebase better, you need more than just to read its code; you need to draw diagrams.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/working-unfamiliar-codebase/) on May 14^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/working-unfamiliar-codebase/) on May 14th, 2023*

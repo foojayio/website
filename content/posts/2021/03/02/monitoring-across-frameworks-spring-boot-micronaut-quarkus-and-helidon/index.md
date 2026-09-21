@@ -156,4 +156,4 @@ Here's a summary of endpoints for all frameworks.
 * [Quarkus - MicroProfile Metrics](https://quarkus.io/guides/microprofile-metrics)
 * [Quarkus - Context and Dependency Injection](https://quarkus.io/guides/cdi-reference#dev-mode)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/monitoring-across-frameworks/) on February 28^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/monitoring-across-frameworks/) on February 28th 2021*

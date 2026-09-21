@@ -92,6 +92,6 @@ However, it's a no-go for me: to create a simple desktop app, I don't want to le
 
 * [Tauri](https://tauri.app/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/opinion-tauri/) on May 12^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/opinion-tauri/) on May 12th, 2024*
 
 *[GUI]: Graphical User Interface

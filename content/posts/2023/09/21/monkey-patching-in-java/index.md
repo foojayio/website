@@ -327,7 +327,7 @@ To choose one over the other, consider the following criteria: build-time vs. ru
 * [Awesome Java Annotation Processing](https://github.com/gunnarmorling/awesome-annotation-processing)
 * [Maven AspectJ plugin](https://www.mojohaus.org/aspectj-maven-plugin/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/monkeypatching-java/) on September 17^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/monkeypatching-java/) on September 17th, 2023*
 
 *[AOP]: Aspect-Oriented Programming
 *[AST]: Abstract Syntax Tree

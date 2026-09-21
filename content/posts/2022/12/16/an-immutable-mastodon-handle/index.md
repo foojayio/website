@@ -99,4 +99,4 @@ The trick works because I'm the only Mastodon user on my domain. If you have sev
 * [RFC 8288 - Web Linking](https://www.rfc-editor.org/rfc/rfc8288.html)
 * [Choosing an HTTP Status Code — Stop Making It Hard](https://www.codetinkerer.com/2015/12/04/choosing-an-http-status-code.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/immutable-mastodon-handle/) on December 18^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/immutable-mastodon-handle/) on December 18th, 2022*

@@ -136,4 +136,4 @@ In this post, I've explained one of the issues of using embedded SVGs in HTML an
 * [Creating Embeddable Fonts as Data URIs](https://oreillymedia.github.io/Using_SVG/extras/ch07-dataURI-fonts.html)
 * [SVG doesn't use font when inside HTML](https://stackoverflow.com/questions/30466610/svg-doesnt-use-font-when-inside-html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/fonts-embedded-svg/) on January 21^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/fonts-embedded-svg/) on January 21th, 2024*

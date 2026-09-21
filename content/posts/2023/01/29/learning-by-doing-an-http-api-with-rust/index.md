@@ -364,6 +364,6 @@ The complete source code for this post can be found on [Github](https://github.c
 * [How to create small Docker images for Rust](https://kerkour.com/rust-small-docker-image)
 * [Using Axum Framework To Create Rest API](https://medium.com/intelliconnect-engineering/using-axum-framework-to-create-rest-api-part-1-7d434d2c5de4)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/http-api-rust/) on January 29^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/http-api-rust/) on January 29th, 2023*
 
 *[CRUD]: Create Read Update Delete

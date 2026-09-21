@@ -302,6 +302,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [The API gateway pattern versus the Direct client-to-microservice communication](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern)
 * [API Gateway vs Backend For Frontend](https://www.manuelkruisz.com/blog/posts/api-gateway-vs-bff)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/backend-for-frontend-demo/) on August 14^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/backend-for-frontend-demo/) on August 14th, 2022*
 
 *[BFF]: Backend-for-Frontend

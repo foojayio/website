@@ -160,4 +160,4 @@ In this post, we have seen how to improve the API provided by third-party librar
 * [Delegation pattern](https://en.wikipedia.org/wiki/Delegation_pattern)
 * [Kotlin's Delegation](https://kotlinlang.org/docs/delegation.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/beautify-third-party-api-kotlin/) on December 19^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/beautify-third-party-api-kotlin/) on December 19th, 2021*

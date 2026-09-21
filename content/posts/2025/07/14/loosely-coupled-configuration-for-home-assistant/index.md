@@ -102,4 +102,4 @@ In this post, I showed how you could replace the explicit grouping of devices by
 * [Group](https://www.home-assistant.io/integrations/group/)
 * [Targeting areas and devices](https://www.home-assistant.io/docs/scripts/perform-actions/#targeting-areas-and-devices)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/8/) on July 13^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/8/) on July 13th, 2025*

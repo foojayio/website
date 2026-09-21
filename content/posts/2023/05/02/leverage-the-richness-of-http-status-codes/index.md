@@ -131,6 +131,6 @@ That shouldn't stop you from using them, as they offer a rich set from which you
 * [Series of posts on HTTP status codes](https://evertpot.com/http/)
 * [The HTTP Status Codes Problem](https://twirl.medium.com/the-http-status-codes-problem-40b3160a189f)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/leverage-richness-http-status-codes/) on April 23^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/leverage-richness-http-status-codes/) on April 23th, 2023*
 
 *[HATEOAS]: Hypermedia As The Engine Of Application State

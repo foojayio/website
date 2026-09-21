@@ -208,4 +208,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Code sample of an existing scanning recipe](https://github.com/openrewrite/rewrite-testing-frameworks/blob/main/src/main/java/org/openrewrite/java/testing/mockito/AnyToNullable.java)
 * [Existing scanning recipes](https://docs.openrewrite.org/reference/scanning-recipes)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/2/) on June 15^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/2/) on June 15th, 2025*

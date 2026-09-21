@@ -72,6 +72,6 @@ When a gap exists between the business and presentation models, it's easy to get
 * [Entities or DTOs – When should you use which projection?](https://www.thoughts-on-java.org/entities-dtos-use-projection/)
 * [GraphQL](http://graphql.github.io/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/alternatives-dto/) on March 6^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/alternatives-dto/) on March 6th, 2022*
 
 *[DTO]: Data Transfer Object

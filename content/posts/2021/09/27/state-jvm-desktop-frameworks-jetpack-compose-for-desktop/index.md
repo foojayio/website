@@ -224,7 +224,7 @@ The complete source code for this post can be found on [Github](https://github.c
 * [GitHub repo with samples](https://github.com/jetbrains/compose-jb)
 * [Under the hood of Jetpack Compose — part 2 of 2](https://medium.com/androiddevelopers/under-the-hood-of-jetpack-compose-part-2-of-2-37b2c20c6cdd)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/state-jvm-desktop-frameworks/5/) on February 7^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/state-jvm-desktop-frameworks/5/) on February 7th 2021*
 
 *[JVM]: Java Virtual Machine
 *[OOP]: Object-Oriented Programming

@@ -61,8 +61,8 @@ In 2022, I published 50 blog posts on : one each week on Sunday, but on Christma
 
 Two things are of interest:
 
-1. The 4^th^ most viewed page is the homepage
-2. The 5^th^, about cache providers, was published in October 2021. It's a long tail, indeed!
+1. The 4th most viewed page is the homepage
+2. The 5th, about cache providers, was published in October 2021. It's a long tail, indeed!
 
 Views are broken down as the following during the year:
 
@@ -132,6 +132,6 @@ Years when one changes jobs are always challenging but very interesting; 2022 wa
 
 What are yours?
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/2022-retrospective/) on January 8^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/2022-retrospective/) on January 8th, 2023*
 
 *[HN]: Hacker News

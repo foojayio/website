@@ -112,4 +112,4 @@ In this, we moved from the proprietary Philips Hue automation between a sensor a
 * [Philips Hue](https://www.philips-hue.com)
 * [Emulated Hue](https://www.home-assistant.io/integrations/emulated_hue)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/3/) on December 8^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/3/) on December 8th, 2024*

@@ -173,4 +173,4 @@ I learned more about `cargo-mutants` and could improve the code in the process.
 * [Welcome to cargo-mutants](https://mutants.rs)
 * [GitHub cargo-mutants](https://github.com/sourcefrog/cargo-mutants)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/mutation-testing-rust/) on March 30^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/mutation-testing-rust/) on March 30th, 2025*

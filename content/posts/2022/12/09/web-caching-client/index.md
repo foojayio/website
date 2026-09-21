@@ -228,4 +228,4 @@ You can find the source code for this post on [GitHub](https://github.com/ajavag
 * [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 * [Service worker caching and HTTP caching](https://web.dev/service-worker-caching-and-http-caching/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/web-caching/client/) on November 27^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/web-caching/client/) on November 27th, 2022*

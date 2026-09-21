@@ -296,6 +296,6 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Custom Implementations for Spring Data Repositories](https://docs.spring.io/spring-data/data-commons/docs/2.5.x/reference/html/#repositories.custom-implementations)
 * [Customize the Base Repository](https://docs.spring.io/spring-data/data-commons/docs/2.5.x/reference/html/#repositories.customize-base-repository)
 
-*Orginally published at [A Java Geek](https://blog.frankel.ch/custom-spring-data-repository/) on April 11^th^, 2021*
+*Orginally published at [A Java Geek](https://blog.frankel.ch/custom-spring-data-repository/) on April 11th, 2021*
 
 *[DSL]: Domain-Specific Language

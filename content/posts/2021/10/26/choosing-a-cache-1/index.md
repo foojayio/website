@@ -178,7 +178,7 @@ Many thanks to my colleague Marko Topolnik for his review.
 * [JCache](https://hazelcast.com/glossary/jcache-java-cache/)
 * [Spring's Cache Abstraction](https://docs.spring.io/spring-framework/docs/5.3.x/reference/html/integration.html#cache)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/choose-cache/1/) on October 24^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/choose-cache/1/) on October 24th, 2021*
 
 *[JSR]: Java Specification Request
 *[CPU]: Central Processing Unit

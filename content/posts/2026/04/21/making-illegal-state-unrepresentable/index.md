@@ -606,4 +606,4 @@ The complete source code for this post can be found on [Codeberg](https://codebe
 * [The Builder pattern is a finite state machine!](https://blog.frankel.ch/builder-pattern-finite-state-machine/)
 * [Make Illegal States Unrepresentable - Data-Oriented Programming v1.1](https://inside.java/2024/06/03/dop-v1-1-illegal-states/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/illegal-state-unrepresentable/) on April 19^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/illegal-state-unrepresentable/) on April 19th, 2026.*

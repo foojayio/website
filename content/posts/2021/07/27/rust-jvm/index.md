@@ -18,7 +18,7 @@ frozen: false
 
 So far, we have learned the basics of Rust syntax, developed a custom Kubernetes controller, and integrated with the front-end with .
 
-This is the 7^th^ post in the in the [Start Rust](https://blog.frankel.ch/focus/start-rust/) series.
+This is the 7th post in the in the [Start Rust](https://blog.frankel.ch/focus/start-rust/) series.
 
 * [My first cup of Rust](https://blog.frankel.ch/start-rust/1/)
 * [My second cup of Rust](https://blog.frankel.ch/start-rust/2/)
@@ -265,7 +265,7 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Calling Rust Functions from Other Languages](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#calling-rust-functions-from-other-languages)
 * [JNI Specification](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/start-rust/7/) on July 18^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/start-rust/7/) on July 18th, 2021*
 
 *[JVM]: Java Virtual Machine
 *[JNI]: Java Native Interface

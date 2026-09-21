@@ -267,9 +267,9 @@ I've already written a full-fledged blog post about [Evolving your APIs](https:/
 
 jPrime is a great community-led conference. After two years of Covid, they were able to attract around 1k attendees and local and international speakers. Icing on the cake, all talks are in English!
 
-Don't miss the next edition, May 30-31^th^, 2023!
+Don't miss the next edition, May 30-31th, 2023!
 
-*Originally published on [A Java Geek](https://blog.frankel.ch/jprime-2022/) on May 29^th^, 2022*
+*Originally published on [A Java Geek](https://blog.frankel.ch/jprime-2022/) on May 29th, 2022*
 
 *[CQRS]: Command and Query Responsibility Segregration
 *[DDD]: Domain-Driven Design

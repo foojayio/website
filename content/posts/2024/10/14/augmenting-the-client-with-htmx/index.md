@@ -182,4 +182,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [HTMX](https://htmx.org/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/5/) on October 6^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/5/) on October 6th, 2024*

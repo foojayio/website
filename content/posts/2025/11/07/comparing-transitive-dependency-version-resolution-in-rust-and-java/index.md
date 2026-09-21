@@ -189,7 +189,7 @@ JVM languages, and Java in particular, offer both a compile-time classpath and a
 * [Maven - Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 * [Effective Rust - Item 25: Manage your dependency graph](https://effective-rust.com/dep-graph.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/dependency-version-resolution-rust-java/) on September 14^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/dependency-version-resolution-rust-java/) on September 14th, 2025*
 
 *[JVM]: Java Virtual Machine
 *[POM]: Project Object Model

@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-**[Devoxx Belgium 2023](https://devoxx.be/?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content&utm_term) is finally here! To mark the 20^th^ anniversary of the conference and the release of the new Azul book [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/?utm_medium=event&utm_campaign=20231004-HEV-Dummies%20Launch%20Party%20at%20Devoxx%20BE&utm_source=unbounce&utm_content=&utm_term=), this post summarizes all the logistical details you need to know to get the most out of Azul at Devoxx!**
+**[Devoxx Belgium 2023](https://devoxx.be/?utm_medium=event&utm_campaign=20231003-SEV-Devoxx%20Belgium&utm_source=unbounce&utm_content&utm_term) is finally here! To mark the 20th anniversary of the conference and the release of the new Azul book [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/?utm_medium=event&utm_campaign=20231004-HEV-Dummies%20Launch%20Party%20at%20Devoxx%20BE&utm_source=unbounce&utm_content=&utm_term=), this post summarizes all the logistical details you need to know to get the most out of Azul at Devoxx!**
 ![](2023-9-14b-devoxx-hero-1024x400.jpg)
 
 Devoxx Belgium will take place on 2 – 6 October 2023 at [Kinepolis](https://www.google.com/maps/dir/Kinepolis+Antwerpen,+Groenendaallaan+394,+2030+Antwerpen,+Belgium/Kinepolis,+Groenendaallaan+394,+2030+Antwerp/@51.2459867,4.3338087,12z/data=!4m13!4m12!1m5!1m1!1s0x47c3f63435c044a3:0xa9fd5c643a4787c5!2m2!1d4.4162091!2d51.2459082!1m5!1m1!1s0x47c3f63435c044a3:0xa9fd5c643a4787c5!2m2!1d4.4162091!2d51.2459082?entry=ttu) in Antwerp (Belgium). This edition is set to become the most visited of the series with over 3,200 attendees expected!

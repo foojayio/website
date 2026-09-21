@@ -375,6 +375,6 @@ The source code is available on [GitHub](https://github.com/ajavageek/poor-man-a
 * [Getting started with Apache APISIX](https://apisix.apache.org/docs/apisix/getting-started/)
 * [Apache APISIX plugins](https://apisix.apache.org/plugins/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/poor-man-api/) on November 20^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/poor-man-api/) on November 20th, 2022*
 
 *[DDoS]: Distributed Denial of Service

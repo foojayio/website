@@ -458,7 +458,7 @@ We are now ready to map the field.
 4. Click on the Create template button
 5. Give it a relevant name, *e.g.* , `geo-locate`
 6. Set an index pattern that matches `wikipedia`, *e.g.* , `wikipedia`
-7. Click on Next to keep the defaults until you reach the 4^th^ step - Mappings
+7. Click on Next to keep the defaults until you reach the 4th step - Mappings
 8. Add a new field named `location.coordinates` and with type Geo-point
 9. Click again on Next until the last step. The preview tab should display the following JSON: 
 

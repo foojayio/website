@@ -225,7 +225,7 @@ But should you do, know that `pip-compile` is compatible with it.
 * [pip tools](https://github.com/jazzband/pip-tools)
 * [PEP 621 – Storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/maze-python-dependency-management/) on September, 11^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/maze-python-dependency-management/) on September, 11th, 2022*
 
 *[PR]: Pull Request
 *[VCS]: Version Control System

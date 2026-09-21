@@ -110,4 +110,4 @@ If I had to follow these steps more frequently than this, I'd probably automate 
 * [rbenv cheatsheet](https://devhints.io/rbenv)
 * [Bundler](https://bundler.io/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/running-jekyll-mac/) on June 5^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/running-jekyll-mac/) on June 5th, 2022*

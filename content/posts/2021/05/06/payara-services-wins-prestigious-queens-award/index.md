@@ -16,7 +16,7 @@ Micro-multinational open source software company, Payara Services, has been comm
 
 {{< img src="4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png" class="alignright size-large is-resized" width="259" height="448" >}}
 
-Now in its 55^th^ year, the Queen's Award for Enterprise: International Trade is the UK's most prestigious business award, honouring organisations that have excelled in overseas exports whilst maintaining the highest standards in social, economic, and environmental activity.
+Now in its 55th year, the Queen's Award for Enterprise: International Trade is the UK's most prestigious business award, honouring organisations that have excelled in overseas exports whilst maintaining the highest standards in social, economic, and environmental activity.
 
 Payara's win attests to the growing success of the open source software business model. Payara's open source product offering, the Payara Platform, is based on the global initiatives of the Jakarta EE and MicroProfile standards. Community users can download the Payara Platform Community Edition for their development projects and containerized Jakarta EE and MicroProfile applications, while the fully supported, subscription based Payara Enterprise Edition is designed for mission critical systems in production and containerized Jakarta EE and MicroProfile applications.
 

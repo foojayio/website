@@ -188,4 +188,4 @@ Developers praise Kotlin for its `null`-safety: it's the result of its `null`-ha
 * [Kotlin nullable types and non-null types](https://kotlinlang.org/docs/null-safety.html#nullable-types-and-non-null-types)
 * [JSpecify](https://jspecify.dev/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/null-safety-java-vs-kotlin/) on February 12^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/null-safety-java-vs-kotlin/) on February 12th, 2023*

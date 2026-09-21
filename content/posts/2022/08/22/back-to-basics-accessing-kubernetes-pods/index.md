@@ -526,6 +526,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Getting started with Apache APISIX Ingress Controller](https://apisix.apache.org/docs/ingress-controller/getting-started/)
 * [Apache APISIX Ingress Controller FAQ](https://apisix.apache.org/docs/ingress-controller/FAQ/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/basics-access-kubernetes-pods/) on August 7^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/basics-access-kubernetes-pods/) on August 7th, 2022*
 
 *[CRD]: Custom Resource Definition

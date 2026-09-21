@@ -126,4 +126,4 @@ In this two-post series, I've addressed most of the 16 practices to secure APIs 
 
 While I don't claim the list is exhaustive, it's a solid basis to improve the security of one's system.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/2/) on February 25^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/2/) on February 25th, 2024*

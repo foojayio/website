@@ -162,6 +162,6 @@ The source code is available on [GitHub](https://github.com/ajavageek/web-cachin
 * [Cache API responses](https://apisix.apache.org/docs/apisix/tutorials/cache-api-responses/)
 * [proxy-cache plugin](https://apisix.apache.org/docs/apisix/plugins/proxy-cache/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/web-caching/server/) on December 4^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/web-caching/server/) on December 4th, 2022*
 
 *[PDCA]: Plan Do Check Act

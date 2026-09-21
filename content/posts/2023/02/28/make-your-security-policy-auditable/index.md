@@ -386,4 +386,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Rego playground](https://play.openpolicyagent.org/)
 * [Spring Security Authorization with OPA](https://www.baeldung.com/spring-security-authorization-opa)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/security-policy-auditable/) on February 26^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/security-policy-auditable/) on February 26th, 2023*

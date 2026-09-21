@@ -247,4 +247,4 @@ You can find the the sources for this post on [GitHub](https://github.com/ajavag
 * [Apache APISIX architecture](https://apisix.apache.org/docs/apisix/architecture-design/apisix)
 * [Apache APISIX on GitHub](https://github.com/apache/apisix)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-api-gateway/) on March 25^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-api-gateway/) on March 25th, 2022*

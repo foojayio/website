@@ -60,4 +60,4 @@ If you want to avoid your blog being flagged as duplicate by search engines, you
 1. avoid content aggregators that don't allow setting the `rel=canonical` attribute
 2. use it!
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/rel-canonical-content-writers/) on April 9^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/rel-canonical-content-writers/) on April 9th, 2023*

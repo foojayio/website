@@ -161,6 +161,6 @@ You learn a new programming language by comparing it with the one(s) you already
 * [Duck typing](https://en.wikipedia.org/wiki/Duck_typing)
 * [Python Protocol](https://peps.python.org/pep-0544/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/on-inheritance/) on January 26^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/on-inheritance/) on January 26th, 2025*
 
 *[Object-Oriented]: OO

@@ -82,4 +82,4 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Custom collectors in Java 8](https://blog.frankel.ch/custom-collectors-java-8/)
 * [Teeing Javadoc](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/stream/Collectors.html#teeing(java.util.stream.Collector,java.util.stream.Collector,java.util.function.BiFunction))
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/teeing-java-api/) on May 9^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/teeing-java-api/) on May 9th, 2021*

@@ -87,7 +87,7 @@ There are two lessons here:
 1. Think before you code - this one I regularly forget.
 2. Don't be afraid to throw away your code.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/example-overengineering/) on April 14^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/example-overengineering/) on April 14th, 2021*
 
 *[WET]: Write Everything Twice
 *[DRY]: Don't Repeat Yourself

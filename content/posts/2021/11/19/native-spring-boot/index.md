@@ -467,7 +467,7 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Spring Native documentation](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/)
 * [Native hints](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#native-hints)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/native/spring-boot/) on November 14^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/native/spring-boot/) on November 14th, 2021*
 
 *[JVM]: Java Virtual Machine
 *[AOT]: Ahead-Of-Time

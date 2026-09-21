@@ -118,4 +118,4 @@ From an architect's point of view, it makes sense to factor the behavior describ
 
 * [Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header-04)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/fix-duplicate-api-requests) on March 30^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/fix-duplicate-api-requests) on March 30th, 2024*

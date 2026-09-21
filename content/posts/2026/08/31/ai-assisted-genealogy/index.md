@@ -154,6 +154,6 @@ I never thought about genealogy before. However, it's a lot of fun, and I'm hook
 * [Topola Genealogy Viewer](https://github.com/PeWu/topola-viewer)
 * [Cloudflare Pages](https://pages.cloudflare.com/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/ai-assisted-genealogy/) on August 30^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/ai-assisted-genealogy/) on August 30th, 2026.*
 
 *[OTP]: One-Time Password

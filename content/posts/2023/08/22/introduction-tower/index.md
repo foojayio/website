@@ -91,6 +91,6 @@ It's widespread in the Rust ecosystem, and learning it is a good investment.
 * [tower crate](https://docs.rs/crate/tower/0.4.13)
 * [axum_tracing_opentelemetry documentation](https://docs.rs/axum-tracing-opentelemetry/0.13.1/axum_tracing_opentelemetry/index.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/introduction-tower/) on August 20^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/introduction-tower/) on August 20th, 2023*
 
 *[MPSC]: Multi Producer Single Consumer

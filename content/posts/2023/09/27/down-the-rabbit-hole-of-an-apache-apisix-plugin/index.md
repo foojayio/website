@@ -123,4 +123,4 @@ It's also a good reminder that even if you're not fluent in a language or a code
 
 * [ctx parameter](https://apisix.apache.org/docs/apisix/plugin-develop/#ctx-parameter)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/rabbit-hole-apisix-plugin/) on September 24^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/rabbit-hole-apisix-plugin/) on September 24th, 2023*

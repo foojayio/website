@@ -166,7 +166,7 @@ Note that this approach doesn't remove any previously logged requests. The only 
 * [How to use DNS API](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
 * [Synology: Schedule Start \& Stop For Docker Containers](https://mariushosting.com/synology-schedule-start-stop-for-docker-containers/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/privacy-subdomains/2/) on September 28^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/privacy-subdomains/2/) on September 28th, 2025*
 
 *[NAS]: Network Area Storage
 *[ACME]: Automatic Certificate Management Environment

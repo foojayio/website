@@ -79,4 +79,4 @@ I've described the `Vary`response header in this post. As soon as you configure 
 
 * [RFC 9110: Vary](https://datatracker.ietf.org/doc/html/rfc9110#field.vary)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/vary-http-header) on May 5^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/vary-http-header) on May 5th, 2024*

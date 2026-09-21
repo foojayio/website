@@ -176,7 +176,7 @@ I believe there are many others: I'll be interested in the ones you've encounter
 * [TwoHardThings](https://martinfowler.com/bliki/TwoHardThings.html)
 * [Can we put an end to this 'Estimate' game of fools?](https://blog.frankel.ch/can-we-put-an-end-to-this-estimate-game-of-fools/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/hard-things-computer-science/) on June 26^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/hard-things-computer-science/) on June 26th, 2022*
 
 *[P]: Partition tolerance
 *[A]: Availability

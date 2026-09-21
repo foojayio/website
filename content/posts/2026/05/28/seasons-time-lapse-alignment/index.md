@@ -74,7 +74,7 @@ Here's the final representation of the alignment pipeline's nominal path:
 
 In the next part, I'll describe how I smoothed the motion between frames using optical flow and the final result.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/2/) on May 24^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/2/) on May 24th, 2026.*
 
 *[RANSAC]: RANdom SAmple Consensus
 *[MPS]: Metal Performance Shaders

@@ -73,7 +73,7 @@ As for now, it would be ill-advised to use the JVM with FaaS. That doesn't mean 
 * [OpenFaaS native Kotlin functions](https://thenatureofsoftware.se/posts/openfaas_graalvm_native/)
 * [Binary As A Function](https://medium.com/@napperley/binary-as-a-function-a0d6490efb27)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-faas-impossible-union/) on October 16^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-faas-impossible-union/) on October 16th, 2021*
 
 *[JVM]: Java Virtual Machine
 *[FaaS]: Function-as-a-Service

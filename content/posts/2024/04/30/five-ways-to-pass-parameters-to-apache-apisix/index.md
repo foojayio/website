@@ -296,4 +296,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [6 Ways To Pass Parameters to Spring REST API](https://javabulletin.substack.com/p/6-ways-to-pass-parameters-to-spring)
 * [How to Build an Apache APISIX Plugin From 0 to 1?](https://api7.ai/blog/how-to-build-an-apache-apisix-plugin-from-0-to-1)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/pass-parameters-apisix/) on April 28^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/pass-parameters-apisix/) on April 28th, 2024*

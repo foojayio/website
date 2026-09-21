@@ -168,4 +168,4 @@ The `build.rs` file is a handy trick for achieving goals that aren't possible wi
 
 * [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/high-cardinality-values-build-flags-rust/) on April 13^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/high-cardinality-values-build-flags-rust/) on April 13th, 2025*

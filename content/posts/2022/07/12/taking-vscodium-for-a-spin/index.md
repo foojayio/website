@@ -82,6 +82,6 @@ At this point, I think I'm ready to use VSCodium for my next talk.
 * [VSCodium](https://vscodium.com/)
 * [Visual Studio Code on GitHub](https://github.com/microsoft/vscode)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/take-vscode-spin/) on June 17^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/take-vscode-spin/) on June 17th, 2022*
 
 *[IDE]: Integrated Development Environment

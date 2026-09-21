@@ -162,4 +162,4 @@ I'd be happy to hear if you found and used such a solution. In any case, I'm not
 * [About self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
 * [Configuring the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/raspberry-pi-github-action/) on March 10^th^ 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/raspberry-pi-github-action/) on March 10th 2024*

@@ -349,4 +349,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Apache APISIX](https://apisix.apache.org)
 * [grpc-transcode plugin](https://apisix.apache.org/docs/apisix/plugins/grpc-transcode/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/grpc-client-side/) on March 16^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/grpc-client-side/) on March 16th, 2023*

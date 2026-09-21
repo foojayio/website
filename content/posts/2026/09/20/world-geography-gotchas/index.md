@@ -51,4 +51,4 @@ Wherever you work, chances are high that you'll have to deal with this kind of t
 * [Büsingen am Hochrhein](https://en.wikipedia.org/wiki/B%C3%BCsingen_am_Hochrhein)
 * [Date and time gotchas](https://blog.frankel.ch/date-time-gotchas/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/world-geography-gotchas/) on September 13^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/world-geography-gotchas/) on September 13th, 2026.*

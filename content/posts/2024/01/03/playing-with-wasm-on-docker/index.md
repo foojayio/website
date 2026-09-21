@@ -292,4 +292,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [WASI, first steps](https://k33g.hashnode.dev/wasi-first-steps)
 * [WebAssembly: Docker without containers!](https://wasmlabs.dev/articles/docker-without-containers/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/wasm-docker/) on June 11^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/wasm-docker/) on June 11th, 2023*

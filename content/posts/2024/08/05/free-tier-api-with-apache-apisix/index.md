@@ -175,4 +175,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [router-radixtree](https://apisix.apache.org/docs/apisix/router-radixtree/)
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/free-tier-api-apisix/) on July 28^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/free-tier-api-apisix/) on July 28th, 2024*

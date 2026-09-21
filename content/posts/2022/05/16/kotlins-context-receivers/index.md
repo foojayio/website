@@ -221,4 +221,4 @@ In the meantime, I'm curious to see more different usages of context receivers a
 * [Context Receivers Are Coming to Kotlin!](https://www.youtube.com/watch?v=GISPalIVdQY)
 * [When to use context receiver?](https://www.reddit.com/r/Kotlin/comments/q9f8yp/when_to_use_context_receiver/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-context-receivers/) on May 14 ^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-context-receivers/) on May 14 th, 2022*

@@ -256,4 +256,4 @@ I've detailed Apache APISIX plugin phases and priorities in this post. I've expl
 * [Apache APISIX plugin execution lifecycle](https://apisix.apache.org/docs/apisix/terminology/plugin/#plugins-execution-lifecycle)
 * [Plugin execution code](https://github.com/apache/apisix/blob/master/apisix/plugin.lua#L1126-L1193)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-plugins-priority-leaky-abstraction/) on December 10^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/apisix-plugins-priority-leaky-abstraction/) on December 10th, 2023*

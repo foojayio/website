@@ -82,4 +82,4 @@ I've described using the proxy-rewrite plugin with a path variable in this post.
 * [PostgREST tables and views](https://postgrest.org/en/v12/references/api/tables_views.html)
 * [APISIX serverless plugin](https://apisix.apache.org/docs/apisix/plugins/serverless/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/advanced-url-rewrite-apisix/) on July 14^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/advanced-url-rewrite-apisix/) on July 14th, 2024*

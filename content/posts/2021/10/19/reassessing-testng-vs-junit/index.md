@@ -293,6 +293,6 @@ Yet, given that the JUnit ecosystem is much more developed, I think I'll switch 
 * [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide)
 * [TestNG documentation](https://testng.org/doc/documentation-main.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/reassessing-testng-junit/) on September 19^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/reassessing-testng-junit/) on September 19th, 2021*
 
 *[DAG]: Directed Acyclic Graph

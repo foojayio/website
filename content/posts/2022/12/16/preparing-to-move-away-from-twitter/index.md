@@ -19,7 +19,7 @@ frozen: false
 
 I opened my Twitter account more than 13 years ago, in August 2009. For 12 years, I kept focusing on professional-related content: Java, the JVM, programming, etc. I built my audience, trying to promote good technical content, either my own or stuff that I enjoyed reading.
 
-Then, on February 24^th^, Russia invaded Ukraine. My first visit to Ukraine was in 2014, just after the Maidan revolution. During eight years, I returned there often and made plenty of friends.
+Then, on February 24th, Russia invaded Ukraine. My first visit to Ukraine was in 2014, just after the Maidan revolution. During eight years, I returned there often and made plenty of friends.
 
 Of course, I wanted to support them and started to use my Twitter account to fight Russian disinformation. I discovered how toxic Twitter could be after having stayed out of politics since the beginning: bad faith, logical fallacies, flat-out lies, reverse accusations, personal attacks, etc.
 
@@ -290,4 +290,4 @@ The source code is available on [GitHub](https://github.com/nfrankel/mastodon-tw
 * [Moa bridge (be careful!)](https://moa.party/)
 * [Mastodon Twitter Sync](https://github.com/klausi/mastodon-twitter-sync)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/move-away-twitter/) on December 11^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/move-away-twitter/) on December 11th, 2022*

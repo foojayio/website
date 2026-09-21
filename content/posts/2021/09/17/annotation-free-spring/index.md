@@ -416,6 +416,6 @@ On a more general note, I believe in Darwinism for libraries and frameworks. I'm
 
 However, things move fast in our industry. Critical or not, I'd suggest that every developer regularly check if their knowledge is still relevant when they express an opinion - and reassess it regularly.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/annotation-free-spring/) on September 12^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/annotation-free-spring/) on September 12th, 2021*
 
 *[DSL]: Domain-Specific Language

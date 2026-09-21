@@ -19,7 +19,7 @@ frozen: false
 
 I continue to take care of my Home Assistant. This week, I replaced my original setup with [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/).
 
-This is the 6^th^ post in the My journey with Home Assistant focus series. Other posts include:
+This is the 6th post in the My journey with Home Assistant focus series. Other posts include:
 
 1. [Why Home Assistant?](https://blog.frankel.ch/home-assistant/1/)
 2. [The Home Assistant model](https://blog.frankel.ch/home-assistant/2/)
@@ -136,6 +136,6 @@ In both cases, we benefit not only from Cloudflare SSL certificates but also fro
 * [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
 * [Cloudflared](https://github.com/brenner-tobias/addon-cloudflared)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/6/) on May 11^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/6/) on May 11th, 2025*
 
 *[HA]: Home Assistant

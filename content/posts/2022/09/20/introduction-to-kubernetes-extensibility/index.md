@@ -230,7 +230,7 @@ In this post, we browsed through several extension points in Kubernetes: the dat
 * [Extend kubectl with plugins](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/)
 * [Krew plugins](https://krew.sigs.k8s.io/plugins/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kubernetes-extensibility/) on September 18^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kubernetes-extensibility/) on September 18th, 2022*
 
 *[CRUD]: Create Read Update Delete
 *[CRD]: Custom Resource Definition

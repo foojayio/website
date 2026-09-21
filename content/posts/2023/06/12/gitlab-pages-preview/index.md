@@ -140,4 +140,4 @@ In this post, I showed how to preview GitLab Pages and share the preview's URL w
 * [Set artifacts visibility independent of the project or group visibility](https://gitlab.com/gitlab-org/gitlab/-/issues/17544)
 * [Change which users can view your pipelines](https://docs.gitlab.com/ee/ci/pipelines/settings.html#change-which-users-can-view-your-pipelines)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/gitlab-pages-preview/) on June 4^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/gitlab-pages-preview/) on June 4th, 2023*

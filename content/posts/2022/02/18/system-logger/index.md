@@ -204,6 +204,6 @@ The complete source code for this post can be found in Maven format [there](http
 * [Migrating the ServiceLoader to the Java 9 module system](https://blog.frankel.ch/migrating-serviceloader-java-9-module-system/)
 * [Java Service Loader vs Spring Factories Loader](https://blog.frankel.ch/java-service-loader-vs-spring-factories/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/system-logger/) on February 13^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/system-logger/) on February 13th, 2022*
 
 *[JUL]: Java Util Logging

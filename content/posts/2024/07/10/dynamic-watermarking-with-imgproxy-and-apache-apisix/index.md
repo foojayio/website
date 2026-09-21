@@ -70,4 +70,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [imgproxy documentation](https://docs.imgproxy.net/)
 * [imgproxy interactive demo](https://imgproxy.net/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/2/) on July 7^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/2/) on July 7th, 2024*

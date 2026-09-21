@@ -362,6 +362,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
 * [OpenTelemetry Operators](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-collector/) on November 12^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-collector/) on November 12th, 2023*
 
 *[ELK]: Elasticsearch Logstash Kibana

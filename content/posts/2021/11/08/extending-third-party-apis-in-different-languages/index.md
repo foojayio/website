@@ -246,6 +246,6 @@ I've regularly stated that Kotlin's most significant benefit over Java is extens
 * [Scala 3 language reference: extension methods](https://docs.scala-lang.org/scala3/reference/contextual/extension-methods.html)
 * [Kotlin extensions](https://kotlinlang.org/docs/extensions.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/extending-third-party-apis/) on November 7^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/extending-third-party-apis/) on November 7th, 2021*
 
 *[Wasm]: WebAssembly

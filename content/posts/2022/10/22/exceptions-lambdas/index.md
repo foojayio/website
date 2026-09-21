@@ -191,4 +191,4 @@ You can find the source code for this post on [GitHub](https://github.com/ajavag
 * [Exceptions in Lambda Expression Using Vavr](https://www.baeldung.com/exceptions-using-vavr)
 * [Java Streams vs Vavr Streams](https://www.baeldung.com/vavr-java-streams)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/exceptions-lambdas/) on October 16^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/exceptions-lambdas/) on October 16th, 2022*

@@ -368,4 +368,4 @@ The complete source code for this post can be found on [Github](https://github.c
 * [Docker Layers Explained](https://mydeveloperplanet.com/2019/03/13/docker-layers-explained/)
 * [Build Mounts](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#build-mounts-run---mount)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/faster-maven-builds/2/) on October 10^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/faster-maven-builds/2/) on October 10th, 2021*

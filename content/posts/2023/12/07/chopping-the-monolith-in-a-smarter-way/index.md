@@ -90,6 +90,6 @@ The complete source code for this post can be found on [Github](https://github.c
 * [apisix-pipeline-request-plugin](https://github.com/bzp2010/apisix-plugin-pipeline-request)
 * [Chaining API requests with API Gateway](https://api7.ai/blog/chaining-api-requests-with-api-gateway)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/chopping-monolith-smarter-way/) on November 26^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/chopping-monolith-smarter-way/) on November 26th, 2023*
 
 *[FaaS]: Function-as-a-Service

@@ -306,7 +306,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Find Awesome MCP Servers and Clients](https://mcp.so/)
 * [LangChain4J - Model Context Protocol (MCP)](https://docs.langchain4j.dev/tutorials/mcp)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings-six-months-after/) on April 27^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings-six-months-after/) on April 27th, 2025*
 
 *[SSE]: Server-Sent Events
 *[RAG]: Retrieval-Augmented Generation

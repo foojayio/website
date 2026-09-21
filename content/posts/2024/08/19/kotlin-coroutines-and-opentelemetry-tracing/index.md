@@ -121,4 +121,4 @@ The Java Agent provides the mechanism to cope with it. One part focuses on movin
 * [OpenTelemetry auto-instrumentation and instrumentation libraries for Java](https://github.com/open-telemetry/opentelemetry-java-instrumentation)
 * [Coroutine context and dispatchers](https://kotlinlang.org/docs/coroutine-context-and-dispatchers.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-coroutines-otel-tracing/) on August 18^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kotlin-coroutines-otel-tracing/) on August 18th, 2024*

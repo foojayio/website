@@ -202,6 +202,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [About CITATION files](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files)
 * [GitHub special files and paths](https://github.com/joelparkerhenderson/github-special-files-and-paths)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/beautify-github-repo/) on April 17^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/beautify-github-repo/) on April 17th, 2022*
 
 *[UI]: User Interface

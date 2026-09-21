@@ -245,7 +245,7 @@ You can find the source code for this post on [GitHub](https://github.com/ajavag
 * [Customize Nginx configuration](https://apisix.apache.org/docs/apisix/customize-nginx-configuration/)
 * [GeoIP Update](https://github.com/maxmind/geoipupdate)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/georouting-apisix/) on November 6^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/georouting-apisix/) on November 6th, 2022*
 
 *[l10n]: localization
 *[i18n]: internationalization

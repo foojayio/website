@@ -196,4 +196,4 @@ Thanks a lot to [Violeta Georgieva](https://twitter.com/violeta_g_g) for her rev
 * [How it works](https://github.com/reactor/BlockHound/blob/master/docs/how_it_works.md)
 * [Custom integrations](https://github.com/reactor/BlockHound/blob/master/docs/custom_integrations.md)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/blockhound-how-it-works/) on June 20^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/blockhound-how-it-works/) on June 20th 2021*

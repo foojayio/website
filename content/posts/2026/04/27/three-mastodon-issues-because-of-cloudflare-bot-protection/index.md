@@ -66,4 +66,4 @@ This is a well-known issue in both the Mastodon and Cloudflare communities. For 
 * [Bot protection is blocking valid bots](https://community.cloudflare.com/t/bot-protection-is-blocking-valid-bots/287563)
 * [Understanding Mastodon Preview Card Display Logic](https://box464.com/posts/mastodon-preview-cards/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/mastodon-cloudflare-bot-protection/) on April 26^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/mastodon-cloudflare-bot-protection/) on April 26th, 2026.*

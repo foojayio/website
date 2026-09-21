@@ -110,4 +110,4 @@ The complete source code for this post can be found on [Codeberg](https://codebe
 * [Micrometer JMX](https://docs.micrometer.io/micrometer/reference/implementations/jmx.html)
 * [JMX Metric Scraper](https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/tip-opentelemetry-projects/) on March 29^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/tip-opentelemetry-projects/) on March 29th, 2026.*

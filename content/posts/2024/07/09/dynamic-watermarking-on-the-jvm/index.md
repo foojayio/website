@@ -79,4 +79,4 @@ I explained how to watermark images on a Java stack in this post. I did the wate
 * [Java 2D API](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/spec/j2d-intro.html)
 * [Image Processing in WebAssembly](https://silvia-odwyer.github.io/photon/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/1/) on June 30^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/1/) on June 30th, 2024*

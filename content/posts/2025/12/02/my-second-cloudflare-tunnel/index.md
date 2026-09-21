@@ -165,4 +165,4 @@ For personal projects running from home, it's hard to beat: no cost, automatic H
 * [Cloudflare Policies](https://developers.cloudflare.com/cloudflare-one/access-controls/policies/)
 * [I finally understand Cloudflare Zero Trust tunnels](https://david.coffee/cloudflare-zero-trust-tunnels)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/second-cloudflare-tunnel/) on November 30^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/second-cloudflare-tunnel/) on November 30th, 2025*

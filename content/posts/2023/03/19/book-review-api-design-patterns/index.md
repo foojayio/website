@@ -105,7 +105,7 @@ Because of the couple of cons I mentioned, [API Design Patterns](https://www.man
 
 Nonetheless, it's a great book that I recommend to any developer entering the world of APIs or even one with more experience to round up their knowledge.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/api-design-patterns/) on January 15^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/api-design-patterns/) on January 15th, 2023*
 
 *[IETF]: Internet Engineering Task Force
 *[RFC]: Request For Comments

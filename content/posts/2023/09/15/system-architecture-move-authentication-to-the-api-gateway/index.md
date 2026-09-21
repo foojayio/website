@@ -251,4 +251,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [How to Integrate Keycloak for Authentication with Apache APISIX](https://www.keycloak.org/2021/12/apisix)
 * [A Quick Guide to Using Keycloak With Spring Boot](https://www.baeldung.com/spring-boot-keycloak)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/authentication-api-gateway/) on July 30^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/authentication-api-gateway/) on July 30th, 2023*

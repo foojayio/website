@@ -245,4 +245,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Sharding YAML configuration](https://shardingsphere.apache.org/document/current/en/user-manual/shardingsphere-jdbc/yaml-config/rules/sharding/)
 * [How to filter route by Nginx builtin variable](https://apisix.apache.org/docs/apisix/router-radixtree/#how-to-filter-route-by-nginx-builtin-variable)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/data-residency/2/) on May 21^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/data-residency/2/) on May 21th, 2023*

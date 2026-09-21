@@ -93,6 +93,6 @@ Migrating to Tailscale was a leap of faith, but I'm very happy I did it. My setu
 * [Integrations](https://tailscale.com/kb/1356/integrations)
 * [Tailscale Services](https://tailscale.com/kb/1552/tailscale-services)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/cloudflare-zero-trust-tailscale/) on January 11^th^, 2026*
+*Originally published at [A Java Geek](https://blog.frankel.ch/cloudflare-zero-trust-tailscale/) on January 11th, 2026*
 
 *[IdP]: Identity Provider

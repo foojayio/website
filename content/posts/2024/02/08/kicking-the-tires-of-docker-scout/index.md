@@ -131,4 +131,4 @@ In this short post, we tried Docker Scout, the Docker image vulnerability detect
 * [Docker Scout](https://docs.docker.com/scout/)
 * [4 Free, Easy-To-Use Tools For Docker Vulnerability Scanning](https://itnext.io/4-free-easy-to-use-tools-for-docker-vulnerability-scanning-bb73342c0faa)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kicking-tires-docker-scout/) on January 14^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kicking-tires-docker-scout/) on January 14th, 2024*

@@ -379,4 +379,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Plugin Develop - APISIX website](https://apisix.apache.org/docs/apisix/plugin-develop/)
 * [How to Build an Apache APISIX Plugin From 0 to 1](https://api7.ai/blog/how-to-build-an-apache-apisix-plugin-from-0-to-1)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/implement-idempotency-key-apisix/) on April 7^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/implement-idempotency-key-apisix/) on April 7th, 2024*

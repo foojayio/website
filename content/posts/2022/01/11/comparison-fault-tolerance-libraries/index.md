@@ -165,4 +165,4 @@ As I'm more familiar with Resilience4J, I'll probably use Failsafe in my next pr
 * [Introduction to Resilience4J](https://resilience4j.readme.io/docs)
 * [Failsafe overview](https://failsafe.dev/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/comparison-fault-tolerance-libraries/) on January 7^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/comparison-fault-tolerance-libraries/) on January 7th, 2022*

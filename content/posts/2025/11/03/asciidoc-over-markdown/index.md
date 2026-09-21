@@ -116,6 +116,6 @@ I hope this post gave you enough arguments to try it.
 * [Asciidoctor Diagram](https://docs.asciidoctor.org/diagram-extension/latest/)
 * [Jekyll AsciiDoc Plugin](https://github.com/asciidoctor/jekyll-asciidoc)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/asciidoc-over-markdown/) on October 26^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/asciidoc-over-markdown/) on October 26th, 2025*
 
 *[WYSIWYG]: What You See Is What You Get

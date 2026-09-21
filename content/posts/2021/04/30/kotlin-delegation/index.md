@@ -175,6 +175,6 @@ The delegate pattern is ubiquitous in the Object-Oriented Programming world. Som
 
 But delegation doesn't stop at the class level. Kotlin does provide delegation at the property level. It provides some out-of-the-box delegates, but you can easily create your own.
 
-*Original published at [A Java Geek](https://blog.frankel.ch/kotlin-delegation/) on April 18^th^, 2021*
+*Original published at [A Java Geek](https://blog.frankel.ch/kotlin-delegation/) on April 18th, 2021*
 
 *[GoF]: Gang of Four

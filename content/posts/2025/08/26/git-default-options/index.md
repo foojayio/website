@@ -123,4 +123,4 @@ Git is a huge beast. Most developers, including me, only use a fraction of its f
 * [Why does git rebase with no arguments work the way that it does?](https://stackoverflow.com/questions/50643026/why-does-git-rebase-with-no-arguments-work-the-way-that-it-does)
 * [What does command 'git rebase' mean when no arguments followed?](https://superuser.com/questions/788912/what-does-command-git-rebase-mean-when-no-arguments-followed)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/git-default-options/) on July 27^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/git-default-options/) on July 27th, 2025*

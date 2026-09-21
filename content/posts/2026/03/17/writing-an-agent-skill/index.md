@@ -137,6 +137,6 @@ The complete source code for this post can be found on [Codeberg](https://codebe
 * [Awesome Skills](https://github.com/sickn33/antigravity-awesome-skills)
 * [AGENTS.md](https://agents.md/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/writing-agent-skill/) on March 15^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/writing-agent-skill/) on March 15th, 2026.*
 
 *[DRY]: Don't Repeat Yourself

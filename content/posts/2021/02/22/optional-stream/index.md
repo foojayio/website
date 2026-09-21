@@ -113,4 +113,4 @@ Functional code doesn't necessarily mean readable code. With the last changes, I
 
 * [Option.stream() Javadoc](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/util/Optional.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/optional-stream) on February 19^th^ 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/optional-stream) on February 19th 2021*

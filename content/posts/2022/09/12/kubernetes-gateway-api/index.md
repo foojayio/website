@@ -244,6 +244,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Getting started with the Gateway API](https://gateway-api.sigs.k8s.io/guides/getting-started/)
 * [Apache APISIX Ingress Controller](https://apisix.apache.org/docs/ingress-controller/design/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/kubernetes-gateway-api/) on September 4^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/kubernetes-gateway-api/) on September 4th, 2022*
 
 *[CRD]: Custom Resource Definition

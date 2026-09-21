@@ -182,4 +182,4 @@ Before writing a plugin, I suggest you design your feature using one of the abov
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 * [Plugin Common Configurations](https://docs.api7.ai/apisix/reference/plugin-common-configurations)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/when-write-apisix-plugin/) on August 25^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/when-write-apisix-plugin/) on August 25th, 2024*

@@ -140,4 +140,4 @@ Before working on the migration, I did my due diligence and asserted the technic
 * [Hugo shortcodes](https://gohugo.io/content-management/shortcodes/)
 * [Hugo functions](https://gohugo.io/functions/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/migrating-jekyll-hugo/) on February 15^th^, 2026*
+*Originally published at [A Java Geek](https://blog.frankel.ch/migrating-jekyll-hugo/) on February 15th, 2026*

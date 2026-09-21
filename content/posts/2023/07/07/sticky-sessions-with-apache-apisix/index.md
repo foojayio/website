@@ -102,4 +102,4 @@ In this article, we detailed sticky sessions, that you should always use session
 * [Upstream configuration](https://apisix.apache.org/docs/apisix/admin-api/#request-body-parameters-3)
 * [The illusion of statelessness](https://blog.frankel.ch/illusion-statelessness/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/sticky-sessions-apache-apisix/) on June 25^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/sticky-sessions-apache-apisix/) on June 25th, 2023*

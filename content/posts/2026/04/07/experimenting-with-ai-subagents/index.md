@@ -83,6 +83,6 @@ It makes sense at every company's level: why train junior developers if the AI c
 
 * [How I Use Claude Code](https://boristane.com/blog/how-i-use-claude-code/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/experimenting-ai-subagents/) on April 5^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/experimenting-ai-subagents/) on April 5th, 2026.*
 
 *[RAG]: Retrieval-Augmented Generation

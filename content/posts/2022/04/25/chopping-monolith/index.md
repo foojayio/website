@@ -191,6 +191,6 @@ In the next post, I will go through this process with a code base and explain ea
 * [Conway's Law](https://en.wikipedia.org/wiki/Conway%27s_law)
 * [The Strangler Fig Application](https://martinfowler.com/bliki/StranglerFigApplication.html)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/chopping-monolith/) on April 24^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/chopping-monolith/) on April 24th, 2022*
 
 *[IT]: Information Technology

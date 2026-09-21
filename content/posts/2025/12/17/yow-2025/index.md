@@ -75,6 +75,6 @@ On top of the conference, the organizers made sure we tourists had tons of fun i
 
 I'd like to express my thanks to the amazing YOW! organizers, [Sabine Wolf](https://www.linkedin.com/in/sabine-s-wolf/), [Damian Maclennan](https://www.linkedin.com/in/damianmaclennan/), [Tracy Chen](https://www.linkedin.com/in/tracy--chen/), and all track hosts and volunteers. It was an amazing experience!
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/yow-2025/) on December 14^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/yow-2025/) on December 14th, 2025*
 
 *[LGTM]: Loki Grafana Tempo Mimir

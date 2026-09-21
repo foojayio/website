@@ -140,4 +140,4 @@ I hope that this post gives you ideas. For me, succeeding in this workflow unloc
 * [Script to download and install gh-aw binary](https://github.com/github/gh-aw/blob/main/install-gh-aw.sh)
 * [TrialOps](https://github.github.com/gh-aw/patterns/trial-ops/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/agentic-github-workflows/) on April 12^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/agentic-github-workflows/) on April 12th, 2026.*

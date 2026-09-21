@@ -109,7 +109,7 @@ It's a tremendous help for API implementors as it provides quick guidelines to a
 * [Standards.REST](https://standards.rest/)
 * [HTTP Client Error 4xx](https://httpwg.org/specs/rfc9110.html#status.4xx)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/structured-errors-http-apis/) on October 30^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/structured-errors-http-apis/) on October 30th, 2022*
 
 *[IETF]: Internet Engineering Task Force
 *[RFC]: Request For Comments

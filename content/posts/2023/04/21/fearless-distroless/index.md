@@ -184,4 +184,4 @@ The new `kubectl debug` command offers a clean way to fix this issue by attachin
 * [Why Distroless containers aren't the security solution you think they are](https://www.redhat.com/en/blog/why-distroless-containers-arent-security-solution-you-think-they-are)
 * [Distroless containers for security and size?](https://bell-sw.com/blog/distroless-containers-for-security-and-size/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/fearless-distroless) on April 16^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/fearless-distroless) on April 16th, 2023*

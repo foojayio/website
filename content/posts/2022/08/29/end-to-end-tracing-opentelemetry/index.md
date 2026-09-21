@@ -361,6 +361,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Python Distro](https://opentelemetry.io/docs/instrumentation/python/distro/)
 * [Jaeger Getting Started](https://www.jaegertracing.io/docs/next-release/getting-started/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/end-to-end-tracing-opentelemetry/) on August 28^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/end-to-end-tracing-opentelemetry/) on August 28th, 2022*
 
 *[CNCF]: Cloud-Native Computing Foundation

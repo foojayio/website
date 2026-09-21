@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-On March 14^th^, 2020, I landed home. I had planned the week before to be productive: one talk in Pasadena, two talks in San Francisco, one in Bucharest, and one in Istanbul. Then, on the 16^th^, I was supposed to fly again to other events.
+On March 14th, 2020, I landed home. I had planned the week before to be productive: one talk in Pasadena, two talks in San Francisco, one in Bucharest, and one in Istanbul. Then, on the 16th, I was supposed to fly again to other events.
 
 Then, Covid happened. Governments started to close borders; in turn, organizers began to cancel events. I managed to do the talk in Pasadena with about ten people in the room. The organizer of one of the San Francisco talks managed to move my talk online. The respective conference organizers canceled the other events.
 
@@ -64,4 +64,4 @@ For small meetups, I ask people to switch on their cameras **on a voluntary basi
 
 Online is another option when it comes to conferences. Just as for desk jobs, it avoids commuting and optimizes one's time. Yet, it doesn't replace the on-site experience: being human beings, both attendees and speakers require face-to-face interactions.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/online-public-speaking/) on August 29 ^th^, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/online-public-speaking/) on August 29 th, 2021*

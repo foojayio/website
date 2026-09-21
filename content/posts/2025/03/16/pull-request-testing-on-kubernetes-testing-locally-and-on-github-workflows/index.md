@@ -396,7 +396,7 @@ jobs:
    * [jobs..services](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices)
    * [vCluster](https://vcluster.com)
 
-   *Originally published on [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/1/) on February 9^th^, 2025*
+   *Originally published on [A Java Geek](https://blog.frankel.ch/pr-testing-kubernetes/1/) on February 9th, 2025*
 
 *[JVM]: Java Virtual Machine
 *[OOP]: Object-Oriented Programming

@@ -321,4 +321,4 @@ I'm always happy to add new components that feature a new stack. At the moment, 
 * [Traefik \& Kubernetes](https://doc.traefik.io/traefik/providers/kubernetes-ingress/)
 * ["Quarkus: Using OpenTelemetry"](https://quarkus.io/guides/opentelemetry)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/even-more-opentelemetry-kubernetes/) on April 6^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/even-more-opentelemetry-kubernetes/) on April 6th, 2025*

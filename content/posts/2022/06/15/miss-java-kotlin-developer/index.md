@@ -230,7 +230,7 @@ In the meantime, I'll only write Java when I have to, as Kotlin has become my la
 * [Extension functions](https://kotlinlang.org/docs/extensions.html#extension-functions)
 * [Reified type parameters](https://kotlinlang.org/docs/inline-functions.html#reified-type-parameters)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/miss-in-java-kotlin-developer/) on June 12^th^, 2022*
+*Originally published at [A Java Geek](https://blog.frankel.ch/miss-in-java-kotlin-developer/) on June 12th, 2022*
 
 *[IDE]: Integrated Development Environment
 *[DSL]: Domain-Specific Languages

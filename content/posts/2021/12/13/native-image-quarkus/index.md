@@ -381,6 +381,6 @@ The complete source code for this post can be found [on Github](https://github.c
 * [Getting started with Reactive - Mutiny](https://quarkus.io/guides/getting-started-reactive#mutiny)
 * [Container images](https://quarkus.io/guides/container-image)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/native/quarkus/) on December 11^th^* *, 2021*
+*Originally published at [A Java Geek](https://blog.frankel.ch/native/quarkus/) on December 11th* *, 2021*
 
 *[CDI]: Context and Dependency Injection

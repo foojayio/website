@@ -87,4 +87,4 @@ Once I understood the options, I made the first one work. It's good enough for m
 * [upload-pages-artifact Marketplace Action](https://github.com/marketplace/actions/upload-github-pages-artifact)
 * [deploy-pages Marketplace Action](https://github.com/marketplace/actions/deploy-github-pages-site)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/refresher-github-pages/) on June 16^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/refresher-github-pages/) on June 16th, 2024*

@@ -75,4 +75,4 @@ To iterate more quickly, I weaved in a `--sample` flag to run the full pipeline 
 
 The inventory, filter, order, and render steps are largely straightforward. Alignment is not. In the next part, I'll describe how I went from a naive approach that produced wobbly, misaligned frames to a neural matcher that gets most frames right.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/1/) on May 17^th^, 2026.*
+*Originally published at [A Java Geek](https://blog.frankel.ch/seasons-time-lapse/1/) on May 17th, 2026.*

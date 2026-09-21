@@ -138,4 +138,4 @@ Playwright allows recording videos in the context of tests, which is very useful
 * [Playwright](https://playwright.dev/)
 * [Video recording](https://playwright.dev/python/docs/videos)
 
-*Originally published on [A Java Geek](https://blog.frankel.ch/first-steps-playwright/) on January 19^th^, 2024*
+*Originally published on [A Java Geek](https://blog.frankel.ch/first-steps-playwright/) on January 19th, 2024*

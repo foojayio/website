@@ -401,4 +401,4 @@ I could write a couple of posts on `act`; I'll leave you to read the documentati
 * [Status check functions](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#status-check-functions)
 * [Introduction to act](https://nektosact.com/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/github-workflows-tips-tricks/) on August 24^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/github-workflows-tips-tricks/) on August 24th, 2025*

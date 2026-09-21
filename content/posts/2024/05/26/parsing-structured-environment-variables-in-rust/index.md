@@ -135,4 +135,4 @@ Now that it works, I'm left with two questions:
 * [lazy_static crate](https://docs.rs/lazy_static/latest/lazy_static/)
 * [envconfig crate](https://docs.rs/envconfig/latest/envconfig/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/structured-env-vars-rust/) on May 26^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/structured-env-vars-rust/) on May 26th, 2024*

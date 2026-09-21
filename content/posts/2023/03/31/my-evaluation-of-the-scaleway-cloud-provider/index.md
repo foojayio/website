@@ -114,7 +114,7 @@ If you're developing a product, be sure to take care of this aspect of things: t
 * [Scaleway](https://www.scaleway.com/)
 * [Google Cloud Run](https://cloud.google.com/run)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/evaluation-scaleway/) on March 26^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/evaluation-scaleway/) on March 26th, 2023*
 
 *[GUI]: Graphical User Interface
 *[CFP]: Call For Papers

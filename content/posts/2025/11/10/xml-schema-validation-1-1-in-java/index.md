@@ -128,4 +128,4 @@ In this post, I described my journey implementing XSD 1.1 validation in Java. It
 * [Java API for XML Processing (JAXP) Tutorial](https://www.oracle.com/java/technologies/jaxp-introduction.html)
 * [The Apache Xerces™ Project](https://xerces.apache.org/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/xml-schema-validation-1-1/) on November 9^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/xml-schema-validation-1-1/) on November 9th, 2025*

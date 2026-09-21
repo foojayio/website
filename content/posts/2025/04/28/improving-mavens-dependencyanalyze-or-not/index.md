@@ -160,4 +160,4 @@ I don't know if it's worth the time and effort. If you think it is, I hope this 
 * [Designing your own Spring Boot starter – part 1](https://blog.frankel.ch/designing-your-own-spring-boot-starter/1/)
 * [Designing your own Spring Boot starter – part 2](https://blog.frankel.ch/designing-your-own-spring-boot-starter/2/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/maven-dependency-analyze/) on March 9^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/maven-dependency-analyze/) on March 9th, 2025*

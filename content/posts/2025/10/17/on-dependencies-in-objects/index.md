@@ -166,6 +166,6 @@ Note that the call can be nested at any level inside the `context`.
 
 I guess I'll continue to use constructor injection, unless I'm coding in Kotlin. In this case, I'll be happy to use context parameters, even though they are in beta.
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/dependencies-objects/) on October 12^th^, 2025*
+*Originally published at [A Java Geek](https://blog.frankel.ch/dependencies-objects/) on October 12th, 2025*
 
 *[OOP]: Object-Oriented Programming

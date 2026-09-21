@@ -155,4 +155,4 @@ Beware of implicit returns.
 * [To be clear, Rust does not have "implicit returns"](https://news.ycombinator.com/item?id=20470081)
 * [On the merits of verbosity and the flaws of expressiveness](https://blog.frankel.ch/on-the-merits-of-verbosity-and-the-flaws-of-expressiveness/)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/pitfall-implicit-returns/) on March 17^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/pitfall-implicit-returns/) on March 17th, 2024*

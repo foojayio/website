@@ -102,6 +102,6 @@ Unfortunately, the draft is expired because of a lack of activity. I'd love to s
 * [Health Check API](https://datatracker.ietf.org/doc/html/draft-inadarei-api-health-check)
 * ["Spring Boot Actuator: Health"](https://docs.spring.io/spring-boot/docs/3.1.x/actuator-api/htmlsingle/#health)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/healthcheck-http-apis/) on May 28^th^, 2023*
+*Originally published at [A Java Geek](https://blog.frankel.ch/healthcheck-http-apis/) on May 28th, 2023*
 
 *[RFCs]: Request For Comment

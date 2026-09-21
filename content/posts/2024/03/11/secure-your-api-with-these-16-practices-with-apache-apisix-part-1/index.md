@@ -256,4 +256,4 @@ We've seen how to configure Apache APISIX to secure your APIs against 7 of the 1
 
 The rules left could be less straightforward to implement; [we will cover them in the second installment](https://foojay.io/today/secure-your-api-with-these-16-practices-with-apache-apisix-part-2/).
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/1/) on February 18^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/1/) on February 18th, 2024*

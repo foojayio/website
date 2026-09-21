@@ -116,7 +116,7 @@ public class BPFRingBuffer<E> extends BPFMap {
 }
 ```
 
-Here `$field` is the Java field name, `$maxEntries` the value in the BPFMapDefinition annotation and `$class` the name of the Java class. `$cX`, `$bX`, `$jX` give the C type name, BPFType and Java class names related to the `X`^th^ type parameter.
+Here `$field` is the Java field name, `$maxEntries` the value in the BPFMapDefinition annotation and `$class` the name of the Java class. `$cX`, `$bX`, `$jX` give the C type name, BPFType and Java class names related to the `X`th type parameter.
 
 ## Ring Buffer Sample Program
 

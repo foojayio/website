@@ -188,4 +188,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [router-radixtree](https://apisix.apache.org/docs/apisix/router-radixtree/)
 * [Route Admin API](https://apisix.apache.org/docs/apisix/admin-api/#route-api)
 
-*Originally published at [A Java Geek](https://blog.frankel.ch/fixed-routes-apisix/) on June 9^th^, 2024*
+*Originally published at [A Java Geek](https://blog.frankel.ch/fixed-routes-apisix/) on June 9th, 2024*
