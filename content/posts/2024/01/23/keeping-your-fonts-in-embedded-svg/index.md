@@ -31,10 +31,10 @@ frozen: true
 Last year, I started to use [Excalidraw](https://excalidraw.com/) as a diagram tool. However, the SVG images didn't display the font correctly. In this post, I'd like to explain the problem and offer a solution.
 
 Let's create a [sample drawing](https://excalidraw.com/#json=Cyg2f6nY2FejMfAMWt4Xg,FM1MMSQIdjxgud6PUozJfw) with Excalidraw. If you open the link, it should look something like this:
-![](sample.png)
+![The sample drawing as Excalidraw renders it: a red rounded rectangle labelled "Apache APISIX" in the handwritten Virgil font](sample.png)
 
 However, in a browser, it looks like this:
-![](sample-with-font.png)
+![The same drawing in a browser, with the label falling back to a plain sans-serif because the font did not load](sample-with-font.png)
 
 *Note that the site doesn't allow uploading SVGs for security reasons. Hence, images in this post are only for illustration purposes. If you want to check the SVGs, please check the [original post](https://blog.frankel.ch/fonts-embedded-svg/)*
 
@@ -87,7 +87,7 @@ An alternative is to copy-paste the content of the SVG file inside the HTML page
 ```
 
 The result conforms to our expectations:
-![](sample.png)
+![The drawing again in the handwritten Virgil font, this time from an inlined SVG](sample.png)
 
 The downside is that you need to copy-paste the new code when changes happen.
 
@@ -110,7 +110,7 @@ Another alternative is to transform the font to raw Base 64 data. I found [this 
 ```
 
 Because the SVG is self-contained, it now works:
-![](sample.png)
+![The drawing again in the handwritten Virgil font, this time from an SVG carrying the font as base64 data](sample.png)
 
 The downside is that we cannot use the image directly; we need the additional transform processing step.
 
@@ -123,7 +123,7 @@ The last option is the most straightforward one and the one I chose: instead of 
 ```
 
 Note the same original SVG, without any changes. And here's the result:
-![](sample.png)
+![The drawing again in the handwritten Virgil font, this time from the unchanged SVG loaded through an object tag](sample.png)
 
 The downside is that you don't get any features from the `<img>` tag.
 
