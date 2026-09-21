@@ -93,13 +93,45 @@ in `scripts/transfer/*.java`, with no override flag). The moment DNS flips they
 read the *Hugo* site instead — and they will produce empty or wrong output
 rather than failing loudly. Finish this phase before touching DNS.
 
+**Take the database dump FIRST, and this phase gets a lot less frightening.**
+A phpMyAdmin dump of `wp_foojay` is a complete, offline copy of everything
+WordPress knows, and it retires the deadline on three of the items below: the
+view counts, the comment archive and the Cloudflare email repair stop being
+"scrape it now or lose it" and become "read it out of a file whenever". A dump
+taken 2026-09-21 was diffed against `content/` in full, so the shape of what it
+holds — and the handful of things it does not — is known:
+
+- **Every published post, author, comment, category and view total.** The diff
+  found one post with a body (`keeping-your-fonts-in-embedded-svg`), one hero
+  image, five author social links, eleven redirects and eight WordPress-side
+  edits that `content/` was missing; all are fixed as of that date.
+- **View counts that are better than a crawl.** `wp_post_views` with
+  `type = '4'` is the per-post total, and on 2026-09-21 it was 87,617 views and
+  91 posts ahead of `data/legacy-views.json`. Seed from the dump, not a crawl.
+- **NOT the media files.** It is a database dump: `wp-content/uploads` paths are
+  in `wp_posts`, the bytes are not. Take a file backup too, though `content/`
+  already carries every image a post uses.
+
+The dump and its full validation notes live outside this repo (it holds password
+hashes and commenter IPs): `Foojay/WordPress backup/`, with a `README.md` next to
+it covering provenance, table inventory, a loader script and the queries behind
+each number above.
+
 - [ ] **Re-scrape anything outstanding**, then re-run the repair passes that a
       re-scrape can undo:
-      - `jbang scripts/cleanup/CloudflareEmails.java` — **this one cannot be
-        re-run after cutover at all.** It repairs from the *live HTML*, because
-        the stored files kept only Cloudflare's placeholder and the encoded copy
-        was dropped at conversion. Once WordPress is gone the addresses are
-        unrecoverable.
+      - `jbang scripts/cleanup/CloudflareEmails.java` — it repairs from the
+        *live HTML*, because the stored files kept only Cloudflare's placeholder
+        and the encoded copy was dropped at conversion. **This used to be the
+        one thing here that could not be re-run after cutover at all; the
+        database dump ends that.** Obfuscation happens at Cloudflare's edge, so
+        `wp_posts.post_content` is clean — 233 posts carry a raw address there.
+        Run the script while WordPress is up because it is the easy path, but a
+        missed address is now recoverable from the dump rather than gone.
+
+        One address is not, and no source has it: the placeholder in
+        `best-practices-for-working-with-ai-agents-subagents-skills-and-mcp` is
+        baked into `post_content` too — the author pasted it in that form. That
+        one is closed, not solved.
       - Re-check the 790 remaining cross-post `canonical:` URLs.
         `transfer/Posts.java` copies `link[rel=canonical]` through blindly, so a
         re-scrape puts back any dead one it finds — which is why the 48 already
@@ -113,8 +145,26 @@ rather than failing loudly. Finish this phase before touching DNS.
 
 - [ ] **Final view-count import:**
       `VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed`.
-      This is the last chance — the WordPress counts vanish with the site and
-      `data/legacy-views.json` is the only copy.
+
+      **Rebuild `data/legacy-views.json` from the database dump before seeding,
+      rather than from a crawl.** `LegacyViews.java` walks the live site page by
+      page; the dump answers the same question in one query, exactly, for every
+      post at once:
+
+      ```sql
+      SELECT p.post_name, v.count
+      FROM wp_post_views v JOIN wp_posts p ON p.ID = v.id
+      WHERE v.type = '4' AND p.post_type = 'post';
+      ```
+
+      That is not a tidier route to the same number. On 2026-09-21 the crawl-built
+      file was **87,617 views light across 2,169 posts, and missing 91 posts
+      outright** (the largest worth 9,997 views). Nothing was over-counted, so
+      every difference is something the crawl did not see.
+
+      It is still the last chance in the sense that matters — take the dump
+      before the site goes, and `data/legacy-views.json` remains the only copy
+      inside the repo.
 
       **Then confirm it landed**, which matters more here than anywhere else in
       this runbook: `/seed` has no sanity check of its own. `fetch/ViewCounts.java`
@@ -137,11 +187,18 @@ rather than failing loudly. Finish this phase before touching DNS.
 
 - [ ] **Final comment archive:** `jbang scripts/transfer/Comments.java`, then
       commit whatever it changed. Run it again here even if it ran earlier, to
-      pick up comments posted on WordPress in the meantime — **this is the last
-      chance**, since the bodies have no other source once the site is off.
-      Needs no credential. It rewrites a file only when that file's content
-      changed, so a run with nothing new leaves an empty diff; check `git status`
-      to see whether there was anything.
+      pick up comments posted on WordPress in the meantime. Needs no credential.
+      It rewrites a file only when that file's content changed, so a run with
+      nothing new leaves an empty diff; check `git status` to see whether there
+      was anything.
+
+      **No longer the last chance** — `wp_comments` in the dump holds every
+      comment, and the 2026-09-21 diff found `content/posts/**/comments.json`
+      already complete: 590 approved comments on 276 posts, all archived, the
+      only absentee being the two on `works-with-openjdk` (a post that redirects
+      to the home page here, so there is nowhere to show them). What the dump
+      also holds and the archive deliberately does not: 1,403 spam comments and
+      401 pingbacks.
 
       It does **not** post to GitHub Discussions any more. It used to, and
       GitHub banned the account it posted as a few posts in — see the script's
@@ -320,10 +377,27 @@ paid for at least that long.
 ## Redirect rules
 
 Everything the WordPress Redirection plugin serves has been carried into the
-repo, and **86 of its 89 concrete rules are `aliases:` in `content/`** — per-URL,
+repo, and **88 of its 92 concrete rules are `aliases:` in `content/`** — per-URL,
 so Hugo emits a redirect page for each, nothing to configure and nothing to
 forget. What follows is only what an alias cannot do: three regexes from the
 plugin export, plus two families the export never knew about.
+
+**A third thing the export never knew about: `_wp_old_slug`.** Rename a post in
+WordPress and it keeps the old slug in postmeta and redirects from it for ever,
+with no plugin rule to show for it. Nine such URLs were live and heading for a
+404 here; they are `aliases:` as of 2026-09-21, found by diffing the SQL dump
+against `content/`:
+
+```sql
+SELECT p.post_name, m.meta_value AS old_slug
+FROM wp_postmeta m JOIN wp_posts p ON p.ID = m.post_id
+WHERE m.meta_key = '_wp_old_slug';
+```
+
+Same lesson as rules 4 and 5 below, and worth **re-running that query against
+the final dump**: the plugin table lists redirects somebody *added*, and every
+rename since is invisible in it. Two more rules (ids 106 and 107, the
+`commit-created…` chain) postdate the export and are aliases now as well.
 
 **Rules 4 and 5 were not in the export**, which is why they were missed the
 first time round: it lists redirects somebody *added*, not the URLs WordPress
