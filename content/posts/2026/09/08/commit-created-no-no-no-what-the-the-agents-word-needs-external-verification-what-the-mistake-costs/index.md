@@ -21,6 +21,8 @@ related_posts:
 frozen: false
 aliases:
   - "/today/commit-created-no-no-no-what-the-the-agents-word-needs-external-verification-и-what-the-mistake-costs/"
+  - "/today/commit-created-but-it-isnt-why-the-agents-word-needs-external-verification-and-what-the-mistake-costs/"
+  - "/today/commit-created-no-no-no-wh-the-the-agents-word-needs-external-verification-и-what-the-mistake-costs/"
 ---
 
 ***A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with "done". The work has a shape. The shape looks right. You have six more tickets.***

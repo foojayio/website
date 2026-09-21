@@ -17,6 +17,8 @@ related_posts:
   - "wordish-with-javafx-part-5"
   - "wordish-with-javafx-part-4"
 frozen: false
+aliases:
+  - "/today/native-applications-for-multiple-device-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/"
 ---
 
 The post ["Starting a JavaFX Project with Gluon Tools"](https://foojay.io/today/starting-a-javafx-project-with-gluon-tools/) shows you how to start a Gluon Mobile Multiview project with a few clicks in IntelliJ IDEA thanks to the ["Gluon plugin"](https://plugins.jetbrains.com/plugin/7864-gluon).

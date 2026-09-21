@@ -1,7 +1,7 @@
 ---
 title: "Modeling Relationships With Hibernate ORM and MongoDB"
 date: "2025-11-04T17:08:49+00:00"
-lastmod: "2025-12-12T21:20:20+00:00"
+lastmod: "2026-09-01T21:46:36+00:00"
 description: "In the previous article—Getting Started With Hibernate ORM and MongoDB—we learned how to configure Hibernate to work with MongoDB, create an entity, and perform basic CRUD operations using the familiar Hibernate API.If you haven’t read that first part yet, I recommend starting there before continuing. It covers the project setup, dependencies, and the fundamentals that we’ll build upon here. In this second part, we’ll extend our application to model relationships between entities—introducing a Review entity and linking it to our existing Book class. This will allow us to explore more advanced capabilities of the MongoDB Hibernate integration, including: Representing one-to-many relationships. Storing embedded data structures. Executing more complex queries. By the end of this tutorial, you’ll see how Hibernate and MongoDB can work together to model richer, interconnected data, all while using the same familiar annotations and APIs from the ORM world."
 authors:
   - "ricardo-mello"
@@ -32,21 +32,7 @@ By the end of this tutorial, you'll see how [Hibernate and MongoDB](https://www.
 
 ## Prerequisites
 
-Before continuing, make sure you have the project from the first article up and running.  
-
-That project includes the initial configuration, the Book entity, and all CRUD operations we'll build upon here.
-
-If you don't have it yet, you can clone the repository from GitHub and check out the [**v1.0**](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v1.0) tag, which represents the state of the project at the end of the first article:
-
-```
-git clone https://github.com/mongodb-developer/mongodb-hibernate-crud.git
-
-cd mongodb-hibernate-crud/
-
-git checkout v1.0
-```
-
-Make sure your environment still meets the same requirements: Java 17+, Maven, and MongoDB 6.0+ (replica set enabled).
+Before continuing, make sure you have the project from the first article up and running.
 
 ## One-to-many relationship
 
@@ -63,8 +49,6 @@ In the current version of our project, we have a single entity—**Book**—that
 Now, we'll extend this model to make it more realistic. A book can have multiple reviews, and each review belongs to a specific book, forming a classic one-to-many relationship.
 
 ### Approach 1: Embedding reviews inside books
-
-*This section corresponds to Git* [*tag* *v2.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v2.0).
 
 The first approach we'll explore is to embed the reviews directly inside the Book document.  
 
@@ -213,8 +197,6 @@ However, this strategy has an important limitation: If a book becomes extremely 
 To address that, the next step is to **move the reviews to their own collection**, allowing them to scale independently while still keeping a logical relationship to their book.
 
 ### Approach 2: Moving reviews to a separate collection
-
-*This section corresponds to Git* [*tag* *v3.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v3.0).
 
 As we saw earlier, embedding reviews directly inside the Book document works well for small datasets, but it's not good when a book has thousands of reviews.
 
@@ -463,8 +445,6 @@ To address this, we can apply a common modeling technique known as the **Subset 
 
 ### Approach 3: Bringing back recent reviews (Subset Pattern)
 
-*This section corresponds to Git* [*tag v4.0*](https://github.com/mongodb-developer/mongodb-hibernate-crud/tree/v4.0).
-
 The [**Subset Pattern**](https://www.mongodb.com/company/blog/building-with-patterns-the-subset-pattern/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-data-modeling&utm_term=ricardo.mello) is useful when a document can potentially grow very large, but only a small portion of its data is frequently accessed. Instead of embedding all related documents (like every review ever written), we can embed only the most relevant subset, for example, **the last three**or five reviews.
 
 #### Applying the Subset Pattern
@@ -639,4 +619,4 @@ The key takeaway is that working with MongoDB requires a shift in mindset. Inste
 
 Whenever you need more control, remember that you can always fall back to the MongoDB Java Driver to run native MQL commands directly. It's a great option for edge cases where ORM abstractions might not yet expose certain MongoDB capabilities.
 
-You can find the complete project—including all three strategies (*tags v1.0, v2.0, v3.0,* and*v4.0* )—on [GitHub](https://github.com/mongodb-developer/mongodb-hibernate-crud).
+You can find the complete project on [GitHub](https://github.com/mongodb-developer/mongodb-jvm-showcase/tree/main/java/hibernate/mongodb-hibernate-crud).

@@ -11,6 +11,8 @@ categories:
   - "JDK Flight Recorder"
 related_posts:
 frozen: false
+aliases:
+  - "/today/how-when-to-use-jdk-flight-recorded-in-production/"
 ---
 
 While it would certainly be useful to record the whole lifetime, this is unpractical, even airplane Flight Data Recorders (and Cockpit Voice Recorders) only keep recent history. Instead, it's possible to aim at specific time frames where a recording could be useful:

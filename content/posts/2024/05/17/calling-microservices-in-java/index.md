@@ -5,6 +5,7 @@ lastmod: "2024-05-17T19:48:22+00:00"
 description: "This article explores various approaches to calling microservices in Java, from simple RESTful APIs to advanced. Learn more!"
 authors:
   - "abo-saad-muaath"
+image: "Screenshot-1445-10-05-at-7.23.37-AM.png"
 categories:
   - "Java"
   - "Microservices"
@@ -13,7 +14,14 @@ related_posts:
   - "book-review-monolith-to-microservices-part-1"
   - "book-review-quarkus-for-spring-developers"
   - "idempotent-spring-boot-starter"
-frozen: false
+# FROZEN to keep the hero. WordPress serves this post's og:image with a
+# NARROW NO-BREAK SPACE (U+202F) left unencoded in the URL
+# ("...7.23.37 AM.png"), which transfer/Posts.java cannot fetch -- which is
+# why this was the one post on the site with a featured image in WordPress
+# and none here. The file was pulled by hand with the space percent-encoded
+# and renamed with a hyphen (no other file under content/ has a space in its
+# name). Without the freeze the next re-scrape drops the image again.
+frozen: true
 ---
 
 **When building applications that need to call other parts of the system ([microservices](https://mezocode.com/microservices-soa-introduction-part1/ "microservices")), Java programmers have access to a variety of tools and techniques that they can use for their development tasks.**

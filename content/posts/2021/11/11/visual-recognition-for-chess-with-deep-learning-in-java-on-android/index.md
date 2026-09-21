@@ -16,6 +16,8 @@ related_posts:
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
   - "foojay-podcast-1"
 frozen: false
+aliases:
+  - "/today/visual-recognition-for-chess-using-deep-learning-in-java-on-android/"
 ---
 
 **Find out how can you use AI in Java to build applications that can see and understand the world. This article describes an Android chessboard position scanner built with pure Java deep learning engine [Deep Netts](https://www.deepnetts.com/).**

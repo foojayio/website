@@ -13,5 +13,12 @@
     "authorUrl": "https://webtechie.be/",
     "date": "2026-03-16T09:45:30",
     "html": "<p>Hi, you can find the podcast RSS here: <a href=\"https://anchor.fm/s/10b9c3cfc/podcast/rss\" rel=\"nofollow ugc noopener\" target=\"_blank\">https://anchor.fm/s/10b9c3cfc/podcast/rss</a></p>"
+  },
+  {
+    "id": 98713,
+    "depth": 0,
+    "author": "Kelvin",
+    "date": "2026-09-16T07:42:03",
+    "html": "<p>Calling out that Java 26 ships exactly a year into the “year 26” naming coincidence while being a non-LTS release is the right framing — it stops teams from treating every six-month drop as mandatory. Ten JDK Enhancement Proposals is a solid haul for a non-LTS train, and covering what is gone in the same episode as what is new is more useful than splitting it across two posts.</p>"
   }
 ]

@@ -1,13 +1,15 @@
 ---
 title: "Agentic WMS — Part 1: Where AI Agents Add Value"
 date: "2026-09-03T16:23:14+00:00"
-lastmod: "2026-09-03T19:18:50+00:00"
+lastmod: "2026-09-15T14:41:44+00:00"
 description: "With this project, I am not trying to build a complete WMS. Instead, I want to use a logistics scenario I know well to explore how an AI agent can become part of a real business workflow and where it can add value. In this first part, we will introduce the WMS scenario and identify where an AI agent can help. In Part 2, we will define and connect the agent using Java and Spring AI. Finally, in Part 3, we will execute the plan, gather context, make the replenishment decision, and act when necessary."
 authors:
   - "ricardo-mello"
 image: "Screenshot-2026-09-03-at-11.21.04-AM.jpg"
 categories:
   - "AI"
+  - "Java"
+  - "Mongo"
 related_posts:
   - "atlas-searching-with-the-java-driver"
   - "best-practices-for-deploying-mongodb-in-kubernetes"

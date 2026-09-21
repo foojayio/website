@@ -1,7 +1,7 @@
 ---
 title: "Foojay Podcast #101: Java 27 in Practice: Smaller Heaps, Smarter Defaults, and Valhalla on the Horizon"
 date: "2026-09-14T06:11:42+00:00"
-lastmod: "2026-09-14T06:11:43+00:00"
+lastmod: "2026-09-14T12:23:18+00:00"
 description: "JDK 27 arrives on 15 September 2026, and it is a feature release rather than a Long-Term Support one. That distinction matters less than it sounds: as…"
 authors:
   - "frankdelporte"
@@ -17,7 +17,7 @@ related_posts:
   - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
   - "azul-august-2026-release-javas-first-monthly-cspu"
   - "what-should-i-know-about-garbage-collection-as-a-java-developer"
-frozen: false
+frozen: true
 ---
 
 JDK 27 arrives on 15 September 2026, and it is a feature release rather than a Long-Term Support one. That distinction matters less than it sounds: as Simon Ritter points out, all OpenJDK releases are delivered the same way, and "long-term support" is a property of the binary distributions you install, not of the platform itself. What JDK 27 does have is two changes that switch on by default and cost you nothing but the upgrade. Compact object headers shrink the per-object header from 64 bits to 32, which the JEP measures at a 22% reduction in heap and 8% in CPU on SPECjbb2015 — and because it is internal to the JVM, a JAR you built years ago benefits without a single line changing. Alongside it, G1 becomes the default garbage collector everywhere, including the small, single-core machines that used to fall back to the serial collector.

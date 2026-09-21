@@ -11,6 +11,8 @@ categories:
   - "Performance"
 related_posts:
 frozen: false
+aliases:
+  - "/today/peter-lawrey-talks-about-low-latency-high-performance-java/"
 ---
 
 About 7 years ago, I attended a session given by Java Champion Peter Lawrey, leader of [Chronical Software](https://chronicle.software "Chronical Software"), at a JavaOne conference. Since most of my prior development work in the realm of low-latency high-performance was C/C++ software, I was very interested in hearing what Peter might say about how Java addresses this problem.

@@ -15,6 +15,8 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "jurassic-jdk-migrate-or-extinct"
 frozen: false
+aliases:
+  - "/today/container-awareness-for-java-developer/"
 ---
 
 When you containerize a Java application, make sure you use a base JDK image that is container-aware (CGroup aware) so that the JDK can allocate memory and CPU counts properly.

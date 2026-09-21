@@ -1,7 +1,7 @@
 ---
-title: "Did Your AI Agent Run the Debugger? One JVM Bug, Two Agent Runs"
+title: "Did Your AI Agent Ever Run a Debugger? One JVM Bug, Two Agent Runs"
 date: "2026-09-03T13:48:32+00:00"
-lastmod: "2026-09-07T11:39:12+00:00"
+lastmod: "2026-09-08T09:32:37+00:00"
 description: "Java developers reach for the debugger without thinking about it. Set a breakpoint, run the failing test, look at the variables, then decide what to…"
 authors:
   - "viktoria-evdokimova"
@@ -16,7 +16,14 @@ categories:
   - "Kotlin"
   - "LLM"
 related_posts:
-frozen: false
+# FROZEN because the LIVE WORDPRESS COPY IS THE BROKEN ONE. The 2026-09-08 edit
+# there mangled six links in the body -- schemes stripped
+# ("github.com/obra/superpowers"), doubled ("http:https://...///"), one anchor
+# text spliced into the middle of another -- almost certainly a bad find/replace
+# in the WP editor. A re-scrape reproduces the damage faithfully, so this file
+# keeps the title from that edit (a real improvement) and the body from before
+# it. Nothing here needs re-fetching; the dump confirms WP has no better copy.
+frozen: true
 ---
 
 Java developers reach for the debugger without thinking about it. Set a breakpoint, run the failing test, look at the variables, then decide what to change.
