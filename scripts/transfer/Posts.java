@@ -155,6 +155,21 @@ public class Posts {
     // so the newest-first cutoff logic holds); isLikelyPostUrl() then drops any
     // taxonomy/pagination/author links. Pagination is a.next (…page/N/).
     static final String SELECTOR_LISTING_POST_LINKS = "section.section-blog a[href*=/today/]";
+    /**
+     * The author archive is a DIFFERENT TEMPLATE, and the main-feed selector
+     * silently matches nothing on it: /today/author/<slug>/ has no
+     * <section class="section-blog"> at all -- its cards live in
+     * .new-author__content (one .article-big for the newest, then
+     * .section-blog__small-articles, which is a div whose class merely starts
+     * with the same word). Verified against the live page, 2026-09.
+     *
+     * Scoping to .new-author__content also does here what section-blog does
+     * there: it keeps the sidebar's "most viewed" and the author card's own
+     * links out of the crawl. Unlike the main feed there is no out-of-order
+     * featured card to worry about -- every card on this page is this author's.
+     */
+    static final String SELECTOR_AUTHOR_LISTING_POST_LINKS =
+            ".new-author__content a[href*=/today/]";
     static final String SELECTOR_PAGINATION_NEXT = "a.next, a[rel=next]";
     // Verified against foojay.io's live post markup (2026-07): the body lives in
     // .article__main-content, which also holds the <h1> and the date/read-time
@@ -376,7 +391,9 @@ public class Posts {
                 }
 
                 List<String> pageUrls = new ArrayList<>();
-                for (Element a : doc.select(SELECTOR_LISTING_POST_LINKS)) {
+                for (Element a : doc.select(author == null
+                        ? SELECTOR_LISTING_POST_LINKS
+                        : SELECTOR_AUTHOR_LISTING_POST_LINKS)) {
                     String href = a.absUrl("href");
                     if (!isLikelyPostUrl(href)) continue;
                     String url = stripTrailingSlash(href) + "/";
