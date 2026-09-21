@@ -2926,7 +2926,27 @@ body.lightbox-open { overflow: hidden; }
    image, instead of leaving empty space under it. --- */
 .post-header { margin-bottom: 1.75rem; }
 .post-header::after { content: ""; display: block; clear: both; } /* contain the float */
-.post-header h1 { margin-top: 0; }
+/* BALANCED, so a title does not end on one orphan word. "Come for Java. Get a
+   Whole Lot More." broke as "...Get a Whole / Lot More." at every window width
+   from 660px to 1550px; balanced it breaks at the full stop instead, which is
+   where a reader would break it.
+
+   The inherited `text-wrap: pretty` on body does not cover this. Pretty only
+   pulls a word down to lengthen a short last line when it can do so without
+   changing any earlier break -- and it cannot here, because the FLOATED HERO
+   shortens the first line: every line above the last is already as full as it
+   goes. Balance is allowed to re-break the whole block, so it can trade the
+   first line's width for a last line that carries its weight.
+
+   Measured on the longest titles in the archive (three and four lines, 100 to
+   127 characters) before turning it on: balance either left them exactly as
+   they were or moved a word down onto the last line. Chrome stops balancing
+   past six lines, and no title in the archive reaches that even on a phone.
+
+   Same reason and same property as .post-card--lead .post-card-title, which
+   has carried this since the card grid was built -- a post's title and that
+   post's own card were breaking by different rules. */
+.post-header h1 { margin-top: 0; text-wrap: balance; }
 .post-single .post-header .post-hero {
   float: left; width: 120px; height: auto; margin: .15rem 1.25rem .5rem 0;
   border-radius: var(--radius);
