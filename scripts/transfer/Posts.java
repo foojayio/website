@@ -41,7 +41,17 @@ import java.util.stream.Stream;
  *   jbang scripts/transfer/Posts.java --days 14             (only posts published in the last 14 days)
  *   jbang scripts/transfer/Posts.java --since 2026-01-01    (only posts published on/after a date)
  *   jbang scripts/transfer/Posts.java --concurrency 12      (posts scraped per page in parallel; default 8)
+ *   jbang scripts/transfer/Posts.java --author nicolas-frankel  (only that author's posts)
  *   jbang scripts/transfer/Posts.java --url https://foojay.io/today/some-post/   (single post)
+ *
+ * AN UNKNOWN FLAG IS AN ERROR, and that is not pedantry. `--author` did not
+ * exist until somebody used it: the loop below silently ignored what it did not
+ * recognise, so `--author nicolas-frankel` ran a FULL crawl of all 2191 posts.
+ * It re-scraped every post on the site, reverted 485 of them to whatever the
+ * converter produces today -- related_posts churn, `**bold**` turned into code
+ * spans, the space after an image link eaten -- and pulled 41 MB of images back
+ * into bundles that cleanup/images.py had already shrunk. All of it silent, all
+ * of it green. A typo must stop the run, not widen it.
  *
  * Each listing page's posts are scraped + converted concurrently on virtual
  * threads (see crawlAndConvert), bounded by --concurrency to stay polite.
@@ -94,6 +104,25 @@ public class Posts {
     // ---- CONFIG -------------------------------------------------------
     static final String BASE_URL = "https://foojay.io";
     static final String LISTING_PATH = "/today/";
+    /**
+     * WordPress publishes a per-author archive at /today/author/<slug>/, with the
+     * same section-blog markup and the same a.next pagination as the main feed --
+     * verified against the live site (2026-09). So --author is not a filter applied
+     * to a full crawl; it is a different, much shorter feed to walk: 28 pages for a
+     * prolific author against 150+ for /today/, and no post outside their work is
+     * ever fetched.
+     */
+    static final String AUTHOR_LISTING_PATH = "/today/author/%s/";
+
+    static final String USAGE =
+            "Usage:\n"
+              + "  jbang scripts/transfer/Posts.java                      (full crawl)\n"
+              + "  jbang scripts/transfer/Posts.java --author <slug>      (one author's posts)\n"
+              + "  jbang scripts/transfer/Posts.java --url <post url>     (single post)\n"
+              + "  jbang scripts/transfer/Posts.java --days <n>           (published in the last n days)\n"
+              + "  jbang scripts/transfer/Posts.java --since <yyyy-mm-dd> (published on/after a date)\n"
+              + "  jbang scripts/transfer/Posts.java --max-pages <n>      (cap listing pages)\n"
+              + "  jbang scripts/transfer/Posts.java --concurrency <n>    (default 8)\n";
     static final Path OUTPUT_DIR = Path.of("content/posts");
     static final int REQUEST_TIMEOUT_MS = 20_000;
     static final int MAX_EMPTY_PAGES = 2;   // with --days/--since: stop after this many consecutive out-of-window pages
@@ -193,19 +222,25 @@ public class Posts {
 
         Integer maxPages = null;
         String singleUrl = null;
+        String author = null;
         OffsetDateTime cutoff = null; // only convert posts published on/after this
         int concurrency = DEFAULT_CONCURRENCY;
         for (int i = 0; i < args.length; i++) {
-            if ("--max-pages".equals(args[i]) && i + 1 < args.length) {
-                maxPages = Integer.parseInt(args[++i]);
-            } else if ("--url".equals(args[i]) && i + 1 < args.length) {
-                singleUrl = args[++i];
-            } else if ("--days".equals(args[i]) && i + 1 < args.length) {
-                cutoff = OffsetDateTime.now().minusDays(Long.parseLong(args[++i]));
-            } else if ("--since".equals(args[i]) && i + 1 < args.length) {
-                cutoff = LocalDate.parse(args[++i]).atStartOfDay().atOffset(ZoneOffset.UTC);
-            } else if ("--concurrency".equals(args[i]) && i + 1 < args.length) {
-                concurrency = Math.max(1, Integer.parseInt(args[++i]));
+            switch (args[i]) {
+                case "--max-pages" -> maxPages = Integer.parseInt(value(args, ++i, "--max-pages"));
+                case "--url" -> singleUrl = value(args, ++i, "--url");
+                case "--author" -> author = value(args, ++i, "--author");
+                case "--days" -> cutoff =
+                        OffsetDateTime.now().minusDays(Long.parseLong(value(args, ++i, "--days")));
+                case "--since" -> cutoff = LocalDate.parse(value(args, ++i, "--since"))
+                        .atStartOfDay().atOffset(ZoneOffset.UTC);
+                case "--concurrency" ->
+                        concurrency = Math.max(1, Integer.parseInt(value(args, ++i, "--concurrency")));
+                default -> {
+                    System.err.println("Unknown option: " + args[i]);
+                    System.err.println(USAGE);
+                    System.exit(2);
+                }
             }
         }
 
@@ -219,10 +254,45 @@ public class Posts {
         if (cutoff != null) {
             System.out.println("Only converting posts published on/after " + cutoff.toLocalDate() + ".");
         }
+        if (author != null) {
+            System.out.println("Only walking " + BASE_URL + String.format(AUTHOR_LISTING_PATH, author)
+                    + " -- no other author's post is fetched.");
+            warnIfUnknownAuthor(author);
+        }
 
-        int[] r = crawlAndConvert(cutoff, maxPages, concurrency);
+        int[] r = crawlAndConvert(cutoff, maxPages, concurrency, author);
         // writePost() files each post under content/posts/<year>/<month>/<slug>.md.
         System.out.printf("Done. written=%d skipped(frozen)=%d failed=%d%n", r[0], r[1], r[2]);
+    }
+
+    /**
+     * The value that follows a flag, or a clean exit saying which flag is short
+     * of one. The old parser folded `i + 1 < args.length` into matching the flag
+     * itself, so a trailing `--since` with no date simply fell through and the
+     * run ignored it -- the same silent shape as the unknown option above, one
+     * argument later.
+     */
+    static String value(String[] args, int i, String flag) {
+        if (i >= args.length) {
+            System.err.println(flag + " needs a value.");
+            System.err.println(USAGE);
+            System.exit(2);
+        }
+        return args[i];
+    }
+
+    /**
+     * Says so when --author names nobody we have a bundle for. NOT fatal: the
+     * upstream archive is the authority, and an author can have posts on
+     * foojay.io before content/authors/<slug>/ exists locally. A typo is far
+     * likelier than that, though -- and it otherwise shows up only as a crawl
+     * that walks a few failing pages and writes nothing.
+     */
+    static void warnIfUnknownAuthor(String slug) {
+        if (!Files.isDirectory(Path.of("content", "authors", slug))) {
+            System.out.println("  NOTE: there is no content/authors/" + slug + "/ bundle"
+                    + " -- check the slug if the crawl below finds no posts.");
+        }
     }
 
     // ---- Listing crawl --------------------------------------------------
@@ -246,16 +316,25 @@ public class Posts {
      * MAX_EMPTY_PAGES consecutive listing pages with nothing in-window. Pair with
      * --max-pages to hard-cap the number of listing pages fetched for a quick test.
      */
-    static int[] crawlAndConvert(OffsetDateTime cutoff, Integer maxPages, int concurrency)
-            throws IOException, InterruptedException {
+    static int[] crawlAndConvert(OffsetDateTime cutoff, Integer maxPages, int concurrency,
+                                 String author) throws IOException, InterruptedException {
         AtomicInteger written = new AtomicInteger();
         AtomicInteger skippedFrozen = new AtomicInteger();
         AtomicInteger failed = new AtomicInteger();
         Set<String> seen = new HashSet<>();
         Semaphore gate = new Semaphore(concurrency); // bound concurrent requests
 
+        // --author swaps the feed, not the filter: /today/author/<slug>/ pages
+        // exactly like /today/ (same section-blog, same a.next), so everything
+        // below -- pagination, the cutoff bookkeeping, the failure recovery that
+        // rebuilds a page URL by number -- works unchanged against a base that is
+        // one line different.
+        String listingBase = author == null
+                ? LISTING_PATH
+                : String.format(AUTHOR_LISTING_PATH, author);
+
         try (ExecutorService pool = Executors.newVirtualThreadPerTaskExecutor()) {
-            String pageUrl = BASE_URL + LISTING_PATH;
+            String pageUrl = BASE_URL + listingBase;
             int page = 1;
             int emptyPages = 0;
 
@@ -275,13 +354,23 @@ public class Posts {
                     listingFailures = 0;
                 } catch (IOException e) {
                     System.err.println("LISTING FAILED: " + pageUrl + " -> " + e);
+                    // Page 1 of an author feed is not a flaky page, it is the
+                    // wrong slug: /today/author/<typo>/ is a 404. Stepping over
+                    // it to try pages 2 and 3 of the same wrong archive only
+                    // buries the answer under two more retried 404s.
+                    if (author != null && page == 1) {
+                        System.err.println("  Is \"" + author + "\" the right author slug?"
+                                + " It is the last path segment of the author link on any of"
+                                + " their posts.");
+                        break;
+                    }
                     if (++listingFailures >= MAX_LISTING_FAILURES) {
                         System.err.println("Giving up after " + listingFailures
                                 + " consecutive listing failures; posts already written are kept.");
                         break;
                     }
                     page++;
-                    pageUrl = BASE_URL + LISTING_PATH + "page/" + page + "/";
+                    pageUrl = BASE_URL + listingBase + "page/" + page + "/";
                     if (maxPages != null && page > maxPages) break;
                     continue;
                 }
@@ -292,6 +381,18 @@ public class Posts {
                     if (!isLikelyPostUrl(href)) continue;
                     String url = stripTrailingSlash(href) + "/";
                     if (seen.add(url)) pageUrls.add(url);
+                }
+
+                // AN AUTHOR FEED THAT IS EMPTY ON PAGE 1 IS A BAD SLUG, and saying so
+                // beats the alternative: WordPress answers /today/author/<typo>/
+                // with a 200 and an empty archive, so without this the run walks
+                // MAX_EMPTY_PAGES of nothing and reports "written=0" as though the
+                // author had simply published nothing.
+                if (author != null && page == 1 && pageUrls.isEmpty()) {
+                    System.err.println("No posts at " + pageUrl + " -- is \"" + author
+                            + "\" the right author slug? (it is the last path segment of the"
+                            + " author link on any of their posts)");
+                    break;
                 }
 
                 List<Future<Boolean>> futures = new ArrayList<>();
