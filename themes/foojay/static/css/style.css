@@ -2184,8 +2184,14 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    it. What the row cannot supply is what the partial adds -- and
    `.author-social a` is 0-1-1, so it outranks `.feed-link` (0-1-0) and would
    win on `display: inline-block`, which drops the icon onto the text baseline.
-   Restate only what actually collides. */
-.author-social a.feed-link { display: inline-flex; align-items: center; }
+   Restate only what actually collides.
+
+   `line-height` collides the other way round: .feed-link's own 1.3 is what a
+   meta line next to a read count wants, but a pill in this row is sized by the
+   body's 1.65 and the RSS one came out ~5px shorter than the Bluesky one
+   beside it. `inherit` takes the row's value rather than restating 1.65, so
+   the two cannot drift apart again. */
+.author-social a.feed-link { display: inline-flex; align-items: center; line-height: inherit; }
 .author-social a.feed-link:hover, .author-social a.feed-link:focus-visible {
   border-color: var(--feed); color: var(--ink);
 }
