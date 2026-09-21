@@ -117,7 +117,15 @@ except ImportError:
 Image.MAX_IMAGE_PIXELS = None
 
 RASTER = {".png", ".jpg", ".jpeg"}
-INDEX_NAMES = ("index.md", "_index.md")
+# index.adoc BELONGS HERE, and leaving it out was a silent data loss rather than
+# a missing feature. An AsciiDoc post is the same page bundle with the same YAML
+# frontmatter (template/post.adoc, draft/README.md) -- so passes 1 and 4 happily
+# renamed its foo.png to foo.jpg and unlinked the original, then rewrote the
+# references in an index.md that does not exist. The result is a broken image
+# with a green build, which is the one outcome this script is written to avoid.
+# The reference regex needs nothing: it matches on the filename, so AsciiDoc's
+# `image::foo.png[]` is caught by the same pattern as Markdown's `](foo.png)`.
+INDEX_NAMES = ("index.md", "_index.md", "index.adoc")
 
 # (long-edge cap, WebP quality). Tried in order until the result fits the budget;
 # the last rung is deliberately aggressive, because a screencast that still will
@@ -350,7 +358,10 @@ def is_animated(path):
 def fix_animated_heroes(root, cap, dry_run):
     """Repoint an animated `image:` at a still poster. Returns (fixed, orphaned)."""
     fixed, orphaned = [], []
-    for md in sorted(list(root.rglob("index.md")) + list(root.rglob("_index.md"))):
+    indexes = []
+    for name in INDEX_NAMES:
+        indexes.extend(root.rglob(name))
+    for md in sorted(indexes):
         text = md.read_text(encoding="utf-8", errors="replace")
         end = text.find("\n---", 3)
         if end < 0:
