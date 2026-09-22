@@ -20,6 +20,8 @@ repository, and publishing an article is a pull request.
 If you only read one paragraph: **nothing you have written has moved, and
 nothing you need to do has changed, except if you want to [contribute content](/today/how-to-submit-your-next-article-on-foojay-io/).**
 
+{{< youtube B11taLdZHtw >}}
+
 ## Why This Change?
 
 Foojay was a WordPress site, and it did the job for six years and 2,000+

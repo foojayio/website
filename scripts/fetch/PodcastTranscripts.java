@@ -76,8 +76,8 @@ public class PodcastTranscripts {
         String onlySlug = valueOf(argv, "--slug");
         int limit = Integer.parseInt(Objects.requireNonNullElse(valueOf(argv, "--limit"), "0"));
 
-        List<Episode> episodes = discover();
-        System.out.println(episodes.size() + " podcast episode(s) with a video");
+        List<Episode> episodes = discover(onlySlug);
+        System.out.println(episodes.size() + " post(s) with a video");
         if (onlySlug != null) {
             episodes = episodes.stream().filter(e -> e.slug.equals(onlySlug)).toList();
             if (episodes.isEmpty()) { System.err.println("no episode with slug " + onlySlug); System.exit(1); }
@@ -140,8 +140,16 @@ public class PodcastTranscripts {
     /** Every post in the "Podcast" category that embeds a video. The category is
      *  the definition of what an episode is -- the same one the site's own
      *  listing uses -- rather than a slug pattern, which would miss the episodes
-     *  whose slug is a title instead of `foojay-podcast-N`. */
-    static List<Episode> discover() throws IOException {
+     *  whose slug is a title instead of `foojay-podcast-N`.
+     *
+     *  A POST NAMED WITH --slug IS TAKEN WHATEVER ITS CATEGORY, because the
+     *  category answers "what should a full run pick up", not "what can carry a
+     *  transcript". posts/single.html renders `transcript.md` off
+     *  `.Resources.GetMatch` for any post at all, so an article that embeds a
+     *  video -- a release announcement, a conference talk write-up -- gets the
+     *  same reader-facing benefit as an episode. Naming one is explicit enough
+     *  to be the whole opt-in. */
+    static List<Episode> discover(String onlySlug) throws IOException {
         List<Episode> found = new ArrayList<>();
         List<String> noVideo = new ArrayList<>();
         if (!Files.isDirectory(POSTS)) return found;
@@ -151,9 +159,9 @@ public class PodcastTranscripts {
                 int end = text.indexOf("\n---", 3);
                 if (end < 0) continue;
                 String frontmatter = text.substring(0, end);
-                if (!PODCAST_CATEGORY.matcher(frontmatter).find()) continue;
-
                 String slug = index.getParent().getFileName().toString();
+                boolean named = slug.equals(onlySlug);
+                if (!named && !PODCAST_CATEGORY.matcher(frontmatter).find()) continue;
                 Matcher title = TITLE.matcher(frontmatter);
                 Matcher yt = YOUTUBE.matcher(text.substring(end));
                 String id = null;

@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the new Foojay!"
 description: "The same content from amazing Java developers, now in a new home. Foojay has been rebuilt from the ground up — faster pages, better search, and every article and every link exactly where you left it. Click around and discover..."
-link: "/today/announcing-the-new-foojay"
+link: "https://foojay.io/today/announcing-the-new-foojay/"
 cta: "Read more"
 image: "foojay-social-card.png"
 background: "#ffffff"
