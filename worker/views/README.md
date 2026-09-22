@@ -73,17 +73,15 @@ by omitting a correct one and watching the count stay put).
 
 ## Loading the WordPress numbers
 
-From the repo root, with the token from step 3:
+Done, and the tool is gone. `scripts/transfer/LegacyViews.java` fetched the
+WordPress counts into `data/legacy-views.json` and pushed them to `/seed`, and
+it was deleted with the rest of `scripts/transfer/` after the final import. Look
+in the git history if you ever need to read it.
 
-```bash
-jbang scripts/transfer/LegacyViews.java                       # writes data/legacy-views.json
-VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed   # ...and pushes it
-```
-
-Re-run this whenever you want to catch up with WordPress — right up to cutover.
-`/seed` **sets** the `legacy` column rather than adding to it, so re-running is
-idempotent and never doubles a number. Views counted here in the meantime live
-in a separate `live` column and are not touched.
+`data/legacy-views.json` stays in the repo as the only surviving copy of those
+numbers. The counter holds them in its `legacy` column, a reader's hit
+increments `live`, and `/all` returns the sum. A page published from now on gets
+its row from the first beacon hit, so nothing needs seeding again.
 
 ## Endpoints
 

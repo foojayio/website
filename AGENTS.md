@@ -46,27 +46,22 @@ should catch a mistake at PR time rather than letting it fail silently.
   `authors:` list of author *folders*, so anything created from it failed
   `validate/Frontmatter.java`. Add starter files to `template/`, not `archetypes/`.
 - **`scripts/` is grouped by lifetime, not by verb** — `fetch/` (external data,
-  runs in CI, outlives the migration), `transfer/` (reads the live WordPress
-  site, deleted at cutover), `cleanup/` (one-off rewrites of what is already in
-  `content/`, deleted at cutover), `validate/` (PR-time checks) and `shared/`
-  (common code, never run on its own). The question a folder answers is "does
-  this still exist after cutover?", which is the one that actually matters here:
-  two of the five folders get deleted whole, and nothing has to be untangled
-  from the ones that stay. So a script is named for **what it produces**, with
-  the folder supplying the verb — `fetch/Jugs.java`, not `FetchJugs.java` in a
-  flat directory of twenty. `shared/HtmlToMarkdown.java` is pulled in with
-  `//SOURCES ../shared/HtmlToMarkdown.java`; jbang resolves that relative to the
-  calling script, and every script still runs from the repo root because they
-  resolve `content/`/`data/` against the working directory, not their own path.
-  `scripts/README.md` is the per-folder index — add a new script's line there.
-- **Two jbang conversion scripts** in `scripts/`: `transfer/Posts.java` and
-  `transfer/Authors.java`. They scrape the live foojay.io site (no WP admin/DB
-  access was used or assumed) and write Hugo content markdown. Both are
-  idempotent (safe to re-run repeatedly) and respect a `frozen: true` frontmatter
-  flag to avoid clobbering hand-edited files. (The one-off `ConvertPages.java`
-  and `ConvertPedia.java` scrapers were removed once `content/pages/` and
-  `content/pedia/` were converted — those sections are hand-maintained now; only
-  posts and authors keep growing on the live site, so only those are re-scraped.)
+  runs in CI) and `validate/` (PR-time checks). It had three more: `transfer/`,
+  `cleanup/` and the `shared/` converter they both called. The grouping is why
+  they were a clean delete at cutover: the question a folder answered was "does
+  this still exist after cutover?", so three of the five went whole and nothing
+  had to be untangled from the two that stay. A script is named for **what it
+  produces**, with the folder supplying the verb — `fetch/Jugs.java`, not
+  `FetchJugs.java` in a flat directory of twenty. Every script runs from the
+  repo root, because they resolve `content/`/`data/` against the working
+  directory rather than their own path. `scripts/README.md` is the per-folder
+  index — add a new script's line there.
+- **`content/` came out of a scraper, not a database export.** `Posts.java` and
+  `Authors.java` in the deleted `scripts/transfer/` read the live foojay.io site
+  (no WP admin or DB access was used or assumed) and wrote the Hugo markdown
+  that is in the repo today. That matters when something in `content/` looks
+  odd: the answer is usually "this is what the WordPress page rendered", and the
+  conventions below say so where it bites.
 - **`scripts/fetch/Jugs.java`**: regenerates `data/jugs.yaml` from the
   community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs)
   (one Markdown-with-YAML-frontmatter file per JUG under its `_jugs/`
@@ -433,152 +428,21 @@ should catch a mistake at PR time rather than letting it fail silently.
   each new episode, so it does not need re-measuring. Worth revisiting
   deliberately -- the search page already gives each section its own quota --
   rather than by default.
-- **`scripts/transfer/Sponsors.java`**: converts the sponsor section from the live
-  WP site into `content/sponsors/<wp-slug>/index.md` page bundles (logo pulled
-  local as a bundle resource, About text through `HtmlToMarkdown`). Reads the
-  index at `/our-sponsors/` for the tier, then each `/sponsor/<slug>/` profile
-  for the rest. Idempotent and `frozen: true`-aware like the other
-  `transfer/` scrapers, and run by hand for the same reason they are — it scrapes the
-  WordPress site that goes away at cutover, so it does **not** belong in CI
-  next to `fetch/Jugs.java`/`fetch/JavaChampions.java` (those pull from upstream GitHub
-  repos that outlive the migration). See "sponsors ↔ articles" below for the
-  one field it deliberately does not own.
-- **`scripts/cleanup/EnlighterToFences.java`**: rewrites legacy EnlighterJS code
-  markup already sitting in `content/` (`<pre class="EnlighterJSRAW"
-  data-enlighter-language="java" …>`, inline `<code class="EnlighterJSRAW">`,
-  and hand-written ` ```EnlighterJSRAW ` info strings) as plain Markdown
-  fences. **Storage format only — the site is visually unchanged**: the
-  EnlighterJS markup goes back on at render time (see "code blocks" below).
-  Contributors send posts as PRs, and a fence is what they already know how to
-  type; eight attributes of WordPress plumbing is not. Already run over the
-  whole tree, and idempotent — a re-run is a no-op. It stays in the repo
-  because the WP site keeps serving Enlighter markup until cutover, so a late
-  re-scrape can reintroduce blocks. `--dry-run` reports without writing;
-  `--path <dir>` narrows the scan.
-
-  It also repairs **WordPress's double-escaping inside fences** — bodies that
-  store a lambda arrow as `-&amp;gt;`, so the code renders as `-&gt;`. (The
-  live WP site shows those wrong too; it's an old content bug, not a conversion
-  one.) The rule lives in `HtmlToMarkdown.resolveDoubleEscaped` so the scrapers
-  and this script agree, and it is deliberately narrow: `&lt; &gt; &quot;
-  &apos;` always resolve, but a bare `&amp;` does **not** — in an XML/XHTML
-  sample `&amp;` is correct source. `&amp;` is only resolved as the `&&`
-  operator, a shell redirect (`2>&1`) or a URL query separator. Don't "simplify"
-  this into a second blanket unescape: content/ has a JSF snippet whose
-  `value="Food &amp; Culture"` and a post that appends a literal `"&nbsp;"`
-  string, and a blanket pass corrupts both.
-
-  It also turns the **non-breaking spaces WordPress indents code with** into
-  ordinary ones (`HtmlToMarkdown.normalizeCodeSpaces`). A U+00A0 looks like an
-  indent in the rendered block but isn't one — copy the sample out and the
-  compiler chokes on it. This script always did it; the SCRAPER did not, so a
-  re-scrape put 10,270 of them back across 36 posts. Both call the same method
-  now. Fence bodies and inline code only — a U+00A0 in prose is left alone (147
-  of them, harmless, and sometimes deliberate).
-
-  The repair covers **fence bodies, inline code spans and Markdown link
-  destinations** — the three places WP damage can land. Code spans get the same
-  `resolveDoubleEscaped` rule as fences (Markdown doesn't decode entities inside
-  `` ` `` either, so `` `DESCRIBE KEYSPACE &lt;name>` `` renders a literal
-  `&lt;`). Destinations get `HtmlToMarkdown.resolveEscapedUrl` instead, which
-  collapses `&amp;` to `&` repeatedly. Note what that is and isn't fixing:
-  `?a=1&amp;b=2` is CORRECT Markdown (CommonMark decodes entities in
-  destinations) and only the over-escaped `?a=1&amp;amp;b=2` actually renders
-  wrong. The collapse is applied anyway so storage matches what an author would
-  type and what a re-scrape now emits — of the 78 files it touched, 76 were
-  provably no-ops (built HTML diffed before/after: 2 pages changed). Bare prose
-  and preserved raw-HTML blocks are never touched — a post has a *table of
-  entity names* as its subject matter, and in raw HTML `&amp;` is correct
-  markup.
-- **`scripts/cleanup/GalleriesToShortcode.java`**: one-off migration that
-  replaced the WordPress gallery markup in `content/` with the
-  `{{< gallery >}}` shortcode — 55 posts, 94 galleries, 259 images, both block
-  shapes (nested `<figure>`s and the older `<ul class="blocks-gallery-grid">`).
-  Same reasoning and same shape as `cleanup/EnlighterToFences.java`: a
-  contributor can't be asked to type 30 lines of block markup, and a gallery is
-  a list of filenames. It calls `HtmlToMarkdown.galleryShortcode`, which the
-  scrapers now use too, so a re-scrape emits the same thing and a re-run here is
-  a no-op. `--dry-run` / `--path` as usual. See the gallery convention below for
-  what the shortcode derives rather than stores.
-- **`scripts/cleanup/CloudflareEmails.java`**: one-off migration that put back the
-  email addresses Cloudflare hid from the scrapers. foojay.io is behind
-  Cloudflare with **Email Address Obfuscation** on, so an address never reaches
-  a non-browser client: the HTML carries a placeholder plus an XOR-encoded copy,
-  and a script in the *reader's* browser swaps them back. Nothing here runs
-  JavaScript, so the literal `[email protected]` landed in `content/` and every
-  mailto became a dead `](/cdn-cgi/l/email-protection)` -- 293 occurrences across
-  161 files. Cloudflare matches a loose `x@y`, so it also mangled things that
-  merely look like addresses, **inside code**: `git@github.com:...` in a clone
-  command and every line of `java --list-modules` output (`javafx.base@14.0.2`).
-  `HtmlToMarkdown.decodeCloudflareEmails` now undoes all of it at conversion
-  time, so a re-scrape emits the right thing and a re-run here is a no-op.
-
-  Unlike the other migrations this one **cannot repair from what it has** -- the
-  stored files kept only the placeholder, the encoded copy was dropped by the
-  converter -- so it re-fetches each affected page and reads the addresses back
-  out of the live HTML. That makes the safety rule the interesting part: a file
-  is only written when its placeholder count matches the number of obfuscated
-  elements in the live page body, so the n-th placeholder provably pairs with
-  the n-th address; a file that doesn't match is left alone and reported, never
-  guessed at. `--dry-run` / `--path` as usual. 148 files, 279 addresses. One
-  known leftover: one post
-  really does contain the words "[email protected]" in a prompt example (the
-  live page has the same literal). Run it again after any late re-scrape, before
-  cutover kills the only source of these addresses.
-- **`scripts/transfer/Comments.java`**: captures the legacy WordPress comments
-  (580 approved across 270 posts, read from foojay.io's open
-  `/wp-json/wp/v2/comments` — no admin access needed) into the repo as **one
-  `comments.json` per post bundle**, so cutover doesn't reset every post to zero
-  comments. `partials/legacy-comments.html` renders them under the giscus widget
-  as "Discussions on the previous Foojay site". Needs **no credential** and
-  writes nothing outside this repository. Run repeatedly until cutover; 269 files
-  written, 578 comments (2 belong to a post foojay.io has deleted — its URL 301s
-  to the homepage — and are reported, not guessed at).
-
-  **It used to post them into the GitHub Discussions giscus reads, and that is
-  dead because GITHUB BANNED THE ACCOUNT** after only a few posts had been
-  handled. Several hundred API-driven comment creations from a fresh account is
-  indistinguishable from spam at GitHub's end, and no variant of that approach
-  avoids looking like the thing that got blocked. **Don't rebuild it**, and note
-  the archive is the better shape regardless: these comments are a **closed
-  record** whose authors' GitHub identities are unknown, so nobody could ever
-  have edited or replied to their own 2020 comment there either — a mutable
-  discussion pretended otherwise. It is also reversible (a diff, not an
-  irreversible public write), and it is the **only copy**, committed for the same
-  reason `data/legacy-views.json` is. giscus still owns every *new* comment, on
-  the same term; the two are separate sections that say which is which.
-
-  Four things are load-bearing:
-  - **The stored HTML is sanitized in the SCRIPT, and that is a security
-    boundary.** `hugo.toml` sets goldmark `unsafe = true` for the raw HTML in
-    post bodies, so putting 578 stranger-authored bodies through `markdownify`
-    would be stored XSS on 269 article pages. Every body goes through **jsoup's
-    own `Safelist.basic()`** — a tested sanitizer, not a regex written here — and
-    the result is what is stored, so the template renders it with `safeHTML` and
-    never sees unsanitized input. The safelist is measured, not guessed: across
-    all 580 comments the only tags used are `p` (969), `br` (470), `a` (110),
-    `code` (15), `pre` (12), `strong` (9), `em` (2) and `blockquote` (1) — no
-    image, iframe, script or style. A run **reports any tag it dropped** rather
-    than losing it silently; today it drops none.
-  - **No timestamp in the file, and a file is rewritten only when its content
-    changed** — the `fetch/JugEvents.java` lesson: a "generated at" field moves
-    every run, so every run would commit and therefore deploy on nothing. Git
-    already records when it changed. Verified: the second run reports
-    `0 file(s) written, 269 already up to date`.
-  - **WordPress's real nesting is kept** (461 top-level, 115 one deep, 4 two
-    deep), written as a flat array in **threaded display order** with a `depth`
-    on each — so the template is a `range` with no recursion and the CSS clamps
-    the indent. The 3 comments whose parent is unpublished sit at depth 0.
-  - **`frozen: true` is deliberately NOT honoured**, unlike the other `transfer/`
-    scrapers. Those rebuild a post's frontmatter and body, where a hand edit is
-    precious; this writes one generated file beside it and touches nothing a
-    human wrote. A "corrected" comment body is not a thing that exists — these
-    are quotes from other people.
-
-  `--dry-run` reports without writing (with `--slug`, prints the sanitized
-  bodies). It also reports an **orphan** — a `comments.json` whose post
-  WordPress no longer has any comment for — rather than deleting it, and only on
-  a full run, since a `--slug` run cannot know the complete set.
+- **`scripts/transfer/`, `scripts/cleanup/` and `scripts/shared/` are gone**,
+  deleted at cutover on the Phase 4 list in `CUTOVER.md`, and this file used to
+  carry an entry for each of their scripts. Where a convention below names
+  `HtmlToMarkdown` and one of its methods, that is the deleted
+  `shared/HtmlToMarkdown.java`: it is named because it explains the shape of
+  what is in `content/`, not because there is a file to open. `transfer/` scraped the live WordPress site into
+  `content/` (`Posts`, `Authors`, `Sponsors`, `Comments`, `LegacyViews`) and
+  `cleanup/` held the one-off repairs of what those scrapers produced
+  (`EnlighterToFences`, `GalleriesToShortcode`, `CloudflareEmails`,
+  `HeadingAnchors`, `NormalizeMarkdown`, `Descriptions`, `SanitizeSlugs`,
+  `PostsToBundles`, `AuthorsToBundles`, `HeaderlessTables`, `external_images`).
+  Every one of them answered a question the site no longer has. What they left
+  behind is still described under "Conventions to keep following" below, because
+  the shape of `content/` is their output and outlives them. Read a script
+  itself out of the git history.
 - **`worker/views/`**: the read counter — a Cloudflare Worker over a D1 table
   of `<section>/<slug> -> (legacy, live)`, routed at `foojay.io/api/views/*`. Deployed by
   hand (`wrangler deploy`), never by CI, for the same reason
@@ -591,36 +455,6 @@ should catch a mistake at PR time rather than letting it fail silently.
   would not work until that id is filled in. Verified end to end on the day:
   `/all` and `/<key>` answer, a hit counts, a hit from a foreign `Origin` does
   not, `/seed` 401s without the token, and a malformed key 404s.
-- **`scripts/transfer/LegacyViews.java`**: captures the view counts WordPress holds for
-  every post, page and pedia entry (the Post Views Counter plugin exposes them
-  on an open REST route — no admin, DB or credential needed, same posture as
-  `transfer/Comments.java`) into `data/legacy-views.json`, and with `--seed`
-  loads them into the Worker as its `legacy` baseline. Posts and pages come
-  from `/wp/v2/`; the **pedia glossary is a custom post type (`terminology`)
-  that WordPress does not expose to REST**, so each entry's id is read back out
-  of its rendered page's body class (`postid-124618`) — all 30 resolve.
-  **Author profiles have no WordPress baseline at all**: the plugin can count
-  user archives, but the option is off on foojay.io (its user-views route
-  returns 0 for every author checked), so they start at zero. The script prints
-  that on every run rather than leaving a section silently empty. Run by hand, repeatedly,
-  until cutover — the TODO's "one-time operation that needs to be repeated".
-  Seeding **sets** rather than adds, and live views accumulate in a separate
-  column, so a re-run can't double or discard a number. One request per post
-  (the route sums when handed several ids, so there is no batching), eight at a
-  time, ~3 minutes for the site; `--limit N` for a test run. Needs a browser
-  `User-Agent` — WP Engine's WAF 403s a bare Java one. Every one of the 2145
-  posts and all 30 pedia entries match. The items it reports as unmatched are
-  WordPress listing pages (`today`, `author`, `home-page`, `our-sponsors`, …) with
-  no single Hugo page behind them, plus anything genuinely absent here;
-  `PAGE_ALIASES` covers the pages whose Hugo file is named differently (`jugs` →
-  `java-user-groups-jugs`, `all-events` → `calendar`, `team` → `meet-the-team`,
-  `download` → `install-java`), and
-  `SECTION_MOVES` the one that changed *section* (WP page `log4j-cve` → Hugo
-  post `posts/log4j-cve`). Add to `SECTION_MOVES` whenever a WP page is
-  republished here as a post: WordPress can't be edited to follow, so without
-  the entry the item resolves against the wrong section's slugs, lands in
-  `unmatched`, and its whole count is silently dropped at the next run. The
-  key in `data/legacy-views.json`/`data/views.json` has to move with it.
 - **`scripts/fetch/ViewCounts.java`**: the CI half — reads
   `/api/views/all` into `data/views.json` at every deploy and four times a day
   (`sync-view-counts.yml`, its own workflow — see below), so the
@@ -647,110 +481,6 @@ should catch a mistake at PR time rather than letting it fail silently.
   counting until it is switched off; catching that up is the manual `--seed` on
   the cutover list, and deliberately not a CI job — pushing a new baseline needs
   `SEED_TOKEN`, which CI has no business holding.
-- **`scripts/cleanup/HeadingAnchors.java`**: one-off migration that removed the
-  WordPress heading anchors (`## Title {#h2-2-title}`) from `content/`. WP
-  stamps every heading with `id="h2-<index>-<slug>"`, Flexmark carries an id
-  over as Markdown attribute syntax, and Goldmark applies it — the round trip
-  worked, which is why it went unnoticed. Dropped because the ids are
-  **positional** (inserting an H2 leaves `h2-3-` above `h2-2-`), a good few are
-  corrupt at the source (WP's slugifier eats leading capitals: "Podcast Apps" →
-  `h2-1--odcast-pps`, which foojay.io really does serve), and a contributor
-  writing a new post would never type one. Handles ATX, setext and
-  blockquote-wrapped headings; resizes setext underlines; skips fenced code,
-  where `{#…}` is CSS or shell parameter expansion. 1835 files, 14344 anchors
-  (plus one heading whose text the conversion had wrapped onto a second line,
-  rejoined by hand).
-  `HtmlToMarkdown.toMarkdown` now drops heading ids at the source, so a
-  re-scrape is a no-op; the script stays for the same reason
-  `cleanup/EnlighterToFences.java` does. `--dry-run` / `--path` as usual.
-
-  It also strips the same id where WordPress stamped it on a **link** rather
-  than a heading -- `[Ty Morton](https://.../){#31db}`, which Medium-imported
-  posts carry on every paragraph's first link. That case is worse than the
-  heading one and was still live: Goldmark's attribute syntax applies to a whole
-  block, so an id sitting mid-paragraph never round-tripped -- it rendered as
-  the literal text `{#31db}` in the middle of a sentence, on 28 posts. 39
-  removed (plus 21 heading anchors that a later re-scrape had put back).
-  `HtmlToMarkdown` drops `a[id]` alongside the heading ids now. Anchored to the
-  link's closing paren, so a `{#id}` in a CSS example is never touched, and
-  fenced code is skipped as before.
-
-  **And a third pass, because fixing the elements one at a time was the actual
-  bug.** Headings were dealt with, then links -- and WordPress goes on stamping
-  ids on everything else: `<p id="caption-attachment-36528">` under a captioned
-  image, `<span id="more-36262">` at the editor's read-more break, and
-  `<p class="sect0" id="_quarkus_unpacked_...">` on every paragraph of an
-  Asciidoc import. All of them render as literal text, and **1268 of them were
-  live across 91 posts** -- visible on the page, in the search index and in the
-  meta description. Which is why the source fix is now
-  `content.select("[id]").removeAttr("id")` over the whole body rather than a
-  third selector: nothing downstream reads an id, so there is no list to keep.
-  Raw-HTML blocks are exempt -- they are preserved before that pass runs, so an
-  author's own in-page anchor inside one still resolves.
-
-  **Position is what makes it safe to strip, and that was measured rather than
-  assumed.** Every one of the 1293 `{#...}` occurrences outside a code fence
-  sits at the END of its line, and 1293 minus the 13 on a heading line is
-  exactly the 1280 the built HTML rendered as visible text -- so "at the end of
-  a line that is not a heading" is precisely the broken set. A `{#...}`
-  **mid-line** is reported and never touched: that is the shape a real Qute or
-  Handlebars tag written in a sentence has (`{#insert}`), and there is nothing
-  in the spelling to tell them apart. There are none today. A line that held
-  nothing but the anchor is removed entirely, along with one of the blank lines
-  around it, or every removal would leave a double blank line behind.
-- **`scripts/cleanup/NormalizeMarkdown.java`**: one-off migration that brought
-  `content/` in line with the storage format the converter now emits. Two
-  things, both Flexmark defaults that were never a deliberate choice:
-  **setext headings → ATX** (Flexmark underlines h1/h2 with `====`/`----` and
-  only hashes from h3 down, so content was in two styles at once — 8053
-  converted), and **decorative `<br>` lines dropped** (WP uses a bare `<br />`
-  as a vertical spacer after images and embeds; 1152 removed, same case as the
-  decorative `<hr>`s below). Bodies now end in a single newline.
-  `HtmlToMarkdown` emits both shapes directly now
-  (`FlexmarkHtmlConverter.SETEXT_HEADINGS = false` + the `STANDALONE_BREAK`
-  pass), so a re-scrape is a no-op. `--dry-run` / `--path` as usual.
-
-  Three things it deliberately leaves alone, each because touching them would
-  change the page rather than restyle the source: a `<br>` with text on its line
-  (load-bearing in a table cell or inline SVG), anything inside a fence or an
-  indented code block (several posts paste multi-document YAML whose `---`
-  separators would otherwise become headings), and a `---` under a **list item**
-  (CommonMark says a setext underline can't interrupt a list, so that pair
-  already renders as list + thematic break — 203 left underlined for this).
-- **`scripts/cleanup/Descriptions.java`**: one-off migration that put back the
-  spaces Yoast dropped when it built a post's meta description by concatenating
-  the body's text nodes with no separator -- so a heading ran into the paragraph
-  after it and the boundary punctuation lost its space
-  (`...using the Service Layer pattern.What you'll learn`). That string is what a
-  reader sees in a search result, a link preview and the `BlogPosting` JSON-LD,
-  even though the page itself renders fine. 22 posts.
-
-  The rule lives in `HtmlToMarkdown.repairRunOnSentences`, which
-  `transfer/Posts.java` and `transfer/Sponsors.java` now apply to the scraped
-  description, so a re-scrape emits the repaired form and a re-run here is a
-  no-op. **The guards are the whole design**, because the damage is spelled
-  exactly like a Java identifier: the word before the punctuation must start
-  lowercase (which rules out `System.Logger`, `FetchType.EAGER`) and its
-  whitespace-delimited token must hold no other `.` (which rules out
-  `sun.misc.Unsafe`). `:` is repaired alongside `.!?` -- same heading-boundary
-  artefact, and no identifier spelling to collide with.
-
-  What it **declines** is printed rather than guessed at, the way
-  `fetch/DiscoverJugCalendars.java` reports its near-misses: candidates whose
-  preceding word is capitalised, which no lexical rule can tell apart from a type
-  name. It reports **3** today and all three are correct refusals
-  (`System.Logger`, `FetchType.EAGER`, `DALL.E API` -- a mis-typed DALL-E), so a
-  non-empty report is not automatically a problem. The 4 that were real damage
-  (`ReadyNow.Azul`, `MongoDB.In`, `Hibernate API.If`, `Caching.Now`) were fixed by
-  hand. An exception list would have automated those 4 and was rejected on
-  purpose: it rots, and a space inserted into a type name reads as our bug where a
-  missing space reads as WordPress's. Note that a hand fix here is only as durable
-  as the post -- `transfer/Posts.java` rebuilds frontmatter from scratch, so
-  re-scraping one of those 4 reverts it, and the script's report is what catches
-  that. Note the residual
-  `learnIn`-style damage (a lowercase letter running straight into a capital, no
-  punctuation at all) is **not** repairable: it is indistinguishable from
-  `JavaFX`, `OpenJDK` and `MongoDB`. `--dry-run` / `--path` as usual.
 - **`scripts/validate/Frontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle, no emoji in a post title, no
@@ -1169,10 +899,11 @@ should catch a mistake at PR time rather than letting it fail silently.
   hand-edit it. Seeded from `data/legacy-views.json` so the counts are live on
   the site *now*, before the Worker exists; once it is deployed this is
   overwritten with `legacy + live` on every build.
-- **`data/legacy-views.json`**: auto-generated by `scripts/transfer/LegacyViews.java` —
-  each post's WordPress view count at the last import. Committed because it is
-  the **only** copy: these numbers vanish with the WordPress site, and they are
-  what seeds the counter.
+- **`data/legacy-views.json`**: each post's WordPress view count at the final
+  import. The script that produced it went with `scripts/transfer/`, and the
+  counter already holds these numbers in its `legacy` column, so nothing writes
+  or reads this file any more. Committed because it is the **only** copy of a
+  number that has no other source left.
 - **`data/java-champions.yaml`**: auto-generated by
   `scripts/fetch/JavaChampions.java` — see above. Never hand-edit it; add/fix
   an entry upstream in aalmiray/java-champions instead. Rendered at
@@ -1189,10 +920,11 @@ should catch a mistake at PR time rather than letting it fail silently.
 
 1. **Scraping selectors are unverified against real HTML.** The environment
    this was built in could only fetch pages through a markdown-extraction
-   tool, not raw HTML, so the CSS selectors in the three `scripts/transfer/`
-   scrapers (categories, tags, author link, related-posts links) are
-   best-effort WordPress/Yoast conventions, not confirmed against
-   foojay.io's actual theme markup. Title/description/canonical/image are
+   tool, not raw HTML, so the CSS selectors in the (now deleted) `transfer/`
+   scrapers (categories, tags, author link, related-posts links) were
+   best-effort WordPress/Yoast conventions, never confirmed against
+   foojay.io's actual theme markup. What they produced is what `content/`
+   holds. Title/description/canonical/image are
    solid (they come from standard meta tags + JSON-LD, which foojay.io does
    emit). **First thing to do**: run each script with `--url <a real post/author/page>`
    and check the output; fix the `SELECTOR_*` constants at the top of the
@@ -1266,8 +998,7 @@ should catch a mistake at PR time rather than letting it fail silently.
    **The legacy WordPress comments are NOT in those Discussions and must not be
    put there.** Importing them got the posting account **banned by GitHub** a
    few posts in. They are `content/posts/**/comments.json` now, rendered under
-   the widget by `partials/legacy-comments.html` — see
-   `scripts/transfer/Comments.java`'s entry above. Only 3 discussions exist in
+   the widget by `partials/legacy-comments.html`. Only 3 discussions exist in
    the repo today and that is the correct, expected number.
    **Views are live** — the Worker was deployed and seeded on 2026-08-24 (2230
    rows, 13.89M views), and every route was verified against
@@ -1506,9 +1237,10 @@ should catch a mistake at PR time rather than letting it fail silently.
   repo can measure or shrink.
 
   Two halves, and they agree on the filename by construction:
-  the scraper (so a re-scrape produces local files and nothing needs freezing)
-  and **`scripts/cleanup/external_images.py`**, the one-off sweep over what is
-  already in `content/`.
+  the scraper (so a re-scrape produced local files and nothing needed freezing)
+  and `cleanup/external_images.py`, the one-off sweep over what was already in
+  `content/`. Both are deleted, and what they left behind is the naming rule
+  below, which still governs any image added by hand.
 
   **AN EXTERNAL IMAGE IS STORED AS `<stem>-<8 hex of its URL>.<ext>`, and the
   hash is not decoration.** Third-party basenames collide constantly: **58
@@ -1749,19 +1481,20 @@ should catch a mistake at PR time rather than letting it fail silently.
   generates an id per heading from its text — the "On this page" panel and its
   scroll-spy resolve every one of their 14k links. Accepted knowingly; fragment
   links into a blog post are rare next to the cost of keeping two conventions.
-- **The trial deploy is noindex, and that is derived from baseURL.** The site is
-  a byte-for-byte copy of the still-live WordPress content, so a crawlable
-  foojayio.github.io/website put ~2600 duplicate URLs into Google's index
-  competing with foojay.io for foojay.io's own rankings -- made worse by a
-  permissive `robots.txt` that advertised the sitemap. Both `baseof.html` and
-  `layouts/robots.txt` now compute `$isTrial` as `baseURL != params.productionBaseURL`
-  and emit `noindex, nofollow` + `Disallow: /` when it holds. **Never turn this
-  into a config flag**: as a derivation it flips itself the moment `baseURL`
-  becomes the production URL, and there is nothing to remember to unset on the
-  day it matters most. `build-deploy.yml` passes `--baseURL` on the command
-  line and `site.BaseURL` reflects that override, so this reads the URL actually
-  being built for. Verified both ways: a `--baseURL https://foojay.io/` build has
-  no `noindex` outside `/search/` and the 404.
+- **`$isTrial` is spent, and it flipped itself.** While the Hugo site was a
+  byte-for-byte copy of still-live WordPress content, a crawlable
+  foojayio.github.io/website would have put ~2600 duplicate URLs into Google's
+  index competing with foojay.io for its own rankings, so `baseof.html`,
+  `analytics.html` and `layouts/robots.txt` compute `$isTrial` as
+  `baseURL != params.productionBaseURL` and suppress indexing and analytics when
+  it holds. `baseURL` is now the production URL, so it evaluates false
+  everywhere and the templates behave as if it were not there.
+
+  It stays because it costs nothing and because a derivation is the right shape:
+  **never turn a condition like this into a config flag**. A flag has to be
+  remembered and unset on the day it matters most, and this one turned itself
+  off when the URL changed, with nobody doing anything. Any preview deploy on a
+  different host gets the same protection for free.
 
 - **Every page self-canonicalises, pagers included, and `canonical:` frontmatter
   means "not ours".** `.Params.canonical | default $self` -- and `$self` is
@@ -1956,7 +1689,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   Ketch's `boot.js` are **services, not libraries** — a pinned copy of a consent
   manager would serve last month's consent configuration, and a pinned copy of
   gtag.js still has to talk to Google — so they stay CDN-loaded, and they stay
-  confined to that one partial, which renders nothing on the trial deploy.
+  confined to that one partial, which renders nothing on a non-production host.
 
 - **`lightbox.js` skips anything inside `.leaflet-container`, and that is not a
   nicety.** It binds `.prose img`, and a Leaflet map lives inside `.prose` with
@@ -3835,9 +3568,11 @@ should catch a mistake at PR time rather than letting it fail silently.
   `comments.html` configures giscus with `data-mapping="specific"` +
   `data-term="<slug>"` (`or .Params.slug .File.ContentBaseName` — the same thing
   `:slugorcontentbasename` resolves to, so it is derived, not authored). Pathname
-  mapping is the tempting default and it is a trap here: the trial deploy serves
-  `/website/today/<slug>/` and production serves `/today/<slug>/`, so every thread
-  created before cutover would be orphaned after it. `data-strict="1"` goes with
+  mapping is the tempting default and it was a trap here: the trial deploy served
+  `/website/today/<slug>/` where production serves `/today/<slug>/`, so every
+  thread created before cutover would have been orphaned after it. Slug mapping
+  is what carried them across, and it is what keeps a thread if a URL ever
+  moves again. `data-strict="1"` goes with
   it: non-strict mode is a fuzzy `in:title` search that takes the first hit, and
   30 foojay slugs are substrings of another slug
   (`...-postgresql-connections` inside `...-postgresql-connections-part-2-batching`),
@@ -3851,8 +3586,8 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   The **link** giscus stamps into a discussion body needs the same care for a
   different reason: it defaults to the URL of the page the widget is running on,
-  which during the trial is the throwaway `foojayio.github.io/website` one, and a
-  body posted by a reader is not ours to rewrite afterwards. So `baseof.html`
+  which during the trial was the throwaway `foojayio.github.io/website` one, and
+  a body posted by a reader is not ours to rewrite afterwards. So `baseof.html`
   emits `<meta name="giscus:backlink">` on post pages from
   `partials/production-url.html` (= `params.productionBaseURL` + the page's path,
   with the trial prefix stripped), and `transfer/Comments.java` writes the same
@@ -3970,9 +3705,10 @@ should catch a mistake at PR time rather than letting it fail silently.
   joining it.
 
   Three behaviours are load-bearing:
-  1. **Nothing renders on the trial deploy**, derived from the same
+  1. **Nothing renders off the production host**, derived from the same
      `baseURL != params.productionBaseURL` test `baseof.html` uses for
-     `noindex` — so it switches itself on at cutover with nothing to unset. The
+     `noindex` — it switched itself on at cutover with nothing to unset, and it
+     still keeps a preview build out of the analytics. The
      trial is a byte-for-byte copy of the live content, so counting it would
      inflate every number in the property with a second site's traffic, and a
      consent banner on a throwaway host stores a reader's choice against the

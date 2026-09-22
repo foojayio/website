@@ -88,26 +88,25 @@ public class ViewCounts {
             if (counts.isEmpty()) {
                 // An empty counter is indistinguishable from a broken one here,
                 // and blanking every number on the site is the worse outcome of
-                // the two. Seed it first (scripts/transfer/LegacyViews.java --seed).
+                // the two. The importer that used to refill it is gone with the
+                // rest of the WordPress bridge, so an empty answer now means the
+                // Worker or its D1 binding, not a counter waiting to be seeded.
                 keepExisting("counter returned no rows");
                 return;
             }
 
             // A counter that knows about FEWER pages than the file we already
-            // have is the same failure as an empty one, and it is the state a
-            // freshly deployed Worker is in: it answers 200 with the handful of
-            // rows real readers have created since it went up, which would
-            // replace 2200 numbers on the site with one. Nothing ever deletes a
+            // have is the same failure as an empty one. Nothing ever deletes a
             // row (see worker/views/schema.sql -- /seed sets `legacy`, a hit
             // increments `live`), so the key count only ever grows, and a drop
-            // means an unseeded, half-restored or wrongly-bound database rather
-            // than news about the site. Blocks a deploy from blanking the
-            // counts; does not block the numbers going UP.
+            // means a half-restored or wrongly-bound database rather than news
+            // about the site. Blocks a deploy from blanking the counts, and
+            // does not block the numbers going UP.
             int existing = existingKeyCount();
             if (counts.size() < existing) {
                 keepExisting("counter returned " + counts.size() + " rows, fewer than the "
                         + existing + " already in " + OUTPUT_FILE
-                        + " -- seed it first: jbang scripts/transfer/LegacyViews.java --seed");
+                        + " -- check the Worker's D1 binding (worker/views/README.md)");
                 return;
             }
 

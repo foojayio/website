@@ -9,13 +9,13 @@ name: Sync view counts
 # Offset from the 01:20 daily sync so the two don't collide; they also share a
 # concurrency group in case a run ever overlaps.
 #
-# ONE schedule again. There were two while the Worker was undeployed: a daily
-# entry additionally ran transfer/LegacyViews.java --write-views, ~2200 requests
-# against foojay.io's live WordPress, to keep the numbers moving in the meantime.
-# The Worker answers now, so its legacy + live is the source and the bridge is
-# gone. WordPress keeps counting until it is switched off, and catching that up
-# is the manual --seed on the cutover list, not a job here -- pushing a new
-# baseline needs the Worker's SEED_TOKEN, which CI deliberately does not hold.
+# ONE schedule, and one step. Both were two while the Worker was undeployed: a
+# daily cron entry ran a WordPress bridge that refreshed the numbers from the
+# live WP site, and a later step warned when a page in data/legacy-views.json
+# had not reached the counter yet. The Worker answers now, its legacy + live is
+# the source, the final import is done, and scripts/transfer/ is deleted -- so
+# both of those went with it. Nothing here holds SEED_TOKEN and nothing here
+# needs it.
 
 on:
   schedule:
@@ -75,68 +75,6 @@ jobs:
       # blank every count on the site.
       - name: Refresh view counts
         run: jbang scripts/fetch/ViewCounts.java
-
-      # data/legacy-views.json gaining a key does NOT put that number in the
-      # counter -- only the manual --seed does, for the reasons in the header
-      # comment above -- so between a WordPress import and the next seed a post
-      # renders no view count at all (views.html deliberately prints nothing
-      # rather than "0 views"). That is a silent failure with no symptom short
-      # of loading the page and noticing an absence.
-      #
-      # It has already happened once: the 2026-09-09 import added 13 posts worth
-      # 1,914 views that stayed invisible until somebody went looking for one
-      # post's missing number.
-      #
-      # A WARNING, NOT A FAILURE. The fix needs SEED_TOKEN, which this workflow
-      # deliberately does not hold, so a red run would be one nobody here can
-      # clear -- and a red scheduled sync every six hours until a human seeds is
-      # how a gate gets ignored. Costs nothing either: both files are already in
-      # the checkout, so this is a comparison of two local files, no request and
-      # no credential.
-      #
-      # Goes away at cutover with data/legacy-views.json and the rest of the
-      # WordPress bridge: after the final --seed on CUTOVER.md's list there is no
-      # WordPress left to import from, and a new post's row is created by the
-      # first beacon hit instead.
-      - name: Warn if the counter is missing seeded pages
-        run: |
-          python3 - <<'PY'
-          import json, os, pathlib
-
-          legacy = pathlib.Path("data/legacy-views.json")
-          views = pathlib.Path("data/views.json")
-          if not legacy.exists() or not views.exists():
-              print("No legacy import to compare against -- nothing to check.")
-              raise SystemExit(0)
-
-          imported = json.loads(legacy.read_text())
-          counted = json.loads(views.read_text())
-          missing = sorted(k for k in imported if k not in counted)
-
-          if not missing:
-              print(f"All {len(imported)} imported pages are in the counter.")
-              raise SystemExit(0)
-
-          total = sum(imported[k] for k in missing)
-          print(
-              f"::warning title=View counts not seeded::{len(missing)} page(s) in "
-              f"data/legacy-views.json are missing from the counter ({total:,} imported "
-              f"views), so they show no count on the site. Re-seed with "
-              f"VIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed"
-          )
-
-          summary = os.environ.get("GITHUB_STEP_SUMMARY")
-          if summary:
-              with open(summary, "a") as out:
-                  out.write(f"### {len(missing)} page(s) missing from the view counter\n\n")
-                  out.write(
-                      f"`{total:,}` imported views are not showing on the site. The counter "
-                      "only learns these from the manual seed:\n\n"
-                      "```\nVIEWS_SEED_TOKEN=... jbang scripts/transfer/LegacyViews.java --seed\n```\n\n"
-                  )
-                  for key in missing:
-                      out.write(f"- `{key}` ({imported[key]:,} views)\n")
-          PY
 
       - name: Commit updated data
         env:

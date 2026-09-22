@@ -435,7 +435,7 @@ debugging the rules.
       Running a query is client-side, so that still needs a browser.
 - [x] **`www.foojay.io`** redirects to the apex over HTTPS. Verified: `301` to
       `https://foojay.io/`.
-- [ ] **Mail still works.** Send a test to `hello@foojay.io`. Still worth doing
+- [x] **Mail still works.** Send a test to `hello@foojay.io`. Still worth doing
       end to end, but **the records cutover could have broken are intact**,
       which is what the "touching `MX` or the `TXT` records breaks mail"
       warning in Phase 2 step 1 is about:
@@ -518,17 +518,35 @@ paid for at least that long.
       a temporary move and keep the old URLs indexed, so do not leave it for
       months.
 
-- [ ] **Delete `scripts/transfer/` and `scripts/cleanup/` entirely.** Both
+- [x] **Delete `scripts/transfer/` and `scripts/cleanup/` entirely.** Both
       folders exist only to read or repair WordPress content, which is the
       question the `scripts/` layout is organised around — see `AGENTS.md`.
-      `scripts/fetch/`, `validate/` and `shared/` stay.
+      **Done 2026-09-22**, 16 scripts, together with the references that would
+      have dangled: the validator's author-facing image messages,
+      `fetch/ViewCounts.java`'s "seed it first" advice,
+      `sync-view-counts.yml`'s seed-warning step (seeding is impossible now, so
+      the step could only mislead), `worker/views/README.md` and
+      `scripts/README.md`.
+
+      **`shared/` went too**, against the line above, and deliberately.
+      `HtmlToMarkdown.java` was its only file and every one of its seven
+      callers lived in the two deleted folders, so it was 94 KB that nothing
+      compiled. `scripts/` is `fetch/` and `validate/` now. The conventions in
+      `AGENTS.md` still name its methods where they explain the shape of
+      `content/`, which is the one thing that outlives it.
 - [x] **Simplify `sync-view-counts.yml`** back to a single six-hourly cron
       entry, now that the bridge step is gone — **done in `7b8a24937`**
       (2026-08-24) along with the bridge step itself; the file has carried one
       `50 3,9,15,21 * * *` entry ever since. See the `[ORDER]` item above.
-- [ ] **Prune `AGENTS.md`** of the sections describing scripts that no longer
+- [x] **Prune `AGENTS.md`** of the sections describing scripts that no longer
       exist, and of the trial/`$isTrial` reasoning — though note the derivation
       itself is harmless once `baseURL` and `productionBaseURL` agree.
+      **Done 2026-09-22.** The nine per-script catalogue entries became one note
+      saying where they went, 4,030 lines down to 3,765. The `$isTrial` bullet
+      is now four lines recording that the derivation flipped itself when
+      `baseURL` became the production URL, which it has, and why a derivation
+      beat a config flag. The templates keep it: it costs nothing and it still
+      protects any preview build on another host.
 - [ ] **Retire WordPress**, keeping `data/legacy-views.json` (the only surviving
       copy of the WordPress view counts) and a final database/file backup.
 

@@ -704,7 +704,7 @@ public class Frontmatter {
                 problems.add(md + ": hero image '" + hero + "' is " + why
                         + " -- a hero is used as the card thumbnail, og:image and JSON-LD image,"
                         + " none of which animate. Point `image:` at a still frame"
-                        + " (cleanup/images.py writes one as <name>-poster.png) and keep the"
+                        + " (.claude/resize_images.py writes one as <name>-poster.png) and keep the"
                         + " animation in the body.");
             }
         }
@@ -751,7 +751,7 @@ public class Frontmatter {
     /**
      * The biggest a single bundle image may be.
      *
-     * 4 MB, set from what content/ actually looks like after cleanup/images.py has
+     * 4 MB, set from what content/ actually looks like after .claude/resize_images.py has
      * run -- the largest legitimate asset is moveRefactoring.webp at 3.53 MB, a
      * 228-frame screen recording -- rather than from a round number that happens to
      * look strict. 3 MB would have forced that one down to roughly 550px, where the
@@ -796,7 +796,7 @@ public class Frontmatter {
                 if (size <= MAX_IMAGE_BYTES) continue;
                 problems.add(String.format(
                         "%s: image is %.1f MB, over the %.0f MB budget -- resize or compress it"
-                        + " (an animated GIF should be an animated WebP; `python3 scripts/cleanup/images.py"
+                        + " (an animated GIF should be an animated WebP; `python3 .claude/resize_images.py"
                         + " --path %s` does both)",
                         file, size / 1e6, MAX_IMAGE_BYTES / 1e6, file.getParent()));
             }
@@ -812,7 +812,7 @@ public class Frontmatter {
      * emergency at 1.3 MB, and a bundle of forty holiday photos each of which
      * passes the per-file budget on its own. Both were live findings, not
      * hypotheticals -- an import brought in a 1.34 MB PNG hero that
-     * cleanup/images.py took to 0.18 MB, and the month a trip report landed added
+     * .claude/resize_images.py took to 0.18 MB, and the month a trip report landed added
      * 33 MB where an average month adds 9.4.
      *
      * A HERO IS THE ONE IMAGE THAT IS ALWAYS FETCHED. It is the card thumbnail in
@@ -824,7 +824,7 @@ public class Frontmatter {
      * hero on the site exceeds it today except the four this check exempts.
      *
      * A TRANSPARENT PNG IS EXEMPT, because nothing can be done about it
-     * automatically: JPEG has no alpha, so cleanup/images.py correctly refuses to
+     * automatically: JPEG has no alpha, so .claude/resize_images.py correctly refuses to
      * convert one, and failing a PR over a fix that does not exist is how a gate
      * gets switched off. All four heroes over the limit are exactly that. (They
      * are a content problem of their own -- template/post.md asks for a solid
@@ -858,7 +858,7 @@ public class Frontmatter {
                 problems.add(String.format(
                         "%s: hero image '%s' is %.0f KB, over the %.0f KB budget -- a hero is the card"
                         + " thumbnail, the og:image and the LCP element, so every reader pays for it."
-                        + " `python3 scripts/cleanup/images.py --path %s` re-encodes it",
+                        + " `python3 .claude/resize_images.py --path %s` re-encodes it",
                         index, hero, size / 1024.0, MAX_HERO_BYTES / 1024.0, index.getParent()));
             }
         }
@@ -884,7 +884,7 @@ public class Frontmatter {
                 problems.add(String.format(
                         "%s: the images in this post total %.1f MB, over the %.0f MB budget --"
                         + " no single file is the problem, the count is."
-                        + " `python3 scripts/cleanup/images.py --path %s` resizes and re-encodes them",
+                        + " `python3 .claude/resize_images.py --path %s` resizes and re-encodes them",
                         index, total / 1e6, MAX_BUNDLE_BYTES / 1e6, dir));
             }
         }
@@ -898,7 +898,7 @@ public class Frontmatter {
      * "Has an alpha channel" is NOT the question: a great many of these WordPress
      * PNGs are RGBA with every pixel opaque, which converts to JPEG perfectly
      * well. So this reads the channel's actual minimum, which is what
-     * cleanup/images.py's has_real_transparency does -- the two have to agree, or
+     * .claude/resize_images.py's has_real_transparency does -- the two have to agree, or
      * this check would demand a conversion that script refuses to perform.
      */
     static boolean hasTransparency(Path file) {

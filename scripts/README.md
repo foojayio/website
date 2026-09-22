@@ -7,16 +7,20 @@ they resolve `content/` and `data/` relative to the working directory:
 jbang scripts/fetch/Jugs.java
 ```
 
-They are grouped by **lifetime and job**, not by what they happen to be called.
-The question a folder answers is *"does this still exist after cutover?"*:
+They are grouped by **lifetime and job**, not by what they happen to be called:
 
-| folder | what it does | after cutover |
+| folder | what it does | when it runs |
 | --- | --- | --- |
-| `fetch/` | pulls data from community-run upstreams into `data/*` | **stays** — runs in CI |
-| `transfer/` | pulls content out of the live WordPress site | **goes** — WordPress is gone |
-| `cleanup/` | one-off rewrites of what is already in `content/` | **goes** — nothing left to repair |
-| `validate/` | PR-time content checks | **stays** — runs in CI |
-| `shared/` | common code, never run on its own | stays as long as its callers do |
+| `fetch/` | pulls data from community-run upstreams into `data/*` | CI, and by hand |
+| `validate/` | PR-time content checks | CI |
+
+**`transfer/`, `cleanup/` and `shared/` are gone**, deleted at cutover on the
+Phase 4 list in `CUTOVER.md`. `transfer/` scraped the live WordPress site
+(posts, authors, sponsors, comments, view counts), `cleanup/` held the one-off
+repairs of what those scrapers produced, and `shared/HtmlToMarkdown.java` was
+the WordPress HTML → Markdown converter both of them called. All three answered
+a question the site no longer has. The git history keeps them if you ever need
+to read one.
 
 ## `fetch/` — external data (ongoing)
 
@@ -75,65 +79,6 @@ and a normal run looks up **none** of them. Missing key, dead geocoder or an
 exhausted quota never fails the run; the newest champions just aren't on the map
 yet. `--no-geocode` skips the lookups, `--geocode-limit N` caps them.
 
-## `transfer/` — WordPress → Hugo (dies at cutover)
-
-Everything here reads the live foojay.io WordPress site over its public HTML and
-REST routes; no admin, database or credential is assumed. Delete the folder once
-the WordPress site is switched off.
-
-| script | does | run |
-| --- | --- | --- |
-| `Posts.java` | `/today/` posts → `content/posts/` | repeatedly, until cutover |
-| `Authors.java` | `/today/author/` → `content/authors/` | repeatedly, until cutover |
-| `Sponsors.java` | `/our-sponsors/` → `content/sponsors/` | by hand |
-| `Comments.java` | legacy WP comments → a `comments.json` per post bundle | repeatedly, until cutover — no credential |
-| `LegacyViews.java` | WP view counts → `data/legacy-views.json`, `--seed` loads the counter | by hand, repeatedly, until cutover |
-
-The scrapers are **idempotent**: they update a bundle rather than duplicating
-it, look it up by slug so it stays put across re-runs, and skip any file whose
-frontmatter is hand-marked `frozen: true`. `--url <page>` converts a single page,
-for tuning selectors against real markup.
-
-`Sponsors.java` is deliberately run by hand rather than in CI: it scrapes a site
-that goes away at cutover, so it does not belong next to the `fetch/` scripts.
-
-`Comments.java` **used to post the 580 legacy comments into the GitHub
-Discussions giscus reads, and no longer does — GitHub banned the account it
-posted as** after only a few posts had been handled. Several hundred API-driven
-comment creations from a fresh account is indistinguishable from spam at
-GitHub's end, and no variant of that approach avoids looking like the thing that
-got blocked. It now writes an archive into the repo instead: one `comments.json`
-per post bundle, rendered under the giscus widget by
-`partials/legacy-comments.html` as "Discussions on the previous Foojay site".
-That needs no token, touches nothing outside this repository, and is a diff
-rather than an irreversible public write. giscus still owns all *new* comments.
-
-## `cleanup/` — one-off content migrations (already run)
-
-Each of these rewrote `content/` once and is **idempotent**, so a re-run is a
-no-op. They are kept because the WordPress site keeps serving the old markup
-until cutover, so a late re-scrape can reintroduce what they repaired. All of
-them take `--dry-run` (report, change nothing) and most take `--path <dir>`.
-
-| script | repaired |
-| --- | --- |
-| `EnlighterToFences.java` | EnlighterJS `<pre>` markup → Markdown fences, plus WP's double-escaped entities and non-breaking indent spaces |
-| `GalleriesToShortcode.java` | WordPress gallery blocks → `{{< gallery >}}` |
-| `CloudflareEmails.java` | email addresses Cloudflare had obfuscated away from the scrapers (re-fetches the live page) |
-| `HeadingAnchors.java` | every WordPress `{#id}` Flexmark carried over — the positional `{#h2-N-slug}` on a heading, the `{#31db}` on a Medium import's links, and the 1268 on captions, read-more breaks and whole paragraphs that Goldmark never consumes and the reader therefore SEES (91 posts). Reports, rather than strips, anything mid-line |
-| `HeaderlessTables.java` | the empty header row that makes a WordPress table a GFM table again — 111 tables across 54 posts had a delimiter row with no header above it, which Goldmark renders as a wall of literal pipes. Empty rather than promoting the first row: 86 of the 111 open with a legend or a note box, not a header |
-| `NormalizeMarkdown.java` | setext headings → ATX, decorative `<br>` spacers dropped |
-| `images.py` | the WordPress-era media weight — animated GIF → animated WebP, large PNG → JPEG, oversized rasters resized, animated `image:` heroes given a still poster. Took the built site from 1.39 GB to 0.69 GB, under GitHub Pages' 1 GB artifact limit. **The one script here that outlives cutover** (content keeps arriving) and the one that isn't jbang Java — writing an *animated* WebP needs Pillow, which Java has no equivalent for |
-| `external_images.py` | hotlinked images pulled into the post's own bundle — 393 posts referenced 1710 images on 115 hosts they don't control and **129 across 46 posts are already dead**. Shrinks in a temp dir before the file enters the repo (455 MB raw would pass the 1 GB artifact limit, and nothing rewrites git history), verifies the bytes really are an image, and reports a failure rather than rewriting a reference to a file that isn't there. **All 393 posts are done**: 1710 external references down to 212, and those 212 are unrecoverable (44 dead, 9 bot-walled, 4 mermaid.ink, 5 live CI badges) rather than pending. Run `images.py` over the same bundles afterwards for the GIFs |
-| `Descriptions.java` | two Yoast defects in `description:` — the spaces it dropped building one from the body (`…pattern.What you'll learn`, 22 posts), and the `" - by <Author>"` tail it stamps on an auto-generated one (290 posts, removed only when the name is one the post actually credits). Prints what it can't tell apart from a type name, or from prose |
-| `SanitizeSlugs.java` | slugs → lowercase `[a-z0-9_-]` |
-| `PostsToBundles.java` | flat post files → leaf bundles |
-| `AuthorsToBundles.java` | flat author files → leaf bundles |
-
-The converter now emits the corrected shape directly (mostly in
-`shared/HtmlToMarkdown.java`), which is what makes a re-scrape a no-op — change
-one and change the other.
-
 ## `validate/` — PR-time checks
 
 `Frontmatter.java` is run by `.github/workflows/pr-check.yml` in lieu of a
@@ -177,18 +122,10 @@ reports its near-misses. The boundary is `.prose`, which is exactly where
 `.Content` is rendered and nowhere else. `--strict` fails on those too, which is
 the way to drive a cleanup pass to zero.
 
-## `shared/` — common code
-
-`HtmlToMarkdown.java` is pulled in with `//SOURCES ../shared/HtmlToMarkdown.java`
-and is never run on its own. It is the single definition of WordPress HTML →
-Markdown: code fences, galleries, Cloudflare email decoding, entity repair,
-image localization, widget preservation. The `transfer/` scrapers and the
-`cleanup/` migrations both call it, which is what keeps them agreeing.
-
 ## Adding a script
 
 Put it in the folder that answers the lifetime question above, and name it for
 **what it produces**, not for the verb — the folder already supplies the verb
-(`fetch/Jugs.java`, not `fetch/FetchJugs.java`). If it needs `HtmlToMarkdown`,
-add the `//SOURCES ../shared/HtmlToMarkdown.java` line rather than copying logic
+(`fetch/Jugs.java`, not `fetch/FetchJugs.java`). Code shared by two scripts goes
+in a new `shared/`, pulled in with jbang's `//SOURCES`, rather than copied
 across.
