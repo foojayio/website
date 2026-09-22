@@ -2,8 +2,6 @@
 title: "Install Java on Windows"
 description: "Install Java on Windows with an MSI installer, then check the installation from the command prompt."
 url: "/java-quick-start/install-java/install-java-on-windows/"
-aliases:
-  - "/java-quick-start/install-java/install-java-on-windows/"
 frozen: false
 ---
 
@@ -16,7 +14,7 @@ No problem, let's use an installer to make the process really easy.
 This is a direct link to get the Azul Zulu build of OpenJDK distribution, version 25, as a Windows installer:  
 <https://cdn.azul.com/zulu/bin/zulu25.34.17-ca-jdk25.0.3-win_x64.msi>
 
-Many more distributions and versions of Java exist. You can [read more info here](https://foojay.io/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
+Many more distributions and versions of Java exist. You can [read more info here](/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
 
 Once the `.msi` file has completed downloading, double-click it, and follow the instructions.
 

@@ -4,7 +4,6 @@ description: "Free Java courses, tutorials and catalogs from some of the best ed
 url: "/java-quick-start/other-tutorials/"
 type: "tutorials"
 aliases:
-  - "/java-quick-start/other-tutorials/"
   - "/java-learning-trail/other-tutorials/"
 frozen: false
 tutorials:

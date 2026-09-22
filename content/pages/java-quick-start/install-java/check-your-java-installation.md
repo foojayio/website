@@ -2,8 +2,6 @@
 title: "Check your Java installation"
 description: "Find out whether Java is already installed and which version you have, using java -version in a terminal on Windows, macOS or Linux."
 url: "/java-quick-start/install-java/check-your-java-installation/"
-aliases:
-  - "/java-quick-start/install-java/check-your-java-installation/"
 frozen: false
 ---
 
@@ -47,6 +45,6 @@ Command 'java' not found, did you mean...
 
 Go to one of the following pages for details on installing OpenJDK:
 
-* [Install Java (Windows)](https://foojay.io/java-quick-start/install-java/install-java-on-windows/)
-* [Install Java (Mac OS X)](https://foojay.io/java-quick-start/install-java/install-java-on-macos/)
-* [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/install-java-on-linux/)
+* [Install Java (Windows)](/java-quick-start/install-java/install-java-on-windows/)
+* [Install Java (Mac OS X)](/java-quick-start/install-java/install-java-on-macos/)
+* [Install Java (Linux)](/java-quick-start/install-java/install-java-on-linux/)

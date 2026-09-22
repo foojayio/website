@@ -4,9 +4,8 @@ linkTitle: "Using Streams"
 description: "Streams, added in Java 8, let you chain steps over a collection. Extend the text-file example with filtering and mapping."
 url: "/java-quick-start/quick-start-tutorial/using-streams/"
 jdoodle: true
-aliases:
-  - "/java-quick-start/quick-start-tutorial/using-streams/"
 frozen: false
+duration: "2:53"
 weight: 10
 ---
 

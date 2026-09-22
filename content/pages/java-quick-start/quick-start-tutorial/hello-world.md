@@ -5,9 +5,9 @@ description: "Write and run your first Java program with a simple Hello World ex
 url: "/java-quick-start/quick-start-tutorial/hello-world/"
 jdoodle: true
 aliases:
-  - "/java-quick-start/quick-start-tutorial/hello-world/"
   - "/getting-started-with-java/quick-start-tutorial/helloworld-running-a-single-file-java-application/"
 frozen: false
+duration: "2:42"
 weight: 2
 ---
 

@@ -3,7 +3,6 @@ title: "Meet the Foojay Team"
 description: "Get to know the team behind Foojay.io, the Java community platform built by Friends Of OpenJDK for the Java ecosystem."
 url: "/meet-the-team/"
 aliases:
-  - "/meet-the-team/"
   # The old WordPress /team/ page (an "our web development team" profile of the
   # agency that built the WP site) is gone; its URLs redirect here. Both of its
   # aliases have to move with it -- /about-our-team/ is a legacy WordPress path

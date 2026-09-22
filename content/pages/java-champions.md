@@ -10,8 +10,6 @@ type: "champions"
 outputs:
   - html
   - rss
-aliases:
-  - "/java-champions/"
 frozen: true
 ---
 

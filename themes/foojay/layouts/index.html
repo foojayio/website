@@ -137,28 +137,16 @@ first band under the articles because it is the one thing here that
 expires. */}}
 {{ partial "upcoming-events.html" . }}
 
-<section class="band">
-  <div class="shell">
-    <div class="section-head">
-      <div>
-        <h2>Getting started with Java</h2>
-        <p>Is Java your first language, or are you coming from another one? Let Friends Of OpenJDK help you get up and running.</p>
-      </div>
-      <a class="more" href="{{ "java-quick-start/" | relURL }}">Quick Start guide &rarr;</a>
-    </div>
-    <div class="post-grid">
-      {{ range first 4 (where $posts "Params.categories" "intersect" (slice "Java Beginner" "java-beginner")) }}
-        {{ partial "post-card.html" . }}
-      {{ end }}
-    </div>
-  </div>
-</section>
+{{/* The Quick Start trail itself -- the install guides and the 11-step
+     tutorial -- and NOT four posts from the "Java Beginner" category, which is
+     what this band used to be. See the partial for why that had to change. */}}
+{{ partial "quick-start-band.html" . }}
 
 <section class="band band--sunken">
   <div class="shell">
     <div class="section-head">
       <div>
-        <h2>More blog categories</h2>
+        <h2>Most popular post categories</h2>
         <p>Explore the full breadth of what the community writes about.</p>
       </div>
       <a class="more" href="{{ "today/category/" | relURL }}">View all categories &rarr;</a>

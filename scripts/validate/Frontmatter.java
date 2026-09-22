@@ -88,6 +88,7 @@ public class Frontmatter {
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
+        problems.addAll(checkSelfAliases(Path.of("content")));
         problems.addAll(checkPostDates(postsDir));
         problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
         problems.addAll(checkEvents(Path.of("data/events")));
@@ -990,6 +991,51 @@ public class Frontmatter {
             }
         }
         return problems;
+    }
+
+    /**
+     * A page whose `aliases:` list contains its OWN `url:` -- an alias that
+     * redirects a URL to itself.
+     *
+     * 29 pages carried one, inherited from the WordPress scrape, and on two of
+     * them it took the page off the air: Hugo wrote the alias stub over the
+     * real page, so /java-quick-start/ and /java-quick-start/quick-start-tutorial/
+     * each served nothing but a `<meta http-equiv="refresh">` pointing at
+     * themselves -- an infinite redirect in the browser, and the Quick Start
+     * hub is where the home page's "Getting started with Java" band sends a
+     * beginner. The other 27 happened to lose the race and rendered fine,
+     * which is exactly why this is a check and not a one-time cleanup: the
+     * same line is harmless in one page and fatal in the next, and nothing in
+     * the build says which.
+     *
+     * A self-alias can never do anything useful -- the URL already serves the
+     * page -- so the rule is simply that it must not exist.
+     */
+    static List<String> checkSelfAliases(Path contentDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(contentDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(contentDir)) {
+            for (Path file : files.filter(Frontmatter::isContentFile).sorted().toList()) {
+                if (isPageResource(file)) continue;
+                Map<String, Object> fm = readFrontmatter(file);
+                if (fm == null || !(fm.get("url") instanceof String url)) continue;
+                if (!(fm.get("aliases") instanceof List<?> aliases)) continue;
+                for (Object alias : aliases) {
+                    if (alias instanceof String a && trimSlashes(a).equals(trimSlashes(url))) {
+                        problems.add(file + ": aliases lists the page's own url '" + a
+                                + "' -- Hugo can write that redirect stub OVER the page itself,"
+                                + " leaving the URL serving an infinite refresh loop. Delete the line.");
+                    }
+                }
+            }
+        }
+        return problems;
+    }
+
+    /** Leading and trailing slashes off, so "/x/" and "x" compare equal. */
+    private static String trimSlashes(String s) {
+        return s.replaceAll("^/+", "").replaceAll("/+$", "");
     }
 
     static List<String> checkFeaturedAuthors(Path configFile, Set<String> authorSlugs) throws IOException {

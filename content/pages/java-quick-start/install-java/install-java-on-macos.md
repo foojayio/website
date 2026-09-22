@@ -2,8 +2,6 @@
 title: "Install Java on MacOS"
 description: "Install Java on macOS with a ready-made installer, for both Intel and Apple silicon Macs."
 url: "/java-quick-start/install-java/install-java-on-macos/"
-aliases:
-  - "/java-quick-start/install-java/install-java-on-macos/"
 frozen: false
 ---
 
@@ -20,7 +18,7 @@ This is a direct link to the Azul Zulu build of OpenJDK distribution, version 25
 * For an Apple computer with an M-chip:  
   <https://cdn.azul.com/zulu/bin/zulu25.28.85-ca-fx-jdk25.0.0-macosx_aarch64.dmg>
 
-Many more distributions and versions of Java exist. You can [read more info here](https://foojay.io/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
+Many more distributions and versions of Java exist. You can [read more info here](/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
 
 Once the `.dmg` file completed downloading, double-click it, and follow the instructions.
 

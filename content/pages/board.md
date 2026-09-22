@@ -2,8 +2,6 @@
 title: "Foojay Advisory Board"
 description: "The organizations that set the direction of Foojay."
 url: "/board/"
-aliases:
-  - "/board/"
 type: "board"
 layout: "list"
 frozen: false

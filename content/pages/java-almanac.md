@@ -2,8 +2,6 @@
 title: "The Java Version Almanac"
 description: "Compare any two Java versions side by side, browse the API diffs, and find the docs and specs for every JDK release."
 url: "/java-almanac/"
-aliases:
-  - "/java-almanac/"
 frozen: false
 ---
 

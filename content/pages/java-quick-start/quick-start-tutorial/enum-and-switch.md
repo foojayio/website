@@ -4,9 +4,8 @@ linkTitle: "Enum and Switch"
 description: "Replace loose integer values with an enum, and use a switch to react to each of its options in Java."
 url: "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 jdoodle: true
-aliases:
-  - "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 frozen: false
+duration: "2:45"
 weight: 6
 ---
 

@@ -683,6 +683,176 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .event-strip__where { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .event-strip__time { font-variant-numeric: tabular-nums; }
 
+/* -------------------------------------------------- home: quick start -- */
+/* The "Getting started with Java" band (partials/quick-start-band.html): the
+   two steps of /java-quick-start/, not post cards. It replaced four cards from
+   the "Java Beginner" category, so it sits where those did and has to hold the
+   same visual weight without pretending to be articles -- these are evergreen
+   reference pages, and a reader who mistakes one for this week's blog post
+   skips it.
+
+   Hence cards, not a plain list: two panels with a numbered badge, the same
+   surface/border/radius the board cards use, on the same .band rhythm as every
+   other home section. */
+.quick-start {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  /* Two columns where there is room, one below ~46rem of content. The install
+     card is short and the tutorial card is long, so `start` rather than a
+     stretch: a 5-link card padded out to the height of an 11-link one is a
+     card with a hole in it. */
+  grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr));
+  align-items: start;
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  counter-reset: quick-start;
+}
+.quick-start__step {
+  counter-increment: quick-start;
+  padding: 1.4rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--brand-accent);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+/* The step number, drawn from the counter so the markup states the order once
+   (the <ol>) and never spells a digit out. --brand-accent is a fill and never
+   text here (see the palette note at the top), so the badge is the accent
+   ground with --on-accent on it. */
+.quick-start__title {
+  display: flex; align-items: center; gap: .6rem;
+  margin: 0; font-size: 1.15rem; line-height: 1.3;
+}
+.quick-start__title::before {
+  content: counter(quick-start);
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.7rem; height: 1.7rem; border-radius: 999px;
+  background: var(--brand-accent); color: var(--on-accent);
+  font-family: var(--font-display); font-size: .92rem; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.quick-start__desc { margin: .6rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+.quick-start__links {
+  list-style: none; margin: .9rem 0 0; padding: 0;
+  font-size: .95rem;
+}
+.quick-start__links li { margin: 0; padding: .3rem 0; }
+.quick-start__links a { font-weight: 600; }
+/* The eleven tutorial steps read as one short journey in two columns rather
+   than as a long list in one. `break-inside` so a wrapped step title is not
+   split across the column break. */
+.quick-start__links--cols { columns: 2; column-gap: 1.5rem; counter-reset: qs-step; }
+/* Flex, not a bare marker: a step title that wraps ("Using Arguments and
+   String Arrays") has to hang under its own text, not under its number. */
+.quick-start__links--cols li {
+  break-inside: avoid; counter-increment: qs-step;
+  display: flex; align-items: baseline;
+}
+/* Numbered, because columns flow DOWN the left one and then down the right,
+   and a reader scanning across the top two would otherwise read step 1 next to
+   step 7. Muted and tabular so the numbers order the list without competing
+   with the links they label. */
+.quick-start__links--cols li::before {
+  content: counter(qs-step) ".";
+  /* Wide enough for "11." -- at 1.35em the two-digit steps ran into their
+     own link while the single-digit ones sat clear of it. */
+  flex: 0 0 1.75em;
+  color: var(--ink-muted); font-variant-numeric: tabular-nums;
+}
+.quick-start__meta {
+  margin: .45rem 0 0;
+  font-family: var(--font-display); font-weight: 700; font-size: .82rem;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--brand-accent-strong);
+}
+.quick-start__foot {
+  margin: 1.25rem 0 0;
+  color: var(--ink-soft); font-size: .95rem;
+}
+@media (max-width: 30rem) {
+  /* Two columns of ~7rem is not two columns, it is two truncated ones. */
+  .quick-start__links--cols { columns: 1; }
+}
+
+/* -------------------------------------------------- quick start: steps -- */
+/* {{< quick-start-steps >}} on /java-quick-start/ and the two hub pages under
+   it -- the derived replacement for the Markdown lists of links those pages
+   used to hand-type.
+
+   A row per page rather than a grid of cards: these lists are read top to
+   bottom (the tutorial IS an order), and every row carries a sentence, so
+   cards side by side would put two paragraphs on one line at the reading
+   measure the page is capped to.
+
+   NOTE THE CLASS-ON-CLASS SELECTORS. This renders inside `.prose`, whose
+   `.prose ol`, `.prose li + li` and `.prose ol li::before` rules are 0-1-1 and
+   0-1-2 and outrank a single class -- the same gotcha the series partials hit
+   (see AGENTS.md). Anything here that a prose list also styles has to be
+   written with two classes or it silently loses. */
+.qs-steps { margin: 1.25rem 0 1.75rem; }
+.qs-steps .qs-steps__summary {
+  margin: 0 0 .7rem;
+  font-family: var(--font-display); font-weight: 700; font-size: .82rem;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--brand-accent-strong);
+}
+.qs-steps .qs-steps__list {
+  list-style: none; margin: 0; padding: 0;
+  counter-reset: qs-item;
+  display: grid; gap: .55rem;
+}
+.qs-steps .qs-steps__item {
+  counter-increment: qs-item;
+  margin: 0;
+  display: grid;
+  /* title ... time, with a number column only on an ordered list. */
+  grid-template-columns: 1fr auto;
+  align-items: baseline; column-gap: .25rem;
+  padding: .7rem .95rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px;
+}
+/* NUMBERS ONLY ON A SEQUENCE. The tutorial steps are done in order; the
+   install guides are alternatives, and numbering "Install Java on Windows" 5
+   of 5 tells a reader on Windows they are four behind. */
+.qs-steps .qs-steps__list--ordered .qs-steps__item { grid-template-columns: 2rem 1fr auto; }
+.qs-steps .qs-steps__list--ordered .qs-steps__item::before {
+  content: counter(qs-item) ".";
+  /* Overrides `.prose ol li::before`, which positions its own counter
+     absolutely -- this one is a grid cell. */
+  position: static;
+  color: var(--ink-muted); font-variant-numeric: tabular-nums;
+  font-family: var(--font-display); font-weight: 700; font-size: .9rem;
+}
+.qs-steps .qs-steps__link { font-weight: 600; }
+/* The mm:ss a step takes, right of its title. Tabular so eleven of them line
+   up into a column a reader can add up at a glance. */
+.qs-steps .qs-steps__time {
+  grid-column: -2;
+  color: var(--ink-muted); font-size: .85rem;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+/* Under the title, never beside it -- so the description starts in the
+   title's own column: the first one on an unnumbered list, the second on a
+   numbered one, where column 1 is the number. */
+/* The author or organization behind an outside tutorial, in the column the
+   tutorial steps put their running time in. Not tabular: it is a name. */
+.qs-steps .qs-steps__by {
+  grid-column: -2;
+  color: var(--ink-muted); font-size: .85rem; white-space: nowrap;
+}
+.qs-steps .qs-steps__desc {
+  grid-column: 1 / -1;
+  margin: .2rem 0 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.45;
+}
+.qs-steps .qs-steps__list--ordered .qs-steps__desc { grid-column: 2 / -1; }
+@media (max-width: 30rem) {
+  /* The time drops under the title rather than squeezing it: at this width a
+     step name is already wrapping to two lines. */
+  .qs-steps .qs-steps__list--ordered .qs-steps__item { grid-template-columns: 1.6rem 1fr; }
+  .qs-steps .qs-steps__item { grid-template-columns: 1fr; }
+  .qs-steps .qs-steps__time { grid-column: -2; grid-row: auto; }
+}
+
 /* ------------------------------------------------------------ post grid -- */
 
 .post-grid {

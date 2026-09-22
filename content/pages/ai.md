@@ -2,8 +2,6 @@
 title: "Foojay.io AI Portal"
 description: "Where Java meets AI: practical guides, tutorials and success stories on building AI-powered Java applications, from pure-Java ML to LangChain4j and Deep Netts."
 url: "/ai/"
-aliases:
-  - "/ai/"
 image: "/images/pages/ai/ai4devs.png"
 type: "ai"
 # The portal is a curated view of one category, not a hand-kept list of posts:

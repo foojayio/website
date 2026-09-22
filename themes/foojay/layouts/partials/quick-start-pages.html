@@ -1,0 +1,46 @@
+{{- /* THE SINGLE DEFINITION OF "THE PAGES UNDER A QUICK START HUB". Takes a hub
+       page (`/java-quick-start/`, `.../install-java/`,
+       `.../quick-start-tutorial/`); returns its child pages in the order they
+       should be read.
+
+       Three places ask this question and must not answer it differently: the
+       home page band (partials/quick-start-band.html), the list the hub page
+       itself renders ({{< quick-start-steps >}}), and the "you are here" the
+       series partials draw on a step. Before this, the lists were written out
+       in Markdown as well -- 38 hand-typed links across three pages, all of
+       them absolute `https://foojay.io/...` URLs that walked a reader off a
+       `hugo server` preview and onto the live site, with titles that had
+       already drifted from the pages they point at ("Install Java (Mac OS X)"
+       for a page called "Install Java on MacOS").
+
+       The children of a folder, found by `File.Dir` on site.RegularPages, the
+       way partials/series-steps.html finds a series: none of these folders has
+       an `_index.md`, so no hub page is a Hugo parent of its own children. The
+       folder is built from the hub's own `File.ContentBaseName`, so renaming a
+       hub renames the query with it. */ -}}
+
+{{- $hub := . -}}
+{{- $pages := slice -}}
+{{- if and $hub $hub.File -}}
+  {{- $kids := where site.RegularPages "File.Dir" (printf "%s%s/" $hub.File.Dir $hub.File.ContentBaseName) -}}
+  {{- /* WEIGHT IF THE AUTHOR STATED ONE FOR EVERY CHILD, ALPHABETICAL OTHERWISE.
+         A weight is this site's way of saying "these pages are a sequence" (it
+         is also what hands them the progress bar and the prev/next cards), and
+         the eleven tutorial steps carry one each. The five install guides
+         deliberately do not: they are alternatives -- Windows, macOS, Linux --
+         not a path, so there is no order to state and nothing to sort by but
+         the title. Which is the useful order here anyway: "Check your Java
+         installation" (the step that may save you the other four), then "Find
+         Another Java Version", then the three "Install Java on ..." pages.
+
+         All-or-nothing rather than "sort the weighted ones first": a folder
+         where only some pages carry a weight is a mistake to notice, not an
+         order to honour. */ -}}
+  {{- $weighted := where $kids "Weight" ">" 0 -}}
+  {{- if and $kids (eq (len $weighted) (len $kids)) -}}
+    {{- $pages = sort $kids "Weight" -}}
+  {{- else -}}
+    {{- $pages = sort $kids "Title" -}}
+  {{- end -}}
+{{- end -}}
+{{- return $pages -}}

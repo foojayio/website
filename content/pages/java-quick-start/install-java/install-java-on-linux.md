@@ -3,7 +3,6 @@ title: "Install Java on Linux"
 description: "Install Java on Linux with a Debian package installer, and find the other distributions and versions available for your system."
 url: "/java-quick-start/install-java/install-java-on-linux/"
 aliases:
-  - "/java-quick-start/install-java/install-java-on-linux/"
   - "/install-java-on-linux/"
 frozen: false
 ---
@@ -17,7 +16,7 @@ No problem, let's use an installer to make the process really easy.
 This is a direct link to get the Azul Zulu distribution, version 25, as an installer for a Debian-based system (Ubuntu, PopOS, Linux Mint, and more):  
 <https://cdn.azul.com/zulu/bin/zulu25.34.17-ca-jdk25.0.3-linux_amd64.deb>
 
-Many more distributions and versions of Java exist. You can [read more info here](https://foojay.io/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
+Many more distributions and versions of Java exist. You can [read more info here](/java-quick-start/install-java/find-another-java-version/) on how to find another distribution or version.
 
 Download the `.deb` file, open a Terminal, and run the following commands.
 

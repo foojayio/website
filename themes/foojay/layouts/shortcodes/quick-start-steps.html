@@ -1,0 +1,60 @@
+{{- /*
+  {{< quick-start-steps >}} -- the pages under a Quick Start hub, as a list of
+  linked cards, in place of a hand-typed Markdown list of links.
+
+    {{< quick-start-steps >}}                  the pages under THIS page
+    {{< quick-start-steps "install-java" >}}   the pages under a sibling hub
+
+  Everything comes from partials/quick-start-pages.html, which is also what the
+  home page band is built from -- so the trail is described in exactly one
+  place, the links are root-relative (they work under `hugo server`; the 38
+  they replace were absolute foojay.io URLs that did not), and a step's title
+  here is the title of the page it opens, forever.
+
+  Each row carries the page's own `description:` as its one-line gloss. That is
+  the same sentence the page gives a search engine and a link preview, so a
+  reader arriving from Google and a reader arriving from this list are told the
+  same thing about where they are going -- and an editor rewriting a step's
+  description updates its entry in every list at once.
+
+  A `duration:` (mm:ss) is shown when the page has one, and the header line
+  adds them up. Only the eleven tutorial steps carry one -- an install guide
+  takes as long as your download does.
+*/ -}}
+
+{{- $hub := .Page -}}
+{{- with .Get 0 -}}
+  {{- $hub = site.GetPage (path.Join "/" $.Page.File.Dir $.Page.File.ContentBaseName .) -}}
+{{- end -}}
+
+{{- $pages := partial "quick-start-pages.html" $hub -}}
+
+{{- /* A SEQUENCE OR A SET OF ALTERNATIVES, which is the same question
+       partials/quick-start-pages.html sorts by, asked again here because it
+       decides how the list READS. The eleven tutorial steps are done in order,
+       so they are an <ol>, they are numbered, and saying "11 steps" is the
+       reassurance a beginner wants. The five install guides are a choice --
+       you read the one for your own machine and none of the others -- so they
+       are a <ul> with no numbers, and calling them "5 steps" would tell a
+       reader on a Mac they have four more things to do. */ -}}
+{{- $ordered := and $pages (eq (len (where $pages "Weight" ">" 0)) (len $pages)) -}}
+{{- $minutes := partial "quick-start-minutes.html" $pages -}}
+
+{{- with $pages }}
+<div class="qs-steps">
+  {{- if $ordered }}
+  {{- /* Counted, never typed. */ -}}
+  <p class="qs-steps__summary">
+    {{ len . }} step{{ if ne (len .) 1 }}s{{ end }}
+    {{- with $minutes }}, under {{ . }} minutes in total{{ end -}}
+  </p>
+  <ol class="qs-steps__list qs-steps__list--ordered">
+    {{- partial "quick-start-items.html" . -}}
+  </ol>
+  {{- else }}
+  <ul class="qs-steps__list">
+    {{- partial "quick-start-items.html" . -}}
+  </ul>
+  {{- end }}
+</div>
+{{- end -}}

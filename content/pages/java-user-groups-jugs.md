@@ -10,7 +10,6 @@ outputs:
   - html
   - rss
 aliases:
-  - "/jugs/"
   - "/jugs-2/"
 frozen: true
 ---

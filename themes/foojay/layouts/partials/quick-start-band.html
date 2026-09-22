@@ -1,0 +1,98 @@
+{{/* "Getting started with Java" on the home page -- THE QUICK START TRAIL
+     ITSELF, not posts.
+
+     It used to be `first 4` of the "Java Beginner" category, and that is the
+     bug this replaces. A category is a word an author puts on their own post,
+     and authors reach for "Java Beginner" for anything they consider
+     approachable: a gentle introduction to one vendor's framework, a first look
+     at a product, a beginner's guide to a library. All fine posts, none of them
+     an answer to the question this band exists to answer -- "I don't have Java
+     yet, where do I start?" -- and the four on show changed with whatever was
+     published last. Curating from here cannot fix that, because the input is
+     1500 authors' reading of two words.
+
+     /java-quick-start/ is the answer the site already has and the one the
+     editors control: the one-time install, then an 11-step tutorial that gets
+     you to streams in under 30 minutes. So the band now shows THAT, as the two
+     numbered steps the hub page itself is built from.
+
+     EVERYTHING IS READ OFF THOSE PAGES -- the headings, the links, the blurbs,
+     the install options, the tutorial steps, the count of recommended
+     tutorials. There is no second copy of the trail here to keep in step with
+     /java-quick-start/, and a new install guide, a new tutorial step or a new
+     recommended course appears in this band on the build that first sees it.
+
+     Renders nothing if the hub page is gone, the way the podcast and events
+     bands render nothing when they have nothing. */}}
+
+{{ $hub := site.GetPage "/pages/java-quick-start" }}
+{{ $install := site.GetPage "/pages/java-quick-start/install-java" }}
+{{ $tutorial := site.GetPage "/pages/java-quick-start/quick-start-tutorial" }}
+{{ $other := site.GetPage "/pages/java-quick-start/other-tutorials" }}
+
+{{/* Both lists come from partials/quick-start-pages.html, which is also what
+     the hub pages' own {{< quick-start-steps >}} renders -- so the band and
+     the page it links to cannot disagree about what the trail is. */}}
+{{ $installPages := partial "quick-start-pages.html" $install }}
+{{ $steps := partial "quick-start-pages.html" $tutorial }}
+
+{{ with $hub }}
+<section class="band">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <h2>Getting started with Java</h2>
+        <p>Is Java your first language, or are you coming from another one? Let Friends Of OpenJDK help you get up and running.</p>
+      </div>
+      <a class="more" href="{{ .RelPermalink }}">Quick Start guide &rarr;</a>
+    </div>
+
+    {{/* An <ol>, because the two cards are steps in an order and the reader
+         does the first one before the second. The numbers are drawn by a CSS
+         counter rather than written here. */}}
+    <ol class="quick-start">
+      {{ with $install }}
+      <li class="quick-start__step">
+        <h3 class="quick-start__title"><a href="{{ .RelPermalink }}">Install Java</a></h3>
+        <p class="quick-start__desc">{{ partial "meta-description.html" . }}</p>
+        <ul class="quick-start__links">
+          {{ range $installPages }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+          {{ end }}
+        </ul>
+      </li>
+      {{ end }}
+
+      {{ with $tutorial }}
+      <li class="quick-start__step">
+        <h3 class="quick-start__title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+        <p class="quick-start__desc">{{ partial "meta-description.html" . }}</p>
+        {{/* The one thing the numbered list below cannot say, and the reason a
+             beginner starts an eleven-step tutorial at all. Added up from the
+             steps' own `duration:`, so it cannot overpromise. */}}
+        {{ with partial "quick-start-minutes.html" $steps }}
+          <p class="quick-start__meta">Under {{ . }} minutes in total</p>
+        {{ end }}
+        {{/* Two columns at width, so eleven short steps read as one short
+             journey rather than a long list. */}}
+        <ol class="quick-start__links quick-start__links--cols">
+          {{ range $steps }}
+            <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+          {{ end }}
+        </ol>
+      </li>
+      {{ end }}
+    </ol>
+
+    {{/* The third heading of the hub page, as one line rather than a third
+         card: it is a send-off, and the reader only reaches it after the two
+         steps above. The count is `len`, so adding a tutorial to that page's
+         frontmatter list updates this sentence too. */}}
+    {{ with $other }}
+    <p class="quick-start__foot">
+      Done, or want another voice? <a href="{{ .RelPermalink }}">{{ len .Params.tutorials }} more free Java courses and tutorials</a>, picked by the community.
+    </p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

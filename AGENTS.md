@@ -3408,6 +3408,92 @@ should catch a mistake at PR time rather than letting it fail silently.
   its grid below is unpaginated and shows every article anyway, so there is
   nothing hidden by the pick; it can opt in by passing more.
 
+- **The home page's "Getting started with Java" band is the QUICK START TRAIL,
+  not posts -- because a category is not an editorial decision.** It used to be
+  `first 4` of the "Java Beginner" category, and authors reach for that
+  category for anything they consider approachable: a gentle introduction to
+  one vendor's framework, a first look at a product, a beginner's guide to a
+  library. All fine posts, none of them an answer to the question the band
+  exists to answer ("I don't have Java yet, where do I start?"), and the four
+  on show changed with whatever was published last. Curating from the layout
+  cannot fix that -- the input is 1500 authors' reading of two words -- and
+  re-tagging 100+ posts fixes it only until the next one.
+
+  `partials/quick-start-band.html` shows `/java-quick-start/` instead: two
+  numbered cards, the five install guides and the eleven tutorial steps, with
+  the tutorial's total running time and the recommended-course count as a
+  send-off. That trail is editorially controlled, which is the whole point.
+
+  `/java-quick-start/`'s own "Next Steps" still links the category as a *list*,
+  which is what a tag is good for; the home page is where it could not carry
+  the weight.
+
+- **THE QUICK START TRAIL IS DESCRIBED ONCE, in the pages themselves.** Three
+  places render it -- the home page band, the hub pages' own lists, and the
+  series progress bar on a step -- and before this each Markdown page ALSO
+  wrote its own list out by hand: 38 links across `java-quick-start.md`,
+  `install-java.md` and `quick-start-tutorial.md`, every one of them an
+  absolute `https://foojay.io/...` URL (so a `hugo server` preview walked you
+  onto the live site mid-tutorial), with titles that had already drifted from
+  the pages they open -- "Install Java (Mac OS X)" for a page called "Install
+  Java on MacOS", and a step timed at `00:00:035`.
+
+  The pieces, smallest first:
+  - **`partials/quick-start-pages.html`** is the single definition of "the
+    pages under a hub": the children of its folder, found by `File.Dir` on
+    `site.RegularPages` the way `series-steps.html` finds a series, because
+    none of these folders has an `_index.md` and so no hub page is a Hugo
+    parent of its own children. The folder is built from the hub's own
+    `File.ContentBaseName`, so renaming a hub renames the query.
+  - **Weight if every child has one, `Title` otherwise.** A weight is this
+    site's way of saying "these pages are a sequence"; the eleven tutorial
+    steps carry one each, the five install guides deliberately do not (see the
+    series entry above). All-or-nothing, because a folder where only some pages
+    are weighted is a mistake to notice, not an order to honour.
+  - **`{{< quick-start-steps >}}`** renders that list on a hub page, and asks
+    the same question again to decide how it READS: a sequence is an `<ol>`
+    with numbers and a "11 steps, under 29 minutes in total" header;
+    alternatives are a `<ul>` with neither, because telling a reader on a Mac
+    that "Install Java on Windows" is step 5 of 5 invents four chores.
+  - **`{{< quick-start-tutorials >}}`** does the same for the outside courses,
+    read from `other-tutorials.md`'s `tutorials:` frontmatter -- so step 3 of
+    the hub page is the same rows as steps 1 and 2 rather than a sentence with
+    a link in it, and the two pages cannot list different tutorials. These are
+    the only rows that leave the site, so they are the only ones that open in a
+    new tab.
+  - **Each row's gloss is the target page's own `description:`.** The same
+    sentence it gives a search engine, so a reader arriving from Google and a
+    reader arriving from the list are told the same thing, and an editor
+    rewriting it updates every list at once.
+
+  Two things to know when touching this:
+  - **`duration:` (mm:ss) now lives on the step**, not in a list on another
+    page, and the hub's "under 30 minutes" promise is `math.Floor` of their sum
+    (`partials/quick-start-minutes.html`) -- so re-timing a step or adding a
+    twelfth moves the claim on its own, and it can no longer overpromise.
+    **Strip leading zeros before `int`**: Hugo's `int` is `strconv.ParseInt`
+    with base 0, so "08" is read as octal and FAILS THE WHOLE BUILD. That
+    failure is also why `hugo --quiet` is not enough to check a change here --
+    it hid the error and still exited 0, leaving `/java-quick-start/` simply
+    not written.
+  - **A template cannot build an element NAME.** `<{{ $tag }}>` is escaped to
+    visible text by Go's html/template, which is what the first version of the
+    shortcode shipped to the page. Hence `partials/quick-start-items.html`: one
+    shared row body, two branches around it.
+
+- **A page must never list its own `url:` in `aliases:`, and
+  `Frontmatter.checkSelfAliases` fails the PR if one does.** 29 pages carried
+  one, inherited from the WordPress scrape, and on two of them it had taken the
+  page off the air: Hugo wrote the alias's redirect stub OVER the real page, so
+  `/java-quick-start/` and `/java-quick-start/quick-start-tutorial/` served
+  nothing but a `<meta http-equiv="refresh">` pointing at themselves -- an
+  infinite redirect in the browser, on the hub the home page's "Getting started
+  with Java" band sends a beginner to. The other 27 happened to win the race
+  and rendered fine, which is exactly why this is a check and not a one-time
+  cleanup: the same line is harmless in one page and fatal in the next, nothing
+  in the build says which, and `hugo` reports no error either way. A
+  self-alias can never do anything useful -- the URL already serves the page.
+
 - **The logo file is cropped to its artwork, and sized in CSS.**
   `themes/foojay/static/images/foojay-logo.png` was a 1500x500 export whose mark
   only occupied 1022x352 of it -- 32% of the width and 30% of the height was

@@ -4,9 +4,8 @@ linkTitle: "Working with Numbers"
 description: "The Java number types you will actually use - int, float, double and long - and how to work with them."
 url: "/java-quick-start/quick-start-tutorial/working-with-numbers/"
 jdoodle: true
-aliases:
-  - "/java-quick-start/quick-start-tutorial/working-with-numbers/"
 frozen: false
+duration: "2:08"
 weight: 4
 ---
 

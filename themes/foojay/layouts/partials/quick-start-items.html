@@ -1,0 +1,15 @@
+{{- /* The <li> rows of a {{< quick-start-steps >}} list. Takes the pages.
+
+       Its own partial only because the list is an <ol> when the pages are a
+       sequence and a <ul> when they are alternatives, and Go's html/template
+       will not let a template build an element NAME: `<{{ $tag }} ...>` is
+       escaped to visible text rather than rendered, which is exactly what the
+       first version of this shortcode shipped to the page. Two branches around
+       one shared body is the version that works. */ -}}
+{{- range . }}
+    <li class="qs-steps__item">
+      <a class="qs-steps__link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{- with .Params.duration }}<span class="qs-steps__time">{{ . }}</span>{{ end }}
+      {{- with .Params.description }}<p class="qs-steps__desc">{{ . }}</p>{{ end }}
+    </li>
+{{- end }}

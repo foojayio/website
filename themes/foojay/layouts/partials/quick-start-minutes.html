@@ -1,0 +1,28 @@
+{{- /* How long a list of Quick Start pages takes, in whole minutes. Takes the
+       pages; returns 0 when none of them says.
+
+       The tutorial's `duration:` values are mm:ss, because that is what the
+       videos they were timed from are. A reader does not want eleven sets of
+       seconds added up in their head, and "29 minutes" is the number the hub
+       page's promise is made of -- so the promise is now DERIVED from the
+       steps rather than typed next to them, and re-timing a step or adding a
+       twelfth moves it on its own. `math.Floor`, not round: the sentence this
+       feeds says "under N minutes", and rounding 29:52 up to 30 would make a
+       true claim read as a false one. */ -}}
+
+{{- $seconds := 0 -}}
+{{- range . -}}
+  {{- with .Params.duration -}}
+    {{- $parts := split . ":" -}}
+    {{- if eq (len $parts) 2 -}}
+      {{- /* LEADING ZEROS OFF BEFORE `int`. Hugo's `int` is strconv.ParseInt
+             with base 0, which reads "08" as octal and FAILS THE WHOLE BUILD
+             ("unable to cast \"08\"") -- and mm:ss is written with them. The
+             `default "0"` is for "00", which trims away to nothing. */ -}}
+      {{- $m := int (strings.TrimLeft "0" (index $parts 0) | default "0") -}}
+      {{- $s := int (strings.TrimLeft "0" (index $parts 1) | default "0") -}}
+      {{- $seconds = add $seconds (add (mul 60 $m) $s) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return (int (math.Floor (div $seconds 60.0))) -}}

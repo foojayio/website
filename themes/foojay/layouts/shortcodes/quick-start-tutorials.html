@@ -1,0 +1,41 @@
+{{- /*
+  {{< quick-start-tutorials >}} -- the recommended outside courses from
+  /java-quick-start/other-tutorials/, in the same rows the two lists above them
+  use, so step 3 of the hub page looks like steps 1 and 2 instead of trailing
+  off into a sentence with a link in it.
+
+    {{< quick-start-tutorials >}}              the sibling "other-tutorials" page
+    {{< quick-start-tutorials "other-tutorials" >}}   same, said out loud
+
+  The entries are that page's `tutorials:` frontmatter -- the single place they
+  are written down, and where an editor adds one (AGENTS.md explains why they
+  are a list there rather than a page each). Nothing is repeated here: add a
+  seventh tutorial and it appears on both pages, and the count in the line
+  above the list follows on its own.
+
+  These are the only rows in the family that leave the site, so unlike the
+  install guides and the tutorial steps they open in a new tab -- the same
+  treatment the cards on /java-quick-start/other-tutorials/ give them.
+*/ -}}
+
+{{- $name := .Get 0 | default "other-tutorials" -}}
+{{- $source := site.GetPage (path.Join "/" .Page.File.Dir .Page.File.ContentBaseName $name) -}}
+
+{{- with $source -}}
+{{- with .Params.tutorials }}
+<div class="qs-steps">
+  <p class="qs-steps__summary">
+    {{ len . }} free course{{ if ne (len .) 1 }}s{{ end }} and catalog{{ if ne (len .) 1 }}s{{ end }}
+  </p>
+  <ul class="qs-steps__list">
+    {{- range . }}
+    <li class="qs-steps__item">
+      <a class="qs-steps__link" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+      {{- with .by }}<span class="qs-steps__by">by {{ . }}</span>{{ end }}
+      {{- with .description }}<p class="qs-steps__desc">{{ . }}</p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+</div>
+{{- end -}}
+{{- end -}}
