@@ -1,6 +1,6 @@
 ---
 title: "How much will post-quantum migration cost your Java codebase?"
-date: "2026-09-25"
+date: "2026-09-28"
 description: "A static auditor that estimates what a post-quantum migration will cost a Java codebase, run across 27 popular Java projects to show where the cost hides."
 authors:
   - "arpan-sharma"

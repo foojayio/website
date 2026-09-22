@@ -1,6 +1,6 @@
 ---
 title: "VoIP, VPN, and the Build System Behind Them"
-date: "2026-09-24"
+date: "2026-09-25"
 description: "Codename One adds native call management and VPN APIs, while its builders generate the platform services, frameworks, permissions, and extension plumbing..."
 authors: ["shai-almog"]
 image: "voip-vpn-builders-bdff9b8012.jpg"

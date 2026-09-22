@@ -1,6 +1,6 @@
 ---
 title: "The Java 21 Doomsday Clock Countdown"
-date: "2026-09-30"
+date: "2026-09-29"
 description: "Oracle's free NFTC license for Java 21 has expired, and the October 2026 quarterly update is the first one enterprises have to pay for. Here are the three options left, and why the timeline is short!"
 authors:
   - "dana-crane"
