@@ -12,18 +12,14 @@ related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
 ---
 
-Markdown is a good default. It is easy to write, everybody already knows it, and
-for most articles it is exactly enough.
+Markdown is a good default. It is easy to write, everybody already knows it, and for most articles it is exactly enough.
 
-For some articles it is not. If you have ever wanted to put a caption on a code
-block, number the interesting lines and explain them underneath, or set a
-warning apart from the paragraph before it, you have run into the edges of what
-Markdown can say — and reached for a pile of raw HTML instead.
+For some articles it is not. If you have ever wanted to put a caption on a code block, number the interesting lines and explain them underneath, or set a warning apart from the paragraph before it, you have found the limits of Markdown.
 
 Large parts of the Java ecosystem document in
 https://asciidoc.org/[AsciiDoc] for exactly this reason. So posts here on the new Hugo-driven Foojay, can now be written in it too.
 Thanks to link:/today/author/brice-dutheil/[Brice Dutheil] for requesting
-this feature, and for naming exactly which parts of it he uses.
+this feature, and for naming exactly which parts of it he uses. And of course, https://github.com/foojayio/website/blob/main/content/posts/2026/09/23/asciidoc-support-on-foojay/index.adoc[this post is written in AsciiDoc] to show it off!
 
 == The short version
 
@@ -36,10 +32,8 @@ content/posts/2026/10/09/my-article/
 └── screenshot.png
 ---
 
-The frontmatter block is identical — same `title`, `date`, `authors`,
-`categories`, same `---` fences. Images still sit next to the article. The same
-checks run on your pull request. Nothing else about submitting an article
-changes.
+The frontmatter block is identical: `title`, `date`, `authors`,
+`categories`, fenced with `---`. Images still sit next to the article. The same checks run on your pull request. Nothing else about submitting an article changes.
 
 == Named blocks
 
@@ -62,13 +56,11 @@ which renders as:
 var executor = Executors.newVirtualThreadPerTaskExecutor();
 ----
 
-Any block takes one — tables, images, quotes — so a reader scrolling for "the
-one with the executor in it" has something to scroll for.
+Any block can be named: tables, images, and quotes.
 
 == Callouts in source code
 
-This is the one that has no Markdown equivalent at all. Put numbered markers in
-the code and explain them beneath it:
+This is the one that has no Markdown equivalent at all. Put numbered markers in the code and explain them beneath it:
 
 [source,subs="-callouts"]
 ------
@@ -85,12 +77,7 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {  // <1>
 <3> `join` waits for all of them, and rethrows the first failure.
 ------
 
-The marker goes inside a comment for the language of the snippet — `//` here,
-`#` in a shell or Python snippet, `--` in SQL — which is what keeps the file
-compiling if you paste the snippet back into an IDE to check it. The comment
-itself does not reach the reader: it becomes a circled number, and the markers
-line up with the explanation underneath, where neither can drift out of step
-with the other when you edit the snippet later. The result looks like this:
+The marker goes inside a comment for the language of the snippet — `//` for Java, `#` in a shell or Python snippet, `--` in SQL. This keeps the file compiling if you paste the snippet back into an IDE to check it. The comment itself does not reach the reader: it becomes a circled number, and the markers line up with the explanation underneath, where neither can drift out of step with the other when you edit the snippet later. The result looks like this:
 
 [source,java]
 ----
@@ -106,9 +93,7 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {  // <1>
 
 == Admonitions
 
-Admonitions are the labelled boxes that set a remark apart from the paragraph
-around it — AsciiDoc's word for them, and the one to search the docs with.
-Five kinds, each written as one word followed by a colon:
+Admonitions are the labelled boxes that set a remark apart from the paragraph around it. It's a specific term used by AsciiDoc. There are five kinds, each written as one word followed by a colon:
 
 [source,text]
 ----
@@ -123,6 +108,8 @@ CAUTION: Don't over-use these kind of blocks...
 IMPORTANT: This message gets really highlighted!
 ----
 
+Result:
+
 NOTE: Virtual threads are not faster threads. They are cheaper threads.
 
 TIP: `jcmd <pid> Thread.dump_to_file` gives you every virtual thread.
@@ -133,12 +120,9 @@ CAUTION: Don't over-use these kind of blocks...
 
 IMPORTANT: This message gets really highlighted!
 
-The text has to start on the same line as the label. It may then wrap over as
-many lines as it likes — but a label sitting alone on its line is not an
-admonition at all, it is a paragraph that happens to begin with the word "TIP:".
+The text has to start on the same line as the label. It may then wrap over as many lines as it likes, but a label sitting alone on its line is not an admonition at all, it is a paragraph that happens to begin with the word "TIP:".
 
-So for anything with a blank line in it, use the other form: the label in
-square brackets on its own line, above a `====` block.
+For anything with a blank line in it, you need to use the other form: the label in square brackets on its own line, above a `====` block.
 
 [source]
 ------
@@ -154,6 +138,8 @@ measure with `jcmd <pid> Thread.dump_to_file -format=json` before assuming
 which one you have.
 ====
 ------
+
+Result:
 
 [TIP]
 ====
@@ -169,8 +155,7 @@ which one you have.
 
 == Tables that do more than a grid
 
-Markdown tables are a grid of cells and nothing else. AsciiDoc tables set column
-widths, span cells, and align per column:
+Markdown tables are a grid of cells and nothing else. AsciiDoc tables set column widths, span cells, and alignment per column:
 
 [source]
 ----
@@ -185,6 +170,8 @@ widths, span cells, and align per column:
 |===
 ----
 
+Result:
+
 .Garbage collectors at a glance
 [cols="<1,^1,>1,2", options="header"]
 |===
@@ -195,15 +182,9 @@ widths, span cells, and align per column:
 | ZGC    | yes | 1ms | large heaps, latency-sensitive services
 |===
 
-The `cols` attribute is doing all of it. The numbers are relative widths, so
-the last column is twice the width of the others because it holds twice the
-text. The symbol in front of each one sets the alignment: `<` left, `^` centre,
-`>` right — which is how the numbers line up under each other while the prose
-stays left.
+The `cols` attribute is doing all of it. The numbers are relative widths, so the last column is twice the width of the others because it holds twice the text. The symbol in front of each one sets the alignment: `<` left, `^` centre, `>` right, which is how the numbers line up under each other while the prose stays left.
 
-Cells span, too, which is the part Markdown has no answer for at all. A prefix
-before the `|` says how far a cell reaches: `3+|` spans three columns, `.2+|`
-spans two rows, and `2.2+|` does both.
+Cells span, too, which is the part Markdown has no answer for at all. A prefix before the `|` says how far a cell reaches: `3+|` spans three columns, `.2+|` spans two rows, and `2.2+|` does both.
 
 [source]
 ----
@@ -212,39 +193,33 @@ spans two rows, and `2.2+|` does both.
 |===
 | Release | Type | Vendor support | Ends
 
-| Java 21 | LTS  .2+| every major vendor | 2031
+| Java 21 | LTS  .2+| Every major vendor | 2031
 | Java 25 | LTS | 2035
 3+| Java 26 and 27 — non-LTS, six months each | 2027
 |===
 ----
+
+Result:
 
 .JDK support windows
 [cols="1,1,2,1", options="header"]
 |===
 | Release | Type | Vendor support | Ends
 
-| Java 21 | LTS  .2+| every major vendor | 2031
+| Java 21 | LTS  .2+| Every major vendor | 2031
 | Java 25 | LTS | 2035
 3+| Java 26 and 27 — non-LTS, six months each | 2027
 |===
 
-"Every major vendor" is one cell spanning two rows, and the last row is one
-cell spanning three columns. Both cost a couple of characters.
+"Every major vendor" is one cell spanning two rows, and the last row is one cell spanning three columns. Both cost a couple of characters.
 
 == Everything else stays the same
 
-Everything the site does around an article works the same way. The "On this
-page" navigation is built from your `==` headings. Images go in the article
-folder and are checked for weight and for alternative text. The frontmatter
-rules are the same rules, enforced by the same check on your pull request.
-Foojay's own shortcodes work too.
+Everything the site does around an article works the same way. The "On this page" navigation is built from your `==` headings. Images go in the article folder and are checked for weight and for alternative text. The frontmatter rules are the same rules, enforced by the same check on your pull request.
 
-Code is highlighted by the same highlighter, with the same language names, so
-`[source,kotlin]` here and a ```` ```kotlin ```` fence in a Markdown article
-come out looking identical.
+Code is highlighted by the same highlighter, with the same language names, so `[source,kotlin]` here and a ```` ```kotlin ```` fence in a Markdown article come out looking identical.
 
-And link:/today/diagrams-as-code-mermaid-support-on-foojay/[Mermaid diagrams]
-work, as a source block like any other:
+And link:/today/diagrams-as-code-mermaid-support-on-foojay/[Mermaid diagrams] work, as a source block like any other:
 
 [source]
 ------
@@ -255,6 +230,8 @@ graph LR
     B --> C[Bytecode]
 ----
 ------
+
+Result:
 
 [source,mermaid]
 ----
