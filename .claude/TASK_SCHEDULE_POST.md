@@ -86,7 +86,11 @@ jbang scripts/validate/Frontmatter.java
 Expect `Frontmatter check passed`. The lines starting with `~` are advisory and
 span the whole archive, so read the ones naming this post and ignore the rest.
 
-**6. Commit to `main`.**
+**6. Transcript.**
+
+If the post is a podcast and/or contains a YouTube embed, run the transcript script to generate a `transcript.md` in the post bundle. This is optional, but recommended for accessibility and SEO.
+
+**7. Commit to `main`.**
 
 A message in the shape of `New post from draft: SLUG` matches what the history
 already uses. Publishing needs nothing further from you.

@@ -1,5 +1,5 @@
 ---
-title: "Announcing Foojay 2.0"
+title: "Announcing The New Foojay"
 date: "2026-09-22"
 description: "Foojay has a new home: a static, open-source site where publishing an article is a pull request. Same URLs, same archive, much faster, and new features."
 authors:
@@ -133,246 +133,135 @@ whole site. If you mistyped your author slug or forgot to commit an image, you
 find out in about a minute, from a robot, before a human has spent any time on
 it.
 
-**Already published the article on your own blog?** You can cross-post on Foojay like in the past, only add one extra line:
+**Already published the article on your own blog?** Use a canonical link and search engines will keep crediting your site while the article reaches Foojay's
+readers. Roughly 800 articles here are cross-posts, by using this extra line in the frontmatter section:
 
 ```yaml
 canonical: "https://your-blog.example/the-original/"
 ```
 
-Search engines keep crediting your site while the article reaches Foojay's
-readers. Roughly 800 articles here are cross-posts, and that line is how.
+All info about writing and submitting an article is on [the How To Submit Your Next Article page](/today/how-to-submit-your-next-article-on-foojay-io/).
 
 ### Automated Checks
 
-Every pull request is checked automatically before someone of the Foojay team reviews it. In total, three things run automatically, and they are worth describing because they catch different classes of mistake.
+Automated checks run before anyone from the Foojay team reads your article, and
+each one catches a different kind of mistake.
 
-**On a pull request: your frontmatter and a full site build.** The check reads
-the article you added. It fails on the things that otherwise fail *silently*: an author slug with no matching profile (the article renders, but never appears on your author page), a hero image naming a file you forgot to commit, two articles claiming the same URL, leftover text from the template. Then it builds all pages, so a broken shortcode is a red cross on your PR rather than a broken page on the site.
+**On the pull request.** Besides your frontmatter, the check builds all pages, so a broken shortcode shows up as a red cross on your PR instead of a
+broken page on the site.
 
-**Before every deploy: the site Hugo that has been  built.** Did every source file produce a page? That one matters because a section never breaks with an error.
-It breaks as a template that runs fine and quietly matches nothing. And does
-every internal link resolve? Half a million of them across those 4,200 pages,
-checked against the files actually on disk, in about five seconds. That one earns
-its keep. It caught a broken "back to the homepage" link on the 404 page itself,
-one wrong character in a template, on the one page a lost reader ever sees.
+**On the built site, before it deploys.** Did every source file produce a page?
+A broken section rarely throws an error. It renders a template that runs fine
+and matches nothing. The check also resolves every internal link against the
+files on disk, half a million of them in about five seconds. 
 
-**Then a real browser, on the built site.** Some of Foojay only exists once
-JavaScript has run: the search index, the two world maps, the image lightbox,
-the sortable tables in the [sitemap](/sitemap/), syntax highlighting. Every one
-of those fails the same way. The page still returns 200, still looks full, and
-simply stops doing the thing. So a throwaway local server hosts the built site
-and about forty checks click through it: search for a word and get grouped
-results, open a gallery, page a table, flip to dark mode.
+**In a real browser.** Search, the two world maps, the image lightbox, the
+sortable tables in the [sitemap](/sitemap/), syntax highlighting,...: none of it
+exists until JavaScript runs, and all of it fails the same quiet way. The page
+returns 200, looks complete, and stops doing its job. So about forty checks
+click through the finished site.
 
-**One of those checks is about security rather than mistakes.** Foojay's
-markdown allows raw HTML, and it has to, because two thousand imported WordPress
-articles carry tables, collapsible blocks and embeds with no Markdown
-equivalent. A merged pull request could therefore carry a `<script>`, and a
-static site keeps no server-side layer to catch it. So the check refuses seven
-kinds of executable markup in article text:
-`<script>`, inline event handlers like `onerror=`, `javascript:` links,
-`<form>`, `<base>`, meta-refresh redirects, and `<object>`/`<embed>`. Before
-turning it on I counted every one of them across all 2,153 published articles.
-Every count came back zero, so nothing in the archive needed fixing first, and
-anything new is by construction something nobody has written here in five years
-of publishing.
+One check covers security rather than mistakes. Foojay's Markdown allows raw
+HTML, and it has to, because two thousand imported WordPress articles carry
+tables and embeds with no Markdown equivalent. A merged pull request could
+therefore carry a `<script>`, and a static site keeps no server-side layer to
+catch it. So the check refuses executable markup in article text. It skips
+fenced code blocks, where Hugo escapes everything anyway, so you can still
+write about XSS as long as you fence your examples.
 
-The check skips code samples, and that is not a loophole. Hugo escapes a fenced
-block before it reaches the page, so a `<script>` inside one renders as visible
-text and cannot run. You can still publish an article *about* XSS. It just has to
-fence its examples, which is what we ask for anyway. `<iframe>` is the one shape
-that warns instead of failing, because 33 articles legitimately use one for
-Vimeo, Speaker Deck or Apple Podcasts. The warning names the host so a reviewer
-can glance at it. Findings land as annotations on the diff itself, on the file
-and the line, rather than in a log four clicks away. They come from the log
-stream rather than the API, so they work identically on a pull request from a
-fork, which is how most first-time authors arrive.
-
-Security takes an honest new shape after leaving WordPress. There is no CMS to
-log into, no database, and no PHP running on a server, so there is nothing to
-exploit remotely. What remains is that the site changes when a maintainer merges
-something. Review is therefore the security control, and these checks are what
-give it teeth.
-
-Two decisions in there were deliberate. **Only breakage we caused blocks a
-deploy.** The check reports and counts a dead link an author typed in 2021
-rather than treating it as an emergency. The archive held 53 of those when the
-check first ran, and a gate that blocks every future deploy on a five-year-old
-typo is a gate somebody switches off within the week. (They are down to one, for
-the record, and it needs a URL only its author knows.) And **the checks never
-call anyone else's server.** Roughly 440 articles embed a YouTube player.
-Asserting that one reaches "playing" would assert that YouTube is up, on a check
-that can stop our own deploy. The checks answer third-party requests locally
-instead, so nothing here goes red because someone else's CDN is having an
-afternoon.
-
-None of this is unusual for a software project. It is unusual for a website, and
-it is the part I would most want back if we ever moved again.
-
-## Every podcast episode is now readable
+## Podcasts are Now Readable
 
 The Foojay Podcast had exactly one way in: press play and listen for the next
-forty-five minutes. **100 episodes now carry a transcript on the page**, roughly
-824,000 words of conversation you can read, skim, `Ctrl-F` through, or quote
-from.
+hour. But now in this new site, **100 episodes have a transcript on the page**, roughly 824,000 words of conversation you can read, skim, `Ctrl-F` through, or quote from.
 
-Nobody transcribed anything to make that happen. Every episode sits on Foojay's
-own YouTube channel and YouTube has already run speech recognition over all of
-them, so the text was ours to fetch. Seconds per episode, against hours of local
-compute for a result of the same quality. A JBang script pulls the captions,
-collapses YouTube's rolling repeats (its captions re-send each settled line in
-the following cue, so a 45-minute episode arrives as 2,643 cues holding about
-1,300 distinct lines), drops the jingle and the "uh"s, and writes a
+Nobody transcribed anything to make that happen. Every episode sits on YouTube, where speech recognition already has fetched the text. Seconds per episode, against hours of local compute for a result of the same quality. A JBang script pulls the captions and writes a
 `transcript.md` next to the episode's `index.md`. The page renders it *because
 the file is there*, so there is no flag on the episode to set and none to
 remember to unset. It is a plain section of the page with its own entry in "On
-this page", not a collapsed box you have to know to open. Your browser's
-find-in-page does not look inside a closed one, so `Ctrl-F` for a guest's name
-would have found nothing on the very page that says it.
+this page". 
 
-**And it is a machine transcript, which every episode says out loud above the
-text.** Automatic captions get names and Java vocabulary wrong, and an
-uncorrected machine transcript that claims to be a faithful record is worse than
-one that admits what it is. Every correction the script applies comes from what
-recognition actually produced rather than from a guess, and the best argument for
-working that way is `forj`. It looks exactly like a mangled "Foojay". It is in
-fact **`4j`**, and it only ever appears next to Neo, Log, SLF and LangChain. The
-spelling-based guess would have quietly rewritten every mention of Log4j in six
-years of archive into a mention of this website.
-
-The script deliberately leaves guests' names alone. Recognition mangles them
+But, don't forget, **it is a machine transcript, which every episode says out loud above the
+text.** Automatic captions get names and Java vocabulary wrong. The script tries to fix some recurring mistakes, like rewriting `fujy` to `Foojay`. On the other hand, it deliberately leaves guests' names alone. Recognition mangles them
 worse than anything else, but no script can *know* which spelling someone
 intended, and inventing one puts words in their mouth. So if you were on an
 episode and your name comes out wrong, every transcript carries a **Suggest a
 correction** link that opens that episode's transcript file in an editor. The
 script never overwrites a corrected transcript again.
 
-One deliberate omission: **transcripts stay out of the search index.** 824,000
-words against the article archive's 115,000 would make every episode a hit for
-any word anyone happened to say out loud, and bury the thing you were actually
-searching for.
+One deliberate omission: **transcripts stay out of the search index.** as they would add to much "noise" to the search results. The search index is for articles, not for every word spoken in a podcast.
 
-## The calendar fills itself now
+## JUGs, Calendar and Events
 
-Finding out what your nearest Java User Group has planned used to depend on
-somebody remembering to tell Foojay. The old calendar was a table in the
-WordPress database, and every line on it arrived because a person added the JUG into a database list, and a scripted fetched the events from a Meetup link based on a weekly scheduled task. 
+One of the most important things Foojay does is connect Java developers to each other. The JUG directory and the calendar of meetups are fully automated, and anyone can add a conference or event with a pull request.
 
-This has been improved for the new Foojay using the list of JUGs also used as a source for the [Java User Groups page](/jugs/). **That list of groups is not ours to maintain either.** It comes from
-[GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs), the
+### Automated Calendar of JUG Meetups
+
+The Foojay WordPress had a system to import Meetup events from the JUGs it knew about, but it was limited to that list and JUGs had to let us know that they were using Meetup. This has now been changed to a fully automated system in two steps:
+
+* The list of [Java User Groups](/jugs/) is **not ours to maintain as there is already a public source!** It comes from [GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs), the
 community-run directory that already tracks which JUGs exist and where, and a
 JBang script pulls it into the site at every deploy. A JUG lead who wants to
-correct their entry opens a pull request against that repository, not this one.
-Once a day a second script walks that list and reads the calendar feed each
-group already publishes, which is no longer restricted to Meetup-only. **100 JUGs sit in the directory and 68 of them publish a
-feed we can read, and 52 upcoming meetups sit on the calendar as I write this.**
+correct their entry opens a pull request against that repository, not the Foojay one. 
+* The [Foojay calendar](/calendar/) is now fully automated. It reads the iCal feed each JUG publishes, and it does not care whether that feed comes from Meetup, Google Calendar, a file on the group's own site, or any other platform that exports iCal. Once a day a second script walks that list and reads the calendar feed to fill our calendar data file.
+
+**102 JUGs sit in the directory and 70 of them publish a
+feed we can read, and 62 upcoming meetups sit on the calendar as I write this.**
 
 Both screenshots below show September 2026, taken on the first of the month:
 
-{{< gallery cols="1" >}}
+{{< gallery cols="2" >}}
 calendar-september-old.jpg | The old calendar. 11 entries for the month, each one typed into WordPress by hand.
 calendar-september-new.jpg | The same month on the new site. 23 entries, none of them typed in.
 {{< /gallery >}}
 
-Same month, twice the community. The old calendar carried 11 entries. The new
-one carries 23, from 19 different JUGs across 15 cities, and it knows the start
-time and the venue for 17 of them because the feeds carry that too.
+### Conferences and Events
 
-**Reading iCal instead of talking to Meetup is what unlocked the rest of the
-world.** The first version of this script posted to Meetup's GraphQL API, which
-needs a Meetup Pro subscription and an OAuth client. That is a paid dependency
-for reading events Meetup already publishes to anyone, and it capped the
-calendar at the groups who use Meetup at all. Every JUG in the directory that
-records a calendar publishes iCal instead: Google Calendar, a file on the
-group's own site, or Meetup's own export. One format covers all three, and Luma,
-Eventbrite, Tito, Bevy and Mobilizon export the same thing. A group that changes
-platform keeps working without anyone here touching a line.
-
-**A broken feed says so on the page.** Eight groups currently fail. Seven answer
-with a 404, because the address in the directory points at a group that moved or
-got renamed, and the eighth serves an ordinary web page where a feed should be.
-The calendar names those eight underneath itself rather than showing an empty
-month and letting you conclude that nothing is happening in Kaiserslautern. Each
-one is a two-line fix upstream by whoever knows the new address.
-
-**Conferences work the other way round, because a conference has no feed.**
-Nobody subscribes to Devoxx in their calendar app the way they subscribe to a
+**Conferences and other events work differently.** Nobody subscribes to Devoxx in their calendar app the way they subscribe to a
 JUG, so those entries live in the repository as one small YAML file each, and
-anyone can add one with a pull request. Copy `../../../../../../template/event.yaml`, fill in the
-name, the URL and the dates, open the PR. The frontmatter check reads it at
-review time and fails on a key it does not recognise, so `website:` instead of
-`url:` gets caught before a human looks at it rather than rendering an event
-with a piece missing. One file per event also means two people adding two
-conferences in the same week never touch the same bytes, so they never collide.
+anyone can add one with a pull request. Copy `template/event.yaml`, fill in the
+name, the URL and the dates, and open a PR. The frontmatter check reads it at
+review time and fails on a key it does not recognise. One file per event also means two people adding two conferences in the same week never touch the same data, so they never collide.
 
 Nothing has to be deleted afterwards either. The page drops an event the day
-after it ends, so a stale file is inert, and a calendar whose upkeep is a chore
-is a calendar that rots.
+after it ends.
 
-Both routes are on [the calendar page](https://foojay.io/calendar/) itself.
+Both routes are on [the calendar page](/calendar/) itself.
 **Add an event** opens the events folder in this repository. **Add your JUG**
-opens the directory upstream. The bottleneck moved from "does somebody at Foojay
-know about your meetup" to "does your group publish a feed", and that second one
-is a question you can answer yourself.
+opens the repository upstream. 
 
-## Your old comments are still there
+## Comments Moved to GitHub Discussions
 
 Foojay collected 580 comments across 270 articles over six years, and a lot of
-them earn their place. Someone corrected the author, someone posted the command
-that actually worked, someone asked the question everybody else also had.
+them earn their place. 
 
-New comments go to [giscus](https://giscus.app/), which keeps each thread as a
+New comments are handled with [giscus](https://giscus.app/), which keeps each thread as a
 GitHub Discussion on the same public repository as the articles. You sign in with
 GitHub, the thread has a URL you can link to, and the team moderates it with the
-tools it already uses every day. A thread keys on the article slug and not on its
-path, so moving the site to its new home orphaned none of them.
+tools it already uses every day. 
 
-The 580 old comments needed a different answer, and the first attempt failed in a
-way worth writing down. The plan was to post them into those same Discussions
+The 580 old comments needed a different answer, and the first attempt failed... The plan was to post them into those same Discussions
 from the Foojay account, so that an old conversation and a new one looked
-identical. GitHub blocked the account a few articles in. Several hundred comments
-created through an API by a brand new account looks exactly like spam from their
-side, and it is hard to argue they read it wrong.
+identical. GitHub blocked the transfer after a few articles because it looked like a spam bot...
 
-So the old comments live in the repository instead. Each article carries a small
+So the old comments now live in the repository instead. Each article carries a small
 JSON file next to its text, and the page renders it under the live discussion as
-**Discussions on the previous Foojay site**. Two of the 580 did not survive,
-because they belong to an article WordPress itself has deleted, which leaves 578
-across 269 articles.
-
-Losing that import turned out to improve the result. Nobody knows the GitHub
-identity of a reader who commented in 2021, so not one of those people could ever
-have edited or replied to their own comment inside a Discussion. An archive says
-what it honestly is. It also forgives a mistake: a bad conversion costs a re-run,
-where a bad import cost an apology to 580 people. And it is now the only copy of
-those 580 comments, which matters more every day, because they disappear with the
-WordPress site.
-
-One detail here is not cosmetic. Foojay's Markdown allows raw HTML, for the same
-reason the security check above has to allow it. Printing 578 bodies written by
-strangers straight onto the page would therefore hand any one of them a
-`<script>` tag, on 269 article pages, with no server left to catch it. So the
-conversion runs every comment through jsoup's own sanitizer and stores the
-result, and the page prints only what the sanitizer approved. The tags those
-comments actually use come to eight: paragraphs, line breaks, links, `code`,
-`pre`, `strong`, `em` and one blockquote. Not a single image, iframe or script
-among them.
+**Discussions on the previous Foojay site**. 
 
 ## Accessibility
 
-No law very likely obliges Foojay to be accessible. The European Accessibility
-Act covers consumer services in listed sectors, not community blogs. That is a
+No law seems to oblige Foojay to be accessible. The [European Accessibility
+Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en) covers consumer services in listed sectors, not community blogs. That is a
 poor reason to skip it. Java developers are precisely the audience that browses
 with a keyboard, at 200% zoom, in a dark colour scheme, or with a screen
 reader.
 
 So the site targets **[WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/)**, and there
-is now an [accessibility statement](https://foojay.io/accessibility/) that says
+is now an [accessibility statement](/accessibility/) that says
 where it actually stands. What went in:
 
 - A skip link, one `<h1>` and real landmarks on every page.
-- **Everything works without a mouse**: the menu, the search field, the image
-  viewer, the event calendar, the sortable tables, the sponsor banners. Read [the accessibility page](https://foojay.io/accessibility/) for more information about navigating with the keyboard through the site.
+- **Everything should work without a mouse**: the menu, the search field, the image
+  viewer, the event calendar, the sortable tables, the sponsor banners. Read [the accessibility page](/accessibility/) for more information about navigating with the keyboard through the site.
 - **We measure contrast, and the stylesheet records the number next to each
   colour.** That is how we found that Foojay's own logo blue is 2.02:1 on white.
   Fine as a fill, unusable as text. So it is never text here, and the focus
@@ -381,59 +270,25 @@ where it actually stands. What went in:
   nothing.
 - **Nothing moves that you cannot stop**, and nothing moves at all if your
   system asks for reduced motion.
+- The mobile menu moved off-screen but stayed in the tab order, so a keyboard walked you through a menu you could not see. 
+- The image viewer bound its click handler to the `<img>`, so click-to-enlarge did not exist for a keyboard at all. 
 
-The failures we fixed teach more than the list of things that pass. The mobile
-menu moved off-screen but stayed in the tab order, so a keyboard walked you
-through a menu you could not see. The image viewer bound its click handler to
-the `<img>`, so click-to-enlarge did not exist for a keyboard at all. Two pages
-overflowed a 390px phone screen by 243 and 151 pixels.
-
-**And the biggest gap sits on the statement rather than glossed over: roughly
-3,000 images in the archive have no alt text.** They arrived that way, and no
-script can invent a description of a screenshot it cannot see. The check reads
+One thing which could not be easily fixed: **roughly 3,000 images in the archive have no alt text.** They arrived that way, and no
+script can or should invent a description. The check reads
 new articles when you open the pull request and raises a *warning* rather than a
 failure, because whether an image carries meaning is a judgement call. The
 predictable response to a hard failure is `alt="image"`, which serves a screen
-reader worse than nothing at all.
+reader worse than nothing at all. If you
+wrote one of those articles on WordPress, you are the best person alive to describe its screenshots.
 
-Which makes it 3,000 tiny independent jobs in a public repository, and if you
-wrote one of those articles you are the best person alive to describe its
-screenshots.
+## Visitor Counting and Privacy
 
-## What we deliberately did not build
+There are **two** counters, for different reasons. One is Google Analytics, which the marketing team uses to understand traffic patterns. The other is a counter we run ourselves, which counts how many people actually read an article.
 
-A few things are absent on purpose, and they are the decisions we would defend
-hardest.
-
-**There is no "related articles" algorithm.** When an article links to three
-others at the bottom, a human chose those three.
-
-**There is no tag cloud.** Categories only, because a taxonomy nobody curates
-becomes 4,000 tags used once each.
-
-## Visitor counting and privacy
-
-Let's be straight about this, because it is the one place where "static site"
-does not automatically mean "nothing is watching". There are **two** counters,
-they do different jobs, and only one of them is ours.
-
-### 1. Google Analytics, because the marketing team loves it
+### 1. Google Analytics, because marketing loves it
 
 Foojay reports into the same Google Analytics property it always has. That has
-not changed and we are not going to pretend otherwise.
-
-How it gets there *has* changed. The old site loaded Google Tag Manager, 360 KB
-of JavaScript, to deliver a grand total of eleven lines of tags. One of those was
-a Universal Analytics tag from 2023 that only still worked because Google quietly
-aliases the retired id to the current property behind the scenes. Foojay 2.0
-loads the GA4 tag directly instead. Same numbers, one fewer legacy shim that
-Google can retire without telling anyone, and here is the part we care about:
-**you can read everything your browser runs, in this repository**, in a file
-anyone can review in a pull request, rather than in a web console nobody outside
-the team can see.
-
-[Ketch](https://www.ketch.com/) is still the consent manager, and Google
-[Consent Mode](https://support.google.com/analytics/answer/9976101) now defaults
+not changed, and we are not going to pretend otherwise. [Ketch](https://www.ketch.com/) is still the consent manager, and Google [Consent Mode](https://support.google.com/analytics/answer/9976101) now defaults
 every category to *denied* before it loads. So until you actually agree to
 something, GA sets no cookie and sends cookieless pings. If you decline, it
 stays that way.
@@ -441,34 +296,20 @@ stays that way.
 **You use an ad blocker and refuse cookies? No problem, so do I.** That is
 exactly why a second counter exists.
 
-### 2. Our own read counter, because we want to know what people actually read
+### 2. Read counter, because we want to know what people actually read
 
 With Google Analytics as the only source, every number we publish comes out
-wrong, and wrong in a predictable direction. A large share of Java developers
-block third-party analytics domains outright. A page-view count that silently
-misses a third of its readers is not a statistic, it is a guess. And the read
-count on a Foojay article is a *published* number, sitting on the page next to
-the byline, so it had better be true.
+wrong, and wrong in a predictable direction. A large share of Java developers and Foojay visitors use ad blockers. A page-view count that silently
+misses a a big part of its readers is not a statistic, it is a guess. And the read count on a Foojay article is a *published* number, sitting on the page next to the byline, so it had better be true.
 
 So the `12,345 views` you see comes from something we run ourselves: a small
 [Cloudflare Worker](https://developers.cloudflare.com/workers/) on
-`foojay.io/api/views`, in front of a table with exactly two columns. A page key
-like `posts/announcing-foojay-2-0`, and an integer.
+`https://foojay.io/api/views/all`, in front of a table with exactly two columns. A page key
+like `posts/announcing-the-new-foojay`, and an integer. No visitor records, no IP addresses, no sessions, no personal data of any kind.
 
-**Nobody's article went back to zero.** Six years of reading history sat in
-WordPress, and throwing it away for a clean slate would have been the easy option
-and a rotten one. A 2021 article that 40,000 people have read should say so. So
-we carried the numbers across: **13.8 million reads** over 2,147 articles, 47
-glossary entries and 32 pages. Each one becomes the starting value of that page's
-count and live reads accumulate on top, so you see one number rather than an old
-total sitting next to a new one.
-
-That transfer moved exactly what the counter itself holds and nothing else: **a
-single number per post or page.** No visitor records, no IP addresses, no
-sessions, no personal data of any kind. None of that existed to carry over,
-because a total is all we asked WordPress for and all the new table can
-store. (Author pages are the one exception, and they genuinely do start at zero:
-WordPress was never counting them.)
+**Nobody's article went back to zero.** We transferred the numbers from WordPress to keep the history: **13.8 million reads** over 2,147 articles, 47
+glossary entries and 32 pages. Each one became the starting value of that page's
+count.
 
 That is the whole design, and the privacy properties fall out of it rather than
 sitting on top of it as a promise:
@@ -483,7 +324,7 @@ sitting on top of it as a promise:
   block. It is first-party, on the same domain as the article you are reading.
   That is not a loophole. It is why the number is accurate.
 - **The build bakes the count into the page**, so displaying it costs no request
-  at all. No JavaScript, no dash that turns into a number a second later.
+  at all. No JavaScript and no placeholder that turns into a number a second later.
 
 The single piece of state on your machine is a `sessionStorage` flag that stops
 a page refresh counting twice, and it dies when you close the tab.
@@ -492,11 +333,11 @@ And the thing doing the counting is in this repository too: the Worker is
 [under two hundred lines, comments included](https://github.com/foojayio/website/tree/main/worker/views),
 and you can read every query it makes against that table.
 
-For the formal version, see the [privacy policy](https://foojay.io/privacy-policy/).
+For the formal version, see the [privacy policy](/privacy-policy/).
 
-## Come and write something
+## Come and Write
 
-One thing about Foojay never changes, whatever the site runs on. Foojay is worth
+One thing about Foojay never changes: Foojay is worth
 reading because people in this community take the time to write things down.
 
 If you have ever thought *someone should write that up*, that someone can be you.
@@ -507,14 +348,13 @@ not need to be a Java Champion, and it does not need to be 3,000 words.
 - **Start here:**
   [How To Submit Your Next Article On Foojay.io](https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/)
 - **Or just read the templates:** the
-  [`../../../../../../template` folder](https://github.com/foojayio/website/tree/main/template)
+  [`template/` folder](https://github.com/foojayio/website/tree/main/template)
   holds everything you need. Copy a file, fill it in, open a pull request.
 - **Questions, or not sure your idea fits?** Ask in the
   [Foojay Slack](https://bit.ly/join-foojay-slack). The answer is usually yes.
 
-And if you spot a typo in this very article, scroll to the foot of it and look
-for the **Edit this page on GitHub** link. It opens the exact file this page came
-from, in an editor, and turns your fix into a pull request. GitHub forks the
-repository for you, so it takes three clicks and no local setup. Every article,
-page and glossary entry on the site carries that link. That is rather the
-point.
+If you spot a typo in this or any other article or page, scroll to the foot of it and look for the **Edit this page on GitHub** link. It opens the exact file this page came from, in an editor, and turns your fix into a pull request. GitHub forks the repository for you, so it takes three clicks and no local setup. Every article, page and glossary entry on the site carries that link. 
+
+We hope you enjoy the new Foojay, and we look forward to your contributions. Found an issue or something that could be improved? Open a pull request, or [file an issue](https://github.com/foojayio/website/issues)! 
+
+
