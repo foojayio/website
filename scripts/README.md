@@ -24,9 +24,11 @@ to read one.
 
 ## `fetch/` — external data (ongoing)
 
-Run at every deploy and on a cron (`build-deploy.yml`,
-`sync-external-content.yml`, `sync-view-counts.yml`). The `data/*` files they
-write are **generated — never hand-edit them**; fix the entry upstream.
+Run on a cron by `sync-external-content.yml` (daily) and
+`sync-view-counts.yml` (four times a day), which commit what changed and then
+ask `build-deploy.yml` for a deploy. The deploy itself refreshes nothing: it
+builds what is in the repo. The `data/*` files these write are **generated —
+never hand-edit them**, fix the entry upstream.
 
 | script | writes | source |
 | --- | --- | --- |

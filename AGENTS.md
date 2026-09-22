@@ -65,17 +65,18 @@ should catch a mistake at PR time rather than letting it fail silently.
 - **`scripts/fetch/Jugs.java`**: regenerates `data/jugs.yaml` from the
   community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs)
   (one Markdown-with-YAML-frontmatter file per JUG under its `_jugs/`
-  folder). Run at every deploy (`build-deploy.yml`, before the Hugo build)
-  and once a day (`sync-external-content.yml`, before `fetch/JugEvents.java`), both of
-  which commit the refreshed file back to `main` — same pattern as
-  `jug-events.json`. JUG leaders add/update their own group by opening a PR
+  folder). Run once a day by `sync-external-content.yml`, before
+  `fetch/JugEvents.java`, which commits the refreshed file back to `main` and
+  then asks for a deploy — same pattern as `jug-events.json`. It used to run on
+  every deploy as well, which is why every push to `main` produced a "chore:
+  refresh..." commit of its own. The deploy builds what is in the repo now. JUG leaders add/update their own group by opening a PR
   against that repo, not this one. Derives `meetup_slug`/`meetup_url`
   whenever a JUG's `website` is a meetup.com URL.
 - **`scripts/fetch/JavaChampions.java`**: regenerates `data/java-champions.yaml`
   from [aalmiray/java-champions](https://github.com/aalmiray/java-champions)'s
   single `java-champions.yml` file — the data behind
-  [javachampions.org](https://javachampions.org/). Run at every deploy and
-  once a day, same as `fetch/Jugs.java` above. Champions add/update their own entry
+  [javachampions.org](https://javachampions.org/). Run once a day, same as
+  `fetch/Jugs.java` above. Champions add/update their own entry
   by editing that file directly upstream, not this repo.
 
   **It also resolves the coordinates behind the world map on
@@ -217,10 +218,10 @@ should catch a mistake at PR time rather than letting it fail silently.
   and the read counter moved to its own six-hourly `sync-view-counts.yml`:
   everything external here (JUG list, Champions, events) changes slowly, and
   the view count is the one thing that moves continuously. Both workflows
-  commit to `main`, so they share a `concurrency: data-sync` group -- which
-  serialises the two of THEM and nothing else, since `build-deploy.yml` commits
-  data too and is in another group, so each push retries rather than trusting
-  the group (see `build-deploy.yml` below). Both then have to ASK for the deploy,
+  commit to `main`, so they share a `concurrency: data-sync` group, and since
+  `build-deploy.yml` stopped committing data they are the only two writers that
+  group has to serialise. Each push still retries rather than trusting the
+  group, because a human pushing to `main` is a writer nothing serialises. Both then have to ASK for the deploy,
   because a workflow's own push does not cause one (see
   `build-deploy.yml` below). And it **only rewrites `data/jug-events.json` when the events themselves
   changed**: `generatedAt` moves on every run, so writing unconditionally would
@@ -456,7 +457,7 @@ should catch a mistake at PR time rather than letting it fail silently.
   `/all` and `/<key>` answer, a hit counts, a hit from a foreign `Origin` does
   not, `/seed` 401s without the token, and a malformed key 404s.
 - **`scripts/fetch/ViewCounts.java`**: the CI half — reads
-  `/api/views/all` into `data/views.json` at every deploy and four times a day
+  `/api/views/all` into `data/views.json` four times a day
   (`sync-view-counts.yml`, its own workflow — see below), so the
   numbers are baked into the HTML. **Never fails the build**: if the counter is
   unreachable it keeps the committed file and exits 0.
