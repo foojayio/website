@@ -9,8 +9,9 @@ categories:
   - "Foojay"
 related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
-  - "redesigned-foojay-home"
-  - "a-week-of-housekeeping-what-changed-on-foojay-io"
+  - "join-slack-com-t-foojay-signup"
+  - "asciidoc-support-on-foojay"
+  - "diagrams-as-code-mermaid-support-on-foojay"
 ---
 
 Foojay has moved, but the address stays exactly where it was, just like every URL you have bookmarked, linked or cited. Everything behind that address is
