@@ -6,9 +6,9 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  # write, not read: the "Refresh ..." steps below commit the regenerated
-  # data/ files back to main after fetching them fresh.
-  contents: write
+  # read: nothing here commits any more. The data/ files are refreshed by the
+  # two scheduled syncs, which own the write.
+  contents: read
   pages: write
   id-token: write
 
@@ -20,33 +20,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # A GITHUB APP TOKEN RATHER THAN THE DEFAULT GITHUB_TOKEN, for when main
-      # gets a branch ruleset: the built-in Actions token cannot be let through
-      # one. A bypass list takes roles, teams, GitHub Apps and deploy keys, and
-      # there is no entry for GITHUB_TOKEN -- so the data commit below would be
-      # rejected, and in build-deploy.yml the deploy would go down with it, since
-      # that push runs before Hugo. The app goes on main's bypass list instead.
-      #
-      # UNSET TODAY, AND HARMLESS: main is not protected yet, so with no
-      # DATA_SYNC_APP_ID variable this step is skipped and checkout falls back to
-      # GITHUB_TOKEN, exactly as before. Same in a fork, and in the window
-      # between merging this and creating the app. Setup lives in AGENTS.md
-      # under "Protecting main".
-      #
-      # One behaviour flips when it IS set, and the commit step below depends on
-      # knowing which: a push authenticated with an app token triggers
-      # workflows, where a GITHUB_TOKEN push never does.
-      - name: Mint a push token
-        id: app-token
-        if: ${{ vars.DATA_SYNC_APP_ID != '' }}
-        uses: actions/create-github-app-token@v3
-        with:
-          app-id: ${{ vars.DATA_SYNC_APP_ID }}
-          private-key: ${{ secrets.DATA_SYNC_APP_PRIVATE_KEY }}
-
+      # NO APP TOKEN HERE ANY MORE. One was minted so the data commit below
+      # could get past a branch ruleset on main, since GITHUB_TOKEN cannot be
+      # put on a bypass list. With the commit gone this job only reads, and the
+      # default token reads a protected branch perfectly well. The two syncs
+      # still mint one, because they still push. See AGENTS.md, "Protecting
+      # main".
       - uses: actions/checkout@v7
         with:
-          token: ${{ steps.app-token.outputs.token || github.token }}
           submodules: recursive
           # hugo.toml sets enableGitInfo, which dates every page from the last
           # commit that touched its file. The default shallow clone (depth 1)
@@ -60,97 +41,22 @@ jobs:
         # commit can break this workflow with no change on our side.
         uses: jbangdev/setup-jbang@v0.1.1
 
-      # Refreshes data/jugs.yaml from the World Wide JUGs directory
-      # (https://github.com/World-Wide-JUGs/GlobalWWJugs) so the /jugs/ page
-      # is never more than one build behind that upstream list. Also run once
-      # a day by .github/workflows/sync-external-content.yml, independent of
-      # deploys.
-      - name: Refresh JUG list
-        run: jbang scripts/fetch/Jugs.java
-
-      # Refreshes data/java-champions.yaml from the official Java Champions
-      # directory (https://github.com/aalmiray/java-champions) so /java-champions/
-      # is never more than one build behind it. Also run once a day by
-      # .github/workflows/sync-external-content.yml, independent of deploys.
+      # NO DATA REFRESH HERE, AND THAT IS THE POINT. This job used to run
+      # fetch/Jugs.java, fetch/JavaChampions.java and fetch/ViewCounts.java and
+      # commit the result, so every single push to main produced a second
+      # commit -- "chore: refresh JUG list + Java Champions list + view counts"
+      # -- whether or not anything upstream had moved. It also made this
+      # workflow a THIRD writer to main alongside the two syncs, which is what
+      # the retry loops in those files were fighting.
       #
-      # GEOCODE_API_KEY resolves coordinates for the world map on that page, and
-      # only for champions whose city isn't already in data/geocode-cache.yaml --
-      # so a normal deploy makes NO geocoding requests at all and this costs
-      # nothing. The script never fails over it: no secret, or a geocoder that is
-      # down, just leaves the newest champions off the map until the next run.
-      - name: Refresh Java Champions list
-        env:
-          GEOCODE_API_KEY: ${{ secrets.GEOCODE_API_KEY }}
-        run: jbang scripts/fetch/JavaChampions.java
+      # The scheduled syncs already do the same work: sync-external-content.yml
+      # daily for the JUG list, the Champions and the events, and
+      # sync-view-counts.yml four times a day for the counter. Both dispatch
+      # this workflow when they actually change something, so refreshed data
+      # still reaches the site on the same build it always did. What is gone is
+      # a refresh on every unrelated push. A deploy now builds what is in the
+      # repo, which is the one job a deploy should have.
 
-      # Refreshes data/views.json from the read counter (worker/views/), so the
-      # view count on each post and card is baked into the HTML rather than
-      # fetched by the reader's browser. Never fails the build: if the counter
-      # is unreachable the committed file is left alone and yesterday's numbers
-      # ship, which beats a red deploy over an analytics blip. Also run every
-      # six hours by .github/workflows/sync-view-counts.yml -- the counter is
-      # the one data source here that moves continuously, which is why it has
-      # its own workflow instead of riding the daily external-content sync.
-      - name: Refresh view counts
-        run: jbang scripts/fetch/ViewCounts.java
-
-      - name: Commit updated data
-        run: |
-          git config user.name "foojay-bot"
-          git config user.email "actions@github.com"
-          # data/geocode-cache.yaml is committed for the same reason the data
-          # files are: it is the only copy, and it is what keeps the champions
-          # geocoding down to zero requests on a normal run.
-          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/views.json
-          if git diff --cached --quiet; then
-            echo "No JUG list, Java Champions or view count changes."
-          else
-            # [skip ci] IS LOAD-BEARING NOW, where it used to be belt-and-
-            # braces: this push is to the same branch/event this workflow
-            # triggers on, and since it is authenticated with an app token
-            # rather than GITHUB_TOKEN it really does start workflow runs. So
-            # without this, every push to main would build and deploy twice.
-            # (Nothing rebuilds off THIS commit, and nothing needs to -- the
-            # run that made it goes on to build with the refreshed files.)
-            git commit -m "chore: refresh JUG list + Java Champions list + view counts [skip ci]"
-            # PUSH WITH RETRY, because pull-then-push has a window and main has
-            # THREE writers, not two: this workflow, the other sync, and
-            # build-deploy.yml's own data commit. The `data-sync` concurrency
-            # group only serialises the two syncs -- build-deploy.yml is in group
-            # `pages`, and has to be, because that group carries
-            # cancel-in-progress for the deploy. So it can land a commit between
-            # the pull and the push below, and did: on 2026-08-31 this workflow
-            # pulled, build-deploy pushed 421fb7b57, and this push was rejected
-            # as a non-fast-forward. No amount of concurrency configuration
-            # closes a window between two commands; retrying does.
-            #
-            # THIS ONE MATTERS MOST: there was no pull here at all, only a bare
-            # push, and this step runs BEFORE Hugo -- so losing the race did not
-            # cost a stale data file, it failed the job and took the whole deploy
-            # down with it. That is the exact failure the app token exists to
-            # prevent, arriving by another route.
-            pushed=false
-            for attempt in 1 2 3 4 5; do
-              if git pull --rebase --autostash && git push; then
-                pushed=true
-                break
-              fi
-              echo "Push rejected (attempt $attempt) -- main moved under us; retrying."
-              sleep $(( attempt * 3 ))
-            done
-            if [ "$pushed" != true ]; then
-              echo "::error::Could not push after 5 attempts; main is moving faster than this job can rebase."
-              exit 1
-            fi
-          fi
-
-      # PINNED, not "latest". `latest` makes the action resolve the version
-      # through formulae.brew.sh, so a read ECONNRESET from Homebrew's API --
-      # a third party with no stake in this site -- fails the whole run before
-      # Hugo is even downloaded. It did, on 33050054411. A pin also means the
-      # site is built by the version it was developed against rather than by
-      # whatever shipped this morning: a Hugo release that changes a template
-      # function is not something to discover from a red deploy.
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
