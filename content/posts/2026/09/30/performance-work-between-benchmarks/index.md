@@ -1,11 +1,16 @@
 ---
 title: "Lies, Damn Lies and Benchmarks"
-date: "2026-09-18"
+date: "2026-09-30"
 description: "Codename One tackles GC, maps, startup, and JavaScript overhead, and adds native drag and drop plus cross-device continuity. Javadoc joins website search..."
 authors: ["shai-almog"]
 image: "performance-work-between-benchmarks-add0d8fe44.jpg"
 categories: ["Java"]
 canonical: "https://www.codenameone.com/blog/performance-work-between-benchmarks/"
+related_posts:
+  - "voip-vpn-builders"
+  - "the-third-generation-gui-builder-one-workspace-for-every-form"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
+  - "sqlite-across-every-port-one-contract-one-encrypted-file-format"
 ---
 
 ![Lies, Damn Lies And Benchmarks](performance-work-between-benchmarks-add0d8fe44.jpg)
@@ -331,7 +336,7 @@ flowchart LR
 
 The tooling uses Java 25 in a separate module from the Java 8 build. Markdown documentation comments themselves arrived in JDK 23. The doclet preserves their prose for Hugo and extracts recognized sections such as parameters and returns into member data. We still generate the standard `javadocs.zip` archive from the same sources.
 
-![Website search finds PublicKey and PrivateKey fromPem members](javadoc-hugo-search-227150b342.png)
+![Website search finds PublicKey and PrivateKey fromPem members](javadoc-hugo-search-227150b342.jpg)
 
 *A live site capture from September 10. API methods now appear in website search, grouped by type. The full developer guide retains its own navigation and browser search rather than joining this index.*
 

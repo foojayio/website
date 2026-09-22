@@ -1,6 +1,6 @@
 ---
 title: "Testing Kafka Consumer Recovery Contracts With Testcontainers and JUnit"
-date: "2026-09-19"
+date: "2026-09-28"
 description: "Use Testcontainers and JUnit to test Kafka consumer recovery contracts for duplicate delivery, malformed records, and offset-boundary failures."
 authors:
   - "ishan-shah"
@@ -10,7 +10,11 @@ categories:
   - "Kafka"
   - "Testcontainers"
   - "Testing"
-related_posts: []
+related_posts:
+  - "when-not-to-use-event-driven-architecture-eda"
+  - "eliminating-flaky-tests-to-end-world-hunger"
+  - "testing-emails-with-testcontainers-and-mailpit"
+  - "event-driven-architecture-in-java-and-kafka"
 ---
 
 A Kafka consumer can pass a unit test and still fail when production redelivers a
