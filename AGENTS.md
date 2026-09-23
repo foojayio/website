@@ -854,8 +854,17 @@ site.
   emit an SVG or AVIF as `og:image` and serves the favicon instead, so **48
   posts lost their real hero**, indistinguishable in the page HTML from a post
   with none. An **SVG hero is deliberately kept off `og:image`** — no preview
-  scraper renders SVG, so those posts would preview blank, worse than the
-  foojay card. It stays the hero on the page. AVIF is left through, knowingly.
+  scraper renders SVG, so such a post previews as the generic foojay card
+  rather than its own picture. AVIF is left through, knowingly.
+
+  **No post carries an SVG hero any more** (2026-09-23): the 17 that did were
+  given 1600x900 JPEGs, rendered from the SVG with headless Chromium and
+  composited with Pillow. Nothing is cropped — an opaque card is scaled to fit
+  and the canvas extends its own border colour, so the letterbox is invisible;
+  a transparent logo or diagram gets white, or `--surface-navy` when the mark
+  is light and sparse. The four SVGs that are also in-article figures stay in
+  their bundles. `baseof.html`'s skip remains the guard for the next one, and
+  `template/post.md` already tells authors not to use SVG for a hero.
 
 - **Structured data covers three page kinds and nothing else.** A post gets an
   `@graph` of `BlogPosting` + `Organization` + `BreadcrumbList`, an author gets

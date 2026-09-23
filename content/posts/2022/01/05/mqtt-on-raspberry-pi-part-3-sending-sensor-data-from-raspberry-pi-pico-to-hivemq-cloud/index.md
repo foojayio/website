@@ -6,7 +6,7 @@ description: "Let's learn about adding some more data to our messaging system wi
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part03-sending-sensor-data-hivemqcloud-pico/"
 authors:
   - "frankdelporte"
-image: "pico-pinout.svg"
+image: "pico-pinout.jpg"
 categories:
   - "Embedded"
   - "MQTT"

@@ -4,7 +4,7 @@ date: "2026-04-01T08:48:56+00:00"
 description: "Grails graduated to a Top-Level Apache project in 2025. Here's what the 18-month migration, Grails 7 release, and Spring Boot alignment mean for teams still running it."
 authors:
   - "steve-poole"
-image: "grails-banner.svg"
+image: "grails-banner.jpg"
 categories:
   - "Spring"
 related_posts:

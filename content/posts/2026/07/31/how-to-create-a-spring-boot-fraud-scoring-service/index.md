@@ -6,7 +6,7 @@ description: "Most Java teams who want a machine learning model in production en
 authors:
   - "geertjan-wielenga"
   - "zoran-sevarac"
-image: "Deep-Netts-Logo.svg"
+image: "Deep-Netts-Logo.jpg"
 categories:
   - "AI"
   - "Deep Netts"

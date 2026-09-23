@@ -5,7 +5,7 @@ lastmod: "2026-08-31T06:26:09+00:00"
 description: "DuckDB is an in-process analytical database. You add one JAR to a Java project and get a SQL engine that reads CSV, Parquet, and JSON files directly, with…"
 authors:
   - "geertjan-wielenga"
-image: "duckdb-square-icon.svg"
+image: "duckdb-square-icon.jpg"
 categories:
   - "Developer Tools"
   - "DuckDB"

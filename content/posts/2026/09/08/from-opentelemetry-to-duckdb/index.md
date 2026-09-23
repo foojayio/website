@@ -5,7 +5,7 @@ lastmod: "2026-09-08T08:38:34+00:00"
 description: "Observability platforms generally expect you to do your analysis inside them, using their query language and their dashboards. That works for the…"
 authors:
   - "geertjan-wielenga"
-image: "duckdb-square-icon.svg"
+image: "duckdb-square-icon.jpg"
 categories:
   - "Developer Tools"
   - "DuckDB"

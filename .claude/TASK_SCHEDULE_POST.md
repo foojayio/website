@@ -24,23 +24,22 @@ second thought.
 
 ## Steps
 
-**1. Check the frontmatter.**
+### Check the frontmatter
 
 `jbang scripts/validate/Frontmatter.java` is the definition of correct, and it
 runs on every PR. It requires `title`, `description`, `authors`, `image` and
 `categories` on a draft, rejects an emoji in a title, and fails on a
 `related_posts` entry whose slug matches no post.
 
-Two things the validator does not check, so check them by eye:
+Two things the validator does not check, so check them yourself and propose improvements if needed:
 
 * `categories`: at least one, and each one has to exist in
   `template/categories.md`.
+* `image`: check the image file exists, is in the bundle, and is not too large (see step 4). It should also be a .jpg or .png, not a .gif, .svg, or .webp. In that case, convert it, otherwise it will not be picked up by social media cards when the post is shared.
 * `related_posts`: four or more recent, genuinely related posts reads best. This
   is a house preference, not a rule that blocks a merge. Find related posts if none are included.
 
-Make sure the author profile exists.
-
-**2. Set the date.**
+### Set the date
 
 Write the day only, with no time:
 
@@ -53,7 +52,7 @@ scheduled build rather than at the time in the field, so a time later than the
 build silently holds the article back past its own date, and an earlier one
 changes nothing.
 
-**3. Move the bundle.**
+### Move the bundle
 
 ```
 git mv draft/SLUG content/posts/YYYY/MM/DD/SLUG
@@ -64,7 +63,7 @@ check fails the PR when they disagree, because Hugo publishes off the date and
 the folder is the cosmetic half. Use `git mv` so the move stays a rename in the
 history rather than a delete plus an add.
 
-**4. Resize the images.**
+### Resize the images
 
 ```
 python3 .claude/resize_images.py --path content/posts/YYYY/MM/DD/SLUG
@@ -79,7 +78,7 @@ first to see what it would touch.
 The validator fails a PR on an image over 4 MB, which is the backstop this step
 exists to stay clear of.
 
-**5. Verify.**
+### Verify
 
 ```
 jbang scripts/validate/Frontmatter.java
@@ -88,17 +87,17 @@ jbang scripts/validate/Frontmatter.java
 Expect `Frontmatter check passed`. The lines starting with `~` are advisory and
 span the whole archive, so read the ones naming this post and ignore the rest.
 
-**6. Review the content.**
+### Review the content
 
 Review the content of the post for spelling mistakes, broken links, and other errors. The validator does not check the body of the post, ask the website maintainer for answers if something is not clear.
 
 Avoid too promotional posts, and make sure the content is relevant to the audience. If you find any issues, fix them or ask how to be handled before proceeding.
 
-**7. Transcript.**
+### Transcript
 
 If the post is a podcast and/or contains a YouTube embed, run the transcript script to generate a `transcript.md` in the post bundle. This is optional, but recommended for accessibility and SEO.
 
-**8. Commit to `main`.**
+### Commit to `main`
 
 A message in the shape of `New post from draft: SLUG` matches what the history
 already uses. Publishing needs nothing further from you.

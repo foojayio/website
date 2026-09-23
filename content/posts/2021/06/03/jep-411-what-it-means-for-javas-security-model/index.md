@@ -5,7 +5,7 @@ lastmod: "2021-06-03T08:02:30+00:00"
 description: "Java, like most platforms or languages has layers of security, this article lookS at the Authorization layer and how JEP 411 relates to it."
 authors:
   - "peter-firmstone"
-image: "Swiss_cheese_model-47912861.svg"
+image: "Swiss_cheese_model-47912861.jpg"
 categories:
   - "JEPs"
   - "Security"

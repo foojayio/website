@@ -6,7 +6,7 @@ description: "Java Flight Recorder is the profiler you can use in production, co
 canonical: "https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/"
 authors:
   - "brice-dutheil"
-image: "java-flight-recorder-big-picture2-dc6f4fb7.svg"
+image: "java-flight-recorder-big-picture2-dc6f4fb7.jpg"
 categories:
   - "JDK Flight Recorder"
   - "Tools"
