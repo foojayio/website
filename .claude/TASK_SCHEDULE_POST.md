@@ -36,7 +36,9 @@ Two things the validator does not check, so check them by eye:
 * `categories`: at least one, and each one has to exist in
   `template/categories.md`.
 * `related_posts`: four or more recent, genuinely related posts reads best. This
-  is a house preference, not a rule that blocks a merge.
+  is a house preference, not a rule that blocks a merge. Find related posts if none are included.
+
+Make sure the author profile exists.
 
 **2. Set the date.**
 
@@ -86,11 +88,17 @@ jbang scripts/validate/Frontmatter.java
 Expect `Frontmatter check passed`. The lines starting with `~` are advisory and
 span the whole archive, so read the ones naming this post and ignore the rest.
 
-**6. Transcript.**
+**6. Review the content.**
+
+Review the content of the post for spelling mistakes, broken links, and other errors. The validator does not check the body of the post, ask the website maintainer for answers if something is not clear.
+
+Avoid too promotional posts, and make sure the content is relevant to the audience. If you find any issues, fix them or ask how to be handled before proceeding.
+
+**7. Transcript.**
 
 If the post is a podcast and/or contains a YouTube embed, run the transcript script to generate a `transcript.md` in the post bundle. This is optional, but recommended for accessibility and SEO.
 
-**7. Commit to `main`.**
+**8. Commit to `main`.**
 
 A message in the shape of `New post from draft: SLUG` matches what the history
 already uses. Publishing needs nothing further from you.
