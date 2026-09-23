@@ -15,7 +15,6 @@ related_posts:
   - "how-to-add-an-event-to-the-foojay-event-calendar"
   - "join-slack-com-t-foojay-signup"
   - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
-jdoodle: true
 frozen: true
 ---
 
@@ -25,23 +24,20 @@ While developing the [Foojay Quickstart Java Tutorial](https://foojay.io/java-qu
 
 ### Single file code
 
-To integrate "plain" Java code in your post or page, use the following syntax and add it as "Custom HTML" widget:
+To integrate "plain" Java code in your post or page, wrap it in the `jdoodle` shortcode:
 
 ```
-<div data-pym-src='https://www.jdoodle.com/plugin' 
-   data-language="java" 
-   data-version-index="4">
+{{</* jdoodle */>}}
      // This is the place to put the code
-</div>
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+{{</* /jdoodle */>}}
 ```
 
-For example, this "Custom HTML":
+Nothing else is needed: the page loads the JDoodle script by itself when it finds the shortcode.
+
+For example, this:
 
 ```
-<div data-pym-src='https://www.jdoodle.com/plugin' 
-   data-language="java" 
-   data-version-index="4">
+{{</* jdoodle */>}}
 public class MainArguments {
     public static void main (String[] args) {
         System.out.println("Number of arguments: " + args.length);
@@ -53,70 +49,48 @@ public class MainArguments {
         }
     }
 }
-</div>
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+{{</* /jdoodle */>}}
 ```
 
 Will produce the following output. Hit the "Execute" button to run the code.
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="4">
-
-<pre>
+{{< jdoodle >}}
 public class MainArguments {
     public static void main (String[] args) {
         System.out.println("Number of arguments: " + args.length);
-        if (args.length &gt; 0) {
+        if (args.length > 0) {
             System.out.println("First argument: " + args[0]);
         }
-        for (int i = 0; i &lt; args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             System.out.println("Argument " + (i + 1) + ": " + args[i]);
         }
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
  <p class="wp-block-paragraph">As you can see, the reader of your Foojay post can modify the code, execute it, and even add CommandLine Arguments to change the behavior of the code as you can see in this screenshot:</p>
  <figure class="wp-block-image size-medium">
   <img fetchpriority="high" decoding="async" width="629" height="510" src="jdoodle-example-629x510.png" alt="" class="wp-image-102637">
  </figure>
  <h3 class="wp-block-heading" id="h3-2-code-with-external-data-files">Code with external data files</h3>
- <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle, but needs a slightly different "Custom HTML" block that looks like this:</p>
+ <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle. Put the data file itself in
+<code>assets/jdoodle/</code> in the Foojay repository, name it in the shortcode's
+<code>files</code> parameter, and open it from <code>/uploads/</code>:</p>
  <p>
 
 ```
-<div data-pym-src="https://www.jdoodle.com/plugin" 
-   data-version-index="4"
-   data-language="java" 
-   data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-has-files="true">
-   <div data-type="file" data-file-name="testdata.csv">
-        // This is the place to put the text data
-   </div>
-   <div data-type="script"><xmp>
+{{</* jdoodle files="testdata.csv" */>}}
         // This is the place to put the code
-   </xmp></div>
-</div>
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+{{</* /jdoodle */>}}
 ```
 
 </p>
- <p class="wp-block-paragraph">The <code>data-client-id</code> is important here to allow the use of external files, but is only valid when used on the Foojay website! Create your own <a target="_blank" href="https://www.jdoodle.com">account on the JDoodle site</a> if you want to use this functionality on another website.</p>
+ <p class="wp-block-paragraph">Foojay's own JDoodle client id is what allows the use of external files, and the shortcode adds it for you. Create your own <a target="_blank" href="https://www.jdoodle.com">account on the JDoodle site</a> if you want to use this functionality on another website.</p>
  <p class="wp-block-paragraph">This is a simple example to read data from a CSV file:</p>
  <p>
 
 ```
-<div data-pym-src="https://www.jdoodle.com/plugin" 
-   data-version-index="4"
-   data-language="java" 
-   data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" 
-   data-has-files="true">
-   <div data-type="file" data-file-name="testdata.csv">
-1,Ada,Gomez,40,Mabvob Pike,Radafso,LA,60500
-2,Bernard,Jordan,28,Dotcu Court,Cewbufbim,MS,17422
-   </div>
-   <div data-type="script"><xmp>
+{{</* jdoodle files="testdata.csv" */>}}
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -133,9 +107,7 @@ public class ReadTextFile {
         }
     }
 }
-   </xmp></div>
-</div>
-<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+{{</* /jdoodle */>}}
 ```
 
 </p>

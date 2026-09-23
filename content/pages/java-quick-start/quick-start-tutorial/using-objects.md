@@ -1,9 +1,7 @@
 ---
 title: "Using Objects"
-linkTitle: "Using Objects"
 description: "Java is object-oriented: turn part of your program into an object with its own variables and methods."
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
-jdoodle: true
 frozen: false
 duration: "4:07"
 weight: 8
@@ -15,14 +13,12 @@ Java is an object-oriented programming language. This means we can turn any part
 
 Just like the previous example, this one also uses some methods which are not part of "base Java". That's why our code starts with the import lines to determine where ArrayList and List can be found.
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 import java.util.ArrayList;
 import java.util.List;
 public class UsingObject {
     public static void main (String[] args) {
-        List&lt;ShoppingCartItem&gt; items = new ArrayList&lt;&gt;();
+        List<ShoppingCartItem> items = new ArrayList<>();
         items.add(new ShoppingCartItem("Raspberry Pi 4, 4Gb", 1, 59.95F));
         items.add(new ShoppingCartItem("Micro-HDMI cable", 2, 5.9F));
         items.add(new ShoppingCartItem("Raspberry Pi 4 power supply", 1, 9.95F));
@@ -58,9 +54,7 @@ public class UsingObject {
         }
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 The class `ShoppingCartItem` is an object that can hold the data for each item in the shopping list. The constructor `ShoppingCartItem(String name, int quantity, float price)` enables us to make an item that has a name, quantity, and price. The method `getTotal()` inside the item will return the total cost for the item based on quantity and price.
 

@@ -246,3 +246,40 @@ graph LR
 
 For more examples, see the blog post TODO. You can use the [Mermaid live editor](https://mermaid.live/) to create diagrams.
 
+### Runnable code
+
+Wrap a snippet in the `jdoodle` shortcode and the reader gets a **Run** button:
+the code compiles and executes in the page, through
+[JDoodle](https://www.jdoodle.com/). Write the code exactly as you would in a
+fence — indentation and blank lines are preserved, and `<`, `>` and `&` need no
+escaping.
+
+{{< jdoodle >}}
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, foojay!");
+    }
+}
+{{< /jdoodle >}}
+
+All parameters are optional:
+
+| Parameter | Default | What it does |
+|---|---|---|
+| `lang` | `java` | The JDoodle language id. |
+| `version` | `6` | JDoodle's language version index. |
+| `libs` | none | Maven coordinates, comma-separated, for dependencies. |
+| `files` | none | Data files the snippet reads, comma-separated (see below). |
+
+**A snippet that reads a data file** names it in `files`, and the file itself
+lives once in `assets/jdoodle/`. Inside the sandbox it is at
+`/uploads/<name>`, which is the path your code should open:
+
+{{< jdoodle files="testdata.csv" >}}
+var file = new java.io.File("/uploads/testdata.csv");
+{{< /jdoodle >}}
+
+Put a shared fixture in `assets/jdoodle/` rather than pasting it into the page:
+two tutorial steps already read the same 100-row `testdata.csv`, and two copies
+of a fixture drift.
+

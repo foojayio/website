@@ -171,7 +171,7 @@
        writes a ```mermaid fence and gets a diagram, and the 4000 pages without
        one never fetch the library. */}}
   {{ if strings.Contains (partialCached "article-html.html" . .RelPermalink) "<pre class=\"mermaid\">" }}{{ partial "mermaid.html" . }}{{ end }}
-  {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
+  {{ if .HasShortcode "jdoodle" }}{{ partial "jdoodle.html" . }}{{ end }}
 
   {{/* Counts this read. The partial decides for itself whether the page is
        counted (views-key.html) and renders nothing otherwise, so the list of

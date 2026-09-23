@@ -1,9 +1,7 @@
 ---
 title: "Using Methods"
-linkTitle: "Using Methods"
 description: "Split a Java program into methods to keep the code simple, readable and maintainable long after you wrote it."
 url: "/java-quick-start/quick-start-tutorial/using-methods/"
-jdoodle: true
 frozen: false
 duration: "2:32"
 weight: 7
@@ -15,9 +13,7 @@ Let's now use some different methods to keep the code simple and easy to read an
 
 Methods help you to organize your code. Each method does one specific thing, either with or without input values.
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class UsingMethod {
@@ -32,9 +28,7 @@ public class UsingMethod {
         return new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date());
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 1. First, look at the import statements at the top. Because we use methods that are not part of "basic Java", we need to tell our program which additional classes need to be imported.
 2. Then two methods are defined. By calling these methods from the main method, we can keep the code in the main method very clean and readable.

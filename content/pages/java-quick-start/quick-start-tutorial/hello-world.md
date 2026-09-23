@@ -3,7 +3,6 @@ title: "Hello World"
 linkTitle: "Hello World!"
 description: "Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
 url: "/java-quick-start/quick-start-tutorial/hello-world/"
-jdoodle: true
 aliases:
   - "/getting-started-with-java/quick-start-tutorial/helloworld-running-a-single-file-java-application/"
 frozen: false
@@ -17,18 +16,14 @@ Traditionally, we start our first experiment with a "Hello World" application.
 
 Create a new file, named "HelloWorld.java" and add the following code:
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 public class HelloWorld {
     public static void main (String[] args) {
         String txt = "Hello World";
         System.out.println(txt);
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 1. **Public Class.** Java requires us to "package" our code in a public class. By convention, this has the same name as the file, which you see in this first line. All our code starts after this line, after which we finish the class with a closing bracket `}`.
 2. **Entry Point.** A Java application also needs an "entry point", the main class which is started and can call all other methods, that's the second line, and again we need to close this method with a bracket `}`.

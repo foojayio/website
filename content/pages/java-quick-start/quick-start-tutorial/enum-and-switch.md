@@ -1,9 +1,7 @@
 ---
 title: "Enum and Switch"
-linkTitle: "Enum and Switch"
 description: "Replace loose integer values with an enum, and use a switch to react to each of its options in Java."
 url: "/java-quick-start/quick-start-tutorial/enum-and-switch/"
-jdoodle: true
 frozen: false
 duration: "2:45"
 weight: 6
@@ -15,9 +13,7 @@ In the previous example, we used an integer value to define testValue. But if we
 
 Enums are, by convention, typed in uppercase.
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 public class EnumSwitch {
     public static void main (String[] args) {
         // Define value based on an enum
@@ -41,9 +37,7 @@ public class EnumSwitch {
         TYPE_1, TYPE_2, TYPE_3, TYPE_4, TYPE_5, UNKNOWN;
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 Change the value in line 4 to check the output, for instance when running with `TYPE_2` and `TYPE_4`:
 

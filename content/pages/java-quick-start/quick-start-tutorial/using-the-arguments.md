@@ -3,7 +3,6 @@ title: "Using the Arguments"
 linkTitle: "Using Arguments and String Arrays"
 description: "Use the start-up arguments of the main method to learn Java arrays: their length, and how to loop through them."
 url: "/java-quick-start/quick-start-tutorial/using-the-arguments/"
-jdoodle: true
 frozen: false
 duration: "2:10"
 weight: 3
@@ -15,23 +14,19 @@ Let's go a little step further and use the start-up arguments assigned in the ma
 
 We need to create another new Java file and call it `MainArguments.java`. The `args` variable of the main method is a String array and we will use it with the following code. You can try it out here, by typing in one or more words as "Input Arguments":
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 public class MainArguments {
     public static void main (String[] args) {
         System.out.println("Number of arguments: " + args.length);
-        if (args.length &gt; 0) {
+        if (args.length > 0) {
             System.out.println("First argument: " + args[0]);
         }
-        for (int i = 0; i &lt; args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             System.out.println("Argument " + (i + 1) + ": " + args[i]);
         }
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 Now we can start the application and provide it any number of extra arguments.
 

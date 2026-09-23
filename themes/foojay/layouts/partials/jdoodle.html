@@ -1,10 +1,9 @@
-{{/* JDoodle runnable code snippets. Each snippet in the body is a
-     <div data-pym-src="https://www.jdoodle.com/plugin" ...>; the pym loader
-     below finds them and swaps in an interactive iframe.
+{{/* The JDoodle pym loader, which swaps each snippet's div for an
+     interactive iframe. Loaded only on pages that use the jdoodle shortcode
+     (baseof.html asks `.HasShortcode`), so there is no frontmatter flag to
+     set or forget -- same rule as the EnlighterJS and mermaid loaders.
 
-     The script stays hosted on jdoodle.com (it is not a WordPress asset), so it
-     keeps working after the WordPress site is retired — nothing to vendor.
-
-     Loaded only on pages whose frontmatter has `jdoodle: true`, which
-     ConvertPages.java sets when it finds a [data-pym-src] element. */}}
+     Hosted by jdoodle.com rather than vendored: it is a client for their
+     service, not a library, so a pinned copy would still have to talk to
+     them. */}}
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" defer></script>

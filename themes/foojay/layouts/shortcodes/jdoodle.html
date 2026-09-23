@@ -1,0 +1,43 @@
+{{- /* A runnable JDoodle snippet. `.Inner` is the code; `files` names data
+       files under assets/jdoodle/, comma-separated, for a snippet that reads
+       one.
+
+       A SHORTCODE rather than raw HTML in the page, because the payload is
+       read as textContent and three separate things silently corrupt it:
+       `hugo --minify` collapses a whitespace run outside `<pre>`, so every
+       snippet lost its indentation; a blank line inside the code ended the
+       surrounding CommonMark HTML block and handed the rest to Goldmark; and
+       `<xmp>` never decodes entities. Inner text never reaches Goldmark, so
+       only the escaping below is left to get right.
+
+       The client id is foojay's own and the same for every snippet, so it is
+       here rather than a parameter set to one value on every call.
+
+       NO data-version-index unless a snippet asks for one. The plugin reads
+       `dataset.versionIndex` and JSON.stringify drops it when undefined, so
+       omitting it means JDoodle's current default -- which is what a tutorial
+       teaching Java wants. The pins it replaced (4 and 6) were both years
+       stale, and nobody was going to bump them.
+
+       htmlEscape + safeHTML, exactly as _markup/render-codeblock.html does:
+       once, deliberately, so `List<Person>` is not parsed as markup and not
+       escaped a second time into `&amp;lt;`. */ -}}
+{{- $code := strings.Trim .Inner "\r\n" -}}
+{{- $names := slice -}}
+{{- with .Get "files" -}}
+  {{- range split . "," -}}
+    {{- with trim . " " }}{{ $names = $names | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+<div data-pym-src="https://www.jdoodle.com/plugin" data-language="{{ .Get "lang" | default "java" }}"{{ with .Get "version" }} data-version-index="{{ . }}"{{ end }}{{ with .Get "libs" }} data-libs="{{ . }}"{{ end }} data-client-id="34d6e81ae45d88cdb9fb98fed1415b81"{{ if $names }} data-has-files="true"{{ end }}>
+{{- range $names }}
+{{- $res := resources.Get (printf "jdoodle/%s" .) -}}
+{{- if not $res }}{{ errorf "jdoodle shortcode: assets/jdoodle/%s does not exist" . }}{{ end }}
+<div data-type="file" data-file-name="{{ . }}"><pre>{{ $res.Content | htmlEscape | safeHTML }}</pre></div>
+{{- end }}
+{{- if $names }}
+<div data-type="script"><pre>{{ $code | htmlEscape | safeHTML }}</pre></div>
+{{- else }}
+<pre>{{ $code | htmlEscape | safeHTML }}</pre>
+{{- end }}
+</div>

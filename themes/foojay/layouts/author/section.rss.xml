@@ -5,14 +5,11 @@ Hugo's embedded RSS template only ranges over `.Pages`/`.RegularPages`, which
 an author profile does not have -- so without this override, turning `rss` on
 for them renders an empty <channel>.
 
-It mirrors the author->posts filtering the profile page uses (an `authors:`
-list, or an older single `author:` slug -- both matched and de-duped), so the
-feed lists the same articles the page shows.
+Articles come from partials/author-posts.html, the single definition of
+"this author's articles" -- so the feed cannot credit an author differently
+from their own profile page.
 */ -}}
-{{- $slug := .File.ContentBaseName }}
-{{- $posts := where site.RegularPages "Section" "posts" }}
-{{- $written := where $posts "Params.authors" "intersect" (slice $slug) | union (where $posts "Params.author" $slug) }}
-{{- $written = $written.ByDate.Reverse }}
+{{- $written := partial "author-posts.html" . }}
 {{- $limit := .Site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}{{ $written = $written | first $limit }}{{ end }}
 {{- /* `{{-`, not `{{`: an XML declaration is only a declaration at byte 0,

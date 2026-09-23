@@ -3,7 +3,6 @@ title: "Working with numbers"
 linkTitle: "Working with Numbers"
 description: "The Java number types you will actually use - int, float, double and long - and how to work with them."
 url: "/java-quick-start/quick-start-tutorial/working-with-numbers/"
-jdoodle: true
 frozen: false
 duration: "2:08"
 weight: 4
@@ -21,9 +20,7 @@ Depending on the type of number, they use more or less memory. In most cases, in
 
 We create both the example float and double with 20 decimals to see the number of decimals that are really stored in the variable.
 
-<div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
-
-<pre>
+{{< jdoodle >}}
 public class NumberValues {
     public static void main (String[] args) {
         int intValue = 2;
@@ -35,9 +32,7 @@ public class NumberValues {
         System.out.println("Multiply: " + (intValue * floatValue) + ", rounded: " + Math.round(intValue * floatValue));
     }
 }
-</pre>
-
-</div>
+{{< /jdoodle >}}
 
 When we run this code, you see how many decimals are stored in the values and also how you can round a value.
 

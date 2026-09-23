@@ -510,12 +510,6 @@ convention below). What is genuinely still open:
    instead of two, and required approvals at 1 instead of 0.
 7. **Hotjar (`hjid` 2547610) and Reo.dev (`b38cec169d83063`)** ran on the
    WordPress site and were deliberately not carried over. Decide separately.
-8. **Three small cleanups worth doing next time the file is open**: a
-   `{{< jdoodle >}}` shortcode to replace 17 hand-written embeds that have
-   already drifted into four shapes; the 8 of 11 `linkTitle:` lines that now
-   merely restate `title:`; and `layouts/author/section.rss.xml`, which
-   re-derives an author's posts with its own `where` instead of calling
-   `partials/author-posts.html`.
 
 **A lesson worth keeping from a gap that closed**: `/pedia/` looked complete
 because the WordPress index is **paginated and lists 31 of 47**.
@@ -736,20 +730,45 @@ site.
   become circled digits, because EnlighterJS re-renders a block from its
   `textContent` and would otherwise print the marker's markup literally.
 
-- **A JDoodle runnable snippet keeps its indentation only because the code is
-  in a `<pre>`, and that `<pre>` must be its own Markdown block.**
-  `hugo --minify` collapses a whitespace run in ordinary flow content, so
-  **every leading space was stripped from every snippet on the site** — the
-  Quick Start step about indentation had none. `keepWhitespace = true` does not
-  fix it (measured) and costs +1.9 MB.
+- **A runnable snippet is the `{{< jdoodle >}}` shortcode**, whose `.Inner` is
+  the code and whose `files=` names data files kept once in `assets/jdoodle/`.
+  `template/post.md` documents it for authors. The loader is derived with
+  `.HasShortcode`, so there is no `jdoodle:` flag — same rule as the
+  EnlighterJS and mermaid loaders.
 
-  Three load-bearing details, each a live failure: the `<pre>` needs a **blank
-  line above it** so it starts a CommonMark type-1 HTML block, or the first
-  blank line inside the code ends the surrounding type-6 block and hands the
-  rest of the snippet back to Goldmark; **except for `data-type="file"`, where
-  it must be TIGHT**, since the payload is a CSV and a leading blank line is a
-  record; and **`<xmp>` is not a `<pre>`** — it is RAWTEXT, so entities are
-  never decoded and `List&lt;Person&gt;` reached the compiler literally.
+  It replaced 17 hand-written HTML embeds that had drifted into four shapes,
+  and the shortcode exists because three separate things silently corrupt a
+  payload read as `textContent`: **`hugo --minify` collapses a whitespace run
+  outside `<pre>`**, which had stripped every leading space from every snippet
+  on the site (`keepWhitespace = true` does not fix it — measured — and costs
+  +1.9 MB); **a blank line inside the code ended the surrounding CommonMark
+  HTML block** and handed the rest to Goldmark; and **`<xmp>` is not a `<pre>`**,
+  being RAWTEXT, so `List&lt;Person&gt;` reached the compiler literally. Inner
+  text never reaches Goldmark now, leaving only the escaping — `htmlEscape` then
+  `safeHTML`, once, exactly as `render-codeblock.html` does.
+
+  **A data file is at `/uploads/<name>` inside the sandbox**, which is the path
+  the snippet opens. Two tutorial steps read the same 100-row `testdata.csv`,
+  which is why it lives in `assets/` rather than being pasted into both.
+
+  **No `data-version-index` and no `clientid` parameter.** The client id is
+  foojay's own and identical everywhere, so it is a constant in the shortcode
+  rather than a knob set to one value. The version is omitted entirely: the
+  plugin reads `dataset.versionIndex` and `JSON.stringify` drops it when
+  undefined, so leaving it off means JDoodle's current default — which is what
+  a tutorial teaching Java wants, and what the pins it replaced (4 and 6, both
+  years stale) had stopped being.
+
+  **Verify a change here by extracting the payload from the BUILT, MINIFIED
+  HTML exactly as pym does** — `textContent` of the div, or of its
+  `[data-type=script]`/`[data-type=file]` children when `data-has-files` —
+  then `javac` and run it. Nothing static can check this: indentation loss, an
+  undecoded entity and a truncated snippet all build green and fail only inside
+  somebody else's iframe. The conversion was verified that way, all 11 payloads
+  byte-identical to what the old markup produced.
+
+  The two posts that explain JDoodle keep **raw HTML inside code fences** as
+  documentation samples. Those are inert and deliberate; don't convert them.
 
 - **Email addresses are decoded on the way in, never left obfuscated.**
   Cloudflare's Email Address Obfuscation turns every address into a placeholder
