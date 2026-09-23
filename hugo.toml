@@ -236,8 +236,19 @@ enableGitInfo = true
   isPlainText = true
   notAlternative = true
 
+# /stats.json -- every count the build already knows, in one machine-readable
+# file: content, read counts by section, ad views and clicks, and the community
+# data the syncs fetch. Written by layouts/index.stats.json. isPlainText keeps
+# Go's HTML escaping off a JSON document, and notAlternative keeps it out of
+# the <link rel="alternate"> block in the head, the same as LLMS above.
+[outputFormats.STATS]
+  mediaType = "application/json"
+  baseName = "stats"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS", "LLMS"]
+  home = ["HTML", "RSS", "LLMS", "STATS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]

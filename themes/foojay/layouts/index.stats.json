@@ -1,0 +1,165 @@
+{{- /*
+  /stats.json -- one machine-readable count of everything this site knows about
+  itself, written on every build. Wired up as the STATS output format on the
+  home page (see hugo.toml), the same way /llms.txt is.
+
+  WHY A BUILD ARTEFACT AND NOT A SCRIPT. Every number here is already in the
+  build: Hugo holds the pages it just rendered and `site.Data` holds the files
+  the syncs fetched. A script would have to re-derive both from disk and would
+  answer a slightly different question -- "what is in content/" rather than
+  "what got published" -- which differ by every future-dated post. Counting
+  what was built means the file cannot disagree with the site it ships beside.
+
+  DERIVED, NEVER MAINTAINED. Adding a section, a data file or a counted
+  namespace changes this file by itself. The one thing to keep in step is
+  `$counted` below, which mirrors partials/views-key.html: those are the
+  sections whose pages carry a read count, and a section missing there is a
+  section counted as zero here.
+
+  SCHEDULED POSTS ARE ABSENT ON PURPOSE. Hugo does not build a future-dated
+  post, so `posts` is what a reader can reach today, not what sits in the repo.
+  That is the number worth publishing, and the difference is the "Coming soon"
+  list on the home page.
+*/ -}}
+{{- $counted := slice "posts" "pages" "pedia" "authors" -}}
+
+{{/* ---- content, counted off what was actually built ------------------- */}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $pedia := where site.RegularPages "Section" "pedia" -}}
+{{- $pages := where site.RegularPages "Section" "pages" -}}
+{{/* Sponsors and authors are BRANCH bundles, so they are in site.Pages and not
+     in RegularPages -- both carry a cascaded singular `type`, which is how
+     every other template identifies one. Ads are regular pages but carry
+     `render: never` + `list: local`, which keeps them out of site.RegularPages
+     entirely, so they are counted off their own section. Counting any of the
+     three off RegularPages silently returns 0. */}}
+{{- $sponsors := where site.Pages "Type" "sponsor" -}}
+{{- $authors := where site.Pages "Type" "author" -}}
+{{- $ads := slice -}}
+{{- with site.GetPage "/ads" }}{{ $ads = .Pages }}{{ end -}}
+
+{{- $words := 0 -}}
+{{- $adoc := 0 -}}
+{{- $crossposts := 0 -}}
+{{- $withTranscript := 0 -}}
+{{- $withComments := 0 -}}
+{{- $comments := 0 -}}
+{{- $byYear := dict -}}
+{{- range $posts -}}
+  {{- $words = add $words .WordCount -}}
+  {{- if .File -}}
+    {{- if eq .File.Ext "adoc" }}{{ $adoc = add $adoc 1 }}{{ end -}}
+  {{- end -}}
+  {{- with .Params.canonical }}{{ $crossposts = add $crossposts 1 }}{{ end -}}
+  {{- $y := .Date.Format "2006" -}}
+  {{- $byYear = merge $byYear (dict $y (add (int (index $byYear $y)) 1)) -}}
+  {{/* Both are page resources with no frontmatter flag, so the only way to
+       count them is to look for the file -- the same test the templates that
+       render them use. */}}
+  {{- with .Resources.GetMatch "transcript.md" }}{{ $withTranscript = add $withTranscript 1 }}{{ end -}}
+  {{- with .Resources.GetMatch "comments.json" -}}
+    {{- $withComments = add $withComments 1 -}}
+    {{- with unmarshal .Content }}{{ $comments = add $comments (len .) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* ---- views, split on the key namespace ------------------------------ */}}
+{{- $views := dict -}}
+{{- $viewTotal := 0 -}}
+{{- $adViews := 0 -}}
+{{- $adClicks := 0 -}}
+{{- $perAd := dict -}}
+{{- $keys := 0 -}}
+{{- range $key, $n := site.Data.views -}}
+  {{- $keys = add $keys 1 -}}
+  {{- $parts := split $key "/" -}}
+  {{- $ns := index $parts 0 -}}
+  {{- $slug := strings.TrimPrefix (printf "%s/" $ns) $key -}}
+  {{- if eq $ns "ad-view" -}}
+    {{- $adViews = add $adViews $n -}}
+    {{- $cur := or (index $perAd $slug) (dict "views" 0 "clicks" 0) -}}
+    {{- $perAd = merge $perAd (dict $slug (merge $cur (dict "views" $n))) -}}
+  {{- else if eq $ns "ad-click" -}}
+    {{- $adClicks = add $adClicks $n -}}
+    {{- $cur := or (index $perAd $slug) (dict "views" 0 "clicks" 0) -}}
+    {{- $perAd = merge $perAd (dict $slug (merge $cur (dict "clicks" $n))) -}}
+  {{- else -}}
+    {{- $viewTotal = add $viewTotal $n -}}
+    {{- $views = merge $views (dict $ns (add (int (index $views $ns)) $n)) -}}
+  {{- end -}}
+{{- end -}}
+{{/* Named explicitly rather than taken from the data, so a section that has
+     never been viewed reports 0 instead of going missing. */}}
+{{- $viewsBySection := dict -}}
+{{- range $counted -}}
+  {{- $viewsBySection = merge $viewsBySection (dict . (int (index $views .))) -}}
+{{- end -}}
+
+{{/* ---- the community data the syncs fetch ----------------------------- */}}
+{{- $jugs := site.Data.jugs | default slice -}}
+{{- $jugsWithFeed := 0 -}}
+{{- range $jugs -}}
+  {{- if or .calendar .meetup_slug }}{{ $jugsWithFeed = add $jugsWithFeed 1 }}{{ end -}}
+{{- end -}}
+{{/* THE CALENDAR HAS TWO SOURCES, and neither one is "meetups". JUG feeds
+     carry whatever a group publishes -- a meetup, yes, but also a workshop, a
+     hackday or a conference -- and data/events/ is hand-added conferences and
+     webinars. So they are counted separately and named for where they come
+     from, with the total being what /calendar/ actually shows.
+
+     `fromJugFeeds` needs no date test: fetch/JugEvents.java only ever writes
+     upcoming events. `submitted` does, because a data/events/ file stays on
+     disk after its event: the rule is the one partials/calendar-events.html
+     uses, end date (or start, when there is no end) on or after today, so a
+     multi-day conference counts as upcoming until the day after it ends. */}}
+{{- $eventGroups := (index site.Data "jug-events").groups | default slice -}}
+{{- $fromFeeds := 0 -}}
+{{- range $eventGroups }}{{ $fromFeeds = add $fromFeeds (len (.events | default slice)) }}{{ end -}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $submitted := 0 -}}
+{{- range $slug, $c := site.Data.events -}}
+  {{- with $c.start -}}
+    {{- $end := time.AsTime . -}}
+    {{- with $c.end }}{{ $end = time.AsTime . }}{{ end -}}
+    {{- if ge ($end.Format "2006-01-02") $today }}{{ $submitted = add $submitted 1 }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- $champions := (index site.Data "java-champions") | default slice -}}
+{{- $roundups := (index site.Data "jvm-weekly") | default slice -}}
+
+{{- dict
+      "generated" (now.UTC.Format "2006-01-02T15:04:05Z")
+      "site" (dict "baseURL" site.BaseURL "hugo" hugo.Version)
+      "content" (dict
+        "posts"           (len $posts)
+        "authors"         (len $authors)
+        "pages"           (len $pages)
+        "pedia"           (len $pedia)
+        "sponsors"        (len $sponsors)
+        "ads"             (len $ads)
+        "categories"      (len (index site.Taxonomies "categories"))
+        "words"           $words
+        "asciidoc"        $adoc
+        "markdown"        (sub (len $posts) $adoc)
+        "crossposts"      $crossposts
+        "withTranscript"  $withTranscript
+        "withComments"    $withComments
+        "comments"        $comments
+        "postsByYear"     $byYear)
+      "views" (merge (dict
+        "total"  $viewTotal
+        "keys"   $keys) $viewsBySection)
+      "ads" (dict
+        "views"  $adViews
+        "clicks" $adClicks
+        "byAd"   $perAd)
+      "community" (dict
+        "jugs"              (len $jugs)
+        "jugsWithFeed"      $jugsWithFeed
+        "javaChampions"     (len $champions)
+        "jvmWeeklyRoundups" (len $roundups)
+        "calendar" (dict
+          "upcomingItems" (add $fromFeeds $submitted)
+          "fromJugFeeds"  $fromFeeds
+          "submitted"     $submitted))
+    | jsonify (dict "indent" "  ") -}}
