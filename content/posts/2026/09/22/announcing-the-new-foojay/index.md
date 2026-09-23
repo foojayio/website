@@ -34,7 +34,7 @@ formatting survived. For instance, Markdown was available, but code blocks somet
 
 **As the amount of posts grew, WordPress became slower.** But not only page load time increased. The whole process to add new features, improve the styling, fix bugs, constantly update plugins and WordPress itself, it all started taking too much time, effort, and money for a community driven project.
 
-**AI happened.** WordPress was one of the few options to build something like Foojay for a long time. But with Hugo and AI assisted coding, replacing what we had into something faster and more user-friendly for visitors, authors, and maintainers, it became possible to build what you see now in a matter of weeks with a very small budget.
+**AI happened.** WordPress was one of the few options to build something like Foojay for a long time. But with Hugo and AI assisted coding, replacing what we had with something faster and more user-friendly for visitors, authors, and maintainers, it became possible to build what you see now in a matter of weeks with a very small budget.
 
 One evening I was "fed up" with recurring issues and decided to see if I could do better. I had a few ideas, and I wanted to see if they were feasible. I started a small experiment, and that night at 03:00 I was convinced I could make this work and port all existing content to a Hugo website, with extra features, and a full cleanup.
 
@@ -102,13 +102,13 @@ dependencies at the top and runs directly:
 //JAVA 21+
 ```
 
-As an example: `jbang scripts/transfer/Posts.java` read all the content from the WordPress site, uses jsoup to parse the HTML, flexmark turns it into Markdown, Jackson and SnakeYAML handle the JSON and YAML. As a Java developer, those are the tools I know and use in other projects. Based on this info, Claude generated the scripts, I reviewed, and used it over and over again until the cutover to keep the old site live while the new one was being built and tested.
+As an example: `jbang scripts/transfer/Posts.java` was used to read all the content from the WordPress site. It used jsoup to parse the HTML, flexmark to turn it into Markdown, Jackson and SnakeYAML to handle the JSON and YAML. As a Java developer, those are the tools I know and use in other projects. Based on this info, Claude generated the scripts, I reviewed, and used it over and over again until the cutover to keep the old site live while the new one was being built and tested.
 
 During that process, the content got cleaned up to become a proper Markdown site. A simpler image gallery got added, code blocks became fenced blocks, links got checked and fixed, and the frontmatter at the top of each article now asks for six things: title, date, description, author, hero image and categories. Everything else is derived from that.
 
-One potential problem: GitHub Pages has a limit of 1Gb. A lot of images were imported from the old site, and some of them were huge. The largest one was a 52 MB animated GIF that was used as the header image of three different articles. That alone was enough to push the repository over the limit. So a script got added to reduce file sizes and we are now below the limit with some room for the future. We may need to move images to a CDN later, but that's not an urgent thing at this moment.
+One potential problem: GitHub Pages has a limit of 1 GB. A lot of images were imported from the old site, and some of them were huge. The largest one was a 52 MB animated GIF that was used as the header image of three different articles. That alone was enough to push the repository over the limit. So a script got added to reduce file sizes and we are now below the limit with some room for the future. We may need to move images to a CDN later, but that's not an urgent thing at this moment.
 
-I'll wait a few days until to see if any issues arise, and then I'll remove some of the script which are only needed for the migration. What will stay, are the Java scripts that keep the site up-to-date:
+I'll wait a few days to see if any issues arise, and then I'll remove some of the scripts which were only needed for the migration. What will stay, are the Java scripts that keep the site up-to-date:
 
 | Runs | What it does |
 |---|---|
@@ -191,7 +191,7 @@ episode and your name comes out wrong, every transcript carries a **Suggest a
 correction** link that opens that episode's transcript file in an editor. The
 script never overwrites a corrected transcript again.
 
-One deliberate omission: **transcripts stay out of the search index.** as they would add to much "noise" to the search results. The search index is for articles, not for every word spoken in a podcast.
+One deliberate omission: **transcripts stay out of the search index**, as they would add too much "noise" to the search results. The search index is for articles, not for every word spoken in a podcast.
 
 ## JUGs, Calendar and Events
 
@@ -207,7 +207,7 @@ JBang script pulls it into the site at every deploy. A JUG lead who wants to
 correct their entry opens a pull request against that repository, not the Foojay one. 
 * The [Foojay calendar](/calendar/) is now fully automated. It reads the iCal feed each JUG publishes, and it does not care whether that feed comes from Meetup, Google Calendar, a file on the group's own site, or any other platform that exports iCal. Once a day a second script walks that list and reads the calendar feed to fill our calendar data file.
 
-**102 JUGs sit in the directory and 70 of them publish a
+**102 JUGs sit in the directory, 70 of them publish a
 feed we can read, and 62 upcoming meetups sit on the calendar as I write this.**
 
 Both screenshots below show September 2026, taken on the first of the month:
@@ -303,7 +303,7 @@ exactly why a second counter exists.
 
 With Google Analytics as the only source, every number we publish comes out
 wrong, and wrong in a predictable direction. A large share of Java developers and Foojay visitors use ad blockers. A page-view count that silently
-misses a a big part of its readers is not a statistic, it is a guess. And the read count on a Foojay article is a *published* number, sitting on the page next to the byline, so it had better be true.
+misses a big part of its readers is not a statistic, it is a guess. And the read count on a Foojay article is a *published* number, sitting on the page next to the byline, so it had better be true.
 
 So the `12,345 views` you see comes from something we run ourselves: a small
 [Cloudflare Worker](https://developers.cloudflare.com/workers/) on

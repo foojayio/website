@@ -1487,7 +1487,16 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .related-posts {
   margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
 }
-.related-posts h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+/* `> h3`, NOT a descendant selector: partials/post-card.html titles its cards
+   with <h3 class="post-card-title">, so `.related-posts h3` also matched every
+   card inside the strip and set the related posts' TITLES in caps with letter
+   spacing -- the one place on the site where a post title was uppercased. It
+   also beat .post-card-title on specificity (0,1,1 over 0,1,0), so the card's
+   own rule could not take it back. The child combinator keeps this on the
+   section's own heading, which is all it was ever meant to style, and is what
+   makes good on the promise below that a related card cannot drift from a card
+   anywhere else. */
+.related-posts > h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
 
 /* Cards rather than a bulleted list, because what makes a reader take the next
    article is the picture and the date as much as the title -- the same reason

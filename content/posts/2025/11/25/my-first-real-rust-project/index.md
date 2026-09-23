@@ -21,7 +21,7 @@ I have been learning Rust for a couple of years, and using it for pet projects a
 
 Our main software platform has baked-in health sensors for monitoring. These sensors are exposed as HTTP APIs. The problem is that most customers do not actively monitor those endpoints. For an engineer such as myself, they are responsible for their lack of maturity regarding observability; for customer success managers, they should be helped and cared for.
 
-The goal is simple: provide a component that polls the sensors' state and sends them via email. One can configure the sensors polled and the severity, *e.g.*, warning and above, as well as the email and a a few other parameters.
+The goal is simple: provide a component that polls the sensors' state and sends them via email. One can configure the sensors polled and the severity, *e.g.*, warning and above, as well as the email and a few other parameters.
 
 ## Why Rust?
 
