@@ -6,6 +6,8 @@ cta: "Read more"
 image: "foojay-social-card.png"
 background: "#ffffff"
 
+expiryDate: "2026-10-31"
+
 # foojay's own promotion, not a paid placement -- so no "Sponsored Content"
 # label. The live homepage renders the label on the other two slides and leaves
 # this one's empty.
