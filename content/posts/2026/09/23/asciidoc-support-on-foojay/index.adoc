@@ -26,11 +26,11 @@ this feature, and for naming exactly which parts of it he uses. And of course, h
 Name your file `index.adoc` instead of `index.md`. That is the whole switch.
 
 [source]
----
+------
 content/posts/2026/10/09/my-article/
 ├── index.adoc
 └── screenshot.png
----
+------
 
 The frontmatter block is identical: `title`, `date`, `authors`,
 `categories`, fenced with `---`. Images still sit next to the article. The same checks run on your pull request. Nothing else about submitting an article changes.

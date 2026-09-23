@@ -54,7 +54,10 @@ Sections start at `==`. Sub-sections use `===`. They become the "On this page"
 navigation automatically.
 
 Inline markup: *bold*, _italic_, `monospace`, and a
-https://foojay.io[link with its text in brackets].
+https://foojay.io[link with its text in brackets]. Links to other sites
+automatically open in a new tab; links to other foojay pages stay in the same
+tab. (Adding AsciiDoc's own `^` suffix -- `https://example.com[text^]` -- still
+works and is left as you wrote it, but you no longer need it.)
 
 * A bullet
 * Another one

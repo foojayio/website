@@ -79,10 +79,13 @@
          after the slash -- it is what keeps a protocol-relative `//host/path`
          from being mangled into the site's own base path.
 
-         NOT DONE HERE: target/rel on external links, the hook's job 3.
-         AsciiDoc says that at the source with a `^` suffix -- `https://x[text^]`
-         -- which is the author's choice to make and is what template/post.adoc
-         documents. */ -}}
+         Job 3 -- target/rel on external links -- is done just below, for the
+         same reason: an author writing the same link in Markdown gets a new
+         tab, so an AsciiDoc article that opened it in place would make the two
+         formats disagree about what a link to another site does. AsciiDoc can
+         also say it at the source with a `^` suffix -- `https://x[text^]` --
+         and that still works; a link that already carries a target is left
+         exactly as the author wrote it. */ -}}
   {{- /* relURL "" and NOT relURL "/": relURL leaves a path that already starts
          with a slash alone, so relURL "/" is "/" on every deploy and the guard
          below would never fire. The link hook hits the same trap and works
@@ -91,6 +94,40 @@
   {{- if ne $base "/" -}}
     {{- $html = replaceRE `href="(?:https?:)?//(?:www\.)?foojay\.io/` (printf `href="%s` $base) $html -}}
     {{- $html = replaceRE `href="/([^/"])` (printf `href="%s$1` $base) $html -}}
+  {{- end -}}
+
+  {{- /* EXTERNAL LINKS OPEN IN A NEW TAB -- job 3 of the link hook, applied to
+         asciidoctor's HTML because the hook itself never sees it.
+
+         AFTER the baseURL rewrite above, and that order is load-bearing: on a
+         subpath deploy that rewrite has already turned an absolute foojay.io
+         href into a root-relative one, which no longer matches the absolute
+         pattern here and so correctly stays in the same tab. In production it
+         does not fire at all -- relURL "" is "/" -- so an absolute foojay.io
+         link survives to this point and has to be excluded by host instead.
+         That is what the $internal test below is for, and it is a COPY of the
+         one in _markup/render-link.html rather than a cleverer test, so the
+         two formats cannot drift apart on which hosts count as ours.
+
+         TAG BY TAG rather than one replaceRE, because the decision needs two
+         things RE2 cannot express in a single pattern without lookahead: skip
+         a link that already has a target (asciidoctor writes one for the `^`
+         suffix, and rewriting it would emit a duplicate attribute), and skip
+         our own host. `replace` swaps every identical occurrence at once, so a
+         tag repeated in the article is handled on its first visit and is a
+         no-op on the rest.
+
+         mailto:, #fragments and bundle-relative paths are untouched: the
+         pattern only matches an absolute or protocol-relative http(s) href,
+         which is the same thing the hook calls external. */ -}}
+  {{- range $tag := findRE `<a [^>]*href="(?:https?:)?//[^"]*"[^>]*>` $html -}}
+    {{- if not (strings.Contains $tag "target=") -}}
+      {{- $href := replaceRE `^.*?href="([^"]*)".*$` "$1" $tag -}}
+      {{- $internal := or (hasPrefix $href "https://foojay.io") (hasPrefix $href "http://foojay.io") (hasPrefix $href "https://www.foojay.io") (hasPrefix $href "http://www.foojay.io") (hasPrefix $href "//foojay.io") -}}
+      {{- if not $internal -}}
+        {{- $html = replace $html $tag (replaceRE `>$` ` target="_blank" rel="noopener noreferrer">` $tag) -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 
   {{- /* CALLOUTS: `// <1>` AT THE END OF A CODE LINE BECOMES A CIRCLED DIGIT,
