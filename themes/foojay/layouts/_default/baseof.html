@@ -46,10 +46,25 @@
     {{ end }}
   {{ end }}
 
-  {{/* No site name suffix: the brand was costing 33 of the ~60 characters
-       Google renders, on 2147 post titles that already average past that. The
-       page number keeps the pagers from sharing one title. */}}
-  <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Page not found{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}</title>
+  {{/* Site name suffix as the SHORT brand token, " | foojay" -- 9 characters,
+       the same string og:site_name below already uses, and deliberately NOT
+       site.Title. Appending site.Title is what this template used to refuse,
+       and the reason still holds: "foojay.io - Friends Of OpenJDK" plus a
+       separator is 33 of the ~60 characters Google renders, on 2147 post
+       titles that already average past that. Nine is a different trade -- it
+       buys the brand back into the search result and into a shared tab strip,
+       which the bare title had lost, at a cost the long titles can absorb.
+
+       NOT ON THE HOME PAGE, whose title IS site.Title: it would read
+       "foojay.io - Friends Of OpenJDK | foojay".
+
+       NOT ON og:title either. og:site_name carries the brand separately in
+       every link preview, so adding it here too would render "foojay" twice
+       in the same card.
+
+       The page number keeps the pagers from sharing one title, and it goes
+       BEFORE the suffix so the brand stays last. */}}
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Page not found{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}{{ if not .IsHome }} | Foojay.io{{ end }}</title>
   {{/* Derived for the kinds that carry no description of their own (author
        profiles, category terms), and length-guarded for the ones that do --
        see partials/meta-description.html for why, and for the 470 URLs that

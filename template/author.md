@@ -41,6 +41,19 @@ avatarFull: ""
 # truncated to ~260 characters in the author box under each article.
 bio: ""
 
+# Optional. The one-line summary a search engine or a social card shows for your
+# profile page -- it is not displayed on the page itself.
+#
+# Leave it empty and the site falls back to your `bio`, cut to 200 characters on
+# a word boundary. That is fine for a short bio and poor for a long one: a bio
+# that opens with a list of roles and titles gets cut off before it reaches the
+# projects you are actually known for, and the snippet ends mid-list on "and...".
+#
+# So write this one to stand alone, in about 160 characters, most recognisable
+# thing first -- the name is already the page title, so spend the space on what
+# you do rather than repeating it.
+description: ""
+
 # Every link is optional; the profile only renders the ones that are set.
 # Full URLs, not handles.
 bluesky: ""

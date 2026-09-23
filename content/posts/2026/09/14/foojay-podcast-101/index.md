@@ -2,7 +2,7 @@
 title: "Foojay Podcast #101: Java 27 in Practice: Smaller Heaps, Smarter Defaults, and Valhalla on the Horizon"
 date: "2026-09-14T06:11:42+00:00"
 lastmod: "2026-09-14T12:23:18+00:00"
-description: "JDK 27 arrives on 15 September 2026, and it is a feature release rather than a Long-Term Support one. That distinction matters less than it sounds: as…"
+description: "Simon Ritter on JDK 27: compact object headers, G1 everywhere by default, post-quantum TLS, monthly security updates, and Valhalla's first preview in Java 28."
 authors:
   - "frankdelporte"
   - "simonritter"
