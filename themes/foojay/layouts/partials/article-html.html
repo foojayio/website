@@ -61,20 +61,12 @@
     {{- $html = replaceRE `href="/([^/"])` (printf `href="%s$1` $base) $html -}}
   {{- end -}}
 
-  {{- /* EXTERNAL LINKS OPEN IN A NEW TAB, as the link hook does for Markdown.
-
-         AFTER the baseURL rewrite above, and that order is load-bearing: on a
-         subpath deploy that rewrite has already turned an absolute foojay.io
-         href root-relative, so it no longer matches here and correctly stays
-         in the same tab. In production the rewrite does not fire, so such a
-         link survives to this point and has to be excluded by host -- which is
-         what $internal is for, and it is a COPY of the link hook's test so the
-         two formats cannot disagree about which hosts are ours.
-
-         TAG BY TAG rather than one replaceRE, because RE2 cannot express
-         either skip without lookahead: a link that already carries a target
-         (asciidoctor writes one for the `^` suffix, and rewriting it would
-         emit a duplicate attribute), and our own host. */ -}}
+  {{- /* External links open in a new tab, as the link hook does for Markdown.
+         AFTER the rewrite above: on a subpath deploy that has already made
+         foojay.io links relative, so only production needs $internal, copied
+         from the hook so the two cannot disagree. Tag by tag, not one
+         replaceRE: RE2 has no lookahead, and this must skip our own host and
+         links already carrying a target (the `^` suffix writes one). */ -}}
   {{- range $tag := findRE `<a [^>]*href="(?:https?:)?//[^"]*"[^>]*>` $html -}}
     {{- if not (strings.Contains $tag "target=") -}}
       {{- $href := replaceRE `^.*?href="([^"]*)".*$` "$1" $tag -}}

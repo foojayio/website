@@ -34,6 +34,21 @@ A flag that is always set to the same value is not configuration, it's a
 chore — delete it. When a knob does have to exist, `validate/Frontmatter.java`
 should catch a mistake at PR time rather than letting it fail silently.
 
+## Hard requirement: don't overload comments
+
+A comment earns its place by saying what the code cannot. Keep new ones short:
+
+- **Say WHY, not what** — the code already says what it does.
+- **Three or four lines is the ceiling**, and one is usually enough. Only a
+  genuinely subtle trap earns more.
+- **Say it once.** If something is already explained elsewhere, point at it
+  rather than repeating it.
+- **No narrating the diff**, and no history of what the code used to do.
+
+This applies to every language here: Go templates, CSS, JS, Java, frontmatter.
+Plenty of existing comments are longer than this allows — shorten them when you
+touch them, and don't take them as the model for new ones.
+
 ## What exists so far
 
 - **Hugo skeleton**: `hugo.toml`, `themes/foojay/` (layouts + `static/css/style.css`),

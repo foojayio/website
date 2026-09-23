@@ -473,6 +473,36 @@
         label.textContent = MONTHS[cursor.getMonth()] + ' ' + cursor.getFullYear();
       }
 
+      /* Toolbar state in the URL -- ?month=YYYY-MM&view=grid|list -- so a
+         month and view can be shared as a link. `month` is cursorKey()'s own
+         format; `view=month` is accepted as a synonym for grid, since that is
+         the button's label. replaceState, not push: the arrows are a scrubber
+         and Back should leave the page. Unknown params are preserved. */
+      var VIEW_PARAM = { grid: 'grid', month: 'grid', list: 'list' };
+      /* Set after init, so merely opening /calendar/ never stamps a URL. */
+      var urlReady = false;
+
+      function readUrlState() {
+        var q;
+        try { q = new URLSearchParams(window.location.search); } catch (e) { return {}; }
+        var m = q.get('month');
+        var v = q.get('view');
+        return {
+          /* Junk would make setCursor an Invalid Date. */
+          month: (m && /^\d{4}-(0[1-9]|1[0-2])$/.test(m)) ? m : null,
+          view: (v && VIEW_PARAM[v.toLowerCase()]) || null
+        };
+      }
+
+      function syncUrl() {
+        if (!urlReady || !window.history || !history.replaceState) return;
+        var q;
+        try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+        q.set('month', cursorKey());
+        q.set('view', view);
+        history.replaceState(null, '', window.location.pathname + '?' + q.toString() + window.location.hash);
+      }
+
       /* Where the cursor sits in the agenda: its own index when that month has
          events, otherwise the nearest one in the direction of travel. */
       function listIndex(delta) {
@@ -485,9 +515,11 @@
         return delta > 0 ? monthKeys.length : monthKeys.length - 1;
       }
 
-      function scrollToMonth(key) {
+      /* 'auto' on first load: a smooth scroll races the browser's own
+         scroll restoration. */
+      function scrollToMonth(key, behavior) {
         var section = root.querySelector('[data-month="' + key + '"]');
-        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (section) section.scrollIntoView({ behavior: behavior || 'smooth', block: 'start' });
       }
 
       /* An arrow that cannot go anywhere says so, rather than absorbing the
@@ -518,6 +550,7 @@
           renderGrid();
         }
         syncArrows();
+        syncUrl();
       }
 
       prevBtn.addEventListener('click', function () { step(-1); });
@@ -537,6 +570,7 @@
           scrollToMonth(cursorKey());
         }
         syncArrows();
+        syncUrl();
       });
 
       var switches = root.querySelectorAll('[data-cal-view]');
@@ -555,17 +589,26 @@
           updateLabel();
         }
         syncArrows();
+        syncUrl();
       }
       Array.prototype.forEach.call(switches, function (btn) {
         btn.addEventListener('click', function () { show(btn.getAttribute('data-cal-view')); });
       });
 
+      /* Before renderGrid, so a shared month is drawn once. Clamped to
+         floorKey: the calendar has no past. */
+      var initial = readUrlState();
+      if (initial.month) setCursor(initial.month < floorKey ? floorKey : initial.month);
+
       toolbar.hidden = false;
       renderGrid();
       /* Seven columns of chips are unreadable on a phone, so a narrow screen
          opens on the agenda instead -- the switch is still there for anyone who
-         wants the grid. */
-      show(window.matchMedia('(max-width: 720px)').matches ? 'list' : 'grid');
+         wants the grid. An explicit ?view= in the link beats that default. */
+      show(initial.view || (window.matchMedia('(max-width: 720px)').matches ? 'list' : 'grid'));
+      /* After show(), which may snap the cursor to a month that has a section. */
+      if (initial.month && view === 'list') scrollToMonth(cursorKey(), 'auto');
+      urlReady = true;
     })();
   </script>
   {{ else }}
