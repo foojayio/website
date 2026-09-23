@@ -13,6 +13,11 @@ categories:
 related_posts:
   - "how-to-add-an-event-to-the-foojay-event-calendar"
   - "join-slack-com-t-foojay-signup"
+# WordPress's admin URLs. Nothing here has a login, and these are the two paths
+# people (and bots) still try -- so they land on how to actually contribute.
+aliases:
+  - "/wp-admin/"
+  - "/wp-login.php"
 frozen: true
 ---
 
