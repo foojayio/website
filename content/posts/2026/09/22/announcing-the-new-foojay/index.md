@@ -290,11 +290,7 @@ There are **two** counters, for different reasons. One is Google Analytics, whic
 
 ### 1. Google Analytics, because marketing loves it
 
-Foojay reports into the same Google Analytics property it always has. That has
-not changed, and we are not going to pretend otherwise. [Ketch](https://www.ketch.com/) is still the consent manager, and Google [Consent Mode](https://support.google.com/analytics/answer/9976101) now defaults
-every category to *denied* before it loads. So until you actually agree to
-something, GA sets no cookie and sends cookieless pings. If you decline, it
-stays that way.
+Foojay reports into the same Google Analytics property it always has. That has not changed, and we are not going to pretend otherwise. [Ketch]([Ketch](https://www.ketch.com/)) is still the consent manager.
 
 **You use an ad blocker and refuse cookies? No problem, so do I.** That is
 exactly why a second counter exists.

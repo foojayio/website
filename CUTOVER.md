@@ -38,15 +38,11 @@ that silently gets worse or gets lost if cutover happens without it.
       thing and are **not** imported into Discussions; see "Final comment
       archive" in the next phase.
 
-- [X] **Resolve the Ketch / Consent Mode question.** `partials/analytics.html`
-      emits Google Consent Mode defaults of `denied` and depends on Ketch
-      issuing a standard `gtag('consent', 'update', …)`. If Ketch's Google
-      Consent Mode plugin is not enabled on the `foojay_io` property, GA4 goes
-      to cookieless pings at cutover and the numbers collapse. Test in a
-      **normal** browser window (a Firefox private window blocks
-      `google-analytics.com` outright via Enhanced Tracking Protection and will
-      look like consent gating): accept the banner, watch for `/g/collect` with
-      `tid=G-GS21L12HYK`.
+- [X] **Resolve the Ketch / Consent Mode question.** Answered the hard way:
+      the worry was real, the pre-cutover check was wrong, and GA recorded
+      almost nothing for the first day. See "Analytics fires" in Phase 3 for
+      what happened and how it was fixed. The site no longer emits Consent
+      Mode defaults at all.
 
 - [x] **[BLOCKER] Pre-create the Cloudflare Redirect Rules** — done 2026-09-09
       by IT: all five families in [Redirect rules](#redirect-rules) below, in one
@@ -352,26 +348,42 @@ debugging the rules.
       'foojayio.github.io\|/website/'` → `0`. Verified `0`, even though
       `hugo.toml`'s `baseURL` still carries the trial URL — the build overrides
       it, and the alias pages emit `canonical href=https://foojay.io/…`.
-- [ ] **Analytics fires.** Load the site in a normal (non-private) window,
-      accept the Ketch banner, confirm `/g/collect` with `tid=G-GS21L12HYK`.
-      The banner and the beacon need a real browser, so this stays open — but
-      **the Phase 0 worry behind it is now answered.** That item asked whether
-      Ketch's Google Consent Mode plugin is enabled on the `foojay_io` property,
-      because without it GA4 falls back to cookieless pings and the numbers
-      collapse. It is enabled, and the property config says so:
+- [x] **Analytics fires** — but only after being fixed on 2026-09-23, and the
+      failure is worth keeping.
+
+      **GA recorded almost nothing from cutover until then.** The site loaded
+      `gtag/js?id=G-GS21L12HYK` directly with Consent Mode defaults of
+      `denied`, and **Ketch never sent the update** — so every hit went out
+      `gcs=G100`, no `_ga` cookie was set, realtime showed 0 and average
+      engagement 0s. Accepting the banner changed nothing.
+
+      **The pre-cutover check was wrong, and this is the lesson.** It read the
+      property config, saw `googletag` in `plugins`, and concluded the Consent
+      Mode plugin was enabled:
 
       ```sh
       curl -s https://global.ketchcdn.com/web/v3/config/azul/foojay_io/config.json \
         | python3 -c 'import json,sys; print(json.load(sys.stdin)["plugins"])'
-      # {'googletag': {}, 'gpc': {...}, 'lanyard': {}}
+      # {'googletag': {}, 'gpc': {...purposeMappings...}, 'lanyard': {}}
       ```
 
-      `googletag` is the Consent Mode plugin, and the config maps `_ga` / `_gid`
-      to the `analytics` purpose. The served HTML holds the other half: the
-      `gtag('consent','default', …)` block with everything `denied` except
-      `security_storage`, `wait_for_update: 500`, the Ketch boot script, and
-      `gtag/js?id=G-GS21L12HYK`. What is left to confirm in a browser is only
-      that accepting the banner produces the `consent update` and the beacon.
+      `googletag` is `{}` — **the key is present and the configuration is
+      empty**, so it maps no Ketch purpose onto any Google consent signal.
+      `gpc` beside it is what a configured plugin looks like. A plugin listed
+      is not a plugin configured; only a browser can tell you, so make the
+      browser check the gate, not the config listing.
+
+      **The fix was to go back to the GTM container** (`GTM-M6ZT5NW`), which
+      is the configuration that worked before cutover: no Consent Mode
+      defaults, the container's UA tag on `UA-726113-5` reaching GA4 through
+      Google's connected site tag. Confirmed in a browser — the hit is
+      `/j/collect` with `tid=UA-726113-5`, a `gjid`, and **no `gcs`** — and
+      then confirmed live in GA. Ketch comes from the container and loads
+      exactly once.
+
+      Enabling the `googletag` plugin properly on the Ketch property is what
+      would make a direct GA4 tag viable again; until then, don't reintroduce
+      one.
 - [x] **The regex redirects work.** Run the verification loop in
       [Redirect rules](#redirect-rules) — `/blog/…`, `/almanac/jdk-17`,
       `/docs/…`, a nested category path, and `/feed/`. That loop also checks the

@@ -483,12 +483,15 @@ the live site's own palette, Featured Authors exist, `/pedia/` holds all 47
 entries, search is live, and the paid banner carousel is built (see the ads
 convention below). What is genuinely still open:
 
-1. **Ketch's Google Consent Mode integration is not configured** on the
-   `azul`/`foojay_io` property — Ketch records consent on its own side but
-   never calls `gtag('consent','update')`. That is why loading GA4 directly
-   flatlined analytics at cutover, and why the site is back on the GTM
-   container with no Consent Mode defaults. Enabling that integration on the
-   Ketch property is what would make a direct GA4 tag viable again.
+1. **Ketch's Google Consent Mode plugin is listed but not configured** on the
+   `azul`/`foojay_io` property: the config has `"googletag": {}` — an empty
+   object, where `gpc` beside it carries real `purposeMappings`. So Ketch
+   records consent on its own side and never calls `gtag('consent','update')`.
+   That is why loading GA4 directly flatlined analytics at cutover, and why
+   the site is back on the GTM container with no Consent Mode defaults.
+   Configuring that plugin is what would make a direct GA4 tag viable again —
+   and **a plugin key in the config listing is not evidence it is
+   configured**; only a browser can tell you.
 2. **The accessibility backlog is the site's biggest real gap** — roughly 3,100
    images across `content/` with no description, plus 287 podcast posts with no
    transcript. `Frontmatter.checkImageAltText` warns rather than fails; see the
@@ -1472,10 +1475,12 @@ site.
   `/j/collect` with `tid=UA-726113-5` and a `gjid`, which is that bridge.
 
   **Loading GA4 directly instead is what broke analytics at cutover** — it
-  needed Consent Mode defaults, Ketch's Google Consent Mode integration is not
-  configured on this property, so nothing ever sent the update and every hit
-  went out `gcs=G100`. There are **no `gtag('consent', …)` defaults now**, and
-  azul.com has none either. Gating is Ketch's own, not Consent Mode's.
+  needed Consent Mode defaults, Ketch's `googletag` plugin is present but
+  empty on this property, so nothing ever sent the update and every hit went
+  out `gcs=G100`. There are **no `gtag('consent', …)` defaults now**, and
+  azul.com has none either; gating is Ketch's own, not Consent Mode's.
+  Restoring the container fixed it, **confirmed live in GA on 2026-09-23**.
+  `CUTOVER.md`'s "Analytics fires" has the full account.
 
   **The container also injects Ketch**, so `[params.analytics.ketch]` is
   commented out — setting it loads Ketch twice. Worth fixing the other way
