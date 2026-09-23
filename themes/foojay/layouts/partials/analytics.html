@@ -1,86 +1,30 @@
-{{/*
-  The two third-party scripts foojay.io runs: Google Analytics 4 and Ketch, the
-  consent manager. Both are OFF unless configured.
-
-  THEY ARE LOADED DIRECTLY, NOT THROUGH A TAG MANAGER, and that is a deliberate
-  break from what WordPress did (one GTM container, `GTM-M6ZT5NW`, carrying two
-  retired Universal Analytics tags that resolved to this same GA4 property
-  server-side, plus a Custom HTML tag booting Ketch). The container is 360 KB
-  of JavaScript to deliver eleven lines, pointing at it would load Ketch twice
-  and fire the dead UA tags, and a tag manager puts half the site's
-  third-party behaviour in a web console where no PR can see it. Everything a
-  reader's browser is asked to run should be readable here. A tag manager, if
-  ever wanted, REPLACES this partial rather than joining it.
-
-  Two rules, both derived rather than configured:
-
-  1. NOTHING RENDERS UNLESS IT IS CONFIGURED. No `ga` -> no gtag.js; no Ketch
-     `org`/`property` -> no consent manager. Same posture as views-beacon.html:
-     a local build, a fork or a contributor's `hugo server` never reports a
-     pageview into foojay's property and never shows a consent banner.
-
-  2. CONSENT MODE IS EMITTED ONLY WHEN KETCH IS. Consent Mode defaults
-     everything to `denied` and lets the consent manager grant what the reader
-     agrees to, which is correct exactly when something is going to send the
-     update. With no consent manager nothing could ever grant it, so a
-     default-deny would silently reduce GA to permanent modelling. Hence it
-     follows Ketch rather than being its own knob. `wait_for_update` gives
-     Ketch 500ms to answer.
-
-     Ketch's own Consent Mode integration is configured per property on the
-     Ketch side, not here. If GA reports every session as consent-denied, that
-     plugin is the first thing to check -- the defaults below are doing their
-     job and nothing is updating them.
-
-  The stub-then-boot shape of the Ketch snippet is Ketch's own: calls made
-  before boot.js arrives queue on `window.semaphore` instead of being lost. Its
-  published `?property=` override is left out on purpose -- a QA hook for
-  switching properties on a live page, and this site has one property.
-*/}}
-
-{{- /* Hugo lowercases every config key, so these lookups are all lowercase --
-       an `[params.analytics.ketch] Org` would register as `org` and a lookup
-       for "Org" would find nothing, with no error. `index` rather than
-       `.analytics.ga` so an unconfigured site is an absent key and not a nil
-       dereference at build time. */ -}}
+{{- /* Ketch, then the GTM container; analytics-noscript.html is the other
+       half. GTM rather than gtag.js directly: loading GA4 ourselves needed
+       Consent Mode defaults nothing was updating, so every hit went out
+       `gcs=G100`. Each half renders only when its id is set. */ -}}
 {{- $cfg := index site.Params "analytics" | default dict -}}
-{{- $ga := index $cfg "ga" -}}
+{{- $gtm := index $cfg "gtm" -}}
 {{- $ketch := index $cfg "ketch" | default dict -}}
 {{- $org := index $ketch "org" -}}
 {{- $property := index $ketch "property" -}}
-{{- $hasKetch := and $org $property -}}
 
-{{- with $ga }}
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  {{- if $hasKetch }}
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    functionality_storage: 'denied',
-    personalization_storage: 'denied',
-    security_storage: 'granted',
-    wait_for_update: 500
-  });
-  {{- end }}
-</script>
+{{- if and $org $property }}
+  {{- /* Ahead of the container, as azul.com has it -- but GTM-M6ZT5NW
+         injects Ketch itself, so this double-loads until that tag is
+         deleted. Hence unset by default. */ -}}
+  <script>
+    window.semaphore = window.semaphore || [];
+    window.ketch = function () { window.semaphore.push(arguments); };
+  </script>
+  <script src="https://global.ketchcdn.com/web/v2/config/{{ $org }}/{{ $property }}/boot.js" defer async></script>
 {{- end }}
 
-{{- if $hasKetch }}
-<script>
-  window.semaphore = window.semaphore || [];
-  window.ketch = function () { window.semaphore.push(arguments); };
-</script>
-<script src="https://global.ketchcdn.com/web/v2/config/{{ $org }}/{{ $property }}/boot.js" defer async></script>
-{{- end }}
-
-{{- with $ga }}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
-<script>
-  gtag('js', new Date());
-  gtag('config', {{ . }});
-</script>
+{{- with $gtm }}
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',{{ . }});</script>
+  <!-- End Google Tag Manager -->
 {{- end }}

@@ -483,15 +483,12 @@ the live site's own palette, Featured Authors exist, `/pedia/` holds all 47
 entries, search is live, and the paid banner carousel is built (see the ads
 convention below). What is genuinely still open:
 
-1. **GA4 has reported almost nothing since cutover, and the cause is the Ketch
-   handoff.** Verified in a browser against live foojay.io: the page emits
-   `gtag('consent','default', …)` with everything denied, Ketch loads and
-   records consent on its own side, but **never calls `gtag('consent','update')`**
-   — so every hit goes out as `gcs=G100`, no `_ga` cookie is set, realtime
-   shows 0 and engagement duration is 0. Accepting the banner changes nothing.
-   The fix is on the Ketch property (`azul`/`foojay_io`): enable its Google
-   Consent Mode v2 integration and map the purposes. Nothing in this repo is
-   wrong — `partials/analytics.html` is doing exactly what it should.
+1. **Ketch's Google Consent Mode integration is not configured** on the
+   `azul`/`foojay_io` property — Ketch records consent on its own side but
+   never calls `gtag('consent','update')`. That is why loading GA4 directly
+   flatlined analytics at cutover, and why the site is back on the GTM
+   container with no Consent Mode defaults. Enabling that integration on the
+   Ketch property is what would make a direct GA4 tag viable again.
 2. **The accessibility backlog is the site's biggest real gap** — roughly 3,100
    images across `content/` with no description, plus 287 podcast posts with no
    transcript. `Frontmatter.checkImageAltText` warns rather than fails; see the
@@ -1461,26 +1458,33 @@ site.
   with the cards below it. **Author pages have no WordPress baseline** and
   started at zero — don't go looking for the import that "must have failed".
 
-- **Third-party analytics is GA4 + Ketch, loaded directly.**
-  `partials/analytics.html` is the only place the site asks a browser to run
-  someone else's code. Each half renders only when its own values are set, so a
-  fork or a local build never reports a pageview or shows a consent banner.
+- **Third-party analytics is the GTM container `GTM-M6ZT5NW`.**
+  `partials/analytics.html` (head, as high as possible) and
+  `partials/analytics-noscript.html` (straight after `<body>`) are the only
+  places the site asks a browser to run someone else's code. Both render
+  nothing unless `[params.analytics] gtm` is set, so a fork or a local build
+  reports nothing.
 
-  **The GA4 measurement id is invisible from outside, and a grep will tell you
-  the site has no analytics.** The old site loaded one GTM container carrying
-  Universal Analytics tags on `UA-726113-5`, which Google resolves **server
-  side** to `G-GS21L12HYK` through its UA-to-GA4 connected site tag. We name
-  the GA4 id directly and skip that indirection. Pointing at the container
-  instead would load Ketch **twice**, fire the dead UA tags and ship 360 KB to
-  deliver eleven lines — and a tag manager moves half the site's third-party
-  behaviour into a console invisible to this repo and to a PR.
+  **The GA4 id appears nowhere, and a grep will tell you the site has no
+  analytics.** The container fires Universal Analytics tags on `UA-726113-5`,
+  which Google resolves **server side** to `G-GS21L12HYK` through its
+  UA-to-GA4 connected site tag. Verified in a browser: the hit is
+  `/j/collect` with `tid=UA-726113-5` and a `gjid`, which is that bridge.
 
-  Two behaviours are load-bearing. **Consent Mode defaults are emitted only
-  when Ketch is**, because default-deny is correct exactly when something will
-  send the update; without a consent manager it would reduce GA to permanent
-  modelling. And **a comment meant to reach view-source must go through
-  `printf | safeHTML`** — Go's `html/template` strips HTML comments out of a
-  template, so a literal one renders nothing at all.
+  **Loading GA4 directly instead is what broke analytics at cutover** — it
+  needed Consent Mode defaults, Ketch's Google Consent Mode integration is not
+  configured on this property, so nothing ever sent the update and every hit
+  went out `gcs=G100`. There are **no `gtag('consent', …)` defaults now**, and
+  azul.com has none either. Gating is Ketch's own, not Consent Mode's.
+
+  **The container also injects Ketch**, so `[params.analytics.ketch]` is
+  commented out — setting it loads Ketch twice. Worth fixing the other way
+  round: azul.com loads Ketch from the page, first thing in `<head>`, ahead of
+  its container, and its container carries no Ketch tag (checked). Delete the
+  Custom HTML tag in the GTM console, then uncomment.
+
+  **A comment meant to reach view-source must go through `printf | safeHTML`**
+  — Go's `html/template` strips HTML comments out of a template.
 
   **GA4 and `data/views.json` will never agree, and GA4 is always lower. That
   is not a bug in either.** Google's collection domains are on Firefox's
@@ -1491,7 +1495,5 @@ site.
   counts for GA4 numbers because GA4 looks more authoritative, and don't treat
   a growing gap as drift.** Also: a consent test in a Firefox private window
   measures ETP, not consent.
-
-  See the gaps section above for the live Ketch consent-update problem.
 
 - **Posts are contributed via PR** (see `CONTRIBUTING.md`); the repo is public.

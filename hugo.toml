@@ -172,26 +172,18 @@ enableGitInfo = true
 [params.views]
   endpoint = "https://foojay.io/api/views"
 
-# Google Analytics + Ketch, the two third-party scripts foojay.io runs. See
-# themes/foojay/layouts/partials/analytics.html -- it renders NOTHING unless
-# the values below are set.
+# The third-party tags foojay.io runs; partials/analytics.html renders nothing
+# unless these are set. `gtm` is the container WordPress used, which reaches
+# GA4 through the retired UA id Google resolves server-side.
 #
-# `ga` is the GA4 property foojay.io reports into. It is loaded directly here
-# rather than through the GTM container WordPress used, which reached the same
-# property only via a retired UA id Google resolves server-side -- one fewer
-# legacy shim, and the property is named in the repo instead of hidden behind
-# a dead id.
-#
-# Ketch is the consent manager, and these two values ARE the live ones -- read
-# out of the Custom HTML tag inside that same GTM container, which loads
-# https://global.ketchcdn.com/web/v2/config/azul/foojay_io/boot.js. `org` is the
-# Ketch organisation ("azul", since Azul runs the Ketch account) and `property`
-# is foojay.io's property within it.
+# Ketch is commented out because the container already injects it. Uncomment
+# only after deleting that Custom HTML tag in the GTM console, or it loads
+# twice -- worth doing, since azul.com loads Ketch ahead of its container.
 [params.analytics]
-  ga = "G-GS21L12HYK"
-  [params.analytics.ketch]
-    org = "azul"
-    property = "foojay_io"
+  gtm = "GTM-M6ZT5NW"
+  # [params.analytics.ketch]
+  #   org = "azul"
+  #   property = "foojay_io"
 
 # ---------------------------------------------------------------------------
 # /llms.txt -- the llmstxt.org convention: a short, markdown-formatted map of

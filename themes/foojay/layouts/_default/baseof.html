@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1">
+
+  {{/* As high in <head> as possible: Google asks for the container here, and
+       a consent manager must run before the tags it gates. */}}
+  {{ partial "analytics.html" . }}
   {{/* This page's own URL, pager included. .Permalink on a paginated list is
        the URL of page 1 for EVERY pager, so using it directly declares every
        pager a duplicate of page 1 and costs the archive its only crawl path.
@@ -132,13 +136,9 @@
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $feedTitle | safeHTML }}
   {{ end }}
 
-  {{/* Google Analytics + Ketch (consent). Renders nothing unless
-       [params.analytics] is configured. In <head> rather than at the end of
-       <body> so the consent banner decides before the page is interactive;
-       both scripts are async/defer and neither blocks first paint. */}}
-  {{ partial "analytics.html" . }}
 </head>
 <body>
+  {{ partial "analytics-noscript.html" . }}
   {{ partial "header.html" . }}
 
   {{/* data-pagefind-body puts Pagefind in opt-in mode SITE-WIDE, so
