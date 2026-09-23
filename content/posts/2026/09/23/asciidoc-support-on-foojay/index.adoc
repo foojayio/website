@@ -8,6 +8,7 @@ image: "asciidoc-support-on-foojay.svg"
 categories:
   - "Foojay"
 related_posts:
+  - "announcing-the-new-foojay"
   - "diagrams-as-code-mermaid-support-on-foojay"
   - "how-to-submit-your-next-article-on-foojay-io"
 ---
