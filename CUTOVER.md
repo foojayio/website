@@ -543,10 +543,14 @@ paid for at least that long.
       itself is harmless once `baseURL` and `productionBaseURL` agree.
       **Done 2026-09-22.** The nine per-script catalogue entries became one note
       saying where they went, 4,030 lines down to 3,765. The `$isTrial` bullet
-      is now four lines recording that the derivation flipped itself when
+      is now a few lines recording that the derivation flipped itself when
       `baseURL` became the production URL, which it has, and why a derivation
-      beat a config flag. The templates keep it: it costs nothing and it still
-      protects any preview build on another host.
+      beat a config flag.
+
+      **The templates have since dropped it too (2026-09-23)**, along with
+      `params.productionBaseURL` and `partials/production-url.html`: nothing
+      deploys on another host, so "it still protects a preview build" was not
+      true of anything that exists. The giscus backlink is `.Permalink` now.
 - [ ] **Retire WordPress**, keeping `data/legacy-views.json` (the only surviving
       copy of the WordPress view counts) and a final database/file backup.
 

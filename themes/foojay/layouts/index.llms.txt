@@ -37,22 +37,7 @@
   file is read off-site by something that has no notion of our origin, so a
   root-relative path here resolves against whatever host is asking.
 
-  It self-flips at cutover like robots.txt and baseof.html's noindex, off the
-  same baseURL != productionBaseURL test. The trial deploy is a byte-for-byte
-  copy of the live WordPress site, so publishing a curated index of it would be
-  inviting a model to ingest the duplicate rather than foojay.io -- the exact
-  thing the trial's `Disallow: /` exists to prevent. Nothing to unset on the day.
 */ -}}
-{{- $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) -}}
-{{- $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod -}}
-{{- if $isTrial -}}
-# Trial deploy of the foojay.io Hugo rebuild
-
-> Not the live site. The content here duplicates https://foojay.io/ and is
-> excluded from crawling by robots.txt and by a noindex on every page.
-
-Read <https://foojay.io/llms.txt> instead.
-{{- else -}}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- $pedia := where site.RegularPages "Section" "pedia" -}}
 {{- $authors := partial "authors-all.html" -}}
@@ -162,4 +147,3 @@ The 50 most recent of {{ len $posts }}. The complete list is in the sitemaps abo
 - [Java Champions]({{ "java-champions/" | absURL }}): the Java Champions programme membership, on a map.
 - [Events calendar]({{ "calendar/" | absURL }}): upcoming JUG meetups and Java conferences.
 - [Write for Foojay]({{ "today/how-to-submit-your-next-article-on-foojay-io/" | absURL }}): how to contribute an article.
-{{- end }}

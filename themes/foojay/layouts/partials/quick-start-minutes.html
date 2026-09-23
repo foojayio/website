@@ -1,14 +1,10 @@
-{{- /* How long a list of Quick Start pages takes, in whole minutes. Takes the
-       pages; returns 0 when none of them says.
+{{- /* How long a list of Quick Start pages takes, in whole minutes. Takes
+       the pages; returns 0 when none of them says.
 
-       The tutorial's `duration:` values are mm:ss, because that is what the
-       videos they were timed from are. A reader does not want eleven sets of
-       seconds added up in their head, and "29 minutes" is the number the hub
-       page's promise is made of -- so the promise is now DERIVED from the
-       steps rather than typed next to them, and re-timing a step or adding a
-       twelfth moves it on its own. `math.Floor`, not round: the sentence this
-       feeds says "under N minutes", and rounding 29:52 up to 30 would make a
-       true claim read as a false one. */ -}}
+       The hub page's "under N minutes" promise is DERIVED from the steps'
+       own mm:ss `duration:` rather than typed next to them, so re-timing a
+       step or adding a twelfth moves it. `math.Floor`, not round: rounding
+       29:52 up to 30 would make a true claim read as a false one. */ -}}
 
 {{- $seconds := 0 -}}
 {{- range . -}}

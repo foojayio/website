@@ -1,54 +1,29 @@
-{{- /* A VISIBLE "subscribe by RSS" link -- the single definition of how a feed
-       is offered to a reader, so the home page, /today/, a category, /pedia/,
+{{- /* A VISIBLE "subscribe by RSS" link -- the single definition of how a
+       feed is offered, so the home page, /today/, a category, /pedia/,
        /calendar/ and a sponsor profile cannot each invent their own wording,
-       icon or placement.
+       icon or placement. A <link rel="alternate"> in <head> is not an offer:
+       browsers stopped showing a button for it years ago.
 
-       Every one of those pages has had a feed all along and advertised it only
-       as a <link rel="alternate"> in <head> -- which a browser stopped showing
-       a button for years ago, so in practice the feeds existed and nobody could
-       find them. The one exception was a category page, which had a
-       "Subscribe via RSS" ghost button; that wording and this partial are now
-       the same thing.
-
-       Context (.) is the page whose `rss` output format to link -- or a dict
-       with `page` set to it, which is the same thing spelled for a caller that
-       is linking a feed other than its own.
+       Context (.) is the page whose `rss` output format to link, or a dict
+       with `page` set to it -- for a caller linking a feed other than its
+       own. /ai/ is a portal over one category, so it links THAT term's feed.
 
        THE LABEL IS NOT A PARAMETER. It was, and one caller promptly said
        "Machine Learning RSS feed" while every other said "RSS feed", so the
-       same control read as a different control on /ai/. One wording, decided
-       here, is what "the single definition of how a feed is offered" has to
-       mean -- and a per-page label is the kind of knob this repo deletes
-       (a flag always set to the same value is a chore, and this one was set to
-       a DIFFERENT value once, which is worse).
+       same control read as a different control.
 
-       Renders NOTHING when that page has no rss output, so a caller never has
-       to guard -- and a page that loses its feed loses the link with it rather
-       than shipping a dead one. Note the page passed in need not be the page
-       being rendered: /ai/ is a portal over one category, so it links THAT
-       term's feed, the same way it links the term page itself.
+       Renders NOTHING when the page has no rss output, so a caller never has
+       to guard and a page that loses its feed loses the link with it.
 
-       IT OPENS IN A NEW TAB, which is not the usual same-origin rule but is
-       the right one here: the destination is not a page. Chrome and Firefox
-       render a feed as a wall of raw XML and Safari hands it to a reader app or
-       downloads it -- so in the same tab a curious click destroys the reader's
-       place on a 2000-word article or halfway down a table of 422 champions,
-       with the back button as the only way out. This repo already made that
-       call for the other same-origin non-HTML resource it links: the
-       sponsorship PDF (sponsors/list.html) opens in a new tab too. Copying the
-       URL into a reader -- the other way this link gets used, and probably the
-       commoner one -- is unaffected either way.
+       IT OPENS IN A NEW TAB, against the usual same-origin rule, because the
+       destination is not a page: browsers show a wall of raw XML or hand it to
+       a reader app, so in the same tab a curious click costs the reader their
+       place. The sponsorship PDF is linked the same way. `noopener` is written
+       out although browsers imply it, matching the other new-tab links.
 
-       `noopener` is written out although every current browser implies it for
-       target="_blank", matching how the PDF and the GitHub edit link are
-       written. There is no "opens in a new tab" hint in the label, which is a
-       WCAG 3.2.5 (AAA) nicety the site does not claim and none of its other
-       new-tab links carry either.
-
-       The icon is inline SVG rather than a font glyph or an <img>: it is one
-       shape, it inherits its size from the text, and it must not be a network
-       request on 4000 pages. It is `aria-hidden`, with the visible label
-       carrying the accessible name -- an icon-only feed link is the thing this
+       The icon is inline SVG -- one shape, inheriting its size from the text,
+       and not a network request on 4000 pages. `aria-hidden`, with the visible
+       label carrying the accessible name: an icon-only feed link is what this
        partial exists to stop. */ -}}
 {{- $page := . -}}
 {{- if reflect.IsMap . }}{{ $page = .page }}{{ end -}}

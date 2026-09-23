@@ -1,50 +1,35 @@
-{{- /* The key a page's read count is stored under, or "" if it isn't counted.
+{{- /* The key a page's read count is stored under, or "" if it isn't
+       counted.
 
-       ONE DEFINITION, and everything that touches a count calls it rather than
-       building the string itself: views.html (display), views-total.html,
-       views-beacon.html (counting), baseof.html and comments-term.html. A
-       hand-built key that disagreed would show up as a count silently stuck at
-       zero, not as an error, which is why there is a partial for two lines of
-       string concatenation. transfer/LegacyViews.java was the sixth caller,
-       minting the same key for the WordPress import; it went with the rest of
-       scripts/transfer/ at cutover, and nothing has imported a count since.
+       ONE DEFINITION, called by everything that touches a count: views.html,
+       views-total.html, views-beacon.html, baseof.html and comments-term.html.
+       A hand-built key that disagreed would show up as a count silently stuck
+       at zero, not as an error.
 
-       `$counted` below is mirrored in layouts/index.stats.json, which reports
-       views per section and has no page to ask. Adding a section to one list
-       means adding it to the other, or /stats.json reports the new section's
-       reads as zero.
+       `$counted` below is MIRRORED in layouts/index.stats.json, which reports
+       views per section and has no page to ask. Add a section to one list and
+       it must go in the other, or /stats.json reports it as zero.
 
-       `<section>/<slug>`, not a bare slug and not a pathname:
+       `<section>/<slug>`, never a bare slug and never a pathname:
+       - The SLUG half is derived from the bundle folder or file name, so there
+         is nothing for an author to write. A PATHNAME is the tempting
+         alternative and a trap: the key is permanent, a URL is not, so every
+         count would reset the next time a URL moved. Same shape as a giscus
+         comment term for the same reason.
+       - The SECTION half keeps the counted sections from colliding. They do
+         not today, but that is luck: nothing stops a pedia entry and an author
+         page wanting the same key, and the counter is a permanent store where
+         a collision silently merges two pages' numbers.
 
-       - The SLUG half is `or .Params.slug .File.ContentBaseName`, which is what
-         hugo.toml's :slugorcontentbasename resolves to. So it's derived from the
-         bundle folder or file name, with nothing for an author to write. A
-         pathname would have been the tempting alternative and was a trap: the
-         trial deploy served /website/today/<slug>/ where production serves
-         /today/<slug>/, so every count would have reset to zero at cutover.
-         It did not, and the same shape keeps a count if a URL ever moves
-         again. Same reasoning, same key shape as a giscus comment thread
-         (comments.html).
-       - The SECTION half keeps the four counted sections from colliding. They
-         don't today -- 2561 slugs across posts, pages, pedia, authors and
-         sponsors are all distinct -- but that is luck, not a rule: nothing stops
-         a pedia entry named "graalvm" and an author page from wanting the same
-         key, and the counter is a permanent store where a collision would
-         silently merge two pages' numbers.
-
-       Add a section here to start counting it. Nothing else needs to change --
-       the Worker accepts any `<section>/<slug>` key. */ -}}
+       Add a section here to start counting it -- the Worker accepts any
+       `<section>/<slug>` key. */ -}}
 {{- $counted := slice "posts" "pages" "pedia" "authors" -}}
 {{- $key := "" -}}
-{{/* `.IsPage` was the test here, and it silently stopped matching author
-     profiles when they became BRANCH bundles (sections) so that .Paginate would
-     accept them -- every author's count would have quietly reverted to nothing
-     being recorded. What actually matters is that the page has a FILE, so the
-     slug half can be derived, and that it is not a section LISTING (the
-     /today/author/ landing page, which is counted under `pages/...` if at all).
-     A profile is identified the same way everywhere: `type: "author"`.
-     .File.ContentBaseName returns the folder name for _index.md exactly as it
-     did for index.md, so the key itself is unchanged by the conversion. */}}
+{{/* NOT `.IsPage`: author profiles are BRANCH bundles, so that test
+     silently stops matching them and every author's count reverts to nothing
+     recorded. What matters is that the page has a FILE, so the slug can be
+     derived, and that it is not a section LISTING. A profile is identified
+     the way it is everywhere else: `type: "author"`. */}}
 {{- $isProfile := eq .Type "author" -}}
 {{- if and .File (in $counted .Section) (or .IsPage $isProfile) -}}
   {{- $key = printf "%s/%s" .Section (or .Params.slug .File.ContentBaseName) -}}

@@ -1,32 +1,26 @@
-{{- /* The carousel itself: the scroll-snap track, the slides and the controls.
+{{- /* The carousel: the scroll-snap track, the slides and the controls.
 
        Params: ads (slice of ad Pages), variant ("wide" for the home page band,
        "side" for the sidebar column), shuffle (bool -- see below).
 
-       ONE definition, two placements. The home page band and the sidebar column
-       are the same mechanism at two widths -- same snap behaviour, same arrows,
-       same dots, same autoplay -- so a second copy would be two places to fix a
-       scroll bug and two chances for them to behave differently. Only the card's
-       proportions differ, and that is CSS (.ad--wide / .ad--side).
+       ONE definition, two placements: the two are the same mechanism at two
+       widths, so a second copy would be two places to fix a scroll bug. Only
+       the card's proportions differ, and that is CSS.
 
-       The track works with no JavaScript: it is a scroll-snap row, so it swipes
-       on a phone and trackpad-scrolls on a desktop. static/js/ad-carousel.js
-       adds the arrows and the autoplay, and they start `hidden` so nobody is
-       offered a button that does nothing. Same posture as /calendar/'s toolbar.
+       The track works with NO JavaScript -- a scroll-snap row that swipes on a
+       phone and trackpad-scrolls on a desktop. static/js/ad-carousel.js adds
+       the arrows and autoplay, and they start `hidden` so nobody is offered a
+       button that does nothing.
 
-       Arrows only, no dot row: with three banners the dots said little the
-       arrows did not, and they cost a strip of height under every banner on
-       both placements -- in the sidebar, height that the sponsor tiers below
-       need more. Position is read from the scroll, so nothing depended on
-       them. */ -}}
+       Arrows only, no dot row: the dots said little the arrows did not and
+       cost a strip of height under every banner. */ -}}
 
 {{- $ads := .ads -}}
 {{- $variant := .variant | default "wide" -}}
 {{- $shuffle := .shuffle | default false -}}
-{{- /* The endpoint is what switches banner counting on: unset in hugo.toml (a
-       local or unconfigured build) and no attribute is written, so
-       ad-carousel.js finds nothing to post to and a `hugo server` session never
-       inflates a sponsor's numbers. Same guard, and the same reason, as
+{{- /* The endpoint switches banner counting on. Unset (a local or
+       unconfigured build) and no attribute is written, so a `hugo server`
+       session never inflates a sponsor's numbers. Same guard as
        partials/views-beacon.html. */ -}}
 {{- $endpoint := site.Params.views.endpoint -}}
 {{- with $ads }}
@@ -36,9 +30,7 @@
   <ul class="ad-carousel__track" data-ad-track>
     {{- range . }}
     {{- /* The banner's folder under content/ads/, which is what the counter
-           keys on -- NOT the title, which an editor rewrites mid-campaign, and
-           not a number, which nobody could read in data/views.json. The same
-           slug the ad-stats page turns back into a row. */}}
+           keys on -- not the title, which an editor rewrites mid-campaign. */}}
     <li class="ad-carousel__slide" data-ad-key="{{ .File.ContentBaseName }}">
       {{ partial "ad-slide.html" (dict "page" . "class" (printf "ad--%s" $variant)) }}
     </li>
@@ -46,27 +38,21 @@
   </ul>
   {{- if and $shuffle (gt (len .) 1) }}
   {{- /* FAIRNESS ON THE ONE PAGE THAT CANNOT BE ROTATED SERVER-SIDE.
-         partials/ads-widget.html gives every post a different leading banner by
-         hashing its URL, so across ~2150 posts each campaign leads an even
-         share -- no JavaScript, correct in the HTML. The home page has ONE URL,
-         so that trick has nothing to vary on: whichever banner is first in
-         .Pages order leads every single home page impression, and with the
-         track only ever showing one slide at a time that is the difference
-         between a campaign being seen and not.
+         ads-widget.html gives every post a different leading banner by hashing
+         its URL. The home page has ONE URL, so that has nothing to vary on and
+         whichever banner sorts first would lead every impression.
 
-         INLINE AND SYNCHRONOUS, immediately after the track it reorders, rather
-         than in static/js/ad-carousel.js (which is `defer` and therefore runs
-         after the parser is done and possibly after first paint). Here it runs
-         while the parser is still inside this <div>, so the shuffled order is
-         the FIRST thing painted -- no flash of the unshuffled order.
+         INLINE AND SYNCHRONOUS, immediately after the track it reorders,
+         rather than in the `defer`red ad-carousel.js: here it runs while the
+         parser is still inside this <div>, so the shuffled order is the first
+         thing painted and there is no flash of the unshuffled one.
 
          IT MOVES THE NODES rather than setting flex `order`, because
-         ad-carousel.js reads position out of DOM index and scroll offset: with
+         ad-carousel.js reads position from DOM index and scroll offset -- with
          `order` the two would disagree and the arrows would jump.
 
-         With JavaScript off nothing runs and the static order stands, which is
-         a fair fallback rather than a broken one -- it is the same order the
-         sidebar would have used. */}}
+         With JavaScript off the static order stands, which is a fair
+         fallback. */}}
   <script>
   (function () {
     var track = document.currentScript.previousElementSibling;
@@ -83,12 +69,10 @@
 
   {{- /* One banner needs no arrows. */}}
   {{- if gt (len .) 1 }}
-  {{- /* The arrows sit OVER the banner, one at each edge, rather than in a row
-         underneath it: below the card they read as page navigation for the
-         section and cost a strip of vertical space on both placements -- which
-         the sidebar column in particular does not have. Overlaid, they are
-         unmistakably the banner's own control. They are outside the track, not
-         inside it, so they do not scroll away with the slides. */}}
+  {{- /* The arrows sit OVER the banner, one at each edge: below the card they
+         read as page navigation for the section and cost vertical space the
+         sidebar does not have. Outside the track, not inside it, so they do
+         not scroll away with the slides. */}}
   <button class="ad-carousel__arrow ad-carousel__arrow--prev" data-ad-prev type="button"
           aria-label="Previous banner" hidden>
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -103,18 +87,14 @@
             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
-  {{- /* PAUSE. The track advances itself every 7 seconds, and WCAG 2.2.2 asks
-         for a way to stop anything that moves on its own for longer than five --
-         the reader who needs it is the one for whom a banner sliding away
-         mid-sentence is the end of the sentence. The script already pauses on
-         hover and on focus, but neither is "a mechanism to pause": one needs a
-         pointer, and the other needs the reader to keep something focused
-         inside the carousel while reading the article beside it.
+  {{- /* PAUSE. The track advances every 7 seconds and WCAG 2.2.2 asks for a
+         way to stop anything moving on its own for longer than five. Pausing
+         on hover and on focus does not count: one needs a pointer, the other
+         needs focus kept inside the carousel while reading beside it.
 
-         Hidden like the arrows, and revealed by the script, so it never appears
-         on a page where nothing is moving -- with JavaScript off, or with
-         prefers-reduced-motion set, there is no autoplay to stop. The label is
-         written by the script, since it changes with the state. */}}
+         Hidden like the arrows and revealed by the script, so it never appears
+         where nothing is moving (JavaScript off, or prefers-reduced-motion).
+         The label is written by the script, since it changes with state. */}}
   <button class="ad-carousel__pause" data-ad-pause type="button" aria-label="Pause banner rotation" hidden>
     <svg class="ad-carousel__icon-pause" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
       <rect x="3.5" y="2.5" width="3.5" height="11" rx="1" fill="currentColor"/>

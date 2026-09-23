@@ -10,19 +10,16 @@
        renderer means reproducing the entity decoding goldmark would have done. */ -}}
 {{- $dest := .Destination | htmlUnescape -}}
 {{- $abs := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") (hasPrefix $dest "//") (hasPrefix $dest "data:") -}}
-{{- /* width/height are emitted whenever the image is a page-bundle resource
-       Hugo can measure, which is every in-article image except the 76 posts
-       that reference a remote URL. They are not cosmetic: without them the
-       browser reserves no space, so every image in a 2000-word post shoves the
-       text below it down the moment it decodes -- cumulative layout shift on
-       all 2147 article pages. The CSS already caps them (`.prose img {
-       max-width: 100% }`), and a browser scales the reserved box by the same
-       ratio, so the attributes fix the shift without fixing the size.
+{{- /* width/height whenever the image is a page-bundle resource Hugo can
+       measure. Not cosmetic: without them the browser reserves no space, so
+       every image shoves the text below it down as it decodes. The CSS caps
+       them (`.prose img { max-width: 100% }`) and the browser scales the
+       reserved box by the same ratio, so this fixes the shift without fixing
+       the size.
 
-       Only a RASTER can be measured. Hugo reports an SVG as ResourceType
-       "image" too, but .Width on one raises "this method is only available
-       for raster images" and halts the build, so the media subtype is what is
-       tested -- not the resource type. */ -}}
+       ONLY A RASTER CAN BE MEASURED. Hugo reports an SVG as ResourceType
+       "image" too, but .Width on one halts the build -- so the MEDIA SUBTYPE
+       is what is tested, not the resource type. */ -}}
 {{- $w := 0 -}}
 {{- $h := 0 -}}
 {{- if not $abs -}}
@@ -37,9 +34,6 @@
   {{- end -}}
 {{- end -}}
 <img src="{{ $dest }}" alt="{{ .Text | htmlUnescape }}"{{ with .Title }} title="{{ . | htmlUnescape }}"{{ end }}{{ if and $w $h }} width="{{ $w }}" height="{{ $h }}"{{ end }} loading="lazy" decoding="async">
-{{- /* NO TRAILING NEWLINE -- same reason as render-link.html, which had the
-       same bug: an image is inline, so a newline after the tag lands between
-       it and whatever follows and HTML collapses it to a space. Rarer to see
-       than on links (most images sit alone in a paragraph), but a caption
-       written as `![](shot.png)When we press OK` rendered with a space that
-       is not in the Markdown. */ -}}
+{{- /* NO TRAILING NEWLINE, same reason as render-link.html: an image is
+       inline, so a newline after the tag collapses to a space between it and
+       whatever follows. */ -}}

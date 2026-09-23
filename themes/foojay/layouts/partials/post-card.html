@@ -1,36 +1,24 @@
-{{- /* A post card. Called either with the Page itself -- the normal case, and
-       what every listing does -- or with a dict:
+{{- /* A post card. Called with the Page itself -- the normal case -- or
+       with a dict:
          page            the Page (required)
-         maxCategories   how many category chips to show; 0 = all
-                         (default 2, so a card stays a card)
+         maxCategories   how many category chips to show; 0 = all (default 2)
          compact         the card is NARROW; drop what does not survive it
-                         (default false)
-         eager            this card's image is the page's LCP element
+         eager           this card's image is the page's LCP element
                          (default false -- every card in a listing is lazy)
-       The AI portal passes maxCategories 0: there the category chips ARE the
-       navigation, so a post's full topic list is the point rather than clutter.
+       The AI portal passes maxCategories 0: there the chips ARE the
+       navigation, so the full topic list is the point rather than clutter.
 
-       `compact` is one flag rather than several because it states one fact --
-       this card is about 178px wide, not the usual 255+ -- and everything it
-       switches off follows from that fact alone, so the caller never has to
-       keep two knobs in agreement. The related-posts strip at the foot of an
-       article is the only caller today; it lays three or four cards across the
-       article column. It drops:
+       `compact` IS ONE FLAG rather than several because it states one fact --
+       this card is ~178px wide, not the usual 255+ -- and everything it
+       switches off follows from that alone, so a caller never has to keep two
+       knobs in agreement. It drops the description (ten lines of text, taller
+       than the thumbnail), the author NAMES above one, and the author FACES:
+       a 20px portrait in front of a byline that has collapsed to a count is a
+       picture of whoever sorted first, labelled as twelve people.
 
-         - the description. 140 characters under a two-line title is ten lines
-           of text, taller than the thumbnail above it. Omitted rather than
-           hidden in CSS, or the markup would still be built and shipped on all
-           2147 post pages for the browser to throw away.
-         - the author NAMES, above one. foojay-podcast-94 credits twelve
-           people; see byline.html for why that becomes "12 authors" rather
-           than a truncated list.
-         - the author FACES. They follow from the same width: a 20px portrait
-           in front of a byline that has already collapsed to a count is a
-           picture of whoever sorted first, labelled as twelve people.
-
-       `avatars` can also be passed explicitly, and author/section.html is the
-       one caller that turns it off on a full-width card: there every post has
-       the same author, whose portrait is already at the top of the page. */ -}}
+       `avatars` can also be passed explicitly: author/section.html turns it
+       off on a full-width card, since every post there has the same author
+       whose portrait is already at the top of the page. */ -}}
 {{- $p := . -}}
 {{- $maxCategories := 2 -}}
 {{- $compact := false -}}

@@ -7,24 +7,21 @@
        running, which every caller must treat as "render nothing" -- an empty
        carousel is worse than no carousel).
 
-       WHAT IS RUNNING IS HUGO'S OWN ANSWER, NOT OURS. A banner carries
-       publishDate/expiryDate, and Hugo drops a page outside that window from the
-       build entirely -- so there is no date comparison here, none in the
+       WHAT IS RUNNING IS HUGO'S OWN ANSWER, NOT OURS: a banner carries
+       publishDate/expiryDate and Hugo drops a page outside that window from
+       the build entirely, so there is no date comparison here or in the
        templates, and nothing to switch off when a campaign ends. Contrast
-       partials/upcoming-events.html, which DOES compare dates: an event stays on
-       the calendar as a thing that happened, while a finished banner is simply
-       gone.
+       upcoming-events.html, which DOES compare dates -- an event stays on the
+       calendar as a thing that happened, a finished banner is simply gone.
 
-       THE ORDER IS .Pages' OWN: weight first, then title. That is why there is
-       no sort here -- an editorial `weight:` on one banner floats it to the
-       front of the carousel, and with none set (the normal case) the order is
-       alphabetical by headline, which is stable across builds. A stable order
-       matters more than it looks: the first slide is the one most readers see,
-       so it must not depend on directory-read order.
+       THE ORDER IS .Pages' OWN (weight, then title), which is why there is no
+       sort: an editorial `weight:` floats a banner to the front, and with
+       none set the order is alphabetical and stable across builds. That
+       matters -- the first slide is the one most readers see, so it must not
+       depend on directory-read order.
 
-       partialCached at every call site: this depends on the content, not on the
-       page being rendered, and the sidebar alone would otherwise re-resolve it
-       on all 4000 pages. */ -}}
+       partialCached at every call site: it depends on the content, not the
+       page, and the sidebar alone would re-resolve it on 4000 pages. */ -}}
 
 {{- $ads := slice -}}
 {{- with site.GetPage "/ads" -}}

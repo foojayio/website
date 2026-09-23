@@ -2,34 +2,21 @@
 <div class="layout-with-sidebar">
   <article class="post-single">
     <header class="post-header{{ if .Params.image }} post-header--with-hero{{ end }}">
-      {{/* Explicit data-pagefind-meta, same reason as on the author photo in
-           authors/single.html: Pagefind's automatic image detection picks the
-           first image that comes AFTER the <h1>, and the hero sits before it --
-           so a search result showed the first image in the body, or, on a post
-           with no images of its own, the author photo from the "Written by"
-           block at the foot of the page. */}}
-      {{/* NOT loading="lazy", and fetchpriority="high": the hero is the first
-           thing on the page and is the LCP element on all 2147 posts, so
-           lazy-loading it deferred the one image the score is measured on
-           until after layout -- the browser has to discover it, then decide it
-           is in view, then start the request. Eager + high priority puts it in
-           the very first batch, ahead of the sidebar avatars and the card
-           images further down that DO deserve lazy. */}}
-      {{/* onerror="this.remove()": 70 posts hero-link an image on a
-           third-party host and 11 of those are already 404/403, so the top of
-           the article was a broken-image glyph. A hotlink can die at any time
-           and no build step can see it, so the only place to handle it is the
-           browser. Same attribute, same reason, in post-thumb.html -- where a
-           card additionally has a placeholder tile to fall back ONTO. */}}
+      {{/* Three attributes, each load-bearing:
+           - data-pagefind-meta, because Pagefind's automatic image detection
+             takes the first image AFTER the <h1> and the hero sits before it.
+           - fetchpriority="high" and NO loading="lazy": the hero is the LCP
+             element on every post, so lazy would defer the one image the score
+             is measured on. The avatars and cards further down do deserve lazy.
+           - onerror="this.remove()", because a hero can be a hotlink on a
+             third-party host that dies at any time. No build step can see
+             that, so the browser is the only place to handle it. */}}
       {{ with .Params.image }}<img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" fetchpriority="high" decoding="async" onerror="this.remove()">{{ end }}
       {{ with .Params.categories }}
       <div class="post-categories post-categories--top">
-        {{/* data-pagefind-meta="category" on the FIRST chip only: it is the
-             label search/single.html puts on the placeholder tile of a result
-             with no image, and the string it hashes for that tile's hue, so a
-             post looks the same in a card grid and in a result list. First,
-             not all, for the same reason the breadcrumb trail follows the
-             first category -- a post carries up to eight. */}}
+        {{/* data-pagefind-meta="category" on the FIRST chip only: it labels
+             and colours the placeholder tile of an imageless search result, so
+             a post looks the same in a card grid and in a result list. */}}
         {{ range $i, $cat := first 2 . }}<a href="{{ printf "today/category/%s/" ($cat | urlize) | relURL }}"{{ if eq $i 0 }} data-pagefind-meta="category"{{ end }}>{{ partialCached "category-name.html" $cat $cat }}</a>{{ end }}
       </div>
       {{ end }}
@@ -37,26 +24,15 @@
       <h1>{{ .Title }}</h1>
 
       <div class="post-meta">
-        {{/* AUTHOR FIRST, THEN DATE, matching post-card.html's meta line -- the
-             byline here and the byline on this post's own card are the same
-             partial with the same options, so they should not also be in a
-             different order. The card puts the face and the name first because
-             they are what make a post feel written by somebody; that holds just
-             as well under the title.
+        {{/* Author first, then date, matching post-card.html: the same partial
+             with the same options should not also be in a different order.
 
-             Wrapped so the "·" separator (.post-meta > * + *::before) attaches
-             to this span, not to the author <a> inside -- otherwise the dot
-             becomes part of the clickable, underlined link.
-
-             pagefindMeta: this byline is the post's OWN, so it becomes the
-             "author" meta key search/single.html shows beside the date. Only
-             here -- see byline.html for why the flag is opt-in, and for why the
-             collapsed multi-author form has to stamp the names explicitly. */}}
+             pagefindMeta because this byline is the post's OWN -- it becomes
+             the "author" key search results show. See byline.html for why the
+             flag is opt-in. */}}
         {{ partial "byline.html" (dict "page" . "pagefindMeta" true "avatars" true) }}
-        {{/* data-pagefind-meta captures the ISO datetime attribute as the
-             "date" meta key (see search/single.html), so search results can
-             show/sort by date without Pagefind having to parse the display
-             text. */}}
+        {{/* The ISO attribute becomes the "date" meta key, so search results
+             sort by date without parsing the display text. */}}
         <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]">{{ .Date.Format "Jan 2, 2006" }}</time>
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
@@ -67,50 +43,36 @@
       {{ partialCached "article-html.html" . .RelPermalink }}
     </div>
 
-    {{/* THE EPISODE TRANSCRIPT, and it is here because the FILE is here: a
-         podcast episode has one when scripts/fetch/PodcastTranscripts.java has
-         written transcript.md into its bundle. No frontmatter flag, nothing to
-         set on a new episode and nothing to unset -- the same rule the code
-         highlighter and the mermaid loader follow.
+    {{/* THE EPISODE TRANSCRIPT, derived from the FILE: an episode has one when
+         scripts/fetch/PodcastTranscripts.java has written transcript.md into
+         its bundle. No frontmatter flag to set or unset.
 
-         An <h2> in the flow of the article, not a collapsed <details>: a
-         transcript is one of the things a reader comes to the page FOR, and the
-         browser's own find-in-page skips text inside a closed <details> -- so
-         Ctrl-F for a guest's name found nothing on the one page that says it.
+         An <h2> in the flow of the article, not a collapsed <details>: the
+         browser's own find-in-page skips text inside a closed <details>, so
+         Ctrl-F for a guest's name would miss the one page that says it.
 
-         id="transcript" is hand-written rather than minted by Goldmark, because
-         this heading is not in .Content -- and partials/toc.html appends a TOC
-         entry pointing at exactly that id. Goldmark dedupes ids within a
-         document body and knows nothing about this one, so an episode whose own
-         body carried a "## Transcript" heading would take the id first and the
-         TOC link would land on it instead. No post does today (the 8 with such a
-         heading are screencast write-ups with no transcript.md), and the failure
-         is a link scrolling to the wrong heading rather than anything breaking.
+         id="transcript" is hand-written because this heading is not in
+         .Content, and toc.html appends an entry pointing at exactly that id.
+         Goldmark dedupes ids within .Content and knows nothing about this one,
+         so an episode whose body carried its own "## Transcript" would take
+         the id first and the TOC link would land there.
 
-         The "automatically generated" line is not a disclaimer for its own sake.
-         The text is YouTube's speech recognition, cleaned up but not corrected
-         against the audio, so it gets names and Java vocabulary wrong -- and an
-         uncorrected machine transcript presented as a faithful record is worse
-         than one that says what it is. /accessibility/ says the same thing.
+         The "automatically generated" line is not boilerplate: the text is
+         speech recognition, cleaned up but not corrected against the audio, so
+         it gets names and Java vocabulary wrong.
 
-         data-pagefind-ignore: 99 transcripts is ~800k words against the site's
-         115k-word index, so indexing them would make every episode a result for
-         any word anyone happened to say out loud, and the archive of ARTICLES --
-         what people search this site for -- would be buried. Worth revisiting
-         deliberately, with the search page's per-section quotas in mind, rather
-         than by default. */}}
+         data-pagefind-ignore: the transcripts are ~800k words against a 115k
+         index, so indexing them would bury the articles under any word anyone
+         happened to say out loud. Worth revisiting deliberately, with the
+         search page's per-section quotas in mind. */}}
     {{ with .Resources.GetMatch "transcript.md" }}
     <section class="prose transcript" data-pagefind-ignore>
       <h2 id="transcript">Transcript</h2>
-      {{/* The correction link points at transcript.md, NOT at the post -- a
-           mangled name is in the transcript file, and sending someone to
-           index.md to fix it would be sending them to the wrong file. That is
-           what source-url.html's "file" argument is for. */}}
+      {{/* The correction link points at transcript.md, not at the post: the
+           mangled name is in that file. Hence source-url.html's "file" arg. */}}
       <p class="transcript__note">Automatically generated from the audio, so it can contain errors in names and technical terms.{{ with partial "source-url.html" (dict "page" $ "file" "transcript.md") }} <a href="{{ . }}" target="_blank" rel="nofollow noopener">Suggest a correction</a>.{{ end }}</p>
-      {{/* .Content directly, NOT partials/article-html.html: inside this `with`
-           the dot is the transcript RESOURCE, not a Page. The partial takes a
-           Page (it reads .File.Ext), and a transcript is always Markdown
-           anyway, so there is nothing here for it to translate. */}}
+      {{/* .Content directly, not article-html.html: inside this `with` the dot
+           is the transcript RESOURCE, not a Page. */}}
       {{ .Content }}
     </section>
     {{ end }}
@@ -122,20 +84,13 @@
          these callouts cannot disagree about whether there are any. */}}
     {{ range $i, $author := partial "post-authors.html" . }}
       {{ with $author }}
-      {{/* id on the FIRST callout only: a post can credit twelve people
-           (foojay-podcast-94), and the TOC offers one entry that lands at the
-           top of the run. Hand-written rather than minted by Goldmark, and
-           namespaced `post-` for the reason the #transcript comment above
-           gives: Goldmark dedupes ids inside .Content and knows nothing about
-           this one, so a post whose own body has an "## About the author"
-           heading would take that id first and the link would land on it. */}}
+      {{/* id on the FIRST callout only -- a post can credit a dozen people and
+           the TOC offers one entry landing at the top of the run. Namespaced
+           `post-` for the reason #transcript above gives. */}}
       <section class="author-callout"{{ if eq $i 0 }} id="post-authors"{{ end }}>
-        {{/* data-pagefind-ignore="all": a post with no hero and no images of
-             its own would otherwise hand this photo to Pagefind as the post's
-             search thumbnail. "all" rather than the bare attribute, whose
-             default ("index") drops the element from the text index but still
-             lets it supply metadata -- which is exactly what has to stop here.
-             The photo carries no text (alt=""), so nothing is lost either way. */}}
+        {{/* data-pagefind-ignore="all", not the bare attribute: its default
+             ("index") still lets an element supply METADATA, so a post with no
+             images of its own would take this photo as its search thumbnail. */}}
         {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-ignore="all" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <div>
           <span class="eyebrow">Written by</span>
@@ -150,33 +105,22 @@
     {{/* partials/related-pages.html resolves the slugs, and partials/toc.html
          calls the same partial -- so the jump link and the section agree. */}}
     {{ with partial "related-pages.html" . }}
-    {{/* data-pagefind-ignore: these are other posts' titles, dates and authors,
-         and without it every article's search entry absorbs the metadata of the
-         three or four it links to -- so a query would match a post because of
-         what it recommends rather than what it says. The bulleted version had
-         the same problem on a smaller scale (titles only). Nothing becomes
-         unfindable: each related post is indexed as its own page. */}}
+    {{/* data-pagefind-ignore: without it an article's search entry absorbs the
+         titles, dates and authors of the posts it links to, so a query matches
+         a post for what it recommends rather than what it says. Each related
+         post is still indexed as its own page. */}}
     <section class="related-posts" id="post-related" data-pagefind-ignore>
       <h3>Related posts</h3>
-      {{/* THREE across, fixed, and the count is not consulted. Four fitted the
-           article column but squeezed a card to ~178px, where the meta line
-           ("1 Jun 2026 - 3 authors - 898 views") wraps onto a second row and
-           the card stops being scannable. Three gives ~248px, which holds it on
-           one line and makes every related card the same size on every post
-           whether the author listed one or five.
-
-           So four related posts -- the commonest case -- wrap as 3 + 1, and
-           five as 3 + 2. That is a grid wrapping, which is what it looks like;
-           balancing the rows instead would mean 2 x 2 cards of ~381px, wider
-           than a card anywhere else on the site for the section that matters
-           least on the page. The column count lives in the CSS, not here,
-           because nothing about it depends on the page. */}}
+      {{/* Three across, fixed, whatever the count: it gives a ~248px card,
+           which holds the meta line on one row, and it makes every related
+           card the same size on every post. Four related posts therefore wrap
+           3 + 1 -- a grid wrapping, rather than 2 x 2 cards wider than a card
+           anywhere else on the site. The column count is in the CSS, since
+           nothing about it depends on the page. */}}
       <div class="related-posts__grid post-grid">
         {{ range . }}
-          {{/* compact: three across the article column puts a card at ~248px,
-               and narrower still once the grid reflows. See post-card.html for
-               what that drops and why. maxCategories 1 for the same reason --
-               a post carries up to eight and two chips already wrap here. */}}
+          {{/* compact and maxCategories 1, because a ~248px card has room for
+               neither the full meta line nor two chips. */}}
           {{ partial "post-card.html" (dict "page" . "maxCategories" 1 "compact" true) }}
         {{ end }}
       </div>
@@ -185,9 +129,9 @@
 
     {{ partial "comments.html" . }}
 
-    {{/* Under giscus, deliberately: the live conversation is the one a reader can
-         join, and the WordPress archive is history below it. Renders nothing on
-         the 1885 posts with no comments.json -- see the partial. */}}
+    {{/* Under giscus deliberately: the live conversation is the one a reader
+         can join, the imported archive is history below it. Renders nothing
+         on a post with no comments.json. */}}
     {{ partial "legacy-comments.html" . }}
   </article>
 

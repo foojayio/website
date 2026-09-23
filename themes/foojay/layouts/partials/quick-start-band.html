@@ -1,29 +1,19 @@
 {{/* "Getting started with Java" on the home page -- THE QUICK START TRAIL
      ITSELF, not posts.
 
-     It used to be `first 4` of the "Java Beginner" category, and that is the
-     bug this replaces. A category is a word an author puts on their own post,
-     and authors reach for "Java Beginner" for anything they consider
-     approachable: a gentle introduction to one vendor's framework, a first look
-     at a product, a beginner's guide to a library. All fine posts, none of them
-     an answer to the question this band exists to answer -- "I don't have Java
-     yet, where do I start?" -- and the four on show changed with whatever was
-     published last. Curating from here cannot fix that, because the input is
-     1500 authors' reading of two words.
+     It used to be `first 4` of the "Java Beginner" category, and a category is
+     a word an author puts on their own post: they reach for that one for
+     anything they consider approachable, so the band meant to answer "I don't
+     have Java yet, where do I start?" showed four unrelated articles that
+     changed with whatever was published last. Curating from here cannot fix
+     an input that is 1500 authors' reading of two words.
 
-     /java-quick-start/ is the answer the site already has and the one the
-     editors control: the one-time install, then an 11-step tutorial that gets
-     you to streams in under 30 minutes. So the band now shows THAT, as the two
-     numbered steps the hub page itself is built from.
+     /java-quick-start/ is the answer the site already has and the editors
+     control. EVERYTHING BELOW IS READ OFF THOSE PAGES, so there is no second
+     copy of the trail to keep in step and a new guide, step or recommended
+     course appears on the build that first sees it.
 
-     EVERYTHING IS READ OFF THOSE PAGES -- the headings, the links, the blurbs,
-     the install options, the tutorial steps, the count of recommended
-     tutorials. There is no second copy of the trail here to keep in step with
-     /java-quick-start/, and a new install guide, a new tutorial step or a new
-     recommended course appears in this band on the build that first sees it.
-
-     Renders nothing if the hub page is gone, the way the podcast and events
-     bands render nothing when they have nothing. */}}
+     Renders nothing if the hub page is gone. */}}
 
 {{ $hub := site.GetPage "/pages/java-quick-start" }}
 {{ $install := site.GetPage "/pages/java-quick-start/install-java" }}

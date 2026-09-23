@@ -3,16 +3,13 @@
   menus render their links identically, which is why this is a partial rather
   than the same six lines twice.
 
-  An http(s) or mailto: URL is emitted verbatim: piping it through relURL would
-  leave it alone today, but the point is that these are not site-relative paths
-  and must never pick up the baseURL subpath. http(s) gets target="_blank" --
-  and so does the feed, for the reason partials/feed-link.html gives: a feed is
-  raw XML or a download, so it is a dead end in the tab the reader was using.
-  A mailto: does not: in a new tab it leaves them on a blank page.
+  An http(s) or mailto: URL is emitted VERBATIM: these are not site-relative
+  paths and must never pick up a baseURL subpath. http(s) gets
+  target="_blank", and so does the feed, for the reason feed-link.html gives.
+  A mailto: does not -- in a new tab it leaves the reader on a blank page.
 
-  `rss = true` means the URL is Hugo's to work out, not the config's: it follows
-  [outputs] home and the RSS format's baseName, the same way _default/term.html
-  and partials/feed-link.html already derive theirs.
+  `rss = true` means the URL is Hugo's to work out, not the config's: it
+  follows [outputs] home and the RSS format's baseName.
 */}}
 {{- $url := .URL -}}
 {{- if .Params.rss -}}

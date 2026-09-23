@@ -1,18 +1,13 @@
 {{- /* A code-fence tag -> the language name the vendored EnlighterJS build
-       knows, or "generic".
+       knows, or "generic". Takes the raw tag, returns a lowercase name.
 
-       EXTRACTED SO THERE IS ONE COPY. It was inline in render-codeblock.html
-       until AsciiDoc arrived: asciidoctor does not go through Hugo's render
-       hooks, so partials/article-html.html has to resolve `[source,kt]` to the
-       same lexer that ```kt resolves to. Two copies of a 57-language registry
-       would disagree the first time anyone added an alias to one of them.
+       ONE COPY, because two callers resolve a tag: render-codeblock.html for
+       Markdown fences and article-html.html for asciidoctor's `[source,kt]`,
+       which never reaches a render hook. Two copies of a 57-language registry
+       would disagree the first time anyone added an alias.
 
-       Takes the raw tag (string), returns a lowercase language name.
-
-       `mermaid` is NOT special-cased here -- it is a diagram, not a language,
-       and it comes back as "generic" like anything else unknown. Both callers
-       branch on it BEFORE asking this partial, which is the same order
-       render-codeblock.html has always used. */ -}}
+       `mermaid` is NOT special-cased -- it is a diagram, not a language, and
+       comes back "generic". Both callers branch on it BEFORE asking. */ -}}
 
 {{- $alias := dict
       "sh" "shell" "bash" "shell" "zsh" "shell" "console" "shell" "shell-session" "shell"

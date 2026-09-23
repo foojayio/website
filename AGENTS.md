@@ -508,6 +508,23 @@ should catch a mistake at PR time rather than letting it fail silently.
   catches the near-miss of copying `template/post.md` to `draft/<slug>.md`
   instead of `draft/<slug>/index.md`, and leftover template placeholder text.
 
+  **It is the ONE hard check scoped to `--changed-since`, and that is
+  deliberate.** Every other check in the script guards `content/`, which
+  publishes — a broken page there is broken on the site, so whose PR
+  introduced it is beside the point. `draft/` is a staging area Hugo never
+  reads, and a submission legitimately sits in it half-finished: an article
+  waiting on its author's profile, a profile waiting on its article (exactly
+  the state `draft/javafx-ai-image-contact-sheet` + `draft/taylor-lee` were
+  in). Checking every draft on every PR failed everybody else's unrelated work
+  over someone's unfinished submission — a check costing more than it caught.
+  A draft is still held to every rule the moment its own PR touches it, which
+  is both the PR that can fix it and the last one before a maintainer moves
+  the folder into `content/posts/`. The skip is printed, so a green PR says
+  which drafts were left alone rather than hiding it, and an unscoped run (any
+  local `jbang scripts/validate/Frontmatter.java`) still checks all of them.
+  Matching is a prefix on the FOLDER, not the `index.md`, so a PR that only
+  adds an image to a draft is still a PR about that draft.
+
   **`//JAVA 21+`, and NOT the 17 it declared for months.** `TITLE_EMOJI` uses
   `\p{IsExtended_Pictographic}`, and Java's Unicode emoji properties -- that one
   and the `\p{IsEmoji}` its comment rejects -- only arrived in JDK 21. On 17 the
@@ -572,9 +589,9 @@ should catch a mistake at PR time rather than letting it fail silently.
 
   Four things are load-bearing:
   - **The base path is read from the home page's own `canonical`**, not
-    configured — so it is `/website/` on a trial build and `/` on a production
-    one, with nothing to remember to change at cutover. Same self-flipping shape
-    as `baseof.html`'s `$isTrial`.
+    configured — so it is `/` on a production build and the subpath on any
+    build served under one, with nothing to remember to change. Same
+    self-deriving shape `$isTrial` had before cutover retired it.
   - **A root-relative link that does NOT start with the base path is its own
     kind of failure**, reported as "escapes the base path". It resolves on a
     laptop and 404s once deployed under `/website/`, which is invisible locally —
@@ -1482,20 +1499,28 @@ should catch a mistake at PR time rather than letting it fail silently.
   generates an id per heading from its text — the "On this page" panel and its
   scroll-spy resolve every one of their 14k links. Accepted knowingly; fragment
   links into a blog post are rare next to the cost of keeping two conventions.
-- **`$isTrial` is spent, and it flipped itself.** While the Hugo site was a
-  byte-for-byte copy of still-live WordPress content, a crawlable
-  foojayio.github.io/website would have put ~2600 duplicate URLs into Google's
-  index competing with foojay.io for its own rankings, so `baseof.html`,
-  `analytics.html` and `layouts/robots.txt` compute `$isTrial` as
-  `baseURL != params.productionBaseURL` and suppress indexing and analytics when
-  it holds. `baseURL` is now the production URL, so it evaluates false
-  everywhere and the templates behave as if it were not there.
+- **`$isTrial` is GONE from the templates (2026-09-23), and the shape it had
+  is the part worth remembering.** While the Hugo site was a byte-for-byte
+  copy of still-live WordPress content, a crawlable foojayio.github.io/website
+  would have put ~2600 duplicate URLs into Google's index competing with
+  foojay.io for its own rankings. So `baseof.html`, `analytics.html`,
+  `robots.txt` and `index.llms.txt` derived `$isTrial` as
+  `baseURL != params.productionBaseURL` and suppressed indexing and analytics
+  when it held.
 
-  It stays because it costs nothing and because a derivation is the right shape:
-  **never turn a condition like this into a config flag**. A flag has to be
-  remembered and unset on the day it matters most, and this one turned itself
-  off when the URL changed, with nobody doing anything. Any preview deploy on a
-  different host gets the same protection for free.
+  **It was a derivation, never a config flag, and that is the lesson to keep:**
+  a flag has to be remembered and unset on the day it matters most, and this
+  one turned itself off when the URL changed with nobody doing anything.
+
+  It was kept for a while after cutover on the grounds that it cost nothing and
+  still covered a preview on another host. That reasoning did not survive
+  contact: nothing deploys anywhere else (`pr-check.yml` builds with
+  hugo.toml's own production `baseURL` and publishes nothing), so it was four
+  copies of a condition that is now always false, plus a `productionBaseURL`
+  param and a `production-url.html` partial that only existed to serve it. All
+  of it is deleted; the giscus backlink is `.Permalink`, which is what
+  `production-url.html` resolved to once the two URLs agreed. If a preview host
+  is ever wanted, re-derive it the same way rather than adding a flag.
 
 - **Every page self-canonicalises, pagers included, and `canonical:` frontmatter
   means "not ours".** `.Params.canonical | default $self` -- and `$self` is

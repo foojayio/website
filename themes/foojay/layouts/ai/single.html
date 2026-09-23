@@ -1,9 +1,7 @@
 {{ define "main" }}
-{{/* The AI portal is a curated landing page for one category -- on WordPress it
-     literally IS the "Machine Learning" category page with an editorial intro on
-     top. So the only thing content/pages/ai.md states is `list_category`, and
-     everything below (lead post, grid, topic chips, count) is derived from it.
-     Nothing to keep in sync when a new AI post lands. */}}
+{{/* The AI portal is a curated landing page for ONE category: the only
+     thing content/pages/ai.md states is `list_category`, and everything below
+     is derived from it. Nothing to keep in sync when a new post lands. */}}
 {{ $category := .Params.list_category }}
 {{ $posts := where (where site.RegularPages "Section" "posts") "Params.categories" "intersect" (slice $category) }}
 {{ $posts = $posts.ByDate.Reverse }}
@@ -15,11 +13,8 @@
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
     <div class="page-head__meta">
       <p>{{ len $posts }} article{{ if ne (len $posts) 1 }}s{{ end }} on AI and machine learning in Java.</p>
-      {{/* The portal has no feed of its own; the category it curates does --
-           which is what feed-link.html taking a page is for. It was a
-           `btn--ghost btn--sm` reading "Subscribe via RSS" here, i.e. the same
-           offer as every other page in a different shape, on the one page that
-           sits right next to its own category page for comparison. */}}
+      {{/* The portal has no feed of its own; the category it curates does,
+           which is what feed-link.html taking a page is for. */}}
       {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
         {{ partial "feed-link.html" . }}
       {{ end }}
@@ -31,10 +26,9 @@
 <div class="layout-with-sidebar">
   <div class="content-col">
 
-    {{/* Topics covered: the categories these posts actually carry, most-used
-         first, each linking to its own category page -- the same derived-not-
-         stored idiom as a sponsor profile's topic list. The curated category
-         itself is dropped: every post on the page has it, so it says nothing. */}}
+    {{/* The categories these posts actually carry, most-used first -- the
+         same derived idiom as a sponsor profile's topic list. The curated
+         category is dropped: every post here has it, so it says nothing. */}}
     {{ $counts := dict }}
     {{ range $posts }}
       {{ range .Params.categories }}
@@ -58,18 +52,14 @@
     </section>
     {{ end }}
 
-    {{/* Lead card + grid, mirroring the home page: the newest post gets the
-         "Latest post" treatment the WordPress portal gives it, the rest follow,
-         each card carrying its own categories. The full list is rendered rather
-         than paginated -- .Paginate only works on list pages, and a portal that
-         shows every article beats one that hides two thirds of them behind
-         pages Hugo can't build here. The category page below paginates. */}}
+    {{/* Lead card + grid, mirroring the home page. The FULL list rather than
+         a pager: .Paginate only works on list pages, and a portal showing
+         every article beats one hiding two thirds behind pages Hugo cannot
+         build here. The category page below paginates. */}}
     {{ with $posts }}
-      {{/* A one-item slice: the home page hands lead-posts.html every post of
-           the newest day, but this portal is a single category's stream and the
-           grid below it is not paginated, so nothing here needs the grouping --
-           it wants the same panel, label and lead card the home page shows on a
-           one-post day. */}}
+      {{/* A one-item slice: this portal is a single category's stream and
+           the grid below is not paginated, so it wants the same panel, label
+           and lead card the home page shows on a one-post day. */}}
       {{ partial "lead-posts.html" (first 1 .) }}
       <div class="post-grid">
         {{/* maxCategories 0 -> every category, not the usual first two: on a

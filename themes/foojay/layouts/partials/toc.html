@@ -1,38 +1,25 @@
-{{- /* Sticky "On this page" table of contents + scroll-spy, built from
-       Hugo's automatic h2/h3 heading extraction (.TableOfContents) -- no
-       manual heading list to maintain. Renders nothing when a page has no
-       h2/h3 headings, so short posts/pages/pedia entries are unaffected.
-       Paired with static/js/toc.js (highlights the link for whichever
-       heading is currently in view) and the .toc rules in style.css. */ -}}
+{{- /* Sticky "On this page" + scroll-spy, built from Hugo's h2/h3 extraction
+       (.TableOfContents). Renders nothing when a page has no headings. Paired
+       with static/js/toc.js and the .toc rules in style.css. */ -}}
 {{/* .TableOfContents already renders its own <nav id="TableOfContents">
      wrapper around the <ul>, so this outer element is a plain <div> rather
      than a second, redundant <nav> landmark. */}}
-{{/* Guarded by has-toc.html, NOT by `with .TableOfContents` -- Hugo emits the
-     empty <nav> wrapper even when there are no headings, so `with` was always
-     true and this widget rendered as a bare "On this page" heading with
-     nothing under it on the home and listing pages. */}}
-{{/* ENTRIES FOR TEMPLATE-RENDERED SECTIONS HAVE TO BE APPENDED BY HAND.
-     .TableOfContents is built from the page's own markdown, so it cannot see a
-     heading that posts/single.html renders itself -- the transcript (which
-     comes from a bundle RESOURCE, transcript.md), the author callouts, the
-     related-posts strip or the comment section. Those are the four things at
-     the foot of a long article that a reader most often wants to jump to, and
-     without this they were the sections missing from the panel.
+{{/* Guarded by has-toc.html, NOT `with .TableOfContents`: Hugo emits the
+     empty <nav> wrapper even with no headings, so `with` is always true. */}}
+{{/* ENTRIES FOR TEMPLATE-RENDERED SECTIONS ARE APPENDED BY HAND.
+     .TableOfContents is built from the page's markdown, so it cannot see the
+     transcript, author callouts, related posts or comments -- which
+     posts/single.html renders itself, and which are what a reader jumps to.
 
      Each entry is conditional on the SAME partial the article uses to decide
-     whether to render the section at all -- post-authors.html,
-     related-pages.html, comments-term.html -- so the panel can never offer a
-     link to an anchor that is not on the page. The ids are hand-written in
-     posts/single.html and namespaced `post-` so Goldmark, which mints ids for
-     .Content and knows nothing about these, cannot take one first.
+     whether the section renders at all, so the panel can never link to an
+     anchor that is not there. The ids are namespaced `post-` so Goldmark,
+     which mints ids for .Content, cannot take one first.
 
-     Inserted before the LAST </ul> so they land as top-level items of Hugo's
-     own list, which is what an h2 is: nested lists have closed by then. Doing
-     it that way rather than rendering a second <ul> beside the nav means the
-     existing .toc #TableOfContents styling and toc.js's scroll-spy (it collects
-     every a[href^="#"] inside .toc) cover them with nothing added to either.
-     The regex is anchored to the end of the string, so a </ul> inside a heading
-     title is not a target. */}}
+     Inserted before the LAST </ul>, so they land as top-level items of Hugo's
+     own list (nested lists have closed by then) and the existing .toc styling
+     and toc.js scroll-spy cover them with nothing added. The regex is anchored
+     to the end of the string, so a </ul> inside a heading is not a target. */}}
 {{ $hasToc := partial "has-toc.html" . }}
 
 {{/* The transcript is CONTENT -- the bulk of what the page says -- so it joins
@@ -42,9 +29,8 @@
   {{ $items = $items | append `<li><a href="#transcript">Transcript</a></li>` }}
 {{ end }}
 
-{{/* The end matter is marked with a class so the CSS can rule it off from the
-     article's own sections: it is the same page, but it is not what the article
-     SAYS, and three near-constant entries reading like chapters would make a
+{{/* Marked with a class so the CSS can rule it off from the article's own
+     sections: three near-constant entries reading like chapters would make a
      five-heading post look like an eight-heading one. */}}
 {{ $tail := slice }}
 {{ with partial "post-authors.html" . }}
@@ -62,20 +48,15 @@
        heading labelled another reads as the wrong link. */}}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
 {{ end }}
-{{/* After the giscus entry, matching the order the page renders them in -- a
-     panel that lists the archive above the live thread would be describing a
-     different page. Keyed on the same bundle resource the section is derived
-     from, so the link cannot advertise a section that is not there. */}}
+{{/* After the giscus entry, matching the order the page renders them in.
+     Keyed on the same bundle resource the section is derived from. */}}
 {{ if .Resources.GetMatch "comments.json" }}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#legacy-comments">Discussions on the previous Foojay site</a></li>` }}
 {{ end }}
 
-{{/* End matter NEVER brings the panel into existence on its own. "About the
-     author / Related posts / Join the discussion" is not a table of contents --
-     it is the same three lines on every post, and on a short post with no
-     headings it would map nothing about the article. So it is appended to a
-     panel that already has a reason to exist, and a post with no headings and
-     no transcript still gets no panel at all. */}}
+{{/* End matter NEVER brings the panel into existence on its own: the same
+     three lines on every post map nothing about the article. It is appended
+     to a panel that already has a reason to exist. */}}
 {{ $extras := $items }}
 {{ if or $hasToc $items }}{{ $extras = $items | append $tail }}{{ end }}
 

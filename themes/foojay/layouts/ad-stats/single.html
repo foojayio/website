@@ -2,29 +2,20 @@
 {{/* Banner impressions and click-throughs, per campaign and per sponsor.
 
      READ OFF DISK, NOT FROM THE PAGE GRAPH. A banner past its expiryDate is
-     dropped from the build entirely (template/ad.md) -- which is what lets a
-     campaign retire itself with no flag to unset, and is worth keeping. The
-     cost is that `site.GetPage "/ads"` holds only what is running TODAY, while
-     the report a sponsor asks for is almost always for a campaign that has
-     already finished. The FOLDER is still on disk, though, so its frontmatter
-     is read directly and a finished campaign keeps its headline, its sponsor
-     and its dates. Same move, and the same reason, as
-     partials/coming-soon.html reading scheduled posts Hugo declined to build.
+     dropped from the build entirely, which is what lets a campaign retire
+     itself -- but it means `site.GetPage "/ads"` holds only what is running
+     today, while the report a sponsor asks for is almost always a finished
+     campaign. The FOLDER is still on disk, so its frontmatter is read
+     directly. Same move as partials/coming-soon.html. Cheap: content/ads/
+     holds a handful of folders per year and this is one page.
 
-     Cheap enough to do on every build: content/ads/ holds a handful of folders
-     per year, and this is one page. Not comparable to walking content/posts/.
+     THE NUMBERS come from data/views.json, the same source as an article's
+     view count, under `ad-view/<slug>` and `ad-click/<slug>` keys posted by
+     static/js/ad-carousel.js.
 
-     THE NUMBERS come from data/views.json, refreshed from the Worker every six
-     hours by .github/workflows/sync-view-counts.yml -- the same source as the
-     view count on an article, so the two can never disagree. Keys are
-     `ad-view/<slug>` and `ad-click/<slug>`, posted by static/js/ad-carousel.js
-     and accepted by the Worker's existing KEY rule -- banner counting needed no
-     change to worker/views/ and no redeploy. See the comment there.
-
-     A ROW SURVIVES ITS FOLDER TOO. If a bundle is deleted outright rather than
-     left to expire, its counts are still in the table and would otherwise
-     vanish from the report while remaining in the total. Those slugs are swept
-     up in the second pass below and shown bare. */}}
+     A ROW SURVIVES ITS FOLDER: a bundle deleted outright rather than left to
+     expire still has counts, which would otherwise vanish from the report
+     while staying in the total. The second pass below sweeps those up. */}}
 
 {{ $data := hugo.Data.views }}
 {{ $dir := "content/ads" }}
@@ -41,24 +32,19 @@
       {{ $ctr := 0.0 }}
       {{ if gt $views 0 }}{{ $ctr = mul (div (float $clicks) (float $views)) 100.0 }}{{ end }}
 
-      {{/* THE FIRST TEN CHARACTERS, for the reason coming-soon.html spells out:
-           YAML hands a date back quoted, unquoted-as-time.Time or not at all,
-           and all the readable shapes start with the ISO day. Anything else is
-           left blank rather than parsed, so a typo in one banner cannot halt
-           the build from inside a template. */}}
+      {{/* THE FIRST TEN CHARACTERS, for the reason coming-soon.html gives:
+           YAML hands a date back quoted, as time.Time, or not at all, and
+           every readable shape starts with the ISO day. Anything else is left
+           blank rather than parsed, so one typo cannot halt the build. */}}
       {{ $from := substr (printf "%v" ($fm.publishDate | default "")) 0 10 }}
       {{ $till := substr (printf "%v" ($fm.expiryDate | default "")) 0 10 }}
 
-      {{/* THE FOLDER'S MONTH, as a fallback for the "Ran" column.
-           publishDate/expiryDate are optional -- template/ad.md says to leave
-           them out for a banner that runs until someone removes it -- so most
-           campaigns have neither and the column was an em-dash on every row.
-           The `<yyyy>-<mm>-` prefix is NOT optional (validate/Frontmatter.java
-           requires it, and requires it to agree with publishDate when that is
-           set), which makes it the one date every campaign is guaranteed to
-           have, before AND after its bundle is gone. It cannot contradict the
-           frontmatter, because the check that admits the folder name is the
-           same check that ties the two together. */}}
+      {{/* THE FOLDER'S MONTH, as a fallback for the "Ran" column:
+           publishDate/expiryDate are optional, but the `<yyyy>-<mm>-` prefix
+           is not (Frontmatter.java requires it, and requires it to agree with
+           publishDate when set). So it is the one date every campaign has,
+           before and after its bundle is gone, and it cannot contradict the
+           frontmatter. */}}
       {{ $month := "" }}
       {{ with findRE `^[0-9]{4}-[0-9]{2}` $slug 1 }}{{ $month = index . 0 }}{{ end }}
 
@@ -109,30 +95,21 @@
 {{ range $rows }}{{ with .sponsor }}{{ $sponsors = $sponsors | append . }}{{ end }}{{ end }}
 {{ $sponsors = $sponsors | uniq | sort }}
 
-{{/* THE SHELL, which this page had none of: `<article class="prose">` on its
-     own sits directly in .site-main (display: block), so it took the whole
-     viewport with no max-width, no gutter and no top margin -- the one page on
-     the site that did.
+{{/* page-head + .content-col.full-width, what /sitemap/ uses, rather than
+     the .layout-with-sidebar an ordinary page takes. Two reasons, the second
+     being the real one:
 
-     page-head + .content-col.full-width, i.e. what /sitemap/ uses, rather than
-     the .layout-with-sidebar + .page-single that an ordinary page uses. Two
-     reasons, and the second is the real one:
-
-       1. It is a data page. Six columns of figures read better in the 1240px
-          shell than folded into the 96ch reading measure meant for prose.
-       2. A SIDEBAR HERE WOULD CORRUPT THE NUMBERS. partials/ads-widget.html
-          renders the live banners in that column, and static/js/ad-carousel.js
-          counts an impression for each one that comes into view. Opening the
-          report to check a sponsor's figures would add to them. A page that
-          changes what it measures by being read is worse than a page that is
-          the wrong width. */}}
+       1. Six columns of figures read better in the 1240px shell than folded
+          into the reading measure meant for prose.
+       2. A SIDEBAR HERE WOULD CORRUPT THE NUMBERS. ads-widget.html renders
+          live banners in that column and ad-carousel.js counts an impression
+          for each one that comes into view, so opening the report to check a
+          sponsor's figures would add to them. */}}
 <div class="page-head">
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
-    {{/* .Content only, not `description` as well -- /sitemap/'s head does the
-         same. The frontmatter description is written for the gallery card and
-         the social preview; printing it here too would open the page by saying
-         nearly the same thing twice. */}}
+    {{/* .Content only, not `description`: that is written for the social
+         preview, and printing both opens the page by saying it twice. */}}
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
   </div>
 </div>
@@ -142,16 +119,14 @@
 
   {{ with $rows }}
   <h2>By campaign</h2>
-  {{/* .table-scroll + .site-table + .site-table__num, the same three classes
-       the derived tables on /ai-instructions/ use: a focusable scroll box on a
-       narrow screen, and tabular figures right-aligned so a column of counts
-       lines up digit under digit. Nothing new was needed here -- a fourth
-       table style would be a fourth place to fix a padding bug. */}}
-  {{/* data-sortable + data-sort-type is the whole opt-in; static/js/sortable-table.js
-       turns those headers into buttons and is otherwise generic -- /sitemap/ was
-       its only caller until now, and it needed no change to take a second one.
-       aria-sort on Campaign declares the order the server already rendered, so
-       the first click on it flips rather than re-applying what is on screen. */}}
+  {{/* The same three classes the derived tables on /ai-instructions/ use: a
+       focusable scroll box on a narrow screen, and tabular figures aligned
+       digit under digit. A fourth table style would be a fourth place to fix
+       a padding bug. */}}
+  {{/* data-sortable + data-sort-type is the whole opt-in; sortable-table.js
+       is otherwise generic. aria-sort on Campaign declares the order the
+       server already rendered, so the first click flips it rather than
+       re-applying what is on screen. */}}
   <div class="table-scroll" tabindex="0">
   <table class="site-table" data-sortable>
     <thead>
@@ -169,16 +144,14 @@
       <tr>
         {{/* A deleted bundle has no headline left, so `title` falls back to the
              slug -- printing both would say the same thing twice. */}}
-        {{/* Sorts on the SLUG, not on the headline shown above it: the slug
-             carries the <yyyy>-<mm>- prefix, so a text sort of this column is
-             chronological -- which is the order a campaign list is actually
-             read in. A headline sort would be alphabetical by advertising copy. */}}
+        {{/* Sorts on the SLUG, not the headline: the slug carries the
+             <yyyy>-<mm>- prefix, so a text sort is chronological. A headline
+             sort would be alphabetical by advertising copy. */}}
         <td data-sort-value="{{ .slug }}">{{ if ne .title .slug }}{{ .title }}<br>{{ end }}<code class="ad-stats__slug">{{ .slug }}</code></td>
         <td class="ad-stats__sponsor">{{ with .sponsor }}{{ . }}{{ else }}&mdash;{{ end }}</td>
-        {{/* An exact window when the campaign declared one, otherwise the
-             month it was filed under. Sorts on whichever is shown, so a
-             month-only row still lands in the right place among the dated
-             ones -- "2026-09" sorts between "2026-08-31" and "2026-10-01". */}}
+        {{/* The declared window if there is one, else the month it was
+             filed under. Sorts on whichever is shown, so "2026-09" lands
+             between "2026-08-31" and "2026-10-01". */}}
         <td class="ad-stats__ran" data-sort-value="{{ or .from .month }}">
           {{- if .from }}{{ .from }}{{ with .till }} &rarr; {{ . }}{{ end }}
           {{- else if .month }}{{ .month }}

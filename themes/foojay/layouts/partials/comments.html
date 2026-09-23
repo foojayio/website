@@ -1,61 +1,37 @@
 <!--
-  giscus: comments + reactions ("likes"), backed by GitHub Discussions on this
-  repo. Zero infra to run, and the moderation tools are the ones the team
-  already uses.
+  giscus: comments + reactions, backed by GitHub Discussions on this repo. No
+  infra to run, and moderation happens in the tools the team already uses.
 
-  Required one-time setup (see README.md "Comments"):
-    1. Enable Discussions on github.com/foojayio/website (repo Settings ->
-       Features -> Discussions) and add a "Blog Comments" category, so 2000+
-       post threads don't drown the real discussions in "General".
-    2. Install the giscus app on the repo: https://github.com/apps/giscus
-    3. Fill in [params.giscus] in hugo.toml. The two ids come from
-       https://giscus.app.
-  Until all four values are set this partial renders nothing, so an
-  unconfigured build simply has no comment section. All four ARE set and all
-  three steps are done -- the repo has Discussions enabled with a "Blog
-  Comments" category, and giscus has created threads there on its own. (The
-  `--print-config` flag that used to print the block is gone with the import;
-  see below.)
+  Setup (see README.md "Comments"): Discussions enabled on the repo with a
+  "Blog Comments" category, the giscus app installed, and [params.giscus] in
+  hugo.toml filled in from https://giscus.app. Until all four values are set
+  this renders nothing, so an unconfigured build simply has no comments.
 
-  WHICH PAGES GET A SECTION, AND THE TERM THEY USE, ARE partials/comments-term.html.
-  That partial is the single definition -- partials/toc.html asks it the same
-  question to decide whether to offer a "Join the discussion" jump link, and
-  when the condition lived here and a paraphrase of it lived there, the panel
-  advertised a comment section that pages like /jvm-options/ did not have.
-  It also qualifies the term by section for everything except posts; see there.
+  WHICH PAGES GET A SECTION, AND THE TERM THEY USE, ARE IN
+  partials/comments-term.html -- the single definition, because toc.html asks
+  it the same question to decide whether to offer a "Join the discussion" jump
+  link.
 
-  THE TERM IS THE POST SLUG, NOT THE PATHNAME.
-  giscus finds a page's discussion by searching for its "term". The obvious
-  choice, mapping="pathname", is wrong here: this site runs at
-  /website/today/<slug>/ during the trial and at /today/<slug>/ after cutover,
-  so every thread created before the move would be orphaned after it. The slug
-  survives that (it IS the permalink, see hugo.toml's :slugorcontentbasename),
-  and it needs nothing from the author -- it's the bundle folder name.
+  THE TERM IS THE SLUG, NOT THE PATHNAME. giscus finds a discussion by
+  searching for its term, and a slug survives a URL change where a pathname
+  does not -- every thread created before such a change would be orphaned by
+  it. The slug also needs nothing from the author: it is the bundle folder
+  name.
 
-  strict="1" for the same "must not silently attach to the wrong post" reason:
-  non-strict matching is a fuzzy in:title search that takes the first hit, and
-  30 foojay slugs are substrings of another slug ("...-postgresql-connections"
-  inside "...-postgresql-connections-part-2-batching"). Strict matches on a hash
-  of the term instead, which is exact.
+  strict="1" for the "must not silently attach to the wrong post" reason:
+  non-strict matching is a fuzzy in:title search taking the first hit, and 30
+  foojay slugs are substrings of another slug. Strict matches on a hash of the
+  term, which is exact.
 
-  LEGACY COMMENTS ARE NOT IN HERE, and that is not the original plan.
-  scripts/transfer/Comments.java used to post the 580 WordPress comments into
-  these discussions, written exactly the way giscus itself would so an imported
-  thread was indistinguishable from a real one. GitHub BANNED THE ACCOUNT it
-  posted as, a few posts in -- several hundred API-driven comment creations from
-  a fresh account looks exactly like spam from their side. So the archive lives
-  in the repo now: one comments.json per post bundle, rendered as its own section
-  under this one by partials/legacy-comments.html. This partial owns NEW comments
-  only; see Comments.java's class comment for why that split is the better shape
-  anyway (those commenters' GitHub identities are unknown, so nobody could ever
-  have edited or replied to their own 2020 comment here regardless).
+  THE IMPORTED WORDPRESS COMMENTS ARE NOT IN HERE. They live in the repo, one
+  comments.json per post bundle, rendered as its own section below this one by
+  partials/legacy-comments.html -- posting them into Discussions got the
+  posting account banned as spam. This partial owns NEW comments only.
 -->
 {{ $term := partial "comments-term.html" . }}
 {{ with $term }}
-{{/* comments-term.html has already established that all four giscus settings
-     are present -- it returns "" otherwise -- so this reads them directly
-     rather than re-testing them and nesting a second `with` (inside which `.`
-     would be the term string, not the settings). */}}
+{{/* comments-term.html has already established all four settings are
+     present -- it returns "" otherwise -- so this reads them directly. */}}
 {{ $g := site.Params.giscus }}
 <section id="giscus-comments" class="giscus-section">
   <h2 class="giscus-section__title">Join the discussion</h2>

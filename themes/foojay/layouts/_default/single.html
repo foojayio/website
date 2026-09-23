@@ -6,64 +6,40 @@
     {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
   </div>
 </div>
-{{/* THE RAIL ALWAYS RENDERS, and it did not used to.
+{{/* THE RAIL ALWAYS RENDERS, unconditionally. The TOC is not the only thing
+     in that column -- the paid banner and the sponsor logos are too -- so
+     gating the rail on the page having headings drops both from every short
+     page. toc.html renders nothing when there are no headings, so such a page
+     simply gets a rail of banner + sponsors.
 
-     It was conditional on the page having h2/h3s, on the reasoning that a short
-     page has no "On this page" panel to show. But the panel is not the only
-     thing in that column -- the paid banner and the sponsor logos are too, and
-     both are there on every post and every listing. So 13 Quick Start pages plus
-     the two legal pages fell to a full-width branch that showed neither.
-
-     Full width did not even buy them anything: every page using this template is
-     PROSE, capped at the reading measure by .page-single, so the branch
-     produced a column of text left-aligned in a 1240px shell with the remaining
-     ~450px thrown away as empty gutter. Two columns is strictly better -- the
-     text measure is identical and the gutter now holds something.
-
-     partials/toc.html renders nothing when there are no headings (it is guarded
-     by has-toc.html), so a short page simply gets a rail of banner + sponsors
-     rather than an empty panel. Nothing here needs a condition.
-
-     This is NOT the rule for the genuinely wide layouts -- /jugs/,
-     /java-champions/, /sitemap/, /board/ -- whose content is a map or a
-     thousand-row table. Those keep their full width and take no rail; see
-     page-single--wide in style.css. */}}
+     This is NOT the rule for the genuinely wide layouts (/jugs/,
+     /java-champions/, /sitemap/, /board/), whose content is a map or a
+     thousand-row table: they keep full width and take no rail. */}}
 <div class="layout-with-sidebar">
   <article class="content-col page-single prose">
-    {{/* Both render nothing unless the page carries a `weight`, i.e. is a step
-         in a multi-page series (the Java Quick Start tutorial today). Kept here
-         rather than in a series-specific layout so any folder of ordered pages
-         gets the navigation by adding one number per page, and every other page
-         using this template is untouched. */}}
+    {{/* Both render nothing unless the page carries a `weight`, i.e. is a
+         step in a series. Here rather than in a series-specific layout, so
+         any folder of ordered pages gets the navigation for free. */}}
     {{ partial "series-progress.html" . }}
     {{ partialCached "article-html.html" . .RelPermalink }}
     {{ partial "series-nav.html" . }}
     {{ partial "page-source.html" . }}
-    {{/* Renders nothing unless partials/comments-term.html gives this page a
-         term -- so the legal pages, /sitemap/, /search/ and /ai-instructions/
-         stay quiet while a Quick Start step, an install guide, /jvm-options/ or
-         /what-is-foojay/ gets a comment box. The pages that route to a layout of
-         their own via `type:` never reach this template at all. */}}
+    {{/* Renders nothing unless comments-term.html gives this page a term, so
+         the legal and machinery pages stay quiet while an ordinary prose page
+         gets a comment box. */}}
     {{ partial "comments.html" . }}
   </article>
   <aside class="sidebar" data-pagefind-ignore>
     {{ partial "toc.html" . }}
 
-    {{/* Same paid banner carousel the post sidebar carries (partials/sidebar.html).
-         This column is not built from that partial -- it holds only a table of
-         contents -- so the placement has to be added here too, or a reader on a
-         pedia entry, a Quick Start step or a sponsor profile sees a right column
-         with a gap where every other page has a banner. Renders nothing when no
-         campaign is running, and nothing on the home page. */}}
+    {{/* The same paid banner the post sidebar carries. This rail is hand-built
+         rather than partials/sidebar.html, so the placement has to be repeated
+         or the column has a gap where every other page has a banner. */}}
     {{ partial "ads-widget.html" . }}
 
-    {{/* And the sponsor list, for the same reason the banner above it is here.
-         partials/sidebar.html carries both on posts and listings; this column is
-         hand-built, so it got the banner when that was added and was silently
-         left without the logos -- so the paid carousel ran on these pages while
-         the sponsors who fund the site did not appear. AGENTS.md treats sponsor
+    {{/* And the sponsor list, for the same reason. AGENTS.md treats sponsor
          visibility as contractual and exempts this widget from the TOC-height
-         cull; a rail that renders at all should render it. */}}
+         cull: a rail that renders at all should render it. */}}
     {{ partial "sidebar-sponsors.html" . }}
   </aside>
 </div>

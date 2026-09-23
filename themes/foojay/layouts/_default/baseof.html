@@ -3,79 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1">
-  {{/* ---------------------------------------------------------------------
-       Is this the throwaway trial deploy, or the real site?
-
-       DERIVED from baseURL rather than configured, so it flips itself at
-       cutover: the moment baseURL becomes params.productionBaseURL the site
-       turns indexable, with nothing to remember to unset. (build-deploy.yml
-       passes --baseURL on the command line, and site.BaseURL reflects that
-       override, so this is the URL actually being built for.)
-       --------------------------------------------------------------------- */}}
-  {{ $prod := strings.TrimSuffix "/" (site.Params.productionBaseURL | default site.BaseURL) }}
-  {{ $isTrial := ne (strings.TrimSuffix "/" site.BaseURL) $prod }}
-
-  {{/* ---------------------------------------------------------------------
-       This page's own URL, pager included.
-
-       .Permalink on a paginated list is the URL of page 1 for EVERY pager, so
-       using it directly made /today/page/2/ (and all 123 category pages'
-       pagers) declare themselves duplicates of page 1 -- telling Google to drop
-       them, and with them the only crawl path into the older archive.
-       partials/paginator.html explains why the pager is fetched through a
-       partial instead of calling .Paginator here.
-       --------------------------------------------------------------------- */}}
+  {{/* This page's own URL, pager included. .Permalink on a paginated list is
+       the URL of page 1 for EVERY pager, so using it directly declares every
+       pager a duplicate of page 1 and costs the archive its only crawl path.
+       partials/paginator.html says why the pager comes from a partial. */}}
   {{ $pager := partial "paginator.html" . }}
   {{ $self := .Permalink }}
   {{ $pageNum := 0 }}
   {{ with $pager }}
     {{ if gt .PageNumber 1 }}
       {{ $pageNum = .PageNumber }}
-      {{/* A pager's .URL is root-relative and ALREADY carries the baseURL's path
-           prefix (/website/today/page/2/ on the trial deploy), so `absURL` would
-           prepend that prefix a second time. The origin is taken from THIS PAGE
-           instead -- .Permalink minus .RelPermalink is exactly "scheme://host" --
-           rather than from site.BaseURL, which reports the CONFIGURED value and
-           is not what `hugo server` serves: locally that made every pager
-           canonical and og:url point at foojayio.github.io. This form needs no
-           knowledge of the pagination path either, which is not readable from
-           the site config in Hugo 0.165 (page.SiteConfig has no Pagination
-           field). */}}
+      {{/* A pager's .URL already carries the baseURL path prefix, so
+           `absURL` would prepend it twice. The origin comes from THIS PAGE --
+           .Permalink minus .RelPermalink is exactly "scheme://host" -- not
+           from site.BaseURL, which reports the CONFIGURED value rather than
+           what `hugo server` serves. */}}
       {{ $origin := strings.TrimSuffix $.RelPermalink $.Permalink }}
       {{ $self = printf "%s%s" $origin .URL }}
     {{ end }}
   {{ end }}
 
-  {{/* Site name suffix as the SHORT brand token, " | foojay" -- 9 characters,
-       the same string og:site_name below already uses, and deliberately NOT
-       site.Title. Appending site.Title is what this template used to refuse,
-       and the reason still holds: "foojay.io - Friends Of OpenJDK" plus a
-       separator is 33 of the ~60 characters Google renders, on 2147 post
-       titles that already average past that. Nine is a different trade -- it
-       buys the brand back into the search result and into a shared tab strip,
-       which the bare title had lost, at a cost the long titles can absorb.
-
-       NOT ON THE HOME PAGE, whose title IS site.Title: it would read
-       "foojay.io - Friends Of OpenJDK | foojay".
-
-       NOT ON og:title either. og:site_name carries the brand separately in
-       every link preview, so adding it here too would render "foojay" twice
-       in the same card.
-
-       The page number keeps the pagers from sharing one title, and it goes
-       BEFORE the suffix so the brand stays last. */}}
+  {{/* The SHORT brand token, not site.Title, which would spend 33 of the ~60
+       characters Google renders. Not on the home page, whose title IS
+       site.Title, and not on og:title, where og:site_name carries the brand
+       separately. The page number goes BEFORE it, so the brand stays last. */}}
   <title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Page not found{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}{{ if not .IsHome }} | Foojay.io{{ end }}</title>
   {{/* Derived for the kinds that carry no description of their own (author
-       profiles, category terms), and length-guarded for the ones that do --
-       see partials/meta-description.html for why, and for the 470 URLs that
-       used to share one boilerplate string. */}}
+       profiles, category terms) and length-guarded for the ones that do --
+       see partials/meta-description.html. */}}
   {{ $desc := partial "meta-description.html" . }}
-  {{/* A pager says which page it is, for the same reason <title> does: a list
-       page and its pagers describe one archive, so without this /today/ and its
-       215 pagers -- and every category and author pager -- ship one identical
-       snippet across hundreds of URLs. The suffix goes on HERE rather than
-       inside meta-description.html because json-ld.html reads that same partial
-       for a BlogPosting description, where a page number would be nonsense. */}}
+  {{/* A pager says which page it is, or hundreds of URLs ship one identical
+       snippet. HERE rather than in meta-description.html, which json-ld.html
+       also reads for a BlogPosting description. */}}
   {{ if $pageNum }}{{ $desc = printf "%s (page %d)" $desc $pageNum }}{{ end }}
   <meta name="description" content="{{ $desc }}">
 
@@ -84,18 +43,12 @@
        none at all -- it is not a page with a URL of its own. */}}
   {{ if ne .Kind "404" }}<link rel="canonical" href="{{ .Params.canonical | default $self }}">{{ end }}
 
-  {{/* Three separate reasons to keep a page out of the index, in one tag:
-       1. The whole trial deploy -- it is a byte-for-byte copy of the live
-          WordPress site, so 2600 crawlable duplicates of foojay.io would
-          compete with foojay.io for its own rankings.
-       2. The search page has no server-rendered content of its own to rank on.
-       3. The 404 -- GitHub Pages serves it with a 404 status, but it is
-          reachable at /404.html too.
-       4. /ad-stats/, the banner numbers. `build.list: never` already keeps it
-          out of sitemap.xml and the /sitemap/ page, but that only stops us
-          ADVERTISING the URL -- a crawler that reaches it from a referrer or a
-          shared link would index a page of sponsors' campaign results. */}}
-  {{ $noindex := or $isTrial (eq .Type "search") (eq .Kind "404") (eq .Type "ad-stats") }}
+  {{/* Three reasons to keep a page out of the index, in one tag: the search
+       page has nothing server-rendered to rank on; the 404 is reachable at
+       /404.html as well as through a 404 status; and /ad-stats/ holds
+       sponsors' campaign results, which `build.list: never` keeps out of the
+       sitemap but cannot keep a crawler from reaching by referrer. */}}
+  {{ $noindex := or (eq .Type "search") (eq .Kind "404") (eq .Type "ad-stats") }}
   {{ if $noindex }}<meta name="robots" content="noindex, nofollow">{{ end }}
 
   <meta property="og:site_name" content="foojay">
@@ -105,27 +58,18 @@
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}{{ if $pageNum }} (page {{ $pageNum }}){{ end }}">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ $self }}">
-  {{/* .IsPage matters here, not just Section: content/posts/_index.md (the
-       /today/ listing) has Section "posts" too, but it's a list page, not an
-       article -- without the .IsPage check it was getting og:type=article
-       and an article:published_time that didn't mean anything for a listing
-       page. */}}
+  {{/* .IsPage matters, not just Section: content/posts/_index.md (the /today/
+       listing) has Section "posts" too but is a list, not an article. */}}
   {{ $isPost := and (eq .Section "posts") .IsPage }}
   <meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
 
-  {{/* Falls back to the social card so a link to the home page, /today/, a
-       category or an author profile still previews as something. The card is
-       themes/foojay/static/images/foojay-social-card.png -- 1200x630, the
-       wordmark on --surface-navy, because the logo is light-blue-on-transparent
-       and vanishes on a white ground. */}}
+  {{/* Falls back to the social card so a link to the home page, a category or
+       an author profile still previews as something. 1200x630, the wordmark on
+       --surface-navy, because the logo is light-blue-on-transparent and
+       vanishes on a white ground. */}}
   {{/* An SVG hero is skipped here and ONLY here: no link-preview scraper
-       renders SVG (Facebook, LinkedIn, X and Slack all show nothing), so a post
-       whose featured image is one would preview as a blank card -- worse than
-       the foojay one. It stays the hero on the page and the thumbnail on a card,
-       where a browser draws it fine. 10 posts are in this state, all of them
-       vendor logos WordPress had as their featured image; Yoast makes the same
-       call upstream, which is exactly why it served the site favicon for them
-       and why transfer/Posts.java has to ask the REST API instead. */}}
+       renders SVG, so such a post previews as a blank card. It stays the hero
+       on the page and the thumbnail on a card. */}}
   {{ $ogImage := "" }}
   {{ with .Params.image }}
     {{ if not (strings.HasSuffix (lower .) ".svg") }}
@@ -142,40 +86,23 @@
        derived from `categories:`, so nothing extra to write per post. */}}
   {{ range .Params.categories }}<meta property="article:section" content="{{ . }}">
   {{ end }}
-  {{/* giscus stamps a link to the article into the discussion body when it
-       creates that article's thread, and it uses THIS meta tag if present,
-       otherwise the URL of the page it happens to be running on (see
-       client.ts: `backLink = getMetaContent('giscus:backlink') || cleanedLocation`).
-       Without it, every thread a visitor starts during the trial would keep a
-       dead foojayio.github.io/website link after cutover -- and a discussion
-       body posted by a reader is not something we can go back and rewrite.
-       Note this is deliberately NOT .Params.canonical: on the 838 cross-posted
-       articles that points at the original publisher, while the backlink has to
-       point at the foojay.io article the thread belongs to. */}}
-  <meta name="giscus:backlink" content="{{ partial "production-url.html" . }}">
+  {{/* The link giscus stamps into a discussion body when it creates a
+       thread. NOT .Params.canonical: on a cross-posted article that points at
+       the original publisher, and a reader's discussion body is not something
+       we can rewrite later. */}}
+  <meta name="giscus:backlink" content="{{ .Permalink }}">
   {{ end }}
 
   {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
 
   {{ partial "json-ld.html" . }}
 
-  {{/* The webfonts are SELF-HOSTED -- see vendor/fonts/fonts.css for the 40
-       faces and why they are not two <link>s at fonts.googleapis.com. Nothing
-       is preconnected because there is nowhere to preconnect to.
-
-       The two faces below are PRELOADED because they are on every page and
-       nothing else: --font-body at 400 is the article text and --font-display
-       at 700 is the headings, in the latin cut a browser would pick for
-       English. A font inside a stylesheet is only discovered once that
-       stylesheet has been fetched and parsed, so without this the two files the
-       first paint waits on start a round trip late. The rest are left to be
-       discovered normally -- preloading a face a page does not use spends
-       bandwidth to render nothing.
-
-       This also makes a wrong path FAIL LOUDLY rather than silently falling
-       back to Segoe UI: a preload is requested on every page whether or not the
-       text needs it, so tests/e2e's "no failed same-origin request" assertion
-       covers it on all 20 pages it walks. */}}
+  {{/* Self-hosted, so there is nowhere to preconnect to. ONLY the two faces
+       on every page are preloaded: a font inside a stylesheet is discovered
+       only once that stylesheet is parsed, so the two files first paint waits
+       on would otherwise start a round trip late -- and preloading a face a
+       page does not use spends bandwidth to render nothing. A wrong path also
+       FAILS LOUDLY, since tests/e2e asserts no failed same-origin request. */}}
   <link rel="preload" as="font" type="font/woff2" crossorigin
         href="{{ "vendor/fonts/source-sans-3-400-latin.woff2" | relURL }}">
   <link rel="preload" as="font" type="font/woff2" crossorigin
@@ -197,51 +124,31 @@
     })();
   </script>
 
-  {{/* The feed is titled after the PAGE, not the site: every category term,
-       every author profile and every section gets its own feed, and titling
-       them all "foojay.io - Friends Of OpenJDK" meant a reader subscribing
-       from /today/category/java/ filed it under the site name and could not
-       tell two subscriptions apart. The site name is kept as the suffix so the
-       source is still obvious in a reader's sidebar. */}}
+  {{/* Titled after the PAGE, not the site: every category, author and section
+       has its own feed, and one shared title makes two subscriptions
+       indistinguishable in a reader. The site name stays as the suffix. */}}
   {{ range .AlternativeOutputFormats }}
     {{ $feedTitle := cond $.IsHome $.Site.Title (printf "%s | %s" $.Title $.Site.Title) }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $feedTitle | safeHTML }}
   {{ end }}
 
-  {{/* Google Analytics + Ketch (consent). Renders nothing unless configured in
-       [params.analytics], and nothing at all on the trial deploy -- the
-       partial derives that from baseURL the same way $isTrial above does, so
-       it is not passed in and cannot fall out of step with the noindex tag.
-       In <head> rather than at the end of <body> because the consent banner
-       should decide before the page is interactive; both scripts are
-       async/defer, so neither blocks first paint. */}}
+  {{/* Google Analytics + Ketch (consent). Renders nothing unless
+       [params.analytics] is configured. In <head> rather than at the end of
+       <body> so the consent banner decides before the page is interactive;
+       both scripts are async/defer and neither blocks first paint. */}}
   {{ partial "analytics.html" . }}
 </head>
 <body>
   {{ partial "header.html" . }}
 
-  {{/* data-pagefind-body switches Pagefind (see search/single.html) into
-       opt-in indexing mode site-wide: only elements with this attribute get
-       indexed, so header/nav/footer are automatically excluded from search
-       results without needing to tag them individually.
-       data-pagefind-filter="section:..." tags every page with its Hugo
-       section (posts/authors/pages/pedia) so the search page can group
-       results under those headers -- set once here rather than in every
-       section's own template. Uses .Type rather than .Section so a page
-       that overrides `type:` in frontmatter (the /jugs/ page is Section
-       "pages" but Type "jugs") gets its own group instead of being lumped
-       in with generic pages.
+  {{/* data-pagefind-body puts Pagefind in opt-in mode SITE-WIDE, so
+       header/nav/footer drop out without being tagged. The filter groups
+       results by .Type, not .Section, so a page overriding `type:` gets its
+       own group.
 
-       PAGERS ARE NOT INDEXED. Every pager of a paginated list renders the same
-       page -- same <h1>, same bio, same sidebar -- with a different slice of
-       cards below it, so tagging all of them as a body made ONE author or
-       category show up in search once per pager (searching "delporte" returned
-       frankdelporte 28 times, one per page of his archive). $pageNum is the
-       pager number worked out in <head> above, and is 0 on a page that either
-       doesn't paginate or is page 1 -- exactly the pages worth a result. Since
-       data-pagefind-body puts Pagefind in opt-in mode site-wide, leaving it off
-       drops the pager from the index entirely; the posts it lists are indexed
-       as their own pages anyway, so nothing becomes unreachable. */}}
+       PAGERS ARE NOT INDEXED: every pager renders the same page with a
+       different slice of cards, so tagging them makes one author a result
+       once per pager. $pageNum is 0 exactly on the pages worth a result. */}}
   <main class="site-main" id="main"{{ if not $pageNum }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
@@ -254,15 +161,10 @@
 
   {{/* Interactive widgets migrated from WordPress — loaded only on the pages
        that use them (flags set by the conversion scripts). */}}
-  {{/* Loaded whenever the RENDERED page actually contains an EnlighterJS block.
-       There is NO `enlighterjs:` frontmatter flag any more -- an author writes a
-       fence and highlighting happens, which is one less thing to know and one
-       less thing to forget. Code reaches the page as a plain ```fence turned
-       into EnlighterJS markup by
-       layouts/_default/_markup/render-codeblock.html, so a contributor writing
-       a fenced block gets highlighting without knowing the flag exists — and
-       can't ship a post where the code silently isn't highlighted because they
-       forgot it. The flag is still honoured for any page that sets it. */}}
+  {{/* Loaded whenever the RENDERED page contains an EnlighterJS block -- no
+       `enlighterjs:` frontmatter flag to know or to forget. An author writes a
+       fence, render-codeblock.html turns it into the markup, and this finds
+       it. The flag is still honoured for any page that sets it. */}}
   {{ if strings.Contains (partialCached "article-html.html" . .RelPermalink) "EnlighterJSRAW" }}{{ partial "enlighterjs.html" . }}{{ end }}
   {{/* Same rule for mermaid diagrams, and for the same reasons: derived from
        the rendered page rather than a `mermaid:` frontmatter flag, so an author
@@ -271,10 +173,9 @@
   {{ if strings.Contains (partialCached "article-html.html" . .RelPermalink) "<pre class=\"mermaid\">" }}{{ partial "mermaid.html" . }}{{ end }}
   {{ if .Params.jdoodle }}{{ partial "jdoodle.html" . }}{{ end }}
 
-  {{/* Counts this read. The partial decides for itself whether this page is
-       counted (partials/views-key.html) and renders nothing when it isn't or
-       when [params.views] endpoint is unset -- so which sections have a read
-       counter is defined in exactly one place, not repeated here. */}}
+  {{/* Counts this read. The partial decides for itself whether the page is
+       counted (views-key.html) and renders nothing otherwise, so the list of
+       counted sections lives in one place. */}}
   {{ partial "views-beacon.html" . }}
 </body>
 </html>

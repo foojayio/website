@@ -13,16 +13,14 @@
   {{ with $a.Params.youtube }}<li><a href="{{ . }}" rel="noopener" target="_blank">YouTube</a></li>{{ end }}
   {{ with $a.Params.twitter }}<li><a href="{{ . }}" rel="noopener" target="_blank">Twitter/X</a></li>{{ end }}
   {{ with $a.Params.website }}<li><a href="{{ . }}" rel="noopener" target="_blank">Website</a></li>{{ end }}
-  {{/* RSS output is enabled per author via the cascade in content/authors/_index.md
-       (see themes/foojay/layouts/author/section.rss.xml). Shown here rather than
-       gated on a specific social param so it appears both on the author's own
-       profile page and in the "Written by" callout on each of their posts.
+  {{/* RSS output is enabled per author by the cascade in
+       content/authors/_index.md. Shown here rather than gated on a social
+       param, so it appears on the profile AND in the "Written by" callout.
 
-       Through partials/feed-link.html, like every other feed offer on the site:
-       this was a plain "RSS" pill, so the one control a reader learns to look
-       for looked different on 348 profiles from everywhere else. It is the same
-       pill as its neighbours by design -- .feed-link and .author-social a carry
-       the same size, weight, padding and border -- plus the RSS mark. */}}
+       Through partials/feed-link.html, like every other feed offer on the
+       site, so the one control a reader learns to look for looks the same
+       everywhere. .feed-link and .author-social a share a size, weight,
+       padding and border by design. */}}
   {{ with $rss }}<li>{{ partial "feed-link.html" $a }}</li>{{ end }}
 </ul>
 {{- end -}}

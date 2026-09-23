@@ -1,17 +1,12 @@
 {{- /*
   The site feed: the newest posts, and nothing else.
 
-  Hugo's embedded RSS template ranges over the home page's .RegularPages, which
-  here means every page on the site -- so /index.xml shipped 2584 items and
-  3.85 MB, led by the Java Quick Start tutorial steps carrying `pubDate Mon, 01
-  Jan 0001` because those pages have no date. A reader polling that on a phone
-  pays for the whole archive every time, and some aggregators drop an item whose
-  pubDate won't parse.
+  Hugo's embedded RSS template ranges over the home page's .RegularPages,
+  which is EVERY page on the site -- thousands of items, including dateless
+  ones carrying `pubDate Mon, 01 Jan 0001`, which some aggregators drop.
 
-  So: filtered to Section "posts" (a feed of "what's new on foojay" means
-  articles, which is also what the WordPress feed served), newest first, and cut
-  to [services.rss] limit in hugo.toml -- the same value the section, term and
-  per-author feeds honour, so there is one number to change.
+  So: filtered to Section "posts", newest first, cut to [services.rss] limit
+  -- the same value the section, term and per-author feeds honour.
 */ -}}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- $posts = $posts.ByDate.Reverse -}}

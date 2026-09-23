@@ -1,35 +1,21 @@
-{{- /* "Thanks to our sponsors" sidebar widget.
+{{- /* "Thanks to our sponsors" sidebar widget, driven by content/sponsors/
+       -- the same bundles behind /our-sponsors/ and each profile.
 
-       Driven by content/sponsors/ (the same bundles behind /our-sponsors/ and
-       each /sponsor/<slug>/ profile), so adding a sponsor is one re-run of
-       scripts/transfer/Sponsors.java and nothing here has to change. It replaces
-       an older scaffold that read a `params.sponsors` list from hugo.toml which
-       was never populated -- meaning the widget silently rendered nothing.
+       ROWS PER TIER, not one row per sponsor: as a vertical list this was
+       ~420px of a sticky column that also carries a TOC and a banner, so the
+       lower tiers sat below the fold -- the opposite of what a sponsor pays
+       for. Grouped, every tier is visible at once in half the height.
 
-       ROWS PER TIER, not one row per sponsor. As a vertical list of seven
-       logo+name+tier rows this was ~420px of a sticky column that also carries
-       the table of contents and a banner, so the lower tiers sat below the fold
-       on most screens -- the opposite of what a sponsor pays for. Grouped, the
-       same seven sponsors are three rows of logos in about half the height, and
-       every tier is visible at once.
+       Tier sets both the ORDER (gold, silver, bronze, alphabetical within) and
+       the SIZE, so the placement reflects what each tier pays for. There is no
+       per-sponsor name caption: the row says the tier once, and the logo's alt
+       carries the sponsor's name, so the link keeps its accessible name.
 
-       Tier still does both jobs it did before: it sets the ORDER (gold, silver,
-       bronze, alphabetical within each) and the SIZE (gold largest), so the
-       placement visibly reflects what each tier pays for -- the sidebar
-       equivalent of the tier grouping on /our-sponsors/. What went is the
-       per-sponsor NAME and tier caption: the row now says the tier once instead
-       of repeating it on every logo, and the logo's alt text still carries the
-       sponsor's name, so the link keeps its accessible name and its tooltip.
+       Order comes from sponsors-ordered.html, which also guarantees that a
+       sponsor on a tier missing from `tiers` is appended rather than dropped.
 
-       Order comes from sponsors-ordered.html rather than being re-derived here,
-       which is also what preserves its guarantee that a sponsor on a tier
-       missing from `tiers` is appended rather than silently dropped -- the
-       untiered row at the bottom.
-
-       Unlike the authors/JUGs widgets, this is NOT dropped on pages with a
-       table of contents: sponsor visibility is contractual, so it stays on
-       every page the sidebar appears on. It sits under the TOC and the banner
-       slot for that reason. */ -}}
+       Unlike the authors/JUGs widgets this is NOT dropped on pages with a
+       TOC: sponsor visibility is contractual. */ -}}
 {{- $section := site.GetPage "/sponsors" -}}
 {{- with $section -}}
 {{- $ordered := partial "sponsors-ordered.html" . -}}
@@ -58,10 +44,8 @@
     {{- end }}
     {{- end }}
 
-    {{- /* Anything on a tier that is not in the list. Rendered rather than
-           dropped, for the same reason sponsors-ordered.html appends them: a
-           tier renamed upstream must not make a paying sponsor disappear from
-           the sidebar with nothing to show that it happened. */}}
+    {{- /* Anything on a tier not in the list. Rendered rather than
+           dropped: a renamed tier must not make a paying sponsor vanish. */}}
     {{- $untiered := where $ordered "Params.tier" "not in" $known }}
     {{- with $untiered }}
     <div class="sponsor-tier sponsor-tier--other">

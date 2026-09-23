@@ -1,19 +1,10 @@
-{{/* Every event on the calendar, from BOTH of its sources, flattened into one
-     slice with one set of keys.
+{{/* THE SINGLE DEFINITION OF AN EVENT HERE: both sources flattened into one
+     slice with one set of keys. /calendar/ and the home page band both call
+     it, so they cannot disagree about a date, a place or a colour.
 
-     This is the single definition of what an event is here -- /calendar/
-     (layouts/events/single.html) and the home page band
-     (partials/upcoming-events.html) both call it, so neither can disagree with
-     the other about a date, a place or a colour, and a third caller gets all of
-     it for free. Same reasoning as partials/sponsor-posts.html and
-     partials/board-members.html.
-
-     Every key on an event is a formatted STRING for reading, with two
-     exceptions: `sort` (the instant, for ordering) and `startISO` (the instant,
-     for a consumer that has to format it in a way nothing on the page needs --
-     /calendar/'s RSS feed wants an RFC-1123 pubDate). Rebuilding that from
-     `date` + `time` + `offset` in the caller is three keys and a printf to say
-     what one key says.
+     Every key is a formatted STRING for reading, except `sort` (the instant,
+     for ordering) and `startISO` (the instant, for a consumer needing a format
+     nothing on the page uses -- the RSS feed's RFC-1123 pubDate).
 
      Returns a dict:
        events      every upcoming event, sorted by start time
@@ -21,8 +12,7 @@
        errored     names of JUG groups whose last sync failed
        generatedAt when the JUG feed was last synced
 
-     Cached: the result depends on the data files, not on the page, so it is
-     built once per build rather than once per caller. */}}
+     Cached: the result depends on the data files, not on the page. */}}
 
 {{ $data := index hugo.Data "jug-events" }}
 
@@ -33,12 +23,11 @@
   {{ $jugBySlug = merge $jugBySlug (dict .slug .) }}
 {{ end }}
 
-{{/* Flatten groups -> events, and enrich each one with everything the grid,
-     the agenda and the detail dialog need, so neither the templates below nor
-     the JavaScript has to re-derive it. Times are formatted here, in the
-     event's OWN offset (that is what the JUG means by "19:00" and what Meetup
-     shows); rebuilding them from the ISO string in the browser would silently
-     restate them in the reader's zone instead. */}}
+{{/* Flatten groups -> events, enriched with everything the grid, the agenda
+     and the dialog need, so nothing downstream re-derives it. Times are
+     formatted in the event's OWN offset -- that is what the JUG means by
+     "19:00"; formatting in the browser would restate it in the reader's
+     zone. */}}
 {{ $events := slice }}
 {{ $errored := slice }}
 {{ range $g := $data.groups }}
@@ -52,10 +41,8 @@
        colour everywhere on the page without a colour ever being configured. */}}
   {{ $hue := mod (hash.FNV32a $g.jug) 360 }}
   {{ range $e := ($g.events | default slice) }}
-    {{/* One string for where the event is: "Online", else venue + city as the
-         JSON-LD gave them, else nothing (and the templates below fall back to
-         the JUG's country). Built once here so the grid, the agenda and the
-         dialog can't disagree about it. */}}
+    {{/* One string for where the event is: "Online", else venue + city, else
+         nothing (and the templates fall back to the JUG's country). */}}
     {{ $place := "" }}
     {{ if eq $e.online true }}
       {{ $place = "Online" }}
@@ -65,10 +52,8 @@
       {{ with $e.city }}{{ $parts = $parts | append . }}{{ end }}
       {{ $place = delimit $parts ", " }}
     {{ end }}
-    {{/* The short form, for a month-grid cell ~140px wide: the city alone
-         ("Darmstadt"), not the whole venue line ("DICOS GmbH
-         Kommunikationssysteme, Darmstadt"). Falls back to the venue and then
-         to the JUG's country, so a chip always says where. */}}
+    {{/* The short form for a ~140px month-grid cell: the city alone, falling
+         back to the venue and then the country, so a chip always says where. */}}
     {{ $placeShort := "" }}
     {{ if eq $e.online true }}
       {{ $placeShort = "Online" }}
@@ -83,11 +68,10 @@
       {{ $endDate = $end.Format "2006-01-02" }}
       {{ $endTime = $end.Format "15:04" }}
     {{ end }}
-    {{/* A meetup occupies ONE cell in the month grid even when its feed claims
-         an end a week later: a handful of recurring "Stammtisch" entries carry
-         exactly that, and smearing them across seven days would fill the grid
-         with an upstream typo. A conference below genuinely spans its days,
-         which is why `days` exists at all. */}}
+    {{/* A meetup occupies ONE cell even when its feed claims an end a week
+         later -- some recurring entries do, and smearing them across seven
+         days fills the grid with an upstream typo. A conference genuinely
+         spans its days, which is why `days` exists. */}}
     {{ $events = $events | append (dict
         "kind"       "meetup"
         "days"       (slice ($start.Format "2006-01-02"))
@@ -123,21 +107,15 @@
   {{ end }}
 {{ end }}
 
-{{/* ------------------------------------------------------------------------
-     Hand-added events: data/events/<slug>.yaml, one file per event, opened as
-     a pull request (data/events/README.md is the contributor's instructions,
-     template/event.yaml the starter file, and
-     Frontmatter.checkEvents the PR-time check).
+{{/* Hand-added events: data/events/<slug>.yaml, one file per event, opened
+     as a pull request (see data/events/README.md, template/event.yaml, and
+     Frontmatter.checkEvents).
 
-     They land in the same $events slice as the JUG meetups above and carry the
-     same keys, so the grid, the agenda, the dialog and the JSON island stay
-     one code path -- the ONLY thing that differs downstream is `kind`.
-
-     Everything here is derived from the file except the eight fields the
-     README documents: the colour from the filename, the day cells a
-     conference occupies from its dates, the counts in the page header from
-     the entries themselves.
-     ------------------------------------------------------------------------ */}}
+     They land in the same $events slice with the same keys, so everything
+     downstream stays one code path -- `kind` is the only difference.
+     Everything but the eight documented fields is derived: the colour from
+     the filename, the day cells from the dates, the header counts from the
+     entries. */}}
 {{ $today := now.Format "2006-01-02" }}
 {{ $conferences := slice }}
 {{ range $slug, $c := (index hugo.Data "events" | default dict) }}
@@ -163,9 +141,8 @@
       {{ $allDay := and (eq $start.Hour 0) (eq $start.Minute 0) }}
 
       {{/* Every date the event covers, so a five-day conference is five cells
-           in the month grid rather than one chip on the Monday. Capped: a
-           mistyped year would otherwise expand into thousands of entries, and
-           the PR check rejects a span this long anyway. */}}
+           rather than one chip on the Monday. Capped, because a mistyped year
+           would expand into thousands of entries. */}}
       {{ $span := int (div (sub $end.Unix $start.Unix) 86400) }}
       {{ if lt $span 0 }}{{ $span = 0 }}{{ end }}
       {{ if gt $span 30 }}{{ $span = 30 }}{{ end }}
@@ -251,43 +228,27 @@
 
 {{ $events = sort $events "sort" }}
 
-{{/* ---------------------------------------------------------------------
-     A ZONE LABEL, BUT ONLY ON A DAY THAT ACTUALLY NEEDS ONE.
+{{/* A ZONE LABEL, BUT ONLY ON A DAY THAT NEEDS ONE.
 
-     Every event is sorted on `sort`, which is the real instant, so the order is
-     always right. What is not obvious is that each row prints the time in its
-     OWN offset, which is what the JUG means by "18:30" and what Meetup shows.
-     Put those two together on a day that spans continents and a correctly
-     ordered column reads as a broken one:
+     Events sort on `sort`, the real instant, but each row prints the time in
+     its OWN offset -- what the JUG announced. On a day spanning continents a
+     correctly ordered column therefore reads as a broken one:
 
        18:00  Philip Riecks           Germany   (16:00 UTC)
-       18:00  Softwarearchitektur     Jena      (16:00 UTC)
        19:00  Java, Spring Boot...    Hamburg   (17:00 UTC)
        18:30  An Engineer's Guide     USA       (23:30 UTC)  <- genuinely last
 
-     Re-sorting on the printed clock would "fix" the column by lying: it would
-     put an event starting at half past midnight European time above one that
-     starts at seven in the evening. Restating every time in the reader's own
-     zone is the other tempting fix and is ruled out on the same grounds the
-     times are server-rendered in the first place -- 19:00 is the thing the JUG
-     announced.
+     Sorting on the printed clock would fix the column by lying, and restating
+     every time in the reader's zone throws away the announced time. So the
+     ORDER stays and the ambiguity gets NAMED: a day whose events do not share
+     one UTC offset prints the offset beside each time, and no other day does.
+     Offsets come off the events, not from a list of zones, so an unfamiliar
+     region is handled by arithmetic.
 
-     So the ORDER stays and the ambiguity gets named. A day whose events do not
-     all share one UTC offset gets the offset printed next to each of its times;
-     every other day is untouched. Measured on the current feed that is 5 days
-     out of 41, so this is a label that turns up where it explains something and
-     nowhere else.
-
-     Offsets come off the events rather than from a list of zones, so a JUG in a
-     region nobody thought about is handled by arithmetic.
-
-     ONLY CLOCK-BEARING EVENTS COUNT, on both sides of this. An all-day entry has
-     no time to qualify, and a date-only `start` in data/events/*.yaml parses as
-     UTC midnight -- so counting those would (a) hang a meaningless "UTC" on a
-     conference that shows "8-9 September" rather than a clock, and (b) make a day
-     look mixed because of a phantom +0000 that is not a timezone claim at all.
-     IntelliJ IDEA Conf 2026 does exactly this to 8 September, a day with one
-     clock on it and nothing to disambiguate. ------------------------------- */}}
+     ONLY CLOCK-BEARING EVENTS COUNT, on both sides. A date-only `start`
+     parses as UTC midnight, so counting those would hang a meaningless "UTC"
+     on a conference that shows "8-9 September", and make a day look mixed
+     over a phantom +0000 that is not a timezone claim. */}}
 {{ $offsetsByDay := dict }}
 {{ range $e := $events }}
   {{ if and (not $e.allDay) (eq (len $e.days) 1) }}

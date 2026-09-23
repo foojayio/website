@@ -1,34 +1,17 @@
 {{ define "main" }}
 {{/* /calendar/ -- the events calendar.
 
-     TWO SOURCES, one calendar, and the difference between them is whether the
-     event publishes a feed:
+     TWO SOURCES, split on whether the event publishes a feed: JUG meetups
+     from data/jug-events.json (written daily by fetch/JugEvents.java), and
+     everything else from data/events/<slug>.yaml, one hand-written file per
+     event. The generated JSON is overwritten daily, so a hand-added event
+     cannot live in it; it is named jug-events.json because data/events.json
+     and a data/events/ folder would share one key in hugo.Data.
 
-     1. JUG meetups come from data/jug-events.json (written daily by
-        scripts/fetch/JugEvents.java from whatever iCal feed each JUG
-        publishes -- its own .ics, a Google Calendar, or Meetup's export),
-        joined to data/jugs.yaml on the group's `jug` slug for the country.
-     2. Conferences and anything else with no feed come from
-        data/events/<slug>.yaml, one hand-written file per event, added
-        through a pull request. A conference publishes no iCal feed to
-        scrape, and that generated JSON is overwritten every single day, so
-        a hand-added event cannot live in it -- see data/events/README.md.
-
-     The generated file is named jug-events.json rather than events.json for
-     exactly that reason: data/events.json and a data/events/ folder share one
-     key in hugo.Data, and merging a generated feed with hand-written entries
-     into one namespace is a collision waiting to happen.
-
-     Everything a reader sees is still derived: the page file holds a one-line
-     intro and this layout does the rest, the same way /jugs/ and
-     /java-champions/ work.
-
-     Two renderings of one set of events, and only one of them is content: the
-     agenda list below is server-rendered (so it is what Pagefind indexes and
-     what a reader without JavaScript gets), and the month grid is a
-     visualisation of the same events built client-side from the JSON island.
-     The toolbar starts `hidden` because every control on it is JS-only --
-     without the script the page is simply the agenda. */}}
+     TWO RENDERINGS, only one of them content: the agenda list is
+     server-rendered (what Pagefind indexes, and what a reader without
+     JavaScript gets), the month grid is built client-side from the JSON
+     island. The toolbar starts `hidden` because its controls are JS-only. */}}
 
 {{/* Every event, from both sources, with all of its display fields already
      worked out -- see partials/calendar-events.html, which the home page band
@@ -38,11 +21,9 @@
 {{ $conferences := $cal.conferences }}
 {{ $errored := $cal.errored }}
 
-{{/* Where a contributor goes to add one: the starter file, not the folder --
-     template/event.yaml documents every field in its comments, and the first
-     instruction in it is where to copy it to. Landing on the folder means
-     landing on eight filled-in examples and no schema. Derived from the giscus
-     repo setting rather than hardcoded, so a repo rename moves every link. */}}
+{{/* The starter FILE, not the folder: template/event.yaml documents every
+     field in its comments, where the folder is examples and no schema.
+     Derived from the giscus repo setting, so a rename moves every link. */}}
 {{ $repo := printf "https://github.com/%s" (site.Params.giscus.repo | default "foojayio/website") }}
 {{ $repoEvents := printf "%s/blob/main/template/event.yaml" $repo }}
 
@@ -89,18 +70,12 @@
       </p>
       {{ end }}
     </div>
-    {{/* OUTSIDE .page-head__meta, like every other page head that has one.
-         It used to sit inside it, and .page-head__meta is a flex row while
-         .page-head__views carries a `margin-top` meant for sitting BELOW that
-         row -- so the read count rendered on the stats line but half a line
-         lower than everything on it. The count is also a different kind of
-         number from the ones beside it: those describe the calendar, this
-         describes the page, and running them together invited reading it as a
-         fifth calendar statistic. */}}
-    {{/* The read count and the feed link share this line -- .page-head__views is
-         a flex row (style.css). The feed belongs next to the count rather than
-         on the stats row above for the same reason the count does: both are
-         about this PAGE, where the numbers up there describe the calendar. */}}
+    {{/* OUTSIDE .page-head__meta, like every other page head: that is a flex
+         row, and .page-head__views has a margin-top meant for sitting below
+         it. The count is also a different KIND of number -- the ones above
+         describe the calendar, this describes the page. */}}
+    {{/* The feed sits with the read count, not on the stats row: both are about
+         this PAGE, where the numbers above describe the calendar. */}}
     {{ $views := partial "views.html" . }}
     {{ $feed := partial "feed-link.html" . }}
     {{ if or $views $feed }}
@@ -115,12 +90,10 @@
   {{ if $events }}
   <div class="calendar" data-calendar>
     <aside class="calendar__aside">
-      {{/* The two routes onto this calendar, as two buttons, because they are
-           genuinely different jobs: an event is a pull request against this
-           repo, while a JUG's meetups sync from its own feed once its entry
-           exists upstream. Adding an event leads, and is the accent button,
-           because it is the one a reader of this page can act on today -- the
-           JUG route is for the handful of people who run one. */}}
+      {{/* Two buttons because they are genuinely different jobs: an event is a
+           pull request here, a JUG's meetups sync from its own feed once its
+           entry exists upstream. Adding an event leads, as the one a reader
+           of this page can act on today. */}}
       <div class="cal-ctas">
         <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
         <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
@@ -128,16 +101,12 @@
 
       {{ with $conferences }}
       <section class="cal-legend">
-        {{/* The count is not decoration: the list below is capped and scrolls,
-             so without it a reader seeing eight rows has no way to know whether
-             that is all of them. It also means the scroll cap can change without
-             anyone having to restate a number here. */}}
+        {{/* Not decoration: the list is capped and scrolls, so without it a
+             reader seeing eight rows cannot tell whether that is all. */}}
         <h2 class="cal-legend__head" id="cal-legend-conferences">Conferences &amp; community events <span class="cal-legend__total">{{ len . }}</span></h2>
-        {{/* The SCROLLER is this wrapper, not the <ul>, so the list keeps its
-             list semantics (a screen reader still announces "list, N items") --
-             putting role="group" on the <ul> itself would strip them. tabindex
-             makes it scrollable from the keyboard: both lists hold links, so tab
-             reaches the rows, but only by walking through every one of them. */}}
+        {{/* The SCROLLER is this wrapper, not the <ul>: role="group" on the
+             <ul> would strip its list semantics. tabindex makes it scrollable
+             from the keyboard without tabbing through every row. */}}
         <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-conferences">
         <ul class="cal-legend__list">
           {{ range . }}
@@ -174,10 +143,9 @@
         </div>
       </section>
     
-      {{/* This page builds its own rail (the two legends), so it never went
-           through partials/sidebar.html and never showed the sponsors. Last,
-           under the legends, because those are the key to the calendar beside
-           them and have to stay next to it. */}}
+      {{/* This page builds its own rail, so it never goes through
+           partials/sidebar.html. Last, under the legends, which are the key
+           to the calendar beside them and have to stay next to it. */}}
       {{ partial "sidebar-sponsors.html" . }}
     </aside>
 
@@ -226,16 +194,13 @@
                     <p class="cal-row__meta">
                       <span class="cal-dot" aria-hidden="true"></span>
                       <span class="cal-row__group">{{ $e.group }}</span>
-                      {{/* `when` is built once, per source: "19:00-21:00" for a
-                           meetup, "5-9 October" for a multi-day conference, and
-                           empty for a single all-day one -- where the date
-                           beside the row already says everything. */}}
-                      {{/* `zone` is set only on a day whose events do NOT all
-                           share one UTC offset -- see calendar-events.html. The
-                           rows are ordered by the real instant, so on such a day
-                           an 18:30 in Chicago correctly sits below a 19:00 in
-                           Hamburg, and without the offset that reads as a broken
-                           sort rather than as two different afternoons. */}}
+                      {{/* `when` is built once, per source: "19:00-21:00" for
+                           a meetup, "5-9 October" for a multi-day conference,
+                           empty for a single all-day one. */}}
+                      {{/* `zone` is set only on a day whose events do NOT
+                           share one UTC offset -- see calendar-events.html.
+                           Rows sort on the real instant, so without it an
+                           18:30 below a 19:00 reads as a broken sort. */}}
                       {{ with $e.when }}<span class="cal-row__sep">&middot;</span><span class="cal-row__time">{{ . }}{{ with $e.zone }} <span class="cal-row__zone">{{ . }}</span>{{ end }}</span>{{ end }}
                       {{/* Only a meetup gets the "until" tail: a conference's
                            span is already in `when`, and repeating it would read
@@ -256,13 +221,10 @@
     </div>
   </div>
 
-  {{/* Same note, and the same reason, as the one on /jugs/: the data behind
-       this page is regenerated on a schedule, so say where it comes from
-       where it is actually shown rather than only in a code comment.
-
-       Full width, under the calendar, rather than in the rail: it is the one
-       piece of prose here, and at 300px it ran long enough to push the two
-       legends into a scroll they didn't need. */}}
+  {{/* Same note as /jugs/: the data is regenerated on a schedule, so say
+       where it comes from where it is shown, not only in a code comment.
+       Full width under the calendar, since at 300px it pushed the legends
+       into a scroll they did not need. */}}
   <p class="cal-source">
     JUG meetups are pulled from the calendar each group publishes, via the community-run
     <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>

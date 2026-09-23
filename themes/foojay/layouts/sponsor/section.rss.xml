@@ -1,22 +1,14 @@
 {{- /*
   A sponsor's feed: the articles attributed to that sponsor, newest first.
 
-  Every sponsor profile has had a feed since [outputs] in hugo.toml gave one to
-  every `section`, and a sponsor bundle became a section so .Paginate would take
-  it -- but a sponsor section has no child pages, so Hugo's embedded RSS template
-  ranged over nothing and shipped an EMPTY <channel>, advertised in <head> on all
-  7 profiles. A reader could subscribe and receive nothing, for ever. Verified
-  before this template existed: 0 <item>s in every one of them.
+  A sponsor bundle is a section only so .Paginate will take it, and it has no
+  CHILD pages -- so Hugo's embedded RSS template ranges over nothing and ships
+  an EMPTY <channel>, advertised in <head>. See author/section.rss.xml for the
+  same trap.
 
-  So the feed lists what the PAGE lists. partials/sponsor-posts.html is the one
-  definition of "a sponsor's articles" -- it resolves the `authors:` list,
-  including the from:/till: windows for people who have changed employer -- so
-  the feed cannot credit the sponsor with an article their page does not show,
-  which on a page with money attached is the failure that matters.
-
-  Same shape and the same [services.rss] limit as layouts/author/section.rss.xml
-  next door; that one is worth reading for why a per-page feed needs a template
-  at all.
+  So the feed lists what the PAGE lists: partials/sponsor-posts.html is the one
+  definition of "a sponsor's articles", from:/till: windows included, so the
+  feed cannot credit the sponsor with an article their page does not show.
 */ -}}
 {{- $posts := partial "sponsor-posts.html" . -}}
 {{- $limit := site.Config.Services.RSS.Limit -}}

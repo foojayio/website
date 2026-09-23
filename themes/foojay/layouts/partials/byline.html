@@ -1,80 +1,31 @@
-{{/* Renders a post's author byline. Posts can have multiple authors
-     (`authors:` list); falls back to the legacy single `author:` slug so
-     not-yet-reconverted posts still show a byline.
+{{/* A post's author byline. Posts carry an `authors:` list; a legacy single
+     `author:` slug still works.
 
-     Called either with the Page -- the normal case -- or with a dict:
+     Called with the Page, or with a dict:
        page          the Page (required)
-       maxNames      above this many authors, render "N authors" instead of the
-                     names (0, the default, always names everyone)
-       pagefindMeta  stamp data-pagefind-meta="author" on the wrapper, so the
-                     names become the "author" meta key of this page's search
-                     result (see below)
-       avatars       show each author's face before their name (default false).
-                     Above ONE author this becomes a row of overlapping faces
-                     plus a count instead -- see the $pile branch.
+       maxNames      above this many authors, render "N authors" instead of
+                     the names (0, the default, always names everyone)
+       pagefindMeta  stamp data-pagefind-meta="author" on the wrapper
+       avatars       show each author's face before their name (default
+                     false). Above ONE author this becomes a row of
+                     overlapping faces plus a count -- the $pile branch.
 
-     `maxNames 1` is what the related-posts cards pass. A podcast episode can
-     credit a dozen people -- foojay-podcast-94 credits twelve -- and in a
-     ~178px card that byline is taller than the thumbnail above it and buries
-     the title and date, which are what a reader actually picks the next
-     article on. It is a count rather than a truncated list ("Frank Delporte
-     and 11 others") because at this size the first name is not more meaningful
-     than the rest, it is just the one that sorted first.
+     THE .byline-group WRAPPER IS LOAD-BEARING, and belongs here rather than
+     in each caller. Every place a byline appears is a flex row with a `gap`,
+     and a flex container makes EVERY child its own item -- so without the
+     wrapper the gap applies around the ", " too, rendering "Dominika Tasarz ,
+     Luqman Saeed".
 
-     The collapsed form is a <span>, not a link: there is no single author page
-     to send twelve people to, and the card's title link already goes to the
-     post that names them.
+     `avatars` PUTS THE FACE INSIDE THE LINK, not beside it: the picture and
+     the name are one person, so one hover target and one tab stop. alt="" for
+     the same reason -- the name is in the same link, so a described image
+     would announce the person twice.
 
-     THE .byline-group WRAPPER IS LOAD-BEARING, and it belongs here rather than
-     in each caller. Every place a byline appears is a flex row with a `gap`
-     (.post-meta, .post-card-meta), and a flex container makes EVERY child its
-     own item -- so without the wrapper the names and the ", " between them were
-     separate items and the gap was applied around the comma too, rendering
-     "Dominika Tasarz , Luqman Saeed". Wrapped, the flex row sees one item and
-     the names and commas inside it flow as ordinary inline text. posts/single.html
-     used to add this wrapper itself, which is exactly why the post header looked
-     right and the cards did not.
-
-     `avatars` PUTS THE FACE INSIDE THE LINK, not beside it. The picture and
-     the name are one person, so they should be one hover target and one tab
-     stop; a sibling <a> would give a keyboard user two stops that go to the
-     same page. It carries alt="" for the same reason -- the name is right
-     there in the same link, so a described image would have a screen reader
-     announce the person twice.
-
-     It is opt-in because a face is not always the useful thing. The related-
-     posts strip does not take it -- see `compact` in post-card.html: at ~178px
-     the byline is already collapsing to "12 authors".
-
-     THE ARTICLE PAGE TAKES IT, and takes it whole -- pile included -- so the
-     byline under a post title is the SAME element as the byline on that post's
-     card, not a variant of it. An earlier attempt suppressed the pile there,
-     reasoning that a full-width header has room for every name; that made the
-     two places differ for a reason no reader can see, which is worse than
-     either choice on its own.
-
-     Keeping the pile there did need the metadata fixed. posts/single.html is
-     the one caller passing `pagefindMeta`, and the collapsed form's visible
-     text is "2 authors" -- which would otherwise become the author metadata of
-     all 161 co-authored posts in site search. So the pile branch stamps the
-     names EXPLICITLY (`author:<names>`) instead of letting Pagefind read them
-     off the element. What the eye gets and what the index gets may differ
-     here; what the index gets must still be the authors.
-
-     An author's OWN page does take it, which is worth saying because the
-     opposite looks right at first: every card there is by the same person, so
-     the portrait beside each one repeats what the profile at the top already
-     shows. It earns its place on the co-authored posts, where the pile is the
-     only thing on the page that says who else was involved.
-
-     `pagefindMeta` IS OPT-IN, and must stay opt-in -- the same shape as
-     sponsor-logo.html / board-logo.html's `pagefindImage`, and for the same
-     reason. Pagefind takes the LAST element carrying a given meta key on a
-     page, and this partial renders on every post card too: on `/today/` that is
-     ten cards inside data-pagefind-body, so stamping the attribute here
-     unconditionally would give the archive listing the byline of whichever post
-     sorted last. Only a page whose byline is its OWN passes the flag, which
-     today is posts/single.html. */}}
+     `pagefindMeta` IS OPT-IN AND MUST STAY OPT-IN. Pagefind takes the LAST
+     element carrying a given meta key on a page, and this partial renders on
+     every post card too -- so stamping it unconditionally would give /today/
+     the byline of whichever post sorted last. Only a page whose byline is its
+     OWN passes the flag. */}}
 {{ $p := . }}
 {{ $maxNames := 0 }}
 {{ $pagefindMeta := false }}
@@ -89,8 +40,8 @@
 {{ $authors := .Params.authors }}
 {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
 {{- $pile := and $avatars (ge (len $authors) 2) -}}
-{{- /* Resolved before the wrapper, because the WRAPPER carries them when the
-       names are not in the visible text -- see the metadata note above. */ -}}
+{{- /* Resolved before the wrapper, because the wrapper carries them when the
+       names are not in the visible text -- see $pile below. */ -}}
 {{- $names := slice -}}
 {{- range $authors -}}
   {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
@@ -99,40 +50,25 @@
 <span class="byline-group{{ if $avatars }} byline-group--avatars{{ end }}"
   {{- if $pagefindMeta }} data-pagefind-meta="author{{ if $pile }}:{{ delimit $names ", " }}{{ end }}"{{ end }}>
 {{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) (not $pile) }}
-  {{- /* "N authors", never "N author": the branch only runs above maxNames,
-         which is at least 1, so the plural always holds. */ -}}
+  {{- /* Always plural: the branch only runs above maxNames, which is >= 1. */ -}}
   <span class="byline">{{ len $authors }} authors</span>
 {{- else if $pile -}}
-  {{- /* MORE THAN ONE, WITH FACES: a row of overlapping portraits and a count,
-         never a list. 161 posts are in this branch and one of them credits
-         twelve people: spelled out with a portrait each, that byline was three
-         wrapped lines pushing the title off the card, which is the same problem
-         `maxNames` was added for and the reason the collapsed form exists.
+  {{- /* MORE THAN ONE, WITH FACES: overlapping portraits and a count, never a
+         list. THE THRESHOLD IS TWO, AND IT IS MEASURED: in a 379px card, two
+         faces with both names needs 428px and wraps the view count onto a
+         second line, where the count form needs 265px. Whether the name form
+         fits depends on how long the two names happen to be, so keeping it for
+         two would wrap some cards and not others for no visible reason.
 
-         THE THRESHOLD IS TWO, NOT THREE, AND IT IS MEASURED RATHER THAN GUESSED.
-         In a 379px card, two faces with both names needs 428px and wraps the
-         view count onto a second line; piling the faces first still needs 408px.
-         The count form needs 265px. Since whether the name form fits depends on
-         how long the two names happen to be, keeping it for two authors means
-         some cards wrap and some do not, for no reason a reader can see -- so
-         two collapses like twelve does. The lead card is no exception: its text
-         column is a 1fr half of a 1.15fr/1fr split, narrower still than a grid
-         card.
+         The faces are individually linked, so this is MORE navigable than the
+         text form, not less. Each carries the name as `alt` and again in
+         `data-name`, which is what the hover label prints (`title` would show
+         after the browser's own delay, unstyleable, and double up). The count
+         is then decoration, hence aria-hidden.
 
-         The faces are individually linked, so unlike the plain "12 authors"
-         this does not cost the reader a way through to each person -- it is
-         MORE navigable than the text form, not less. Each carries the name as
-         its alt, so a screen reader announces the person, and again in
-         `data-name`, which is what the hover label prints. `title` would show a
-         name too, but only after the browser's own delay, in chrome that cannot
-         be styled, and it would then double up with the styled label. The count
-         beside the faces is decoration once the names are reachable, so it is
-         aria-hidden.
-
-         Four faces at most: beyond that the discs stop being recognisable
-         faces at 30px and just widen the row. There is deliberately no "+N"
-         chip on the end -- the count next to the row already says five, and a
-         chip repeating it is a second circle in the pile that is not a face. */ -}}
+         Four faces at most -- beyond that the discs stop being recognisable at
+         30px. No "+N" chip: the count beside the row already says five, and a
+         chip repeating it is a circle in the pile that is not a face. */ -}}
   <span class="byline-faces">
     {{- range $i, $slug := first 4 $authors -}}
       {{- $author := partial "author-page.html" $slug -}}
@@ -148,26 +84,22 @@
       {{- end -}}
     {{- end -}}
   </span>
-  {{- /* The count carries the FULL list, not just the four that fit as faces,
-         so hovering it answers "who are the other eight?" -- the one question
-         the pile cannot answer by itself. Same data-name/::after mechanism as a
-         face; the CSS lets this one wrap onto several lines. */ -}}
+  {{- /* The count carries the FULL list, not just the four faces, so hovering
+         it answers "who are the other eight?". Same data-name/::after
+         mechanism as a face, but allowed to wrap. */ -}}
   <span class="byline byline--count" data-name="{{ delimit $names ", " }}" aria-hidden="true">{{ len $authors }} authors</span>
 {{- else -}}
   {{ range $i, $slug := $authors }}
-    {{- /* The comma is for the text-only byline. With faces on, each portrait
-           already marks where one author ends and the next begins, and the
-           group's own flex gap does the spacing -- a comma there reads as
-           punctuation floating between two pictures. */ -}}
+    {{- /* The comma is for the text-only byline: with faces on, each portrait
+           already separates the authors and a comma floats between pictures. */ -}}
     {{- if and $i (not $avatars) }}<span class="byline-sep">, </span>{{ end -}}
     {{- $author := partial "author-page.html" $slug -}}
     {{- if $author -}}
       <a class="byline" href="{{ $author.RelPermalink }}">
         {{- if $avatars }}{{ with $author.Params.avatar -}}
-          {{/* width/height are the 2x pixels of the ~30px CSS box, so the space
-               is reserved before the image decodes and the card does not reflow
-               its title as the faces arrive. The source is 192x192 for every
-               one of the 354 author bundles, so there is headroom above this. */}}
+          {{/* width/height are the 2x pixels of the ~30px CSS box, so the
+               space is reserved before the image decodes and the card does not
+               reflow its title as the faces arrive. */}}
           <img class="byline-avatar" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}"
                alt="" loading="lazy" decoding="async" width="60" height="60">
         {{- end }}{{ end -}}

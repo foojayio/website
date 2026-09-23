@@ -1,22 +1,19 @@
-{{- /* The full-width, two-column lead card -- one post given the whole width
-       of the content column.
+{{- /* The full-width, two-column lead card -- one post given the whole
+       content column.
 
-       It is the CARD only: the tinted panel and the "Most recent post" label
-       around it belong to lead-posts.html, which is the single definition of how
-       the newest articles are spotlighted and which also has to label a GROUP of
-       same-day posts. Rendering it through anything else gives an untinted,
-       unlabelled wide card, which is a shape the site does not use. */ -}}
+       The CARD only: the tinted panel and the label around it belong to
+       lead-posts.html, which also has to label a GROUP of same-day posts.
+       Rendering this through anything else gives an untinted, unlabelled wide
+       card, which is a shape the site does not use. */ -}}
 <article class="post-card post-card--lead">
-  {{/* eager=true: this is the LCP element of the home page, so post-thumb.html
-       gives it fetchpriority="high" and no loading="lazy" -- without the hint
-       the browser gives it the same default priority as the ten card images
-       below the fold and schedules it behind the stylesheet and the fonts.
-       Same reasoning as the post hero in posts/single.html; the plain cards
-       stay lazy, because those really are below the fold.
+  {{/* eager=true: this is the home page's LCP element, so post-thumb.html
+       gives it fetchpriority="high" and no loading="lazy" -- otherwise the
+       browser schedules it with the ten card images below the fold. The plain
+       cards stay lazy, because those really are below it.
 
-       Rendered unconditionally, which this card needs more than the others do:
-       it is a two-column grid, so a lead post with no image used to leave the
-       right-hand half of the home page's first screen simply empty. */}}
+       Rendered UNCONDITIONALLY, which this card needs more than the others:
+       it is a two-column grid, so a lead post with no image would leave half
+       the home page's first screen empty. */}}
   {{ partial "post-thumb.html" (dict "page" . "eager" true) }}
   <div class="post-card-body">
     {{/* h3: the panel's label is the <h2> this card sits under. */}}

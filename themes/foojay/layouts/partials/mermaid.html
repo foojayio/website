@@ -1,28 +1,22 @@
-{{/* Mermaid diagrams (https://mermaid.js.org) for ```mermaid fences.
+{{/* Mermaid diagrams for ```mermaid fences.
 
-     VENDORED, like EnlighterJS, into themes/foojay/static/vendor/mermaid/
-     (v11.17.0, MIT). Not CDN-loaded, unlike Leaflet on /jugs/: this runs on
-     ARTICLE pages, and a third-party script on the content itself is the one
-     place this repo keeps first-party (see the analytics conventions in
-     AGENTS.md -- reviewable in a PR, pinned to a version, and it cannot break
-     2000 posts because someone else changed a URL).
+     VENDORED into themes/foojay/static/vendor/mermaid/ (v11.17.0, MIT), not
+     CDN-loaded: this runs on ARTICLE pages, and a third-party script on the
+     content itself is reviewable in a PR, pinned, and cannot break 2000 posts
+     because someone else changed a URL.
 
-     THE ESM BUILD, not the 3.4 MB single-file UMD one. mermaid.esm.min.mjs is
-     30 KB and dynamically imports only the chunks the diagram types on the page
-     actually need, so a page with one flowchart fetches a fraction of the
-     library instead of all of it. That is why vendor/mermaid/ is 104 files
-     rather than one -- the chunks are the lazy loads, referenced relatively by
-     the entry point, so the whole directory has to travel together. To update:
-     `npm pack mermaid@<version>`, then copy dist/mermaid.esm.min.mjs and
-     dist/chunks/mermaid.esm.min/*.mjs (no .map files) over this folder.
+     THE ESM BUILD, not the 3.4 MB UMD one: mermaid.esm.min.mjs is 30 KB and
+     dynamically imports only the chunks the page's diagram types need. That
+     is why vendor/mermaid/ is 104 files -- the chunks are the lazy loads,
+     referenced relatively, so the whole directory travels together. To
+     update: `npm pack mermaid@<version>`, then copy dist/mermaid.esm.min.mjs
+     and dist/chunks/mermaid.esm.min/*.mjs (no .map files).
 
-     Loaded only on pages whose RENDERED output contains a mermaid block (see
-     baseof.html) -- there is no `mermaid:` frontmatter flag, the same way there
-     is no `enlighterjs:` one. An author writes a fence and gets a diagram.
+     Loaded only on pages whose RENDERED output contains a mermaid block -- no
+     `mermaid:` frontmatter flag, the same way there is no `enlighterjs:` one.
 
-     type="module" is required (it is an ES module) and is deferred by
-     definition, so this runs after the document is parsed -- no DOMContentLoaded
-     dance needed. */}}
+     type="module" is required and is deferred by definition, so this runs
+     after the document is parsed. */}}
 <script type="module">
   import mermaid from "{{ "vendor/mermaid/mermaid.esm.min.mjs" | relURL }}";
 

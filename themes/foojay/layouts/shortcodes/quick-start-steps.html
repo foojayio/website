@@ -5,21 +5,16 @@
     {{< quick-start-steps >}}                  the pages under THIS page
     {{< quick-start-steps "install-java" >}}   the pages under a sibling hub
 
-  Everything comes from partials/quick-start-pages.html, which is also what the
-  home page band is built from -- so the trail is described in exactly one
-  place, the links are root-relative (they work under `hugo server`; the 38
-  they replace were absolute foojay.io URLs that did not), and a step's title
-  here is the title of the page it opens, forever.
+  Everything comes from partials/quick-start-pages.html, which the home page
+  band is built from too, so the trail is described in one place and a row's
+  title is the title of the page it opens.
 
-  Each row carries the page's own `description:` as its one-line gloss. That is
-  the same sentence the page gives a search engine and a link preview, so a
-  reader arriving from Google and a reader arriving from this list are told the
-  same thing about where they are going -- and an editor rewriting a step's
-  description updates its entry in every list at once.
+  Each row's gloss is the page's own `description:` -- the same sentence it
+  gives a search engine, so a reader arriving from Google and one arriving
+  from this list are told the same thing.
 
-  A `duration:` (mm:ss) is shown when the page has one, and the header line
-  adds them up. Only the eleven tutorial steps carry one -- an install guide
-  takes as long as your download does.
+  A `duration:` (mm:ss) is shown when the page has one, and the header adds
+  them up. Only the tutorial steps carry one.
 */ -}}
 
 {{- $hub := .Page -}}
@@ -29,14 +24,12 @@
 
 {{- $pages := partial "quick-start-pages.html" $hub -}}
 
-{{- /* A SEQUENCE OR A SET OF ALTERNATIVES, which is the same question
-       partials/quick-start-pages.html sorts by, asked again here because it
-       decides how the list READS. The eleven tutorial steps are done in order,
-       so they are an <ol>, they are numbered, and saying "11 steps" is the
-       reassurance a beginner wants. The five install guides are a choice --
-       you read the one for your own machine and none of the others -- so they
-       are a <ul> with no numbers, and calling them "5 steps" would tell a
-       reader on a Mac they have four more things to do. */ -}}
+{{- /* A SEQUENCE OR A SET OF ALTERNATIVES -- the same question
+       quick-start-pages.html sorts by, asked again because it decides how the
+       list READS. The tutorial steps are done in order, so they are a numbered
+       <ol> and "11 steps" is reassurance. The install guides are a choice, so
+       they are an unnumbered <ul>: "5 steps" would tell a reader on a Mac
+       they have four more things to do. */ -}}
 {{- $ordered := and $pages (eq (len (where $pages "Weight" ">" 0)) (len $pages)) -}}
 {{- $minutes := partial "quick-start-minutes.html" $pages -}}
 

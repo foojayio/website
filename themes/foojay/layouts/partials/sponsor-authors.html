@@ -1,13 +1,10 @@
-{{- /* A sponsor's `authors:` list, normalised to one shape.
+{{- /* A sponsor's `authors:` list, normalised to one shape. Takes the
+       sponsor Page; returns a slice of { slug, from, till, dated }, where
+       `from`/`till` are "" when unset and `dated` is true when either is set.
 
-       Param: the sponsor Page. Returns: a slice of
-       { slug, from, till, dated } -- `from`/`till` are "" when unset, and
-       `dated` is true when either is set.
-
-       WHY THE LIST IS MIXED. An author's posts belong to a sponsor because the
-       author worked there, and people join and leave. Two Azul authors left on
-       2026-04-01, and without a date their later articles -- written for someone
-       else -- kept appearing on Azul's page. So an entry may be either:
+       WHY THE LIST IS MIXED: an author's posts belong to a sponsor because
+       the author worked there, and people join and leave -- so without dates,
+       articles written for someone else keep appearing. An entry may be:
 
          authors:
            - "tim-kelly"                    # currently there: nothing to say
@@ -16,30 +13,23 @@
            - slug: "someone-else"
              from: "2024-06-01"             # arrived; earlier posts aren't theirs
 
-       The bare string stays the default because it is the common case (16 of
-       Azul's 18), and a maintainer should not have to write a two-line map to say
-       "still here" -- that is the derive/default/ask rule in AGENTS.md.
+       The bare string stays the default because it is the common case, and a
+       maintainer should not write a two-line map to say "still here".
 
-       SEMANTICS: a HALF-OPEN range, [from, till). `from` is the first day
-       attributed, `till` is the first day NOT attributed -- i.e. the day they
-       left, which is the date a maintainer actually knows. That choice is not
-       arbitrary: it makes the SAME date correct for both sponsors when someone
-       moves (old employer `till: "2026-04-01"`, new one `from: "2026-04-01"`)
-       with no gap and no double-attribution, which an inclusive `till` cannot do
-       without an off-by-one. Both keys are optional and independent, so `till`
-       alone means "everything up to then" and neither means "everything".
+       SEMANTICS: a HALF-OPEN range, [from, till). `till` is the first day NOT
+       attributed -- the day they left, which is the date a maintainer knows.
+       That makes the SAME date correct for both sponsors when someone moves,
+       with no gap and no double-attribution, which an inclusive `till` cannot
+       do without an off-by-one. Both keys are optional and independent.
 
-       Dates are pushed through `time.Format` rather than compared as written,
-       because YAML turns an unquoted 2026-04-01 into a date object and a quoted
-       one into a string -- and comparing those two to each other silently fails
-       rather than erroring. Normalising both to ISO strings also makes the
-       comparison in sponsor-posts.html a plain lexicographic one, which is
-       correct for ISO-8601 and needs no time arithmetic.
+       Dates go through `time.Format` rather than being compared as written:
+       YAML turns an unquoted 2026-04-01 into a date object and a quoted one
+       into a string, and comparing the two silently fails rather than
+       erroring. ISO strings also make sponsor-posts.html's comparison a plain
+       lexicographic one.
 
-       One definition, because three things read this list: sponsor-posts.html
-       (which posts count), and the author list plus the author COUNT on
-       sponsor/section.html. Before this they each re-read `.Params.authors`
-       assuming it was a list of strings. */ -}}
+       One definition, because three things read this list: sponsor-posts.html,
+       and the author list plus the author COUNT on sponsor/section.html. */ -}}
 
 {{- $entries := slice -}}
 {{- range .Params.authors -}}

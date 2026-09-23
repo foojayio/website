@@ -79,9 +79,11 @@ jobs:
         uses: jbangdev/setup-jbang@v0.1.1
 
       - name: Validate post/author/page frontmatter
-        # --changed-since scopes the ACCESSIBILITY WARNINGS (missing image
-        # descriptions) to what this branch touches; every other check still
-        # looks at the whole tree, and only those can fail the run.
+        # --changed-since scopes two things to what this branch touches: the
+        # accessibility/embed WARNINGS, and the draft/ checks -- see
+        # Frontmatter.checkDrafts for why a half-finished submission must not
+        # fail somebody else's unrelated PR. Every check over content/ still
+        # looks at the whole tree, because content/ publishes.
         run: jbang scripts/validate/Frontmatter.java --changed-since ${{ github.event.pull_request.base.sha }}
 
       - name: Build site (catches template/content errors)

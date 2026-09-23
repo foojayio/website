@@ -1,31 +1,20 @@
-{{- /* THE GITHUB URL FOR A PAGE'S OWN SOURCE FILE -- the single definition of
-       that URL's shape, used by partials/page-source.html for the "Edit this
-       page" link at the foot of an article and by posts/single.html for the
-       "suggest a correction" link on a machine transcript (which points at
-       transcript.md, a DIFFERENT file in the same bundle -- which is the whole
-       reason this is a URL builder and not just the link partial).
+{{- /* THE GITHUB URL FOR A PAGE'S OWN SOURCE FILE -- one definition of that
+       URL's shape, used by page-source.html for "Edit this page" and by
+       posts/single.html for the "suggest a correction" link on a transcript,
+       which points at a DIFFERENT file in the same bundle. That second caller
+       is why this is a URL builder and not just the link partial.
 
        Everything is derived from .File.Path, so there is nothing per page to
-       write, nothing to keep in step with a rename, and no way for a link to
-       point at a file that isn't the one being read.
+       write and no way for a link to point at a file that is not the one being
+       read.
 
-       .File is nil on a page Hugo GENERATES rather than reads -- a taxonomy
-       term, a paginated list, the 404 -- and `with` covers that: those pages
-       have no source file to edit, so they get no link rather than a broken
-       one. Returns an empty string in every case where a link would be wrong,
-       so a caller can `with` the result.
-
-       Unset [params.source] is also an empty string, i.e. no link at all: a
-       fork, or a local build of someone else's content, has no business
+       Returns "" in every case where a link would be wrong, so a caller can
+       `with` the result: .File is nil on a page Hugo GENERATES rather than
+       reads, and an unset [params.source] means a fork has no business
        advertising an edit button into foojay's repository.
 
-       Call as a Page for the page's own file, or as
-       (dict "page" $ "file" "transcript.md") for a sibling inside its bundle.
-
-       Note what an edit link cannot know: a post is still re-scraped from the
-       live WordPress site by scripts/transfer/Posts.java until cutover, which
-       rebuilds the file and drops a hand edit. A merged content fix wants
-       `frozen: true` on the post until the scrapers are deleted. */ -}}
+       Call with a Page for its own file, or (dict "page" $ "file"
+       "transcript.md") for a sibling inside its bundle. */ -}}
 {{- $page := . -}}
 {{- $file := "" -}}
 {{- if reflect.IsMap . -}}

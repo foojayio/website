@@ -84,7 +84,11 @@ public class Frontmatter {
         problems.addAll(checkDir(Path.of("content/sponsors"), List.of("title", "tier")));
         problems.addAll(checkTitleEmoji(postsDir));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
-        problems.addAll(checkDrafts(Path.of("draft"), postSlugs, authorSlugs));
+
+        // Resolved up here, not with the warnings below, because checkDrafts
+        // needs it too -- see the scoping note in its javadoc.
+        Set<Path> touched = changedFiles(args);
+        problems.addAll(checkDrafts(Path.of("draft"), postSlugs, authorSlugs, touched));
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
@@ -103,8 +107,6 @@ public class Frontmatter {
         // WARNINGS, which never fail the check -- see reportWarnings below for
         // why image descriptions are on this side of the line and everything
         // above it is not.
-        Set<Path> touched = changedFiles(args);
-
         List<String> embeds = new ArrayList<>();
         embeds.addAll(checkEmbeds(Path.of("content"), touched));
         embeds.addAll(checkEmbeds(Path.of("draft"), touched));
@@ -323,9 +325,23 @@ public class Frontmatter {
      * it never appears on the author's profile and the byline links nowhere),
      * and a hero `image:` naming a file that isn't in the folder (a remote URL
      * is left alone -- 76 published posts legitimately use one).
+     *
+     * SCOPED TO WHAT THE BRANCH TOUCHES, and this is the one hard check that
+     * is. Every other check here guards content/, which PUBLISHES -- a broken
+     * page there is broken on the site, so whose PR introduced it is beside
+     * the point. draft/ is a staging area that Hugo never reads, and a
+     * submission legitimately sits in it half-finished: an article waiting on
+     * its author's profile, a profile waiting on its article. Checking every
+     * draft on every PR made one unfinished submission fail everybody else's
+     * unrelated work, which is a check that costs more than it catches.
+     *
+     * A draft is still held to every rule the moment its own PR touches it --
+     * which is the PR that can fix it, and the last one before a maintainer
+     * moves the folder into content/posts/. An unscoped run (no
+     * `--changed-since`, i.e. any local run) still checks all of them.
      */
-    static List<String> checkDrafts(Path draftDir, Set<String> postSlugs, Set<String> authorSlugs)
-            throws IOException {
+    static List<String> checkDrafts(Path draftDir, Set<String> postSlugs, Set<String> authorSlugs,
+            Set<Path> touched) throws IOException {
         List<String> problems = new ArrayList<>();
         if (!Files.isDirectory(draftDir)) return problems;
 
@@ -337,6 +353,7 @@ public class Frontmatter {
             for (Path file : loose.filter(Files::isRegularFile).sorted().toList()) {
                 String name = file.getFileName().toString();
                 if (!name.endsWith(".md") || name.equals("README.md")) continue;
+                if (untouched(touched, file)) continue;
                 problems.add(file + ": a submission is a folder, not a loose file"
                         + " -- move it to draft/" + stripExt(name) + "/index.md"
                         + " (the folder name becomes the URL slug)");
@@ -353,7 +370,9 @@ public class Frontmatter {
         Set<String> knownSlugs = new TreeSet<>(postSlugs);
         knownSlugs.addAll(draftSlugs);
 
+        int skipped = 0;
         for (Path dir : bundles) {
+            if (untouched(touched, dir)) { skipped++; continue; }
             String slug = dir.getFileName().toString();
             // Resolved in one expression rather than reassigned: `index` is
             // captured by the PLACEHOLDERS lambda below, which needs it
@@ -442,7 +461,29 @@ public class Frontmatter {
                         + " (put it next to index.md and reference it by filename)");
             }
         }
+
+        // Said out loud, so a skip is never silent: a maintainer reading a
+        // green PR can see that another draft was left alone rather than
+        // passed.
+        if (skipped > 0) {
+            System.out.println("(skipped " + skipped + " draft" + (skipped == 1 ? "" : "s")
+                    + " this branch does not touch; they are checked by the PR that does)");
+        }
         return problems;
+    }
+
+    /**
+     * True when a scoped run should leave this draft alone: nothing the branch
+     * changed is at or under `path`. Always false on an unscoped run, which
+     * checks everything.
+     *
+     * Prefix matching on the FOLDER, not equality on index.md, because a PR
+     * that only adds an image to a draft is still a PR about that draft.
+     */
+    static boolean untouched(Set<Path> touched, Path path) {
+        if (touched == null) return false;
+        Path dir = path.normalize();
+        return touched.stream().noneMatch(f -> f.normalize().startsWith(dir));
     }
 
     /**

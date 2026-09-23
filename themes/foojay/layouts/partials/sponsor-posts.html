@@ -1,29 +1,21 @@
-{{- /* Every post attributed to a sponsor, newest first.
+{{- /* Every post attributed to a sponsor, newest first. Takes the sponsor
+       Page, returns a slice of Pages.
 
-       This is the whole sponsor<->article link. WordPress derives it from a
-       plugin relation we can't read; here it is explicit and hand-maintained:
-       a sponsor's frontmatter lists `authors:` (the folder names under
-       content/authors/), and a post belongs to the sponsor when any of those
-       slugs wrote it. Everything shown on a sponsor page that counts or
-       summarises articles goes through this partial, so there is exactly one
-       definition of "a sponsor's articles".
+       THE WHOLE SPONSOR<->ARTICLE LINK, and it is explicit: a sponsor's
+       frontmatter lists `authors:`, and a post belongs to the sponsor when any
+       of those slugs wrote it. Everything on a sponsor page that counts or
+       summarises articles goes through here, so there is one definition of "a
+       sponsor's articles".
 
-       AN AUTHOR'S ATTRIBUTION CAN BE DATE-BOUNDED. An entry in `authors:` may
-       carry `from:`/`till:` (see partials/sponsor-authors.html), because people
-       change employer: two Azul authors left on 2026-04-01 and their later
-       articles, written elsewhere, were still being listed under Azul. A post
-       counts when it falls inside the window of AT LEAST ONE of its authors --
+       AN AUTHOR'S ATTRIBUTION CAN BE DATE-BOUNDED (`from:`/`till:` -- see
+       partials/sponsor-authors.html), because people change employer. A post
+       counts when it falls inside the window of AT LEAST ONE of its authors,
        so a piece co-written by a current colleague and a departed one is still
-       the sponsor's, which is the right answer and the reason this is a per-post
-       check rather than a filter on the slug list.
+       the sponsor's -- which is why this is a per-post check rather than a
+       filter on the slug list.
 
-       Posts credit authors as an `authors:` list; older ones may still carry a
-       single `author:` slug -- match both and de-dupe. (Nothing in content/ uses
-       the singular key today, and transfer/Posts.java only ever writes the list,
-       but it costs two lines to keep honouring it.)
-
-       Param: the sponsor Page. Returns: a slice of Pages (empty when the
-       sponsor has no authors listed yet). */ -}}
+       Posts credit authors as an `authors:` list; a legacy singular `author:`
+       is matched too, and the two de-duped. */ -}}
 
 {{- $entries := partial "sponsor-authors.html" . -}}
 {{- $result := slice -}}

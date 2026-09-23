@@ -12,21 +12,15 @@
 </div>
 
 <div class="content-col full-width">
-  {{/* page-single--wide: the wrapper above is already full-width, but
-       .page-single caps its child at the READING measure -- right for
-       prose, wrong here, where the content is a world map and a table of
-       hundreds of rows. Without it the page left-aligned at ~800px inside the
-       1240px shell and threw the rest away as empty gutter. Same opt-out
-       sponsors/list.html uses; these two were missed. There is almost no prose
-       on either page to widen badly -- the body is a source note. */}}
+  {{/* page-single--wide: .page-single caps its child at the READING measure,
+       which is right for prose and wrong for a world map and a table of
+       hundreds of rows. Same opt-out sponsors/list.html uses. */}}
   <article class="page-single page-single--wide prose">
     {{ .Content }}
 
-    {{/* data/java-champions.yaml is regenerated at every build and daily
-         (scripts/fetch/JavaChampions.java, .github/workflows/build-deploy.yml
-         + meetup-sync.yml) from the official Java Champions directory --
-         nobody should ever hand-edit that file, so say so here where the
-         data is actually shown, not just in a code comment. */}}
+    {{/* data/java-champions.yaml is regenerated from the official directory
+         on every build -- nobody should hand-edit it, so say so where the
+         data is shown, not only in a code comment. */}}
     <p class="champions-source-note">
       This list is fetched automatically from the official
       <a href="https://github.com/aalmiray/java-champions" target="_blank" rel="noopener">Java Champions directory</a>
@@ -41,29 +35,23 @@
          (data/java-champions.yaml -> key "java-champions"), hence index. */}}
     {{ $champions := index hugo.Data "java-champions" }}
 
-    {{/* World map of every champion we have coordinates for
-         (data/java-champions.yaml's latitude/longitude, resolved by
-         scripts/fetch/JavaChampions.java through data/geocode-cache.yaml, or
-         taken from an upstream `location:` once
-         aalmiray/java-champions#318 merges).
+    {{/* World map of every champion with coordinates, resolved by
+         scripts/fetch/JavaChampions.java through data/geocode-cache.yaml.
 
-         The map itself is static/js/cluster-map.js, shared with /jugs/ --
-         grouping by place, the counted badges and the cluster totals live
-         there so the two maps cannot disagree about what a number means. All
-         this template supplies is the points, the noun and the element.
+         The map is static/js/cluster-map.js, shared with /jugs/ -- grouping,
+         badges and cluster totals live there so the two maps cannot disagree
+         about what a number means. This template supplies only the points,
+         the noun and the element.
 
-         `avatar` is the same upstream image the table below shows, and is
-         optional in cluster-map.js precisely so /jugs/ (which has none) keeps
-         the popup it always had. Note the popups are built lazily over
-         there -- 420 hotlinked avatars must not be requested until a marker
-         is actually clicked. */}}
+         `avatar` is optional in cluster-map.js so /jugs/, which has none,
+         keeps its popup. Popups are built LAZILY there: 420 hotlinked avatars
+         must not be requested until a marker is clicked. */}}
     {{ $points := slice }}
     {{ range $champions }}
       {{ if and .latitude .longitude }}
-        {{/* First profile the champion actually has, so a popup name is a link
-             wherever possible. partials/champion-url.html defines that pick --
-             shared with the RSS feed, so the two cannot disagree about which of
-             a champion's links is the canonical one. */}}
+        {{/* The first profile the champion has, so a popup name is a link
+             where possible. partials/champion-url.html defines that pick and
+             is shared with the RSS feed. */}}
         {{ $url := partial "champion-url.html" . }}
         {{ $points = $points | append (dict
              "name" .name
@@ -99,16 +87,13 @@
     <div class="list-filter">
       <input type="search" id="champions-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter Java Champions by name or country" autocomplete="off">
     </div>
-    {{/* The table is WIDER THAN A PHONE (617px of columns against a 390px
-         viewport on /jugs/, 525 on /java-champions/), and with nothing to
-         contain it the whole PAGE scrolled sideways -- WCAG 1.4.10, which asks
-         for no two-dimensional scrolling below 320px-equivalent. Squeezing the
-         columns instead is not an option: the Connect cell is a row of links
-         and the name column would become one word per line. So the table scrolls
-         inside its own box, and that box carries tabindex="0" -- a scroll
-         container that only a mouse or a touchscreen can move is unreachable for
-         a keyboard user (2.1.1), and it needs a name and a role to be worth
-         landing on. */}}
+    {{/* The table is WIDER THAN A PHONE, and uncontained the whole PAGE
+         scrolls sideways -- WCAG 1.4.10 asks for no two-dimensional scrolling
+         below 320px-equivalent, and squeezing the columns is not an option
+         (the Connect cell is a row of links). So it scrolls inside its own
+         box, and that box carries tabindex="0": a scroll container only a
+         mouse can move is unreachable for a keyboard user (2.1.1), and it
+         needs a name and a role to be worth landing on. */}}
     <div class="table-scroll" tabindex="0" role="region" aria-label="Java Champions table">
       <table class="champions-table">
         <thead>

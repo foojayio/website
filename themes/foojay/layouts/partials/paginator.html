@@ -1,27 +1,20 @@
 {{- /*
   The single definition of "how does this page paginate", returning the current
-  pager, or false for a page that doesn't paginate.
+  pager or false.
 
-  It exists because of an ordering trap. baseof.html needs the pager in <head>
-  to write a self-referencing canonical on /today/page/2/ instead of pointing
-  every pager at page 1 -- and <head> is rendered BEFORE `{{ block "main" }}`.
-  Hugo lets .Paginate be called any number of times but errors out if the
-  arguments differ between calls ("invoked multiple times with different
-  arguments"), so a bare .Paginator in the head would collide with
-  posts/list.html's `.Paginate .RegularPagesRecursive.ByDate.Reverse`. Routing
-  both callers through one partial makes the arguments identical by
-  construction; a future paginated section adds a branch here and gets its
-  canonical for free.
+  It exists because of an ordering trap: baseof.html needs the pager in <head>
+  to write a self-referencing canonical on /today/page/2/, and <head> renders
+  BEFORE `{{ block "main" }}`. Hugo allows .Paginate any number of times but
+  ERRORS IF THE ARGUMENTS DIFFER between calls, so a bare .Paginator in the
+  head collides with posts/list.html's. Routing both through one partial makes
+  the arguments identical by construction.
 
   Deliberately plain `partial`, NOT `partialCached`: Hugo renders /today/,
-  /today/page/2/, ... by re-executing this same Page with the pager advanced, so
-  a cache keyed on the page would hand page 2 the page-1 pager and every pager
-  would list the same posts.
+  /today/page/2/ … by re-executing the same Page with the pager advanced, so a
+  cache keyed on the page hands page 2 the page-1 pager.
 
-  ONE return, at the end, assigning into a variable along the way. Hugo rejects
-  a partial with a `return` that other statements fall through past
-  ("wrong number of args for return: want 0 got 1"), which is what an early
-  `{{ return .Paginator }}` per branch produces.
+  ONE return, at the end. Hugo rejects a partial with a `return` that other
+  statements fall through past.
 */ -}}
 
 {{- $pager := false -}}
@@ -38,15 +31,12 @@
   {{- $pager = .Paginate .RegularPagesRecursive.ByDate.Reverse -}}
 {{- end -}}
 
-{{/* An author profile and a sponsor profile paginate a list that is NOT their own
-     children -- the posts belong to content/posts/ and are attributed by slug. So
-     each is keyed on `type` (set by the cascade in the section's _index.md, which
-     is also what routes them to layouts/<type>/section.html), not on Kind alone:
-     the parent listing pages /today/author/ and /our-sponsors/ are sections in the
-     same section and must NOT paginate posts.
-
-     Both are branch bundles (_index.md) purely because .Paginate refuses a page
-     kind -- see those _index.md files. */}}
+{{/* An author or sponsor profile paginates a list that is NOT its own
+     children -- the posts live in content/posts/ and are attributed by slug.
+     Keyed on `type`, not on Kind alone: the parent listings /today/author/ and
+     /our-sponsors/ are sections in the same section and must NOT paginate
+     posts. Both are branch bundles purely because .Paginate refuses a page
+     kind. */}}
 {{- if eq .Type "author" -}}
   {{- $pager = .Paginate (partial "author-posts.html" .) -}}
 {{- end -}}

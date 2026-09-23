@@ -1,25 +1,18 @@
 {{ define "main" }}
 <div class="layout-with-sidebar">
   <div class="content-col">
-    {{/* An author with no photo gets an explicitly EMPTY image meta rather
-         than none: with no meta at all, Pagefind falls back to scanning the
-         page and hands the search result the hero of whatever article happens
-         to sit first in the grid below. The search page treats "" as no
-         image, which is the honest answer here. */}}
+    {{/* An author with no photo gets an explicitly EMPTY image meta: with
+         none at all, Pagefind scans the page and hands the result the hero of
+         whatever article sorts first in the grid below. */}}
     <div class="author-profile"{{ if not (or .Params.avatarFull .Params.avatar) }} data-pagefind-meta="image:"{{ end }}>
-      {{/* Explicit data-pagefind-meta so Pagefind's site search uses the
-           author's own photo as the result thumbnail. Without this, Pagefind's
-           automatic image detection scans the whole indexed page -- including
-           the post-grid below -- and can end up picking a post's hero image
-           instead of the avatar. */}}
+      {{/* Explicit, so the result thumbnail is the author's own photo:
+           automatic detection scans the whole page, post grid included. */}}
       {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
-      {{/* Author pages start from zero rather than from a WordPress number:
-           the Post Views Counter plugin's user-archive counting is switched
-           off on foojay.io, so there is nothing to import (verified against
-           several authors -- see scripts/transfer/LegacyViews.java). This renders
-           nothing until the counter has seen some traffic. */}}
+      {{/* Author pages start from zero -- there was no per-author count
+           upstream to import -- so this renders nothing until the counter has
+           seen some traffic. */}}
       {{ with partial "views.html" . }}<p class="author-meta">{{ . | safeHTML }}</p>{{ end }}
       {{ partial "author-social.html" . }}
     </div>
@@ -28,22 +21,18 @@
          Featured Authors block and its sidebar widget. Kept for the TOTAL in the
          heading -- the grid below shows one page of it. */}}
     {{ $written := partial "author-posts.html" . }}
-    {{/* Paginated: a prolific author has 150+ articles and this was a single
-         grid several screens long. The pager comes from partials/paginator.html,
-         the same definition baseof.html uses for this page's canonical, so the
-         two cannot disagree about which posts page 2 holds. */}}
+    {{/* Paginated: a prolific author has 150+ articles. The pager comes from
+         partials/paginator.html, the same definition baseof.html uses for the
+         canonical. */}}
     {{ $pager := partial "paginator.html" . }}
     <div class="section-head">
       {{/* id + the pager's `anchor` below: paging returns the reader to the
            grid rather than to the top of the profile. */}}
       <h2 id="articles">{{ len $written }} article{{ if ne (len $written) 1 }}s{{ end }}</h2>
-      {{/* The reads across ALL of them, not this pager's slice -- same set the
-           count beside it comes from. Summed from data/views.json through
-           partials/views-total.html, so it agrees with the per-article numbers
-           on the cards below; renders nothing while the counter has no data,
-           the way views.html does. Deliberately next to the article total
-           rather than up in the profile head: that line is the profile page's
-           OWN count, and a second number there would read as the same thing. */}}
+      {{/* Reads across ALL of them, not this pager's slice -- the same set
+           the count beside it comes from. Next to the article total rather
+           than in the profile head, where the number is the PAGE's own count
+           and a second one would read as the same thing. */}}
       {{ with partial "views-total.html" $written }}
       <span class="section-head__count views">{{ lang.FormatNumberCustom 0 . }} views</span>
       {{ end }}
@@ -51,11 +40,10 @@
     {{ if $written }}
     {{ partial "pagination.html" (dict "page" . "position" "top" "anchor" "articles") }}
     <div class="post-grid">
-      {{/* Faces ON here, like every other listing. The obvious argument against
-           -- every post is by the author whose portrait is already at the top --
-           only holds for the posts they wrote alone. A co-authored one shows who
-           they wrote it WITH, which is information this page has nowhere else,
-           and the pile makes those posts findable at a glance while scrolling. */}}
+      {{/* Faces ON, like every other listing. "Every post is by the author
+           at the top" only holds for the posts they wrote ALONE -- on a
+           co-authored one the pile shows who else, which this page has
+           nowhere else. */}}
       {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
     </div>
     {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" "articles") }}

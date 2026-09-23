@@ -11,23 +11,18 @@
 </div>
 
 <div class="content-col full-width">
-  {{/* --wide: this page is a card grid, not prose, so it opts out of the
-       reading measure that would otherwise leave the right third empty. The
-       hero's own text still reads at a sane length because it sits in the
-       narrower of the hero's two columns. */}}
+  {{/* --wide: a card grid, not prose, so it opts out of the reading measure
+       that would leave the right third empty. */}}
   <article class="page-single page-single--wide prose">
-    {{/* Two-column hero (text left, banner right) collapsing to one column on
-         narrow screens -- same arrangement as the WordPress page. The image is
-         decorative, so alt="" keeps it out of the accessibility tree rather
-         than making screen readers announce a meaningless filename. */}}
+    {{/* Two-column hero collapsing to one on narrow screens. The image is
+         decorative, so alt="" keeps it out of the accessibility tree. */}}
     <section class="sponsors-hero{{ if .Params.heroImage }} sponsors-hero--split{{ end }}">
       <div class="sponsors-hero__text">
         <h2>{{ .Params.heroTitle | default "Who Keeps Foojay Running" }}</h2>
         {{ .Content }}
-        {{/* The prospectus is a local PDF (static/files/), so it goes through
-             resource-url.html for the same reason images do: it applies the
-             baseURL subpath the GitHub Pages test deploy sits under, while
-             leaving an absolute URL untouched if one is ever configured. */}}
+        {{/* A local PDF (static/files/), through resource-url.html for the
+             same reason images are: it applies any baseURL subpath and leaves
+             an absolute URL untouched. */}}
         {{ with .Params.prospectus }}
         <p><a class="sponsors-button" href="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" target="_blank" rel="noopener">Become a Sponsor</a></p>
         {{ end }}
@@ -39,11 +34,10 @@
       {{ end }}
     </section>
 
-    {{/* Tier order, labels, icons and blurbs all come from the `tiers` list in
-         content/sponsors/_index.md rather than from the sponsor pages, so a
-         tier is described in exactly one place. The "Other sponsors" group at
-         the bottom catches any sponsor whose tier isn't in that list, so a new
-         tier appearing upstream can never make a sponsor silently vanish. */}}
+    {{/* Tier order, labels, icons and blurbs come from the `tiers` list in
+         content/sponsors/_index.md, so a tier is described in one place. The
+         "Other sponsors" group catches any tier not in that list, so a new
+         one can never make a sponsor silently vanish. */}}
     {{ $known := slice }}
     {{ range $tiers }}{{ $known = $known | append .name }}{{ end }}
 
@@ -55,10 +49,9 @@
           {{/* The tier marker is a CSS ::before disc tinted by the heading's
                own colour (see .sponsors-tier__head h2::before) rather than an
                emoji — decorative, so it needs no alt text or aria handling. */}}
-          {{/* groupTitle/noun rather than "<label> Sponsors" and a hardcoded
-               "sponsor": Community Partners is not a sponsorship, and both
-               strings default to the sponsor wording for every tier that is.
-               See partials/sponsor-tier.html. */}}
+          {{/* groupTitle/noun rather than "<label> Sponsors": Community
+               Partners is not a sponsorship. Both default to the sponsor
+               wording. See partials/sponsor-tier.html. */}}
           {{ $t := partial "sponsor-tier.html" $tier.name }}
           <h2>{{ $t.groupTitle }}</h2>
           <span class="sponsors-tier__count">{{ len . }} {{ $t.noun }}{{ if ne (len .) 1 }}s{{ end }}</span>
@@ -85,44 +78,33 @@
 
     <section class="sponsors-cta">
       <h2>Support the Java Community</h2>
-      {{/* NOT A CLAIM ABOUT AUDIENCE SIZE, and that is deliberate.
-           GA4 -- the only thing that would
-           even try to count people -- is blocked for a large and unknowable
-           share of an audience of Java developers (see partials/analytics.html,
-           which measures exactly that).
+      {{/* NOT A CLAIM ABOUT AUDIENCE SIZE, deliberately: GA4 is blocked
+           for a large and unknowable share of an audience of Java developers.
 
-           So every figure below is DERIVED from what the site already shows
-           elsewhere: the post list, authors-all.html, the Podcast category, and
-           views-total.html over data/views.json -- the same source as the count
-           printed on each individual post. Nothing to keep in step, nothing to
-           go stale, and no number here can disagree with the page it links to.
-           The reads total is FLOORED rather than rounded, so the printed figure
-           is never above the truth. */}}
+           Every figure is DERIVED from what the site already shows elsewhere
+           -- the post list, authors-all.html, the Podcast category, and
+           views-total.html over data/views.json -- so no number here can
+           disagree with the page it links to. The reads total is FLOORED
+           rather than rounded, so it is never above the truth. */}}
       {{ $ctaPosts := where site.RegularPages "Section" "posts" }}
       {{ $ctaAuthors := partialCached "authors-all.html" "authors" }}
       {{ $ctaEpisodes := 0 }}
       {{ with index site.Taxonomies.categories "podcast" }}{{ $ctaEpisodes = len .Pages }}{{ end }}
       {{ $ctaReads := partial "views-total.html" $ctaPosts }}
-      {{/* THE CALENDAR LINK IS RESOLVED, NOT TYPED. A literal href="/calendar"
-           was live here and pointed at foojayio.github.io/calendar -- off the
-           site entirely -- because the trial deploy serves everything under
-           /website/ and a root-relative path skips it. .RelPermalink carries
-           the base path in both worlds, and going through site.GetPage means a
-           renamed page breaks the BUILD rather than the link. (Nothing caught
-           the literal: this card sits inside .prose, so validate/BuiltSite.java
-           read a template's dead link as an author's typo and only reported
-           it.) */}}
+      {{/* THE CALENDAR LINK IS RESOLVED, NOT TYPED: going through
+           site.GetPage means a renamed page breaks the BUILD rather than the
+           link. Nothing else catches it -- this card sits inside .prose, so
+           BuiltSite.java reads a template's dead link as an author's typo and
+           only reports it. */}}
       {{ $calendar := site.GetPage "/pages/calendar.md" }}
       <p>Join our sponsors and reach the Java &amp; OpenJDK community where it already
         reads: the articles, the podcast{{ with $calendar }}, and a
         <a href="{{ .RelPermalink }}">calendar</a> full of community events{{ end }}.</p>
-      {{/* FIGURES, NOT BULLETS. Five one-line fragments ("353 authors") in a
-           centred card read as a shopping list; the same five as number-plus-
-           label read as credentials, which is what a sponsor is here to weigh.
-           Still a <ul>, so a screen reader still hears a list of five.
-           Each `with` drops its own figure rather than printing a zero: a local
-           build has no data/views.json, and "0 million reads" on the sponsor
-           page is worse than one figure fewer. */}}
+      {{/* FIGURES, NOT BULLETS: number-plus-label reads as credentials,
+           which is what a sponsor is here to weigh. Still a <ul>, so a screen
+           reader hears a list. Each `with` drops its own figure rather than
+           printing a zero -- a local build has no data/views.json, and
+           "0 million reads" is worse than one figure fewer. */}}
       <ul class="sponsors-cta__stats">
         <li><strong>{{ lang.FormatNumberCustom 0 (len $ctaPosts) }}</strong><span>articles</span></li>
         <li><strong>{{ lang.FormatNumberCustom 0 (len $ctaAuthors) }}</strong><span>authors</span></li>

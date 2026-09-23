@@ -113,13 +113,6 @@ enableGitInfo = true
   # 2026-08 ["cristobal-escobar", "shai-almog"]
   # 2026-07 ["igor-de-souza", "steve-poole"]
 
-  # Where the site lives after cutover, which is NOT baseURL during the trial.
-  # Only for URLs handed to an outside system that stores them and that we can't
-  # rewrite later -- currently just the giscus backlink (see
-  # partials/production-url.html). Everything the build regenerates uses
-  # .Permalink and needs no help. When baseURL becomes this value, the two agree
-  # and nothing has to change.
-  productionBaseURL = "https://foojay.io/"
   # Path to the JUG list consumed by the events sidebar/calendar page.
   jugsDataFile = "jugs"
   eventsDataFile = "events"
@@ -181,24 +174,13 @@ enableGitInfo = true
 
 # Google Analytics + Ketch, the two third-party scripts foojay.io runs. See
 # themes/foojay/layouts/partials/analytics.html -- it renders NOTHING unless
-# the values below are set, and nothing at all while baseURL is still the trial
-# URL, so this can be filled in now and goes live by itself at cutover.
+# the values below are set.
 #
-# `ga` is the GA4 property foojay.io already reports into, and it is worth
-# knowing why that id appears NOWHERE in the live site's HTML or in its GTM
-# container -- grepping foojay.io for "G-" finds nothing at all. The live chain
-# is: container GTM-M6ZT5NW fires a Universal Analytics tag on UA-726113-5;
-# Google resolves that id SERVER-SIDE (googletagmanager.com/gtag/destination?
-# id=UA-726113-5) and returns a `__zone` tag whose child container is
-# G-GS21L12HYK with inheritParentConfig -- Google's UA-to-GA4 "connected site
-# tag" migration, which keeps the retired UA id working as an alias for the GA4
-# property. That is why the stats are current even though the visible tag is a
-# 2023-vintage UA one.
-#
-# Loading the measurement id directly, as this does, drops that indirection:
-# one fewer legacy shim Google can retire unilaterally, and the property is
-# named in the repo instead of hidden behind a dead id. Confirm it against
-# GA4 Admin > Data streams before cutover.
+# `ga` is the GA4 property foojay.io reports into. It is loaded directly here
+# rather than through the GTM container WordPress used, which reached the same
+# property only via a retired UA id Google resolves server-side -- one fewer
+# legacy shim, and the property is named in the repo instead of hidden behind
+# a dead id.
 #
 # Ketch is the consent manager, and these two values ARE the live ones -- read
 # out of the Custom HTML tag inside that same GTM container, which loads

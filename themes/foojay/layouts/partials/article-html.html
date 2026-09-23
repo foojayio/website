@@ -1,35 +1,17 @@
 {{- /* A page's rendered body, with asciidoctor's code blocks translated into
-       the markup the rest of the site already uses.
+       the markup the rest of the site already uses. Takes the Page, returns
+       HTML; a Markdown page gets .Content back untouched and costs nothing.
 
-       Param: the Page. Returns: HTML. For a Markdown page it returns .Content
-       untouched and costs nothing.
-
-       WHY THIS EXISTS. Hugo's render hooks are a Goldmark feature. AsciiDoc
-       goes out to the asciidoctor binary instead, so _markup/render-codeblock.html
-       -- which is what turns ```java into an EnlighterJS block and ```mermaid
-       into a diagram -- never sees a .adoc article. The visible result was two
-       bugs with one cause: `[source,java]` rendered as unhighlighted grey text
-       while the same snippet in Markdown was coloured, and `[source,mermaid]`
-       rendered as a listing of its own diagram source.
-
-       Rewriting asciidoctor's HTML afterwards is the only hook available, and
-       it is a narrow one: three shapes in, the site's own two shapes out. The
-       LANGUAGE NAME is resolved through partials/code-language.html, the same
-       registry the Markdown hook uses, so `[source,kt]` and ```kt land on the
-       same lexer and cannot drift apart.
+       Hugo's render hooks are a Goldmark feature, so _markup/render-codeblock.html
+       never sees a .adoc article and rewriting asciidoctor's HTML afterwards
+       is the only hook available. The language name goes through
+       partials/code-language.html, the same registry the Markdown hook uses,
+       so `[source,kt]` and ```kt cannot drift onto different lexers.
 
        CALLED FROM baseof.html TOO, and that is not optional: baseof decides
-       whether to load mermaid.js by looking for `<pre class="mermaid">`, and
-       on a .adoc page that element does not exist until this partial has run.
-       Reading .Content there would find nothing and the diagram would sit
-       silently unrendered. Both callers go through partialCached on the same
-       key, so the regex work happens once per page rather than twice.
-
-       WHAT IS LOST: a source block carrying AsciiDoc callouts gets its <1>
-       markers as PLAIN TEXT -- a circled digit -- rather than as the .conum
-       elements asciidoctor writes, because EnlighterJS re-renders a block from
-       its textContent and drops any markup inside. See the callout section at
-       the bottom for what that costs and what it buys. */ -}}
+       whether to load mermaid.js by looking for `<pre class="mermaid">`, which
+       on a .adoc page does not exist until this has run. Both callers use
+       partialCached on the same key, so the regex work happens once. */ -}}
 
 {{- $page := . -}}
 {{- $html := $page.Content -}}
@@ -60,66 +42,39 @@
   {{- $html = replaceRE `(?s)(<div class="listingblock">\s*<div class="content">\s*)<pre>(.*?)</pre>` `${1}<pre class="EnlighterJSRAW" data-enlighter-language="generic">$2</pre>` $html -}}
 
   {{- /* LINKS. _markup/render-link.html is a Goldmark hook too, so an AsciiDoc
-         article gets none of it -- and one of its four jobs is load-bearing:
-         a root-relative `/today/...` link needs the baseURL subpath, or it
-         points at the host root and 404s on every deploy served under a path
-         (the trial site at foojayio.github.io/website/, and any preview).
-         An author writing the same link in Markdown gets it rewritten, so
-         without this the two formats disagree about what `/today/x/` means.
-
-         Absolute foojay.io links -- what a contributor gets by copying a URL
-         out of the address bar -- are folded into the same rewrite rather than
-         left pointing at the live WordPress site, matching job 1 of the hook.
-
-         Only when there IS a subpath: in production relURL "/" is "/" and
-         every link is already correct, so the whole block is skipped rather
-         than rewriting hrefs to identical values on 4000 pages.
+         article gets none of it and the same two rewrites have to happen here
+         or the two formats disagree about what a link means. Only fires when
+         the deploy has a baseURL SUBPATH -- a preview host -- since otherwise
+         every link is already correct and this would rewrite 4000 pages' hrefs
+         to identical values.
 
          RE2 has no negative lookahead, hence `([^/"])` to hold the character
-         after the slash -- it is what keeps a protocol-relative `//host/path`
+         after the slash: it is what keeps a protocol-relative `//host/path`
          from being mangled into the site's own base path.
 
-         Job 3 -- target/rel on external links -- is done just below, for the
-         same reason: an author writing the same link in Markdown gets a new
-         tab, so an AsciiDoc article that opened it in place would make the two
-         formats disagree about what a link to another site does. AsciiDoc can
-         also say it at the source with a `^` suffix -- `https://x[text^]` --
-         and that still works; a link that already carries a target is left
-         exactly as the author wrote it. */ -}}
-  {{- /* relURL "" and NOT relURL "/": relURL leaves a path that already starts
-         with a slash alone, so relURL "/" is "/" on every deploy and the guard
-         below would never fire. The link hook hits the same trap and works
-         around it the same way (`strings.TrimPrefix "/" | relURL`). */ -}}
+         relURL "" and NOT relURL "/": relURL leaves a path that already starts
+         with a slash alone, so relURL "/" is "/" everywhere and the guard
+         below would never fire. The link hook works around it the same way. */ -}}
   {{- $base := relURL "" -}}
   {{- if ne $base "/" -}}
     {{- $html = replaceRE `href="(?:https?:)?//(?:www\.)?foojay\.io/` (printf `href="%s` $base) $html -}}
     {{- $html = replaceRE `href="/([^/"])` (printf `href="%s$1` $base) $html -}}
   {{- end -}}
 
-  {{- /* EXTERNAL LINKS OPEN IN A NEW TAB -- job 3 of the link hook, applied to
-         asciidoctor's HTML because the hook itself never sees it.
+  {{- /* EXTERNAL LINKS OPEN IN A NEW TAB, as the link hook does for Markdown.
 
          AFTER the baseURL rewrite above, and that order is load-bearing: on a
          subpath deploy that rewrite has already turned an absolute foojay.io
-         href into a root-relative one, which no longer matches the absolute
-         pattern here and so correctly stays in the same tab. In production it
-         does not fire at all -- relURL "" is "/" -- so an absolute foojay.io
-         link survives to this point and has to be excluded by host instead.
-         That is what the $internal test below is for, and it is a COPY of the
-         one in _markup/render-link.html rather than a cleverer test, so the
-         two formats cannot drift apart on which hosts count as ours.
+         href root-relative, so it no longer matches here and correctly stays
+         in the same tab. In production the rewrite does not fire, so such a
+         link survives to this point and has to be excluded by host -- which is
+         what $internal is for, and it is a COPY of the link hook's test so the
+         two formats cannot disagree about which hosts are ours.
 
-         TAG BY TAG rather than one replaceRE, because the decision needs two
-         things RE2 cannot express in a single pattern without lookahead: skip
-         a link that already has a target (asciidoctor writes one for the `^`
-         suffix, and rewriting it would emit a duplicate attribute), and skip
-         our own host. `replace` swaps every identical occurrence at once, so a
-         tag repeated in the article is handled on its first visit and is a
-         no-op on the rest.
-
-         mailto:, #fragments and bundle-relative paths are untouched: the
-         pattern only matches an absolute or protocol-relative http(s) href,
-         which is the same thing the hook calls external. */ -}}
+         TAG BY TAG rather than one replaceRE, because RE2 cannot express
+         either skip without lookahead: a link that already carries a target
+         (asciidoctor writes one for the `^` suffix, and rewriting it would
+         emit a duplicate attribute), and our own host. */ -}}
   {{- range $tag := findRE `<a [^>]*href="(?:https?:)?//[^"]*"[^>]*>` $html -}}
     {{- if not (strings.Contains $tag "target=") -}}
       {{- $href := replaceRE `^.*?href="([^"]*)".*$` "$1" $tag -}}
@@ -130,39 +85,19 @@
     {{- end -}}
   {{- end -}}
 
-  {{- /* CALLOUTS: `// <1>` AT THE END OF A CODE LINE BECOMES A CIRCLED DIGIT,
-         the way every other AsciiDoc-rendered site draws one. Done across the
-         whole article rather than per block -- an untagged `----` block carries
-         callouts too, and doing it inside one of the branches above left the
-         other one printing raw markup.
+  {{- /* CALLOUTS: `// <1>` at the end of a code line becomes a circled digit.
+         Applied to the whole article, not per block, because an untagged
+         `----` block carries callouts too.
 
-         Asciidoctor writes the marker as `<b class="conum">(1)</b>` INSIDE the
-         code, and EnlighterJS does not read a block as HTML: it escapes the
-         markup it finds and prints it, so the reader saw a literal
-         `// <b class="conum">(1)</b>` at the end of the line. A CHARACTER is
-         therefore the only form that survives -- U+2460 and up, which is the
-         glyph asciidoctor's own stylesheet imitates with a CSS circle, and
-         which the counter style on .colist reuses so the marker and the list
-         entry that explains it are the same shape.
+         A CHARACTER is the only form that survives: EnlighterJS re-renders a
+         block from its textContent, so asciidoctor's `<b class="conum">` would
+         reach the reader as escaped markup. U+2460 up is also what the counter
+         style on .colist uses, so marker and list entry match.
 
-         THE COMMENT MARKER IN FRONT OF IT GOES TOO. Asciidoctor drops `//`,
-         `#`, `--`, `;;` and an XML `<!--1-->` wrapper when it draws callouts as
-         icons, and dropping them here is what the AsciiDoc spec promises an
-         author who "types a comment according to the snippet language": the
-         comment is what hides the marker from a compiler reading the source,
-         not something to show the reader. Only the marker and one space go, so
-         a snippet that pads its callouts into a column stays in that column.
-
-         The cost is that a snippet copied out of a callout block pastes with a
-         circled digit where a comment used to be. Asciidoctor has the same
-         problem and solves it with `user-select: none` on the .conum element --
-         not available to us, since there is no element left by the time
-         EnlighterJS is done. A reader copying an ANNOTATED snippet is taking
-         the annotations with them either way.
-
-         Safe to apply site-wide within the article: asciidoctor uses .conum
-         only inside a verbatim block, and the list underneath is a plain <ol>
-         with no conum in it (checked against the rendered page, not assumed).
+         The comment marker in front goes too -- asciidoctor drops `//`, `#`,
+         `--`, `;;` and an XML `<!--1-->` wrapper when it draws callouts as
+         icons; the comment hides the marker from a compiler, it is not for the
+         reader. Only the marker and one space, so a padded column survives.
 
          XML FIRST, because `&lt;!--` ends in `--` and the line-comment rule
          below would otherwise eat half of it and leave `&lt;!` behind. */ -}}
@@ -170,9 +105,8 @@
   {{- $html = replaceRE `(?://|#|--|;;) ?(<b class="conum">)` "$1" $html -}}
 
   {{- /* ①-⑳, indexed by the marker's own number. Past 20 the parenthesised
-         form stays: a snippet with 21 annotations has a bigger problem than its
-         markers, and Unicode's circled digits stop being one uninterrupted run
-         of the same design shortly after (⑴ and ⒈ are separate series). */ -}}
+         form stays -- Unicode's circled digits stop being one run of the same
+         design shortly after (⑴ and ⒈ are separate series). */ -}}
   {{- $circled := split "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳" "" -}}
   {{- range $marker := findRE `<b class="conum">\([0-9]+\)</b>` $html -}}
     {{- $n := int (replaceRE `[^0-9]` "" $marker) -}}

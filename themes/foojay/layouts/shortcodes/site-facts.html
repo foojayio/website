@@ -2,23 +2,15 @@
   {{< site-facts >}} -- the identity block at the top of /ai-instructions/: what
   this site is, where it lives and which accounts are genuinely ours.
 
-  Every row is DERIVED from a definition that already exists somewhere else, so
-  this table cannot disagree with the rest of the site:
+  Every row is DERIVED from a definition that exists elsewhere, so this table
+  cannot disagree with the rest of the site: the name, year and profiles from
+  partials/json-ld-organization.html; the contact address from [[menu.legal]];
+  the repository from [params.source]; the feed URL from the home page's own
+  RSS output format, never a literal "/index.xml".
 
-    - the name, the alternate name, the year and the official profiles come
-      from partials/json-ld-organization.html, which is already the single
-      description of foojay as an organization (the home page's @graph and
-      every post's publisher node). An account added there appears here.
-    - the contact address is the mailto: entry in [[menu.legal]], i.e. the same
-      address the footer shows on every page.
-    - the repository is [params.source], the same setting behind every "Found a
-      mistake? Edit this page on GitHub" link.
-    - the feed URL is Hugo's own, via the home page's RSS output format --
-      never a literal "/index.xml", which is the copy that goes stale in silence.
-
-  Deliberately NOT here: who owns and operates the site, and what that means
-  for its independence. That is a paragraph with a caveat in it, not a cell in
-  a table, so it is written out in the page itself where it can be qualified.
+  Deliberately NOT here: who owns and operates the site. That is a paragraph
+  with a caveat in it, not a cell in a table, so it is written out in the page
+  where it can be qualified.
 */ -}}
 {{- $org := partial "json-ld-organization.html" . -}}
 {{- $rss := site.Home.OutputFormats.Get "rss" -}}

@@ -5,28 +5,23 @@
   {{ partial "toc.html" . }}
 
   {{/* One paid banner, above the sponsor tiers. Like them it survives the
-       TOC-height cull below -- a placement that vanishes on every post long
-       enough to have headings is missing from most of the site. Which banner is
-       derived from this page's URL, so it is stable per page and evenly shared
-       across the archive; see the partial. */}}
+       TOC-height cull below -- a placement that vanishes on every post with
+       headings is missing from most of the site. Which banner is derived from
+       the page's URL, so it is stable per page and evenly shared. */}}
   {{ partial "ads-widget.html" . }}
 
   {{/* Built from content/sponsors/ -- see the partial for why it sits here and
        why it survives the TOC-height cull below. */}}
   {{ partial "sidebar-sponsors.html" . }}
 
-  {{/* Home page only, and gated HERE rather than inside the partial, the way
-       featured-authors-widget.html is. Two reasons it is not site-wide: the
-       queue is a home-page thing (it is what WordPress carries there), and the
-       partial SCANS THE FILESYSTEM -- on one page that is four directory
-       listings, on all 4200 it would be four thousand. If it is ever wanted
-       site-wide, wrap it in partialCached: the result does not depend on the
-       page it renders on.
+  {{/* Home page only, gated HERE rather than inside the partial: the queue is
+       a home-page thing, and the partial SCANS THE FILESYSTEM -- four
+       directory listings on one page, four thousand across the site. If it is
+       ever wanted site-wide, wrap it in partialCached; the result does not
+       depend on the page.
 
-       Above Categories rather than below, because it expires: what is out
-       tomorrow is worth a glance before a list of 123 categories that is the
-       same every day. It renders nothing when nothing is scheduled, so on the
-       ordinary day the aside is exactly what it was. */}}
+       Above Categories because it EXPIRES: what is out tomorrow is worth a
+       glance before a list that is the same every day. */}}
   {{ if .IsHome }}{{ partial "coming-soon.html" . }}{{ end }}
 
   <section class="widget widget-categories">
@@ -39,23 +34,18 @@
     <a class="view-all" href="{{ "today/category/" | relURL }}">All categories</a>
   </section>
 
-  {{/* Authors + JUGs are dropped whenever a TOC is showing: a post long
-       enough to have h2/h3 headings makes for a tall sidebar once these are
-       added on top of it, and the whole aside is one sticky block -- so
-       past a certain combined height, the TOC (listed first) scrolls out of
-       view instead of staying visible the whole time, defeating the point.
-       Short posts with no TOC still get the full widget set as before. */}}
+  {{/* Authors + JUGs are dropped whenever a TOC is showing: the aside is one
+       sticky block, so past a certain height the TOC (listed first) scrolls
+       out of view instead of staying visible, which defeats it. */}}
   {{ if not (partial "has-toc.html" .) }}
   <section class="widget widget-authors">
     <h2>Authors</h2>
     <ul>
-      {{/* Shuffled, not the first 5: unshuffled this is `where` order, i.e.
-           whichever five authors happen to sort first -- the same five names on
-           every page of the site, and 337 authors who never appear here at all.
-           Hugo shuffles per call, so each page gets its own five and the widget
-           is a way to stumble on someone new. It re-rolls at every build, which
-           is fine (a deploy is the only thing that changes the pages anyway);
-           the Featured Authors widget below is the deliberate pick. */}}
+      {{/* Shuffled, not the first 5: unshuffled it is `where` order, i.e.
+           the same five names on every page and 337 authors who never appear.
+           Hugo shuffles per call, so each page gets its own five. It re-rolls
+           each build, which is fine -- the Featured Authors widget below is
+           the deliberate pick. */}}
       {{ range first 5 (shuffle (partialCached "authors-all.html" "authors")) }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ end }}
@@ -66,16 +56,12 @@
   <section class="widget widget-jugs">
     <h2>Java User Groups</h2>
     <ul>
-      {{/* .website covers every JUG, Meetup-based or not (data/jugs.yaml,
-           regenerated from GlobalWWJugs by scripts/fetch/Jugs.java) --
-           a hardcoded meetup.com URL would 404 for the majority of JUGs
-           that don't use Meetup.
+      {{/* .website covers every JUG, Meetup-based or not -- a hardcoded
+           meetup.com URL would 404 for the majority that do not use Meetup.
 
-           Shuffled per page, same as the authors widget above: unshuffled,
-           data/jugs.yaml's own (alphabetical) order meant the same handful of
-           groups on every page and the rest of the 91 never shown. Filtered
-           BEFORE the shuffle, not after -- picking five and then dropping the
-           one JUG with no website would leave a short list on ~5% of pages. */}}
+           Shuffled per page like the authors widget above, and filtered
+           BEFORE the shuffle: picking five and then dropping the one JUG with
+           no website would leave a short list on some pages. */}}
       {{ $linked := where hugo.Data.jugs "website" "!=" nil }}
       {{ range first 5 (shuffle $linked) }}
         <li><a href="{{ .website }}">{{ .name }}</a></li>
@@ -86,10 +72,8 @@
   {{ end }}
 
   {{- /* Home page only: /today/author/ already leads with the full Featured
-         Authors band, and the aside would repeat the same two people. Placed
-         last so the sponsors widget keeps its position under the TOC.
-         Whitespace-trimmed so every other page's markup is byte-identical to
-         what it was before this widget existed. */ -}}
+         Authors band. Last, so the sponsors widget keeps its place under the
+         TOC. */ -}}
   {{- if .IsHome }}
   {{ partial "featured-authors-widget.html" . }}
   {{- end }}

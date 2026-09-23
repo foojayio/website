@@ -1,19 +1,15 @@
 {{ define "main" }}
-{{/* /java-quick-start/other-tutorials/ -- external Java courses as tiles, the
-     same card rhythm as the advisory board (layouts/board/list.html).
+{{/* /java-quick-start/other-tutorials/ -- external Java courses as tiles,
+     the same card rhythm as the advisory board.
 
-     The board derives its members from a folder of pages, and this page
-     deliberately does NOT: a board member has a profile of their own worth a
-     URL, whereas each entry here exists to send the reader somewhere else. A
-     page per tutorial would mint five URLs, five view-counter keys and five
-     files to open, all to hold four fields. So the list is frontmatter on this
-     page -- case 3 of the derive/default/ask rule in AGENTS.md, since which
-     tutorials to recommend genuinely lives in an editor's head. Adding one is
-     five lines above the `---`, and the count below follows on its own.
-
-     Note this page has no `.TableOfContents` any more (the entries stopped
-     being h3s), so _default/single.html's TOC sidebar would not have fired
-     here regardless. */}}
+     The board derives its members from a folder of pages and this page
+     deliberately does NOT: a board member has a profile worth a URL, whereas
+     each entry here exists to send the reader somewhere else, and a page
+     apiece would mint a URL, a view-counter key and a file to hold four
+     fields. So the list is `tutorials:` in this page's own frontmatter --
+     case 3 of the derive/default/ask rule, since which tutorials to recommend
+     lives in an editor's head. Adding one is five lines, and the count
+     follows on its own. */}}
 {{ $tutorials := .Params.tutorials }}
 
 <div class="page-head">
@@ -34,10 +30,10 @@
     <article class="tutorial-card">
       <a class="tutorial-card__link" href="{{ .url }}" target="_blank" rel="noopener">
         {{/* Same tile treatment as a board logo: the artwork is a mix of
-             portraits, course screenshots and wordmarks, so `contain` on a
-             sunken tile keeps them on the same visual footing without cropping
-             anyone's face. `imagebackground` is the same escape hatch board
-             logos have, for art that needs its own ground. */}}
+             portraits, screenshots and wordmarks, so `contain` on a sunken
+             tile keeps them on one footing without cropping anyone's face.
+             `imagebackground` is the escape hatch for art needing its own
+             ground. */}}
         <div class="tutorial-card__art"{{ with .imagebackground }} style="background-color: {{ . }}"{{ end }}>
           {{ with .image }}
           <img src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="" loading="lazy" decoding="async">

@@ -1,21 +1,17 @@
 {{- /* A TABLE WHOSE HEADER ROW IS ENTIRELY EMPTY IS RENDERED WITHOUT ONE.
 
-       GFM has no way to write a headerless table -- the delimiter row is what
-       makes a table a table, and it only comes after a header. WordPress has no
-       such rule, and most of its tables here are headerless: legends, note
-       boxes, numbered annotations. So shared/HtmlToMarkdown.java stores those
-       with an EMPTY header row (the only valid GFM shape that keeps every data
-       row a data row -- see the long comment there for why promoting the first
-       row was rejected), and this hook takes it back out again.
+       GFM cannot write a headerless table -- the delimiter row is what makes
+       a table a table, and it only comes after a header -- but many imported
+       tables are headerless (legends, note boxes, annotations). Those are
+       stored with an EMPTY header row, the only valid GFM shape that keeps
+       every data row a data row, and this hook takes it back out.
 
-       Without it the reader gets a blank strip above the table: `.prose th`
-       carries a bottom border and the theme's heading weight, so an empty
-       header is visible furniture rather than nothing.
+       Without it the reader gets a blank strip: `.prose th` carries a bottom
+       border and heading weight, so an empty header is visible furniture.
 
-       Derived from the content -- a table with a real header keeps it, a table
-       with a blank one loses it, and no frontmatter or shortcode chooses. The
-       rest of the markup is what Goldmark's own table renderer emits, so
-       `.prose table` styling is unaffected. */ -}}
+       Derived from the content -- a real header is kept, a blank one is
+       dropped, and no frontmatter chooses. The rest of the markup is what
+       Goldmark's own renderer emits, so `.prose table` is unaffected. */ -}}
 {{- $hasHeader := false -}}
 {{- range .THead -}}
   {{- range . -}}

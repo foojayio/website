@@ -28,16 +28,14 @@
            {{< gallery "one.png" "two.png" />}}
 
        Filenames resolve through resource-url.html, so a bare name means "the
-       file sitting next to index.md in this post's folder" -- the same rule as
-       a plain Markdown image. Full URLs and /static paths work too.
+       file next to index.md in this post's folder" -- the same rule as a plain
+       Markdown image. Full URLs and /static paths work too.
 
-       Images are click-to-enlarge for free -- static/js/lightbox.js binds every
-       `.prose img`, so no per-image markup is needed here. Where a filename
-       carries WordPress's `-1024x768` size suffix and the full-size original
-       sits in the same bundle, the image is wrapped in a link to that original
-       so the lightbox opens the full-size version instead of the thumbnail --
-       derived rather than asked for, which is what the migrated WordPress
-       galleries used to spell out as <a href> markup. */ -}}
+       Click-to-enlarge is free: static/js/lightbox.js binds every `.prose
+       img`. Where a filename carries a `-1024x768` size suffix and the
+       full-size original is in the same bundle, the image is wrapped in a link
+       to that original so the lightbox opens the full version -- derived
+       rather than asked for. */ -}}
 
 {{- /* Items: positional args on a self-closed call, otherwise one per line. */ -}}
 {{- $items := slice -}}
@@ -70,13 +68,10 @@
     {{- if findRE `-\d+x\d+\.[a-zA-Z0-9]+$` $file -}}
       {{- $base := replaceRE `-\d+x\d+(\.[a-zA-Z0-9]+)$` "$1" $file -}}
       {{- $scaled := replaceRE `(\.[a-zA-Z0-9]+)$` "-scaled$1" $base -}}
-      {{/* ...and the same name under ANY extension. GetMatch takes a glob, and
-           `name.*` cannot match `name-scaled.jpg` or the thumbnail itself, so this
-           is a safe last resort. It exists because the original and its thumbnail
-           need not share a format: cleanup/images.py converts a large PNG to JPEG
-           but leaves a smaller thumbnail as PNG, which broke the derivation for 28
-           images -- the lightbox silently opened the 1024px thumbnail instead of
-           the full-size original. Tried LAST, so an exact-extension match always
+      {{/* ...and the same name under ANY extension, because an original and
+           its thumbnail need not share a format. `name.*` cannot match
+           `name-scaled.jpg` or the thumbnail itself, so this is a safe last
+           resort -- and it is tried LAST, so an exact-extension match always
            wins. */}}
       {{- $anyExt := replaceRE `-\d+x\d+\.[a-zA-Z0-9]+$` ".*" $file -}}
       {{- with $.Page.Resources.GetMatch $base -}}

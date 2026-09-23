@@ -12,21 +12,15 @@
 </div>
 
 <div class="content-col full-width">
-  {{/* page-single--wide: the wrapper above is already full-width, but
-       .page-single caps its child at the READING measure -- right for
-       prose, wrong here, where the content is a world map and a table of
-       hundreds of rows. Without it the page left-aligned at ~800px inside the
-       1240px shell and threw the rest away as empty gutter. Same opt-out
-       sponsors/list.html uses; these two were missed. There is almost no prose
-       on either page to widen badly -- the body is a source note. */}}
+  {{/* page-single--wide: .page-single caps its child at the READING measure,
+       which is right for prose and wrong for a world map and a table of
+       hundreds of rows. Same opt-out sponsors/list.html uses. */}}
   <article class="page-single page-single--wide prose">
     {{ .Content }}
 
-    {{/* data/jugs.yaml is regenerated at every build and daily
-         (scripts/fetch/Jugs.java, .github/workflows/build-deploy.yml +
-         meetup-sync.yml) from the community-run World Wide JUGs directory --
-         nobody should ever hand-edit that file, so say so here where the
-         data is actually shown, not just in a code comment. */}}
+    {{/* data/jugs.yaml is regenerated from the community-run World Wide JUGs
+         directory -- nobody should hand-edit it, so say so where the data is
+         shown, not only in a code comment. */}}
     <p class="jugs-source-note">
       This list is fetched automatically from the community-run
       <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
@@ -39,25 +33,17 @@
 
     {{ $jugs := hugo.Data.jugs }}
 
-    {{/* World map of every JUG with coordinates (data/jugs.yaml's
-         latitude/longitude, derived from GlobalWWJugs's `location` field by
-         scripts/fetch/Jugs.java).
+    {{/* World map of every JUG with coordinates, from data/jugs.yaml.
 
-         The map itself is static/js/cluster-map.js, shared with
-         /java-champions/ -- grouping by place, the counted badges and the
-         cluster totals live there so the two maps cannot disagree about what a
-         number means. All this template supplies is the points, the noun and
-         the element.
+         The map is static/js/cluster-map.js, shared with /java-champions/ --
+         grouping, badges and cluster totals live there so the two maps cannot
+         disagree about what a number means.
 
-         Grouping matters here for a smaller but real reason than on the
-         champions map: 87 of the 88 distinct points hold exactly one JUG, but
+         Grouping matters here even though nearly every point holds one JUG:
          upstream gives Duesseldorf/Rhein, Freiburg and Hessen the SAME
-         coordinates (51.233334, 6.783333 -- Duesseldorf's; Freiburg is 400km
-         away and Hessen is another state entirely). As three separate markers
-         those stacked on one point and two of them were unreachable at any
-         zoom. They are now one marker reading 3, with all three in its popup.
-         The coordinates themselves are an upstream bug -- fix them in
-         GlobalWWJugs, never in the generated data/jugs.yaml. */}}
+         coordinates, and as separate markers two of the three were
+         unreachable at any zoom. Those coordinates are an upstream bug -- fix
+         them in GlobalWWJugs, never in the generated data/jugs.yaml. */}}
     {{ $points := slice }}
     {{ range $jugs }}
       {{ if and .latitude .longitude }}
@@ -94,16 +80,13 @@
     <div class="list-filter">
       <input type="search" id="jugs-filter" class="list-filter__input" placeholder="Filter by name or country…" aria-label="Filter JUGs by name or country" autocomplete="off">
     </div>
-    {{/* The table is WIDER THAN A PHONE (617px of columns against a 390px
-         viewport on /jugs/, 525 on /java-champions/), and with nothing to
-         contain it the whole PAGE scrolled sideways -- WCAG 1.4.10, which asks
-         for no two-dimensional scrolling below 320px-equivalent. Squeezing the
-         columns instead is not an option: the Connect cell is a row of links
-         and the name column would become one word per line. So the table scrolls
-         inside its own box, and that box carries tabindex="0" -- a scroll
-         container that only a mouse or a touchscreen can move is unreachable for
-         a keyboard user (2.1.1), and it needs a name and a role to be worth
-         landing on. */}}
+    {{/* The table is WIDER THAN A PHONE, and uncontained the whole PAGE
+         scrolls sideways -- WCAG 1.4.10 asks for no two-dimensional scrolling
+         below 320px-equivalent, and squeezing the columns is not an option
+         (the Connect cell is a row of links). So it scrolls inside its own
+         box, and that box carries tabindex="0": a scroll container only a
+         mouse can move is unreachable for a keyboard user (2.1.1), and it
+         needs a name and a role to be worth landing on. */}}
     <div class="table-scroll" tabindex="0" role="region" aria-label="Java User Groups table">
       <table class="jugs-table">
         <thead>
@@ -123,12 +106,10 @@
               {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $jug.name }}</a>{{ else }}{{ .name }}{{ end }}
             </td>
             <td>{{ .country }}</td>
-            {{/* founded_date in the source data is inconsistent precision --
-                 "2013-01-01", but also just "2009-11" (year-month, no day) for
-                 some JUGs, which Hugo's dateFormat/date parser rejects outright
-                 (breaks the whole build). Every value seen starts with a
-                 4-digit year, so slice that out directly rather than parsing
-                 it as a date at all. */}}
+            {{/* founded_date is inconsistent precision upstream -- "2013-01-01"
+                 but also "2009-11", which Hugo's date parser rejects outright
+                 and so breaks the build. Every value starts with a 4-digit
+                 year, so slice that out rather than parsing a date. */}}
             <td>{{ with .founded_date }}{{ if ge (len .) 4 }}{{ slicestr . 0 4 }}{{ else }}{{ . }}{{ end }}{{ end }}</td>
             <td class="jugs-table__links">
               {{ $links := slice }}

@@ -2,21 +2,16 @@
 
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
 
-{{/* THE MOST RECENT POSTS -- everything published on the newest publish DATE,
-     not just the single newest page.
-
-     Scheduled posts carry a date with no time (see AGENTS.md), so a day's
-     articles all land at the same instant and Hugo's sort falls through to the
-     file path: whichever one the old `index $posts 0` spotlighted was picked by
-     its folder name, and its same-day siblings dropped into the grid below
-     looking a week old. 523 of the archive's 1497 publishing days carry more
-     than one post, so that was a third of them. lead-posts.html labels the
-     whole set instead.
+{{/* THE MOST RECENT POSTS -- everything published on the newest publish
+     DATE, not just the single newest page. Scheduled posts carry a date with
+     no time, so a day's articles land at the same instant and Hugo's sort
+     falls through to the file path: spotlighting one of them would be picking
+     by folder name. lead-posts.html labels the whole set instead.
 
      The day comes from THE NEWEST POST, never from `now`: foojay does not
-     publish every day, so keying on today would empty the panel on a quiet one.
-     $posts is date-descending, so the same-day posts are the prefix of it --
-     hence the loop with a break rather than a `where`, which cannot compare two
+     publish daily, so keying on today would empty the panel on a quiet one.
+     $posts is date-descending, so the same-day posts are its prefix -- hence
+     the loop with a break rather than a `where`, which cannot compare two
      dates a calendar day at a time across the offsets content/ carries. */}}
 {{ $leads := slice }}
 {{ with $posts }}
@@ -30,46 +25,29 @@
   {{ end }}
 {{ end }}
 
-{{/* The home page had no <h1> at all -- it opens straight into the lead card,
-     so its first heading was the <h2> on the "Podcasts" band and the most
-     linked-to page on the site had no top-level heading for either a search
-     engine or a screen reader.
-
-     Visually hidden rather than drawn, because the page deliberately has no
-     hero to put one in: adding a visible title would push the lead article
-     down the fold to satisfy a crawler, which is the tail wagging the dog. The
-     text is the site's own name, i.e. what the page IS -- not a keyword line
-     written for a robot and hidden from readers, which is what Google
-     penalises, and not the tagline appended to it either, since site.Title
-     already spells out "Friends Of OpenJDK". Every other layout has a real,
-     visible <h1>. */}}
+{{/* Visually hidden rather than drawn, because the page deliberately has no
+     hero to put an <h1> in: a visible title would push the lead article down
+     the fold to satisfy a crawler. The text is the site's own NAME, i.e. what
+     the page is -- not a keyword line hidden from readers, which is what
+     Google penalises. Every other layout has a real, visible <h1>. */}}
 <h1 class="visually-hidden">{{ site.Title }}</h1>
 
 {{/* The one-line masthead strapline, and the only prose on the home page.
 
-     It is here, above the fold, rather than in a band at the foot, because the
-     reader it exists for is the one who has never been here before -- and they
-     decide what this site is within a screen, long before they would reach a
-     closing section. It was tried at the foot first; that placement serves
-     everyone except the person it is for.
+     Above the fold rather than in a band at the foot, because the reader it
+     exists for has never been here before and decides what this site is
+     within a screen.
 
-     Two things already in the chrome are why this is ONE LINE and not a hero:
-     the header carries "Friends Of OpenJDK" beside the wordmark, and it carries
-     the "Write for Foojay" CTA. So the strapline owes the reader only the bit
-     neither of those gives -- what the site is FOR -- and it must not spend the
-     lead article's fold space saying anything else. Note the header tag is
-     `display: none` below 1120px, so on a phone or tablet this line is the only
-     thing on the page that expands "foojay.io" at all.
+     ONE LINE and not a hero, because the header already carries "Friends Of
+     OpenJDK" and the "Write for Foojay" CTA -- so this owes the reader only
+     what neither gives, and must not spend the lead article's fold space. The
+     header tag is `display: none` below 1120px, so on a phone this is the only
+     thing that expands "foojay.io" at all.
 
-     The <h1> above stays hidden. This is orientation, not document structure,
-     and a visible heading here would just repeat the wordmark two rows up.
-
-     THE SENTENCE IS DERIVED: it is /what-is-foojay/'s own description, through
-     partials/meta-description.html -- the same string that page gives a search
-     engine and a link preview -- so the home page cannot describe Foojay
-     differently from the page it sends you to for the long version, and there is
-     no second pitch to keep in step with the footer blurb. `with` on the lookup,
-     so a fork that removes that page gets no strip rather than an empty bar. */}}
+     THE SENTENCE IS DERIVED from /what-is-foojay/'s own description, so the
+     home page cannot describe Foojay differently from the page it sends you
+     to for the long version. `with` on the lookup, so removing that page
+     gives no strip rather than an empty bar. */}}
 {{ with site.GetPage "/pages/what-is-foojay" }}
 <div class="home-intro">
   <div class="shell">
@@ -89,22 +67,16 @@
     {{ partial "ads-carousel.html" . }}
 
     <div class="post-grid">
-      {{/* 10, not 9: with the lead card above taking the full width, the grid
-           below is 2 columns in the sidebar layout at common window widths, and
-           9 left the last row half empty.
-
-           `after (len $leads)`, not `after 1`: the panel above holds every post
-           of the newest day, so a fixed 1 would repeat all but one of them
-           here. */}}
+      {{/* 10, not 9: the grid is 2 columns at common widths, and 9 left the
+           last row half empty. `after (len $leads)`, not `after 1`, because
+           the panel above holds every post of the newest day. */}}
       {{ range first 10 (after (len $leads) $posts) }}
         {{ partial "post-card.html" . }}
       {{ end }}
     </div>
 
-    {{/* The site feed sits beside "View all articles" because that is where a
-         reader who wants MORE of this looks, and the two are the same offer by
-         different means: the archive, or a subscription to it. /index.xml is
-         posts-only (layouts/index.rss.xml), i.e. exactly what this grid is. */}}
+    {{/* The feed sits beside "View all articles": the same offer by another
+         means, and /index.xml is posts-only, exactly what this grid is. */}}
     <p class="section-more">
       <a class="btn btn--ghost" href="{{ "today/" | relURL }}">View all articles</a>
       {{ partial "feed-link.html" . }}

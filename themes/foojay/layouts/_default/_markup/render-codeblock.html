@@ -1,27 +1,18 @@
 {{- /* Fenced code block -> EnlighterJS markup, EXCEPT ```mermaid.
 
-       Content stores plain Markdown fences (```java) because that is what an
-       author can reasonably be asked to type; this hook turns each one back
-       into the <pre class="EnlighterJSRAW"> element the vendored EnlighterJS
-       initialiser looks for (see partials/enlighterjs.html). Storage format and
-       presentation are separated: contributors write Markdown, the site keeps
-       its existing code styling, and swapping the highlighter later means
-       editing this one file rather than reprocessing 1000+ posts.
-
+       Content stores plain Markdown fences, which is what an author can be
+       asked to type; this turns each one into the <pre class="EnlighterJSRAW">
+       element the vendored initialiser looks for. Swapping the highlighter
+       later means editing this file rather than reprocessing 1000+ posts.
        Chroma is bypassed entirely -- returning our own HTML means Hugo does no
-       server-side highlighting, which is what we want while EnlighterJS owns
-       the rendering.
+       server-side highlighting.
 
-       LANGUAGE MAPPING. The list below is the registry of the VENDORED build
-       (static/vendor/enlighterjs/enlighterjs.min.js) -- 57 languages, read out
-       of the bundle itself rather than from documentation. It really does have
-       `xml`, `yaml` and `visualbasic` lexers, and `html` is a declared alias of
-       `xml`; an earlier version of this list omitted all four, which silently
-       downgraded 591 blocks in content/ to `generic`. If the vendored build is
-       ever updated, re-derive the list from the new bundle rather than editing
-       it by hand. Fence tags authors actually type are mapped to the closest
-       EnlighterJS name here, and anything unrecognised degrades to `generic`
-       rather than breaking the block. */ -}}
+       LANGUAGE MAPPING. The list below is the registry of the VENDORED build,
+       read out of the bundle itself rather than from documentation: it really
+       does have `xml`, `yaml` and `visualbasic` lexers, and `html` is a
+       declared alias of `xml`. If that build is ever updated, RE-DERIVE this
+       list from the new bundle rather than editing it by hand. Anything
+       unrecognised degrades to `generic` rather than breaking the block. */ -}}
 
 
 {{- /* EnlighterJS's own registry -- a fence tag in this list is passed straight
@@ -30,42 +21,34 @@
 
 {{- $tag := lower (trim (.Type | default "") " ") -}}
 
-{{- /* MERMAID is a diagram, not code, so it leaves before the highlighter sees
-       it: ```mermaid becomes <pre class="mermaid">, which is the element
-       mermaid's own run() looks for (partials/mermaid.html). Same separation of
-       storage from presentation as the EnlighterJS path below -- an author types
-       the fence GitHub and GitLab already render, and nothing about the
-       renderer leaks into content/.
+{{- /* MERMAID is a diagram, not code, so it leaves before the highlighter
+       sees it: ```mermaid becomes the <pre class="mermaid"> that mermaid's own
+       run() looks for.
 
        This must come FIRST. `mermaid` is not in $supported, so without the
        branch a diagram falls through to `generic` and renders as a syntax
-       block of its own source -- which is what it did before, silently.
+       block of its own source.
 
-       htmlEscape + safeHTML for exactly the reason the EnlighterJS block below
-       needs them, and it matters more here: diagram syntax is full of `-->`,
-       `<|--` and `<br/>`, so an unescaped body would be parsed as markup, and a
-       double-escaped one would reach mermaid as `--&gt;` and fail to parse.
-       The browser decodes the entities back into textContent, which is what
-       mermaid reads. */ -}}
+       htmlEscape + safeHTML for the reason the EnlighterJS block below needs
+       them, and it matters more here: diagram syntax is full of `-->`, `<|--`
+       and `<br/>`, so an unescaped body is parsed as markup and a
+       double-escaped one reaches mermaid as `--&gt;` and fails to parse. */ -}}
 {{- if eq $tag "mermaid" -}}
 <pre class="mermaid">{{ htmlEscape .Inner | safeHTML }}</pre>
 {{- else -}}
 
 {{- $lang := partial "code-language.html" $tag -}}
 
-{{- /* .Inner is the raw code. htmlEscape is what keeps a snippet containing
-       </pre> or <script> from escaping the block; EnlighterJS un-escapes it
+{{- /* .Inner is the raw code; htmlEscape keeps a snippet containing </pre>
+       or <script> from escaping the block, and EnlighterJS un-escapes it
        client-side.
 
-       safeHTML is NOT optional here. htmlEscape hands back a plain string, and
-       html/template then escapes that string a SECOND time on output, so a `>`
-       in the source lands in the page as `&amp;gt;` and the reader sees a
-       literal `&gt;`. Marking the already-escaped result safe is what stops the
-       second pass -- this is the shape Hugo's own docs use
-       (`.Inner | htmlEscape | safeHTML`). Dropping safeHTML re-breaks every
-       code block containing < > & " ' (~950 posts).
+       safeHTML IS NOT OPTIONAL. htmlEscape hands back a plain string, which
+       html/template then escapes a SECOND time on output, so a `>` reaches
+       the page as `&amp;gt;`. Dropping it breaks every code block containing
+       < > & " ' -- around 950 posts.
 
-       No newline between the tag and the code -- a leading blank line would
-       show up as one inside the rendered block. */ -}}
+       No newline between the tag and the code: a leading blank line shows up
+       inside the rendered block. */ -}}
 <pre class="EnlighterJSRAW" data-enlighter-language="{{ $lang }}"{{ with .Attributes.title }} data-enlighter-title="{{ . }}"{{ end }}{{ with .Attributes.highlight }} data-enlighter-highlight="{{ . }}"{{ end }}>{{ htmlEscape .Inner | safeHTML }}</pre>
 {{- end -}}

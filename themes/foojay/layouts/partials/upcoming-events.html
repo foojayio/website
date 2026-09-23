@@ -1,24 +1,19 @@
 {{/* The next two weeks, as a horizontal band on the home page.
 
      Everything comes from partials/calendar-events.html -- the same slice
-     /calendar/ renders -- so a conference added as a pull request appears here
-     and there at the same build, and the two can't disagree about a date, a
-     place or a group's colour. There is nothing to configure and no second list
-     to keep.
+     /calendar/ renders -- so the two cannot disagree about a date, a place or
+     a group's colour.
 
-     Renders NOTHING when the window is empty, the way the podcast band does: a
-     quiet fortnight is a reason to show no section, not to show an empty one.
-     Two weeks is the point of it -- "what could I still go to?" -- so it is a
-     window, not a top-N that would quietly stretch to next spring. */}}
+     Renders NOTHING when the window is empty: a quiet fortnight is a reason
+     to show no section, not an empty one. A WINDOW, not a top-N, which would
+     quietly stretch to next spring. */}}
 
 {{ $cal := partialCached "calendar-events.html" . }}
 {{ $today := now.Format "2006-01-02" }}
 {{ $cutoff := (now.AddDate 0 0 14).Format "2006-01-02" }}
 
-{{/* Overlap, not "starts within": a five-day conference that opened yesterday
-     is on this week, and dropping it because its START is behind us is exactly
-     the bug a reader would notice. Dates are ISO strings, which compare
-     correctly as strings. */}}
+{{/* OVERLAP, not "starts within": a five-day conference that opened
+     yesterday is on this week. ISO strings, which compare correctly. */}}
 {{ $soon := slice }}
 {{ range $cal.events }}
   {{ $end := .endDate | default .date }}

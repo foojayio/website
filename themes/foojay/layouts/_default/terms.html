@@ -1,13 +1,11 @@
 {{ define "main" }}
-{{/* The A-Z index of a taxonomy -- /today/category/ (see
-     content/categories/_index.md for why it sits there and not at /categories/).
+{{/* The A-Z index of a taxonomy -- /today/category/.
 
-     Alphabetical, deliberately: the sidebar widget and the home page band
-     already show the top categories BY COUNT, so what is missing everywhere
-     else -- and the only reason to open a page listing all 123 -- is finding a
-     specific one. Hence the filter box on top, the same one /today/author/ uses
-     for 344 authors. Everything here is derived from the taxonomy, so a new
-     category appears by a post carrying it; there is no list to maintain. */}}
+     ALPHABETICAL, deliberately: the sidebar widget and the home page band
+     already show the top categories BY COUNT, so the only reason to open a
+     page listing all 123 is to find a specific one. Hence the filter box,
+     the same one /today/author/ uses. Derived from the taxonomy, so a new
+     category appears by a post carrying it. */}}
 {{ $terms := .Data.Terms.Alphabetical }}
 <div class="page-head">
   <div class="page-head__inner">

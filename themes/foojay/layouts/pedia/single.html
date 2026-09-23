@@ -19,11 +19,9 @@
 
     {{ partial "page-source.html" . }}
 
-    {{/* Renders nothing unless partials/comments-term.html gives this page a
-         term. A glossary entry is exactly the kind of page a reader corrects or
-         asks a follow-up on, and the term is qualified `pedia/<slug>` there --
-         content/pedia/records.md and the post "records" would otherwise share
-         one thread. */}}
+    {{/* Renders nothing unless comments-term.html gives this page a term.
+         Qualified `pedia/<slug>` there, or a glossary entry and a post that
+         slug the same would share one thread. */}}
     {{ partial "comments.html" . }}
 
     <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
@@ -32,21 +30,14 @@
   <aside class="sidebar" data-pagefind-ignore>
     {{ partial "toc.html" . }}
 
-    {{/* Same paid banner carousel the post sidebar carries (partials/sidebar.html).
-         This column is not built from that partial -- it holds only a table of
-         contents -- so the placement has to be added here too, or a reader on a
-         pedia entry, a Quick Start step or a sponsor profile sees a right column
-         with a gap where every other page has a banner. Renders nothing when no
-         campaign is running, and nothing on the home page. */}}
+    {{/* The same paid banner the post sidebar carries. This rail is hand-built
+         rather than partials/sidebar.html, so the placement has to be repeated
+         or the column has a gap where every other page has a banner. */}}
     {{ partial "ads-widget.html" . }}
 
-    {{/* And the sponsor list, for the same reason the banner above it is here.
-         partials/sidebar.html carries both on posts and listings; this column is
-         hand-built, so it got the banner when that was added and was silently
-         left without the logos -- so the paid carousel ran on these pages while
-         the sponsors who fund the site did not appear. AGENTS.md treats sponsor
+    {{/* And the sponsor list, for the same reason. AGENTS.md treats sponsor
          visibility as contractual and exempts this widget from the TOC-height
-         cull; a rail that renders at all should render it. */}}
+         cull: a rail that renders at all should render it. */}}
     {{ partial "sidebar-sponsors.html" . }}
   </aside>
   {{ end }}

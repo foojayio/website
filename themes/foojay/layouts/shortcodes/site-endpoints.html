@@ -3,16 +3,14 @@
   /ai-instructions/. The point of the section is "fetch these instead of
   crawling us", so the URLs are printed in full as well as linked.
 
-  URLs here are ABSOLUTE, which is the "absolute by contract" exception to
-  AGENTS.md's .RelPermalink rule and the same reasoning llms.txt uses: these
-  are values meant to be copied out of the page and fetched by something that
-  has no idea what our origin is. Everywhere else on this page, an internal
-  link is relative.
+  URLs here are ABSOLUTE -- the "absolute by contract" exception to AGENTS.md's
+  .RelPermalink rule, for the reason llms.txt uses it: these are values meant
+  to be copied out of the page and fetched by something with no idea what our
+  origin is.
 
   Derived, so a route cannot be described here as something Hugo does not
-  actually emit: llms.txt and the feed come from the home page's own output
-  formats (never a literal "/index.xml" -- Hugo decides that path), and the
-  repository from [params.source].
+  emit: llms.txt and the feed come from the home page's own output formats
+  (never a literal "/index.xml"), and the repository from [params.source].
 */ -}}
 {{- $rss := site.Home.OutputFormats.Get "rss" -}}
 {{- $llms := site.Home.OutputFormats.Get "llms" -}}

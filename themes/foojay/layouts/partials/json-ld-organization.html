@@ -1,25 +1,20 @@
-{{- /* The one description of foojay as an organization, returned as a dict so
-       both callers emit the SAME node rather than two entities that happen to
-       share a name: the home page's @graph, and every post's @graph (where it
-       is the BlogPosting's publisher).
+{{- /* The one description of foojay as an organization, returned as a dict
+       so both callers emit the SAME node rather than two entities sharing a
+       name: the home page's @graph, and every post's (as the publisher).
 
-       It has to be a shared definition rather than an @id reference alone. A
-       bare {"@id": ".../#organization"} on a post page points at a node that is
-       not in that document -- Google resolves it only if it also sees the
-       definition -- so the post branch emits this node alongside the
-       BlogPosting and links to it by @id. One node, defined once, repeated
-       where it is needed.
+       A SHARED DEFINITION, not an @id reference alone: a bare {"@id":
+       ".../#organization"} points at a node not in that document, which Google
+       resolves only if it also sees the definition. So the post branch emits
+       this node alongside the BlogPosting and links to it by @id.
 
-       sameAs is the set of profiles foojay actually controls, kept in step with
-       partials/footer.html. The Slack link in the footer is deliberately
-       absent: it is a join invite, not a profile page, so it is not an identity
-       a search engine can reconcile.
+       sameAs is the set of profiles foojay controls, kept in step with
+       partials/footer.html. The Slack link there is deliberately absent: a
+       join invite is not a profile a search engine can reconcile.
 
-       The logo is a dedicated square, white-ground raster. Google composites a
-       publisher logo onto white and wants at least 112px on its short side, and
-       the header wordmark is 1022x352 light-blue-on-transparent -- which
-       disappears exactly where Google would draw it. See
-       themes/foojay/static/images/. */ -}}
+       The logo is a dedicated square, white-ground raster -- Google
+       composites a publisher logo onto white and wants 112px on its short
+       side, and the header wordmark is light-blue-on-transparent, which
+       disappears exactly there. */ -}}
 {{- return (dict
   "@type" "Organization"
   "@id" (printf "%s#organization" site.Home.Permalink)
