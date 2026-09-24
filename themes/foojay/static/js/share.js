@@ -56,6 +56,15 @@
     }
   }
 
+  /* --- LinkedIn ------------------------------------------------------- */
+  /* The href is the URL-only endpoint, which is the one a phone can use. On a
+     desktop-sized screen swap in the form that actually prefills the composer
+     -- see share.html for why that one cannot be the href. */
+  var linkedin = root.querySelector('[data-share-linkedin-desktop]');
+  if (linkedin && window.matchMedia('(min-width: 768px) and (pointer: fine)').matches) {
+    linkedin.href = linkedin.getAttribute('data-share-linkedin-desktop');
+  }
+
   /* --- Mastodon ------------------------------------------------------- */
   /* There is no mastodon.com to post to: the share URL is the reader's OWN
      server, which nothing in the build can know. So the pill opens a form,
