@@ -164,7 +164,7 @@ Customers on the 4 branch without contracted Lifetime Support can still access e
 
 ## **Looking Ahead**
 
-The Azul Payara product line spans the JDK (Azul Zulu and Azul Platform Prime), the full application server (Azul Payara Server) and the cloud-native runtime (Azul Payara Micro), all from one vendor. The 7, 6, 5, and 4 lines continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version.
+The Azul Payara product line spans the JDK (Azul Zulu and Azul Prime), the full application server (Azul Payara Server) and the cloud-native runtime (Azul Payara Micro), all from one vendor. The 7, 6, 5, and 4 lines continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version.
 
 If you run MicroProfile OpenTracing on the 7 or 6 lines, re-instrumenting against OpenTelemetry `@WithSpan` is now blocking work rather than future work. And if you are evaluating a move to Payara 7, this release makes that easier than the last one did: the jakarta.\* namespace is stable between Jakarta EE 10 and 11, so existing Jakarta EE 10 applications deploy on Payara 7 by upgrading the runtime rather than rewriting the codebase, and the descriptor compatibility work in this cycle removes a further class of migration friction. Migration assessments are available through your Azul account team.
 
