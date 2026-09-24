@@ -1745,30 +1745,30 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* Left rail on the live calendar, right rail here: the site's other wide pages
    all put their secondary column on the right, and the grid should start at
    the same x as every other page's content. */
-.calendar__aside { order: 2; display: grid; gap: 1.5rem; align-content: start; }
-.calendar__main { order: 1; min-width: 0; }
+.calendar__aside { min-width: 0; display: grid; gap: 1.5rem; align-content: start; }
+.calendar__main { min-width: 0; }
+.calendar__aside .widget-sponsors h2 { margin: 0 0 1rem; font-size: 1rem; }
 
-.cal-intro { margin-bottom: 1.75rem; }
+.cal-intro { max-width: 70ch; margin-bottom: 1.75rem; }
 .cal-stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .cal-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 
 /* Two ways onto the calendar, so two buttons: an event by a pull request here,
    a JUG upstream in the World Wide JUGs directory. Wrapped so they sit together
    rather than inheriting the aside's 1.5rem section gap. */
-.cal-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.cal-ctas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: .5rem; }
 /* Side by side in a 300px rail, so they need to be narrower than a default
    button and their labels centred -- .btn is an inline-flex box, so text-align
    alone would leave both labels hard against the left edge. */
 .cal-cta {
   justify-self: stretch; justify-content: center; text-align: center;
-  padding: .5rem .6rem; font-size: .85rem;
+  padding: .5rem .6rem; font-size: .85rem; white-space: normal;
 }
 
 /* The group legend doubles as the key to the grid's dots and as the list of
    which JUGs actually have something coming up. */
 .cal-legend__head {
-  margin: 0 0 .75rem; font-size: .82rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .1em; color: var(--ink-muted);
+  margin: 0 0 .75rem; font-size: 1rem; font-weight: 700; color: var(--ink);
 }
 /* Capped and scrollable: both lists grow with the data -- 90 JUGs publish a
    calendar and a busy month puts dozens of them here -- and an aside that runs
@@ -1831,11 +1831,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
     radial-gradient(farthest-side at 50% 100%, rgb(255 255 255 / .16), transparent) bottom / 100% .8rem no-repeat;
   background-attachment: local, local, scroll, scroll;
 }
-/* Drawn INSIDE the box: an outline-offset on a scroll container is clipped on
-   the axis it scrolls, so the ring's bottom edge would not be painted. Same
-   rule as .table-scroll. */
-.cal-legend__scroll:focus-visible { outline-offset: -3px; }
-
 .cal-legend__list {
   list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem;
 }
@@ -1867,7 +1862,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    and prose in a 300px column is a stack of four-word lines that crowds out
    the legends the rail is actually for. */
 .cal-source {
-  margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  max-width: 75ch; margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
   color: var(--ink-muted); font-size: .85rem; line-height: 1.55;
 }
 .cal-source__synced { display: inline-block; margin-top: .35rem; }
@@ -1894,8 +1889,8 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 }
 .cal-nav { display: flex; align-items: center; gap: .5rem; }
 .cal-nav__btn {
-  width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer;
-  border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink);
+  width: 2.25rem; height: 2.25rem; border-radius: var(--radius-sm); cursor: pointer;
+  border: 1px solid var(--control-border, var(--ink-muted)); background: var(--surface); color: var(--ink);
   font-size: 1.1rem; line-height: 1; display: grid; place-items: center;
 }
 .cal-nav__btn:hover:not(:disabled) { border-color: var(--ink); }
@@ -1904,19 +1899,19 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    silently doing nothing, which is how it read before. */
 .cal-nav__btn:disabled { opacity: .35; cursor: default; }
 .cal-nav__label {
-  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--ink);
+  font-family: var(--font-body); font-size: 1.05rem; font-weight: 700; color: var(--ink);
   min-width: 10.5ch; text-align: center;
 }
 .cal-nav__today { margin-left: .35rem; cursor: pointer; }
 
 .cal-switch {
-  display: inline-flex; border: 1px solid var(--border-strong);
-  border-radius: 999px; overflow: hidden; background: var(--surface);
+  display: inline-flex; border: 1px solid var(--control-border, var(--ink-muted));
+  border-radius: var(--radius-sm); overflow: hidden; background: var(--surface);
 }
 .cal-switch__btn {
   border: 0; background: transparent; cursor: pointer;
-  padding: .35rem 1rem; font-family: var(--font-display); font-weight: 600;
-  font-size: .88rem; color: var(--ink-soft);
+  padding: .5rem 1rem; font-family: var(--font-body); font-weight: 600;
+  font-size: .9rem; color: var(--ink-soft);
 }
 .cal-switch__btn[aria-pressed="true"] { background: var(--brand-accent); color: var(--on-accent); }
 
@@ -1933,7 +1928,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-table th {
   text-align: left; padding: .6rem .7rem; font-size: .74rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted);
-  border-bottom: 1px solid var(--border);
+  background: var(--surface-tinted, var(--surface-sunken)); border-bottom: 1px solid var(--border);
 }
 .cal-table th abbr { text-decoration: none; }
 .cal-cell {
@@ -1950,7 +1945,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-cell.is-outside,
 .cal-cell.is-past { background: var(--surface-sunken); }
 .cal-cell.is-outside .cal-cell__day,
-.cal-cell.is-past .cal-cell__day { opacity: .45; }
+.cal-cell.is-past .cal-cell__day { font-weight: 400; }
 .cal-cell__day {
   display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem;
   font-size: .82rem; font-weight: 600; color: var(--ink-muted);
@@ -1964,24 +1959,25 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* An event chip: a real link to the event, with the click intercepted to open
    the detail dialog (see the layout). */
 .cal-chip {
-  display: block; padding: .3rem .45rem; border-radius: var(--radius-sm);
+  display: block; padding: .3rem .45rem;
   background: var(--surface-sunken); border-left: 3px solid var(--cal-dot, var(--brand-secondary));
+  /* Keep the source-color rail straight; only the opposite corners round off. */
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: .78rem; line-height: 1.25; color: var(--ink);
+  scroll-margin-block-start: 5rem;
 }
-.cal-chip:hover { background: var(--brand-accent-soft); color: var(--ink); text-decoration: none; }
-.cal-chip__time { display: block; color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: .95em; }
-/* A hand-added event (a conference, a community day) reads as a band across
-   the days it runs, so it needs to be distinguishable from a single evening's
-   meetup at a glance. Tinted with its OWN colour rather than one shared
-   "conference" colour: --cal-dot is already on the element, so the band and
-   the legend dot match without a second variable. The flat declaration above
-   it is the fallback for a browser without color-mix. */
+.cal-chip:hover {
+  background: var(--brand-accent-soft); color: var(--ink); text-decoration: none;
+}
+.cal-chip__time { display: block; color: var(--ink-soft); font-variant-numeric: tabular-nums; font-size: .95em; }
+/* Conference bands retain their source tint and the matching legend color. */
 .cal-chip--event {
   background: var(--surface-sunken);
   background: color-mix(in srgb, var(--cal-dot) 14%, var(--surface-sunken));
   border-left-width: 4px;
 }
 .cal-chip--event:hover { background: color-mix(in srgb, var(--cal-dot) 26%, var(--surface-sunken)); }
+
 /* Two lines of title, then ellipsis: a cell is ~140px wide, and one line cuts
    most meetup titles off before the topic. The full title is in the chip's
    tooltip, the detail dialog and the list view. */
@@ -1993,7 +1989,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    feed gave no venue. One line: a cell is ~140px wide, and the full address is
    in the dialog and the list. */
 .cal-chip__place {
-  display: block; color: var(--ink-muted); font-size: .95em;
+  display: block; color: var(--ink-soft); font-size: .95em;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
@@ -2001,10 +1997,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* Room for the sticky header AND the sticky toolbar above it, so an arrow
    click lands the month's heading in view rather than underneath them. */
-.cal-month { scroll-margin-top: calc(var(--header-h) + 5rem); }
+.cal-month { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 5rem); }
 .cal-month + .cal-month { margin-top: 2rem; }
 .cal-month__head {
-  margin: 0 0 .85rem; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em;
+  margin: 0 0 .85rem; font-size: 1.15rem;
   padding-bottom: .5rem; border-bottom: 1px solid var(--border);
 }
 .cal-month__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
@@ -2029,9 +2025,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* In the agenda a meetup's "group" is the JUG's name, which is self-evidently
    a name; a hand-added event's is its TYPE ("Conference", "Workshop"), which
    is a label and reads as one. */
-/* Outlined rather than filled: the hue is derived from a hash, so it lands
-   anywhere on the wheel, and light text on a hashed background is a contrast
-   lottery. The border carries the colour, the text stays legible. */
 .cal-row--event .cal-row__group {
   padding: .05rem .45rem; border-radius: 999px;
   border: 1px solid var(--cal-dot, var(--border)); color: var(--ink-soft);
@@ -2053,7 +2046,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface); color: var(--ink-soft);
   padding: 1.6rem 1.75rem; max-width: 26rem; width: calc(100% - 2rem);
-  box-shadow: var(--shadow-md);
 }
 /* Don't give the dialog a `position` of its own: the modal is centred by the
    browser's own `position: fixed; inset: 0; margin: auto`, and overriding it
@@ -2067,8 +2059,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-dialog__close:hover { color: var(--ink); }
 .cal-dialog__group {
   margin: 0 0 .5rem; display: flex; align-items: center; gap: .45rem;
-  font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ink-muted);
+  font-size: .9rem; font-weight: 600; color: var(--ink-muted);
 }
 .cal-dialog__group::before {
   content: ""; width: .55rem; height: .55rem; border-radius: 50%; flex: none;
@@ -2079,11 +2070,8 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-dialog__where { margin: .3rem 0 0; color: var(--ink-muted); font-size: .92rem; }
 .cal-dialog__link { margin-top: 1.1rem; }
 
-@media (max-width: 900px) {
+@media (max-width: 64rem) {
   .calendar { grid-template-columns: 1fr; }
-  /* The legend and the "add your JUG" call belong under the calendar once they
-     are no longer a rail beside it. */
-  .calendar__aside { order: 2; }
   .cal-cell { height: auto; min-height: 4.5rem; }
   .cal-chip__time { display: none; }
 }

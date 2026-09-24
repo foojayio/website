@@ -50,7 +50,6 @@
 
 <div class="page-head">
   <div class="page-head__inner">
-    <span class="eyebrow">Community</span>
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
     <div class="page-head__meta">
@@ -89,65 +88,6 @@
 
   {{ if $events }}
   <div class="calendar" data-calendar>
-    <aside class="calendar__aside">
-      {{/* Two buttons because they are genuinely different jobs: an event is a
-           pull request here, a JUG's meetups sync from its own feed once its
-           entry exists upstream. Adding an event leads, as the one a reader
-           of this page can act on today. */}}
-      <div class="cal-ctas">
-        <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
-        <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
-      </div>
-
-      {{ with $conferences }}
-      <section class="cal-legend">
-        {{/* Not decoration: the list is capped and scrolls, so without it a
-             reader seeing eight rows cannot tell whether that is all. */}}
-        <h2 class="cal-legend__head" id="cal-legend-conferences">Conferences &amp; community events <span class="cal-legend__total">{{ len . }}</span></h2>
-        {{/* The SCROLLER is this wrapper, not the <ul>: role="group" on the
-             <ul> would strip its list semantics. tabindex makes it scrollable
-             from the keyboard without tabbing through every row. */}}
-        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-conferences">
-        <ul class="cal-legend__list">
-          {{ range . }}
-            <li class="cal-legend__item">
-              <span class="cal-dot" style="--cal-dot: hsl({{ .hue }} 62% 46%)" aria-hidden="true"></span>
-              <span class="cal-legend__name">
-                {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
-                <span class="cal-legend__country">{{ with .when }}{{ . }}{{ else }}{{ dateFormat "2 January" .date }}{{ end }}{{ with .country }} &middot; {{ . }}{{ end }}</span>
-              </span>
-            </li>
-          {{ end }}
-        </ul>
-        </div>
-      </section>
-      {{ end }}
-
-      <section class="cal-legend">
-        <h2 class="cal-legend__head" id="cal-legend-groups">Groups on the calendar <span class="cal-legend__total">{{ len $groupNames }}</span></h2>
-        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-groups">
-        <ul class="cal-legend__list">
-          {{ range $g := $groupNames }}
-            {{ $first := index (where $events "group" $g) 0 }}
-            {{ $count := len (where $events "group" $g) }}
-            <li class="cal-legend__item">
-              <span class="cal-dot" style="--cal-dot: hsl({{ $first.hue }} 62% 46%)" aria-hidden="true"></span>
-              <span class="cal-legend__name">
-                {{ with $first.groupUrl }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $g }}</a>{{ else }}{{ $g }}{{ end }}
-                {{ with $first.country }}<span class="cal-legend__country">{{ . }}</span>{{ end }}
-              </span>
-              <span class="cal-legend__count">{{ $count }}</span>
-            </li>
-          {{ end }}
-        </ul>
-        </div>
-      </section>
-    
-      {{/* This page builds its own rail, so it never goes through
-           partials/sidebar.html. Last, under the legends, which are the key
-           to the calendar beside them and have to stay next to it. */}}
-      {{ partial "sidebar-sponsors.html" . }}
-    </aside>
 
     <div class="calendar__main">
       {{/* Every control here is JavaScript-only, so it stays hidden until the
@@ -219,6 +159,65 @@
         {{ end }}
       </div>
     </div>
+    <aside class="calendar__aside">
+      {{/* Two buttons because they are genuinely different jobs: an event is a
+           pull request here, a JUG's meetups sync from its own feed once its
+           entry exists upstream. Adding an event leads, as the one a reader
+           of this page can act on today. */}}
+      <div class="cal-ctas">
+        <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
+        <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
+      </div>
+
+      {{ with $conferences }}
+      <section class="cal-legend">
+        {{/* Not decoration: the list is capped and scrolls, so without it a
+             reader seeing eight rows cannot tell whether that is all. */}}
+        <h2 class="cal-legend__head" id="cal-legend-conferences">Conferences &amp; community events <span class="cal-legend__total">{{ len . }}</span></h2>
+        {{/* The SCROLLER is this wrapper, not the <ul>: role="group" on the
+             <ul> would strip its list semantics. tabindex makes it scrollable
+             from the keyboard without tabbing through every row. */}}
+        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-conferences">
+        <ul class="cal-legend__list">
+          {{ range . }}
+            <li class="cal-legend__item">
+              <span class="cal-dot" style="--cal-dot: hsl({{ .hue }} 62% 46%)" aria-hidden="true"></span>
+              <span class="cal-legend__name">
+                {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+                <span class="cal-legend__country">{{ with .when }}{{ . }}{{ else }}{{ dateFormat "2 January" .date }}{{ end }}{{ with .country }} &middot; {{ . }}{{ end }}</span>
+              </span>
+            </li>
+          {{ end }}
+        </ul>
+        </div>
+      </section>
+      {{ end }}
+
+      <section class="cal-legend">
+        <h2 class="cal-legend__head" id="cal-legend-groups">Groups on the calendar <span class="cal-legend__total">{{ len $groupNames }}</span></h2>
+        <div class="cal-legend__scroll" tabindex="0" role="group" aria-labelledby="cal-legend-groups">
+        <ul class="cal-legend__list">
+          {{ range $g := $groupNames }}
+            {{ $first := index (where $events "group" $g) 0 }}
+            {{ $count := len (where $events "group" $g) }}
+            <li class="cal-legend__item">
+              <span class="cal-dot" style="--cal-dot: hsl({{ $first.hue }} 62% 46%)" aria-hidden="true"></span>
+              <span class="cal-legend__name">
+                {{ with $first.groupUrl }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $g }}</a>{{ else }}{{ $g }}{{ end }}
+                {{ with $first.country }}<span class="cal-legend__country">{{ . }}</span>{{ end }}
+              </span>
+              <span class="cal-legend__count">{{ $count }}</span>
+            </li>
+          {{ end }}
+        </ul>
+        </div>
+      </section>
+
+      {{/* This page builds its own rail, so it never goes through
+           partials/sidebar.html. Last, under the legends, which are the key
+           to the calendar beside them and have to stay next to it. */}}
+      {{ partial "sidebar-sponsors.html" . }}
+    </aside>
   </div>
 
   {{/* Same note as /jugs/: the data is regenerated on a schedule, so say
