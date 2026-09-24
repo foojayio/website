@@ -23,11 +23,9 @@ The usual answer is to open a drawing tool, export a PNG, and drop it in the
 article folder. That works, and it is what most Foojay articles have done so
 far. It also means the diagram is now a binary file that nobody can review,
 nobody can correct a typo in, and nobody can update without finding the original
-file again — assuming they still have it.
+file again, assuming they still have it.
 
-So Foojay articles now support [Mermaid](https://mermaid.js.org/): you write a
-diagram as a fenced code block, and it renders as an actual diagram. Thanks to
-[Maximillian Arruda](/today/author/maximillian-arruda/) for requesting it.
+So Foojay articles now support [Mermaid](https://mermaid.ai/open-source/): you write a diagram as a fenced code block, and it renders as an actual diagram. Thanks to [Maximillian Arruda](/today/author/maximillian-arruda/) for requesting it.
 
 ## The short version
 
@@ -200,6 +198,6 @@ paragraphs because drawing it was too much hassle, it isn't any more.
 
 ## Writing for Foojay
 
-Foojay runs on contributions, and everything here — this feature included — is in the open. `template/post.md` in the [repository](https://github.com/foojayio/website) documents every formatting feature available to an author, Mermaid included, and [How to submit your next article](/today/how-to-submit-your-next-article-on-foojay-io/) walks through the whole process.
+Foojay runs on contributions, and everything here, including this feature, is in the open. `template/post.md` in the [repository](https://github.com/foojayio/website/tree/main/template) documents every formatting feature available to an author, Mermaid included, and [How to submit your next article](/today/how-to-submit-your-next-article-on-foojay-io/) walks through the whole process.
 
 If you spot something missing, [open an issue](https://github.com/foojayio/website/issues) or a [pull request](https://github.com/foojayio/website/pulls). 
