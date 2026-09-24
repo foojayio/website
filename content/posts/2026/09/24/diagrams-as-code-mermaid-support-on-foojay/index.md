@@ -8,8 +8,10 @@ image: "mermaid-support-on-foojay.jpg"
 categories:
   - "Foojay"
 related_posts:
+  - "announcing-the-new-foojay"
+  - "asciidoc-support-on-foojay"
   - "how-to-submit-your-next-article-on-foojay-io"
-  - "a-week-of-housekeeping-what-changed-on-foojay-io"
+  - "join-slack-com-t-foojay-signup"
 ---
 
 Some things are much easier to show than to describe. A request travelling
@@ -60,14 +62,12 @@ loaded.
 ## A few examples
 
 Mermaid covers a lot of diagram types. These are the ones that come up most in
-the kind of articles Foojay publishes. Check the source of this article for the code blocks that produced them. 
-
-// TODO add link to GitHub repo once this article is merged.
+the kind of articles Foojay publishes. Check the [source of this article for the code blocks](https://github.com/foojayio/website/blob/main/content/posts/2026/09/24/diagrams-as-code-mermaid-support-on-foojay/index.md) that produced them. 
 
 ### Sequence diagrams
 
-Probably the most useful of the lot for anything involving more than one
-process — and the most tedious to draw by hand, because every change moves
+A sequence diagram is very useful to explain more than one
+process. This one is difficult to draw by hand, because every change moves
 every arrow below it.
 
 ```mermaid
@@ -89,8 +89,7 @@ sequenceDiagram
 
 ### Class diagrams
 
-Useful for explaining an API shape or a small hierarchy without pasting five
-files of source.
+This one is useful to explain an API shape or a small hierarchy without pasting multiple sources.
 
 ```mermaid
 classDiagram
@@ -111,14 +110,11 @@ classDiagram
     Shape <|.. Rectangle
 ```
 
-Note that an interface is a `class` carrying an `<<interface>>` annotation —
-there is no `interface` keyword, which is an easy thing to trip over coming from
-Java.
+Note that an interface is a `class` carrying an `<<interface>>` annotation as there is no `interface` keyword, which is an easy thing to trip over coming from Java.
 
 ### State diagrams
 
-For anything with a lifecycle — a connection, a session, a virtual thread, a
-build.
+For anything with a lifecycle like a connection, a session, a virtual thread, a build.
 
 ```mermaid
 stateDiagram-v2
@@ -132,6 +128,8 @@ stateDiagram-v2
 ```
 
 ### Entity-relationship diagrams
+
+If you need to explain a database schema and the relations, this is the one to use.
 
 ```mermaid
 erDiagram
@@ -164,36 +162,26 @@ gantt
 ## Why this is worth using
 
 **A diagram in a code block is reviewable.** Foojay articles arrive as pull
-requests. A PNG shows up in a diff as "binary file changed"; a Mermaid diagram
-shows up as the lines you altered. A reviewer can spot that an arrow points the
-wrong way, and you can fix it by editing one line rather than reopening a
-drawing tool.
+requests. A PNG shows up in a diff as "binary file changed" while a Mermaid diagram shows up as the lines you altered. A reviewer can spot that an arrow points the wrong way, and you can fix it by editing one line rather than reopening a drawing tool.
 
-**It stays correct.** When the thing you described changes, you edit two words
-instead of recreating an image. The diagrams that go stale are the ones that are
-expensive to update.
+**It stays correct.** When the thing you described changes, you edit two words instead of recreating an image. The diagrams that go stale are the ones that are expensive to update.
 
 **It reads well in both themes.** Diagrams follow the site's light and dark
 theme, and re-draw when a reader switches. An exported PNG has one background
-colour for ever, which is why a lot of diagrams on the web are a white rectangle
-in the middle of a dark page.
+colour, which is why a lot of diagrams on the web are a white rectangle
+in the middle of a dark page. Try it out and toggle the theme with the button in the menu top bar of this page.
 
 **It stays sharp.** It is an SVG, so it scales to whatever screen the reader
 brought.
 
 **It is the same syntax you already use.** GitHub and GitLab render `mermaid`
-blocks in issues, pull requests and READMEs. A diagram from your project's
-README can be pasted into an article unchanged.
+blocks in issues, pull requests and README files. A diagram from your project's README can be pasted into an article unchanged.
 
 ## Things to know
 
-- **Check your syntax** in the [Mermaid live editor](https://mermaid.live/)
-  before submitting. If a diagram doesn't parse, that one diagram is replaced by
-  an error message in the rendered article — the rest of the page is fine, but
+- **Check your syntax** in the [Mermaid live editor](https://mermaid.live/) before submitting. If a diagram doesn't parse, that one diagram is replaced by an error message in the rendered article — the rest of the page is fine, but
   the diagram isn't.
-- **Don't hard-code colours.** Mermaid supports styling directives, but a colour
-  chosen for a light background tends to disappear on a dark one. The default
-  theming already follows the reader's choice.
+- **Don't hard-code colours.** Mermaid supports styling directives, but a colour chosen for a light background tends to disappear on a dark one. The default theming already follows the reader's choice.
 - **Keep them small.** A diagram with forty nodes is unreadable on a phone.
   Several small diagrams beat one enormous one.
 - **Diagrams are not a substitute for alt text.** If a diagram carries something
@@ -204,10 +192,7 @@ README can be pasted into an article unchanged.
   diagram. Pages without one don't load the diagram library at all.
 - **Diagrams follow the reader's theme**, light or dark, and re-draw when the
   reader flips it. Don't hard-code colours.
-- **If the syntax doesn't parse**, that one diagram shows an error message in
-
-  place and the rest of the article is unaffected. Check your diagram in the
-  [live editor](https://mermaid.live/) if you're unsure.
+- **If the syntax doesn't parse**, that one diagram shows an error message in place and the rest of the article is unaffected. Check your diagram in the [live editor](https://mermaid.live/) if you're unsure.
 
 Images are of course still fine, and still the right answer for screenshots,
 photos and anything hand-drawn. But if you have been describing a flow in three
@@ -215,12 +200,6 @@ paragraphs because drawing it was too much hassle, it isn't any more.
 
 ## Writing for Foojay
 
-Foojay runs on contributions, and everything here — this feature included — is
-in the open. `../../template/post.md` in the
-[repository](https://github.com/foojayio/website) documents every formatting
-feature available to an author, Mermaid included, and
-[How to submit your next article](/today/how-to-submit-your-next-article-on-foojay-io/)
-walks through the whole process.
+Foojay runs on contributions, and everything here — this feature included — is in the open. `template/post.md` in the [repository](https://github.com/foojayio/website) documents every formatting feature available to an author, Mermaid included, and [How to submit your next article](/today/how-to-submit-your-next-article-on-foojay-io/) walks through the whole process.
 
-If you spot something missing, open an issue or a pull request. That is how this
-one arrived.
+If you spot something missing, [open an issue](https://github.com/foojayio/website/issues) or a [pull request](https://github.com/foojayio/website/pulls). 

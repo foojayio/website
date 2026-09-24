@@ -11,6 +11,7 @@ related_posts:
   - "announcing-the-new-foojay"
   - "diagrams-as-code-mermaid-support-on-foojay"
   - "how-to-submit-your-next-article-on-foojay-io"
+  - "join-slack-com-t-foojay-signup"
 ---
 
 Markdown is a good default. It is easy to write, everybody already knows it, and for most articles it is exactly enough.
