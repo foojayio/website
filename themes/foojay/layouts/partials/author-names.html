@@ -1,0 +1,20 @@
+{{- /* A page's authors as DISPLAY NAMES: the author page's Title, falling back
+       to the slug itself. byline.html's rule, and it is here so the byline and
+       the share text cannot disagree about what a post's credit reads.
+
+       partials/post-authors.html answers the same question differently on
+       purpose -- it returns author PAGES, so an unresolvable slug has nothing
+       to return and is dropped. A name is still worth printing.
+
+       Context is the page, or the slug list for a caller that already has it. */ -}}
+{{- $slugs := . -}}
+{{- if not (reflect.IsSlice .) -}}
+  {{- $slugs = .Params.authors -}}
+  {{- if and (not $slugs) .Params.author }}{{ $slugs = slice .Params.author }}{{ end -}}
+{{- end -}}
+{{- $names := slice -}}
+{{- range $slugs -}}
+  {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
+  {{- else -}}{{- $names = $names | append . -}}{{- end -}}
+{{- end -}}
+{{- return $names -}}

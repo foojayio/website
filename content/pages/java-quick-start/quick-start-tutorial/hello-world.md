@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
 linkTitle: "Hello World!"
-description: "Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
+description: "Java Quick Start Tutorial: Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
 url: "/java-quick-start/quick-start-tutorial/hello-world/"
 aliases:
   - "/getting-started-with-java/quick-start-tutorial/helloworld-running-a-single-file-java-application/"

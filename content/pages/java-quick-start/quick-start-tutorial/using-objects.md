@@ -1,6 +1,6 @@
 ---
 title: "Using Objects"
-description: "Java is object-oriented: turn part of your program into an object with its own variables and methods."
+description: "Java Quick Start Tutorial: Java is object-oriented: turn part of your program into an object with its own variables and methods."
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
 frozen: false
 duration: "4:07"

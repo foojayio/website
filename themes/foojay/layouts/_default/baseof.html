@@ -158,6 +158,9 @@
   <script src="{{ "js/nav.js" | relURL }}" defer></script>
   <script src="{{ "js/lightbox.js" | relURL }}" defer></script>
   <script src="{{ "js/toc.js" | relURL }}" defer></script>
+  {{/* No-ops on a page with no share row -- the same rule as toc.js above,
+       rather than a fifth condition in this list for a 2KB script. */}}
+  <script src="{{ "js/share.js" | relURL }}" defer></script>
   {{ $articleHTML := partialCached "article-html.html" . .RelPermalink }}
   {{ if or (strings.Contains $articleHTML "<table") (strings.Contains $articleHTML "<pre") }}
   <script src="{{ "js/prose-scroll.js" | relURL }}" defer></script>

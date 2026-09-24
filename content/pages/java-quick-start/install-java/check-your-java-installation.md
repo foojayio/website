@@ -1,6 +1,6 @@
 ---
 title: "Check your Java installation"
-description: "Find out whether Java is already installed and which version you have, using java -version in a terminal on Windows, macOS or Linux."
+description: "How to find out whether Java is already installed and which version you have, using java -version in a terminal on Windows, macOS or Linux."
 url: "/java-quick-start/install-java/check-your-java-installation/"
 frozen: false
 ---

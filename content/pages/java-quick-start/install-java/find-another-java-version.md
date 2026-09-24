@@ -1,6 +1,6 @@
 ---
 title: "Find Another Java Version"
-description: "OpenJDK is the source; the runtime you install comes from a distribution. An overview of the free builds you can choose between."
+description: "Which Java distribution to install? OpenJDK is the source; the runtime you install comes from a distribution. An overview of the free builds you can choose between."
 url: "/java-quick-start/install-java/find-another-java-version/"
 frozen: false
 ---

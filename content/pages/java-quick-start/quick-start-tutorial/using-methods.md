@@ -1,6 +1,6 @@
 ---
 title: "Using Methods"
-description: "Split a Java program into methods to keep the code simple, readable and maintainable long after you wrote it."
+description: "Java Quick Start Tutorial: Split a Java program into methods to keep the code simple, readable and maintainable long after you wrote it."
 url: "/java-quick-start/quick-start-tutorial/using-methods/"
 frozen: false
 duration: "2:32"

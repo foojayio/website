@@ -23,6 +23,7 @@
     {{ partial "series-progress.html" . }}
     {{ partialCached "article-html.html" . .RelPermalink }}
     {{ partial "series-nav.html" . }}
+    {{ partial "share.html" . }}
     {{ partial "page-source.html" . }}
     {{/* Renders nothing unless comments-term.html gives this page a term, so
          the legal and machinery pages stay quiet while an ordinary prose page
