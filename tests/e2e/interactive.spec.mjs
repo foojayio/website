@@ -142,19 +142,23 @@ test('the sitemap tables sort and filter', async ({ page }) => {
 });
 
 test('mermaid diagrams render to SVG, and follow the theme', async ({ page }) => {
-  // Skips until a published post uses a ```mermaid fence -- the support is
-  // built and vendored, but nothing in content/ exercises it yet. This turns
-  // itself on the day that post lands, with nothing to remember to enable.
-  test.skip(!PAGES.mermaid, 'no published page has a mermaid diagram');
-  await page.goto(PAGES.mermaid);
+  // EVERY page with a diagram, because a fence reaches <pre class=mermaid> by
+  // two routes -- Goldmark's codeblock hook for Markdown, article-html.html's
+  // rewrite for AsciiDoc -- and they have to agree. Skips only if the build
+  // genuinely has none.
+  const pages = PAGES.mermaidAll ?? [];
+  test.skip(!pages.length, 'no published page has a mermaid diagram');
 
-  const diagram = page.locator('pre.mermaid').first();
-  await expect(diagram.locator('svg')).toBeVisible({ timeout: 15_000 });
-  await expect(diagram).toHaveAttribute('data-processed', /.+/);
-  // The source is stashed before rendering precisely so a theme flip can
-  // re-render; without it a reader switching to dark keeps a white diagram.
-  await expect(diagram).toHaveAttribute('data-mermaid-source', /.+/);
-  expectClean(page);
+  for (const url of pages) {
+    await page.goto(url);
+    const diagram = page.locator('pre.mermaid').first();
+    await expect(diagram.locator('svg'), url).toBeVisible({ timeout: 15_000 });
+    await expect(diagram, url).toHaveAttribute('data-processed', /.+/);
+    // The source is stashed before rendering precisely so a theme flip can
+    // re-render; without it a reader switching to dark keeps a white diagram.
+    await expect(diagram, url).toHaveAttribute('data-mermaid-source', /.+/);
+    expectClean(page);
+  }
 });
 
 test('the read counter is wired, and counts nothing from here', async ({ page }) => {

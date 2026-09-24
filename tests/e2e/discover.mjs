@@ -17,11 +17,13 @@ import { PUBLIC_DIR } from './site.mjs';
 /** What each feature looks like in the built (and minified) HTML. */
 const FEATURES = {
   // A ```mermaid fence -- render-codeblock.html emits this, mermaid.js swaps in an <svg>.
-  mermaid: /<pre class=["']?mermaid["' ]/i,
+  // `>` is in the trailing class because the suite runs against a MINIFIED
+  // build, where Hugo drops attribute quotes: `<pre class=mermaid>`.
+  mermaid: /<pre class=["']?mermaid["' >]/i,
   // A ```java fence, rendered back into the element EnlighterJS looks for.
   code: /EnlighterJSRAW/,
   // The {{< gallery >}} shortcode: several images the lightbox steps through.
-  gallery: /<figure class=["']?gallery["' ]/i,
+  gallery: /<figure class=["']?gallery["' >]/i,
   // An embedded video. 438 posts carry one; none of them is self-hosted.
   video: /<iframe[^>]+src=["']?https:\/\/www\.youtube\.com\/embed\//i,
   // The WordPress comment archive (partials/legacy-comments.html), on the 269
@@ -88,20 +90,28 @@ function* htmlUnder(dir) {
 export function discover() {
   const pages = { ...FIXED };
   const wanted = new Set(Object.keys(FEATURES));
+  const mermaidAll = [];
 
   // Only articles are searched: every feature above is something an author puts
   // in a post body, and scanning the other 2000 pages to prove that costs time
   // for no extra coverage.
+  //
+  // No early exit once every feature is found, because mermaidAll below wants
+  // them all -- measured at 0.76s to read the 2331 post pages, once per run.
   for (const file of htmlUnder(join(PUBLIC_DIR, 'today'))) {
-    if (!wanted.size) break;
     const html = readFileSync(file, 'utf8');
+    const url = file.slice(PUBLIC_DIR.length + 1).split(sep).slice(0, -1).join('/') + '/';
+    // EVERY page with a diagram, not the first: a ```mermaid fence reaches the
+    // same <pre class=mermaid> by two different routes -- Goldmark's codeblock
+    // hook for Markdown, article-html.html's rewrite for AsciiDoc -- and the
+    // whole point of that rewrite is that the two agree. One page would test
+    // whichever sorted first and leave the other path unexercised.
+    if (FEATURES.mermaid.test(html)) mermaidAll.push(url);
     for (const key of [...wanted]) {
-      if (FEATURES[key].test(html)) {
-        pages[key] = file.slice(PUBLIC_DIR.length + 1).split(sep).slice(0, -1).join('/') + '/';
-        wanted.delete(key);
-      }
+      if (FEATURES[key].test(html)) { pages[key] = url; wanted.delete(key); }
     }
   }
+  pages.mermaidAll = mermaidAll;
   for (const key of wanted) pages[key] = null;   // the build genuinely has none
 
   pages.author = firstUnder('today/author/');
