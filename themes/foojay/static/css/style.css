@@ -2638,17 +2638,10 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose .colist p { margin-bottom: 0; }
 .prose .colist li + li { margin-top: .35rem; }
 
-/* A wide data table scrolls INSIDE ITS OWN BOX rather than taking the page
-   with it (see the templates for the measurements). Only below 60rem: on a
-   desktop both tables fit, and a scroll container there would needlessly clip
-   the sticky-header trick the sitemap tables use.
-
-   `overscroll-behavior-x: contain` stops a sideways flick at the end of the
-   table from turning into a browser back-gesture, which is what makes a
-   horizontally scrolling region tolerable on a touchpad at all. */
-@media (max-width: 60rem) {
-  .table-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
-}
+/* A wide data table scrolls inside its own box at every viewport width:
+   enlarged text can overflow even a desktop layout. Sitemap tables have their
+   own wrapper and sticky-header rules below. */
+.table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 /* The ring is drawn INSIDE the box: an outline-offset on a scroll container is
    clipped on the axis it scrolls, so the right-hand edge of the indicator would
    simply not be painted. */
@@ -4487,3 +4480,41 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .jvmw-head { gap: .85rem; }
   .jvmw-head__logo { width: 56px; height: 56px; padding: .4rem; border-radius: 10px; }
 }
+
+/* Native code actions stay discoverable with pointer, touch and keyboard. */
+.enlighter-default .code-actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem;
+  padding: .5rem .75rem; background: #282a36; color: #f8f8f2;
+  font-family: var(--font-body); font-size: .875rem;
+}
+.enlighter-default .code-actions button,
+.enlighter-default .code-actions a {
+  appearance: none; font: inherit; line-height: 1.5;
+  color: inherit; background: transparent; border: 1px solid #899ac4;
+  border-radius: var(--radius-sm); padding: .3rem .55rem; cursor: pointer;
+  text-decoration: none;
+}
+.enlighter-default .code-actions button:hover,
+.enlighter-default .code-actions a:hover,
+.enlighter-default .code-actions button[aria-pressed="true"] { background: #44475a; }
+.enlighter-default .code-actions :focus-visible,
+.enlighter-default .enlighter-code:focus-visible {
+  outline: 2px solid var(--focus-ring); outline-offset: -4px;
+  box-shadow: inset 0 0 0 2px var(--focus-halo, #ffffff);
+}
+.code-actions__status { flex-basis: 100%; }
+.code-actions__status:empty { display: none; }
+
+/* Dracula's original muted tokens were 3.02:1; this is 5.07:1 on #282a36.
+   Extra component specificity wins over the later-loaded vendor stylesheet. */
+.enlighter-default.enlighter-t-dracula .enlighter-c0,
+.enlighter-default.enlighter-t-dracula .enlighter-c1,
+.enlighter-default.enlighter-t-dracula .enlighter-c2,
+.enlighter-default.enlighter-t-dracula .enlighter-c9,
+.enlighter-default.enlighter-t-dracula .enlighter-k11,
+.enlighter-default.enlighter-t-dracula .enlighter-t0,
+.enlighter-default.enlighter-t-dracula .enlighter > div,
+.enlighter-default.enlighter-t-dracula.enlighter-linenumbers .enlighter > div::before { color: #899ac4; }
+
+/* Article tables may exceed the reading column even above the mobile breakpoint. */
+.prose-table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }

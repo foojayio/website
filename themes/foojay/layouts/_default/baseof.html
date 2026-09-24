@@ -158,6 +158,10 @@
   <script src="{{ "js/nav.js" | relURL }}" defer></script>
   <script src="{{ "js/lightbox.js" | relURL }}" defer></script>
   <script src="{{ "js/toc.js" | relURL }}" defer></script>
+  {{ $articleHTML := partialCached "article-html.html" . .RelPermalink }}
+  {{ if or (strings.Contains $articleHTML "<table") (strings.Contains $articleHTML "<pre") }}
+  <script src="{{ "js/prose-scroll.js" | relURL }}" defer></script>
+  {{ end }}
 
   {{/* Interactive widgets migrated from WordPress — loaded only on the pages
        that use them (flags set by the conversion scripts). */}}
