@@ -1,32 +1,47 @@
-<a class="skip-link" href="#main">Skip to content</a>
+<nav class="skip-links" aria-label="Skip links">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#footer">Skip to footer</a>
+</nav>
 
 <header class="site-header" data-nav>
   <div class="site-header__inner">
 
-    <a class="logo" href="{{ "" | relURL }}">
+    <a class="logo" href="{{ "" | relURL }}" aria-label="Foojay home">
       {{ partial "site-logo.html" . }}
       <span class="logo__tag">Friends Of OpenJDK</span>
     </a>
 
     <button class="nav-toggle" type="button" data-nav-toggle
-            aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-      <span class="nav-toggle__bars"></span>
+            aria-expanded="false" aria-controls="nav-shell" aria-label="Open menu">
+      <span>Menu</span><span class="nav-toggle__bars" aria-hidden="true"></span>
     </button>
 
+    <div class="nav-shell" id="nav-shell">
+      <div class="nav-drawer__head">
+        <span id="nav-drawer-title">Navigation</span>
+        <button type="button" class="nav-close" data-nav-close>
+          Close menu
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
     <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <div class="header-actions header-actions--mobile nav-drawer__search">
+        {{ partial "search-form.html" (dict "page" . "label" "Search (menu)") }}
+      </div>
       <ul class="primary-nav__list">
         {{ $page := . }}
         {{ range .Site.Menus.main }}
           {{ if .HasChildren }}
+            {{ $panelID := printf "nav-panel-%s" (.Identifier | default (.Name | urlize)) }}
             {{/* Count direct children that are plain links, so an empty grid cell
                  is never rendered when a menu is made up only of groups. */}}
             {{ $plain := 0 }}
             {{ range .Children }}{{ if not .HasChildren }}{{ $plain = add $plain 1 }}{{ end }}{{ end }}
             {{ $cols := .Params.cols | default 1 }}
             <li class="nav-item nav-item--has-panel" data-nav-item>
-              <button class="nav-link nav-link--parent" type="button" data-nav-trigger aria-expanded="false"
+              <button class="nav-link nav-link--parent" type="button" data-nav-trigger aria-expanded="false" aria-controls="{{ $panelID }}"
                       {{ if $page.HasMenuCurrent "main" . }}aria-current="page"{{ end }}>{{ .Name }}</button>
-              <div class="nav-panel">
+              <div class="nav-panel" id="{{ $panelID }}">
                 <div class="nav-panel__inner nav-panel__inner--cols-{{ $cols }}">
 
                   {{ if gt $plain 0 }}
@@ -70,19 +85,19 @@
 
       {{/* Drawer copy of the header actions — hidden on desktop by CSS. */}}
       <div class="header-actions header-actions--mobile">
-        {{ partial "search-form.html" (dict "page" . "label" "Search (menu)") }}
         {{ partial "theme-toggle.html" . }}
         {{ range .Site.Params.headerCta }}
-          <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
+          <a class="{{ if .secondary }}header-link{{ else }}btn btn--accent{{ end }}" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
         {{ end }}
       </div>
     </nav>
+    </div>
 
     <div class="header-actions">
       {{ partial "search-form.html" (dict "page" . "label" "Search") }}
       {{ partial "theme-toggle.html" . }}
       {{ range .Site.Params.headerCta }}
-        <a class="btn btn--accent" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
+        <a class="{{ if .secondary }}header-link{{ else }}btn btn--accent{{ end }}" href="{{ .url | strings.TrimPrefix "/" | relURL }}">{{ .label }}</a>
       {{ end }}
     </div>
 

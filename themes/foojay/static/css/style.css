@@ -262,12 +262,22 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   clip-path: inset(50%); white-space: nowrap;
 }
 
-.skip-link {
-  position: absolute; left: 1rem; top: -3rem; z-index: 200;
-  background: var(--ink); color: var(--on-ink); padding: .6rem 1rem; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  transition: top .15s var(--ease);
+/* Reveal the destinations together on the first Tab, above the sticky header.
+   Keep native links and focusable landmarks so skipping also works without JS. */
+.skip-links {
+  position: fixed; inset: 1rem auto auto 1rem; z-index: 200;
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  max-width: calc(100% - 2rem); padding: .5rem;
+  background: var(--surface); border: 1px solid var(--control-border, var(--ink-muted));
+  border-radius: var(--radius-sm); transform: translateY(calc(-100% - 2rem));
 }
-.skip-link:focus { top: 0; color: var(--on-ink); text-decoration: none; }
+.skip-links:focus-within { transform: none; }
+.skip-link {
+  display: inline-block; padding: .6rem .75rem;
+  color: var(--ink); font-weight: 600; border-radius: var(--radius-sm);
+}
+.skip-link:hover, .skip-link:focus { color: var(--ink); background: var(--surface-tinted, var(--surface-sunken)); }
+:root :is(#main, #footer):focus-visible { outline-offset: -4px; }
 
 /* --------------------------------------------------------------- shell --- */
 
@@ -307,14 +317,18 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   margin-inline: auto;
   padding-inline: var(--gutter);
   min-height: var(--header-h);
-  display: flex;
+  display: flex; flex-wrap: wrap;
   align-items: center;
-  gap: clamp(1rem, 2vw, 2rem);
+  gap: .5rem clamp(.75rem, 1.5vw, 1.5rem);
 }
 
 /* Brand -------------------------------------------------------- */
-.logo { display: flex; align-items: center; gap: .6rem; color: var(--ink); flex: 0 0 auto; }
+.logo { display: flex; align-items: center; gap: .6rem; color: var(--ink); flex: 0 0 auto; border-radius: var(--radius-sm); }
 .logo:hover { text-decoration: none; color: var(--ink); }
+:root .logo:focus-visible {
+  outline-width: 3px; outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--focus-halo, var(--surface));
+}
 .logo__mark { width: 34px; height: 34px; }
 /* The logo PNG carries the wordmark, so it is sized by height and replaces the
    text mark entirely. The file is cropped to the artwork (no transparent
@@ -341,6 +355,8 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
    actions, rather than `margin-left: auto` on the nav pushing every item to the
    far right — which left a void beside the logo and made the bar read as one
    1240px-wide strip on a big screen. */
+.nav-shell { display: contents; }
+.nav-drawer__head { display: none; }
 .primary-nav { margin-left: .5rem; }
 .primary-nav__list { display: flex; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 
@@ -398,13 +414,13 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   transform: translate(-50%, 0);
 }
 /* keyboard/no-JS fallback */
-.nav-item:focus-within > .nav-panel {
+.site-header:not([data-nav-ready]) .nav-item:focus-within > .nav-panel {
   opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
 }
 /* keep the last panel from running off the right edge */
 .nav-item:last-child > .nav-panel { left: auto; right: 0; transform: translate(0, -6px); }
 .nav-item:last-child[data-open="true"] > .nav-panel,
-.nav-item:last-child:focus-within > .nav-panel { transform: translate(0, 0); }
+.site-header:not([data-nav-ready]) .nav-item:last-child:focus-within > .nav-panel { transform: translate(0, 0); }
 
 .nav-panel__inner { display: grid; gap: .25rem 1.75rem; align-items: start; }
 .nav-panel__inner--cols-1 { min-width: 250px; }
@@ -466,28 +482,28 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
      otherwise still be a tab stop. */
   width: 0; padding: .5rem 0; opacity: 0; visibility: hidden;
   background: var(--surface-sunken);
-  border: 1px solid transparent; border-radius: 999px;
+  border: 1px solid var(--control-border, var(--ink-muted)); border-radius: 999px;
   color: var(--ink);
   /* `visibility` steps rather than eases, and it is delayed on the way OUT so
      the field is still there while it shrinks. On the way IN it must flip at
      once: a visibility:hidden element cannot take focus, so easing it would
      make the click land the caret nowhere. */
-  transition: width .2s var(--ease), padding .2s var(--ease), opacity .15s var(--ease),
+  transition: opacity .15s var(--ease),
               visibility 0s linear .2s, background .15s var(--ease), border-color .15s var(--ease);
 }
 .site-search input::placeholder { color: var(--ink-muted); }
 .site-search[data-open="true"] input {
   width: 210px; padding: .5rem .9rem; opacity: 1; visibility: visible;
-  background: var(--surface); border-color: var(--border-strong);
-  transition: width .2s var(--ease), padding .2s var(--ease), opacity .15s var(--ease),
+  background: var(--surface); border-color: var(--control-border, var(--ink-muted));
+  transition: opacity .15s var(--ease),
               visibility 0s, background .15s var(--ease), border-color .15s var(--ease);
 }
-.site-search input:focus { outline-offset: 0; }
 
 .site-search__toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; flex: 0 0 auto;
-  background: none; border: 1px solid var(--border); border-radius: 999px;
+  width: 44px; height: 44px; padding: .4rem; flex: 0 0 auto;
+  font: inherit; font-size: .95rem;
+  background: none; border: 1px solid var(--border); border-radius: 50%;
   color: var(--ink-soft); cursor: pointer;
   transition: border-color .15s var(--ease), color .15s var(--ease), background .15s var(--ease);
 }
@@ -527,7 +543,8 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
 .nav-toggle {
   display: none;
   margin-left: auto;
-  width: 42px; height: 42px;
+  min-height: 44px; padding: .65rem .75rem; gap: .75rem;
+  font: inherit; font-size: 1rem;
   align-items: center; justify-content: center;
   background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
   cursor: pointer; color: var(--ink);
@@ -549,6 +566,24 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
   opacity: 0; visibility: hidden; transition: opacity .2s var(--ease), visibility .2s;
 }
 body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
+.nav-backdrop[hidden] { display: none; }
+
+@media (max-width: 64rem) {
+  .site-header:not([data-nav-ready]) .nav-shell { position: static; width: 100%; transform: none; visibility: visible; }
+  .site-header:not([data-nav-ready]) .nav-panel { display: block; }
+  .site-header:not([data-nav-ready]) .nav-toggle,
+  .site-header:not([data-nav-ready]) .nav-drawer__head { display: none; }
+}
+
+/* Search opens below the bar so its input cannot push navigation off-screen. */
+.site-header__inner > .header-actions .site-search label {
+  position: absolute; top: calc(100% + .65rem); right: 0; z-index: 1;
+}
+.site-header__inner > .header-actions .site-search[data-open="true"] input {
+  width: min(24rem, calc(100vw - 2rem));
+}
+.header-link { color: var(--ink); font-size: .95rem; font-weight: 600; white-space: nowrap; }
+.header-actions--mobile .header-link { padding: .65rem 0; }
 
 /* -------------------------------------------------------- page headers -- */
 
@@ -2110,15 +2145,11 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   display: flex; gap: .35rem; flex-wrap: wrap; justify-content: center;
   list-style: none; margin: 0; padding: 0;
 }
-/* On a phone there is no width left to hold the arrows apart -- keeping the
-   three-part row there overflowed the viewport and stranded « on a line of its
-   own. So below the fixed width it becomes two stacked rows: the numbers, then
-   « and » paired underneath, which is a better thumb target than one at each
-   screen edge anyway. `order` does the stacking, so the DOM keeps
-   prev -> numbers -> next for a screen reader and for tab order. */
+/* Keep Previous -> page numbers -> Next in both visual and DOM order.
+   Only the numbers wrap on small screens; moving them above the arrows made
+   keyboard focus jump up and down through the same control. */
 @media (max-width: 34rem) {
-  .pagination__row { flex-wrap: wrap; justify-content: center; row-gap: .5rem; }
-  .pagination__list { flex: 1 1 100%; order: -1; }
+  .pagination__list { min-width: 0; }
   .pagination__btn { min-width: 2.25rem; height: 2.25rem; padding: 0 .45rem; }
   .pagination__gap { min-width: 1.1rem; height: 2.25rem; }
   /* Five numbers plus both numbered ends and two ellipses is nine cells, which
@@ -2209,13 +2240,8 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
 /* ----------------------------------------------------------- responsive -- */
 
-@media (min-width: 1120px) {
+@media (min-width: 80rem) {
   .logo__tag { display: inline-block; }
-}
-
-@media (max-width: 1080px) {
-  .header-actions .btn { display: none; }
-  .site-search[data-open="true"] input { width: 160px; }
 }
 
 @media (max-width: 960px) {
@@ -2225,36 +2251,45 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 /* Mobile drawer nav ------------------------------------------- */
-@media (max-width: 900px) {
+@media (max-width: 64rem) {
   .nav-toggle { display: inline-flex; }
 
-  .primary-nav {
+  .nav-shell {
+    display: block;
     position: fixed; z-index: 95;
-    inset: var(--header-h) 0 0 auto;
-    width: min(400px, 88vw);
+    inset: 0 0 0 auto;
+    width: min(28rem, 100vw);
     margin-left: 0;
     background: var(--surface);
     border-left: 1px solid var(--border);
     padding: 1rem 1rem 3rem;
     overflow-y: auto; overscroll-behavior: contain;
     transform: translateX(100%);
-    /* VISIBILITY, not just the transform. The drawer is off-screen when closed
-       but still rendered, so every link in it stayed in the tab order: on a
-       phone, tabbing off the menu button walked a keyboard user through a nav
-       they cannot see, with the focus ring nowhere on screen (WCAG 2.4.3, and
-       2.4.11 -- a focused element may not be hidden). visibility:hidden takes
-       the whole subtree out of the tab order and is still animatable, unlike
-       display:none. Delayed on the way out so the slide still plays, immediate
-       on the way in so a click can focus the first link. */
+    /* Hide a closed drawer immediately, including when switching from desktop.
+       A delayed visibility change briefly exposes its departing controls even
+       though the focus has already returned to the menu button. */
     visibility: hidden;
-    transition: transform .25s var(--ease), visibility 0s linear .25s;
+    transition: transform .25s var(--ease), visibility 0s;
   }
-  body[data-nav-open="true"] .primary-nav {
+  body[data-nav-open="true"] .nav-shell {
     transform: translateX(0);
     visibility: visible;
     transition: transform .25s var(--ease), visibility 0s;
   }
+  /* Keyboard focus must arrive on screen immediately, ahead of the slide-in. */
+  body[data-nav-open="true"] .nav-shell:has(:focus-visible) { transition: none; }
 
+  .primary-nav { margin-left: 0; }
+  .nav-drawer__head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem;
+    padding: 0 0 1rem; color: var(--ink); font-weight: 600;
+  }
+  .nav-close {
+    display: inline-flex; align-items: center; gap: .5rem; min-height: 44px;
+    font: inherit; padding: .4rem .5rem; background: none; color: var(--ink);
+    border: 1px solid var(--control-border, var(--ink-muted)); border-radius: var(--radius-sm); cursor: pointer;
+  }
+  .nav-close svg { flex: none; }
   .primary-nav__list { flex-direction: column; align-items: stretch; gap: .1rem; }
 
   .nav-item,
@@ -2274,11 +2309,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
     border: 0; box-shadow: none; border-radius: 0;
     padding: 0 0 .5rem .6rem;
     margin-left: .35rem;
-    border-left: 2px solid var(--border);
+    border-left: 1px solid var(--border);
     display: none;
   }
   .nav-item[data-open="true"] > .nav-panel { display: block; transform: none; }
-  .nav-item:focus-within > .nav-panel { transform: none; }
+  .site-header:not([data-nav-ready]) .nav-item:focus-within > .nav-panel { transform: none; }
   .nav-item:last-child > .nav-panel { transform: none; }
 
   .nav-panel__inner,
@@ -2300,6 +2335,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
      the drawer is closed and off-screen, which is exactly the bug the drawer's
      own visibility rule exists to fix. Measured: tabbing the header at 390px
      landed here, in a menu the reader cannot see. */
+  .primary-nav .header-actions--mobile.nav-drawer__search { margin: 0 0 1rem; }
   .primary-nav .header-actions--mobile .site-search input {
     width: 100%; padding: .5rem .9rem; opacity: 1; visibility: inherit;
   }
@@ -2490,7 +2526,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    nothing: it is an <h2> inside .prose.) */
 .prose h2, .prose h3,
 .author-callout[id], .related-posts[id], .giscus-section[id], .legacy-comments[id] {
-  scroll-margin-top: calc(var(--header-h) + 1rem);
+  scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem);
 }
 .prose ul, .prose ol { padding-left: 1.4rem; }
 .prose li + li { margin-top: .35rem; }
@@ -3002,10 +3038,10 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   width: 100%; font: inherit; font-size: 1.1rem;
   padding: .8rem 1.1rem;
   background: var(--surface-sunken);
-  border: 1px solid var(--border-strong); border-radius: 999px;
+  border: 1px solid var(--control-border, var(--ink-muted)); border-radius: 999px;
   color: var(--ink);
 }
-.search-page__form input:focus { border-color: var(--brand-accent); outline-offset: 0; }
+.search-page__form input:focus { border-color: var(--brand-accent); }
 
 .search-page__status { color: var(--ink-muted); font-size: .92rem; min-height: 1.4em; }
 
@@ -3501,7 +3537,7 @@ body.lightbox-open { overflow: hidden; }
 /* scroll-margin so an "On this page" jump doesn't park the heading under the
    sticky header -- same reason .prose h2/h3 carry it. Applied to the heading
    wherever it sits, since the articles heading is nested in .section-head. */
-.sponsor-section h2 { font-size: 1.35rem; margin: 0 0 1rem; scroll-margin-top: calc(var(--header-h) + 1rem); }
+.sponsor-section h2 { font-size: 1.35rem; margin: 0 0 1rem; scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem); }
 
 .sponsor-topics { display: flex; flex-wrap: wrap; gap: .5rem; }
 .sponsor-topic {
@@ -3733,7 +3769,7 @@ body.lightbox-open { overflow: hidden; }
   margin-top: 2.5rem;
   /* So a jump link doesn't park the heading under the sticky site header --
      same reason .prose h2 and .sponsor-section h2 carry one. */
-  scroll-margin-top: calc(var(--header-h) + 1rem);
+  scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem);
 }
 .sitemap__section > h2 {
   padding-bottom: .5rem;

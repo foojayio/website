@@ -149,7 +149,7 @@
        PAGERS ARE NOT INDEXED: every pager renders the same page with a
        different slice of cards, so tagging them makes one author a result
        once per pager. $pageNum is 0 exactly on the pages worth a result. */}}
-  <main class="site-main" id="main"{{ if not $pageNum }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
+  <main class="site-main" id="main" tabindex="-1"{{ if not $pageNum }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 
