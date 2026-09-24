@@ -18,11 +18,11 @@
       artwork everything else has to sit beside, so it wins.
    2. A BRIGHT BLUE CANNOT BE ACCENT AND ACCENT-TEXT AT ONCE. #50c2f7 measures
       2.02:1 on white, so it is a fill, a border and a tint here and never text
-      -- --brand-accent-strong is the same hue walked down to 4.75:1. The live
+      -- --brand-accent-strong is the same hue darkened for text on white and tinted surfaces. The live
       site does not make this split and pays for it: #4fc3f7 is its body-link
       colour, i.e. links at 2.02:1.
    3. THE LIVE SITE'S MUTED INK IS NOT COPIED EITHER. rgba(55,71,79,.5) is
-      2.56:1 on white. --ink-muted is the same hue at 4.94:1.
+      2.56:1 on white. --ink-muted is the same hue, measured on each light surface.
 
    Realigning hues to the live design is the point; importing its contrast
    failures is not. Every pair below was measured, and the numbers in the
@@ -36,19 +36,15 @@
 :root {
   /* Brand -- the logo blue, its readable sibling, and its tint.
      accent      #50c2f7  fills, borders, ticks, the featured panel's edge
-     accent-strong        accent AS TEXT: 4.75 on white, 4.59 on --page-bg
+     accent-strong        accent AS TEXT: 5.54 on white, 4.87 on --page-head-bg
      accent-soft          the featured panel's ground: --ink on it is 8.57 */
   --brand-accent:        #50c2f7;
-  --brand-accent-strong: #087ab0;
+  --brand-accent-strong: #076fa0;
   --brand-accent-soft:   #e4f4fc;
-  /* THE FOCUS RING IS ITS OWN TOKEN, and in the light scheme it is NOT
-     --brand-accent. WCAG 1.4.11 asks a focus indicator for 3:1 against what it
-     sits on, and #50c2f7 measures 2.02 on --surface, 1.95 on --page-bg and 1.88
-     on --surface-sunken -- the same reason point 2 above rules the accent out as
-     text, applied to the one piece of UI a keyboard user navigates by. The
-     readable sibling is 4.40 on --surface and 4.25 on --surface-sunken.
-     Dark keeps #50c2f7, which is already 8.57 there. */
-  --focus-ring:          #087ab0;
+  /* The two focus colors contrast by more than 18:1. Unlike a single accent
+     ring, this pair remains distinguishable on the footer and colored controls. */
+  --focus-ring:          #0a1114;
+  --focus-halo:          #ffffff;
   /* The label on an accent FILL. Was #1c1204 in five places and #14100a in
      three more -- a warm near-black chosen for amber, which reads as a brown
      cast on blue. One token now, cool, 8.07 on --brand-accent. */
@@ -60,7 +56,7 @@
      each time -- .btn--accent:hover measured 1.60:1 in dark, .sponsor-badge
      2.78. Both were wrong before this palette too; they are fixed here because
      re-measuring every pair is what a palette change is. */
-  --on-accent-strong:    #ffffff;   /* 4.75 on --brand-accent-strong */
+  --on-accent-strong:    #ffffff;   /* 5.54 on --brand-accent-strong */
   --on-ink:              #ffffff;   /* 9.65 on --ink, 4.94 on --ink-muted */
 
   /* Secondary = the live theme's --blue, and here as there it is the
@@ -81,17 +77,16 @@
      steps below it (the live site's rgba(.75)/(.5) are 4.74 and 2.56). */
   --ink:            #37474f;   /* 9.65 on white */
   --ink-soft:       #4d646f;   /* 6.24 */
-  --ink-muted:      #5a7481;   /* 4.94 -- the floor, meta lines live here */
+  --ink-muted:      #526a76;   /* 5.01 on --page-head-bg; 5.70 on white */
   --surface:        #ffffff;
-  --surface-sunken: #edf9fe;   /* live --section-bg / --block-bg */
+  --surface-sunken: #f3f5f6;   /* neutral secondary surface */
+  --surface-tinted: #edf9fe;   /* brand-tinted navigation and section panels */
   /* Was --surface-navy, and the name is kept because 30-odd rules use it: the
      header and footer ground. The live site's is --nav-bg #37474f, a dark
      blue-grey rather than a navy, i.e. the ink colour itself. */
   --surface-navy:   #37474f;
-  /* Page background: the live --home-bg, a barely-there blue rather than the
-     grey off-white the scaffold guessed, so cards read as white against it. */
+  /* A pale canvas separates white cards; blue page heads establish sections. */
   --page-bg:        #f7fcfe;
-  /* Page-head band: a step into the section blue so the title area reads. */
   --page-head-bg:   #e2f3fb;
 
   /* Footer keeps its own tokens: it is dark in the light scheme, and needs a
@@ -101,11 +96,12 @@
   --footer-fg:     #c3cfd5;
   --footer-link:   #dfe8ec;
   --footer-head:   #ffffff;
-  --footer-muted:  #9fb0b8;
+  --footer-muted:  #abbcc5;
   --footer-border: #4d646f;
   /* live --border-color rgba(55,71,79,.1) and a stronger step of it */
   --border:         #ebeded;
   --border-strong:  #d6dcde;
+  --control-border: #7a8d96; /* 3.46 on white; decorative borders stay subtle */
 
   /* The RSS mark on partials/feed-link.html. Not the canonical #f26522: that
      measures 2.77 on --page-head-bg, where most of these links live, and 1.4.11
@@ -168,7 +164,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-block-start: calc(var(--header-offset, var(--header-h)) + 1rem);
+}
+/* Focus must arrive with the viewport, even when Tab jumps across a long article. */
+html:focus-within { scroll-behavior: auto; }
 
 body {
   margin: 0;
@@ -182,24 +184,30 @@ body {
 
 img, svg { max-width: 100%; height: auto; display: block; }
 
+input::placeholder, textarea::placeholder { color: var(--ink-muted); opacity: 1; }
+input, textarea { caret-color: var(--focus-ring); }
+::selection { background: var(--brand-accent); color: var(--on-accent); }
+
 a { color: var(--brand-secondary); text-decoration: none; }
 a:hover { color: var(--brand-accent-strong); text-decoration: underline; text-underline-offset: 2px; }
-/* One focus indicator for everything focusable, including the two kinds that
-   are not natively focusable and are given a tabindex: a click-to-enlarge image
-   (js/lightbox.js) and a sideways-scrolling table region, which a keyboard user
-   can only scroll once it can hold focus. 3px rather than 2 so the ring clears
-   WCAG 1.4.11's area test against a light border as well as its contrast one. */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-summary:focus-visible,
-dialog:focus-visible,
-[tabindex]:focus-visible {
-  outline: 3px solid var(--focus-ring);
+/* Two contrasting bands remain identifiable on page, footer and ad surfaces.
+   Include native scroll containers, not only elements with an explicit tabindex.
+   Keep an outline: forced-colors mode can suppress box shadows (W3C C40). */
+:root :focus-visible {
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--focus-halo);
+  scroll-margin: .5rem;
+}
+/* Draw both bands inside controls whose scroll or segmented container clips
+   outside ink. Keep the indicator visible in forced-colors mode as well. */
+:root :is(.cal-legend__scroll, .cal-switch__btn, .table-scroll, .sitemap-table-wrap,
+  .leaflet-container, .leaflet-bar a):focus-visible {
+  outline-offset: -4px;
+  box-shadow: inset 0 0 0 2px var(--focus-halo);
+}
+@media (forced-colors: active) {
+  :root :focus-visible { outline-color: Highlight; }
 }
 
 h1, h2, h3, h4, h5 {
@@ -520,7 +528,9 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
 }
 .btn--accent { background: var(--brand-accent); color: var(--on-accent); }
 .btn--accent:hover { background: var(--brand-accent-strong); color: var(--on-accent-strong); text-decoration: none; }
-.btn--ghost { border-color: var(--border-strong); color: var(--ink); }
+.btn--ghost {
+  background: transparent; border-color: var(--control-border); color: var(--ink);
+}
 .btn--ghost:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
 .btn--navy { background: var(--ink); color: var(--on-ink); }
 .btn--navy:hover { background: #475c66; }
@@ -1159,61 +1169,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 .post-card-excerpt { margin: 0; font-size: .95rem; color: var(--ink-soft); }
 
-/* ---------------------------------------------------- highlight panel ---
-   THE SINGLE DEFINITION OF "THIS BLOCK IS THE ONE TO LOOK AT". Two users so
-   far: the most recent post on the home page (post-card-lead.html) and the
-   monthly featured authors at the top of /today/author/
-   (featured-authors-band.html). A third gets it by adding the class -- which
-   is the reason it is a class rather than a selector list, since the whole
-   point is that the site has ONE highlight treatment and not one per section.
-
-   The ground is --brand-accent-soft: the logo blue's own tint, already carrying
-   the eyebrow tick and the accent button, so this introduces no colour that
-   exists for one block only -- and it retunes itself for dark, where the token
-   is a translucent blue over the page rather than a pale solid.
-
-   --ink-muted IS REDEFINED INSIDE THE PANEL, and that is the interesting part:
-   the token measures 4.39:1 on this ground against 4.94 on white, and it is
-   used by a dozen descendants (card meta, an author's article count, a latest
-   article's date). Stepping the token up once here fixes all of them at 4.71
-   and keeps it lighter than --ink-soft, so the hierarchy inside the panel
-   survives; naming each descendant instead would be a dozen rules that a new
-   descendant silently misses. Dark needs no equivalent -- --ink-muted is 5.76
-   on the dark panel already. */
+/* Featured groups share a blue surface and inherit the theme's readable ink. */
 .highlight-panel {
-  --ink-muted: #566f7b;
   background: var(--brand-accent-soft);
-  border: 1px solid var(--brand-accent);
-  border-radius: var(--radius);
+  border: 1px solid var(--border); border-radius: 12px;
 }
-/* An eyebrow inside a highlight panel is a LABEL, not a chip.
 
-   It used to be a solid accent pill, which solved a contrast problem and
-   created a worse affordance one: a filled, rounded, uppercase pill is exactly
-   what every clickable thing on this site looks like -- .btn, .chip-row a, the
-   category chips on a card, the pagination cells -- so "Most recent post" read
-   as a button that does nothing when clicked. An affordance that lies is worse
-   than low contrast, because the reader acts on it.
+/* The newest article uses a wider image/title composition than the archive grid. */
 
-   So the pill is gone and the contrast problem is solved the other way: the
-   text takes the panel's own --ink (9.4:1 on --brand-accent-soft) instead of
-   --brand-accent-strong, which is the token that could only manage 4.22 here.
-   The 22px tick comes back as the marker and takes --brand-accent-strong,
-   where a 3px bar of the lighter accent would have vanished into the tint.
-   Nothing else on the site draws a label this way, so it cannot be mistaken
-   for a control. */
-.highlight-panel .eyebrow { color: var(--ink); }
-.highlight-panel .eyebrow::before { background: var(--brand-accent-strong); }
-
-/* Lead / featured card -- the most recent post.
-
-   It sits in the highlight panel above rather than behind the hairline rule it
-   used to carry, because the home page opens straight into this card: there is
-   no hero and the <h1> is visually hidden (see index.html), so the first thing
-   a reader sees is a card whose only distinction from the ten below it was
-   being wider. Every card on the page is unfilled, so one filled block is all
-   the focus this needs. Layout only here; the highlight is not this card's to
-   define. */
 .post-card--lead {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -1298,7 +1261,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* ------------------------------------------------------------- sidebar --- */
 
-.sidebar { display: grid; gap: 1.5rem; position: sticky; top: calc(var(--header-h) + 1.25rem); }
+.sidebar { display: grid; gap: 1.5rem; align-content: start; }
 .sidebar .widget {
   background: var(--surface-sunken);
   border: 1px solid var(--border);
@@ -2375,7 +2338,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .chip-row--lg { gap: .6rem; }
 .chip-row--lg a { font-size: .85rem; padding: .45rem 1rem; }
 .chip-count, .sidebar .count {
-  display: inline-block; font-weight: 700; opacity: .55; font-size: .85em;
+  display: inline-block; font-weight: 700; font-size: .85em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -2905,9 +2868,9 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   --brand-accent:        #50c2f7;   /* 8.57 on --surface */
   --brand-accent-strong: #8ed6fa;   /* 10.83 */
   --brand-accent-soft:   rgba(80, 194, 247, .14);
-  /* The one scheme where the accent IS a contrasting ring: 8.57 on --surface,
-     11.9 on --page-bg. The light scheme's readable sibling would be 2.3 here. */
-  --focus-ring:          #50c2f7;
+  /* Reverse the two focus bands for the dark canvas. */
+  --focus-ring:          #ffffff;
+  --focus-halo:          #0a1114;
   /* #3562e5 is 2.4:1 on a dark ground -- an indigo that dark cannot be a link
      colour here, so it is the same hue lightened to 6.08. */
   --brand-secondary:     #7796ee;
@@ -2930,11 +2893,13 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   --ink-muted:      #8b9ea7;   /*  6.22 */
   --surface:        #121c21;
   --surface-sunken: #1d292f;
+  --surface-tinted: #1d292f;
   --surface-navy:   #0a1114;
   --page-bg:        #0a1114;
   --page-head-bg:   #1d292f;
   --border:         #2e3f48;
   --border-strong:  #435a65;
+  --control-border: #6b8795; /* 4.55 on the dark surface */
 
   /* 6.66 on --page-head-bg, 7.74 on --surface. */
   --feed:           #ff922b;
@@ -2996,7 +2961,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose figure.alignleft, .prose figure.alignright { max-width: 50%; }
 .prose figure { margin: 1.5rem 0; }
 .prose figure img, .prose img.alignleft, .prose img.alignright { height: auto; max-width: 100%; }
-.prose figcaption, .prose .wp-element-caption { font-size: 0.85em; opacity: 0.72; text-align: center; margin-top: 0.4rem; }
+.prose figcaption, .prose .wp-element-caption { font-size: 0.85em; color: var(--ink-muted); text-align: center; margin-top: 0.4rem; }
 
 /* Artwork drawn FOR a white page -- black linework on transparency -- loses its
    outlines on the dark scheme: Duke's cap on /who-we-are/ becomes an invisible
@@ -3197,7 +3162,7 @@ body.lightbox-open { overflow: hidden; }
   width: 100%; max-width: 420px; padding: .6rem .9rem;
   font-family: var(--font-body); font-size: 1rem;
   color: var(--ink); background: var(--surface);
-  border: 1px solid var(--border-strong); border-radius: var(--radius);
+  border: 1px solid var(--control-border); border-radius: var(--radius);
 }
 /* The border tint is the resting-to-focused cue; the OUTLINE is the focus
    indicator, and deleting it (which this rule used to do) leaves a keyboard
@@ -3334,8 +3299,8 @@ body.lightbox-open { overflow: hidden; }
 :root {
   /* foojay.io's own sponsor-hero blue -- see .sponsors-hero. */
   --sponsors-hero-bg: #2f56ca;
-  --tier-gold:   #c8912a;
-  --tier-silver: #7d8894;
+  --tier-gold:   #8b5f16;
+  --tier-silver: #5d6b78;
   --tier-bronze: #a4682f;
   /* DELIBERATELY NOT A METAL. Community Partner is not a rung on the
      gold/silver/bronze ladder -- it is the tier that pays nothing -- so it gets
@@ -4330,6 +4295,10 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   color: var(--ink-muted);
 }
 .page-source a, .prose .page-source a { color: var(--brand-accent-strong); }
+.page-source a, .cal-source a, .quick-start__foot a, .jvmw-head .page-head__meta a,
+.review-source a, .review-empty a, .leaflet-container .leaflet-control-attribution a {
+  text-decoration: underline; text-underline-offset: .15em;
+}
 
 /* ------------------------------------------------- episode transcript ----
    The machine transcript under a podcast episode (posts/single.html, written
