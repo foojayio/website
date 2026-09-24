@@ -1,10 +1,11 @@
 ---
 title: "Join the Foojay.io Community on Slack"
-date: "2022-08-04T14:14:09+00:00"
-lastmod: "2023-01-20T12:24:23+00:00"
+date: "2022-08-04"
+lastmod: "2026-09-24"
 description: "On Slack, the Foojay.io community discusses articles, insights, tips, tricks, events, and more."
 authors:
   - "geertjan-wielenga"
+  - "frankdelporte"
 image: "image-1024x825.png"
 categories:
   - "Foojay"
