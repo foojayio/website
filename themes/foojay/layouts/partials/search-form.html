@@ -1,12 +1,5 @@
-{{/* Submits to /search/, which is Pagefind (layouts/search/single.html).
-     `searchAction` in hugo.toml can point it elsewhere.
-
-     In the header the field is collapsed to its magnifier and expands on
-     click (js/nav.js), because an always-open input cost ~150px in a bar
-     already running edge to edge. The button is a real `submit`, so with no
-     JavaScript the first click still lands the reader on the search page --
-     never a dead icon. In the mobile drawer it is always open, where there is
-     room and no hover to discover the icon with. */}}
+{{/* Header search expands without displacing navigation. The real submit
+     button preserves a useful no-JS path to the Pagefind search page. */}}
 {{- /* Called with the Page, or with a dict {page, label} -- the header renders
        this twice (the bar and the mobile drawer), and two search landmarks with
        the same name are two things a screen-reader user cannot tell apart in a

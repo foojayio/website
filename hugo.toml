@@ -134,11 +134,12 @@ enableGitInfo = true
   # Array of tables (not a single table) so more than one header button can
   # be listed -- header.html ranges over these rather than using `with`.
   [[params.headerCta]]
-    label = "Write for Foojay"
-    url = "/today/how-to-submit-your-next-article-on-foojay-io/"
-  [[params.headerCta]]
     label = "Join our Slack"
     url = "/today/join-slack-com-t-foojay-signup/"
+    secondary = true
+  [[params.headerCta]]
+    label = "Write for Foojay"
+    url = "/today/how-to-submit-your-next-article-on-foojay-io/"
 
 # Comments + reactions, via giscus on this repo's GitHub Discussions -- see
 # themes/foojay/layouts/partials/comments.html for the setup steps and for why

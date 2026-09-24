@@ -9,11 +9,11 @@
   editor picks: the brand blurb, the copyright year, and the RSS URL (derived
   from the home page's output format for the entry carrying `rss = true`).
 */}}
-<footer class="site-footer">
+<footer class="site-footer" id="footer" tabindex="-1">
   <div class="footer-cols">
 
     <div class="footer-col footer-brand">
-      <a class="logo" href="{{ "" | relURL }}">
+      <a class="logo" href="{{ "" | relURL }}" aria-label="Foojay home">
         {{ partial "site-logo.html" . }}
       </a>
       <p>A place for Friends Of OpenJDK — free reference material, community news and daily Java insight.</p>
