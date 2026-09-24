@@ -1,7 +1,7 @@
 ---
 title: "Alessandro Vozza"
 avatar: "alessandro-vozza.jpg"
-avatarFull: "alessandro-vozza.jpg"
+avatarFull: "alessandro-vozza-full.jpg"
 bio: "Founder at Cloud Pirates. Talks about Azure, Security, and Kubernetes."
 bluesky: ""
 mastodon: ""

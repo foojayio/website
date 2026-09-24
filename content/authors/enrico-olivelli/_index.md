@@ -1,7 +1,7 @@
 ---
 title: "Enrico Olivelli"
 avatar: "enrico-olivelli.jpg"
-avatarFull: "enrico-olivelli.jpg"
+avatarFull: "enrico-olivelli-full.jpg"
 bio: "Apache Pulsar PMC member"
 bluesky: ""
 mastodon: ""
