@@ -12,7 +12,7 @@ categories:
   - "JUGs"
   - "Trip Reports"
 related_posts:
-  - "foojay-podcast-32-philippines-jug"
+  - "foojay-podcast-32"
   - "jugph-continuing-the-connection-with-the-java-enthusiasts"
   - "jug-ph-meetup-4-and-5"
   - "ai4devs-schedule-published"

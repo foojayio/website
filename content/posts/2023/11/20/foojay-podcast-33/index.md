@@ -10,7 +10,7 @@ categories:
   - "Conference"
   - "Podcast"
 related_posts:
-  - "foojay-podcast-32-philippines-jug"
+  - "foojay-podcast-32"
   - "foojay-podcast-31"
   - "foojay-podcast-30"
 frozen: false

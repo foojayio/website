@@ -12,7 +12,7 @@ categories:
   - "Podcast"
 related_posts:
   - "foojay-podcast-35"
-  - "foojay-podcast-32-philippines-jug"
+  - "foojay-podcast-32"
   - "foojay-podcast-30"
 frozen: false
 ---
