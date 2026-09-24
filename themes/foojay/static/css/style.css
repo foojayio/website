@@ -1390,12 +1390,22 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   display: flex; flex-wrap: wrap; gap: 0 .4rem;
   font-size: .82rem; color: var(--ink-muted); line-height: 1.4;
 }
+.coming-soon-side__meta { align-items: center; }
 .coming-soon-side__meta time { font-weight: 600; color: var(--ink-soft); }
+/* "by" and the face are one phrase, so they align and wrap together -- as flex
+   children of the meta line they otherwise split across two rows with the
+   portrait stranded on the date's line. The disc is smaller than on a card
+   because the column is ~300px and the type here is .82rem. */
+.coming-soon-side__by { display: inline-flex; align-items: center; gap: .3rem; }
+.coming-soon-side__by .byline-avatar { width: 1.45rem; height: 1.45rem; }
 /* `.sidebar li a` is (0,1,2) and turns every link inside a widget list into a
    PADDED BLOCK -- so the author link dropped onto its own line and spaced
    itself out like a nav item. Restated at (0,2,1) so the meta line stays one
    sentence. Colour and hover are deliberately left to that rule. */
 .sidebar .coming-soon-side__meta a { display: inline; padding: 0; font-size: inherit; }
+/* ...but a byline WITH a face has to stay inline-flex, or that `display: inline`
+   lets the line break between the portrait and the name. (0,3,1) to outrank it. */
+.sidebar .coming-soon-side__meta a.byline { display: inline-flex; align-items: center; gap: .3rem; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */

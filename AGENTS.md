@@ -1146,6 +1146,9 @@ site.
      aside widget: four directory listings per build, not a walk of 2163 posts.
      Titles are **plain text, not links** — the page does not exist yet.
      `.IsHome` is checked in `sidebar.html`, which also bounds the cost.
+     The byline is **`byline.html` given slugs instead of a Page** (that input
+     exists for this caller), so faces and names here cannot look or resolve
+     differently from a card's.
      **`buildFuture = true` is the trap**: it would need a `where .Date "lt"
      now` in every list, term, feed and JSON-LD template plus the Pagefind
      body, and ONE missed spot publishes an embargoed article early, silently.

@@ -2,7 +2,10 @@
      `author:` slug still works.
 
      Called with the Page, or with a dict:
-       page          the Page (required)
+       page          the Page (required unless `authors` is given)
+       authors       author slugs, for a caller that has no Page -- which is
+                     why it exists: coming-soon.html reads scheduled posts off
+                     disk, so there is no Page to take them from
        maxNames      above this many authors, render "N authors" instead of
                      the names (0, the default, always names everyone)
        pagefindMeta  stamp data-pagefind-meta="author" on the wrapper
@@ -30,15 +33,19 @@
 {{ $maxNames := 0 }}
 {{ $pagefindMeta := false }}
 {{ $avatars := false }}
+{{ $authors := slice }}
 {{ if reflect.IsMap . }}
   {{ $p = .page }}
   {{ if isset . "maxNames" }}{{ $maxNames = .maxNames }}{{ end }}
   {{ if isset . "pagefindMeta" }}{{ $pagefindMeta = .pagefindMeta }}{{ end }}
   {{ if isset . "avatars" }}{{ $avatars = .avatars }}{{ end }}
+  {{ if isset . "authors" }}{{ $authors = .authors }}{{ end }}
 {{ end }}
 {{ with $p }}
-{{ $authors := .Params.authors }}
-{{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
+  {{ $authors = .Params.authors }}
+  {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
+{{ end }}
+{{ with $authors }}
 {{- $pile := and $avatars (ge (len $authors) 2) -}}
 {{- /* Resolved before the wrapper, because the wrapper carries them when the
        names are not in the visible text -- see $pile below. */ -}}

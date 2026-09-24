@@ -102,21 +102,10 @@
                long month name pushed the byline onto a line of its own. */}}
           <time datetime="{{ .date }}">{{ $when.Format "2 Jan 2006" }}</time>
           {{ with .authors }}
-            {{/* The same lookup and classes byline.html uses, so a byline
-                 here cannot resolve differently from one on a card. Not
-                 byline.html itself, because that takes a Page and the point
-                 here is that there is not one. A missing author bundle
-                 degrades to the slug; Frontmatter fails the PR over it. */}}
-            <span class="coming-soon-side__by">by <span class="byline-group">
-              {{- range $i, $slug := . -}}
-                {{- if $i }}<span class="byline-sep">, </span>{{ end -}}
-                {{- with partial "author-page.html" $slug -}}
-                  <a class="byline" href="{{ .RelPermalink }}">{{ .Title }}</a>
-                {{- else -}}
-                  <span class="byline">{{ $slug }}</span>
-                {{- end -}}
-              {{- end -}}
-            </span></span>
+            {{/* byline.html itself, given slugs rather than a Page -- these
+                 posts have none. So a byline here cannot resolve or look
+                 different from one on a card, faces included. */}}
+            <span class="coming-soon-side__by">by {{ partial "byline.html" (dict "authors" . "avatars" true) }}</span>
           {{ end }}
         </p>
       </li>
