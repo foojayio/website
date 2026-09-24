@@ -1,6 +1,6 @@
 ---
 title: "My love-hate relationship with Java formatters"
-date: "2026-09-23"
+date: "2026-09-30"
 description: "Learning to love google-java-format, why AI agents make formatters matter even more, and why palantir-java-format now has a fork: open-java-format."
 authors:
   - "abashev"
