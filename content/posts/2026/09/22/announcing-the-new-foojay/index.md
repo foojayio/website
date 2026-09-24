@@ -9,6 +9,7 @@ categories:
   - "Foojay"
 related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
+  - "how-to-add-an-event-to-the-foojay-event-calendar"
   - "join-slack-com-t-foojay-signup"
   - "asciidoc-support-on-foojay"
   - "diagrams-as-code-mermaid-support-on-foojay"
