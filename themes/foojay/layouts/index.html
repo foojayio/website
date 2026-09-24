@@ -86,13 +86,23 @@
   {{ partial "sidebar.html" . }}
 </div>
 
+{{/* The band is the Foojay Podcast; the CATEGORY is broader and also holds
+     JCast and write-ups about episodes. Narrowed by slug because every episode
+     already has `foojay-podcast-<n>` -- 101 of 101, numbered without a gap --
+     so nothing has to be added to 101 posts and a new episode qualifies by
+     being named the way every other one is. A prefix, not an exact match:
+     episode 32's folder is `foojay-podcast-32-philippines-jug`. */}}
 {{ $podcasts := where $posts "Params.categories" "intersect" (slice "Podcast" "podcast") }}
-{{ with $podcasts }}
+{{ $episodes := slice }}
+{{ range $podcasts }}
+  {{ if findRE `^foojay-podcast-[0-9]+` .File.ContentBaseName }}{{ $episodes = $episodes | append . }}{{ end }}
+{{ end }}
+{{ with $episodes }}
 <section class="band band--sunken">
   <div class="shell">
     <div class="section-head">
       <div>
-        <h2>Podcasts</h2>
+        <h2>Foojay Podcast</h2>
         <p>Catch up on the most recent episodes and stay updated with the latest OpenJDK innovations.</p>
       </div>
       <a class="more" href="{{ "today/category/podcast/" | relURL }}">More podcasts &rarr;</a>

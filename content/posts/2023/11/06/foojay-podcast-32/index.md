@@ -15,6 +15,8 @@ related_posts:
   - "foojay-podcast-30"
   - "foojay-podcast-29"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+aliases:
+  - "/foojay-podcast-32-philippines-jug/"
 frozen: false
 ---
 
