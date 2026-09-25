@@ -67,7 +67,9 @@
 {{- $qLinkedin := replace (urlquery $linkedin) "+" "%20" -}}
 {{- $qSubject := replace (urlquery $title) "+" "%20" -}}
 {{- $qBody := replace (urlquery $body) "+" "%20" -}}
-<div class="page-share" data-pagefind-ignore
+{{- /* id="post-share": toc.html links "Share this post" here, namespaced like
+       #post-authors and #transcript so Goldmark's own ids never collide. */ -}}
+<div class="page-share" id="post-share" data-pagefind-ignore
      data-share-url="{{ $url }}" data-share-title="{{ $title }}"
      data-share-summary="{{ $summary }}" data-share-post="{{ $masto }}">
   <span class="page-share__label" id="page-share-label">Share this page</span>

@@ -33,6 +33,15 @@
      sections: three near-constant entries reading like chapters would make a
      five-heading post look like an eight-heading one. */}}
 {{ $tail := slice }}
+{{/* share.html has no `with`-able return value to guard on -- it always
+     renders when called. Of every caller of THIS partial, ai/single.html
+     (type "ai", the curated AI portal) is the one exception that reaches toc.html
+     via sidebar.html but never calls share.html, so #post-share would not
+     exist there. Guarded on that instead of on a partial result. Ordered
+     first to match where single.html renders it, ahead of post-authors.html. */}}
+{{ if ne .Type "ai" }}
+  {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-share">Share this post</a></li>` }}
+{{ end }}
 {{ with partial "post-authors.html" . }}
   {{/* Plural derived from the count, not written twice: foojay-podcast-94
        credits twelve people and most posts credit one. */}}
