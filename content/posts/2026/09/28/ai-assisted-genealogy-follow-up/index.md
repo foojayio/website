@@ -9,7 +9,10 @@ image: "cover_large.jpg"
 categories:
   - "AI"
   - "Use Cases"
-related_posts: []
+related_posts:
+  - "ai-assisted-genealogy"
+  - "my-first-steps-with-playwright"
+  - "writing-an-agent-skill"
 ---
 
 I got a lot of feedback on my post [AI-assisted genealogy](https://blog.frankel.ch/ai-assisted-genealogy/), some good, some not so good. In any case, I felt the subject was interesting to a lot of people. Meanwhile, I continue working on my tree, and I have deepened my understanding of the subject. In this post, I want to share again.
