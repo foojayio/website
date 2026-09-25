@@ -177,24 +177,16 @@ blocks in issues, pull requests and README files. A diagram from your project's 
 
 ## Things to know
 
-- **Check your syntax** in the [Mermaid live editor](https://mermaid.live/) before submitting. If a diagram doesn't parse, that one diagram is replaced by an error message in the rendered article — the rest of the page is fine, but
-  the diagram isn't.
+- **Nothing to switch on.** No frontmatter flag is needed. Write the fence and you get a diagram. Pages without one don't load the diagram library at all.
+- **Check your syntax** in the [Mermaid live editor](https://mermaid.live/) before submitting. If a diagram doesn't parse, that one diagram is replaced by an error message in the rendered article.
 - **Don't hard-code colours.** Mermaid supports styling directives, but a colour chosen for a light background tends to disappear on a dark one. The default theming already follows the reader's choice.
-- **Keep them small.** A diagram with forty nodes is unreadable on a phone.
-  Several small diagrams beat one enormous one.
+- **Keep them small.** A diagram with forty nodes is unreadable on a small screen. Several small diagrams beat one enormous one.
 - **Diagrams are not a substitute for alt text.** If a diagram carries something
-  essential, say it in the surrounding prose too — that serves screen-reader
-  users, and it also serves the reader skimming on a train.
-  Three things worth knowing:
-- **Nothing to switch on.** No frontmatter flag — write the fence and you get a
-  diagram. Pages without one don't load the diagram library at all.
-- **Diagrams follow the reader's theme**, light or dark, and re-draw when the
-  reader flips it. Don't hard-code colours.
-- **If the syntax doesn't parse**, that one diagram shows an error message in place and the rest of the article is unaffected. Check your diagram in the [live editor](https://mermaid.live/) if you're unsure.
+  essential, say it in the surrounding prose too. That serves screen-reader
+  users, and it readers using their phone.
 
 Images are of course still fine, and still the right answer for screenshots,
-photos and anything hand-drawn. But if you have been describing a flow in three
-paragraphs because drawing it was too much hassle, it isn't any more.
+photos and anything hand-drawn. 
 
 ## Writing for Foojay
 
