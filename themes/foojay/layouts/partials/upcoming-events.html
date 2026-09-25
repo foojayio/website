@@ -38,7 +38,7 @@
          is a list, which is what /calendar/ is for. */}}
     <ul class="event-strip">
       {{ range . }}
-        <li class="event-strip__item" style="--cal-dot: hsl({{ .hue }} 62% 46%)">
+        <li class="event-strip__item{{ if ne .kind "meetup" }} event-strip__item--event{{ end }}" style="--cal-dot: hsl({{ .hue }} 62% 46%)">
           <span class="event-strip__date">{{ .dateShort }}</span>
           {{ if .url }}
             <a class="event-strip__title" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
