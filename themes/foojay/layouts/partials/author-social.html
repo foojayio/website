@@ -1,26 +1,31 @@
-{{- /* Social links for an author. Context (.) is the author page. Renders
-       nothing when the author has no links set, so callers don't need to guard.
-       Used by both the author profile page and the "Written by" post callout. */ -}}
-{{- $a := . -}}
-{{- $rss := $a.OutputFormats.Get "rss" -}}
-{{- if or $a.Params.bluesky $a.Params.mastodon $a.Params.linkedin $a.Params.github $a.Params.gitlab $a.Params.youtube $a.Params.twitter $a.Params.website $rss -}}
+{{- /* Shared by author profiles, post callouts, featured authors and the sitemap.
+       Context is the author Page. RSS keeps the site's shared feed control. */ -}}
+{{- $author := . -}}
+{{- $links := slice -}}
+{{- range slice
+  (dict "key" "bluesky" "label" "Bluesky" "icon" "brand-bluesky" "rel" "me noopener")
+  (dict "key" "mastodon" "label" "Mastodon" "icon" "brand-mastodon" "rel" "me noopener")
+  (dict "key" "linkedin" "label" "LinkedIn" "icon" "brand-linkedin")
+  (dict "key" "github" "label" "GitHub" "icon" "brand-github")
+  (dict "key" "gitlab" "label" "GitLab" "icon" "brand-gitlab")
+  (dict "key" "youtube" "label" "YouTube" "icon" "brand-youtube")
+  (dict "key" "twitter" "label" "Twitter/X" "icon" "brand-x")
+  (dict "key" "website" "label" "Website" "icon" "world")
+-}}
+  {{- $link := . -}}
+  {{- with index $author.Params .key -}}
+    {{- $links = $links | append (merge $link (dict "url" .)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $rss := $author.OutputFormats.Get "rss" -}}
+{{- if or $links $rss }}
 <ul class="author-social">
-  {{ with $a.Params.bluesky }}<li><a href="{{ . }}" rel="me noopener" target="_blank">Bluesky</a></li>{{ end }}
-  {{ with $a.Params.mastodon }}<li><a href="{{ . }}" rel="me noopener" target="_blank">Mastodon</a></li>{{ end }}
-  {{ with $a.Params.linkedin }}<li><a href="{{ . }}" rel="noopener" target="_blank">LinkedIn</a></li>{{ end }}
-  {{ with $a.Params.github }}<li><a href="{{ . }}" rel="noopener" target="_blank">GitHub</a></li>{{ end }}
-  {{ with $a.Params.gitlab }}<li><a href="{{ . }}" rel="noopener" target="_blank">GitLab</a></li>{{ end }}
-  {{ with $a.Params.youtube }}<li><a href="{{ . }}" rel="noopener" target="_blank">YouTube</a></li>{{ end }}
-  {{ with $a.Params.twitter }}<li><a href="{{ . }}" rel="noopener" target="_blank">Twitter/X</a></li>{{ end }}
-  {{ with $a.Params.website }}<li><a href="{{ . }}" rel="noopener" target="_blank">Website</a></li>{{ end }}
-  {{/* RSS output is enabled per author by the cascade in
-       content/authors/_index.md. Shown here rather than gated on a social
-       param, so it appears on the profile AND in the "Written by" callout.
-
-       Through partials/feed-link.html, like every other feed offer on the
-       site, so the one control a reader learns to look for looks the same
-       everywhere. .feed-link and .author-social a share a size, weight,
-       padding and border by design. */}}
-  {{ with $rss }}<li>{{ partial "feed-link.html" $a }}</li>{{ end }}
+  {{- range $links }}
+  <li><a class="icon-button" href="{{ .url }}" rel="{{ .rel | default "noopener" }}" target="_blank"
+         aria-label="{{ .label }} — {{ $author.Title }} (opens in a new tab)" title="{{ .label }}">
+    {{ partial "icon.html" .icon }}
+  </a></li>
+  {{- end }}
+  {{- with $rss }}<li>{{ partial "feed-link.html" $author }}</li>{{ end }}
 </ul>
 {{- end -}}
