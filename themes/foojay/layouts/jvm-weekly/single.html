@@ -32,7 +32,7 @@
          src="{{ partial "resource-url.html" (dict "page" . "src" "/images/pages/jvm-weekly/jvm-weekly-logo.png") }}"
          alt="" width="88" height="88" decoding="async">
     <div class="jvmw-head__text">
-    <span class="eyebrow"><a href="{{ "today/" | relURL }}">News</a></span>
+    <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
     <div class="page-head__meta">

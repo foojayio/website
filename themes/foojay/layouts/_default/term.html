@@ -1,7 +1,6 @@
 {{ define "main" }}
 <div class="page-head">
   <div class="page-head__inner">
-    <span class="eyebrow">{{ .Data.Singular | humanize }}</span>
     <h1>{{ .Title }}</h1>
     <div class="page-head__meta">
       <p>{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }} in this {{ .Data.Singular }}.</p>

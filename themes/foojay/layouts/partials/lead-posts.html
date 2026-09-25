@@ -17,13 +17,12 @@
        The label is not a parameter (same rule as feed-link.html); only its
        plural is derived.
 
-       An <h2>, because the cards inside are <h3>s and without it the home page
-       goes from its hidden <h1> straight to an <h3> (WCAG 1.3.1). Styled as an
-       eyebrow, so nothing about the look depends on the tag. */ -}}
+       An <h2> groups the article <h3>s without skipping a heading level.
+       Its section-heading style stays distinct from article headlines. */ -}}
 {{- $leads := . -}}
 {{- with $leads }}
 <div class="lead-panel highlight-panel">
-  <h2 class="eyebrow">Most recent post{{ if gt (len .) 1 }}s{{ end }}</h2>
+  <h2 class="lead-panel__heading">Most recent post{{ if gt (len .) 1 }}s{{ end }}</h2>
   {{- if eq (len .) 1 }}
   {{ partial "post-card-lead.html" (index . 0) }}
   {{- else }}
