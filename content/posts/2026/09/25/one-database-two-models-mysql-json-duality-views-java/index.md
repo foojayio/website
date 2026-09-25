@@ -1,6 +1,6 @@
 ---
 title: "One Database, Two Models: Building AI-Friendly Java Applications with MySQL JSON Duality Views"
-date: "2026-09-24"
+date: "2026-09-25"
 description: "Explore MySQL JSON Duality Views in Java: simpler reads, safe document writes, ORM comparisons, and read-only tools for a local AI assistant."
 authors: ["bazlur-rahman"]
 image: "mysql-json-duality-views-java-ai.jpg"
