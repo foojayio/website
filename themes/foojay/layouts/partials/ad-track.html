@@ -25,8 +25,22 @@
 {{- $endpoint := site.Params.views.endpoint -}}
 {{- with $ads }}
 <div class="ad-carousel ad-carousel--{{ $variant }}" data-ad-carousel
+     role="group" aria-label="Sponsored and community banners"
      {{- with $endpoint }} data-ad-endpoint="{{ . }}"{{ end }}
      {{- if $shuffle }} data-ad-shuffle{{ end }}>
+  {{- if gt (len .) 1 }}
+  {{- /* Pause precedes slide links so keyboard users can stop rotation first.
+         The script reveals it only when autoplay is available. */}}
+  <button class="ad-carousel__pause" data-ad-pause type="button" aria-label="Pause banner rotation" hidden>
+    <svg class="ad-carousel__icon-pause" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="3.5" y="2.5" width="3.5" height="11" rx="1" fill="currentColor"/>
+      <rect x="9" y="2.5" width="3.5" height="11" rx="1" fill="currentColor"/>
+    </svg>
+    <svg class="ad-carousel__icon-play" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M4 2.8v10.4a.6.6 0 0 0 .92.5l8.2-5.2a.6.6 0 0 0 0-1L4.92 2.3a.6.6 0 0 0-.92.5Z" fill="currentColor"/>
+    </svg>
+  </button>
+  {{- end }}
   <ul class="ad-carousel__track" data-ad-track>
     {{- range . }}
     {{- /* The banner's folder under content/ads/, which is what the counter
@@ -85,23 +99,6 @@
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M3.333 8h9.334M8 3.333 12.667 8 8 12.667" stroke="currentColor"
             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-  {{- /* PAUSE. The track advances every 7 seconds and WCAG 2.2.2 asks for a
-         way to stop anything moving on its own for longer than five. Pausing
-         on hover and on focus does not count: one needs a pointer, the other
-         needs focus kept inside the carousel while reading beside it.
-
-         Hidden like the arrows and revealed by the script, so it never appears
-         where nothing is moving (JavaScript off, or prefers-reduced-motion).
-         The label is written by the script, since it changes with state. */}}
-  <button class="ad-carousel__pause" data-ad-pause type="button" aria-label="Pause banner rotation" hidden>
-    <svg class="ad-carousel__icon-pause" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-      <rect x="3.5" y="2.5" width="3.5" height="11" rx="1" fill="currentColor"/>
-      <rect x="9" y="2.5" width="3.5" height="11" rx="1" fill="currentColor"/>
-    </svg>
-    <svg class="ad-carousel__icon-play" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M4 2.8v10.4a.6.6 0 0 0 .92.5l8.2-5.2a.6.6 0 0 0 0-1L4.92 2.3a.6.6 0 0 0-.92.5Z" fill="currentColor"/>
     </svg>
   </button>
   {{- end }}
