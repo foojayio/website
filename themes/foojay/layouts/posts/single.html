@@ -94,7 +94,7 @@
              images of its own would take this photo as its search thumbnail. */}}
         {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-ignore="all" src="{{ partial "resource-url.html" (dict "page" $author "src" .) }}" alt="" loading="lazy">{{ end }}
         <div>
-          <span class="eyebrow">Written by</span>
+          <span class="author-callout__label">Written by</span>
           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           {{ with .Params.bio }}<p>{{ . | truncate 260 }}</p>{{ end }}
           {{ partial "author-social.html" . }}
