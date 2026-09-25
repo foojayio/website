@@ -40,7 +40,7 @@
      exist there. Guarded on that instead of on a partial result. Ordered
      first to match where single.html renders it, ahead of post-authors.html. */}}
 {{ if ne .Type "ai" }}
-  {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-share">Share this post</a></li>` }}
+  {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-share">Share this page</a></li>` }}
 {{ end }}
 {{ with partial "post-authors.html" . }}
   {{/* Plural derived from the count, not written twice: foojay-podcast-94
