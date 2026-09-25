@@ -17,6 +17,7 @@
       {{ partialCached "article-html.html" . .RelPermalink }}
     </div>
 
+    {{ partial "share.html" . }}
     {{ partial "page-source.html" . }}
 
     {{/* Renders nothing unless comments-term.html gives this page a term.

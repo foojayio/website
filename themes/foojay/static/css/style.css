@@ -1623,12 +1623,23 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .author-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; grid-row: 1 / span 3; }
 .author-bio { margin: 0 0 .8rem; color: var(--ink-soft); }
 .author-social { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: 0; }
-.author-social a {
+/* THE SHARE ROW IS THIS PILL, so it is in this selector rather than a second
+   set of the same five values further down -- see .feed-link, which took the
+   other route and now carries a comment about the near-miss it became.
+   `.prose .page-share a` is listed because a selector in a list keeps
+   its own specificity: the share row sits inside .prose on
+   layouts/_default/single.html, and .prose a (0-1-1) would otherwise win the
+   colour and underline every pill. */
+.author-social a,
+.page-share a, .page-share button,
+.prose .page-share a {
   display: inline-block; font-size: .85rem; font-weight: 600;
   padding: .25rem .7rem; border: 1px solid var(--border-strong); border-radius: 999px;
-  color: var(--ink-soft);
+  color: var(--ink-soft); text-decoration: none;
 }
-.author-social a:hover { border-color: var(--brand-accent); color: var(--brand-accent-strong); text-decoration: none; }
+.author-social a:hover,
+.page-share a:hover, .page-share button:hover,
+.prose .page-share a:hover { border-color: var(--brand-accent); color: var(--brand-accent-strong); text-decoration: none; }
 
 .author-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.25rem; }
 .author-card {
@@ -2464,6 +2475,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    giscus box, squeezing that text into a two-character column. Each end-matter
    block clears for itself; the article's own ::after still handles the footer. */
 .prose > .series-nav,
+.prose > .page-share,
 .prose > .page-source,
 .prose > .giscus-section,
 .prose > .legacy-comments { clear: both; }
@@ -4263,6 +4275,54 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .ad--wide { flex-direction: column; align-items: flex-start; }
   .ad--wide .ad__img { width: auto; max-width: 55%; align-self: center; }
 }
+
+/* -------------------------------------------------------------- share ----
+   The share row at the foot of an article (partials/share.html), directly
+   above the "Found a mistake?" line below.
+
+   ONE rule between the two, not one each: they are a pair of end-matter
+   offers, and both drawing their own put a second line 30px under the first.
+   The share row carries it; page-source drops its own when it follows, and
+   keeps it on the pages where the share row is not there.
+
+   The pills are `.author-social a` -- see that selector. What is here is the
+   row, its label, and the reset a <button> needs to sit in a row of links: a
+   button inherits neither font nor background, so without it the three
+   JavaScript-only controls render in the UA's 13px Arial beside the rest. */
+.page-share {
+  margin-top: 2.75rem; padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem;
+}
+.page-share__label { font-size: .92rem; color: var(--ink-muted); }
+.page-share__list { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; }
+/* The row renders INSIDE .prose on layouts/_default/single.html, and .prose
+   styles lists generically -- `.prose ul` (0-1-1) indents it and
+   `.prose li + li` (0-1-2) pushed every pill EXCEPT the first one down, so
+   Bluesky sat half a line above the rest. Class-on-class rather than
+   !important, the same fix .series-progress carries for the same two rules. */
+.page-share .page-share__list { margin: 0; padding: 0; }
+.page-share .page-share__list li + li { margin-top: 0; }
+.page-share button { font-family: inherit; line-height: inherit; background: none; cursor: pointer; }
+/* An author `display` beats the UA's `[hidden] { display: none }`, and the
+   three JavaScript-only controls and the server prompt all start hidden. */
+.page-share [hidden] { display: none; }
+.page-share + .page-source { margin-top: .9rem; padding-top: 0; border-top: 0; }
+
+/* The Mastodon server prompt takes a whole row of its own: opened between two
+   pills it would shove every pill after it onto the next line. */
+.page-share__masto {
+  flex: 1 0 100%;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem;
+  font-size: .9rem; color: var(--ink-muted);
+}
+.page-share__masto input {
+  font: inherit; color: var(--ink); min-width: 12rem;
+  padding: .25rem .7rem; border: 1px solid var(--border-strong); border-radius: 999px;
+  background: var(--surface);
+}
+.page-share__masto input[aria-invalid="true"] { border-color: var(--warning); }
+.page-share__masto-error { flex: 1 0 100%; margin: 0; color: var(--warning); }
 
 /* --------------------------------------------------- edit this page ----
    The "Found a mistake?" line at the foot of an article

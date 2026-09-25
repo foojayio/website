@@ -48,12 +48,9 @@
 {{ with $authors }}
 {{- $pile := and $avatars (ge (len $authors) 2) -}}
 {{- /* Resolved before the wrapper, because the wrapper carries them when the
-       names are not in the visible text -- see $pile below. */ -}}
-{{- $names := slice -}}
-{{- range $authors -}}
-  {{- with partial "author-page.html" . -}}{{- $names = $names | append .Title -}}
-  {{- else -}}{{- $names = $names | append . -}}{{- end -}}
-{{- end -}}
+       names are not in the visible text -- see $pile below. Through
+       author-names.html so the byline and the share text cannot disagree. */ -}}
+{{- $names := partial "author-names.html" $authors -}}
 <span class="byline-group{{ if $avatars }} byline-group--avatars{{ end }}"
   {{- if $pagefindMeta }} data-pagefind-meta="author{{ if $pile }}:{{ delimit $names ", " }}{{ end }}"{{ end }}>
 {{- if and (gt $maxNames 0) (gt (len $authors) $maxNames) (not $pile) }}

@@ -1,0 +1,118 @@
+{{- /* "Share this page", at the foot of an article, beside page-source.html.
+
+       PLAIN LINKS TO SHARE INTENTS, not a third-party widget: a widget is a
+       tracker, a network request on 4,000 pages and a layout shift, and an
+       <a href> works with JavaScript off and is keyboard-reachable for free.
+
+       THE NETWORKS ARE FOOJAY'S OWN (menu.footer -> footer-social) plus the
+       two aggregators a Java audience actually posts to. No Twitter/X: the
+       footer dropped it, and offering a network foojay is not on is odd.
+
+       Three controls need JavaScript and are therefore rendered `hidden` and
+       unhidden by static/js/share.js -- in place, so the row keeps one order
+       whether or not the script runs. Mastodon is one of them because its
+       share URL is per-instance: there is no host to put in an href until the
+       reader names theirs.
+
+       data-pagefind-ignore for page-source.html's reason: one row on 4,000
+       pages otherwise makes every one of them a result for "Bluesky".
+
+       Every href is built whole and passed through safeURL. Go escapes an
+       interpolation that lands after a `?` in an href, so an already-encoded
+       value dropped in there comes out double-encoded (%20 -> %2520). */ -}}
+{{- $url := .Permalink -}}
+{{- $title := .Title -}}
+{{- /* The page's OWN description, not meta-description.html: that one falls
+       back to the site boilerplate for a page without one, and "foojay.io is
+       the place for Friends Of OpenJDK" under every share post is noise. */ -}}
+{{- $desc := "" -}}
+{{- with .Params.description }}{{ $desc = plainify . }}{{ end -}}
+{{- $names := partial "author-names.html" . -}}
+{{- /* Capped at two named plus a count: a post can credit a dozen people, and
+       the credit is competing with the description for the same 300. */ -}}
+{{- $credit := "" -}}
+{{- if $names -}}
+  {{- if gt (len $names) 3 -}}
+    {{- $credit = printf "Posted by %s and %d others on foojay.io" (delimit (first 2 $names) ", ") (sub (len $names) 2) -}}
+  {{- else -}}
+    {{- $credit = printf "Posted by %s on foojay.io" (delimit $names ", " " and ") -}}
+  {{- end -}}
+{{- end -}}
+{{- /* ONE sentence, cut to each channel's own limit by share-text.html --
+       Bluesky counts 300 graphemes and Mastodon 500, and a post that arrives
+       in the composer already over the limit is one the reader has to edit
+       before they can send it. 0 is "no limit". */ -}}
+{{- $args := dict "title" $title "desc" $desc "credit" $credit "url" $url -}}
+{{- $bsky := partial "share-text.html" (merge $args (dict "limit" 300)) -}}
+{{- $masto := partial "share-text.html" (merge $args (dict "limit" 500)) -}}
+{{- /* LinkedIn allows 3,000, which nothing here comes near. */ -}}
+{{- $linkedin := partial "share-text.html" (merge $args (dict "limit" 0)) -}}
+{{- /* The email subject and the OS share sheet both carry the title on their
+       own, so neither of these repeats it. The sheet is handed the URL as its
+       own field, which is why the summary stops before it. */ -}}
+{{- $lines := slice -}}
+{{- with $desc }}{{ $lines = $lines | append . }}{{ end -}}
+{{- with $credit }}{{ $lines = $lines | append . }}{{ end -}}
+{{- $summary := delimit $lines "\n\n" -}}
+{{- $body := delimit ($lines | append $url) "\n\n" -}}
+{{- /* Reddit's own title field, and it caps at 300. */ -}}
+{{- $redditTitle := truncate 300 "…" $title -}}
+{{- /* urlquery writes a space as `+`, which a mail client shows literally in
+       a mailto body (RFC 6068 is percent-encoding only). %20 is correct in
+       every one of these, so they all get the same treatment rather than the
+       mailto one being the odd link out. */ -}}
+{{- $qUrl := replace (urlquery $url) "+" "%20" -}}
+{{- $qTitle := replace (urlquery $redditTitle) "+" "%20" -}}
+{{- $qBsky := replace (urlquery $bsky) "+" "%20" -}}
+{{- $qLinkedin := replace (urlquery $linkedin) "+" "%20" -}}
+{{- $qSubject := replace (urlquery $title) "+" "%20" -}}
+{{- $qBody := replace (urlquery $body) "+" "%20" -}}
+<div class="page-share" data-pagefind-ignore
+     data-share-url="{{ $url }}" data-share-title="{{ $title }}"
+     data-share-summary="{{ $summary }}" data-share-post="{{ $masto }}">
+  <span class="page-share__label" id="page-share-label">Share this page</span>
+  <ul class="page-share__list" aria-labelledby="page-share-label">
+    <li><a href="{{ printf "https://bsky.app/intent/compose?text=%s" $qBsky | safeURL }}" target="_blank" rel="nofollow noopener">Bluesky</a></li>
+    <li hidden data-share-mastodon><button type="button" aria-expanded="false" aria-controls="page-share-mastodon">Mastodon</button></li>
+    {{- /* TWO LINKEDIN URLS, AND NEITHER ONE WORKS EVERYWHERE.
+
+           The href is share-offsite, which takes a URL AND NOTHING ELSE --
+           LinkedIn dropped the `title`/`summary` parameters of the old
+           shareArticle endpoint, so its composer fills itself by FETCHING the
+           page's og: tags. Which is why it looks empty for a URL LinkedIn
+           cannot reach: a localhost preview, or a post not deployed yet.
+
+           feed/?shareActive=true does prefill from `text`, and is desktop-web
+           only -- a phone browser lands on the bare feed with no composer at
+           all. So it is not the href: share.js swaps it in only on a screen
+           big enough to be desktop LinkedIn, and a phone keeps the link that
+           works there. Anyone with JavaScript off keeps it too. */ -}}
+    <li><a href="{{ printf "https://www.linkedin.com/sharing/share-offsite/?url=%s" $qUrl | safeURL }}"
+           data-share-linkedin-desktop="{{ printf "https://www.linkedin.com/feed/?shareActive=true&text=%s" $qLinkedin | safeURL }}"
+           target="_blank" rel="nofollow noopener">LinkedIn</a></li>
+    {{- /* `url` and `title`, which are the only two Reddit honours -- a LINK
+           post has no body, so there is nowhere for a description to go. The
+           same is true of Hacker News below. Reddit also declines to prefill
+           at all from a URL it cannot resolve, which is what an empty submit
+           form against a localhost link is. */ -}}
+    <li><a href="{{ printf "https://www.reddit.com/submit?url=%s&title=%s" $qUrl $qTitle | safeURL }}" target="_blank" rel="nofollow noopener">Reddit</a></li>
+    <li><a href="{{ printf "https://news.ycombinator.com/submitlink?u=%s&t=%s" $qUrl $qTitle | safeURL }}" target="_blank" rel="nofollow noopener">Hacker News</a></li>
+    <li><a href="{{ printf "mailto:?subject=%s&body=%s" $qSubject $qBody | safeURL }}">Email</a></li>
+    <li hidden data-share-copy><button type="button">Copy link</button></li>
+    <li hidden data-share-native><button type="button">Share&hellip;</button></li>
+  </ul>
+  {{- /* A real <form>, so Enter submits and the input is labelled, rather than
+         a prompt() -- which some browsers suppress and none of which can be
+         styled or read back. */ -}}
+  <form class="page-share__masto" id="page-share-mastodon" hidden>
+    <label for="page-share-instance">Your Mastodon server</label>
+    <input type="text" id="page-share-instance" name="instance" placeholder="foojay.social"
+           inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+    <button type="submit">Open</button>
+    <p class="page-share__masto-error" hidden>Enter a server address, like <code>foojay.social</code>.</p>
+  </form>
+  {{- /* The copy button's own label changes to "Link copied", which a screen
+         reader only hears if it happens to be focused there -- it is, since a
+         click moved focus, but the mouse path does not guarantee it. */ -}}
+  <p class="visually-hidden" role="status" data-share-status></p>
+</div>

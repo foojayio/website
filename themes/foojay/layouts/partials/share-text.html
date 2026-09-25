@@ -1,0 +1,50 @@
+{{- /* The text of a share post, composed once and fitted to the channel's own
+       character limit. Called by partials/share.html for each channel that
+       carries text, so Bluesky's 300 and Mastodon's 500 are two lengths of one
+       sentence rather than two sentences.
+
+       WHAT GIVES, IN ORDER: the description, then the title. The URL and the
+       byline never do -- a post that has lost its own link is not worth
+       sending, and the credit is the point of naming the author at all.
+       A description below 60 characters is dropped rather than shown, where a
+       truncated half-clause reads as a glitch and not as a summary.
+
+       `truncate` cuts on a word boundary and adds its ellipsis ON TOP of the
+       size it is given, so every budget here is one short of the room there
+       actually is. That off-by-one put 162 posts at 301 characters.
+
+       limit 0 means no limit -- email and the OS share sheet have none.
+
+       dict in: title, desc, credit, url, limit. String out. */ -}}
+{{- $title := .title -}}
+{{- $desc := .desc -}}
+{{- $credit := .credit -}}
+{{- $url := .url -}}
+{{- $limit := .limit -}}
+
+{{- /* The title first, because a long enough one overruns the limit on its
+       own -- one podcast episode names four guests and their projects in 222
+       characters, which is already over Bluesky's 300 with the URL. */ -}}
+{{- if $limit -}}
+  {{- $keep := sub $limit (add (strings.RuneCount $url) 2) -}}
+  {{- if $credit }}{{ $keep = sub $keep (add (strings.RuneCount $credit) 2) }}{{ end -}}
+  {{- if and (gt $keep 20) (gt (strings.RuneCount $title) $keep) -}}
+    {{- $title = truncate (sub $keep 1) "…" $title -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $parts := slice $title -}}
+{{- if $desc -}}
+  {{- if not $limit -}}
+    {{- $parts = $parts | append $desc -}}
+  {{- else -}}
+    {{- $used := add (strings.RuneCount $title) (add (strings.RuneCount $url) 2) -}}
+    {{- if $credit }}{{ $used = add $used (add (strings.RuneCount $credit) 2) }}{{ end -}}
+    {{- /* The 2 is the blank line the description adds to what is already there. */ -}}
+    {{- $room := sub (sub $limit $used) 2 -}}
+    {{- if ge $room 60 }}{{ $parts = $parts | append (truncate (sub $room 1) "…" $desc) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $credit }}{{ $parts = $parts | append $credit }}{{ end -}}
+{{- $parts = $parts | append $url -}}
+{{- return delimit $parts "\n\n" -}}

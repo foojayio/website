@@ -90,8 +90,7 @@
      JCast and write-ups about episodes. Narrowed by slug because every episode
      already has `foojay-podcast-<n>` -- 101 of 101, numbered without a gap --
      so nothing has to be added to 101 posts and a new episode qualifies by
-     being named the way every other one is. A prefix, not an exact match:
-     episode 32's folder is `foojay-podcast-32-philippines-jug`. */}}
+     being named the way every other one is. */}}
 {{ $podcasts := where $posts "Params.categories" "intersect" (slice "Podcast" "podcast") }}
 {{ $episodes := slice }}
 {{ range $podcasts }}
