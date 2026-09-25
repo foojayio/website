@@ -151,7 +151,7 @@ To verify this, distributions must pass all the tests of the Java Technology Com
   * **Azul Zulu Builds of OpenJDK** :
     * Drop-in replacement for any OpenJDK.
     * Free to download and use.
-  * **Azul Platform Core** :
+  * **Azul Core** :
     * Azul Zulu Builds of OpenJDK + support + upgrades + extra tools.
     * Available in a free version for evaluation and development and a licensed version.
 
@@ -164,7 +164,7 @@ To verify this, distributions must pass all the tests of the Java Technology Com
 * Extra functions are added inside the JDK:
   * Connected Runtime Service (CRS) can connect to [Azul Vulnerability Detection](https://www.azul.com/products/vulnerability-detection/) to help you identify security issues in real-time.
   * [ReadyNow!](https://www.azul.com/products/components/readynow/): a technology that enables Java applications to start up fast and keep running fast.
-* It is available as **Azul Platform Prime** :
+* It is available as **Azul Prime** :
   * Azul Prime Builds of OpenJDK + C4 + Falcon + ReadyNow! + support + upgrades + extra tools.
   * Available in a free version for evaluation and development and a licensed version.
 

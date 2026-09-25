@@ -119,7 +119,7 @@ Azul Payara 4.1.2.191.56 receives the cross-cycle CSRF and SSRF security fix and
 
 ## Looking Ahead
 
-The Azul Payara product line now spans the JDK ([Azul Zulu and Azul Platform Prime](https://www.azul.com/products/core/)), the full application server ([Azul Payara Server](https://www.azul.com/products/payara-server/)), and the cloud-native runtime ([Azul Payara Micro](https://www.azul.com/products/payara-micro/)), all from one vendor. Payara 7, 6, 5, and 4 continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version.
+The Azul Payara product line now spans the JDK ([Azul Zulu and Azul Zing](https://www.azul.com/products/core/)), the full application server ([Azul Payara Server](https://www.azul.com/products/payara-server/)), and the cloud-native runtime ([Azul Payara Micro](https://www.azul.com/products/payara-micro/)), all from one vendor. Payara 7, 6, 5, and 4 continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version.
 
 For teams on Payara 5 or 6, the ready-after-applications default change is the one item in this cycle worth a quick check against any post-boot scripts or transaction recovery configuration before upgrading.
 

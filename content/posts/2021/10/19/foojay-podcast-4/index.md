@@ -32,7 +32,7 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## Guests
 
-* **Simon Ritter**, Deputy CTO of Azul Systems, making the Azul Platform, including the Azul Zulu builds of OpenJDK.
+* **Simon Ritter**, Deputy CTO of Azul Systems, making Azul Zulu and Zing Builds of OpenJDK.
 * **Dmitry Chuyko**, Senior Performance Engineer of Bellsoft, making the Liberica builds of OpenJDK.
 * **Bruno Borges**, Product Manager Microsoft, making the Microsoft builds of OpenJDK and Temurin, Adoptium's builds of OpenJDK.
 * **Ashley Williams**, founder and open-source strategist for the Rust Foundation.

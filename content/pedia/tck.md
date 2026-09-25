@@ -21,8 +21,8 @@ Below are major OpenJDK distributions and their TCK compliance status:
 |----------------------------|----------------|
 | Adoptium Temurin           | ✅              |
 | Amazon Corretto            | ✅              |
-| Azul Platform Prime        | ✅              |
 | Azul Zulu                  | ✅              |
+| Azul Zing                  | ✅              |
 | BellSoft Liberica          | ✅              |
 | Microsoft Build of OpenJDK | ✅              |
 | Oracle JDK                 | ✅              |

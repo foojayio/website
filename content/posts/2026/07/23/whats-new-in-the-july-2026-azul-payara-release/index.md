@@ -96,7 +96,7 @@ Azul Payara Server and Micro 4.1.2.191.57 receive the cross-cycle brute force se
 
 ## Looking Ahead
 
-The Azul Payara product line now spans the JDK (Azul Zulu and Azul Platform Prime), the full application server (Azul Payara Server), and the cloud-native runtime (Azul Payara Micro), all from one vendor. The 7, 6, 5, and 4 lines continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version. For teams on the 5 or 6 line evaluating the move to Payara 7, the `jakarta.*` namespace is stable between EE 10 and EE 11, so existing Jakarta EE 10 applications deploy on Payara 7 by upgrading the runtime, not rewriting the codebase. Migration assessments are available through your Azul account team.
+The Azul Payara product line now spans the JDK (Azul Zulu and Azul Zing), the full application server (Azul Payara Server), and the cloud-native runtime (Azul Payara Micro), all from one vendor. The 7, 6, 5, and 4 lines continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version. For teams on the 5 or 6 line evaluating the move to Payara 7, the `jakarta.*` namespace is stable between EE 10 and EE 11, so existing Jakarta EE 10 applications deploy on Payara 7 by upgrading the runtime, not rewriting the codebase. Migration assessments are available through your Azul account team.
 
 ## Upgrading and Feedback
 
