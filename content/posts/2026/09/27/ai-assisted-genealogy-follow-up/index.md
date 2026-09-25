@@ -1,6 +1,6 @@
 ---
 title: "AI-assisted genealogy, a follow-up"
-date: "2026-09-28"
+date: "2026-09-27"
 description: "A follow-up on AI-assisted genealogy: source quality with GEDCOM QUAY, per-site browsing skills, Playwright sessions, transcriptions, and hiccups along the way."
 canonical: "https://blog.frankel.ch/ai-assisted-genealogy-follow-up/"
 authors:
