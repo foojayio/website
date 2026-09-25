@@ -1,0 +1,6 @@
+{{- /* Decorative, locally bundled SVG. Its enclosing control provides the name. */ -}}
+{{- with resources.Get (printf "icons/%s.svg" .) -}}
+  {{- replace .Content "<svg" "<svg aria-hidden=\"true\" focusable=\"false\"" | safeHTML -}}
+{{- else -}}
+  {{- errorf "Unknown theme icon: %s" . -}}
+{{- end -}}
