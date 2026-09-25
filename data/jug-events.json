@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-24T06:15:46Z",
+  "generatedAt" : "2026-09-25T06:13:15Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -15,14 +15,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG Meetup at Picnic",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316510873/",
-      "startTime" : "2026-09-24T18:00:00+02:00",
-      "endTime" : "2026-09-24T21:00:00+02:00",
-      "venue" : "Picnic HQ",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
       "title" : "Amsterdam JUG OTel Workshop at Dash0",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/316455984/",
       "startTime" : "2026-09-30T18:00:00+02:00",
@@ -53,14 +45,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/arnhemjug/",
     "events" : [ {
-      "title" : "ArnhemJUG - September meetup",
-      "url" : "https://www.meetup.com/arnhemjug/events/316453615/",
-      "startTime" : "2026-09-24T17:00:00+02:00",
-      "endTime" : "2026-09-24T21:30:00+02:00",
-      "venue" : "OpenValue Arnhem",
-      "city" : "Arnhem",
-      "online" : false
-    }, {
       "title" : "ArnhemJUG - October meetup",
       "url" : "https://www.meetup.com/arnhemjug/events/314385055/",
       "startTime" : "2026-10-29T17:00:00+01:00",
@@ -106,15 +90,7 @@
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
-    "events" : [ {
-      "title" : "Architecture for the Agentic Era and Make Cybersecurity Fun",
-      "url" : "https://www.meetup.com/belgian-java-user-group/events/316368818/",
-      "startTime" : "2026-09-24T18:00:00+02:00",
-      "endTime" : "2026-09-24T21:00:00+02:00",
-      "venue" : "we+",
-      "city" : "Hasselt",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "BordeauxJUG",
     "name" : "BordeauxJUG",
@@ -371,14 +347,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "Renovate – Dein Freund und Helfer für Dependency Updates",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316419369/",
-      "startTime" : "2026-09-24T19:00:00+02:00",
-      "endTime" : "2026-09-24T20:30:00+02:00",
-      "venue" : "adesso SE",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
       "title" : "Java auf Diät: Schlankere Spring Boot Container für mehr Sicherheit",
       "url" : "https://www.meetup.com/jug-hamburg/events/316580306/",
       "startTime" : "2026-10-29T19:00:00+01:00",
@@ -500,7 +468,15 @@
     "jug" : "KarlsruheJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Karlsruhe/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Double Feature: Value Objects and Project Valhalla + Java for AI",
+      "url" : "https://www.meetup.com/java-user-group-karlsruhe/events/316698731/",
+      "startTime" : "2026-10-01T18:00:00+02:00",
+      "endTime" : "2026-10-01T21:30:00+02:00",
+      "venue" : "SAP Schulungszentrum Walldorf",
+      "city" : "Walldorf",
+      "online" : false
+    } ]
   }, {
     "slug" : "JUG-Mainz",
     "name" : "Java User Group Mainz",
@@ -737,14 +713,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/londonjavacommunity/",
     "events" : [ {
-      "title" : "From Search to AI: How Retrieval Evolved",
-      "url" : "https://www.meetup.com/londonjavacommunity/events/316194795/",
-      "startTime" : "2026-09-24T11:00:00+01:00",
-      "endTime" : "2026-09-24T11:45:00+01:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    }, {
       "title" : "LJC Meetup at Engine by Starling",
       "url" : "https://www.meetup.com/londonjavacommunity/events/315903371/",
       "startTime" : "2026-10-01T18:00:00+01:00",
@@ -918,15 +886,7 @@
     "jug" : "TampaJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/tampa-jug/",
-    "events" : [ {
-      "title" : "Known and Unknowns: Testing AI Generated Code",
-      "url" : "https://www.meetup.com/tampa-jug/events/316348039/",
-      "startTime" : "2026-09-24T17:45:00-04:00",
-      "endTime" : "2026-09-24T19:45:00-04:00",
-      "venue" : "Hillsborough Community College",
-      "city" : "Tampa",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "toronto-java-users-group",
     "name" : "Toronto Java Users Group",
@@ -934,14 +894,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/toronto-java-users-group/",
     "events" : [ {
-      "title" : "Choose Your Own AI Adventure: Java, agents, and rabbit holes",
-      "url" : "https://www.meetup.com/toronto-java-users-group/events/316529380/",
-      "startTime" : "2026-09-24T18:30:00-04:00",
-      "endTime" : "2026-09-24T20:30:00-04:00",
-      "venue" : "Free Times Cafe",
-      "city" : "Toronto",
-      "online" : false
-    }, {
       "title" : "Building Intelligent Java Apps: Agent Patterns, MCP, and the Future of AI Native",
       "url" : "https://www.meetup.com/toronto-java-users-group/events/316595726/",
       "startTime" : "2026-10-05T18:30:00-04:00",
@@ -978,14 +930,6 @@
     "jug" : "WarsawJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Warszawa-JUG/",
-    "events" : [ {
-      "title" : "Confitura 2026 | Last minute ticket!",
-      "url" : "https://www.meetup.com/warszawa-jug/events/316675567/",
-      "startTime" : "2026-09-24T14:00:00+02:00",
-      "endTime" : "2026-09-24T15:00:00+02:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    } ]
+    "events" : [ ]
   } ]
 }
