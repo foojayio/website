@@ -2,16 +2,6 @@
 <div class="layout-with-sidebar">
   <article class="post-single">
     <header class="post-header{{ if .Params.image }} post-header--with-hero{{ end }}">
-      {{/* Three attributes, each load-bearing:
-           - data-pagefind-meta, because Pagefind's automatic image detection
-             takes the first image AFTER the <h1> and the hero sits before it.
-           - fetchpriority="high" and NO loading="lazy": the hero is the LCP
-             element on every post, so lazy would defer the one image the score
-             is measured on. The avatars and cards further down do deserve lazy.
-           - onerror="this.remove()", because a hero can be a hotlink on a
-             third-party host that dies at any time. No build step can see
-             that, so the browser is the only place to handle it. */}}
-      {{ with .Params.image }}<img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}" fetchpriority="high" decoding="async" onerror="this.remove()">{{ end }}
       {{ with .Params.categories }}
       <div class="post-categories post-categories--top">
         {{/* data-pagefind-meta="category" on the FIRST chip only: it labels
@@ -37,6 +27,18 @@
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>
+
+      {{/* Keep the hero after the byline in both reading and keyboard order.
+           Explicit Pagefind metadata still selects it as the search image.
+           Eager loading and high priority suit this prominent opening image;
+           a failed external image removes itself without an empty wrapper. */}}
+      {{ with .Params.image }}
+      <img class="post-hero is-zoomable" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}"
+        {{/* Reserve space for bundled rasters, as in render-image.html. SVG
+             and external images cannot use Hugo's raster dimension methods. */}}
+        {{ with $.Resources.GetMatch . }}{{ if and (eq .ResourceType "image") (in (slice "png" "jpeg" "gif" "webp" "bmp" "tiff") .MediaType.SubType) }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}{{ end }}
+        fetchpriority="high" decoding="async" onerror="this.remove()">
+      {{ end }}
     </header>
 
     <div class="prose">
