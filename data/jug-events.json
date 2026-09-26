@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-09-25T06:13:15Z",
+  "generatedAt" : "2026-09-26T06:13:00Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -476,6 +476,14 @@
       "venue" : "SAP Schulungszentrum Walldorf",
       "city" : "Walldorf",
       "online" : false
+    }, {
+      "title" : "From Code to Context – Wie KI Softwaresysteme wirklich verstehen kann",
+      "url" : "https://www.meetup.com/java-user-group-karlsruhe/events/316709983/",
+      "startTime" : "2026-11-11T18:30:00+01:00",
+      "endTime" : "2026-11-11T20:30:00+01:00",
+      "venue" : "1000 Satellites Karlsruhe-Malzwerk",
+      "city" : "Karlsruhe",
+      "online" : false
     } ]
   }, {
     "slug" : "JUG-Mainz",
@@ -596,15 +604,7 @@
     "jug" : "OstfalenJUG",
     "source" : "calendar",
     "url" : "http://www.jug-ostfalen.de/",
-    "events" : [ {
-      "title" : "Vom Monolithen zum Modulithen: Spring Modulith in der Praxis (Nils Hartmann)",
-      "url" : "",
-      "startTime" : "2026-09-24T19:00:00Z",
-      "endTime" : "2026-09-24T21:00:00Z",
-      "venue" : "Cloudogu GmbH",
-      "city" : "Braunschweig",
-      "online" : null
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "PaderbornJUG",
     "name" : "Java User Group Paderborn",
@@ -899,6 +899,14 @@
       "startTime" : "2026-10-05T18:30:00-04:00",
       "endTime" : "2026-10-05T20:30:00-04:00",
       "venue" : "16 York St",
+      "city" : "Toronto",
+      "online" : false
+    }, {
+      "title" : "7 Ways You Can Build an Amazing Dev Career in the AI Era",
+      "url" : "https://www.meetup.com/toronto-java-users-group/events/316707940/",
+      "startTime" : "2026-10-13T18:30:00-04:00",
+      "endTime" : "2026-10-13T20:30:00-04:00",
+      "venue" : "Intuit",
       "city" : "Toronto",
       "online" : false
     } ]
