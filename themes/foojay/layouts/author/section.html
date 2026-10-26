@@ -26,7 +26,7 @@
     {{ end }}
     {{ if and $upcoming (not .Paginator.HasPrev) }}
     <div class="section-head"><h2>Coming soon</h2></div>
-    <div class="coming-soon-day__list">
+    <div class="coming-soon-day__list author-upcoming">
       {{ range $upcoming }}
       <div>
         <p class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "2 January 2006" }}</time></p>

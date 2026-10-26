@@ -4533,6 +4533,7 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   font-size: 1.15rem;
 }
 .coming-soon-day__list { display: grid; gap: 1.5rem; }
+.author-upcoming { margin-bottom: 3rem; }
 .coming-soon-day__list .post-card-excerpt { max-width: none; }
 .coming-soon-day__list .post-card-meta { align-items: center; }
 .coming-soon-day__list .post-card-categories { margin-left: auto; justify-content: flex-end; }
