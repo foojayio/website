@@ -16,6 +16,10 @@ related_posts:
   - "should-you-update-java-or-upgrade-and-which-version-should-you-use"
 ---
 
+{{< warning >}}
+The Out-of-Cycle release mentioned in this post, was followed by a new one on October 24. A new, related vulnerability has been detected. Azul asks all its customers to update to the latest release ASAP. See the [Azul Zulu release notes of October 24, 2026](https://docs.azul.com/core/release/october-2026-24-respin/) for all info.
+{{< /warning >}}
+
 A record-breaking quarterly update is supposed to be the big security event of the quarter. On October 20, 2026, Azul released the October 2026 update for Azul Zulu Builds of OpenJDK, covering Java 27, 25, 21, 17, 11, 8, 7, and 6, with patches for 53 CVEs. Within a day it was not enough anymore: a zero-day showed up that no quarterly schedule could have planned for, and on October 21 Azul shipped an out-of-cycle update for it.
 
 This post covers both, because together they change the message. The question is no longer "which quarter's update do I install?", but "how fast can I install a security fix without breaking my application?"
@@ -30,7 +34,9 @@ With huge team efforts, Azul was able to release an out-of-cycle update on Octob
 
 Azul recommends installing it immediately. If you cannot update right away, the release notes describe a [temporary workaround based on security properties](https://docs.azul.com/core/emudhra-workaround).
 
-If you already rolled out the quarterly update, you need to update again. If you have not started yet, go straight to the [out-of-cycle builds](https://docs.azul.com/core/release/october-2026-respin/release-notes): they supersede the quarterly ones.
+{{< important >}}
+If you already rolled out the quarterly update, you need to update again. If you have not started yet, go straight to the [latest out-of-cycle builds of October 24](https://docs.azul.com/core/release/october-2026-24-respin/): they supersede both the quarterly and the October 21 ones.
+{{< /important >}}
 
 ## Why This Changes the Message
 
