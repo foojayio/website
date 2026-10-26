@@ -2,6 +2,12 @@
 
 Two things arrive here by pull request: **articles** and **calendar events**.
 
+## Code of Conduct
+
+Everyone who contributes here agrees to follow our
+[Code of Conduct](CODE_OF_CONDUCT.md): communicate in a friendly way, respect
+other opinions, and keep feedback constructive.
+
 ## Contributing a post
 
 The full, up-to-date guide for writing and submitting an article lives on the

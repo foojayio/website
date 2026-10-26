@@ -87,6 +87,10 @@ No access yet? [Fork the repository](https://github.com/foojayio/website/fork), 
 
 Not comfortable with Git? No problem. **Zip up your article folder** (the `index.md` and its images) and email it to [hello@foojay.io](mailto:hello@foojay.io). We'll take care of the rest.
 
+## Code of Conduct
+
+By submitting an article or a pull request you agree to follow our [Code of Conduct](/code-of-conduct/): communicate in a friendly way, respect other opinions, and keep feedback constructive.
+
 ## What happens next
 
 We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the Friends Of OpenJDK!

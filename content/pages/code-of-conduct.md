@@ -33,6 +33,21 @@ and what happens if that expectation isn't met.
   subject at hand; unrelated promotion, spam, and vote/traffic manipulation
   aren't welcome.
 
+## How we communicate
+
+- **Be friendly and welcoming.** Greet newcomers, thank people for their
+  contributions, and remember that many of us write in a second language and
+  are not all equally experienced.
+- **Respect other opinions.** Java has many valid ways to do the same thing.
+  Listen to understand before replying, and accept that reasonable people can
+  disagree and leave it there.
+- **Be constructive.** Say what could be better and why, and offer a suggestion
+  rather than only a criticism. Critique the work, not the person.
+- **Keep your tone kind and clear.** Written text loses nuance, so avoid
+  sarcasm and put-downs, and ask a question before assuming bad intent.
+- **Take disagreement calmly.** If a discussion heats up, step away, or take it
+  to a private message; if it doesn't resolve, ask the editorial team to help.
+
 ## Where this applies
 
 Everywhere Foojay is the venue: articles and their frontmatter, pull
@@ -67,6 +82,10 @@ need to have a polished case, a specific page and what happened is enough.
   of the [editorial team](/meet-the-team/) directly.
 
 We'll acknowledge your report, look into it, and let you know what we did. We won't share who reported it without asking first.
+
+This page is also kept in the website repository as
+[CODE_OF_CONDUCT.md](https://github.com/foojayio/website/blob/main/CODE_OF_CONDUCT.md),
+where it is shown to anyone opening a pull request.
 
 *This Code of Conduct draws on the spirit of the
 [Contributor Covenant](https://www.contributor-covenant.org/), adapted for a

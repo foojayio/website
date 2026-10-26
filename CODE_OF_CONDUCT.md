@@ -16,6 +16,8 @@ post:
 - Assume good faith. Blunt technical feedback and code review are normal and
   welcome; personal attacks and harassment are not.
 - Credit your sources, and don't submit plagiarised or fabricated content.
+- Be friendly and respectful: welcome newcomers, listen to other opinions, and
+  keep feedback constructive and kind.
 - Keep it on topic — no spam, no pure advertising.
 
 This applies to this repository, comments on foojay.io, and any foojay-run
