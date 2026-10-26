@@ -1,6 +1,6 @@
 ---
 title: "The tests passed. The feature had never worked."
-date: "2026-10-28"
+date: "2026-01-01"
 description: "With an AI assistant, the test, the example and the docs may all come from the process that wrote the feature. Two ways to check."
 authors:
   - "mauro-mura"
