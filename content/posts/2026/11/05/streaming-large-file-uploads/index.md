@@ -1,16 +1,23 @@
 ---
 title: "Streaming Large File Uploads in Java Without Killing Your Server"
+date: "2026-11-05"
 description: "Spring's @RequestPart cannot stream multipart uploads — not even FilePart. The API that actually does, and the tests that prove it."
 authors:
-  - "denis111"
-image: "cover.png"
+  - "denis-kalgushkin"
+image: "cover.jpg"
 categories:
   - "Java"
   - "Spring"
   - "Streaming"
   - "Performance"
+related_posts:
+  - "lightweight-spring-boot-monitoring"
+  - "idempotent-spring-boot-starter"
+  - "java-stream-gatherers"
+  - "what-i-learned-building-an-ai-code-reviewer-with-java-spring-boot"
 canonical: "https://denis111.hashnode.dev/streaming-large-file-uploads"
 ---
+
 ## Introduction
 
 You've seen the tutorial. A `@PostMapping` endpoint, a `MultipartFile` parameter, a call to `transferTo()`. Done in five minutes. Works great on localhost.
