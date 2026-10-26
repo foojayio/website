@@ -6,4 +6,5 @@ bio: "Denis is a software architect working on Java and Spring backends, writing
 description: ""
 github: "https://github.com/denis111"
 website: "https://denis111.hashnode.dev"
+linkedin: "https://www.linkedin.com/in/keygenmusic/"
 ---
