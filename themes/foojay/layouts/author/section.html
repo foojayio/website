@@ -17,6 +17,25 @@
       {{ partial "author-social.html" . }}
     </div>
 
+    {{/* First page only. Cached: the queue is the same for every author, and
+         reading it per profile would repeat the directory scan for each one. */}}
+    {{ $slug := .File.ContentBaseName }}
+    {{ $upcoming := slice }}
+    {{ range partialCached "scheduled-posts.html" . }}
+      {{ if in .authors $slug }}{{ $upcoming = $upcoming | append . }}{{ end }}
+    {{ end }}
+    {{ if and $upcoming (not .Paginator.HasPrev) }}
+    <div class="section-head"><h2>Coming soon</h2></div>
+    <div class="coming-soon-day__list">
+      {{ range $upcoming }}
+      <div>
+        <p class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "2 January 2006" }}</time></p>
+        {{ partial "scheduled-card.html" . }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+
     {{/* One shared definition of "this author's articles", also used by the
          Featured Authors block and its sidebar widget. Kept for the TOTAL in the
          heading -- the grid below shows one page of it. */}}
