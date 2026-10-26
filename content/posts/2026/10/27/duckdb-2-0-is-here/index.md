@@ -1,7 +1,7 @@
 ---
 title: "DuckDB 2.0 Is Here"
-date: "2026-01-01"
-description: "DuckDB 2.0.0 LTS \"Cinnamon Teal\" is the project's biggest release yet, with a server mode, async I/O, first-class VARIANT support and a new parser."
+date: "2026-10-27"
+description: "DuckDB 2.0.0 LTS - Cinnamon Teal - is the project's biggest release yet, with a server mode, async I/O, first-class VARIANT support and a new parser."
 authors:
   - "geertjan-wielenga"
 image: "duckdb-2-0.jpg"
@@ -9,10 +9,10 @@ categories:
   - "Databases"
   - "Java"
 related_posts:
-  - "one-database-two-models-mysql-json-duality-views-java"
-  - "announcing-the-new-foojay"
-  - "asciidoc-support-on-foojay"
-  - "diagrams-as-code-mermaid-support-on-foojay"
+  - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"
+  - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"
+  - "running-duckdbs-jdbc-driver-in-a-graalvm-native-image"
+  - "from-opentelemetry-to-duckdb"
 ---
 
 [DuckDB](https://duckdb.org/) 2.0.0, nicknamed "Cinnamon Teal", shipped on
