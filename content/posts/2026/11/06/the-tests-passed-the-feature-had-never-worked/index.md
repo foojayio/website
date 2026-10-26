@@ -1,6 +1,6 @@
 ---
 title: "The tests passed. The feature had never worked."
-date: "2026-01-01"
+date: "2026-11-06"
 description: "With an AI assistant, the test, the example and the docs may all come from the process that wrote the feature. Two ways to check."
 authors:
   - "mauro-mura"
@@ -9,6 +9,11 @@ categories:
   - "Java"
   - "AI"
   - "Testing"
+related_posts:
+  - "green-build-wrong-task-a-working-agreement-for-java-teams-using-ai-coding-agents"
+  - "context-is-a-budget-ai-coding-agents-team-process"
+  - "debugging-is-invariant-discovery-what-one-kafka-session-taught-us-about-ai-agents"
+  - "your-agents-dont-need-an-llm-to-negotiate"
 canonical: "https://bitautonomi.substack.com/p/the-tests-passed-the-feature-had"
 ---
 
