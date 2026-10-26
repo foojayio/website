@@ -97,7 +97,7 @@ See `scripts/fetch/AGENTS.md`. All fetchers run daily from
   `build-deploy.yml` saves the live feed before deploying and the `announce`
   job compares it with the new build's, so a scheduled post is announced when it
   goes live. An empty previous feed skips rather than announcing everything.
-  `slack-weekly.yml` posts the last 7 days every Monday.
+  `slack-weekly.yml` posts the previous Monday-to-Sunday week every Monday.
 
 ### Validators
 
