@@ -1,6 +1,6 @@
 ---
 title: "dukehoff-decide: Typed, Calibrated Decisions from Small Language Models"
-date: "2026-01-01"
+date: "2026-11-04"
 description: "Many LLM calls in Java apps are multiple choice. dukehoff-decide answers them with a small local model and returns a typed value with calibrated probabilities."
 authors:
   - "eppleton"
@@ -9,6 +9,11 @@ categories:
   - "AI"
   - "LLM"
   - "Library"
+related_posts:
+  - "your-agents-dont-need-an-llm-to-negotiate"
+  - "embedding-strategies-job-search"
+  - "spring-ai-agents-no-second-runtime"
+  - "adding-rag-to-jakarta-ee-11-app"
 canonical: "https://dukehoff.com/en/blog/dukehoff-decide/"
 ---
 
@@ -17,7 +22,7 @@ team handles this ticket? Is this message spam? How urgent is it? The usual way 
 question to a large model, ask for JSON, parse the text and hope the answer is one of the allowed
 values. And when the model says it is sure, there is no way to tell whether that means anything.
 
-dukehoff-decide turns such a question into a Java type and answers it with a small model that runs
+`dukehoff-decide` turns such a question into a Java type and answers it with a small model that runs
 locally. You get a valid value of that type, a probability for every option, and a gate that
 decides on its own only where those probabilities are reliable. It is open source under the Apache
 License 2.0, and version 0.1.0 is on Maven Central.
