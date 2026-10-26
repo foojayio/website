@@ -32,7 +32,7 @@ Java makes this worse than it sounds: it does not check certificate revocation b
 
 With huge team efforts, Azul was able to release an out-of-cycle update on October 21 for [Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/release/october-2026-respin/release-notes)  27, 25, 21, 17, 11, 8, 7, and 6 and [Azul Zing Builds of OpenJDK](https://docs.azul.com/prime/release-notes#prime_stable_26_08_101_0)  25, 21, 17, 11, and 8. It adds the eight certificates to the blocklist, in both the CPU and PSU configurations, so Java stops trusting anything signed with the compromised keys.
 
-Azul recommends installing it immediately. If you cannot update right away, the release notes describe a [temporary workaround based on security properties](https://docs.azul.com/core/emudhra-workaround).
+Azul recommends installing it immediately. If you could not update right away, the release notes describe a [temporary workaround based on security properties](https://docs.azul.com/core/emudhra-workaround). That workaround covers only this first vulnerability: **it does not fix the related one found on October 24**, which requires the [October 24 release](https://docs.azul.com/core/release/october-2026-24-respin/).
 
 {{< important >}}
 If you already rolled out the quarterly update, you need to update again. If you have not started yet, go straight to the [latest out-of-cycle builds of October 24](https://docs.azul.com/core/release/october-2026-24-respin/): they supersede both the quarterly and the October 21 ones.
