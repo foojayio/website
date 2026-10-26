@@ -17,7 +17,7 @@ related_posts:
 
 How are experienced Java developers using AI coding tools beyond autocomplete? In my latest GitHub Blog article, I interviewed Java Champions [Vlad Mihalcea](https://github.com/vladmihalcea), [Patrick Baumgartner](https://github.com/patbaumgartner), and [Frank Delporte](/today/author/frankdelporte/) about their workflows.
 
-Vlad describes accelerating feature development while preserving existing coding practices. Patrick shares how he approaches agentic workflows with clear requirements and task-specific verification. [Frank](/today/author/frankdelporte/) walks through a Pi4J investigation where Copilot traced a hardware-input bug to virtual-thread pinning in native calls.
+Vlad describes accelerating feature development while preserving existing coding practices. Patrick shares how he approaches agentic workflows with clear requirements and task-specific verification. Frank walks through a Pi4J investigation where Copilot traced a hardware-input bug to virtual-thread pinning in native calls.
 
 Across these different experiences, the same practical advice emerges: give the agent useful context, ask for evidence, review its output, and remain responsible for what ships.
 
