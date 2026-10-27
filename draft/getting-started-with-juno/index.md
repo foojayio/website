@@ -3,7 +3,7 @@ title: "Getting Started with Juno: Running Java on Arduino & M5Stack"
 date: "2026-11-02"
 description: "Learn how Juno compiles a practical subset of Java into native code for Arduino and M5Stack boards."
 authors:
-  - "Juan Antonio Breña Moral"
+  - "jabrena"
 image: "juno.png"
 categories:
   - "Java"
