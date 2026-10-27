@@ -25,7 +25,7 @@ install-bx-module bx-ai
 
 ## The productivity platform grows up
 
-**BoxLang** is the software productivity platform for building, modernizing and running applications with developers and AI agents working together. Every piece of the platform is designed to connect, and 3.6 is the release where the connections becomes even tighter.
+**BoxLang** is the software productivity platform for building, modernizing and running applications with developers and AI agents working together. Every piece of the platform is designed to connect, and 3.6 is the release where the connections become even tighter.
 
 Two major modules launched alongside 3.6:
 
@@ -83,7 +83,7 @@ agent = aiAgent(
 )
 ```
 
-Security is built in. The module setting `mcp.stdio.allowedCommands` limits which executables can be launched. An empty array (the default) allows any — set an explicit list in production to lock it down. No shell is ever used; the command is always an array, so shell injection is structurally impossible.
+Security controls are built in. The module setting `mcp.stdio.allowedCommands` limits which executable names can be launched. An empty array (the default) allows any executable. In production, use an explicit allowlist and prefer fixed binaries. Note that `allowedCommands` validates the executable name, not the full argument list, so commands such as `npx` can still select packages through subsequent arguments. For stricter control, use a command guard that validates the full command array. No shell is used; commands are passed as arrays rather than shell strings.
 
 ---
 
@@ -279,7 +279,7 @@ Your agent used to reason about text and call data APIs. With 3.6 it can also op
 
 ## Get started
 
-**Requirements:** BoxLang 1.18+, Java 21+.
+**Requirements:** BoxLang 1.18+, Java 21+. The optional MCP examples using `npx` require Node.js/npm, while examples using `uvx` require `uv`.
 
 ```bash
 # Install BoxLang AI
