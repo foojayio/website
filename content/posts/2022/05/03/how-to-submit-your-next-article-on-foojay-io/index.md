@@ -21,6 +21,7 @@ related_posts:
 aliases:
   - "/wp-admin/"
   - "/wp-login.php"
+  - "/write-for-foojay/"
 ---
 
 Foojay, the place for Friends Of OpenJDK, is a friendly community of Java and Kotlin developers who share tips and insights every day on [Foojay Today](/today/). We would love to publish your article too!
