@@ -112,7 +112,7 @@ public class SlackPosts {
             System.out.println("Nothing was published last week.");
             return;
         }
-        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size() + ")\n");
+        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + count(posts) + ")\n");
         for (Post p : posts) {
             text.append("• <").append(p.link()).append("|").append(esc(p.title())).append(">");
             if (!p.authors().isEmpty()) text.append(" — ").append(esc(p.authors()));
@@ -133,8 +133,12 @@ public class SlackPosts {
         }
         rows.append("]");
         return "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":"
-                + json("*Published on Foojay.io the past week* (" + posts.size() + ")")
+                + json("*Published on Foojay.io the past week* (" + count(posts) + ")")
                 + "}},{\"type\":\"table\",\"rows\":" + rows + "}]";
+    }
+
+    static String count(List<Post> posts) {
+        return posts.size() + (posts.size() == 1 ? " post" : " posts");
     }
 
     static String raw(String s) {
