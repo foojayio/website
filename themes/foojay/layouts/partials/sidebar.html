@@ -33,13 +33,15 @@
         <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/category/" | relURL }}">All categories</a>
+    <a class="view-all" href="{{ "today/category/" | relURL }}">All {{ len .Site.Taxonomies.categories }} categories</a>
   </section>
 
   {{/* Authors + JUGs are dropped whenever a TOC is showing: the aside is one
        sticky block, so past a certain height the TOC (listed first) scrolls
        out of view instead of staying visible, which defeats it. */}}
   {{ if not (partial "has-toc.html" .) }}
+  {{/* On the home page the featured-authors widget carries this list too. */}}
+  {{ if not (and .IsHome (partial "featured-authors.html" .)) }}
   <section class="widget widget-authors">
     <h2>Authors</h2>
     <ul>
@@ -52,8 +54,9 @@
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/author/" | relURL }}">All authors</a>
+    <a class="view-all" href="{{ "today/author/" | relURL }}">All {{ len (partialCached "authors-all.html" "authors") }} authors</a>
   </section>
+  {{ end }}
 
   <section class="widget widget-jugs">
     <h2>Java User Groups</h2>
@@ -69,7 +72,7 @@
         <li><a href="{{ .website }}">{{ .name }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "jugs/" | relURL }}">All Java User Groups</a>
+    <a class="view-all" href="{{ "jugs/" | relURL }}">All {{ len hugo.Data.jugs }} Java User Groups</a>
   </section>
   {{ end }}
 

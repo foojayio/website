@@ -4534,3 +4534,7 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .coming-soon-day__list .post-card-excerpt { max-width: none; }
 .coming-soon-day__list .post-card-meta { align-items: center; }
 .coming-soon-day__list .post-card-categories { margin-left: auto; justify-content: flex-end; }
+.widget-featured-authors__sub {
+  margin: .9rem 0 .4rem; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--ink-muted);
+}
