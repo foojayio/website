@@ -1,6 +1,6 @@
 ---
 title: "Spring AI or LangChain4j? One App, Three Stacks, One Test"
-date: "2026-01-01"
+date: "2026-11-05"
 description: "The same small AI service in Spring AI, LangChain4j on Spring Boot and on Quarkus, held to one shared test. Where they differ, and where they do not."
 authors:
   - "nicolas-duminil"
@@ -10,7 +10,11 @@ categories:
   - "LangChain4j"
   - "Spring"
   - "Java"
-related_posts: []
+related_posts:
+  - "verified-match-explanations-spring-ai"
+  - "how-i-built-an-ai-assistant-for-my-career-with-java-spring-ai-and-mongodb"
+  - "adding-rag-to-jakarta-ee-11-app"
+  - "introduction-to-retrieval-augmented-generation-with-java-and-mongodb"
 ---
 
 Java has quietly become a credible place to build AI applications. That raises a
