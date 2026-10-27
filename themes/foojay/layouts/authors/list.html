@@ -2,7 +2,10 @@
 <div class="page-head">
   <div class="page-head__inner">
     <h1>Authors</h1>
-    <p>{{ len (partialCached "authors-all.html" "authors") }} people have contributed writing to foojay.io.</p>
+    <p>Everyone who has published content on foojay.io.</p>
+    <div class="page-head__meta">
+      <p class="page-head__stats"><strong>{{ len (partialCached "authors-all.html" "authors") }}</strong> authors</p>
+    </div>
   </div>
 </div>
 

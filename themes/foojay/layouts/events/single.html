@@ -54,7 +54,7 @@
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
     <div class="page-head__meta">
       {{ if $events }}
-      <p class="cal-stats">
+      <p class="page-head__stats">
         <strong>{{ len $events }}</strong> events &middot;
         <strong>{{ len $groupNames }}</strong> Java User Groups &middot;
         {{/* "conferences" while they all are; the moment a workshop or a
