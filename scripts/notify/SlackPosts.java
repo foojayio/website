@@ -94,7 +94,7 @@ public class SlackPosts {
             fresh = fresh.subList(fresh.size() - MAX_NEW, fresh.size());
         }
         for (Post p : fresh) {
-            StringBuilder text = new StringBuilder("*<" + p.link() + "|" + esc(p.title()) + ">*");
+            StringBuilder text = new StringBuilder("The following new post just got published:\n*<" + p.link() + "|" + esc(p.title()) + ">*");
             if (!p.authors().isEmpty()) text.append("\nby ").append(esc(p.authors()));
             if (!p.description().isEmpty()) text.append("\n").append(esc(p.description()));
             send(webhook, dryRun, text.toString());
