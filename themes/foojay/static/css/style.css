@@ -1680,7 +1680,28 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .featured-author__name a:hover { color: var(--brand-accent-strong); }
 .featured-author__count { margin: .15rem 0 .7rem; font-size: .88rem; }
 .featured-author__count a { color: var(--ink-muted); }
-.featured-author .author-bio { font-size: .95rem; }
+/* A long bio scrolls inside the card; tabindex="0" in the template keeps it
+   reachable by keyboard. Same scroll-shadow trick as .cal-legend__scroll (see
+   there), covered with the panel's own ground instead of the page's. */
+.featured-author .author-bio {
+  --bio-shadow: rgb(0 0 0 / .26);
+  --bio-ground: var(--brand-accent-soft);
+  font-size: .95rem; max-height: 9rem; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+  padding-right: .25rem;
+  background:
+    linear-gradient(var(--bio-ground) 30%, transparent) top / 100% 1.5rem no-repeat,
+    linear-gradient(transparent, var(--bio-ground) 70%) bottom / 100% 1.5rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, var(--bio-shadow), transparent) top / 100% 1.1rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, var(--bio-shadow), transparent) bottom / 100% 1.1rem no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+/* Dark: the panel's tint is translucent, and a translucent cover lets the
+   shadow show through at the end already reached -- so flatten it onto the page. */
+:root[data-theme="dark"] .featured-author .author-bio {
+  --bio-shadow: rgb(255 255 255 / .34);
+  --bio-ground: color-mix(in srgb, var(--brand-accent) 14%, var(--page-bg));
+}
 .featured-author .author-social { margin-top: .9rem; margin-bottom: 1rem; }
 /* Latest article: a whole-block link, so the title reads as the target and the
    label/date are supporting text rather than three separate link targets. */
@@ -4534,7 +4555,12 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .coming-soon-day__list .post-card-excerpt { max-width: none; }
 .coming-soon-day__list .post-card-meta { align-items: center; }
 .coming-soon-day__list .post-card-categories { margin-left: auto; justify-content: flex-end; }
+.widget-featured-authors__subhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin: .9rem 0 .8rem;
+}
+.widget-featured-authors__subhead .view-all { margin-top: 0; }
 .widget-featured-authors__sub {
-  margin: .9rem 0 .4rem; font-size: .8rem; text-transform: uppercase;
+  margin: 0; font-size: .8rem; text-transform: uppercase;
   letter-spacing: .04em; color: var(--ink-muted);
 }

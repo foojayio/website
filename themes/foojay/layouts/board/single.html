@@ -14,7 +14,8 @@
      over it silently matches nothing. */}}
 {{ with where (partial "sponsors-ordered.html" .) "Title" .Title }}{{ $sponsor = index . 0 }}{{ end }}
 
-<div class="content-col full-width">
+<div class="layout-with-sidebar">
+  <div class="content-col">
   <article class="board-single">
     <p class="board-back"><a href="{{ $board.RelPermalink }}">&larr; {{ $board.Title }}</a></p>
 
@@ -86,5 +87,7 @@
 
     <p class="board-back board-back--foot"><a href="{{ $board.RelPermalink }}">&larr; Back to the {{ $board.Title }}</a></p>
   </article>
+  </div>
+  {{ partial "sidebar.html" . }}
 </div>
 {{ end }}

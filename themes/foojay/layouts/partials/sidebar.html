@@ -33,7 +33,7 @@
         <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/category/" | relURL }}">All {{ len .Site.Taxonomies.categories }} categories</a>
+    <a class="view-all" href="{{ "today/category/" | relURL }}">All {{ len .Site.Taxonomies.categories }} categories &rarr;</a>
   </section>
 
   {{/* Authors + JUGs are dropped whenever a TOC is showing: the aside is one
@@ -54,7 +54,7 @@
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/author/" | relURL }}">All {{ len (partialCached "authors-all.html" "authors") }} authors</a>
+    <a class="view-all" href="{{ "today/author/" | relURL }}">All {{ len (partialCached "authors-all.html" "authors") }} authors &rarr;</a>
   </section>
   {{ end }}
 
@@ -72,7 +72,7 @@
         <li><a href="{{ .website }}">{{ .name }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "jugs/" | relURL }}">All {{ len hugo.Data.jugs }} Java User Groups</a>
+    <a class="view-all" href="{{ "jugs/" | relURL }}">All {{ len hugo.Data.jugs }} Java User Groups &rarr;</a>
   </section>
   {{ end }}
 

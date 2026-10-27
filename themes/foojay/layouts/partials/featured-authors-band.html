@@ -37,7 +37,7 @@
           {{ $views }}
         </p>
         {{ end }}
-        {{ with $author.Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
+        {{ with $author.Params.bio }}<p class="author-bio" tabindex="0">{{ . }}</p>{{ end }}
         {{ partial "author-social.html" $author }}
         {{ with $posts }}
         {{ $latest := index . 0 }}
