@@ -3,6 +3,7 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    <p class="page-head__intro"><strong>{{ len (index hugo.Data "java-champions") }} Java Champions</strong></p>
     {{ $views := partial "views.html" . }}
     {{ $feed := partial "feed-link.html" . }}
     {{ if or $views $feed }}

@@ -180,8 +180,8 @@ See `scripts/validate/AGENTS.md` (`Frontmatter.java`, `BuiltSite.java`) and
 
 Most of what this section used to list closed at or before cutover: the
 scrapers are deleted, the fetchers all run daily for real, the theme carries
-the live site's own palette, Featured Authors exist, `/pedia/` holds all 47
-entries, search is live, and the paid banner carousel is built (see the ads
+the live site's own palette, Featured Authors exist, `/pedia/` holds every
+entry, search is live, and the paid banner carousel is built (see the ads
 convention below). What is genuinely still open:
 
 1. **Ketch's Google Consent Mode plugin is listed but not configured** on the
@@ -193,18 +193,18 @@ convention below). What is genuinely still open:
    Configuring that plugin is what would make a direct GA4 tag viable again —
    and **a plugin key in the config listing is not evidence it is
    configured**; only a browser can tell you.
-2. **The accessibility backlog is the site's biggest real gap** — roughly 3,100
-   images across `content/` with no description, plus 287 podcast posts with no
+2. **The accessibility backlog is the site's biggest real gap** — thousands of
+   images across `content/` with no description, plus every podcast post with no
    transcript. `Frontmatter.checkImageAltText` warns rather than fails; see the
    accessibility convention for why.
-3. **53 author-written dead links** inside article bodies, reported by
+3. **Author-written dead links** inside article bodies, reported by
    `BuiltSite.java` rather than failing it. Three clusters: bare domains with
    no scheme, WordPress artifacts (`_wp_link_placeholder`, `/wp-admin/…`), and
    `/wp-content/uploads/` paths never localised, including two `.mp4`s and a
    PDF simply absent from the build.
-4. **212 external image references are unrecoverable** — 44 dead, 9 behind a
-   bot wall, 4 mermaid.ink 503s, 3 connection failures and 5 live CI badges,
-   which are deliberate. Each is named with its post in the sweep's report.
+4. **Some external image references are unrecoverable** — dead, behind a bot
+   wall, mermaid.ink 503s, connection failures, and live CI badges, which are
+   deliberate. Each is named with its post in the sweep's report.
 5. **`worker/views/wrangler.toml` still has a placeholder `database_id`**, so
    a `wrangler deploy` from this repo would not work. It was deployed by IT.
 6. **The two branch-protection deviations** above want a decision: one ruleset
@@ -213,7 +213,7 @@ convention below). What is genuinely still open:
    WordPress site and were deliberately not carried over. Decide separately.
 
 **A lesson worth keeping from a gap that closed**: `/pedia/` looked complete
-because the WordPress index is **paginated and lists 31 of 47**.
+because the WordPress index is **paginated and lists only some of them**.
 `terminology-sitemap.xml` was the honest count. Check a sitemap, not an index
 page, if anything here is ever compared against an archived copy of the old
 site.
@@ -236,7 +236,7 @@ site.
   - **A link in running text is UNDERLINED** (`.prose a`) — no blue foojay owns
     clears 3:1 against both the body text and the page. Write it as a bare
     `.prose a`, **never a chain of `:not()`s**: each adds its argument's
-    specificity and beat every exclusion (422 champion avatars kept theirs).
+    specificity and beat every exclusion (every champion avatar kept theirs).
   - **Anything hidden off-screen must leave the TAB ORDER too.** `visibility`
     does it; descendants use **`inherit`, not `visible`**, or they climb back
     out of the fix.
@@ -260,14 +260,14 @@ site.
 
 ### Images
 
-- **Images have a per-file budget, and the deploy is why.** The built site hit
-  **1.26 GB against GitHub Pages' hard 1 GB artifact limit**, and that warning
-  lands on a run that otherwise goes **green**. The site is ~864 MB now with
-  ~136 MB of headroom. An image a PR adds or changes over 2 MB fails the PR check (4 MB for what is already there).
+- **Images have a per-file budget, and the deploy is why.** The built site once
+  went **over GitHub Pages' hard 1 GB artifact limit**, and that warning lands
+  on a run that otherwise goes **green**. Check the built size before assuming
+  there is headroom. An image a PR adds or changes over 2 MB fails the PR check (4 MB for what is already there).
 
-  **JPEG, not WebP, for large PNGs** — Frank's call; q85 saves 81% against
-  WebP's 89%, either clears the limit, and JPEG is what the other 1400 images
-  already are. The hard limit is transparency: the 22 files that genuinely use
+  **JPEG, not WebP, for large PNGs** — Frank's call; q85 saves most of what
+  WebP does, either clears the limit, and JPEG is what nearly every other image
+  already is. The hard limit is transparency: the files that genuinely use
   alpha stay PNG, which is not the same as *having* an alpha channel (many
   WordPress PNGs are RGBA with every pixel opaque). The `--png-min` floor is
   100 KB, and it is what makes the policy self-selecting — a flame graph was
@@ -292,8 +292,8 @@ site.
 
 - **Every image a post references is stored locally, and an external one is
   named `<stem>-<8 hex of its URL>.<ext>`.** Hotlinking spends a stranger's
-  bandwidth, leaks each reader's IP, and dies without telling us — 129 of 1710
-  hotlinked images were already dead at import. The hash is not decoration: 58
+  bandwidth, leaks each reader's IP, and dies without telling us — many
+  hotlinked images were already dead at import. The hash is not decoration:
   bundles reference an external URL whose basename is **already** a file in
   that bundle, so without it `Files.exists` short-circuits and the page
   silently shows a different picture. A foojay-hosted image keeps its bare
@@ -301,7 +301,7 @@ site.
 
   Four rules govern anything added by hand now:
   - **Lookup is by STEM, ignoring extension**, which finds a file later
-    re-encoded and copes with the 221 external URLs that carry no extension.
+    re-encoded and copes with external URLs that carry no extension.
   - **What came back has to BE an image.** A dead URL rarely 404s cleanly — it
     serves a login wall or placeholder with a 200, and writing that as
     `foo.png` turns a visibly broken image into one that *looks* localised.
@@ -314,8 +314,8 @@ site.
   a full-size blob downloaded into `content/` is there for ever.
 
 - **A body `<h1>` is the author's heading.** A bare `h1` in the scraper's noise
-  selector, meant to drop the repeated title, removed **503 headings across 137
-  posts** — and the text under a deleted heading stays, so articles silently
+  selector, meant to drop the repeated title, removed **hundreds of headings
+  across over a hundred posts** — and the text under a deleted heading stays, so articles silently
   read as one slab with nothing downstream able to tell. Only an h1 repeating
   the TITLE is removed; the rest are demoted to h2, since `title:` is already
   the page's h1.
@@ -333,12 +333,11 @@ site.
 - **URLs are load-bearing.** Every converted post, author and page keeps its
   legacy path via `aliases:` (and an explicit `url:` for pages) — don't
   restructure a URL without adding one. WordPress ran a redirect layer on top:
-  **89 concrete rules are `aliases:` in `content/`** (chains resolved to their
+  **The concrete rules are `aliases:` in `content/`** (chains resolved to their
   final destination, since an alias aimed at another redirect is one search
-  engines discard), and **3 regexes are Cloudflare config** in `REDIRECTS.md` —
-  `^/blog/(.*)` (209k hits, foojay's original scheme), `^/almanac/(jdk|java)-…`
-  (103k) and `^/docs/(.*)` (530). 17 export rules were deliberately skipped
-  because their targets 404 on WordPress too.
+  engines discard), and **a few regexes are Cloudflare config** in `REDIRECTS.md` —
+  `^/blog/(.*)` (foojay's original scheme), `^/almanac/(jdk|java)-…` and
+  `^/docs/(.*)`. Some export rules were deliberately skipped because their targets 404 on WordPress too.
 
   Three post URLs carry an emoji `aliases:` entry written as the literal
   character, because `stripEmoji` removed it from the folder name. **One
@@ -348,16 +347,16 @@ site.
 
 - **Every page self-canonicalises, and `canonical:` means "not ours".** `$self`
   is **not** `.Permalink` — on a paginated list that is page 1's URL for *every*
-  pager, so `/today/page/2/` and 123 category pagers declared themselves
+  pager, so `/today/page/2/` and every category pager declared themselves
   duplicates of page 1, asking Google to drop the only crawl path into the
   archive. The only legitimate `canonical:` points at a different page or site:
   the cross-posted articles, and `/download/`.
 
   **A cross-post canonical rots, and a dead one is worse than none** — it tells
-  Google the real version is at a URL that 404s. All 837 were re-checked; 47
-  removed. **The 48 affected posts are `frozen: true`, and that is the fix** —
-  an identical audit a week earlier removed the identical 48 and a re-scrape
-  put every one back. Two traps if it is ever re-run: **a 4xx from a bot wall
+  Google the real version is at a URL that 404s. All of them were re-checked and
+  the dead ones removed. **The affected posts are `frozen: true`, and that is
+  the fix** — an identical audit a week earlier removed the same ones and a
+  re-scrape put every one back. Two traps if it is ever re-run: **a 4xx from a bot wall
   is indistinguishable from a deleted page** (Medium flip-flops 403/410 on the
   same URL, so probe four times and record all four), and **check with two
   clients before believing a failure**, and probe a redirect's TARGET rather
@@ -367,9 +366,9 @@ site.
   `render-table.html` omits the `<thead>` when every header cell is blank. GFM
   cannot express a table without a header, and Flexmark handed a headerless
   WordPress table emits a delimiter row with nothing above it — which Goldmark
-  does not recognise as a table at all, so **111 tables across 54 posts
+  does not recognise as a table at all, so **over a hundred tables
   rendered as a wall of literal pipes**. An empty header, **not** promoting the
-  first row: only 25 of the 111 have a first row that is actually a header, and
+  first row: only a quarter have a first row that is actually a header, and
   promoting a legend turns a data row into a heading.
 
 - **Headings are stored as ATX (`##`), not setext underlines.** Levels map 1:1
@@ -382,11 +381,11 @@ site.
   `<pre class="EnlighterJSRAW">` the vendored initialiser looks for; Hugo's own
   Chroma highlighting is bypassed. Storage and presentation stay separate so
   swapping the highlighter means editing one file, not 1000 posts. The hook
-  maps fence tags to the 57 languages in the **vendored** bundle — that list is
+  maps fence tags to the languages in the **vendored** bundle — that list is
   derived by reading the bundle, not from docs, after a hand-written version
-  silently rendered 592 blocks as `generic`. **There is no `enlighterjs:`
+  silently rendered hundreds of blocks as `generic`. **There is no `enlighterjs:`
   flag**: detection covers every case, and defaulting it to true would pull
-  144 KB onto the 1477 pages with no code. Don't reintroduce one, and don't put
+  the whole highlighter bundle onto every page with no code. Don't reintroduce one, and don't put
   raw `<pre class="EnlighterJSRAW">` into `content/`.
 
   **Check the fence balance after any bulk content pass.** A file ending inside
@@ -398,9 +397,9 @@ site.
   branches on the tag *before* the EnlighterJS path (mermaid is not in
   `$supported`, so it would otherwise render as highlighted source), and
   `baseof.html` loads the library when the RENDERED page contains one — so no
-  `mermaid:` flag either. It is the **ESM build** (30 KB entry plus chunks,
-  against a 3.4 MB UMD single file), which is why `static/vendor/mermaid/` is
-  104 files; update with `npm pack` and copy the entry plus `dist/chunks/…`,
+  `mermaid:` flag either. It is the **ESM build** (a small entry plus chunks,
+  against a multi-MB UMD single file), which is why `static/vendor/mermaid/` is
+  a hundred-odd files; update with `npm pack` and copy the entry plus `dist/chunks/…`,
   **no `.map` files**.
 
   Four things are load-bearing: `htmlEscape` + `safeHTML` (diagram syntax is
@@ -437,7 +436,7 @@ site.
   `.HasShortcode`, so there is no `jdoodle:` flag — same rule as the
   EnlighterJS and mermaid loaders.
 
-  It replaced 17 hand-written HTML embeds that had drifted into four shapes,
+  It replaced hand-written HTML embeds that had drifted into four shapes,
   and the shortcode exists because three separate things silently corrupt a
   payload read as `textContent`: **`hugo --minify` collapses a whitespace run
   outside `<pre>`**, which had stripped every leading space from every snippet
@@ -449,7 +448,7 @@ site.
   `safeHTML`, once, exactly as `render-codeblock.html` does.
 
   **A data file is at `/uploads/<name>` inside the sandbox**, which is the path
-  the snippet opens. Two tutorial steps read the same 100-row `testdata.csv`,
+  the snippet opens. Two tutorial steps read the same `testdata.csv`,
   which is why it lives in `assets/` rather than being pasted into both.
 
   **No `data-version-index` and no `clientid` parameter.** The client id is
@@ -465,7 +464,7 @@ site.
   `[data-type=script]`/`[data-type=file]` children when `data-has-files` —
   then `javac` and run it. Nothing static can check this: indentation loss, an
   undecoded entity and a truncated snippet all build green and fail only inside
-  somebody else's iframe. The conversion was verified that way, all 11 payloads
+  somebody else's iframe. The conversion was verified that way, every payload
   byte-identical to what the old markup produced.
 
   The two posts that explain JDoodle keep **raw HTML inside code fences** as
@@ -483,16 +482,16 @@ site.
   on its line is a real hard break and stays.
 
 - **Posts are filed by publish date** (`content/posts/<y>/<m>/<d>/<slug>/`),
-  purely to keep a 2000-post directory browsable. It has no effect on the URL.
+  purely to keep a directory of thousands of posts browsable. It has no effect on the URL.
 
 - **There is no `tags` taxonomy, deliberately.** WordPress tags its posts but
   never renders them, so the scrapers never saw one and every post landed with
-  an empty `tags:` — 0 term pages against categories' 752. All of it was
+  an empty `tags:` — no term pages, against categories' hundreds. All of it was
   removed. Categories are the taxonomy.
 
 - **Emoji come off post TITLES, never out of bodies.** A title is the card, the
-  RSS item, the browser tab and the `og:title`. Bodies are untouched: 404 posts
-  carry 3443 emoji, among which arrows, `(TM)` and comparison-table check marks
+  RSS item, the browser tab and the `og:title`. Bodies are untouched: hundreds of posts
+  carry thousands of emoji, among which arrows, `(TM)` and comparison-table check marks
   are load-bearing. The rule is `\p{IsExtended_Pictographic}` plus skin tones,
   keycaps, variation selectors and ZWJ — **not** `\p{IsEmoji}`, which is true
   for ASCII digits and would eat the "5" out of "The 5 Knights".
@@ -514,15 +513,15 @@ site.
 - **`render-link.html` resolves page-bundle resources**, the same way
   `render-image.html` does. Without it a link to a PDF or zip in the author's
   own folder resolved against the SITE ROOT while Hugo published it inside the
-  bundle — **143 internal links were dead this way**, unnoticed because
+  bundle — **over a hundred internal links were dead this way**, unnoticed because
   `![](shot.png)` resolved and `[handout](handout.pdf)` did not.
 
 - **Render hooks must redo the escaping Goldmark would have done.** Two live
   shapes: `render-codeblock.html` needs `htmlEscape .Inner | safeHTML`, or
   html/template escapes a second time and `->` reaches the reader as `-&gt;`
-  (~950 posts); `render-link.html`/`render-image.html` need `htmlUnescape` on
+  (about a thousand posts); `render-link.html`/`render-image.html` need `htmlUnescape` on
   `.Destination`/`.Title`, or `?a=1&amp;b=2` becomes a param named `amp;b`
-  (~90 posts). Check both when editing a hook.
+  (about a hundred posts). Check both when editing a hook.
 
 ### Templates, metadata and feeds
 
@@ -553,7 +552,7 @@ JS-level notes for the sections below.
   1. **`partials/scheduled-posts.html` reads pending posts OFF DISK** (the home
      widget `coming-soon.html` and `/today/coming-soon/` both render its list), since no
      template can `range` a page that was never built. It is the home page
-     aside widget: four directory listings per build, not a walk of 2163 posts.
+     aside widget: four directory listings per build, not a walk of every post.
      Titles are **plain text, not links** — the page does not exist yet.
      `.IsHome` is checked in `sidebar.html`, which also bounds the cost.
      The byline is **`byline.html` given slugs instead of a Page** (that input
@@ -609,10 +608,10 @@ JS-level notes for the sections below.
   key and a file to hold four fields.
 
 - **A page must never list its own `url:` in `aliases:`**, and
-  `checkSelfAliases` fails the PR. 29 pages carried one, and on two it had
+  `checkSelfAliases` fails the PR. Dozens of pages carried one, and on two it had
   taken the page off the air — Hugo wrote the redirect stub OVER the real page,
   so `/java-quick-start/` served nothing but a refresh pointing at itself. The
-  other 27 happened to win the race, which is exactly why this is a check and
+  rest happened to win the race, which is exactly why this is a check and
   not a one-time cleanup.
 
 - **`/team/` and `/community-support/` are gone, and both taught the same
@@ -681,7 +680,7 @@ JS-level notes for the sections below.
   — the grid, the organisation count and the "other members" strip all derive
   from it. Adding a member is one file plus a logo. It stays a landing page
   under `content/pages/` rather than becoming a section, because the page has
-  58,754 WordPress views under the `pages/board` key and a section would have
+  a large WordPress view count under the `pages/board` key and a section would have
   renamed it. Logos carry `logoBackground` for the same reason sponsor logos
   do.
 
