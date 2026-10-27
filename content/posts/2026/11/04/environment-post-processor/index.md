@@ -1,6 +1,6 @@
 ---
 title: "Spring Boot's Hidden Secret for Configuration: EnvironmentPostProcessor"
-date: "2026-01-01"
+date: "2026-11-04"
 description: "How to ship default configuration from a shared Spring Boot starter so services can still override it."
 authors:
   - "mikhail-polivakha"
@@ -8,6 +8,11 @@ image: "preview.jpg"
 categories:
   - "Java"
   - "Spring"
+related_posts:
+  - "no-database-operations-found-what-writing-a-spring-boot-analyzer-taught-me-about-spring"
+  - "lightweight-spring-boot-monitoring"
+  - "how-to-secure-a-spring-boot-application-with-openid-connect-and-pac4j"
+  - "how-to-create-a-spring-boot-fraud-scoring-service"
 canonical: "https://axelix.io/blog/environment-post-processor"
 ---
 
