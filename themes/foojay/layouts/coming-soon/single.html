@@ -9,6 +9,12 @@
     <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    {{ with $posts }}
+    {{/* Days run to the last scheduled date, counted from today's midnight UTC. */}}
+    {{ $last := time.AsTime (printf "%sT00:00:00Z" (index . (sub (len .) 1)).date) }}
+    {{ $days := int (div ($last.Sub (time.AsTime (printf "%sT00:00:00Z" (now.UTC.Format "2006-01-02")))).Hours 24) }}
+    <p class="page-head__intro"><strong>{{ len . }} {{ if eq (len .) 1 }}post{{ else }}posts{{ end }} scheduled in the next {{ $days }} {{ if eq $days 1 }}day{{ else }}days{{ end }}</strong></p>
+    {{ end }}
   </div>
 </div>
 
