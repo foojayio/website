@@ -213,7 +213,4 @@ converge and where they diverge.
 
 If you want the full treatment, it is the subject of my book, *Java AI
 Frameworks*, available on [Leanpub](https://leanpub.com/javaaiframeworks) with a
-free sample of the first two chapters. All the code, including everything in this
-article, is open source and runs against a local model, so nothing costs an API
-call to try:
-[github.com/nicolasduminil/java-ai-rosetta](https://github.com/nicolasduminil/java-ai-rosetta).
+free sample of the first two chapters.
