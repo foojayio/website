@@ -21,7 +21,7 @@ So you drop an `application.yml` into the library's `src/main/resources`, set yo
 
 **The TL;DR is:** `application.yml` is the wrong tool for that job, and Spring Boot has a purpose-built hook for it that rarely makes it into tutorials - `EnvironmentPostProcessor` (At Axelix, we use it extensively btw).
 
-If you're interesting in the particular details, then lets dive in!
+If you're interested in the particular details, then let's dive in!
 
 ## The Problem Everyone Eventually Meets
 
@@ -56,7 +56,7 @@ Now let's watch the obvious solutions quietly fail this requirement one by one.
 This is the first thing everyone tries. You put an `application.yml` inside `company-commons`, and now there are **two** `application.yml` files on the classpath: the library's and the service's.
 
 Here's the catch: Spring Boot does not "merge" two `application.yml` files that live at the same conventional location. It resolves configuration data from well-known locations, and a second `application.yml` sitting somewhere else on the classpath does not participate in that resolution the way you imagine. Depending on classpath ordering and packaging, your library's file may be silently ignored, or it may behave in ways that feel arbitrary. Either way, the starter's `application.yaml` will not serve as a default
-but rather the behavior will be quite unpredictable, and it is certainly not the good solution.
+but rather the behavior will be quite unpredictable, and it is certainly not a good solution.
 
 ### Attempt 2: Ship `application-commons.yml` and tell teams to activate a profile
 
@@ -87,13 +87,13 @@ If your default needs to influence logging, or config-data location, or anything
 
 > "Add these five properties to your `application.yml`."
 
-This is Attempt 2 without even the profile. It fully offloads the work, and whats worse - *the risk of getting it wrong*, onto *every single consuming team*. It's not a good solution at all.
+This is Attempt 2 without even the profile. It fully offloads the work, and what's worse - *the risk of getting it wrong*, onto *every single consuming team*. It's not a good solution at all.
 
-P.S: I must acknowledge the small embarrassment since [we used to ask for it in Axelix 1.1 release](https://axelix.io/docs/start/configuring-spring-boot-starter#exposing-the-endpoints-on-axelix-below-120), but since Axelix 1.2 we no longer would require that (thanks to the external OSS contributor btw!)
+P.S: I must acknowledge the small embarrassment since [we used to ask for it in the Axelix 1.1 release](https://axelix.io/docs/start/configuring-spring-boot-starter#exposing-the-endpoints-on-axelix-below-120), but since Axelix 1.2 we no longer require that (thanks to the external OSS contributor btw!)
 
 ### Micro-conclusion
 
-Every naive approach fails one of three ways: it either runs at the wrong time, or it lands at the wrong precedence, or it depends on a humans doing something. What we actually want is a hook that:
+Every naive approach fails one of three ways: it either runs at the wrong time, or it lands at the wrong precedence, or it depends on humans doing something. What we actually want is a hook that:
 
 1. runs **early**, while the `Environment` is still being assembled.
 2. lets us add a property source at a **precedence we choose**. Underneath the user's config for defaults, or on top **when we deliberately want to win regardless**.
@@ -124,21 +124,21 @@ public class CompanyDefaultsEnvironmentPostProcessor implements EnvironmentPostP
 }
 ```
 
-There're a couple of things wroth noting:
+There're a couple of things worth noting:
 
 - **`addLast(...)`** puts our property source at the **end** of the resolution order, i.e. the **lowest** precedence. Every other source: the service's `application.yml`, environment variables, command-line arguments - all of them are consulted first. Our values only apply when nobody else set them. That is precisely **"the defaults"** behavior.
 - It runs early enough that these properties are in place before the necessary beans are bootstrapped, and before most of what Spring Boot does with the `Environment`.
 
 ### How Does Spring Even Find Our `EnvironmentPostProcessor`?
 
-There is an important thing to realize that an `EnvironmentPostProcessor` just **cannot be a simple Spring bean.** Just think about it - it must run **before** the `ApplicationContext` exists, so there is no bean container to look it up in yet. This is a classic chicken-and-egg problem.
+One important thing to realize is that an `EnvironmentPostProcessor` just **cannot be a simple Spring bean.** Just think about it - it must run **before** the `ApplicationContext` exists, so there is no bean container to look it up in yet. This is a classic chicken-and-egg problem.
 
-But the good news are that this problem is quite well known in Spring Boot, and it is already solved with `spring.factories` (and no, this file is NOT used for `@AutoConfiguration` classes anymore).
+But the good news is that this problem is quite well known in Spring Boot, and it is already solved with `spring.factories` (and no, this file is NOT used for `@AutoConfiguration` classes anymore).
 
-So, we need to register our `EnvironmentPostProcessor` in `META-INF/spring.factories` (just a simple key value pair):
+So, in Spring Boot 3, we need to register our `EnvironmentPostProcessor` in `META-INF/spring.factories` (just a simple key value pair):
 
 ```properties
-org.springframework.boot.EnvironmentPostProcessor=\
+org.springframework.boot.env.EnvironmentPostProcessor=\
 com.acme.commons.CompanyDefaultsEnvironmentPostProcessor
 ```
 
@@ -160,13 +160,13 @@ graph TD
 
 The exact interleaving of the steps in the middle generally depends on the ordering, which, as we're about to see, is the genuinely subtle part.
 
-## A Real Example: How We Exposes Custom Actuator Endpoints
+## A Real Example: How We Expose Custom Actuator Endpoints
 
 Let me show you a real, in-production use of exactly this pattern. Axelix ships Spring Boot starters that teams add to their services. A starter is, effectively, just a library that must contribute some configuration to someone else's application - the exact shape of the problem above.
 
-Whats important is that Axelix defines its own actuator endpoints (that's how Axelix Master talks to your service). For those endpoints to be reachable, they have to be listed in `management.endpoints.web.exposure.include`. We *could* write in the docs "please add `axelix-*` to your exposure list" - and in the 1.1 days we did exactly that (I am sorry 🙈). But you already know how I feel about solutions that depend on people remembering.
+What's important is that Axelix defines its own actuator endpoints (that's how Axelix Master talks to your service). For those endpoints to be reachable, they have to be listed in `management.endpoints.web.exposure.include`. We *could* write in the docs "please add `axelix-*` to your exposure list" - and in the 1.1 days we did exactly that (I am sorry 🙈). But you already know how I feel about solutions that depend on people remembering.
 
-So, since 1.2, the starter will contribute the endpoints itself, via an `EnvironmentPostProcessor`. The twist is that `management.endpoints.web.exposure.include` is a property the user very likely **already set**. So we must add our endpoints to end-user's, we **must NOT** overwrite them. Here is the [actual code](https://github.com/axelixlabs/axelix/blob/master/sbs/axelix-spring-boot-3-starter/src/main/java/com/axelixlabs/axelix/sbs/spring/core/env/AxelixEndpointsEnvironmentPostProcessor.java) (lightly trimmed):
+So, since 1.2, the starter will contribute the endpoints itself, via an `EnvironmentPostProcessor`. The twist is that `management.endpoints.web.exposure.include` is a property the user very likely **already set**. So we must add our endpoints to the end user's, we **must NOT** overwrite them. Here is the [actual code](https://github.com/axelixlabs/axelix/blob/master/sbs/axelix-spring-boot-3-starter/src/main/java/com/axelixlabs/axelix/sbs/spring/core/env/AxelixEndpointsEnvironmentPostProcessor.java) (lightly trimmed):
 
 ```java
 public class AxelixEndpointsEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
@@ -223,14 +223,14 @@ Why? Because we need to *read* the user's `management.endpoints.web.exposure.inc
 
 That's the rule of thumb worth taking away:
 
-> An `EnvironmentPostProcessor` that **reads** existing configuration must run **after** config data is loaded. One that **bootstraps where configuration comes from (e.g. new YAML file)**, must run **before** it.
+> An `EnvironmentPostProcessor` that **reads** existing configuration must run **after** config data is loaded. One that **influences how config data is loaded (e.g. config locations for YAML files, imports, or active profiles)** must run **before** it.
 
 ## Gotchas Worth Knowing Before You Reach for It
 
-`EnvironmentPostProcessor` is powerful precisely because it runs so early, and that earliness is also the dually-edged sword:
+`EnvironmentPostProcessor` is powerful precisely because it runs so early, and that earliness is also a double-edged sword:
 
-- **No dependency injection.** Again, it's not a bean, so you can't `@Autowired` anything into it. Keep it self-contained.
-- **No logging (yet).** The logging system may not be initialized when your processor runs, so logging from inside one is unreliable, although, Spring Boot gives you a `DeferredLogFactory` to buffer output until logging is ready, if you truly need it.
+- **No application-context bean injection.** Again, it's not a bean, so you can't `@Autowired` anything into it. Keep it self-contained.
+- **No logging (yet).** The logging system may not be initialized when your processor runs, so logging from inside one is unreliable, although Spring Boot gives you a `DeferredLogFactory` to buffer output until logging is ready, if you truly need it.
 - **Fail gracefully.** An exception here can derail the whole startup, very early, with poor diagnostics. If your logic can fail (a classpath scan, some parsing), guard it.
 - **It's global.** It fires for *every* application that has your library on the classpath. That's the feature, but it also means you should keep the work conditional and cheap, and bail out early when there's nothing to do (as the example above does with the `*` check).
 - **Prefer `Binder` over hand-parsing** when reading structured or relaxed-binding properties (sets, lists, `kebab-case` vs `camelCase`). It's what Spring Boot itself uses.
@@ -246,8 +246,8 @@ Use an `EnvironmentPostProcessor` when:
 
 Reach for something simpler when:
 
-- If you just need static defaults for **your own** application (not a library). A plain `application.yml` in that application is completely fine.
-- The configuration is either only consumed *after* the context is up. Ordinary `@ConfigurationProperties` and beans are simpler and more discoverable.
+- You just need static defaults for **your own** application (not a library). A plain `application.yml` in that application is completely fine.
+- The configuration is only consumed *after* the context is up. Ordinary `@ConfigurationProperties` and beans are simpler and more discoverable.
 - You'd be tempted to hide an important parameter here that really belongs in an explicit API or a property the user sets on purpose.
 - You provide defaults for your own properties, not for Spring Boot's properties. For your own `@ConfigurationProperties`, the `EnvironmentPostProcessor` is typically an overcomplication.
 
