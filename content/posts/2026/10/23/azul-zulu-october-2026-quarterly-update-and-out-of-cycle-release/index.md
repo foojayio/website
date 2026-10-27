@@ -10,10 +10,10 @@ categories:
   - "Java Core"
   - "Release Notes"
 related_posts:
+  - "free-java-real-risk-why-unsupported-openjdk-is-now-a-security-gamble"
   - "azul-zulu-july-2026-quarterly-update-released"
-  - "azul-zulu-april-2026-quarterly-update-released"
-  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
   - "should-you-update-java-or-upgrade-and-which-version-should-you-use"
+  - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
 ---
 
 {{< warning >}}
