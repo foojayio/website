@@ -13,7 +13,7 @@
     {{/* Days run to the last scheduled date, counted from today's midnight UTC. */}}
     {{ $last := time.AsTime (printf "%sT00:00:00Z" (index . (sub (len .) 1)).date) }}
     {{ $days := int (div ($last.Sub (time.AsTime (printf "%sT00:00:00Z" (now.UTC.Format "2006-01-02")))).Hours 24) }}
-    <div class="page-head__meta"><p class="page-head__stats"><strong>{{ len . }}</strong> {{ if eq (len .) 1 }}post{{ else }}posts{{ end }} scheduled in the next <strong>{{ $days }}</strong> {{ if eq $days 1 }}day{{ else }}days{{ end }}</p></div>
+    <div class="page-head__meta"><p class="page-head__stats"><strong>{{ len . }}</strong> {{ if eq (len .) 1 }}post{{ else }}posts{{ end }} scheduled in the next <strong>{{ $days }}</strong> {{ if eq $days 1 }}day{{ else }}days{{ end }}.</p></div>
     {{ end }}
   </div>
 </div>

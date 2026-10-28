@@ -65,7 +65,7 @@
           {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
           <strong>{{ len . }}</strong> {{ if and (eq (len $types) 1) (eq (index $types 0) "Conference") }}conferences{{ else }}conferences &amp; workshops{{ end }} &middot;
         {{ end }}
-        <strong>{{ len $countries }}</strong> countries
+        <strong>{{ len $countries }}</strong> countries.
       </p>
       {{ end }}
     </div>

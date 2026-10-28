@@ -4,9 +4,9 @@
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
     <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len .Pages }}</strong> terms explained</p>
+      <p class="page-head__stats"><strong>{{ len .Pages }}</strong> terms explained.</p>
+      {{ partial "feed-link.html" . }}
     </div>
-    {{ with partial "feed-link.html" . }}<div class="page-head__views">{{ . }}</div>{{ end }}
   </div>
 </div>
 <div class="content-col full-width">
