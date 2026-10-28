@@ -73,7 +73,7 @@ all, the guide below covers sending a zip instead.
   *(A JUG's own meetups need nothing here — they sync automatically from the
   calendar your group already publishes.)*
 - **Missing or wrong Java conference?** Send a pull request to
-  [javaconferences.org's repository](https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md);
+  [javaconferences.org's repository](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md);
   it reaches [/java-conferences/](https://foojay.io/java-conferences/) and the
   calendar at the next daily sync.
 - **Missing or wrong JUG?** That data is community-run and lives

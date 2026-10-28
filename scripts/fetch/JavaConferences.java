@@ -202,7 +202,7 @@ public class JavaConferences {
                 # (.github/workflows/sync-external-content.yml) and overwrites any change.
                 #
                 # To add, fix or remove a conference, send a pull request to that repository's
-                # README.md: %s/edit/main/README.md
+                # README.md: %s/blob/main/README.md
                 #
                 # Read by /java-conferences/ (the map) and /calendar/. A conference with its own
                 # file in data/events/ is shown from that file instead.

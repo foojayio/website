@@ -10,8 +10,8 @@ source instead:
 | What | Where it is maintained | Shown on foojay.io at |
 |------|------------------------|-----------------------|
 | Java User Groups (and their meetup calendars) | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs) — one small file per JUG | [/jugs/](https://foojay.io/jugs/), [/calendar/](https://foojay.io/calendar/) |
-| Java Champions | [aalmiray/java-champions](https://github.com/aalmiray/java-champions/edit/main/java-champions.yml) — `java-champions.yml` | [/java-champions/](https://foojay.io/java-champions/) |
-| Java conferences, dates and CFPs | [javaconferences/javaconferences.github.io](https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md) — `README.md` | [/java-conferences/](https://foojay.io/java-conferences/), [/calendar/](https://foojay.io/calendar/) |
+| Java Champions | [aalmiray/java-champions](https://github.com/aalmiray/java-champions/blob/main/java-champions.yml) — `java-champions.yml` | [/java-champions/](https://foojay.io/java-champions/) |
+| Java conferences, dates and CFPs | [javaconferences/javaconferences.github.io](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md) — `README.md` | [/java-conferences/](https://foojay.io/java-conferences/), [/calendar/](https://foojay.io/calendar/) |
 
 Everything under `data/` that these produce is generated. Never edit it by hand.
 
@@ -101,7 +101,7 @@ and on every other site that reads the directory too.
 Conferences are pulled in daily from [javaconferences.org](https://javaconferences.org/),
 the community list of upcoming Java conferences. If yours is missing, or a date,
 location or call for papers is wrong, send a pull request to the
-[`README.md` of that repository](https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md)
+[`README.md` of that repository](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md)
 (one table row per conference). It appears on foojay.io's
 [/java-conferences/](https://foojay.io/java-conferences/) map and on the calendar
 at the next daily sync, and on javaconferences.org itself. **Don't add a file to

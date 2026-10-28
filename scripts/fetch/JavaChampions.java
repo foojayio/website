@@ -72,7 +72,7 @@ import java.util.*;
 public class JavaChampions {
 
     static final String SOURCE_URL = "https://raw.githubusercontent.com/aalmiray/java-champions/main/java-champions.yml";
-    static final String EDIT_URL = "https://github.com/aalmiray/java-champions/edit/main/java-champions.yml";
+    static final String FILE_URL = "https://github.com/aalmiray/java-champions/blob/main/java-champions.yml";
     // Avatar paths in the source (e.g. "img/avatars/aalmiray.png") are
     // relative to the published site root, not the repo -- javachampions.org
     // is also the more stable long-term host (repo file layout is an
@@ -637,7 +637,7 @@ public class JavaChampions {
                 # address -- resolved through data/geocode-cache.yaml, and taken straight from
                 # an upstream `location:` field the moment aalmiray/java-champions#318 adds one.
 
-                """.formatted(EDIT_URL).stripIndent();
+                """.formatted(FILE_URL).stripIndent();
 
         DumperOptions options = new DumperOptions();
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
