@@ -2355,6 +2355,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    baseline, which is what /calendar/ shipped. Cheap guard, because the symptom
    is a small vertical offset that is easy to miss in review. */
 .page-head__meta .page-head__views { margin-top: 0; }
+.page-head__meta .views { font-size: .95rem; }
 /* THE FEED LINK (partials/feed-link.html) -- one look, wherever a feed is
    offered. Typographically it is the read count's sibling: same .9rem, same
    --ink-soft, so it sits on a meta line beside "52,391 views" without shouting.
