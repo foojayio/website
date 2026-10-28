@@ -236,6 +236,8 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
+          # Without it /.well-known/security.txt is dropped from the artifact.
+          include-hidden-files: true
 
   deploy:
     needs: build
