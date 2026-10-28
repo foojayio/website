@@ -15,6 +15,11 @@ related_posts:
   - "nulling-out-references-wont-help-your-garbage-collector"
   - "unikernel-profiling-and-troubleshooting-jvm-on-nanos-unikernel"
 ---
+
+A profiler tells you where the time goes. It's tempting to read that as a promise: remove the 29 seconds it points at, and you get 29 seconds back. This article is about a case where that promise didn't hold. The check we removed really was expensive, but part of its cost silently moved to a line of code we never touched.
+
+The setting is a hot loop in which a single operation takes about 200 nanoseconds. At that scale the CPU cache stops being a detail and starts deciding what your code costs, and one operation can pay a bill that another one runs up.
+
 Let's optimize a graph traversal together: step by step, measuring every step. We start with the simplest one.
 
 ## The task
