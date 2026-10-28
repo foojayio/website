@@ -3,11 +3,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len hugo.Data.jugs }}</strong> Java User Groups.</p>
-      {{ partial "feed-link.html" . }}
-    </div>
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> Java User Groups" (len hugo.Data.jugs))
+      "feed" . "views" .) }}
   </div>
 </div>
 

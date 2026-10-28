@@ -52,33 +52,21 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    <div class="page-head__meta">
-      {{ if $events }}
-      <p class="page-head__stats">
-        <strong>{{ len $events }}</strong> events &middot;
-        <strong>{{ len $groupNames }}</strong> Java User Groups &middot;
-        {{/* "conferences" while they all are; the moment a workshop or a
-             community day is added, the label widens on its own rather than
-             counting a workshop as a conference. */}}
-        {{ with $conferences }}
-          {{ $types := slice }}
-          {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
-          <strong>{{ len . }}</strong> {{ if and (eq (len $types) 1) (eq (index $types 0) "Conference") }}conferences{{ else }}conferences &amp; workshops{{ end }} &middot;
-        {{ end }}
-        <strong>{{ len $countries }}</strong> countries.
-      </p>
+    {{ if $events }}
+      {{/* "conferences" while they all are; the moment a workshop or a
+           community day is added, the label widens on its own rather than
+           counting a workshop as a conference. */}}
+      {{ $stats := slice (printf "<strong>%d</strong> events" (len $events)) (printf "<strong>%d</strong> Java User Groups" (len $groupNames)) }}
+      {{ with $conferences }}
+        {{ $types := slice }}
+        {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
+        {{ $label := cond (and (eq (len $types) 1) (eq (index $types 0) "Conference")) "conferences" "conferences &amp; workshops" }}
+        {{ $stats = $stats | append (printf "<strong>%d</strong> %s" (len .) $label) }}
       {{ end }}
-    </div>
-    {{/* OUTSIDE .page-head__meta, like every other page head: that is a flex
-         row, and .page-head__views has a margin-top meant for sitting below
-         it. The count is also a different KIND of number -- the ones above
-         describe the calendar, this describes the page. */}}
-    {{/* The feed sits with the read count, not on the stats row: both are about
-         this PAGE, where the numbers above describe the calendar. */}}
-    {{ $views := partial "views.html" . }}
-    {{ $feed := partial "feed-link.html" . }}
-    {{ if or $views $feed }}
-    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
+      {{ $stats = $stats | append (printf "<strong>%d</strong> countries" (len $countries)) }}
+      {{ partial "page-head-meta.html" (dict "stats" (delimit $stats " &middot; ") "feed" . "views" .) }}
+    {{ else }}
+      {{ partial "page-head-meta.html" (dict "feed" . "views" .) }}
     {{ end }}
   </div>
 </div>

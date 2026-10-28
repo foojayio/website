@@ -17,10 +17,9 @@
     <span class="page-back"><a href="{{ "java-quick-start/" | relURL }}">Java Quick Start</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>{{ len $tutorials }} recommended {{ if eq (len $tutorials) 1 }}resource{{ else }}resources{{ end }}, all free.</p>
-    </div>
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> recommended %s, all free" (len $tutorials) (cond (eq (len $tutorials) 1) "resource" "resources"))
+      "views" .) }}
   </div>
 </div>
 

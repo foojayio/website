@@ -11,15 +11,11 @@
     <span class="page-back"><a href="{{ "today/" | relURL }}">Friends Of OpenJDK Today</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>{{ len $posts }} article{{ if ne (len $posts) 1 }}s{{ end }} on AI and machine learning in Java.</p>
-      {{/* The portal has no feed of its own; the category it curates does,
-           which is what feed-link.html taking a page is for. */}}
-      {{ with site.GetPage (printf "/categories/%s" ($category | urlize)) }}
-        {{ partial "feed-link.html" . }}
-      {{ end }}
-    </div>
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{/* The portal has no feed of its own; the category it curates does. */}}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> article%s on AI and machine learning in Java" (len $posts) (cond (eq (len $posts) 1) "" "s"))
+      "feed" (site.GetPage (printf "/categories/%s" ($category | urlize)))
+      "views" .) }}
   </div>
 </div>
 

@@ -1,0 +1,24 @@
+{{- /* The count line under a page title: the count sentence with the RSS pill
+       beside it, then the read count on its own line. The single definition,
+       so no page can place, bold or punctuate them differently.
+
+       Context is a dict, every key optional:
+         stats  the sentence as HTML, with the numbers in <strong>; the closing
+                "." is added here
+         feed   the page whose RSS feed to offer (see feed-link.html)
+         views  the page whose read count to show (see views.html) */ -}}
+{{- $feed := "" -}}
+{{- with .feed }}{{ $feed = partial "feed-link.html" . }}{{ end -}}
+{{- $views := "" -}}
+{{- with .views }}{{ $views = partial "views.html" . }}{{ end -}}
+{{- if or .stats $feed }}
+<div class="page-head__meta">
+  {{- with .stats }}
+  <p class="page-head__stats">{{ . | safeHTML }}.</p>
+  {{- end }}
+  {{ $feed }}
+</div>
+{{- end }}
+{{- with $views }}
+<div class="page-head__views">{{ . | safeHTML }}</div>
+{{- end }}

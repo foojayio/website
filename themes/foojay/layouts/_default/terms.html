@@ -11,9 +11,8 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len $terms }}</strong> {{ .Data.Plural }} across foojay.io.</p>
-    </div>
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> %s across foojay.io" (len $terms) .Data.Plural)) }}
   </div>
 </div>
 

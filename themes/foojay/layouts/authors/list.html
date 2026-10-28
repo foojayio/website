@@ -3,9 +3,8 @@
   <div class="page-head__inner">
     <h1>Authors</h1>
     <p>Everyone who has published content on foojay.io.</p>
-    <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len (partialCached "authors-all.html" "authors") }}</strong> authors.</p>
-    </div>
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> authors" (len (partialCached "authors-all.html" "authors")))) }}
   </div>
 </div>
 

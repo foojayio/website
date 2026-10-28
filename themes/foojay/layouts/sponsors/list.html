@@ -7,9 +7,8 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len (partial "sponsors-ordered.html" .) }}</strong> sponsors.</p>
-    </div>
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> sponsors" (len (partial "sponsors-ordered.html" .)))) }}
   </div>
 </div>
 

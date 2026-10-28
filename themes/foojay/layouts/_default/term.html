@@ -2,15 +2,9 @@
 <div class="page-head">
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
-    <div class="page-head__meta">
-      <p>{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }} in this {{ .Data.Singular }}.</p>
-      {{/* Category RSS is enabled site-wide via hugo.toml's [outputs] term
-           config, so every term page automatically gets a feed -- link to it.
-           Through partials/feed-link.html since this page's hand-rolled button
-           was the only visible feed offer on the site; it is now the same
-           control the home page, /today/, /pedia/ and /calendar/ show. */}}
-      {{ partial "feed-link.html" . }}
-    </div>
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> article%s in this %s" (len .Pages) (cond (eq (len .Pages) 1) "" "s") .Data.Singular)
+      "feed" .) }}
   </div>
 </div>
 

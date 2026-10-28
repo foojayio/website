@@ -35,16 +35,12 @@
     <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>
-        {{ len $editions }} edition{{ if ne (len $editions) 1 }}s{{ end }}, written by
-        {{/* The profile is the site's own page about Artur; the newsletter is
-             his. Both are offered, because a reader here wants one or the
-             other and neither substitutes for the other. */}}
-        <a href="{{ "today/author/artur-skowronski/" | relURL }}">Artur Skowronski</a>.
-      </p>
-      {{ with partial "views.html" . }}{{ . | safeHTML }}{{ end }}
-    </div>
+    {{/* The profile is the site's own page about Artur; the newsletter is
+         his. Both are offered, because a reader here wants one or the other
+         and neither substitutes for the other. */}}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf `<strong>%d</strong> edition%s, written by <a href="%s">Artur Skowronski</a>` (len $editions) (cond (eq (len $editions) 1) "" "s") ("today/author/artur-skowronski/" | relURL))
+      "views" .) }}
     </div>
   </div>
 </div>

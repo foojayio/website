@@ -10,10 +10,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p class="page-head__stats"><strong>{{ len $members }}</strong> organization{{ if ne (len $members) 1 }}s{{ end }} on the board.</p>
-    </div>
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> organization%s on the board" (len $members) (cond (eq (len $members) 1) "" "s"))
+      "views" .) }}
   </div>
 </div>
 
