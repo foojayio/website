@@ -4578,3 +4578,9 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   margin: 0; font-size: .8rem; text-transform: uppercase;
   letter-spacing: .04em; color: var(--ink-muted);
 }
+
+/* 404: suggestions from the dead URL, and the fallback lists -------- */
+.nf-suggest, .nf-fallback { margin-top: 2rem; max-width: 62rem; }
+.nf-suggest h2, .nf-fallback h2 { font-size: 1.15rem; margin: 1.75rem 0 .75rem; }
+.nf-suggest ul { padding-left: 1.25rem; display: grid; gap: .5rem; }
+.nf-topics { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
