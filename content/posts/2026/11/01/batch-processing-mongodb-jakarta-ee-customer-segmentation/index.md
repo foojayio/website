@@ -1,10 +1,15 @@
 ---
 title: "Batch Processing with MongoDB and Jakarta EE: From Customer Segmentation to Scalable Workflows"
-date: "2026-10-30"
+date: "2026-11-01"
 description: "Build a Jakarta Batch job that reclassifies e-commerce customers into tiers on MongoDB, with a Jakarta Faces preview flow before execution."
 authors: ["otavio-santana"]
 image: "jakarta-batch-mongodb-cover.jpg"
 categories: ["Jakarta EE", "Java", "Mongo", "Tutorials"]
+related_posts:
+  - "build-your-first-saas-with-mongodb-ephemeral-clusters"
+  - "testing-jakarta-ee-three-layers-three-tools"
+  - "adding-rag-to-jakarta-ee-11-app"
+  - "jakarta-faces-java-web-framework-stateless-edition-marketplace-alifaces"
 ---
 
 Batch processing addresses a common enterprise need: reliably applying business rules to large data sets without relying on individual user requests. Tasks such as recalculating customer segments, migrating records, reconciling transactions, updating prices, or processing millions of documents require more than a basic loop. Applications must control memory efficiently, handle failures, minimize unnecessary writes, and separate long-running processes away from interactive user experiences.
@@ -544,7 +549,7 @@ The diagram below shows the batch working and the process working:
 
 <div style="text-align:center">
 
-![Sequence diagram showing CustomerSegmentationService starting the Jakarta Batch runtime, which loops over CustomerItemReader, CustomerTierProcessor, and CustomerItemWriter for each chunk, branching on whether a customer's tier changed before writing updates to MongoDB.](jakarta-batch-sequence-diagram.png)
+![Sequence diagram showing CustomerSegmentationService starting the Jakarta Batch runtime, which loops over CustomerItemReader, CustomerTierProcessor, and CustomerItemWriter for each chunk, branching on whether a customer's tier changed before writing updates to MongoDB.](jakarta-batch-sequence-diagram.jpg)
 
 </div>
 
