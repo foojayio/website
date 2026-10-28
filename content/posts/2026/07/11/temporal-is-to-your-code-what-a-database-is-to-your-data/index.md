@@ -7,7 +7,6 @@ authors:
   - "geertjan-wielenga"
 image: "horizontal-logo.png"
 categories:
-  - "Durability"
   - "Performance"
   - "Temporal"
 related_posts:

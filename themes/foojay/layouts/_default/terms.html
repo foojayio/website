@@ -12,7 +12,7 @@
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
     <div class="page-head__meta">
-      <p>{{ len $terms }} {{ .Data.Plural }} across foojay.io.</p>
+      <p class="page-head__stats"><strong>{{ len $terms }}</strong> {{ .Data.Plural }} across foojay.io.</p>
     </div>
   </div>
 </div>

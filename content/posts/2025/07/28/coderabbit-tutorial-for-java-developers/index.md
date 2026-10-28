@@ -9,7 +9,6 @@ authors:
 image: "Cr_icon_632e505ce3-1.png"
 categories:
   - "AI"
-  - "CodeRabbit"
   - "Machine Learning"
 related_posts:
   - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"

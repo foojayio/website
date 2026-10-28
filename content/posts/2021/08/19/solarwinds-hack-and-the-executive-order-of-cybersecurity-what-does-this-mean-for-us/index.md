@@ -8,8 +8,7 @@ authors:
 image: "mqdefault-f6be976c.jpg"
 categories:
   - "DevOps"
-  - "JFrog Artifactory"
-  - "JFrog Xray"
+  - "JFrog"
   - "Security"
   - "Videos"
 related_posts:

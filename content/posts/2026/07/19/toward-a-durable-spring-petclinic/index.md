@@ -8,7 +8,6 @@ authors:
 image: "horizontal-logo.png"
 categories:
   - "Developer Tools"
-  - "Durability"
   - "Performance"
   - "Temporal"
 related_posts:

@@ -12,7 +12,6 @@ frontmatter.
 - Apache Tomcat
 - Arm
 - Azure
-- Bach
 - Book Announcement
 - Book Review
 - Books
@@ -20,7 +19,6 @@ frontmatter.
 - Campaigns
 - Chronicle Software
 - Cloud
-- CodeRabbit
 - Conference
 - CRaC
 - Data Engineering
@@ -29,13 +27,11 @@ frontmatter.
 - DataStax
 - Debugging
 - Deep Netts
-- Dependabot
+- Dependency Management
 - Design Patterns
 - Desktop
 - Developer Tools
 - DevOps
-- Dubai JUG
-- Durability
 - Eclipse
 - Elastic
 - Embedded
@@ -66,8 +62,7 @@ frontmatter.
 - JDK21
 - Jelastic
 - JEPs
-- JFrog Artifactory
-- JFrog Xray
+- JFrog
 - JMS
 - jOOQ
 - JShell
@@ -105,7 +100,6 @@ frontmatter.
 - Records
 - Redis
 - Release Notes
-- Renovate
 - Research
 - RIFE2
 - Scala

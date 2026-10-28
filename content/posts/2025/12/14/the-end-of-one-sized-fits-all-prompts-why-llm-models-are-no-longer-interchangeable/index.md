@@ -9,7 +9,6 @@ authors:
 image: "366d55fa-75e8-401a-842e-f8b4d407b7a2.webp"
 categories:
   - "AI"
-  - "CodeRabbit"
   - "Developer Tools"
   - "GenAI"
   - "Machine Learning"

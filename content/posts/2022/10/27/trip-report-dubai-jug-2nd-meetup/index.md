@@ -7,7 +7,6 @@ authors:
   - "pacovan"
 image: "dubai-jug-2nd-meetup-1024x768.jpg"
 categories:
-  - "Dubai JUG"
   - "JUGs"
   - "Trip Reports"
 related_posts:

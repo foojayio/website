@@ -8,9 +8,8 @@ authors:
   - "marit-van-dijk"
 image: "Snyk-PR-1.png"
 categories:
-  - "Dependabot"
+  - "Dependency Management"
   - "Developer Tools"
-  - "Renovate"
   - "Security"
   - "Snyk"
 related_posts:

@@ -7,7 +7,6 @@ authors:
   - "carldea"
 image: "Screen-Shot-2021-03-25-at-4.04.43-PM.jpg"
 categories:
-  - "Bach"
   - "JavaFX"
 related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-6"

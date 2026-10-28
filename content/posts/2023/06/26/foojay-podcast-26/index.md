@@ -13,7 +13,7 @@ categories:
   - "DevOps"
   - "GitLab"
   - "IntelliJ IDEA"
-  - "JFrog Artifactory"
+  - "JFrog"
   - "Maven"
   - "Microservices"
   - "Podcast"

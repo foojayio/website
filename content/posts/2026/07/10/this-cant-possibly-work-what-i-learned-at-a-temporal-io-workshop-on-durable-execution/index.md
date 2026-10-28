@@ -8,7 +8,6 @@ authors:
 image: "IMG_2976-scaled.jpeg"
 categories:
   - "Developer Tools"
-  - "Durability"
   - "Performance"
   - "Temporal"
 related_posts:

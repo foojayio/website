@@ -7,7 +7,6 @@ authors:
 image: "durable-execution-property-not-product.jpg"
 categories:
   - "Opinion"
-  - "Durability"
   - "Java"
 related_posts:
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"

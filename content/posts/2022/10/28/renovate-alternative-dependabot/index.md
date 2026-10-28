@@ -8,10 +8,9 @@ authors:
   - "nicolas-frankel"
 image: "painter-g72d10f286.jpg"
 categories:
-  - "Dependabot"
+  - "Dependency Management"
   - "Developer Tools"
   - "DevOps"
-  - "Renovate"
   - "Tools"
 related_posts:
   - "blockhound-how-it-works"

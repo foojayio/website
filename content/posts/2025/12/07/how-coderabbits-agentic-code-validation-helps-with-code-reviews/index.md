@@ -8,7 +8,6 @@ authors:
 image: "ee88f311-e2fd-4bb5-acb5-2a07ceff098d.webp"
 categories:
   - "AI"
-  - "CodeRabbit"
   - "Developer Tools"
   - "Machine Learning"
 related_posts:
