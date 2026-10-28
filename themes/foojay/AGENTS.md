@@ -67,6 +67,13 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   **length-guarded at 200 characters** on a word boundary; the stored text is
   untouched.
 
+- **Machine-readable copies are derived, never authored.** Posts and glossary
+  entries also publish `<page>/index.md` (the MARKDOWN output, switched on by a
+  cascade in the two `_index.md` files), and `/llms-full.txt` carries the
+  glossary and Quick Start in full. The sitemap is our own template so a page
+  whose `canonical:` names another URL is left out; glossary entries and Quick
+  Start steps get `DefinedTerm` and `TechArticle` JSON-LD from `json-ld.html`.
+
 - **`/search/` and the 404 are out of the index, and `/search/` is out of the
   sitemap** — it has no server-rendered content to rank on, so listing it and
   then telling it `noindex` was two contradictory instructions. The 404 also
