@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-10-27T06:25:19Z",
+  "generatedAt" : "2026-10-28T06:56:02Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -14,15 +14,7 @@
     "jug" : "AlpesJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/alpesjug/",
-    "events" : [ {
-      "title" : "Un outil pour les gouverner tous",
-      "url" : "https://www.meetup.com/alpesjug/events/317009119/",
-      "startTime" : "2026-10-27T19:00:00+01:00",
-      "endTime" : "2026-10-27T21:00:00+01:00",
-      "venue" : "29 Boulevard des Alpes",
-      "city" : "Meylan",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "amsterdam-java-user-group",
     "name" : "Amsterdam Java User Group",
@@ -111,15 +103,7 @@
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
-    "events" : [ {
-      "title" : "Open Space with Kotlin User Group",
-      "url" : "https://www.meetup.com/belgian-java-user-group/events/317062424/",
-      "startTime" : "2026-10-27T18:30:00+01:00",
-      "endTime" : "2026-10-27T21:30:00+01:00",
-      "venue" : "Da Vincilaan 11",
-      "city" : "Zaventem",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "BordeauxJUG",
     "name" : "BordeauxJUG",
@@ -511,6 +495,14 @@
       "venue" : "Consid GmbH",
       "city" : "Hamburg",
       "online" : false
+    }, {
+      "title" : "Backend Entwicklung mit Rust",
+      "url" : "https://www.meetup.com/jug-hamburg/events/317162786/",
+      "startTime" : "2026-11-17T19:00:00+01:00",
+      "endTime" : "2026-11-17T20:30:00+01:00",
+      "venue" : "Hamburger Berater Team GmbH",
+      "city" : "Hamburg",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Hannover",
@@ -699,22 +691,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "JCON USA 2026 at IBM TechXchange",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316383834/",
-      "startTime" : "2026-10-26T09:00:00+01:00",
-      "endTime" : "2026-10-29T18:00:00+01:00",
-      "venue" : "Georgia World Congress Center",
-      "city" : "Atlanta",
-      "online" : false
-    }, {
-      "title" : "AI Trends That Actually Matter: Lessons from 100+ Hours of AI Live Coding",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316514677/",
-      "startTime" : "2026-10-27T17:30:00+01:00",
-      "endTime" : "2026-10-27T19:00:00+01:00",
-      "venue" : "IHK-Akademie in Ostbayern GmbH",
-      "city" : "Weiden in der Oberpfalz",
-      "online" : false
-    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
       "startTime" : "2026-11-11T18:00:00+01:00",
@@ -1090,7 +1066,15 @@
     "jug" : "UtrechtJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/utrecht-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Utrecht JUG Meetup – Nov 11: Java Security & Agentic AI in Legacy Modernization",
+      "url" : "https://www.meetup.com/utrecht-java-user-group/events/317133451/",
+      "startTime" : "2026-11-11T17:30:00+01:00",
+      "endTime" : "2026-11-11T22:00:00+01:00",
+      "venue" : "PSG technauts Nieuwegein",
+      "city" : "Nieuwegein",
+      "online" : false
+    } ]
   }, {
     "slug" : "ValenciaJUG",
     "name" : "ValenciaJUG",
@@ -1098,12 +1082,12 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/ValenciaJUG/",
     "events" : [ {
-      "title" : "Lightning Talks ⚡⚡",
+      "title" : "Lightning Talks ⚡/ Ask a Dev",
       "url" : "https://www.meetup.com/valenciajug/events/317024529/",
       "startTime" : "2026-11-17T18:30:00+01:00",
       "endTime" : "2026-11-17T21:30:00+01:00",
-      "venue" : null,
-      "city" : "Valencia",
+      "venue" : "Universidad Politécnica de Valencia (UPV)",
+      "city" : "València",
       "online" : false
     } ]
   }, {
@@ -1117,7 +1101,7 @@
       "url" : "https://luma.com/aidevcon-nyc2026",
       "startTime" : "2026-11-02T00:00:00Z",
       "endTime" : "2026-11-05T00:00:00Z",
-      "venue" : "5-2-A at Industry City",
+      "venue" : "34 35th St",
       "city" : "USA",
       "online" : null
     }, {
