@@ -10,6 +10,7 @@ categories:
   - "Databases"
   - "Microservices"
   - "Neo4J"
+  - "Mongo"
 related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "book-review-effortless-cloud-native-app-development-using-skaffold-2"

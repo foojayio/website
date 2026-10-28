@@ -8,6 +8,7 @@ authors:
 image: "funding-open-source-without-the-bait-and-switch.jpg"
 categories:
   - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"

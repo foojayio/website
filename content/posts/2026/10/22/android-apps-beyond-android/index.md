@@ -4,7 +4,7 @@ date: "2026-10-22"
 description: "Compile Android apps for iOS, web and desktop with a free, open-source compatibility layer. Try the browser demo, see the iOS binary size and migrate one..."
 authors: ["shai-almog"]
 image: "android-apps-beyond-android-d1d17778d9.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/android-apps-beyond-android/"
 ---
 

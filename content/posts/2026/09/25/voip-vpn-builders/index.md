@@ -4,7 +4,7 @@ date: "2026-09-25"
 description: "Codename One adds native call management and VPN APIs, while its builders generate the platform services, frameworks, permissions, and extension plumbing..."
 authors: ["shai-almog"]
 image: "voip-vpn-builders-bdff9b8012.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "sqlite-across-every-port-one-contract-one-encrypted-file-format"

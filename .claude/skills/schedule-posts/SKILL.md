@@ -35,6 +35,10 @@ Two things the validator does not check, so check them yourself and propose impr
 
 * `categories`: at least one, and each one has to exist in
   `../../../template/categories.md`.
+  Some authors write mostly about one product. When the post is about
+  MongoDB, Codename One or BoxLang (named in the title or description, or the
+  subject of the body), add `Mongo`, `Codename One` or `BoxLang` even if the
+  author left it out, so the post shows up on that category page.
 * `image`: check the image file exists, is in the bundle, and is not too large (see step 4). It should also be a .jpg or .png, not a .gif, .svg, or .webp. In that case, convert it, otherwise it will not be picked up by social media cards when the post is shared.
 * `related_posts`: four or more recent, genuinely related posts reads best. This
   is a house preference, not a rule that blocks a merge. Find related posts if none are included.

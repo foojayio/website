@@ -4,7 +4,7 @@ date: "2026-10-16"
 description: "Build a smaller native Java service with Spring-style transactions and dependency injection. Inspect the generated code and compare local Linux startup,..."
 authors: ["shai-almog"]
 image: "java-server-work-before-startup-d9b84f58b7.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/java-server-work-before-startup/"
 ---
 

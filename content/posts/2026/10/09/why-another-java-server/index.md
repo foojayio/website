@@ -4,7 +4,7 @@ date: "2026-10-09"
 description: "Why we brought Codename One's mobile runtime to the server: small native Java executables, Go comparisons, and shared code from the app to its database."
 authors: ["shai-almog"]
 image: "why-another-java-server-f8959ffdf0.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/why-another-java-server/"
 ---
 

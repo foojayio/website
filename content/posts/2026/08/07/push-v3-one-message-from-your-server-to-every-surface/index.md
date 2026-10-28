@@ -8,6 +8,7 @@ authors:
 image: "push-v3-new-cloud.jpg"
 categories:
   - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

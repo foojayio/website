@@ -8,6 +8,7 @@ authors:
 image: "Screenshot-2026-09-03-at-11.46.42-AM.png"
 categories:
   - "AI"
+  - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "abstracting-data-access-in-java-with-the-dao-pattern"
