@@ -1,6 +1,6 @@
 ---
 title: "BoxLang AI 3.6: Your Agent Now Has Eyes, Ears, and a Voice"
-date: "2026-01-01"
+date: "2026-10-31"
 description: "BoxLang AI 3.6 connects AI agents to browser automation, audio tools, streaming speech, MCP stdio servers, MariaDB vector memory, and stronger safety controls."
 authors:
   - "luis-majano"
@@ -12,10 +12,14 @@ categories:
   - "MCP"
   - "Developer Tools"
 canonical: "https://www.ortussolutions.com/blog/boxlang-ai-36-your-agent-now-has-eyes-ears-and-a-voice"
-related_posts: []
+related_posts:
+  - "bxplaywright-10-real-browsers-fluent-boxlang-built-for-ai-agents"
+  - "boxlang-ai-340-gateways-hitl-security"
+  - "boxlang-1-18-0-released-every-cloud-every-node-every-agent"
+  - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 ---
 
-**Ortus Solutions today announces BoxLang AI 3.6, the release that connects the AI framework to the rest of the BoxLang productivity platform. Your agents can now drive a real browser via [bx-playwright](https://www.ortussolutions.com/blog/bxplaywright-10-real-browsers-fluent-boxlang-built-for-ai-agents), speak and master audio via [bx-audio](https://www.ortussolutions.com/blog/bxaudio-10-make-mix-master-and-speak-audio-from-boxlang), stream text-to-speech token by token, talk to any MCP server over stdio — and do all of it with the same fluent BoxLang syntax they always have.**
+**Ortus Solutions announced BoxLang AI 3.6, the release that connects the AI framework to the rest of the BoxLang productivity platform. Your agents can now drive a real browser via [bx-playwright](https://www.ortussolutions.com/blog/bxplaywright-10-real-browsers-fluent-boxlang-built-for-ai-agents), speak and master audio via [bx-audio](https://www.ortussolutions.com/blog/bxaudio-10-make-mix-master-and-speak-audio-from-boxlang), stream text-to-speech token by token, talk to any MCP server over stdio — and do all of it with the same fluent BoxLang syntax they always have.**
 
 ```bash
 install-bx-module bx-ai
