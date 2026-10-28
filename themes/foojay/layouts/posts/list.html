@@ -3,9 +3,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    {{ partial "page-head-meta.html" (dict
-      "stats" (printf "<strong>%d</strong> article%s" (len .RegularPagesRecursive) (cond (eq (len .RegularPagesRecursive) 1) "" "s"))
-      "feed" .) }}
+    {{ $stats := printf "<strong>%d</strong> article%s" (len .RegularPagesRecursive) (cond (eq (len .RegularPagesRecursive) 1) "" "s") }}
+    {{ with partial "views-posts-total.html" }}{{ $stats = printf "%s &middot; <strong>%s</strong> views" $stats (lang.FormatNumberCustom 0 .) }}{{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats "feed" .) }}
   </div>
 </div>
 

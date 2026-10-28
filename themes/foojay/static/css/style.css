@@ -3438,6 +3438,7 @@ body.lightbox-open { overflow: hidden; }
 .sponsor-profile__head { display: flex; gap: 1.5rem; align-items: center; }
 .sponsor-profile__intro h1 { margin: .5rem 0 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
 .sponsor-profile__tagline { margin: .4rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+.sponsor-profile__views { margin: .3rem 0 0; color: var(--ink-muted); font-size: .9rem; }
 .sponsor-profile__links {
   display: flex; flex-wrap: wrap; gap: .5rem;
   margin-top: 1.25rem; padding-top: 1.25rem;

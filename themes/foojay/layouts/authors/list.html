@@ -3,8 +3,9 @@
   <div class="page-head__inner">
     <h1>Authors</h1>
     <p>Everyone who has published content on foojay.io.</p>
-    {{ partial "page-head-meta.html" (dict
-      "stats" (printf "<strong>%d</strong> authors" (len (partialCached "authors-all.html" "authors")))) }}
+    {{ $stats := printf "<strong>%d</strong> authors" (len (partialCached "authors-all.html" "authors")) }}
+    {{ with partial "views-posts-total.html" }}{{ $stats = printf "%s &middot; <strong>%s</strong> views" $stats (lang.FormatNumberCustom 0 .) }}{{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats) }}
   </div>
 </div>
 

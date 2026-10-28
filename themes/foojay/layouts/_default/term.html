@@ -2,9 +2,9 @@
 <div class="page-head">
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
-    {{ partial "page-head-meta.html" (dict
-      "stats" (printf "<strong>%d</strong> article%s in this %s" (len .Pages) (cond (eq (len .Pages) 1) "" "s") .Data.Singular)
-      "feed" .) }}
+    {{ $stats := printf "<strong>%d</strong> article%s in this %s" (len .Pages) (cond (eq (len .Pages) 1) "" "s") .Data.Singular }}
+    {{ with partial "views-total.html" .Pages }}{{ $stats = printf "%s &middot; <strong>%s</strong> views" $stats (lang.FormatNumberCustom 0 .) }}{{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats "feed" .) }}
   </div>
 </div>
 

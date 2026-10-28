@@ -23,14 +23,14 @@
 
        Add a section here to start counting it -- the Worker accepts any
        `<section>/<slug>` key. */ -}}
-{{- $counted := slice "posts" "pages" "pedia" "authors" -}}
+{{- $counted := slice "posts" "pages" "pedia" "authors" "sponsors" -}}
 {{- $key := "" -}}
 {{/* NOT `.IsPage`: author profiles are BRANCH bundles, so that test
      silently stops matching them and every author's count reverts to nothing
      recorded. What matters is that the page has a FILE, so the slug can be
      derived, and that it is not a section LISTING. A profile is identified
-     the way it is everywhere else: `type: "author"`. */}}
-{{- $isProfile := eq .Type "author" -}}
+     the way it is everywhere else: `type: "author"` (or "sponsor"). */}}
+{{- $isProfile := in (slice "author" "sponsor") .Type -}}
 {{- if and .File (in $counted .Section) (or .IsPage $isProfile) -}}
   {{- $key = printf "%s/%s" .Section (or .Params.slug .File.ContentBaseName) -}}
 {{- end -}}

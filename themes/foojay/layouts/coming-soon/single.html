@@ -9,13 +9,15 @@
     <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    {{ $stats := "" }}
     {{ with $posts }}
     {{/* Days run to the last scheduled date, counted from today's midnight UTC. */}}
     {{ $last := time.AsTime (printf "%sT00:00:00Z" (index . (sub (len .) 1)).date) }}
     {{ $days := int (div ($last.Sub (time.AsTime (printf "%sT00:00:00Z" (now.UTC.Format "2006-01-02")))).Hours 24) }}
-    {{ partial "page-head-meta.html" (dict "stats" (printf "<strong>%d</strong> %s scheduled in the next <strong>%d</strong> %s"
-      (len .) (cond (eq (len .) 1) "post" "posts") $days (cond (eq $days 1) "day" "days"))) }}
+    {{ $stats = printf "<strong>%d</strong> %s scheduled in the next <strong>%d</strong> %s"
+      (len .) (cond (eq (len .) 1) "post" "posts") $days (cond (eq $days 1) "day" "days") }}
     {{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats "views" .) }}
   </div>
 </div>
 

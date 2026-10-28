@@ -64,6 +64,7 @@
           {{ with .Params.tier }}<span class="sponsor-badge sponsor-badge--{{ . }}">{{ (partial "sponsor-tier.html" .).badge }}</span>{{ end }}
           <h1>{{ .Title }}</h1>
           {{ with .Params.tagline }}<p class="sponsor-profile__tagline">{{ . }}</p>{{ end }}
+          {{ with partial "views.html" . }}<p class="sponsor-profile__views">{{ . | safeHTML }}</p>{{ end }}
         </div>
       </div>
 

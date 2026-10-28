@@ -14,7 +14,7 @@
   SCHEDULED POSTS ARE ABSENT ON PURPOSE -- `posts` is what a reader can reach
   today. The difference is the "Coming soon" list on the home page.
 */ -}}
-{{- $counted := slice "posts" "pages" "pedia" "authors" -}}
+{{- $counted := slice "posts" "pages" "pedia" "authors" "sponsors" -}}
 
 {{/* ---- content, counted off what was actually built ------------------- */}}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
