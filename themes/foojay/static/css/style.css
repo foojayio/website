@@ -1875,7 +1875,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    and prose in a 300px column is a stack of four-word lines that crowds out
    the legends the rail is actually for. */
 .cal-source {
-  max-width: 75ch; margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
   color: var(--ink-muted); font-size: .85rem; line-height: 1.55;
 }
 .cal-source__synced { display: inline-block; margin-top: .35rem; }
