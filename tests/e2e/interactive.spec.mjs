@@ -60,7 +60,7 @@ test('the gallery lightbox opens, steps and closes', async ({ page }) => {
  * no error, no message, a gap where the map was. Only the tiles are third-party
  * now, and a tile that does not load leaves a working map over an empty ground.
  */
-for (const kind of ['jugs', 'champions']) {
+for (const kind of ['jugs', 'champions', 'conferences']) {
   test(`the ${kind} map is wired to real points`, async ({ page }) => {
     test.skip(!PAGES[kind], `no ${kind} page`);
     await page.goto(PAGES[kind]);
@@ -81,7 +81,8 @@ for (const kind of ['jugs', 'champions']) {
     await expect(page.locator('.leaflet-container')).toBeVisible({ timeout: 15_000 });
     await expect
       .poll(() => page.locator('.leaflet-marker-icon').count(), { timeout: 15_000 })
-      .toBeGreaterThan(5);
+      // Conferences cluster hard in Europe, so far fewer markers than the other two.
+      .toBeGreaterThan(kind === 'conferences' ? 1 : 5);
     expectClean(page);
   });
 }

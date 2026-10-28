@@ -1,0 +1,116 @@
+{{ define "main" }}
+{{ $today := now.Format "2006-01-02" }}
+{{/* Upcoming only: the data file keeps past conferences so it does not change
+     every day, and each page drops what has ended. */}}
+{{ $all := default slice (index hugo.Data "java-conferences") }}
+{{ $conferences := slice }}
+{{ range sort $all "start" }}
+  {{ if ge .end $today }}{{ $conferences = $conferences | append . }}{{ end }}
+{{ end }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> upcoming Java conferences" (len $conferences))
+      "views" .) }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  <article class="page-single page-single--wide prose">
+    {{ .Content }}
+
+    <p class="conferences-source-note">
+      This list is fetched automatically from
+      <a href="https://javaconferences.org/" target="_blank" rel="noopener">javaconferences.org</a>
+      and refreshed daily. If a conference is missing, or a date, location or CFP is wrong, please
+      <a href="https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md" target="_blank" rel="noopener">edit <code>README.md</code> in the javaconferences repository</a>
+      with a pull request, and it will show up here automatically. Conferences are also on the
+      <a href="{{ "calendar/" | relURL }}">events calendar</a>.
+    </p>
+
+    {{ $points := slice }}
+    {{ $rows := slice }}
+    {{ range $conferences }}
+      {{ $start := time.AsTime .start }}
+      {{ $end := time.AsTime .end }}
+      {{ $when := $start.Format "2 Jan 2006" }}
+      {{ if ne .start .end }}
+        {{ if eq ($start.Format "2006-01") ($end.Format "2006-01") }}
+          {{ $when = printf "%s–%s" ($start.Format "2") ($end.Format "2 Jan 2006") }}
+        {{ else }}
+          {{ $when = printf "%s – %s" ($start.Format "2 Jan") ($end.Format "2 Jan 2006") }}
+        {{ end }}
+      {{ end }}
+      {{ $rows = $rows | append (merge . (dict "when" $when)) }}
+      {{ if and .latitude .longitude }}
+        {{ $points = $points | append (dict
+             "name" (printf "%s (%s)" .name $when)
+             "lat" .latitude
+             "lng" .longitude
+             "place" (printf "%s, %s" .city .country)
+             "url" (.url | default "")) }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $points }}
+    {{ partial "cluster-map.html" . }}
+    <div id="conferences-map" class="cluster-map"></div>
+    <p class="cluster-map__note">
+      {{ len $points }} of {{ len $conferences }} upcoming conferences are on the map, and each marker
+      shows how many are in that city. Online conferences have no place to put on a map, but are in the list below.
+    </p>
+    <script>
+      foojayClusterMap({
+        el: 'conferences-map',
+        points: {{ $points | jsonify | safeJS }},
+        singular: 'Java conference',
+        plural: 'Java conferences'
+      });
+    </script>
+    {{ end }}
+
+    {{ if $conferences }}
+    <div class="list-filter" data-filter-wrap hidden>
+      <input type="search" class="list-filter__input" data-filter-for="conferences-table"
+             data-filter-count="conferences-count" data-filter-noun="conferences"
+             placeholder="Filter by name, city or country…" aria-label="Filter Java conferences by name, city or country" autocomplete="off">
+      <span class="list-filter__count" id="conferences-count" aria-live="polite"></span>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Java conferences table">
+      <table class="conferences-table" id="conferences-table" data-filter-cols="0,2">
+        <thead>
+          <tr>
+            <th>Conference</th>
+            <th>When</th>
+            <th>Where</th>
+            <th>Call for papers</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $rows }}
+          {{ $name := .name }}
+          <tr>
+            <td>{{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</td>
+            <td class="conferences-table__when">{{ .when }}</td>
+            <td>{{ if .online }}Online{{ else }}{{ .city }}, {{ .country }}{{ if .hybrid }} <span class="conferences-table__tag">+ online</span>{{ end }}{{ end }}</td>
+            <td>
+              {{ if not .cfp_url }}&ndash;
+              {{ else if and .cfp_closes (lt .cfp_closes $today) }}Closed
+              {{ else }}<a href="{{ .cfp_url }}" target="_blank" rel="noopener">Open</a>{{ with .cfp_closes }}, closes {{ dateFormat "2 Jan 2006" . }}{{ end }}
+              {{ end }}
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+    {{ else }}
+    <p>The conference list hasn't synced yet.</p>
+    {{ end }}
+  </article>
+</div>
+<script src="{{ "js/table-filter.js" | relURL }}" defer></script>
+{{ end }}

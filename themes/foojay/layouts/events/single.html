@@ -148,13 +148,12 @@
       </div>
     </div>
     <aside class="calendar__aside">
-      {{/* Two buttons because they are genuinely different jobs: an event is a
-           pull request here, a JUG's meetups sync from its own feed once its
-           entry exists upstream. Adding an event leads, as the one a reader
-           of this page can act on today. */}}
+      {{/* Three buttons because they are genuinely different jobs: an event is
+           a pull request here, while a conference and a JUG's meetups sync
+           from their own upstream lists. The event one leads, as the one a
+           reader can act on today; the other two sit under the list they add to. */}}
       <div class="cal-ctas">
         <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
-        <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
       </div>
 
       {{ with $conferences }}
@@ -178,6 +177,7 @@
           {{ end }}
         </ul>
         </div>
+        <a class="btn btn--ghost cal-cta cal-legend__cta" href="https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md" target="_blank" rel="noopener">+ Add your conference</a>
       </section>
       {{ end }}
 
@@ -199,6 +199,7 @@
           {{ end }}
         </ul>
         </div>
+        <a class="btn btn--ghost cal-cta cal-legend__cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
       </section>
 
       {{/* This page builds its own rail, so it never goes through
@@ -217,8 +218,10 @@
     <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
     directory, and refreshed daily. If your JUG is missing or its events
     aren't showing up, add or fix its entry there &mdash; it appears here automatically.
-    Conferences, workshops and other one-offs have no such feed, so they are added by
-    pull request: one small
+    Conferences come from <a href="{{ "java-conferences/" | relURL }}">javaconferences.org</a>,
+    where a missing one is added by
+    <a href="https://github.com/javaconferences/javaconferences.github.io" target="_blank" rel="noopener">pull request</a>.
+    Workshops, webinars and anything else without a feed are added here by pull request: one small
     <a href="{{ $repoEvents }}" target="_blank" rel="noopener">YAML file per event</a>.
     {{ with $cal.generatedAt }}<br><span class="cal-source__synced">Last synced {{ dateFormat "2 January 2006, 15:04 MST" . }}.</span>{{ end }}
     {{ with $errored }}<br><span class="cal-source__errors">{{ len . }} group{{ if gt (len .) 1 }}s{{ end }} could not be synced last time: {{ delimit . ", " }}.</span>{{ end }}

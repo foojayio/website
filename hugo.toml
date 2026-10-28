@@ -351,10 +351,18 @@ enableGitInfo = true
     desc = "Find a JUG near you on the world map"
 
 [[menu.main]]
+  name = "Java Conferences"
+  parent = "Resources"
+  url = "/java-conferences/"
+  weight = 25
+  [menu.main.params]
+    desc = "Upcoming Java conferences and their calls for papers, on a map"
+
+[[menu.main]]
   name = "Java Champions"
   parent = "Resources"
   url = "/java-champions/"
-  weight = 25
+  weight = 26
   [menu.main.params]
     desc = "The community members recognized by the Java Champions program"
 

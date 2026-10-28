@@ -8,7 +8,7 @@
 
      Returns a dict:
        events      every upcoming event, sorted by start time
-       conferences just the hand-added ones, sorted (the /calendar/ legend)
+       conferences the hand-added and javaconferences.org ones, sorted (the /calendar/ legend)
        errored     names of JUG groups whose last sync failed
        generatedAt when the JUG feed was last synced
 
@@ -118,7 +118,34 @@
      entries. */}}
 {{ $today := now.Format "2006-01-02" }}
 {{ $conferences := slice }}
-{{ range $slug, $c := (index hugo.Data "events" | default dict) }}
+{{/* Conferences from javaconferences.org (data/java-conferences.yaml) join the
+     hand-added ones, with the same keys. A hand-written file wins: a generated
+     entry is dropped when one starts within three days and has the same website
+     host or the same city, so nobody has to delete anything to correct an entry. */}}
+{{ $handEvents := index hugo.Data "events" | default dict }}
+{{ $handKeys := slice }}
+{{ range $handEvents }}
+  {{ if and .url .start }}
+    {{ $handKeys = $handKeys | append (dict "host" (strings.TrimPrefix "www." (urls.Parse .url).Host) "city" (lower (.city | default "-")) "at" (time.AsTime .start).Unix) }}
+  {{ end }}
+{{ end }}
+{{ $eventSources := $handEvents }}
+{{ range (index hugo.Data "java-conferences" | default slice) }}
+  {{ $covered := false }}
+  {{ $host := strings.TrimPrefix "www." (urls.Parse (.url | default "")).Host }}
+  {{ $at := (time.AsTime .start).Unix }}
+  {{ $city := lower (.city | default "+") }}
+  {{ range $handKeys }}
+    {{ if and (or (eq .host $host) (eq .city $city)) (le (math.Abs (sub .at $at)) 259200) }}{{ $covered = true }}{{ end }}
+  {{ end }}
+  {{ if not $covered }}
+    {{ $eventSources = merge $eventSources (dict (printf "conf-%s" .slug) (dict
+        "name" .name "type" "Conference" "url" (.url | default "")
+        "start" .start "end" .end "city" (.city | default "") "country" (.country | default "")
+        "online" .online)) }}
+  {{ end }}
+{{ end }}
+{{ range $slug, $c := $eventSources }}
   {{/* A README.md sitting in the folder is not an entry. Hugo ignores it (it
        only reads yaml/json/toml), but guard anyway: a file that somehow parses
        without a name is skipped rather than rendered as a blank row. */}}

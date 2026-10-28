@@ -38,6 +38,7 @@ the **source** instead.
 |------|----------------|-------------|
 | `data/jugs.yaml` | `fetch/Jugs.java` | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs) |
 | `data/java-champions.yaml` | `fetch/JavaChampions.java` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions) |
+| `data/java-conferences.yaml` | `fetch/JavaConferences.java` | [javaconferences.org](https://javaconferences.org/) |
 | `data/jug-events.json` | `fetch/JugEvents.java` | the JUG's own calendar feed, via GlobalWWJugs |
 | `data/views.json` | `fetch/ViewCounts.java` | the counter itself |
 | `data/legacy-views.json` | `transfer/LegacyViews.java` | — kept in the repo because it is the **only** copy; the numbers vanish with WordPress |
@@ -75,7 +76,7 @@ Pagefind.
 | Workflow | Trigger | Does |
 |---|---|---|
 | `build-deploy.yml` | push to `main` | refreshes the generated `data/*`, commits them back with `[skip ci]`, builds, runs Pagefind, deploys to Pages |
-| `sync-external-content.yml` | daily | JUG list, Java Champions, JUG events |
+| `sync-external-content.yml` | daily | JUG list, Java Champions, Java conferences, JUG events |
 | `sync-view-counts.yml` | 4×/day | read counts — the one thing that moves continuously |
 | `pr-check.yml` | pull requests | `validate/Frontmatter.java` + a full build (GitHub Pages has no per-PR preview URL, so this is the review signal) |
 

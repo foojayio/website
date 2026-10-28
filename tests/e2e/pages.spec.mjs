@@ -9,7 +9,7 @@ const BASE = basePath();
  * BuiltSite.java cannot see, because both only exist once a browser runs the
  * page. Which pages these are comes from the build itself -- see discover.mjs.
  */
-const KINDS = ['home', 'today', 'pager', 'search', 'calendar', 'jugs', 'champions',
+const KINDS = ['home', 'today', 'pager', 'search', 'calendar', 'jugs', 'champions', 'conferences',
   'sitemap', 'sponsors', 'board', 'author', 'category', 'sponsor', 'pedia',
   'code', 'gallery', 'video'];
 

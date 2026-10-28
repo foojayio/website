@@ -89,6 +89,12 @@ jobs:
           GEOCODE_API_KEY: ${{ secrets.GEOCODE_API_KEY }}
         run: jbang scripts/fetch/JavaChampions.java 2>&1 | tee -a "$SYNC_LOG"
 
+      # ONE public request: conferences.json from javaconferences.org, the
+      # list behind /java-conferences/ and the conferences on /calendar/.
+      # Needs no credential; see the script.
+      - name: Refresh Java conferences
+        run: jbang scripts/fetch/JavaConferences.java 2>&1 | tee -a "$SYNC_LOG"
+
       # ~150 requests across meetup.com, Google Calendar and the JUGs' own
       # sites: an iCal feed per JUG, then a page per event that still needs a
       # venue. Needs no credential; see the script.
@@ -115,7 +121,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           .github/scripts/sync-health.sh "$SYNC_LOG" .github/sync-health.json \
-            jugs java-champions jug-events jvm-weekly
+            jugs java-champions java-conferences jug-events jvm-weekly
 
       - name: Commit updated data
         env:
@@ -131,7 +137,7 @@ jobs:
           # the same deploy decision below: it is bookkeeping for the health
           # check above, not content, and opening or closing a tracking issue
           # must not by itself spend a deploy.
-          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/jug-events.json data/jvm-weekly.yaml .github/sync-health.json
+          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/java-conferences.yaml data/jug-events.json data/jvm-weekly.yaml .github/sync-health.json
           if git diff --cached --quiet; then
             echo "No JUG list, Java Champions, event, JVM Weekly or sync-health changes."
           else
@@ -140,7 +146,7 @@ jobs:
             else
               data_changed=true
             fi
-            git commit -m "chore: sync JUG list + Java Champions + JUG events + JVM Weekly [skip ci]"
+            git commit -m "chore: sync JUG list + Java Champions + conferences + JUG events + JVM Weekly [skip ci]"
             # PUSH WITH RETRY, because pull-then-push has a window. main had
             # THREE writers when this loop was written -- this workflow, the
             # other sync, and build-deploy.yml's own data commit -- and the

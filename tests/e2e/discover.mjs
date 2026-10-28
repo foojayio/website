@@ -39,6 +39,7 @@ const FIXED = {
   calendar: 'calendar/',
   jugs: 'jugs/',
   champions: 'java-champions/',
+  conferences: 'java-conferences/',
   sitemap: 'sitemap/',
   sponsors: 'our-sponsors/',
   board: 'board/',

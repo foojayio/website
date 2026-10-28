@@ -2,6 +2,19 @@
 
 Two things arrive here by pull request: **articles** and **calendar events**.
 
+Some lists on the site are **not edited here at all**, because a community
+project already maintains them and foojay.io refreshes its copy every day. A
+fix made in this repo is overwritten at the next sync, so send it to the
+source instead:
+
+| What | Where it is maintained | Shown on foojay.io at |
+|------|------------------------|-----------------------|
+| Java User Groups (and their meetup calendars) | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs) — one small file per JUG | [/jugs/](https://foojay.io/jugs/), [/calendar/](https://foojay.io/calendar/) |
+| Java Champions | [aalmiray/java-champions](https://github.com/aalmiray/java-champions/edit/main/java-champions.yml) — `java-champions.yml` | [/java-champions/](https://foojay.io/java-champions/) |
+| Java conferences, dates and CFPs | [javaconferences/javaconferences.github.io](https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md) — `README.md` | [/java-conferences/](https://foojay.io/java-conferences/), [/calendar/](https://foojay.io/calendar/) |
+
+Everything under `data/` that these produce is generated. Never edit it by hand.
+
 ## Code of Conduct
 
 Everyone who contributes here agrees to follow our
@@ -68,8 +81,8 @@ See the guide linked above for the details.
 
 ## Adding an event to the calendar
 
-[foojay.io/calendar/](https://foojay.io/calendar/) carries two kinds of event,
-and they arrive by two different routes. Pick the right one:
+[foojay.io/calendar/](https://foojay.io/calendar/) carries three kinds of event,
+and they arrive by different routes. Pick the right one:
 
 ### A Java User Group meetup — nothing to do here
 
@@ -78,31 +91,41 @@ already publishes (its own `.ics`, a Google Calendar, or Meetup's export).
 Nothing in this repo is hand-edited for them.
 
 If your JUG's events are missing, the fix belongs **upstream**, in the
-community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs):
+community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs):
 add or correct your group's file there, giving it a `calendar:` (any iCal URL)
 or a `meetup:` entry. It shows up on foojay's calendar at the next daily sync,
 and on every other site that reads the directory too.
 
-### A conference, workshop or other one-off — one small file
+### A Java conference — add it to javaconferences.org
 
-Conferences publish no feed anyone can subscribe to, so they are added by hand:
+Conferences are pulled in daily from [javaconferences.org](https://javaconferences.org/),
+the community list of upcoming Java conferences. If yours is missing, or a date,
+location or call for papers is wrong, send a pull request to the
+[`README.md` of that repository](https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md)
+(one table row per conference). It appears on foojay.io's
+[/java-conferences/](https://foojay.io/java-conferences/) map and on the calendar
+at the next daily sync, and on javaconferences.org itself. **Don't add a file to
+`data/events/` for a conference that belongs on that list.**
+
+### A workshop, webinar or other one-off — one small file
+
+These have no list or feed to join, so they are added by hand:
 
 1. Copy [`template/event.yaml`](template/event.yaml) to
    `data/events/<event-slug>.yaml`.
 2. Name the file after the event **including its year** —
-   `devoxx-belgium-2026.yaml`, `jfokus-2027.yaml`. Lowercase letters, digits
+   `ai-coding-workshop-berlin-2026.yaml`, `ocx-webinar-week-2026.yaml`. Lowercase letters, digits
    and dashes only. Next year's edition is a new file, not an edit of this one.
 3. Fill it in and open a pull request. Nothing else needs touching.
 
 ```yaml
-name: "Devoxx Belgium 2026"
-type: "Conference"
-url: "https://devoxx.be/"
-start: "2026-10-05"
-end: "2026-10-09"
-venue: "Kinepolis Antwerpen"
-city: "Antwerp"
-country: "Belgium"
+name: "AI Coding Workshop Berlin 2026"
+type: "Workshop"
+url: "https://example.org/ai-coding-workshop/"
+start: "2026-09-15"
+venue: "Example Venue"
+city: "Berlin"
+country: "Germany"
 ```
 
 | Field | Required | Notes |

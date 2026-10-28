@@ -1763,8 +1763,8 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .page-head__stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
 .page-head__stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 
-/* Two ways onto the calendar, so two buttons: an event by a pull request here,
-   a JUG upstream in the World Wide JUGs directory. Wrapped so they sit together
+/* Three ways onto the calendar, so three buttons: an event by a pull request
+   here, a conference or a JUG upstream. Wrapped so they sit together
    rather than inheriting the aside's 1.5rem section gap. */
 .cal-ctas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: .5rem; }
 /* Side by side in a 300px rail, so they need to be narrower than a default
@@ -1774,6 +1774,9 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   justify-self: stretch; justify-content: center; text-align: center;
   padding: .5rem .6rem; font-size: .85rem; white-space: normal;
 }
+
+/* The add-to-this-list button under a legend: full width, a step clear of the list. */
+.cal-legend__cta { display: flex; margin-top: .75rem; }
 
 /* The group legend doubles as the key to the grid's dots and as the list of
    which JUGs actually have something coming up. */
@@ -2445,6 +2448,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    nothing said why. Measured in the browser, not reasoned about. */
 .prose .champions-table a,
 .prose .jugs-table a,
+.prose .conferences-table a,
 .prose .cluster-map a,
 .prose .leaflet-container a,
 .prose .gallery a,
@@ -2715,6 +2719,13 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }
 .jugs-table__edit { text-decoration: none; opacity: .55; }
 .jugs-table__edit:hover { opacity: 1; }
+
+/* /java-conferences/ page: data/java-conferences.yaml
+   (themes/foojay/layouts/conferences/single.html) */
+.conferences-source-note { font-size: .92rem; color: var(--ink-muted); }
+.conferences-table__when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.conferences-table__tag { font-size: .78rem; color: var(--ink-muted); }
+.conferences-table td:first-child a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* /java-champions/ page: data/java-champions.yaml source note + table
    (themes/foojay/layouts/champions/single.html) */
@@ -3166,6 +3177,7 @@ body.lightbox-open { overflow: hidden; }
    stylesheet, but `display: table-row` from the table's own layout wins over
    it, so a hidden <tr> stays visible without the override. */
 .jugs-table tbody tr[hidden] { display: none !important; }
+.conferences-table tbody tr[hidden] { display: none !important; }
 .champions-table tbody tr[hidden] { display: none !important; }
 .sitemap-table tbody tr[hidden] { display: none !important; }
 .list-filter__empty { color: var(--ink-muted); margin: 0; }

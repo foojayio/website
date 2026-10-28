@@ -44,6 +44,29 @@ All run daily from `sync-external-content.yml`, commit their result, then
   would hide the typo. Flags: `--no-geocode`, `--geocode-limit N`,
   `--geocode-key`.
 
+- **`JavaConferences.java`** regenerates `data/java-conferences.yaml` from
+  [javaconferences.org](https://javaconferences.org/), the site built from
+  [javaconferences/javaconferences.github.io](https://github.com/javaconferences/javaconferences.github.io).
+  It reads the site's published `conferences.json`, not the README it is edited
+  in: same list, already geocoded, so **no geocoder and no key**. Fix an entry
+  with a PR upstream.
+
+  Three behaviours are load-bearing:
+  - **Dates are free text** (`31 January-1 February 2026`) and parsed here to
+    ISO. One that does not parse is **reported and skipped, never guessed**.
+  - **Past conferences stay in the file.** Filtering here would change it daily
+    and deploy on a date; `/java-conferences/` and the calendar drop an event
+    once it has ended.
+  - **It feeds the calendar without writing `data/events/` files.**
+    `partials/calendar-events.html` adds these as a second source, and a
+    hand-written event file **wins**: a generated entry is dropped when one
+    starts within three days and shares a website host or a city. Generated
+    files in that folder would go stale, mix with hand-curated ones, and need
+    deleting.
+
+  Same keep-the-committed-file guards as `Jugs.java` (unreachable source, or
+  fewer than half the committed entries; `--allow-shrink`).
+
 - **`JugEvents.java`** writes `data/jug-events.json`. **Needs no credential and
   is not Meetup-specific**: it speaks iCal to whatever a JUG publishes —
   `calendar:` from `data/jugs.yaml` first, else `meetup_slug` →
@@ -184,6 +207,8 @@ Never hand-edit any of these.
 - **`data/geocode-cache.yaml`** — `fetch/JavaChampions.java`. Place string →
   coordinates, or `found: false`. **Do** delete an entry, or the whole file, to
   force a fresh lookup; a full rebuild is ~250 requests inside the free tier.
+- **`data/java-conferences.yaml`** — `fetch/JavaConferences.java`, rendered at
+  `/java-conferences/` and read by the calendar. Fix an entry upstream.
 - **`data/jug-events.json`** — `fetch/JugEvents.java`. Read as
   `index hugo.Data "jug-events"`; a dash cannot be a field selector.
 - **`data/jvm-weekly.yaml`** — `fetch/JvmWeekly.java`, read the same way.

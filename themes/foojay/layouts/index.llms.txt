@@ -145,5 +145,6 @@ The 50 most recent of {{ len $posts }}. The complete list is in the sitemaps abo
 - [Authors]({{ "today/author/" | absURL }}): profiles for all {{ len $authors }} contributors, each with their own article list and feed.
 - [Java User Groups]({{ "jugs/" | absURL }}): the community-run World Wide JUGs directory, on a map.
 - [Java Champions]({{ "java-champions/" | absURL }}): the Java Champions programme membership, on a map.
+- [Java conferences]({{ "java-conferences/" | absURL }}): upcoming Java conferences and their calls for papers, on a map.
 - [Events calendar]({{ "calendar/" | absURL }}): upcoming JUG meetups and Java conferences.
 - [Write for Foojay]({{ "today/how-to-submit-your-next-article-on-foojay-io/" | absURL }}): how to contribute an article.
