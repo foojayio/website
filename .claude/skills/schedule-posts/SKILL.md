@@ -66,8 +66,11 @@ history rather than a delete plus an add.
 ### Resize the images
 
 ```
-python3 .claude/skills/schedule-posts/resize_images.py --path content/posts/YYYY/MM/DD/SLUG
+~/.venvs/foojay-images/bin/python .claude/skills/schedule-posts/resize_images.py --path content/posts/YYYY/MM/DD/SLUG
 ```
+
+Pillow lives in a venv because Homebrew's Python refuses `pip install`. If the
+venv is missing: `python3 -m venv ~/.venvs/foojay-images && ~/.venvs/foojay-images/bin/pip install Pillow`.
 
 Run this after the move, on the new path. It caps the long edge at 1600px,
 converts a PNG over 100 KB to JPEG and an animated GIF to WebP, and gives an

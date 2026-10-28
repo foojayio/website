@@ -112,7 +112,9 @@ from pathlib import Path
 try:
     from PIL import Image, ImageSequence
 except ImportError:
-    sys.exit("needs Pillow:  python3 -m pip install --user Pillow")
+    sys.exit("needs Pillow (Homebrew Python refuses pip --user):\n"
+             "  python3 -m venv ~/.venvs/foojay-images && ~/.venvs/foojay-images/bin/pip install Pillow\n"
+             "then run this script with ~/.venvs/foojay-images/bin/python")
 
 Image.MAX_IMAGE_PIXELS = None
 
