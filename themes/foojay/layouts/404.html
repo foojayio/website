@@ -19,12 +19,13 @@
   <p><a href="{{ site.Home.RelPermalink }}">&larr; Back to the homepage</a></p>
 
   {{/* Filled by the script below from the dead URL's last segment. */}}
-  <section class="nf-suggest" id="nf-suggest" aria-labelledby="nf-suggest-title" hidden>
-    <h2 id="nf-suggest-title">Were you looking for&hellip;?</h2>
-    <ul id="nf-suggest-list"></ul>
+  <section class="nf-suggest" id="nf-suggest" aria-labelledby="nf-suggest-title">
+    <div class="nf-suggest__inner">
+      <h2 id="nf-suggest-title">Were you looking for&hellip;?</h2>
+      <ul id="nf-suggest-list"></ul>
+    </div>
   </section>
 
-  {{/* Shown until the search above finds something. */}}
   <section class="nf-fallback" id="nf-fallback">
     <h2>Latest articles</h2>
     <div class="post-grid">
@@ -71,8 +72,7 @@
       li.appendChild(a);
       list.appendChild(li);
     });
-    document.getElementById('nf-suggest').hidden = false;
-    document.getElementById('nf-fallback').hidden = true;
+    document.getElementById('nf-suggest').classList.add('is-open');
   }).catch(function () {});
 })();
 </script>
