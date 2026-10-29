@@ -85,6 +85,20 @@ SYM_KAFKA_BOOTSTRAP_SERVERS=<the cluster's bootstrap address>
 SPRING_PROFILES_ACTIVE=local
 ```
 
+The `local` profile needs no Kafka address of its own: it points the stream cluster at Halyx's in-process broker, with no authentication:
+
+```yaml
+halyx:
+  providers:
+    local:
+      type: memory
+  stream-clusters:
+    voices:
+      bootstrap-servers: memory:9092
+      auth:
+        type: none
+```
+
 The build includes all three provider modules, `halyx-aws`, `halyx-azure` and `halyx-gcp`, so one jar runs anywhere and you build and test one artifact. Halyx uses resources but doesn't create them: the tables, the bucket and the topic come from your infrastructure-as-code.
 
 ## The same code on every cloud
@@ -149,12 +163,14 @@ The optional cache profile backs Spring's cache abstraction with ElastiCache, Az
 
 ```java
 @ExceptionHandler(CloudException.class)
-ProblemDetail unavailable(CloudException e) {
-    return ProblemDetail.forStatusAndDetail(HttpStatus.SERVICE_UNAVAILABLE, "try again later");
+ProblemDetail cloudFailure(CloudException e) {
+    return e.isRetryable()
+            ? ProblemDetail.forStatusAndDetail(HttpStatus.SERVICE_UNAVAILABLE, "try again later")
+            : ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 }
 ```
 
-Failures raise the same exception types on every cloud, so one handler covers all three. Nothing in sym catches a DynamoDB, Cosmos DB or Firestore exception.
+Failures raise the same exception types on every cloud, so one handler covers all three. `isRetryable()` is true only for `ThrottledException` and `UnavailableException`, so only those tell the client to try again; an `AccessDeniedException` or `InvalidArgumentException` is a fault in the service or its permissions, and retrying won't fix it. A missing message or image is handled earlier, as a `NotFoundException` that sym turns into a 404. Nothing in sym catches a DynamoDB, Cosmos DB or Firestore exception.
 
 That's all of it. sym is 12 files and about 300 lines of code, and none of them knows which cloud it's on.
 
@@ -193,7 +209,7 @@ Halyx makes the code portable; it doesn't make the clouds identical. A few thing
 - **Not every feature exists everywhere.** Differences are declared as capabilities rather than hidden: Pub/Sub has no message deduplication or delayed delivery, Halyx doesn't declare Kafka transactions on Event Hubs, and presigned URLs on Google Cloud need credentials that can sign. Code checks a capability with `supports()` or asserts it with `require()`, and an unsupported call throws `UnsupportedFeatureException` rather than being silently ignored.
 - **Each cloud's limits still apply.** A document can be 400 KB on DynamoDB but 2 MB on Cosmos DB, secondary indexes are eventually consistent on DynamoDB, and Firestore stores decimals as doubles. A portable data design keeps to the strictest of the three.
 - **Native features leave the portable path.** `unwrap` hands you the configured SDK client for things like S3 Object Lock or the Cosmos DB change feed. Keep those calls behind one interface of your own, because on another cloud they fail by design.
-- **Infrastructure and retries are yours.** Halyx doesn't create tables, buckets or topics, doesn't retry a throttled batch for you, and doesn't wait out eventual consistency.
+- **Infrastructure and retries are yours.** Halyx doesn't create tables, buckets or topics, doesn't wait out eventual consistency, and doesn't add retries of its own by default: the cloud SDKs already retry transient failures. For uniform retries across clouds, install the opt-in `RetryInterceptor`, which retries idempotent operations that fail with a throttling or unavailability error.
 - **It's Java.** Halyx needs Java 21 or later. A polyglot estate needs something like Dapr for its other languages.
 
 ## How Halyx differs from Spring Cloud and Dapr
