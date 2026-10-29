@@ -80,6 +80,23 @@ In order of preference:
 
 If you have write access to the repository, create your folder under **`draft/your-slug/`**, commit it, and open a pull request. A maintainer reviews it and moves it into place. If you'd like this access, just ask — mention it in your first pull request or in an email to us.
 
+You don't need the full 2 GB clone either. Download only the folders an article touches, and push your branch straight to the repository:
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/foojayio/website.git
+cd website
+git sparse-checkout set draft template
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit index.md, add your images to the same folder
+git add draft/your-slug
+git commit -m "Add article: <your title>"
+git push -u origin my-article
+```
+
+GitHub prints a link in the output of the push to open the pull request. If you are also adding an author profile, add `content/authors` to the `sparse-checkout set` line and `git add content/authors/<your-slug>` as well.
+
 ### Option 2 — Pull request (from a fork)
 
 No access yet? Add your **`draft/your-slug/`** folder to your own fork of the repository and open a pull request from there back to the main repository. You need a free GitHub account, but you do **not** need to clone the whole repository: with its history and years of images it is around 2 GB, and you only need to add a few files. Pick whichever of these fits you:
@@ -98,7 +115,7 @@ If you already have an old fork, use **Sync fork** on its page first, or your pu
 
 #### On your computer, with a small clone
 
-If you prefer your own editor, [fork the repository](https://github.com/foojayio/website/fork) and download only what you need: a shallow clone without history, restricted to the few folders an article touches.
+If you prefer your own editor, [fork the repository](https://github.com/foojayio/website/fork) and download only what you need: a shallow clone of your fork without history, restricted to the few folders an article touches. (If you have write access, see Option 1 for the same commands against the main repository.)
 
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/<your-github-name>/website.git

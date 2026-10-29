@@ -102,6 +102,9 @@ If you already have an old fork, use **Sync fork** first.
 
 **With a shallow, sparse clone** (your own editor, a few MB instead of 2 GB)
 
+*No write access:* [fork the repository](https://github.com/foojayio/website/fork)
+and clone your fork.
+
 ```bash
 git clone --depth 1 --filter=blob:none --sparse https://github.com/<you>/website.git
 cd website
@@ -114,6 +117,26 @@ git add draft/your-slug
 git commit -m "Add article: <title>"
 git push -u origin my-article
 ```
+
+*Invited as a writer on `foojayio/website`:* no fork needed, clone the
+repository itself and push your branch to it.
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/foojayio/website.git
+cd website
+git sparse-checkout set draft template
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit, add images, then:
+git add draft/your-slug
+git commit -m "Add article: <title>"
+git push -u origin my-article
+```
+
+In both cases open the pull request from the link `git push` prints. Add
+`content/authors` to the `sparse-checkout set` line if you are also creating
+an author profile.
 
 Only part of the tree is checked out, so `hugo server` won't work from this
 clone; the PR check builds the site for you. To preview, use a full clone.
