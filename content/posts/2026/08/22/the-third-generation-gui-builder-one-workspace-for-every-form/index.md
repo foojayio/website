@@ -8,6 +8,7 @@ authors:
 image: "third-generation-gui-builder.jpg"
 categories:
   - "Java"
+  - "Codename One"
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

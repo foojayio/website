@@ -4,7 +4,7 @@ date: "2026-09-30"
 description: "Codename One tackles GC, maps, startup, and JavaScript overhead, and adds native drag and drop plus cross-device continuity. Javadoc joins website search..."
 authors: ["shai-almog"]
 image: "performance-work-between-benchmarks-add0d8fe44.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/performance-work-between-benchmarks/"
 related_posts:
   - "voip-vpn-builders"

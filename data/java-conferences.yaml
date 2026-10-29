@@ -5,7 +5,7 @@
 # (.github/workflows/sync-external-content.yml) and overwrites any change.
 #
 # To add, fix or remove a conference, send a pull request to that repository's
-# README.md: https://github.com/javaconferences/javaconferences.github.io/edit/main/README.md
+# README.md: https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md
 #
 # Read by /java-conferences/ (the map) and /calendar/. A conference with its own
 # file in data/events/ is shown from that file instead.
@@ -218,8 +218,8 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8534951
-  longitude: 2.3483915
+  latitude: 48.8588897
+  longitude: 2.320041
   cfp_url: https://devoxxfr2026.cfp.dev/
   cfp_closes: '2026-01-11'
 - slug: devoxx-greece-2026
@@ -564,8 +564,8 @@
   hybrid: false
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: https://app.confitura.pl/login
   cfp_closes: '2026-06-07'
 - slug: jug-saxony-day-2026
@@ -655,8 +655,8 @@
   hybrid: true
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: '[https://forms.gle/nKreGcpfzx4zsLhU7](https://docs.google.com/forms/d/e/1FAIpQLSc9ITG71szuMVGbAUHrquGy4Fq6fgKvukKP10dWrqvMErmfqw/viewform'
   cfp_closes: '2026-08-23'
 - slug: jdd-2026
@@ -1027,8 +1027,8 @@
   hybrid: false
   city: Kraków
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://sessionize.com/kotlinconf-2027
   cfp_closes: '2026-11-27'
 - slug: jcon-europe-2027
@@ -1103,6 +1103,19 @@
   country: United Kingdom
   latitude: 55.9533456
   longitude: -3.1883749
+- slug: jnation-2027
+  name: JNation
+  url: https://jnation.pt/
+  start: '2027-05-25'
+  end: '2027-05-26'
+  online: false
+  hybrid: false
+  city: Coimbra
+  country: Portugal
+  latitude: 40.2111874
+  longitude: -8.4291478
+  cfp_url: https://sessionize.com/jnation-2027/
+  cfp_closes: '2027-01-08'
 - slug: j-spring-2027
   name: J-Spring
   url: https://jspring.nl/

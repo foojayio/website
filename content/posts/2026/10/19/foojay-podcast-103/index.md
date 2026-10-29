@@ -12,6 +12,7 @@ categories:
   - "Kotlin"
   - "Performance"
   - "Podcast"
+  - "Codename One"
 related_posts:
   - "reflection-free-serialization-on-the-jvm-four-formats-in-avro-out"
   - "openapi-orm-svg-and-lottie"

@@ -8,6 +8,7 @@ authors:
 image: "Screenshot-2026-09-03-at-11.35.41-AM.jpg"
 categories:
   - "AI"
+  - "Mongo"
 related_posts:
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "inside-the-engine-the-sub-millisecond-performance-relay-of-mongodb-8-0"

@@ -4,7 +4,7 @@ date: "2026-10-16"
 description: "Adopt Xcode 27 without moving your redesign schedule. This week: Liquid Glass, a JPA inspired ORM, OpenTelemetry, WebSockets and push callbacks."
 authors: ["shai-almog"]
 image: "who-decides-your-app-redesign-e9b18f15b8.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/who-decides-your-app-redesign/"
 ---
 

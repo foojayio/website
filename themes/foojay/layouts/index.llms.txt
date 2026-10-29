@@ -74,10 +74,12 @@ Content is copyright its respective authors and is published under the terms at
 
 Everything not listed below is one link away. Use these rather than crawling:
 
-- [XML sitemap]({{ "sitemap.xml" | absURL }}): every published URL on the site, each with a last-modified date. This is the authoritative, complete list.
+- [XML sitemap]({{ "sitemap.xml" | absURL }}): every canonical URL on the site, each with a last-modified date. Cross-posts whose original lives elsewhere are left out. This is the authoritative, complete list.
 - [HTML sitemap]({{ "sitemap/" | absURL }}): the same tree rendered for people, with sortable tables of all {{ len $posts }} articles and all {{ len $authors }} authors.
 - [RSS feed]({{ with site.Home.OutputFormats.Get "rss" }}{{ .Permalink }}{{ end }}): the 30 most recent articles. Every category and every author profile has a feed of its own, linked from its page.
 - [Search]({{ "search/" | absURL }}): full-text search across the site.
+- [Full reference text]({{ "llms-full.txt" | absURL }}): the glossary and the Java Quick Start, complete, in one file.
+- Markdown versions: every article and glossary entry is also served as Markdown at its own URL plus `index.md`, for example {{ with index $posts 0 }}{{ .Permalink }}index.md{{ end }} .
 {{ range site.Menus.footer }}
 ## {{ .Name }}
 {{ range .Children -}}

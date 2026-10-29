@@ -8,6 +8,7 @@ authors:
 image: "app-shield-server-attestation.jpg"
 categories:
   - "Java"
+  - "Codename One"
 related_posts:
   - "sqlite-across-every-port-one-contract-one-encrypted-file-format"
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

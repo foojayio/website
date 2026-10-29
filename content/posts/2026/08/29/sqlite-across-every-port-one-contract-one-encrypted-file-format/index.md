@@ -8,6 +8,7 @@ authors:
 image: "sqlite-portable-encrypted.jpg"
 categories:
   - "Java"
+  - "Codename One"
 related_posts:
   - "app-shield-your-server-should-not-trust-the-app-calling-it"
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

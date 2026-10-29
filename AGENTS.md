@@ -112,12 +112,11 @@ See `scripts/validate/AGENTS.md` (`Frontmatter.java`, `BuiltSite.java`) and
   files **before** the Hugo step, so anything that makes that push fail takes
   the deploy down with it.
 
-  **`hugo-version` is PINNED, here and in `pr-check.yml`.**
-  `peaceiris/actions-hugo` resolves `latest` through `formulae.brew.sh`, so an
-  `ECONNRESET` from Homebrew's API failed a deploy before Hugo was even
-  downloaded. Same argument that vendored Leaflet, mermaid and the webfonts. A
-  pin also means the site is built by the version it was developed against.
-  Move it deliberately, in both files, having built locally on it first.
+  **`hugo-version` is `latest`, here and in `pr-check.yml`**, by decision.
+  `peaceiris/actions-hugo` resolves it through `formulae.brew.sh`, so an
+  `ECONNRESET` from Homebrew's API can fail a run before Hugo is downloaded:
+  re-run it. A Hugo release that changes a template function shows up as a red
+  build, not a silent one.
 
 - **Three workflows push to `main`, the concurrency group covers only two, so
   every push RETRIES.** The two syncs share `concurrency: data-sync`;

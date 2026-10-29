@@ -17,5 +17,63 @@
      the correct form), so "/" came out as a bare "/" and left the /website/
      trial deploy for the GitHub Pages root. */}}
   <p><a href="{{ site.Home.RelPermalink }}">&larr; Back to the homepage</a></p>
+
+  {{/* Filled by the script below from the dead URL's last segment. */}}
+  <section class="nf-suggest" id="nf-suggest" aria-labelledby="nf-suggest-title">
+    <div class="nf-suggest__inner">
+      <h2 id="nf-suggest-title">Were you looking for&hellip;?</h2>
+      <ul id="nf-suggest-list"></ul>
+    </div>
+  </section>
+
+  <section class="nf-fallback" id="nf-fallback">
+    <h2>Latest articles</h2>
+    <div class="post-grid">
+      {{ range first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse }}{{ partial "post-card.html" . }}{{ end }}
+    </div>
+
+    <h2>Popular topics</h2>
+    <ul class="nf-topics">
+      {{ range first 8 site.Taxonomies.categories.ByCount }}
+      <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+      {{ end }}
+    </ul>
+
+    {{ with site.GetPage "/pages/java-quick-start" }}
+    <h2>New to Java?</h2>
+    <p><a href="{{ .RelPermalink }}">{{ .Title }}</a>: {{ partial "meta-description.html" . }}</p>
+    {{ end }}
+  </section>
 </div>
+
+{{/* Same client-side Pagefind index /search/ uses, so this needs no service
+     and shows nothing where there is no index (a plain `hugo server`). */}}
+<script>
+(function () {
+  var seg = location.pathname.replace(/\.html$/, '').split('/').filter(function (s) {
+    return s && !/^(index|page|\d+)$/.test(s);
+  }).pop();
+  if (!seg) return;
+  var query;
+  try { query = decodeURIComponent(seg).replace(/[-_+.]+/g, ' ').trim(); } catch (e) { return; }
+  if (query.length < 3) return;
+  import({{ "pagefind/pagefind.js" | relURL }}).then(function (pf) {
+    // Articles and glossary entries only: a lost reader wants one of those.
+    return pf.search(query, { filters: { section: { any: ['posts', 'pedia'] } } });
+  }).then(function (res) {
+    return Promise.all(res.results.slice(0, 5).map(function (r) { return r.data(); }));
+  }).then(function (hits) {
+    if (!hits.length) return;
+    var list = document.getElementById('nf-suggest-list');
+    hits.forEach(function (h) {
+      var li = document.createElement('li'), a = document.createElement('a');
+      a.href = h.url;
+      a.textContent = (h.meta && h.meta.title) || h.url;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    document.getElementById('nf-suggest').classList.add('is-open');
+  }).catch(function () {});
+})();
+</script>
 {{ end }}

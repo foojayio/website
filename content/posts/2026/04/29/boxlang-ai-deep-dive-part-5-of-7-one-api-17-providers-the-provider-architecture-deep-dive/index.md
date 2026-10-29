@@ -12,6 +12,7 @@ categories:
   - "GenAI"
   - "Java"
   - "Tutorials"
+  - "BoxLang"
 related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"

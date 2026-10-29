@@ -19,6 +19,7 @@ frontmatter.
 - Campaigns
 - Chronicle Software
 - Cloud
+- Codename One
 - Conference
 - CRaC
 - Data Engineering

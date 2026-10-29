@@ -1875,7 +1875,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    and prose in a 300px column is a stack of four-word lines that crowds out
    the legends the rail is actually for. */
 .cal-source {
-  max-width: 75ch; margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
   color: var(--ink-muted); font-size: .85rem; line-height: 1.55;
 }
 .cal-source__synced { display: inline-block; margin-top: .35rem; }
@@ -4578,3 +4578,21 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   margin: 0; font-size: .8rem; text-transform: uppercase;
   letter-spacing: .04em; color: var(--ink-muted);
 }
+
+/* 404: suggestions from the dead URL, and the fallback lists -------- */
+/* Opens by animating from 0 height, so the fixed content below is pushed down
+   rather than replaced. visibility keeps the closed state out of the tab order. */
+.nf-suggest, .nf-fallback { max-width: 62rem; }
+.nf-suggest {
+  display: grid; grid-template-rows: 0fr; visibility: hidden; opacity: 0;
+  transition: grid-template-rows .45s ease, opacity .45s ease, visibility 0s .45s;
+}
+.nf-suggest.is-open { grid-template-rows: 1fr; visibility: visible; opacity: 1; transition-delay: 0s; }
+.nf-suggest__inner { overflow: hidden; min-height: 0; }
+.nf-suggest.is-open .nf-suggest__inner { padding: 1rem 0 .5rem; }
+@media (prefers-reduced-motion: reduce) { .nf-suggest { transition: none; } }
+.nf-fallback { margin-top: 1rem; }
+.nf-suggest h2, .nf-fallback h2 { font-size: 1.15rem; margin: 1.75rem 0 .75rem; }
+.nf-suggest h2 { margin-top: 0; }
+.nf-suggest ul { padding-left: 1.25rem; display: grid; gap: .5rem; }
+.nf-topics { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }

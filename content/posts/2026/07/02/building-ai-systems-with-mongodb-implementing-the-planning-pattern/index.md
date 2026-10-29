@@ -7,6 +7,7 @@ authors:
 image: "Technical_ACTION_Build1_Spot.jpg"
 categories:
   - "AI"
+  - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"

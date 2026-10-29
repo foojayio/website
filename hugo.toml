@@ -214,8 +214,35 @@ enableGitInfo = true
   isPlainText = true
   notAlternative = true
 
+# The same article as plain Markdown, at <page>/index.md beside the HTML, for a
+# reader that would rather not parse the theme. Switched on per section by a
+# cascade in content/posts/_index.md and content/pedia/_index.md. Not
+# notAlternative: baseof.html then advertises it as <link rel="alternate">.
+[outputFormats.MARKDOWN]
+  mediaType = "text/markdown"
+  baseName = "index"
+  isPlainText = true
+
+# /llms-full.txt -- the reference material in full (glossary and Quick Start),
+# the sibling of /llms.txt, which only links. Articles stay out: 2300 of them
+# are far too long for one file and each has its own index.md.
+[outputFormats.LLMSFULL]
+  mediaType = "text/plain"
+  baseName = "llms-full"
+  isPlainText = true
+  notAlternative = true
+
+# /.well-known/security.txt (RFC 9116). A template rather than a static file
+# because the spec requires an Expires date, and a fixed one silently goes stale.
+[outputFormats.SECURITY]
+  mediaType = "text/plain"
+  baseName = "security"
+  path = ".well-known"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS", "LLMS", "STATS"]
+  home = ["HTML", "RSS", "LLMS", "LLMSFULL", "SECURITY", "STATS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]

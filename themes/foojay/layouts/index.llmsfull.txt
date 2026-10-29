@@ -1,0 +1,30 @@
+{{- /* /llms-full.txt -- the reference pages in full, so a model can answer
+       from one fetch. The curated map is /llms.txt. Sources are the same two
+       definitions llms.txt uses: content/pedia/ and series-steps.html. */ -}}
+# {{ site.Title }}: reference material in full
+
+> {{ site.Params.description }}
+
+Content is copyright its respective authors and is published under the terms at {{ "terms-of-use/" | absURL }} .
+{{ with site.GetPage "/pages/java-quick-start/quick-start-tutorial/hello-world" }}
+{{- range partial "series-steps.html" . }}
+
+---
+
+## Java Quick Start: {{ .Title }}
+
+Source: {{ .Permalink }}
+
+{{ .RawContent }}
+{{- end }}
+{{- end }}
+{{ range sort (where site.RegularPages "Section" "pedia") "Title" }}
+
+---
+
+## {{ .Title }}
+
+Source: {{ .Permalink }}
+
+{{ .RawContent }}
+{{- end }}

@@ -4,7 +4,7 @@ date: "2026-10-24"
 description: "Own a full-stack Java ride-hailing application: rider, driver and admin apps, payments, live tracking and push."
 authors: ["shai-almog"]
 image: "create-an-uber-clone-in-1-minute-0a72804819.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/create-an-uber-clone-in-1-minute/"
 ---
 

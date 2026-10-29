@@ -60,7 +60,7 @@ jobs:
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.165.0"
+          hugo-version: "latest"
           extended: true
 
       # AsciiDoc articles (content/**/index.adoc) are rendered by asciidoctor,
@@ -236,6 +236,8 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
+          # Without it /.well-known/security.txt is dropped from the artifact.
+          include-hidden-files: true
 
   deploy:
     needs: build

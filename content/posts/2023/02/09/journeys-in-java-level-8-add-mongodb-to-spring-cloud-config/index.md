@@ -14,6 +14,7 @@ categories:
   - "Neo4J"
   - "nosql"
   - "Spring"
+  - "Mongo"
 related_posts:
   - "journeys-in-java-level-7-externalize-microservice-configuration"
   - "journeys-in-java-level-6-build-a-neo4j-microservice"

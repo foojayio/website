@@ -6,6 +6,8 @@
             renders.
          3. The home page -> Organization + WebSite, the latter carrying the
             SearchAction that can put a search box in foojay.io's own result.
+         4. A glossary entry -> DefinedTerm in the /pedia/ DefinedTermSet, and
+            a Quick Start step -> TechArticle, both from title and description.
 
        Nothing on other list/section/taxonomy pages: they are not a single
        creative work, person or site, and Google's guidance is not to mark up
@@ -61,6 +63,8 @@
     "url" .Permalink
     "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
     "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "wordCount" .WordCount
+    "isAccessibleForFree" true
     "publisher" (dict "@id" (printf "%s#organization" site.Home.Permalink))
   -}}
   {{- if not .Lastmod.IsZero }}{{ $data = merge $data (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
@@ -69,6 +73,7 @@
   {{- with .Params.categories -}}
     {{- $data = merge $data (dict "articleSection" (cond (eq (len .) 1) (index . 0) .)) -}}
   {{- end -}}
+  {{- with .Params.categories }}{{ $data = merge $data (dict "keywords" (delimit . ", ")) }}{{ end -}}
   {{- $data = merge $data (dict "inLanguage" (or site.Language.Locale site.Language.Lang "en")) -}}
   {{- with .Params.image }}{{ $data = merge $data (dict "image" (slice (partial "resource-url.html" (dict "page" $ "src" . "abs" true)))) }}{{ end -}}
   {{- if gt (len $people) 0 }}{{ $data = merge $data (dict "author" $people) }}{{ end -}}
@@ -146,5 +151,42 @@
       "query-input" "required name=search_term_string")) -}}
   {{- end -}}
   {{- $data := dict "@context" "https://schema.org" "@graph" (slice $org $site) -}}
+  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}
+
+{{- if and (eq .Section "pedia") .IsPage -}}
+  {{- $set := dict "@type" "DefinedTermSet" "name" "Java Terms Explained" -}}
+  {{- with site.GetPage "/pedia" }}{{ $set = merge $set (dict "url" .Permalink) }}{{ end -}}
+  {{- $data := dict
+    "@context" "https://schema.org"
+    "@type" "DefinedTerm"
+    "name" .Title
+    "description" (partial "meta-description.html" .)
+    "url" .Permalink
+    "inDefinedTermSet" $set
+  -}}
+  <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}
+
+{{/* A step of the Quick Start, which has no section of its own: its pages sit
+     under content/pages/ with a `url:` beneath /java-quick-start/. The hub
+     itself and the unweighted install-java alternatives are still articles a
+     learner reads, so the URL prefix is the whole test. */}}
+{{- if and .IsPage (hasPrefix .RelPermalink "/java-quick-start/") (ne .RelPermalink "/java-quick-start/") -}}
+  {{- $data := dict
+    "@context" "https://schema.org"
+    "@type" "TechArticle"
+    "headline" .Title
+    "description" (partial "meta-description.html" .)
+    "url" .Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "inLanguage" (or site.Language.Locale site.Language.Lang "en")
+    "isAccessibleForFree" true
+    "learningResourceType" "tutorial"
+    "educationalLevel" "Beginner"
+    "wordCount" .WordCount
+    "publisher" (dict "@id" (printf "%s#organization" site.Home.Permalink))
+  -}}
+  {{- if not .Lastmod.IsZero }}{{ $data = merge $data (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")) }}{{ end -}}
   <script type="application/ld+json">{{ $data | jsonify (dict "indent" "  ") | safeJS }}</script>
 {{- end -}}

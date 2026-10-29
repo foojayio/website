@@ -11,4 +11,10 @@ url: "/today/"
 aliases:
   - "/blog/"
   - "/docs/"
+cascade:
+  - target:
+      kind: page
+    outputs:
+      - html
+      - markdown
 ---
