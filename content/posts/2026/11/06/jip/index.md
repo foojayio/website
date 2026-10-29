@@ -19,6 +19,7 @@ related_posts:
   - "lathe-a-java-language-server-from-your-maven-build"
   - "my-final-take-on-gradle-vs-maven"
 ---
+
 ## Why I Created jip
 
 This project started with a simple frustration, not a grand plan to reinvent Java development.
@@ -53,7 +54,7 @@ That idea became jip.
 
 The basic workflow is straightforward:
 
-```bash
+```shell
 jip get https://github.com/example/project.git
 cd project
 jip run
