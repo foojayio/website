@@ -1,6 +1,6 @@
 ---
 title: "Cloud-Agnostic Java Microservices with Halyx: One Jar on AWS, Azure and Google Cloud"
-date: "2026-01-01"
+date: "2026-11-09"
 description: "Build a Java microservice once and deploy it to AWS, Azure or Google Cloud by configuration, with no cloud SDK in your code."
 authors:
   - "kamran-zafar"
@@ -9,7 +9,12 @@ categories:
   - "Java"
   - "Cloud"
   - "Microservices"
-related_posts: []
+  - "Kafka"
+related_posts:
+  - "introducing-floci-a-high-performance-graalvm-powered-aws-emulator"
+  - "foojay-podcast-96"
+  - "idempotent-spring-boot-starter"
+  - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
 ---
 
 Many teams describe their microservices as cloud-agnostic, but the claim rarely survives a close look at the code. The business logic may be neutral; the integration layer usually isn't. Data access, messaging, caching and authentication are typically built directly on one provider's SDK. Moving such a service to another cloud, or running it on two, isn't a configuration change: it means rewriting and retesting everything that talks to the platform.
@@ -24,7 +29,7 @@ This article shows how to build a truly cloud-agnostic, portable microservice wi
 
 sym needs four cloud services. Each is a different product on each cloud, and a single Halyx API in the code:
 
-![A table of the four cloud services sym uses and what Halyx runs each on. Documents use DocumentStore and Spring Data repositories, on DynamoDB, Cosmos DB or Firestore. Object storage uses BlobStore, on S3, Blob Storage or Cloud Storage. The Kafka stream uses StreamProducer and @HalyxListener, on Amazon MSK, the Event Hubs Kafka endpoint or Managed Service for Apache Kafka. The optional cache uses @Cacheable, on ElastiCache, Azure Managed Redis or Memorystore. All four also run in memory locally.](halyx-apis-per-cloud.png)
+![A table of the four cloud services sym uses and what Halyx runs each on. Documents use DocumentStore and Spring Data repositories, on DynamoDB, Cosmos DB or Firestore. Object storage uses BlobStore, on S3, Blob Storage or Cloud Storage. The Kafka stream uses StreamProducer and @HalyxListener, on Amazon MSK, the Event Hubs Kafka endpoint or Managed Service for Apache Kafka. The optional cache uses @Cacheable, on ElastiCache, Azure Managed Redis or Memorystore. All four also run in memory locally.](halyx-apis-per-cloud.jpg)
 
 sym is tested on emulators. Halyx's own real-cloud runs cover Event Hubs and Managed Kafka; the MSK run is ready but waiting on an AWS account that allows MSK.
 
@@ -32,7 +37,7 @@ No passwords appear anywhere. Halyx logs in with the platform's identity: Pod Id
 
 Here's how a message moves through those services:
 
-![A client POSTs to MessageService, which saves the message to the messages store (DynamoDB, Cosmos DB or Firestore) and sends it, keyed by author, to the message-posted Kafka stream (MSK, Event Hubs or Managed Kafka). HashtagIndexer reads the stream and puts entries by tag into the hashtags store; other services can read the same stream in their own consumer groups.](sym-message-flow.png)
+![A client POSTs to MessageService, which saves the message to the messages store (DynamoDB, Cosmos DB or Firestore) and sends it, keyed by author, to the message-posted Kafka stream (MSK, Event Hubs or Managed Kafka). HashtagIndexer reads the stream and puts entries by tag into the hashtags store; other services can read the same stream in their own consumer groups.](sym-message-flow.jpg)
 
 ## Resources are named once, in configuration
 
