@@ -1,6 +1,6 @@
 ---
 title: "jip: Clone a Java Project. Run It. Done."
-date: ""
+date: "2026-11-06"
 description: "A lightweight, pip-inspired dependency manager and runner that makes exploring GitHub Java projects simple, without the usual Maven or Gradle hassle."
 authors:
   - "michael-gasche"
@@ -8,11 +8,16 @@ image: "social-preview.jpg"
 categories:
   - "Java"
   - "Developer Tools"
+  - "Dependency Management"
   - "DevOps"
   - "Gradle"
   - "Maven"
   - "Tools"
-related_posts: []
+related_posts:
+  - "introducing-jenesis"
+  - "maven-build-cache-in-practice"
+  - "lathe-a-java-language-server-from-your-maven-build"
+  - "my-final-take-on-gradle-vs-maven"
 ---
 ## Why I Created jip
 
