@@ -1,6 +1,6 @@
 ---
 title: "Checking Module Boundaries in a Java Monolith"
-date: "2026-01-01"
+date: "2026-11-10"
 description: "Use an ArchUnit test to check a Java module boundary, examine a violation and move the dependency behind the module's API."
 authors:
   - "omphile-matheolane"
@@ -8,6 +8,11 @@ image: "module-boundaries-cover.jpg"
 categories:
   - "Java"
   - "Testing"
+related_posts:
+  - "spring-modulith-modularity-maturity"
+  - "monolith-vs-microservices-2025"
+  - "green-build-wrong-task-a-working-agreement-for-java-teams-using-ai-coding-agents"
+  - "testing-jakarta-ee-three-layers-three-tools"
 ---
 
 A module boundary often starts with a perfectly reasonable agreement: ordering can use the payments API, while the payment implementation stays inside payments. Everyone understands it, the diagram looks tidy, and the team gets on with building the application.
