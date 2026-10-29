@@ -1,0 +1,6 @@
+{{- /* The week's numbers for scripts/notify/SlackPosts.java, which cannot see
+       what a page derives. */ -}}
+{{- $d := partial "week-review-data.html" . -}}
+{{- $authors := slice -}}
+{{- range $d.newAuthors }}{{ $authors = $authors | append (dict "name" .Title "url" .Permalink) }}{{ end -}}
+{{- dict "week" .Params.weekStart "posts" (len $d.posts) "newAuthors" $authors | jsonify -}}

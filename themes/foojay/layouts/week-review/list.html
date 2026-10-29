@@ -1,0 +1,4 @@
+{{ define "main" }}
+{{/* Just the latest week; its pager links every other week by dated URL. */}}
+{{ with index (.RegularPages.ByParam "weekStart").Reverse 0 }}{{ partial "week-review-body.html" (dict "page" . "index" true) }}{{ end }}
+{{ end }}

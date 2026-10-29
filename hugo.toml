@@ -214,6 +214,14 @@ enableGitInfo = true
   isPlainText = true
   notAlternative = true
 
+# <week>/review.json beside each week-review page: its counts and new authors,
+# for the Slack announcement.
+[outputFormats.REVIEW]
+  mediaType = "application/json"
+  baseName = "review"
+  isPlainText = true
+  notAlternative = true
+
 # The same article as plain Markdown, at <page>/index.md beside the HTML, for a
 # reader that would rather not parse the theme. Switched on per section by a
 # cascade in content/posts/_index.md and content/pedia/_index.md. Not
@@ -280,6 +288,14 @@ enableGitInfo = true
   weight = 11
   [menu.main.params]
     desc = "Everything the community published, newest first"
+
+[[menu.main]]
+  name = "Week in Review"
+  parent = "News"
+  url = "/today/week-review/"
+  weight = 11
+  [menu.main.params]
+    desc = "What was published on foojay.io, week by week"
 
 [[menu.main]]
   name = "Podcast"

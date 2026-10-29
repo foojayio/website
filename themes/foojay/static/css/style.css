@@ -627,9 +627,6 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .section-head .chip-row { margin-top: .75rem; }
 .btn--sm { padding: .3rem .75rem; font-size: .82rem; }
 
-/* Back links remain navigation, without a decorative label treatment. */
-.page-back { display: block; margin-bottom: .75rem; font-size: .95rem; }
-.page-back a { text-decoration: underline; text-underline-offset: .15em; }
 .author-callout__label { font-size: .9rem; color: var(--ink-muted); }
 
 .section-head {
@@ -4596,3 +4593,15 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .nf-suggest h2 { margin-top: 0; }
 .nf-suggest ul { padding-left: 1.25rem; display: grid; gap: .5rem; }
 .nf-topics { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+
+/* /today/week-review/ */
+.week-review__section + .week-review__section { margin-top: 2.25rem; }
+.week-review__posts { display: grid; gap: 1.25rem; }
+.week-review__posts .post-card {
+  display: grid; grid-template-columns: 9rem 1fr; column-gap: 1rem; row-gap: .3rem;
+  align-items: start; grid-auto-flow: row;
+}
+.week-review__posts .post-card-image { grid-row: 1 / span 4; }
+.week-review__posts .post-card > :not(.post-card-image) { grid-column: 2; }
+@media (max-width: 480px) { .week-review__posts .post-card { grid-template-columns: 6rem 1fr; } }
+.week-review__posts .post-card-excerpt { max-width: none; }

@@ -1,0 +1,23 @@
+{{- /* What a week page and its review.json both show, so they cannot disagree.
+       Takes the week page; returns {monday, next, posts (oldest first),
+       newAuthors}. Everything is derived from the posts: the page only knows
+       its Monday. */ -}}
+{{ $monday := time.AsTime (printf "%sT00:00:00Z" .Params.weekStart) }}
+{{ $next := $monday.AddDate 0 0 7 }}
+{{ $posts := where (where site.RegularPages "Section" "posts") "Date" "ge" $monday }}
+{{ $posts = sort (where $posts "Date" "lt" $next) "Date" "asc" }}
+
+{{/* A new author is one whose oldest post falls inside this week. */}}
+{{ $newAuthors := slice }}
+{{ $seen := dict }}
+{{ range $posts }}
+  {{ range partial "post-authors.html" . }}
+    {{ $slug := .File.ContentBaseName }}
+    {{ if not (isset $seen $slug) }}
+      {{ $seen = merge $seen (dict $slug true) }}
+      {{ $theirs := partialCached "author-posts.html" . $slug }}
+      {{ if ge (index $theirs (sub (len $theirs) 1)).Date $monday }}{{ $newAuthors = $newAuthors | append . }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return (dict "monday" $monday "next" $next "posts" $posts "newAuthors" $newAuthors) }}
