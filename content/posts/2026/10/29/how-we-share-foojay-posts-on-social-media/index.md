@@ -37,19 +37,21 @@ The script runs as the last step of the deploy workflow:
 
 When a platform fails or has no credentials, its text lands in the same Slack message. I can still copy it by hand, so nothing gets lost. A failure in this step never turns a finished deploy red.
 
-## Challenge 1: mention the authors correctly
+## Challenge 1: Mention the authors correctly
 
 A post without the author's name feels wrong. A mention that points to the wrong person is worse.
 
 Every article page already contains JSON-LD with the author names and their social profiles. The script reads that data, picks the Bluesky and Mastodon profiles, and converts them to the format of each network, like `@name.bsky.social` or `@user@instance`. The prompt tells Claude to use these handles exactly as given. When an author has no handle, Claude uses the plain name and invents nothing.
 
-> **Note for Foojay authors:** the script can only mention you correctly when your profile contains your links. Open `content/authors/<your-slug>/_index.md` and fill in the `bluesky`, `mastodon`, and `linkedin` fields. Send a pull request with that change, and your next article credits you with a real mention. The same fields appear in the [author template](https://github.com/foojayio/website/blob/main/template/author.md), and the [contribution guide](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md) explains how to open a pull request.
+{{< tip >}}
+**Note for Foojay authors:** The script can only mention you correctly when your profile contains your links. Open `content/authors/<your-slug>/_index.md` and fill in the `bluesky`, `mastodon`, and `linkedin` fields. Send a pull request with that change, and your next article credits you with a real mention. The same fields appear in the [author template](https://github.com/foojayio/website/blob/main/template/author.md), and the [contribution guide](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md) explains how to open a pull request.
+{{< /tip >}}
 
 Mastodon turns a mention into a link on its own. Bluesky doesn't. A mention, link or hashtag is only clickable when the post carries a facet with UTF-8 byte offsets, so the script builds those. It first resolves each handle to its identifier. A handle that doesn't resolve stays plain text, and the post still goes out.
 
 LinkedIn is the exception. A mention only works when you pick the person in the composer, so the text contains the full name and I select the profile myself. This is the only manual step that's still needed. But it's just clicking on the link I get in Slack, and the text is already filled in. When the LinkedIn page has opened, I only need to click the author name and pick the right profile. The script even adds a link to the article, so I can check the text before posting.
 
-## Challenge 2: fit the character limit
+## Challenge 2: Fit the character limit
 
 Mastodon allows 500 characters and Bluesky only 300. The prompt contains the limit, but a language model counts badly, and the platforms count differently than you expect:
 
@@ -60,7 +62,7 @@ The script calculates the length the way each platform does. When a text is too 
 
 The prompt also holds our house rules. Claude writes as Foojay, uses only facts from the article, avoids hype words, and never puts a link or mention between parentheses, because some clients read the bracket as part of the link.
 
-## Challenge 3: include the link and the preview image
+## Challenge 3: Include the link and the preview image
 
 Mastodon builds the preview card from the `og:` tags of the page. The post only needs the link. A request key based on the article URL prevents a double post when I re-run a deploy.
 
