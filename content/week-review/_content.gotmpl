@@ -1,0 +1,29 @@
+{{- /* One page per Monday-to-Sunday week that has a post, derived from the
+       content/posts/<y>/<m>/<d>/ folders (checkPostDates keeps a folder and its
+       `date:` in step). Read off disk because site.RegularPages is not
+       available to an adapter. The page only records its Monday; the template
+       finds the posts. Weeks are cut in UTC, as post dates are midnight UTC. */ -}}
+{{ $today := now.UTC.Format "2006-01-02" }}
+{{ $seen := dict }}
+{{ range $y := os.ReadDir "content/posts" }}{{ if $y.IsDir }}
+{{ range $m := os.ReadDir (printf "content/posts/%s" $y.Name) }}{{ if $m.IsDir }}
+{{ range $d := os.ReadDir (printf "content/posts/%s/%s" $y.Name $m.Name) }}{{ if $d.IsDir }}
+  {{ $iso := printf "%s-%s-%s" $y.Name $m.Name $d.Name }}
+  {{ if and (findRE `^\d{4}-\d{2}-\d{2}$` $iso) (le $iso $today) }}
+    {{ $date := time.AsTime (printf "%sT00:00:00Z" $iso) }}
+    {{ $monday := $date.AddDate 0 0 (sub 0 (mod (add (int $date.Weekday) 6) 7)) }}
+    {{ $key := $monday.Format "2006-01-02" }}
+    {{ if not (isset $seen $key) }}
+      {{ $seen = merge $seen (dict $key true) }}
+      {{ $.AddPage (dict
+           "path" $key
+           "title" (printf "Week in review: %s" ($monday.Format "2 January 2006"))
+           "url" (printf "/today/week-review/%s/" $key)
+           "type" "week-review"
+           "outputs" (slice "HTML" "REVIEW")
+           "params" (dict "weekStart" $key)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}{{ end }}
+{{ end }}{{ end }}
+{{ end }}{{ end }}

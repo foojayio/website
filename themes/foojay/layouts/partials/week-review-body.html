@@ -1,0 +1,34 @@
+{{- /* One week's review: header, new authors, posts, week pager. Takes
+       {page: the week page, index: true on /today/week-review/, which shows
+       the latest week}. */ -}}
+{{ $page := .page }}{{ $isIndex := .index }}
+{{ $d := partial "week-review-data.html" $page }}
+{{ $monday := $d.monday }}{{ $next := $d.next }}{{ $posts := $d.posts }}{{ $newAuthors := $d.newAuthors }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ $page.Title }}</h1>
+    {{ $stats := printf "%s &ndash; %s &middot; <strong>%d</strong> %s" ($monday.Format "2 Jan") (($next.AddDate 0 0 -1).Format "2 Jan 2006") (len $posts) (cond (eq (len $posts) 1) "post" "posts") }}
+    {{ if $newAuthors }}{{ $stats = printf "%s &middot; <strong>%d</strong> new %s" $stats (len $newAuthors) (cond (eq (len $newAuthors) 1) "author" "authors") }}{{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats) }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+  {{ partial "week-review-pager.html" (dict "page" $page "position" "top") }}
+  {{ with $newAuthors }}
+  <section class="week-review__section">
+    <h2>New authors</h2>
+    <p>Welcome to {{ range $i, $a := . }}{{ if $i }}{{ if eq $i (sub (len $newAuthors) 1) }} and {{ else }}, {{ end }}{{ end }}<a href="{{ $a.RelPermalink }}">{{ $a.Title }}</a>{{ end }}, who published {{ if eq (len $newAuthors) 1 }}a{{ else }}their{{ end }} first article on foojay.io this week.</p>
+  </section>
+  {{ end }}
+
+  <section class="week-review__section">
+    <h2>Published this week</h2>
+    <div class="week-review__posts">
+      {{ range $posts }}{{ partial "post-card.html" . }}{{ else }}<p>Nothing was published this week.</p>{{ end }}
+    </div>
+  </section>
+
+  {{ partial "week-review-pager.html" (dict "page" $page "position" "bottom") }}
+</div>

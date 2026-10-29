@@ -6,7 +6,6 @@
 
 <div class="page-head">
   <div class="page-head__inner">
-    <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
     {{ $stats := "" }}

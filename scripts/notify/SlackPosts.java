@@ -1,6 +1,9 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 17+
+//DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -21,10 +24,9 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -46,6 +48,7 @@ public class SlackPosts {
 
     record Post(String title, String link, String authors, String categories, String description, ZonedDateTime date) {}
 
+    static final String SITE = "https://foojay.io";
     static final int MAX_NEW = 10;
     static final int DESCRIPTION_LIMIT = 300;
 
@@ -112,41 +115,35 @@ public class SlackPosts {
             System.out.println("Nothing was published last week.");
             return;
         }
-        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + count(posts) + ")\n");
-        for (Post p : posts) {
-            text.append("• <").append(p.link()).append("|").append(esc(p.title())).append(">");
-            if (!p.authors().isEmpty()) text.append(" — ").append(esc(p.authors()));
-            text.append("\n");
+        String review = SITE + "/today/week-review/" + start.toLocalDate() + "/";
+        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size()
+                + "), see the overview on <" + review + "|the weekly review>");
+        newAuthors(review + "review.json").ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
+        send(webhook, dryRun, text.toString());
+    }
+
+    // The week page works out who published a first article; the feed cannot.
+    // Any failure drops the section rather than the whole announcement.
+    static Optional<String> newAuthors(String url) {
+        try {
+            HttpResponse<String> r = HttpClient.newHttpClient().send(
+                    HttpRequest.newBuilder(URI.create(url)).timeout(Duration.ofSeconds(30))
+                            .header("User-Agent", "foojay.io").build(),
+                    HttpResponse.BodyHandlers.ofString());
+            if (r.statusCode() != 200) throw new IllegalStateException(url + " answered " + r.statusCode());
+            List<String> links = new ArrayList<>();
+            for (JsonNode a : new ObjectMapper().readTree(r.body()).path("newAuthors")) {
+                links.add("<" + a.path("url").asText() + "|" + esc(a.path("name").asText()) + ">");
+            }
+            if (links.isEmpty()) return Optional.empty();
+            String names = links.size() == 1 ? links.get(0)
+                    : String.join(", ", links.subList(0, links.size() - 1)) + " and " + links.get(links.size() - 1);
+            return Optional.of("Welcome to " + names + ", who published " + (links.size() == 1 ? "a" : "their")
+                    + " first article on foojay.io this week.");
+        } catch (Exception e) {
+            System.out.println("No new-authors section: " + e.getMessage());
+            return Optional.empty();
         }
-        send(webhook, dryRun, text.toString().stripTrailing(), weeklyBlocks(posts));
-    }
-
-    // Slack allows one table block per message; cells take rich text, so titles stay links.
-    static String weeklyBlocks(List<Post> posts) {
-        StringBuilder rows = new StringBuilder("[" + rawRow("Date", "Author(s)", "Title", "Category"));
-        for (Post p : posts) {
-            rows.append(",[").append(raw(p.date().format(DateTimeFormatter.ofPattern("EEE d MMM", Locale.ENGLISH)))).append(",")
-                    .append(raw(p.authors().isEmpty() ? "-" : p.authors())).append(",")
-                    .append("{\"type\":\"rich_text\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[")
-                    .append("{\"type\":\"link\",\"url\":").append(json(p.link())).append(",\"text\":").append(json(p.title()))
-                    .append("}]}]},").append(raw(p.categories().isEmpty() ? "-" : p.categories())).append("]");
-        }
-        rows.append("]");
-        return "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":"
-                + json("*Published on Foojay.io the past week* (" + count(posts) + ")")
-                + "}},{\"type\":\"table\",\"rows\":" + rows + "}]";
-    }
-
-    static String count(List<Post> posts) {
-        return posts.size() + (posts.size() == 1 ? " post" : " posts");
-    }
-
-    static String raw(String s) {
-        return "{\"type\":\"raw_text\",\"text\":" + json(s) + "}";
-    }
-
-    static String rawRow(String... cells) {
-        return "[" + String.join(",", Arrays.stream(cells).map(SlackPosts::raw).toList()) + "]";
     }
 
     static List<Post> readFeed(String source) throws Exception {
@@ -201,34 +198,20 @@ public class SlackPosts {
     }
 
     static void send(String webhook, boolean dryRun, String text) throws Exception {
-        send(webhook, dryRun, text, null);
-    }
-
-    // `text` is the notification and the fallback when Slack rejects `blocksJson`.
-    static void send(String webhook, boolean dryRun, String text, String blocksJson) throws Exception {
         if (dryRun) {
             System.out.println("---\n" + text);
             return;
         }
-        HttpResponse<String> r = post(webhook, text, blocksJson);
-        if (r.statusCode() != 200 && blocksJson != null) {
-            System.out.println("Slack rejected the blocks (" + r.statusCode() + ": " + r.body() + "); posting plain text.");
-            r = post(webhook, text, null);
-        }
-        if (r.statusCode() != 200) {
-            throw new IllegalStateException("Slack answered " + r.statusCode() + ": " + r.body());
-        }
-        System.out.println("Posted: " + text.lines().findFirst().orElse(""));
-    }
-
-    static HttpResponse<String> post(String webhook, String text, String blocksJson) throws Exception {
-        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false"
-                + (blocksJson == null ? "" : ",\"blocks\":" + blocksJson) + "}";
-        return HttpClient.newHttpClient().send(
+        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false}";
+        HttpResponse<String> r = HttpClient.newHttpClient().send(
                 HttpRequest.newBuilder(URI.create(webhook)).timeout(Duration.ofSeconds(30))
                         .header("Content-Type", "application/json; charset=utf-8")
                         .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8)).build(),
                 HttpResponse.BodyHandlers.ofString());
+        if (r.statusCode() != 200) {
+            throw new IllegalStateException("Slack answered " + r.statusCode() + ": " + r.body());
+        }
+        System.out.println("Posted: " + text.lines().findFirst().orElse(""));
     }
 
     static String json(String s) {

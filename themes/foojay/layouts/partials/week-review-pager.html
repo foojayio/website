@@ -1,0 +1,40 @@
+{{- /* The week pager, same look as pagination.html but every button links to a
+       week's own dated URL, so a link keeps pointing at that week while the
+       latest one moves on. Newest on the left, like page 1. Takes
+       {page: the week page, position: "top"|"bottom"}. */ -}}
+{{- $weeks := (.page.Parent.RegularPages.ByParam "weekStart").Reverse -}}
+{{- $cur := 0 -}}
+{{- range $i, $w := $weeks }}{{ if eq $w.RelPermalink $.page.RelPermalink }}{{ $cur = $i }}{{ end }}{{ end -}}
+{{- $last := sub (len $weeks) 1 -}}
+{{- $size := 5 -}}
+{{- $from := sub $cur 2 -}}
+{{- if lt $from 0 }}{{ $from = 0 }}{{ end -}}
+{{- $to := add $from (sub $size 1) -}}
+{{- if gt $to $last }}{{ $to = $last }}{{ $from = sub $to (sub $size 1) }}{{ end -}}
+{{- if lt $from 0 }}{{ $from = 0 }}{{ end -}}
+<nav class="pagination pagination--{{ .position }}" aria-label="Weeks">
+  <div class="pagination__row">
+    {{- if gt $cur 0 }}
+    <a class="pagination__btn" href="{{ (index $weeks (sub $cur 1)).RelPermalink }}" rel="next" aria-label="Newer week"><span aria-hidden="true">&laquo;</span></a>
+    {{- else }}
+    <span class="pagination__btn is-disabled" aria-hidden="true">&laquo;</span>
+    {{- end }}
+    <ul class="pagination__list">
+      {{- range $i := seq $from $to }}
+        {{- $w := index $weeks $i }}
+        {{- $label := (time.AsTime (printf "%sT00:00:00Z" $w.Params.weekStart)).Format "2 Jan" }}
+        {{- $d := sub $i $cur }}{{ if lt $d 0 }}{{ $d = sub 0 $d }}{{ end }}
+        {{- if eq $i $cur }}
+      <li><span class="pagination__btn is-current" aria-current="page">{{ $label }}</span></li>
+        {{- else }}
+      <li{{ if gt $d 1 }} class="pagination__cell--far"{{ end }}><a class="pagination__btn" href="{{ $w.RelPermalink }}" aria-label="Week of {{ $w.Params.weekStart }}">{{ $label }}</a></li>
+        {{- end }}
+      {{- end }}
+    </ul>
+    {{- if lt $cur $last }}
+    <a class="pagination__btn" href="{{ (index $weeks (add $cur 1)).RelPermalink }}" rel="prev" aria-label="Older week"><span aria-hidden="true">&raquo;</span></a>
+    {{- else }}
+    <span class="pagination__btn is-disabled" aria-hidden="true">&raquo;</span>
+    {{- end }}
+  </div>
+</nav>
