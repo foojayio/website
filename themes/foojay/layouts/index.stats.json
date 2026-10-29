@@ -114,6 +114,13 @@
     {{- if ge ($end.Format "2006-01-02") $today }}{{ $submitted = add $submitted 1 }}{{ end -}}
   {{- end -}}
 {{- end -}}
+{{/* Same end-or-start-on-or-after-today rule as `$submitted` above. */}}
+{{- $conferences := (index site.Data "java-conferences") | default slice -}}
+{{- $upcomingConfs := 0 -}}
+{{- range $conferences -}}
+  {{- $end := .end | default .start -}}
+  {{- if and $end (ge (time.AsTime $end | time.Format "2006-01-02") $today) }}{{ $upcomingConfs = add $upcomingConfs 1 }}{{ end -}}
+{{- end -}}
 {{- $champions := (index site.Data "java-champions") | default slice -}}
 {{- $roundups := (index site.Data "jvm-weekly") | default slice -}}
 
@@ -147,6 +154,9 @@
         "jugs"              (len $jugs)
         "jugsWithFeed"      $jugsWithFeed
         "javaChampions"     (len $champions)
+        "conferences"       (dict
+          "total"    (len $conferences)
+          "upcoming" $upcomingConfs)
         "jvmWeeklyRoundups" (len $roundups)
         "calendar" (dict
           "upcomingItems" (add $fromFeeds $submitted)
