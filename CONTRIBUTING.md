@@ -34,6 +34,8 @@ images, and delivering it (pull request, fork, or zip).
 ### In short
 
 - Posts are contributed via pull request (fork the repo if you don't have write access).
+  **You don't have to clone the whole repository** (about 2 GB with history):
+  see [Submitting without a full clone](#submitting-without-a-full-clone).
 - Create your post in a folder under **`draft/<your-slug>/`** with the text in
   `index.md` (or `index.adoc`) and its images in the same folder. Copy `template/post.md` (or `template/post.adoc`) as your
   starting point. A maintainer moves the folder into
@@ -78,6 +80,43 @@ images, and delivering it (pull request, fork, or zip).
   Markdown, and the PR check installs it either way.
 
 See the guide linked above for the details.
+
+### Submitting without a full clone
+
+The repository is around 2 GB with history, and an article only adds a few
+files. Two lighter routes, both ending in a pull request from your own fork:
+
+**In the browser**
+
+1. Open the `draft` folder on [github.com/foojayio/website](https://github.com/foojayio/website)
+   and choose **Add file → Create new file**. GitHub offers to fork the
+   repository for you.
+2. Name the file `your-slug/index.md` (the `/` creates the folder) and paste your
+   article in, starting from `template/post.md`.
+3. **Commit changes… → Propose changes → Create pull request.**
+4. Add images by opening your branch in your fork, going to `draft/your-slug/`
+   and choosing **Add file → Upload files**. They join the same pull request.
+   A new author profile goes in the same way, under `content/authors/<your-slug>/`.
+
+If you already have an old fork, use **Sync fork** first.
+
+**With a shallow, sparse clone** (your own editor, a few MB instead of 2 GB)
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/<you>/website.git
+cd website
+git sparse-checkout set draft template content/authors
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit, add images, then:
+git add draft/your-slug
+git commit -m "Add article: <title>"
+git push -u origin my-article
+```
+
+Only part of the tree is checked out, so `hugo server` won't work from this
+clone; the PR check builds the site for you. To preview, use a full clone.
 
 ## Adding an event to the calendar
 

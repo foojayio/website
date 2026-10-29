@@ -1,7 +1,7 @@
 ---
 title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-10-08T00:00:00+00:00"
+lastmod: "2026-10-29T00:00:00+00:00"
 description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"
@@ -82,7 +82,43 @@ If you have write access to the repository, create your folder under **`draft/yo
 
 ### Option 2 — Pull request (from a fork)
 
-No access yet? [Fork the repository](https://github.com/foojayio/website/fork), add your **`draft/your-slug/`** folder to your fork exactly as in Option 1, and open a pull request from your fork back to the main repository.
+No access yet? Add your **`draft/your-slug/`** folder to your own fork of the repository and open a pull request from there back to the main repository. You need a free GitHub account, but you do **not** need to clone the whole repository: with its history and years of images it is around 2 GB, and you only need to add a few files. Pick whichever of these fits you:
+
+#### In the browser, without installing anything
+
+This is the quickest route for a text article.
+
+1. Open [github.com/foojayio/website](https://github.com/foojayio/website) and go to the `draft` folder.
+2. Choose **Add file → Create new file**. GitHub tells you that you need to fork the repository to propose changes, and does that for you.
+3. In the file name box type `your-slug/index.md`. Typing the `/` creates the folder. Paste your article, including the frontmatter from `template/post.md`, into the editor.
+4. Choose **Commit changes…**, then **Propose changes**, and on the next screen **Create pull request**.
+5. Now add your images. On the pull request page, follow the link to your branch in your fork, open `draft/your-slug/`, and choose **Add file → Upload files**. Every upload is added to the same pull request. A new author profile (`content/authors/<your-slug>/`) is added the same way.
+
+If you already have an old fork, use **Sync fork** on its page first, or your pull request will carry commits that are not yours.
+
+#### On your computer, with a small clone
+
+If you prefer your own editor, [fork the repository](https://github.com/foojayio/website/fork) and download only what you need: a shallow clone without history, restricted to the few folders an article touches.
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/<your-github-name>/website.git
+cd website
+git sparse-checkout set draft template content/authors
+```
+
+That fetches a fraction of the full size. Then create your article and push it:
+
+```bash
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit index.md, add your images to the same folder
+git add draft/your-slug
+git commit -m "Add article: <your title>"
+git push -u origin my-article
+```
+
+GitHub prints a link in the output of the push to open the pull request. If you are adding an author profile, `git add content/authors/<your-slug>` as well. Because only some folders are checked out, you cannot run `hugo server` from this clone, which is fine since the pull request check builds the site for you.
 
 ### Option 3 — Email us a zip
 
