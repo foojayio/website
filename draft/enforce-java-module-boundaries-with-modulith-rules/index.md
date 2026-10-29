@@ -4,7 +4,7 @@ date: "2026-01-01"
 description: "Use an ArchUnit test to check a Java module boundary, examine a violation and move the dependency behind the module's API."
 authors:
   - "omphile-matheolane"
-image: "module-boundaries.png"
+image: "module-boundaries-cover.jpg"
 categories:
   - "Java"
   - "Testing"
@@ -76,7 +76,7 @@ Package-private visibility helps when a type only needs to be used within one pa
 
 ## Expressing the decision in a test
 
-The [complete example on GitHub](https://github.com/omphile-matheolane/module-framework/tree/main/examples/boundary-example) contains two Maven projects, `before` and `after`, with the source files and build configuration used below. You will need Java 17 or newer.
+The [complete example on GitHub](https://github.com/omphile-matheolane/Resources/tree/main/boundary-example) contains two Maven projects, `before` and `after`, with the source files and build configuration used below. You will need Java 17 or newer.
 
 For the architecture test, add the core library and JUnit in test scope:
 
@@ -199,6 +199,6 @@ If your team already uses Spring Modulith, start by checking whether its verific
 
 ## Start with one boundary
 
-The [before-and-after example](https://github.com/omphile-matheolane/module-framework/tree/main/examples/boundary-example) provides a small starting point, and the [project's existing example application](https://github.com/modular-monolith/modular-monolith-rules/tree/main/modulith-rules-example) shows a wider configuration. The [documentation](https://modularmonolith.io/) describes the available rules and their behaviour. Modulith Rules is licensed under Apache License 2.0, and questions or problems can be raised through the [issue tracker](https://github.com/modular-monolith/modular-monolith-rules/issues).
+The [before-and-after example](https://github.com/omphile-matheolane/Resources/tree/main/boundary-example) provides a small starting point. The [documentation](https://modularmonolith.io/) describes the available rules and their behaviour. Modulith Rules is licensed under Apache License 2.0, and questions or problems can be raised through the [issue tracker](https://github.com/modular-monolith/modular-monolith-rules/issues).
 
 When you try a rule in your own codebase, give it something to complain about first. Add a dependency you know should fail and check that the test catches it, then remove it and keep the check in the build. The next person who reaches into an internal package will have the boundary explained while the change is still small, even if the original design discussion happened long before they joined the team.
