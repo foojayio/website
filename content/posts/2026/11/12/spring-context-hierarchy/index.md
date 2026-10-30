@@ -1,6 +1,6 @@
 ---
 title: "Spring ApplicationContext Hierarchy and a High CVE in Axelix"
-date: "2026-01-01"
+date: "2026-11-12"
 description: "How Spring's ApplicationContext hierarchy caused a JWT bypass in Axelix when Actuator ran on a separate management port."
 authors:
   - "mikhail-polivakha"
@@ -10,6 +10,12 @@ categories:
   - "Spring"
   - "Security"
 canonical: "https://axelix.io/blog/spring-context-hierarchy"
+related_posts:
+  - "java-new-features-in-production"
+  - "spring-boot-actuator-health-for-microprofile-developers"
+  - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
+  - "role-based-access-control-in-java-applications"
+  - "how-to-secure-a-spring-boot-application-with-openid-connect-and-pac4j"
 ---
 
 ## Introduction
