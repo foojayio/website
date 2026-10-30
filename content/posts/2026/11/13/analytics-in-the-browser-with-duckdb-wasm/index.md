@@ -1,6 +1,6 @@
 ---
 title: "Analytics in the Browser with DuckDB-Wasm and a Java Backend"
-date: "2026-01-01"
+date: "2026-11-13"
 description: "A Java backend sends the dataset once and DuckDB-Wasm runs the SQL in the browser. A two-file example with no build tools, and when the approach makes sense."
 authors:
   - "geertjan-wielenga"
@@ -10,7 +10,11 @@ categories:
   - "Databases"
   - "Tutorials"
   - "Developer Tools"
-related_posts: []
+related_posts:
+  - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"
+  - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"
+  - "running-duckdbs-jdbc-driver-in-a-graalvm-native-image"
+  - "from-opentelemetry-to-duckdb"
 ---
 
 *DuckDB-Wasm runs the DuckDB analytical database inside the browser tab. The Java backend sends the dataset once, and from then on each filter and aggregation is a local SQL query rather than another request to the server. Below is a two-file example with no build tools, and a look at when the approach is a good fit and when it isn't.*
