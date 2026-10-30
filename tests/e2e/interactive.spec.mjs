@@ -207,9 +207,23 @@ test('the calendar grid opens on today and will not page into the past', async (
   await expect(page.locator('[data-cal-view="grid"]')).toHaveAttribute('aria-pressed', 'true');
 
   const label = page.locator('[data-cal-label]');
-  const thisMonth = await page.evaluate(() => new Date()
-    .toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }));
-  await expect(label).toHaveText(thisMonth);
+  const { thisMonth, home } = await page.evaluate(() => {
+    const t = new Date();
+    const fmt = (d) => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    // The grid opens on the NEXT month when today's week holds this one's last day.
+    const weekEnd = new Date(t.getFullYear(), t.getMonth(), t.getDate() + 6 - ((t.getDay() + 6) % 7));
+    const last = new Date(t.getFullYear(), t.getMonth() + 1, 0);
+    return {
+      thisMonth: fmt(t),
+      home: fmt(new Date(t.getFullYear(), t.getMonth() + (weekEnd >= last ? 1 : 0), 1)),
+    };
+  });
+  await expect(label).toHaveText(home);
+  if (home !== thisMonth) {
+    await expect(page.locator('[data-cal-prev]')).toBeEnabled();
+    await page.locator('[data-cal-prev]').click();
+    await expect(label).toHaveText(thisMonth);
+  }
 
   // Today is in the FIRST row. Whole weeks that are over are not rendered; the
   // few days before today in the week it starts on are, because the columns are
