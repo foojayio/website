@@ -564,8 +564,8 @@
   hybrid: false
   city: Warsaw
   country: Poland
-  latitude: 52.2333742
-  longitude: 21.0711489
+  latitude: 52.2319581
+  longitude: 21.0067249
   cfp_url: https://app.confitura.pl/login
   cfp_closes: '2026-06-07'
 - slug: jug-saxony-day-2026
@@ -655,8 +655,8 @@
   hybrid: true
   city: Warsaw
   country: Poland
-  latitude: 52.2333742
-  longitude: 21.0711489
+  latitude: 52.2319581
+  longitude: 21.0067249
   cfp_url: '[https://forms.gle/nKreGcpfzx4zsLhU7](https://docs.google.com/forms/d/e/1FAIpQLSc9ITG71szuMVGbAUHrquGy4Fq6fgKvukKP10dWrqvMErmfqw/viewform'
   cfp_closes: '2026-08-23'
 - slug: jdd-2026
@@ -836,6 +836,8 @@
   end: '2027-01-26'
   online: true
   hybrid: false
+  cfp_url: https://sessionize.com/jchampions-conference-2027/
+  cfp_closes: '2026-10-28'
 - slug: jfokus-2027
   name: Jfokus
   url: https://www.jfokus.se/
@@ -966,6 +968,17 @@
   longitude: 4.8924534
   cfp_url: https://vdams27.cfp.dev/
   cfp_closes: '2026-12-01'
+- slug: devoxx-france-2027
+  name: Devoxx France
+  url: https://www.devoxx.fr/en
+  start: '2027-04-07'
+  end: '2027-04-09'
+  online: false
+  hybrid: false
+  city: Paris
+  country: France
+  latitude: 48.8588897
+  longitude: 2.320041
 - slug: open-community-experience-2027
   name: Open Community Experience
   url: https://ocxconf.org
@@ -1027,8 +1040,8 @@
   hybrid: false
   city: Kraków
   country: Poland
-  latitude: 50.0469432
-  longitude: 19.9971534
+  latitude: 50.0619474
+  longitude: 19.9368564
   cfp_url: https://sessionize.com/kotlinconf-2027
   cfp_closes: '2026-11-27'
 - slug: jcon-europe-2027

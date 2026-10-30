@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-10-29T07:14:05Z",
+  "generatedAt" : "2026-10-30T07:16:44Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -59,15 +59,7 @@
     "jug" : "ArnhemJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/arnhemjug/",
-    "events" : [ {
-      "title" : "ArnhemJUG - October meetup",
-      "url" : "https://www.meetup.com/arnhemjug/events/314385055/",
-      "startTime" : "2026-10-29T17:00:00+01:00",
-      "endTime" : "2026-10-29T19:00:00+01:00",
-      "venue" : "Alliander",
-      "city" : "Arnhem",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "Athens-Java-User-Group",
     "name" : "Athens Java User Group",
@@ -140,15 +132,7 @@
     "jug" : "BrabantJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/brabant-jug/",
-    "events" : [ {
-      "title" : "BrabantJUG @ the/experts",
-      "url" : "https://www.meetup.com/brabant-jug/events/316812291/",
-      "startTime" : "2026-10-29T17:30:00+01:00",
-      "endTime" : "2026-10-29T21:00:00+01:00",
-      "venue" : "the/experts.",
-      "city" : "Breda",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "brno-java",
     "name" : "Brno Java User Group",
@@ -447,10 +431,10 @@
     "source" : "calendar",
     "url" : "http://jugf.de/",
     "events" : [ {
-      "title" : "Agentic Coding - die JUGF probiert's aus (Alexander Culum)",
+      "title" : "Gemeinsam Agentic Coden - der JUGF Adventskalender",
       "url" : "",
-      "startTime" : "2026-10-28T18:30:00+01:00",
-      "endTime" : "2026-10-28T20:00:00+01:00",
+      "startTime" : "2026-11-25T18:30:00+01:00",
+      "endTime" : "2026-11-25T20:00:00+01:00",
       "venue" : null,
       "city" : null,
       "online" : null
@@ -488,14 +472,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "Java auf Diät: Schlankere Spring Boot Container für mehr Sicherheit",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316580306/",
-      "startTime" : "2026-10-29T19:00:00+01:00",
-      "endTime" : "2026-10-29T20:30:00+01:00",
-      "venue" : "Kühne + Nagel",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
       "title" : "Mit Java, ohne kommerzielle LLMs, KI Aufgaben erkennen und lösen",
       "url" : "https://www.meetup.com/jug-hamburg/events/316782036/",
       "startTime" : "2026-11-12T19:00:00+01:00",
@@ -528,7 +504,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcpbkc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202130/",
       "startTime" : "2026-11-27T19:00:00+01:00",
       "endTime" : "2026-12-04T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -544,7 +520,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykccbmc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202138/",
       "startTime" : "2027-01-29T19:00:00+01:00",
       "endTime" : "2027-02-05T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -552,7 +528,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcdbjc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202140/",
       "startTime" : "2027-02-26T19:00:00+01:00",
       "endTime" : "2027-03-05T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -675,7 +651,15 @@
     "jug" : "NuernbergJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Nurnberg/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Peter Kranz: Der Monolith, der bleiben darf",
+      "url" : "https://www.meetup.com/jug-nurnberg/events/317195614/",
+      "startTime" : "2026-11-25T18:00:00+01:00",
+      "endTime" : "2026-11-25T21:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : false
+    } ]
   }, {
     "slug" : "jug-oberpfalz",
     "name" : "JUG Oberpfalz",
@@ -1028,15 +1012,7 @@
     "jug" : "TorontoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/toronto-java-users-group/",
-    "events" : [ {
-      "title" : "Legacy Code Doesn't Have to Suck",
-      "url" : "https://www.meetup.com/toronto-java-users-group/events/316878883/",
-      "startTime" : "2026-10-29T18:30:00-04:00",
-      "endTime" : "2026-10-29T20:30:00-04:00",
-      "venue" : "Free Times Cafe",
-      "city" : "Toronto",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "triangle-java-users-group",
     "name" : "Triangle Java Users Group (TriJUG)",
