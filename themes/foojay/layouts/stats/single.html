@@ -40,11 +40,11 @@
       <li><strong>{{ lang.FormatNumberCustom 0 $m.jvmWeeklyRoundups }}</strong><span>JVM Weekly roundups</span></li>
     </ul>
 
-    <h2 id="articles-per-year">Articles per year</h2>
+    <h2 id="articles-per-year">Published Articles</h2>
     <p>How many articles went live on Foojay.</p>
     {{ template "chart" (dict "id" "stats-years" "what" "Articles published per year" "data" $c.postsByYear "days" $s.days.articles "color" "--brand-accent-strong") }}
 
-    <h2 id="new-authors">New authors per year</h2>
+    <h2 id="new-authors">New Authors</h2>
     <p>How many authors published their first article on Foojay.</p>
     {{ template "chart" (dict "id" "stats-new-authors" "what" "New authors per year" "data" $c.newAuthorsByYear "days" $s.days.newAuthors "color" "--brand-secondary") }}
 
