@@ -3,4 +3,10 @@
 {{- $d := partial "week-review-data.html" . -}}
 {{- $authors := slice -}}
 {{- range $d.newAuthors }}{{ $authors = $authors | append (dict "name" .Title "url" .Permalink) }}{{ end -}}
-{{- dict "week" .Params.weekStart "posts" (len $d.posts) "newAuthors" $authors | jsonify -}}
+{{- $scheduled := dict "posts" 0 "days" 0 -}}
+{{- with partialCached "scheduled-posts.html" . -}}
+{{- $last := time.AsTime (printf "%sT00:00:00Z" (index . (sub (len .) 1)).date) -}}
+{{- $today := time.AsTime (printf "%sT00:00:00Z" (now.UTC.Format "2006-01-02")) -}}
+{{- $scheduled = dict "posts" (len .) "days" (int (div ($last.Sub $today).Hours 24)) -}}
+{{- end -}}
+{{- dict "week" .Params.weekStart "posts" (len $d.posts) "newAuthors" $authors "scheduled" $scheduled | jsonify -}}

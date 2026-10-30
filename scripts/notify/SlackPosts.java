@@ -118,21 +118,40 @@ public class SlackPosts {
         String review = SITE + "/today/week-review/" + start.toLocalDate() + "/";
         StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size()
                 + "), see the overview on <" + review + "|the weekly review>");
-        newAuthors(review + "review.json").ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
+        JsonNode data = reviewData(review + "review.json");
+        newAuthors(data).ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
+        scheduled(data).ifPresent(n -> text.append("\n\n").append(n));
         send(webhook, dryRun, text.toString());
     }
 
     // The week page works out who published a first article; the feed cannot.
     // Any failure drops the section rather than the whole announcement.
-    static Optional<String> newAuthors(String url) {
+    static JsonNode reviewData(String url) {
         try {
             HttpResponse<String> r = HttpClient.newHttpClient().send(
                     HttpRequest.newBuilder(URI.create(url)).timeout(Duration.ofSeconds(30))
                             .header("User-Agent", "foojay.io").build(),
                     HttpResponse.BodyHandlers.ofString());
             if (r.statusCode() != 200) throw new IllegalStateException(url + " answered " + r.statusCode());
+            return new ObjectMapper().readTree(r.body());
+        } catch (Exception e) {
+            System.out.println("No review data: " + e.getMessage());
+            return new ObjectMapper().createObjectNode();
+        }
+    }
+
+    static Optional<String> scheduled(JsonNode data) {
+        int posts = data.path("scheduled").path("posts").asInt();
+        if (posts == 0) return Optional.empty();
+        int days = data.path("scheduled").path("days").asInt();
+        return Optional.of(posts + (posts == 1 ? " post is" : " posts are") + " already scheduled for the next "
+                + days + (days == 1 ? " day" : " days") + ".");
+    }
+
+    static Optional<String> newAuthors(JsonNode data) {
+        try {
             List<String> links = new ArrayList<>();
-            for (JsonNode a : new ObjectMapper().readTree(r.body()).path("newAuthors")) {
+            for (JsonNode a : data.path("newAuthors")) {
                 links.add("<" + a.path("url").asText() + "|" + esc(a.path("name").asText()) + ">");
             }
             if (links.isEmpty()) return Optional.empty();

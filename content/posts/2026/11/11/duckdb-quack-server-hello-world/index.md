@@ -1,6 +1,6 @@
 ---
 title: "Setting Up a DuckDB Quack Server: A Hello World"
-date: "2026-11-04"
+date: "2026-11-11"
 description: "A step-by-step hello world for the Quack remote protocol in DuckDB 2.0: start a server in one terminal, connect from another, and read your first remote row."
 authors:
   - "geertjan-wielenga"
