@@ -608,6 +608,14 @@ enableGitInfo = true
   [menu.main.params]
     desc = "Organizations deciding on Foojay’s roadmap and direction"
 
+[[menu.main]]
+  name = "Foojay Statistics"
+  parent = "About"
+  url = "/statistics/"
+  weight = 47
+  [menu.main.params]
+    desc = "Articles, authors, reads and community in numbers"
+
 # ---------------------------------------------------------------------------
 # Footer navigation
 #

@@ -1,0 +1,189 @@
+{{ define "main" }}
+{{- $s := partial "site-stats.html" . -}}
+{{- $c := $s.content -}}
+{{- $v := $s.views -}}
+{{- $m := $s.community -}}
+{{/* Resolved, not typed, so a renamed page breaks the build. */}}
+{{- $jugs := (site.GetPage "/pages/java-user-groups-jugs.md").RelPermalink -}}
+{{- $champions := (site.GetPage "/pages/java-champions.md").RelPermalink -}}
+{{- $conferences := (site.GetPage "/pages/java-conferences.md").RelPermalink -}}
+{{- $calendar := (site.GetPage "/pages/calendar.md").RelPermalink -}}
+{{- $articles := (site.GetPage "/posts").RelPermalink -}}
+{{- $authors := (site.GetPage "/authors").RelPermalink -}}
+{{- $categories := (site.GetPage "/categories").RelPermalink -}}
+{{- $pedia := (site.GetPage "/pedia").RelPermalink -}}
+{{- $sponsors := (site.GetPage "/sponsors").RelPermalink -}}
+{{- $sitemap := (site.GetPage "/pages/sitemap.md").RelPermalink -}}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+  </div>
+</div>
+
+<div class="layout-with-sidebar">
+  <article class="content-col page-single prose">
+
+    <h2 id="content">Content</h2>
+    <p>What has been published on foojay.io so far, counted from the pages the site serves today.</p>
+    <ul class="stats-grid stats-grid--content">
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.posts }}</strong><span><a href="{{ $articles }}">Articles</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.authors }}</strong><span><a href="{{ $authors }}">Authors</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.categories }}</strong><span><a href="{{ $categories }}">Categories</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.pedia }}</strong><span><a href="{{ $pedia }}">Pedia entries</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.pages }}</strong><span><a href="{{ $sitemap }}">Pages</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.sponsors }}</strong><span><a href="{{ $sponsors }}">Sponsors</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.words }}</strong><span>Words published</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.crossposts }}</strong><span>Cross-posted articles</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $c.withTranscript }}</strong><span>Articles with a transcript</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.jvmWeeklyRoundups }}</strong><span>JVM Weekly roundups</span></li>
+    </ul>
+
+    <h2 id="articles-per-year">Articles per year</h2>
+    <p>How many articles went live on Foojay.</p>
+    {{ template "chart" (dict "id" "stats-years" "what" "Articles published per year" "data" $c.postsByYear "days" $s.days.articles "color" "--brand-accent-strong") }}
+
+    <h2 id="new-authors">New authors per year</h2>
+    <p>How many authors published their first article on Foojay.</p>
+    {{ template "chart" (dict "id" "stats-new-authors" "what" "New authors per year" "data" $c.newAuthorsByYear "days" $s.days.newAuthors "color" "--brand-secondary") }}
+
+    {{ if $v.total }}
+    <h2 id="reads">Reads</h2>
+    <p>How often pages have been read, including the counts carried over from the previous Foojay site. Blocked trackers do not affect this first-party counter.</p>
+    <ul class="stats-grid stats-grid--reads">
+      <li><strong>{{ lang.FormatNumberCustom 0 $v.total }}</strong><span>Reads in total</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $v.posts }}</strong><span>On articles</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $v.pages }}</strong><span>On pages</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $v.pedia }}</strong><span>On Pedia entries</span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $v.authors }}</strong><span>On author pages</span></li>
+    </ul>
+    {{ end }}
+
+    <h2 id="community">Community</h2>
+    <p>The Java user groups, champions, conferences and events listed on foojay.io.</p>
+    <ul class="stats-grid stats-grid--community">
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.jugs }}</strong><span><a href="{{ $jugs }}">Java User Groups</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.jugsWithFeed }}</strong><span><a href="{{ $jugs }}">JUGs with an event feed</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.javaChampions }}</strong><span><a href="{{ $champions }}">Java Champions</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.conferences.total }}</strong><span><a href="{{ $conferences }}">Conferences</a></span><small>{{ lang.FormatNumberCustom 0 $m.conferences.upcoming }} upcoming</small></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.calendar.upcomingItems }}</strong><span><a href="{{ $calendar }}">Upcoming calendar events</a></span></li>
+    </ul>
+
+  </article>
+  <aside class="sidebar" data-pagefind-ignore>
+    <div class="widget toc">
+      <h2>On this page</h2>
+      <nav id="TableOfContents"><ul>
+        <li><a href="#content">Content</a></li>
+        <li><a href="#articles-per-year">Articles per year</a></li>
+        <li><a href="#new-authors">New authors per year</a></li>
+        {{ if $v.total }}<li><a href="#reads">Reads</a></li>{{ end }}
+        <li><a href="#community">Community</a></li>
+      </ul></nav>
+    </div>
+    {{ partial "ads-widget.html" . }}
+    {{ partial "sidebar-sponsors.html" . }}
+  </aside>
+</div>
+
+<script src="{{ "vendor/chartjs/chart.umd.js" | relURL }}"></script>
+<script>
+  (function () {
+    if (!window.Chart) return;
+    var css = getComputedStyle(document.documentElement);
+    var ink = css.getPropertyValue('--ink-muted').trim();
+        var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function option(value, text) {
+      var o = document.createElement('option');
+      o.value = value; o.textContent = text;
+      return o;
+    }
+    function select(label, controls) {
+      var wrap = document.createElement('label');
+      wrap.textContent = label + ' ';
+      var sel = document.createElement('select');
+      wrap.appendChild(sel);
+      controls.appendChild(wrap);
+      return sel;
+    }
+
+    document.querySelectorAll('canvas[data-days]').forEach(function (el) {
+      var days = JSON.parse(el.dataset.days);
+      var figure = el.parentNode;
+      var years = Object.keys(days).map(function (k) { return k.slice(0, 4); })
+        .filter(function (y, i, a) { return a.indexOf(y) === i; }).sort();
+
+      var controls = document.createElement('div');
+      controls.className = 'stats-chart__controls';
+      figure.insertBefore(controls, el);
+      var yearSel = select('Year', controls);
+      var monthSel = select('Month', controls);
+      yearSel.appendChild(option('', 'All years'));
+      years.forEach(function (y) { yearSel.appendChild(option(y, y)); });
+      monthSel.appendChild(option('', 'All months'));
+      MONTHS.forEach(function (m, i) { monthSel.appendChild(option(pad(i + 1), m)); });
+
+      function sum(prefix) {
+        return Object.keys(days).reduce(function (t, k) { return k.indexOf(prefix) === 0 ? t + days[k] : t; }, 0);
+      }
+      function series() {
+        var y = yearSel.value, m = monthSel.value, labels = [], values = [];
+        if (!y) {
+          years.forEach(function (yy) { labels.push(yy); values.push(sum(yy)); });
+        } else if (!m) {
+          MONTHS.forEach(function (name, i) { labels.push(name); values.push(sum(y + '-' + pad(i + 1))); });
+        } else {
+          var n = new Date(+y, +m, 0).getDate();
+          for (var d = 1; d <= n; d++) { labels.push(String(d)); values.push(days[y + '-' + m + '-' + pad(d)] || 0); }
+        }
+        return { labels: labels, values: values };
+      }
+
+      var chart = new Chart(el, {
+        type: 'bar',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: css.getPropertyValue(el.dataset.color).trim(), borderRadius: 4 }] },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: ink }, grid: { display: false } },
+            y: { beginAtZero: true, ticks: { color: ink, precision: 0 } }
+          },
+          onHover: function (e, hit) { e.native.target.style.cursor = hit.length && !monthSel.value ? 'pointer' : 'default'; },
+          onClick: function (e, hit) {
+            if (!hit.length || monthSel.value) return;
+            if (!yearSel.value) yearSel.value = years[hit[0].index];
+            else monthSel.value = pad(hit[0].index + 1);
+            render();
+          }
+        }
+      });
+
+      function render() {
+        monthSel.disabled = !yearSel.value;
+        if (!yearSel.value) monthSel.value = '';
+        var s = series();
+        chart.data.labels = s.labels;
+        chart.data.datasets[0].data = s.values;
+        chart.update();
+        el.setAttribute('aria-label', el.dataset.what + ': ' + s.labels.map(function (l, i) { return l + ' ' + s.values[i]; }).join(', '));
+      }
+      yearSel.addEventListener('change', render);
+      monthSel.addEventListener('change', render);
+      render();
+    });
+  })();
+</script>
+{{ end }}
+
+{{/* Chart.js is vendored (v4.4.7). The aria-label carries the same numbers
+     for a screen reader. */}}
+{{ define "chart" }}
+{{- $label := slice -}}
+{{- range $k, $n := .data }}{{ $label = $label | append (printf "%s %d" $k $n) }}{{ end -}}
+<figure class="stats-chart">
+  <canvas id="{{ .id }}" data-what="{{ .what }}" data-color="{{ .color }}" role="img" aria-label="{{ .what }}: {{ delimit $label ", " }}"
+          data-days='{{ .days | jsonify }}'></canvas>
+</figure>
+{{ end }}

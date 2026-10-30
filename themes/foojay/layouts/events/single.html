@@ -279,7 +279,17 @@
 
       var today = new Date();
       var todayKey = keyOf(today);
-      var cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+      /* The month the grid opens on. When today's week holds the month's last
+         day, the current month would be a single row, so open on the next one;
+         its grid starts on the Monday holding the 1st, so this week still shows. */
+      function homeMonth() {
+        var lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        var weekEnd = new Date(today.getFullYear(), today.getMonth(),
+                               today.getDate() + 6 - ((today.getDay() + 6) % 7));
+        var m = weekEnd >= lastDay ? 1 : 0;
+        return new Date(today.getFullYear(), today.getMonth() + m, 1);
+      }
+      var cursor = homeMonth();
 
       /* THE CALENDAR HAS NO PAST, so neither does the grid.
          Nothing here can start before today -- JugEvents.java drops a meetup
@@ -546,7 +556,7 @@
       prevBtn.addEventListener('click', function () { step(-1); });
       nextBtn.addEventListener('click', function () { step(1); });
       root.querySelector('[data-cal-today]').addEventListener('click', function () {
-        cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+        cursor = homeMonth();
         renderGrid();
         /* Stay in the view the reader chose -- forcing the grid here dropped a
            phone, which opens on the agenda, into the one view that does not fit
