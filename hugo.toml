@@ -777,6 +777,12 @@ enableGitInfo = true
   url = "/our-sponsors/"
   weight = 35
 
+[[menu.footer]]
+  name = "Foojay Statistics"
+  parent = "footer-about"
+  url = "/statistics/"
+  weight = 36
+
 # ---------------------------------------------------------------------------
 
 [[menu.footer]]
