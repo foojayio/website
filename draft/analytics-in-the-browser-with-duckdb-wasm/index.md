@@ -30,7 +30,7 @@ Moving analytics into the browser changes two things about a data-heavy UI: what
 1. **Interactions become instant.** Once the data is in the tab, a re-aggregation over tens of thousands of rows is a local, in-memory columnar query. There's no network latency, no JSON serialisation, no connection pool. Filters and drill-downs respond immediately.
 2. **Your server does far less work.** In the classic pattern, ten users each clicking twenty filters means two hundred analytical queries on your infrastructure. Here it's ten data downloads. The queries run on the user's machine instead of yours.
 3. **Java stays the source of truth.** This isn't "replace the backend with JavaScript". Java still decides *what* data a user may see, applies security and business rules, and produces the dataset. The browser only gets to ask questions about what it was given.
-4. **It's SQL, not a bespoke JavaScript API.** The front-end speaks the same language as your database and your data team. A query you prototype in the DuckDB CLI or in Java via JDBC runs unchanged in the browser.
+4. **It's SQL, not a bespoke JavaScript API.** The front-end speaks the same language as your database and your data team. For SQL that both clients support, a query you prototype in the DuckDB CLI or in Java via JDBC runs unchanged in the browser. The browser build is not identical to the native one: it ships a smaller set of extensions and has its own HTTPFS implementation, so a query that leans on native file or network I/O is where the two can diverge.
 5. **It works offline and shares well.** Once loaded, the page keeps working without the server. That makes it a good fit for reports you email, dashboards on flaky conference Wi-Fi, or exploratory tools you hand to someone outside your network.
 
 This works best when the dataset per user is small enough to download (megabytes to low hundreds of megabytes) but the number of questions asked about it is large.
@@ -81,7 +81,8 @@ import java.util.Random;
 public class Server {
 
     public static void main(String[] args) throws Exception {
-        var server = HttpServer.create(new InetSocketAddress(8080), 0);
+        // Loopback only: this demo has no auth, so don't expose it to the network
+        var server = HttpServer.create(new InetSocketAddress("127.0.0.1", 8080), 0);
 
         // Data endpoint: Java produces the data
         server.createContext("/api/sales.csv", ex -> {
@@ -142,45 +143,55 @@ Create `index.html` next to it. The script boots DuckDB-Wasm, fetches the CSV fr
   <table id="results"></table>
 
   <script type="module">
-    import * as duckdb from 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/+esm';
     const status = document.getElementById('status');
 
-    // 1. Boot DuckDB-Wasm
-    const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
-    const workerUrl = URL.createObjectURL(
-      new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
-    );
-    const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), new Worker(workerUrl));
-    await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
-    URL.revokeObjectURL(workerUrl);
+    try {
+      // Dynamic import so a CDN failure lands in the catch below, not the console.
+      // The version is pinned so a new release can't change the page under you.
+      const duckdb = await import('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm');
 
-    // 2. Fetch the data from the Java backend and register it as a file
-    status.textContent = 'Fetching data from Java…';
-    const csv = await (await fetch('/api/sales.csv')).text();
-    await db.registerFileText('sales.csv', csv);
+      // 1. Boot DuckDB-Wasm
+      const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+      const workerUrl = URL.createObjectURL(
+        new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
+      );
+      const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), new Worker(workerUrl));
+      await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+      URL.revokeObjectURL(workerUrl);
 
-    // 3. Query it with SQL, in the browser
-    const conn = await db.connect();
-    await conn.query(`CREATE TABLE sales AS SELECT * FROM read_csv('sales.csv')`);
-    const result = await conn.query(`
-      SELECT region,
-             count(*)               AS orders,
-             round(sum(amount), 2)  AS revenue,
-             round(avg(amount), 2)  AS avg_order
-      FROM sales
-      GROUP BY region
-      ORDER BY revenue DESC
-    `);
+      // 2. Fetch the data from the Java backend and register it as a file
+      status.textContent = 'Fetching data from Java…';
+      const response = await fetch('/api/sales.csv');
+      if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
+      const csv = await response.text();
+      await db.registerFileText('sales.csv', csv);
 
-    // 4. Render the result
-    const rows = result.toArray().map(r => r.toJSON());
-    document.getElementById('results').innerHTML =
-      `<tr><th>Region</th><th>Orders</th><th>Revenue</th><th>Avg order</th></tr>` +
-      rows.map(r => `<tr><td>${r.region}</td><td>${r.orders}</td>
-                         <td>${r.revenue}</td><td>${r.avg_order}</td></tr>`).join('');
-    status.textContent = `Analysed ${csv.split('\n').length - 2} rows in the browser.`;
+      // 3. Query it with SQL, in the browser
+      const conn = await db.connect();
+      await conn.query(`CREATE TABLE sales AS SELECT * FROM read_csv('sales.csv')`);
+      const result = await conn.query(`
+        SELECT region,
+               count(*)               AS orders,
+               round(sum(amount), 2)  AS revenue,
+               round(avg(amount), 2)  AS avg_order
+        FROM sales
+        GROUP BY region
+        ORDER BY revenue DESC
+      `);
 
-    await conn.close();
+      // 4. Render the result
+      const rows = result.toArray().map(r => r.toJSON());
+      document.getElementById('results').innerHTML =
+        `<tr><th>Region</th><th>Orders</th><th>Revenue</th><th>Avg order</th></tr>` +
+        rows.map(r => `<tr><td>${r.region}</td><td>${r.orders}</td>
+                           <td>${r.revenue}</td><td>${r.avg_order}</td></tr>`).join('');
+      status.textContent = `Analysed ${csv.split('\n').length - 2} rows in the browser.`;
+
+      await conn.close();
+    } catch (err) {
+      status.textContent = `Could not load the dashboard: ${err.message}`;
+      throw err;
+    }
   </script>
 </body>
 </html>
@@ -238,7 +249,7 @@ Know the limits before you move analytics client-side.
 - **Data size.** The browser tab has a memory budget, and WebAssembly adds its own ceiling. Megabytes are comfortable; gigabytes are not. For big data, query server-side, or let DuckDB-Wasm read only the parts of a remote Parquet file it needs via HTTP range requests.
 - **First load.** The engine is a multi-megabyte download. Browsers cache it, but for a page someone visits once to check a single number, a plain server-rendered value is faster.
 - **Freshness.** Data in the tab is a snapshot. If users need second-by-second live numbers, you'll need a refresh strategy or a streaming-first tool.
-- **Threads.** Multi-threaded execution in the browser requires cross-origin isolation headers. Without them, DuckDB-Wasm runs single-threaded. That's plenty for the scenario here, but worth knowing before you benchmark.
+- **Threads.** This sample runs single-threaded. `getJsDelivrBundles()` returns the `mvp` and `eh` builds, not the `coi` build that threading needs, so headers alone won't change it. Multi-threaded execution means serving the `coi` bundle *and* setting the cross-origin isolation headers (`Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`). Single-threaded is plenty for the scenario here, but know this before you benchmark.
 
 A rule of thumb: if you'd happily email the dataset to the user as an attachment, you can probably send it to their browser.
 
@@ -262,11 +273,17 @@ try (var conn = DriverManager.getConnection("jdbc:duckdb:");
 }
 ```
 
-Serve the file with `Content-Type: application/octet-stream`, and in the browser swap the text registration for a binary one:
+Serve the file with `Content-Type: application/octet-stream`, and in the browser replace steps 2 and 3 with a binary fetch and a Parquet read:
 
 ```js
-const buf = new Uint8Array(await (await fetch('/api/sales.parquet')).arrayBuffer());
+// 2. Fetch Parquet (binary) instead of CSV
+const response = await fetch('/api/sales.parquet');
+if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
+const buf = new Uint8Array(await response.arrayBuffer());
 await db.registerFileBuffer('sales.parquet', buf);
+
+// 3. Read it
+const conn = await db.connect();
 await conn.query(`CREATE TABLE sales AS SELECT * FROM read_parquet('sales.parquet')`);
 ```
 
