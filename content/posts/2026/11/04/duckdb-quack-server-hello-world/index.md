@@ -1,6 +1,6 @@
 ---
 title: "Setting Up a DuckDB Quack Server: A Hello World"
-date: "2026-01-01"
+date: "2026-11-04"
 description: "A step-by-step hello world for the Quack remote protocol in DuckDB 2.0: start a server in one terminal, connect from another, and read your first remote row."
 authors:
   - "geertjan-wielenga"
@@ -8,7 +8,11 @@ image: "duckdb-quack-hello-world.jpg"
 categories:
   - "Databases"
   - "Developer Tools"
-related_posts: []
+related_posts:
+  - "duckdb-2-0-is-here"
+  - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"
+  - "running-duckdbs-jdbc-driver-in-a-graalvm-native-image"
+  - "from-opentelemetry-to-duckdb"
 ---
 
 DuckDB is known for being an [in-process database](https://duckdb.org/why_duckdb),
