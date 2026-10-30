@@ -1,7 +1,7 @@
 ---
 title: "Rewrite Everything in Java: Not Rust"
 date: "2026-10-30"
-description: "A Java word processor built with Codename One beats its Rust twin on startup, typing latency, memory, binary size, code size and CI time, and also runs on..."
+description: "A Java word processor built with Codename One beats its Rust twin on startup, typing latency, memory, binary size, code size and CI time, and also runs on iPhone, Android and the web."
 authors: ["shai-almog"]
 image: "rewrite-everything-in-java-not-rust-deace7455a.jpg"
 categories: ["Java"]
@@ -14,10 +14,9 @@ Rust is a great language for a kernel, a driver or a database engine. Code like 
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
 
+So we tested it instead of arguing about it. [Wordcraft](https://github.com/storytold/wordcraft) is an open-source word processor written in Rust with egui. It's a serious project with over 15,000 GitHub stars, a ribbon, styles, tables, track changes and mail merge, and it publishes a 502-row feature catalog, which makes it a fair target. We built [the same word processor in Java with Codename One](https://github.com/shai-almog/cn1-wordprocessor), implemented every catalog row Wordcraft implements, and measured both apps on the same GitHub runners in the same CI run.
 
-So we tested it instead of arguing about it. [Wordcraft](https://github.com/storytold/wordcraft) is an open source word processor written in Rust with egui. It's a serious project with over 15,000 GitHub stars, a ribbon, styles, tables, track changes and mail merge, and it publishes a 502-row feature catalog, which makes it a fair target. We built [the same word processor in Java with Codename One](https://github.com/shai-almog/cn1-wordprocessor), implemented every catalog row Wordcraft implements, and measured both apps on the same GitHub runners in the same CI run.
-
-The Java version is faster, smaller, uses less memory, has about two thirds of the code and runs its tests several times cheaper. It also feels more native: it has a real macOS menu bar, copies formatted text into other apps, and lets you drag text and files between the document and the rest of the OS. And it ships to iPhone and Android from the same source. The details are below.
+The Java version is faster, smaller, uses less memory, has about two-thirds of the code and runs its tests several times cheaper. It also feels more native: it has a real macOS menu bar, copies formatted text into other apps, and lets you drag text and files between the document and the rest of the OS. And it ships to iPhone and Android from the same source. The details are below.
 
 This is also the start of a busy week. A word processor makes the case with one app; the rest of the week is about what you can start with today. Three new full-stack templates join [Wayline](https://www.codenameone.com/blog/create-an-uber-clone-in-1-minute/): a real-time 3D strategy game, an end-to-end encrypted messenger and a food delivery service. Each one is an app and its server in one Java project that you can brand and ship.
 
@@ -32,13 +31,11 @@ Today is the Java against Rust story. Then one template a day, followed by the f
 - **Wednesday, October 28:** [Native Menus, File Dialogs and 3D Models](https://www.codenameone.com/blog/desktop-dialogs-menus-3d-models/). Native open and save dialogs, native menu bars with standard commands, and animated 3D models.
 - **Thursday, October 29:** [WebRTC Calls, Key Agreement and ORM Checks at Build Time](https://www.codenameone.com/blog/private-calls-and-safer-backends/). WebRTC calls, key agreement and HKDF everywhere, a backend client with mutual TLS, and ORM mistakes that fail the build.
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/build-a-multiplayer-strategy-game-in-java/"><img width="420" height="909" src="skirmish-battle-e889d393bc.png" alt="A Skirmish battle with towers, troops and a hand of cards" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Skirmish, Saturday.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/launch-your-own-private-messenger/"><img width="419" height="909" src="parley-chats-cf5acea888.png" alt="The Parley chat list" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Parley, Sunday.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/launch-your-own-food-delivery-app/"><img width="420" height="909" src="savor-customer-home-1a637d2cf4.png" alt="The Savor home screen with food categories and restaurants" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Savor, Monday.</figcaption></figure>
-</div>
-
+{{< gallery cols="3" >}}
+skirmish-battle-e889d393bc.jpg | Skirmish, Saturday. | A Skirmish battle with towers, troops and a hand of cards
+parley-chats-cf5acea888.png | Parley, Sunday. | The Parley chat list
+savor-customer-home-1a637d2cf4.jpg | Savor, Monday. | The Savor home screen with food categories and restaurants
+{{< /gallery >}}
 
 ## The numbers
 
@@ -81,7 +78,7 @@ How does Java beat Rust here? Codename One compiles the app ahead of time throug
 
 ### It's smaller, and it scales better
 
-"Garbage collection wastes memory" is the first thing people tell me when I say Java should be used for desktop and mobile apps. The measurements say otherwise. The executable is less than two thirds the size on every OS, half on Linux. Idle memory is lower on all three, and the gap grows with the document:
+"Garbage collection wastes memory" is the first thing people tell me when I say Java should be used for desktop and mobile apps. The measurements say otherwise. The executable is less than two-thirds the size on every OS, half on Linux. Idle memory is lower on all three, and the gap grows with the document:
 
 | Idle RAM | 1 paragraph | 1,000 paragraphs | 10,000 paragraphs |
 | --- | --- | --- | --- |
@@ -93,7 +90,7 @@ With a 10,000-paragraph document, the Rust version needs between 65% and 95% mor
 
 ### It costs less for AI and CI
 
-The Java code base is about two thirds of the lines and three fifths of the tokens. If you work with coding agents, tokens are the cost model: every task starts with the agent reading code, and every edit it proposes is code a human reviews. A smaller code base for the same feature catalog means less to read, a smaller context and smaller diffs.
+The Java code base is about two-thirds of the lines and three fifths of the tokens. If you work with coding agents, tokens are the cost model: every task starts with the agent reading code, and every edit it proposes is code a human reviews. A smaller code base for the same feature catalog means less to read, a smaller context and smaller diffs.
 
 The word processor itself was written that way. I started with Codex, then switched to Claude, and Codename One's built-in MCP server let the agents drive the running app and inspect it while they worked.
 
@@ -128,16 +125,14 @@ The same source builds a native iPhone and iPad app, an Android app, a browser a
 
 There's one platform Wordcraft supports that we don't: FreeBSD. Codename One doesn't target it today. If there's demand for FreeBSD support, we'll add it, so tell us in the comments.
 
+{{< gallery cols="2" >}}
+wordprocessor-iphone-8c80a8da69.jpg | iPhone | The Java word processor on an iPhone
+wordprocessor-android-252399a62c.jpg | Android | The Java word processor on Android
+{{< /gallery >}}
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordprocessor-iphone.jpg"><img width="552" height="1200" src="wordprocessor-iphone-8c80a8da69.jpg" alt="The Java word processor on an iPhone" loading="lazy" style="width:100%;height:auto" /></a><figcaption>iPhone</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordprocessor-android.jpg"><img width="540" height="1200" src="wordprocessor-android-252399a62c.jpg" alt="The Java word processor on Android" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Android</figcaption></figure>
-</div>
-
-
-
-<figure style="margin:24px 0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordprocessor-web.jpg"><img src="wordprocessor-web-1cb75816ae.jpg" alt="The Java word processor running in a browser" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The same app in a browser.</figcaption></figure>
-
+{{< gallery cols="1" >}}
+wordprocessor-web-1cb75816ae.jpg | The same app in a browser. | The Java word processor running in a browser
+{{< /gallery >}}
 
 ### It feels more native
 
@@ -153,28 +148,26 @@ This is the part I care about most, because users feel it before they ever see a
 | High contrast | Follows the OS setting live | Not supported |
 | iPhone, iPad and Android | Native apps with touch selection handles | No mobile target |
 
+{{< gallery cols="1" >}}
+native-menu-submenu-71146182bc.jpg | The native menu bar on macOS, with submenus. | The Java word processor's native File menu with an Export submenu on macOS
+{{< /gallery >}}
 
-<figure style="margin:24px 0"><a href="https://www.codenameone.com/blog/release-2026-10-23/native-menu-submenu.jpg"><img width="1400" height="871" src="native-menu-submenu-71146182bc.jpg" alt="The Java word processor's native File menu with an Export submenu on macOS" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The native menu bar on macOS, with submenus.</figcaption></figure>
-
-
-
-<figure style="margin:24px 0"><a href="https://www.codenameone.com/blog/release-2026-10-23/native-menu-app-roles.jpg"><img width="1000" height="600" src="native-menu-app-roles-244a67e02c.jpg" alt="The macOS application menu with About, Settings and Quit" loading="lazy" style="width:100%;height:auto" /></a><figcaption>About, Settings and Quit where a Mac user expects them. Wednesday's post shows how any app gets this.</figcaption></figure>
-
+{{< gallery cols="1" >}}
+native-menu-app-roles-244a67e02c.jpg | About, Settings and Quit where a Mac user expects them. Wednesday's post shows how any app gets this. | The macOS application menu with About, Settings and Quit
+{{< /gallery >}}
 
 ### It looks at least as good
 
 Wordcraft is on the left, the Java app on the right. Both are polished desktop apps, and both follow the OS dark mode live. Only one of them also looks right on a phone and follows the high contrast setting.
 
+{{< gallery cols="2" >}}
+wordcraft-rust-15eeacca43.jpg | Wordcraft (Rust). Screenshot from its README. | Wordcraft, the Rust word processor, showing its built-in sample document
+wordprocessor-editor-light-1db0ab6735.jpg | The Java version on macOS. | The Codename One word processor in light mode on macOS
+{{< /gallery >}}
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordcraft-rust.jpg"><img width="1600" height="1000" src="wordcraft-rust-15eeacca43.jpg" alt="Wordcraft, the Rust word processor, showing its built-in sample document" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Wordcraft (Rust). Screenshot from its README.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordprocessor-editor-light.jpg"><img width="1600" height="835" src="wordprocessor-editor-light-1db0ab6735.jpg" alt="The Codename One word processor in light mode on macOS" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The Java version on macOS.</figcaption></figure>
-</div>
-
-
-
-<figure style="margin:24px 0"><a href="https://www.codenameone.com/blog/release-2026-10-23/wordprocessor-editor-dark.jpg"><img src="wordprocessor-editor-dark-22f9e9def2.jpg" alt="The Codename One word processor in dark mode" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Dark mode, following the OS live.</figcaption></figure>
-
+{{< gallery cols="1" >}}
+wordprocessor-editor-dark-22f9e9def2.jpg | Dark mode, following the OS live. | The Codename One word processor in dark mode
+{{< /gallery >}}
 
 ### It's just as secure
 
@@ -186,7 +179,7 @@ The difference is in the supply chain. Wordcraft's `Cargo.lock` pulls in 534 ext
 
 For size and speed, probably. It would take a lot of work and a deep rethink of memory layout and inlining, which means even more code and even slower builds. Matching Java here would mean rebuilding, inside Rust, what Java already provides. That's the cost I'm talking about.
 
-A personal note. I use Firefox every day, and I love what the Rust work did for its speed and stability. But Firefox is a special case, and I think it proves my point. The parts Rust replaced are the low-level ones: the style engine, the renderer, media parsing. That's exactly where Rust belongs, and it works great there. The browser's user interface, the high-level part, is written in JavaScript, a JIT compiled, garbage collected language that gives the team flexibility. Firefox effectively reinvented the high-level side of Java for itself. A browser has to have both halves. Your application only has the second one.
+A personal note. I use Firefox every day, and I love what the Rust work did for its speed and stability. But Firefox is a special case, and I think it proves my point. The parts Rust replaced are the low-level ones: the style engine, the renderer, media parsing. That's exactly where Rust belongs, and it works great there. The browser's user interface, the high-level part, is written in JavaScript, a JIT-compiled, garbage-collected language that gives the team flexibility. Firefox effectively reinvented the high-level side of Java for itself. A browser has to have both halves. Your application only has the second one.
 
 ## Why this matters now
 
@@ -200,43 +193,35 @@ Each template is a working application and its server in one Java project. The c
 
 ## More This Week
 
-### A real-time 3D strategy game, royalty free
+### A real-time 3D strategy game, royalty-free
 
 For years I avoided pitching Codename One for games. That changed while we built these templates: a modern mobile game is mostly app. Sign-in, menus, a shop, friends, quests, push and a server, with the battle as a small part of the code. **Skirmish** is a real-time strategy game in the style of Clash Royale. Two players face each other across a 3D arena of animated glTF characters, each drawing troops and spells from a deck, and try to bring down the other's towers. Matches run online in lockstep over a WebSocket, with replays, progression, gem packs, a season pass, ads, and invites.
-
 
 <video controls playsinline preload="metadata" poster="https://www.codenameone.com/blog/release-2026-10-23/skirmish-walkthrough-poster.jpg" style="width:100%;max-width:420px;height:auto;display:block;margin:0 auto" aria-label="A walkthrough of Skirmish: sign-in, the home screen, the guided training battle and a battle against a bot">
 <source src="https://www.codenameone.com/blog/release-2026-10-23/skirmish-walkthrough.mp4" type="video/mp4">
 <a href="https://www.codenameone.com/blog/release-2026-10-23/skirmish-walkthrough.mp4">Download the Skirmish walkthrough video</a>.
 </video>
 
-
 Every menu in that video is a regular Codename One component, laid out with layout managers and styled in CSS.
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-home.png"><img width="420" height="909" src="skirmish-home-42d6a61c8f.png" alt="The Skirmish home screen" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Home, chests and quests.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-online-battle.png"><img width="420" height="909" src="skirmish-online-battle-a93e5780d6.png" alt="An online Skirmish match" loading="lazy" style="width:100%;height:auto" /></a><figcaption>An online match.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-shop.png"><img width="420" height="909" src="skirmish-shop-6ef75d2b70.png" alt="The Skirmish shop" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The shop.</figcaption></figure>
-</div>
-
+{{< gallery cols="3" >}}
+skirmish-home-42d6a61c8f.jpg | Home, chests and quests. | The Skirmish home screen
+skirmish-online-battle-a93e5780d6.jpg | An online match. | An online Skirmish match
+skirmish-shop-6ef75d2b70.png | The shop. | The Skirmish shop
+{{< /gallery >}}
 
 The game is only half of what ships. **The Forge** is a level editor inside the game, where players and your designers build units, arenas, missions and whole campaigns and share them as packs. And an admin console runs the game like a live service: live matches, reports and flags, player history with audited moderation, queries over game data, engagement pipelines and promotions. It works on a phone and on the desktop.
 
+{{< gallery cols="3" >}}
+skirmish-forge-editor-57849b79d6.png | The Forge, the level editor. | The Forge level editor in Skirmish
+skirmish-forge-arena-4a18e78708.png | Designing an arena. | Designing an arena in the Forge
+skirmish-admin-overview-d05b638f0b.png | The admin console. | The Skirmish admin console on a phone
+{{< /gallery >}}
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-forge-editor.png"><img width="1125" height="2436" src="skirmish-forge-editor-57849b79d6.png" alt="The Forge level editor in Skirmish" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The Forge, the level editor.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-forge-arena.png"><img width="1125" height="2436" src="skirmish-forge-arena-4a18e78708.png" alt="Designing an arena in the Forge" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Designing an arena.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-admin-overview.png"><img width="420" height="909" src="skirmish-admin-overview-d05b638f0b.png" alt="The Skirmish admin console on a phone" loading="lazy" style="width:100%;height:auto" /></a><figcaption>The admin console.</figcaption></figure>
-</div>
-
-
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-desktop-admin-overview.png"><img width="800" height="480" src="skirmish-desktop-admin-overview-a2d82baf0f.png" alt="The Skirmish admin console on the desktop" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Live operations on the desktop.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/skirmish-desktop-admin-pipelines.png"><img width="800" height="480" src="skirmish-desktop-admin-pipelines-ddb15a8971.png" alt="Engagement pipelines in the Skirmish admin console" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Engagement pipelines.</figcaption></figure>
-</div>
-
+{{< gallery cols="2" >}}
+skirmish-desktop-admin-overview-a2d82baf0f.png | Live operations on the desktop. | The Skirmish admin console on the desktop
+skirmish-desktop-admin-pipelines-ddb15a8971.png | Engagement pipelines. | Engagement pipelines in the Skirmish admin console
+{{< /gallery >}}
 
 Adding a unit to the game is one line in the shared rules module:
 
@@ -249,16 +234,14 @@ No royalties, no per-install fees, no revenue share. Saturday's [Skirmish articl
 
 ### A messenger your server can't read
 
-Hospitals, companies and communities want their own messenger and can't use WhatsApp for it. **Parley** is that messenger: chats, groups, channels, voice notes, voice and video calls and linked devices, encrypted end to end with X3DH and the Double Ratchet, the design Signal uses. The server stores and forwards ciphertext, and calls go peer to peer.
+Hospitals, companies and communities want their own messenger and can't use WhatsApp for it. **Parley** is that messenger: chats, groups, channels, voice notes, voice and video calls and linked devices, encrypted end to end with X3DH and the Double Ratchet, the design Signal uses. The server stores and forwards ciphertext, and calls go peer-to-peer.
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/parley-chats.png"><img width="419" height="909" src="parley-chats-cf5acea888.png" alt="The Parley chat list" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Chats, groups and channels.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/parley-direct-chat-received.png"><img width="419" height="909" src="parley-direct-chat-received-80f1b2db04.png" alt="An encrypted Parley conversation" loading="lazy" style="width:100%;height:auto" /></a><figcaption>An encrypted conversation.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/parley-call-connected.png"><img width="419" height="909" src="parley-call-connected-96ee59bd2a.png" alt="A Parley call" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Calls, peer to peer.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/parley-admin-dashboard.png"><img width="419" height="909" src="parley-admin-dashboard-7b35bbd91f.png" alt="The Parley admin dashboard" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Moderation without reading messages.</figcaption></figure>
-</div>
-
+{{< gallery cols="4" >}}
+parley-chats-cf5acea888.png | Chats, groups and channels. | The Parley chat list
+parley-direct-chat-received-80f1b2db04.png | An encrypted conversation. | An encrypted Parley conversation
+parley-call-connected-96ee59bd2a.png | Calls, peer-to-peer. | A Parley call
+parley-admin-dashboard-7b35bbd91f.png | Moderation without reading messages. | The Parley admin dashboard
+{{< /gallery >}}
 
 The crypto reads like ordinary Java because the primitives are now part of Codename One:
 
@@ -276,14 +259,12 @@ Sunday's [Parley article](https://www.codenameone.com/blog/launch-your-own-priva
 
 Delivery platforms often take between 15% and 30% of every order. **Savor** gives a restaurant, a chain or a local startup its own service: one app whose landing screen depends on the role (customer, restaurant, courier or admin), card holds captured on delivery, live tracking on a map with no API key bill, and order and delivery state machines that can't get confused when two people act at once.
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/savor-customer-home.png"><img width="420" height="909" src="savor-customer-home-1a637d2cf4.png" alt="The Savor customer home screen" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Customer</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/savor-merchant-queue.png"><img width="420" height="909" src="savor-merchant-queue-2894e16e41.png" alt="The restaurant's order queue" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Restaurant</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/savor-courier-offer.png"><img width="420" height="909" src="savor-courier-offer-ba49408b34.png" alt="A delivery offer for a courier" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Courier</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/savor-admin-dashboard.png"><img width="420" height="909" src="savor-admin-dashboard-a6bab235a1.png" alt="The Savor admin dashboard" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Admin</figcaption></figure>
-</div>
-
+{{< gallery cols="4" >}}
+savor-customer-home-1a637d2cf4.jpg | Customer | The Savor customer home screen
+savor-merchant-queue-2894e16e41.png | Restaurant | The restaurant's order queue
+savor-courier-offer-ba49408b34.jpg | Courier | A delivery offer for a courier
+savor-admin-dashboard-a6bab235a1.png | Admin | The Savor admin dashboard
+{{< /gallery >}}
 
 Monday's [Savor article](https://www.codenameone.com/blog/launch-your-own-food-delivery-app/) shows the flow and the ways to reshape it, from a single restaurant to groceries or flowers.
 
@@ -291,14 +272,12 @@ Monday's [Savor article](https://www.codenameone.com/blog/launch-your-own-food-d
 
 The class library gained 116 classes and interfaces, including `java.util.function`, streams, `Optional`, `java.time` and readers and writers. Existing Java code ports with fewer changes, and ParparVM and the obfuscator strip whatever your app doesn't call, so the overhead is minor. There's still no reflection and no class loading, on purpose.
 
-We also tried something new to learn from what Unity does right: simple Unity 2D projects, C# scripts and all, now build and run as Codename One apps. Five open source games run unmodified. It's a proof of concept, and you can't take any Unity game and run it.
+We also tried something new to learn from what Unity does right: simple Unity 2D projects, C# scripts and all, now build and run as Codename One apps. Five open-source games run unmodified. It's a proof of concept, and you can't take any Unity game and run it.
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/unity-interop-fruitopia.png"><img width="960" height="540" src="unity-interop-fruitopia-457dc94f5a.png" alt="Fruitopia, an open source Unity platformer, running on Codename One" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Fruitopia</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/developer-guide/img/unity-interop-sokoban.png"><img width="960" height="540" src="unity-interop-sokoban-0d7074595d.png" alt="An open source Unity Sokoban game running on Codename One" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Sokoban</figcaption></figure>
-</div>
-
+{{< gallery cols="2" >}}
+unity-interop-fruitopia-457dc94f5a.png | Fruitopia | Fruitopia, an open-source Unity platformer, running on Codename One
+unity-interop-sokoban-0d7074595d.png | Sokoban | An open-source Unity Sokoban game running on Codename One
+{{< /gallery >}}
 
 Would that be useful to you? Tuesday's [Java and Unity article](https://www.codenameone.com/blog/bring-your-java-code-everywhere/) asks, and also covers a faster XML parser and a button in the API docs that runs each sample in your browser.
 
@@ -313,12 +292,10 @@ Command quit = Command.createDesktopRole(Command.DESKTOP_ROLE_QUIT, e -> quit())
 
 That's "Settings…" with Cmd+, on a Mac, "Options" under Tools on Windows and "Preferences" under Edit on Linux. Open and save dialogs are the operating system's own, with filters, options and a preview where the platform supports them:
 
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/file-dialog-preview-option.jpg"><img width="1110" height="880" src="file-dialog-preview-option-f6cc1656b5.jpg" alt="An open dialog with an image preview and a Remove location data option" loading="lazy" style="width:100%;height:auto" /></a><figcaption>An open dialog with a preview and an option.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/release-2026-10-23/native-menu-app-roles.jpg"><img width="1000" height="600" src="native-menu-app-roles-244a67e02c.jpg" alt="The macOS application menu with About, Settings and Quit" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Standard commands in the macOS application menu.</figcaption></figure>
-</div>
-
+{{< gallery cols="2" >}}
+file-dialog-preview-option-f6cc1656b5.jpg | An open dialog with a preview and an option. | An open dialog with an image preview and a Remove location data option
+native-menu-app-roles-244a67e02c.jpg | Standard commands in the macOS application menu. | The macOS application menu with About, Settings and Quit
+{{< /gallery >}}
 
 Wednesday's [desktop article](https://www.codenameone.com/blog/desktop-dialogs-menus-3d-models/) has the details, plus the animated 3D models behind Skirmish.
 
