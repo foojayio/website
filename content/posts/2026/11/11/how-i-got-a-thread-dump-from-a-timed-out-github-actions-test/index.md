@@ -1,6 +1,6 @@
 ---
 title: "How I got a thread dump from a timed-out GitHub Actions test"
-date: "2026-01-01"
+date: "2026-11-11"
 description: "When a JVM test hangs and GitHub Actions cancels the job, the test JVM is often still alive. Three ways to dump it, and an action that does it for you."
 canonical: "https://dev.to/maschiojv/how-i-got-a-thread-dump-from-a-timed-out-github-actions-test-hpp"
 authors:
@@ -14,6 +14,7 @@ related_posts:
   - "what-jstack-misses-when-your-java-service-uses-virtual-threads"
   - "virtual-thread-pinning-field-guide"
   - "masking-a-jvm-thread-dump-without-breaking-the-analysis"
+  - "enabling-ai-agents-to-use-a-real-debugger-instead-of-logging"
 ---
 
 A test hangs in CI, the job sits there for 30 minutes, and GitHub Actions cancels it. The log says the job exceeded its time limit and nothing about what the test was doing when it got stuck. Running it again locally rarely helps, because a timing problem that shows up on a 2-core runner can be close to impossible to reproduce on a laptop with 16.
