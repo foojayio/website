@@ -4,7 +4,7 @@ date: "2026-01-01"
 description: "A step-by-step hello world for the Quack remote protocol in DuckDB 2.0: start a server in one terminal, connect from another, and read your first remote row."
 authors:
   - "geertjan-wielenga"
-image: ""
+image: "duckdb-quack-hello-world.jpg"
 categories:
   - "Databases"
   - "Developer Tools"
