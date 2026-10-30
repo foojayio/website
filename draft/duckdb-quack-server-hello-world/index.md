@@ -183,8 +183,9 @@ A few things change once the client and server are on different machines:
   CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname = true);
   ```
 
-  Quack does not terminate TLS itself, so put a reverse proxy in front of it for
-  anything that leaves your own machine.
+  Non-local Quack URIs use HTTPS by default, with a self-signed certificate. For
+  production, put a TLS-terminating reverse proxy in front of Quack, or set
+  `ssl_cert_file` and `ssl_key_file` to use your own certificate.
 
 - Because the client is just DuckDB, any DuckDB connection can be the client,
   including a [JDBC](https://duckdb.org/docs/2.0/clients/java/overview) or
