@@ -111,7 +111,7 @@ A plain assertion failure doesn't trigger any of this, because the test JVM has 
 
 ## What gets sent
 
-With analysis on, the dump goes to [threadmine.dev](https://threadmine.dev/). The repository name isn't sent, and reports made without an account expire after seven days. If thread dumps can't leave your environment, set `analyze: false`. You still get the dump at the right moment, in the artifact, and nothing is sent anywhere.
+With analysis on, the dump goes to [threadmine.dev](https://threadmine.dev/). The repository name isn't sent, and reports made without an account expire after seven days. If thread dumps can't go to a third party, set `analyze: false`. You still get the dump at the right moment, and it only goes to the workflow artifact, which GitHub stores like the rest of your CI output.
 
 Without an account the limit is five analyses per hour and 20 per day per IP. GitHub-hosted runners share IPs, so on a busy day the summary says the analysis was skipped and the dump is still in the artifact. Windows runners aren't supported yet, and if the action itself breaks, you get a warning, not a second reason for the job to fail.
 
