@@ -3,6 +3,8 @@
 {{- $c := $s.content -}}
 {{- $v := $s.views -}}
 {{- $m := $s.community -}}
+{{/* One list drives the headings and the contents panel, so they cannot drift. */}}
+{{- $titles := dict "content" "Content" "articles" "Published Articles" "authors" "New Authors" "reads" "Reads" "community" "Community" -}}
 {{/* Resolved, not typed, so a renamed page breaks the build. */}}
 {{- $jugs := (site.GetPage "/pages/java-user-groups-jugs.md").RelPermalink -}}
 {{- $champions := (site.GetPage "/pages/java-champions.md").RelPermalink -}}
@@ -25,7 +27,7 @@
 <div class="layout-with-sidebar">
   <article class="content-col page-single prose">
 
-    <h2 id="content">Content</h2>
+    <h2 id="content">{{ index $titles "content" }}</h2>
     <p>What has been published on foojay.io so far, counted from the pages the site serves today.</p>
     <ul class="stats-grid stats-grid--content">
       <li><strong>{{ lang.FormatNumberCustom 0 $c.posts }}</strong><span><a href="{{ $articles }}">Articles</a></span></li>
@@ -40,16 +42,16 @@
       <li><strong>{{ lang.FormatNumberCustom 0 $m.jvmWeeklyRoundups }}</strong><span>JVM Weekly roundups</span></li>
     </ul>
 
-    <h2 id="articles-per-year">Published Articles</h2>
+    <h2 id="articles">{{ index $titles "articles" }}</h2>
     <p>How many articles went live on Foojay.</p>
     {{ template "chart" (dict "id" "stats-years" "what" "Articles published per year" "data" $c.postsByYear "days" $s.days.articles "color" "--brand-accent-strong") }}
 
-    <h2 id="new-authors">New Authors</h2>
+    <h2 id="authors">{{ index $titles "authors" }}</h2>
     <p>How many authors published their first article on Foojay.</p>
     {{ template "chart" (dict "id" "stats-new-authors" "what" "New authors per year" "data" $c.newAuthorsByYear "days" $s.days.newAuthors "color" "--brand-secondary") }}
 
     {{ if $v.total }}
-    <h2 id="reads">Reads</h2>
+    <h2 id="reads">{{ index $titles "reads" }}</h2>
     <p>How often pages have been read, including the counts carried over from the previous Foojay site. Blocked trackers do not affect this first-party counter.</p>
     <ul class="stats-grid stats-grid--reads">
       <li><strong>{{ lang.FormatNumberCustom 0 $v.total }}</strong><span>Reads in total</span></li>
@@ -60,7 +62,7 @@
     </ul>
     {{ end }}
 
-    <h2 id="community">Community</h2>
+    <h2 id="community">{{ index $titles "community" }}</h2>
     <p>The Java user groups, champions, conferences and events listed on foojay.io.</p>
     <ul class="stats-grid stats-grid--community">
       <li><strong>{{ lang.FormatNumberCustom 0 $m.jugs }}</strong><span><a href="{{ $jugs }}">Java User Groups</a></span></li>
@@ -75,11 +77,9 @@
     <div class="widget toc">
       <h2>On this page</h2>
       <nav id="TableOfContents"><ul>
-        <li><a href="#content">Content</a></li>
-        <li><a href="#articles-per-year">Articles per year</a></li>
-        <li><a href="#new-authors">New authors per year</a></li>
-        {{ if $v.total }}<li><a href="#reads">Reads</a></li>{{ end }}
-        <li><a href="#community">Community</a></li>
+        {{ range $id := slice "content" "articles" "authors" "reads" "community" }}
+          {{ if or (ne $id "reads") $v.total }}<li><a href="#{{ $id }}">{{ index $titles $id }}</a></li>{{ end }}
+        {{ end }}
       </ul></nav>
     </div>
     {{ partial "ads-widget.html" . }}
