@@ -55,7 +55,7 @@ Type `mvn` in a project directory without any arguments and Maven greets you wit
 
 Every one of my projects carries this line, and it does more than save a few keystrokes. It documents the canonical build. A new contributor who clones the repository and runs `mvn` gets exactly the build the CI server runs, including tests, static analysis and whatever else is bound to the lifecycle up to `verify`.
 
-The choice of `verify` over `install` is deliberate. `verify` runs every check there is, but it does not copy the artifacts into your local repository. Nothing in `~/.m2` changes behind your back, and no other project on your machine silently picks up a half-finished snapshot. In a multi-module build the reactor resolves the modules among themselves anyway, so `install` is only needed when a separate project has to consume the result. If that is the case, say so explicitly: `mvn install`.
+The choice of `verify` over `install` is deliberate. `verify` runs every phase up to and including the checks, but it does not copy the artifacts into your local repository. Nothing in `~/.m2` changes behind your back, and no other project on your machine silently picks up a half-finished snapshot. In a multi-module build the reactor resolves the modules among themselves anyway, so `install` is only needed when a separate project has to consume the result. If that is the case, say so explicitly: `mvn install`.
 
 ### A Fast Lane
 
@@ -277,7 +277,7 @@ Setting it up takes more XML than most plugins, mainly because Error Prone needs
 </plugin>
 ```
 
-For the full list of `-J` options and the reasons behind them consult the [Error Prone installation guide](https://errorprone.info/docs/installation). A few details in there are easy to get wrong. `fork` runs the compiler in a separate JVM, which is what makes the `-J` options take effect at all. `combine.children="append"` once again adds the arguments to any `compilerArgs` inherited from the parent instead of merging the two lists.
+For the full list of `-J` options and the reasons behind them consult the [Error Prone installation guide](https://errorprone.info/docs/installation). A few details in there are easy to get wrong. `fork` runs the compiler in a separate JVM, which is what makes the `-J` options take effect at all. `combine.children="append"` once again adds the arguments to any `compilerArgs` inherited from the parent instead of merging the two lists. Note that once `annotationProcessorPaths` is set, javac looks for annotation processors only there, so Lombok, MapStruct and the like have to be listed next to Error Prone.
 
 `-Werror`, finally, turns every warning into an error, those from `-Xlint` as well as the Error Prone checks of severity WARNING. Downgrading a check with `-Xep:Name:WARN` therefore makes no difference, a check is either on and fatal or `OFF`. That sounds harsh, but it is the only setting that works in the long run. A warning that does not fail the build is a warning that nobody reads, and after a few months the build log is full of them.
 
@@ -332,7 +332,7 @@ A negated property condition does the job without that side effect:
 
 The profile is active whenever the property `check.skip-errorprone` is not defined, regardless of what else happens on the command line. Passing `-Dcheck.skip-errorprone` turns it off, and since the condition only asks whether the property exists, any value does. The property name is free to choose, and naming it after what it does makes the command line read like a sentence.
 
-Two commands help when you are unsure what is going on: `mvn help:active-profiles` lists the profiles that are active for each module, and `-P -name` deactivates a profile explicitly (as does `-P '!name'`, quoted so that bash leaves the exclamation mark alone). Maven 4 is stricter here: a profile named with `-P` that does not exist fails the build instead of producing a warning. `-P ?name` marks it as optional.
+Two commands help when you are unsure what is going on: `mvn help:active-profiles` lists the profiles that are active for each module, and `-P '!name'` deactivates a profile explicitly (quoted, so that bash leaves the exclamation mark alone). `-P-name` works as well, but not with a space in between, because `-name` would then be taken for an option of its own. Maven 4 is stricter here: a profile named with `-P` that does not exist fails the build instead of producing a warning. `-P ?name` marks it as optional.
 
 ### One Property to Activate and Configure
 
