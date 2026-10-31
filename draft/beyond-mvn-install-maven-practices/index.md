@@ -85,11 +85,11 @@ It is worth checking that such a profile really skips what it claims to. The fir
 
 `mvn -Pfast` now produces a jar in a fraction of the usual time. For Jackcess that means 27 seconds instead of almost two minutes. The full build stays the default, and the shortcut is something you have to ask for.
 
-One thing the `fast` profile cannot do is switch off another profile. In Maven 3, and still in Maven 4, profile activation only looks at system properties, including those passed with `-D` on the command line, never at properties defined inside the POM, and that includes the properties of other profiles. If a profile is activated by the absence of a property, as the Error Prone profile further below is, setting that property in `fast` has no effect. You still have to pass it explicitly: `mvn -Pfast -Dcheck.skip-errorprone`. More on that kind of activation in the section on profiles.
+One thing the `fast` profile cannot do is switch off another profile. In Maven 3, and still in Maven 4, property-based profile activation only looks at system properties, including those passed with `-D` on the command line, never at properties defined inside the POM, and that includes the properties of other profiles. If a profile is activated by the absence of a property, as the Error Prone profile further below is, setting that property in `fast` has no effect. You still have to pass it explicitly: `mvn -Pfast -Dcheck.skip-errorprone`. More on that kind of activation in the section on profiles.
 
 ## Properties as the Single Source of Truth
 
-A version number that appears in more than one place will sooner or later appear in two different variants. The remedy is old and simple, yet many POMs still apply it only halfway: every version goes into a property, not just those of the dependencies, but those of the plugins as well.
+A version number that appears in more than one place will sooner or later appear in two different variants. The remedy is old and simple, yet many POMs still apply it only halfway: every version goes into a property, not just those of the dependencies, but those of the plugins as well. The one exception is the version of the parent POM, which Maven needs before it can resolve any property, so it stays a literal.
 
 ```xml
 <properties>
