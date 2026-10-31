@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-10-30T07:16:44Z",
+  "generatedAt" : "2026-10-31T07:05:16Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -95,7 +95,15 @@
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Deterministic Java refactoring at scale + Snake in 10 lines",
+      "url" : "https://www.meetup.com/belgian-java-user-group/events/317149858/",
+      "startTime" : "2026-11-18T17:45:00+01:00",
+      "endTime" : "2026-11-18T20:45:00+01:00",
+      "venue" : "Veldkant 4",
+      "city" : "Kontich",
+      "online" : false
+    } ]
   }, {
     "slug" : "BordeauxJUG",
     "name" : "BordeauxJUG",
@@ -364,14 +372,6 @@
     "source" : "calendar",
     "url" : "http://www.jug-da.de/",
     "events" : [ {
-      "title" : "JUG DA: Zwei Vorträge: Datenorientierte Programmierung mit Java und Speed Dating Java Secrets (Birgit Kratz, Bernd Müller)",
-      "url" : "https://www.jug-da.de/2026/10/Data-Oriented-Programming-und-Java-Secrets/",
-      "startTime" : "2026-10-29T18:30:00+01:00",
-      "endTime" : "2026-10-29T20:30:00+01:00",
-      "venue" : "h_da (Hochschule Darmstadt)",
-      "city" : "Darmstadt",
-      "online" : null
-    }, {
       "title" : "JUG DA: Global Day of Code Retreat Frankfurt",
       "url" : "https://www.jug-da.de/2026/11/global-day-of-code-retreat/",
       "startTime" : "2026-11-07T09:00:00+01:00",
@@ -1042,10 +1042,10 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/ValenciaJUG/",
     "events" : [ {
-      "title" : "Lightning Talks ⚡/ Ask a Dev",
+      "title" : "Lightning Talks ⚡",
       "url" : "https://www.meetup.com/valenciajug/events/317024529/",
       "startTime" : "2026-11-17T18:30:00+01:00",
-      "endTime" : "2026-11-17T21:30:00+01:00",
+      "endTime" : "2026-11-17T20:30:00+01:00",
       "venue" : "Universidad Politécnica de Valencia (UPV)",
       "city" : "València",
       "online" : false
