@@ -31,7 +31,7 @@ For the record, moving away from Google also benefits [my privacy](https://blog.
 
 Syncthing works out of the box on the public Internet. To do that, it relies on infrastructure run by the Syncthing project: _global discovery_ servers, where each device announces its current IP address, and _relay_ servers, which forward encrypted traffic when two devices can't reach each other directly. **Traffic is encrypted end-to-end in both cases.** Still, a third party knows my devices' addresses, and my encrypted traffic may go through its relays.
 
-I already have a private network between all my devices, thanks to Tailscale. I described the setup in [a previous post](https://blog.frankel.ch/cloudflare-zero-trust-tailscale/). Every device has a stable name and address on the mesh, wherever it is. With Tailscale, Syncthing needs neither discovery servers nor relays. I can switch them off and address the devices by name.
+I already have a private network between all my devices, thanks to Tailscale. I described the setup in [From Cloudflare Zero Trust to Tailscale](https://blog.frankel.ch/cloudflare-zero-trust-tailscale/). Every device has a stable name and address on the mesh, wherever it is. With Tailscale, Syncthing needs neither discovery servers nor relays. I can switch them off and address the devices by name.
 
 I'm fully aware that Tailscale is a third party too. Its coordination servers distribute the devices' public keys and know which device connects to which, and from where, though they never see the traffic.
 
