@@ -564,8 +564,8 @@
   hybrid: false
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: https://app.confitura.pl/login
   cfp_closes: '2026-06-07'
 - slug: jug-saxony-day-2026
@@ -655,8 +655,8 @@
   hybrid: true
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: '[https://forms.gle/nKreGcpfzx4zsLhU7](https://docs.google.com/forms/d/e/1FAIpQLSc9ITG71szuMVGbAUHrquGy4Fq6fgKvukKP10dWrqvMErmfqw/viewform'
   cfp_closes: '2026-08-23'
 - slug: jdd-2026
@@ -1040,8 +1040,8 @@
   hybrid: false
   city: Kraków
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://sessionize.com/kotlinconf-2027
   cfp_closes: '2026-11-27'
 - slug: jcon-europe-2027
