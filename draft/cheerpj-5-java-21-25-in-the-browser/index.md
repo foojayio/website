@@ -13,7 +13,7 @@ related_posts: []
 canonical: "https://labs.leaningtech.com/blog/cheerpj-5.0"
 ---
 
-Today we are proud to release CheerpJ 5.0, the latest major release of CheerpJ, a full distribution of OpenJDK for the browser in WebAssembly, designed to run Java applications and libraries in the browser.
+We are proud to release CheerpJ 5.0, the latest major release of CheerpJ, a full distribution of OpenJDK for the browser in WebAssembly, designed to run Java applications and libraries in the browser.
 
 **[Get started](https://cheerpj.com/docs/getting-started)** | [Join us on Discord](https://discord.leaningtech.com)
 
