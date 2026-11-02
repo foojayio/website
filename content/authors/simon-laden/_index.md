@@ -1,11 +1,11 @@
 ---
 title: "Simon Laden"
-avatar: ""
+avatar: "simon-laden.jpg"
 avatarFull: ""
 bio: "Azul"
 bluesky: ""
 mastodon: ""
-linkedin: ""
+linkedin: "https://www.linkedin.com/in/simon-laden/"
 github: ""
 youtube: ""
 website: ""
