@@ -69,7 +69,7 @@
            no website would leave a short list on some pages. */}}
       {{ $linked := where hugo.Data.jugs "website" "!=" nil }}
       {{ range first 5 (shuffle $linked) }}
-        <li><a href="{{ .website }}">{{ .name }}</a></li>
+        <li><a href="{{ .website }}" target="_blank" rel="noopener">{{ .name }}</a></li>
       {{ end }}
     </ul>
     <a class="view-all" href="{{ "jugs/" | relURL }}">All {{ len hugo.Data.jugs }} Java User Groups &rarr;</a>
