@@ -1356,6 +1356,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   margin: 0;
   font-family: var(--font-display); font-weight: 700;
   font-size: .95rem; line-height: 1.3; color: var(--ink);
+  /* Titles are authors' words: "EnvironmentPostProcessor" is ~370px at 200%
+     text in a 248px box, and an unbreakable word spills out of it, widening
+     the page's scrollWidth without any element's own box showing it. */
+  overflow-wrap: anywhere;
 }
 /* A flex row with a gap, like .event-strip__meta and .post-card-meta -- the
    site's other meta lines -- rather than relying on template whitespace for the
