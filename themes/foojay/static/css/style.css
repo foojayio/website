@@ -1045,13 +1045,21 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   padding: .2rem .45rem; border-radius: .35rem;
   background: var(--ink); color: var(--surface);
   font-size: .72rem; font-weight: 600; line-height: 1.3; white-space: nowrap;
-  opacity: 0; pointer-events: none;
-  transition: opacity .12s ease, transform .12s ease;
+  display: none; opacity: 0; pointer-events: none;
+  transition: opacity .12s ease, transform .12s ease, display .12s allow-discrete;
 }
 .byline-face:hover::after,
 .byline-face:focus-visible::after,
 .byline--count[data-name]:hover::after,
-.byline--count[data-name]:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+.byline--count[data-name]:focus-visible::after { display: block; opacity: 1; transform: translateX(-50%) translateY(0); }
+/* display:none while closed: a hidden tooltip still counts toward scrollWidth,
+   and a centred one beside a face at the right gutter overflows at 200% text. */
+@starting-style {
+  .byline-face:hover::after,
+  .byline-face:focus-visible::after,
+  .byline--count[data-name]:hover::after,
+  .byline--count[data-name]:focus-visible::after { opacity: 0; transform: translateX(-50%) translateY(.15rem); }
+}
 
 /* THE COUNT ANSWERS "WHO ELSE?". Only four faces fit, so on a twelve-author
    post eight people are represented by the word "authors" alone -- hovering the
