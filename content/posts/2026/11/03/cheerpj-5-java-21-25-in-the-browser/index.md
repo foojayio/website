@@ -1,6 +1,6 @@
 ---
 title: "CheerpJ 5.0: Java 21/25 in the browser, full OpenJDK, and a new WasmGC engine"
-date: "2026-01-01"
+date: "2026-11-03"
 description: "CheerpJ 5.0 brings Java 21 and 25, a complete OpenJDK build, and an experimental WasmGC execution engine to the browser."
 authors:
   - "alessandro-pignotti"
@@ -9,7 +9,11 @@ categories:
   - "Java"
   - "Release Notes"
   - "Developer Tools"
-related_posts: []
+related_posts:
+  - "java-in-the-browser-with-teavm"
+  - "endive-1-0-wasm"
+  - "on-programming-languages-targets-and-platforms"
+  - "javafx-links-of-september-2026"
 canonical: "https://labs.leaningtech.com/blog/cheerpj-5.0"
 ---
 
