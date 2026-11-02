@@ -1232,7 +1232,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* ------------------------------------------------------------- sidebar --- */
 
-.sidebar { display: grid; gap: 1.5rem; align-content: start; }
+/* minmax(0, 1fr), not the implicit `auto` column: auto sizes to the widest
+   widget's min-content, so one unbreakable byline at 200% text stretched the
+   whole aside past its 330px track and the viewport. */
+.sidebar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; align-content: start; }
 .sidebar .widget {
   padding: 1.25rem; margin: 0; background: var(--surface-tinted);
   border: 1px solid var(--border); border-radius: 12px;
@@ -1244,7 +1247,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .sidebar h2 {
   margin: 0 0 .8rem; font-size: 1rem; color: var(--ink);
 }
-.sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
+.sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: .1rem; }
 .sidebar li a {
   display: block; padding: .3rem 0; font-size: .95rem; color: var(--ink-soft);
 }
@@ -1382,6 +1385,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* ...but a byline WITH a face has to stay inline-flex, or that `display: inline`
    lets the line break between the portrait and the name. (0,3,1) to outrank it. */
 .sidebar .coming-soon-side__meta a.byline { display: inline-flex; align-items: center; gap: .3rem; }
+/* The author's name may wrap rather than hold the widget open at its
+   one-line width -- at 200% text that is wider than the 330px aside. */
+.coming-soon-side__by, .sidebar .coming-soon-side__meta a.byline { min-width: 0; max-width: 100%; }
+.coming-soon-side__by .byline-name { min-width: 0; overflow-wrap: anywhere; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */

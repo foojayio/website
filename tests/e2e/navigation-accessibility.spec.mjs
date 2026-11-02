@@ -55,8 +55,7 @@ for (const scheme of ['light', 'dark']) {
   });
 }
 
-// Skipped 2026-11-02: fails on every CI run since the home page content changed, cause not found.
-test.skip('header actions fit at the previous overflow breakpoint and 200% text', async ({ page }) => {
+test('header actions fit at the previous overflow breakpoint and 200% text', async ({ page }) => {
   await page.setViewportSize({ width: 1120, height: 1000 });
   await page.goto(PAGES.home);
   // Measuring before the webfont swap completes measures the fallback
