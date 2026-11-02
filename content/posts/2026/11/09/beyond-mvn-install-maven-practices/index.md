@@ -1,6 +1,6 @@
 ---
 title: "Beyond mvn install: Maven Practices That Pay Off"
-date: "2026-01-01"
+date: "2026-11-09"
 description: "Fail fast, pin every version, let profiles switch themselves and get an SBOM for free: practical Maven techniques from POMs in daily use."
 authors:
   - "markus-spann"
@@ -14,6 +14,7 @@ related_posts:
   - "maven-build-cache-in-practice"
   - "improving-mavens-dependencyanalyze-or-not"
   - "how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide"
+  - "introducing-jenesis"
 ---
 
 Most Maven builds start as a copy of a copy. Somebody's `pom.xml` from an older project gets pasted into a new one, a few versions get bumped, and from then on nobody touches the build until it breaks. That works, but it misses a lot. Maven has quite a few features that make a build faster to fail, easier to maintain and more pleasant to use, and most of them cost only a few lines of XML.
