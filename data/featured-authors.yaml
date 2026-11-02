@@ -7,6 +7,9 @@
 # `announcement` is the foojay post (if any) introducing that rotation --
 # empty string, not omitted, when there wasn't one. validate/Frontmatter.java
 # checks both.
+- month: "2026-11"
+  authors: ["geertjan-wielenga", "ricardo-mello"]
+  announcement: "/today/featured-foojay-authors-for-november-2026/"
 - month: "2026-10"
   authors: ["bazlur-rahman", "nicolas-frankel"]
   announcement: "/today/featured-foojay-authors-for-october-2026/"
