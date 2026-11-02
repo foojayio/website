@@ -49,7 +49,7 @@
     <tr>
       <th scope="row">Source repository</th>
       <td>
-        <a href="{{ . }}">{{ . }}</a> — the website is a static site whose every
+        <a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a> — the website is a static site whose every
         page, including this one, is a file in that public repository.
       </td>
     </tr>
@@ -60,7 +60,7 @@
         {{- $links := slice -}}
         {{- range $org.sameAs -}}
           {{- $host := (urls.Parse .).Host -}}
-          {{- $links = $links | append (printf "<a href=%q>%s</a>" . (strings.TrimPrefix "www." $host)) -}}
+          {{- $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">%s</a>` . (strings.TrimPrefix "www." $host)) -}}
         {{- end -}}
         {{ delimit $links ", " | safeHTML }}.
         Anything not on this list is not us.

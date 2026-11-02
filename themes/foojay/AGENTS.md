@@ -160,6 +160,10 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   its file, so the derived pages deliberately don't. It carries
   `data-pagefind-ignore`, or 2246 pages are a result for "edit".
 
+- **A link to another site opens in a new tab (`target="_blank"
+  rel="noopener"`); a link within foojay.io stays in the same tab.** Applies
+  to templates and widgets as it does to article bodies.
+
 - **Internal links are `.RelPermalink`; only absolute-by-contract URLs are
   `.Permalink`.** `.Permalink` is built from the CONFIGURED baseURL, which is
   not what `hugo server` serves. Keep `.Permalink` for canonical, `og:url`, the
