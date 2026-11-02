@@ -2,6 +2,10 @@
   {{/* Repeated on every page -- excluded from the search index so results
        aren't dominated by sidebar widget text. */}}
 
+  {{/* Home page only, and first: the newest episode is what a returning
+       visitor looks for. */}}
+  {{ if .IsHome }}{{ partial "latest-podcast-widget.html" . }}{{ end }}
+
   {{ partial "toc.html" . }}
 
   {{/* One paid banner, above the sponsor tiers. Like them it survives the
