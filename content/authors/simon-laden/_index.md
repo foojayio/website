@@ -6,7 +6,7 @@ bio: "Azul"
 bluesky: ""
 mastodon: ""
 linkedin: "https://www.linkedin.com/in/simon-laden/"
-github: ""
+github: "https://github.com/simonladen"
 youtube: ""
 website: ""
 ---
