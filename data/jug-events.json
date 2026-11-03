@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-02T07:46:36Z",
+  "generatedAt" : "2026-11-03T08:00:16Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -204,10 +204,10 @@
       "city" : "Vienna",
       "online" : false
     }, {
-      "title" : "December Meetup",
+      "title" : "\"Drive your UI with AI\" + \"TornadoVM: Your Java workload on the GPU\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166142/",
-      "startTime" : "2026-11-30T18:00:00+01:00",
-      "endTime" : "2026-11-30T21:00:00+01:00",
+      "startTime" : "2026-12-03T18:00:00+01:00",
+      "endTime" : "2026-12-03T21:00:00+01:00",
       "venue" : null,
       "city" : "Vienna",
       "online" : false
@@ -357,7 +357,15 @@
     "jug" : "BonnJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Bonn/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "JUG Bonn #51: Architekturen verständlicher machen & Property-Based Testing",
+      "url" : "https://www.meetup.com/jug-bonn/events/317242775/",
+      "startTime" : "2026-11-17T18:30:00+01:00",
+      "endTime" : "2026-11-17T21:30:00+01:00",
+      "venue" : "Conet",
+      "city" : "Bonn",
+      "online" : false
+    } ]
   }, {
     "slug" : "jugbremen",
     "name" : "Java User Group (JUG) Bremen/Oldenburg",
@@ -629,22 +637,22 @@
     "jug" : "MuenchenJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Munchen-JUGM/",
-    "events" : [ {
-      "title" : "Technical documentation in the times of AI Agents: is it still needed?",
-      "url" : "https://www.meetup.com/java-user-group-munchen-jugm/events/317060711/",
-      "startTime" : "2026-11-02T19:00:00+01:00",
-      "endTime" : "2026-11-02T21:00:00+01:00",
-      "venue" : "Eden Hotel Wolff",
-      "city" : "München",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "java-usergroup-munster",
     "name" : "Java Usergroup Münster",
     "jug" : "MuensterJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/java-usergroup-munster/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Post-Quanten-Kryptographie und Java: Hintergrund, Risiken, Handlungsbedarf",
+      "url" : "https://www.meetup.com/java-usergroup-munster/events/317259570/",
+      "startTime" : "2026-11-18T18:00:00+01:00",
+      "endTime" : "2026-11-18T19:30:00+01:00",
+      "venue" : "LVM Versicherung (Gebäudeteil 5)",
+      "city" : "Münster",
+      "online" : false
+    } ]
   }, {
     "slug" : "JUG-Nurnberg",
     "name" : "JUG Nürnberg",
@@ -1065,14 +1073,6 @@
     "source" : "calendar",
     "url" : "https://luma.com/vjug",
     "events" : [ {
-      "title" : "AI DevCon NYC",
-      "url" : "https://luma.com/aidevcon-nyc2026",
-      "startTime" : "2026-11-02T00:00:00Z",
-      "endTime" : "2026-11-05T00:00:00Z",
-      "venue" : "34 35th St",
-      "city" : "USA",
-      "online" : null
-    }, {
       "title" : "From JDBC to Database Control Planes: 30 Years of Java Database Connectivity by Rogerio Robetti",
       "url" : "https://luma.com/event/evt-yAEwk4JK5p9nzOR",
       "startTime" : "2026-11-09T20:00:00Z",
