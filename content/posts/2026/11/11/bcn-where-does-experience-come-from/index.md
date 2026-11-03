@@ -4,6 +4,12 @@ description: "Proton’s CTO wrote a memo that nearly eulogized writing code by 
 authors: ["jottinger"]
 categories: ["AI", "Testing"]
 image: "preview.jpg"
+date: "2026-11-11"
+related_posts:
+  - "can-you-explain-the-diff-your-ai-agent-just-wrote"
+  - "green-build-wrong-task-a-working-agreement-for-java-teams-using-ai-coding-agents"
+  - "did-your-ai-agent-run-the-debugger-one-jvm-bug-two-agent-runs"
+  - "debugging-is-invariant-discovery-what-one-kafka-session-taught-us-about-ai-agents"
 canonical: "https://bytecode.news/posts/2026/11/where-does-the-experience-come-from"
 ---
 
