@@ -409,6 +409,14 @@ enableGitInfo = true
   [menu.main.params]
     desc = "The community members recognized by the Java Champions program"
 
+[[menu.main]]
+  name = "Foojay Television"
+  parent = "Resources"
+  url = "/tv/"
+  weight = 27
+  [menu.main.params]
+    desc = "Videos from the Java community's YouTube channels"
+
 # ---------------------------------------------------------------------------
 # Java Basics: the deep Quick Start tree. Third level renders as columns, so
 # the 11-step tutorial no longer hides behind two hover intents.
@@ -650,6 +658,12 @@ enableGitInfo = true
 [[menu.footer]]
   name = "Java Resources"
   identifier = "footer-resources"
+  weight = 20
+
+[[menu.footer]]
+  name = "Sustainability eBook"
+  parent = "footer-resources"
+  url = "/sustainability-for-java-developers/"
   weight = 10
 
 [[menu.footer]]
@@ -683,9 +697,9 @@ enableGitInfo = true
   weight = 15
 
 [[menu.footer]]
-  name = "Sustainability eBook"
+  name = "Foojay Television"
   parent = "footer-resources"
-  url = "/sustainability-for-java-developers/"
+  url = "/tv/"
   weight = 16
 
 # ---------------------------------------------------------------------------
@@ -693,7 +707,7 @@ enableGitInfo = true
 [[menu.footer]]
   name = "Content Hub"
   identifier = "footer-community"
-  weight = 20
+  weight = 10
 
 [[menu.footer]]
   name = "Friends Of OpenJDK Today"

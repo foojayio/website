@@ -1,0 +1,90 @@
+{{ define "main" }}
+{{/* /tv/ -- videos from data/tv-videos.json (scripts/fetch/TvVideos.java, which
+     already drops Shorts), channels from data/tv-channels.yaml.
+
+     EVERYTHING IS RENDERED, JS ONLY NARROWS IT: without JavaScript the page is
+     the full list and every video links to YouTube. js/tv.js adds the channel
+     filter and "show more", and swaps the player for a youtube-nocookie iframe
+     on click, so nothing of YouTube loads until the reader asks. */}}
+{{ $data := index hugo.Data "tv-videos" }}
+{{ $videos := $data.videos }}
+{{ $channels := dict }}
+{{ range $data.channels }}{{ $channels = merge $channels (dict .handle .) }}{{ end }}
+{{ $sorted := slice }}
+{{ range $data.channels }}{{ $sorted = $sorted | append (dict "key" (lower .title) "ch" .) }}{{ end }}
+
+<div class="page-head">
+  <div class="page-head__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf `<strong>%d</strong> videos from <strong>%d</strong> channels` (len $videos) (len $data.channels))
+      "views" .) }}
+  </div>
+</div>
+
+<div class="content-col full-width">
+<div class="tv-layout">
+  <nav class="tv-channels" aria-label="Channels">
+    <label class="visually-hidden" for="tv-search">Filter channels</label>
+    <input class="tv-channels__search" id="tv-search" type="search" placeholder="Filter channels" autocomplete="off">
+    <ul class="tv-channels__list" tabindex="0">
+      <li>
+        <button type="button" class="tv-filter" data-channel="" data-name="all channels" aria-pressed="true">
+          <span class="tv-filter__all" aria-hidden="true">All</span>
+          <span class="tv-filter__name">All channels</span>
+          <span class="tv-filter__count">{{ len $videos }}</span>
+        </button>
+      </li>
+      {{ range sort $sorted "key" }}
+      {{ $ch := .ch }}
+      <li>
+        <button type="button" class="tv-filter" data-channel="{{ $ch.handle }}" data-name="{{ .key }}" data-title="{{ $ch.title }}" data-url="https://www.youtube.com/channel/{{ $ch.id }}" aria-pressed="false">
+          {{ with $ch.avatar }}<img src="{{ . }}" alt="" width="28" height="28" loading="lazy">{{ end }}
+          <span class="tv-filter__name">{{ $ch.title }}</span>
+          <span class="tv-filter__count">{{ len (where $videos "channel" $ch.handle) }}</span>
+        </button>
+      </li>
+      {{ end }}
+    </ul>
+    <p class="tv-channels__empty" id="tv-channels-empty" hidden>No channel matches.</p>
+  </nav>
+
+  <div class="tv-main">
+    {{ with index $videos 0 }}
+    {{ $ch := index $channels .channel }}
+    <section class="tv-stage" aria-label="Video player">
+      <a class="tv-player" id="tv-player" href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" rel="noopener" data-id="{{ .id }}">
+        <img src="https://i.ytimg.com/vi/{{ .id }}/hqdefault.jpg" alt="" width="480" height="360" decoding="async">
+        <span class="tv-player__play" aria-hidden="true"></span>
+        <span class="visually-hidden">Play {{ .title }}</span>
+      </a>
+      <h2 class="tv-now__title" id="tv-now-title">{{ .title }}</h2>
+      <p class="tv-now__meta" id="tv-now-meta">{{ $ch.title }} · <time datetime="{{ .published }}">{{ (time .published).Format "2 January 2006" }}</time></p>
+    </section>
+    {{ end }}
+
+    <div class="tv-results">
+      <h2 class="tv-results__title" id="tv-results-title">Latest videos</h2>
+      <span class="tv-results__count" id="tv-results-count" role="status"></span>
+    </div>
+
+    <ul class="tv-grid" id="tv-grid">
+      {{ range $videos }}
+      {{ $ch := index $channels .channel }}
+      <li data-channel="{{ .channel }}">
+        <a class="tv-card" href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" rel="noopener"
+           data-id="{{ .id }}" data-title="{{ .title }}" data-meta="{{ $ch.title }} · {{ (time .published).Format "2 January 2006" }}">
+          <img src="https://i.ytimg.com/vi/{{ .id }}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+          <span class="tv-card__title">{{ .title }}</span>
+          <span class="tv-card__meta">{{ $ch.title }} · <time datetime="{{ .published }}">{{ (time .published).Format "Jan 2, 2006" }}</time></span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    <button type="button" class="btn tv-more" id="tv-more" hidden>Show more videos</button>
+  </div>
+</div>
+</div>
+<script src="{{ "js/tv.js" | relURL }}" defer></script>
+{{ end }}

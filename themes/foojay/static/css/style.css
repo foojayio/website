@@ -4651,3 +4651,63 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .week-review__posts .post-card > :not(.post-card-image) { grid-column: 2; }
 @media (max-width: 480px) { .week-review__posts .post-card { grid-template-columns: 6rem 1fr; } }
 .week-review__posts .post-card-excerpt { max-width: none; }
+
+/* /tv/ ---------------------------------------------------------------- */
+.tv-layout { display: grid; grid-template-columns: 18rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+.tv-channels { position: sticky; top: 1rem; }
+.tv-channels__search {
+  width: 100%; padding: .55rem .8rem; margin-bottom: .75rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--ink); font: inherit;
+}
+.tv-channels__list { list-style: none; margin: 0; padding: 0; max-height: calc(100vh - 9rem); overflow-y: auto; }
+.tv-filter {
+  display: flex; align-items: center; gap: .6rem; width: 100%; cursor: pointer; text-align: left;
+  padding: .45rem .6rem; border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--ink); font: 600 .9rem var(--font-body);
+}
+.tv-filter:hover { background: var(--surface-sunken); }
+.tv-filter img, .tv-filter__all { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; }
+.tv-filter__all { display: grid; place-items: center; background: var(--surface-sunken); font-size: .75rem; }
+.tv-filter__name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tv-filter__count { flex: 0 0 auto; color: var(--ink-muted); font-size: .8rem; font-weight: 500; }
+.tv-filter[aria-pressed="true"] { background: var(--brand-accent); color: var(--on-accent); }
+.tv-filter[aria-pressed="true"] .tv-filter__count { color: inherit; }
+.tv-channels__list [hidden], .tv-grid [hidden] { display: none; }
+.tv-channels__empty { color: var(--ink-muted); margin: .5rem .6rem; }
+
+.tv-stage { margin-bottom: 2rem; }
+.tv-player {
+  position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden;
+  background: var(--surface-navy); border-radius: var(--radius);
+}
+.tv-player img, .tv-player__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.tv-player__play {
+  position: absolute; top: 50%; left: 50%; width: 4.5rem; height: 4.5rem; translate: -50% -50%;
+  background: var(--brand-accent); border-radius: 50%;
+}
+.tv-player__play::after {
+  content: ""; position: absolute; top: 50%; left: 52%; translate: -50% -50%;
+  border-style: solid; border-width: .8rem 0 .8rem 1.3rem; border-color: transparent transparent transparent var(--on-accent);
+}
+.tv-now__title { margin: .9rem 0 .25rem; font-size: 1.4rem; line-height: 1.3; }
+.tv-now__meta { margin: 0; color: var(--ink-soft); }
+
+.tv-results { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; margin: 0 0 1rem; }
+.tv-results__title { margin: 0; font-size: 1.25rem; }
+.tv-results__count { color: var(--ink-muted); font-weight: 500; font-size: .9rem; }
+.tv-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1.25rem; }
+.tv-card { display: flex; flex-direction: column; gap: .4rem; height: 100%; color: var(--ink); }
+.tv-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); background: var(--surface-sunken); }
+.tv-card__title { font-family: var(--font-display); font-weight: 700; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tv-card:hover .tv-card__title { color: var(--brand-accent-strong); }
+.tv-card__meta { color: var(--ink-muted); font-size: .85rem; }
+.tv-more { display: block; margin: 1.75rem auto 0; }
+.tv-more[hidden] { display: none; }
+.tv-missing { margin: 2.5rem 0 0; color: var(--ink-soft); }
+.tv-missing a { text-decoration: underline; }
+@media (max-width: 52rem) {
+  .tv-layout { grid-template-columns: 1fr; }
+  .tv-channels { position: static; }
+  .tv-channels__list { max-height: 14rem; }
+}

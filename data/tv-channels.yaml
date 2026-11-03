@@ -1,0 +1,10 @@
+# Channels shown at /tv/. The handle is all that is needed: the channel id,
+# name and avatar are resolved by scripts/fetch/TvVideos.java.
+- handle: intellijidea
+- handle: FrankDelporte
+- handle: coffeesoftware
+- handle: hszanowski
+- handle: JetBrainsWDYT
+- handle: sivalabs
+- handle: DevoxxForever
+- handle: NLJUG1

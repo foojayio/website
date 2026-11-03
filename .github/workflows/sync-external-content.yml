@@ -109,6 +109,11 @@ jobs:
       - name: Fetch the JVM Weekly Foojay roundups
         run: jbang scripts/fetch/JvmWeekly.java 2>&1 | tee -a "$SYNC_LOG"
 
+      # Public RSS feeds for the channels in data/tv-channels.yaml, plus one
+      # probe per NEW video to drop Shorts. No credential; see the script.
+      - name: Fetch the Foojay Television videos
+        run: jbang scripts/fetch/TvVideos.java 2>&1 | tee -a "$SYNC_LOG"
+
       # A fetcher that keeps failing over and over is invisible otherwise --
       # every one of the four above exits 0 and keeps its last good file on
       # purpose (see AGENTS.md's "Generated data files"), which is exactly
@@ -121,7 +126,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           .github/scripts/sync-health.sh "$SYNC_LOG" .github/sync-health.json \
-            jugs java-champions java-conferences jug-events jvm-weekly
+            jugs java-champions java-conferences jug-events jvm-weekly tv-videos
 
       - name: Commit updated data
         env:
@@ -137,7 +142,7 @@ jobs:
           # the same deploy decision below: it is bookkeeping for the health
           # check above, not content, and opening or closing a tracking issue
           # must not by itself spend a deploy.
-          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/java-conferences.yaml data/jug-events.json data/jvm-weekly.yaml .github/sync-health.json
+          git add data/jugs.yaml data/java-champions.yaml data/geocode-cache.yaml data/java-conferences.yaml data/jug-events.json data/jvm-weekly.yaml data/tv-videos.json .github/sync-health.json
           if git diff --cached --quiet; then
             echo "No JUG list, Java Champions, event, JVM Weekly or sync-health changes."
           else

@@ -93,6 +93,15 @@ All run daily from `sync-external-content.yml`, commit their result, then
   internal front-end state that changes with any deploy of theirs. Flags:
   `--dry-run`, `--limit N`, `--jug <slug>`, `--no-venues`.
 
+- **`TvVideos.java`** writes `data/tv-videos.json` for `/tv/`, from the
+  channels in the hand-edited `data/tv-channels.yaml` (a handle is all it
+  needs). It reads each channel's public RSS feed, which does not label
+  Shorts, so **a new video is probed at `/shorts/<id>`**: 200 is a Short, a 303
+  to `/watch` is not, anything else throws rather than guessing. The probe
+  sends `Cookie: SOCS=CAI`, **without which an EU runner gets a 302 to the
+  consent page** and every Short passes as a video. Shorts are remembered by
+  id, and a channel that fails keeps its committed videos.
+
 - **`JvmWeekly.java`** writes `data/jvm-weekly.yaml`: every edition of Artur
   Skowronski's JVM Weekly that is a Foojay roundup, rendered at `/jvm-weekly/`.
   Substack is the source; LinkedIn is a republication with no feed.
