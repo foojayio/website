@@ -1634,7 +1634,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .author-profile .author-bio, .author-profile .author-description, .author-profile .author-social { grid-column: 2; }
 .author-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; grid-row: 1 / span 3; }
 .author-bio { margin: 0 0 .8rem; color: var(--ink-soft); }
-.author-description { margin: 0 0 .8rem; color: var(--ink-soft); font-size: .9rem; }
+.author-description { margin: 0 0 0.1rem; color: var(--ink-soft); font-size: .9rem; font-style: italic; }
 /* One control row everywhere; link geometry belongs to icon-button/feed-link. */
 .author-social, .sidebar .author-social {
   display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
