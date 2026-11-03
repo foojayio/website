@@ -126,6 +126,10 @@ Did you miss an article last week? The [Week in review page](/today/week-review/
 
 When an author published their first article on Foojay that week, the page says so with a short welcome. The number of posts and new authors is also shown in the header.
 
+{{< gallery cols="1" >}}
+week-review.jpg | The latest week with the week pager, the new authors and the articles published
+{{< /gallery >}}
+
 **How it works:**
 
 - A week has no file of its own. [`_content.gotmpl`](https://github.com/foojayio/website/blob/main/content/week-review/_content.gotmpl) creates one page for every Monday-to-Sunday week that has a post, based on the folders in `content/posts/`, so a new week appears by itself.
