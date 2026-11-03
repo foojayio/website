@@ -69,7 +69,7 @@
 {{- $adClicks := 0 -}}
 {{- $perAd := dict -}}
 {{- $keys := 0 -}}
-{{- range $key, $n := site.Data.views -}}
+{{- range $key, $n := hugo.Data.views -}}
   {{- $keys = add $keys 1 -}}
   {{- $parts := split $key "/" -}}
   {{- $ns := index $parts 0 -}}
@@ -95,7 +95,7 @@
 {{- end -}}
 
 {{/* ---- the community data the syncs fetch ----------------------------- */}}
-{{- $jugs := site.Data.jugs | default slice -}}
+{{- $jugs := hugo.Data.jugs | default slice -}}
 {{- $jugsWithFeed := 0 -}}
 {{- range $jugs -}}
   {{- if or .calendar .meetup_slug }}{{ $jugsWithFeed = add $jugsWithFeed 1 }}{{ end -}}
@@ -109,12 +109,12 @@
      events. `submitted` does, because a data/events/ file stays on disk after
      its event: the rule is calendar-events.html's, end (or start) on or after
      today. */}}
-{{- $eventGroups := (index site.Data "jug-events").groups | default slice -}}
+{{- $eventGroups := (index hugo.Data "jug-events").groups | default slice -}}
 {{- $fromFeeds := 0 -}}
 {{- range $eventGroups }}{{ $fromFeeds = add $fromFeeds (len (.events | default slice)) }}{{ end -}}
 {{- $today := now.Format "2006-01-02" -}}
 {{- $submitted := 0 -}}
-{{- range $slug, $c := site.Data.events -}}
+{{- range $slug, $c := hugo.Data.events -}}
   {{- with $c.start -}}
     {{- $end := time.AsTime . -}}
     {{- with $c.end }}{{ $end = time.AsTime . }}{{ end -}}
@@ -122,15 +122,15 @@
   {{- end -}}
 {{- end -}}
 {{/* Same end-or-start-on-or-after-today rule as `$submitted` above. */}}
-{{- $conferences := (index site.Data "java-conferences") | default slice -}}
+{{- $conferences := (index hugo.Data "java-conferences") | default slice -}}
 {{- $upcomingConfs := 0 -}}
 {{- range $conferences -}}
   {{- $end := .end | default .start -}}
   {{- if and $end (ge (time.AsTime $end | time.Format "2006-01-02") $today) }}{{ $upcomingConfs = add $upcomingConfs 1 }}{{ end -}}
 {{- end -}}
-{{- $champions := (index site.Data "java-champions") | default slice -}}
-{{- $roundups := (index site.Data "jvm-weekly") | default slice -}}
-{{- $tv := (index site.Data "tv-videos") | default dict -}}
+{{- $champions := (index hugo.Data "java-champions") | default slice -}}
+{{- $roundups := (index hugo.Data "jvm-weekly") | default slice -}}
+{{- $tv := (index hugo.Data "tv-videos") | default dict -}}
 
 {{- return (dict
       "content" (dict
