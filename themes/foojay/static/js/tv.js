@@ -48,14 +48,20 @@
     play(link.dataset.id).focus();
   });
 
+  // ?channel=<handle> deep-links to a channel; the URL follows the selection.
+  function select(btn) {
+    filters.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+    channel = btn.dataset.channel;
+    shown = PAGE;
+    heading.textContent = channel ? btn.dataset.title : 'Latest videos';
+    var url = new URL(location.href);
+    if (channel) url.searchParams.set('channel', channel); else url.searchParams.delete('channel');
+    history.replaceState(null, '', url);
+    render();
+  }
+
   filters.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filters.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
-      channel = btn.dataset.channel;
-      shown = PAGE;
-      heading.textContent = channel ? btn.dataset.title : 'Latest videos';
-      render();
-    });
+    btn.addEventListener('click', function () { select(btn); });
   });
 
   more.addEventListener('click', function () { shown += PAGE; render(); });
@@ -74,5 +80,12 @@
     empty.hidden = any;
   });
 
-  render();
+  var wanted = (new URLSearchParams(location.search).get('channel') || '').toLowerCase();
+  var initial = wanted && filters.filter(function (b) { return b.dataset.channel.toLowerCase() === wanted; })[0];
+  if (initial) {
+    select(initial);
+    initial.scrollIntoView({ block: 'nearest' });
+  } else {
+    render();
+  }
 })();
