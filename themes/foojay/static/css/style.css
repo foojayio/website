@@ -4711,3 +4711,18 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   .tv-channels { position: static; }
   .tv-channels__list { max-height: 14rem; }
 }
+
+/* Clear button on filter boxes (static/js/search-clear.js) */
+.clearable { position: relative; display: block; max-width: 420px; flex: 0 1 420px; }
+.tv-channels .clearable { max-width: none; }
+.clearable > input { padding-right: 2.2rem; }
+.clearable > input::-webkit-search-cancel-button { appearance: none; display: none; }
+.clearable__button {
+  position: absolute; top: 50%; right: .35rem; transform: translateY(-50%);
+  width: 1.7rem; height: 1.7rem; padding: 0; border: 0; border-radius: 50%;
+  background: none; color: var(--ink-muted); font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.clearable__button:hover { background: var(--surface-sunken); color: var(--ink); }
+.clearable__button[hidden] { display: none; }
+.tv-channels__search { margin-bottom: 0; }
+.tv-channels .clearable { margin-bottom: .75rem; }
