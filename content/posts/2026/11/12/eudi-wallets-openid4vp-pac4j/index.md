@@ -1,6 +1,6 @@
 ---
 title: "EUDI wallets with OpenID4VP and pac4j: same device and another device"
-date: "2026-01-01"
+date: "2026-11-12"
 description: "Authenticate Java Spring Boot users with EUDI wallets and pac4j: SD-JWT VC on the same phone, or an mdoc PID via QR code on another device."
 authors:
   - "jerome-leleu"
