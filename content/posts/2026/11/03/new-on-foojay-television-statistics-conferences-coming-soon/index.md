@@ -1,7 +1,7 @@
 ---
-title: "New on Foojay: Television, Statistics, Java Conferences and Coming Soon"
+title: "New on Foojay: Television, Statistics, Java Conferences, Coming Soon and Week in Review"
 date: "2026-11-03"
-description: "Four new pages on foojay.io: Java videos from YouTube, the numbers behind Foojay, a map of Java conferences and a peek at the articles that are coming."
+description: "Five new pages on foojay.io: Java videos from YouTube, the numbers behind Foojay, a map of Java conferences, a peek at the articles that are coming and a weekly review of what was published."
 authors:
   - "frankdelporte"
 image: "foojay-new-pages.jpg"
@@ -14,7 +14,7 @@ related_posts:
   - "featured-foojay-authors-for-october-2026"
 ---
 
-Foojay is more than a list of articles, and the site keeps growing. Four new pages went live in the past week: a page with Java videos, a page with the numbers behind Foojay, a map of Java conferences and a page showing which articles are coming next. None of them needs any manual work to stay up to date. Each one is built from data that is fetched or counted automatically, and I'll show where that data comes from.
+Foojay is more than a list of articles, and the site keeps growing. Five new pages went live in the past week: a page with Java videos, a page with the numbers behind Foojay, a map of Java conferences, a page showing which articles are coming next and a weekly review of what was published. None of them needs any manual work to stay up to date. Each one is built from data that is fetched or counted automatically, and I'll show where that data comes from.
 
 ## Foojay Television
 
@@ -117,6 +117,20 @@ coming-soon-homepage.jpg | The scheduled articles in the sidebar on the homepage
 {{< note >}}
 Want your article on this page? Send it in a pull request, as described in [How To Submit Your Next Article On Foojay.io](/today/how-to-submit-your-next-article-on-foojay-io/), and a maintainer will schedule it.
 {{< /note >}}
+
+## Week in Review
+
+**Page:** [foojay.io/today/week-review](/today/week-review/)
+
+Did you miss an article last week? The [Week in review page](/today/week-review/) lists everything Foojay published from Monday to Sunday, as the same cards you know from the rest of the site. It opens on the latest week, and the links at the top and bottom take you to the weeks before and after it.
+
+When an author published their first article on Foojay that week, the page says so with a short welcome. The number of posts and new authors is also shown in the header.
+
+**How it works:**
+
+- A week has no file of its own. [`_content.gotmpl`](https://github.com/foojayio/website/blob/main/content/week-review/_content.gotmpl) creates one page for every Monday-to-Sunday week that has a post, based on the folders in `content/posts/`, so a new week appears by itself.
+- [`week-review-body.html`](https://github.com/foojayio/website/blob/main/themes/foojay/layouts/partials/week-review-body.html) finds the posts and the new authors of that week while the site is built.
+- Every Monday, [`slack-weekly.yml`](https://github.com/foojayio/website/blob/main/.github/workflows/slack-weekly.yml) posts the previous week to Slack, with a link to its review page.
 
 ## Feedback
 
