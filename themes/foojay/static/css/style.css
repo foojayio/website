@@ -1631,9 +1631,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
 }
 .author-profile h1 { grid-column: 2; margin: 0 0 .35rem; font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); }
-.author-profile .author-bio, .author-profile .author-social { grid-column: 2; }
+.author-profile .author-bio, .author-profile .author-description, .author-profile .author-social { grid-column: 2; }
 .author-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; grid-row: 1 / span 3; }
 .author-bio { margin: 0 0 .8rem; color: var(--ink-soft); }
+.author-description { margin: 0 0 .8rem; color: var(--ink-soft); font-size: .9rem; }
 /* One control row everywhere; link geometry belongs to icon-button/feed-link. */
 .author-social, .sidebar .author-social {
   display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
@@ -2325,7 +2326,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 @media (max-width: 560px) {
   .author-profile { grid-template-columns: minmax(0, 1fr); }
   .author-avatar { grid-row: auto; }
-  .author-profile h1, .author-profile .author-bio, .author-profile .author-social { grid-column: 1; }
+  .author-profile h1, .author-profile .author-bio, .author-profile .author-description, .author-profile .author-social { grid-column: 1; }
   .post-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
