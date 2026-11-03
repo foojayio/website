@@ -10,6 +10,7 @@
 {{- $champions := (site.GetPage "/pages/java-champions.md").RelPermalink -}}
 {{- $conferences := (site.GetPage "/pages/java-conferences.md").RelPermalink -}}
 {{- $calendar := (site.GetPage "/pages/calendar.md").RelPermalink -}}
+{{- $tv := (site.GetPage "/pages/tv.md").RelPermalink -}}
 {{- $articles := (site.GetPage "/posts").RelPermalink -}}
 {{- $authors := (site.GetPage "/authors").RelPermalink -}}
 {{- $categories := (site.GetPage "/categories").RelPermalink -}}
@@ -68,8 +69,9 @@
       <li><strong>{{ lang.FormatNumberCustom 0 $m.jugs }}</strong><span><a href="{{ $jugs }}">Java User Groups</a></span></li>
       <li><strong>{{ lang.FormatNumberCustom 0 $m.jugsWithFeed }}</strong><span><a href="{{ $jugs }}">JUGs with event feed</a></span></li>
       <li><strong>{{ lang.FormatNumberCustom 0 $m.javaChampions }}</strong><span><a href="{{ $champions }}">Java Champions</a></span></li>
-      <li><strong>{{ lang.FormatNumberCustom 0 $m.conferences.total }}</strong><span><a href="{{ $conferences }}">Conferences</a></span><small>{{ lang.FormatNumberCustom 0 $m.conferences.upcoming }} upcoming</small></li>
-      <li><strong>{{ lang.FormatNumberCustom 0 $m.calendar.upcomingItems }}</strong><span><a href="{{ $calendar }}">Upcoming calendar events</a></span></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.conferences.total }}</strong><span><a href="{{ $conferences }}">Conferences</a></span><small>of which {{ lang.FormatNumberCustom 0 $m.conferences.upcoming }} upcoming</small></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.tv.videos }}</strong><span><a href="{{ $tv }}">Foojay TV videos</a></span><small>from {{ lang.FormatNumberCustom 0 $m.tv.channels }} channels</small></li>
+      <li><strong>{{ lang.FormatNumberCustom 0 $m.calendar.upcomingItems }}</strong><span><a href="{{ $calendar }}">Calendar events</a></span></li>
     </ul>
 
   </article>

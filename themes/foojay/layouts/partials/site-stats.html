@@ -130,6 +130,7 @@
 {{- end -}}
 {{- $champions := (index site.Data "java-champions") | default slice -}}
 {{- $roundups := (index site.Data "jvm-weekly") | default slice -}}
+{{- $tv := (index site.Data "tv-videos") | default dict -}}
 
 {{- return (dict
       "content" (dict
@@ -165,6 +166,9 @@
           "total"    (len $conferences)
           "upcoming" $upcomingConfs)
         "jvmWeeklyRoundups" (len $roundups)
+        "tv" (dict
+          "channels" (len ($tv.channels | default slice))
+          "videos"   (len ($tv.videos | default slice)))
         "calendar" (dict
           "upcomingItems" (add $fromFeeds $submitted)
           "fromJugFeeds"  $fromFeeds
