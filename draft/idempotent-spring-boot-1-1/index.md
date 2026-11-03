@@ -137,7 +137,7 @@ The last two aren't Java types, and they matter most.
 
 1.0 also made the one breaking change that could not wait. `ScopeResolver.namespace()` now receives an `IdempotencyContext` instead of reading the `SecurityContextHolder` ThreadLocal, which is empty on a reactive stack. That is what lets reactive scoping arrive later as an additive change.
 
-A bug-fix release, 1.0.1, followed on October 29. It fixed filter mode on Oracle, and filter mode reading records that aspect mode had written.
+A bug-fix release, 1.0.1, followed on October 29. It fixed filter mode on Oracle. It also changed what happens after you switch from aspect mode to filter mode: a key written by aspect mode used to fail with a Jackson error, and now gets a clear `409 Conflict`. Such a key is never re-executed.
 
 ## 1.1: the first release I didn't write
 
@@ -179,14 +179,14 @@ curl -i -X POST localhost:8080/orders -H "Idempotency-Key: $KEY" \
 
 The second response is the first one replayed, with an `Idempotent-Replay: true` header, and the handler doesn't run again. The [README](https://github.com/benhendayoussef/idempotency-spring-boot-starter#readme) covers the JDBC and Caffeine setups.
 
-**Metrics.** Every outcome lands on one counter, `idempotency.requests`, tagged by `outcome` (`executed`, `replayed`, `conflict`, `released`, and others). So the replay rate is a single ratio, and an outcome added in a later version shows up in your query without any change:
+**Metrics.** If your application has a Micrometer `MeterRegistry` (adding `spring-boot-starter-actuator` is enough), the starter publishes metrics automatically. Every outcome lands on one counter, `idempotency.requests`, tagged by `outcome` (`executed`, `replayed`, `conflict`, `released`, and others). So the replay rate is a single ratio, and an outcome added in a later version shows up in your query without any change:
 
 ```promql
 sum(rate(idempotency_requests_total{outcome="replayed"}[5m]))
   / sum(rate(idempotency_requests_total[5m]))
 ```
 
-The trace tag uses the same values, so a dashboard and a trace search select the same requests.
+With Micrometer Tracing configured (actuator plus a bridge such as `micrometer-tracing-bridge-otel` or `-brave`), the trace tag uses the same values, so a dashboard and a trace search select the same requests. Without those dependencies, neither is added.
 
 **Extension points.** Implement `IdempotencyStore` (four methods: `claim`, `complete`, `release`, `find`) for your own backend. Or register a `ScopeResolver` to decide which caller a key belongs to. Your beans win over the built-ins.
 
@@ -213,7 +213,7 @@ This section is my opinion, not a commitment.
 
 Being loud about these is what makes a library trustworthy:
 
-- **At-least-once by default.** Redis is always at-least-once. JDBC is exactly-once only with `join-transaction=true`, only for writes in that transaction, and at the connection cost shown above.
+- **At-least-once by default.** Redis is always at-least-once. With JDBC, the annotation path is exactly-once only with `join-transaction=true`, only for writes in that transaction, and at the connection cost shown above. Your own code can also get it without the property, by calling `IdempotencyStore.complete()` inside a transaction it already holds open.
 - **`on-conflict=wait` (the default) holds a servlet thread** for each waiting duplicate. In testing, a 20-duplicate burst against an 8-thread pool pushed an *unrelated* endpoint from under 50ms to over a second. Use `fail_fast` where bursts are likely. WebFlux doesn't have this problem.
 - **No streaming, SSE or `Flux`.** The library replays one captured response.
 - **No multipart bodies in the fingerprint**, and no fingerprint at all in filter mode.
