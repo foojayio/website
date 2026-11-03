@@ -118,6 +118,10 @@ public class SlackPosts {
         String review = SITE + "/today/week-review/" + start.toLocalDate() + "/";
         StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size()
                 + "), see the overview on <" + review + "|the weekly review>");
+        for (Post p : posts) {
+            text.append("\n• <").append(p.link()).append("|").append(esc(p.title())).append(">");
+            if (!p.authors().isEmpty()) text.append(" by ").append(esc(p.authors()));
+        }
         JsonNode data = reviewData(review + "review.json");
         newAuthors(data).ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
         scheduled(data).ifPresent(n -> text.append("\n\n").append(n));
@@ -144,7 +148,7 @@ public class SlackPosts {
         int posts = data.path("scheduled").path("posts").asInt();
         if (posts == 0) return Optional.empty();
         int days = data.path("scheduled").path("days").asInt();
-        return Optional.of(posts + (posts == 1 ? " post is" : " posts are") + " already scheduled for the next "
+        return Optional.of(posts + (posts == 1 ? " post is" : " posts are") + " already <" + SITE + "/today/coming-soon/|scheduled for> the next "
                 + days + (days == 1 ? " day" : " days") + ".");
     }
 
