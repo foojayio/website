@@ -20,7 +20,7 @@ For a small Spring Boot application, how much resident memory and startup time d
 
 ## What changed
 
-Both versions are Spring Boot 4.1.1 applications running on JDK 25 with compact object headers. Both use H2, Thymeleaf, the same local GitHub fixture, the same dashboard, and the same monitoring request workload. Both ran as executable fat JARs. Packaging is a separate question, covered by the earlier [fat JAR vs extracted layout comparison](https://pvrlabs.xyz/articles/spring-boot-extracted-layout.html).
+Both versions are Spring Boot 4.1.1 applications running on JDK 25 with compact object headers. They use H2, Thymeleaf, the same local GitHub fixture, the same dashboard, and the same monitoring request workload. The applications ran as executable fat JARs. Packaging is a separate question, covered by the earlier [comparison of fat JAR and extracted layouts](https://pvrlabs.xyz/articles/spring-boot-extracted-layout.html).
 
 Both variants exposed metrics through Spring Boot Actuator's Prometheus endpoint, suitable for monitoring with tools like [StatLite](https://pvrlabs.xyz/statlite/).
 
