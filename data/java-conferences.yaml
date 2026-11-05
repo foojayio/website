@@ -218,8 +218,8 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8588897
-  longitude: 2.320041
+  latitude: 48.8534951
+  longitude: 2.3483915
   cfp_url: https://devoxxfr2026.cfp.dev/
   cfp_closes: '2026-01-11'
 - slug: devoxx-greece-2026
@@ -407,8 +407,8 @@
   hybrid: false
   city: Utrecht
   country: Netherlands
-  latitude: 52.0907006
-  longitude: 5.1215634
+  latitude: 52.0841923
+  longitude: 5.0988034
   cfp_url: https://sessionize.com/jspring26
   cfp_closes: '2026-03-29'
 - slug: devbcn-2026
@@ -564,8 +564,8 @@
   hybrid: false
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: https://app.confitura.pl/login
   cfp_closes: '2026-06-07'
 - slug: jug-saxony-day-2026
@@ -655,8 +655,8 @@
   hybrid: true
   city: Warsaw
   country: Poland
-  latitude: 52.2319581
-  longitude: 21.0067249
+  latitude: 52.2333742
+  longitude: 21.0711489
   cfp_url: '[https://forms.gle/nKreGcpfzx4zsLhU7](https://docs.google.com/forms/d/e/1FAIpQLSc9ITG71szuMVGbAUHrquGy4Fq6fgKvukKP10dWrqvMErmfqw/viewform'
   cfp_closes: '2026-08-23'
 - slug: jdd-2026
@@ -968,6 +968,17 @@
   longitude: 4.8924534
   cfp_url: https://vdams27.cfp.dev/
   cfp_closes: '2026-12-01'
+- slug: churconf-seoul-2027
+  name: ChurConf Seoul
+  url: https://kr.churconf.com/
+  start: '2027-04-03'
+  end: '2027-04-03'
+  online: false
+  hybrid: false
+  city: Seoul
+  country: South Korea
+  latitude: 37.5666791
+  longitude: 126.9782914
 - slug: devoxx-france-2027
   name: Devoxx France
   url: https://www.devoxx.fr/en
@@ -977,8 +988,8 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8588897
-  longitude: 2.320041
+  latitude: 48.8534951
+  longitude: 2.3483915
 - slug: open-community-experience-2027
   name: Open Community Experience
   url: https://ocxconf.org
@@ -1138,8 +1149,8 @@
   hybrid: false
   city: Utrecht
   country: Netherlands
-  latitude: 52.0907006
-  longitude: 5.1215634
+  latitude: 52.0841923
+  longitude: 5.0988034
 - slug: jcrete-2027
   name: JCrete®
   url: https://www.jcrete.org
