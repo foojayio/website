@@ -17,6 +17,7 @@ github: "https://github.com/axelixlabs/axelix"
 # are this sponsor's articles. transfer/Sponsors.java preserves this block verbatim.
 authors:
   - "mikhail-polivakha"
+  - "dmitry-mazurov"
 # Fallback only -- sponsor/section.html derives the topic list from the tags of
 # this sponsor's own articles as soon as there are any, and only falls back to
 # this list while there are none.
