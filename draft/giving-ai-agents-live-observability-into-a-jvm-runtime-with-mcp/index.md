@@ -169,10 +169,13 @@ BxMCP can restart applications, reload modules, clear caches and trigger GC. You
 					"jvm-only": {
 						"includedTools": [ "jvm*", "runtime_get_info" ],
 						"excludedTools": [ "jvm_trigger_gc", "jvm_trigger_heap_dump" ]
+					    },
+ 				   "deployment-agent": {
+       					 "includedTools": [ "check_deployment_status" ]
 					}
 				},
 				"authToken": [
-					{ "token": "agent-token", "profile": "readonly" },
+					{ "token": "agent-token", "profile": "deployment-agent" },
 					{ "token": "ops-token", "profile": "jvm-only" },
 					{ "token": "admin-token", "profile": "admin" }
 				]
@@ -182,7 +185,7 @@ BxMCP can restart applications, reload modules, clear caches and trigger GC. You
 }
 ```
 
-Our advice: give your agents the `readonly` profile in production, and keep `admin` for humans.
+For production agents, prefer an explicit, audited tool allowlist rather than relying only on the built-in `readonly` profile. The profile filters tools by name, so custom tools should be reviewed carefully before being exposed. Keep `admin` for trusted human operators.
 
 ## Extend it with your own tools
 
