@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-05T07:59:19Z",
+  "generatedAt" : "2026-11-06T08:00:31Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -22,14 +22,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG Meetup at Atlassian",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048044/",
-      "startTime" : "2026-11-05T18:00:00+01:00",
-      "endTime" : "2026-11-05T21:00:00+01:00",
-      "venue" : "Atlassian B.V.",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
       "title" : "Amsterdam JUG Meetup at Flagsmith",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048165/",
       "startTime" : "2026-11-17T18:00:00+01:00",
@@ -192,8 +184,8 @@
       "url" : "https://www.meetup.com/java-vienna/events/316166128/",
       "startTime" : "2026-11-07T09:00:00+01:00",
       "endTime" : "2026-11-07T17:00:00+01:00",
-      "venue" : null,
-      "city" : "Vienna",
+      "venue" : "Gußhausstraße 27-29",
+      "city" : "Wien",
       "online" : false
     }, {
       "title" : "November Meetup",
@@ -204,7 +196,7 @@
       "city" : "Vienna",
       "online" : false
     }, {
-      "title" : "\"Drive your UI with AI\" + \"TornadoVM: Your Java workload on the GPU\"",
+      "title" : "\"TornadoVM: GPU Accelerated Java\" +\"Drive your UI with AI\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166142/",
       "startTime" : "2026-12-03T18:00:00+01:00",
       "endTime" : "2026-12-03T21:00:00+01:00",
@@ -683,14 +675,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "I Quit BDD Once. This Time the AI Writes the Glue",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/317243044/",
-      "startTime" : "2026-11-05T20:00:00+01:00",
-      "endTime" : "2026-11-05T22:00:00+01:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    }, {
       "title" : "JUGO - TBD - save the date",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
       "startTime" : "2026-11-11T18:00:00+01:00",
@@ -872,7 +856,15 @@
     "jug" : "MadridJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/madridjug/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Técnicas de optimización de memoria: estrategias para reducir costes y consumo",
+      "url" : "https://www.meetup.com/madridjug/events/317164717/",
+      "startTime" : "2026-11-18T19:00:00+01:00",
+      "endTime" : "2026-11-18T20:30:00+01:00",
+      "venue" : "C. de Méndez Álvaro, 61",
+      "city" : "Madrid",
+      "online" : false
+    } ]
   }, {
     "slug" : "ManchesterUK-Java-Community",
     "name" : "Manchester Java Community",
@@ -901,15 +893,7 @@
     "jug" : "MontrealJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/montreal-jug/",
-    "events" : [ {
-      "title" : "⚡️Présentations éclairs de la communauté / Lightning Talks",
-      "url" : "https://www.meetup.com/montreal-jug/events/316679816/",
-      "startTime" : "2026-11-05T17:30:00-05:00",
-      "endTime" : "2026-11-05T20:30:00-05:00",
-      "venue" : "Maplr",
-      "city" : "Montréal",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "nairobi-jvm",
     "name" : "Nairobi Java User Group",
