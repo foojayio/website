@@ -15,7 +15,7 @@ canonical: "https://www.ortussolutions.com/blog/free-observability-with-bxmcp-gi
 related_posts: []
 ---
 
-**Ortus Solutions today announces that [bx-mcp](https://boxlang.ortusbooks.com/boxlang-ai/bx-mcp), the Model Context Protocol (MCP) server for BoxLang, is now free for everyone.** Install it, point any MCP capable client at it, and your AI coding assistant, IDE agent or automation pipeline can inspect and operate a live BoxLang runtime: JVM, caches, datasources, slow requests, schedulers, logs and more. No BoxLang+ subscription required unless you want professional support 🤪 and help support the futher development of all our open-source initiatives.
+**Ortus Solutions today announces that [bx-mcp](https://boxlang.ortusbooks.com/boxlang-ai/bx-mcp), the Model Context Protocol (MCP) server for BoxLang, is now free for everyone.** Install it, point any MCP-capable client at it, and your AI coding assistant, IDE agent or automation pipeline can inspect and operate a live BoxLang runtime: JVM, caches, datasources, slow requests, schedulers, logs and more. No BoxLang+ subscription required unless you want professional support 🤪 and help support the further development of all our open-source initiatives.
 
 ```bash
 bx-module install bx-mcp
@@ -77,7 +77,7 @@ boxlang bxmcp http://localhost:8080/~bxmcp/boxlang.bxm --token=your-auth-token
 
 ## Install it in two minutes
 
-You need BoxLang 1.14+ and the `bx-ai` module. Install both with the BoxLang module manager:
+You need BoxLang 1.18+ and the `bx-ai` module. The `bx-mcp` package declares `bx-ai` as a dependency, so installing `bx-mcp` also installs the required AI module:
 
 ```bash
 bx-module install bx-mcp
@@ -156,7 +156,7 @@ Per route percentiles pointed straight at `/db.bxm`. The slow SQL collector had 
 BxMCP can restart applications, reload modules, clear caches and trigger GC. You decide who gets which tools:
 
 - **Bearer tokens**, one or many, each with its own tool access
-- **Security profiles:** the built in `admin` profile allows everything, and `readonly` allows only get, has, search and read tools. Define your own, too
+- **Security profiles:** the built-in `admin` profile allows everything, and `readonly` allows only get, has, search and read tools. Define your own, too
 - **Glob patterns** in `includedTools` and `excludedTools`, such as `jvm*` or `cache_get*`
 - **IP allowlisting** (localhost only by default) and **CORS** origins
 
@@ -186,7 +186,7 @@ Our advice: give your agents the `readonly` profile in production, and keep `adm
 
 ## Extend it with your own tools
 
-The built in tools are only the start. Any module or application can register its own tools and prompts into the same server using the `mcpServer()` BIF from `bx-ai`:
+The built-in tools are only the start. Any module or application can register its own tools and prompts into the same server using the `mcpServer()` BIF from `bx-ai`:
 
 ```js
 mcpServer( "boxlang" ).registerTool(
