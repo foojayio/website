@@ -125,7 +125,9 @@ Here, `@ROWOWNERSHIP` injects the authenticated identity into the procedure para
 ```text
 POST /orders/shop/whoami  (authenticated as Bob)
 {"userId":"11F1DA81D3E6621E9A098E5D4C15B1E0"}
-200 → {"ok":true,"principalId":"11F1DA81D3E789B29A098E5D4C15B1E0"}
+HTTP 200
+Extracted result (resultSets[0].items[0].result):
+{"ok":true,"principalId":"11F1DA81D3E789B29A098E5D4C15B1E0"}
 ```
 
 The returned principal is Bob's, as the [full capture](https://github.com/rokon12/order-duality/blob/foojay-mrs-article/docs/evidence/mrs/forged-identity-example.json) shows.
@@ -200,7 +202,7 @@ public JsonNode requestCancellation(long orderId, String reason, UUID requestKey
 }
 ```
 
-`REQUEST` is an enum value mapped to `requestCancellation`, not an arbitrary path. [MrsClient](https://github.com/rokon12/order-duality/blob/foojay-mrs-article/mrs-agent/src/main/java/com/bazlur/mrs/client/MrsClient.java) builds the HTTPS request using the JDK HTTP client, attaches its bearer token, applies timeouts and response-size limits, and unwraps MRS's procedure response:
+`REQUEST` is an enum value mapped to `requestCancellation`, not an arbitrary path. [MrsClient](https://github.com/rokon12/order-duality/blob/foojay-mrs-article/mrs-agent/src/main/java/com/bazlur/mrs/client/MrsClient.java) builds the HTTPS request using the JDK HTTP client, attaches its bearer token, configures connection and request timeouts, caps responses at 128 KiB, and unwraps MRS's procedure response:
 
 ```java
 public JsonNode call(Operation operation, Map<String, ?> arguments) throws Exception {
@@ -211,6 +213,8 @@ public JsonNode call(Operation operation, Map<String, ?> arguments) throws Excep
     return result;
 }
 ```
+
+The timeouts have a gap on the tested Java 25 runtime. The client uses `BodyHandlers.ofInputStream()` and then `readNBytes()`. Its 20-second request timeout stops covering the exchange after the response headers arrive; it does not bound those body reads. A stalled response body can still block the terminal. A production client needs a separate deadline for body consumption.
 
 That wrapper exposes an important distinction. A denied endpoint returns an HTTP error such as 403. A procedure can execute successfully and report a business denial inside HTTP 200:
 
@@ -228,7 +232,11 @@ The application rejects an answer unless at least one tool call in that turn com
 
 The interactive session also keeps a 20-message [LangChain4j chat memory](https://docs.langchain4j.dev/tutorials/chat-memory/), so a follow-up such as “What is its status now?” can refer to the order just discussed. A simple turn with one tool call adds four messages; extra tool calls and rounds consume the window faster. This is a message limit, not a token budget, so large documents can still exceed the model's context capacity.
 
-The system prompt tells the model to check tools again for current facts. Budgets and retry keys reset each turn, and a failed turn restores the previous messages so that a rejected answer does not become conversational fact. Restoring memory does not undo an API operation that already succeeded: inspect `/requests` before retrying a failed cancellation turn. Retaining tool results also gives injected business text several turns to influence the model instead of one. `/clear` forgets the conversation and the selected request, while saved requests remain in MySQL.
+The system prompt tells the model to check tools again for current facts. Budgets and retry keys reset each turn, and a failed turn restores the previous messages so that a rejected answer does not become conversational fact. Restoring memory does not undo an API operation that already succeeded.
+
+Before retrying a failed cancellation turn, inspect `/review REQUEST_ID` if you know its ID, or check `/requests`. The latter shows only the first ten requests and has no pagination command, so an absent request does not prove that creation failed. If it reports more results, use a REST client authenticated as the same customer to call `GET /orders/shop/requests?limit=10&offset=0`, then follow each response's `next` link until `hasMore` is false. MRS documents this [pagination format](https://dev.mysql.com/doc/dev/mysql-rest-service/latest/restApi.html). Check the remaining pages before retrying: a new turn gets a new retry key and could create another pending request.
+
+Retaining tool results also gives injected business text several turns to influence the model instead of one. `/clear` forgets the conversation and the selected request, while saved requests remain in MySQL.
 
 ## A cancellation request is a database record
 
