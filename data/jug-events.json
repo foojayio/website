@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-06T08:00:31Z",
+  "generatedAt" : "2026-11-07T07:17:54Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -364,7 +364,15 @@
     "jug" : "BremenOldenburgJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jugbremen/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Umzug 1/3",
+      "url" : "https://www.meetup.com/jugbremen/events/317318713/",
+      "startTime" : "2026-11-11T17:30:00+01:00",
+      "endTime" : "2026-11-11T18:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    } ]
   }, {
     "slug" : "DarmstadtJUG",
     "name" : "Java User Group Darmstadt",
@@ -579,6 +587,14 @@
       "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykckbnc/",
       "startTime" : "2027-07-30T19:00:00+02:00",
       "endTime" : "2027-08-06T22:00:00+02:00",
+      "venue" : "Pizza Unica",
+      "city" : "Hannover",
+      "online" : false
+    }, {
+      "title" : "Java Stammtisch",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykclbkc/",
+      "startTime" : "2027-08-27T19:00:00+02:00",
+      "endTime" : "2027-09-03T22:00:00+02:00",
       "venue" : "Pizza Unica",
       "city" : "Hannover",
       "online" : false
@@ -1072,6 +1088,14 @@
       "venue" : "Online Event",
       "city" : null,
       "online" : true
+    }, {
+      "title" : "Re:Build Conference 2027",
+      "url" : "https://luma.com/9xkxbofp",
+      "startTime" : "2027-05-05T07:00:00Z",
+      "endTime" : "2027-05-06T17:00:00Z",
+      "venue" : "Business Design Centre Ltd",
+      "city" : "UK",
+      "online" : null
     } ]
   }, {
     "slug" : "Warszawa-JUG",
