@@ -319,7 +319,7 @@ JSON-B produced:
 while Jackson produced:
 
 ```json
-"birthDate": [1995, 8, 12]
+"birthDate": [1995, 12, 8]
 ```
 
 So the abstraction removed code from our application, but it did **not** remove the underlying decisions.
