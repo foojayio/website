@@ -1,7 +1,7 @@
 ---
 title: "Comparing Java Formatters: Why Open Java Format Is My New Favorite"
 date: "2026-11-17"
-description: "Comparing Google Java Format 2.0, Palantir Java Format, Open Java Format, and Prince of Space on JDK 25 across 86 formatting scenarios."
+description: "Comparing Google Java Format 2.0, Palantir Java Format, Open Java Format, Prince of Space, and Netflix jfmt on JDK 25 across 86 scenarios."
 authors:
   - "guillaume-laforge"
 image: "java-formatters-comparison-banner.jpg"
@@ -31,44 +31,47 @@ In his post, Alex made two points that immediately resonated with me:
 In his article, Alex also introduced [open-java-format](https://openjavaformat.dev/) ([GitHub](https://github.com/openjavaformat/open-java-format)), an open-source fork of `palantir-java-format` that he created to fix long-standing bugs, modernize the build and IDE tooling, and keep pace with recent JDK releases.
 
 That made me curious: how do the main Java formatters actually compare today on modern Java 21 to 25 code?
-I put together a test and benchmark suite on JDK 25 (`25.0.4.1.1`) across 16 targeted Java snippets and a 1,042-line `FormatterShowcase.java` file covering 86 formatting scenarios, pitting four formatters against each other:
+I put together a test and benchmark suite on JDK 25 (`25.0.4.1.1`) across 16 targeted Java snippets and a 1,042-line `FormatterShowcase.java` file covering 86 formatting scenarios, pitting five formatters against each other:
 
 1. **[Google Java Format](https://github.com/google/google-java-format)** (`2.0.0`, released October 30, 2026, alongside legacy `1.37.0`)
 2. **[Palantir Java Format](https://github.com/palantir/palantir-java-format)** (`2.103.0`)
 3. **[Open Java Format](https://github.com/openjavaformat/open-java-format)** (`21.0.2`)
 4. **[Prince of Space](https://github.com/agustafson/prince-of-space)** (`2.3.1`)
+5. **[Netflix jfmt](https://github.com/Netflix/jfmt)** (`0.9.0`)
 
-Along the way, I uncovered some surprising edge-case bugs, reported a compilation-breaking annotation bug in Prince of Space ([Issue #147](https://github.com/agustafson/prince-of-space/issues/147)), and contributed a backward-compatibility fix to Open Java Format ([PR #200](https://github.com/openjavaformat/open-java-format/pull/200), already merged and released in `21.0.2`) as well as a pull request to Spotless ([PR #3179](https://github.com/diffplug/spotless/pull/3179)).
+Along the way, I uncovered some surprising edge-case bugs (including a compilation-breaking annotation bug in Prince of Space reported at [Issue #147](https://github.com/agustafson/prince-of-space/issues/147), and a 2-cycle oscillation crash in Netflix's `jfmt` on empty blocks with comments), and contributed a backward-compatibility fix to Open Java Format ([PR #200](https://github.com/openjavaformat/open-java-format/pull/200), already merged and released in `21.0.2`) as well as a pull request to Spotless ([PR #3179](https://github.com/diffplug/spotless/pull/3179)).
 
 > **Quick links to the projects and articles:**
 > - **Trigger article:** [My love-hate relationship with Java formatters](https://foojay.io/today/my-love-hate-relationship-with-java-formatters/) by Alex Abashev on Foojay.io
 > - **Open Java Format:** [openjavaformat.dev](https://openjavaformat.dev/), [GitHub repository](https://github.com/openjavaformat/open-java-format), and [WebAssembly Playground](https://openjavaformat.dev/playground/)
-> - **Other formatters:** [google-java-format](https://github.com/google/google-java-format), [palantir-java-format](https://github.com/palantir/palantir-java-format), and [prince-of-space](https://github.com/agustafson/prince-of-space)
+> - **Other formatters:** [google-java-format](https://github.com/google/google-java-format), [palantir-java-format](https://github.com/palantir/palantir-java-format), [prince-of-space](https://github.com/agustafson/prince-of-space), and [Netflix/jfmt](https://github.com/Netflix/jfmt)
 
-## The Four Contenders at a Glance
+## The Five Contenders at a Glance
 
-Before looking at code diffs, here is how the four formatters compare across their core design choices:
+Before looking at code diffs, here is how the five formatters compare across their core design choices:
 
-| Dimension | `google-java-format` (`2.0.0`) | `palantir-java-format` (`2.103.0`) | `open-java-format` (`21.0.2`) | `prince-of-space` (`2.3.1`) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Maven Coordinates** | `com.google.googlejavaformat:google-java-format:2.0.0` | `com.palantir.javaformat:palantir-java-format:2.103.0` | `dev.openjavaformat:open-java-format:21.0.2` | `io.github.agustafson.princeofspace:prince-of-space-core:2.3.1` |
-| **Parser Engine** | Internal `jdk.compiler` (`javac` AST) | Internal `jdk.compiler` (`javac` AST) | Internal `jdk.compiler` (`javac` AST) | **JavaParser** (`3.28.2`, no internal JDK APIs) |
-| **Requires `--add-exports` on JVM?** | **Yes** (6 `--add-exports`) | **Yes** (`--add-exports` + `--add-opens`) | **Yes** on JVM (native binaries need none) | **No** (runs on standard JVM classpath) |
-| **Default Line Length** | **100** cols (`--max-line-length` added in 2.0.0) | **120** cols | **120** cols | **120** cols (configurable) |
-| **Default Indentation** | **2 spaces** (4sp continuation; `AOSP` = 4/8) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation; 4sp for chains) |
-| **Configurability** | Minimal (`GOOGLE`/`AOSP`, `--max-line-length`, `--cleanup=false`) | Minimal (`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | Minimal (`OJF`/`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | **7 options** (`indentStyle`, `indentSize`, `lineLength`, `wrapStyle`, `closingParenOnNewLine`, `trailingCommas`, `javaLanguageLevel`) |
-| **Single-Arg Block Lambda** | **Inline** in `2.0.0` (wrapped in `1.37.0`) | **Inline** | **Inline** | **Inline** |
-| **Multi-Arg Trailing Block Lambda** | **Wraps** all arguments | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) |
-| **Method Chain Wrapping** | Breaks at 100 cols; `.stream()` stays on receiver | Breaks at **80-col dot limit** or 120-col line limit; 8sp indent | Same as Palantir (80-col dot limit, 120-col line limit, 8sp indent) | Breaks at 120 cols; **breaks before `.stream()`**; 4sp indent |
-| **Import Sorting & Unused Removal** | **Yes** | **Yes** | **Yes** (preserves `import java.lang.*` with wildcards) | **No** |
-| **Partial Range Formatting** | **Yes** | **Yes** | **Yes** | **No** (whole-file only) |
-| **JBang `//DEPS` & `//$NON-NLS-1$`** | Breaks (`// DEPS`, `// $NON-NLS-1$`) | Breaks (`// DEPS`, `// $NON-NLS-1$`) | **Preserves exact syntax** | Preserves `//DEPS`, moves `//$NON-NLS-1$` |
-| **GraalVM Native / Wasm** | Native binaries on GitHub Releases | Native binaries (Linux/macOS) | Native binaries + **WebAssembly** ([Playground](https://openjavaformat.dev/playground/)) | JVM JAR / CLI fat JAR |
+| Dimension | `google-java-format` (`2.0.0`) | `palantir-java-format` (`2.103.0`) | `open-java-format` (`21.0.2`) | `prince-of-space` (`2.3.1`) | `Netflix/jfmt` (`0.9.0`) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Maven Coordinates** | `com.google.googlejavaformat:google-java-format:2.0.0` | `com.palantir.javaformat:palantir-java-format:2.103.0` | `dev.openjavaformat:open-java-format:21.0.2` | `io.github.agustafson.princeofspace:prince-of-space-core:2.3.1` | `com.netflix:com.netflix.tools.jfmt:0.9.0` |
+| **Parser Engine** | Internal `jdk.compiler` (`javac` AST) | Internal `jdk.compiler` (`javac` AST) | Internal `jdk.compiler` (`javac` AST) | **JavaParser** (`3.28.2`, no internal JDK APIs) | Internal `jdk.compiler` (`javac` AST + attribution in `ImportNormalizer`; forked from GJF `1.36.1`) |
+| **Minimum JDK** | JDK 21+ | JDK 21+ | JDK 21+ | JDK 17+ | **JDK 25+** (classfile version `69.0`) |
+| **Requires `--add-exports` on JVM?** | **Yes** (6 `--add-exports`) | **Yes** (`--add-exports` + `--add-opens`) | **Yes** on JVM (native binaries need none) | **No** (runs on standard JVM classpath) | **Yes** (7 `--add-exports`, including `com.sun.tools.javac.model`) |
+| **Default Line Length** | **100** cols (`--max-line-length` added in 2.0.0) | **120** cols | **120** cols | **120** cols (configurable) | **Unlimited** (`UNLIMITED_LINE_WIDTH`; wraps by **AST structural complexity**; **80** cols for Javadoc) |
+| **Default Indentation** | **2 spaces** (4sp continuation; `AOSP` = 4/8) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation; 4sp for chains) | **4 spaces** (8sp continuation + **column alignment** up to 24-space cap) |
+| **Configurability** | Minimal (`GOOGLE`/`AOSP`, `--max-line-length`, `--cleanup=false`) | Minimal (`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | Minimal (`OJF`/`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | **7 options** (`indentStyle`, `indentSize`, `lineLength`, `wrapStyle`, `closingParenOnNewLine`, `trailingCommas`, `javaLanguageLevel`) | **Zero style flags** (CLI offers `--check`, `-` stdin, and `javac` flags `-cp`, `-p`, `--source-path`) |
+| **Single-Arg Block Lambda** | **Inline** in `2.0.0` (wrapped in `1.37.0`) | **Inline** | **Inline** | **Inline** | **Inline** |
+| **Multi-Arg Trailing Block Lambda** | **Wraps** all arguments | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) |
+| **Method Chain Wrapping** | Breaks at 100 cols; `.stream()` stays on receiver | Breaks at **80-col dot limit** or 120-col line limit; 8sp indent | Same as Palantir (80-col dot limit, 120-col line limit, 8sp indent) | Breaks at 120 cols; **breaks before `.stream()`**; 4sp indent | Breaks by AST complexity; `.stream()` stays on variable receiver and **column-aligns** chained `.` under `.stream()` |
+| **Braceless `if`/`else`/`for`/`while`** | Preserves braceless statements | Preserves braceless statements | Preserves braceless statements | **Inserts `{ ... }` braces** | **Inserts `{ ... }` braces** (`ControlBraces`) |
+| **Import Sorting & Unused Removal** | **Yes** | **Yes** | **Yes** (preserves `import java.lang.*` with wildcards) | **No** | **Yes** (**4 OpenJDK groups** + CLI semantic `ImportNormalizer` expanding `import pkg.*;` and shortening `pkg.Type`) |
+| **Partial Range Formatting** | **Yes** | **Yes** | **Yes** | **No** (whole-file only) | **Yes** (via internal `Formatter.formatSource`) |
+| **JBang `//DEPS` & `//$NON-NLS-1$`** | Breaks (`// DEPS`, `// $NON-NLS-1$`) | Breaks (`// DEPS`, `// $NON-NLS-1$`) | **Preserves exact syntax** | Preserves `//DEPS`, moves `//$NON-NLS-1$` | Preserves standalone `///usr/bin/env` & `//DEPS`, breaks trailing `// $NON-NLS-1$` |
+| **GraalVM Native / Wasm** | Native binaries on GitHub Releases | Native binaries (Linux/macOS) | Native binaries + **WebAssembly** ([Playground](https://openjavaformat.dev/playground/)) | JVM JAR / CLI fat JAR | Modular JAR (`ToolProvider` `"jfmt"`) + JDK 25 `jlink` image |
 
 ## How They Format Code Differently: Side-by-Side Examples
 
-When I ran all four formatters across the 16 test snippets, `google-java-format`, `palantir-java-format` / `open-java-format`, and `prince-of-space` produced **0 out of 16 identical files** between families.
-Even small differences in indentation and wrapping philosophy change the visual shape of daily Java code.
+When I ran all five formatters across the 16 test snippets, `google-java-format`, `palantir-java-format` / `open-java-format`, `prince-of-space`, and `Netflix/jfmt` produced almost completely distinct layouts across families.
+Even small differences in indentation, alignment, and wrapping philosophy change the visual shape of daily Java code.
 
 ### 1. Lambdas and Reactive / Async Pipelines
 
@@ -90,10 +93,10 @@ public String multiArgTrailingBlockLambda(
 }
 ```
 
-By contrast, `palantir-java-format`, `open-java-format`, and `prince-of-space` apply the "rectangle rule": they keep the leading argument and the `() -> {` lambda header on the same line as the call, so the block reads just like a built-in `if` or `for` statement:
+By contrast, `palantir-java-format`, `open-java-format`, `prince-of-space`, and `Netflix/jfmt` apply the "rectangle rule": they keep the leading argument and the `() -> {` lambda header on the same line as the call, so the block reads just like a built-in `if` or `for` statement:
 
 ```java
-// palantir-java-format 2.103.0 & open-java-format 21.0.2 (4-space indent, 120 columns)
+// palantir-java-format 2.103.0, open-java-format 21.0.2, prince-of-space 2.3.1 & Netflix/jfmt 0.9.0
 public String multiArgTrailingBlockLambda(RetryPolicy retryPolicy, String operationContextDescription) {
     return retryPolicy.executeWithFallbackAndCircuitBreaker(operationContextDescription, () -> {
         String raw = fetchData();
@@ -117,10 +120,10 @@ public List<String> mediumChain(List<String> items) {
 }
 ```
 
-Notice two subtle details here:
+Notice how differently the other formatters handle this exact pipeline:
 - Even though the entire chain is 105 characters and would fit inside a 120-column limit, `palantir-java-format` and `open-java-format` wrap it onto one call per line because they enforce an **80-column dot limit** for chained calls. Short chains (`items.stream().filter(s -> !s.isEmpty()).toList()`) stay on one line, while multi-step pipelines break cleanly with `.stream()` attached to `items` and an 8-space continuation indent.
 - If you run `google-java-format 2.0.0` with `--max-line-length=120`, it has no 80-column dot heuristic, so it flattens the entire 4-step `mediumChain` onto a single 105-character line.
-- **`prince-of-space`** takes a different approach: it breaks *before* `.stream()` and indents chained calls by 4 spaces instead of 8:
+- **`prince-of-space`** breaks *before* `.stream()` and indents chained calls by 4 spaces instead of 8:
 
 ```java
 // prince-of-space 2.3.1
@@ -134,7 +137,22 @@ public List<String> mediumChain(List<String> items) {
 }
 ```
 
-### 3. Method Signatures and Closing Parentheses
+- **`Netflix/jfmt`** keeps `.stream()` attached when the receiver is a simple variable (`items.stream()`), and then uses `Indent.Align` (capped at 24 spaces) to **column-align** every subsequent `.filter(...)`, `.map(...)`, and `.toList()` dot directly under `.stream()` at column 20:
+
+```java
+// Netflix/jfmt 0.9.0 (dots column-aligned under .stream() at column 20)
+public List<String> mediumChain(List<String> items) {
+    return items.stream()
+                .filter(s -> s != null)
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
+}
+```
+
+Because `Netflix/jfmt` wraps method chains based on AST structural complexity (`MAX_UNBROKEN_COMPLEXITY = 6`) rather than line length, it even wraps a 58-character 3-step chain (`items.stream().filter(s -> !s.isEmpty()).toList()`, complexity `7 > 6`) across three column-aligned lines, whereas the other four formatters keep it on one line.
+
+### 3. Method Signatures, Closing Parentheses, and Structural Complexity Wrapping
 
 When a method declaration or call overflows the line limit, `google-java-format`, `palantir-java-format`, and `open-java-format` bin-pack short parameters when they fit together on the continuation line (or place them one per line when they don't) and keep the closing `) {` inline after the last parameter:
 
@@ -172,6 +190,26 @@ private Map<String, List<Optional<CompletableFuture<String>>>> invokeDownstreamS
 }
 ```
 
+**`Netflix/jfmt`** takes the most radical approach of all: **it has no column width limit for code (`UNLIMITED_LINE_WIDTH = (1 << 28) - 1`, or 268,435,455 columns)** and removes `StringWrapper` completely so string literals are never split across lines (while still reflowing Javadoc and `///` Markdown doc comments at **80 columns**).
+Instead of measuring character columns, `jfmt` decides whether a parameter list, argument list, or expression is `FLAT` (single line), `WRAPPED` (single continuation break), or `BROKEN` (one per line) purely from **AST structural complexity** (`MAX_UNBROKEN_COMPLEXITY = 6`):
+
+- Every method parameter (`VariableTree`) has a structural complexity score of `2`. That means **any method or constructor with 4 or more parameters** has complexity `>= 8` (`> 6`) and **always wraps before the 4th parameter**, even if the entire signature is only 90 characters and fits comfortably on one line in every other formatter!
+- Conversely, a 134-character 4-argument method call with inline `/* ... */` comments (complexity `4 <= 6`), a 137-character `@SuppressWarnings(value = "...")` annotation (complexity `3 <= 6`), or even a 436-character low-complexity statement stays on **one unbroken line**:
+
+```java
+// Netflix/jfmt 0.9.0:
+// 134-character 4-arg call has complexity 4 (<= 6), so it stays on 1 unbroken line:
+public void invokeWithInlineComments() {
+    configureEndpoint("https://api.example.com", null /* customAuthHeader */, true /* followRedirects */, 30_000 /* timeoutMs */);
+}
+
+// 90-character 4-param method has complexity 4 * 2 = 8 (> 6), so it always wraps before the 4th parameter:
+private void configureEndpoint(String url, String header, boolean follow,
+        int timeout) {}
+```
+
+And if a wrapped 4-parameter method has a short name whose opening `(` sits at or before column 24, `jfmt` column-aligns the wrapped parameter under `(` (`public void op(String a, String b, String c,\n               String d) {}`).
+
 ### 4. Braceless Control Flow and AST Cleanups
 
 Historically, `google-java-format` refused to modify the AST beyond import ordering and modifier sorting.
@@ -181,25 +219,27 @@ That changed in **`google-java-format` `2.0.0`**, which now runs an AST cleanup 
 - Removes parentheses around single untyped lambda parameters (`(s) -> s.trim()` becomes `s -> s.trim()`),
 - Reorders modifiers to JLS order (`static public final` becomes `public static final`).
 
-`prince-of-space` goes even further on control flow: if it encounters a braceless `if`, `else`, `for`, or `while` statement (`if (value < 0) return "negative";`), it automatically inserts `{ ... }` curly braces around the body. The Google/Palantir/Open Java Format family leaves braceless statements untouched.
+Both **`prince-of-space`** and **`Netflix/jfmt`** (via `ControlBraces.addBraces`) go even further on control flow: if they encounter a braceless `if`, `else`, `for`, or `while` statement (`if (value < 0) return "negative";`), they automatically insert `{ ... }` curly braces around the body. The Google/Palantir/Open Java Format family leaves braceless statements untouched.
 
 ## Performance and Idempotency Benchmarks on JDK 25
 
-To measure how fast each formatter runs in-process on the JVM and how compact their outputs are, I benchmarked all four formatters (plus legacy `google-java-format` `1.37.0`) on JDK 25 (`25.0.4.1.1`) across:
+To measure how fast each formatter runs in-process on the JVM and how compact their outputs are, I benchmarked all five formatters (plus legacy `google-java-format` `1.37.0`) on JDK 25 (`25.0.4.1.1`) across:
 - **16 targeted comparison snippets** (25 warmup iterations + 50 timed iterations)
 - **`FormatterShowcase.java`** (a 1,042-line torture test covering 86 Java 21 to 25 formatting scenarios; 10 warmup iterations + 25 timed iterations)
 
-| Formatter | Cold 1st Call (ms) | 16-Snippet Suite Avg (ms) | `FormatterShowcase` (1,042 lines) Avg (ms) | Showcase Output Lines | Showcase Avg Line Length | 1st-Pass Idempotent on Showcase? |
-| :--- | ---: | ---: | ---: | ---: | ---: | :---: |
-| `google-java-format` `2.0.0` | 148.5 | 10.3 | 31.5 | 1,566 | 38.9 | **No** (converges on pass 2) |
-| `google-java-format` `1.37.0` | 18.8 | 9.8 | 30.0 | 1,580 | 38.9 | **No** (converges on pass 2) |
-| `palantir-java-format` `2.103.0` | 35.5 | 11.3 | 47.7 | 1,479 | 45.8 | **Yes** |
-| `open-java-format` `21.0.2` | 25.0 | 11.5 | 83.8 | 1,479 | 45.8 | **Yes** |
-| `prince-of-space` `2.3.1` | 75.0 | 7.7 | 65.4 | 1,598 | 42.0 | **Yes** |
+| Formatter | Cold 1st Call (ms) | 16-Snippet Suite Avg (ms) | `FormatterShowcase` (1,042 lines) Avg (ms) | Showcase Output Lines | Showcase Max Line Length | Showcase Avg Line Length | 1st-Pass Idempotent on Showcase? |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | :---: |
+| `google-java-format` `2.0.0` | 162.5 | 13.4 | 41.0 | 1,566 | 153 | 38.9 | **No** (converges on pass 2) |
+| `google-java-format` `1.37.0` | 19.4 | 12.2 | 38.8 | 1,580 | 153 | 38.9 | **No** (converges on pass 2) |
+| `palantir-java-format` `2.103.0` | 36.3 | 13.9 | 65.4 | 1,479 | 157 | 45.8 | **Yes** |
+| `open-java-format` `21.0.2` | 27.6 | 14.6 | 98.8 | 1,479 | 157 | 45.8 | **Yes** |
+| `prince-of-space` `2.3.1` | 87.4 | 8.5 | 73.1 | 1,598 | 156 | 42.0 | **Yes** |
+| `Netflix/jfmt` `0.9.0` | 52.9 | 11.8 | 33.7 | 1,397 | **436** | 48.1 | **No** (2-cycle oscillation crash!) |
 
-Two numbers stand out in this table:
-1. **Vertical compactness:** `palantir-java-format` and `open-java-format` format the 1,042-line showcase into **1,479 lines** (averaging 45.8 characters per line), saving nearly 100 vertical lines compared to `google-java-format` (`1,566` lines) and 120 lines compared to `prince-of-space` (`1,598` lines).
-2. **`open-java-format` vs. `palantir-java-format` on long strings:** Across the 16 normal snippets, `open-java-format` and `palantir-java-format` run at the exact same speed (~11.4 ms). On `FormatterShowcase.java` (which includes several intentionally oversized string literals), `open-java-format` averages ~84 ms vs. ~48 ms for Palantir. Bytecode inspection of `com.palantir.javaformat.java.StringWrapper` shows why: `open-java-format` wraps `StringWrapper.wrapOnce(...)` in a convergence loop (`MAX_ROUNDS = 5`). Whenever a pass splits or joins a long string literal, it runs an extra verification pass to guarantee that the output is 100% stable on the first call.
+Three numbers stand out in this table:
+1. **Vertical compactness (with bounded line width):** Among formatters that enforce a 100- or 120-column line limit, `palantir-java-format` and `open-java-format` format the 1,042-line showcase into **1,479 lines** (averaging 45.8 characters per line), saving nearly 90 vertical lines compared to `google-java-format` (`1,566` lines) and 120 lines compared to `prince-of-space` (`1,598` lines).
+2. **`Netflix/jfmt`'s single-pass speed vs. 436-column lines:** On a single pass, `Netflix/jfmt` is the fastest `javac`-based formatter on `FormatterShowcase.java` (`33.7 ms`, and `11.8 ms` on the 16 snippets) because it completely removes `StringWrapper` (no extra re-lex/re-parse pass for long strings) and sets `UNLIMITED_LINE_WIDTH`, eliminating width-overflow backtracking. However, because low-complexity statements never wrap by column width, its output on `FormatterShowcase.java` reaches a maximum line length of **436 characters**, and as we will see below, its public `JfmtFormatter.formatSource` API actually crashes on `FormatterShowcase.java` due to a 2-cycle non-convergence bug.
+3. **`open-java-format` vs. `palantir-java-format` on long strings:** Across the 16 normal snippets, `open-java-format` and `palantir-java-format` run at virtually the same speed (~14 ms). On `FormatterShowcase.java` (which includes several intentionally oversized string literals), `open-java-format` averages ~99 ms vs. ~65 ms for Palantir. Bytecode inspection of `com.palantir.javaformat.java.StringWrapper` shows why: `open-java-format` wraps `StringWrapper.wrapOnce(...)` in a convergence loop (`MAX_ROUNDS = 5`). Whenever a pass splits or joins a long string literal, it runs an extra verification pass to guarantee that the output is 100% stable on the first call.
 
 ## Pros, Cons, and the Bugs I Found
 
@@ -221,7 +261,7 @@ Let's look at the strengths, trade-offs, and bugs I hit when testing each format
 
 **Pros:**
 - Created specifically to solve Google Java Format's vertical staircase problem on modern monitors: 4-space indentation, 120-column line width, the "rectangle rule" for lambdas, and an 80-column dot limit for readable fluent chains.
-- Fast (~48 ms on the 1,042-line `FormatterShowcase.java`) and 1st-pass idempotent.
+- Fast (~65 ms on the 1,042-line `FormatterShowcase.java`) and 1st-pass idempotent.
 
 **Cons & Gotchas:**
 - As Alex noted in his Foojay article, external issues and PRs often sit unreviewed because releases primarily track Palantir's internal infrastructure syncs.
@@ -249,6 +289,42 @@ Let's look at the strengths, trade-offs, and bugs I hit when testing each format
   public @SuppressWarnings({"unchecked", "rawtypes"}) @Nullable String findRecord(
   ```
   Because `java.lang.SuppressWarnings` is not `@Repeatable`, **`javac` refuses to compile the formatted code** (`SuppressWarnings is not a repeatable annotation interface`). I reported this upstream at [agustafson/prince-of-space#147](https://github.com/agustafson/prince-of-space/issues/147).
+
+### 4. Netflix `jfmt` (`0.9.0`)
+
+**Pros:**
+- Forked from `google-java-format` `1.36.1` with all internal dependencies (`google-java-format`, Guava, CommonMark, JSpecify) shaded under `com.netflix.tools.jfmt.internal.*`, so it has zero classpath conflict with `google-java-format` or Guava.
+- Opinionated 4-space OpenJDK-inspired style with inline single-arg and multi-arg trailing block lambdas, column-aligned `.stream()` pipelines, automatic `{ ... }` braces on single-statement control flow (`ControlBraces`), and 80-column reflowing for both classic `/** ... */` Javadoc and Java 23+ `///` Markdown doc comments.
+- Preserves standalone JBang headers (`///usr/bin/env jbang`, `//DEPS`, `//JAVA`) verbatim because it disables line-comment reflowing (`wrapLineComments = false`).
+- **Two-tier import normalization:**
+  1. Sorts imports into **4 OpenJDK groups** (`import module`, `java.*`/`javax.*`, third-party, and `import static`) and preserves comment-divided import blocks intact instead of failing with `error: Imports not contiguous` like `google-java-format` and `palantir-java-format`.
+  2. When invoked on files via the `jfmt` CLI (`JfmtToolProvider`), `ImportNormalizer` runs `JavacTaskImpl.parse()` and `JavacTaskImpl.enter()` to **expand wildcard imports** (`import java.util.*;` becomes explicit `import java.util.List;`, etc.) and **shorten unambiguous fully-qualified type names in code** (`java.time.Duration` in a method signature becomes `Duration` + `import java.time.Duration;`).
+
+**Cons & Gotchas:**
+- **JDK 25+ only:** `com.netflix:com.netflix.tools.jfmt:0.9.0` is compiled to classfile version `69.0` (JDK 25) and requires 7 `--add-exports` flags on `jdk.compiler` (adding `com.sun.tools.javac.model`).
+- **Unbounded line lengths vs. premature parameter wrapping:** Because `jfmt` sets `UNLIMITED_LINE_WIDTH` and removes `StringWrapper`, low-complexity statements and string literals can stretch to 200 to 436+ columns on a single line, while a 75-character method with 4 short parameters wraps onto two lines simply because its AST complexity is `4 * 2 = 8 > 6`.
+- **`jfmt` CLI requires `-cp` / `-p` on non-modular files with third-party imports:** Because `ImportNormalizer` runs `JavacTaskImpl.enter()` on input files, running `jfmt` on a non-modular `.java` file that imports third-party libraries without passing `--class-path` (`-cp`) or `--module-path` (`-p`) aborts with a `javac` `package ... does not exist` error (exit code `1`). (If an enclosing `module-info.java` is passed alongside the file and its required modules are missing, `ImportNormalizer` gracefully falls back to syntax-only formatting; passing `-` to format via stdin also skips `ImportNormalizer`.)
+- **Minor comment glitches:** When the last row of an array initializer has a trailing line comment (`0, 0, 1 // row 2`), `jfmt` indents the closing `};` by 8 spaces instead of 4:
+  ```java
+  public static final int[] MATRIX_ROWS = {
+      1, 0, 0, // row 0
+      0, 1, 0, // row 1
+      0, 0, 1 // row 2
+      };
+  ```
+  And while standalone `//DEPS` comments are preserved, trailing same-line `//$NON-NLS-1$` comments still get an extra space (`// $NON-NLS-1$`).
+- **Showstopper non-convergence bug (`Formatting did not converge`) on empty blocks containing a block comment (`{ /* ... */ }`):** In `jfmt` `0.9.0`, `Doc.Break.computeWidth()` was modified from `isForced() ? MAX_LINE_WIDTH : flat.length()` to `isForced() ? 0 : flat.length()`. Combined with `UNLIMITED_LINE_WIDTH`, any empty method or block body containing a single-line block comment (such as `@Override public void close() { /* cleanup */ }` in Scenario 19 of `FormatterShowcase.java`) **oscillates in a 2-cycle on every pass**:
+  ```java
+  // Pass 1 (when input has a space before /* cleanup */):
+  public void close() {
+      /* cleanup */
+  }
+
+  // Pass 2 (when input has a newline between { and /* cleanup */):
+  public void close() {/* cleanup */
+  }
+  ```
+  Pass 3 reverts to Pass 1! Because `JfmtFormatter.formatSource(String)` (and the `jfmt` CLI) runs an 8-pass convergence loop and throws if the output does not stabilize, **running `new JfmtFormatter().formatSource(...)` or the `jfmt` CLI on `FormatterShowcase.java` (or any file containing `{ /* comment */ }`) crashes with `FormatterException: error: Formatting did not converge`**.
 
 ## Why Open Java Format (`21.0.2`) Is My New Favorite
 
@@ -310,7 +386,7 @@ In parallel, I also opened [diffplug/spotless#3179](https://github.com/diffplug/
 
 ## Configuring and Using the Formatters
 
-Let's look at how to set up and configure `open-java-format` across your CLI, build tools, IDEs, and AI coding workflows, followed by how to configure `google-java-format`, `palantir-java-format`, and `prince-of-space` if you want to use or compare them in your own projects.
+Let's look at how to set up and configure `open-java-format` across your CLI, build tools, IDEs, and AI coding workflows, followed by how to configure `google-java-format`, `palantir-java-format`, `prince-of-space`, and `Netflix/jfmt` if you want to use or compare them in your own projects.
 
 ### 1. Open Java Format: CLI, Gradle, Maven, IDEs, and AI Agents
 
@@ -426,9 +502,9 @@ You can combine two lightweight guardrails in your repository:
    - uses: openjavaformat/open-java-format-action@v4
    ```
 
-### 2. Configuring Google Java Format, Palantir Java Format, and Prince of Space
+### 2. Configuring Google Java Format, Palantir Java Format, Prince of Space, and Netflix `jfmt`
 
-If you want to configure the other three formatters in Spotless, via their CLIs, or programmatically in Java, here are the exact configurations I used in my test suite.
+If you want to configure the other four formatters in Spotless, via their CLIs, or programmatically in Java, here are the exact configurations I used in my test suite.
 
 #### Spotless (Gradle & Maven) for `google-java-format` and `palantir-java-format`
 
@@ -493,15 +569,54 @@ String formatted = formatter.format(sourceCode);
 
 If you prefer traditional Java parameter wrapping in `prince-of-space`, switching `.wrapStyle(WrapStyle.WIDE)` and `.closingParenOnNewLine(false)` brings its method signature layout much closer to Palantir and Open Java Format.
 
+#### Configuring and Running `Netflix/jfmt` (CLI, `ToolProvider`, and Java API)
+
+`Netflix/jfmt` is published on Maven Central as `com.netflix:com.netflix.tools.jfmt:0.9.0` (compiled for **JDK 25+**).
+On the command line (or via a custom `jlink` image built on JDK 25), `jfmt` formats files in place by default, supports `--check` for CI verification, or reads from stdin via `-`:
+
+```bash
+# Format files in place (pass -cp / -p so ImportNormalizer can resolve third-party types and expand wildcards)
+jfmt -cp "lib/*" $(git ls-files '*.java')
+
+# Check formatting in CI (exits with code 1 if any file is unformatted)
+jfmt --check -cp "lib/*" $(git ls-files '*.java')
+
+# Format from stdin to stdout (skips ImportNormalizer attribution)
+jfmt - < src/main/java/demo/App.java
+```
+
+In Java 25 code (with the 7 `jdk.compiler` `--add-exports` flags below), you can invoke `JfmtFormatter` for in-memory formatting, or `JfmtToolProvider` (which implements `java.util.spi.ToolProvider` with tool name `"jfmt"`) to run the full CLI pipeline including `ImportNormalizer` wildcard expansion and qualified-name shortening:
+
+```java
+import com.netflix.tools.jfmt.JfmtFormatter;
+import com.netflix.tools.jfmt.JfmtToolProvider;
+import java.io.PrintWriter;
+
+// 1. In-memory source formatting (4-group import sorting + AST formatting, 8-pass convergence check):
+var jfmt = new JfmtFormatter();
+String formatted = jfmt.formatSource(sourceCode);
+
+// 2. Full CLI + javac ImportNormalizer pipeline (expands import pkg.* and shortens pkg.Type):
+// Note: ToolProvider.findFirst("jfmt") requires --module-path since module-info.class declares the provider;
+// on the classpath, instantiate JfmtToolProvider directly:
+var tool = new JfmtToolProvider();
+int exitCode = tool.run(
+        new PrintWriter(System.out, true),
+        new PrintWriter(System.err, true),
+        "-cp", classPath,
+        "src/main/java/demo/App.java");
+```
+
 #### Programmatic Java API and Required `--add-exports` Flags
 
-Finally, if you invoke `google-java-format`, `palantir-java-format`, or `open-java-format` programmatically on the JVM (or run Spotless in-process on Gradle/Maven), you must pass the `jdk.compiler` module exports to your JVM (`org.gradle.jvmargs`, `.mvn/jvm.config`, or `maven-surefire-plugin`):
+Finally, if you invoke `google-java-format`, `palantir-java-format`, `open-java-format`, or `Netflix/jfmt` programmatically on the JVM (or run Spotless in-process on Gradle/Maven), you must pass the `jdk.compiler` module exports to your JVM (`org.gradle.jvmargs`, `.mvn/jvm.config`, or `maven-surefire-plugin`):
 
 ```text
 --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED
+--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
 --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
@@ -530,6 +645,7 @@ String formatted = formatter.formatSourceAndFixImports(sourceCode);
 
 If you are happy with Google's 2-space, 100-column style, [google-java-format](https://github.com/google/google-java-format) `2.0.0` is a very welcome upgrade that finally fixes single-argument block lambdas and adds useful AST cleanups.
 If you need a formatter library that embeds cleanly into a tool without `--add-exports` JVM flags, [prince-of-space](https://github.com/agustafson/prince-of-space) is worth keeping an eye on once its annotation duplication bug ([Issue #147](https://github.com/agustafson/prince-of-space/issues/147)) is fixed.
+And if you are already on JDK 25 and intrigued by complexity-based structural line wrapping, column-aligned streams, and compiler-backed wildcard import expansion, [Netflix/jfmt](https://github.com/Netflix/jfmt) is a fascinating experiment to watch once its `{ /* ... */ }` non-convergence bug is resolved.
 
 For my own Java projects, however, **[open-java-format](https://openjavaformat.dev/)** ([GitHub](https://github.com/openjavaformat/open-java-format)) hits the sweet spot: it gives me the readable 4-space, 120-column layout and inline lambda style of `palantir-java-format`, fixes the annoying JBang, `$NON-NLS$`, import, and string-wrapping bugs, and ships fast native binaries that make both human code reviews and AI agent diffs clean and predictable.
 
@@ -537,14 +653,14 @@ Give the [Open Java Format Playground](https://openjavaformat.dev/playground/) a
 
 ## Addendum: Records, Text Blocks, and Pattern-Matching Switches
 
-After sharing this post on social media, someone asked a great follow-up question: *of the four formatters, which ones handle recent Java features (like records, text blocks, and `switch` patterns) properly?*
+After sharing this post on social media, someone asked a great follow-up question: *of the five formatters, which ones handle recent Java features (like records, text blocks, and `switch` patterns) properly?*
 
-Because `google-java-format` (`2.0.0`), `palantir-java-format` (`2.103.0`), and `open-java-format` (`21.0.2`) all parse code using the JDK's own `jdk.compiler` (`javac`) parser under the hood, all three support Java 21 to 25 syntax out of the box when run on a recent JDK (or via their standalone GraalVM native binaries).
+Because `google-java-format` (`2.0.0`), `palantir-java-format` (`2.103.0`), `open-java-format` (`21.0.2`), and `Netflix/jfmt` (`0.9.0`) all parse code using the JDK's own `jdk.compiler` (`javac`) parser under the hood, all four support Java 21 to 25 syntax out of the box when run on JDK 25 (or via the standalone GraalVM native binaries for Google, Palantir, and Open Java Format).
 However, they format several modern constructs quite differently, while `prince-of-space` (`2.3.1`, which relies on JavaParser) hits a few rough edges:
 
 ### 1. Switch Expressions and Pattern Matching (`when` Guards & Deconstruction)
 
-When returning a pattern-matching `switch` expression directly (`return switch (shape) { ... }`), all four formatters keep record deconstruction patterns and `when` guards on clean single lines when they fit:
+When returning a pattern-matching `switch` expression directly (`return switch (shape) { ... }`), all five formatters keep record deconstruction patterns and `when` guards on clean single lines when they fit:
 
 ```java
 return switch (shape) {
@@ -557,9 +673,9 @@ return switch (shape) {
 
 Where they diverge is **assigning a `switch` expression to a variable** (`String label = switch (code) { ... };`):
 
-- **`open-java-format` and `palantir-java-format`** keep the assignment and `switch` header on a single line, so the `case` arms indent just one level inside the method:
+- **`open-java-format`, `palantir-java-format`, and `Netflix/jfmt`** keep the assignment and `switch` header on a single line, so the `case` arms indent just one level inside the method:
   ```java
-  // open-java-format 21.0.2 & palantir-java-format 2.103.0
+  // open-java-format 21.0.2, palantir-java-format 2.103.0 & Netflix/jfmt 0.9.0
   String label = switch (code) {
       case 1 -> "one";
       case 2 -> "two";
@@ -592,7 +708,7 @@ Where they diverge is **assigning a `switch` expression to a variable** (`String
 
 ### 2. Text Blocks (`""" ... """`) and `.formatted(...)`
 
-All four formatters preserve the relative indentation inside a text block (since modifying interior indentation would alter the runtime `String` value).
+All five formatters preserve the relative indentation inside a text block (since modifying interior indentation would alter the runtime `String` value).
 The main visual difference appears when chaining `.formatted(...)` (or `.stripIndent()`, `.translateEscapes()`, etc.) onto the closing `"""` delimiter:
 
 - **`open-java-format` and `palantir-java-format`** keep `.formatted(...)` inline on the closing `"""`:
@@ -606,16 +722,16 @@ The main visual difference appears when chaining `.formatted(...)` (or `.stripIn
           """.formatted(describe(s));
   }
   ```
-- **`google-java-format` (`2.0.0`)** breaks `.formatted(...)` onto a new line below `"""`:
+- **`google-java-format` (`2.0.0`) and `Netflix/jfmt` (`0.9.0`)** break `.formatted(...)` onto a new line below `"""` (with 2-space/4-space indentation in `google-java-format` vs. 4-space/8-space indentation in `Netflix/jfmt`):
   ```java
-  // google-java-format 2.0.0
+  // Netflix/jfmt 0.9.0 (google-java-format 2.0.0 is similar with 2-space indent)
   public String report(Shape s) {
-    return """
-    Shape Report
-    ------------
-    Description: %s
-    """
-        .formatted(describe(s));
+      return """
+              Shape Report
+              ------------
+              Description: %s
+              """
+              .formatted(describe(s));
   }
   ```
 - **`prince-of-space` (`2.3.1`)** keeps `.formatted(` on the closing `"""` when a single argument is passed, but wraps the argument and closing `);` across three lines:
@@ -634,8 +750,9 @@ The main visual difference appears when chaining `.formatted(...)` (or `.stripIn
 
 ### 3. Records and Compact Constructors
 
-All four formatters handle short single-line records (`record Rectangle(double width, double height) implements Shape {}`), nested records inside `sealed` interfaces, and compact constructors (`public Circle { ... }`) cleanly.
-When a record declaration has enough components to wrap across multiple lines, `google-java-format`, `palantir-java-format`, and `open-java-format` keep the closing `) {` inline after the last component, whereas `prince-of-space` places `) {` on its own line (and inserts `{ ... }` braces around any braceless `if` validation inside the compact constructor):
+All five formatters handle short single-line records (`record Rectangle(double width, double height) implements Shape {}`), nested records inside `sealed` interfaces, and compact constructors (`public Circle { ... }`) cleanly.
+When a record declaration has enough components to wrap across multiple lines (or 4+ components in `Netflix/jfmt`), `google-java-format`, `palantir-java-format`, `open-java-format`, and `Netflix/jfmt` keep the closing `) {` inline after the last component (with `Netflix/jfmt` using a single continuation break for 4 to 6 components, column-aligned under `(` when `(` sits at or before column 24, and one component per line for 7+ components).
+Meanwhile, `prince-of-space` places `) {` on its own line, and both `prince-of-space` and `Netflix/jfmt` automatically insert `{ ... }` braces around any braceless `if` validation inside the compact constructor:
 
 ```java
 // open-java-format 21.0.2 & palantir-java-format 2.103.0
@@ -654,4 +771,4 @@ record DetailedProfile(
 }
 ```
 
-In short, if your codebase leans heavily on Java 21–25 features like records, pattern-matching `switch` expressions, text blocks, unnamed variables (`_`), JEP 467 `///` Markdown doc comments, or JEP 513 flexible constructor bodies, **`open-java-format`** and **`palantir-java-format`** produce the cleanest, most idiomatic layout out of the box.
+In short, if your codebase leans heavily on Java 21 to 25 features like records, pattern-matching `switch` expressions, text blocks, unnamed variables (`_`), JEP 467 `///` Markdown doc comments, or JEP 513 flexible constructor bodies, **`open-java-format`** and **`palantir-java-format`** produce the cleanest, most idiomatic layout out of the box.
