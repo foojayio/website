@@ -4,7 +4,7 @@ date: "2026-11-18"
 description: "JSR 381 is Java's standard API for image classification. Use its Deep Netts reference implementation, then write a DuckDB-backed classifier in five files."
 authors:
   - "geertjan-wielenga"
-image: ""
+image: "preview.jpg"
 categories:
   - "Java"
   - "AI"
