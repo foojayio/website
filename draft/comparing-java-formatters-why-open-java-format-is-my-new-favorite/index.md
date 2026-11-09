@@ -53,7 +53,7 @@ Before looking at code diffs, here is how the four formatters compare across the
 | **Requires `--add-exports` on JVM?** | **Yes** (6 `--add-exports`) | **Yes** (`--add-exports` + `--add-opens`) | **Yes** on JVM (native binaries need none) | **No** (runs on standard JVM classpath) |
 | **Default Line Length** | **100** cols (`--max-line-length` added in 2.0.0) | **120** cols | **120** cols | **120** cols (configurable) |
 | **Default Indentation** | **2 spaces** (4sp continuation; `AOSP` = 4/8) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation) | **4 spaces** (8sp continuation; 4sp for chains) |
-| **Configurability** | Minimal (`GOOGLE`/`AOSP`, `--max-line-length`, `--no-cleanup`) | Minimal (`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | Minimal (`OJF`/`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | **7 options** (`indentStyle`, `indentSize`, `lineLength`, `wrapStyle`, `closingParenOnNewLine`, `trailingCommas`, `javaLanguageLevel`) |
+| **Configurability** | Minimal (`GOOGLE`/`AOSP`, `--max-line-length`, `--cleanup=false`) | Minimal (`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | Minimal (`OJF`/`PALANTIR`/`GOOGLE`/`AOSP`, `formatJavadoc`) | **7 options** (`indentStyle`, `indentSize`, `lineLength`, `wrapStyle`, `closingParenOnNewLine`, `trailingCommas`, `javaLanguageLevel`) |
 | **Single-Arg Block Lambda** | **Inline** in `2.0.0` (wrapped in `1.37.0`) | **Inline** | **Inline** | **Inline** |
 | **Multi-Arg Trailing Block Lambda** | **Wraps** all arguments | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) | **Inline** (`call(a, () -> {`) |
 | **Method Chain Wrapping** | Breaks at 100 cols; `.stream()` stays on receiver | Breaks at **80-col dot limit** or 120-col line limit; 8sp indent | Same as Palantir (80-col dot limit, 120-col line limit, 8sp indent) | Breaks at 120 cols; **breaks before `.stream()`**; 4sp indent |
@@ -172,7 +172,7 @@ private Map<String, List<Optional<CompletableFuture<String>>>> invokeDownstreamS
 ### 4. Braceless Control Flow and AST Cleanups
 
 Historically, `google-java-format` refused to modify the AST beyond import ordering and modifier sorting.
-That changed in **`google-java-format` `2.0.0`**, which now runs an AST cleanup pass by default (disableable via `--no-cleanup`) that:
+That changed in **`google-java-format` `2.0.0`**, which now runs an AST cleanup pass by default (disableable via `--cleanup=false`) that:
 - Removes redundant double semicolons (`;;` becomes `;`),
 - Strips empty annotation parentheses (`@Deprecated()` becomes `@Deprecated`),
 - Removes parentheses around single untyped lambda parameters (`(s) -> s.trim()` becomes `s -> s.trim()`),
@@ -417,7 +417,7 @@ You can combine two lightweight guardrails in your repository:
    open-java-format --replace path/to/File.java
    ```
    ````
-2. **In an edit hook or CI:** If your agent supports post-edit hooks (like Claude Code's `PostToolUse` hook in `.claude/settings.json`), you can run `open-java-format --skip-removing-unused-imports --replace` automatically after every file edit in ~50 ms. And in GitHub Actions, a two-line step checks every pull request without even needing a JDK on the runner:
+2. **In an edit hook or CI:** If your agent supports post-edit hooks (like Claude Code's `PostToolUse` hook in `.claude/settings.json`), you can run `open-java-format --skip-removing-unused-imports --replace` automatically after every file edit in ~50 ms. And in GitHub Actions, once you commit a `.open-java-format-version` file (`echo 21.0.2 > .open-java-format-version`) at the root of your repository, a two-line step checks every pull request without even needing a JDK on the runner:
    ```yaml
    - uses: actions/checkout@v7
    - uses: openjavaformat/open-java-format-action@v4
@@ -452,10 +452,10 @@ spotless {
 }
 ```
 
-With `google-java-format` `2.0.0` on the command line (or via its native binary), you can also combine `--aosp` (4-space indentation), `--max-line-length=120`, and `--no-cleanup` (to disable the new AST cleanup pass):
+With `google-java-format` `2.0.0` on the command line (or via its native binary), you can also combine `--aosp` (4-space indentation), `--max-line-length=120`, and `--cleanup=false` (to disable the new AST cleanup pass):
 
 ```bash
-google-java-format --aosp --max-line-length=120 --replace src/main/java/**/*.java
+google-java-format --aosp --max-line-length=120 --cleanup=false --replace $(git ls-files '*.java')
 ```
 
 #### Configuring `prince-of-space` (Gradle, CLI, and Java API)
@@ -514,7 +514,8 @@ import com.palantir.javaformat.java.Formatter;
 import com.palantir.javaformat.java.JavaFormatterOptions;
 
 var options = JavaFormatterOptions.builder()
-        .style(JavaFormatterOptions.Style.OJF) // or Style.PALANTIR
+        // Use Style.OJF in open-java-format, or Style.PALANTIR (supported by both)
+        .style(JavaFormatterOptions.Style.PALANTIR)
         .formatJavadoc(true)
         .build();
 
