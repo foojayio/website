@@ -1,12 +1,11 @@
 ---
 title: "Java 27: What’s New?"
 date: "2026-11-12"
-lastmod: "2026-11-12T10:00:28+00:00"
 description: "What's new in Java 27 for us, developers"
 canonical: "https://www.loicmathieu.fr/wordpress/informatique/java-27-whats-new/"
 authors:
   - "loic-mathieu"
-image: "5c3c350f-beeb-4ab0-83de-7c0d2d774b51.png"
+image: "java-27.jpg"
 categories:
   - "Java"
   - "JEPs"
