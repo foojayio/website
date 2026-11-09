@@ -13,7 +13,9 @@ permissions:
 
 jobs:
   notify:
-    if: github.event.discussion.category.name == 'Blog Comments'
+    # Disabled while scripts/migrate/Discussions.java imports the archive: every
+    # imported discussion would mention authors and post to Slack.
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
