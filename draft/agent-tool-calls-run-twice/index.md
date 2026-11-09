@@ -24,9 +24,11 @@ Whether a repeat is safe is decided in the service, by whoever wrote the tool en
 
 ## Give the call one identity and keep its result
 
-The standard fix is an idempotency key, and it works on agent tool calls the same way it works on payment APIs. The part that needs thought is what the key names. A random key minted per attempt is useless, because every retry then arrives looking like a new request. The key has to name the logical operation: the playbook step making the call, the tool being called, and a hash of the arguments. The same logical request produces the same key however many times it is retried, and a genuinely different request produces a different one.
+The standard fix is an idempotency key, and it works on agent tool calls the same way it works on payment APIs. The part that needs thought is what the key names. A random key minted per attempt is useless, because every retry then arrives looking like a new request. The key has to name the logical operation: the playbook step making the call, the tool being called, a hash of the arguments, and one component that names this run of the step. That run identifier is assigned when the step is planned and carried unchanged through every retry of that step, but the next genuine run of the same step, with the same arguments, gets a new one. Without it, a legitimate repeat of a step returns the first run's stored result and never runs at all. The same logical request produces the same key however many times it is retried, and a genuinely different request produces a different one.
 
-Store the key with the result of the first execution. When a call arrives, look the key up before running anything. If a result is already recorded, return it and skip the tool. If not, run the tool, record the result under the key with a conditional write so that two racing executions cannot both record theirs, and return the result. In the services I work on, the store behind this is DynamoDB and the conditional write is what settles the race. Keep the record longer than any retry can plausibly arrive. A day covers the retry horizons I have seen, and storing a result string is cheap.
+When a call arrives, look the key up before running anything. If a result is already recorded, return it and skip the tool. If not, claim the key with a conditional write, and let only the caller that wins the claim run the tool. A caller that loses the claim does not run anything: it waits and returns the winner's result once that lands. Checking first and running second is not enough, because two racing callers can both find nothing stored and both run the tool before either records a result. In the services I work on, the store behind this is DynamoDB, and the conditional write is the claim. Keep the record longer than any retry can plausibly arrive. A day covers the retry horizons I have seen, and storing a result string is cheap.
+
+A claim is not a result. If the caller holding the claim stops before it records one, the key sits claimed and empty, and a retry has to know what to do with that. Give the claim a lease: a retry that finds an expired claim takes it over. And wherever the tool can accept the key itself, pass it down, so the tool stays idempotent even on the rare path where a takeover runs it again.
 
 The shape of it is small:
 
@@ -36,7 +38,8 @@ public record ToolCall(String idempotencyKey, String toolName,
 
 public interface ToolResultStore {
     Optional<String> find(String idempotencyKey);
-    boolean putIfAbsent(String idempotencyKey, String result);
+    boolean claim(String idempotencyKey); // conditional write: first caller only
+    void complete(String idempotencyKey, String result);
 }
 
 public String executeTool(ToolCall call, ToolExecutor executor) {
@@ -44,11 +47,14 @@ public String executeTool(ToolCall call, ToolExecutor executor) {
     if (stored.isPresent()) {
         return stored.get(); // a retry: the tool does not run again
     }
-    String result = executor.run(call.toolName(), call.arguments());
-    if (store.putIfAbsent(call.idempotencyKey(), result)) {
-        return result;
+    if (!store.claim(call.idempotencyKey())) {
+        // Another caller is running this call. Wait for its result
+        // instead of running the tool a second time.
+        return waitForResult(call.idempotencyKey());
     }
-    return store.find(call.idempotencyKey()).orElse(result); // lost a race
+    String result = executor.run(call.toolName(), call.arguments());
+    store.complete(call.idempotencyKey(), result);
+    return result;
 }
 ```
 
