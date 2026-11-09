@@ -1,6 +1,6 @@
 ---
 title: "Comparing Java Formatters: Why Open Java Format Is My New Favorite"
-date: "2026-01-01"
+date: "2026-11-17"
 description: "Comparing Google Java Format 2.0, Palantir Java Format, Open Java Format, and Prince of Space on JDK 25 across 86 formatting scenarios."
 authors:
   - "guillaume-laforge"
@@ -15,6 +15,9 @@ categories:
   - "Maven"
 related_posts:
   - "my-love-hate-relationship-with-java-formatters"
+  - "enterprise-java-quality-gates-ai"
+  - "introduction-to-error-prone-how-to-catch-bugs-at-compile-time"
+  - "upgrading-java-21-to-25-what-actually-breaks"
 canonical: "https://glaforge.dev/posts/2026/11/09/comparing-java-formatters-why-open-java-format-is-my-new-favorite/"
 ---
 
