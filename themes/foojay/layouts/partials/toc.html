@@ -1,5 +1,5 @@
 {{- /* Sticky "On this page" + scroll-spy, built from Hugo's h2/h3 extraction
-       (.TableOfContents). Renders nothing when a page has no headings. Paired
+       (.TableOfContents). A post with no headings still gets the end-matter links. Paired
        with static/js/toc.js and the .toc rules in style.css. */ -}}
 {{/* .TableOfContents already renders its own <nav id="TableOfContents">
      wrapper around the <ul>, so this outer element is a plain <div> rather
@@ -63,13 +63,13 @@
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#legacy-comments">Discussions on the previous Foojay site</a></li>` }}
 {{ end }}
 
-{{/* End matter NEVER brings the panel into existence on its own: the same
-     three lines on every post map nothing about the article. It is appended
-     to a panel that already has a reason to exist. */}}
+{{/* A post always gets the panel, even with no headings, since the end-matter
+     links are what a reader jumps to. Other pages keep it to real content. */}}
+{{ $show := or $hasToc $items (and (eq .Section "posts") $tail) }}
 {{ $extras := $items }}
-{{ if or $hasToc $items }}{{ $extras = $items | append $tail }}{{ end }}
+{{ if $show }}{{ $extras = $items | append $tail }}{{ end }}
 
-{{ if or $hasToc $items }}
+{{ if $show }}
 {{ $toc := printf "%s" .TableOfContents }}
 {{ with delimit $extras "" }}
   {{ if $hasToc }}
