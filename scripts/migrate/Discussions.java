@@ -428,7 +428,17 @@ public class Discussions {
                         .POST(HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(payload)))
                         .build(),
                 HttpResponse.BodyHandlers.ofString());
-        JsonNode json = response.body().isBlank() ? JSON.createObjectNode() : JSON.readTree(response.body());
+        String body = response.body();
+        if (!body.isBlank() && !body.stripLeading().startsWith("{")) {
+            // GitHub answers a 5xx or a secondary limit with an HTML page, not JSON.
+            String detail = "HTTP " + response.statusCode() + ", non-JSON reply: "
+                    + body.strip().replaceAll("\\s+", " ").substring(0, Math.min(120, body.strip().length()));
+            if (response.statusCode() >= 500 || response.statusCode() == 403 || response.statusCode() == 429) {
+                throw new RateLimited(detail);
+            }
+            throw new IOException(detail);
+        }
+        JsonNode json = body.isBlank() ? JSON.createObjectNode() : JSON.readTree(body);
         List<String> messages = new ArrayList<>();
         if (json.has("message")) messages.add(json.path("message").asText());
         for (JsonNode e : json.path("errors")) messages.add(e.path("message").asText());
