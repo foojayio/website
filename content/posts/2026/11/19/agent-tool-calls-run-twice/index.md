@@ -1,6 +1,6 @@
 ---
 title: "Your Agent's Tool Calls Will Run Twice: Idempotency and Evaluation Gates in Java Services"
-date: "2026-01-01"
+date: "2026-11-19"
 description: "Why every LLM tool call eventually runs twice, and how idempotency keys plus evaluation gates make that safe in Java services."
 authors:
   - "vishnuvardhan-reddy-kaithapuram"
@@ -9,7 +9,11 @@ categories:
   - "Java"
   - "AI"
   - "LLM"
-related_posts: []
+related_posts:
+  - "verified-match-explanations-spring-ai"
+  - "commit-created-no-no-no-what-the-the-agents-word-needs-external-verification-what-the-mistake-costs"
+  - "building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions"
+  - "the-tests-passed-the-feature-had-never-worked"
 ---
 
 I build production AI agents for advertiser analytics at Amazon Advertising. The audience strategy agent I work on is built with Strands on Bedrock AgentCore, its tools sit behind MCP servers, and the services around it are Java. People ask what breaks first when an agent like this leaves the demo and starts doing real work. They usually expect an answer about the model: a confident wrong figure, an answer stitched together from the wrong data. Those happen. The failures that have cost me the most time are duller. A tool call runs twice.
