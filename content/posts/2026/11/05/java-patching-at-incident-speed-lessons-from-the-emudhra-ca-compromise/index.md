@@ -113,18 +113,10 @@ So, a question for you: **if a certificate authority you trust were compromised 
 ## FAQ
 
 **1. If browsers blocked the compromised eMudhra CAs within hours, why are Java applications still at risk?**\
-Java doesn’t rely on browser or operating system trust decisions. Every JDK ships its own trust store (cacerts), and every container image that bundles a JDK carries its own copy. Until each runtime is updated, a service making outbound TLS calls to a payment processor, partner API, or SaaS platform can be tricked into trusting a forged certificate by anyone positioned between it and the destination.
+A JVM makes its own trust decisions. It reads the certificates bundled with the JDK (the `cacerts` file) and ignores what the browser or the operating system has just blocked. Until a runtime is updated, its outbound TLS connections keep accepting the compromised CAs.
 
 **2. Why does Java patching take weeks or a full quarter, and what makes security-only patches faster?**\
-A typical JDK release bundles security fixes with bug fixes, performance changes and behavior changes. Each of those is a reason to re-test, so every update triggers a full regression cycle. A security-only update changes only the security fix, so the change to validate is small. Testing shrinks dramatically, and a patch can move from build to production in days instead of a quarter. It matters most for out-of-band fixes like the eMudhra response, where you need an update you can trust to change nothing else.
+Regular JDK releases mix security fixes with other changes, so each one needs a full regression cycle before it can go to production. A security-only update leaves everything else untouched, which leaves far less to test and lets a fix reach production in days. That is what an out-of-band response like eMudhra requires.
 
 **3. What does an enterprise need in place to respond to a Java security incident in hours?**\
-Five capabilities, in place before the incident:
-
-- **Know:** a live inventory of every JVM, version, vendor and trust store, including inside containers.
-- **Triage:** a defined path to decide within hours whether an issue applies to you and how urgent it is.
-- **Minimize:** security-only patches, including out-of-band fixes, so testing stays focused.
-- **Prove:** automated regression that can certify a runtime update in a day.
-- **Ship:** a pipeline that can roll a new runtime and its trust store across the fleet, and roll it back.
-
-This matters because the pace is accelerating. Rapid7’s 2026 Global Threat Landscape Report found exploited high and critical vulnerabilities up 105%, and the median time to CISA KEV inclusion fell from 8.5 days to 5.
+Five things, set up before the incident: a live JVM inventory, a fast triage path, security-only patches, automated regression, and a pipeline that can roll a runtime out and back. The section "Building a rapid-defense approach" above describes each one.
