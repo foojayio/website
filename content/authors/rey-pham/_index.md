@@ -6,7 +6,7 @@ bio: "Rey Pham is a Java developer who works on Spring Boot and JPA applications
 description: "Java developer working with Spring Boot and JPA, and maintainer of Model Query, an open-source library for typed DTO queries on JPA."
 bluesky: ""
 mastodon: ""
-linkedin: ""
+linkedin: "https://www.linkedin.com/in/rey5137/"
 github: "https://github.com/rey5137"
 gitlab: ""
 youtube: ""
