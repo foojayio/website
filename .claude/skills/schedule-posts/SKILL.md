@@ -85,6 +85,28 @@ first to see what it would touch.
 The validator fails a PR on an image over 4 MB, which is the backstop this step
 exists to stay clear of.
 
+### Present the images as galleries
+
+If the body contains images, improve how they render with the `{{< gallery >}}`
+shortcode (syntax in `template/post.md`) rather than leaving bare `![](x.png)`
+lines. Do this after the resize step, so the filenames are the final ones.
+`content/posts/2026/10/30/rewrite-everything-in-java-not-rust/index.md` is the
+model:
+
+* Images that belong together (a series of screenshots, before/after, one per
+  platform) go in one gallery, `cols` set to the count, at most 3.
+* A lone image becomes a `cols="1"` gallery, so it also enlarges on click.
+* One filename per line, then `| caption`. Add a second `| alt text` when the
+  description for a screen reader should differ from the caption, and write one
+  whenever the original alt text was empty or `image`, describing what the
+  picture shows.
+* Keep the author's own wording for captions and alt text where it exists.
+* Leave the frontmatter `image:` alone, and leave diagrams, logos and inline
+  icons that sit inside a sentence as plain images.
+
+Check the rendered page afterwards; a filename that does not match a file in
+the bundle shows no picture.
+
 ### Verify
 
 ```
