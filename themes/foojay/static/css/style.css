@@ -3124,7 +3124,7 @@ body.lightbox-open { overflow: hidden; }
 .post-single .post-header .post-meta { margin: 0; }
 .post-single .post-header .post-hero {
   display: block; width: 100%; height: auto; margin: .5rem 0 0;
-  max-height: 20rem; object-fit: contain; /* capped so the text stays in view; click to zoom */
+  max-height: 26rem; object-fit: contain; /* capped so the text stays in view; click to zoom */
   border-radius: var(--radius);
 }
 @media (max-width: 560px) {
