@@ -191,9 +191,9 @@ private Map<String, List<Optional<CompletableFuture<String>>>> invokeDownstreamS
 ```
 
 **`Netflix/jfmt`** takes the most radical approach of all: **it has no column width limit for code (`UNLIMITED_LINE_WIDTH = (1 << 28) - 1`, or 268,435,455 columns)** and removes `StringWrapper` completely so string literals are never split across lines (while still reflowing Javadoc and `///` Markdown doc comments at **80 columns**).
-Instead of measuring character columns, `jfmt` decides whether a parameter list, argument list, or expression is `FLAT` (single line), `WRAPPED` (single continuation break), or `BROKEN` (one per line) purely from **AST structural complexity** (`MAX_UNBROKEN_COMPLEXITY = 6`):
+Instead of enforcing a fixed line-length limit, `jfmt` decides whether a parameter list, argument list, or expression is `FLAT` (single line), `WRAPPED` (single continuation break), or `BROKEN` (one per line) primarily from **AST structural complexity** (`MAX_UNBROKEN_COMPLEXITY = 6`, combined with syntax-width heuristics such as a long first argument):
 
-- Every method parameter (`VariableTree`) has a structural complexity score of `2`. That means **any method or constructor with 4 or more parameters** has complexity `>= 8` (`> 6`) and **always wraps before the 4th parameter**, even if the entire signature is only 90 characters and fits comfortably on one line in every other formatter!
+- Every simple method parameter (`VariableTree`) has a structural complexity score of `2`. That means a method or constructor with **4 to 6 simple parameters** (complexity `8` to `12 > 6`) **wraps with a single continuation break before the 4th parameter** (`WRAPPED`), even if the entire signature is only 90 characters, while **7 or more simple parameters** (or fewer parameters with complex generic types/annotations) switch to one parameter per line (`BROKEN`)!
 - Conversely, a 134-character 4-argument method call with inline `/* ... */` comments (complexity `4 <= 6`), a 137-character `@SuppressWarnings(value = "...")` annotation (complexity `3 <= 6`), or even a 436-character low-complexity statement stays on **one unbroken line**:
 
 ```java
@@ -234,11 +234,11 @@ To measure how fast each formatter runs in-process on the JVM and how compact th
 | `palantir-java-format` `2.103.0` | 36.3 | 13.9 | 65.4 | 1,479 | 157 | 45.8 | **Yes** |
 | `open-java-format` `21.0.2` | 27.6 | 14.6 | 98.8 | 1,479 | 157 | 45.8 | **Yes** |
 | `prince-of-space` `2.3.1` | 87.4 | 8.5 | 73.1 | 1,598 | 156 | 42.0 | **Yes** |
-| `Netflix/jfmt` `0.9.0` | 52.9 | 11.8 | 33.7 | 1,397 | **436** | 48.1 | **No** (2-cycle oscillation crash!) |
+| `Netflix/jfmt` `0.9.0` | 52.9 | 11.8 | 33.7 *(1st pass; public API fails)* | 1,397 *(pass 1)* | **436** | 48.1 | **No** (2-cycle oscillation crash!) |
 
 Three numbers stand out in this table:
 1. **Vertical compactness (with bounded line width):** Among formatters that enforce a 100- or 120-column line limit, `palantir-java-format` and `open-java-format` format the 1,042-line showcase into **1,479 lines** (averaging 45.8 characters per line), saving nearly 90 vertical lines compared to `google-java-format` (`1,566` lines) and 120 lines compared to `prince-of-space` (`1,598` lines).
-2. **`Netflix/jfmt`'s single-pass speed vs. 436-column lines:** On a single pass, `Netflix/jfmt` is the fastest `javac`-based formatter on `FormatterShowcase.java` (`33.7 ms`, and `11.8 ms` on the 16 snippets) because it completely removes `StringWrapper` (no extra re-lex/re-parse pass for long strings) and sets `UNLIMITED_LINE_WIDTH`, eliminating width-overflow backtracking. However, because low-complexity statements never wrap by column width, its output on `FormatterShowcase.java` reaches a maximum line length of **436 characters**, and as we will see below, its public `JfmtFormatter.formatSource` API actually crashes on `FormatterShowcase.java` due to a 2-cycle non-convergence bug.
+2. **`Netflix/jfmt`'s speed vs. 436-column lines and convergence:** On the 16-snippet suite (where all formatters converge cleanly), `Netflix/jfmt` is the fastest `javac`-based formatter at `11.8 ms` because it removes `StringWrapper` (no extra re-lex/re-parse pass for long strings) and sets `UNLIMITED_LINE_WIDTH`, eliminating width-overflow backtracking. On `FormatterShowcase.java`, however, its public `JfmtFormatter.formatSource` API fails after 8 passes due to a 2-cycle oscillation bug (detailed below); inspecting a single internal `Formatter.formatSource` pass takes `33.7 ms` and produces 1,397 lines, but with low-complexity statements stretching up to **436 characters** on a single line.
 3. **`open-java-format` vs. `palantir-java-format` on long strings:** Across the 16 normal snippets, `open-java-format` and `palantir-java-format` run at virtually the same speed (~14 ms). On `FormatterShowcase.java` (which includes several intentionally oversized string literals), `open-java-format` averages ~99 ms vs. ~65 ms for Palantir. Bytecode inspection of `com.palantir.javaformat.java.StringWrapper` shows why: `open-java-format` wraps `StringWrapper.wrapOnce(...)` in a convergence loop (`MAX_ROUNDS = 5`). Whenever a pass splits or joins a long string literal, it runs an extra verification pass to guarantee that the output is 100% stable on the first call.
 
 ## Pros, Cons, and the Bugs I Found
@@ -572,9 +572,10 @@ If you prefer traditional Java parameter wrapping in `prince-of-space`, switchin
 #### Configuring and Running `Netflix/jfmt` (CLI, `ToolProvider`, and Java API)
 
 `Netflix/jfmt` is published on Maven Central as `com.netflix:com.netflix.tools.jfmt:0.9.0` (compiled for **JDK 25+**).
-On the command line (or via a custom `jlink` image built on JDK 25), `jfmt` formats files in place by default, supports `--check` for CI verification, or reads from stdin via `-`:
+You can either install Netflix's [`ja`-enabled JDK toolchain](https://github.com/Netflix/ja#installation) (which bundles the `jfmt` launcher with all required `--add-exports` flags preconfigured) or run the standalone modular JAR directly on any standard JDK 25+ runtime:
 
 ```bash
+# Option A: Using the jfmt launcher from a ja-enabled JDK 25
 # Format files in place (pass -cp / -p so ImportNormalizer can resolve third-party types and expand wildcards)
 jfmt -cp "lib/*" $(git ls-files '*.java')
 
@@ -583,6 +584,17 @@ jfmt --check -cp "lib/*" $(git ls-files '*.java')
 
 # Format from stdin to stdout (skips ImportNormalizer attribution)
 jfmt - < src/main/java/demo/App.java
+
+# Option B: Running the standalone JAR on any standard JDK 25+
+java \
+    --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+    --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
+    -jar com.netflix.tools.jfmt-0.9.0.jar -cp "lib/*" $(git ls-files '*.java')
 ```
 
 In Java 25 code (with the 7 `jdk.compiler` `--add-exports` flags below), you can invoke `JfmtFormatter` for in-memory formatting, or `JfmtToolProvider` (which implements `java.util.spi.ToolProvider` with tool name `"jfmt"`) to run the full CLI pipeline including `ImportNormalizer` wildcard expansion and qualified-name shortening:
@@ -597,8 +609,9 @@ var jfmt = new JfmtFormatter();
 String formatted = jfmt.formatSource(sourceCode);
 
 // 2. Full CLI + javac ImportNormalizer pipeline (expands import pkg.* and shortens pkg.Type):
-// Note: ToolProvider.findFirst("jfmt") requires --module-path since module-info.class declares the provider;
-// on the classpath, instantiate JfmtToolProvider directly:
+// Note: On the classpath, instantiate JfmtToolProvider directly (with --add-exports=...=ALL-UNNAMED).
+// If you load the JAR on --module-path and use ToolProvider.findFirst("jfmt"), target the named module
+// in your exports instead (--add-exports=jdk.compiler/com.sun.tools.javac.*=com.netflix.tools.jfmt).
 var tool = new JfmtToolProvider();
 int exitCode = tool.run(
         new PrintWriter(System.out, true),
@@ -751,7 +764,7 @@ The main visual difference appears when chaining `.formatted(...)` (or `.stripIn
 ### 3. Records and Compact Constructors
 
 All five formatters handle short single-line records (`record Rectangle(double width, double height) implements Shape {}`), nested records inside `sealed` interfaces, and compact constructors (`public Circle { ... }`) cleanly.
-When a record declaration has enough components to wrap across multiple lines (or 4+ components in `Netflix/jfmt`), `google-java-format`, `palantir-java-format`, `open-java-format`, and `Netflix/jfmt` keep the closing `) {` inline after the last component (with `Netflix/jfmt` using a single continuation break for 4 to 6 components, column-aligned under `(` when `(` sits at or before column 24, and one component per line for 7+ components).
+When a record declaration has enough components to wrap across multiple lines (or 4+ components in `Netflix/jfmt`), `google-java-format`, `palantir-java-format`, `open-java-format`, and `Netflix/jfmt` keep the closing `) {` inline after the last component (with `Netflix/jfmt` using a single continuation break before the 4th component for 4 to 6 simple components, column-aligned under `(` when `(` sits at or before column 24, and one component per line for 7+ simple components or complex component types).
 Meanwhile, `prince-of-space` places `) {` on its own line, and both `prince-of-space` and `Netflix/jfmt` automatically insert `{ ... }` braces around any braceless `if` validation inside the compact constructor:
 
 ```java
