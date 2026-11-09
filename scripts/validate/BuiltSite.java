@@ -76,17 +76,9 @@ public class BuiltSite {
     /**
      * Where a dead link is somebody's prose rather than this repo's bug -- see the
      * class comment for why only the second kind may stop a deploy.
-     *
-     * `.prose` is where .Content renders. `.legacy-comment__body` is the archived
-     * WordPress comment bodies, and they belong on this side for a STRONGER reason
-     * than article text does: an article is a file a maintainer can edit, whereas a
-     * comment is a quote from a stranger in 2020 and "correcting" one is not a
-     * thing that exists (see transfer/Comments.java). One of them links to
-     * foojay.io/java-8/, which 404s on the live WordPress site too -- so treating
-     * it as a build bug would block every future deploy on a reader's dead link
-     * that nobody is allowed to fix.
+     * `.prose` is where .Content renders.
      */
-    static final String AUTHORED = ".prose, .legacy-comment__body";
+    static final String AUTHORED = ".prose";
 
     /** A link found on a page: where it points, and whether an author wrote it. */
     record Link(String url, boolean authored) {}

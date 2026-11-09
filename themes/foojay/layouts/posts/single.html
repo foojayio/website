@@ -135,10 +135,6 @@
 
     {{ partial "comments.html" . }}
 
-    {{/* Under giscus deliberately: the live conversation is the one a reader
-         can join, the imported archive is history below it. Renders nothing
-         on a post with no comments.json. */}}
-    {{ partial "legacy-comments.html" . }}
   </article>
 
   {{ partial "sidebar.html" . }}

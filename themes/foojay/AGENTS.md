@@ -455,7 +455,7 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   of mapping, term or strict and a mismatch shows up as an empty comment
   section, not an error.
 
-  **The legacy WordPress comments are NOT in Discussions and must not be put
-  there** — importing them got the posting account **banned by GitHub** a few
-  posts in. They are `content/posts/**/comments.json`, rendered under the
-  widget. Only a handful of real discussions exist, which is correct.
+  **The legacy WordPress comments were imported into Discussions** — slowly,
+  because a fast first run got the posting account **banned by GitHub** as spam.
+  Don't bulk-post to Discussions again. The archive, its template and the import
+  script are deleted; git history has them.

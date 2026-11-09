@@ -141,11 +141,8 @@ enableGitInfo = true
 # https://giscus.app.
 # The comment section renders only when all four values are filled in, so it stays
 # invisible until the "Blog Comments" category exists and its id is pasted here.
-# All four are set, so it renders. NOTE these Discussions hold NEW comments only:
-# the 580 legacy WordPress ones are an archive in the repo
-# (content/posts/**/comments.json, rendered by partials/legacy-comments.html),
-# because importing them got the posting account banned by GitHub. See
-# scripts/transfer/Comments.java.
+# All four are set, so it renders. The legacy WordPress comments were imported
+# into these Discussions (see MAINTAINERS.md).
 [params.giscus]
   repo = "foojayio/website"
   repoId = "R_kgDOTog_lQ"

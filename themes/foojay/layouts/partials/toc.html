@@ -57,11 +57,6 @@
        heading labelled another reads as the wrong link. */}}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
 {{ end }}
-{{/* After the giscus entry, matching the order the page renders them in.
-     Keyed on the same bundle resource the section is derived from. */}}
-{{ if .Resources.GetMatch "comments.json" }}
-  {{ $tail = $tail | append `<li class="toc__tail"><a href="#legacy-comments">Discussions on the previous Foojay site</a></li>` }}
-{{ end }}
 
 {{/* A post always gets the panel, even with no headings, since the end-matter
      links are what a reader jumps to. Other pages keep it to real content. */}}

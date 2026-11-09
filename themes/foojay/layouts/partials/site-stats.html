@@ -19,8 +19,6 @@
 {{- $adoc := 0 -}}
 {{- $crossposts := 0 -}}
 {{- $withTranscript := 0 -}}
-{{- $withComments := 0 -}}
-{{- $comments := 0 -}}
 {{- $byYear := dict -}}
 {{- $byDay := dict -}}
 {{- range $posts -}}
@@ -37,10 +35,6 @@
        count them is to look for the file -- the same test the templates that
        render them use. */}}
   {{- with .Resources.GetMatch "transcript.md" }}{{ $withTranscript = add $withTranscript 1 }}{{ end -}}
-  {{- with .Resources.GetMatch "comments.json" -}}
-    {{- $withComments = add $withComments 1 -}}
-    {{- with unmarshal .Content }}{{ $comments = add $comments (len .) }}{{ end -}}
-  {{- end -}}
 {{- end -}}
 
 {{/* An author is "new" in the year of their earliest post. Compared on unix
@@ -146,8 +140,6 @@
         "markdown"        (sub (len $posts) $adoc)
         "crossposts"      $crossposts
         "withTranscript"  $withTranscript
-        "withComments"    $withComments
-        "comments"        $comments
         "postsByYear"     $byYear
         "newAuthorsByYear" $newAuthors)
       "days" (dict "articles" $byDay "newAuthors" $newAuthorsDay)
