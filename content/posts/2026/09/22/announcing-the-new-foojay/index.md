@@ -251,6 +251,10 @@ So the old comments now live in the repository instead. Each article carries a s
 JSON file next to its text, and the page renders it under the live discussion as
 **Discussions on the previous Foojay site**. 
 
+> **Update 9 November 2026:** this is now fixed! The old comments have been imported into
+> the GitHub Discussions, slowly enough this time to stay under GitHub's spam limits, so they
+> appear in the same thread as new comments instead of in a separate archive.
+
 ## Accessibility
 
 No law seems to oblige Foojay to be accessible. The [European Accessibility
