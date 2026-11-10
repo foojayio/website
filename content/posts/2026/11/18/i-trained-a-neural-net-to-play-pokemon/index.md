@@ -1,6 +1,6 @@
 ---
 title: "I Trained a Neural Net to Play Pokémon"
-date: "2026-11-14"
+date: "2026-11-18"
 description: "A neural net that plays the Pokémon TCG, 4.2 million games, and the Java batch jobs that kept the training league running overnight."
 authors:
   - "nicholas-dhondt"
