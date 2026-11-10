@@ -46,6 +46,8 @@ import java.util.regex.Pattern;
  * credentials falls back to its own text in that Slack message.
  *
  *   new <previous.xml> <current.xml>   posts in current that previous lacks
+ *   post <feed.xml> <url>              one post by its URL, to retry after a failure;
+ *                                      anything already posted is posted again
  *
  * Same contract as SlackPosts.java: the previous feed is from BEFORE the
  * deploy, so no state is kept, and an empty previous feed aborts instead of
@@ -96,8 +98,9 @@ public class SocialPosts {
     public static void main(String[] args) throws Exception {
         List<String> a = new ArrayList<>(List.of(args));
         boolean dryRun = a.remove("--dry-run");
-        if (a.size() != 3 || !a.get(0).equals("new")) {
-            System.err.println("usage: SocialPosts.java [--dry-run] new <previous.xml> <current.xml>");
+        boolean one = a.size() == 3 && a.get(0).equals("post");
+        if (a.size() != 3 || !(one || a.get(0).equals("new"))) {
+            System.err.println("usage: SocialPosts.java [--dry-run] new <previous.xml> <current.xml> | post <feed.xml> <url>");
             System.exit(2);
         }
         String claude = env("ANTHROPIC_API_KEY");
@@ -109,14 +112,24 @@ public class SocialPosts {
             dryRun = true;
         }
 
-        List<Post> previous = readFeed(a.get(1));
-        if (previous.isEmpty()) {
-            System.out.println("Previous feed has no posts; skipping rather than writing texts for everything.");
-            return;
+        List<Post> fresh;
+        if (one) {
+            String url = a.get(2).trim().replaceAll("/+$", "") + "/";
+            fresh = readFeed(a.get(1)).stream().filter(p -> p.link().equals(url)).toList();
+            if (fresh.isEmpty()) {
+                System.err.println(url + " is not in the live feed, so it is not published yet or the URL is wrong.");
+                System.exit(1);
+            }
+        } else {
+            List<Post> previous = readFeed(a.get(1));
+            if (previous.isEmpty()) {
+                System.out.println("Previous feed has no posts; skipping rather than writing texts for everything.");
+                return;
+            }
+            Set<String> known = new LinkedHashSet<>();
+            previous.forEach(p -> known.add(p.link()));
+            fresh = new ArrayList<>(readFeed(a.get(2)).stream().filter(p -> !known.contains(p.link())).toList());
         }
-        Set<String> known = new LinkedHashSet<>();
-        previous.forEach(p -> known.add(p.link()));
-        List<Post> fresh = new ArrayList<>(readFeed(a.get(2)).stream().filter(p -> !known.contains(p.link())).toList());
         if (fresh.isEmpty()) {
             System.out.println("No new posts.");
             return;
@@ -136,7 +149,7 @@ public class SocialPosts {
                 System.out.println("::warning title=Social post failed::" + p.link() + ": " + e.getMessage());
                 if (!dryRun && token != null && user != null) {
                     try {
-                        post(token, user, "*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\nSocial texts failed: " + esc(String.valueOf(e.getMessage())));
+                        post(token, user, "*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\nSocial texts failed: " + esc(String.valueOf(e.getMessage())) + retryHint());
                     } catch (Exception ignored) {
                         // the warning above is all that is left
                     }
@@ -156,6 +169,7 @@ public class SocialPosts {
             message.append("by ").append(esc(String.join(", ", authors.stream().map(Author::name).toList()))).append("\n");
         }
         int failed = 0;
+        boolean retry = false;
         for (Platform pl : PLATFORMS) {
             String text, posted = null, problem = "";
             try {
@@ -164,6 +178,7 @@ public class SocialPosts {
             } catch (Exception e) {
                 // One platform's text must not cost the other platforms or the Slack message.
                 failed++;
+                retry = true;
                 System.err.println(pl.label() + " text failed for " + p.link() + ": " + e.getMessage());
                 message.append("\n*").append(pl.label()).append("* - no text written, ").append(esc(String.valueOf(e.getMessage()))).append("\n");
                 continue;
@@ -174,6 +189,7 @@ public class SocialPosts {
                     if (posted == null) problem = " - not posted, no credentials set";
                 } catch (Exception e) {
                     problem = " - not posted, " + esc(String.valueOf(e.getMessage()));
+                    retry = true;
                     System.err.println(pl.label() + " failed for " + p.link() + ": " + e.getMessage());
                 }
             }
@@ -191,6 +207,7 @@ public class SocialPosts {
             }
         }
 
+        if (retry) message.append(retryHint());
         System.out.println("=== " + p.link() + "\n" + message);
         if (dryRun) return;
         if (token == null || user == null) {
@@ -200,6 +217,13 @@ public class SocialPosts {
         post(token, user, message.toString());
         System.out.println("Sent to Slack.");
         if (failed > 0) throw new IllegalStateException(failed + " platform text(s) failed for " + p.link());
+    }
+
+    /** Points at the manual workflow (social-post.yml) that reruns one post. */
+    static String retryHint() {
+        String repo = env("GITHUB_REPOSITORY") == null ? "foojayio/website" : env("GITHUB_REPOSITORY");
+        return "\nTo retry, run the manual GitHub action \"Retry social posts\" via <https://github.com/" + repo
+                + "/actions/workflows/social-post.yml|this link> and enter the post URL.";
     }
 
     /** Returns the URL of the new post, or null when there are no credentials. */
