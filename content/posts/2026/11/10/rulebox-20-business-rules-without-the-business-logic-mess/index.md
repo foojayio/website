@@ -7,17 +7,19 @@ authors:
 image: "cover.jpg"
 categories:
   - "BoxLang"
-  - "Java"
-  - "Architecture"
   - "Developer Tools"
   - "Testing"
 canonical: "https://www.ortussolutions.com/blog/rulebox-20-a-natural-language-rules-engine-for-boxlang-and-coldbox"
-related_posts: []
+related_posts:
+  - "boxlang-ai-v3-has-landed-multi-agent-orchestration-tooling-skills-and-so-much-more"
+  - "testbox-7-real-time-feedback-a-browser-based-ide-and-modern-testing-workflows-on-the-jvm"
+  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
 ---
 
 **Ortus Solutions today announces the general availability of [RuleBox 2.0.0](https://rulebox.coldbox.org), a modern, natural-language rules engine for BoxLang and ColdBox applications. It is a BoxLang-only rewrite, and it ships with rules as data, declared rulebooks, dry runs, an audit trail, and a built-in Rule Visualizer.**
 
-Every application grows a pile of business decisions: who gets approved, which discount applies, what ships for free, when a promotion ends. They usually start as one clean `if` and end as a 300-line method nobody wants to touch.  If you have been there, keep reading!
+Every application grows a pile of business decisions: who gets approved, which discount applies, what ships for free, when a promotion ends. They usually start as one clean `if` and end as a 300-line method nobody wants to touch. If you have been there, keep reading!
 
 **RuleBox** turns that pile into **named rules you can read, test and audit**. Given some facts, when a condition holds, then act. In BoxLang, or as JSON/YAML/DB your team can change without a deploy.
 
@@ -180,8 +182,6 @@ RuleBox singleton services, such as `Builder@rulebox`, are now thread safe. Do n
 
 ## The Rule Visualizer
 
-![RuleBox Visualizer](rule-visualizer.png)
-
 2.0 ships with a built-in admin UI. Turn it on with one setting:
 
 ```js
@@ -196,20 +196,20 @@ Then browse to `/rulebox-visualizer`. It is off by default, does zero extra work
 
 ### One-minute tour
 
-[![Watch the RuleBox Visualizer tour](one-minute-tour.png)](https://rulebox.coldbox.org/assets/video/rulebox-visualizer-intro.mp4)
+[![Watch the RuleBox Visualizer tour](one-minute-tour.jpg)](https://rulebox.coldbox.org/assets/video/rulebox-visualizer-intro.mp4)
 
 *Click the image to watch the video.*
 
 ### The Visualizer, screen by screen
 
-| | |
-|---|---|
-| ![Dashboard](dashboard.png) | ![Chain view](chain-fraudcheck.png) |
-| **Dashboard:** every rulebook, plus the rules that fail most and the slowest ones | **Chain view:** rules in run order with durations, error rates and the last error |
-| ![Dry run](dryrun.png) | ![Metrics](metrics.png) |
-| **Dry run:** type facts and see which rules would fire | **Metrics:** completion and error rates, and every rule's health |
-| ![Errors and stack traces](metrics-errors.png) | ![Live tracker](live.png) |
-| **Errors:** each distinct error once, with a count, its cause and where it was thrown | **Live tracker:** every evaluation as it happens, with failures expanded |
+{{< gallery cols="2" >}}
+dashboard.jpg | Dashboard: every rulebook, plus the rules that fail most and the slowest ones | The Visualizer dashboard listing every rulebook and its slowest and most failing rules
+chain-fraudcheck.jpg | Chain view: rules in run order with durations, error rates and the last error | A rulebook's rules in run order, each with its duration and error rate
+dryrun.jpg | Dry run: type facts and see which rules would fire | The dry run screen with a facts field and the rules that would fire
+metrics.jpg | Metrics: completion and error rates, and every rule's health | The metrics screen with completion and error rates and a health row per rule
+metrics-errors.jpg | Errors: each distinct error once, with a count, its cause and where it was thrown | The errors screen listing each distinct error with its count and cause
+live.jpg | Live tracker: every evaluation as it happens, with failures expanded | The live tracker streaming rule evaluations with a failure expanded
+{{< /gallery >}}
 
 ## Learn it in ten short lessons
 
