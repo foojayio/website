@@ -1,6 +1,6 @@
 ---
 title: "I Trained a Neural Net to Play Pokémon"
-date: "2026-11-12"
+date: "2026-11-14"
 description: "A neural net that plays the Pokémon TCG, 4.2 million games, and the Java batch jobs that kept the training league running overnight."
 authors:
   - "nicholas-dhondt"
@@ -81,7 +81,9 @@ public void iteration(String run, int it, JobContext ctx) {
 
 The play batch creates one child job per shard, and each child starts a Node process that plays its slice of the games. The train batch only starts when every shard has succeeded. The last job writes the results and enqueues the next iteration, so the league keeps itself going.
 
-![The JobRunr dashboard during iteration 115: one batch job and its twelve play shards, all processing at the same time](play-shards-processing.png)
+{{< gallery cols="1" >}}
+play-shards-processing.jpg | The JobRunr dashboard during iteration 115: one batch job and its twelve play shards, all processing at the same time
+{{< /gallery >}}
 
 A job in this setup is a thin wrapper around a child process. It runs `node` or `python` with `ProcessBuilder`, reads the last JSON line from stdout, and throws if the exit code is not zero. Throwing is the whole error strategy, because a thrown exception means a failed job, and a failed job gets retried.
 
@@ -97,7 +99,9 @@ public void playShard(String run, String specPath, int shard, int nshards, JobCo
 
 Everything the child process prints as its summary also lands in the dashboard log of that job. So when I wanted to know how training for one deck was going, I did not tail a log file. I clicked on the job.
 
-![A training job in the dashboard: the exact Python command, the PPO summary with 79,088 training steps, and the job finishing in 17 seconds](train-job-ppo-log.png)
+{{< gallery cols="1" >}}
+train-job-ppo-log.jpg | A training job in the dashboard: the exact Python command, the PPO summary with 79,088 training steps, and the job finishing in 17 seconds
+{{< /gallery >}}
 
 ## Three Java details I ended up liking
 
@@ -119,7 +123,9 @@ JobRunr ignores a job whose id already exists. So if a job that creates other jo
         concurrentJobRateLimiter("python", parUpdates).asCreatedByConfiguration())
 ```
 
-![The rate limiters page: node capped at 12 concurrent jobs, python at 3](rate-limiters.png)
+{{< gallery cols="1" >}}
+rate-limiters.png | The rate limiters page: node capped at 12 concurrent jobs, python at 3
+{{< /gallery >}}
 
 This turned out to matter more than I expected. More on that in a minute.
 
@@ -137,7 +143,9 @@ boolean promote = mean >= gateMin && mean >= gateSe * se;
 
 The candidate needs to be at least one point better, and that gap has to be at least 1.5 standard errors. Otherwise the snapshot is deleted and the old champion stays.
 
-![The promotion gate at iteration 110: the mew candidate wins 48.8% against the champion's 46.3% over 1,000 paired games and is promoted, the Rayquaza candidate is 0.4 points better and is not](promotion-gate.png)
+{{< gallery cols="1" >}}
+promotion-gate.jpg | The promotion gate at iteration 110: the Mew candidate wins 48.8% against the champion's 46.3% over 1,000 paired games and is promoted, the Rayquaza candidate is 0.4 points better and is not
+{{< /gallery >}}
 
 I like this screenshot a lot. Two decks, same iteration. One candidate is 2.5 points better and takes the crown. The other is 0.4 points better, which is noise, and gets thrown away. No human was awake for either decision.
 
@@ -157,7 +165,9 @@ Before any reinforcement learning, each net first learned to imitate a hand-writ
 
 After three league generations, its win rate against 13 decks from a recent Regional Championship went from 69% to 81%. That is 200 games per opponent, so give each number a few points of slack. When two new decks showed up that it had never trained against, I added them to the league, and it went from 47% to 59.5% against one and from 56.5% to 70% against the other, without getting worse against the old ones.
 
-![The dashboard after the first league: 4,408 jobs, 100% success ratio, zero retries](dashboard-overview.png)
+{{< gallery cols="1" >}}
+dashboard-overview.jpg | The dashboard after the first league: 4,408 jobs, 100% success ratio, zero retries
+{{< /gallery >}}
 
 The full tally so far:
 
