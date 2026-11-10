@@ -74,17 +74,42 @@
     "id" : "UCP7uiEZIqci43m22KDl0sNw",
     "title" : "Kotlin by JetBrains",
     "avatar" : "https://yt3.googleusercontent.com/TTzoNteRV1ZPudFs4BMuSsfgIW4qZm9z3k7qI9hXdeKPShb5e57823NQcJFL9kKfxesb0mkXEWA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "anahata108",
+    "id" : "UC0WXH03OU-RJeUQ2CuMFU9g",
+    "title" : "Anahata TV - Java AI, AGI, ASI",
+    "avatar" : "https://yt3.googleusercontent.com/lBBGPlk8vAWzHrZnLSdLptAvZi4N6rR3UYMwrFD62vQ5XdG-qkYtVDLyWETTrId7Dn_CqDeJUw=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "U0HJBXSLHLY",
+    "channel" : "Kotlin",
+    "title" : "Spring WebFlux | Add Kotlin Coroutines to an Existing Java App | Hands-On Demo",
+    "published" : "2026-11-09T12:50:17+00:00"
+  }, {
+    "id" : "Z2ZyqJ3aanQ",
+    "channel" : "JetBrainsWDYT",
+    "title" : "We don't need IDEs anymore?",
+    "published" : "2026-11-09T10:30:15+00:00"
+  }, {
     "id" : "8dgnng27kMo",
     "channel" : "java",
     "title" : "Java and the Next Generation of Programming Models",
     "published" : "2026-11-08T10:45:10+00:00"
   }, {
+    "id" : "ioR5aE9uEbc",
+    "channel" : "anahata108",
+    "title" : "WW3 Simulator - Live C4ISR 3D Globe & London Traffic CCTV Video Grid",
+    "published" : "2026-11-07T20:16:54+00:00"
+  }, {
     "id" : "s0amssv6BcM",
     "channel" : "sivalabs",
     "title" : "Working with Latest Technologies using AI Coding Agents",
     "published" : "2026-11-07T11:03:33+00:00"
+  }, {
+    "id" : "QUZM_Jm4ZZo",
+    "channel" : "anahata108",
+    "title" : "WW3 Simulator - Live Global Strategic C4ISR & Nuclear Defcon Simulation",
+    "published" : "2026-11-06T11:42:22+00:00"
   }, {
     "id" : "OL4GWogRDMc",
     "channel" : "JetBrainsTV",
@@ -546,6 +571,11 @@
     "title" : "The Past, Present, and Future of Enterprise Java by Ivar Grimstad | IntelliJ IDEA Conf 2026",
     "published" : "2026-10-02T11:00:09+00:00"
   }, {
+    "id" : "pdjn2y2vF10",
+    "channel" : "anahata108",
+    "title" : "Pure JavaFX Minecraft running on NetBeans - Anahata ASI",
+    "published" : "2026-10-01T19:57:14+00:00"
+  }, {
     "id" : "GkvnkCxA-nk",
     "channel" : "azulsystems",
     "title" : "Your GPU Bill Isn't the Whole Story: The Hidden JVM Drag on AI Infrastructure.",
@@ -561,6 +591,36 @@
     "title" : "JRush Ep 8 - Java in the Age of AI",
     "published" : "2026-09-29T18:43:56+00:00"
   }, {
+    "id" : "ZSWy4ZIE9Ho",
+    "channel" : "anahata108",
+    "title" : "IntelliJ Smoke Test - Anahata ASI",
+    "published" : "2026-09-27T18:00:27+00:00"
+  }, {
+    "id" : "O-ZWYKnJMN8",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Commander Keen 1990 Cyber-Arcade | Episode 1: Marooned on Mars! Anahata ASI",
+    "published" : "2026-09-27T17:24:45+00:00"
+  }, {
+    "id" : "g1clUPLLH9s",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade | Level 3: Blockers & Builders! Anahata ASI",
+    "published" : "2026-09-27T16:24:42+00:00"
+  }, {
+    "id" : "M0PQoCZSDdo",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade | Level 3: Blockers & Builders! Anahata ASI",
+    "published" : "2026-09-27T16:06:12+00:00"
+  }, {
+    "id" : "KGwyurC06m0",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade Edition | Level 2: Only Floaters Can Survive This! Anahata ASI",
+    "published" : "2026-09-27T12:57:26+00:00"
+  }, {
+    "id" : "1jmHhGQDs9o",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade Edition | 60 FPS Recreation (Level 1: Just Dig!) Anahata ASI",
+    "published" : "2026-09-25T08:18:59+00:00"
+  }, {
     "id" : "dm_Lgy90ixY",
     "channel" : "cbrjar",
     "title" : "Java NullPointerException: Why the Compiler Can't Stop It",
@@ -570,6 +630,11 @@
     "channel" : "Kotlin",
     "title" : "Swift Export: Where We Stand |  Pamela Hill-Galloway",
     "published" : "2026-09-24T12:30:00+00:00"
+  }, {
+    "id" : "SxFgUxWxGKI",
+    "channel" : "anahata108",
+    "title" : "Pure Java Lemmings (1991) Recreation - Level 1: Just Dig!",
+    "published" : "2026-09-24T09:53:04+00:00"
   }, {
     "id" : "QqTdGg2wYxY",
     "channel" : "Kotlin",
@@ -621,10 +686,35 @@
     "title" : "Java 27 in Practice: Smaller Heaps, Smarter Defaults, and Valhalla for Java 28 (Foojay Podcast #101)",
     "published" : "2026-09-12T10:13:06+00:00"
   }, {
+    "id" : "h-O9D0PZ97s",
+    "channel" : "anahata108",
+    "title" : "⚡ Anahata-AGI-1: deepseek-ai/deepseek-v4-pro-0813 on JAVA-ARKANOID-1 (Retro Arcade Game Execution)",
+    "published" : "2026-09-11T21:52:42+00:00"
+  }, {
+    "id" : "AKVALoefC_o",
+    "channel" : "anahata108",
+    "title" : "⚡ Anahata-AGI-1: poolside/laguna-s-2.1 on JAVA-ARKANOID-1 (Retro Arcade Game Execution)",
+    "published" : "2026-09-11T19:02:35+00:00"
+  }, {
     "id" : "IQkzg7quc58",
     "channel" : "cbrjar",
     "title" : "Cyber Resilience Act for Software Vendors: What to Do Now",
     "published" : "2026-09-11T12:12:38+00:00"
+  }, {
+    "id" : "76pWS0WFu_U",
+    "channel" : "anahata108",
+    "title" : "Second test of Java-EARTH-GLOBE-1",
+    "published" : "2026-09-10T11:37:41+00:00"
+  }, {
+    "id" : "d2W0QYYPhlQ",
+    "channel" : "anahata108",
+    "title" : "First test of JAVA-EARTH-GLOBE-1 - gemini 3.8 flash",
+    "published" : "2026-09-10T08:35:09+00:00"
+  }, {
+    "id" : "iHLBVt5VP9Y",
+    "channel" : "anahata108",
+    "title" : "⚡ gemini-3.8-flash goes JavaFX for 3D Photorealistic Earth & Satellite C4ISR Tracker",
+    "published" : "2026-09-09T10:22:55+00:00"
   }, {
     "id" : "MJQye7v7GLk",
     "channel" : "JetBrainsWDYT",
@@ -986,5 +1076,5 @@
     "title" : "MCL #002: Gavin King & Hibernate 6.3",
     "published" : "2023-09-08T04:11:53+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "Sz-rSzL2pGM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "Sz-rSzL2pGM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-09T08:07:37Z",
+  "generatedAt" : "2026-11-10T08:30:04Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -204,7 +204,7 @@
       "city" : "Vienna",
       "online" : false
     }, {
-      "title" : "maybe february meetup",
+      "title" : "february meetup with Ed Burns",
       "url" : "https://www.meetup.com/java-vienna/events/316693695/",
       "startTime" : "2027-02-22T18:00:00+01:00",
       "endTime" : "2027-02-22T20:00:00+01:00",
@@ -464,14 +464,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "An Evening about Event Sourcing by Ted M. Young (+  Lightning Talk)",
-      "url" : "https://www.meetup.com/jug-hamburg/events/317272014/",
-      "startTime" : "2026-11-09T18:00:00+01:00",
-      "endTime" : "2026-11-09T21:00:00+01:00",
-      "venue" : "Step Beyond GmbH",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
       "title" : "Mit Java, ohne kommerzielle LLMs, KI Aufgaben erkennen und lösen",
       "url" : "https://www.meetup.com/jug-hamburg/events/316782036/",
       "startTime" : "2026-11-12T19:00:00+01:00",
@@ -679,6 +671,14 @@
       "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
       "startTime" : "2026-11-11T18:00:00+01:00",
       "endTime" : "2026-11-11T21:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
+      "title" : "Train an Image Classifier in Java with JobRunr, Live",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/317359771/",
+      "startTime" : "2026-11-12T20:00:00+01:00",
+      "endTime" : "2026-11-12T22:00:00+01:00",
       "venue" : null,
       "city" : null,
       "online" : true
@@ -984,14 +984,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/GatewayJUG/",
     "events" : [ {
-      "title" : "Bootiful Spring Security",
-      "url" : "https://www.meetup.com/gatewayjug/events/317096138/",
-      "startTime" : "2026-11-09T18:30:00-06:00",
-      "endTime" : "2026-11-09T20:00:00-06:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    }, {
       "title" : "Testing the Untestable: Reliably testing AI-Infused Applications",
       "url" : "https://www.meetup.com/gatewayjug/events/315805152/",
       "startTime" : "2027-01-14T18:30:00-06:00",
