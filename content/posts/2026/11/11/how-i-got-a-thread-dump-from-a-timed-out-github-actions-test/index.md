@@ -2,7 +2,6 @@
 title: "How I got a thread dump from a timed-out GitHub Actions test"
 date: "2026-11-11"
 description: "When a JVM test hangs and GitHub Actions cancels the job, the test JVM is often still alive. Three ways to dump it, and an action that does it for you."
-canonical: "https://dev.to/maschiojv/how-i-got-a-thread-dump-from-a-timed-out-github-actions-test-hpp"
 authors:
   - "felipe-maschio"
 image: "hung-test-ci-thread-dump.jpg"
