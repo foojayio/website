@@ -22,56 +22,12 @@ date: "2026-01-01"
 
 # Optional: last-updated date, if you revise the article later.
 # lastmod: "2026-01-02"
-
-# One or two sentences (keep it below 160 characters). 
-# Shown on cards/listings and used for SEO and social previews. 
-# Required.
 description: "Nobody knows everything about, well, anything. What matters is why each gap is there, what the rest of the team already covers, and whether anyone is allowed to say they don't know"
-
-# Author slug(s): the FOLDER name of your author profile in content/authors/
-# (e.g. content/authors/jane-doe/  ->  "jane-doe"). One or more.
-# Every post needs at least one author. If you don't have a profile
-# yet, copy template/author.md to that folder and include it in the same PR.
-# Required.
 authors:
-  - "jottinger"
-
-# Preview / hero image. Put the file in THIS folder and reference it by name.
-# It is your article's card on the home page and in the article overviews, and
-# the picture that shows when your post is shared on social media.
-#
-# BEST FORMAT: 1600 x 900 (16:9), JPEG, under 300 KB.
-#   - 16:9 is exactly the big card on the home page, and it crops cleanly to
-#     the smaller cards and the social preview (both 1.91:1). All of those
-#     crop from the CENTRE outwards, so keep whatever has to stay readable --
-#     text, logos, faces -- away from the edges.
-#   - 1600 px wide is for the social preview, which wants at least 1200. The
-#     site itself never needs more, so bigger only costs your readers time.
-#     Anything over 2 MB fails the pull request check.
-#   - JPEG for photos and screenshots. PNG only for hard-edged line art that
-#     JPEG makes look fuzzy. Not SVG: social platforms will not render one, so
-#     your post would preview with the generic Foojay card instead of your
-#     image.
-#   - A STILL image: the card and the social preview do not animate. Point this
-#     at a still frame and put the animated version in the article body.
-#   - A SOLID background, not a transparent one. Cards paint their own colour
-#     behind the image and dim it slightly in dark mode, so a transparent logo
-#     can disappear.
-# You do not write a description for this image -- the site derives one.
-# Required.
-image: ""
-
-# Categories (see categories.md for the existing list — prefer existing ones). 
-# Required.
+  - "jottinger"image: ""
 categories:
   - "Java"
-
-# Slugs (folder names) of related foojay articles to show at the bottom. 
-# Optional.
 related_posts: []
-
-# Advanced / Optional:
-# slug: "override-url-slug"   # only to make the URL differ from the folder name
 canonical: "https://bytecode.news/posts/2026/11/no-programmer-knows-everything" 
 ---
 
@@ -87,8 +43,9 @@ In the movie adaptation of _The Wizard of Oz_, the Scarecrow believes he lacks a
 
 The Scarecrow's gap was imagined. Plenty of gaps are real, and that's okay! A given person can genuinely lack a skill required for a particular job - and an Oz-like validation won't provide it.
 
-!!! note
-    For some positions, that actually is disqualifying. If a position requires someone to design intuitive user interfaces in JavaFX, someone like me would be a poor choice. But it has no implication that the candidate is incompetent.
+{{< note >}}
+For some positions, that actually is disqualifying. If a position requires someone to design intuitive user interfaces in JavaFX, someone like me would be a poor choice. But it has no implication that the candidate is incompetent.
+{{< /note >}}
 
 ## Gaps are different things
 
@@ -140,8 +97,9 @@ A conversational interview doesn't eliminate qualification requirements. Someone
 
 But it gives both parties a better opportunity to discover those things without requiring either one to pretend to be something they're not.
 
-!!! note
-    My entire interview process is built around finding people who are willing to learn, and want to learn, and want to *teach* - and to find out if the other person is a jackwagon. I can handle a knowledge gap, even an enormous knowledge gap: the information is out there somewhere, after all. I am looking for *aptitude*, and aptitude held by someone I want to work with. I cannot make someone less of a jerk, and I won't hire a jerk, nor will I work with one. Life's too short as it is.
+{{< note >}}
+My entire interview process is built around finding people who are willing to learn, and want to learn, and want to *teach* - and to find out if the other person is a jackwagon. I can handle a knowledge gap, even an enormous knowledge gap: the information is out there somewhere, after all. I am looking for *aptitude*, and aptitude held by someone I want to work with. I cannot make someone less of a jerk, and I won't hire a jerk, nor will I work with one. Life's too short as it is.
+{{< /note >}}
 
 ## The missing part
 
