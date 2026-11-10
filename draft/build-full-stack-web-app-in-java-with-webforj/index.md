@@ -282,12 +282,6 @@ Now the menu entry. In `MainLayout`, add one line to the existing list of items:
     appNav.addItem(new AppNavItem("Deals", DealsView.class, TablerIcon.create("briefcase")));
 ```
 
-Restart the app and the shell has the new entry:
-
-![The app shell with the Customers entry added to the side menu, next to the placeholder dashboard view](webforj-sidemenu-app-shell.jpg)
-
-Click **Customers** and you get the view from the top of this article. The rows in that screenshot are demo records seeded for the picture. They are not part of the code here, so your table starts empty until you build the form.
-
 The [Spring Data JPA guide](https://docs.webforj.com/docs/integrations/spring/spring-data-jpa) describes the adapter in more detail, including paging, sorting and filtering with JPA Specifications.
 
 ## The customer form
@@ -335,7 +329,11 @@ public class CustomerFormView extends Composite<FlexLayout> {
 }
 ```
 
-The **Add Customer** button already navigates to this class, so the two views are connected. Open the form, type a first and a last name, press **Submit** and the table shows the new row. Type a digit into the first name instead and the field reports "Invalid characters" while **Submit** switches off. That behavior comes from the annotations on the entity and the one `onValidate` line.
+With both views in place, the side menu has the new entry:
+
+![The app shell with the Customers entry added to the side menu, next to the placeholder dashboard view](webforj-sidemenu-app-shell.jpg)
+
+Click **Customers** and you get the view from the top of this article. The rows in that screenshot are demo records seeded for the picture, so your table starts empty. Press **Add Customer**, type a first and a last name, press **Submit** and the table shows the new row. Type a digit into the first name instead and the field reports "Invalid characters" while **Submit** switches off. That behavior comes from the annotations on the entity and the one `onValidate` line.
 
 ![The New customer form in the app shell with First Name, Last Name and Company fields filled in, a Submit button and a Cancel button](webforj-customer-form.jpg)
 
