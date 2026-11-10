@@ -49,14 +49,20 @@ class extends="rulebox.models.RuleBook" {
 			newRule( "declineLowScores" )
 				.withPriority( 20 )
 				.when( ( facts ) -> facts.creditScore < 580 )
-				.then( ( facts, result ) -> result.setValue( "DECLINED" ) )
+				.then( ( facts, result ) -> {
+    result.setValue( "DECLINED" )
+    return false
+} )
 				.stop()
 		)
 		addRule(
 			newRule( "autoApprove" )
 				.when( ( facts ) -> facts.creditScore >= 680 )
 				.except( ( facts ) -> facts.requestedAmount > 500000 )
-				.then( ( facts, result ) -> result.setValue( "APPROVED" ) )
+				.then( ( facts, result ) -> {
+    result.setValue( "APPROVED" )
+    return false
+} )
 		)
 	}
 
@@ -170,7 +176,7 @@ RuleBox.InvalidFactsException: RuleBook [] was given invalid facts: Missing requ
 
 ### Safer by design
 
-Singleton objects are now thread safe. A `then()` consumer that throws is recorded as `FAILED` in the audit trail before the exception reaches your code. The audit trail resets on every `run()`, so a rule your chain did not reach never reports a stale status. And `overwrite` on `given()` is finally honored.
+RuleBox singleton services, such as `Builder@rulebox`, are now thread safe. Do not share a `RuleBook` across requests; obtain a fresh instance for each decision, as in the provider example above. A `then()` consumer that throws is recorded as `FAILED` in the audit trail before the exception reaches your code. The audit trail resets on every `run()`, so a rule your chain did not reach never reports a stale status. And `overwrite` on `given()` is finally honored.
 
 ## The Rule Visualizer
 
@@ -229,7 +235,7 @@ The 1.0.0 docs are kept in the [archive](https://rulebox.coldbox.org/versions/1.
 box install rulebox
 ```
 
-Two features need optional BoxLang modules that RuleBox does not install for you: `box install bx-yaml` for YAML rule files, and `box install bx-sqlite` if you want Visualizer metrics to survive a restart.
+Two features need optional BoxLang modules that RuleBox does not install for you: `box install bx-yaml` for YAML rule files, and `box install bx-sqlite` for persistent Visualizer metrics. Installing `bx-sqlite` alone does not enable persistence; you must also configure `SQLiteMetricsStore@rulebox` and register its datasource. See the Visualizer persistence instructions in the RuleBox documentation for the full setup.
 
 Save a rulebook as `models/HelloWorld.bx`, call `getInstance( "HelloWorld" ).run( { name : "World" } )`, and you are running rules. The full walkthrough is in the [Getting Started guide](https://rulebox.coldbox.org/getting-started/).
 
