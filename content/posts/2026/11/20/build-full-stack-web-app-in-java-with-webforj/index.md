@@ -1,6 +1,6 @@
 ---
 title: "Building a full-stack web app using only Java, in 5 small classes"
-date: "2026-01-01"
+date: "2026-11-20"
 description: "Build a full-stack web app using only Java: one Maven command, a table backed by Spring Data and a validated form in 5 classes, no JavaScript."
 authors:
   - "hyyan-abo-fakher"
@@ -9,14 +9,20 @@ categories:
   - "Java"
   - "Tutorials"
   - "Spring"
-related_posts: []
+related_posts:
+  - "create-an-uber-clone-in-1-minute"
+  - "android-apps-beyond-android"
+  - "rewrite-everything-in-java-not-rust"
+  - "lightweight-spring-boot-monitoring"
 ---
 
 A Java team can usually ship a backend without drama. The trouble starts when the app needs screens. Suddenly there is a JavaScript framework to pick, a REST layer to feed it and a second build to keep alive.
 
 This article skips all of that. We build a small customer app with a side menu, a sortable table on top of a database and a validated form, and every line we write is Java. It comes to five classes and one test, about 240 lines. Here is where we end up:
 
-![The finished Customers view in the app shell: a side menu, and a sortable table with first name, last name and company columns above an Add Customer button](webforj-customers-table.jpg)
+{{< gallery cols="1" >}}
+webforj-customers-table.jpg | The finished Customers view in the app shell: a side menu, and a sortable table with first name, last name and company columns above an Add Customer button
+{{< /gallery >}}
 
 The framework is [webforJ](https://docs.webforj.com), the full-stack Java framework for business web apps: you build the whole app, screens included, in Java. I work at webforJ, and this is the tour I give Java teams who ask what working with it looks like. All the code below comes from the working app in that screenshot.
 
@@ -331,11 +337,15 @@ public class CustomerFormView extends Composite<FlexLayout> {
 
 With both views in place, the side menu has the new entry:
 
-![The app shell with the Customers entry added to the side menu, next to the placeholder dashboard view](webforj-sidemenu-app-shell.jpg)
+{{< gallery cols="1" >}}
+webforj-sidemenu-app-shell.jpg | The app shell with the Customers entry added to the side menu, next to the placeholder dashboard view
+{{< /gallery >}}
 
 Click **Customers** and you get the view from the top of this article. The rows in that screenshot are demo records seeded for the picture, so your table starts empty. Press **Add Customer**, type a first and a last name, press **Submit** and the table shows the new row. Type a digit into the first name instead and the field reports "Invalid characters" while **Submit** switches off. That behavior comes from the annotations on the entity and the one `onValidate` line.
 
-![The New customer form in the app shell with First Name, Last Name and Company fields filled in, a Submit button and a Cancel button](webforj-customer-form.jpg)
+{{< gallery cols="1" >}}
+webforj-customer-form.jpg | The New customer form in the app shell with First Name, Last Name and Company fields filled in, a Submit button and a Cancel button
+{{< /gallery >}}
 
 The [data binding docs](https://docs.webforj.com/docs/data-binding/validation/jakarta-validation) cover custom validators and transformers.
 
@@ -377,7 +387,9 @@ class CustomerFormViewTest {
 
 There is one more thing in the app you just built, and you did not have to add it. [craftforJ](https://docs.webforj.com/docs/craftforj) is the visual development environment that ships with webforJ. The archetype turns it on in development mode, which is why a small button has been floating over the app the whole time. Click it, or press <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd>.
 
-![craftforJ open over the Customers view: the component tree shows MainLayout, CustomersView, its Table and Button, and the properties of the selected Add Customer button](webforj-craftforj-inspector.jpg)
+{{< gallery cols="1" >}}
+webforj-craftforj-inspector.jpg | craftforJ open over the Customers view: the component tree shows MainLayout, CustomersView, its Table and Button, and the properties of the selected Add Customer button
+{{< /gallery >}}
 
 What you see is your own app, in your own terms. The tree lists `MainLayout`, `CustomersView`, the `Table` and the `Button`, the classes we wrote, and not the markup the browser rendered. Select the button and its properties are right there, including the "Add Customer" text from our constructor.
 
