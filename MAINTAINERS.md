@@ -111,6 +111,11 @@ thread. Don't re-import them: a fast first run got the posting account
 waited between writes. The script is deleted; read it from git history
 (`scripts/migrate/Discussions.java`) if you ever need to repeat the approach.
 
+Imported text must not contain a live `@`: that script escaped Markdown but not
+`@`, so `@Mihai` and even `@NotNull` pinged real GitHub accounts, and 17
+comments had to be edited by hand afterwards. A WordPress commenter's name
+matches no GitHub user, so escape every `@`.
+
 ## Read counter
 
 The `12,345 views` line on posts, pages, glossary entries and author profiles
