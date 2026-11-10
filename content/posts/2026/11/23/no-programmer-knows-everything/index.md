@@ -18,17 +18,22 @@ title: "No Programmer Knows Everything"
 # A date in the FUTURE schedules the article: it is not published and not 
 # searchable until that morning. Until then, it appears in
 # "Coming soon" on the home page, by title, date and author.
-date: "2026-01-01"
+date: "2026-11-23"
 
 # Optional: last-updated date, if you revise the article later.
 # lastmod: "2026-01-02"
 description: "Nobody knows everything about, well, anything. What matters is why each gap is there, what the rest of the team already covers, and whether anyone is allowed to say they don't know"
 authors:
-  - "jottinger"image: ""
+  - "jottinger"
+image: "header.jpg"
 categories:
   - "Java"
-related_posts: []
-canonical: "https://bytecode.news/posts/2026/11/no-programmer-knows-everything" 
+related_posts:
+  - "bcn-where-does-experience-come-from"
+  - "how-i-built-an-ai-assistant-for-my-career-with-java-spring-ai-and-mongodb"
+  - "what-i-learned-building-an-ai-code-reviewer-with-java-spring-boot"
+  - "java-new-features-in-production"
+canonical: "https://bytecode.news/posts/2026/11/no-programmer-knows-everything"
 ---
 
 Imagine a programmer, desperate for a position in a world where so many applicants with lots of experience are hunting for jobs. The requirements are vague, often asking for optimal experience across so many spheres, and the fear is that any gap, any at all, at any point in the application process is enough to reject the programmer.
