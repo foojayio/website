@@ -8,8 +8,6 @@ categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/why-another-java-server/"
 ---
 
-![Small servers, one Java stack](why-another-java-server-f8959ffdf0.jpg)
-
 ## Why Build Another Java Server?
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

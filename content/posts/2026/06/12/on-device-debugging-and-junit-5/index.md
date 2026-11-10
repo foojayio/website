@@ -16,8 +16,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![On-Device Debugging And JUnit 5](developer-workflow-debug-and-junit.jpg)
-
 This is the first follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/) and it covers the two changes from this release that affect how you iterate on a Codename One app rather than what the app itself does. On-device debugging that treats Java as Java on a real iPhone or a real Android device, and standard JUnit 5 against the JavaSE simulator. The first is the one we have been wanting for a long time, and is the one that takes the most explaining, so most of the post is about it.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

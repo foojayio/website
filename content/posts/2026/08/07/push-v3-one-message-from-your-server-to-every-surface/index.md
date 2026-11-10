@@ -16,8 +16,6 @@ related_posts:
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 ---
 
-![Push V3 connects one typed message to phones, widgets, and live surfaces](push-v3-new-cloud.jpg)
-
 Push notifications should be application infrastructure, not a pile of expiring certificates and provider-specific JSON.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

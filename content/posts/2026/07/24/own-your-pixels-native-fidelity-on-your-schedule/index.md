@@ -16,8 +16,6 @@ related_posts:
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 ---
 
-![Own Your Pixels: Native Fidelity on Your Schedule](pixel-perfect-is-a-test.jpg)
-
 An iOS or Android update can change a screen you shipped without you changing a line of code. If your app builds its UI from UIKit, SwiftUI, Compose, or Material widgets, Apple or Google owns those widget implementations. Codename One does something different. It statically links our lightweight component implementation into your native app. The UI you test is the UI your users keep after the next OS update. An update can still break a platform API or permission contract, but it cannot swap our button implementation for a new one.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

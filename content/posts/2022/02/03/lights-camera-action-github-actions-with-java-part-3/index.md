@@ -17,8 +17,6 @@ related_posts:
   - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
 ---
 
-![Spiderman chooses GitHub Action's Disco API](Spidey_GitHub_Action_disco_latest.jpg)
-
 The Java GitHub Action that Rules them all - Disco API
 
 ## Introduction

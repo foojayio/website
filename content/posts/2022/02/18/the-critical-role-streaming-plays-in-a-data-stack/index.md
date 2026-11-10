@@ -19,8 +19,6 @@ related_posts:
   - "why-developers-should-use-apache-pulsar"
 ---
 
-![](streaming-data-Depositphotos_5_tn-300x210-1.jpg)
-
 Why Apache Pulsar is the right choice for multi-datacenter, geo-distributed deployments.
 
 Building applications today requires companies and teams to be familiar with data flows (including streaming data flows) and how to transform them into compelling user experiences. Data fuels companies' ability to understand their customers, move faster than competitors, and provide compelling products that the market wants. According to [research](https://www.datastax.com/resources/report/the-state-of-the-data-race-2021) by DataStax and Clearpath Strategies, almost all companies (96%) now have a formal strategy for how they will work with data, but only 38% think they're doing a good job using data in their applications.

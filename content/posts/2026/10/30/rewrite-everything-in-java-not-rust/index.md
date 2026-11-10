@@ -8,8 +8,6 @@ categories: ["Java"]
 canonical: "https://www.codenameone.com/blog/rewrite-everything-in-java-not-rust/"
 ---
 
-![A Java word processor running on an iPhone and a Mac](rewrite-everything-in-java-not-rust-deace7455a.jpg)
-
 Rust is a great language for a kernel, a driver or a database engine. Code like that can't pause for a garbage collector and has to account for every byte, and Rust's ownership model pays for itself there. Somewhere along the way "rewrite it in Rust" turned into the default answer for everything, including desktop and mobile applications. For applications, I think that's the wrong trade. You pay more to write the code, more to review it and more to build it, and you don't get a better application in return.
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

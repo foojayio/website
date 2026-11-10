@@ -20,8 +20,6 @@ related_posts:
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
 ---
 
-![](0_aX8FjIfXNHJhbSWU.png)
-
 **Learn the key steps of deploying databases and stateful workloads in Kubernetes and meet the cloud-native technologies, like K8ssandra, that can streamline Apache Cassandra for K8s.**
 
 The idea of running a stateful workload in Kubernetes (K8s) can be intimidating, especially if you haven't done it before. How do you deploy a database? Where is the actual storage? How is the storage mapped to the database or the application using it?

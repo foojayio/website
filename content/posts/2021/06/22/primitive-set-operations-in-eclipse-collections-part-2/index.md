@@ -16,8 +16,6 @@ related_posts:
   - "beginners-guide-to-java-profiler"
 ---
 
-![Primitive Set Operations in Eclipse Collections - Part 2](foojay-2-featured.png)
-
 Primitive Set Operations in Eclipse Collections - Part 2
 
 Continuing [from Part 1](https://foojay.io/today/primitive-set-operations-in-eclipse-collections/), in the Eclipse Collections 11.0 release, we will have the following Set operations `union`, `intersect`, `difference`, `symmetricDifference`, `isSubsetOf`, `isProperSubsetOf`, `cartesianProduct` on primitive collections.

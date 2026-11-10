@@ -16,8 +16,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![How We Beat HotSpot Performance (By Cheating, But Not Like That)](beating-hotspot-performance.jpg)
-
 No, we didn't cheat in the benchmark. At least I hope we didn't. Every optimization in this story was gated on bit identical output checksums against HotSpot, and the harness refuses to print a ratio when a checksum differs. If anything, this post is about how good HotSpot actually is. We tilted the table in our favor in every way we could, we hand tuned C code, and we still only beat it on some benchmarks. Getting there was a genuine struggle. If you want to understand the nuts and bolts of what your Java code costs, and the tradeoffs each runtime picks, I hope this is a good read.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

@@ -12,8 +12,6 @@ categories:
 related_posts:
 ---
 
-![](Swiss_cheese_model-47912861.svg)
-
 ## Java's Existing Layers of Security
 
 Java, like most platforms or languages has layers of security, this article intends to look at Java's Authorization layer, which is unlike in other languages, and to distinguish between two different ways this layer is typically utilized, why one is effective while the other isn't and investigate why JEP 411 only considers the least effective method and hopefully increase awareness of the Principle of Least Privilege as it's applied to Java Authorization, improve adoption, encourage people to take advantage of the improved security it provides, as well as prolong its support and possibly even improve it in future.

@@ -8,8 +8,6 @@ categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/who-decides-your-app-redesign/"
 ---
 
-![Apple designs iOS; you choose your redesign schedule](who-decides-your-app-redesign-e9b18f15b8.jpg)
-
 Apple's design team doesn't know what's on your backlog. A new iOS appearance might be exactly what you want for your next release. It might also arrive halfway through a customer rollout, when changing the navigation is the last thing you need.
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

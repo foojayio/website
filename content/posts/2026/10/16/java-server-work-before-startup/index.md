@@ -8,8 +8,6 @@ categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/java-server-work-before-startup/"
 ---
 
-![Java server wiring moves from startup into the build](java-server-work-before-startup-d9b84f58b7.jpg)
-
 What do you pay for Spring and Java's dynamic architecture? Can you deliver the same API without the same runtime cost?
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

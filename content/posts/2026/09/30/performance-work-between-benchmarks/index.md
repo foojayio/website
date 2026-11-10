@@ -13,8 +13,6 @@ related_posts:
   - "sqlite-across-every-port-one-contract-one-encrypted-file-format"
 ---
 
-![Lies, Damn Lies And Benchmarks](performance-work-between-benchmarks-add0d8fe44.jpg)
-
 There's an old joke about three kinds of lies: [lies, damn lies, and benchmarks](https://www.spec.org/osg/news/articles/news9412/lies.html). Codename One did very well in our benchmarks. But were they accurate? Were they representative?
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

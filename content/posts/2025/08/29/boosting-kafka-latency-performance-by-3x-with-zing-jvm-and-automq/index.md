@@ -19,8 +19,6 @@ related_posts:
   - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 ---
 
-![](kafka-with-zing-and-automq.jpg)
-
 ## Why is Latency so Important to Kafka?
 
 The importance of low latency in Kafka stems from the use cases it enables. Many applications that rely on Kafka are time-sensitive.

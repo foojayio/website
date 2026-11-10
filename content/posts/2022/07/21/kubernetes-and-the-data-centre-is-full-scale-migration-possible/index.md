@@ -19,8 +19,6 @@ related_posts:
   - "building-reactive-java-applications-with-spring-framework"
 ---
 
-![](kubernetes-genric-169jpeg_51633.jpg)
-
 Data centres used to be exactly that - the centres of our data worlds, where all information, files and records would be kept and controlled.
 
 Today, that is no longer the case. More companies are moving to cloud services, whether this is dialling down on their traditional on-premises environments or never setting them up in the first place.

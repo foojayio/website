@@ -20,8 +20,6 @@ related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
 ---
 
-![](observ_img1-700x470.png)
-
 Grafana dashboard for all running frameworks
 
 ## Introduction

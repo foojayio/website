@@ -18,8 +18,6 @@ related_posts:
   - "foojay-podcast-56"
 ---
 
-![](CLAS12-side.jpg)
-
 ## Background
 
 The CLAS12 detector at Jefferson Lab conducts nuclear physics experiments to study the structure of nucleons and new particle states.

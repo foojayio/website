@@ -17,8 +17,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![Mac Native Builds, Live Protocols, And Open Issues Under 350](weekly.jpg)
-
 Our focus was all over the place this week with work that targeted many different directions: desktop, monetization, communication, media, and more. This fits with our roadmap of one platform that delivers the promise Java never delivered: WORA for Everything Everywhere.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

@@ -16,8 +16,6 @@ related_posts:
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
 ---
 
-![A shield between a mobile application and a protected server API](app-shield-server-attestation.jpg)
-
 Any security check that runs only on a phone can be patched out on that phone. [App Shield](https://github.com/codenameone/CodenameOne/pull/5486) moves the final decision to your server by attaching a short-lived, server-verified attestation token to protected requests.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

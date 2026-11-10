@@ -15,8 +15,6 @@ related_posts:
   - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
 ---
 
-![Vaadin 22 released](1200x630-vaadin-release-v22-700x368.jpg)
-
 ## Vaadin 22.0.0
 
 Vaadin is an open source development platform for building modern web applications on Java backends. It includes:

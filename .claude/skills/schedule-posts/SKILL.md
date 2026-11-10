@@ -40,6 +40,7 @@ Two things the validator does not check, so check them yourself and propose impr
   subject of the body), add `Mongo`, `Codename One` or `BoxLang` even if the
   author left it out, so the post shows up on that category page.
 * `image`: check the image file exists, is in the bundle, and is not too large (see step 4). It should also be a .jpg or .png, not a .gif, .svg, or .webp. In that case, convert it, otherwise it will not be picked up by social media cards when the post is shared.
+* No duplicate header image: the layout renders `image` as a large hero above the content, so the body must not open with that same image (`![...](same-file)` as the first line, or the first file in a leading gallery). Delete it from the body, but keep any other images.
 * `related_posts`: four or more recent, genuinely related posts reads best. This
   is a house preference, not a rule that blocks a merge. Find related posts if none are included.
 

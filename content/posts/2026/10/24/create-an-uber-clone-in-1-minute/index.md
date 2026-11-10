@@ -8,8 +8,6 @@ categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/create-an-uber-clone-in-1-minute/"
 ---
 
-![Create your own ride-hailing app from the Wayline starting project](create-an-uber-clone-in-1-minute-0a72804819.jpg)
-
 A lot has changed since 2018, both in programming and in Codename One. Back then I wrote [Create an Uber Clone in 7 Days: Build a real world full stack mobile app in Java](https://www.amazon.com/Create-Uber-Clone-Days-mobile/dp/1983258784). Today you can start with the application those seven days were meant to teach you to build, then spend your time making it yours.
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

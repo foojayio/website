@@ -15,8 +15,6 @@ related_posts:
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
 ---
 
-![Cover](R0mdaId-c5de449a.png "Cover")
-
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages.
 
 I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.

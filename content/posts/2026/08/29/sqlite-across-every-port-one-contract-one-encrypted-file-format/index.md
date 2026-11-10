@@ -16,8 +16,6 @@ related_posts:
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
 ---
 
-![A locked SQLite database connected to mobile, web, desktop, and watch applications](sqlite-portable-encrypted.jpg)
-
 The original `com.codename1.db` implementation delegated SQLite calls to the database supplied by each operating system. We knew this was less portable than the rest of Codename One, but fixing it meant taking ownership of SQLite on every target. That looked like a deep rabbit hole, so we exposed escape hatches instead. The [pluggable SpatiaLite work we described in 2018](https://www.codenameone.com/blog/spatial-pluggable-sqlite/) is one example.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

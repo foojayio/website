@@ -16,8 +16,6 @@ related_posts:
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 ---
 
-![The Codename One JavaScript Port Is Now Free and Open Source](javascript-free-open-source.jpg)
-
 The Codename One JavaScript port is now open source and available on every plan, including Free. You can also build the JavaScript target locally without a Codename One account.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

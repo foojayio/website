@@ -16,8 +16,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![AI, OAuth, And Other Platform APIs In The Core](platform-apis-in-the-core.jpg)
-
 This is the second follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). It covers the platform APIs that moved into the framework core this release. There are two headline pieces (AI / LLM and the modern OAuth / OIDC stack), and two smaller pieces (WiFi / connectivity and share-sheet result callbacks). This continues the direction the previous release set when we moved NFC, biometrics, and cryptography into the framework core. The full background on that earlier set is in [NFC, Crypto, Biometrics, And A New Build Cloud](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/).
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

@@ -13,8 +13,6 @@ related_posts:
   - "voip-vpn-builders"
 ---
 
-![The Flutter Gallery running in Flutter and in Codename One side by side](flutter-better-in-java-0b3f7d013b.jpg)
-
 I usually blog about a feature the week it lands. This one landed a few weeks ago and was in development for months before that: Codename One can now take a Flutter app's Dart source and build it as a Codename One app. The results are amazing. I held this post back because I know how explosive these claims are. I wanted the numbers to come from a CI job that runs on every commit instead of a benchmark I tuned once on my laptop.
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

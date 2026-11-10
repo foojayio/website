@@ -17,8 +17,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![OpenAPI, ORM, SVG and Lottie](build-time-codegen.jpg)
-
 This is the third follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). Saturday's was about how you iterate; yesterday's was about new platform APIs in the core; today's is about a run of pieces that change how you write the structural parts of an app.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

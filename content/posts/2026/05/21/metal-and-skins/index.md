@@ -16,8 +16,6 @@ related_posts:
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
 
-![Metal and Skins](metal-and-skins.jpg)
-
 This post has a lot to cover. Before we get to any of it I want to take on the uncomfortable subject first: quality. Two incidents from the past two weeks deserve a public explanation, one was a bug that fits into our normal iteration loop and one was a serious mistake on my part. Both deserve the kind of explanation I would want if I were on the other side of the import.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 

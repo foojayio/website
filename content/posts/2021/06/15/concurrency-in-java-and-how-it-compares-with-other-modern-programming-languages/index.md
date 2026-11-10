@@ -16,8 +16,6 @@ related_posts:
   - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 ---
 
-![cover image](evgeniya-litovchenko-3whkjP9a9ZI-unsplash-700x467.jpg)
-
 This is a multi-part series where I talk about concurrency in modern programming languages and build and benchmark a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Java, Rust, Go, JavaScript (NodeJS), TypeScript (Deno) and Kotlin to compare concurrency and its performance between these languages/platforms.
 
 The chapters of this series are as below, with part 6 here on Foojay.io, the place for Friends Of OpenJDK.

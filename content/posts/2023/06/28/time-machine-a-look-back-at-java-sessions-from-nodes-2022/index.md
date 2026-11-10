@@ -19,8 +19,6 @@ related_posts:
   - "ai4devs-schedule-published"
 ---
 
-![Base Photo by Compare Fibre on Unsplash](nodes2023-java-scaled.jpg)
-
 Figure 1. Base Photo by Compare Fibre on Unsplash
 
 As we prepare for NODES 2023, I wanted to pull out the time machine and review the Java sessions from [NODES 2022](https://neo4j.com/video/nodes-2022/).

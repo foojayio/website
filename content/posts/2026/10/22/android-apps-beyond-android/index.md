@@ -8,8 +8,6 @@ categories: ["Java", "Codename One"]
 canonical: "https://www.codenameone.com/blog/android-apps-beyond-android/"
 ---
 
-![Android application screens reach phones, desktop and the browser](android-apps-beyond-android-d1d17778d9.jpg)
-
 We are not the first to bring Android to iOS. Earlier projects brought Android's runtime along with the application. Dalvik was built for Android, including a just-in-time compiler (JIT) that ordinary iOS apps are [not permitted to use](https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web). Disabling it removes an important source of [Dalvik's performance](https://android-developers.googleblog.com/2010/05/android-22-and-developers-goodies.html). Dalvik was designed around interpretation and JIT compilation, not ahead-of-time compilation (AOT), so taking away the JIT leaves an interpreter rather than an optimized native app.
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>

@@ -18,8 +18,6 @@ related_posts:
   - "crafting-your-own-railway-display-with-java"
 ---
 
-![Hilla Framework](og-image-github-700x350.png)
-
 [Hilla](https://hilla.dev/) is a new framework for building reactive web apps on Java backends. It seamlessly integrates a reactive [Lit](https://lit.dev) TypeScript frontend with a [Spring Boot](https://spring.io/projects/spring-boot) backend. Hilla is built and supported by [Vaadin](https://vaadin.com).
 
 Hilla is designed to be simple enough for small utilities, but robust enough to build complex, enterprise-grade apps.

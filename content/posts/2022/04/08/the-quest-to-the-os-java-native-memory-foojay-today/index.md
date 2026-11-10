@@ -15,8 +15,6 @@ related_posts:
   - "clean-memory-from-finalize-to-cleaner"
 ---
 
-![](0-QMIuX6OHkdzv3HGM-e70ddfe1.jpg)
-
 As developers we want to spend most time on new features and improvements, providing value to our users or customers. However, all software inevitably contains bugs and other defects. A lot can be done to catch defects before software reaches production (something Picnic's automated fulfillment center team has [previously written about](https://blog.picnic.nl/reinventing-the-qa-process-25854fee51f3)) but some defects are likely to go undetected until the software is in the hands of users.
 
 One such case happened when Picnic's Distribution Systems team started to get notified that one of its deployments, the Fulfillment Service, was regularly killed and restarted by our Kubernetes cluster. This particular deployment houses many of the planning algorithms employed by Picnic, such as its [truck scheduling algorithm](https://blog.picnic.nl/its-in-our-dna-solving-logistics-problems-using-genetic-algorithms-a3d59e31558c).

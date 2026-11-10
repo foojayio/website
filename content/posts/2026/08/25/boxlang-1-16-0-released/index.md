@@ -19,8 +19,6 @@ related_posts:
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
 ---
 
-![](boxlang-v1.16.0-700x467.jpg)
-
 BoxLang 1.16.0 is here, closing **50 issues** across new features, improvements, and bug fixes. The theme running through this release is control: control over how HTTP clients are created and reused, control over what happens when a request fails, control over how much data a response is allowed to buffer, control over when Java classpaths reload, and tighter alignment with CFML behavior in the edge cases when doing migrations.
 
 ## HTTP Client Lifecycle and Observability

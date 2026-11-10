@@ -15,8 +15,6 @@ related_posts:
   - "new-to-java-some-resources"
 ---
 
-![Cover](Faella-SGS-HI-8fd9184e.jpeg)
-
 I recently [reviewed the book "Java by Comparison"](/today/book-review-java-by-comparison/) by Simon Harrer, Jörg Lenhard, and Linus Dietz. That book is intended for programmers who know the basics of the Java language, perhaps from a university curriculum. The book teaches programmers to improve their Java language and library usage through seventy "before and after" examples, covering topics such as coding style, naming, exceptions, streams, and class design.
 
 For contrast, I'll now review Marco Faella's book "[Seriously Good Software](https://www.manning.com/books/seriously-good-software)" that also teaches intermediate Java programmers to write better software, using an entirely different approach. (Disclaimer: Marco talked me into writing the preface for his book.)
