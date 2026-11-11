@@ -185,10 +185,11 @@ For a single value, skip JSON altogether: `ffprobe -v error -show_entries format
 ```java
 record Snapshot(long frame, double seconds, String speed, boolean done) {
     // out_time_us is "N/A" before the first packet and again while the encoder
-    // flushes at the end, so N/A keeps the last real value.
+    // flushes at the end, so N/A keeps the last real value. Audio-only
+    // output has no frame key at all, so it reads as 0.
     static Snapshot of(Map<String, String> kv, double lastSeconds) {
         String us = kv.get("out_time_us");
-        return new Snapshot(Long.parseLong(kv.get("frame")),
+        return new Snapshot(Long.parseLong(kv.getOrDefault("frame", "0")),
                 us.equals("N/A") ? lastSeconds : Long.parseLong(us) / 1e6,
                 kv.get("speed"), kv.get("progress").equals("end"));
     }
@@ -239,12 +240,13 @@ $ java Progress.java media/minute.mp4 out/minute-x264.mp4
 exit 0
 ```
 
-Reading the raw feed turned up four details:
+Reading the raw feed turned up five details:
 
 - `out_time_ms` is not in milliseconds. It holds the same microsecond value as `out_time_us`: `out_time_us=4501333` and `out_time_ms=4501333` in the same block. Use `out_time_us`.
 - The times can be `N/A`. Before the first packet is written, with a slow preset and a short `-stats_period`, the first blocks read `frame=0` and `out_time_us=N/A`. They go `N/A` again near the end: in one run the blocks at frames 1733, 1768 and 1787 of 1800 had no time at all. My first version mapped `N/A` to zero, and the progress line dropped to 0.0% just before finishing. Keeping the last real value fixes that.
 - With audio in the output, `out_time` runs ahead of the video. Copying the audio stream, the first block said `frame=34` next to `out_time_us=4501333`: 1.1 seconds of video against 4.5 seconds of output time. The run above shows it too, at 10% after 88 frames. libx264 is still holding frames in its lookahead while audio packets are already being written. That's fine for a percentage, but don't use it to count finished frames.
 - A block arrives every half second by default. `-stats_period` changes that.
+- Audio-only output has no `frame` or `fps` line at all. An `.m4a` encode's blocks start at `bitrate=`, which is why `Snapshot.of` falls back to 0 instead of calling `Long.parseLong(null)`.
 
 ## Stopping an encode
 
@@ -300,6 +302,7 @@ Virtual threads make one blocking task per file easy to write, and a `Semaphore`
 
 ```java
 static double runAll(List<String> inputs, int limit) throws Exception {
+    if (limit < 1) throw new IllegalArgumentException("limit must be at least 1, got " + limit);
     var slots = new Semaphore(limit);
     long start = System.nanoTime();
     try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {

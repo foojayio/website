@@ -24,6 +24,7 @@ public class Batch {
     }
 
     static double runAll(List<String> inputs, int limit) throws Exception {
+        if (limit < 1) throw new IllegalArgumentException("limit must be at least 1, got " + limit);
         var slots = new Semaphore(limit);
         long start = System.nanoTime();
         try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {

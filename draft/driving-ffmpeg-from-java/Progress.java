@@ -6,10 +6,11 @@ import java.util.function.Consumer;
 public class Progress {
     record Snapshot(long frame, double seconds, String speed, boolean done) {
         // out_time_us is "N/A" before the first packet and again while the encoder
-        // flushes at the end, so N/A keeps the last real value.
+        // flushes at the end, so N/A keeps the last real value. Audio-only
+        // output has no frame key at all, so it reads as 0.
         static Snapshot of(Map<String, String> kv, double lastSeconds) {
             String us = kv.get("out_time_us");
-            return new Snapshot(Long.parseLong(kv.get("frame")),
+            return new Snapshot(Long.parseLong(kv.getOrDefault("frame", "0")),
                     us.equals("N/A") ? lastSeconds : Long.parseLong(us) / 1e6,
                     kv.get("speed"), kv.get("progress").equals("end"));
         }
@@ -41,7 +42,9 @@ public class Progress {
 
     static double duration(String file) throws Exception {
         Process p = new ProcessBuilder("ffprobe", "-v", "error",
-                "-show_entries", "format=duration", "-of", "csv=p=0", file).start();
+                "-show_entries", "format=duration", "-of", "csv=p=0", file)
+            .redirectError(ProcessBuilder.Redirect.INHERIT)
+            .start();
         String out = new String(p.getInputStream().readAllBytes()).trim();
         if (p.waitFor() != 0) throw new IllegalStateException("ffprobe failed: " + file);
         return Double.parseDouble(out);
