@@ -54,7 +54,7 @@ Secondly, a scanner can match only what it can identify. Trivy, for example, ide
 
 Considering the above, what do you think: How many unknown vulnerabilities are in your image right now? Nobody can tell you. You can’t control what you don’t know — sounds pessimistic, but not quite true in our situation.
 
-What you can control is how quickly a newly disclosed CVE turns into a finding for your affected services. This is where a Software Bill of Materials can help you. Generate an SBOM at build time for each of your images and rescan it continuously. Ideally, have a separate SBOM for the base image (some maintainers provide it out-of-the-box). This will help you to split the accountability clearly: what should be patched by your engineers and what goes to the base image maintainer.
+What you can control is how quickly a newly disclosed CVE turns into a finding for your affected services. This is where a Software Bill of Materials can help you. Generate an application SBOM at build time from your build tool's dependency graph (for example, with the CycloneDX Maven plugin), so that shaded dependencies are included too, and associate it with the image you ship. Then rescan it continuously. Ideally, have a separate SBOM for the base image (some maintainers provide it out-of-the-box). This will help you to split the accountability clearly: what should be patched by your engineers and what goes to the base image maintainer.
 
 ## Distroless and hardened are not synonyms
 
@@ -72,7 +72,7 @@ So look for hardened images in the first place, and then choose a flavor – sli
 
 ## A signed image is not necessarily a safe image
 
-A valid signature proves who built the artifact and that it arrived unaltered. It says nothing about whether the artifact is safe. In March 2024, the xz-utils compression library shipped versions 5.6.0 and 5.6.1 with a backdoor targeting SSH servers ([CVE-2024-3094](https://nvd.nist.gov/vuln/detail/CVE-2024-3094)). The CVE lived in the official release tarballs, which were published through the project's normal release process by a co-maintainer who had gradually taken over the releases.
+A valid signature proves who signed the artifact and that it arrived unaltered. It doesn't prove who built it — for that, you need verified provenance. It says nothing about whether the artifact is safe. In March 2024, the xz-utils compression library shipped versions 5.6.0 and 5.6.1 with a backdoor targeting SSH servers ([CVE-2024-3094](https://nvd.nist.gov/vuln/detail/CVE-2024-3094)). The CVE lived in the official release tarballs, which were published through the project's normal release process by a co-maintainer who had gradually taken over the releases.
 
 It doesn’t mean signatures are useless. But a signature alone is not a proof of safety. You have to also verify provenance, assess the general security of the upstream project, scan artifacts, and control dependency updates. Also, use least-privilege configurations and runtime monitoring of suspicious behavior to limit damage if malicious code gets in.
 
@@ -96,12 +96,13 @@ RUN cd app && ./mvnw package
 
 FROM bellsoft/hardened-liberica-runtime-container:jre-25-nonroot-musl
 WORKDIR /app
+# Replace app-*.jar with your actual Maven output name (<artifactId>-<version>.jar)
 COPY --from=builder /app/app/target/app-*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/app.jar"]
 ```
 
-The same structure works with `eclipse-temurin` or `alpine` images, but you have to explicitly set `USER 1234:1234` in the final stage. The `nonroot` tag saved you from having to remember to do that.
+The same structure works with other Java images, such as `eclipse-temurin:25-jdk-alpine` for the builder and `eclipse-temurin:25-jre-alpine` for the runtime. In that case, you have to explicitly set `USER 1234:1234` in the final stage. The `nonroot` tag saved you from having to remember to do that.
 
 Also, never bake secrets into an image\! A database password in an `ENV` instruction or a `COPY`\-ed properties file becomes available to everyone who pulls the image. Fetch the secrets at runtime from a secret manager such as HashiCorp Vault or Kubernetes Secrets.
 
@@ -113,7 +114,7 @@ Suppose you did everything above. Then a week passes, new CVEs are found in the 
 
 The good news is that reliable vendors publish patched base images constantly. The not-so-good news: when a vendor releases an update for your base image, it won't get updated in your builds auto-magically. A remediation SLA only helps when you rebuild and deploy the patched image.
 
-Getting there starts with pinning. A tag like `jre-25-musl` can drift and point to a different image tomorrow, so pin the base image by digest and keep the human-readable version in a comment. Then, run the scans and monitor updates regularly. One way of automating this process is to use tools like Renovate or Dependabot, which open a pull request with the new digest whenever the vendor publishes an update.
+Getting there starts with pinning. A tag like `jre-25-musl` can drift and point to a different image tomorrow, so pin the base image by digest and keep the tag in the reference: `bellsoft/hardened-liberica-runtime-container:jre-25-musl@sha256:…`. The digest pins the exact image, while the tag tells humans and tools what it is. Then, run the scans and monitor updates regularly. One way of automating this process is to use tools like Renovate or Dependabot, which use the tag to track the image and open a pull request with the new digest whenever the vendor publishes an update.
 
 Implement updates on a regular schedule (weekly, for instance) and keep an emergency lane for actively exploited vulnerabilities. The emergency lane is fast if the regular one has kept everything close to current.
 
