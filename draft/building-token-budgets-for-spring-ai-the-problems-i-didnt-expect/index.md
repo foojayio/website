@@ -1,10 +1,10 @@
 ---
 title: "Building Token Budgets for Spring AI: The Problems I Didn't Expect"
-date: "2026-01-01"
+date: "2026-11-11"
 description: "A Spring Boot starter that budgets Spring AI ChatClient calls by tokens and cost, with per-call metering, atomic reservations, Redis support, and agent call limits."
 authors:
   - "ujjwal-tiwari"
-image: ""
+image: "budgetjourney-700x363.png"
 categories:
   - "Java"
   - "Spring"
@@ -38,7 +38,7 @@ So the budget has to be in tokens or dollars, and it has to be checked per model
 
 ## What using it looks like
 
-Add the starter next to your Spring AI model starter:
+Version 0.3.1 requires Java 17 or later, Spring Boot 4.1, and Spring AI 2.0. Add the starter next to your Spring AI model starter:
 
 ```xml
 <dependency>
@@ -51,12 +51,19 @@ Add the starter next to your Spring AI model starter:
 Set prices (dollars per million tokens, copied from the provider's pricing page) and limits:
 
 ```yaml
+spring:
+  ai:
+    openai:
+      chat:
+        model: gpt-4o-mini
+
 token-allowance:
   pricing:
     models:
       - name: gpt-4o-mini
         input-per-mtok: "0.15"
         output-per-mtok: "0.60"
+        cached-input-per-mtok: "0.075"
   limits:
     - { scope: user, window: daily, max-cost: "0.50" }
     - { scope: global, window: monthly, max-cost: "200.00" }
@@ -64,7 +71,17 @@ token-allowance:
     max-model-calls: 10
 ```
 
-Your controller doesn't change. Inject the `ChatClient.Builder` Spring AI gives you and build from it. When a user has spent their 50 cents for the day, the next request gets this instead of another paid call:
+Inject the `ChatClient.Builder` Spring AI gives you and build from it. Supply the authenticated user's ID on each request so the user budget applies:
+
+```java
+String answer = chatClient.prompt()
+    .user(message)
+    .advisors(a -> a.param(SubjectParams.USER_ID, authenticatedUserId))
+    .call()
+    .content();
+```
+
+When this user has spent their 50 cents for the day, the next request gets this instead of another paid call:
 
 ```http
 HTTP/1.1 429 Too Many Requests
@@ -78,7 +95,7 @@ Content-Type: application/problem+json
 }
 ```
 
-`Retry-After` is the number of seconds until the day's window resets. The user comes from an advisor param on the call, else the Spring Security principal, else a header, if you turn it on with subject.header and your gateway sets it.
+`Retry-After` is the number of seconds until the day's window resets. The user ID can come from a `SubjectParams.USER_ID` advisor parameter supplied on each request, the Spring Security principal, or a header enabled with `subject.header` and set by a trusted gateway. Spring Security principal resolution may not be available in WebFlux, streams running on another thread, or background jobs; pass `SubjectParams.USER_ID` explicitly in those cases. Otherwise, the per-user limit can be skipped even when the originating user is authenticated. If no user ID is available, only the global budget is checked; the per-user 50-cent limit does not apply.
 
 ## Where the check sits matters more than I expected
 
@@ -113,7 +130,7 @@ With reservations, the first request takes the balance from 40 to 48 cents. The 
 
 After the call, the reservation is replaced with the usage the provider reported.
 
-The estimate is deliberately crude: one token per three characters of prompt, plus the request's max output tokens (or 1,024 if none is set). For English and code that's above the real count, which is the side you want to be wrong on.
+The estimate is deliberately crude: one token per three characters of messages, tool calls and tool definitions, 1,600 tokens per image or other media item, plus the request's max output tokens (or 1,024 if none is set). For ordinary English prose this is often above the real count, but code and other dense text can exceed the estimate. For Chinese, Japanese, and Korean text, the character estimate can be about three times too low. Long audio or video can also exceed the media estimate. These inputs can overshoot the budget by more than expected; use a model-specific estimator for code-heavy or media-heavy workloads.
 
 It also has a cost I didn't see coming until I watched the demo. With 1,024 output tokens reserved, a user with 800 tokens left gets refused, even when their answer would have used 100. From their side it looks like the app is lying about their balance. 0.3.0 adds `estimate.output-tokens`, so you can reserve a typical answer length instead. A longer answer is still charged in full, so the budget can go over by the difference. You get to choose which way it's wrong.
 
@@ -129,13 +146,23 @@ This one surprised me most. OpenAI's `prompt_tokens` includes tokens read from t
 
 Spring AI passes both through as `promptTokens`. If you price that number directly, cached Anthropic calls look almost free. The metering advisor normalises Anthropic usage, so "input" always means all input tokens, and cache reads and writes are priced on their own.
 
+Gemini has its own twist. Thinking tokens and tool-use prompt tokens show up only in the total, so prompt plus completion is less than what you are billed for. The difference is charged as output, the more expensive side.
+
 Streaming has its own variant. With Ollama, every chunk carries a usage object, but it's 0/0 until the final chunk. With an OpenAI-compatible endpoint and stream usage turned off, every chunk is 0/0, forever.
 
 So "usage missing" can't be detected by type or null; it has to be "zero tokens reported". When that happens the reserved estimate is charged instead, and a metric records that it was an estimate.
 
+## Calls that never report usage
+
+A reader asked the obvious next question: what happens to a reservation when the provider times out and reports nothing? Before 0.3.1 the answer was "it gets released", which meant a slow call that the provider had already billed cost the user nothing. Now it depends on where the call failed:
+
+- **It timed out waiting for the answer.** The provider got the request and may have billed it, so the estimate is charged, tagged `charge=estimate` in the metrics. A stream that stops before the usage chunk arrives is treated the same way. `stream.interrupted: release` charges nothing in both cases, if you'd rather undercount than overcount.
+- **It failed while connecting.** Nothing reached the provider, so the reservation is released.
+- **It never settled at all,** for example because the instance crashed mid-call. The reservation is dropped after an hour, so it can't block a user's budget forever. In Redis, each budget key keeps its open reservations in a sorted set, and every new reservation sweeps out the expired ones in the same script.
+
 ## Sharing budgets across instances
 
-The default store is in memory, which is fine for one instance. With more than one, each instance would hand out the full budget on its own, so there is a Redis store.
+The default store is in memory. Its recorded spend is lost on restart, so the full budget can be spent again within the same window; use persistent storage when budgets must survive restarts. Separately, with more than one instance, each instance would hand out the full budget on its own, so there is a Redis store for sharing atomic budget state across instances.
 
 Reserve and settle are each a single Lua script, so the check-and-add stays atomic across instances. All keys share a `{ta}` hash tag, so they land on one Redis Cluster node and one script can touch all of them.
 
@@ -153,7 +180,7 @@ ChatClient agentClient = builder
     .build();
 ```
 
-After five model calls, the next one is refused with a 429 explaining which cap it hit.
+After five model calls, the sixth call is denied within the same agent request. For a non-streaming request, that denial returns HTTP 429 explaining which cap it hit; it does not automatically refuse a later HTTP request. For streams, a denial before any data is sent returns HTTP 429; a denial after a chunk has been sent terminates the stream with an error. Streaming clients should handle that stream error rather than expect an HTTP 429 response.
 
 In the demo, an agent walking an org chart through a `managerOf` tool gets cut off after five calls. The agent walkthrough uses the Gemini profile: small local models like `llama3.2` often stop calling the tool on their own before reaching the limit.
 
@@ -165,9 +192,12 @@ Things you should know before you rely on it:
 
 - **Costs are estimates, not invoices.** They're your configured prices times the provider's reported usage. Compare them with your bill, and start in `observe` mode for that reason.
 - **You type the prices in.** No provider has an API that returns prices. A bundled price list is the thing I most want to add next.
-- **Only `ChatClient` calls are counted.** Calling a `ChatModel` directly, or embedding models, skips the advisors.
+- **One price per model.** Long-context surcharges aren't applied, and a call is priced by the model it asked for, so a router that picks another model is priced wrong.
+- **Only `ChatClient` calls built from Spring AI's auto-configured `ChatClient.Builder` are counted.** Calling a `ChatModel` directly, using embeddings, or building a client with `ChatClient.builder(chatModel)` skips the starter's advisors unless you add them explicitly.
 - **Windows are fixed.** A minute cap can be spent at 10:00:59 and again at 10:01:00.
-- **A budget can go over a little.** A call that has already happened is always charged, so parallel calls can overshoot by the gap between their estimates and their real usage.
+- **A budget can go over a little.** Parallel calls can overshoot by the gap between their estimates and their real usage.
+- **Retries inside the model client are invisible.** The OpenAI client, for example, retries timeouts and server errors on its own, below the advisors, so only the last attempt is charged. Rate-limit and connection errors aren't billed anyway; a timed-out attempt the provider finished may be. If that matters to you, turn the client's retries off and retry around the `ChatClient` call, where every attempt is metered.
+- **A call that settles more than an hour after it started may not be charged,** because its reservation has already been dropped.
 
 ## Try it
 
