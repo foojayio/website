@@ -53,7 +53,8 @@ and what happens if that expectation isn't met.
 Everywhere Foojay is the venue: articles and their frontmatter, pull
 requests and issues on
 [github.com/foojayio/website](https://github.com/foojayio/website), comments
-on articles, and Foojay-run podcast recordings or events. It also covers
+on articles, the Foojay Slack workspace, and Foojay-run podcast recordings or
+events. It also covers
 private communication (email, direct messages) between participants when it
 concerns Foojay.
 
