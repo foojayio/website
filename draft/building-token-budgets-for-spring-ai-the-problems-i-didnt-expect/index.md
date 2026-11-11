@@ -4,7 +4,7 @@ date: "2026-11-11"
 description: "A Spring Boot starter that budgets Spring AI ChatClient calls by tokens and cost, with per-call metering, atomic reservations, Redis support, and agent call limits."
 authors:
   - "ujjwal-tiwari"
-image: "budgetjourney-700x363.png"
+image: "token-limit-exhausted.png"
 categories:
   - "Java"
   - "Spring"
