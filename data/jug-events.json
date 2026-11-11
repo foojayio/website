@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-10T08:30:04Z",
+  "generatedAt" : "2026-11-11T07:49:09Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -233,14 +233,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-bb/",
     "events" : [ {
-      "title" : "Event Sourcing without ORMs – Ted M. Young",
-      "url" : "https://www.meetup.com/jug-bb/events/317277437/",
-      "startTime" : "2026-11-10T18:30:00+01:00",
-      "endTime" : "2026-11-10T20:30:00+01:00",
-      "venue" : "PRODYNA SE",
-      "city" : "Berlin",
-      "online" : false
-    }, {
       "title" : "JUG BB: Pre-SAG Special @ JetBrains with Chris Richardson",
       "url" : "https://www.meetup.com/jug-bb/events/317058007/",
       "startTime" : "2026-11-16T18:30:00+01:00",
@@ -309,6 +301,14 @@
       "url" : "https://www.meetup.com/jug-bb/events/kvnqltykcjbcb/",
       "startTime" : "2027-06-01T18:30:00+02:00",
       "endTime" : "2027-06-01T21:00:00+02:00",
+      "venue" : "Da Vinci",
+      "city" : "Berlin",
+      "online" : false
+    }, {
+      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+      "url" : "https://www.meetup.com/jug-bb/events/kvnqltykckbjb/",
+      "startTime" : "2027-07-06T18:30:00+02:00",
+      "endTime" : "2027-07-06T21:00:00+02:00",
       "venue" : "Da Vinci",
       "city" : "Berlin",
       "online" : false
@@ -804,15 +804,7 @@
     "jug" : "JUGNoord",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-noord/",
-    "events" : [ {
-      "title" : "November 2026: Kotlin-Powered Spring Boot and the Security of LLMs",
-      "url" : "https://www.meetup.com/jug-noord/events/317057241/",
-      "startTime" : "2026-11-10T17:00:00+01:00",
-      "endTime" : "2026-11-10T20:00:00+01:00",
-      "venue" : "Dienst Uitvoering Onderwijs (DUO)-IB-Groep",
-      "city" : "Groningen",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "KnoxJava",
     "name" : "KnoxJava",
@@ -1057,13 +1049,13 @@
     "source" : "calendar",
     "url" : "https://luma.com/vjug",
     "events" : [ {
-      "title" : "From JDBC to Database Control Planes: 30 Years of Java Database Connectivity by Rogerio Robetti",
-      "url" : "https://luma.com/event/evt-yAEwk4JK5p9nzOR",
-      "startTime" : "2026-11-09T20:00:00Z",
-      "endTime" : "2026-11-09T21:00:00Z",
-      "venue" : "Online Event",
-      "city" : null,
-      "online" : true
+      "title" : "London Software Guild #4",
+      "url" : "https://luma.com/8j5cyvm3",
+      "startTime" : "2026-11-26T18:00:00Z",
+      "endTime" : "2026-11-26T20:00:00Z",
+      "venue" : "Civo Tech Junction",
+      "city" : "UK",
+      "online" : null
     }, {
       "title" : "Re:Build Conference 2027",
       "url" : "https://luma.com/9xkxbofp",

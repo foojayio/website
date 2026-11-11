@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: read
-  discussions: write
 
 jobs:
   notify:
@@ -22,11 +21,9 @@ jobs:
             content/posts
             content/authors
       - uses: jbangdev/setup-jbang@v0.1.1
-      - name: Mention the authors
+      - name: Tell Slack
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_CONTENT }}
           TITLE: ${{ github.event.discussion.title }}
           URL: ${{ github.event.discussion.html_url }}
-          NODE_ID: ${{ github.event.discussion.node_id }}
-        run: jbang scripts/notify/DiscussionAuthors.java "$TITLE" "$URL" "$NODE_ID"
+        run: jbang scripts/notify/DiscussionAuthors.java "$TITLE" "$URL"
