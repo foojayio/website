@@ -81,8 +81,8 @@ class AgentController {
 Next, write a few goldens in `goldens.jsonl`, one JSON object per line:
 
 ```json
-{"id": "reset-password", "input": "How do I reset my password?", "expected": "Use the Forgot password link on the sign-in page."}
-{"id": "export-csv", "input": "Can I export my data as CSV?", "expected": "Yes, from Settings, Export."}
+{"id": "reset-password", "input": "How do I reset my password?", "expected": "Use the Forgot password link on the sign-in page.", "expected_tools": ["reset_help"]}
+{"id": "export-csv", "input": "Can I export my data as CSV?", "expected": "Yes, from Settings, Export.", "expected_tools": ["export_settings"]}
 ```
 
 Then describe the eval in YAML. Exact match is useless for free-text answers, so this config uses an LLM judge for correctness and a latency budget for performance:
@@ -107,9 +107,10 @@ judge_llm: {provider: openai, name: gpt-4o}
 sinks: [stdout]
 ```
 
-Start the Spring Boot app, then run:
+Start the Spring Boot app. Before running the judge, set your OpenAI API key:
 
 ```bash
+export OPENAI_API_KEY=sk-...
 pip install "harness-evals[llm]"
 harness-evals run support-agent.eval.yaml
 ```
@@ -120,7 +121,11 @@ If your response carries more than just text, `HttpTarget` can pick it up too. P
 
 The part I find most compelling is that harness-evals speaks OpenTelemetry on the way in and on the way out.
 
-On the way in, the OTel importer turns spans into an EvalCase. It classifies spans using the OTel GenAI semantic conventions, looking at attributes such as `gen_ai.operation.name`, `gen_ai.input.messages`, `gen_ai.output.messages` and `gen_ai.tool.name`. Spring AI's observability support already emits `gen_ai.*` attributes, so traces from your production Java agent can become eval cases without a separate logging path:
+On the way in, the OTel importer turns spans into an EvalCase. It classifies spans using the OTel GenAI semantic conventions, looking at attributes such as `gen_ai.operation.name`, `gen_ai.input.messages`, `gen_ai.output.messages` and `gen_ai.tool.name`. 
+
+**Important**: Spring AI's default observability emits `gen_ai.*` attributes but **omits prompt and completion content** for privacy. Imported cases may have empty outputs, and safety metrics like PII will not check response content. To capture content, configure Spring AI's tracer to include `gen_ai.request.model` and the full message text in span attributes, and consider the privacy implications of capturing sensitive prompts and responses in observable spans.
+
+With this context, traces from your production Java agent can become eval cases without a separate logging path:
 
 ```python
 from harness_evals import evaluate
@@ -133,7 +138,15 @@ scores = evaluate(ec, metrics=[LatencyMetric(max_ms=3000), PIIMetric()])
 
 That means you can score what real users actually experienced, not only what your curated goldens predicted. Run a PII check over last week's production traces and you'll learn something.
 
-On the way out, `OtlpSink` exports eval scores as OTLP metrics and traces to any OpenTelemetry-compatible backend. You can attach the eval spans to an existing trace via a parent context, so an eval run shows up next to the request it judged:
+On the way out, `OtlpSink` exports eval scores as OTLP metrics and traces to any OpenTelemetry-compatible backend. You can attach the eval spans to an existing trace via a parent context, so an eval run shows up next to the request it judged.
+
+First, install the OTLP extra:
+
+```bash
+pip install "harness-evals[otlp]"
+```
+
+Then export scores:
 
 ```python
 from harness_evals.sinks.otlp_sink import OtlpSink
@@ -143,7 +156,10 @@ sink = OtlpSink(
     run_id="nightly-001",
     resource_attributes={"deployment.environment": "ci"},
 )
-scores = evaluate(ec, metrics=[...], sinks=[sink])
+try:
+    scores = evaluate(ec, metrics=[...], sinks=[sink])
+finally:
+    sink.shutdown()
 ```
 
 Eval quality then becomes another signal in your observability stack, on the same dashboards and alerts as latency and error rates.
@@ -153,7 +169,7 @@ Eval quality then becomes another signal in your observability stack, on the sam
 The CLI is built for CI. `harness-evals run` exits with 0 on pass, 1 on a failure or regression, and 2 on a config error, so any pipeline can gate on it. Two independent checks are available:
 
 - `--fail-under 0.8` sets an absolute quality floor.
-- `--baseline` compares the run against stored scores (add `baseline: {store: json, path: .evals/baseline.json}` to the YAML) and fails on regressions beyond a tolerance. `--update-baseline` refreshes the snapshot once you accept a change.
+- `--baseline` compares the run against stored scores (add `baseline: {store: json, path: .evals/baseline.json}` to the YAML) and fails on regressions beyond a tolerance. `--update-baseline` refreshes the snapshot once you accept a change. Run `--update-baseline` locally, then commit `.evals/baseline.json` to the repo. CI reads that committed file for comparisons.
 
 In a GitHub Actions workflow for a Maven project, that looks roughly like this:
 
