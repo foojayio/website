@@ -241,7 +241,7 @@ toggles.override(Features.NEW_PRICING, false);   // kill switch during an incide
 
 ### Failing at startup, not at 2am
 
-Routes are resolved and validated when the proxy is built: a missing fallback bean, a `fallbackMethod` with the wrong signature, or an annotated method that isn't on any interface all stop the application from starting. The consistency check from Principle 4 runs automatically in Spring Boot, and can be made strict:
+Routes are resolved and validated at startup: a missing fallback bean, a `fallbackMethod` with the wrong signature, or an annotated method that isn't on any interface all stop the application from starting. The consistency check from Principle 4 runs automatically in Spring Boot, and can be made strict:
 
 ```yaml
 flipjack:
@@ -326,7 +326,7 @@ That is the useful way to think about it. Flipjack isn't a replacement for Unlea
 <dependency>
     <groupId>org.kamranzafar.flipjack</groupId>
     <artifactId>flipjack-spring-boot-starter</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
