@@ -120,7 +120,7 @@ final class PricingRouter implements PricingService {
 }
 ```
 
-There is still one condition, but now it is *the* condition: one per feature, in a class whose only job is routing. Every method on the interface follows the same toggle, so you can't end up with the new quote and the old discount. The combinatorial explosion from problem 2 is bounded by structure rather than by discipline.
+There is still one condition, but now it is *the* condition: one per feature, in a class whose only job is routing. Every method on the interface follows the same toggle, so no call can get the new quote with the old discount. (The toggle is read on each call, so a flag flipped *between* `quote()` and `discount()` takes effect from the next call.) The combinatorial explosion from problem 2 is bounded by structure rather than by discipline.
 
 ### Principle 3: Removal should be a deletion
 
@@ -265,7 +265,7 @@ FeatureContextProvider featureContext() {
 }
 ```
 
-`GET /actuator/flipjack` lists every feature with its effective state, and `?subject=alice` evaluates one for a specific user.
+`GET /actuator/flipjack` lists every feature with its effective state, and `GET /actuator/flipjack/{name}?subject=alice` evaluates one for a specific user.
 
 ### Loading toggles from your own config store
 
@@ -277,7 +277,7 @@ FeatureToggles toggles = PollingFeatureToggles.builder(toggleConfig::loadFeature
         .build();
 ```
 
-`PollingFeatureToggles` calls the loader once per interval, a single bulk read, and answers every check from an in-memory snapshot, so toggle checks never touch the network. If a load fails, or a value isn't `true`/`false`, the last good snapshot is kept and calls keep routing by it.
+`PollingFeatureToggles` calls the loader once per interval, a single bulk read, and answers every check from an in-memory snapshot, so toggle checks never touch the network. If a load fails, or a value isn't `true`/`false`, the last good snapshot is kept and calls keep routing by it. If the very first load fails, the service starts with every feature off, so calls take their fallbacks; call `.requireInitialLoad()` on the builder to fail startup instead.
 
 ### Using a flag platform
 
@@ -294,7 +294,7 @@ It follows the same principles as the rest of Flipjack:
 
 - **It fails the way Principle 5 asks.** An evaluation never throws: a missing flag, an unready provider or any other error returns the default and goes to an error handler, which by default logs each problem once rather than on every call.
 - **Targeting comes from the same `FeatureContextProvider`.** The subject becomes the provider's targeting key, so per-user rollouts on the platform still need no signature changes.
-- **It needs no cache.** Providers already keep flags in memory and update them by streaming or polling.
+- **It usually needs no cache.** Most providers keep flags in memory and update them by streaming or polling. Check yours: flagd's Java provider, for example, evaluates over RPC by default and only keeps flags in memory in its in-process mode.
 
 The one thing you give up is Principle 4's startup check: OpenFeature can't list its flags, so a misspelt name isn't caught at boot. It shows up as a "flag not found" warning the first time it's evaluated.
 
