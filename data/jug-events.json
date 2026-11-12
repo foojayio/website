@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-11T07:49:09Z",
+  "generatedAt" : "2026-11-12T08:26:38Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -7,7 +7,15 @@
     "jug" : "AlmatyJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/almaty-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Almaty Java community x 127.1",
+      "url" : "https://www.meetup.com/almaty-java-community/events/317382270/",
+      "startTime" : "2026-11-20T18:30:00+05:00",
+      "endTime" : "2026-11-20T20:30:00+05:00",
+      "venue" : "улица Кабанбай батыра 112",
+      "city" : "Almaty",
+      "online" : false
+    } ]
   }, {
     "slug" : "alpesjug",
     "name" : "AlpesJUG",
@@ -180,7 +188,7 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/java-vienna/",
     "events" : [ {
-      "title" : "November Meetup",
+      "title" : "\"Dev Career in the AI Era\" + \"Java Static Site Generation\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166123/",
       "startTime" : "2026-11-16T18:00:00+01:00",
       "endTime" : "2026-11-16T21:00:00+01:00",
@@ -357,10 +365,10 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jugbremen/",
     "events" : [ {
-      "title" : "Umzug 1/3",
-      "url" : "https://www.meetup.com/jugbremen/events/317318713/",
-      "startTime" : "2026-11-11T17:30:00+01:00",
-      "endTime" : "2026-11-11T18:00:00+01:00",
+      "title" : "Es geht wo anders weiter",
+      "url" : "https://www.meetup.com/jugbremen/events/317383624/",
+      "startTime" : "2026-11-17T19:00:00+01:00",
+      "endTime" : "2026-11-17T19:30:00+01:00",
       "venue" : null,
       "city" : null,
       "online" : true
@@ -394,15 +402,7 @@
     "jug" : "DortmundJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Dortmund/",
-    "events" : [ {
-      "title" : "Neuerungen in Java und Open Source Finanzierung",
-      "url" : "https://www.meetup.com/jug-dortmund/events/316869289/",
-      "startTime" : "2026-11-11T18:00:00+01:00",
-      "endTime" : "2026-11-11T21:00:00+01:00",
-      "venue" : "SIGNAL IDUNA Gruppe Hauptverwaltung Dortmund",
-      "city" : "Dortmund",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "rheinJUG",
     "name" : "Java User Group Duesseldorf Rhein",
@@ -601,15 +601,7 @@
     "jug" : "KarlsruheJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Karlsruhe/",
-    "events" : [ {
-      "title" : "From Code to Context – Wie KI Softwaresysteme wirklich verstehen kann",
-      "url" : "https://www.meetup.com/java-user-group-karlsruhe/events/316709983/",
-      "startTime" : "2026-11-11T18:30:00+01:00",
-      "endTime" : "2026-11-11T20:30:00+01:00",
-      "venue" : "1000 Satellites Karlsruhe-Malzwerk",
-      "city" : "Karlsruhe",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "JUG-Mainz",
     "name" : "Java User Group Mainz",
@@ -667,14 +659,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "JUGO - TBD - save the date",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
-      "startTime" : "2026-11-11T18:00:00+01:00",
-      "endTime" : "2026-11-11T21:00:00+01:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    }, {
       "title" : "Train an Image Classifier in Java with JobRunr, Live",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/317359771/",
       "startTime" : "2026-11-12T20:00:00+01:00",
@@ -1018,15 +1002,7 @@
     "jug" : "UtrechtJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/utrecht-java-user-group/",
-    "events" : [ {
-      "title" : "Utrecht JUG Meetup – Nov 11: Java Security & Agentic AI in Legacy Modernization",
-      "url" : "https://www.meetup.com/utrecht-java-user-group/events/317133451/",
-      "startTime" : "2026-11-11T17:30:00+01:00",
-      "endTime" : "2026-11-11T22:00:00+01:00",
-      "venue" : "PSG technauts Nieuwegein",
-      "city" : "Nieuwegein",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "ValenciaJUG",
     "name" : "ValenciaJUG",

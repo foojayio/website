@@ -218,8 +218,8 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8534951
-  longitude: 2.3483915
+  latitude: 48.8588897
+  longitude: 2.320041
   cfp_url: https://devoxxfr2026.cfp.dev/
   cfp_closes: '2026-01-11'
 - slug: devoxx-greece-2026
@@ -307,8 +307,8 @@
   hybrid: false
   city: Krakow
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://2026.geecon.org/cfp/
   cfp_closes: '2026-01-30'
 - slug: jalba-2026
@@ -433,8 +433,8 @@
   hybrid: false
   city: Krakow
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://devoxxpl26.cfp.dev
   cfp_closes: '2026-02-28'
 - slug: voxxed-days-luxembourg-2026
@@ -668,8 +668,8 @@
   hybrid: false
   city: Krakow
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://jdd.org.pl/cfp-2026/
   cfp_closes: '2026-06-30'
 - slug: jcon-usa-at-ibm-techxchange-2026
@@ -999,8 +999,21 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8534951
-  longitude: 2.3483915
+  latitude: 48.8588897
+  longitude: 2.320041
+- slug: devjvm-2027-2027
+  name: DEVJVM 2027
+  url: https://devjvm.com/
+  start: '2027-04-10'
+  end: '2027-04-10'
+  online: false
+  hybrid: false
+  city: Barranquilla
+  country: Colombia
+  latitude: 11.0101922
+  longitude: -74.8231794
+  cfp_url: https://sessionize.com/devjvm-2027
+  cfp_closes: '2026-12-18'
 - slug: open-community-experience-2027
   name: Open Community Experience
   url: https://ocxconf.org
@@ -1062,8 +1075,8 @@
   hybrid: false
   city: Kraków
   country: Poland
-  latitude: 50.0619474
-  longitude: 19.9368564
+  latitude: 50.0469432
+  longitude: 19.9971534
   cfp_url: https://sessionize.com/kotlinconf-2027
   cfp_closes: '2026-11-27'
 - slug: jcon-europe-2027
