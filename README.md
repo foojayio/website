@@ -33,6 +33,9 @@ A few things worth knowing before you start:
 - **Already published it on your own blog? Post it here too.** Set `canonical:`
   to your original and search engines keep crediting your site, while your
   article reaches foojay's readers. Around 800 articles here are cross-posts.
+- **Send the article and its images only.** Code and scripts go in a repository
+  of your own, linked from the article, not into the pull request. Videos go on
+  YouTube or another external service, to keep our storage within limits.
 - **No paywall, no ads inside your article, no sign-up wall for readers.**
 - **You write Markdown or AsciiDoc, not Hugo.** If you can write a `README`, you can publish
   here. Nothing in the build needs to be understood or configured by you.

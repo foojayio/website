@@ -47,6 +47,11 @@ images, and delivering it (pull request, fork, or zip).
   ordinary prose and what most articles use; AsciiDoc is worth it for captions
   on code blocks, numbered callouts inside a snippet, admonitions, and tables
   that span cells.
+- **Only the article and its images go in the PR**: `index.md` or `index.adoc`,
+  plus images. Example code, scripts and project files don't belong in this
+  repository: publish them in a repository of your own and link to it from the
+  article. Videos too: host them on YouTube or another external service and
+  embed or link them (`{{< youtube VIDEO_ID >}}`), so the repository stays small.
 - **Company-based and commercial articles are welcome if they are Java/OpenJDK/JVM-oriented**
   — they need real, working Java example code or developer tooling, not just a product description.
   Marketing-only submissions are declined.
