@@ -85,7 +85,7 @@ Next, write a few goldens in `goldens.jsonl`, one JSON object per line:
 {"id": "export-csv", "input": "Can I export my data as CSV?", "expected": "Yes, from Settings, Export.", "expected_tools": ["export_settings"]}
 ```
 
-Then describe the eval in YAML. Exact match is useless for free-text answers, so this config uses an LLM judge for correctness and a latency budget for performance:
+Then describe the eval in YAML. Exact match is useless for free-text answers, so this config uses an LLM judge for correctness, tool usage metrics, and a latency budget:
 
 ```yaml
 # support-agent.eval.yaml
@@ -96,15 +96,34 @@ target:
   type: http
   url: http://localhost:8080/run
   output_path: $.output
+  tool_calls_path: $.tool_calls
   timeout_s: 30
   retries: 2
 
 metrics:
   - {kind: geval, threshold: 0.7, params: {criteria: "Is the answer correct and helpful compared to the expected answer?"}}
+  - {kind: tool_correctness, threshold: 0.8}
   - {kind: latency, threshold: 0.5, params: {max_ms: 5000}}
 
 judge_llm: {provider: openai, name: gpt-4o}
 sinks: [stdout]
+```
+
+Your controller should return tool calls in the response. For example:
+
+```java
+record AgentResponse(String output, List<String> tool_calls) {}
+
+@PostMapping("/run")
+AgentResponse run(@RequestBody AgentRequest request) {
+    String answer = chatClient.prompt()
+            .user(request.input())
+            .call()
+            .content();
+    // Extract tool calls from the response
+    List<String> tools = extractToolCalls(answer);
+    return new AgentResponse(answer, tools);
+}
 ```
 
 Start the Spring Boot app. Before running the judge, set your OpenAI API key:
@@ -123,7 +142,15 @@ The part I find most compelling is that harness-evals speaks OpenTelemetry on th
 
 On the way in, the OTel importer turns spans into an EvalCase. It classifies spans using the OTel GenAI semantic conventions, looking at attributes such as `gen_ai.operation.name`, `gen_ai.input.messages`, `gen_ai.output.messages` and `gen_ai.tool.name`. 
 
-**Important**: Spring AI's default observability emits `gen_ai.*` attributes but **omits prompt and completion content** for privacy. Imported cases may have empty outputs, and safety metrics like PII will not check response content. To capture content, configure Spring AI's tracer to include `gen_ai.request.model` and the full message text in span attributes, and consider the privacy implications of capturing sensitive prompts and responses in observable spans.
+**Important**: Spring AI's default observability emits `gen_ai.*` attributes but **omits prompt and completion content** for privacy. Imported cases may have empty outputs, and safety metrics like PII will not check response content.
+
+To capture content, set `spring.ai.chat.client.observability.enabled=true` and configure the tracer to export `gen_ai.request.messages.0.content` and `gen_ai.response.messages.0.content` attributes. This requires careful handling:
+
+- **Access controls**: Restrict trace access to authorized personnel only; do not export to public observability backends.
+- **Retention**: Set a short TTL (e.g., 7 days) for traces containing prompts or responses.
+- **Data classification**: Ensure your organization's security team approves trace content export before enabling it.
+
+With these safeguards in place, configure your trace backend with retention policies and access controls before enabling content capture.
 
 With this context, traces from your production Java agent can become eval cases without a separate logging path:
 
