@@ -334,6 +334,3 @@ The starter works with Spring Boot 3.5 and 4.1. Use `flipjack-core` instead for 
 
 Toggles should make releases safer without making the code worse. Put the decision at a seam, make it in one place, and let removal be a deletion. Whether or not you use Flipjack to do it, your future self, the one who has to clean up the toggles, will thank you.
 
----
-
-*Updated 2026-11-02 for Flipjack 1.1.0: OpenFeature support, so flag platforms such as Unleash and LaunchDarkly can drive the routing, and Spring Boot 4.1 support.*
