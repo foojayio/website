@@ -414,4 +414,4 @@ What to check:
 - Write MKV when a hard kill is possible, and remux at the end.
 - Size the concurrency for the encoder, not for the number of threads Java could start.
 
-The complete examples: [Deadlock.java](Deadlock.java), [Drained.java](Drained.java), [Probe.java](Probe.java), [Progress.java](Progress.java), [Cancel.java](Cancel.java), [CloseTest.java](CloseTest.java), [Batch.java](Batch.java), [Carriers.java](Carriers.java) and [Loudnorm.java](Loudnorm.java), with [make-media.sh](make-media.sh) to generate the test files. They expect `ffmpeg` and `ffprobe` on the `PATH`, and `CloseTest.java` needs JDK 26 or later.
+The complete examples are on GitHub at [markksantos/driving-ffmpeg-from-java](https://github.com/markksantos/driving-ffmpeg-from-java): `Deadlock.java`, `Drained.java`, `Probe.java`, `Progress.java`, `Cancel.java`, `CloseTest.java`, `Batch.java`, `Carriers.java` and `Loudnorm.java`, with `make-media.sh` to generate the test files. They expect `ffmpeg` and `ffprobe` on the `PATH`, and `CloseTest.java` needs JDK 26 or later.
