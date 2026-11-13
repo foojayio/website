@@ -253,6 +253,23 @@
 {{ end }}
 {{ $conferences = sort $conferences "sort" }}
 
+{{/* A JUG feed can carry a conference too (VirtualJUG's Luma lists Re:Build),
+     with another host and city, so only the name can match it: drop the
+     meetup when its title contains a conference's name, starting within three days. */}}
+{{ $kept := slice }}
+{{ range $events }}
+  {{ $dupe := false }}
+  {{ if eq .kind "meetup" }}
+    {{ $title := lower .title }}
+    {{ $at := .sort }}
+    {{ range $conferences }}
+      {{ if and (in $title (lower .title)) (le (math.Abs (sub .sort $at)) 259200) }}{{ $dupe = true }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if not $dupe }}{{ $kept = $kept | append . }}{{ end }}
+{{ end }}
+{{ $events = $kept }}
+
 {{ $events = sort $events "sort" }}
 
 {{/* A ZONE LABEL, BUT ONLY ON A DAY THAT NEEDS ONE.
