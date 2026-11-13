@@ -81,6 +81,16 @@
     "avatar" : "https://yt3.googleusercontent.com/lBBGPlk8vAWzHrZnLSdLptAvZi4N6rR3UYMwrFD62vQ5XdG-qkYtVDLyWETTrId7Dn_CqDeJUw=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "yQ22bZcSTmU",
+    "channel" : "hszanowski",
+    "title" : "Let’s Replace the JetBrains IDEs Splash Screen | Live Coding",
+    "published" : "2026-11-13T01:14:52+00:00"
+  }, {
+    "id" : "f3oODzMvaIY",
+    "channel" : "JetBrainsTV",
+    "title" : "Live coding Rust with Air in RustRover",
+    "published" : "2026-11-12T21:10:24+00:00"
+  }, {
     "id" : "ooYkI7FHrSc",
     "channel" : "sivalabs",
     "title" : "AI Agentic Development : Use AI as an Amplifier",
@@ -235,11 +245,6 @@
     "channel" : "Kotlin",
     "title" : "Inside Kotlin's Language Design | KotlinConfersations",
     "published" : "2026-10-29T14:55:44+00:00"
-  }, {
-    "id" : "f3oODzMvaIY",
-    "channel" : "JetBrainsTV",
-    "title" : "Live coding Rust with Air in RustRover",
-    "published" : "2026-10-29T14:55:16+00:00"
   }, {
     "id" : "LEBdgYS0Lc4",
     "channel" : "java",
@@ -1136,5 +1141,5 @@
     "title" : "MCL #002: Gavin King & Hibernate 6.3",
     "published" : "2023-09-08T04:11:53+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "Sz-rSzL2pGM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }
