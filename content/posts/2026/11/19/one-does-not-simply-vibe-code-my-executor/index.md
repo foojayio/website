@@ -9,8 +9,11 @@ categories:
   - "Java"
   - "AI"
   - "GenAI"
-related_posts: []
-canonical: "https://example.com/original/"
+related_posts:
+  - "systematic-ai-coding-my-takeaways-from-the-eclipse-foundation-workshop-in-brussels"
+  - "writing-a-data-orchestrator-in-java"
+  - "flaky-tests-a-journey-to-beat-them-all"
+  - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
 ---
 
 A coding assistant was given a real feature request against the execution engine of an open-source orchestrator. Three pull requests later, the code was plausible and still wrong. The author, who maintains that engine, explains why: the assistant had a generic world model of executors and a grep-built model of the code, but not the human one that holds the boundaries and the reasons. Then he hands it that model, and it works.
