@@ -46,7 +46,7 @@ Two things the validator does not check, so check them yourself and propose impr
 
 ### Remove the frontmatter comments
 
-The starter file carries long `#` comments between the keys. Delete every comment line inside the frontmatter (between the two `---` lines) and any blank line they leave behind. Leave the body alone: a `#` there is a heading or code.
+The starter file carries long `#` comments between the keys. Delete every comment line inside the frontmatter (between the two `---` lines) and any blank line they leave behind. Leave the body alone: a `#` there is a heading or code. This also applies for new author profiles in `content/authors/`, which are also page bundles with frontmatter.
 
 ### Set the date
 
