@@ -58,9 +58,9 @@
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
 {{ end }}
 
-{{/* A post always gets the panel, even with no headings, since the end-matter
+{{/* A post (not the /today/ list) always gets the panel, even with no headings: the end-matter
      links are what a reader jumps to. Other pages keep it to real content. */}}
-{{ $show := or $hasToc $items (and (eq .Section "posts") $tail) }}
+{{ $show := or $hasToc $items (and .IsPage (eq .Section "posts") $tail) }}
 {{ $extras := $items }}
 {{ if $show }}{{ $extras = $items | append $tail }}{{ end }}
 
