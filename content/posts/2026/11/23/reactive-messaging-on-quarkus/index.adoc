@@ -1,6 +1,6 @@
 ---
 title: "Reactive Messaging on Quarkus"
-date: "2026-01-01"
+date: "2026-11-23"
 description: "Using MicroProfile Reactive Messaging with Quarkus, Apache Kafka and virtual threads."
 authors:
   - "nicolas-duminil"
