@@ -40,6 +40,13 @@ Two things the validator does not check, so check them yourself and propose impr
   subject of the body), add `Mongo`, `Codename One` or `BoxLang` even if the
   author left it out, so the post shows up on that category page.
 * `image`: check the image file exists, is in the bundle, and is not too large (see step 4). It should also be a .jpg or .png, not a .gif, .svg, or .webp. In that case, convert it, otherwise it will not be picked up by social media cards when the post is shared.
+* Missing `image`: don't send the draft back. Run
+  `~/.venvs/foojay-images/bin/python .claude/skills/schedule-posts/generate_header.py --path <bundle>`
+  (after the move, before the resize step). It reuses the best image already in
+  the bundle when one is at least 1000px wide and close to 16:9, otherwise
+  renders a plain branded card from the title and first category, and sets
+  `image: "header.jpg"`. Mention in the PR comment that the header was generated, so the
+  author can supply a better one.
 * No duplicate header image: the layout renders `image` as a large hero above the content, so the body must not open with that same image (`![...](same-file)` as the first line, or the first file in a leading gallery). Delete it from the body, but keep any other images.
 * `related_posts`: four or more recent, genuinely related posts reads best. This
   is a house preference, not a rule that blocks a merge. Find related posts if none are included.
