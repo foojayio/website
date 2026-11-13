@@ -218,7 +218,7 @@ on virtual threads, as section 5.6 shows.
 |Thread serving a message |an event loop, which must remain unblocked |one virtual thread per message
 |Code style |a composed pipeline, each step being a callback |sequential statements and ordinary control flow
 |Error handling |failure operators in the pipeline |`try` and `catch`
-|Back pressure |a part of the model, as in section 5.5 |absent by default, to be provided explicitly
+|Back pressure |a part of the model, as in section 5.5 |demand controlled by the connector, with at most 1024 concurrent messages by default, a lower limit being configured explicitly as in section 5.6
 |Streams |natural, through `Multi` |requires additional constructions
 |Order of the messages |preserved by default |abandoned, as section 5.6 demonstrates
 |Principal hazard |a blocking call stalls every request on that event loop |a `synchronized` block around I/O pins the carrier on JDK 21
@@ -1452,10 +1452,12 @@ FINNHUB_TOKEN=<your-key> mvn -pl finhub-simple -am quarkus:dev
 Replacing `finhub-simple` by `finhub-msg` runs the variant using envelopes. Each poll produces one
 line of log, such as `AAPL 261.74 USD ▲ {plus}2.03 ({plus}0.78%)`.
 
-The services of stage 3 must share one broker. In development mode each of them would start its
-own broker through Dev Services. In the `prod` profile they run instead against a broker started
-beforehand, each one on its own HTTP port. The variable `KAFKA++_++BOOTSTRAP++_++SERVERS`, whose default value
-is `localhost:9092`, designates this broker. The script `run-all.sh` performs the whole sequence.
+The services of stage 3 must share one broker. In development mode, Dev Services would provide it,
+since by default it shares the container it starts among all the Quarkus applications running in
+this mode. The script below uses the `prod` profile instead, which runs the packaged applications
+against a broker started beforehand, each one on its own HTTP port. The variable
+`KAFKA++_++BOOTSTRAP++_++SERVERS`, whose default value is `localhost:9092`, designates this broker.
+The script `run-all.sh` performs the whole sequence.
 
 [source,shell]
 ----
