@@ -880,11 +880,13 @@ here is to carry the concurrency limit shown in the following configuration.
 
 [source,properties]
 ----
+mp.messaging.incoming.signals.fail-on-deserialization-failure=false
 mp.messaging.incoming.signals.failure-strategy=dead-letter-queue
 mp.messaging.incoming.signals.dead-letter-queue.value.serializer=io.quarkus.kafka.client.serialization.JsonbSerializer
 smallrye.messaging.worker.alerts.max-concurrency=${ALERT_MAX_CONCURRENCY:32}
 quarkus.rest-client.alert.connection-pool-size=${ALERT_POOL:${ALERT_MAX_CONCURRENCY:32}}
 quarkus.rest-client.alert.url=${ALERT_URL:http://localhost:9000/alerts}
+quarkus.rest-client.alert.read-timeout=5000
 ----
 
 image::08-kafka-alert.png[Sequence diagram of the alert consumer]
