@@ -1,14 +1,17 @@
 ---
 title: "Embedded Java: 20x Smaller Than Chrome, Faster Than Rust, Royalty Free"
-date: "2026-11-13"
+date: "2026-11-23"
 description: "Codename One now targets embedded Linux: a touch UI that needs a twentieth of a Chromium kiosk's memory and no GPU, and a headless backend that served more..."
 authors: ["shai-almog"]
 image: "embedded-linux-ui-in-18-mb-500726cf44.jpg"
-categories: ["Java"]
+categories: ["Java", "Codename One", "Embedded"]
+related_posts:
+  - "rewrite-everything-in-java-not-rust"
+  - "flutter-better-in-java"
+  - "android-apps-beyond-android"
+  - "create-an-uber-clone-in-1-minute"
 canonical: "https://www.codenameone.com/blog/embedded-linux-ui-in-18-mb/"
 ---
-
-![Embedded Java: 20x smaller than Chrome, faster than Rust](embedded-linux-ui-in-18-mb-500726cf44.jpg)
 
 Embedded software has the hardest job description in our industry. It has to run for years without a reboot. It has to fit in whatever RAM and flash the bill of materials allowed, because every chip you add is paid for again on every unit you ship. It has to respond instantly on a CPU slower than a phone from five years ago. And now it also has to look like the phone app, talk to the phone app, and report to a cloud service, because that's what customers expect from anything with a power cord.
 

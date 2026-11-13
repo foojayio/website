@@ -1,6 +1,6 @@
 ---
 title: "Ahead-of-Time Method Profiling: Method Profiles in the AOT Cache (JEP 515)"
-date: "2026-01-01"
+date: "2026-11-19"
 description: "Since Java 25, the AOT cache holds method profiles. They shorten the warmup – and cost speed in the long run. Measured and explained."
 authors:
   - "sven-woltmann"

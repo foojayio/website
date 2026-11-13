@@ -1,6 +1,6 @@
 ---
 title: "Feature Toggles in Java, Without the If-Else"
-date: "2026-01-01"
+date: "2026-11-25"
 description: "Why the usual if-else feature toggle turns into debt, how to design toggles cleanly in Java, and how Flipjack moves the decision out of your code."
 authors:
   - "kamran-zafar"

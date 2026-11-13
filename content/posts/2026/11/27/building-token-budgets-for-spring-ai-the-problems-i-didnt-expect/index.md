@@ -1,6 +1,6 @@
 ---
 title: "Building Token Budgets for Spring AI: The Problems I Didn't Expect"
-date: "2026-11-11"
+date: "2026-11-27"
 description: "A Spring Boot starter that budgets Spring AI ChatClient calls by tokens and cost, with per-call metering, atomic reservations, Redis support, and agent call limits."
 authors:
   - "ujjwal-tiwari"
@@ -9,8 +9,13 @@ categories:
   - "Java"
   - "Spring"
   - "GenAI"
+  - "AI"
   - "Open Source"
-related_posts: []
+related_posts:
+  - "spring-ai-langchain4j-three-stacks-one-test"
+  - "verified-match-explanations-spring-ai"
+  - "how-i-built-an-ai-assistant-for-my-career-with-java-spring-ai-and-mongodb"
+  - "building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions"
 canonical: "https://dev.to/ultron03/building-token-budgets-for-spring-ai-the-problems-i-didnt-expect-lg2"
 ---
 
@@ -22,7 +27,9 @@ Your LLM provider isn't. It just billed you for forty calls.
 
 That gap is why I wrote [Token Allowance](https://github.com/Ultron03/token-allowance), a Spring Boot starter that puts token and dollar budgets on Spring AI `ChatClient` calls: per user, per tenant, per session, plus a cap on how many model calls one request may make. This post is about how it works and the parts that turned out harder than they looked.
 
-![Token Allowance demo showing an agent stopped after five model calls and dollar budget enforcement](https://raw.githubusercontent.com/Ultron03/token-allowance-demo/main/demo/agent-and-dollars.gif)
+{{< gallery cols="1" >}}
+agent-and-dollars-8c7187ea.gif | Token Allowance demo showing an agent stopped after five model calls and dollar budget enforcement
+{{< /gallery >}}
 
 *The agent and dollar-budget walkthrough uses the Gemini profile and requires a Gemini API key. The basic chat and 429 walkthrough also runs locally with Ollama.*
 

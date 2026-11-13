@@ -1,6 +1,6 @@
 ---
 title: "Finally final: embracing JEP 500"
-date: "2026-01-01"
+date: "2026-11-26"
 description: "JEP 500 makes final mean final. How Tentackle's TRIP serializer stopped writing final fields for good, and a blueprint you can reuse for your own framework."
 authors:
   - "harald-krake"

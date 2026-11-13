@@ -1,6 +1,6 @@
 ---
 title: "Evaluating Java AI Agents with Harness Evals"
-date: "2026-11-11"
+date: "2026-11-24"
 description: "Your agent passed its unit tests. Is it any good? Learn how to use harness-evals to evaluate Java AI agents."
 authors:
   - "geertjan-wielenga"

@@ -1,6 +1,6 @@
 ---
 title: "Driving FFmpeg from Java Without Deadlocks or Broken Files"
-date: "2026-01-01"
+date: "2026-11-25"
 description: "ProcessBuilder and FFmpeg on JDK 21+: the stderr pipe deadlock, ffprobe JSON into records, live progress, clean cancellation and parallel encodes."
 authors:
   - "mark-santos"

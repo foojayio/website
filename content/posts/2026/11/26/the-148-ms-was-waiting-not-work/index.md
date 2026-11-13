@@ -1,6 +1,6 @@
 ---
 title: "The 148 ms was waiting, not work"
-date: "2026-01-01"
+date: "2026-11-26"
 description: "A 148 ms closed-loop max, the samples wrk added around it, and a run beside a second JVM that read 2.4 s instead of 2 ms and still passed the gate."
 canonical: "https://blog.arkstack.dev/en/blog/the-148-ms-was-waiting-not-work"
 authors:
@@ -52,7 +52,7 @@ Throttling does not explain the difference between the arms. The Quarkus-tuned a
 
 As the pool shrank from 32 connections to 16 and then 8, the Exeris max rose from 152–178 ms to 269–296 ms to 316–412 ms, while Quarkus-tuned's did not move. At four it fell back to about 200 ms, at a rate where the server was no longer CPU-bound. The quota and the generator touched both arms alike; the tail did not. So throttling by itself does not produce it. Whether a tail this size needs throttling, I cannot say: the one saturated configuration without a quota, the gated triad, had a worst request of 50 to 64 ms, and it differs from these runs in more than the quota. Either way, whatever holds those requests back is most likely on the server side, in the runtime I am building, and the connection pool is where I would look first. I have not looked yet; [the open issue](https://github.com/exeris-systems/exeris-kernel/issues/834) holds the table and what would close it.
 
-![Worst wrk response per run against DB connection pool size 4, 8, 16, 32 under the same 4-vCPU quota. Exeris rises from 152–178 ms at 32 to 316–412 ms at 8 and is about 200 ms at 4; Quarkus-tuned stays at 16–40 ms throughout. Both arms are throttled in 98% of CFS periods at pools 8–32; at pool 4 Exeris is throttled in 9%.](fig1_pool_vs_max_en.png)
+![Worst wrk response per run against DB connection pool size 4, 8, 16, 32 under the same 4-vCPU quota. Exeris rises from 152–178 ms at 32 to 316–412 ms at 8 and is about 200 ms at 4; Quarkus-tuned stays at 16–40 ms throughout. Both arms are throttled in 98% of CFS periods at pools 8–32; at pool 4 Exeris is throttled in 9%.](fig1_pool_vs_max_en.jpg)
 
 *Figure 1: The same quota, the same generator, and a tail only one arm has. Exploratory, n=3 per cell.*
 
@@ -60,7 +60,7 @@ As the pool shrank from 32 connections to 16 and then 8, the Exeris max rose fro
 
 What the arithmetic does explain is the rest of the closed-loop histogram. `wrk` 4.1 corrects its own histogram for [coordinated omission](https://github.com/giltene/wrk2): after the run it takes the average time between two requests on one connection, here 300 s divided by 133,439 requests per connection, 2.25 ms, and for every response slower than twice that it inserts a synthetic sample at each 2.25 ms step below it. A single 148 ms response becomes 65 recorded latencies, 64 of which no request experienced. The classifier run printed a mean of 5.61 ms. By Little's law, 128 connections completing 56.9 k requests per second cannot have averaged more than 2.25 ms per request (the same quantity `wrk` uses as its interval, which is why the two numbers match), so the correction has at least doubled the mean. The printed p99 of 37 ms includes the same insertions, and the summary `wrk` prints does not say how far below it the real one sits.
 
-![Left: one real 147.7 ms response followed by 64 synthetic samples that wrk inserts at 2.25 ms steps down to zero. Right: the mean wrk printed, 5.61 ms, against the 2.25 ms ceiling Little's law allows for 128 connections at 56.9 k rps.](fig2_wrk_backfill_en.png)
+![Left: one real 147.7 ms response followed by 64 synthetic samples that wrk inserts at 2.25 ms steps down to zero. Right: the mean wrk printed, 5.61 ms, against the 2.25 ms ceiling Little's law allows for 128 connections at 56.9 k rps.](fig2_wrk_backfill_en.jpg)
 
 *Figure 2: One slow response, as `wrk` 4.1 records it. The max is the only one of these 65 samples a request experienced.*
 
@@ -106,7 +106,7 @@ One thing in that table cuts against my own curve. At 30 k the excluded pair rea
 
 What changed my mind about the cause along the way was pinning. The first run of this curve was unpinned, showed the same blow-up, and I attributed the blow-up to the missing pinning. The re-run pinned the target pair, the database and the load generator each to its own disjoint cpuset: both target JVMs on CPUs `0-1,8-9`, two physical cores and their SMT siblings, Postgres on four other cores, the generator on two more. It showed the same shape. The diagnosis had been wrong. Two JVMs sharing four logical CPUs do not stop interfering because neither of them can leave those CPUs, and pinning does nothing for what they share beyond them: the L3, memory bandwidth, the kernel.
 
-![Left, gated triad: target and neighbour JVM on the same cpuset 0-1,8-9, Postgres on 4-7,12-15, wrk on 2-3,10-11, no CPU quota; the two JVMs still share L3, memory bandwidth and the kernel. Right, constrained runs: target JVM and wrk inside one cgroup with a 4-vCPU CFS quota.](fig3_cpu_cgroup_layout_en.png)
+![Left, gated triad: target and neighbour JVM on the same cpuset 0-1,8-9, Postgres on 4-7,12-15, wrk on 2-3,10-11, no CPU quota; the two JVMs still share L3, memory bandwidth and the kernel. Right, constrained runs: target JVM and wrk inside one cgroup with a 4-vCPU CFS quota.](fig3_cpu_cgroup_layout_en.jpg)
 
 *Figure 3: Pinning separates who runs where. It does not separate what the processes share beyond their CPUs, and in the constrained runs the quota put the server and its load generator in one budget.*
 

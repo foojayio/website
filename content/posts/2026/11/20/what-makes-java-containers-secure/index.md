@@ -1,23 +1,19 @@
 ---
-
 title: "Small, Signed, and Still Vulnerable? What Really Makes a Java Container Secure"
-
-date: "2026-01-01"
-
+date: "2026-11-20"
 description: "Small, distroless, signed, and scanned clean, yet vulnerable? Six Java container security myths taken apart and gaps closed."
-
 authors:
   - "catherine-edelveis"
-
-image: "/iron.jpg"
-
+image: "iron.jpg"
 categories:
   - "Java"
   - "Security"
   - "DevOps"
-
-related_posts: []
-
+related_posts:
+  - "java-patching-at-incident-speed-lessons-from-the-emudhra-ca-compromise"
+  - "free-java-real-risk-why-unsupported-openjdk-is-now-a-security-gamble"
+  - "testcontainers-integration-testing-running-your-real-war-in-docker"
+  - "beyond-mvn-install-maven-practices"
 ---
 
 **TLDR**
