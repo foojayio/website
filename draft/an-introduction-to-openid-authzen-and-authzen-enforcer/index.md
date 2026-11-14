@@ -1,6 +1,7 @@
 ---
 title: "An Introduction to OpenID AuthZEN and authzen-enforcer, a Java SDK"
 description: "An introduction to OpenID AuthZEN, the standard API between PEPs and PDPs, with Keycloak as the PDP and authzen-enforcer, a Java SDK."
+canonical: "https://hakdogan.medium.com/an-introduction-to-openid-authzen-and-authzen-enforcer-a-java-sdk-933f2122bdd9"
 authors: ["huseyin-akdogan"]
 image: "authzen-cover.jpg"
 categories:
@@ -13,6 +14,8 @@ related_posts:
   - "vaadin-oauth2-and-keycloak"
   - "how-to-secure-a-spring-boot-application-with-openid-connect-and-pac4j"
 ---
+
+_This article was first published on [my Medium blog](https://hakdogan.medium.com/an-introduction-to-openid-authzen-and-authzen-enforcer-a-java-sdk-933f2122bdd9)._
 
 Over the years, as the software industry became aware of the problems that come with authorization logic embedded in application code, moving that logic out of the application has gradually become the accepted solution. In this model, which the OASIS XACML standard described back in 2003, a **Policy Decision Point (PDP)** holds the policies and makes the decisions, and a **Policy Enforcement Point (PEP)** inside the application consults the PDP and enforces its decision.
 
