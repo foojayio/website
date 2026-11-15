@@ -117,6 +117,8 @@ Agenor has no supervision and doesn't restart agents, so everything above is app
 on Agenor 0.40.0 from Maven Central. With Java 21, Maven and Docker or Podman:
 
 ```bash
+git clone --branch v0.1.0 https://github.com/mauro-mura/agenor-example-job-dispatcher.git
+cd agenor-example-job-dispatcher
 mvn package -DskipTests
 bash demo/demo.sh
 ```
