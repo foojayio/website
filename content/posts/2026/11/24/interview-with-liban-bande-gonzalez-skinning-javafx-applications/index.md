@@ -41,9 +41,27 @@ The book is about going beyond CSS in JavaFX. It teaches the Control-Skin archit
 
 It's for software developers who want to build modern graphical interfaces, especially those who have discovered that no default control meets the requirements of a project. Readers don't need to be experienced: being familiar with the basics of JavaFX is enough.
 
+{{< gallery cols="4" caption="The table of contents of the book" >}}
+book-toc-1.jpg | Table of contents of Skinning JavaFX Applications, first page
+book-toc-2.jpg | Table of contents of Skinning JavaFX Applications, second page
+book-toc-3.jpg | Table of contents of Skinning JavaFX Applications, third page
+book-toc-4.jpg | Table of contents of Skinning JavaFX Applications, last page
+{{< /gallery >}}
+
+{{< gallery cols="4" caption="Sample pages from the book" >}}
+book-content-1.jpg | Sample page from Skinning JavaFX Applications, first example
+book-content-2.jpg | Sample page from Skinning JavaFX Applications, second example
+book-content-3.jpg | Sample page from Skinning JavaFX Applications, third example
+book-content-4.jpg | Sample page from Skinning JavaFX Applications, fourth example
+{{< /gallery >}}
+
 ## Why focus on Control-Skin instead of CSS?
 
 When I face real projects, I have to build modern graphical user interfaces, and in most cases CSS isn't enough. Do you want a challenge that proves CSS isn't enough? Try building a set of glassmorphic panels and controls. There is no CSS rule in JavaFX that applies a blur and lets you see through a control or panel without a domino effect on its child nodes.
+
+{{< gallery cols="1" caption="Glassmorphic panels and controls built with skins" >}}
+glass.jpg | A JavaFX window with glassmorphic, translucent panels and controls
+{{< /gallery >}}
 
 ## What made you write the book?
 
@@ -55,8 +73,9 @@ Once readers finish the book, they will be able to create their own controls and
 
 The most laborious chapter, I'd say, was the one on Fluent. The difficulty was writing the code and testing it. At the same time, it's the chapter I'm proudest of, because it brings everything together. It's the decisive chapter that integrates the whole body of knowledge.
 
-{{< gallery cols="1" caption="The Fluent materials demo: an Acrylic panel blurring the shapes behind it on the left, Mica and reveal borders on the right" >}}
+{{< gallery cols="1" cols="2" caption="The Fluent materials demo: an Acrylic panel blurring the shapes behind it on the left, Mica and reveal borders on the right" >}}
 fluent-materials-demo.jpg | A JavaFX window with a blurred, translucent Acrylic panel over colored shapes and the word FLUENT, next to a Mica pane with Home, Library and Settings buttons
+fluent.jpg | A JavaFX application using the Fluent design system
 {{< /gallery >}}
 
 ## Does the book need Vitra?
@@ -71,9 +90,19 @@ It is entirely possible to buy the book without access to Vitra. The reader deci
 
 [AtlantaFX](https://www.jfx-central.com/libraries/atlantafx) is mainly a collection of CSS themes that refreshes the look of the standard controls. Vitra goes a step further: it adds new controls built with skins.
 
+{{< gallery cols="3" caption="Vitra controls: calendar, date range picker, dashboard, Gantt chart and Kanban board" >}}
+calendar.jpg | A calendar control built with Vitra
+daterange-picker.jpg | A date range picker built with Vitra
+dashboard.jpg | A dashboard built with Vitra
+gantt.jpg | A Gantt chart built with Vitra
+kanban.jpg | A Kanban board built with Vitra
+{{< /gallery >}}
+
 ## What are the micro-interactions in Celestia?
 
 [Celestia](https://www.jfx-central.com/libraries/celestia) offers a set of micro-interactions, animations or motion for JavaFX nodes. Users want graphical interfaces that are aesthetically rich, but they also want interactivity.
+
+{{< youtube btvjlI0JnmE >}}
 
 Some clients say that Android and web interfaces have more "life" or "fluidity". It wouldn't hurt to bring some of that feeling to desktop applications.
 
