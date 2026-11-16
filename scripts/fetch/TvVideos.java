@@ -94,7 +94,7 @@ public class TvVideos {
                 System.out.println(handle + ": ok");
             } catch (Exception e) {
                 failed++;
-                if (channel != null) channels.add(channel);
+                if (channel != null && !channels.contains(channel)) channels.add(channel);
                 System.out.println(handle + ": " + e + " -- keeping its committed videos");
             }
         }
