@@ -39,10 +39,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Writes a Mastodon, Bluesky and LinkedIn text for every post that went live,
+ * Writes a Mastodon, Bluesky, LinkedIn and Reddit text for every post that went live,
  * with Claude working from the article itself. Mastodon and Bluesky are posted
- * directly; LinkedIn has no usable API, so its text goes to Slack in a code
- * block plus a link that opens LinkedIn's composer prefilled, with links to what was posted. A platform that fails or has no
+ * directly; LinkedIn and Reddit have no usable API, so their text goes to Slack in a code
+ * block plus a link that opens the composer prefilled, with links to what was posted. A platform that fails or has no
  * credentials falls back to its own text in that Slack message.
  *
  *   new <previous.xml> <current.xml>   posts in current that previous lacks
@@ -93,7 +93,14 @@ public class SocialPosts {
                             + "Use plain text only: no bold, no italic, no markdown (no `**`, no `*`, no `_`) and no unicode bold/italic characters.\n"
                             + "Don't open with a hook or rhetorical question like `If you've ever wondered...`, `Ever wondered...`, "
                             + "`Have you ever...` or `Imagine...`. Start directly with what the article is about, in a plain and "
-                            + "factual tone, like a colleague sharing a link."));
+                            + "factual tone, like a colleague sharing a link."),
+            new Platform("reddit", "Reddit", 1500,
+                    "The first line is the post title (max 150 characters, no hashtags), then an empty line, then the body: "
+                            + "a short plain summary of what the article covers, ending with the link.\n"
+                            + "No hashtags, no @mentions (give the author's plain name), no markdown headings and no emoji.\n"
+                            + "Don't open with a hook or rhetorical question. Keep a plain, factual tone."));
+
+    static final Set<String> MANUAL = Set.of("linkedin", "reddit");
 
     public static void main(String[] args) throws Exception {
         List<String> a = new ArrayList<>(List.of(args));
@@ -183,7 +190,7 @@ public class SocialPosts {
                 message.append("\n*").append(pl.label()).append("* - no text written, ").append(esc(String.valueOf(e.getMessage()))).append("\n");
                 continue;
             }
-            if (!dryRun && !pl.id().equals("linkedin")) {
+            if (!dryRun && !MANUAL.contains(pl.id())) {
                 try {
                     posted = pl.id().equals("bluesky") ? postBluesky(text, p, page) : postMastodon(text, p);
                     if (posted == null) problem = " - not posted, no credentials set";
@@ -203,6 +210,12 @@ public class SocialPosts {
                     message.append(" <https://www.linkedin.com/company/98327419/admin/page-posts/published/?share=true&text=")
                             .append(URLEncoder.encode(text, StandardCharsets.UTF_8).replace("+", "%20")).append("|Open in LinkedIn>");
                 }
+                if (pl.id().equals("reddit")) {
+                    String[] parts = text.split("\\R\\s*\\R", 2);
+                    message.append(" <https://www.reddit.com/r/foojay/submit/?type=TEXT&selftext=true&title=")
+                            .append(encode(parts[0].strip())).append("&text=")
+                            .append(encode(parts.length > 1 ? parts[1].strip() : "")).append("|Open in Reddit>");
+                }
                 message.append("\n```\n").append(text.replace("```", "'''")).append("\n```\n");
             }
         }
@@ -217,6 +230,10 @@ public class SocialPosts {
         post(token, user, message.toString());
         System.out.println("Sent to Slack.");
         if (failed > 0) throw new IllegalStateException(failed + " platform text(s) failed for " + p.link());
+    }
+
+    static String encode(String s) {
+        return URLEncoder.encode(s, StandardCharsets.UTF_8).replace("+", "%20");
     }
 
     /** Points at the manual workflow (social-post.yml) that reruns one post. */
@@ -437,6 +454,7 @@ public class SocialPosts {
                 String handle = switch (pl.id()) {
                     case "bluesky" -> blueskyMention(au.bluesky());
                     case "mastodon" -> mastodonMention(au.mastodon());
+                    case "reddit" -> au.name();
                     default -> "@" + au.name(); // LinkedIn has no text handles
                 };
                 who.append("Author: ").append(au.name()).append("\n    ").append(pl.label())
