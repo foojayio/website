@@ -16,7 +16,7 @@ related_posts:
   - "kcdc-2025"
 ---
 
-My conference participation has dropped sharply since I left DevRel for a regular office engineering job. In 2023, I was proud to have had [70 talks](https://blog.frankel.ch/speaking/2023/); I'll finish this year with 4, including one online and one quickie. It has one beneficial side effect, though. Because I go to so few, I take the time to attend. Last Tuesday, I was lucky to attend and talk at the [Porto TechHub](https://portotechhub.com/) conference, for the 4th year.
+My conference participation has dropped sharply since I left DevRel for a regular office engineering job. In 2023, I was proud to have had [70 talks](https://blog.frankel.ch/speaking/2023/); I'll finish this year with 4, including one online and one quickie. It has one beneficial side effect, though. Because I go to so few, I take the time to attend. On Tuesday, November 10<sup>th</sup>, I was lucky to attend and talk at the [Porto TechHub](https://portotechhub.com/) conference, for the 4th year.
 
 ![My Porto TechHub 2026 badge](badge.jpg)
 
