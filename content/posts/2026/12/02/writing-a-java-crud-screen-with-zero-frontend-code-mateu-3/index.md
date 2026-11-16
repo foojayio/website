@@ -1,6 +1,6 @@
 ---
 title: "Writing a Java CRUD Screen with Zero Frontend Code: Mateu 3.0"
-date: "2026-01-01"
+date: "2026-12-02"
 description: "From a Spring Boot app to a working CRUD with search, filters and validation, declared in Java only: how Mateu 3.0 does it and where it fits."
 authors:
   - "miguel-perez-colom"
@@ -9,7 +9,11 @@ categories:
   - "Java"
   - "Spring"
   - "Tutorials"
-related_posts: []
+related_posts:
+  - "paging-dto-projections-spring-data-jpa"
+  - "build-full-stack-web-app-in-java-with-webforj"
+  - "create-an-uber-clone-in-1-minute"
+  - "why-another-java-server"
 canonical: "https://medium.com/@miguelperezcolom/mateu-3-0-is-out-declare-a-business-ui-once-run-it-everywhere-82874c42ef2e"
 ---
 
@@ -231,17 +235,23 @@ That is the whole application. Run it with `mvn spring-boot:run` and open `http:
 
 The listing has a single search field. Typing and pressing Enter searches the text; clicking it opens a *Filter by* panel with one filter per field of the record:
 
-![The Products listing in the browser, with the Filter by panel open listing Id, Name, Price, Status and Added](products-filters-panel.jpg)
+{{< gallery cols="1" >}}
+products-filters-panel.jpg | The Products listing in the browser, with the Filter by panel open listing Id, Name, Price, Status and Added
+{{< /gallery >}}
 
 Each filter gets a widget that matches its type: a text input for strings, a multi-select for the enum (any of the picked values), a from–to range for the `LocalDate` (dates are ranges by default, because equality on an exact day is rarely what a user wants) and a min–max range for the price, because we asked for it with `@RangeFilter`. Every applied condition becomes a chip, and the URL carries it, so a filtered listing is a link you can share or bookmark:
 
-![The Products listing filtered to a price between 50 and 150 and status Available or Discontinued, showing two rows: Coffee grinder and Pour-over kettle](products-filtered.jpg)
+{{< gallery cols="1" >}}
+products-filtered.jpg | The Products listing filtered to a price between 50 and 150 and status Available or Discontinued, showing two rows: Coffee grinder and Pour-over kettle
+{{< /gallery >}}
 
 That screen is `/products?price_from=50&price_to=150&status=Available,Discontinued`, and opening the URL in a new tab restores exactly that state.
 
 *New* opens `/products/new`. Pressing *Save* on an empty form marks the invalid fields, moves the focus to the first of them, and saves nothing:
 
-![The New product form after pressing Save with empty fields: Id, Name and Status show "Cannot be empty" and an error toast lists the validation errors](products-validation.jpg)
+{{< gallery cols="1" >}}
+products-validation.jpg | The New product form after pressing Save with empty fields: Id, Name and Status show "Cannot be empty" and an error toast lists the validation errors
+{{< /gallery >}}
 
 Clicking a row opens the record page at `/products/{id}`, with an *Edit* button leading to `/products/{id}/edit`. Selecting rows enables *Delete*. All of these are real routes: reload the page and you land where you were.
 
@@ -383,7 +393,9 @@ It is also fair to compare it with tools that already exist. OpenXava and Jmix d
 
 `AutoCrud` is one of several *archetypes*. A class that extends `Wizard` becomes a multi-step process, `Dashboard` turns `MetricCard` fields into a KPI band and `@Panel` fields into tiles, and `Welcome`, `ItemOverview`, `Foldout`, `CollectionDetail`, `CalendarPage` and others cover most of what a back office needs. When none fits, you compose the screen from components yourself.
 
-![A dashboard in the Mateu Explorer: MetricCard fields become a KPI band and panels become tiles](explorer-dashboard.jpg)
+{{< gallery cols="1" >}}
+explorer-dashboard.jpg | A dashboard in the Mateu Explorer: MetricCard fields become a KPI band and panels become tiles
+{{< /gallery >}}
 
 Because the screen travels as JSON, the same declaration has several places to run:
 

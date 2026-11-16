@@ -1,6 +1,6 @@
 ---
 title: "SIGILL on Startup: How the JDK AOT Cache Crashed Axelix in Docker"
-date: "2026-01-01"
+date: "2026-12-01"
 description: "Why a JDK 25 AOT cache can crash with SIGILL on another CPU, and how Axelix builds portable multi-arch Docker images without cached adapters."
 authors:
   - "artemy-degtyarev"
@@ -8,7 +8,11 @@ image: "preview.jpg"
 categories:
   - "Java"
   - "Performance"
-related_posts: []
+related_posts:
+  - "ahead-of-time-method-profiling"
+  - "how-is-leyden-improving-java-performance-part-3-of-3"
+  - "java-server-work-before-startup"
+  - "what-makes-java-containers-secure"
 canonical: "https://axelix.io/blog/aot-cache-sigill"
 ---
 
