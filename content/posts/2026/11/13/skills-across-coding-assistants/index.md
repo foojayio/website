@@ -16,7 +16,7 @@ related_posts:
   - "context-is-a-budget-ai-coding-agents-team-process"
 ---
 
-I love Claude Code, but I use it so much that I regularly exhaust my weekly quota before the week ends. When that happens, I usually switch to other free-tier CLIs, _e.g._, Google Antigravity, GitHub Copilot, and, just last week, Mistral's Vibe. I really wanted to try Vibe to evaluate the feasibility of moving away from Claude Code in favor of a more sovereign solution.
+I love Claude Code, but I use it so much that I regularly exhaust my weekly quota before the week ends. When that happens, I usually switch to other free-tier CLIs, e.g., Google Antigravity, GitHub Copilot, and, just last week, Mistral's Vibe. I really wanted to try Vibe to evaluate the feasibility of moving away from Claude Code in favor of a more sovereign solution.
 
 Vibe only offers a single model by default, Mistral Medium 3.5. It hallucinated results badly, and I noticed it immediately. When I tried to understand what happened, I realized it hadn't triggered any of my lovingly crafted skills. The reason is that Claude Code stores skills in custom locations, in opposition to most other assistants.
 
