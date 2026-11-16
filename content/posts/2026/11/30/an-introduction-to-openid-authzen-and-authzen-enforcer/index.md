@@ -1,5 +1,6 @@
 ---
 title: "An Introduction to OpenID AuthZEN and authzen-enforcer, a Java SDK"
+date: "2026-11-30"
 description: "An introduction to OpenID AuthZEN, the standard API between PEPs and PDPs, with Keycloak as the PDP and authzen-enforcer, a Java SDK."
 canonical: "https://hakdogan.medium.com/an-introduction-to-openid-authzen-and-authzen-enforcer-a-java-sdk-933f2122bdd9"
 authors: ["huseyin-akdogan"]

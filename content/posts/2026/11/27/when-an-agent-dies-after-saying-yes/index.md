@@ -1,6 +1,6 @@
 ---
 title: "When an agent dies after saying yes"
-date: "2026-01-01"
+date: "2026-11-27"
 description: "A worker that dies after AGREE never sends its result. How the manager handles expired assignments, and what happens when a late response turns up anyway."
 authors:
   - "mauro-mura"
@@ -9,6 +9,11 @@ categories:
   - "Java"
   - "Design Patterns"
   - "Databases"
+related_posts:
+  - "agent-tool-calls-run-twice"
+  - "your-agents-dont-need-an-llm-to-negotiate"
+  - "idempotent-write-paths-keeping-an-integration-pipeline-correct-when-messages-repeat"
+  - "building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions"
 canonical: "https://bitautonomi.substack.com/p/when-an-agent-dies-after-saying-yes"
 ---
 
