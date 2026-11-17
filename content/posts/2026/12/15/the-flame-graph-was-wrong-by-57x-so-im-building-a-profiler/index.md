@@ -1,6 +1,6 @@
 ---
 title: "The flame graph was wrong by 57×. So I’m building a profiler."
-date: "2026-01-01"
+date: "2026-12-15"
 description: "When twenty operations run billions of times and none of them is hot, a flame graph tells you about HashMap and nothing you can act on."
 authors:
   - "andrey-minogin"
@@ -11,6 +11,9 @@ categories:
 canonical: "https://minogin.com/the-flame-graph-was-wrong-by-57x-so-im-building-a-profiler/"
 related_posts:
   - "optimizing-nanosecond-operations-when-the-cpu-cache-matters"
+  - "ahead-of-time-method-profiling"
+  - "unikernel-profiling-and-troubleshooting-jvm-on-nanos-unikernel"
+  - "runtime-code-analysis-in-the-age-of-vibe-coding"
 ---
 
 This is the first post about it — why we would ever need a new profiler, and where the existing tools fall short.

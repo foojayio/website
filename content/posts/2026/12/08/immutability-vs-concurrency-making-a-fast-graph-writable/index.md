@@ -1,6 +1,6 @@
 ---
 title: "Immutability vs concurrency: making a fast graph writable"
-date: "2026-01-01"
+date: "2026-12-08"
 description: "An in-memory graph is fast until you need to write to it."
 authors:
   - "andrey-minogin"
@@ -11,6 +11,9 @@ categories:
 canonical: "https://minogin.com/immutability-vs-concurrency-making-a-fast-graph-writable/"
 related_posts:
   - "optimizing-nanosecond-operations-when-the-cpu-cache-matters"
+  - "when-postgres-is-the-wrong-place-to-traverse-the-graph"
+  - "java-native-memory-access-modes"
+  - "your-tls-stack-is-lying-about-zero-copy"
 ---
 
 In [my last article](https://minogin.com/when-postgres-is-the-wrong-place-to-traverse-the-graph/) I promised to explain how the in-memory graph could be modified in real-time without losing high traversal throughput.

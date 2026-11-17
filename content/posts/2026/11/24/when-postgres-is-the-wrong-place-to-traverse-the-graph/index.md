@@ -1,6 +1,6 @@
 ---
 title: "When Postgres is the wrong place to traverse the graph"
-date: "2026-01-01"
+date: "2026-11-24"
 description: "Recursive CTEs hit an O(b^D) wall, and no amount of indexing or tuning moves it."
 authors:
   - "andrey-minogin"
@@ -11,6 +11,9 @@ categories:
 canonical: "https://minogin.com/when-postgres-is-the-wrong-place-to-traverse-the-graph/"
 related_posts:
   - "optimizing-nanosecond-operations-when-the-cpu-cache-matters"
+  - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"
+  - "the-148-ms-was-waiting-not-work"
+  - "5-jvm-heap-oom-patterns"
 ---
 
 Some performance problems are not query-optimization problems. You can index, rewrite, tune parameters, throw hardware at it — and still lose, because the work simply doesn’t belong in the database. The fix isn’t a better query. It’s moving the work somewhere else.

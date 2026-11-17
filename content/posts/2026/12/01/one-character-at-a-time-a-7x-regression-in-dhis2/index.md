@@ -1,6 +1,6 @@
 ---
 title: "One character at a time: a 7× regression in DHIS2"
-date: "2026-01-01"
+date: "2026-12-01"
 description: "Compression put 31× fewer bytes on the wire and made the request 27 seconds slower."
 authors:
   - "andrey-minogin"
@@ -11,6 +11,9 @@ categories:
 canonical: "https://minogin.com/one-character-at-a-time-a-7x-regression-in-dhis2/"
 related_posts:
   - "optimizing-nanosecond-operations-when-the-cpu-cache-matters"
+  - "the-148-ms-was-waiting-not-work"
+  - "streaming-large-file-uploads"
+  - "5-jvm-heap-oom-patterns"
 ---
 
 From time to time I voluntarily do performance audits of open source projects. DHIS2 is a health information system used by ministries of health in about seventy countries. It ships a bulk data export API, `dataValueSets`, that integrations lean on heavily — data warehouses, donor reporting, tracker-to-aggregate sync. I put it on a bench, on the public demo database, and started measuring.
