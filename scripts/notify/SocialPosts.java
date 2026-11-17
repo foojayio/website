@@ -80,6 +80,8 @@ public class SocialPosts {
     static final int BLUESKY_IMAGE_LIMIT = 900_000;
     static final int MAX_NEW = 5;
     static final int MAX_ARTICLE_CHARS = 8000;
+    static final int PAGE_FETCH_ATTEMPTS = 8;
+    static final long PAGE_FETCH_WAIT_MS = 30_000;
     static final String MODEL = "claude-sonnet-5-5";
 
     static final List<Platform> PLATFORMS = List.of(
@@ -166,8 +168,20 @@ public class SocialPosts {
         if (failures > 0) System.exit(1);
     }
 
+    /** The deploy job finishes before the edge and Cloudflare serve the new page, so a 404 is retried. */
+    static Document fetchPage(String url) throws Exception {
+        for (int attempt = 1; ; attempt++) {
+            try {
+                return Jsoup.connect(attempt == 1 ? url : url + "?retry=" + attempt).userAgent("foojay.io").timeout(15000).get();
+            } catch (org.jsoup.HttpStatusException e) {
+                if (e.getStatusCode() != 404 || attempt == PAGE_FETCH_ATTEMPTS) throw e;
+                Thread.sleep(PAGE_FETCH_WAIT_MS);
+            }
+        }
+    }
+
     static void send(Post p, String claudeKey, String token, String user, boolean dryRun) throws Exception {
-        Document page = Jsoup.connect(p.link()).userAgent("foojay.io").timeout(15000).get();
+        Document page = fetchPage(p.link());
         List<Author> authors = authors(page);
         String article = articleText(page, p);
 
