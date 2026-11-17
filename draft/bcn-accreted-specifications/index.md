@@ -6,13 +6,14 @@ authors:
 # BCN tags: design patterns, ontology, specification, technical debt
 categories: [Java]
 image: ""
-canonical: "https://bytecode.news/posts/2026/11/2026/11/accreted-specifications"
+canonical: "https://bytecode.news/posts/2026/11/accreted-specifications"
 ---
 
 I was thinking about the least pleasant parts of a codebase I work on, and a truly sticky statement[^1] came to mind: "Accreted design is going to be the worst part of your system." If you'll pardon me, it really is a good statement... and it's actually wrong.
 
-!!! note
-    Accretion is from Steve McConnell's _Code Complete_,[^4] and he meant it as a neutral-to-positive description of an architecture: an oyster builds a pearl a layer at a time around something that's already there. Software grows the same way: a working core, then layers added as the system meets conditions nobody specified up front. That's how working software is supposed to grow in his model. The word picked up a sneer somewhere: it's understandable, but isn't quite fair.
+{{< note >}}
+Accretion is from Steve McConnell's _Code Complete_,[^4] and he meant it as a neutral-to-positive description of an architecture: an oyster builds a pearl a layer at a time around something that's already there. Software grows the same way: a working core, then layers added as the system meets conditions nobody specified up front. That's how working software is supposed to grow in his model. The word picked up a sneer somewhere: it's understandable, but isn't quite fair.
+{{< /note >}}
 
 Here's how accreted design happens: you build a system around expectations, like "A customer sends a file to this endpoint." Then it turns out the customers don't send the files the way you expected: they compress them... in multiple ways. And the format isn't CSV, but TOML, or JSON, or JSONL. A customer uses an internal name for a header. Laws change, and thus some fields gain validations they didn't have - or lose validations based on timestamps. Some records have more fields than expected based on other field values, and the customer didn't understand that exporting Excel wasn't the same as... Each layer is a requirement, delivered by reality instead of by a product owner. The accretion is the system learning what the world is like, its first contact with reality.
 
