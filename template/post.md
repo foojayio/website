@@ -90,6 +90,7 @@ categories:
   - "Java"
 
 # Slugs (folder names) of related foojay articles to show at the bottom. 
+# They are grouped per 3 on the page, so 3 or 6 is best. But this isn't a hard limit.
 # Optional.
 related_posts: []
 

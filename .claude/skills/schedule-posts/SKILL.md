@@ -48,7 +48,7 @@ Two things the validator does not check, so check them yourself and propose impr
   `image: "header.jpg"`. Mention in the PR comment that the header was generated, so the
   author can supply a better one.
 * No duplicate header image: the layout renders `image` as a large hero above the content, so the body must not open with that same image (`![...](same-file)` as the first line, or the first file in a leading gallery). Delete it from the body, but keep any other images.
-* `related_posts`: four or more recent, genuinely related posts reads best. This
+* `related_posts`: up to six recent, genuinely related posts reads best. This
   is a house preference, not a rule that blocks a merge. Find related posts if none are included.
 
 ### Remove the frontmatter comments
