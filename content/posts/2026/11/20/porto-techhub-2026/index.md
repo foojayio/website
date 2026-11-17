@@ -1,6 +1,6 @@
 ---
 title: "Porto TechHub 2026"
-date: "2026-11-19"
+date: "2026-11-20"
 description: "Notes from Porto TechHub 2026: Embabel and agentic AI planning, a comparison of Spring AI, LangChain4j, and Embabel, and the new defaults in Git 3."
 canonical: "https://blog.frankel.ch/porto-techhub-2026/"
 authors:
@@ -80,26 +80,26 @@ The talk compares Spring AI, LangChain4j, and Embabel through the lens of an AI 
     <tr>
       <th>Deterministic workflows</th>
       <td>Advisors &amp; plain Java code</td>
-      <td><span style="color: green">Workflow agents</span></td>
-      <td><span style="color: green">@State and planner</span></td>
+      <td>✅ Workflow agents</td>
+      <td>✅ @State and planner</td>
     </tr>
     <tr>
       <th>Pure agents</th>
-      <td><span style="color: green">Tool calling loop</span></td>
-      <td><span style="color: green">Supervisor agent</span></td>
-      <td><span style="color: green">Built in</span></td>
+      <td>✅ Tool calling loop</td>
+      <td>✅ Supervisor agent</td>
+      <td>✅ Built in</td>
     </tr>
     <tr>
       <th>Memory and state</th>
-      <td><span style="color: green">ChatMemory advisors</span></td>
-      <td><span style="color: green">AgenticScope</span></td>
-      <td><span style="color: green">Blackboard</span></td>
+      <td>✅ ChatMemory advisors</td>
+      <td>✅ AgenticScope</td>
+      <td>✅ Blackboard</td>
     </tr>
     <tr>
       <th>Agentic patterns</th>
       <td>Experimental</td>
-      <td><span style="color: green">Built in, some experimental</span></td>
-      <td><span style="color: green">Built in, some experimental</span></td>
+      <td>✅ Built in, some experimental</td>
+      <td>✅ Built in, some experimental</td>
     </tr>
     <tr>
       <th>Observability</th>
@@ -111,18 +111,18 @@ The talk compares Spring AI, LangChain4j, and Embabel through the lens of an AI 
       <th>Testing</th>
       <td>Mocks, evaluators</td>
       <td>Mostly manual</td>
-      <td><span style="color: green">Advanced testing support</span></td>
+      <td>✅ Advanced testing support</td>
     </tr>
     <tr>
       <th><abbr title="Model Context Protocol">MCP</abbr></th>
-      <td><span style="color: green">Client and server</span></td>
-      <td><span style="color: red">No HTTP server support</span></td>
-      <td><span style="color: green">Client and server</span></td>
+      <td>✅ Client and server</td>
+      <td>❌ No HTTP server support</td>
+      <td>✅ Client and server</td>
     </tr>
     <tr>
       <th><abbr title="Agent to Agent">A2A</abbr></th>
       <td>Experimental</td>
-      <td><span style="color: red">Client only</span></td>
+      <td>❌ Client only</td>
       <td>Experimental</td>
     </tr>
     <tr>
@@ -135,10 +135,10 @@ The talk compares Spring AI, LangChain4j, and Embabel through the lens of an AI 
         </ul>
       </td>
       <td>Agentic experimental</td>
-      <td><span style="color: green">GA, plus some experimental features</span></td>
+      <td>✅ GA, plus some experimental features</td>
     </tr>
     <tr>
-      <td colspan="4" align="right"><em>Legend</em>: <span style="color: green">Built-in</span> | Experimental or some effort | <span style="color: red">Limited</span></td>
+      <td colspan="4" align="right"><em>Legend</em>: ✅ Built-in | Experimental or some effort | ❌ Limited</td>
     </tr>
   </tbody>
 </table>
