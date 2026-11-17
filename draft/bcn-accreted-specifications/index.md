@@ -5,7 +5,7 @@ authors:
   - "jottinger"
 # BCN tags: design patterns, ontology, specification, technical debt
 categories: [Java]
-image: ""
+image: "foojay-social-card.png"
 canonical: "https://bytecode.news/posts/2026/11/accreted-specifications"
 ---
 
