@@ -123,8 +123,9 @@ void handleEgress(Input input, Destination destination) {
 
 In this case, the flow in `handleEgress()` is *constant*[^6]. We determine a policy that maps the input to the destination - and that encompasses the rules, permissions, transformations, even the notification mechanism. The permissions and transformations can be defaults and identities - things that do nothing - but if they need to do anything special, they can - and we have a system in place that can accrete new behavior in the *policies*, where such behavior belongs.
 
-!!! note "Transformations"
-    Note the `AcmeCsvToS3Policy` - it has both a *filter* - `PiiFilter` - and a *transformer*, `CsvToXml`. Here, they're both instantiated on the fly, and they're order-dependent; we could do some work to ensure that filters run *before* transformers, but golly, people, this is *made-up example code*. In a real living system we would probably separate transformations out from filters and enforce order, and in *my* real systems I do separate the components by type and priority like that. See, even article content accretes. It's inescapable.
+{{< note >}}
+Note the `AcmeCsvToS3Policy` - it has both a *filter* - `PiiFilter` - and a *transformer*, `CsvToXml`. Here, they're both instantiated on the fly, and they're order-dependent; we could do some work to ensure that filters run *before* transformers, but golly, people, this is *made-up example code*. In a real living system we would probably separate transformations out from filters and enforce order, and in *my* real systems I do separate the components by type and priority like that. See, even article content accretes. It's inescapable.
+{{< /note >}}
 
 And if we should discover more - the whole reason complexity accreted in the first place - well, the `EgressPolicy` is the natural place to put such operations. The handler doesn't increase in complexity, because those operations would be called just like the `transform()` method is, with potential no-ops.
 
