@@ -80,6 +80,8 @@ public class SocialPosts {
     static final int BLUESKY_IMAGE_LIMIT = 900_000;
     static final int MAX_NEW = 5;
     static final int MAX_ARTICLE_CHARS = 8000;
+    // The whole text travels in the "Open in Reddit" URL, and Slack cut a ~1750-character one short.
+    static final int REDDIT_MAX = 900;
     static final int PAGE_FETCH_ATTEMPTS = 8;
     static final long PAGE_FETCH_WAIT_MS = 30_000;
     static final String MODEL = "claude-sonnet-5-5";
@@ -96,7 +98,7 @@ public class SocialPosts {
                             + "Don't open with a hook or rhetorical question like `If you've ever wondered...`, `Ever wondered...`, "
                             + "`Have you ever...` or `Imagine...`. Start directly with what the article is about, in a plain and "
                             + "factual tone, like a colleague sharing a link."),
-            new Platform("reddit", "Reddit", 1500,
+            new Platform("reddit", "Reddit", REDDIT_MAX,
                     "The first line is the post title (max 150 characters, no hashtags), then an empty line, then the body: "
                             + "a short plain summary of what the article covers, ending with the link.\n"
                             + "No hashtags, no @mentions (give the author's plain name), no markdown headings and no emoji.\n"
@@ -230,7 +232,7 @@ public class SocialPosts {
                             .append(encode(parts[0].strip())).append("&text=")
                             .append(encode(parts.length > 1 ? parts[1].strip() : "")).append("|Open in Reddit>");
                 }
-                message.append("\n```\n").append(text.replace("```", "'''")).append("\n```\n");
+                message.append("\n");
             }
         }
 
