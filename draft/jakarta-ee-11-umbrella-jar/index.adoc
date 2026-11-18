@@ -9,7 +9,8 @@ categories:
   - "Jakarta EE"
   - "Java"
   - "Dependency Management"
-related_posts: []
+related_posts:
+  - "batch-processing-mongodb-jakarta-ee-customer-segmentation"
 ---
 
 _This work was sponsored by https://flowlogix.com[Flow Logix]._
@@ -115,13 +116,13 @@ NOTE: If you added `<type>pom</type>` as a workaround for EE 10, it still works 
 
 Since https://github.com/jakartaee/jakartaee-api/pull/139[PR #139], the Platform depends on the Web Profile, and the Web Profile depends on the Core Profile, exactly as the specifications describe them. The duplicated dependency lists were removed, along with the custom `+*-api.cp.version+` properties and unnecessary `<optional>` tags. This PR removed 129 lines of POM and added 48.
 
-The result follows normal Maven resolution rules. If you combine Jakarta EE and MicroProfile, you get one consistent Core Profile version. If you need to override the version of a single API, standard `dependencyManagement` does it. The same PR made javadoc errors fail the build instead of silently producing broken javadoc.
+The result follows normal Maven resolution rules. If you combine Jakarta EE and MicroProfile, you get one Core Profile version for the whole build, and it is the one that comes from the dependency you declare first. If you need to override the version of a single API, standard `dependencyManagement` does it. The same PR made javadoc errors fail the build instead of silently producing broken javadoc.
 
 === Ready for a Core Profile that goes its own way
 
 https://github.com/m-reza-rahman[Reza Rahman] has pointed out that the Core Profile may diverge in the future. It serves a different audience than the Web Profile and the full Platform, and at some point it may no longer be the base that the other two build on. It could include something that the Web Profile and the Platform do not want.
 
-This work fully supports that. When it becomes a requirement, it is a few lines of POM. An API that belongs only to the Core Profile can be marked `<optional>` there, so it does not flow into the Web Profile. Or the Web Profile can add an `<exclusion>` for it on its Core Profile dependency. Either way the profiles stay true about what they contain, and nobody has to restructure the build or bring back copied dependency lists.
+This work fully supports that. When it becomes a requirement, it is a few lines of POM. An API that belongs only to the Core Profile can be kept out of the Web Profile with an `<exclusion>` on the Web Profile's Core Profile dependency. The profiles stay true about what they contain, and nobody has to restructure the build or bring back copied dependency lists.
 
 === The rest of the EE 11 work
 
@@ -134,9 +135,11 @@ Done over the following two years:
 
 == What you need to do
 
-Nothing. That was the point.
+For the changes described in this article, nothing. That was the point.
 
 Keep the same dependency, change the version to `11.0.0`, and remove any workarounds you added for EE 10.
+
+This covers only the platform dependency itself. Jakarta EE 11 has other changes, such as removed APIs, that may need work in your application. Those are outside the scope of this article.
 
 == Why this matters
 
