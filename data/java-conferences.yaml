@@ -1075,8 +1075,8 @@
   hybrid: false
   city: Kraków
   country: Poland
-  latitude: 50.0469432
-  longitude: 19.9971534
+  latitude: 50.0619474
+  longitude: 19.9368564
   cfp_url: https://sessionize.com/kotlinconf-2027
   cfp_closes: '2026-11-27'
 - slug: jcon-europe-2027

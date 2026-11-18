@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-17T09:19:25Z",
+  "generatedAt" : "2026-11-18T08:38:43Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -22,7 +22,15 @@
     "jug" : "AlpesJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/alpesjug/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Wrap, Reshape, or Redesign : adapter vos APIs existantes à un monde d’agents",
+      "url" : "https://www.meetup.com/alpesjug/events/317468244/",
+      "startTime" : "2026-12-01T19:00:00+01:00",
+      "endTime" : "2026-12-01T21:00:00+01:00",
+      "venue" : "Salesforce",
+      "city" : "Meylan",
+      "online" : false
+    } ]
   }, {
     "slug" : "amsterdam-java-user-group",
     "name" : "Amsterdam Java User Group",
@@ -30,14 +38,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG Meetup at Flagsmith",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048165/",
-      "startTime" : "2026-11-17T18:00:00+01:00",
-      "endTime" : "2026-11-17T21:00:00+01:00",
-      "venue" : "Plantage Kerklaan 35",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
       "title" : "Amsterdam JUG Meetup at Metafactory",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048407/",
       "startTime" : "2026-11-24T18:00:00+01:00",
@@ -89,14 +89,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/atlantajug/",
     "events" : [ {
-      "title" : "Knowns and Unknowns: Testing AI-Generated Code",
-      "url" : "https://www.meetup.com/atlantajug/events/316430418/",
-      "startTime" : "2026-11-17T18:30:00-05:00",
-      "endTime" : "2026-11-17T20:30:00-05:00",
-      "venue" : "Roam",
-      "city" : "Atlanta",
-      "online" : false
-    }, {
       "title" : "Refactoring to Modernize Java Applications Using AI.",
       "url" : "https://www.meetup.com/atlantajug/events/316436426/",
       "startTime" : "2026-12-15T18:30:00-05:00",
@@ -208,8 +200,8 @@
       "url" : "https://www.meetup.com/java-vienna/events/316166142/",
       "startTime" : "2026-12-03T18:00:00+01:00",
       "endTime" : "2026-12-03T21:00:00+01:00",
-      "venue" : null,
-      "city" : "Vienna",
+      "venue" : "Posedio GmbH",
+      "city" : "Wien",
       "online" : false
     }, {
       "title" : "January Meetup",
@@ -357,15 +349,7 @@
     "jug" : "BonnJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Bonn/",
-    "events" : [ {
-      "title" : "JUG Bonn #51: Architekturen verständlicher machen & Property-Based Testing",
-      "url" : "https://www.meetup.com/jug-bonn/events/317242775/",
-      "startTime" : "2026-11-17T18:30:00+01:00",
-      "endTime" : "2026-11-17T21:30:00+01:00",
-      "venue" : "Conet",
-      "city" : "Bonn",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "jugbremen",
     "name" : "Java User Group (JUG) Bremen/Oldenburg",
@@ -373,10 +357,10 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jugbremen/",
     "events" : [ {
-      "title" : "Es geht wo anders weiter",
-      "url" : "https://www.meetup.com/jugbremen/events/317383624/",
-      "startTime" : "2026-11-17T19:00:00+01:00",
-      "endTime" : "2026-11-17T19:30:00+01:00",
+      "title" : "Das war's? Nicht ganz:",
+      "url" : "https://www.meetup.com/jugbremen/events/317478632/",
+      "startTime" : "2026-11-23T17:00:00+01:00",
+      "endTime" : "2026-11-23T17:30:00+01:00",
       "venue" : null,
       "city" : null,
       "online" : true
@@ -480,14 +464,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "Backend Entwicklung mit Rust",
-      "url" : "https://www.meetup.com/jug-hamburg/events/317162786/",
-      "startTime" : "2026-11-17T19:00:00+01:00",
-      "endTime" : "2026-11-17T20:30:00+01:00",
-      "venue" : "Hamburger Berater Team GmbH",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
       "title" : "API-Tests, Contract-Tests, Consumer-driven Contract-Tests – Einstieg & Überblick",
       "url" : "https://www.meetup.com/jug-hamburg/events/317239033/",
       "startTime" : "2026-11-26T19:00:00+01:00",
@@ -870,15 +846,7 @@
     "jug" : "MiamiJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/miami-java-user-group/",
-    "events" : [ {
-      "title" : "Next-level AI: Upgrade your skills with agents, MCP, and more",
-      "url" : "https://www.meetup.com/miami-java-user-group/events/317269198/",
-      "startTime" : "2026-11-17T18:30:00-05:00",
-      "endTime" : "2026-11-17T20:30:00-05:00",
-      "venue" : null,
-      "city" : null,
-      "online" : true
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "montreal-jug",
     "name" : "Montréal JUG - La communauté Java de Montréal",
@@ -1040,15 +1008,7 @@
     "jug" : "ValenciaJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/ValenciaJUG/",
-    "events" : [ {
-      "title" : "Lightning Talks ⚡",
-      "url" : "https://www.meetup.com/valenciajug/events/317024529/",
-      "startTime" : "2026-11-17T18:30:00+01:00",
-      "endTime" : "2026-11-17T20:30:00+01:00",
-      "venue" : "UPV - Escuela Técnica Superior de Ingeniería Informática ETSINF",
-      "city" : "València",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "VirtualJUG",
     "name" : "Virtual Java User Group",

@@ -81,6 +81,71 @@
     "avatar" : "https://yt3.googleusercontent.com/lBBGPlk8vAWzHrZnLSdLptAvZi4N6rR3UYMwrFD62vQ5XdG-qkYtVDLyWETTrId7Dn_CqDeJUw=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "kjc19Z9aN-E",
+    "channel" : "JetBrainsTV",
+    "title" : "Cross-Database Queries in DataGrip",
+    "published" : "2026-11-18T03:51:46+00:00"
+  }, {
+    "id" : "zuXWzeFxBlw",
+    "channel" : "JetBrainsTV",
+    "title" : "Opening Keynote",
+    "published" : "2026-11-17T22:10:17+00:00"
+  }, {
+    "id" : "b0iCLZyGsOU",
+    "channel" : "JetBrainsTV",
+    "title" : "Dependency Assistant: An IntelliJ Plugin That Started With a Prompt",
+    "published" : "2026-11-17T22:10:14+00:00"
+  }, {
+    "id" : "8u0Wk-gm2DQ",
+    "channel" : "JetBrainsTV",
+    "title" : "Building Language Plugins With the Native LSP API",
+    "published" : "2026-11-17T22:10:10+00:00"
+  }, {
+    "id" : "iYQdxxK4BAc",
+    "channel" : "JetBrainsTV",
+    "title" : "Integrating a Web-Based Profiler Into IntelliJ IDEA",
+    "published" : "2026-11-17T22:10:07+00:00"
+  }, {
+    "id" : "kN64x0pMjZc",
+    "channel" : "JetBrainsTV",
+    "title" : "Your Plugin's Second Service: Architecture for Integrations That Grow",
+    "published" : "2026-11-17T22:10:04+00:00"
+  }, {
+    "id" : "0q7mBIqjj_4",
+    "channel" : "JetBrainsTV",
+    "title" : "EelApi: Taking Your Plugin From Local to WSL and Dev Containers",
+    "published" : "2026-11-17T22:10:00+00:00"
+  }, {
+    "id" : "jRBscOi1RUk",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session with Jakub and Patrick",
+    "published" : "2026-11-17T21:01:48+00:00"
+  }, {
+    "id" : "9YTaCRS2X7s",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session with Jakub and Patrick",
+    "published" : "2026-11-17T21:01:47+00:00"
+  }, {
+    "id" : "vhb9bzJ-aRA",
+    "channel" : "anahata108",
+    "title" : "Tracking Real Asteroid Orbits in Pure JavaFX with NetBeans",
+    "published" : "2026-11-17T18:21:59+00:00"
+  }, {
+    "id" : "zsnSF5vqFr8",
+    "channel" : "Kotlin",
+    "title" : "Build your app idea with Kotlin Toolchain and Multiplatform",
+    "published" : "2026-11-17T14:51:48+00:00"
+  }, {
+    "id" : "fHl9OMLe7Lg",
+    "channel" : "virtualJUG",
+    "title" : "Solving the challenges of Java ecosystems in the AI world by Mikhail Polivakha",
+    "published" : "2026-11-16T18:34:46+00:00"
+  }, {
+    "id" : "iLsLhqUOOPw",
+    "channel" : "java",
+    "title" : "Why It Takes 3000 Commits to Bring Valhalla’s Value Objects to the JDK",
+    "published" : "2026-11-16T10:45:10+00:00"
+  }, {
     "id" : "4U3LP_HYmQs",
     "channel" : "coffeesoftware",
     "title" : "Brian Sam-Bodden on a Bootiful Podcast",
@@ -388,7 +453,7 @@
   }, {
     "id" : "8n7WONyX0yk",
     "channel" : "FrankDelporte",
-    "title" : "Click Any Note and Fly Through the Score in 3D: Sheet Music and LilyPond in Java (JavaFX)",
+    "title" : "Click Any Note and Fly Through the Score in 3D: Sheet Music and LilyPond in Java (Sheetmusic4J)",
     "published" : "2026-10-22T14:27:04+00:00"
   }, {
     "id" : "tRWMbwnl1ec",
@@ -903,7 +968,7 @@
   }, {
     "id" : "b9dP2HHtKkQ",
     "channel" : "FrankDelporte",
-    "title" : "Show Guitar Pro and ABC Sheet Music in Your Java App (JavaFX)",
+    "title" : "Show Guitar Pro and ABC Sheet Music in Your Java/JavaFX App (Sheetmusic4J)",
     "published" : "2026-07-30T08:30:23+00:00"
   }, {
     "id" : "hKs1l3uEH34",
@@ -918,7 +983,7 @@
   }, {
     "id" : "D2uaHpvC9ao",
     "channel" : "FrankDelporte",
-    "title" : "Show Interactive Sheet Music in a Java App (MusicXML + JavaFX)",
+    "title" : "Show Interactive Sheet Music in a Java and JavaFX App (MusicXML - Sheetmusic4J)",
     "published" : "2026-07-24T11:31:22+00:00"
   }, {
     "id" : "78Jm2sR33fI",
@@ -1181,5 +1246,5 @@
     "title" : "MCL #002: Gavin King & Hibernate 6.3",
     "published" : "2023-09-08T04:11:53+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "djH8eWBTlCE", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "KHW61Pw3vn8", "KQBygmRGtTM", "NRGlFwlzw30", "N_djt-XsdZs", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "djH8eWBTlCE", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }
