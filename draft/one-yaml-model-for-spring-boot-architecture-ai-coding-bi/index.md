@@ -47,7 +47,7 @@ The pet store's domain is about 180 lines of YAML under `src/main/resources/blue
         delete:  CANCELLED
 ```
 
-One line is one field. The `meta` line says the order is an aggregate root exposed over REST, owned by the customer who placed it, and readable and cancellable only by that owner. `states` is its lifecycle. Nothing here names a framework, a package layout or a persistence API. That is the point.
+One line is one field. The `meta` line says the order is an aggregate root exposed over REST, owned by the customer who placed it, and readable and cancellable only by that owner. `states` is its lifecycle. The relation marks borrow JPA's names (`@ManyToOne`, `@Embedded`), and `@jpa:Version` passes a JPA annotation straight through, but nothing here chooses a package layout, a layer structure, a language or a Spring Boot version. That is the point.
 
 ## 1. Architecture and technology change: regenerate, don't rewrite
 
@@ -143,7 +143,18 @@ The rules are generated, so they cannot be forgotten. The `states` block becomes
     }
 ```
 
-A customer who tries to cancel someone else's order gets 404, not 403, so the order's existence does not leak. With the sample running, these are the responses I got:
+A customer who tries to cancel someone else's order gets 404, not 403, so the order's existence does not leak. With the sample running (see "Try it" below), these are the responses I got. The order body and the sign-in first:
+
+```bash
+cat > order.json <<'EOF'
+{"lines":[{"itemId":1000,"quantity":2,"unitCost":0.01}],
+ "creditCard":{"creditCardNumber":"4111111111111111","creditCardType":"VISA","creditCardExpDate":"12/30"}}
+EOF
+# Sign in as the demo customer; the session cookie goes to cookies.txt
+curl -c cookies.txt -X POST localhost:18080/api/petstore/customer/signin -H 'Content-Type: application/json' -d '{"login":"user","password":"user"}'
+```
+
+Then:
 
 ```bash
 # Not signed in
@@ -152,7 +163,8 @@ curl -i -X POST localhost:18080/api/petstore/purchaseOrder -H 'Content-Type: app
 
 # Signed in as the customer. order.json sends "unitCost":0.01; the server ignores it
 curl -b cookies.txt -X POST localhost:18080/api/petstore/purchaseOrder -H 'Content-Type: application/json' -d @order.json
-# {"customerId":2,...,"lines":[{"itemId":1000,"quantity":2,"subTotal":20.00,"unitCost":10.00}],"status":"PLC","total":20.63,...}
+# {"customerId":2,...,"lines":[{"itemId":1000,"quantity":2,"subTotal":20.00,"unitCost":10.00}],"orderId":"...","status":"PLC","total":20.63,...}
+ID=...   # the orderId from that response
 
 curl -i -b cookies.txt -X POST localhost:18080/api/petstore/purchaseOrder/$ID/ship
 # 403 {"detail":"ship PurchaseOrder is for the administrator",...}
