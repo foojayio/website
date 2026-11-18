@@ -1,0 +1,165 @@
+---
+title: "Jakarta EE 11 No Longer Has an Umbrella JAR"
+date: "2026-01-01"
+description: "The Jakarta EE umbrella JAR and its duplicate classes, JPMS split packages and Maven surprises are gone in EE 11. Your dependency stays the same."
+authors:
+  - "lenny-primak"
+image: "jakarta-ee-11-no-umbrella-jar.jpg"
+categories:
+  - "Jakarta EE"
+  - "Java"
+  - "Dependency Management"
+related_posts: []
+---
+
+_This work was sponsored by https://flowlogix.com[Flow Logix]._
+
+If you have built a Jakarta EE application, you have almost certainly written this:
+
+[source,xml]
+----
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-api</artifactId>
+    <version>11.0.0</version>
+    <scope>provided</scope>
+</dependency>
+----
+
+For years this dependency gave you the "umbrella JAR": one big JAR file with a copy of every API class in the platform. It was also one of the standard complaints about Jakarta EE. It was bloated, it broke the Java module system, and it fought with other dependencies.
+
+In Jakarta EE 11, the umbrella JAR is gone. Not smaller. Gone. The dependency above still works exactly as before, but there is no longer a JAR full of API classes behind it. This article explains what was wrong, what replaced it, and why you did not have to change anything. I did this work in the https://github.com/jakartaee/jakartaee-api[jakartaee-api] project between 2023 and 2025.
+
+== The debate that would not end
+
+If you followed enterprise Java over the last several years, you heard about the umbrella JAR constantly. On https://www.pubhouse.net/podcasts/the-stackd-podcast/[The Stackd Podcast], in blog posts, in conference hallways and across social media, the community spent many hundreds of hours on the same questions:
+
+* What exactly is included in the umbrella JAR, and what should be?
+* Why is it all or nothing?
+* Why do we have to wait for everything just to get something? One specification is updated, but nobody can use it until the whole platform ships.
+* Should the platform have more profiles, fewer profiles, or no umbrella at all?
+
+These were fair questions. They also had the same root cause. The umbrella was treated as a thing in its own right, one big artifact that had to be assembled, argued over and released as a unit. As long as it was a JAR full of classes, that was true.
+
+Then, quietly, the conversation stopped. Not because anyone won the argument, but because the thing being argued about is no longer there.
+
+== What was wrong in Jakarta EE 10
+
+Beyond the debate, the Jakarta EE 10 umbrella JAR had concrete technical problems. It did two things at once:
+
+. It contained a copy of every API class in the platform. `jakarta.jakartaee-api-10.0.0.jar` holds 2,440 class files.
+. It also declared every individual specification JAR as a transitive dependency.
+
+So every API class was on your classpath twice. Once inside the umbrella JAR, and once more in `jakarta.servlet-api`, `jakarta.persistence-api`, and the rest:
+
+.Output of `mvn dependency:tree` with Jakarta EE 10
+----
+[INFO] +- jakarta.platform:jakarta.jakartaee-api:jar:10.0.0:provided
+[INFO] |  +- jakarta.platform:jakarta.jakartaee-web-api:jar:10.0.0:provided
+[INFO] |  |  +- jakarta.servlet:jakarta.servlet-api:jar:6.0.0:provided
+[INFO] |  |  +- jakarta.faces:jakarta.faces-api:jar:4.0.1:provided
+[INFO] |  |  +- jakarta.persistence:jakarta.persistence-api:jar:3.1.0:provided
+[INFO] |  |  ...
+[INFO] |  +- jakarta.jms:jakarta.jms-api:jar:3.1.0:provided
+[INFO] |  +- jakarta.mail:jakarta.mail-api:jar:2.1.0:provided
+[INFO] |  ...
+----
+
+That caused big problems, which I reported in https://github.com/jakartaee/jakartaee-api/issues/133[issue #133]:
+
+* *JPMS split packages.* The same package appeared in two JARs. Any project with a `module-info.java` failed to compile, because the module system does not allow that.
+* *OSGi deployment issues*, for the same reason.
+* *Duplicate classes*, which confuse debuggers, IDEs and static analysis tools, and make it unclear which copy the compiler actually used.
+
+The Web Profile and Core Profile artifacts had the same problem, each with its own copy of the classes.
+
+There was a second problem, described in https://github.com/jakartaee/jakartaee-api/issues/138[issue #138]. The Web Profile POM did not depend on the Core Profile. It copied and pasted the Core Profile dependency list instead. MicroProfile depends on the Core Profile artifact, so mixing Jakarta EE and MicroProfile in one build could silently give you two different versions of the same APIs, with no warning from Maven.
+
+The common workaround was to add `<type>pom</type>` to the Jakarta EE dependency, so Maven would skip the JAR and use only the list of specification JARs. The other option was to give up on the umbrella and list each API by hand. Neither is something a newcomer should have to know.
+
+== What changed in Jakarta EE 11
+
+=== There is no umbrella JAR anymore
+
+The umbrella should never have been a JAR of classes. It should be a list of dependencies and nothing else.
+
+Since https://github.com/jakartaee/jakartaee-api/pull/137[PR #137], that's exactly what happened. `jakarta.jakartaee-api` is now just a POM that names the specification JARs as dependencies. Each API class exists in exactly one place: the JAR published by its own specification. The same is true for `jakarta.jakartaee-web-api` and `jakarta.jakartaee-core-api`.
+
+With one copy of each class, the split package problem is also gone. The dependency works in modular projects and on current JDKs without workarounds.
+
+It also answers the old questions. What is included? Read the POM, or run `mvn dependency:tree`. It is a plain list of specification JARs and versions. Is it all or nothing? No. Each API is an ordinary Maven dependency that you can exclude or override in your own build. Nothing is baked into a single file anymore, so there is nothing to wait for the umbrella to repackage. Your runtime still decides which specification versions it supports, but the API side is no longer the bottleneck.
+
+=== Why a JAR file is still published
+
+If you look on Maven Central, you will still find `jakarta.jakartaee-api-11.0.0.jar`. Open it and you will see a manifest, a license file and the Maven metadata. There is not a single class in it.
+
+It is there for one reason. Maven assumes a dependency is a JAR unless you tell it otherwise. If the platform published only a POM, every application would have to declare it like this:
+
+[source,xml]
+----
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-api</artifactId>
+    <version>11.0.0</version>
+    <type>pom</type>     <!--1-->
+    <scope>provided</scope>
+</dependency>
+----
+<1> Without the placeholder JAR, this line would be required.
+
+Every existing build, tutorial, archetype and book would be wrong overnight. The empty placeholder JAR lets the plain dependency you already have keep working. It is a compatibility detail of Maven, not an umbrella JAR.
+
+NOTE: If you added `<type>pom</type>` as a workaround for EE 10, it still works with EE 11. You just do not need it anymore.
+
+=== The profiles now build on each other
+
+Since https://github.com/jakartaee/jakartaee-api/pull/139[PR #139], the Platform depends on the Web Profile, and the Web Profile depends on the Core Profile, exactly as the specifications describe them. The duplicated dependency lists were removed, along with the custom `+*-api.cp.version+` properties and unnecessary `<optional>` tags. This PR removed 129 lines of POM and added 48.
+
+The result follows normal Maven resolution rules. If you combine Jakarta EE and MicroProfile, you get one consistent Core Profile version. If you need to override the version of a single API, standard `dependencyManagement` does it. The same PR made javadoc errors fail the build instead of silently producing broken javadoc.
+
+=== Ready for a Core Profile that goes its own way
+
+https://github.com/m-reza-rahman[Reza Rahman] has pointed out that the Core Profile may diverge in the future. It serves a different audience than the Web Profile and the full Platform, and at some point it may no longer be the base that the other two build on. It could include something that the Web Profile and the Platform do not want.
+
+This work fully supports that. When it becomes a requirement, it is a few lines of POM. An API that belongs only to the Core Profile can be marked `<optional>` there, so it does not flow into the Web Profile. Or the Web Profile can add an `<exclusion>` for it on its Core Profile dependency. Either way the profiles stay true about what they contain, and nobody has to restructure the build or bring back copied dependency lists.
+
+=== The rest of the EE 11 work
+
+Done over the following two years:
+
+* Added Jakarta Data to the platform dependencies (https://github.com/jakartaee/jakartaee-api/pull/146[#146], https://github.com/jakartaee/jakartaee-api/pull/147[#147])
+* Removed the optional XML Binding, XML Web Services and SOAP APIs that are no longer part of EE 11 (https://github.com/jakartaee/jakartaee-api/pull/163[#163])
+* Removed Faces workarounds and fixed the javadoc module path (https://github.com/jakartaee/jakartaee-api/pull/164[#164], https://github.com/jakartaee/jakartaee-api/pull/174[#174])
+* Made the release process simpler, so the BOM and each profile can be deployed separately (https://github.com/jakartaee/jakartaee-api/pull/144[#144], https://github.com/jakartaee/jakartaee-api/pull/193[#193])
+
+== What you need to do
+
+Nothing. That was the point.
+
+Keep the same dependency, change the version to `11.0.0`, and remove any workarounds you added for EE 10.
+
+== Why this matters
+
+None of this is a headline feature. There is no new annotation and no new API. But the first thing every Jakarta EE developer touches is that one dependency, and it now does exactly what you would expect. "The umbrella JAR is bloated and breaks modules" was a fair criticism of the platform. Today there is no umbrella JAR to criticize.
+
+A lot of open source work looks like this. The best outcome is that people stop noticing the problem.
+
+== Thank you, and join us
+
+Thank you to https://github.com/ivargrimstad[Ivar Grimstad], who worked closely with me on this, and to the Jakarta EE Platform team for the reviews and discussions along the way.
+
+This work started with one bug report from one application developer. If something in Jakarta EE gets in your way, you can fix it too:
+
+* Browse the open issues in https://github.com/jakartaee/jakartaee-api/issues[jakartaee-api] and the https://github.com/jakartaee/platform[Jakarta EE Platform]
+* Read the https://jakarta.ee/contribute/[Jakarta EE contribution guide]
+* Join the https://jakarta.ee/connect/mailing-lists/[mailing lists] and the platform calls
+
+== About the author
+
+Lenny Primak is an open source maintainer, the https://shiro.apache.org[Apache Shiro] PMC Chair, and a contributor to Jakarta EE, Jersey, Weld, Grizzly and Arquillian. Find him on https://github.com/lprimak[GitHub] and https://linkedin.com/in/lprimak[LinkedIn].
+
+His Jakarta EE work is sponsored by https://flowlogix.com[Flow Logix], which builds open source components for Jakarta EE applications. See the projects at https://github.com/flowlogix[github.com/flowlogix].
+
+This work is unpaid. If it made your build simpler, you can support it through https://github.com/sponsors/flowlogix[GitHub Sponsors: Flow Logix].
+
+All of the pull requests mentioned here are listed at link:https://github.com/jakartaee/jakartaee-api/pulls?q=is%3Apr+author%3Alprimak[jakartaee-api pull requests by lprimak].
