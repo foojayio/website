@@ -1,6 +1,6 @@
 ---
 title: "Put the structure of your Spring Boot service in a YAML model: architecture changes, AI coding and BI from one source"
-date: "2026-01-01"
+date: "2026-11-25"
 description: "A YAML domain model that regenerates the Spring Boot code when the architecture or stack changes, keeps AI-written code consistent, and exports an Apache Ossie model for BI."
 authors:
   - "richard-kim"
@@ -10,7 +10,11 @@ categories:
   - "Spring"
   - "Developer Tools"
   - "AI"
-related_posts: []
+related_posts:
+  - "from-spec-driven-development-to-living-specifications-in-java-projects"
+  - "green-build-wrong-task-a-working-agreement-for-java-teams-using-ai-coding-agents"
+  - "no-database-operations-found-what-writing-a-spring-boot-analyzer-taught-me-about-spring"
+  - "java-server-work-before-startup"
 ---
 
 I lead the ElastiCORE project. ElastiCORE is an Apache-2.0 Gradle plugin that reads a YAML model of a business domain and generates a Spring Boot application from it. This article argues one point with a working sample: if the structure of a service lives in a small model instead of in hand-written layers, three hard problems get easier.
