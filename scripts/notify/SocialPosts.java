@@ -82,6 +82,8 @@ public class SocialPosts {
     static final int MAX_ARTICLE_CHARS = 8000;
     // The whole text travels in the "Open in Reddit" URL, and Slack cut a ~1750-character one short.
     static final int REDDIT_MAX = 900;
+    static final int SLACK_CHUNK = 2500;
+    static final String DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     static final int PAGE_FETCH_ATTEMPTS = 8;
     static final long PAGE_FETCH_WAIT_MS = 30_000;
     static final String MODEL = "claude-sonnet-5-5";
@@ -187,7 +189,7 @@ public class SocialPosts {
         List<Author> authors = authors(page);
         String article = articleText(page, p);
 
-        StringBuilder message = new StringBuilder("*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\n");
+        StringBuilder message = new StringBuilder(DIVIDER + "\n:newspaper: *New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\n");
         if (!authors.isEmpty()) {
             message.append("by ").append(esc(String.join(", ", authors.stream().map(Author::name).toList()))).append("\n");
         }
@@ -243,9 +245,27 @@ public class SocialPosts {
             System.out.println("SLACK_BOT_TOKEN or SLACK_CHANNEL_ID is not set; not sent to Slack.");
             return;
         }
-        post(token, user, message.toString());
+        List<String> parts = chunks(message.toString());
+        for (int i = 0; i < parts.size(); i++) {
+            post(token, user, i == 0 ? parts.get(i) : "_" + esc(p.title()) + " (continued)_\n" + parts.get(i));
+        }
         System.out.println("Sent to Slack.");
         if (failed > 0) throw new IllegalStateException(failed + " platform text(s) failed for " + p.link());
+    }
+
+    /** Slack cut the end off a long message, which was the Reddit link, so each platform's block travels separately. */
+    static List<String> chunks(String message) {
+        List<String> out = new ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        for (String block : message.split("(?=\\n\\*)")) {
+            if (cur.length() > 0 && cur.length() + block.length() > SLACK_CHUNK) {
+                out.add(cur.toString());
+                cur.setLength(0);
+            }
+            cur.append(block);
+        }
+        out.add(cur.toString());
+        return out;
     }
 
     static String encode(String s) {
