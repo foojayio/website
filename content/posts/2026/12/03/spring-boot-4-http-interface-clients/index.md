@@ -1,14 +1,18 @@
 ---
 title: "You Can Delete Feign Now: Spring Boot 4's Built-in HTTP Clients"
-date: "2026-01-01"
+date: "2026-12-03"
 description: "Spring Boot 4 builds @HttpExchange clients from one annotation and a base URL. A runnable demo, plus how to move off RestTemplate and Feign."
 authors:
-  - "pushpak"
+  - "pushpak-raut"
 image: "cover.jpg"
 categories:
   - "Spring"
   - "Tutorials"
-related_posts: []
+related_posts:
+  - "preparing-for-spring-framework-7-and-spring-boot-4"
+  - "explore-spring-framework-7-features-api-versioning"
+  - "spring-boot-4-opentelemetry-explained"
+  - "the-new-jdbcclient-introduced-in-spring-framework-6-1"
 ---
 
 Most Spring projects I open still have two ways of calling other services. Old code uses `RestTemplate`. Newer code uses OpenFeign, which pulls in Spring Cloud, its own BOM, and one more version to keep in step with Spring Boot.
