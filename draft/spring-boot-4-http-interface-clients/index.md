@@ -102,7 +102,7 @@ spring:
         read-timeout: 5s
 ```
 
-The key under `serviceclient` must match the group name in `@ImportHttpServices`. That's the whole wiring. Boot reads this, builds a `RestClient` with that base URL and those timeouts, and creates a proxy for `UserClient`.
+The key under `serviceclient` must match the group name in `@ImportHttpServices`. Boot reads this, builds a `RestClient` with that base URL and those timeouts, and creates a proxy for `UserClient`.
 
 ## Step 5: Use it like any other bean
 
@@ -234,15 +234,15 @@ public interface UserClient {
 The steps, in order:
 
 1. Replace `@FeignClient` with `@HttpExchange` and the mapping annotations with their `@...Exchange` versions.
-2. Delete `@EnableFeignClients` and add `@ImportHttpServices`, one group per remote service.
+2. Add `@ImportHttpServices`, one group per remote service. Delete `@EnableFeignClients` only after the last Feign client is migrated.
 3. Move each `url` into `spring.http.serviceclient.<group>.base-url`.
 4. Turn Feign `RequestInterceptor` beans into a `RestClientHttpServiceGroupConfigurer`.
 5. Replace `FeignException` handling with `RestClientResponseException` (or its subclasses).
-6. Remove `spring-cloud-starter-openfeign`. If nothing else uses Spring Cloud, the Spring Cloud BOM can go too.
+6. Once no `@FeignClient` is left, remove `spring-cloud-starter-openfeign`. If nothing else uses Spring Cloud, the Spring Cloud BOM can go too.
 
-Callers don't change, because they only ever saw the interface. You can also do this one client at a time, since Feign and HTTP interface clients can run in the same app while you move them.
+Callers don't change, because they only ever saw the interface. You can move one client at a time: Feign and HTTP interface clients run side by side in the same app, as long as `@EnableFeignClients` and the OpenFeign starter stay until the last Feign client is gone.
 
-Spring Cloud OpenFeign is now considered feature complete by its maintainers, who point people to Spring's own HTTP interfaces. That's another reason not to start new clients on it.
+Spring Cloud OpenFeign is now considered feature complete by its maintainers, who point people to Spring's own HTTP interfaces, so I wouldn't start new clients on it.
 
 ## Moving off RestTemplate
 
@@ -274,7 +274,7 @@ But if a class is full of these calls for one service, move it to an interface i
 
 ## Wrapping up
 
-For most services, an interface, one annotation and a base URL now replace Feign and hand-written `RestTemplate` calls. If you're starting a new client today, start with `@HttpExchange`. For existing Feign clients, move one at a time when you next touch them.
+For most services, an interface, an annotation and a base URL now replace Feign and hand-written `RestTemplate` calls. If you're starting a new client today, start with `@HttpExchange`. For existing Feign clients, move one at a time when you next touch them.
 
 HTTP clients are one of many places where Boot 4 changed names and packages under people's feet. The starters moved, `@MockBean` is gone, test annotations moved to new packages, and JWT setup got simpler. I put all of it in my Spring Boot 4 Cheat Sheet: 48 pages of code from one real app that compiles on Spring Boot 4.1, plus 55 interview answers, 22 common errors with their fixes, and the full source project. It's $9.99, with a 30-day refund if it doesn't help: [Spring Boot 4 Cheat Sheet + Interview Guide](https://pushpak48.gumroad.com/l/spring-boot-4-cheat-sheet?utm_source=foojay&utm_campaign=http-clients-post).
 
