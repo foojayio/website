@@ -274,9 +274,6 @@ enableGitInfo = true
   weight = 10
   [menu.main.params]
     cols = 1
-    [menu.main.params.footlink]
-      label = "View all articles"
-      url = "/today/"
 
 [[menu.main]]
   name = "Daily News"
@@ -311,7 +308,7 @@ enableGitInfo = true
     desc = "AI Newsletter curated by Miro Wengner"
 
 [[menu.main]]
-  name = "Foojay Monthly Review"
+  name = "Monthly Review"
   parent = "News"
   url = "/month-overview/"
   weight = 15
@@ -407,9 +404,6 @@ enableGitInfo = true
   weight = 30
   [menu.main.params]
     cols = 3
-    [menu.main.params.footlink]
-      label = "Open the full Java Quick Start guide"
-      url = "/java-quick-start/"
 
 [[menu.main]]
   name = "Java Terms Explained"
@@ -701,6 +695,12 @@ enableGitInfo = true
   parent = "footer-community"
   url = "/today/category/podcast/"
   weight = 22
+
+[[menu.footer]]
+  name = "Week in Review"
+  parent = "footer-community"
+  url = "/today/week-review/"
+  weight = 23
 
 [[menu.footer]]
   name = "Events Calendar"
