@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-18T08:38:43Z",
+  "generatedAt" : "2026-11-19T08:54:17Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -103,15 +103,7 @@
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
-    "events" : [ {
-      "title" : "Deterministic Java refactoring at scale + Snake in 10 lines",
-      "url" : "https://www.meetup.com/belgian-java-user-group/events/317149858/",
-      "startTime" : "2026-11-18T17:45:00+01:00",
-      "endTime" : "2026-11-18T20:45:00+01:00",
-      "venue" : "Veldkant 4",
-      "city" : "Kontich",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "BordeauxJUG",
     "name" : "BordeauxJUG",
@@ -204,7 +196,7 @@
       "city" : "Wien",
       "online" : false
     }, {
-      "title" : "January Meetup",
+      "title" : "\"Java 28 - Better Language, APIs, and Runtime\" + \"Operaton (Camunda Fork)\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166147/",
       "startTime" : "2027-01-18T18:00:00+01:00",
       "endTime" : "2027-01-18T21:00:00+01:00",
@@ -471,6 +463,14 @@
       "venue" : "adesso Mobile Solutions",
       "city" : "Hamburg",
       "online" : false
+    }, {
+      "title" : "Special Day: Software Entwicklung",
+      "url" : "https://www.meetup.com/jug-hamburg/events/317484039/",
+      "startTime" : "2026-12-04T13:00:00+01:00",
+      "endTime" : "2026-12-04T18:00:00+01:00",
+      "venue" : "WPS - Workplace Solutions GmbH",
+      "city" : "Hamburg",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Hannover",
@@ -620,15 +620,7 @@
     "jug" : "MuensterJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/java-usergroup-munster/",
-    "events" : [ {
-      "title" : "Post-Quanten-Kryptographie und Java: Hintergrund, Risiken, Handlungsbedarf",
-      "url" : "https://www.meetup.com/java-usergroup-munster/events/317259570/",
-      "startTime" : "2026-11-18T18:00:00+01:00",
-      "endTime" : "2026-11-18T19:30:00+01:00",
-      "venue" : "LVM Versicherung (Gebäudeteil 5)",
-      "city" : "Münster",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "JUG-Nurnberg",
     "name" : "JUG Nürnberg",
@@ -824,15 +816,7 @@
     "jug" : "MadridJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/madridjug/",
-    "events" : [ {
-      "title" : "Técnicas de optimización de memoria: estrategias para reducir costes y consumo",
-      "url" : "https://www.meetup.com/madridjug/events/317164717/",
-      "startTime" : "2026-11-18T19:00:00+01:00",
-      "endTime" : "2026-11-18T20:30:00+01:00",
-      "venue" : "C. de Méndez Álvaro, 61",
-      "city" : "Madrid",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "ManchesterUK-Java-Community",
     "name" : "Manchester Java Community",
