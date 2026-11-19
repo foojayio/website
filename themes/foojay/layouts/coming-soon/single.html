@@ -27,14 +27,22 @@
   {{ range $posts }}{{ $counts = merge $counts (dict .date (add 1 (index $counts .date | default 0))) }}{{ end }}
   <nav class="coming-soon-strip" aria-label="Days with scheduled posts">
     <ul class="coming-soon-strip__list" tabindex="0">
-      {{ range $date, $n := $counts }}
-      {{ $t := time.AsTime (printf "%sT00:00:00Z" $date) }}
-      <li><a href="#d-{{ $date }}" class="coming-soon-strip__day">
+      {{/* Every day from the first to the last scheduled one, so gaps show. */}}
+      {{ $first := time.AsTime (printf "%sT00:00:00Z" (index $posts 0).date) }}
+      {{ $last := time.AsTime (printf "%sT00:00:00Z" (index $posts (sub (len $posts) 1)).date) }}
+      {{ range $i := seq 0 (int (div ($last.Sub $first).Hours 24)) }}
+      {{ $t := $first.AddDate 0 0 $i }}
+      {{ $date := $t.Format "2006-01-02" }}
+      {{ $n := index $counts $date | default 0 }}
+      {{ $cls := cond (in (slice "Saturday" "Sunday") ($t.Format "Monday")) " is-weekend" "" }}
+      <li>
+        {{ if $n }}<a href="#d-{{ $date }}" class="coming-soon-strip__day{{ $cls }}">{{ else }}<span class="coming-soon-strip__day is-empty{{ $cls }}">{{ end }}
         <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
         <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
         <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
-        <span class="coming-soon-strip__count">{{ $n }} {{ cond (eq $n 1) "post" "posts" }}</span>
-      </a></li>
+        <span class="coming-soon-strip__count">{{ if $n }}{{ $n }} {{ cond (eq $n 1) "post" "posts" }}{{ else }}&nbsp;{{ end }}</span>
+        {{ if $n }}</a>{{ else }}</span>{{ end }}
+      </li>
       {{ end }}
     </ul>
   </nav>

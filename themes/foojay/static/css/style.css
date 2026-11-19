@@ -4669,3 +4669,8 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .coming-soon-strip__num { font-size: 1.6rem; font-weight: 700; }
 .coming-soon-strip__count { margin-top: .2rem; font-size: .8rem; font-weight: 600; color: var(--brand-accent-strong); white-space: nowrap; }
 .coming-soon-day { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem); }
+.coming-soon-strip__day.is-weekend { background: var(--surface-sunken); }
+a.coming-soon-strip__day.is-weekend:hover { background: var(--surface-tinted); }
+.coming-soon-strip__day.is-empty { border-style: dashed; color: var(--ink-muted); background: transparent; }
+.coming-soon-strip__day.is-empty.is-weekend { background: var(--surface-sunken); }
+.coming-soon-strip__day.is-empty .coming-soon-strip__num { font-weight: 400; }
