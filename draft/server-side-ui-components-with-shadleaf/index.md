@@ -78,6 +78,36 @@ A table of team members, where you delete a member after confirming in a dialog,
 If you want to build this with React, you need a component library, a fetch call, a JSON endpoint and some state.
 With Shadleaf and htmx, all you need is a template and a controller.
 
+### Adding htmx
+
+The Shadleaf starter does not bring htmx along, so add it yourself.
+[htmx-spring-boot](https://github.com/wimdeblauwe/htmx-spring-boot) gives you the `hx:*` Thymeleaf attributes and the `HtmxResponse` used below, and the webjar serves htmx itself from your own application:
+
+```xml
+<dependency>
+  <groupId>io.github.wimdeblauwe</groupId>
+  <artifactId>htmx-spring-boot-thymeleaf</artifactId>
+  <version>6.0.1</version>
+</dependency>
+<dependency>
+  <groupId>org.webjars.npm</groupId>
+  <artifactId>htmx.org</artifactId>
+  <version>4.0.1</version>
+</dependency>
+<dependency>
+  <groupId>org.webjars</groupId>
+  <artifactId>webjars-locator-lite</artifactId>
+</dependency>
+```
+
+Then load the script in the `<head>` of your layout, after the Shadleaf assets:
+
+```html
+<script th:src="@{/webjars/htmx.org/dist/htmx.min.js}" defer></script>
+```
+
+The [htmx guide](https://shadleaf.dev/current/guides/htmx/) in the Shadleaf documentation has the details, including a strict Content-Security-Policy.
+
 ### The table
 
 `<sl:table>` styles the plain table elements you write inside it.
