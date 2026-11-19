@@ -4272,7 +4272,10 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 }
 
 /* "Originally published on" line under the hero of a cross-posted article. */
-.post-origin { font-size: .92rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
+.post-origin {
+  font-size: .95rem; color: var(--ink); margin: 0 0 1.5rem; padding: .75rem 1rem;
+  background: var(--surface-sunken); border-block: 1px solid var(--border);
+}
 .post-origin a { color: var(--brand-accent-strong); text-decoration: underline; text-underline-offset: .15em; }
 
 /* ------------------------------------------------- episode transcript ----
