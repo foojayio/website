@@ -1,6 +1,6 @@
 ---
 title: "Show US What You're Proud Of"
-date: "2026-11-20"
+date: "2026-11-21"
 description: "Enter the free Passion Project Contest by 31 December 2026. Share what you built and why for a chance at a showcase video and €500."
 authors:
   - "maaike-vanputten"
