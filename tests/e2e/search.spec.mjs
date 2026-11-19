@@ -48,6 +48,19 @@ test('a query returns results, grouped by section', async ({ page }) => {
   expectClean(page);
 });
 
+// The weekly reviews re-list articles that are already results, so the index
+// must not hold them (baseof.html leaves them out of data-pagefind-body).
+test('week reviews are not in the search index', async ({ page }) => {
+  await page.goto('search/');
+  const sections = await page.evaluate(async () => {
+    const pf = await import(new URL('../pagefind/pagefind.js', location.href).href);
+    await pf.init();
+    return Object.keys((await pf.filters()).section || {});
+  });
+  expect(sections, 'the index should have sections at all').toContain('posts');
+  expect(sections).not.toContain('week-review');
+});
+
 test('the first result opens the page it promises', async ({ page }) => {
   const results = await search(page, QUERY);
   const first = results.locator('.search-result').first();

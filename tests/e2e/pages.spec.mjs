@@ -50,6 +50,11 @@ test('the site nav is on the page and its links work', async ({ page }) => {
   }
 });
 
+test('the footer links to the week in review', async ({ page }) => {
+  await page.goto('');
+  await expect(page.locator('footer a[href$="/today/week-review/"]')).toHaveCount(1);
+});
+
 test('an unknown URL serves the 404 page, with a 404 status', async ({ page }) => {
   const response = await page.goto('this-page-does-not-exist/');
   expect(response.status()).toBe(404);

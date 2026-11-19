@@ -2,7 +2,7 @@ import { test, expect, expectClean } from './fixtures.mjs';
 
 test('sidebar links remain fully visible during sequential keyboard navigation', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('ai/');
+  await page.goto('today/category/ai/');
   // Exercise the static links separately from the rotating banner's controls.
   const links = page.locator('.sidebar .widget:not(.widget-ad) a[href]');
   const count = await links.count();
