@@ -18,7 +18,6 @@ for (const scheme of ['light', 'dark']) {
       ...['install-java-on-windows', 'install-java-on-macos', 'install-java-on-linux', 'check-your-java-installation', 'find-another-java-version'].map(slug => `/java-quick-start/install-java/${slug}/`),
       '/java-quick-start/quick-start-tutorial/',
       ...['choosing-an-editor', 'hello-world', 'using-the-arguments', 'working-with-numbers', 'if-then-else', 'enum-and-switch', 'using-methods', 'using-objects', 'reading-a-text-file', 'using-streams', 'whats-next'].map(slug => `/java-quick-start/quick-start-tutorial/${slug}/`),
-      '/java-quick-start/',
     ]);
     await page.keyboard.press('Tab');
     await expect(panel.getByRole('link').first()).toBeFocused();

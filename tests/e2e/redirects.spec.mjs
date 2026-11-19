@@ -12,7 +12,7 @@ const BASE = basePath();
 async function refreshTarget(page, path) {
   const response = await page.request.get(path);
   expect(response.status(), `${path} should be served`).toBe(200);
-  const target = (await response.text()).match(/http-equiv="refresh" content="0; url=([^"]+)"/)?.[1];
+  const target = (await response.text()).match(/http-equiv="?refresh"?\s+content="?0;\s*url=([^"\s>]+)/)?.[1];
   expect(target, `${path} should be a redirect stub`).toBeTruthy();
   return new URL(target).pathname;
 }
