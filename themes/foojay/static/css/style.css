@@ -4527,11 +4527,15 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .review-also__by .byline { display: inline-flex; align-items: center; min-height: 24px; }
 
 /* /today/coming-soon/: one heading per publish day, over that day's cards. */
-.coming-soon-day + .coming-soon-day { margin-top: 2.25rem; }
-.coming-soon-day__title {
-  margin: 0 0 1rem; padding-bottom: .4rem;
-  border-bottom: 1px solid var(--border, currentColor);
-  font-size: 1.15rem;
+.coming-soon-day + .coming-soon-day { margin-top: 1.5rem; }
+.coming-soon-day {
+  display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 1.5rem; align-items: start;
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+}
+.coming-soon-day__card { position: sticky; top: calc(var(--header-offset, var(--header-h)) + 1rem); }
+@media (max-width: 40rem) {
+  .coming-soon-day { grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; }
+  .coming-soon-day__card { min-width: 0; padding-inline: .25rem; }
 }
 .coming-soon-day__list { display: grid; gap: 1.5rem; }
 .content-col .author-upcoming { margin-bottom: 3rem; padding-bottom: 1rem; }
@@ -4653,24 +4657,20 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .tv-channels__search { margin-bottom: 0; }
 .tv-channels .clearable { margin-bottom: .75rem; }
 
-/* /today/coming-soon/: strip of the days that have posts, linking to their sections. */
-.coming-soon-strip { margin-bottom: 2rem; }
-.coming-soon-strip__list {
-  display: flex; gap: .6rem; margin: 0; padding: 0 0 .5rem; list-style: none;
-  overflow-x: auto; overscroll-behavior-x: contain;
-}
+/* The day card, in the left column of each /today/coming-soon/ section. */
 .coming-soon-strip__day {
   display: grid; justify-items: center; gap: .1rem; min-width: 5.2rem; padding: .6rem .5rem;
   border: 1px solid var(--border-strong); border-radius: .5rem;
   background: var(--surface); color: var(--ink); text-decoration: none; line-height: 1.2;
 }
-.coming-soon-strip__day:hover { background: var(--surface-tinted); }
 .coming-soon-strip__dow, .coming-soon-strip__month { font-size: .8rem; color: var(--ink-soft); text-transform: uppercase; }
 .coming-soon-strip__num { font-size: 1.6rem; font-weight: 700; }
 .coming-soon-strip__count { margin-top: .2rem; font-size: .8rem; font-weight: 600; color: var(--brand-accent-strong); white-space: nowrap; }
 .coming-soon-day { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem); }
 .coming-soon-strip__day.is-weekend { background: var(--surface-sunken); }
-a.coming-soon-strip__day.is-weekend:hover { background: var(--surface-tinted); }
 .coming-soon-strip__day.is-empty { border-style: dashed; color: var(--ink-muted); background: transparent; }
 .coming-soon-strip__day.is-empty.is-weekend { background: var(--surface-sunken); }
 .coming-soon-strip__day.is-empty .coming-soon-strip__num { font-weight: 400; }
+.coming-soon-day.is-empty { align-items: center; padding-bottom: 1rem; color: var(--ink-muted); }
+.coming-soon-day.is-empty .coming-soon-day__card { position: static; }
+.coming-soon-day__none { margin: 0; }
