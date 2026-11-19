@@ -1,0 +1,5 @@
+---
+title: "AI"
+aliases:
+  - "/ai/"
+---

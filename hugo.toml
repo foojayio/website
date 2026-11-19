@@ -327,28 +327,12 @@ enableGitInfo = true
     desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
 
 [[menu.main]]
-  name = "Foojay.io AI Portal"
-  parent = "News"
-  url = "/ai/"
-  weight = 16
-  [menu.main.params]
-    desc = "Java and AI: guides, tutorials and machine learning on the JVM"
-
-[[menu.main]]
   name = "All Categories"
   parent = "News"
   url = "/today/category/"
   weight = 17
   [menu.main.params]
     desc = "Every topic the community writes about, A-Z"
-
-[[menu.main]]
-  name = "Coming soon..."
-  parent = "News"
-  url = "/today/coming-soon/"
-  weight = 18
-  [menu.main.params]
-    desc = "Scheduled content that will appear on foojay.io in the future"
 
 # ---------------------------------------------------------------------------
 
@@ -634,7 +618,7 @@ enableGitInfo = true
 # definition does: three labels disagreed with the header ("Meet The Team" vs
 # "Meet the Team", "Where to Find Foojay" vs the long form), the podcast sat in
 # the resources column while the nav filed it under News, and four pages the
-# nav offers (Java Champions, the Sustainability eBook, the AI portal, Write
+# nav offers (Java Champions, the Sustainability eBook, Write
 # for Foojay) were reachable from the hover panel and nowhere else. One
 # convention for both menus means a mismatch is now something you can see.
 #
@@ -717,12 +701,6 @@ enableGitInfo = true
   parent = "footer-community"
   url = "/today/category/podcast/"
   weight = 22
-
-[[menu.footer]]
-  name = "Foojay.io AI Portal"
-  parent = "footer-community"
-  url = "/ai/"
-  weight = 23
 
 [[menu.footer]]
   name = "Events Calendar"

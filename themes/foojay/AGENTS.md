@@ -426,13 +426,6 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   alphabetically with a filter box, since the top categories are already shown
   elsewhere and the only reason to open a list of 123 is to find one.
 
-- **The AI portal is a derived category landing page.** `/ai/` is what
-  WordPress serves as the "Machine Learning" category with an editorial intro,
-  so the page file holds the intro plus `list_category:` and the layout derives
-  the rest. Don't turn it into a hand-picked `posts:` list. Its grid is **not**
-  paginated (`.Paginate` doesn't work on a page kind), and its cards pass
-  `maxCategories: 0`, because on a portal the chips are the navigation.
-
 - **`/search/` gives each SECTION its own quota, never a global top-N.**
   Pagefind returns one relevance-ordered list, so a global `slice(0, 30)` is
   spent on whichever section matches most: on "pi4j", 328 pages matched and the

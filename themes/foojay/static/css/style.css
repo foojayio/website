@@ -610,9 +610,8 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head__meta { display: flex; align-items: center; flex-wrap: wrap; gap: .9rem; }
 .page-head__meta p { margin: 0; }
 
-/* AI portal: its editorial intro lives in the page head, so its paragraphs need
-   the spacing `.page-head p` deliberately removes for the single-line meta text
-   every other page head holds. */
+/* An editorial intro in the page head needs the paragraph spacing
+   `.page-head p` removes for the single-line meta text. */
 .page-head__intro { margin: 0 0 1.1rem; }
 .page-head__intro p { margin: 0; }
 .page-head__intro p + p { margin-top: .75rem; }
