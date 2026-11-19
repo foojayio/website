@@ -1,10 +1,12 @@
 ---
 title: "Compact Profiles"
 description: "Note: Compact Profiles are a Java 8 feature. Starting with Java 9, the same goal — creating a minimal, self-contained runtime — is achieved more flexibly by jlink and the Java Module System (JPMS). If you are working with Java ..."
-url: "/pedia/compactprofiles/"
+url: "/java-terms-explained/compactprofiles/"
+aliases:
+  - "/pedia/compactprofiles/"
 ---
 
-> **Note:** Compact Profiles are a Java 8 feature. Starting with Java 9, the same goal — creating a minimal, self-contained runtime — is achieved more flexibly by `jlink` and the Java Module System (JPMS). If you are working with Java 9 or later, see [Java Module System (JPMS)](https://foojay.io/pedia/java-module-system-jpms/) instead.
+> **Note:** Compact Profiles are a Java 8 feature. Starting with Java 9, the same goal — creating a minimal, self-contained runtime — is achieved more flexibly by `jlink` and the Java Module System (JPMS). If you are working with Java 9 or later, see [Java Module System (JPMS)](https://foojay.io/java-terms-explained/java-module-system-jpms/) instead.
 
 Introduced in OpenJDK 8 (JSR 337), compact profiles define three nested subsets of the Java SE 8 API designed to reduce the runtime footprint on resource-constrained devices such as embedded systems and IoT hardware.
 
@@ -14,6 +16,6 @@ In Java 9+, `jlink` replaced compact profiles as the preferred mechanism for bui
 
 ## See Also
 
-* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
-* [OpenJDK](/pedia/openjdk/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
+* [Java Module System (JPMS)](/java-terms-explained/java-module-system-jpms/)
+* [OpenJDK](/java-terms-explained/openjdk/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)

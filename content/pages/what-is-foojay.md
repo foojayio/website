@@ -18,7 +18,7 @@ On Foojay, you can find the following content (and more!):
 * **[Daily News](/today/)** - a daily stream of blog posts, tutorials and news from [Java developers, JDK engineers and industry contributors around the world](/today/author/).
 * **[The Foojay Podcast](/today/category/podcast/)** - conversations with the people building and shaping the Java platform.
 * **[OpenJDK Release Details](/java-almanac/)** - the Java Version Almanac: every JDK release with its docs, specs and API diffs, so you can see exactly what changed between two versions.
-* **[Glossary](/pedia/) \& [Java Quick Start](/java-quick-start/)** - reference material and guided tutorials for developers learning Java or getting oriented in the ecosystem.
+* **[Glossary](/java-terms-explained/) \& [Java Quick Start](/java-quick-start/)** - reference material and guided tutorials for developers learning Java or getting oriented in the ecosystem.
 * **[JC-AI Newsletter](/today/category/jc-ai-newsletter/)** - a regular briefing at the intersection of Java and AI.
 * **[Event Calendar](/calendar/)** - Java events happening worldwide.
 * **[Java User Groups](/jugs/)** - a world map of the JUGs near you, sourced live from the community-run World Wide JUGs directory.

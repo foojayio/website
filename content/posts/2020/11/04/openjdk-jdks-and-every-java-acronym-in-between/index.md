@@ -64,11 +64,11 @@ Vendors may introduce little implementation differences such as garbage collecti
 
 ### When can you call something a JDK?
 
-To be called a JDK officially, the binaries need to have passed a Java Compatibility Kit (JCK) for that release, which is a collection of tests provided by the [Technology Compatibility Kits (TCK)](https://foojay.io/pedia/tck/), for testing each [JSR](https://jcp.org/en/jsr/all) to ensure that the implementation of the specification behaves as expected. [Oracle's OpenJDK](https://jdk.java.net/15/) we spoke about earlier has passed the TCK, for example.
+To be called a JDK officially, the binaries need to have passed a Java Compatibility Kit (JCK) for that release, which is a collection of tests provided by the [Technology Compatibility Kits (TCK)](https://foojay.io/java-terms-explained/tck/), for testing each [JSR](https://jcp.org/en/jsr/all) to ensure that the implementation of the specification behaves as expected. [Oracle's OpenJDK](https://jdk.java.net/15/) we spoke about earlier has passed the TCK, for example.
 
 ### What's the Technology Compatibility Kit (TCK)?
 
-The [Technology Compatibility Kit (TCK)](https://foojay.io/pedia/tck/) is a set of tests that is applicable for a JSR. There has been controversy on the license for the TCK given it's an open source project. There is now a specific license to allow the TCK to be run against the OpenJDK under the GPL license.
+The [Technology Compatibility Kit (TCK)](https://foojay.io/java-terms-explained/tck/) is a set of tests that is applicable for a JSR. There has been controversy on the license for the TCK given it's an open source project. There is now a specific license to allow the TCK to be run against the OpenJDK under the GPL license.
 
 ### Who Makes JDKs?
 
@@ -86,7 +86,7 @@ It is also possible to build your own JDK, but that's a whole other blog! Talkin
 
 Java Development Kits:
 
-* A binary which is an implementation of the [Java platform specification](https://docs.oracle.com/javase/specs/) that has passed the [TCK](https://foojay.io/pedia/tck/)
+* A binary which is an implementation of the [Java platform specification](https://docs.oracle.com/javase/specs/) that has passed the [TCK](https://foojay.io/java-terms-explained/tck/)
 * Some JDKs are free to use, some have a cost associated with them for various things such as commercial use, fixes and support
 
 Contributions to Java and updates:

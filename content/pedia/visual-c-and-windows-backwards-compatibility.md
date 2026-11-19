@@ -1,7 +1,9 @@
 ---
 title: "OpenJDK with Visual C++"
 description: "Historical context: This article describes the Visual C++ considerations that applied during the Java 8 / early Java 11 era (2018–2021). It is retained for reference. For current Windows build requirements, see the OpenJDK build documentation. Background OpenJDK on Windows ..."
-url: "/pedia/visual-c-and-windows-backwards-compatibility/"
+url: "/java-terms-explained/visual-c-and-windows-backwards-compatibility/"
+aliases:
+  - "/pedia/visual-c-and-windows-backwards-compatibility/"
 ---
 
 > **Historical context:** This article describes the Visual C++ considerations that applied during the Java 8 / early Java 11 era (2018–2021). It is retained for reference. For current Windows build requirements, see the [OpenJDK build documentation](https://openjdk.org/guide/).
@@ -30,6 +32,6 @@ The JVM native library (`jvm.dll`) is statically linked against the MSVC runtime
 
 ## See Also
 
-* [JDK Distributions](/pedia/jdk-distributions/)
-* [OpenJDK](/pedia/openjdk/)
-* [Compact Profiles](/pedia/compactprofiles/)
+* [JDK Distributions](/java-terms-explained/jdk-distributions/)
+* [OpenJDK](/java-terms-explained/openjdk/)
+* [Compact Profiles](/java-terms-explained/compactprofiles/)

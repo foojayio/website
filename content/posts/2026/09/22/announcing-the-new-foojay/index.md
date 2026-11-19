@@ -60,7 +60,7 @@ automatically with GitHub Actions to GitHub Pages whenever something lands on th
 | Podcast episodes | Press play and listen | Idem plus a transcript on the page as well |
 | All content | In a database | Markdown files you can read on GitHub |
 
-Everything came across: [2250+ articles](/today/), [350+ author profiles](/today/author/), [50+ JVM Terms Explained](/pedia/), the [JUG (Java User Group) directory](/jugs/), the [calendar](/calendar/), the [sponsors](/our-sponsors/),... Every legacy path
+Everything came across: [2250+ articles](/today/), [350+ author profiles](/today/author/), [50+ JVM Terms Explained](/java-terms-explained/), the [JUG (Java User Group) directory](/jugs/), the [calendar](/calendar/), the [sponsors](/our-sponsors/),... Every legacy path
 still resolves, including the ones nobody would think to check: the old `/blog/`
 scheme, the retired slugs, and the URLs that changed when an article got a new
 name years ago.

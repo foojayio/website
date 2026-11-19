@@ -78,7 +78,7 @@ Another point to note is to recognize what does not appear in the conceptual dia
 
 ### 2.2 Reducing Risk By Removing Modules
 
-While operations teams can still use a central system-wide JRE, many developers customize a single JRE to run a single application. Tools such as jlink enable developers to [create custom JREs](https://www.baeldung.com/jlink) that slim down modules. These expand modern JREs (JDK 11+) from the previous incarnations of [compact profiles](https://foojay.io/pedia/compactprofiles/) and javapackager.
+While operations teams can still use a central system-wide JRE, many developers customize a single JRE to run a single application. Tools such as jlink enable developers to [create custom JREs](https://www.baeldung.com/jlink) that slim down modules. These expand modern JREs (JDK 11+) from the previous incarnations of [compact profiles](https://foojay.io/java-terms-explained/compactprofiles/) and javapackager.
 
 By incorporating only modules that are used by the application, they remove tools that are unused. Removing unused modules also works to remove risk against those modules. A custom JRE that does not contain JDBC is unlikely to be affected by various SQL Injection attacks.
 

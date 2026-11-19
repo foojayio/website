@@ -1,7 +1,9 @@
 ---
 title: "The Heap, Stack, and Metaspace"
 description: "The JVM divides memory into several distinct regions, each serving a different purpose. The Heap is where object instances live. When you call new, the object is allocated on the heap. The heap is managed by the garbage collector, which ..."
-url: "/pedia/the-heap-stack-and-metaspace/"
+url: "/java-terms-explained/the-heap-stack-and-metaspace/"
+aliases:
+  - "/pedia/the-heap-stack-and-metaspace/"
 ---
 
 The JVM divides memory into several distinct regions, each serving a different purpose.
@@ -16,7 +18,7 @@ More reading on Foojay: [Debugging RAM: Java Garbage Collection – Java Heap De
 
 ## See Also
 
-* [Garbage Collection](/pedia/garbage-collection/)
-* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
-* [Epsilon GC](/pedia/epsilon-gc/)
-* [Project Lilliput](/pedia/project-lilliput/)
+* [Garbage Collection](/java-terms-explained/garbage-collection/)
+* [GC Algorithms: G1, ZGC, and Shenandoah](/java-terms-explained/gc-algorithms-g1-zgc-and-shenandoah/)
+* [Epsilon GC](/java-terms-explained/epsilon-gc/)
+* [Project Lilliput](/java-terms-explained/project-lilliput/)

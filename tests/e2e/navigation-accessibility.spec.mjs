@@ -13,7 +13,7 @@ for (const scheme of ['light', 'dark']) {
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect(panel).toBeVisible();
     expect(await panel.getByRole('link').evaluateAll(links => links.map(a => new URL(a.href).pathname))).toEqual([
-      '/pedia/', '/java-quick-start/other-tutorials/',
+      '/java-terms-explained/', '/java-quick-start/other-tutorials/',
       '/java-quick-start/install-java/',
       ...['install-java-on-windows', 'install-java-on-macos', 'install-java-on-linux', 'check-your-java-installation', 'find-another-java-version'].map(slug => `/java-quick-start/install-java/${slug}/`),
       '/java-quick-start/quick-start-tutorial/',

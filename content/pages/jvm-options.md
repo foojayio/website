@@ -55,8 +55,8 @@ Chris maintains a whole shelf of OpenJDK tooling, most of it built on the same i
 * [VM Intrinsics Explorer](https://chriswhocodes.com/vm-intrinsics-explorer.html) — the methods HotSpot replaces with hand-written machine code
 * [GC Explorer](https://chriswhocodes.com/gc-explorer.html) — garbage collector flags and their interactions
 * [JITWatch](https://github.com/AdoptOpenJDK/jitwatch) — a log analyser for the HotSpot JIT compiler
-* [JEPMap](https://chriswhocodes.com/jepmap.html) and [JEPSearch](https://chriswhocodes.com/jepsearch.html) — [JEPs](/pedia/jep-jdk-enhancement-proposal/) mapped to their [OpenJDK projects](/pedia/openjdk-projects/), and full-text searchable
+* [JEPMap](https://chriswhocodes.com/jepmap.html) and [JEPSearch](https://chriswhocodes.com/jepsearch.html) — [JEPs](/java-terms-explained/jep-jdk-enhancement-proposal/) mapped to their [OpenJDK projects](/java-terms-explained/openjdk-projects/), and full-text searchable
 * [hsdis builds](https://chriswhocodes.com/hsdis/) — the disassembler plugin, prebuilt, so you can read the assembly HotSpot generated
-* [Byte-Me](https://byte-me.dev) — Java source to [bytecode](/pedia/bytecode/), side by side
+* [Byte-Me](https://byte-me.dev) — Java source to [bytecode](/java-terms-explained/bytecode/), side by side
 
 If you tune JVMs, debug a performance problem, or just want to know what that flag in a Dockerfile you inherited actually does, this is one of those quietly indispensable resources you will reach for more often than you expect.

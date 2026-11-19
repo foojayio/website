@@ -103,7 +103,7 @@ All run daily from `sync-external-content.yml`, commit their result, then
   id, and a channel that fails keeps its committed videos.
 
 - **`JvmWeekly.java`** writes `data/jvm-weekly.yaml`: every edition of Artur
-  Skowronski's JVM Weekly that is a Foojay roundup, rendered at `/jvm-weekly/`.
+  Skowronski's JVM Weekly that is a Foojay roundup, rendered at `/month-overview/`.
   Substack is the source; LinkedIn is a republication with no feed.
 
   **Two sources, because the feed is a window.** The RSS feed carries bodies

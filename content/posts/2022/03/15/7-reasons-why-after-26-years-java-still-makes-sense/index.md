@@ -73,7 +73,7 @@ Here is the list of the Quality Outreach program of free and open source Java li
 
 Besides these standards and libraries, many open source frameworks, such as [Spring](https://spring.io/), and particularly, [Spring Boot](https://spring.io/projects/spring-boot), has made our lives super easy when writing web services. Similarly, many other frameworks, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/) and [Helidon](https://helidon.io/) are getting traction, too. There is an immense amount of content on the Web, and books are available on all of these frameworks, making learning easy.
 
-Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no means the only provides of the OpenJDK. Although every OpenJDK provider has its own implementation and unique sauces, if they're doing things right, they're complying with the shared [Technology Compatibility Kit (TCK)](https://foojay.io/pedia/tck/).
+Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no means the only provides of the OpenJDK. Although every OpenJDK provider has its own implementation and unique sauces, if they're doing things right, they're complying with the shared [Technology Compatibility Kit (TCK)](https://foojay.io/java-terms-explained/tck/).
 
 Performance may differ from OpenJDK vendor to OpenJDK vendor, but the output remains the same. For example, the default GC of [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) is G1, which is highly performant. However, if we want to use a commercial GC, such as [Azul C4,](https://www.azul.com/products/components/pgc/) that's also fine. We can do that without changing our application code. That's a tremendous freedom.
 

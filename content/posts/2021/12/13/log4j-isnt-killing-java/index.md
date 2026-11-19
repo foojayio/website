@@ -44,7 +44,7 @@ This is a standard security best practice and does not relate directly to or fix
 
 Teams can automatically monitor the security baseline and upgrade their systems by using the [Foojay Disco API](https://github.com/foojayio/discoapi). Developers can pair this with a GitHub action and ensure that each build of their code uses the latest security update for their code. When security events occur, upgrading the JRE is the same as rebuilding and redeploying the code. [Examples of this GitHub](https://github.com/foojayio/discoTestingMatrix) action appear in the testing matrix.
 
-The Java security baseline changes on the Tuesday closest to the 17th of each January, April, July, and October. Details appear in the [Oracle Critical Patch Update schedule](https://www.oracle.com/security-alerts/) and the [OpenJDK Vulnerability Group](https://foojay.io/pedia/security-vulnerability-management/) uses the same schedule. Unscheduled security updates can occur in the event of a major issue. There was no such issue in the log4j2 exploit.
+The Java security baseline changes on the Tuesday closest to the 17th of each January, April, July, and October. Details appear in the [Oracle Critical Patch Update schedule](https://www.oracle.com/security-alerts/) and the [OpenJDK Vulnerability Group](https://foojay.io/java-terms-explained/security-vulnerability-management/) uses the same schedule. Unscheduled security updates can occur in the event of a major issue. There was no such issue in the log4j2 exploit.
 
 A sample configuration to use the security baseline of Java 11 is:
 

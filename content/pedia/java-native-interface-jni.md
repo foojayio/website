@@ -1,7 +1,9 @@
 ---
 title: "Java Native Interface (JNI)"
 description: "The Java Native Interface (JNI) is the standard mechanism that allows Java code running in the JVM to call, and be called by, native code written in C, C++, or other languages that can produce a shared library. It has ..."
-url: "/pedia/java-native-interface-jni/"
+url: "/java-terms-explained/java-native-interface-jni/"
+aliases:
+  - "/pedia/java-native-interface-jni/"
 ---
 
 The Java Native Interface (JNI) is the standard mechanism that allows Java code running in the JVM to call, and be called by, native code written in C, C++, or other languages that can produce a shared library. It has been part of Java since version 1.1.
@@ -14,6 +16,6 @@ For new code in Java 22+, the **Foreign Function \& Memory (FFM) API** is the re
 
 ## See Also
 
-* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)
-* [Bytecode](/pedia/bytecode/)
-* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
+* [Foreign Function & Memory API](/java-terms-explained/foreign-function-memory-api/)
+* [Bytecode](/java-terms-explained/bytecode/)
+* [Java Module System (JPMS)](/java-terms-explained/java-module-system-jpms/)

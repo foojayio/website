@@ -1,7 +1,9 @@
 ---
 title: "Garbage Collection"
 description: "Garbage Collection (GC) is the process by which the JVM automatically reclaims memory occupied by objects that are no longer reachable by the running application. Java developers do not call free() or delete() as in C or C++; the garbage ..."
-url: "/pedia/garbage-collection/"
+url: "/java-terms-explained/garbage-collection/"
+aliases:
+  - "/pedia/garbage-collection/"
 ---
 
 Garbage Collection (GC) is the process by which the JVM automatically reclaims memory occupied by objects that are no longer reachable by the running application. Java developers do not call `free()` or `delete()` as in C or C++; the garbage collector handles memory management automatically.
@@ -18,6 +20,6 @@ More reading on Foojay:
 
 ## See Also
 
-* [Epsilon GC](/pedia/epsilon-gc/)
-* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
-* [The Heap, Stack, and Metaspace](/pedia/the-heap-stack-and-metaspace/)
+* [Epsilon GC](/java-terms-explained/epsilon-gc/)
+* [GC Algorithms: G1, ZGC, and Shenandoah](/java-terms-explained/gc-algorithms-g1-zgc-and-shenandoah/)
+* [The Heap, Stack, and Metaspace](/java-terms-explained/the-heap-stack-and-metaspace/)

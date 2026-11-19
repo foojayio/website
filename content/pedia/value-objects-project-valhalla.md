@@ -1,7 +1,9 @@
 ---
 title: "Value Objects (Project Valhalla)"
 description: "Value objects are a new kind of Java class being developed under Project Valhalla — available in preview in recent Java releases — that behave like primitive types at the JVM level: they have no object identity, are always compared ..."
-url: "/pedia/value-objects-project-valhalla/"
+url: "/java-terms-explained/value-objects-project-valhalla/"
+aliases:
+  - "/pedia/value-objects-project-valhalla/"
 ---
 
 Value objects are a new kind of Java class being developed under **Project Valhalla** — available in preview in recent Java releases — that behave like primitive types at the JVM level: they have no object identity, are always compared by state rather than reference, and can be stored as flat data in arrays and fields rather than as heap references.
@@ -24,6 +26,6 @@ Project Valhalla is a long-running effort. Its current state can be tracked at [
 
 ## See Also
 
-* [OpenJDK Projects](/pedia/openjdk-projects/)
-* [Records](/pedia/records/)
-* [Sealed Classes](/pedia/sealed-classes/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)
+* [Records](/java-terms-explained/records/)
+* [Sealed Classes](/java-terms-explained/sealed-classes/)

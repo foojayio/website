@@ -1,7 +1,9 @@
 ---
 title: "GraalVM and Native Image"
 description: "GraalVM is a high-performance JDK distribution and runtime developed by Oracle. It extends the standard JDK with two key capabilities: the Graal JIT compiler (a Java-written replacement for HotSpot's C2 JIT that can deliver improved peak throughput for certain workloads) ..."
-url: "/pedia/graalvm-and-native-image/"
+url: "/java-terms-explained/graalvm-and-native-image/"
+aliases:
+  - "/pedia/graalvm-and-native-image/"
 ---
 
 **GraalVM** is a high-performance JDK distribution and runtime developed by Oracle. It extends the standard JDK with two key capabilities: the **Graal JIT compiler** (a Java-written replacement for HotSpot's C2 JIT that can deliver improved peak throughput for certain workloads) and **Native Image** (an AOT compilation tool that produces self-contained native executables).
@@ -21,7 +23,7 @@ GraalVM is available in two editions: **GraalVM Community** (open source, GPLv2+
 
 ## See Also
 
-* [AOT Compilation (Ahead-of-Time)](/pedia/aot-compilation-ahead-of-time/)
-* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
-* [JDK Distributions](/pedia/jdk-distributions/)
-* [Project Leyden](/pedia/project-leyden/)
+* [AOT Compilation (Ahead-of-Time)](/java-terms-explained/aot-compilation-ahead-of-time/)
+* [JIT Compilation (Just-in-Time)](/java-terms-explained/jit-compilation-just-in-time/)
+* [JDK Distributions](/java-terms-explained/jdk-distributions/)
+* [Project Leyden](/java-terms-explained/project-leyden/)

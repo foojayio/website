@@ -1,7 +1,9 @@
 ---
 title: "GC Algorithms: G1, ZGC, and Shenandoah"
 description: "The JDK ships with several garbage collectors, each designed for different goals. Choosing the right one depends on whether your application prioritises throughput, latency, or predictability. Serial GC The simplest collector, designed for single-threaded or very small-heap applications. It uses ..."
-url: "/pedia/gc-algorithms-g1-zgc-and-shenandoah/"
+url: "/java-terms-explained/gc-algorithms-g1-zgc-and-shenandoah/"
+aliases:
+  - "/pedia/gc-algorithms-g1-zgc-and-shenandoah/"
 ---
 
 The JDK ships with several garbage collectors, each designed for different goals. Choosing the right one depends on whether your application prioritises throughput, latency, or predictability.
@@ -38,7 +40,7 @@ More reading on Foojay:
 
 ## See Also
 
-* [Garbage Collection](/pedia/garbage-collection/)
-* [Stop-the-World Pause](/pedia/stop-the-world-pause/)
-* [Latency](/pedia/latency/)
-* [Epsilon GC](/pedia/epsilon-gc/)
+* [Garbage Collection](/java-terms-explained/garbage-collection/)
+* [Stop-the-World Pause](/java-terms-explained/stop-the-world-pause/)
+* [Latency](/java-terms-explained/latency/)
+* [Epsilon GC](/java-terms-explained/epsilon-gc/)

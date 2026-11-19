@@ -1,7 +1,9 @@
 ---
 title: "Pattern Matching"
 description: "Pattern matching is a set of language features that allow you to test the structure or type of a value and extract components from it in a single, concise expression. Java has added pattern matching incrementally since Java 14, progressively ..."
-url: "/pedia/pattern-matching/"
+url: "/java-terms-explained/pattern-matching/"
+aliases:
+  - "/pedia/pattern-matching/"
 ---
 
 Pattern matching is a set of language features that allow you to test the structure or type of a value and extract components from it in a single, concise expression. Java has added pattern matching incrementally since Java 14, progressively replacing verbose, error-prone type-checking idioms.
@@ -12,7 +14,7 @@ The more powerful form is pattern matching in `switch` expressions and statement
 
 ## See Also
 
-* [Switch Expressions](/pedia/switch-expressions/)
-* [Records](/pedia/records/)
-* [Sealed Classes](/pedia/sealed-classes/)
-* [Project Amber](/pedia/project-amber/)
+* [Switch Expressions](/java-terms-explained/switch-expressions/)
+* [Records](/java-terms-explained/records/)
+* [Sealed Classes](/java-terms-explained/sealed-classes/)
+* [Project Amber](/java-terms-explained/project-amber/)

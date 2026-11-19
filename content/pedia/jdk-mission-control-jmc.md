@@ -1,10 +1,12 @@
 ---
 title: "JDK Mission Control (JMC)"
 description: "JDK Mission Control is a suite of tools for profiling, monitoring, and diagnosing Java applications. It provides a GUI frontend for Java Flight Recorder (JFR) data and a live connection to running JVMs via JMX. JMC was originally developed by ..."
-url: "/pedia/jdk-mission-control-jmc/"
+url: "/java-terms-explained/jdk-mission-control-jmc/"
+aliases:
+  - "/pedia/jdk-mission-control-jmc/"
 ---
 
-JDK Mission Control is a suite of tools for profiling, monitoring, and diagnosing Java applications. It provides a GUI frontend for [Java Flight Recorder (JFR)](https://foojay.io/pedia/jfr-java-flight-recorder/) data and a live connection to running JVMs via JMX.
+JDK Mission Control is a suite of tools for profiling, monitoring, and diagnosing Java applications. It provides a GUI frontend for [Java Flight Recorder (JFR)](https://foojay.io/java-terms-explained/jfr-java-flight-recorder/) data and a live connection to running JVMs via JMX.
 
 JMC was originally developed by BEA Systems as JRockit Mission Control, acquired by Oracle with BEA in 2008, and open-sourced under the Eclipse Foundation in 2018 (project name: JDK Mission Control, or JMC). It is available as a standalone download and as a plugin for Eclipse IDE and IntelliJ IDEA.
 
@@ -19,6 +21,6 @@ JMC download and documentation: [github.com/openjdk/jmc](https://github.com/open
 
 ## See Also
 
-* [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
-* [Heap Dump](/pedia/heap-dump/)
-* [Thread Dump](/pedia/thread-dump/)
+* [JFR (Java Flight Recorder)](/java-terms-explained/jfr-java-flight-recorder/)
+* [Heap Dump](/java-terms-explained/heap-dump/)
+* [Thread Dump](/java-terms-explained/thread-dump/)

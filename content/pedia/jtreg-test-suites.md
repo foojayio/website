@@ -1,10 +1,12 @@
 ---
 title: "jtreg Test Suites"
 description: "jtreg is the test harness for regression and unit testing used by the JDK test framework. For many OpenJDK distributions, the jtreg tests are run in addition to the TCK to provide broader coverage of JVM behaviour and standard library ..."
-url: "/pedia/jtreg-test-suites/"
+url: "/java-terms-explained/jtreg-test-suites/"
+aliases:
+  - "/pedia/jtreg-test-suites/"
 ---
 
-jtreg is the test harness for regression and unit testing used by the JDK test framework. For many OpenJDK distributions, the jtreg tests are run in addition to the [TCK](https://foojay.io/pedia/tck/) to provide broader coverage of JVM behaviour and standard library correctness.
+jtreg is the test harness for regression and unit testing used by the JDK test framework. For many OpenJDK distributions, the jtreg tests are run in addition to the [TCK](https://foojay.io/java-terms-explained/tck/) to provide broader coverage of JVM behaviour and standard library correctness.
 
 The OpenJDK source repository (hosted at [github.com/openjdk/jdk](https://github.com/openjdk/jdk)) contains tens of thousands of jtreg tests. As of Java 21, the test suite contains over 100,000 individual test cases across the `test/` directory tree — covering the compiler, JVM, standard libraries, and tools. The count grows with every release.
 
@@ -14,6 +16,6 @@ The jtreg tool itself is open source and available at [openjdk.org/jtreg/](https
 
 ## See Also
 
-* [Technology Compatibility Kit](/pedia/tck/)
-* [OpenJDK Coding Guidelines and Code Reviews](/pedia/openjdk-coding-guidelines/)
-* [OpenJDK](/pedia/openjdk/)
+* [Technology Compatibility Kit](/java-terms-explained/tck/)
+* [OpenJDK Coding Guidelines and Code Reviews](/java-terms-explained/openjdk-coding-guidelines/)
+* [OpenJDK](/java-terms-explained/openjdk/)

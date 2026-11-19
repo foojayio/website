@@ -39,7 +39,7 @@ never hand-edit them**, fix the entry upstream.
 | `JugEvents.java` | `data/jug-events.json` | the iCal feed each JUG publishes (its own site, Google Calendar, Meetup) |
 | `ViewCounts.java` | `data/views.json` | our own read counter (`worker/views/`) |
 | `TvVideos.java` | `data/tv-videos.json` | the public RSS feeds of the YouTube channels in `data/tv-channels.yaml`, shown at `/tv/` without Shorts |
-| `JvmWeekly.java` | `data/jvm-weekly.yaml` | the public RSS feed of [JVM Weekly](https://www.jvm-weekly.com/), for the monthly Foojay roundup shown at `/jvm-weekly/` |
+| `JvmWeekly.java` | `data/jvm-weekly.yaml` | the public RSS feed of [JVM Weekly](https://www.jvm-weekly.com/), for the monthly Foojay roundup shown at `/month-overview/` |
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
 | `PodcastTranscripts.java` | `transcript.md` in each podcast episode's bundle | the automatic captions on foojay's own YouTube channel, via `yt-dlp` |
 

@@ -46,7 +46,7 @@
        useful snippet, so a description that IS the fallback is dropped. */ -}}
 {{- $boiler := site.Params.description -}}
 {{- /* A menu entry carries a URL, not a page reference, and site.GetPage takes
-       a CONTENT path -- so it resolves /pedia/ (a real section) and misses every
+       a CONTENT path -- so it resolves the glossary (a real section) and misses every
        one of the 15 pages that override their path with `url:` frontmatter, i.e.
        almost the whole footer. Indexing the site by RelPermalink once is what
        lets a menu entry find its page, and therefore its real description. */ -}}

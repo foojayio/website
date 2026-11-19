@@ -1,7 +1,9 @@
 ---
 title: "Bytecode"
 description: "When you compile a Java source file, the Java compiler (javac) does not produce native machine code for a specific CPU. Instead it produces bytecode: a compact, platform-neutral instruction set stored in .class files. Bytecode is not directly understood by ..."
-url: "/pedia/bytecode/"
+url: "/java-terms-explained/bytecode/"
+aliases:
+  - "/pedia/bytecode/"
 ---
 
 When you compile a Java source file, the Java compiler (`javac`) does not produce native machine code for a specific CPU. Instead it produces *bytecode* : a compact, platform-neutral instruction set stored in `.class` files. Bytecode is not directly understood by the operating system; it is executed by the Java Virtual Machine (JVM), which translates it into native instructions at runtime.
@@ -12,8 +14,8 @@ Bytecode is also the reason the JVM can host languages other than Java. Kotlin, 
 
 ## See Also
 
-* [Basic Java Concepts](/pedia/basic-java-concepts/)
-* [Class Loading](/pedia/class-loading/)
-* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)
-* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
-* [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)
+* [Basic Java Concepts](/java-terms-explained/basic-java-concepts/)
+* [Class Loading](/java-terms-explained/class-loading/)
+* [Foreign Function & Memory API](/java-terms-explained/foreign-function-memory-api/)
+* [JIT Compilation (Just-in-Time)](/java-terms-explained/jit-compilation-just-in-time/)
+* [Java Native Interface (JNI)](/java-terms-explained/java-native-interface-jni/)

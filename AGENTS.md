@@ -179,7 +179,7 @@ See `scripts/validate/AGENTS.md` (`Frontmatter.java`, `BuiltSite.java`) and
 
 Most of what this section used to list closed at or before cutover: the
 scrapers are deleted, the fetchers all run daily for real, the theme carries
-the live site's own palette, Featured Authors exist, `/pedia/` holds every
+the live site's own palette, Featured Authors exist, `/java-terms-explained/` holds every
 entry, search is live, and the paid banner carousel is built (see the ads
 convention below). What is genuinely still open:
 
@@ -211,7 +211,7 @@ convention below). What is genuinely still open:
 7. **Hotjar (`hjid` 2547610) and Reo.dev (`b38cec169d83063`)** ran on the
    WordPress site and were deliberately not carried over. Decide separately.
 
-**A lesson worth keeping from a gap that closed**: `/pedia/` looked complete
+**A lesson worth keeping from a gap that closed**: `/java-terms-explained/` looked complete
 because the WordPress index is **paginated and lists only some of them**.
 `terminology-sitemap.xml` was the honest count. Check a sitemap, not an index
 page, if anything here is ever compared against an archived copy of the old
@@ -664,6 +664,10 @@ JS-level notes for the sections below.
   Everything on display is derived. **Don't add a `featured: true` frontmatter
   flag**: that is two files to edit per rotation and two to remember to unset,
   which is how an author silently stays featured for ever.
+
+- **The glossary's folder is `content/pedia/` but its URL is `/java-terms-explained/`**,
+  and `/pedia/…` survives as an alias on every entry. Templates reach it through
+  `site.GetPage "/pedia"`, never a literal path.
 
 - **A pedia entry is: prose, then optional "More reading on Foojay:", then
   `## See Also`.** The two blocks mean different things — More reading links

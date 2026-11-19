@@ -115,7 +115,7 @@ export function discover() {
   pages.author = firstUnder('today/author/');
   pages.category = firstUnder('today/category/');
   pages.sponsor = firstUnder('sponsor/');
-  pages.pedia = firstUnder('pedia/');
+  pages.pedia = firstUnder('java-terms-explained/');
   pages.pager = 'today/page/2/';
   // Self-hosted media is found on DISK, not by looking for a link to it: the
   // one .mp4 in the build is a bundle resource whose post still links to the

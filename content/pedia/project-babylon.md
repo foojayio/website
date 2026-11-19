@@ -1,7 +1,9 @@
 ---
 title: "Project Babylon"
 description: "Project Babylon extends Java's reflection to reach inside method bodies, so a library can read and transform the code of a lambda. Its driving use case is running Java on GPUs."
-url: "/pedia/project-babylon/"
+url: "/java-terms-explained/project-babylon/"
+aliases:
+  - "/pedia/project-babylon/"
 ---
 
 Project Babylon is the OpenJDK project exploring **code reflection**: extending Java's reflective capabilities from the *shape* of a program — its classes, methods and fields — to the *contents* of a method body.
@@ -20,7 +22,7 @@ More reading on Foojay:
 
 ## See Also
 
-* [Bytecode](/pedia/bytecode/)
-* [Project Panama](/pedia/project-panama/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
-* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
+* [Bytecode](/java-terms-explained/bytecode/)
+* [Project Panama](/java-terms-explained/project-panama/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)
+* [JIT Compilation (Just-in-Time)](/java-terms-explained/jit-compilation-just-in-time/)

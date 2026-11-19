@@ -162,7 +162,7 @@ public class BuiltSite {
                 new Section("posts", Path.of("content/posts"), "today/", true),
                 new Section("authors", Path.of("content/authors"), "today/author/", true),
                 new Section("sponsors", Path.of("content/sponsors"), "sponsor/", true),
-                new Section("pedia entries", Path.of("content/pedia"), "pedia/", false));
+                new Section("pedia entries", Path.of("content/pedia"), "java-terms-explained/", false));
 
         for (Section s : sections) {
             if (!Files.isDirectory(s.dir())) continue;
