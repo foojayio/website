@@ -69,9 +69,9 @@ OpenJDK 64-Bit Server VM Zulu21.54+107-CA (build 21.0.13+9-LTS, mixed mode, shar
 
 Three parts matter:
 
-- **The version string** (`21.0.13.1`): the OpenJDK patch level. Compare it with the latest release.
-- **The vendor build** (`Zulu21.54.201-CA`): the vendor, the Zulu version, and the availability type. CA means Community Availability, SA means Subscriber Availability.
-- **The build number** (`+2`): the exact build of that patch level.
+- **The version string** (`21.0.13`): the OpenJDK patch level. Compare it with the latest release.
+- **The vendor build** (`Zulu21.54+107-CA`): the vendor, the Zulu version, and the availability type. CA means Community Availability, SA means Subscriber Availability.
+- **The build number** (`+9`): the exact OpenJDK build of that patch level.
 
 If you see 21.0.9 or 25.0.1, you run a build from October 2025. A full year of security fixes is missing. You can find back the release date in this [Version Search Tool](https://docs.azul.com/core/version-search).
 
@@ -83,10 +83,10 @@ java-21-version-search.png | The Version Search Tool shows the release that cont
 
 The [Azul Core release notes](https://docs.azul.com/core/release-notes) list every build. The table below shows the November 17, 2026 monthly update for Java 21 and 25:
 
-| Java | PSU-based build (CA and SA) | OpenJDK version | CPU-based build (SA) | OpenJDK version |
-|------|-----------------------------|-----------------|----------------------|-----------------|
-| 21   | 21.54.201 (CA), 21.54.202 (SA) | 21.0.13.1 | 21.53.202 | 21.0.12.1 |
-| 25   | 25.38.201 (CA), 25.38.202 (SA) | 25.0.5.1  | 25.37.202 | 25.0.4.1  |
+| Java | PSU-based build (CA and SA) |  CPU-based build (SA) | 
+|------|-----------------------------|----------------------|
+| 21   | 21.54.201 (CA), 21.54.202 (SA)  | 21.53.202 | 
+| 25   | 25.38.201 (CA), 25.38.202 (SA)  | 25.37.202 | 
 
 CPU stands for Critical Patch Update and contains security fixes only. PSU stands for Patch Set Update and adds bug fixes and enhancements. Free Community Availability (CA) builds follow the PSU line. If you need the security-only line for production, that is part of a subscription (Subscriber Availability (SA)). The [August 2026 CSPU post](https://foojay.io/today/azul-august-2026-release-javas-first-monthly-cspu/) explains both lines in detail.
 
@@ -108,7 +108,12 @@ java-21-fixes-per-release-2026.png | CVE Fixes in 2026 per Release for Java 21, 
 java-21-cve-table.png | The first part of the list with the CVEs per release
 {{< /gallery >}}
 
-The numbers make the point. A Java 21 build from the first release (21.0.0, October 2023) misses 150 CVEs, of which 37 are rated high or critical. For Java 21, the October 20, 2026 release alone fixed 43 CVEs.
+The numbers make the point. When you are running 21.0.0 (October 2023), you are exposed to 150 CVEs compared to version 21.0.13 (November 2026):
+
+* Critical: 2
+* High: 35
+* Medium: 69
+* Low: 44
 
 The tool only counts CVEs fixed in OpenJDK builds. It leaves out CVEs that other distributions fixed and that are known not to affect Zulu. Figures for older releases can differ slightly from numbers other OpenJDK vendors report.
 
