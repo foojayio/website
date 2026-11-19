@@ -287,14 +287,6 @@ enableGitInfo = true
     desc = "Everything the community published, newest first"
 
 [[menu.main]]
-  name = "Week in Review"
-  parent = "News"
-  url = "/today/week-review/"
-  weight = 11
-  [menu.main.params]
-    desc = "What was published on foojay.io, week by week"
-
-[[menu.main]]
   name = "Podcast"
   parent = "News"
   url = "/today/category/podcast/"
@@ -325,6 +317,14 @@ enableGitInfo = true
   weight = 15
   [menu.main.params]
     desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
+
+[[menu.main]]
+  name = "Week in Review"
+  parent = "News"
+  url = "/today/week-review/"
+  weight = 16
+  [menu.main.params]
+  desc = "What was published on foojay.io, week by week"
 
 [[menu.main]]
   name = "All Categories"
