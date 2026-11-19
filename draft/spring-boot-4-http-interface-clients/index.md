@@ -234,13 +234,14 @@ public interface UserClient {
 The steps, in order:
 
 1. Replace `@FeignClient` with `@HttpExchange` and the mapping annotations with their `@...Exchange` versions.
-2. Add `@ImportHttpServices`, one group per remote service. Delete `@EnableFeignClients` only after the last Feign client is migrated.
+2. Add `@ImportHttpServices`, one group per remote service. Delete `@EnableFeignClients` only after the last Feign client is migrated. If it lists clients explicitly (`clients = {...}`), take each migrated interface out of that list, or startup fails.
 3. Move each `url` into `spring.http.serviceclient.<group>.base-url`.
 4. Turn Feign `RequestInterceptor` beans into a `RestClientHttpServiceGroupConfigurer`.
 5. Replace `FeignException` handling with `RestClientResponseException` (or its subclasses).
-6. Once no `@FeignClient` is left, remove `spring-cloud-starter-openfeign`. If nothing else uses Spring Cloud, the Spring Cloud BOM can go too.
+6. If the Feign client had a `fallback` or `fallbackFactory`, delete that bean. Otherwise two beans implement the interface and injection by type fails with `NoUniqueBeanDefinitionException`. HTTP interface clients have no fallbacks, so move the failure handling into the caller (catch `RestClientException`) or into a `@Retryable` service method.
+7. Once no `@FeignClient` is left, remove `spring-cloud-starter-openfeign`. If nothing else uses Spring Cloud, the Spring Cloud BOM can go too.
 
-Callers don't change, because they only ever saw the interface. You can move one client at a time: Feign and HTTP interface clients run side by side in the same app, as long as `@EnableFeignClients` and the OpenFeign starter stay until the last Feign client is gone.
+Apart from fallback handling, callers don't change, because they only ever saw the interface. You can move one client at a time: Feign and HTTP interface clients run side by side in the same app, as long as `@EnableFeignClients` and the OpenFeign starter stay until the last Feign client is gone.
 
 Spring Cloud OpenFeign is now considered feature complete by its maintainers, who point people to Spring's own HTTP interfaces, so I wouldn't start new clients on it.
 
