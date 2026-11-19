@@ -4652,3 +4652,20 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .clearable__button[hidden] { display: none; }
 .tv-channels__search { margin-bottom: 0; }
 .tv-channels .clearable { margin-bottom: .75rem; }
+
+/* /today/coming-soon/: strip of the days that have posts, linking to their sections. */
+.coming-soon-strip { margin-bottom: 2rem; }
+.coming-soon-strip__list {
+  display: flex; gap: .6rem; margin: 0; padding: 0 0 .5rem; list-style: none;
+  overflow-x: auto; overscroll-behavior-x: contain;
+}
+.coming-soon-strip__day {
+  display: grid; justify-items: center; gap: .1rem; min-width: 5.2rem; padding: .6rem .5rem;
+  border: 1px solid var(--border-strong); border-radius: .5rem;
+  background: var(--surface); color: var(--ink); text-decoration: none; line-height: 1.2;
+}
+.coming-soon-strip__day:hover { background: var(--surface-tinted); }
+.coming-soon-strip__dow, .coming-soon-strip__month { font-size: .8rem; color: var(--ink-soft); text-transform: uppercase; }
+.coming-soon-strip__num { font-size: 1.6rem; font-weight: 700; }
+.coming-soon-strip__count { margin-top: .2rem; font-size: .8rem; font-weight: 600; color: var(--brand-accent-strong); white-space: nowrap; }
+.coming-soon-day { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem); }

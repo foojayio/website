@@ -22,6 +22,23 @@
 
 <div class="content-col full-width">
   {{ if $posts }}
+  {{/* Counts per day, for the strip of links to each day's section below. */}}
+  {{ $counts := dict }}
+  {{ range $posts }}{{ $counts = merge $counts (dict .date (add 1 (index $counts .date | default 0))) }}{{ end }}
+  <nav class="coming-soon-strip" aria-label="Days with scheduled posts">
+    <ul class="coming-soon-strip__list" tabindex="0">
+      {{ range $date, $n := $counts }}
+      {{ $t := time.AsTime (printf "%sT00:00:00Z" $date) }}
+      <li><a href="#d-{{ $date }}" class="coming-soon-strip__day">
+        <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+        <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+        <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
+        <span class="coming-soon-strip__count">{{ $n }} {{ cond (eq $n 1) "post" "posts" }}</span>
+      </a></li>
+      {{ end }}
+    </ul>
+  </nav>
+
   {{/* Sorted by date, so a day's posts are adjacent: open a section on the
        first of each date. */}}
   {{ $day := "" }}
@@ -29,7 +46,7 @@
     {{ if ne .date $day }}
       {{ if $day }}</div></section>{{ end }}
       {{ $day = .date }}
-  <section class="coming-soon-day">
+  <section class="coming-soon-day" id="d-{{ .date }}">
     <h2 class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "Monday, 2 January 2006" }}</time></h2>
     <div class="coming-soon-day__list">
     {{ end }}
