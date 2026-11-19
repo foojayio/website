@@ -41,6 +41,11 @@
       {{ end }}
     </header>
 
+    {{/* Only a canonical naming ANOTHER site: foojay's own permalink is not a cross-post. */}}
+    {{ with .Params.canonical }}{{ with urls.Parse . }}{{ if and .Host (ne .Host (urls.Parse $.Site.BaseURL).Host) }}
+    <p class="post-origin">This article was originally published on <a href="{{ $.Params.canonical }}" target="_blank" rel="noopener">{{ strings.TrimPrefix "www." .Host }}</a>.</p>
+    {{ end }}{{ end }}{{ end }}
+
     <div class="prose">
       {{ partialCached "article-html.html" . .RelPermalink }}
     </div>

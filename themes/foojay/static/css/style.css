@@ -4271,6 +4271,10 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   text-decoration: underline; text-underline-offset: .15em;
 }
 
+/* "Originally published on" line under the hero of a cross-posted article. */
+.post-origin { font-size: .92rem; color: var(--ink-muted); margin: 0 0 1.5rem; }
+.post-origin a { color: var(--brand-accent-strong); text-decoration: underline; text-underline-offset: .15em; }
+
 /* ------------------------------------------------- episode transcript ----
    The machine transcript under a podcast episode (posts/single.html, written
    by scripts/fetch/PodcastTranscripts.java).
