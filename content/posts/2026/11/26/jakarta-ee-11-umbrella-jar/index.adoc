@@ -1,6 +1,6 @@
 ---
 title: "Jakarta EE 11 No Longer Has an Umbrella JAR"
-date: "2026-01-01"
+date: "2026-11-26"
 description: "The Jakarta EE umbrella JAR and its duplicate classes, JPMS split packages and Maven surprises are gone in EE 11. Your dependency stays the same."
 authors:
   - "lenny-primak"
@@ -11,6 +11,9 @@ categories:
   - "Dependency Management"
 related_posts:
   - "batch-processing-mongodb-jakarta-ee-customer-segmentation"
+  - "testing-jakarta-ee-three-layers-three-tools"
+  - "adding-rag-to-jakarta-ee-11-app"
+  - "jakarta-ee-testing-tools-compared-weldinitiator-arquillian-and-testcontainers"
 ---
 
 _This work was sponsored by https://flowlogix.com[Flow Logix]._

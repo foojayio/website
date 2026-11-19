@@ -1,6 +1,6 @@
 ---
 title: "You don't need React to get a component library"
-date: "2026-01-01"
+date: "2026-12-04"
 description: "Shadleaf brings shadcn-style, accessible UI components to Spring Boot and Thymeleaf, so a good-looking UI no longer means a single-page application."
 authors:
   - "wim-deblauwe"
@@ -8,7 +8,11 @@ image: "shadleaf-hero.jpg"
 categories:
   - "Spring"
   - "Library"
-related_posts: []
+related_posts:
+  - "build-full-stack-web-app-in-java-with-webforj"
+  - "writing-a-java-crud-screen-with-zero-frontend-code-mateu-3"
+  - "dont-panic-the-thymeleaf-template-injection-that-only-hurts-if-you-let-it-cve-2026-40478"
+  - "spring-boot-jpa-vs-jdbc"
 ---
 
 Ask a Spring Boot team why their new project has a React or Angular front end, and the answer is rarely "we need client-side state".
@@ -198,7 +202,9 @@ There is no API to version and no front-end state to keep in sync with the serve
 
 This is what it looks like in one of the sample applications, where Delete sits in a menu on each row:
 
-![Choosing Delete from the row menu of Ada Lovelace opens a confirmation dialog; confirming removes her row from the table of team members and shows the toast "Ada Lovelace was deleted" in the bottom right corner](delete-team-member.gif)
+{{< gallery cols="1" >}}
+delete-team-member.gif | Deleting a team member from the table | Choosing Delete from the row menu of Ada Lovelace opens a confirmation dialog; confirming removes her row from the table of team members and shows the toast "Ada Lovelace was deleted" in the bottom right corner
+{{< /gallery >}}
 
 ## Mistakes fail early
 
@@ -240,11 +246,15 @@ And if a component really doesn't fit, you can override its template in your own
 All skins support light and dark mode as well.
 This is the people table of one of the sample applications, in light mode:
 
-![A Shadleaf application with a sidebar and a table of people, with search, sorting and pagination, in light mode](shadleaf-sample-01-light.png)
+{{< gallery cols="1" >}}
+shadleaf-sample-01-light.jpg | A Shadleaf application with a sidebar and a table of people, with search, sorting and pagination, in light mode
+{{< /gallery >}}
 
 And the same page in dark mode:
 
-![The same table of people in dark mode](shadleaf-sample-01-dark.png)
+{{< gallery cols="1" >}}
+shadleaf-sample-01-dark.jpg | The same table of people in dark mode
+{{< /gallery >}}
 
 ## When you still want a SPA
 

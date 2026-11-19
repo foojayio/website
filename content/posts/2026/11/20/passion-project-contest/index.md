@@ -1,21 +1,17 @@
 ---
-
 title: "Show US What You're Proud Of"
-
-date: "2026-11-18"
-
+date: "2026-11-20"
 description: "Enter the free Passion Project Contest by 31 December 2026. Share what you built and why for a chance at a showcase video and €500."
-
 authors:
   - "maaike-vanputten"
-
 image: "passionprojectcontestbanner.jpg"
-
 categories:
   - "Java"
-
-related_posts: []
-
+related_posts:
+  - "featured-foojay-authors-for-november-2026"
+  - "foojay-podcast-105"
+  - "new-on-foojay-television-statistics-conferences-coming-soon"
+  - "a-week-of-housekeeping-what-changed-on-foojay-io"
 ---
 
 ## The Passion Project Contest 💖
