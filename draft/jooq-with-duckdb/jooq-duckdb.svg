@@ -1,0 +1,79 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="jooqGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d7db8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c5aa0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="duckdbGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb700;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left side: jOOQ -->
+  <g>
+    <!-- jOOQ box -->
+    <rect x="50" y="100" width="450" height="430" rx="12" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+
+    <!-- jOOQ header -->
+    <rect x="50" y="100" width="450" height="80" rx="12" fill="url(#jooqGradient)"/>
+
+    <!-- jOOQ label -->
+    <text x="275" y="155" font-size="48" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial, sans-serif">jOOQ</text>
+
+    <!-- jOOQ description -->
+    <text x="275" y="220" font-size="18" fill="#333" text-anchor="middle" font-family="Arial, sans-serif" font-weight="500">Type-Safe SQL Builder</text>
+
+    <!-- jOOQ features -->
+    <g font-family="Arial, sans-serif" font-size="16" fill="#555">
+      <text x="80" y="270">✓ Compile-time SQL verification</text>
+      <text x="80" y="305">✓ Fluent DSL for queries</text>
+      <text x="80" y="340">✓ Generated code from schema</text>
+      <text x="80" y="375">✓ Zero runtime surprises</text>
+      <text x="80" y="410">✓ IDE autocomplete support</text>
+      <text x="80" y="445">✓ Java-native query building</text>
+    </g>
+  </g>
+
+  <!-- Center: Plus/Arrow -->
+  <g>
+    <circle cx="600" cy="315" r="45" fill="white" stroke="#ddd" stroke-width="2"/>
+    <text x="600" y="335" font-size="48" fill="#999" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold">+</text>
+  </g>
+
+  <!-- Right side: DuckDB -->
+  <g>
+    <!-- DuckDB box -->
+    <rect x="700" y="100" width="450" height="430" rx="12" fill="white" stroke="#e0e0e0" stroke-width="2"/>
+
+    <!-- DuckDB header -->
+    <rect x="700" y="100" width="450" height="80" rx="12" fill="url(#duckdbGradient)"/>
+
+    <!-- DuckDB label -->
+    <text x="925" y="155" font-size="48" font-weight="bold" fill="#333" text-anchor="middle" font-family="Arial, sans-serif">DuckDB</text>
+
+    <!-- DuckDB description -->
+    <text x="925" y="220" font-size="18" fill="#333" text-anchor="middle" font-family="Arial, sans-serif" font-weight="500">Embedded Analytics Engine</text>
+
+    <!-- DuckDB features -->
+    <g font-family="Arial, sans-serif" font-size="16" fill="#555">
+      <text x="730" y="270">✓ In-process OLAP database</text>
+      <text x="730" y="305">✓ Query CSV and Parquet files</text>
+      <text x="730" y="340">✓ Fast analytical queries</text>
+      <text x="730" y="375">✓ No external dependencies</text>
+      <text x="730" y="410">✓ Millisecond response times</text>
+      <text x="730" y="445">✓ JDBC driver for Java</text>
+    </g>
+  </g>
+
+  <!-- Bottom banner -->
+  <rect x="0" y="560" width="1200" height="70" fill="#f0f0f0" stroke="#ddd" stroke-width="1"/>
+  <text x="600" y="600" font-size="22" fill="#333" text-anchor="middle" font-family="Arial, sans-serif" font-weight="500">Combine for type-safe analytical queries in Java with zero external database overhead</text>
+</svg>
