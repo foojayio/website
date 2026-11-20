@@ -11,6 +11,7 @@ authors:
   - "r-fichtner"
 image: "episode-72-jcon-part-1.jpg"
 categories:
+  - "Career"
   - "Conference"
   - "Podcast"
 related_posts:

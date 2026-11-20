@@ -9,6 +9,7 @@ authors:
 image: "jcon-part-3.jpg"
 categories:
   - "Book Review"
+  - "Career"
   - "Cloud"
   - "Conference"
   - "Jakarta EE"

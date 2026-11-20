@@ -8,6 +8,7 @@ authors:
   - "rafael-del-nero"
 image: "boost.jpg"
 categories:
+  - "Career"
   - "Podcast"
 related_posts:
   - "foojay-podcast-64"

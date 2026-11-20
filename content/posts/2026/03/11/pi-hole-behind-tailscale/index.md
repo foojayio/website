@@ -20,7 +20,7 @@ Privacy, or more specifically *digital privacy*, is the ability to protect onese
 
 Other countries range from the bad to the none. Worse, most companies located in non-regulated countries either don't know, don't care, or don't risk much.
 
-I have been using ad blockers for ages, but they represent only a tiny bit of a larger picture. First, marketers have been using techniques that allow profiling people without cookies, using hardware and software data that browsers leak. Second, in this day and age, not all requests go through your browser. I'm using Claude Code and a couple of other coding assistants a lot. I'm working on [Home Assistant](/focus/home-assistant/) as well.
+I have been using ad blockers for ages, but they represent only a tiny bit of a larger picture. First, marketers have been using techniques that allow profiling people without cookies, using hardware and software data that browsers leak. Second, in this day and age, not all requests go through your browser. I'm using Claude Code and a couple of other coding assistants a lot. I'm working on [Home Assistant](https://www.home-assistant.io/) as well.
 
 Let's face some hard truths: it would require near-infinite effort to benefit from 100% privacy. My objective is much more limited. I only want to increase my overall privacy settings, making the task of data hoarders more complicated.
 

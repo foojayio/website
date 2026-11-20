@@ -214,6 +214,6 @@ Rust implements error handling via the Either monad of FP and the `Result` enum.
 * [thiserror crate](https://docs.rs/thiserror/latest/thiserror/)
 * [What is the difference between context and with_context in anyhow?](https://stackoverflow.com/questions/65459952/what-is-the-difference-between-context-and-with-context-in-anyhow)
 * [Error handling across different languages](https://blog.frankel.ch/error-handling/)
-* [A retrospective on Errors Management: where do we go from here?](retrospective-error-management)
+* [A retrospective on Errors Management: where do we go from here?](https://blog.frankel.ch/retrospective-error-management/)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/error-management-rust-libs/) on February 11th, 2024*

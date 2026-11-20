@@ -17,6 +17,7 @@ frontmatter.
 - Books
 - BoxLang
 - Campaigns
+- Career
 - Chronicle Software
 - Cloud
 - Codename One

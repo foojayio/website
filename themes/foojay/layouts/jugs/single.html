@@ -113,7 +113,7 @@
               {{ $links := slice }}
               {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
               {{ with .twitter }}{{ $links = $links | append (printf `<a href="https://twitter.com/%s" target="_blank" rel="noopener">Twitter</a>` (. | strings.TrimPrefix "@")) }}{{ end }}
-              {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+              {{ with .mastodon }}{{ $m := . }}{{ if not (hasPrefix $m "http") }}{{ $p := split (strings.TrimPrefix "@" $m) "@" }}{{ $m = printf "https://%s/@%s" (index $p 1) (index $p 0) }}{{ end }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` $m) }}{{ end }}
               {{ with .calendar }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Calendar</a>` .) }}{{ end }}
               {{ with .email }}{{ $links = $links | append (printf `<a href="mailto:%s">Email</a>` .) }}{{ end }}
               {{ if and .latitude .longitude }}{{ $links = $links | append (printf `<a href="https://www.google.com/maps?q=%v,%v" target="_blank" rel="noopener">Map</a>` .latitude .longitude) }}{{ end }}

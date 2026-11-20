@@ -7,6 +7,7 @@ authors:
   - "bazlur-rahman"
 image: "hired.png"
 categories:
+  - "Career"
   - "Opinion"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

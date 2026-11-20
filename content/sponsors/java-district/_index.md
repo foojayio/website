@@ -21,7 +21,8 @@ authors: []
 #
 # EVERY ENTRY MUST BE AN EXISTING CATEGORY (see template/categories.md).
 topics:
-  - "Java"
+  - "Java Core"
+  - "Career"
 # Never on WordPress -- Java District joined after the Hugo migration, so the folder
 # name IS the only URL and there is no legacy /sponsor/<wpSlug>/ to alias.
 wpSlug: "java-district"

@@ -7,6 +7,7 @@ authors:
   - "frankdelporte"
 image: "podcast.jpg"
 categories:
+  - "Career"
   - "Podcast"
 related_posts:
   - "foojay-podcast-86"

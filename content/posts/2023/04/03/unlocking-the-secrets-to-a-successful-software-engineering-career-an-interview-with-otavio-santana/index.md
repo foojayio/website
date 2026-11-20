@@ -7,6 +7,7 @@ authors:
   - "bazlur-rahman"
 image: "Otavio-Santana-.jpg"
 categories:
+  - "Career"
   - "Interviews"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"

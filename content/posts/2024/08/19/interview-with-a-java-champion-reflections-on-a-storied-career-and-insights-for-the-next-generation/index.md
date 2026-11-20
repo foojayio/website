@@ -7,6 +7,7 @@ authors:
   - "bazlur-rahman"
 image: "Ben-Evans-.jpg"
 categories:
+  - "Career"
   - "Interviews"
 related_posts:
   - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
