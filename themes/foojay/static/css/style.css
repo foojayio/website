@@ -4553,9 +4553,10 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .coming-soon-day__list .post-card-meta { align-items: center; }
 .coming-soon-day__list .post-card-categories { margin-left: auto; justify-content: flex-end; }
 .widget-featured-authors__subhead {
-  display: flex; justify-content: space-between; align-items: baseline;
-  margin: .9rem 0 .8rem;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+  column-gap: .6rem; margin: .9rem 0 .8rem;
 }
+.widget-featured-authors__note { font-size: .75rem; color: var(--ink-muted); }
 .widget-featured-authors__subhead .view-all { margin-top: 0; }
 .widget-featured-authors__sub {
   margin: 0; font-size: .8rem; text-transform: uppercase;

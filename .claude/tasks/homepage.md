@@ -6,7 +6,6 @@
 - Categories appear in three places (sidebar, "Most popular post categories", "All Categories" menu item), and the sidebar order looks arbitrary.
 - The "Java" badge is on almost every card and says nothing.
 - About ten sidebar modules sit before the footer.
-- Featured Authors shows two names with no explanation.
 
 ## Plan
 1. **Hero:** replace the generic line with a concrete one that names what a visitor gets (for example: daily Java news, OpenJDK data, tutorials) and gives two buttons, "Read the news" and "New to Java?".
@@ -14,7 +13,6 @@
 3. **Category order:** sort by count, descending, and cap at a visible number with a link to all.
 4. **Hide the "Java" badge** on cards in the template (derive it, no per-post change). Check that it is not a category used for filtering.
 5. **Sidebar budget:** audit `themes/foojay/layouts/partials/sidebar.html`, choose at most five modules, and move the rest to their own pages.
-6. **Featured Authors:** add one line ("Rotated monthly by the editors") next to the heading. The slugs stay in `hugo.toml`.
 
 ## Done when
 - Each block appears once on the homepage.
