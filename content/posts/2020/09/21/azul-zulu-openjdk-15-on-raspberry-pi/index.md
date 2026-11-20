@@ -8,6 +8,8 @@ authors:
 image: "Screenshot-2020-09-21-at-10.21.40-1024x264.png"
 categories:
   - "Raspberry Pi"
+  - "Quarkus"
+  - "Spring"
 related_posts:
   - "startup-spring-quarkus-raspberry-pi"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

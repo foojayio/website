@@ -10,6 +10,7 @@ image: "cover_large.jpeg"
 categories:
   - "OpenTelemetry"
   - "Spring"
+  - "Quarkus"
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"

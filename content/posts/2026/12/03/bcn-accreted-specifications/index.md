@@ -4,7 +4,7 @@ date: "2026-12-03"
 description: "Code accretes because reality keeps delivering requirements nobody wrote down. The damage from this comes when the code is the only record of why, and the way out is to recover and record that specification."
 authors:
   - "jottinger"
-categories: [Java]
+categories: ["Opinion"]
 image: "header.jpg"
 canonical: "https://bytecode.news/posts/2026/11/accreted-specifications"
 related_posts:
