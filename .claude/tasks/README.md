@@ -6,11 +6,9 @@ Findings from a review of foojay.io (2026-11-19). The live-site observations cam
 |---|------|----------|
 | 1 | [navigation.md](navigation.md) | High |
 | 2 | [homepage.md](homepage.md) | High |
-| 3 | [neutrality-and-about.md](neutrality-and-about.md) | High |
-| 4 | [beginner-path.md](beginner-path.md) | Medium |
-| 5 | [stub-pages.md](stub-pages.md) | Medium |
-| 6 | [events-and-search.md](events-and-search.md) | Medium |
-| 8 | [contributor-experience.md](contributor-experience.md) | Low |
-| 9 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
+| 3 | [beginner-path.md](beginner-path.md) | Medium |
+| 4 | [stub-pages.md](stub-pages.md) | Medium |
+| 5 | [events-and-search.md](events-and-search.md) | Medium |
+| 6 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
 
 Rule for every task: follow the order in `AGENTS.md` (derive, default, ask) so publishing stays effortless for authors.
