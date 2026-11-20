@@ -38,7 +38,7 @@ Instead of writing our REST API, we use the PostgREST component:
 
 Let's apply it to a simple use case. Here's a `product` table that I want to expose via a CRUD API:
 
-![](table.png)
+![Entity diagram of the product table: id, name, description, price and hero columns](table.png)
 
 Note that you can find the whole source code on [GitHub](https://github.com/ajavageek/poor-man-api) to follow along.
 

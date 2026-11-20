@@ -95,7 +95,7 @@ java -jar spring-petclinic-3.2.0.jar
 
 Here are the results when starting up the application without using CRaC:
 
-![](StartWithoutCRaC1-700x456.png)
+![Bar chart of startup time without CRaC: JDK 17 takes 4632 ms and JDK 21 takes 4099 ms](StartWithoutCRaC1-700x456.png)
 
 OK, it's around 500ms faster but still takes some time to start up, so let's take a look at another approach that was implemented in SpringBoot 3.2.
 
@@ -123,7 +123,7 @@ java -XX:CRaCRestoreFrom=./tmp_checkpoint
 
 Here are the results related to the startup time when restoring from the automatic checkpoint
 
-![](StartAutomaticCheckpoint-700x432.png)
+![Bar chart of startup time: JDK 21 with automatic checkpoint restore takes 392 ms versus 4099 ms without](StartAutomaticCheckpoint-700x432.png)
 
 This is pretty cool, we get a startup time that is one order of magnitude faster than the original startup time without the need of changing our code. It also means the checkpoint only contains the framework code and not your application code, because that was not started yet.
 
@@ -169,7 +169,7 @@ java -XX:CRaCRestoreFrom=./tmp_checkpoint
 
 This manually triggered checkpoint does not only contain the framework code but also the application code which means we should see an even faster startup because the application was already loaded and started by the framework. So here are the results:
 
-![](StartWithManualCheckpoint-700x441.png)
+![Bar chart of startup time: JDK 21 restoring a manual checkpoint takes only 75 ms, against 4632 ms for JDK 17](StartWithManualCheckpoint-700x441.png)
 
 As you can see, we have been able to reduce the startup time of the petclinic application by another order of magnitude down to 75ms!
 

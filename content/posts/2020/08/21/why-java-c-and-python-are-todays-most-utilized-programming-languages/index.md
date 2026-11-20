@@ -16,7 +16,7 @@ related_posts:
 ---
 
 Looking at the latest [TIOBE Programming Community Index](https://www.tiobe.com/tiobe-index/), we see that Java has recently surpassed C in the TIOBE ratings index, while Python is holding steady in the third position:
-![](tiobe_20200820.png)
+![TIOBE index line chart from 2002 to 2020 with Java falling just below C at the latest reading](tiobe_20200820.png)
 
 Back in 2014, I wrote an analysis of the TIOBE data at that time period, claiming that: [TIOBE Is (Unintentionally) Misleading; in Truth, Interest in Java Is Surging](https://community.oracle.com/blogs/editor/2014/04/23/tiobes-unintentionally-misleading-truth-interest-java-surging).
 

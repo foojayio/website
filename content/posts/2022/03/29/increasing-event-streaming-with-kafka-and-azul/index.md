@@ -98,10 +98,10 @@ The following is the JDK version to download:
 * x86 64-bit
 
 The following is the download page of the Azul Zulu Prime Builds of OpenJDK:
-[![](Platform-Prime-1024x613-76a049e8.png)](https://www.azul.com/products/prime/stream-download/)
+[![Azul Platform Prime download page offering Quickstart Guides for Red Hat, CentOS and Oracle Linux](Platform-Prime-1024x613-76a049e8.png)](https://www.azul.com/products/prime/stream-download/)
 
 The following is the download page of the Azul Zulu Builds of OpenJDK:
-[![](Zulu-builds-of-OpenJDK-1024x400-e2382cc1.png)](https://www.azul.com/downloads/?package=jdk#download-openjdk)
+[![Azul Zulu download page filtered to Java 17 LTS, Linux, x86 64-bit JDK, with .zip, .tar.gz, .deb and .rpm downloads](Zulu-builds-of-OpenJDK-1024x400-e2382cc1.png)](https://www.azul.com/downloads/?package=jdk#download-openjdk)
 
 After downloading the binaries you'll want to decompress the files to a local directory.
 

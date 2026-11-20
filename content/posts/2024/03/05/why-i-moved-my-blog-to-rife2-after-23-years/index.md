@@ -28,19 +28,19 @@ Needless to say, I was hooked, line, and sinker.
 
 The blog is more complicated than it looks; many behind-the-scenes features have been added over the years.
 
-![](erik.thauvin.net_blog_admin_editor_typepostid9739-1-638x510.jpg)
+![Admin editor of Erik's weblog showing the title, description, tags and text of a post about moving to RIFE2](erik.thauvin.net_blog_admin_editor_typepostid9739-1-638x510.jpg)
 
 It supports numerous APIs, like [MetaWeblog](https://en.wikipedia.org/wiki/MetaWeblog), [WebSub](https://en.wikipedia.org/wiki/WebSub), and [Pushover](https://pushover.net/)… It can automatically cross-post to social networks like [Mastodon](https://mastodon.social/@ethauvin), [BlueSky](https://bsky.app/profile/erik.thauvin.net), [X](https://twitter.com/ethauvin), [Facebook](https://www.facebook.com/ethauvin), and [LinkedIn](https://www.linkedin.com/in/ethauvin/)…
 
 With one click, I can easily share a bookmark across various social networks of my choosing, pull and post my [Flickr](https://www.flickr.com/photos/kire/) photos, or grab metadata from YouTube.
 
-![](Screenshot-from-2024-02-19-16-52-29-700x239.png)
+![Blog admin form to share a post on social networks, with Mastodon, BlueSky, LinkedIn and others checked](Screenshot-from-2024-02-19-16-52-29-700x239.png)
 
 There are webhooks from [GitHub](https://github.com/ethauvin), [IFTTT](https://ifttt.com/), and [trakt](https://trakt.tv/users/ethauvin/)… For years, it also managed my popular [Linkblog](https://erik.thauvin.net/blog/posts/1267/rip-linkblog)… and so much more.
 
 This was the first time in over 20 years I had the opportunity to remove deprecated APIs and seriously clean everything up. My OCD kicked in, and I really went to town. Suddenly, this mammoth of a codebase started to become lean and mean, as I had envisioned. In the process, as Geert had recommended, I created the [RIFE2 Template Renderers](https://github.com/rife2/rife2-template-renderers) library to meet some of my more generic needs.
 
-![](Screenshot-from-2024-02-19-17-06-25-merge-1.png)
+![Two IDE project trees of the blog: Java packages for elements, executors, models and webhooks, and the templates folder](Screenshot-from-2024-02-19-17-06-25-merge-1.png)
 
 Now, I'm not going to lie, I had to battle RIFE2 more than a few times. Geert was invaluable at helping with my very specific issues. And within a short amount of time, things just started to just flow, almost zen-like. In retrospect, most of my issues had more to do with my resistance and hardheadedness. I wanted to do things the way I was used to. But once the pieces fell into place, it moved very quickly.
 

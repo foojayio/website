@@ -50,11 +50,11 @@ Let's evaluate the trio based on the following criteria:
 
 For our demo scenario, we'll assume data of about 5 GB with 5,000,000 entries. Our service is called about 2,592,000 times for reading and 259,200 times for writing in one month (1 read/s, 0.1 write/s).
 
-![](CodeEngineEclipseStore_Scene1.png)
+![Architecture diagram: customer calls a cloud Code Engine with business logic, which reads and writes data in a PostgreSQL database.](CodeEngineEclipseStore_Scene1.png)
 
 The PostgreSQL Database hosted in the IBM Cloud with minimal configuration costs about 77$ for one month. You get 6 GB RAM, 10 GB Disk and 0 dedicated cores with included backups as seen in the [pricing table](https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-pricing "pricing table").
 
-![](CodeEngineEclipseStore_Scene2.png)
+![Architecture diagram: customer calls a Code Engine with business logic and Eclipse Store, persisting data in cloud object storage.](CodeEngineEclipseStore_Scene2.png)
 
 The same constellation with EclipseStore costs about 2.81$ (0.11$ storing + 1.35$ reading + 1.35$ writing) for the whole month. Thanks to the [pricing model](https://cloud.ibm.com/objectstorage/create#pricing "pricing model") we don't need to pay for network bandwidth within the IBM Cloud. This way our Code Engine App can communicate with the Cloud Object Storage absolutely for free.  
 
@@ -64,7 +64,7 @@ This saves us over 95% of storage costs every month.
 
 To show you how this could work in the real world, we prepared a demo project for you. You can either use [the completed Repository from GitHub](https://github.com/xdev-software/eclipse-store-code-engine-demo "the completed Repository from GitHub") as template or follow the Step-by-step instructions here:
 
-![](CodeEngineEclipseStore.drawio.png)
+![Deployment diagram: Spring Boot Eclipse Store source built by Paketo Maven into a container image on Code Engine, serving customers.](CodeEngineEclipseStore.drawio.png)
 
 To keep our build as small and simple as possible, we are using [Spring Boot](https://spring.io/projects/spring-boot "Spring Boot") as a framework. In there, EclipseStore will handle the data persistence with the [XDEV IBM COS connector](https://github.com/xdev-software/eclipse-store-afs-ibm-cos "XDEV IBM COS connector").
 
@@ -143,7 +143,7 @@ public class DemoApplication {
 * `@Qualifier(…)` is necessary to direct Spring to the correct Bean  
   Here we could also initialize some initial data like a few already existing products (see [demo repository](https://github.com/xdev-software/eclipse-store-code-engine-demo/blob/master/src/main/java/software/xdev/eclipse/store/ibm/code/engine/demo/EclipseStoreCodeEngineDemoApplication.java "demo repository")).
 
-![](CodeEngineEclipseStore_Layors-279x510.png)
+![Layer diagram: customers call ProductResource, then ProductService, then StorageManager, which writes to cloud object storage.](CodeEngineEclipseStore_Layors-279x510.png)
 
 To ensure an easy-to-understand structure of the code, we use simple layering of classes.
 
@@ -240,7 +240,7 @@ First things first: if you have not yet, [create an account in the IBM Cloud](ht
 
 Login to the CLI, for example through the one time passcode that's created after you logged in the cloud console on [cloud.ibm.com](https://cloud.ibm.com/ "cloud.ibm.com").
 
-![](96f78f2232ef4b76aab5ea79889ab846.png)
+![IBM Cloud console user menu with the 'Log in to CLI and API' option highlighted in red.](96f78f2232ef4b76aab5ea79889ab846.png)
 
 From there you can paste the similar line to your command line:
 

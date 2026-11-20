@@ -28,7 +28,7 @@ The delegation pattern is described in the book:
 
 Delegation is critical when one chooses *composition* over *inheritance*.
 
-![](composition-inheritance.png)
+![UML diagram: class Delta composes and delegates to Bravo, while Charlie inherits from Bravo, both implementing interface Alpha](composition-inheritance.png)
 
 ## Manual and native delegation
 

@@ -30,7 +30,7 @@ Customers will work closely with the Microsoft Program Manager responsible for d
 ### Quick Survey
 
 If this sounds interesting, please fill out the survey below, by clicking on the image below, [or click here to go straight to the survey](https://aka.ms/migration-survey).
-[![](Screenshot-2020-10-01-at-14.51.02-1024x336.png)](https://aka.ms/migration-survey)
+[![Survey question asking how you plan to run your Java EE, Jakarta EE or MicroProfile application on Azure, with checkbox options](Screenshot-2020-10-01-at-14.51.02-1024x336.png)](https://aka.ms/migration-survey)
 
 <https://aka.ms/migration-survey>
 

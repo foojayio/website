@@ -16,7 +16,7 @@ related_posts:
 
 SKP's Agile Cheatsheet is a three part series of articles focused on daily agile terminology, ideal to be printed out and pinned up near your workstation. Part 1 is available [here](https://foojay.io/today/skps-agile-cheatsheet-part-01 "Here") and part 2 [here](https://foojay.io/today/skps-agile-cheatsheet-part-02 "Here") while the PDF cheatsheet is [here](https://rebrand.ly/skp-agile-cheat-sheet-all "Here").
 
-![](LGzevOM-a56ab03b.jpg)  
+![Diagram 'Five Levels of Agile Planning': nested circles from Product Vision down to Daily Planning, each with its focus](LGzevOM-a56ab03b.jpg)  
 
 **Release Train**. The Agile Release Train (ART) is a long-lived team of Agile teams, which, along with other stakeholders, incrementally develops, delivers, and where applicable operates, one or more solutions in a value stream. \[Type – Agile Product Management\]
 
@@ -26,7 +26,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Satisfaction Histogram.** Use this activity to set the stage and/or gather data in an iteration retrospective. Highlight how satisfied team members are with a focus area. Provide a visual picture of status in a particular area to help the team have deeper discussions and analysis. Acknowledge differences in perspective among team members. \[Type – Agile Project Management\]  
 
-![](EuY0kkk-9cc4f652.jpg)
+![Whiteboard satisfaction histogram with sticky notes scoring teamwork, release target, codebase and test confidence from 1 to 5](EuY0kkk-9cc4f652.jpg)
 
 **Scaled Agile Framework (SAFe)**. The Scaled Agile Framework® (SAFe®) is a system for implementing Agile, Lean, and DevOps practices at scale. The Scaled Agile Framework is the most popular framework for leading enterprises because it works: it's trusted, customizable, and sustainable. (Credits to www.scaledagile.com) \[Type – Scaled Agile Framework / Large Scale Agile\]
 
@@ -34,7 +34,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Scrum.** Scrum is a process framework used to manage product development and other knowledge work. \[Type – Agile Project Management / Agile Development\]
 
-![](21lrmib-b9748417.jpg)  
+![Scrum framework diagram: product backlog, sprint planning, sprint backlog, daily scrum, increment, review and retrospective loop](21lrmib-b9748417.jpg)  
 
 **Scrum Master** . The scrum master is responsible for ensuring the team lives agile values and principles and follows the practices that the team agreed they would use. \[Type – Agile Project Management / Agile Developlment\]
 

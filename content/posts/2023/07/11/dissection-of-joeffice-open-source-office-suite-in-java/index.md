@@ -32,7 +32,7 @@ One of the most visible benefits of the platform is the windows management syste
 I remember when tabs were introduced in Quattro Pro 5 spreadsheet software or Opera browser, quickly the competition followed up and now you can't have a browser or spreadsheet software without tabs.
 
 With the NetBeans Platform, I had this feature directly out of the box for free, so people can have 20, 50 documents opened and still be able to manage the windows.  
-![](4square.png) 4 documents opened and visible at the same time
+![Joeffice application with spreadsheet, presentation, word processor and database tabs in one window](4square.png) 4 documents opened and visible at the same time
 
 Another part where the NetBeans Platform will save you a lot of time is for creating installers for the different platforms Windows, Mac OS and Linux.
 

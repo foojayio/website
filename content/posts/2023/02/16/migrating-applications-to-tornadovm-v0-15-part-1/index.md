@@ -34,7 +34,7 @@ TornadoVM uses a programming model that derives from the state-of-the-art progra
 * the **host code**, which includes the core software part of the application and it is typically executed on the CPU.
 * the **accelerated code**, which corresponds to the method that will perform data processing on a hardware accelerator device.
 
-![](programming-model-2.png)
+![Java program split into host code running on the CPU and accelerated code (method or kernel) running on an accelerator](programming-model-2.png)
 
 **Note:** This article focuses on the changes that are required to migrate applications that use the TornadoVM API (prior to v0.15). All changes concern only the host code. Therefore for the accelerated code we point you to the [documentation](https://tornadovm.readthedocs.io/en/latest/programming.html#expressing-parallelism-within-java-methods) that shows how to express parallelism within a method.
 
@@ -44,7 +44,7 @@ The execution model of TornadoVM includes three main steps:
 2. Parallel data **processing on the accelerator**.
 3. **Transfer the result data** from the accelerator to the host.
 
-![](execution-model-2.png)
+![TornadoVM execution model: transfer data to the device, process it, then transfer the result data back to the host](execution-model-2.png)
 
 To follow the TornadoVM execution model, a programmer needs to use:
 

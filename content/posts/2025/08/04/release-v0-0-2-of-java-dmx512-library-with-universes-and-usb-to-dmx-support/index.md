@@ -25,8 +25,8 @@ Earlier this month, I [released V0.0.1 of my new Java library to interact with D
 * **USB-to-DMX Support**: First working protocol over serial communication to DMX512! (more info below)
 
 {{< gallery >}}
-ip-to-dmx-universes-1024x637.jpg
-usb-to-dmx-1024x572.jpg
+ip-to-dmx-universes-1024x637.jpg | | Blue DMX512 interface box with two XLR cables plugged into ports labelled DMX1 and DMX2
+usb-to-dmx-1024x572.jpg | | USB-to-DMX adapter plugged into a USB hub, with a coiled cable leading to an XLR connector
 {{< /gallery >}}
 
 ## Introduction of DMX Universes
@@ -116,7 +116,7 @@ The library I created is open-source with its [sources on GitHub](https://github
 ## DMX512 JavaFX Demo Project
 
 The JavaFX user interface demo application has been updated to use V0.0.2 of the library and has proven to work identically with IP-to-DMX and USB-to-DMX. Check the [sources on GitHub](https://github.com/codewriterbv/DMX512-Demo).
-![](demo-app-picospot-channels-ce878674.jpg)
+![JavaFX demo app controlling a PicoSpot 20 LED light in 9-channel mode, with program, color, gobo and pan/tilt controls](demo-app-picospot-channels-ce878674.jpg)
 
 ## Next Steps
 

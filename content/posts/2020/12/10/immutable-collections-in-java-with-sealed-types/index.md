@@ -59,13 +59,13 @@ Guava has collection types that are *structurally* immutable, but not *contractu
 #### Sealed Types
 
 The Sealed Types preview in JDK 15 gives developers the capability to finally provide the trifecta of c*ontractual* , *structural* and *verifiable* immutability in a collections framework. Using the Sealed Types preview feature, we can restrict the implementations of an `ImmutableCollection` interface using the `sealed` and `permits` modifiers.
-![](foojay-don-2-700x54.png) sealed interface ImmutableCollection
+![Java code declaring a sealed interface ImmutableCollection that permits ImmutableList, ImmutableBag and ImmutableSet](foojay-don-2-700x54.png) sealed interface ImmutableCollection
 
 Similarly, we can restrict the implementations of `ImmutableList`.
-![](foojay-don-3.png) sealed interface ImmutableList
+![Java code declaring sealed interface ImmutableList that permits ImmutableEmptyList and ImmutableArrayList](foojay-don-3.png) sealed interface ImmutableList
 
 The ImmutableEmptyList implementation of ImmutableList is then declared as final.
-![](foojay-don-4.png) class ImmutableEmptyList
+![Java code for final class ImmutableEmptyList with a static INSTANCE constant](foojay-don-4.png) class ImmutableEmptyList
 
 Experimenting with Sealed Types in JDK 15 has been interesting and encouraging. I wish this feature was available a decade ago when we first defined the ImmutableCollection hierarchy in Eclipse Collections. I've been able to extend the design ideas that we implemented in Eclipse Collections years ago with a feature that provides a more restrictive modeling capability.
 
@@ -74,7 +74,7 @@ Experimenting with Sealed Types in JDK 15 has been interesting and encouraging. 
 The source code for an experimental implementation of a collections framework can be found in the [Deck of Cards Kata repo](https://github.com/BNYMellon/CodeKatas/tree/master/deck-of-cards-kata). The Deck of Cards Kata can be taken to become familiar with multiple collections frameworks including the latest versions of the[Java Collections + Streams framework](https://medium.com/javarevisited/7-best-java-collections-and-stream-api-courses-for-beginners-in-2020-3ad18d52c38), Apache Commons Collections, Google Guava and Eclipse Collections.
 
 The custom collections framework interfaces and implementations can be browsed online [here](https://github.com/BNYMellon/CodeKatas/tree/master/deck-of-cards-kata/src/main/java/bnymellon/codekatas/deckofcards/custom/collections). The following class diagram shows the interfaces in the framework, including the immutable collection interfaces that leverage Sealed Types.
-![](foojay-don-5-1024x592.jpg) A Custom Collections framework in the Deck of Cards Kata   
+![UML class diagram of the custom collection interfaces extending JDK interfaces, with sealed immutable interfaces in purple](foojay-don-5-1024x592.jpg) A Custom Collections framework in the Deck of Cards Kata   
 
 The experimental collections framework in the kata has been evolving to use [Project Amber](https://openjdk.java.net/projects/amber/) features as they become available as preview features in the JDK. The kata was upgraded to JDK 15 the day it was released. The framework now uses the following features from Project Amber:
 

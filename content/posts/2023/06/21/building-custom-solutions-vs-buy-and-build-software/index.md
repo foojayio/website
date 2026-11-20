@@ -42,7 +42,7 @@ I say semi-human readable because most of the time it is human-readable, but all
 
 For example, 'D' denotes a New Order Single message, which is a message that is often used when you wish to place an order with your counterparty.
 
-![](Screenshot-2023-06-12-at-5.03.20-PM-1024x341.png)  
+![Example FIX message as a pipe-delimited string, with tag 35=D marking a New Order Single](Screenshot-2023-06-12-at-5.03.20-PM-1024x341.png)  
 *Image 1. An example FIX message in FIX format*
 
 When it comes to the FIX protocol, you have to be careful, as it turns out to be much more involved than just having the correct FIX message format and being able to decode the key=value pairs. The protocol also includes ensuring the counterparty has successfully logged in and that any missed messages are retransmitted; it also requires support for gap fills and sequence resets.
@@ -65,17 +65,17 @@ Now looking back on those early days, I ponder, 'did I make the right decision? 
 
 My problem would have been if later this was to be upgraded to another FIX version, or we had to support resend-requests, or sequence resets and gap fills. Or to offer production support and a dashboard where administering existing running sessions on the live system.
 
-![](Screenshot-2023-06-12-at-5.04.36-PM-1024x304.png)  
+![Chronicle FIX UI Sessions tab listing client:server and server:client sessions, both online with their read and write sequence numbers](Screenshot-2023-06-12-at-5.04.36-PM-1024x304.png)  
 *Image 2. Example dashboard for FIX sessions*
 
 At this point, it becomes a serious undertaking; and it starts to make more sense to turn to a tried and tested solution, already with all these bells and whistles. To use products with the ability to search historic fix messages:
 
-![](Screenshot-2023-06-12-at-5.05.20-PM-1024x705.jpg)  
+![Chronicle FIX UI Search tab with a timeline of NewOrderSingle messages and a details panel of decoded FIX fields](Screenshot-2023-06-12-at-5.05.20-PM-1024x705.jpg)  
 *Image 3. Searching for all FIX messages with a given client order id.*
 
 ...and which raise alerts when sessions disconnect:
 
-![](Screenshot-2023-06-12-at-5.05.51-PM-1024x430.png)  
+![Chronicle FIX UI notifications warning that the server:client session is inactive and disconnecting](Screenshot-2023-06-12-at-5.05.51-PM-1024x430.png)  
 *Image 4. Alerts being raised in FIX UI*
 
 ### Conclusion

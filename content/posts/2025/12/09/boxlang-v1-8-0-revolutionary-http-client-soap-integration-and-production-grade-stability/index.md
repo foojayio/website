@@ -11,7 +11,7 @@ categories:
 related_posts:
 ---
 
-![](boxlang-v1.8.0-700x467.jpg)
+![BoxLang v1.8.0 release banner with Christmas ornaments and the tagline Modular, Dynamic, Productive](boxlang-v1.8.0-700x467.jpg)
 
 The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL integration, and delivers over 100 critical bug fixes for production-grade stability. This release focuses on modern web application development with fluent APIs, streaming support, persistent connection management, and extensive CFML compatibility improvements.
 

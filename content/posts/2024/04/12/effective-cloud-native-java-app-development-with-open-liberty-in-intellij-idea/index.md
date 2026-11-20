@@ -37,7 +37,7 @@ The open source [Liberty Tools for IntelliJ IDEA](https://ibm.biz/LibertyToolsIn
 
 The Liberty Tools for IntelliJ IDEA plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you in developing, building, testing, deploying, and managing your applications – all within your favorite IDE, IntelliJ!
 
-![](Screenshot-2024-04-03-at-13.21.37-700x437.jpg)
+![Liberty Tools plugin page on the JetBrains Marketplace for IntelliJ IDEA, with two preview screenshots](Screenshot-2024-04-03-at-13.21.37-700x437.jpg)
 
 ## Key Capabilities of Liberty Tools
 

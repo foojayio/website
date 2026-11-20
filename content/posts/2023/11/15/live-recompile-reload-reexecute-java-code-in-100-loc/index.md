@@ -29,7 +29,7 @@ Here are some changes that simplify your first Java program:
 In this article, we'll write a program (**The Reloader**) to easily play with Java code without the need to know how to compile or run the code or print the result.
 
 The code will be automatically (re)compiled, (re)loaded, (re)executed and (re)printed to the output when the .java file is saved.  
-![](hot-reload-code-ant-commander-pro-1024x391.jpg) On the left side, the Java file that I edited and saved. On the right side, the code re-executed.
+![Ant Commander Pro with PlayWithNumbers.java in the editor and Reloader output of sorted random numbers in the console](hot-reload-code-ant-commander-pro-1024x391.jpg) On the left side, the Java file that I edited and saved. On the right side, the code re-executed.
 
 |                              |            |              |                                |              |
 |------------------------------|------------|--------------|--------------------------------|--------------|
@@ -169,7 +169,7 @@ public class Reloader {
 ```
 
 Now start it with ***java Reloader.java PlayWithNumbers.java*** and edit the *PlayWithNumbers.java* file as you wish.  
-[![](hot-reload-code-netbeans2-1024x576.jpg)](hot-reload-code-netbeans2.png) Playing with numbers and stream.
+[![NetBeans with Reloader.java and PlayWithNumbers.java open and a terminal showing the program re-run after each edit](hot-reload-code-netbeans2-1024x576.jpg)](hot-reload-code-netbeans2.png) Playing with numbers and stream.
 
 ## Going further
 

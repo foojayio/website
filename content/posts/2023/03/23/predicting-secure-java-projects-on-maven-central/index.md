@@ -74,7 +74,7 @@ Machine learning nerds can read more details about the rating in the [State of t
 
 A key conclusion that came out of analyzing the OpenSSF Scorecard data is that code review is the single most important thing projects can do to reduce the chance of future vulnerabilities.
 
-![](Screenshot-2023-03-13-at-3.16.16-PM-700x459.png)
+![Bar chart of OpenSSF Scorecard checks by predictive value, with Code Review highest at about 0.21, then Binaries and Dependencies Pinned](Screenshot-2023-03-13-at-3.16.16-PM-700x459.png)
 
 ***OpenSSF Health Checks Most Useful For Identifying Vulnerable Projects***
 

@@ -124,7 +124,7 @@ In short, two kinds of admission controllers are available:
 
 They run in turn as per the following diagram:
 
-![](admission-controller-phases.png)
+![Kubernetes admission flow: API request, authentication, mutating webhooks, schema validation, validating webhooks, then etcd](admission-controller-phases.png)
 
 *From [A Guide to Kubernetes Admission Controllers](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers)*
 

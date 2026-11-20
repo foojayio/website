@@ -161,7 +161,7 @@ Buildg lets us inspect container state at each stage of the build process to ide
 
 To install buildg follow the instructions on the [Buildg GitHub page](https://github.com/ktock/buildg).
 
-![](vscode-dap-9d93542e.png)
+![VS Code debugging a Dockerfile with buildg, paused at the figlet RUN step with 'Hello, World!' ASCII art in the terminal](vscode-dap-9d93542e.png)
 
 ## Conclusion
 

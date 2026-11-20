@@ -22,7 +22,7 @@ related_posts:
   - "boxlang-ai-v2-enterprise-ai-development-without-the-complexity"
 ---
 
-![](bx-docbox-700x467.jpg)  
+![BX-DocBox banner: a JavaDoc-style documentation generator for BoxLang and CFML applications](bx-docbox-700x467.jpg)  
 
 Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the ground up.
 
@@ -34,7 +34,7 @@ This release introduces **three distinct flavors** for generating world-class do
 
 **This isn't an update. This is DocBox reborn. 🔥**
 
-![](docbox-dashboard-700x347.png)
+![DocBox v5 dashboard in dark theme showing 6 packages, 6 classes, 1 interface and 7 total types](docbox-dashboard-700x347.png)
 
 ## The Evolution: One Tool, Three Flavors 🎭
 
@@ -48,7 +48,7 @@ Choose your flavor based on your needs. Use one, use all three. We don't judge. 
 
 ## 🎨 Theme System: Documentation That Doesn't Look Like It's From 2005
 
-![](docbox-overview-440x510.png)  
+![DocBox v5 overview page with package sidebar, quick start code, feature list and supported documentation strategies](docbox-overview-440x510.png)  
 
 Let's talk about the elephant in the room: most API documentation is ugly. Not anymore. 🙅‍♂️
 
@@ -61,7 +61,7 @@ DocBox v5 introduces a **professional theme system** with multiple gorgeous temp
 **- Smooth Navigation 🧭** : SPA-style routing without page refreshes  
 **- Component Tree View 🌲** : Hierarchical navigation that makes sense  
 **- Type Annotations 🏷️** : Clear visual indicators for classes, interfaces, and functions  
-![](docbox-frames-565x510.png)  
+![DocBox frames-style HTML docs for AbstractTemplateStrategy with package tree, class attributes and property summary](docbox-frames-565x510.png)  
 
 The result? API documentation that developers actually want to use. 💯. Here are the docs for the DocBox library itself: <https://s3.amazonaws.com/apidocs.ortussolutions.com/docbox/5.0.0/index.html>
 

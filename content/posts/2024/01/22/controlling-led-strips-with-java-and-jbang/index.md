@@ -98,9 +98,9 @@ Connections between PBOE and LED strip:
 The following pictures show you the connections with one LED strip on channel 0 of the PBOE:
 
 {{< gallery >}}
-full-setup-1024x768.jpg
-pixelblaze-output-expander-768x1024.jpg
-raspberry-pi-connections-1024x768.jpg
+full-setup-1024x768.jpg | | Pixelblaze Output Expander wired to a Raspberry Pi 4 and a glowing LED strip
+pixelblaze-output-expander-768x1024.jpg | | Close-up of the Pixelblaze Output Expander board with green screw terminals and connected wires
+raspberry-pi-connections-1024x768.jpg | | Jumper wires connected to the GPIO header of a Raspberry Pi 4 Model B
 {{< /gallery >}}
 
 ## Sample Application
@@ -277,7 +277,7 @@ Closing /dev/ttyS0
 This is only a short introduction, the [Pi4J website offers more detailed information and extra examples](https://pi4j.com/examples/jbang/), including the use of LED matrixes and a JavaFX user interface to define the colors being displayed on a LED strip.
 
 {{< gallery >}}
-javafx-ui-1024x589.jpg
-matrix-line-1024x473.jpg
-matrix-test-1024x473.jpg
+javafx-ui-1024x589.jpg | | JavaFX 'Pixelblaze Test' window with color dropdowns next to a terminal running the jbang command on a Raspberry Pi
+matrix-line-1024x473.jpg | | A bright white line lit across an LED matrix, with an LED strip in front of it
+matrix-test-1024x473.jpg | | An LED matrix showing multicolored lit pixels along its edges, with an LED strip in front of it
 {{< /gallery >}}

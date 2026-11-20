@@ -113,9 +113,9 @@ I'm probably a bit old-fashioned, but I still prefer paper books. I'm always dis
 This book provides a lot of information on a limited number of pages, so there are many references to websites where you can find more information. It would have been nice if a few of those had been handled more in detail, especially the Kotlin-specific parts, such as the Kotlin Coroutines.
 
 {{< gallery >}}
-content-animating-1024x578.jpg
-books-side-by-side-1024x578.jpg
-books-on-top-1024x577.jpg
+content-animating-1024x578.jpg | | Open book spread on JavaFX effects and animation, with figures showing blurred text, glow and sepia-toned frog photos
+books-side-by-side-1024x578.jpg | | The books 'Frontend Development with JavaFX and Kotlin' and 'The Definitive Guide to Modern Java Clients with JavaFX 17' side by side
+books-on-top-1024x577.jpg | | The two Apress JavaFX books stacked on top of each other, showing their spines
 {{< /gallery >}}
 
 If you are new to JavaFX+Kotlin, this book is a good starting point and gives enough examples to help you understand how to create an application and benefit from Kotlin's features. If you are new to JavaFX, I would advise you to combine it with the "JavaFX Bible" written by Stephen Chin, Johan Vos, James Weaver, and many others: [The Definitive Guide to Modern Java Clients with JavaFX 17: Cross-Platform Mobile and Cloud Development](https://www.amazon.nl/Definitive-Guide-Modern-Clients-JavaFX/dp/1484272676/) (635 pages, 63€ on paper, 44.3€ for ebook on Amazon.nl). BTW this book is printed in full color! 🙂

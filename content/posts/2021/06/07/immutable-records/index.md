@@ -69,7 +69,7 @@ Records help you remove repetitive and error-prone code, and increases developer
 
 If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Jobs](https://jfeatures.com/). You can download this step-by-step guide for free!
 
-[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
+[![Cover of the ebook '5 Steps to Best Java Jobs' by Vipin Sharma](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

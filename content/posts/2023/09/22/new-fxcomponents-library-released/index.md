@@ -39,7 +39,7 @@ Reordering of the lists is also possible through drag and drop.
 ### Reordable ListView
 
 A ListView that the user can reorder by drag and dropping each cell.
-![](Reordable-ListView.webp)
+![JavaFX window with a list of fruits (Apples, Oranges, Bananas, Lemons, Grapes) where Bananas is selected for drag-and-drop reordering](Reordable-ListView.webp)
 
 ### Blocking Progress Bar
 
@@ -51,8 +51,8 @@ The developer passes a Runnable to the showAndWait method. That Runnable will be
 
 #### Indeterminate
 
-![](Blocking-ProgressBar.webp)
+![JavaFX Button Sample window with a 'Show BlockingProgressBar' button to open the blocking progress bar](Blocking-ProgressBar.webp)
 
 #### Determinate
 
-![](Blocking-ProgressBar-determinate.webp)
+![JavaFX Button Sample window with a 'Show BlockingProgressBar' button for the determinate progress bar demo](Blocking-ProgressBar-determinate.webp)

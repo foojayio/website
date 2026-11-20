@@ -75,7 +75,7 @@ I asked Claude Code to come up with the team design. He created a plan that incl
 
 "Regular" subagents do their tasks autonomously, but then come back to the main agent. Subagents in teams communicate with each other directly.
 
-![](subagents-vs-agent-teams-light-57829694.png)
+![Diagram contrasting subagents that report back to a main agent with agent teams that share a task list and communicate directly](subagents-vs-agent-teams-light-57829694.png)
 
 After defining agents, you need to specify how subagents communicate with each other toward the accomplishment of a task. You describe such interactions in [a skill](https://blog.frankel.ch/writing-agent-skill/), which Claude also created for me. Here's a very simplified model.
 

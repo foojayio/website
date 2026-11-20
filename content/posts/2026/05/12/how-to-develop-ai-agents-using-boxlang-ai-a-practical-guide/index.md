@@ -21,7 +21,7 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 ---
 
-![](boxlang-ai-v3-1-700x467.jpg)
+![BoxLang AI v3.0 logo on a green and blue network-pattern background](boxlang-ai-v3-1-700x467.jpg)
 
 AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need, decide when to use them, chain multiple actions together, and remember what happened earlier in a conversation.
 

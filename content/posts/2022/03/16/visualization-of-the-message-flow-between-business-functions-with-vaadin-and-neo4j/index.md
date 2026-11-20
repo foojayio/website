@@ -29,7 +29,7 @@ Vaadin has a lot of great UI components but in my case there was no match. Final
 
 The graph below is a simplyfied model of what my client wants to manged in the application. A business function can send many messages and a message can be received by many business functions.
 
-![](Unbenanntes-Diagramm.drawio-1.png)
+![Diagram: a business function sends a message, and the message is received by a business unit](Unbenanntes-Diagramm.drawio-1.png)
 
 ## The Implementation
 
@@ -151,7 +151,7 @@ private Node createNode(String prefix, Long id, String name, String color) {
 
 Finally the graph is displayed in the application.
 
-![](graph.png)
+![Vaadin app showing a graph of German-labelled business functions (blue) and messages (orange) linked by arrows](graph.png)
 
 ## Conclusion
 

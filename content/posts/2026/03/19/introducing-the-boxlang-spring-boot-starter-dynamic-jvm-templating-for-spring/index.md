@@ -21,7 +21,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](boxlang-spring-boot-release-700x467.jpg)
+![BoxLang Spring Boot Starter banner with the BoxLang and Spring Boot logos on a glowing green-blue background](boxlang-spring-boot-release-700x467.jpg)
 
 Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — until the syntax fights you. What if you could write templates in a dynamic JVM language that gives you the full power of the platform, feels natural, and requires zero setup to integrate?
 

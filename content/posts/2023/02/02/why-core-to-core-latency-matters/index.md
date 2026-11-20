@@ -44,13 +44,13 @@ AMD architecture differs from Intel by introducing core complexes (CCX) which ar
 The following heatmaps show the latency when exchanging data between a pair of threads running on different cores, colour-coded with the lowest numbers green, and moving through yellow to red for the highest numbers. All three heatmaps use the same scale.
 
 **Intel Xeon Gold 6346 (2×16 core)**   
-![](Screen-Shot-2023-01-24-at-9.29.52-AM-1024x506.jpg)
+![Core-to-core latency heatmap for an AMD EPYC: about 100 ns within a socket (green) versus about 225 ns across sockets (yellow)](Screen-Shot-2023-01-24-at-9.29.52-AM-1024x506.jpg)
 
 **AMD EPYC 7343 (2×16 core, 4-core CCX)**   
-![](Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507.jpg)
+![Core-to-core latency heatmap for AMD EPYC 7343: 50 ns inside a CCX, 190-220 ns across CCXs, 310-360 ns across sockets](Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507.jpg)
 
 **AMD EPYC 73F3 (2×16 core, 2-core CCX)**   
-![](Screen-Shot-2023-01-24-at-9.30.57-AM-1024x508.jpg)
+![Core-to-core latency heatmap for AMD EPYC 73F3 showing 2-core CCX pairs fast and cross-socket latencies of 340-400 ns](Screen-Shot-2023-01-24-at-9.30.57-AM-1024x508.jpg)
 
 ### Conclusion
 

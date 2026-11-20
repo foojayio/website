@@ -35,7 +35,7 @@ Unlike a web interface where you have to copy-paste files back and forth, Claude
 
 It basically turns your terminal into a conversational agentic coding partner. You talk to it, and it acts on your code.
 
-![](Screenshot-2026-02-02-at-15.07.01-656x510.png)
+![Claude Code terminal in the java-security-demo project listing the project's source and test classes](Screenshot-2026-02-02-at-15.07.01-656x510.png)
 
 ## **The Old Way: The Context-Switching Tax 💸**
 
@@ -57,7 +57,7 @@ Why is this a game changer?
 
 Because now, the workflow is seamless. You stay in the CLI. Claude Code generates code, and it can ask SonarQube: "Is this actually good?" even before it creates the response and touches the file.
 
-![](Screenshot-2026-02-02-at-15.18.03-539x510.png)
+![MCP Market page for the SonarQube MCP server by SonarSource, describing code analysis and Cloud/Server support](Screenshot-2026-02-02-at-15.18.03-539x510.png)
 
 ## **Close the AI trust gap with a "vibe, then verify" approach 🔄**
 
@@ -86,7 +86,7 @@ claude mcp add sonarqube \
 
 Once this is running, Claude will have [25 SonarQube tools](https://github.com/SonarSource/sonarqube-mcp-server?tab=readme-ov-file#tools) in its belt that will allow the Agent to interact with SonarQube to get issues, quality gate status, analyze snippets, and more.
 
-![](Screenshot-2026-02-02-at-15.46.22.jpg)
+![Claude Code /mcp screen listing the SonarQube server's 17 tools such as list_enterprises and search_sonar_issues_in_projects](Screenshot-2026-02-02-at-15.46.22.jpg)
 
 ### **Step 2: The Action (Java Example) ☕**
 
@@ -168,7 +168,7 @@ Try asking Claude Code these questions:
 
 Claude Code queries the SonarQube Cloud/Server via MCP and prints the answer right there. It is like having the documentation and the dashboard baked into your terminal.
 
-![](Screenshot-2026-02-02-at-15.50.31-700x470.png)
+![Claude Code reporting a failing SonarQube quality gate: maintainability, coverage and duplication conditions failed](Screenshot-2026-02-02-at-15.50.31-700x470.png)
 
 ## **Why this matters**
 

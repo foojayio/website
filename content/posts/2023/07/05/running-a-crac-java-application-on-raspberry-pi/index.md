@@ -40,8 +40,8 @@ $ sudo apt upgrade
 ```
 
 {{< gallery >}}
-imager-64bit-1024x678.png
-azul-download-1024x419.png
+imager-64bit-1024x678.png | | Raspberry Pi Imager 1.7.4 operating system list with Raspberry Pi OS (64-bit) highlighted
+azul-download-1024x419.png | | Azul Zulu download page filtered on JDK CRaC, listing Java 17 builds for Linux x86 64-bit and ARM 64-bit
 {{< /gallery >}}
 
 ## Install Azul Zulu OpenJDK
@@ -290,8 +290,8 @@ Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 G
 ```
 
 {{< gallery >}}
-raspberrypi-os-kernel-criu-1-1024x739.png
-raspberrypi-os-kernel-criu-2-1024x734.png
+raspberrypi-os-kernel-criu-1-1024x739.png | | Linux kernel menuconfig main screen for arm64 6.1.32 in a terminal
+raspberrypi-os-kernel-criu-2-1024x734.png | | Kernel menuconfig General setup screen with 'Checkpoint/restore support' enabled
 {{< /gallery >}}
 
 ### Retry the Checkpoint Creation with Fix 1

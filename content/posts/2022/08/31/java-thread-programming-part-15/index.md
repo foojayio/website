@@ -105,7 +105,7 @@ private static Credit calculateCreditForPerson3(ExecutorService pool)
 
 To know how the future works, read part 12 of this threading series: ​​<https://foojay.io/today/java-thread-programming-part-12/>.
 
-![](Aysnchronos-Programming-1024x447.png)
+![Diagram: the main thread submits a task to a thread pool and gets a Future back, then continues until it calls get() for the result](Aysnchronos-Programming-1024x447.png)
 
 The code exactly does the same thing, but it is much cleaner and better. The basic idea is that the second and third methods are being executed independently and separately in other threads.
 

@@ -42,7 +42,7 @@ By supporting Jakarta EE 10 as soon as possible, Payara Server continues to be e
 **About Payara**:
 
 A global open source company, Payara creates innovative infrastructure software. We proudly nurture and grow an open, collaborative community to advance our software and services by being innovative and flexible while providing first-class support, stability, and security. We actively contribute to Jakarta EE as one of the main Eclipse Foundation Solutions members and members of the Project Management Committee to shape the future of the industry. Payara is one of 205 organizations nationally recognized with the prestigious Queen's Award for Enterprise: International Trade 2021.
-![](orange_fish-white_text-blue_background-small-1.png)
+![Payara logo: an orange fish beside white 'payara' text on a dark blue background](orange_fish-white_text-blue_background-small-1.png)
 
 For more information, please visit:
 

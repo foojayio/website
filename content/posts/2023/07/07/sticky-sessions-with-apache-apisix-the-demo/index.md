@@ -41,7 +41,7 @@ The application uses the following:
 
 The design looks like the following:
 
-![](design-1024x759.png)
+![Component diagram: Apache APISIX routes HTTP to Web App 2 and Web App 1 (Spring WebMVC, Security, Sessions, Thymeleaf, Hazelcast)](design-1024x759.png)
 
 `app1` and `app2` are two instances of the same app; I didn't want to overcrowd the diagram with redundant data.
 
@@ -255,7 +255,7 @@ services:
 
 We can log in using one of the two hard-coded accounts. I'm using `john`, with password `john` and label `John Doe`. Notice that Apache APISIX sets me on a node and keeps using the same if I refresh.
 
-![](johndoe-1024x293.png)
+![Sticky Sessions demo page showing counter 4, host name webapp2 and logged-in user John Doe](johndoe-1024x293.png)
 
 We can try to log in with the other account (`jane`/`jane`) from a private window and check the counter starts from 0.
 

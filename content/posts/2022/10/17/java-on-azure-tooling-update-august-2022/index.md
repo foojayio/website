@@ -37,13 +37,13 @@ In our latest release, Azure Kubernetes Service (AKS) cluster is available on Az
 
 To create it, you just need to locate the Kubernetes Services and right click it and choose "create" option. It will take several minutes to create the cluster.
 
-![](AKS-create-new.gif)
+![Animated IntelliJ IDEA Azure Explorer creating a new Kubernetes cluster from the Kubernetes services node](AKS-create-new.gif)
 
 After you create a Kubernetes cluster, if you want to connect or interact with your Kubernetes cluster, you could install kubectl on your local machine and use kubeconfig file to configure access to a cluster.
 
 And our plugin also provides the support to download kubeconfig (Admin/User) to the local machine, and set as current cluster(Admin/User).
 
-![](AKS-operation-updates.gif)
+![Animated IntelliJ IDEA Azure Explorer showing Kubernetes service operations such as downloading kubeconfig](AKS-operation-updates.gif)
 
 ### Virtual Machine Support
 
@@ -58,7 +58,7 @@ It will be complex for developers to launch and connect with an Azure Virtual Ma
 
 With this new Virtual Machine support, you can directly run or debug applications on Azure Virtual Machine in IntelliJ IDEA. Here is a short demonstration for it.
 
-![](vm-runend.webp)
+![Animation of running a Java Hello World app on an Azure virtual machine from IntelliJ IDEA](vm-runend.webp)
 
 ### Search Subscriptions Easily
 
@@ -68,7 +68,7 @@ It is common that when you or your organization have multiple subscriptions, it 
 
 To improve this experience, we have added the support that you can use the search box to find it with the subscription name. You can select the subscriptions and change your subscriptions easily with this new feature.
 
-![](Search.gif)
+![Animated Azure Explorer in IntelliJ IDEA searching subscriptions by name in the search box](Search.gif)
 
 ### Explore the Settings Menu
 
@@ -78,13 +78,13 @@ With this feature, you can not only open the Azure SDK Reference Book to find mo
 
 Besides, the Dev Blogs and Documentation also bring more useful resources.
 
-![](Explore-Settings.png)
+![Azure Explorer settings menu in IntelliJ IDEA with links to docs, dev blogs, feedback and view options](Explore-Settings.png)
 
 ### Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
-![](feedback-new-768x328-1.png)
+![Azure Explorer toolbar with an arrow pointing to the heart button labeled 'Click on this button to provide your feedback'](feedback-new-768x328-1.png)
 
 * Leave your comment on this blog post
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new " Create a feature request or submit a bug") on our official GitHub Issues page

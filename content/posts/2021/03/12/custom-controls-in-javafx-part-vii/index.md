@@ -21,7 +21,7 @@ This time, I have created an application that makes use of custom controls. I wo
 
 But first, let me show you the application...
 
-![](JDK-Butler-2021-02-10-11-57-56-700x504.png)
+![JDK Butler app with columns for major version, version, distribution, OS, architecture and archive type, plus a Download button](JDK-Butler-2021-02-10-11-57-56-700x504.png)
 
 The [JDK Butler](https://github.com/HanSolo/jdkbutler) is an app that makes use of the [Foojay Disco API](https://github.com/foojay2020/discoapi) to enable you to drill down to a JDK of your choice and download it to your machine. As you can see in the screenshot, we have columns where we can select things like major version, version, distribution etc.
 
@@ -29,7 +29,7 @@ Every time you select something, the selected text will be colored in a specific
 
 First of all, I extended a JavaFX Label which is made from a Labeled container that wraps a LabeledText. In the following screenshot the dashed rectangle represents the border of the Labeled container and the Text represents the LabeledText.
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-13-08-700x473.jpg)
+![Affinity Designer canvas with a 'Text' label and a dashed rectangle showing the Labeled container around its text](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-13-08-700x473.jpg)
 
 In the SelectableLabel class I've added a Region to the Label using the setGraphics() method and aligned it to the right by calling setContentDisplay(ContentDisplay.RIGHT) as you can see in the following code snippet:
 
@@ -79,19 +79,19 @@ The "magic" is in the -fx-background-insets entry, here we stretch the shape in 
 
 Because it is easier to understand when looking at a picture, here are some screenshots that hopefully explain it. So let's assume the background color of our columns is blue and the border color is red. So let's first take a look at the triangle:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-34-44-700x473.jpg)
+![Affinity Designer canvas with a blue triangle with red outline sticking out on the right edge of the label](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-34-44-700x473.jpg)
 
 Here you can see that the triangle will stand out on the right side of our SelectableLabel and because of the stretching and compressing it looks like it has only a red border on the left side. If we now add the column with it's blue background and red border it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-37-46-700x473.jpg)
+![Affinity Designer canvas with a blue column filling the label and the triangle shape stretched on its right edge](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-37-46-700x473.jpg)
 
 Ok so if we now add the next column on the right side and make sure that it will be added to the scene graph after the first column it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-39-49-700x473.jpg)
+![Affinity Designer canvas where a second blue column on the right gives the first column a notched edge](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-39-49-700x473.jpg)
 
 And here we go, now it looks like we wanted it to look. If we adjust the colors to the real ones it will look as follows:
 
-![](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-43-25-700x473.jpg)
+![Affinity Designer canvas showing the finished notched label shape in dark theme colors with blue text](Affinity-Designer-Untitled-Modified-200.0-2021-02-10-12-43-25-700x473.jpg)
 
 With this technique one can create interesting effects by just tweaking the CSS code without the need of creating complex custom controls. So the take away here is that you should keep in mind that background-insets can also be negative which enables a lot of things.
 
@@ -99,7 +99,7 @@ Another custom control that I use here is the one that we created in [Part V of 
 
 And there is TextField in the upper right corner of the application. Because I'm working on a Mac I've created a SearchTextField control that looks like the TextField that one can find in Mac OS. Here is a screenshot of the system settings in Mac OS:
 
-![](Systemeinstellungen-2021-02-10-12-51-37-700x70.png)
+![Search field in the macOS System Settings title bar with a blue focus ring around it](Systemeinstellungen-2021-02-10-12-51-37-700x70.png)
 
 In this control you see that we have a loupe on the left side and what you don't see in the screenshot is that as son as you type in some text there will also be a circular button on the right side of the text field to clear the text.  
 
@@ -109,7 +109,7 @@ To keep the post short I won't go into detail here but just tell you that I've a
 
 So my own SearchTextField looks similar to the original one in MacOS and good enough for me 🙂
 
-![](JDK-Butler-2021-02-10-12-55-37-700x67.png)
+![Custom SearchTextField in the JDK Butler title bar, with a blue focus ring like the macOS one](JDK-Butler-2021-02-10-12-55-37-700x67.png)
 
 Some of you (probably the ones working on Mac) might already wonder why JDK Butler comes in dark mode. Because JavaFX does not recognize dark/light modes you have to create the whole window on your own. Fortunately that is possible in JavaFX because you can set the Stage style to transparent by calling:
 
@@ -133,11 +133,11 @@ For Mac OS, I've added all system colors that are defined in Mac OS for aqua (li
 
 For example, if I choose red as the accent color in Mac OS, as follows...
 
-![](Allgemein-2021-02-10-13-23-35-700x210.png)
+![macOS General settings with dark appearance and red chosen as the accent and selection color](Allgemein-2021-02-10-13-23-35-700x210.png)
 
 ...if I now start JDK Butler, it will look like this:
 
-![](JDK-Butler-2021-02-10-13-24-13-700x504.png)
+![JDK Butler restyled with the red macOS accent color for selected items and checkboxes](JDK-Butler-2021-02-10-13-24-13-700x504.png)
 
 Because this is only a demo application, I did not implement this for all kinds of controls but just for the stuff I needed. At least it will give you an idea of what you can do using JavaFX. 🙂
 

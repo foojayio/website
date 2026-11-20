@@ -31,7 +31,7 @@ A practical guide to the five best practices every developer should apply when w
 Most agent implementations start the same way. You have a model, you have a few tools or API calls hardcoded into the agent, and you have one big system prompt that tries to make the whole thing work. It looks like this:
 
 **`naive-architecture`**
-![](Screenshot_20260330_194732-642x510.png)
+![ASCII diagram of a single agent with one huge system prompt and many write-capable tools wired directly to production systems](Screenshot_20260330_194732-642x510.png)
 
 This works in the demo. Here's why it fails in production:
 
@@ -48,7 +48,7 @@ This works in the demo. Here's why it fails in production:
 The solution is decomposition — the same principle that moved us from monolithic services to microservices, applied to agent systems. A supervisor agent handles intent routing. specialised subagents handle specific domains. MCP servers provide standardised, scoped access to external systems. Each component has one job and a clearly bounded blast radius.
 
 **`multi-agent-mcp-architecture`**
-![](Screenshot_20260330_194746-392x510.png)
+![ASCII diagram of a supervisor agent routing to order, aftersales and reporting subagents, each with scoped, mostly read-only MCP servers](Screenshot_20260330_194746-392x510.png)
 
 This is better for concrete reasons: a subagent that can only read orders cannot delete them, regardless of what the model is told to do. An MCP server scoped to `read` cannot be coerced into writing. The supervisor that only routes cannot directly touch any external system. Scope is enforced by architecture, not just by instruction.
 

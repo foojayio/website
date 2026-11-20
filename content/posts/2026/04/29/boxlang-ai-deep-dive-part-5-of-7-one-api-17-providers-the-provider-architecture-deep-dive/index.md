@@ -22,7 +22,7 @@ aliases:
   - "/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive-🛡️/"
 ---
 
-![](bxai-series-cover-05-700x368.png)
+![Cover for BoxLang AI 3.0 deep dive part 5: One API, 17 Providers - Zero Vendor Lock-In by Design](bxai-series-cover-05-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 5 of 7*
 

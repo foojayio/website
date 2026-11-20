@@ -21,7 +21,7 @@ related_posts:
 The best way to learn a technology is by putting it into practice in a real system.
 
 A few months ago, I decided to build a virtual assistant that could answer questions about my career, help people learn more about my articles, videos, talks, and projects, and even schedule a call on my calendar.
-![](unnamed-16-1024x937.png)
+![RicAI chat page where a user asks about Ricardo Mello and receives a summary of his experience and expertise](unnamed-16-1024x937.png)
 
 At first, the idea was simple: give the assistant access to my content and let people ask questions about it. But as the project evolved, I realized that not every question should be handled in the same way. Some questions can be answered with a direct query to the database, while others benefit from semantic search. In other cases, the assistant may need to use a tool or execute multiple steps before reaching an answer.
 
@@ -30,7 +30,7 @@ This is how [**RicAI**](https://www.ricardohsmello.com/ask-ai) evolved from a si
 ## How RicAI Works
 
 Before jumping into the implementation, let's first understand what happens when someone sends a question to RicAI:
-![](unnamed-17-647x1024.jpg)
+![Flowchart: a user question is routed to a MongoDB query, vector search, or Calendly scheduling before a response is generated and saved](unnamed-17-647x1024.jpg)
 
 1. **Receive the question** – The user asks anything about my career, content, projects, or talks.
 2. **Load conversation history** – RicAI checks whether there is previous context for that conversation and loads it so the AI can understand what was discussed before.
@@ -438,10 +438,10 @@ Besides answering questions about my career, RicAI can also help users schedule 
 Normally, the user could simply open my[Calendly page](https://calendly.com/ricardohsmello/30min), choose an available time, and continue with the scheduling process.
 
 But RicAI can help with this flow directly from the conversation. For example, the user can simply ask to schedule a call and then request my next available meeting times.
-![](unnamed-18-1024x769.jpg)
+![RicAI chat in which the user asks to schedule a call and the assistant lists Ricardo's available meeting times](unnamed-18-1024x769.jpg)
 
 As the conversation continues, the user can select one of the available times and provide the information required for the meeting. RicAI then uses that context to prepare the scheduling link.
-![](unnamed-19-1024x760.jpg)
+![RicAI chat that confirms the chosen time and offers a Schedule Call with Ricardo booking link](unnamed-19-1024x760.jpg)
 
 To make this possible, RicAI needs access to the Calendly API. I will not include the complete integration code here, but you can find it in the [project repository](https://github.com/ricardohsmello/ricai-personal-content-agent/tree/main/src/main/java/br/com/ricas/scheduling).
 

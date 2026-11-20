@@ -56,7 +56,7 @@ Host: Frank Delporte
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-![](podcast-guests-web-development-1024x576.jpg)
+![Video call with three participants: Martijn Dashorst, Frank Delporte and Marcus, recording the Foojay podcast](podcast-guests-web-development-1024x576.jpg)
 
 ## Links
 

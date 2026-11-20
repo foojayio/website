@@ -20,7 +20,7 @@ I have to admit, being a long-time C/C++ developer, but also with quite a lot of
 
 Peter's session convinced me that matching C/C++ performance is quite possible in Java, with appropriate tunings to the JVM.
 
-![](PeterLawrey.jpg)
+![Portrait photo of Peter Lawrey smiling, wearing a grey sweater in a restaurant](PeterLawrey.jpg)
 
 I caught up with Peter again recently, and asked him some questions about what's happened since then, and where we are today. Here are my questions and Peter's responses.
 

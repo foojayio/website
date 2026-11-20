@@ -23,11 +23,11 @@ Come discover how the best minds use the latest technologies to build solutions.
 The scope of talks focus on the interests of the Washington DC area's software developer community, including [really a lot of different topics](https://devignition.com/).
 
 **This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends Of OpenJDK, in addition to the normal schedule of diverse technical talks.**
-[![](ticketsdev-1024x395.png)](https://devignition.ticketleap.com/devignition2024/dates/Nov-07-2024_at_0830AM)
+[![Ticketleap page for DevIgnition2024 at Van Metre Hall, George Mason University, on Thursday November 7 2024, with a Get Tickets button](ticketsdev-1024x395.png)](https://devignition.ticketleap.com/devignition2024/dates/Nov-07-2024_at_0830AM)
 
 Links:
 
 * [Call for Papers](https://www.papercall.io/devignition2024) (closes September 27, 2024 14:00 UTC)
 * [Tickets](https://devignition.ticketleap.com/devignition2024/)
 
-![](grouppic-1024x257.jpg)
+![Three views of a conference room at DevIgnition: a speaker presenting, a Questions slide and attendees at tables](grouppic-1024x257.jpg)

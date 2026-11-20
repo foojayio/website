@@ -29,7 +29,7 @@ Below is the link to the survey.
 <https://survey.alchemer.com/s3/7845442/Azul>
 
 There are only 25 questions in total, including the screener questions, so this should only take about 10 - 15 minutes to complete.
-[![](image-1-1024x799.jpg)](https://survey.alchemer.com/s3/7845442/Azul)
+[![Survey question asking which JDK distribution providers respondents have heard of, with a checkbox list from Corretto to SapMachine](image-1-1024x799.jpg)](https://survey.alchemer.com/s3/7845442/Azul)
 
 The survey will close in two weeks time, so if you could complete this report within that timeframe that would be great!
 

@@ -216,8 +216,8 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
 ```
 
 {{< gallery >}}
-index-before-1024x539.png
-index-after-1024x567.jpg
+index-before-1024x539.png | | Demo web page with buttons to request random text and add list items, a name form and a Duke image, before interaction
+index-after-1024x567.jpg | | The same demo page after interaction: random text, new timestamped list items and a greeting from the server
 {{< /gallery >}}
 
 ### htmx with websocket
@@ -241,8 +241,8 @@ By adding `ws-send` in any HTML-element, you instruct htmx to replace it's defau
 In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp from the server back to the client every second so it can display it's still connected.
 
 {{< gallery >}}
-websocket-before-1024x302.png
-websocket-after-1024x366.jpg
+websocket-before-1024x302.png | | Demo page with Request text and Replace paragraph buttons and a server-pushed timestamp, before interaction
+websocket-after-1024x366.jpg | | The same demo page after interaction: random text, a replaced paragraph and an updated server timestamp
 {{< /gallery >}}
 
 ## Running the Application

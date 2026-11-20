@@ -22,7 +22,7 @@ There are many common mistakes I've seen repeated over the years while trying to
 It should not come as a surprise. Many 'let's add observability platform X' projects start off with plenty of fanfare but also a very hazy sense of direction and extremely muddled criteria for success. The vision of what effective observability can do to**actually help** developers work better is suspiciously missing from the preaching of many of its commercial vendors and oracles. Ask yourself, how often do you find yourself taking your eyes off the code in the IDE to find out what you can learn from its execution data?
 
 Please don't get me wrong, I am a huge believer in the role observability (fancy name for data about your app) can play in software development. OpenTelemetry is huge. I can see clearly how it can help developers write better code, introduce new paradigms, and accelerate development cycles. It can inspire developers to ask questions they did not yet even consider. However, everywhere you look online the focus still seems to be on observability itself, how to enable it, and how to get started. As awesome as shiny dashboards with cool graphics are, many teams are left in the dark as to where to take it from there.
-![](1-wrgcVpXAKhqQxKItgS5urQ-d0e3445e.jpg) *Source: Merktoonist, license acquired by the author*
+![Marketoonist cartoon: a dashboard of many KPIs, one trending to zero measures how well people understand them all](1-wrgcVpXAKhqQxKItgS5urQ-d0e3445e.jpg) *Source: Merktoonist, license acquired by the author*
 
 In this post, I will try to address this far more interesting topic: *What does success for developers using observability look like? How can the team expect to **code** and **release** better using the wealth of code runtime data? More importantly, what are examples of things that observability can tell you, right now, about your code and how can it help you improve it? We'll look at concrete code examples to find out how to leverage observability as a coding practice.*
 
@@ -39,7 +39,7 @@ At one time, in one of these crazy product launch stages when myself and the oth
 #### Let's take a more practical example
 
 To illustrate how we can utilize observability for improving our dev cycle, let's take a more practical example of a real-life scenario: Bob, a senior developer in the team, has been asked to add some functionality to the [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) example. It seems like vaccination records for pets are extremely important to keep track of and Bob has been asked to integrate with an external data source to do so. For the initial MVP, Bob creates a feature branch and moves forward to implement some new pieces of functionality.
-![](image-32.jpg)
+![Illustration of cartoon dogs and cats in a workshop, with a hooded dog wearing glasses working at a laptop](image-32.jpg)
 
 Having read many tutorials on how to collect observability data from Java applications, Bob has several OSS and free tools running in the background to assist him in his task. In the context of this post, I won't go into the details of how to set that entire stack up (as it's also widely documented) but would be happy to do that in a follow-up post if there is demand for it. You can, however, find the entire stack available as a docker_compose file [here](https://github.com/doppleware/spring-petclinic-cf/blob/main/observability/tracing/docker-compose.trace.yml).
 
@@ -51,7 +51,7 @@ Bob's basic observability stack:
 * [Prometheus](https://prometheus.io/) for saving matrics and the OSS version of [Grafana](https://grafana.com/oss/) for visualizing them
 
 It's important to note that to start collecting code data with OTEL, Bob didn't need to make **any code changes** . Running locally, he can safely use the [OTEL agent](https://opentelemetry.io/docs/instrumentation/java/automatic/). In his case, he just references the agent in the run config of the IDE so it would be picked up when running/debugging locally. He also adds a [docker-compose.override](https://github.com/doppleware/spring-petclinic-cf/blob/main/docker-compose.override.otel.yml) file to be used launching the application using Docker/Podman (this also doesn't require changing the sourced docker-compose file, I wrote about this neat little trick [here](https://digma.ai/blog/observing-java-application-running-via-docker-compose-using-opentelemetry/)).
-![](image-19-1024x659.jpg)
+![IntelliJ run configuration for petclinic-service with OpenTelemetry environment variables such as JAVA_TOOL_OPTIONS and OTEL_SERVICE_NAME](image-19-1024x659.jpg)
 
 With everything up and running, Bob creates a new feature branch and begins work on the new functionality. You can find the entire forked project available in [this](https://github.com/doppleware/spring-petclinic-cf) repo if you wish to take a closer look at the code.
 
@@ -192,7 +192,7 @@ Finally, Bob adds a new field that will indicate whether a pet vaccine is overdu
 ```
 
 That's it! The changes are ready. Bob even writes some tests and watches them turn into a happy shade of green. Pleased with the quick progress and feeling confident about the code that runs without incident when testing out locally, Bob turns to the collected runtime data to see what it can reveal about his changes. He decides to [stretch the Definition of Done](https://digma.ai/blog/youre-never-done-by-definition/) and spends additional effort in examining the data related to his changes.
-![](image-20.jpg)
+![Illustration of a caped superhero developer working at a computer, standing in for Bob the developer](image-20.jpg)
 
 ## Observability to the rescue
 
@@ -207,34 +207,34 @@ http_server_requests_seconds{uri="/owners/{ownerId}/pets/new", quantile="0.5", m
 We can then examine the graph before and after the code change.
 
 **Before:**
-![](image-21-1024x682.jpg)
+![Grafana chart 'Create new pet' with request duration dropping from about 80 ms to about 20 ms before the change](image-21-1024x682.jpg)
 
 **After:**
-![](image-23-1024x582.png)
+![Grafana chart 'Create new pet' showing request duration climbing from seconds to over 30 s after the change](image-23-1024x582.png)
 
 Yikes! Undoubtedly the changes caused a significant performance issue. We can immediately spot it just by looking at the metrics but the traces can reveal much more about the root causes and underlying problems. It's time to call up Jaeger, another component of our observability stack. Jaeger is used to visualize the captured traces and presents Bob with the opportunity to investigate what his code has been up to while he was busy adding more logic and functionality:
-![](image-24-1024x547.jpg)
+![Jaeger trace of POST /owners/{ownerId}/pets/new lasting 34.17s with 219 spans and many repeated SELECT queries](image-24-1024x547.jpg)
 
 Thus, without adding a single breakpoint we can already learn a lot going on with this code in this request. Information that until now Bob was quite oblivious to. While he did notice some lagginess when trying out the new request, he did not pay it much attention. Maybe the external API is just slow? Now that he has access to the trace, he can take a fresh look at the code he's introducing.
 
 ## Select statements galore
 
 The first issue that stands out is the many SQL statements triggered as a part of the findById repository method. This gets automatically instrumented by Spring.Data and gives us some context into what's going on. Examining the queries more closely reveals a familiar Hibernate pitfall:
-![](image-25-1024x240.png)
+![Trace span detail showing the SELECT on the visits table with its SQL statement highlighted](image-25-1024x240.png)
 
 It looks like the 'Visits' relationship is being fetched lazily for each pet in what is commonly referred to as an **N+1 Select.**Interestingly enough, this issue seems to be endemic to the PetClinic application and seems to pre-date Bob's changes. Indeed, while this is causing some slowdown it is not as significant as some of the other issues, as becomes apparent when Bob examines the trace further.
 
 ## HTTP Requests Chatter
 
 The true cause of the performance regression seems to be related to a misunderstanding of Bob's, probably due to the ambiguous naming of the `VaccineServiceFacade` methods. It seems that it was not that clear to him that an API call is executed behind the scenes each time the `VaccineRecord` function was invoked. This leaky abstraction might have been alleviated with a better naming convention, emphasizing this is in fact an execution of a long synchronous operation.
-![](image-26-1024x587.jpg)
+![Trace spans showing repeated PetVaccinationServiceFacade.VaccineRecord calls, each followed by a GET taking about 190 ms](image-26-1024x587.jpg)
 
 {{< img src="image-27-1024x532.jpg" class="size-large is-resized" width="840" height="436" >}}
 
 ## Hidden Errors
 
 Something else is going on with the HTTP requests. As we scroll down the list of requests Bob notices some of them ended with an error, followed by an exception in trying to serialize the nonexisting response. The underlying cause, based on the HTTP error code is related to a rate limit or throttling or the external API. This problem may be temporarily solved by optimizing the number of calls but may resurface as more users start using this component concurrently. Additionally, the exception handling in this code is definitely faulty, perhaps a retry mechanism might be in order.
-![](image-28-1024x505.jpg)
+![Trace spans marked with errors, including a GET returning 429 and a JSONException stack trace about converting a String to JSONArray](image-28-1024x505.jpg)
 
 ## Open Session in View
 
@@ -255,7 +255,7 @@ In this somewhat naive example, we were able to demonstrate how simply turning O
 1. **A manual process that is not continuous**: The entire experiment relied on Bob having the dedication, discipline, and will to double-check his code. As the release pressure mounts, he is less and less likely to do so. Especially if in a considerable number of instances he will have spent the time to investigate the data without coming up with anything of significance. Similar to testing, unless it is continuous and automatic, it will probably not happen at scale.
 2. **Expertise requirements**: As mentioned, this example is somewhat contrived in highlighting some clear-cut scenarios. In reality, it is very hard, without knowledge of statistics, regressions, and even basic ML to work with the data in such a way to understand the impact of code changes. Take as an example the first graph we examine, the 'before' state. Does the difference between the values represent a fluke, some ramp-up cost, or something else?
 
-![](image-30-1024x682.jpg)
+![Grafana chart 'Create new pet' with request duration around 20 ms, shown as the baseline before the change](image-30-1024x682.jpg)
 
 3. **Context switching and tooling overload** - Context switching is hard**.** For this kind of programming paradigm to work, it has to be a solution that can be **owned** by the Engineering team. It can't be a bunch of dashboards and tools which developers need to master and know how to read correctly. The more we reduce the required cognitive effort the more likely it is that this information will be put to use.
 
@@ -275,15 +275,15 @@ In this somewhat naive example, we were able to demonstrate how simply turning O
 Full disclosure: I am the author of [**Digma**](https://digma.ai/)**,** a free Continuous Feedback plugin that I created because this inexplicable chasm preventing developers from using code data was driving me mad with frustration. More than once I've encountered a 'Bob' scenario where all of the information was there, right there in the open. It could be found either in the debug/test data or even in the production data about the code, it's just that no one would or could examine it.
 
 What we envisioned with Digma was pipeline automation that could spot all of the different issues Bob finally picked up on and more, and make that continuous — just a part of the normal dev cycle. In fact, we removed the whole OTEL configuration, boilerplate, and toolings from the equation. Reducing the work required to 'turn it on' to a simple button toggle. In this manner, the entire initiative now requires Bob to do only two things - enable observability, and run his code. This means more developers would be able to start exploring the potential of code runtime data, and not just die-hards like Bob.
-![](image-33-1024x559.jpg)
+![IntelliJ with the Digma plugin panel inviting the user to toggle observability on with one click](image-33-1024x559.jpg)
 
 Having enabled observability collection, here is the IDE view of the code Bob would have seen had he been using the Digma plugin while debugging and running locally:
-![](image-31-1024x522.jpg)
+![IntelliJ code of processCreationForm flagged by Digma as N+1 suspected with excessive HTTP calls, with an insights panel beside it](image-31-1024x522.jpg)
 
 Everything from the Session in View anti-pattern, the N+1 Queries, detecting slowdowns, and the hidden errors become just a part of the developer's view — living documentation. It is continually unlocked and deciphered from the huge amounts of data that are collected as Bob continues to code, run and debug.
 
 In this manner, similar to testing, we can finally make observability transparent — something that requires no conscious effort. Just like plumbing, the role of observability should be to blend into the background. It should not matter how the data is collected or whether it was OTEL or some other technology. More importantly, we've reversed the process. Instead of Bob searching in a haystack of metrics and traces for issues related to the code, he beings by viewing the code issues which themselves contain links to relevant metrics and traces for further investigation.
-![](image-34-1024x676.jpg)
+![IntelliJ with Digma showing a trace of GET /owners/new, span bottleneck insights and a live duration graph](image-34-1024x676.jpg)
 
 ## What do you know / or want to know about your code?
 

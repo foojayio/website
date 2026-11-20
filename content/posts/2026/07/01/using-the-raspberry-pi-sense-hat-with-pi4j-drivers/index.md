@@ -40,7 +40,7 @@ The board includes several built-in components:
 * Magnetometer (Compass)
 
 With all these features available on a single board, the Sense HAT is an excellent platform for learning IoT, environmental monitoring, robotics, and hardware programming.
-![](sensehat.webp)
+![Raspberry Pi Sense HAT board with its 8x8 LED matrix, sensor chips and joystick](sensehat.webp)
 
 ## Why is the Sense HAT So Popular?
 

@@ -194,7 +194,7 @@ Following is the output.
 
 As you can see that there is one pod running. You can view the same status on the web console also. You should see the following.
 
-![](1-mc5CF_MgjHChXK7-zMvZFw-01e28fbb.png)
+![OpenShift web console overview of springboot-demo-openshift showing one running pod and a completed build](1-mc5CF_MgjHChXK7-zMvZFw-01e28fbb.png)
 
 If you carefully observe, we have not exposed the application to the outside world yet because we have not created a route. Let's do that now and see if we can access the application.
 
@@ -218,7 +218,7 @@ Similarly, if you goto web console applications\>routes. You can see that route 
 
 Let's hit the URL and access our spring boot demo application.
 
-![](1-7xA0K3gOjXvMSy6VYxu0AQ-0c97f3e8.png)
+![Browser showing the deployed app's message: Hello Spring-Boot app successfully deployed and running on Minishift](1-7xA0K3gOjXvMSy6VYxu0AQ-0c97f3e8.png)
 
 We have successfully deployed our first Spring boot demo application to Openshift locally.
 

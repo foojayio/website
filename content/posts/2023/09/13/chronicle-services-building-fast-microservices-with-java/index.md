@@ -55,7 +55,7 @@ Over many years, Chronicle Software has been involved in building libraries, app
 Based on experience gained in this work, we have developed an architectural approach for constructing low-latency applications based on event-driven microservices.
 
 We have created the [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") framework, to support this approach, taking care of necessary software infrastructure and enabling developers to focus on implementing business logic based on their functional requirements.
-![](Screenshot-2023-09-08-at-3.15.36-PM-1024x484.png)
+![Layered diagram of the Chronicle stack, with Chronicle Services on top of Queue Enterprise, Queue, Threads and Core](Screenshot-2023-09-08-at-3.15.36-PM-1024x484.png)
 
 [Chronicle Services](https://portal.chronicle.software/docs/services-cookbook/chronicle-services-documentation/RG00-introduction/introduction.html "Chronicle Services") presents an opinionated view of several of the specialised libraries we have developed to support low-latency applications.
 
@@ -72,7 +72,7 @@ There are two key concepts in[Chronicle Services](https://portal.chronicle.softw
 A Service is a self-contained processing component that accepts input from one or more sources and outputs to a single sink. Service input and output are in the form of Events, where an Event is an indication that something has happened.
 
 By default, events are transmitted between services using [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), a persisted low-latency messaging framework offering the ability to send messages with latencies of under 1 microsecond. Events are transmitted in a compact proprietary binary format. Encoding and decoding are extremely efficient in terms of both time and space and require no additional code generation on the sending or receiving side.
-![](Screenshot-2023-09-08-at-3.17.09-PM.png)
+![Diagram: a Service receives an input event through its public interface and emits an output event](Screenshot-2023-09-08-at-3.17.09-PM.png)
 
 In a comparison, described [here](https://chronicle.software/benchmarking-kafka-vs-chronicle-for-microservices-which-is-750-times-faster/ "here"), Chronicle Services transmitted messages some 750 times faster than Kafka.
 
@@ -119,7 +119,7 @@ Detailed functional testing is available through a powerful testing framework, w
 Each Service is defined in terms of its implementation class and the Chronicle Queues that are used for the transmission of Events. There is enough information here for the Chronicle Services runtime to create and start each service.
 
 Diagrammatically, the application described in the above file would appear like this:
-![](Screenshot-2023-09-25-at-9.37.26-AM-1024x256.jpg)
+![Diagram: a chain of Chronicle Services and Queues passing sum2(double,double) and sumResult(double) events](Screenshot-2023-09-25-at-9.37.26-AM-1024x256.jpg)
 
 **Deploying a Service**
 
@@ -134,10 +134,10 @@ Services can be further packaged into containers, which can simplify deployment,
 Chronicle Services applications can also integrate with industry-standard monitoring and observability components such as Prometheus and Grafana to provide visualisations of their operation.
 
 For example, we can have a snapshot of the overall state of an application:
-![](Screenshot-2023-09-25-at-9.38.43-AM-1024x271.png)
+![Dashboard of connected Chronicle Services such as random-walk, mdbb, position, pricer and passive-hedger, and their event flows](Screenshot-2023-09-25-at-9.38.43-AM-1024x271.png)
 
 or specific latency statistics from individual services:
-![](Screenshot-2023-09-25-at-9.38.56-AM-1024x262.png)
+![Grafana chart of 99th percentile service latency over several minutes for each Chronicle service](Screenshot-2023-09-25-at-9.38.56-AM-1024x262.png)
 
 Monitoring solutions are described in more detail in [this article](https://chronicle.software/monitoring-chronicle-services/).
 

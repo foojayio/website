@@ -98,7 +98,7 @@ JDK Mission Control aka JMC is a GUI tool for examining the recording created by
 
 In the next window, you can go with default options or tweak them as per your needs. Then click on **Finish** to start the recording of events for the Spring Boot application.
 
-![](1-ch1rdvwiz4slOBij7uuLnQ-7f6b6fe5.png)
+![Start Flight Recording dialog in Java Mission Control with a 1 minute fixed recording and the 'Profiling - on server' setting](1-ch1rdvwiz4slOBij7uuLnQ-7f6b6fe5.png)
 
 Once the recording is finished automated analysis results are shown.
 

@@ -34,7 +34,7 @@ In January 2021 the Raspberry Pi Pico was introduced. This is a completely new t
 The Raspberry Pi Foundation made sure a very extensive [documentation site](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html) was available when the board was launched. Programming can be done with a C/C++ and MicroPython SDK.
 
 The Pico provides a lot of GPIOs which are grouped very nicely by separating them with a ground connection. These grounds even have a different shape on the board (no rounded corners), to make it easier to find the correct pin you want to use.
-![](pico-pinout.svg) Pico pinout diagram
+![Raspberry Pi Pico pinout diagram showing GPIO pins GP0 to GP9 with their UART, I2C and SPI functions, GND pins and the onboard LED on GP25](pico-pinout.svg) Pico pinout diagram
 
 ## Pico project
 
@@ -55,7 +55,7 @@ Let's start with preparing our Pico for this tutorial. We need to connect the co
 ### Wiring
 
 Take a breadboard and some wires to create this small test setup.
-![](breadboard-wiring-1024x652.jpg) Breadboard wiring
+![Breadboard with a Raspberry Pi Pico, an ESP32 WiFi board and an HC-SR04 distance sensor connected by jumper wires](breadboard-wiring-1024x652.jpg) Breadboard wiring
 
 #### Adafruit AirLift WiFi
 
@@ -108,14 +108,14 @@ To simplify the use of components, a whole set of libraries is available as one 
 * adafruit_minimqtt
 * adafruit_requests
 
-![](files-on-pico.png) Files on the Pico
+![Finder window of the Pico's lib folder with Adafruit libraries (minimqtt, requests, esp32spi) plus code.py and secrets.py](files-on-pico.png) Files on the Pico
 
 ### IDE
 
 The code-files can be written directly to the Pico with any text editor or IDE. Adafruit advises to use the Mu editor as this allows to both write the code and see the application output in one tool. You can download this tool from[codewith.mu](https://codewith.mu/).
 
 Install the application on your PC, run it and select Mode \> CircuitPython.
-![](mu-editor-1024x699.png) Mu Editor
+![Mu editor with CircuitPython code that measures distance and publishes it to HiveMQ, and REPL output of published values](mu-editor-1024x699.png) Mu Editor
 
 ### Code
 
@@ -335,7 +335,7 @@ public void handlePicoData(Mqtt5Publish message) {
 ### Extended layout
 
 With these small modifications, we now will see the data of both the CrowPi and the Pico in one dashboard.
-![](dashboard-app-with-pico.png)
+![JavaFX dashboard of tiles showing temperature, humidity, light, tilt and distance readings from the CrowPi and the Pico](dashboard-app-with-pico.png)
 
 ## Conclusion
 

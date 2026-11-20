@@ -15,7 +15,7 @@ related_posts:
   - "debugging-collections-streams-and-watch-renderers"
 ---
 
-![](Blog-Header-1200x600-px1-700x350.jpeg)
+![Illustration of a robot reading a book on a stack of books next to the title 'The Debugger Checklist'](Blog-Header-1200x600-px1-700x350.jpeg)
 
 **Win at debugging by following an organized process and leveraging the tools you already have!**
 

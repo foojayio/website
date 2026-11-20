@@ -52,7 +52,7 @@ The following steps will show you how to create a new JavaFX project from scratc
 **Step 1:**Create a New Project
 
 After installing and launching **IntelliJ** click on the '**New Project**' option. In Figure 1 below are three options allowing you to create a Java project.
-![](IntelliJ-NewProject.png) Figure 1. Three ways to create a Java project.
+![IntelliJ IDEA 2020.2.1 welcome screen with New Project, Open or Import and Get from Version Control options](IntelliJ-NewProject.png) Figure 1. Three ways to create a Java project.
 
 **\*Note:** If you've already completed the tutorial **"[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/today/a-javafx-app-on-zulufx-in-60-seconds/)"** then you could select the option '**Open or Import**' and select the project directory and jump all the way down to step 15 executing the Hello World FX application.
 
@@ -61,35 +61,35 @@ After installing and launching **IntelliJ** click on the '**New Project**' optio
 Select **Java** as the type of project to be created in the **New Project** as shown in figure 2.
 
 **\*Warning:** You should notice in figure 2 on the left is the option for **JavaFX, where it is NOT selected** . I am purposefully avoiding the **non-modular** JavaFX application project convention (in favor of the **modular JPMS convention** ). Non-modular projects are Java Apps prior to Java 9 where JavaFX applications only use the Java **class path** as opposed to the new **module path**.
-![](01_NewProject.png) Figure 2. Select Java as the project type.
+![IntelliJ New Project dialog with Java selected as project type and JDK 1.8_232 as Project SDK](01_NewProject.png) Figure 2. Select Java as the project type.
 
 **Step 3:**Choose your JDK (ZuluFX)
 
 Click on the **Add JDK** option to locate the JDK's **Home** directory. In Figure 3 it shows three options to select a JDK for this project (Download, Add and Detected SDKs.
-![](Add_JDK.png)
+![IntelliJ Project SDK dropdown with the Add JDK option highlighted](Add_JDK.png)
 
 After selecting the '**Add JDK** ' option locate the previously installed (ZuluFX) JDK's **Home** directory as shown in figure 4 below. Assuming you've already installed **ZuluFX** locally, you will select the **Home** directory and click the **Open** button. In MacOS the parent directory will contain symlinks (Alias) to subdirectories under zulu-14.jdk. This makes it convenient for setting environment variables.
-![](zuluFX_home_links.png) Figure 4. ZuluFX Java JDK that includes JavaFX modules.
+![macOS file picker with the zulu14 FX JDK 14.0.2 home folder selected, showing bin, conf, lib and other folders](zuluFX_home_links.png) Figure 4. ZuluFX Java JDK that includes JavaFX modules.
 
 **Step 4:** Uncheck Create Project from template option, then Click Next
 
 **Step 5:** Name your project **HelloWorldFX** and click **Finish** . As a convention of mine I will create a projects directory under my home directory. On Windows you would have the following: `%HOMEDRIVE%%HOMEPATH%`\\projects
-![](HelloWorldFX.png) Figure 5. Naming Project to be created in a projects directory.
+![IntelliJ New Project dialog with the project name HelloWorldFX entered](HelloWorldFX.png) Figure 5. Naming Project to be created in a projects directory.
 
 **Step 6:** Change **Project Language Level** . In IntelliJ's menu options select **File -\> Project Structure** as shown below. Select **14 (Preview)** and click **OK**.
-![](Change-Language-level.png) Figure 6. Project language level selection. 14 (Preview) should be selected.
+![IntelliJ Project Structure dialog with the language level list open and 14 (Preview) highlighted](Change-Language-level.png) Figure 6. Project language level selection. 14 (Preview) should be selected.
 
 **Step 7:** Unmark the '**src**' directory as the source root as shown below in figure 7.
-![](Unmark-as-Source-Root.png) Figure 7. Unmark as Source Root.
+![IntelliJ context menu with Mark Directory as then Unmark as Sources Root chosen for the src folder](Unmark-as-Source-Root.png) Figure 7. Unmark as Source Root.
 
 **Step 8:** Create a module directory as '**com.mycompany.helloworld** '. Right mouse button click the '**src** ' directory in the project (tree) as shown in Figure 8. **New -\> Directory**
-![](Create-a-module-directory.png) Figure 8. Create a module directory using the reverse domain name convention. ![](NewDirectory.png) Figure 9. The name of the new directory for the project module.
+![IntelliJ context menu on src with New then Directory selected](Create-a-module-directory.png) Figure 8. Create a module directory using the reverse domain name convention. ![New Directory dialog with the name com.mycompany.helloworld typed in](NewDirectory.png) Figure 9. The name of the new directory for the project module.
 
 **Step 9:** Mark module directory as Root Source. Right mouse click '**com.mycompany.helloworld** ', Select **Mark Directory as -\> Sources Root**
-![](Mark-as-source-root.png) Figure 10. Marking the module directory as the **Sources Root**.
+![IntelliJ context menu with Mark Directory as then Sources Root chosen for the com.mycompany.helloworld folder](Mark-as-source-root.png) Figure 10. Marking the module directory as the **Sources Root**.
 
 **Step 10:** Creating a module-info.java file definition. JPMS defines a module's dependencies and shared modules. Right mouse click the folder **com.mycompany.helloworld** , select **New -\> module-info.java**
-![](Creating-a-module-info.png) Figure 11. Creating a JPMS module-info.java file for the JavaFX application.
+![IntelliJ context menu with New then module-info.java selected on the module folder](Creating-a-module-info.png) Figure 11. Creating a JPMS module-info.java file for the JavaFX application.
 
 **Step 11:** Enter (copy \& paste) the following module definition into the file.
 
@@ -103,19 +103,19 @@ module com.mycompany.helloworld {
 After hitting Ctrl + S to save the file you will encounter errors in the editor window where the module is referencing (exports) the **com.mycompany.helloworld** package which doesn't exist yet. So in the next step let's create the package namespace.
 
 **Step 12:** Create the package name space of the Java application with the directory path of **com/mycompany/helloworld** . Right mouse click the folder **com.mycompany.helloworld**,
-![](Create-a-package.png) Figure 12. Creating directories of the package namespace.
+![module-info.java requiring javafx.controls, with the New menu open and Package selected](Create-a-package.png) Figure 12. Creating directories of the package namespace.
 
 After selecting the menu options you will enter the package name **com.mycompany.helloworld** and hit **Enter** as shown below:
-![](Newpackagename.png) Figure 13. package name **com.mycompany.helloworld**
+![New Package dialog with com.mycompany.helloworld entered](Newpackagename.png) Figure 13. package name **com.mycompany.helloworld**
 
 Once created you should see the following folder created under the module name as shown in figure 14 below:
-![](packagenamespace-directory.png) Figure 14. Package name space under module directory.
+![Project tree showing the new com.mycompany.helloworld package nested under the module folder of the same name](packagenamespace-directory.png) Figure 14. Package name space under module directory.
 
 **Step 13:** Creating the main JavaFX Application file **HelloWorld.java** in the package (folder) **com.mycompany.helloworld** (beneath the module directory).
-![](Creating-JavaFX-Main.png) Figure 15. Creating the JavaFX main application Java file.
+![IntelliJ context menu on the package with New then Java Class selected](Creating-JavaFX-Main.png) Figure 15. Creating the JavaFX main application Java file.
 
 Next, the prompt will allow you to select the type of Java Class. Enter the name HelloWorld and select JavaFXApplication beneath denoting the Java Class type as shown below:
-![](JavaFXApplication.png) Figure 16. Name of Java class and the class type.
+![New Java Class dialog with the name HelloWorld and JavaFXApplication selected as the class type](JavaFXApplication.png) Figure 16. Name of Java class and the class type.
 
 After hitting enter the file is created and displayed in the editor as shown in figure 17 below.
 
@@ -147,12 +147,12 @@ The final project in IntelliJ should look like the following:
 **Step 15:** Executing the HelloWorldFX application project.
 
 Right mouse click the **HelloWorld** file in the Project tree view select **Run** as shown in figure 19
-![](Initial-Run.png)   
+![IntelliJ context menu on HelloWorld with Run 'HelloWorld.main()' highlighted](Initial-Run.png)   
 
 Figure 19. Run the HelloWorld application.
 
 The following is the output of running the HelloWorld application.
-![](Final-output-App.png) Figure 20. The output of the execution of HelloWorld JavaFX application.
+![Running JavaFX window titled Hello World containing a single Hello World button](Final-output-App.png) Figure 20. The output of the execution of HelloWorld JavaFX application.
 
 ## Maven JavaFX Project
 
@@ -164,7 +164,7 @@ The following are steps to create a modular JavaFX application through IntelliJ 
 **Step 2:** Select Maven as the project type and Choose Project SDK
 
 \*Note: It's preferred to use **ZuluFX** due to JavaFX modules are already bundled together with Java JDK. If you choose a JDK that doesn't include JavaFX you will need to add libraries through File -\> Project Structure -\> Libraries add to locate JavaFX lib directory.
-![](01-New-Project-Maven.png) Figure 22. Selecting Maven as a Project type and Selecting a JDK
+![IntelliJ New Project dialog with Maven selected and ZuluFX 14.0.2 as Project SDK](01-New-Project-Maven.png) Figure 22. Selecting Maven as a Project type and Selecting a JDK
 
 After hitting Next, you'll set up your project and Maven settings.
 
@@ -177,12 +177,12 @@ Next, you'll be specifying Maven coordinates GroupId, ArtifactId and Version as 
 **GroupId:** com.mycompany.helloworld  
 **ArtifactId:** helloworldfx  
 **Version:** 1.0-SNAPSHOT
-![](02-New-Project-artifact-coord.png) Figure 23. Naming the project and Maven coordinates
+![IntelliJ Maven project dialog with name MavenHelloWorldFX, groupId com.mycompany.helloworld and artifactId helloworldfx](02-New-Project-artifact-coord.png) Figure 23. Naming the project and Maven coordinates
 
 Click on **Finish**.
 
 The project will output as shown below in Figure 24.
-![](03-Empty-Project-1024x357.jpg) Figure 24. An empty Maven Java project.
+![Empty Maven project in IntelliJ with the project tree and a minimal pom.xml open](03-Empty-Project-1024x357.jpg) Figure 24. An empty Maven Java project.
 
 Step 4: Add Plugins and dependencies into **pom.xml**file
 
@@ -240,12 +240,12 @@ Copy \& Paste to replace the following **pom.xml** into the editor and Save.
 **Step 5:**Project Settings -\> Project - Set Language Level
 
 Below you will want to ensure the Project SDK and Project language level is at least 11 or better. In figure 25 the language level was set to Java 14 (Preview).
-![](06-Language-Level.png) Figure 25. Setting Language Level for Project
+![IntelliJ Project Structure with ZuluFX 14.0.2 as SDK and language level 14 (Preview) highlighted](06-Language-Level.png) Figure 25. Setting Language Level for Project
 
 Step 6: Project Settings -\> Modules - Set Language Level to 14 (Preview)
 
 Select Modules under Project Settings. Make sure the helloworld project language level is in sync as shown below (fig 26). Then click OK.
-![](07-Language-Level2.png) Figure 26. Setting Language Level for Modules
+![IntelliJ Project Structure Modules tab with language level 14 (Preview) set for the Maven module](07-Language-Level2.png) Figure 26. Setting Language Level for Modules
 
 **Step 7:** Create a **module-info.java** file
 
@@ -265,15 +265,15 @@ module com.mycompany.helloworld {
 ```
 
 **Step 6:** Create a Java package name space **com.mycompany.helloworld**.
-![](04-Package-namespace.png) Figure 27. New Package name space folder ![](05-New-Package-name.png) Figure 28. Entering the package name
+![IntelliJ context menu with New then Package selected](04-Package-namespace.png) Figure 27. New Package name space folder ![New Package dialog with com.mycompany.helloworld entered](05-New-Package-name.png) Figure 28. Entering the package name
 
 After entering the package name the following is a created folder under the java directory as shown in figure 29 below.
-![](08-Javafolder.png) Figure 29. Creating a new module-info.java file.
+![Maven project tree showing the com.mycompany.helloworld package under src/main/java](08-Javafolder.png) Figure 29. Creating a new module-info.java file.
 
 **Step 7:** Create the Main JavaFX app file
 
 Right Mouse click the folder **com.mycompany.helloworld** (Project pane) to select the popup menu **New -\> Class** , then type in **HelloWorld** as the name of the class as shown in figure 30 below. This will create an empty class.
-![](09-Create-Main-Class.png) Figure 30. Create a Class called HelloWorld
+![New Java Class dialog with the name HelloWorld and Class selected](09-Create-Main-Class.png) Figure 30. Create a Class called HelloWorld
 
 Next, **copy \& paste** or type the following code to replace the code in the recently created **HelloWorld.java** file and **Save**.
 
@@ -313,12 +313,12 @@ public class HelloWorld extends Application {
 **Step 8:** Reload Maven Project
 
 On the right pane there should be tabs to select **Maven** . Next, click on the reload tool bar button. This will pull down any plugins or dependencies specified in the **pom.xml**.
-![](10-Maven-Reload-project.png) Figure 31. Maven tab to reload the project plugins and dependencies.
+![IntelliJ Maven pane with the Reload All Maven Projects button highlighted](10-Maven-Reload-project.png) Figure 31. Maven tab to reload the project plugins and dependencies.
 
 Step 9: Executing the **HelloWorldFX** application project.
 
 Still on the Maven pane expand the **Plugins** folder, **javafx** , and double click on **javafx:run**
-![](Final-output-App.png) Figure 32. Maven executed Hello World application
+![Running JavaFX window titled Hello World containing a single Hello World button](Final-output-App.png) Figure 32. Maven executed Hello World application
 
 If you want to run the application using the IDE's Run configuration you'll need to specify VM Options such as the following:
 
@@ -328,7 +328,7 @@ When using ZuluFX:
 --add-modules javafx.controls
 ```
 
-![](11-VMoptions.png) Figure 33. VM Options
+![IntelliJ Run/Debug Configurations with main class com.mycompany.helloworld.HelloWorld and VM option --add-modules javafx.controls](11-VMoptions.png) Figure 33. VM Options
 
 When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and a **mods** directory (modules output directory):
 

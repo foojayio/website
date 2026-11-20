@@ -28,7 +28,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 ## File support
 
 **Parquet.** A Parquet file opens in a window with a Visual tab and a Query tab.
-![](Screenshot-2026-08-30-at-11.54.48-1024x483.jpg)
+![NetBeans DataWrangler Visual tab for newsample.parquet showing columns, row groups, compression stats and a data preview](Screenshot-2026-08-30-at-11.54.48-1024x483.jpg)
 
 * The Visual tab shows the number of rows and row groups, the writer and format version, and a table of columns with their SQL type, physical type, encoding, compression codec, compressed and uncompressed size, minimum, maximum and null count.
 * A bar in the size column shows each column's share of the file.
@@ -36,7 +36,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 * The Query tab is an SQL editor over the file, pre-filled with a `read_parquet` query and commented examples.
 
 **Excel.** A workbook opens as a spreadsheet: lettered columns, numbered rows, a name box and formula bar above the grid, and one tab per sheet along the bottom.
-![](Screenshot-2026-08-30-at-11.54.27-1024x504.jpg)
+![NetBeans spreadsheet view of newsample.xlsx with an orders sheet table of order id, customer, city and product](Screenshot-2026-08-30-at-11.54.27-1024x504.jpg)
 
 * Header cells have a dropdown with Sort A to Z, Sort Z to A and a filter by value, sorting renumbers the rows, filtering hides rows and shows their original numbers in blue, as Excel does.
 * Columns can be dragged to reorder and resized.
@@ -49,7 +49,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 **CSV, TSV, JSON and JSON Lines** files (`.csv`, `.tsv`, `.json`, `.jsonl`, `.ndjson`) have icons, editors and the same context-menu actions as the formats above.
 
 **New File › Analytics** contains five script templates: SQL Query, Data Exploration Script, Import Script, Parquet Query Script and Export Script, each line explained in a comment and with expected results where the data is fixed, together with sample CSV, Parquet, JSON and Excel files. The Parquet sample has 200 rows with LIST and STRUCT columns, the JSON sample has nested objects and arrays, the Excel sample has two sheets.
-![](Screenshot-2026-08-30-at-12.26.28-small.png)
+![NetBeans New File dialog listing SQL Query, DuckDB scripts and sample CSV, Parquet, JSON and Excel file types](Screenshot-2026-08-30-at-12.26.28-small.png)
 
 ## Query, convert, copy
 
@@ -66,7 +66,7 @@ Right-clicking a CSV, Parquet, JSON or Excel file, or inside an open CSV or JSON
 ## The SQL editor
 
 When the editor's connection is a DuckDB connection, the following are active.
-![](Screenshot-2026-08-30-at-12.11.46-1024x217.png)
+![SQL editor with DuckDB error markers and a tooltip saying column xxx is not found in the FROM clause](Screenshot-2026-08-30-at-12.11.46-1024x217.png)
 
 **Error checking.** Each statement is sent to DuckDB as `EXPLAIN <statement>`, which parses and binds the statement without running it. Syntax errors are underlined in red and unresolved names in yellow, at the position DuckDB reports, with DuckDB's message in the tooltip, including its "Did you mean" and "Candidate bindings" hints. Statements with side effects, such as `INSTALL` and `SET`, are not sent. Because the check is performed by the engine, DuckDB syntax such as `QUALIFY`, `PIVOT`, `SELECT * EXCLUDE (...)`, `GROUP BY ALL`, FROM-first queries and lambdas is accepted.
 
@@ -91,7 +91,7 @@ After `s.` it lists the columns of `s`, which may be a table, a view, a common t
 **Documentation.** As seen above, DuckDB keywords and types are colored, and hovering shows a summary, the syntax and an example, with a link to the DuckDB documentation. Standard keywords such as `FROM`, `GROUP BY` and `INSERT` are documented for what DuckDB adds to them. Hovering a function shows its signature and description. The same text appears in the completion documentation pane.
 
 **Code templates.** Thirty-one templates cover common patterns, such as `dqual` for top-N per group, `dpiv` for a cross-tab, `dasof` for a time-series join, `dcsv` and `dpq` for reading files, `dcopy` for writing Parquet, `dmacro` for macros and `dvals` for inline data.
-![](Screenshot-2026-08-30-at-18.07.44-1024x340.jpg)
+![Code completion popup of DuckDB snippets such as ASOF JOIN, with a preview of the selected snippet](Screenshot-2026-08-30-at-18.07.44-1024x340.jpg)
 
 Type the abbreviation and press Tab. They can be edited under Tools › Options › Editor › Code Templates › SQL, and [the full list is in the repository README](https://github.com/geertjanw/Apache-NetBeans-Data-Wrangler#code-templates).
 
@@ -99,7 +99,7 @@ Type the abbreviation and press Tab. They can be edited under Tools › Options 
 
 * **Register DuckDB Database** on the Databases node creates a connection to an in-memory database or to a file, with options for read-only mode, thread count and memory limit.   
 
-  ![](Screenshot-2026-08-30-at-14.09.39-700x314.png)  
+  ![Register DuckDB Database dialog with in-memory or file options, threads, memory limit and display name fields](Screenshot-2026-08-30-at-14.09.39-700x314.png)  
 
   DuckDB has no credentials, so connecting never prompts for a user or password. Whenever a feature needs the connection, such as when creating a file from a template, opening a Parquet or Excel file, completing, converting, the connection is opened automatically. If no DuckDB connection exists, an in-memory one is created.
 
@@ -107,7 +107,7 @@ Type the abbreviation and press Tab. They can be edited under Tools › Options 
 
 * **Manage DuckDB Extensions** on a connection lists the output of `duckdb_extensions()` and installs or loads an extension with a click.   
 
-  ![](Screenshot-2026-08-30-at-12.46.34-435x510.png)  
+  ![Manage DuckDB Extensions dialog listing extensions with Installed and Loaded checkboxes and Install and Load buttons](Screenshot-2026-08-30-at-12.46.34-435x510.png)  
   Code completion is updated immediately for the newly added extension.
 
 <!-- -->

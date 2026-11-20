@@ -48,7 +48,7 @@ My colleague Jonathan Shook benchmarked the performance characteristics of Cassa
 
 ### Throughput results
 
-![](graph.png)
+![Bar chart of throughput in requests/s: Cassandra 4.0 with ZGC leads on key/value and time series, and matches CMS on tabular](graph.png)
 
 Here we are looking at Cassandra running at 70% of maximum throughput. This leaves 30% operational headroom to absorb compaction, repair, or load spikes for the purposes of realistic measurements.
 
@@ -57,11 +57,11 @@ Cassandra 4.0 running with the same configuration as Cassandra 3.11 is 30% faste
 ### Latency results
 
 I've split the latency results into one chart per workload so it's easier to see the trends across the different percentiles:
-![](workloadlatencies.png)
+![Line chart of key/value latencies: 3.11 and 4.0 CMS reach about 42 ms at p999 while ZGC stays around 6 ms](workloadlatencies.png)
 
 {{< img src="timeseries-768x475-1.png" class="size-large is-resized" width="512" >}}
 
-![](tabular.png)
+![Line chart of tabular workload latencies: 3.11 and 4.0 CMS reach 40-42 ms at p999, ZGC about 11 ms](tabular.png)
 
 For these results, we limited each test scenario to the slowest system's throughput, i.e., we used 30,000, 44,000, and 54,000 requests per second for the key/value, time series, and tabular workloads, respectively.
 

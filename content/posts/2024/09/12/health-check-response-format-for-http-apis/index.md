@@ -25,7 +25,7 @@ Note that it's a draft. Moreover, it has been dormant for nearly two years and, 
 
 Even though it's not a long read, it's a bit "dry". Fortunately, the specification offers a JSON sample. I copy-pasted it in PlantUML, and presto, it shows a visual representation of it:
 
-[![](sample-healthcheck-response-1024x610.png)](sample-healthcheck-response.png)
+[![PlantUML diagram of the sample health check JSON response, with nested status, checks and links objects](sample-healthcheck-response-1024x610.png)](sample-healthcheck-response.png)
 
 Let's have a look at the proposed structure element by element.
 
@@ -33,7 +33,7 @@ Let's have a look at the proposed structure element by element.
 
 At its simplest, the response is a JSON object with a mandatory `status` property:
 
-![](root-object-response.png)
+![The simplest health check response: a JSON object with only a status property set to pass](root-object-response.png)
 
 Values can be:
 
@@ -43,7 +43,7 @@ Values can be:
 
 One can add additional *optional* values:
 
-![](root-object-healthcheck.png)
+![Health check root object with optional fields such as version, releaseId, serviceId and description, plus notes, checks and links](root-object-healthcheck.png)
 
 * `version`: *public* version of the service
 * `releaseId`: internal version of the service. For example, the `version` would be incremented for non-compatible change, while the `releaseId` could be the commit hash or a semantic version.
@@ -56,7 +56,7 @@ One can add additional *optional* values:
 
 The `links` object consists of object pairs. Values are URIs, while keys can be URIs or common/registered ones: see [RFC5988](https://www.rfc-editor.org/rfc/rfc5988#section-6.2.2) for common values, *e.g.* , `self`.
 
-![](links-object-healthcheck.png)
+![The links object of a health check response with an 'about' link and a thresholds link, each pointing to a URI](links-object-healthcheck.png)
 
 ## The `checks` objects
 
@@ -82,11 +82,11 @@ Values consist of one of the following keys:
 * `links`: see the previous section
 * Any other non-standard value
 
-![](checks-object-healthcheck-1024x376.png)
+![The checks object of a health check response, with entries such as cassandra:responseTime and uptime, each with component details](checks-object-healthcheck-1024x376.png)
 
 I tried implementing the above with Spring Boot using a custom `HealthIndicator`. Here's the best I could come up with:
 
-[![](spring-boot-healthcheck-1024x101.png)](spring-boot-healthcheck.png)
+[![Health check output from a Spring Boot custom HealthIndicator, showing the nested details object in the response structure](spring-boot-healthcheck-1024x101.png)](spring-boot-healthcheck.png)
 
 The current structure of the JSON response needs to be (easily?) customizable. You'd need to create your endpoint. I hope the Spring Boot team provides the option to generate a compatible structure.
 

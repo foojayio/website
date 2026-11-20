@@ -16,7 +16,7 @@ related_posts:
 ---
 
 Last week [JFall](https://jfall.nl/)—the "Biggest Java Conference of the Netherlands"—took place. Foojay.io, the Friends Of OpenJDK, were there in full force, including a booth with stickers and other swag, as well as Frank Delporte with his popular Foojay.io Podcast, doing live interviews with attendees.
-![](IMG_8957-1024x768.jpg)
+![Foojay.io stand at JFall with a live recording set-up: cameras, tripods and people at a table in front of foojay.io banners](IMG_8957-1024x768.jpg)
 
 Not only Frank was present throughout the day, doing interviews for upcoming podcast episodes, but so was his 14-year-old son Vik (in yellow sweater in the pic above), handling the technical side and directing the interviews like a true and enthusiastic professional.
 
@@ -25,10 +25,10 @@ You can find all the interviews [in this YouTube playlist](https://www.youtube.c
 {{< youtube 31bhIAR_oc4 >}}
 
 What was also great is that Digma, in the form of [Lee Sheinberg](https://www.linkedin.com/in/leesheinberg/), actively participated in the Foojay.io booth too, i.e., Foojay.io is a global network of enthusiastic Java and, more broadly, OpenJDK developers, which was reflected in the participation at the booth.
-[![](digmafoojay-1024x697.jpg)](https://x.com/Digma_ai/status/1855967865175785896)
+[![Digma's post thanking the foojay.io team for inviting them to JFall, with four photos of the conference, rubber ducks and attendees](digmafoojay-1024x697.jpg)](https://x.com/Digma_ai/status/1855967865175785896)
 
 It was also an opportunity for [Nataliia Dziubenko](http://Nataliia Dziubenko), new engineer at Azul, to meet several of her new colleagues in person, such as Gerrit, Frank, and myself.
-![](IMG_8951-1024x791.jpg)
+![Five people from the foojay.io team posing together in front of a State of Java banner at JFall](IMG_8951-1024x791.jpg)
 
 There was also an ongoing Java survey, more about that later when the Java survey results are released, however, a raffle for Apple AirPods Max was held throughout the day.
 

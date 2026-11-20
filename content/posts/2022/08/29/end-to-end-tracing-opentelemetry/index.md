@@ -40,7 +40,7 @@ A tracing solution should provide a standard format to work across heterogeneous
 
 One needs to understand that a specification rarely appears from nowhere. In general, the market already has a couple of distinct implementations. Most of the time, a new specification leads to an additional implementation, as the famous XKCD comic describes:
 
-![](standards-d3945873.png)
+![XKCD comic: 14 competing standards lead someone to create a universal one, resulting in 15 competing standards](standards-d3945873.png)
 
 Sometimes, however, a miracle happens: the market adheres to the new specification. Here, Trace Context is a W3C specification, and it seems to have done the trick:
 > This specification defines standard HTTP headers and a value format to propagate context information that enables distributed tracing scenarios. The specification standardizes how context information is sent and modified between services. Context information uniquely identifies individual requests in a distributed system and also defines a means to add and propagate provider-specific context information.
@@ -87,7 +87,7 @@ My favorite use case is an e-commerce shop, so let's not change it. In this case
 
 When a user arrives on the app, the home page fetches all products, gets their respective price, and display them.
 
-![](request-flow.png)
+![UML sequence diagram: Apache APISIX gateway calls the Spring Boot catalog service, which queries products and calls the Flask pricing service](request-flow.png)
 
 To make things more interesting, `catalog` is a Spring Boot application coded in Kotlin, while `pricing` is a Python Flask application.
 
@@ -327,17 +327,17 @@ curl localhost:9080/products/1
 
 The responses are not interesting, but let's look at the Jaeger UI. We find both traces, one per call:
 
-[![](all-traces.jpg)](all-traces.jpg)
+[![Jaeger trace list showing two APISIX traces for /products and /products/1, with 13 and 8 spans across services](all-traces.jpg)](all-traces.jpg)
 
 We can dive into the spans of a single trace:
 
-[![](all-spans-in-trace-scaled.jpg)](all-spans-in-trace-scaled.jpg)
+[![Jaeger timeline of the APISIX /products trace: 13 spans over 1.18s, with nested orders and pricing calls](all-spans-in-trace-scaled.jpg)](all-spans-in-trace-scaled.jpg)
 
 Note that we can infer the sequence flow without the above UML diagram. Even better, the sequence displays the calls internal to a component.
 
 Each span contains attributes that the automatic instrumentation added and the ones we added manually:
 
-[![](span-attributes.jpg)](span-attributes.jpg)
+[![Jaeger span details for the pricing SELECT query: 697 microseconds, with tags and OpenTelemetry Python SDK info](span-attributes.jpg)](span-attributes.jpg)
 
 ## Conclusion
 

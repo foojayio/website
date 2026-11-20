@@ -24,15 +24,15 @@ I turned the post into a talk and presented it at several conferences. I think i
 
 In the talk, I use an e-commerce webapp as an example.
 
-[![](original-flow.png)](original-flow.png)
+[![Sequence diagram: a client's checkout() call goes through Apache APISIX to the monolith, which returns price and cart](original-flow.png)](original-flow.png)
 
 The pricing needs to change often due to business requirements, and it is a good candidate for chopping. The idea is first to expose pricing as an HTTP route.
 
-[![](forked-flow.png)](forked-flow.png)
+[![Sequence diagram: the client calls cart() then price(cart lines) through APISIX, both handled by the monolith](forked-flow.png)](forked-flow.png)
 
 At this point, we can configure the Gateway to forward pricing calls with the cart payload to another component, *e.g.* , a .
 
-[![](forked-flow-to-faas.png)](forked-flow-to-faas.png)
+[![Sequence diagram: cart() goes to the monolith and price(cart lines) goes to a separate Pricing service via APISIX](forked-flow-to-faas.png)](forked-flow-to-faas.png)
 
 I expected a lot of pushback because we now need twice the number of HTTP calls. Given that the client is remote, it has a non-trivial performance cost. It has yet to be mentioned, but I'd like to offer another better-designed approach today.
 
@@ -53,7 +53,7 @@ We need a plugin that pipes an HTTP call's output to another HTTP call's input. 
 
 The final sequence is the following:
 
-[![](forked-flow-with-pipeline.png)](forked-flow-with-pipeline.png)
+[![Sequence diagram: on checkout(), APISIX gets cart lines from the monolith, sends them to Pricing, and returns price and cart](forked-flow-with-pipeline.png)](forked-flow-with-pipeline.png)
 
 Note that the `apisix-pipeline-request-plugin` consumes the input. As we want to return all the necessary data, we must return both the cart lines and the price in the payload. The pricing should return the cart lines, which is not an issue since it receives it as an input.
 

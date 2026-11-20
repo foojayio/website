@@ -27,7 +27,7 @@ We will be using the latest (currently 11.15) version of FXGL via Maven (or Grad
 
 The full source code is available at the end of this page. The game will look like this:
 
-![](fxgl_pong-d6286394.png)
+![Simple Pong game window with two black paddles, a square ball and scores 2 and 0](fxgl_pong-d6286394.png)
 
 Whilst this tutorial is meant to teach basic concepts, building on them will allow us to produce much more [complex examples](https://youtu.be/yhr1b4061os?t=496).
 

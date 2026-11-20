@@ -79,7 +79,7 @@ LangChain4j provides a Spring Boot integration starter. Here's our minimal depen
 
 LangChain4j offers an abstraction API over the specifics of different LLMs. Here's a focus on what we will use in this section:
 
-![](chat-language-model-api.png)
+![UML diagram of LangChain4j's ChatLanguageModel interface, its Ollama implementation and the ChatMessage types](chat-language-model-api.png)
 
 The fundamental API `model.generate(String)` passes the user's message to the Ollama instance and returns its response. We need to create an endpoint to wrap the call; the details are unimportant.
 
@@ -143,7 +143,7 @@ The above solution works, but the user experience has room for improvement. The 
 
 We can readily replace `ChatLanguageModel` with `StreamingChatLanguageModel` to achieve this. Methods are slightly different:
 
-![](streaming-chat-language-model-api.png)
+![UML diagram of LangChain4j's StreamingChatLanguageModel, which sends tokens to a StreamingResponseHandler](streaming-chat-language-model-api.png)
 
 We need to change the app configuration accordingly:
 
@@ -213,7 +213,7 @@ Every chatbot request is independent of others at this stage - they don't keep a
 
 I started to store the history by myself in memory at first. If interested, check the commit history to see how I did it. However, LangChain4j offers an integrated approach via its `AiServices` class. `ChatLanguageModel` represents the basic request-response interface to the LLM, while `AiServices` wraps additional services: chat memory, RAG, and external function calls.
 
-![](ai-services-api.png)
+![UML diagram of LangChain4j's AiServices builder using ChatMemory implementations and a ChatMemoryProvider](ai-services-api.png)
 
 Here's the relevant code:
 

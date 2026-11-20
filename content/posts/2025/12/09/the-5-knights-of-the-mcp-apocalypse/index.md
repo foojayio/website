@@ -52,10 +52,10 @@ This prompt goes *straight* to the Agent, and it could be associated with an MCP
 
 * **Check ownership:** Are you really installing the MCP server you wanted to install? They look like it, but they may be non official copies, that in the best cases they perform poorly or don't have enough tools, but in the worst case they are leaking information, modifying the response with bad purpose, or even destroying your data if they have write access.  
 
-![](Screenshot-2025-12-09-at-16.57.38.png)
+![MCP marketplace search results for 'sonarqube' showing many similar SonarQube server listings from different publishers](Screenshot-2025-12-09-at-16.57.38.png)
 
 *List of SonarQube MCP Servers in an MCP marketplace*
-![](Screenshot-2025-12-09-at-16.58.46.png)
+![MCP marketplace page for the SonarQube server published by SonarSource, the official one](Screenshot-2025-12-09-at-16.58.46.png)
 
 *Only this one is the official* [*SonarQube MCP Server*](https://github.com/SonarSource/sonarqube-mcp-server)
 
@@ -102,7 +102,7 @@ spec:
 
 * Use tools like [ToolHive](https://toolhive.dev/): they add proxies and egress containers routing the network and allowing us to configure the allowed network destinations for each container (MCP server)  
 
-![](Screenshot-2025-12-09-at-16.58.56.png)
+![ToolHive 'Configure github' dialog with outbound network filtering enabled, allowing only github.com hosts on port 443](Screenshot-2025-12-09-at-16.58.56.png)
 
 ### **3. The "Black Box of Vulnerabilities" Problem 🐛**
 
@@ -112,7 +112,7 @@ spec:
 
 * **SCA Analysis(Software Composition Analysis):** This is non-negotiable. You *must* run an SCA scan (like SonarQube Advanced Security) against the server's code. This will generate a **report** and tell you every known CVE it's vulnerable to and the fix (version change) suggested.
 
-![](Screenshot-2025-12-09-at-16.59.03-1024x340.png)
+![SonarQube Advanced Security report listing vulnerable dependencies with CVE IDs, severity, and suggested version fixes](Screenshot-2025-12-09-at-16.59.03-1024x340.png)
 
 * **DAST Analysis (Dynamic Analysis):** Run automated security scanners against the server's live API endpoints. This will find "outside-in" vulnerabilities like improper auth, open-management endpoints, etc.
 * **Isolation.** Assume the server *is* vulnerable. Run it in a minimal, locked-down container, on a separate network segment (VLAN), with a strict firewall policy that only allows it to talk to *exactly* what it needs. *See details in previous point.*   

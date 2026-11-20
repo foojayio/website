@@ -34,7 +34,7 @@ For those dabbling in microservices, GlassFish now natively supports **MicroProf
 [Get started with GlassFish
 with this guide](https://omnifish.ee/developer-resources/)
 
-![](Screenshot-from-2024-09-06-16-08-30-1024-2625f222.png)
+![Slide titled GlassFish Embedded by OmniFish showing how to start from a Java app with GlassFishRuntime.bootstrap().newGlassFish().start()](Screenshot-from-2024-09-06-16-08-30-1024-2625f222.png)
 
 **A Developer's Best Friend**
 
@@ -68,7 +68,7 @@ Thanks to OmniFish, GlassFish isn't just an application server alone. Our contri
 * [Arquillian containers for GlassFish](https://omnifish.ee/developers/glassfish-server/arquillian-containers/)
 * [IDE plugins for GlassFish](https://omnifish.ee/developers/glassfish-server/ide-plugins-for-glassfish/)
 
-![](GlassFish-commits-1024x437-4062f14c.jpg) 3 of the 4 top GlassFish contributors from OmniFish
+![Line chart of GlassFish commits over time from Sep 2022 to Sep 2024, with the top four contributors' commit counts overlaid](GlassFish-commits-1024x437-4062f14c.jpg) 3 of the 4 top GlassFish contributors from OmniFish
 
 **Commercial support gets you covered**
 

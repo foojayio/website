@@ -113,8 +113,9 @@ The phone app compiles against the same `BatteryDto`. It finds the vacuum with B
 We ran the same workload in five toolkits: an 800 by 480 gauge with a sweeping arc, a needle and a bold percentage, redrawn every frame and capped at 60 frames per second, in software. Same Debian arm64 container, three runs each, median shown.
 
 
-<img width="720" height="322" src="embedded-gui-memory-52d5157665.png" alt="Memory while animating, PSS in MB: Codename One: 18, Slint 23, Qt 23, JavaFX 116, Chromium 398, flutter-pi 112" loading="lazy" style="width:100%;height:auto;margin:16px 0" />
-<img width="720" height="322" src="embedded-gui-first-frame-e054edc6d9.png" alt="Milliseconds to the first frame from a cold start: Codename One: 46, Slint 45, Qt 73, JavaFX 327, Chromium 717, flutter-pi 767" loading="lazy" style="width:100%;height:auto;margin:16px 0" />
+![Memory while animating, PSS in MB: Codename One: 18, Slint 23, Qt 23, JavaFX 116, Chromium 398, flutter-pi 112](embedded-gui-memory-52d5157665.png)
+
+![Milliseconds to the first frame from a cold start: Codename One: 46, Slint 45, Qt 73, JavaFX 327, Chromium 717, flutter-pi 767](embedded-gui-first-frame-e054edc6d9.png)
 
 
 | Toolkit | First frame, cold | Frames per second | Memory (PSS) | On disk (files mapped) |
@@ -134,7 +135,7 @@ The container ran on an Apple Silicon Mac, not a board, so a real board will be 
 The headless flavor ran its own benchmark: a small JSON service pinned to two cores.
 
 
-<img width="720" height="322" src="embedded-server-throughput-4de72538bd.png" alt="Peak JSON requests per second on two cores: Codename One: 379,930, Rust 290,204, Go 178,930, Node.js 63,488, Spring Boot 33,322, Python 6,684" loading="lazy" style="width:100%;height:auto;margin:16px 0" />
+![Peak JSON requests per second on two cores: Codename One: 379,930, Rust 290,204, Go 178,930, Node.js 63,488, Spring Boot 33,322, Python 6,684](embedded-server-throughput-4de72538bd.png)
 
 
 | Runtime | Start | Idle memory | Peak requests/s | p99 at peak |

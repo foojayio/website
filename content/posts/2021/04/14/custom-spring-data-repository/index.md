@@ -166,7 +166,7 @@ Let's check how we can customize Spring Data to achieve that.
 
 By default, a Spring Data repository offers all generic functions you can expect, *.e.g.*:
 
-![](spring-data-repo-class-diagram-1024x526.png)
+![UML class diagram: CrudRepository extends Repository, and PagingAndSortingRepository extends CrudRepository, with their methods](spring-data-repo-class-diagram-1024x526.png)
 
 I believe that one comes to Spring Data for ease of use, but that one stays for its extensibility capabilities.
 
@@ -222,7 +222,7 @@ Spring Data applications define interfaces, but the implementation needs to come
 
 Here's an overview of the class diagram:
 
-![](spring-data-factory-class-diagram-1024x477.png)
+![UML class diagram of Spring Data JDBC: SimpleJdbcRepository, created by JdbcRepositoryFactory and its factory bean](spring-data-factory-class-diagram-1024x477.png)
 
 The detailed flow is pretty complex: the important part is the `SimpleJdbcRepository` class. Spring Data will find the class via the `JdbcRepositoryFactoryBean` bean, create a new instance of it and register the instance in the context.
 

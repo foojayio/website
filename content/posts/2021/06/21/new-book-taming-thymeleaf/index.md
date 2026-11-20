@@ -27,4 +27,4 @@ You will also learn how to integrate libraries like Tailwind CSS that need some 
 
 The book is available as [e-book](https://leanpub.com/taming-thymeleaf) or in [paperback](https://www.lulu.com/en/us/shop/wim-deblauwe/taming-thymeleaf/paperback/product-mgpezn.html?page=1&pageSize=4) format. See <https://www.wimdeblauwe.com/books/taming-thymeleaf/> for more information and some screenshots of the application you will build during the course of the book.
 
-![](whatthymeleadpeople-1024x644.png)
+![Reader testimonials for the book Taming Thymeleaf from Philip Riecks and Frederik Hahne](whatthymeleadpeople-1024x644.png)

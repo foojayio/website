@@ -270,15 +270,15 @@ Then we adjust some of these styles for the different states like :readonly, :fo
 
 The final result of our control will then look like this...
 
-![](Extended-Control-2021-01-27-12-52-07.png)
+![JavaFX 'Extended Control' window showing an empty 'Name' text field and a Focus button](Extended-Control-2021-01-27-12-52-07.png)
 
 Above: Standard design without focus.
 
-![](Extended-Control-2021-01-27-12-52-35.png)
+![JavaFX 'Extended Control' window with the field focused: small blue 'Name' label above 'Han Solo' and a blue underline](Extended-Control-2021-01-27-12-52-35.png)
 
 Above: Focused with content.
 
-![](Extended-Control-2021-01-27-12-52-47.png)
+![JavaFX 'Extended Control' window unfocused: grey 'Name' label above 'Han Solo' and a grey underline](Extended-Control-2021-01-27-12-52-47.png)
 
 Above: Not focused with content.
 

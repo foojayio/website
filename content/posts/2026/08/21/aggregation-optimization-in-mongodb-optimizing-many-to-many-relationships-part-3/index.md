@@ -19,14 +19,14 @@ related_posts:
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part3-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-![](fri1-1.png)
+![MongoDB 'Love Your Developers' banner with the MongoDB logo and floating illustrated documents](fri1-1.png)
 
 [In Part 1 of this series](https://foojay.io/today/aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1/), we described a use case based on a recent design review I conducted with a team at a MongoDB customer. The team in question was new to MongoDB, and the approach they had taken to both modeling their data and then subsequently querying it was very "RDBMS-like." As a result, query performance was significantly slower than their SLA called for.
 
 The use case involved a fictional video streaming service, with a database mapping user profiles to the devices from which those users were accessing the service.
 
 The query that we were attempting to support was to find all profiles associated with a contact address in a given city, and that had used a given device type to access the service—for example, all profiles registered in Austin, TX, which had accessed the service using an iPhone 12. To perform this query an [aggregation pipeline](https://www.mongodb.com/docs/manual/aggregation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part3-foojay&utm_term=tony.kim#aggregation-operations) had been built with ten stages:
-![](fri2.png)
+![Aggregation pipeline stages: $match, $lookup, $unwind, $lookup, $unwind, $group, $set, $sort, $skip, $limit](fri2.png)
 
 In Part 1, we broke down what each stage of the pipeline was designed to do. If you are unfamiliar or need a refresher on MongoDB aggregation pipelines, I'd suggest you refer back to that before continuing.
 
@@ -41,7 +41,7 @@ So far, our efforts to improve the pipeline had involved removing unnecessary un
 ## Optimization Step 2: refactoring the many-to-many relationship
 
 Our initial data model included the use of an intermediate, or "associative," mapping collection, splitting the many-to-many relationship between the profile and device collections into a one-to-many and many-to-one pair of relationships:
-![](fri3-1024x269.png)
+![Schema diagram of Profiles and Devices linked through an intermediate Mappings collection](fri3-1024x269.png)
 
 The use of associative tables to model many-to-many relationships is a pattern that will be familiar to anyone who has worked with relational databases. It was created to work around one of the limitations of tabular data storage, namely that there is no good way to store an arbitrary number of references from a row in one table to the many rows in another table to which it is related. While the introduction of an associative table in an RDBMS model removes this limitation, the downside is that it means two joins are required to get from data on one side of the many-to-many relationship, to data on the other side. Regardless of the database type being used, joins are always computationally expensive, and the more joins needed to satisfy a query, the slower that query will be.
 
@@ -50,7 +50,7 @@ The document data model used by MongoDB, through the use of subdocuments and arr
 With many-to-many relationships, one of the options the document model gives is to replace associative collections with an array of IDs of documents on one side of the relationship to associated documents on the other side of the relationship. Usually, the array of IDs is added to documents on the side of the relationship with the lower cardinality—i.e., where the resulting array will be smaller. By eliminating the intermediate associative collection, we reduce the number of join operations needed when traversing the relationship.  
 
 In the case of the streaming service data, the cardinality of the many-to-many relationship between profiles and devices was not significantly different on either side of the relationship — less than 10, in almost all cases—so we elected to add an array of device serial numbers to the profile documents. This changed the data model to look like this:
-![](unnamed-3-1024x425.png)
+![Schema diagram of Profiles holding a deviceSNs array that references Devices directly](unnamed-3-1024x425.png)
 
 With this revised model, a profile with three associated devices would now look like this (note the added deviceSNs array):
 

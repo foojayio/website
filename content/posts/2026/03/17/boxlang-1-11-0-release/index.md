@@ -21,7 +21,7 @@ related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 ---
 
-![](boxlang-v1.11.0-700x467.jpg)
+![BoxLang RELEASE 1.11.0 banner with the BoxLang logo over a blue and green wave background](boxlang-v1.11.0-700x467.jpg)
 
 We're proud to announce **BoxLang 1.11.0**, a highly focused performance and stability release that delivers measurable speed improvements across every BoxLang application, with zero code changes required. The team invested deeply in bytecode generation, class loading, lock management, and type casting to produce one of the most impactful runtime optimization releases to date. Alongside the performance wave, this release resolves critical concurrency bugs, hardens DateTime handling, and ships powerful new developer tooling.
 

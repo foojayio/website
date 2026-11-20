@@ -71,7 +71,7 @@ All in all, `Cache-Control` is quite complex. It might be well the subject of a 
 
 However, here's a visual help on how to configure `Cache-Control` response headers.
 
-![](cache-control-flow-1024x985.png)
+![Flowchart for choosing Cache-Control headers: no-store, immutable, max-age, no-cache, must-revalidate, ETag, public, private, s-maxage](cache-control-flow-1024x985.png)
 
 The [Cache Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#use_cases) page of Mozilla Developer Network has some significant use cases of `Cache-Control`, complete with configuration.
 

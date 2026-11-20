@@ -30,7 +30,7 @@ But as a software developer, we have to deal with the same question every day. I
 #### Differences Between Make / Buy On All Layers
 
 If we are looking at all layers of a cloud-native stack to compare the value of "make" to "buy" we will see that the component "buy" is in all layers the bigger one. But first things first.
-![](001-308x510.jpg)
+![Layered stack of Application, Linux, Docker and Kubernetes, each with a make-or-buy bar, under DevSecOps](001-308x510.jpg)
 
 The first step is the development of the application itself. Assuming that we are working with Java and using maven as a dependency manager, we are most likely adding more lines of code indirectly as dependency compared to the number of lines we are writing by ourselves. The dependencies are the more prominent part, and third parties develop them. We have to be carefully, and it is good advice to check these external binaries for known vulnerabilities.
 
@@ -49,12 +49,12 @@ Comparing the effort of scanning against known Vulnerabilities and for Complianc
 #### Compliance Issues: Just Singular Points in the Stack
 
 There is one other difference between Compliance Issues and Vulnerabilities. If there is a compliance issue, it is a singular point inside the overall environment. Just this single part is a defect and is not influencing other elements of the environment.
-![](002-624x510.jpg)
+![Compliance diagram: concentric rings for Application, Operating System and Docker with isolated red issue points on single layers](002-624x510.jpg)
 
 #### Vulnerabilities: Combining in Different Attack Vectors
 
 Vulnerabilities are a bit different. They do not only exist at the point where they are located. Additionally, they can be combined with other existing vulnerabilities in any additional layer of the environment. Vulnerabilities can be combined into different attack vectors. Every possible attack vector itself must be seen and evaluated. A set of minor vulnerabilities in different layers of the application can be combined into a highly critical risk.
-![](003-533x510.jpg)
+![Vulnerabilities diagram: concentric rings where an attacker chains red points from the Docker layer inward to the application](003-533x510.jpg)
 
 #### Vulnerabilities: Timeline from Found to Active in Production
 
@@ -62,7 +62,7 @@ Next is the timeline from when the vulnerability is found until the fix is in pr
 > As a consumer, we can only get the information as soon as possible is spending money. This state of affairs is not nice, but mostly the truth.
 
 Nevertheless, at some point, the information is consumable for us. If you are using **JFrog Xray** , from the free tier, for example, you will get the information very fast. **JFrog** is consuming different security information resources and merging all information into a single vulnerability database. After this database is fed with new information, all **JFrog Xray** instances are updated. After this stage is reached, you can act.
-![](004-262x510.jpg)
+![Vulnerability timeline from found to public info, consumable info, and fixed in production, split between provider and consumer](004-262x510.jpg)
 
 ### Test Coverage Safety Belt: Mutation Testing
 
@@ -78,7 +78,7 @@ The need for a single point that understands all repo-types
 To get a picture of the full impact graph based on all known vulnerabilities, it is crucial to understand all package managers included by the dependencies. Focussing on just one layer in the tech-stack is by far not enough.
 
 JFrog Artifactory provides information, including the vendor-specific metadata that is part of the package managers. JFrog Xray can consume all this knowledge and can scan all binaries that are hosted inside the repositories that are managed by Artifactory.
-![](005-498x510.jpg)
+![Layers (application, Linux, Docker, Kubernetes) mapped to maven, debian, Docker and Helm, managed through Artifactory and Xray in one platform](005-498x510.jpg)
 
 ### Vulnerabilities: IDE Plugin
 

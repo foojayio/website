@@ -24,7 +24,7 @@ With more features introduced into Java extension on Visual Studio Code, the num
 
 In fact, this is not because our product team does not want to completely fix this problem. The root cause starts with the architecture of Java Language Services:
 
-![](architecturepng.png)
+![Architecture of the JDT Java Language Server: request handlers, build system support, JDT core, workspace, plus plugins](architecturepng.png)
 
 JDT Java Language Server architecture diagram
 
@@ -44,7 +44,7 @@ Linked Resources : Linked resources are files and folders that are stored in loc
 
 This is the official definition of Linked Resources. It can be used as part of the project, but it is allowed to be stored in other locations outside the project path. In VS Code Java extensions, for the Unmanaged Folder (project without a build system), these metadata files are hidden through the Linked Resources mechanism. Its implementation principle is shown in the following figure:
 
-![](mechanism.jpg)
+![Diagram of a linked resource: the VS Code folder's .project file with a link location pointing to the language server workspace storage](mechanism.jpg)
 
 ## Principles of Unmanaged Folder Implementation
 

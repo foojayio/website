@@ -89,7 +89,7 @@ Then I thought why not do it with my favourite IDE, IntelliJ IDEA.
 Here are the steps: -
 
 First, we need to go preference, and then **Build, Execution, Deployment** and then Select Java Compiler.
-![](Screen-Shot-2022-05-09-at-11.43.12-PM-1024x917.png)
+![IntelliJ IDEA Java Compiler preferences with '--add-modules jdk.incubator.concurrent' in Additional command line parameters](Screen-Shot-2022-05-09-at-11.43.12-PM-1024x917.png)
 
 At the bottom, there is a box named the additional command line parameter. Add the following line there-
 
@@ -98,12 +98,12 @@ At the bottom, there is a box named the additional command line parameter. Add t
 ```
 
 And then go to the run configuration. Select the modify options and Mark the Add VM options.
-![](Screen-Shot-2022-05-08-at-5.04.39-AM-1024x722.png)
+![IntelliJ IDEA Run/Debug Configurations dialog with the Modify options menu open and Add VM options checked](Screen-Shot-2022-05-08-at-5.04.39-AM-1024x722.png)
 
 We need to add **--add-modules jdk.incubator.concurrent** there as well.
 
 Similarly, way we can add other incubator modules as well, such as ***jdk.incubator.foreign***
-![](Screen-Shot-2022-05-09-at-11.43.35-PM-1024x751.png)
+![IntelliJ IDEA Run/Debug Configuration with the VM options field set to --add-modules jdk.incubator.concurrent](Screen-Shot-2022-05-09-at-11.43.35-PM-1024x751.png)
 
 That's it.
 

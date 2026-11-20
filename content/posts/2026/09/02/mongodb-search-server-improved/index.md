@@ -120,7 +120,7 @@ Over the course of these three commits, all three modes of [facets](https://www.
 Faceting on supported fields - number, date, and strings mapped as token - is straightforwardly done with a parameter or two. For example, here are the top 3 (by number of films) genres:
 
 **/search?facet.string.genres=genres\&limit=0\&facet.string.genres.numBuckets=3**
-![](unnamed-4.png)
+![JSON response with a total of 21349 documents and genre facet buckets: Drama 12385, Comedy 6532, Romance 3318](unnamed-4.png)
 
 The search constrains facet counts; in this case. With no query provided, the facet counts span the entire collection. This no-operator mode (implicitly a match-all-documents query) is a valuable capability worth leveraging.
 
@@ -133,7 +133,7 @@ String faceting is the simplest. All you need is a field name and an optional nu
 Numbers and dates are faceted in the same way: by specifying a series of increasing boundary values that define the facet buckets. Additionally, when a default label is provided, another facet bucket is returned with that label and the count of documents that fall outside the beginning-to-end boundary range.
 
 **/search?limit=0\&facet.number.num_years=year\&facet.number.num_years.boundaries=0,1800,1900,1950,1960\&facet.number.num_years.default=other**
-![](unnamed-5-490x1024.png)
+![JSON response with a total of 21349 documents and year facet buckets with boundaries 0, 1800, 1900, 1950 and 'other'](unnamed-5-490x1024.png)
 
 Interestingly, facets can be used to double-check a dataset across various dimensions or to look for anomalies. For example, there are 2 documents in the year range 1800-1899 (\<= 1900) - for real? Or bad data? Facets shine light into these bucketed corners - what's in your data?
 
@@ -144,7 +144,7 @@ Dates are faceted using the same style as numbers, using boundaries and an optio
 Two features covered in one request, sorting and highlighting; the digested/default parameters are shown in the request section of the response:
 
 **/search?q=sunshine\&project=title,plot,year\&search=title,plot\&sort=year%20asc\&highlight=title,plot**
-![](unnamed-6-1024x1022.jpg)
+![JSON search response for the query 'sunshine' sorted by year, with highlights marking the matched word in titles](unnamed-6-1024x1022.jpg)
 
 The highlight parameter is a comma-separated list of field names used to highlight query terms. Highlighting snippets are returned in a _highlights section of each returned document. See commit [ea58891](https://github.com/mongodb-developer/mongodb-search-java-server/commit/e7ea5889114e58ccf6b677d5bab6683a9e8aa5e6) for details.
 
@@ -165,8 +165,8 @@ It's equally handy to be able to select documents that do NOT fall into a partic
 Relevance matters. A lot! But it's not something that comes for free with any search system. The quality of search result relevance is a measure of how well the results work for your users with your data, and it deserves your attention to detail in measuring, monitoring, and tuning. One huge improvement in relevance generally comes from weighting search fields so that query matches, say, in a movie title, weigh higher than the same words that may appear in the plot field.
 
 Here's a side-by-side comparison of adding additional weight (score boost clause) to the title field using the new "\<field\>\^\<weight\>" syntax available for every search field; you can see that just a little extra weight on the title field really improved the search results ordering:  
-![](unnamed-7-373x1024.png)  
-![](unnamed-8-373x1024.png)
+![JSON search response for 'purple rain' without boosting, listing Purple Butterfly first and Purple Rain second](unnamed-7-373x1024.png)  
+![JSON search response for 'purple rain' with title^2 boosting, now listing Purple Rain first](unnamed-8-373x1024.png)
 
 Building weighted fields into your own application, if you aren't using a search server that does so, is highly recommended. Adding this tiny syntax to this server's search field support dramatically improves the flexibility and quality of the results returned.
 

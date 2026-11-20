@@ -35,7 +35,7 @@ or to be more precise, it's faster on my machine.
 ### CPU
 
 My first submission was 23 seconds on my 2016 desktop (Intel) so I was quite surprised to hear it was 41 seconds on the "super fast" CPU of the 1BRC server.
-![](1brc-first-attempt.png) Lesson 1️⃣: Measure performance on production (like) hardware.
+![Bar chart of CalculateAverage time: the EPYC 7502P took 41 s, an i7-6700K 29 s on Java 8 and 23 s on Java 21, a Ryzen 9 laptop 14 s](1brc-first-attempt.png) Lesson 1️⃣: Measure performance on production (like) hardware.
 
 To be fair, only 8 cores were used on the 1BRC server instead of the 32 available.  
 
@@ -125,7 +125,7 @@ The 1BRC project includes a [weather_stations.csv](https://github.com/gunnarmorl
 ## My implementation
 
 My strategy here was to start with the K.I.S.S. (Keep It Simple Stupid) optimization first and profile for bottlenecks. Using JFR to profile gave me some ideas on where to profile but it didn't result in the expected win quite often.  
-![](1brc-flameview2-1024x421.jpg) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
+![JFR/JMC flame view of the 1BRC run on Windows, with time spent in readNextLine and addTemperature](1brc-flameview2-1024x421.jpg) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
 And *-Dorg.eclipse.swt.browser.DefaultType=edge* in jmc.ini on Windows
 
 What you don't see in the proposed solutions are also the many attempts and code that were producing less performance.
@@ -135,7 +135,7 @@ So here are the lessons learned on my implementation:
 > * 1️⃣0️⃣ Using a `HashMap` and then sort keys when showing the result is faster than using a `TreeMap`
 > * 1️⃣1️⃣ Using one `HashMap` per thread and then combine the result is faster (especially on some machines) than one global `ConcurrentHashMap`
 > * 1️⃣2️⃣ Put a `try {} catch {}` outside a loop is way faster than having it in the loop
-[![](1brc-total-1024x246.png)](1brc-total.png)
+[![Bar chart of CalculateAverage time: baseline about 290 s, ChatGPT about 70 s, the author's version about 10 s, the best near zero](1brc-total-1024x246.png)](1brc-total.png)
 
 ## Conclusion
 

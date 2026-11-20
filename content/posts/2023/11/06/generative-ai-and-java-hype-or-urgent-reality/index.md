@@ -19,7 +19,7 @@ related_posts:
   - "foojay-io-at-fosdem-2023-trip-report"
 ---
 
-![](image1-700x272.jpg)
+![AI-generated illustration of a robot face split between warm orange and cool blue halves](image1-700x272.jpg)
 
 It's hard to grasp that it's been about a year since Chat GPT and other generative AI tools burst onto the scene. We're all still grappling with, well, everything about them. Whatever equilibrium we eventually find, it's clear that the world is changing. The whole world mind, not just the IT industry.
 

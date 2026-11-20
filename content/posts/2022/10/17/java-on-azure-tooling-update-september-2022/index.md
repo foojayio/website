@@ -62,11 +62,11 @@ After you have created Azure Virtual Machines in Azure Explorer, you can locate 
 
 You will be guided to complete the password in SSH configuration panel for the first time. After that, you do not need to configure it every time.
 
-![](VM-enhance.png)
+![IntelliJ IDEA SSH Configurations dialog with an Azure VM entry, host, username and password authentication](VM-enhance.png)
 
 Here is a quick demonstration.
 
-![](VM-vm-ssh-sftp-new1.gif)
+![Animated demo in IntelliJ IDEA of connecting to an Azure virtual machine over SSH/SFTP from the Azure Explorer](VM-vm-ssh-sftp-new1.gif)
 
 ### Azure SDK Reference Book Enhancement
 
@@ -81,13 +81,13 @@ To enhance the experience for using Azure SDKs with Java Language, we have suppo
 
 To use it, you just need to find the relevant Azure Service and right click with the option "View Azure SDK". And then you can select the relevant SDK to add/update the dependency for your project. Here is a short demo.
 
-![](Open-SDK-Book.webp)
+![IntelliJ IDEA showing an Azure Functions Java project, with the Azure Explorer tree listing Azure services beside the code](Open-SDK-Book.webp)
 
 ### Feedback and Suggestions
 
 Please don't hesitate to [try our product](https://aka.ms/azuretoolkit/intellijidea "try our product")! Your feedback and suggestions are very important to us and will help shape our product in future.
 
-![](feedback-new-768x328-1.png)
+![Azure Explorer in IntelliJ with a red arrow pointing to the heart button used to provide feedback](feedback-new-768x328-1.png)
 
 * Leave your comment on this blog post
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new " Create a feature request or submit a bug") on our official GitHub Issues page

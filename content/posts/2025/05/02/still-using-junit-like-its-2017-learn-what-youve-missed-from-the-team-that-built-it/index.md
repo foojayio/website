@@ -26,7 +26,7 @@ That's exactly what you'll get in this hands-on 2-hour workshop at [JCON EUROPE 
 
 "Catching up with JUnit 5" is your opportunity to finally catch up—with guidance from the very people who built it.
 
-![](53726451134_a501889f5f_o-700x239.jpg)
+![Attendees seated in a classroom watching a presenter in front of a projector screen at a JUnit workshop](53726451134_a501889f5f_o-700x239.jpg)
 
 ### Meet Your Guides:
 

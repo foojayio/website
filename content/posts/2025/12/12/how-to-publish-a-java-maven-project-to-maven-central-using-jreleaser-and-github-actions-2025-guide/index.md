@@ -308,7 +308,7 @@ Before we can run JReleaser on GitHub, we first need to set our secrets in the s
 To keep things simple just copy all the key values from the JReleaser config file that was used locally.
 
 And you will end up with something like this:
-![](Screenshot-2025-12-08-at-14.07.59.png) Note that in this example `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME`  
+![GitHub repository settings page, Actions secrets, listing the JReleaser GPG and Maven Central Sonatype username and password secrets](Screenshot-2025-12-08-at-14.07.59.png) Note that in this example `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME`  
 has been shortened to `JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME`
 
 ### Workflow

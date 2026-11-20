@@ -24,7 +24,7 @@ Powerful processors and cheaper memory allow software to do more and do it faste
 As Azul Deputy CTO Simon Ritter says, "***Java shows no danger of becoming the new COBOL. By adding new features to the platform under the six-month release cadence, we are seeing Java evolve faster than ever before.***"
 
 In this article, we want to look into some false assumptions and outdated ideas about Java.
-![](nine-outdate-ideas-1024x410.jpg)
+![Stylised numeral 9 drawn in blue contour lines above the word NINE on a dark blue background](nine-outdate-ideas-1024x410.jpg)
 
 ## 1. Myth: Java is old and not evolving
 

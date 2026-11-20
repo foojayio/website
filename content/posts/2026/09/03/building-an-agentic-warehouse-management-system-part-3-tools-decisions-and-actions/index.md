@@ -25,7 +25,7 @@ A live version of the Agentic WMS is available[here](https://agentic-wms-3976386
 ## From Plan to Execution
 
 Let's revisit the complete agent flow. The first stages: **Define the Agent, Trigger the Agent, and Plan,** were covered in the previous article. Now we will focus on executing the tasks, using the available tools, gathering context, and making the replenishment decision.  
-![](p3-flow-765x1024.jpg)
+![Flowchart of the agent flow: execute tasks with tools, decide if replenishment is required, then create replenishment and draft notification or complete](p3-flow-765x1024.jpg)
 
 ## Execute tasks with controlled tools
 
@@ -130,7 +130,7 @@ return definition.executor()
 The result of each completed task becomes part of the context available to the tasks that follow. This allows the agent to progressively gather the information it needs before making the replenishment decision.
 
 At the same time, the capability assigned to each task defines which tools are available during its execution. This preserves the boundaries we established earlier: an ANALYSIS task, for example, can inspect information from the WMS, but it does not have access to tools that create a replenishment request.
-![](p3-04_analysis-1024x305.png)
+![Agent Runs page of the warehouse app showing run NF-OUT-01 with its first task completed, identifying product BR01 with 300 units shipped](p3-04_analysis-1024x305.png)
 
 ## Accessing operational data
 
@@ -160,7 +160,7 @@ The complete application exposes [additional tools](https://github.com/mongodb-d
 ## Retrieving depositor policies
 
 The depositor policies are also accessed through a dedicated tool exposed by the POLICY capability. In our application, each depositor can register business rules through the [Depositor Policies page](https://agentic-wms-39763860545.southamerica-west1.run.app/#policies). For example, a policy may define a seven-day lead time or require at least 500 units per replenishment request:
-![](p3-05_policy-1024x397.png)
+![Agreed Policies page listing two Amazon replenishment policies: lead time and minimum order quantity](p3-05_policy-1024x397.png)
 
 These policies are stored as natural-language documents, which allows us to retrieve them using semantic search instead of relying solely on exact keywords. For example:
 
@@ -185,7 +185,7 @@ When a policy is stored, its text is converted into an embedding using the confi
 *apply to replenishing product BR01?*
 
 This gives us a simple [Retrieval-Augmented Generation (RAG](https://www.mongodb.com/docs/vector-search/tutorials/rag/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agentic-wms&utm_term=ricardo.mello)) flow: the question is used to retrieve the most relevant policies, which are then added to the execution:
-![](p3-06_rag-1024x235.png)
+![RAG diagram: an agent question is embedded, searched semantically with a metadata filter, and relevant policies feed the agent context for a decision](p3-06_rag-1024x235.png)
 
 The retrieval uses [semantic search](https://github.com/mongodb-developer/mongodb-jvm-showcase/blob/6eb6dc81b5eb60976d198b92ff5ec2ff5e2dd165/java/use-cases/agentic-wms/src/main/java/com/devrel/wms/knowledge/DepositorKnowledgeStore.java#L46):
 
@@ -242,7 +242,7 @@ private boolean decidedToStop(String capability, String result) {
 ```
 
 If replenishment is not required, the remaining REPLENISHMENT and NOTIFICATION tasks are marked as SKIPPED, and the execution is completed:
-![](p3-07_skipped-1024x492.jpg)
+![Agent run with the analysis concluding REPLENISHMENT_NOT_REQUIRED, and the replenishment and notification tasks marked SKIPPED](p3-07_skipped-1024x492.jpg)
 
 The runner marks those tasks as SKIPPED and completes the execution:
 
@@ -323,10 +323,10 @@ At this point, the agent has made the decision and performed the actions require
 ## Complete
 
 When there are no more tasks to execute, the agent run is completed and a summary is generated:
-![](p3-08_draft-1024x607.jpg)
+![Agent run showing a completed replenishment request for 1200 units of BR01 and a drafted notification email to Amazon](p3-08_draft-1024x607.jpg)
 
 If a replenishment request was created, it is now available on the[Replenishments](https://agentic-wms-39763860545.southamerica-west1.run.app/#replenishment) page for review:
-![](p3-09_replenishment-1024x467.png)
+![Replenishments page listing a pending request for 1200 units of BR01 from Amazon, with Approve and Reject buttons](p3-09_replenishment-1024x467.png)
 
 This completes the flow: the agent gathers context through controlled tools, decides whether replenishment is necessary, and acts only when required.
 

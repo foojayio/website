@@ -263,7 +263,7 @@ UN  10.24.1.214  398.22 KiB  256          ?       76c0d2ba-a9a8-46c0-87e5-311f7e
 ```
 
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes and networking:
-![](k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png)
+![Diagram of two GKE clusters, each with a Cassandra datacenter and K8ssandra pods, connected through a VPC network](k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png)
 
 ## What's next
 

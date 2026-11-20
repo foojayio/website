@@ -269,7 +269,7 @@ ArchUnit also allows us to import [PlantUML](https://plantuml.com/component-diag
 
 One has to use component diagrams, where the classes are associated with components through stereotypes.
 
-[![](diagram.svg)](diagram.svg)
+[![UML component diagram: Author and Reader both depend on Book, each component defined by a package stereotype](diagram.svg)](diagram.svg)
 
 ```
 @startuml

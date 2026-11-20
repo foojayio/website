@@ -18,7 +18,7 @@ related_posts:
 ---
 
 **Let's see in this article different ways to replace the synchronized keyword to make our code more virtual threads friendly.**  
-![](synchronized-loc.png) Lines of code of the different solutions discussed in this article
+![Bar chart of lines of code per approach to replace synchronized: ReentrantLock needs the most (6), annotation-based ones the fewest](synchronized-loc.png) Lines of code of the different solutions discussed in this article
 
 ## Synchronized and pinning threads
 

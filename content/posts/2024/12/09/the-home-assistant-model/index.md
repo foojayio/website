@@ -31,7 +31,7 @@ The biggest issue in describing the Home Assistant is the number of conflicting 
 
 As far as I understand it, here's the conceptual model.
 
-![](home-assistant-class-diagram.png)
+![UML class diagram of the Home Assistant model: Integration, Device, Entity, Area, Service, Physical Device, Sensor, Event and Logbook](home-assistant-class-diagram.png)
 
 ## Integrations
 
@@ -43,11 +43,11 @@ When you switch on Home Assistant for the first time, it's a blank slate. You mu
 
 You can add an `Integration` on the [integration dashboard](https://home.frankel.ch:8443/config/integrations/dashboard): there's a *ADD INTEGRATION* in the lower left corner. Alternatively, you can add it from its documentation page, via a *ADD INTEGRATION TO MY HOME ASSISTANT* button. In this case, clicking on the latter opens a new page.
 
-![](ha-ui-integration-open-page-1024x370.jpeg)
+![Home Assistant prompt 'Open page in your Home Assistant?' with an Open link button and the instance URL home.local:8123](ha-ui-integration-open-page-1024x370.jpeg)
 
 You can change it; the URL is stored on the browser.
 
-![](ha-ui-integration-my-ha-1024x849.jpeg)
+![My Home Assistant page asking for the Home Assistant instance URL, with an Update button](ha-ui-integration-my-ha-1024x849.jpeg)
 
 Some integrations require additional configuration, *e.g.*, authentication.
 
@@ -59,8 +59,8 @@ Some integrations require additional configuration, *e.g.*, authentication.
 
 Once you've added the integration, you can add `Device`:
 
-* some categorize as *Service* , when they need a Cloud connection, *e.g.* , [Google Cloud SDK](https://www.home-assistant.io/integrations/google_assistant_sdk/) or [GitHub](https://www.home-assistant.io/integrations/github/)![](ha-ui-service.jpeg)
-* some as *Device* , when they need one, *e.g.* , [Philips Hue](https://www.home-assistant.io/integrations/hue/).![](ha-ui-device.jpeg)
+* some categorize as *Service* , when they need a Cloud connection, *e.g.* , [Google Cloud SDK](https://www.home-assistant.io/integrations/google_assistant_sdk/) or [GitHub](https://www.home-assistant.io/integrations/github/)![Home Assistant 'Sun' service page with Service info, Diagnostic, and Logbook cards for next dawn, dusk and noon](ha-ui-service.jpeg)
+* some as *Device* , when they need one, *e.g.* , [Philips Hue](https://www.home-assistant.io/integrations/hue/).![Home Assistant device page for a TP-Link Coffee Machine Plug with controls, sensors, configuration and an empty logbook](ha-ui-device.jpeg)
 
 ## Entities
 
@@ -74,7 +74,7 @@ For example, the Philips Hue motion sensor device has three different available 
 * Motion as a boolean
 * Temperature in Celsius
 
-![](ha-ui-sensors.jpeg)
+![Home Assistant page for a Hue motion sensor showing illuminance, motion, temperature and a logbook of motion events](ha-ui-sensors.jpeg)
 
 Unexpectedly, a motion sensor provides a temperature sensor. Check your devices for such sensors; you might be in for a good surprise.
 

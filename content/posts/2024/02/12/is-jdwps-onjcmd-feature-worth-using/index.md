@@ -68,7 +68,7 @@ Summary
 ```
 
 You can see that the run-time difference between "with JDWP" and "with onjcmd" is 0.5s, way below the standard deviations of both benchmarks. Plotting the benchmark results using box plots visualizes this fact:
-![](Figure_1-1-420aa1b3.png)
+![Box plot of run time in seconds: without JDWP is fastest (about 210 s), with JDWP and with onjcmd are both slower (about 219 s)](Figure_1-1-420aa1b3.png)
 
 Or, more analytically, [Welch's t-test](https://en.wikipedia.org/wiki/Welch's_t-test) doesn't rule out the possibility of both benchmarks producing the same run-time distribution with p=0.5. There is, therefore, no measurable effect on the performance if we use the onjcmd feature. But what we do notice is that enabling the JDWP agent results in an increase in the run-time by 4%.
 
@@ -96,7 +96,7 @@ Summary
     1.51 ± 0.09 times faster than "with JDWP"
 ```
 
-![](Figure_1-2-2000x1500-3124717d.png)
+![Box plot of run time in seconds: with JDWP is far slowest (about 350 s), with onjcmd about 247 s, without JDWP about 234 s](Figure_1-2-2000x1500-3124717d.png)
 
 We excluded the finagle-chirper sub-benchmark here, as it causes the run-time to increase drastically. The sub-benchmark alone does not cause any problems, so the GC run possibly causes the performance hit before the sub-benchmark, which cleans up after the dotty sub-benchmark. Dotty is run directly before finagle-chirper.
 
@@ -135,7 +135,7 @@ Summary
     1.07 ± 0.02 times faster than "with JDWP"
 ```
 
-![](Figure_1-3-2000x1500-fb2846af.png)
+![Box plot of run time in seconds: without JDWP about 235 s, with JDWP and with onjcmd both around 250 s and nearly equal](Figure_1-3-2000x1500-fb2846af.png)
 
 This clearly shows the significant impact of the change. 11.0.3 came out on Apr 18, 2019, and 11.0.9 on Jul 15, 2020, so the onjcmd improved on-demand debugging for almost a year.
 

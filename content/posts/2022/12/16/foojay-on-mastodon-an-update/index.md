@@ -50,10 +50,10 @@ Most of the user-accounts are personal accounts, but we are happy that some Java
 * acme4j ([@acme4j](https://foojay.social/@acme4j)): open source Java client for the ACME protocol (RFC 8555).
 
 In this overview you can also see the list of Mastodon instances that were most involved in the interactions, and some other statistics.
-![](20221212-mastodon-stats.png)
+![Mastodon admin dashboard for Nov 13 to Dec 12, 2022: 110 new users, 118 active users, 4,033 interactions, top servers listed](20221212-mastodon-stats.png)
 
 In the administrator UI, the used space storage is also shown. The media storage contains the timeline for all the members of this instance and has been "fluctuating" between 12 and 20GB as this data gets cleaned and updated continuously.
-![](20221212-mastodon-info.png)
+![Mastodon admin panel showing software versions (Mastodon 4.0.2, PostgreSQL 13.9) and space usage with 15.2 GB of media storage](20221212-mastodon-info.png)
 
 ## Conclusion
 

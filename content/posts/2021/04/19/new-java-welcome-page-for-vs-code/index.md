@@ -23,13 +23,13 @@ Our new design focuses on three things: help users find the most important featu
 
 A step-by-step feature tour is displayed when the Welcome Page is opened for the first time. The tour covers the most important Java features for a user, opening project, managing project, running and debugging project, and testing project. The tour embeds links that take you directly to these features.
 
-![](feature-tour1.gif)
+![Animated tour of the Java Welcome Page in VS Code, starting on 'Welcome to use Java Tools' with a Get Started button](feature-tour1.gif)
 
 #### The Welcome Page
 
 After the feature tour, you will be taken to the Welcome Page. Besides creating a new project or importing an existing project, the page also provides you with access to a set of selected references in the groups of Configuration, Spring and Student. In addition, you can find our blog, Twitter and GitHub repository on the page to keep connected with us.
 
-![](welcome-page.png)
+![Java Tools Welcome Page in VS Code with Get Started links, a configuration tab and a 'Show welcome page' checkbox](welcome-page.png)
 
 #### Launching
 

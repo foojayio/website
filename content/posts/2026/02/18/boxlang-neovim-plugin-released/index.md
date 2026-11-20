@@ -17,13 +17,13 @@ related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 ---
 
-![](boxlang-neovim-700x467.jpg)
+![BoxLang NeoVim Plugin release banner with the BoxLang logo, the Neovim logo and a glowing BoxLang cube](boxlang-neovim-700x467.jpg)
 
 We're excited to announce the release of the BoxLang NeoVim Plugin - a comprehensive syntax highlighting solution designed specifically for BoxLang developers working in Vim and NeoVim environments. This isn't a port or adaptation of existing CFML syntax files; it's a ground-up implementation built for BoxLang's modern feature set. Coming soon as well will be our runners, syntax validators, and integration with our LSP for live previews, insights, and much more.
 
 ## Why a Dedicated BoxLang Plugin?Why a Dedicated BoxLang Plugin?
 
-![](vim-boxlang-class-400x510.png)
+![Neovim editor showing syntax-highlighted BoxLang code for a UserService class with annotations and control flow](vim-boxlang-class-400x510.png)
 
 BoxLang is a modern dynamic JVM language that combines features from Java, CFML, Python, Ruby, Go, and PHP. While it maintains CFML compatibility through our `bx-compat-cfml` module, BoxLang introduces significant modern language features that require proper tooling support:
 

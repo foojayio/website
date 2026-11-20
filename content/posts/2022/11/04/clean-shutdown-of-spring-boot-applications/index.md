@@ -42,7 +42,7 @@ netstat -ao
 ```
 
 You will get a screen such as the below. Locate the port on which you had started the Tomcat Server.  
-![](AVvXsEgHTALnmpA7DEvZj6QxKQmwqKdjPPKLhKlZ-1e4230f5.png)
+![Windows netstat output with the line for port 8080 in LISTENING state highlighted, showing PID 14836](AVvXsEgHTALnmpA7DEvZj6QxKQmwqKdjPPKLhKlZ-1e4230f5.png)
 
 Go ahead and locate the PID and kill the task (Windows/MS-DOS)
 
@@ -50,7 +50,7 @@ Go ahead and locate the PID and kill the task (Windows/MS-DOS)
 taskkill /F /PID 14836
 ```
 
-![](AVvXsEiS0214rgPJ0H8qP9HK8Eciiy9RNiE3qtqL-76d1822b.png)
+![Command prompt running taskkill /F /PID 14836, reporting the process was terminated](AVvXsEiS0214rgPJ0H8qP9HK8Eciiy9RNiE3qtqL-76d1822b.png)
 
 Note that if you were running the application from the command-line, You can just press \[Ctrl+C\] to terminate the application. In most cases, it will also kill the process. But if it does not kill the process, you should proceed with the above mentioned steps.  
 **\[1a\]** ++Automate the writing of Process Id to a File++
@@ -66,7 +66,7 @@ Note that if you were running the application from the command-line, You can jus
 **2. Terminate the Application, Kill the Process (TCPView)**
 
 There is one another way to immediately kill the process via the TCPView tool that is made available by Microsoft. It is available at this [link](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) to download.
-![](AVvXsEjL9aie5-WPDlJOWLxVGPRzWlekHbKfkrEs-b227eee2.jpg)
+![TCPView window listing TCP endpoints, including java.exe listening on local port 8080](AVvXsEjL9aie5-WPDlJOWLxVGPRzWlekHbKfkrEs-b227eee2.jpg)
 
 The next simple method is proposed by me. Beginby clicking on the \[Terminate - Red Square in Eclipse on the Console Tab\] button. You will observer that the application immediately shuts down. But infact at the background, the tomcat server will still be running on the port that it was started!
 
@@ -78,14 +78,14 @@ This is a very convenient way especially if you are a Software Architect or an E
 
 The most 'cleanest' way among the ones I described until now is the usage of Actuator to shutdown the spring boot applications. You will begin this by making sure to the include the following in your **pom.xml**
 
-![](AVvXsEjMGD_-_KVzJC1S-8yY9xlkHawwdDSmQOEG-93d9f173.png)
+![pom.xml snippet adding the spring-boot-starter-actuator dependency](AVvXsEjMGD_-_KVzJC1S-8yY9xlkHawwdDSmQOEG-93d9f173.png)
 
 Next make sure that you have enabled the shutdown endpoint via actuator using the properties as shown below.
 
-![](AVvXsEg4yZyksyu3xqAbAj44fheHcemCgQZNjGKq-8e140e85.png)
+![application.properties enabling the shutdown actuator endpoint and exposing all web endpoints](AVvXsEg4yZyksyu3xqAbAj44fheHcemCgQZNjGKq-8e140e85.png)
 
 Once you have to shutdown the application, the actuator endpoint /shutdown will also kill the associated process. This is a very clean way to shutdown the Spring Boot applications. You have to make sure that you invoke the actuator endpoint /shutdown via a \[POST\] request only.
-![](AVvXsEjELC9xnk-jTPNkpKG4JHvEX64fM33ZNJPY-2794152d.png)
+![Postman POST request to the /actuator/shutdown endpoint returning the message 'Shutting down, bye...'](AVvXsEjELC9xnk-jTPNkpKG4JHvEX64fM33ZNJPY-2794152d.png)
 
 If Spring Boot is the root context of your spring boot application, then the invocation will look like the following. The above diagram shows the response from the request sent via Postman.
 
@@ -142,11 +142,11 @@ You may then use the following controller method to close the context asynchrono
 
 Once the above has been done, built and deployed. You may then close the spring boot using the following browser request.
 
-![](AVvXsEh3qfActZG-2gu9LjZ3e73WemtzCttIziJ3-1c4eeeb5.png)
+![Browser at localhost:8080/springbootdocker/shutdown2 showing 'Shutdown Requested - Will Shutdown in Next 2 Seconds!'](AVvXsEh3qfActZG-2gu9LjZ3e73WemtzCttIziJ3-1c4eeeb5.png)
 
 You will notice that the application has been shutdown when you see the console and also the process has been removed from the operating system processes.
 
-![](skp_ts_blog_001-257c8527.png)
+![Console log with debug lines and Tomcat stopping the service, with 'Requested Shutdown (via Context)' message](skp_ts_blog_001-257c8527.png)
 
 **5. Exit using SpringApplication.exit()**
 
@@ -179,11 +179,11 @@ The other way is use the exit() method of the SpringApplication class, it will a
 
 The controller will look similar to what we had written previously. Once your application is running and you want to shutdown the application 'cleanly', then you may use the following:
 
-![](AVvXsEhj9fdgrxzUzjulgrIX5hosG0H-nC0SgPcI-07ebcb35.png)
+![Browser at /springbootdocker/shutdown3 showing 'Shutdown Requested via Spring Application Exit' message](AVvXsEhj9fdgrxzUzjulgrIX5hosG0H-nC0SgPcI-07ebcb35.png)
 
 You will notice that the application has been shutdown when you see the console and also the process has been removed from the operating system processes.
 
-![](AVvXsEjEMWmzL03e0bjpDwxNE6sdx_-UnSfXugAZ-44e2d20d.png)
+![Console log showing Tomcat stopping and 'Requested Shutdown (via Spring Application Exit)' message](AVvXsEjEMWmzL03e0bjpDwxNE6sdx_-UnSfXugAZ-44e2d20d.png)
 
 **\[Reference\]**   
 <https://www.javadevjournal.com/spring-boot/shutdown-spring-boot-application/>

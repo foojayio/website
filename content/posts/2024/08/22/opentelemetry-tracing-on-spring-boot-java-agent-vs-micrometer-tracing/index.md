@@ -211,7 +211,7 @@ fun intermediate() {
 
 It yields the expected new `intermediate()` trace:
 
-![](trace-agent-1x-custom.png)
+![Jaeger trace for the agent-1x app with nested spans, including the custom intermediate() span, taking about 270 ms in total.](trace-agent-1x-custom.png)
 
 ## OpenTelemetry Agent v2
 

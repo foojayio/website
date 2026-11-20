@@ -41,7 +41,7 @@ At its core, hexagonal architecture is very simple:
 * The outside world interacts with the core through ports.
 * Adapters implement those ports for specific technologies.
 
-![](Screenshot-2026-02-11-at-3.13.47-PM.png)
+![Ports and adapters hexagonal diagram: domain entities at the core, use cases and ports around them, adapters on the outside](Screenshot-2026-02-11-at-3.13.47-PM.png)
 
 What makes this architecture powerful is the directional dependency: the core depends on the abstractions, while the infrastructure depends on the core. Not the other way around.
 

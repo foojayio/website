@@ -34,9 +34,9 @@ The key to solving this problem was updating the operating system using the [Bea
 As described on the [BeagleBoard Documentation \> Boards \> BeagleV-Fire \> Quick Start](https://docs.beagle.cc/boards/beaglev/fire/02-quick-start.html), you need a serial connection to see what the board is doing and interrupt it at the right moment to make it accessible from the Imaging Utility. I used a [DSD TECH USB to TTL Serial Cable](https://www.amazon.com.be/dp/B083HVM7VZ?ref=ppx_yo2ov_dt_b_fed_asin_title).
 
 {{< gallery >}}
-beaglev-fire-serial.jpg
-beaglev-fire-connected.jpg
-beaglev-fire-usb-disc.jpg
+beaglev-fire-serial.jpg | | Serial debug cable with RXD, TXD and GND pins connected to the BeagleV-Fire board header
+beaglev-fire-connected.jpg | | BeagleV-Fire board connected by a USB-C cable and serial wires, with its LEDs lit
+beaglev-fire-usb-disc.jpg | | Terminal showing BeagleV-Fire boot messages next to the BeagleBoard Imager listing the eMMC as a USB drive
 {{< /gallery >}}
 
 You also need a USB-to-USB cable to connect the board to your computer.
@@ -81,7 +81,7 @@ $ sudo screen /dev/ttyUSB0 115200
 ```
 
 With the serial connection established, check the board output in the `screen` session and wait for the message `Press a key to enter CLI` to appear. You have one second to react, so be fast! 🙂
-![](beaglev-fire-boot-interrupt.jpg)
+![Serial console output from the BeagleV-Fire showing the boot prompt interrupted to enter the CLI and the USB mass storage mode](beaglev-fire-boot-interrupt.jpg)
 
 Then type in the following two commands:
 

@@ -29,7 +29,7 @@ All a component needs to know is how to process incoming messages and how to sen
 
 Below is an example of an EDA architecture:
 
-![](Screen-Shot-2022-12-02-at-11.17.40-AM-1024x394.png)
+![Diagram of Chronicle Services connected by Chronicle Queues: market data feeds daily price and position services into a web page queue](Screen-Shot-2022-12-02-at-11.17.40-AM-1024x394.png)
 
 Where the orange boxes are java processes, and the blue boxes are message queues.
 

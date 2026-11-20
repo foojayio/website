@@ -171,7 +171,7 @@ Here are several resources to generate the icons for the various devices.
 * Maven Image Builder: You add a scale goal and specify your desired sizes, an input image and an output image name for each size. See the readme file here for more information: <https://github.com/zayass/image-maven-plugin>
 
 Here is the TiltMaze icon. Be sure to leave generous margins around the icon, since Apple will round the corners, possibly cutting into your design.  
-![](tiltmaze-logo-small.png) TiltMaze icon
+![Tilt Maze game logo: a maze with a blue ball path, green arrow and star on a tan board with red border](tiltmaze-logo-small.png) TiltMaze icon
 
 ### **Android**
 

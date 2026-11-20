@@ -38,7 +38,7 @@ This button will do two things for you:
 
 Here is a demo of the feature:
 
-![](enable-tests-7a570e49.gif)
+![Screen recording of VS Code with a Java test file showing errors, demonstrating how to enable Java testing support](enable-tests-7a570e49.gif)
 
 After this step is done, simply create a Java file and start writing unit tests! You can get this feature in the latest update of [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
 
@@ -54,7 +54,7 @@ We have added built-in support to create a JavaFX based project with Maven arche
 
 To run the JavaFX application, you can open the Maven view, expand `hellofx` \> `Plugins` \> `javafx` and run the Maven goal: `javafx:run`.
 
-![](run-javafx-84576e28.gif)
+![VS Code Maven view with the javafx:run goal highlighted, used to run the JavaFX application](run-javafx-84576e28.gif)
 
 #### More Visual Studio Code sample projects for JavaFX
 
@@ -66,7 +66,7 @@ AWT is another framework that is popular among Java GUI application development.
 
 To enable the code completion for AWT, you can open the Command Palette (Ctrl+Shift+P) and then select the command Java: Help Center. Go to the Student section and select Enable AWT Development. Please note that this action will update a setting at the workspace level, so please make sure a workspace is opened in Visual Studio Code. Here is a demo of this feature:
 
-![](enableawt-1-f3abfa14.gif)
+![VS Code editor with a Hello World Java class and breakpoint, with the Debug Console open below](enableawt-1-f3abfa14.gif)
 
 After the setting is enabled, code completion will work on AWT applications! You can use [this basic sample code](https://code.visualstudio.com/docs/java/java-gui#_develop-awt-applications) to test your AWT on Visual Studio Code.
 

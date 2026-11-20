@@ -52,10 +52,10 @@ The same Debug tool window you use for any other Java project. Frames panel on t
 ### How the pieces fit together
 
 On iOS the IDE never talks to the device directly. The CN1 Debug Proxy is a small Java process you run on your developer machine. It binds two TCP ports: one for the iOS app to dial into using the CN1 wire protocol, and one that speaks standard JDWP for the IDE. The IDE sees a normal remote JVM. The iOS app sees a debug proxy. The proxy translates between the two and walks the ParparVM struct layout so Java fields, method calls, and values round-trip cleanly in both directions.
-![](codenameone-ondevice-debugging-chart1.png)
+![Diagram: IntelliJ IDEA connects over JDWP to the CN1 Debug Proxy, which talks to the Codename One iOS app over the CN1 wire protocol](codenameone-ondevice-debugging-chart1.png)
 
 On Android the proxy is unnecessary. Dalvik / ART implement JDWP themselves, so IntelliJ attaches directly to the device through `adb`'s built-in JDWP forwarder. The Maven plugin's new `cn1:android-on-device-debugging` goal does the `adb` orchestration and the port forwarding for you.
-![](ondevice-debugging-chart2.png)
+![Diagram: IntelliJ IDEA connects over JDWP to adb forward, which reaches the Android device or emulator over USB or Wi-Fi](ondevice-debugging-chart2.png)
 
 A capability difference between the two platforms worth knowing up front: on Android, a native interface's `Impl` class is regular Java, so the JDWP attach steps through it the same way it steps through any other class in your project. On iOS the `Impl` is Objective-C, which JDWP does not speak, so you cannot step through it from the IDE. You can still step through the Codename One framework code and your own Java up to and through the native-interface call, and you can inspect the value the call returns; the body of the Objective-C method is the only thing that is opaque from the JDWP side. Attach Xcode in parallel if you need to step through the Objective-C as well.
 

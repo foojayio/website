@@ -20,7 +20,7 @@ related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 ---
 
-![](skills-boxlang-io-700x394.jpg)
+![BoxLang promo for skills.boxlang.io, showing a terminal installing skills and cards for reusable AI agent skills](skills-boxlang-io-700x394.jpg)
 
 Today we're launching something we've been quietly building for months: [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") — a public, agent-agnostic directory for AI skills covering BoxLang, ColdBox, TestBox, CommandBox, and the entire Ortus ecosystem.
 

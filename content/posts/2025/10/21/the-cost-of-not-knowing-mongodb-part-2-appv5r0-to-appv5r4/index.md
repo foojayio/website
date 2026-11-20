@@ -120,7 +120,7 @@ With these impressive improvements regarding index size, it's quite probable tha
 ### Load tests results
 
 Executing the load test for appV5R0 and appV0R1 and plotting it alongside the results for appV4, we have the following results for Get Reports and Bulk Upsert:
-![](Screenshot-2025-10-13-at-12.31.56-PM-1024x566.png) ![](Screenshot-2025-10-13-at-12.32.22-PM-1024x536.png)
+![Line chart of Get Reports throughput: V5R1 reaches about 215 requests/s, well above V5R0 (about 85/s) and V4 (under 20/s)](Screenshot-2025-10-13-at-12.31.56-PM-1024x566.png) ![Line chart of Bulk Upsert throughput: V5R0 and V5R1 climb above 700 requests/s, while V4 stays around 500/s](Screenshot-2025-10-13-at-12.32.22-PM-1024x536.png)
 
 The graph above shows the best improvement between versions we've ever had in this series. Both new versions, appV5R0 and appV0R1, are considerably more performative than appV4, and appV5R1 is a lot better than appV5R0. This shows that, in our case, bucketing the data by quarter is better than bucketing the data by month.
 
@@ -228,7 +228,7 @@ This reduction in the Data Size and Document size will help in the performance o
 ### Load tests results
 
 Executing the load test for appV5R2 and plotting it alongside the results for appV5R1, we have the following results for Get Reports and Bulk Upsert:
-![](Screenshot-2025-10-13-at-12.33.09-PM-1024x550.png) ![](Screenshot-2025-10-13-at-12.33.46-PM-1024x530.png)
+![Line chart of Get Reports throughput: V5R2 tracks V5R1 closely, with slightly higher peaks](Screenshot-2025-10-13-at-12.33.09-PM-1024x550.png) ![Line chart of Bulk Upsert throughput: V5R2 and V5R1 are nearly identical, V5R2 slightly higher near the end](Screenshot-2025-10-13-at-12.33.46-PM-1024x530.png)
 
 The graphs above show a small performance improvement in the Get Reports and a little worse performance in the Bulk Upsert when going from appV5R1 to appV5R2. I confess I was expecting more.
 
@@ -326,7 +326,7 @@ As the document schema and Bulk Upsert operations for appV5R3 are the same as ap
 ### Load tests results
 
 Executing the load test for appV5R3 and plotting it alongside the results for appV5R2, we have the following results for Get Reports and Bulk Upsert:
-![](Screenshot-2025-10-13-at-12.34.19-PM-1024x566.png) ![](Screenshot-2025-10-13-at-12.34.43-PM-1024x537.png)
+![Line chart of Get Reports throughput: V5R3 and V5R2 are almost identical, peaking near 220 requests/s](Screenshot-2025-10-13-at-12.34.19-PM-1024x566.png) ![Line chart of Bulk Upsert throughput: V5R3 and V5R2 overlap, reaching about 1,000 requests/s](Screenshot-2025-10-13-at-12.34.43-PM-1024x537.png)
 
 The graphs above show that we have another revision that didn't bring clear gains. appV5R3 is just slightly better than appV5R2 in some parts of both functions, Get Reports and Bulk Upsert.
 
@@ -424,7 +424,7 @@ As discussed in this revision introduction, the additional totals field on each 
 ### Load tests results
 
 Executing the load test for appV5R4 and plotting it alongside the results for appV5R3, we have the following results for Get Reports and Bulk Upsert:
-![](Screenshot-2025-10-13-at-12.35.14-PM-1024x550.png) ![](Screenshot-2025-10-13-at-12.35.30-PM-1024x557.png)
+![Line chart of Get Reports throughput: V5R4 matches V5R3 early on but is a little lower in later rounds](Screenshot-2025-10-13-at-12.35.14-PM-1024x550.png) ![Line chart of Bulk Upsert throughput: V5R4 closely follows V5R3, dropping slightly at the end](Screenshot-2025-10-13-at-12.35.30-PM-1024x557.png)
 
 The graphs above show what we've been expecting since the beginning of this revision: The performance of appV5R4 is worse than appV5R3 in both functions, Get Reports and Bulk Upsert.
 

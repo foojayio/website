@@ -15,7 +15,7 @@ related_posts:
   - "pi4j-operating-system-for-java-development-on-raspberry-pi"
 ---
 
-![](duke_sw_01-1024x687.jpg)
+![Duke, the Java mascot, in a Jedi robe holding a green lightsaber in front of a Death Star backdrop](duke_sw_01-1024x687.jpg)
 
 Every year on May 4th, fans around the world celebrate Star Wars Day with the iconic phrase "May the 4th be with you." The following day, May 5th, is often recognized as "Revenge of the Fifth", a playful nod to Revenge of the Sith, where many embrace the darker side of the Force and celebrate iconic Sith Lords and villains.
 
@@ -100,7 +100,7 @@ This is your Jedi identity stored in code.
 
 Like Anakin Skywalker before his fall… or redemption.
 
-![](duke_st_02-687x1024.jpg)
+![Duke figurine dressed as a Jedi, wielding two green lightsabers](duke_st_02-687x1024.jpg)
 
 #### Objects = Jedi in the Field
 
@@ -158,7 +158,7 @@ Output:
 Obi-Wan Kenobi uses the Force like Master Yoda taught.
 ```
 
-![](duke_st_03-1024x687.jpg)
+![Jedi-robed Duke-style figure with a blue lightsaber facing a dark, shadowy figure made of Java coffee-cup logos](duke_st_03-1024x687.jpg)
 
 ## The Real Dark Side: The Empire of Bad Learning
 
@@ -198,7 +198,7 @@ No randomness.
 
 Only discipline.
 
-![](duke_st_04-1024x687.jpg)
+![Duke in a Jedi robe holds up a glowing holographic code tablet in front of young students](duke_st_04-1024x687.jpg)
 
 ## Training Like a Jedi: Loops in the Temple
 
@@ -287,7 +287,7 @@ Now you are no longer a learner.
 
 You are building systems like the Jedi rebuilt themselves after Order 66.
 
-![](java_start_wars_end-1024x683.jpg)
+![Nine-panel Star Wars themed storyboard about learning Java, ending with the quote 'The Force was never meant to be easy'](java_start_wars_end-1024x683.jpg)
 
 ## Final Wisdom from the Jedi Archives
 

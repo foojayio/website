@@ -32,10 +32,10 @@ Example code for many programming languages is available on [the HiveMQ website]
 ## Setting up a HiveMQ Cloud account
 
 Let's start with our free HiveMQ Cloud account. Go to [auth.hivemq.cloud](https://auth.hivemq.cloud) \> "Sign Up Now" and create a login. Once logged in, you will be presented with your clusters. By pressing the "Manage Cluster" button, you will be directed to a view containing the details of your HiveMQ Cloud instance.
-![](hivemq-your-clusters.png) Your clusters
+![HiveMQ Cloud 'Your Clusters' page showing a running free cluster with its URL and TLS port 8883](hivemq-your-clusters.png) Your clusters
 
 Go to the "Access Management" section and create a user name and password for the credentials we will use in our applications.
-![](hivemq-access-management-1024x582.png) Access Management
+![HiveMQ Cloud Access Management tab with the MQTT credentials form and the active user 'hivemq-user'](hivemq-access-management-1024x582.png) Access Management
 
 ## About Raspberry Pi
 
@@ -54,7 +54,7 @@ post to send sensor data to HiveMQ Cloud.
 ### Java on Raspberry Pi
 
 When you start with a new Raspberry Pi, you will need to "burn" an Operating System to an SD card. On the [software page of the Raspberry Pi website](https://www.raspberrypi.com/software/), you can find the "Imager" tool. With this tool you can burn one of the pre-defined OS-versions, or select an image you downloaded from another site. If you select "Raspberry Pi OS (other)" \> "Raspberry Pi OS Full (32-bit)", you will have a full Linux desktop environment with extra programming tools.
-![](imager-full-1024x677.png) Raspberry Pi Imager tool
+![Raspberry Pi Imager listing Raspberry Pi OS Lite and Full (32-bit) options](imager-full-1024x677.png) Raspberry Pi Imager tool
 
 And what's even more important for us, Java is also pre-installed! When you open the terminal and check the version with `java -versions` you will get this result (depending on the build of Raspberry Pi OS):
 
@@ -70,7 +70,7 @@ This means we are fully prepared to develop and run Java applications on our Ras
 ### Pi4J
 
 The Pi4J project (started in 2012) aims to unite Java programming with electronics. By using the Pi4J-dependency in a project, electronic components connected to the GPIO-pins (General Purpose Input/Output) of the Raspberry Pi can be controlled as objects in the Java-code. Pi4J uses native libraries to control the GPIOs so you - as a programmer - don't need to be fully aware of all the "magic" which relates to hardware communication.
-![](pi4j-overview-1024x427.jpg) Pi4J overview
+![Diagram: a Java application in the JVM calls the Pi4J library, then native libraries and hardware interfaces, to the Raspberry Pi GPIO pins](pi4j-overview-1024x427.jpg) Pi4J overview
 
 #### History
 
@@ -92,7 +92,7 @@ Together with this V2, a new [documentation website was published](https://pi4j.
 The first application we will create is a data-publisher and the full sources are available on [GitHub](https://github.com/FDelporte/HiveMQ-examples). We will read from different sensors and send their values to HiveMQ Cloud. Because every "maker" will have his/her own ideas and wishes for a project, we will not focus on components and wiring, but use an easy starter kit that is perfect for this demo project: the [CrowPi](https://www.elecrow.com/crowpi.html). This pre-wired kit makes it very easy to get started with electronics programming as all the components are pre-assembled and  
 
 wired. So at least that's one thing you don't need to worry about or can mess up ;-).
-![](crowpi1-1024x1024.jpg) CrowPi version 1
+![CrowPi educational kit, a briefcase holding a Raspberry Pi, screen, sensors, buttons, LCD and LED matrix](crowpi1-1024x1024.jpg) CrowPi version 1
 
 ### Based on the CrowPi project by FHNW
 
@@ -357,7 +357,7 @@ But even with these tweaks, the results are not 100% reliable. This kind of sens
 ["Raspberry Pi Real-Time OS (RTOS): Which to Choose"](https://all3dp.com/2/rtos-raspberry-pi-real-time-os/) by Cherie Tan.
 
 One last remark: this project uses the tilt sensor, which needs to be enabled with a dip switch on the CrowPi board:
-![](switch-tilt-sensor.png) DIP switch for the tilt sensor on the CrowPi
+![Two DIP switch banks, left with all switches off and right with switch 2 on, for selecting the tilt sensor](switch-tilt-sensor.png) DIP switch for the tilt sensor on the CrowPi
 
 ### Building and running on Raspberry Pi
 
@@ -390,10 +390,10 @@ After some startup logging, you will see the scheduled messages and events of di
 ### WebSocket test page
 
 The logging of our application shows data is published to HiveMQ Cloud, but we want to be sure before we continue to create a client... Luckily there is a websocket client we can use to do this test very easily! Head over to [hivemq.com/demos/websocket-client/](http://www.hivemq.com/demos/websocket-client/) and fill in all the fields with your credentials. Make sure to select the `SSL` check box! When all is filled in correctly, and you hit the `Connect` button, you will get a green `connected` indication on top.
-![](hivemq-websockets-1024x493.png) HiveMQ WebSocket tester
+![HiveMQ Websocket Client showing a connected session to the HiveMQ Cloud host with the hivemq-user credentials](hivemq-websockets-1024x493.png) HiveMQ WebSocket tester
 
 Now we can define the topics we want to subscribe to, e.g. "crowpi/motion", "crowpi/sensors"... As soon as messages are pushed from our Raspberry Pi, they are shown in this web test page.
-![](hivemq-websocket-messages.png) HiveMQ WebSocket messages
+![List of MQTT messages on crowpi/motion, crowpi/touch and crowpi/sensors topics with JSON values for temperature, humidity, light and distance](hivemq-websocket-messages.png) HiveMQ WebSocket messages
 
 Great! We have data flowing from our Raspberry Pi to HiveMQ Cloud!!!
 

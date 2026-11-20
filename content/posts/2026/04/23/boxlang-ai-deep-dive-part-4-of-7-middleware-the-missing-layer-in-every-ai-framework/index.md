@@ -20,7 +20,7 @@ aliases:
   - "/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵/"
 ---
 
-![](bxai-series-cover-04-700x368.png)
+![Cover card for BoxLang AI 3.0 deep dive part 4 of 7: 'Middleware, The Missing Layer in Every AI Framework'](bxai-series-cover-04-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 4 of 7*
 

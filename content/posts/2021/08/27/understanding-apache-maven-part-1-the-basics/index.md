@@ -47,7 +47,7 @@ In addition, maven provides capabilities for a project to :
 Apache Maven provides sensible defaults for a project's build management. A developer can then choose to override any preset defaults.
 
 An **example of such** is clear in the conventional directory structure of a Maven project:
-![](image-10-1024x463.png)
+![Directory tree of a Maven project: src/main and src/test with java and resources folders, plus pom.xml](image-10-1024x463.png)
 
 In this directory structure, the source code is, by convention located under the project root directory in a `src` directory.
 

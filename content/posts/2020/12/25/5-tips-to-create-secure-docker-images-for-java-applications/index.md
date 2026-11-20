@@ -21,7 +21,7 @@ However, the naive way of creating custom Docker images for your Java applicatio
 When creating a Docker image, we make this image based on some image we pull from Docker Hub. This is what we call the base-image. The base image is the foundation of the new image you are about to build for your Java application. The base image you choose is essential because it allows you to utilize everything available in this image. However, this comes at a price. When a base image has a vulnerability, you will inherit this in your newly created image.
 
 Let's look at a popular set of Docker Java base images from Adoptopenjdk, [openjdk11](https://hub.docker.com/r/adoptopenjdk/openjdk11/). Using their default tag, this image is built on top of an ubuntu distribution. However, we can also choose tags for specific versions that are, for instance, based on Debian, Centos, or Alpine (note, alpine is not glibc based, and may not be compatible with applications that make native JNI calls).
-![](adoptopenjdk-graph.png)
+![Bar chart of vulnerabilities per tag for adoptopenjdk/openjdk11: Debian 75, CentOS 27, Ubuntu 25 and Alpine 0](adoptopenjdk-graph.png)
 
 We can conclude that choosing the right base image is critical from a security perspective. You probably do not need all the binaries that come with a full operating system. Building your new Docker Java image for your application is preferable based on a minimal base image. Binaries that you do not have cannot harm you.
 
@@ -38,12 +38,12 @@ Even if you would like to build your application inside a Docker container, you 
 I want to create a Docker Java image for my java-code-workshop application. It is a spring-boot based application build with maven that needs Java version 8.
 
 The naive way to create this Docker Java image would be something like this:
-![](DMJ7VOymBspNHSqlFxyOC-FyOSweRv5mzfln4Z__-7c85eed4.png)
+![Dockerfile that copies a project into a maven:3-openjdk-8 image and starts it with mvn spring-boot:run](DMJ7VOymBspNHSqlFxyOC-FyOSweRv5mzfln4Z__-7c85eed4.png)
 
 I picked a base image that includes maven and openjdk8, copy my source into the image, and call maven to build and run my application. This example works perfectly fine. My application will launch and runs smoothly. However, the Docker image that I just created has a size of 631 MB.
 
 Let's change this Dockerfile and use a multi-stage build:
-![](pxZ5K5IuS4i9HCwAucIBvg6j67kKHrs_ASAAR9sT-3ada583d.png)
+![Multi-stage Dockerfile building the jar with Maven, then copying it into a slim openjdk:8-jre-alpine image to run](pxZ5K5IuS4i9HCwAucIBvg6j67kKHrs_ASAAR9sT-3ada583d.png)
 
 What happens now is that I still use the maven-openjdk8 image to build my project. However, this will not be the output. I create a new image based on a significantly smaller java 8 JRE image and copy only the executable spring-boot jar. Now I just have to execute the `jar-file`, and I am done! The result is a Docker image that does not include the JDK or maven but only the JRE. The image size reduces dramatically to 132 MB.
 
@@ -56,7 +56,7 @@ You can also use this when you have to include secrets for accessing a private r
 When creating a Docker container, by default, you will run it as root. Although this is convenient for development, you do not want this in your production images. Suppose, for whatever reason, an attacker has access to a terminal or can execute code. In that case, it has significant privileges over that running container, as well as potentially accessing host filesystems via filesystem bind mounts with inappropriately high access rights.  
 
 The easiest way to do to prevent this is to create a specific user like here:
-![](Ppz8LxO_-sLRcdqC12-gDuXAhmN-E6WiGFZAfjxI-edc21519.png)
+![Dockerfile creating a non-root user, copying the app, changing ownership and running as that user instead of root](Ppz8LxO_-sLRcdqC12-gDuXAhmN-E6WiGFZAfjxI-edc21519.png)
 
 On the third line, I am creating a new group and adding a user. This user is a system user (-r) without a password and home directory. I am also adding it to the newly created group.
 
@@ -76,7 +76,7 @@ If I want to scan an `adoptopenjdk` image as I mentioned in the first section, t
     $ snyk container test adoptopenjdk/opendjdk11:latest
 
 Output:
-![](xrnalf7_hXKJ9wddZ8l2cAV6DlxwVbNipgr31sDd-10328bff.png)
+![Terminal output of snyk container test on adoptopenjdk/openjdk11:latest, reporting 21 issues across 132 dependencies](xrnalf7_hXKJ9wddZ8l2cAV6DlxwVbNipgr31sDd-10328bff.png)
 
 You can both test and monitor the Docker image. For monitoring, you use `snyk container monitor <image>`. Monitoring takes a snapshot and monitors if new vulnerabilities or fixes are available for your image over time.
 

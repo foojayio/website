@@ -17,7 +17,7 @@ categories:
 related_posts:
 ---
 
-![](bx-ldap-700x467.jpg)
+![BoxLang BX-LDAP banner with a glowing padlock, describing LDAP capabilities for the BoxLang language](bx-ldap-700x467.jpg)
 
 We're excited to announce the release of **bx-ldap**, a comprehensive LDAP module that brings enterprise-grade directory access to BoxLang! This module goes above and beyond traditional CFML LDAP implementations, offering modern features like connection pooling, event-driven programming, multiple return formats, and a clean, intuitive API.
 > **Note:** bx-ldap is a premium module available exclusively to BoxLang +/++ **subscribers**.

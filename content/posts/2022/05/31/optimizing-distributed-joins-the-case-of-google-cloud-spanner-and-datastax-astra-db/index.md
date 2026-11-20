@@ -18,7 +18,7 @@ related_posts:
   - "k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices"
 ---
 
-![](0_6VGah2hwaLIBjW7R-1024x576.jpeg)
+![Abstract glowing network of connected nodes on a dark background, illustrating distributed data](0_6VGah2hwaLIBjW7R-1024x576.jpeg)
 
 *In this post, learn how relational and NoSQL databases, Google Cloud Spanner and DataStax Astra DB, optimize distributed joins for real-time applications.*
 
@@ -39,7 +39,7 @@ Consider the four types of distributed joins illustrated in Figure 1:
 * A *co-located join* does not need to move data at all because data is already stored such that all rows with the same join key value reside on the same node. Data still needs to be joined using a nested-loop, sort-merge, or hash join algorithm.
 * A *pre-computed join* does not need to move data or compute joins locally on each node because data is already stored in a joined form. This type of join skips data movement and join computation and goes directly to merging and returning results.
 
-![](0_O7giKw-xhWRaeLp0.png) Figure 1: Four Types of Distributed Joins
+![Shuffle, broadcast, co-located and pre-computed joins compared: the further right, the less data moves and the faster the join](0_O7giKw-xhWRaeLp0.png) Figure 1: Four Types of Distributed Joins
 
 Shuffle and broadcast joins are more suitable for batch or near real-time analytics. For example, they are used in [Apache Spark](https://spark.apache.org/) as the main join strategies. Co-located and pre-computed joins are faster and can be used for online transaction processing with real-time applications. They frequently rely on organizing data based on unique storage schemes supported by a database.
 
@@ -48,7 +48,7 @@ In the rest of this article, our focus is on co-located and pre-computed joins, 
 ## Running example: Managing users, accounts, and transactions
 
 Let's define a running example that we can implement in both Google Cloud Spanner and [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome).
-![](0_yCIUmUfvSkKp6I_r.png) Figure 2: Example of relational database schema and SQL queries
+![Relational schema of users, accounts and transactions tables with the two SQL join queries used in the running example](0_yCIUmUfvSkKp6I_r.png) Figure 2: Example of relational database schema and SQL queries
 
 Figure 2 depicts the relational database schema with three tables and two SQL queries. We have users identified by user ids, bank accounts identified by account ids, and account transactions identified by transaction ids. A user can have one or more accounts, while each account must belong to exactly one user. An account can have zero or more transactions, while each transaction must be associated with exactly one account. These key and cardinality constraints are captured via *primary key* (PK) and *foreign key* (FK) constraints on the diagram.
 
@@ -67,7 +67,7 @@ Figure 3 shows how to take advantage of table interleaving and co-located joins 
 The SQL queries are unchanged when compared to our original running example. They use the same joins as before, but these joins can now be executed faster as co-located joins.
 
 To try this example in [Google Cloud Spanner](https://cloud.google.com/spanner), we share [our SQL script](https://github.com/ArtemChebotko/distributed-joins/blob/main/spanner-interleaved-tables.sql) for Co-Located Joins.
-![](1_dxpTk2l6aVR-7QdCPkrdWA.png) *Figure 3: Co-located joins in Google Cloud Spanner*
+![Google Cloud Spanner DDL creating interleaved users, accounts and transactions tables, plus the same two join queries](1_dxpTk2l6aVR-7QdCPkrdWA.png) *Figure 3: Co-located joins in Google Cloud Spanner*
 
 ## **Pre-computed joins and tables with multi-row partitions in DataStax Astra DB**
 
@@ -80,7 +80,7 @@ Figure 4 shows how to take advantage of tables with multi-row partitions and pre
 The CQL queries are much simplified when compared to their SQL counterparts. They are very efficient queries that retrieve one partition at a time based on a partition key value. There are no joins or ordering required because data is already organized in pre-joined and ordered form.
 
 To try this example in [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome), we share [our CQL script](https://github.com/ArtemChebotko/distributed-joins/blob/main/astra-db.cql). If you are new to CQL, it stands for Cassandra Query Language and is used in both [DataStax Astra DB](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/openid-connect/registrations?client_id=auth-proxy&response_type=code&scope=openid+profile+email&redirect_uri=https://astra.datastax.com/welcome) and [Apache Cassandra](https://cassandra.apache.org/). Astra DB is a serverless and multi-region database service that is based on Apache Cassandra, an open-source NoSQL database. To learn more about CQL and tables with multi-row partitions, the hands-on [Cassandra Fundamentals](https://www.datastax.com/learn/cassandra-fundamentals) learning series is highly recommended. For more advanced data modeling, there is also the collection of [data modeling example](https://www.datastax.com/learn/data-modeling-by-example)s from various domains.
-![](1_C9pQNOHe4FpOwctfNZubaw.png) *Figure 4: Pre-computed joins in DataStax Astra DB*
+![Cassandra CQL tables accounts_by_user and transactions_by_account, with simple single-partition SELECT queries](1_C9pQNOHe4FpOwctfNZubaw.png) *Figure 4: Pre-computed joins in DataStax Astra DB*
 
 ## Conclusion
 

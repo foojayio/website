@@ -48,7 +48,7 @@ nodes:
 kind create cluster -- config kind.yml
 ```
 
-![](cluster.png)
+![Diagram of a Kubernetes cluster with two worker nodes, 172.18.0.3 and 172.18.0.2](cluster.png)
 
 Next, we need a container. It shouldn't just run and stop: Let's use the latest Nginx image available at the time of this writing.
 
@@ -103,7 +103,7 @@ hostname -I
 10.244.1.2
 ```
 
-![](internal-only.png)
+![Diagram of the cluster with an nginx pod (10.244.1.2) on the first worker node, reachable only internally](internal-only.png)
 
 We cannot successfully ping this IP outside the cluster; it's an internal IP.
 
@@ -152,7 +152,7 @@ nginx        ClusterIP   10.96.93.97   <none>        8080/TCP   4s
 
 From this point on, it's possible to access the pod *via* the service's `ClusterIP`.
 
-![](cluster-ip.png)
+![Diagram of a ClusterIP service (10.96.93.97) in front of the nginx pod inside the cluster](cluster-ip.png)
 
 All is set for access inside the cluster. From the outside, it's not possible yet. So why shall we use `ClusteIP`? It's pretty darn useful for services that you don't want to expose to the outside world: databases, ElasticSearch nodes, Redis nodes, etc.
 
@@ -259,7 +259,7 @@ curl localhost:30800
     host: nginx-b69d8877c-p2s79
     IP:   10.244.2.2
 
-![](nodeport.png)
+![Diagram of NodePort: external requests reach both worker nodes, then the nginx service routes to the pod](nodeport.png)
 
 The pathway of the request is as follows (notwithstanding the VM layer on Mac/Windows):
 
@@ -299,7 +299,7 @@ while true; do curl localhost:30800; done
     host: nginx-b69d8877c-w7db4
     IP:   10.244.2.2
 
-![](nodeport-two-nodes.png)
+![Diagram of NodePort service balancing requests between two nginx pods on different nodes](nodeport-two-nodes.png)
 
 The service balances the requests between all available pods.
 
@@ -484,7 +484,7 @@ spec:
 
 Here's what it should look like. Note that I've chosen to represent only the `left` path and one node not to overload the diagram.
 
-![](ingress.png)
+![Diagram of an APISIX gateway routing through the 'left' service to the left pod inside the cluster](ingress.png)
 
 To check that it works, let's curl again.
 

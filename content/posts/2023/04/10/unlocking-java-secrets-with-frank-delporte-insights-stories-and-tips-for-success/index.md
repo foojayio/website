@@ -120,9 +120,9 @@ I was one of the first users in Belgium of the Media 100, such a computer-based 
 Going from analog copies with quality loss, to lossless digital video, was only one of the significant improvements.
 
 {{< gallery >}}
-editing-film.jpg
-editing-video-analogue.jpg
-editing-video-media100.jpg
+editing-film.jpg | | Analog film editing table with reels, a small monitor and speakers
+editing-video-analogue.jpg | | Person operating an older video editing suite with three monitors showing color bars and tape decks
+editing-video-media100.jpg | | Media 100 digital video editing system with two monitors, speakers and a Power Mac tower
 {{< /gallery >}}
 
 Soon after, my clients wanted to distribute their company movie to (potential) customers easily and attractively. That's when Macromedia Director and Flash became my new working tools as they allowed me to combine slides, video, and coding on DVD and CD-Rom. The logical next step was to put the same content online. You may remember the annoying "Skip Intro" Flash animations that were used on many websites for some years, and yes, I have to admit, I also created those… Everyone sought new ways to convert static boring text pages into more appealing content. We probably made a lot of wrong decisions at that time, but don't we still? Anyhow, soon I needed a database to create dynamic and easily updatable websites and started using Access Database for it - bad idea - and SQL Server.

@@ -25,7 +25,7 @@ In this three-part series, I'll show how to use JavaFX for mobile app developmen
 You use the same JavaFX code targeting Google Play and Apple App stores. Performance is excellent and startup time is fast with native images. You use Java 11+ and the latest JavaFX.
 
 Our game is TiltMaze Labyrinth. Figure 1 shows TiltMaze running on an Android Nexus 5X. Figure 2 shows TiltMaze running on an iPhone 8 Plus.  
-![](TiltMaze-android-small.png) Figure 1. TiltMaze on Android  
+![Tilt Maze game running on an Android phone, with numbered blue targets in a maze and a speed slider](TiltMaze-android-small.png) Figure 1. TiltMaze on Android  
 ![TiltMaze on iPhone](TiltMaze-iPhone-small.png) Figure 2. TiltMaze on iPhone  
 
 We'll discuss TiltMaze in three parts. First, we explore the JavaFX code: the basic structure of an animation-type app and the Gluon Attach API that lets you access hardware-specific features in a device-agnostic way.
@@ -113,7 +113,7 @@ path.getElements().add(
 ```
 
 Figure 3 shows a game in progress. The ball's path is marked in blue and the countdown timer has 6.5 seconds remaining. Of course, the game must perform collision detection with the maze barriers, holes, and outside boundaries. We leave this code for you to digest at your leisure!  
-![](TiltMaze-InPlay-small.png) Figure 3. TiltMaze during play  
+![Tilt Maze game in play on an iPhone, with the ball's path drawn in blue and 6.5 seconds left on the timer](TiltMaze-InPlay-small.png) Figure 3. TiltMaze during play  
 
 The Novice/Expert slider is disabled during play, but can be adjusted between games. The Novice setting has the longest game time and the slowest ball roll. The Expert setting corresponds to the shortest game time and the fastest ball roll. And you can experiment with values in between that fit your level.
 

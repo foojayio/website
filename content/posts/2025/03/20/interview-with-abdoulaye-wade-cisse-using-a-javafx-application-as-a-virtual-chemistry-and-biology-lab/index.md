@@ -18,7 +18,7 @@ related_posts:
 ---
 
 I continuously collect JavaFX-related content for the [JFX Central Links Of The Week](https://www.jfx-central.com/links). Recently, I saw a [video on LinkedIn, shared by Abdoulaye Wade Cissé, of a JavaFX "virtual lab"](https://www.linkedin.com/posts/abdoulaye-wade-ciss%C3%A9-7892a621b_javafx-aezducation-laboratoirevirtuel-activity-7293250354949869568-yMOF) and wanted to learn more about this project... Turns out he is a 22-year-old student in Senegal, creating a fantastic project to provide a virtual laboratory as software where the resources are not available for a physical lab. With his project, he proved that Java and JavaFX are the ideal way to generate entirely free software with a lot of functionality.  
-![](abdoulaye-896x1024.jpg)  
+![Abdoulaye Wade Cissé in a dark suit and tie with a backpack, smiling slightly under a green metal roof structure](abdoulaye-896x1024.jpg)  
 ***What is your experience with Java development?***
 
 I started using Java last year, during my second year of university. I learned Java in our Object-Oriented Programming (OOP) course because it is part of our academic  
@@ -47,9 +47,9 @@ This virtual laboratory application allows students to perform chemistry and bio
 The main goal of this application is to help students simulate experiments that they usually only learn in theory so they can better understand and visualize scientific concepts. Based on the implemented experiments, this application is mainly for 9th-grade students and teachers.
 
 {{< gallery >}}
-lab-1-734x1024.jpg
-lab-3-667x1024.jpg
-lab-5.jpg
+lab-1-734x1024.jpg | | Phone screenshot of a French document describing the respiratory rate experiment, above the virtual lab app with a running figure and lungs
+lab-3-667x1024.jpg | | Phone screenshot of a French description of hydrocarbon combustion, above the virtual lab app showing a burner flame
+lab-5.jpg | | French description of the oxygen consumption experiment above the virtual lab app showing a person in a box and an oxygen cylinder
 {{< /gallery >}}
 
 ***Are the project sources shared, and is it easy to add extra experiments and translations?***

@@ -50,9 +50,9 @@ Note: **Note**: Qute is still an experimental feature.
 Using Quarkus, Qute and Pi4J an example application is built to show a 7-segments diplay on the PC which controls such an electronic component connected to a Raspberry Pi.
 
 {{< gallery cols="3" >}}
-quarkus_pi4j01-1024x768.jpg
-7-seg-disp-ca.png
-Screenshot-2020-09-22-at-13.50.54-187x300-1.png
+quarkus_pi4j01-1024x768.jpg | | Raspberry Pi on a breadboard driving a green 7-segment display showing 6, next to a laptop with a red web display
+7-seg-disp-ca.png | | Pin layout of a 7-segment display with segments a to g and DP, plus its diode schematic
+Screenshot-2020-09-22-at-13.50.54-187x300-1.png | | Table mapping each display segment (a to h) to its pin number and Pi4J GPIO number
 {{< /gallery >}}
 
 The full [code is shared on GitHub](https://github.com/igfasouza/qute-example-pi4j) but the main class is pretty small and easy to understand:
@@ -145,8 +145,8 @@ The setup used in the example of Igor has the main advantage that you only need 
 To solve this problem, a [shift register SN74HC595 IC](https://www.ti.com/lit/ds/symlink/sn74hc595.pdf) can be used which only requires 3 GPIOs to control all 8 LED-segments. On my blog I have this way of working further described in the post "[Controlling a LED number display with JavaFX and Python on Raspberry Pi](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/)". As you can see in the image below, the number of connections to the Raspberry Pi is reduced, but the wiring on the breadboard becomes a bit more complicated...
 
 {{< gallery cols="2" >}}
-led_segment_scheme_breadboard.png
-segment_display_fully_wired-1024x498.jpg
+led_segment_scheme_breadboard.png | | Fritzing diagram wiring a Raspberry Pi to a 74HC595 shift register and a 7-segment display on a breadboard
+segment_display_fully_wired-1024x498.jpg | | Breadboard with a 7-segment display showing the digit 5 wired to a 74HC595 chip
 {{< /gallery >}}
 
 ## Conclusion

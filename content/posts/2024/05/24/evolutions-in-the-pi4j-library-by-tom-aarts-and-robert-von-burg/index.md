@@ -36,8 +36,8 @@ Robert von Burg worked on improvements to the I2C implementation in Pi4J. The ch
 Tom Aarts added PWM hardware support for the Raspberry Pi 5 via a new provider `linuxfs-pwm`. The previous PWM PiGpio provider does not support the Raspberry Pi 5 RP1 chip. To use this new provider, changes are required in your dependencies and Java code. See [this blog post for more details and a code example](https://pi4j.com/blog/2024/20240423_pwm_rpi5/).
 
 {{< gallery >}}
-led-connection.jpg
-pwm-config-txt.jpg
+led-connection.jpg | | Raspberry Pi GPIO extension board with ribbon cable and a green LED wired to it with jumper wires
+pwm-config-txt.jpg | | Raspberry Pi config.txt open in a text editor with the line dtoverlay=pwm added at the end
 {{< /gallery >}}
 
 ## New Class to Get Board Info
@@ -47,8 +47,8 @@ The new `BoardInfoHelper` class and the related enums and methods can provide th
 This new class is already used as the basis for the website [api.pi4j.com](https://api.pi4j.com), which visualizes all the info defined inside the library, like board info, header pins, type of pins, etc. This website runs on a Raspberry Pi board, so the [System Information screen](https://api.pi4j.com/system-information) shows the info about that board, using this new class.
 
 {{< gallery >}}
-api-boards-915x1024.jpg
-api-system-information-1024x813.jpg
+api-boards-915x1024.jpg | | Pi4J API website Board Information page for the Raspberry Pi 5 Model B, with specs and 40-pin header
+api-system-information-1024x813.jpg | | Pi4J API System Information page listing a Raspberry Pi 4 running Linux and Azul Zulu 17
 {{< /gallery >}}
 
 ## Interview with Robert von Burg
@@ -62,9 +62,9 @@ My name is Robert von Burg. I've started programming in 1998 learning a bit of C
 For the last decade I've been working at [Atexxi](https://www.atexxi.ch/), where I'm a co-owner and founder. We are developing our eSyNet platform, enabling hospitals, pharmacies, and elderly/nursing homes to digitize their drug logistics. Our platform is software-based, but it could not work without our electronic cabinets and accessories, with which the users of our system interact and thus allow inventory to be tracked. Our goal is to unburden nurses and move the administrative work surrounding drug logistics of nurses to the pharmacy.
 
 {{< gallery >}}
-eitch.jpg
-IMG_8095-1024x683.jpg
-IMG_20200430_153450-767x1024.jpg
+eitch.jpg | | Portrait of Robert von Burg, smiling, in a dark shirt
+IMG_8095-1024x683.jpg | | Hand reaching into a drawer with green and red LED strips lighting compartments holding sweets
+IMG_20200430_153450-767x1024.jpg | | Industrial roller conveyor line with a control cabinet inside a bright warehouse hall
 {{< /gallery >}}
 
 ***How did you get involved in the Pi4J development?***
@@ -96,9 +96,9 @@ These devices, as they become more powerful with each generation, make it easier
 **Tom Aarts** started contributing to the Pi4J project when he did his first commit in the [pi4j-example-devices repository](https://github.com/Pi4J/pi4j-example-devices/). Currently, you can find example implementations for a long list of devices (see screenshot below), using V2 of Pi4J. While creating these implementations, he found some missing pieces and bugs in the core library and also fixed them. For instance, this blog post is [about the ongoing PWM improvements for the Raspberry Pi 5](https://pi4j.com/blog/2024/20240423_pwm_rpi5/). Furthermore, Tom often assists users who [filed a Pi4J V2 issue](https://github.com/Pi4J/pi4j-v2/issues) or [started a discussion](https://github.com/Pi4J/pi4j-v2/discussions).
 
 {{< gallery >}}
-tom-808x1024.jpg
-desk-1024x768.jpg
-pi4j-example-devices-1024x812.jpg
+tom-808x1024.jpg | | Selfie portrait of Tom Aarts, bearded man with glasses, in a dark shirt
+desk-1024x768.jpg | | Workbench with a monitor showing code, a keyboard, mouse and shelves of small parts organizers
+pi4j-example-devices-1024x812.jpg | | GitHub pi4j-example-devices repository listing folders of device examples such as ads1256, bme280 and mcp3008
 {{< /gallery >}}
 
 ***Can you introduce yourself? What is your history in software (Java) development?***
@@ -124,9 +124,9 @@ I focus on device support and examples to assist in issues and discussions. I am
 I have a couple of home projects for clocks and temperature and a large number of prototype boards to support the various chips I implemented.
 
 {{< gallery >}}
-setup-1-768x1024.jpg
-setup-2-768x1024.jpg
-setup-3-768x1024.jpg
+setup-1-768x1024.jpg | | Cardboard board with a Raspberry Pi GPIO breakout, small display and red prototype boards wired together
+setup-2-768x1024.jpg | | Cardboard board covered in tangled jumper wires linking LCD displays, a sensor and prototype boards
+setup-3-768x1024.jpg | | Cardboard board with two breadboards and a red LED connected by a dense tangle of colored wires
 {{< /gallery >}}
 
 ***You answer a lot of questions in the Pi4J discussions and tickets. What is the most challenging part of being able to help users?***

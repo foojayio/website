@@ -80,7 +80,7 @@ Snapshots provide far more detail about all types of collections. Since they acc
 
 E.g., take for instance this snapshot from the pet clinic Spring Boot demo. It lists a vector and the 10 elements within it. The values of individual objects within are clearly visible in the snapshot and can be traversed easily.
 
-![](Screen-Shot-2022-03-28-at-14.51.52-2048x1267-1-700x433.jpg)
+![IntelliJ IDEA debugging the Spring Petclinic with a Lightrun snapshot showing the vets list and its elements in Variables](Screen-Shot-2022-03-28-at-14.51.52-2048x1267-1-700x433.jpg)
 
 ### Use Size and Related Methods
 
@@ -90,7 +90,7 @@ If you expect a result to include a fixed set of elements you can easily use the
 
 You can use it as a condition or within the log format itself:
 
-![](Screen-Shot-2022-03-28-at-14.55.09-700x500.png)
+![Lightrun 'Create Log' dialog adding a log line in VetController.java with a condition that the vet list is not empty](Screen-Shot-2022-03-28-at-14.55.09-700x500.png)
 
 ### Logging an Individual Entry
 
@@ -106,7 +106,7 @@ vet.getFirstName().equals("Shai")
 
 If it's met I can print out the full details for the entry: `Current vet is {newVet}`.
 
-![](Screen-Shot-2022-03-28-at-14.59.23-700x414.jpg)
+![Lightrun 'Create Log' dialog logging 'Current vet is {newVet}' only when the first name equals Shai](Screen-Shot-2022-03-28-at-14.59.23-700x414.jpg)
 
 ## Preparation
 

@@ -69,7 +69,7 @@ Now that TornadoVM is installed in your system, let's see which devices are dete
 $ tornado --devices
 ```
 
-![](devices-m1-pro.png)
+![Terminal output of 'tornado --devices' listing two OpenCL devices, both Apple M1 Pro, one CPU and one GPU](devices-m1-pro.png)
 
 The first device is the CPU of Apple M1 Pro, while the second device is the GPU.
 
@@ -79,7 +79,7 @@ The TornadoVM version that is demonstrated in this blog is v0.14 and the exact c
 
 We have run all unit tests on the CPU (first device detected) by running make tests, and we obtained the following report: TornadoVM passes 477 tests, fails 36 tests, and 15 out of 528 are not supported.
 
-![](unittests-report-m1-pro.png)
+![TornadoVM unit tests report: 477 passed, 36 failed and 15 unsupported, with about 92.98% coverage](unittests-report-m1-pro.png)
 
 Several unit tests fail for different reasons. For instance, the default OpenCL version on M1 Pro is 1.2, while TornadoVM requires OpenCL 2.1 to exploit all its features.
 
@@ -96,7 +96,7 @@ $ tornado --threadInfo -Ds0.t0.device=0:1 -m tornado.examples/uk.ac.manchester.t
 ```
 
 The result is 738.5x performance increase compared to a single threaded execution, as shown below.  
-![](mxm-m1-pro-700x227.png)
+![Terminal output of matrix multiplication on the M1 Pro GPU: TornadoVM reaches 277 GFlops, a 738.5x speedup over single-threaded CPU](mxm-m1-pro-700x227.png)
 
 ### Final Remarks
 

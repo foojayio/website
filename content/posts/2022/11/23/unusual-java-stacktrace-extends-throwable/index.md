@@ -112,7 +112,7 @@ public class EgMain {
 
 Produces the following Exception when run:
 
-![](Screen-Shot-2022-11-14-at-4.00.07-PM-1024x152.png)
+![Stack trace of an IllegalStateException 'Closed', with a 'Caused by' StackTrace showing where the resource was closed](Screen-Shot-2022-11-14-at-4.00.07-PM-1024x152.png)
 
 Normally you would see the IllegalStateException and where your code tried to use the closed resource, but this doesn't tell you why it was closed without additional information.
 
@@ -155,7 +155,7 @@ public class CreatedMain {
 
 Prints the following:
 
-![](Screen-Shot-2022-11-14-at-4.01.22-PM-1024x202.png)
+![Console warning that a resource was discarded but not closed, with a StackTrace showing where it was created](Screen-Shot-2022-11-14-at-4.01.22-PM-1024x202.png)
 
 This allows you to not just see where a resource was created so you can try to determine why it wasn't closed, but it's trivial to log in a manner your IDE understands, as your logger will already have support for printing out the stack trace. e.g. you can click on the line numbers to look through the code which created it.
 
@@ -197,7 +197,7 @@ public class JitteryMain implements Runnable {
 
 Prints the following, which again you can see is easy to navigate the stack in your IDE.
 
-![](Screen-Shot-2022-11-14-at-4.06.07-PM-1024x196.png)
+![Log message that a thread spent 177 ms longer than expected, with a stack trace of the pause location](Screen-Shot-2022-11-14-at-4.06.07-PM-1024x196.png)
 
 You might be wondering why this happens in this case. The most likely cause is that *Thread.sleep(time)* sleeps for a minimum amount of time, not a maximum and on Windows sleep 1 ms actually takes about 1.9 ms fairly consistently.
 
@@ -239,7 +239,7 @@ public class ConcurrentUsageMain {
 
 Prints the following:
 
-![](Screen-Shot-2022-11-14-at-4.07.24-PM-1024x158.png)
+![Exception showing a resource used by two threads, with a 'Caused by' StackTrace showing its first use on another thread](Screen-Shot-2022-11-14-at-4.07.24-PM-1024x158.png)
 
 You can see the resource was used by two threads with their names, however, you can also see where in the stack they were used to determine the possible cause.
 

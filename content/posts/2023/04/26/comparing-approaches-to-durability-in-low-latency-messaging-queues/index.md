@@ -32,7 +32,7 @@ In computer terminology, the level of concurrency or parallelism a system has to
 
 To achieve a given throughput, the level of concurrency increases with the latency. This generally also increases the level of complexity and risk in order to achieve this concurrency. Many systems have a high inherent parallelism, however financial systems generally do not, limiting how much concurrency can be theoretically achieved. More moving parts increases the risk of failure as well.
 
-![](Screenshot-2023-04-17-at-9.29.37-AM-1024x549.png)
+![Table rating messaging difficulty by latency and throughput, from trivial at 5 microseconds and 200K/s to impractical at 50 ms](Screenshot-2023-04-17-at-9.29.37-AM-1024x549.png)
 
 *Table 1. Level of concurrency/parallelism required to achieve a given throughput and latency.*
 
@@ -58,7 +58,7 @@ Low latency systems 'need for speed' usually trumps the need for reliability, so
 
 However, many financial systems have higher durability but lower latency speed requirements. The message sizes are also typically larger e.g. 1 – 8 KB.
 
-![](Screenshot-2023-04-17-at-9.20.15-AM-1024x590.png)
+![Diagram of a client sending to Server 1, which writes to disk, replicates to Server 2, which also persists and acknowledges back](Screenshot-2023-04-17-at-9.20.15-AM-1024x590.png)
 
 ### Benchmarked Scenario
 
@@ -78,7 +78,7 @@ A simple way to reduce latencies is to do less work. Low latency systems tend to
 
 The chart below shows data from the same run, and the different lines represent which points we measure time at, to show the difference it makes if you wait for different stages of persistence.
 
-![](Screenshot-2023-04-17-at-9.22.24-AM-1024x558.png)  
+![Latency chart: publish only stays under 1 microsecond, waiting for commit reaches about 43, M.2 async with ack climbs steeply past 93](Screenshot-2023-04-17-at-9.22.24-AM-1024x558.png)  
 *Figure 1. M.2 200K/s messages of 256 Bytes in timed at different stages*
 
 While these tests benefit from smaller messages (compare "M.2 Async\&Ack" in the last chart below), the main speed improvement is not waiting for the same stage of persistence.
@@ -95,7 +95,7 @@ Above we compared the same configuration timed at different stages. In this case
 
 In use cases requiring higher guarantees, the messages are often larger. In this test, 50K/s messages of 1 KB are timed from publishing on a client to receiving a committed message from the "Server 1". The "SYNC 10/s" assumes that on average, a SYNC is required ten times a second. This can be based on the content of the messages, e.g. a large order or payment, rather than just periodically.
 
-![](Screenshot-2023-04-17-at-9.23.14-AM-1024x565.png)  
+![Publish-to-commit latency on SSD: async with ack is far lowest, while synchronous writes reach many milliseconds at high percentiles](Screenshot-2023-04-17-at-9.23.14-AM-1024x565.png)  
 *Figure 2. 50K/s messages of 1KB timed from publishing on client to receiving a committed message*
 
 Note: the round trip time for an acknowledgement from a second machine is much faster than a sync to disk. The cost is about the round trip time for the network.
@@ -108,7 +108,7 @@ As you can see from the yellow line, this significantly reduces the typical late
 
 M.2 drives perform much better across the board, and for the drive tested, even at 200Kmsg/s outperformed the SSD. Nevertheless, selective sync-ing still significantly improves the typical latency and the high end latencies. This is the same test as above but with a higher throughput of 200K/s vs 50K/s
 
-![](Screenshot-2023-04-17-at-9.23.55-AM-1024x563.png)  
+![Publish-to-commit latency on M.2 drive: async with ack stays lowest, sync every message reaches about 25,000 microseconds at 99.9%](Screenshot-2023-04-17-at-9.23.55-AM-1024x563.png)  
 *Figure 3. 200K/s messages of 1KB timed from publishing on client to receiving a committed message*
 
 Again, you can see that the yellow line has significantly lower latencies with selective sync-ing compared to sync-ing every batch of messages.

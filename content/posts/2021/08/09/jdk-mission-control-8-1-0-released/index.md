@@ -26,53 +26,53 @@ I will try to remember to [tweet](https://twitter.com/hirt) or say something on 
 **JMC 8.1 – New Release!**   
 
 This is a new minor release of Java Mission Control. The JMC application will now require JDK 11+ to run, but can still be used with OpenJDK 8u272+ and Oracle JDK 7u40+. It can also still open and visualize flight recordings from JDK 7 and 8.
-![](image-1.png)
+![JMC 8.1 icon: a stylised red and white rocket on a blue background](image-1.png)
 
 **Eclipse 4.19 support**   
 
 The Mission Control client is now built to run optimally on Eclipse 2021-03 and later. To install Java Mission Control into Eclipse, go to the update site (Help \| Install New Software…). The URL to the update site will be vendor specific, and some vendors will instead provide an archive with the update site.
-![](image-2.png)
+![Eclipse logo, a purple sphere with white horizontal stripes](image-2.png)
 
 **Minor bugfixes and improvements**   
 
 There are more than 80 fixes and improvements in this release. Check out the JMC 8.1 Result Dashboard (https://bugs.openjdk.java.net/secure/Dashboard.jspa?selectPageId=20404) for more information.
-![](image-3.png)
+![Donut chart of 85 issues fixed in JMC 8.1.0 by component, led by Mission Control Client with 48 issues](image-3.png)
 
 ### Core
 
 **New Serializers Core Bundle**   
 
 There is now a new core bundle making it easy to serialize flight recording data to DOT (Graphviz) and JSon. This bundle will be expanded upon in future versions.
-![](image-4.jpg)
+![JMC console output of a flight recording serialized to Graphviz DOT format as plain text](image-4.jpg)
 
 **Improved JFR parser performance**   
 
 The performance of the JFR parser has been improved. More improvements are coming in 8.2.
-![](image-5.png)
+![Table of three benchmark runs showing JFR parser time dropping from about 54 seconds to about 39 seconds, 26 to 28 percent faster](image-5.png)
 
 #### Java Flight Recorder (JFR)
 
 **Support for the new JDK 16 Allocation Events**   
 
 A new form of light weight allocation profiling was introduced with JDK 16 (see https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8257602). This version of JMC supports this new type of allocation profiling.
-![](image-6.png)
+![JDK Mission Control Memory page with allocation by class, a timeline of allocation events and stack traces](image-6.png)
 
 **New Page for Peeking into the Constant Pools**   
 
 There is a new page available for taking a look at what constants are available in the recording. This can, for example, be useful when creating custom events to see where all that storage and memory is being used.
-![](image-7.png)
+![JDK Mission Control Constant Pools page listing constant pool types with counts and sizes and the constant values below](image-7.png)
 
 **Open Recordings with .lz4 extension**   
 
 For convenience, files with the .lz4 extension will now be attempted to be opened as flight recordings. This is since lz4 is a common compression to use with flight recordings.
-![](image-8.png)
+![JDK Mission Control Open File dialog selecting myrecording.lz4 to open as a flight recording](image-8.png)
 
 ### JMC Agent Plug-in
 
 **New JMC Agent Plug-in**   
 
 There is now a new agent plug-in available for JMC, which allows configuring where to emit flight recording events in an already running process.
-![](image-9.png)
+![JDK Mission Control JVM Browser with the JMC Agent entry's 'Open the JMC Agent Plug-in' menu and the Agent Live Config page](image-9.png)
 
 ## Bug Fixes
 

@@ -130,6 +130,6 @@ The try-catch-finally mechanism can be summarized as follows:
 * If no appropriate `catch` handler is found, the JVM terminates execution of the current frame and looks for a handler in the previous frame.
 * The JVM goes through all frames until it finds a `catch` handler, executing any `finally` handlers that it finds along the way.
 * If no handler is found, the program's execution is terminated.  
-  ![](exceptions-flow-700x498.png)
+  ![Hand-drawn diagram mapping try-catch, try-finally and catch-finally exception table ranges to bytecode lines 0-19](exceptions-flow-700x498.png)
 
 That's it for now! See you in the next nerding session 🤓

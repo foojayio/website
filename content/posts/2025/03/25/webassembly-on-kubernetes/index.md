@@ -233,7 +233,7 @@ Now comes the fun part: your favorite Cloud provider(s) isn't using Docker Deskt
 
 The latter executes a process; in our case, it's `containerd`. Yet, `containerd` is only an orchestrator of other container processes. It detects the "flavor" of the container and calls the relevant executable. For example, for "regular" containers, it calls `runc` via a *shim* . The good thing is that we can install other shims dedicated to other container types, such as Wasm. The following illustration, taken from the [Wasmedge website](https://wasmedge.org/docs/develop/deploy/intro/), summarizes the flow:
 
-![](wasmedge.png)
+![Diagram: Docker and Kubernetes call containerd, which uses containerd-shim with runc for containers, or containerd-wasm-shim with WasmEdge for Wasm](wasmedge.png)
 
 Despite some of the [mainstream](https://learn.microsoft.com/en-us/azure/aks/use-wasi-node-pools) [Cloud providers](https://www.spinkube.dev/docs/install/azure-kubernetes-service/) offering Wasm integration, none of them provide such a low-level one. I'll continue on my laptop, but Docker Desktop doesn't offer a direct integration either: it's time to be creative. For example, [minikube](https://minikube.sigs.k8s.io/) is a full-fledged Kubernetes distribution that creates an intermediate Linux virtual machine within a Docker environment. We can SSH into the VM and configure it to our heart's content. Let's start by installing `minikube`.
 

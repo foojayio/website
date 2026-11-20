@@ -33,7 +33,7 @@ From this point on, we will focus on the main parts of the agent implementation 
 In [Part 1](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-1-where-ai-agents-add-value/), we established an important boundary: the WMS defines what the agent is allowed to do, while the agent decides what to do within those boundaries. Now we can translate that design into code.
 
 Before diving into the implementation, the following diagram summarizes the complete agent flow across Parts 2 and [3](https://foojay.io/today/building-an-agentic-warehouse-management-system-part-3-tools-decisions-and-actions/). In this part, we will focus on **defining the agent, triggering its execution, and creating the plan.**  
-![](p2-flow-745x1024.png)
+![Flowchart of an agent: define it, trigger it on a completed invoice, then plan tasks; later steps are faded](p2-flow-745x1024.png)
 
 ## Define the Agent
 

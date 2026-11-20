@@ -29,7 +29,7 @@ SWE-bench is the closest thing we have to a standard, objective benchmark for LL
 
 As Jack Morris put it:
 
-![](unnamed-700x209.png)
+![Tweet by Jack Morris saying a high SWEbench score just indicates the training data contained a lot of Django](unnamed-700x209.png)
 
 But if the big labs have better benchmarks they haven't released them, so it has fallen to small teams like [Aider](https://aider.chat/docs/leaderboards/ "Aider") and now Brokk to step up and move the industry forward with independent evaluations.
 
@@ -37,33 +37,33 @@ But if the big labs have better benchmarks they haven't released them, so it has
 
 ### GPT-5 is on top at every performance level and every price point
 
-![](Screenshot-2025-08-12-at-20-04-14-Brokk---AI-for-Large-Codebases-700x497.png)
+![Bar chart of Brokk Java benchmark scores: GPT-5 mini High leads at 76%, followed by Claude 4.1 Opus at 72%](Screenshot-2025-08-12-at-20-04-14-Brokk---AI-for-Large-Codebases-700x497.png)
 
 We've seen commentary elsewhere about GPT-5 underwhelming vs expectations and we couldn't disagree more. OpenAI came out **hard** with the GPT-5 release. Not only does it have chart-topping performance, but **also** killer value. They even quietly improved their prefix cache discount from 4x to 10x.
 
 This is a release worthy of the GPT name that puts OpenAI back on top in every possible category, dominating the pareto frontier at the top:
 
-![](Screenshot-2025-08-12-at-20-14-34-Brokk---AI-for-Large-Codebases-700x427.png)  
+![Scatter chart of total spend versus score: GPT-5 is the best value, while Claude 4.1 Opus costs about $203 for a similar score](Screenshot-2025-08-12-at-20-14-34-Brokk---AI-for-Large-Codebases-700x427.png)  
 
 And at the low end:
 
-![](image-7-700x379.png)
+![Scatter chart of spend versus score for open models: GPT-5 mini leads at 61% for about $1, while Grok 3 and Qwen 3 Coder cost more](image-7-700x379.png)
 
 ### … but it's no speed demon
 
 The one chink in OpenAI's armor is that, at least as of release week, the entire GPT-5 family is slow. The only slower model in the A or B tiers is Gemini 2.5 Pro. By contrast, Sonnet 4 is screaming fast. Even Opus 4.1 is faster than GPT-5 Mini.
 
-![](Screenshot-2025-08-12-at-20-04-51-Brokk---AI-for-Large-Codebases-700x427.png)  
+![Scatter chart of latency versus score: GPT-5 scores highest but is slow (8:16), as is Gemini 2.5 Pro (10:36)](Screenshot-2025-08-12-at-20-04-51-Brokk---AI-for-Large-Codebases-700x427.png)  
 
 And if we drop down to the Open Round, GPT-5 nano is both slower and dumber than Flash 2.5 – which, to be fair, is 5x more expensive. The big surprise is GPT OSS (as served by Fireworks) showing up as significantly faster than nano.
 
-![](image-6-700x379.png)
+![Scatter chart of latency versus score for open models: Gemini 2.5 Flash is fast at 54%, while Grok 3 mini High is slowest at 15%](image-6-700x379.png)
 
 ### Performance by task length
 
 The Power Ranking tasks are up to 108k tokens long. All the models get worse at larger tasks, with the top-performing models at large tasks (GPT-5 and Gemini 2.5 Pro) falling off more slowly than the rest, but still falling off.
 
-![](bpr4-700x375.png)  
+![Bar chart of best scores by task length: every model's score drops as inputs grow from 2048 to 131071 tokens](bpr4-700x375.png)  
 
 This also means that context length isn't the primary reason that newer models are passing former value king DeepSeek's offerings. Yes, V3 was only able to solve one task over 32k tokens long, but the other models in its class fall off sharply here, too. So if we look at scores counting only tasks under that threshold, V3 edges closer to Flash 2.5 but the relative rankings are unchanged.
 
@@ -89,7 +89,7 @@ You can think of the Power Ranking as halfway between AiderBench ("toy" problems
 
 Brokk's tasks are significantly larger in scope than either AiderBench's or SWEBench's:
 
-![](bpr4-700x375.png)
+![Bar chart of best scores by task length: every model's score drops as inputs grow from 2048 to 131071 tokens](bpr4-700x375.png)
 
 To build the Power Rank tasks, we looked at all the commits from the last six months in these five projects that had nontrivial changes AND test coverage, and reverse engineered them to a problem description:
 

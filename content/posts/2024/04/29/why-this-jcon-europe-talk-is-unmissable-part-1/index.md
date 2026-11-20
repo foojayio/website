@@ -16,7 +16,7 @@ related_posts:
 ---
 
 **[JCON Europe](https://2024.europe.jcon.one/) in Cologne is around the corner ([and here are your free Foojay JCON tickets](https://bit.ly/3xv9yfT)), May 13 to 16. Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!**
-![](image-2.jpg)
+![Portrait of a bearded man with glasses wearing a black top hat with steampunk goggles](image-2.jpg)
 
 ## **DevOps for Java Developers (Or Maybe Against Them?!) - Baruch Sadogursky**
 

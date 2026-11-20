@@ -22,7 +22,7 @@ related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 ---
 
-![](BoxLangAI-3.2-700x394.jpg)
+![BX-AI v3.2 release graphic listing image generation, fluent audio, web search, agent registry and MCP observability features](BoxLangAI-3.2-700x394.jpg)
 
 BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a centralized agent registry, and deep MCP observability along with a suite of analytics improvements and a critical bug fix. Let's dig in. 🎉
 

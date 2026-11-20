@@ -49,7 +49,7 @@ Now, let's suppose that another request updates the product information. If the 
 The result? When the load balancer routes requests across instances, users might receive different responses depending on which node handles the request.
 
 The following diagram shows and explains the current situation:  
-![](Screenshot-2026-04-10-at-1.05.00-PM.png)
+![Sequence diagram: a cache update on Instance B leaves Instance A's local cache stale, so a later request returns outdated product data](Screenshot-2026-04-10-at-1.05.00-PM.png)
 
 This problem becomes even more complex when the architecture includes multiple cache levels, such as:
 

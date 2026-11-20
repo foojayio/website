@@ -48,9 +48,9 @@ We tested the performance of three different applications, without (baseline) an
 
 The three applications ranged from a very simple application with a single REST endpoint ([pingperf](https://github.com/HotswapProjects/pingperf-quarkus/ "pingperf")) through a more complicated application using JPA and a remote database ([Rest Crud](https://github.com/johnaohara/quarkusRestCrudDemo/ "Rest Crud")) to a full application using MicroProfile features ([AcmeAir Microservice Main](https://github.com/blueperf/acmeair-mainservice-java#acme-air-main-service---javaliberty/ "AcmeAir Microservice Main")).
 
-![](startuptimeinms.png)
+![Bar chart: startup time drops from 1610-2799 ms at baseline to 129-180 ms with Liberty InstantOn across three apps](startuptimeinms.png)
 
-![](firstresponsetimeinms.png)
+![Bar chart: first response time drops from 1974-2917 ms at baseline to 266-459 ms with InstantOn across three apps](firstresponsetimeinms.png)
 
 As well as providing very fast startup and first response times, the collaborative Liberty InstantOn checkpoint/restore approach provides a better developer experience than removing the JVM completely or implementing a checkpoint/restore solution only at the JDK level and then just stating that many kinds of tasks should not be done before checkpoint.
 
@@ -90,7 +90,7 @@ Retaining the JVM with Liberty InstantOn means that your app gets all the benefi
 
 A restored container simply picks up execution from where it left off before the checkpointing was done and so typically reaches the same (or very close to) peak throughput as it would have in a traditional Liberty container that did not use InstantOn (as you can see in the following graph from tests on the same three applications that were described previously).
 
-![](throughput.png)
+![Bar chart: throughput is 100% for both baseline and InstantOn on all three applications](throughput.png)
 
 ## The security of the app is not compromised
 

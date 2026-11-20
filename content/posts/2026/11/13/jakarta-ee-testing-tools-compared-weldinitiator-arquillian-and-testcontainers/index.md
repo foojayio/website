@@ -38,7 +38,7 @@ WeldInitiator, from the weld-junit5 module, boots a Weld SE container inside the
 
 Every [\*ServiceTest](https://github.com/payara/Payara-Examples/tree/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/service) class in the project — BookServiceTest, PatronServiceTest, LibrarianServiceTest, LoanServiceTest — is built this way:
 
-![](Screenshot-2026-10-08-052225-1024x761.jpg)
+![BookServiceTest code using WeldInitiator and Mockito to test BookService.create with a mocked EntityManager](Screenshot-2026-10-08-052225-1024x761.jpg)
 
 Advantages. This is the fastest layer by a wide margin: no container to boot, no network, no Docker. Because weld.select(BookService.class).get() returns a container-managed instance, the test catches a wiring regression — a broken @Inject point, a changed scope — the way production would, unlike a hand-instantiated new BookService(). Scoping WeldInitiator.from(…) to the bean under test keeps failures narrow and easy to diagnose.
 
@@ -54,7 +54,7 @@ Arquillian inverts the approach of the other two. Instead of testing from outsid
 
 This project uses Arquillian deliberately narrowly, in exactly one class: [BookServiceArquillianIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/arquillian/BookServiceArquillianIT.java). It covers the corner of AbstractService that neither [BookServiceTest](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/service/BookServiceTest.java) nor [BookServiceIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/service/BookServiceIT.java) can reach: count(), findRange(), and the named-query methods, none of which any REST resource, JSF bean, or other test calls.
 
-![](Screenshot-2026-10-08-053056-1024x694.jpg)
+![BookServiceArquillianIT code using Arquillian with a ShrinkWrap deployment to test a named query that finds a book by title](Screenshot-2026-10-08-053056-1024x694.jpg)
 
 About that deployment: it is a minimal JavaArchive holding only the domain classes, [AbstractService](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/main/java/fish/payara/examples/service/AbstractService.java) and [BookService](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/main/java/fish/payara/examples/service/BookService.java), the real [persistence.xml](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/main/resources/META-INF/persistence.xml), and an empty beans.xml — not the full WAR Testcontainers deploys, because this test needs only that BookService be injectable against a working persistence unit, not the Jakarta REST or JSF layers.
 
@@ -80,15 +80,15 @@ Testcontainers starts Docker containers as part of the test lifecycle — here, 
 
 [PayaraMicroContainer](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/testcontainers/PayaraMicroContainer.java) wraps the image, and [AbstractContainerIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/testcontainers/AbstractContainerIT.java) starts it exactly once in a static initialiser, shared across every integration test class:
 
-![](Screenshot-2026-10-08-053426-1024x238.png)
+![AbstractContainerIT code starting a shared PayaraMicroContainer once in a static initializer](Screenshot-2026-10-08-053426-1024x238.png)
 
 Two categories of test share that container. [BookServiceIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/service/BookServiceIT.java) exercises the deployed REST API over HTTP:
 
-![](Screenshot-2026-10-08-053517-1024x312.png)
+![BookServiceIT code posting a book as JSON to the REST API and asserting a 201 Created status](Screenshot-2026-10-08-053517-1024x312.png)
 
 And [BookUiIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/ui/BookUiIT.java) drives the JSF pages with a headless Chromium browser through Playwright:
 
-![](Screenshot-2026-10-08-053618-1024x289.png)
+![BookUiIT code using Playwright to fill in a book title in the JSF page, save it and assert the row is visible](Screenshot-2026-10-08-053618-1024x289.png)
 
 That assertThat is PlaywrightAssertions.assertThat, which retries until the assertion passes or times out — the thing that makes UI assertions stable against asynchronous rendering. A static import from JUnit or AssertJ compiles just as happily and silently loses that behaviour.
 

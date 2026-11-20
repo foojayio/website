@@ -18,7 +18,7 @@ related_posts:
 Smartphones are more powerful then ever, with processors rivaling old laptops. So let's try to use them like a laptop to develop web-applications on the go.
 
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
-![](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
+![VS Code on a phone showing DeductDiscountHandler.java in the cap-sflight project with the divisor changed to 10](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
 
 ## Termux
 
@@ -79,7 +79,7 @@ Go to [localhost:8080](http://localhost:8080) to access it. Now we have a IDE, r
 {{< img src="Screenshot-May-7-2025-1_11_41-PM-900x200-58cbd86a.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 That was simple, wasn't it? The only Problem: The official VSCode extensions and accessing the official VSCode market place is not supported, as code-server is a fork of VSCode:  
-![](Screenshot-May-7-2025-1_19_15-PM-2000x90-52303f50.png)
+![VS Code on a phone showing the Red Hat Language Support for Java extension, flagged as unavailable in code-server](Screenshot-May-7-2025-1_19_15-PM-2000x90-52303f50.png)
 
 You can still install the Java extensions from file by downloading the latest Linux arm64 release via wget from [GitHub](https://github.com/redhat-developer/vscode-java/releases/tag/v1.41.1) and then use "Install from VSIX" in the front-end, but this is cumbersome.
 
@@ -263,7 +263,7 @@ Leading you to:
 ## Modifying the Application via VSCode
 
 We can use the VSCode instance that we launched before to access our SFlight project (`nohup code serve-web --port 8080 --without-connection-token &` to start it again if you stopped yours) and work with the code:
-![](Screenshot-May-8-2025-1_27_10-PM-2000x90-19c25adb.png)
+![VS Code on a phone with the cap-sflight project tree and DeductDiscountHandler.java open](Screenshot-May-8-2025-1_27_10-PM-2000x90-19c25adb.png)
 
 Now let's have some fun: The SFlight admin screens allows the privileged user to application deductions to the cost of a flight. We now introduce a small bug in the code that computes the discount in the `DeductDiscountHandler` class to always calculate a ten times higher discount than requested. This might not make any sense, but the reverse (fixing this bug) is a nice demo of how one can use VSCode on their phone to fix a serious bug on the go.
 
@@ -281,13 +281,13 @@ BigDecimal deductedTotalPrice = travel.totalPrice()
 ```
 
 We can now introduce the bug by dividing `context.percent()` in the first two lines not by 100, but by 10.
-![](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
+![VS Code on a phone showing the deliberate bug: the discount calculation now divides by 10 instead of 100](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
 
 When we rebuild and run the application via `mvn spring-boot:run`, deducting 10% of the travel costs:
-![](Screenshot_20250508-133128-2000x900-de10d14b.png)
+![Phone browser showing the app's Deduct Discount dialog with 10 entered as the percent](Screenshot_20250508-133128-2000x900-de10d14b.png)
 
 Decreases the price to 0 USD:
-![](Screenshot_20250508-133150-2000x900-621a8336.png)
+![Phone browser showing the Vacation travel record with booking fee and total price both at 0.00 USD after the discount](Screenshot_20250508-133150-2000x900-621a8336.png)
 
 Nothing prevents us from using git to commit our change to some repo. This shows how we can easily modify our CAP/Spring-Boot application locally on our phone.
 

@@ -32,7 +32,7 @@ We recommend using the exception breakpoint. This breakpoint type suspends the p
 
 So you can define a breakpoint that will stop on a line that throws NullPointerException and ignore the exceptions that are thrown from files that belong to other libraries. All you have to do is define the package that has your project's files. This will help you focus the analysis of your code behavior.
 
-![](Use-an-Exception-Breakpoint-700x439.png)
+![IntelliJ Breakpoints dialog for a NullPointerException exception breakpoint with a class filter limiting it to one package](Use-an-Exception-Breakpoint-700x439.png)
 
 Lightrun offers snapshots – breakpoints that do not stop the program from running. [Learn more here](https://lightrun.com/product/?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Learn more here").
 
@@ -44,7 +44,7 @@ In the loop below, you can see the breakpoint will stop the service when the age
 
 Notice that a condition can be very elaborate and even invoke methods as part of the condition.
 
-![](Use-Conditions-in-Your-Breakpoints-700x373.png)
+![IntelliJ breakpoint popup with the condition agent.getId() == null on line 188 of ServerCalls.java](Use-Conditions-in-Your-Breakpoints-700x373.png)
 
 Lightrun offers conditions for all its actions: snapshots, logs etc. [Learn more here](https://lightrun.com/product/?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Learn more here").
 
@@ -54,7 +54,7 @@ If you're writing a custom IntelliJ/IDEA plugin, enable Internal Actions (Tools 
 
 [To enable Internal Actions](https://www.jetbrains.org/intellij/sdk/docs/reference_guide/internal_actions/enabling_internal.html "To enable Internal Actions") select Help -\> Edit Custom Properties. Then type in `idea.is.internal=true` and save. Upon restart you should see the new option under the Tools menu.
 
-![](Enable-the-Internal-Actions-Menu-for-Custom-Plugin-Development--372x510.png)
+![IntelliJ Internal Actions submenu used to enable plugin development tools](Enable-the-Internal-Actions-Menu-for-Custom-Plugin-Development--372x510.png)
 
 ### 4. Use the "Analyze Thread Dump" Feature
 
@@ -70,11 +70,11 @@ Java 8 streams are very cool to use but notoriously hard to debug. Streams conde
 
 IntelliJ has a brand new cool tool, the [stream debugger](https://dzone.com/articles/debugging-java-streams-with-intellij "stream debugger"). You can use it to inspect the results of the stream operation visually. When you hit a breakpoint on a stream, press the stream debugger icon in the debugger. You will see the UI mapping of the value of the stream elements at each stage/function of the stream. Thus, each step is visualized and you can see the operations in the stream and detect the problem.
 
-![](stream-debugger-e1592293166245-700x141.png)
+![IntelliJ stream debugger flow showing three strings sorted and collected into an ArrayList](stream-debugger-e1592293166245-700x141.png)
 
-![](streamdebugger2-700x410.png)
+![IntelliJ Stream Trace window on the filter step, mapping 13 names to the 10 that match the predicate](streamdebugger2-700x410.png)
 
-![](stream-debugger-3-700x404.png)
+![IntelliJ Stream Trace window on the map step, converting each name to upper case](stream-debugger-3-700x404.png)
 
 ### 6. Use Field Watchpoints
 
@@ -82,7 +82,7 @@ The Field Watchpoint is a type of breakpoint that suspends the program when the 
 
 To set this breakpoint, simply add it at the line of the desired field. The program will suspend when, for example, the field is modified:
 
-![](field-watchpoints-700x220.png)
+![IntelliJ editor with field watchpoints set on the name field and its assignment in a setter](field-watchpoints-700x220.png)
 
 ### 7. Debug Microservices with the Lightrun Plugin
 
@@ -90,7 +90,7 @@ Lightrun's IntelliJ plugin enables adding logs, snapshots and performance metric
 
 The Lightrun plugin is useful for saving time, so instead of going through multiple iterations of local reproduction of environments, restarts and redeployments you can debug straight in production.
 
-![](lightrun-plugin-700x464.png)
+![Lightrun IDE plugin menu offering to create a log, snapshot or metric on a line of Java code](lightrun-plugin-700x464.png)
 
 Want to learn more? [Request a demo.](https://go.lightrun.com/request-a-demo?utm_source=blog&utm_medium=LR_blog&utm_campaign=eight-debugging-tips-for-intellijidea "Request a demo.")
 
@@ -100,7 +100,7 @@ When it comes to brainstorming, 1+1=3. And when it comes to dealing with complex
 
 Or you both complement each other until you reach the solution. Just by asking each other questions and undermining some of each other's assumptions, you will reach new conclusions that will help you find the problem. You can also use each other for ["Rubber Duck Debugging"](http://lists.ethernal.org/oldarchives/cantlug-0211/msg00174.html "“Rubber Duck Debugging”"), or as we like to call it, "Cheetah debugging".
 
-![](rubber-duck-debugging-700x397.png)
+![Illustration of a leopard mascot lying with a laptop, representing rubber duck debugging](rubber-duck-debugging-700x397.png)
 
 We hope these tips by our own developers will help you with your debugging needs. Feel free to share your debugging tips and best practices with us and to share this blog post to help others.
 

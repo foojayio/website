@@ -13,7 +13,7 @@ related_posts:
 
 It's not every day that **Mark Stoodley** , IBM's **Chief Architect for Java** , flies from Canada to Europe to lead a hands-on workshop. At [JCON EUROPE 2025](https://europe.jcon.one/ "JCON EUROPE 2025"), you have a rare opportunity to sit down, code, and ask your questions to one of the most influential technical leaders in the Java world.
 
-![](53725167482_02e2c3bafc_k-700x414.jpg)
+![Mark Stoodley, IBM's Chief Architect for Java, smiling while chatting with attendees at a conference](53725167482_02e2c3bafc_k-700x414.jpg)
 
 With over two decades of deep JVM experience, Mark has shaped the runtime used by thousands of enterprise applications worldwide. He led the transformation of IBM's J9 JVM into the open-source OpenJ9 and OMR projects. This isn't just a workshop—it's your chance to **tap directly into the mind of the architect behind the tech that powers your Java workloads.**
 

@@ -16,17 +16,17 @@ related_posts:
 ---
 
 [Devoxx Belgium 2023](https://devoxx.be/), the premier Java developer conference, held in Antwerp, Belgium is an event we eagerly anticipate. As representatives of Payara, a sponsor of the conference, we had the privilege of attending this year's gathering, which took place at the iconic Kinepolis Antwerpen Cinema.
-![](image-png-Oct-12-2023-03-49-00-8874-PM-db998b5b.jpg)
+![Two people in green fairy costumes on stilts flank the entrance of the Devoxx Belgium 2023 venue](image-png-Oct-12-2023-03-49-00-8874-PM-db998b5b.jpg)
 
 The conference ran seamlessly, reflecting the organizers' dedication to creating a productive environment for learning, networking, and fostering our shared enthusiasm for technology. We were thrilled to participate in an event that was such a focal point for Java developers.  
 ![](https://blog.payara.fish/hs-fs/hubfs/image-png-Oct-12-2023-03-55-38-8960-PM.png?width=327&height=347&name=image-png-Oct-12-2023-03-55-38-8960-PM.png)
 
 Our booth was a hub of activity throughout the conference, attracting engaged attendees interested in exploring Payara's contributions to the Java and Jakarta EE development landscape. The reception we received highlighted the active and vibrant Java community at Devoxx Belgium.
 
-Attendees were very interested to learn more about Payara Server and Payara Micro. But [Payara Cloud](https://www.payara.fish/products/payara-cloud/) definitely stole the show for us this time, attendees were very interested to see the innovations we were bringing to Jakarta EE.![](undefined-fefc31f6.jpeg)
+Attendees were very interested to learn more about Payara Server and Payara Micro. But [Payara Cloud](https://www.payara.fish/products/payara-cloud/) definitely stole the show for us this time, attendees were very interested to see the innovations we were bringing to Jakarta EE.![Payara team member addressing a crowd of attendees at the booth at Devoxx Belgium 2023](undefined-fefc31f6.jpeg)
 
 Meeting James Gosling, a true luminary in the Java world, was a memorable experience. Conversations with him were enlightening, offering insight into Java's rich history and its evolution. His presence added a touch of history to the event, and we felt honoured to share the same space with him.
-![](image-2.jpg)
+![Portrait of James Gosling smiling during a conversation at Devoxx Belgium 2023](image-2.jpg)
 
 Patrik's well-attended talk, "Elementary Full-stack Development with Hypermedia and Java 21," was a key highlight. It provided an opportunity to showcase the capabilities of Java 21 and left the audience inspired to explore the future of Java development. [You can watch the talk on YouTube here](https://youtube.com/watch?v=Ldi1hYQCfFY%3Flist%3DPLRsbF2sD7JVoylItQFt2RKpLsYasx1c3F).
 

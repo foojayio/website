@@ -47,15 +47,15 @@ The conference was held on Oct 25-27, 2023 in hybrid format. [Airmeet](https://w
 
 #### Airmeet
 
-![](softcon-virtual-lobby-700x340.jpg)
+![SOFTCON 2023 virtual lobby in Airmeet, a futuristic hall with Welcome Delegates signs, an expo hall and a registration desk](softcon-virtual-lobby-700x340.jpg)
 
 #### Entrance View
 
-![](softcon-2023-entrance-680x510.jpg)
+![Entrance to SOFTCON 2023 with roll-up banners listing the organizers and sponsors](softcon-2023-entrance-680x510.jpg)
 
 #### Conference View
 
-![](softcon-smx-aura-2023-680x510.jpg)
+![Speaker on stage in the SOFTCON 2023 conference hall, with a large screen and an attentive seated audience](softcon-smx-aura-2023-680x510.jpg)
 
 ### Foojay Speakers
 
@@ -77,13 +77,13 @@ Below are the list of invited speakers from our community and their respective t
 
 In the expo hall, I met with the Azul folks and gave me some of their merchandises including the Duke brick!
 
-![](softcon-2023-duke-brick-680x510.jpg)
+![Azul Duke brick building kit: a sealed bag of bricks next to a card showing the finished Duke figure](softcon-2023-duke-brick-680x510.jpg)
 
-![](softcon-2023-azul-expo-383x510.jpg)
+![Three people in Azul shirts pose on a blue platform at the Azul expo booth at SOFTCON 2023](softcon-2023-azul-expo-383x510.jpg)
 
 The speakers in the event were given a hoodie merchandise from the organizers as a token of their appreciation.
 
-![](softcon-2023-hoodie-383x510.jpg)
+![Black SOFTCON 2023 speaker hoodie with an AI graphic, with a conference badge reading Tristan Mahinay, Speaker](softcon-2023-hoodie-383x510.jpg)
 
 ## Samsung Open Source Conference
 
@@ -97,17 +97,17 @@ The conference is a one day event held in the University of the Philippines. Bel
 
 #### Entrance View
 
-![](soscon-2023-entrance-680x510.jpg)
+![Entrance area of the Samsung Open Source Conference Philippines, with banners for Open Source Software PH and DEVCON and a backdrop](soscon-2023-entrance-680x510.jpg)
 
 #### Conference View
 
-![](soscon-2023-conference-680x510.jpg)
+![Seminar room at SOSCON 2023 with attendees on orange and green chairs facing a presentation screen](soscon-2023-conference-680x510.jpg)
 
 #### Merchandise
 
 The conference at the end will give their attendees a merchandise. The merchandise was sponsored by Samsung, Open-source Software Philippines, DevCon Philippines, Google Developers Group Philippines and Java User Group Philippines and Azul.
 
-![](soscon-2023-merchandise-680x510.jpg)
+![SOSCON 2023 giveaways laid out on a table: tote bag, bottle, notebooks, JUG and Azul stickers, pen and lanyard badge](soscon-2023-merchandise-680x510.jpg)
 
 ### Speakers
 

@@ -58,7 +58,7 @@ We can apply this same pattern to databases. For example, Cassandra's data plane
 The remainder of the control plane consists of logic that leverages the management API to manage Cassandra nodes. This is implemented via the Kubernetes operator pattern. Operators define custom resources and provide control loops that observe the state of those resources and take actions to move them toward a desired state, helping extend Kubernetes with domain-specific logic.
 
 The K8ssandra project uses [cass-operator](https://github.com/datastax/cass-operator) to automate Cassandra operations. Cass-operator defines a "CassandraDatatcenter" custom resource (CRD) to represent each top-level failure domain of a Cassandra cluster. This builds a higher-level abstraction based on Stateful Sets and Persistent Volumes.
-![](Screen-Shot-2021-05-12-at-7.png)
+![Sample K8ssandra deployment: three Cassandra data centers, each a pod running Cassandra with the Management API, plus cass-operator](Screen-Shot-2021-05-12-at-7.png)
 
 ### Principle Three: Make Observability Easy
 

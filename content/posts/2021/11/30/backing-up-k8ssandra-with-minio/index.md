@@ -69,10 +69,10 @@ Forwarding from [::1]:9000 -> 9000
 ```
 
 Now you can login to MinIO at [http://localhost:9000](http://localhost:9000/) using your install time defined credentials (if you used the same commands above they would be `minio_key` and `minio_secret`):
-![](minio-login.png)
+![MinIO login page in a browser on localhost:9000 with access key and secret key fields](minio-login.png)
 
 Once logged in, you can see that the `k8ssandra-medusa` bucket was created and is currently empty:
-![](k8ssandra-medusa-bucket.png)
+![MinIO browser showing the empty k8ssandra-medusa bucket](k8ssandra-medusa-bucket.png)
 
 ## Deploy K8ssandra
 
@@ -210,7 +210,7 @@ kubectl get cassandrabackup backup1 -n k8ssandra -o jsonpath={.status.finishTime
 As long as this doesn't output a date and time, then the backup is still running. With the amount of data present and the fact that you're using a locally accessible backend, this should complete quickly.
 
 Now refresh the MinIO UI and you should see some files in the `k8ssandra-medusa` bucket:
-![](k8ssandra-medusa-backup.png)
+![MinIO browser with the k8ssandra-medusa bucket now containing an index folder and a backup folder (633.84 KB used)](k8ssandra-medusa-backup.png)
 
 An index folder should appear (it is Medusa's backup index) and then another folder that is specific to each Cassandra node in the cluster (in this case there is only one node).
 

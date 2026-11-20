@@ -20,7 +20,7 @@ related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 ---
 
-![](java-script-cover-700x467.jpg)
+![Duke, the Java mascot, typing at a desk with two monitors full of code and a cup of coffee](java-script-cover-700x467.jpg)
 
 ## The Scripting Dilemma
 

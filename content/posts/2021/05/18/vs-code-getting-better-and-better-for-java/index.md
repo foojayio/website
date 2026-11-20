@@ -21,7 +21,7 @@ Together with Red Hat, we are very happy to announce type hierarchy is publicly 
 
 The feature allows you to view type hierarchy in class, supertype, or subtype view:
 
-![](type-hierarchy.gif)
+![Animated VS Code demo: browsing the type hierarchy of Person.java in the Spring PetClinic project](type-hierarchy.gif)
 
 ### Generating tests
 
@@ -29,7 +29,7 @@ Automatically generating testing method templates and importing testing packages
 
 Starting from April, you can generate the method templates directly from a test file. In May, we will also add support for generating from a source file.To generate testing method templates, open or create a test file under project's test folder, right-click on file editor to invoke context menu, select "**Source Action…** " and then "**Generate Test…**", and finally select methods to generate:
 
-![](generate-test.gif)  
+![Animated VS Code demo: generating a unit test for Spring PetClinic, shown on the ValidatorTests explorer view](generate-test.gif)  
 **Note:** for generating from a test file, testing dependency need be added into your project.
 
 ### Package refactoring when moving file
@@ -38,7 +38,7 @@ When a .java file is moved from one folder to another, VS Code can automatically
 
 The latest release of [Language Support for Java published by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java "Language Support for Java published by Red Hat") now supports this feature. In addition to automatic updating, the feature also allows you to review and undo package changes:
 
-![](moveRefactoring.webp)
+![Animated VS Code demo: moving the Specialty class to another package with the move refactoring](moveRefactoring.webp)
 
 ### Classpath configuration
 
@@ -46,7 +46,7 @@ Managing path for source code, output, runtime, and libraries is an important pr
 
 However, for those not using the build tool, especially like students, they need rely on IDE/editor tool to manage. Responding to that need, we released classpath configuration feature. You can launch the classpath configuration from "**JAVA PROJECTS** " explorer or by clicking **Ctrl** +**Shift** +**P** to open command palette and then typing "**configure classpath**" on the palette.
 
-![](classpath-configuration-launch.png)
+![VS Code Java Projects view with the more-actions menu open and 'Configure Classpath' highlighted](classpath-configuration-launch.png)
 
 This feature is released as part of [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack "Java Extension Pack"). Please, make sure you have installed the latest version of the pack.
 
@@ -56,17 +56,17 @@ This feature is released as part of [Java Extension Pack](https://marketplace.vi
 
 [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug "Debugger for Java") extension is now able to show variable values inline in editor when stepping through source code:
 
-![](inlineValues.jpg)
+![VS Code debugging a Java lambda, with variable values like x = 23 shown inline next to the code lines](inlineValues.jpg)
 
 You can enable this feature by selecting **Files** -\>**Preferences** -\>**Settings** menu, searching for "**debug.inlineValues**" on settings view, and selecting the option.
 
-![](inlineValuesSetting.png)
+![VS Code settings searching 'debug.inlineValues' with the 'Show variable values inline in editor while debugging' box checked](inlineValuesSetting.png)
 
 #### Customized variables view
 
 You can right-clicking the view to bring up customization menu.
 
-![](variablesViewCustomization.jpg)
+![VS Code Variables view with the context menu open showing options such as 'Show Qualified Names' and 'Disable Logical Structure View'](variablesViewCustomization.jpg)
 
 Debugging enhancements were demonstrated at [VS Code 1.56 Release Party](https://channel9.msdn.com/Shows/VS-Code-Livestreams/1-56-Release-Party#time=20m55s "VS Code 1.56 Release Party").
 
@@ -76,10 +76,10 @@ Debugging enhancements were demonstrated at [VS Code 1.56 Release Party](https:/
 
 Now, you can directly execute common lifecycle phases from Maven explorer view by clicking the run icon next to a phase:
 
-![](Maven-lifecycle.png)
+![VS Code Maven explorer listing lifecycle phases clean to deploy, with a run icon beside 'package'](Maven-lifecycle.png)
 
 #### Refined creating project experience
 
-![](createMavenProject.webp)
+![Animated VS Code demo: the Welcome page with 'Interface overview' highlighted, starting a new Maven project](createMavenProject.webp)
 
 Until next time, happy coding!

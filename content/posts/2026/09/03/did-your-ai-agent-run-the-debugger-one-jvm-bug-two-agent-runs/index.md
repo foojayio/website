@@ -34,7 +34,7 @@ I wanted to know what that guess costs. So I took one real JVM bug, one model, o
 ## The bug: `Files.list` on a directory you cannot read
 
 The failure came from a Kotlin project running inside a JetBrains IDE on Windows. If you write Java, every line of the trace will look familiar, because it is plain `java.nio.file`:  
-![](----------------2026-09-03---16.35.35-700x96.png)
+![Stack trace: AccessDeniedException on C:\Config.Msi thrown from Files.list in FacadeMentionCandidates](----------------2026-09-03---16.35.35-700x96.png)
 
 `C:\Config.Msi `is a protected Windows Installer directory. The code checked `Files.isDirectory(path)`, got `true`, and then called `Files.list(path)`. The listing threw.
 
@@ -81,7 +81,7 @@ I dropped the patch. It hid a distinction the feature needs and left a test-only
 The Explyt run started from the same log and source. The difference was what it did after forming the hypothesis.
 
 It wrote a minimal reproducer, put a line breakpoint on the Files.list call, and started the test under the JetBrains debugger. When the JVM paused, the model evaluated:  
-![](----------------2026-09-03---16.40.19-700x92.png)  
+![Console output showing Files.isDirectory is true and isReadable is false, yet Files.list throws AccessDeniedException](----------------2026-09-03---16.40.19-700x92.png)  
 
 The call stack in the debugger matched the production trace frame for frame: `listDir `→ `listChildren` → `MentionSuggestionMapper.suggestionsFor`, inside the coroutine that builds suggestions.  
 
@@ -100,7 +100,7 @@ Strip away the agents for a moment. The bug itself is a classic NIO trap that ap
 Files.isDirectory answers "is this a directory?" It does not answer "may I list it?" On Windows, ACLs make those two questions independent, and Files.list is where the second one gets asked.
 
 Two shapes of handling are possible. The following Java sketch is illustrative; it is not the production patch:  
-![](----------------2026-09-03---16.44.26-700x454.png)
+![Java code comparing a swallowing childrenSwallow method with a sealed Listing interface with Children, Denied and Failed records](----------------2026-09-03---16.44.26-700x454.png)
 
 Which shape is right depends on the caller. That is the decision the first run made blind and the second run made with the failing state on screen.
 

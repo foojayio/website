@@ -99,7 +99,7 @@ And for attendees to give feedback to the speaker or the organization when this 
 The first one was by Jago de Vreede, who wanted to play a guitar. But instead of learning to play the guitar himself, he automated it using a Raspberry Pi, servo motors and a bit of Java 😉
 
 Here's a picture of Jago and his automatic guitar:
-![](image-1.jpg)
+![Guitar-playing robot: a guitar fitted with servo motors and a Raspberry Pi, with a monitor showing sheet music for 'Slow down brother'](image-1.jpg)
 
 <https://x.com/JagoVreede/status/1192378065516683264?s=20>.
 

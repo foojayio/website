@@ -361,6 +361,6 @@ The chatbot will ask you a few questions and recommend a recipe based on your re
 
 As the conversation progresses, the chatbot will start summarizing older messages to retain essential context while staying within the allowed token threshold if the token limit is exceeded.
 
-![](Screenshot-2025-02-14-at-1.04.29-AM-502x510.webp)
+![Terminal running the Chefbot jar, printing a Bangladeshi Beef Curry recipe with ingredients, steps and calories](Screenshot-2025-02-14-at-1.04.29-AM-502x510.webp)
 
 The source code is here: <https://github.com/rokon12/chefbot>

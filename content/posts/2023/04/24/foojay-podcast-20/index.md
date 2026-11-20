@@ -57,7 +57,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](guests-podcast-functional-programming-1024x575.jpg)
+![Video call with podcast host Frank Delporte and guests Ties, Deepu Sasidharan and Alejandro Serrano Mena discussing functional programming](guests-podcast-functional-programming-1024x575.jpg)
 
 ## Links
 

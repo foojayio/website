@@ -87,10 +87,10 @@ The basic model of a [Chronicle Services](https://chronicle.software/services/ "
 
 Consider a simple stateful service that maintains the balance of some form of account. The service reads and processes events from an input queue to represent changes in the account's balance:
 
-![](Screenshot-2023-11-22-at-2.08.05-PM-1024x454.png)
+![Diagram of a Chronicle queue holding Initial 100 and Credit 150 events, with the service state Balance at 250](Screenshot-2023-11-22-at-2.08.05-PM-1024x454.png)
 
 We can see the service maintains state that represents the balance; its current value is the result of processing the two relevant events on the queue. The service maintains a pointer indicating from where the next event will be read:  
-![](Screenshot-2023-11-22-at-2.08.31-PM-1024x457.png)
+![Diagram of the queue after a Debit 125 event is added, with the service Balance now 125 and a pointer at the latest event](Screenshot-2023-11-22-at-2.08.31-PM-1024x457.png)
 
 Now we can see how the service's local value is updated following the event.
 
@@ -98,7 +98,7 @@ Now we can see how the service's local value is updated following the event.
 
 If the service were to stop for some reason, its local state will be lost. However, [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") retains all the events in the queue on persistent storage. On service restart, the local value can be recreated by re-applying these events through the appropriate event handlers.
 
-![](Screenshot-2023-11-22-at-2.19.12-PM-1024x469.png)
+![Diagram of the queue events greyed out as the service stops, while the in-memory Balance of 125 would be lost](Screenshot-2023-11-22-at-2.19.12-PM-1024x469.png)
 
 During event replay, events (shown greyed out in the diagram) are read from the service's input queue(s), and processed in order although not in "real-time" (i.e. without the delays between events that would have occurred before). Due to the performance and efficiency of [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue"), the overhead of replaying events is kept to a minimum.
 

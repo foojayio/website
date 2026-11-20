@@ -39,7 +39,7 @@ Outgoing messages and sequence numbers from the acceptor are logged in a Chronic
 
 Since the secondary acceptor already has the state of the failed session, it can continue to exchange messages with the initiator from the state before the failure.
 
-![](Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888.jpg)  
+![Diagram of Chronicle FIX failover: the initiator switches from failed primary Acceptor 1 to secondary Acceptor 2 with replicated queues](Screen-Shot-2023-03-27-at-3.33.54-PM-1024x888.jpg)  
 *Figure 1. A high-level view of the Chronicle FIX failover mechanism and components*
 
 As Figure 1. shows, all the necessary components for failover are provided natively by Chronicle Software.

@@ -169,7 +169,7 @@ Designing such a relatively complex code path without creating any object while 
 ### Profiling Methods
 
 Profiling methods called during execution reveals Chronicle Queue is using ThreadLocal variables:  
-![](Screen-Shot-2022-11-07-at-1.28.58-PM-1024x253.png)
+![Profiler top-methods table where UnsafeFieldAccessorImpl.ensureObj leads with 29.8 percent and ThreadLocalMap.getEntry takes 7.04 percent](Screen-Shot-2022-11-07-at-1.28.58-PM-1024x253.png)
 
 It spends about 7% of its time looking up thread local variables via the*ThreadLocal$ThreadLocalMap.getEntry(ThreadLocal)* method but this is well worth its effort compared to creating objects on the fly.
 

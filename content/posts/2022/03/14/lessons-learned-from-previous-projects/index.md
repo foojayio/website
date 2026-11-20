@@ -159,7 +159,7 @@ Note that getter alternatives make for a more complex design without many added 
 
 One of the first lessons I was taught in enterprise was that "good" developers always design their implementation around the following three components:
 
-![](LOen3i8m34Ltdy8NQ0K3AoeB4iTm4oCYujIodG69mzEA3h2z_zwVFCYYImL_bgPa99YruF5qWDA2xKw9yReiGBE7KGfCbTpniiyjVSrADz4Ai0CENOVt-U_vmpXs7TUyQNYKpCYYyK9XcTaS9cwvI_q0.png)
+![UML diagram: interface Foo, abstract class AbstractFoo implementing it, and FooImpl extending AbstractFoo](LOen3i8m34Ltdy8NQ0K3AoeB4iTm4oCYujIodG69mzEA3h2z_zwVFCYYImL_bgPa99YruF5qWDA2xKw9yReiGBE7KGfCbTpniiyjVSrADz4Ai0CENOVt-U_vmpXs7TUyQNYKpCYYyK9XcTaS9cwvI_q0.png)
 
 The problem is that `FooImpl` is the only `Foo` implementation, and it becomes apparent when you need to name the classes. The most common scheme is to prefix the abstract class with `Abstract` and suffix the concrete one with `Impl`. Another way to spot the issue is where to implement the method: between the abstract class and the concrete one, there's no easy way to decide the best place.
 

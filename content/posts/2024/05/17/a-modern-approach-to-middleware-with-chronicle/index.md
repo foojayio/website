@@ -49,6 +49,6 @@ Slow consumers combined with ultra-fast producers do not cause back pressure-ind
 On top of this, queues are cloud-friendly with TCP/IP replication to remote backup systems; they can scale to dozens of consumers without burdening a producer. Queues also provide corollary functions such as event recording/playback, auditing and logging without impacting system performance.
 
 The below diagram is an example trading system using Chronicle Services showing chronicle queues as the "bus" in a pub/sub environment.  
-![](Screenshot-2024-05-07-at-09.59.51-700x487.png)
+![Chronicle Middleware as a central queue: trading algos, order router, market gateways and health monitor publish and subscribe to topics](Screenshot-2024-05-07-at-09.59.51-700x487.png)
 
 [Contact Chronicle](http://https://chronicle.software/contact-us/ "Contact Chronicle") today for more information, as well as for access to our [documentation](http://https://portal.chronicle.software/resources.php?_gl=1*15yr5dm*_ga*MTk1MTk4MjgzNS4xNzAxMjYzOTE1*_ga_F8RYJ50Q4J*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w*_ga_5XEVBSKC5K*MTcxNTA3MjI4NC4xMjUuMS4xNzE1MDcyNTM5LjAuMC4w&_ga=2.240404995.1202346314.1715072285-1951982835.1701263915#docs "documentation") on Chronicle Services and Queue Enterprise.

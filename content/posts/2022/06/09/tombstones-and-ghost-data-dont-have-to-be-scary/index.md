@@ -19,7 +19,7 @@ related_posts:
   - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
 ---
 
-![](1_g5MhVmTyqdCWG_-LkItmNg-1024x679.jpeg)
+![Blue-tinted photo of a hand typing on a keyboard in the dark](1_g5MhVmTyqdCWG_-LkItmNg-1024x679.jpeg)
 
 ***Working with tombstones can be one of the more frustrating aspects of Apache Cassandra®. Problems with tombstones can happen when a large number of deletes occur within a short period of time, resulting in slower queries and disk bloat. This article will discuss tombstones, including the purpose they serve, and strategies/methods on how to avoid them.***
 

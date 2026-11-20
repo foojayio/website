@@ -27,7 +27,7 @@ In this post, I'll explain the basics of Java's file systems to get you started.
 ## History of File Systems Within Java
 
 A short, flippant, perhaps not even completely correct history of the Java APIs for [file systems](https://en.wikipedia.org/wiki/File_system). Not required reading, jump ahead if you're getting antsy to start actual work!
-> ![](gosling-507x510.jpg)
+> ![Portrait of James Gosling, creator of Java, gesturing while speaking](gosling-507x510.jpg)
 >
 > *The initial release of [Java 1.0](https://en.wikipedia.org/wiki/Java_version_history#JDK_1.0) provided access to the operating system's file system via [java.io.File](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/File.html), a simple implementation built on blocking I/O and single-threaded operations. Usable but limited, adequate performance but definitely not scalable. Acceptable for a small target audience, perhaps viewed as more proof-of-concept than anything; doubtful that [James Gosling](https://computerhistory.org/profile/james-gosling/) or anyone at [Sun](https://www.britannica.com/money/Sun-Microsystems-Inc) envisioned the boheimeth Java has since become.*
 >
@@ -54,7 +54,7 @@ Implementing your first custom file system will not be quick, straight-forward n
 
 The URI is *the* core concept upon which a Java file system is built, and understanding its construction and purpose is required.
 
-![](file-system-uri-700x89.png)
+![Java file system URI structure: scheme, optional user:password, host, and path to the file](file-system-uri-700x89.png)
 
 A URI has four components that are relevant for file systems:
 
@@ -67,7 +67,7 @@ URI query strings may be used for unique requirements but generally are not nece
 
 ### File Tree Management
 
-![](file-tree.png)
+![Folder tree of the JavaFileSystemSandbox Gradle project with src/main/java and resources](file-tree.png)
 
 You need to track the directories and files comprising your file tree, but where? Relational and document-based NoSQL database systems are obvious choices, your requirements may lead you elsewhere.
 
@@ -77,7 +77,7 @@ Managing a file tree is challenging: operating systems structures – e.g., \*ni
 
 ### Binary Storage
 
-![](disk-controller-700x237.jpg)
+![Blurred close-up of a disk controller or drive rack with vents and indicator lights](disk-controller-700x237.jpg)
 
 Where does your file system store the actual file, the raw bytes representing the file uploaded to your file system? Storing locally is feasible, though counter-intuitive; storing files externally is more likely, such as [AWS S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Google Cloud Storage](https://cloud.google.com/storage), even a [database which supports blobs](https://www.postgresql.org/docs/7.1/jdbc-lo.html). Each approach has different functionality, limitations, costs, so choose wisely for the sake of your implementation.
 
@@ -89,7 +89,7 @@ File storage is as simple or as complicated as defined by your requirements.
 
 Four components must be present to bootstrap your Java file system. Clone the [starter file system](https://github.com/scsosna99/java-file-system-starter) repository if you want to follow along in your IDE: after reviewing you'll understanding how little magic is actually involved.
 
-![](sandbox-path.png)
+![IDE code line showing public class SandboxPath implementing Path](sandbox-path.png)
 
 * *Implement [Path](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html)* : Represents a file system's directory or file based on its URI representation, created either by direct calls to [FileSystem.getPath()](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/FileSystem.html#getPath(java.lang.String,java.lang.String...)) or indirectly via [Path.of()](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html#of(java.net.URI)). Implement the methods:
   * Constructor to which a generic Path or path as a string are passed in; the associated FileSystem instance may also be useful.
@@ -98,14 +98,14 @@ Four components must be present to bootstrap your Java file system. Clone the [s
   * `subpath()`
   * `toUri()`
 
-![](sandbox-file-system.png)
+![IDE code line showing public class SandboxFileSystem extending FileSystem](sandbox-file-system.png)
 
 * *Extend* [*FileSystem*](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/FileSystem.html): An instance of a file system, usually identified by a truncated URI (e.g., scheme and hostname). For example, a zip file has its own [ZipFileSystem](https://github.com/openjdk/jdk/blob/master/src/jdk.zipfs/share/classes/jdk/nio/zipfs/ZipFileSystem.java) instance with which to interact with the zip file via the Java file system. Implement the methods:
   * Constructor which accepts a FileSystemProvider
   * `getPath()`
   * `provider()`
 
-![](sandbox-file-system-provider.png)
+![IDE code line showing public class SandboxFileSystemProvider extending FileSystemProvider](sandbox-file-system-provider.png)
 
 * *Extend \[FileSystemProvider\](<https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/FileSystem.html#provider>())* : The power engine of a Java file system, as the functionality implemented determines what/how your file system operates. A singleton is registered with the JVM at startup. Once registered, operations for the defined scheme are forwarded to the FileSystemProvider instance. Implement the methods:
   * `getScheme()`
@@ -113,7 +113,7 @@ Four components must be present to bootstrap your Java file system. Clone the [s
   * `getFileSystem()`
   * `getPath()`
 
-![](sandbox-file-system-resource.png)
+![Services file entry naming dev.scottsosna.sandbox.javafs.filesystem.SandboxFileSystemProvider](sandbox-file-system-resource.png)
 
 * *Register FileSystemProvider* : Create the resource file `META-INFO/services/java.nio.file.spr.FileSystemProvider`. The file must contain the fully-qualified class name for your file system provider.
 

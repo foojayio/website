@@ -14,7 +14,7 @@ categories:
 related_posts:
 ---
 
-![](boxlang-v1.10.0-700x467.jpg)
+![BoxLang release banner announcing version 1.10.0](boxlang-v1.10.0-700x467.jpg)
 
 We're excited to announce **BoxLang 1.10.0**, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and enterprise-grade distributed locking to the BoxLang runtime. This release represents a significant leap forward in developer productivity and application scalability.
 

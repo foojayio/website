@@ -24,10 +24,10 @@ The Java Message Service (JMS) API is a standard for creating, sending, receivin
 JMS supports two message delivery modes: Point-to-Point and Publish/Subscribe
 
 In the point-to-point domain, a producer can send a message to one consumer through a destination called "queue". A given queue may have multiple receivers, but only one receiver may consume each message.
-![](image.png)
+![Point-to-point messaging: Client 1 sends a message to a queue and Client 2 consumes and acknowledges it](image.png)
 
 In the publish-subscribe domain, a producer can send a message to many consumers through a destination called "topic". Consumers can subscribe to a topic and receive a copy of each message.
-![](image-1.png)
+![Publish-subscribe messaging: Client 1 publishes a message to a topic, which delivers it to subscribers Client 2 and Client 3](image-1.png)
 
 ## Durable Subscription
 

@@ -17,7 +17,7 @@ related_posts:
 Multiple different vendors provide the OpenJDK and Foojay.io gives you access to them all.
 
 Simply go here: [**foojay.io/download**](https://foojay.io/download/)
-![](image-1-1024x748.png)
+![Foojay.io Download OpenJDK page with the distribution filter (Liberica and Zulu ticked) and a table of JDK 17 builds for macOS](image-1-1024x748.png)
 
 Note: in the lower part of the navigation bar on the left, you can finetune your selection so that you can download exactly the OpenJDK distribution that you need:
-![](image-2-441x1024.png)
+![Foojay download page filter options: JavaFX included, major version 17, macOS, x64, JDK package and tar.gz archive](image-2-441x1024.png)

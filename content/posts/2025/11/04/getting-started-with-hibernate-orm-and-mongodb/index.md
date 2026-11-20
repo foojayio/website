@@ -110,7 +110,7 @@ If you'd like to follow along or check the complete code, it's all available on 
 ## Setting up the project
 
 For this example, I'm using **IntelliJ IDEA** as my IDE. To create the project, go to *File* **→** *New* **→** *Project* , select *Java* , choose **Maven** as the build system, and click **Create**, as shown in the image below:  
-![](Screenshot-2025-10-27-at-2.52.17-PM.png)
+![IntelliJ IDEA New Project dialog with a Maven project named mongodb-hibernate-crud using Corretto 21](Screenshot-2025-10-27-at-2.52.17-PM.png)
 
 This will generate a simple Maven-based Java project with the standard structure (src/main/java and src/main/resources).
 

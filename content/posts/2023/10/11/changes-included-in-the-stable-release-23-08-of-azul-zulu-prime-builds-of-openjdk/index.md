@@ -27,7 +27,7 @@ related_posts:
 * **Stable Builds** : Builds that incorporate only critical patch updates (CPUs), patch set updates (PSUs), and Azul Platform Prime critical fixes. Stable builds do not include new features or non-critical enhancements from stream builds. Stable builds are our primary vehicle for delivering time-sensitive bug fixes to customers and are **only available to Azul customers**. Their version number is based on the stream build they originated from. For instance, "22.02.501.0" is derived from the February stream build of 2022; but it already had multiple updates, as the 501 number indicates.
 
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a stream build becomes the new stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the latest stable release, 23.08.01.0.
-![](Azul-Prime-Stable-2308-1024x400.jpg)
+![Java mascot Duke riding a rocket against a wavy teal line background](Azul-Prime-Stable-2308-1024x400.jpg)
 
 ## Changes Included in 23.08.1.0
 

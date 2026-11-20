@@ -54,7 +54,7 @@ We'll use [Spring Initializr](https://start.spring.io/) to generate the basic st
 * Spring Web
 * Validation
 
-![](Screenshot-2025-09-02-at-10.29.32-AM-1024x534.png)
+![Spring Initializr set to Maven, Java 21, Spring Boot 3.5.5 with Spring Web, Spring Data MongoDB and Validation](Screenshot-2025-09-02-at-10.29.32-AM-1024x534.png)
 
 This gives us everything we need to expose REST endpoints and talk to MongoDB. Now, we can open it up in the IDE of our choosing.
 

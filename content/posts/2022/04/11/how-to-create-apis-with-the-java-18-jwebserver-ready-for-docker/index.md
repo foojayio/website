@@ -34,7 +34,7 @@ The goal of the article is to provide a closer look at the associated "*jwebserv
 Let's begin!
 
 How to start from the command-line...
-![](Image1-700x330.png)
+![Browser showing the page served by jwebserver: 'OpenJDK Rocks!' with a description and the OpenJDK logo](Image1-700x330.png)
 
 ***Image 1.**: "jwebserver" delivers context, using the code below*
 
@@ -158,7 +158,7 @@ server.start();
 
 ***Example 10.**: Programmatic simple file server initiation and start*
 
-![](Image2.png)
+![jwebserver default directory listing for / with links post/, get/ and get_simple.json](Image2.png)
 
 ***Image 2.**: Default configuration print the folder structure*
 

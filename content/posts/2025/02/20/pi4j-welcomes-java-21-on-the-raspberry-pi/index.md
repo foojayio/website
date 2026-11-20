@@ -20,7 +20,7 @@ related_posts:
 **Pi4J provides a friendly object-oriented I/O API and implementation libraries for Java Programmers to access the full I/O capabilities of the Raspberry Pi platform.**
 
 The project "hides" the complexity to interact with electronic components through different ways of communication (SPI, I2C, PWM,...) by providing Java interfaces on top of native libraries that can interact with the GPIO (General Purpose Input/Output) pins on the Raspberry Pi.
-![](pi4j-overview-1024x427.jpg)
+![Diagram: your Java application in the JVM calls the Pi4J library, which uses native libraries and hardware interfaces (GPIO, I2C, SPI, PWM, serial) on a Raspberry Pi](pi4j-overview-1024x427.jpg)
 
 Recently, the development of the Pi4J library faced a decision point: "*Should we stick to Java 11 for existing projects and old Raspberry Pi's ([with ARMv6](https://www.pi4j.com/documentation/java-for-arm/)), versus moving on and making use of better and more performant Java code with the latest Long Term Support (LTS) version?*"
 

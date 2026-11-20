@@ -42,9 +42,9 @@ Lottie4J is organized into three main modules:
 3. **FXFileViewer**: A demo application that shows animations and visualizes their structure
 
 {{< gallery >}}
-json-parsing.png
-fxfileviewer-1024x457.png
-github-repo-1024x793.jpg
+json-parsing.png | | Java code of the Animation record with Jackson JsonProperty annotations for parsing Lottie JSON
+fxfileviewer-1024x457.png | | Lottie4J Animation Viewer showing the same animation in JavaFX and HTML players, with a properties tree
+github-repo-1024x793.jpg | | GitHub page of the lottie4j repository, a Java library to handle Lottie files, with its README
 {{< /gallery >}}
 
 ## Making Sense of the JSON

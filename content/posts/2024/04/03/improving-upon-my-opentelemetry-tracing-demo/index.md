@@ -69,7 +69,7 @@ opentelemetry_instrumentation_wsgi-0.41b0.dist-info
 
 The above setup adds a new automated trace for connections.
 
-![](connect-span-1024x511.jpg)
+![Jaeger trace UI showing the 'connect' span of the pricing service: a 10ms Postgres connection via SQLAlchemy instrumentation](connect-span-1024x511.jpg)
 
 ## Gunicorn on Flask
 
@@ -151,7 +151,7 @@ val otel = GlobalOpenTelemetry.get()
 
 At runtime, the agent will work its magic to return the instance. Here's a simplified class diagram focused on tracing:
 
-![](otel-tracer-api-1024x527.jpg)
+![UML class diagram of the OpenTelemetry API: OpenTelemetry leads to TracerProvider, Tracer, SpanBuilder and Span](otel-tracer-api-1024x527.jpg)
 
 In turn, the flow goes something like this:
 

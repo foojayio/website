@@ -12,4 +12,4 @@ related_posts:
 ---
 
 Today, published [by Nikos Vaggalis on I Programmer](https://www.i-programmer.info/news/80-java/14116-foojay-all-about-java-and-the-openjdk.html):
-![](image-2-628x1024.jpg)
+![I Programmer article about foojay, with the foojay.io logo and a grid of Java Version Almanac links from Java 1.0 to 16](image-2-628x1024.jpg)

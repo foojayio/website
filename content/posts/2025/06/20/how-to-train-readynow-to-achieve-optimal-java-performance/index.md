@@ -28,7 +28,7 @@ When using ReadyNow, you get the best results if you perform several training ru
 When your application runs in production, it might have a lot of run-to-run variability. This is mainly caused by handling "real-world traffic," which is probably different from your test or training environment. By executing multiple training runs, you help to increase the profiling coverage to produce a final profile that is more representative of the expected application run in production.
 
 For example, to generate a good profile for an application instance called MyApp-v1.5, you could perform three training runs of your application to record three generations of the ReadyNow profile log. You start the first run without an input file and use the output file for each subsequent training run.
-![](readynow-generation-training-runs.avif)
+![Diagram of three ReadyNow training runs, each reading the previous run's log and writing a new generation, with Gen2 promoted](readynow-generation-training-runs.avif)
 
 You want to ensure that each training run's output meets the minimum criteria to be promoted as the input for the next level. These promotion criteria can be:
 

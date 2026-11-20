@@ -30,7 +30,7 @@ Let's start with a simple example to show how it works. We want to model a simpl
 
 Accounts balance is stored in a database, and respective credit/debut operations must be transactional.
 
-![](simple-transfer-model.png)
+![UML class diagram: AccountService.transfer takes a Transaction, while AccountRepo credits and debits Account entities](simple-transfer-model.png)
 
 Let's focus on the `AccountService.transfer()` function. It requires a `Transaction` instance that wraps several of operations:
 

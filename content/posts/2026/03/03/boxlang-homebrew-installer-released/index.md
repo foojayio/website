@@ -15,7 +15,7 @@ categories:
 related_posts:
 ---
 
-![](boxlang-homebrew-700x467.jpg)
+![BoxLang Homebrew tap announcement graphic with a beer mug, the BoxLang cube logo and the command brew install boxlang/bvm](boxlang-homebrew-700x467.jpg)
 
 We're excited to announce the official **BoxLang Homebrew tap** — the easiest way to get BoxLang up and running on macOS (and Linux with Homebrew). One command, and you're in business.
 

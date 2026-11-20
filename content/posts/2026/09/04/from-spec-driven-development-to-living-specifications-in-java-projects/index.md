@@ -43,7 +43,7 @@ What caught my attention was the idea of bringing engineering discipline to AI-a
 
 The cycle progressed incrementally from product intent to implementation and verification:
 
-![](sldd-flow-en-f997f58a.png)
+![Flow of six steps from product intent spec through technical designs, tests first and minimal implementation to verification](sldd-flow-en-f997f58a.png)
 
 Instead of giving the agent an isolated prompt and immediately asking for code, each step produced context for the next one.
 
@@ -119,7 +119,7 @@ That does not make the specification useless. It simply means that it represents
 
 This leads us to a model that became increasingly important:
 
-![](spec-test-code-en-25ee1006.png)
+![Diagram showing a specification leading to tests, which lead to code](spec-test-code-en-25ee1006.png)
 
 And yes, the arrows matter, because software evolves in both directions:
 
@@ -170,7 +170,7 @@ we can express something observable:
 
 By assigning a stable identifier to that requirement, we can establish a relationship such as:
 
-![](req-test-comp-en-bf7cacc8.png)
+![Diagram showing a requirement leading to a test, which verifies the expected behavior](req-test-comp-en-bf7cacc8.png)
 
 The agent still has the freedom to reason about the implementation, but the expected behavior now has a deterministic verification boundary.
 
@@ -219,7 +219,7 @@ Instead of making the main specification workflow understand every possible arch
 
 Conceptually:
 
-![](sdd4j-arch-adapter-7c65b88d.png)
+![Diagram of SDD4J using an architecture adapter that supports package-by-feature, BCE and package-by-layer structures](sdd4j-arch-adapter-7c65b88d.png)
 
 The core remains concerned with specifications, testable requirements, traceability, and convergence.
 
@@ -255,7 +255,7 @@ The same requirement presented earlier could therefore be expressed in an SDD4J 
 
 We preserve the same intent:
 
-![](req-test-comp-en-bf7cacc8.png)
+![Diagram showing a requirement leading to a test, which verifies the expected behavior](req-test-comp-en-bf7cacc8.png)
 
 but in the language configured for the project.
 

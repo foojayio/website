@@ -98,7 +98,7 @@ More information can be found in [JEP 522](https://openjdk.org/jeps/522).
 ## UUIDv7 support
 
 The new `UUID.ofEpochMillis(long)` method allows you to create a **type 7 UUID** (UUIDv7) from a Unix Epoch timestamp.
-![](uuidv7-700x404.webp)
+![Diagram of a UUIDv7 split into 48 bits of timestamp, 4 version bits, 2 variant bits and the remaining random bits](uuidv7-700x404.webp)
 
 UUIDv7s are created by assigning a Unix timestamp in milliseconds to the most significant 48 bits, assigning the required version (4 bits) and variant (2 bits), and filling the remaining 74 bits with random bits.
 

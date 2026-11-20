@@ -38,7 +38,7 @@ There are actually multiple options, but for this blog post, we'll show you how 
 
 Here's a quick diagram of what this solution looks like.
 
-![](17079264-hazelcast-redpanda-bff5c138.jpg)
+![Diagram: Redpanda orders flow into Hazelcast maps, are joined with starters, and the combined result returns to Redpanda](17079264-hazelcast-redpanda-bff5c138.jpg)
 
 ### Tutorial: real-time stream processing with Redpanda and Hazelcast
 

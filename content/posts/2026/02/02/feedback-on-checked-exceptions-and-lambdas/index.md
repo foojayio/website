@@ -44,7 +44,7 @@ On Mastodon, Oliver Drotbohm pointed out that the Spring Framework has wrapping 
 > Post by @[odrotbohm@chaos.social](mailto:odrotbohm@chaos.social)  
 > View on Mastodon
 
-![](spring-wrap-exceptions-1024x874.png)
+![UML class diagram of Spring's ThrowingConsumer, ThrowingFunction, ThrowingRunnable, ThrowingSupplier and ThrowingBiFunction interfaces](spring-wrap-exceptions-1024x874.png)
 
 ## Things I learned
 

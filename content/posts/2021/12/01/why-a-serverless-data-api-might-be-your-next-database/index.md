@@ -54,7 +54,7 @@ Data API gateways are emerging as a solution to the direct coupling of frontend 
 * Allows for horizontal scalability of coordination layer
 
 What's intriguing about the data API gateway pattern is that requests are routed to the storage engine without the consumer knowing or caring what the underlying engine is. They agree to an API contract for say, GraphQL, and they can do all of their development with the GraphQL they know and love while operators can make changes underneath with no one the wiser.
-![](1-stargate-1024x791.jpg)
+![Diagram of Stargate modules: API extensions (CQL, REST, GraphQL, document), persistence backends and the auth API](1-stargate-1024x791.jpg)
 
 Modules in stargate.io
 
@@ -85,7 +85,7 @@ To even approach becoming a fully serverless DBaaS, the monolithic database serv
 * Leveraging other K8s - native structures for workload orchestration, automated remediation and leader delegation
 
 One can imagine a database that wasn't already inherently partition-tolerant would have significantly bigger challenges, or simply would be unable to affect this architecture change at all. For a cloud-native database these serverless transition challenges are difficult, they are not insurmountable. Early movers like FaunaDB, and later AWS Aurora, Azure Cosmos DB and now [DataStax Astra](https://dtsx.io/3r6FOke) have all crossed this chasm. The benchmark below illustrates what success looks like: you can see the serverless dynamic provisioning and de-provisioning based on load (blue) versus manually scaling up and down an entire monolithic instance (orange) over time.
-![](2-serverless-1024x544.jpg)
+![Line chart of operations per second over time, where the blue line reaches about 370,000 and the orange line stays near 210,000](2-serverless-1024x544.jpg)
 
 Serverless Autoscaling based on load
 

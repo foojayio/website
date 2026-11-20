@@ -33,7 +33,7 @@ As [described in our documentation](https://docs.azul.com/core/install/debian), 
 ### Downloading From Azul Downloads
 
 You can check the [available builds on the Azul Downloads page](https://www.azul.com/downloads/?os=linux&architecture=arm-64-bit&package=jdk-fx#zulu). Thanks to the search filters, it's very easy to find the correct download for, for instance, a Linux ARM system:
-![](azul-downloads-arm-javafx-1024x813.jpg)
+![Azul Downloads page filtered to Linux, ARM 64-bit, JDK FX, listing Zulu builds for Java 22, 21, 17, 11 and 8](azul-downloads-arm-javafx-1024x813.jpg)
 
 ### Using SDKMAN
 

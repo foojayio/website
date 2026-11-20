@@ -66,7 +66,7 @@ Project Panama is an umbrella project that comprises many JEPs (Java Enhancement
 Shown below is the timeline of the roadmap:
 
 {{< gallery >}}
-timeline_panama-1024x349.png
+timeline_panama-1024x349.png | | Timeline 2018-2021 of Project Panama JEPs: Vector API, Foreign-Memory Access API, Foreign Linker API and Foreign Function & Memory API
 {{< /gallery >}}
 
 **Note:** The infographic above is missing the following Java Enhancement proposals:

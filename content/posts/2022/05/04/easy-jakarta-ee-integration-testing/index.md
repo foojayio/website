@@ -629,11 +629,11 @@ Testcontainers Cloud is currently in a private beta and you can [get access by s
 2. Install the client on your development environment: Windows, Linux, and macOS are supported.
 3. Run the client software. The client software will automatically open a browser window pointing to [https://app.testcontainers.cloud](https://app.testcontainers.cloud/downloads) to retrieve the token needed to link your user account:  
 
-   ![](JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0-f970aabb.png)
+   ![Browser page at app.testcontainers.cloud confirming the Testcontainers Cloud token was obtained successfully](JRSvfMGHaCwVF6KzMLehX6QOSUrwg4IpAWCf6Xv0-f970aabb.png)
 4. You're good to go! Testcontainers Cloud is ready to power your Testcontainers based tests.
 
 Here's how the Testcontainers Cloud client looks in a Windows environment:
-![](M6Uz4DKM4i0oHTx-HfJn4Lv2CtDv-LZjpzShZs_h-2e085a20.png)
+![Testcontainers Cloud client tray menu in Windows with options such as Restart, Stop, Show logs and version 1.1.2](M6Uz4DKM4i0oHTx-HfJn4Lv2CtDv-LZjpzShZs_h-2e085a20.png)
 
 Now, when running the same test suite that we created in the previous sections, we'll see that when the Testcontainers engine connects to the Docker environment it will use a "leased" environment courtesy of your cloud account:
 

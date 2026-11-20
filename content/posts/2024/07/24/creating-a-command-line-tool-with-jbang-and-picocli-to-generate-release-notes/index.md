@@ -61,7 +61,7 @@ jbang edit --sandbox release-notes.java
 
 This creates a sandbox environment and sets up a Gradle project for you. You can then open it on your favourite IDE.
 
-![](Screenshot-2024-07-18-at-10.18.19-PM-1024x733.png)
+![IntelliJ IDEA with the release_notes JBang project open, showing a picocli command class with options for GitHub user, repo and commits](Screenshot-2024-07-18-at-10.18.19-PM-1024x733.png)
 
 ### **Step 3: Add Dependencies**
 

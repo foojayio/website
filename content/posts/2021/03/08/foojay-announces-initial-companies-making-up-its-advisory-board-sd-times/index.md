@@ -12,4 +12,4 @@ related_posts:
 ---
 
 Today, published [by Jenna Sargent in SD Times](https://sdtimes.com/java/whats-coming-in-java-16/):
-![](image-3-1024x385.jpg)
+![Excerpt from SD Times: Foojay announces Azul, Datadog, DataStax, JFrog, Payara and Snyk as initial advisory board companies](image-3-1024x385.jpg)

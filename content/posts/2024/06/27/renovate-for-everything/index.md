@@ -28,7 +28,7 @@ First things first, Renovate does indeed [manages Kotlin Scripting](https://docs
 
 Even better, Renovate can manage *any* type of file. Thanks to Max Andersen for the tip:
 
-[![](Screenshot-2024-06-22-at-19.10.07.jpg)](https://x.com/maxandersen/status/1764379149177630827)
+[![Tweet from Max Rydahl Andersen saying Renovate can be configured to update dependencies in JBang scripts, as he did for jbang](Screenshot-2024-06-22-at-19.10.07.jpg)](https://x.com/maxandersen/status/1764379149177630827)
 
 You can create your configuration for package managers, which must still be added to Renovate's scope!
 > With `customManagers` using `regex` you can configure Renovate so it finds dependencies that are not detected by its other built-in package managers.

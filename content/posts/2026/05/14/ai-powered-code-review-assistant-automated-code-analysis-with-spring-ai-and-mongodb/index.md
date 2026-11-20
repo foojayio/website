@@ -539,7 +539,7 @@ The `@Transient` annotation tells Spring Data MongoDB not to persist this field 
 ## 4. Building the code review engine
 
 The `ReviewService` is where the pieces connect. It accepts a code submission, finds matching patterns via vector search, sends both to an LLM, and parses the structured response into findings. The following diagram shows the complete flow from submission to response:  
-![](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
+![Flowchart of the review flow: submit code, save it, embed it, vector search review patterns, prompt the LLM, parse findings and return the response](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
 
 Figure 1: Review flow diagram showing the steps from code submission through embedding, vector search, LLM analysis, and saving findings to MongoDB
 
@@ -826,7 +826,7 @@ public List<SeverityCount> getSeverityDistribution() {
 If most findings are `CRITICAL`, the team may need to focus on fundamental practices. If the distribution skews toward `INFO`, the codebase is generally healthy.
 
 The third pipeline is more involved. It identifies which specific patterns keep recurring across reviews by joining data from two collections. The following diagram shows how documents flow through each stage:  
-![](Screenshot-2026-05-08-at-3.10.37-PM-312x1024.png)
+![Flowchart of the MongoDB aggregation pipeline: match, group by pattern, sort, limit, lookup, unwind and project](Screenshot-2026-05-08-at-3.10.37-PM-312x1024.png)
 
 Aggregation pipeline diagram showing the stages from match through group, sort, limit, lookup, unwind, and project
 

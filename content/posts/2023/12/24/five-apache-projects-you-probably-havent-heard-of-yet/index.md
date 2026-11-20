@@ -39,7 +39,7 @@ If no plugin fits your requirements, writing your own is possible.
 
 You can leverage APISIX on Kubernetes as an Ingress Controller. APISIX provides a Helm Chart for this.
 
-## [![](flow-software-architecture-1024x438.jpg)](flow-software-architecture.jpg)
+## [![Apache APISIX software architecture: core and plugin runtime on OpenResty and Nginx, with observability, security and traffic management plugins](flow-software-architecture-1024x438.jpg)](flow-software-architecture.jpg)
 
 ## Apache ShardingSphere
 
@@ -87,7 +87,7 @@ SeaTunnel comes with a web UI, which provides visual management of jobs, schedul
 * The **storage** offers an interface over a supported backend. Supported backends include ElasticSearch, H2, MySQL, TiDB, and BanyanDB, a custom storage engine developed for SkyWalking
 * Finally, a web **UI** allows visualizing SkyWalking's data
 
-[![](ui_ServiceMesh-1024x527.jpg)](ui_ServiceMesh.png)
+[![Apache SkyWalking dashboard for the Mesh-Service view with service apdex, response time, success rate and load charts](ui_ServiceMesh-1024x527.jpg)](ui_ServiceMesh.png)
 
 Skywalking supports a couple of formats, including OpenTelemetry. Given the industry's current focus on OpenTelemetry, I recommend seriously considering this option.
 
@@ -104,7 +104,7 @@ Doris promotes four primary scenarios:
 * Unified data warehouse construction
 * Data lake query
 
-![](doris-architecture-1024x359.png)
+![Apache Doris architecture: data sources flow through ingestion and ETL into a real-time data warehouse serving reporting, federated query and log analysis](doris-architecture-1024x359.png)
 
 Doris is mostly MySQL compliant so that you can use a regular MySQL client.
 

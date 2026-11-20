@@ -37,11 +37,11 @@ I simplified some aspects:
 
 Here's the final component diagram:
 
-![](sample-data-residency-architecture-1024x685.png)
+![Component diagram: Apache APISIX gateway routes to Europe and USA applications, each with ShardingSphere and a PostgreSQL database](sample-data-residency-architecture-1024x685.png)
 
 The data model is simple:
 
-![](sample-data-residency-data-model.png)
+![UML class diagram: a Thingy (id, name) belongs to one Owner (id, country, name), with many Thingies per Owner](sample-data-residency-data-model.png)
 
 We insert location-specific data on each database:
 
@@ -206,7 +206,7 @@ Let's start with a headerless request:
 curl localhost:9080/thingies/1
 ```
 
-![](headerless-request.jpg)
+![Jaeger trace of a /thingies/1 request without country header, routed by default and taking 3.56 seconds](headerless-request.jpg)
 
 It uses the default route defined in APISIX and returns the correct data, thanks to ShardingSphere. Now, let's set the country to `fr`, which is correct.
 
@@ -216,7 +216,7 @@ curl -H 'X-Country: fr' localhost:9080/thingies/1
 
 APISIX correctly forwards the request to the Europe-located app.
 
-![](request-with-correct-header.jpg)
+![Jaeger trace of a /thingies/1 request with header x-country=fr, routed to the Europe app in 110 ms](request-with-correct-header.jpg)
 
 Finally, imagine a malicious actor changing the header to get their hands on data that are located in the US.
 
@@ -226,7 +226,7 @@ curl -H 'X-Country: us' localhost:9080/thingies/1
 
 APISIX forwards it to the USA-located app according to the header. However, Shardingsphere still fetches data from Europe.
 
-![](request-with-incorrect-header.jpg)
+![Jaeger trace of a /thingies/1 request with header x-country=us, routed to the USA app taking 3.73 seconds](request-with-incorrect-header.jpg)
 
 ## Conclusion
 

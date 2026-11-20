@@ -28,7 +28,7 @@ This blocks all incoming IPv4 packages from `twitter.com`. We see how it works i
 ## Network Packet
 
 All networking is packet-based, with multiple layers of protocol from shared medium (e.g., Ethernet) to application level (e.g., HTTP):
-![](network_stack-2000x517-e3edcfd7.png)
+![Diagram of a network packet's layers: Ethernet header fields, IPv4 protocol field and TCP carrying HTTP](network_stack-2000x517-e3edcfd7.png)
 
 [Ethernet](https://en.wikipedia.org/wiki/Ethernet) is the lowest-level protocol, with all packets coming to and from network interfaces being ethernet packets. The ethernet header contains the "physical" MAC address of both the source and destination of the package, combined with the protocol number of the next level protocol. We can represent it in C as follows:
 
@@ -112,7 +112,7 @@ Armed with this knowledge, we can now create a package filter:
 ## Writing a Packet Filter
 
 The basic structure of our packet filter application consists of a Java part that handles the configuration and logging and an eBPF part that uses an XDP hook that is called for every received packet. As explained above, The XDP hook decides what to do with every packet. So the structures are as follows:
-![](xdp_filter-1-2000x1005-0e7749c3.jpg)
+![Diagram of a Java eBPF application exchanging statistics and blocked IPs with a kernel eBPF program that checks packets between network driver and Linux network stack](xdp_filter-1-2000x1005-0e7749c3.jpg)
 
 We start with the definition of eBPF for collecting statistics, blocked packets per IP address, and the configuration of the blocked IP addresses:
 

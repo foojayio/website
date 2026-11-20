@@ -39,7 +39,7 @@ if (thread->at_safepoint()) {
 ```
 
 to every location where a safepoint check should occur. The main problem is its performance. We either add lots of code or wrap it in a function and have a function call for every check. We can do better by exploiting the fact that the check often fails, so we can optimize for the fast path of "thread not at safepoint". The OpenJDK does this by exploiting the page protection mechanisms of modern CPUs ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L45)) in JIT compiled code:
-![](safepoint-2000x726-e022f9ab.jpg)
+![Safepoint polling: a thread's polling_page points to a good page when disabled or a bad page when enabled, causing a segfault that triggers the safepoint](safepoint-2000x726-e022f9ab.jpg)
 
 The JVM creates a *good* and a *bad* page/memory area for every thread before a thread executes any Java code ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L67)):
 

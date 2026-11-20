@@ -12,7 +12,7 @@ categories:
 related_posts:
 ---
 
-![](pico_top-1024x267.jpg)
+![Raspberry Pi connected by USB cable to a Raspberry Pi Pico whose built-in LED is lit green](pico_top-1024x267.jpg)
 
 Java applications are usually associated with APIs, databases, messaging systems, and cloud infrastructure. But Java can also interact with the physical world—reading sensors, controlling LEDs, driving motors, and communicating with microcontrollers.
 
@@ -33,7 +33,7 @@ Firmata is a protocol that allows software running on a computer to communicate 
 Instead of compiling and uploading a new firmware every time an application needs to change a pin, the board runs a generic Firmata firmware. The host application then sends commands to configure pins, write values, and receive input updates.
 
 A simplified architecture looks like this:
-![](pico_table.png)
+![Stack diagram: Quarkus application talks Firmata over USB serial to a Pico running ConfigurableFirmata, driving GPIO, PWM and sensors](pico_table.png)
 
 Firmata uses a MIDI-inspired binary message format and supports feature discovery through capability queries. This means the host can ask the board which modes each pin supports instead of relying entirely on hard-coded board definitions. More details are available in the [official Firmata protocol documentation](https://github.com/firmata/protocol "official Firmata protocol documentation").
 
@@ -81,7 +81,7 @@ To build the project, you need:
 * ConfigurableFirmata 2.11 or newer
 * A USB cable capable of data transfer
 
-![](logos-1024x576.png)  
+![AI-generated badges for Quarkus, Raspberry Pi, Java 25 and Pi4J representing the technology stack](logos-1024x576.png)  
 *Image created with AI - logos representing the technology stack used to control a Raspberry Pi Pico from a Java application.*
 
 ## Building the extension
@@ -165,10 +165,10 @@ public class PicoService {
 ```
 
 ConfigurableFirmata identifies the Pico's built-in LED as logical pin 25.
-![](pico_led_on_off-1024x683.jpg)
+![Two photos of a Raspberry Pi Pico over USB, with the built-in LED off on the left and on on the right](pico_led_on_off-1024x683.jpg)
 
 It is important to distinguish logical GPIO numbers from physical header positions. The RP2040 support documentation describes 30 logical pins, four analog inputs, and 16 PWM-capable pins. The analog inputs use logical indexes 26 through 29. See the official [ConfigurableFirmata board-support documentation](https://github.com/firmata/ConfigurableFirmata/blob/master/BoardSupport.md "ConfigurableFirmata board-support documentation") for the complete mapping.
-![](pico_gpio.jpg)
+![Raspberry Pi Pico GPIO map relating GPIO numbers, physical pins and Firmata indexes, with GP25 as the built-in LED](pico_gpio.jpg)
 
 Reading an analog input is equally simple:
 

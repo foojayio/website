@@ -40,7 +40,7 @@ When you enable GitHub Pages, you can choose its source: GitHub Actions or Deplo
 
 If you choose Deploy from a branch, you can select the branch name and the source root folder. Apart from that, the behavior is similar to the pre-GitHub Action behavior. A vast difference, however, is that GitHub runs a GitHub Action after each push to the branch, whether the push happens via an Action or not.
 
-![](pages-build-deployment.jpg)
+![GitHub Pages 'pages-build-deployment' workflow graph with build, report-build-status and deploy jobs all succeeded](pages-build-deployment.jpg)
 
 While you can see the workflow executions, you cannot access its YAML source. By default, the `build` job in the workflow runs the following phases:
 

@@ -34,7 +34,7 @@ The full research paper is available [here](https://arxiv.org/abs/2202.06869 "he
 
 The figure below shows two reactions where missing nucleon was identified through the missing mass of detected particles, and shows significant increase in statistics (solid line) when using AI to identify tracks through their segments in the drift chambers.
 
-![](physics_scan-a970e559.png)
+![Two histograms of missing mass with ratio plots, showing more events when AI identifies tracks than the standard method](physics_scan-a970e559.png)
 
 ## Implementation
 
@@ -44,7 +44,7 @@ We also implemented MLP based auto-encoder to reconstruct missing segments from 
 
 The reconstruction software infrastructure for CLAS12 detector is a Service Oriented Architecture (SOA) written in Java.
 
-![](FeedForwardNeuralNetwork-e8f7a4a5.png)
+![Feed-forward neural network with inputs, hidden layers and outputs, with a forward pass for prediction and backward pass for training](FeedForwardNeuralNetwork-e8f7a4a5.png)
 
 We searched for Java machine learning libraries that can be easily integrated into our software infrastructure.
 

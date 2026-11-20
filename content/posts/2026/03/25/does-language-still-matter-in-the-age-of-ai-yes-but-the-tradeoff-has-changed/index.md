@@ -18,7 +18,7 @@ related_posts:
   - "offline-crypto-address-validation-in-java"
 ---
 
-## ![](dominance-700x467.jpg)
+## ![Banner asking whether language still matters in the age of AI, with Python and Java logos on servers either side of a shield](dominance-700x467.jpg)
 
 I keep hearing the same question in architecture reviews, slack threads, and conference Hallways:
 > **"If AI is writing the code, does language even matter anymore?"**
@@ -63,7 +63,7 @@ That last point is worth sitting with. AI-generated Java looks like human-writte
 * Verbosity is no longer a flaw — it's a verification accelerator
 * Clarity determines how fast AI-generated code can ship
 
-![](foojay-700x467.jpg)
+![Developer holding his head while reviewing an AI-generated code fix on a monitor, looking worried](foojay-700x467.jpg)
 
 ## The Other Half: Runtime Performance
 

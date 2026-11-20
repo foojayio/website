@@ -150,7 +150,7 @@ crate_type = ["cdylib"]                            // 2
 
 Here's an abridged of the API offered by the crate:
 
-![](jni-api-1024x797.png)
+![UML diagram of the Rust jni crate API, with JNIEnv, JObject and JValue linked to the sys types jint and jdouble](jni-api-1024x797.png)
 
 The API maps one-to-one to the generated C code. We can use it accordingly:
 

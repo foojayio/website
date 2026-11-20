@@ -62,15 +62,15 @@ Testcontainers gives you integration and end-to-end tests with no shared test en
 
 The [project’s integration layer](https://github.com/payara/Payara-Examples/tree/main/ecosystem/testcontainers-example) runs a real, Dockerised Azul Payara Micro instance. The dependency is a standard, test-scoped addition to pom.xml:
 
-![](Screenshot-2026-10-06-110344-1024x146.png)
+![pom.xml dependency block adding Testcontainers junit-jupiter 1.21.4 with test scope](Screenshot-2026-10-06-110344-1024x146.png)
 
 The container definition lives in [PayaraMicroContainer](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/testcontainers/PayaraMicroContainer.java), a GenericContainer subclass configured to pull the payara/micro image at the version the project builds against, copy in the WAR the build just produced, and wait for Payara’s own “ready” log line before considering itself started:
 
-![](Screenshot-2026-10-06-110452-1024x967.jpg)
+![Java class PayaraMicroContainer extending GenericContainer that starts a Payara Micro image and deploys a WAR with a log-message wait](Screenshot-2026-10-06-110452-1024x967.jpg)
 
 Note requiredProperty. The payara.version and war.path system properties are not hardcoded, and the container fails loudly with a useful message if they are missing — which they will be if someone runs the tests from an IDE instead of through Maven. The build supplies them via the Failsafe plugin’s systemPropertyVariables:
 
-![](Screenshot-2026-10-06-110849-1024x99.png)
+![Maven plugin configuration passing payara.version and war.path as system property variables to the tests](Screenshot-2026-10-06-110849-1024x99.png)
 
 war.path points at the WAR Maven produces during the package phase, so the container always deploys the artifact this build just made rather than a stale one.
 
@@ -78,7 +78,7 @@ war.path points at the WAR Maven produces during the package phase, so the conta
 
 Container management lives in [AbstractContainerIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/testcontainers/AbstractContainerIT.java), the shared base class for every integration test in the project:
 
-![](Screenshot-2026-10-06-110951-1-1024x779.jpg)
+![Abstract JUnit base class that starts the Payara container once and exposes the application URL and container logs](Screenshot-2026-10-06-110951-1-1024x779.jpg)
 
 Starting the container in a static initialiser rather than through JUnit 5’s @Testcontainers/@Container lifecycle is deliberate. It is the documented [singleton container pattern](https://java.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers), and the reason it is needed here is specific: the JUnit extension manages a static @Container field with a per-class beforeAll/afterAll. Put that field in a base class shared by many test classes and the first class to finish will stop the container in its afterAll, leaving every class that runs afterwards pointed at a dead container. A static initialiser sidesteps the extension entirely — one Azul Payara Micro instance boots once, for the entire run, and every integration test class shares it. Clean-up falls to Ryuk and JVM shutdown rather than to JUnit.
 
@@ -88,7 +88,7 @@ The trade-off is worth stating plainly: a shared container means shared state. N
 
 [AbstractServiceIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/service/AbstractServiceIT.java) extends AbstractContainerIT and sets up a Jakarta REST Client around it, so classes like BookServiceIT can hit the deployed API directly:
 
-![](Screenshot-2026-10-06-111226-1000x1024.jpg)
+![BookServiceIT test that POSTs a book, retries while the response is 404, then retrieves it and asserts the title](Screenshot-2026-10-06-111226-1000x1024.jpg)
 
 That is a real POST over HTTP to a Jakarta REST resource, persisted through the runtime’s own datasource. Worth being precise about what “the database” is here: the application uses Azul Payara Micro’s [built-in embedded H2 datasource](https://docs.payara.fish/community/docs/Technical%20Documentation/Application%20Development/Configuring%20the%20Java%20Persistence%20Provider.html), jdbc/\_\_default, running inside the same container. There is no separate database container. That is fine for exercising the persistence layer, but it is not the database production runs — and closing that last gap is a one-line change, since adding a [PostgreSQLContainer](https://java.testcontainers.org/modules/databases/postgres/) and pointing the deployment at it is exactly the kind of thing Testcontainers is for.
 
@@ -100,11 +100,11 @@ PayaraMicroContainer waits for the log line Payara Micro … ready, and start() 
 
 A 404 in that window is indistinguishable from a genuine routing bug if you assert on the first response — so the test retries for up to twenty seconds and treats only a non-404 status as the real answer. In the project as it stands this tolerance appears in more than one test class, which is the tell that it belongs somewhere else.
 
-![](testcontainers-part2-404-window-1024x362.png)
+![Timeline: between start() returning and the WAR being deployed, every request returns 404 although the container is up](testcontainers-part2-404-window-1024x362.png)
 
 The cleaner fix is to move the tolerance into the container definition: chain an HTTP wait strategy on an application endpoint after the log-message one, so start() does not return until the deployment itself responds.
 
-![](Screenshot-2026-10-06-111415-1-1024x146.png)
+![Container wait strategy combining a log-message wait with an HTTP wait for status 200 on /application/resources/books](Screenshot-2026-10-06-111415-1-1024x146.png)
 
 Set the overall startup timeout explicitly — WaitAllStrategy applies one budget across all its strategies, and a slow first image pull will eat it. The cost of this approach is coupling the container definition to a known application path; the benefit is that the startup race is handled in one place instead of being rediscovered in every new test class. Either way the underlying point stands: with Testcontainers, “the container started” and “the application is serving” are two different events, and tests that conflate them will be flaky at startup.
 
@@ -112,7 +112,7 @@ Set the overall startup timeout explicitly — WaitAllStrategy applies one budge
 
 [AbstractUiIT](https://github.com/payara/Payara-Examples/blob/main/ecosystem/testcontainers-example/src/test/java/fish/payara/examples/ui/AbstractUiIT.java) extends the same AbstractContainerIT but drives a headless Chromium browser through Playwright against the container’s JSF pages instead of calling the REST API:
 
-![](Screenshot-2026-10-06-111534-1-1024x437.png)
+![BookUiIT Playwright test that fills in a book form, saves it, and asserts the new row appears in the list](Screenshot-2026-10-06-111534-1-1024x437.png)
 
 One thing to watch in that snippet: assertThat here is PlaywrightAssertions.assertThat, not JUnit’s or AssertJ’s. [Playwright’s version](https://playwright.dev/java/docs/test-assertions) retries the assertion until it passes or times out, which is what makes UI assertions stable against asynchronous rendering — and if a static import collides with a different assertThat, you lose that retry behaviour without any compile error to warn you.
 

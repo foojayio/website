@@ -35,7 +35,7 @@ java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/path/to/image_dir
 ```
 
 and that's it. Of course you can check more options [in the documentation](https://docs.azul.com/core/crac/crac-vm-options).
-![](lcars-1.png)
+![Star Trek LCARS-style panel showing CRaC features: high performance, no privileges needed, compression, Zulu 17, 21 and 23.](lcars-1.png)
 
 ## Warp enters Docker
 

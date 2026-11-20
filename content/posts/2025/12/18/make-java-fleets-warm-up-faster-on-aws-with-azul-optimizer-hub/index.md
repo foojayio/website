@@ -46,7 +46,7 @@ Azul Zing Builds of OpenJDK (Zing) is a modern, TCK-compliant Java runtime based
 ## Amazon Services to run Optimizer Hub
 
 A full Java system on AWS that uses Optimizer Hub may consist of the following environments.
-![](aws-warm-up-diagram.avif)
+![AWS architecture: Java apps on EC2 and EKS in two regions reach a primary and fallback Optimizer Hub on EKS via Route 53](aws-warm-up-diagram.avif)
 
 In the above diagram, you replace the Java Virtual Machine (Oracle, OpenJDK, Corretto) on the instances running on EC2, EKS, or Fargate with Zing. Zing communicates with the Optimizer Hub instances closest to them. Each Optimizer Hub instance is a shared service that can serve thousands of Java apps.
 
@@ -112,8 +112,8 @@ The second chart shows the same app running with Optimizer Hub. The initial pre-
 The results mean we can change the readiness check to allow traffic 30 seconds earlier, at the 60-second mark.
 
 {{< gallery >}}
-aws-warm-up-queues-1.jpg
-aws-warm-up-queues-2.jpg
+aws-warm-up-queues-1.jpg | | Compiler Queues graph without Optimizer Hub: queue peaks near 10,500 methods and drains slowly over 540 seconds
+aws-warm-up-queues-2.jpg | | Compiler Queues graph with Optimizer Hub: queue peaks near 7,700 methods and drains within 60 seconds
 {{< /gallery >}}
 
 ## Compiler threads
@@ -125,8 +125,8 @@ In the first chart, the allowed JIT threads are maxed out all the way until the 
 In the second graph with Optimizer Hub and Cloud Native Compiler, there is no client-side tier 2 JIT compilation happening at all.
 
 {{< gallery >}}
-aws-warm-up-compiler-threads-1.jpg
-aws-warm-up-compiler-threads-2.jpg
+aws-warm-up-compiler-threads-1.jpg | | Compiler Threads graph without Optimizer Hub: five tier 2 threads active early, then two, with sporadic tier 1 activity
+aws-warm-up-compiler-threads-2.jpg | | Compiler Threads graph with Optimizer Hub: no client-side compiler thread activity at all
 {{< /gallery >}}
 
 ## CPU use percentage
@@ -138,8 +138,8 @@ The first chart shows consistent high CPU – over 50% of the 8 vCores allotted 
 The second chart shows what happens when the compilation activity is removed from the client. There are still short bumps in CPU utilization in periods when the JVM has no optimized code at all, but the CPU then settles immediately at around 55% of the 5 vCores allotted. The machine is able to handle all of the requests, staying within its response time SLAs and within its CPU utilization autoscaling limits, with 3 fewer vCores.
 
 {{< gallery >}}
-aws-warm-up-cpu-use-1.jpg
-aws-warm-up-cpu-use-2.jpg
+aws-warm-up-cpu-use-1.jpg | | CPU use graph without Optimizer Hub: spikes to 100% around traffic start, settling near 62%
+aws-warm-up-cpu-use-2.jpg | | CPU use graph with Optimizer Hub: settling near 52% after traffic starts at 90 seconds
 {{< /gallery >}}
 
 ## Case study: real-world impact
@@ -154,14 +154,14 @@ Results after implementing Optimizer Hub:
 * Significant reduction in error rates and cart abandonment
 * Deemed "the single most impactful change the teams had made all year"
 
-![](aws-warm-up-cpu-over-time.avif)
+![CPU usage over time: Optimizer Hub cuts the needed node capacity from about 80% to 40%, allowing smaller nodes](aws-warm-up-cpu-over-time.avif)
 
 The solution has since expanded to their supply chain, vendor management, and warehousing systems with similar cost reductions.
 
 ## Impact on errors
 
 The following chart shows the impact the solution had on their indicators of customer satisfaction (reduction in error/abandonment rate) for their most critical business application. As you can see the number of these errors is heavily reduced.
-![](aws-warm-up-impact-errors.avif)
+![Dark chart of business-critical errors and abandonments spiking until Optimizer Hub was introduced, after which they nearly vanish](aws-warm-up-impact-errors.avif)
 
 ## Conclusion
 

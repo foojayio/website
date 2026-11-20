@@ -59,7 +59,7 @@ The remainder of the control plane consists of logic that leverages the Manageme
 The K8ssandra project uses [cass-operator](https://github.com/datastax/cass-operator?ref=hackernoon.com) to automate Cassandra operations. Cass-operator defines a "CassandraDatatcenter" custom resource (CRD) to represent each top-level failure domain of a Cassandra cluster. This builds a higher-level abstraction based on Stateful Sets and Persistent Volumes.
 
 A sample K8ssandra deployment including Apache Cassandra and cass-operator:
-![](image.jpg)
+![Diagram of a Cassandra deployment on Kubernetes: three data centers, each with a service, pod and Management API, managed by Cass Operator](image.jpg)
 
 **Principle 3: Make observability easy**
 

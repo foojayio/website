@@ -65,7 +65,7 @@ The restart of a service after a failover necessitates the alignment of its inte
 
 The 'History Record,' an integral part of event replay, includes meta-information about each event, such as the originating service and posting time. Configuring the 'startFromStrategy' and 'inputsReplayStrategy' fields allows control over event processing order and choice of events for state reconstruction.
 
-![](Screenshot-2023-10-31-at-3.45.06-PM-476x1024.png)
+![Diagram: Chronicle Queues inA and inB feed services a and b, whose outputs feed service-c and queue outC](Screenshot-2023-10-31-at-3.45.06-PM-476x1024.png)
 
 However, maintaining exact event order can be complex with multiple input queues. To navigate this challenge, [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") uses History Records for each input event, ensuring a strict time-ordered replay regardless of the queue origin.
 

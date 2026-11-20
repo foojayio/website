@@ -27,12 +27,12 @@ The same application was developed in both Spring and Quarkus:
 
 * Use embedded H2 database to store very simple one-on-many related data
 
-![](db_sensor.jpg)
+![Database diagram of a Sensor table linked one-to-many to a Measurement table](db_sensor.jpg)
 
 * REST with CRUD APIs for both sensor and measurement data
 * Swagger UI to test the APIs
 
-![](swagger-1024x741.png)
+![Swagger UI of the Quarkus REST DB example listing the hello, measurement, sensor and timestamp endpoints](swagger-1024x741.png)
 
 * Spring is using JPA, while Quarkus uses Panache
 
@@ -41,12 +41,12 @@ The same application was developed in both Spring and Quarkus:
 Both projects are available on GitHub in "[JavaOnRaspberryPi \> Chapter_10_Spring \> java-spring-rest-db](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_10_Spring/java-spring-rest-db)" and "[JavaQuarkusRestDb](https://github.com/FDelporte/JavaQuarkusRestDb)". If you like to get more information of the code itself, you can check the blog post links at the bottom of this page.
 
 {{< gallery cols="3" >}}
-spring-db-swagger-1024x814.jpg
-spring-db-swagger-measurement-post-1024x484.png
-spring-db-swagger-sensor-post-error-1024x173.png
-spring-db-swagger-sensor-post-1024x320.png
-spring-db-swagger-measurement-post-result-1.png
-spring-db-swagger-sensor-post-result.png
+spring-db-swagger-1024x814.jpg | | Swagger UI API documentation listing measurement and sensor endpoints with GET and POST operations
+spring-db-swagger-measurement-post-1024x484.png | | Swagger UI POST /measurement form with key degrees Celsius, sensorId 1 and value 24
+spring-db-swagger-sensor-post-error-1024x173.png | | Swagger response with HTTP 400 error body 'There is already a sensor with the name: temp2'
+spring-db-swagger-sensor-post-1024x320.png | | Swagger UI POST /sensor form with the name parameter set to temp1
+spring-db-swagger-measurement-post-result-1.png | | Browser JSON output of localhost:8080/sensor/1 showing sensor temp1 with three temperature data entries
+spring-db-swagger-sensor-post-result.png | | Browser JSON output of localhost:8080/sensor listing sensors temp1 and temp2 with empty data entries
 {{< /gallery >}}
 
 I use Spring every day, but Quarkus was new for me. But thanks to [the detailed documentation](https://quarkus.io/guides/datasource), building a new application with the same functionality as the Spring version, only took a couple of hours. This post is not a guide pro or contra one of these frameworks, but just a non-scientific attempt to compare the start-up speeds.
@@ -62,9 +62,9 @@ Some of the keynotes while developing:
 * Overload of examples and documentation available
 
 {{< gallery cols="3" >}}
-spring-h2-login.png
-spring-h2-measurements.png
-spring-h2-sensors.png
+spring-h2-login.png | | H2 Console login screen with the embedded driver and JDBC URL jdbc:h2:mem:testdb
+spring-h2-measurements.png | | H2 Console query SELECT * FROM MEASUREMENTS returning three temperature rows for sensor 1
+spring-h2-sensors.png | | H2 Console query SELECT * FROM SENSORS returning sensors temp1 and temp2
 {{< /gallery >}}
 
 #### Quarkus
@@ -82,7 +82,7 @@ To run the application, two new fresh SD cards where prepared with the [Imager t
 * Raspbian OS 32bit full edition
 * Ubuntu 20.04 LTS (Raspberry Pi 3/4/, 64-bit server OS for arm64 architectures)
 
-![](imager-ubuntu.png)
+![Raspberry Pi Imager operating system list showing Ubuntu 20.04 LTS 32-bit and 64-bit server options](imager-ubuntu.png)
 
 As both applications are packaged as a JAR, they can be started in the same way:
 

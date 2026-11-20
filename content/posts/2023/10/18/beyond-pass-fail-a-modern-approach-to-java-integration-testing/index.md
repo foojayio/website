@@ -18,7 +18,7 @@ related_posts:
 
 ## Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
 
-![](1_JAiQsj-ez608WsovCheXVQ-1024x512.jpg)
+![Illustration of a developer sitting at a laptop surrounded by long looping ribbons of data](1_JAiQsj-ez608WsovCheXVQ-1024x512.jpg)
 
 Automated testing will assuredly go down in the annals of software development history as one of these industry-changing trends. Although few actually adhere to full-metal, OCD mode, TDD discipline (I am in awe of those that do, just to be clear), most developers make sure to prioritize and include testing in their dev cycle.
 
@@ -153,7 +153,7 @@ With the test setup out of the way, we can start focusing on what we want to tes
 ```
 
 This, with a simple request and basic validation we have black-boxed some server logic, creating an integration test. But how fast does it run?
-![](1_z0UWlO2DNYgKCO2sPZl2Lg.png)
+![IntelliJ test results: OwnerControllerTests passes shouldSaveNewOwner() in 6.5 seconds and shouldGetAllOwners() in 31 ms](1_z0UWlO2DNYgKCO2sPZl2Lg.png)
 
 I created two tests so that I could measure the one-time setup time vs. the marginal cost for any additional test. We see a one-time cost of 6.5 seconds for the test run, with almost no penalty at all for each consecutive test.
 
@@ -166,18 +166,18 @@ One of the tragedies of integration tests is that they produce a wealth of usefu
 Thankfully, this too is an area where the technology landscape is different today. [OpenTelemetry](https://opentelemetry.io/docs/instrumentation/java/automatic/) has made it easy to collect data produced by testing, even without making any code changes. To make that raw data into something more practical that we can use to assess our code changes, we can use tools that can digest and analyze that data.
 
 One such project that I am personally involved in is [Digma](https://digma.ai/), a free tool for developers, which focuses on analyzing the code by studying this type of observability data. It is a simple IDE plugin that runs locally on your machine and completely abstracts the logistics around OTEL and collecting and analyzing metrics and traces. We can set Digma up by installing it into the IDE via the [plugin marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback):
-![](1_G1pamm4hBqnJwPshTp-N_A-1024x638.jpg)
+![IntelliJ plugin settings showing the Digma Continuous Feedback plugin found in the Marketplace](1_G1pamm4hBqnJwPshTp-N_A-1024x638.jpg)
 
 #### Trace-based testing, continuously
 
 We complete the plugin setup and… well that's it really! 😁 We are now collecting information about our code locally which we'll be able to see in a second once we run our tests. This time, instead of looking at simply the functional aspects of the code, we can learn more about what it does. More bluntly put, the integration tests we wrote before are all passing — but does that mean we can go ahead and check in our code? We can run our test again to find out.
-![](1_75g-ZTNsdEt6hjw-DOo3aw-1024x312.png)
+![Digma in IntelliJ flagging N+1 queries, excessive HTTP calls and a 37 second duration on the pets creation endpoint](1_75g-ZTNsdEt6hjw-DOo3aw-1024x312.png)
 
 The test passed, but looking at the code we see the test result analysis already revealed some issues in the code. I've previously discussed this specific change and the type of issues it can cause in a [blog post](https://foojay.io/today/effective-coding-with-java-observability/) focusing on improving code using observability. This time, though, this feedback arrives automatically simply by merit of running our test. We can click the 'Live' button to actually see the graph, which in this example shows a very clear picture of the regression.
-![](1_ZxlVxN3FZws-361kp-ltag-1024x555.png)
+![Digma chart for HTTP POST /owners/{ownerId}/pets/new: duration jumps from near 0 to about 20 seconds, flagged as a slowdown](1_ZxlVxN3FZws-361kp-ltag-1024x555.png)
 
 If I am interested in learning more about exactly what is going on, the tracing integration allows me to to drill into the anatomy of the requests simulated by the tests to understand exactly what is going on and what could be wrong:
-![](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.jpg)
+![Trace view of shouldSaveNewOwnerPet with spans and timings next to Digma insights on request breakdown and duration](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.jpg)
 
 #### Enter Continuous Feedback
 

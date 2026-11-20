@@ -24,7 +24,7 @@ related_posts:
 * *[The Road to Docker Official Images for Java: The Azul Zulu Story](https://www.azul.com/blog/the-road-to-docker-official-images-for-java-the-azul-zulu-story/)*
 
 [Azul Zulu is now a Docker Official Image](https://hub.docker.com/_/azul-zulu), so getting a trusted, secure Java base image is now just a `FROM azul-zulu` line in your Dockerfile. But pulling the right image is just the beginning. This post shows you how to use these images in practice, and how a few extra steps can seriously cut the size of what you ship.
-![](azul-docker-official-1024x576.avif)
+![Azul Zulu OpenJDK Docker Official Images card with a checkmark badge on a dark blue background](azul-docker-official-1024x576.avif)
 
 ## How to Use Azul Zulu as Docker Official Images
 

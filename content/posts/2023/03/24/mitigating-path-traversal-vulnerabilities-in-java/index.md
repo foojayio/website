@@ -68,7 +68,7 @@ Regarding path traversal, [++Snyk Code++](https://docs.snyk.io/scan-application-
 Next, I'm using the [++Snyk plugin for IntelliJ IDEA++](https://docs.snyk.io/ide-tools/jetbrains-plugins) with Snyk Code enabled. Scanning on my local machine during development already pinpointed the path traversal problem in my file upload.
 
 Additionally, it also gave me some suggestions for possible mitigation actions.
-![](normalize-1024x419.png)
+![Snyk plugin in IntelliJ IDEA flagging a Path Traversal vulnerability in UploadController.java with data flow and an example fix](normalize-1024x419.png)
 
 By using Snyk Code, you can proactively identify and fix these path traversal vulnerabilities before they are exploited, helping to ensure the security of your application and the data it handles.
 

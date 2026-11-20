@@ -20,7 +20,7 @@ related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 ---
 
-![](boxlang-express-700x373.jpg)
+![BoxLang Express promotional graphic: fast, minimal, powerful web framework for BoxLang inspired by Express.js, with its feature highlights](boxlang-express-700x373.jpg)
 
 If you've spent years in Spring Boot, Micronaut, or Jakarta EE, "web framework" usually means a servlet container, an embedded Tomcat or Netty, a build step, and a fat jar before anything answers a request. What if you could skip all of that and still be on the JVM?
 

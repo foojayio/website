@@ -130,7 +130,7 @@ docker run -it --rm -p 3000:3000 -e OPENAI_TOKEN=... nfrankel/rust-dalle:0.1.0
 
 Enjoy!
 
-![](rust-dalle.jpg)
+![Rust Dall-E web app with a prompt about a hacker in a hoodie and four generated images](rust-dalle.jpg)
 
 ## Conclusion
 

@@ -22,7 +22,7 @@ related_posts:
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 ---
 
-![](testbox-7-1-700x467.jpg)
+![TestBox 7 logo on a dark blue background with glowing waves](testbox-7-1-700x467.jpg)
 
 TestBox 7.x focuses on improving testing workflows for BoxLang and CFML applications. This release introduces improvements to the **BoxLang CLI runner** , real-time **streaming test execution via SSE** , **dry run** capabilities, a browser-based **TestBox RUN** interface, and several developer experience enhancements.
 
@@ -30,17 +30,17 @@ Check out the what's new here: <https://testbox.ortusbooks.com/readme/release-hi
 
 #### TestBox RUN: A Browser IDE for Your Tests
 
-![](image-700x155.png)
+![BoxLang logo](image-700x155.png)
 
 The centerpiece of TestBox 7 is **TestBox RUN** : a self-hosted, single-page web app (`bx/tests/index.bxm`) that you drop into any **BoxLang** project and open in a browser. No build toolchain. No external service. Just BoxLang.
 
-![](spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-b75a32f56aca939912a78a80d63affb60323d894_testbox-run.webp)
+![TestBox RUN browser UI showing 26 bundles, 88 suites and 411 specs, all test bundles listed and collapsed](spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-b75a32f56aca939912a78a80d63affb60323d894_testbox-run.webp)
 
 It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and streams spec results in real time via **Server-Sent Events**. Results appear in the test tree as each spec finishes, green for passing, red for failures, with full error messages; long before the full suite completes.
 
 #### What You GetWhat You Get
 
-![](222.webp)
+![TestBox RUN UI with the list of collapsed test bundles and zero results before a run](222.webp)
 
 * **Real-time streaming test tree** — live updates per spec, not per suite
 * **Dark / Light theme** with `localStorage` persistence
@@ -49,23 +49,23 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 * **Live search + status filters** — filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 
-![](333.webp)
+![TestBox RUN UI with the mouse over the toolbar buttons above the list of test bundles](333.webp)
 
 * **Per-bundle Run button** — re-run a single bundle without touching the rest
 
-![](444.webp)
+![TestBox RUN UI with the AssertionsTest bundle expanded to show its individual specs](444.webp)
 
 * **Debug Buffer Panel** — captured TestBox debug output surfaced per-bundle
 
-![](555.webp)
+![TestBox RUN UI with the BDDTest bundle expanded, some specs marked as skipped](555.webp)
 
 * **Floating progress widget** — current bundle, specs completed vs. total, animated progress bar
 
-![](666.webp)
+![TestBox RUN bundle rows collapsed, cropped to their expand arrows](666.webp)
 
 * **Configurable settings** — runner URL, directory, bundle pattern, labels, excludes — all saved in `localStorage`
 
-![](777.webp)
+![TestBox RUN after a run: 397 passed, 0 failed, 0 errored and 31 skipped, with per-bundle pass counts](777.webp)
 
 Every setting is also overridable via URL query params, making CI integration clean:
 
@@ -151,7 +151,7 @@ var results = tb.dryRun();
 ./testbox/run --dry-run
 ```
 
-![](888.webp)
+![Terminal showing the command ./run --dry-run-json being typed in the testbox project folder](888.webp)
 
 Lists every suite and spec that would execute, with labels and skip reasons — perfect for coverage audits and CI test inventory reporting.
 
@@ -238,7 +238,7 @@ Direct suite name matching is now reliable at any nesting depth. If a suite's na
 
 ### TestBox CLI Updates (v1.8.0)
 
-![](AAAAAAAAAAAA-700x332.webp)
+![Terminal output of the 'testbox info' command with an ASCII TESTBOX banner, installation source, path and mapping](AAAAAAAAAAAA-700x332.webp)
 
 The `testbox-cli` CommandBox module hits 1.8.0 with two new commands:
 

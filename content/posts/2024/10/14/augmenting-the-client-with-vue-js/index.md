@@ -102,7 +102,7 @@ Here's the code on the HTML side:
 
 As explained in last week's article, one of Thymeleaf's benefits is that it allows both static file rendering and server-side rendering. To make the magic work, I specify a client-side path, *i.e.* , `src`, and a server-side path, *i.e.* , `th:src`.
 
-![](vue-static-display.webp)
+![Simple task list web page with one 'Take out the trash' row, a Cleanup button and a New task field with an Add button](vue-static-display.webp)
 
 ## The Vue code
 

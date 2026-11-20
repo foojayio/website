@@ -333,22 +333,22 @@ fw-monitoring-examples_app-quarkus-kotlin_1
 **Example 17.** Considered containers are up
 
 Let's use POSTMAN and create an appropriate collection. Such a collection should address all exposed endpoints and be executed repeatedly against them. Not implemented path causes the HTTP 404 responses (not found) (Img 2.) the rest should pass with HTTP response 200 (ok).
-![](observ_img2-700x215.png)
+![Postman collection listing requests to the Ktor, Spring Boot and Micronaut services, with 200 OK responses](observ_img2-700x215.png)
 
 **Image 2.** Execution of POSTMAN collection
 
 Congratulations! The POSTMAN collection is running and data points are being generated and emitted through Prometheus to the example Grafana dashboard we have created to observe availability and behavior of considered nodes. We can now nicely observe JVM behavior by utilizing a functionality provided by the Prometheus(Img 3).
-![](observ_img3-700x185.png)
+![Grafana panels for the spring-boot-kotlin job: JVM heap rising and dropping in a sawtooth, with periodic GC allocation spikes](observ_img3-700x185.png)
 
 **Image 3**. Observing the heap and GC behavior for the "spring-boot-kotlin" job
 
 Grafana provides very helpful functionality to aggregate for example all GET requests across the all considered docker nodes and display them at the "real-time" manner.
-![](observ_img4-700x316.png)
+![Grafana bar panel of GET requests per service: ktor-kt is far highest at about 2K, the others sit near 410 to 550](observ_img4-700x316.png)
 
 **Image 4.** Capturing all get request coming to the docker nodes
 
 As has been already mentioned, Grafana provides a very neat environment to work with results of implemented counters. It's possible to display a timeline of requested names and put them into the context of application endpoints observability (Img 5.)
-![](observ_img5-700x328.png)
+![Grafana line chart of Nodes-Name-Counters for all monitored services, rising together at 11:37 and falling after 11:53](observ_img5-700x328.png)
 
 **Image 5.** Timeline of requested name endpoints and the customer "**Counter**" provided by each docker node
 

@@ -27,7 +27,7 @@ In 2026, we are taking the next step. JCON USA comes to Atlanta from October 26 
 
 For me, this creates a pretty cool combination. You can spend your morning in a deep Java session, join a hands-on lab afterwards, explore the Sandbox, talk with an IBM engineer, meet people working in AI, data, infrastructure, security, or hybrid cloud, and then return to the JCON Community Hub to continue the Java conversation. You do not have to choose between JCON and TechXchange. You get both.
 
-![](csm_gwcc_c_54c84c537b-700x467.webp)
+![Georgia World Congress Center in Atlanta, a glass-fronted convention building beside a tree-lined walkway](csm_gwcc_c_54c84c537b-700x467.webp)
 
 ## Three ways to experience JCON USA
 
@@ -37,7 +37,7 @@ But a good conference is more than a sequence of presentations. That is why the 
 
 The third part is the JCON Mentorship Hub. Sometimes you do not need another presentation. You need a conversation. The Mentorship Hub gives you direct access to experienced people who are willing to discuss a technical problem, an architectural decision, open source, career development, leadership, community work, or another topic that matters to you. There is no sign-up and no complicated process. Check the schedule, find a mentor or topic, walk up, and join the conversation.
 
-![](csm_54527777115_7cc48fabdc_o_dbc941aac3.webp)
+![Three attendees and a bearded man wearing JCON badges, smiling in a conference hallway](csm_54527777115_7cc48fabdc_o_dbc941aac3.webp)
 
 ## Session highlights
 
@@ -51,7 +51,7 @@ Open source itself is also part of the conversation. Brian Fox, Sonatype co-foun
 
 These highlights reflect the JCON approach: useful technical content from people who build, operate, and improve the technologies we depend on. The full breakout and Tech Talk program offers many more opportunities to learn from that experience and continue the discussion in person.
 
-![](csm_54521549055_0aec3ac12d_o_9f7659d57f.webp)
+![A smiling attendee in a red JCON t-shirt talking with others in a bright conference space](csm_54521549055_0aec3ac12d_o_9f7659d57f.webp)
 
 ## A complete technical conference around JCON
 
@@ -71,7 +71,7 @@ Last year proved that the Java community can bring its own energy into a major t
 
 If you work with Java, Jakarta EE, Spring, Quarkus, the JVM, cloud native systems, open source, or AI-assisted development, join us in Atlanta. Come for Java. Get a whole lot more.
 
-![](Java-Modernization-JChampions-700x394.jpg)
+![JCON Europe 2025 organizers and volunteers lined up on stage in front of a screen with the JCON 2025 logo](Java-Modernization-JChampions-700x394.jpg)
 
 ## Event information
 

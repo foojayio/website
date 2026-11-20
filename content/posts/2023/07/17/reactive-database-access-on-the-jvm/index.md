@@ -32,7 +32,7 @@ The base application uses Project Reactor and its types - `Flux` and `Mono`. For
 
 I don't want a complicated demo model, but I don't want it to be too simple. I'll use a single many-to-many relationship and a field with `LocalDate`:
 
-![](demo-model-1024x204.png)
+![Entity diagram of person, person_address and address tables showing a many-to-many relationship with their columns](demo-model-1024x204.png)
 
 ## Spring Data R2DBC
 
@@ -57,7 +57,7 @@ interface PersonRepository : ReactiveCrudRepository<Person, Long>
 
 R2DBC repositories look similar to regular Spring Data repositories with one big difference. They integrate Project Reactor's reactive types, `Mono` and `Flux`. Note that it's easy to use Kotlin's coroutines with an additional bridge dependency.
 
-![](spring-data-r2dbc-repos.png)
+![UML diagram of Spring's ReactiveCrudRepository interface and its methods returning Mono and Flux](spring-data-r2dbc-repos.png)
 
 Now comes the hard problem: mapping the many-to-many relationship with the `Address`.
 
@@ -246,7 +246,7 @@ As for the two above frameworks, jOOQ Reactive is similar to its non-reactive ve
 
 Once you've generated the code, you can create your data class and design the query. jOOQ class hierarchy integrates with Java's collections, Java's Reactive Streams, and Project Reactor.
 
-![](jooq-class-hierarchy.png)
+![UML diagram showing jOOQ's ResultQuery extending its Publisher, which builds on the Reactive Streams and java.util.concurrent Publisher interfaces](jooq-class-hierarchy.png)
 
 The code may look complex if you're neither a SQL nor a jOOQ expert.  
 

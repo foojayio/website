@@ -50,7 +50,7 @@ As the most active contributor to the GlassFish project, we've continued to lead
 
 {{< img src="GlassFish-Admin-Command-Logger.png" class="size-full is-resized" width="874" height="275" style="width:836px;height:auto" >}}
 
-![](Runnable-GlassFish-Embedded-1-1024x399-1.jpg)
+![Terminal output of running the GlassFish embedded jar with clusterjsp.war, ending in a 'GLASSFISH STARTED' banner at localhost:8080](Runnable-GlassFish-Embedded-1-1024x399-1.jpg)
 
 * **Progress on GlassFish 8:**
   * Released eight milestones, closely tracking Jakarta EE 11 developments.
@@ -89,6 +89,6 @@ In 2025, we aim to:
 We're excited about what's to come and deeply grateful to our team, customers, and the wider community for their support. Together, we're building a future where Java and its ecosystem continue to thrive, evolve, and empower developers worldwide.
 
 Here's to an even more remarkable 2025!
-![](freepik__adjust__85845_2025-1024x574-1.png)
+![Glass of water with a glowing circuit board pattern and bokeh lights, with the text 2025](freepik__adjust__85845_2025-1024x574-1.png)
 
 [](https://omnifish.ee/issues-with-old-glassfish/)

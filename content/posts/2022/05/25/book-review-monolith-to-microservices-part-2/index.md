@@ -21,7 +21,7 @@ This is the second article [of the first one I wrote the other day](https://fooj
 
 In this article, I will summarize chapter two.
 
-![](monolith-to-microservice.jpeg)
+![Cover of the O'Reilly book 'Monolith to Microservices' by Sam Newman](monolith-to-microservice.jpeg)
 
 ## **Chapter #2: Planning to Migration**
 

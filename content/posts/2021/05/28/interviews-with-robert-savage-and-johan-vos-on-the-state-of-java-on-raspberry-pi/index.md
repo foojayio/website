@@ -31,7 +31,7 @@ But maybe you don't have / want to believe me? So let's ask two experts what the
 [The Pi4J project](https://pi4j.com/) aims to unite Java programming with electronics. The project started in 2012. Version 1.3 was released in February 2021 to support the newest Raspberry Pi boards (4, 400, and Compute 4) and is the last version that is based on Java 8. V1.4 is targeting Java 11 and in the final test.
 
 By using the Pi4J-dependency in a project, controlling electronic components connected to the GPIO (General Purpose Input/Output) pins of the Raspberry Pi can be controlled as objects in the Java-code. Pi4J uses native libraries to control the GPIOs so you as a programmer don't need to fully be aware of all the "magic" which relates to hardware communication.
-![](pi4j-overview-1024x427.jpg)
+![Diagram of a Java application on the JVM using the Pi4J library and native libraries to reach Raspberry Pi hardware interfaces (GPIO, I2C, SPI, serial)](pi4j-overview-1024x427.jpg)
 
 Work is ongoing for a totally refactored V2 which will bring modules and improved architecture to make the project easier to maintain, test and release. In the next articles in this series, we will use this V2 to show you how to program on the Raspberry Pi and control different electronic components.
 
@@ -40,9 +40,9 @@ Work is ongoing for a totally refactored V2 which will bring modules and improve
 Robert is the founding father of the Pi4J project. He started in 2012 and quickly got a lot of attention from the Java community. Pi4J is now actively in use in a lot of projects. He also presented his work in the Devoxx 2014 and Oracle Code One 2019 conferences.
 
 {{< gallery cols="3" >}}
-github-pi4j-search-1024x901.jpg
-robert-savage-devoxx-2014-1024x768.jpg
-robert-savage.jpg
+github-pi4j-search-1024x901.jpg | | GitHub code search for pi4J showing results from Maven pom files and Java projects
+robert-savage-devoxx-2014-1024x768.jpg | | Robert Savage presenting Pi4J on stage at Devoxx 2014, with a 'What is Pi4J' slide on the screen
+robert-savage.jpg | | Portrait of Robert Savage, creator of Pi4J, smiling in a gray shirt
 {{< /gallery >}}
 
 **The very first version of Pi4J dates from 2012. What was your trigger to start using Java on the Raspberry Pi and build this framework?**
@@ -76,7 +76,7 @@ Although in the current trend a backend is mostly combined with a loosely couple
 ## Interview with Johan Vos
 
 We asked Johan Vos, co-founder of Gluon, why Java on embedded devices is a hot topic. Gluon is the company leading the open-source development of JavaFX within the openjfx.io project. On [their website](https://gluonhq.com/developers/samples/), you can also find a lot of tools, documentation, and samples to get started with JavaFX.
-![](gluon-team-duke-choice-awards-1024x683.jpg)
+![Johan Vos and Gluon colleagues holding a Duke's Choice Award on stage, with Duke and a 'Twenty Years of Java' backdrop](gluon-team-duke-choice-awards-1024x683.jpg)
 
 **Java on embedded seems a controversial subject. Why do you believe Java, JavaFX, and the Raspberry Pi still are a perfect match?**
 
@@ -109,4 +109,4 @@ Yes, that is the idea from the previous questions: we don't want specific API's,
 Indeed, Java and JavaFX are a great match with the Raspberry Pi. Maybe you are not convinced yet, but in the next articles in Java Magazine, and here on Foojay you can find a lot of examples to get you started!
 
 If you want to learn more, I can highly recommend you (of course ;-)) [my book "Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/) which will give you even deeper insights.  
-![](ebook-paperbook.jpg)
+![Cover of the ebook and the Elektor paperback edition of 'Getting Started with Java on the Raspberry Pi' by Frank Delporte](ebook-paperbook.jpg)

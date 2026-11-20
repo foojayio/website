@@ -57,13 +57,13 @@ Politics: 0.000
 
 With a higher score for "Software Engineering" and an even lower score for "Politics."
 
-![](1-H7FiUe-NTKoYSlqg76peww-44b140c2.webp)
+![Hugging Face zero-shot classification widget with text box, class names field, Compute button and model tree](1-H7FiUe-NTKoYSlqg76peww-44b140c2.webp)
 
 You can easily try it out at: [https://huggingface.co/MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli](https://huggingface.co/MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli?candidate_labels=Software+Engineering%2C+Software+Programming%2C+Politics&multi_class=true&text=Java+is+a+great+programming+language)
 
 ## Integrating a Zero-Shot Classification Model with the Deep Java Library
 
-![](0-MqJEP40BE5Gi3Ay7-31e39fc8.png)
+![Deep Java Library logo](0-MqJEP40BE5Gi3Ay7-31e39fc8.png)
 
 **The Deep Java Library (DJL) is an open-source library that makes it easier to work with machine learning models in Java.** It lets you run models locally, in-process, inside your Java application. It supports many engines (like PyTorch and TensorFlow), and it can load models directly from Hugging Face or from disk.
 
@@ -329,7 +329,7 @@ After I had tested and made sure the translator was working as expected, it was 
 
 As a result, you can find the PR here: <https://github.com/deepjavalibrary/djl/pull/3712>
 
-![](1-qWVMzOJ0JDDrqtJpIFIRbg-479c3f31.jpg)
+![GitHub pull request #3712 in deepjavalibrary/djl, merged, aligning ZeroShotClassificationTranslator with Hugging Face behavior](1-qWVMzOJ0JDDrqtJpIFIRbg-479c3f31.jpg)
 
 ## Final Words
 

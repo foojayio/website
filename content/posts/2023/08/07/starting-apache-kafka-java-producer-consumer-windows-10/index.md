@@ -38,7 +38,7 @@ This article also provides the Maven Dependencies required to create, build and 
 
 Before you begin, [read the first article in this series](https://foojay.io/today/starting-apache-kafka-on-windows-10-kafka-v3-4/).
 
-![](techila_shots_kafka_java_001-396cc739.png)
+![Graphic with the text 'Java + Kafka =' a rocket, showing the Duke mascot, a heart and the Kafka logo](techila_shots_kafka_java_001-396cc739.png)
 
 #### Maven Project (Eclipse) and Dependencies
 
@@ -248,7 +248,7 @@ Run the Above Application in your IDE or Command-Line.
 
 #### Typical Output from Running the Kafka Producer Consumer PoC
 
-![](AVvXsEglbg9GBBUrvZY1epMjYK2RUmaw-bhLSgjQ-d63c8d09.png)
+![Eclipse console showing a Kafka producer and consumer exchanging numbered 'Watson, Please Come Over Here' messages](AVvXsEglbg9GBBUrvZY1epMjYK2RUmaw-bhLSgjQ-d63c8d09.png)
 
 The next article in this series will be the Spring Boot Kafka Consumer Producer Integration that is planned to be used in a real world Product.
 

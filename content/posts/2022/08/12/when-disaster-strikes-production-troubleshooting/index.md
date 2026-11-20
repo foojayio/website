@@ -28,7 +28,7 @@ Production doesn't go down in flames as much. Thanks to staging, QA, CI/CD and D
 
 So we have all of these things in place. We passed QA, staging and everything's perfect. Right?
 
-![](5m9Wd26e.jpg)
+![Meme: 'Production is live', 'We passed QA so all's good, right?' followed by a worried 'Right???'](5m9Wd26e.jpg)
 
 Well… Not exactly.
 

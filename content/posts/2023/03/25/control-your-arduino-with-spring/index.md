@@ -20,7 +20,7 @@ Have you ever wanted to control your Arduino board from a Raspberry Pi, or your 
 
 In this article, I show how I created a web app to control my Arduino with a Raspberry PI using Spring. And so this is another article about Java on Raspberry PI or perhaps this time I can say Java and Arduino.
 
-![](Arduino_spring01.jpg)  
+![Arduino and Spring logos side by side](Arduino_spring01.jpg)  
 
 ### Idea
 
@@ -34,7 +34,7 @@ Every year, Arduino Day is celebrated around the world with lots of workshops, m
 
 Let's have a look at a simple architecture for this idea.
 
-![](arduino_code_01-1024x160.png)  
+![Diagram: a Raspberry Pi sends commands to an Arduino, which executes actions](arduino_code_01-1024x160.png)  
 Picture 1: Simple Architecture
 
 In simple words, the Raspberry Pi or any computer sends commands to the Arduino that just execute the actions.
@@ -61,7 +61,7 @@ To connect to the device via serial port it uses a lib for serial communication.
 
 Plug your Arduino directly into your Raspberry Pi board, using the USB cable.
 
-![](arduino_spring_02-1024x282.png)  
+![Diagram: Spring code with Firmata4j on a Raspberry Pi sends 'Set digital pin 13 to HIGH' over USB to an Arduino Mega running Firmata](arduino_spring_02-1024x282.png)  
 Picture 2: full idea Architecture
 
 A Spring app that is running on the Raspberry Pi, it uses the Firmata4j to send commands to the Arduino. The Arduino itself is just running the Firmata code that receives the command and executes that action. In this example, it just blinks the LED.
@@ -76,7 +76,7 @@ You can check under "Sketch" \> "Include Library" \> "Manage Libraries" \> Write
 
 Now that you have Firmata on your Arduino IDE, select the StandardFirmata sketch example.
 
-![](arduino_standard_firmata_sketch.png)  
+![Arduino IDE menu File > Examples > Firmata > StandardFirmata highlighted](arduino_standard_firmata_sketch.png)  
 Picture 3: Arduino IDE
 
 You can check the Firmata code or just ignore and upload it to your Arduino board.  

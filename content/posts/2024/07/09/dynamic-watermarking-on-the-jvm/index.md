@@ -28,7 +28,7 @@ However, if there are too many images on a site, it can be a burden to watermark
 
 The Java 2D API has been part of the JDK since 1.0, and it shows.
 
-![](java2d-class-diagram.png)
+![UML class diagram of Java 2D: ImageIO reads a BufferedImage, which creates a Graphics2D extending Graphics](java2d-class-diagram.png)
 
 It translates into the following code:
 

@@ -44,7 +44,7 @@ Where the information is passed as a series of events between the micoservices.
 
 The requirements for each internal microservices can be described in YAML, for Behaviour-Driven Development.
 
-![](Screen-Shot-2023-02-20-at-4.50.56-PM-1024x225.png)  
+![Diagram: Market Data Source and System Monitoring feed a chain of three Chronicle Services leading to Trading Exchange and System Management](Screen-Shot-2023-02-20-at-4.50.56-PM-1024x225.png)  
 *Figure 1- Gateways connect internal services to external systems*
 
 All examples are in the [Chronicle-Queue-Demo/hello-world module](https://github.com/OpenHFT/Chronicle-Queue-Demo/tree/main/hello-world).
@@ -214,7 +214,7 @@ public class AddsExclamation implements Says {
 }
 ```
 
-![](Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241.png)  
+![Diagram: 'HelloWorld' input goes through an input gateway, an AddsExclamation function and an output gateway, producing 'HelloWorld!'](Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241.png)  
 *Figure 2- A microservice that adds exclamation marks to input messages.*
 
 ### A Single-Threaded Event-Driven Process
@@ -247,7 +247,7 @@ public class AddsExclamationTest {
 }
 ```
 
-![](Screen-Shot-2023-02-20-at-4.58.02-PM-1024x363.png)
+![Test resources: in.yaml lists say One, Two, Three and out.yaml expects the same values with an exclamation mark added](Screen-Shot-2023-02-20-at-4.58.02-PM-1024x363.png)
 
 Let's update the input to see how easy it is to maintain this test. I will change the second input to Hello World and run the test again.
 
@@ -264,11 +264,11 @@ say: Three
 ...
 ```
 
-![](Screen-Shot-2023-02-20-at-4.58.42-PM-1024x370.png)
+![IntelliJ test result showing 1 failed test with a JUnit ComparisonFailure and a link to click to see the difference](Screen-Shot-2023-02-20-at-4.58.42-PM-1024x370.png)
 
 Not only does the test fail, I can click on the differences to see clearly why.
 
-![](Screen-Shot-2023-02-20-at-4.59.05-PM.png)
+![IntelliJ side-by-side diff of expected 'Two!' against actual 'Hello World!' on line 5, the single difference](Screen-Shot-2023-02-20-at-4.59.05-PM.png)
 
 At this point I can either fix the test, or I can accept the change by copying and pasting the actual result over the expected result in the out.yaml file.
 

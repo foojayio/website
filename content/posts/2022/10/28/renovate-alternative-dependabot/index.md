@@ -168,7 +168,7 @@ From that point on, Renovate will monitor the configured repositories and send P
 
 Even better, Renovate Bot limits the number of PRs to abide by [GitHub rate limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting). For convenience, it sends a [dedicated issue](https://github.com/nfrankel/opentelemetry-tracing/issues/4) titled "Dependency Dashboard", where you can see *all* available dependencies updates.
 
-![](renovate-dashboard.jpg)
+![Renovate bot's Dependency Dashboard issue on GitHub listing open dependency updates and detected dependencies](renovate-dashboard.jpg)
 
 How to interact with the dashboard is pretty self-explanatory. Just check the relevant checkbox, and it opens a PR regarding the dependency. Renovate will also open PRs if below the rate limit.
 

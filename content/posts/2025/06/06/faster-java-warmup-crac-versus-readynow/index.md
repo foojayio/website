@@ -46,7 +46,7 @@ Java application startup involves a few different tasks:
 The combined duration of tasks 1 and 2 is called the "**time to first response**." At that moment, the application replies to API calls, handles incoming messages, and performs other important functions.
 
 In step 3, we see a performance improvement as soon as the code gets compiled into native code, called the "warmup."
-![](java-total-warm-up-process.avif)
+![Diagram: JVM start is fast, application start takes a bit, application warmup takes the longest, with startup and warmup spans](java-total-warm-up-process.avif)
 
 ### Java warmup phase
 
@@ -57,12 +57,12 @@ A Java application goes through three phases when it starts executing the code, 
 3. In the meantime, the JVM keeps tracking how the code is used. For example, maybe a few `case`s in a `switch` are never used. Based on this knowledge, after another threshold, the code is again converted to native code, leading to the best possible native code for the system it is running. This happens by the **Tier 2** compiler.
 
 After this Java warmup phase, we reach the "**time to full speed**."
-![](java-warmup-chart.avif)
+![Area chart: speed rises over 100 ms from interpreted and Tier 1 code to fully optimized code, reaching maximum around 70 ms](java-warmup-chart.avif)
 
 ### Deoptimizations
 
 The Tier 2 compiler makes certain decisions based on how the code is used. But if some of those are wrong, the compiled code gets deoptimized and goes through the compilation steps again. In the example we used before, one of those non-compiled `case`s could turn out to be needed, e.g., when the application starts handling different data. This can lead to minor performance drops because the execution falls back to the byte code before it has been recompiled.
-![](java-deoptimizations.avif)
+![Cycle diagram: interpretation, profiling, C1 compiling, profiling, C2 compiling, with deoptimization looping back to interpretation](java-deoptimizations.avif)
 
 This effect is minimal and, in most cases, not even noticeable. However, in some industries where timing is critical, for instance, financial transactions, such deoptimizations should be avoided at all costs.
 

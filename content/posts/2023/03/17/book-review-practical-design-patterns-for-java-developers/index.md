@@ -24,9 +24,9 @@ related_posts:
 This book is for sale on [Amazon in Kindle and Paperback editions](https://www.amazon.de/dp/180461467X).
 
 {{< gallery >}}
-practical-cover-830x1024.jpg
-practical-backside.jpg
-miro.jpg
+practical-cover-830x1024.jpg | | Cover of the book Practical Design Patterns for Java Developers by Miroslav Wengner, published by Packt
+practical-backside.jpg | | Back cover of Practical Design Patterns for Java Developers with the description and what you will learn
+miro.jpg | | Portrait of Miroslav Wengner, author of the book, smiling and wearing glasses
 {{< /gallery >}}
 
 We'll start this post with the personal verdict of two avid readers of this book:

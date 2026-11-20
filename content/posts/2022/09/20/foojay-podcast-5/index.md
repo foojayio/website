@@ -89,4 +89,4 @@ You can listen and subscribe to the Foojay Podcast on:
 43'30 About Java modules  
 
 45'45 Outro
-![](FdCZjrTXEAUlyb7-1024x404.jpg)
+![Video call grid showing the five participants of the Foojay Podcast episode 5](FdCZjrTXEAUlyb7-1024x404.jpg)

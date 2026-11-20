@@ -18,7 +18,7 @@ related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 ---
 
-![](BoxLang-release-1.14.0-4-700x394.jpg)
+![BoxLang Release 1.14.0 banner with the title 'Sets, Ranges, Inner Classes, and a Runtime That Talks Back'](BoxLang-release-1.14.0-4-700x394.jpg)
 
 BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a modern dynamic JVM language looks like on its own terms. Sixty-five issues closed. Four innovative language features. A formatter that has grown up. And a companion module - `bx-mcp` - that fundamentally changes how you operate a running BoxLang application with AI.
 

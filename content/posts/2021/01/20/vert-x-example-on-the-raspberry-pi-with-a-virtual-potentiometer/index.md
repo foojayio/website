@@ -33,7 +33,7 @@ More details here: [potentiometers basic principles](https://passive-components.
 ## The Idea
 
 The idea is to create a simple web application that I can use as a potentiometer:
-![](20210115_121231-1024x1024-1-1024x1024.jpg)
+![Photo of an LED lit on a breadboard above a browser showing a Vert.x web app with a range slider acting as potentiometer](20210115_121231-1024x1024-1-1024x1024.jpg)
 
 This time I decided to do it with [Vert.X](https://github.com/eclipse-vertx/vert.x).
 
@@ -52,7 +52,7 @@ I can combine this with my [Duke robot](http://www.igfasouza.com/blog/raspberry-
 I can combine it with my [Christmas hats](http://www.igfasouza.com/blog/raspberry-christmas-hat/) and create a nice fade effect.
 
 I can do a simple Led example:
-![](01_Blinking-LED_bb-1024x777-1.jpg)
+![Fritzing diagram of a Raspberry Pi 3 wired to a breadboard with a red LED and a resistor](01_Blinking-LED_bb-1024x777-1.jpg)
 
 ## Code
 

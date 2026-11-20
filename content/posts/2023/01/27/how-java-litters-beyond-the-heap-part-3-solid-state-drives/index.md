@@ -36,7 +36,7 @@ Imagine you have created an application that actively uses an SSD. The applicati
 
 The SSD splits its storage space into blocks, then divides each block into pages.
 
-![](ssd_image7-700x286.png)
+![Diagram of two SSD blocks of 4KB pages: block 1 has four used pages, the rest are free](ssd_image7-700x286.png)
 
 A **page** is the SSD's smallest logical unit, consisting of physical memory cells. The page size is usually 4KB. The pages are grouped into **blocks**. Typically, a block is comprised of 128 pages and has a size of 512KB (128 pages \* 4KB page size).
 
@@ -44,7 +44,7 @@ The block is the smallest unit of access in the SSD. Even if the app needs to re
 
 What about writes? Suppose the app needs to write some user data to disk. The app sends an INSERT statement to a database and the latter flushes changes to the disk.
 
-![](ssd_image3-700x444.png)
+![Diagram of an SSD writing new data to a free page at the page level in block 1](ssd_image3-700x444.png)
 
 The SSD will receive the write request from the database and will store data to a free page of one of its blocks. The SSD always writes new data to new pages, it never overwrites used ones.
 
@@ -54,11 +54,11 @@ How does the device handle updates if the SSD never overwrites used pages?
 
 It's simple. The SSD writes new data to a free page and marks a page with old data as stale.
 
-![](ssd_image1-700x395.png)
+![Diagram showing an update marking the old page stale and writing the new data to a free page](ssd_image1-700x395.png)
 
 Over time, the number of stale pages in the block keeps growing, leaving less and less space for new data.
 
-![](ssd_image4-609x510.png)
+![Diagram of an SSD block with a mix of stale, used and one free page](ssd_image4-609x510.png)
 
 The stale pages are effectively garbage that needs to be removed. And the SSD has its own garbage collector.
 
@@ -70,7 +70,7 @@ It all has to do with physics. While application data can be written or read at 
 
 As a result, the SSD has its own garbage collector (yes, similar to Java) that traverses blocks and cleans those that are about to run out of free space.
 
-![](ssd_image2-700x491.png)
+![Diagram of SSD garbage collection: live data moves to another block, then the first block is erased](ssd_image2-700x491.png)
 
 The garbage collection is a two-step process in SSDs:
 
@@ -85,13 +85,13 @@ SSD manufacturers were aware of the negative impact that garbage collection can 
 
 That over-provisioned space is a safe buffer, allowing your apps and the garbage collector to work with the SSD concurrently, causing as little impact as possible.
 
-![](ssd_image6-700x349.png)
+![Diagram of SSD over-provisioning: 128GB drive with 100GB for user data and the rest reserved for garbage collection](ssd_image6-700x349.png)
 
 However, even though the SSD allocates over-provisioned space, the garbage collector continues using the space belonging to the application data.
 
 As soon as the applications need to persist bigger volumes of data, less space will be available for the garbage collector. If there is a write-intensive workload that generates and updates data on disk continuously, performance can fall sharply:
 
-![](ssd_image5-700x359.png)
+![Line chart of several SSDs where operations per second fall sharply over six hours of sustained writes](ssd_image5-700x359.png)
 
 So, if your application's performance suddenly worsens and your disk I/O chart looks like the one above, tit might be your SSD garbage collector. If the SSD is 50% (or more) full, you may start noticing the impact of garbage collection. In this case, consider using an SSD with larger capacity, and see if you can optimize your write workloads.
 

@@ -170,7 +170,7 @@ Output:
 `jps` is a simple tool with few options that make it easy to master, and when in need it can be a quick and great help you wanted. Utilities like this are very useful in a situation when we need to analyze and resolve problems in production Java application quickly. `jps` is part of OpenJDK, no need to install any third party software.
 
 If you want to get amazing Java jobs, I wrote an ebook \[5 steps to Best Java Jobs\](https://jfeatures.com/). You can download this step-by-step guide for free!  
-![](ebook_upd.png)
+![Book cover of '5 Steps to Best Java Jobs' by Vipin Sharma, showing hands typing on a laptop with green code](ebook_upd.png)
 
 #### Resources
 

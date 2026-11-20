@@ -62,12 +62,12 @@ To call this named entity graph in our query, we have added the following additi
 ## **Using Spring Data JPA Provided @EntityGraph Annotation**
 
 Let's see the entity first.
-![](1_Tr3xvq9hSvqoK3LHNaib6g-5-455x510.png)
+![Java entity class with an @ElementCollection roles list using FetchType.LAZY highlighted](1_Tr3xvq9hSvqoK3LHNaib6g-5-455x510.png)
 
 We have an entity which has a List of String Roles, mapped as @ElementCollection. Its fetch type is FetchType.LAZY.
 
 Now let's see our UserRepository interface.
-![](1_Tr3xvq9hSvqoK3LHNaib6g-6-700x158.png)
+![Spring Data JPA repository method findByUsername annotated with @EntityGraph on the roles attribute to handle lazy loading](1_Tr3xvq9hSvqoK3LHNaib6g-6-700x158.png)
 
 Here we have used the @EntityGraph annotation and provided the attribute name which we want to fetch, in attributePaths parameter. And it is that simple to do the whole stuff.
 

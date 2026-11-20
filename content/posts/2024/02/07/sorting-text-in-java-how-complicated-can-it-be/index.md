@@ -264,4 +264,4 @@ Collections.sort(textList, stringComparator());
 * Not tested with numbers larger than Long.MAX_COMPARE
 
 ![File Manager Ant Commander Pro using the sorting algorithm with numbers](sorting-ant-commander-pro-invoices.png) File Manager Ant Commander Pro using the sorting algorithm with files with numbers  
-[![](sorting-toolbox-test-457x1024.png)](https://www.japplis.com/toolbox/) Text Utility Japplis Toolbox applying the sort algorithm on text with numbers
+[![Japplis Toolbox 'Lines' tab with unsorted text lines above and the sorted result below, with accented 'tést2' placed after 'test2'](sorting-toolbox-test-457x1024.png)](https://www.japplis.com/toolbox/) Text Utility Japplis Toolbox applying the sort algorithm on text with numbers

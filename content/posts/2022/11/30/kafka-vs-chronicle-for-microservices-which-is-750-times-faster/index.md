@@ -27,7 +27,7 @@ When I wrote [Open Source Chronicle Queue](https://chronicle.software/queue/ "Op
 In this article, I will describe how Kafka does not scale in terms of throughput as easily as Chronicle Queue for microservices applications.
 
 As a teaser, I will show you this chart showing that Chronicle Queue is around 750 times faster even when handling 5x the throughput of Kafka.  
-![](Screen-Shot-2022-11-22-at-9.24.24-AM-1024x704.png)
+![Line chart: Chronicle at 500k msg/s has roughly 700 to 1100 times lower end-to-end latency than Kafka at 100k msg/s](Screen-Shot-2022-11-22-at-9.24.24-AM-1024x704.png)
 
 ### Visualising Delay as a Distance
 
@@ -43,7 +43,7 @@ The 99%ile single microservice end-to-end latency for Chronicle Queue Enterprise
 
 To visualise this timeframe, a signal travels a distance of 750 m. This can be compared to a 10-minute walk in central London.
 
-![](Screen-Shot-2022-11-22-at-9.25.31-AM.jpg)
+![Google Maps walking route in central London from Trafalgar Square to the Strand, about 10 minutes and 750 m](Screen-Shot-2022-11-22-at-9.25.31-AM.jpg)
 
 #### Microservice Latency Using Kafka
 
@@ -51,7 +51,7 @@ Using Kafka for the same test, but at a lower throughput of 100k msg/s the 99%il
 
 To use the same analogy as above, this is the time it takes for a signal to travel 526 km. If you walk this distance from London, you will for example end up in Dumfries in Scotland and you will need to walk for over 100 hours.
 
-![](Screen-Shot-2022-11-22-at-9.26.21-AM-889x1024.jpg)
+![Google Maps walking route from London to Dumfries in Scotland, about 108 hours and 523 km](Screen-Shot-2022-11-22-at-9.26.21-AM-889x1024.jpg)
 
 ### Log Aggregation
 
@@ -94,13 +94,13 @@ The low latency configuration (linger.ms=0) failed for throughputs over 25k msg/
 
 ### Publish Latency
 
-![](Screen-Shot-2022-11-22-at-11.10.30-AM-1024x769.png)  
+![Line chart of event publish time by percentile: Kafka rises steeply while Chronicle Queue stays far lower](Screen-Shot-2022-11-22-at-11.10.30-AM-1024x769.png)  
 
 As can be seen, the typical latency to publish is comparable. However, the outliers are much higher. Depending on the use case, the performance difference might not matter, and the typical latency across tests was no more than 2.6 microseconds.
 
 In each case, the events published were 512-byte JSON messages. Two fields were added to trace when the message was sent.
 
-![](Screen-Shot-2022-11-22-at-11.11.19-AM.jpg)
+![YAML text of a ChronicleEvent test message with date-time, text, number and value fields](Screen-Shot-2022-11-22-at-11.11.19-AM.jpg)
 
 ### Microservice Messaging Transport
 
@@ -145,13 +145,13 @@ Chronicle Queue open-source performs much the same most of the time, however, it
 
 Chronicle Queue Enterprise includes specific features (over open source) to better control outliers. You can't see Kafka in this chart as the latencies are all much higher.
 
-![](Screen-Shot-2022-11-22-at-11.16.05-AM-1024x759.png)
+![Chart of end-to-end latency by percentile: Chronicle Queue stays under 80 microseconds, Kafka is off the scale](Screen-Shot-2022-11-22-at-11.16.05-AM-1024x759.png)
 
 #### Latencies up to 1000 microseconds
 
 The chart below has a 10x scale, and it can be seen that while Chronicle Queue has higher outliers they are reasonably consistent up to the 99.99 percentile. Kafka is yet to appear.
 
-![](Screen-Shot-2022-11-22-at-11.25.27-AM-1024x753.png)
+![Same latency chart at 100 microsecond scale: Chronicle Queue rises gradually, Enterprise stays flat, Kafka not visible](Screen-Shot-2022-11-22-at-11.25.27-AM-1024x753.png)
 
 #### Latencies up to 10,000 microseconds
 
@@ -159,7 +159,7 @@ The chart below has a scale again made 10x larger. In this scale, not much detai
 
 In particular, it can be seen that the 99% latency for 100k msg/s (200k msg/s total) is around 2,630 microseconds, similar to the 5 milliseconds for Confluent's benchmark.
 
-![](Screen-Shot-2022-11-22-at-11.26.33-AM-1024x708.png)
+![Latency chart up to 10,000 microseconds: Kafka needs 1,900 to 6,600 microseconds while Chronicle stays near zero](Screen-Shot-2022-11-22-at-11.26.33-AM-1024x708.png)
 
 #### Using a logarithmic scale for the latencies
 
@@ -167,7 +167,7 @@ With a large range of values, it can be useful to use a logarithmic scale.
 
 While this can be more readable, it can be harder to appreciate how different the latencies are as many people are not used to reading logarithmic scale charts.
 
-![](Screen-Shot-2022-11-22-at-11.27.15-AM-1024x799.png)
+![Logarithmic latency chart: Kafka sits in thousands of microseconds, Chronicle Queue in single to double digits](Screen-Shot-2022-11-22-at-11.27.15-AM-1024x799.png)
 
 ### How much higher are the latencies?
 
@@ -179,7 +179,7 @@ Kafka is consistently at least 680x slower for this benchmark, even for one-fift
 
 For Kafka to achieve its lowest latencies with a 100k msg/s throughput, four partitions and eight microservices were used, however, Chronicle Queue only needed one in all cases.
 
-![](Screen-Shot-2022-11-22-at-11.27.55-AM-1024x706.png)
+![Line chart: Kafka latency is roughly 680 to 1,100 times that of Chronicle across percentiles](Screen-Shot-2022-11-22-at-11.27.55-AM-1024x706.png)
 
 ### Heap usage
 
@@ -191,7 +191,7 @@ The benchmark runs with a 32 MB heap. No GCs occurred after warm-up.
 
 NOTE: Most of the garbage is from the Flight Recorder doing its job and Chronicle Queue doesn't use the standard Java serialization features.
 
-![](Screen-Shot-2022-11-22-at-11.28.35-AM-1024x547.png)
+![Java Flight Recorder memory view for Chronicle Queue showing low allocation, mostly small objects](Screen-Shot-2022-11-22-at-11.28.35-AM-1024x547.png)
 
 #### Kafka memory usage
 
@@ -199,7 +199,7 @@ The Kafka benchmark of 250k/s messages for 10 minutes (300 million messages tota
 
 This can be run with a 128 MB heap size but results in over 139k GCs which is sub-optimal.
 
-![](Screen-Shot-2022-11-22-at-11.29.14-AM-1024x563.jpg)
+![Java Flight Recorder memory view for Kafka showing 142 GiB of byte() allocation and heavy heap churn](Screen-Shot-2022-11-22-at-11.29.14-AM-1024x563.jpg)
 
 ### Conclusion
 

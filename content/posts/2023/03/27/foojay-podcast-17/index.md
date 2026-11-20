@@ -62,7 +62,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-tornadovm-1024x384.jpg)
+![Video call grid of the six participants in the Foojay podcast episode about TornadoVM](podcast-guests-tornadovm-1024x384.jpg)
 
 ## **Content**
 

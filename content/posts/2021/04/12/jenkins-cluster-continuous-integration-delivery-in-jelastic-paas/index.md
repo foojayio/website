@@ -39,17 +39,17 @@ In this article, we'll describe how to install Jenkins cluster with slave nodes 
 
 In order to simplify cluster provisioning our team has prepared Jenkins certified templates for master and worker nodes. Once you click on the **New Environment** and add Jenkins application server, the **Auto-Clustering** functionality creates cluster topology which comprises one master node and one worker node by default. The worker nodes can be scaled out horizontally up to 16 nodes being automatically detected and registered at master node and vice versa.
 
-![](jenkins-auto-clustering-97144303.png)
+![Jelastic dashboard creating a Jenkins environment with auto-clustering on, highlighting New Environment and the Jenkins master node](jenkins-auto-clustering-97144303.png)
 
 ## Jenkins Cluster Specifics
 
 Each worker node has an [executor](https://wiki.jenkins.io/display/JENKINS/Terminology) process that is used for building the projects. By default one job at a time can be run since there is one executor configured in a worker. You may change the number of executors. To do this click on **Build Executor Status** and press **Configure** at node you need to change the number of executors in.
 
-![](Jenkins-Build-Executor-Status-d0f724aa.png)
+![Jenkins Nodes page with Build Executor Status highlighted and the Configure option in a worker node's menu](Jenkins-Build-Executor-Status-d0f724aa.png)
 
 Change the number of executors and apply changes with the **Save** button.
 
-![](Jenkins-Executors-c534659c.png)
+![Jenkins node configuration page with the number of executors field set to 2 and the Save button highlighted](Jenkins-Executors-c534659c.png)
 
 For example you build tasks stuck in a long queue, the worker nodes can be [scaled out horizontally](https://jelastic.com/blog/horizontal-scaling-of-cloud-environments-stateless-stateful-automatic/) either manually or automatically for speeding up a large number of the project builds. In such cases, the package ensures an automatic discovery of new worker nodes by the Jenkins master node. It takes just a couple minutes to expand cluster e.g. up to 10 workers.
 
@@ -57,11 +57,11 @@ For example you build tasks stuck in a long queue, the worker nodes can be [scal
 
 Press **Change Environment Topology** and choose Workers layer (Java Engine) and do horizontal scaling with + button in the **Horizontal Scaling** section of the wizard. It's also preferable to choose **stateless** scaling mode as we do not store any important state in the workers.
 
-![](jenkins-cluster-java-engine-1-c810ae6f.png)
+![Jelastic topology wizard for the Workers layer, with the horizontal scaling plus button highlighted to add nodes](jenkins-cluster-java-engine-1-c810ae6f.png)
 
 Once scaling is completed, make sure the all newly created worker nodes were discovered and registered automatically at master. Go back to the Jenkins admin panel and click on **Build Executor Status** link once again to see all of available cluster members in a friendly format.
 
-![](Jenkins-Cluster-Workers-and-Master-e0e5e544.jpg)
+![Jenkins Nodes list showing the master and ten registered worker nodes, with 10 executors in Build Executor Status](Jenkins-Cluster-Workers-and-Master-e0e5e544.jpg)
 
 ## Create a New Job through Jenkins Admin Panel
 
@@ -69,19 +69,19 @@ Now let's see how to create a job that builds and publishes a simple project to 
 
 1.After installation, log in to the admin panel with credentials from the respective email.
 
-![](open-jenkins-cluster-1-f62b925f.png)
+![Jelastic dialog confirming the Jenkins DevOps Pack deployed, with admin URL and an Open in Browser button](open-jenkins-cluster-1-f62b925f.png)
 
 2.At the top of the page click on create new jobs.
 
-![](Jenkins-Cluster-Create-New-Job-3b49dfcb.png)
+![Jenkins welcome page with the 'create new jobs' link highlighted](Jenkins-Cluster-Create-New-Job-3b49dfcb.png)
 
 3.Specify the project name (e.g. *My Java Project* ), choose **Maven project** and press **OK**.
 
-![](Jenkins-Cluster-Java-Project-df4a632d.png)
+![Jenkins new item form with the name 'My Java Project' entered and Maven project selected](Jenkins-Cluster-Java-Project-df4a632d.png)
 
 4.Define the project **Description** , click on the **GitHub project** and specify the repository URL. Within this tutorial, we use <https://github.com/jelastic/helloworld.git>.
 
-![](Jenkins-Cluster-GitHub-Project-ca3d1f8c.png)
+![Jenkins project General tab with a description and the GitHub project URL for the helloworld repository](Jenkins-Cluster-GitHub-Project-ca3d1f8c.png)
 
 5.The Jelastic Maven plugin requires the destination environment access parameters to be defined and passed to the [pom.xml](https://github.com/jelastic/helloworld/blob/master/pom.xml) file located in the repository of the application you build.
 
@@ -110,7 +110,7 @@ The plugin's section in the **pom.xml** looks as follows:
 
 For defining parameters via project variables click on the checkbox This project is parameterized and add the first variable clicking on **Add Parameter \> String Parameter**.
 
-![](Jenkins-Cluster-Parameters-b7c0cc7d.png)
+![Jenkins project configuration with 'This project is parameterized' checked and the Add Parameter menu open on String Parameter](Jenkins-Cluster-Parameters-b7c0cc7d.png)
 
 As for our example, we use four variables defined globally for the project:
 
@@ -120,7 +120,7 @@ As for our example, we use four variables defined globally for the project:
 {{< img src="Jenkins-Cluster-Domain-2-1178226b.png" class="size-medium" width="841" height="195" >}}
 
 * **TOKEN** - access token for the platform on which the deployment environment is located.Set the **Description** for new access token and expiry date, then in the **API** field use a predefined **Maven Plugin** template which will allow the DeployApp API method to be executed. The respective access parameters will be selected automatically.  
-  ![](Jenkins-Cluster-Access-Token-1-8609f112.png)
+  ![Jelastic Generate Access Token dialog with description 'App Deployment' and the Maven Plugin API selected](Jenkins-Cluster-Access-Token-1-8609f112.png)
 
 <!-- -->
 
@@ -128,15 +128,15 @@ As for our example, we use four variables defined globally for the project:
 
 Finally, the variables section should look like in the picture below.
 
-![](Jenkins-Cluster-Variables-1-939ce403.png)
+![Jenkins string parameters JELASTIC_API_ENDPOINT, TARGET_ENV, CONTEXT and TOKEN with their default values](Jenkins-Cluster-Variables-1-939ce403.png)
 
 6.Then scroll down to the **Source Code Management** section and specify the **Repository URL**.
 
-![](Jenkins-Cluster-Repository-1-40201e89.png)
+![Jenkins Source Code Management tab with Git selected and the helloworld.git repository URL highlighted](Jenkins-Cluster-Repository-1-40201e89.png)
 
 7.In the **Build** section set the phases the Maven will execute: **clean** , **package** and **jelastic:deploy** . Finally, press the **Save** button.
 
-![](Jenkins-Cluster-Maven-settings-1-136d5932.png)
+![Jenkins Build section with Goals and options set to 'clean package jelastic:deploy' and Save highlighted](Jenkins-Cluster-Maven-settings-1-136d5932.png)
 
 Resulting from the **clean** and **package** phases you will get a war archive file. In our case, it will be **helloworld.war** file as for <https://github.com/jelastic/helloworld> project.
 
@@ -146,23 +146,23 @@ The **jelastic:deploy** is performed by Jelastic Maven plugin on the fly during 
 
 1.Click on **Build Now**. Then confirm the parameters to be passed to the Jelastic Maven plugin.
 
-![](Maven-Java-Project-in-Jenkins-1-74e6d66e.png)
+![Jenkins 'Build with Parameters' form asking for API endpoint, target environment, context and token before building](Maven-Java-Project-in-Jenkins-1-74e6d66e.png)
 
 2.In the **Build History** , you can see that the build is performed successfully and marked with a green sign next to the **#1**.
 
-![](Build-Maven-Project-in-Jenkins-1-1f915142.png)
+![Jenkins project page with Build Now highlighted and build #1 in Build History showing success](Build-Maven-Project-in-Jenkins-1-1f915142.png)
 
 ## Build Debug inside Jenkins
 
 By hovering over the sign next to the build, you can open the **Console Output** that may help you to debug project building.
 
-![](Jenkins-Cluster-Build-Debug-1-21254432.png)
+![Jenkins Console Output for build #1 showing helloworld.war built and 'Finished: SUCCESS'](Jenkins-Cluster-Build-Debug-1-21254432.png)
 
 The output contains all of the commands executed during the build. Jenkins does job distribution among all of the available worker nodes trying to load them equally.
 
 If you want to execute project building on the specific node, go to the **General** section and enable **Restrict where this project can be run** option. Fill out the **Label Expression** field with hostname like node${nodeID}.
 
-![](Jenkins-Cluster-Label-Expression-1-8ab09dfe.png)
+![Jenkins General settings with 'Restrict where this project can be run' checked and a node label expression entered](Jenkins-Cluster-Label-Expression-1-8ab09dfe.png)
 
 ## Java Project Deployment via Jenkins
 
@@ -174,6 +174,6 @@ Click on the **Open in Browser** button at the destination server to make sure t
 
 The *helloworld.war* application web page should be displayed as follows.
 
-![](Jenkins-Cluster-HelloWorld-1-26702e09.png)
+![Browser showing the deployed helloworld.war application at myenv.vip.jelastic.cloud: 'Hello World - You did it!'](Jenkins-Cluster-HelloWorld-1-26702e09.png)
 
 That's it! Now you know how to easily get Jenkins cluster installation in the cloud with the Maven project build and deploy. Register at one of [Jelastic cloud service providers](https://jelastic.com/) to automate continuous integration and delivery of your Java applications using pre-configured master-slave Jenkins cluster.

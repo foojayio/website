@@ -118,7 +118,7 @@ You can take advantage of the young generation system by focusing on local varia
 ## Types of Java Garbage Collectors
 
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
-![](garbage-collectors-table-a4b7857b.png) Table overview of the different Garbage Collectors in Java
+![Table comparing Java garbage collectors (Serial, Parallel, CMS, G1, C4, ZGC, Shenandoah) by parallelism, concurrency, generations, Java version and JVM option](garbage-collectors-table-a4b7857b.png) Table overview of the different Garbage Collectors in Java
 
 {{< img src="deepak-sreedhar.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
 

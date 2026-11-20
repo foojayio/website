@@ -308,4 +308,4 @@ Knowing features like this helps you get the best java jobs, that's why to help 
 
 Download this step-by-step guide for free!
 
-![](ebook_upd.png)
+![Cover of the free ebook 5 Steps to Best Java Jobs by Vipin Sharma, showing hands typing on a laptop](ebook_upd.png)

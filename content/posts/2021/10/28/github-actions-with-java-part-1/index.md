@@ -40,14 +40,14 @@ If you want to just follow along the code and setup for the example is on GitHub
 
 Once you've chosen your repository click on the Action tab (**Step 1** ) then click on the link  
 `set up a workflow yourself ->` (**Step 2**) as shown below:
-![](Screen-Shot-2021-10-19-at-12.51.41-PM.png)
+![GitHub repository page: the Actions tab (1) and the 'set up a workflow yourself' link (2) on the Get started page](Screen-Shot-2021-10-19-at-12.51.41-PM.png)
 
 In this article I will show you how to create a GitHub Actions workflow from scratch and In Part 2 we will discuss the GitHub Actions Marketplace and how to use a newer template containing additional options that are available when setting up Java before building begins.
 
 If you have forked ![Fork Button](Screen-Shot-2021-10-21-at-9.40.06-AM.png) an existing project that may or may not contain a workflow (having GitHub Actions) you will still need to activate GitHub Actions on your fork as shown below:
 
 {{< gallery cols="1" caption="Activating GitHub Actions on a Forked project" >}}
-Activate_GH_Action_of_Fork.png
+Activate_GH_Action_of_Fork.png | | GitHub notice 'Workflows aren't being run on this forked repository' with a button to enable them
 {{< /gallery >}}
 
 ## Yaml Loves You
@@ -56,7 +56,7 @@ Activate_GH_Action_of_Fork.png
 > Unknown Yaml zealot
 
 After activating GitHub Actions (**Step 2** ) you'll get a default Yaml file generated as `.github/workflows/main.yml` shown below:
-![](Screen-Shot-2021-10-20-at-12.02.09-PM-1024x580.png) A Workflow (yml file) to build a Java project
+![GitHub editor for .github/workflows/main.yml with the 'on' section, triggering on push and pull_request to main, highlighted](Screen-Shot-2021-10-20-at-12.02.09-PM-1024x580.png) A Workflow (yml file) to build a Java project
 
 Before we discuss GitHub Action **jobs** (the meat and potatoes of the article), Let's just go over the simple top-level attributes `name` and `on`.
 
@@ -198,7 +198,7 @@ jobs:
 ```
 
 After, entering in the above, let's commit the new GitHub workflow. Click on the Start commit button as shown below:
-![](Commit.png) Commit Workflow
+![GitHub 'Commit new file' dialog with the message 'Adding a GitHub Action' and 'Commit directly to the main branch' selected](Commit.png) Commit Workflow
 
 After, committed the workflow will be triggered to run. You'll want to click on the Actions tab and the workflow item as shown below:
 

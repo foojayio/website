@@ -31,4 +31,4 @@ All the fixes provided for each updated OpenJDK release are found here:
 Some of the security issues addressed are important enough to get a CVE (Common Vulnerabilities and Exposures), which means it is included in a list of publicly available computer security flaws. When the term "CVE" is referred to, what is meant is a security flaw that's been assigned a CVE ID number.
 
 These too, with their details, [are listed on Foojay.io](https://javaalmanac.io/jdk/17/):
-[![](image-2-1024x671.png)](https://javaalmanac.io/jdk/17/)
+[![OpenJDK update details page for 17.0.4 listing four CVE fixes with CVSS scores from 5.3 to 7.5](image-2-1024x671.png)](https://javaalmanac.io/jdk/17/)

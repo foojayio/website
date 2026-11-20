@@ -69,7 +69,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode-28-guests-1024x578.jpg)
+![Video call with host Frank Delporte and guests Mohamed Taman, Piotr and Simon Ritter in an Azul Tech Talks background](episode-28-guests-1024x578.jpg)
 
 ## Content
 

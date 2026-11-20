@@ -87,7 +87,7 @@ A combination of GAV coordinates and distinguishers can be used to locate the ex
 ## POM Hierarchies
 
 This section describes the hierarchy in Maven POMs.
-![](mavenhierarchies-8c37200a.png)
+![Three Maven POM relationships: parent inheritance, aggregation of modules, and bill-of-materials, with who knows whom](mavenhierarchies-8c37200a.png)
 
 ### Parent POM
 

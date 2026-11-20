@@ -21,7 +21,7 @@ After [thinking about it](https://foojay.io/today/lets-start-a-java-mastodon-com
 And thanks to [toot.io](https://toot.io/mastodon_hosting.html) we don't need to worry about the maintenance and the bill has been covered.
 
 If you were already following me on Mastodon, you may have noticed that I moved my own account to this new instance, so you can find me now on [foojay.social/@frankdelporte](https://foojay.social/@frankdelporte/).
-![](foojay-on-mastodon-1024x604.png) Homepage of the Mastodon server on foojay.social
+![Foojay.social Mastodon server page showing the foojay.io profile with its bio, 86 active users and follower counts](foojay-on-mastodon-1024x604.png) Homepage of the Mastodon server on foojay.social
 
 ## What Is It All About?
 

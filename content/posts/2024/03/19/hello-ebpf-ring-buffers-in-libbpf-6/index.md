@@ -29,7 +29,7 @@ In [Hello eBPF: Recording data in event buffers (3)](https://foojay.io/today/hel
 > [BPF ring buffer](https://nakryiko.com/posts/bpf-ringbuf/) by Andrii Nakryiko
 
 Ring buffers are still circular buffers:
-![](ring_buffer.png)
+![Ring buffer diagram: an eBPF program writes events at the write pointer while the Java application reads at the read pointer](ring_buffer.png)
 
 Their usage is similar to the perf event buffers we've seen before. The significant difference is that we implemented the perf event buffers using the libbcc-based eBPF code, which made creating a buffer easy:
 

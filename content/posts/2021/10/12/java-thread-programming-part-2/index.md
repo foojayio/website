@@ -93,7 +93,7 @@ Let's walk through the code first. In the above code, a `ServerSocket` starts at
 
 We can use telnet to connect the server and use this server.
 
-![](Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png)
+![IntelliJ with a single-threaded server's accept loop and a terminal where a telnet client queries word counts](Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png)
 
 The only problem with this is it can handle only one client at a time. So if we try to connect another client, it will respond only when the other connected client gets disconnected.
 
@@ -123,7 +123,7 @@ public class MultiThreadedServer {
 
 Now, we can connect multiple clients at once, and serve them all simultaneously:
 
-![](Screen-Shot-2021-09-30-at-10.06.47-PM-700x289.png)
+![Two telnet terminals connected to the Java server at once, each receiving its own word counts](Screen-Shot-2021-09-30-at-10.06.47-PM-700x289.png)
 
 Now that we understand the benefits of using threads in Java, we will dig a bit deeper into using threads in the following articles in this series.
 

@@ -21,7 +21,7 @@ related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 ---
 
-![](boxlang-v1.13.0-700x467.jpg)
+![BoxLang RELEASE 1.13.0 banner with the BoxLang logo over a blue and green wave background](boxlang-v1.13.0-700x467.jpg)
 
 **BoxLang 1.13.0** is a stability-first release with deep compatibility work and runtime hardening. This build closes 48 issues, with the majority focused on CFML compatibility edge cases, concurrency correctness, formatting parity, and miniserver/runtime reliability under real production loads.
 

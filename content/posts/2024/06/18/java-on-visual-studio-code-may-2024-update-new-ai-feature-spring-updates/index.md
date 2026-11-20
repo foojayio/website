@@ -30,7 +30,7 @@ With the [release of various AI products](https://blogs.microsoft.com/blog/2024/
 
 Here's how the feature works, on your Java class, a new CodeLens text will appear above the name of the class: "Rewrite with new Java syntax". Once the user clicks on this, it will trigger an inspection on the current Java class. Once the inspection is complete, Visual Studio Code will show several improvement suggestions and point users to the location.
 
-![](trigger-8ce33757.gif)
+![Animated VS Code view of Main.java where a 'Rewrite with new Java syntax' CodeLens appears above the class declaration](trigger-8ce33757.gif)
 
 For each suggestion, additional CodeLens will appear and shows what the solution is (and what needs to be improved).
 

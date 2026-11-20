@@ -53,7 +53,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [@frankdelporte@foojay.social](https://foojay.social/@frankdelporte)
   * <https://twitter.com/FrankDelporte>
 
-![](podcast-guests-brazil-jug-1024x577.jpg)
+![Video call grid with the host Frank Delporte and three guests from the Brazilian JUG recording the podcast](podcast-guests-brazil-jug-1024x577.jpg)
 
 ## Links
 

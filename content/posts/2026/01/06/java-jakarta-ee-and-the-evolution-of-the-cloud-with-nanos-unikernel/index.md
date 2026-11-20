@@ -58,7 +58,7 @@ This results in:
 
 |                                     |                                            |
 |-------------------------------------|--------------------------------------------|
-| ##### Kubernetes Model ![](k8s.png) | ##### Nanos Unikernel Model ![](nanos.png) |
+| ##### Kubernetes Model ![Layered stack for Kubernetes deployment: Payara 7 Full, JVM, container, pod, node, runtime, Linux kernel, host OS, hypervisor, hardware](k8s.png) | ##### Nanos Unikernel Model ![Slimmer stack with Nanos: Payara 7 Full and Azul JRE on a Nanos unikernel directly on a hypervisor and hardware](nanos.png) |
 
 With Nanos:
 
@@ -106,13 +106,13 @@ This not only increases security but also enables **higher application density**
 
 |               |               |                              |
 |---------------|---------------|------------------------------|
-| ![](logo.png) | ![](logo.svg) | ![](Payara_Logo-700x365.jpg) |
+| ![NanoVMs logo](logo.png) | ![NanoVMs logo](logo.svg) | ![Payara logo with an orange fish on a dark blue background](Payara_Logo-700x365.jpg) |
 
-![](oracleOCI.jpg)
+![Oracle Cloud logo](oracleOCI.jpg)
 
 The CI/CD pipeline plays the same role it would with containers, but the final output is a **lightweight, immutable Unikernel Nanos Image**.
 
-![](cloud_deploy_diagram-816f1eb6.svg)
+![GitOps pipeline: push to Git, GitHub Actions builds a Nanos unikernel image, then deploys to 11 cloud providers](cloud_deploy_diagram-816f1eb6.svg)
 
 The repository *AngeloRubens/ci-cd-nanos-unikernel* demonstrates how to:
 * build Nanos images with Azul JRE and Payara7 Full by GithubAction Pipeline
@@ -182,7 +182,7 @@ Nanos security is **architectural**.
 
 |                                                 |                                                 |
 |-------------------------------------------------|-------------------------------------------------|
-| ![](img2-b8ee2e2c.png) | ![](img3-7ec84f40.png) |
+| ![Unikernel benefits: no shell, no Linux, no users, 30k lines of code, single process, higher performance and safer](img2-b8ee2e2c.png) | ![Docker/Kubernetes drawbacks: shell, runs Linux, users, 30M lines of code, many processes, lower performance and less safe](img3-7ec84f40.png) |
 
 And because there are no system processes, **all resources are dedicated to the JVM**, increasing performance and reducing costs.
 

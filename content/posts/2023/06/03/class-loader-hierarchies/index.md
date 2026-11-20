@@ -28,7 +28,7 @@ Class loaders are responsible for (possibly dynamically) loading classes, and th
 > [ClassLoader Documentation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ClassLoader.html)
 
 An application has multiple class loaders:
-![](image-7f19353f.jpg)
+![Class loader diagram: bootstrap, platform and app loaders with X and Y below; bootstrap referencing class X fails, app referencing bootstrap works](image-7f19353f.jpg)
 
 A typical Java application has a bootstrap class loader (internal JDK classes and the ClassLoader class itself, implemented in C++ code), a platform classloader (all other JDK classes), and an application/system class loader (application classes):
 > * Bootstrap class loader. It is the virtual machine's built-in class loader, typically represented as `null`, and does not have a parent.
@@ -130,10 +130,10 @@ Feel free to try this agent on your applications; maybe you gain some new insigh
 Understanding class loader hierarchies helps to understand subtle problems in writing instrumenting agents. Knowing how to write small agents can empower you to write simple tools to understand the properties of your application.
 
 I hope this blog post helped you to understand class loader hierarchies and agents a little bit better. I'm writing it in a lovely park in Milan:
-![](image-1-2000x1507-b82633f2.jpg)
+![Laptop showing a blog draft with a class loader diagram, held in front of a river weir and trees](image-1-2000x1507-b82633f2.jpg)
 
 After giving [a talk at JUG Milano on profiling](http://www.jugmilano.it/meeting-145.html) on Wednesday:
-![](image-3-2000x1500-dcdab984.jpg)
+![Audience seated at the Milan JUG meetup in the eDreams ODIGEO TechLab, with the speaker holding a microphone](image-3-2000x1500-dcdab984.jpg)
 
 Next week, I will write a short article on my talk (with slides and the [recording](https://www.youtube.com/watch?v=DhYDzff6UCE&t=348s)). If you live near Munich, you can attend my talk [Write your own Java Profiler in 240 lines of pure Java](https://www.meetup.com/openvaluemuenchen/events/293736106/) on Monday, June 5th.
 

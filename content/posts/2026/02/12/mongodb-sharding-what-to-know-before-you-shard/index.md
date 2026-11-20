@@ -47,7 +47,7 @@ Sharding doesn't exist in isolation. It is built on top of a few core MongoDB co
 At a high level, replication in MongoDB means having the same data stored on multiple servers. This is done through a replica set, which is usually composed of three nodes.
 
 One node acts as the primary, receiving all write operations and replicating this information to the other secondary nodes:  
-![](Screenshot-2026-02-09-at-9.47.43-AM.png)
+![Replica set diagram: a client application writes to and reads from the primary, which replicates to two secondary nodes](Screenshot-2026-02-09-at-9.47.43-AM.png)
 
 Now, imagine a simple scenario. You have one node running in São Paulo, another one in New York, and a third one in Bengaluru. All three nodes store the same data.
 
@@ -58,7 +58,7 @@ When the São Paulo node comes back online, it rejoins the replica set as a seco
 This approach helps maintain high availability and also simplifies disaster recovery. Since the data is already replicated across different locations, it can be recovered from another node if one of them is lost.
 
 Building on top of this replication layer, a MongoDB sharded cluster is composed of three main components: **mongos** , **config servers** , and **shards**, as shown in the figure below:  
-![](Screenshot-2026-02-09-at-9.48.36-AM.png)
+![Sharded cluster diagram: an application connects to mongos routers, which talk to shards A, B and C and to a config server, each a replica set](Screenshot-2026-02-09-at-9.48.36-AM.png)
 
 ### Shards
 
@@ -81,10 +81,10 @@ In production environments, MongoDB automatically provisions and manages multipl
 ## Distributing data in a sharded cluster
 
 Data distribution across shards is usually done by spreading the data of a collection across multiple shards. For example, in a cluster with two shards, a *books* collection with 10 million documents can be split between those two shards:  
-![](Screenshot-2026-02-09-at-9.49.35-AM.png)
+![Diagram of a books collection split across shard A and shard B behind the mongos router](Screenshot-2026-02-09-at-9.49.35-AM.png)
 
 Now, in this same scenario, imagine that a new collection is created and it is **not sharded**—for example, an articles collection:  
-![](Screenshot-2026-02-09-at-9.49.42-AM.png)
+![Diagram of an unsharded articles collection placed on shard A, the primary shard, next to books, while shard B holds only a books part](Screenshot-2026-02-09-at-9.49.42-AM.png)
 
 By default, this collection is assigned to the database's primary shard. You can verify which shard is acting as the primary for a database by running:
 
@@ -97,7 +97,7 @@ By default, this collection is assigned to the database's primary shard. You can
 Since this primary shard may host multiple unsharded collections, they all end up sharing the same resources. As these collections grow, this can lead to resource contention.
 
 Starting with MongoDB 8.0, this unsharded collection can be moved to a specific shard using [moveCollection](https://www.mongodb.com/docs/manual/tutorial/move-a-collection/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello). This allows the collection to benefit from dedicated resources and avoids competing with other collections on the same shard:  
-![](Screenshot-2026-02-09-at-9.50.56-AM.png)
+![Diagram of the moveCollection command moving the articles collection from primary shard A to shard C](Screenshot-2026-02-09-at-9.50.56-AM.png)
 
 ## When should you shard a collection?
 
@@ -162,10 +162,10 @@ This process is handled by the [balancer](https://www.mongodb.com/docs/manual/co
 At this point, it is important to understand that the shard key affects not only how data is stored, but also how queries are executed.
 
 When a query includes the shard key, MongoDB can determine exactly where the data is located. Using the cluster metadata stored on the config servers, mongos knows which shard owns the relevant chunk and routes the operation directly to that shard. Only that shard executes the query and returns the result, which is then forwarded back to the client. These are known as [targeted operations](https://www.mongodb.com/docs/manual/core/sharded-cluster-query-router/#targeted-operations-vs.-broadcast-operations/?%20utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello), and they are typically fast and efficient:  
-![](Screenshot-2026-02-09-at-9.51.55-AM.png)
+![Query diagram: a client query on publishedYear 2026 goes through mongos, which targets only shard C](Screenshot-2026-02-09-at-9.51.55-AM.png)
 
 On the other hand, when a query doesn't include the shard key, MongoDB can't determine which shard holds the requested data. In this case, mongos has no choice but to broadcast the query to all shards:  
-![](Screenshot-2026-02-09-at-9.52.29-AM.png)
+![Query diagram: without the shard key, mongos broadcasts the query to shards A, B and C and merges the results](Screenshot-2026-02-09-at-9.52.29-AM.png)
 
 Each shard executes the operation on its own subset of the data and sends the result back to mongos, which then merges the results before returning them to the client. These are known as **broadcast operations** , or **scatter-gather queries**.
 
@@ -248,7 +248,7 @@ To make this more concrete, let's walk through a simple experiment. For this exp
 * *shardRS2*
 
 In the middle of the cluster sits mongos, which acts as the router. The Java application doesn't connect directly to the shards or to the config servers. All read and write operations go through mongos:  
-![](Screenshot-2026-02-09-at-9.53.14-AM.png)
+![Architecture diagram: a Java application reads and writes through mongos, which connects to shardRS1, shardRS2 and a config server](Screenshot-2026-02-09-at-9.53.14-AM.png)
 
 **Notice** : At this point, the cluster is already up and running. The config servers, shards, and mongos are fully configured, and the shards have already been added to the cluster. The focus of this section is not on how to deploy a sharded cluster, but on analyzing data distribution and behavior once sharding is applied. You can deploy your own quickly using [MongoDB Atlas](https://www.mongodb.com/docs/atlas/cluster-additional-settings/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello).
 

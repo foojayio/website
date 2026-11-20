@@ -158,7 +158,7 @@ First things first, content scripts work in the context of the page. Hence, logg
 
 Now that we know how to log, it's possible to go further and describe communication across scripts. Here's an overview of the overall flow:
 
-![](communication-across-scripts-968x1024.png)
+![Sequence diagram of the Firefox extension: background.js registers a click handler and sends a message to content.js, which returns a response](communication-across-scripts-968x1024.png)
 
 Let's change the code a bit so that `background.js` sends a message:
 
@@ -278,7 +278,7 @@ We can use the same `storage` API in the Trello calling code to read credentials
 
 At this point, I was happy with my setup. I just added another round-trip from the `background` to the `content` to display an `alert` with Trello's card name and URL.
 
-![](final-result-1024x434.jpg)
+![Sessionize call-for-speakers page for DeveloperWeek Latin America with an alert saying the Trello card was created successfully](final-result-1024x434.jpg)
 
 ## Conclusion
 

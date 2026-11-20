@@ -18,7 +18,7 @@ related_posts:
 ---
 
 The annual [2021Jakarta EE Developer Survey](https://www.surveymonkey.com/r/F9SWSDF) is out. Make sure to use this opportunity to make your voice heard!
-[![](JakartaEESurvey2021-1024x574-89696f30.jpg)](https://www.surveymonkey.com/r/F9SWSDF)
+[![Banner reading 'Jakarta EE Developer Survey 2021: Take the survey today!' with a developer typing on a laptop](JakartaEESurvey2021-1024x574-89696f30.jpg)](https://www.surveymonkey.com/r/F9SWSDF)
 
 This is the fourth Jakarta EE Developer Survey, so it is safe to say that it has become an annual tradition and is your chance to influence the direction of the Jakarta EE working group.
 

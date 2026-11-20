@@ -21,7 +21,7 @@ related_posts:
   - "running-your-database-on-openshift-and-codeready-containers"
 ---
 
-![](0_cYkNr7XdB-MsJiu5-1024x674.png)
+![Architecture: control-plane k8ssandra-operator in cluster 0 deploys Stargate and Cassandra datacenters to clusters 1 and 2](0_cYkNr7XdB-MsJiu5-1024x674.png)
 
 We built the new K8ssandra Operator to simplify deploying multiple Apache Cassandra data centers in different regions and across multiple Kubernetes (K8s) clusters. We're not at the finish line just yet, but we've hit the first major milestone. Now, it's easier than ever to run Apache Cassandra® across multiple K8s clusters in multiple regions with the K8ssandraCluster!
 
@@ -100,7 +100,7 @@ Before deploying a K8ssandraCluster, there are a few other requirements, includi
 There are a few different ways to accomplish the prerequisite steps, using either [Helm](https://helm.sh/) or [Kustomize](https://kustomize.io/). You can learn more about the installation process with this [step-by-step guide on GitHub](https://github.com/k8ssandra/k8ssandra-operator/blob/main/docs/install/README.md).
 
 Figure 2 below gives you a quick glimpse at a simple deployment, before the installation of the K8ssandraCluster:
-![](0_lZpUEraToyN7iV1l.png) Figure 2: Diagram of a simple deployment before installing k88ssandraCluster.
+![Diagram of a control-plane k8ssandra-operator in cluster 0 with ClientConfigs for two data-plane clusters](0_lZpUEraToyN7iV1l.png) Figure 2: Diagram of a simple deployment before installing k88ssandraCluster.
 
 Here we have:
 
@@ -112,12 +112,12 @@ Here we have:
 While any k8ssandra-operator is capable of operating in the control plane or data plane mode, the control plane is the one responsible for distributing resources to remote clusters. So, the K8ssandraCluster resource should be deployed to the control plane cluster.
 
 When a K8ssandraCluster resource is installed to the control plane cluster, other resources will be distributed to the remote clusters for local reconciliation within those clusters.
-![](0_2ILJc-Ic_7drMmG5.png) Figure 3: Diagram illustrating the distribution of resources between clusters.
+![Diagram of a K8ssandraCluster resource in cluster 0 being distributed as Stargate and CassandraDatacenter resources to clusters 1 and 2](0_2ILJc-Ic_7drMmG5.png) Figure 3: Diagram illustrating the distribution of resources between clusters.
 
 The control plane has now distributed new resources to each of the other clusters. From here, the operators installed in each remote cluster will begin to deploy the necessary services within that cluster.
 
 Eventually, a coordinated deployment will take shape that will look like the following:
-![](0_lmEh1iNau437AooB.png) Figure 4: Diagram showing the coordinated deployment of Kubernetes clusters.
+![Diagram of the full multi-cluster deployment: Cassandra StatefulSets and Stargate deployments running in clusters 1 and 2](0_lmEh1iNau437AooB.png) Figure 4: Diagram showing the coordinated deployment of Kubernetes clusters.
 
 Once resources have been distributed by the control plane to each data plane cluster, the local operator services within each cluster will manage the deployment of the data services.
 

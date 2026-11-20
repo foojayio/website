@@ -41,13 +41,13 @@ So, you should only use the Canvas node for controls if the control is so comple
 
 The control we are building today does not necessarily make sense but clearly shows what I've tried to explain above. It will be a simple button that should look similar to the aqua style buttons that we saw in older Mac OS X versions. And as always... first we create a graphical prototype in a vector drawing program. Here is my prototype:
 
-![](Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.jpg)
+![Affinity Designer showing the finished blue glossy 'Button' design used as the model for the JavaFX control](Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.jpg)
 
 The control is made out of several shapes, the main shape is a rounded rectangle, in the center there is another rounded rectangle which will be filled with a radial gradient just for the lighter color in the bottom center. On top you will see the other shape that will give us the reflection. And finally in the center there is the text itself.
 
 Because some of these shapes are hard to identify on the above screenshot I've created a version that shows the shapes withouth effects but only filled with a color and with this it's more clear what I'm talking about:
 
-![](Affinity-Designer-AquaButton-Modified-200.0-2021-02-04-10-53-40-680x510.jpg)
+![Affinity Designer with the button split into coloured shapes: blue main, green inner highlight, red top highlight, and text layers](Affinity-Designer-AquaButton-Modified-200.0-2021-02-04-10-53-40-680x510.jpg)
 
 These are the exact same shapes just without making use of gradients and transparency. The idea is to draw these shapes in a Canvas node and fill them with the appropriate gradients and apply effects like drop shadows, inner shadows etc.
 
@@ -140,7 +140,7 @@ As you can see it's not really complex. The most complex thing we have to do whe
 
 Here is a workflow that I use to transfer a path from a drawing program into code. Let's take the following triangle as an example, here is the drawing:
 
-![](Affinity-Designer-Untitled-Modified-500.0-2021-02-04-11-25-06-647x510.png)
+![Affinity Designer with a red triangle, 200 by 150 px, used as the example path to convert to code](Affinity-Designer-Untitled-Modified-500.0-2021-02-04-11-25-06-647x510.png)
 
 It's just a simple triangle, 200px wide and 150px tall. Now I export this path to an SVG file that looks as follows:
 
@@ -156,7 +156,7 @@ The shape is defined in the element. Now I cope the string into a spreadsheet pr
 
 Here is a screenshot of such a spreadsheet:
 
-![](Ohne-Titel.numbers-2021-02-04-11-29-30-700x461.png)
+![Numbers spreadsheet converting triangle points to width/height factors, with matching ctx.moveTo and ctx.lineTo calls](Ohne-Titel.numbers-2021-02-04-11-29-30-700x461.png)
 
 Because we would like to have the path scalable we need to get the factors for width and height for each point of the shape. So in the column factorX and factorY I simply divide the X and Y coordinates by the width and the height (e.g. 100 / 200 = 0.5).  
 
@@ -227,7 +227,7 @@ Using the Canvas always reminds me a lot on using Java Swing. You have to take c
 
 In our example the button has the shape of a rounded rectangle which means that the particles which move from bottom to top might be draw outside the button because the node is rectangular but our button is not. Here is a screenshot that shows what I am talking about:
 
-![](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-45-16-647x510.png)
+![Affinity Designer button design with four red circles marking where the bubble particles sit, some outside the rounded shape](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-45-16-647x510.png)
 
 The red circles should represent our particles and as you can see the upper left and lower right particle are outside of our button shape but still inside of the Canvas node.
 
@@ -245,13 +245,13 @@ Now we only have to make sure that the clipping rectangle always has the exact s
 
 With such a clipping shape in place it would like like this:
 
-![](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-54-29-647x510.jpg)
+![Affinity Designer button with a clip curve applied so the red bubble circles are cut off at the rounded border](Affinity-Designer-AquaButton-Modified-263.4-2021-02-05-10-54-29-647x510.jpg)
 
 Here you see that the particles will be clipped at the border of the rounded rectangle.
 
 So here is a screenshot of the Canvas based control that you will find in the github repository:
 
-![](Canvas-based-Control-2021-02-05-10-59-10-700x335.png)
+![JavaFX window 'Canvas based Control' with three glossy pill buttons labelled We, Love and Java](Canvas-based-Control-2021-02-05-10-59-10-700x335.png)
 
 Because the Control is based on a Region it doesn't have method to register a consumer for ActionEvents. So I simply added the following method to get the same behavior as a standard JavaFX button:
 

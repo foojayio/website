@@ -12,4 +12,4 @@ related_posts:
 ---
 
 Today, published [by Steve Millidge on DZone](https://dzone.com/articles/virtual-tour-is-biggest-project-yet-for-new-java-c):
-![](image-1-1024x981.jpg)
+![DZone article 'Virtual Tour Is the Biggest Project Yet for the New Java Community Platform, Foojay', with the Foojay Virtual JUG Tour 2021 badge](image-1-1024x981.jpg)

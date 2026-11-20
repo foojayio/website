@@ -122,7 +122,7 @@ public class Main {
 }
 ```
 
-![](frame_problem-32e9522c.jpg) The expected flame graph is on the left (obtained after fixing the bug), and the actual flame graph is on the right.
+![Two call stack listings: the full trace with reflection frames versus a truncated trace ending at Main.test()](frame_problem-32e9522c.jpg) The expected flame graph is on the left (obtained after fixing the bug), and the actual flame graph is on the right.
 
 So the only test case on AsyncGetCallTrace in the OpenJDK did not properly test the whole trace. This was not a problem when the test case was written. One can expect that its author checked the entire stack trace manually once and then created a small check test case to test the first frame, which is not implementation specific. But this is a problem for regression testing:
 

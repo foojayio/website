@@ -21,7 +21,7 @@ Confused about the release cycles of OpenJDK and OpenJFX and the relationship be
 ## OpenJDK
 
 Since 2018, Java switched to a 6-months release cycle. Every new release brings new finished features, but also "preview" ones which are not finished yet. These can be enabled [with a flag](https://mkyong.com/java/java-how-to-enable-the-preview-language-features/) (\``java --enable-preview`\`) to allow developers to start experimenting with them and provide feedback to the developers to further improve these so they can become available in one of the next releases.
-![](history_java_releases.png) Java release history
+![Timeline of Java releases from JDK Beta in 1995 to Java SE 16 and 17 in 2021](history_java_releases.png) Java release history
 
 Thanks to this fixed schedule, new versions are no longer causing major changes, but provide a steady, predictable, and stable flow of new features.
 
@@ -30,10 +30,10 @@ If you're in doubt if you should move to a newer JDK version, make sure to read 
 ## OpenJFX
 
 In the past, JavaFX has been bundled with the Oracle JDK (until JDK 11), but it was always a project on its own as [openjfx.io](https://openjfx.io/), with its [sources on GitHub](https://github.com/openjdk/jfx). [Gluon](https://gluonhq.com/) builds and distributes the OpenJFX releases, following the same 6-month release cycle.
-![](history_javafx-1.png) JavaFX history
+![Timeline of JavaFX releases from JavaFX 1.0 in 2008 to JavaFX 14 and 15 in 2020](history_javafx-1.png) JavaFX history
 
 You can find them in the [Maven Central Repository](https://search.maven.org/search?q=org.openjfx) or on the [Gluon website](https://gluonhq.com/products/javafx/).
-![](Screenshot-from-2020-10-29-20-29-12-1024x640.png) openjfx in the Maven Central Repository
+![Maven Central search for org.openjfx listing the JavaFX artifacts at version 16-ea+3](Screenshot-from-2020-10-29-20-29-12-1024x640.png) openjfx in the Maven Central Repository
 
 An overview of all the changes in OpenJFX since version 11 are [available here.](https://github.com/openjdk/jfx/tree/jfx15/doc-files)
 

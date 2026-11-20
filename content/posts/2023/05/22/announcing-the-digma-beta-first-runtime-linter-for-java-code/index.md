@@ -17,7 +17,7 @@ related_posts:
   - "beginning-javafx-with-intellij"
 ---
 
-![](doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1-1024x512.jpg)
+![Illustration of a bearded developer in a yellow beanie at a laptop, tangled in a large knot of colorful yarn](doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1-1024x512.jpg)
 
 ## Call for Developers
 

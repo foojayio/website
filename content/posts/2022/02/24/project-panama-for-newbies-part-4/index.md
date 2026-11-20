@@ -29,7 +29,7 @@ But, did you know that you can go in the opposite direction (C code executes Jav
 Why is this capablity amazing, you ask? Well, imagine C code capable of performing a computation and after its completion the C code will notify Java code to perform updates to JavaFX UI components.
 
 In this article you will learn about **callbacks** and how to create them in both **Java** and in **C** . In principle, you will learn how to create Java code that can be executed from C code using `linker`'s `upcallStub()` method.
-![](part4_upCallStub.png)
+![Java code calls upCallStub(), which gives C a callback function that runs C code then calls back into Java](part4_upCallStub.png)
 
 In addition to this article I will show you how to create a native library written in C that will be later accessed using Java's newer Foreign Access APIs
 
@@ -51,7 +51,7 @@ The article's agenda is as follows:
 ## Application Layers
 
 Whenever developing applications with dependencies it's a good idea to view component layers at a high-level (Top-down approach). This is especially important when you are sharing native resources that could potentially be used by other applications and services on the same node(device). Shown below are the components stacked upon each other.
-![](panama_layers.png) Java's Project Panama Architecture Layers
+![Layer diagram: Java application on the JVM and C application on a native library, both above the OS and hardware](panama_layers.png) Java's Project Panama Architecture Layers
 
 Above you'll notice a Java Application block that depends on the JVM and Native library blocks respectively. In addition to the top layer you'll notice a C application (block) that also depends on the native library (block) as a shared resource. The rest of the layers are the operating system and hardware.
 
@@ -108,7 +108,7 @@ Before getting into Java code let's look at a simple example of creating a nativ
 * **C file** (`mylib.c`)- Implementation code.
 
 The diagram below shows how to compile a C program into a native library for the MacOS platform. Use the the `-o` switch to name your output binary for the respective OS. eg: Linux `-o libmylib.so`, Windows `-o mylib.dll`
-![](part4_dynamic_library-2.png)
+![Compiling mylib.c and mylib.h with gcc into libmylib.dylib on macOS, mylib.dll on Windows and libmylib.so on Linux](part4_dynamic_library-2.png)
 
 You'll notice the naming convention for the Mac OS where the name of the library is `mylib` but the file name is `libmylib.dylib`. This is good to know because in `jextract` you will generate code that under the hood calls the `System.loadLibrary("mylib");` . That way it will load the library in a similar way for all OS platforms. This will allow the library to be distributed with the application co-located with your Java code or specified in Java property `java.library.path`.
 
@@ -183,7 +183,7 @@ Above you'll notice the `main()` function code that tests the `my_callback_funct
 void (*ptr)() = &my_function;
 ```
 
-![](part4_function_pointer-1.png) Declare a function pointer variable named ptr
+![C function pointer syntax: return type void, pointer name (*ptr), and the function arguments in parentheses](part4_function_pointer-1.png) Declare a function pointer variable named ptr
 
 In C language the **ampersand** gets the **address** of the `my_function()` function to be assigned to the variable `ptr` . Notice the matching call signiture. e.g. returns void and void parameters (no parameters). Remember, the `(*SOME_VARIABLE_NAME)` parenthesis and asterisk around the name denotes it is a **variable** of a pointer to a function.
 

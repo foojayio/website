@@ -54,7 +54,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](foojay-podcast-guests-chicago-1024x576.jpg)
+![Foojay Podcast video call with guests Mary Grygleski and John Burns and host Frank Delporte](foojay-podcast-guests-chicago-1024x576.jpg)
 
 ## Links
 

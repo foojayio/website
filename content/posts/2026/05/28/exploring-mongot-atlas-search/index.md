@@ -26,7 +26,7 @@ You can check out the source code here:
 git clone https://github.com/mongodb/mongot
 ```
 
-![](Screenshot-2026-05-08-at-3.17.36-PM-1024x548.png)
+![Sketch of MongoD sending queries to MongoT, which follows changes from MongoD and builds a Lucene index](Screenshot-2026-05-08-at-3.17.36-PM-1024x548.png)
 
 MongoT is a wrapper around the amazing Java search engine: [Lucene](https://lucene.apache.org/).
 
@@ -36,7 +36,7 @@ Adding vector search to MongoDB was clearly a core goal for the MongoT project, 
 
 ## Let's dive in!
 
-![](Screenshot-2026-06-04-at-8.27.46-PM-1024x523.png)
+![Animated MongoT runtime tour showing a graph of components such as client, mongod, server, index and replication, with a story list on the left](Screenshot-2026-06-04-at-8.27.46-PM-1024x523.png)
 
 (Check out the live demo of this screenshot [here](https://luketn.com/mongot-app-tour/index.html))
 
@@ -136,7 +136,7 @@ idea .
       - 5005:5005    # Debug port
 ```
 
-![](Screenshot-2026-05-27-at-12.43.57-PM.jpg)
+![Docker Compose YAML for a local mongot container that exposes the debug port 5005, query port 27028 and metrics port 9946](Screenshot-2026-05-27-at-12.43.57-PM.jpg)
 
 This will allow us to connect and debug the locally built mongot code over the 5005 debugger port.
 
@@ -150,18 +150,18 @@ Once the build is finished, and the containers are running, we can attach a debu
 
 5. Create a Remote JVM run config:
 
-![](Screenshot-2026-05-27-at-12.45.26-PM.png)  
-![](Screenshot-2026-05-27-at-12.46.09-PM-1024x533.png)
+![IntelliJ Add New Configuration menu searching for 'remote JVM' with Remote JVM Debug highlighted](Screenshot-2026-05-27-at-12.45.26-PM.png)  
+![IntelliJ Run/Debug Configurations dialog for a Remote JVM Debug named 'MongoT Container' attaching to localhost port 5005](Screenshot-2026-05-27-at-12.46.09-PM-1024x533.png)
 
 6. Run the new MongoT Container run config, and you'll see your IntelliJ is now debugging the source code:
 
-![](Screenshot-2026-05-27-at-12.48.18-PM.png)
+![IntelliJ debug console confirming it connected to the target VM at localhost:5005](Screenshot-2026-05-27-at-12.48.18-PM.png)
 
 You can connect to MongoDB using Compass:  
-![](Screenshot-2026-05-27-at-12.49.08-PM.png)
+![MongoDB Compass sidebar showing the 'local atlas' connection and its databases](Screenshot-2026-05-27-at-12.49.08-PM.png)
 
 When configuring the connection you'll need to configure the TLS settings to point at the ca.pem and client-combined.pem files in the community-quick-start/tls directory:  
-![](Screenshot-2026-05-27-at-12.50.15-PM.png)
+![Compass advanced connection options with TLS enabled and the ca.pem and client-combined.pem certificate files selected](Screenshot-2026-05-27-at-12.50.15-PM.png)
 
 ## Sample Data
 
@@ -178,10 +178,10 @@ If you want to dig into the code for that, there's a walkthrough here: <https://
 <https://tech-blog.luketn.com/java-faceted-full-text-search-api-using-mongodb-atlas-search>
 
 Here's the Atlas Search Coco sample project serving up queried data from the Coco image dataset through a locally debugged MongoT:  
-![](Screenshot-2026-05-08-at-3.29.10-PM-1024x706.jpg)
+![Atlas Coco demo app in a browser showing image search results with captions, category filters and tags](Screenshot-2026-05-08-at-3.29.10-PM-1024x706.jpg)
 
 And here is the index that was built in the local MongoT through Compass:  
-![](Screenshot-2026-05-08-at-3.34.11-PM-1024x476.png)
+![Compass showing the atlasSearchCoco image collection with a READY search index named 'default' and its mapped fields](Screenshot-2026-05-08-at-3.34.11-PM-1024x476.png)
 
 If you explore this app, you'll find some fun things you can do with local LLMs, vector embeddings, and queries that I played around with while writing this article.
 
@@ -252,25 +252,25 @@ db.image.aggregate([
 ]);
 ```
 
-![](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.jpg)
+![IntelliJ debugger paused in TextQueryFactory.createQuery with the search term 'frisbee' on the caption path visible in the variables](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.jpg)
 
 You can step through and see it create the Lucene query object instances, e.g., TermQuery ($type:string/caption:frisbee) being built from the Atlas Search facet compound clauses.
 
 Continue stepping through, you'll eventually get to LuceneFacetCollectorSearchManager.initialSearch:  
-![](Screenshot-2026-05-08-at-3.37.52-PM-1024x851.jpg)
+![IntelliJ Evaluate window showing the Lucene BooleanQuery built for 'frisbee' plus an animal:dog facet filter](Screenshot-2026-05-08-at-3.37.52-PM-1024x851.jpg)
 
 Here you can see the fully composed BooleanQuery, combining the string-type TermQuery on frisbee with the token-type TermQuery on dog.
 
 This is interesting just for learning the (somewhat obtuse) Java library API for Lucene queries.
 
 The results from Lucene include the docs matched and the facets:  
-![](Screenshot-2026-05-08-at-3.38.24-PM-1024x965.jpg)
+![IntelliJ Evaluate window showing the search results: a facets collector with 48 hits and top docs with 366 hits](Screenshot-2026-05-08-at-3.38.24-PM-1024x965.jpg)
 
 You can keep digging around and see all the ways the wrapper is marshaling documents from Lucene indexes.
 
 You'll notice some interesting things, like the _ids in Lucene Indexes are integers. This is core to the way Lucene works, and I'll get into why in a minute:  
-![](Screenshot-2026-05-08-at-3.39.12-PM-1-1024x657.jpg)  
-![](Screenshot-2026-05-08-at-3.39.37-PM-1024x663.jpg)
+![IntelliJ debugger in LuceneSearchBatchProducer showing the current value with a document id, score and BSON document](Screenshot-2026-05-08-at-3.39.12-PM-1-1024x657.jpg)  
+![IntelliJ debugger in MongotCursor.getNextBatch showing a batch of 101 BSON documents with ids and search scores](Screenshot-2026-05-08-at-3.39.37-PM-1024x663.jpg)
 
 The MongoDB ObjectID (or whatever type you use) _id is stored as metadata and returned as part of the result set if required:  
 
@@ -374,7 +374,7 @@ This is a super deep topic, and I won't cover all of it here, but there are grea
 #### Multiple-index searching with merged results
 
 MongoDB can't do multiple-index searching. MongoDB uses a single index per query, and if there is further filtering to be done, it will be done directly on the documents. A MongoDB query for multiple indexed fields looks broadly like this:  
-![](Screenshot-2026-05-08-at-3.41.23-PM-1024x923.jpg)
+![Flowchart of the MongoDB query engine: pick an index, query it, filter the matched documents, then return results](Screenshot-2026-05-08-at-3.41.23-PM-1024x923.jpg)
 
 (Gross oversimplification of MongoDB's query engine)
 
@@ -389,7 +389,7 @@ In a typical text field index, Lucene analyzes text into terms. It stores those 
 You can also have simpler 1-1 indexes over fields that don't need the text extracted, like integers, floating point numbers, dates, enums, and keywords.
 
 You can think of Lucene indexes like a set of maps between Term Ids to a list of Document Ids.  
-![](Screenshot-2026-05-08-at-3.41.49-PM-1024x428.jpg)
+![Table sketch of Lucene inverted indexes mapping terms in a description and link id field to document ids](Screenshot-2026-05-08-at-3.41.49-PM-1024x428.jpg)
 
 Lucene is very efficient at performing index intersection, because of the basic structure and sort order of the data and ordinal indexes, and several optimization techniques like:
 
@@ -402,7 +402,7 @@ MongoT creates Lucene documents to match MongoDB documents, mapping every Atlas 
 Depending on the preferences you choose for each field in the Atlas Search field mappings, MongoT will store the values of the MongoDB document differently in the Lucene document. It may store a single value using multiple Lucene document field types in order to support filtering, sorting, and faceting:
 
 <https://lucene.apache.org/core/9_10_0/core/org/apache/lucene/index/package-summary.html#field_types>  
-![](Screenshot-2026-05-08-at-3.42.22-PM-1024x157.jpg)
+![Debugger list of Lucene fields created for one fruitId value: indexed, numeric doc values and sorted numeric doc values](Screenshot-2026-05-08-at-3.42.22-PM-1024x157.jpg)
 
 For this reason, it is probably worth taking some time tuning the Atlas Search index field mappings to ensure you are only selecting the options you really need. The bigger and more complex the field mappings and types are, the worse the performance and the heavier the resource requirements.
 
@@ -502,7 +502,7 @@ db.image.aggregate([{$vectorSearch: {
 Behind the scenes, MongoT computes the embedding for the query text 'circular flying', uses Voyage API to compute a semantic meaning as an array of floats, then uses Lucene to find the nearest matches semantically in the index.
 
 You can put a breakpoint on EmbeddingServiceManager.embed() and take a look at how the query path works:  
-![](Screenshot-2026-05-08-at-3.44.42-PM-1024x595.jpg)
+![IntelliJ debugger in the embed method with the Evaluate window showing a 1024-float vector returned by the voyage-4 model](Screenshot-2026-05-08-at-3.44.42-PM-1024x595.jpg)
 
 So cool. There is obviously a real financial cost to this, but it is the ultimate in convenience.
 
@@ -541,7 +541,7 @@ And then ran a K6 load test script to see what sort of performance MongoT was pr
 Here you can see the end- to- end performance of a Java Atlas Search API.
 
 As represented by the MongoT performance dashboard in Grafana:  
-![](Screenshot-2026-05-08-at-3.45.34-PM-1024x513.jpg)
+![Grafana MongoT dashboard showing search latency stats (mean 357 microseconds, p99 2.06 ms), latency charts and requests per second](Screenshot-2026-05-08-at-3.45.34-PM-1024x513.jpg)
 
 And as seen by the K6 client:
 
@@ -566,7 +566,7 @@ k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
 What does this mean? Well, the full round-trip of a Java HTTP Atlas Search API call as measured by the K6 client had a median response time of 12.8ms (using a large range of data scenarios drawn from the COCO image dataset).
 
 If I add some tracing to each request, I can see the overheads of Java vs the MongoT-\>MongoD end-to-end query command:  
-![](Screenshot-2026-05-08-at-3.46.50-PM-1024x481.jpg)
+![Grafana MongoT dashboard from a second run: mean latency 1.09 ms, median 861 microseconds, p99 5.02 ms, with latency and throughput charts](Screenshot-2026-05-08-at-3.46.50-PM-1024x481.jpg)
 
 ```
 k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
@@ -583,10 +583,10 @@ I have to admit getting a bit deep down in the rabbit hole here, and spending mo
 <https://github.com/luketn/mongot/pull/2/changes>
 
 With these traces, you can see that the actual Lucene index query part of the whole system is a tiny fraction of the overall query time.  
-![](Screenshot-2026-05-08-at-3.47.30-PM-1024x663.jpg)
+![Text Search Only trace summary: k6 throughput 554 req/s, HTTP median 39 ms, MongoDB median 9 ms, with the stream lifecycle span dominating](Screenshot-2026-05-08-at-3.47.30-PM-1024x663.jpg)
 
 And over a K6 load client run:  
-![](Screenshot-2026-05-08-at-3.47.56-PM-1024x797.jpg)
+![Grafana dashboard of search stream latency (mean 11.7 ms, p99 48.2 ms) with request rate and per-phase breakdown charts](Screenshot-2026-05-08-at-3.47.56-PM-1024x797.jpg)
 
 (Note times are slowed by additional tracing)
 
@@ -597,10 +597,10 @@ If you look at the breakdown of timings within MongoT, only a small fraction of 
 All that said, the overall performance for Atlas Search is amazing, and as a pairing, they are a rock-solid, high-performance search engine, tightly coupled (in a good way!) between the transactional data and the search index.
 
 I really like a visual representation of performance, and being able to pull out traces:  
-![](Screenshot-2026-05-08-at-3.49.33-PM-1024x663.jpg)
+![Grafana Jaeger search listing traces for the mongot service's atlasSearchCoco image search operation with durations](Screenshot-2026-05-08-at-3.49.33-PM-1024x663.jpg)
 
 And then walk through the spans in a search trace:
-![](Screenshot-2026-05-08-at-3.49.59-PM-1024x807.jpg)
+![Jaeger trace waterfall of one mongot search command with expanded span attributes and the Lucene build_query span](Screenshot-2026-05-08-at-3.49.59-PM-1024x807.jpg)
 
 Really helps me understand the code and how it works. Of course, the additional tracing severely impacts performance, but if you want to, check out the branch and play with the Grafana dashboards!
 

@@ -25,7 +25,7 @@ We need a new metaphor, I argued, as traditional logging is prone to anti-patter
 
 More generally speaking, they don't offer a good way to specify intent. As a result, the logs become muddled with debugging messages, excavation attempts, warnings, and notices, to the point where we actually need AI systems to try and make sense of our mess.
 
-[![](twitter-362x510.png)](https://twitter.com/PR0GRAMMERHUM0R/status/1634902085228539905?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1634902085228539905%7Ctwgr%5E3f7b17a90d093b9c894fa7947b4e563a79dc5ad2%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2FPR0GRAMMERHUM0R%2Fstatus%2F16349020852285399053Fs3D20image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fabs.twimg.com252Ferrors252Flogo46x38.png26key3Da19fcc184b9711e1b4764040d3dc5c07 "![](twitter-362x510.png)")
+[![Meme tweet: Drake rejects 'Use a Debugger to debug your code' and approves 'Use a lot of print statements'](twitter-362x510.png)](https://twitter.com/PR0GRAMMERHUM0R/status/1634902085228539905?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1634902085228539905%7Ctwgr%5E3f7b17a90d093b9c894fa7947b4e563a79dc5ad2%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2FPR0GRAMMERHUM0R%2Fstatus%2F16349020852285399053Fs3D20image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fabs.twimg.com252Ferrors252Flogo46x38.png26key3Da19fcc184b9711e1b4764040d3dc5c07 "![Meme tweet: Drake rejects 'Use a Debugger to debug your code' and approves 'Use a lot of print statements'](twitter-362x510.png)")
 
 Newer standards such as OTEL have introduced new ways by which to holistically view logging, tracing, and metrics. These seem to demand similar innovation in the verbs and metaphors we use in our code in using them.
 
@@ -39,7 +39,7 @@ The library is called [Micrometer](https://micrometer.io/ "Micrometer") and its 
 
 Let's take a look at a few examples! Here is how I originally imagined the future of observability back in my 2021 blog post on 'breaking the fourth wall':
 
-![](0_FygxK5PQOuY83IXh-700x177.webp)
+![Code using cog.observe with a message, Severity.Warning and escalate_on(NonIsolated, EndUserImpact) to express logging intent](0_FygxK5PQOuY83IXh-700x177.webp)
 
 While not quite in the same direction, here is how one might define observability in code using Micrometer:
 
@@ -86,7 +86,7 @@ Second, notice how we didn't need to specify (or know) anything about specific o
 
 Below you can see the trace results captured via [Jaeger](https://www.jaegertracing.io/ "Jaeger"):
 
-![](1_GEROGxda0xVcVPf1VErAXQ-700x295.webp)
+![Jaeger trace for a PetClinic-Micrometer POST request showing a create_pet span with tags such as pet.name and pet.type](1_GEROGxda0xVcVPf1VErAXQ-700x295.webp)
 
 As a developer, it shifts the focus to intent, artifacts, and events rather than worrying about the underlying technologies and boilerplate. And if the above example is too verbose to your liking (I like the explicitness), there is also a slicker DSL-like interface for accomplishing the same result:
 

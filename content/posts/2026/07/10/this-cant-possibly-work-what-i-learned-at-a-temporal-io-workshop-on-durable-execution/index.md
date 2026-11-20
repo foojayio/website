@@ -14,7 +14,7 @@ related_posts:
 ---
 
 **When developers first hear about [Temporal](https://temporal.io/), they tend to move through a predictable sequence of emotions. First comes disbelief — the claim that your application can crash mid-execution and simply pick up where it left off, variables intact, sounds like nonsense. Then comes irritation that anyone would even say such a thing is possible. Then they try it, discover it actually works, and get very excited. And finally they ask the only question that matters: *how?***
-![](IMG_2977-1024x768.jpeg)
+![Workshop room of developers with laptops at tables, listening to the instructor at the front beside a slide titled Logistics](IMG_2977-1024x768.jpeg)
 
 That arc was the through-line of yesterday's very well attended [Developing Crash-Proof Java Applications](https://www.wearedevelopers.com/world-congress/agenda/workshops/developing-crash-proof-java-applications-1122204) hands-on workshop at [We Are Developers World Congress Europe in Berlin](https://www.wearedevelopers.com/world-congress), on building crash-proof Java applications with Temporal, led by [principal developer advocate Tom Wheeler](https://www.wearedevelopers.com/world-congress/speakers/tom-wheeler) — who cheerfully admitted he went through the exact same stages himself. He spent days trying to break the platform before joining the company. He couldn't.
 
@@ -54,7 +54,7 @@ The **Temporal Service** sits separately, managing task queues and event histori
 ## Seeing is believing
 
 The Temporal Web UI got singled out as "worth the price of admission." Every workflow execution — running or long finished — is inspectable: inputs, outputs, timelines, per-activity details down to which process on which machine executed each step.
-![](Timeline1-1024x590.jpg)
+![Temporal Web UI event history timeline for a 'canary' workflow, showing activities, timers and signals over about two seconds](Timeline1-1024x590.jpg)
 
 In the live demo, Tom killed the inventory service mid-order. The UI showed the reserve-inventory activity failing and retrying — attempt six, seven, eight — while the rest of the workflow simply waited.
 

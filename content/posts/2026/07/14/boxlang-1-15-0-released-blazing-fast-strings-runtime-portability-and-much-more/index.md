@@ -23,7 +23,7 @@ related_posts:
   - "boxlang-1-14-0-introducing-inner-classes"
 ---
 
-![](boxlang-v1.15.0-700x467.jpg)
+![BoxLang Release 1.15.0 banner with glowing blue and green waves](boxlang-v1.15.0-700x467.jpg)
 
 **BoxLang 1.15.0** is a high-impact release with two big headlines and a long tail of hardening. The first headline is a **massive performance upgrade to string handling** : a new first-class `BoxStringBuilder` type, compile-time literal folding, smarter `&=` semantics, and a runtime concat strategy that automatically switches to builder-backed accumulation once your expression gets big enough. Your existing string-heavy code just got faster. No rewrites required.
 
@@ -43,7 +43,7 @@ BoxLang 1.15.0 fixes this at four layers simultaneously: a new type, a new opera
 
 We benchmarked plain string concatenation against` StringBuilder.append()` across 100,000 iterations, with segment counts from 2 to 8 strings. The result:
 
-![](79a24b81f22a6aff9286ff09b5c23ecaf4afda72_2_690x394.png)
+![Line chart: String.concat() time grows steeply to about 18,600 ms at 8 strings while StringBuilder.append() stays near 5,000 ms](79a24b81f22a6aff9286ff09b5c23ecaf4afda72_2_690x394.png)
 
 Key takeaways:
 

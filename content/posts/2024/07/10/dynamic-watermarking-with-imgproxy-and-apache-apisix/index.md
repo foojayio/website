@@ -24,7 +24,7 @@ Another alternative is to use ready-made components, namely [imgproxy](https://i
 
 Here's the general sequence flow of the process:
 
-![](watermark_sequence_diagram.png)
+![Sequence diagram: APISIX forwards a watermark request to imgproxy, which fetches the image and logo, watermarks it and returns it.](watermark_sequence_diagram.png)
 
 * When APISIX receives a specific pattern, it calls `imgproxy` with the relevant parameters
 * `imgproxy` fetches the original image and the watermark to apply

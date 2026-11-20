@@ -40,7 +40,7 @@ When you start a Java application, the JVM can't run at full speed immediately. 
 * **Reaches Tier 2:** The JVM keeps watching. After it reaches a second threshold (e.g., 10,000 times), it re-compiles with heavy optimizations (Tier 2) based on how your code actually runs.
 
 This chart from Azul shows how performance improves over time in seconds \[Figure 1\]. The drops? Those are de-optimizations when the JVM realizes its assumptions used for the Tier 2 compilation were wrong:
-![](chart-speed-optimization-level-1024x538.jpg)
+![Chart of JVM speed over time: interpreted and profiled code give way to optimized code, reaching full speed after about 70 seconds](chart-speed-optimization-level-1024x538.jpg)
 
 But while all these compilations are happening, your app also needs to handle requests. The JVM is conservative and prevents the compilations from interfering too much with your application. So warmup can take a while.
 
@@ -157,7 +157,7 @@ java -XX:ProfileLogIn=/var/app/profiles/readynow.profile \
 ```
 
 The first run creates a profile that includes all compiler decisions. Subsequent runs read this profile and immediately compile all methods to produce the optimal code based on the information from the previous run. No waiting for invocation thresholds. The warmup time drops dramatically \[Figure 2\].
-![](CHART-ReadyNow-Warmup-1024x585-1.avif)
+![Chart comparing JVM warmup with and without ReadyNow, which reaches peak performance much sooner](CHART-ReadyNow-Warmup-1024x585-1.avif)
 
 You can update the profile across multiple runs when you specify both a `ProfileLogIn` and `ProfileLogOut` and reuse the out-file as the in-file in a following run. After a few iterations, you've got an optimal profile that captures your app's actual behavior.
 
@@ -197,7 +197,7 @@ The ReadyNow Orchestrator service handles profile management for you \[Figure 3\
 * From all those profiles, the best one is automatically promoted.
 * It serves the optimal profile to new instances.
 
-![](optimizer-hub-jvm-flows-300x268-1.avif)
+![Diagram of Optimizer Hub collecting profiles from JVM instances and serving the best profile to new instances](optimizer-hub-jvm-flows-300x268-1.avif)
 
 ### Setting it up
 

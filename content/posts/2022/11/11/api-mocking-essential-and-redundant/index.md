@@ -19,12 +19,12 @@ I love contradictions where both states of truth can work at the same time.
 
 Case in point is this tweet about mocking from the other week:
 
-![](Screen-Shot-2022-10-25-at-14.53.38-700x263.png)
+![Tweet by Maxi Contieri: 'If you use mocks, you are not testing.'](Screen-Shot-2022-10-25-at-14.53.38-700x263.png)
 > [If you use mocks, you are not testing](https://twitter.com/mcsee1/status/1582762075289374720)
 
 My answer was:
 
-![](Screen-Shot-2022-10-25-at-14.55.58-700x457.png)
+![Tweet reply by Shai Almog arguing mocks are a fast, essential part of a wider quality strategy, though not enough alone](Screen-Shot-2022-10-25-at-14.55.58-700x457.png)
 > \[Mocks help assert limited fixed functionality and they do it FAST.
 >
 > Which is what unit tests are about. Mocks are an essential part of a wider quality strategy. Otherwise you will spend your time in integration test churn.

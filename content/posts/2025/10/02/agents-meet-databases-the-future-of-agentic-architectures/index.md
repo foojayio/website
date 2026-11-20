@@ -26,7 +26,7 @@ Enter the Model Context Protocol (MCP), originally developed by Anthropic. MCP h
 Agents are LLM-based systems that have access to tools: functionalities or resources they can use to perform tasks beyond their native capabilities. What defines them is the ability to autonomously decide when and how to use these tools, whether independently, within a structured workflow, or with a human in the loop.
 
 **Figure 1.** Core components of an agent: perception, planning, tools, and memory.
-![](Screenshot-2025-10-02-at-9.56.39-AM-1024x447.png)
+![Diagram of an AI agent's perception, planning, tools and memory components, with those supported by MongoDB highlighted in green](Screenshot-2025-10-02-at-9.56.39-AM-1024x447.png)
 
 Granting agents the ability to directly query and interact with database data enables a range of powerful use cases. Examples include generating application code based on available collections and schemas, or retrieving the latest customer information to resolve support issues.
 
@@ -39,7 +39,7 @@ MCP servers offer a plug-and-play approach to integrating agents with databases.
 MCP provides agents with a standardized interface for database interaction. These servers can be deployed locally or remotely. A remote server allows multiple clients to access the same instance, making it ideal for shared environments. Your choice between local and remote deployment depends on your performance, scalability, and security needs. Remote deployments, in particular, may require additional considerations such as authentication mechanisms to ensure secure access.
 
 **Figure 2.** Architecture diagram showing an agent interfacing with the MongoDB MCP Server.
-![](Screenshot-2025-10-02-at-9.57.25-AM-1024x469.png)
+![Diagram of an agent with an MCP client and LLM connecting to the MongoDB MCP Server, which exposes Atlas and database tools](Screenshot-2025-10-02-at-9.57.25-AM-1024x469.png)
 
 The upsides of this approach are:
 

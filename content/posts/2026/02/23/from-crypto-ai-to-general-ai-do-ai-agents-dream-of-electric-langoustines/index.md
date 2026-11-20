@@ -58,7 +58,7 @@ At a system level, the goal is simple.
 Replace "one provider, many API keys" with "one payment-enabled access surface that can reach many paid APIs and models," so agents can quote, pay, and retrieve results without account setup.
 
 To tackle this topic, we need to start by breaking down discovery, routing, identity, and paid endpoints in a production-shaped workflow.  
-![](ChatGPT-Image-19.-2.-2026-18_43_09.jpg)
+![AI-generated cinematic image of a man lying on a couch speaking into a microphone with a langoustine on his chest, beside retro computers](ChatGPT-Image-19.-2.-2026-18_43_09.jpg)
 
 ## What changed in x402 and ERC-8004 in the last month or so?
 
@@ -107,7 +107,7 @@ Once this becomes normal, the important question shifts from UI polish to infras
 
   OpenClaw does not wrap Claude Code. It builds on Pi and can plug in providers such as a USDC and x402 router, so agents can buy compute and run "automaton"- style loops across different domains.
 
-![](u69Dr_Aa.jpeg)
+![GitHub page of the openclaw/openclaw repository: personal AI assistant with a red lobster logo, 197k stars and 34k forks](u69Dr_Aa.jpeg)
 
 That is the moment the agent economy starts to look less like a set of disparate demos and more like a system.  
 
@@ -212,7 +212,7 @@ A human can stay in the loop, but the workflow does not depend on it.
 
 Besides running its own Twitter account. Pretty kickass.
 
-![](HBB0eQsbkAAg38o.jpeg)
+![Tweet-style banner of a motorcyclist: xgate.run, an optimised discovery layer for agents and x402 endpoints, ready for OpenClaw agents](HBB0eQsbkAAg38o.jpeg)
 
 [DayDreams](https://www.daydreams.systems/) provides the Langoustine with a commerce layer that lets the agent publish [x402](https://www.x402.org/) endpoints, register [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) identities, and get discovered through xgate.run.
 
@@ -316,7 +316,7 @@ Lucid integrates all of this into an SDK and runtime, so builders ship services 
 This matters for general AI because it reduces friction in standard developer workflows.  
 
 It also enables a path where agents pay for tools in the background while products still feel like standard SaaS.  
-![](1500x500.png)
+![DayDreams.systems banner on a dark grid with three yellow icons labelled Framework, Lucid and Router](1500x500.png)
 
 ## So, Agentic commerce has developed. What else does the stack need?
 
@@ -408,4 +408,4 @@ Agents search, verify, pay, and call services in the background.
 ***But the direction is clear.***
 
 ***The first contact has been made.***   
-![](HAYbz8NXQAACAIj.jpeg)
+![Lobster claw reaching toward a human hand, a parody of Michelangelo's Creation of Adam, symbolizing first contact with AI agents](HAYbz8NXQAACAIj.jpeg)

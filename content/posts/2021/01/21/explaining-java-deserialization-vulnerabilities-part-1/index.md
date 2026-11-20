@@ -61,10 +61,10 @@ fileOut.close();
 ```
 
 When reading the file `ValueObject.ser` containing the serialized object with a hex-editor the output is this:
-![](image-7-1024x433.jpg)
+![Hex dump of the serialized ValueObject file with the string value 'Hi' highlighted at the end](image-7-1024x433.jpg)
 
 Now I can easily manipulate the string value. Below I change it from `Hi` to `Hallo`:
-![](image-8-1024x411.jpg)
+![Hex dump of the serialized file after editing, with the string value changed to 'Hallo'](image-8-1024x411.jpg)
 
 ```java
 FileInputStream fileIn = new FileInputStream("ValueObject2.ser");

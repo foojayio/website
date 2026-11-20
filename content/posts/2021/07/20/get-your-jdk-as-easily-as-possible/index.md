@@ -31,7 +31,7 @@ Long story short, we created plugins for Intellij Idea, Eclipse, and Visual Stud
 To keep it as simple as possible, I've tried to reduce the user interface of the plugin to a minimum.
 
 In principle, it is just a list of dropdown boxes that enables the user to drill down to the package of their choice. Let me take the IntelliJ IDEA plugin as an example:
-![](IntellijPlugin-354x510.png)
+![Foojay JDK Discovery Service IntelliJ plugin dialog with dropdowns for version, distribution, OS, architecture and archive type, plus a Download button](IntellijPlugin-354x510.png)
 
 As you can see it is not a very fancy user interface but focused on functionality. 😁
 
@@ -65,7 +65,7 @@ So why not create plugins for the browsers to make it even easier to get a JDK?
 ### **Browser Plugins**
 
 And so I did, there are now plugins for Chrome, Edge, Firefox, and Safari. And because I don't want to reinvent the wheel, I simply made them look exactly the same as the IDE plugins. Here is a screenshot that shows all four plugins in their browser:
-![](BrowserPlugins-700x295.jpg)
+![The JDK discovery plugin shown in Chrome, Safari, Firefox and Edge, each with the same version and distribution dropdowns](BrowserPlugins-700x295.jpg)
 
 As you can see, they look more or less all the same and the functionality is the same as in the IDE plugins.
 

@@ -80,7 +80,7 @@ In some cases, EDA and CDC can complement each other. For example:
 * **Scenario:** Your e-commerce system emits an **OrderPlaced** event when an order is created. However, for reporting purposes, you also need to track changes to the **Orders** database table.
 * **Solution:** Use EDA to orchestrate workflows (like payment processing and inventory updates) and CDC to feed data into your reporting or analytics system.
 
-![](https://mezocode.com/wp-content/uploads/2024/12/Screenshot-1446-06-01-at-4.15.47 PM.png)
+![Screenshot of a mezocode.com image illustrating the OrderPlaced event scenario](https://mezocode.com/wp-content/uploads/2024/12/Screenshot-1446-06-01-at-4.15.47 PM.png)
 
 **Explanation**:
 

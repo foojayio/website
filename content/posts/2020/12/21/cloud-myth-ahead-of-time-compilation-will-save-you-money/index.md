@@ -69,7 +69,7 @@ Imagine we have a microservice that takes 50ms to execute we will explore typica
 
 In the table below, I use a "typical" cost based on Azure and AWS pricing, which is very similar.
 
-![](table1-700x281.jpg)
+![Table of annual cost by memory size (1GB to 128MB) at 10, 100 and 1000 requests per second, falling as memory shrinks](table1-700x281.jpg)
 
 The table shows annual cost (£) for running a serverless function at continuous request rates running from 10 requests per second through to 1000 requests per second for various memory usages. As you can see the annual cost for a service running at 10 requests per second utilising 1GB of memory is £263 whereas as a service utilising 128MB is £33 as expected 1/8th of the cost. This looks huge on a proportional basis however the absolute annual saving is £230 which is very small.
 
@@ -89,7 +89,7 @@ Typically a Jakarta EE microservice can easily run within a 1GB memory allocatio
 
 The table below shows the typical annual cost (£) of running a container instance 24/7/365 in different memory and CPU shapes.
 
-![](table-2.jpg)
+![Table of annual cost by instance shape, from 394 for 1 cpu 1GB to 864 for 2 cpu 4GB](table-2.jpg)
 
 From this, you can see that the cost is more sensitive to the number of CPUs allocated than the memory allocated to the container. For example the difference between an instance with 2 CPU and 1GB of memory and an instance with 2 CPU and 4 GB of memory is only £116 over the year.
 

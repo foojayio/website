@@ -16,7 +16,7 @@ related_posts:
   - "foojay-podcast-67"
 ---
 
-![](wpf3-415x510.jpeg)
+![Cover of 'Why Programs Fail: A Guide to Systematic Debugging, Second Edition' by Andreas Zeller, with colourful toy blocks](wpf3-415x510.jpeg)
 
 When I got my new job as developer advocate at Lightrun, one of the first things I asked for was books. Lots of books. Some of them cover my new job and others talk about debugging. I've been debugging for decades, but I feel like the theory around debugging is a bit vague. My goal was to bolster my terminology used by academics and peers. A secondary goal is to see how others teach ideas related to debugging.
 

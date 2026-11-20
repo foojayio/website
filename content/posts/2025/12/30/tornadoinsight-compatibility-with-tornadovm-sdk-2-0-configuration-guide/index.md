@@ -125,7 +125,7 @@ If the variable is present, TornadoInsight will automatically detect the Tornado
 ## **Summary**
 
 If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.
-![](screenshot_aa1940fc-c2d6-4120-95fc-2df46-bb9c5e73.jpg)
+![TornadoInsight settings in IntelliJ IDEA with a warning that the TORNADOVM_HOME environment variable is not set](screenshot_aa1940fc-c2d6-4120-95fc-2df46-bb9c5e73.jpg)
 
 Some common issues are listed here:
 

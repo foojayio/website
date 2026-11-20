@@ -19,7 +19,7 @@ related_posts:
   - "why-developers-should-use-apache-pulsar"
 ---
 
-![](0_Yj9vaj0to8ZAf9NJ-1-1024x682.jpeg)
+![Man in a suit touching a wall of floating screens with charts and data, illustrating data streaming](0_Yj9vaj0to8ZAf9NJ-1-1024x682.jpeg)
 
 *This post introduces developers to* [*DataStax Astra Streaming*](https://astra.dev/3SZLxE1)*with a step-by-step tutorial that illustrates how it can be used to easily build scalable, streaming applications.*
 
@@ -46,7 +46,7 @@ To build our streaming pipeline for tracking objects in real-time and historical
 * A Java producer that will publish events to the `object_location` topic.
 * An [Astra](https://astra.dev/3SZLxE1) database with two tables that get data from the `object_location` topic.
 
-![](0_60OmPaLhWm_Fg96_.png) Figure 1: All the moving parts we'll need to build for this demo.
+![Architecture diagram: a Java producer publishes to an Astra Streaming topic that feeds two Astra database tables](0_60OmPaLhWm_Fg96_.png) Figure 1: All the moving parts we'll need to build for this demo.
 
 In our object tracking example, a single topic will feed data into two different tables. The `object_location` table records only the most recent known location for an object while the `object_location_history` records all locations that an object has been located at any given time. The location history data is useful for different types of analyses, such as analyzing the flow of different objects through the airport terminal.
 
@@ -65,23 +65,23 @@ You can create your [Astra Streaming](https://astra.dev/3SZLxE1) on one cloud pr
 While it is possible to create an access token that grants you access to all of your databases, I highly recommend creating database-specific tokens based on custom roles. On more than one occasion, I've accidentally leaked security tokens into GitHub (errors that I corrected within minutes). The only thing that's saved my bacon is the fact that the token was restricted to a single database. If you're not familiar with the process for creating a token, I'll show you how to do that in this section.
 
 After you have created the database, click on the "down arrow" next to your organization name, as shown in the red square in the following image.
-![](0_tqnoGodwfUrOeOFq.png) Figure 2: Accessing your organization settings.
+![DataStax Astra console with the organization dropdown highlighted next to the airport-demo database](0_tqnoGodwfUrOeOFq.png) Figure 2: Accessing your organization settings.
 
 This will bring up a menu. Click on the `Organization Settings` menu item. Once the page loads, click on the `Role Management` menu item on the left side of the page and press the `Add Custom Role` button. Give your role a meaningful name. As you can see in the following image, I named my custom role `airport-demo`. Then you can start selecting the permissions for your role. Since this role will be specific to a database built for demo purposes, I tend to be pretty liberal with my permissions. Set your permissions to suit your needs and scroll down to access the rest of the page.
-![](0_U4RatnehQy_adGF1.png) Figure 3: Define the permissions for your custom role.
+![Astra Create Role dialog named airport-demo with organization permissions checkboxes](0_U4RatnehQy_adGF1.png) Figure 3: Define the permissions for your custom role.
 
 Select the keyspace permission and table permissions as appropriate. I like to enable all of the APIs for my databases, so I usually select them all. The most important step occurs at the very bottom where you select the single database for which this role applies.
-![](0_xC8xT6H5GZsyLp6R.png) Figure 4: Finishing the custom role definition.
+![Astra role form with keyspace, table and API access permissions, scoped to the airport-demo database](0_xC8xT6H5GZsyLp6R.png) Figure 4: Finishing the custom role definition.
 
 When you are satisfied with your role configuration press the `Create Role` button.
 
 ## Generating your database token
 
 Now you can create a security token that is specific to your customer role and database. Select the `Token Management` menu item. Then select the custom role you created earlier and press the `Generate Token` button.
-![](0_m3ARgUdUAtt7NB3R.png) Figure 5: Generating a token.
+![Astra Token Management page with the airport-demo role selected and a Generate Token button](0_m3ARgUdUAtt7NB3R.png) Figure 5: Generating a token.
 
 You'll need to exercise some caution here because the dialog box that pops up will never be displayed again. You'll need this token information in your source code to connect to the database from Astra Streaming. So, you might want to press the ***Download Token Details*** button to download a CSV file with your token.
-![](0_BAvmShLukcYXe-8v.png) Figure 6: This information will never be shown to you again! Take this opportunity to download it.
+![Astra dialog showing the generated client ID, client secret and token (redacted) with a Download Token Details button](0_BAvmShLukcYXe-8v.png) Figure 6: This information will never be shown to you again! Take this opportunity to download it.
 
 ## Create the Astra Streaming components
 
@@ -90,22 +90,22 @@ Now we're going to shift gears and create the [Astra Streaming](https://astra.de
 ## Create the Astra Streaming tenant
 
 An Astra tenant is the top-level object for streaming. You can think of a tenant as akin to an application or a database. Create a new streaming tenant in the [Astra DB](https://astra.dev/3SZLxE1) web console and name it `airport-events`. When the tenant is fully created and running you will see a small green dot to the left of its name and the dashboard for the tenant will show up in your browser, as shown in the following image.
-![](0_rsPw9QwfIaRBaIwf.png) Figure 7: The airport-events tenant dashboard.
+![Astra Streaming quickstart page for the airport-events tenant, with steps to create a tenant, namespace and topic](0_rsPw9QwfIaRBaIwf.png) Figure 7: The airport-events tenant dashboard.
 
 ## Create the Astra Streaming namespace
 
 This step is optional because there is a default namespace created for you when you create a tenant. However, I like to keep things organized and isolated so I strongly recommend that you create a namespace for the airport-demo. Click on the `Namespaces` tab.
-![](0_0G4pEBJXCoivo2qL.png) Figure 8: Creating a namespace in Astra Streaming.
+![Astra Streaming Namespaces tab with the Namespaces tab and Create namespace link highlighted](0_0G4pEBJXCoivo2qL.png) Figure 8: Creating a namespace in Astra Streaming.
 
 Set the namespace to `airport` and press the `create` button. It's just that easy!
 
 ## Create the Astra Streaming Topic
 
 Our next step is to create the topic for our object location events. Click on the `Topics` tab in the dashboard. By default, you will see both the new `airport` namespace and the default namespace listed in the dashboard. Click the `Add Topic` button in the `airport` namespace to create the new topic.
-![](0__15XVK-Ro0DQYFal.png) Figure 9: Creating a topic in the airport namespace.
+![Astra Streaming Topics tab with the airport namespace and its Add Topic button highlighted](0__15XVK-Ro0DQYFal.png) Figure 9: Creating a topic in the airport namespace.
 
 You only need to specify the name of the topic, `object-location` as shown in the next image.
-![](0_WtzPWE9x6_LLXdxr.png) Figure 10: Creating the object-location topic in the airport namespace.
+![Add Topic form with the name object-location, persistent enabled, and Save and Cancel buttons](0_WtzPWE9x6_LLXdxr.png) Figure 10: Creating the object-location topic in the airport namespace.
 
 Press the `Save` button. At this point, we have a topic on which we can publish events. However, those events don't go anywhere just yet. Next, we will create two "sinks'' that will consume the events and store them in a database. A "sink" in streaming terms is either an [Astra DB](https://astra.dev/3SZLxE1) or an [ElasticSearch](https://www.elastic.co/elasticsearch/) instance. For this article, we will use the [Astra DB](https://astra.dev/3SZLxE1) to store our events.
 
@@ -116,19 +116,19 @@ The mechanism that [Astra Streaming](https://astra.dev/3SZLxE1) uses to store ev
 ## Create the object-location sink
 
 Our first sink will store the event on the `object_location` table. This table is different from the `object_location_history` table in that it does **not** have the `ts` (timestamp) field. Click on the `Sinks` tab and then press the `Create Sink` button.
-![](0_ncYrW0W6ZiHh5aGf.png) Figure 11: Creating the sink for the object_location table in our Astra DB.
+![Astra Streaming Sinks tab with the Sinks tab and Create Sink link highlighted](0_ncYrW0W6ZiHh5aGf.png) Figure 11: Creating the sink for the object_location table in our Astra DB.
 
 In Step 1 of the wizard, select the fields as shown in the following image.
-![](0_dspQGj73RA0JNFMx.png) Figure 12: Step 1-Create the object-location sink.
+![Create New Sink step 1: namespace airport, sink type Astra DB and name object-location](0_dspQGj73RA0JNFMx.png) Figure 12: Step 1-Create the object-location sink.
 
 Be sure to select the `object-location` topic in Step 1 of the wizard.
-![](0_nHdITPVo-UhEMIIo.png) Figure 13: Step 2-Select the topic.
+![Create New Sink step 2: the object-location topic selected as the sink's input](0_nHdITPVo-UhEMIIo.png) Figure 13: Step 2-Select the topic.
 
 Next, you need to provide the connectivity information for your database. All of the information is important, but the database token is probably the most critical piece here. After you have pasted your token in, press the TAB button to exit the token field. This will prompt the [Astra](https://astra.dev/3SZLxE1) website to inspect your database and table and generate the field mappings, as you will see next.
-![](0_4oXutXoGzdW1DVCn.png) Figure 14: Step 3-Specify the database you want to use.
+![Sink configuration step: database airport-demo, keyspace airport, table object_location and a masked token](0_4oXutXoGzdW1DVCn.png) Figure 14: Step 3-Specify the database you want to use.
 
 The field mapping is done automatically for you. Notice that the automatic mapping only concerns itself with the fields in the table you have specified. There is no schema for the overall topic yet because we haven't sent any messages over the topic (we will get to that in a little bit). I have yet to find a condition where the automatic mapping is incorrect, but it never hurts to check twice! Also, you can now expand the area for the `object_location` schema and view the details there as shown in the following image.
-![](0_Vjx3tFExFTiN_9np.png) Figure 15: Notice the field mapping is automatically generated for you.
+![Sink field mapping name=value.name, type, x and y, with the object_location schema shown below](0_Vjx3tFExFTiN_9np.png) Figure 15: Notice the field mapping is automatically generated for you.
 
 Press the `Create` button to create the sink.
 
@@ -141,7 +141,7 @@ Now to create our second sink, the one that will capture information into the `o
 * **Table Name** : `object_location_history`
 
 This time when you enter the database token and TAB out of the field, the mapping will appear a little differently as shown below.
-![](0_eEiMPNDdB2bfxP8_.png) Figure 16: Notice the field mapping is slightly different for this sink.
+![Sink field mapping for the history table, with the added ts=value.ts timestamp mapping underlined](0_eEiMPNDdB2bfxP8_.png) Figure 16: Notice the field mapping is slightly different for this sink.
 
 You see here the `ts` or `timestamp` field (a Java long data type) is included in the mapping. Press the `Create` button to create this sink.
 
@@ -196,20 +196,20 @@ public void run() {
 ```
 
 The `producer.send(objLoc)` takes a native Java POJO that watches the schema expected and sends it over the topic. Note that you don't have to serialize your object. The Pulsar libraries are smart enough to take care of that for you! Also, the very first time you run this code (which we will do next), [Astra Streaming](https://astra.dev/3SZLxE1) will record the schema for the message type. You can view that schema by navigating to your topic and clicking on the ***Schema*** tab, as shown next.
-![](0_9gll9LTr_rtwEtyl.png) Figure 17: Viewing a topic schema.
+![Astra Streaming schema tab showing the JSON record schema for ObjectLocation, including name and long ts fields](0_9gll9LTr_rtwEtyl.png) Figure 17: Viewing a topic schema.
 
 ## Seeing it in action
 
 If you load the project up in an editor like [VS Code](https://code.visualstudio.com/) you can run the App class to see the application in action. When you do, you will see output like the following:
-![](0_mWsvrCJp4m66R19J.png) Figure 18: Events generated by the producer.
+![Console output of the Java producer sending ABS2045 Boeing 737 positions, x decreasing from 0 to -15](0_mWsvrCJp4m66R19J.png) Figure 18: Events generated by the producer.
 
 From the output above, we can see that the producer is generating events/messages on our topic. Now let's check our database tables to see the data that was recorded. I'm going to use the CQLShell window on the [Astra](https://astra.dev/3SZLxE1) website to keep things simple. Let's start by looking at the `object_location` table.
-![](0_v43ESgR7axRQizjx.png) Figure 19: There should be a single record in your object_location table.
+![CQL console query on object_location returning one row: ABS2045, Boeing 737 at x -15.0, y 0.0](0_v43ESgR7axRQizjx.png) Figure 19: There should be a single record in your object_location table.
 
 Remember, the purpose of this table is to record the last known location of an object, a Boeing 737 in this case. Your X and Y coordinates will vary depending on when you stopped the application from creating messages.
 
 Now let's take a look at our `object_location_history` table:
-![](0_HSvIZalTAr3p4rUF.png) Figure 20: Our object_location_history table's data.
+![CQL console query on object_location_history returning 16 rows with timestamps and x from 0 to -15](0_HSvIZalTAr3p4rUF.png) Figure 20: Our object_location_history table's data.
 
 ## Try it yourself!
 

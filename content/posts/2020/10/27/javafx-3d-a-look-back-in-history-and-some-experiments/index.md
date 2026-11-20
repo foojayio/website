@@ -30,7 +30,7 @@ But by JavaFX 8, it became apparent that certain use cases needed 3D graphics. F
 {{< youtube AS26gZrYNy8 >}}
 
 Work on 3D graphics capabilities within JavaFX progressed to the point that 3D characters could be animated with JavaFX. At JavaOne 2013, a chessboard with animated Duke chess pieces was presented at the keynote demo. This animated demo was presented along with a robotic arm that controlled a 3D-printed version of these Duke chess pieces, controlled from the same server.
-![](Screenshot-from-2020-10-25-22-04-10-1024x521.jpg)
+![Blurry frame of a 3D animated chess game rendered in JavaFX, with white and black pieces on a perspective board](Screenshot-from-2020-10-25-22-04-10-1024x521.jpg)
 
 {{< youtube 4og3QCOnSaQ >}}
 
@@ -59,7 +59,7 @@ For the upcoming version 16 of OpenJFX, better support for embedded devices runn
 </figure>
 
 Another valuable resource for JavaFX 3D is available at the [GitHub project "FXyz3D"](https://github.com/FXyz/FXyz). This allows you to create many different 3D custom shapes and even has a GUI application which allows you to visualize all the samples and the different options.
-![](fxsampler-1024x655.png)
+![FXyz sampler app showing a rainbow-coloured 3D spring mesh with texture and geometry controls on the right](fxsampler-1024x655.png)
 
 Chess seems to be a popular topic for 3D-experiments as this final impressive example shows. In this application, both a 2D and 3D board are combined and show the same moves simultanously.
 
@@ -86,9 +86,9 @@ This application renders a water molecule in JavaFX 3D.
 This application can load different 3D image file formats and visualize them.
 
 {{< gallery cols="3" >}}
-duke-welcome-1.jpg
-MoleculeSampleApp.png
-3DViewer.png
+duke-welcome-1.jpg | | Duke waving above the text 'Welcome to the Duke Repository'
+MoleculeSampleApp.png | | JavaFX Molecule Sample Application window showing a large red sphere joined to two white spheres, like a water molecule
+3DViewer.png | | JavaFX 3D viewer showing a white chess king model with a red sphere, and a settings panel with camera sliders
 {{< /gallery >}}
 
 ### **Build and run on PC**

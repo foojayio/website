@@ -137,7 +137,7 @@ Version 1.2 has a new GRPC route that is not found in version 1.0. This way, tea
 
 CRDs are cluster-wide resources, but there's no conflict since the virtual clusters behave like isolated clusters. Each team can happily use the version they need without forcing others to use it.
 
-![](deployment-vcluster.png)
+![Diagram of a host cluster containing separate Team B and Team X virtual clusters, each used by its own team](deployment-vcluster.png)
 
 ## Conclusion
 

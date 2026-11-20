@@ -61,7 +61,7 @@ Two things of note:
 
 Therefore, we can design our architecture as the following:
 
-![](overall-architecture.png)
+![Component diagram: a client calls Apache APISIX over http, which calls an ETCD adapter over gRPC, which stores data in MySQL](overall-architecture.png)
 
 ## Demo
 
@@ -176,7 +176,7 @@ curl -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' http://localhost:9180/apis
 
 We can also check via the Adminer interface that it has been persisted via MySQL:
 
-![](adminer.jpg)
+![Adminer view of the kine table in the apisix MySQL database, showing APISIX configuration entries and a route persisted](adminer.jpg)
 
 Unfortunately, we need to stop at this point. Getting all routes doesn't work:
 

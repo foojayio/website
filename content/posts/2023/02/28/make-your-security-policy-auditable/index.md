@@ -148,7 +148,7 @@ internal class TokenAuthenticationManager(
 
 The whole flow can be summarized as the following:
 
-[![](spring-security-obfuscated-flow-1024x992.png)](spring-security-obfuscated-flow.png)
+[![Sequence diagram: the app checks authorization, queries accounts and employees and applies hierarchy rules to return 200 or 401](spring-security-obfuscated-flow-1024x992.png)](spring-security-obfuscated-flow.png)
 
 Now, we can try some requests.
 
@@ -232,7 +232,7 @@ A more robust approach is to let OPA access external data to separate responsibi
 
 OPA offers [many options](https://www.openpolicyagent.org/docs/latest/external-data/) to achieve it. Here, I pretend to extract data from the `Employee` database, bundle it together with the policy file, serve the bundle via HTTP, and configure OPA to load it at regular intervals.
 
-[![](bundle-refresh-1024x1000.png)](bundle-refresh.png)
+[![Sequence diagram: an extractor bundles policy and employee data for OPA, which refreshes it from Apache APISIX at intervals](bundle-refresh-1024x1000.png)](bundle-refresh.png)
 
 Note that you shouldn't use Apache APISIX only to serve static files. But since I'll be using it in the next evolution of my architecture, I want to avoid having a separate HTTP server to simplify the system.
 
@@ -271,7 +271,7 @@ internal class OpaAuthenticationManager(
 
 The flow is now the following:
 
-[![](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png) At this point, we moved the authorization logic from the code to OPA.
+[![Sequence diagram: the app authenticates the user, sends JSON input to OPA and returns 200 or 401 based on its decision](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png) At this point, we moved the authorization logic from the code to OPA.
 
 ## Moving authentication to the API Gateway
 
@@ -361,7 +361,7 @@ internal fun validateOpa(
 
 The final flow is the following:
 
-[![](no-spring-security-flow-1024x823.png)](no-spring-security-flow.png)
+[![Sequence diagram: Apache APISIX authenticates the request, then the app asks OPA for a decision and returns 200 or 401](no-spring-security-flow-1024x823.png)](no-spring-security-flow.png)
 
 ## Conclusion
 

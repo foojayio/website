@@ -34,7 +34,7 @@ This release of Azul Zulu comes with IANA Time Zone Database version 2022g.
 Why do we need a new version of the time zone and currency database every few months?
 
 Let's find out…
-![](timezone-currency-1024x400.jpg)
+![Decorative banner of a clock face with currency symbols over hexadecimal digits](timezone-currency-1024x400.jpg)
 
 ## Time Zone Database
 
@@ -57,7 +57,7 @@ The Java time zone information is based on the Time Zone Database of the [Intern
 The IANA announces changes via two different mailing lists, in which proposals for database updates are discussed.
 
 If we look at the IANA website, we see precisely this version **2022g** that was included in the January release notes of Zulu.
-![](iana-website-2022g-2048x1033-1-1024x517.png)
+![IANA Time Zone Database web page showing the latest version, 2022g, released 2022-11-29, with download links](iana-website-2022g-2048x1033-1-1024x517.png)
 
 In Java, the ZoneRulesProvider provides access to this information. The JavaDoc of this class says: "*The Java virtual machine has a default provider that provides zone rules for the time-zones defined by IANA Time Zone Database (TZDB).* " Another vital aspect described in the JavaDoc: "*Time-zone rules are political, thus the data can change at any time. Each provider will provide the latest rules for each zone ID, but they may also provide the history of how the rules changed.*"
 
@@ -200,7 +200,7 @@ The data directory in the OpenJDK sources contains another file that can change 
 * [JDK-8296239](https://bugs.openjdk.java.net/browse/JDK-8296239): ISO 4217 Amendment 174 Update, 02 November 2022: currency changes for CROATIA.
 
 The third one is caused by Croatia joining the group of countries where the EURO is used as the currency. We can see this is reflected in the changes in [this pull request](https://github.com/openjdk/jdk/pull/10994/files):
-![](croatia-euro-1024x355.png)
+![Code diff of CurrencyData.properties changing dataVersion from 173 to 174 and Croatia's currency from HRK to switch to EUR on 2022-12-31](croatia-euro-1024x355.png)
 
 ### Code Examples of Currency Usage
 

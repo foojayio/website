@@ -39,8 +39,8 @@ Some examples:
 * **[Rhode recording kit](https://www.thomann.de/intl/rode_complete_studio_kit.htm)**: includes an interface to connect and adjust the volume of a headset easily
 
 {{< gallery >}}
-blue-snowball.png
-rhode-studio-kit.jpg
+blue-snowball.png | | Blue Snowball USB microphone on a small tripod stand
+rhode-studio-kit.jpg | | Rode studio kit with a large-diaphragm condenser microphone in a shock mount and an audio interface
 {{< /gallery >}}
 
 If you use audio recording software, like Audacity, adjust the level to record at -10db.
@@ -77,7 +77,7 @@ Record yourself for the explanation:
 I found out **Zoom** is an excellent tool for recording podcasts with several remote guests. If you go into the recording preferences of the program, you can select "Record a separate file of each participant."
 
 When you finish the recording, you'll find a file per meeting guest, which makes editing and finetuning each speaker's sound very easy!
-![](zoom-setting-audio-track-per-person-1024x522.png)
+![Zoom recording settings with 'Record a separate audio file of each participant' checked and highlighted by a red arrow](zoom-setting-audio-track-per-person-1024x522.png)
 
 Another important tip: make sure multiple people make a recording simultaneously. In case the connection of one of you drops, the file is corrupted,... Better to be safe than sorry!
 
@@ -88,9 +88,9 @@ The [**ATEM Mini**](https://www.blackmagicdesign.com/products/atemmini) is a ver
 The ATEM is recognized as a webcam when connected via USB to your computer. You can do live video cutting during a recording or call when you want to switch between cameras and computer screens easily, and you can even do a picture-in-picture.
 
 {{< gallery >}}
-atem-software-1024x590.png
-atem-in-action-1-1024x768.jpg
-atem-p-in-p-1024x573.jpg
+atem-software-1024x590.png | | ATEM Software Control for the ATEM Mini Pro, with camera 4 on program and picture-in-picture settings
+atem-in-action-1-1024x768.jpg | | ATEM Mini Pro hardware switcher with input 4 lit red as the live source
+atem-p-in-p-1024x573.jpg | | Picture-in-picture video: the presenter waves in an inset above a Raspberry Pi and an educational electronics case
 {{< /gallery >}}
 
 Be careful, webcams only have a USB output, so they can not be used with the ATEM. If you can find a Raspberry Pi (chip and stock problems...), you can use those as a cheap camera as [described here](https://webtechie.be/post/2021-12-20-raspberry-pi-as-hdmi-camera-for-atem-mini/).
@@ -106,9 +106,9 @@ For video editing, [**DaVinci Resolve** by Blackmagic Design](https://www.blackm
 I also use DaVinci Resolve for podcast editing, as I bought the additional **[Speed Editor](https://www.blackmagicdesign.com/products/davinciresolve/keyboard)**, which enables cutting "euhs", repeats, and pauses with the push of a few buttons. This approach speeds up the editing process significantly! You can buy this device included with a license for the full version of DaVinci Resolve, but if you search on eBay, you can also find it a lot cheaper without such a license if you already have one.
 
 {{< gallery >}}
-podcast-editing-audacity-1024x695.png
-podcast-editing-davinci-1024x614.jpg
-IMG_20230316_162046-1024x768.jpg
+podcast-editing-audacity-1024x695.png | | Audacity with three audio tracks, one for each podcast participant
+podcast-editing-davinci-1024x614.jpg | | DaVinci Resolve editing the Foojay Podcast #18 timeline with three video participants and audio tracks
+IMG_20230316_162046-1024x768.jpg | | DaVinci Resolve Speed Editor keyboard with a jog wheel, placed in front of a computer keyboard
 {{< /gallery >}}
 
 ## Example Setups
@@ -132,9 +132,9 @@ As I record and edit the Foojay podcasts, I invested a little more to extend my 
 To further improve my setup, I need to move a 19"-rack to a different room, as my router and NAS make some fan noise. Some foam on the walls would probably also improve the audio quality further. My speakers are mounted too high, so I need to ruin the wall a bit more with new (and unused) drill holes. And cable management is a challenging problem to tackle!
 
 {{< gallery >}}
-recording-setup-frank-1-1024x768.jpg
-recording-setup-frank-2-1024x768.jpg
-wallmount-raspberry-pi-camera.webp
+recording-setup-frank-1-1024x768.jpg | | Podcast recording desk with an ultrawide monitor, wall-mounted speakers, a microphone and a mixer
+recording-setup-frank-2-1024x768.jpg | | Close-up of the recording desk with a Rode microphone, mixer, ATEM switcher, headphones and keyboard
+wallmount-raspberry-pi-camera.webp | | Raspberry Pi camera with a lens in a white 3D-printed case on a wall mount
 {{< /gallery >}}
 
 **Frank used this setup for the [Foojay podcast](https://foojay.io/today/category/podcast/) and created the "[Java Quick Start](https://foojay.io/java-quick-start/)" tutorial.**

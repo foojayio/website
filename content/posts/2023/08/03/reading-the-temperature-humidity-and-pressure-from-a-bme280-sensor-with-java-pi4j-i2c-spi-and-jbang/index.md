@@ -70,8 +70,8 @@ In my example, the sensor in a version of [Adafruit](https://www.adafruit.com/pr
 You can control the sensor both with I2C and SPI, so there are two wirings provided.
 
 {{< gallery cols="2" >}}
-bme280_wiring_i2c_breadboard.png
-bme280_wiring_spi_breadboard.png
+bme280_wiring_i2c_breadboard.png | | Fritzing diagram wiring a BME280 sensor on a breadboard to the Raspberry Pi GPIO header over I2C
+bme280_wiring_spi_breadboard.png | | Fritzing diagram wiring a BME280 sensor on a breadboard to the Raspberry Pi GPIO header over SPI
 {{< /gallery >}}
 
 ### Java Code

@@ -58,7 +58,7 @@ Absolute numbers are not that interesting, but comparing them is. Interestingly,
 
 Besides, I created a script to track daily metrics across sites and social media, just as I did for Apache APISIX. It displays interesting results:
 
-![](social-metrics-1024x768.webp)
+![Line chart of follower counts across social channels from October 2023 to January 2024: Twitter flat near 14K, Dev.to growing past 8K](social-metrics-1024x768.webp)
 
 As above, numbers are much less important than the trend. Growth visibly happens mainly on dev.to and Bluesky for reasons I cannot fathom (yet?).
 

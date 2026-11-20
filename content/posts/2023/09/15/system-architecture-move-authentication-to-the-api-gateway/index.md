@@ -23,7 +23,7 @@ related_posts:
 
 The API Gateway doesn't authenticate but delegates authentication to an authentication provider. After authentication, the Gateway forwards the request to the app. The app checks authentication and gets the associated identity and permissions.
 
-![](overall-authentication-flow.png)
+![Sequence diagram: the API gateway asks the ID provider whether the user is authenticated, forces a login if not, then forwards to the app](overall-authentication-flow.png)
 
 Now, onto the implementation. We will implement the above flow with the following components:
 
@@ -228,11 +228,11 @@ services:
 
 Let's try to access the application via Apache APISIX. When we browse to , Apache APISIX redirects us to the Keycloak login page:
 
-![](keycloak-authentication-1024x804.jpg)
+![Keycloak 'Sign in to your account' page for the apisix realm in a browser, with username and password fields](keycloak-authentication-1024x804.jpg)
 
 If we log in successfully, we are allowed to access the app. Notice that we display the username of the person who logged in:
 
-![](successful-login-1024x806.png)
+![Browser at localhost:9080 showing 'Welcome to My App' with the logged-in username 'john'](successful-login-1024x806.png)
 
 ## Conclusion
 

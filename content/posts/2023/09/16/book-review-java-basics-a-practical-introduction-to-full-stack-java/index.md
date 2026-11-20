@@ -50,7 +50,7 @@ The thoroughness and ambition of the book is clear from its table of contents, e
 **Pragmatic and Helpful**
 
 The book is very clearly, and more than anything else, a very pragmatic workbook. It marries theory and practical application extremely well, and has barcodes throughout pointing to supporting video content on YouTube.
-![](IMG_6968-1-1024x768.jpg)
+![Open copy of the book Java Basics showing a section on Java's var keyword with code listings](IMG_6968-1-1024x768.jpg)
 
 In between the numerous tutorial-like step-by-step instructions, you'll learn about a lot of context particular to Java and typical points of confusion to newbies, i.e., Shai understands what the newbie is likely to be confused about and helpfully explains all of these aspects common to the Java language:
 

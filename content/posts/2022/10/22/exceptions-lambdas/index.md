@@ -101,7 +101,7 @@ The API consists of two parts:
 
 Here's a small excerpt:
 
-![](commons-lang.png)
+![UML class diagram of Apache Commons Lang's Failable, FailableStream and FailableFunction types for streams that throw exceptions](commons-lang.png)
 
 The code finally becomes what we expected from the beginning:
 
@@ -128,7 +128,7 @@ To achieve this, we can leverage the power of Vavr. Vavr is a library that bring
 
 Imagine that we want a pipeline that collects both exceptions and classes. Here's an excerpt of the API that describes several building blocks.
 
-![](vavr-api.png)
+![UML class diagram of Vavr's Function1, CheckedFunction1, Try and Either types used to handle exceptions in lambdas](vavr-api.png)
 
 It translates into the following code:
 

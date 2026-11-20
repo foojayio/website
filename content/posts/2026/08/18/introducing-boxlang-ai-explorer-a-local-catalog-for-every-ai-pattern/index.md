@@ -22,7 +22,7 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 ---
 
-![](boxlang-explorer-700x394.png)
+![BoxLang AI Explorer interface with a sidebar of code samples and category cards such as Basic Chatting, AI Agents and MCP Servers](boxlang-explorer-700x394.png)
 
 Learning a new AI API usually means jumping between scattered documentation pages, guessing at imports, and copy-pasting code that may or may not still work. We wanted something better for BoxLang AI, so we built the **BoxLang AI Explorer** : a local, browser-based catalog of runnable BoxLang AI examples, organized by category and difficulty, each with guidance, source code, and sample output. You can also try it online at <https://ai.boxlang.io/explorer/>
 

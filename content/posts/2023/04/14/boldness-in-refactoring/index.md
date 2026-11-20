@@ -29,7 +29,7 @@ It's more like a bad apple in a barrel. Bad code and forbidden zones tend to gro
 
 When we have a flexible team with a relatively small and familiar code base, touching everything isn't challenging. It's easy in that case.
 
-[![](Trapped-657x510.jpg)](https://www.goodtechthings.com/locked-in/)
+[![Cartoon: a man crushed under 'Technical Debt' and 'Legacy Hardware' says he is glad he avoided cloud lock-in](Trapped-657x510.jpg)](https://www.goodtechthings.com/locked-in/)
 
 ## The Legacy Project
 

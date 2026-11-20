@@ -59,7 +59,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-rich-and-famous-1024x577.jpg)
+![Video call grid of the four participants in the Foojay podcast episode: Maarten Mulders, Frank Delporte, Tim te Beek and Lukas](podcast-guests-rich-and-famous-1024x577.jpg)
 
 ## Content
 

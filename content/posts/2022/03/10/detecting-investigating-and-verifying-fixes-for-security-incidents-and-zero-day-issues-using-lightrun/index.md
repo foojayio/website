@@ -50,7 +50,7 @@ Lightrun won't find a vulnerability out of thin air, for that you need a dedicat
 
 E.g. let's take this obvious bug:
 
-![](0ZR1fZVLh.png)
+![Java method building a SQL query by concatenating the name parameter, an obvious SQL injection flaw](0ZR1fZVLh.png)
 
 This is an obvious SQL injection bug. But is it exploitable?
 

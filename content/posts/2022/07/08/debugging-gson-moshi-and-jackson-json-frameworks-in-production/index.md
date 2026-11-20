@@ -162,7 +162,7 @@ Once we have that, we can start debugging…
 
 The code that generates a JSON file is usually much simpler to debug and has fewer issues. It's a simple place to start. We can place a snapshot right in the location where we write the object. E.g. in this case, I used the JSONDatabaseService class and placed a snapshot on the writeString method call.
 
-![](image2-1-700x371.png)
+![IntelliJ editor with a Lightrun snapshot at the JSON write line, showing the call stack and variable values in the Snapshots panel](image2-1-700x371.png)
 
 In the stack I can see the JSON data and the original object. That way, we can inspect any discrepancies between the two. Oftentimes, this can relate to default behaviors of an implementation like Jackson or Gson in relation to null objects, date, time, etc. Those are nuances that differ significantly between the various implementations.
 
@@ -172,7 +172,7 @@ Reading a JSON string or file into a class is the place where most of us fail. N
 
 Here is the true value of the ability to inspect the JSON before we convert a string to an object. We can easily do that in this sample by placing a snapshot in the `JacksonDatabaseService` class. Notice that this is Jackson specific. We can do the same for Gson and moshi by placing the snapshot in their respective abstraction classes.
 
-![](image1-700x488.jpg)
+![IntelliJ with a Lightrun snapshot in the Jackson service, showing the JSON string variable before it is parsed into an object](image1-700x488.jpg)
 
 Once this is placed, we can try reading an object and we'll see the JSON that's received. In this particular case, grabbing the JSON is trivial from the method parameter. However, this isn't the exception and grabbing this data is possible in most cases.
 

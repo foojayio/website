@@ -37,7 +37,7 @@ Though not as precise as the Sliding Window Log, the Sliding Window Counter requ
 
 ## How It Works
 
-![](1-XLeoFFYwU1uzvLuMFu-tAw-8ccca08f.gif)
+![Sliding window counter diagram: a 1-minute window split into 20-second subwindows, limit of 5 requests, current window highlighted](1-XLeoFFYwU1uzvLuMFu-tAw-8ccca08f.gif)
 
 ### 1. Define a Time Window
 

@@ -20,7 +20,7 @@ related_posts:
   - "offline-crypto-address-validation-in-java"
 ---
 
-![](BookCover-407x510.jpg)
+![Cover of the book 'Transitioning to Java' by Ken Fogel, published by Packt](BookCover-407x510.jpg)
 
 When I retired from the classroom in 2021, I had no intention of sitting on a rocking chair on my front porch.
 

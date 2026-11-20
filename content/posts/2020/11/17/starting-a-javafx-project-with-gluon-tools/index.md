@@ -91,7 +91,7 @@ In that case you'll need to follow these steps:
 3. In the "Project structure" dialog in IntelliJ IDEA add the location including the "lib" in the "Modules \> Dependencies" screen, e.g. `/opt/javafx-sdk-16/lib`. By doing this, your IDE will be able to provide you the correct syntax highlighting.
 4. To run your application, we also need to add the startup arguments to point to the javafx-modules. Open the Configurations dialog and provide the "VM options", including all the modules required for your project, e.g. `--module-path /opt/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml`.
 
-![](Screenshot-from-2020-11-16-08-33-50-1024x434.jpg) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
+![IntelliJ IDEA Project Structure dialog, Dependencies tab, with JavaFX libraries and the /opt/javafx-sdk-16/lib folder added](Screenshot-from-2020-11-16-08-33-50-1024x434.jpg) Adding openjfx as a dependency ![IntelliJ IDEA Run/Debug Configurations with VM options setting --module-path to the JavaFX SDK and adding javafx.controls and javafx.fxml](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
 
 ### Create a New Project with start.gluon.io
 
@@ -118,19 +118,19 @@ Gluon also created a [plugin for IntelliJ IDEA](https://plugins.jetbrains.com/pl
 In your IntelliJ IDEA, double click the SHIFT key to open the universal search box and type "Plugins" and select the first option. Now you can search in the marketplace and install the Gluon plugin.
 
 {{< gallery cols="2" >}}
-intellij-plugins-300x260.png
-intellij-plugins-marketplace-300x260.png
+intellij-plugins-300x260.png | | IntelliJ IDEA search popup showing the Manage IDE Settings sync plugins action
+intellij-plugins-marketplace-300x260.png | | IntelliJ IDEA Plugins marketplace showing the Gluon plugin
 {{< /gallery >}}
 
 Starting a new mobile JavaFX project now has become a very easy process. From the main menu select File \> New \> Project. In the left list, you will now find "Gluon" and four different options for a new project.
-![](intellij-new-project.png)
+![IntelliJ IDEA New Project dialog with the Gluon category selected and 'Gluon Mobile - Multi View Project' highlighted](intellij-new-project.png)
 
 In the next windows, you can select different options, Maven or Gradle, names of the pre-created first and second view,... Once the project is created and opened in IntelliJ IDEA, you can run it with `mvn javafx:run`.
 
 {{< gallery cols="3" >}}
-intellij-new-project-1.png
-intellij-new-project-run-1024x666.jpg
-intellij-new-project-views.png
+intellij-new-project-1.png | | IntelliJ IDEA New Project dialog with the Gluon Mobile - Multi View Project template selected
+intellij-new-project-run-1024x666.jpg | | IntelliJ IDEA running the generated Gluon application, showing a mobile-style window with a 'Change the World!' button
+intellij-new-project-views.png | | IntelliJ IDEA New Project dialog with primary and secondary view names and CSS file options
 {{< /gallery >}}
 
 As you can see in this video, within 30 seconds you have a new JavaFX project opened in IntelliJ IDEA which you can immediately run and test.

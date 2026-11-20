@@ -58,7 +58,7 @@ ScoreFile.save(score, Path.of("speed-the-plough-copy.abc"));
 ```
 
 ABC is a big enough format that not every corner is covered yet, so real-world tunes that don't render correctly are exactly the kind of bug report I want.
-![](sheetdemo-0.0.3-1024x604.png)
+![Sheetmusic4J demo app rendering the 'Do-Re-Mi' score beside a print preview of the same piece](sheetdemo-0.0.3-1024x604.png)
 
 ## Guitar Pro: An Experiment
 
@@ -89,7 +89,7 @@ There's also a new `NoteBackgroundStyle` in the FX viewer to configure the highl
 ## Under the Hood
 
 The demo app got reorganized and gained a standalone strip play-along demo, the library now logs through SLF4J, the MusicXML reader correctly merges multiple `<attributes>` blocks per part instead of overwriting, and MIDI import produces fewer spurious rests.
-![](stripdemo-0.0.3-1024x517.png)
+![Sheetmusic4J strip demo playing a score with a red cursor and highlight, plus tempo and color controls](stripdemo-0.0.3-1024x517.png)
 
 ## Still 0.0.x, Still Listening
 

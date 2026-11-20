@@ -275,7 +275,7 @@ You could pull every game into the application and compute scores in Java, but t
 3. Use `$filter` on the key-value pair array to keep only entries whose key appeared in the intersection, then use `$reduce` to sum their values into a single score.
 4. Add the computed score as a new field with `$addFields` and sort by score descending.
 
-![](Screenshot-2026-04-17-at-1.25.13-PM.png)
+![Flowchart of the scoring pipeline: convert preferences, intersect genres, filter and reduce to a score, then sort](Screenshot-2026-04-17-at-1.25.13-PM.png)
 
 Since the pipeline references the user's preferences as literal values (not fields from the games collection), you need to build it dynamically in Java. Here is the `RecommendationService`:
 
@@ -439,7 +439,7 @@ That gives it a total score of 3.1. Compare that to *Hollow Knight*, which score
 ## 4. User ratings and affinity adjustment
 
 The recommendation engine works, but the preference weights are static. A user sets their initial preferences once, and the system never learns from their behavior. You need a ratings endpoint that lets users score games they have played, and adjustment logic that updates preference weights based on those ratings.  
-![](Screenshot-2026-04-17-at-1.26.02-PM.png)
+![Flowchart of rating adjustment: 4-5 stars raise a preference weight, 1-2 lower it, 3 changes nothing, then recommendations recalculate](Screenshot-2026-04-17-at-1.26.02-PM.png)
 
 ### Ratings endpoint
 
@@ -943,7 +943,7 @@ The response now includes all three scores for each game:
 
 ### Recommendation flow
 
-![](Screenshot-2026-04-17-at-1.26.35-PM.png)
+![Diagram merging content-based scoring and vector similarity into a 0.6/0.4 weighted, ranked recommendation list](Screenshot-2026-04-17-at-1.26.35-PM.png)
 
 The combined system follows this flow: user preferences and ratings feed into the content-based scoring pipeline, which computes a score for each game using MongoDB aggregation. In parallel, the user's top preferences are converted to a text summary and passed through the embedding model to produce a query vector. MongoDB Atlas Vector Search uses that vector to find semantically similar games. Both sets of scores are normalized and merged using the weighted formula, and the final output is a single ranked list of recommendations sorted by combined score.
 

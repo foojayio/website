@@ -16,7 +16,7 @@ related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
 ---
 
-![](JDoodle-Gokul.png)  
+![Portrait photo of Gokul Chandrasekaran, creator of JDoodle, in a blue blazer outdoors.](JDoodle-Gokul.png)  
 In two previous posts, we [explained how you can add executable Java code to your posts here on Foojay](https://foojay.io/today/integrate-executable-java-code-in-your-blog-posts/), including [code with dependencies](https://foojay.io/today/integrate-executable-java-code-in-your-blog-posts-part-2-how-to-use-dependencies/), by using JDoodle.
 
 To achieve this full integration, we got [Gokul Chandrasekaran](https://www.linkedin.com/in/gokulchandrasekaran-jdoodle/)'s support to use the plugin version, and he also gave us some insight into the history and development of JDoodle.
@@ -28,7 +28,7 @@ Certainly! I'm Gokul the founder of JDoodle, and I have over 20 years of experie
 Over the years, I've transitioned through diverse roles, from engineering management and IT architecture to management consulting. Each of these positions has given me a unique perspective. I'm glad we can help Foojay with this initiative.
 
 ***Example of executable code integration with JDoodle into the [Foojay Java Quickstart Tutorial](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/):***
-![](foojay-java-tutorial-1-973x1024.jpg)
+![foojay.io tutorial page with an embedded JDoodle editor running Java code that reads a CSV file and lists persons.](foojay-java-tutorial-1-973x1024.jpg)
 
 ***What was your initial goal when you started with JDoodle?***
 
@@ -47,7 +47,7 @@ Furthermore, in our constant quest to offer more value to our users, we've intro
 ***JDoodle supports 80+ languages and 2 databases. Those are big numbers! How did you achieve this?***
 
 Achieving support for 76+ languages and 2 databases on JDoodle was predominantly user-driven. As I mentioned earlier, the platform's growth and direction have been significantly influenced by the needs and feedback of our users. Whenever a user reached out with a request for a new language or a feature, we took it upon ourselves to find a way to accommodate it.
-![](jdoodle-supported-languages-1024x695.jpg)
+![JDoodle language picker showing 88 languages and 2 databases, with Java, Python, C# and others as templates.](jdoodle-supported-languages-1024x695.jpg)
 
 This commitment to our community's requirements and our relentless drive to cater to them led us to the extensive list of languages and databases we support today. And our mission doesn't stop here. We're continuously working to expand our offerings, and I'm excited to share that we're on track to support more than 100 languages soon. This journey is a testament to the symbiotic relationship between JDoodle and its users, where their needs shape our growth, and our platform empowers their coding journey.
 

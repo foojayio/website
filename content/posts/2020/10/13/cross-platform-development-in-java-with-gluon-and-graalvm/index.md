@@ -18,7 +18,7 @@ That's a common question when making conversation, but how many times have you f
 ## The job of a CTO / Software architect
 
 In a reply to such a question, you can try to be a tad more accurate by saying: *"No, I don't fix computers. In my job, I help my management decide how we can digitally exchange data with our customers and how we can provide digital services for internal and external use."* That's a mouthful, but if you have pen and paper, you can make the following drawing:
-![](gluon-bruno-figure01.png)
+![Diagram of a front end connected to a back end of public and private cloud services, with 'I am here' on the connection](gluon-bruno-figure01.png)
 
 This drawing isn't accurate, but it's already better than telling people you're *"doing something with computers."*
 
@@ -27,14 +27,14 @@ Your company has a back end that consists of a combination of internal and exter
 Usually, that's where the conversation that started with *"What do you do for a living?"* ends, but you and I know that your actual job is much more complex. In the drawing you made, you showed a portable with a globe on the screen, which could lead to believe that you're responsible for creating and maintaining the company websites, but that's only a small—albeit important—aspect of your job.
 
 You could add more detail to your drawing to reflect this.
-![](gluno-bruno-figure02.png)
+![Diagram of front ends for iOS, Android, Windows, embedded and IoT devices connected to cloud back-end services](gluno-bruno-figure02.png)
 
 Apart from providing a responsive web site that can be used in a browser on the desktop or on your phone, you may also want to offer applications that run on mobile devices such as iPhones, iPads, Android phones, Android tables. For complex functionality, you may also require applications that run on the desktop. In some cases, you're also responsible for embedded software or software that runs on IoT devices.
 
 ## The Java Platform
 
 It is your task to lead the development team that makes all of this happen.
-![](gluon-bruno-figure03.png)
+![Diagram placing the developer and IDE on the left, producing front ends for several platforms that connect to cloud back ends](gluon-bruno-figure03.png)
 
 If you're like me, you've once had the job of the people you are now leading. I wrote my first lines of code in BASIC in 1982. I was twelve years old. I tried many different programming languages, but when I wrote my first lines of Java code in 1996, I knew I had found the language that was the best fit for my professional needs. I've experimented with other languages in projects where Java wasn't an option, but whenever I had a choice between a project with Java or a project without Java, I chose the project with Java.
 
@@ -72,7 +72,7 @@ ReactNative or Flutter are popular with startups that are "born mobile" and who 
 ### Xamarin
 
 If you are working in a Microsoft environment and your team is well-versed in C#, then Xamarin may be a valid option for you.
-![](gluon-bruno-figure04.png)
+![Diagram of C# in Visual Studio compiled with Xamarin to iOS, Android, Windows and device front ends talking to Azure](gluon-bruno-figure04.png)
 
 Developers create their code once in Visual Studio, they use Xamarin to compile it to different platforms, and they can easily integrate Azure if they need Cloud functionality. Wouldn't it be great if a similar solution existed for the Java Platform?
 

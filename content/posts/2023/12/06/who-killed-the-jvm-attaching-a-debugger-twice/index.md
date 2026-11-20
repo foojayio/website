@@ -28,7 +28,7 @@ This is quite useful because the JDWP agent has to do substantial initialization
 Other things, like class loading, were slower with an attached debugger in older JDK versions (see [JDK-8227269](https://bugs.openjdk.org/browse/JDK-8227269)).
 
 But what happens after you end the debugging session? Is your debugged program aborted, and if not, can you reattach your debugger at a later point in time? The answer is as always: It depends. Or, more precisely: It depends on the remote debugger you're using and how you terminate the debugging session.  
-![](reattach-2000x573-0300f385.jpg)
+![Timeline: start application, attach debugger, disconnect, app runs freely while waiting, reattach, then terminate/exit](reattach-2000x573-0300f385.jpg)
 
 But why should you disconnect and then reattach a debugger? It allows you to not run the debugger during longer ignorable stretches of your application's execution. The overhead of running the JDWP agent waiting for a connection is minimal compared to the plethora of events sent from the agent to the debugger during a debugging session (like class loading events, see [A short primer on Java debugging internals](https://mostlynerdless.de/blog/2022/12/27/a-short-primer-on-java-debugging-internals/)).
 
@@ -61,16 +61,16 @@ NetBeans, IntelliJ IDEA, and Eclipse all support reattaching after ending a debu
 ## Terminating an Application with IDEs
 
 NetBeans is the only IDE of the three that does not support this (as far as I can ascertain). IntelliJ IDEA and Eclipse both support it, with Eclipse having the more straight-forward UI:  
-![](eclipse_buttons-74184c16.png)
+![Eclipse debug toolbar with the Terminate (red square) and Disconnect buttons labeled](eclipse_buttons-74184c16.png)
 
 If the *terminate* button is not active, then you might have to tick the *Allow termination of remote VM* check-box in the remote configuration settings:  
-![](eclipse_remote_dbg_dialog-e5248aee.jpg)
+![Eclipse Debug Configurations dialog for a Remote Java Application with 'Allow termination of remote VM' checked](eclipse_remote_dbg_dialog-e5248aee.jpg)
 
 IntelliJ IDEA's UI is, in this instance, arguably less discoverable: To terminate the application, you have to close the specific debugging session tab explicitly.  
-![](intellij_dbg_buttons-d888d7ee.png)
+![IntelliJ IDEA debug toolbar for a 'remote' session with the Close tab, (Re)connect and Stop buttons labeled](intellij_dbg_buttons-d888d7ee.png)
 
 This then results in a popup that offers you the ability to terminate:  
-![](image-9-a2b8aadf.png)
+![IntelliJ dialog 'Process remote Is Running' asking to Cancel, Disconnect or Terminate the process](image-9-a2b8aadf.png)
 
 ## Conclusion
 
@@ -79,4 +79,4 @@ The ability to disconnect and then reattach debuggers is helpful for many comple
 I hope you enjoyed this addendum to my [Level-up your Java Debugging Skills with on-demand Debugging](https://mostlynerdless.de/blog/2023/10/03/level-up-your-java-debugging-skills-with-on-demand-debugging/) blog post. If you want even more debugging from me, come to my talk at the ConFoo conference in Montreal on the 23rd of February, and hopefully, next year a conference or user group near you.
 
 **This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone. It appeared first on my personal blog [mostlynerdless.de](https://mostlynerdless.de/) and was supported by rainy weather and the subsequent afternoon in a cafe in Bratislava:**  
-![](IMG_2578-2000x1500-91cf16ab.jpeg)
+![Slice of chocolate cheesecake beside a laptop showing Java code in Eclipse on a cafe table](IMG_2578-2000x1500-91cf16ab.jpeg)

@@ -46,7 +46,7 @@ If you've used JetBrains IDEs such as IntelliJ, you're probably familiar with th
 
 It's a very effective tool, but it also provides a very limited view. It's very hard to gauge the state of a specific thread by looking at the combo box. Additional details such as grouping, location, etc. are unclear when looking at this widget only.
 
-![](thread-debugging-1-700x355.png)
+![IntelliJ debugger Frames tab with a dropdown listing the application's threads and their states](thread-debugging-1-700x355.png)
 
 Luckily, most IDEs support a view that's more oriented to heavily threaded apps. The downside is that it's a bit more noisy by comparison. I guess this is the reason it isn't the default UI.
 
@@ -54,11 +54,11 @@ But if the process that you're debugging has complex concurrency, this might imp
 
 To enable that mode, we need to check the "Threads" option in the IDE in the debugger view:
 
-![](thread-debugging-2.png)
+![IntelliJ debugger layout menu with the 'Threads' option highlighted to enable the threads view](thread-debugging-2.png)
 
 This is off by default as the UX is difficult and most developers don't need this for typical apps. But when we have a thread heavy application, this view becomes a lifesaver...
 
-![](thread-debugging-3-680x510.png)
+![IntelliJ debugger Threads tab listing threads of a PetClinic app, with one thread expanded to show its stack](thread-debugging-3-680x510.png)
 
 The threads effectively become the top-level element. We can see the stack by expanding a particular thread (e.g. File Watcher in this image). Here we have full access to the stack as we had before, but we can see all the threads.
 
@@ -66,13 +66,13 @@ If you have an app with a very high thread count, this might be a problem, e.g. 
 
 We can further tune this view through settings, this can enable more verbosity and hierarchy:
 
-![](thread-debugging-4.png)
+![IntelliJ 'Customize Threads View' dialog with options for thread groups, line numbers, class and package names](thread-debugging-4.png)
 
 There are several interesting capabilities mentioned in the settings dialog, but the most interesting one is grouping by thread groups. Thread groups let us package a thread as part of a group. As a result, we can create common behavior for all the threads within. E.g. a single catch handler, etc.
 
 Most threads you'll receive from a pool or a framework would already be grouped logically. This means grouping should already be relatively intuitive and easy to grok.
 
-![](thread-debugging-5-700x474.png)
+![IntelliJ Threads view with thread groups expanded, showing the running http-nio-8080-exec-1 thread and its stack frames](thread-debugging-5-700x474.png)
 
 ## Debugging a Deadlock Situation
 
@@ -88,7 +88,7 @@ I won't talk about deadlock prevention, which is a vast subject in its own right
 
 All we need to do is press pause in the debugger:
 
-![](deadlock-700x389.png)
+![IntelliJ Threads view of a deadlock sample where Thread-0 and Thread-1 are both stuck in MONITOR state](deadlock-700x389.png)
 
 Once the application is suspended, we can review the entries on the list. Notice the two entries are stuck on "MONITOR" threads waiting for a monitor. This effectively means they are probably stuck on a synchronized block or some other synchronization API call.
 
@@ -125,7 +125,7 @@ If we place a breakpoint on the last line, we will miss the functionality of the
 
 Ideally we could track method entry and exit but then we won't be able to distinguish between them...
 
-![](race-condition-1-700x474.png)
+![IntelliJ breakpoint dialog for a method breakpoint set not to suspend, logging 'Method Exit' with the thread name](race-condition-1-700x474.png)
 
 After we create a method breakpoint, we set it to not suspend and enable logging. We effectively created a tracepoint.
 
@@ -135,17 +135,17 @@ We can now log that we're exiting the method and log the thread name. This will 
 
 We can do the same thing for method entry, but here we can use a regular breakpoint:
 
-![](race-condition-2-700x475.png)
+![IntelliJ breakpoint dialog for a non-suspending line breakpoint that logs 'Method Enter' with the current thread name](race-condition-2-700x475.png)
 
 Again, we don't suspend the thread and use what is effectively a tracepoint. This lets us see if we're a deadlock victim by reviewing the logs.
 
 If they include two entry logs in a row... It might be a race condition. Since the threads aren't suspended, things shouldn't be disturbed by the debugging process.
 
-![](race-condition-3-700x318.png)
+![Debugger console showing alternating 'Method Enter' and 'Method Exit' log lines for thread http-nio-8080-exec-1](race-condition-3-700x318.png)
 
 In some cases, the output might be so verbose and from a single thread. In that case, we can use a simple conditional statement to filter out the noise:
 
-![](race-condition-4-700x378.png)
+![IntelliJ breakpoint dialog with a condition excluding thread http-nio-8080-exec-1 so only other threads are logged](race-condition-4-700x378.png)
 
 We can also build a poor man's deadlock detector using a similar technique. It can give us a sense of shared resource usage so we can properly evaluate deadlock potentials.
 

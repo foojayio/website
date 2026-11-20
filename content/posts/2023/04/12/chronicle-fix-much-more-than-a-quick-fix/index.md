@@ -54,7 +54,7 @@ Chronicle FIX is trusted by some of the world's largest financial institutions, 
 
 The below diagram speaks for itself and shows Chronicle FIX multiple times faster than QuickFIX/J, with the ratio particularly noticeable at higher percentiles.
 
-![](Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614.jpg)
+![Line chart: QuickFIX/J latency climbs to about 4,800 microseconds at the 99.99th percentile while Chronicle FIX stays near zero](Screen-Shot-2023-04-03-at-2.04.05-PM-1024x614.jpg)
 
 Note: the benchmark exercises a full round trip i.e. it generates a NewOrderSingle (NOS) and sends it out from one FIX engine to another engine over localhost.
 
@@ -68,7 +68,7 @@ Chronicle FIX has support for transparent session failover for initiators and ac
 
 We have customers who – as part of their standard deployment process, failover between FIX engines in milliseconds with no message loss.
 
-![](Screen-Shot-2023-04-03-at-2.04.38-PM-1024x706.jpg)
+![Diagram: if Acceptor 1 fails, the Initiator fails over to Acceptor 2, replicated via Chronicle Queue, with no data loss](Screen-Shot-2023-04-03-at-2.04.38-PM-1024x706.jpg)
 
 Additionally, there is a lightweight proxy component which supports common patterns such as load-balancing, transparent SSL etc.
 
@@ -78,7 +78,7 @@ Chronicle FIX leverages Chronicle Queue Enterprise replication to achieve HA/DR,
 
 The below graph shows the send/ack round-trip/latency impact on the sender as the number of outstanding messages (u) varies. u=0 is fully synchronous replication.
 
-![](Screen-Shot-2023-04-03-at-2.05.05-PM-1024x639.jpg)
+![Log-scale chart: send-to-ack latency with ack window u=0 is much higher than with u=1 to 16, which stay below 0.3 microseconds](Screen-Shot-2023-04-03-at-2.05.05-PM-1024x639.jpg)
 
 ### Features
 
@@ -96,15 +96,15 @@ Chronicle FIX implements additional features which have been driven by customer 
 
 The engine can be controlled from customers' tooling via API, or with the GUI.
 
-![](Screen-Shot-2023-04-03-at-2.06.36-PM-1024x257.png)
+![Chronicle FIX session manager listing a Coinbase session with read and write sequence numbers, active and connected](Screen-Shot-2023-04-03-at-2.06.36-PM-1024x257.png)
 
 And all FIX messages are stored, indexed and are searchable with a sophisticated query language.
 
-![](Screen-Shot-2023-04-03-at-2.07.05-PM-1024x576.jpg)
+![FIX Search screen showing a timeline of order messages and the field details of a selected NewOrderSingle message](Screen-Shot-2023-04-03-at-2.07.05-PM-1024x576.jpg)
 
 All important metrics, including latency numbers, are exposed via the monitoring features and can be surfaced in your monitoring tool of choice, e.g. [Grafana](https://grafana.com/ "Grafana")
 
-![](Screen-Shot-2023-04-03-at-2.08.13-PM-1024x678.jpg)
+![Grafana 'Replication Stats' dashboard with FIX engine bandwidth, round-trip time, connections and latency panels](Screen-Shot-2023-04-03-at-2.08.13-PM-1024x678.jpg)
 
 ### Commercial Support
 

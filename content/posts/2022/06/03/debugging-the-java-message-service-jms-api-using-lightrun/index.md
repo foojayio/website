@@ -92,7 +92,7 @@ You can place Lightrun actions (snapshots, logs etc.) directly into the platform
 
 With Spring with JMS support as shown above, we can open the `JmsTemplate` and add a snapshot to the execute method:
 
-![](image2-700x423.jpg)
+![IntelliJ IDEA with the Lightrun plugin showing a snapshot taken in JmsTemplate.execute, with its stack frames and variables](image2-700x423.jpg)
 
 As you can see, the action is invoked when sending to a topic. We can review the stack frame to see the topic that receives the message and use conditions to narrow down the right handler for messages.
 
@@ -100,7 +100,7 @@ We can place a matching snapshot in the source of message so we can track the fl
 
 In the stack above, you can see that the execute method is invoked by the method send at line 584. The execute method wraps the caller so the operation will be asynchronous. We can go further down the stack by going to the closure and placing a snapshot there:
 
-![](image1-700x422.jpg)
+![IntelliJ IDEA with Lightrun snapshots showing JmsTemplate.send at line 584 invoking the execute method, with call stack and variables](image1-700x422.jpg)
 
 Notice that here we can place a condition on the specific topic and narrow things down.
 

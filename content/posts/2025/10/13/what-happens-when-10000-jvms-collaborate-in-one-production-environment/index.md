@@ -64,22 +64,22 @@ This is a good start, but Optimizer Hub can improve things further.
 ReadyNow can store profiles in a central cloud repository like Optimizer Hub's ReadyNow Orchestrator service. When a container-based service starts up, rather than using a locally stored profile, the JVM can be configured to request the profile from the Optimizer Hub. When changes to the profile are required, a new profile can be uploaded to the Optimizer Hub and will be used by subsequent JVM runs.
 
 As each new JVM starts in its container and the JIT compiles the code based on the ReadyNow profile, the JVM sends back a new version of the profile to ReadyNow Orchestrator in Optimizer Hub. There are two benefits: 1) ReadyNow Orchestrator 'curates' the best profile over time to ensure each successive JVM that starts has the best possible profile, and 2) the container does not need to be rebuilt or redeployed because the profile is no longer directly included in the container image, saving both time and expense.
-![](simon1-1024x526.png)
+![Compilation queue charts: vanilla OpenJDK warms up slowly after start, while Optimizer Hub's Cloud Native Compiler clears the queue before traffic](simon1-1024x526.png)
 
 Another issue associated with JIT compilation is that the compiler must share the resources of the container with the application. When using small containers, such as a two-vCore instance, application throughput will be halved while compilation is taking place.
-![](simon2-1024x574.png)
+![Throughput charts: vanilla OpenJDK ramps up slowly with stalls, while Azul Platform Prime with ReadyNow reaches full speed much faster](simon2-1024x574.png)
 
 The second service of Optimizer Hub is the Cloud Native Compiler. This decouples the [JIT compiler](https://www.azul.com/products/components/falcon-jit-compiler/) from an individual JVM and offloads it to an elastically scalable, centralized service.
 
 When code needs to be compiled by the JVM, it sends the code along with the collected profiling data to the Cloud Native Compiler.
 
 It compiles the code and returns it to the JVM. By eliminating the contention for resources, individual service containers can be configured with less compute power, thus saving money.
-![](simon3-1024x686.png)
+![Diagram comparing many large VMs doing their own JIT compilation with smaller instances offloading JIT to a Cloud Native Compiler service](simon3-1024x686.png)
 
 In addition, the Cloud Native Compiler is a long-running process, allowing it to maintain a cache of compiled code. When multiple instances of the same application need to be started to address a sudden increase in load, it does not need to compile the same code for each instance.
 
 After the first compilation, the code will be stored in Cloud Native Compiler so that it can immediately be returned for subsequent service invocations.
-![](simon4-1024x538.png)
+![CPU utilization charts: vanilla OpenJDK has long high-CPU warm-up, while Optimizer Hub shows a brief spike then a flat, low load](simon4-1024x538.png)
 
 By leveraging Optimizer Hub's centralized services, Azul Platform Prime:
 

@@ -54,7 +54,7 @@ By decoupling read and write operations, CQRS assigns each its own responsibilit
 
 This tutorial focuses on a specific, instructional use case: authorizing card usage. Instead of building a complete financial system, we concentrate on authorizing transactions and retrieving transaction history. This limited scope helps demonstrate the process of creating both command and query components.To maintain consistency with the previous post, we will use [Helidon with MicroProfile](https://www.mongodb.com/community/forums/t/introduction-to-mongodb-and-helidon/303061/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=hugh.murray). You may define the groupId, artifactId, version, and package name as you prefer. After downloading the project, include the MongoDB integration—Eclipse JNoSQL—in the pom.xml file at the project root:
 
-![](mon1-1024x540.png)
+![Sequence diagram of authorizing a card: command handler validates, debits or declines, updates the view, then a query returns transactions](mon1-1024x540.png)
 
 To maintain consistency [with the previous post](https://dev.to/mongodb/introduction-to-events-using-mongodb-22b4), we will use [Helidon](https://helidon.io/starter/4.4.1) with MicroProfile. You may define the groupId, artifactId, version, and package name as you prefer. After downloading the project, include the MongoDB integration—Eclipse JNoSQL—in the pom.xml file at the project root:
 

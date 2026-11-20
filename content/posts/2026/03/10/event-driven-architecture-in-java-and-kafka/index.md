@@ -147,7 +147,7 @@ With the Java applications added, the overall application flow is:
 4. For each received message, the Java applications do a lookup of the aircraft's registration (tail) number against registration data downloaded from the Federal Aviation Authority and saved in a second MongoDB collection. Where a matching registration is found, the Java applications enrich the original ADS-B message by adding the aircraft manufacturer and model from the FAA data.
 5. Finally, the Java applications save the updated/enriched ADS-B message into a new MongoDB collection.
 
-![](Screenshot-2026-03-06-at-12.25.26-PM.png)
+![Diagram: replayer sends MongoDB raw data to Kafka, a Java app enriches it with FAA registrations and stores enriched ADSB data](Screenshot-2026-03-06-at-12.25.26-PM.png)
 
 ### Blocking Code Version
 

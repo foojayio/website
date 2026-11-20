@@ -29,7 +29,7 @@ The Friends Of OpenJDK community has put together a number of resources, and mor
 ### OpenJDK 19 Fixes
 
 As always Foojay.io provides you with [a complete list of fixes, here](https://javaalmanac.io/jdk/19/):
-[![](image-1024x631.png)](https://javaalmanac.io/jdk/19/)
+[![Foojay OpenJDK Update and Release Details page for Java 19.0.0 listing fixed JDK issues by component and priority](image-1024x631.png)](https://javaalmanac.io/jdk/19/)
 
 ### New Foojay.io Podcast
 

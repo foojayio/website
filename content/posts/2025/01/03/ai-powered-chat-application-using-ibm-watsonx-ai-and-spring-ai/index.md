@@ -97,7 +97,7 @@ The IBM watsonx.ai API supports chat and embedding models in Spring AI context. 
 
 To generate embeddings, the platform supports *WatsonxAiEmbeddingModel*.
 
-![](watsonx-springai-uml.png)
+![UML diagram of WatsonxAiChatModel implementing the ChatModel and StreamingChatModel interfaces](watsonx-springai-uml.png)
 
 The image above is the UML Diagram of WatsonxAi API. The chat model implements the provided abstraction of Spring AI for basic chat and streaming chat. To provide implementations of these methods, the WatsonxAiChatModel needs to call the corresponding watsonx.ai platform API via REST and HTTP protocol.
 
@@ -315,13 +315,13 @@ I've showed how quickly it is to create a custom chat application and integrate 
 
 The basic chat waits for the AI platform to fully return the response. Thus, waiting time may be longer.
 
-![](watsonx-chat.webp)
+![Empty 'watsonx Chat' web page at localhost:8080/chat with a message box and Send button](watsonx-chat.webp)
 
 ### Streaming Chat
 
 The streaming chat responds by chunks and prevents frustration to the end user.
 
-![](watsonx-streaming-chat.webp)
+![Empty 'watsonx Streaming Chat' web page at localhost:8080/streaming-chat with a message box and Send button](watsonx-streaming-chat.webp)
 
 ## Summary
 

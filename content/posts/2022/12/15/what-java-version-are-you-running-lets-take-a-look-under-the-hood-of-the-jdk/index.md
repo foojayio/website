@@ -76,7 +76,7 @@ SOURCE="git:f4b2b4c5882e"
 ## Getting More Information With showSettings
 
 In 2010, an experimental flag (indicated with the `X`) was added to OpenJDK to provide more configuration information: `-XshowSettings`.
-![](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
+![Tweet from OpenJDK announcing that Kumar Srinivasan added the -XshowSettings flag to print Java configuration](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
 
 This flag can be called with different arguments, each producing an other information output.
 

@@ -22,7 +22,7 @@ related_posts:
 In a previous post, we looked at the project "[Electronics \& Quarkus Qute on Raspberry Pi](https://foojay.io/today/electronics-quarkus-qute-on-raspberry-pi/)" by [Igor De Souza](https://twitter.com/Igfasouza).
 
 In this article, we present you another great example of Java on Raspberry Pi created by Igor. It shows how to create a Micronaut Velocity demo using an 8x8 LED matrix display.
-![](raspberry_micronaut.jpg)
+![Micronaut logo beside the Raspberry Pi logo](raspberry_micronaut.jpg)
 
 ## Micronaut
 
@@ -219,7 +219,7 @@ Using Java and Pi4J you can build an application to control the LED matrix as sh
 The characters and images are created by converting the bit series to byte values inside enums. The number of definitions in the code is limited as this example is only a demonstration of what you can do, not a fully finished project. So some fun work left for you!
 
 By using the "Find" function in the IDE for value "1" it becomes pretty clear how the defined columns and rows will end up on the matrix display.
-![](width-b-versus-t.jpg)
+![Code defining the pixel bit patterns for the letters B and T as binary strings in the Java source](width-b-versus-t.jpg)
 
 ## Conclusion
 

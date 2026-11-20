@@ -61,7 +61,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode_29_guests-1024x574.jpg)
+![Foojay Podcast video call with guests Roni Dover, Zoran Sevarac and a NYJavaSIG representative, and host Frank Delporte](episode_29_guests-1024x574.jpg)
 
 ## Content
 

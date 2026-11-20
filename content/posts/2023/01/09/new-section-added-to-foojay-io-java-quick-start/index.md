@@ -23,8 +23,8 @@ As we want to spread the love for OpenJDK, i.e., Java, Kotlin, and other OpenJDK
 So... today we're announcing a new section: [Java Quick Start](https://foojay.io/java-quick-start/) (with hopefully more quick starts to follow, e.g., 'Kotlin Quick Start'), which you can reach via the main menu, which includes a 30 minute [video-series](https://www.youtube.com/playlist?list=PL-3Bf_FLNZLCI7MEiWscgdIwSB8p2Z7Xb) with an introduction to the Java programming language:
 
 {{< gallery >}}
-foojay-menu-quick-start.png
-foojay-playlist-getting-started-942x1024.jpg
+foojay-menu-quick-start.png | | Foojay.io main menu open on OpenJDK Hub, with Java Quick Start expanded to show Install Java and tutorial steps 1 to 4
+foojay-playlist-getting-started-942x1024.jpg | | YouTube playlist 'Foojay - Getting Started With Java' listing eleven short videos from Install Visual Studio Code to What's Next
 {{< /gallery >}}
 
 ## What You Will Learn

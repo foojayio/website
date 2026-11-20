@@ -31,7 +31,7 @@ In this post, I want to compare the different zero-code OpenTelemetry approaches
 
 I keep the architecture pretty simple:
 
-![](architecture.png)
+![Architecture diagram: an Application calls a Ping web service and reads from a PostgreSQL database](architecture.png)
 
 I'm using Reactive data access on both the remote service and the database to spice up things a bit, more specifically, Kotlin coroutines. Here's the general structure:
 
@@ -88,11 +88,11 @@ services:
 
 Here's the Jaeger trace when calling the endpoint on the Spring Boot application:
 
-![](boot-agent-1024x225.png)
+![Jaeger trace for the Spring Boot agent: GET /products with ping, findAll and SELECT spans, including the repository call](boot-agent-1024x225.png)
 
 And here's the one on Quarkus:
 
-![](quarkus-agent-1024x142.png)
+![Jaeger trace for the Quarkus agent: GET /products with ping and SELECT spans but no repository span](quarkus-agent-1024x142.png)
 
 Spring Boot features an additional span that displays the repository call. There's no such thing available on Quarkus, as I'm using the Record pattern to access the data.
 
@@ -127,7 +127,7 @@ The above setup doesn't register the database call. To fix it, we need an additi
 
 The new trace contains the database span:
 
-![](micrometer-1024x190.png)
+![Jaeger trace with Micrometer showing the PostgreSQL query span, with the ping and database calls running one after the other](micrometer-1024x190.png)
 
 You might notice another issue: calls to the service and the database are sequential, where they should be parallel. It stems from Spring Boot not handling context propagation properly to the coroutine scope. It's an underlying work from the Spring team. Subscribe to the [GitHub issue](https://github.com/spring-projects/spring-framework/issues/35185) if you're interested.
 
@@ -142,7 +142,7 @@ The OpenTelemetry project provides a [Spring Boot starter](https://opentelemetry
 </dependency>
 ```
 
-![](boot-starter-1024x143.png)
+![Jaeger trace with the Spring Boot starter: similar to before, with ping and SELECT spans running serially](boot-starter-1024x143.png)
 
 The result is very similar to the previous one, including the not-parallel-but-serial issue.
 
@@ -172,7 +172,7 @@ services:
 
 Results are as expected:
 
-![](quarkus-1024x145.png)
+![Jaeger trace for Quarkus with the new setup: GET /products, ping and SELECT spans, still sequential](quarkus-1024x145.png)
 
 ## Discussion
 

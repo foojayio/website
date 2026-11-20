@@ -24,7 +24,7 @@ Recently, my good friend Richard Fichtner advised using the `mvn dependency:anal
 >
 > It can show you the dependencies you use in your code but have not declared in your pom.xml. This works because you have a transitive dependency on your classpath. Either don't use the dependency or declare it.
 >
-> [![](bafkreibztkdlkhrkyydfdntdkktrdw7qqr4t54m-0653ea62.jpg)](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
+> [![Terminal output where Maven's dependency:analyze warns that commons-collections is used but undeclared, and dependency:tree shows it as a transitive dependency](bafkreibztkdlkhrkyydfdntdkktrdw7qqr4t54m-0653ea62.jpg)](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
 >
 > — [Richard Fichtner 💻☕ @richard.fichtner.dev](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r?ref_src=embed)  
 > [December 10, 2024 at 2:00 PM](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)

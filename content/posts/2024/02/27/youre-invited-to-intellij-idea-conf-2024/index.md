@@ -26,7 +26,7 @@ You'll be able to learn about a variety of topics, like Core Java, Kotlin, Java 
 
 You'll also learn more about IntelliJ IDEA performance enhancements, JetBrains AI Assistant, IntelliJ IDEA's database support, and tips and tricks to make you more productive.
 
-![](Featured_1280x720_x2-1200x675-2-700x394.jpg)
+![IntelliJ IDEA Conf 2024 banner with glowing blue-to-red rounded squares on a black background](Featured_1280x720_x2-1200x675-2-700x394.jpg)
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf "Conference Details and Registration")
 

@@ -92,7 +92,7 @@ jobScheduler.schedule(
 JobRunr integrates very well with the whole Java ecosystem like Spring Boot, Quarkus and Micronaut and supports all major SQL databases and even some popular NoSQL databases.
 
 A feature of JobRunr that neither Quartz nor db-scheduler provide out of the box is a dashboard. Thanks to the built-in dashboard, it's **easy to monitor the system** to see why a job failed or to perform actions such as requeuing or deleting a job.  
-![](dashboard.jpeg)
+![JobRunr dashboard listing enqueued jobs, with counts for scheduled, enqueued, processing, succeeded and failed jobs](dashboard.jpeg)
 
 Used, loved and trusted by developers, the open-source version of **JobRunr provides essential features you need for distributing and scheduling tasks in Java**. You can expect features similar to those in Quartz Scheduler, but much easier to use. The team behind JobRunr also develops and maintains JobRunr Pro which offers Enterprise grade features, making JobRunr Pro the best job scheduling library in Java!
 

@@ -37,7 +37,7 @@ A couple of concepts are central in Spring. The related documentation doesn't de
 
 To configure a Spring application, one creates one or more contexts and registers the necessary bean definitions in the desired ones. In the following sections, we will configure the following simple model:
 
-![](application-model.png)
+![UML class diagram of Person with a name, two constructors, getManager() returning Optional and getName(), referencing an optional manager](application-model.png)
 
 ## Property file
 

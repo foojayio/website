@@ -126,7 +126,7 @@ $ cd ~/helloworld
 ```
 
 ***Step 2:*** Create a module directory that will later contain the **module-info.java** file.
-![](initial-proj-directory2.png) The module directory named using the reverse domain convention.
+![Finder view of a helloworld folder containing src and a com.mycompany.helloworld module folder](initial-proj-directory2.png) The module directory named using the reverse domain convention.
 
 Create a directory using a preferred *naming convention* based on Java Module System's new way to organize source code and modules ([reverse domain name scheme](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html)).
 
@@ -135,7 +135,7 @@ mkdir src/com.mycompany.helloworld
 ```
 
 ***Step 3:*** Create the directory structure **com/mycompany/helloworld** that follows a package namespaces for ***`HelloWorld.java`***
-![](project_directories-89c468ff.png) Figure 2. Project Directory structure for HelloWorld.java file.
+![Finder view with the com/mycompany/helloworld package folders nested inside the com.mycompany.helloworld module folder](project_directories-89c468ff.png) Figure 2. Project Directory structure for HelloWorld.java file.
 
 Under the directory **com.mycompany.helloworld** you will create the following directory structure **com/mycompany/helloworld**. This directory will later contain the **Helloworld.java** file created in Step 5.
 
@@ -146,7 +146,7 @@ mkdir -p src/com.mycompany.helloworld/com/mycompany/helloworld
 ***Step 4:*** Create a ***module-info.java*** file.
 
 Create a file named ***module-info.java*** under the directory ***src/com.mycompany.helloworld*** as shown below.
-![](module-info-file2.png) Figure 3. Module-info.java file
+![Finder view showing a module-info.java file beside the com folder inside the com.mycompany.helloworld module directory](module-info-file2.png) Figure 3. Module-info.java file
 
 Copy and paste the code from Listing 1 into the **module-info.java** file. Use vi, nano or notepad. For example:
 

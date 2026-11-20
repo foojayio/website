@@ -38,7 +38,7 @@ One of the benefits of Java is that observability is almost free. Significantly,
 
 In this example, we'll be using a developer tool called [`Digma`](https://digma.ai/how-it-works/ "<code>Digma</code>") to collect and analyze the tracing data. Digma is an IntelliJ plugin and uses OpenTelemetry behind the scenes to collect data about the code. To get started, all you have to do is install Digma from the [IntelliJ marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "IntelliJ marketplace") and run your code. Even locally you can gather a log of data just by activating your code or running tests. You can get even more comprehensive data by connecting Digma with a CI, Staging, or Production environment.
 
-![](https://lh7-us.googleusercontent.com/fJ_EgVbOzFRsZz4-SbVbv5Bs11h8J0H0yYmpYaQXZE3VksUuRmgf560nIQVKIARAQOLYqlNHPxVrXnQpS3vjVm77HJM0-_iupVpAsPKAl2Jwr0Tf7Hp9gjp2Nmi3dQLSXt8TWZSTtKGiycjwTGhLFuw)  
+![Digma plugin in IntelliJ IDEA collecting OpenTelemetry tracing data for the code](https://lh7-us.googleusercontent.com/fJ_EgVbOzFRsZz4-SbVbv5Bs11h8J0H0yYmpYaQXZE3VksUuRmgf560nIQVKIARAQOLYqlNHPxVrXnQpS3vjVm77HJM0-_iupVpAsPKAl2Jwr0Tf7Hp9gjp2Nmi3dQLSXt8TWZSTtKGiycjwTGhLFuw)  
 
 Digma Continuous Feedback plugin
 
@@ -57,13 +57,13 @@ Learn more: [Here](https://docs.digma.ai/digma-developer-guide "Here")
 
 This insight highlights areas in the code with high levels of runtime dependencies. By identifying these nexus points, developers gain insight into the areas that require meticulous attention and thoughtful refactoring. This insight can help prevent a dependency hell as you refactor your code and better select candidates for extraction into modular components.
 
-![](https://lh7-us.googleusercontent.com/QYJ6kyOdBsmta3ebp1DKVNcXr_6guP6w3N2KweGV4B4RnB6t2eEUAthwazjw59Dnh0E5JOsrmMbhTVbDE9iJCWePLF4vSOqw_2TddZdmpYaIwN8zOoojXaalgl_oLkZ1gE2slg60FBrpOVOotFvQBXQ)
+![Digma runtime dependencies insight highlighting code areas with many dependencies](https://lh7-us.googleusercontent.com/QYJ6kyOdBsmta3ebp1DKVNcXr_6guP6w3N2KweGV4B4RnB6t2eEUAthwazjw59Dnh0E5JOsrmMbhTVbDE9iJCWePLF4vSOqw_2TddZdmpYaIwN8zOoojXaalgl_oLkZ1gE2slg60FBrpOVOotFvQBXQ)
 
 Code Nexus Point Insight
 
 In the example above, we can see that the "Services" property reveals that only one service uses the current method. Based on the intended architecture, we can make that method part of a microservice that uses it. If more than one service uses that method, consider moving that service to a shared module. Look at the image below, which shows three service references.
 
-![](https://digma.ai/wp-content/uploads/2024/04/image-7.png)
+![Digma insight whose 'Services' property shows only one service uses the current method](https://digma.ai/wp-content/uploads/2024/04/image-7.png)
 
 ## Top Usage Insight
 
@@ -71,7 +71,7 @@ With this insight you see more specific information about how the code is used, 
 
 By using this insight, you can see all the places that call your method and their usage rate. Use the traces button to investigate traces in more detail.
 
-![](https://lh7-us.googleusercontent.com/EF2TaoZaMI33ojX7n3cBINYbzRLc3T7XAvG9RkVbNeENGXoLztoC5PEf9SNvuUrFrT92ZsZLtQXTRYnKAGWJz83uArDDoScaI3QxziOInhnh8YRjdjGBYGr5-MW85MOm7U9BTmwIwCYSKWo37WoVjbo)  
+![Digma usage insight listing the callers of a method and their usage rate](https://lh7-us.googleusercontent.com/EF2TaoZaMI33ojX7n3cBINYbzRLc3T7XAvG9RkVbNeENGXoLztoC5PEf9SNvuUrFrT92ZsZLtQXTRYnKAGWJz83uArDDoScaI3QxziOInhnh8YRjdjGBYGr5-MW85MOm7U9BTmwIwCYSKWo37WoVjbo)  
 
 Top Usage Insight
 
@@ -81,7 +81,7 @@ The above insights allow us to reveal important information pieces about how the
 
 Digma provides annotations over such areas in the IDE editor to draw your attention to the fact that they are not reached by any flow in the application:
 
-![](https://lh7-us.googleusercontent.com/WQX3wvdWrU4S-9ZSwSKeHD1098x5J4klfm6gNnA8gve4YSj_EqEtUtpVcR5HPV3OnNPgxwMY0UvRvY5hbHzTxsbae3iuJoxfRuGZJEuDyMmBF5-yMPohCuc3fbhWp5fxFGB0c8M7XRSUK-D0mEsaNRQ)
+![Digma editor annotation marking code that no application flow reaches](https://lh7-us.googleusercontent.com/WQX3wvdWrU4S-9ZSwSKeHD1098x5J4klfm6gNnA8gve4YSj_EqEtUtpVcR5HPV3OnNPgxwMY0UvRvY5hbHzTxsbae3iuJoxfRuGZJEuDyMmBF5-yMPohCuc3fbhWp5fxFGB0c8M7XRSUK-D0mEsaNRQ)
 
 ## Duration Breakdown Insight
 
@@ -89,7 +89,7 @@ Lastly, for each area in our application, Digma will reveal the Duration Breakdo
 
 Understanding the performance of methods is crucial to microservices migration and will save you a lot of time and frustration. Most likely, it was performance problems that led you to the decision to switch to microservices.
 
-![](https://digma.ai/wp-content/uploads/2024/04/image-6-768x357.png)  
+![Digma Duration Breakdown insight showing where time is spent in a method](https://digma.ai/wp-content/uploads/2024/04/image-6-768x357.png)  
 
 Duration Breakdown Insight
 

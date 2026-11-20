@@ -29,7 +29,7 @@ What's good about all this is that we can now look at more meaningful measures o
 Over the past 6 months, the activity that most clearly highlights all the key strengths and relevance of the Friends Of OpenJDK community was [FOSDEM 2023](https://fosdem.org/2023/schedule/track/friends_of_openjdk/).
 
 After having collaborated with and supported FOSDEM during the two virtual years of the Corona period, we came together for the first time in person this year, bringing together developers from across the Java community, and beyond, and had an awesome and truly united experience, [as described in detail here](https://foojay.io/today/foojay-io-at-fosdem-2023-trip-report/), with a speaker dinner and full rooms and well known as well as less well known engaging speakers.
-![](image-1-1024x631.jpg)
+![Packed lecture hall of developers listening to a talk at FOSDEM](image-1-1024x631.jpg)
 
 We fully intend to continue the tradition next year. Maybe we could try to use both FOSDEM days, since we have so much content, and 20 minute sessions are entertaining and fun, though occasionally also a bit stressful.
 
@@ -51,7 +51,7 @@ That means that there's an organization-level commitment to the community goals 
 ## Foojay Today
 
 Probably the most successful aspect of the Foojay site, at least in terms of broad usage, are [the daily articles](https://foojay.io/today). Every day, Monday to Friday, of the week one or more articles are published by the community on [Foojay Today](https://foojay.io/today).
-[![](image-11-1024x693.png)](https://foojay.io/today/)
+[![Foojay Today page in dark theme showing the latest post, article cards and a category list on the right](image-11-1024x693.png)](https://foojay.io/today/)
 
 Since Foojay Today is the one part of Foojay that changes on a daily basis, with continual new content coming in, which is discussed and worked on collaboratively via [the Foojay Slack channels, including a publicly discussed weekly schedule](https://bit.ly/join-foojay-slack), it is also the part that drives the majority of the unique views, shown in the stats section below.
 
@@ -60,7 +60,7 @@ Since Foojay Today is the one part of Foojay that changes on a daily basis, with
 A lot of work has been done by the Yelk team in Ukraine in collaboration with the Foojay.io community. Of course, Foojay.io is a WordPress site. In a way, that's sad, that we're not (yet?) using an OpenJDK technology for the Friends Of OpenJDK site. On the other hand, everyone knows (loves?) WordPress, so onboarding new collaborators is trivial.
 
 We're constantly finetuning and adding enhancements and new features to Foojay.io, ever since we began the project from scratch in April 2020. One of the most impressive recent features is the [Foojay.io Community Calendar](http://https;//foojay.io/calendar).
-[![](image-10-1024x495.png)](https://foojay.io/calendar)
+[![Foojay calendar for July 2023 with Java conferences and JUG meetups shown as bars across the weeks](image-10-1024x495.png)](https://foojay.io/calendar)
 
 The intention is for this calendar to list ALL conferences and JUG events or relevance to anyone using the OpenJDK in any way. To that end, an API is available, and integration has already been done with the Adoptium calendar and the JUG Switzerland calendar, while manually adding new events to the moderation queue is a simple process (requiring no login credentials) of clicking on a calendar cell and then submitting the details in a simple form.
 
@@ -98,7 +98,7 @@ A separate article on interesting analysis relating to the Disco API will be pub
 ## Podcast
 
 A really cool addition to the Foojay.io "franchise" is the [Foojay.io Podcast](https://foojay.io/today/category/podcast/), with its cool jingle (thanks Erik Costlow), great host (first Erik, then Frank Delporte, and now sometimes others too, i.e., really sharing the fun/load).
-[![](image-15-1024x634.png)](https://foojay.io/today/category/podcast/)
+[![Podcast download chart showing a cumulative rise to 5,216 downloads between June 2022 and June 2023](image-15-1024x634.png)](https://foojay.io/today/category/podcast/)
 
 Frank went on a virtual JUG tour, several JUGs have been covered, great conversations with cool people from all over the world, plus many interesting themed podcasts, really great, and more coming from September onwards.
 
@@ -111,24 +111,24 @@ Check it out:
 Something rather wonderful has been happening on the [Foojay.io Slack](https://bit.ly/join-foojay-slack) over the last few months. Initiated by well known Dutch Java luminaries Roy Wasse and Bert Jan Schrijver, and others from [OpenValue](https://www.openvalue.eu/), a Java certification is being worked out that actually measures programming skills (rather than the ability to complete multiple choice questions, etc).
 
 This will be the Java community validating Java skills and anyone certified via the Foojay.io Java Certification program will have community stamp of approval with prospective employers having a stronger guarantee that their new hires know what they're claiming to know. During this week, a session will be held [at the OpenValue meetup](https://www.meetup.com/openvalue/events/294280905/) on this topic, as outlined below.
-[![](image-14-1024x559.png)](https://www.meetup.com/openvalue/events/294280905/)
+[![Slack post announcing the talk 'How good of a developer are you?' by Roy Wasse and Bert Jan Schrijver](image-14-1024x559.png)](https://www.meetup.com/openvalue/events/294280905/)
 
 Join in with the above [at the OpenValue meetup here](https://www.meetup.com/openvalue/events/294280905/) and, of course, [join the Foojay Slack](https://bit.ly/join-foojay-slack), where there's a channel dedicated to the above discussion, a cadence of meetings, experimentation, demos, etc, i.e., a vibrant project that's great to be able to host and encourage via Foojay.
 
 ## OpenJDK Information
 
 The first impulse for the creation of Foojay.io back in April 2020 was the absence of a clear place listing all the issues making it into a quarterly update or LTS release. That content continues to be added to the site each quarter, [as shown below](https://javaalmanac.io/jdk/17/), with the option for anyone to vote on their favorite fixes for addition to the Highlights tab.
-[![](image-12-1024x601.jpg)](https://javaalmanac.io/jdk/17/)
+[![Foojay OpenJDK Update and Release Details page for Java 17 listing issues with component, priority and voting](image-12-1024x601.jpg)](https://javaalmanac.io/jdk/17/)
 
 A key collaborator with Foojay.io is Chris Newland, whose range of tools on [chriswhocodes.com](https://chriswhocodes.com/) are gradually being transitioned to Foojay.io, most recently his collection of command line arguments reference materials, though the display and user interface continue to be enhanced and expanded.
-![](image-13-1024x612.png)
+![Foojay OpenJDK 21 Command Line Arguments page with a table of options and counts of new and removed options](image-13-1024x612.png)
 
 A core aspect of Foojay.io is these kinds of reference materials, though they may be of relevance to a smaller subset of Java developers than initially thought. I.e., this is not daily changing content and therefore may attract less views, while the fact that this reference material is out there is something that could be better known. Still, bottom line, this content may be more relevant for specialists rather than the daily worker bee putting applications together as specified by architects and other team leaders who are of a smaller number and may be the ones who find this kind of content of greater relevance to them.
 
 ## Everybody Wants Stats
 
 Below you can see that the trend breaks midway through last year, referred to in the note in small script above, purely because of the change in cookie policies, which means that any discussion of the number of unique views across the Foojay.io site is now meaningless. Also the total unique visitors and sessions has been impacted by this.
-![](image-4-1024x767.png)
+![Google Analytics chart from May 2020 to July 2023 showing 233K users, with traffic climbing and then dipping mid-2022](image-4-1024x767.png)
 
 The Y axis shows a line for each day from May 1, 2020 (the first month of Foojay's existence) to today. The X axis shows the number of unique views on each day. There are very big spikes, which have been discussed in previous Foojay status reports, referred to above.
 
@@ -139,14 +139,14 @@ The day on which the largest spike took place overall above correlates with the 
 Notice that you can now see the total number of unique views, which several people have asked for. It helps to see which articles clearly resonate with a broad audience versus those that are more relevant to a more niche group of specialists. (In the above case, the article was republished in November 2021, while it was originally published in September 2021, which is why the unique views count starts in September while its publication date shows November. Maybe that distinction should also be shown, i.e., first published versus subsequent republications.)
 
 Each article now publicly exposes its unique views live on the page, although within WordPress itself this information has always been visible, i.e., these are the most popular articles that have been published on Foojay.io.
-![](image-7-1024x420.png)
+![WordPress post list sorted by unique views, led by 'Working with Multiple Carets in IntelliJ IDEA' with 51,674 views](image-7-1024x420.png)
 
 In addition to all the articles on Foojay Today, all/many/most of the other pages on Foojay are now for the first time also being tracked for unique views, so as to gather stats on them, too. For example, you'll see the below on the [Foojay Download page](https://foojay.io/download).
 
 {{< img src="image-8.png" class="size-full is-resized" width="334" height="104" >}}
 
 It helps to take two equivalent periods and compare them to each other, before the cookie policy change, e.g., May 1 to July 13 in 2022 with the same period in the previous year, which shows an almost 100% growth of unique users year over year, as shown below, together with other stats from those specific periods.
-![](image-9-1024x702.png)
+![Notes comparing May-July 2022 with 2021: overall unique users up 96.1% to 35,056, with Google traffic up 336.3%](image-9-1024x702.png)
 
 Other stats that may be of interest are that Foojay.io now has over 10K followers on Twitter (though that number goes up and down quite wildly and erratically), 1101 subscribers on [Foojay.io Slack](https://bit.ly/join-foojay-slack), and the number of Foojay.io Today authors [is publicly listed here](https://foojay.io/today/author).
 
@@ -155,13 +155,13 @@ Other stats that may be of interest are that Foojay.io now has over 10K follower
 A recurring question in the context of Foojay.io relates to who has "skin in the game" here. As indicated in the Foojay.io Advisory Board Growth section above, there's no "pay for play" here, the downside of which is the loosely coupled commitment of the organizations involved in the Foojay community. I.e., the "skin in the game" is of a collaborative nature, i.e., content is introduced from the organization to the Foojay.io, which is fantastic and shows the level of support the organization has for Foojay.
 
 However, maybe more options than that could be available. One that has recently been developed and is available to organizations is something akin to part of Foojay now being available for ads and sponsorship. There is a new section in the Foojay WordPress specifically for adding adverts to Foojay, as shown below, together with the number of times the ad is displayed, great for analysis and post mortems after a campaign has ended.
-![](image-1024x495.png)
+![WordPress admin list of two ads, the Kafka on Azul Platform Prime banner (174 displays) and the Java Quick Start Guide (200)](image-1024x495.png)
 
 And when creating the ad, as shown below, the Probability field is available which sets the likelihood/frequency that the ad will be shown.
-![](image-1-1024x843.png)
+![WordPress ad edit form for the Apache Kafka banner with title, description, link, colors and a probability field](image-1-1024x843.png)
 
 The ads appear high up on the page, at or around "above the fold", i.e., no scrolling is needed to see at least the top of the advert, the above settings producing the advert shown below.
-![](image-2-1024x909.png)
+![Foojay home page with article cards and a blue banner ad for Apache Kafka performance on Azul Platform Prime](image-2-1024x909.png)
 
 There is no annoying scrolling or flashing between one ad and the next. Instead, whenever you land on the main page (refresh it a few times to see the two currently available) you see the advert based on the probability setting. When you come back the next time, the probability that the ad you've already seen will be shown again is lower than before, and most likely you'll see a different ad, based on its probability. Once a few more have been added, we'll also make explicit that these are actually ads, i.e., some kind of "Sponsored Content" label, will be added to the above banner.
 

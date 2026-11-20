@@ -19,10 +19,10 @@ related_posts:
 **In my previous Java-related blog post called [Level-up your Java Debugging Skills with on-demand Debugging](https://foojay.io/today/level-up-your-java-debugging-skills-with-on-demand-debugging/), I showed you how to use the `onthrow` option of the JDWP agent to start the debugging session on the first throw of a specific exception.**
 
 This gave us a mysterious error in JDB:
-![](image-3-1b809dff.jpg)
+![Terminal showing a NullPointerException in the jdb event handler because ExceptionEvent.exception() returned null](image-3-1b809dff.jpg)
 
 And I asked if somebody had any ideas. No one had, but I was at Devoxx Belgium and happened to talk with [Aleksey Shipilev](https://shipilev.net/) about it at the Corretto booth:
-![](F7hNsheWUAA0Y46-2000x1500-25a1d10f.jpg) Two OpenJDK developers having fun at Devoxx: Investigating a jdb bug with Shipilev   
+![Selfie of two developers at a Devoxx Belgium booth in front of an Amazon CodeWhisperer sign](F7hNsheWUAA0Y46-2000x1500-25a1d10f.jpg) Two OpenJDK developers having fun at Devoxx: Investigating a jdb bug with Shipilev   
 in the Coretto booth ([Tweet](https://twitter.com/parttimen3rd/status/1709201492115095904))
 
 We got a rough idea of what was happening, and now that I'm back from Devoxx, I have the time to investigate it properly. But to recap: How can you use the `onthrow` option and reproduce the bug?
@@ -148,7 +148,7 @@ void JNICALL Exception(
 > [JVMTI Documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/jvmti.html#Exception)
 
 On every exception, this handler [checks](https://github.com/openjdk/jdk/blob/ad7a8e86e0334390f87ae44cf749d2b47f1409a1/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L469) if the exception has the name passed to the `onthrow` option. If the exception matches, then the agent initializes the debugging session:
-![](onthrow-2000x1085-35597a3a.jpg)
+![Diagram: the first throw of an Ex exception triggers a handler that starts a debugging session, later throws send exception events normally](onthrow-2000x1085-35597a3a.jpg)
 
 The only problem here is that `cbEarlyException` is passed all the exception information but doesn't pass it to the `initialize` method. This causes the JDWP-agent to send out an Exception event with all fields being `null`, as you saw in the previous section.
 
@@ -201,7 +201,7 @@ main[1]
 ```
 
 But does fixing this issue also mean that IDEs like IntelliJ IDEA now support attaching to agents with `onthrow` enabled? Yes, at least if we set a breakpoint somewhere after the first exception has been thrown (like with the `onjcmd` option):
-![](Screenshot-2023-10-11-at-13.00.17-2000x1-5295a20f.jpg)
+![IntelliJ IDEA debugger stopped on a throw statement in OnThrowAndJCmd.java after attaching remotely](Screenshot-2023-10-11-at-13.00.17-2000x1-5295a20f.jpg)
 
 ## Conclusion
 

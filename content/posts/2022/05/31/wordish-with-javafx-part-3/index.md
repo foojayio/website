@@ -55,9 +55,9 @@ After navigating from the Wordish game view to the How to Play view, we must ret
 Furthermore, we must also save the games' results in order to display the game statistics and create the bar chart in the Statistics view. Figure 2 shows these three views of Wordish.
 
 {{< gallery caption="Figure 2. The three views of Wordish" >}}
-playgame5-copy-619x1024.png
-howto-screen-1-619x1024.png
-chart-stats.png
+playgame5-copy-619x1024.png | | Wordish game board with a three-row guess, colored tiles and an 'IMPRESSIVE' message above the on-screen keyboard
+howto-screen-1-619x1024.png | | Wordish 'How to Play' screen with rules and examples of green, yellow and gray letter tiles
+chart-stats.png | | Wordish Statistics view: 6 played, 100% wins, and a guess distribution bar chart peaking at 3 guesses
 {{< /gallery >}}
 
 There are several ways to implement data sharing among the views. One, Gluon includes a convenient library called [Glisten Afterburner](https://gluonhq.com/gluon-mobile-next-iteration/)(part of Gluon Mobil) that implements a minimalistic dependency injection.

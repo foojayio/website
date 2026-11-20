@@ -23,7 +23,7 @@ Local variables and method parameters use memory based on a 'stack'. This area o
 
 These two memory areas are depicted below:
 
-![](Screenshot-2023-09-22-at-5.40.01-PM.png)  
+![Diagram: a JVM contains several threads, each with a stack, and a shared heap](Screenshot-2023-09-22-at-5.40.01-PM.png)  
 
 Figure 1. JVM Stack and Heap Memory Areas  
 
@@ -53,7 +53,7 @@ To note, as long as an object is "reachable", it is 'live' and the garbage colle
 
 The root set includes all local variables and method parameters that are currently on all thread stacks. If two objects referenced each other, but could not be reached by the root set, they would be garbage collected.
 
-![](Screenshot-2023-09-22-at-5.39.32-PM-1024x489.jpg)  
+![Diagram: objects reachable from the root set are kept, while unreachable objects are garbage collected](Screenshot-2023-09-22-at-5.39.32-PM-1024x489.jpg)  
 *Figure 2. Object Reachability*
 
 The time between an object's creation and the time it is destroyed is encapsulated by the term '[object lifetime](https://en.wikipedia.org/wiki/Object_lifetime "object lifetime")'. With 'short-lived' objects, these remain in a part of the heap memory known as the '[Nursery](https://docs.oracle.com/cd/E15289_01/JRSDK/garbage_collect.htm#i1087437 "Nursery")', this is also known as the 'Young Space', or as 'Eden'. With longer living objects, typically these are moved to the part of the heap known as 'Tenured' (the 'Old Space') in order to free up the nursery for new objects to be allocated.
@@ -64,7 +64,7 @@ It is important to aim for either short lived objects that have a lifetime short
 
 In the case that object allocation is very low, and the heap is sized appropriately for a system, garbage collection happens so rarely that it doesn't impact the running of the application, which is something that we aim for at [Chronicle](https://chronicle.software/ "Chronicle"). For more details on the different areas of memory and how objects are stored in them, see [here](https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/garbage_collect.html "here").
 
-![](Screenshot-2023-09-22-at-5.39.07-PM-1024x402.png)  
+![Diagram: JVM heap divided into a nursery (new) space and a tenured (old) space holding objects](Screenshot-2023-09-22-at-5.39.07-PM-1024x402.png)  
 *Figure 3. Nursery and Tenured space within the JVM Heap*
 
 In short, when field and local variables are declared, in your class only enough memory is allocated for the reference. The reference is usually 4 or 8 bytes per object, regardless of the size of the object itself, which is allocated elsewhere on the heap. Object allocation is the process of allocating object memory, which is allocated when the 'new' operator is used.
@@ -75,7 +75,7 @@ Still unclear? Let's take a look at an analogy.
 
 To illustrate object allocation, let's imagine a set of shelves, which you want to add your coffee mugs to:
 
-![](Screenshot-2023-09-22-at-5.40.48-PM.jpg)  
+![A wall shelf of many different coffee mugs, illustrating objects allocated in memory](Screenshot-2023-09-22-at-5.40.48-PM.jpg)  
 *Image 1. Mugs organised on a shelf, representing objects in a system*
 
 Each coffee mug represents an object in a system, and the person organising the shelves can symbolise the JVM managing memory. Similar to a computer's memory having limited space, the shelf too has limited capacity for storing your mugs.

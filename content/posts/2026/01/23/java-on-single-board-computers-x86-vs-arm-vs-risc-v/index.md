@@ -20,7 +20,7 @@ related_posts:
 Ever since I started my #JavaOnRaspberryPi journey in 2019, which resulted in my book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)", I've been fascinated with these tiny, inexpensive computers. For 2026, I've set one of my goals to experiment with Java on various Single-Board Computers (SBC), going beyond my "Raspberry Pi comfort zone." The market is flooded with SBCs ranging from budget boards (tens of euros) to powerhouses (hundreds of euros). One of the reasons of this price range is the difference between the processors they use. Raspberry Pi uses an ARM processor, but RISC-V is gaining momentum, while Intel maintains its presence. So before I start experimenting, now is the perfect time to compare these three processor families and understand their differences.
 
 This post is just a "comparison of facts." I was so lucky to receive a few different boards at the end of 2025, so expect more posts later when I run my first tests on them!
-![](single-board-computers-1024x549.jpg)
+![Five single-board computers laid out on a desk: Raspberry Pi 4, Orange Pi 5 Ultra, Orange Pi RV2, VisionFive 2 Lite and another RISC-V board](single-board-computers-1024x549.jpg)
 
 On the picture:
 

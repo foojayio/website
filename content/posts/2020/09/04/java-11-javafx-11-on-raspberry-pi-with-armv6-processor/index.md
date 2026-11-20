@@ -76,7 +76,7 @@ The sources of Java are available through the [open-source project OpenJDK](http
 ### Install Java 11 for ARMv6 provided by Azul
 
 Only Azul seems to provide an ARMv6 version with their [Zulu builds of OpenJDK](https://www.azul.com/downloads/zulu-community), which is available for free!
-![](azul-zulu-armv6-1024x328.png)
+![Azul Zulu download page filtered to Java 11 JDK for Linux ARM 32-bit HF, version 11.0.8](azul-zulu-armv6-1024x328.png)
 
 Let's get it from their download page and extract it on our Raspberry Pi.
 
@@ -249,7 +249,7 @@ $ sudo java --module-path /home/pi/armv6hf-sdk/lib
 ```
 
 And there we have it! JavaFX running on an ARMv6 Raspberry Pi B+ 1.2!!!
-![](javafx-on-armv6-raspberrypi-1024x422.jpg)
+![Raspberry Pi B+ terminal showing an ARMv6 CPU and Java 11.0.8, with a JavaFX 11 window displaying a 'Click me' button](javafx-on-armv6-raspberrypi-1024x422.jpg)
 
 ## Conclusion
 

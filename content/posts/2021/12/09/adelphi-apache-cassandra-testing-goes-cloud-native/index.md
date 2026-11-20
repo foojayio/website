@@ -22,7 +22,7 @@ related_posts:
 |-----------------------------------------------------------------------------------------------------------------------|
 | **adelphi** (ancient greek ἀδελφός) - Subs.: brother or sister, son of the same mother. Adj.: double, twin, in pairs. |
 
-![](Screen-Shot-2021-05-11-at-14.44.17-1024x129.png)
+![Argo workflow graph where every step has succeeded, from start-registry and Cassandra clusters through run-diff to start-results-server](Screen-Shot-2021-05-11-at-14.44.17-1024x129.png)
 
 **What is Adelphi?**
 
@@ -47,7 +47,7 @@ The pre-packaged workflow spins up two side-by-side (though isolated) Cassandra 
 We refer to these two clusters as **source** and **target** . The source cluster should be a stable version, the ground-truth for the tests. The target cluster is the *system under test*, in other words the new version you want to evaluate. For instance, if you have a production cluster on 3.11.7, you can set that version for the source cluster, and then use 4.0.0 for the target.
 
 Alternatively, you can also choose a commit hash (or branch/tag name) for the target cluster, in which case Adelphi will build Cassandra from the source code and generate a Docker image on the fly to be deployed in Kubernetes (this assumes the selected checkpoint has no breaking changes in relation to the K8ssandra API). The latter scenario is particularly useful if you are contributing a patch to Cassandra.
-![](Adelphi-Overview-Page-1-1024x607.png)
+![Diagram of Adelphi in a Kubernetes cluster: a workload runs against Cassandra 3.11.7 source and 4.0.0 target clusters, with metrics and integrity checks](Adelphi-Overview-Page-1-1024x607.png)
 
 As depicted in the diagram above, the main input for Adelphi is the CQL schema. When you issue the install command, the provided schema is sent over to the workflow controller and from that point on Adelphi will take control and do the rest for you. It will apply the schema in the clusters and run pseudo-random, reproducible, workloads tailored for your schema.
 
@@ -60,7 +60,7 @@ This section shows how to validate a schema using Adelphi. It assumes you have a
 If you want to follow along in your local environment, check the setup instructions and requirements in the project's [Getting Started](https://github.com/datastax/adelphi/blob/master/GETTING_STARTED.md) guide to create a Kubernetes cluster with k3d (before you proceed locally, make sure the KUBECONFIG environment variable is pointing to the correct k8s cluster).
 
 The schema used in this article comes from the [Banking IOT project](https://github.com/DataStax-Examples/banking-iot-demo). In order to use that schema definition, we have to create a YAML file to hold our custom settings. For now it only needs two attributes: `cql_schema` containing the CQL statements, and gemina_schema_keyspace specifying the name of the keyspace you want to test (at the moment, we only support testing a single keyspace at a time), so it should look like this:
-![](my-settings-1024x297.png)
+![Text editor showing my-settings.yaml with a gemini_schema_keyspace setting and CQL schema creating a banking transactions table](my-settings-1024x297.png)
 
 And that's it! We are ready to install Adelphi in the Kubernetes cluster using our own schema, so go to the Adelphi root folder and execute:
 
@@ -77,7 +77,7 @@ That will immediately start the workflow and you can watch the progress either i
 $ argo watch -n cass-operator @latest
 ```
 
-![](argo-cli-1024x482.gif)
+![Terminal output of 'argo watch' for workflow-adelphi-1, listing steps like cassandra-source, start-registry and cassandra-ready](argo-cli-1024x482.gif)
 
 or in the Argo UI:
 
@@ -89,7 +89,7 @@ deployment/argo-server \ # the service we want to access
 ```
 
 open the browser at [http://localhost:2746](http://localhost:2746/)
-![](argo-ui.gif)
+![Argo UI showing workflow-adelphi-1 with a graph of steps in progress, some completed with green checkmarks](argo-ui.gif)
 
 When the workflow reaches the end, you can open up the Grafana dashboard to inspect the collected metrics:
 
@@ -101,7 +101,7 @@ grafana \ # the service we want to access
 ```
 
 open the browser at [http://localhost:3000](http://localhost:3000/) (first-time credentials: admin/admin)
-![](Grafana-1024x367.png)
+![Grafana 'Adelphi Metrics' dashboard with data integrity counts, ops charts, error counts and client overhead graphs](Grafana-1024x367.png)
 
 If you are already familiar with the dashboard that comes with NoSQLBench, you will notice Adelphi's is very similar, except that the metrics for both clusters are overlaid.
 
@@ -162,7 +162,7 @@ Cass-Operator is responsible for managing the Cassandra nodes: starting them up,
 Argo Workflow enables the creation of reusable templates of workflow steps such that k8s manifests can be applied in a lazy fashion and only executed at the appropriate time. When you install the Adelphi chart with Helm, it will submit all templates to the Argo Server and then the Workflow Controller will instantiate them later on.
 
 The pods initiated by Argo are ephemeral and they are immediately terminated when each step completes. Other pods in the system are persistent, in the sense that they remain available for inspection even after the workflow is done, such as the Cassandra nodes and the web server (they will still be removed when you uninstall Adelphi).
-![](Adelphi-Overview-Page-2-741x1024.png)
+![Architecture diagram of Adelphi in the cass-operator namespace: NoSQLBench, Gemini and cassandra-diff run against two datacenters and write to a web server](Adelphi-Overview-Page-2-741x1024.png)
 
 In the diagram below you see a logical representation of the communication between the main components. The arrows indicate the direction the data is written (either workload data or metrics) and as you can see, there is no direct communication between the Cassandra clusters, they're isolated from one another. The dotted boxes represent workflow-managed pods while the solid boxes represent long-lived pods.
 

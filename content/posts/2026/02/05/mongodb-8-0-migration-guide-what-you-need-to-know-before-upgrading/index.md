@@ -33,7 +33,7 @@ The most popular document database is [now faster than ever](https://www.mongodb
 ### Queryable Encryption
 
 With the new version, Queryable Encryption enables you to search within a range, using operators like $lt, $lte,$gt, and $gte, for example, to filter data by specific intervals, such as dates or numerical values, while keeping the data encrypted.  
-![](Screenshot-2025-12-30-at-10.14.49-PM.png)
+![Side by side document views: the application sees sensitive fields decrypted, while DBA/AWS/Dev view shows them masked](Screenshot-2025-12-30-at-10.14.49-PM.png)
 
 *MongoDB encrypted data view*
 
@@ -48,7 +48,7 @@ db.customer.find({_id: ObjectId('670ec6b005b98857588f5b6a')}).explain()
 ```
 
 …you will see that this new EXPRESS_IXSCAN stage has been included.  
-![](Screenshot-2025-12-30-at-10.17.14-PM.png)
+![MongoDB Compass explain plan showing the new EXPRESS_IXSCAN stage returning one document by _id](Screenshot-2025-12-30-at-10.17.14-PM.png)
 
 *MongoDB Compass Explain plan view*
 
@@ -108,7 +108,7 @@ db.pizzaOrders.find({price: 10})
 ```
 
 …the query will be automatically rejected by MongoDB:  
-![](Screenshot-2025-12-30-at-10.18.43-PM.png)
+![Error banner reading 'Query rejected by admin query settings'](Screenshot-2025-12-30-at-10.18.43-PM.png)
 
 *Query rejected by admin query settings*   
 
@@ -231,7 +231,7 @@ No other place will contain more valuable information than the release notes of 
 #### Check the driver compatibility
 
 Before upgrading anything MongoDB related, it's crucial to check the compatibility tables in the documentation for your driver. To **avoid** **breaking your application**, you should ensure that the MongoDB version is compatible with the MongoDB driver that you plan to use. Take a look at this image:  
-![](Screenshot-2025-12-30-at-10.22.59-PM.jpg)
+![MongoDB driver compatibility table showing which Java driver versions fully support MongoDB 8.0 and older releases](Screenshot-2025-12-30-at-10.22.59-PM.jpg)
 
 *MongoDB Java Driver Compatibility Table*
 
@@ -240,7 +240,7 @@ We can see that to use all the features of MongoDB 8.0, you need to use the driv
 #### Cluster health check
 
 Another crucial point before starting the migration is to check the health of all the members of your replica set. **Ensure all nodes are running optimally.** You can find this information by accessing the "Database Cluster" menu and clicking on your cluster:  
-![](Screenshot-2025-12-30-at-10.24.50-PM.png)
+![MongoDB Atlas cluster nodes in Sao Paulo: two healthy secondaries and one primary](Screenshot-2025-12-30-at-10.24.50-PM.png)
 
 *Cluster health*
 
@@ -254,7 +254,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 #### This step involves creating a dedicated cluster for testing purposes. Follow the standard process to set up a new cluster, *ensuring it matches the current production version* to simulate the production environment accurately.
 
-![](Screenshot-2025-12-30-at-10.25.20-PM.png)
+![Atlas Additional Settings with the MongoDB version dropdown open, offering 6.0, 7.0, 8.0 and Latest Rapid Release](Screenshot-2025-12-30-at-10.25.20-PM.png)
 
 *Additional Settings - Creating a new Cluster*
 
@@ -262,7 +262,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 #### Restore a recent backup from the production cluster to ensure the staging environment mirrors the current state of production. You can do this through the Atlas interface by selecting the backup, choosing the restore option, and targeting the staging cluster.
 
-![](Screenshot-2025-12-30-at-10.25.50-PM.png)
+![Atlas restore dialog for a snapshot with target project and target cluster dropdown](Screenshot-2025-12-30-at-10.25.50-PM.png)
 
 *Restoring Backup*
 
@@ -281,7 +281,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 After testing in a staging environment, ensure that the **Feature Compatibility Version (FCV)** is set appropriately, before upgrading the production cluster.
 
 FCV provides an extra layer of security during the upgrade process by controlling which features of the new MongoDB version are enabled in the cluster. This allows you to transition gradually to the latest version, making sure everything works correctly before fully enabling the new features in production.  
-![](Screenshot-2025-12-30-at-10.27.38-PM.png)
+![Atlas cluster menu with the 'Pin Feature Compatibility Version' option highlighted](Screenshot-2025-12-30-at-10.27.38-PM.png)
 
 *Pinning Feature Compatibility Version*
 
@@ -292,7 +292,7 @@ Once you've configured the FCV (if desired), you can proceed with upgrading the 
 ### Monitoring
 
 Post-migration is just as important as all the previous steps. Monitoring the operation is crucial to ensure the success of the process.
-![](Screenshot-2025-12-30-at-10.28.06-PM.png)
+![Atlas network metrics charts for three shards of a cluster, with a red marker showing the upgrade moment](Screenshot-2025-12-30-at-10.28.06-PM.png)
 
 *MongoDB Atlas metrics*
 
@@ -307,7 +307,7 @@ Some important points to check are:
 **Indexes**: Check that indexes are functioning properly and optimize them if necessary.
 
 Last but not least, check the metrics for each node in your cluster. They will provide valuable insight into the overall health of your system. You can find them in the "Metrics" tab of your cluster:  
-![](Screenshot-2025-12-30-at-10.28.29-PM.png)
+![MongoDB Atlas cluster metrics: connections, CPU, query execution times, hottest collections and no slow operations](Screenshot-2025-12-30-at-10.28.29-PM.png)
 
 ### *Cluster node metrics*
 

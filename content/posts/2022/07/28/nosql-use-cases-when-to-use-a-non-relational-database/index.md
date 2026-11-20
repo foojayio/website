@@ -60,7 +60,7 @@ NoSQL comes with many benefits, including:
 ## Comparing NoSQL to SQL
 
 While NoSQL databases have many advantages, they're not the right choice for every situation. Sometimes sticking with a tried-and-true SQL database is the way to go. Let's compare SQL and NoSQL databases across several factors. Think about how each would apply to your data profile and use cases.
-![](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![](1_tJO9HgZyaAjFSseYzjG1Og.png)
+![Comparison table of SQL and NoSQL databases on data structure, scalability, availability, query ability and speed](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![Continued SQL versus NoSQL table covering developer speed, data integrity, dataset size and community](1_tJO9HgZyaAjFSseYzjG1Og.png)
 
 ## NoSQL use cases
 

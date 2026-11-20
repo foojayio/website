@@ -106,7 +106,7 @@ plockstat(1)             - front-end to DTrace to print statistics about POSIX m
 
 It's worth your time going over this list to realize what you can truly do here.
 
-![](Screen-Shot-2022-07-04-at-7.24.48-700x302.png)
+![Terminal listing of DTrace-based tools on macOS, such as dtruss, execsnoop and iosnoop, with one-line descriptions](Screen-Shot-2022-07-04-at-7.24.48-700x302.png)
 
 ### Examples
 
@@ -243,7 +243,7 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libdl.so.2", O_RDONLY|O_CL
 
 There are many system calls you can learn and use to track many behaviors such as this: connect, write, etc. This is only the tip of the iceberg of what you can do using strace. Julia Evans wrote some of the most [exhaustive and entertaining posts on strace](https://jvns.ca/categories/strace/). If you want to learn more about it, there's probably no better place (also check out her other stuff... Amazing resources!).
 
-![](Screen-Shot-2022-07-04-at-7.26.35-700x278.png)
+![strace output for 'java -classpath . PrimeMain' showing many failed open() calls with ENOENT before libraries are found](Screen-Shot-2022-07-04-at-7.26.35-700x278.png)
 
 ### Strace and Java
 

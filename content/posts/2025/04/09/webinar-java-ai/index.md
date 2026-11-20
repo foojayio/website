@@ -45,4 +45,4 @@ Zoran Sevarac, CEO of @Deep Netts, Full Professor at University of Belgrade, Jav
 ### Moderator
 
 Pratik Patel, VP Developer Advocacy at Azul, Java Champion
-![](20250428_Java_AI-1024x576.jpg)
+![Webinar banner 'Java's Place in the AI Revolution' with speakers Zoran Sevarac, Frank Greco and Pratik Patel, Monday April 28](20250428_Java_AI-1024x576.jpg)

@@ -57,7 +57,7 @@ Starting that one up is even easier with the single executable that now contains
 
 I ran the previous instructions on my AMD Ryzen 9 5950X 16 Core 128GB dedicated Ubuntu Linux server and then called `siege -c 10 -r 2000 -b http://localhost:8080/hello` to measure the performance:
 
-![](og-aot-compilation-1015x1024.png)
+![Terminal output of the RIFE2 native image starting in 3ms and serving 33,898 requests/sec, above a bar chart comparing GraalVM JIT and Native Image startup, speed and memory](og-aot-compilation-1015x1024.png)
 
 These were the key points:
 

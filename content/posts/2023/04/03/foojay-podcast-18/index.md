@@ -48,7 +48,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](atlantajug-screenshot-zoom-1024x577.jpg)
+![Video call with Pratik Patel, Frank Delporte and Vincent Mayers recording the Foojay podcast about the Atlanta JUG](atlantajug-screenshot-zoom-1024x577.jpg)
 
 ## Links
 

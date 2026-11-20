@@ -41,7 +41,7 @@ The `Layer` trait allows composing `Service`s together.
 
 Here's a slightly more detailed diagram:
 
-![](tower-api-diagram-1024x891.jpg)
+![UML diagram of Tower's Service and Layer traits and the ServiceBuilder that stacks layers](tower-api-diagram-1024x891.jpg)
 
 A typical `Service` implementation will wrap an underlying component; the component may be a service itself. Hence, you can chain multiple features by composing various functions.
 
@@ -57,7 +57,7 @@ The role of a layer would be to take one service and wrap it into the other.
 
 With this in mind, it's relatively easy to check the [axum-tracing-opentelemetry crate](https://docs.rs/axum-tracing-opentelemetry/latest/axum_tracing_opentelemetry/) and understand what it does. It offers two services with their respective layers: one is to extract the trace and span IDs from an HTTP request, and another is to send the data to the OTEL collector.
 
-![](axum-tracing-otel-diagram.png)
+![UML diagram of axum-tracing-opentelemetry middleware: OtelAxumLayer and OtelInResponseLayer implement Tower's Layer, with matching services](axum-tracing-otel-diagram.png)
 
 Note that Tower comes with several out-of-the-box services, each available via a *feature crate*:
 
@@ -73,7 +73,7 @@ Note that Tower comes with several out-of-the-box services, each available via a
 
 Finally, note that Tower comes in three crates: `tower` is the public crate, while `tower-service` and `tower-layer` are considered less stable.
 
-![](tower-components.png)
+![Diagram showing the tower crate depending on the tower-service and tower-layer crates](tower-components.png)
 
 In this post, we have explained the what is the Tower library:
 

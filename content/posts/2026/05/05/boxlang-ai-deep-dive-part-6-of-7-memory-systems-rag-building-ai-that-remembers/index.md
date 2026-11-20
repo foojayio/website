@@ -20,7 +20,7 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 ---
 
-![](bxai-series-cover-06-700x368.png)
+![Cover for part 6 of the BoxLang AI 3.0 Deep Dive series: Memory & RAG, building AI that remembers](bxai-series-cover-06-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 6 of 7*
 

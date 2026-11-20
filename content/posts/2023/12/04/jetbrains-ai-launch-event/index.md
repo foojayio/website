@@ -27,4 +27,4 @@ Free yourself from the routine and stay in the flow like never before!
 Join the [JetBrains AI launch event online](https://jb.gg/aihere)! **December 6, 5:00 pm (CET) \| 8:00 am (PST).**
 
 Learn more about JetBrains AI and AI Assistant from the creators themselves.
-![](DSGN-18145_AI_Launch_Blog-Social-Share-1280x720-2x-1024x576.jpg)
+![JetBrains AI Launch Event announcement for an online event on December 6 at 5:00 pm CET](DSGN-18145_AI_Launch_Blog-Social-Share-1280x720-2x-1024x576.jpg)

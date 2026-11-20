@@ -22,7 +22,7 @@ aliases:
   - "/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/"
 ---
 
-![](bxai-series-cover-01-700x368.png)
+![Cover for part 1 of the BoxLang AI 3.0 Deep Dive series: The Skills Revolution, writing AI agents that actually know things](bxai-series-cover-01-700x368.png)
 
 *This article is part of our 7-part deep dive on building production-ready AI systems with BoxLang.*
 

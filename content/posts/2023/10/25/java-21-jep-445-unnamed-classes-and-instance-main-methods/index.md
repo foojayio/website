@@ -33,7 +33,7 @@ It's ideal for students or anyone who wants to start experimenting with Java. It
 The video above and this post are inspired by [a post by Tom Cools](https://www.tomcools.be/post/april-2023-onboarding-now/), and to be honest, I stole a bit of his approach as I first want to show you the older [JEP 330: "Launch Single-File Source-Code Programs"](https://openjdk.org/jeps/330).
 
 Thanks to this feature, introduced in Java 11 you can already execute a single Java-file without the need to compile the code to byte code with `javac` as visiualized in this diagram:
-![](jep330.jpg)
+![Diagram: before JEP 330, javac compiled HelloWorld.java to a class file for java; with JEP 330, java runs the source file directly](jep330.jpg)
 
 With the changes brought by JEP 330, the conversion from Java code to byte code, is "hidden". It still happens, but you, as a user, don't need to take care of it.
 
@@ -94,4 +94,4 @@ This JEP 445 won't bring many improvements for experienced developers, but it ma
 As it is a preview feature, you still need additional flags to use it, but hopefully the next Java-release will bring this to its full use!
 
 As always, start using the new Java version ASAP for your development and try to update your production systems so you can take full advantage of all the evolutions in the OpenJDK project!
-![](newer-than-8.jpg)
+![Meme where developers react to Java 21 with 'We are using Java 17', 'still on Java 11' and 'there is a newer version than 8?'](newer-than-8.jpg)

@@ -20,7 +20,7 @@ GlassFish is an application server with a long history and has always had a spec
 If you still think of GlassFish as a slow, unsupported, and purely for-development application server, it's time to take a fresh look. At OmniFish, we've been working hard to change that perception since 2022. The Eclipse GlassFish of today, particularly from version 7.0 onwards, is a completely different platform, and we're proud to show you what we've helped to build with the rest of the Eclipse GlassFish contributors.
 
 This article explores the key differences between the modern Eclipse GlassFish and its predecessor, Oracle GlassFish and older Eclipse GlassFish versions. We'll show you how GlassFish has evolved into a robust, enterprise-grade platform with commercial support from our team at OmniFish, with frequent updates, and a strong commitment to modern Java standards and modern lightweight deployments. In short, this is no longer your father's GlassFish.
-![](oracle_glassfish_comparison_infographic-1024x682.png)
+![Comparison of Oracle GlassFish (pre-2018: stagnant releases, no support, legacy Java) with Eclipse GlassFish (post-2022: monthly releases, 24/7 support, Jakarta EE 11, cloud-native)](oracle_glassfish_comparison_infographic-1024x682.png)
 
 ## The Myth of the Unsupported, Non-Production Server
 

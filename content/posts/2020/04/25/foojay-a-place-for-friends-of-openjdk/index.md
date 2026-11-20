@@ -23,7 +23,7 @@ Welcome to foojay, a place for **f** riends **o** f **O** pen**J** DK, sponsored
 #### Java Technologist Dashboards
 
 Together with Java enthusiasts around the world, the foojay team works to identify critical aspects of each new OpenJDK release and update -- with related information such as OpenJDK distributions, download locations, and JVM command line arguments -- and brings to the fore precisely the content and services that have value and relevance to those that use Java on a daily basis throughout the industry.
-![](Screenshot-2020-08-20-at-17.19.43-1024x647.jpg) OpenJDK Update Release Details
+![foojay OpenJDK Update Release Details page for Java 8u262, listing highlighted issues with foojay commentary and votes](Screenshot-2020-08-20-at-17.19.43-1024x647.jpg) OpenJDK Update Release Details
 
 [Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://javaalmanac.io/jdk/8/), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/today/dashboard-for-openjdk-update-release-details/).  
 
@@ -32,10 +32,10 @@ Together with Java enthusiasts around the world, the foojay team works to identi
 A key contributor to foojay is [Marc Hoffmann](https://twitter.com/marcandsweep). On his [javaalmanac.io](http://javaalmanac.io), he presents extensive data on each Java release, with details on distributions, new features, and API differences between releases.
 
 That information he's also made available here on foojay, where it is known as the Java Version Almanac, consisting of a set of dashboards with detailed information on each version of Java:
-![](Screenshot-2020-08-21-at-09.18.59-1024x633.jpg)
+![foojay Java Version Almanac page for Java 8 showing release data and a table of distros, vendors, licenses and platforms](Screenshot-2020-08-21-at-09.18.59-1024x633.jpg)
 
 Take special note at the lower end of each page of the almanac, where you'll find details on the differences between the APIs of the currently selected Java version compared to all previous Java versions:
-![](Screenshot-2020-08-21-at-09.19.51-1024x525.png)
+![foojay New APIs page comparing Java 14 with Java 8, with packages and methods marked added, removed or deprecated](Screenshot-2020-08-21-at-09.19.51-1024x525.png)
 
 [Go here to explore the Java Version Almanac on foojay](https://javaalmanac.io/jdk/8), with thanks to Marc.  
 
@@ -44,7 +44,7 @@ Take special note at the lower end of each page of the almanac, where you'll fin
 Another key contributor to foojay is [Chris Newland](https://twitter.com/chriswhocodes), who's gathered extensive data sets on JVM command line arguments, which he hosts on his own [chriswhocodes.com](http://chriswhocodes.com).   
 
 At the same time, he's also been making his data available here as part of the integrated Java dashboard environment that is foojay:
-![](Screenshot-2020-08-20-at-17.23.09-1024x639.jpg) OpenJDK Command Line Arguments
+![foojay OpenJDK 11 Command Line Arguments page with a searchable, filterable table of 1989 JVM options](Screenshot-2020-08-20-at-17.23.09-1024x639.jpg) OpenJDK Command Line Arguments
 
 [Go here to explore the wealth of JVM command line arguments](https://chriswhocodes.com/hotspot_options_openjdk11.html), with thanks to Chris.
 
@@ -71,7 +71,7 @@ Kevin blogs on general high level Java topics, focusing on how Java has evolved 
 #### Comprehensive Search
 
 Interested in a specific Java topic? Type it into the search and find related items across fixes, JVM command line arguments, and blogs.
-![](Screenshot-2020-08-20-at-18.28.51-1024x625.png)
+![foojay search results for 'jfr' showing 169 hits, mostly JDK issues, with the first two JFR assertion failures listed](Screenshot-2020-08-20-at-18.28.51-1024x625.png)
 
 #### Conclusion
 

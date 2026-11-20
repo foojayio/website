@@ -22,7 +22,7 @@ This book is also suitable for experienced developers who wish to learn how to u
 
 Lastly, game developers familiar with Unity, Unreal Engine or Godot who wish to learn Java and JavaFX will find this book useful.
 
-![](978-1-4842-8625-8-336x510.jpg)
+![Cover of 'Learn JavaFX Game and App Development with FXGL 17' by Almas Baimagambetov (Apress)](978-1-4842-8625-8-336x510.jpg)
 
 JavaFX is a modern high-performance GUI toolkit for Java. It provides hardware acceleration support on a range of platforms, including desktop, mobile and embedded, allowing the development of cross-platform applications.
 

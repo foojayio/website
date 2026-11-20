@@ -93,7 +93,7 @@ And that wasn't the only JavaFX announcement last week! JetBrains showed a great
 *To save you time configuring settings after project creation, we've reworked the new project wizard for JavaFX. It only takes two steps. First, you add a project SDK and the language you will use, the desired build system, and the test framework.*
 
 *Then you will have the opportunity to choose from a list of the most frequently used libraries, which come with short descriptions on the right. Once you create your new JavaFX project, your IDE will generate a fully configured sample application.*
-![](UX_JavaFXWizard-3c47029c.webp)
+![IntelliJ IDEA New Project wizard with JavaFX selected, showing name, build system Maven, JUnit, group, artifact and Java 16 SDK](UX_JavaFXWizard-3c47029c.webp)
 
 ## Conclusion
 

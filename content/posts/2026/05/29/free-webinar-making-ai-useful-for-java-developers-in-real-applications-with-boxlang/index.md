@@ -17,7 +17,7 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 ---
 
-![](Webinar-SM1-700x394.jpg)
+![Webinar banner: Making AI Useful in Real Applications, led by Bill Reese, Friday June 5th 2026, powered by Ortus Solutions](Webinar-SM1-700x394.jpg)
 
 AI is everywhere right now, but for many development teams, the biggest question is no longer "What is AI?" it's *"How do we actually use it in real applications in a secure, practical, and maintainable way?"*
 

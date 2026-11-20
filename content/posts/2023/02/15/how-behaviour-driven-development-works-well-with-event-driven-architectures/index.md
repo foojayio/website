@@ -24,10 +24,10 @@ Using both can result in a shorter time to market for new functionality and a mo
 
 BDD increases the inclusion of users, focuses on requirements capture and maintains the velocity of development as the application increases in complexity.
 
-![](Screen-Shot-2023-02-06-at-12.45.45-PM-1024x491.png)  
+![Cycle diagram of BDD with nested TDD: issue, failing scenario, coding with unit-test loop, passing scenario, refactor](Screen-Shot-2023-02-06-at-12.45.45-PM-1024x491.png)  
 *Figure 1. Behaviour Driven Development for the high level with Test Driven Development for the low level*
 
-![](Screen-Shot-2023-02-06-at-12.46.23-PM-1024x311.png)
+![Table of pros and cons of behaviour driven development](Screen-Shot-2023-02-06-at-12.46.23-PM-1024x311.png)
 
 *Table 1. Pros and Cons of Behaviour Driven Development*
 
@@ -37,11 +37,11 @@ Events are facts about something that happened representing a state change, such
 
 EDA supports loosely coupled services, greater fault tolerance, and observable interactions between services can help minimise technical debt.
 
-![](Screen-Shot-2023-02-06-at-12.47.40-PM-1024x613.png)
+![Puzzle-piece diagram of an event-driven FIX system: messages flow through inbound messages, control system with state, strategies and outbound messages to the order system](Screen-Shot-2023-02-06-at-12.47.40-PM-1024x613.png)
 
 *Figure 2. Example of an Event Driven Kappa Architecture microservice with feedback*
 
-![](Screen-Shot-2023-02-06-at-12.51.54-PM-1024x396.png)
+![Table of pros and cons of event driven architectures](Screen-Shot-2023-02-06-at-12.51.54-PM-1024x396.png)
 
 *Table 2. Pros and Cons of Event Driven Architectures*
 
@@ -55,7 +55,7 @@ EDA makes it natural to record what the application does do, in an easily observ
 
 From the output of such a test, the user can see with each iteration, how they wish to customise the event processor or microservice, rather than having to specify all the details in advance.
 
-![](Screen-Shot-2023-02-06-at-12.52.49-PM-1024x649.png)
+![Cycle diagram: add input events, record the outputs, review results, add new variations of inputs](Screen-Shot-2023-02-06-at-12.52.49-PM-1024x649.png)
 
 *Figure 3. Using known inputs and designed output to iteratively specify requirement*
 
@@ -69,7 +69,7 @@ BDD naturally supports the development of a common language between all microser
 
 The common language can be referred to in code and kept consistent by having a shared schema of events and data transfer objects.
 
-![](Screen-Shot-2023-02-06-at-12.53.45-PM-1024x406.png)
+![Pipeline diagram: FIX-out feeds a market depth book builder and an order/position chain, both feeding a Pricer that produces Pricer-out](Screen-Shot-2023-02-06-at-12.53.45-PM-1024x406.png)
 
 *Figure 4. Simplified EDA used by a number of our customers*
 

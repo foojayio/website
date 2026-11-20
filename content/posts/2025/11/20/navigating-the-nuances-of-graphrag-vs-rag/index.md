@@ -28,7 +28,7 @@ To address these limitations, a variation of the RAG architecture known as Graph
 In a standard vector-based RAG system, the underlying data used to augment the knowledge of LLMs is processed by first splitting it into chunks. Using embedding models, these chunks are then transformed into numerical vectors known as embeddings. Retrieval is then performed by searching for chunks whose vector embeddings are similar to the user's query embedding. This process efficiently identifies pieces of text that are semantically or contextually related to the input.
 
 **Figure 1.** Architecture of a standard vector-based RAG implementation.
-![](Screenshot-2025-11-14-at-8.22.00-AM.png)
+![Naive RAG architecture: documents are chunked and embedded into MongoDB Atlas, queried by vector search, then sent to an LLM](Screenshot-2025-11-14-at-8.22.00-AM.png)
 
 This embedding-based approach is powerful for many tasks, such as finding relevant documents or passages about a specific topic. It treats each document or chunk as an isolated piece of information and primarily relies on the semantic similarity captured by the vector representations.
 
@@ -47,7 +47,7 @@ Making these logical connections across different entities, often referred to as
 GraphRAG builds upon the foundation established by RAG but introduces a critical enhancement: the integration of a knowledge graph. A knowledge graph is a structured way of representing information. It consists of entities—which are key items like people, places, organizations, or concepts—and relationships, which define how these entities are connected. Think of a knowledge graph as a map that explicitly shows how different pieces of information relate to each other.
 
 **Figure 1.** Knowledge graph visualization based on [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mcp-foojay&utm_term=tony.kim)'s Wikipedia page.
-![](Screenshot-2025-11-14-at-8.22.30-AM.png)
+![Knowledge graph around MongoDB, linking it to concepts like Sharding, Replication, ACID Transactions, Atlas and cloud providers](Screenshot-2025-11-14-at-8.22.30-AM.png)
 
 By incorporating a knowledge graph into the retrieval process, GraphRAG moves beyond treating data chunks as isolated units. Instead, it considers how different pieces of knowledge are connected and related through the graph structure. This structure enables LLM-based systems using GraphRAG to retrieve related entities and reason over their interconnections, resulting in more comprehensive answers to complex questions and improved information relevance.
 
@@ -64,7 +64,7 @@ A primary challenge with GraphRAG is creating the knowledge graph itself. This o
 Unlike the relatively lightweight and fast process of embedding and indexing data for vector-based RAG, building and updating a knowledge graph often depends on the LLMs accurately understanding, mapping complex relationships, and integrating them into the existing graph structure. Each time new data needs to be added to the knowledge graph, the data extracted by the LLM must be checked against the existing graph data and updated accordingly, which can be computationally intensive.
 
 **Figure 2.**Architecture of a GraphRAG implementation.
-![](Screenshot-2025-11-14-at-8.22.58-AM.png)
+![GraphRAG architecture: an LLM extracts entities and graph relations, MongoDB Atlas uses $graphLookup, and an LLM answers](Screenshot-2025-11-14-at-8.22.58-AM.png)
 
 The inherent added complexity of graph traversal can also introduce challenges regarding response latency and scalability as the knowledge base grows. In contrast to vector-based RAG, retrieving information now involves navigating the connections within the graph, which can be computationally more intensive than a simple similarity search, especially for multi-hop queries. Latency is closely tied to factors like the depth of traversal required to answer a query and the specific retrieval strategy employed. These aspects must be carefully considered and optimized based on the application's requirements.
 

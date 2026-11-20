@@ -119,7 +119,7 @@ Also IntelliJ, through the Github Copilot plugin with a very similar installatio
 
 And the way to use it couldn't be easier, just ask your question in natural language and the assistant will decide which tool to use and answer to your request :
 
-![](Screenshot-2025-11-03-at-14.51.47-300x167.png)
+![AI assistant chat using the GitHub MCP server to list Java projects on GitHub](Screenshot-2025-11-03-at-14.51.47-300x167.png)
 
 ### **A Cool MCP on the Block: The SonarQube MCP Server**
 

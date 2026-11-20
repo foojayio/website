@@ -21,9 +21,9 @@ I've taken a holiday this month, so probably missed a lot of the amazing JavaFX 
 But the most essential and thrilling news is the release of the new version of [jfx-central.com](https://www.jfx-central.com/)! A complete new home for "all things JavaFX" thanks to the amazing work of a whole [team of JavaFX enthousiast](https://www.jfx-central.com/team). Indeed, yes, it's a website but actually a JavaFX application, so you can also run it as a desktop app. And what's even more important... the [full sources are available on GitHub](https://github.com/dlemmermann/jfxcentral2).
 
 {{< gallery >}}
-homepage-1024x616.jpg
-libraries-1024x812.jpg
-showcases-1024x749.jpg
+homepage-1024x616.jpg | | JFX Central home page: 'Home to anything JavaFX related' with featured items Pixel Duke, QFive and Mastering JavaFX 10
+libraries-1024x812.jpg | | JFX Central Libraries page listing JavaFX libraries such as AnimateFX, CalendarFX and ControlsFX in a grid
+showcases-1024x749.jpg | | JFX Central Showcases page with application tiles such as 360T Bridge, AIDA, Airbus Equinox and bisq
 {{< /gallery >}}
 
 ## Applications

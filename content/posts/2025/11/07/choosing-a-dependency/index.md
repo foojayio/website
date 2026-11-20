@@ -58,7 +58,7 @@ The [blurb](https://blog.frankel.ch/choose-cache/1/#standard-projects-health-ind
 
 I believe this is the most important aspect by far. You need to look at the license. GitHub makes it easy to verify it: first, it encourages projects to have a `LICENSE` file; then, it displays it prominently on the top if it's one of the recognized Open Source licenses.
 
-![](license.jpg)
+![GitHub license panel: open-telemetry/semantic-conventions uses Apache License 2.0, listing permissions, limitations and conditions](license.jpg)
 
 You need to make sure you understand the license. For regular [OSI-approved licenses](https://opensource.org/licenses), it's quite easy: others have already done the work for you. For other types, it can be harder. Some dependencies are released under a dual license: one Open Source and one commercial. Most of the time, you can assume the Open Source license is quite restrictive and will need the commercial one.
 

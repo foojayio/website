@@ -156,22 +156,22 @@ Executing the load test for appV6R0 and plotting it alongside the results for ap
 #### **Get Reports rates**
 
 The two versions exhibit very similar rate performance, with appV6R0 showing slight superiority in the second and third quarters, while appV5R0 is superior in the first and fourth quarters.
-![](Screenshot-2025-11-11-at-1.15.39-PM.png)
+![Chart: Get Reports rate for V5R0 and V6R0 both stay around 40-80 requests/s, far below the desired ramp up to 250/s](Screenshot-2025-11-11-at-1.15.39-PM.png)
 
 #### **Get Reports latency**
 
 The two versions exhibit very similar latency performance, with appV6R0 showing slight advantages in the second and third quarters, while appV5R0 is superior in the first and fourth quarters.
-![](Screenshot-2025-11-11-at-1.16.17-PM.png)
+![Chart: Get Reports P90 latency for V5R0 and V6R0 rises to about 400-550 ms in each phase, with near-identical curves](Screenshot-2025-11-11-at-1.16.17-PM.png)
 
 #### **Bulk Upsert rates**
 
 Both versions have similar rate values, but it can be seen that appV6R0 has a small edge compared to appV5R0.
-![](Screenshot-2025-11-11-at-1.16.59-PM.png)
+![Chart: Bulk Upsert rate for V5R0 and V6R0 both track the desired rate from 250/s up to 1,000/s closely](Screenshot-2025-11-11-at-1.16.59-PM.png)
 
 #### **Bulk Upsert latency**
 
 Although both versions have similar latency values for the first quarter of the test, for the final three-quarters, appV6R0 has a clear advantage over appV5R0.
-![](Screenshot-2025-11-11-at-1.17.26-PM.png)
+![Chart: Bulk Upsert P90 latency, V6R0 stays near 2,500 ms while V5R0 spikes up to about 6,000 ms in later phases](Screenshot-2025-11-11-at-1.17.26-PM.png)
 
 #### **Performance summary**
 
@@ -281,22 +281,22 @@ Executing the load test for appV6R0 and plotting it alongside the results for ap
 #### **Get Reports rates**
 
 For the first three-quarters of the test, both versions have similar rate values, but, for the final quarter, appV6R1 has a notable edge over appV5R3.
-![](Screenshot-2025-11-11-at-1.18.58-PM.png)
+![Chart: Get Reports rate for V5R3 and V6R1 follow the desired ramp early, then plateau around 140-215/s, V6R1 slightly higher at the end](Screenshot-2025-11-11-at-1.18.58-PM.png)
 
 #### **Get Reports latency**
 
 As shown in the rates graph, both versions exhibit similar values for the first three-quarters, with appV6R1 outperforming appV5R3 in the final quarter.
-![](Screenshot-2025-11-11-at-1.19.21-PM.png)
+![Chart: Get Reports latency for V5R3 and V6R1, similar early on, with V6R1 performing better later in the test](Screenshot-2025-11-11-at-1.19.21-PM.png)
 
 #### **Bulk Upsert rates**
 
 Both versions exhibit very similar rate values throughout the test. However, appV6R1 achieves better values than appV5R3 in the final 20 minutes, although it still fails to reach the desired rate.
-![](Screenshot-2025-11-11-at-1.19.46-PM.png)
+![Chart: Bulk Upsert rate for V5R3 and V6R1, both close to the desired rate, V6R1 slightly better in places](Screenshot-2025-11-11-at-1.19.46-PM.png)
 
 #### **Bulk Upsert latency**
 
 Even though both versions have similar rate values, we can see that appV6R1 has considerably better latency values than appV5R3, being almost two times faster for the last three quarters of the test.
-![](Screenshot-2025-11-11-at-1.20.10-PM.png)
+![Chart: Bulk Upsert latency, V6R1 considerably lower than V5R3 across most phases](Screenshot-2025-11-11-at-1.20.10-PM.png)
 
 ### Issues and improvements
 
@@ -385,22 +385,22 @@ Executing the load test for appV6R2 and plotting it alongside the results for ap
 #### **Get Reports rates**
 
 We can see that appV6R2 has better rates than appV6R1 throughout the test, but it's still not reaching the top rate of 250 reports per second.
-![](Screenshot-2025-11-11-at-1.20.44-PM.png)
+![Chart: Get Reports rate, V6R2 higher than V6R1 throughout but still short of the 250/s peak](Screenshot-2025-11-11-at-1.20.44-PM.png)
 
 #### **Get Reports latency**
 
 As shown in the rates graph, appV6R2 consistently provides lower latency than appV6R1 throughout the test.
-![](Screenshot-2025-11-11-at-1.21.06-PM.png)
+![Chart: Get Reports latency, V6R2 consistently lower than V6R1 throughout the test](Screenshot-2025-11-11-at-1.21.06-PM.png)
 
 #### **Bulk Upsert rates**
 
 Both versions exhibit very similar rate values throughout the test, with appV6R2 performing slightly better than appV6R1 in the final 20 minutes, yet still failing to reach the desired rate.
-![](Screenshot-2025-11-11-at-1.21.33-PM.png)
+![Chart: Bulk Upsert rate for V6R1 and V6R2 both follow the desired rate from 250/s to 1,000/s almost exactly](Screenshot-2025-11-11-at-1.21.33-PM.png)
 
 #### **Bulk Upsert latency**
 
 Although appV6R2 had better rate values than appV6R1, their latency performance is not conclusive, with appV6R2 being superior in the first and final quarters and appV6R1 in the second and third quarters.
-![](Screenshot-2025-11-11-at-1.22.04-PM.png)
+![Chart: Bulk Upsert latency for V6R1 and V6R2, inconclusive with V6R2 better in some phases and worse in others](Screenshot-2025-11-11-at-1.22.04-PM.png)
 
 #### **Performance summary**
 
@@ -506,22 +506,22 @@ Executing the load test for appV6R3 and plotting it alongside the results for ap
 #### **Get Reports rate**
 
 We achieved a significant improvement by transitioning from appV6R2 to appV6R3. For the first time, the application successfully reached all the desired rates in a single phase.
-![](Screenshot-2025-11-11-at-1.23.04-PM.png)
+![Chart: Get Reports rate, V6R3 reaches the desired rate in the first phase while V6R2 plateaus lower in later phases](Screenshot-2025-11-11-at-1.23.04-PM.png)
 
 #### **Get Reports latency**
 
 The latency saw significant improvements, with the peak value reduced by 71% in the first phase, 67% in the second phase, 47% in the third phase, and 30% in the fourth phase.
-![](Screenshot-2025-11-11-at-1.23.28-PM.png)
+![Chart: Get Reports latency, V6R3 peak values drop sharply compared with V6R2 in the first phases](Screenshot-2025-11-11-at-1.23.28-PM.png)
 
 #### **Bulk Upsert rate**
 
 As had happened in the previous version, the application was able to reach all the desired rates.
-![](Screenshot-2025-11-11-at-1.23.50-PM.png)
+![Chart: Bulk Upsert rate, V6R3 reaches all the desired rates like the previous version](Screenshot-2025-11-11-at-1.23.50-PM.png)
 
 #### **Bulk Upsert latency**
 
 Here, we have one of the most significant gains in this series: The latency has decreased from seconds to milliseconds. We went from a peak of 1.8 seconds to 250ms in the first phase, from 2.3 seconds to 400ms in the second phase, from 2 seconds to 600ms in the third phase, and from 2.2 seconds to 800ms in the fourth phase.
-![](Screenshot-2025-11-11-at-1.24.12-PM.png)
+![Chart: P90 latency comparing V6R2 and V6R3, V6R3 much lower in early phases of each cycle (up to about 170 ms vs 60 ms)](Screenshot-2025-11-11-at-1.24.12-PM.png)
 
 ### Issues and improvements
 
@@ -600,22 +600,22 @@ Executing the load test for appV6R4 and plotting it alongside the results for ap
 #### **Get Reports rate**
 
 Although we didn't achieve all the desired rates, we saw a significant improvement from appV6R3 to appV6R4. This revision allowed us to reach the desired rates in the first, second, and third quarters.
-![](Screenshot-2025-11-11-at-1.25.21-PM.png)
+![Chart: Get Reports rate, V6R4 reaches nearly the full desired rate in later phases while V6R3 falls to about 200/s](Screenshot-2025-11-11-at-1.25.21-PM.png)
 
 #### **Get Reports latency**
 
 The latency also saw significant improvements, with the peak value reduced by 30% in the first phase, 57% in the second phase, 61% in the third phase, and 57% in the fourth phase.
-![](Screenshot-2025-11-11-at-1.25.43-PM.png)
+![Chart: Get Reports latency, V6R4 peak values reduced by 30% to 57% compared with V6R3 in the phases](Screenshot-2025-11-11-at-1.25.43-PM.png)
 
 #### **Bulk Upsert rate**
 
 As had happened in the previous version, the application was able to reach all the desired rates.
-![](Screenshot-2025-11-11-at-1.26.03-PM.png)
+![Chart: Bulk Upsert rate, V6R4 reaches all the desired rates, as V6R3 did](Screenshot-2025-11-11-at-1.26.03-PM.png)
 
 #### **Bulk Upsert latency**
 
 Here, we also achieved considerable improvements, with the peak value being reduced by 48% in the first phase, 39% in the second phase, 43% in the third phase, and 47% in the fourth phase.
-![](Screenshot-2025-11-11-at-1.26.29-PM.png)
+![Chart: Bulk Upsert latency, V6R4 peak values reduced by up to about 48% compared with V6R3](Screenshot-2025-11-11-at-1.26.29-PM.png)
 
 ### Issues and improvements
 

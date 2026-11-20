@@ -39,7 +39,7 @@ Let's discover what makes Kestra unique amongst all the data orchestrators and h
 
 Kestra's architecture is built on a distributed system, where various components interact asynchronously, primarily through messaging queues. Below is an overview of the key components that make up Kestra's architecture:
 
-![](kestra-software-architecture-700x394.jpg)
+![Kestra architecture: executor, scheduler and worker feed a queue, then an indexer and repository, with a webserver for users.](kestra-software-architecture-700x394.jpg)
 
 ### Core Components of Kestra:
 

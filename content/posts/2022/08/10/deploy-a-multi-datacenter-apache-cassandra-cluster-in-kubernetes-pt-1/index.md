@@ -260,7 +260,7 @@ UN  10.120.3.7   158.64 KiB  256          17.8%             9e686277-9a78-49f6-b
 ```
 
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes:
-![](k8ssandra-docs-architecture-Multi-cluster-1.jpg)
+![Diagram of a Kubernetes cluster with two namespaces, each holding a Cassandra datacenter of three rack pods plus other K8ssandra pods](k8ssandra-docs-architecture-Multi-cluster-1.jpg)
 
 ## Multiple Cassandra datacenters in a single K8ssandra install?
 

@@ -26,7 +26,7 @@ Summary of the meetups done in the 1st half of 2024. We discussed a variety of t
 
 We kicked-off the Java meetup in partnership with Angular Philippines. The meetup had 2 sessions which was demonstrated by Mark Montealto and Eric Martin.
 
-![](jugph-angular-2024-1-700x467.jpeg)
+![Attendees at a computer lab watch a session of the JUG PH and Angular Philippines meetup](jugph-angular-2024-1-700x467.jpeg)
 
 ### Progressive Web App using Angular Framework
 
@@ -38,7 +38,7 @@ Topics covered:
 * Progressive Web Application (PWA)
 * Build Applications using Angular PWA
 
-![](jugph-angular-2024-2-700x467.jpeg)
+![Speaker presenting a student-community talk to attendees at the Angular Philippines meetup](jugph-angular-2024-2-700x467.jpeg)
 
 ### Clean Code in Java
 
@@ -49,7 +49,7 @@ Eric Martin discussed Clean Coding by Robert Martin using Java. He discussed the
 * Good Comments
 * Code Refactoring
 
-![](jugph-angular-2024-3-680x510.jpeg)
+![Speaker presents 'Clean Coding in Java' to attendees in a classroom at the JUG PH meetup](jugph-angular-2024-3-680x510.jpeg)
 
 ## JCP 25th Anniversary
 
@@ -57,11 +57,11 @@ Eric Martin discussed Clean Coding by Robert Martin using Java. He discussed the
 
 We included in this meetup the celebration of Java Community Process 25th Anniversary. The image below is a snapshot of the JCP 25th Anniversary video.
 
-![](jugph-jcp-2024-3-680x510.jpeg)  
-![](jugph-jcp-2024-1-680x510.jpeg)
+![Screens in a meeting room show the Java Community Process 25th anniversary video call with a poster beside them](jugph-jcp-2024-3-680x510.jpeg)  
+![Five JUG PH organizers pose beside the Java Community Process 25th anniversary poster](jugph-jcp-2024-1-680x510.jpeg)
 
 The JCP Organization gave us merchandises to be distributed to JUG PH Members  
-![](jugph-jcp-2024-4-680x510.jpeg)
+![Table with JCP 25th anniversary merchandise: stickers, badges, a T-shirt, a tote bag and a book](jugph-jcp-2024-4-680x510.jpeg)
 
 ### Spring Modulith
 
@@ -87,15 +87,15 @@ Sequence of the demonstration using GitHub Copilot
    * Controller, Service, Repository and Model
 2. Creation of a Deployment object in Kubernetes
 
-![](jugph-github-2024-1-680x510.jpeg)
+![Speaker with a microphone presents to a seated audience in a modern meetup space at a GitHub-related JUG PH event](jugph-github-2024-1-680x510.jpeg)
 
-![](jugph-github-2024-2-680x510.jpeg)
+![Group photo of JUG PH meetup attendees posing in front of a green wall](jugph-github-2024-2-680x510.jpeg)
 
 ## Modern API Development
 
 This meetup focuses on Modern Java API Development and Testing Frameworks.
 
-![](jugph-api-development-2024-1-680x510.jpeg)
+![Group photo of attendees at the Modern API Development meetup in an office](jugph-api-development-2024-1-680x510.jpeg)
 
 ### OpenAPI using Quarkus and Vert.x
 

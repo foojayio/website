@@ -37,7 +37,7 @@ npx @vaadin/cli init --hilla my-hilla-app
 ```
 
 Or use [start.vaadin.com](https://start.vaadin.com). Make sure that you delete all views and add one of those
-![](image-1754a3fb.png)
+![Sidebar menu items 'Hello World using Hilla' and 'Master-Detail using Hilla'](image-1754a3fb.png)
 
 ## The Endpoint
 

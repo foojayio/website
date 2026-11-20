@@ -45,7 +45,7 @@ The following figure shows a typical transactional Java application and its typi
 * Throughput, which slowly increases and might follow a curve like the one shown in the graph. When all warmup activities are completed, the application reaches a state of peak throughput (steady state).
 * Memory footprint (light gray line), which initially increases rapidly as the application starts compiling, before settling down to a relatively steady memory usage when compilation is complete.
 
-![](image01-700x357.jpg)
+![Throughput over time graph with startup, rampup and steady state phases, plus a performance report card grading startup B, rampup C, throughput B, memory C](image01-700x357.jpg)
 
 Longer startup time means paying for resources that aren't delivering any value (that is, responding to requests). Slower rampup means paying for resources while getting less than full value (that is, requests are taking longer and not as many are being fulfilled). Overall throughput performance should be as high as possible to minimize either the size of machine needed or the number of machines needed to handle incoming customer workload. The initially spiky memory usage is expensive too, so we'll look at how to smooth out that line towards the end of the article.
 
@@ -72,7 +72,7 @@ The shared classes cache stores Java classes and JIT-compiled code in an on-disk
 
 For many applications, the shared classes cache just worked "out of the box." Running the [Daytrader8 application](https://github.com/OpenLiberty/sample.daytrader8 "Daytrader8 application") on [Open Liberty](https://openliberty.io/guides/getting-started.html "Open Liberty") with the shared classes cache configured in Semeru, we saw improved startup time performance compared to other JDKs. Increasing the size of the cache enables more JIT-compiled methods to be stored which can further improve startup time.
 
-![](image02.png)
+![Bar chart of startup time: Semeru with a 150M shared classes cache is fastest (about 4.6 s), Semeru with 80M about 6 s, Temurin about 6.6 s](image02.png)
 
 But some applications, such as the JBoss EAP application server, saw very little startup improvement with the shared classes cache because not all classes were loaded by a URLClassLoader. Before we improved the shared classes cache, an example JBoss application (such as AcmeAir) was only able to store 3,340 classes and 3,250 compiled methods in the shared classes cache. These classes and compiled methods are from the Java class libraries themselves, not the application server or the application.
 
@@ -83,7 +83,7 @@ But some applications, such as the JBoss EAP application server, saw very little
 
 With the improved shared classes cache, there is a dramatic increase in the number of classes (almost 5x) and AOT methods (almost double) now eligible to be loaded by SharedClassCache. By reusing more classes and compiled JIT code, JBoss starts the AcmeAir application 11% faster (msec) with just one additional command-line option (`-XX:+ShareOrphans`). This option has now been made default if a user runs with the shared classes cache enabled in recent releases of IBM Semeru Runtimes.
 
-![](image03.png)
+![Bar chart: Semeru Java 17 with -XX:+ShareOrphans starts about 11% faster than the baseline](image03.png)
 
 Although 11% is a significant improvement, it isn't enough to really change our report card. But the shared classes cache isn't the only technology available in IBM Semeru Runtimes that can improve the time it takes to start Java applications.
 
@@ -93,7 +93,7 @@ Although 11% is a significant improvement, it isn't enough to really change our 
 
 CRIU allows you to snapshot a process and write all the process state into checkpoint files on disk which can then be restored later. We take the checkpoint after having already started the application and run it to a certain point; when we restore, we only need to pick up execution from that point. Because we don't need to start the application from scratch when we restore, the startup time is reduced significantly.
 
-![](image04-700x395.png)
+![Diagram of CRIU checkpoint and restore: an app built and checkpointed in the build stage is restored in multiple production instances](image04-700x395.png)
 
 So, how do you use InstantOn to make your application start faster? The easiest way is to package your application to run on Liberty and Semeru, which together hide most of the complexity of CRIU and OS-level details of how it works. This is a unique solution in the industry in terms of being whole stack, as there have been several [changes made to both Liberty and Semeru](https://dzone.com/articles/five-java-developer-must-haves-for-ultra-fast-star "changes made to both Liberty and Semeru") to make configuration a painless experience for the end-user.
 
@@ -101,11 +101,11 @@ To use InstantOn, you develop your application as normal. The only change is an 
 
 As seen with three different applications running on Open Liberty, PingPerf, Rest Crud, and AcmeAir Microservice Main, InstantOn can start your application almost 10X faster! The following figure shows the first response times (msec; lower is better) of each application without and with InstantOn.
 
-![](image05-700x277.png)
+![Bar chart of first response times: InstantOn cuts startup of Pingperf, Rest Crud and AcmeAir from 1.9-2.9 s to 0.27-0.46 s](image05-700x277.png)
 
 You can also use the InstantOn support in IBM Semeru Runtimes to start Java workloads that don't use Open Liberty, but the user experience isn't quite as simple. In the following figure, a [Quarkus](https://code.quarkus.io/ "Quarkus") app that normally starts in approximately 5 seconds with Temurin can start in milliseconds (time to first response) with InstantOn, which makes it comparable to what we see with the [GraalVM](https://www.graalvm.org/ "GraalVM") native image.
 
-![](image06.png)
+![Bar chart of time to first response: Semeru InstantOn and GraalVM native image take a few hundred ms, Temurin about 5200 ms](image06.png)
 
 The benefit of InstantOn over GraalVM native images is that your application can dynamically load new classes and has an active JIT compiler even after the checkpoint is restored: the application instance restores as a fully functional JVM. You don't need to change how you write and maintain your Java applications. Retaining this full Java support with high throughput, low memory footprint, and seamless dev-prod parity makes this solution broadly appealing to many Java developers.
 
@@ -119,7 +119,7 @@ The benefit of InstantOn over GraalVM native images is that your application can
 
 Returning to our typical application performance graph, these improvements mean that everything moves to the left. The startup period, which was noticeable in terms of time on the x-axis, becomes almost nothing because you can start up very, very quickly. The application starts much faster, and because of that you reach peak throughput earlier with reduced rampup time.
 
-![](image07-700x361.png)
+![Throughput graph showing InstantOn shifts the rampup curve to the left, improving the report card to startup A and rampup B](image07-700x361.png)
 
 InstantOn improves the grade on our report card for startup time and for rampup time. But because the rampup improvement came from just shifting the performance curve to the left, we'll only improve the rampup time grade to a 'B' as the application is still ramping up at roughly the same rate.
 
@@ -136,7 +136,7 @@ If you're already using Semeru Runtimes, but haven't tried the InstantOn feature
 
 We can improve rampup time further by using the Cloud Compiler. The Cloud Compiler (sometimes also called [JIT Server](https://developer.ibm.com/articles/jitserver-optimize-your-java-cloud-native-applications/ "JIT Server")) decouples the JIT compiler from the JVM to operate as an independent process or even as a remote service. The JIT compiler is a critical JVM component because it helps enable high throughput for Java applications, but its overhead is like the Garbage Collector in that it is active at run time. The Cloud Compiler moves this overhead out of the running application container. Multiple applications can also connect to the same JIT compiler process to reduce costs even further.
 
-![](image08-700x288.jpg)
+![Diagram of the Cloud Compiler: JIT compilation offloaded from JVMs in Docker containers to remote JIT servers managed by Kubernetes](image08-700x288.jpg)
 
 As a separate process, the compiler can scale independently of the rest of the application. You can give more CPU or more memory to the Cloud Compiler according to demand and significantly improve the ramp-up time of the application, or applications, connected to the Cloud Compiler.
 
@@ -148,11 +148,11 @@ Let's look at some applications in real performance tests.
 
 The following figure illustrates the throughput of the Daytrader8 application running on Open Liberty with Cloud Compiler.
 
-![](image09-2-700x359.jpg)
+![Throughput over time for Daytrader8 on Open Liberty: Semeru with Cloud Compiler ramps up fastest, Temurin slowest, all converging near 4000 req/sec](image09-2-700x359.jpg)
 
 The following figure illustrates the throughput of the RestCRUD application running on Quarkus with Cloud Compiler.
 
-![](image10-2-700x425.jpg)
+![Throughput over time for RestCRUD on Quarkus: Semeru InstantOn with Cloud Compiler ramps up fastest, and both Semeru runs reach about 11,000 req/sec, above GraalVM native image at 6,000](image10-2-700x425.jpg)
 
 The real applications didn't ramp up as steeply as our fictional curve but they were clearly trending toward that goal. The blue line shows throughput without Cloud Compiler, whereas the orange line represents throughput with Cloud Compiler enabled. Using the Cloud Compiler allowed Daytrader8 to process 60% more transactions within the first 150 seconds and achieve peak throughput 55% faster. Similarly, the Cloud Compiler helped RestCRUD handle 80% more transactions during the first 60 seconds and achieve peak throughput 73% faster.
 
@@ -165,7 +165,7 @@ We are looking to further improve this trend and shift this whole graph to the l
 
 Using the Cloud Compiler with our application significantly changes the shape of the rampup graph, and improves rampup time—converting our rampup grade from a B to an A.
 
-![](image11-700x359.png)
+![Throughput graph showing the Cloud Compiler speeds up rampup, improving the report card to rampup A](image11-700x359.png)
 
 Let us look at our scores again with these innovations:
 
@@ -188,13 +188,13 @@ To improve our application's throughput, the trend line on our graph needs to be
 
 Our goal is to get good throughput performance improvement for Semeru on multiple applications while still achieving fast startup and rampup time, with low memory footprint. So far, we have seen Semeru throughput (shown in the rampup graphs) be very competitive on Liberty and Quarkus apps. For another example, we improved benchmark suite [TPC-H](https://www.tpc.org/tpch/ "TPC-H") query times with [Apache Spark](https://spark.apache.org/ "Apache Spark") by an average of 36%.
 
-![](image12-700x337.png)
+![Bar chart of 22 query timings (normalized): Semeru 17 0.46 is faster than 0.41 on every query, about 25% lower in total](image12-700x337.png)
 
 We achieved these improvements through a variety of different techniques, including platform tuning on the latest hardware (for example, Java intrinsics, array copying, and object allocation), general performance enhancements (for example, `java.lang.invoke.*` class, final static field folding, and change trade-offs with other performance metrics), and analyzing and tuning apps. Since the default policy in the Semeru JDK is to balance for all performance metrics out of the box, we also have an option `--Xtune:throughput` which skews the trade-off toward improved throughput performance at the cost of other metrics.
 
 Security is another important consideration for most enterprise applications. The Semeru JDK also optimizes Java cryptographic operations using native acceleration, thus achieving the best of both worlds: security and throughput performance. The following figure shows our hypothetical Java application's throughput performance with Semeru.
 
-![](image13-700x403.png)
+![Throughput graph showing more compiler optimizations lead to higher throughput, improving the report card to throughput A](image13-700x403.png)
 
 For throughput, we've been able to improve throughput from a grade B to an A as a result of all this work.
 
@@ -213,7 +213,7 @@ The following figure shows a typical memory graph when an application starts: wh
 
 While the steady-state memory use is typically much better than with other Java distributions, this trendline demonstrates how the stereotypical memory footprint is not very efficient and can be improved, hence the C grade in our report card. Let's look at how we can improve this grade.
 
-![](image14-700x363.png)
+![Memory footprint graph of the original application showing spikes during startup, with the memory footprint still graded C](image14-700x363.png)
 
 ### Improving memory footprint with Semeru Cloud Compiler
 
@@ -223,15 +223,15 @@ We ran the same two applications (Daytrader8 on Open Liberty and RestCRUD on Qua
 
 As you can see in the following graph, for Daytrader8 on Open Liberty, without the Cloud Compiler (blue trendline) the memory footprint has a few large spikes and takes a longer period to reach its steady state. With the Cloud compiler (orange trendline), we removed those spikes and the application reached steady state much sooner.
 
-![](image15-2-700x364.jpg)
+![Resident set size for Daytrader8: Semeru uses about 550 MB steadily and Temurin grows past 1000 MB, with Cloud Compiler removing Semeru's early spikes](image15-2-700x364.jpg)
 
 Similarly, for RestCRUD on Quarkus, the Cloud Compiler removed the large spikes and the application reached steady state much sooner.
 
-![](image16-2-700x424.jpg)
+![Resident set size for RestCRUD on Quarkus: GraalVM native image uses about 85 MB, Semeru InstantOn with Cloud Compiler about 125 MB, and InstantOn alone about 130 MB after spikes](image16-2-700x424.jpg)
 
 The following figure shows our hypothetical Java application's memory footprint with Cloud Compiler.
 
-![](image17-700x360.png)
+![Memory footprint graph showing the Cloud Compiler removes compilation spikes, improving the memory grade from C to B](image17-700x360.png)
 
 This innovation allows us to improve our score for memory footprint from a C to a B, but there is even more we can do to achieve a straight A report card.
 
@@ -246,7 +246,7 @@ This innovation allows us to improve our score for memory footprint from a C to 
 
 As well as removing the memory spikes and reaching this steady state sooner, we want to try and reduce the overall memory footprint that our application needs, lowering this trendline on our graph. We can do this using Semeru Runtimes.
 
-![](image18-700x360.png)
+![Memory footprint graph showing more memory management optimizations lower the footprint, improving the grade from B to A](image18-700x360.png)
 
 Semeru's memory footprint characteristics even without the Cloud Compiler are quite good throughout the run when running in JVM mode as well as when compared with native image. Even though memory footprint is not as good as native image in absolute terms, the fact that Semeru delivers almost 2x the throughput while consuming only a bit more memory means that from a "throughput per megabyte of memory" metric, Semeru does exceptionally well. This kind of metric demonstrates a key point: Semeru is achieving all these performance characteristics all at once, making the overall user experience a more balanced one from a performance perspective.
 
@@ -270,7 +270,7 @@ Overall, by making use of the innovations and improvements discussed in this art
 
 Now, our two performance graphs for throughput and memory footprint have vastly different trendlines for our application:
 
-![](image19-700x334.png)
+![Two graphs comparing the optimized application with the original: much higher and faster throughput, and a lower memory footprint without spikes](image19-700x334.png)
 
 The exciting thing is that this work is ongoing and we're continuing to investigate and research how we can continue to improve these critical metrics (just like any good straight A student) and make our Java applications even more performant with IBM Semeru Runtimes. So keep an eye on this space, there's more to come.
 

@@ -25,7 +25,7 @@ A good example for this is a widely used design pattern. A design pattern that b
 A careful reader may already have identified which pattern. Yes, it's the Factory design pattern and it will be used in the example code.
 
 Let us consider a simple factory that produces different vehicle types. The used types are "*Car* ", "*Bus* " and "*Truck* ". Each inherits from the interface "*Vehicle*" (Figure 1.)
-![](factory_pattern-700x446.png)
+![UML diagram: VehicleFactory creates Vehicle objects; Car, Bus and Truck implement the Vehicle interface](factory_pattern-700x446.png)
 
 Figure 1. Creating desired Vehicle instances with naive vehicle factory example
 

@@ -51,7 +51,7 @@ Securely authenticating to Google Cloud, or any other Cloud provider, from GitHu
 
 The overall flow (simplified), is the following:
 
-![](oidc-flow-1024x793.png)
+![Sequence diagram: set up a GitHub repo, service account and workload identity pool, then a workflow authenticates to Google Cloud and queries BigQuery](oidc-flow-1024x793.png)
 
 In short, during the *Run* phase:
 

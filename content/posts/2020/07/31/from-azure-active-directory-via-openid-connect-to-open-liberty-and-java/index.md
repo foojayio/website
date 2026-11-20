@@ -99,7 +99,7 @@ The relevant configuration in `web.xml`:
 ```
 
 This is just standard Java EE security. The authentication and authorization workflow is shown in the following diagram.
-![](dzone-com-afac1be9.png)
+![Sequence diagram of OpenID Connect between browser, web server, Microsoft identity platform and web API with token exchange](dzone-com-afac1be9.png)
 
 *Picture 1: OpenID Connect sign-in and token acquisition flow, from* [*Microsoft identity platform and OpenID Connect protocol*](https://docs.microsoft.com/azure/active-directory/develop/v2-protocols-oidc#protocol-diagram-access-token-acquisition)
 

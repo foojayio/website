@@ -22,7 +22,7 @@ related_posts:
 **ING, Azul, Qodo, and ContentStack**
 
 Co-sponsored and co-organized with ING and Azul, together with Qodo and ContentStack, the event featured standout keynote sessions from Josh Long, of SpringBoot fame, and Pratik Patel, from Azul, who delivered insights on AI in the context of Spring and on increasing the speed of Java-based applications, especially in the context of AI-oriented applications.
-![](IMG_6230-1024x683.jpg)
+![Audience seated in a hall watching a speaker at the AI4Devs Amsterdam conference](IMG_6230-1024x683.jpg)
 
 However, AiDevs had as much love for frontend as for backend developers, with multiple parallel tracks, dedicated in particular to Java, JavaScript, and Python, together with a dedicated workshop track that ran throughout the day.
 
@@ -31,7 +31,7 @@ However, AiDevs had as much love for frontend as for backend developers, with mu
 The conference fulfilled its mission to "share practical, usable knowledge with real use cases and code," targeting developers working with AI technologies at every level. True to its promise of being code-first, the event delivered talks with 50% live coding demonstrations across the full range of technologies.
 
 The full-day event featured in-depth technical sessions, real-world AI implementation examples, hands-on workshops, and extensive networking opportunities. Attendees enjoyed comprehensive catering including lunch, refreshments, and a closing networking reception.
-![](IMG_6249-1024x683.jpg)
+![Attendees mingling and picking food from a buffet table during a break at AI4Devs Amsterdam](IMG_6249-1024x683.jpg)
 
 **Strong Developer-Centric Foundation**
 
@@ -42,4 +42,4 @@ With its laser-focused, developer-centric approach and intimate setting, AI4Devs
 The inaugural event sets a strong foundation for future editions, demonstrating clear demand for technical, code-heavy AI conferences in the European market and beyond.
 
 And the speaker dinner was one to be remembered!
-![](IMG_0858.jpg)
+![Group of conference attendees and organizers smiling around a long dinner table in a restaurant](IMG_0858.jpg)

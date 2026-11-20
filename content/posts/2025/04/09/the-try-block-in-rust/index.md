@@ -117,7 +117,7 @@ fn add(str1: &str, str2: &str) -> i8 {
 1. The compiler cannot infer the type
 2. Using `?` on `Result` inside the `try` block is now allowed
 
-![](try-api.png)
+![UML diagram: the Try trait extends FromResidual and is implemented by Result and Option, returning ControlFlow](try-api.png)
 
 ## Conclusion
 

@@ -24,7 +24,7 @@ But... did you know you can also use it on the ARM-processor-powered Raspberry P
 Let's install and test them!
 
 On your Raspberry Pi open a browser and go to the [Visual Studio Code download page](https://code.visualstudio.com/Download). We will be using the Linux .deb-files.
-![](visualstudiocode-download.png) Visual Studio Code dowload page with ARM 32bit and 64bit version
+![Visual Studio Code download page with the .deb 64 bit, ARM and ARM 64 options highlighted for Debian and Ubuntu](visualstudiocode-download.png) Visual Studio Code dowload page with ARM 32bit and 64bit version
 
 ### Raspberry Pi OS 32-bit
 
@@ -45,8 +45,8 @@ sudo apt install code -y
 You can now start VSC from the start button and you will find it in the "Programming" list.
 
 {{< gallery cols="2" >}}
-programming-tools-in-raspberry-pi-os-930x1024.jpg
-vsc-on-raspberry-pi-1024x770.jpg
+programming-tools-in-raspberry-pi-os-930x1024.jpg | | Raspberry Pi OS start menu with the Programming submenu listing BlueJ, Geany, Thonny and Visual Studio Code
+vsc-on-raspberry-pi-1024x770.jpg | | Visual Studio Code on Raspberry Pi with the Java Extension Pack and a terminal showing java and mvn versions
 {{< /gallery >}}
 
 There it is, version 1.53.2 on a Linux ARM processor, in the screenshot with Maven and the Java Extension Pack installed!
@@ -63,7 +63,7 @@ $ sudo apt install ./code_1.50.1-1602600638_arm64.deb
 ```
 
 Also here you'll now find Visual Studio Code in the Programming list in the start menu. Let's also here add the "Java Extension Pack" (or one from the others mentioned in [the previous post](https://foojay.io/today/welcome-to-vs-code-for-java/)), so we can test a Java application.
-![](visualstudiocode-64bit-java-extension-pack.jpg) Visual Studio Code running on Raspberry Pi OS (64bit)
+![VNC view of the Raspberry Pi desktop with Visual Studio Code showing the Java Extension Pack and the About dialog for version 1.50.1](visualstudiocode-64bit-java-extension-pack.jpg) Visual Studio Code running on Raspberry Pi OS (64bit)
 
 Maven and BellSoft JDK with JavaFX are already installed on my board:
 
@@ -82,7 +82,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)
 ```
 
 Without any further installation, we can now try out [this demo application which you can get from GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_07_JavaFX/javafx-dashboard).
-![](visualstudiocode-64bit-java-testing.jpg) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
+![Visual Studio Code on the Raspberry Pi running a JavaFX dashboard with a temperature chart, GPIO switch and console output](visualstudiocode-64bit-java-testing.jpg) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
 
 ### Is Microsoft Spying On You?
 

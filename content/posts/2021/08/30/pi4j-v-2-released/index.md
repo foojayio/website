@@ -21,7 +21,7 @@ related_posts:
 After long rework, the Pi4J library (**a friendly object-oriented I/O API and implementation libraries for Java Programmers** to access the **full I/O capabilities of the Raspberry Pi platform**) has taken a big step with the first release of the V.2.
 
 **The Pi4J Project** was started in **2012** by **[Robert Savage](https://twitter.com/savageautomate)** , the same year the Raspberry Pi was introduced as a tool to provide Java developers a simple and familiar object-oriented interface library to access the low-level I/O capabilities of the Raspberry Pi including **GPIO** , **I2C** , **SPI** , **PWM** , and **Serial** communications.
-![](pi4j-overview-1024x427.jpg) Pi4j program structure
+![Pi4J architecture: your Java application on the JVM calls the Pi4J library, then native libraries and hardware interfaces (GPIO, I2C, SPI, PWM, UART) on a Raspberry Pi](pi4j-overview-1024x427.jpg) Pi4j program structure
 
 For all documentation and examples check <https://pi4j.com/>.
 
@@ -37,7 +37,7 @@ Pi4J V.2 is a complete rewrite and **does not maintain API compatibility** with 
 * Hardware PWM Support
 * Java 11
 
-![](pi4j-v2-architecture-1f6d8aff.jpg) P4J V.2 architecture diagram
+![Pi4J version 2.0 architecture diagram showing context, platforms, providers, I/O types, configs and builders](pi4j-v2-architecture-1f6d8aff.jpg) P4J V.2 architecture diagram
 
 In addition to the features listed above, Pi4J version 2.0 also abandons the old WiringPi pin numbering scheme in favor of the more traditional and commonly used Broadcom pin numbering scheme. This pin numbering scheme has been a source of confusion for a number of years, especially with beginners and is somewhat cumbersome to maintain as new Raspberry Pi models are introduces with differing or added GPIO pins. Moving forward, Pi4J will only use the Broadcom (BCM) pin numbering scheme.
 

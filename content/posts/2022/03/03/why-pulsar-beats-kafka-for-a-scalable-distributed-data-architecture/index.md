@@ -20,7 +20,7 @@ related_posts:
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
 ---
 
-![](shutterstock_1009002379-350x233-1.jpg) © Shutterstock / Jurik Peter   
+![Glowing star in a purple space nebula, a decorative header for the Pulsar versus Kafka article](shutterstock_1009002379-350x233-1.jpg) © Shutterstock / Jurik Peter   
 
 The leading open source event streaming platforms are Apache Kafka and Apache Pulsar. For enterprise architects and application developers, choosing the right event streaming approach is critical, as these technologies will help their apps scale up around data to support operations in production.
 

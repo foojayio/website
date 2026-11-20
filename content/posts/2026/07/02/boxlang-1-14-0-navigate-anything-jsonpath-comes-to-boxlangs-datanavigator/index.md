@@ -19,7 +19,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](BoxLang-release-1.14.0-3-700x394.jpg)
+![BoxLang RELEASE 1.14.0 banner titled 'Navigate Anything: JSONPath Comes to BoxLang's DataNavigator'](BoxLang-release-1.14.0-3-700x394.jpg)
 
 Every application eventually has to deal with deeply nested data. JSON API responses with payloads six levels deep. Configuration files where the key you need is buried inside an array of objects, one of which has a `null` for the field you thought was required. Module metadata structures that nobody wrote a schema for. Runtime introspection data shaped like a tree that grew without a plan.
 

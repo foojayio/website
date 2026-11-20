@@ -127,7 +127,7 @@ If you want to take GitHub to the command line, checkout [GitHub CLI](https://cl
 ### Project composition
 
 K8ssandra is primarily composed of [YAML](https://en.wikipedia.org/wiki/YAML) files used for declarative configurations. In fact, many of the YAML files are a collection of [Helm charts](https://helm.sh/). Helm is an open source package management solution for Kubernetes, and its charts are the packaging format used.
-![](pasted-image-0.png)
+![GitHub language breakdown of K8ssandra, with YAML at 83.7% and Go at 12.8%](pasted-image-0.png)
 
 In addition to YAML, you will see some **.go** files in the K8ssandra project. [Go](https://golang.org/) within K8ssandra is used for utilities and tests.
 
@@ -186,7 +186,7 @@ The K8ssandra project creates separation between the tests themselves and the su
 
 {{< img src="pasted-image-0-1.png" class="alignright size-large" width="269" height="463" >}}
 
-![](pasted-image-0-2.png)  
+![Screenshot of a repository tree containing a testdata folder with Helm unit test values YAML files](pasted-image-0-2.png)  
 
 Watch for the expansion of testing practices as K8ssandra continues to grow!
 
@@ -195,7 +195,7 @@ Watch for the expansion of testing practices as K8ssandra continues to grow!
 For a more visual way to obtain an overview of the resources and components in a Kubernetes cluster, consider using a free Kubernetes IDE like [Lens](https://k8slens.dev/).
 
 Here's an example of what it looks like to view your K8ssandra pods, deployments, jobs, and other Kubernetes objects using the Lens UI. The tool has support for Windows, Linux, and MacOS.
-![](Lens-screenshot.png)
+![Lens Kubernetes IDE listing 18 running pods, including coredns, etcd, kube-system components and nginx-deployment replicas](Lens-screenshot.png)
 
 A UI can be great for some users, but there will be times when only a command line will be required or needed. That's why tips related to Kubernetes command-line usage specific to K8ssandra are included below.
 

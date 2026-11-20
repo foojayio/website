@@ -70,7 +70,7 @@ One of the most important things to understand when stepping through methods is 
 
 Luckily, most IDEs let us inspect the return value dynamically and see what the method returned from its execution. In JetBrains IDEs such as IntelliJ/IDEA, we can enable "Show Method Return Value" as I discuss [here](https://talktotheduck.dev/debugging-tutorial-java-return-value-intellij-jump-to-line-and-more).
 
-![](image-1.png)
+![IntelliJ debugger settings menu with 'Show Method Return Values' enabled](image-1.png)
 
 ### Flow Control as a Learning Tool
 
@@ -82,7 +82,7 @@ That's a pretty common set of question. With a debugger, we can [change control 
 
 Simple. Just drag the execution back a bit and invoke the method again with a different value. This is much easier than reading into a deep hierarchy.
 
-![](image-2-700x311.png)
+![IntelliJ debugger frame context menu with 'Force Return' highlighted](image-2-700x311.png)
 
 ### Keeping Track With Object Marking
 
@@ -94,7 +94,7 @@ This becomes very hard to keep track of. So we limit the interaction to very few
 
 This is also remarkably useful in keeping track of threads, which can help in understanding code where the threading logic is complex.
 
-![](image-3-538x510.png)
+![IntelliJ debugger variables context menu with 'Mark Object...' highlighted](image-3-538x510.png)
 
 ### Check The Objects In Memory
 
@@ -104,7 +104,7 @@ As a solution, we can use the memory inspection tool and see which [objects of t
 
 Seeing actual object instance values and reviewing them helps put numbers/facts behind the objects. It's a powerful tool that helps us visualize the data.
 
-![](image-4-700x394.png)
+![IntelliJ dialog listing instances of java.util.LinkedHashMap$Entry with their values](image-4-700x394.png)
 
 ### Use Tracepoint Statements to Follow Complex Logic
 
@@ -114,7 +114,7 @@ But adding a log can be worse. Re-compile, re-run, and accidentally commit it to
 
 Thankfully, we have [tracepoints](https://talktotheduck.dev/basics-of-breakpoints-you-might-not-know#heading-tracepoints) which are effectively logs that let us print out expressions, etc.
 
-![](image-5-680x510.png)
+![IntelliJ breakpoint dialog with 'Evaluate and log' set to print the value of cnt](image-5-680x510.png)
 
 ## What's Going on in Production – AKA "Reality Coverage"
 
@@ -142,7 +142,7 @@ Is this block in the code reached? How often?
 
 If you want to understand where to focus your energies first, the counter is probably the most handy tool at your disposal. You can read about counters [here](https://docs.lightrun.com/metrics/#counter).
 
-![](image-6.png)
+![Lightrun 'Create Counter' dialog for PrimeMain.java line 20 in IntelliJ](image-6.png)
 
 ### Assumption Verification with Conditions
 
@@ -160,7 +160,7 @@ We can't have that. Studying something should be solitary, but by definition, pr
 
 With [piping](https://docs.lightrun.com/logs/#configure-piping) we can log everything locally to the IDE and spare everyone else the noise. Since the logic is sandboxed, there will be no overhead if you log too much. So go wild!
 
-![](image-7-700x134.gif)
+![Lightrun Console in IntelliJ showing log lines piped from a running application](image-7-700x134.gif)
 
 ### Snapshots for Easier Learning
 
@@ -170,7 +170,7 @@ Again, using conditional snapshots is very helpful in pinpointing a specific que
 
 Simple, place a conditional snapshot for the permission. Then inspect the resulting snapshot to see how variable values are affected along the way.
 
-![](image-8-700x229.gif)
+![Lightrun Snapshots panel showing stack frames and variable values captured at a conditional snapshot](image-8-700x229.gif)
 
 ## Final Word
 

@@ -35,7 +35,7 @@ It works by checking to see if event handler latency remains within acceptable b
 
 This can be explained using pseudo code:
 
-![](Screenshot-2023-05-15-at-5.37.56-PM-1024x214.png)
+![Pseudo code of a fast event loop thread recording its start time, and a monitor thread that grabs a stack trace when a threshold is exceeded](Screenshot-2023-05-15-at-5.37.56-PM-1024x214.png)
 
 ### Best practice
 

@@ -62,4 +62,4 @@ This is something I am always trying to fulfil in the [Chronicle libraries](http
 Let's finish with my favourite quote about engineering, from the French writer, Antoine de Saint Exupéry:  
 ***"It seems that perfection is reached not when there is nothing left to add, but when there is nothing left to take away"*.**
 
-![](Screen-Shot-2023-01-17-at-10.36.48-AM-1024x521.png)
+![Diagram of a ubiquitous language shared by domain expert, analyst and developers, linking application code, test code, specs and whiteboard talks](Screen-Shot-2023-01-17-at-10.36.48-AM-1024x521.png)

@@ -34,7 +34,7 @@ I don't like the term non-breaking breakpoint. It's an oxymoron. At Lightrun we 
 
 In the image below we can see a breakpoint with the suspend option unchecked which turns it into a non-breaking breakpoint. Notice the breakpoint is in yellow instead of red to show the status. This breakpoint literally does nothing since there are no additional settings. I'll get back to that…
 
-![](01-breakpoints-700x503.png)
+![IntelliJ breakpoint settings dialog for VetController.java:100 with Suspend unchecked, making it a non-breaking breakpoint](01-breakpoints-700x503.png)
 
 When we create a "normal" breakpoint it has the side effect of suspending all threads. Debuggers have the ability to disable that feature and effectively create a non-breaking breakpoint. In the interest of completeness they also have the option to suspend only the current thread, this can be helpful when debugging multithreaded code.
 
@@ -46,7 +46,7 @@ We can't see the stack trace and the variable values in the IDE watch area. We n
 
 The tracepoint lets us add a log to every breakpoint, the log can be as simple as "breakpoint hit" but can also include expressions such as `"Reached the method with variable: " + variableValue`. We can see an example of that in the screenshot below.
 
-![](02-breakpoints-700x508.png)
+![IntelliJ breakpoint dialog with 'Evaluate and log' ticked and the expression 'Current vet is:' + vet.first](02-breakpoints-700x508.png)
 
 ## Beyond Tracepoints
 

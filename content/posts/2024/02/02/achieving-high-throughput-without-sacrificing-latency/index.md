@@ -29,13 +29,13 @@ We can define these terms as follows:
 
 We relate the concept of latency to non-IT related areas too. Imagine you visit your favourite fast-food restaurant. Latency can be thought of as the time it takes for you to make your order, have it prepared, pay and then receive the order. Clearly lower values for latency are better.
 
-![](Screenshot-2024-01-26-at-13.59.38.png)
+![Diagram of a request entering and leaving a pipe, with the pipe's length labelled as latency](Screenshot-2024-01-26-at-13.59.38.png)
 
 **Throughput** is a measure of how much work can be done in a given time period, for example, the number of transactions that can be processed in a second. We've all seen examples of systems that struggle with handling high request loads, such as websites that become unresponsive at certain times when the number of requests increases suddenly, for example at the start or end of a business day, or the release of tickets for a highly popular concert.
 
 In the context of the fast-food restaurant, throughput would measure how many customers are served within a given time period, and clearly higher values are better.
 
-![](Screenshot-2024-01-26-at-14.00.08-1024x238.png)
+![Diagram of requests 3, 2 and 1 flowing through a pipe in sequence, with the output rate labelled as throughput](Screenshot-2024-01-26-at-14.00.08-1024x238.png)
 
 ## Scaling Out to Improve Throughput
 
@@ -43,7 +43,7 @@ A commonly suggested solution to increase the throughput of a component is to in
 
 The argument goes that during the processing of a single task, there are likely to be multiple "pauses" because the current task is waiting for something to happen (perhaps reading or writing data, or communicating with another component). When one thread is unable to proceed for some reason, another can continue.
 
-![](Screenshot-2024-01-26-at-14.00.37.png)
+![Diagram of two requests entering a wide pipe side by side and leaving in parallel](Screenshot-2024-01-26-at-14.00.37.png)
 
 We could also introduce multiple instances of a component across a cluster of different systems - indeed this is one of the factors that is often used to justify following a "cloud-native" architecture for applications.
 
@@ -71,13 +71,13 @@ Alternatively, we could use a separate database component to store data that is 
 
 All of these things introduce further complexity into the request processing cycle.
 
-![](Screenshot-2024-01-26-at-14.01.58.png)
+![Diagram of two parallel requests passing through a pipe containing gears, representing extra processing complexity](Screenshot-2024-01-26-at-14.01.58.png)
 
 ## Increasing Throughput by Reducing Latency
 
 In many cases, it is possible to improve throughput performance in a component without resorting to scaling out. This approach is based on a simple observation. If we can reduce the amount of time to process a single request, then the net result is that we can process more requests in a given timeframe.
 
-![](Screenshot-2024-01-26-at-14.03.02.png)
+![Diagram of requests 2 and 1 queued in a narrower pipe, showing reduced latency and so higher throughput](Screenshot-2024-01-26-at-14.03.02.png)
 
 Low latency Java software such as that developed by [Chronicle Software](https://chronicle.software/ "Chronicle Software") is built using guidelines that are non-idiomatic, in order to minimise, and ideally eliminate, the pauses that often affect more conventional Java execution.
 
@@ -89,7 +89,7 @@ Nowadays, the advent of multi-core processor architectures allows a thread to "s
 
 The net effect of these approaches is, however, to remove much of the additional complexity introduced in horizontal scaling.
 
-![](Screenshot-2024-01-26-at-14.04.25.png)
+![Diagram of requests 2 and 1 passing through a narrow pipe containing two gears, showing simpler processing](Screenshot-2024-01-26-at-14.04.25.png)
 
 ## Conclusion
 

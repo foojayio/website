@@ -19,7 +19,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](BoxLang-release-1.14.0-2-700x394.jpg)
+![BoxLang Release 1.14.0 banner with the title 'Query Transformers: Take Full Control of Your Query Results'](BoxLang-release-1.14.0-2-700x394.jpg)
 
 BoxLang 1.14.0 ships a lot of exciting features -- Dynamic Sets, Ranges, Inner Classes, JSONPath navigation -- but one quietly powerful addition will change the way you think about every database call in your application: **Query Transformers**, and this is just the start, we have plans for a whole lot more cool query features.
 

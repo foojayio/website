@@ -21,7 +21,7 @@ related_posts:
   - "developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar"
 ---
 
-![](0_ntxtNVffHhl99weW-1-1024x535.jpg)
+![Illustration of a man riding a bicycle whose front wheel is the Kubernetes logo, on a blue background](0_ntxtNVffHhl99weW-1-1024x535.jpg)
 
 By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/)
 
@@ -32,10 +32,10 @@ To alleviate much of the load felt by DevOps teams, we evolved a number of these
 To show you how we did this, let's start by looking at a single region K8ssandra deployment running on a lone K8s cluster. It is made up of six Cassandra nodes spread across three availability zones within that region, with two Cassandra nodes in each availability zone. In this example, we'll use the [Google Cloud Platform](https://cloud.google.com/) (GCP) zone name. However, our example here could just as easily apply to other clouds or even on-prem.
 
 Here's where we are now:
-![](0_C2mWeh5HM5olXxEt.png) Existing deployment of our cloud database.
+![Diagram of one region (us-east4) with three availability zones, one Kubernetes cluster and two pods per zone](0_C2mWeh5HM5olXxEt.png) Existing deployment of our cloud database.
 
 The goal is to have two regions, each with a Cassandra data center. In our cloud-managed K8s deployment here, this translates to two K8s clusters — each with a separate control plane, but utilizing a common virtual private cloud (VPC) network. By expanding our Cassandra cluster into multiple data centers, we have redundancy in case of a regional outage, as well as improved response times and latencies to our client applications given local access to data.
-![](0_T5EBFr918S-sJOSr.jpg) *This is our goal: to have two regions, each with their own Cassandra data center.*
+![Diagram of two regions, us-west1 and us-east4, each with three zones and a Kubernetes cluster running pods](0_T5EBFr918S-sJOSr.jpg) *This is our goal: to have two regions, each with their own Cassandra data center.*
 
 On the surface, it would seem like we could achieve this by simply spinning up another K8s cluster deploying the same K8s [YAML](https://www.redhat.com/en/topics/automation/what-is-yaml). Then just add a couple tweaks for [Availability Zone](https://cloud.google.com/about/locations#network) names and we can call it done, right? Ultimately the shape of the resources is *very* similar, and it's all K8s objects. So, shouldn't this just work? Well, *maybe* . Depending on your environment, this approach *might* work.
 
@@ -54,12 +54,12 @@ One of the first hurdles you might run into involves basic networking. Going bac
 In our VPC shown below, we have a Classless Inter-Domain Routing (CIDR) range representing the addresses for the K8s worker instances. Within the scope of the K8s cluster there is a separate address space where pods operate and containers run. A pod is a collection of containers that have shared resources — such as storage, networking, and process space.
 
 In some cloud environments, these subnets are tied to specific availability zones. So, you might have a CIDR range for each subnet your K8s workers are launched into. You may also have other virtual machines within your VPC, but in this example we'll stick with K8s being the only tenant.
-![](0_El_xudxlj57P80m6.png) *CIDR ranges used by a VPC with a K8s layer*
+![Diagram of a VPC with three nodes on 10.100.x.x and a Kubernetes cluster with pod ranges on 10.200.x.x](0_El_xudxlj57P80m6.png) *CIDR ranges used by a VPC with a K8s layer*
 
 In our example, we have 10.100.x.x for the nodes and 10.200.x.x for the K8s level. Each of the K8s workers gets a slice of the 10.200.x.x CIDR range for the pods that are running on that individual instance.
 
 Thinking back to our target structure, what happens if both clusters utilize the same or overlapping CIDR address ranges? You may remember these error messages when first getting into networking:
-![](0_C2ysoCqmw64gxvMD.png) *Common error messages when trying to connect two networks.*
+![Two operating system error dialogs warning of an IP address conflict with another device on the network](0_C2ysoCqmw64gxvMD.png) *Common error messages when trying to connect two networks.*
 
 Errors don't look like this with K8s. You don't have an alert that pops up warning you that your clusters cannot effectively communicate.
 
@@ -68,7 +68,7 @@ If you have a cluster that has one IP space, and then you have another cluster f
 By default there really is no hint here. There are some ways around this; but at a high level, if you're overlapping, you're asking for a bad time. The point here is that you need to understand your address space for each cluster and then carefully plan the assignment and usage of those IPs. This allows for the Linux kernel (where K8s routing happens) and the VPC network layer to forward and route packets as appropriate.
 
 But, what if you don't have enough IPs? In some cases, you can't give every pod its own IP address. So, in this case, you would need to take a step back and determine what services absolutely must have a unique address and what services can be running together in the same address space. For example, if your database here needs to be able to talk to each and every other pod, it probably needs its own unique address. But if your application tiers in the East Coast and in the West Coast are just talking to their local data layer, they can have their own dedicated K8s clusters with the same address range and avoid conflict.
-![](0_5cFYbL4l-uYKrxdA.jpg) *Flattening out the network.*
+![Diagram of two regions with nodes and pods in separate, non-overlapping CIDR ranges (10.100/10.200 and 10.150/10.250)](0_5cFYbL4l-uYKrxdA.jpg) *Flattening out the network.*
 
 In our reference deployment, we dedicated non-overlapping ranges in K8s clusters for the layers of infrastructure that MUST be unique and overlapping CIDR ranges where services will not communicate. Ultimately, what we're doing here is flattening out the network.
 
@@ -113,7 +113,7 @@ Another solution similar to DNS stubs is to use a managed DNS product. In the ca
 * Integration with [Google Cloud's operations suite](https://cloud.google.com/stackdriver/docs) — This provides for DNS monitoring and logging.
 * [VPC scope DNS](https://cloud.google.com/kubernetes-engine/docs/how-to/cloud-dns#vpc_scope_dns) — Provides for multi-cluster, multi-environment, and VPC-wide K8s service resolution.
 
-![](0_roZU8X7vzs1YqDEE.png) *Replicated managed DNS for multi-cluster service discovery.*
+![Google Cloud DNS diagram: frontend pod resolves the backend service through the GKE cluster's Cloud DNS data and control planes](0_roZU8X7vzs1YqDEE.png) *Replicated managed DNS for multi-cluster service discovery.*
 
 Cloud DNS abstracts away a lot of the traditional overhead that you would have. The cloud provider is going to manage the scaling, the monitoring and security patches, and all the other aspects you would expect from a managed offering. There are also some added benefits to some of the cloud providers with GKE providing a node local DNS cache, which reduces latency by running a DNS cache at a lower level so that you're not waiting on DNS response.
 

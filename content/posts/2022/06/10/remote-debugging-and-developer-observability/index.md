@@ -91,7 +91,7 @@ We can use the [free version of Lightrun](https://lightrun.com/free) to get star
 
 The most simple thing you can do with most developer observability tools is log injection. This lets you add a new log to a running process through an IDE context menu.
 
-![](inject-log-context-menu-700x211.png)
+![IntelliJ context menu with the Lightrun submenu open and the 'Log' action highlighted](inject-log-context-menu-700x211.png)
 
 We can pipe the log to the debug console in the IDE or we can leave the default which logs it as if you wrote it in the code. This means the log will show up with all your other logs.
 
@@ -101,7 +101,7 @@ The log will be ingested like the other logs and will appear in the right order!
 
 Furthermore, you can print variables, method return values, etc. Expression evaluation is done in your programming language of choice, e.g. Java for JVM apps. That way we can print variable values as we do here:
 
-![](injected-log.png)
+![IntelliJ editor showing an injected Lightrun log line: 'The value of i is {i} and cnt is {cnt}'](injected-log.png)
 
 This raises two important concerns:
 
@@ -120,7 +120,7 @@ As I mentioned before, regular breakpoints are an immense problem when debugging
 
 They provide us with information similar to the typical breakpoints in source code, which is remarkably useful. We can analyze the stack trace and variable values all around for this point in time. They even support conditional expressions similar to conditional breakpoints. We can grab a snapshot for a specific use case only.
 
-![](snapshot-700x285.png)
+![IntelliJ Lightrun Snapshots panel showing the stack frame and variables captured in a Node.js movie app](snapshot-700x285.png)
 
 The snapshot is the workhorse of such remote debugging tools. With it, we can get an insight into the production that's normally reserved only for local development tools. Amazingly, we can get this insight without compromising the integrity of the remote machine.
 
@@ -148,7 +148,7 @@ APMs provide some insight, but they provide very coarse grained information. For
 
 Counter works just like that, without the hassle and without deploying. You can use conditional counters as you can with every action to count fine grained usage.
 
-![](counter.jpg)
+![Lightrun 'Create Counter' dialog counting how many times line 11 of PrimeMain.java is reached](counter.jpg)
 
 ### TicToc \& Method Duration
 

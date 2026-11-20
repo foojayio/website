@@ -68,9 +68,11 @@ Today is the Flutter story and the numbers behind it. Then one post a day:
 Every commit to Codename One builds the Flutter Gallery twice: once with Flutter's own release build and once with Codename One. CI measures both on the same machine in interleaved rounds, so a runner that slows down halfway through penalizes both builds equally. The figures below are from the run on October 29.
 
 
-<img width="760" height="364" src="flutter-cold-start-3b4c72071b.svg" alt="Cold start to first frame. Android: 395 ms for Codename One against 1247 ms for Flutter. macOS: 609 against 722 ms. Windows: 126 against 205 ms. Linux: 123 against 198 ms." loading="lazy" style="width:100%;height:auto;margin:16px 0" />
-<img width="760" height="364" src="flutter-memory-880797d298.svg" alt="Memory at rest. Android: 46 MB for Codename One against 79 MB for Flutter. macOS: 37 against 56 MB. Windows: 58 against 92 MB. Linux: 82 against 224 MB." loading="lazy" style="width:100%;height:auto;margin:16px 0" />
-<img width="760" height="502" src="flutter-code-size-1d954ec6fb.svg" alt="Executable code. Android: 4.7 MB for Codename One against 20.6 MB for Flutter. iOS: 17.3 against 19.1 MB. macOS: 33.2 against 47.9 MB. Windows: 11.4 against 14.1 MB. Linux: 14.2 against 16.1 MB. Web: 12.9 against 25.2 MB." loading="lazy" style="width:100%;height:auto;margin:16px 0" />
+![Cold start to first frame. Android: 395 ms for Codename One against 1247 ms for Flutter. macOS: 609 against 722 ms. Windows: 126 against 205 ms. Linux: 123 against 198 ms.](flutter-cold-start-3b4c72071b.svg)
+
+![Memory at rest. Android: 46 MB for Codename One against 79 MB for Flutter. macOS: 37 against 56 MB. Windows: 58 against 92 MB. Linux: 82 against 224 MB.](flutter-memory-880797d298.svg)
+
+![Executable code. Android: 4.7 MB for Codename One against 20.6 MB for Flutter. iOS: 17.3 against 19.1 MB. macOS: 33.2 against 47.9 MB. Windows: 11.4 against 14.1 MB. Linux: 14.2 against 16.1 MB. Web: 12.9 against 25.2 MB.](flutter-code-size-1d954ec6fb.svg)
 
 
 CI collects 26 metrics: installed size, executable code and download size on six platforms, plus cold start and memory at rest on the four where we can measure both sides fairly. Codename One is ahead on all 26. The Android timings come from an emulator, and iOS start-up and memory aren't measured; both are explained below. The biggest gaps are on Android, where the app starts in a third of the time and carries a quarter of the code, and on Linux, where it settles at 82 MB against 224 MB.
@@ -80,7 +82,7 @@ The comparison is tilted toward Flutter, not away from it. The app is Flutter's 
 CI also runs eleven compute workloads (hash maps, recursion, string building, sorting, arithmetic and more) in Java and in Dart. On every native platform we measured, Codename One is faster overall, by 1.3x on Android up to 1.9x on Windows and Linux:
 
 
-<img width="760" height="574" src="flutter-compute-ab28e22de9.svg" alt="Compute speedups for eleven workloads on Android, macOS, Windows and Linux. Codename One is faster or tied in 38 of the 43 measured cells. Flutter wins object allocation on Android (2.3x) and macOS (3.1x), value escape on Android (1.2x), and quicksort on macOS and long arithmetic on Windows by 2% and 6%. Geometric means: Android 1.3x, macOS 1.5x, Windows 1.9x, Linux 1.9x for Codename One." loading="lazy" style="width:100%;height:auto;margin:16px 0" />
+![Compute speedups for eleven workloads on Android, macOS, Windows and Linux. Codename One is faster or tied in 38 of the 43 measured cells. Flutter wins object allocation on Android (2.3x) and macOS (3.1x), value escape on Android (1.2x), and quicksort on macOS and long arithmetic on Windows by 2% and 6%. Geometric means: Android 1.3x, macOS 1.5x, Windows 1.9x, Linux 1.9x for Codename One.](flutter-compute-ab28e22de9.svg)
 
 
 Flutter takes 5 of the 43 cells. Two are within 6%. The real one is object allocation on Android and macOS, where Dart's allocator is quick at short lived objects; that's on our list.

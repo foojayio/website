@@ -20,7 +20,7 @@ related_posts:
 Let's be honest: when we try a new AI model, the first thing we look at is if the code compiles and does what we asked. But if you have been in the Java world for a while, you know that **"working" is just level 1**. The real final boss is reliability, maintenance and security. 💀
 
 I have been analyzing the latest [**Sonar Leaderboard**](https://www.sonarsource.com/the-coding-personalities-of-leading-llms/leaderboard/) (with fresh data from late 2025/2026 on 4,444 tasks) and there are big surprises.
-![](Screenshot-2026-01-09-at-19.51.02-1024x528.png)
+![Leaderboard table ranking 12 LLMs by pass rate, code size, complexity and issue density; Opus 4.5 Thinking leads at 83.62%](Screenshot-2026-01-09-at-19.51.02-1024x528.png)
 
 ☝️ **An important detail:** This leaderboard has evolved fast. What **started analyzing initially only 5 models** has expanded drastically to include the whole new wave of AIs that have flooded the market. Now that we have a much wider range (from the new "Thinking models" to the Gemini family), with 12 models covered, the quality differences between them have become much more evident.
 
@@ -106,7 +106,7 @@ public List<String> filterValidUsers(List<User> users) {
 ```
 
 Which one do you prefer to maintain in 6 months? Exactly.
-![](Screenshot-2026-01-09-at-19.51.13-1024x217.png)
+![Top three models by pass rate: Opus 4.5 Thinking, Gemini 3 Pro and GPT-5.2 High, with release dates and lines of code](Screenshot-2026-01-09-at-19.51.13-1024x217.png)
 
 ## **2. Security: A "Bug" is not the same as an "Open Door" 🚨**
 
@@ -157,7 +157,7 @@ public List<User> search(String username) {
 **Pro Tip:** If you use a model with high *Issue Density* (\>25), assume there are vulnerabilities. ALWAYS run a comprehensive code scanner (like SonarQube) before accepting the PR.
 
 Difference in terms of issue density on the main model of each organization:
-![](Screenshot-2026-01-09-at-19.51.23-1024x634.png)
+![Bar chart of issue density by vendor: Anthropic about 15, Google about 22, OpenAI about 25](Screenshot-2026-01-09-at-19.51.23-1024x634.png)
 
 ## **3. "New" does not guarantee "Better Code" 📉**
 
@@ -186,7 +186,7 @@ try {
 }
 ```
 
-![](Screenshot-2026-01-09-at-19.51.31-1024x326.png)
+![Line charts of issue density over 2025: Anthropic models drop to 15, OpenAI models fall to 20 then rise to 25](Screenshot-2026-01-09-at-19.51.31-1024x326.png)
 
 ## **4. The Summary: Which model should I use for Java?**
 

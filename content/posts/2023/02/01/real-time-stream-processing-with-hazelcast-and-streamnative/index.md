@@ -32,7 +32,7 @@ When it comes to usage, Hazelcast can be used for stateful data processing over 
 
 Meanwhile, Apache Pulsar **can be used for** both messaging and streaming use cases, taking the place of multiple products and provides a superset of their features. Apache Pulsar is a cloud-native multitenant unified messaging platform to replace Apache Kafka, RabbitMQ, MQTT and legacy messaging platforms. Apache Pulsar provides an infinite message bus for Hazelcast to act as an instant source and sink for any and all data sources.
 
-![](Screenshot-2023-01-27-at-14.00.51.png)
+![Architecture diagram: Apache Pulsar with tiered storage and functions streaming data into the Hazelcast Platform's stream processing pipeline and in-memory storage](Screenshot-2023-01-27-at-14.00.51.png)
 
 ## Prerequisites
 
@@ -135,7 +135,7 @@ Example PM2.5 Data
 {"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM2.5","latitude":39.95,"longitude":-75.151,"aqi":54}
 ```
 
-![](Screenshot-2023-01-27-at-14.01.42-c6268004.jpg)
+![Spring Boot console logs of an air quality app publishing and consuming ozone and PM2.5 observations through Pulsar](Screenshot-2023-01-27-at-14.01.42-c6268004.jpg)
 
 ## Data processing
 

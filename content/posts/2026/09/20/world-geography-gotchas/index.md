@@ -19,7 +19,7 @@ Years ago, a colleague of mine told me about two pockets of foreign land surroun
 
 Enclaves can be seen from different perspectives. From a bird's-eye view, they are fun:
 
-![](Screenshot-2026-09-14-at-15.44.14-1024x591.jpg)
+![OpenStreetMap view of Lake Lugano with the outlined border of an enclave on the water and shoreline](Screenshot-2026-09-14-at-15.44.14-1024x591.jpg)
 
 If the enclave and its surrounding country are at odds (or worse), the life of its inhabitants can be hell. However, this post is about software, so let's focus on that. Imagine having to design systems for one of these two towns. Take Campione, for example. This is what you could have to deal with, depending on the domain you tackle:
 

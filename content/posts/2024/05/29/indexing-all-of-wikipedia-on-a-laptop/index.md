@@ -22,7 +22,7 @@ In November, [Cohere released a dataset containing all of Wikipedia](https://hug
 Computing this many embeddings yourself would cost in the neighborhood of $5000, so the public release of this dataset makes creating [a semantic, vector-based index](https://www.datastax.com/guides/what-is-vector-search) of Wikipedia practical for an individual for the first time.
 
 Here's what we're building:
-![](ydeHYk97v6Bza1GF0wbbHUEzxgCAJLfwbRcVnWvU-584b8743.png)
+![Search results page for 'significance of the seine to parisian development' listing matching Wikipedia articles about Paris and the Seine](ydeHYk97v6Bza1GF0wbbHUEzxgCAJLfwbRcVnWvU-584b8743.png)
 
 You can try searching the completed index [on a public demo instance here](https://jvectordemo.com:8443/).
 
@@ -33,7 +33,7 @@ Sure, the dataset is big (180GB for the English corpus), but that's not the obst
 The obstacle is that until now, off-the-shelf vector databases could not index a dataset larger than memory, because both the full-resolution vectors and the index (edge list) needed to be kept in memory during index construction. Larger datasets could be split into [segments](https://stackoverflow.com/questions/2703432/what-are-segments-in-lucene), but this means that at query time they need to search each segment separately, then combine the results, turning an O(log N) search per segment into O(N) overall. (In their latest release, [Lucene attempts to mitigate this by processing segments in parallel with multiple threads](https://www.elastic.co/search-labs/blog/elasticsearch-lucene-vector-database-gains), but obviously (1) this only gives you a constant factor of improvement before you run out of CPU cores and (2) this does not improve throughput.)
 
 Specifically, if you're indexing 1536-dimension vectors (the size of ada002 or openai-v3-small), then you can fit about 5M vectors and their associated edge lists in a 32GB index construction RAM budget.
-![](BwVEUQqMIDekxlKXgiuOiQcycoM_fP3ncRjVNgRD-6c8d6e72.jpg)
+![Bar chart: multi-segment index latency grows to about 70 ms at 40 million vectors, versus about 34 ms for a single segment](BwVEUQqMIDekxlKXgiuOiQcycoM_fP3ncRjVNgRD-6c8d6e72.jpg)
 
 [JVector](https://github.com/jbellis/jvector/), the library that powers [DataStax Astra](https://www.datastax.com/products/datastax-astra) vector search, now supports indexing larger-than-memory datasets by performing construction-related searches with compressed vectors. This means that the edge lists need to fit in memory, but the uncompressed vectors do not, which gives us enough headroom to index Wikipedia-en on a laptop.
 
@@ -65,28 +65,28 @@ The full source of the index construction class is [here](https://github.com/jbe
 JVector is based on the [DiskANN](https://www.microsoft.com/en-us/research/publication/diskann-fast-accurate-billion-point-nearest-neighbor-search-on-a-single-node/) vector index design, which performs an initial search using vectors compressed lossily with [product quantization (PQ)](https://towardsdatascience.com/similarity-search-product-quantization-b2a1a6397701) in memory, then reranks the results using high-resolution vectors from disk. However, while DiskANN stores full, uncompressed vectors to perform reranking, JVector is able to improve on that using [Locally-Adaptive Quantization (LVQ)](https://arxiv.org/abs/2402.02044) compression.
 
 To set this up, we'll first load some vectors into a RandomAccessVectorValues (RAVV) instance. RAVV is a JVector interface for a vector container; it could be List or Map based, in-memory or on-disk. In this case we'll use a simple List-backed RAVV. We'll compute the parameters for both compressions (kmeans clustering for PQ, global mean for LVQ) from a single shard of the dataset. At about 110k rows, this is enough data to have a statistically valid sample.
-![](aN200b1SULDTwrg5inwDuNFKLCVyYstVuYOSXLqA-63969997.png)
+![Java code loading the vectors into a list and wrapping them in ListRandomAccessVectorValues for quantization](aN200b1SULDTwrg5inwDuNFKLCVyYstVuYOSXLqA-63969997.png)
 
 Next, we compute the PQ compression codebook; we're compressing the vectors by a factor of 64, because the Cohere v3 embeddings can be PQ-compressed that much without losing accuracy, after reranking. [Binary Quantization only gives us 32x compression and is less accurate](https://thenewstack.io/why-vector-size-matters/).
-![](PS0HlbtZNajjlTe9AFg1yoW7fvGyKeSpHGwfk3_k-70062f3c.png)
+![Java code computing the product quantization (PQ) codebook with 256 clusters and writing it to a file](PS0HlbtZNajjlTe9AFg1yoW7fvGyKeSpHGwfk3_k-70062f3c.png)
 
 Finally, we need to set up LVQ. LVQ gives us 4x compression while losing no measurable accuracy over the full uncompressed vectors, resulting in both a smaller footprint on disk and faster searches. (I thank the vector search team at Intel Research for pointing this out to us.)
-![](XheHrYXEE6j_GaROcmgI_0-OFJx9GJes1uVcEGDc-46bed74c.png)
+![Java code computing locally adaptive vector quantization (LVQ) and writing it to a file](XheHrYXEE6j_GaROcmgI_0-OFJx9GJes1uVcEGDc-46bed74c.png)
 
 ## GraphIndexBuilder
 
 Next, we need to instantiate and configure our GraphIndexBuilder.
-![](veV6oVgpkDyr-WLPIMzzTtHD0q8MIT3sQxOauqdX-0a42b4e5.png)
+![Java code configuring a JVector GraphIndexBuilder with cosine similarity, PQ vectors, degree 48 and an on-disk index writer](veV6oVgpkDyr-WLPIMzzTtHD0q8MIT3sQxOauqdX-0a42b4e5.png)
 
 This instantiates a JVector GraphIndexBuilder and connects it to an OnDiskGraphIndexWriter, and tells it to use the PQ-compressed vectors list (which starts empty and will grow as we add vectors to the index) during construction (in the BuildScoreProvider).
 
 ## Chronicle Map and RowData
 
 We'll store article contents in RowData records. This content is what has been encoded as the corresponding vector in the dataset, and is what we want to return to the user in our search results.
-![](veVvO8QUrY_k_YGDwavo_dBaIoM5ZGGfaN5dowCr-f2ccd56d.jpg)
+![Java record RowData holding url, title and text, with methods to render it as Markdown and as an HTML card](veVvO8QUrY_k_YGDwavo_dBaIoM5ZGGfaN5dowCr-f2ccd56d.jpg)
 
 To turn the vector index's search results (a list of integer vector ids) into RowData, we store the RowData in a Map keyed by the vector id. This will be a lot of data, so we use [ChronicleMap](https://github.com/OpenHFT/Chronicle-Map) to store this on disk with a minimal in-memory footprint.
-![](hFMjxcQstglWY0IjbgKqiHB9dk7KlKATQnBIBLZh-b1ecff54.png)
+![Java code creating a Chronicle Map that persists RowData entries to disk, keyed by integer vector id](hFMjxcQstglWY0IjbgKqiHB9dk7KlKATQnBIBLZh-b1ecff54.png)
 
 We need to tell ChronicleMap how large it's going to be, both in entry count and entry size. Undersizing these will cause it to crash ([my primary complaint](https://github.com/OpenHFT/Chronicle-Map/issues/533) about ChronicleMap), so we deliberately use a high estimate.
 
@@ -101,7 +101,7 @@ We use Java's parallel Streams to process the shards in parallel. For each row i
 3. Call *builder.addGraphNode*– order is important because both (1) and (2) are used when we call addGraphNode
 4. Call *contentMap.put* with the article chunk data.
 
-![](5souUR9e_gbEEdcUwWvq8_cjleyFGglaQaCSV-XF-1f7bcce0.png) ![](_Z7fqvsbvQ2kXJY286iM-ysvQJCHwlaWgmBACBFZ-5815d2c2.jpg)
+![Java code building the graph by processing all shards in parallel with an IntStream](5souUR9e_gbEEdcUwWvq8_cjleyFGglaQaCSV-XF-1f7bcce0.png) ![Java processShard method that encodes each vector, writes it to the index, adds a graph node and stores the row in the content map](_Z7fqvsbvQ2kXJY286iM-ysvQJCHwlaWgmBACBFZ-5815d2c2.jpg)
 
 You can look at [the full source](https://github.com/jbellis/coherepedia-jvector/blob/master/src/main/java/io/github/jbellis/BuildIndex.java) if you're curious about *forEachRow*, it's just standard "pull data out of Arrow" stuff.
 
@@ -130,17 +130,17 @@ These are respectively
 ## Loading the index (after construction)
 
 The code for serving queries is found in the [WebSearch](https://github.com/jbellis/coherepedia-jvector/blob/master/src/main/java/io/github/jbellis/WebSearch.java) class. We're using Spark ([the web framework](https://sparkjava.com/), not the big data engine) to serve a simple search form:
-![](a-y2F-t0K9ph-4-0ERwSLy7-xhLDMQZD1qz7FU8t-4e925d19.png)
+![Search page in a browser at localhost:4567 with a text box containing a query and a Search button](a-y2F-t0K9ph-4-0ERwSLy7-xhLDMQZD1qz7FU8t-4e925d19.png)
 
 Construction needed a relatively large heap to keep the edge lists in memory. With that complete, we only need enough to keep the PQ-compressed vectors in memory; *exec@serve*is configured to use a 4GB heap.
 
 WebSearch ([the class behind *exec@serve*](https://github.com/jbellis/coherepedia-jvector/blob/master/src/main/java/io/github/jbellis/WebSearch.java)) first has a static initializer to load the PQ vectors and open the ChronicleMap. We also create a reusable GraphSearcher instance:
-![](ofHaU8px5jnF0FCupz_mJt4CMc1Bg8Lul36DcScu-38417974.png)
+![Java code loading the on-disk graph index, PQ vectors and Chronicle Map, then creating a GraphSearcher](ofHaU8px5jnF0FCupz_mJt4CMc1Bg8Lul36DcScu-38417974.png)
 
 ## Performing a search
 
 Executing a search and turning it into RowData for the user looks like this:
-![](bY_lTq_EAXUwfuP_MEsLYcuwwdx13wKCCYAAL83K-d53ea973.jpg)
+![Java search endpoint that embeds the query with Cohere, runs a two-pass PQ and rerank search, and renders results as HTML](bY_lTq_EAXUwfuP_MEsLYcuwwdx13wKCCYAAL83K-d53ea973.jpg)
 
 There are four "paragraphs" of code here, containing
 

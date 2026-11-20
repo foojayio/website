@@ -19,7 +19,7 @@ related_posts:
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part4-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-![](fri1-2.png)
+![MongoDB 'Love Your Developers' banner with the MongoDB logo and floating document and chart icons](fri1-2.png)
 
 In this series, we've described our steps to improve the performance of a slow running MongoDB [aggregation pipeline](https://www.mongodb.com/docs/manual/aggregation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part4-foojay&utm_term=tony.kim#aggregation-operations). The pipeline was part of a fictional video streaming service application, mapping user profiles to the devices those users were using to access the service, and was based on a real use case I'd encountered during a recent design review.
 

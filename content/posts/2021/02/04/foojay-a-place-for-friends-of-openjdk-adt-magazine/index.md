@@ -12,4 +12,4 @@ related_posts:
 ---
 
 Today, published [by John K. Waters in ADT Magazine](https://adtmag.com/blogs/watersworks/2021/02/foojay-for-openjdk.aspx):
-![](image-641x1024.jpg)
+![ADT Magazine article 'Foojay: A Place for Friends of OpenJDK' announcing the site's advisory board](image-641x1024.jpg)

@@ -536,7 +536,7 @@ plt.show()
 ```
 
 The following is the output of the first 15 test images and their predictions:
-![](Screen-Shot-2022-04-24-at-8.21.19-PM-1024x690.png) Showing the first 15 test predictions
+![Matplotlib figure of fashion test images with predicted labels and bar charts; most are correct (blue), one sandal/sneaker is wrong (red)](Screen-Shot-2022-04-24-at-8.21.19-PM-1024x690.png) Showing the first 15 test predictions
 
 Now that the models are updated (trained) and ready to predict whether an image is one of the 10 clothing types we can complete the tutorial by testing with a single image. The following Python Code will allow you to pass in a single image (Using the 2nd image in the test data).
 

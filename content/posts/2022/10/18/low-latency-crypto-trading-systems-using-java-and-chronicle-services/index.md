@@ -65,7 +65,7 @@ Exchange updates are provided by a [websocket connection](https://binance-docs.g
 ```
 
 The data flow between the Binance endpoint and the trading logic follows below:  
-![](Screen-Shot-2022-10-10-at-2.21.44-PM-1024x321.png)
+![Diagram: Binance sends raw book and trade updates to a Chronicle exchange connector service, which sends aggregated snapshots to a trading service](Screen-Shot-2022-10-10-at-2.21.44-PM-1024x321.png)
 
 ### Best Practices: Implementing Efficient Market Data Connector
 
@@ -143,7 +143,7 @@ The purpose can be either "what-if" [hypothesis testing](https://en.wikipedia.or
 
 The crucial point is that the algorithms should produce exactly the same output on the same market data.
 
-![](Screen-Shot-2022-10-10-at-2.23.52-PM-1024x396.png)
+![Diagram: events flow from an input queue through a single event loop into an output queue](Screen-Shot-2022-10-10-at-2.23.52-PM-1024x396.png)
 
 This works out of the box with the [Chronicle Services](https://chronicle.software/services/ "Chronicle Services") framework. The model for Chronicle microservice design is the Lambda Architecture: if the trading logic is implemented as a Chronicle microservice, it is effectively stateless and the outcome depends only on an immutable ever-growing queue of events.
 
@@ -172,7 +172,7 @@ The diagram below just highlights the idea of separating the connector service f
 
 You can use this approach to start your project and attach more Chronicle microservices to the data flow as required.
 
-![](Screen-Shot-2022-10-10-at-2.27.27-PM-1024x618.png)
+![Diagram: two exchanges feed book services that write to a Chronicle Queue read by the trading logic service on one host](Screen-Shot-2022-10-10-at-2.27.27-PM-1024x618.png)
 
 ### Demo Project
 

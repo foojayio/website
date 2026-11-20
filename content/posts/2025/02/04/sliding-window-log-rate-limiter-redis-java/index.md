@@ -28,7 +28,7 @@ By checking how many requests were made within that time frame, it ensures limit
 
 ## How It Works
 
-![](1-tmaCfNHgzaAJNop4Aa2afA-bed82bc8.webp)
+![Sliding Window Log diagram: requests over time with a one-minute current window starting at 3:06 and a limit of 5 requests](1-tmaCfNHgzaAJNop4Aa2afA-bed82bc8.webp)
 
 ### 1. **Define a Time Window**
 

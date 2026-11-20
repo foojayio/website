@@ -20,7 +20,7 @@ related_posts:
 > This is the second post in the series, building a profiler from scratch using AsyncGetCallTrace. Today, we're covering wall-clock profiling and how to collect the obtain stack traces. If you're unfamiliar with AsyncGetCallTrace, please check out my previous article in the series [here](https://foojay.io/today/writing-a-profiler-from-scratch-introduction/).
 
 Our goal today is to essentially write the primary loop of a profiler and do the following every n milliseconds (where n is our chosen profiling interval):
-![](diagrams3-2048x1029-1-1024x515.png)
+![Diagram: a random subset of threads is signalled, each walks its stack into a preallocated trace, and traces are collected](diagrams3-2048x1029-1-1024x515.png)
 
 The question that comes up is: Which threads should we sample? If we only sample currently running threads, then we have cpu-time profiling, but if we sample all threads (running and idle), we have the far more popular wall-clock profiling.
 

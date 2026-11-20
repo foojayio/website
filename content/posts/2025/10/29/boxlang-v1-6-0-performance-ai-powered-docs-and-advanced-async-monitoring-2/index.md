@@ -23,7 +23,7 @@ We're thrilled to announce BoxLang 1.6.0, a release that delivers massive perfor
 
 ### 🤖 BoxLang Documentation Meets AI: MCP Server Integration
 
-![](BoxLang_docs-531x510.png)  
+![BoxLang documentation page with its Edit menu open, offering Copy page, Connect with MCP and Connect to VSCode options](BoxLang_docs-531x510.png)  
 
 BoxLang documentation is now accessible via the Model Context Protocol (MCP)! Connect AI assistants like Claude, GitHub Copilot, and other MCP-compatible tools directly to comprehensive BoxLang documentation for instant access to language references, framework features, and best practices.
 

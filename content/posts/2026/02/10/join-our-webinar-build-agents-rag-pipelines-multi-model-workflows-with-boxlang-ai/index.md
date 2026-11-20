@@ -17,7 +17,7 @@ related_posts:
 
 ## Join Our Webinar: Build Agents, RAG Pipelines \& Multi-Model Workflows with BoxLang AI
 
-![](Webinar-SM1-700x394.jpg)
+![Webinar banner: Luis Majano presents 'Unlock Enterprise AI on the JVM' with BoxLang AI on February 18th, 2026](Webinar-SM1-700x394.jpg)
 
 ## Unlock Enterprise AI on the JVM with BoxLang AI
 

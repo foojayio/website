@@ -12,12 +12,12 @@ related_posts:
 ---
 
 We're happy to announce that we're hosting Chris Newland's [VMOptionsExplorer](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing all details per release on Java command line switches.
-![](Screenshot-2020-08-29-at-23.09.05-1024x514.jpg)
+![foojay OpenJDK 11 Command Line Arguments page showing all 1989 options in a table with Name, Type, Component and Default columns](Screenshot-2020-08-29-at-23.09.05-1024x514.jpg)
 
 {{< legacy-notice >}}
 
 It also shows a diff between the currently selected release and the previous release, showing a tab for the switches that have been added and those that have been removed.
-![](Screenshot-2020-08-29-at-23.09.57-1024x485.png)
+![foojay OpenJDK 11 Command Line Arguments page with the 'New in Java 11 (53)' tab selected, listing options such as EagerJVMCI](Screenshot-2020-08-29-at-23.09.57-1024x485.png)
 
 Go here to take a look, yourself: <https://chriswhocodes.com/hotspot_options_openjdk11.html>.
 

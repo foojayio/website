@@ -47,7 +47,7 @@ The above code is safe if unwieldy.
 
 But Rust offers a full-fledged API around the `Result` struct. The API implements the monad paradigm.
 
-![](result-api.png)
+![UML diagram of Rust's Result enum with Ok and Err variants and its methods such as unwrap, map and and_then.](result-api.png)
 
 ## Propagating results
 
@@ -103,7 +103,7 @@ fn a(error: bool) -> Result<Bar, MyErr> {
 
 Note that `Result` enforces no bound on the right type, the "error" type. However, Rust provides an `Error` trait.
 
-![](error-api.png)
+![UML diagram of Rust's Error trait in std::error, extending the Debug and Display traits.](error-api.png)
 
 Two widespread libraries help us manage our errors more easily. Let's detail them in turn.
 
@@ -179,7 +179,7 @@ fn a(flag: i8) -> anyhow::Result<Foo> {
 
 With the `Context` trait, we can improve the user experience with additional details.
 
-![](context-api-1024x460.png)
+![UML diagram of the anyhow Context trait, implemented by Result and Option, adding context and with_context methods.](context-api-1024x460.png)
 
 The `with_context()` method is evaluated lazily, while the `context()` is evaluated eagerly.
 

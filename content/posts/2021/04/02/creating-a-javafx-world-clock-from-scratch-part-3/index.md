@@ -177,7 +177,7 @@ Once the file is loaded you will see the **Document** section's Hierarchy of Jav
 
 In the cavas area shown below, you'll see UI controls and layouts not having much styling and/or layout constraints:
 
-![](Screen-Shot-2021-03-25-at-9.57.37-AM-1.png)
+![JavaFX world clock locations form with error-overlay labels on the GMT offset, latitude and longitude fields](Screen-Shot-2021-03-25-at-9.57.37-AM-1.png)
 
 You'll also see unusual buttons oddly positioned that overlap other textfields. These overlapping buttons are what is known as **validation icons** that appear when a user is entering invalid input. Validation icons will also show a tooltip popup text of the warning or error. These overlay buttons will be styled using JavaFX CSS with an SVG vector icon that will appear as a round icon with an 'X' denoting an error.
 

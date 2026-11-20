@@ -52,7 +52,7 @@ Let's take a look at a project POM file that has one dependency (depA) and also 
 Maven will first look in myRepo1 for depA before going to Maven central because it looks at the local `pom.xml` first.
 
 If the depA has a dependency (depB) and depA has a myRepo2 (like below), where will depB be downloaded from?
-![](Project-pom.xml_-1024x754.png)
+![Diagram of a Maven project pom.xml declaring myRepo1 and depA, whose own pom.xml declares myRepo2 and depB](Project-pom.xml_-1024x754.png)
 
 To download depB, Maven will first look at myRepo1 because it is in the project POM (2a of the repository order, local `pom.xml`). Next, it will go to the parent POM all the way up to Maven Central via the Super POM. If the package depB is NOT available at Maven Central it will download the package from myRepo2.
 

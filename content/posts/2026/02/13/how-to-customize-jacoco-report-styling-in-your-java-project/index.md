@@ -33,7 +33,7 @@ JaCoCo generates standalone HTML reports that reference their own `jacoco-resour
 That `report.css` controls everything: table styling, source code highlighting, coverage bar colors, breadcrumbs, typography. If you want to change the look, you need to replace that file after JaCoCo generates it.
 
 Here is how the default CSS looks like:  
-![](Screenshot-2026-02-13-at-07.37.10-700x229.png)
+![JaCoCo coverage report with default styling for the GitHub Copilot Community SDK, showing a plain table of packages](Screenshot-2026-02-13-at-07.37.10-700x229.png)
 
 ## The Strategy: CSS Overlay
 
@@ -187,7 +187,7 @@ When deploying documentation, you typically run `mvn site`, not `mvn verify`. So
 ## The Result
 
 Same data, completely different experience. The custom theme has clean white cards, rounded borders, GitHub-style coverage colors, modern typography.  
-![](Screenshot-2026-02-13-at-07.38.45-700x290.png)
+![Restyled JaCoCo report for the GitHub Copilot Community SDK with clean cards, rounded borders and modern coverage bars](Screenshot-2026-02-13-at-07.38.45-700x290.png)
 
 You can see the live result on our documentation site: [Copilot SDK for Java — JaCoCo Report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/).
 

@@ -46,7 +46,7 @@ Should not be used as a template for one's own JavaFX applications.
 The two other example applications use an LED and a button.  
 
 These must be wired as is shown in the following diagram:
-![](led-button_bb-1024x378.png)
+![Fritzing breadboard diagram wiring a Raspberry Pi, push button and LED with resistors](led-button_bb-1024x378.png)
 
 ### MinimalPi4J
 
@@ -61,7 +61,7 @@ Once the Pi4J setup has been tested, MinimalPi4J can be deleted.
 This application shows the interaction between a JavaFX based Graphical User Interface (GUI) and the Raspberry Pi connected sensors and actuators, the Physical User Interface (PUI).
 
 This application is to be used as a template for one's own applications. This includes the existing test cases.
-![](running-gui-1024x686.jpg)
+![IntelliJ IDEA with the Pi4J JavaFX template project and its running GUI window showing a counter at 73](running-gui-1024x686.jpg)
 
 You should first get to know and understand the example. For your own applications you should then copy the the `TemplateApp` and modify it for your project, however without violating the rules of the MVC concept.
 
@@ -76,14 +76,14 @@ When developing PUI only applications, or when adding the GUI later, then one sh
 The classic Model-View-Controller concept contains in addition to the starter class at least 3 more classes.  
 
 The interaction is clearly defined:
-![](mvc-concept-1024x472.png)
+![MVC diagram: the controller triggers actions and updates the model, which the JavaFX GUI and the Raspberry Pi hardware (PUI) both display](mvc-concept-1024x472.png)
 
 This way the GUI and PUI are completely separated from each other, i.e a GUI button to turn an LED on has no direct access to the LED component of the PUI. Instead the GUI button triggers a corresponding action in the controller which then sets the on state property in the model. The PUI listening on this state then turns the actual LED on or off.
 
 GUI and PUI work with the same identical controller and thus also the same identical model.
 
 In the MVC concept, every user interaction traverses the exact same cycle:
-![](mvc-interaction.png)
+![Cycle diagram of MVC: a user changes text in a view, the controller updates the observable model, which notifies the view](mvc-interaction.png)
 
 ## Conclusion
 

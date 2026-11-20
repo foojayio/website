@@ -24,7 +24,7 @@ For most real services, horizontal scaling should be driven by proactive workloa
 Vertical scaling is not a replacement for horizontal scaling. It is a complement. Horizontal scaling determines how many replicas you need. Vertical scaling determines how much CPU and memory each replica should have at different phases of its lifecycle.
 
 In this post, we focus on a common vertical scaling challenge: **Java warm-up**.
-![](prime-kedify-jvm-warm-up.avif)
+![Diagram of JVM CPU use falling from a warm-up boost to a lower steady state across replicas](prime-kedify-jvm-warm-up.avif)
 
 ## Why JVM Warmup and Steady State Should Not Share the Same Resource Profile
 
@@ -34,7 +34,7 @@ Due to the JIT compilation, Java Virtual Machines, and thus Java applications, d
 
 ###### **Diagram #1: Relationship between application lifecycle, CPU spend by the JIT compiler, and performance**
 
-![](Image-2-1-scaled-cb60d7ab.png)
+![Chart: JIT compiler CPU peaks during warm-up while performance climbs to 100% by steady state](Image-2-1-scaled-cb60d7ab.png)
 
 Warm-up happens every time the application is newly started. In the modern Kubernetes world, this is more than common – horizontal autoscaling, spawning new instances and stopping the unnecessary ones dynamically based on load, has become the new standard of running things cost efficiently.
 
@@ -46,7 +46,7 @@ The right model is simple and intuitive: **allocate more CPU during warm-up, the
 
 ###### **Diagram #2: Warm-up phase vs steady state**
 
-![](Image-3-1-scaled-673d3369.png)
+![Diagram: the JVM uses 10 cores during warm-up JIT compilation, then 4 cores at steady state](Image-3-1-scaled-673d3369.png)
 
 Azul Zing, the JVM at the heart of Azul Prime, is the first JVM on the market to integrate directly with Kedify, making this kind of lifecycle-aware right-sizing seamless and trivial to use.
 > **What is Azul Prime?**
@@ -198,7 +198,7 @@ kubectl get po -lapp=heavy-workload \
 
 ###### **Diagram #3: Resource transition timeline**
 
-![](Image-4-2-scaled-7a48318f.png)
+![Timeline: a pod starts with CPU request 10, warms up, then Pod Resource Resizing cuts the request to 4, reclaiming about 60% capacity](Image-4-2-scaled-7a48318f.png)
 
 ## Metrics: What This Achieves
 
@@ -241,7 +241,7 @@ In practice, the flow looks like this:
 3. Shrink resources after warm-up to avoid long lived overprovisioning .
 4. Run the real workload efficiently across multiple optimized replicas.
 
-![](Image-5-1-scaled-5df6c3ed.jpg)
+![Four-step diagram of proactive horizontal scaling, vertical scaling during warm-up, shrinking resources afterward, and running the workload on replicas](Image-5-1-scaled-5df6c3ed.jpg)
 
 ## Try It Yourself
 

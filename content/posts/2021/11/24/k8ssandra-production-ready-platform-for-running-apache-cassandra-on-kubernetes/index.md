@@ -32,7 +32,7 @@ Along with elastic scale and auto-healing features, K8ssandra also includes seve
 [Cass-operator](https://github.com/datastax/cass-operator) serves as a translation layer between the control plane of Kubernetes and Cassandra cluster operations. [Cassandra Reaper](http://cassandra-reaper.io/) provides a solution for managing maintenance tasks and repairs. A backup and restore tool, [Cassandra Medusa](https://github.com/thelastpickle/cassandra-medusa), is also included. Cassandra Reaper and Medusa were part of The Last Pickle, [acquired by DataStax earlier this year](https://techcrunch.com/2020/03/03/datastax-acquires-the-last-pickle/).
 
 From an observability point of view, K8ssandra comes with pre-configured metrics for [Prometheus](https://prometheus.io/) and pre-designed dashboards in [Grafana](https://grafana.com/).
-![](1K8ssandra_0-1609686338716-1024x272.png)
+![Architecture diagram of K8ssandra: Cassandra, cass-operator, Reaper, Medusa and metrics collector, with Prometheus/Grafana and Traefik, on Kubernetes](1K8ssandra_0-1609686338716-1024x272.png)
 
 *Source: <https://www.datastax.com/blog/2020/11/developer-newsletter-convergence-cassandra-and-kubernetes>*
 

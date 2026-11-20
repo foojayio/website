@@ -19,7 +19,7 @@ related_posts:
   - "gear-up-for-nodes-2024-what-to-know"
 ---
 
-![](05.03_Nodes_Banner_1200x628-1-700x366.png)
+![Neo4j NODES 2023 banner announcing the online conference in October and inviting readers](05.03_Nodes_Banner_1200x628-1-700x366.png)
 
 NODES is back for its fifth year on October 26, 2023!
 

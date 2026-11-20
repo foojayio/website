@@ -36,10 +36,10 @@ This article dives into the key steps of deploying databases and stateful worklo
 ## 1. Get to Know the Kubernetes Primitives
 
 Simply put: databases are just applications composed of compute, network, and storage. We can deploy them like any other K8s application and take advantage of resources that it provides: StatefulSets, Services, StorageClasses, PersistentVolumes, and PersistentVolumeClaims, and more.
-![](0_xoPr_TvmecLWjIbC.png) Figure 1: Kubernetes resources help us think of applications in terms of compute, network, and storage.
+![Kubernetes primitives grouped by compute, network and storage, such as Pod, Service and PersistentVolume](0_xoPr_TvmecLWjIbC.png) Figure 1: Kubernetes resources help us think of applications in terms of compute, network, and storage.
 
 Getting comfortable with using these primitives will help you understand how databases and other data infrastructure are deployed on K8s. For example, a deployment of [Apache Cassandra®](https://cassandra.apache.org/) will typically use a StatefulSet to launch pods across available Kubernetes worker nodes, with each Cassandra pod having its own PersistentVolumeClaim that can be preserved and reused if the pod needs to be replaced.
-![](0_EmQkWjapqR8oV-WI.png) Figure 2: Simple deployment of Cassandra on Kubernetes using a StatefulSet.
+![Diagram of a Cassandra StatefulSet: three pods with claims on a persistent volume, plus CQL and seed services](0_EmQkWjapqR8oV-WI.png) Figure 2: Simple deployment of Cassandra on Kubernetes using a StatefulSet.
 
 For more great examples of using these primitives online, check the reference example in the Kubernetes documentation of [deploying Cassandra using StatefulSets](https://kubernetes.io/docs/tutorials/stateful-application/cassandra/). We're also building a [collection of examples on GitHub](https://github.com/data-on-k8s-book/examples) in association with the book project and would love to see your issues and pull requests.
 
@@ -60,7 +60,7 @@ Deciding on a database isn't entirely independent from other decisions in your a
 Unless the database you choose is just a cache holding ephemeral data, you'll need to configure your database to use persistent storage. If you're using one of the public clouds, you'll have storage options available such as Elastic Block Storage (EBS) volumes in AWS.
 
 However, there are many other options that are cloud-vendor independent. You can find a thriving ecosystem of K8s providers in the [Cloud-Native Storage category](https://landscape.cncf.io/card-mode?category=cloud-native-storage&grouping=category) of the CNCF Landscape.
-![](0_oHM4CPPB-Y-Z3EF3.png) Figure 3: Cloud Native Storage projects on the CNCF Landscape as of September 2021.
+![Grid of logos of cloud native storage projects, with Rook, a CNCF graduated project, highlighted](0_oHM4CPPB-Y-Z3EF3.png) Figure 3: Cloud Native Storage projects on the CNCF Landscape as of September 2021.
 
 These include a number of options for managing both local and networked storage, in formats such as block, file, and object storage. You'll likely be able to find sample code that shows how to configure your selected database to use your chosen storage provider. For example, here's a [tutorial on running Apache Cassandra on OpenEBS](https://docs.openebs.io/docs/next/cassandra.html), a popular open-source storage provider for K8s that you can run in a variety of environments.
 

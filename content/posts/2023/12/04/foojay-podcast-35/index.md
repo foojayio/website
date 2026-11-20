@@ -39,7 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://twitter.com/dubjug>
 * [https://www.youtube.com/@dubjug/videos?view=0\&sort=dd\&shelf_id=0](https://www.youtube.com/@dubjug/videos?view=0&sort=dd&shelf_id=0)
 
-![](dublin-jug-podcast-guest-1024x289.jpg)
+![Video call screenshot of the podcast guest on the left and host Frank Delporte with headphones on the right](dublin-jug-podcast-guest-1024x289.jpg)
 
 ## Guest: Barry Alistair
 

@@ -41,4 +41,4 @@ Participants will have the end-to-end experience of developing a solution on the
 
 Receive a Stream Processing Fundamentals Workshop digital badge, which you can add to your CV or LinkedIn upon completing our 90 minutes training.
 
-[![](hz-unconf-social-2-510x510.jpg)](https://hazelcast.com/lp/unconference/)
+[![Banner for the Real-Time Stream Processing unconference by Hazelcast, March 9, 2023, hybrid in London, with a Register for Free button](hz-unconf-social-2-510x510.jpg)](https://hazelcast.com/lp/unconference/)

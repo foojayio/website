@@ -28,4 +28,4 @@ Recordings for the event will be done during the upcoming Devnexus.
 [Register for this unique and free celebration here!](https://www.azul.com/duke-turns-30-celebrating-java/#register)
 
 Also... you can hold a watch party with your JUG, organization, or group of friends, and get free pizza, [sign up for that here](https://docs.google.com/forms/d/1NOQyRDSyEaGeOnERzbpu8lXLAPZqmP2v0GZp-TTHIR0).
-[![](duke30-1024x247.jpg)](https://www.azul.com/duke-turns-30-celebrating-java)
+[![Azul banner: Duke Turns 30, free virtual event celebrating 30 years of Java on March 13 at 9 AM PST, with Register Now button](duke30-1024x247.jpg)](https://www.azul.com/duke-turns-30-celebrating-java)

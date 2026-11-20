@@ -45,7 +45,7 @@ If you are using version 2.4.0 of a library, and version 2.4.1 fixes a critical 
 * **You don't need to subscribe to newsletters.**
 * As part of code analysis, it just tells you: *"Upgrade this jar to version X to be safe."*
 
-![](Screenshot-2025-12-22-at-11.07.33-1024x300.png)
+![SonarQube list of dependency risks, mostly Jackson-databind CVEs, beside the detail page for CVE-2020-35491](Screenshot-2025-12-22-at-11.07.33-1024x300.png)
 
 ## **Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥**
 
@@ -70,7 +70,7 @@ You never invited **Library C**, but it's living in your house. If you run mvn d
 ```
 
 SonarQube Advanced Security visualizes this chain instantly. It shows you exactly *how* the vulnerability got in, so you know you need to upgrade legacy-reporting-tool to fix the root cause.
-![](Screenshot-2025-12-22-at-11.07.42-1024x423.png)
+![SonarQube dependency page showing jackson-annotations 2.9.10 pulled in transitively through jackson-databind](Screenshot-2025-12-22-at-11.07.42-1024x423.png)
 
 ## **Problem #3: "Wait, I can't use this library? It's open source!" ⚖️**
 
@@ -86,7 +86,7 @@ SonarQube Advanced Security scans your dependencies and allows you to define lic
 * It allows you to approve or ban specific licenses for your organization.
 
 It saves you from a massive lawsuit (or a complete rewrite) later.
-![](Screenshot-2025-12-22-at-11.07.52-1024x403.png)
+![SonarQube dependency risks filtered to prohibited licenses, such as CDDL-1.1 and EPL-1.0 dependencies](Screenshot-2025-12-22-at-11.07.52-1024x403.png)
 
 ## **Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️**
 
@@ -137,7 +137,7 @@ public class FileUtils {
 ```
 
 Standard tools ignore this because they don't look *inside* the library's logic. SonarQube flags this immediately as **Command Injection**.
-![](Screenshot-2025-12-22-at-11.08.08-1024x843.png)
+![SonarQube for IDE highlighting a SQL injection in findUsers, with the taint flow from the HTTP request to the query execution](Screenshot-2025-12-22-at-11.08.08-1024x843.png)
 
 ## **Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜**
 

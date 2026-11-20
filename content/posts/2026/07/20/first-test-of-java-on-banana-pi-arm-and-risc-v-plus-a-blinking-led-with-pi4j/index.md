@@ -63,7 +63,7 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
 * [Operating System](https://drive.google.com/drive/folders/1-MzSVsduPX8qHKgbAOM3wmcCbwfkffAz)
   * I used "20241011_Bananapi-Armbian_24.8.2_Bpi-m4zero_ubuntu22.04_jammy_legacy_5.4.125_xfce_desktop.zip"
 
-![](bananapi-pi4j.jpg)
+![Breadboard with jumper wires, a lit red LED and a Banana Pi board connected for a Pi4J blinking LED test](bananapi-pi4j.jpg)
 
 ### Banana Pi BPI-F3
 
@@ -76,7 +76,7 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
   * Select the image ending in "bianbu-k1-xxx.img.zip"
   * I used "bianbu-25.04-desktop-k1-v3.0.1-release-20250815185656.img.zip"
 
-![](bananapi-vs-raspberrypi-1024x971.jpg)
+![Banana Pi BPI-F3 and BPI-M4 Zero boards with their boxes, next to a Raspberry Pi 4 and a Pi Zero 2 for size comparison](bananapi-vs-raspberrypi-1024x971.jpg)
 
 ## Testing with Java and Pi4J
 
@@ -252,7 +252,7 @@ The Banana Pi BPI-F3 boots in desktop mode! So that's a lot nicer for a first te
 ## Benchmark Results
 
 To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](https://webtechie.be/sbc/), where you can compare them with the other boards I tested before.
-![](sbc-benchmarks-bananapi-1024x526.jpg)
+![Bar chart of overall SBC benchmark performance: OPi 5 Ultra 100%, Raspberry Pi 5 80%, Banana Pi boards around 23%](sbc-benchmarks-bananapi-1024x526.jpg)
 
 Some highlights:
 

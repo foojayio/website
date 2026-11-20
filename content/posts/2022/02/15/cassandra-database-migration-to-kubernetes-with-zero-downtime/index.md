@@ -68,7 +68,7 @@ UN  172.31.22.153  10.2 GiB  16      100.0%            d6488a81-be1c-4b07-9145-2
 ```
 
 In the AWS console, we can access the details of a node in the EC2 service and locate its VPC id which we'll need later to create a peering connection with the EKS cluster VPC:
-![](image-1536x722-1-1024x481.png) Finding the VPC id
+![AWS EC2 instance summary for the Cassandra node, with an arrow pointing to its VPC ID](image-1536x722-1-1024x481.png) Finding the VPC id
 
 The next step is to create an EKS cluster with the right settings so that pod IPs will be reachable from the existing EC2 instances.
 
@@ -187,7 +187,7 @@ Once the VPC peering connection is created and the route tables are updated in b
 
 ### Preparing the Cassandra cluster for the expansion
 
-![](image-1.png) Original Cassandra cluster
+![Diagram: Cassandra cluster1 DC1 with five nodes on VMs or bare metal, with apps and services pinned to DC1](image-1.png) Original Cassandra cluster
 
 When expanding a Cassandra cluster to another DC, and assuming you haven't created your cluster with the `SimpleSnitch` (otherwise you first have to [switch snitches first](https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/operations/opsSwitchSnitch.html)), you need to make sure your keyspaces use the `NetworkTopologyStrategy` (NTS). This replication strategy is the only one that is DC and rack aware. The default `SimpleStrategy` will not consider DCs and will behave as if all nodes were collocated in the same DC and rack.
 
@@ -233,7 +233,7 @@ More information can be found in the drivers documentation.
 
 ### Deploying K8ssandra as a new datacenter
 
-![](image-2.png) Creating a K8ssandra deployment for the new datacenter
+![Diagram: new K8ssandra datacenter DC2 joins cluster1 beside DC1 on a flat network, with apps still using DC1](image-2.png) Creating a K8ssandra deployment for the new datacenter
 
 K8ssandra ships with **[cass-operator](https://github.com/k8ssandra/cass-operator)** which orchestrates the Cassandra nodes and handles their configuration. Cass-operator exposes an `additionalSeeds` setting which allows us to add seed nodes that are not managed by the local instance of cass-operator and by doing so, create a new datacenter that will expand an existing cluster.
 
@@ -348,7 +348,7 @@ UN  172.31.22.153  10.2 GiB   16      100.0%            d6488a81-be1c-4b07-9145-
 
 ### Rebuilding the new datacenter
 
-![](image-3.png) Replicating data to the new datacenter by rebuilding
+![Diagram: data is rebuilt from DC1 to the K8ssandra datacenter DC2 while apps stay on DC1](image-3.png) Replicating data to the new datacenter by rebuilding
 
 Now that our K8ssandra datacenter has joined the cluster, we will alter the replication strategies to create replicas in the `k8s-1` DC for the keyspaces we previously altered:
 
@@ -396,13 +396,13 @@ UN  172.31.22.153  10.32 GiB  16      100.0%            d6488a81-be1c-4b07-9145-
 
 ### Switching traffic to the new datacenter
 
-![](image-4.png) Redirecting client traffic to the new datacenter
+![Diagram: apps and services are pinned to the new DC2 datacenter while DC1 stays in the cluster](image-4.png) Redirecting client traffic to the new datacenter
 
 Client traffic can now be directed at the `k8s-1` datacenter, the same way we previously restricted it to `us-west-2`. If your clients are running from within the Kubernetes cluster, use the cassandra service exposed by K8ssandra as a contact point for the driver. If the clients are running outside of the Kubernetes cluster, you'll need to enable Ingress and configure it appropriately, which is outside the scope of this blog post and will be covered in a future one.
 
 ### Decommissioning the old datacenter and finishing the migration
 
-![](image-5.png) Decommission the original datacenter
+![Diagram: DC1 is decommissioned and the K8ssandra DC2 datacenter serves all application traffic](image-5.png) Decommission the original datacenter
 
 Once all the client apps/services have been restarted, we can alter our keyspaces to only replicate them on `k8s-1`:
 

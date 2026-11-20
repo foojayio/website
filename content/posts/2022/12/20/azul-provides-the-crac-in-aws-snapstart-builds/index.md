@@ -32,7 +32,7 @@ And Lambda, with its underlying use of the [Firecracker MicroVM](https://firecra
 
 ## Momentum for the CRaC API is Building
 
-![](crac-momentum-blog-hero-1024x576.jpg)
+![Banner reading 'Momentum for the OpenJDK CRaC Project' over a night view of Earth with city lights](crac-momentum-blog-hero-1024x576.jpg)
 
 CRaC has been gaining momentum by supporting a range of microservices frameworks. This is another huge step toward widespread acceptance and adoption of CRaC as a viable way of addressing warmup issues in Java while retaining all the benefits of the platform's dynamic class ecosystem and proven speed and optimization.
 

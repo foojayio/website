@@ -24,7 +24,7 @@ This allows you to memory map large virtual regions without worrying about waste
 
 In this program, you can see it reserves 8 TiB (8,192 GiB)
 
-![](Screen-Shot-2023-03-06-at-11.11.24-AM-1024x480.png)  
+![Java code creating a Chronicle Queue with an 8 TiB sparse-file block size, writing 'Hello World' and tailing it](Screen-Shot-2023-03-06-at-11.11.24-AM-1024x480.png)  
 *Figure 1. Test 1: Sparse file*
 
 Tip: x \<\< y means x × 2y therefore:
@@ -43,25 +43,25 @@ Using multiples of 10 for the shift makes them easier to read.
 ```
 
 The virtual memory size of the above process is just over 8192 GiB at 8200.7 GiB, but the RSS (Resident Set Size) is only 122,060 KB, or 122 MB.  
-![](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.jpg)  
+![Linux top output showing the Java process with 8200.7g virtual memory but only 122 MB resident memory](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.jpg)  
 *Figure 2. RES for Test 1*
 
 On disk, the extents reported are 8 TiB, however the amount of disk (and memory) actually used is just 20 KiB.
 
-![](Screen-Shot-2023-03-06-at-11.13.55-AM-1024x274.png)  
+![Terminal listing an 8.1T queue file that uses only 20K of actual disk space](Screen-Shot-2023-03-06-at-11.13.55-AM-1024x274.png)  
 *Figure 3. Disk usage for Test 1*
 
 The following test displays the main point of this article more clearly. In the test the reserved virtual memory is 8 TiB again but data has been written sparsely; 1000 integers are written but there is 16L \<\< 10 (16 KiB = four pages) skip after each write.
 
-![](Screen-Shot-2023-03-06-at-11.14.27-AM-1024x928.png)  
+![Java code writing 1000 sparse-spaced integers into a Chronicle Queue and reading them back with a tailer](Screen-Shot-2023-03-06-at-11.14.27-AM-1024x928.png)  
 *Figure 4. Test 2: Sparse file with skipped pages*
 
 The RSS (Resident Set Size) is only 129,272 KB, or 122 MB and the disk usage is only 4.0 MiB which indicates that only touched pages use memory. Although it seems the size of data is 16 KiB *1000 = 16 MiB but only 1 out of 4 pages have been touched so the actual disk usage is 4KiB* 1000 = 4.0 MiB
 
-![](Screen-Shot-2023-03-06-at-11.15.11-AM-1024x422.jpg)  
+![Linux top output showing the Java process with 8200.7g virtual memory and only 129 MB resident memory](Screen-Shot-2023-03-06-at-11.15.11-AM-1024x422.jpg)  
 *Figure 5. RES for Test 2*
 
-![](Screen-Shot-2023-03-06-at-11.15.39-AM-1024x299.png)  
+![Terminal listing an 8.1T queue file using only 4.0M of actual disk space after writing data](Screen-Shot-2023-03-06-at-11.15.39-AM-1024x299.png)  
 *Figure 6. Disk usage for Test 2*
 
 ### Conclusion

@@ -28,7 +28,7 @@ After talking with my friend, I decided to reach out to the folks on r/Experienc
 
 After posting my question and receiving so much solidarity, I shared it with my friend. He was very happy to know that he was not alone. We both felt that I should compile all the tips I received and create a post for developers who feel they are falling behind in staying current.
 
-![](https://digma.ai/wp-content/uploads/2024/05/image-461x1024.png)  
+![Illustration from the Digma post about a developer sharing a problem with a friend; based on surrounding article text.](https://digma.ai/wp-content/uploads/2024/05/image-461x1024.png)  
 
 Sorce; Reddit
 

@@ -59,7 +59,7 @@ Note: In the above search results, it appears on the second page, and doesn't gi
 
 ## The `TransactionSynchronizationManager` class
 
-![](tx-sync-mgr-class-diagram.png)
+![UML class diagram of Spring's TransactionSynchronizationManager with its ThreadLocal fields and resource, synchronization and transaction methods](tx-sync-mgr-class-diagram.png)
 
 Its Javadoc is pretty descriptive:
 > Central delegate that manages resources and transaction synchronizations per thread. To be used by resource management code but not by typical application code.
@@ -83,7 +83,7 @@ Let's have a look at a simplified sequence diagram.
 
 I'll use the `DataSourceTransactionManager`, but other Spring-provided transaction managers behave in a similar way.
 
-![](tx-sequence-diagram-924x1024.png)  
+![Sequence diagram of a Spring transactional call: the transaction manager binds a resource to a ThreadLocal on begin and unbinds it on commit](tx-sequence-diagram-924x1024.png)  
 During startup, Spring searches for all `@Transactional`-annotated methods. For each of them, it creates a proxy (either a JDK one or a CGLIB one), which wraps the real method with pre- and post-code.
 
 1. The sequence starts when you call a `@Transactional`-annotated method
@@ -97,7 +97,7 @@ During startup, Spring searches for all `@Transactional`-annotated methods. For 
 
 In Reactive Programming, tasks are executed asynchronously across multiple threads to maximize resource utilization. Since `ThreadLocal` ties data to a specific thread, Spring can't use it reliably in reactive environments. Instead, Spring's reactive transaction management uses a `Context` object associated with the reactive stream. Still, Spring designers kept the same class name-quite confusing.
 
-![](tx-reactive-sync-mgr-class-diagram-1024x331.png)  
+![UML class diagram of the reactive TransactionSynchronizationManager delegating to a TransactionContext that holds the transaction state](tx-reactive-sync-mgr-class-diagram-1024x331.png)  
 Notice that the `TransactionSynchronizationManager` methods are instance-scoped in the Reactive context, while they were class-scoped (`static`) in the regular one.
 
 It's harder to create an UML sequence diagram for reactive transaction management flow because:

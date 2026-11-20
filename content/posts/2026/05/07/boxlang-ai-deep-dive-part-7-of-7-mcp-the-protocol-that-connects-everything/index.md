@@ -20,7 +20,7 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 ---
 
-![](bxai-series-cover-07-700x368.png)
+![Cover slide: BoxLang AI 3.0 Deep Dive, Part 7 of 7, MCP: The Protocol That Connects Everything](bxai-series-cover-07-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 7 of 7*
 

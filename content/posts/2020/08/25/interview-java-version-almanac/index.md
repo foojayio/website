@@ -12,12 +12,12 @@ related_posts:
 ---
 
 From this week, we're happy to announce that we're hosting Marc Hoffmann's [Java Version Almanac](http://javaalmanac.io) [right here on foojay](https://javaalmanac.io/jdk/8/), providing details per release on OpenJDK distributions, new features, and differences between APIs across releases.
-![](Screenshot-2020-08-25-at-08.35.09-1024x559.jpg)
+![Java Version Almanac page on foojay.io for Java 8, listing distributions, vendors, licenses and platforms](Screenshot-2020-08-25-at-08.35.09-1024x559.jpg)
 
 {{< legacy-notice >}}
 
 It also shows differences between the APIs of the currently selected Java release and all previous releases, handy when you're upgrading!
-![](Screenshot-2020-08-25-at-08.55.35-1024x435.png)
+![Java Version Almanac 'New APIs' view comparing Java 14 with Java 8, with added, removed and deprecated markers](Screenshot-2020-08-25-at-08.55.35-1024x435.png)
 
 Go here to take a look, yourself: <https://javaalmanac.io/jdk/8/>
 

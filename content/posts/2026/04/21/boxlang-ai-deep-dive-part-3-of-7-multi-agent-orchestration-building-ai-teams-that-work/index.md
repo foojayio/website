@@ -20,7 +20,7 @@ aliases:
   - "/today/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work-🌲/"
 ---
 
-![](bxai-series-cover-03-700x368.png)
+![Slide-style cover for part 3 of the BoxLang AI 3.0 deep dive: Multi-Agent Orchestration, Building AI Teams That Work](bxai-series-cover-03-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 3 of 7*
 

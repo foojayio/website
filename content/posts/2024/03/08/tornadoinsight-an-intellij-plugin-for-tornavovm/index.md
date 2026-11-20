@@ -15,7 +15,7 @@ related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
 ---
 
-![](tornado-insight.webp)  
+![Purple swirl seen through a magnifying glass over a code-filled monitor, illustrating TornadoInsight inspecting code](tornado-insight.webp)  
 
 **TornadoInsight is an open-source IntelliJ IDEA plugin for enhancing the developer experience when working with TornadoVM.**
 
@@ -57,7 +57,7 @@ Then, it invokes the TornadoVM runtime on the developer's machine to run the gen
 {{< img src="TornadoInsight_successful_compilation-1024x653.webp" class="size-large is-resized" width="1024" height="653" style="width:840px;height:auto" >}}
 
 If it is not compatible, it will output an exception stack trace. In addition, the elapsed time for running the checks is displayed in the bottom right corner.
-![](TornadoInsight_unsuccessful_compilation-1024x645.webp)
+![TornadoInsight console in IntelliJ showing a failed dynamic inspection of an ArraySort kernel with a stack trace](TornadoInsight_unsuccessful_compilation-1024x645.webp)
 
 ## How to use TornadoInsight?
 

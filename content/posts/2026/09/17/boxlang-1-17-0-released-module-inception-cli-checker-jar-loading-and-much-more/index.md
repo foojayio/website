@@ -23,11 +23,11 @@ related_posts:
 
 **BoxLang has always been an extensible language. As of 1.17.0, it is a hierarchically extensible one.**
 
-![](boxlang-v1.17.0-700x467.jpg)
+![BoxLang RELEASE 1.17.0 banner with the BoxLang logo over a colorful wave background](boxlang-v1.17.0-700x467.jpg)
 
 Modules can now contain other modules; **aka Module Inception** . Recursively. To any depth. Each nested module gets its own class loader, chained to its parent's, and BoxLang's own `ModuleService` discovers, registers, activates, and unloads that entire tree itself. No package manager. No build tool. No install ordering. Drop in one artifact and everything it depends on comes with it, already wired up and already isolated. **Not only that, you can now package modules into a single jar.**
 
-![](module-inception-hero-700x368.jpg)
+![Module Inception title card: modules that bundle their own modules, recursively, to any depth](module-inception-hero-700x368.jpg)
 
 That is the headline, and it changes what a BoxLang module fundamentally is. A module is no longer a leaf in a flat list that something outside the language has to resolve for you. It is a tree, and the runtime owns the whole thing.
 
@@ -41,7 +41,7 @@ Every other module ecosystem you have worked in is **flat**. You declare a list 
 
 BoxLang 1.17.0 changes that. Drop a `modules/` folder into your module, and BoxLang treats it exactly like a top-level `modulesDirectory`.
 
-![](module-inception-anatomy-700x400.jpg)
+![Folder tree of myModule with a nested modules/ folder holding child and grandchild modules, contrasted with libs/ as plain classpath](module-inception-anatomy-700x400.jpg)
 
 The practical outcome: **one self-contained artifact**, a single module folder or a single JAR, that brings every module it depends on along with it, fully isolated from the host application's own modules, working the moment it is dropped in.
 
@@ -51,7 +51,7 @@ The distinction that matters most is the one on the right of that diagram. `libs
 
 Nested modules load from the inside out and unload from the outside in.
 
-![](module-inception-lifecycle-700x320.jpg)
+![Lifecycle diagram: nested modules load grandchild, child, then parent, and unload in the reverse order](module-inception-lifecycle-700x320.jpg)
 
 Registering or activating a parent cascades down the whole tree first, so by the time your module's `onLoad()` runs, everything it bundles is already active and usable. Unloading reverses it, because a child's class loader depends on its parent's.
 
@@ -59,7 +59,7 @@ Registering or activating a parent cascades down the whole tree first, so by the
 
 Isolation here is real, not conventional. The class loader hierarchy mirrors the module hierarchy: a nested module's loader is parented to **its parent module's** loader, chaining upward until a top-level module, whose loader is parented to the runtime.
 
-![](module-inception-classloaders-700x330.jpg)
+![Class loader diagram: each nested module's loader chains to its parent's, sharing parent libs while sibling modules stay isolated](module-inception-classloaders-700x330.jpg)
 
 Put a shared dependency in the parent's `libs/` once and every module nested inside it can use it without redeclaring anything, while remaining invisible to siblings and unrelated modules.
 
@@ -139,7 +139,7 @@ public IStruct modules() {
 
 Those overrides land in the middle of a three-layer precedence chain.
 
-![](module-inception-precedence-700x310.jpg)
+![Three-layer config merge: the child's defaults, the parent's overrides, then the global boxlang.json, which always wins](module-inception-precedence-700x310.jpg)
 
 The global app config is applied last and always wins, so a deployment can override anything, including a parent's decision about its own child. The merge is additive: settings the parent does not mention keep the child's own defaults.
 

@@ -36,7 +36,7 @@ It works by turning text into embeddings, vectors (arrays of numbers) that captu
 With recent vector query support in Spring Data, Java developers can build semantic search using familiar repositories and queries.
 
 In this article, we'll build a small **movie search** app that understands intent beyond keywords. You'll type queries like "movie with pyramids in Egypt" or "a science fiction movie about rebels fighting an empire in space" and the app will surface relevant titles.
-![](Screenshot-2025-10-09-at-12.11.48-PM.jpg)
+![Movie Search web app finding sci-fi films about rebels from a natural language query, with genre and year filters and Star Wars results](Screenshot-2025-10-09-at-12.11.48-PM.jpg)
 
 Along the way, we'll explore how to generate embeddings, perform vector searches, and retrieve the most relevant results.
 
@@ -107,10 +107,10 @@ This step won't affect your code, but it's a best practice to keep your Atlas en
 [Voyage AI](https://www.voyageai.com/) is an embedding platform offering high-quality, production-ready models behind a simple API. In this project, we use Voyage AI to generate embeddings in **two places**:
 
 1.**Generate embeddings:** Each movie's plot was sent to [voyage-3-large](https://docs.voyageai.com/docs/embeddings), and the returned vector was stored in the embedded_movies collection as plot_embedding_voyage_3_large.(This preprocessing is already done.)
-![](Screenshot-2025-10-09-at-12.25.25-PM.png)
+![Diagram: movie plot is converted into embeddings by voyage-3-large and stored as a new field in the MongoDB document](Screenshot-2025-10-09-at-12.25.25-PM.png)
 
 2.**Generate embeddings (user query)**: When the user searches, we encode the query with the same voyage-3-large model and compare that query vector to the stored document vectors. We then return the most similar movies.
-![](Screenshot-2025-10-09-at-12.14.03-PM.png)
+![Diagram: a user query is embedded, a vector search compares embeddings, and the most similar results are returned](Screenshot-2025-10-09-at-12.14.03-PM.png)
 
 The similarity comparison is executed by [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-data-monogbd-hybrid-search-foojay&utm_term=tony.kim) against the stored vectors.
 
@@ -119,7 +119,7 @@ If you'd like to explore more details about the model we use here, you can check
 ## Preparing the dataset
 
 Before creating the index, make sure the **embedded_movies** collection has been imported into your MongoDB Atlas cluster. In our case, this dataset already comes with a field called **plot_embedding_voyage_3_large**, which stores the pre-computed embeddings for each movie plot.
-![](Screenshot-2025-10-09-at-12.27.14-PM.png)
+![MongoDB Atlas embedded_movies collection with the plot_embedding_voyage_3_large field highlighted](Screenshot-2025-10-09-at-12.27.14-PM.png)
 
 With the dataset in place, the next step is to create a vector index so MongoDB Atlas knows which field to use, its dimensionality, and the similarity metric.
 
@@ -150,7 +150,7 @@ Let's break it down:
 ## Building the movie search app
 
 Now that we've seen what vector search is, how embeddings are generated, and created the vector index in MongoDB Atlas, let's put everything into practice. To get started, open [Spring Initializr](https://start.spring.io/), create a new project, and select Spring Web and Spring Data MongoDB as dependencies. Download the project and open it in your favorite IDE.
-![](Screenshot-2025-10-09-at-12.16.10-PM.png)
+![Spring Initializr set to Maven, Java 21, Spring Boot 3.5.5 with Spring Web and Spring Data MongoDB dependencies](Screenshot-2025-10-09-at-12.16.10-PM.png)
 
 ### Configuring the application
 

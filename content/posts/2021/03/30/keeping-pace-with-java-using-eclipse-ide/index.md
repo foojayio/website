@@ -34,101 +34,101 @@ Here is a sneak peek into the major interesting features of recent Java versions
 
 To get started, you can add a JRE in Preferences \> Java \> Installed JREs:
 
-![](Installed-JREs.png)
+![Eclipse Installed JREs preference listing jdk-16 as the default JRE](Installed-JREs.png)
 
 Then, set the JDK compliance in Preferences \> Java \> Compiler:
 
-![](JDK-compliance.png)
+![Eclipse JDK Compliance settings with compiler level 16 and a disabled 'Enable preview features for Java 16' option](JDK-compliance.png)
 
 To quickly enable the preview features on an existing Java project, you can right-click on it in the Package or Project Explorer and select Configure \> Enable preview features:
 
-![](Enable-preview-features.png)
+![Eclipse project Configure menu with 'Enable preview features' highlighted](Enable-preview-features.png)
 
 When a preview feature is used in the code, a default warning is provided by the compiler that the preview feature may not be supported in a future release. You can choose to ignore this problem or set it to Info by changing its severity level on the Java Compiler preference page:
 
-![](Preview-features-severity.jpg)
+![Eclipse compiler settings with preview features enabled and a severity dropdown offering Warning, Info and Ignore](Preview-features-severity.jpg)
 
 ### Sealed Classes
 
 Sealed classes have received a second round of preview in Java 16 and they can be used to restrict the type hierarchy of a class. You can create a permitted class or interface declaring the sealed type as its super type with the provided Quick Fix (Ctrl/Cmd + 1):
 
-![](Create-permitted-class.png)
+![Eclipse quick fix offering 'Create class Circle' for a sealed class Shape that permits an undefined Circle](Create-permitted-class.png)
 
 The type hierarchy needs to be controlled at the permitted sub type by declaring it as `final`, `sealed`, or `non-sealed`, which can be done using the provided Quick Fixes:
 
-![](Restrict-permitted-class.png)
+![Eclipse quick fixes to change a permitted subclass Circle to final, non-sealed or sealed](Restrict-permitted-class.png)
 
 ### Records
 
 You can create a record in Eclipse IDE by using the New \> Record wizard which provides more options like selecting the visibility modifier and adding the interfaces to be implemented by the record:
 
-![](Record-wizard.png)
+![Eclipse New Java Record wizard with package demo.sealed and the name Square](Record-wizard.png)
 
 You can run a Java program which is using the record to see that the record instance is provided with auto-generated constructor, component accessor, `toString`, `equals`, and `hashcode` methods:
 
-![](Record-usage.png)
+![Eclipse showing a Square record, a demo class using it, and console output Square(side=10), 10 and true](Record-usage.png)
 
 Eclipse IDE allows you to perform the rename refactoring on record components and it updates the accessor method names along with the component references:
 
-![](Record-component-rename.png)
+![Eclipse renaming a record component to sideLen, updating the accessor call and constructor references](Record-component-rename.png)
 
 A lot of new settings have been added to the formatter profile to control the formatting of records. You can use the filter to quickly view these configurable settings:
 
-![](Record-formatter.png)
+![Eclipse formatter profile filtered on 'record', showing indentation, brace, whitespace and wrapping settings for records](Record-formatter.png)
 
 ### Pattern Matching for instanceof
 
 Pattern matching for instanceof provides a pattern variable with the `instanceof` operator. Eclipse IDE provides you a new clean up option on the Java Feature tab of your clean up profile to use the pattern matching for instanceof and simplify your code by reducing explicit casts created after an `instanceof` check:
 
-![](Pattern-matching-for-instanceof-clean-up.png)
+![Eclipse clean-up profile with the 'Use pattern matching for instanceof' option selected](Pattern-matching-for-instanceof-clean-up.png)
 
 Eclipse IDE understands the pattern variable's type and scope, and allows you to perform various actions like invoking the content assist (Ctrl + Space) and renaming the pattern variable:
 
-![](Instanceof-pattern-variable-actions.png)
+![Eclipse content assist on an instanceof pattern variable, next to the result after renaming it to s](Instanceof-pattern-variable-actions.png)
 
 ### Text Blocks
 
 You can create a text block by enclosing any text in triple quotes. Eclipse IDE makes it easier for you to add this new delimiter with the new keyboard shortcut Ctrl/Cmd + Shift + ' (apostrophe). You can also select any existing text and use this key binding to quickly enclose it in text block delimiters:
 
-![](Text-block-shortcut.png)
+![Eclipse text block created with triple quotes, with the Ctrl+Shift+' shortcut caption 'Add Text Block'](Text-block-shortcut.png)
 
 The indentation of a text block can be configured in the formatter profile:
 
-![](Text-block-formatter.png)
+![Eclipse formatter dropdown for text block indentation with options such as 'Default for wrapped lines'](Text-block-formatter.png)
 
 ### Switch Expressions
 
 Eclipse IDE provides you a Quick Assist (Ctrl/Cmd + 1) and clean up option to convert eligible switch statements into switch expressions:
 
-![](Convert-to-switch-expression.jpg)
+![Eclipse quick assist 'Convert to switch expression' previewing the converted switch on days of the week](Convert-to-switch-expression.jpg)
 
 Many quick fixes, quick assists, and templates are also provided to help you in writing code with switch improvements. For example, there are quick fixes to add the `default` case or the missing case statements in a switch expression:
 
-![](Add-cases-to-switch-expression.png)
+![Eclipse error 'A Switch expression should cover all possible values' with quick fixes to add a default case or missing cases](Add-cases-to-switch-expression.png)
 
 The proposals are inserted in linked mode so you can quickly replace them with the desired values:
 
-![](Linked-mode-proposals.png)
+![Eclipse inserted a missing WEDNESDAY case throwing UnsupportedOperationException, highlighted in linked mode](Linked-mode-proposals.png)
 
 A quick assist is provided to split multiple labels in a single case statement so that you can provide separate code for these cases if needed:
 
-![](Split-case-labels.png)
+![Eclipse quick assist 'Split case labels' previewing separate case lines for SUNDAY, MONDAY and FRIDAY](Split-case-labels.png)
 
 You can press Ctrl/Cmd and click on the `default` and `case` keywords to quickly navigate to the beginning of the switch expression.
 
 The formatter profile has new settings that allow you to control spaces at various locations in switch expressions:
 
-![](Switch-formatter.png)
+![Eclipse formatter checkboxes for spaces around arrows, commas and braces in switch expressions](Switch-formatter.png)
 
 ### Local-Variable Type Inference
 
 While extracting an expression to a local variable, you can choose to declare the type of the local variable as `var`:
 
-![](Local-variable-type-as-var-.png)
+![Eclipse Extract Local Variable dialog with variable name asList and 'Declare the local variable type as var' checked](Local-variable-type-as-var-.png)
 
 Quick Assists are provided to change the type of a variable from `var` to the inferred type and vice-versa:
 
-![](Convert-var-to-type.png)
+![Eclipse quick assist changing the type of a var variable asList to List<String>](Convert-var-to-type.png)
 
 You can view the inferred type for `var` by just hovering over it and you can also use Ctrl/Cmd + click on `var` to navigate to that type.
 
@@ -136,41 +136,41 @@ You can view the inferred type for `var` by just hovering over it and you can al
 
 To convert an existing Java project to a modular project by creating a module-info.java file in it, you can right-click on the project in the Package or Project Explorer and select Configure \> Create module-info.java:
 
-![](Create-module-info.png)
+![Eclipse project Configure menu with 'Create module-info.java' highlighted](Create-module-info.png)
 
 The module-info.java file is created with directives like exports, requires, etc. based on the existing contents of the project.
 
 You can go to the project's properties and add libraries to its modulepath on the Java Build Path \> Libraries tab:
 
-![](Add-libraries-to-modulepath.png)
+![Eclipse Java Build Path Libraries tab showing the Modulepath with JRE System Library and JUnit 5, and an empty Classpath](Add-libraries-to-modulepath.png)
 
 You can also configure the properties of its module graph on the Java Build Path \> Module Dependencies tab:
 
-![](Configure-module-dependencies.jpg)
+![Eclipse Java Build Path Module Dependencies tab listing demo.modules and java.base, java.compiler and other modules](Configure-module-dependencies.jpg)
 
 Quick Fixes are provided to identify the used types and add the required modules to module-info.java file:
 
-![](Add-required-module-qf.png)
+![Eclipse quick fix adding 'requires org.junit.jupiter.api' to module-info.java for an unresolved @Test annotation](Add-required-module-qf.png)
 
 You can create and export a new non-empty package directly from the module-info.java file using the provided Quick Fixes:
 
-![](Create-and-export-package.jpg)
+![Eclipse quick fixes on 'exports demo.two' offering to create a new class, annotation, enum or interface in that package](Create-and-export-package.jpg)
 
 You can also provide a service implementation from module-info.java with the help of the provided Quick Fixes:
 
-![](Import-type-and-add-required-module.png)
+![Eclipse quick fix to import Driver from java.sql and add 'requires java.sql' to module-info.java](Import-type-and-add-required-module.png)
 
-![](Create-service-implementation.png)
+![Eclipse quick fix to create class DriverImpl for a 'provides Driver with demo.DriverImpl' service declaration](Create-service-implementation.png)
 
 ### Functional Interface Instances
 
 You can hover over the `->` of a lambda expression or the `::` of a method reference to view the functional interface method being implemented and you can use Ctrl/Cmd + click on these operators to navigate to that method:
 
-![](View-functional-method.png)
+![Eclipse hover over a lambda arrow showing the implemented Comparator.compare method, beside an equivalent method reference](View-functional-method.png)
 
 Eclipse IDE provides you many quick assist, clean up, formatting, and refactoring options to work with anonymous classes, lambda expressions, and method references:
 
-![](Functional-instances-quick-assists.png)
+![Eclipse quick assists for a lambda, including convert to method reference, add 'var' parameter types and convert to anonymous class](Functional-instances-quick-assists.png)
 
 ## Summary
 

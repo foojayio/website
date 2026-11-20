@@ -149,7 +149,7 @@ Knowing language features like this helps you get the best java jobs, that's why
 
 Download this step by step guide for free!
 
-[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
+[![Ebook cover '5 Steps to Best Java Jobs' by Vipin Sharma, showing hands typing on a laptop with green binary code](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

@@ -46,7 +46,7 @@ The following code retrieves a user from the database considering the username p
 
 |                                                    |                            |
 |----------------------------------------------------|----------------------------|
-| ![](Screenshot-2024-08-27-at-16.00.02-300x218.png) | 
+| ![Login form with username 'myuser' and a masked password, as a normal login](Screenshot-2024-08-27-at-16.00.02-300x218.png) | 
 
 ```java
 public List findUsers(String user, String pass) throws Exception {
@@ -66,7 +66,7 @@ public List findUsers(String user, String pass) throws Exception {
 
 However, when the attacker uses injection techniques, this code, using string interpolation, will result in unexpected results, allowing the attacker to log into the application.
 
-![](Screenshot-2024-08-27-at-15.59.47-300x220.png)
+![Login form with the SQL injection input admin' -- in the username field](Screenshot-2024-08-27-at-15.59.47-300x220.png)
 
 To fix this problem we would change this approach from using string concatenation to parameter injection. In fact, String concatenation is generally a bad idea, in terms of performance and security.
 
@@ -229,7 +229,7 @@ But what if the attacker tries to log in with this user?
 
 |                                                                       |                                            |
 |-----------------------------------------------------------------------|--------------------------------------------|
-| ``` john login in\n2024-08-19 12:34:56 INFO User 'admin' login in ``` | ![](Screenshot-2024-08-27-at-16.01.33.png) |
+| ``` john login in\n2024-08-19 12:34:56 INFO User 'admin' login in ``` | ![Login form with a username containing 'john login in' and a timestamp, illustrating log injection](Screenshot-2024-08-27-at-16.01.33.png) |
 
 It's clearly a wrong user name and it will fail. But, it will be logged and the person checking the log will get very confused.
 

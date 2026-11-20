@@ -21,7 +21,7 @@ related_posts:
   - "idempotent-spring-boot-starter"
 ---
 
-![](bx-rss-700x467.jpg)
+![BX-RSS banner for BoxLang's RSS/Atom feed module, with the BoxLang logo and an orange RSS icon](bx-rss-700x467.jpg)
 
 We're thrilled to announce the release of `bx-rss`, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to [BoxLang](https://www.boxlang.io/# "BoxLang")! Whether you're building a content aggregator, publishing a podcast, or exposing your application's data as feeds, `bx-rss` makes it incredibly simple.
 

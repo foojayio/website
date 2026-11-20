@@ -24,7 +24,7 @@ It's a small change in letters but an important one. The new name reflects where
 
 The iconic Payara fish has also had a bit of a refresh. The Azul Payara commercial logos were updated back in December, and now the community edition gets the same treatment - same fish character the Payara community knows well, just updated to match its new home at Azul.
 
-![](Untitled-400-x-100-px.png)
+![Azul Payara Community logo with the Payara fish mark](Untitled-400-x-100-px.png)
 
 ## What the acquisition means for the Community
 
@@ -50,7 +50,7 @@ We'll also be at a number of Java conferences this year. More details to come, b
 
 We didn't want to announce the rebrand without also catching you up on recent releases ([download here!](https://payara.fish/downloads/payara-platform-community-edition/ "download here!")), so here's a combined look at what landed for Azul Payara Community in April and May.
 
-![](Azul-Payara-Community-New-Release-1.jpg)
+![Azul Payara Community 'New Release May 2026' banner with a megaphone illustration](Azul-Payara-Community-New-Release-1.jpg)
 
 ### May: Azul Payara Community 7.2026.5
 

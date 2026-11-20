@@ -21,7 +21,7 @@ A great line up of known and less known OpenJDK users will be presenting new and
 [Check out the great program](https://fosdem.org/2022/schedule/track/friends_of_openjdk/), there's likely something for everyone, starting with new features in Java, including the hot topic of Java security, expanding out from Java to Kotlin and beyond, as well as several sessions around JavaFX and Java on the Web and beyond.
 
 It's a mixed bag from the very detailed to the very fun, and everything in between, all of them around 30 minutes in length, everything pre-recorded, with the speaker available during the session for Q\&A and discussions afterwards.
-[![](image-1024x877.png)](https://fosdem.org/2022/schedule/track/friends_of_openjdk/)
+[![Friends of OpenJDK FOSDEM 2022 schedule table listing Saturday and Sunday Java talks with speakers and times](image-1024x877.png)](https://fosdem.org/2022/schedule/track/friends_of_openjdk/)
 
 Also... there is a quiz and cool prizes. Aside from the FOSDEM chat where you'll be chatting with the speakers and each other, there'll be a FOSDEM Foojay quiz running on the Foojay Slack, go here to sign up:
 
@@ -32,7 +32,7 @@ Once you're in, you'll find there's a **#fosdem22** channel, where after each se
 Put the answers to as many questions as you can in an e-mail to [hello@foojay.io](mailto:hello@foojay.io) and whoever has the most correct answers will be able to pick the prize of their choice first, whoever has the second most correct answers picks second, etc.
 
 And what are the prizes? Here some of them, (an [Oculus](https://www.oculus.com/quest-2/) from Azul, Raspberry Pis from [Open Liberty](https://openliberty.io/), a range of cool techy toys from [OpenValue](https://www.openvalue.eu/), and five one year [Deep Netts](https://www.deepnetts.com/) licenses, amongst others), with more coming to be announced soon:
-![](image-4-1024x576.jpg)
+![Prizes for the quiz: a Meta Quest headset, Codenames board game, Lego Star Wars set and other gadgets, plus a Deep Netts logo](image-4-1024x576.jpg)
 
 To get started, go here to sign up, and join the **#fosdem22** channel:
 

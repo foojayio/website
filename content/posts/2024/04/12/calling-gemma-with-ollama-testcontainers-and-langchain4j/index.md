@@ -48,7 +48,7 @@ TestContainers is not only useful for testing, but you can also use it for drivi
 
 So here's the whole picture:
 
-![](gemma-ollama-testcontainers-langchain4j-700x360.png)
+![Diagram: a user asks 'Why is the sky blue?', a chatbot app sends it to Gemma in an Ollama container under Testcontainers, answer 'Rayleigh scattering'](gemma-ollama-testcontainers-langchain4j-700x360.png)
 
 ## Time to implement this approach!
 

@@ -469,7 +469,7 @@ Executed in the project directory *calculator*, the command `fjx tgt calculator.
 The system user is executed in the project directory *app*. Thus, the module path for the execution `MP=build:mlib:${FEPCOS_HOME}/mlib` contains the the *app's* compiled Java classes in the directory *build* , the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
 
 The execution of app by using the command `java -p ${MP} -m app/app.Main` returns the output as depicted in **Fig .7**.  
-![](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
+![Terminal running java with a module path and app.Main, printing 5 + 7 = 12 and 5 * 7 = 35](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
 
 ## Conclusion
 

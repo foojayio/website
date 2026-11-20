@@ -36,7 +36,7 @@ The preparation started last March in Makati, Philippines to conduct a mock pres
 
 This was led by the amazing training and event coordinators of O \& B Philippines.
 
-![](preparation-680x510.jpg)
+![Meeting room at the venue prepared for the Java User Group PH session, with a long table, whiteboard and wall screens](preparation-680x510.jpg)
 
 We created a meetup group for our joiners to RSVP to this event.
 
@@ -60,7 +60,7 @@ It was an hour of talk starting from 11-ish in the morning up to noon.
 
 The presentation slide is available in JUG PH GitHub [repository](https://github.com/JUGPH/java-presentations "repository").
 
-![](photo_3-700x382.jpg)
+![Simon Ritter presenting a slide on pattern matching for switch to a seated audience at the JUG PH event](photo_3-700x382.jpg)
 
 ### After the talk
 
@@ -72,7 +72,7 @@ It was a nice experience that Java enthusiasts come together again to have a lea
 
 Including an opportunity to have a selfie with Simon.
 
-![](with_simon_ritter-680x510.jpg)  
+![Selfie of Simon Ritter in an Azul shirt with three JUG PH attendees](with_simon_ritter-680x510.jpg)  
 
 Also, the JUG PH and PinoyJUG leaders who organized the event had a picture too (missing Kerby Martino).
 

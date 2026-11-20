@@ -20,6 +20,6 @@ Robby speaks with Ken Fogel, College Instructor, JCP EC member, and Java Champio
 ### EPISODE NOTES
 
 Robby speaks with Ken Fogel, College Instructor, JCP EC member, and Java Champion. They discuss the benefits of unit testing, how Dawson approaches internship placement, and the importance of code documentation. Ken also talks about how software is about more than just getting things to work, and why it's important to focus on the long-term impact of coding decisions.
-[![](image-9-1024x276.png)](https://maintainable.fm/episodes/ken-fogel-what-are-you-leaving-behind)
+[![Podcast episode header with a photo of Ken Fogel and the title 'Ken Fogel: What Are You Leaving Behind?'](image-9-1024x276.png)](https://maintainable.fm/episodes/ken-fogel-what-are-you-leaving-behind)
 
 You can find it at <https://maintainable.fm/episodes/ken-fogel-what-are-you-leaving-behind>.

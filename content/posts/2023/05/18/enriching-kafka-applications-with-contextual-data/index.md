@@ -42,7 +42,7 @@ This article aims to take your Kafka applications to the next level.
 
 Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka applications with "context."
 
-![](1683707203791-700x289.png)
+![Diagram: Kafka real-time trades and a companies map in a Hazelcast cluster are joined into ingest_trades, feeding a web server and web client](1683707203791-700x289.png)
 
 ## Prerequisites
 

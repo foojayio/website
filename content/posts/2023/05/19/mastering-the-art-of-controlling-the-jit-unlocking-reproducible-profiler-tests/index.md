@@ -49,7 +49,7 @@ Before I start with discussing the ways you can force methods to be compiled, in
 4. There are four different compilation levels, but I'm subsuming all C1 variants under the C1 label because some of my used techniques only work on the C1/C2/inlined level. You can read more on tiered compilation in articles like [Tiered Compilation in JVM](https://www.baeldung.com/jvm-tiered-compilation) on Baeldung.
 
 Now that I finished the obligatory disclaimer: What are the stages in the life of a method with a tiered JIT?  
-![](tiered_states-3-2000x1415-558543fc.jpg)
+![State diagram of JVM compilation: Interpreted, C1 Compiled, C2 Compiled and Inlined, with compile and deoptimize transitions](tiered_states-3-2000x1415-558543fc.jpg)
 
 The first time the JVM executes a method, the method's byte code is interpreted without compilation. This allows the JVM to gather information on the method, as C1 and C2 are profile guided.
 
@@ -62,10 +62,10 @@ Every compiler can decide to inline called methods of a currently compiled metho
 ## What we want and what we get
 
 The ideal would be to tell the JVM to just use a method in its compiled version, e.g.:
-![](tiered_states3-2000x474-80dbe9b3.png)
+![Diagram of a single C1 Compiled state with an entry arrow, the desired starting point](tiered_states3-2000x474-80dbe9b3.png)
 
 But this is not possible, as the JVM does not have any information it needs for compilation before the first execution of a method. We, therefore, have first to execute the method (or the benchmark) and then set the compilation level:
-![](tiered_states2-2000x470-e1664a1a.jpg)
+![Diagram where a method goes from Interpreted to C1 Compiled after its first invocation](tiered_states2-2000x470-e1664a1a.jpg)
 
 ## How do we get it?
 
@@ -75,7 +75,7 @@ We can split the task of forcing a method to be compiled (or inlined, for that m
 2. Force the JIT to never compile a method with a different compiler (→ Compiler Control)
 
 The following is the modified state diagram when forcing a method to be C1 compiled:
-![](tiered_states4-2000x1415-ccc71e45.jpg)
+![State diagram with only the Interpreted to C1 transition allowed; C1-to-C2 compilation and inlining are blocked](tiered_states4-2000x1415-ccc71e45.jpg)
 
 In the following, I'll discuss how to use both the WhiteBox API and Compiler Control to facilitate the wanted behavior.
 

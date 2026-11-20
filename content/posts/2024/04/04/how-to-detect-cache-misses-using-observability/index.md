@@ -254,16 +254,16 @@ http :8080/api/phonebooks/phones/numbers/+46123
 One of the most important features of Digma is Insights, Digma uses OpenTelemetry behind the scenes to collect data (traces, logs, and metrics) about our code when we run it locally and then turn those Observability Data Into Insights by analyzing them.
 
 In our case, Digma sends a notification in the IntelliJ Idea to inform us about a found insight.  
-![](https://digma.ai/wp-content/uploads/2024/03/image-3.png)
+![Digma insights list in IntelliJ highlighting a detected cache-miss issue in the application.](https://digma.ai/wp-content/uploads/2024/03/image-3.png)
 
 *Digma insight notification in IntelliJ*  
-![](https://digma.ai/wp-content/uploads/2024/03/image-4.png)
+![Digma insight notification in IntelliJ, and the same insights shown in the Observability view.](https://digma.ai/wp-content/uploads/2024/03/image-4.png)
 
 *Digma insights in Observability view*
 
 Also, in the Observability view, you can see the insight column and click on the insight to open it. As you can see in the image below, you can read about the founded insight in the Digma Insights view.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-5.png)
+![Digma Observability view with an insight column; clicking an insight opens its details.](https://digma.ai/wp-content/uploads/2024/03/image-5.png)
 
 Digma detects that this new endpoint, on average, is slower than other endpoints. In real scenarios, it can be because of a slow database query or forgetting to use cache, cache misses, or … In this case, we need to use the @Cacheable annotation on the method to fix this issue:
 

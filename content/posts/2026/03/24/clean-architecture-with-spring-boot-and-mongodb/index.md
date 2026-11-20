@@ -538,7 +538,7 @@ You might wonder why the adapter repositories use `@Component` while the service
 This also makes the wiring visible in one place. You can see exactly which implementations back which interfaces. The `ProductRepository` and `OrderRepository` parameters are resolved by Spring from the `@Component`-annotated adapter classes (`MongoProductRepository` and `MongoOrderRepository`).
 
 To see how all of this connects, trace a `POST /orders` request through the layers:  
-![](Screenshot-2026-03-18-at-8.36.36-AM.png)
+![Request flow from Client through OrderController, CreateOrderUseCase and CreateOrderService to the Mongo repositories and MongoDB](Screenshot-2026-03-18-at-8.36.36-AM.png)
 
 Each layer depends only on the layer inside it. The controller knows about use case interfaces but not about services. The services know about domain objects and repository interfaces, but not about MongoDB documents. The MongoDB adapters implement the repository interfaces and handle all the database-specific details.
 

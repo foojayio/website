@@ -21,7 +21,7 @@ Java developers building applications for Raspberry Pi often face a common chall
 [Pi4J](https://www.pi4j.com/) has become the standard way to access GPIO, I2C, SPI, UART, and other Raspberry Pi interfaces from Java applications. On the other hand, Quarkus has established itself as one of the most innovative Java frameworks, offering fast startup times, low memory consumption, and a developer-friendly experience.
 
 The Quarkus Pi4J Extension brings these two worlds together, making it easier than ever to build hardware-enabled applications using the Quarkus ecosystem.
-![](quarkus_pi4j01-1024x819.jpg)
+![Duke mascot placing a Raspberry Pi brick on a Lego board beside a Raspberry Pi, with a Quarkus plus Pi4J sign](quarkus_pi4j01-1024x819.jpg)
 
 Project repository:  
 <https://github.com/quarkiverse/quarkus-pi4j>
@@ -43,7 +43,7 @@ Developers typically need:
 While Pi4J provides excellent hardware integration, Quarkus adds the application framework capabilities needed to build production-ready solutions.
 
 The Quarkus Pi4J extension allows developers to use Pi4J naturally within a Quarkus application, combining hardware control with all the features available in the Quarkus ecosystem.
-![](pi4j_quarkus.png)
+![Pi4J and Quarkus logos side by side](pi4j_quarkus.png)
 
 ### What Does the Extension Provide?
 
@@ -173,7 +173,7 @@ This creates a complete Java-based stack running directly on Raspberry Pi hardwa
 The extension is hosted within the Quarkiverse, the community ecosystem for Quarkus extensions. Quarkiverse provides a home for community-driven integrations that expand the capabilities of Quarkus while benefiting from shared infrastructure, testing, documentation, and release processes.
 
 Being part of Quarkiverse makes the extension easier to discover, maintain, and integrate into existing Quarkus projects.
-![](PrPiS-687x1024.jpg)
+![Lego-style Duke mascot with a witch hat working on a Raspberry Pi board mounted on a Quarkus-branded brick base](PrPiS-687x1024.jpg)
 
 ### Looking Ahead
 

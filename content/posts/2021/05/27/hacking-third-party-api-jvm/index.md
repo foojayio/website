@@ -88,7 +88,7 @@ A long post could be dedicated solely to Java's class loading mechanism. For thi
 
 Let's start with the following architecture:
 
-![](classes-in-jar.png)
+![UML component diagram: Main depends on class A in thirdparty.jar, which depends on class B](classes-in-jar.png)
 
 The simplest command to launch the application is the following:
 

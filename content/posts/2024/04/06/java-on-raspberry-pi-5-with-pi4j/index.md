@@ -28,8 +28,8 @@ But because the Raspberry Pi 5 uses a new approach, with the [new RP1 chip](http
 Luckily Alexander Liggesmeyer, a Pi4J user, took up the challenge to find a solution!
 
 {{< gallery >}}
-raspberrypi5.jpg
-rp1.jpg
+raspberrypi5.jpg | | Raspberry Pi 5 board seen from above at an angle, showing GPIO pins, USB ports, Ethernet and HDMI
+rp1.jpg | | Block diagram of the RP1 chip linking the BCM2712 host CPU over PCIe to Ethernet, USB, GPIO, DAC, SDIO and camera/display interfaces
 {{< /gallery >}}
 
 (Images from https://www.raspberrypi.com)
@@ -76,9 +76,9 @@ Spring Boot is a well-known Java framework for developing APIs.
 Pi4J allows me to control the Raspberry Pi's GPIO interfaces directly from Java.
 
 {{< gallery >}}
-alexander.jpg
-cocktailmaker_circuit-1024x732.jpg
-screen-cocktail-1024x475.jpg
+alexander.jpg | | Portrait of Alexander Liggesmeyer, a smiling young man with short brown hair and a navy polo shirt
+cocktailmaker_circuit-1024x732.jpg | | Wiring diagram of eight peristaltic pumps connected through a relay board to a Raspberry Pi 4
+screen-cocktail-1024x475.jpg | | CocktailMaker web app showing the Agua de valencia recipe with an orange cocktail picture and its ingredient steps
 {{< /gallery >}}
 
 ***When you discovered that Pi4J wasn't compatible with this new chip, what made you decide to dive into the problem and add a new provider?***

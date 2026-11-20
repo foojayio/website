@@ -20,7 +20,7 @@ related_posts:
 *Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/)*
 
 In this article, we explore one of the AgentCore capabilities i.e., ***memory***
-![](ac_overviewchart_04_07-7f591d25.png) ***Source: Amazon***
+![AgentCore services overview: tools, gateway, identity, memory, policy, registry and runtime, plus observability and evaluations](ac_overviewchart_04_07-7f591d25.png) ***Source: Amazon***
 
 To begin, enable **AgentCore memory** for the agent you built earlier.  
 ![SpringAI SDK](SpringAISDK.jpg)

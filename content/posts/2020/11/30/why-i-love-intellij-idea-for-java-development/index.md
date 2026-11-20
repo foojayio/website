@@ -24,7 +24,7 @@ I stayed in love with Eclipse until I started migrating AppFuse to Maven in 2006
 
 NOTE: I used IDEA 2020.2.3 (Ultimate Edition) for this blog post.
 
-![](idea-2020.2.3-700x455.png "IntelliJ IDEA 2020.2.3")
+![IntelliJ IDEA 2020.2.3 Ultimate Edition splash and About dialog showing build number and bundled OpenJDK 11 runtime](idea-2020.2.3-700x455.png "IntelliJ IDEA 2020.2.3")
 
 ### Run Your Java Apps from IntelliJ IDEA
 
@@ -32,7 +32,7 @@ I used to prefer running my apps from the command line with Ant or Maven. Then, 
 
 In fact, if you go to **File** \> **New** \> **Project**, you'll see IDEA supports many popular Java frameworks like Spring Boot, Micronaut, Quarkus, and MicroProfile.
 
-![](intellij-new-project-2-629x510.png "New Project Dialog")
+![IntelliJ IDEA New Project dialog listing Spring Initializr, Quarkus, Micronaut and MicroProfile project types](intellij-new-project-2-629x510.png "New Project Dialog")
 
 If you select any of these frameworks, a multi-step wizard will guide you through options.
 
@@ -40,7 +40,7 @@ If you select any of these frameworks, a multi-step wizard will guide you throug
 
 If you select Spring Boot, it'll even create a run configuration for you with the name matching your main `Application` class. In the screenshot below, the buttons are as follows:
 
-![](spring-boot-run.png "Spring boot run")
+![IntelliJ IDEA toolbar with the DemoApplication Spring Boot run configuration and run, debug and coverage buttons](spring-boot-run.png "Spring boot run")
 
 * The hammer icon on the left will build your project
 * The play icon will run your project
@@ -59,37 +59,37 @@ cd java-microservices-examples/spring-cloud-gateway idea .
 
 After downloading dependencies and initializing the project, you'll see a **Services** popup in the bottom right corner.
 
-![](4-spring-boot-service.png "Services popup")
+![IntelliJ IDEA Services notification saying multiple Spring Boot run configurations were detected](4-spring-boot-service.png "Services popup")
 
 Click on it and it'll expand to give you a couple of options. Click on the first one to show run configurations.
 
-![](5-spring-boot-show-run-configs.png "Show Run Configurations")
+![Expanded Services notification offering 'Show run configurations in Services' or 'Do not show again'](5-spring-boot-show-run-configs.png "Show Run Configurations")
 
 This will show the run dashboard and you'll see all your apps listed. You can click on the **Not Started** element and click the play icon to start them all.
 
-![](6-spring-boot-services.png "Spring Boot Services")
+![IntelliJ Services tool window listing ApiGateway, CarService and EurekaService applications as Not Started](6-spring-boot-services.png "Spring Boot Services")
 
 Pretty cool, eh?!
 
-![](7-spring-boot-services-running.png "Spring Boot Services runnning")
+![Services window with three Spring Boot apps running on ports 8080, 8081 and 8761 and Eureka registry logs in the console](7-spring-boot-services-running.png "Spring Boot Services runnning")
 
 #### Run Micronaut Apps in IntelliJ IDEA
 
 Micronaut is similar to Spring Boot in that it has a `public static void main()`. When I created a new app using IDEA's Micronaut wizard, it did not generate any run configurations for me. However, when I clicked on the play icon next to the `main()` method, it allowed me to easily create one.
 
-![](8-micronaut-run.png "Create a Micronaut Run Configuration")
+![IntelliJ editor with a gutter menu on the Micronaut Application main() method offering Run, Debug and Coverage](8-micronaut-run.png "Create a Micronaut Run Configuration")
 
 #### Run Quarkus Apps in IntelliJ IDEA
 
 Quarkus is a bit different—it has no `main()` method. You have to run the `quarkus:dev` Maven goal to start the app. The good news is you can create a run (or debug) configuration from this by right-clicking on the goal in the Maven tool window and selecting the second option.
 
-![](9-quarkus-run.png "Create a Quarkus Run Configuration")
+![IntelliJ Maven tool window with the quarkus:dev goal's context menu offering Run 'demo (quarkus:dev)'](9-quarkus-run.png "Create a Quarkus Run Configuration")
 
 #### Configure Environment Variables
 
 You might be wondering, "why do I need a run configuration?" First of all, it's nice to click a button (or use a keyboard shortcut) to start and re-start your app. Secondly, it provides a way for you to configure JVM options and environment variables.
 
-For example, if you're using Spring Boot with Okta's Spring Boot starter, you'll want to use environment variables rather than putting a client secret in your source code.![](10-env-variables.png "Set environment variables")
+For example, if you're using Spring Boot with Okta's Spring Boot starter, you'll want to use environment variables rather than putting a client secret in your source code.![IntelliJ Environment Variables dialog with Okta OAuth2 issuer, client ID and client secret variables set](10-env-variables.png "Set environment variables")
 
 ### Debug Your Java Apps
 
@@ -101,7 +101,7 @@ In IntelliJ IDEA, you can click in the left gutter next to the line you want to 
 
 If you start your app with Maven, you can debug it too. Let's use Micronaut in this example. If you run `mvnDebug mn:run`, it'll wait for you to attach a remote debugger on port 8000. To create a remote debugging configuration in IntelliJ IDEA, go to **Add Configuration** \> **+** \> **Remote** and give it a name. Then change the port to `8000`.
 
-![](12-remote-debug.png "Remote Debugging")
+![IntelliJ Remote Debug configuration attaching to localhost port 8000 with the JDWP agent arguments shown](12-remote-debug.png "Remote Debugging")
 
 #### Debug via Gradle in IntelliJ IDEA
 
@@ -132,11 +132,11 @@ When a test fails, I know I can run it as an individual test by adding extra par
 
 IntelliJ has excellent testing support. When you open a Java test in the editor, there will be a play icon next to your test class and individual methods. Click it and you'll get the option to run, debug, run with coverage, or edit the configuration.
 
-![](13-play-icon-tests.png "Play options for tests")
+![IntelliJ gutter menu on the testHelloEndpoint() test offering Run, Debug, Run with Coverage and Edit](13-play-icon-tests.png "Play options for tests")
 
 I use this support a lot to run and debug individual tests.
 
-![](14-quarkus-test.png "Running a Quarkus test")
+![IntelliJ running the Quarkus HelloResourceTest, with the test passing in the Run window](14-quarkus-test.png "Running a Quarkus test")
 
 You can also run them at a package level by right-clicking on the page and selecting the **Run Tests** option.
 

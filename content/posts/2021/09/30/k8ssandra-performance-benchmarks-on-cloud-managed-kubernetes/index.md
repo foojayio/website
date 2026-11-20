@@ -298,7 +298,7 @@ Note that the latency test uses a **striderate** instead of a **cyclerate** . A 
 | **Average Throughput (ops/s)** | 22,864         | 22,239         | 23,022         | **25,957**                 | 20,983                    |
 
 Throughput test results
-![](ThroughputTest.png)
+![Bar chart of average throughput in ops/s: Azure AKS UltraSSD highest at 25,957, Azure AKS premium lowest at 20,983](ThroughputTest.png)
 
 If there were still any doubts about the performance of running Cassandra in Kubernetes, we can see in the above results that the drop between AWS EC2 and EKS is negligible. We get slightly more performance in GKE with the n2 instances and Azure shows a nice bump (+12%) using Ultra Disks when compared to our baseline (note that using standard or premium disks in Azure would not match the performance of AWS and GCP) .
 
@@ -319,7 +319,7 @@ Such results are expected given the r5 instances have slower CPU cores as establ
 | **p999** | 9.37           | 11.17          | **5.52**       | 6.42                   | 35.57                 |
 
 Latency test results (values in ms)
-![](LatencyTest.png)
+![Line chart of latency from p50 to p999 in ms: Azure AKS premium is far slower, reaching 35.57 ms at p999 while the others stay under 12](LatencyTest.png)
 
 While AWS keeps latencies at a very solid level, GCP and Azure managed to cut the latencies in half, most probably thanks to their faster CPU speeds.
 

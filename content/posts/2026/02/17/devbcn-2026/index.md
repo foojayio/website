@@ -26,11 +26,11 @@ The 11th edition of **[DevBcn](http://www.devbcn.com)**, the developer's confere
 {{< img src="Screenshot-2026-02-17-at-10.35.06.jpg" class="aligncenter size-full is-resized" width="1011" height="851" style="aspect-ratio:1.18804004331396;width:564px;height:auto" >}}
 
 It will be hosted on the 16th and 17th of June 2026, in the **World Trade Center Conference Center** , having 4 rooms with talks in parallel during the 2 days of the conference : **Java/JVM, AI, Cloud, Frontend, Managing and Soft skills**.
-![](unnamed-1-1024x282.jpg)
+![Panoramic view of the crowded DevBCN 2026 exhibition hall with attendees and sponsor booths](unnamed-1-1024x282.jpg)
 
 {{< gallery >}}
-unnamed-1024x551.jpg
-1771321672348.jpg
+unnamed-1024x551.jpg | | Crowded audience watching a speaker on the main stage in the DevBCN 2026 conference hall
+1771321672348.jpg | | Speaker on the DevBCN stage in front of a large screen with a presentation slide
 {{< /gallery >}}
 
 Don't miss the opportunity and **register now** with discounted prices 🚀 , **submit your talk** to the CFP (closing in 10 days) 📥, and contact us if your company could be interested on the **sponsorship** 🏆

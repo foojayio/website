@@ -97,19 +97,19 @@ Notice how platform threads are created and used (pool) vs how virtual threads a
 
 Here are the benchmark results:
 
-![](ops-sec1-9cc789b6.png)
+![Bar chart: virtual threads reach roughly 580% to 910% of platform-thread operations per second across four JDBC queries.](ops-sec1-9cc789b6.png)
 
 As expected, virtual threads permit way more operations per second.
 
 To be fair, results using the platform pool of threads can perform better: I've run this test with different pool sizes, to see if the results differ. The best performance using platform threads was achieved when pool has 4 connections:
 
-![](ops-sec2-e19b782f.png)
+![Bar chart: with 16 connections virtual threads reach 743% of platform threads; with 4 connections the gap is only 315% vs 275%.](ops-sec2-e19b782f.png)
 
 When using platform threads, having a smaller pool (4 connections vs 16) avoids context switching making performance better. Expectations when dealing with virtual threads are more natural: context switching for virtual threads is way less costly, so having more connections to pool just permits executing more queries simultaneously.
 
 I've run the benchmark using 16 connections with the MySQL connector too, for the MySQL Connector the performance difference wasn't that big:
 
-![](ops-sec3-d505b3e8.png)
+![Bar chart: MariaDB virtual threads reach 743% of platform threads; with MySQL the gain is smaller, 188% vs 72%.](ops-sec3-d505b3e8.png)
 
 Virtual threads are incredible but still have some limitations. For example there's a limitation named 'pinning'—making a virtual thread blocking like a platform thread (tip: pinning can be logged using the Java option -Djdk.tracePinnedThreads=full). At the time of writing, the MySQL connector still makes intensive use of synchronized methods, making it susceptible to issues related to pinning. This explains the difference between the performance of the MariaDB connector and MySQL's connector.
 
@@ -117,7 +117,7 @@ Virtual threads are incredible but still have some limitations. For example ther
 
 While at it, here is the benchmark achieved comparing a platform/virtual threads with JDBC connector and [MariaDB R2DBC connector](https://mariadb.com/downloads/connectors/connectors-data-access/r2dbc-connector). (Results differ to the previous one, because this was run on 2 others machines with different ping)
 
-![](r2dbc-compare-06f74759.png)
+![Bar chart comparing platform threads, R2DBC and virtual threads: virtual threads lead on most queries, R2DBC close behind.](r2dbc-compare-06f74759.png)
 
 R2DBC is a non-blocking connector based on specifications that differ from JDBC. This benchmark confirms that R2DBC presents a huge improvement compared to traditional threads. The main advantage of R2DBC is that it can already be used with frameworks like Spring Data R2DBC, but in terms of performance, virtual threads dethrone R2DBC.
 

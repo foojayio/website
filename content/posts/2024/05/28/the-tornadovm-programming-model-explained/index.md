@@ -18,7 +18,7 @@ related_posts:
 
 ## Key Takeaways
 
-![](back-c8acc920.jpg)
+![AI-style artwork of a white-and-purple tornado swirling up from a computer chip on a circuit-filled background, illustrating TornadoVM](back-c8acc920.jpg)
 
 * [TornadoVM](https://github.com/beehive-lab/TornadoVM/) offers an API for parallel programming on modern hardware that tackles data parallel, task parallel and pipeline parallel applications.
 * TornadoVM offers different abstractions to developers to be able to express parallel applications in Java, identify the methods to offload, and dispatch the application on the corresponding accelerators.
@@ -272,7 +272,7 @@ Cool, isn't it? If you want to know more about dynamic reconfiguration, [this pa
 
 There are more methods in the `TornadoExecutionPlan` class. We covered just two of them. If you are interested, I invite you to read the documentation and the examples. Additionally, I recorded a video showing, step by step, some of these functions in action.
 
-[![](R3gwI0qijGk-819f33b6.jpg)](https://youtu.be/R3gwI0qijGk)
+[![YouTube video thumbnail 'TornadoVM Programming Model Explained' with a play button and a photo of the presenter](R3gwI0qijGk-819f33b6.jpg)](https://youtu.be/R3gwI0qijGk)
 
 ## Summary
 

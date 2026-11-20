@@ -23,7 +23,7 @@ Here we present a hybrid approach by taking the strengths of vector databases an
 
 **Qdrant** is a vector similarity search engine and vector database. It provides a production-ready service with a convenient API to store, search, and manage points—vectors with an additional payload Qdrant is tailored to extended filtering support. It makes it useful for all sorts of neural network or semantic-based matching, faceted search, and other applications.
 
-![](Hazelcast_Qdrant-700x394.png)
+![Architecture diagram: Qdrant handles movie description embeddings and similarity search, while Hazelcast joins casts and actors with predicates](Hazelcast_Qdrant-700x394.png)
 
 ### Step 1: run Hazelcast and install the client
 

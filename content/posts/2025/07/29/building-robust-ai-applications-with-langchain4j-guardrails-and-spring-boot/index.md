@@ -945,7 +945,7 @@ open http://localhost:8080
 > The demo application includes all the guardrails discussed in this article, pre-configured and ready to test. Simply clone, run, and navigate to localhost:8080 to see them in action.
 
 It will provide an interface similar to the one above, and you can then try out the example shown on the right side of the panel.
-![](Screenshot-2025-06-21-at-12.17.07-E2-80-201125cf.png)
+![Browser showing the AI Customer Support demo app blocking the message 'How to h4ck into accounts?' with a content safety guardrail error](Screenshot-2025-06-21-at-12.17.07-E2-80-201125cf.png)
 
 ## Conclusion
 

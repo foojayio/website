@@ -31,7 +31,7 @@ Imagine you want to visit a city and have a specific budget in mind. How should 
 Let's help users get the most out of their trips by building a simple Java application called [BudgetJourney](https://github.com/YugabyteDB-Samples/budget-journey-gpt "BudgetJourney"). The app can suggest multiple points of interest within a city, tailored to fit specific budget constraints.
 
 The architecture of the BudgetJourney app looks as follows:  
-![](budgetjourney-700x363.png)
+![Architecture diagram: users reach a Vaadin frontend, which calls a Spring Boot backend that uses YugabyteDB and the OpenAI APIs](budgetjourney-700x363.png)
 
 1. The users open a BudgetJourney web UI that runs on [Vaadin](https://vaadin.com "Vaadin").
 2. Vaadin connects to a Spring Boot backend when users want to get recommendations for a specific city and budget.
@@ -155,7 +155,7 @@ For example, suppose a user is visiting Tokyo and wants to spend up to $900 in t
 ```
 
 This JSON is then converted into a list of different points of interest. It is then shown to the user:  
-![](image3-700x352.png)
+![BudgetJourney app showing a Tokyo trip with a 900 budget and a table of suggested places with descriptions and prices](image3-700x352.png)
 
 **NOTE:** The GPT-3.5 model was trained on the Sep 2021 data set. Therefore, it can't provide 100% accurate and relevant trip recommendations. However, this inaccuracy can be improved with the help of OpenAI plugins that give models access to real-time data. For instance, once the [Expedia plugin for OpenAI](https://openai.com/blog/chatgpt-plugins "Expedia plugin for OpenAI") becomes publicly available as an API, this will let you improve this BudgetJourney app further.
 
@@ -173,7 +173,7 @@ To make OpenAI GPT applications scalable, it's worth storing the model responses
 2. Serve user requests with low latency by returning previously processed (or preloaded) recommendations from the database.
 
 The BudgetJourney app uses the YugabyteDB database due to its ability to scale globally and store the model responses close to the user locations. With [the geo-partitioned deployment mode](https://dzone.com/articles/what-developers-need-to-know-about-table-geo-parti "the geo-partitioned deployment mode"), you can have a single database cluster with the data automatically pinned to and served from various geographies with low latency.  
-![](image2-700x439.png)
+![Geo-partitioned YugabyteDB cluster on a world map, with city and budget rows stored in US, Europe and Asia regions by a region column](image2-700x439.png)
 
 A custom geo-partitioning column (the `"region"` column in the picture above) lets the database decide on a target row location. For instance, the database nodes from Europe already store recommendations for a trip to Miami on a $1500 budget. Next, suppose a user from Europe wants to go to Miami and spend that amount. In that case, the application can respond within a few milliseconds by getting the recommendations straight from the database nodes in the same geography.
 

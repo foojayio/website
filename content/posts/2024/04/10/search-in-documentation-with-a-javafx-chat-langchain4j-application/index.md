@@ -112,9 +112,9 @@ public class CustomStreamingResponseHandler {
 ```
 
 {{< gallery >}}
-langchain4j-code-1024x566.jpg
-langchain4j-question-javafx-1024x372.jpg
-langchain4j-question-story-1024x371.jpg
+langchain4j-code-1024x566.jpg | | IntelliJ IDEA showing the AnswerService class of the JavaFX LangChain4j example, building a streaming chat model
+langchain4j-question-javafx-1024x372.jpg | | JavaFX Chat Langchain4J demo answering 'What can you tell me about JavaFX?' with a list of key features
+langchain4j-question-story-1024x371.jpg | | JavaFX chat demo producing a story about Evelyn and Landon, reusing names from earlier questions
 {{< /gallery >}}
 
 ## Chat With the Azul Documentation
@@ -284,9 +284,9 @@ void ask(SearchAction action) {
 ```
 
 {{< gallery >}}
-langchain4j-docs-azul-home-1024x722.jpg
-langchain4j-docs-azul-json-1024x486.jpg
-langchain4j-docs-what-is-prime-1024x609.jpg
+langchain4j-docs-azul-home-1024x722.jpg | | Azul Documentation home page with a search box and cards for Platform Core, Platform Prime and Intelligence Cloud
+langchain4j-docs-azul-json-1024x486.jpg | | IntelliJ IDEA showing the docs_index.json file with Azul documentation sections used as chat content
+langchain4j-docs-what-is-prime-1024x609.jpg | | JavaFX chat demo answering 'What is Azul Prime?' with related documentation links and a generated answer
 {{< /gallery >}}
 
 ## Conclusion

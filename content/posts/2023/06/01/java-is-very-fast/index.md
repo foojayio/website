@@ -31,7 +31,7 @@ While allocation is as efficient as possible, it cannot avoid the memory pressur
 
 #### Benchmark on a Ryzen 5950X with Ubuntu 22.10.
 
-![](Screenshot-2023-05-24-at-10.15.53-AM-1024x379.png)
+![Table of throughput and average latency for Azul Zulu 8, 11, 17, 18 and Oracle OpenJDK 18, with and without per-event objects](Screenshot-2023-05-24-at-10.15.53-AM-1024x379.png)
 
 *Across 16 clients, an event is sent in both directions. The Average Latency = 2* 16 / throughput
 
@@ -50,11 +50,11 @@ A benchmark that just creates short lived TopOfBook objects, across multiple CPU
 
 #### On a Ryzen 5950X with Ubuntu 21.10, Java 17.0.4.1
 
-![](Screenshot-2023-05-24-at-10.23.46-AM-1024x471.png)
+![Table and bar chart: allocation rate plateaus near 220 M objs/sec beyond 4 threads while average latency rises to 150 ns at 32 threads](Screenshot-2023-05-24-at-10.23.46-AM-1024x471.png)
 
 ### The Benchmarks
 
-![](Screenshot-2023-05-24-at-10.32.39-AM-1024x487.png)  
+![Diagram of 16 echo clients exchanging events with one echo server](Screenshot-2023-05-24-at-10.32.39-AM-1024x487.png)  
 
 In this benchmark, sixteen clients connect to a simple microservice that takes each event and sends it back again. All events are (de)serialised POJOs with an event type. This translates to an asynchronous RPC call.
 

@@ -64,7 +64,7 @@ For the diagram itself, call me old-fashioned, but I still favor [UML sequence d
 
 Without further ado, here it is:
 
-![](get-sequence-diagram-1024x707.png)
+![UML sequence diagram of a map get() call through MapProxyImpl, GetOperation and RecordStore, highlighting the unwanted setLastAccessTime call](get-sequence-diagram-1024x707.png)
 
 Having drawn the diagram, we can locate pretty quickly where the issue is:
 

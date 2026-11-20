@@ -41,7 +41,7 @@ Out of scope (for now):
 2. Full E2E test coverage.
 
 Sounds reasonable right? Let's get to it!
-![](Untitled-1.png)
+![ChatGPT conversation where the author asks for help writing a Spring Boot microservice and ChatGPT agrees](Untitled-1.png)
 
 *Disclaimer: I am using ChatGPT Plus with the latest GPT4 model to generate the code snippets. Some of the code generation prompt examples here might not work with the current free-to-use GPT3.5 model.*
 
@@ -477,6 +477,6 @@ We saw how using ChatGPT we managed to create a new Spring Boot microservice, im
 While on some occasions it decided to follow the original requirements and Spring conventions, on many others we see that they were ignored, resulting in future refactoring we'll have to do. For a model that outshined at the last prompt, I would expect a more consistent behavior while nonetheless impressed by the outcome.
 
 In the next article in the series, I will 'productionize' the generated code: add persistence for responses (using Spring Data JPA), refactor the code to apply best practices, add some observability and answer the question: can we actually do it?
-![](pasted-image-0.png)
+![ChatGPT closing message thanking the author and wishing readers happy coding with Java 17 and Maven](pasted-image-0.png)
 
 Till the next time!

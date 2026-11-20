@@ -19,7 +19,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](BoxLang-release-1.14.0-700x394.jpg)
+![BoxLang release 1.14.0 banner: Introducing Inner Classes](BoxLang-release-1.14.0-700x394.jpg)
 
 BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper class, you needed a file. One class, one `.bx` file, no exceptions. This also stemmed from the CFML days. That's clean and predictable, but it creates real friction when a class is tightly coupled to exactly one caller and has no business existing anywhere else.
 

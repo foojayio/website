@@ -20,7 +20,7 @@ related_posts:
   - "boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution"
 ---
 
-![](bxai-series-cover-02-700x368.png)
+![Cover slide: BoxLang AI 3.0 Deep Dive, Part 2 of 7, The Tool Ecosystem](bxai-series-cover-02-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 2 of 7*
 

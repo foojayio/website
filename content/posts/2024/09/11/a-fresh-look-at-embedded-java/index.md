@@ -24,7 +24,7 @@ related_posts:
 But soon, it became one of the leading programming languages powering high-scale business applications that can handle massive amounts of transactions with high throughput.
 
 Because those use cases are very visible and there are a lot of job opportunities within that area, we tend to forget that Java on embedded is also still very much alive and kicking!
-![](fresh-look-embedded-java-1024x400.jpg)
+![Car navigation screen showing a map with a red arrow labelled JAVA, illustrating Java in embedded devices](fresh-look-embedded-java-1024x400.jpg)
 
 Java is used on embedded platforms for in-car infotainment and information displays, home automation and production environment edge gateways, medical devices, appliances, and the list goes on.
 
@@ -35,7 +35,7 @@ Java is used on embedded platforms for in-car infotainment and information displ
 An essential but not well-known fact is the energy efficiency Java delivers compared to other programming languages. This is another important fact in today's economy, where ecological and energy costs become increasingly critical. According to the study [Energy Efficiency across Programming Languages: How does Energy, Time and Memory Relate?](https://sites.google.com/view/energy-efficiency-languages/results#h.p_nggWE5Z-iDZ0), Java is, for example, up to 38 times more energy-efficient than Python!
 
 With modern, powerful systems based on ARMv7 or newer, the exact same Java runtime used in big cloud environments or on powerful machines runs just as smoothly on the smallest Linux systems. Azul provides builds of OpenJDK for various platforms, as you can see on the [download page](https://www.azul.com/downloads/?package=jdk#zulu). If your system is not on the list of downloads, you can contact Azul as they have other builds available for customers who are not listed on the free download page.
-![](azul-downloads-embedded-screenshot.jpg)
+![Azul Zulu downloads page with the architecture dropdown open, listing x86, ARM, PPC and SPARC options](azul-downloads-embedded-screenshot.jpg)
 
 ## Use cases for Java on Embedded
 
@@ -46,7 +46,7 @@ Because the runtime manages the memory use and handles the threads, developers c
 But thanks to JavaFX – to build appealing user interfaces – there is also a big opportunity for embedded devices with a screen.
 
 *"The biggest car brands rely on Java to handle screens and sensor data in their cars," says Azul Consultant Marc Maathuis. "But Azul runtimes are also used in medical devices, Point-of-Sale (POS) systems, ticket vending machines, home-automation edge devices, and many more. For example, you can remotely check the temperature in your house or open the door, thanks to Java!"*
-![](embedded-Maathuis-quote.jpg)
+![Quote card with a portrait of Marc Maathuis: 'You can remotely check the temperature in your house or open the door, thanks to Java!'](embedded-Maathuis-quote.jpg)
 
 ## What Azul Offers for Embedded Java
 
@@ -62,7 +62,7 @@ But the Azul OpenJDK Builds offers much-added value to assist you with Java on e
 * **Faster startup**: Thanks to technology created by Azul, solutions are available to minimize the startup time of your application (CRaM and CRaC).
 
 "*Many companies build prototypes of new products based on off-the-shelf devices like the Raspberry Pi and later move the software to their own custom hardware," Maathuis says. "Azul can help by building a Java runtime that perfectly fits your product and provides the libraries needed for your application.*"
-![](embedded-Maathuis-quote2.jpg)
+![Quote card with a portrait of Marc Maathuis: Azul can build a Java runtime that fits your product and provides the needed libraries](embedded-Maathuis-quote2.jpg)
 
 ## Protect your code from license contamination
 
@@ -73,7 +73,7 @@ Many of the source files used to build OpenJDK are covered by the GPLv2 license 
 This way, you won't need to publish the sources of your application after distributing it to your end-users.
 
 *"Software licensing has become a big challenge in all languages," notes Pavel Petroshenko, Azul's vice president of Product Management. "The open-source community has brought big evolutions in the software industry, but it comes with some "strings attached." We at Azul are entirely focused on Java and know and understand every piece of it. We can help any company that has questions or challenges, either with the development, runtime environment, or the legal part."*
-![](embedded-Petroshenko-quote.jpg)
+![Quote card with a portrait of Pavel Petroshenko: open source brought big evolutions but comes with 'strings attached'](embedded-Petroshenko-quote.jpg)
 
 ## Faster startup with Azul runtimes
 

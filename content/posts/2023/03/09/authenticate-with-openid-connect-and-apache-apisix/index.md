@@ -154,11 +154,11 @@ Fill in the fields:
 * Name: whatever you want
 * Authorized redirect URIs: `/callback`, *e.g.* , `http://localhost:9080/callback`
 
-![](google-cloud-create-oauth-client-id-626x1024.jpg)
+![Google Cloud 'Create OAuth client ID' form with Web application type and http://localhost:9080/callback as redirect URI](google-cloud-create-oauth-client-id-626x1024.jpg)
 
 `URL` should be the URL of the web application. Likewise, `/callback` should match the `openid-connect` plugin configuration above. Note that Google doesn't allow relative URLs, so if you need to reuse the application in different environments, you need to add the URL of each environment. Click the *Create* button.
 
-![](google-cloud-oauth-client-created-957x1024.jpg)
+![Google Cloud 'OAuth client created' dialog showing the client ID and secret (redacted) with status Enabled](google-cloud-oauth-client-created-957x1024.jpg)
 
 In the Docker Compose configuration above, use the Client ID and Client Secret as `OIDC_CLIENTID` and `OIDC_SECRET`. I wrote them down as environment variables in a `.env` file.
 

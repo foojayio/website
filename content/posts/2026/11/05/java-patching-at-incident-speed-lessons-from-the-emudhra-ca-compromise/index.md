@@ -26,7 +26,7 @@ Mozilla received the report at 20:06 UTC and had Firefox blocking the certificat
 
 Browsers have an automated way to stop trusting a certificate authority, and they used it within hours, but **what about the thousands of Java applications running in your data centers and clouds?** 
 
-![](Screenshot-2026-10-27-145450-1024x271.png)
+![Timeline of the eMudhra CA compromise from Oct 17 to Oct 24, with browsers fixing it within about three hours](Screenshot-2026-10-27-145450-1024x271.png)
 
 *Timeline of the eMudhra CA compromise response, October 17–24, 2026* 
 
@@ -38,7 +38,7 @@ Until each runtime is updated, a service making outbound TLS calls (to a payment
 
 And it landed in the same week as the October quarterly update: **53 OpenJDK CVEs**, the most in a single quarterly release in well over a decade. 
 
-![](Screenshot-2026-10-27-152622-1024x359.png)
+![Browsers, operating systems and language libraries get trust updates automatically, but Java apps with their own cacerts do not](Screenshot-2026-10-27-152622-1024x359.png)
 
 *A browser fix doesn’t reach your JVMs* 
 
@@ -74,7 +74,7 @@ The numbers point one way. Rapid7’s 2026 Global Threat Landscape Report found 
 
 Quarterly patching used to be the plan. Now it’s the minimum. 
 
-![](Screenshot-2026-10-27-152355-1024x355.png)
+![Three statistics: 53 OpenJDK CVEs in one update, 5 days median to CISA KEV listing, and +105% exploited vulnerabilities](Screenshot-2026-10-27-152355-1024x355.png)
 
 *The patch window is collapsing* 
 
@@ -90,7 +90,7 @@ The teams that took this week in stride had five things in place before it start
 
 None of this is exotic, but it has to exist *before* the incident. 
 
-![](Screenshot-2026-10-27-152927.png)
+![Five steps (know, triage, minimize, prove, ship) cut vendor-fix-to-production time from weeks to hours or days](Screenshot-2026-10-27-152927.png)
 
 *Five capabilities that turn weeks into hours* 
 

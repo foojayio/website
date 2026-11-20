@@ -88,7 +88,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: unable to create native t
 ```
 
 In case you want to use IntelliJ IDEA, you can configure the stack size, check the following image:   
-![](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
+![IntelliJ IDEA Run/Debug Configurations dialog with the -XX:ThreadStackSize=1048576 VM option highlighted](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
 
 ### **1 GB Stack Size**
 

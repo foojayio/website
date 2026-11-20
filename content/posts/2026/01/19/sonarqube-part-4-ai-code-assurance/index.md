@@ -48,13 +48,13 @@ Whether you are in IntelliJ (via Connected Mode) or reviewing a Pull Request in 
 * **Your Job:** You just review the diff and click **"Apply"**.
 
 What used to take 20 minutes of refactoring now takes 10 seconds of reviewing.
-![](Screenshot-2026-01-19-at-15.23.11.jpg)
+![SonarQube issue list and details flagging reflected XSS in HomeServlet.java, with a Generate AI Fix button](Screenshot-2026-01-19-at-15.23.11.jpg)
 
 We can see here the issue and the execution flow, and the "Generate AI Fix" button
-![](Screenshot-2026-01-19-at-15.24.02.jpg)
+![SonarQube AI CodeFix tab showing a diff that imports StringEscapeUtils and wraps the name in escapeHtml4](Screenshot-2026-01-19-at-15.24.02.jpg)
 
 And the solution suggested by SonarQube AI CodeFix feature
-![](Screenshot-2026-01-19-at-15.24.15.jpg)
+![IntelliJ IDE showing the SonarQube AI CodeFix change in HomeServlet.java with Apply and Decline buttons](Screenshot-2026-01-19-at-15.24.15.jpg)
 
 And finally this is the way we see the change coming from SonarQube AI CodeFix in IntelliJ IDE
 
@@ -83,7 +83,7 @@ Before generating code, your AI agent can query SonarQube to understand the acti
 * **The Outcome:** The AI generates code that is *already* compliant with your Quality Profile. No red squiggles. No rework.
 
 Read these extended articles about [MCP](https://foojay.io/today/lets-talk-about-mcp/) , [SonarQube MCP Server](https://foojay.io/today/your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij-%f0%9f%a4%96/) and [MCP Security pitfalls](https://foojay.io/today/the-5-knights-of-the-mcp-apocalypse/).
-![](Screenshot-2026-01-19-at-15.24.27-1024x164.png)
+![Chat reply stating SonarQube analyzed the new method through the MCP tool and found no issues](Screenshot-2026-01-19-at-15.24.27-1024x164.png)
 
 Asking the agent to produce code but connecting it to SonarQube MCP Server in order to be sure it doesn't contain issues.
 
@@ -96,7 +96,7 @@ The "Black Box" of AI code is a major anxiety for Tech Leads.
 **The Solution:** [AI Code Assurance](https://www.sonarsource.com/solutions/ai/ai-code-assurance/).
 
 SonarQube allows you to tag projects that use Generative AI or Autodetects AI-generated content (at the moment only considering Github Copilot projects). It then enforces a specific, stricter **"AI Code Assurance"** process.
-![](Screenshot-2026-01-19-at-15.24.38.jpg)
+![SonarQube Cloud settings to enable AI Code Assurance: mark the project as containing AI code and pick a qualified quality gate](Screenshot-2026-01-19-at-15.24.38.jpg)
 
 It will assign the "Sonar way" quality profile to the project, that checks for:
 
@@ -105,7 +105,7 @@ It will assign the "Sonar way" quality profile to the project, that checks for:
 3. **Tests:** High coverage requirements (because AI code is only as good as its tests).
 
 When a project passes this strict gate, it earns the **"AI Code Assurance"** badge. It's a seal of approval that tells management: *"Yes, we used AI, and yes, we verified it's safe."*
-![](Screenshot-2026-01-19-at-15.24.49-1024x197.png)
+![SonarQube pages showing an 'AI code detected' notice and a passed quality gate with the AI Code Assurance passed badge](Screenshot-2026-01-19-at-15.24.49-1024x197.png)
 
 ## **🎯 Series Summary: The Complete Cycle**
 

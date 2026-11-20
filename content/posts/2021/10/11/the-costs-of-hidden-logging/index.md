@@ -35,7 +35,7 @@ Unfortunately, at this point the regression was persisting no matter what profil
 To make things more interesting, the customer additionally reported that the system seemed to behave 'normally' even with both tracer and profiler enabled and with the default profiler settings, that is, until they ran a load test there. During the load test the latency would spike and after the load test had finished the CPU usage would stabilize at over 10% more than what had been observed before the load test run.
 
 The CPU usage graph would look something like this.  
-![](pic1-700x416.png)
+![Grafana host dashboard of CPU usage jumping to about 90% in the load test, then settling to a sustained overhead of roughly 12%](pic1-700x416.png)
 
 Well, that makes the things clear, doesn't it?
 

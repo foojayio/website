@@ -28,7 +28,7 @@ This week, I'll show you briefly how to use another kind of eBPF maps, the perf 
 Data structures, like the hash map described in the previous article, are great for storing data but have their limitation when we want to pass new bits of information continuously from the eBPF program to our user-land application. This is especially pertinent when recording performance events. So, [in 2015, the Linux kernel got a new map type](https://github.com/torvalds/linux/commit/457f44363a8894135c85b7a9afd2bd8196db24ab): `BPF_MAP_TYPE_PERF_EVENT_ARRAY`.
 
 This map type functions as a fixed-size ring buffer that can store elements of a given size and is allocated per CPU. The eBPF program submits data to the buffer, and the user-land application retrieves it. When the buffer is full, data can't be submitted, and a drop counter is incremented.  
-![](perf_event_buffer-52d5107b.png)
+![Ring buffer for data_t entries: the eBPF program writes at the write pointer while the Java application reads at the read pointer](perf_event_buffer-52d5107b.png)
 
 *Perf Event Buffers have their issues, as explained by [Andrii Nakryiko](https://nakryiko.com/posts/bpf-ringbuf/), so in* [2020](https://github.com/torvalds/linux/commit/bf99c936f9478a05d51e9f101f90de70bee9a89c),*[eBPF got ring buffers](https://www.kernel.org/doc/html/latest/bpf/ringbuf.html), which have less overhead. Perf Event Buffers are still used, as only Linux 5.8 and above supports ring buffers. It doesn't make a difference for our toy examples, but I'll show you how to use ring buffers in a few weeks.*
 

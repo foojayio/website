@@ -71,7 +71,7 @@ javap -c SumNumbers
 
 Here's what we see:
 
-![](SumNumbers.class.png)
+![Terminal showing java -version, javac and javap output with the bytecode of the SumNumbers class](SumNumbers.class.png)
 
 As a matter of fact, though, understanding how Java bytecode works is critical if you are developing high-performance low-latency applications. It's actually possible to edit Java bytecode in order to improve performance. That is, your compiler produced a good first version of Java bytecode, but you have some ideas about how to further optimize the bytecode to increase the performance of your application.
 

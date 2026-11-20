@@ -35,7 +35,7 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
   * And many others, with bigger or smaller changes (see the table below)
 * **Deprecation cleanup**: Removal of some EJB features, JAXB support, and Jakarta Faces Managed Beans
 
-![](jakarta-ee-11-web.jpg) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
+![Jakarta EE 11 Web Profile specifications, with updated, not updated and new (Data 1.0) specs color-coded](jakarta-ee-11-web.jpg) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
 
 ### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile
 

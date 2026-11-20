@@ -98,7 +98,7 @@ ollama list
 
 ```
 
-### ![](Screenshot-2025-04-05-at-9.48.13-E2-80-A-5244e7a7.png)
+### ![Terminal running 'ollama run llama3:latest' and the model answering a 'hello' prompt](Screenshot-2025-04-05-at-9.48.13-E2-80-A-5244e7a7.png)
 
 ### **Part 2: Creating the Spring Boot Project via Spring Initializr**
 
@@ -407,7 +407,7 @@ I structured the extension with three main parts:
 3. **Popup UI (popup.html and popup.js)** : Provides a simple interface for the user (e.g., a button to  
    trigger form filling).  
 
-![](Screenshot-2025-04-06-at-6.50.38-PM-1.png)
+![IntelliJ project tree of the chrome-extension folder with css, images, js scripts, manifest.json and popup.html](Screenshot-2025-04-06-at-6.50.38-PM-1.png)
 
 The most challenging part was reliably detecting form fields and extracting useful metadata, especially labels, as HTML forms vary widely in structure. I implemented several strategies in content.js:
 
@@ -690,7 +690,7 @@ Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 * Click the extension icon in your Chrome toolbar
 * Right-click on the page and select "Smart Form Filler" from the context menu, then choose "Fill Forms"
 
-![](Screenshot-2025-04-06-at-6.38.24-E2-80-A-48dd9c3b.jpg)
+![Smart Form Filler Chrome extension popup with Fill Forms button, next to a demo web form with personal information fields](Screenshot-2025-04-06-at-6.38.24-E2-80-A-48dd9c3b.jpg)
 
 ## **Testing with a Demo Form**
 

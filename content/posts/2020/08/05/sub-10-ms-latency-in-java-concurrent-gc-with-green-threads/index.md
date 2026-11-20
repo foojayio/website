@@ -27,13 +27,13 @@ In this round we want to look at the same problem from the opposite angle: what 
 
 Let's go through an example with a streaming job running on a four-core machine. In a typical execution engine design, every task (roughly corresponding to a [DAG vertex](https://jet-start.sh/docs/concepts/dag)) gets its own thread to execute it:
 
-![](2020-08-05-dag1-700x387.png)
+![Diagram of four cores, each running two threads that each run one task, eight tasks in total](2020-08-05-dag1-700x387.png)
 
 There are eight threads and the OS is in charge of deciding how to schedule them to run on the four available cores. The application has no direct control over this and the cost of switching from one thread to another on the same CPU core is around 2-10 microseconds.
 
 This is how it will look when we add a concurrent GC thread into the picture:
 
-![](2020-08-05-dag1-with-gc-694x510.png)
+![Same four-core diagram, but core 4 also runs a concurrent GC thread alongside its two task threads](2020-08-05-dag1-with-gc-694x510.png)
 
 There's one more thread now, the concurrent GC thread, and it's additionally interfering with the computation pipeline.
 

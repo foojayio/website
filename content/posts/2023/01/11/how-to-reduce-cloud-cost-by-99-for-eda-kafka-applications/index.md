@@ -33,7 +33,7 @@ The latter concept is used in this article whereby messages are persisted to que
 
 Suppose that we have an EDA application with a chain of five services and where we have a requirement that 99.9% of the messages sent from the first producer to the last consumer should have a latency less than 100 ms at a message rate of 1,000 messages per second.
 
-![](Screen-Shot-2023-01-04-at-11.38.49-AM-1024x162.png)
+![Diagram: a benchmark sends messages through topics 0 to 5 across a chain of five services and back to the benchmark](Screen-Shot-2023-01-04-at-11.38.49-AM-1024x162.png)
 
 *Figure 1. The five Services and the Benchmark interconnected by six topics/queues.*
 
@@ -131,7 +131,7 @@ All latency figures are given in ms, 99% means 99-percentile and 99.9% means 99.
 
 The Kafka broker and the benchmarks were all run using the prefix *"taskset -c 2-8"* followed by the respective command (eg *taskset -c 2-8 mvn exec:java@Kafka*). The following results were obtained for Kafka:
 
-![](Screen-Shot-2023-01-04-at-11.46.35-AM-1024x219.png)
+![Table: with 2 Kafka instances 99.9% latency is 106 ms and CPU is saturated, versus 30 ms with 1 instance](Screen-Shot-2023-01-04-at-11.46.35-AM-1024x219.png)
 
 *Table 1. Shows Kafka instances vs latencies and CPU utilisation.*
 
@@ -151,7 +151,7 @@ Here is a snapshot from the output from the "top" command when running two insta
 
 The benchmarks were run using the command *"taskset -c 2-8 mvn exec:java@ChronicleQueue"* and following results were obtained:
 
-![](Screen-Shot-2023-01-04-at-11.49.09-AM-1024x633.png)
+![Table: Chronicle Queue latency stays under 1 ms up to 25 instances, rising to 96 ms at 99.9% with 500 instances](Screen-Shot-2023-01-04-at-11.49.09-AM-1024x633.png)
 
 *Table 2. Shows Chronicle Queue instances vs latencies and CPU utilisation.*
 
@@ -161,7 +161,7 @@ The sheer efficiency of Chronicle Queue becomes apparent in these benchmarks whe
 
 Here is a chart showing the number of instances vs the 99.9-percentile for the two different queue types:
 
-![](Screen-Shot-2023-01-04-at-11.50.11-AM-1024x635.png)
+![Chart: Kafka latency passes the 100 ms limit at about 10 instances, while Chronicle Queue stays below it up to 500 instances](Screen-Shot-2023-01-04-at-11.50.11-AM-1024x635.png)
 
 *Chart 1. Shows Instances vs latencies in ms for the 99.9-percentile.*
 
@@ -173,7 +173,7 @@ About four hundred times more instances can be run on the same hardware if a swi
 
 About four hundred times more instances corresponds to a potential of reducing cloud or hardware costs by about 99.8% as illustrated in Chart 2 below (less is better). In fact, the cost can barely be seen at all in the scale used:
 
-![](Screen-Shot-2023-01-04-at-11.51.28-AM-646x1024.png)
+![Bar chart: Kafka cost is 100 while Chronicle Queue cost is near zero, a reduction of about 99.8%](Screen-Shot-2023-01-04-at-11.51.28-AM-646x1024.png)
 
 *Chart 2. Shows normalised cost vs queue type (less is better).*
 

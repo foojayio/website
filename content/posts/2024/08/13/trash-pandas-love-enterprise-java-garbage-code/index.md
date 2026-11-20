@@ -56,6 +56,6 @@ Dead code detection improves developer productivity and developer happiness. It'
 ## Free Live Demo
 
 [Join in with a free live demo](https://azul.com/ic-demo/) at your convenience and with an expert who'll happily go much further into these topics.  
-[![](barcode-1024x1022.png)](https://azul.com/ic-demo)
+[![QR code linking to the free live demo](barcode-1024x1022.png)](https://azul.com/ic-demo)
 
 **Note:** This is an edited version of an article that [originally ran on The New Stack on May 23, 2024](https://thenewstack.io/does-garbage-collection-logging-affect-app-performance/).

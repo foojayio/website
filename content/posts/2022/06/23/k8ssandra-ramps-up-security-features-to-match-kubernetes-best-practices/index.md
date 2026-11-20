@@ -21,7 +21,7 @@ related_posts:
   - "reclaiming-persistent-volumes-in-kubernetes"
 ---
 
-![](1_qz4yqblkLUoJDL3t8xrsSg-1024x478.jpeg)
+![Letter blocks spelling 'CONTAINER SECURITY' on a grey background, the header for the K8ssandra security article](1_qz4yqblkLUoJDL3t8xrsSg-1024x478.jpeg)
 
 *New security features are coming to the open-source data platform: K8ssandra. The goal? To align even more with the security best practices of Kubernetes. Here's an introduction to the platform's security mission and an update on current initiatives.*
 
@@ -34,7 +34,7 @@ The default values are based on Kubernetes' security best practices because Kube
 As a security-conscious Kubernetes user, you'll need a trusted environment to run your Kubernetes clusters. Kubernetes security best practices recommend a layered methodology to augment a highly regarded[defense-in-depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) practice.
 
 The four layers described by Kubernetes for cloud-native security include artifacts that span application code to cloud.
-![](0_hM3DjCd-5S3vRIQo.png) **Figure 1:**The 4 C's of Kubernetes cloud-native security.
+![Four stacked boxes labeled Code, Container, Cluster and Cloud, the layers of cloud-native security](0_hM3DjCd-5S3vRIQo.png) **Figure 1:**The 4 C's of Kubernetes cloud-native security.
 
 K8ssandra security practices will follow this layered approach to give users full customizability to fit with Kubernetes best practices.
 
@@ -55,17 +55,17 @@ Future releases of K8ssandra won't include PSP features either. Instead, they'll
 ## Pods and containers to support Kubernetes SecurityContext
 
 In an upcoming release, K8ssandra will include access and permission control settings for pods and containers. The pods and containers will support the Kubernetes SecurityContext, which encapsulates a wide range of security controls.
-![](0_M9zl97g_QS0C4FTh.png) **Figure 2:**The container scope security.
+![The Code, Container, Cluster and Cloud layers, with K8ssandra SecurityContext pointing at the Container layer](0_M9zl97g_QS0C4FTh.png) **Figure 2:**The container scope security.
 
 Initially, the SecurityContext configurations will be included in the K8ssandra [values.yaml](https://github.com/gruntwork-io/helm-kubernetes-services/blob/master/charts/k8s-service/values.yaml) file. The additions will provide options ranging from security-enhanced Linux controls to filtering a process' system calls.
 
 Below is an example of the SecurityContext placeholders for the [Apache Cassandra®](https://www.datastax.com/what-is/cassandra) containers residing in the K8ssandra values.yaml file. Each container will have its own security scope and can include customizations as needed without impacting other container's SecurityContext settings.
-![](0_m0pEJ06tA25q2rt-.png) **Figure3:**SecurityContext placeholders in K8ssandra values.yaml file.
+![Helm values.yaml excerpt for K8ssandra showing empty securityContext settings for the Cassandra container and init containers](0_m0pEJ06tA25q2rt-.png) **Figure3:**SecurityContext placeholders in K8ssandra values.yaml file.
 
 The *rendered* pod configuration with those values applied will now include **readOnlyRootFilesystem: true** for containers' SecurityContext entries. The default value is empty **{}** for pod SecurityContext entries. In the future, additional defaults may be included at the pod-level based on security best practices.
 
 Below is an example of a pod-scoped SecurityContext. Its container-scoped SecurityContext defaults are applied. It's important to note that container SecurityContext settings will be isolated with settings unique to each container.
-![](0_3S5FsrhzGXseoYlf.png) **Figure 4:**SecurityContext with defaults applied.
+![Kubernetes Pod YAML for k8ssandra-container with readOnlyRootFilesystem set to true in its securityContext](0_3S5FsrhzGXseoYlf.png) **Figure 4:**SecurityContext with defaults applied.
 
 ## There will be no K8ssandra specific types
 
@@ -88,7 +88,7 @@ A container's `SecurityContext` will include a `readOnlyRootFilesystem: true` se
 However, overriding current and future K8ssandra security defaults will impact the deployment's overall security. By default you will be using the Kubernetes recommended security best practices.
 
 Below is an example of `SecurityContext` customization for the Reaper container. This illustrates where the user could use container `SecurityContext` features other than the default set by K8ssandra. Only the single Reaper container will inherit the unique `SecurityContext` settings. No other containers will be impacted.
-![](0_AKMkhU9y731mWVDj.png) **Figure 5:**Reaper container: SecurityContext example.
+![Helm values for the Reaper container's securityContext, with privileged, runAsNonRoot, runAsUser 3000 and read-only root filesystem](0_AKMkhU9y731mWVDj.png) **Figure 5:**Reaper container: SecurityContext example.
 
 ## Future K8ssandra versions will expand security
 
