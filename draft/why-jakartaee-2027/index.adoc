@@ -1,0 +1,210 @@
+---
+title: "Why Use Jakarta EE in 2027: The Technical Case"
+date: "2026-01-01"
+description: "Jakarta EE keeps APIs apart from their implementation. That one decision gives you easier CVE patching, clear APIs, tiny artifacts and code AI understands."
+authors:
+  - "lenny-primak"
+image: "why-jakarta-ee-2027.jpg"
+categories:
+  - "Jakarta EE"
+  - "Java"
+  - "Security"
+related_posts:
+  - "jakarta-ee-11-umbrella-jar"
+  - "testing-jakarta-ee-three-layers-three-tools"
+  - "adding-rag-to-jakarta-ee-11-app"
+---
+
+_This work was sponsored by https://flowlogix.com[Flow Logix]. Generate a ready-to-run Jakarta EE project at https://start.flowlogix.com[start.flowlogix.com]._
+
+When people explain why you should use Jakarta EE, they usually talk about open standards and vendor neutrality. Those things are important. This article is not about that.
+
+This article is about one technical decision and what you get from it. In Jakarta EE, the API you write code against is kept apart from the implementation that runs it. Your application sees `jakarta.*` interfaces and annotations. The runtime supplies everything behind them.
+
+That sounds like a small thing. It is the reason your application does not have to be rebuilt for most CVEs, the reason the APIs are clear and well documented, the reason your artifacts are a few kilobytes, and the reason AI coding tools handle Jakarta EE code very well.
+
+== The idea, in plain Java
+
+You do not need Jakarta EE to see the idea. Start with an interface:
+
+.The API
+[source,java]
+----
+public interface Greeter {
+    String greet(String name);
+}
+----
+
+Somebody else, in a different JAR, provides an implementation. Another somebody else provides another one:
+
+.Two implementations
+[source,java]
+----
+Greeter friendly = name -> "Hi, " + name + "!";
+Greeter formal   = name -> "Good afternoon, " + name + ".";
+----
+
+The application asks the JDK's https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ServiceLoader.html[`ServiceLoader`] for a `Greeter`. It never names an implementation:
+
+.The application
+[source,java]
+----
+Greeter greeter = ServiceLoader.load(Greeter.class).findFirst().orElseThrow();
+IO.println(greeter.greet("Duke"));
+----
+
+NOTE: The snippets in this article are trimmed to the essentials, so they are easy to read. The numbers and results come from complete, running versions of the same code.
+
+The application was compiled against the `Greeter` interface and nothing else. So I can swap the friendly JAR for the formal one and run the same application JAR again:
+
+----
+$ java -cp app.jar:greeter-api.jar:greeter-friendly.jar com.example.Main
+Hi, Duke!
+$ java -cp app.jar:greeter-api.jar:greeter-formal.jar com.example.Main
+Good afternoon, Duke.
+----
+
+The behavior changed. `app.jar` did not. It was not recompiled, and its checksum is the same before and after.
+
+== Jakarta EE is the same idea
+
+Jakarta EE is the `Greeter` example at the scale of a whole platform. Your application is the code that calls `greet`. The `jakarta.*` packages are the `Greeter` interface. Your runtime, whether that is GlassFish, Payara, WildFly, Open Liberty, Helidon, Quarkus or another one, is the implementation JAR.
+
+Maven says the same thing in one word:
+
+[source,xml]
+----
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-api</artifactId>
+    <version>11.0.0</version>
+    <scope>provided</scope>     <!--1-->
+</dependency>
+----
+<1> Needed to compile. Not packaged into your application. The runtime provides it.
+
+== Security: patch the runtime, not the application
+
+This is the part with the biggest practical payoff.
+
+A vulnerability is a flaw in code that does something. In a Jakarta EE application, the code that parses HTTP requests, reads JSON, talks to the database and checks credentials belongs to the runtime. It is not inside your WAR file. When a CVE is published against one of those components, the fix is a new version of the runtime. Your application stays exactly as it is.
+
+I tested this with a small `Greeter` REST application. I built it once, as a WAR, and deployed that same file on two consecutive releases of Payara Micro 7:
+
+.One WAR file on two runtime releases
+[cols="2,2,1", options="header"]
+|===
+| Runtime | `greeter.war` SHA-256 | Response
+
+| Payara Micro 7.2026.10 | `5dd537bd26816ffd...` | `Hi, Duke!`
+| Payara Micro 7.2026.11 | `5dd537bd26816ffd...` | `Hi, Duke!`
+|===
+
+Same file, same checksum, a newer implementation underneath. No recompile, no new build, no new release of the application.
+
+Could an API JAR itself have a vulnerability? In principle, yes. Some of them contain real code. Even then your application is not rebuilt, because the API JARs are `provided`. They are not in your WAR either. They come with the runtime and are updated with it.
+
+=== Why the separation is good for security
+
+* *There is one place to patch.* Ten applications on one runtime need one update, not ten rebuilds.
+* *The people who patch do not need your source code.* An operations team can move to a fixed runtime without waiting for each development team to cut a release.
+* *Nothing is rebuilt, so nothing is retested from scratch.* The artifact that passed your tests is the artifact that stays in production.
+* *Your artifact has very little in it to attack.* A scanner looking at the WAR finds your classes and whatever libraries you chose to add. There is no long tree of framework dependencies inside it.
+
+Compare that with what happened during https://nvd.nist.gov/vuln/detail/CVE-2021-44228[Log4Shell]. The vulnerable library was packaged inside applications. Fixing it meant finding every application that contained a copy, then rebuilding and redeploying each one.
+
+NOTE: This applies to what the runtime provides. If you add your own third-party libraries to `WEB-INF/lib`, those are yours to update, and that does mean a rebuild. The fewer you add, the more of this benefit you keep.
+
+== Why Jakarta EE APIs are incredibly good, and why Spring uses them
+
+The separation also explains something that is easy to take for granted. Jakarta EE APIs are clear and well documented.
+
+That is not luck. An API that ships together with its only implementation can be vague, because the implementation fills in the gaps. Whatever the code happens to do becomes the behavior, and the documentation can lag behind.
+
+A Jakarta EE API cannot work that way. Several independent teams have to implement it and arrive at the same behavior. So every specification comes with a written specification document, API documentation and a test suite that an implementation must pass. If something is unclear, two implementations will disagree, and the specification gets fixed.
+
+The result is an API that has to make sense without any implementation behind it. You can read the interface and its documentation and know what will happen. You can find all of it at https://jakarta.ee/specifications/[jakarta.ee/specifications].
+
+This is also why Spring uses them. Spring did not write its own replacements for Jakarta Servlet, Jakarta Persistence, Jakarta Validation or Jakarta Transactions. It builds on those APIs, and it accepts `@Inject` as well. A Spring application is, in large part, a Jakarta EE API application with a different implementation behind it.
+
+== AI understands Jakarta EE
+
+The same qualities that help a person read the API help an AI coding assistant.
+
+* *The contract is written down.* The specifications and API documentation are public, precise and stable over many years. A model has seen them, and they have not changed underneath it every few months.
+* *The surface is small.* To use an API correctly, an assistant needs the interface, not the thousands of lines behind it. That is less to read and fewer tokens spent.
+* *Intent is declared.* `@Inject`, `@Path` and `@Transactional` say what the code is meant to do in one word. There is no wiring code to trace and no configuration to guess at.
+* *There is very little boilerplate.* The runtime does the work, so your code only says what it wants. Less code to write and less code to read means fewer tokens spent on every request. Asking for a `Greeter` takes two lines:
++
+[source,java]
+----
+@Inject
+Greeter greeter;
+----
+* *There is one answer.* Behavior is defined by the specification, not by which version of which library happens to be on the classpath.
+
+This is reasoning, not a benchmark.
+
+== Logging frameworks are not an issue
+
+Logging is where many Java projects fight their dependencies. Two libraries want two different logging frameworks, a bridge is missing, and the wrong binding wins.
+
+The same API and implementation split makes that go away. The JDK has a logging API, https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.Logger.html[`System.Logger`], and it finds its implementation the same way the application found its `Greeter`, through `ServiceLoader`:
+
+[source,java]
+----
+private static final System.Logger log =
+        System.getLogger(Greeter.class.getName());
+
+log.log(System.Logger.Level.INFO, "Greeting {0}", name);
+----
+
+I added these lines to the `Greeter` application. On both Payara Micro releases the message appeared in the server log, formatted and routed by the runtime. The WAR contains no logging library, no binding and no logging configuration. Where the logs go, and in what format, is the runtime's decision. There is nothing in the application to conflict.
+
+== Small, fast artifacts
+
+Here is that complete `Greeter` application, with its REST endpoint, injection and logging:
+
+----
+$ ls -l greeter.war
+2993 greeter.war
+----
+
+Under 3 KB. It holds four small classes and nothing else, because everything else is provided.
+
+A real application is bigger, but it grows with your code, not with a framework. The source stays small for the same reason the WAR does. There is very little boilerplate in it. That has consequences well beyond disk space:
+
+* *Builds are fast.* There is nothing to repackage except your own classes.
+* *Uploads and container images are small.* The runtime is one image layer that rarely changes. Your application is a thin layer on top.
+* *Nothing is rebuilt when the implementation changes.* A runtime update does not start a build for every application that runs on it.
+* *CI does not waste cycles.* No pipeline rebuilds and republishes unchanged applications just to pick up a patched dependency.
+* *AI agents do not waste tokens.* An agent working on your project is not reading, resolving and rebuilding a large dependency tree to change one class.
+
+== Common objections
+
+* *"Application servers are slow to start."* That is no longer the case. Modern servers start as fast as any other framework.
+* *"Updating the runtime under my application is risky."* There is some risk. It is still less than the alternative, which is to rebuild the whole application with new dependencies and redeploy it. Here the tested artifact does not change.
+* *"A single fat JAR is simpler for containers."* Layers are better and less risky. The runtime is one image layer that rarely changes. Your application is a thin layer on top, and that is the only part you ship each time.
+* *"Jakarta EE moves slowly."* Jakarta EE 11 link:/today/jakarta-ee-11-umbrella-jar/[no longer has an umbrella JAR]. Each API is an ordinary dependency, so you can move to a newer version of one specification as soon as your runtime supports it, without waiting for the whole platform.
+
+== Try it
+
+Everything in this article comes from one decision, to keep the API apart from the implementation:
+
+* Most CVEs are fixed by updating the runtime, with no change to your application.
+* The APIs are clear and documented, because they have to stand without an implementation.
+* AI tools can work from a small, stable, written contract.
+* Logging just works.
+* Artifacts are small, and they are not rebuilt when the implementation changes.
+
+Standards and vendor neutrality are good reasons to choose Jakarta EE. These are the technical ones.
+
+Removing boilerplate is the number one motto of https://flowlogix.com[Flow Logix]. The fastest way to see it for yourself is https://start.flowlogix.com[start.flowlogix.com]. It generates a complete, testable Jakarta EE project that you can build and run in a few minutes.
+
+== About the author
+
+Lenny Primak is an open source maintainer, the https://shiro.apache.org[Apache Shiro] PMC Chair, and a contributor to Jakarta EE, Jersey, Weld, Grizzly and Arquillian. Find him on https://github.com/lprimak[GitHub] and https://linkedin.com/in/lprimak[LinkedIn].
+
+His Jakarta EE work is sponsored by https://flowlogix.com[Flow Logix], which builds open source components for Jakarta EE applications. See the projects at https://github.com/flowlogix[github.com/flowlogix].
+
+This work is unpaid. If it was useful to you, you can support it through https://github.com/sponsors/flowlogix[GitHub Sponsors: Flow Logix].
