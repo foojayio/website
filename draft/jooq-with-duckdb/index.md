@@ -151,7 +151,7 @@ For Parquet, use `table("read_parquet('data.parquet')")`.
 DuckDB 2.0 brings breaking changes from 1.x. Two things to keep in mind:
 
 - DuckDB 2.0 writes a new storage format, and DuckDB 1.x can't read it. A `.db` file created with this setup won't open in 1.x tools.
-- jOOQ's DSL may not have methods for the newest 2.0 syntax yet. You can run that syntax through plain SQL with `ctx.execute("…")`, `ctx.fetch("…")` or `table("…")`. See the [DuckDB migration guide](https://duckdb.org/docs/guides/upgrade/from-v1) for full compatibility details.
+- jOOQ's DSL may not have methods for the newest 2.0 syntax yet. You can run that syntax through plain SQL with `ctx.execute("…")`, `ctx.fetch("…")` or `table("…")`. See the [DuckDB migration guide](https://duckdb.org/docs/2.0/operations_manual/migration) for full compatibility details.
 
 ## Conclusion
 
