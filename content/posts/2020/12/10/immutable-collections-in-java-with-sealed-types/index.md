@@ -16,7 +16,7 @@ related_posts:
   - "your-tls-stack-is-lying-about-zero-copy"
 ---
 
-{{< img src="foojay-don-1-1-469x510.jpg" class="size-medium" width="469" height="510" >}}
+{{< img src="foojay-don-1-1-469x510.jpg" alt="UML diagram: RichIterable interface extended by sealed ImmutableCollection, which is extended by ImmutableBag, ImmutableList and ImmutableSet" class="size-medium" width="469" height="510" >}}
 
 *Designing Immutable Collection using Sealed Types in JDK 15*
 

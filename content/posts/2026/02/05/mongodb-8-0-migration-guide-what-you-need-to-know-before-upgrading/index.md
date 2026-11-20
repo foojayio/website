@@ -270,7 +270,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 #### Update the staging cluster to MongoDB 8.0 to test the new version and its features. To do this, simply click on the cluster and select "Edit Configuration" and "Additional Settings":
 
-{{< img src="Screenshot-2025-12-30-at-10.26.38-PM.png" class="aligncenter size-full is-resized" width="592" height="223" style="width:592px;height:auto" >}}
+{{< img src="Screenshot-2025-12-30-at-10.26.38-PM.png" alt="MongoDB Atlas Additional Settings with a version dropdown listing 8.0 and 7.0, and a warning that upgrading to 8.0 cannot be downgraded" class="aligncenter size-full is-resized" width="592" height="223" style="width:592px;height:auto" >}}
 
 4. **Test your application**
 

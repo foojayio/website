@@ -19,7 +19,7 @@ related_posts:
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="aspect-ratio:2.2802192518511397;width:840px;height:auto" >}}
+{{< img src="tue11.png" alt="MongoDB banner reading 'Love Your Developers' with floating document and chart icons on a dark background" class="size-full is-resized" width="700" height="307" style="aspect-ratio:2.2802192518511397;width:840px;height:auto" >}}
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 

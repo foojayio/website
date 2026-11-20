@@ -102,7 +102,7 @@ Gluon created such a build action which you can integrate into the build process
 
 **This license-step is optional!** If you don't have one, a popup will be shown at startup of your application. You can request a free license to Gluon if you are working on a student or open-source project, as described on ["Free Gluon Licenses"](https://gluonhq.com/programs/free-gluon-licenses/).
 
-{{< img src="github-secret-gluon-license-700x220.png" class="size-medium" width="700" height="220" >}}
+{{< img src="github-secret-gluon-license-700x220.png" alt="GitHub repository secrets page for ResistorCalculatorApp showing a GLUON_LICENSE secret just added" class="size-medium" width="700" height="220" >}}
 
 ### **Build as a Native Application with GraalVM**
 

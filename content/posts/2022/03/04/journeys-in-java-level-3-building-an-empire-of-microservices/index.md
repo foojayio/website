@@ -202,7 +202,7 @@ Next, we can start the service1 and service2 applications, either through an IDE
 
 And here is the resulting output!
 
-{{< img src="microservices-lvl3-results-554x510.png" class="size-medium" width="554" height="510" >}}
+{{< img src="microservices-lvl3-results-554x510.png" alt="Browser showing JSON from localhost:8080/goodreads listing books with bookID, title and authors, mostly Harry Potter titles" class="size-medium" width="554" height="510" >}}
 
 ## Wrapping up!
 

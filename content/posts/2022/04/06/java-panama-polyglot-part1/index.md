@@ -18,7 +18,7 @@ related_posts:
   - "java-panama-polyglot-swift-part-2"
 ---
 
-{{< img src="polyglot.png" class="size-full is-resized" width="469" height="112" >}}
+{{< img src="polyglot.png" alt="Dictionary definition of polyglot: adjective, composed of elements from different languages (Merriam-Webster)" class="size-full is-resized" width="469" height="112" >}}
 
 Hello and welcome to the **Java Panama Polyglot** series where we will be presenting quick tutorials or recipes on how to access native libraries written in other languages.
 

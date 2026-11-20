@@ -54,7 +54,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * Be hungry, humble, and smart!
   * <https://www.reddit.com/r/ProgrammerHumor/comments/jo4b6s/recruiters_be_like/>
 
-{{< img src="fullstackitdepartment.webp" class="size-full is-resized" width="960" height="1008" style="width:240px;height:252px" >}}
+{{< img src="fullstackitdepartment.webp" alt="Tweet joking that a recruiter's wish list of languages, frameworks, databases, cloud and DevOps tools describes an entire IT department, not a full stack developer" class="size-full is-resized" width="960" height="1008" style="width:240px;height:252px" >}}
 
 * 26'39 "*2023 will be the year we try to figure out what to do with all this AI stuff* "
   * Devoxx Belgium 2022 AI intro movie

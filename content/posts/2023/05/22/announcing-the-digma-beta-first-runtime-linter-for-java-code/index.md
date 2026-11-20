@@ -38,7 +38,7 @@ We have 20 slots currently open for the beta.
 4. Help create a tool that will improve developer happiness
 5. Some cool swag... (TShirt, stressballs and more )🦇
 
-{{< img src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" class="aligncenter size-large is-resized" width="155" height="206" >}}
+{{< img src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" alt="Two blue bat-shaped stress toys with big round eyes on a desk, Digma swag" class="aligncenter size-large is-resized" width="155" height="206" >}}
 
 ## Requirements to apply ✅
 

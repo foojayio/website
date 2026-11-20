@@ -16,7 +16,7 @@ related_posts:
   - "beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2"
 ---
 
-{{< img src="1_2RyMETT6diUSVGKdJPoQgQ.webp" class="aligncenter size-full is-resized" width="720" height="720" style="width:368px;height:auto" >}}
+{{< img src="1_2RyMETT6diUSVGKdJPoQgQ.webp" alt="Green illustration of a MongoDB leaf above a database cylinder, linked by arrows to a tree structure, hard disk and gear" class="aligncenter size-full is-resized" width="720" height="720" style="width:368px;height:auto" >}}
 
 Inside MongoDB's storage engine, [WiredTiger](https://www.mongodb.com/docs/manual/core/wiredtiger/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-forget-foojay&utm_term=tony.kim), **nothing happens by accident.**
 

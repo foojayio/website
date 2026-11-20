@@ -257,7 +257,7 @@ Configuring the Spring Boot plugin is straightforward:
 </plugin>
 ```
 
-{{< img src="image-12.png" class="size-large is-resized" width="269" height="233" >}}
+{{< img src="image-12.png" alt="Directory tree of an executable Spring Boot jar with BOOT-INF classes and lib, META-INF/MANIFEST.MF and the org/springframework/loader folder" class="size-large is-resized" width="269" height="233" >}}
 
 1. Project compiled classes
 2. JAR dependencies

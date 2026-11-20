@@ -56,7 +56,7 @@ Please submit through Pentabarf here:
 
 When submitting your talk in Pentabarf, make sure to select "Friends Of OpenJDK devroom" as the Track, as shown below.
 
-{{< img src="image-1024x1013.jpg" class="size-large is-resized" width="554" height="547" >}}
+{{< img src="image-1024x1013.jpg" alt="Pentabarf event form with the Track drop-down open and 'Friends of OpenJDK devroom' highlighted" class="size-large is-resized" width="554" height="547" >}}
 
 Create a Pentabarf account if, and only if, you don't already have one from a previous year. Please double check if you have an account you can reuse!
 

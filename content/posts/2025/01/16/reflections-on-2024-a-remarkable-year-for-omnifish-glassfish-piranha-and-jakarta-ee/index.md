@@ -48,7 +48,7 @@ As the most active contributor to the GlassFish project, we've continued to lead
     * **Embedded Support in Docker:** Enabled GlassFish Embedded to run seamlessly in the official GlassFish Docker container.
   * Consistently updated dependencies to address security and compatibility concerns.
 
-{{< img src="GlassFish-Admin-Command-Logger.png" class="size-full is-resized" width="874" height="275" style="width:836px;height:auto" >}}
+{{< img src="GlassFish-Admin-Command-Logger.png" alt="GlassFish admin console Log Entry Detail showing an AdminCommandLogger INFO entry: user admin executed an admin command" class="size-full is-resized" width="874" height="275" style="width:836px;height:auto" >}}
 
 ![Terminal output of running the GlassFish embedded jar with clusterjsp.war, ending in a 'GLASSFISH STARTED' banner at localhost:8080](Runnable-GlassFish-Embedded-1-1024x399-1.jpg)
 

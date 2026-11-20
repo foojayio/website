@@ -23,7 +23,7 @@ Go here to take a look, yourself: <https://javaalmanac.io/jdk/8/>
 
 And, let's meet Marc, here's a quick interview with him about the Java Version Almanac**!**  
 
-{{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="154" height="176" >}}
+{{< img src="Screenshot-2020-08-21-at-09.20.34.png" alt="Close-up photo of Marc Hoffmann wearing sunglasses outdoors by the sea" class="alignleft size-large is-resized" width="154" height="176" >}}
 
 **Hi Marc, can you briefly introduce yourself and how you've been active in the Java ecosystem over the years?**   
 

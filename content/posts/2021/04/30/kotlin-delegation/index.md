@@ -24,7 +24,7 @@ Kotlin offers many exciting features. In general, developers tend to cite null s
 The delegation pattern is described in the book:
 > *Delegation* is a way to make composition as powerful for reuse as inheritance \[Lie86, JZ91\]. In delegation, *two* objects are involved in handling a request: a receiving object delegates operations to its *delegate* . This is analogous to subclasses deferring requests to parent classes. But with inheritance, an inherited operation can always refer to the receiving object through the `this` member variable in C++ and `self` in Smalltalk. To achieve the same effect with delegation, the receiver passes itself to the delegate to let the delegated operation refer to the receiver.
 
-{{< img src="window-rectangle-700x117.png" class="aligncenter size-medium" width="700" height="117" >}}
+{{< img src="window-rectangle-700x117.png" alt="UML class diagram: Window delegates area() to its Rectangle, which computes height * width" class="aligncenter size-medium" width="700" height="117" >}}
 
 Delegation is critical when one chooses *composition* over *inheritance*.
 

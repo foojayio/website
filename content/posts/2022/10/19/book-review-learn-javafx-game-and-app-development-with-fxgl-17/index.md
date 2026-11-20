@@ -23,7 +23,7 @@ In "Entreprenerd," he also describes the process of writing two books about the 
 
 So, when I received this book about **FXGL**, I immediately had to think back to Bruno's story. Who better to write a book about FXGL than Almas, its creator?
 
-{{< img src="41ou5Nfo9DL.jpeg" class="size-full is-resized" width="248" height="375" >}}
+{{< img src="41ou5Nfo9DL.jpeg" alt="Book cover of Learn JavaFX Game and App Development with FXGL 17 by Dr. Almas Baimagambetov, with cartoon game characters" class="size-full is-resized" width="248" height="375" >}}
 
 [**Dr. Almas Baimagambetov**](https://twitter.com/AlmasBaim) is a principal lecturer in computer science at the University of Brighton, UK. He has considerable software development experience and is a huge fan of open source. His prominent contributions to the JVM community on GitHub include the FXGL game engine, collaborations on numerous JavaFX projects, a wide range of open-source games, and a collection of practical tutorials.
 

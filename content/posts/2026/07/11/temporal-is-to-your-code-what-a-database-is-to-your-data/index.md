@@ -16,7 +16,7 @@ related_posts:
 
 Then the relational database arrived and made a deal with application developers: ***you declare what you want, and I guarantee it survives**.* Atomicity, durability, crash recovery: all of it moved out of application code and into a dedicated platform. Nobody writes their own file-based transaction log anymore.
 
-{{< img src="img-1-database-deal.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
+{{< img src="img-1-database-deal.svg" alt="Diagram: before databases each app used ad hoc files with locking and recovery worries; a database guarantees atomicity, durability and recovery" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 Now let's take a look at how we handle ***execution*** today...
 
@@ -32,7 +32,7 @@ This problem has a name now, :durable execution", and [Temporal.io](https://temp
 
 Its proposition is the same deal the database made, aimed at a different layer: **you write ordinary (Java) code, and the platform guarantees it runs to completion, across crashes, deploys, and outages.**
 
-{{< img src="img-2-hand-rolled-mess.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
+{{< img src="img-2-hand-rolled-mess.svg" alt="Comparison: hand-rolled queues, cron, status columns and retry loops versus Temporal providing queues, timers, retries and state underneath plain Java" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 [Temporal.io](https://temporal.io/) is to code execution what a database is to data.
 
@@ -46,7 +46,7 @@ Every meaningful event in a Temporal Workflow's life (an Activity started, a tim
 
 When the JVM running your Temporal Workflow dies, Temporal rehydrates that Workflow on another Worker by replaying that history through your code. Your local variables, your position in a loop, the fact that you're on step 3 of 7, all of it is reconstructed.
 
-{{< img src="img-3-wal-replay.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
+{{< img src="img-3-wal-replay.svg" alt="Diagram: after a worker JVM crashes, another worker replays the persisted event history to rebuild local variables and resume exactly where it stopped" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 Your `int retriesRemaining` survives a JVM crash the way a committed row survives a Postgres restart.
 
@@ -63,7 +63,7 @@ sendRenewalReminder(customer);
 
 and no thread, no pod, no JVM sits around waiting for a month. The Temporal Workflow is durably parked, consuming essentially nothing, and gets rehydrated when the timer fires, even if you've deployed forty times and replaced every server in between.
 
-{{< img src="img-4-month-transaction.svg" class="size-full is-resized" style="aspect-ratio:2.142891431314505;width:840px;height:auto" >}}
+{{< img src="img-4-month-transaction.svg" alt="Timeline: a workflow sleeps 30 days with no threads or pods while deploys and crashes happen, then rehydrates and sends the reminder" class="size-full is-resized" style="aspect-ratio:2.142891431314505;width:840px;height:auto" >}}
 
 In effect, a Temporal Workflow provides run-to-completion guarantees that can span days or months. For extremely long-running workflows (years, or those exceeding \~10,000 events), use Continue-As-New to reset the history while preserving state. It's not literally ACID, long-running business processes use Sagas and compensation rather than rollback, but the direction of the guarantee is the same: the process either completes, or it resumes from exactly where it stopped.
 
@@ -83,7 +83,7 @@ The half-finished, stuck-in-limbo state that plagues distributed systems simply 
 
 In each case, a hard, error-prone concern that every application was reimplementing (data durability, memory, orchestration, execution) moved into a dedicated platform that hands back a guarantee.
 
-{{< img src="img-5-same-pattern.svg" class="size-full is-resized" style="aspect-ratio:2.1429491307147455;width:840px;height:auto" >}}
+{{< img src="img-5-same-pattern.svg" alt="Four tiles: virtual memory, garbage collection, Kubernetes and Temporal, each moving a hard concern into a platform that guarantees it" class="size-full is-resized" style="aspect-ratio:2.1429491307147455;width:840px;height:auto" >}}
 
 ## What this means for your Java code
 
@@ -96,7 +96,7 @@ Concretely, adopting Temporal means deleting things:
 
 What's left is code that reads like the business process it implements: charge the card, reserve the inventory, send the email, wait for the shipment, remind the customer in 30 days.
 
-{{< img src="img-6-what-you-delete.svg" class="size-full is-resized" style="aspect-ratio:2.1429315652379826;width:820px;height:auto" >}}
+{{< img src="img-6-what-you-delete.svg" alt="Diff-style graphic: status flags, retries, idempotency and queue plumbing are deleted, leaving plain code for a business process" class="size-full is-resized" style="aspect-ratio:2.1429315652379826;width:820px;height:auto" >}}
 
 Straight-line Java, with the reliability engineering underneath handled by a platform whose entire job is exactly that.
 

@@ -54,7 +54,7 @@ This is a question Maven Central attempts to provide insight into through the So
 
 The rating ranges from 1 to 10, where 1 means a project is very likely to have future vulnerabilities and 10 is unlikely to have future vulnerabilities.  
 
-{{< img src="foojay-safetyrating-700x265.png" class="size-medium" width="700" height="265" >}}
+{{< img src="foojay-safetyrating-700x265.png" alt="Maven Central page for commons-math 2.2 showing a Sonatype Safety Rating of 10 out of 10" class="size-medium" width="700" height="265" >}}
 
 ***Screenshot from central.sonatype.com***
 

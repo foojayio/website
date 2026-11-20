@@ -97,7 +97,7 @@ Rather than incrementally building up to our final example, here's the complete 
 
 At this point, go ahead and copy the above JSON aggregation pipeline and paste it into Atlas UI or Compass. There's a nifty feature (the mode button - see button image below) where you can paste in the entire JSON just copied.  
 
-{{< img src="Screenshot-2026-01-23-at-4.24.49-PM.png" class="aligncenter size-full is-resized" width="164" height="50" style="width:208px;height:auto" >}}
+{{< img src="Screenshot-2026-01-23-at-4.24.49-PM.png" alt="Small dark 'TEXT' button with a code icon, the mode button in Atlas for pasting the aggregation pipeline as text" class="aligncenter size-full is-resized" width="164" height="50" style="width:208px;height:auto" >}}
 
 Here's what the results should look like for you:
 ![three-stage aggregation pipeline in Compass](Screenshot-2025-11-18-at-9.14.25-AM.jpg)

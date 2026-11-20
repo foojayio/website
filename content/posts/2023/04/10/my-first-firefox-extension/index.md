@@ -85,11 +85,11 @@ document.body.style.border = '5px solid red';
 
 I found the development feedback loop good. Imagine that you have followed the tutorial and created all the necessary files above. You can go to and click on the "Load Temporary Add-on" button.
 
-{{< img src="firefox-load-extension-700x182.jpg" class="aligncenter size-medium" width="700" height="182" >}}
+{{< img src="firefox-load-extension-700x182.jpg" alt="Firefox about:debugging page for version 110.0 showing zero temporary extensions and a Load Temporary Add-on button" class="aligncenter size-medium" width="700" height="182" >}}
 
 Then, point to your manifest file. Firefox loads the extension: it's now active.
 
-{{< img src="firefox-loaded-extension-700x508.jpg" class="aligncenter size-medium" width="700" height="508" >}}
+{{< img src="firefox-loaded-extension-700x508.jpg" alt="Firefox about:debugging showing the Conf2Trello temporary extension loaded, with Inspect, Reload and Remove buttons" class="aligncenter size-medium" width="700" height="508" >}}
 
 In the above example, the JavaScript from the tutorial adds a red border around every web page. It's useless, we can do better, but it shows how it works. We can change the script to change the color, *e.g.* , from `red` to `green`. To make Firefox reload **any change**, including changes to the manifest, click on the "Reload" button on the temporary extension panel.
 
@@ -152,7 +152,7 @@ Let's stop for a moment to talk about debugging. I lost several hours because I 
 
 First things first, content scripts work in the context of the page. Hence, logging statements work in the regular console. Background scripts do work in another context. To watch their log statements, we need to have **another** Firefox developer console. You can open it on the extension panel by clicking the "Inspect" button.
 
-{{< img src="extension-developer-console-700x260.jpg" class="aligncenter size-medium" width="700" height="260" >}}
+{{< img src="extension-developer-console-700x260.jpg" alt="Firefox developer tools console for the Conf2Trello background page printing 'Hello from background'" class="aligncenter size-medium" width="700" height="260" >}}
 
 ## Communication across scripts
 
@@ -272,7 +272,7 @@ We also need to ask the `storage` permission in the manifest:
 
 We can now store the Trello credentials (as well as the required Trello list id) on the settings page:
 
-{{< img src="settings-700x384.jpg" class="aligncenter size-medium" width="700" height="384" >}}
+{{< img src="settings-700x384.jpg" alt="Conf2Trello extension preferences page with fields for Trello List ID, Key and Token and a Save button" class="aligncenter size-medium" width="700" height="384" >}}
 
 We can use the same `storage` API in the Trello calling code to read credentials.
 

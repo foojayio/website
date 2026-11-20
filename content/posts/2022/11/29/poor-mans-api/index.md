@@ -354,7 +354,7 @@ curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PU
 
 Send a couple of queries and open the Grafana dashboard. It should look similar to this:
 
-{{< img src="grafana-700x288.jpg" class="size-medium aligncenter" width="700" height="288" >}}
+{{< img src="grafana-700x288.jpg" alt="Grafana dashboard with Nginx connection counts (20 accepted and handled) and a bandwidth graph with two small traffic spikes" class="size-medium aligncenter" width="700" height="288" >}}
 
 ## Conclusion
 

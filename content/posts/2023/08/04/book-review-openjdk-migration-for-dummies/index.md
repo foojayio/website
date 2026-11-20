@@ -27,7 +27,7 @@ related_posts:
 
 [
 
-{{< img src="dummies-373x510.png" class="alignright" width="270" height="369" >}}
+{{< img src="dummies-373x510.png" alt="Cover of OpenJDK Migration for Dummies, Azul Special Edition, with a cartoon face and three bullet topics" class="alignright" width="270" height="369" >}}
 
 ](https://www.azul.com/openjdk-migration-for-dummies/)
 

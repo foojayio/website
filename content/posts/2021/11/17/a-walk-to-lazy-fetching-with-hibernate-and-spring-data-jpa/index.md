@@ -14,7 +14,7 @@ related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
 ---
 
-{{< img src="oie_koKWLHXsUxuL.jpg" class="is-resized" width="452" height="226" style="width:452px;height:226px" >}}
+{{< img src="oie_koKWLHXsUxuL.jpg" alt="Hibernate logo with the text Lazy Fetching" class="is-resized" width="452" height="226" style="width:452px;height:226px" >}}
 
 ### Background
 

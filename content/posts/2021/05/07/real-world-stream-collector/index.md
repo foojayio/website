@@ -20,7 +20,7 @@ Java Stream's `Collectors` methods fit most use-cases. They allow returning eith
 
 Let's imagine an e-commerce platform that implements a shopping cart. The cart is modeled as the following:
 
-{{< img src="cart-700x332.png" class="aligncenter size-medium" width="700" height="332" >}}
+{{< img src="cart-700x332.png" alt="UML diagram: a Cart holds many Products, with the quantity stored in an association class" class="aligncenter size-medium" width="700" height="332" >}}
 
 This diagram might translate into the following (abridged) code:
 
@@ -150,7 +150,7 @@ public class PriceAndRows {
 
 Here's a summary of the `Collector` interface. For more details, please check [this previous post](https://blog.frankel.ch/custom-collectors-java-8/).
 
-{{< img src="class-diagram-700x473.png" class="aligncenter size-medium" width="700" height="473" >}}
+{{< img src="class-diagram-700x473.png" alt="UML class diagram of the Collector interface, its Supplier, BiConsumer, BinaryOperator and Function members, and Characteristics enum" class="aligncenter size-medium" width="700" height="473" >}}
 
 |      Interface      |                                                 Description                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------|

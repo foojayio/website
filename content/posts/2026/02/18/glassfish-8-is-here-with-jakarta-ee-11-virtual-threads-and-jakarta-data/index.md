@@ -105,7 +105,7 @@ More information:
 * [](https://omnifish.ee/glassfish-is-rolling-forward-whats-new/)[Level up from Payara: Why GlassFish Is much better](https://omnifish.ee/level-up-from-payara-why-glassfish-is-much-better/) (OmniFish)
 * [The Eclipse Foundation's Jakarta EE Working Group Announces Jakarta EE 11 Release](https://newsroom.eclipse.org/news/announcements/eclipse-foundation%E2%80%99s-jakarta-ee-working-group-announces-jakarta-ee-11-release) (Eclipse Foundation)
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a teal circle with a stylised yellow-green fish and the text OMNI FISH" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 **OmniFish - Modern Jakarta EE Runtimes**
 

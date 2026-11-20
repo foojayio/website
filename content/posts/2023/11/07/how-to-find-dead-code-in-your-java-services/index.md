@@ -153,7 +153,7 @@ Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c79241
 
 Now that we have generated a report, we can inspect the generated `report/index.html` and look for coverage on some suspected legacy code. We are looking for red lines, which means the code is not covered. Let's dive into some examples.
 
-{{< img src="0-qYvVZekF-qruyoxt-98ddb8af.png" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
+{{< img src="0-qYvVZekF-qruyoxt-98ddb8af.png" alt="Java method annotated @Deprecated-style with a 'Drop method' TODO whose single return line is highlighted red as never executed" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
 
 This bit of legacy code has been around for a few years already and has been marked as deprecated for a few months already. When searching for usages of this method across organization repositories, we find that it is indeed unused apart from tests!
 

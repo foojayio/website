@@ -34,7 +34,7 @@ However, the extra punch these tests packed came at a cost. The more realistic t
 
 Unit tests were an easy alternative and a cheap substitute. Fast, better suited for creating tests en-mass, especially efficient in testing isolated pieces of logic or data-driven testing use cases, leveraging the quick execution time to cover numerous input permutations. Trying to balance the faster easier-to-write unit tests with the heavy wielder test types resulted in the concept of the 'testing pyramid'. Today it is widely accepted as a best practice in testing your code.  
 
-{{< img src="0_h3w4QyATz5z8k25E.png" class="aligncenter size-full is-resized" width="466" height="246" style="width:466px;height:246px" caption="source: https://martinfowler.com/articles/practical-test-pyramid.html" >}}
+{{< img src="0_h3w4QyATz5z8k25E.png" alt="Test pyramid: UI tests at the top are slower with more integration, unit tests at the base are faster with more isolation" class="aligncenter size-full is-resized" width="466" height="246" style="width:466px;height:246px" caption="source: https://martinfowler.com/articles/practical-test-pyramid.html" >}}
 
 #### Continuous Integration is not Continuous Unit Testing
 
@@ -42,7 +42,7 @@ Unfortunately, over-investing in unit tests has its downturns. I have seen huge,
 
 The fact that it was easy to produce so many unit tests turned out to be a two-edged sword. The tests often induced a 'false sense of confidence' that did not take into account the many biases that these tests fall into. Each test would look at a very narrow scope and validate only one happy path in a complex distributed system. A developer, reviewing thousands of green tests in the build would assume that his code change is well tested, often being surprised when real-world issues started occurring soon after merging the code.  
 
-{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.jpg" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
+{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.jpg" alt="Four-panel comic: tests show OK for the developer, a warning for QA, a blue screen for the project manager, and a disaster for the customer" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
 
 To complicate matters, in some programming languages, injecting dependencies to allow mocking at every level, as unit tests require, entails complex changes, which do not necessarily lead to better design. The practice of 'refactoring for better testability', once vaunted as advantageous in producing less closely coupled components, soon became an obstacle as the cost of that abstraction became clear. Modern dev practices often favor simplicity over multi-layered modular designs and unit tests unfortunately strictly require the latter.
 
@@ -191,7 +191,7 @@ Given the changes in both the cost and value of integration tests, we can certai
 
 We'll be looking for high-value tests with minimal cost. As such, single service integration tests such as the one we just created seem to represent an optimal balance.  
 
-{{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
+{{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" alt="Chart of test value versus cost: unit tests are cheap and low value, service integration tests give high value at moderate cost" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
 
 This means that we can invest in more tests that will be both easier to code, relatively fast to run, and still provide great coverage and real-world scenario validation. In addition, the data produced by these tests can be leveraged for more than simple functional validation — we can give our code some exercise and see the shape just by running our tests.
 

@@ -60,6 +60,6 @@ For those who could not attend, presentation slides will be posted on the confer
 
 The '**hallway track**', the networking opportunities at the pub afterwards, and the direct access to presenters are integral parts of the overall experience that virtual interactions cannot replace.
 
-{{< img src="PXL_20230503_204004325-edited.jpg" class="size-large is-resized" width="530" height="704" >}}
+{{< img src="PXL_20230503_204004325-edited.jpg" alt="Speaker presenting at JConf.dev Toronto in front of a slide reading 'The Community for Open Innovation and Collaboration' from the Eclipse Foundation" class="size-large is-resized" width="530" height="704" >}}
 
 In conclusion, JConf Toronto 2023 was a confluence of minds and ideas, weaving together the threads of innovation and camaraderie, setting the stage for an even more inspiring event in 2024.

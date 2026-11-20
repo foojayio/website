@@ -76,7 +76,7 @@ However, if you want to **enforce** DPoP for a specific client, meaning Bearer t
 
 **Step 3:** Enable the **Require DPoP bound tokens** switch.
 
-{{< img src="image1-700x370.png" class="size-medium" width="700" height="370" >}}
+{{< img src="image1-700x370.png" alt="Keycloak client capability config with the 'Require DPoP bound tokens' switch highlighted and still off" class="size-medium" width="700" height="370" >}}
 
 With this option enabled, the client must include a DPoP proof with every token request. Requests without valid proof will be rejected, and Bearer tokens will not be accepted to access this client's resources.
 

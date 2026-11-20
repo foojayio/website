@@ -74,7 +74,7 @@ It should work if I return the same response to the same query on a custom domai
 
 Given this, I can search on <https://mastodon.top> with `@me@frankel.ch` (or any handle `@frankel.ch`), and it returns the expected results:
 
-{{< img src="mastodon.top_-700x289.jpg" class="aligncenter size-medium" width="700" height="289" >}}
+{{< img src="mastodon.top_-700x289.jpg" alt="Mastodon web interface searching @me@frankel.ch and returning the profile of Nicolas Fränkel (@frankel)" class="aligncenter size-medium" width="700" height="289" >}}
 
 I checked on other instances, *e.g.* , <https://mastodon.social/>, but it doesn't work. The reason is simple. When searching on the instance you're logged in, the XHR is [https://mastodon.top/api/v2/search?q=@me@frankel.ch\&resolve=true\&limit=5](https://mastodon.top/api/v2/search?q=@me@frankel.ch&resolve=true&limit=5); when not, it's [https://mastodon.top/api/v2/search?q=@me@frankel.ch\&resolve=false\&limit=5](https://mastodon.top/api/v2/search?q=@me@frankel.ch&resolve=false&limit=5). Conclusion: you can only query handles on the same instance when you're not authenticated.
 

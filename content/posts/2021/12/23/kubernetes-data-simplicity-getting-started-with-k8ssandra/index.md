@@ -184,7 +184,7 @@ The K8ssandra project creates separation between the tests themselves and the su
 
 #### Unit test artifacts with test data files
 
-{{< img src="pasted-image-0-1.png" class="alignright size-large" width="269" height="463" >}}
+{{< img src="pasted-image-0-1.png" alt="IDE project tree of the tests/unit folder in k8ssandra with Go test files such as template_reaper_test.go" class="alignright size-large" width="269" height="463" >}}
 
 ![Screenshot of a repository tree containing a testdata folder with Helm unit test values YAML files](pasted-image-0-2.png)  
 

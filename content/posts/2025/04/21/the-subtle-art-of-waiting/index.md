@@ -25,7 +25,7 @@ The application starts very fast and eagerly tries to establish a connection to 
 
 After a while, Kubernetes requests the application pod's state. Because it's failed, it terminates it and starts a new pod. At this point, two things can happen: the database pod isn't ready yet, and it's back to square one or it's ready, and the application finally connects.
 
-{{< img src="concurrent-pod-initialization-476x510.png" class="aligncenter size-medium" width="476" height="510" >}}
+{{< img src="concurrent-pod-initialization-476x510.png" alt="UML sequence diagram: Kubernetes creates application and database pods, and the application loops start() and connect() until the database is ready" class="aligncenter size-medium" width="476" height="510" >}}
 
 To speed up the process, Kubernetes offers [startup probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes):
 

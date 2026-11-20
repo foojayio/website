@@ -125,7 +125,7 @@ To bring **Code Quality** checks into Windsurf via MCP, you can use Docker:
 
 **Manual:** Add this to your \~/.codeium/windsurf/mcp_config.json file.
 
-{{< img src="Screenshot-2026-02-16-at-09.40.51.png" class="size-full is-resized" width="849" height="607" style="aspect-ratio:1.398688729316266;width:487px;height:auto" >}}
+{{< img src="Screenshot-2026-02-16-at-09.40.51.png" alt="JSON MCP server configuration for sonarqube that runs the mcp/sonarqube Docker image with token and org environment variables" class="size-full is-resized" width="849" height="607" style="aspect-ratio:1.398688729316266;width:487px;height:auto" >}}
 
 Or even easier, using the free extension [SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-intellij/), that you can install in major IDEs like VSCode or IntelliJ, you will have live analysis results on your IDE, plus a very convenient way to install SonarQube MCP server or even Windsurf Hooks to guarantee that all responses from the Agent go through a SonarQube analysis.
 ![SonarQube for IDE 'AI Agents Configuration' panel with steps to configure the MCP server, create instructions and install a hook](Screenshot-2026-02-16-at-08.54.42.png) ![Notification that the SonarQube hook script was installed for Windsurf so code is analyzed automatically after AI generation](Screenshot-2026-02-16-at-09.05.28.png)

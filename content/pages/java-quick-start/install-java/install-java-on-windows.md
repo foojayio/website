@@ -17,10 +17,10 @@ Many more distributions and versions of Java exist. You can [read more info here
 
 Once the `.msi` file has completed downloading, double-click it, and follow the instructions.
 
-{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-1.png" alt="" width="616" height="481" >}}
-{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-2.png" alt="" width="616" height="481" >}}
-{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-3.png" alt="" width="616" height="481" >}}
-{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-4.png" alt="" width="616" height="481" >}}
+{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-1.png" alt="Azul Zulu JDK 17 Setup Wizard welcome screen with a Next button" width="616" height="481" >}}
+{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-2.png" alt="Custom Setup step with Add to PATH selected, Set JAVA_HOME variable unselected and the install location C:/Program Files/Zulu/zulu-17" width="616" height="481" >}}
+{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-3.png" alt="Ready to install screen of the Zulu JDK 17 wizard with an Install button" width="616" height="481" >}}
+{{< img src="/images/pages/java-quick-start/install-java/install-java-on-windows/zulu-install-windows-4.png" alt="Completed screen of the Zulu JDK 17 Setup Wizard with a Finish button" width="616" height="481" >}}
 
 ## Validate the Java Installation
 

@@ -164,4 +164,4 @@ If you're looking for a quick demo, you can attempt to install and run our appli
 
 And that's all for today! Here is how a JavaFX applications looks like in an Oracle Linux WSL instance:
 
-{{< img src="wsl-700x450.png" class="size-medium aligncenter" width="700" height="450" >}}
+{{< img src="wsl-700x450.png" alt="XPipe Desktop Connection Hub running in an Oracle Linux WSL instance on Windows 10" class="size-medium aligncenter" width="700" height="450" >}}

@@ -28,7 +28,7 @@ The open source [Liberty Tools for Eclipse IDE](https://ibm.biz/LibertyToolsEc
 
 The Liberty Tools for Eclipse IDE plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you to develop, build, test, deploy, and manage your applications – all within your favorite IDE, Eclipse!
 
-{{< img src="EclipseLibertyTools1-700x397.png" class="size-medium aligncenter" width="700" height="397" >}}
+{{< img src="EclipseLibertyTools1-700x397.png" alt="Eclipse Marketplace page for the Liberty Tools plugin for Eclipse IDE, listing details and supported Eclipse versions" class="size-medium aligncenter" width="700" height="397" >}}
 
 ## Key capabilities of Liberty Tools
 

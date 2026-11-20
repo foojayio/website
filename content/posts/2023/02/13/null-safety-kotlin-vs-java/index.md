@@ -27,7 +27,7 @@ The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-k
 
 [
 
-{{< img src="Screenshot-2023-02-11-at-13.11.04-485x510.png" class="aligncenter size-medium" width="485" height="510" >}}
+{{< img src="Screenshot-2023-02-11-at-13.11.04-485x510.png" alt="Tweet by Martin Bonnin asking how many nullability annotations exist in Java, with a photo of a speaker pointing at a slide listing them" class="aligncenter size-medium" width="485" height="510" >}}
 
 ](https://twitter.com/martinbonnin/status/1622197657534857220)
 

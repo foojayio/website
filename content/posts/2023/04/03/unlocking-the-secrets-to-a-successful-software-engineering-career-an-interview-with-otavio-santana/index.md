@@ -15,7 +15,7 @@ related_posts:
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
 ---
 
-{{< img src="otavio-edited.webp" class="alignright size-full is-resized" width="481" height="481" >}}
+{{< img src="otavio-edited.webp" alt="Portrait of Otavio Santana in a gray jcp.org zip-up shirt, smiling" class="alignright size-full is-resized" width="481" height="481" >}}
 
 In this exclusive interview, we had the pleasure of speaking with [Otavio Santana](https://www.linkedin.com/in/otaviojava/), a Java Champion and passionate software engineer and architect dedicated to empowering fellow engineers to deliver efficient, scalable software on the Cloud.
 

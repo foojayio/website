@@ -109,7 +109,7 @@ With the above code, how many tasks will be created?
 
 The recursion tree will look like this.
 
-{{< img src="Screen-Shot-2022-02-26-at-10.05.20-AM-493x510.png" class="size-medium" width="493" height="510" >}}
+{{< img src="Screen-Shot-2022-02-26-at-10.05.20-AM-493x510.png" alt="Recursion tree of Fibonacci-style calls: task 5 spawns 4 and 3, which split down to leaves 1 and 0, 15 tasks in total" class="size-medium" width="493" height="510" >}}
 
 We count that we will have 15 tasks. The top task, which is 5, will create two new tasks and wait for them to finish.
 

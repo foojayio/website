@@ -14,7 +14,7 @@ related_posts:
   - "7-ways-to-contribute-to-openjdk"
 ---
 
-{{< img src="erik.jpeg" class="alignright size-full is-resized" width="450" height="675" >}}
+{{< img src="erik.jpeg" alt="Portrait of Erik, smiling, in a navy suit and red patterned tie in front of greenery" class="alignright size-full is-resized" width="450" height="675" >}}
 
 In today's fast-paced tech world, understanding the intricacies of software development and product management is key to success.
 

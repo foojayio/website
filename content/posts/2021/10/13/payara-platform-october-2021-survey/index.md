@@ -19,7 +19,7 @@ related_posts:
 
 [
 
-{{< img src="MicrosoftTeams-image-33-700x394.jpg" class="size-medium" width="700" height="394" >}}
+{{< img src="MicrosoftTeams-image-33-700x394.jpg" alt="Payara Platform October 2021 Survey banner with a clipboard checklist, rating stars and message bottles on waves" class="size-medium" width="700" height="394" >}}
 
 ](https://www.payara.fish/Survey)
 

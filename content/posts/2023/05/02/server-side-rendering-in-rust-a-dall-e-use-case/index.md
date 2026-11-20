@@ -79,7 +79,7 @@ async fn main() {
 
 Here are the base items:
 
-{{< img src="axum-template-api-700x310.png" class="aligncenter size-medium" width="700" height="310" >}}
+{{< img src="axum-template-api-700x310.png" alt="UML class diagram of the axum_template crate with Engine, Key and RenderHtml, where RenderHtml implements IntoResponse" class="aligncenter size-medium" width="700" height="310" >}}
 
 * `Engine` is a facade over the templating library
 * Templates are stored in a hashtable-like structure. With the MiniJinja implementation, according to the configuration above, `Key` is simply the filename, *e.g.* , `home.html`

@@ -21,7 +21,7 @@ You can query, convert, inspect, edit and analyze them without leaving the IDE. 
 
 The engine behind all of this is [DuckDB](https://duckdb.org/), which is bundled with the plugin.
 
-{{< img src="Screenshot-2026-08-30-at-11.56.50-293x510.png" class="size-medium" width="293" height="510" >}}
+{{< img src="Screenshot-2026-08-30-at-11.56.50-293x510.png" alt="NetBeans Databases tree with a DuckDB in-memory connection exposing csv_data, json_data and parquet_data tables with columns" class="size-medium" width="293" height="510" >}}
 
 Sources are here, issues and pull requests are very welcome: [github.com/geertjanw/Apache-NetBeans-Data-Wrangler](https://github.com/geertjanw/Apache-NetBeans-Data-Wrangler).
 
@@ -55,7 +55,7 @@ Sources are here, issues and pull requests are very welcome: [github.com/geertja
 
 Right-clicking a CSV, Parquet, JSON or Excel file, or inside an open CSV or JSON editor, provides actions for querying and converting the currently selected file to one of the other formats.
 
-{{< img src="Screenshot-2026-08-30-at-12.02.29-700x420.png" class="size-medium" width="700" height="420" >}}
+{{< img src="Screenshot-2026-08-30-at-12.02.29-700x420.png" alt="NetBeans context menu on a Parquet file with Convert with DuckDB submenu offering CSV, TSV, Parquet, JSON and Excel" class="size-medium" width="700" height="420" >}}
 
 **Query with DuckDB** opens an SQL editor bound to a DuckDB connection with a query that reads the file using the appropriate function: `read_csv`, `read_parquet`, `read_json_auto` (or `read_json` with `format = 'newline_delimited'` for JSON Lines) or `read_xlsx`. Below the query is a set of commented examples for that format, such as `sniff_csv` for CSV, `parquet_metadata` for Parquet, `unnest(items, recursive := true)` for JSON and `sheet = '...'` for Excel. For Parquet and Excel files the query opens in the file's own Query tab.
 
@@ -72,21 +72,21 @@ When the editor's connection is a DuckDB connection, the following are active.
 
 **Quick fixes.** When DuckDB reports that a function exists in an extension that is not loaded, Alt-Enter offers to install and load that extension...
 
-{{< img src="Screenshot-2026-08-30-at-12.14.56-700x182.png" class="size-medium" width="700" height="182" >}}
+{{< img src="Screenshot-2026-08-30-at-12.14.56-700x182.png" alt="NetBeans SQL editor quick fix offering to install and load the DuckDB extension 'spatial' for st_point" class="size-medium" width="700" height="182" >}}
 
 ...after a confirmation. When DuckDB suggests a name, Alt-Enter offers to replace the identifier with it.
 
-{{< img src="Screenshot-2026-08-30-at-12.15.14-700x209.png" class="size-medium" width="700" height="209" >}}
+{{< img src="Screenshot-2026-08-30-at-12.15.14-700x209.png" alt="Confirmation dialog asking to install and load the DuckDB extension 'spatial', with No and Yes buttons" class="size-medium" width="700" height="209" >}}
 
 **Objects created earlier in the same file** are not reported as missing. A script that creates a table on its first line and inserts into it on its second line shows no warnings before it has been run.
 
 **Completion.** Ctrl+Space lists functions from `duckdb_functions()`, including those from loaded extensions, with signature and description, tables and views from the catalog, DuckDB keywords and types, and columns in scope.
 
-{{< img src="Screenshot-2026-08-30-at-12.22.33-700x217.png" class="size-medium" width="700" height="217" >}}
+{{< img src="Screenshot-2026-08-30-at-12.22.33-700x217.png" alt="NetBeans SQL editor hover showing DuckDB documentation for the SELECT keyword with its syntax" class="size-medium" width="700" height="217" >}}
 
 After `s.` it lists the columns of `s`, which may be a table, a view, a common table expression, a subquery or a `read_csv(...)` call. Columns are resolved by asking DuckDB with `DESCRIBE`.
 
-{{< img src="Screenshot-2026-08-30-at-12.20.36-700x204.png" class="size-medium" width="700" height="204" >}}
+{{< img src="Screenshot-2026-08-30-at-12.20.36-700x204.png" alt="NetBeans SQL editor completion popup listing the columns of cities.csv (amount, city, created_at, id, name) after 's.'" class="size-medium" width="700" height="204" >}}
 
 **Documentation.** As seen above, DuckDB keywords and types are colored, and hovering shows a summary, the syntax and an example, with a link to the DuckDB documentation. Standard keywords such as `FROM`, `GROUP BY` and `INSERT` are documented for what DuckDB adds to them. Hovering a function shows its signature and description. The same text appears in the completion documentation pane.
 

@@ -63,7 +63,7 @@ public class DemoApplication{  // Missing space before {
 
 For example, when you ask CodeRabbit to check the style above, you'll get a response comparable to this:
 
-{{< img src="coderabbitai-1-548x510.png" class="size-medium" width="548" height="510" >}}
+{{< img src="coderabbitai-1-548x510.png" alt="GitHub pull request thread where CodeRabbit confirms the spacing in a Java class is correct and offers two brace-style options" class="size-medium" width="548" height="510" >}}
 
 **Best Practices**
 
@@ -89,7 +89,7 @@ public void unsafeMethod(String userInput) {
 
 The above is analyzed in several ways, including this, by CodeRabbit:
 
-{{< img src="coderabbit-2-575x510.png" class="size-medium" width="575" height="510" >}}
+{{< img src="coderabbit-2-575x510.png" alt="CodeRabbit review comment on a pull request flagging a critical SQL injection and suggesting a parameterized query" class="size-medium" width="575" height="510" >}}
 
 ### **3. Performance Optimization Suggestions**
 

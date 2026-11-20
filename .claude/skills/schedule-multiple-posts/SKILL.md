@@ -71,7 +71,8 @@ Follow its steps for each draft, with these batch notes:
 * Remove a body image that duplicates the hero.
 * A hotlinked image is stored locally as `<stem>-<8 hex of sha1(url)>.<ext>`;
   `raw.githubusercontent.com` needs `allowed_domains` in the sandbox.
-* Run `resize_images.py --path <new path>` per bundle, then gallery-ify body images.
+* Run `resize_images.py --path <new path>` per bundle, then gallery-ify body images
+  and write the missing alt text ("Describe every image" in `schedule-posts`).
 * The folder date and the frontmatter `date` must agree: both come from the table.
 
 ## 4. Verify once

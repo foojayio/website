@@ -23,7 +23,7 @@ In [part 1 of this series](https://foojay.io/today/new-user-interface-for-jfx-ce
 
 *CEO of Senapt GmbH \& DLSC Software \& Consulting GmbH, [@dlemmermann](https://twitter.com/dlemmermann)*
 
-{{< img src="dirk-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="dirk-300x260.jpg" alt="Portrait of Dirk Lemmermann, smiling man with glasses" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in JavaFX and JavaFX development?**
 
@@ -65,7 +65,7 @@ Up until the final release of JavaFX 8, we could frequently see new features bei
 
 *JavaFX developer and freelancer, [@LeeWyatt_7788](https://twitter.com/LeeWyatt_7788)*
 
-{{< img src="liwang-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="liwang-300x260.jpg" alt="Portrait of Li Wang, man with glasses and arms crossed in a dark T-shirt" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 
@@ -103,7 +103,7 @@ I owe profound gratitude to Mr. Dirk Lemmermann for the invaluable opportunities
 
 *CO-Founder and CTO at Sandec GmbH, [@FlorianKirmaier](https://twitter.com/FlorianKirmaier)*
 
-{{< img src="florian-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="florian-300x260.jpg" alt="Portrait of Florian Kirmaier, dark-haired man in a white collarless shirt" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 
@@ -157,7 +157,7 @@ Additionally, we'll make public various libraries we've created and employed in 
 
 *Founder Hydraulic Software*
 
-{{< img src="mike-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="mike-300x260.jpg" alt="Black and white portrait of Mike Hearn, smiling man in a plaid shirt with arms crossed" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 

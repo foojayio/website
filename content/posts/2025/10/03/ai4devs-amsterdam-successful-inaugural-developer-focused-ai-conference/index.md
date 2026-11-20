@@ -37,7 +37,7 @@ The full-day event featured in-depth technical sessions, real-world AI implement
 
 With its laser-focused, developer-centric approach and intimate setting, AI4Devs Amsterdam successfully established itself as a premier destination for practical AI knowledge.
 
-{{< img src="ing-ai4devs-1024x493.png" class="size-large is-resized" width="1024" height="493" style="width:523px;height:auto" >}}
+{{< img src="ing-ai4devs-1024x493.png" alt="LinkedIn post by ING Nederland saying they sponsored the first AI4Devs event in Amsterdam, with a practical, code-focused agenda" class="size-large is-resized" width="1024" height="493" style="width:523px;height:auto" >}}
 
 The inaugural event sets a strong foundation for future editions, demonstrating clear demand for technical, code-heavy AI conferences in the European market and beyond.
 

@@ -26,7 +26,7 @@ Here, I'd like to focus on improvements in Java garbage collection that Cassandr
 
 In 2012, I gave a talk titled, "Dealing with JVM Limitations in Apache Cassandra." Here is the first slide from that presentation:
 
-{{< img src="paintpointsforjavadatabases.jpg" class="size-full is-resized" width="734" >}}
+{{< img src="paintpointsforjavadatabases.jpg" alt="Opening slide from a 2012 talk titled 'Pain points for Java databases' listing GC three times" class="size-full is-resized" width="734" >}}
 
 On the one hand, garbage collection is a primary reason that Java is so much more productive than traditional systems languages like C++. As JVM architect Cliff Click once wrote, "Many concurrent algorithms are very easy to write with a GC and totally hard to downright impossible using explicit free." Cassandra takes full advantage of this power.
 
@@ -40,7 +40,7 @@ The Z Garbage Collector (ZGC) was created to address this situation, and specifi
 
 To show how well ZGC improves Cassandra performance, we compared both throughput and latency in three environments: Cassandra 3.11 running on JDK 8 with its default CMS GC settings, Cassandra 4.0 running on JDK 8 with the same settings, and Cassandra 4.0 running on JDK 16 with ZGC. I'm pleased to report that ZGC convincingly achieves its design goals, allowing Cassandra to deliver nearly-constant latencies through the 99th percentile, with only a modest uptick at the 99.9th percentile!
 
-{{< img src="JAX_LDN21_728x90_61392_v1.jpg" class="size-large is-resized" width="716" >}}
+{{< img src="JAX_LDN21_728x90_61392_v1.jpg" alt="Banner for JAX London, 4 to 7 October 2021, in London or online" class="size-large is-resized" width="716" >}}
 
 ## ZGC performance results
 
@@ -59,7 +59,7 @@ Cassandra 4.0 running with the same configuration as Cassandra 3.11 is 30% faste
 I've split the latency results into one chart per workload so it's easier to see the trends across the different percentiles:
 ![Line chart of key/value latencies: 3.11 and 4.0 CMS reach about 42 ms at p999 while ZGC stays around 6 ms](workloadlatencies.png)
 
-{{< img src="timeseries-768x475-1.png" class="size-large is-resized" width="512" >}}
+{{< img src="timeseries-768x475-1.png" alt="Line chart of timeseries latencies: ZGC stays at 12 ms at p999, while Cassandra 3.11 and 4.0b4 CMS reach 86 ms and above" class="size-large is-resized" width="512" >}}
 
 ![Line chart of tabular workload latencies: 3.11 and 4.0 CMS reach 40-42 ms at p999, ZGC about 11 ms](tabular.png)
 

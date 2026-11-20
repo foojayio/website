@@ -66,7 +66,7 @@ For more detailed information, please refer to the [documentation](https://devel
 
 The Spring team was the first to offer a Web UI to configure one's project, the [Spring Initializr](https://start.spring.io/).
 
-{{< img src="spring-initializr-700x331.jpg" class="aligncenter size-medium" width="700" height="331" >}}
+{{< img src="spring-initializr-700x331.jpg" alt="Spring Initializr configured for a Maven Kotlin project with Spring Native and Spring Reactive Web dependencies" class="aligncenter size-medium" width="700" height="331" >}}
 
 With it, you can configure the following parameters:
 
@@ -78,7 +78,7 @@ With it, you can configure the following parameters:
 
 Additionally, the application also offers a REST API to use the CLI and automate repetitive tasks. IntelliJ IDEA integrates the REST API, so you can create a new project while not leaving your IDE.
 
-{{< img src="spring-intellij-689x510.jpg" class="aligncenter size-medium" width="689" height="510" >}}
+{{< img src="spring-intellij-689x510.jpg" alt="IntelliJ IDEA New Project dialog for Spring Boot 2.5.6 with Spring Reactive Web and Spring Native added" class="aligncenter size-medium" width="689" height="510" >}}
 
 Finally, while it's hosted, the underlying code is [available on GitHub](https://github.com/spring-io/initializr) under the Apache v2 license so that you can clone and configure it. It's designed with extensibility in mind to allow for upgrades.
 

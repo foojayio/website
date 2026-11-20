@@ -19,7 +19,7 @@ related_posts:
 
 **Welcome, Frank!** **Tell us about yourself. 🙂**  
 
-{{< img src="pasfoto-2.jpg" class="alignleft size-large is-resized" width="173" height="208" >}}
+{{< img src="pasfoto-2.jpg" alt="Portrait of Frank Delporte, wearing glasses and a black sweater" class="alignleft size-large is-resized" width="173" height="208" >}}
 
 Hi, I'm Frank Delporte, living in Belgium. I started programming when I was 10 on my Commodore 64.
 

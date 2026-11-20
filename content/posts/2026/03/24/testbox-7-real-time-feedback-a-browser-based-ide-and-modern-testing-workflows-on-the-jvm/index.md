@@ -45,7 +45,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 * **Real-time streaming test tree** — live updates per spec, not per suite
 * **Dark / Light theme** with `localStorage` persistence
 
-{{< img src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" class="aligncenter size-medium" width="509" height="510" >}}
+{{< img src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" alt="TestBox Run browser UI listing the AssertionsTest xUnit suite with its specs, all counters at zero before the run" class="aligncenter size-medium" width="509" height="510" >}}
 
 * **Live search + status filters** — filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 

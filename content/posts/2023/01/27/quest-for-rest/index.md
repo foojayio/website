@@ -113,7 +113,7 @@ A common issue with REST is the lack of standards; HATEOAS is no different. The 
 
 Here's a quick diagram that summarizes the proposal:
 
-{{< img src="hal-700x291.png" class="size-medium aligncenter" width="700" height="291" >}}
+{{< img src="hal-700x291.png" alt="UML diagram of HAL: a Resource Object holds _links to Resource Links with href, type and title, and _embedded objects" class="size-medium aligncenter" width="700" height="291" >}}
 
 We can rework the above with HAL as the following:
 

@@ -15,7 +15,7 @@ related_posts:
 
 Last week, I [described a use-case](https://blog.frankel.ch/real-world-stream-collector/) for a custom Stream `Collector`. I received a intriguing comment on Twitter:
 
-{{< img src="Screenshot-2021-05-09-at-15.31.46-700x171.png" class="aligncenter size-medium" width="700" height="171" >}}
+{{< img src="Screenshot-2021-05-09-at-15.31.46-700x171.png" alt="Tweet from Miguel Martins replying that this problem could also be solved with the standard teeing collector" class="aligncenter size-medium" width="700" height="171" >}}
 
 Hats off to you, Miguel! Your comment revealed a method I didn't know!
 

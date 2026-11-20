@@ -22,7 +22,7 @@ Between 2nd and 17th September, I gave three talks in three different cities:
 
 I traveled from Karlsruhe to Oslo (via Stuttgart Airport) and from Oslo to Hanover via plane, then to Hamburg, Hanover, back to Hamburg, and the end via Bonn back to Karlsruhe via train:  
 
-{{< img src="image-14.jpg" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
+{{< img src="image-14.jpg" alt="Map route from Oslo via Hamburg, Hanover and Bonn back to Karlsruhe, showing the trip by plane and train" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
 
 This was my second two-week-long tour giving talks, after my tour d'Europe in May/June this year (see [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/)), but this time it consisted solely of talks at conferences. The following is a short report of my trip that saw me brewing beer, giving a talk at one of my favorite conferences, and visiting Hamburg for the first time.
 
@@ -108,7 +108,7 @@ In the evening, I ate dinner with a couple of my fellow speakers, including [Mar
 
 The next day was my last in Oslo before moving to northern Germany. So I took the chance to explore the city center once more and made a photograph of the speaker's gift:  
 
-{{< img src="IMG_2091-2000x1500-3d1b7439.jpeg" class="aligncenter size-large is-resized" width="614" height="454" style="width:614px;height:454px" caption="A Viking duke in front of the Oslo Stock Exchange" >}}
+{{< img src="IMG_2091-2000x1500-3d1b7439.jpeg" alt="Java Duke mascot figurine wearing a Viking helmet on a stone quay, with Oslo buildings and water behind" class="aligncenter size-large is-resized" width="614" height="454" style="width:614px;height:454px" caption="A Viking duke in front of the Oslo Stock Exchange" >}}
 
 I had to say goodbye to Oslo and then traveled to Hamburg via Hanover Airport to stay with a friend in Hamburg.
 

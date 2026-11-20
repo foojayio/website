@@ -138,15 +138,15 @@ If you didn't do it already, customize the [OAuth Consent Screen](https://consol
 
 In the project context, navigate *APIs \& Services \| Credentials*.
 
-{{< img src="google-cloud-credentials-526x510.jpg" class="aligncenter size-medium" width="526" height="510" >}}
+{{< img src="google-cloud-credentials-526x510.jpg" alt="Google Cloud console menu with APIs & Services expanded and the Credentials entry highlighted, in project openid-connect-demo" class="aligncenter size-medium" width="526" height="510" >}}
 
 Then, press the *+ CREATE CREDENTIALS* button in the upper menu bar.
 
-{{< img src="google-cloud-create-credentials-700x72.jpg" class="aligncenter size-medium" width="700" height="72" >}}
+{{< img src="google-cloud-create-credentials-700x72.jpg" alt="Google Cloud Credentials page toolbar with the '+ CREATE CREDENTIALS' button" class="aligncenter size-medium" width="700" height="72" >}}
 
 Select *OAuth Client Id* in the scrolling menu.
 
-{{< img src="google-cloud-choose-credentials-700x447.jpg" class="aligncenter size-medium" width="700" height="447" >}}
+{{< img src="google-cloud-choose-credentials-700x447.jpg" alt="Google Cloud 'Create credentials' menu with options API key, OAuth client ID, Service account and Help me choose" class="aligncenter size-medium" width="700" height="447" >}}
 
 Fill in the fields:
 
@@ -166,7 +166,7 @@ The last missing variable is `OIDC_ISSUER`: it's `accounts.google.com`. If you n
 
 At this point, we can start our setup with `docker compose up`. When we navigate to , the browser redirects us to the Google authentication page. Since I'm already authenticated, I can choose my ID - and I need one bound to the organization of the project I created above.
 
-{{< img src="google-auth-choose-account-457x510.jpg" class="aligncenter size-medium" width="457" height="510" >}}
+{{< img src="google-auth-choose-account-457x510.jpg" alt="Google 'Choose an account' sign-in screen for Openid Connect Demo listing two accounts" class="aligncenter size-medium" width="457" height="510" >}}
 
 Then, I can freely access the resource.
 

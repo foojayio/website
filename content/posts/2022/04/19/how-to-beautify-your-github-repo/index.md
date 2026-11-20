@@ -65,7 +65,7 @@ You can choose any license you want, but the GitHub provides a good help for Ope
 
 You can choose one to check its content. GitHub displays its permissions, limitations, and conditions:
 
-{{< img src="license-properties-700x226.jpg" class="aligncenter size-medium" width="700" height="226" >}}
+{{< img src="license-properties-700x226.jpg" alt="GitHub license panel for the Unlicense: permissions allow private and commercial use, limitations exclude liability and warranty" class="aligncenter size-medium" width="700" height="226" >}}
 
 You can now *Review and submit*. At this point, you are faced with three choices:
 
@@ -75,7 +75,7 @@ You can now *Review and submit*. At this point, you are faced with three choices
 
 After adding the license, GitHub displays it on the right of the repository's page.
 
-{{< img src="cite-sidebar-548x510.jpg" class="aligncenter size-medium" width="548" height="510" >}}
+{{< img src="cite-sidebar-548x510.jpg" alt="GitHub 'Cite this repository' popup showing an APA citation and a 'View citation file' button" class="aligncenter size-medium" width="548" height="510" >}}
 
 For more details, check the [documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 
@@ -110,7 +110,7 @@ Here's a quick sum-up of how GitHub handles it:
 
 GitHub skips invalid configuration lines. To verify, you can use the UI:
 
-{{< img src="check-codeowners-700x291.jpg" class="size-medium aligncenter" width="700" height="291" >}}
+{{< img src="check-codeowners-700x291.jpg" alt="GitHub CODEOWNERS file page with the message 'This CODEOWNERS file is valid'" class="size-medium aligncenter" width="700" height="291" >}}
 
 ## SECURITY
 
@@ -162,7 +162,7 @@ license: Unlicense
 
 After adding the file, a new *Cite this repository* link appears on the right sidebar. You can choose which format you want to copy, APA or BibTeX when you click it.
 
-{{< img src="cite-sidebar-1-548x510.jpg" class="aligncenter size-medium" width="548" height="510" >}}
+{{< img src="cite-sidebar-1-548x510.jpg" alt="GitHub 'Cite this repository' popup offering APA and BibTeX formats" class="aligncenter size-medium" width="548" height="510" >}}
 
 ## Sponsorship
 
@@ -179,7 +179,7 @@ custom:
 
 The preview tab validates your input.
 
-{{< img src="validate-funding-571x510.jpg" class="size-medium aligncenter" width="571" height="510" >}}
+{{< img src="validate-funding-571x510.jpg" alt="GitHub Sponsor dialog with a red error that FUNDING.yml lists users not enrolled in GitHub Sponsors" class="size-medium aligncenter" width="571" height="510" >}}
 
 In this case, the validation fails by telling that user `nfrankel` (me) didn't enroll in the GitHub sponsors program.
 

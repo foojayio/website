@@ -23,7 +23,7 @@ Recently, I mentioned [how I refactored](https://blog.frankel.ch/kotlin-scriptin
 
 [
 
-{{< img src="Screenshot-2024-03-10-at-17.20.56-557x510.jpg" class="aligncenter size-medium" width="557" height="510" >}}
+{{< img src="Screenshot-2024-03-10-at-17.20.56-557x510.jpg" alt="Tweet photo of three people at GeeCON Prague, one holding a Raspberry Pi kit won in a prize draw" class="aligncenter size-medium" width="557" height="510" >}}
 
 ](https://twitter.com/nicolas_frankel/status/1715313240568197233)
 

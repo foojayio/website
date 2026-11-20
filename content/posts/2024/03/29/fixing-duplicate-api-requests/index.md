@@ -46,7 +46,7 @@ The spec describes the following flow:
 
 [
 
-{{< img src="idempotency-key-sequence-448x510.png" class="aligncenter size-medium" width="448" height="510" >}}
+{{< img src="idempotency-key-sequence-448x510.png" alt="Sequence diagram: client sends a unique key, the server stores the request and returns the stored response if one exists, else computes and stores one" class="aligncenter size-medium" width="448" height="510" >}}
 
 ](idempotency-key-sequence.png)
 

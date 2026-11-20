@@ -17,7 +17,7 @@ related_posts:
 
 Shai Almog's "[Java Basics: A Practical Introduction to Full Stack Java](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack/dp/B0CCCJ38WH)" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author having a track record going back to leading Java mobile efforts all the way back to Sun Microsystems.
 
-{{< img src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" class="size-full is-resized" width="290" height="362" style="width:290px;height:362px" >}}
+{{< img src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" alt="Cover of Java Basics: A Practical Introduction to Full-Stack Java by Shai Almog, yellow with binary digits" class="size-full is-resized" width="290" height="362" style="width:290px;height:362px" >}}
 
 **Thoroughness and Ambition**
 

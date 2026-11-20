@@ -20,7 +20,7 @@ The third in a series of SBOMs, software supply chains, the government and you (
 
 Yes, just like the previous articles, we have cake this time too - this one is a three tiered extravaganza!  
 
-{{< img src="Unknown-300x260.jpg" class="aligncenter size-thumbnail" width="300" height="260" >}}
+{{< img src="Unknown-300x260.jpg" alt="Colourful painted illustration of a three-tiered cake with a candle on a purple background" class="aligncenter size-thumbnail" width="300" height="260" >}}
 
 So… still with us? Good!
 

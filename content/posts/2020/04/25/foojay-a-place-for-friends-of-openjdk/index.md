@@ -27,7 +27,7 @@ Together with Java enthusiasts around the world, the foojay team works to identi
 
 [Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://javaalmanac.io/jdk/8/), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/today/dashboard-for-openjdk-update-release-details/).  
 
-{{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="88" height="100" caption="Marc Hoffmann" >}}
+{{< img src="Screenshot-2020-08-21-at-09.20.34.png" alt="Photo of Marc Hoffmann wearing sunglasses outdoors by the water" class="alignleft size-large is-resized" width="88" height="100" caption="Marc Hoffmann" >}}
 
 A key contributor to foojay is [Marc Hoffmann](https://twitter.com/marcandsweep). On his [javaalmanac.io](http://javaalmanac.io), he presents extensive data on each Java release, with details on distributions, new features, and API differences between releases.
 
@@ -39,7 +39,7 @@ Take special note at the lower end of each page of the almanac, where you'll fin
 
 [Go here to explore the Java Version Almanac on foojay](https://javaalmanac.io/jdk/8), with thanks to Marc.  
 
-{{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="92" height="92" caption="Chris Newland" >}}
+{{< img src="0-2.jpeg" alt="Photo of Chris Newland, smiling, in a pink shirt" class="alignleft size-large is-resized" width="92" height="92" caption="Chris Newland" >}}
 
 Another key contributor to foojay is [Chris Newland](https://twitter.com/chriswhocodes), who's gathered extensive data sets on JVM command line arguments, which he hosts on his own [chriswhocodes.com](http://chriswhocodes.com).   
 
@@ -54,13 +54,13 @@ The Java community is rich with up to date and cutting edge insights and knowled
 
 Let's introduce some of the bloggers active on foojay.  
 
-{{< img src="b4927414dd9dfdd1d7f5973a880dccea.png" class="alignleft size-large is-resized" width="73" height="73" >}}
+{{< img src="b4927414dd9dfdd1d7f5973a880dccea.png" alt="Small photo of Marcus Hirt wearing sunglasses" class="alignleft size-large is-resized" width="73" height="73" >}}
 
 **Marcus Hirt** is the project lead for the Open JDK JMC project. Once upon the time he co-founded Appeal, the company creating the JRockit JVM.
 
 Marcus blogs on topics relating to Java Mission Control (JMC) and Java Flight Recorder (JFR). [Check out his posts here.](https://foojay.io/today/author/hirt/)  
 
-{{< img src="51e2bcc080bf5b4acaf66b8071f80610.png" class="alignleft size-large is-resized" width="73" height="73" >}}
+{{< img src="51e2bcc080bf5b4acaf66b8071f80610.png" alt="Small photo of Kevin Farnham, smiling, outdoors" class="alignleft size-large is-resized" width="73" height="73" >}}
 
 **Kevin Farnham** is a technology writer and software engineer. He's focused on high-performance low-latency big-data Java, Python, C/C++ programming.
 

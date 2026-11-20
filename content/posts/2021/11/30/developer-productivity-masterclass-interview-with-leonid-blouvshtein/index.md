@@ -22,7 +22,7 @@ related_posts:
 
 [
 
-{{< img src="devprodmaster-700x227.jpg" class="size-medium" width="700" height="227" >}}
+{{< img src="devprodmaster-700x227.jpg" alt="Developer Productivity Masterclass banner with speakers from Netflix, Meta, HashiCorp and Lightrun, plus the Lightrun logo" class="size-medium" width="700" height="227" >}}
 
 ](https://www.linkedin.com/events/developerproductivitymasterclas6870717107772907520/)
 

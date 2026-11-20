@@ -18,7 +18,7 @@ related_posts:
 
 I was searching for some JFR-related settings on the internet when I stumbled upon the [`/jfr` command](https://minecraft.fandom.com/wiki/Commands/jfr) that exists in [Minecraft](https://www.minecraft.net):  
 
-{{< img src="image-2-636eafaf.jpg" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
+{{< img src="image-2-636eafaf.jpg" alt="Minecraft Wiki page for the /jfr command, which starts and stops profiling with Java Flight Recorder" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 This, of course, intrigued me, especially as Minecraft apparently adds some custom JFR events:
 [![Documentation list of custom Minecraft JFR events: ServerTickTime, ChunkGeneration, PacketRead, PacketSent and WorldLoadFinishedEvent](image-3-b9708eb4.png)](https://minecraft.fandom.com/wiki/Commands/jfr)
@@ -27,7 +27,7 @@ So I had to check it out. I downloaded and started the [Java server](https://www
 
 You then must ensure that you have OP privileges and add them, if not via the Minecraft server shell. Then, you can type `/jfr start` in the chat (launch it by typing <kbd>T</kbd>) to start the recording and `/jfr stop` to stop it.  
 
-{{< img src="Screenshot-from-2023-11-17-15-47-07-b4d3289b.jpg" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
+{{< img src="Screenshot-from-2023-11-17-15-47-07-b4d3289b.jpg" alt="Minecraft game window at night with '/jfr start' typed in the chat bar" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 *You see that it's my first time "playing" Minecraft, and I'm great at getting attacked. It's probably also my last time.*
 

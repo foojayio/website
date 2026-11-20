@@ -17,7 +17,7 @@ related_posts:
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="width:840px;height:auto" >}}
+{{< img src="tue11.png" alt="MongoDB banner reading 'Love Your Developers' with the MongoDB logo and floating document icons" class="size-full is-resized" width="700" height="307" style="width:840px;height:auto" >}}
 
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 

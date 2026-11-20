@@ -135,7 +135,7 @@ We shall use Maven to generate the Java boilerplate code:
 
 After compilation, the structure should look something like the following:
 
-{{< img src="model-project-structure-444x510.jpg" class="aligncenter size-medium" width="444" height="510" >}}
+{{< img src="model-project-structure-444x510.jpg" alt="IntelliJ project tree of the model module: model.proto under src/main/proto and generated gRPC and protobuf Java classes under target" class="aligncenter size-medium" width="444" height="510" >}}
 
 We can package the classes in a JAR and use it in a web app project. The latter is in Kotlin, but only because it's my favourite JVM language.
 

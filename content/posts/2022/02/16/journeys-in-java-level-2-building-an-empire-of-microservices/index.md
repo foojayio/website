@@ -189,7 +189,7 @@ Start each of the applications, either through your IDE or via the command line.
 
 And here is the resulting output!
 
-{{< img src="microservices-lvl2-results-1-611x510.png" class="size-medium" width="611" height="510" >}}
+{{< img src="microservices-lvl2-results-1-611x510.png" alt="Browser at localhost:8080/hello showing a JSON list of four books with bookId, title and author" class="size-medium" width="611" height="510" >}}
 
 ## Wrapping up!
 

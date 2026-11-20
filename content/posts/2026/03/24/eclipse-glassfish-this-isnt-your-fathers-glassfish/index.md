@@ -74,7 +74,7 @@ Eclipse GlassFish was the **first to pass the Jakarta EE 11 Web Profile and Jaka
 
 Embedded GlassFish has grown from a developer-focused tool into a **production-ready, lightweight runtime** . It's now a viable option for running microservices from the [command line](https://omnifish.ee/run-your-apps-with-glassfish-from-the-command-line/) or in [cloud containers](https://github.com/eclipse-ee4j/glassfish.docker/wiki/Example:-Using-Embedded-GlassFish-with-the-docker-Command). With the inclusion of MicroProfile APIs and JMX monitoring, Embedded GlassFish offers the same power and observability as the full server in a smaller footprint.  
 
-{{< img src="Embedded-GlassFish-featured-300x260.png" class="aligncenter size-thumbnail" width="300" height="260" >}}
+{{< img src="Embedded-GlassFish-featured-300x260.png" alt="Embedded GlassFish title above the GlassFish fish logo and a server icon" class="aligncenter size-thumbnail" width="300" height="260" >}}
 
 ### Performance and Security at the Core
 
@@ -89,7 +89,7 @@ On the security front, GlassFish now supports the **PKCS12 keystore format**and 
 * [GlassFish 8 Released: Enterprise-Grade Java, Redefined. What's new?](https://omnifish.ee/blog/glassfish-8-released-enterprise-grade-java-redefined/)
 * [Azul Acquires Payara: GlassFish Supported by OmniFish Is A Reliable Choice](https://omnifish.ee/blog/azul-acquires-payara-glassfish-supported-by-omnifish-is-a-reliable-choice/)
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: stylized fish skeleton in a teal circle" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 ## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 

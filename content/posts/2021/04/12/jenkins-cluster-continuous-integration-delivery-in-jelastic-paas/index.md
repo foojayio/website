@@ -33,7 +33,7 @@ In this article, we'll describe how to install Jenkins cluster with slave nodes 
 
 3. As shown in the picture below, the deployed Jenkins topology comprises one master node and two worker nodes.
 
-{{< img src="jenkins-cluster-environment-1-75a3b813.png" class="size-medium" width="625" height="254" >}}
+{{< img src="jenkins-cluster-environment-1-75a3b813.png" alt="Jelastic dashboard showing a running Jenkins DevOps Pack with one master node and two Java Engine workers" class="size-medium" width="625" height="254" >}}
 
 ### Installation as New Environment
 
@@ -53,7 +53,7 @@ Change the number of executors and apply changes with the **Save** button.
 
 For example you build tasks stuck in a long queue, the worker nodes can be [scaled out horizontally](https://jelastic.com/blog/horizontal-scaling-of-cloud-environments-stateless-stateful-automatic/) either manually or automatically for speeding up a large number of the project builds. In such cases, the package ensures an automatic discovery of new worker nodes by the Jenkins master node. It takes just a couple minutes to expand cluster e.g. up to 10 workers.
 
-{{< img src="jenkins-cluster-cicd-1-b663e931.png" class="size-medium" width="711" height="154" >}}
+{{< img src="jenkins-cluster-cicd-1-b663e931.png" alt="Jelastic environment 'myjenkins' with the Change Environment Topology button highlighted by a tooltip" class="size-medium" width="711" height="154" >}}
 
 Press **Change Environment Topology** and choose Workers layer (Java Engine) and do horizontal scaling with + button in the **Horizontal Scaling** section of the wizard. It's also preferable to choose **stateless** scaling mode as we do not store any important state in the workers.
 
@@ -117,7 +117,7 @@ As for our example, we use four variables defined globally for the project:
 * **JELASTIC_API_ENDPOINT** - Defines destination hosting platform hostname. See Hoster Domain field in the list of [Jelastic Hosting Providers](https://docs.jelastic.com/jelastic-hoster-info).
 * **TARGET_ENV** - deployment destination environment [shortdomain](https://docs.jelastic.com/create-env-api) name within the destination hosting platform. The destination environment must have a Java application server, here we use [Tomcat](https://docs.jelastic.com/tomcat). You can deploy to a single node environment or clusterized one.  
 
-{{< img src="Jenkins-Cluster-Domain-2-1178226b.png" class="size-medium" width="841" height="195" >}}
+{{< img src="Jenkins-Cluster-Domain-2-1178226b.png" alt="Jelastic environment settings with the environment name field and the ROOT deployment of helloworld.war highlighted in red" class="size-medium" width="841" height="195" >}}
 
 * **TOKEN** - access token for the platform on which the deployment environment is located.Set the **Description** for new access token and expiry date, then in the **API** field use a predefined **Maven Plugin** template which will allow the DeployApp API method to be executed. The respective access parameters will be selected automatically.  
   ![Jelastic Generate Access Token dialog with description 'App Deployment' and the Maven Plugin API selected](Jenkins-Cluster-Access-Token-1-8609f112.png)
@@ -170,7 +170,7 @@ If the build procedure succeeds, it means that Jenkins deployed the result appli
 
 Click on the **Open in Browser** button at the destination server to make sure the deployment was performed properly.
 
-{{< img src="Jenkins-Cluster-Java-Application-Deploym-35423ef2.png" class="size-medium" width="838" height="194" >}}
+{{< img src="Jenkins-Cluster-Java-Application-Deploym-35423ef2.png" alt="Jelastic environment running helloworld.war on Tomcat, with the Open in Browser button highlighted" class="size-medium" width="838" height="194" >}}
 
 The *helloworld.war* application web page should be displayed as follows.
 

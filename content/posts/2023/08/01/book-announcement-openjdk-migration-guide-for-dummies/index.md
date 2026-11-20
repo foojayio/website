@@ -24,7 +24,7 @@ But if you have a variety of specialized Java applications, created at different
 
 But, worry no more, Java Champion Simon Ritter has you covered in a new (free) book.
 
-{{< img src="image-764x1024.jpg" class="size-large is-resized" width="372" height="499" >}}
+{{< img src="image-764x1024.jpg" alt="Cover of OpenJDK Migration for Dummies, Azul Special Edition, with the cartoon Dummies character" class="size-large is-resized" width="372" height="499" >}}
 
 This handy book offers a concise, fun-to-read overview of OpenJDK migration:
 

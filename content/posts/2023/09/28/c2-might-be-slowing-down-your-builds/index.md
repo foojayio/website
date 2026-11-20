@@ -62,7 +62,7 @@ Does this mean that you should always disable C2 in CI builds? No. At a certain 
 
 Take, for example, [quarkus](https://quarkus.io/): A clean build on two cores runs for 430s (710s cpu-time) with C2 enabled:
 
-{{< img src="image-9-2000x383-584a7e9f.jpg" class="size-large is-resized" width="614" height="126" style="width:614px;height:126px" caption="Quarkus (af4208a05e) built with maven 3.8.8 on SapMachine 17.0.8.1 and ./mvnd -Dquickly" >}}
+{{< img src="image-9-2000x383-584a7e9f.jpg" alt="Flame graph of a Maven build: the green Java frames run on one side and yellow C2 compiler threads dominate the other" class="size-large is-resized" width="614" height="126" style="width:614px;height:126px" caption="Quarkus (af4208a05e) built with maven 3.8.8 on SapMachine 17.0.8.1 and ./mvnd -Dquickly" >}}
 
 The runtime proportions are less skewed in the direction of C2:
 

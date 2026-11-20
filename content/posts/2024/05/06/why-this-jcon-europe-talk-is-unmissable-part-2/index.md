@@ -17,7 +17,7 @@ related_posts:
 
 **[JCON Europe](https://2024.europe.jcon.one/) in Cologne is around the corner ([and here are your free Foojay JCON tickets](https://bit.ly/3xv9yfT)), May 13 to 16. Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!**
 
-{{< img src="image.jpg" class="size-full is-resized" width="1024" height="682" style="width:582px;height:auto" >}}
+{{< img src="image.jpg" alt="Portrait of a smiling man in a black jacket with an Oracle Groundbreaker Ambassador logo" class="size-full is-resized" width="1024" height="682" style="width:582px;height:auto" >}}
 
 ### Jakarta EE 11 - Performance and Developer Productivity - Ivar Grimstad
 

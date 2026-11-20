@@ -43,7 +43,7 @@ SDKMAN! will automatically set **JAVA_HOME** and make the JDK available to Torna
 
 TornadoVM SDKs come as ZIP archives tailored for different operating systems, CPU architectures, and accelerator backends. Choose the SDK that matches your setup from the official [++TornadoVM webpage++](https://www.tornadovm.org/downloads) or the [SDKMAN! TornadoVM page](https://sdkman.io/sdks/tornadovm/).  
 
-{{< img src="tornadovm-sdkman-1024x617.png" class="aligncenter size-large is-resized" width="1024" height="617" style="width:578px;height:auto" >}}
+{{< img src="tornadovm-sdkman-1024x617.png" alt="SDKMAN page for TornadoVM 2.2.0-opencl showing the install command 'sdk install tornadovm'" class="aligncenter size-large is-resized" width="1024" height="617" style="width:578px;height:auto" >}}
 
 You can choose a backend-specific build:
 

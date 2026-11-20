@@ -38,7 +38,7 @@ When you do any code changes, only your changes are rebuilt, not your entire app
 
 [
 
-{{< img src="jib-ashish-700x400.png" class="size-medium" width="700" height="400" >}}
+{{< img src="jib-ashish-700x400.png" alt="IntelliJ editor with a Spring Boot Controller whose /hello endpoint returns 'Hello from Jib!!!!!!!!!!!!'" class="size-medium" width="700" height="400" >}}
 
 ](https://www.youtube.com/watch?v=vizfV2opkfU)
 

@@ -52,7 +52,7 @@ try (Component component = new Component()) {
 
 However, `Component` must implement `AutoCloseable`.
 
-{{< img src="auto-closeable-api-278x510.png" class="aligncenter size-medium" width="278" height="510" >}}
+{{< img src="auto-closeable-api-278x510.png" alt="UML class diagram: Component in my.package has close(), while Closeable extends AutoCloseable but Component does not implement it" class="aligncenter size-medium" width="278" height="510" >}}
 
 Kotlin provides the `use()` extension function on `Closeable`.  
 

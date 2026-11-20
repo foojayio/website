@@ -97,7 +97,7 @@ In that case you'll need to follow these steps:
 
 Gluon has created the website [start.gluon.io](https://start.gluon.io/) to start a new JavaFX project, the same way you can also do for Spring with [start.spring.io](https://start.spring.io/), or Quarkus with [code.quarkus.io](https://code.quarkus.io/).
 
-{{< img src="start-gluon-io-minimal-675x510.png" class="size-medium" width="675" height="510" caption="Minimal selections for a JavaFX application on start.gluon.io" >}}
+{{< img src="start-gluon-io-minimal-675x510.png" alt="start.gluon.io form with name, group and artifact fields, JavaFX 15 with base, graphics and controls modules, and Gluon features" class="size-medium" width="675" height="510" caption="Minimal selections for a JavaFX application on start.gluon.io" >}}
 
 For a minimal JavaFX project, you only need to define the "Application Details" and select the version and modules you are going to need.
 
@@ -105,11 +105,11 @@ As Gluon also offers additional features and you can use their tools to build mo
 
 A nice feature of this site is the "Preview Project" button which will show you the structure of your project before you download it.
 
-{{< img src="start-gluon-io-preview-700x496.png" class="size-medium" width="700" height="496" caption="Preview of the project before downloading" >}}
+{{< img src="start-gluon-io-preview-700x496.png" alt="Project preview dialog on start.gluon.io showing the generated file tree with Main.java, README.md and pom.xml" class="size-medium" width="700" height="496" caption="Preview of the project before downloading" >}}
 
 By clicking the "Generate Project" button, you will get a ZIP with the full project you can open in your IDE and run immediately with `mvn javafx:run`.
 
-{{< img src="start-gluon-io-running-700x372.png" class="size-medium" width="700" height="372" caption="The created application running in IntelliJ IDEA" >}}
+{{< img src="start-gluon-io-running-700x372.png" alt="Generated JavaFX app running beside IntelliJ IDEA, showing the Duke mascot and the text 'Hello, JavaFX 15, running on Java 11.0.7.'" class="size-medium" width="700" height="372" caption="The created application running in IntelliJ IDEA" >}}
 
 ### Create a New Mobile Project with the Gluon Plugin in IntelliJ IDEA
 

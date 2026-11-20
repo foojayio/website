@@ -63,7 +63,7 @@ More information:
 * [OmniFaces Jakarta EE 2020 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 * [OmniFaces Jakarta EE 2018 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a stylised yellow and green fish skeleton in a teal circle" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

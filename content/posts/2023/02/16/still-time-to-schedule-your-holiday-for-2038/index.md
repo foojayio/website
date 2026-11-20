@@ -42,7 +42,7 @@ October 23st of 1982    -->     821023
 January 1st of 2000     -->     000101
 ```
 
-{{< img src="y2k-454x510.jpg" class="size-medium" width="454" height="510" caption="News paper cover announcing the end of the world because of the Y2K bug" >}}
+{{< img src="y2k-454x510.jpg" alt="Weekly World News cover predicting banks failing and the Earth standing still on January 1, 2000 because of Y2K" class="size-medium" width="454" height="510" caption="News paper cover announcing the end of the world because of the Y2K bug" >}}
 
 Luckily, most systems were patched before the world was able to collapse and the Y2K-bug disappeared very quickly.
 

@@ -183,7 +183,7 @@ Event modeling is a blueprint for a solution. Some think that storming and model
 
 [
 
-{{< img src="Screenshot-2022-05-29-at-09.23.42-477x510.png" class="aligncenter size-medium" width="477" height="510" >}}
+{{< img src="Screenshot-2022-05-29-at-09.23.42-477x510.png" alt="Tweet by Adam Dymitruk joking about an event modeling zoo exercise, with a sticky note reading 'Guest eaten by animal' and a bear photo" class="aligncenter size-medium" width="477" height="510" >}}
 
 ](https://twitter.com/adymitruk/status/1443582579425230848)
 

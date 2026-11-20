@@ -52,7 +52,7 @@ Two critical concepts emerge from the document:
 * A **trace** follows the path of a request that spans multiple components
 * A **span** is bound to a single component and linked to another span by a child-parent relationship
 
-{{< img src="trace-spans-700x268.png" class="aligncenter size-medium" width="700" height="268" >}}
+{{< img src="trace-spans-700x268.png" alt="Sketch of a single trace containing span X with child spans Y and Z" class="aligncenter size-medium" width="700" height="268" >}}
 
 At the time of this writing, the specification is a W3C recommendation, which is the **final** stage.
 

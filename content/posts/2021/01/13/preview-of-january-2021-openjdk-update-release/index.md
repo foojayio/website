@@ -15,15 +15,15 @@ On the Tuesday closest to the 17th day of January, April, July, and October unde
 
 For the January 2021 update, set to be released next week, a preview list of the fixes that will be in that update is available from today [on foojay.io, on the frontpage,](https://foojay.io/) you'll see a new button providing you access to the preview list:
 
-{{< img src="image-4-1024x206.png" class="size-large is-resized" width="1042" height="209" >}}
+{{< img src="image-4-1024x206.png" alt="foojay.io 'What's New in OpenJDK?' list of update releases from October 2019 to January 2021 (preview)" class="size-large is-resized" width="1042" height="209" >}}
 
 For each major release where there's an update for January 2021, you'll find an update number in the drop-down, enabling you to see what's been fixed for the update in relation to that release.
 
-{{< img src="image-6-1024x677.png" class="size-large is-resized" width="553" height="366" >}}
+{{< img src="image-6-1024x677.png" alt="foojay.io OpenJDK update page for Java 11 with a drop-down of update releases from 11.0.5 (Oct 2019) to 11.0.10 (Jan 2021)" class="size-large is-resized" width="553" height="366" >}}
 
 By default, the Highlights page is empty. That is for us all to fill out! Pick the fixes you like from the All Issues tab or Component View tab and then vote for them—simply click on the star, no login is needed for this—and once you've refreshed the page, you'll see that the Highlights page is updated with a card for each item with high votes.
 
-{{< img src="image-5-1024x625.png" class="size-large is-resized" width="1046" height="638" >}}
+{{< img src="image-5-1024x625.png" alt="foojay.io OpenJDK Update & Release Details page for Java 8u282 showing highlighted fixes as starred cards" class="size-large is-resized" width="1046" height="638" >}}
 
 In this way, the Java community can, together, provide a clear indication of the items that are most meaningful. For example, just because a fix is a P3, does not mean that it is unimportant, in fact, many P3s and P4s turn out to be more important than you might think, for every day Java developers.
 

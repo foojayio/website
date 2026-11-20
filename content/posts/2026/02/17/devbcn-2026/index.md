@@ -23,7 +23,7 @@ Hola developers !!!!!
 
 The 11th edition of **[DevBcn](http://www.devbcn.com)**, the developer's conference in Barcelona is coming next June. The perfect place to have great technology talks 🤖, perfect weather 🏖️, amazing food 🥘, and an unforgettable experience 💖.  
 
-{{< img src="Screenshot-2026-02-17-at-10.35.06.jpg" class="aligncenter size-full is-resized" width="1011" height="851" style="aspect-ratio:1.18804004331396;width:564px;height:auto" >}}
+{{< img src="Screenshot-2026-02-17-at-10.35.06.jpg" alt="DevBcn logo over an aerial view of Barcelona's port, with the text 'The Barcelona Developers Conference'" class="aligncenter size-full is-resized" width="1011" height="851" style="aspect-ratio:1.18804004331396;width:564px;height:auto" >}}
 
 It will be hosted on the 16th and 17th of June 2026, in the **World Trade Center Conference Center** , having 4 rooms with talks in parallel during the 2 days of the conference : **Java/JVM, AI, Cloud, Frontend, Managing and Soft skills**.
 ![Panoramic view of the crowded DevBCN 2026 exhibition hall with attendees and sponsor booths](unnamed-1-1024x282.jpg)

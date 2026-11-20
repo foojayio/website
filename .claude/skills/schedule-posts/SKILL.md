@@ -127,6 +127,24 @@ model:
 Check the rendered page afterwards; a filename that does not match a file in
 the bundle shows no picture.
 
+### Describe every image
+
+Every image in the body needs a description, including the ones that stay
+plain after the gallery step. Look at each file and write what it shows in the
+context of the article, one sentence, ideally under 125 characters. Never
+`image` or `screenshot` alone, and never repeat the caption word for word.
+Cover all the shapes an image takes:
+
+* `![](x.png)` gets text between the brackets.
+* `{{< img src="x.png" >}}` gets `alt="..."`.
+* A gallery line with no caption gets the second `|` field empty and the third
+  filled: `x.png | | description`.
+* Raw `<img>` and `image::x.png[]` (AsciiDoc) get the same.
+
+Leave a description empty only for a decoration, such as a divider. Keep the
+author's own text where it exists, and use no double quotes, square brackets or
+pipes in it. The frontmatter `image:` hero needs none.
+
 ### Verify
 
 ```
@@ -135,6 +153,7 @@ jbang scripts/validate/Frontmatter.java
 
 Expect `Frontmatter check passed`. The lines starting with `~` are advisory and
 span the whole archive, so read the ones naming this post and ignore the rest.
+None may name this post under "no description": fix those before committing.
 
 ### Review the content
 

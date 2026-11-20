@@ -105,7 +105,7 @@ More information:
 
 [This article was originally published on the](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) [OmniFish blog. For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here:](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) <https://omnifish.ee/blog/>.  
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: stylised fish skeleton in yellow-green on a teal circle" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

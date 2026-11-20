@@ -99,7 +99,7 @@ On your mark, get set, **GO!**
 
 ***Step 1:*** Create the **`helloworld`** project directory structure
 
-{{< img src="initial-proj-directory.png" class="size-large is-resized" width="381" height="64" caption="Figure 1. Initial project and source code directories created." >}}
+{{< img src="initial-proj-directory.png" alt="Finder view of a helloworld folder containing an empty src folder" class="size-large is-resized" width="381" height="64" caption="Figure 1. Initial project and source code directories created." >}}
 
 The following commands create the project and src directories.
 
@@ -173,7 +173,7 @@ The **exports** keyword exposes the **com.mycompany.helloworld** module to the r
 
 The file will be created in the directory **src/com.mycompany.helloworld/com/mycompany/helloworld** as shown in figure 4 below.
 
-{{< img src="helloworld.java_-31cfb833.png" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
+{{< img src="helloworld.java_-31cfb833.png" alt="Finder tree showing HelloWorld.java and module-info.java under src/com.mycompany.helloworld" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
 
 Use **[vim](https://www.vim.org/)** for those who despise those other wimpy editors 😉
 
@@ -236,7 +236,7 @@ javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.
 
 After compiling your code the class files the mods directory should look like the following:
 
-{{< img src="compiled-classes-5076aa43.png" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
+{{< img src="compiled-classes-5076aa43.png" alt="Finder tree where the new mods directory holds the compiled HelloWorld.class and module-info.class beside src" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
 
 ***Step 7:***Execute the JavaFX HelloWorld application!
 

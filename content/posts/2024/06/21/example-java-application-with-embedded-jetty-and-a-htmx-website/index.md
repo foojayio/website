@@ -192,7 +192,7 @@ private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollecti
 
 I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/en-US/firefox/addon/simple-websocket-client/) to test WebSocket communication to make sure it works, before diving into the HTML client implementation... As you can see in the screenshot, the server sends a timestamp every second and answers when you send a message starting with "echo".
 
-{{< img src="websocket-test-300x260.png" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="websocket-test-300x260.png" alt="Firefox WebSocket client connected to ws://localhost:9999/websocket/ws, with an echo test request and a log of timestamp messages" class="size-thumbnail" width="300" height="260" >}}
 
 ### htmx web requests
 

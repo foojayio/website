@@ -18,7 +18,7 @@ related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
 ---
 
-{{< img src="duke_sensehat-819x1024.jpg" class="alignleft is-resized" style="width:250px" >}}
+{{< img src="duke_sensehat-819x1024.jpg" alt="Duke mascot in a Raspberry Pi t-shirt wiring a Sense HAT, breadboard with LEDs and a Raspberry Pi board" class="alignleft is-resized" style="width:250px" >}}
 
 One of the biggest advantages of the Pi4J Drivers project is the ability to interact with complex hardware through simple and intuitive Java APIs. A great example of this is the Raspberry Pi Sense HAT, one of the most popular Raspberry Pi add-on boards and the hardware platform used in the Astro Pi program aboard the International Space Station.
 

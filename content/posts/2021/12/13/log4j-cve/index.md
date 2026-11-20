@@ -96,8 +96,8 @@ There's also [Java Serialization Filtering](https://docs.oracle.com/en/java/java
 
 ## Relevant Tweets
 
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="image-950x1024.png" alt="" width="436" height="469" >}}</a>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="image-950x1024.png" alt="Tweets by Marcus Hutchins calling the log4j CVE-2021-44228 flaw extremely bad and giving the formatMsgNoLookups mitigation" width="436" height="469" >}}</a>
 
- <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="kryptos-1024x1000.jpg" alt="" width="438" height="428" >}}</a>
+ <a target="_blank" href="https://twitter.com/malwaretechblog/status/1470096336133373954">{{< img src="kryptos-1024x1000.jpg" alt="Tweet by Marcus Hutchins on Kryptos Logic's scanner finding 10,000+ vulnerable hosts, with a doughnut chart led by the US" width="438" height="428" >}}</a>
 
- <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="checking-1024x802.png" alt="" width="440" height="345" >}}</a>
+ <a target="_blank" href="https://twitter.com/TomGranot/status/1469704635715706885">{{< img src="checking-1024x802.png" alt="Tweet by Tom Granot checking formatMsgNoLookups live with Lightrun, a red arrow pointing at the value" width="440" height="345" >}}</a>

@@ -88,7 +88,7 @@ A task can be defined as follows:
 
     taskGraph.task("sample", Class::methodA, input, output);
 
-{{< img src="task-graph-1024x163.png" class="aligncenter size-large is-resized" width="559" height="88" >}}
+{{< img src="task-graph-1024x163.png" alt="Diagram of a method with input and output next to a task with input and output data, wrapped in a TaskGraph" class="aligncenter size-large is-resized" width="559" height="88" >}}
 
 **Note:** The data in the **transferToHost** and **transferToDevice** methods, define the data flow between one or multiple tasks in a **TaskGraph**. In case data from one task is going to be consumed by another task, then it will be persisted into the device's memory and no copy will be involved.
 
@@ -113,7 +113,7 @@ The following code snippet sets one output array (output) to be transferred from
 
 Once a TaskGraph is defined, and the programmer is confident that the shape of the TaskGraph will not be altered, then it is necessary to capture a snapshot of the TaskGraph which will return an object of type **ImmutableTaskGraph**.  
 
-{{< img src="taskgraph-snapshot-1024x79.png" class="aligncenter size-large is-resized" width="644" height="49" >}}
+{{< img src="taskgraph-snapshot-1024x79.png" alt="Flow showing a TaskGraph being snapshotted into an immutable TaskGraph" class="aligncenter size-large is-resized" width="644" height="49" >}}
 
 This is a very simple process:
 

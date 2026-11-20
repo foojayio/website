@@ -21,7 +21,7 @@ JDKMon is a little tool written in JavaFX that tries to detect all OpenJDK distr
 
 It will scan for new updates every three hours and will inform you about available updates.
 
-{{< img src="jdkmon-17.0.23.png" class="size-full is-resized" width="423" height="306" >}}
+{{< img src="jdkmon-17.0.23.png" alt="JDKMon window listing installed JDKs (GraalVM, Zulu, JavaFX SDK) with newer versions and download format badges" class="size-full is-resized" width="423" height="306" >}}
 
 **Note:** JDKMon won't install the distributions on your machine but will enable you to download them to a place of your choice.
 
@@ -60,7 +60,7 @@ At the moment the following distributions are supported:
 
 JDKMon 17.0.23 has just been released and brings a new feature consisting of CVE's that are found will be coloured according to their score, e.g., low is green and high is red.
 
-{{< img src="slack-imgs.com_.png" class="size-full is-resized" width="279" height="135" >}}
+{{< img src="slack-imgs.com_.png" alt="JDKMon dialog listing two CVEs, both score 3.6 and severity MEDIUM, highlighted in green" class="size-full is-resized" width="279" height="135" >}}
 
 JDKMon is available for the following platforms:
 

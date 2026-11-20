@@ -15,7 +15,7 @@ related_posts:
   - "jc-ai-newsletter-16"
 ---
 
-{{< img src="jekov.jpeg" class="alignright size-full is-resized" width="400" height="400" >}}
+{{< img src="jekov.jpeg" alt="Portrait photo of Jakob Jenkov" class="alignright size-full is-resized" width="400" height="400" >}}
 
 Welcome back to the second installment of our in-depth conversation with Jakob Jenkov, a leading figure in the world of Java. If you joined us for[Part I](https://foojay.io/today/exploring-the-depths-of-java-a-comprehensive-conversation-with-jakob-jenkov-part-i/), you'll recall the insightful discussions around the evolving landscape of Java and its continuous improvements. Today, we delve even deeper into the subject. Jakob will share his thoughts on the challenges of modern software development, the impacts of artificial intelligence on developers, and much more. Get ready for another fascinating exploration into the depths of Java with Jakob Jenkov!
 

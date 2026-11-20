@@ -34,7 +34,7 @@ Robert C. Martin introduced Clean Architecture to keep business rules independen
 
 The architecture is usually drawn as four concentric rings. Each ring is a layer. Dependencies always point inward, from the outermost frameworks ring toward the innermost domain ring:  
 
-{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.jpg" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
+{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.jpg" alt="Clean architecture rings: Domain at the center, then Application, Interface Adapters and Frameworks, with dependencies pointing inward" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
 
 Starting from the inside:
 

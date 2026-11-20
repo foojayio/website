@@ -53,7 +53,7 @@ The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-
 
 Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason–Act–Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
 
-{{< img src="foojay1.png" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
+{{< img src="foojay1.png" alt="Flowchart: a Planner LLM turns a complex goal into a JSON plan that a deterministic executor runs via two tools to produce output" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
 
 To illustrate this pattern, we will develop a travel itinerary assistant. Users may ask questions such as "Show me available cities to travel" or "Create a historical itinerary in Portugal." Rather than relying only on training data, the AI agent will access a MongoDB database of cities and attractions that reflects the offerings available at the travel agency. Based on the user's goal, the agent will select suitable tools, retrieve relevant information, and generate recommendations using real application data.
 

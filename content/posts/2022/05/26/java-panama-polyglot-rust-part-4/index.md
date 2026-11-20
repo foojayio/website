@@ -165,7 +165,7 @@ cargo build
 
 The output should look like the following:
 
-{{< img src="Screen-Shot-2022-05-20-at-1.23.55-AM.png" class="size-full is-resized" width="725" height="271" caption="Executing cargo build" >}}
+{{< img src="Screen-Shot-2022-05-20-at-1.23.55-AM.png" alt="Terminal output of cargo build compiling Rust crates such as bitflags and clap, with a progress bar at 44 of 51" class="size-full is-resized" width="725" height="271" caption="Executing cargo build" >}}
 
 This may take awhile. When this is done you can view the contents of `lib.h` as shown below:
 

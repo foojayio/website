@@ -26,7 +26,7 @@ This blog outlines the key changes in TornadoVM to **enable code interoperabilit
 
 The following figure illustrates the code interoperability of the generated OpenCL kernels in TornadoVM.  
 
-{{< img src="TornadoVM-Code-Interoperability-Mode.png" class="aligncenter is-resized" width="512" height="180" >}}
+{{< img src="TornadoVM-Code-Interoperability-Mode.png" alt="Diagram: TornadoVM conventional Java mode compiles to OpenCL for Java, while interoperability mode exposes the OpenCL code to C, C++ and Python" class="aligncenter is-resized" width="512" height="180" >}}
 
 **Note:** The code interoperability is prototyped as a complementary mode[^\[1\]^](#_ftn1) to enable TornadoVM-generated kernels to be transferable for execution from other programming languages, beyond Java.
 

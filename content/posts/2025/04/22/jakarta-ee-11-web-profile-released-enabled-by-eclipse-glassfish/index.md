@@ -83,7 +83,7 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to the OmniFish blog here: [https://omnifish.ee/blog/](https://omnifish.ee/jakarta-ee-11-web-profile-released-enabled-by-eclipse-glassfish/).
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a stylised fish skeleton in yellow-green on a teal circle" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 ## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 

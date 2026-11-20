@@ -31,7 +31,7 @@ This blog begins with a prerequisite that a snapshot of a user-defined TaskGraph
 
 The following code snippet defines the TaskGraph of our example and shows how the **TaskGraph** is converted to an **ImmutableTaskGraph**.  
 
-{{< img src="taskgraph-snapshot-1-1024x79.png" class="aligncenter size-large is-resized" width="531" height="40" >}}
+{{< img src="taskgraph-snapshot-1-1024x79.png" alt="Flow diagram: a TaskGraph becomes a Snapshot, which becomes an Immutable TaskGraph" class="aligncenter size-large is-resized" width="531" height="40" >}}
 
 ```java
 TaskGraph taskGraph = new TaskGraph(“name”);

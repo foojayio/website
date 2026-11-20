@@ -37,7 +37,7 @@ This time we want to highlight his work which combines a web app made with Sprin
 
 ## Wiring
 
-{{< img src="glcd-pinout-683x1024.jpg" class="size-large is-resized" width="683" height="1024" >}}
+{{< img src="glcd-pinout-683x1024.jpg" alt="Photo of a graphic LCD board with red labels marking pins: GND, 5V, SCK (13), MOSI (11) and CS (10)" class="size-large is-resized" width="683" height="1024" >}}
 
 The display is connected according to this table indicating the physical PIN number and its according BCM number used in the code:
 ![Table of Raspberry Pi pin connections for the LCD: pin 33 GPIO 13 SCK, pin 35 GPIO 19 MOSI, pin 37 GPIO 26 CS](LCD_raspberry_map.png)

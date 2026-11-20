@@ -103,7 +103,7 @@ void decays() {
 
 If we then run Pitest again, we'll already see some improvements:
 
-{{< img src="report3-700x414.png" class="size-medium" width="700" height="414" >}}
+{{< img src="report3-700x414.png" alt="Pitest HTML report: source code lines highlighted green when mutations are killed and red where mutations survive" class="size-medium" width="700" height="414" >}}
 
 However, we'll notice there are still a couple of surviving mutations.  
 

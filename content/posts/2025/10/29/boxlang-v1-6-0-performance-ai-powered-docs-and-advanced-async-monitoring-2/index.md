@@ -15,7 +15,7 @@ related_posts:
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
 ---
 
-{{< img src="boxlang-v1.6.0-1-700x467.jpg" class="size-medium aligncenter" width="700" height="467" >}}
+{{< img src="boxlang-v1.6.0-1-700x467.jpg" alt="BoxLang release v1.6.0 banner with the BoxLang logo over a glowing blue and purple galaxy with futuristic city outlines" class="size-medium aligncenter" width="700" height="467" >}}
 
 We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities. This release focuses on making BoxLang faster, smarter, and more observable than ever before.
 

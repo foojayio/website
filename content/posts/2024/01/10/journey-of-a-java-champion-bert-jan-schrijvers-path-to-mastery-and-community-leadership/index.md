@@ -15,7 +15,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="image.jpg" class="alignright size-full" width="400" height="400" >}}
+{{< img src="image.jpg" alt="Portrait of Bert Jan Schrijvers, smiling, in a dark top" class="alignright size-full" width="400" height="400" >}}
 
 Bert Jan is CTO at [OpenValue](https://www.openvalue.eu/) and focuses on Java, software architecture, Continuous Delivery and DevOps.   
 

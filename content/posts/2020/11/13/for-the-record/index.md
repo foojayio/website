@@ -31,11 +31,11 @@ Records help provide a way to succinctly describe the intent of these data-carri
 
 As mentioned earlier, data-carrier classes can now be simplified to just a few lines of code by adding the keyword `record`:
 
-{{< img src="public-record-donut-700x510.png" class="size-medium aligncenter" width="700" height="510" >}}
+{{< img src="public-record-donut-700x510.png" alt="Side-by-side IDE view: a long Donut class with getters, equals and hashCode, versus a one-line Donut record" class="size-medium aligncenter" width="700" height="510" >}}
 
 Refactoring this code resulted in 58 changes (2 additions, 56 deletions).
 
-{{< img src="donut-code-refactoring-700x51.png" class="size-medium aligncenter" width="700" height="51" >}}
+{{< img src="donut-code-refactoring-700x51.png" alt="GitHub diff summary tooltip: 58 changes, 2 additions and 56 deletions in Donut.java" class="size-medium aligncenter" width="700" height="51" >}}
 
 ![Decompiled Donut record class showing its fields, constructor and compiler-generated toString, hashCode, equals and accessors](donut-code-refactored-1024x522.jpg)
 

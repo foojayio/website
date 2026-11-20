@@ -16,7 +16,7 @@ related_posts:
   - "ejb-support-in-piranha-via-cdi"
 ---
 
-{{< img src="beans-300x260.jpg" class="alignleft is-resized" width="225" height="195" >}}
+{{< img src="beans-300x260.jpg" alt="Close-up of roasted coffee beans with one bean glowing white" class="alignleft is-resized" width="225" height="195" >}}
 
 *EJB, or Enterprise Beans, are Java classes with a number of container provided services attached to them, such as transactions, remoting and security. In this article we will take a look at what we can expect for EJB in the future.*
 
@@ -92,7 +92,7 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here: <https://omnifish.ee/blog/>.
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a teal circle with a stylised yellow-green fish and the text OMNI FISH" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

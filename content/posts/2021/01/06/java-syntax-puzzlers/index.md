@@ -15,7 +15,7 @@ Roughly 12 years ago, I started to contribute to the Eclipse ecosystem in variou
 
 While working on Eclipse, I fondly remember working on various parts of the Java Tooling (JDT) and while working on refactorings and quick fixes. And not surprisingly, working on language-intensive pieces turned out to have the same hiccups as other non-trivial algorithms - the transition from "this is gonna be easy" to "why am I up at 3 am reading the Java Language Specification".
 
-{{< img src="muskallatweet-700x129.png" class="size-medium" width="700" height="129" >}}
+{{< img src="muskallatweet-700x129.png" alt="Tweet from Benjamin Muskalla: a bug report takes 10 minutes, a patch 2 hours, and being pinged 11 years later is priceless" class="size-medium" width="700" height="129" >}}
 
 Working on language-specific tooling exposes you to all kinds of edge cases and delicate details and language has to offer. Some of them are well known and generally seen as "unprofessional" (hello `goto`). Others are actually not known at all. And with all due respect, I quite enjoy discovering the edge cases of the language syntax - a lot of times to confuse my co-workers who think they know the Java Language Syntax 😉 And given I love a good puzzle (especially the Java Puzzles), let's try a puzzle but using the Java syntax only, without any runtime behavior.
 

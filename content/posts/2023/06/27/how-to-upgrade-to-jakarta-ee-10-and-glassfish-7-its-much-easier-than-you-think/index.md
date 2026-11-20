@@ -56,7 +56,7 @@ So far, the series contains the following posts:
 
 We've prepared detailed instructions that explain how to use available automating tools and example projects that show how to use them. In near future, we'll be adding more articles to cover more details, like how to upgrade dependencies to Jakarta EE 10, how to transform them if needed, and how to refactor your code to remove usage of APIs removed in Jakarta EE 10. We hope that this series of articles will help you upgrade to Jakarta EE 10 easily and in a very short time.
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a stylised yellow and green fish skeleton in a teal circle" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

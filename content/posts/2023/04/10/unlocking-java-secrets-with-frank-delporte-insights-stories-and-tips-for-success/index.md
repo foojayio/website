@@ -15,7 +15,7 @@ related_posts:
   - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 ---
 
-{{< img src="Frank-7-XS.jpg" class="alignright size-full is-resized" width="450" height="413" >}}
+{{< img src="Frank-7-XS.jpg" alt="Portrait of Frank Delporte, smiling, with dark-framed glasses and a dark sweater" class="alignright size-full is-resized" width="450" height="413" >}}
 
 Welcome to our exclusive interview with [Frank Delporte](https://www.linkedin.com/in/frankdelporte/), a Senior Technical Writer at Azul, Java Champion, and a passionate advocate for all things related to Java and Java on [Raspberry Pi](https://www.raspberrypi.org/).
 

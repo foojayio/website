@@ -269,7 +269,7 @@ The key parameters I use most often:
 
 When you run the benchmark, the async profiler will generate an HTML file that looks like the flame graph in the following image. Let me explain how to read it:
 
-{{< img src="flamegraph-example-700x258.png" class="size-medium" width="700" height="258" >}}
+{{< img src="flamegraph-example-700x258.png" alt="Flame graph from the async profiler showing stacked call frames for the JMH random-read benchmark" class="size-medium" width="700" height="258" >}}
 
 In this real flame graph, you can immediately see the problem: an enormous amount of time is being spent in close() operations. The width of each stack frame represents the percentage of time spent in that method. The wider the frame, the more time it's consuming. Looking at this graph, I can see:
 

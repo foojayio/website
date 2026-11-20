@@ -33,7 +33,7 @@ A couple of concepts are central in Spring. The related documentation doesn't de
 * **Bean Definition** : A bean definition is the set of properties given to the Spring container and that the requested bean will have, *e.g.*, class, name, scope, dependencies, etc.
 * **Context**: A context is a bean factory with additional capabilities (mainly internationalization and event publishing)
 
-{{< img src="spring-concepts-700x492.png" class="aligncenter size-medium" width="700" height="492" >}}
+{{< img src="spring-concepts-700x492.png" alt="UML diagram: ApplicationContext extends BeanFactory, and GenericApplicationContext implements BeanDefinitionRegistry holding BeanDefinitions" class="aligncenter size-medium" width="700" height="492" >}}
 
 To configure a Spring application, one creates one or more contexts and registers the necessary bean definitions in the desired ones. In the following sections, we will configure the following simple model:
 
@@ -224,7 +224,7 @@ GenericApplicationContext().apply {             // 1
 
 All the previous configuration alternatives provide an abstraction layer over bean definitions. Then, the container creates beans out of bean definitions. We can bypass these abstraction layers and directly use the bean definition API.
 
-{{< img src="bean-definition-class-700x312.png" class="aligncenter size-medium" width="700" height="312" >}}
+{{< img src="bean-definition-class-700x312.png" alt="UML diagram: GenericApplicationContext registers BeanDefinitions in DefaultListableBeanFactory, with GenericBeanDefinition extending AbstractBeanDefinition" class="aligncenter size-medium" width="700" height="312" >}}
 
 Let's first define a specialized bean definition:
 
@@ -268,7 +268,7 @@ context.refresh();                                                           // 
 
 Spring provides a simple API for simple bean definitions, so we don't need to create dedicated bean definition classes. This mechanism creates such a definition when necessary.
 
-{{< img src="bean-registration-700x156.png" class="aligncenter size-medium" width="700" height="156" >}}
+{{< img src="bean-registration-700x156.png" alt="UML class listing of GenericApplicationContext's overloaded registerBean methods" class="aligncenter size-medium" width="700" height="156" >}}
 
 Here's the code to create the sample configuration:
 

@@ -23,7 +23,7 @@ Go here to take a look, yourself: <https://chriswhocodes.com/hotspot_options_ope
 
 Let's meet Chris, here's a quick interview with him about his Java command line switches integrated into foojay!  
 
-{{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="146" height="146" >}}
+{{< img src="0-2.jpeg" alt="Portrait of a smiling man in a pink shirt" class="alignleft size-large is-resized" width="146" height="146" >}}
 
 **Hi Chris, who are you and what does your Java life look like?**
 

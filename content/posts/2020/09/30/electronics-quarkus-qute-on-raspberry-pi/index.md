@@ -23,7 +23,7 @@ The "Hello World" version of electronics programming is a blinking LED. But, in 
 
 We will do this by taking a closer look at one of the projects in the list "[Spectacular Java Projects on the Raspberry Pi](https://foojay.io/today/spectacular-java-projects-on-the-raspberry-pi/)".  
 
-{{< img src="led-number-display-300x260.jpg" class="alignleft size-thumbnail is-resized" width="99" height="86" >}}
+{{< img src="led-number-display-300x260.jpg" alt="Several red seven-segment LED number display modules lying on a white surface" class="alignleft size-thumbnail is-resized" width="99" height="86" >}}
 
 [Igor De Souza](https://twitter.com/Igfasouza), Dublin based Principal Big Data Consultant at Oracle, set up an interesting experiment in which he combines a LED number display with the Raspberry Pi and Quarkus.
 

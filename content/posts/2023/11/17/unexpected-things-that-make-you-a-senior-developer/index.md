@@ -45,7 +45,7 @@ Here are some interesting situations related to dates, times, and time zones.
 > And there are many reasons why dates and time zones are fertile ground for [great conference talks](https://www.youtube.com/watch?v=d7KeRjLS5Iw) and [famous blog posts](https://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time).
 > \~ Marit
 
-{{< img src="fail-timezone-issue-511x510.jpg" class="size-medium is-resized" width="511" height="510" style="object-fit:cover;width:300px;height:300px" >}}
+{{< img src="fail-timezone-issue-511x510.jpg" alt="Handwritten sign 'Days since last timezone issue' with a sticky note reading -1" class="size-medium is-resized" width="511" height="510" style="object-fit:cover;width:300px;height:300px" >}}
 
 ## Computer System Breakdowns
 
@@ -54,7 +54,7 @@ But be aware, we can not only make mistakes in our code and database! Our whole 
 >
 > 
 
-{{< img src="fail-imac-463x510.jpg" class="size-medium is-resized" width="463" height="510" style="object-fit:contain;width:200px;height:200px" >}}
+{{< img src="fail-imac-463x510.jpg" alt="Teal and white first-generation iMac G3 seen from the side" class="size-medium is-resized" width="463" height="510" style="object-fit:contain;width:200px;height:200px" >}}
 
 >
 > After many hours of investigation, I ended up with four conclusions:  

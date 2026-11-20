@@ -19,7 +19,7 @@ related_posts:
 
 I have just finished reading ["Monolith to Microservices: Evolutionary Patterns to Transform Your Monolith](https://www.amazon.ca/Monolith-Microservices-Evolutionary-Patterns-Transform/dp/1492047848)" by Sam Newman.
 
-{{< img src="monolith-to-microservice-388x510.jpeg" class="size-medium" width="388" height="510" >}}
+{{< img src="monolith-to-microservice-388x510.jpeg" alt="Cover of O'Reilly's Monolith to Microservices by Sam Newman, with a jellyfish-like illustration" class="size-medium" width="388" height="510" >}}
 
 This book is undoubtedly great. It explains the critical aspects applicable when moving away from a monolith to a microservices architecture.
 

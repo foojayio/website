@@ -25,7 +25,7 @@ htmx seems to be one of those hot new rising stars, and I already wanted to dive
 
 Luckily, [Wim Deblauwe](https://www.wimdeblauwe.com) is here now to help me!
 
-{{< img src="htmx-cover-small.jpg" class="size-full is-resized" width="540" height="810" style="aspect-ratio:0.6666666666666666;width:259px;height:auto" >}}
+{{< img src="htmx-cover-small.jpg" alt="Cover of the book Modern frontends with htmx by Wim Deblauwe" class="size-full is-resized" width="540" height="810" style="aspect-ratio:0.6666666666666666;width:259px;height:auto" >}}
 
 In the past, I had the privilege to work on a project that was initially created by Wim for a startup, where Thymeleaf was used. His book "[Taming Thymeleaf](https://www.wimdeblauwe.com/books/taming-thymeleaf/)" has been a reference for many people who wanted to learn more about the Thymeleaf framework.
 

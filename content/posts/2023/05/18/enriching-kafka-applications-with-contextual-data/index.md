@@ -269,7 +269,7 @@ SELECT * FROM trade_map;
 
 The following diagram explains our demo setup; we have a Kafka topic called trades which contains a collection of trades that will be ingested into a Hazelcast cluster.
 
-{{< img src="Hazelcast-Kafka-700x289.png" class="size-medium" width="700" height="289" >}}
+{{< img src="Hazelcast-Kafka-700x289.png" alt="Architecture diagram: Kafka trades topic feeds a Hazelcast cluster that enriches it with a companies map, then a web server and client" class="size-medium" width="700" height="289" >}}
 
 Additionally, a companies map represents companies' data stored in the Hazelcast cluster.
 

@@ -371,7 +371,7 @@ Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
 
 It will print on the terminal if we don't want to save it in any file.
 
-{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.jpg" class="size-medium" width="700" height="290" >}}
+{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.jpg" alt="Terminal output of the generated release notes in Markdown, listing commits of the cargotracker project" class="size-medium" width="700" height="290" >}}
 
 That's it.
 

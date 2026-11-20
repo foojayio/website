@@ -27,11 +27,11 @@ Here are some screenshots...
 
 The application:
 
-{{< img src="JDKMonitor-644x510.png" class="size-medium" width="644" height="510" >}}
+{{< img src="JDKMonitor-644x510.png" alt="JDKMonitor macOS app showing days since JDK 22 and the latest update, and download links for LTS versions 21, 17, 11 and 8" class="size-medium" width="644" height="510" >}}
 
 The available widgets:
 
-{{< img src="JDKMonitor-Widgets-700x236.png" class="size-medium" width="700" height="236" >}}
+{{< img src="JDKMonitor-Widgets-700x236.png" alt="JDKMonitor widgets in two sizes showing OpenJDK JDK 22 and update release dates with days elapsed" class="size-medium" width="700" height="236" >}}
 
 You can find the app on the MacOS app store following [this link](https://apps.apple.com/us/app/jdkmonitor/id6468484792 "this link")...
 

@@ -229,7 +229,7 @@ It looks like the 'Visits' relationship is being fetched lazily for each pet in 
 The true cause of the performance regression seems to be related to a misunderstanding of Bob's, probably due to the ambiguous naming of the `VaccineServiceFacade` methods. It seems that it was not that clear to him that an API call is executed behind the scenes each time the `VaccineRecord` function was invoked. This leaky abstraction might have been alleviated with a better naming convention, emphasizing this is in fact an execution of a long synchronous operation.
 ![Trace spans showing repeated PetVaccinationServiceFacade.VaccineRecord calls, each followed by a GET taking about 190 ms](image-26-1024x587.jpg)
 
-{{< img src="image-27-1024x532.jpg" class="size-large is-resized" width="840" height="436" >}}
+{{< img src="image-27-1024x532.jpg" alt="Java code of UpdateVaccinationStatus with the per-record adapter.VaccineRecord call, made inside a nested loop, highlighted in red" class="size-large is-resized" width="840" height="436" >}}
 
 ## Hidden Errors
 
@@ -240,7 +240,7 @@ Something else is going on with the HTTP requests. As we scroll down the list of
 
 Just before he is off to start correcting the many issues revealed by examining the observability artifacts, Bob decides to take a quick look at the other API he modified. There doesn't seem to be a significant performance degradation in this case, but examining the trace still reveals at least one issue that needs to be fixed.
 
-{{< img src="image-29-1024x343.jpg" class="size-large is-resized" width="840" height="281" >}}
+{{< img src="image-29-1024x343.jpg" alt="Trace view for spring-petclinic's owner details page showing a long series of near-identical SELECT queries" class="size-large is-resized" width="840" height="281" >}}
 
 There is a significant number of SQL calls occurring during the rendering phase, an anti-pattern caused by accessing lazy Hibernate attributes while the Session is still open, known as [**open session in view**](https://vladmihalcea.com/the-open-session-in-view-anti-pattern/)**.**This issue can be tricky to spot but is immediately apparent in the trace.
 

@@ -18,7 +18,7 @@ The 1/2 year mark of 2021 is a good moment to reflect on the current status of F
 
 First, some data! Here's the Google Analytics graph showing total unique visitors to Foojay.io over the past half year, with several interesting spikes, explained in detail below.
 
-{{< img src="first-6-months-2021-1024x844.png" class="size-large is-resized" width="522" height="430" >}}
+{{< img src="first-6-months-2021-1024x844.png" alt="Google Analytics chart of Foojay.io users from January to June 2021 (28K users) with spikes in early February and late May" class="size-large is-resized" width="522" height="430" >}}
 
 ### Understanding the Data
 
@@ -28,7 +28,7 @@ Only from February onwards has real promotion of Foojay.io begun, since that's w
 
 Here's a map of the [20+ JUG visits across March and April](https://foojay.io/today/schedule-for-foojay-virtual-jug-tour/), all done virtually, of course, with [a large cross-section of the Java community and its technologies involved](https://foojay.io/today/virtual-foojay-jug-tour/):
 
-{{< img src="image-15-1024x576.jpg" class="size-large is-resized" width="678" height="381" >}}
+{{< img src="image-15-1024x576.jpg" alt="World map pinning the 20+ virtual JUG tour visits, clustered in Europe and the US with others in India, South Africa and Korea" class="size-large is-resized" width="678" height="381" >}}
 
 After that there were a number of significant spikes, in the graph above, which can also be explained: the big spike towards the end of April is because of Wim Deblauwe's brilliant and very well received "[Better Error Handling for Your Spring Boot REST APIs](https://foojay.io/today/better-error-handling-for-your-spring-boot-rest-apis/)", while the massive spike in May is because of Deepu Sasidharan's fantastically explained and comprehensive "[Demystifying JVM Memory Management](https://foojay.io/today/demystifying-jvm-memory-management/)", these two articles were extremely well received, really popular on Reddit, for example, as well as elsewhere, drawing a lot of traffic to Foojay.io, not to mention the hot discussions around JEP 411 and the deprecation of the SecurityManager, with Peter Firmstone providing great content around this theme, such as "[The Principle of Least Privilege and How JEP 411 Will Have a Negative Impact on Java Security](https://foojay.io/today/why-jep-411-will-have-a-negative-impact-on-java-security/)".
 
@@ -38,11 +38,11 @@ It is also noticeable that [a lot of JavaFX-related content is finding its way o
 
 Let's also look at the month-by-month growth of Foojay.io. The first graph shows that between January and March this year, i.e., over the space of two months, total unique visitors doubled:
 
-{{< img src="image-13-1024x899.png" class="size-large is-resized" width="368" height="323" >}}
+{{< img src="image-13-1024x899.png" alt="Bar chart: Foojay.io had 4.69K users in March 2021 versus about 2.2K in January, a doubling in two months" class="size-large is-resized" width="368" height="323" >}}
 
 That doubling effect, which took two months, i.e., from January to March, took half as long to achieve again just one month later, i.e., from April to May:
 
-{{< img src="image-14-1024x865.png" class="size-large is-resized" width="355" height="300" >}}
+{{< img src="image-14-1024x865.png" alt="Bar chart: Foojay.io users rose from about 5.2K in April 2021 to 9.43K in May, nearly doubling in one month" class="size-large is-resized" width="355" height="300" >}}
 
 ### Thank You, Everyone!
 

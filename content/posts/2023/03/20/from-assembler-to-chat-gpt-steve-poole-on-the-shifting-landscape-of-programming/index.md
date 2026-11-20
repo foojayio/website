@@ -15,7 +15,7 @@ related_posts:
   - "from-law-degree-to-java-champion-geertjan-wielenga-on-the-success-of-java-and-navigating-the-software-industry"
 ---
 
-{{< img src="image-4-921x1024.jpg" class="alignright size-large is-resized" width="461" height="512" >}}
+{{< img src="image-4-921x1024.jpg" alt="Photo of Steve Poole in glasses and a Mad Scientist t-shirt, hand on chin in a thoughtful pose" class="alignright size-large is-resized" width="461" height="512" >}}
 
 Welcome to our exclusive interview with [Steve Poole](https://www.linkedin.com/in/noregressions/), a seasoned Java developer, leader, and evangelist with a lot of experience in the tech industry.
 
@@ -151,7 +151,7 @@ For weeks and weeks, we tried different things to capture the problem until some
 
 Unfortunately, we just made assumptions before we'd even started about the problem - rather than stepping back and understanding the situation, we just allowed a rogue screen saver to eat all the CPU right in front of us! That taught me a great deal about how to really diagnose problems and avoid pre-emptive guessing and assumptions.  
 
-{{< img src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.jpg" class="alignright size-full is-resized" width="256" height="256" >}}
+{{< img src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.jpg" alt="AI-generated illustration of laughing developers gathered around a computer monitor" class="alignright size-full is-resized" width="256" height="256" >}}
 
 **Editor's note:** *Steve's anecdote emphasizes the importance of thorough diagnosis and avoiding assumptions when tackling problems. This lesson highlights the need to step back, understand the situation, and remain open to possibilities, which is applicable across various problem-solving contexts.*
 

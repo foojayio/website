@@ -60,7 +60,7 @@ kubectl port-forward podname 9000:9000
 
 Once we do that, we can use the usual debugging features by connecting directly to the remote server from the IDE by creating a remote debugging target and just running it. Notice that you can do all of that in visual studio code, as discussed [here](https://lightrun.com/debugging/how-to-debug-remotely-in-vs-code/).
 
-{{< img src="remote-debugging-700x188.png" class="size-medium" width="700" height="188" >}}
+{{< img src="remote-debugging-700x188.png" alt="IntelliJ IDEA Run/Debug Configurations dialog for a Remote JVM Debug targeting localhost port 5005 with the agentlib argument" class="size-medium" width="700" height="188" >}}
 
 We now have a debug session of the application as if we launched it directly from the IDE!
 

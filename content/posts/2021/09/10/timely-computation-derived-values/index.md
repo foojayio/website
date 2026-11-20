@@ -52,7 +52,7 @@ The flow is the following. When the cart is updated, set `dirty` to `true`.
 
 When you need to display the cost:
 
-{{< img src="flow-319x510.png" class="aligncenter size-medium" width="319" height="510" >}}
+{{< img src="flow-319x510.png" alt="Sequence diagram: displaying a price computes, stores and clears the dirty flag only when the cart is dirty, then returns the price" class="aligncenter size-medium" width="319" height="510" >}}
 
 The only con is more complex logic.
 

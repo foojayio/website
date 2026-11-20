@@ -17,7 +17,7 @@ related_posts:
   - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 ---
 
-{{< img src="chris.jpg" class="alignright size-full is-resized" width="384" height="384" >}}
+{{< img src="chris.jpg" alt="Portrait of Chris Newland, smiling with glasses, in front of a garden" class="alignright size-full is-resized" width="384" height="384" >}}
 
 We're excited to introduce you to Chris Newland, an industry veteran and dedicated JVM performance specialist.
 

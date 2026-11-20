@@ -20,7 +20,7 @@ The Raspberry Pi allows us to do a lot of electronic projects without having to 
 
 You can go ahead and use this idea to start your project without wasting more time and without buying anything. Today, I want to show a way to play with a potentiometer:
 
-{{< img src="Electronic-Component-Potentiometer-624x631-1.jpg" class="size-large is-resized" width="280" height="282" >}}
+{{< img src="Electronic-Component-Potentiometer-624x631-1.jpg" alt="A potentiometer: a metal-shafted rotary component with three solder lugs" class="size-large is-resized" width="280" height="282" >}}
 
 **From Wikipedia**: "A potentiometer is a three-terminal resistor with a sliding or rotating contact that forms an adjustable voltage divider. If only two terminals are used, one end and the wiper, it acts as a variable resistor or rheostat."
 

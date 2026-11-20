@@ -16,7 +16,7 @@ related_posts:
   - "beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1"
 ---
 
-{{< img src="1_fKlXRaOCelfpXA_XhNaitA-510x510.webp" class="aligncenter size-medium" width="510" height="510" >}}
+{{< img src="1_fKlXRaOCelfpXA_XhNaitA-510x510.webp" alt="Illustration of a database, a lightbulb, a network graph and a leaf logo labelled Data, Logic and Intent" class="aligncenter size-medium" width="510" height="510" >}}
 
 Every software system begins with intent. A human decision. A statement of what should exist, how it should behave, and why it matters. But somewhere along the way, that intent dies. It's decomposed into documentation, user stories, and scattered logic. It becomes a shadow of itself fragmented across layers of code, processes, and people who no longer remember what it was meant to achieve.
 

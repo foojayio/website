@@ -30,7 +30,7 @@ Nanos images are not just an alternative to containers: they are **lighter, fast
 
 VMs vs. Containers vs. Unikernels
 
-{{< img src="vms-vs-unikernels.png" class="size-medium" width="600" height="379" >}}
+{{< img src="vms-vs-unikernels.png" alt="Diagram comparing VM, Docker and unikernel stacks, where the unikernel drops the operating system layer under the application" class="size-medium" width="600" height="379" >}}
 
 The Key Point: Cloud hypervisors already have everything you need...
 

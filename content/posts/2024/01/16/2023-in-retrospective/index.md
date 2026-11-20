@@ -76,7 +76,7 @@ Here's the GitHub summary:
 
 [
 
-{{< img src="github-contribs-700x482.webp" class="aligncenter size-medium" width="700" height="482" >}}
+{{< img src="github-contribs-700x482.webp" alt="GitHub profile showing 1,275 contributions in the last year, 94% commits, 2% code review, 1% issues, 3% pull requests" class="aligncenter size-medium" width="700" height="482" >}}
 
 ](https://github.com/nfrankel/)
 

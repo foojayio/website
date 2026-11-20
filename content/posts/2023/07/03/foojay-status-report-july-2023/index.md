@@ -134,7 +134,7 @@ The Y axis shows a line for each day from May 1, 2020 (the first month of Foojay
 
 The day on which the largest spike took place overall above correlates with the most popular article yet published on Foojay, which is Helen Scott's multiple carets article below.
 
-{{< img src="image-5-1024x263.png" class="size-large is-resized" width="513" height="131" >}}
+{{< img src="image-5-1024x263.png" alt="Foojay article header 'Working with Multiple Carets in IntelliJ IDEA' showing 51,675 unique views since September 2021" class="size-large is-resized" width="513" height="131" >}}
 
 Notice that you can now see the total number of unique views, which several people have asked for. It helps to see which articles clearly resonate with a broad audience versus those that are more relevant to a more niche group of specialists. (In the above case, the article was republished in November 2021, while it was originally published in September 2021, which is why the unique views count starts in September while its publication date shows November. Maybe that distinction should also be shown, i.e., first published versus subsequent republications.)
 
@@ -143,7 +143,7 @@ Each article now publicly exposes its unique views live on the page, although wi
 
 In addition to all the articles on Foojay Today, all/many/most of the other pages on Foojay are now for the first time also being tracked for unique views, so as to gather stats on them, too. For example, you'll see the below on the [Foojay Download page](https://foojay.io/download).
 
-{{< img src="image-8.png" class="size-full is-resized" width="334" height="104" >}}
+{{< img src="image-8.png" alt="Foojay 'Download OpenJDK' page header showing 236 unique views since June 2023" class="size-full is-resized" width="334" height="104" >}}
 
 It helps to take two equivalent periods and compare them to each other, before the cookie policy change, e.g., May 1 to July 13 in 2022 with the same period in the previous year, which shows an almost 100% growth of unique users year over year, as shown below, together with other stats from those specific periods.
 ![Notes comparing May-July 2022 with 2021: overall unique users up 96.1% to 35,056, with Google traffic up 336.3%](image-9-1024x702.png)

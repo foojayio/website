@@ -15,7 +15,7 @@ related_posts:
   - "resilience-in-coding-miro-wengner-on-thriving-in-the-software-industry"
 ---
 
-{{< img src="Sebastian.jpeg" class="alignright size-full is-resized" width="375" height="375" >}}
+{{< img src="Sebastian.jpeg" alt="Portrait of Sebastian Daschner in a black Java Champion polo shirt" class="alignright size-full is-resized" width="375" height="375" >}}
 
 In this insightful interview, renowned Java Champion, Oracle Developer Champion, and JavaOne Rockstar, Sebastian Daschner, shares his journey in the field of Java enterprise software development.
 

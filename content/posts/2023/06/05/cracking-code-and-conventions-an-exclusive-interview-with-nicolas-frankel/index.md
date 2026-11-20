@@ -15,7 +15,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="nicols-510x510.jpeg" class="alignright is-resized" width="383" height="383" >}}
+{{< img src="nicols-510x510.jpeg" alt="Portrait of Nicolas Frankel in a maroon t-shirt against a dark background" class="alignright is-resized" width="383" height="383" >}}
 
 In this enlightening interview, we explore the unique journey of Nicolas Fränkel, a seasoned professional in the software industry. From an architecture student to a passionate software developer, Nicolas shares his candid thoughts about the current state of software development and the potential impacts of AI.
 

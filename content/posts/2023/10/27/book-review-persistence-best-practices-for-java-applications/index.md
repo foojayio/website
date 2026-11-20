@@ -22,7 +22,7 @@ related_posts:
 
 Luckily all these topics, and so many more are covered in the magnificent new book "Persistence Best Practices for Java Applications" by [Otàvio Santana](https://otaviojava.com/) and [Karina Varela](https://karinavarela.me/)  
 
-{{< img src="image-830x1024.jpg" class="aligncenter size-large is-resized" width="456" height="563" style="width:456px;height:563px" >}}
+{{< img src="image-830x1024.jpg" alt="Cover of Persistence Best Practices for Java Applications by Otavio Santana and Karina Varela, Packt first edition" class="aligncenter size-large is-resized" width="456" height="563" style="width:456px;height:563px" >}}
 
 ## About the book
 

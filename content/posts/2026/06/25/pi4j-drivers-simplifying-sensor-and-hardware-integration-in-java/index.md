@@ -17,7 +17,7 @@ related_posts:
   - "evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg"
 ---
 
-{{< img src="duke_driver01-819x1024.jpg" class="alignleft is-resized" style="width:300px" >}}
+{{< img src="duke_driver01-819x1024.jpg" alt="Duke mascot in a Raspberry Pi t-shirt wiring sensors and an LED on a breadboard to a Raspberry Pi board" class="alignleft is-resized" style="width:300px" >}}
 
 When developing Java applications for Raspberry Pi, [Pi4J](https://www.pi4j.com/) is one of the most popular libraries for accessing GPIO, I2C, SPI, PWM, and other hardware interfaces. However, interacting directly with these protocols often requires a significant amount of code and a deep understanding of the underlying hardware.
 

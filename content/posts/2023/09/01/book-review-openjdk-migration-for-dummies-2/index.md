@@ -22,7 +22,7 @@ related_posts:
 
 This is where the new **free** book [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/) by [Simon Ritter](https://www.linkedin.com/in/siritter/) offers a very useful resource.  
 
-{{< img src="dummies-373x510.png" class="aligncenter is-resized" width="262" height="358" style="width:262px;height:358px" >}}
+{{< img src="dummies-373x510.png" alt="Cover of OpenJDK Migration for Dummies, Azul Special Edition" class="aligncenter is-resized" width="262" height="358" style="width:262px;height:358px" >}}
 
 After all, it's easy to say: "Just pick an OpenJDK, any will do!", but is it really that easy, are there any caveats? As it turns out, yes, there are, and this book will help you navigate quite a bit of them. (For example, you might be using the Lucida font.)
 

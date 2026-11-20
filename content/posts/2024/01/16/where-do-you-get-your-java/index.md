@@ -86,7 +86,7 @@ Semeru provides full support for all major operating systems and architectures b
 
 The other major difference is the JVM. Instead of the default "HotSpot" JVM from Oracle, Semeru Runtimes is the only Java distribution that is powered by the Eclipse OpenJ9 JVM. This JVM also has a lot of history. Originally developed by IBM over 25 years ago as the J9 JVM, it was open sourced to the Eclipse Foundation over 6 years ago. It is renowned for its small footprint, fast start-up, and fast ramp-up time. (See more in [this performance blog post](https://eclipse.dev/openj9/performance/ "this performance blog post").)
 
-{{< img src="EclipseOpenJ9Performance-700x304.png" class="size-medium" width="700" height="304" >}}
+{{< img src="EclipseOpenJ9Performance-700x304.png" alt="Four charts showing Eclipse OpenJ9 starts about 51% faster, uses 50% less footprint after startup, ramps up faster and uses 33% less memory under load than HotSpot" class="size-medium" width="700" height="304" >}}
 
 ## Foundation for Open Liberty and Websphere Liberty
 

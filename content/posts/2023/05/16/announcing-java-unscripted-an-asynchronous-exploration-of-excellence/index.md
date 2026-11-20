@@ -42,7 +42,7 @@ The interviews will be conducted asynchronously via **email** or **Slack** , wit
 
 ### **We'd be thrilled to have you if you're interested in contributing to this series. Please fill out this Google Form to provide some basic information and preferences for the interview process:[Interview Participation Form](https://forms.gle/DsC9hN424sCPicgM8)**
 
-{{< img src="image-847x1024.png" class="size-large is-resized" width="629" height="760" >}}
+{{< img src="image-847x1024.png" alt="Google Form introducing the Java Unscripted asynchronous interview series, with links to five past interviews" class="size-large is-resized" width="629" height="760" >}}
 
 We eagerly look forward to hearing from you.   
 

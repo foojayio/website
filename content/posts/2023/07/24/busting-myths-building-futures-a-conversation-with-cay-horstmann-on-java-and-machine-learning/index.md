@@ -15,7 +15,7 @@ related_posts:
   - "jc-ai-newsletter-16"
 ---
 
-{{< img src="cay-pfh-big-edited.jpg" class="alignright size-medium is-resized" width="503" height="356" >}}
+{{< img src="cay-pfh-big-edited.jpg" alt="Portrait of Cay Horstmann, gray-haired man with rimless glasses, blue shirt and dark blazer" class="alignright size-medium is-resized" width="503" height="356" >}}
 
 In our ongoing series of interviews with the movers and shakers of the software world, we bring you a conversation with Cay Horstmann, a towering figure in the Java community and a respected academic and entrepreneur.
 

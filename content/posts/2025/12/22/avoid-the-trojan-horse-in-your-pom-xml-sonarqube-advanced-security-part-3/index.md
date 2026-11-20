@@ -243,7 +243,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
 You just click "Download," hand it to the auditor (or the automated compliance system), and go back to coding.
 
-{{< img src="Screenshot-2025-12-22-at-11.08.19.jpg" class="size-full is-resized" width="710" height="590" style="width:426px;height:auto" >}}
+{{< img src="Screenshot-2025-12-22-at-11.08.19.jpg" alt="SonarQube Export SBOM menu offering CycloneDX and SPDX v2.3 formats in XML or JSON" class="size-full is-resized" width="710" height="590" style="width:426px;height:auto" >}}
 
 ## **🎯 Summary**
 

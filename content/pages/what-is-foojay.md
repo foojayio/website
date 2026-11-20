@@ -7,7 +7,7 @@ aliases:
   - "/foojay-brand-and-logo/"
 ---
 
-{{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" class="alignleft size-large is-resized on-light" width="666" height="681" style="width:300px" >}}
+{{< img src="/images/pages/who-we-are/Foojay-and-Java-Duke-with-weblink.png" alt="Java mascot Duke and the blue jay mascot giving thumbs up above the foojay.io logo" class="alignleft size-large is-resized on-light" width="666" height="681" style="width:300px" >}}
 
 Foojay.io, the website for **F**riends **O**f **O**pen**J**DK, is the integrated dashboard for all things Java: a central resource for daily information, curated highlights and categorized reference material for the Java community.
 
@@ -40,6 +40,6 @@ Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those
 
 The logos are stored in this [GitHub repository](https://github.com/foojayio/foojay-logo) in various formats.
 
-{{< img src="/images/pages/who-we-are/foojay_podcast.png" class="alignleft size-large is-resized" width="1024" height="1024" style="width:300px" >}}
+{{< img src="/images/pages/who-we-are/foojay_podcast.png" alt="Foojay Podcast badge: the blue jay mascot wearing headphones inside a 'Friends of OpenJDK' seal" class="alignleft size-large is-resized" width="1024" height="1024" style="width:300px" >}}
 
-{{< img src="/images/pages/who-we-are/foojay_logo-1024x341.png" class="alignleft size-large is-resized" width="1024" height="341" style="width:300px" >}}
+{{< img src="/images/pages/who-we-are/foojay_logo-1024x341.png" alt="foojay.io logo in light-blue lettering" class="alignleft size-large is-resized" width="1024" height="341" style="width:300px" >}}

@@ -77,7 +77,7 @@
       <div class="board-mini-list">
         {{ range . }}
         <a class="board-mini" href="{{ .RelPermalink }}">
-          {{ partial "board-logo.html" (dict "page" . "class" "board-logo--mini") }}
+          {{ partial "board-logo.html" (dict "page" . "class" "board-logo--mini" "decorative" true) }}
           <span>{{ .Title }}</span>
         </a>
         {{ end }}

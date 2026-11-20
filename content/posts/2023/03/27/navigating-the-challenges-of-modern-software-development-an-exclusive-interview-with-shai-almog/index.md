@@ -15,7 +15,7 @@ related_posts:
   - "unlocking-the-secrets-to-a-successful-software-engineering-career-an-interview-with-otavio-santana"
 ---
 
-{{< img src="shai-almog.jpg" class="alignleft size-full" width="474" height="474" >}}
+{{< img src="shai-almog.jpg" alt="Portrait of Shai Almog smiling, wearing a dark pinstripe jacket and striped shirt" class="alignleft size-full" width="474" height="474" >}}
 
 Welcome to our exclusive interview with [Shai Almog](https://www.linkedin.com/in/shai-almog-81a42/), an accomplished entrepreneur, author, blogger, and Java expert with over two decades of experience in the software industry.
 

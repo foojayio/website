@@ -87,11 +87,11 @@ We know the JVM interprets byte code, and it is a stack machine. It has an opera
 
 If we want to evaluate this using the following images:
 
-{{< img src="page-272-700x250.png" class="size-medium" width="700" height="250" >}}
+{{< img src="page-272-700x250.png" alt="Stack diagram: push 1, push 2, then add leaves 3 on the stack" class="size-medium" width="700" height="250" >}}
 
 Firstly, we will push 1 and 2 to the stack. And then we will pop these two, add them, and put them in the stack again. The same thing is done in JVM by two instructions: **iconst_\<\>** and **iadd**.
 
-{{< img src="page-273-700x239.png" class="size-medium" width="700" height="239" >}}
+{{< img src="page-273-700x239.png" alt="The same stack steps with JVM instructions: iconst_1, iconst_2, then iadd leaves 3" class="size-medium" width="700" height="239" >}}
 
 *iconst_1* and *iconst_2* , these two opcodess push 1 and 2 to the stack, and `iadd` opcode pops them from the stack and puts them back after adding them. The *iconst_1* and *iconst_2*are two special opcodes for loading 1 and 2 as they are constant.
 

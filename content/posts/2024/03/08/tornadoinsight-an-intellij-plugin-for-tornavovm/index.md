@@ -36,17 +36,17 @@ TornadoInsight is equipped with an on-the-fly static checker. This tool scans To
 
 **This plugin enables programmers to perform proactive adjustments in accordance with the TornadoVM guidelines.** Currently, the static checker applies checks for data types, Traps/Exceptions, recursion, native method calls, and assert statements.  
 
-{{< img src="Static_Check_Fig1-1024x671.webp" class="aligncenter size-large is-resized" width="1024" height="671" style="width:718px;height:auto" >}}
+{{< img src="Static_Check_Fig1-1024x671.webp" alt="IntelliJ editor with a TornadoInsight tooltip warning 'Unsupported datatype in TornadoVM' on the Integer type in an ArrayList" class="aligncenter size-large is-resized" width="1024" height="671" style="width:718px;height:auto" >}}
 
 TornadoInsight provides a tool window to view the built-in static inspector for detailed information.  
 
-{{< img src="TornadoInsight_Guidelines.webp" class="aligncenter size-full is-resized" width="700" height="1014" style="width:433px;height:auto" >}}
+{{< img src="TornadoInsight_Guidelines.webp" alt="TornadoInsight Inspector Guide panel listing the data type, assert, recursion, static task and exception inspectors" class="aligncenter size-full is-resized" width="700" height="1014" style="width:433px;height:auto" >}}
 
 ## 2. Dynamic Testing Framework
 
 TornadoInsight simplifies the testing process for individual TornadoVM tasks. After creating a TornadoVM Task, there is no need to write the main method or initialize the method parameters. You only need to select the method to test from the tool window of TornadoInsight, as shown in the following image.  
 
-{{< img src="Vector_Addition_Fig3-1024x648.webp" class="aligncenter size-large is-resized" width="1024" height="648" style="width:605px;height:auto" >}}
+{{< img src="Vector_Addition_Fig3-1024x648.webp" alt="IntelliJ with the TornadoVM Tasks panel and a 'Run Dynamic Inspection' menu for the vectorAdd task in VectorAddInt.java" class="aligncenter size-large is-resized" width="1024" height="648" style="width:605px;height:auto" >}}
 
 **With its dynamic testing framework, developers can seamlessly conduct tests on specific tasks within their codebase.** TornadoInsight dynamically generates a test file, guides the automatic generation of the Main method and TaskGraph objects needed by TornadoVM, and automatically creates and initializes variables based on parameter types.
 
@@ -54,7 +54,7 @@ Then, it invokes the TornadoVM runtime on the developer's machine to run the gen
 
 **If a TornadoVM task is compatible with TornadoVM, the test outputs the generated OpenCL kernel code for it.**
 
-{{< img src="TornadoInsight_successful_compilation-1024x653.webp" class="size-large is-resized" width="1024" height="653" style="width:840px;height:auto" >}}
+{{< img src="TornadoInsight_successful_compilation-1024x653.webp" alt="TornadoInsight console showing the generated OpenCL kernel for the add task and a 'Dynamic testing completed' notification (1185 ms)" class="size-large is-resized" width="1024" height="653" style="width:840px;height:auto" >}}
 
 If it is not compatible, it will output an exception stack trace. In addition, the elapsed time for running the checks is displayed in the bottom right corner.
 ![TornadoInsight console in IntelliJ showing a failed dynamic inspection of an ArraySort kernel with a stack trace](TornadoInsight_unsuccessful_compilation-1024x645.webp)
@@ -88,7 +88,7 @@ Developers should configure the TornadoVM root directory (i.e. the path to the T
 
 Additionally, developers should indicate a tentative "Max array size" that can be used by TornadoInsight to set the size of the input and output arrays of a TornadoVM task.  
 
-{{< img src="TornadoInsight_Configuration_Plugin-1024x653.webp" class="aligncenter size-large is-resized" width="1024" height="653" style="width:643px;height:auto" >}}
+{{< img src="TornadoInsight_Configuration_Plugin-1024x653.webp" alt="TornadoInsight settings in IntelliJ Preferences: TornadoVM root path, JDK 21 path and max array size of 32, annotated with red arrows" class="aligncenter size-large is-resized" width="1024" height="653" style="width:643px;height:auto" >}}
 
 In **macOS Catalina** and **later,** there may be the need to remove the quarantine attribute before selecting the JDK. To do this, run the following:
 

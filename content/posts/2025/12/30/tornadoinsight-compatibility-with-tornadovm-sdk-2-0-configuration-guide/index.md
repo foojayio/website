@@ -17,7 +17,7 @@ related_posts:
   - "foojay-podcast-91"
 ---
 
-{{< img src="tornado-insight.webp" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
+{{< img src="tornado-insight.webp" alt="Magnifying glass over a monitor of code with a purple swirl, illustrating TornadoInsight code inspection" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
 
 This blog updates the previously published **TornadoInsight** configuration [**++guidelines++**](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea) and explains how to configure the required environment variable to ensure that TornadoInsight correctly detects the TornadoVM SDK when IntelliJ IDEA is launched from a graphical environment.
 
@@ -43,7 +43,7 @@ TornadoInsight supports using the JDK defined in the IntelliJ project settings.
 
 When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.
 
-{{< img src="screenshot_bd38c017-be77-49d6-a5b0-f9ca5-628e5f31.jpg" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
+{{< img src="screenshot_bd38c017-be77-49d6-a5b0-f9ca5-628e5f31.jpg" alt="IntelliJ Project Structure dialog with JDK 21 selected as the project SDK, which TornadoInsight uses for dynamic inspection" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
 
 ## TornadoVM SDK Configuration (Recommended)
 

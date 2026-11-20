@@ -295,7 +295,7 @@ jreleaser full-release
 
 You can login in to the [Maven Central repository](https://central.sonatype.com/publishing) to see the progress.
 
-{{< img src="Screenshot-2025-12-08-at-14.20.55-700x402.png" class="size-medium" width="700" height="402" >}}
+{{< img src="Screenshot-2025-12-08-at-14.20.55-700x402.png" alt="Maven Central publishing page showing the semver-check 1.0.0 bundle with status Published and its three components" class="size-medium" width="700" height="402" >}}
 
 ## GitHub action
 
@@ -332,7 +332,7 @@ on:
 
 This will look something like this when you start the release workflow
 
-{{< img src="Screenshot-2025-12-08-at-14.08.23-653x510.png" class="size-medium" width="653" height="510" >}}
+{{< img src="Screenshot-2025-12-08-at-14.08.23-653x510.png" alt="GitHub Actions Release workflow with the Run workflow dialog asking for release version 1.0.0 and next version 1.0.1" class="size-medium" width="653" height="510" >}}
 
 Next up is just your default build setup, in this example, java 11 is used, but this is the same as for your normal build. Except `fetch-depth` as JReleaser will use the git log to create the changelog it will need the full history, and thus we set the `fetch-depth` to `0`. As it defaults to `1`.
 

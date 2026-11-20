@@ -112,7 +112,7 @@ Maven home: /usr/share/maven
 
 To control the LED-lights, we are going to use the Pi4J-library, which makes the bridge between our Java-code and the GPIO-pins on the Raspberry Pi. These General-Purpose Input/Output-pins allow us to connect and control electronic components. There are 40 of those pins on the Raspberry Pi and can be used for different purposes. In this post, we are only using them as output-pins to control the LEDs but there are countless other possibilities.
 
-{{< img src="headerpins_in_header.png" class="size-full is-resized" width="293" height="449" >}}
+{{< img src="headerpins_in_header.png" alt="Raspberry Pi GPIO header table mapping each of the 40 pins to its function, color-coded as power, ground or digital" class="size-full is-resized" width="293" height="449" >}}
 
 For full support of the Pi4J-library, we need to install some extra software on the board. Again we only need a single command to do this:
 

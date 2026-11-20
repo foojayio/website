@@ -82,6 +82,11 @@
            is the transcript RESOURCE, not a Page. */}}
       {{ .Content }}
     </section>
+    {{ else }}
+    {{/* An episode without one says so; a reader of audio-only content should know. */}}
+    {{ if and .File (hasPrefix .File.ContentBaseName "foojay-podcast-") }}
+    <p class="transcript__note" data-pagefind-ignore>No transcript is available for this episode yet.</p>
+    {{ end }}
     {{ end }}
 
     {{ partial "share.html" . }}

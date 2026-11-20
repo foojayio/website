@@ -16,7 +16,7 @@ related_posts:
   - "building-rest-apis-in-java-with-spring-boot"
 ---
 
-{{< img src="1_rM-JIRWo49QIKv-vZ4taEQ.webp" class="aligncenter size-full is-resized" width="720" height="720" style="width:308px;height:auto" >}}
+{{< img src="1_rM-JIRWo49QIKv-vZ4taEQ.webp" alt="Green MongoDB leaf inside a circle of icons for security, search, databases and hierarchy on a dark background" class="aligncenter size-full is-resized" width="720" height="720" style="width:308px;height:auto" >}}
 
 In environments where microseconds dictate competitive advantage, [MongoDB 8.0](https://www.mongodb.com/products/updates/version-release/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-engine-foojay&utm_term=tony.kim) delivers a meticulously tuned execution pipeline that transforms raw network packets into sub-millisecond query responses at global scale.
 

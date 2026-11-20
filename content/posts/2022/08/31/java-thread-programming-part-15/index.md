@@ -17,7 +17,7 @@ related_posts:
 
 This article will discuss how we do asynchronous method invocation with [Callable](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/Callable.html) and [Future](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/Future.html) with a practical example.
 
-{{< img src="Playground.java_-700x227.png" class="size-medium" width="700" height="227" >}}
+{{< img src="Playground.java_-700x227.png" alt="Playground.java in a code editor showing an empty main method" class="size-medium" width="700" height="227" >}}
 
 Look at the code snippet. It doesn't have anything yet, but [as we learned about Java threading](https://foojay.io/today/java-thread-programming-part-14/), we know anything we put here will run on the main thread unless we spawn a new thread from here.
 

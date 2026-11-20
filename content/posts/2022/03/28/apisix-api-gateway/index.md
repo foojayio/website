@@ -76,7 +76,7 @@ APISIX provides several core objects:
 * Route:"The route matches the client's request by defining rules, then loads and executes the corresponding plugin based on the matching result, and forwards the request to the specified Upstream."
 * Service: A reusable object that binds both a set of plugins and an upstream.
 
-{{< img src="apisix-objects-479x510.png" class="size-medium aligncenter" width="479" height="510" >}}
+{{< img src="apisix-objects-479x510.png" alt="UML diagram: Route, Service and Consumer link to Plugins, PluginConfig and an Upstream with type, key and nodes" class="size-medium aligncenter" width="479" height="510" >}}
 
 Objects are stored in [etcd](https://etcd.io/), a distributed key-value store also used by Kubernetes. Apache APISIX exposes a REST API so that you can access the configuration in a technical-agnostic way. Here, we request all existing routes:
 

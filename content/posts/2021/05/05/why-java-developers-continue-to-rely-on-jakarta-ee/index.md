@@ -19,7 +19,7 @@ related_posts:
 
 Over the past year, the Eclipse Foundation spoke to leading Java developers around the world to discuss why they rely on[Jakarta EE](https://jakarta.ee/) and the unique benefits of using Jakarta EE technologies. Their input is captured in our white paper, which describes the important advantages Jakarta EE offers today and for the future.  
 
-{{< img src="JakartaEEWhitepaper-09e55960.jpg" class="aligncenter size-large is-resized" width="222" height="288" >}}
+{{< img src="JakartaEEWhitepaper-09e55960.jpg" alt="Cover of the Eclipse Foundation white paper 'Why Jakarta EE Is the Right Choice for Today's Java Applications', with a sailboat" class="aligncenter size-large is-resized" width="222" height="288" >}}
 
 [Download the Jakarta EE white paper!](https://outreach.jakartaee.org/white-paper-java-applications)
 

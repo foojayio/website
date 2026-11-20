@@ -296,11 +296,11 @@ To use customized controls with Scene Builder, supply a JAR file with these comp
 
 From the Scene Builder Library menu, select the **Settings** icon (at the top next to Library) and the **JAR/FXML Manager**, as shown in Figure 3.
 
-{{< img src="screenbuilder-librarysettings.png" class="size-full is-resized" width="477" height="292" caption="Figure 3. Use the JAR/FXML Manager to customize Scene Builder" >}}
+{{< img src="screenbuilder-librarysettings.png" alt="Scene Builder Library menu open with the JAR/FXML Manager entry highlighted, above custom KeyButton and LetterLabel" class="size-full is-resized" width="477" height="292" caption="Figure 3. Use the JAR/FXML Manager to customize Scene Builder" >}}
 
 Scene Builder will then display the Library Manager. To add the KeyButton and LetterLabel classes, select **Add Library/FXML from file system** , as shown in Figure 4. Supply the jar file containing the compiled class files for LetterLabel, KeyButton, and LetterStyle (here, file **wordish.jar**).
 
-{{< img src="screenbuilder-addcustom.png" class="size-full is-resized" width="388" height="377" caption="Figure 4. The Scene Builder Library Manager" >}}
+{{< img src="screenbuilder-addcustom.png" alt="Scene Builder Library Manager listing wordish.jar and two Ikonli libraries, with actions to add a library from the file system" class="size-full is-resized" width="388" height="377" caption="Figure 4. The Scene Builder Library Manager" >}}
 
 Once you add them, the classes appear in the Custom section under Library. You can then select a LetterLabel, for example, place it in your visual view, and even configure its properties, including the custom properties `letterDisplay` and `matchResult` that we showed earlier.
 

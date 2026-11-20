@@ -15,7 +15,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="miro.jpeg" class="alignright size-full" width="426" height="426" >}}
+{{< img src="miro.jpeg" alt="Portrait of Miro Wengner, smiling with glasses and a dark blue polo shirt" class="alignright size-full" width="426" height="426" >}}
 
 In this insightful discussion, we sit down with Miro Wengner, an accomplished software engineer with a deep-rooted affinity for Java. Miro shares his professional journey, highlights the significant challenges in the field, and reflects on the key moments that shaped his career.  
 

@@ -60,7 +60,7 @@ BTW, notice I'm using [Java](https://lightrun.com/debugging/top-10-java-linters/
 
 This is trivial to test in Lightrun. We can just add a log or a snapshot that will be triggered when an invalid request happens. Then we can try sending invalid values via a curl command to see if our log is triggered.
 
-{{< img src="2-700x471.png" class="size-medium" width="700" height="471" >}}
+{{< img src="2-700x471.png" alt="Lightrun 'Create Log' dialog in IntelliJ adding a log line at MovieService.java line 33 with a regex condition on name" class="size-medium" width="700" height="471" >}}
 
 Notice that we use a regular expression to validate the name value. If we receive a log, it means the problematic value is exploitable. This also means the risk of the security vulnerability is high.
 
@@ -72,7 +72,7 @@ What do we do?
 
 Well, we can do something similar to what we did above and add a snapshot with a similar condition and a few "tune ups":
 
-{{< img src="3-672x510.png" class="size-medium" width="672" height="510" >}}
+{{< img src="3-672x510.png" alt="Lightrun 'Edit Snapshot' dialog for MovieService.java line 33 with the regex condition, max hit count 20 and 60-hour expiry" class="size-medium" width="672" height="510" >}}
 
 This image contains a lot, so let's try to unpack it.
 

@@ -15,7 +15,7 @@ related_posts:
   - "book-review-quarkus-for-spring-developers"
 ---
 
-{{< img src="effortless-cloud-skaffold-835x1024.jpg" class="size-large is-resized" width="299" height="367" >}}
+{{< img src="effortless-cloud-skaffold-835x1024.jpg" alt="Cover of the book 'Effortless Cloud-Native App Development Using Skaffold' by Ashish Choudhary" class="size-large is-resized" width="299" height="367" >}}
 
 In "[Effortless Cloud-Native App Development Using Skaffold](https://www.packtpub.com/product/effortless-cloud-native-app-development-using-skaffold/9781801077118)", Ashish Choudhary provides a thorough overview of [Skaffold](https://skaffold.dev/), with the book's subtitle clearly defining its agenda: "Simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes with Skaffold".
 

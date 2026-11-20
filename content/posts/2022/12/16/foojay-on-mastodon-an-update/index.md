@@ -37,7 +37,7 @@ It has been one month since we announced [foojay.social](https://foojay.social).
 
 On our own account [foojay.social/@foojay](https://foojay.social/@foojay) we share the same content as we do on Twitter, mainly links to new articles. We don't use a cross-posting tool, but try to link to the Mastodon account of the writer, or other references, whenever possible. This account is also one month old, and already gained nearly 250 followers.
 
-{{< img src="mastodon-foojay-20221215.png" class="size-full is-resized" width="316" height="591" >}}
+{{< img src="mastodon-foojay-20221215.png" alt="Foojay.io profile on foojay.social with 86 posts, 364 following and 240 followers" class="size-full is-resized" width="316" height="591" >}}
 
 The administration dashboard shows we have a total of 118 active users on the foojay.social-server, who interacted more than 4000 times. Two spam-like messages got reported during this month and those account are blocked, and are no longer able to interact with this Mastodon instance.
 

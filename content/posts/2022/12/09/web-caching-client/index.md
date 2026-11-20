@@ -86,7 +86,7 @@ To avoid the risk of serving an out-of-date resource, the browser **must** send 
 
 Let's use a diagram to make clear how they interact:
 
-{{< img src="last-modified-sequence-498x510.png" class="size-medium aligncenter" width="498" height="510" >}}
+{{< img src="last-modified-sequence-498x510.png" alt="Sequence diagram: browser sends If-Modified-Since, server replies 200 with new data or 304 from cache" class="size-medium aligncenter" width="498" height="510" >}}
 
 Note: the `If-Unmodified-Since` has the opposite function for `POST` and other non-idempotent methods. It returns a `412 Precondition Failed` HTTP error to avoid overwriting resources that have changed.
 

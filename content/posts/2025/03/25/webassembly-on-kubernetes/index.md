@@ -480,7 +480,7 @@ We do the same with the `embed` and the `native` pods, barring the `runtimeClass
 
 The final deployment diagram is the following:
 
-{{< img src="deployment-diagram-600x510.png" class="aligncenter size-medium" width="600" height="510" >}}
+{{< img src="deployment-diagram-600x510.png" alt="UML deployment diagram: minikube ingress-controller routes /embed and /native to runc vclusters and /runtime to a wasmedge vcluster" class="aligncenter size-medium" width="600" height="510" >}}
 
 The final touch is to tunnel to expose services:
 

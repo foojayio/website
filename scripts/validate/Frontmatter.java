@@ -123,6 +123,7 @@ public class Frontmatter {
                         + " who cannot see it is told nothing at all. Add one where the image carries"
                         + " meaning; leave it empty where the image is decoration and the text beside it"
                         + " already says everything. See /accessibility/ for the standard the site aims at.");
+        reportAltTextBacklog(Path.of("content"));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -1507,6 +1508,34 @@ public class Frontmatter {
             }
         }
         return warnings;
+    }
+
+    static final Pattern POST_YEAR = Pattern.compile("content/posts/(\\d{4})/");
+
+    /** Undescribed images per post year over the whole archive, whatever the scope, so the trend is visible in every run. */
+    static void reportAltTextBacklog(Path dir) throws IOException {
+        if (!Files.isDirectory(dir)) return;
+        Map<String, Integer> byYear = new TreeMap<>();
+        try (Stream<Path> files = Files.walk(dir)) {
+            for (Path file : files.filter(Frontmatter::isContentFile).toList()) {
+                if (isPageResource(file)) continue;
+                int n = imagesWithoutAlt(Files.readString(file), file.toString().endsWith(".adoc")).size();
+                if (n == 0) continue;
+                Matcher y = POST_YEAR.matcher(file.toString().replace('\\', '/'));
+                byYear.merge(y.find() ? y.group(1) : "other", n, Integer::sum);
+            }
+        }
+        int total = byYear.values().stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Images with no description, whole archive: " + total
+                + (byYear.isEmpty() ? "" : " (" + byYear.entrySet().stream()
+                        .map(e -> e.getKey() + ": " + e.getValue()).collect(java.util.stream.Collectors.joining(", ")) + ")"));
+        String summary = System.getenv("GITHUB_STEP_SUMMARY");
+        if (summary == null || summary.isBlank()) return;
+        StringBuilder md = new StringBuilder("### Images with no description\n\n| Year | Images |\n|---|---|\n");
+        byYear.forEach((k, v) -> md.append("| ").append(k).append(" | ").append(v).append(" |\n"));
+        md.append("| **Total** | **").append(total).append("** |\n");
+        Files.writeString(Path.of(summary), md.toString(), java.nio.file.StandardOpenOption.CREATE,
+                java.nio.file.StandardOpenOption.APPEND);
     }
 
     /** `image::file.png[alt]` and the inline `image:file.png[alt]`. */

@@ -15,7 +15,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="michael-redlich.jpg" class="alignright size-full is-resized" width="480" height="480" >}}
+{{< img src="michael-redlich.jpg" alt="Portrait of Michael Redlich smiling in sunglasses at an outdoor table with a flight of cider samples" class="alignright size-full is-resized" width="480" height="480" >}}
 
 In this interview, we had the pleasure of speaking with Michael P. Redlich, a seasoned software developer with over 30 years of experience in the field.
 

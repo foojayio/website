@@ -18,7 +18,7 @@ related_posts:
   - "foojay-podcast-25"
 ---
 
-{{< img src="cover.jpg" class="size-full is-resized" width="327" height="466" style="width:auto;height:200px" >}}
+{{< img src="cover.jpg" alt="Cover of Frontend Development with JavaFX and Kotlin by Peter Spaeth, Apress" class="size-full is-resized" width="327" height="466" style="width:auto;height:200px" >}}
 
 For a personal pet project, I started experimenting with JavaFX and Kotlin to create a user interface with a lot of Java / Kotlin background processing. As I knew there is a book available on this specific topic, Apress was so kind to send me a review copy of [Frontend Development with JavaFX and Kotlin: Build State-of-the-Art Kotlin GUI Applications](https://www.amazon.nl/Frontend-Development-JavaFX-Kotlin-State/dp/1484297164) by Peter Späth (152 pages, 48€ on paper, 35.5€ for ebook on Amazon.nl).
 

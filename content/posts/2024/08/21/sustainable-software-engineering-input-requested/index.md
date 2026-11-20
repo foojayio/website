@@ -32,7 +32,7 @@ ven you or your organization does not do anything, we still want to ask you to f
 
 [
 
-{{< img src="itsustainability-630x510.jpg" class="size-medium" width="630" height="510" >}}
+{{< img src="itsustainability-630x510.jpg" alt="IT Sustainability Goals survey form in OpnForm, asking whether the reader has heard of Software Carbon Intensity" class="size-medium" width="630" height="510" >}}
 
 ](https://opnform.com/forms/it-sustainability-goals-ewq3yc)
 

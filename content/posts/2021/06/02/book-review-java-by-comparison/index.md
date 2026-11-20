@@ -15,7 +15,7 @@ related_posts:
   - "openjdk-vs-openjfx-release-cycles"
 ---
 
-{{< img src="book-java-by-comparison-423x510.png" class="size-medium" width="423" height="510" >}}
+{{< img src="book-java-by-comparison-423x510.png" alt="Cover of Java by Comparison: Become a Java Craftsman in 70 Examples, by Harrer, Lenhard and Dietz" class="size-medium" width="423" height="510" >}}
 
 The book ["Java by Comparison" by Simon Harrer, Jörg Lenhard, and Linus Dietz](https://pragprog.com/titles/javacomp/java-by-comparison/), promises the reader to become a "Java Craftsman" through the study of 70 examples. The book is published by The Pragmatic Bookshelf.
 

@@ -58,7 +58,7 @@ No more surprises in the pipeline. You see the error *before* you commit.
 
 Open IntelliJ **Settings** (or Preferences) -\> **Tools** -\> **SonarQube for IDE** . Click the **+** icon under "Connections" to start, or on the SonarQube IDE plugin window click on the **configure** button.
 
-{{< img src="Screenshot-2025-12-16-at-10.22.56.jpg" class="size-full is-resized" width="660" height="606" style="width:369px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.22.56.jpg" alt="SonarQube for IDE findings panel in IntelliJ listing eight older issues, with a Configure SonarQube for IDE tooltip" class="size-full is-resized" width="660" height="606" style="width:369px;height:auto" >}}
 
 Click on the tool icon to open the settings dialog.
 ![IntelliJ Project Settings dialog with the 'Bind project to SonarQube' option still unchecked](Screenshot-2025-12-16-at-10.23.05-1024x265.png)
@@ -79,7 +79,7 @@ Click on the + icon to add the connection
 
 **Step 5: Bind the Project** Now that the connection is made, IntelliJ will ask which specific project on the server matches your current open folder. Search for your project key (e.g., my-company_backend-api) and click **Bind**.
 
-{{< img src="Screenshot-2025-12-16-at-10.23.52-686x510.png" class="size-medium is-resized" width="686" height="510" style="width:374px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.23.52-686x510.png" alt="IntelliJ dialog 'Select SonarQube Cloud Project To Bind' with the 'security' project highlighted" class="size-medium is-resized" width="686" height="510" style="width:374px;height:auto" >}}
 
 ![Project Settings with the project bound to SonarQube Cloud and the project key filled in](Screenshot-2025-12-16-at-10.24.00-1024x251.png)
 
@@ -145,14 +145,14 @@ SonarQube Cloud allows you to define what "New Code" means for *your* specific s
    * *Result:* You can merge if *your* changes are tested, even if the rest of the app is a mess.
 2. **Custom Profiles:** Your Tech Lead can clone the "Sonar way (Java)" profile and disable rules that don't fit your style (e.g., maybe you don't care about "Trailing comments" or specific naming conventions).
 
-{{< img src="Screenshot-2025-12-16-at-10.24.44.jpg" class="size-full is-resized" width="910" height="570" style="width:581px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.24.44.jpg" alt="SonarQube Cloud Quality profiles page for Java listing the built-in Sonar way (575 rules) and a custom Jonathan profile (576 rules)" class="size-full is-resized" width="910" height="570" style="width:581px;height:auto" >}}
 
 We can inherit the Sonar default profile, and modify it
 ![SonarQube Cloud quality profile page showing inherited rules, linked project and rule breakdown counts](Screenshot-2025-12-16-at-10.24.53.jpg)
 
 We see in our profile we have one more rule activated
 
-{{< img src="Screenshot-2025-12-16-at-10.25.03.jpg" class="size-full is-resized" width="804" height="628" style="width:618px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.25.03.jpg" alt="SonarQube Cloud rules view of the custom profile showing one added rule, 'Members of Spring components should be injected'" class="size-full is-resized" width="804" height="628" style="width:618px;height:auto" >}}
 
 By tuning the gate, the tool becomes a helper, not a blocker. We can define our thresholds that resonate better with our maturity and goals.
 ![SonarQube Cloud quality gate with conditions on new code such as coverage below 30% and ratings worse than A](Screenshot-2025-12-16-at-10.25.14-1024x703.png)
@@ -175,7 +175,7 @@ You have the final say. You can override the tool's judgment in the SonarQube Cl
    * ***Tip*** *:* You can leave a comment explaining your reasoning so the next developer understands why this exception exists.
 2. **Assigning the Issue** : If the pipeline failed because of a bug in a file you touched, but the bug was actually part of a legacy method written by your colleague Bob, you can Assign it to him. It's not about blaming; it's about making sure the right person handles the debt. You can optionally also [integrate](https://docs.sonarsource.com/sonarqube-cloud/managing-your-projects/administering-your-projects/jira-integration) with SonarQube Cloud with your Jira workflow.
 
-{{< img src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" class="size-large is-resized" width="1024" height="454" style="width:571px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" alt="SonarQube issue dialogs for changing status to Accept with an optional comment, and for assigning the issue to yourself" class="size-large is-resized" width="1024" height="454" style="width:571px;height:auto" >}}
 
 ## **Problem #6: "I'm lost in the details: How is the project actually doing?"**
 
@@ -307,7 +307,7 @@ jobs:
 
 **Why is this cool?** Because of the pull_request trigger and the GITHUB_TOKEN, SonarQube Cloud knows exactly where to post those comments on your PR.
 
-{{< img src="Screenshot-2025-12-16-at-10.25.44-611x510.png" class="size-medium is-resized" width="611" height="510" style="width:376px;height:auto" >}}
+{{< img src="Screenshot-2025-12-16-at-10.25.44-611x510.png" alt="SonarQube Cloud comment on a GitHub pull request reporting Quality Gate passed with 7 new issues and 0 security hotspots" class="size-medium is-resized" width="611" height="510" style="width:376px;height:auto" >}}
 
 ![GitHub Actions run for the pull request showing the 'Build and analyze' job succeeded in 53 seconds](Screenshot-2025-12-16-at-10.25.50.png)
 
