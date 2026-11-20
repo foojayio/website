@@ -79,8 +79,23 @@
     "id" : "UC0WXH03OU-RJeUQ2CuMFU9g",
     "title" : "Anahata TV - Java AI, AGI, ASI",
     "avatar" : "https://yt3.googleusercontent.com/lBBGPlk8vAWzHrZnLSdLptAvZi4N6rR3UYMwrFD62vQ5XdG-qkYtVDLyWETTrId7Dn_CqDeJUw=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "jjohannes",
+    "id" : "UCxACdAdoVVimgPoFwbdHUkQ",
+    "title" : "onepiece.Software by Jendrik Johannes",
+    "avatar" : "https://yt3.googleusercontent.com/U5rB3j8qX8xlqRvLYPOvqB-MmXf6Uw08HNs1pvn4hMkQEi7esLk8rhFzxQWk7EWco_hdKwrGrg=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "zv7IDjz62Dw",
+    "channel" : "JetBrainsTV",
+    "title" : "Rust & AI: Keeping Humans in the Loop",
+    "published" : "2026-11-20T05:23:37+00:00"
+  }, {
+    "id" : "Wy4pfglazFg",
+    "channel" : "sivalabs",
+    "title" : "mise: One Tool To Rule Them All",
+    "published" : "2026-11-19T09:41:17+00:00"
+  }, {
     "id" : "xE7EfRg5z8M",
     "channel" : "azulsystems",
     "title" : "Azul Account Executive Steven Piper Shares Security Insights",
@@ -546,11 +561,6 @@
     "title" : "Live-Building AI-Driven PCG with Godot, C#, and Gemini | Sharmishtha Sen | GameDev Day 2026",
     "published" : "2026-10-19T14:46:50+00:00"
   }, {
-    "id" : "ArRxCTD9EU4",
-    "channel" : "JetBrainsTV",
-    "title" : "Death by a Thousand Ticks: Why Gameplay Systems Become Slow | Konrad Słoń | GameDev Day 2026",
-    "published" : "2026-10-19T14:46:39+00:00"
-  }, {
     "id" : "y8HtFI5JNlE",
     "channel" : "intellijidea",
     "title" : "Sandboxing AI Agents With GraalVM by Thomas Wuerthinger | IntelliJ IDEA Conf 2026",
@@ -966,6 +976,11 @@
     "title" : "Why Your Pipeline Needs Zero Trust (And How to Build It)",
     "published" : "2026-08-21T15:11:52+00:00"
   }, {
+    "id" : "zyrGN6_0Tn4",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #37 – CI: GitHub Actions & TestLens",
+    "published" : "2026-08-12T20:27:29+00:00"
+  }, {
     "id" : "Z5jJQz1YM3U",
     "channel" : "cbrjar",
     "title" : "How to Apply Zero Trust to Open Source Dependencies",
@@ -1151,20 +1166,40 @@
     "title" : "From Java to Assembly in Java's 1-Billion-Row Challenge (Ep. 4) | With @caseymuratori ​",
     "published" : "2025-10-16T15:00:55+00:00"
   }, {
+    "id" : "vPwnISaWjNs",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde: Carefree Dependency Management in Java Projects",
+    "published" : "2025-10-16T07:10:39+00:00"
+  }, {
     "id" : "8l1obGG_6jQ",
     "channel" : "virtualJUG",
     "title" : "[vJUG CONNECT] AI & Java: From Structured Prompts to Smarter Apps",
     "published" : "2025-10-15T07:21:53+00:00"
+  }, {
+    "id" : "kg8TpiYZvvU",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #6 – Update Dependencies in Java Projects",
+    "published" : "2025-10-11T09:56:36+00:00"
   }, {
     "id" : "dvA5TfN1EQ8",
     "channel" : "MarcoCodes",
     "title" : "Slow For-Loops in Java's 1-Billion-Row Challenge (Ep. 3) | With @caseymuratori ​",
     "published" : "2025-10-03T13:47:20+00:00"
   }, {
+    "id" : "i9Vf39vme_w",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #5 – Analyze Dependencies in Java Projects",
+    "published" : "2025-10-03T08:03:15+00:00"
+  }, {
     "id" : "0eMjPI9th18",
     "channel" : "azulsystems",
     "title" : "azul bids short",
     "published" : "2025-09-30T16:14:35+00:00"
+  }, {
+    "id" : "2tJxmci4VCg",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #4 – Dependency Conflict Management in Java Projects",
+    "published" : "2025-09-26T05:32:13+00:00"
   }, {
     "id" : "uV1in4xaWVg",
     "channel" : "azulsystems",
@@ -1181,15 +1216,35 @@
     "title" : "JDK25 OnDemand Webinar",
     "published" : "2025-09-22T04:30:02+00:00"
   }, {
+    "id" : "CWgFD0bO6-8",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #3 – Separate build tool configuration from dependency management",
+    "published" : "2025-09-19T10:48:56+00:00"
+  }, {
     "id" : "1scdo1RGepY",
     "channel" : "azulsystems",
     "title" : "How to Boost JVM Scalability and Performance With Kotlin and Azul Runtime",
     "published" : "2025-09-13T17:23:00+00:00"
   }, {
+    "id" : "0mpw4edHFrg",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #2 – Version Management in Java Projects",
+    "published" : "2025-09-12T08:56:09+00:00"
+  }, {
+    "id" : "rEA-QfhdSPo",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #1 – Dependency Definition in Java projects",
+    "published" : "2025-09-05T10:47:56+00:00"
+  }, {
     "id" : "rzLcVq8xm1Y",
     "channel" : "MarcoCodes",
     "title" : "Setting Performance Baselines for Java's 1-Billion-Row Challenge (Ep. 2) | With @caseymuratori",
     "published" : "2025-09-04T14:28:53+00:00"
+  }, {
+    "id" : "MUeJeiNRFFA",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #0 – Modules in Java Development",
+    "published" : "2025-08-28T15:43:29+00:00"
   }, {
     "id" : "n-YK3B4_xPA",
     "channel" : "MarcoCodes",
@@ -1236,10 +1291,20 @@
     "title" : "Building Docker Images - Best Practices",
     "published" : "2024-06-20T11:16:06+00:00"
   }, {
+    "id" : "7ueAnM7ADm4",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #36 – Task Actions",
+    "published" : "2023-11-20T09:20:41+00:00"
+  }, {
     "id" : "soqw1cPHMEE",
     "channel" : "MarcoCodes",
     "title" : "GraalVM & Spring Boot: Building a Native Executable | Marco Reacts",
     "published" : "2023-11-08T13:44:31+00:00"
+  }, {
+    "id" : "LhVhC86FVIY",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #35 – Working with Files",
+    "published" : "2023-11-06T15:03:51+00:00"
   }, {
     "id" : "uLUMM1Y-dd8",
     "channel" : "MarcoCodes",
@@ -1260,6 +1325,21 @@
     "channel" : "MarcoCodes",
     "title" : "MCL #002: Gavin King & Hibernate 6.3",
     "published" : "2023-09-08T04:11:53+00:00"
+  }, {
+    "id" : "n8Tgr4aLB18",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #34 – Properties and Providers",
+    "published" : "2023-08-31T04:56:30+00:00"
+  }, {
+    "id" : "6rFEDcP8Noc",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #33 – Classpath and Module Path in Testing",
+    "published" : "2023-06-19T13:38:43+00:00"
+  }, {
+    "id" : "T9U0BOlVc-c",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #32 – Artifact Transforms",
+    "published" : "2023-04-28T08:11:15+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "25p0SDaiDmI", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KQBygmRGtTM", "M0Wha6RdIPY", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "dKQLbWmM7Jw", "djH8eWBTlCE", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "9S9UNVME4tQ", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KQBygmRGtTM", "M0Wha6RdIPY", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "QXXxXIfr610", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "iv_-3yw-cGA", "jpWqkgomt7M", "k7H-9eZTnyY", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "o_3fKlij9Zo", "obIiJgMzxR8", "piTR9wKwDnQ", "pk3nsX3HglI", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }
