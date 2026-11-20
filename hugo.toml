@@ -161,6 +161,10 @@ enableGitInfo = true
 # data/views.json, which the build refreshes via scripts/fetch/ViewCounts.java.
 [params.views]
   endpoint = "https://foojay.io/api/views"
+  # A count below this is not shown: a small number reads as "nobody cares".
+  minimum = 100
+  # Nor on a post younger than this many days.
+  minAgeDays = 2
 
 # The third-party tags foojay.io runs; partials/analytics.html renders nothing
 # unless these are set. `gtm` is the container WordPress used, which reaches

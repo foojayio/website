@@ -6,7 +6,6 @@
 - Categories appear in three places (sidebar, "Most popular post categories", "All Categories" menu item), and the sidebar order looks arbitrary.
 - The "Java" badge is on almost every card and says nothing.
 - About ten sidebar modules sit before the footer.
-- Low view counts ("31 views") on day-old posts read as "unpopular".
 - Featured Authors shows two names with no explanation.
 
 ## Plan
@@ -15,8 +14,7 @@
 3. **Category order:** sort by count, descending, and cap at a visible number with a link to all.
 4. **Hide the "Java" badge** on cards in the template (derive it, no per-post change). Check that it is not a category used for filtering.
 5. **Sidebar budget:** audit `themes/foojay/layouts/partials/sidebar.html`, choose at most five modules, and move the rest to their own pages.
-6. **View counts:** hide the number below a threshold (e.g. 100) in the card and post templates, as a build-time rule, so no author flag is needed. This touches only display; `views-key.html` stays the single definition of counting.
-7. **Featured Authors:** add one line ("Rotated monthly by the editors") next to the heading. The slugs stay in `hugo.toml`.
+6. **Featured Authors:** add one line ("Rotated monthly by the editors") next to the heading. The slugs stay in `hugo.toml`.
 
 ## Done when
 - Each block appears once on the homepage.

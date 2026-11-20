@@ -5,8 +5,8 @@
   partial only renders. The number is baked in at build time from
   data/views.json (refreshed by scripts/fetch/ViewCounts.java from the counter in
   worker/views/), so it needs no JavaScript and can't shift the layout after
-  paint. Renders nothing when a page has no count yet -- correct on a brand new
-  post, on every author page until the Worker has been live a while (WordPress
+  paint. Renders nothing below [params.views] minimum or on a post younger than
+  minAgeDays, so also when a page has no count yet -- correct on a brand new post, on every author page until the Worker has been live a while (WordPress
   has no author-archive numbers to import), and during local development where
   data/views.json may be empty.
 */}}
@@ -17,6 +17,7 @@
     {{- with index . $key -}}{{- $count = . -}}{{- end -}}
   {{- end -}}
 {{- end -}}
-{{- if gt $count 0 -}}
+{{- $cutoff := now.AddDate 0 0 (sub 0 (site.Params.views.minAgeDays | default 0)) -}}
+{{- if and (gt $count 0) (ge $count (site.Params.views.minimum | default 0)) (or .Date.IsZero (.Date.Before $cutoff)) -}}
 <span class="views">{{ lang.FormatNumberCustom 0 $count }} views</span>
 {{- end -}}
