@@ -113,8 +113,16 @@ model:
   whenever the original alt text was empty or `image`, describing what the
   picture shows.
 * Keep the author's own wording for captions and alt text where it exists.
+* Raw HTML image grids (`<div class="release-screenshots">` with `<figure>`,
+  `<img>` and `<figcaption>`, often from syndicated posts) are galleries too:
+  `<figcaption>` becomes the caption and `alt` the second field. Convert them
+  even when each image is wrapped in a link; the shortcode has no links, and
+  the article is normally linked in the text nearby. Search for `<img` and
+  `<figure`, not only `![`.
 * Leave the frontmatter `image:` alone, and leave diagrams, logos and inline
   icons that sit inside a sentence as plain images.
+* Afterwards, check the bundle for a PNG left beside its JPG conversion that
+  nothing references, and delete it.
 
 Check the rendered page afterwards; a filename that does not match a file in
 the bundle shows no picture.

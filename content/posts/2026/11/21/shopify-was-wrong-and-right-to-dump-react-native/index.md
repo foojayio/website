@@ -43,11 +43,11 @@ Before we proceed, here's a recap of last week on the blog:
 - **Thursday, November 19:** [Run an LLM and Whisper on the Phone, With No Server Bill](https://www.codenameone.com/blog/run-an-llm-on-the-phone/). Local models through the same API as the cloud ones, so moving a feature onto the phone is a one line change.
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/"><img src="gantt-critical-path-acf04493e0.png" alt="A Gantt chart with the critical path highlighted" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Gantt with the critical path.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/"><img width="1080" height="1920" src="slate-book-slots-6b4e28f424.jpg" alt="Slate showing free appointment times" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Booking in Slate.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/ship-your-java-game-on-steam/"><img src="splat-in-game-511a95ee57.jpg" alt="A first-person view of a Splat capture the flag match" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Splat, in a match.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+gantt-critical-path-acf04493e0.png | Gantt with the critical path | A Gantt chart with the critical path highlighted
+slate-book-slots-6b4e28f424.jpg | Booking in Slate | Slate showing free appointment times
+splat-in-game-511a95ee57.jpg | Splat, in a match | A first-person view of a Splat capture the flag match
+{{< /gallery >}}
 
 
 ## React Native was built to fail at write once, run anywhere
