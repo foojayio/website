@@ -8,7 +8,6 @@ authors:
   - "david-vlijmincx"
 image: "async.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Project Panama"
 related_posts:

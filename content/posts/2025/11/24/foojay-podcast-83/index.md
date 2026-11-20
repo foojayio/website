@@ -9,7 +9,6 @@ authors:
   - "johan-vos"
 image: "episode-83-java-evolutions-tips-tricks.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JavaFX"
   - "Podcast"

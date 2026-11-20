@@ -9,7 +9,6 @@ image: "bx-jwt.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Library"
   - "Security"
   - "Tools"

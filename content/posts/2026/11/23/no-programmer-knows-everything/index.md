@@ -6,7 +6,7 @@ authors:
   - "jottinger"
 image: "header.jpg"
 categories:
-  - "Java"
+  - "Opinion"
 related_posts:
   - "bcn-where-does-experience-come-from"
   - "how-i-built-an-ai-assistant-for-my-career-with-java-spring-ai-and-mongodb"

@@ -13,7 +13,6 @@ categories:
   - "Cloud"
   - "DevOps"
   - "Events"
-  - "Java"
   - "Java Core"
   - "jOOQ"
   - "Kotlin"

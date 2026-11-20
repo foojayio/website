@@ -7,7 +7,6 @@ authors:
   - "siva-katamreddy"
 image: "1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
-  - "Java"
   - "Spring"
   - "Testcontainers"
 related_posts:

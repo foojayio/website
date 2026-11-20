@@ -6,7 +6,6 @@ authors:
   - "michael-gasche"
 image: "social-preview.jpg"
 categories:
-  - "Java"
   - "Developer Tools"
   - "Dependency Management"
   - "DevOps"

@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "thumbnail.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "Pi4J"

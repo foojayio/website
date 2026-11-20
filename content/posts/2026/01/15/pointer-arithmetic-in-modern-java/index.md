@@ -8,7 +8,7 @@ authors:
   - "david-vlijmincx"
 image: "jmh.png"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "everything-bad-in-java-is-good-for-you"
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"

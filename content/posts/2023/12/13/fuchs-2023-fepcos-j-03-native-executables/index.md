@@ -8,7 +8,6 @@ authors:
 image: "fuchs2023-fepcos-j-modular-design.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
 related_posts:
   - "native-image-micronaut"

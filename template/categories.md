@@ -30,7 +30,6 @@ frontmatter.
 - Deep Netts
 - Dependency Management
 - Design Patterns
-- Desktop
 - Developer Tools
 - DevOps
 - Eclipse
@@ -51,7 +50,6 @@ frontmatter.
 - IntelliJ IDEA
 - Interviews
 - Jakarta EE
-- Java
 - Java Beginner
 - Java Core
 - JavaFX

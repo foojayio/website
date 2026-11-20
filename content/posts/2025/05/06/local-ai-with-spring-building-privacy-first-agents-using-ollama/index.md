@@ -7,7 +7,6 @@ authors:
   - "bruno-oliveira"
 image: "3wm66Vp.md_.png"
 categories:
-  - "Java"
   - "Spring"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

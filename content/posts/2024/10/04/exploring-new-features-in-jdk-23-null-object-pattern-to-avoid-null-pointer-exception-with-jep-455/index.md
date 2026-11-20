@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "JEPs"
 related_posts:
   - "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"

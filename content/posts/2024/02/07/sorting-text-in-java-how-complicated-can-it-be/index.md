@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"

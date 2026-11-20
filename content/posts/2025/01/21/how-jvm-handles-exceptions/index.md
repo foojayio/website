@@ -8,7 +8,6 @@ authors:
   - "nataliia"
 image: "try-catch-finally-700x506-1.png"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-64"

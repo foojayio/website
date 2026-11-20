@@ -10,7 +10,6 @@ categories:
   - "Agile"
   - "AI"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "Machine Learning"
   - "Opinion"

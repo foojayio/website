@@ -12,7 +12,6 @@ authors:
   - "miro-wengner"
 image: "episode-73-jcon-part-2.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
 related_posts:

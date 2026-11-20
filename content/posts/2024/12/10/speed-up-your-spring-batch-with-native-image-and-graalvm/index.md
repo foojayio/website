@@ -8,7 +8,6 @@ authors:
 image: "speedup-batch.jpg"
 categories:
   - "Cloud"
-  - "Java"
   - "Performance"
   - "Spring"
   - "Tools"

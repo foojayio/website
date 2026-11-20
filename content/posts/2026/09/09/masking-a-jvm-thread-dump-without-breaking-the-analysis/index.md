@@ -7,7 +7,6 @@ authors:
   - "felipe-maschio"
 image: "foojay-featured-thread-dump-anonymizer.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Security"
 related_posts:

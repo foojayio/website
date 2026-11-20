@@ -9,7 +9,6 @@ authors:
 image: "Scalable-Enterprise-Java-for-the-Cloud-05.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "nosql"
   - "Payara"

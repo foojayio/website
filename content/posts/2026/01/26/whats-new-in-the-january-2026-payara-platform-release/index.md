@@ -8,7 +8,6 @@ authors:
 image: "Payara-New-Release-Image-Square.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Payara"
 related_posts:
   - "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"

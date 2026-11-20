@@ -3,7 +3,7 @@ title: "Announcing Vitra – A Modern UI Library for JavaFX"
 description: "Vitra is a carefully crafted UI library that brings modern controls, Fluent-inspired materials and professional surfaces to JavaFX applications."
 date: "2026-10-28"
 authors: ["liban-bande-gonzalez"]
-categories: ["JavaFX", "Library", "Desktop"]
+categories: ["JavaFX", "Library"]
 image: "vitra.jpg"
 related_posts:
   - "announcing-skinning-javafx-applications"

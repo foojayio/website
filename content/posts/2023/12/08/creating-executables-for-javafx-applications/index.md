@@ -7,7 +7,6 @@ authors:
   - "heshan-thenura-kariyawasam"
 image: "JavaPackageDemo.png"
 categories:
-  - "Desktop"
   - "DevOps"
   - "GitLab"
   - "JavaFX"

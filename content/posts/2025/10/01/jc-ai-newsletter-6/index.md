@@ -8,7 +8,6 @@ authors:
 image: "ai-insider-1.jpg"
 categories:
   - "AI"
-  - "Java"
   - "JC-AI Newsletter"
   - "LangChain4j"
   - "LLM"

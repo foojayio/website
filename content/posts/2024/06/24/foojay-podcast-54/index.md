@@ -8,7 +8,6 @@ authors:
   - "geert-bevin"
 image: "podcast-guests-java-midi.jpg"
 categories:
-  - "Desktop"
   - "Java Core"
   - "Kotlin"
   - "Podcast"

@@ -7,7 +7,8 @@ authors:
   - "bazlur-rahman"
 image: "Gemini_Generated_Image-2.jpeg"
 categories:
-  - "Java"
+  - "Testing"
+  - "Records"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

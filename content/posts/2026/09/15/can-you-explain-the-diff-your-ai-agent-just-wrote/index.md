@@ -9,7 +9,6 @@ image: "Frame-5.jpg"
 categories:
   - "AI"
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
   - "LLM"
 related_posts:

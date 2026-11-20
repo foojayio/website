@@ -9,7 +9,6 @@ image: "duckdb-square-icon.jpg"
 categories:
   - "Developer Tools"
   - "DuckDB"
-  - "Java"
   - "Performance"
 related_posts:
 ---

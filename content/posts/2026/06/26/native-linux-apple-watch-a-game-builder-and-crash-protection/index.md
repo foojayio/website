@@ -8,7 +8,6 @@ authors:
   - "shai-almog"
 image: "native-linux-apple-watch-game-builder-crash-protection.jpg"
 categories:
-  - "Java"
   - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

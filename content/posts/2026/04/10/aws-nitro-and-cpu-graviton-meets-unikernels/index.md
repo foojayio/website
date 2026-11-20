@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "FinOps"
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Performance"
 related_posts:

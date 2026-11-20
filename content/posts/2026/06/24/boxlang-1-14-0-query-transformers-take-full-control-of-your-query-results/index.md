@@ -10,7 +10,6 @@ categories:
   - "BoxLang"
   - "Databases"
   - "Developer Tools"
-  - "Java"
   - "Tools"
 related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"

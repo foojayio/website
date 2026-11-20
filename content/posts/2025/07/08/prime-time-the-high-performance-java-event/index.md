@@ -8,7 +8,6 @@ authors:
 image: "unlock.jpg"
 categories:
   - "Events"
-  - "Java"
   - "Performance"
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"

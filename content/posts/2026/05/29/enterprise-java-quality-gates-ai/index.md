@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "DevOps"
   - "Gradle"
-  - "Java"
   - "Maven"
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"

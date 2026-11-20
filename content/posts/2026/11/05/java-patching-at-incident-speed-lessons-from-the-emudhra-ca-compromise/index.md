@@ -7,7 +7,6 @@ authors:
   - "miles-dawborne"
 image: "java-patching-at-incident-speed-lessons-from-the-emudhra-ca-compromise.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Security"
   - "OpenJDK"

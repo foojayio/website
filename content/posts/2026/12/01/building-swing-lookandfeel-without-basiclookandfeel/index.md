@@ -6,8 +6,7 @@ authors:
   - "boyd-edmondson"
 image: "featured.jpg"
 categories:
-  - "Java"
-  - "Desktop"
+  - "Java Core"
 related_posts:
   - "building-a-glasspanebase-control-in-javafx"
   - "interview-with-liban-bande-gonzalez-skinning-javafx-applications"

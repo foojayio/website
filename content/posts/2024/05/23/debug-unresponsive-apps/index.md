@@ -9,7 +9,6 @@ authors:
 image: "debug-unresponsive-apps-banner.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
   - "Tutorials"
 related_posts:

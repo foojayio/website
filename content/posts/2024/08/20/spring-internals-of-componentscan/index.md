@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "componentscan.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Tutorials"
 related_posts:

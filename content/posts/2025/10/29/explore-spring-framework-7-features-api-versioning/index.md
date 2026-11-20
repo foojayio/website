@@ -8,7 +8,6 @@ authors:
 image: "apiversioning.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Spring"
   - "Tutorials"
 related_posts:

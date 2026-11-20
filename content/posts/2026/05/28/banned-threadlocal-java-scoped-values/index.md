@@ -8,7 +8,6 @@ authors:
   - "arkadiusz-przychocki"
 image: "Screenshot-2026-06-03-at-09.05.15.jpg"
 categories:
-  - "Java"
   - "JavaPro"
   - "JEPs"
 related_posts:

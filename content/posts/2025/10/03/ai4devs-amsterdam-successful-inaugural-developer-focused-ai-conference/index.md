@@ -9,7 +9,6 @@ image: "IMG_6230-scaled.jpg"
 categories:
   - "Conference"
   - "Events"
-  - "Java"
 related_posts:
   - "ai4devs-schedule-published"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

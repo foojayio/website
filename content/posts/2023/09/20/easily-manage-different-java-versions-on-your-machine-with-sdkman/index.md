@@ -9,7 +9,6 @@ authors:
   - "luqman-saeed"
 image: "sdkman.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Tools"
   - "Tutorials"

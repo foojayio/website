@@ -9,7 +9,6 @@ image: "SpringCloudStream-700x394-1.jpg"
 categories:
   - "Apache Pulsar"
   - "IntelliJ IDEA"
-  - "Java"
   - "Microservices"
   - "OpenTelemetry"
   - "Spring"

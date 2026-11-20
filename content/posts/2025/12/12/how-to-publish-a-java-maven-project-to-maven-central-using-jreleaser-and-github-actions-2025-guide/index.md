@@ -9,7 +9,6 @@ image: "Screenshot-2025-12-08-at-14.20.55-1.png"
 categories:
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Maven"
 related_posts:
   - "7-habits-of-highly-effective-java-coding"

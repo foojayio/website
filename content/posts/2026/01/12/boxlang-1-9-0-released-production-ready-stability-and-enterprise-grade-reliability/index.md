@@ -8,7 +8,6 @@ authors:
 image: "IMG_0067.jpeg"
 categories:
   - "BoxLang"
-  - "Java"
   - "Library"
   - "Release Notes"
 related_posts:

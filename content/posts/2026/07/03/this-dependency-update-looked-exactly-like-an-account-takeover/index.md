@@ -7,7 +7,6 @@ authors:
 image: "marshal-foojay-featured.png"
 categories:
   - "Gradle"
-  - "Java"
   - "Maven"
   - "Security"
 related_posts:

@@ -9,7 +9,6 @@ image: "Frame-2147236862-e1788858255231.jpg"
 categories:
   - "Agile"
   - "AI"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"

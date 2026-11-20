@@ -6,7 +6,6 @@ authors:
   - "rey-pham"
 image: "hero.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Databases"
 related_posts:

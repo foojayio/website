@@ -7,7 +7,6 @@ authors:
   - "rijo-sam"
 image: "Santa-Claus-1.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "securing-symmetric-encryption-algorithms-in-java"

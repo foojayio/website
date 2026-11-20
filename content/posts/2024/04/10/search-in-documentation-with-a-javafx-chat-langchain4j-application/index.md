@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "langchain4j-question-story.jpg"
 categories:
-  - "Java"
   - "Machine Learning"
   - "Research"
 related_posts:

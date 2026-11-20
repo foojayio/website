@@ -6,7 +6,6 @@ authors:
   - "jerome-leleu"
 image: "openid4vp-pac4j.jpg"
 categories:
-  - "Java"
   - "Security"
   - "Tutorials"
 ---

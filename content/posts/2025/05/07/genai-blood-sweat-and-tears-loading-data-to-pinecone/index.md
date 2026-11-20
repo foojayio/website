@@ -8,7 +8,6 @@ authors:
 image: "unsplash-hard-labor-scaled.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Java Beginner"
   - "Spring"
 related_posts:

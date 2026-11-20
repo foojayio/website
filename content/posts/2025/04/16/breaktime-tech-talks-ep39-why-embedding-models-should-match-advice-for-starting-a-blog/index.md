@@ -9,7 +9,6 @@ image: "techtalks.jpg"
 categories:
   - "Databases"
   - "Graph"
-  - "Java"
   - "Neo4J"
 related_posts:
   - "breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag"

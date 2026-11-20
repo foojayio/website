@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "JEPs"
 related_posts:
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"

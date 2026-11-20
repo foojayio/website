@@ -9,7 +9,6 @@ categories:
   - "Kafka"
   - "reactive"
   - "Microservices"
-  - "Java"
 related_posts:
   - "event-driven-architecture-in-java-and-kafka"
   - "virtual-thread-pinning-field-guide"

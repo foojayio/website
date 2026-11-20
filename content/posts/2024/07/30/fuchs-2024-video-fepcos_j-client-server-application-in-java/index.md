@@ -8,7 +8,6 @@ authors:
 image: "fepcos.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
   - "Videos"
 related_posts:

@@ -14,7 +14,6 @@ categories:
   - "Conference"
   - "Debugging"
   - "IntelliJ IDEA"
-  - "Java"
   - "Java Core"
   - "Maven"
   - "Podcast"

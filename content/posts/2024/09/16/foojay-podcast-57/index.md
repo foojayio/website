@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "episode-57-java-23-guests.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "Podcast"

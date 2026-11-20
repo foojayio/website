@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-02-27-at-12.56.01-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "inside-the-engine-the-sub-millisecond-performance-relay-of-mongodb-8-0"

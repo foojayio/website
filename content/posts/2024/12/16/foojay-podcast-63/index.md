@@ -10,7 +10,6 @@ authors:
   - "johan-janssen"
 image: "podcast-63-up-to-date-java.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
   - "OpenJDK Migration"

@@ -10,7 +10,6 @@ image: "LibertyBadge1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Maven"
   - "Microservices"

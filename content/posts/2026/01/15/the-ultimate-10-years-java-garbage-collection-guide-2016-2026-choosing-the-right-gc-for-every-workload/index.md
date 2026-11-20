@@ -6,7 +6,6 @@ authors:
   - "alexius-diakogiannis"
 image: "Gemini_Generated_Image_pa4tufpa4tufpa4t-1024x559.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"

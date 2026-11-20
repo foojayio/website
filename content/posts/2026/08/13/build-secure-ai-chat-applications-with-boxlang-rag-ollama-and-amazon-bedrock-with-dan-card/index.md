@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Security"
 related_posts:

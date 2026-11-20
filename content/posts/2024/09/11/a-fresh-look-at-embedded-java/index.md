@@ -9,7 +9,6 @@ authors:
 image: "fresh-look-embedded-java.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "Raspberry Pi"
 related_posts:

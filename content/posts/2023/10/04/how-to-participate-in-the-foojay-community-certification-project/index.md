@@ -8,7 +8,6 @@ authors:
 image: "Community-Process.jpg"
 categories:
   - "Foojay"
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "foojay-developer-certification-measure-skills"

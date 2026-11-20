@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "synchronized-feature.png"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
 related_posts:

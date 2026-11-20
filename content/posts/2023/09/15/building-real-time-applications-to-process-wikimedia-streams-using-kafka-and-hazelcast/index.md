@@ -8,7 +8,6 @@ authors:
 image: "1693934925104.jpg"
 categories:
   - "Hazelcast"
-  - "Java"
   - "Kafka"
   - "Microservices"
   - "Performance"

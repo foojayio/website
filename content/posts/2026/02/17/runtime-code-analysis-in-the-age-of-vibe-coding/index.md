@@ -7,7 +7,6 @@ authors:
   - "suneet-kamath"
 image: "what.jpg"
 categories:
-  - "Java"
   - "Observability"
   - "Performance"
   - "Profiler"

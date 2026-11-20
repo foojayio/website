@@ -7,7 +7,6 @@ authors:
   - "hanno-embregts"
 image: "basketball-24.jpg"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "foojay-podcast-68"

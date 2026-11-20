@@ -7,7 +7,6 @@ authors:
   - "tristan-mahinay"
 image: "generative-ai-in-enterprise-systems-1024x589.jpg"
 categories:
-  - "Java"
   - "JDK21"
   - "Spring"
   - "Tools"

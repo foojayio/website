@@ -7,7 +7,6 @@ authors:
   - "nicolas-frankel"
 image: "Decorator_UML_class_diagram.png"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "blockhound-how-it-works"

@@ -9,7 +9,6 @@ image: "generated-image-2026-09-04T160504.935-1-e1788858160830.jpg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
   - "Java Core"
   - "JavaFX"
   - "JavaPro"

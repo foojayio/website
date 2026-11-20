@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "Design-Pattern-680x510-1.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Microservices"
   - "Spring"

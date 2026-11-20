@@ -8,7 +8,6 @@ authors:
 image: "OpenRewrite-poster.png"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "JDK21"
   - "Maven"
   - "OpenRewrite"

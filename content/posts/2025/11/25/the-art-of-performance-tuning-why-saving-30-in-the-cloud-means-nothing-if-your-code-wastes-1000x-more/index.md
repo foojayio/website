@@ -8,7 +8,6 @@ image: "fj_art1_results_5.jpg"
 categories:
   - "Debugging"
   - "Design Patterns"
-  - "Java"
   - "Kafka"
   - "Performance"
   - "Profiler"

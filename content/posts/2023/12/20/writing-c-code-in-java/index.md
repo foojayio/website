@@ -7,7 +7,6 @@ authors:
   - "johannes-bechberger"
 image: "panama-2000x981-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "java-panama-polyglot-part1"

@@ -8,7 +8,6 @@ authors:
 image: "ai-insider-1.jpg"
 categories:
   - "Data Engineering"
-  - "Java"
   - "JC-AI Newsletter"
   - "Machine Learning"
   - "Observability"

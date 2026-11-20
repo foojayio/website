@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "code-8779051.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "on-programming-languages-targets-and-platforms"

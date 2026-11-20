@@ -7,7 +7,6 @@ authors:
   - "nick-zhu"
 image: "pack.jpg"
 categories:
-  - "Java"
   - "Tools"
   - "VS Code"
 related_posts:

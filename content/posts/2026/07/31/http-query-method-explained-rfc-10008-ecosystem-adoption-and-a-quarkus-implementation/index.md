@@ -7,7 +7,6 @@ authors:
 image: "article-cover-scaled.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "why-we-moved-our-timefold-java-worker-pods-from-amd-to-arm64"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"

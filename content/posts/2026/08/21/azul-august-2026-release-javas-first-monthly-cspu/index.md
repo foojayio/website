@@ -7,7 +7,6 @@ authors:
   - "frankdelporte"
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"

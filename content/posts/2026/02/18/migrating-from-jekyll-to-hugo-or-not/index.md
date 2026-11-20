@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog"
 ---

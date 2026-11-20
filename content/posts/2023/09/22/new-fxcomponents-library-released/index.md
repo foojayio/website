@@ -7,7 +7,6 @@ authors:
   - "pedro-vieira"
 image: "List-Builder-poster.jpg"
 categories:
-  - "Java"
   - "JavaFX"
   - "Release Notes"
 related_posts:

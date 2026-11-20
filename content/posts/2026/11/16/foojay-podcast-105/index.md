@@ -9,7 +9,6 @@ image: "episode-105-owasp-security.jpg"
 categories:
   - "AI"
   - "Dependency Management"
-  - "Java"
   - "Podcast"
   - "Security"
 related_posts:

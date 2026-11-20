@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
 ---
 

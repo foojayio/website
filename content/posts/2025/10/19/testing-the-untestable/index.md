@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
   - "Testing"
 related_posts:
 ---

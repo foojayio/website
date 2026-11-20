@@ -7,7 +7,6 @@ authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.jpg"
 categories:
-  - "Java"
   - "Security"
   - "Spring"
 related_posts:

@@ -7,7 +7,6 @@ authors:
   - "david-parry"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Machine Learning"
 related_posts:

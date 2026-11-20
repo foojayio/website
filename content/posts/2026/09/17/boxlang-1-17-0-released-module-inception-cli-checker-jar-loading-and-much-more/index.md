@@ -11,7 +11,6 @@ categories:
   - "BoxLang"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "Testing"
   - "Tools"
 related_posts:

@@ -6,7 +6,6 @@ authors:
   - "julien-dubois"
 image: "java-champions-github-copilot.jpg"
 categories:
-  - "Java"
   - "Developer Tools"
 related_posts:
   - "enabling-ai-agents-to-use-a-real-debugger-instead-of-logging"

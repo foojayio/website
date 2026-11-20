@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "sharp-wood-hole-window-glass-wall-624482.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "my-first-real-rust-project"
   - "runtime-initialized-variables-in-rust"

@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "episode-78-java-25.jpg"
 categories:
-  - "Java"
   - "Podcast"
 related_posts:
   - "foojay-podcast-71"

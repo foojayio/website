@@ -7,7 +7,6 @@ authors:
   - "shai-almog"
 image: "third-generation-gui-builder.jpg"
 categories:
-  - "Java"
   - "Codename One"
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"

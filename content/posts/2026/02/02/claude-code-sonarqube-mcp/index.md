@@ -9,7 +9,6 @@ image: "Gemini_Generated_Image_3v7k2u3v7k2u3v7k-1024x572.jpg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
 related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"

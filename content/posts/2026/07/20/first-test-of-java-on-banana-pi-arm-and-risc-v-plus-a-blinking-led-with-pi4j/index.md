@@ -8,7 +8,6 @@ authors:
 image: "thumb-bananapi.jpg"
 categories:
   - "Embedded"
-  - "Java"
 related_posts:
   - "java-benchmarks-on-single-board-computers"
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"

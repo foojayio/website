@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "structured-concurrency-round.png"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
 related_posts:

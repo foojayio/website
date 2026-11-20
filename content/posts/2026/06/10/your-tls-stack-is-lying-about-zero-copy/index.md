@@ -8,7 +8,6 @@ authors:
   - "arkadiusz-przychocki"
 image: "featured_cover1.png"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
   - "Performance"

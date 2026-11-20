@@ -8,7 +8,6 @@ authors:
 image: "asgard-init-1024x765.jpg"
 categories:
   - "DevOps"
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "starting-docker-desktop-with-spring-boot"

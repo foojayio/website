@@ -8,7 +8,6 @@ authors:
   - "david-vlijmincx"
 image: "flamegraph-example-2.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"

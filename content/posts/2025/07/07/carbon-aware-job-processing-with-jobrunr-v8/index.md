@@ -7,7 +7,6 @@ authors:
   - "nicholas-dhondt"
 image: "jobrunr-carbon-foojay.jpg"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"

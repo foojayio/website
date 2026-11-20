@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "how-readynow-improves-java-warmup-time"

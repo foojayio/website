@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "sc.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "JDK21"

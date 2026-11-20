@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Cloud"
-  - "Java"
   - "Java Core"
   - "Performance"
 related_posts:

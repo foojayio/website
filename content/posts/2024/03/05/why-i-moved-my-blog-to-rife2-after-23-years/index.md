@@ -8,7 +8,6 @@ authors:
 image: "rife2.png"
 categories:
   - "Apache Tomcat"
-  - "Java"
   - "Opinion"
   - "RIFE2"
 related_posts:

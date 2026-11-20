@@ -7,7 +7,6 @@ authors:
 image: "sbc-java-benchmarks.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "JBang"
   - "Performance"

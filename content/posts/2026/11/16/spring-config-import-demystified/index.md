@@ -6,7 +6,6 @@ authors:
   - "dmitry-mazurov"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Spring"
 related_posts:
   - "environment-post-processor"

@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "Tutorials"
   - "BoxLang"
 related_posts:

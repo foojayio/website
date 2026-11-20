@@ -9,7 +9,6 @@ authors:
 image: "compare-boards.png"
 categories:
   - "Embedded"
-  - "Java"
   - "Raspberry Pi"
 related_posts:
   - "controlling-a-led-strip-with-pi4j-and-jbang"

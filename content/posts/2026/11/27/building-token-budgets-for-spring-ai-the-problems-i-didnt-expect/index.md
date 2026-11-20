@@ -6,7 +6,6 @@ authors:
   - "ujjwal-tiwari"
 image: "token-limit-exhausted.png"
 categories:
-  - "Java"
   - "Spring"
   - "GenAI"
   - "AI"

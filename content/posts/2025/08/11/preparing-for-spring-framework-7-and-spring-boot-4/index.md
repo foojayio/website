@@ -8,7 +8,6 @@ authors:
 image: "spring.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "JMS"
   - "Kotlin"
   - "Maven"

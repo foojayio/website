@@ -7,7 +7,6 @@ authors:
   - "gerrit-grunwald"
 image: "avdazul.png"
 categories:
-  - "Java"
   - "Security"
   - "Tools"
 related_posts:

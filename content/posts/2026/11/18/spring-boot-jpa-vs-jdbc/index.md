@@ -6,7 +6,6 @@ authors:
   - "ted-kupolov"
 image: "spring-boot-jpa-vs-jdbc-og.jpg"
 categories:
-  - "Java"
   - "Spring"
 canonical: "https://pvrlabs.xyz/java-performance/experiments/spring-boot-jpa-vs-jdbc.html"
 related_posts:

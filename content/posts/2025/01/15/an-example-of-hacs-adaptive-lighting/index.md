@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "light-bulbs-3958844.jpg"
 categories:
-  - "Java"
+  - "Tools"
 related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

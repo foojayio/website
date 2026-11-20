@@ -6,7 +6,7 @@ authors:
   - "maaike-vanputten"
 image: "passionprojectcontestbanner.jpg"
 categories:
-  - "Java"
+  - "Foojay"
 related_posts:
   - "featured-foojay-authors-for-november-2026"
   - "foojay-podcast-105"

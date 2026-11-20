@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "DevOps"
   - "Interviews"
-  - "Java"
   - "Java Beginner"
   - "Microservices"
   - "Observability"

@@ -7,7 +7,6 @@ authors:
   - "frankdelporte"
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "are-java-security-updates-important"

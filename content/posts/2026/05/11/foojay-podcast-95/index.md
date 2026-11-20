@@ -8,7 +8,6 @@ authors:
   - "steve-poole"
 image: "episode-95-security-eol-cve.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
   - "Security"

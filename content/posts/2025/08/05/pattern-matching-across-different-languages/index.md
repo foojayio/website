@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "cover-1024x683.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Research"
   - "Scala"

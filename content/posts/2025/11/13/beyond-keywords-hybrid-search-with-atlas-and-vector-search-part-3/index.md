@@ -9,7 +9,6 @@ image: "Screenshot-2025-11-11-at-1.58.35-PM.jpg"
 categories:
   - "AI"
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"

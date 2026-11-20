@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Security"
   - "Tools"
 related_posts:

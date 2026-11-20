@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "BoxLang"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Tutorials"
 related_posts:

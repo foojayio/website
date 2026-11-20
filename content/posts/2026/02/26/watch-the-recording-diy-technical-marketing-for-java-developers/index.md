@@ -8,7 +8,6 @@ authors:
 image: "DYI-tech-Marketing-title-page.jpg"
 categories:
   - "Conference"
-  - "Java"
   - "Java Beginner"
   - "Payara"
   - "Tutorials"

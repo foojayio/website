@@ -9,7 +9,6 @@ authors:
 image: "zulu-lean-container.avif"
 categories:
   - "Cloud"
-  - "Java"
   - "Java Core"
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"

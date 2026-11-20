@@ -6,7 +6,6 @@ authors:
   - "loic-mathieu"
 image: "vide-coding-vs-context-engineering.jpg"
 categories:
-  - "Java"
   - "AI"
   - "GenAI"
 related_posts:

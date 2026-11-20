@@ -8,7 +8,8 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-3.jpg"
 categories:
-  - "Java"
+  - "OpenTelemetry"
+  - "Observability"
 related_posts:
 ---
 

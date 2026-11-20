@@ -4,7 +4,7 @@ date: "2026-11-21"
 description: "Shopify dumped React Native for two native codebases because agents write the second copy for free. React Native deserved it: it's a heavyweight toolkit..."
 authors: ["shai-almog"]
 image: "shopify-was-wrong-and-right-to-dump-react-native-de356406a0.jpg"
-categories: ["Java"]
+categories: ["Opinion"]
 canonical: "https://www.codenameone.com/blog/shopify-was-wrong-and-right-to-dump-react-native/"
 ---
 

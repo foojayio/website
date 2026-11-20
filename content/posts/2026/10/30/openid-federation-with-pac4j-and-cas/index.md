@@ -6,7 +6,6 @@ authors:
   - "jerome-leleu"
 image: "openid-federation-pac4j-cas.jpg"
 categories:
-  - "Java"
   - "Security"
   - "Tutorials"
 canonical: "https://www.pac4j.org/blog/openid_federation_with_pac4j_and_cas.html"

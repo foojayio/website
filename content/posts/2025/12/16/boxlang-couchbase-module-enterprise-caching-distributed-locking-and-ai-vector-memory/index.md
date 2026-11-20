@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "BoxLang"
   - "Databases"
-  - "Java"
 related_posts:
   - "announcing-bx-ldap-enterprise-ldap-for-boxlang"
   - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"

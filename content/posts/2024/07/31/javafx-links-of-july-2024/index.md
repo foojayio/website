@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "jfxcentral.jpg"
 categories:
-  - "Desktop"
   - "Game Development"
   - "JavaFX"
   - "JBang"

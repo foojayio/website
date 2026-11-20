@@ -6,7 +6,6 @@ authors:
   - "kamran-zafar"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Cloud"
   - "Microservices"
   - "Kafka"

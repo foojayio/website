@@ -8,7 +8,6 @@ authors:
 image: "sonar-logo-horizontal-dark-bg.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
 related_posts:
   - "builders-withers-and-records-javas-path-to-immutability"
   - "code-reviews-with-ai-a-developer-guide"

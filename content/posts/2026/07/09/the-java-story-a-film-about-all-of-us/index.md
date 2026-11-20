@@ -9,7 +9,6 @@ image: "Java-Documentary-snap.jpg"
 categories:
   - "Apache Tomcat"
   - "Jakarta EE"
-  - "Java"
   - "JUGs"
   - "Videos"
 related_posts:

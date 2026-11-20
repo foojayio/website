@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "poppy-capsules-g8d0f5a9fa.jpg"
 categories:
-  - "Java"
+  - "Foojay"
 related_posts:
 ---
 

@@ -8,7 +8,6 @@ authors:
 image: "pic01-1.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Machine Learning"
   - "Tutorials"
 related_posts:

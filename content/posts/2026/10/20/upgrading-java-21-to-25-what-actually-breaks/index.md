@@ -6,7 +6,6 @@ authors:
   - "gerard-marimon"
 image: "preview-1600x900.jpg"
 categories:
-  - "Java"
   - "OpenJDK Migration"
   - "JEPs"
 related_posts: []

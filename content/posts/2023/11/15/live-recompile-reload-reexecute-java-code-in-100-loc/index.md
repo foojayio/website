@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "hot-reload-code-ant-commander-pro-1024x391-1.png"
 categories:
-  - "Java"
   - "JShell"
 related_posts:
   - "java-21-jep-445-unnamed-classes-and-instance-main-methods"

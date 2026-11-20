@@ -12,7 +12,6 @@ categories:
   - "Cloud"
   - "Design Patterns"
   - "Jakarta EE"
-  - "Java"
   - "Performance"
   - "Tutorials"
   - "Use Cases"

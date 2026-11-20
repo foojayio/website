@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "JDK21"
 related_posts:
   - "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"

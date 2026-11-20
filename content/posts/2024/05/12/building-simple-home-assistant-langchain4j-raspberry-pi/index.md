@@ -7,7 +7,6 @@ authors:
   - "jansen-ang"
 image: "raspberry-pi-smart-assistant-1.jpg"
 categories:
-  - "Java"
   - "Machine Learning"
   - "Raspberry Pi"
 related_posts:

@@ -6,7 +6,6 @@ authors:
   - "dana-crane"
 image: "azul-java21-countdown-banner.jpg"
 categories:
-  - "Java"
   - "OpenJDK"
   - "OpenJDK Migration"
 canonical: "https://www.azul.com/blog/the-java-21-doomsday-clock-countdown/"

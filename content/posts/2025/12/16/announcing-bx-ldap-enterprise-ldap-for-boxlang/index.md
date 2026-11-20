@@ -9,7 +9,6 @@ image: "bx-ldap.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "JavaPro"
   - "Tools"
   - "Tutorials"

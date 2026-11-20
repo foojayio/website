@@ -7,7 +7,6 @@ authors:
   - "graeme-robinson"
 image: "Screenshot-2026-03-06-at-12.25.26-PM.png"
 categories:
-  - "Java"
   - "Kafka"
   - "Mongo"
 related_posts:

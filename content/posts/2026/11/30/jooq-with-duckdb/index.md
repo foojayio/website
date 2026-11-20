@@ -5,7 +5,6 @@ description: "Combine jOOQ's type-safe SQL builder with DuckDB's analytical engi
 authors:
   - "geertjan-wielenga"
 categories:
-  - "Java"
   - "Databases"
 related_posts:
   - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"

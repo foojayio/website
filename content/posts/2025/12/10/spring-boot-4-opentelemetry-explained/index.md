@@ -8,7 +8,6 @@ authors:
 image: "OpenTelemetrySpringBoot4-1.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Microservices"
   - "Mongo"
   - "Observability"

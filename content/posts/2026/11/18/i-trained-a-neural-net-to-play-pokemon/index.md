@@ -6,7 +6,6 @@ authors:
   - "nicholas-dhondt"
 image: "neural-net-plays-pokemon.jpg"
 categories:
-  - "Java"
   - "Machine Learning"
   - "AI"
 related_posts:

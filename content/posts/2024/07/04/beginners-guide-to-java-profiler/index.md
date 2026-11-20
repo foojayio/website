@@ -9,7 +9,6 @@ authors:
 image: "banner-1.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Performance"
   - "Tools"
   - "Tutorials"

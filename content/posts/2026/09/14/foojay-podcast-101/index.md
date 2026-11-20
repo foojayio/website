@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "episode-101-java-27.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "OpenJDK"
   - "Podcast"

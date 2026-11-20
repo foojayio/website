@@ -6,7 +6,6 @@ authors:
   - "igor-de-souza"
 image: "duke_Pinocchio01.jpg"
 categories:
-  - "Java"
   - "Student"
 related_posts:
   - "foojay-podcast-92"

@@ -7,7 +7,7 @@ authors:
   - "abo-saad-muaath"
 image: "aspectj.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"

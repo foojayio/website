@@ -8,7 +8,6 @@ authors:
 image: "Docker-Azul-Zulu-Blog-Image-40-1024x576.png"
 categories:
   - "DevOps"
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"

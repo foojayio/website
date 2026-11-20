@@ -7,7 +7,6 @@ authors:
 image: "cover.jpg"
 categories:
   - "BoxLang"
-  - "Java"
   - "Cloud"
   - "Developer Tools"
 canonical: "https://www.ortussolutions.com/blog/tryboxlangio-now-runs-every-boxlang-version-with-or-without-cfml"

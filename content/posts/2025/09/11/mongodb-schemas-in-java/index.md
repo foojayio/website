@@ -8,7 +8,6 @@ authors:
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"

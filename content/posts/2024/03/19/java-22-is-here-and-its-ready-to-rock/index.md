@@ -7,7 +7,6 @@ authors:
   - "hanno-embregts"
 image: "guitar-pedals.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Project Panama"
   - "Records"

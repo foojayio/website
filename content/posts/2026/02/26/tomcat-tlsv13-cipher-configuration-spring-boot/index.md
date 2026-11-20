@@ -9,7 +9,6 @@ authors:
 image: "tomcat.jpg"
 categories:
   - "Apache Tomcat"
-  - "Java"
   - "Security"
   - "Spring"
 related_posts:

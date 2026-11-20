@@ -9,9 +9,7 @@ authors:
 image: "edge-cover.png"
 categories:
   - "Cloud"
-  - "Desktop"
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:

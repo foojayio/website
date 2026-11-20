@@ -8,7 +8,6 @@ image: "spring-logo.png"
 categories:
   - "Debugging"
   - "Developer Tools"
-  - "Java"
   - "Spring"
 related_posts:
   - "statically-spilling-your-spring-beans"

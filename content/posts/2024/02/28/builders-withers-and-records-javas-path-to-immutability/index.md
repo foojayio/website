@@ -7,7 +7,6 @@ authors:
   - "jonathan-vila"
 image: "sonarlint.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "top-most-detected-issues-in-java-projects"

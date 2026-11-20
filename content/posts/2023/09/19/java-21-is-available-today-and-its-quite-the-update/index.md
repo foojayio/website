@@ -7,7 +7,6 @@ authors:
   - "hanno-embregts"
 image: "ready-set-go.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Project Panama"

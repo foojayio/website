@@ -6,7 +6,6 @@ authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_jf93u3jf93u3jf93.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "did-ai-just-break-software-security-for-ever"

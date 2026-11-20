@@ -8,7 +8,6 @@ authors:
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Java Core"
   - "Mongo"
 related_posts:

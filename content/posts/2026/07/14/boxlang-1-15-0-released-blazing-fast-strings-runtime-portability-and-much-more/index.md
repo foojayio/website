@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Java Core"
   - "Performance"
   - "Release Notes"

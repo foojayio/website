@@ -7,8 +7,6 @@ authors:
   - "christopher-schnick"
 image: "Screen-Shot-2021-05-17-at-12.15.51-AM.jpg"
 categories:
-  - "Desktop"
-  - "Java"
   - "JavaFX"
   - "Tutorials"
 related_posts:

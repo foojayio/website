@@ -8,7 +8,6 @@ authors:
   - "jlengrand"
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Opinion"
   - "Use Cases"

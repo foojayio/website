@@ -9,7 +9,6 @@ authors:
 image: "desktop-with-ip-info-1024x577-1.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"

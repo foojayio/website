@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "jdk21-files-feature-image.png"
 categories:
-  - "Java"
   - "JDK21"
 related_posts:
   - "foojay-podcast-28"

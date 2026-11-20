@@ -7,7 +7,7 @@ authors:
   - "nicolas-frankel"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Dependency Management"
 related_posts:
 ---
 

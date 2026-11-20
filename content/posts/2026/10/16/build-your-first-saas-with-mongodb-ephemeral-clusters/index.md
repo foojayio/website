@@ -4,7 +4,7 @@ date: "2026-10-16"
 description: "Provision a MongoDB Atlas Ephemeral Cluster with one API call, then have an AI coding agent build a full-stack Spring Boot and React job tracker on it."
 authors: ["tim-kelly"]
 image: "build-your-first-saas-mongodb-ephemeral-clusters-cover.jpg"
-categories: ["Mongo", "Java", "Spring", "Tutorials"]
+categories: ["Mongo", "Spring", "Tutorials"]
 ---
 
 It's a new world. A prototype that once meant hours or days of setup can now be up and running in minutes. With one API call, an AI agent can create a MongoDB Atlas cluster from your IDE, so you can start building without stopping to navigate account setup, cloud choices, regions, or cluster configuration.

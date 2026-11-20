@@ -6,7 +6,6 @@ authors:
   - "igor-de-souza"
 image: "duke_sw_01.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "the-java-in-education-catalog-now-has-a-beautiful-home"

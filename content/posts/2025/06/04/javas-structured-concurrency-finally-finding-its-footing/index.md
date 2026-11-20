@@ -8,7 +8,6 @@ authors:
   - "bazlur-rahman"
 image: "shutterstock_1111260050-350x233-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-64"

@@ -12,7 +12,6 @@ categories:
   - "Developer Tools"
   - "DevOps"
   - "Jakarta EE"
-  - "Java"
   - "Java Core"
   - "Observability"
   - "Performance"

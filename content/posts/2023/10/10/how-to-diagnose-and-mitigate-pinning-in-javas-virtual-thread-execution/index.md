@@ -7,7 +7,8 @@ authors:
   - "bazlur-rahman"
 image: "shutterstock_1111260050-350x233-1.jpg"
 categories:
-  - "Java"
+  - "Java Core"
+  - "Performance"
 related_posts:
   - "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

@@ -12,7 +12,6 @@ categories:
   - "Databases"
   - "Events"
   - "Graph"
-  - "Java"
   - "JBang"
   - "Neo4J"
   - "Spring"

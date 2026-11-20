@@ -8,7 +8,7 @@ authors:
   - "helenjoscott"
 image: "java.png"
 categories:
-  - "Java"
+  - "Java Beginner"
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"

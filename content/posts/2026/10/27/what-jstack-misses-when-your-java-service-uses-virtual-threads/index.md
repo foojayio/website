@@ -7,7 +7,6 @@ authors:
   - "felipe-maschio"
 image: "what-jstack-misses-virtual-threads.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Debugging"
 related_posts:

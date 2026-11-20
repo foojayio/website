@@ -8,7 +8,6 @@ authors:
 image: "Copia-de-Blue---WIP-2.png"
 categories:
   - "AI"
-  - "Java"
   - "nosql"
   - "Redis"
   - "Tutorials"

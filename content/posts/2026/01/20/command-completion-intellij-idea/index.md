@@ -9,7 +9,6 @@ authors:
 image: "command.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"

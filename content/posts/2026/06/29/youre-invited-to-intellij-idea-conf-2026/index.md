@@ -9,7 +9,6 @@ image: "intellij-idea-conf-2026.jpg"
 categories:
   - "AI"
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
   - "Maven"
   - "Spring"

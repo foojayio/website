@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large.jpg"
 categories:
-  - "Java"
+  - "DevOps"
 related_posts:
 ---
 

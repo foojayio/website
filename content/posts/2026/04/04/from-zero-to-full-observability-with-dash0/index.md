@@ -8,7 +8,6 @@ authors:
 image: "og-image.jpg"
 categories:
   - "Cloud"
-  - "Java"
   - "Kubernetes"
   - "OpenTelemetry"
 related_posts:

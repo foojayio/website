@@ -7,7 +7,6 @@ authors:
   - "frankdelporte"
 image: "thumbnail-dmx512-ofl.jpg"
 categories:
-  - "Java"
   - "Library"
   - "Videos"
 related_posts:

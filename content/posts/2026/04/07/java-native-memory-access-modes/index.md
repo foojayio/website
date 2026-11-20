@@ -7,7 +7,6 @@ authors:
   - "david-vlijmincx"
 image: "0407.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "unsafe-is-finally-going-away-embracing-safer-memory-access-with-jep-471"

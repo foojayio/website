@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "JDK 23"
 related_posts:

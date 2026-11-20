@@ -9,7 +9,6 @@ image: "arm.jpg"
 categories:
   - "Arm"
   - "Cloud"
-  - "Java"
   - "Java Beginner"
   - "Performance"
   - "Tutorials"

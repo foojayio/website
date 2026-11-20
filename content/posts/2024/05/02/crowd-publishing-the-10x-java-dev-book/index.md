@@ -10,7 +10,6 @@ image: "10xdev.jpg"
 categories:
   - "Book Announcement"
   - "Books"
-  - "Java"
   - "Tutorials"
 related_posts:
   - "book-review-practical-design-patterns-for-java-developers"

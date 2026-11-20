@@ -6,7 +6,6 @@ authors:
   - "richard-kim"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Developer Tools"
   - "AI"

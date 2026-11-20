@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2025-11-18-at-9.09.16-AM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"

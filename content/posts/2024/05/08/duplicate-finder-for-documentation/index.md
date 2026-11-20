@@ -8,7 +8,6 @@ authors:
   - "igor-kulakov"
 image: "duplicate-finder-banner.jpg"
 categories:
-  - "Java"
   - "Kotlin"
 related_posts:
   - "debug-without-breakpoints"

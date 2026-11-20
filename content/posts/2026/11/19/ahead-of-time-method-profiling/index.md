@@ -6,7 +6,6 @@ authors:
   - "sven-woltmann"
 image: "ahead-of-time-method-profiling.jpg"
 categories:
-  - "Java"
   - "JEPs"
   - "Performance"
 related_posts:

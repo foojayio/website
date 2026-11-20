@@ -7,7 +7,6 @@ authors:
   - "simon-martinelli"
 image: "vaadin.jpg"
 categories:
-  - "Java"
   - "Vaadin"
   - "Videos"
 related_posts:

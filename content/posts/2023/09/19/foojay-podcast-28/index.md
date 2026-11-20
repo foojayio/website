@@ -9,7 +9,6 @@ authors:
   - "simonritter"
 image: "episode-28-guests.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Podcast"

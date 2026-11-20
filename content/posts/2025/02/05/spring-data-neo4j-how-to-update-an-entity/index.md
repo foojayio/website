@@ -9,7 +9,6 @@ image: "unsplash-sdn-update-entity-scaled-e1737583612770.jpg"
 categories:
   - "Databases"
   - "Graph"
-  - "Java"
   - "Neo4J"
   - "Spring"
 related_posts:

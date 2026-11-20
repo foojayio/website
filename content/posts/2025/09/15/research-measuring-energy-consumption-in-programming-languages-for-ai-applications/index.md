@@ -9,7 +9,6 @@ image: "20250915_ArticleLogo.png"
 categories:
   - "AI"
   - "Arm"
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Pi4J"

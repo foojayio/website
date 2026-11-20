@@ -7,7 +7,6 @@ authors:
 image: "duckdb-2-0.jpg"
 categories:
   - "Databases"
-  - "Java"
 related_posts:
   - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"
   - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"

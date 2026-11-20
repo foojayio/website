@@ -7,7 +7,6 @@ authors:
   - "johannes-bechberger"
 image: "asgct_asgst-2000x1125-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
   - "Performance"

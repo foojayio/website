@@ -3,7 +3,7 @@ title: "Announcing 'Skinning JavaFX Applications'"
 date: "2026-10-01"
 description: "A practical, code-first book on building modern, visually distinctive JavaFX interfaces — from theming to custom dashboard controls built from scratch."
 authors: ["liban-bande-gonzalez"]
-categories: ["JavaFX", "Java"]
+categories: ["JavaFX"]
 image: "cover.jpg"
 related_posts:
   - "custom-controls-in-javafx-part-i"

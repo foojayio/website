@@ -8,7 +8,6 @@ authors:
   - "rijo-sam"
 image: "NS_display_2-scaled.jpg"
 categories:
-  - "Java"
   - "Raspberry Pi"
   - "Vaadin"
 related_posts:

@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "old-coffee.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "java-whats-old-part-i-collections"

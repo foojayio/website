@@ -7,7 +7,6 @@ authors:
   - "felipe-maschio"
 image: "foojay-featured-virtual-thread-pinning.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "banned-threadlocal-java-scoped-values"

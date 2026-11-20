@@ -7,7 +7,6 @@ authors:
   - "hanno-embregts"
 image: "road-train.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "JEPs"

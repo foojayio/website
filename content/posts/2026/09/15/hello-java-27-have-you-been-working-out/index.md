@@ -7,7 +7,6 @@ authors:
   - "hanno-embregts"
 image: "dumbbells.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
 related_posts:

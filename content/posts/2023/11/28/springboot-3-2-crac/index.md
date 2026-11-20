@@ -8,7 +8,6 @@ authors:
 image: "StartWithManualCheckpoint-700x441-1.png"
 categories:
   - "CRaC"
-  - "Java"
   - "JDK21"
   - "Spring"
 related_posts:

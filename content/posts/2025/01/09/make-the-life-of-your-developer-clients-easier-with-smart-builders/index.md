@@ -7,7 +7,6 @@ authors:
   - "maximillian-arruda"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "lazy-ferris_large.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "my-first-real-rust-project"
   - "error-management-in-rust-and-libs-that-support-it"

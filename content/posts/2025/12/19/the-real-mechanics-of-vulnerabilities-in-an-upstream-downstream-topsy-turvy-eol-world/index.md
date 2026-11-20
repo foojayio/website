@@ -6,7 +6,6 @@ authors:
   - "steve-poole"
 image: "banner2.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
 ---

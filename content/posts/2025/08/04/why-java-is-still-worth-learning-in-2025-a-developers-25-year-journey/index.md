@@ -9,7 +9,6 @@ authors:
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JDK21"

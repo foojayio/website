@@ -9,7 +9,6 @@ authors:
   - "simonritter"
 image: "episode-68-java-24.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
   - "Release Notes"

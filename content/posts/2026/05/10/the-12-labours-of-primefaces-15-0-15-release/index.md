@@ -8,7 +8,6 @@ authors:
 image: "toge-herculer-1024x576.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "jakarta-faces-java-web-framework-stateless-edition-marketplace-alifaces"
 ---

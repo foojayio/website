@@ -6,7 +6,6 @@ authors:
   - "luis-majano"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "Observability"
   - "AI"
   - "Developer Tools"

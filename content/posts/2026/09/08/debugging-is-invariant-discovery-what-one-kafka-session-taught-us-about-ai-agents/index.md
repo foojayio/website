@@ -11,7 +11,6 @@ categories:
   - "Debugging"
   - "GenAI"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"

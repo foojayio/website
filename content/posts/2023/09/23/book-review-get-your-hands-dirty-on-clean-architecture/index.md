@@ -9,7 +9,6 @@ image: "GetYourHandsDirtyOnCleanArchitecture-1.jpg"
 categories:
   - "Book Review"
   - "Books"
-  - "Java"
   - "Java Beginner"
   - "Microservices"
   - "Spring"

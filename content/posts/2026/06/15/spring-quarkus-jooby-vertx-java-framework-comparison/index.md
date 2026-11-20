@@ -7,7 +7,8 @@ authors:
   - "catherine-edelveis"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Spring"
+  - "Microservices"
 related_posts:
 ---
 

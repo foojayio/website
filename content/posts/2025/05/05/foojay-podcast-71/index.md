@@ -8,7 +8,6 @@ authors:
 image: "edit-james-gosling.jpg"
 categories:
   - "Interviews"
-  - "Java"
   - "Java Core"
   - "Podcast"
 related_posts:

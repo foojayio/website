@@ -11,7 +11,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "IntelliJ IDEA"
-  - "Java"
   - "Testing"
 related_posts:
   - "explore-project-structure-with-intellij-ideas-dependency-matrix"

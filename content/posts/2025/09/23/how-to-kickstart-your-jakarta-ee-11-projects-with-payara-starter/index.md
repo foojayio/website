@@ -10,7 +10,6 @@ image: "Payara-Starter-04-1.webp"
 categories:
   - "Gradle"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Maven"
 related_posts:

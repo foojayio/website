@@ -7,8 +7,6 @@ authors:
   - "christopher-schnick"
 image: "permission.jpg"
 categories:
-  - "Desktop"
-  - "Java"
   - "JavaFX"
   - "Use Cases"
 related_posts:

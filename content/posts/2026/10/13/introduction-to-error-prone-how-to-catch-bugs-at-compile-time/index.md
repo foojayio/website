@@ -6,7 +6,6 @@ authors:
   - "huseyin-akdogan"
 image: "error-prone-cover.jpg"
 categories:
-  - "Java"
   - "Developer Tools"
 related_posts:
   - "my-love-hate-relationship-with-java-formatters"

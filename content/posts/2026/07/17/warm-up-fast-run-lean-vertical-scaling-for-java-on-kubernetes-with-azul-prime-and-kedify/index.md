@@ -8,7 +8,6 @@ authors:
 image: "prime-kedify-jvm-warm-up.avif"
 categories:
   - "Cloud"
-  - "Java"
   - "Kubernetes"
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"

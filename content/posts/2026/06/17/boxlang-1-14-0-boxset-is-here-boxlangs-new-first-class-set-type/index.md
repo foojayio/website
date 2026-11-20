@@ -10,7 +10,6 @@ categories:
   - "BoxLang"
   - "Design Patterns"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Tools"
 related_posts:

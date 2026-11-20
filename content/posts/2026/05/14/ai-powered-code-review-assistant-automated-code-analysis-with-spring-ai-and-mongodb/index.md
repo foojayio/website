@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-05-08-at-3.02.20-PM.png"
 categories:
   - "AI"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:

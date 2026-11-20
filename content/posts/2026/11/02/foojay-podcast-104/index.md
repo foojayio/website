@@ -7,7 +7,6 @@ authors:
   - "simonritter"
 image: "episode-104-security-updates.jpg"
 categories:
-  - "Java"
   - "OpenJDK"
   - "Podcast"
   - "Security"

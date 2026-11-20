@@ -9,7 +9,6 @@ categories:
   - "AI"
   - "LangChain4j"
   - "Spring"
-  - "Java"
 related_posts:
   - "verified-match-explanations-spring-ai"
   - "how-i-built-an-ai-assistant-for-my-career-with-java-spring-ai-and-mongodb"

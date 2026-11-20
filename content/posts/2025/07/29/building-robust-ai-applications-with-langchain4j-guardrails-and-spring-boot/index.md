@@ -9,7 +9,6 @@ authors:
 image: "u6131494527_1._Shield__AI_Brain_Concept__A_modern_minimalist__c6366e07-45bb-4d60-8f31-a4380e8e1bd8_0.jpg"
 categories:
   - "AI"
-  - "Java"
   - "LangChain4j"
   - "Machine Learning"
 related_posts:

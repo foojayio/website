@@ -7,7 +7,6 @@ authors:
 image: "cover.jpg"
 categories:
   - "Performance"
-  - "Java"
 canonical: "https://minogin.com/one-character-at-a-time-a-7x-regression-in-dhis2/"
 related_posts:
   - "optimizing-nanosecond-operations-when-the-cpu-cache-matters"

@@ -7,7 +7,6 @@ authors:
   - "yuelin-ou"
 image: "A1_featured_image.png"
 categories:
-  - "Java"
   - "Observability"
   - "Streaming"
   - "Tutorials"

@@ -8,7 +8,6 @@ authors:
   - "laura-cowen"
 image: "startuptimeinms.png"
 categories:
-  - "Java"
   - "Opinion"
   - "Performance"
 related_posts:

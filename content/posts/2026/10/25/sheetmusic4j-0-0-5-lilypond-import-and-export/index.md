@@ -8,7 +8,6 @@ authors:
 image: "lilypond-bach-bwv610.png"
 categories:
   - "JavaFX"
-  - "Java"
 related_posts:
   - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"

@@ -8,7 +8,6 @@ authors:
   - "john-ceccarelli"
 image: "episode-82-openjdk-projects.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
   - "TornadoVM"

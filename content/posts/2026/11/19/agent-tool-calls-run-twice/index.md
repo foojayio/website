@@ -6,7 +6,6 @@ authors:
   - "vishnuvardhan-reddy-kaithapuram"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "AI"
   - "LLM"
 related_posts:

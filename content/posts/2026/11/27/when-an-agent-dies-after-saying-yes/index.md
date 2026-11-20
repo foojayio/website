@@ -6,7 +6,6 @@ authors:
   - "mauro-mura"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "Design Patterns"
   - "Databases"
 related_posts:

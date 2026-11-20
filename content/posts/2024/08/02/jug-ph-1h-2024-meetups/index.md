@@ -8,7 +8,6 @@ authors:
 image: "jugph-angular-2024-1-700x467-1.jpeg"
 categories:
   - "Events"
-  - "Java"
   - "JUGs"
   - "Trip Reports"
 related_posts:

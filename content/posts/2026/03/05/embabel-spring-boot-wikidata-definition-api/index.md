@@ -8,7 +8,6 @@ authors:
 image: "3embabel.png"
 categories:
   - "AI"
-  - "Java"
   - "Spring"
   - "Videos"
 related_posts:

@@ -7,7 +7,7 @@ authors:
   - "kevinfarnham"
 image: "tiobe_20200820.png"
 categories:
-  - "Java"
+  - "Research"
 related_posts:
   - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"

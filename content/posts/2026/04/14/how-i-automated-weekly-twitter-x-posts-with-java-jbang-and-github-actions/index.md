@@ -8,7 +8,6 @@ authors:
 image: "social-post-banner.jpg"
 categories:
   - "Foojay"
-  - "Java"
 related_posts:
 ---
 

@@ -8,7 +8,6 @@ authors:
   - "rich-hagarty"
 image: "EclipseOpenJ9Performance.jpg"
 categories:
-  - "Java"
   - "Opinion"
 related_posts:
   - "are-java-security-updates-important"

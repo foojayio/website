@@ -6,7 +6,6 @@ authors:
   - "alessandro-pignotti"
 image: "cheerpj-5-hero.jpg"
 categories:
-  - "Java"
   - "Release Notes"
   - "Developer Tools"
 related_posts:

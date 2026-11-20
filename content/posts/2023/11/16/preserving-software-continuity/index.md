@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Events"
   - "Foojay"
-  - "Java"
   - "Microservices"
 related_posts:
   - "the-more-you-say-the-less-people-remember"

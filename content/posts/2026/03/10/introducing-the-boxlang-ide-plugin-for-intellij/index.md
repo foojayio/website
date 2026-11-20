@@ -8,7 +8,6 @@ authors:
 image: "1773053085130-700x467-1.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Tools"
   - "BoxLang"
 related_posts:

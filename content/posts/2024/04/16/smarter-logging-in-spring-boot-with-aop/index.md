@@ -7,7 +7,7 @@ authors:
   - "abo-saad-muaath"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Spring"
 related_posts:
   - "aspect-oriented-programming-aop"
   - "microservices-design-principles-for-well-crafted-architecture"

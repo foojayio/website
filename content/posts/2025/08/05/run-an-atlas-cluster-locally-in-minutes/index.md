@@ -7,7 +7,6 @@ authors:
   - "arekborucki"
 image: "mongologo.png"
 categories:
-  - "Java"
   - "Mongo"
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"

@@ -8,7 +8,6 @@ authors:
   - "markus-eisele"
 image: "49de875e-fe8c-40d2-9613-61a6c8270eb3_1536x1024.webp"
 categories:
-  - "Java"
   - "LangChain4j"
 related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"

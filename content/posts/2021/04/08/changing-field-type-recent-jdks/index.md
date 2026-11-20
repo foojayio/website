@@ -7,7 +7,7 @@ authors:
   - "nicolas-frankel"
 image: "writing-play-cards-art-design-hands-869927.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "avoid-the-trojan-horse-in-your-pom-xml-sonarqube-advanced-security-part-3"

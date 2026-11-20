@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Testcontainers"
 related_posts:
 ---

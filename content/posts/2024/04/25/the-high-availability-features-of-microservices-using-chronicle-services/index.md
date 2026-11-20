@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2024-04-16-at-17.51.31-1024x588-1.jpg"
 categories:
   - "Chronicle Software"
-  - "Java"
   - "Microservices"
 related_posts:
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"

@@ -7,7 +7,6 @@ authors:
   - "lee-sheinberg"
 image: "Digmo-and-Java-.png"
 categories:
-  - "Java"
   - "Observability"
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"

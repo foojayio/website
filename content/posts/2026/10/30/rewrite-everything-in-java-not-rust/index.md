@@ -4,7 +4,7 @@ date: "2026-10-30"
 description: "A Java word processor built with Codename One beats its Rust twin on startup, typing latency, memory, binary size, code size and CI time, and also runs on iPhone, Android and the web."
 authors: ["shai-almog"]
 image: "rewrite-everything-in-java-not-rust-deace7455a.jpg"
-categories: ["Java"]
+categories: ["Opinion"]
 canonical: "https://www.codenameone.com/blog/rewrite-everything-in-java-not-rust/"
 ---
 

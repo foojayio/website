@@ -7,7 +7,6 @@ authors:
   - "simon-martinelli"
 image: "maven.png"
 categories:
-  - "Java"
   - "Spring"
   - "Testcontainers"
   - "Testing"

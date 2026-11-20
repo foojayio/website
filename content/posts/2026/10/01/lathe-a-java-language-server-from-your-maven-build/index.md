@@ -7,7 +7,6 @@ authors:
 image: "hero.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Maven"
 related_posts: []
 canonical: "https://ag-libs.github.io/2026/09/27/lathe-a-java-language-server-from-your-maven-build/"

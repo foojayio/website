@@ -8,7 +8,6 @@ authors:
   - "scott-sellers"
 image: "SoJ26-Download.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-78"

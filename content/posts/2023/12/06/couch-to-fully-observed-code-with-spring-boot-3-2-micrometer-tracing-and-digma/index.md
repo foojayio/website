@@ -9,7 +9,6 @@ authors:
 image: "Digma-white-260.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Observability"
   - "Spring"
 related_posts:

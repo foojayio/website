@@ -7,7 +7,6 @@ authors:
   - "simon-martinelli"
 image: "springboot.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Videos"
 related_posts:

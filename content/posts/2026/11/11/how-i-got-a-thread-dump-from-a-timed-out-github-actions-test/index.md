@@ -6,7 +6,6 @@ authors:
   - "felipe-maschio"
 image: "hung-test-ci-thread-dump.jpg"
 categories:
-  - "Java"
   - "Testing"
   - "Debugging"
 related_posts:

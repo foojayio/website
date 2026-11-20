@@ -10,7 +10,6 @@ image: "Blog-Image_Community-Jakarta-Agentic-AI-square-scaled.jpg"
 categories:
   - "AI"
   - "Jakarta EE"
-  - "Java"
   - "Payara"
   - "Videos"
 related_posts:

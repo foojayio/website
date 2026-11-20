@@ -8,7 +8,6 @@ authors:
   - "shaaf"
 image: "jgraphlets.jpg"
 categories:
-  - "Java"
   - "Library"
 related_posts:
   - "semantic-versioning-your-java-libraries"

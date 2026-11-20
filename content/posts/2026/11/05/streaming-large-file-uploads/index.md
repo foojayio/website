@@ -6,7 +6,6 @@ authors:
   - "denis-kalgushkin"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Streaming"
   - "Performance"

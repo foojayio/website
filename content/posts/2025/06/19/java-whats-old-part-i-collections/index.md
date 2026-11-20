@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "old-coffee.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"

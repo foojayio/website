@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
+  - "Opinion"
 related_posts:
   - "making-illegal-state-unrepresentable"
   - "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"

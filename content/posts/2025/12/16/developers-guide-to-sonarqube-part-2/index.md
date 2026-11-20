@@ -8,7 +8,6 @@ authors:
 image: "Gemini_Generated_Image_jfxwfrjfxwfrjfxw-scaled.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Tutorials"
 related_posts:
   - "offline-crypto-address-validation-in-java"

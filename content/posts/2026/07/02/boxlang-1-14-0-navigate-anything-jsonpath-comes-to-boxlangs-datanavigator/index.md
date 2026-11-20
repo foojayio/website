@@ -10,7 +10,6 @@ categories:
   - "BoxLang"
   - "DataEngineering"
   - "Developer Tools"
-  - "Java"
   - "Tools"
 related_posts:
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"

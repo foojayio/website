@@ -10,7 +10,6 @@ authors:
 image: "episode-76-decbcn-part-1.jpg"
 categories:
   - "Conference"
-  - "Java"
   - "Podcast"
 related_posts:
   - "foojay-podcast-75"

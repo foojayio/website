@@ -11,7 +11,6 @@ categories:
   - "DataEngineering"
   - "Foojay"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "LLM"
   - "Machine Learning"

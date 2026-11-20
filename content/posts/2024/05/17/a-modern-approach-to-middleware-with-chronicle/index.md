@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2024-05-07-at-09.59.51-700x487-1.png"
 categories:
   - "Chronicle Software"
-  - "Java"
   - "Microservices"
 related_posts:
   - "achieving-high-throughput-without-sacrificing-latency"

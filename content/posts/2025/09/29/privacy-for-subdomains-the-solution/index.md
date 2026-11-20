@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
+  - "Security"
 related_posts:
   - "privacy-for-subdomains-the-problem"
 ---

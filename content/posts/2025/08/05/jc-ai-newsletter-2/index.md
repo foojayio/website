@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Design Patterns"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "LLM"
   - "Machine Learning"

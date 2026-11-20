@@ -7,7 +7,6 @@ authors:
   - "frankdelporte"
 image: "java-discussions.webp"
 categories:
-  - "Java"
   - "Java Core"
   - "Opinion"
   - "Performance"

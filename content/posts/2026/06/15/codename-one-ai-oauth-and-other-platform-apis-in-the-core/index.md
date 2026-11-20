@@ -7,7 +7,6 @@ authors:
   - "shai-almog"
 image: "platform-apis-in-the-core.jpg"
 categories:
-  - "Java"
   - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

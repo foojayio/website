@@ -9,7 +9,6 @@ image: "Captura-de-pantalla-2026-09-08-132152.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Microservices"
   - "Tools"

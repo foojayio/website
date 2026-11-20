@@ -9,7 +9,6 @@ image: "BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Release Notes"
   - "Tools"
   - "Tutorials"

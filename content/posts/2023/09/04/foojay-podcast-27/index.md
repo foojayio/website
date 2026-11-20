@@ -8,7 +8,6 @@ authors:
   - "mgrygles"
 image: "foojay-podcast-guests-chicago.jpg"
 categories:
-  - "Java"
   - "JUGs"
   - "Kotlin"
   - "Podcast"

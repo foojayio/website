@@ -6,7 +6,6 @@ authors:
   - "swarnalata-samal"
 image: "codeguard-ai-cover.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "AI"
   - "Developer Tools"

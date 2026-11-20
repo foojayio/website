@@ -8,7 +8,7 @@ authors:
   - "jens-knipper"
 image: "mailusage.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"

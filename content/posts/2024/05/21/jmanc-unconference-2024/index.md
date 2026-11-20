@@ -9,7 +9,6 @@ image: "jmanc-logo-9875160f.png"
 categories:
   - "Conference"
   - "Events"
-  - "Java"
   - "JUGs"
 related_posts:
   - "the-story-of-a-java-17-native-memory-leak"

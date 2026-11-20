@@ -11,7 +11,6 @@ image: "llms.jpg"
 categories:
   - "Cloud"
   - "Jakarta EE"
-  - "Java"
   - "Machine Learning"
   - "Microservices"
 related_posts:

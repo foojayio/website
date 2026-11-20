@@ -6,7 +6,6 @@ authors:
   - "miguel-perez-colom"
 image: "mateu-3-hero.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Tutorials"
 related_posts:

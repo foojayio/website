@@ -11,7 +11,6 @@ categories:
   - "BoxLang"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Tools"
   - "Use Cases"

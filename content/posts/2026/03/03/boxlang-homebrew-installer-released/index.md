@@ -9,7 +9,6 @@ image: "boxlang-homebrew.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Release Notes"
   - "Tools"
 related_posts:

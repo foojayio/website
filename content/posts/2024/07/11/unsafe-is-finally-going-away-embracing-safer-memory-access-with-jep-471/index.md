@@ -7,7 +7,6 @@ authors:
   - "bazlur-rahman"
 image: "Gemini_Generated_Image_9cppb89cppb89cpp.jpeg"
 categories:
-  - "Java"
   - "JDK 23"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"

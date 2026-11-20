@@ -9,7 +9,6 @@ image: "pi4j-overview.jpg"
 categories:
   - "Pi4J"
   - "Raspberry Pi"
-  - "Java"
   - "Embedded"
 related_posts:
   - "pi4j-drivers-simplifying-sensor-and-hardware-integration-in-java"

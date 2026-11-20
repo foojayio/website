@@ -7,7 +7,6 @@ authors:
 image: "header.jpg"
 canonical: "https://webtechie.be/post/do-you-know-which-java-build-you-are-running/"
 categories:
-  - "Java"
   - "Java Core"
   - "Security"
   - "Release Notes"

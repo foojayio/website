@@ -7,7 +7,6 @@ authors:
   - "jonathan-vila"
 image: "ai-test-generation.jpg"
 categories:
-  - "Java"
   - "Testing"
 related_posts:
   - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"

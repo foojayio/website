@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover-companion.jpeg"
 categories:
-  - "Java"
+  - "Tools"
 related_posts:
   - "an-example-of-hacs-adaptive-lighting"
   - "loosely-coupled-configuration-for-home-assistant"

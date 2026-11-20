@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "azul-roadmap-end-of-2024.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Opinion"
   - "Performance"

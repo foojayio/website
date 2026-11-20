@@ -7,7 +7,6 @@ authors:
   - "lee-sheinberg"
 image: "digmalovejava-spring.png"
 categories:
-  - "Java"
   - "Observability"
   - "Performance"
 related_posts:

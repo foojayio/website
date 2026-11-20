@@ -8,7 +8,6 @@ authors:
   - "loic-mathieu"
 image: "podcast-guests-java-22.jpg"
 categories:
-  - "Java"
   - "JEPs"
   - "Release Notes"
 related_posts:

@@ -8,7 +8,6 @@ authors:
 image: "java.jpeg"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "java-virtual-threads-in-action-optimizing-mongodb-operation"

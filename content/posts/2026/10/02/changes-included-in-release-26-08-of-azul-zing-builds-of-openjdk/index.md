@@ -7,7 +7,6 @@ authors:
   - "matt-van-order"
 image: "zing-2608-banner.png"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "azul-august-2026-release-javas-first-monthly-cspu"

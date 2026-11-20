@@ -9,7 +9,6 @@ image: "ARM-bar.jpg"
 categories:
   - "Arm"
   - "Cloud"
-  - "Java"
 related_posts:
   - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"

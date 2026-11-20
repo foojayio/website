@@ -9,7 +9,6 @@ image: "ai-insider-1.jpg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "LangChain4j"
   - "LLM"

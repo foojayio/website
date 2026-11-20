@@ -7,7 +7,6 @@ authors:
   - "jago-de-vreede"
 image: "maven.jpg"
 categories:
-  - "Java"
   - "Maven"
 related_posts:
   - "transitioning-to-java-my-first-book"

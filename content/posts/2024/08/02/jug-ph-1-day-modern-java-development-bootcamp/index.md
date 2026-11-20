@@ -7,7 +7,6 @@ authors:
   - "tristan-mahinay"
 image: "java-bootcamp-2024-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "JUGs"

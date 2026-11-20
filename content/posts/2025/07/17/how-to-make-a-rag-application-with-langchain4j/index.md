@@ -9,7 +9,6 @@ authors:
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Machine Learning"
   - "Mongo"
 related_posts:

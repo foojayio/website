@@ -9,7 +9,6 @@ image: "image-3-1024x943.jpg"
 categories:
   - "AI"
   - "Jakarta EE"
-  - "Java"
   - "LangChain4j"
   - "Library"
   - "LLM"

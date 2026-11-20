@@ -10,7 +10,6 @@ image: "eliminating-flaky-tests.jpg"
 categories:
   - "Conference"
   - "Gradle"
-  - "Java"
   - "Testcontainers"
   - "Testing"
   - "Tools"

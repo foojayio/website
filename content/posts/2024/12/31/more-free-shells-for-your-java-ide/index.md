@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "shell-prompt-java2-1.png"
 categories:
-  - "Desktop"
   - "Eclipse"
   - "IntelliJ IDEA"
   - "NetBeans"

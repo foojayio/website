@@ -13,7 +13,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "Events"
-  - "Java"
 related_posts:
 ---
 

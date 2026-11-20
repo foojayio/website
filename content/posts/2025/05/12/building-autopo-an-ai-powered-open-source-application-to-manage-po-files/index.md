@@ -7,7 +7,6 @@ authors:
   - "andrea-vacondio"
 image: "autopo-6x.png"
 categories:
-  - "Desktop"
   - "JavaFX"
   - "LangChain4j"
 related_posts:

@@ -6,7 +6,6 @@ authors:
   - "stephane-bury"
 image: "arcana-preview.jpg"
 categories:
-  - "Java"
   - "Library"
   - "Tools"
 related_posts:

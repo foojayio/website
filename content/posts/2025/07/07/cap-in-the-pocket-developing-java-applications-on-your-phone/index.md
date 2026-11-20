@@ -7,7 +7,7 @@ authors:
   - "johannes-bechberger"
 image: "cap-1024x767.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"

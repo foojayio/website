@@ -8,7 +8,6 @@ authors:
 image: "MSPatterns.png"
 categories:
   - "Databases"
-  - "Java"
   - "Microservices"
   - "nosql"
   - "Spring"

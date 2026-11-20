@@ -9,7 +9,6 @@ authors:
   - "kaiming-wan"
 image: "kafka-with-zing-and-automq.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Performance"
 related_posts:

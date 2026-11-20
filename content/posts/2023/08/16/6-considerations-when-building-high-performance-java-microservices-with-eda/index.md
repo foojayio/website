@@ -9,7 +9,6 @@ image: "Screenshot-2023-08-10-at-5.13.36-PM-1024x607-1.jpg"
 categories:
   - "Chronicle Software"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:

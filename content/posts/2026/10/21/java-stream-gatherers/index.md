@@ -6,7 +6,6 @@ image: "StreamGatherers.jpg"
 authors:
   - "mahendra1413"
 categories:
-  - "Java"
   - "Tutorials"
   - "IntelliJ"
 ---

@@ -9,7 +9,6 @@ image: "jdoodle-example.png"
 categories:
   - "Foojay"
   - "Interviews"
-  - "Java"
 related_posts:
   - "integrate-executable-java-code-in-your-blog-posts"
   - "integrate-executable-java-code-in-your-blog-posts-part-2-how-to-use-dependencies"

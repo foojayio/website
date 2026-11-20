@@ -4,7 +4,7 @@ date: "2026-11-23"
 description: "Codename One now targets embedded Linux: a touch UI that needs a twentieth of a Chromium kiosk's memory and no GPU, and a headless backend that served more..."
 authors: ["shai-almog"]
 image: "embedded-linux-ui-in-18-mb-500726cf44.jpg"
-categories: ["Java", "Codename One", "Embedded"]
+categories: ["Codename One", "Embedded"]
 related_posts:
   - "rewrite-everything-in-java-not-rust"
   - "flutter-better-in-java"

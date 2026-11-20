@@ -10,7 +10,6 @@ categories:
   - "BoxLang"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Performance"
   - "Streaming"
   - "Testing"

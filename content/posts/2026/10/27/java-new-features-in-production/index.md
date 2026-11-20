@@ -6,7 +6,6 @@ authors:
   - "mikhail-polivakha"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Sealed Classes"
 canonical: "https://axelix.io/blog/java-new-features-in-production"
 related_posts:

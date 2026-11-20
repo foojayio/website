@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "wordpress-gdf893a2fd.jpg"
 categories:
-  - "Java"
+  - "Foojay"
 related_posts:
 ---
 

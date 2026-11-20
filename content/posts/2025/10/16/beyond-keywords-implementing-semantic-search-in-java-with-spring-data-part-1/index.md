@@ -8,7 +8,6 @@ authors:
 image: "458-4589658_spring-framework-logo-spring-boot-png-transparent-png.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
   - "Tools"

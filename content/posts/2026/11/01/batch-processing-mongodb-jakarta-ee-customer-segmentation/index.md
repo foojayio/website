@@ -4,7 +4,7 @@ date: "2026-11-01"
 description: "Build a Jakarta Batch job that reclassifies e-commerce customers into tiers on MongoDB, with a Jakarta Faces preview flow before execution."
 authors: ["otavio-santana"]
 image: "jakarta-batch-mongodb-cover.jpg"
-categories: ["Jakarta EE", "Java", "Mongo", "Tutorials"]
+categories: ["Jakarta EE", "Mongo", "Tutorials"]
 related_posts:
   - "build-your-first-saas-with-mongodb-ephemeral-clusters"
   - "testing-jakarta-ee-three-layers-three-tools"

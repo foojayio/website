@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "RestClient_1-700x394-1.jpg"
 categories:
-  - "Java"
   - "Microservices"
   - "reactive"
   - "Spring"

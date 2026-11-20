@@ -7,7 +7,6 @@ authors:
   - "vincent-vauban"
 image: "kstream.png"
 categories:
-  - "Java"
   - "Kafka"
   - "Spring"
   - "Streaming"

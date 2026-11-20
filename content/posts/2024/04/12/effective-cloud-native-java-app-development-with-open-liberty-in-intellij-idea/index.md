@@ -13,7 +13,6 @@ categories:
   - "Gradle"
   - "IntelliJ IDEA"
   - "Jakarta EE"
-  - "Java"
   - "Maven"
   - "Tools"
 related_posts:

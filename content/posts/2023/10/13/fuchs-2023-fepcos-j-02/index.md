@@ -8,7 +8,6 @@ authors:
 image: "fuchs2023-fepcos-j-example-use-case-510x510-1.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
 related_posts:
   - "fuchs-2023-fepcos-j-01"

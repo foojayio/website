@@ -7,7 +7,6 @@ authors:
   - "maria-arias"
 image: "aot-cache.webp"
 categories:
-  - "Java"
   - "JEPs"
   - "Performance"
 related_posts:

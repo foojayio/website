@@ -6,7 +6,6 @@ authors:
   - "harald-krake"
 image: "finally-final-jep-500.jpg"
 categories:
-  - "Java"
   - "JEPs"
   - "Java Core"
 related_posts:

@@ -8,7 +8,6 @@ authors:
 image: "ldap-injection-pix.png"
 categories:
   - "DevOps"
-  - "Java"
   - "Security"
   - "Spring"
   - "Videos"

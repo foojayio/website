@@ -8,7 +8,6 @@ authors:
 image: "kestra-software-architecture-700x394-1.jpg"
 categories:
   - "DataEngineering"
-  - "Java"
   - "Kafka"
 related_posts:
   - "effective-coding-with-java-observability"

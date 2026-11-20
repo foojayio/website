@@ -8,7 +8,6 @@ authors:
 image: "idempotent-1-scaled.png"
 categories:
   - "Design Patterns"
-  - "Java"
   - "Library"
   - "Microservices"
   - "Performance"

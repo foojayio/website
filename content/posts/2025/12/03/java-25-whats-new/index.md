@@ -8,7 +8,6 @@ authors:
   - "loic-mathieu"
 image: "j25.png"
 categories:
-  - "Java"
   - "JEPs"
   - "Release Notes"
 related_posts:

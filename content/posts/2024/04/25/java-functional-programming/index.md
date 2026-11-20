@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "FunctionalProgramming-700x394-1.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "Kotlin"

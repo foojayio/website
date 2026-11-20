@@ -6,7 +6,6 @@ authors:
   - "mark-santos"
 image: "driving-ffmpeg-from-java.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Tutorials"
 related_posts:

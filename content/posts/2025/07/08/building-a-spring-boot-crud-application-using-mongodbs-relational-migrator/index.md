@@ -9,7 +9,6 @@ authors:
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "clean-and-modular-java-a-hexagonal-architecture-approach"

@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Design Patterns"
   - "DevOps"
-  - "Java"
   - "Java Core"
   - "JC-AI Newsletter"
   - "LLM"

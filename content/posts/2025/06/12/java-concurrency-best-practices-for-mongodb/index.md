@@ -7,7 +7,6 @@ authors:
   - "vivekanandan-sakthivelu"
 image: "mongologo.png"
 categories:
-  - "Java"
   - "Mongo"
 related_posts:
 ---

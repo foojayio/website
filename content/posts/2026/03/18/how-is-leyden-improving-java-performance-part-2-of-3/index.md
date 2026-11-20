@@ -7,7 +7,6 @@ authors:
   - "maria-arias"
 image: "training-maria-training.jpg"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"

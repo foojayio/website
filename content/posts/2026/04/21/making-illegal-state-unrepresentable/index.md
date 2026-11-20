@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Research"
 related_posts:

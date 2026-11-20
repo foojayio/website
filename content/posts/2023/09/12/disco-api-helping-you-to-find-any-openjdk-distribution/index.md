@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "DevOps"
   - "Foojay"
-  - "Java"
   - "Java Core"
   - "JavaFX"
   - "Tools"

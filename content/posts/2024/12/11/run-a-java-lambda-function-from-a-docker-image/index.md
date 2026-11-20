@@ -9,7 +9,6 @@ image: "LambdaDocker.png"
 categories:
   - "Cloud"
   - "DevOps"
-  - "Java"
   - "Microservices"
 related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"

@@ -5,7 +5,6 @@ description: "Your agent passed its unit tests. Is it any good? Learn how to use
 authors:
   - "geertjan-wielenga"
 categories:
-  - "Java"
   - "AI"
   - "Testing"
   - "GenAI"

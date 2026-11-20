@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Cloud"
   - "GitLab"
-  - "Java"
 related_posts:
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
   - "jc-ai-newsletter-4"

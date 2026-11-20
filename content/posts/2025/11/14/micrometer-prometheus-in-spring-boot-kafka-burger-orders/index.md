@@ -8,7 +8,6 @@ authors:
 image: "Untitled-1024x683.jpg"
 categories:
   - "DevOps"
-  - "Java"
   - "JDK Flight Recorder"
   - "Kafka"
   - "Microservices"

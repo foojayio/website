@@ -9,7 +9,6 @@ image: "Imagen2-1024x978.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Library"
   - "Tools"
 related_posts:

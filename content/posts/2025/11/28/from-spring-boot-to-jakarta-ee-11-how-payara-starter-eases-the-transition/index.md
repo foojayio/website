@@ -10,7 +10,6 @@ image: "Blog-Image_Spring-to-Jakarta-EE.jpg"
 categories:
   - "Eclipse"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Payara"
   - "Spring"

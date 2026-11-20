@@ -9,7 +9,6 @@ image: "Screenshot-2026-05-01-at-2.28.13-PM.png"
 categories:
   - "AI"
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:

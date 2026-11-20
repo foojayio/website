@@ -8,7 +8,6 @@ authors:
 image: "gra.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"

@@ -6,7 +6,6 @@ authors:
   - "somil-garg"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "AI"
   - "Spring"
   - "Testing"

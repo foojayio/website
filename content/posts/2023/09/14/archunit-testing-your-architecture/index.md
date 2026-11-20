@@ -7,7 +7,6 @@ authors:
   - "simon-verhoeven"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Testing"
   - "Tutorials"
 related_posts:

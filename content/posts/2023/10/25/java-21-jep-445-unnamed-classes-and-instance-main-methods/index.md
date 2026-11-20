@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "newer-than-8.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "JDK21"
   - "JEPs"

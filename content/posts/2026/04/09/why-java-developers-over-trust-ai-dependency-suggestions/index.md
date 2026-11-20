@@ -7,7 +7,6 @@ authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_zu1ebzu1ebzu1ebz-1024x559.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"

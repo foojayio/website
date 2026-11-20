@@ -7,7 +7,6 @@ authors:
   - "abo-saad-muaath"
 image: "log-1.webp"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "smarter-logging-in-spring-boot-with-aop"

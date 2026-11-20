@@ -7,7 +7,6 @@ authors:
 image: "open-java-format-cover.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Opinion"
 related_posts:
   - "enterprise-java-quality-gates-ai"

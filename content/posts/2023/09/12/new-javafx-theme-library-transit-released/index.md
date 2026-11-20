@@ -7,7 +7,6 @@ authors:
   - "pedro-vieira"
 image: "Councious-ScrollPane-Transit-2-poster.jpg"
 categories:
-  - "Java"
   - "JavaFX"
   - "Release Notes"
 related_posts:

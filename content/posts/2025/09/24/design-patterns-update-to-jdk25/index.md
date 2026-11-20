@@ -8,7 +8,6 @@ authors:
 image: "116749_image_676x380.webp"
 categories:
   - "Agile"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:

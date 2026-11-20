@@ -6,7 +6,6 @@ authors:
   - "igor-de-souza"
 image: "pokemon01.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JEPs"

@@ -8,7 +8,6 @@ authors:
   - "shai-almog"
 image: "episode-103-reflection.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Performance"
   - "Podcast"

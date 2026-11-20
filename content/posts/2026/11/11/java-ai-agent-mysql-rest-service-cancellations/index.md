@@ -4,7 +4,7 @@ date: "2026-11-11"
 description: "Build a Java AI agent that requests order cancellations through MySQL REST Service, with scoped tools, ownership checks, and explicit human confirmation."
 authors: ["bazlur-rahman"]
 image: "mysql-java-ai.jpg"
-categories: ["Java", "Databases", "AI", "LangChain4j", "Security"]
+categories: ["Databases", "AI", "LangChain4j", "Security"]
 related_posts:
   - "one-database-two-models-mysql-json-duality-views-java"
   - "spring-ai-langchain4j-three-stacks-one-test"

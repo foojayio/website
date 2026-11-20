@@ -6,7 +6,6 @@ authors:
   - "artemy-degtyarev"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "ahead-of-time-method-profiling"

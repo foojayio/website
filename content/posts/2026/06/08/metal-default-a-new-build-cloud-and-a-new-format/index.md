@@ -8,7 +8,6 @@ authors:
   - "shai-almog"
 image: "metal-default-new-build-cloud-and-a-new-format.jpg"
 categories:
-  - "Java"
   - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover2_large.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "why-java-c-and-python-are-todays-most-utilized-programming-languages"
 ---

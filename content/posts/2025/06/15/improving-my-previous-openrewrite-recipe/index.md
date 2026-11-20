@@ -8,7 +8,8 @@ authors:
   - "nicolas-frankel"
 image: "cover-improving-1024x683.jpg"
 categories:
-  - "Java"
+  - "OpenRewrite"
+  - "Developer Tools"
 related_posts:
 ---
 

@@ -6,7 +6,6 @@ authors:
   - "ted-kupolov"
 image: "statlite-monitoring-og.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Observability"
 related_posts: []

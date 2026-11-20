@@ -7,7 +7,6 @@ authors:
   - "bazlur-rahman"
 image: "Gemini_Generated_Image_6ad3g46ad3g46ad3.webp"
 categories:
-  - "Java"
   - "LangChain4j"
 related_posts:
   - "book-review-developing-apps-with-gpt-4-and-chatgpt"

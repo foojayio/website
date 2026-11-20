@@ -8,7 +8,6 @@ authors:
   - "hanno-embregts"
 image: "performance.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "java-24-rolls-out-today-find-out-why-its-aptly-named"

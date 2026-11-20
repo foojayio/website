@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "GenAI"
   - "IntelliJ IDEA"
-  - "Java"
   - "Machine Learning"
   - "Spring"
 related_posts:

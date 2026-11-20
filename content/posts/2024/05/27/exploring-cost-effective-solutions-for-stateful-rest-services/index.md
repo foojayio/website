@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Databases"
   - "DevOps"
-  - "Java"
   - "Microservices"
   - "Performance"
   - "Research"

@@ -9,7 +9,6 @@ image: "azul-docker-official.avif"
 categories:
   - "Cloud"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"

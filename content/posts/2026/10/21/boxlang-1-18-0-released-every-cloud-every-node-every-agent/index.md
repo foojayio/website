@@ -7,7 +7,6 @@ authors:
 image: "cover.jpg"
 categories:
   - "BoxLang"
-  - "Java"
   - "Cloud"
   - "AI"
 canonical: "https://www.ortussolutions.com/blog/boxlang-1180-released-every-cloud-every-node-every-agent"

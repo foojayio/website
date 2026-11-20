@@ -8,7 +8,6 @@ authors:
   - "jakob-jenkov"
 image: "episode-90-java-21-to-25.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
 related_posts:

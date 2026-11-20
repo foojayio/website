@@ -10,7 +10,6 @@ image: "pool.png"
 categories:
   - "Databases"
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "a-dissection-of-java-jdbc-to-postgresql-connections"

@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Spring"
 related_posts:

@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2025-11-03-at-15.07.27-1024x484.jpg"
 categories:
   - "AI"
-  - "Java"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "the-5-knights-of-the-mcp-apocalypse"

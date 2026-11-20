@@ -7,7 +7,6 @@ authors:
 image: "1_wul-KqE6vXk4ynnh_IljSQ.webp"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "JDK21"
   - "Maven"
   - "Performance"

@@ -7,7 +7,6 @@ authors:
   - "loic-mathieu"
 image: "java-27.jpg"
 categories:
-  - "Java"
   - "JEPs"
   - "Release Notes"
 related_posts:

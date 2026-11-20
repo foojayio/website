@@ -8,7 +8,6 @@ authors:
   - "david-vlijmincx"
 image: "ffmep.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Performance"
 related_posts:

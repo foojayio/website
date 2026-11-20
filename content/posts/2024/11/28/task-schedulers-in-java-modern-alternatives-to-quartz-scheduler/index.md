@@ -9,7 +9,6 @@ authors:
 image: "db-scheduler.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Spring"
   - "Tools"
 related_posts:

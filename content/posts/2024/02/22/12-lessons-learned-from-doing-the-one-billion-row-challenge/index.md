@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "1brc-perf-square.png"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Performance"

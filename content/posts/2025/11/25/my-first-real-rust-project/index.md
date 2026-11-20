@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "cover.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "runtime-initialized-variables-in-rust"
   - "error-management-in-rust-and-libs-that-support-it"

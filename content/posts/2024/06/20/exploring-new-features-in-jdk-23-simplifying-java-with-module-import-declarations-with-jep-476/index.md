@@ -7,7 +7,6 @@ authors:
   - "bazlur-rahman"
 image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137-6b73-4ed7-9c61-090471b880f4.jpg"
 categories:
-  - "Java"
   - "JEPs"
   - "Performance"
 related_posts:

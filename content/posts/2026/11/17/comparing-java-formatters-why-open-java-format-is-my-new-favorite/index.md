@@ -6,7 +6,6 @@ authors:
   - "guillaume-laforge"
 image: "java-formatters-comparison-banner.jpg"
 categories:
-  - "Java"
   - "Developer Tools"
   - "Tools"
   - "AI"

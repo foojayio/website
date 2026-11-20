@@ -6,7 +6,6 @@ authors:
   - "geertjan-wielenga"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "AI"
   - "Databases"
   - "Deep Netts"

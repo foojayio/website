@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Databases"
-  - "Java"
   - "Java Core"
   - "sql"
   - "Tools"

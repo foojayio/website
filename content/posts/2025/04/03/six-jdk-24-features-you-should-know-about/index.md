@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "six-jdk24-features.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-68"

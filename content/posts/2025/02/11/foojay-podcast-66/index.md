@@ -11,7 +11,6 @@ authors:
   - "wim-de-troyer"
 image: "episode-66-code-posts.jpg"
 categories:
-  - "Java"
   - "Podcast"
   - "Spring"
 related_posts:

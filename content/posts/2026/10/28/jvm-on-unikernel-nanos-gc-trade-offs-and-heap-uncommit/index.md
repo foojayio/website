@@ -6,7 +6,6 @@ authors:
   - "angelo-rubini"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "OpenJDK"
   - "Performance"
 related_posts:

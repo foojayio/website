@@ -9,7 +9,6 @@ authors:
 image: "Whats-New-in-the-Payara-Platform-April-2026-Release-2.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Payara"
   - "Release Notes"

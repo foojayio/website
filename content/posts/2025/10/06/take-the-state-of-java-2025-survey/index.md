@@ -7,7 +7,6 @@ authors:
   - "geertjan-wielenga"
 image: "which.png"
 categories:
-  - "Java"
   - "Performance"
   - "Surveys"
 related_posts:

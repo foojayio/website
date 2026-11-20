@@ -4,7 +4,7 @@ date: "2026-09-26"
 description: "Explore MySQL JSON Duality Views in Java: simpler reads, safe document writes, ORM comparisons, and read-only tools for a local AI assistant."
 authors: ["bazlur-rahman"]
 image: "mysql-json-duality-views-java-ai.jpg"
-categories: ["Java", "Databases", "AI", "LangChain4j"]
+categories: ["Databases", "AI", "LangChain4j"]
 ---
 
 MySQL can now hand your application a complete JSON document, such as an order with its customer and line items, while the data stays in normal relational tables. You can even send the document back and MySQL updates the right rows. I built a small Java app to see how far that goes. Reading got much simpler. Writing works too, but it comes with a few sharp edges you should know about before you use it.

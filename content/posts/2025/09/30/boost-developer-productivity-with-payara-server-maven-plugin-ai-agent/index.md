@@ -10,7 +10,6 @@ image: "see-it-in-action-screenshot-AI-Maven-Blog.jpg"
 categories:
   - "AI"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Maven"
   - "Tutorials"

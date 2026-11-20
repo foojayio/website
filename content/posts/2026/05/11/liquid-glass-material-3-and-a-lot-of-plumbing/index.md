@@ -7,7 +7,6 @@ authors:
   - "shai-almog"
 image: "liquid-glass-material-3-modern-native-themes-2.jpg"
 categories:
-  - "Java"
   - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"

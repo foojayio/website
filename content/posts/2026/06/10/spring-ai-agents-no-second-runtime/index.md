@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "FinOps"
   - "GenAI"
-  - "Java"
   - "LLM"
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"

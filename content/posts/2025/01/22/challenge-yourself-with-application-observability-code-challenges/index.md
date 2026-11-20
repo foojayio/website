@@ -7,7 +7,6 @@ authors:
   - "cees-bos"
 image: "aocc_small-1.png"
 categories:
-  - "Java"
   - "Observability"
   - "OpenTelemetry"
 related_posts:

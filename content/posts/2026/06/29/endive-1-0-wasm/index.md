@@ -7,7 +7,6 @@ authors:
   - "andrea-peruffo"
 image: "log_plus_text_green-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail"

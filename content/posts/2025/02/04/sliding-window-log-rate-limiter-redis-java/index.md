@@ -8,7 +8,6 @@ authors:
   - "raphael-delio"
 image: "Redis_Video_RateLimiterImplementations_Part4_YoutubeThumbnail.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "nosql"
   - "Redis"

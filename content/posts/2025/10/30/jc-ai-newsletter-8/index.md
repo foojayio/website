@@ -11,7 +11,6 @@ categories:
   - "Design Patterns"
   - "DevOps"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "LLM"
   - "Machine Learning"

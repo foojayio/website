@@ -9,7 +9,6 @@ image: "1500x500-1.jpeg"
 categories:
   - "Debugging"
   - "Developer Tools"
-  - "Java"
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "building-for-failure-best-practices-for-easy-production-debugging"

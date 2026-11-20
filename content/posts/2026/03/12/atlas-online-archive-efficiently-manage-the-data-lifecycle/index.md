@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-03-10-at-1.57.52-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
 ---

@@ -6,7 +6,6 @@ authors:
   - "mikhail-polivakha"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Security"
 canonical: "https://axelix.io/blog/spring-context-hierarchy"

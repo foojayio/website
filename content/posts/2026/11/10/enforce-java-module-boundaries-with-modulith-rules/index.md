@@ -6,7 +6,6 @@ authors:
   - "omphile-matheolane"
 image: "module-boundaries-cover.jpg"
 categories:
-  - "Java"
   - "Testing"
 related_posts:
   - "spring-modulith-modularity-maturity"

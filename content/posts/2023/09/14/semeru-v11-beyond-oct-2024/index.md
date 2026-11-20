@@ -7,7 +7,6 @@ authors:
   - "laura-cowen"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"

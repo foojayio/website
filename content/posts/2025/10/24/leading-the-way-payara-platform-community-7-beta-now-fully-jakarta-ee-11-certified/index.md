@@ -9,7 +9,6 @@ authors:
 image: "Community_Announcement.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "can-java-jakarta-ee-do-microservices"

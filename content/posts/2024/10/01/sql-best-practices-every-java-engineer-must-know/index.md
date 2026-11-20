@@ -8,7 +8,6 @@ authors:
 image: "1.jpg"
 categories:
   - "Databases"
-  - "Java"
 related_posts:
   - "effective-java-logging"
   - "calling-microservices-in-java"

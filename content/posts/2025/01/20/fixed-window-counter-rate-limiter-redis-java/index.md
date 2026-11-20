@@ -9,7 +9,6 @@ authors:
 image: "Redis_Video_RateLimiterImplementations_Part2_YoutubeThumbnail.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "rate-limiting-with-redis-an-essential-guide"

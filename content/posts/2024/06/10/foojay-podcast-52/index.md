@@ -9,7 +9,6 @@ authors:
 image: "jconpic.jpg"
 categories:
   - "CRaC"
-  - "Java"
   - "Java Core"
   - "Podcast"
   - "Security"

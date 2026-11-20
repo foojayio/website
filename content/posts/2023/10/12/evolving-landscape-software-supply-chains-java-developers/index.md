@@ -7,7 +7,6 @@ authors:
   - "steve-poole"
 image: "Screenshot-2023-10-11-at-14.36.06-1024x541.jpg"
 categories:
-  - "Java"
   - "Press"
   - "Research"
   - "Security"

@@ -9,7 +9,6 @@ authors:
   - "matt-van-order"
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
-  - "Java"
   - "Performance"
   - "Release Notes"
 related_posts:

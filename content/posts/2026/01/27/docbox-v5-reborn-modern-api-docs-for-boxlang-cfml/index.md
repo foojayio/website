@@ -12,7 +12,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Use Cases"
 related_posts:

@@ -8,7 +8,6 @@ image: "Screenshot-2025-11-07-at-17.57.47-1024x709.jpg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
   - "LLM"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"

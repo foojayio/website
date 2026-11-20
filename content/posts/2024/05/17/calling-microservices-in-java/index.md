@@ -7,7 +7,6 @@ authors:
   - "abo-saad-muaath"
 image: "Screenshot-1445-10-05-at-7.23.37-AM.png"
 categories:
-  - "Java"
   - "Microservices"
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"

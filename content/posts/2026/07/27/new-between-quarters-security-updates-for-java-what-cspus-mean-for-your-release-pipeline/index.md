@@ -6,7 +6,6 @@ authors:
   - "frankdelporte"
 image: "openjdk-cspu-releases.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Release Notes"
 related_posts:

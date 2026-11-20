@@ -6,7 +6,6 @@ canonical: "https://hakdogan.medium.com/an-introduction-to-openid-authzen-and-au
 authors: ["huseyin-akdogan"]
 image: "authzen-cover.jpg"
 categories:
-  - "Java"
   - "Security"
   - "Spring"
 related_posts:

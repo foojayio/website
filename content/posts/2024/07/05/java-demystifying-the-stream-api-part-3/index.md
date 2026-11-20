@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "DALL-E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-header-about-debugging-Java-streams-using-the-peek-method.-The-image-should-visually-represent-the-concept.jpeg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Tutorials"
 related_posts:

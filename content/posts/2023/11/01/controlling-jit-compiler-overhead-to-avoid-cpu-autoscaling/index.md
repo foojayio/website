@@ -10,7 +10,6 @@ authors:
 image: "before_after.png"
 categories:
   - "DevOps"
-  - "Java"
   - "Performance"
 related_posts:
   - "changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk"

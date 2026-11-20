@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

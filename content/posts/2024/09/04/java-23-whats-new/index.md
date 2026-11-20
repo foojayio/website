@@ -8,7 +8,6 @@ authors:
   - "loic-mathieu"
 image: "java23.jpg"
 categories:
-  - "Java"
   - "JDK 23"
   - "JEPs"
   - "Release Notes"

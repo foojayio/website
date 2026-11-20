@@ -9,7 +9,6 @@ authors:
   - "simonritter"
 image: "podcast-guests-java-22.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JEPs"

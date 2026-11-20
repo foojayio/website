@@ -9,7 +9,6 @@ image: "AdobeStock_975408349-scaled.jpeg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
   - "LangChain4j"
   - "Library"
   - "LLM"

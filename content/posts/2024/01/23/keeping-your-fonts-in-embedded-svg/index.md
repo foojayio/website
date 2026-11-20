@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "watercolor-3445376.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
 # FROZEN, and this one MUST stay frozen: the live WordPress page serves an
 # EMPTY .article__main-content, so every transfer/Posts.java run -- including

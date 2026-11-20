@@ -7,7 +7,7 @@ authors:
   - "catherine-edelveis"
 image: "distro-choice.jpg"
 categories:
-  - "Java"
+  - "OpenJDK"
 related_posts:
 ---
 

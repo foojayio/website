@@ -8,7 +8,6 @@ authors:
 image: "spring-logo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:

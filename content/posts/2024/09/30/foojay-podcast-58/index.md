@@ -13,7 +13,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Java Core"
   - "Observability"
   - "Podcast"

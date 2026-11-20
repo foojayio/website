@@ -9,7 +9,6 @@ authors:
   - "ronald-dehuysser"
 image: "2020-04-23-jobrunr-gets-jobs-done.webp"
 categories:
-  - "Java"
   - "Spring"
   - "Tools"
   - "Tutorials"

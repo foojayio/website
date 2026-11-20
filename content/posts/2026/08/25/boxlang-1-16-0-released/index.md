@@ -9,7 +9,6 @@ image: "boxlang-v1.16.0-700x467.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Release Notes"
 related_posts:

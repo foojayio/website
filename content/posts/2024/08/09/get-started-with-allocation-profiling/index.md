@@ -10,7 +10,6 @@ image: "banner.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
-  - "Java"
   - "Tools"
   - "Tutorials"
   - "Use Cases"

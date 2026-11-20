@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "pi4j-overview-scaled.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-83"

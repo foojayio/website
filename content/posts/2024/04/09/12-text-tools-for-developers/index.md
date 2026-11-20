@@ -7,7 +7,6 @@ authors:
   - "anthony-goubard"
 image: "Toolbox.png"
 categories:
-  - "Desktop"
   - "Developer Tools"
   - "DevOps"
 related_posts:

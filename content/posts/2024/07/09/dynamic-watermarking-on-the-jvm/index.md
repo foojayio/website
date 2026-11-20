@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "faucet-1684902.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Kotlin"
 related_posts:

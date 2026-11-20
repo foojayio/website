@@ -9,7 +9,6 @@ authors:
 image: "hero.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Tools"
 related_posts:
   - "indexing-all-of-wikipedia-on-a-laptop"

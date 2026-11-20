@@ -6,7 +6,6 @@ authors:
   - "hyyan-abo-fakher"
 image: "build-full-stack-web-app-in-java-with-webforj.jpg"
 categories:
-  - "Java"
   - "Tutorials"
   - "Spring"
 related_posts:

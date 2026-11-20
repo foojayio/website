@@ -8,7 +8,6 @@ authors:
   - "guillaume-laforge"
 image: "gemma-ollama-testcontainers-langchain4j-700x360-1.png"
 categories:
-  - "Java"
   - "Machine Learning"
 related_posts:
   - "quick-start-with-machine-learning-in-java"

@@ -8,7 +8,6 @@ authors:
 image: "single-board-computers-scaled.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Raspberry Pi"
 related_posts:
   - "first-experiments-with-java-on-the-lattepanda-iota"

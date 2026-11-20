@@ -10,7 +10,6 @@ image: "htmx-cover-small.jpg"
 categories:
   - "Book Review"
   - "Books"
-  - "Java"
   - "Spring"
 related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"

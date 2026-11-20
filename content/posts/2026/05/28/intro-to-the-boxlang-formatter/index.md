@@ -9,7 +9,6 @@ image: "formatter.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Tools"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"

@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-09-03-at-11.21.04-AM.jpg"
 categories:
   - "AI"
-  - "Java"
   - "Mongo"
 related_posts:
   - "atlas-searching-with-the-java-driver"

@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "OpenRewrite-poster.png"
 categories:
-  - "Java"
   - "OpenRewrite"
 related_posts:
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"

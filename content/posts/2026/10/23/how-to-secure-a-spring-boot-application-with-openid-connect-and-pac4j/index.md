@@ -6,7 +6,6 @@ authors:
   - "jerome-leleu"
 image: "spring-boot-oidc-pac4j.jpg"
 categories:
-  - "Java"
   - "Spring"
   - "Security"
   - "Tutorials"

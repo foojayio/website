@@ -666,8 +666,10 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   flex-wrap: wrap; column-gap: 1.5rem;
 }
 .home-intro__row p { flex: 1 1 24rem; }
-/* nowrap so the link never breaks across lines away from its arrow. */
-.home-intro a { font-weight: 600; white-space: nowrap; }
+.home-intro__actions {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .75rem;
+  padding: .5rem 0;
+}
 /* --------------------------------------------------- home: events strip -- */
 /* The "next two weeks" band (partials/upcoming-events.html). One row that
    scrolls sideways, not a grid that wraps: the band is a glance at what is

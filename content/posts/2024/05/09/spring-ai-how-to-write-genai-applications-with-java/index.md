@@ -8,7 +8,6 @@ authors:
 image: "unsplash-ai-chip-scaled.jpg"
 categories:
   - "Graph"
-  - "Java"
   - "Neo4J"
   - "Spring"
 related_posts:

@@ -12,7 +12,6 @@ authors:
 image: "episode-100-podcast-of-podcasts-1024x576.jpg"
 categories:
   - "Foojay"
-  - "Java"
   - "Podcast"
 related_posts:
   - "foojay-podcast-71"

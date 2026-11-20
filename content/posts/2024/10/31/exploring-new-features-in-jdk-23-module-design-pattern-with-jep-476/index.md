@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "jep476.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:

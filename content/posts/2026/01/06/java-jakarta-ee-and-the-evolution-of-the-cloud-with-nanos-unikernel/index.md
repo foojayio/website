@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "DevOps"
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Performance"
 related_posts:

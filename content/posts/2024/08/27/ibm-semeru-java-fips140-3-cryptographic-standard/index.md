@@ -7,7 +7,6 @@ authors:
   - "laura-cowen"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "where-do-you-get-your-java"

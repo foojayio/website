@@ -9,7 +9,6 @@ image: "BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Design Patterns"
-  - "Java"
   - "Microservices"
 related_posts:
 ---

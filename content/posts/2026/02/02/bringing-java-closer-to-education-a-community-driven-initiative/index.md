@@ -8,7 +8,6 @@ authors:
 image: "catalog.jpg"
 categories:
   - "Campaigns"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:

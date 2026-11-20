@@ -7,7 +7,6 @@ authors:
   - "george-ball"
 image: "Screenshot-2023-10-17-at-4.04.33-PM.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:

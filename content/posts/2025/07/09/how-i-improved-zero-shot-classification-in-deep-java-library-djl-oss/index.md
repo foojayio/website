@@ -7,7 +7,6 @@ authors:
   - "raphael-delio"
 image: "Screenshot-2025-06-15-at-18.41.17.png"
 categories:
-  - "Java"
   - "Machine Learning"
 related_posts:
   - "fixed-window-counter-rate-limiter-redis-java"

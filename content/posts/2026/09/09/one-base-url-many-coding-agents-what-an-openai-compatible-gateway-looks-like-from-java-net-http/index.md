@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Debugging"
   - "IntelliJ IDEA"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"

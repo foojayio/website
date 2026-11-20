@@ -8,7 +8,6 @@ authors:
 image: "Figure_1-2-2000x1500-3124717d.png"
 categories:
   - "Debugging"
-  - "Java"
 related_posts:
   - "is-jdwps-onjcmd-feature-worth-using"
   - "level-up-your-java-debugging-skills-with-on-demand-debugging"

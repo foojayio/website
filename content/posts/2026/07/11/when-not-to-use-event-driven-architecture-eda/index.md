@@ -7,7 +7,6 @@ authors:
   - "vincent-vauban"
 image: "4coverNoEDA-1024x576.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Streaming"
 related_posts:

@@ -6,7 +6,6 @@ authors:
   - "jesus-aguirre"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Library"
   - "Tutorials"
 canonical: "https://medium.com/@aguirrejesus/json-p-vs-json-b-vs-jackson-java-c9dc28fb1e9e"

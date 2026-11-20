@@ -4,7 +4,7 @@ date: "2026-11-10"
 description: "Codename One now builds Flutter apps from their Dart source, and the result starts faster and uses less memory than Flutter's own release build on Android,..."
 authors: ["shai-almog"]
 image: "flutter-better-in-java-0b3f7d013b.jpg"
-categories: ["Java", "Codename One"]
+categories: ["Codename One"]
 canonical: "https://www.codenameone.com/blog/flutter-better-in-java/"
 related_posts:
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

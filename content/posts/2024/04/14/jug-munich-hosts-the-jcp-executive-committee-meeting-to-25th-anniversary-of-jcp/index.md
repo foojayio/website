@@ -8,7 +8,6 @@ authors:
 image: "duke-welcome-1.jpg"
 categories:
   - "Events"
-  - "Java"
   - "JEPs"
 related_posts:
   - "7-ways-to-contribute-to-openjdk"

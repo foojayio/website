@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "OpenRewrite-poster.png"
 categories:
-  - "Java"
   - "OpenRewrite"
 related_posts:
   - "openrewrite-automatic-code-refactoring-and-maintenance"

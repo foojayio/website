@@ -6,7 +6,6 @@ authors:
   - "geertjan-wielenga"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "Databases"
   - "Tutorials"
   - "Developer Tools"

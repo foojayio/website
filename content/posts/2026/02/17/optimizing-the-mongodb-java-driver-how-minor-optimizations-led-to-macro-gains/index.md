@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-02-10-at-11.40.40-AM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"

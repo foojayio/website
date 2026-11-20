@@ -8,7 +8,6 @@ authors:
 image: "Azul-Payara-Community-New-Release-2.jpg"
 categories:
   - "CRaC"
-  - "Java"
   - "Java Beginner"
   - "JUGs"
 related_posts:

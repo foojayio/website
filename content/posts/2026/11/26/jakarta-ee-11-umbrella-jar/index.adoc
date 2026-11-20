@@ -7,7 +7,6 @@ authors:
 image: "jakarta-ee-11-no-umbrella-jar.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Dependency Management"
 related_posts:
   - "batch-processing-mongodb-jakarta-ee-customer-segmentation"

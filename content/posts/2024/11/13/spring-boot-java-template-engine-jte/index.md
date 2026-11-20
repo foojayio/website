@@ -8,7 +8,6 @@ authors:
 image: "jte.png"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Maven"
   - "Spring"
   - "Tutorials"

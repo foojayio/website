@@ -8,7 +8,6 @@ authors:
   - "wim-de-troyer"
 image: "domain-oop.png"
 categories:
-  - "Java"
   - "JDK21"
   - "Records"
   - "Sealed Classes"

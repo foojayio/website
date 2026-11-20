@@ -8,7 +8,6 @@ authors:
 image: "Image-20-scaled-1.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Payara"
   - "Research"

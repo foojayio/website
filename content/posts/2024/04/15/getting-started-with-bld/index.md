@@ -8,7 +8,6 @@ authors:
 image: "bld-create.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Java Beginner"
   - "RIFE2"
   - "Tools"

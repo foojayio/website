@@ -6,7 +6,6 @@ authors:
   - "catherine-edelveis"
 image: "iron.jpg"
 categories:
-  - "Java"
   - "Security"
   - "DevOps"
 related_posts:

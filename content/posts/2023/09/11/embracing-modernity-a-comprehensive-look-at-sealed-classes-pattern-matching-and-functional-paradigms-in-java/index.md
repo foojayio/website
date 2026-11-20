@@ -7,7 +7,6 @@ authors:
   - "bazlur-rahman"
 image: "sealed-classes-benefits.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"

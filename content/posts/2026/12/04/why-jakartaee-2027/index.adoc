@@ -7,7 +7,6 @@ authors:
 image: "why-jakarta-ee-2027.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Security"
 related_posts:
   - "jakarta-ee-11-umbrella-jar"

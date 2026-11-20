@@ -9,7 +9,6 @@ authors:
 image: "Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Redis"
   - "Tools"
 related_posts:

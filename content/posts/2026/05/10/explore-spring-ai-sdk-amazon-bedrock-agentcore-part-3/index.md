@@ -9,7 +9,6 @@ image: "AgentcoreBrowser-2.jpg"
 categories:
   - "AI"
   - "IntelliJ IDEA"
-  - "Java"
   - "Spring"
   - "Tutorials"
 related_posts:

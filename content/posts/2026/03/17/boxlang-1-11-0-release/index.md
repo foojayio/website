@@ -11,7 +11,6 @@ categories:
   - "BoxLang"
   - "Cloud"
   - "Developer Tools"
-  - "Java"
   - "Performance"
   - "Release Notes"
 related_posts:

@@ -9,7 +9,6 @@ authors:
 image: "lattepanda-iota-first-impressions.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"

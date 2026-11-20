@@ -7,7 +7,6 @@ authors:
   - "kevinfarnham"
 image: "agreatmany.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
 related_posts:

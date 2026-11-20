@@ -10,7 +10,6 @@ authors:
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
   - "Cloud"
-  - "Java"
   - "Release Notes"
 related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"

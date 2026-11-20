@@ -8,7 +8,6 @@ authors:
 image: "fuchs-2024-fepcos-j-implemented-multithreaded-server-in-java-680x510-1.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
 related_posts:
   - "fuchs-2023-fepcos-j-01"

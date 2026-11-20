@@ -8,7 +8,6 @@ authors:
 image: "Gemini_Generated_Image_wbzqiiwbzqiiwbzq.jpeg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Tools"
   - "Tutorials"

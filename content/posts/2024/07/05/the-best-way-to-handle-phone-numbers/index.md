@@ -7,7 +7,6 @@ authors:
   - "simon-martinelli"
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-36"

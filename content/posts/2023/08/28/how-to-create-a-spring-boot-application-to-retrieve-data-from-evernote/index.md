@@ -7,7 +7,6 @@ authors:
   - "jennifer-reif"
 image: "blank-sticky-notes-scaled.jpg"
 categories:
-  - "Java"
   - "Spring"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

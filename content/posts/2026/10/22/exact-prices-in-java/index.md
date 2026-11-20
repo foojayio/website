@@ -6,7 +6,6 @@ authors:
   - "christian-lauridsen"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "double-bigdecimal-or-fixed-point-precision-performance-and-sane-choices-for-numbers-in-java"

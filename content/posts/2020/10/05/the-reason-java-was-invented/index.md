@@ -7,7 +7,7 @@ authors:
   - "kevinfarnham"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Opinion"
 related_posts:
 ---
 

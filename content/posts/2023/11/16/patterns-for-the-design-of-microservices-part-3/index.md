@@ -7,7 +7,6 @@ authors:
   - "mahendra1413"
 image: "MSPatternsOne.png"
 categories:
-  - "Java"
   - "Kotlin"
   - "Microservices"
   - "Observability"

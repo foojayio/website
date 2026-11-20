@@ -8,7 +8,6 @@ authors:
   - "frankdelporte"
 image: "kstan.jpg"
 categories:
-  - "Java"
   - "Trip Reports"
 related_posts:
   - "time-zone-and-currency-database-in-jdk"

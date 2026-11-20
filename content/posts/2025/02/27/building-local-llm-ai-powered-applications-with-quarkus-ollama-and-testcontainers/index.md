@@ -7,7 +7,6 @@ authors:
   - "jonathan-vila"
 image: "https___dev-to-uploads.s3.amazonaws.com_uploads_articles_defv9j6s88xk87tot29t.jpg"
 categories:
-  - "Java"
   - "LangChain4j"
   - "Testcontainers"
 related_posts:

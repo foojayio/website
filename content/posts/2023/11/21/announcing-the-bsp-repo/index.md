@@ -7,7 +7,6 @@ authors:
   - "nick-zhu"
 image: "gradleext.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Tools"
   - "VS Code"

@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "CRaC"
-  - "Java"
   - "Performance"
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"

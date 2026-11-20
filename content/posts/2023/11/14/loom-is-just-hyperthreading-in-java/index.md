@@ -7,7 +7,7 @@ authors:
   - "johannes-bechberger"
 image: "ht_vs_vt_pyramid-1-2000x1125-1.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "foojay-podcast-14"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

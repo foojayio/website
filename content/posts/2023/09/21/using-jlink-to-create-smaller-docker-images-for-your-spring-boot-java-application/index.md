@@ -8,7 +8,6 @@ authors:
   - "bmvermeer"
 image: "snyk-logo.png"
 categories:
-  - "Java"
   - "Security"
   - "Snyk"
 related_posts:

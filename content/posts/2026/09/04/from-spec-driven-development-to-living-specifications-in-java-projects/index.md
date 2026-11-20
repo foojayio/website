@@ -9,7 +9,6 @@ categories:
   - "AI"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
 related_posts:
   - "foojay-podcast-66"
   - "foojay-podcast-21"

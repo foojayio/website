@@ -10,7 +10,6 @@ image: "debug-without-breakpoints-banner-1024x538-1.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
   - "Use Cases"
 related_posts:

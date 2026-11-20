@@ -7,7 +7,7 @@ authors:
   - "austin-lehman"
 image: "aussom-logo-atom.png"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "java-for-scripting"
   - "six-jdk-24-features-you-should-know-about"

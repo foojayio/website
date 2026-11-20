@@ -7,7 +7,6 @@ authors:
   - "johannes-bechberger"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"

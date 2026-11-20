@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "jdk-23-builder.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "JDK 23"
   - "JEPs"

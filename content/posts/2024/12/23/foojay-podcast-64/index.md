@@ -13,7 +13,6 @@ categories:
   - "Cloud"
   - "Conference"
   - "Foojay"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"

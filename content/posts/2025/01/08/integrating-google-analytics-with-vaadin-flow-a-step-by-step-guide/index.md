@@ -7,7 +7,6 @@ authors:
   - "simon-martinelli"
 image: "VaadinLogo_RGB_1000x310.png"
 categories:
-  - "Java"
   - "Vaadin"
 related_posts:
   - "5-great-reasons-to-use-jooq"

@@ -7,7 +7,6 @@ authors:
   - "jonathan-vila"
 image: "Screenshot-2024-08-27-at-16.01.33.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Security"
 related_posts:

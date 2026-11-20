@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:

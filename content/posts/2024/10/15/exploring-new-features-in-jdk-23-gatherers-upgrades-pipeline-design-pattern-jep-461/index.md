@@ -7,7 +7,6 @@ authors:
   - "miro-wengner"
 image: "gatherers.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "JDK 23"
 related_posts:

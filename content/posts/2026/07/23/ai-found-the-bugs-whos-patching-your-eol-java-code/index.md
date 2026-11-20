@@ -8,7 +8,6 @@ authors:
 image: "Gemini_Generated_Image_kms68akms68akms6-1024x541.jpg"
 categories:
   - "AI"
-  - "Java"
   - "Security"
 related_posts:
   - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"

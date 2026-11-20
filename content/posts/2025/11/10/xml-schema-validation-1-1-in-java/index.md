@@ -8,7 +8,7 @@ authors:
   - "nicolas-frankel"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
 ---
 

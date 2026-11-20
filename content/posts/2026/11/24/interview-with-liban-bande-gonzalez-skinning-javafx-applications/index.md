@@ -9,7 +9,6 @@ image: "vitra.jpg"
 categories:
   - "JavaFX"
   - "Interviews"
-  - "Desktop"
 related_posts:
   - "announcing-skinning-javafx-applications"
   - "announcing-vitra-modern-ui-library-for-javafx"

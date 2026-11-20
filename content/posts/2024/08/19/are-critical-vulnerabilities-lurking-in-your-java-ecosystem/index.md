@@ -8,7 +8,6 @@ authors:
 image: "java-eco-system.jpeg"
 categories:
   - "DevOps"
-  - "Java"
   - "Security"
 related_posts:
   - "trash-pandas-love-enterprise-java-garbage-code"

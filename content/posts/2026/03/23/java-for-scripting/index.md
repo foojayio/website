@@ -8,7 +8,6 @@ authors:
   - "loic-magnette"
 image: "java-script-cover-700x467-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "JDK21"

@@ -7,7 +7,6 @@ authors:
 image: "foojay-banner.png"
 categories:
   - "Maven"
-  - "Java"
   - "Developer Tools"
   - "DevOps"
 related_posts:

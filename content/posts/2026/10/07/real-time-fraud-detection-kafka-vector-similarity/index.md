@@ -6,7 +6,6 @@ authors:
   - "ricardo-mello"
 image: "real-time-fraud-detection-cover.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Mongo"
   - "Machine Learning"

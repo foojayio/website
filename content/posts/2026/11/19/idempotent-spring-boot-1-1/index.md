@@ -11,7 +11,6 @@ authors:
 image: "idempotent-spring-boot-1-1.jpg"
 
 categories:
-  - "Java"
   - "Spring"
   - "Library"
   - "Microservices"

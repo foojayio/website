@@ -7,7 +7,6 @@ authors:
   - "raphael-delio"
 image: "Screenshot-2025-05-13-at-11.13.22.png"
 categories:
-  - "Java"
   - "JDK21"
   - "Spring"
   - "Tutorials"

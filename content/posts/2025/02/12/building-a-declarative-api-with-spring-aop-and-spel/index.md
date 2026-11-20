@@ -8,7 +8,6 @@ authors:
   - "mikael-francoeur"
 image: "spel.png"
 categories:
-  - "Java"
   - "Spring"
   - "Tutorials"
 related_posts:

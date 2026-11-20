@@ -8,7 +8,6 @@ image: "adding-rag-to-jakarta-ee-11-app.jpg"
 categories:
   - "Jakarta EE"
   - "AI"
-  - "Java"
 related_posts: []
 ---
 

@@ -6,7 +6,6 @@ authors:
   - "frankdelporte"
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Release Notes"
 related_posts:

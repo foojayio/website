@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Data Engineering"
   - "DevOps"
-  - "Java"
   - "JC-AI Newsletter"
   - "LLM"
   - "Machine Learning"

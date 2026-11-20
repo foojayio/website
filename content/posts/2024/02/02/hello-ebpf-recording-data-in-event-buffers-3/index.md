@@ -7,7 +7,6 @@ authors:
   - "johannes-bechberger"
 image: "perf_event_buffer-52d5107b.png"
 categories:
-  - "Java"
   - "Observability"
   - "Tools"
 related_posts:

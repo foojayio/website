@@ -19,7 +19,6 @@ authors:
 image: "edit-94-jcon-foojay-6years.jpg"
 categories:
   - "Conference"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaPro"

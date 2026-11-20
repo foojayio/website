@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Cloud"
   - "Events"
-  - "Java"
   - "Java Core"
   - "JavaFX"
   - "Microservices"

@@ -9,7 +9,6 @@ authors:
 image: "omnifish-logo-turquise-bg-400px-e1663869726664.png"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Performance"
   - "Tools"
 related_posts:

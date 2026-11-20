@@ -7,7 +7,6 @@ authors:
   - "matt-van-order"
 image: "RecordingProgress-1.png"
 categories:
-  - "Java"
   - "JDK Flight Recorder"
 related_posts:
   - "a-closer-look-at-jfr-streaming"

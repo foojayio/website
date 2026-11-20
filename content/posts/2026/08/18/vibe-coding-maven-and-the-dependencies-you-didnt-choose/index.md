@@ -7,7 +7,6 @@ authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_l6kj3gl6kj3gl6kj-scaled.jpeg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"

@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Cloud"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "Machine Learning"
   - "Opinion"

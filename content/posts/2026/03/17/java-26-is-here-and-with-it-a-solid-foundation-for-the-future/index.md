@@ -7,7 +7,7 @@ authors:
   - "hanno-embregts"
 image: "foundation.jpg"
 categories:
-  - "Java"
+  - "Release Notes"
 related_posts:
   - "offline-crypto-address-validation-in-java"
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"

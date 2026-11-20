@@ -7,9 +7,9 @@ authors:
   - "arkadiusz-przychocki"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "Performance"
   - "Testing"
+  - "Quarkus"
 related_posts:
   - "performance-work-between-benchmarks"
   - "benchmarking-and-profiling-java-with-jmh"

@@ -11,7 +11,6 @@ categories:
   - "Books"
   - "Eclipse"
   - "IntelliJ IDEA"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JDK21"

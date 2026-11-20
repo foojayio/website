@@ -8,7 +8,6 @@ image: "csm_gwcc_c_54c84c537b.webp"
 categories:
   - "Conference"
   - "Events"
-  - "Java"
   - "JUGs"
 related_posts:
   - "foojay-live-jcon-koln"

@@ -12,7 +12,6 @@ categories:
   - "CRaC"
   - "DevOps"
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "Pi4J"
   - "Podcast"

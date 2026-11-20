@@ -8,7 +8,6 @@ authors:
   - "nicolas-frankel"
 image: "cover_large-3.jpg"
 categories:
-  - "Java"
   - "Use Cases"
 related_posts:
   - "apache-apisix-north-america-tour"

@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:
