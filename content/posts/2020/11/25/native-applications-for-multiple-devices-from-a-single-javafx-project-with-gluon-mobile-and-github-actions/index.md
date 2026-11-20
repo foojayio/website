@@ -126,7 +126,7 @@ The .yml-structure is pretty similar for all build types and has this structure:
 * Apps: upload to Apple TestFlight or Google Play
 
 Based on the name, you can get a badge which you can add to the README of your project or... this post.
-![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20JAR%20and%20Native/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/MacOS/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Windows/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20Android/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/iOS/badge.svg)
+![Build status of the Linux JAR and Native workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20JAR%20and%20Native/badge.svg) ![Build status of the MacOS workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/MacOS/badge.svg) ![Build status of the Windows workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Windows/badge.svg) ![Build status of the Linux Android workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20Android/badge.svg) ![Build status of the iOS workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/iOS/badge.svg)
 
 Depending on the OS some additional steps are settings are required as described further.
 
