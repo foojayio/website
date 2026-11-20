@@ -6,13 +6,11 @@ authors:
   - "geertjan-wielenga"
 categories:
   - "Java"
-  - "SQL"
   - "Databases"
-  - "Data"
 related_posts:
-  - "jooq-a-type-safe-sql-builder-and-orm-alternative"
-  - "duckdb-as-a-java-library"
-  - "exploring-sql-and-relational-algebra-with-duckdb"
+  - "building-a-chatbot-with-spring-ai-and-duckdb"
+  - "spring-boot-3-and-angular-todo-application-crud"
+  - "testing-groovy-with-junit"
 image: "jooq-duckdb.svg"
 ---
 
@@ -150,10 +148,10 @@ For Parquet, use `table("read_parquet('data.parquet')")`.
 
 ## A Note on DuckDB 2.0
 
-jOOQ has one `DUCKDB` dialect, not one per DuckDB version, so code written against DuckDB 1.x runs unchanged. Two things to keep in mind:
+DuckDB 2.0 brings breaking changes from 1.x. Two things to keep in mind:
 
 - DuckDB 2.0 writes a new storage format, and DuckDB 1.x can't read it. A `.db` file created with this setup won't open in 1.x tools.
-- jOOQ's DSL may not have methods for the newest 2.0 syntax yet. You can run that syntax through plain SQL with `ctx.execute("…")`, `ctx.fetch("…")` or `table("…")`.
+- jOOQ's DSL may not have methods for the newest 2.0 syntax yet. You can run that syntax through plain SQL with `ctx.execute("…")`, `ctx.fetch("…")` or `table("…")`. See the [DuckDB migration guide](https://duckdb.org/docs/guides/upgrade/from-v1) for full compatibility details.
 
 ## Conclusion
 
