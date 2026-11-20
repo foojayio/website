@@ -140,6 +140,10 @@ span the whole archive, so read the ones naming this post and ignore the rest.
 
 Review the content of the post for spelling mistakes, broken links, and other errors. The validator does not check the body of the post, ask the website maintainer for answers if something is not clear.
 
+Syndicated posts (for example from the Codename One blog) can carry a "Coming This
+Week" section listing dated articles. Reword the heading and intro to fit the
+publication date: "Last Week on the ... Blog" when every listed date has passed.
+
 Avoid too promotional posts, and make sure the content is relevant to the audience. If you find any issues, fix them or ask how to be handled before proceeding.
 
 ### Transcript

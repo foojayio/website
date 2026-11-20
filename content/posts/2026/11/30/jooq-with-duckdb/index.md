@@ -12,7 +12,7 @@ related_posts:
   - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"
   - "5-great-reasons-to-use-jooq"
   - "vaadin-and-jooq-match-made-in-heaven"
-image: "header.jpg"
+image: "jooq-duckdb.jpg"
 ---
 
 ## Why jOOQ and DuckDB Together

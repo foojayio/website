@@ -13,6 +13,8 @@ decides the calendar, runs those steps for each draft, then tells the authors.
 
 * Which drafts to leave out (the request usually names them; skip them).
 * Limits: max posts per day, which weekdays are allowed. Defaults: 3 and Mon-Fri.
+  A date the user names explicitly always wins, weekends included (Saturday and
+  Sunday posts already exist); the weekday default only applies to dates you choose.
 * Where the schedule starts. Default: the first weekday with a free slot after today.
 
 ## 1. Inventory
@@ -60,8 +62,10 @@ Follow its steps for each draft, with these batch notes:
 * Strip frontmatter comments and the blank lines inside it; fix `image:` paths
   with a leading `/`.
 * Check `categories` exist in `template/categories.md`; add `Mongo`, `Codename One`
-  or `BoxLang` when the post is about it. Missing `related_posts`: add four
-  existing, genuinely related posts, verifying each slug is a folder under `content/posts`.
+  or `BoxLang` when the post is about it. `related_posts`: replace every entry whose
+  slug is not a folder under `content/posts`, and when it is missing add posts, so the
+  list holds 3 to 6 existing, genuinely related ones. Take as many as are really good
+  (aim for 4) and never pad to reach six; say in the PR comment when slugs were replaced.
 * No `image:` in the frontmatter: run `generate_header.py` from `schedule-posts`
   (reuses a suitable bundle image, else renders a card) and say so in that PR's comment.
 * Remove a body image that duplicates the hero.
@@ -77,8 +81,10 @@ jbang scripts/validate/Frontmatter.java
 hugo --quiet -d $TMPDIR/pub
 ```
 
-Only problems naming the new posts matter; ignore pre-existing ones, and the
-excluded draft folder. Say plainly that body text and links were not reviewed
+The validator exits 1 whenever any problem exists, including old ones (oversized
+hero images in past posts, another draft without an `index.md`). Read its
+"problem(s) found" list and only act on lines naming the new posts; ignore
+pre-existing ones, and the excluded draft folder. Say plainly that body text and links were not reviewed
 unless you did.
 
 ## 5. Commit and push
