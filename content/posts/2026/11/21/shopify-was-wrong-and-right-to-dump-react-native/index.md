@@ -1,6 +1,6 @@
 ---
 title: "Shopify Was Wrong and Right to Dump React Native"
-date: "2026-11-20"
+date: "2026-11-21"
 description: "Shopify dumped React Native for two native codebases because agents write the second copy for free. React Native deserved it: it's a heavyweight toolkit..."
 authors: ["shai-almog"]
 image: "shopify-was-wrong-and-right-to-dump-react-native-de356406a0.jpg"
@@ -13,7 +13,6 @@ canonical: "https://www.codenameone.com/blog/shopify-was-wrong-and-right-to-dump
 In September Shopify announced it's [moving every mobile app off React Native](https://shopify.engineering/back-to-native) and rewriting them in Swift and Kotlin. Their reasoning fits in one sentence from the post: "building the same feature in Swift and Kotlin no longer carries the cost it used to." Agents write the second copy, so why share code at all?
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
-
 
 React Native deserved to die. It's a heavyweight toolkit, and every heavyweight toolkit, from AWT to Xamarin.Forms, was eventually replaced by a lightweight one or by native code. Replacing it with two native codebases is wrong, because it takes the most expensive part of React Native, a separate platform per target, and doubles it. Code was never the cost. Platforms, testing and store churn are, and AI makes every one of them worse.
 
@@ -32,9 +31,9 @@ This isn't a post against AI. I use LLMs every day, and in the right setting the
 - **[A framework should beat the OS, not wrap it.](#a-platform-should-give-you-more-than-the-os)** Gantt charts, commerce with no commission, records as entities, every protection a bank app needs, built once, and a Base64 encoder nearly three times faster than Apple's.
 - **[One codebase pays double when it includes the server.](#the-full-stack-is-where-one-codebase-pays-twice)** Plus my generous offer of a PHP port.
 
-## Coming This Week
+## Last Week on the Codename One Blog
 
-Before we proceed, here's a preview of this week on the blog:
+Before we proceed, here's a recap of last week on the blog:
 
 - **Saturday, November 14:** [Calendars, Gantt Charts and Booking Apps Without Writing a Calendar](https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/). A scheduler, a Gantt chart with critical paths and resource leveling, Material 3 pickers and Slate, our appointment booking template.
 - **Sunday, November 15:** [Subscriptions, Paywalls and a Customer Center, and We Don't Take a Cut](https://www.codenameone.com/blog/subscriptions-and-paywalls-without-a-revenue-cut/). Offerings, experiments, refunds and invites across five stores.
@@ -46,7 +45,7 @@ Before we proceed, here's a preview of this week on the blog:
 
 <div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
 <figure style="margin:0"><a href="https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/"><img src="gantt-critical-path-acf04493e0.png" alt="A Gantt chart with the critical path highlighted" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Gantt with the critical path.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/"><img width="1080" height="1920" src="slate-book-slots-6b4e28f424.png" alt="Slate showing free appointment times" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Booking in Slate.</figcaption></figure>
+<figure style="margin:0"><a href="https://www.codenameone.com/blog/scheduler-gantt-and-material-pickers/"><img width="1080" height="1920" src="slate-book-slots-6b4e28f424.jpg" alt="Slate showing free appointment times" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Booking in Slate.</figcaption></figure>
 <figure style="margin:0"><a href="https://www.codenameone.com/blog/ship-your-java-game-on-steam/"><img src="splat-in-game-511a95ee57.jpg" alt="A first-person view of a Splat capture the flag match" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Splat, in a match.</figcaption></figure>
 </div>
 
@@ -197,15 +196,17 @@ A framework that wraps the OS hands you the lowest common denominator. A lightwe
 
 Performance belongs here too. Codename One's `Base64` on iOS uses a portable SIMD API we built into ParparVM, our ahead-of-time compiler, and it [beats Apple's own implementation](https://www.codenameone.com/blog/ios-density-scroll-and-accessibility/): 379 ms to encode against Apple's 1078 ms, 365 ms to decode against 713 ms.
 
-![Base64 performance on iOS: native encode 1078 ms, Codename One SIMD 379 ms; native decode 713 ms, Codename One SIMD 365 ms](simd-base64-performance-f9349b5154.png)
+{{< gallery cols="1" >}}
+simd-base64-performance-f9349b5154.jpg | Base64 performance on iOS: native encode 1078 ms, Codename One SIMD 379 ms; native decode 713 ms, Codename One SIMD 365 ms
+{{< /gallery >}}
 
 Security is where this matters most. A financial app needs certificate pinning, passkeys, device keys, signed requests, screens hidden from screenshots and the app switcher, jailbreak and root detection, and obfuscation with string encryption. Each has a different pitfall on each platform, and most fail silently: the app works, it isn't protected. Two codebases means getting every one of them right twice. We built them once, and our [Bastion bank template](https://www.codenameone.com/blog/bastion-hardened-bank-template/) uses all of them in a working bank and exchange. Its Security Center shows which protections are live on that device and build, and a test fails the build if the screen ever claims more than the build delivers.
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img width="420" height="860" src="bastion-security-center-d2a60e80a8.png" alt="The Bastion Security Center listing active protections" loading="lazy" style="width:100%;height:auto" /><figcaption>Bastion's Security Center.</figcaption></figure>
-<figure style="margin:0"><img src="bastion-sign-in-flow-f77343297b.png" alt="The Bastion sign-in flow with passkeys and TOTP" loading="lazy" style="width:100%;height:auto" /><figcaption>Sign-in with passkeys and TOTP.</figcaption></figure>
-</div>
+{{< gallery cols="2" >}}
+bastion-security-center-d2a60e80a8.png | Bastion's Security Center | The Bastion Security Center listing active protections
+bastion-sign-in-flow-f77343297b.jpg | Sign-in with passkeys and TOTP | The Bastion sign-in flow with passkeys and TOTP
+{{< /gallery >}}
 
 
 ## The full stack is where one codebase pays twice
@@ -260,12 +261,12 @@ if (!ResourceLeveler.findOverallocations(project).isEmpty()) {
 ```
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img src="scheduler-week-0fdf212d8f.png" alt="The scheduler's week view" loading="lazy" style="width:100%;height:auto" /><figcaption>The week view.</figcaption></figure>
-<figure style="margin:0"><img src="gantt-critical-path-acf04493e0.png" alt="A Gantt chart with the critical path highlighted" loading="lazy" style="width:100%;height:auto" /><figcaption>The critical path.</figcaption></figure>
-<figure style="margin:0"><img src="gantt-leveled-f3f556319d.png" alt="A Gantt chart after resource leveling" loading="lazy" style="width:100%;height:auto" /><figcaption>After resource leveling.</figcaption></figure>
-<figure style="margin:0"><img src="picker-material-date-d5334110d1.png" alt="The Material 3 date picker" loading="lazy" style="width:100%;height:auto" /><figcaption>The Material 3 date picker.</figcaption></figure>
-</div>
+{{< gallery cols="2" >}}
+scheduler-week-0fdf212d8f.png | The week view | The scheduler's week view
+gantt-critical-path-acf04493e0.png | The critical path | A Gantt chart with the critical path highlighted
+gantt-leveled-f3f556319d.png | After resource leveling | A Gantt chart after resource leveling
+picker-material-date-d5334110d1.png | The Material 3 date picker | The Material 3 date picker
+{{< /gallery >}}
 
 
 Slate, our booking template, is the same idea as a full product: clients, providers and an owner, with a slot engine that weighs rooms, buffers and travel time.
@@ -288,7 +289,9 @@ if (!cm.isEntitled("pro")) {
 }
 ```
 
-![The Commerce console](commerce-14925472ec.png)
+{{< gallery cols="1" >}}
+commerce-14925472ec.jpg | The Commerce console
+{{< /gallery >}}
 
 Sunday's [commerce article](https://www.codenameone.com/blog/subscriptions-and-paywalls-without-a-revenue-cut/) has refunds, retention offers, experiments, and invites.
 
@@ -324,11 +327,11 @@ Mail goes out through SMTP or SES from the same transactional outbox, and server
 Splat is a first-person team paintball shooter: four against four, refereed by its own server, with fog, PBR materials, shadows and post processing on every GPU backend. It taught us that the art makes the game, not the engine.
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img width="960" height="564" src="splat-in-game-511a95ee57.jpg" alt="A first-person view of a Splat capture the flag match" loading="lazy" style="width:100%;height:auto" /><figcaption>Capture the flag.</figcaption></figure>
-<figure style="margin:0"><img src="splat-match-overhead-79af0df54d.png" alt="An overhead view of a Splat match" loading="lazy" style="width:100%;height:auto" /><figcaption>The field from above.</figcaption></figure>
-<figure style="margin:0"><img src="splat-mission-editor-eeb8ccf4eb.png" alt="The Splat mission editor" loading="lazy" style="width:100%;height:auto" /><figcaption>The mission builder.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+splat-in-game-511a95ee57.jpg | Capture the flag | A first-person view of a Splat capture the flag match
+splat-match-overhead-79af0df54d.jpg | The field from above | An overhead view of a Splat match
+splat-mission-editor-eeb8ccf4eb.jpg | The mission builder | The Splat mission editor
+{{< /gallery >}}
 
 
 Games now ship to Steam from the build cloud, and Steam features come from portable code that does nothing on other platforms:
@@ -361,10 +364,10 @@ String env = Prompt.select("Environment", Arrays.asList("staging", "production")
 ```
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img src="cli-console-output-c7832aadb8.png" alt="A table, a progress bar and a spinner in the terminal" loading="lazy" style="width:100%;height:auto" /><figcaption>Tables, progress and spinners.</figcaption></figure>
-<figure style="margin:0"><img src="cli-console-select-435abebddc.png" alt="An arrow key selection prompt" loading="lazy" style="width:100%;height:auto" /><figcaption>Interactive prompts.</figcaption></figure>
-</div>
+{{< gallery cols="2" >}}
+cli-console-output-c7832aadb8.png | Tables, progress and spinners | A table, a progress bar and a spinner in the terminal
+cli-console-select-435abebddc.png | Interactive prompts | An arrow key selection prompt
+{{< /gallery >}}
 
 
 Wednesday's [article](https://www.codenameone.com/blog/windows-kiosks-and-command-line-apps/) has both.

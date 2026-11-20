@@ -1,6 +1,6 @@
 ---
 title: "Type-Safe SQL with jOOQ and Embedded Analytics with DuckDB"
-date: "2026-11-20"
+date: "2026-11-30"
 description: "Combine jOOQ's type-safe SQL builder with DuckDB's analytical engine for powerful Java data applications."
 authors:
   - "geertjan-wielenga"
@@ -8,10 +8,11 @@ categories:
   - "Java"
   - "Databases"
 related_posts:
-  - "building-a-chatbot-with-spring-ai-and-duckdb"
-  - "spring-boot-3-and-angular-todo-application-crud"
-  - "testing-groovy-with-junit"
-image: "jooq-duckdb.svg"
+  - "embedding-duckdb-in-a-maven-app-and-using-it-for-things-that-arent-databases"
+  - "duckdb-in-spring-batch-replace-in-memory-java-loops-with-one-sql-statement"
+  - "5-great-reasons-to-use-jooq"
+  - "vaadin-and-jooq-match-made-in-heaven"
+image: "header.jpg"
 ---
 
 ## Why jOOQ and DuckDB Together

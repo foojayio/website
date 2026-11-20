@@ -1,6 +1,6 @@
 ---
 title: "Why Use Jakarta EE in 2027: The Technical Case"
-date: "2026-01-01"
+date: "2026-12-04"
 description: "Jakarta EE keeps APIs apart from their implementation. That one decision gives you easier CVE patching, clear APIs, tiny artifacts and code AI understands."
 authors:
   - "lenny-primak"
@@ -13,6 +13,7 @@ related_posts:
   - "jakarta-ee-11-umbrella-jar"
   - "testing-jakarta-ee-three-layers-three-tools"
   - "adding-rag-to-jakarta-ee-11-app"
+  - "jakarta-ee-testing-tools-compared-weldinitiator-arquillian-and-testcontainers"
 ---
 
 _This work was sponsored by https://flowlogix.com[Flow Logix]. Generate a ready-to-run Jakarta EE project at https://start.flowlogix.com[start.flowlogix.com]._
