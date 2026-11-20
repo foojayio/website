@@ -439,6 +439,11 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   can't interleave. Two guards for silent failures: a `runId` per query, and a
   fallback to one ungrouped list if the counts don't add up.
 
+  **Category and year are Pagefind filters stamped on posts only**, derived in
+  `posts/single.html`; choosing one narrows the page to Posts. A selected value
+  zeroes its siblings in the same key, so each key's chips are counted with the
+  OTHER key's selection. Zero results shows `#search-page-empty`.
+
 - **A post's comment thread is keyed on its slug, never its pathname.** giscus
   is configured `data-mapping="specific"` with the slug as the term — pathname
   mapping was the tempting default and a trap, since the trial served a

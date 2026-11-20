@@ -8,7 +8,6 @@ Findings from a review of foojay.io (2026-11-19). The live-site observations cam
 | 2 | [homepage.md](homepage.md) | High |
 | 3 | [beginner-path.md](beginner-path.md) | Medium |
 | 4 | [stub-pages.md](stub-pages.md) | Medium |
-| 5 | [events-and-search.md](events-and-search.md) | Medium |
-| 6 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
+| 5 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
 
 Rule for every task: follow the order in `AGENTS.md` (derive, default, ask) so publishing stays effortless for authors.

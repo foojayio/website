@@ -7,7 +7,7 @@
         {{/* data-pagefind-meta="category" on the FIRST chip only: it labels
              and colours the placeholder tile of an imageless search result, so
              a post looks the same in a card grid and in a result list. */}}
-        {{ range $i, $cat := first 5 . }}<a href="{{ printf "today/category/%s/" ($cat | urlize) | relURL }}"{{ if eq $i 0 }} data-pagefind-meta="category"{{ end }}>{{ partialCached "category-name.html" $cat $cat }}</a>{{ end }}
+        {{ range $i, $cat := first 5 . }}<a href="{{ printf "today/category/%s/" ($cat | urlize) | relURL }}" data-pagefind-filter="category"{{ if eq $i 0 }} data-pagefind-meta="category"{{ end }}>{{ partialCached "category-name.html" $cat $cat }}</a>{{ end }}
       </div>
       {{ end }}
 
@@ -23,7 +23,7 @@
         {{ partial "byline.html" (dict "page" . "pagefindMeta" true "avatars" true) }}
         {{/* The ISO attribute becomes the "date" meta key, so search results
              sort by date without parsing the display text. */}}
-        <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]" data-pagefind-filter="year:{{ .Date.Format "2006" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>

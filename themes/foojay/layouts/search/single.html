@@ -14,7 +14,17 @@
   </form>
 
   <p class="search-page__status" id="search-page-status" aria-live="polite"></p>
+  <div class="search-page__filters" id="search-page-filters" hidden></div>
   <div class="search-page__results" id="search-page-results"></div>
+
+  <div class="search-page__empty" id="search-page-empty" hidden>
+    <p>Try fewer or different words, or browse a category:</p>
+    <ul class="search-page__suggest">
+      {{ range first 12 site.Taxonomies.categories.ByCount }}
+      <li><a href="{{ .Page.RelPermalink }}">{{ partialCached "category-name.html" .Page.Title .Page.Title }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
 </div>
 
 {{/*
@@ -35,6 +45,12 @@
   var input = document.getElementById('search-page-input');
   var status = document.getElementById('search-page-status');
   var results = document.getElementById('search-page-results');
+  var filtersBox = document.getElementById('search-page-filters');
+  var emptyBox = document.getElementById('search-page-empty');
+  // Category and year exist on posts only (posts/single.html), so choosing
+  // either narrows the page to the Posts group.
+  var active = { category: null, year: null };
+  var FACET_CAP = 12;
   var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
 
   // Matches Hugo's page Type -- "author" (a profile, singular: see the aliases
@@ -115,6 +131,39 @@
   }
 
   function render(html) { results.innerHTML = html; }
+
+  function renderFilters(facets) {
+    var html = '';
+    [['year', 'Year'], ['category', 'Category']].forEach(function (f) {
+      var key = f[0], counts = (facets && facets[key]) || {};
+      var values = Object.keys(counts).filter(function (v) { return counts[v] > 0; });
+      if (active[key] && values.indexOf(active[key]) === -1) values.push(active[key]);
+      values.sort(key === 'year'
+        ? function (a, b) { return b.localeCompare(a); }
+        : function (a, b) { return (counts[b] || 0) - (counts[a] || 0) || a.localeCompare(b); });
+      if (key === 'category') {
+        values = values.filter(function (v, i) { return i < FACET_CAP || v === active[key]; });
+      }
+      if (!values.length) return;
+      html += '<div class="search-filter" role="group" aria-label="Filter by ' + f[1].toLowerCase() + '">' +
+        '<span class="search-filter__label">' + f[1] + '</span>' + values.map(function (v) {
+          var on = active[key] === v;
+          return '<button type="button" class="search-filter__chip" aria-pressed="' + on +
+            '" data-key="' + key + '" data-value="' + escapeHtml(v) + '">' + escapeHtml(v) +
+            (counts[v] ? ' <span class="search-filter__n">' + counts[v] + '</span>' : '') + '</button>';
+        }).join('') + '</div>';
+    });
+    filtersBox.innerHTML = html;
+    filtersBox.hidden = !html;
+  }
+
+  filtersBox.addEventListener('click', function (e) {
+    var chip = e.target.closest && e.target.closest('.search-filter__chip');
+    if (!chip) return;
+    var key = chip.getAttribute('data-key'), value = chip.getAttribute('data-value');
+    active[key] = active[key] === value ? null : value;
+    runSearch(input.value.trim(), true);
+  });
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, function (c) {
@@ -289,10 +338,14 @@
   });
 
   var debounceTimer;
-  function runSearch(query) {
+  function runSearch(query, immediate) {
     clearTimeout(debounceTimer);
     runId++;
-    if (!query) { groups = []; render(''); status.textContent = ''; return; }
+    if (!query) {
+      groups = []; render(''); status.textContent = '';
+      filtersBox.hidden = true; emptyBox.hidden = true;
+      return;
+    }
 
     debounceTimer = setTimeout(function () {
       var id = ++runId;
@@ -307,44 +360,67 @@
         }).then(function (search) {
           if (id !== runId) return;
           var total = search.results.length;
+          emptyBox.hidden = total !== 0;
           if (total === 0) {
             status.textContent = 'No results for "' + query + '".';
             groups = [];
             render('');
+            filtersBox.hidden = true;
             return;
           }
-
-          status.textContent = total + ' result' + (total === 1 ? '' : 's') + ' for "' + query + '"';
 
           var counts = (search.filters && search.filters.section) || {};
           var sections = Object.keys(counts).filter(function (v) { return counts[v] > 0; });
           var filed = sections.reduce(function (n, v) { return n + counts[v]; }, 0);
+          var narrowed = !!(active.category || active.year);
+
+          if (narrowed) sections = ['posts'];
+          status.textContent = narrowed ? '' : total + ' result' + (total === 1 ? '' : 's') + ' for "' + query + '"';
 
           // Sections are how this page reaches past the first ten matches, but
           // they are not allowed to be the only way results appear: if the
           // filter index did not load, or a template ever stops emitting
           // data-pagefind-filter, the leftovers render as one ungrouped list
-          // with the same quota and the same Show-more button. baseof.html tags
-          // every indexed page with its Type, so today `filed` equals `total`
-          // and this branch is unreachable -- verified across all 2740 indexed
-          // pages. It exists because the alternative failure is a page that
-          // says "328 results" above nothing at all.
+          // with the same quota and the same Show-more button.
           if (filed < total) {
+            filtersBox.hidden = true;
             return showGroups(id, [{ section: 'all', handles: search.results }]);
           }
 
+          // A selected value zeroes every sibling in its own key, so each
+          // key's chips are counted with the OTHER key's selection only.
+          function postsFilter(skip) {
+            var f = { section: 'posts' };
+            if (active.category && skip !== 'category') f.category = active.category;
+            if (active.year && skip !== 'year') f.year = active.year;
+            return f;
+          }
+          var facets = {};
+          var facetSearches = narrowed ? [
+            pagefind.search(query, { filters: postsFilter('year') }).then(function (r) { facets.year = r.filters.year; }),
+            pagefind.search(query, { filters: postsFilter('category') }).then(function (r) { facets.category = r.filters.category; })
+          ] : [];
           return Promise.all(sections.map(function (section) {
-            return pagefind.search(query, { filters: { section: section } }).then(function (r) {
+            var f = section === 'posts' ? postsFilter() : { section: section };
+            return pagefind.search(query, { filters: f }).then(function (r) {
+              if (section === 'posts' && !narrowed) facets = r.filters;
               return { section: section, handles: r.results };
             });
-          })).then(function (perSection) {
+          }).concat(facetSearches)).then(function (all) {
+            if (id !== runId) return;
+            var perSection = all.slice(0, sections.length);
+            renderFilters(facets);
+            if (narrowed) {
+              var n = perSection[0].handles.length;
+              status.textContent = n + ' post' + (n === 1 ? '' : 's') + ' for "' + query + '" with the selected filters';
+            }
             return showGroups(id, perSection);
           });
         });
       }).catch(function () {
         status.textContent = 'Something went wrong running that search.';
       });
-    }, 150);
+    }, immediate ? 0 : 150);
   }
 
   input.addEventListener('input', function () { runSearch(input.value.trim()); });
