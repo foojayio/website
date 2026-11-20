@@ -247,10 +247,6 @@ public void setName(String name) {
 
 **Typical Properties File to be Read By ConfigurationProperties**
 
-![](https://drive.google.com/uc?export=view&id=1v987XfEFVZndvJGJOvwOC1f7LuWlsq7j)
-
 **Debug Print Messages on Invocation of a Controller Endpoint**
-
-![](https://drive.google.com/uc?export=view&id=1iwbWi0rSKdMpzDxP3Zi33kgYvZq8VfG1)
 
 My next article in this series wil be named as the [Spring Boot-Annotation Reference-01/b](https://foojay.io/today/spring-boot-annotation-reference-01-b/) I will be focussing on REST/Web/MVC and Stereotype Annotations.

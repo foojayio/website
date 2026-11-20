@@ -74,13 +74,13 @@ And there you have it! One shiny new IntelliJ IDEA project!
 #### A Note on the 'Release Version'
 
 If you're anything like me, the first thing you do is throw caution to the wind and go change a bunch of settings in the IDE because you 'know what you're doing'. Well, turns out, I didn't! So, word of warning - if you see this error, it means your 'Project bytecode version' is set to something higher than your 'Project SDK' (and thus Project language level)':
-![](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/Screenshot+2020-10-01+at+14.18.15-scaled.png)
+![IntelliJ IDEA build output error: 'release version 14 not supported'](Screenshot-2020-10-01-at-14.18.15-scaled-fa981c2c.png)
 
 Check your SDK setting by using **⌘;** on macOS, or **Ctrl+Alt+Shift+S** on Windows/Linux and looking at your Project Settings \> Project, specifically your **Project SDK** and **Project Language Level** values and make a note of them.
-![](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/Screenshot+2020-10-01+at+14.23.11-scaled.png)
+![IntelliJ IDEA Project Structure dialog showing project SDK 11 and language level 8](Screenshot-2020-10-01-at-14.23.11-scaled-59f0308d.png)
 
 Next, check your Project Bytecode version by using **⌘,** on macOS or **Ctrl+Alt+S** and search for Build, Execution, Deployment \> Compiler \> Java Compiler. Your Project bytecode setting needs to either be the same as your Project language level, or something lower than it, such as Java 11. Then you can rebuild the project.
-![](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/Screenshot+2020-10-01+at+14.24.13-scaled.png)
+![IntelliJ IDEA Java Compiler preferences with module target bytecode version 14 and --enable-preview compiler option](Screenshot-2020-10-01-at-14.24.13-scaled-1a4c237e.jpg)
 
 Being new to IntelliJ IDEA, something else that I wondered was what's the difference between the Project SDK and the Project language level. As it turns out, the [Project SDK](https://www.jetbrains.com/help/idea/project-settings-and-structure.html#project-sdk) are the tools you need to develop Java (seems fair), whereas the [Project Language Level](https://www.jetbrains.com/help/idea/project-settings-and-structure.html#language-level) refers to the assistance that IntelliJ IDEA will give you in the editor.
 

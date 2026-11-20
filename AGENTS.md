@@ -192,10 +192,11 @@ convention below). What is genuinely still open:
    Configuring that plugin is what would make a direct GA4 tag viable again —
    and **a plugin key in the config listing is not evidence it is
    configured**; only a browser can tell you.
-2. **The accessibility backlog is the site's biggest real gap** — thousands of
-   images across `content/` with no description, plus every podcast post with no
-   transcript. `Frontmatter.checkImageAltText` warns rather than fails; see the
-   accessibility convention for why.
+2. **Every image has a description, but a model wrote them and no person has
+   reviewed them** (2026-11, from the picture; a few from context where the file
+   would not open). Podcast transcripts are YouTube's automatic captions.
+   `Frontmatter.checkImageAltText` warns rather than fails and prints a per-year
+   count; see the accessibility convention for why.
 3. **Author-written dead links** inside article bodies, reported by
    `BuiltSite.java` rather than failing it. Three clusters: bare domains with
    no scheme, WordPress artifacts (`_wp_link_placeholder`, `/wp-admin/…`), and

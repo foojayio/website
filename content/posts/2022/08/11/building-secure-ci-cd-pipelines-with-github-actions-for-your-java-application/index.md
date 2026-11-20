@@ -31,7 +31,7 @@ And by integrating Snyk into your GitHub CI/CD, you can automate security scanni
 ## Setting up a Github Actions CI Pipeline for Java
 
 GitHub Actions workflows are YAML files in the `.github/workflows` folder. If you do not have a workflow, or want to add a new one, select **Actions** and **New workflow**.
-![](https://snyk.io/wp-content/uploads/blog-github-actions-workflows-1240x274.jpg)
+![GitHub repository tab bar with the Actions tab selected, showing the All workflows page and New workflow button](blog-github-actions-workflows-1240x274-936ae37e.jpg)
 
 For this Java Spring-Boot project, I created a CI pipeline using maven as follows:
 
@@ -120,7 +120,7 @@ opensource-security:
 ```
 
 According to the documentation, the default command is `test`. Without any additional configuration, it will scan your application for known vulnerabilities in your dependencies. If you want to set a specific CLI argument like `--all-projects` to accommodate nested projects, use the `with` keyword and set the property to `args`.
-![](https://snyk.io/wp-content/uploads/blog-github-actions-properties-1240x278.jpg)
+![Table of Snyk Maven Action properties: args, command (default test) and json (default false)](blog-github-actions-properties-1240x278-b47ddc31.jpg)
 
 While Snyk scans our dependencies, let's check the Java code for vulnerabilities in our GitHub Action. To do this, repeat the previous process by setting up a third job specifically for that, and set the `command` property to `code test`.
 
@@ -200,14 +200,14 @@ In addition to scanning during development, we can use Snyk to monitor dependenc
 ```
 
 This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using — and ensure that our published Java project remains vulnerability free.
-![](https://snyk.io/wp-content/uploads/blog-github-actions-snyk-ui-1240x149.jpg)
+![Snyk UI project row for ghaction-example showing zero critical, high, medium and low vulnerabilities, tested an hour ago](blog-github-actions-snyk-ui-1240x149-b8917279.jpg)
 
 ## Integrating security in your GitHub Actions
 
 With GitHub Actions, creating a CI/CD pipeline for your GitHub project is quite straightforward. And with the Snyk actions, you can easily integrate security scanning on multiple levels for all applications.  
 
 GitHub visualizes the pipeline we created today with the following image. With some jobs running in parallel, while others depend on the successful completion of other jobs. You can check out the entire example project in [this GitHub repository](https://github.com/bmvermeer/ghaction-example).
-![](https://snyk.io/wp-content/uploads/blog-github-actions-pipeline-1-1240x415.jpg)
+![GitHub Actions workflow ci.yml: build, opensource-security and code-security run, then release, then opensource-monitor](blog-github-actions-pipeline-1-1240x415-2ef93e0a.jpg)
 
 Today, we used Snyk Code and Snyk Open Source to scan the Java source code and pipeline dependencies. However, you can expand this by scanning Docker files with Snyk Container and Kubernetes files with Snyk IaC.
 

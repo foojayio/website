@@ -169,18 +169,18 @@ The benchmark is available in this [GitHub repository](https://github.com/jpbemp
 Note: We are using an early access version of OpenJDK 15 in the benchmarks, since we discovered a bug whilst building this benchmark. See [JDK-8245120](https://bugs.openjdk.java.net/browse/JDK-8245120).
 
 The first chart shows the impact on http request latencies:
-![](https://lh3.googleusercontent.com/PuiG2s_Mrr_JVtZhs0mACOm0eJPXzj33rvEUJB628A9f_dgMIKwCwQlJisyo7xVNRu1KjRqNDRxigrO4fh654mindcXQkwlPGz4Z5QVpWTdMlRel79eSa0xE8NgRoOjvFSwL-mCf)
+![Line chart of latency percentiles P10 to P99 for none, jfr and jfr-streaming, with jfr-streaming highest up to P95](PuiG2s_Mrr_JVtZhs0mACOm0eJPXzj33rvEUJB628A9f_dgMIKwCwQlJisyo-270fdb0d.png)
 
 Note: Y-axis is in log scale to magnify the difference.
 
 Next chart shows the CPU consumption. We measure in ticks from /proc/\<pid\>/stat at the end of the benchmark. This way we have a unique number easy to compare with other runs. It represents the CPU consumed when threads were scheduled on the CPU.
-![](https://lh3.googleusercontent.com/V6FOpuc2izMU9dEduNSNcVwiSVKbQvyDIsiZUZU2TttpvsFFCansiG5s4ukPxmS8via33aQ6vNUXgw5c6zsDsK4sjbP3myeoa-cU8t9K7aak9Fh_kbjRwnVtpUa58U5MqjC62Jds)
+![Bar chart of CPU ticks: none 36554, jfr 36730, jfr-streaming 48887, so streaming uses noticeably more CPU](V6FOpuc2izMU9dEduNSNcVwiSVKbQvyDIsiZUZU2TttpvsFFCansiG5s4ukP-1dd1657b.png)
 
 The following chart is the total amount of heap allocated during the benchmark. Numbers were extracted from GC logs.
-![](https://lh5.googleusercontent.com/kAxtj7t_KOD8OhHkp9Zsk_gYfj2d137PsGISBI-zov_3BiKIg8hYa6vP-HuKIb03X9cZov5pKXwunSSmDHCH9Fc1cweZIxQn7Oec87dsX9xCI9J2HUQR2L3So7uWIEo1KWnxLX1V)
+![Bar chart of heap allocations: 386 MB with none, 450 MB with jfr and 1007 MB with jfr-streaming](kAxtj7t_KOD8OhHkp9Zsk_gYfj2d137PsGISBI-zov_3BiKIg8hYa6vP-HuK-222b28ed.png)
 
 The final chart represents the size of extracted information, as described above:
-![](https://lh4.googleusercontent.com/ZkMQyLlqtPw6bLSg9P84A0oOF2gWfV0uxJuM8-SJ-twYvzdpH0UDJ54nct1eH1ECWsnl43yZLPLvmUaSwkax-ieb8L5AvHHmjwx-jg2L2HwnLwAkfuTjUMXuHNPu7NiwYMvMmrkl)
+![Bar chart of recording file size in MB: none 0, jfr 77, jfr-streaming 1654, so streaming data is far larger](ZkMQyLlqtPw6bLSg9P84A0oOF2gWfV0uxJuM8-SJ-twYvzdpH0UDJ54nct1e-3c6fb803.png)
 
 Note that the JFR file contains the full stacktraces, and that the jfr-streaming one is limited to the top 5 frames.
 
@@ -191,7 +191,7 @@ So what is the conclusion of these benchmarks? Not much, except for: "don't use 
 * JFR streaming is a great new way to expose JFR data for monitoring purposes.
 * JFR streaming is available from JDK 14 and above.
 * JFR streaming is complementary to the already existing JFR APIs, which remains the go-to way to use JFR for low-overhead detailed information (i.e. profiling / execution tracing).
-* Knowing where and how to use JFR streaming is key to avoiding sad pandas. ![](https://lh4.googleusercontent.com/A42weqOB0CgjMLuPRTdJ5KoqFNoZKlGrnospqXNwUCO5DjAeh7jPvKLRxiCaa_4Asiy-chHi7uAPTcq2Aio6uPCPbPUtkgH2yYS5R3rj5wPBmAKRU898nXWZpRnK64OLtoRfc7rM)
+* Knowing where and how to use JFR streaming is key to avoiding sad pandas. ![A crying panda emoji](A42weqOB0CgjMLuPRTdJ5KoqFNoZKlGrnospqXNwUCO5DjAeh7jPvKLRxiCa-63a985e1.png)
 
 \[1\]:<https://www.reddit.com/r/java/comments/e97vos/jfr_event_streaming_with_jdk_14_in_outprocess/faiapm8/>
 

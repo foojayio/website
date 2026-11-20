@@ -67,14 +67,12 @@ falls short today rather than claiming a conformance we have not audited.
 
 ## What is not there yet
 
-- **Image descriptions in older articles are machine-written, and about 50
-  are still missing.** foojay.io's archive was imported from a previous system
-  that stored most images with an empty description. Every image we store on
-  the site has since been given one, written by an AI model that looked at the
-  picture rather than by the author, and not each one has been checked by a
-  person, so some will be vague or wrong. About 50 images that older articles
-  load from other sites still have none, because we cannot see them to describe
-  them. New articles are checked for this when they are submitted.
+- **Image descriptions in older articles are machine-written.** foojay.io's
+  archive was imported from a previous system that stored most images with an
+  empty description. Every image has since been given one, written by an AI
+  model that looked at the picture rather than by the author, and not each one
+  has been checked by a person, so some will be vague or wrong. New articles
+  are checked for a missing description when they are submitted.
 - **Podcast transcripts are machine-generated.** Every episode page carries a
   transcript you can read, search and skip through, but it comes from automatic
   speech recognition: it is tidied up, not checked against the audio, so names

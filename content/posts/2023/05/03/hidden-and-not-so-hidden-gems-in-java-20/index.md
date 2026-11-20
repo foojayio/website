@@ -239,10 +239,10 @@ Also in Java 20, the locale data has been upgraded to use the [Unicode Consortiu
 * The generalized `{@link}`, `{@linkplain}`, and `@see` tags have been improved to enable linking to specific user-defined anchors in the Javadoc-generated documentation for an element. A double hash mark (##) separates the element name from the URI fragment to distinguish these references from member references. This enhancement provides more flexibility in navigating the documentation, allowing links to be created to specific sections or headings within a document.
 * The Javadoc documentation now includes detailed information about the JEPs related to the preview features on the Preview API page. This gives you a better understanding of the origin and purpose of preview features, as you can see by comparing Figure 1 and Figure 2.
 
-![](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT3D1669D776474319A97D4283A9B1A805/Medium?cb=_cache_04f2&format=jpg&channelToken=4d6a6a00a153413e9a7a992032379dbf)
+![Javadoc Preview API page listing preview interfaces such as CaseLabelTree and DeconstructionPatternTree](Medium-2abefe9a.jpg)
 
 Figure 1. Java 19 documentation preview list
-![](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT88C9ED57E8CB44DE98B3601B0FD3BC77/Medium?cb=_cache_04f2&format=jpg&channelToken=4d6a6a00a153413e9a7a992032379dbf)
+![Java 20 documentation Preview API page listing record patterns, pattern matching for switch, FFM API and virtual threads](Medium-f94766f5.jpg)
 
 Figure 2. Java 20 documentation preview list
 

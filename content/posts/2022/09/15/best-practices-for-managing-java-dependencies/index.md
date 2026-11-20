@@ -74,7 +74,7 @@ Is it worth importing a large dependency, with many functions and data types, if
 
 A quick look at [mvnrepository.com](https://mvnrepository.com/) shows me that this package is about 10MB
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-eclipse-main-library.jpg)
+![MvnRepository page for Eclipse Collections Main Library 11.1.0 showing a 10.0 MB jar and 325 dependent artifacts](blog-java-depen-eclipse-main-library-f940cd4e.jpg)
 
 Also, check to see if the dependencies you already have can do the job for you. Some similar functions or data types might already be available. On the other hand, including a new, extensive library can help you solve multiple problems at once — it all depends on the situation.
 
@@ -84,13 +84,13 @@ We have a pretty low bus factor if the Java dependency you use has only one or j
 
 But, before including any dependencies in your project, be sure to check the core repository and see how many active maintainers there are.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-github-contributors-2048x214.png)
+![GitHub repository header showing 1,173 commits, 10 branches, 40 releases and 66 contributors](blog-java-depen-github-contributors-2048x214-ad8aec9d.png)
 
 ### 4. Is it still maintained?
 
 If a package is no longer maintained you definitely do not want to rely on it. Before integrating a package, check if there are new pushes on the GitHub repository, and take a look at the release cycle of a package. This will give you an idea of how well maintained the package is.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-2-hrs.jpg)
+![GitHub file listing with an arrow pointing to the 'last updated 2 hours ago' commit timestamps](blog-java-depen-2-hrs-a54f6a23.jpg)
 
 ### 5. What is the latest version of the package?
 
@@ -106,7 +106,7 @@ Note that the 11.1.0.M2 is also listed in this image. This is clearly a pre-rele
 
 If a Java dependency has the qualifier GA or final, you can generally consider it a stable release version.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-central-1240x615.jpg)
+![Maven Central version list for eclipse-collections with usage counts, from 11.1.0 back to 10.3.0](blog-java-depen-central-1240x615-bc91593e.jpg)
 
 ### 6. Are there any security vulnerabilities?
 
@@ -132,7 +132,7 @@ In Maven, you can use the versions plugin like below. No need to put anything sp
 
     mvn versions:display-dependency-updates
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-maven-plugin.jpg)
+![Maven versions plugin output listing dependencies with newer versions, such as eclipse-collections 10.3.0 to 11.1.0](blog-java-depen-maven-plugin-981d7da7.jpg)
 
 **Gradle example**   
 
@@ -146,19 +146,19 @@ Now we can run a similar command to display newer versions of your libraries.
 
     gradle dependencyUpdates -Drevision=release
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-project-dep-update.jpg)
+![Gradle dependency updates report listing h2, commons-lang3 and eclipse-collections with newer versions available](blog-java-depen-project-dep-update-bffe5307.jpg)
 
 **IntelliJ IDEA**
 
 If you are using IntelliJ IDEA, then the newer versions will underline the dependencies that can be updated. This works for both Maven and Gradle projects.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-group-id-pkg.jpg)
+![IntelliJ IDEA pom.xml with a popup offering to upgrade eclipse-collections-api from 10.3.0 to 11.1.0](blog-java-depen-group-id-pkg-dab256be.jpg)
 
 **Snyk**
 
 When connecting your GitHub repository to your Snyk account, we can provide you with recommended fixes or updates at every pull request. This, in addition to our comprehensive security advice, can help you keep your Java dependencies up to date.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-snyk-ui-1240x804.jpg)
+![Snyk bot pull request comment proposing an eclipse-collections upgrade from 10.3.0 to 11.1.0 with a major-version warning](blog-java-depen-snyk-ui-1240x804-1072db53.jpg)
 
 ### 2. Are the packages you use still maintained?
 
@@ -176,7 +176,7 @@ You can also scan during your build cycle with the Maven and Gradle (unofficial)
 
 Alternatively, you can add your Git repository to Snyk, so we can scan and update your projects for you on a daily basis.
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-snyk-vuln-report-1240x1036.jpg)
+![Snyk report listing critical struts2-core vulnerabilities such as arbitrary code execution, CVE-2017-5638 and CVE-2020-17530](blog-java-depen-snyk-vuln-report-1240x1036-0972907d.jpg)
 
 ## Removing Java dependencies from your project
 
@@ -194,7 +194,7 @@ In this case, I do not want to get bothered by provided or test dependencies, so
 
     mvn dependency:analyze -DignoreNonCompile
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-warning-unused.jpg)
+![Maven dependency:analyze output warning of unused declared dependencies commons-lang3 and struts2-core](blog-java-depen-warning-unused-5ae5deef.jpg)
 
 **Gradle example**
 
@@ -208,7 +208,7 @@ I have to configure the plugin accordingly to set the `gradleLint.rules`. You ca
 
     gradle lintGradle -PgradleLint.rules=unused-dependency
 
-![](https://snyk.io/wp-content/uploads/blog-java-depen-lint-violation.jpg)
+![Gradle lint output warning that the commons-lang3 and struts2-core dependencies are unused and can be removed](blog-java-depen-lint-violation-b37e8a14.jpg)
 
 ## Create a solid dependency management strategy for your Java applications
 

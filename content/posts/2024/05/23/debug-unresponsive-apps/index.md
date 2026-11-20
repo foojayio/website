@@ -36,7 +36,7 @@ Suppose you have a complex application that hangs when you perform some action. 
 
 In our example app, the hanging happens when you click **Button N**. However, it is not so easy to find the code that is responsible for this action:
 
-{{< img src="https://flounder.dev/img/find-in-files-dark.png" class="size-large is-resized" style="width:649px" >}}
+{{< img src="find-in-files-dark-076a6ca7.png" alt="IntelliJ IDEA Find in Files dialog searching for 'Button N' in the project and showing 'Nothing found'" class="size-large is-resized" style="width:649px" >}}
 
 Let's see how we can use the debugger to find it.
 

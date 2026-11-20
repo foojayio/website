@@ -564,7 +564,7 @@ The problem code is the assumption that a developer has to deal with in the last
 With the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) sealed, you can **declare** a class as a sealed class. A sealed class uses the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) permits to list the classes that can extend it directly. Its subclasses can either be final, non-sealed*,* or sealed.
 
 The following gif shows how you can use IntelliJ IDEA to change the declaration of a regular class to a sealed class (by using the context action 'Seal class'). By default, IntelliJ IDEA declares all derived classes as non-sealed. You can modify it to be `final` or `sealed`:
-![](https://lh3.googleusercontent.com/wO_grmMXfKLDbfW4olxIRkrdPJRYDhyoWOcoUM-JTZUnlF5D000JrE6vD08gbNAFwabDdZFHVIC9-KPh4GfFCex57Pm2oorXjqZt8gRJEmhTOONJMgsgreeBN5ReK-KGQXlf-Q3D=s0)
+![IntelliJ IDEA editor showing a new empty class Plant in package com.jetbrains.java16.sealedtypes.plants](wO_grmMXfKLDbfW4olxIRkrdPJRYDhyoWOcoUM-JTZUnlF5D000JrE6vD08g-e2d2ee35.gif)
 
 Here's the modified code for reference:
 
@@ -586,7 +586,7 @@ In the past, to prevent classes from being extended, developers created package-
 This is no longer the case if you use sealed classes. The goal of the Sealed types is to model your business domain, so that you process it in a definitive manner.
 
 You can't create another class, say, `AquaticPlant`, that tries to extend the sealed class Plant, without adding it to the permits clause of the class `Plant`. As shown in the following gif, this is a compilation error:
-![](https://lh5.googleusercontent.com/DL4Yi0XavZK8P5ZER2TlX8v-r5CIzBMVjOmmN69bCmRG-Cmq7PS4DBSwoqDKXCZiRv5n2fGvnfnvXTPLzG9VnREFX8sBvA_XCpH6dpmOsLTcIUyOVnr5H0uEC-Reij2g48pHosJW=s0)
+![IntelliJ IDEA editor with a Cucumber class extending Climber and the New Java Class popup listing Class, Interface, Record, Enum and Annotation](DL4Yi0XavZK8P5ZER2TlX8v-r5CIzBMVjOmmN69bCmRG-Cmq7PS4DBSwoqDK-9d03ec08.gif)
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
@@ -648,7 +648,7 @@ final class Cucumber extends Climber {}
 ## **Implicit subclasses**
 
 If you define a sealed class and its derived classes in the same source file, you can omit the contextual keyword permits and the name of the derived classes that are included in the declaration of a sealed class. In this case, the compiler can infer the hierarchy.
-![](https://lh4.googleusercontent.com/xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-pyVH_nQbbOQy-DChZRHSxnuz6_pRZJbug8dPzyiKen4uyILnQg4eSN4Ml_JocWKKQ-9WczN8yy9=s0)
+![IntelliJ IDEA editor with class Shape and Circle and Quadrilateral classes extending it in the same file](xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-dfe99273.gif)
 
 ## **Sealed interfaces**
 
@@ -657,7 +657,7 @@ Unlike classes, interfaces can not define constructors. Before the introduction 
 A sealed interface allows you to explicitly specify the interfaces that can extend it and the classes that can implement it. It follows rules similar to sealed classes.
 
 However, since you can't declare an interface using the modifier final – because doing so would clash with its purpose, as interfaces are meant to be implemented – an inheriting interface can be declared using either sealed or non-sealed modifiers. The permits clause of an interface declaration lists the classes that can directly implement a sealed interface and interfaces that can extend it. An implementing class can be either final, sealed, or non-sealed:
-![](https://lh6.googleusercontent.com/XFTePwAnaj8L5idDHi-mbdAlwluK-guL9z-nVOpCd2y9RIVQc8IxtYH_KZ3jzFMPu82XsAd6mG-gEsWkkrKJzlY8o_7zmjQX9GCp-biUhl5C7kbMo2DvuPyb6wiX7Dmrr_0LSSbO=s0)
+![IntelliJ IDEA editor showing interface Move with Athlete, Jump, Kick and Karate types that a sealed interface would restrict](XFTePwAnaj8L5idDHi-mbdAlwluK-guL9z-nVOpCd2y9RIVQc8IxtYH_KZ3j-20362ff8.gif)
 
 Here's the code for reference:
 
@@ -700,7 +700,7 @@ class UseWritingDevice {
 ```
 
 The following gif demonstrates it in IntelliJ IDEA:
-![](https://lh6.googleusercontent.com/tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcFI_QbXIpKUpDcW15_1Ib0J4eFdtE87btbBakLOrPa2iYeyB96xe26QbMgf2pq0eBAbkje7bF-S887=s0)
+![IntelliJ IDEA code with a sealed class WritingDevice permitting Pen and Pencil, and Pen permitting Marker](tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcF-e55ffb63.gif)
 
 I mentioned that Pattern Matching for switch is introduced as a preview language feature in Java 17. Just in case you are unaware of what preview features mean, I've covered it in the next section.
 

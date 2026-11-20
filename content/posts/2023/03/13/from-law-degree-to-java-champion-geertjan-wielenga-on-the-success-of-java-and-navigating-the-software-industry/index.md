@@ -15,7 +15,7 @@ related_posts:
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
 ---
 
-{{< img src="https://media.licdn.com/dms/image/C4E03AQHPaOIko7idtg/profile-displayphoto-shrink_800_800/0/1598955813161?e=1683763200&v=beta&t=-F4XJx_E2F68XRT8-aQu982KIxiA8BJ43HuReoUgAMo" class="alignright size-large is-resized" width="394" height="394" >}}
+{{< img src="1598955813161-a367b96d.jpg" alt="Portrait photo of Geertjan Wielenga in a circular crop" class="alignright size-large is-resized" width="394" height="394" >}}
 
 In this interview, we chat with[Geertjan Wielenga](https://www.linkedin.com/in/geertjanwielenga/), a Java Champion and developer advocate at [Azul](https://www.azul.com/). Geertjan talks about how he unusually got into the software industry and what it was like to work with Java and its community.
 

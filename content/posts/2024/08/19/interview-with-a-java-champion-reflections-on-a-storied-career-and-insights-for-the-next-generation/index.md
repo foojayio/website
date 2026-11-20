@@ -17,8 +17,6 @@ related_posts:
 
 ### **Introduction:**
 
-{{< img src="https://media.licdn.com/dms/image/v2/C4E03AQHOSJQsBSmS3A/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517742324318?e=1729123200&v=beta&t=jVizFMHohUoyR_Jp1Cgi5UO-0lVIMQO2fRu3ivz1LHk" class="alignleft" >}}
-
 In the fast-paced world of software development, a few individuals leave a lasting impact through their dedication and contributions. Our guest today is a seasoned developer, a respected author, and a cornerstone of the Java community.   
 
 With over two decades of experience, he has played a key role in the evolution of Java from a niche language to a critical tool in various industries. In this interview, he shares his journey, insights, and advice for developers at all stages of their careers.

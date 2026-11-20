@@ -19,7 +19,7 @@ related_posts:
 ![Two people in green fairy costumes on stilts flank the entrance of the Devoxx Belgium 2023 venue](image-png-Oct-12-2023-03-49-00-8874-PM-db998b5b.jpg)
 
 The conference ran seamlessly, reflecting the organizers' dedication to creating a productive environment for learning, networking, and fostering our shared enthusiasm for technology. We were thrilled to participate in an event that was such a focal point for Java developers.  
-![](https://blog.payara.fish/hs-fs/hubfs/image-png-Oct-12-2023-03-55-38-8960-PM.png?width=327&height=347&name=image-png-Oct-12-2023-03-55-38-8960-PM.png)
+![Two Payara staff at their conference booth with an orange table and Payara banners](image-png-Oct-12-2023-03-55-38-8960-PM-d3cf6abf.png)
 
 Our booth was a hub of activity throughout the conference, attracting engaged attendees interested in exploring Payara's contributions to the Java and Jakarta EE development landscape. The reception we received highlighted the active and vibrant Java community at Devoxx Belgium.
 
@@ -32,7 +32,7 @@ Patrik's well-attended talk, "Elementary Full-stack Development with Hypermedia 
 
 In addition to the formal sessions, we actively engaged in community panel discussions, delving into the latest trends and challenges in Java development. These conversations were a testament to the collaborative spirit of the Java community, enabling us to both share our insights and gain from the collective wisdom.
 
-The conference also offered social gatherings, including the Azul and JetBrains parties, which provided attendees with an opportunity to relax and connect with peers who shared a passion for technology. These social events were a valuable extension of the conference.![](https://blog.payara.fish/hs-fs/hubfs/image-png-Oct-12-2023-04-04-50-5184-PM.png?width=413&height=478&name=image-png-Oct-12-2023-04-04-50-5184-PM.png)
+The conference also offered social gatherings, including the Azul and JetBrains parties, which provided attendees with an opportunity to relax and connect with peers who shared a passion for technology. These social events were a valuable extension of the conference.![Brightly lit Chinatown gate in Antwerp at night with a Ferris wheel and the railway station behind](image-png-Oct-12-2023-04-04-50-5184-PM-8b7acb12.jpg)
 
 Antwerp's architectural beauty and historical significance provided a fascinating backdrop to the event. The interplay of modern technology discussions with the city's rich heritage added depth to the experience.
 
