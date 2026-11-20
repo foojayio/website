@@ -10,7 +10,6 @@ Findings from a review of foojay.io (2026-11-19). The live-site observations cam
 | 4 | [beginner-path.md](beginner-path.md) | Medium |
 | 5 | [stub-pages.md](stub-pages.md) | Medium |
 | 6 | [events-and-search.md](events-and-search.md) | Medium |
-| 7 | [accessibility-alt-text.md](accessibility-alt-text.md) | Medium |
 | 8 | [contributor-experience.md](contributor-experience.md) | Low |
 | 9 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
 

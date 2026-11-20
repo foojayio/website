@@ -281,13 +281,12 @@ where it actually stands. What went in:
 - The mobile menu moved off-screen but stayed in the tab order, so a keyboard walked you through a menu you could not see. 
 - The image viewer bound its click handler to the `<img>`, so click-to-enlarge did not exist for a keyboard at all. 
 
-One thing which could not be easily fixed: **roughly 3,000 images in the archive have no alt text.** They arrived that way, and no
-script can or should invent a description. The check reads
+One thing which could not be fixed by hand: **roughly 3,000 images in the archive arrived without alt text.** Every one now has a description, written by a model from the picture itself, and no person has reviewed them yet. Some will be wrong or too generic. The check reads
 new articles when you open the pull request and raises a *warning* rather than a
 failure, because whether an image carries meaning is a judgement call. The
 predictable response to a hard failure is `alt="image"`, which serves a screen
 reader worse than nothing at all. If you
-wrote one of those articles on WordPress, you are the best person alive to describe its screenshots.
+wrote one of those articles on WordPress, you are the best person alive to correct its descriptions: open a pull request on the file.
 
 ## Visitor Counting and Privacy
 
