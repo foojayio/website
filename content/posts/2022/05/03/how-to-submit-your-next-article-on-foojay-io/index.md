@@ -39,6 +39,13 @@ Foojay is about Java, not about who pays for the keyboard. **Articles about a co
 
 The same goes for who is behind an article. **Every author profile is a real person**, with a real photo of themselves and links we can use to verify them: at least one of GitHub, LinkedIn, Bluesky, Mastodon or a personal website. Company, brand and team accounts (with a logo as the avatar) are not accepted. If you write for your employer, say so in your bio. Profiles we can't verify as a person are not merged.
 
+## What we decline
+
+- **Marketing-only submissions.** A product description without working Java code or developer tooling a reader can use.
+- **Company, brand or team profiles** as the author. Every author is a real person (see above).
+- **Example code, scripts and project files inside the pull request.** Publish them in a repository of your own and link to it from the article.
+- **Videos stored in the repository.** Host them on YouTube or another external service and embed or link them.
+
 ## 1. Make sure you have an author profile
 
 Every article needs at least one author, and each author has a profile folder named with the author **slug**: `content/authors/<slug>/`. Your post's `authors:` frontmatter uses that slug. For example the profile `content/authors/frankdelporte/` is referenced as `authors: ["frankdelporte"]`.
@@ -149,4 +156,17 @@ By submitting an article or a pull request you agree to follow our [Code of Cond
 
 ## What happens next
 
-We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the Friends Of OpenJDK!
+1. **Automatic reviews run on your pull request.** A validation script checks the frontmatter and builds the site, so a wrong author slug or a missing image is reported within minutes. [CodeRabbit](https://www.coderabbit.ai/) also reviews the pull request automatically. Fix what they report by pushing to the same branch.
+2. **The Foojay team reviews the article** for a good fit and light editing, and may leave comments on the pull request. Pull requests are handled almost daily, and at least once a week. Reply there or push changes; nothing else is needed from you.
+3. **The article is scheduled, published and shared** with the community. A maintainer moves your folder into place, so you never choose the final path.
+
+### Choosing a publication day
+
+Leave `date:` as it is and the article goes out when a maintainer publishes it. If it must appear on a specific day, set `date:` to a plain future day (`date: "2026-12-01"`) and say so in your pull request. **Don't add a time**: the site is rebuilt once a day at 07:00 UTC, so the article goes out with that build, and a time can only make it later, never earlier. A future-dated article stays unlisted until its day and shows under "Coming soon" on the home page.
+
+### Starting points
+
+- [`template/post.md`](https://github.com/foojayio/website/blob/main/template/post.md), or [`template/post.adoc`](https://github.com/foojayio/website/blob/main/template/post.adoc) for AsciiDoc.
+- [`CONTRIBUTING.md`](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md) for the short version of everything on this page.
+
+Thanks for writing for the Friends Of OpenJDK!
