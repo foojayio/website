@@ -1,7 +1,7 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
 date: "2026-06-10T19:02:58+00:00"
-lastmod: "2026-11-21T18:48:01+00:00"
+lastmod: "2026-11-21T19:02:38+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"
@@ -124,9 +124,8 @@ Agent analyst = ExecutorAgent.builder()
     .toolPolicy(ToolPolicy.allowList("crm.lookup", "order.fetch"))
     .build();
 
-// once at startup, on the existing datasource: the store does not create its table by itself
+// on the existing datasource: the agent_checkpoint table comes from your own migrations
 JdbcCheckpointStore checkpoints = new JdbcCheckpointStore(jdbcTemplate, txManager, codec);
-checkpoints.createTableIfMissing();
 
 // one graph per run: the budget counters live on the policy instance
 AgentGraph refundGraph() {
@@ -134,7 +133,7 @@ AgentGraph refundGraph() {
         .addNode("analyse",  analyst)
         .addNode("process",  processor)
         .addEdge("analyse",  "process")
-        // refuse a call once the spend recorded so far plus its estimate passes $0.50
+        // refuse a node once the spend recorded so far plus its estimate passes $0.50
         .budgetPolicy(BudgetPolicy.hierarchical(BudgetLimits.run(0.50), estimator, meter))
         // pause before process, a human must approve
         .approvalGate(ApprovalGate.requireFor("process"))
@@ -144,18 +143,35 @@ AgentGraph refundGraph() {
 }
 
 // the run id is what makes the run checkpointed: this call stops at the approval gate
-AgentResult paused = refundGraph().invoke(
+AgentGraph graph = refundGraph();
+AgentResult paused = graph.invoke(
     AgentContext.of("Refund order 4521"), RunOptions.ofRunId("refund-4521"));
 
-// later, once a human has approved, on the same server or after a restart
-AgentResult done = refundGraph().resume("refund-4521", ResumeOptions.ofApproval("process"));
+// later, once a human has approved: the same graph keeps the spend counted so far
+AgentResult done = graph.resume("refund-4521", ResumeOptions.ofApproval("process"));
 ```
 
-The `processor` agent cannot run until a human approves: the first call returns an interrupt, and `resume` continues from the last checkpoint, even after a restart. A run is only checkpointed when it is started with a run id, so a plain `invoke(ctx)` leaves nothing to resume from.
+The `processor` agent cannot run until a human approves: the first call returns an interrupt, and `resume` continues from the last checkpoint. After a restart, the same `resume` call on a newly built graph does the same. A run is only checkpointed when it is started with a run id, so a plain `invoke(ctx)` leaves nothing to resume from.
+
+The store does not create its table. Add it to your Flyway or Liquibase migrations, like any other table of the application. On PostgreSQL:
+
+```
+CREATE TABLE agent_checkpoint (
+    run_id             VARCHAR(128) PRIMARY KEY,
+    payload            TEXT NOT NULL,
+    checkpoint_version INT NOT NULL,
+    created_at         TIMESTAMP NOT NULL,
+    updated_at         TIMESTAMP NOT NULL
+);
+```
+
+`JdbcCheckpointStore.createTableIfMissing()` creates the same table for you, with a `CLOB` payload: it works on H2 and on the other databases that have that type, and fails on PostgreSQL, which does not.
 
 The tool policy covers the tools registered on the agent. Tools registered on the `ChatClient` itself, for example with `defaultToolCallbacks`, bypass it, so a sensitive tool such as `payment.refund` must stay off a client the analyst shares.
 
-The budget is checked before each call, against an estimate: once the spend recorded so far plus the next estimate passes $0.50, the run is interrupted. A call that costs more than its estimate is recorded after the fact, so a run can end above the limit, and it is the next call that is refused. The counters are held in memory on the policy instance, which is why the graph is built once per run, and a run resumed on a new graph starts counting from zero again.
+The budget is checked before each node attempt, against an estimate: once the spend recorded so far plus the next estimate passes $0.50, the run is interrupted. Three limits follow. A node that calls the model several times, for example through tools, is checked once, before its first call. A node that costs more than its estimate is recorded after the fact, so a run can end above the limit, and it is the next attempt that is refused. And the spend of a failed attempt is not recorded, so the cost of a retried node is undercounted.
+
+The counters are held in memory on the policy instance, not in the checkpoint. That is why the graph is built once per run, and why the resume above goes through the same graph. After a restart, the run resumes on a new graph that counts from zero again: a limit that must hold across restarts needs a `BudgetPolicy` implementation that stores its counters.
 
 No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
 
