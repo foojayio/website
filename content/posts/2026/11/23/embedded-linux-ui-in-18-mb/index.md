@@ -17,7 +17,6 @@ Embedded software has the hardest job description in our industry. It has to run
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
 
-
 Most teams solve that with three or four stacks. C or C++ on the device for size and control, a browser or Qt for the screen, Swift and Kotlin for the companion app, something else on the server. Every boundary between them is a protocol written twice and a bug waiting to happen.
 
 Codename One now runs on embedded Linux, and it covers every one of those pieces with one Java or Kotlin codebase. On our benchmark, the UI drew an animated gauge in **18 MB of memory with no GPU**, about a twentieth of what a Chromium kiosk needed to draw the same thing. The headless backend served **379,900 requests per second on two cores, 1.3 times Rust's `axum`**. And we don't charge royalties.

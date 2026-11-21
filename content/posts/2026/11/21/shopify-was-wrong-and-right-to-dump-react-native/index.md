@@ -8,8 +8,6 @@ categories: ["Opinion"]
 canonical: "https://www.codenameone.com/blog/shopify-was-wrong-and-right-to-dump-react-native/"
 ---
 
-![Shopify was wrong and right to dump React Native](shopify-was-wrong-and-right-to-dump-react-native-de356406a0.jpg)
-
 In September Shopify announced it's [moving every mobile app off React Native](https://shopify.engineering/back-to-native) and rewriting them in Swift and Kotlin. Their reasoning fits in one sentence from the post: "building the same feature in Swift and Kotlin no longer carries the cost it used to." Agents write the second copy, so why share code at all?
 
 <aside style="border-left: 4px solid #007aff; padding: 14px 18px; margin: 24px 0; border-radius: 4px; font-size: 0.95em;"><strong>What is Codename One?</strong> Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at <a href="https://www.codenameone.com/">codenameone.com</a>.</aside>
