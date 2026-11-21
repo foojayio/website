@@ -1,7 +1,7 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
 date: "2026-06-10T19:02:58+00:00"
-lastmod: "2026-11-21T15:04:09+00:00"
+lastmod: "2026-11-21T18:48:01+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"
@@ -115,27 +115,49 @@ Three agents, dynamic routing, typed state shared across nodes. Each agent is a 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
 ```
-// analyst can only call crm.lookup and order.fetch, not payment.refund
+// the policy governs the tools registered on the agent:
+// analyst can call crm.lookup and order.fetch, and nothing else
 Agent analyst = ExecutorAgent.builder()
     .chatClient(chatClient)
     .systemPrompt("Analyse this refund request.")
+    .tools(crmLookup, orderFetch)
     .toolPolicy(ToolPolicy.allowList("crm.lookup", "order.fetch"))
     .build();
 
-AgentGraph graph = AgentGraph.builder()
-    .addNode("analyse",  analyst)
-    .addNode("process",  processor)
-    .addEdge("analyse",  "process")
-    // cap total spend per run at $0.50
-    .budgetPolicy(BudgetPolicy.hierarchical(BudgetLimits.run(0.50), estimator, meter))
-    // pause before process, a human must approve
-    .approvalGate(ApprovalGate.requireFor("process"))
-    // checkpoint after every node on the existing datasource
-    .checkpointStore(new JdbcCheckpointStore(jdbcTemplate, txManager, codec))
-    .build();
+// once at startup, on the existing datasource: the store does not create its table by itself
+JdbcCheckpointStore checkpoints = new JdbcCheckpointStore(jdbcTemplate, txManager, codec);
+checkpoints.createTableIfMissing();
+
+// one graph per run: the budget counters live on the policy instance
+AgentGraph refundGraph() {
+    return AgentGraph.builder()
+        .addNode("analyse",  analyst)
+        .addNode("process",  processor)
+        .addEdge("analyse",  "process")
+        // refuse a call once the spend recorded so far plus its estimate passes $0.50
+        .budgetPolicy(BudgetPolicy.hierarchical(BudgetLimits.run(0.50), estimator, meter))
+        // pause before process, a human must approve
+        .approvalGate(ApprovalGate.requireFor("process"))
+        // checkpoint after every node
+        .checkpointStore(checkpoints)
+        .build();
+}
+
+// the run id is what makes the run checkpointed: this call stops at the approval gate
+AgentResult paused = refundGraph().invoke(
+    AgentContext.of("Refund order 4521"), RunOptions.ofRunId("refund-4521"));
+
+// later, once a human has approved, on the same server or after a restart
+AgentResult done = refundGraph().resume("refund-4521", ResumeOptions.ofApproval("process"));
 ```
 
-The `processor` agent cannot run until a human approves. The graph cannot spend more than $0.50 per run. If the server restarts mid-execution, the next run picks up from the last completed node. No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
+The `processor` agent cannot run until a human approves: the first call returns an interrupt, and `resume` continues from the last checkpoint, even after a restart. A run is only checkpointed when it is started with a run id, so a plain `invoke(ctx)` leaves nothing to resume from.
+
+The tool policy covers the tools registered on the agent. Tools registered on the `ChatClient` itself, for example with `defaultToolCallbacks`, bypass it, so a sensitive tool such as `payment.refund` must stay off a client the analyst shares.
+
+The budget is checked before each call, against an estimate: once the spend recorded so far plus the next estimate passes $0.50, the run is interrupted. A call that costs more than its estimate is recorded after the fact, so a run can end above the limit, and it is the next call that is refused. The counters are held in memory on the policy instance, which is why the graph is built once per run, and a run resumed on a new graph starts counting from zero again.
+
+No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
 
 ## OPERATE: Observe, recover and run safely
 
@@ -190,6 +212,12 @@ AgentFlow4J is available on Maven Central, for Java 17+, tested against Spring A
 <dependency>
     <groupId>io.github.datallmhub</groupId>
     <artifactId>agentflow4j-starter</artifactId>
+    <version>1.0.1</version>
+</dependency>
+<!-- JdbcCheckpointStore, used in the GOVERN example, is not part of the starter -->
+<dependency>
+    <groupId>io.github.datallmhub</groupId>
+    <artifactId>agentflow4j-checkpoint</artifactId>
     <version>1.0.1</version>
 </dependency>
 ```
