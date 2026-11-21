@@ -63,7 +63,7 @@ Here is the same small project with the https://docs.flowlogix.com/base-pom[Flow
 
 The build has no warnings. The project's own POM has no plugin section at all.
 
-`base-pom` is deliberately small. It sets the Java release and the source encoding, and it locks the versions of the standard plugins: enforcer, compiler, surefire, failsafe, source, javadoc, dependency, deploy, release, clean, resources, jar, war, ear, install, jxr, site and project-info-reports. It adds no behavior. It is updated about once a week, so the versions stay current without any work from you.
+`base-pom` is deliberately small. It sets the Java release and the source encoding, and it locks the versions of the standard plugins: enforcer, compiler, surefire, failsafe, source, javadoc, dependency, deploy, release, clean, resources, jar, war, ear, install, jxr, site and project-info-reports. It adds no behavior. It is updated about once a week. To pick up a new release, you change one version number, and Dependabot or Renovate can do that for you.
 
 === Already have a company parent POM?
 
@@ -113,7 +113,7 @@ Here is the second source of build boilerplate. To change one setting of one plu
 </build>
 ----
 
-With a base POM that exposes its settings as properties, the same change is one line:
+With a parent that exposes its settings as properties, such as the FlowLogix `infra-pom` described below, the same change is one line:
 
 [source,xml]
 ----
@@ -199,16 +199,16 @@ Here is what you get:
 * *Useful compiler settings.* Warnings are shown, deprecated and unchecked code is reported, and parameter names are kept for Jakarta EE and other libraries.
 * *Fast, useful tests.* Unit tests run in parallel and in random order, so tests that depend on each other show up early. Output goes to files, and the console stays quiet.
 * *Integration tests wired in.* Any class named `*IT` runs in the integration test phase, and the build stops if one of them fails.
-* *A demo directory facilitates clean documentation and real javadoc snippets.* See below.
+* *A demo directory facilitates clean documentation and compiled javadoc snippets.* See below.
 * *Code style checks.* Checkstyle runs at the start of the build. See below for how to use your own license header.
 * *API compatibility checks.* The build can compare your public API with the last release and fail on a breaking change. This is off until you turn it on.
-* *Code coverage.* JaCoCo is combines unit and integration tests across modules, including on application servers, and does nothing until you run with `-Pcoverage`.
+* *Code coverage.* JaCoCo combines unit and integration tests across modules, including on application servers. It does nothing until you add the JaCoCo plugin to your project and run with `-Pcoverage`.
 * *Versions of common libraries.* The Jakarta EE API, Lombok, Mockito and ShrinkWrap have versions set. Nothing is added to your project. A version applies only if you declare the dependency yourself.
 * *Releases.* Artifacts are signed, uploaded together at the end, and published with a software bill of materials. None of it runs during a normal build.
 
 The https://docs.flowlogix.com/base-pom[Base POM documentation] lists every property and how to change it.
 
-NOTE: `infra-pom` loads Mockito as a Java agent for tests, the way current JDKs require. The `unit-test` https://docs.flowlogix.com/depchains[dependency chain] brings Mockito, JUnit and AssertJ in one dependency.
+NOTE: `infra-pom` loads Mockito as a Java agent for tests, the way current JDKs require, so your project needs Mockito as a test dependency. The `unit-test` https://docs.flowlogix.com/depchains[dependency chain] brings Mockito, JUnit and AssertJ in one dependency. If you do not use Mockito, set the `mockito.agentOptions` property to empty.
 
 === A demo directory
 
