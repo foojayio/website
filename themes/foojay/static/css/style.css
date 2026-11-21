@@ -372,6 +372,14 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
    instead of wrapping -- the gap that showed up at 200% text zoom. */
 .primary-nav__list { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 
+/* Items span the header's full height, so `top: 100%` is the same line whether a
+   panel hangs off its item (1 column) or off the header (2+). */
+@media (min-width: 64.0625rem) {
+  .primary-nav { align-self: stretch; }
+  .primary-nav__list { height: 100%; align-items: stretch; }
+  .nav-item { display: flex; align-items: center; }
+}
+
 .nav-link {
   appearance: none; background: none; border: 0; cursor: pointer;
   display: inline-flex; align-items: center; gap: .4rem;
@@ -444,13 +452,14 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   align-content: start; grid-auto-rows: min-content;
 }
 
-.nav-panel a {
+.nav-panel a,
+.nav-panel li > span {
   display: block; padding: .55rem .7rem; border-radius: var(--radius-sm);
-  color: var(--ink); font-size: .96rem; line-height: 1.35;
+  color: var(--ink); font-size: 1rem; line-height: 1.35;
 }
 .nav-panel a:hover { background: var(--brand-accent-soft); color: var(--brand-accent-strong); text-decoration: none; }
-.nav-panel a .nav-panel__desc {
-  display: block; font-size: .82rem; color: var(--ink-muted); margin-top: .1rem;
+.nav-panel .nav-panel__desc {
+  display: block; font-size: .8rem; color: var(--ink-muted); margin-top: .1rem;
 }
 .nav-panel a:hover .nav-panel__desc { color: var(--ink-soft); }
 
@@ -465,7 +474,6 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   padding: .3rem .7rem .45rem;
 }
 a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); text-decoration: underline; }
-.nav-group .nav-panel__list a { font-size: .9rem; padding-block: .38rem; color: var(--ink-soft); }
 .nav-group + .nav-group { border-top: 1px solid var(--border); margin-top: .3rem; }
 .nav-panel__inner--cols-2 .nav-group + .nav-group,
 .nav-panel__inner--cols-3 .nav-group + .nav-group { border-top: 0; margin-top: 0; }

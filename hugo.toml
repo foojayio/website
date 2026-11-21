@@ -275,69 +275,90 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "News"
+  identifier = "news"
   weight = 10
   [menu.main.params]
-    cols = 1
+    cols = 2
+
+[[menu.main]]
+  name = "Foojay News"
+  parent = "news"
+  weight = 11
 
 [[menu.main]]
   name = "Daily News"
-  parent = "News"
+  parent = "Foojay News"
   url = "/today/"
-  weight = 11
+  weight = 1
   [menu.main.params]
     desc = "Everything the community published, newest first"
 
 [[menu.main]]
   name = "Podcast"
-  parent = "News"
+  parent = "Foojay News"
   url = "/today/category/podcast/"
-  weight = 12
+  weight = 2
   [menu.main.params]
     desc = "Conversations with the people building and using Java"
 
 [[menu.main]]
   name = "Event Calendar"
-  parent = "News"
+  parent = "Foojay News"
   url = "/calendar/"
-  weight = 13
+  weight = 3
   [menu.main.params]
     desc = "JUG meetups, conferences, and other events"
 
 [[menu.main]]
+  name = "All Categories"
+  parent = "Foojay News"
+  url = "/today/category/"
+  weight = 4
+  [menu.main.params]
+    desc = "Every topic the community writes about, A-Z"
+
+[[menu.main]]
+  name = "Newsletters and Overviews"
+  identifier = "newsletters-overviews"
+  parent = "news"
+  weight = 12
+
+[[menu.main]]
   name = "JC-AI Newsletter"
-  parent = "News"
+  parent = "newsletters-overviews"
   url = "/today/category/jc-ai-newsletter/"
-  weight = 14
+  weight = 1
   [menu.main.params]
     desc = "AI Newsletter curated by Miro Wengner"
 
 [[menu.main]]
   name = "Monthly Review"
-  parent = "News"
+  parent = "newsletters-overviews"
   url = "/month-overview/"
-  weight = 15
+  weight = 2
   [menu.main.params]
     desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
 
 [[menu.main]]
-  name = "All Categories"
-  parent = "News"
-  url = "/today/category/"
-  weight = 17
+  name = "Week in Review"
+  parent = "newsletters-overviews"
+  url = "/today/week-review/"
+  weight = 3
   [menu.main.params]
-    desc = "Every topic the community writes about, A-Z"
+    desc = "Foojay content listed per week, with new authors highlighted"
 
 # ---------------------------------------------------------------------------
 
 [[menu.main]]
   name = "Resources"
+  identifier = "resources"
   weight = 20
   [menu.main.params]
     cols = 1
 
 [[menu.main]]
   name = "Sustainability for Java Developers"
-  parent = "Resources"
+  parent = "resources"
   url = "/sustainability-for-java-developers/"
   weight = 21
   [menu.main.params]
@@ -345,7 +366,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java Almanac"
-  parent = "Resources"
+  parent = "resources"
   url = "/java-almanac/"
   weight = 22
   [menu.main.params]
@@ -353,7 +374,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "JVM Options"
-  parent = "Resources"
+  parent = "resources"
   url = "/jvm-options/"
   weight = 23
   [menu.main.params]
@@ -361,7 +382,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java User Groups"
-  parent = "Resources"
+  parent = "resources"
   url = "/jugs/"
   weight = 24
   [menu.main.params]
@@ -369,7 +390,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java Conferences"
-  parent = "Resources"
+  parent = "resources"
   url = "/java-conferences/"
   weight = 25
   [menu.main.params]
@@ -377,7 +398,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java Champions"
-  parent = "Resources"
+  parent = "resources"
   url = "/java-champions/"
   weight = 26
   [menu.main.params]
@@ -385,7 +406,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Foojay Television"
-  parent = "Resources"
+  parent = "resources"
   url = "/tv/"
   weight = 27
   [menu.main.params]
@@ -400,24 +421,6 @@ enableGitInfo = true
   weight = 30
   [menu.main.params]
     cols = 3
-
-[[menu.main]]
-  name = "Java Terms Explained"
-  parent = "Java Basics"
-  # Trailing slash, like every other menu entry: without it the nav link cost a
-  # 301 on every click, from a menu that renders on all 2712 pages.
-  url = "/java-terms-explained/"
-  weight = 31
-  [menu.main.params]
-    desc = "The Java and OpenJDK jargon dictionary"
-
-[[menu.main]]
-  name = "Other Tutorials"
-  parent = "Java Basics"
-  url = "/java-quick-start/other-tutorials/"
-  weight = 32
-  [menu.main.params]
-    desc = "Many more places where you can learn more about Java"
 
 # -- column: Install Java -------------------------------------------------
 [[menu.main]]
@@ -530,6 +533,32 @@ enableGitInfo = true
   parent = "quick-start-tutorial"
   url = "/java-quick-start/quick-start-tutorial/whats-next/"
   weight = 11
+
+# -- column: Learn more -------------------------------------------------
+
+[[menu.main]]
+  name = "Learn More"
+  identifier = "learn-more"
+  parent = "Java Basics"
+  weight = 35
+
+[[menu.main]]
+  name = "Java Terms Explained"
+  parent = "learn-more"
+  # Trailing slash, like every other menu entry: without it the nav link cost a
+  # 301 on every click, from a menu that renders on all 2712 pages.
+  url = "/java-terms-explained/"
+  weight = 1
+  [menu.main.params]
+    desc = "The Java and OpenJDK jargon dictionary"
+
+[[menu.main]]
+  name = "External Tutorials"
+  parent = "learn-more"
+  url = "/java-quick-start/other-tutorials/"
+  weight = 2
+  [menu.main.params]
+    desc = "Many more places where you can learn more about Java"
 
 # ---------------------------------------------------------------------------
 
