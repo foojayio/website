@@ -50,6 +50,7 @@ Two things follow:
 | | |
 |---|---|
 | **JDK** | OpenJDK 17.0.6 and later, and builds derived from it: Temurin, Corretto, Red Hat, Zulu, Liberica, Microsoft, Oracle and others, until patched |
+| **Also listed by Oracle** | Oracle Java SE 8u511b33-perf, Oracle GraalVM for JDK 17 and 21, and Oracle GraalVM Enterprise Edition 21.3, per [the CVE record](https://www.cve.org/CVERecord?id=CVE-2026-114938) |
 | **CPU** | x86-64 with AVX-512 VBMI: Intel Ice Lake or newer, AMD Zen 4 or newer |
 | **Not affected** | ARM64 (for example AWS Graviton or Apple Silicon), which uses a separate implementation |
 | **Severity** | Oracle rates it CVSS 3.1 **8.1**; the researchers rate it CVSS 4.0 **9.2** |
@@ -92,7 +93,9 @@ flags are what decide exposure.
 **Mixed fleets are where this bites.** A Kubernetes node pool with more than one instance type, or an
 autoscaling group that falls back to another family when capacity is short, can run the same image
 safely on one node and unsafely on the next. Many current-generation x86 cloud instance families run
-on Ice Lake or Zen 4. Check every pool, not one representative node.
+on Ice Lake or Zen 4. Check every node that can run the service, including the ones autoscaling and
+failover bring in. A pool can mix CPUs with and without AVX-512 VBMI, so one node doesn't speak for
+the pool.
 
 ## The mitigation, and making sure it applies
 
@@ -179,5 +182,5 @@ for. The full tag list is in our
 
 Most vulnerability management answers "which version are we running?" Java4Shell asks a different
 question: "which runtime, on which CPU?" If you can't answer that for your JVM fleet today, the
-`/proc/cpuinfo` check and a `jcmd` on each node pool are a good afternoon's work, and they'll matter
+`/proc/cpuinfo` check and a `jcmd` on every node that runs a JVM are a good afternoon's work, and they'll matter
 again the next time a bug lives in the JIT.
