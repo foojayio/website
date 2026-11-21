@@ -1,7 +1,7 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
 date: "2026-06-10T19:02:58+00:00"
-lastmod: "2026-06-14T22:05:20+00:00"
+lastmod: "2026-11-21T15:04:09+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"
@@ -115,18 +115,23 @@ Three agents, dynamic routing, typed state shared across nodes. Each agent is a 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
 ```
+// analyst can only call crm.lookup and order.fetch, not payment.refund
+Agent analyst = ExecutorAgent.builder()
+    .chatClient(chatClient)
+    .systemPrompt("Analyse this refund request.")
+    .toolPolicy(ToolPolicy.allowList("crm.lookup", "order.fetch"))
+    .build();
+
 AgentGraph graph = AgentGraph.builder()
     .addNode("analyse",  analyst)
     .addNode("process",  processor)
     .addEdge("analyse",  "process")
-    // analyst can only call crm.lookup and order.fetch, not payment.refund
-    .toolPolicy(ToolPolicy.allowList("crm.lookup", "order.fetch"))
     // cap total spend per run at $0.50
-    .budgetPolicy(BudgetPolicy.perRun(0.50, tokenEstimator, meter))
+    .budgetPolicy(BudgetPolicy.hierarchical(BudgetLimits.run(0.50), estimator, meter))
     // pause before process, a human must approve
     .approvalGate(ApprovalGate.requireFor("process"))
     // checkpoint after every node on the existing datasource
-    .checkpointStore(new JdbcCheckpointStore(dataSource))
+    .checkpointStore(new JdbcCheckpointStore(jdbcTemplate, txManager, codec))
     .build();
 ```
 
@@ -141,14 +146,17 @@ One common failure mode: a retry policy that cannot tell the difference between 
 AgentFlow4J's `FailureClassifier` solves this with three outcomes:
 
 ```
+// Your own rule first; anything it does not recognise falls through to the defaults
+FailureClassifier domain = cause ->
+    cause instanceof InvalidOrderException
+        ? FailureClassification.permanent("order rejected by a business rule")
+        : null;
+
 RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
-    .withClassifier(FailureClassifier.defaults()
-        .orElse((ex, ctx) -> ex instanceof BudgetExceededException
-            ? FailureClassification.OVER_BUDGET
-            : FailureClassification.TRANSIENT));
+    .withClassifier(domain.orElse(FailureClassifier.defaults()));
 ```
 
-`TRANSIENT` means retry. `PERMANENT` means fail fast. `OVER_BUDGET` means route to a cheaper fallback agent instead of retrying. The retry policy is no longer blind to cost.
+`TRANSIENT` means retry with backoff. `PERMANENT` means fail fast. `OVER_BUDGET` means stop and hand the run back as an interrupt, so the caller can pause, raise the limit and resume instead of paying for another attempt. The defaults already treat I/O errors, timeouts, HTTP 5xx and 429 as transient, and a `BudgetExceededException` as over budget. The retry policy is no longer blind to cost.
 
 ### Operational sovereignty
 
@@ -176,25 +184,19 @@ If you are an architect or open-source contributor interested in what a producti
 
 ## Getting started
 
-AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
+AgentFlow4J is available on Maven Central, for Java 17+, tested against Spring AI 1.0, 1.1 and 2.1:
 
 ```
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-
 <dependency>
-    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <groupId>io.github.datallmhub</groupId>
     <artifactId>agentflow4j-starter</artifactId>
-    <version>v0.7.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 * **[GitHub](https://github.com/datallmhub/agentflow4j)**: source, docs, samples
-* **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: six self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing
+* **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: eleven self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing, governed MCP agent, self-correcting writer, LLM as a judge, parallel research squad, governed OpenHands workflow
 * **[Tutorial](https://datallmhub.github.io/agentflow4j/tutorials/stop-your-agent-burning-money/)**: end-to-end walkthrough of the four governance gates
+* **[Validation](https://datallmhub.github.io/agentflow4j/validation/)**: every guarantee, the test behind it, and what that test does not prove
 
 Apache 2.0 (not an official Spring project).
