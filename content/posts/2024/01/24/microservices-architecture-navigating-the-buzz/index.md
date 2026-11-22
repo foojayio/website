@@ -1,7 +1,6 @@
 ---
 title: "Microservices Architecture: Navigating the Buzz"
 date: "2024-01-24T20:05:53+00:00"
-lastmod: "2024-01-24T20:05:54+00:00"
 description: "If flexibility and resilience are priorities, embracing the distributed future of software development is worth considering."
 authors:
   - "jasmine-taylor"

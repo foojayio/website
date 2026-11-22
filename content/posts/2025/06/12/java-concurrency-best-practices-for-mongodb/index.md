@@ -1,7 +1,6 @@
 ---
 title: "Java Concurrency Best Practices for MongoDB"
 date: "2025-06-12T15:30:29+00:00"
-lastmod: "2025-06-12T15:40:26+00:00"
 description: "In a multi-threaded, distributed environment like MongoDB, when clients execute queries concurrently, operations interleave with one another if they are…"
 authors:
   - "vivekanandan-sakthivelu"

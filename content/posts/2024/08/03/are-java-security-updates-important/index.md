@@ -1,7 +1,6 @@
 ---
 title: "Are Java Security Updates Important?"
 date: "2024-08-03T14:56:00+00:00"
-lastmod: "2024-10-03T16:34:30+00:00"
 description: "Equifax had numerous firewalls in place that would have done all the things a firewall should, but did not prevent the attack. Find out why!"
 canonical: "https://www.azul.com/blog/the-importance-of-java-security-updates/"
 authors:

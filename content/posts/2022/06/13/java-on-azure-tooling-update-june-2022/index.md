@@ -1,7 +1,6 @@
 ---
 title: "Java on Azure Tooling Update – June 2022"
 date: "2022-06-13T07:40:38+00:00"
-lastmod: "2022-06-13T07:45:13+00:00"
 description: "Introducing the new application-centric view on Azure toolkit for IntelliJ that will make the interface more user-friendly!"
 authors:
   - "jialuo-gan"

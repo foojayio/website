@@ -1,7 +1,6 @@
 ---
 title: "Analyzing dependencies in IntelliJ IDEA"
 date: "2023-05-11T09:33:40+00:00"
-lastmod: "2023-08-03T08:28:43+00:00"
 description: "Let's look at analyzing dependencies in IntelliJ IDEA. Where does your application get a specific version of a library, show conflicts, etc."
 canonical: "https://maritvandijk.com/analyzing-dependencies/"
 authors:

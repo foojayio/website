@@ -1,7 +1,6 @@
 ---
 title: "A Minor But Useful Refactoring Technique That Would Reduce Your Code Footprint (Part 2)"
 date: "2022-10-26T15:16:18+00:00"
-lastmod: "2022-10-26T15:30:47+00:00"
 description: "This is a continuing attempt to refactor from Java 11 to later versions of Java, and today's topic is about two methods of the Stream API."
 authors:
   - "bazlur-rahman"

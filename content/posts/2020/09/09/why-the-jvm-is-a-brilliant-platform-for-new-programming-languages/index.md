@@ -1,7 +1,6 @@
 ---
 title: "Why the JVM Is a Brilliant Platform for New Programming Languages"
 date: "2020-09-09T05:07:34+00:00"
-lastmod: "2020-09-11T10:43:40+00:00"
 description: "The capability of the JVM to overcome problems related to hardware and operating systems is why we're seeing inventions of new languages on top of the JVM."
 authors:
   - "kevinfarnham"

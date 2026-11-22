@@ -1,7 +1,6 @@
 ---
 title: "AI-Powered Code Review Assistant: Automated Code Analysis with Spring AI and MongoDB"
 date: "2026-05-14T17:09:39+00:00"
-lastmod: "2026-05-14T17:09:41+00:00"
 description: "In this article, you will build a code review assistant API. Developers submit code snippets through a REST endpoint. The system embeds the submitted code with Spring AI and searches a library of known anti-patterns stored as vectors in MongoDB Atlas. It then sends the code along with matched patterns to an LLM for structured review feedback. Every submission and its findings are stored in MongoDB, and aggregation pipelines surface trends over time."
 authors:
   - "farhan-chowdhury"

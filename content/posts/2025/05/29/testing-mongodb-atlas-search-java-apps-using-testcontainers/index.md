@@ -1,7 +1,6 @@
 ---
 title: "Testing MongoDB Atlas Search Java Apps Using TestContainers"
 date: "2025-05-29T18:07:27+00:00"
-lastmod: "2025-05-29T18:08:18+00:00"
 description: "A few examples of how you can use the awesome TestContainers projects to enhance testing of your MongoDB Atlas Search Java apps."
 authors:
   - "luke-thompson"

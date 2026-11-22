@@ -1,7 +1,6 @@
 ---
 title: "Container Awareness for Java Developers Today"
 date: "2020-08-24T08:55:22+00:00"
-lastmod: "2020-08-27T05:38:04+00:00"
 description: "When you containerize a Java application, make sure your base JDK image is container-aware so that the JDK can allocate memory and CPU counts properly."
 canonical: "https://spring-gcp.saturnism.me/deployment/docker/container-awareness"
 authors:

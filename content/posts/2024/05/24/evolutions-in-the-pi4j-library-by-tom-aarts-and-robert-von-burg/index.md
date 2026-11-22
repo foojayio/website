@@ -1,7 +1,6 @@
 ---
 title: "Evolutions in the Pi4J library by Tom Aarts and Robert von Burg"
 date: "2024-05-24T12:16:02+00:00"
-lastmod: "2024-09-12T15:24:56+00:00"
 description: "Multiple improvements have been implemented in the new release, V2.6.0 (2024-04-29) of Pi4J, a friendly object-oriented I/O API and implementation…"
 authors:
   - "frankdelporte"

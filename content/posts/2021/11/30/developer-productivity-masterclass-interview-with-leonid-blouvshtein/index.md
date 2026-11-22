@@ -1,7 +1,6 @@
 ---
 title: "Developer Productivity Masterclass: Interview With Leonid Blouvshtein"
 date: "2021-11-30T09:09:01+00:00"
-lastmod: "2021-11-30T09:15:37+00:00"
 description: "Are the problems startups run into different from the ones experienced by Netflix, Hashicorp and Meta? Learn about increased productivity!"
 authors:
   - "shai-almog"

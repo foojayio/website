@@ -1,7 +1,6 @@
 ---
 title: "Localize applications with AI"
 date: "2024-03-20T08:50:29+00:00"
-lastmod: "2024-07-29T18:13:49+00:00"
 description: "Ever wondered if AI can localize an entire project? Let’s walk through the process end-to-end using Spring Petclinic as an example"
 canonical: "https://flounder.dev/posts/localize-apps-with-ai/"
 authors:

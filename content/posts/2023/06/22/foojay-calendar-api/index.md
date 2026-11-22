@@ -1,7 +1,6 @@
 ---
 title: "Introducing the Foojay.io Calendar API"
 date: "2023-06-22T06:40:22+00:00"
-lastmod: "2023-07-25T14:22:55+00:00"
 description: "We are excited to share that Foojay is growing and offering additional resources to bring the OpenJDK community together on a global scale."
 authors:
   - "slava_yelk"

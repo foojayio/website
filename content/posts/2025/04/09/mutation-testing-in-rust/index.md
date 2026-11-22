@@ -1,7 +1,6 @@
 ---
 title: "Mutation Testing in Rust"
 date: "2025-04-09T12:39:50+00:00"
-lastmod: "2025-04-09T12:39:52+00:00"
 description: "I've been a big fan of Mutation Testing since I discovered PIT. As I dive deeper into Rust, I wanted to check the state of mutation testing in Rust."
 canonical: "https://blog.frankel.ch/mutation-testing-rust/"
 authors:

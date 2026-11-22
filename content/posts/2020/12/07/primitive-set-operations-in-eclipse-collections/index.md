@@ -1,7 +1,6 @@
 ---
 title: "Primitive Set Operations in Eclipse Collections"
 date: "2020-12-07T11:14:46+00:00"
-lastmod: "2020-12-07T14:11:45+00:00"
 description: "Recently, I worked on an issue to implement union, intersect, and difference operations in Sets for primitive types in Eclipse Collections."
 authors:
   - "sirisha-pratha"

@@ -1,7 +1,6 @@
 ---
 title: "The Future of EJB"
 date: "2022-11-10T16:06:56+00:00"
-lastmod: "2022-11-10T16:06:57+00:00"
 description: "A possible future direction for EJB is to rebase it on CDI. We would end up with just one component model in Jakarta EE."
 authors:
   - "ondro-mihalyi"

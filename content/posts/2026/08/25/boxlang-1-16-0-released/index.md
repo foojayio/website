@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.16.0 Released!"
 date: "2026-08-25T13:57:47+00:00"
-lastmod: "2026-08-25T13:57:49+00:00"
 description: "BoxLang 1.16.0 is here, closing 50 issues across new features, improvements, and bug fixes. The theme running through this release is control: control…"
 authors:
   - "cristobal-escobar"

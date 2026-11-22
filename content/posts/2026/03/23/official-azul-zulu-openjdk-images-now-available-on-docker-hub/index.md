@@ -1,7 +1,6 @@
 ---
 title: "Azul Zulu OpenJDK Docker Images Now Available on Docker Hub"
 date: "2026-03-23T07:53:56+00:00"
-lastmod: "2026-03-23T08:01:59+00:00"
 description: "Azul Zulu OpenJDK is now available as a Docker Official Image, giving developers secure, signed, and automatically updated Java containers across multiple versions directly from Docker Hub."
 authors:
   - "dominika-tasarz"

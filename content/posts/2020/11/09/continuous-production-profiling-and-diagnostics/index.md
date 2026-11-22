@@ -1,7 +1,6 @@
 ---
 title: "Continuous Production Profiling and Diagnostics"
 date: "2020-11-09T15:57:38+00:00"
-lastmod: "2023-07-18T07:06:53+00:00"
 description: "I’ve gotten a lot of questions about continuous production profiling. Why to profile in production and why the heck leave it on continuously?"
 canonical: "http://hirt.se/blog/?p=1288"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Building Custom Solutions vs. Buy-and-Build Software"
 date: "2023-06-21T14:41:33+00:00"
-lastmod: "2023-06-29T06:46:52+00:00"
 description: "Sometimes time spent reinventing the wheel results in a revolutionary new rolling device. But sometimes not!"
 authors:
   - "rob-austin"

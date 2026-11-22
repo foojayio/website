@@ -1,7 +1,6 @@
 ---
 title: "Porting an Existing JavaFX App to iOS"
 date: "2023-02-24T11:42:11+00:00"
-lastmod: "2023-02-24T11:42:13+00:00"
 description: "Sometimes there are JavaFX apps that I would also like to use on my iPhone but I wrote them for the desktop and... how to do that?"
 authors:
   - "gerrit-grunwald"

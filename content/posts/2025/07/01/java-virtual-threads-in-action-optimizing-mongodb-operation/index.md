@@ -1,7 +1,6 @@
 ---
 title: "Java Virtual Threads in Action: Optimizing MongoDB Operation"
 date: "2025-07-01T08:12:24+00:00"
-lastmod: "2025-07-01T08:12:25+00:00"
 description: "Java 21's virtual threads simplify handling I/O-bound operations, allowing for massive concurrency with minimal overhead."
 canonical: "https://dev.to/mongodb/java-virtual-threads-in-action-optimizing-mongodb-operation-4l5k"
 authors:

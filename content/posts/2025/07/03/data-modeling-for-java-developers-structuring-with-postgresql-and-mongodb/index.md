@@ -1,7 +1,6 @@
 ---
 title: "Data Modeling for Java Developers: Structuring With PostgreSQL and MongoDB"
 date: "2025-07-03T21:02:16+00:00"
-lastmod: "2025-07-03T21:03:28+00:00"
 description: "Application and system designs have always been considered the most essential step in application development. All the later steps and technologies to be…"
 authors:
   - "aasawari-sahasrabuddhe"

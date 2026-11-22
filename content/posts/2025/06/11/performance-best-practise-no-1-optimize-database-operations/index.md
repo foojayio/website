@@ -1,7 +1,6 @@
 ---
 title: "Performance Best Practise No. 1: Optimize Database Operations"
 date: "2025-06-11T13:24:32+00:00"
-lastmod: "2025-06-11T13:24:35+00:00"
 description: "Boost Jakarta EE database performance by leveraging the following best practices."
 canonical: "https://omnifish.ee/performance-best-practice-no-1-optimize-database-operations/"
 authors:

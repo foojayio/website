@@ -1,7 +1,6 @@
 ---
 title: "Migrating Applications to TornadoVM v0.15 (Part 1)"
 date: "2023-02-16T07:58:43+00:00"
-lastmod: "2023-02-16T08:00:37+00:00"
 description: "TornadoVM 0.15 introduced changes at the API level with the aim of making the exposed operations more comprehensive to the programmers."
 authors:
   - "thanos-stratikopoulos"

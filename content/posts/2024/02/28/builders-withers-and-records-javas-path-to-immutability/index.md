@@ -1,7 +1,6 @@
 ---
 title: "Builders, Withers, and Records - Java’s path to immutability"
 date: "2024-02-28T12:19:11+00:00"
-lastmod: "2024-03-06T11:01:56+00:00"
 description: "Immutability in Java with creational patterns Builders and Withers, along with a new type of immutable object in Java: Records."
 authors:
   - "jonathan-vila"

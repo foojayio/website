@@ -1,7 +1,6 @@
 ---
 title: "Spectacular Java Projects on the Raspberry Pi"
 date: "2020-09-23T10:38:17+00:00"
-lastmod: "2021-12-16T09:43:29+00:00"
 description: "I want to share a number of Java / Raspberry Pi projects with everyone, as they can be an inspiration for getting started with Java on the Raspberry Pi!"
 authors:
   - "frankdelporte"

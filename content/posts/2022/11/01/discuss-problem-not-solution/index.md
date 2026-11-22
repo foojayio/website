@@ -1,7 +1,6 @@
 ---
 title: "Discuss the Problem, Not the Solution!"
 date: "2022-11-01T10:56:17+00:00"
-lastmod: "2022-11-01T10:56:18+00:00"
 description: "Discussing the problem offers insight into what the problem is all about. If you want to bring more value, question what the problem is."
 canonical: "https://blog.frankel.ch/discuss-problem-not-solution/"
 authors:

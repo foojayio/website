@@ -1,7 +1,6 @@
 ---
 title: "Efficient Memory Mapping for Terabyte Sparse Files in Java"
 date: "2023-03-15T11:50:41+00:00"
-lastmod: "2023-03-15T11:55:37+00:00"
 description: "Mapping large areas of memory avoids having to know in advance how much memory we need or having to resize the memory mappings while in use."
 authors:
   - "peter-lawrey"

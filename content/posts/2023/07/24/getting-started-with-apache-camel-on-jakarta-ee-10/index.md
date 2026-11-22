@@ -1,7 +1,6 @@
 ---
 title: "Getting Started With Apache Camel On Jakarta EE 10"
 date: "2023-07-24T10:20:06+00:00"
-lastmod: "2023-07-24T10:20:08+00:00"
 description: "Apache Camel is a Java library that allows for effortless integration of disparate systems using uniform readable constructs."
 canonical: "https://blog.payara.fish/getting-started-with-apache-camel-on-jakarta-ee-10"
 authors:

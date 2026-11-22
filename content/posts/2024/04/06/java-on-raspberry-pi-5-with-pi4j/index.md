@@ -1,7 +1,6 @@
 ---
 title: "Java on Raspberry Pi 5 with Pi4J"
 date: "2024-04-06T11:08:20+00:00"
-lastmod: "2024-04-06T11:08:57+00:00"
 description: "Alexander Liggesmeyer contributed a new plugin to Pi4J: GpioDPlugin. As a Pi4J-user, he wanted to run his applications on the Raspberry Pi 5."
 canonical: "https://pi4j.com/blog/2024/20240318_interview_alexander_liggesmeyer/"
 authors:

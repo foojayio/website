@@ -1,7 +1,6 @@
 ---
 title: "NoSQL Use Cases: When to Use a Non-Relational Database"
 date: "2022-07-28T07:32:07+00:00"
-lastmod: "2022-09-20T17:04:39+00:00"
 description: "There are many things to consider before making the move to NoSQL. In this article, we’ll explore when NoSQL use cases make sense."
 canonical: "https://datastax.medium.com/nosql-use-cases-when-to-use-a-non-relational-database-c05025aabd30"
 authors:

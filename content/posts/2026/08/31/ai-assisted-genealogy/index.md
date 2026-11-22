@@ -1,7 +1,6 @@
 ---
 title: "AI-assisted genealogy"
 date: "2026-08-31T05:51:48+00:00"
-lastmod: "2026-09-21T05:53:22+00:00"
 description: "My son recently came to me to brag about using AI to find our ancestors. While the results were correct, I didn't learn anything new, as it stopped at my…"
 canonical: "https://blog.frankel.ch/ai-assisted-genealogy/"
 authors:

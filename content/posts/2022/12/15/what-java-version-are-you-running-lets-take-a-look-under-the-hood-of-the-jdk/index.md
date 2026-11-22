@@ -1,7 +1,6 @@
 ---
 title: "What Java Version Are You Running?"
 date: "2022-12-15T08:59:05+00:00"
-lastmod: "2022-12-15T11:06:02+00:00"
 description: "Did you know there are multiple ways you check your Java version and even get much more information than you might think, very quickly?"
 authors:
   - "frankdelporte"

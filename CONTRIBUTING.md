@@ -41,6 +41,9 @@ images, and delivering it (pull request, fork, or zip).
   starting point. A maintainer moves the folder into
   `content/posts/<year>/<month>/<day>/<your-slug>/` when it's published — you
   never need to pick that path yourself unless you want the post to be published on a specific date. In that case, clearly specify the preferred date in your pull request.
+- **Updating a published post?** Add `updated: "YYYY-MM-DD"` to its frontmatter.
+  The header then shows "Updated <date>", but only when that date is at least
+  a week after `date`, so a small typo fix needs nothing. Leave `date` alone.
 - **Markdown or AsciiDoc.** Name the file `index.adoc` and write AsciiDoc
   instead, starting from `template/post.adoc`. Everything else is the same —
   same folder shape, same frontmatter, same checks. Markdown is shorter for

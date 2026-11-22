@@ -1,7 +1,6 @@
 ---
 title: "3 Ways to Refactor Your Code in IntelliJ IDEA"
 date: "2021-01-12T08:24:00+00:00"
-lastmod: "2021-09-03T09:25:09+00:00"
 description: "Simplifying your code has advantages, including improving readability, tackling technical debt, and managing ever-changing requirements."
 canonical: "https://blog.jetbrains.com/idea/2020/12/3-ways-to-refactor-your-code-in-intellij-idea/"
 authors:

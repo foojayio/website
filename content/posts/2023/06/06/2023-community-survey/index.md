@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK Community Survey"
 date: "2023-06-06T08:33:06+00:00"
-lastmod: "2023-06-06T08:37:48+00:00"
 description: "Friends Of OpenJDK Community Survey. Kickoff and instructions for a community driven data gathering exercise."
 authors:
   - "steve-poole"

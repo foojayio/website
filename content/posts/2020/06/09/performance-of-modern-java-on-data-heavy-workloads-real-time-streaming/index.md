@@ -1,7 +1,6 @@
 ---
 title: "Performance of Modern Java on Workloads: Real-Time Streaming"
 date: "2020-06-09T01:45:00+00:00"
-lastmod: "2021-03-25T17:25:53+00:00"
 description: "Hazelcast put new Java technologies to the test on workloads typical for their distributed stream processing engine, Hazelcast Jet."
 authors:
   - "marko-topolnik"

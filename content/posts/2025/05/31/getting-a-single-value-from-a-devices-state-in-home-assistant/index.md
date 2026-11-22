@@ -1,7 +1,6 @@
 ---
 title: "Getting a single value from a device's state in Home Assistant"
 date: "2025-05-31T09:27:38+00:00"
-lastmod: "2025-05-31T09:29:12+00:00"
 description: "I recently acquired Netatmo smart radiator valves to manage my rooms' temperature remotely."
 canonical: "https://blog.frankel.ch/home-assistant/7/"
 authors:

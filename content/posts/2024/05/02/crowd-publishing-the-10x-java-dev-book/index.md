@@ -1,7 +1,6 @@
 ---
 title: "Crowd-Publishing the 10x Java Dev Book"
 date: "2024-05-02T07:17:58+00:00"
-lastmod: "2024-05-02T07:17:59+00:00"
 description: "The “enlightenment roadmap” of a Java developer can be scary. How do you become the 10x Java Developer you always dreamed of becoming?"
 authors:
   - "olimpiu-pop"

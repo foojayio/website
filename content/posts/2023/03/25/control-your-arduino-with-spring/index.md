@@ -1,7 +1,6 @@
 ---
 title: "Control your Arduino with Spring"
 date: "2023-03-25T07:21:04+00:00"
-lastmod: "2023-03-25T07:22:50+00:00"
 description: "Learn how to use Firmata4j to control an Arduino board from a Raspberry Pi board or directly from your computer."
 authors:
   - "igor-de-souza"

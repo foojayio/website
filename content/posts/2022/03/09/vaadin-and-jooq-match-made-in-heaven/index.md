@@ -1,7 +1,6 @@
 ---
 title: "Vaadin and jOOQ: Match Made in Heaven"
 date: "2022-03-09T08:25:52+00:00"
-lastmod: "2022-03-10T10:03:41+00:00"
 description: "Quickly learn how easy it is to create data-centric web applications with the combination of Vaadin and jOOQ!"
 authors:
   - "simon-martinelli"

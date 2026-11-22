@@ -1,7 +1,6 @@
 ---
 title: "Taming the Bias: Unbiased Safepoint-Based Stack Walking"
 date: "2023-08-17T14:00:34+00:00"
-lastmod: "2023-08-17T14:07:06+00:00"
 description: "Erik Österlund summed up the problems with my previous JEP proposal quite nicely, and here are my responses!"
 authors:
   - "johannes-bechberger"

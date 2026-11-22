@@ -1,7 +1,6 @@
 ---
 title: "Let's Optimize Relational Database Access"
 date: "2021-06-28T07:42:54+00:00"
-lastmod: "2021-07-08T09:42:37+00:00"
 description: "Most database protocols have not followed the HTTP path yet and remain in the stone age of connection pooling."
 authors:
   - "clement-escoffier"

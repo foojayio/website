@@ -1,7 +1,6 @@
 ---
 title: "Is Java/Jakarta EE Cloud-Native?"
 date: "2021-08-18T09:14:45+00:00"
-lastmod: "2021-08-23T15:31:35+00:00"
 description: "Steve Millidge (founder of Payara), shows you that Java/Jakarta EE IS Cloud-native and can handle microservices and containers in the Cloud!"
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:

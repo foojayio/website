@@ -1,7 +1,6 @@
 ---
 title: "Real-time Stream Processing with Hazelcast and StreamNative"
 date: "2023-02-01T09:09:04+00:00"
-lastmod: "2023-02-01T09:11:50+00:00"
 description: "Learn how to stream data from Apache Pulsar into Hazelcast, where you learn how to process data in real time."
 authors:
   - "fawaz-ghali"

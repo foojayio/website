@@ -1,7 +1,6 @@
 ---
 title: "How Not To Skip A Message Even If Your Data Centre Fails"
 date: "2023-04-07T15:21:31+00:00"
-lastmod: "2024-01-09T12:59:47+00:00"
 description: "High availability is achieved in Chronicle FIX by failover, where workload is transferred in the event of a primary engine failure."
 authors:
   - "forough-goudarzi"

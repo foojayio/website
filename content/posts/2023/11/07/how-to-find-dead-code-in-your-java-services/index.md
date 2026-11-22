@@ -1,7 +1,6 @@
 ---
 title: "How to find dead code in your Java services"
 date: "2023-11-07T10:40:48+00:00"
-lastmod: "2023-11-07T14:53:08+00:00"
 description: "There’s an interesting relation between the problem of finding dead code and another widespread practice: measuring code coverage for tests."
 authors:
   - "jakob-loehnertz"

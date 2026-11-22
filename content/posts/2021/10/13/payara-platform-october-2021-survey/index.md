@@ -1,7 +1,6 @@
 ---
 title: "Payara Platform October 2021 Survey"
 date: "2021-10-13T07:58:29+00:00"
-lastmod: "2021-10-13T08:03:36+00:00"
 description: "We are inviting all Payara Platform community users to answer a few questions about your use of the Payara Platform and ecosystem components!"
 authors:
   - "jadon-ortlepp"

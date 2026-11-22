@@ -1,7 +1,6 @@
 ---
 title: "Front End Debugging Part 3: Networking"
 date: "2025-02-27T16:34:04+00:00"
-lastmod: "2025-02-27T16:34:06+00:00"
 description: "Practical tips for debugging front-end network issues using browser tools, with insights on request replay, throttling & storage management."
 canonical: "https://debugagent.com/front-end-debugging-part-3-networking"
 authors:

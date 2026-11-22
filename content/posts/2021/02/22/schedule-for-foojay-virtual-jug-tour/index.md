@@ -1,7 +1,6 @@
 ---
 title: "Here's The Schedule for Foojay Virtual JUG Tour!"
 date: "2021-02-22T11:08:17+00:00"
-lastmod: "2021-09-03T13:44:16+00:00"
 description: "To celebrate the OpenJDK and Foojay.io, we’re kicking off the Virtual Foojay JUG Tour to be held throughout March and April."
 authors:
   - "ari-waller"

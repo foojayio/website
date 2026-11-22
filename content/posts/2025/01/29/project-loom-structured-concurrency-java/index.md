@@ -1,7 +1,6 @@
 ---
 title: "Project Loom: Structured Concurrency - Java"
 date: "2025-01-29T12:12:38+00:00"
-lastmod: "2025-01-29T12:12:40+00:00"
 description: "Learn about structured concurrency, a paradigm that simplifies concurrent programming by bringing order and predictability to task management."
 authors:
   - "mahendra1413"

@@ -1,7 +1,6 @@
 ---
 title: "From Zero (Really Zero) to OpenTelemetry"
 date: "2026-05-19T13:36:11+00:00"
-lastmod: "2026-05-21T17:49:44+00:00"
 description: "Use https://github.com/dash0hq/agent-skills, the free collection of skills for AI coding agents to make applications observable with OpenTelemetry."
 authors:
   - "geertjan-wielenga"

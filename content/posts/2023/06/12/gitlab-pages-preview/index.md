@@ -1,7 +1,6 @@
 ---
 title: "GitLab Pages Preview"
 date: "2023-06-12T08:55:31+00:00"
-lastmod: "2023-06-13T10:44:04+00:00"
 description: "How to preview GitLab Pages and share the preview's URL with teammates in a couple of steps."
 canonical: "https://blog.frankel.ch/gitlab-pages-preview/"
 authors:

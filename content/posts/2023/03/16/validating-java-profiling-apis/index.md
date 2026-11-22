@@ -1,7 +1,6 @@
 ---
 title: "Validating Java Profiling APIs"
 date: "2023-03-16T14:43:48+00:00"
-lastmod: "2023-03-16T14:44:27+00:00"
 description: "AsyncGetCallTrace is the base of many profilers, but how can we test it automatically to make sure it's correct? I'll explore a layered approach."
 authors:
   - "johannes-bechberger"

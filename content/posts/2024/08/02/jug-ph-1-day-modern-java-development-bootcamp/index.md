@@ -1,7 +1,6 @@
 ---
 title: "JUG PH: 1-Day Modern Java Development Bootcamp"
 date: "2024-08-02T07:53:16+00:00"
-lastmod: "2024-09-18T06:29:46+00:00"
 description: "A 1-Day Modern Java Bootcamp for IT students, early professionals, and career shifters with minimal Java or general programming experience."
 authors:
   - "tristan-mahinay"

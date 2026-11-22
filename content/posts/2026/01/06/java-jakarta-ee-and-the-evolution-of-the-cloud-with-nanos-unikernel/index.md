@@ -1,7 +1,6 @@
 ---
 title: "Java and Jakarta EE and the Evolution of the Cloud with Nanos Unikernel"
 date: "2026-01-06T20:51:09+00:00"
-lastmod: "2026-01-06T21:40:18+00:00"
 description: "Nanos shows that cloud-native can exist without adding complexity, and can be secure, faster, lighter, safer, more efficient, and more cost-effective."
 authors:
   - "angelo-rubini"

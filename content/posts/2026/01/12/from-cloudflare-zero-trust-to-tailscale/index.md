@@ -1,7 +1,6 @@
 ---
 title: "From Cloudflare Zero-trust to Tailscale"
 date: "2026-01-12T20:04:31+00:00"
-lastmod: "2026-09-21T05:59:26+00:00"
 description: "I have spent some time last year implementing Cloudflare Tunnels on my Home Assistant and my Synology NAS. On Mastodon, I had not one but two commenters…"
 canonical: "https://blog.frankel.ch/cloudflare-zero-trust-tailscale/"
 authors:

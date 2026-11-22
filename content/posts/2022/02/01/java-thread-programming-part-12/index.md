@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 12)"
 date: "2022-02-01T16:02:05+00:00"
-lastmod: "2022-02-01T16:02:06+00:00"
 description: "Let's find out what are the ways to create ThreadPool using Executor framework in java and use result-bearing tasks using Callable and Future"
 authors:
   - "bazlur-rahman"

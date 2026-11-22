@@ -1,7 +1,6 @@
 ---
 title: "Async file IO with Java and io_uring"
 date: "2025-04-18T09:28:16+00:00"
-lastmod: "2025-04-18T09:30:17+00:00"
 description: "Using Java together with Project Panama and virtual threads to create async file IO that is also very performant."
 canonical: "https://davidvlijmincx.com/posts/async-io-with-java-and-panama/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "New User Interface for JFX Central, the Home for JavaFX – Part 2"
 date: "2023-09-18T05:42:34+00:00"
-lastmod: "2023-09-18T05:55:24+00:00"
 description: "JFX Central is a not-for-profit team effort. Many people are involved, and any issue or pull request provided by anyone from the JavaFX community helps!"
 canonical: "https://webtechie.be/post/2023-09-07-jfxcentral-new-user-interface/"
 authors:

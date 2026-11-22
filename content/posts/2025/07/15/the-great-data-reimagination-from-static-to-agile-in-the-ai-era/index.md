@@ -1,7 +1,6 @@
 ---
 title: "The Great Data Reimagination: From Static to Agile in the AI Era"
 date: "2025-07-15T13:44:06+00:00"
-lastmod: "2025-07-15T13:44:08+00:00"
 description: "We’re in the middle of a fundamental change in how enterprise software works. In the next decade, your database will become your AI."
 authors:
   - "karin-lauria"

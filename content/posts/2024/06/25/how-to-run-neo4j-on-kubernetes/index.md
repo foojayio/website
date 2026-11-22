@@ -1,7 +1,6 @@
 ---
 title: "How to Run Neo4j on Kubernetes"
 date: "2024-06-25T19:34:00+00:00"
-lastmod: "2024-06-25T19:34:40+00:00"
 description: "For an upcoming event, I was asked to give a demo of how to run Neo4j on Kubernetes. I had very little experience with Kubernetes, so I decided to document my journey for later reference."
 authors:
   - "jennifer-reif"

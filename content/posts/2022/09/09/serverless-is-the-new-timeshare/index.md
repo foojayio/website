@@ -1,7 +1,6 @@
 ---
 title: "Serverless is the New Timeshare"
 date: "2022-09-09T07:53:18+00:00"
-lastmod: "2022-09-09T07:54:38+00:00"
 description: "Remember mainframes? Serverless is that: we own the machine and you rent out time on our big iron. We went full circle on progress..."
 canonical: "https://debugagent.com/serverless-is-the-new-timeshare"
 authors:

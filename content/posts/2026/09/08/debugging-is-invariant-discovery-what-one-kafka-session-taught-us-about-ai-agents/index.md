@@ -1,7 +1,6 @@
 ---
 title: "Debugging Is Invariant Discovery: What One Kafka Session Taught Us About AI Agents"
 date: "2026-09-08T14:14:36+00:00"
-lastmod: "2026-09-09T09:05:00+00:00"
 description: "Every Java team has a sentence like this one somewhere: Any operation on a TID must go through the single asynchronous path and must not let TMS and EMV…"
 authors:
   - "viktoria-evdokimova"

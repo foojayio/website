@@ -1,7 +1,6 @@
 ---
 title: "Why Java Developers Continue to Rely on Jakarta EE"
 date: "2021-05-05T07:53:59+00:00"
-lastmod: "2021-08-23T15:33:08+00:00"
 description: "Eclipse Foundation spoke to Java developers to discuss why they rely on Jakarta EE and the unique benefits of using Jakarta EE technologies."
 authors:
   - "ivar-grimstad"

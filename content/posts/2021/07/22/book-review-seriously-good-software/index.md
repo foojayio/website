@@ -1,7 +1,6 @@
 ---
 title: "New Book Review: Seriously Good Software"
 date: "2021-07-22T07:17:33+00:00"
-lastmod: "2021-09-04T07:45:39+00:00"
 description: "This is another book that I can warmly recommend to Java programmers who have learned to code and strive to code well!"
 authors:
   - "cay-horstmann"

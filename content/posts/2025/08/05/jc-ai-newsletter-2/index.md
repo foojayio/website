@@ -1,7 +1,6 @@
 ---
 title: "JC-AI Newsletter #2"
 date: "2025-08-05T06:30:03+00:00"
-lastmod: "2025-10-14T05:40:12+00:00"
 description: "The JC-AI Newsletter Vol.2 brings again a very interesting collection of articles worth considering."
 authors:
   - "miro-wengner"

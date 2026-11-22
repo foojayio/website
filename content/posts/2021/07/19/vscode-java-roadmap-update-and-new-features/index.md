@@ -1,7 +1,6 @@
 ---
 title: "VSCode Java: Roadmap Update and New Features"
 date: "2021-07-19T07:24:03+00:00"
-lastmod: "2021-07-19T07:43:31+00:00"
 description: "Welcome to the special mid-year edition for Visual Studio Code Java updates, where we look at our product roadmap for the next few months!"
 authors:
   - "nick-zhu"

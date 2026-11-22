@@ -1,7 +1,6 @@
 ---
 title: "Error Handling in Java and Across Different Languages"
 date: "2022-03-21T11:23:46+00:00"
-lastmod: "2022-03-21T11:23:47+00:00"
 description: "In this post, I'd like to describe how a couple of popular languages cope with errors. Get started here for an overview of errors everywhere!"
 canonical: "https://blog.frankel.ch/error-handling/"
 authors:

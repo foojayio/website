@@ -1,7 +1,6 @@
 ---
 title: "What is An Application Server? In 3 Minutes!"
 date: "2022-12-01T17:01:44+00:00"
-lastmod: "2022-12-01T17:06:41+00:00"
 description: "Learn the difference between application servers and web servers, what an application server can do to make your life as a developer easier!"
 canonical: "https://blog.payara.fish/what-is-an-application-server-jakarta-ee"
 authors:

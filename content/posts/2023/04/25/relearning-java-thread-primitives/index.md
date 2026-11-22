@@ -1,7 +1,6 @@
 ---
 title: "Relearning Java Thread Primitives"
 date: "2023-04-25T05:26:16+00:00"
-lastmod: "2023-04-25T05:27:03+00:00"
 description: "\"Synchronized\" was revolutionary and still has great uses. But it's time to move to newer thread primitives and rethink our core logic."
 authors:
   - "shai-almog"

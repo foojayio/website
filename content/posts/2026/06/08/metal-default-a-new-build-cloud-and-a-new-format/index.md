@@ -1,7 +1,6 @@
 ---
 title: "Metal Default, A New Build Cloud, And A New Format"
 date: "2026-06-08T09:47:43+00:00"
-lastmod: "2026-06-08T10:25:31+00:00"
 description: "The iOS Metal renderer is now the default, the new Build Cloud console is wired into every Dashboard link on the site, and the weekly release blog is movin"
 canonical: "https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/"
 authors:

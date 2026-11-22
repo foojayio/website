@@ -1,7 +1,6 @@
 ---
 title: "Choosing a dependency"
 date: "2025-11-07T17:44:37+00:00"
-lastmod: "2026-09-21T06:01:06+00:00"
 description: "Fun fact, I thought I had already written this post, but when I wanted to reference it, I found out that I didn't. In this post, I'd like to describe my…"
 canonical: "https://blog.frankel.ch/choosing-dependency/"
 authors:

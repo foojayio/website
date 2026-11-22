@@ -1,7 +1,6 @@
 ---
 title: "Firefox Profiler Beyond the Web: IntelliJ plugin for JFR"
 date: "2023-02-02T13:13:17+00:00"
-lastmod: "2023-02-02T13:13:18+00:00"
 description: "Ever wanted to profile your application directly from your IDE? Here comes the Java JFR Profiler plugin, an open-source plugin for IntelliJ!"
 authors:
   - "johannes-bechberger"

@@ -1,7 +1,6 @@
 ---
 title: "Mastering Serverless Debugging"
 date: "2024-07-29T10:14:26+00:00"
-lastmod: "2024-07-29T10:15:22+00:00"
 description: "Discover effective strategies for debugging serverless and AWS Lambda. Serverless can be painful, but not a bottomless pit of despair."
 canonical: "https://debugagent.com/mastering-serverless-debugging"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "How To Get Your JDK As Easily As Possible!"
 date: "2021-07-20T07:00:31+00:00"
-lastmod: "2021-07-20T07:01:30+00:00"
 description: "After creating the Disco API, I had the idea to create plugins for IDEs and browsers to enable more easy JDK downloading."
 authors:
   - "gerrit-grunwald"

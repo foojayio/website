@@ -1,7 +1,6 @@
 ---
 title: "Integrate executable Java code in your blog posts"
 date: "2023-11-07T14:49:57+00:00"
-lastmod: "2023-11-08T09:05:17+00:00"
 description: "Thanks to JDoodle you can now also add executable code to your Foojay content!"
 authors:
   - "frankdelporte"

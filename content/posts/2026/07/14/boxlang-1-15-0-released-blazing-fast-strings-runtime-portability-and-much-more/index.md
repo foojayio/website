@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.15.0 Released: Blazing Fast Strings, Runtime Portability, and much more"
 date: "2026-07-14T17:57:10+00:00"
-lastmod: "2026-07-14T17:57:12+00:00"
 description: "BoxLang 1.15.0 is a high-impact release with two big headlines and a long tail of hardening. The first headline is a massive performance upgrade to string…"
 authors:
   - "cristobal-escobar"

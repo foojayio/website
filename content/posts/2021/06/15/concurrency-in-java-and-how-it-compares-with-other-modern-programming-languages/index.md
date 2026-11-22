@@ -1,7 +1,6 @@
 ---
 title: "Concurrency in Java (Compared with Other Programming Languages)"
 date: "2021-06-15T08:05:50+00:00"
-lastmod: "2021-06-15T10:58:10+00:00"
 description: "Learn about concurrency in modern programming languages and how to build and benchmark a concurrent web server in Java."
 canonical: "https://deepu.tech/concurrency-in-modern-languages-java/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "How to create SBOMs in Java with Maven and Gradle"
 date: "2023-03-17T09:08:28+00:00"
-lastmod: "2023-03-17T09:21:56+00:00"
 description: "Java is a compiled language, so you should create an SBOM whenever you build a release version of your application. Find out more here!"
 canonical: "https://snyk.io/blog/create-sboms-java-maven-gradle/"
 authors:

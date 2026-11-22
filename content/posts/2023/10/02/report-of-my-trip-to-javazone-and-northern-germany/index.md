@@ -1,7 +1,6 @@
 ---
 title: "Report of My Trip to JavaZone and Northern Germany"
 date: "2023-10-02T08:44:28+00:00"
-lastmod: "2023-10-02T08:44:29+00:00"
 description: "Between 2nd and 17th September, I gave three talks in three different cities!"
 authors:
   - "johannes-bechberger"

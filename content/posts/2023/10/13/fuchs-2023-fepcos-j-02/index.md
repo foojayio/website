@@ -1,7 +1,6 @@
 ---
 title: "FEPCOS-J (2) – Declaratively compose networked systems in Java"
 date: "2023-10-13T06:07:00+00:00"
-lastmod: "2023-10-13T06:07:01+00:00"
 description: "Compose networked systems like building blocks. An example illustrates how a Java developer can do this by using FEPCOS-J. Read more."
 authors:
   - "gerhard-fuchs"

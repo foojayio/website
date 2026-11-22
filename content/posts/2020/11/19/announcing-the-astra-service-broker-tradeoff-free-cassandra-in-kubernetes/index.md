@@ -1,7 +1,6 @@
 ---
 title: "Astra Service Broker: Tradeoff-Free Cassandra in Kubernetes"
 date: "2020-11-19T19:52:00+00:00"
-lastmod: "2021-11-10T08:50:01+00:00"
 description: "DataStax Astra Service Broker: seamlessly integrate Cassandra into your Kubernetes deployments and leave the operations to somebody else!"
 canonical: "https://www.datastax.com/blog/2020/11/announcing-astra-service-broker-tradeoff-free-cassandra-kubernetes"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Four Easy Ways to Analyze your Java and Kotlin Code for Security Problems"
 date: "2024-08-30T09:07:43+00:00"
-lastmod: "2024-08-30T09:12:52+00:00"
 description: "Nowadays, the security of your applications is just as important as the functionality they provide. Therefore, analyzing your code for security vulnerabilities is a vital part of maintaining the integrity of your applications and protecting your users' data."
 canonical: "https://snyk.io/blog/analyze-java-kotlin-code/"
 authors:

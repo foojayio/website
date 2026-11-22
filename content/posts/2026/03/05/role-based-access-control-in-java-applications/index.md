@@ -1,7 +1,6 @@
 ---
 title: "Role-Based Access Control in Java Applications"
 date: "2026-03-05T20:31:49+00:00"
-lastmod: "2026-03-05T20:31:51+00:00"
 description: "In this article, we will explore how to implement RBAC at the application level, using MongoDB to store user metadata and keeping the authorization logic close to the core of the system. The goal is not only to make things secure, but also to make them architecturally consistent. All the code used in this article is inside this repository."
 authors:
   - "matteo-rossi"

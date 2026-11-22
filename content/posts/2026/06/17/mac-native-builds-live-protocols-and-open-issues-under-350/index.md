@@ -1,7 +1,6 @@
 ---
 title: "Mac Native Builds, Live Protocols, And Open Issues Under 350"
 date: "2026-06-17T15:03:06+00:00"
-lastmod: "2026-06-18T13:39:39+00:00"
 description: "The open issue count dropped below 350 after a push through the oldest reports, and the same week brought native Mac builds, WebSockets in the core, gRPC a"
 canonical: "https://www.codenameone.com/blog/mac-native-grpc-graphql-and-fewer-open-issues/"
 authors:

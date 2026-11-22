@@ -1,7 +1,6 @@
 ---
 title: "Vaadin 22 released with Quarkus support and stateless Fusion"
 date: "2021-12-01T15:38:30+00:00"
-lastmod: "2021-12-16T09:22:33+00:00"
 description: "Vaadin 22 is the latest release of the open source web app development platform. It includes Quarkus support and stateless Fusion!"
 authors:
   - "marcus-hellberg"

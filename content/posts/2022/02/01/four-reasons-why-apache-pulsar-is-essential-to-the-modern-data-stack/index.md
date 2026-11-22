@@ -1,7 +1,6 @@
 ---
 title: "Four Reasons Why Apache Pulsar is Essential to the Modern Data Stack"
 date: "2022-02-01T22:14:58+00:00"
-lastmod: "2022-02-01T22:17:31+00:00"
 description: "Messaging has been on DataStax’s radar for several years. Let’s learn the top reasons why we should consider Apache Pulsar."
 canonical: "https://datastax.medium.com/four-reasons-why-apache-pulsar-is-essential-to-the-modern-data-stack-b90a8bddcb9"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Challenges when Developing a GUI for FIX"
 date: "2022-12-21T08:06:18+00:00"
-lastmod: "2022-12-21T10:36:50+00:00"
 description: "In this article, we explore the challenges in developing a Graphical User Interface (GUI) for Financial Information Exchange (FIX) data."
 authors:
   - "rob-austin"

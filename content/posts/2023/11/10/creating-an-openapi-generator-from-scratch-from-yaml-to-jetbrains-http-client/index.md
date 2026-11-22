@@ -1,7 +1,6 @@
 ---
 title: "OpenAPI Generator: From YAML to JetBrains HTTP Client"
 date: "2023-11-10T10:41:35+00:00"
-lastmod: "2023-11-10T11:03:10+00:00"
 description: "In this article, I'll be implementing an openapi generator from scratch so you can too! We'll be creating a very simple generator for the Jetbrains HTTP Client."
 authors:
   - "jlengrand"

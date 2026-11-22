@@ -1,7 +1,6 @@
 ---
 title: "Understanding JVM Memory Layout with OpenJDK24's New PrintMemoryMapAtExit VM Option"
 date: "2024-07-27T10:38:31+00:00"
-lastmod: "2024-07-27T10:47:25+00:00"
 description: "OpenJDK24 recently added a new HotSpot JVM option called PrintMemoryMapAtExit."
 authors:
   - "chriswhocodes"

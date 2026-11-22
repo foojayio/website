@@ -1,7 +1,6 @@
 ---
 title: "New Book: FXGL 17 -- Learn JavaFX Game and App Development"
 date: "2022-09-19T11:39:12+00:00"
-lastmod: "2022-09-19T12:03:36+00:00"
 description: "New book for beginners in Java and/or JavaFX who wish to develop apps and games with FXGL, while improving Java and JavaFX skills."
 authors:
   - "almasbaimagambetov"

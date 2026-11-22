@@ -1,7 +1,6 @@
 ---
 title: "Building an Agentic Warehouse Management System — Part 2: Java and Spring AI"
 date: "2026-09-03T16:39:59+00:00"
-lastmod: "2026-09-04T14:05:01+00:00"
 description: "We will look at how the agent is built with Java and Spring AI, how its capabilities and boundaries are defined, how it is triggered by the WMS, and how the planner turns the agent’s goal into an execution plan."
 authors:
   - "ricardo-mello"

@@ -1,7 +1,6 @@
 ---
 title: "Exposing your data using Spring GraphQL"
 date: "2023-09-19T05:25:46+00:00"
-lastmod: "2023-09-19T08:34:54+00:00"
 description: "An introductory look at how we can use Spring GraphQL in our Java applications."
 authors:
   - "simon-verhoeven"

@@ -1,7 +1,6 @@
 ---
 title: "Announcing the Build Server for Gradle Open-Source Repository"
 date: "2023-11-21T10:08:33+00:00"
-lastmod: "2023-11-21T10:09:01+00:00"
 description: "We are excited to announce our decision to officially open-source the Build Server for Gradle project!"
 authors:
   - "nick-zhu"

@@ -1,7 +1,6 @@
 ---
 title: "Join Friends Of OpenJDK at FOSDEM 2021"
 date: "2020-12-17T15:31:43+00:00"
-lastmod: "2021-08-23T12:50:20+00:00"
 description: "Organizations included in setting up the Foojay dev room, all active on Foojay.io in one way or another, are Azul, JFrog, Payara, and Snyk."
 authors:
   - "geertjan-wielenga"

@@ -1,7 +1,6 @@
 ---
 title: "How to create your own custom Spring Data repository"
 date: "2021-04-14T07:33:08+00:00"
-lastmod: "2021-04-14T07:33:11+00:00"
 description: "how one can use Arrow's type system with Spring Data. You can benefit from the explanations to craft your custom Spring Data repository."
 canonical: "https://blog.frankel.ch/custom-spring-data-repository/"
 authors:

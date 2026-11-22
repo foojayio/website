@@ -1,7 +1,6 @@
 ---
 title: "Cherry-Pick: Move a Commit to a Different Branch"
 date: "2023-04-05T13:53:20+00:00"
-lastmod: "2023-08-03T08:27:44+00:00"
 description: "Moving a commit to a different branch: not nearly as scary as it sounds! Let the IDE help to turn this into a quick, low-stress task."
 canonical: "https://maritvandijk.com/cherry-pick-move-a-commit-to-a-different-branch/"
 authors:

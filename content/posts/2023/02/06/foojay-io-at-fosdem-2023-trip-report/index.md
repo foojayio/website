@@ -1,7 +1,6 @@
 ---
 title: "Foojay.io at FOSDEM 2023 Trip Report"
 date: "2023-02-06T20:58:47+00:00"
-lastmod: "2023-02-07T16:00:21+00:00"
 description: "\"What if Simon Ritter's keynote at FOSDEM entitled 'After Nearly 30 Years, How Is Java So Popular?' ends up being held... in an empty room?\""
 authors:
   - "geertjan-wielenga"

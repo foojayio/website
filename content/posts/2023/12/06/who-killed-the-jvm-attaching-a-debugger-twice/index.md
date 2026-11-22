@@ -1,7 +1,6 @@
 ---
 title: "Who Killed the JVM? Attaching a Debugger Twice"
 date: "2023-12-06T17:17:47+00:00"
-lastmod: "2023-12-06T17:17:48+00:00"
 description: "The ability to disconnect and then reattach debuggers is helpful for many complex debugging scenarios and can help you debug faster."
 authors:
   - "johannes-bechberger"

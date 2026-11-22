@@ -1,7 +1,6 @@
 ---
 title: "Introduction to intermediate operations modeler: Stream Gatherers"
 date: "2025-03-19T13:04:14+00:00"
-lastmod: "2025-03-19T13:04:15+00:00"
 description: "Gatherers is a new and powerful API that enhances the Stream API by modeling intermediate operations and allowing the definition of custom intermediate operations."
 authors:
   - "huseyin-akdogan"

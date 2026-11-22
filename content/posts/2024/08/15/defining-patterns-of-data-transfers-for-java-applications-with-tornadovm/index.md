@@ -1,7 +1,6 @@
 ---
 title: "Defining patterns of data transfers for Java applications with TornadoVM"
 date: "2024-08-15T15:43:56+00:00"
-lastmod: "2024-11-13T13:37:51+00:00"
 description: "How TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards."
 authors:
   - "thanos-stratikopoulos"

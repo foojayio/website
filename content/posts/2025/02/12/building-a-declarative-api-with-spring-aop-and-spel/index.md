@@ -1,7 +1,6 @@
 ---
 title: "Building a declarative API with Spring AOP and SpEL"
 date: "2025-02-12T15:57:11+00:00"
-lastmod: "2025-02-12T15:59:07+00:00"
 description: "See how to implement a declarative API with Spring AOP and SpEL to perform tasks belonging to cross-cutting concerns like auditing."
 canonical: "https://lemikaelf.github.io/blog/posts/spel-arguments/"
 authors:

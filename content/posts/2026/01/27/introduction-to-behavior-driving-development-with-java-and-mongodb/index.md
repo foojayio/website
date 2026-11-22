@@ -1,7 +1,6 @@
 ---
 title: "Introduction to Behavior Driving Development with Java and MongoDB"
 date: "2026-01-27T16:35:53+00:00"
-lastmod: "2026-01-27T16:35:55+00:00"
 description: "When we face software development, the biggest mistake is about delivering what the client wants. It sounds like a cliché, but after decades, we are still facing this problem. One good way to solve it is to start the test focusing on what the business needs."
 authors:
   - "otavio-santana"

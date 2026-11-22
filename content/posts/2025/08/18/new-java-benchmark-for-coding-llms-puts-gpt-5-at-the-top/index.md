@@ -1,7 +1,6 @@
 ---
 title: "New Java Benchmark for Coding LLMs puts GPT-5 at the top"
 date: "2025-08-18T08:06:40+00:00"
-lastmod: "2025-08-18T14:39:43+00:00"
 description: "The Brokk Power Ranking is a new open-source coding benchmark, featuring 93 tasks from large, real-world codebases."
 canonical: "https://blog.brokk.ai/introducing-the-brokk-power-ranking/"
 authors:

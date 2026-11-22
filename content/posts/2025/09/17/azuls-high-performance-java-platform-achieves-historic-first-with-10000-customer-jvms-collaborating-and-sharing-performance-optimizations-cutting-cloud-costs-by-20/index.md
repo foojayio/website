@@ -1,7 +1,6 @@
 ---
 title: "Azul’s High-Performance Java Platform Achieves Historic First"
 date: "2025-09-17T16:49:56+00:00"
-lastmod: "2025-09-17T16:56:59+00:00"
 description: "Fleet-level advantages achieved for cloud-native Java applications with faster warm-up, smoother scaling and reduced cost."
 canonical: "https://www.azul.com/newsroom/azuls-high-performance-java-platform-achieves-historic-first-with-10000-customer-jvms-collaborating-and-sharing-performance-optimizations-cutting-cloud-costs-by-20/"
 authors:

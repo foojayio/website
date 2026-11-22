@@ -1,7 +1,6 @@
 ---
 title: "Run a Java Lambda Function From a Docker image"
 date: "2024-12-11T16:16:36+00:00"
-lastmod: "2024-12-11T22:24:06+00:00"
 description: "The Hello Lambda Function project contains an AWS Lambda maven application with AWS Java SDK 2.x dependencies."
 authors:
   - "charl-fasching"

@@ -1,7 +1,6 @@
 ---
 title: "Using Async-Profiler and Jattach Programmatically with AP-Loader"
 date: "2023-05-04T11:45:20+00:00"
-lastmod: "2023-05-04T11:45:22+00:00"
 description: "AP-Loader wraps async-profiler and its tools with an API in a cross-platform JAR. This article is about the API."
 authors:
   - "johannes-bechberger"

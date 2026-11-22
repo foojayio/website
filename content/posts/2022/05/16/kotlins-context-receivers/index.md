@@ -1,7 +1,6 @@
 ---
 title: "Toying with Kotlin's Context Receivers"
 date: "2022-05-16T10:39:04+00:00"
-lastmod: "2022-05-16T10:39:06+00:00"
 description: "Learn about Kotlin context receivers to be able to pass additional parameters to a function without having to do it explicitly."
 canonical: "https://blog.frankel.ch/kotlin-context-receivers/"
 authors:

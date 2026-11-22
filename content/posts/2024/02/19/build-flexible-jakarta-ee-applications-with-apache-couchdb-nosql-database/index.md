@@ -1,7 +1,6 @@
 ---
 title: "Flexible Jakarta EE Apps With Apache CouchDB NoSQL Database"
 date: "2024-02-19T07:33:38+00:00"
-lastmod: "2024-02-19T07:36:16+00:00"
 description: "Are you a Jakarta EE developer interested in leveraging the power of NoSQL databases for your applications?"
 canonical: "https://blog.payara.fish/build-flexible-jakarta-ee-applications-with-apache-couchdb-nosql-database-watch-the-recording"
 authors:

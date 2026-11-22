@@ -1,7 +1,6 @@
 ---
 title: "Payara Launches Jakarta EE 10 Platform Compatible Product"
 date: "2022-09-22T16:05:19+00:00"
-lastmod: "2022-09-22T16:05:21+00:00"
 description: "With the launch of Jakarta EE 10 today, Payara releases Payara 6 Community Alpha 4 immediately, bringing new features!"
 authors:
   - "jadon-ortlepp"

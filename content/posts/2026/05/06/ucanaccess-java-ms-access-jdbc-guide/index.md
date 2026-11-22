@@ -1,7 +1,7 @@
 ---
 title: "UCanAccess: The Modern Pure-Java Bridge to Microsoft Access"
 date: "2026-05-06T08:44:00+00:00"
-lastmod: "2026-10-23T20:00:00+00:00"
+updated: "2026-10-23T20:00:00+00:00"
 description: "Learn how to connect Java applications to Microsoft Access (.accdb/.mdb) using UCanAccess. A pure-Java, open-source JDBC driver for cross-platform database access."
 authors:
   - "markus-spann"

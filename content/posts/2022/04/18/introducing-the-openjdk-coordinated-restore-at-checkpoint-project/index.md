@@ -1,7 +1,6 @@
 ---
 title: "Introducing the \"Coordinated Restore at Checkpoint\" Project"
 date: "2022-04-18T08:13:55+00:00"
-lastmod: "2024-02-07T21:59:53+00:00"
 description: "Do you want to dramatically decrease JVM startup time, from hundreds of seconds to tenths of milliseconds? Find out about Java on CRaC."
 authors:
   - "gerrit-grunwald"

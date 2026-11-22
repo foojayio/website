@@ -1,7 +1,6 @@
 ---
 title: "A Comprehensive Guide to Java Virtual Threads (Part 1)"
 date: "2023-05-09T08:33:12+00:00"
-lastmod: "2023-09-11T17:51:15+00:00"
 description: "Learn about Java Virtual Threads, how they simplify concurrent programming, how they overcome the limitations of traditional Java threads."
 authors:
   - "bazlur-rahman"

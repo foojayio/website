@@ -1,7 +1,6 @@
 ---
 title: "Error management in Rust, and libs that support it"
 date: "2024-02-12T17:54:19+00:00"
-lastmod: "2026-09-21T06:03:59+00:00"
 description: "As part of learning the Rust ecosystem, I dedicated the last few days to error management. Here are my findings. Error management 101 The Rust book…"
 canonical: "https://blog.frankel.ch/error-management-rust-libs/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Authoring an OpenRewrite Recipe"
 date: "2025-06-09T17:22:13+00:00"
-lastmod: "2025-06-11T19:16:35+00:00"
 description: "I've been eying OpenRewrite for some time, but I haven't had time to play with it... yet."
 canonical: "https://blog.frankel.ch/openrewrite-recipes/1/"
 authors:

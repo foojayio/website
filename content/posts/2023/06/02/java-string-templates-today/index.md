@@ -1,7 +1,6 @@
 ---
 title: "Java String Templates Today"
 date: "2023-06-02T16:28:25+00:00"
-lastmod: "2023-06-02T16:29:05+00:00"
 description: "String manipulation is improving (JEP 430), but Manifold can help us now. Even on JDK 8, it goes further with a sophisticated template engine"
 canonical: "https://debugagent.com/java-string-templates-today"
 authors:

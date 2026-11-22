@@ -1,7 +1,6 @@
 ---
 title: "Unique Identifiers Based on Timestamps in Distributed Applications"
 date: "2023-06-14T11:22:03+00:00"
-lastmod: "2023-06-29T06:40:30+00:00"
 description: "Generate a highly efficient approach to generating an 8-byte lightweight identifier that is unique across many hosts."
 authors:
   - "peter-lawrey"

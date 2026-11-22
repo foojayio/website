@@ -1,7 +1,6 @@
 ---
 title: "Example Java Application with Embedded Jetty and a htmx Website"
 date: "2024-06-21T08:59:42+00:00"
-lastmod: "2024-06-21T08:59:43+00:00"
 description: "I was experimenting with a Java application that can act as a web server and includes the user interface HTML-files that get modified with htmx, to replace certain parts of the HTML with other ones created in Java."
 canonical: "https://webtechie.be/post/2024-03-28-java-jetty-htmx-websocket-example/"
 authors:

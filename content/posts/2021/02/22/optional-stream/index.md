@@ -1,7 +1,6 @@
 ---
 title: "Learning About Optional.stream() in OpenJDK and Java"
 date: "2021-02-22T17:11:33+00:00"
-lastmod: "2021-08-23T12:44:08+00:00"
 description: "This week, I learned about a \"new\" feature of Optional that I want to share in this post. Available since Java 9, its novelty is relative."
 canonical: "https://blog.frankel.ch/optional-stream/"
 authors:

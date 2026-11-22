@@ -1,7 +1,6 @@
 ---
 title: "Vaadin 24.4 Adds React Support, In-App Coding Assistant"
 date: "2024-06-12T14:38:32+00:00"
-lastmod: "2024-06-12T14:38:33+00:00"
 description: "Vaadin 24.4: Vaadin Copilot, Hilla integration, and React support in Flow."
 authors:
   - "marcus-hellberg"

@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links Of October"
 date: "2022-10-31T16:15:24+00:00"
-lastmod: "2022-10-31T16:15:26+00:00"
 description: "When I (re)started the JavaFX Links Of The Week in September, I was wondering if there would be enough material to share every week..."
 authors:
   - "frankdelporte"

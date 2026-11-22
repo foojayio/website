@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with bld"
 date: "2024-04-15T18:31:32+00:00"
-lastmod: "2024-04-16T13:24:32+00:00"
 description: "bld is an up-and-coming build tool for the Java ecosystem. This article guides you through getting set up to use it in your own projects."
 authors:
   - "ethan-mccue"

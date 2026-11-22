@@ -1,7 +1,6 @@
 ---
 title: "Native GraphQL API with Neo4j AuraDB on Heroku"
 date: "2022-08-08T07:29:38+00:00"
-lastmod: "2022-08-08T07:39:08+00:00"
 description: "Learn how to write a GraphQL API that uses Neo4j AuraDB as a backend with Quarkus and deploy it as a native image on Heroku."
 authors:
   - "michael-simons"

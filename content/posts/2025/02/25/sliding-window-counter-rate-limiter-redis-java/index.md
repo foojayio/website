@@ -1,7 +1,6 @@
 ---
 title: "Sliding Window Counter Rate Limiter (Redis & Java)"
 date: "2025-02-25T21:21:11+00:00"
-lastmod: "2025-05-02T12:50:43+00:00"
 description: "Learn how to implement a Sliding Window Counter Rate Limiter using Redis and Java. Discover an efficient way to manage API request limits."
 canonical: "https://medium.com/redis-with-raphael-de-lio/sliding-window-counter-rate-limiter-redis-java-1ba8901c02e5"
 authors:

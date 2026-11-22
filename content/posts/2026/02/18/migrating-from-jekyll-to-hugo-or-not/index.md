@@ -1,7 +1,6 @@
 ---
 title: "Migrating from Jekyll to Hugo... or not"
 date: "2026-02-18T19:29:45+00:00"
-lastmod: "2026-09-21T05:59:06+00:00"
 description: "Most of my blog posts are lessons learned. I'm trying to achieve something, and I document the process I used to do it. This one is one of the few where,…"
 canonical: "https://blog.frankel.ch/migrating-jekyll-hugo/"
 authors:

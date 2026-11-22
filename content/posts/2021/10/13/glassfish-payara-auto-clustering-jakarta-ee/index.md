@@ -1,7 +1,6 @@
 ---
 title: "GlassFish & Payara Auto-Clustering for Jakarta EE Applications"
 date: "2021-10-13T13:27:30+00:00"
-lastmod: "2021-10-13T13:29:34+00:00"
 description: "Check out out-of-box GlassFish & Payara auto-clustering implementation details and infrastructure topology specifics!"
 authors:
   - "tetiana-fydorenchyk"

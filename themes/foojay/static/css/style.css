@@ -2297,7 +2297,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 .post-categories--top { margin-bottom: .9rem; }
-.reading-time { color: var(--ink-muted); }
+.reading-time, .updated { color: var(--ink-muted); }
 /* The read counter. tabular-nums so a column of cards doesn't jitter as the
    digit widths change, nowrap so "11,459 views" never breaks across lines. */
 .views {

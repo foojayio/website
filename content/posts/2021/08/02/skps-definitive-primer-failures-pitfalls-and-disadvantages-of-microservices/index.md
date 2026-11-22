@@ -1,7 +1,6 @@
 ---
 title: "SKP's Primer: Failures, Pitfalls, and Disadvantages of Microservices"
 date: "2021-08-02T09:35:44+00:00"
-lastmod: "2021-10-11T14:04:44+00:00"
 description: "Pitfalls, failures, and disadvantages of microservices, a one stop reference and gateway for principal architects for decisions of go/no-go."
 authors:
   - "sumith-puri"

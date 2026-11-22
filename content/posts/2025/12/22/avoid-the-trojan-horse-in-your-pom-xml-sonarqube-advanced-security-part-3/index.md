@@ -1,7 +1,6 @@
 ---
 title: "Stop the trojan horse in your pom: SonarQube Advace Security"
 date: "2025-12-22T10:42:41+00:00"
-lastmod: "2025-12-22T10:42:43+00:00"
 description: "Your code is safe, but are your dependencies? Part 3 reveals how SonarQube Advanced Security detects hidden CVEs, manages licenses, and generates SBOMs to secure your Java supply chain."
 authors:
   - "jonathan-vila"

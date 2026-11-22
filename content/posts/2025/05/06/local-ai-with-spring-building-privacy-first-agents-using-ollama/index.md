@@ -1,7 +1,6 @@
 ---
 title: "Local AI with Spring: Building Privacy-First Agents Using Ollama"
 date: "2025-05-06T06:44:07+00:00"
-lastmod: "2025-05-06T06:44:08+00:00"
 description: "Build local AI with Spring: private, cost-efficient local running AI agents with Spring AI and Ollama. Keep your AI under control!"
 authors:
   - "bruno-oliveira"

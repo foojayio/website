@@ -1,7 +1,6 @@
 ---
 title: "Low Latency Crypto Trading Systems with Java and Chronicle"
 date: "2022-10-18T14:59:37+00:00"
-lastmod: "2022-10-18T14:59:39+00:00"
 description: "Chronicle-Services framework allows running the market data connectors within a single event loop, which is designed to minimize latency."
 authors:
   - "ivan-rakov"

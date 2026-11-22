@@ -1,7 +1,6 @@
 ---
 title: "Interview: Chris Newland & Java Command Line Switches"
 date: "2020-08-31T07:12:40+00:00"
-lastmod: "2020-09-03T09:44:46+00:00"
 description: "We're happy to announce that we’re hosting Chris Newland’s VMOptionsExplorer on foojay, providing all details per release on Java command line switches."
 authors:
   - "geertjan-wielenga"

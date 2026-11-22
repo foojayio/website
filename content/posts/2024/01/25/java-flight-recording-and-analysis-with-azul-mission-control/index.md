@@ -1,7 +1,6 @@
 ---
 title: "Java Flight Recording and Analysis with Azul Mission Control"
 date: "2024-01-25T07:59:42+00:00"
-lastmod: "2024-01-25T08:00:21+00:00"
 description: "With Azul Mission Control, you can delve deep into JFR recordings to optimize your code and ensure it runs smoothly and error-free."
 authors:
   - "frankdelporte"

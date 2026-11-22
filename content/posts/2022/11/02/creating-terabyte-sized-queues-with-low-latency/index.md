@@ -1,7 +1,6 @@
 ---
 title: "Creating Terabyte Sized Queues with Low-Latency"
 date: "2022-11-02T10:45:07+00:00"
-lastmod: "2022-11-30T08:24:33+00:00"
 description: "Learn how to create huge persisted queues while retaining predictable and consistent low latency using open-source Chronicle Queue!"
 authors:
   - "per-minborg"

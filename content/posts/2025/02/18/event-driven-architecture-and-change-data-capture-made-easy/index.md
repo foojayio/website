@@ -1,7 +1,6 @@
 ---
 title: "Event-Driven Architecture and Change Data Capture Made Easy"
 date: "2025-02-18T16:44:14+00:00"
-lastmod: "2025-02-18T16:44:16+00:00"
 description: "Learn about Event-Driven Architecture (EDA) and Change Data Capture (CDC), their use cases, and how they can work together. learn more"
 authors:
   - "abo-saad-muaath"

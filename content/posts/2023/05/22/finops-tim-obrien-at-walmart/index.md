@@ -1,7 +1,6 @@
 ---
 title: "FinOps: Tim O'Brien at Walmart"
 date: "2023-05-22T06:01:54+00:00"
-lastmod: "2023-05-23T14:14:09+00:00"
 description: "\"Java and the Java community are what brought me to this role, but my focus is now on Cloud cost, budget, and ideas for efficiency.\""
 authors:
   - "geertjan-wielenga"

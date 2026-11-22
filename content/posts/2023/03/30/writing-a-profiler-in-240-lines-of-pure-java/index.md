@@ -1,7 +1,6 @@
 ---
 title: "Writing a Profiler in 240 Lines of Pure Java"
 date: "2023-03-30T07:14:46+00:00"
-lastmod: "2023-03-30T07:14:47+00:00"
 description: "How to develop a tiny Java profiler, that can output flame graphs, in just 240 lines of pure Java, making it easy for anyone to understand."
 authors:
   - "johannes-bechberger"

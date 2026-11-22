@@ -1,7 +1,6 @@
 ---
 title: "7 Functional Programming Techniques in Java: A Primer"
 date: "2021-05-11T07:34:52+00:00"
-lastmod: "2021-08-23T12:22:16+00:00"
 description: "In this article I'm going to focus on things that you can do in Java which are in line with functional programming concepts."
 canonical: "https://deepu.tech/functional-programming-in-java-for-beginners/"
 authors:

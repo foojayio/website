@@ -1,7 +1,6 @@
 ---
 title: "Java Predictions for 2021: Raspberry Pi and Java"
 date: "2020-12-26T09:06:38+00:00"
-lastmod: "2021-12-10T13:01:30+00:00"
 description: "To celebrate Java and predict highlights for 2021, several key Foojay participants will share their thoughts, starting with Frank Delporte!"
 authors:
   - "frankdelporte"

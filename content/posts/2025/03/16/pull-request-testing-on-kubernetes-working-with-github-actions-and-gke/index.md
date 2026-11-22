@@ -1,7 +1,6 @@
 ---
 title: "Pull Request testing on Kubernetes: Working with GitHub Actions and GKE"
 date: "2025-03-16T15:44:27+00:00"
-lastmod: "2025-03-17T08:27:54+00:00"
 description: "In this article, we'll achieved several milestones toward the end-to-end testing goal."
 canonical: "https://blog.frankel.ch/pr-testing-kubernetes/2/"
 authors:

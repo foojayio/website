@@ -1,7 +1,6 @@
 ---
 title: "Book Announcement: \"OpenJDK Migration Guide for Dummies\""
 date: "2023-08-01T16:15:47+00:00"
-lastmod: "2024-06-30T11:17:04+00:00"
 description: "Learn how to migrate to OpenJDK and get tips on how to select the right Java partner to assist with your migration and provide suppoer."
 authors:
   - "geertjan-wielenga"

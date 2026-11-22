@@ -1,7 +1,6 @@
 ---
 title: "Bringing Raspberry Pico to Quarkus with Firmata"
 date: "2026-09-07T06:06:42+00:00"
-lastmod: "2026-09-07T06:08:21+00:00"
 description: "Java applications are usually associated with APIs, databases, messaging systems, and cloud infrastructure. But Java can also interact with the physical…"
 authors:
   - "igor-de-souza"

@@ -1,7 +1,6 @@
 ---
 title: "OpenRewrite: Automatic Code Refactoring and Maintenance"
 date: "2023-09-05T17:05:06+00:00"
-lastmod: "2023-09-18T12:24:50+00:00"
 description: "OpenRewrite is a powerful tool for automatic code refactoring and maintenance, utilizing customizable recipes to streamline your coding process."
 authors:
   - "mahendra1413"

@@ -1,7 +1,6 @@
 ---
 title: "Profile IntelliJ IDEA with its own profiler"
 date: "2024-10-16T15:49:38+00:00"
-lastmod: "2024-10-16T15:52:50+00:00"
 description: "Analyzing a curious bottleneck in IntelliJ IDEA using the built-in IntelliJ Profiler and several handy debugger features."
 canonical: "https://flounder.dev/posts/profile-idea-with-idea/"
 authors:

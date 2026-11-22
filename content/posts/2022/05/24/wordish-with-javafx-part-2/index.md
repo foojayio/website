@@ -1,7 +1,6 @@
 ---
 title: "Wordish with JavaFX - Part 2"
 date: "2022-05-24T07:50:54+00:00"
-lastmod: "2022-05-24T07:50:55+00:00"
 description: "Learn specialized JavaFX Labels and Buttons, pseudo-classes for CSS styling, and third-party font libraries and customizing Scene Builder!"
 authors:
   - "gail-anderson"

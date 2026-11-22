@@ -1,7 +1,6 @@
 ---
 title: "How to get a JavaFX App on ZuluFX in 60 Seconds"
 date: "2020-08-23T06:57:41+00:00"
-lastmod: "2021-09-03T09:27:33+00:00"
 description: "Here I show you how to use a popular distribution from Azul Zulu OpenJDK to build a JavaFX Hello World Application in 60 seconds."
 authors:
   - "carldea"

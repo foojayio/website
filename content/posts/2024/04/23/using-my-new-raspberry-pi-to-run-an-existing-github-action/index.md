@@ -1,7 +1,6 @@
 ---
 title: "Using my new Raspberry Pi to run an existing GitHub Action"
 date: "2024-04-23T18:45:04+00:00"
-lastmod: "2024-04-24T21:02:14+00:00"
 description: "Recently, I mentioned how I refactored the script that kept my GitHub profile up-to-date. Since Geecon Prague, I'm also a happy owner of a Raspberry Pi."
 canonical: "https://blog.frankel.ch/raspberry-pi-github-action/"
 authors:

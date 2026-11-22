@@ -1,7 +1,6 @@
 ---
 title: "CodeRabbit Tutorial for Java Developers"
 date: "2025-07-28T12:43:19+00:00"
-lastmod: "2025-07-29T04:20:09+00:00"
 description: "For Java developers, CodeRabbit offers specialized analysis that understands Java syntax, best practices, and common patterns."
 authors:
   - "aravind-putrevu"

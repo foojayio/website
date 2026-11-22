@@ -1,7 +1,6 @@
 ---
 title: "Debug Like a Senior Developer"
 date: "2022-12-16T06:34:02+00:00"
-lastmod: "2022-12-16T06:34:03+00:00"
 description: "New online course is launching with the first video ready to view. More are coming in the coming months, also the book is ready for preorder!"
 canonical: "https://debugagent.com/debug-like-a-senior-developer"
 authors:

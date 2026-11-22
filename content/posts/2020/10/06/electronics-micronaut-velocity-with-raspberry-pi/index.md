@@ -1,7 +1,6 @@
 ---
 title: "Electronics & Micronaut Velocity with Raspberry Pi"
 date: "2020-10-06T08:35:45+00:00"
-lastmod: "2021-12-10T13:02:04+00:00"
 description: "we present you with another great example of Java on Raspberry Pi. It shows how to create a Micronaut Velocity demo using an 8×8 LED matrix display."
 canonical: "http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/"
 authors:

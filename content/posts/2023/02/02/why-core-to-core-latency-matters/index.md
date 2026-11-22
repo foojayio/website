@@ -1,7 +1,6 @@
 ---
 title: "Why Core-to-Core Latency Matters"
 date: "2023-02-02T11:16:43+00:00"
-lastmod: "2023-02-03T10:43:06+00:00"
 description: "An initial goal of Java was to “write once, run anywhere”, but does that mean we should not be sympathetic to the hardware?"
 authors:
   - "rob-austin"

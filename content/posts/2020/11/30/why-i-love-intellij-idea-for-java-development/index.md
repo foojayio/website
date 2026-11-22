@@ -1,7 +1,6 @@
 ---
 title: "Why I Love IntelliJ IDEA for Java Development"
 date: "2020-11-30T09:16:06+00:00"
-lastmod: "2020-11-30T20:45:11+00:00"
 description: "I like many things about IntelliJ IDEA, but I thought it'd be fun to write about the ones that make me most productive. Read on for details!"
 authors:
   - "matt-raible"

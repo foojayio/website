@@ -1,7 +1,6 @@
 ---
 title: "Power your AI application with Vector Search"
 date: "2025-09-23T16:23:37+00:00"
-lastmod: "2025-09-23T16:23:38+00:00"
 description: "MongoDB Vector Search enables semantic queries. For example, finding support tickets with similar meanings even if they use different words. It also powers hybrid search by combining exact keyword matches like \"error 500\" with semantically similar phrases like \"server failure\". Another use case is personalization, such as recommending articles similar to those a user has read."
 authors:
   - "arekborucki"

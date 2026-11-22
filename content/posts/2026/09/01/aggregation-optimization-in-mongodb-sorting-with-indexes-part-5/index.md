@@ -1,7 +1,6 @@
 ---
 title: "Aggregation Optimization in MongoDB: Sorting With Indexes (Part 5)"
 date: "2026-09-01T14:07:36+00:00"
-lastmod: "2026-09-02T08:23:09+00:00"
 description: "Part 5 of our aggregation optimization series: swapping an explicit $sort for an index-backed sort cut MongoDB query time from 51ms to 14ms"
 authors:
   - "graeme-robinson"

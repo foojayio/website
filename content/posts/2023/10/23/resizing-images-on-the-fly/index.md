@@ -1,7 +1,6 @@
 ---
 title: "Resizing images on-the-fly"
 date: "2023-10-23T18:01:05+00:00"
-lastmod: "2023-10-23T18:01:06+00:00"
 description: "How to use Apache APISIX with imgproxy to reduce the storage cost of images in multiple resolutions."
 canonical: "https://blog.frankel.ch/resize-images-on-the-fly/"
 authors:

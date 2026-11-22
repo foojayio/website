@@ -1,7 +1,6 @@
 ---
 title: "Optimizing MongoDB Queries in Java Applications"
 date: "2025-12-09T17:45:09+00:00"
-lastmod: "2025-12-09T17:45:12+00:00"
 description: "Modern Java applications often struggle with performance bottlenecks that have little to do with the JVM itself. In most cases, the culprit lies deeper in how the application interacts with its database. Slow queries, missing indexes, or inefficient access patterns can quietly degrade user experience, increase latency, and inflate infrastructure costs. MongoDB, known for its flexibility and document-oriented design, can deliver remarkable performance when used correctly. However, that performance can quickly diminish when queries and indexes are not aligned with real-world access patterns."
 authors:
   - "farhan-chowdhury"

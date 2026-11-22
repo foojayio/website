@@ -1,7 +1,6 @@
 ---
 title: "An Industry Expert's Guide to Thriving in Software Development and Security"
 date: "2023-05-23T15:14:55+00:00"
-lastmod: "2023-05-23T20:26:51+00:00"
 description: "Uncover the dynamics of software development and product management in our discussion with Erik, Senior Director at Azul. Learn about his transition from engineering to product management, key industry challenges, and the importance of application security in today's tech-driven world."
 authors:
   - "bazlur-rahman"

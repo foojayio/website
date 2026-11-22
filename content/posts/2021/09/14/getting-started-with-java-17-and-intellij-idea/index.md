@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java 17 and IntelliJ IDEA"
 date: "2021-09-14T09:20:56+00:00"
-lastmod: "2021-09-14T10:23:35+00:00"
 description: "In this article, I will limit the coverage of Java 17 to its language features – Sealed Classes and Pattern Matching for switch."
 canonical: "https://blog.jetbrains.com/idea/2021/09/java-17-and-intellij-idea/"
 authors:

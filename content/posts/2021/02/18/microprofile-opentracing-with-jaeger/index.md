@@ -1,7 +1,6 @@
 ---
 title: "Introduction to MicroProfile OpenTracing with Jaeger"
 date: "2021-02-18T09:41:19+00:00"
-lastmod: "2021-02-18T09:41:38+00:00"
 description: "In this short video, Rudy de Busscher demonstrates how to use MicroProfile OpenTracing with Jaeger in combination with Payara Micro."
 canonical: "https://blog.payara.fish/microprofile-opentracing-with-jaeger"
 authors:

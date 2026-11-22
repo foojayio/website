@@ -1,7 +1,6 @@
 ---
 title: "Why Java is Still Worth Learning in 2025: A Developer's 25-Year Journey"
 date: "2025-08-04T06:32:05+00:00"
-lastmod: "2025-08-04T06:33:52+00:00"
 description: "In 2025, Java offers something rare in the tech world: stability without stagnation, innovation without disruption, and a community that values both technical excellence and human growth."
 canonical: "https://empatheticdeveloper.wordpress.com/2025/07/20/why-java-is-still-worth-learning-in-2025-a-developers-25-year-journey/"
 authors:

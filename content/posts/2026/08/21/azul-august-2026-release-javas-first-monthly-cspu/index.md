@@ -1,7 +1,6 @@
 ---
 title: "Azul August 2026 Release: Java's First Monthly CSPU"
 date: "2026-08-21T07:48:46+00:00"
-lastmod: "2026-08-26T06:11:28+00:00"
 description: "If someone discloses a 0-day CVE the day after a quarterly update, you could wait up to three months for a patched build. That gap is closed now."
 authors:
   - "frankdelporte"

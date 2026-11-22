@@ -1,7 +1,6 @@
 ---
 title: "How DataStax Tracked Down a Linux Kernel Bug with Fallout"
 date: "2022-06-02T15:32:08+00:00"
-lastmod: "2022-06-02T15:32:10+00:00"
 description: "Sometimes as a developer, you run into a bug buried deep within the layers of your software stack. Chasing down the root cause requires not only…"
 canonical: "https://medium.com/building-the-open-data-stack/how-datastax-tracked-down-a-linux-kernel-bug-with-fallout-3ca10ec1fde4"
 authors:

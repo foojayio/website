@@ -1,7 +1,6 @@
 ---
 title: "Do we understand the value of AI knowledge?"
 date: "2025-08-12T11:26:49+00:00"
-lastmod: "2025-08-12T11:26:51+00:00"
 description: "The future is not yet written and every moment is important."
 authors:
   - "miro-wengner"

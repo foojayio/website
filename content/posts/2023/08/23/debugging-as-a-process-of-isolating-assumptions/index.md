@@ -1,7 +1,6 @@
 ---
 title: "Debugging as a Process of Isolating Assumptions"
 date: "2023-08-23T08:16:22+00:00"
-lastmod: "2023-08-23T08:16:23+00:00"
 description: "When looking at a vast project, how do we know the direction to narrow assumptions during debugging? When should we backtrack and rethink?"
 authors:
   - "shai-almog"

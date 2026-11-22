@@ -1,7 +1,6 @@
 ---
 title: "The TornadoVM Programming Model Explained"
 date: "2024-05-28T11:01:14+00:00"
-lastmod: "2024-05-29T08:47:56+00:00"
 description: "In this article, we have explained the basics of the TornadoVM programming model and the main API blocks."
 authors:
   - "juan-fumero"

@@ -1,7 +1,6 @@
 ---
 title: "FEPCOS-J: Native executables of Java-coded networked systems"
 date: "2023-12-13T12:13:07+00:00"
-lastmod: "2023-12-13T12:14:17+00:00"
 description: "An example shows how Java developers can build native executables of declaratively composed networked systems by using FEPCOS-J and GraalVM."
 authors:
   - "gerhard-fuchs"

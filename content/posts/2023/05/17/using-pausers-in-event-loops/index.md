@@ -1,7 +1,6 @@
 ---
 title: "Using Pausers in Event Loops"
 date: "2023-05-17T09:25:23+00:00"
-lastmod: "2023-05-17T09:27:20+00:00"
 description: "Techniques that help maximise hardware utilisation, while also reducing power consumption, helping reduce costs to your organisation."
 authors:
   - "peter-lawrey"

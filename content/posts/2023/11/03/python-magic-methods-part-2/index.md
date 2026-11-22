@@ -1,7 +1,6 @@
 ---
 title: "Python \"magic\" methods - part 2"
 date: "2023-11-03T09:15:44+00:00"
-lastmod: "2023-11-03T09:15:46+00:00"
 description: "Let's continue our exploration of Python's magic methods in this second part of the series."
 canonical: "https://blog.frankel.ch/python-magic-methods/2/"
 authors:

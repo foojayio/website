@@ -1,7 +1,6 @@
 ---
 title: "Book review: \"Get Your Hands Dirty on Clean Architecture - Second Edition\""
 date: "2023-10-14T11:51:34+00:00"
-lastmod: "2023-10-14T11:51:35+00:00"
 description: "A magnificent job of walking through a lot the different architectural considerations one has to make to develop maintainable code."
 authors:
   - "simon-verhoeven"

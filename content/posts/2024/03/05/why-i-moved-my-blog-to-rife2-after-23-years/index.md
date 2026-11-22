@@ -1,7 +1,6 @@
 ---
 title: "Why I moved my blog to RIFE2 after 23 years?"
 date: "2024-03-05T06:42:47+00:00"
-lastmod: "2024-03-05T07:19:54+00:00"
 description: "In April 2023, I decided to move my 23-year-old blog to RIFE2, a no-dependencies full-stack Java framework…"
 authors:
   - "erik-thauvin"

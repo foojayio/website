@@ -1,7 +1,6 @@
 ---
 title: "Presenting with IntelliJ IDEA"
 date: "2022-10-11T07:14:30+00:00"
-lastmod: "2022-10-11T07:14:32+00:00"
 description: "Let's learn a lot of different tips and tricks that will level up your presentation skills with IntelliJ IDEA!"
 authors:
   - "marit-van-dijk"

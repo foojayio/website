@@ -1,7 +1,6 @@
 ---
 title: "My second Cloudflare Tunnel"
 date: "2025-12-02T20:59:58+00:00"
-lastmod: "2026-09-21T05:59:41+00:00"
 description: "I decided to stop using Twitter, but for my own content and supporting Ukraine against its barbarian invaders, I understood the contemporary media…"
 canonical: "https://blog.frankel.ch/second-cloudflare-tunnel/"
 authors:

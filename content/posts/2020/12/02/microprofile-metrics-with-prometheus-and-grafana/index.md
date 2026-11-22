@@ -1,7 +1,6 @@
 ---
 title: "MicroProfile Metrics with Prometheus and Grafana"
 date: "2020-12-02T09:11:30+00:00"
-lastmod: "2020-12-02T09:11:32+00:00"
 description: "Learn how to connect MicroProfile Metrics with Prometheus and Grafana to produce useful graphics and to help investigate your architecture."
 canonical: "https://blog.payara.fish/microprofile-metrics-with-prometheus-and-grafana"
 authors:

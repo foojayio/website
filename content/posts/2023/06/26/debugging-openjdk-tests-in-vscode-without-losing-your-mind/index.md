@@ -1,7 +1,6 @@
 ---
 title: "Debugging OpenJDK Tests in VSCode (Without Losing Your Mind)"
 date: "2023-06-26T11:27:55+00:00"
-lastmod: "2023-07-10T12:46:48+00:00"
 description: "jtreg is the test harness used by the JDK test framework. Attaching a debugger cumbersome to enable debugging in VSCode. But worry no more!"
 authors:
   - "johannes-bechberger"

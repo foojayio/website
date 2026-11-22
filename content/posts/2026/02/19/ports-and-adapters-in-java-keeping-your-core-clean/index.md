@@ -1,7 +1,6 @@
 ---
 title: "Ports and Adapters in Java: Keeping Your Core Clean"
 date: "2026-02-19T16:13:59+00:00"
-lastmod: "2026-02-19T16:14:01+00:00"
 description: "In this article, we focus on a concrete, real-world scenario: using a database, specifically MongoDB, without contaminating the main domain. The goal is not theoretical elegance, but long-term maintainability and testability of the solution."
 authors:
   - "matteo-rossi"

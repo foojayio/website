@@ -1,7 +1,6 @@
 ---
 title: "From Assembler to Chat-GPT: Steve Poole on the Shifting Landscape of Programming"
 date: "2023-03-20T11:56:20+00:00"
-lastmod: "2023-03-21T11:35:42+00:00"
 description: "Discover insights from seasoned Java developer Steve Poole on the ever-evolving software landscape, career growth, and lessons learned throughout his remarkable journey in the tech industry."
 authors:
   - "bazlur-rahman"

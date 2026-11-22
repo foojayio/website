@@ -1,7 +1,6 @@
 ---
 title: "Improving Maven's dependency:analyze... or not"
 date: "2025-04-28T08:28:32+00:00"
-lastmod: "2025-04-28T08:28:34+00:00"
 description: "Recently, my good friend Richard Fichtner advised using the mvn dependency:analyze command to get rid of declared but unused dependencies."
 canonical: "https://blog.frankel.ch/maven-dependency-analyze/"
 authors:

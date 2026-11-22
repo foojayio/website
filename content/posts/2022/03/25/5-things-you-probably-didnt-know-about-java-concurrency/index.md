@@ -1,7 +1,6 @@
 ---
 title: "5 Things You Probably Didn’t Know About Java Concurrency"
 date: "2022-03-25T05:51:41+00:00"
-lastmod: "2022-03-25T05:54:53+00:00"
 description: "Even while threads are helpful, they are dreadful to many developers. Here are five essential threading concepts for Java developers!"
 authors:
   - "bazlur-rahman"

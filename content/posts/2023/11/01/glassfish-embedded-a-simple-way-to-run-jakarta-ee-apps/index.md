@@ -1,7 +1,6 @@
 ---
 title: "GlassFish Embedded - a simple way to run Jakarta EE apps"
 date: "2023-11-01T15:55:14+00:00"
-lastmod: "2023-11-01T15:55:16+00:00"
 description: "Jan Blavins shares how builds both server component and a client component in his project using the GlassFish Embedded container with little effort."
 authors:
   - "ondro-mihalyi"

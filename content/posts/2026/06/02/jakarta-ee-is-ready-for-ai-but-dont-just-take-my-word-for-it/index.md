@@ -1,7 +1,6 @@
 ---
 title: "Jakarta EE is Ready for AI – Five Talks from OCX26 That Prove It"
 date: "2026-06-02T11:41:01+00:00"
-lastmod: "2026-06-02T11:41:04+00:00"
 description: "Five talks from OCX26 Brussels 2026 explore how Jakarta EE handles AI integration, local inference, agentic systems, and API design — with no framework gymnastics required."
 authors:
   - "dominika-tasarz"

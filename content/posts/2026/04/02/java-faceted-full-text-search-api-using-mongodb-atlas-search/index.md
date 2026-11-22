@@ -1,7 +1,6 @@
 ---
 title: "Java Faceted Full-Text Search API Using MongoDB Atlas Search"
 date: "2026-04-02T16:27:30+00:00"
-lastmod: "2026-04-02T16:27:33+00:00"
 description: "This is going to be a fun, practical tutorial demonstrating how to build a Java faceted full-text search API (like the ones powering sites like Amazon)!"
 canonical: "https://tech-blog.luketn.com/java-faceted-full-text-search-api-using-mongodb-atlas-search"
 authors:

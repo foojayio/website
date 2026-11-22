@@ -25,7 +25,7 @@ enableGitInfo = true
 # is the last resort, which is exactly the dateless pages it was added for.
 [frontmatter]
   date = ["date", "publishDate", "lastmod", ":git"]
-  lastmod = ["lastmod", "date", ":git", "publishDate"]
+  lastmod = ["updated", "date", ":git", "publishDate"]
 
 # Caps every feed the site emits. Hugo's default is -1 (unbounded), which made
 # /index.xml a 3.85 MB document of 2584 items -- a feed that size is slow for

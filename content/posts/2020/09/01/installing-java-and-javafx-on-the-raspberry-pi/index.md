@@ -1,7 +1,6 @@
 ---
 title: "Installing Java and JavaFX on the Raspberry Pi"
 date: "2020-09-01T08:32:24+00:00"
-lastmod: "2020-09-04T08:02:06+00:00"
 description: "One of the most read articles on my blog is on the installation of a recent Java on Raspberry Pi, in March 13, 2019, so it was time for an update! More..."
 canonical: "https://webtechie.be/post/2020-04-08-installing-java-and-javafx-on-raspberry-pi/"
 authors:

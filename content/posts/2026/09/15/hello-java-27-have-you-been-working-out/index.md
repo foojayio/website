@@ -1,7 +1,6 @@
 ---
 title: "Hello Java 27! Have You Been Working Out?"
 date: "2026-09-15T08:00:00+00:00"
-lastmod: "2026-09-16T07:03:53+00:00"
 description: "Java 27 is like that friend that you haven't seen all summer, and when you finally see them again it's clear that they spent a lot of time in the gym. Bringing numerous improvements to performance and security, this version of Java seems to be in top shape. This post has all the info!"
 authors:
   - "hanno-embregts"

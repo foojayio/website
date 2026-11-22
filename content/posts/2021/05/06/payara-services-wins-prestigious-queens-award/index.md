@@ -1,7 +1,6 @@
 ---
 title: "Payara Services Wins Prestigious Queen’s Award!"
 date: "2021-05-06T08:07:23+00:00"
-lastmod: "2021-09-08T15:20:12+00:00"
 description: "Payara commended for its achievements within global trading and exporting with the Queen’s Award for Enterprise for International Trade!"
 authors:
   - "jadon-ortlepp"

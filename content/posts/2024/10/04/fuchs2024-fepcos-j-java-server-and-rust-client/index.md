@@ -1,7 +1,6 @@
 ---
 title: "Java Server and Rust Client Built with Generated Networking Code"
 date: "2024-10-04T11:58:05+00:00"
-lastmod: "2024-10-04T11:58:06+00:00"
 description: "FEPCOS-J allows declaratively implementing a Java server and generating its profile usable to generate the networking code of a Rust client."
 authors:
   - "gerhard-fuchs"

@@ -1,7 +1,6 @@
 ---
 title: "Run AI-enabled JakartaEE/MicroProfile apps with LangChain4j"
 date: "2024-08-12T22:14:36+00:00"
-lastmod: "2024-08-14T10:18:34+00:00"
 description: "Experience AI technology in Jakarta EE and MicroProfile applications that run on Open Liberty by using LangChain4j APIs."
 canonical: "https://openliberty.io/blog/2024/04/01/open-liberty-with-langchain4j-example.html"
 authors:

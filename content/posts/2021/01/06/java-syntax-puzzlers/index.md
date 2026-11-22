@@ -1,7 +1,6 @@
 ---
 title: "Let's Do Some Java Syntax Puzzlers Today"
 date: "2021-01-06T09:26:04+00:00"
-lastmod: "2021-01-06T09:41:29+00:00"
 description: "Given I love a good puzzle (especially the Java Puzzles), let’s try some puzzles, using the Java syntax only, without any runtime behavior."
 authors:
   - "bmuskalla"

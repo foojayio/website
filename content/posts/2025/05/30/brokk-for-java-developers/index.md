@@ -1,7 +1,6 @@
 ---
 title: "Brokk: AI for Large (Java) Codebases"
 date: "2025-05-30T04:39:44+00:00"
-lastmod: "2025-05-31T16:39:24+00:00"
 description: "Brokk can help you tackle large Java codebases with ease. Big codebase? Bring it."
 canonical: "https://brokk.ai/blog/brokk-for-java-developers"
 authors:

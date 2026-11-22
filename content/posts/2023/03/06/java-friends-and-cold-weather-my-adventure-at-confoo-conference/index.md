@@ -1,7 +1,6 @@
 ---
 title: "My Adventures at ConFoo Conference in Montreal"
 date: "2023-03-06T19:16:06+00:00"
-lastmod: "2023-03-06T19:16:07+00:00"
 description: "I attended the ConFoo conference in Montreal for a day, gave two talks on Java, and met with old and new friends, and had a great experience."
 authors:
   - "bazlur-rahman"

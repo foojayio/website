@@ -1,7 +1,6 @@
 ---
 title: "Approaches to Durability in Low Latency Messaging Queues"
 date: "2023-04-26T13:17:59+00:00"
-lastmod: "2023-04-26T13:18:00+00:00"
 description: "Is replicating data to a secondary system faster than sync-ing to disk? My first time benchmarking with a realistic example."
 authors:
   - "peter-lawrey"

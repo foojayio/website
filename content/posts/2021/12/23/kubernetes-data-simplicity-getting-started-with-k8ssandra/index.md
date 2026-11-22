@@ -1,7 +1,6 @@
 ---
 title: "Kubernetes Data Simplicity: Getting started with K8ssandra"
 date: "2021-12-23T08:56:22+00:00"
-lastmod: "2022-07-07T17:20:13+00:00"
 description: "K8ssandra is an open-source distribution of Apache Cassandra for Kubernetes, with a rich set of trusted open-source services and tooling."
 canonical: "https://www.datastax.com/blog/2021/04/kubernetes-data-simplicity-getting-started-k8ssandra"
 authors:

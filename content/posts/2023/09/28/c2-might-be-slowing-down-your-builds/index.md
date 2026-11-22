@@ -1,7 +1,6 @@
 ---
 title: "C2 Might Be Slowing Down Your Builds"
 date: "2023-09-28T09:55:13+00:00"
-lastmod: "2023-09-28T09:55:14+00:00"
 description: "Disabling C2 can be an option to speed up builds of smaller Java applications in CI systems, mainly when restricted to one or two CPU cores."
 authors:
   - "johannes-bechberger"

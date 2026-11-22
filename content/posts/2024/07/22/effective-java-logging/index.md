@@ -1,7 +1,6 @@
 ---
 title: "Effective Java Logging"
 date: "2024-07-22T11:39:40+00:00"
-lastmod: "2024-07-24T14:00:46+00:00"
 description: "Master effective logging in Java applications using SLF4J and Logback. This comprehensive guide provides 14 essential best practices."
 authors:
   - "abo-saad-muaath"

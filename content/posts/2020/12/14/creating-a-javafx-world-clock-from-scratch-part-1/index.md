@@ -1,7 +1,6 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 1)"
 date: "2020-12-14T09:27:54+00:00"
-lastmod: "2022-04-30T03:38:36+00:00"
 description: "I would like to show you how I created a \"sci-fi\" looking world clock that happens to be a cross-platform Java desktop application."
 authors:
   - "carldea"

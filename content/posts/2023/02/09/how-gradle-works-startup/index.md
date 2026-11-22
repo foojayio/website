@@ -1,7 +1,6 @@
 ---
 title: "How Gradle Works: Startup"
 date: "2023-02-09T08:45:57+00:00"
-lastmod: "2023-03-14T11:34:13+00:00"
 description: "This is the first of a series on how Gradle works! For example, how does Gradle start up and how many JVMs are involved in a Gradle build?"
 canonical: "https://blog.gradle.org/how-gradle-works-1"
 authors:

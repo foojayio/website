@@ -1,7 +1,6 @@
 ---
 title: "Introducing BoxLang AI Explorer: A Local Catalog for Every AI Pattern"
 date: "2026-08-18T14:15:48+00:00"
-lastmod: "2026-08-18T14:15:51+00:00"
 description: "Learning a new AI API usually means jumping between scattered documentation pages, guessing at imports, and copy-pasting code that may or may not still…"
 authors:
   - "cristobal-escobar"

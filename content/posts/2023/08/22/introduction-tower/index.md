@@ -1,7 +1,6 @@
 ---
 title: "Introduction to the Tower Library"
 date: "2023-08-22T08:28:33+00:00"
-lastmod: "2023-08-22T08:28:35+00:00"
 description: "In Rust, Tower is designed around Functional Programming and two main abstractions, Service and Layer. Learn more here!"
 canonical: "https://blog.frankel.ch/introduction-tower/"
 authors:

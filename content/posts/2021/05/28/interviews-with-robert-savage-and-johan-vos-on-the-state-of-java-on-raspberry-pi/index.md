@@ -1,7 +1,6 @@
 ---
 title: "Interviews with Robert Savage & Johan Vos on Java on the Raspberry Pi"
 date: "2021-05-28T07:14:26+00:00"
-lastmod: "2021-12-10T13:00:35+00:00"
 description: "Java and JavaFX are a great match with the Raspberry Pi, here on Foojay you can find a lot of examples to get you started!"
 canonical: "https://kiosk.entwickler.de/java-magazin/java-magazin-6-2021/status-quo-und-expertenstimmen/"
 authors:

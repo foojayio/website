@@ -1,7 +1,6 @@
 ---
 title: "Bootstrapping a Java File System"
 date: "2026-01-29T01:44:32+00:00"
-lastmod: "2026-01-29T14:59:44+00:00"
 description: "Creating a custom Java file system is both geeky and fun, perhaps more fun than I have had in a while, plus I have a deeper understanding of a core Java concept."
 authors:
   - "scott-sosna"

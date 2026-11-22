@@ -1,7 +1,6 @@
 ---
 title: "Apache APISIX plugin priority, a leaky abstraction?"
 date: "2023-12-10T12:47:13+00:00"
-lastmod: "2026-09-21T06:04:10+00:00"
 description: "Apache APISIX is an API Gateway, which builds upon the OpenResty reverse-proxy to offer a plugin-based architecture. The main benefit of such an…"
 canonical: "https://blog.frankel.ch/apisix-plugins-priority-leaky-abstraction/"
 authors:

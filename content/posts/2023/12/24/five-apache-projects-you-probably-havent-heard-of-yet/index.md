@@ -1,7 +1,6 @@
 ---
 title: "Five Apache Projects You Probably Haven't Heard Of (Yet)"
 date: "2023-12-24T10:17:38+00:00"
-lastmod: "2023-12-24T19:15:05+00:00"
 description: "In this article, I'd like to introduce some Apache projects that are not so well-known."
 authors:
   - "nicolas-frankel"

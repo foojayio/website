@@ -1,7 +1,6 @@
 ---
 title: "Interview on Machine Learning and Disruptive Data Science"
 date: "2021-03-26T13:15:29+00:00"
-lastmod: "2023-01-08T07:39:57+00:00"
 description: "I spoke with Fabiane recently about Tail Target, its objectives, the theory behind it, and the underlying technology. Read on!"
 authors:
   - "kevinfarnham"

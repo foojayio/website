@@ -1,7 +1,6 @@
 ---
 title: "What Happens When 10,000 JVMs Collaborate"
 date: "2025-10-13T07:03:51+00:00"
-lastmod: "2025-11-13T16:57:46+00:00"
 description: "By making one change, using Azul Platform Prime enhanced by Optimizer Hub, a global enterprise improved application responsiveness and stability at scale while reducing infrastructure costs."
 authors:
   - "simonritter"

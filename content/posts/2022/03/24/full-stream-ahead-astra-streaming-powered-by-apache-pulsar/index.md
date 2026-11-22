@@ -1,7 +1,6 @@
 ---
 title: "Full Stream Ahead: Astra Streaming, Powered by Apache Pulsar"
 date: "2022-03-24T09:22:15+00:00"
-lastmod: "2022-03-24T09:23:08+00:00"
 description: "Astra Streaming is a scalable highly performant event streaming cloud messaging platform for data in motion in modern data applications."
 canonical: "https://www.datastax.com/blog/full-stream-ahead-astra-streaming-powered-apache-pulsar-here"
 authors:

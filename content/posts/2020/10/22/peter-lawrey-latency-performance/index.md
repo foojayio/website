@@ -1,7 +1,6 @@
 ---
 title: "Peter Lawrey Talks about Low-Latency, High-Performance Java"
 date: "2020-10-22T04:28:38+00:00"
-lastmod: "2020-10-22T07:49:42+00:00"
 description: "Build a realistic workload, profile it, and tune the code if possible, or the JVM to optimise for that use case."
 authors:
   - "kevinfarnham"

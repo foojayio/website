@@ -1,7 +1,6 @@
 ---
 title: "FXGL Game Engine 17 Released"
 date: "2022-01-03T10:43:05+00:00"
-lastmod: "2022-01-03T10:44:09+00:00"
 description: "Game developers unite around Java and JavaFX! Version 17 of the FXGL game engine brings a number of improvements in many areas."
 authors:
   - "almasbaimagambetov"

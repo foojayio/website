@@ -1,7 +1,6 @@
 ---
 title: "My Summary of jPrime 2022"
 date: "2022-06-08T18:37:55+00:00"
-lastmod: "2022-06-08T18:38:35+00:00"
 description: "Writing summaries of conference talks is probably the best way to focus on the talk and listen actively..."
 canonical: "https://blog.frankel.ch/jprime-2022/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Payara Server Maven Plugin + AI Agent"
 date: "2025-09-30T08:43:20+00:00"
-lastmod: "2025-09-30T09:29:28+00:00"
 description: "Imagine managing your Jakarta EE applications not just with Maven goals, but by asking natural questions."
 canonical: "https://blog.payara.fish/payara-server-maven-plugin-ai-agent"
 authors:

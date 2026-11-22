@@ -1,7 +1,6 @@
 ---
 title: "Why You Should Join EclipseCon Community Day"
 date: "2020-10-08T06:46:57+00:00"
-lastmod: "2020-11-25T09:23:51+00:00"
 description: "EclipseCon Community Day is on Monday, October 19 14:00 to 18:00 CET (the day before the start of the main EclipseCon conference)."
 canonical: "https://reza-rahman.me/2020/10/06/why-you-should-join-eclipsecon-community-day"
 authors:

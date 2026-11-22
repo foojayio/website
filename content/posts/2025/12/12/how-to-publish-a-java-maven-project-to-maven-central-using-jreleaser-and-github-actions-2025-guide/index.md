@@ -1,7 +1,6 @@
 ---
 title: "How to Release a Java Module to Maven Central with JReleaser and GitHub Actions (2025 Guide)"
 date: "2025-12-12T07:42:00+00:00"
-lastmod: "2025-12-12T08:46:01+00:00"
 description: "Complete step-by-step guide to publishing Java modules to Maven Central using JReleaser and GitHub Actions. Learn GPG signing, automation, and CI/CD best practices for Maven releases in 2025."
 authors:
   - "jago-de-vreede"

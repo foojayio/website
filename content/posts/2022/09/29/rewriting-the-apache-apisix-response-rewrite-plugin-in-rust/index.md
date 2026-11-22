@@ -1,7 +1,6 @@
 ---
 title: "Rewriting the Apache APISIX response-rewrite plugin in Rust"
 date: "2022-09-29T09:09:42+00:00"
-lastmod: "2026-09-21T06:05:31+00:00"
 description: "Last week, I described the basics on how to develop and deploy a Rust plugin for Apache APISIX. The plugin just logged a message when it received the…"
 canonical: "https://blog.frankel.ch/rust-apisix/2/"
 authors:

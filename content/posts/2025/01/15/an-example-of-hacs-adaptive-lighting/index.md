@@ -1,7 +1,6 @@
 ---
 title: "An Example of HACS: Adaptive Lighting"
 date: "2025-01-15T08:40:46+00:00"
-lastmod: "2025-01-15T08:40:48+00:00"
 description: "Configure the Adaptive Lighting integration to our Home Assistant and benefit from different intensities based on the time of the day."
 canonical: "https://blog.frankel.ch/home-assistant/4/"
 authors:

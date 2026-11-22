@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK at FOSDEM 2022"
 date: "2021-12-05T12:00:03+00:00"
-lastmod: "2021-12-26T14:17:17+00:00"
 description: "The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded, submit to the \"Friends Of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"

@@ -1,7 +1,6 @@
 ---
 title: "Where do you get your Java?"
 date: "2024-01-16T14:19:33+00:00"
-lastmod: "2024-01-16T14:22:16+00:00"
 description: "Which Java should you download and use? A brief history of Java, the current Java distribution options, and which stand above the rest."
 canonical: "https://developer.ibm.com/articles/awb-where-do-you-get-your-java/"
 authors:

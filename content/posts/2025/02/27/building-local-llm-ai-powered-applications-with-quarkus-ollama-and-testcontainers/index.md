@@ -1,7 +1,6 @@
 ---
 title: "Build local LLM applications with Quarkus, Ollama, Testcontainers"
 date: "2025-02-27T10:13:19+00:00"
-lastmod: "2025-05-06T10:50:02+00:00"
 description: "Explore how to combine Quarkus with Ollama, a platform for running AI models locally. We’ll also demonstrate how tools like Testcontainers and Quarkus Dev Services simplify development and testing workflows"
 authors:
   - "jonathan-vila"

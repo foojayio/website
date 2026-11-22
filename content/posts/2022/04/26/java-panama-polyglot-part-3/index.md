@@ -1,7 +1,6 @@
 ---
 title: "Java Panama Polyglot (Python/Tensorflow) Part 3"
 date: "2022-04-26T04:42:58+00:00"
-lastmod: "2022-05-26T12:17:24+00:00"
 description: "How can you, as a Java developer, execute Python script code and access 3rd party Python libraries, such as Tensorflow?"
 authors:
   - "carldea"

@@ -1,7 +1,6 @@
 ---
 title: "For the Record: A Little Less Conversation, A Little More Action"
 date: "2020-11-13T08:52:40+00:00"
-lastmod: "2020-11-19T00:21:54+00:00"
 description: "Data-carrier classes can be simplified to a few lines by adding the keyword \"record\". Read on for advantages and constraints and more!"
 canonical: "https://medium.com/@pratha.sirisha/for-the-record-1bfb3622f446"
 authors:

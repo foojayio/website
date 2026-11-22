@@ -1,7 +1,6 @@
 ---
 title: "Learn how to debug unresponsive Java/JVM applications, then reload the fix on the fly, using a hands-on example"
 date: "2024-05-23T07:14:31+00:00"
-lastmod: "2024-08-01T07:36:11+00:00"
 description: "Learn how to debug unresponsive Java/JVM applications, then reload the fix on the fly, using a hands-on example."
 canonical: "https://flounder.dev/posts/debug-unresponsive-apps/"
 authors:

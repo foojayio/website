@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK at FOSDEM with Prizes"
 date: "2022-02-03T10:42:04+00:00"
-lastmod: "2023-01-19T08:43:53+00:00"
 description: "A great line up of known and less known OpenJDK users from the Foojay community will be at FOSDEM, with a quiz and awesome prizes to be won."
 authors:
   - "geertjan-wielenga"

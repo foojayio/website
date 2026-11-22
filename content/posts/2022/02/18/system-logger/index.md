@@ -1,7 +1,6 @@
 ---
 title: "System Logger"
 date: "2022-02-18T12:34:57+00:00"
-lastmod: "2022-02-18T12:34:58+00:00"
 description: "Almost all Java developers are familiar with logging frameworks like Log4j, but not the System.Logger that has been available since java 9."
 canonical: "https://blog.frankel.ch/system-logger/"
 authors:

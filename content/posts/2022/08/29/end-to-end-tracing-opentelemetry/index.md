@@ -1,7 +1,6 @@
 ---
 title: "End-to-End Tracing with OpenTelemetry"
 date: "2022-08-29T14:24:00+00:00"
-lastmod: "2022-09-03T19:40:42+00:00"
 description: "Let's focus on tracing by following a request across an API gateway, two apps based on different tech stacks, and their respective databases."
 canonical: "https://blog.frankel.ch/end-to-end-tracing-opentelemetry/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Preparing for JDK 21: A Comprehensive Overview of Key Features and Enhancements"
 date: "2023-08-02T10:46:28+00:00"
-lastmod: "2023-08-02T15:45:26+00:00"
 description: "As we inch to the release of JDK 21 in September (next month!), get familiar with the features and improvements this version will bring!"
 authors:
   - "bazlur-rahman"

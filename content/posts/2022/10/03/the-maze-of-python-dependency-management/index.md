@@ -1,7 +1,6 @@
 ---
 title: "The Maze of Python Dependency Management"
 date: "2022-10-03T12:49:11+00:00"
-lastmod: "2022-10-03T12:51:36+00:00"
 description: "The default Python's dependency management system breaks automated version upgrades, take a look at the pip-compile alternative."
 canonical: "https://blog.frankel.ch/maze-python-dependency-management/"
 authors:

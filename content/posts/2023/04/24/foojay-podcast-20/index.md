@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #20: Functional Programming: \"The Good, the Bad, and the Ugly\""
 date: "2023-04-24T11:30:36+00:00"
-lastmod: "2025-11-13T09:08:34+00:00"
 description: "Functional programming: you either love it or you hate it. But it is a trade-off. So for today, let's focus on the good, the bad, the ugly!"
 authors:
   - "alejandro-serrano"

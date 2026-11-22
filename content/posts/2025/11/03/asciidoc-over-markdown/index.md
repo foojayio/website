@@ -1,7 +1,6 @@
 ---
 title: "Asciidoc over Markdown"
 date: "2025-11-03T08:26:13+00:00"
-lastmod: "2026-09-21T06:01:12+00:00"
 description: "I taught myself HTML a long time ago, on a software called HotDog (Pro?). There wasn't such a thing as WYSIWYG capabilities at the time. However, HotDog…"
 canonical: "https://blog.frankel.ch/asciidoc-over-markdown/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Predicting Secure Java Projects on Maven Central"
 date: "2023-03-23T14:10:02+00:00"
-lastmod: "2023-03-23T14:12:58+00:00"
 description: "Next time you’re considering a new Java library, look for the Sonatype Safety Rating on Maven Central to aid in your decision making."
 authors:
   - "theresa-mammarella"

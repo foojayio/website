@@ -1,7 +1,6 @@
 ---
 title: "“Commit created” — but it isn’t: why the agent’s word needs external verification, and what the mistake costs"
 date: "2026-09-08T08:54:03+00:00"
-lastmod: "2026-09-08T09:16:59+00:00"
 description: "A detailed report reads like proof. The agent lists the files it touched, names the branch, quotes a commit hash, adds a test count and closes with…"
 authors:
   - "viktoria-evdokimova"

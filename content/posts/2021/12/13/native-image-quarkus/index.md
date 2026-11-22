@@ -1,7 +1,6 @@
 ---
 title: "Native-image with Quarkus"
 date: "2021-12-13T17:50:08+00:00"
-lastmod: "2021-12-13T17:50:09+00:00"
 description: "Quarkus brings an exciting take to the table. Unlike Micronaut, it doesn't generate additional bytecode during each compilation."
 canonical: "https://blog.frankel.ch/native/quarkus/"
 authors:

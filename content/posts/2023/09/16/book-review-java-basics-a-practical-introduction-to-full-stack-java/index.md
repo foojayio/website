@@ -1,7 +1,6 @@
 ---
 title: "Book Review: \"Java Basics\", by Shai Almog"
 date: "2023-09-16T08:43:09+00:00"
-lastmod: "2023-09-16T08:50:17+00:00"
 description: "Shai Almog's \"Java Basics\" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author"
 authors:
   - "geertjan-wielenga"

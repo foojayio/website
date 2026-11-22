@@ -1,7 +1,6 @@
 ---
 title: "Even more OpenTelemetry - Kubernetes special"
 date: "2025-04-08T17:39:31+00:00"
-lastmod: "2026-09-21T06:03:08+00:00"
 description: "I have presented my OpenTelemetry demo many times, and I still do. Each time, the audience is different. To make no two presentations the same, I always…"
 canonical: "https://blog.frankel.ch/even-more-opentelemetry-kubernetes/"
 authors:

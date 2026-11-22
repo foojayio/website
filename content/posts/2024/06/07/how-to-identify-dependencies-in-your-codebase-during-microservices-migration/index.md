@@ -1,7 +1,6 @@
 ---
 title: "Identify Dependencies in Codebases During Microservice Migration"
 date: "2024-06-07T07:17:58+00:00"
-lastmod: "2024-06-07T13:00:12+00:00"
 description: "Migration from a monolithic architecture to microservices presents challenges, particularly in identifying and managing dependencies within the codebase."
 authors:
   - "oleksandr-hrebeniuk"

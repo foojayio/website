@@ -1,7 +1,6 @@
 ---
 title: "K8ssandra: Production-Ready Platform for Cassandra on Kubernetes"
 date: "2021-11-24T09:45:12+00:00"
-lastmod: "2021-11-24T19:13:46+00:00"
 description: "K8ssandra aims to provide a \"production-ready platform\", including automation for operational tasks such as repairs, backups, and monitoring."
 canonical: "https://www.infoq.com/news/2021/01/k8ssandra-cassandra-kubernetes/"
 authors:

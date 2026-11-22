@@ -1,7 +1,6 @@
 ---
 title: "You're Running Untrusted Code!"
 date: "2022-01-17T08:28:24+00:00"
-lastmod: "2026-03-07T20:13:55+00:00"
 description: "I'm afraid the deprecation of the Security Manager just added several lines to that risk, all linked to running untrusted code."
 canonical: "https://blog.frankel.ch/running-untrusted-code/"
 authors:

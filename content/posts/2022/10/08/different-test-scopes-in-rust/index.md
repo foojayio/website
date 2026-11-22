@@ -1,7 +1,6 @@
 ---
 title: "Different test scopes in Rust"
 date: "2022-10-08T15:25:09+00:00"
-lastmod: "2026-09-21T06:05:26+00:00"
 description: "I'm still working on learning Rust. Beyond syntax, learning a language requires familiarizing oneself with its idioms and ecosystem. I'm at a point where…"
 canonical: "https://blog.frankel.ch/different-test-scopes-rust/"
 authors:

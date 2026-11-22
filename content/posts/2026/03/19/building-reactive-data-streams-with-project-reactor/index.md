@@ -1,7 +1,6 @@
 ---
 title: "Building Reactive Data Streams with Project Reactor"
 date: "2026-03-19T15:13:31+00:00"
-lastmod: "2026-04-15T21:09:34+00:00"
 description: "Creating Non-Blocking Streaming Endpoints for High-Throughput Applications"
 authors:
   - "matteo-rossi"

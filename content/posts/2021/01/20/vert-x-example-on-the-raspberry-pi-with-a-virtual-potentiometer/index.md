@@ -1,7 +1,6 @@
 ---
 title: "Vert.x Example on the Raspberry Pi with a Virtual Potentiometer"
 date: "2021-01-20T08:35:52+00:00"
-lastmod: "2021-01-20T09:01:59+00:00"
 description: "Vert.x is open-source reactive polyglot software toolkit from the developers of Eclipse. Let's use it to play with a virtual potentiometer!"
 canonical: "http://www.igfasouza.com/blog/raspberry-pi-vert-x-web-potentiometer/"
 authors:

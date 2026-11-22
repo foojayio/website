@@ -1,7 +1,6 @@
 ---
 title: "Upgrade to Jakarta EE 10 and GlassFish 7: Easier Than You Think!"
 date: "2023-06-27T07:29:48+00:00"
-lastmod: "2023-08-08T10:34:38+00:00"
 description: "Everything you need to know before upgrading to Jakarta EE 10 and a guide to upgrade successfully and in almost no time!"
 authors:
   - "ondro-mihalyi"

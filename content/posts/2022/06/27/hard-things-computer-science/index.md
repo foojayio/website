@@ -1,7 +1,6 @@
 ---
 title: "Hard Things in Computer Science"
 date: "2022-06-27T08:13:01+00:00"
-lastmod: "2022-06-27T08:13:57+00:00"
 description: "Here I list several hard things I've been exposed to. I believe there are many others: I'll be interested in the ones you've encountered!"
 canonical: "https://blog.frankel.ch/hard-things-computer-science/"
 authors:

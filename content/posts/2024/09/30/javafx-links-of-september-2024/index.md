@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of September 2024"
 date: "2024-09-30T02:00:00+00:00"
-lastmod: "2024-10-01T07:18:45+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of September 2024, published on jfx-central.com during this month."
 canonical: "https://webtechie.be/post/2024-09-27-javafx-links-of-september-2024/"
 authors:

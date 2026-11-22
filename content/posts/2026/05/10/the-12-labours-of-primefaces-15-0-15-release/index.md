@@ -1,7 +1,6 @@
 ---
 title: "THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
 date: "2026-05-10T08:15:26+00:00"
-lastmod: "2026-05-10T15:14:28+00:00"
 description: "💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
 authors:
   - "vincent-vauban"

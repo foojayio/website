@@ -1,7 +1,6 @@
 ---
 title: "Developer vs. ChatGPT Part I: Writing a Spring Boot Microservice"
 date: "2023-04-27T15:25:12+00:00"
-lastmod: "2023-05-03T07:43:19+00:00"
 description: "Pitting a seasoned Java developer against the all-knowing generative AI to find out... can AI generate a Java microservice end-to-end?"
 authors:
   - "roni-dover"

@@ -1,7 +1,6 @@
 ---
 title: "Jakarta EE 11 Web Profile Released, Enabled by Eclipse GlassFish"
 date: "2025-04-22T11:06:19+00:00"
-lastmod: "2026-03-23T15:13:53+00:00"
 description: "A cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications."
 authors:
   - "ondro-mihalyi"

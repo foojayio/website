@@ -1,7 +1,6 @@
 ---
 title: "Taking a Closer Look at Kotlin's Delegation"
 date: "2021-04-30T13:53:00+00:00"
-lastmod: "2021-11-08T08:37:51+00:00"
 description: "Kotlin offers many cool features, most tend to cite null safety as their favorite. For me, it's function extensions, with delegation second."
 canonical: "https://blog.frankel.ch/kotlin-delegation/"
 authors:

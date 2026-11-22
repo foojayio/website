@@ -1,7 +1,6 @@
 ---
 title: "New: JDKMonitor"
 date: "2023-10-18T08:04:08+00:00"
-lastmod: "2023-10-19T15:09:19+00:00"
 description: "A widget on your MacOS desktop that shows the days until the next release/update of OpenJDK, and more."
 authors:
   - "gerrit-grunwald"

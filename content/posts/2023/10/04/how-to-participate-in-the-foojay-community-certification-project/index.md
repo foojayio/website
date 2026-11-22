@@ -1,7 +1,6 @@
 ---
 title: "Contributing to Foojay's Java Community Certification"
 date: "2023-10-04T07:12:55+00:00"
-lastmod: "2023-10-04T07:13:41+00:00"
 description: "Read how you can help create a community certification for Java Developers as part of the Foojay community"
 authors:
   - "janhendrik-kuperus"

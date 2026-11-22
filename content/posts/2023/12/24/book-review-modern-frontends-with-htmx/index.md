@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Modern Frontends with htmx"
 date: "2023-12-24T10:07:20+00:00"
-lastmod: "2023-12-24T10:07:21+00:00"
 description: "Get started experimenting with htmx and the many benefits it can bring to build dynamic, user-friendly, web pages!"
 canonical: "https://webtechie.be/post/2023-12-10-book-review-htmx/"
 authors:

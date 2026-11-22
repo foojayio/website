@@ -1,7 +1,6 @@
 ---
 title: "What is MicroProfile?"
 date: "2022-09-22T09:03:08+00:00"
-lastmod: "2022-09-22T09:19:10+00:00"
 description: "What is the MicroProfile specification, what is it used for, and why might you need it? Find out here and get started! "
 canonical: "https://blog.payara.fish/what-is-microprofile"
 authors:

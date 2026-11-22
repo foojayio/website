@@ -1,7 +1,6 @@
 ---
 title: "Contributing to Open Source: Hacktoberfest"
 date: "2023-10-03T09:07:45+00:00"
-lastmod: "2023-10-03T09:08:14+00:00"
 description: "Have you ever considered contributing to open source software, but are you unsure on how to start? Consider participating in Hacktoberfest."
 authors:
   - "simon-verhoeven"

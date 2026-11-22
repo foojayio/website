@@ -1,7 +1,6 @@
 ---
 title: "Seasons time-lapse - the foundations"
 date: "2026-05-21T19:56:04+00:00"
-lastmod: "2026-09-21T05:56:04+00:00"
 description: "I live close to nature. I regularly go for a run in the countryside. Over several years, during my runs, I've taken pictures from the same position,…"
 canonical: "https://blog.frankel.ch/seasons-time-lapse/1/"
 authors:

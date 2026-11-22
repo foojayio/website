@@ -1,7 +1,6 @@
 ---
 title: "Manage Different Java Versions on Your Machine with SDKMan!"
 date: "2023-09-20T07:05:16+00:00"
-lastmod: "2023-09-20T07:05:17+00:00"
 description: "SDKMan! stands for Software Development Kit Manager, a shell script that allows you to manage parallel versions of multiple Software Development Kits for JVM-based languages."
 canonical: "https://blog.payara.fish/easily-manage-different-java-versions-on-your-machine-with-sdkman"
 authors:

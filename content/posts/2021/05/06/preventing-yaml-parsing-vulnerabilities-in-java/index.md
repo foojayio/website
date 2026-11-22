@@ -1,7 +1,6 @@
 ---
 title: "Preventing YAML Parsing Vulnerabilities in Java"
 date: "2021-05-06T16:09:24+00:00"
-lastmod: "2021-07-05T20:09:19+00:00"
 description: "With anchors, you can create a YAML bomb! The tremendous amount of (nested) objects will cause a memory overload."
 canonical: "https://snyk.io/blog/java-yaml-parser-with-snakeyaml/"
 authors:

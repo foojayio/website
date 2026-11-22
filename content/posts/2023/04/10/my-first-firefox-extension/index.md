@@ -1,7 +1,6 @@
 ---
 title: "My First Firefox Extension"
 date: "2023-04-10T18:36:13+00:00"
-lastmod: "2023-04-10T18:37:40+00:00"
 description: "A couple of weeks ago, I spent the weekend creating another CFP submission helper in the form of a Firefox extension."
 canonical: "https://blog.frankel.ch/firefox-extension/"
 authors:

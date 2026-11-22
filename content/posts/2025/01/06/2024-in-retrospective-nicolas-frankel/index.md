@@ -1,7 +1,6 @@
 ---
 title: "2024 in Retrospective: Nicolas Frankel"
 date: "2025-01-06T08:59:26+00:00"
-lastmod: "2025-01-06T08:59:27+00:00"
 description: "For the first article of 2025, I'm continuing my retrospective series!"
 authors:
   - "nicolas-frankel"

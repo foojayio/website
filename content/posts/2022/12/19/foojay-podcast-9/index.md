@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #9: State of JavaFX, Libraries, and Projects"
 date: "2022-12-19T08:09:31+00:00"
-lastmod: "2025-11-13T09:19:27+00:00"
 description: "Let's talk about the JavaFX framework itself, but also about the libraries and applications that are built with it."
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "From Kotlin Scripting to Python"
 date: "2024-03-07T01:04:15+00:00"
-lastmod: "2026-09-21T06:03:55+00:00"
 description: "GitHub offers a way to customize one's profile by allowing one to create a README in a specific repository, named as your profile, e.g.,…"
 canonical: "https://blog.frankel.ch/kotlin-scripting-to-python/"
 authors:

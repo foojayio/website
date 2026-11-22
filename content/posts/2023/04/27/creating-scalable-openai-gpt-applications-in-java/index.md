@@ -1,7 +1,6 @@
 ---
 title: "Creating Scalable OpenAI GPT Applications in Java"
 date: "2023-04-27T14:18:45+00:00"
-lastmod: "2023-04-27T14:18:47+00:00"
 description: "Learn how to integrate the ChatGPT engine into your Java applications in a scalable way by sending prompts to the engine only when necessary."
 canonical: "https://dzone.com/articles/creating-scalable-openai-gpt-applications-in-java"
 authors:

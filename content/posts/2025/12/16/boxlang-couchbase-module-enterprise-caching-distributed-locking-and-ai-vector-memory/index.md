@@ -1,7 +1,6 @@
 ---
 title: "BoxLang Native Couchbase Module"
 date: "2025-12-16T08:37:02+00:00"
-lastmod: "2025-12-17T08:28:07+00:00"
 description: "Ortus Solutions is thrilled to announce the official release of bx-couchbase v1.0, a groundbreaking module that brings enterprise-grade Couchbase capabilities to the BoxLang ecosystem"
 authors:
   - "luis-majano"

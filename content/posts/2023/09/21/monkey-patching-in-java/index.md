@@ -1,7 +1,6 @@
 ---
 title: "Monkey-patching in Java"
 date: "2023-09-21T07:34:22+00:00"
-lastmod: "2023-09-21T07:34:24+00:00"
 description: "Monkey patching is a technique used to dynamically update the behavior of a piece of code at run-time."
 authors:
   - "nicolas-frankel"

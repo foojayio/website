@@ -1,7 +1,6 @@
 ---
 title: "The Java Story: A Film About All of Us"
 date: "2026-07-09T08:43:59+00:00"
-lastmod: "2026-07-09T13:32:00+00:00"
 description: "The official Java documentary premieres July 17 on YouTube. Watch the trailer, meet the guests, and join the live chat with James Gosling."
 authors:
   - "dominika-tasarz"

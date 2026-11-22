@@ -1,7 +1,6 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 6)"
 date: "2021-06-25T16:48:48+00:00"
-lastmod: "2022-01-12T13:46:44+00:00"
 description: "Learn how to make WebService calls (RESTful) from your JavaFX application to retrieve weather data based on geographic locations."
 authors:
   - "carldea"

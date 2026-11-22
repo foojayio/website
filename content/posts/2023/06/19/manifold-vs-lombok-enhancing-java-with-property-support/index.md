@@ -1,7 +1,6 @@
 ---
 title: "Manifold vs. Lombok: Enhancing Java with Property Support"
 date: "2023-06-19T18:04:59+00:00"
-lastmod: "2023-06-19T18:05:00+00:00"
 description: "Two decades ago we worked on properties in Java. Lombok filled in that gap. Manifold aims to solve this same problem. Is it ready?"
 canonical: "https://debugagent.com/manifold-vs-lombok-enhancing-java-with-property-support"
 authors:

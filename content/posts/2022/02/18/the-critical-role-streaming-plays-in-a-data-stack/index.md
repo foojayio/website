@@ -1,7 +1,6 @@
 ---
 title: "The Critical Role Streaming Plays in a Data Stack"
 date: "2022-02-18T17:20:13+00:00"
-lastmod: "2022-02-18T17:20:15+00:00"
 description: "Why Apache Pulsar and its support for streaming data is the right choice for multi-datacenter, geo-distributed deployments."
 canonical: "https://www.rtinsights.com/the-critical-role-streaming-plays-in-a-data-stack/"
 authors:

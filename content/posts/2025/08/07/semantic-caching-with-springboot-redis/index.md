@@ -1,7 +1,6 @@
 ---
 title: "Semantic Caching with SpringBoot & Redis"
 date: "2025-08-07T06:58:07+00:00"
-lastmod: "2025-08-07T07:02:22+00:00"
 description: "Build semantic caching with Spring AI & Redis to cut LLM costs 80%. Cache by meaning, not exact text. Full tutorial with working demo."
 authors:
   - "raphael-delio"

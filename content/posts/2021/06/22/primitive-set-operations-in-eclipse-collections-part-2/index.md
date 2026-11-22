@@ -1,7 +1,6 @@
 ---
 title: "Primitive Set Operations in Eclipse Collections — Part 2"
 date: "2021-06-22T22:58:38+00:00"
-lastmod: "2021-06-23T16:34:34+00:00"
 description: "Eclipse Collections 11.0: Set operations union, intersect, difference, symmetricDifference, isSubsetOf, isProperSubsetOf, cartesianProduct."
 authors:
   - "sirisha-pratha"

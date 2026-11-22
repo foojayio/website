@@ -1,7 +1,6 @@
 ---
 title: "VS Code: SpringOne Updates, UX Improvements, Community Feedback"
 date: "2021-09-20T06:46:49+00:00"
-lastmod: "2021-09-23T07:02:45+00:00"
 description: "Let's share some exciting updates from the SpringOne 2021 conference, as well as various user experience improvements!"
 authors:
   - "nick-zhu"

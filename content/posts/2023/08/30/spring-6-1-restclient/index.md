@@ -1,7 +1,6 @@
 ---
 title: "Spring 6.1 - RestClient"
 date: "2023-08-30T16:23:40+00:00"
-lastmod: "2023-08-31T17:46:29+00:00"
 description: "Getting started making use of the new RestClient introduced in Spring 6.1!"
 authors:
   - "simon-verhoeven"

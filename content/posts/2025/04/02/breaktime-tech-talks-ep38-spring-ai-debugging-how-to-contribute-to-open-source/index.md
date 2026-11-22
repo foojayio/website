@@ -1,7 +1,6 @@
 ---
 title: "Spring AI Debugging + How to Contribute to Open Source"
 date: "2025-04-02T05:56:01+00:00"
-lastmod: "2025-04-11T07:29:01+00:00"
 description: "In this episode, I focus on continuing my journey with vector databases, integrating Pinecone, Neo4J , and Spring AI."
 authors:
   - "jennifer-reif"

@@ -1,7 +1,6 @@
 ---
 title: "BoxLang NeoVim Plugin Released"
 date: "2026-02-18T14:51:35+00:00"
-lastmod: "2026-02-19T08:42:51+00:00"
 description: "We're excited to announce the release of the BoxLang NeoVim Plugin - a comprehensive syntax highlighting solution designed specifically for BoxLang…"
 authors:
   - "cristobal-escobar"

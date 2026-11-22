@@ -1,7 +1,6 @@
 ---
 title: "Who instruments the instrumenters?"
 date: "2024-05-30T16:25:45+00:00"
-lastmod: "2025-02-04T19:16:52+00:00"
 description: "Have you ever wondered how libraries like Spring and Mockito modify your code at run-time to implement all their advanced features?"
 authors:
   - "johannes-bechberger"

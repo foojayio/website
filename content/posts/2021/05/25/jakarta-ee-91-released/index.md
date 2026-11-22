@@ -1,7 +1,6 @@
 ---
 title: "Announcement: Jakarta EE 9.1 Has Been Released!"
 date: "2021-05-25T14:57:35+00:00"
-lastmod: "2021-08-23T15:32:31+00:00"
 description: "The Jakarta EE Working Group Releases Jakarta EE 9.1 as Industry Continues to Embrace Open Source Enterprise Java."
 authors:
   - "ivar-grimstad"

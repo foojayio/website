@@ -1,7 +1,6 @@
 ---
 title: "OpenAPI, ORM, SVG and Lottie"
 date: "2026-06-18T00:52:45+00:00"
-lastmod: "2026-06-18T13:38:40+00:00"
 description: "An OpenAPI 3.x client generator that turns a spec into typed Codename One code, a JPA-shaped SQLite ORM, JAXB-shaped JSON / XML mappers, build-time SVG and"
 canonical: "https://www.codenameone.com/blog/build-time-codegen/"
 authors:

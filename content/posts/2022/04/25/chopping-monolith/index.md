@@ -1,7 +1,6 @@
 ---
 title: "Chopping the Monolith: Foojay.io Today"
 date: "2022-04-25T19:06:50+00:00"
-lastmod: "2022-04-25T19:06:52+00:00"
 description: "In this article, I highlight that microservices, as presented at conferences, are doomed to fail in most organizations."
 canonical: "https://blog.frankel.ch/chopping-monolith/"
 authors:

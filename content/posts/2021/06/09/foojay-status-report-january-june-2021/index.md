@@ -1,7 +1,6 @@
 ---
 title: "Foojay Status Report: January - June 2021"
 date: "2021-06-09T09:16:00+00:00"
-lastmod: "2022-01-13T13:44:18+00:00"
 description: "Half year mark of 2021 is a good moment to reflect on the current status of Foojay.io, a place for Friends Of OpenJDK!"
 authors:
   - "geertjan-wielenga"

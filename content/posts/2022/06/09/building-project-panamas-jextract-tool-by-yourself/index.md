@@ -1,7 +1,6 @@
 ---
 title: "Building Project Panama's jextract tool by yourself"
 date: "2022-06-09T14:22:47+00:00"
-lastmod: "2022-07-09T19:42:01+00:00"
 description: "Learn about jextract, which can generate Java binding code that represents native functions or variables (symbols) from C libraries."
 authors:
   - "carldea"

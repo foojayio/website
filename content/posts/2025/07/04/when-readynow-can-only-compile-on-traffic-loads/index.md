@@ -1,7 +1,6 @@
 ---
 title: "When ReadyNow Can Only Compile on Traffic Loads"
 date: "2025-07-04T19:36:00+00:00"
-lastmod: "2025-07-07T08:11:27+00:00"
 description: "This is the fifth and final blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to…"
 canonical: "https://www.azul.com/blog/when-readynow-can-only-compile-on-traffic-loads/"
 authors:

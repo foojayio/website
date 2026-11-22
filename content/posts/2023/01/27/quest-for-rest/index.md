@@ -1,7 +1,6 @@
 ---
 title: "Quest for REST"
 date: "2023-01-27T14:48:38+00:00"
-lastmod: "2023-01-27T14:49:15+00:00"
 description: "SOAP's biggest flaw was its complexity and its focus on big companies, but it at least provided a shared set of standard specifications."
 canonical: "https://blog.frankel.ch/quest-for-rest/"
 authors:

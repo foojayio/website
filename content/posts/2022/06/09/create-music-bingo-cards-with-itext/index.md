@@ -1,7 +1,6 @@
 ---
 title: "Create Music Bingo Cards with iText"
 date: "2022-06-09T08:33:31+00:00"
-lastmod: "2022-06-09T08:33:33+00:00"
 description: "This weekend we had a party and wanted to organize a music bingo. A small Java project seemed to be the best solution!"
 canonical: "https://webtechie.be/post/2022-05-30-pdf-bingo-card-with-itext/"
 authors:

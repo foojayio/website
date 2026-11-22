@@ -1,7 +1,6 @@
 ---
 title: "Clean Architecture with Spring Boot and MongoDB"
 date: "2026-03-24T16:43:14+00:00"
-lastmod: "2026-03-24T16:43:15+00:00"
 description: "In this article, you will build a product catalog with orders. Products have names, prices, and stock quantities. Orders reference products and enforce rules like \"you can't order more than what's in stock.\" The domain is small enough to follow in one sitting, but it has real business rules that benefit from the architecture. The tech stack is Java 17+, Spring Boot 3.x, and Spring Data MongoDB. By the end, you will have a project structure where the domain and application layers compile without Spring or MongoDB on the classpath."
 authors:
   - "farhan-chowdhury"

@@ -1,7 +1,6 @@
 ---
 title: "One tip for successful OpenTelemetry projects"
 date: "2026-03-31T17:45:56+00:00"
-lastmod: "2026-09-21T05:56:40+00:00"
 description: "Leading your organization to use OpenTelemetry is a challenge. In addition to all the usual project hurdles, you'll face one of these two situations:…"
 canonical: "https://blog.frankel.ch/tip-opentelemetry-projects/"
 authors:

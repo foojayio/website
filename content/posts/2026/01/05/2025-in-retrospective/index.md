@@ -1,7 +1,6 @@
 ---
 title: "2025 in retrospective"
 date: "2026-01-05T11:44:20+00:00"
-lastmod: "2026-09-21T05:59:30+00:00"
 description: "From the beginning, the focus of this blog has been technical, very rarely organizational. I broke this unwritten rule once in 2015. I began writing…"
 canonical: "https://blog.frankel.ch/2025-retrospective/"
 authors:

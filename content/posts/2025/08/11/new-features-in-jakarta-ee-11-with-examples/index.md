@@ -1,7 +1,6 @@
 ---
 title: "New Features in Jakarta EE 11, with Examples"
 date: "2025-08-11T06:40:56+00:00"
-lastmod: "2025-08-11T06:42:31+00:00"
 description: "Launched on June 26, 2025, Jakarta EE 11 introduces one brand-new specification and updates 16 existing ones."
 canonical: "https://omnifish.ee/new-features-in-jakarta-ee-11-with-examples/"
 authors:

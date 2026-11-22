@@ -1,7 +1,6 @@
 ---
 title: "Book review - Practical Design Patterns for Java Developers"
 date: "2023-03-17T08:27:08+00:00"
-lastmod: "2023-03-17T08:38:05+00:00"
 description: "Ever wondered why you need design patterns and how to apply them? Miroslav Wengner's book has you covered."
 canonical: "https://webtechie.be/post/2023-03-08-book-review-practical-design-patterns/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Event Driven Hello World Program"
 date: "2023-03-02T16:34:35+00:00"
-lastmod: "2023-03-03T09:08:08+00:00"
 description: "Let's use an event-driven Hello World (a paradigm where the flow is determined by events) to step through behaviour-driven development,"
 authors:
   - "peter-lawrey"

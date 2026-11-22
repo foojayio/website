@@ -1,7 +1,6 @@
 ---
 title: "Java 23: What’s New?"
 date: "2024-09-04T09:19:35+00:00"
-lastmod: "2024-09-16T07:23:33+00:00"
 description: "The latest version of Java is rather sparse in terms of new features, and few of those currently under development have made it out of the preview."
 canonical: "https://www.loicmathieu.fr/wordpress/en/informatique/java-23-quoi-de-neuf/"
 authors:

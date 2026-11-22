@@ -1,7 +1,6 @@
 ---
 title: "Java Sealed Classes: Building Robust and Secure Applications"
 date: "2023-02-20T11:11:07+00:00"
-lastmod: "2023-03-02T23:31:27+00:00"
 description: "Sealed classes can help you create more robust and maintainable code by restricting the inheritance hierarchy of your classes and interfaces."
 authors:
   - "bazlur-rahman"

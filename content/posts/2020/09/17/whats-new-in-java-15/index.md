@@ -1,7 +1,6 @@
 ---
 title: "What's New, Noteworthy, and Enhanced in Java 15?"
 date: "2020-09-17T19:35:08+00:00"
-lastmod: "2020-09-21T21:05:21+00:00"
 description: "Here on foojay, the fixes that went into the release are listed, giving you a unique and readable changelog in helpful categories."
 authors:
   - "geertjan-wielenga"

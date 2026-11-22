@@ -1,7 +1,6 @@
 ---
 title: "Interview: Marc Hoffmann and Java Version Almanac"
 date: "2020-08-25T06:39:44+00:00"
-lastmod: "2020-09-01T14:07:55+00:00"
 description: "The Java Version Almanac provides details per release on OpenJDK distributions, new features, and differences between APIs across releases."
 authors:
   - "geertjan-wielenga"

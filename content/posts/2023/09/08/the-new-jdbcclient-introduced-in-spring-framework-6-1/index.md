@@ -1,7 +1,6 @@
 ---
 title: "Spring's new JdbcClient API for performing database operations"
 date: "2023-09-08T06:45:44+00:00"
-lastmod: "2023-09-08T06:45:45+00:00"
 description: "Learn how to perform JDBC operations using the new JdbcClient fluent API introduced in Spring framework 6.1."
 authors:
   - "siva-katamreddy"

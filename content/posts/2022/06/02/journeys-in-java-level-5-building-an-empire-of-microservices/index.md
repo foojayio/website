@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 5: Building an Empire of Microservices"
 date: "2022-06-02T05:08:28+00:00"
-lastmod: "2022-06-02T05:08:36+00:00"
 description: "We continue building our microservices system by adding a coordination layer to handle spinning multiple services up and down."
 authors:
   - "jennifer-reif"

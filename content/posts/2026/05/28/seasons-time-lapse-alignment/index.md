@@ -1,7 +1,6 @@
 ---
 title: "Seasons time-lapse - alignment"
 date: "2026-05-28T16:28:48+00:00"
-lastmod: "2026-09-21T05:55:52+00:00"
 description: "In the previous post, I described the Seasons project: a time-lapse of hundreds of pictures taken from nearly the same viewpoint over the years. The…"
 canonical: "https://blog.frankel.ch/seasons-time-lapse/2/"
 authors:

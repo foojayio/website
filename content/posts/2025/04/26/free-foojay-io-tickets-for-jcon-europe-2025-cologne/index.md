@@ -1,7 +1,6 @@
 ---
 title: "Free Foojay.io Tickets for JCON EUROPE 2025, Cologne!"
 date: "2025-04-26T08:16:44+00:00"
-lastmod: "2025-04-28T07:42:32+00:00"
 description: "As proud members of the Java ecosystem, Foojay collaborators of all shapes and sizes can join JCON EUROPE 2025 at no cost."
 authors:
   - "r-fichtner"

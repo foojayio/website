@@ -1,7 +1,7 @@
 ---
 title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-10-29T00:00:00+00:00"
+updated: "2026-10-29T00:00:00+00:00"
 description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"

@@ -1,7 +1,6 @@
 ---
 title: "How to enable java preview feature and run code from IntelliJ IDEA"
 date: "2022-05-08T10:07:50+00:00"
-lastmod: "2022-05-10T16:46:57+00:00"
 description: "JEP 425: Virtual Threads (Preview) has been proposed recently. I wanted to give it a try on my favourite IDE, this article shows you how to do that in IntelliJ IDEA"
 authors:
   - "bazlur-rahman"

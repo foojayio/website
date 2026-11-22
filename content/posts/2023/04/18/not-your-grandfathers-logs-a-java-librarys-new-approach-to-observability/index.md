@@ -1,7 +1,6 @@
 ---
 title: "A Java Library’s New Approach To Observability"
 date: "2023-04-18T08:10:01+00:00"
-lastmod: "2023-07-18T07:07:33+00:00"
 description: "How a Java library is taking a completely new approach to understanding what the code does, and why it makes perfect developer sense."
 canonical: "https://medium.com/better-programming/not-your-grandfathers-logs-a-java-library-s-new-approach-to-observability-ebd4a90d198d"
 authors:

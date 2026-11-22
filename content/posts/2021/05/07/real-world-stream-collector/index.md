@@ -1,7 +1,6 @@
 ---
 title: "A Real-World Example of a Stream Collector"
 date: "2021-05-07T07:34:45+00:00"
-lastmod: "2022-09-04T13:41:55+00:00"
 description: "Java Stream's Collectors methods fit most use-cases. Let's imagine an e-commerce platform that implements a shopping cart."
 canonical: "https://blog.frankel.ch/real-world-stream-collector/"
 authors:

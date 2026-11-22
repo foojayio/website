@@ -1,7 +1,6 @@
 ---
 title: "Looking Back on One Year of Speaking and Blogging"
 date: "2024-01-05T17:49:04+00:00"
-lastmod: "2024-01-05T17:49:05+00:00"
 description: "2023 was an adventurous year for me: I came into my blogging rhythm, blogging every one to two weeks, resulting in 39 articles, many of them on Foojay.io."
 authors:
   - "johannes-bechberger"

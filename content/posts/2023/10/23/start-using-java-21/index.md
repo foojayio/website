@@ -1,7 +1,6 @@
 ---
 title: "Start using Java 21 in your apps on Open Liberty 23.0.0.10"
 date: "2023-10-23T08:39:06+00:00"
-lastmod: "2023-10-23T08:41:14+00:00"
 description: "Java 21, including virtual threads, is finally here! And you can try it all out now on Open Liberty 23.0.0.10 for free."
 canonical: "https://openliberty.io/blog/2023/10/17/23.0.0.10.html"
 authors:

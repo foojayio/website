@@ -1,7 +1,6 @@
 ---
 title: "Running Spring Boot Applications on OpenShift"
 date: "2021-03-04T08:36:17+00:00"
-lastmod: "2021-08-23T12:46:21+00:00"
 description: "This article will demonstrate how to deploy a Spring Boot application on OpenShift (Minishift), by Redhat."
 canonical: "https://ashishtechmill.com/running-simple-spring-boot-application-on-openshift"
 authors:

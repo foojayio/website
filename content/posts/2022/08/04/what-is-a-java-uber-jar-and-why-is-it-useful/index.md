@@ -1,7 +1,6 @@
 ---
 title: "What is a Java Uber-JAR and Why Is It Useful?"
 date: "2022-08-04T12:53:49+00:00"
-lastmod: "2022-08-04T12:53:50+00:00"
 description: "Get started with Uber-JAR today and learn the different variants of the Uber-JAR artifact and the advantages and drawbacks it has."
 canonical: "https://blog.payara.fish/what-is-a-java-uber-jar"
 authors:

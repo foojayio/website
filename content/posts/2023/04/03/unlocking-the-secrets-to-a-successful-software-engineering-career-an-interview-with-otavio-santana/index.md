@@ -1,7 +1,6 @@
 ---
 title: "Unlocking the Secrets to a Successful Software Engineering Career: An Interview with Otavio Santana"
 date: "2023-04-03T11:55:15+00:00"
-lastmod: "2023-04-03T14:17:26+00:00"
 description: "Discover insights from Otavio Santana on the importance of open-source contributions, mentorship, and simplicity in software engineering, as he shares valuable advice for developers at all career stages."
 authors:
   - "bazlur-rahman"

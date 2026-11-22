@@ -1,7 +1,6 @@
 ---
 title: "Solving Gradle metadata and Renovate integration"
 date: "2026-08-19T05:53:45+00:00"
-lastmod: "2026-09-21T05:53:59+00:00"
 description: "My current company has settled on using Gradle. It doesn't make me very happy, but you need to learn to work with constraints. Plus, I must admit that the…"
 canonical: "https://blog.frankel.ch/gradle-metadata-renovate-integration/"
 authors:

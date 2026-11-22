@@ -1,7 +1,6 @@
 ---
 title: "Ingesting Data from Kafka into the QuestDB time-series database"
 date: "2023-03-28T09:38:35+00:00"
-lastmod: "2023-03-28T09:39:34+00:00"
 description: "Learn how to Ingest streaming time-series data from Apache Kafka into QuestDB using ILP with the Kafka Sink Connector."
 authors:
   - "javier-ramirez"

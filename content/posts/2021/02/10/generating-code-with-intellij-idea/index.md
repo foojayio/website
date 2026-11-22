@@ -1,7 +1,6 @@
 ---
 title: "Generating Boilerplate Code with IntelliJ IDEA"
 date: "2021-02-10T09:17:18+00:00"
-lastmod: "2021-09-04T08:47:43+00:00"
 description: "One of the super cool things about IntelliJ IDEA is how much code you can generate with minimum effort. Read on to find out more!"
 canonical: "https://www.helenjoscott.com/posts/generating-code-with-intellij-idea"
 authors:

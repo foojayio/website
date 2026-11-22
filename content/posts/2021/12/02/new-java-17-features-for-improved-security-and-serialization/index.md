@@ -1,7 +1,6 @@
 ---
 title: "New Java 17 Features for Improved Security and Serialization"
 date: "2021-12-02T08:06:36+00:00"
-lastmod: "2021-12-02T08:09:22+00:00"
 description: "The Java 17 LTS release brings you significant improvements to prevent malicious deserialization in your java applications."
 canonical: "https://snyk.io/blog/new-java-17-features-for-improved-security-and-serialization/"
 authors:

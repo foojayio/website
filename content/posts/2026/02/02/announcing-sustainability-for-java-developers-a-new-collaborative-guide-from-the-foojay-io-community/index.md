@@ -1,7 +1,6 @@
 ---
 title: "Announcing: Sustainability for Java Developers"
 date: "2026-02-02T11:04:54+00:00"
-lastmod: "2026-02-02T11:54:29+00:00"
 description: "Java developers from around the world are writung a book about a question that's becoming impossible to ignore: how do we write software that's good for both our projects and the planet?"
 authors:
   - "bazlur-rahman"

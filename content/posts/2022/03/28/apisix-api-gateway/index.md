@@ -1,7 +1,6 @@
 ---
 title: "APISIX: An API Gateway the Apache Way"
 date: "2022-03-28T07:40:15+00:00"
-lastmod: "2022-03-28T07:40:16+00:00"
 description: "Starting with Apache APISIX as your API Gateway is easy as pie. Use Docker, with the APISIX and etcd images, and off you go."
 canonical: "https://blog.frankel.ch/apisix-api-gateway/"
 authors:

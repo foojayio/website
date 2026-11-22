@@ -1,7 +1,6 @@
 ---
 title: "Java’s Structured Concurrency: Finally Finding Its Footing"
 date: "2025-06-04T12:21:07+00:00"
-lastmod: "2025-06-05T07:15:42+00:00"
 description: "Explore the refined Java Structured Concurrency API. Learn about new task scopes, joiners, and improved error handling for cleaner, more robust concurrent code."
 canonical: "https://bazlur.ca/2025/05/25/javas-structured-concurrency-finally-finding-its-footing/"
 authors:

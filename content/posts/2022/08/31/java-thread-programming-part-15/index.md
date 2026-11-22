@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 15)"
 date: "2022-08-31T17:30:53+00:00"
-lastmod: "2022-09-04T13:48:59+00:00"
 description: "Let's learn how to do asynchronous method invocation with Callable and Future by means of a practical example."
 authors:
   - "bazlur-rahman"

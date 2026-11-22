@@ -1,7 +1,6 @@
 ---
 title: "A Walk to Lazy Fetching With Hibernate and Spring Data JPA"
 date: "2021-11-17T11:47:30+00:00"
-lastmod: "2023-08-28T12:40:10+00:00"
 description: "Using FetchType.EAGER is a very bad practice, since our services may not require all the data of the mapped entities in all cases."
 authors:
   - "mainuls18"

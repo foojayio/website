@@ -1,7 +1,6 @@
 ---
 title: "Oracle Alternatives Survey & Report"
 date: "2024-05-13T19:27:51+00:00"
-lastmod: "2024-05-17T20:31:26+00:00"
 description: "Azul is planning to issue an Oracle \"alternatives\" Report in late July, and would like your help to complete the survey."
 authors:
   - "geertjan-wielenga"

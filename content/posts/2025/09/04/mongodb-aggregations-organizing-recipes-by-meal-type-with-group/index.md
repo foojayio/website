@@ -1,7 +1,6 @@
 ---
 title: "MongoDB Aggregations: Organizing Recipes by Meal Type with $group"
 date: "2025-09-04T05:31:22+00:00"
-lastmod: "2025-09-04T05:31:24+00:00"
 description: "In this post, we’ll walk through how to use `$group` to categorize recipes by type and explore grouping by tags to uncover popular recipe categories."
 authors:
   - "justin-jenkins"

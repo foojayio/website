@@ -1,7 +1,6 @@
 ---
 title: "CAP in the Pocket"
 date: "2025-07-07T15:27:26+00:00"
-lastmod: "2025-07-07T15:27:28+00:00"
 description: "Learn you how develop and run a CAP Spring-Boot Java app locally on your Android phone using Termux and VSCode."
 authors:
   - "johannes-bechberger"

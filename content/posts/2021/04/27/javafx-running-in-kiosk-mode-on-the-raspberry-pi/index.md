@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Running in Kiosk Mode on the Raspberry Pi"
 date: "2021-04-27T14:39:50+00:00"
-lastmod: "2021-12-10T13:01:02+00:00"
 description: "Combined with an inexpensive touch screen, the Raspberry Pi makes for a perfect controller for a machine or game console."
 canonical: "https://webtechie.be/post/2021-04-23-javafx-kiosk-raspberry-pi/"
 authors:

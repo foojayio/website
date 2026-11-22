@@ -1,7 +1,6 @@
 ---
 title: "Eclipse GlassFish: This Isn’t Your Father’s GlassFish"
 date: "2026-03-24T15:30:49+00:00"
-lastmod: "2026-03-30T12:19:59+00:00"
 description: "GlassFish is an application server with a long history and has always had a special role in the Java world as the reference implementation of Java EE,…"
 authors:
   - "ondro-mihalyi"

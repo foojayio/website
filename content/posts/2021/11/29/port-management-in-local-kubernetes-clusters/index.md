@@ -1,7 +1,6 @@
 ---
 title: "Port Management in Local Kubernetes Clusters"
 date: "2021-11-29T08:44:25+00:00"
-lastmod: "2021-11-29T08:48:30+00:00"
 description: "Another approach for my demos: a regular proxy in front of my local cluster. OSX comes with an existing Apache Web Server installation."
 canonical: "https://blog.frankel.ch/port-management-local-kubernetes/"
 authors:

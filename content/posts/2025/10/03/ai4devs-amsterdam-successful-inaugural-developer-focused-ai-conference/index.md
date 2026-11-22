@@ -1,7 +1,6 @@
 ---
 title: "Ai4Devs Amsterdam: Successful Inaugural Developer-Focused AI Conference"
 date: "2025-10-03T09:37:43+00:00"
-lastmod: "2025-10-03T09:47:20+00:00"
 description: "The inaugural AI4Devs conference in Amsterdam, proved to be a resounding success, bringing together approximately 200 developers at Amsterdam's iO Digital Campus."
 authors:
   - "geertjan-wielenga"

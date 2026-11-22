@@ -1,7 +1,6 @@
 ---
 title: "Java top most detected issues"
 date: "2024-02-14T09:49:16+00:00"
-lastmod: "2024-02-14T09:57:11+00:00"
 description: "The most detected issues in Java projects by not following the clean code approach, and how to fix them with clear examples."
 authors:
   - "jonathan-vila"

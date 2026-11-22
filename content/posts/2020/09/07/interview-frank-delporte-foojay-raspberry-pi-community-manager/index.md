@@ -1,7 +1,6 @@
 ---
 title: "Interview: Frank Delporte, Foojay Raspberry Pi Community Manager"
 date: "2020-09-07T13:20:38+00:00"
-lastmod: "2025-02-20T10:53:16+00:00"
 description: "Today we introduce a community manager for all things Raspberry Pi on foojay, Frank Delporte. He'd love to publish your Java/Raspberry Pi content on foojay!"
 authors:
   - "geertjan-wielenga"

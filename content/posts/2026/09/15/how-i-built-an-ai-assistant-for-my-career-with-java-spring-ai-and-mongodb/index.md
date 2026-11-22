@@ -1,7 +1,6 @@
 ---
 title: "How I Built an AI Assistant for My Career with Java, Spring AI, and MongoDB"
 date: "2026-09-15T11:51:17+00:00"
-lastmod: "2026-09-15T14:37:16+00:00"
 description: "How one developer built a personal AI assistant in Java using Spring AI, MongoDB Vector Search, conversation memory, and tool calling with Calendly."
 authors:
   - "ricardo-mello"

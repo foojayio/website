@@ -1,7 +1,6 @@
 ---
 title: "Community Spotlight: BoxLang Express Brings Node-Style HTTP to the JVM"
 date: "2026-09-08T11:25:18+00:00"
-lastmod: "2026-09-08T11:25:22+00:00"
 description: "If you've spent years in Spring Boot, Micronaut, or Jakarta EE, \"web framework\" usually means a servlet container, an embedded Tomcat or Netty, a build…"
 authors:
   - "cristobal-escobar"

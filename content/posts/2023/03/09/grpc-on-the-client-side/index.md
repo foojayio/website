@@ -1,7 +1,6 @@
 ---
 title: "gRPC on the client side"
 date: "2023-03-09T16:11:04+00:00"
-lastmod: "2026-09-21T06:05:12+00:00"
 description: "Most inter-systems communication components that use REST serialize their payload in JSON. As of now, JSON lacks a widely-used schema validation standard:…"
 canonical: "https://blog.frankel.ch/grpc-client-side/"
 authors:

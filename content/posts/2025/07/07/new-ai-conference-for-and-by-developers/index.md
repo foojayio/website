@@ -1,7 +1,6 @@
 ---
 title: "New AI Conference For And By Developers"
 date: "2025-07-07T11:50:54+00:00"
-lastmod: "2025-07-21T13:30:11+00:00"
 description: "AI4DEVS, September 19 in Amsterdam, is created for and by developers working with AI technologies."
 authors:
   - "geertjan-wielenga"

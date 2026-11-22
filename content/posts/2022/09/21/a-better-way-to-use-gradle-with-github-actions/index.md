@@ -1,7 +1,6 @@
 ---
 title: "A Better Way To Use Gradle With Github Actions"
 date: "2022-09-21T12:54:10+00:00"
-lastmod: "2022-09-21T14:46:54+00:00"
 description: "To enhance the experience of building Gradle projects on GitHub Actions, the Gradle team has developed the gradle-build-action."
 canonical: "https://blog.gradle.org/gh-actions"
 authors:

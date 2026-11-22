@@ -1,7 +1,6 @@
 ---
 title: "Web resource caching: Client-side"
 date: "2022-12-09T15:27:44+00:00"
-lastmod: "2022-12-09T15:42:06+00:00"
 description: "Learn about several alternatives to cache web resources: Expiry and Cache-Control, Last-Modified and ETag, and the Cache API and web workers."
 canonical: "https://blog.frankel.ch/web-caching/client/"
 authors:

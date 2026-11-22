@@ -1,7 +1,6 @@
 ---
 title: "Lights, Camera, Action: GitHub Actions with Java (Part 3)"
 date: "2022-02-03T15:24:33+00:00"
-lastmod: "2022-02-03T15:28:44+00:00"
 description: "The Java GitHub Actions that rules them all! Third and final instalment of Lights, Camera, Action: GitHub Actions with Java"
 authors:
   - "carldea"

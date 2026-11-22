@@ -1,7 +1,6 @@
 ---
 title: "MongoDB 8.0 Migration Guide: What You Need to Know Before Upgrading"
 date: "2026-02-05T14:56:13+00:00"
-lastmod: "2026-02-05T14:56:15+00:00"
 description: "Have you ever wondered why updates and upgrades are so essential for any system? Well, it’s no secret: They ensure that systems remain relevant and efficient. With MongoDB, it’s no different. Whenever we think about updating, we seek efficiency, security, performance, and other benefits that come with updated systems. However, every update introduces changes that need to be carefully managed. In this article, we will cover some of the new features of MongoDB version 8.0 and highlight the key considerations you should take into account before migrating to this new version."
 authors:
   - "ricardo-mello"

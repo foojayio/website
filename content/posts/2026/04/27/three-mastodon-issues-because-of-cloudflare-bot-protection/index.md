@@ -1,7 +1,6 @@
 ---
 title: "Three Mastodon issues because of Cloudflare Bot protection"
 date: "2026-04-27T18:56:21+00:00"
-lastmod: "2026-09-21T05:56:20+00:00"
 description: "I noticed some time ago that three Mastodon features had stopped working on my blog. Each of them seemed like a separate problem, but they had the same…"
 canonical: "https://blog.frankel.ch/mastodon-cloudflare-bot-protection/"
 authors:

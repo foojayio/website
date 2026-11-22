@@ -1,7 +1,6 @@
 ---
 title: "Securing Admin Access to Apache APISIX"
 date: "2023-02-11T16:34:59+00:00"
-lastmod: "2023-02-11T16:35:01+00:00"
 description: "API Gateways are critical components in one's infrastructure. Here we list a couple of ways to secure your Apache APISIX admin access."
 canonical: "https://blog.frankel.ch/secure-apisix-admin/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Sticky sessions with Apache APISIX"
 date: "2023-07-07T16:51:01+00:00"
-lastmod: "2023-07-07T16:58:45+00:00"
 description: "Learn about sticky sessions, that you should always use session replication with them, and how to implement sticky sessions on Apache APISIX."
 canonical: "https://blog.frankel.ch/sticky-sessions-apache-apisix/"
 authors:

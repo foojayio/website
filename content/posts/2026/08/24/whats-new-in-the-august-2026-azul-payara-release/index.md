@@ -1,7 +1,6 @@
 ---
 title: "What's New in the August 2026 Azul Payara Release?"
 date: "2026-08-24T15:36:28+00:00"
-lastmod: "2026-08-25T19:27:35+00:00"
 description: "The August 2026 Payara release previews Jakarta Agentic AI, adds MicroProfile 7.1 and gRPC and patches a security advisory."
 authors:
   - "dominika-tasarz"

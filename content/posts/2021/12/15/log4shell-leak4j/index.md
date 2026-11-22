@@ -1,7 +1,6 @@
 ---
 title: "Log4Shell / Leak4J"
 date: "2021-12-15T12:49:15+00:00"
-lastmod: "2021-12-15T12:52:11+00:00"
 description: "Over the last couple of days (and nights) I’ve been studying the new (extremely dangerous) vulnerability in log4j2 called Log4Shell."
 canonical: "https://www.royvanrijn.com/blog/2021/12/log4j2-rce-problem/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Java 11 & JavaFX 11 on Raspberry Pi with ARMv6 Processor"
 date: "2020-09-04T08:00:39+00:00"
-lastmod: "2020-09-09T08:24:39+00:00"
 description: "Here are complete and thorough steps for having a working Java JDK with JavaFX 11 on the Raspberry Pi using a ARMv6 Processor."
 canonical: "https://webtechie.be/post/2020-08-27-azul-zulu-java-11-and-gluon-javafx-11-on-armv6-raspberry-pi/"
 authors:

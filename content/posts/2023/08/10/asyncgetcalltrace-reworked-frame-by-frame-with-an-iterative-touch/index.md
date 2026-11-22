@@ -1,7 +1,6 @@
 ---
 title: "AsyncGetCallTrace Reworked: Frame by Frame Iterative Touch!"
 date: "2023-08-10T09:43:33+00:00"
-lastmod: "2023-08-10T09:44:03+00:00"
 description: "This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling."
 authors:
   - "johannes-bechberger"

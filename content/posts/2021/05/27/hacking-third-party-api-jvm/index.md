@@ -1,7 +1,6 @@
 ---
 title: "Getting Started Hacking Third-Party APIs on the JVM"
 date: "2021-05-27T06:27:58+00:00"
-lastmod: "2021-05-27T06:28:00+00:00"
 description: "Some alternatives that allow you to make third-party APIs behave in a way that their designers didn't intend to!"
 canonical: "https://blog.frankel.ch/hacking-third-party-api-jvm/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Hello eBPF: XDP-based Packet Filter (9)"
 date: "2024-05-13T07:13:38+00:00"
-lastmod: "2024-05-13T07:13:39+00:00"
 description: "Learn about new support for XDP to create a simple package blocker for eBPF."
 authors:
   - "johannes-bechberger"

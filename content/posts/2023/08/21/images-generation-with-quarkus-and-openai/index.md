@@ -1,7 +1,6 @@
 ---
 title: "AI-based Images generation with Quarkus and OpenAI DALL.E"
 date: "2023-08-21T07:38:07+00:00"
-lastmod: "2023-08-21T07:39:49+00:00"
 description: "We explore image generation with Quarkus and OpenAI using the new REST Client Reactive to invoke the OpenAI DALL.E API."
 authors:
   - "anto_perrone"

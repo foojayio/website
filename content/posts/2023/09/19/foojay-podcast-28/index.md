@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #28: Java 21 Has Arrived!"
 date: "2023-09-19T05:27:07+00:00"
-lastmod: "2025-11-13T08:58:16+00:00"
 description: "Since 2018, we get a new version of Java every 6 months. And version 21, released during today, is a long-term support version that can be used for many years."
 authors:
   - "frankdelporte"

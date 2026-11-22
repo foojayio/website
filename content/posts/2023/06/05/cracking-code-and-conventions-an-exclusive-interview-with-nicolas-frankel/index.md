@@ -1,7 +1,6 @@
 ---
 title: "Cracking Code and Conventions: An Exclusive Interview with Nicolas Fränkel"
 date: "2023-06-05T11:06:00+00:00"
-lastmod: "2023-06-06T20:08:26+00:00"
 description: "Join us as we explore Nicolas Fränkel's journey in software development, industry challenges, and the potential role of AI in the future of coding."
 authors:
   - "bazlur-rahman"

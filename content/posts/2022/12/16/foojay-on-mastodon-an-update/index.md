@@ -1,7 +1,6 @@
 ---
 title: "Foojay on Mastodon: An Update"
 date: "2022-12-16T06:45:03+00:00"
-lastmod: "2022-12-16T07:34:59+00:00"
 description: "We started with an instance to host foojay.social via toot.io that provides us 200Gb of storage space to handle 250 active users."
 authors:
   - "frankdelporte"

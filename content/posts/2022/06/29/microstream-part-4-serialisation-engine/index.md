@@ -1,7 +1,6 @@
 ---
 title: "MicroStream Next-Generation Serialisation Engine"
 date: "2022-06-29T08:07:20+00:00"
-lastmod: "2022-06-29T08:07:22+00:00"
 description: "Let's go even deeper in this series that focuses on the key features of the MicroStream serialisation engine."
 authors:
   - "rudy-de-busscher"

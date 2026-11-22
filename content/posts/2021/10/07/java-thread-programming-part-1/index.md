@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 1)"
 date: "2021-10-07T10:07:29+00:00"
-lastmod: "2022-03-25T06:57:10+00:00"
 description: "To be able to execute a piece of code requires an execution environment. In Java, a thread is an executing environment."
 authors:
   - "bazlur-rahman"

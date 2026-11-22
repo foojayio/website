@@ -1,7 +1,6 @@
 ---
 title: "Managing Data Residency: Concepts & Theory"
 date: "2023-05-16T09:18:20+00:00"
-lastmod: "2023-05-16T09:18:39+00:00"
 description: "Take a look at data residency and design a draft architecture to implement it. In the next article, we will delve into the technical details."
 canonical: "https://blog.frankel.ch/data-residency/1/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Java Bytecode Simplified: Journey to the Wonderland (Part 1)"
 date: "2022-03-08T10:16:36+00:00"
-lastmod: "2022-08-20T07:06:31+00:00"
 description: "Today I will make an attempt to appreciate how unique the JVM is. So, let’s begin the journey to how Java works!"
 authors:
   - "bazlur-rahman"

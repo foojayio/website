@@ -1,7 +1,6 @@
 ---
 title: "Payara Cloud Hackathon is Open for Sign-ups!"
 date: "2024-03-07T13:53:56+00:00"
-lastmod: "2024-03-07T13:55:37+00:00"
 description: "We're excited to announce that the 2nd edition of Payara Hackathon is now open for sign ups!"
 canonical: "https://www.payara.fish/page/payara-hackathon-2024/"
 authors:

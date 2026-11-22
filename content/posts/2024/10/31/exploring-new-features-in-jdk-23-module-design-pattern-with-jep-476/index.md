@@ -1,7 +1,6 @@
 ---
 title: "JDK 23: Module Design Pattern with JEP-476"
 date: "2024-10-31T09:41:20+00:00"
-lastmod: "2024-10-31T09:41:21+00:00"
 description: "JEP-476 is another great example of Java platform evolution while enabling internal project stability, transparency and security."
 authors:
   - "miro-wengner"

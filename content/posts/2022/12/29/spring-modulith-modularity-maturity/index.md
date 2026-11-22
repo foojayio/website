@@ -1,7 +1,6 @@
 ---
 title: "Spring Modulith: Have We Reached Modularity Maturity?"
 date: "2022-12-29T07:07:29+00:00"
-lastmod: "2023-01-21T09:19:12+00:00"
 description: "Spring Modulith is the successor of Oliver Drotbohm's Moduliths project (with a trailing S). It uses both ArchUnit and jMolecules."
 canonical: "https://blog.frankel.ch/spring-modulith-modularity-maturity/"
 authors:

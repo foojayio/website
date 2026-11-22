@@ -1,7 +1,6 @@
 ---
 title: "Which is the Fastest JVM: OpenJDK or GraalVM?"
 date: "2023-02-08T10:51:58+00:00"
-lastmod: "2023-02-08T10:55:11+00:00"
 description: "How is a high-performance, low-latency Java application affected by the JVM version used? Find out more on Foojay!"
 authors:
   - "per-minborg"

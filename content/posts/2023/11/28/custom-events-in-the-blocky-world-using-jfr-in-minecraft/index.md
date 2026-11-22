@@ -1,7 +1,6 @@
 ---
 title: "Custom Events in the Blocky World: Using JFR in Minecraft"
 date: "2023-11-28T19:12:50+00:00"
-lastmod: "2023-11-28T19:12:51+00:00"
 description: "I was searching for some JFR-related settings on the internet when I stumbled upon the /jfr command that exists in Minecraft..."
 authors:
   - "johannes-bechberger"

@@ -1,7 +1,6 @@
 ---
 title: "Optimizing Java for the Cloud-Native Era with Quarkus"
 date: "2026-01-06T21:09:00+00:00"
-lastmod: "2026-01-06T21:48:03+00:00"
 description: "This article explores how Quarkus can help organizations reduce costs, streamline development, and modernize their Java applications for today’s cloud-native environments."
 authors:
   - "michal-maler"

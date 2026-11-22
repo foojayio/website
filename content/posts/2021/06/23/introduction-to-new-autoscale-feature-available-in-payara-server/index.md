@@ -1,7 +1,6 @@
 ---
 title: "Introduction to New AutoScale Feature Available in Payara Server"
 date: "2021-06-23T07:47:09+00:00"
-lastmod: "2021-08-23T12:14:02+00:00"
 description: "we have introduced the Scaling Group concept to Payara to alter the number of instances in a Deployment group and implement it for SSH nodes."
 canonical: "https://blog.payara.fish/introduction-to-new-autoscale-feature-available-in-payara-server"
 authors:

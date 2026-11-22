@@ -1,7 +1,6 @@
 ---
 title: "GitHub agentic workflows and Renovate"
 date: "2026-08-03T05:54:08+00:00"
-lastmod: "2026-09-21T05:54:50+00:00"
 description: "I've been a big fan of Renovate for a couple of years already. Renovate scans your repositories, detects outdated package versions, and opens pull…"
 canonical: "https://blog.frankel.ch/github-agentic-workflow-renovate/"
 authors:

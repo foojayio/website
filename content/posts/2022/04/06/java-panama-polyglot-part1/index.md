@@ -1,7 +1,6 @@
 ---
 title: "Java Panama Polyglot (C++) Part 1"
 date: "2022-04-06T15:41:49+00:00"
-lastmod: "2022-05-26T09:37:35+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages!"
 authors:
   - "carldea"

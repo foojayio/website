@@ -1,7 +1,6 @@
 ---
 title: "K8ssandra Performance Benchmarks on Cloud Managed Kubernetes"
 date: "2021-09-30T08:06:22+00:00"
-lastmod: "2021-11-03T13:24:57+00:00"
 description: "We came up with results matching our expectations: Cassandra in Kubernetes brings flexibility and ease of use without performance penalty."
 canonical: "https://k8ssandra.io/blog/articles/k8ssandra-performance-benchmarks-on-cloud-managed-kubernetes/"
 authors:

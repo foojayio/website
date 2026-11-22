@@ -1,7 +1,6 @@
 ---
 title: "How to Convert a 3rd Party Library to the New Jakarta Namespace"
 date: "2021-03-08T16:56:53+00:00"
-lastmod: "2021-08-23T12:28:44+00:00"
 description: "Jakarta EE 9 contains the change from the javax namespace to the jakarta namespace as part of the code donation to the Eclipse Foundation."
 canonical: "https://blog.payara.fish/how-to-use-the-eclipse-transformer-project-to-convert-a-3rd-party-library"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Understanding MCP Through Raw STDIO Communication"
 date: "2025-07-17T15:57:05+00:00"
-lastmod: "2025-07-17T16:08:57+00:00"
 description: "Get hands-on experience with the exact code examined in this article, along with exercises, debugging techniques, and best practices for production deployment."
 authors:
   - "david-parry"

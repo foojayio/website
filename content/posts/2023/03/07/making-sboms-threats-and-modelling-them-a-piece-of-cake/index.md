@@ -1,7 +1,6 @@
 ---
 title: "Making SBOMs, Threats, and Modelling Them a Piece of Cake!"
 date: "2023-03-07T09:15:56+00:00"
-lastmod: "2023-03-07T09:15:58+00:00"
 description: "The third article in a series on SBOMs, software supply chains, the government and you, introducing threat modelling and tools to help!"
 authors:
   - "dan-conn"

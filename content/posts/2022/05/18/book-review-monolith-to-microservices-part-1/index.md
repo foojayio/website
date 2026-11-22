@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Monolith to Microservices (Part 1)"
 date: "2022-05-18T07:43:41+00:00"
-lastmod: "2023-03-16T10:45:08+00:00"
 description: "Do we need to do all modern development via the microservices architecture? Is it the norm, the new standard? This book argues differently."
 authors:
   - "bazlur-rahman"

@@ -1,7 +1,6 @@
 ---
 title: "How to Reduce Cloud Cost by 99% for EDA Kafka Applications"
 date: "2023-01-11T13:35:41+00:00"
-lastmod: "2023-01-11T13:36:39+00:00"
 description: "About 400x more instances can be run on the same hardware with Chronicle Queue for specific latency-sensitive EDA applications."
 authors:
   - "per-minborg"

@@ -1,7 +1,6 @@
 ---
 title: "Default map value"
 date: "2024-08-11T14:16:49+00:00"
-lastmod: "2026-09-21T06:03:32+00:00"
 description: "In this post, I'll explain how to provide a default value when querying an absent key in a hash map in different programming languages. Java Let's start…"
 canonical: "https://blog.frankel.ch/default-map-value/"
 authors:

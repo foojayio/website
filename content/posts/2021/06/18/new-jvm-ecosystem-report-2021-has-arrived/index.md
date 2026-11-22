@@ -1,7 +1,6 @@
 ---
 title: "New JVM Ecosystem Report 2021 Has Arrived!"
 date: "2021-06-18T08:14:41+00:00"
-lastmod: "2021-06-18T19:50:50+00:00"
 description: "JVM Ecosystem Report 2021 presents the results of the largest annual survey on the state of the JVM ecosystem."
 authors:
   - "bmvermeer"

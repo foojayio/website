@@ -1,7 +1,6 @@
 ---
 title: "Are Java/Jakarta EE Application Servers Heavy?"
 date: "2021-08-12T07:10:29+00:00"
-lastmod: "2024-02-09T09:42:02+00:00"
 description: "Watch a demo that shows it’s possible to have a small footprint and low resource usage in Jakarta EE runtimes!"
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:

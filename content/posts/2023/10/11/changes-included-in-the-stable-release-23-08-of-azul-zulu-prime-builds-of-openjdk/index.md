@@ -1,7 +1,6 @@
 ---
 title: "Changes Included in the Stable release 23.08 of Azul Zulu Prime Builds of OpenJDK"
 date: "2023-10-11T07:03:09+00:00"
-lastmod: "2023-10-11T07:03:47+00:00"
 description: "The new Stable Azul Zulu Prime Build of OpenJDK brings many improvements and fixes to bring a more performant and secure runtime to your environment."
 canonical: "https://www.azul.com/blog/changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk/"
 authors:

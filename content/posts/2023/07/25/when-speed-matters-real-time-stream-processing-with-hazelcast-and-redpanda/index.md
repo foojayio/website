@@ -1,7 +1,6 @@
 ---
 title: "Real-time Stream Processing with Hazelcast and Redpanda"
 date: "2023-07-25T09:33:27+00:00"
-lastmod: "2023-07-25T09:33:28+00:00"
 description: "Explore the combination of Hazelcast and Redpanda for high-performance, scalable, and fault-tolerant applications reacting to real-time data."
 authors:
   - "dunith-danushka"

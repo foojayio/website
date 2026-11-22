@@ -1,7 +1,6 @@
 ---
 title: "A Glance into JFR Class and Method Tagging"
 date: "2025-02-17T09:26:02+00:00"
-lastmod: "2025-02-17T09:26:04+00:00"
 description: "Ever wonder how the JDK Flight Recorder (JFR) keeps track of the classes and methods it has collected for stack traces and more? In this short article,…"
 authors:
   - "johannes-bechberger"

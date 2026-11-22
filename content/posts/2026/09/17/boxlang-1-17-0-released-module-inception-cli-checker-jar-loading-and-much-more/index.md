@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.17.0 Released: Module Inception, CLI Checker, Jar Loading and much more!"
 date: "2026-09-17T20:20:32+00:00"
-lastmod: "2026-09-17T20:20:34+00:00"
 description: "BoxLang has always been an extensible language. As of 1.17.0, it is a hierarchically extensible one. Modules can now contain other modules; aka Module…"
 authors:
   - "cristobal-escobar"

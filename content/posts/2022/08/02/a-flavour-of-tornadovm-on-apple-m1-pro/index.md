@@ -1,7 +1,6 @@
 ---
 title: "A Flavour of TornadoVM on Apple M1 Pro"
 date: "2022-08-02T08:21:12+00:00"
-lastmod: "2023-02-16T08:01:45+00:00"
 description: "This article aims to describe all of the main steps required to install and run TornadoVM on Apple M1 Pro."
 authors:
   - "thanos-stratikopoulos"

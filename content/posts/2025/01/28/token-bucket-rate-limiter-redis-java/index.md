@@ -1,7 +1,6 @@
 ---
 title: "Token Bucket Rate Limiter (Redis & Java) - Raphael De Lio"
 date: "2025-01-28T07:07:08+00:00"
-lastmod: "2025-05-02T12:52:08+00:00"
 description: "Learn how to implement the Token Bucket rate-limiting algorithm using Redis and Java. Discover step-by-step guidance, testing with Redis TestContainers, and..."
 canonical: "https://raphaeldelio.com/2025/01/13/token-bucket-rate-limiter-redis-java/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Project Panama for Newbies (Part 2)"
 date: "2026-01-02T01:21:00+00:00"
-lastmod: "2026-01-02T11:55:15+00:00"
 description: "In this part of the Panama series, the goal is to call C function signatures, often defined to accept pointers and structs, from Java."
 authors:
   - "carldea"

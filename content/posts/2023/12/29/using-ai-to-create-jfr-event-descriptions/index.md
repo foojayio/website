@@ -1,7 +1,6 @@
 ---
 title: "Using AI to Create JFR Event Descriptions"
 date: "2023-12-29T05:42:16+00:00"
-lastmod: "2023-12-29T05:47:05+00:00"
 description: "Learn about the website that gives an overview of JFR events, with descriptions from the OpenJDK, their properties, examples, configurations, and the JDK versions in which every event is present."
 authors:
   - "johannes-bechberger"

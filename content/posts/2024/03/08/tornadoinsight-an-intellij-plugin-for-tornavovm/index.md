@@ -1,7 +1,6 @@
 ---
 title: "TornadoInsight: Harness the Power of TornadoVM from IntelliJ IDEA"
 date: "2024-03-08T11:59:07+00:00"
-lastmod: "2024-03-08T12:41:23+00:00"
 description: "TornadoInsight is an open-source IntelliJ IDEA plugin for enhancing the developer experience when working with TornadoVM."
 authors:
   - "thanos-stratikopoulos"

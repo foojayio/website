@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Templates for Desktop Applications"
 date: "2021-10-15T08:48:16+00:00"
-lastmod: "2021-10-18T06:43:51+00:00"
 description: "Both for Maven and Gradle lovers there are different possibilities to build Java executables and GitHub provides the free tools to do so!"
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "SBOMs: First Steps in a New Journey for Developers"
 date: "2023-02-14T10:01:28+00:00"
-lastmod: "2023-02-14T10:02:29+00:00"
 description: "Software bill of materials, anyone? A year ago, developers had not heard of the 'SBOM' acronym... and now SBOM visualiser called BOM Doctor."
 authors:
   - "steve-poole"

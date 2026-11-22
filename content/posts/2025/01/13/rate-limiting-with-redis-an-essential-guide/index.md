@@ -1,7 +1,6 @@
 ---
 title: "Rate limiting with Redis: An essential guide"
 date: "2025-01-13T18:23:26+00:00"
-lastmod: "2025-02-22T20:32:09+00:00"
 description: "Discover the essentials of rate limiting with Redis. Learn about popular algorithms like Leaky Bucket, Token Bucket, and Sliding Window, and how to choose..."
 canonical: "https://raphaeldelio.com/2024/12/23/rate-limiting-with-redis-an-essential-guide/"
 authors:

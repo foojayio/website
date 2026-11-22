@@ -1,7 +1,6 @@
 ---
 title: "SQL vs. NoSQL: Pros & Cons"
 date: "2022-04-21T09:28:50+00:00"
-lastmod: "2022-05-29T10:46:39+00:00"
 description: "What’s the best way to store, protect and access your data? This is a fundamental, yet critical decision. Let's look at the key criteria."
 canonical: "https://datastax.medium.com/sql-versus-nosql-the-pros-and-cons-488d4a7ba92f"
 authors:

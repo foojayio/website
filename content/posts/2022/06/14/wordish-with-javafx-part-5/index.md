@@ -1,7 +1,6 @@
 ---
 title: "Wordish with JavaFX - Part 5"
 date: "2022-06-14T07:25:37+00:00"
-lastmod: "2022-06-14T07:25:40+00:00"
 description: "Let's turn to JavaFX charts, showing how to customize charts with orientation and colors and how to add nodes to the chart scene graph!"
 authors:
   - "gail-anderson"

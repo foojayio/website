@@ -1,7 +1,6 @@
 ---
 title: "9 Best Java Profilers to Use in 2024"
 date: "2024-07-10T13:46:51+00:00"
-lastmod: "2024-07-10T14:37:48+00:00"
 description: "In this article, I will share why my team decided to start a Java profiler, the list of profilers we found that are suited for profiling Java apps, and how to analyze the data from the profiler to draw conclusions faster."
 authors:
   - "lee-sheinberg"

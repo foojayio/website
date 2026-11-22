@@ -1,7 +1,6 @@
 ---
 title: "Book review: “Developing Apps with GPT-4 and ChatGPT”"
 date: "2023-10-22T06:05:28+00:00"
-lastmod: "2023-12-23T14:39:33+00:00"
 description: "Thorough, practical examples using a new & rapidly evolving tool. Pro or contra, it's a very worthwhile read."
 authors:
   - "simon-verhoeven"

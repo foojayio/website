@@ -1,7 +1,6 @@
 ---
 title: "Schedule your 2038 holiday and experiment with dates in jshell!"
 date: "2023-02-16T15:54:51+00:00"
-lastmod: "2023-02-16T15:54:52+00:00"
 description: "A new Y2K-bug seems to be approaching and we still have time to prevent it! Or you can already schedule a long holiday for the year 2038..."
 canonical: "https://webtechie.be/post/2022-12-01-schedule-holiday-2038/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Write Once, Run Embedded in any IDE"
 date: "2023-05-16T13:34:19+00:00"
-lastmod: "2023-05-16T13:34:20+00:00"
 description: "Having written many Java GUI applications, I thought it would be cool to run them embedded in IntelliJ IDEA, Eclipse and NetBeans."
 authors:
   - "anthony-goubard"

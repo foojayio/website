@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part II) -- Combining Existing Controls"
 date: "2021-02-05T08:23:32+00:00"
-lastmod: "2021-02-05T08:49:42+00:00"
 description: "Last time you saw how to create JavaFX controls by playing around with CSS, today how to create a control by combining existing controls."
 authors:
   - "gerrit-grunwald"

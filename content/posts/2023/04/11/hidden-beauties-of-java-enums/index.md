@@ -1,7 +1,6 @@
 ---
 title: "Hidden Beauties of Java Enums"
 date: "2023-04-11T07:02:08+00:00"
-lastmod: "2023-07-28T08:00:40+00:00"
 description: "Java enums can contain much more than just a list of definitions, but also data and extended functionality!"
 canonical: "https://webtechie.be/post/2023-03-22-hidden-beauties-of-java-enums/"
 authors:

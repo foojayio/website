@@ -1,7 +1,6 @@
 ---
 title: "XML Schema Validation 1.1 in Java"
 date: "2025-11-10T19:22:44+00:00"
-lastmod: "2026-09-21T05:59:51+00:00"
 description: "This week, I received an interesting task: dusting off a legacy Java application. The application analyzes specific XML files in proprietary format. I…"
 canonical: "https://blog.frankel.ch/xml-schema-validation-1-1/"
 authors:

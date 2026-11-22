@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #14: Debugging Tools and Skills for Fun and Profit"
 date: "2023-02-20T08:29:01+00:00"
-lastmod: "2025-11-13T09:15:05+00:00"
 description: "Let's talk about debugging and observability. We work with debugging all the time, but how well do we know this common practice?"
 authors:
   - "frankdelporte"

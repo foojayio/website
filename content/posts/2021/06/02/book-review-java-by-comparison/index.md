@@ -1,7 +1,6 @@
 ---
 title: "Announcing New Book Review: \"Java by Comparison\""
 date: "2021-06-02T08:13:15+00:00"
-lastmod: "2021-09-04T07:46:46+00:00"
 description: "“Java by Comparison”, Simon Harrer, Jörg Lenhard, and Linus Dietz, promises the reader to become a “Java Craftsman” by studying 70 examples."
 authors:
   - "cay-horstmann"

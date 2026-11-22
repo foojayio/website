@@ -1,7 +1,6 @@
 ---
 title: "How Gradle Works: Inside the Daemon"
 date: "2023-03-14T11:27:52+00:00"
-lastmod: "2023-03-14T15:19:40+00:00"
 description: "This is the second article of the series \"How Gradle Works\". In this article, we'll explain what happens inside the Gradle Daemon JVM."
 canonical: "https://blog.gradle.org/how-gradle-works-2"
 authors:

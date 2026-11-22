@@ -1,7 +1,6 @@
 ---
 title: "Secure CI/CD Pipelines with GitHub Actions for Your Java Apps"
 date: "2022-08-11T06:28:38+00:00"
-lastmod: "2022-08-11T06:29:14+00:00"
 description: "Learn how to integrate Snyk into your GitHub CI/CD to automate security scanning as part of your build cycle prior to production."
 canonical: "https://snyk.io/blog/building-a-secure-pipeline-with-github-actions/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Handling Null: Optional and Nullable Types"
 date: "2022-04-04T08:06:37+00:00"
-lastmod: "2023-02-13T12:20:25+00:00"
 description: "Java is infamous for its NullPointerException: calling a method or accessing an attribute of an object that has not been initialized."
 canonical: "https://blog.frankel.ch/optional-nullable-type/"
 authors:

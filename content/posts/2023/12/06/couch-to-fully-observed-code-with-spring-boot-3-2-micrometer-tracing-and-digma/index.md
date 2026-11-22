@@ -1,7 +1,6 @@
 ---
 title: "Couch to fully-observed code with Spring Boot 3.2, Micrometer Tracing, and Digma"
 date: "2023-12-06T10:42:46+00:00"
-lastmod: "2024-01-03T20:23:49+00:00"
 description: "Collecting important data about your code in dev and test has become trivial, it's now also getting easier to put that data to use."
 authors:
   - "jonatan-ivanov"

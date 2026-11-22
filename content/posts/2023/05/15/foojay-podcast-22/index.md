@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #22: When Profession and Fun Overlap"
 date: "2023-05-15T07:47:29+00:00"
-lastmod: "2025-11-13T09:07:14+00:00"
 description: "Let's talk to volunteers from different organizations where coding is used to inspire children to become engineers."
 authors:
   - "frankdelporte"

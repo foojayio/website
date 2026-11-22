@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK Schedule at FOSDEM 2021"
 date: "2021-01-07T16:49:23+00:00"
-lastmod: "2021-02-22T11:09:11+00:00"
 description: "Subject to change, here's the schedule for FOSDEM 2021, a virtual event this year on 6 and 7 February, for the Friends Of OpenJDK devroom!"
 authors:
   - "geertjan-wielenga"

@@ -1,7 +1,6 @@
 ---
 title: "Why We Moved Our Timefold Java Worker Pods from AMD to ARM64"
 date: "2026-07-08T15:25:58+00:00"
-lastmod: "2026-07-08T17:10:44+00:00"
 description: "AMD hyperthreading caused solver performance variance in our Java based cloud pods. Switching to ARM instances doubled throughput per dollar."
 authors:
   - "tom-cools"

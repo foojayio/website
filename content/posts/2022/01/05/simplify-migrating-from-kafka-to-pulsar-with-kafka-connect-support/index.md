@@ -1,7 +1,6 @@
 ---
 title: "Simplify Migrating from Kafka to Pulsar with Kafka Connect Support"
 date: "2022-01-05T11:30:09+00:00"
-lastmod: "2022-01-05T11:30:11+00:00"
 description: "The new Kafka Connect Adaptor completes the Pulsar-Kafka compatibility ecosystem, allowing an iterative transition from Kafka to Pulsar."
 canonical: "https://www.datastax.com/blog/simplify-migrating-kafka-to-pulsar-kafka-connect-support"
 authors:

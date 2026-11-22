@@ -1,7 +1,6 @@
 ---
 title: "Java, C, and Python: Today's Most Used Program Languages?"
 date: "2020-08-21T04:41:57+00:00"
-lastmod: "2021-08-23T12:59:10+00:00"
 description: "Looking at the latest TIOBE Programming Community Index, we see Java has surpassed C in the TIOBE ratings index, with Python holding steady in third."
 authors:
   - "kevinfarnham"

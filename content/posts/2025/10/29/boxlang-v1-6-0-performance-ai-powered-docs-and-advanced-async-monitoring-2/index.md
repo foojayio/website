@@ -1,7 +1,6 @@
 ---
 title: "BoxLang v1.6.0 - Performance, AI-Powered Docs, and Advanced Async Monitoring"
 date: "2025-10-29T06:48:07+00:00"
-lastmod: "2025-10-29T06:48:10+00:00"
 description: "We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities."
 authors:
   - "cristobal-escobar"

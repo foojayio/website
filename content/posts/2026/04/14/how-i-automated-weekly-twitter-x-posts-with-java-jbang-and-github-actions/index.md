@@ -1,7 +1,6 @@
 ---
 title: "How I Automated Weekly Twitter/X Posts With Java, JBang and GitHub Actions"
 date: "2026-04-14T16:05:06+00:00"
-lastmod: "2026-04-15T06:12:54+00:00"
 description: "Every Monday at 10 AM Eastern, @javaevolved now tweets a modern Java pattern — automatically. No manual steps, no third-party services, no cron servers."
 authors:
   - "bruno-borges"

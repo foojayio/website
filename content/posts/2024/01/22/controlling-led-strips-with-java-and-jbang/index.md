@@ -1,7 +1,6 @@
 ---
 title: "Controlling LED Strips with Java and JBang"
 date: "2024-01-22T18:08:51+00:00"
-lastmod: "2024-01-22T18:08:53+00:00"
 description: "One of the most \"fancy\" electronic components is definitely... a LED strip. It’s really cool to control a long strip of lights with only a few lines of code."
 canonical: "https://webtechie.be/post/2023-10-13-controlling-led-strips-with-java/"
 authors:

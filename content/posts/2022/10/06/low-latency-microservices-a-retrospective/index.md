@@ -1,7 +1,6 @@
 ---
 title: "Low Latency Microservices, A Retrospective"
 date: "2022-10-06T06:25:56+00:00"
-lastmod: "2022-10-06T06:28:26+00:00"
 description: "Learn what we learned after five years of developing and supporting low latency microservices."
 authors:
   - "peter-lawrey"

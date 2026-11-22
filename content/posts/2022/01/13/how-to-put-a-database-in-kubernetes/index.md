@@ -1,7 +1,6 @@
 ---
 title: "How to Put a Database in Kubernetes?"
 date: "2022-01-13T09:18:38+00:00"
-lastmod: "2022-07-14T21:14:05+00:00"
 description: "Learn the key steps of deploying databases and stateful workloads in Kubernetes and meet the cloud-native technologies!"
 canonical: "https://medium.com/building-the-open-data-stack/how-to-put-a-database-in-kubernetes-ab7c21540ec2"
 authors:

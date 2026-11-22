@@ -1,7 +1,6 @@
 ---
 title: "Making illegal state unrepresentable"
 date: "2026-04-21T18:50:02+00:00"
-lastmod: "2026-09-21T05:56:24+00:00"
 description: "A couple of years ago, I wrote that The Builder pattern is a finite state machine!. A state machine consists of states and transitions between them. As a…"
 canonical: "https://blog.frankel.ch/illegal-state-unrepresentable/"
 authors:

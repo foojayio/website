@@ -1,7 +1,6 @@
 ---
 title: "Enriching Kafka Applications with Contextual Data"
 date: "2023-05-18T15:11:22+00:00"
-lastmod: "2023-05-18T15:55:42+00:00"
 description: "Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka apps."
 authors:
   - "fawaz-ghali"

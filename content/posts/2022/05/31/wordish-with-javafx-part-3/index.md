@@ -1,7 +1,6 @@
 ---
 title: "Wordish with JavaFX - Part 3"
 date: "2022-05-31T07:23:02+00:00"
-lastmod: "2022-05-31T07:23:08+00:00"
 description: "The JavaFX controller code maintains game state and responds to user input with appropriate updates to the UI."
 authors:
   - "gail-anderson"

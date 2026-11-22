@@ -1,7 +1,6 @@
 ---
 title: "We Will Not Sabotage Your Code"
 date: "2026-06-20T15:37:22+00:00"
-lastmod: "2026-06-22T10:59:45+00:00"
 description: "A maintainer recently hid a destructive prompt-injection payload aimed at AI agents inside his own framework. That is a betrayal of the trust open source r"
 canonical: "https://www.codenameone.com/blog/we-will-not-sabotage-your-code/"
 authors:

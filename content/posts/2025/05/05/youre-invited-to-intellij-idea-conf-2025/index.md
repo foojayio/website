@@ -1,7 +1,6 @@
 ---
 title: "You’re Invited to IntelliJ IDEA Conf 2025!"
 date: "2025-05-05T10:20:30+00:00"
-lastmod: "2025-05-05T13:18:51+00:00"
 description: "We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event."
 authors:
   - "marit-van-dijk"

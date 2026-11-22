@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK Schedule at FOSDEM 2023"
 date: "2023-01-19T14:42:49+00:00"
-lastmod: "2023-01-31T08:16:39+00:00"
 description: "On from good times in 2022 and 2021, we have a really great schedule with inspiring speakers for FOSDEM in Brussels, on Sunday, February 5!"
 authors:
   - "geertjan-wielenga"

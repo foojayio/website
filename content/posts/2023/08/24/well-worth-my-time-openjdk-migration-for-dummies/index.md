@@ -1,7 +1,6 @@
 ---
 title: "Well Worth My Time: \"OpenJDK Migration for Dummies\""
 date: "2023-08-24T07:51:26+00:00"
-lastmod: "2024-06-30T11:20:15+00:00"
 description: "Good job of establishing the motivation for using OpenJDK and providing actionable steps for how to pursue that migration."
 authors:
   - "tom-wheeler"

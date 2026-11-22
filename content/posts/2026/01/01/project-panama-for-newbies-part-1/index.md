@@ -1,7 +1,6 @@
 ---
 title: "Project Panama for Newbies (Part 1)"
 date: "2026-01-01T09:11:00+00:00"
-lastmod: "2026-01-22T00:11:06+00:00"
 description: "Learn how the Java programming language has new ways to access native libraries that are written in native languages like C, C++, and Fortran."
 authors:
   - "carldea"

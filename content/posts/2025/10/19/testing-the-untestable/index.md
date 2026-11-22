@@ -1,7 +1,6 @@
 ---
 title: "Testing the untestable"
 date: "2025-10-19T17:29:20+00:00"
-lastmod: "2026-09-21T06:01:17+00:00"
 description: "I'm currently working on a software designed more than a decade ago. It offers a plugin architecture: you can develop a plugin whose lifecycle is handled…"
 canonical: "https://blog.frankel.ch/testing-untestable/"
 authors:

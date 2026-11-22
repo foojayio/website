@@ -1,7 +1,6 @@
 ---
 title: "Google Remote Procedure Call (gRPC) Example in Payara Server"
 date: "2022-08-25T10:09:21+00:00"
-lastmod: "2022-08-25T10:35:09+00:00"
 description: "Payara has developed a module to support gRPC. It is available in Payara Community GitHub repository. Find out more here!"
 canonical: "https://blog.payara.fish/grpc-example-in-payara-server"
 authors:

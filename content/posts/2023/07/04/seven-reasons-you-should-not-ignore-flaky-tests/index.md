@@ -1,7 +1,6 @@
 ---
 title: "Seven Reasons You Should Not Ignore Flaky Tests"
 date: "2023-07-04T07:02:44+00:00"
-lastmod: "2023-07-04T07:02:46+00:00"
 description: "Flaky tests might seem like a minor annoyance, but in fact they are a major blocker to developer productivity. Here's seven reasons why."
 canonical: "https://gradle.com/blog/seven-reasons-you-should-not-ignore-flaky-tests/"
 authors:

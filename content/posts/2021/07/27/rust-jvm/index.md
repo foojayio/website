@@ -1,7 +1,6 @@
 ---
 title: "An Introduction to Rust and the JVM"
 date: "2021-07-27T10:26:20+00:00"
-lastmod: "2021-07-27T10:26:22+00:00"
 description: "Learn why and how it makes sense to develop applications using the JVM and delegate the most memory-sensitive parts to Rust."
 canonical: "https://blog.frankel.ch/start-rust/7/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 14)"
 date: "2022-03-01T12:03:03+00:00"
-lastmod: "2022-03-03T09:02:16+00:00"
 description: "What happens if the child-task creates more tasks and the parent-task waits for the child-tasks to finish in TheadPool in java."
 authors:
   - "bazlur-rahman"

@@ -1,7 +1,6 @@
 ---
 title: "Java 21 - JEP 445 - Unnamed Classes and Instance Main Methods"
 date: "2023-10-25T09:25:48+00:00"
-lastmod: "2023-11-07T15:56:05+00:00"
 description: "The goal of JEP 445 is to make it easier to get started with Java, as it’s all about reducing the number of keywords when you write, for instance, your very first HelloWorld Java code."
 canonical: "https://webtechie.be/post/2023-09-18-jep-445-unnamed-classes-and-instance-main-methods/"
 authors:

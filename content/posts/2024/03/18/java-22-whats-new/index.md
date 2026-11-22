@@ -1,7 +1,6 @@
 ---
 title: "Java 22: What’s New?"
 date: "2024-03-18T14:10:04+00:00"
-lastmod: "2024-03-28T08:16:58+00:00"
 description: "As soon as Java 22 is out, it'll be time to walk through all the functionalities that this version bring to us as developers."
 canonical: "https://www.loicmathieu.fr/wordpress/en/informatique/java-22-quoi-de-neuf/"
 authors:

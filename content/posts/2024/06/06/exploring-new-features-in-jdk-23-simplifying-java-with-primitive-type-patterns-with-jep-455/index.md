@@ -1,7 +1,6 @@
 ---
 title: "Exploring New Features in JDK 23: Simplifying Java with Primitive Type Patterns with JEP 455"
 date: "2024-06-06T10:37:33+00:00"
-lastmod: "2024-06-06T10:37:35+00:00"
 description: "How JEP 455 can be utilized to handle complex decision-making scenarios more efficiently. We'll examine a practical example to illustrate the benefits of this feature."
 authors:
   - "bazlur-rahman"

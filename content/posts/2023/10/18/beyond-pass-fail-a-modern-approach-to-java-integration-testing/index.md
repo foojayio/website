@@ -1,7 +1,6 @@
 ---
 title: "Beyond Pass/Fail- a Modern Approach to Java Integration Testing"
 date: "2023-10-18T15:15:14+00:00"
-lastmod: "2023-10-18T15:15:15+00:00"
 description: "Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!"
 canonical: "https://www.atomicjar.com/2023/10/beyond-pass-fail-a-modern-approach-to-java-integration-testing/"
 authors:

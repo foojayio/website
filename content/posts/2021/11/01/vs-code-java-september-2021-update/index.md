@@ -1,7 +1,6 @@
 ---
 title: "VS Code Java September 2021 Update"
 date: "2021-11-01T08:49:12+00:00"
-lastmod: "2021-11-01T08:51:57+00:00"
 description: "Covering the new release of Gradle extension, more convenient Code Actions and the recent 1.0 language server release!"
 authors:
   - "nick-zhu"

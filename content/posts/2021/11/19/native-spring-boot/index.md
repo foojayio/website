@@ -1,7 +1,6 @@
 ---
 title: "Native-image with Spring Boot"
 date: "2021-11-19T11:47:19+00:00"
-lastmod: "2021-11-19T11:52:01+00:00"
 description: "As the Cloud has become more widespread, the Spring ecosystem has been forced to cope with GraalVM native."
 canonical: "https://blog.frankel.ch/native/spring-boot/"
 authors:

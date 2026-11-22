@@ -1,7 +1,6 @@
 ---
 title: "The proper way to define configuration properties in Spring"
 date: "2025-01-07T16:55:31+00:00"
-lastmod: "2025-01-22T09:50:05+00:00"
 description: "Upgrading from Spring Boot 2 to 3 forced me to define my configuration properties in a better way."
 canonical: "https://wimdetroyer.com/blog/the-proper-way-of-using-configuration-properties-in-spring"
 authors:

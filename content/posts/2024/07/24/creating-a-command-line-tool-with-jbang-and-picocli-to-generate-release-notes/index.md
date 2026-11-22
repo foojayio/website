@@ -1,7 +1,6 @@
 ---
 title: "Creating a Command Line Tool with JBang and PicoCLI to Generate Release Notes"
 date: "2024-07-24T09:44:36+00:00"
-lastmod: "2024-07-24T13:56:35+00:00"
 description: "Learn how to create a Java command-line tool with JBang and PicoCLI to automate generating release notes from GitHub."
 authors:
   - "bazlur-rahman"

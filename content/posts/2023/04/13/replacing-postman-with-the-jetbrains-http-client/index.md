@@ -1,7 +1,6 @@
 ---
 title: "Replacing Postman with the Jetbrains HTTP Client"
 date: "2023-04-13T06:59:28+00:00"
-lastmod: "2023-04-13T07:09:10+00:00"
 description: "How to use the JetBrains HTTP Client to replace Postman, test third party APIs, share requests and run them in CI all of that within minutes!"
 canonical: "https://lengrand.fr/replacing-postman-in-seconds-with-the-jetbrains-http-client/"
 authors:

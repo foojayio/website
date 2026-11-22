@@ -1,7 +1,6 @@
 ---
 title: "Analyzing & Tuning Warm-up: Azul Zulu Prime Builds of OpenJDK"
 date: "2023-04-01T16:35:31+00:00"
-lastmod: "2025-07-15T14:23:32+00:00"
 description: "Get a basic understanding of how JIT compilation works and how to optimize warm-up using Azul Zulu Prime Builds of OpenJDK."
 canonical: "https://docs.azul.com/prime/analyzing-tuning-warmup"
 authors:

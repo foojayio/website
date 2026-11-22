@@ -1,7 +1,6 @@
 ---
 title: "Announcing \"Java Unscripted: An Asynchronous Exploration of Excellence"
 date: "2023-05-16T10:09:48+00:00"
-lastmod: "2023-05-16T10:12:19+00:00"
 description: "\"Java Unscripted\" is an exciting interview series featuring insights from Java industry luminaries. Join us as we explore their journeys, sharing wisdom to inspire and guide the next generation of developers."
 authors:
   - "bazlur-rahman"

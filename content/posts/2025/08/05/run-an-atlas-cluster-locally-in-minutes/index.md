@@ -1,7 +1,6 @@
 ---
 title: "Run an Atlas cluster locally in minutes"
 date: "2025-08-05T07:33:47+00:00"
-lastmod: "2025-08-05T07:38:32+00:00"
 description: "You no longer need a cloud account to try MongoDB Atlas features. Spin up a fully compatible local cluster in seconds, with no login, no credit card, and no friction."
 authors:
   - "arekborucki"

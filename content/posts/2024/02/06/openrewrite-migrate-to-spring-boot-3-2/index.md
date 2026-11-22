@@ -1,7 +1,6 @@
 ---
 title: "Migrate to Spring Boot 3.2 with OpenRewrite"
 date: "2024-02-06T08:17:07+00:00"
-lastmod: "2024-02-06T11:44:28+00:00"
 description: "Simplify your migration process to Spring Boot 3.2 with the help of OpenRewrite."
 authors:
   - "mahendra1413"

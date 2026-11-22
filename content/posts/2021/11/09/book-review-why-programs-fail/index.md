@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Why Programs Fail by Andreas Zeller"
 date: "2021-11-09T10:18:25+00:00"
-lastmod: "2021-11-09T10:29:36+00:00"
 description: "The book provides the theoretical infrastructure needed for the quality process. Viewed as a tutorial it’s pretty good for students!"
 authors:
   - "shai-almog"

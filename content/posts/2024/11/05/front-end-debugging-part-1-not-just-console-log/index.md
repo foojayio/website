@@ -1,7 +1,6 @@
 ---
 title: "Front End Debugging Part 1: Not just Console Log"
 date: "2024-11-05T14:01:45+00:00"
-lastmod: "2024-12-03T16:31:07+00:00"
 description: "Learn advanced techniques for debugging across the full stack, from frontend tools to system-level troubleshooting, streamline development."
 canonical: "https://debugagent.com/front-end-debugging-part-1-not-just-console-log"
 authors:

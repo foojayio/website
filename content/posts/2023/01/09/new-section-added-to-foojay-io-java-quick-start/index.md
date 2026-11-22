@@ -1,7 +1,6 @@
 ---
 title: "New Section Added to Foojay.io: Java Quick Start"
 date: "2023-01-09T09:31:47+00:00"
-lastmod: "2023-01-12T11:28:36+00:00"
 description: "Foojay.io aims to be the starting point for “all-things OpenJDK\". The idea struck me that this site needs complete beginner materials, too!"
 authors:
   - "frankdelporte"

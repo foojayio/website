@@ -1,7 +1,6 @@
 ---
 title: "Preview of January 2021 OpenJDK Update Release"
 date: "2021-01-13T09:12:00+00:00"
-lastmod: "2021-08-23T15:15:11+00:00"
 description: "Vote for the items that you find most useful and we'll build a community-based perspective of the January 2021 OpenJDK Update release."
 authors:
   - "geertjan-wielenga"

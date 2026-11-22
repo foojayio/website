@@ -1,7 +1,6 @@
 ---
 title: "Alternatives to DTO"
 date: "2022-03-07T11:03:23+00:00"
-lastmod: "2022-03-07T11:12:08+00:00"
 description: "I used to believe (and still do) that DTOs should be a thing of the past. Yet, it seems their usage is still widespread."
 authors:
   - "nicolas-frankel"

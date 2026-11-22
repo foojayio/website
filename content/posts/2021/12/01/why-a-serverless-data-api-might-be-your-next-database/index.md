@@ -1,7 +1,6 @@
 ---
 title: "Why a Serverless Data API Might be Your Next Database"
 date: "2021-12-01T14:53:44+00:00"
-lastmod: "2021-12-01T14:58:12+00:00"
 description: "Serverless data offers benefits, but market offerings are limited. What serverless data can, should, or could do isn’t always understood."
 canonical: "https://www.infoq.com/articles/serverless-data-api/"
 authors:

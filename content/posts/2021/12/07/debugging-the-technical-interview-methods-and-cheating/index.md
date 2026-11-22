@@ -1,7 +1,6 @@
 ---
 title: "Debugging the Technical Interview: Methods and Cheating"
 date: "2021-12-07T09:00:30+00:00"
-lastmod: "2021-12-07T09:00:32+00:00"
 description: "Can you cheat in a technical interview? This approach for hiring tuned over decades is how you moneyball hiring and work with great people!"
 authors:
   - "shai-almog"

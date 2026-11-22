@@ -1,7 +1,6 @@
 ---
 title: "Java on Visual Studio Code Update – January 2022"
 date: "2022-01-26T08:22:13+00:00"
-lastmod: "2022-01-26T09:47:52+00:00"
 description: "Since this is our first blog post of the new year, we are going to look back on highlights of 2021 and take a look at our roadmap for 2022."
 authors:
   - "nick-zhu"

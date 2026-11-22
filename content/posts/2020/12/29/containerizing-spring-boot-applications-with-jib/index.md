@@ -1,7 +1,6 @@
 ---
 title: "Containerizing Spring Boot Applications with Jib"
 date: "2020-12-29T19:29:08+00:00"
-lastmod: "2021-08-23T12:44:39+00:00"
 description: "How to create Docker or OCI compliant images, without installing Docker clients and without using Dockerfiles, for Spring Boot applications."
 canonical: "https://ashishtechmill.com/containerizing-spring-boot-application-with-jib"
 authors:

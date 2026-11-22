@@ -1,7 +1,6 @@
 ---
 title: "Creating a Simple Spring Boot Application in IntelliJ IDEA"
 date: "2021-05-31T17:06:51+00:00"
-lastmod: "2021-09-04T08:48:37+00:00"
 description: "Let's use the New Project Wizard in IntelliJ IDEA to create a Spring Boot project with the Spring Web dependency!"
 authors:
   - "helenjoscott"

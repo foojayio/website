@@ -1,7 +1,6 @@
 ---
 title: "Java Garbage Collection Types & Settings Customization via Jelastic PaaS"
 date: "2021-04-29T07:54:20+00:00"
-lastmod: "2021-09-16T14:49:21+00:00"
 description: "What types of garbage collection is available at the market, what GC does for Java applications and how it works within Jelastic PaaS."
 authors:
   - "tetiana-fydorenchyk"

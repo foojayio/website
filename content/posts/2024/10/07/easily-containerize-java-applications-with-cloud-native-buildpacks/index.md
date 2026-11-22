@@ -1,7 +1,6 @@
 ---
 title: "Easily containerize Java applications with cloud native buildpacks"
 date: "2024-10-07T09:15:53+00:00"
-lastmod: "2024-10-07T09:15:55+00:00"
 description: "Learn how to use buildpacks to containerize a Java application easily and effectively for cloud native deployment with Open Liberty!"
 canonical: "https://developer.ibm.com/articles/awb-containerizing-java-apps-with-cloud-native-buildpacks/"
 authors:

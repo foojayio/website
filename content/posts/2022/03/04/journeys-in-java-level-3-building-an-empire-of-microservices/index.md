@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 3: Building an Empire of Microservices"
 date: "2022-03-04T16:23:40+00:00"
-lastmod: "2022-04-21T16:24:17+00:00"
 description: "Let’s continue our journey to learn microservice. Today we will learn to use a full-fledged MongoDB database running in a Docker container."
 authors:
   - "jennifer-reif"

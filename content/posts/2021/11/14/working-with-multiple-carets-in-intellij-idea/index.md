@@ -1,7 +1,6 @@
 ---
 title: "Working with Multiple Carets in IntelliJ IDEA"
 date: "2021-11-14T12:21:26+00:00"
-lastmod: "2024-02-06T11:58:24+00:00"
 description: "Sometimes you need to modify multiple lines of code on separate lines inside IntelliJ IDEA with the same change. Here's how!"
 authors:
   - "helenjoscott"

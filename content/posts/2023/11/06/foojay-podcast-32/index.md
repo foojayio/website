@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #32: Philippines JUG"
 date: "2023-11-06T11:03:48+00:00"
-lastmod: "2025-11-13T08:54:58+00:00"
 description: "Once a month we talk about the history of a JUG and the people behind it. Today we travel to the Philippines. Let's talk about the history and future of the Java community in the Philippines!"
 authors:
   - "frankdelporte"

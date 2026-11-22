@@ -1,7 +1,6 @@
 ---
 title: "Book Review: DuckDB in Action"
 date: "2025-03-05T13:42:59+00:00"
-lastmod: "2025-03-05T13:43:48+00:00"
 description: "This review is about DuckDB in Action by JoMark Needham, Michael Hunger, and Michael Simons from Manning."
 authors:
   - "nicolas-frankel"

@@ -1,7 +1,6 @@
 ---
 title: "A refresher on GitHub Pages"
 date: "2024-06-20T18:22:49+00:00"
-lastmod: "2026-09-21T06:03:37+00:00"
 description: "I moved my blog from WordPress to GitLab Pages in... 2016. I'm happy with the solution. However, I used GitHub Pages when I was teaching for both the…"
 canonical: "https://blog.frankel.ch/refresher-github-pages/"
 authors:

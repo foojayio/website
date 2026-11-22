@@ -1,7 +1,6 @@
 ---
 title: "SonarQube AI Code Assurance & MCP: Auto-Fix Java (Part 4)"
 date: "2026-01-19T15:27:14+00:00"
-lastmod: "2026-01-19T15:27:16+00:00"
 description: "Secure Java projects with SonarQube AI Code Assurance. Use AI CodeFix and the MCP Server to auto-remediate technical debt instantly."
 authors:
   - "jonathan-vila"

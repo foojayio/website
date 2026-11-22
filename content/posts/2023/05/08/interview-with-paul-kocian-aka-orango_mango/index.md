@@ -1,7 +1,6 @@
 ---
 title: "Interview with Paul Kocian aka Orango_Mango"
 date: "2023-05-08T07:49:40+00:00"
-lastmod: "2023-05-22T08:24:14+00:00"
 description: "Learn about an impressive list of JavaFX and Raspberry Pi projects and beyond worked on by a 16 year old in Italy!"
 canonical: "https://webtechie.be/post/2023-05-02-interview-paul-kocian-orangomango/"
 authors:

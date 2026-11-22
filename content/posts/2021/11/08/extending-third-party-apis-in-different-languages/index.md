@@ -1,7 +1,6 @@
 ---
 title: "Extending Third-Party APIs in Different Languages"
 date: "2021-11-08T08:36:05+00:00"
-lastmod: "2021-11-08T08:37:10+00:00"
 description: "I'd like to describe how to add new behavior to an existing object/type. I won't use any reactive type to make it more general."
 canonical: "https://blog.frankel.ch/extending-third-party-apis/"
 authors:

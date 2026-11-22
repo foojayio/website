@@ -1,7 +1,6 @@
 ---
 title: "(Semantic) Versioning your Java libraries"
 date: "2024-01-03T15:10:35+00:00"
-lastmod: "2024-01-03T15:10:36+00:00"
 description: "Refine Java library versions seamlessly with Semantic Versioning, ensuring compatibility and efficient upgrades. Learn More!"
 authors:
   - "jago-de-vreede"

@@ -1,7 +1,6 @@
 ---
 title: "LangChain4J musings, six months after"
 date: "2025-04-30T17:36:31+00:00"
-lastmod: "2026-09-21T06:02:51+00:00"
 description: "Last year, I started to dig a bit around LangChain4J. It's a fast-growing project, and I wanted to get familiar with the updates. I also wanted to check…"
 canonical: "https://blog.frankel.ch/langchain4j-musings-six-months-after/"
 authors:

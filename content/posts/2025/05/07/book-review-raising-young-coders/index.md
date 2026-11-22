@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Raising Young Coders"
 date: "2025-05-07T07:04:09+00:00"
-lastmod: "2025-05-07T22:11:35+00:00"
 description: "Whether your child is just beginning to explore technology or ready for more advanced programming, this book provides a solid foundation for fostering lifelong interest in technology."
 authors:
   - "geertjan-wielenga"

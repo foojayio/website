@@ -1,7 +1,6 @@
 ---
 title: "Kotlin Coroutines and OpenTelemetry tracing"
 date: "2024-08-19T06:49:45+00:00"
-lastmod: "2026-09-21T06:03:27+00:00"
 description: "I recently compared three OpenTelemetry approaches on the JVM: Java Agent v1, v2, and Micrometer. I used Kotlin and coroutines without overthinking. I…"
 canonical: "https://blog.frankel.ch/kotlin-coroutines-otel-tracing/"
 authors:

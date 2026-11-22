@@ -1,7 +1,6 @@
 ---
 title: "Java Panama Polyglot (Rust) Part 4"
 date: "2022-05-26T08:33:02+00:00"
-lastmod: "2022-05-26T08:33:05+00:00"
 description: "By exposing native Rust functions, you can be easily accessed from Java code using Project Panama's Foreign Function Access APIs."
 authors:
   - "carldea"

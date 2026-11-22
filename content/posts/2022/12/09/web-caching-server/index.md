@@ -1,7 +1,6 @@
 ---
 title: "Web resource caching: Server-side"
 date: "2022-12-09T15:32:42+00:00"
-lastmod: "2022-12-09T15:41:12+00:00"
 description: "Learn how the most challenging issue with server-side caching is the configuration, such as what to cache and for how long."
 canonical: "https://blog.frankel.ch/web-caching/server/"
 authors:

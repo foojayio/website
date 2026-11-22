@@ -1,7 +1,6 @@
 ---
 title: "Scalable Enterprise Java for the Cloud"
 date: "2025-12-18T11:41:51+00:00"
-lastmod: "2025-12-18T12:02:22+00:00"
 description: "This e-book introduces Jakarta EE as the modern foundation for building Java enterprise applications in a cloud-native world."
 canonical: "https://payara.fish/blog/scalable-enterprise-java-for-the-cloud/"
 authors:

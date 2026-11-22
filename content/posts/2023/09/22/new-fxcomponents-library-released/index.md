@@ -1,7 +1,6 @@
 ---
 title: "New FXComponents Library Released"
 date: "2023-09-22T10:15:43+00:00"
-lastmod: "2023-09-22T10:15:44+00:00"
 description: "A new library for Java / JavaFX has just been released. The library’s name is FXComponents and it is a Java library that contains a collection of new controls to be used in JavaFX applications."
 authors:
   - "pedro-vieira"

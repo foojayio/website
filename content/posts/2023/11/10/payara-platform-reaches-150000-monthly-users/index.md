@@ -1,7 +1,6 @@
 ---
 title: "Payara Platform Surpasses 150,000 Monthly Users"
 date: "2023-11-10T11:42:38+00:00"
-lastmod: "2023-11-10T11:48:54+00:00"
 description: "Jakarta EE application server Payara Platform reaches 150,000 monthly users, a key global milestone!"
 authors:
   - "jadon-ortlepp"

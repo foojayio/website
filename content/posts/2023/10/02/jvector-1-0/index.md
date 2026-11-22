@@ -1,7 +1,6 @@
 ---
 title: "Released: JVector 1.0"
 date: "2023-10-02T12:36:20+00:00"
-lastmod: "2023-10-02T12:37:32+00:00"
 description: "JVector is a pure Java embedded vector search engine that powers DataStax Astra and is being added to Apache Cassandra."
 authors:
   - "jbellis"

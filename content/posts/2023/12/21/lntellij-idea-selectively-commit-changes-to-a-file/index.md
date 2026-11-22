@@ -1,7 +1,6 @@
 ---
 title: "lntelliJ IDEA: Selectively Commit Changes to a File"
 date: "2023-12-21T06:15:09+00:00"
-lastmod: "2023-12-21T06:15:10+00:00"
 description: "Selectively commit changes to a file using the Git integration in IntelliJ IDEA. Split unrelated changes into separate commits."
 canonical: "https://maritvandijk.com/git-selectively-commit/"
 authors:

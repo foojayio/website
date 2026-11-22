@@ -1,7 +1,6 @@
 ---
 title: "The subtle art of waiting"
 date: "2025-04-21T11:59:34+00:00"
-lastmod: "2026-09-21T06:02:57+00:00"
 description: "Recently, while working on a workshop titled Testing Your Pull Request on Kubernetes with GKE, and GitHub Actions, I faced twice the same issue: service A…"
 canonical: "https://blog.frankel.ch/subtle-art-waiting/"
 authors:

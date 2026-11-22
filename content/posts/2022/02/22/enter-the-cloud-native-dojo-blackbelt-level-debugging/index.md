@@ -1,7 +1,6 @@
 ---
 title: "Enter the Cloud Native Dojo: Blackbelt-Level Debugging"
 date: "2022-02-22T13:28:42+00:00"
-lastmod: "2022-02-22T13:30:35+00:00"
 description: "In this article, I want to go over three challenges we face when debugging modern applications: polyglot, unreproducible, data pollution."
 canonical: "https://thenewstack.io/enter-the-cloud-native-dojo-blackbelt-level-debugging/"
 authors:

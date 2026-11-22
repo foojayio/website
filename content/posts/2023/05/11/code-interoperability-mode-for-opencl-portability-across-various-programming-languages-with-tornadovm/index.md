@@ -1,7 +1,6 @@
 ---
 title: "TornadoVM: Code Interoperability Mode"
 date: "2023-05-11T07:54:04+00:00"
-lastmod: "2023-05-11T08:01:41+00:00"
 description: "Code Interoperability Mode enables TornadoVM to prototype kernels that run from multiple programming languages."
 authors:
   - "thanos-stratikopoulos"

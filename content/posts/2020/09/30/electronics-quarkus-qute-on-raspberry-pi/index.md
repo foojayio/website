@@ -1,7 +1,6 @@
 ---
 title: "Electronics & Quarkus Qute on Raspberry Pi"
 date: "2020-09-30T08:07:13+00:00"
-lastmod: "2021-12-10T13:02:15+00:00"
 description: "Igor De Souza has set up an interesting experiment in which he combines a LED number display with the Raspberry Pi and Quarkus."
 canonical: "http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/"
 authors:

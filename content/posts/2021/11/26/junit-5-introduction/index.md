@@ -1,7 +1,6 @@
 ---
 title: "JUnit 5 Introduction"
 date: "2021-11-26T15:22:59+00:00"
-lastmod: "2021-12-10T12:31:37+00:00"
 description: "Many of us have been used to JUnit 4 as a formidable unit testing framework, here is an introduction to JUnit 5, with references to JUnit 4."
 canonical: "https://cguntur.me/2019/07/07/using-junit5-part-1/"
 authors:

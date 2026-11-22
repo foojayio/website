@@ -1,7 +1,6 @@
 ---
 title: "Jakarta Faces, Java Web Framework, Stateless Edition: Marketplace AliFaces"
 date: "2026-08-29T19:22:52+00:00"
-lastmod: "2026-08-31T12:20:55+00:00"
 description: "A Fully Stateless Jakarta Faces Marketplace with Server-Side Rendering — No HttpSession, No Saved ViewState, No Sticky Sessions (see the poc on: AliFaces…"
 authors:
   - "angelo-rubini"

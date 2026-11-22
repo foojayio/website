@@ -1,7 +1,6 @@
 ---
 title: "Navigating Behaviour with Events"
 date: "2023-10-25T15:04:35+00:00"
-lastmod: "2024-01-09T12:58:51+00:00"
 description: "The practices of Event-Driven Architecture and Behaviour-Driven Development have more in common than may at first be apparent."
 authors:
   - "george-ball"

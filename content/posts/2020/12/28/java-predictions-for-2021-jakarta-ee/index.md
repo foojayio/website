@@ -1,7 +1,6 @@
 ---
 title: "What Are Your Java Predictions for 2021: Jakarta EE"
 date: "2020-12-28T09:30:18+00:00"
-lastmod: "2021-08-23T15:34:44+00:00"
 description: "Java developers may stop having to worry about Kubernetes as it is abstracted away as 'just infrastructure'. Payara's 2021 Java predictions!"
 authors:
   - "jadon-ortlepp"

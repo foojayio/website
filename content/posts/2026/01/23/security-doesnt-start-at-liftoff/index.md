@@ -1,7 +1,6 @@
 ---
 title: "Security Doesn’t Start at Liftoff"
 date: "2026-01-23T10:22:31+00:00"
-lastmod: "2026-01-23T12:06:07+00:00"
 description: "This is a follow-on to the article The Real Mechanics of Vulnerabilities in an Upstream/Downstream, Topsy-Turvy EOL World. What you'll learn in this…"
 authors:
   - "steve-poole"

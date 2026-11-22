@@ -1,7 +1,6 @@
 ---
 title: "How to Build and Deploy a Real-time Cloud-based Logging System"
 date: "2023-03-24T15:04:51+00:00"
-lastmod: "2023-03-24T15:05:30+00:00"
 description: "Learn how to treat logs and traces as part of a scalable cloud storage repository that can be analysed with the techniques used for big data."
 authors:
   - "fawaz-ghali"

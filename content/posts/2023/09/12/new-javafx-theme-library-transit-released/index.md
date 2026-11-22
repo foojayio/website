@@ -1,7 +1,6 @@
 ---
 title: "New JavaFX theme library \"Transit\" released"
 date: "2023-09-12T02:56:13+00:00"
-lastmod: "2023-09-12T07:24:45+00:00"
 description: "A new Java (JavaFX) theme has been released. This is a new theme called \"Transit\" and it builds upon JMetro."
 authors:
   - "pedro-vieira"

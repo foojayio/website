@@ -1,7 +1,6 @@
 ---
 title: "Agent Memory with Spring AI & Redis"
 date: "2025-07-23T16:34:04+00:00"
-lastmod: "2025-09-05T10:01:06+00:00"
 description: "Learn how to build a memory-enabled AI agent using Spring Boot, Spring AI, and Redis. Store and recall user preferences and conversation history for personalized, context-aware responses."
 authors:
   - "raphael-delio"

@@ -1,7 +1,6 @@
 ---
 title: "Chopping the monolith in a smarter way"
 date: "2023-12-07T07:40:55+00:00"
-lastmod: "2023-12-07T07:45:09+00:00"
 description: "Instead of forking the call on the client side, we fork the call on the Gateway side."
 canonical: "https://blog.frankel.ch/chopping-monolith-smarter-way/"
 authors:

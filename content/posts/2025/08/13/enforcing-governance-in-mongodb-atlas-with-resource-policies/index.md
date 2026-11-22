@@ -1,7 +1,6 @@
 ---
 title: "Enforcing Governance in MongoDB Atlas with Resource Policies"
 date: "2025-08-13T12:52:05+00:00"
-lastmod: "2025-08-13T12:58:29+00:00"
 description: "The growing adoption of MongoDB Atlas as a managed database platform increasingly demands mechanisms that align security, compliance, and governance."
 authors:
   - "samuel-molling"

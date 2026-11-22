@@ -1,7 +1,6 @@
 ---
 title: "Unlocking Reproducible Profiler Tests"
 date: "2023-05-19T09:02:33+00:00"
-lastmod: "2023-05-19T15:18:33+00:00"
 description: "How to use the WhiteBox API and Compiler Directives to get control of the JIT for better profiling of API tests!"
 authors:
   - "johannes-bechberger"

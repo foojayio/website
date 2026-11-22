@@ -1,7 +1,6 @@
 ---
 title: "JavaFX 3D: A Look Back Through History & Some Experiments"
 date: "2020-10-27T09:11:30+00:00"
-lastmod: "2020-11-08T20:53:12+00:00"
 description: "JavaFX 3D really is a hidden gem! I've been using JavaFX already for a long time now but wasn't aware of these 3D features!"
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "Apache Log4j CVE-2021-44228"
 date: "2021-12-13T07:10:19+00:00"
-lastmod: "2021-12-13T14:48:44+00:00"
 description: "Everything foojay collected on Log4Shell (CVE-2021-44228): the RCE itself, the LDAP attack vectors on recent JDKs, how to find out what leaked, and how to mitigate."
 authors:
   - "geertjan-wielenga"

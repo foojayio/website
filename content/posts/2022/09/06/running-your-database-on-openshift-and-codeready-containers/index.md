@@ -1,7 +1,6 @@
 ---
 title: "Running your Database on OpenShift and CodeReady Containers"
 date: "2022-09-06T09:43:57+00:00"
-lastmod: "2022-09-06T09:43:59+00:00"
 description: "An introductory run-through of setting up your database on OpenShift, using your own hardware and RedHat's CodeReady Containers."
 canonical: "https://dev.to/datastax/running-your-database-on-openshift-and-codeready-containers-5f94"
 authors:

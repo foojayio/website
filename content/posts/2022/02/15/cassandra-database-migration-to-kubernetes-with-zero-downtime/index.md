@@ -1,7 +1,6 @@
 ---
 title: "Cassandra Database Migration to Kubernetes with Zero Downtime"
 date: "2022-02-15T15:22:15+00:00"
-lastmod: "2022-02-15T16:28:47+00:00"
 description: "Learn how to migrate existing Cassandra clusters to K8ssandra without downtime, leveraging flat networking."
 canonical: "https://k8ssandra.io/blog/tutorials/cassandra-database-migration-to-kubernetes-zero-downtime/"
 authors:

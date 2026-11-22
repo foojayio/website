@@ -1,7 +1,6 @@
 ---
 title: "Debugging Java Collections Framework Issues in Production"
 date: "2022-07-15T08:49:59+00:00"
-lastmod: "2022-07-15T08:50:01+00:00"
 description: "Outside of the language itself, collections are the most basic building block for Java applications. How do we expose them for debugging?"
 canonical: "https://lightrun.com/tutorials/debugging-java-collections-framework-issues-in-production/"
 authors:

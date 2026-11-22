@@ -1,7 +1,6 @@
 ---
 title: "Bringing Java Closer to Education: A Community-Driven Initiative"
 date: "2026-02-02T18:02:20+00:00"
-lastmod: "2026-02-03T07:20:29+00:00"
 description: "Over the past decades, Java has proven itself to be one of the most reliable, versatile, and widely used programming languages in the world. From…"
 authors:
   - "igor-de-souza"

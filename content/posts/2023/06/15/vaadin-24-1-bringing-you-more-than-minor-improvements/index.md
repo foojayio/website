@@ -1,7 +1,6 @@
 ---
 title: "Vaadin 24.1: Bringing You More Than Minor Improvements!"
 date: "2023-06-15T14:58:13+00:00"
-lastmod: "2023-06-15T14:58:47+00:00"
 description: "While Vaadin 24.0 was about upgrading the technology baseline and compatibility, this version brings you new features!"
 authors:
   - "sami-ekblad"

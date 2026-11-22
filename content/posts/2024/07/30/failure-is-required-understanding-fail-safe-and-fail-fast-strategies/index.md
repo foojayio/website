@@ -1,7 +1,6 @@
 ---
 title: "Failure is Required: Understanding Fail-Safe & Fail-Fast Strategies"
 date: "2024-07-30T08:08:33+00:00"
-lastmod: "2024-07-30T08:08:34+00:00"
 description: "Learn how embracing failure can improve your app's quality, leading to early error detection, robust error handling & better overall stability"
 canonical: "https://debugagent.com/failure-is-required-understanding-fail-safe-and-fail-fast-strategies"
 authors:

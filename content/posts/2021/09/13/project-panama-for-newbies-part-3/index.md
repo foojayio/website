@@ -1,7 +1,6 @@
 ---
 title: "Project Panama for Newbies (Part 3)"
 date: "2021-09-13T08:53:47+00:00"
-lastmod: "2026-01-01T14:49:45+00:00"
 description: "Dig a little deeper in our exploration of Project Panama and learn how to talk to third party libraries such as SDL & OpenGL."
 authors:
   - "brice-dutheil"

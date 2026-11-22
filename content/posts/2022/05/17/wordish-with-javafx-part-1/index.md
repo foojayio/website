@@ -1,7 +1,6 @@
 ---
 title: "Wordish with JavaFX - Part 1"
 date: "2022-05-17T10:13:21+00:00"
-lastmod: "2022-05-24T07:52:44+00:00"
 description: "Learn about the main UI layout of a cool JavaFX game using Scene Builder, TilePane, FlowPane, controller code, iOS and Android settings!"
 authors:
   - "gail-anderson"

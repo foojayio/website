@@ -1,7 +1,6 @@
 ---
 title: "Discussing Backend For Front-end"
 date: "2022-07-25T14:49:18+00:00"
-lastmod: "2022-07-25T14:49:54+00:00"
 description: "The idea behind Backend For Front-end is to move logic from each microservice to a dedicated deployable endpoint."
 canonical: "https://blog.frankel.ch/backend-for-frontend/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "AI Found the Bugs. Who's Patching Your EOL Java Code?"
 date: "2026-07-23T15:26:53+00:00"
-lastmod: "2026-07-23T15:30:40+00:00"
 description: "AI finds decades-old flaws at machine speed, but the fixes only reach supported versions. What that means for end-of-life Java, and what to do."
 authors:
   - "steve-poole"

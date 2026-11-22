@@ -1,7 +1,6 @@
 ---
 title: "Book review: Learn JavaFX Game Development with FXGL 17"
 date: "2022-10-19T07:20:32+00:00"
-lastmod: "2023-03-16T10:45:28+00:00"
 description: "FXGL provides an impressive list of components with methods to override and build the exact functionality your game requires."
 authors:
   - "frankdelporte"

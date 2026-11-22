@@ -1,7 +1,6 @@
 ---
 title: "Native Linux, Apple Watch, A Game Builder And Crash Protection"
 date: "2026-06-26T18:43:22+00:00"
-lastmod: "2026-06-29T11:15:36+00:00"
 description: "This week adds a native Linux desktop port, an Apple Watch and Wear OS port, a visual Game Builder with a high-level gaming API, and seamless crash protect"
 canonical: "https://www.codenameone.com/blog/native-linux-apple-watch-game-builder-crash-protection/"
 authors:

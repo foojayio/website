@@ -1,7 +1,6 @@
 ---
 title: "Kicking Spring Native's Tires with GraalVM"
 date: "2021-03-22T17:18:05+00:00"
-lastmod: "2021-03-22T17:18:08+00:00"
 description: "Despite all the \"magic\" of Spring Boot, Spring Native handles most of GraalVM's required configuration out-of-the-box!"
 canonical: "https://blog.frankel.ch/kick-spring-native-tires/"
 authors:

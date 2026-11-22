@@ -1,7 +1,6 @@
 ---
 title: "Search in Documentation with a JavaFX LangChain4j Chat"
 date: "2024-04-10T18:09:59+00:00"
-lastmod: "2024-04-12T13:38:49+00:00"
 description: "Let's use an existing documentation set as the data for a ChatGPT-like application, created with JavaFX and LangChain4J."
 canonical: "https://webtechie.be/post/2024-03-18-search-documentation-javafx-chat-langchain4j/"
 authors:

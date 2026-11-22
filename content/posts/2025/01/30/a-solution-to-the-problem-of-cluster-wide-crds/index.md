@@ -1,7 +1,6 @@
 ---
 title: "A solution to the problem of cluster-wide CRDs"
 date: "2025-01-30T11:55:14+00:00"
-lastmod: "2025-01-30T11:55:15+00:00"
 description: "The problem of some Kubernetes objects: they are cluster-wide and lock all teams working on the same cluster to use the same version."
 canonical: "https://www.loft.sh/blog/solution-clusterwide-crds"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "On inheritance and subtyping"
 date: "2025-01-26T12:45:07+00:00"
-lastmod: "2026-09-21T06:03:12+00:00"
 description: "Java is the first language I learned in my career. Its structure is foundational in my early years of understanding programming concepts. After going…"
 canonical: "https://blog.frankel.ch/on-inheritance/"
 authors:

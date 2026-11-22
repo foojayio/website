@@ -1,7 +1,6 @@
 ---
 title: "Java: Where the Wild Code Isn't (On Security and Modularity)"
 date: "2024-09-17T08:41:00+00:00"
-lastmod: "2024-10-03T16:36:26+00:00"
 description: "The OpenJDK community has made Java safer for users and developers while making it easier to design, build, and run applications quickly."
 authors:
   - "erikcostlow"

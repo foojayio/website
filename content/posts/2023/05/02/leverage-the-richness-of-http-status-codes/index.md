@@ -1,7 +1,6 @@
 ---
 title: "Leverage the Richness of HTTP Status Codes"
 date: "2023-05-02T09:34:43+00:00"
-lastmod: "2023-05-02T09:34:44+00:00"
 description: "While many discussions about REST focus on entities and methods, using the correct response status codes can make your API stand out."
 authors:
   - "nicolas-frankel"

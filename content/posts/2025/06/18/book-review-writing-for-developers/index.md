@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Writing for Developers"
 date: "2025-06-18T10:58:31+00:00"
-lastmod: "2025-06-18T10:58:33+00:00"
 description: "The exhaustive description of common patterns is a huge asset for beginning writers and can help even seasoned ones."
 canonical: "https://blog.frankel.ch/writing-for-developers/"
 authors:

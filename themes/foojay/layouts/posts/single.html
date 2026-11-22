@@ -24,6 +24,9 @@
         {{/* The ISO attribute becomes the "date" meta key, so search results
              sort by date without parsing the display text. */}}
         <time datetime="{{ .Date.Format "2006-01-02" }}" data-pagefind-meta="date[datetime]" data-pagefind-filter="year:{{ .Date.Format "2006" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{/* A week apart, so a typo fix does not read as a revision. */}}
+        {{ with .Params.updated }}{{ $u := time . }}{{ if ge ($u.Sub $.Date).Hours 168 }}
+        <span class="updated">Updated <time datetime="{{ $u.Format "2006-01-02" }}">{{ $u.Format "Jan 2, 2006" }}</time></span>{{ end }}{{ end }}
         <span class="reading-time">{{ .ReadingTime }} min read</span>
         {{ partial "views.html" . }}
       </div>

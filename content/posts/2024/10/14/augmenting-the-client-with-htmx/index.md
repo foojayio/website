@@ -1,7 +1,6 @@
 ---
 title: "Augmenting the client with HTMX"
 date: "2024-10-14T12:37:39+00:00"
-lastmod: "2024-10-14T12:37:41+00:00"
 description: "In the two previous articles, I described Vue and Alpine. We configured Spring Boot to return JSON. With HTMX, we configured it to return HTML."
 canonical: "https://blog.frankel.ch/ajax-ssr/5/"
 authors:

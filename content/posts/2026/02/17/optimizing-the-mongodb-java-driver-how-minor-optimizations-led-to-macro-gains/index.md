@@ -1,7 +1,6 @@
 ---
 title: "Optimizing the MongoDB Java Driver"
 date: "2026-02-17T15:33:56+00:00"
-lastmod: "2026-02-18T14:52:52+00:00"
 description: "In this blog, we share how the Java developer experience team optimized the MongoDB Java Driver by strictly adhering to this principle. We discovered that performance issues were rarely where we thought they were. This post explains how we achieved throughput improvements between 20% to over 90% in specific workloads. We’ll cover specific techniques, including using SWAR (SIMD Within A Register) for null-terminator detection, caching BSON array indexes, and eliminating redundant invariant checks."
 authors:
   - "nasir-qureshi"

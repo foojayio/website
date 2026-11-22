@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot, Java 16, and New Java Records"
 date: "2021-03-23T09:55:23+00:00"
-lastmod: "2021-07-12T04:56:01+00:00"
 description: "Let's discuss Records, an official feature in Java 16, and apply this knowledge in conjunction with a Spring Boot application!"
 canonical: "https://ashishtechmill.com/spring-boot-and-java-16-records"
 authors:

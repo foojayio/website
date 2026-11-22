@@ -1,7 +1,6 @@
 ---
 title: "A (Definitive?) Guide to LazyInitializationException"
 date: "2021-03-29T07:19:49+00:00"
-lastmod: "2021-03-29T07:19:51+00:00"
 description: "Posts that have been written about Hibernate's LazyInitializationException could probably fill whole books. Time for a definitive guide!"
 canonical: "https://blog.frankel.ch/guide-lazyinitializationexception/"
 authors:

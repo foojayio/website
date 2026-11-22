@@ -1,7 +1,6 @@
 ---
 title: "Debugging Tutorial 1 – Introduction: Conditional Breakpoints & Set Value"
 date: "2021-10-27T08:03:53+00:00"
-lastmod: "2021-10-27T08:05:13+00:00"
 description: "Debug conditional breakpoints, setValue, and more, for VSCode, IntelliJ/IDEA, PyCharm, WebStorm, Java, JavaScript (NodeJS), Kotlin & Python."
 authors:
   - "shai-almog"

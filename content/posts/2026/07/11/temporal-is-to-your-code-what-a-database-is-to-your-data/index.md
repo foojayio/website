@@ -1,7 +1,6 @@
 ---
 title: "Temporal Is to Your Code What a Database Is to Your Data"
 date: "2026-07-11T10:31:54+00:00"
-lastmod: "2026-07-11T13:48:54+00:00"
 description: "Your database made your data durable. Temporal does the same for your code."
 authors:
   - "geertjan-wielenga"

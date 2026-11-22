@@ -1,7 +1,6 @@
 ---
 title: "What do you think was the reason that Java was invented?"
 date: "2020-10-05T06:14:16+00:00"
-lastmod: "2020-10-05T08:07:37+00:00"
 description: "The Java virtual machine is a system whereby any code could be run on any machine or operating system that supports a JVM."
 authors:
   - "kevinfarnham"

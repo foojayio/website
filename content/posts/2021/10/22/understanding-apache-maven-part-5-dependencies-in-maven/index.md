@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 5): Dependencies in Maven"
 date: "2021-10-22T20:48:59+00:00"
-lastmod: "2021-10-29T08:44:07+00:00"
 description: "In this, part 5 of the series on Apache Maven, a walkthrough of the topic of Apache Maven dependencies is covered!"
 canonical: "https://cguntur.me/2020/06/03/understanding-apache-maven-part-5/"
 authors:

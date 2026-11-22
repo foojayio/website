@@ -1,7 +1,6 @@
 ---
 title: "8 Debugging Tips for IntelliJ IDEA Users You Never Knew Existed"
 date: "2021-09-09T07:15:54+00:00"
-lastmod: "2021-09-09T07:29:59+00:00"
 description: "8 proven debugger tips for developers. Improve debugging in IntelliJ IDEA. Learn advanced data collection, from breakpoints to new features!"
 canonical: "https://lightrun.com/blog/eight-debugging-tips-for-intellijidea-users-you-never-knew-existed/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Participate in the Java Ecosystem Survey 2021"
 date: "2021-04-01T16:03:13+00:00"
-lastmod: "2021-04-01T16:04:41+00:00"
 description: "Just like last year, and together with our partner Azul, we would like your input on how you use Java and the JVM ecosystem."
 canonical: "https://snyk.io/blog/java-ecosystem-survey-2021/"
 authors:

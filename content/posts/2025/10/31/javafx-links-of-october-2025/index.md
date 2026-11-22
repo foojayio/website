@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of October 2025"
 date: "2025-10-31T07:31:45+00:00"
-lastmod: "2025-10-31T07:33:20+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of October 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there…"
 canonical: "https://webtechie.be/post/2025-10-31-javafx-links-of-october-2025/"
 authors:

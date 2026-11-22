@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with FXGL Game Development"
 date: "2020-11-12T08:24:54+00:00"
-lastmod: "2021-04-23T12:36:38+00:00"
 description: "FXGL is a JavaFX Game Library Engine for Java and Kotlin, created by Almas Baimagambetov. Here is everything you need to get started!"
 canonical: "https://webtechie.be/post/2020-05-07-getting-started-with-fxgl/"
 authors:

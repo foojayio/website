@@ -1,7 +1,6 @@
 ---
 title: "Debate on the Future of Java and Kotlin on Foojay.io Today"
 date: "2023-03-29T13:50:29+00:00"
-lastmod: "2023-03-29T13:56:09+00:00"
 description: "In this article, we look at a discussion on Foojay's Slack comparing Java and Kotlin, showing why developers should join the platform."
 authors:
   - "bazlur-rahman"

@@ -1,7 +1,6 @@
 ---
 title: "Sustainable Software Engineering: Input Requested!"
 date: "2024-08-21T09:49:20+00:00"
-lastmod: "2024-08-21T09:51:22+00:00"
 description: "Since about a year ago, the Foojay community has a group of people that are working on a book with tips and information on Sustainable Software Engineering."
 authors:
   - "janhendrik-kuperus"

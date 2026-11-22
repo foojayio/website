@@ -1,7 +1,6 @@
 ---
 title: "Introducing the BoxLang IDE Plugin for IntelliJ"
 date: "2026-03-10T14:25:33+00:00"
-lastmod: "2026-03-17T15:47:36+00:00"
 description: "The IntelliJ ecosystem is one of the most powerful development environments for JVM developers. Today, we’re excited to introduce the official BoxLang IDE…"
 authors:
   - "cristobal-escobar"

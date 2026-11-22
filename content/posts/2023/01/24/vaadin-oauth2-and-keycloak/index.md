@@ -1,7 +1,6 @@
 ---
 title: "Vaadin, OAuth2, and Keycloak"
 date: "2023-01-24T09:34:41+00:00"
-lastmod: "2023-01-24T09:34:42+00:00"
 description: "Security matters! Learn how to configure Vaadin and Spring Security to use OAuth2 with Keycloak on Foojay.io Today!"
 authors:
   - "simon-martinelli"

@@ -1,7 +1,6 @@
 ---
 title: "Navigating the Challenges of Modern Software Development: An Exclusive Interview with Shai Almog"
 date: "2023-03-27T16:39:07+00:00"
-lastmod: "2023-03-27T17:10:44+00:00"
 description: "Join our interview with Java expert Shai Almog, as he shares his journey and offers valuable advice for developers, discussing mentorship and overcoming challenges in the software industry."
 authors:
   - "bazlur-rahman"

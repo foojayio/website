@@ -1,7 +1,6 @@
 ---
 title: "Spring Data Neo4j: How to update an entity"
 date: "2025-02-05T18:58:12+00:00"
-lastmod: "2025-02-05T18:58:14+00:00"
 description: "After working on a new online Spring Data Neo4j course, I learned a couple more things about updating an entity."
 authors:
   - "jennifer-reif"

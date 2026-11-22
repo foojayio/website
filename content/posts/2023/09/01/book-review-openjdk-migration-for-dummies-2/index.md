@@ -1,7 +1,6 @@
 ---
 title: "Book review: \"OpenJDK Migration for Dummies\""
 date: "2023-09-01T07:42:43+00:00"
-lastmod: "2024-06-30T11:18:26+00:00"
 description: "Is \"OpenJDK Migration for Dummies\" worth reading? I'd say so!"
 authors:
   - "simon-verhoeven"

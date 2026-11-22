@@ -1,7 +1,6 @@
 ---
 title: "Foojay Status Report: July 2023"
 date: "2023-07-03T05:20:56+00:00"
-lastmod: "2023-07-03T11:00:52+00:00"
 description: "Great big overview of Foojay.io, plus its subprojects and related insights and statistics, as well as upcoming plans."
 authors:
   - "geertjan-wielenga"

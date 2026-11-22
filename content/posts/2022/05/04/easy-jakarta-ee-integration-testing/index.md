@@ -1,7 +1,6 @@
 ---
 title: "Easy Jakarta EE Integration Testing"
 date: "2022-05-04T14:41:49+00:00"
-lastmod: "2022-05-04T14:57:11+00:00"
 description: "How to use Testcontainers for your project to create a stable and solid integration test suite of your Jakarta EE application features."
 canonical: "https://blog.payara.fish/jakarta-ee-integration-testing-with-testcontainers"
 authors:

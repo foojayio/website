@@ -1,7 +1,6 @@
 ---
 title: "Five Java Developer Must-Haves For Ultra-Fast Startup Solutions"
 date: "2024-05-29T20:15:45+00:00"
-lastmod: "2024-05-29T20:17:17+00:00"
 description: "How to get ultra-fast startup of your Java apps without developer experience compromises."
 canonical: "https://dzone.com/articles/five-java-developer-must-haves-for-ultra-fast-star"
 authors:

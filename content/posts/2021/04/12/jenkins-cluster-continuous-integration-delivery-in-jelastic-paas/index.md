@@ -1,7 +1,6 @@
 ---
 title: "Jenkins Cluster for Continuous Integration and Delivery in Jelastic PaaS"
 date: "2021-04-12T12:44:50+00:00"
-lastmod: "2021-09-16T14:50:47+00:00"
 description: "Automate Java applications continuous integration and delivery with pre-configured master-slave Jenkins cluster from Jelastic PaaS."
 authors:
   - "tetiana-fydorenchyk"

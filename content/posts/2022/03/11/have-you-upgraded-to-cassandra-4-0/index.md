@@ -1,7 +1,6 @@
 ---
 title: "Have you upgraded to Cassandra 4.0 yet?"
 date: "2022-03-11T08:35:20+00:00"
-lastmod: "2022-03-11T09:00:38+00:00"
 description: "If you’re a current Cassandra user, upgrading to the latest releases can be fairly simple and requires no downtime."
 canonical: "https://jaxenter.com/cassandra-4-0-175016.html"
 authors:

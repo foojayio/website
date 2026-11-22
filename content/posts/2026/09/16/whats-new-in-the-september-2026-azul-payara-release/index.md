@@ -1,7 +1,6 @@
 ---
 title: "What's New In The September 2026 Azul Payara Release?"
 date: "2026-09-16T16:46:54+00:00"
-lastmod: "2026-09-17T08:40:00+00:00"
 description: "MicroProfile 7.1 lands on the commercial lines, OpenTracing is removed, and Jakarta Agentic AI reaches Payara Micro in the September Azul Payara release."
 authors:
   - "dominika-tasarz"

@@ -1,7 +1,6 @@
 ---
 title: "Runtime-initialized variables in Rust"
 date: "2025-06-03T07:56:18+00:00"
-lastmod: "2026-09-21T06:02:42+00:00"
 description: "Rust offers different ways to initialize compile time-initialized variables. Recently, I had to create a runtime-initialized variable: existing approaches…"
 canonical: "https://blog.frankel.ch/lazy-initialized-vars-rust/"
 authors:

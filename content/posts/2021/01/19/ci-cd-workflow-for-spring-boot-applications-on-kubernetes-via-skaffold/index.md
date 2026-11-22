@@ -1,7 +1,6 @@
 ---
 title: "CI/CD Workflow for Spring Boot Applications on Kubernetes via Skaffold"
 date: "2021-01-19T07:37:03+00:00"
-lastmod: "2021-07-05T20:04:51+00:00"
 description: "Skaffold eases development and deployment of applications running on Kubernetes, managing the entire workflow, giving instant feedback."
 canonical: "https://ashishtechmill.com/cicd-workflow-for-spring-boot-application-on-kubernetes-via-skaffold"
 authors:

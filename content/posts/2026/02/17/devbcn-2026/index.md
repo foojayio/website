@@ -1,7 +1,6 @@
 ---
 title: "DevBcn, the developer's conference in Barcelona"
 date: "2026-02-17T09:56:33+00:00"
-lastmod: "2026-02-17T09:56:35+00:00"
 description: "Register for the developers' conference in Barcelona next June, with Java, AI, Cloud, Frontend and Managing."
 authors:
   - "jonathan-vila"

@@ -1,7 +1,6 @@
 ---
 title: "BoxLang Dynamic JVM Language Release 1.9.0"
 date: "2026-01-12T11:16:19+00:00"
-lastmod: "2026-01-12T11:16:46+00:00"
 description: "BoxLang continues to expand as more customers migrate to it’s dynamic JVM platform."
 authors:
   - "luis-majano"

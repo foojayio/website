@@ -1,7 +1,6 @@
 ---
 title: "Why I prefer trunk-based development"
 date: "2023-06-23T08:06:35+00:00"
-lastmod: "2023-06-23T08:07:10+00:00"
 description: "Trisha summarizes the advantages of trunk-based development (as opposed to branch-based development) in this article."
 canonical: "https://trishagee.com/2023/05/29/why-i-prefer-trunk-based-development/"
 authors:

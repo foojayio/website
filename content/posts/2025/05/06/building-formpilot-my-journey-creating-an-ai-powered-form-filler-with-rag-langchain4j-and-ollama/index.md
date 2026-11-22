@@ -1,7 +1,6 @@
 ---
 title: "Building FormPilot"
 date: "2025-05-06T10:00:04+00:00"
-lastmod: "2025-05-06T10:47:47+00:00"
 description: "My Journey Creating an AI-Powered Form Filler with RAG, LangChain4j, and Ollama"
 canonical: "https://bazlur.ca/2025/04/06/building-formpilot-my-journey-creating-an-ai-powered-form-filler-with-rag-langchain4j-and-ollama/"
 authors:

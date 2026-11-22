@@ -1,7 +1,6 @@
 ---
 title: "Benchmark and profiling Java with JMH"
 date: "2025-06-24T21:49:25+00:00"
-lastmod: "2025-06-24T21:51:12+00:00"
 description: "Exploring how to profile and benchmark Java code using JMH and Async profiler."
 canonical: "https://davidvlijmincx.com/posts/benchmark-and-profile-java/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Fearless Distroless"
 date: "2023-04-21T08:59:50+00:00"
-lastmod: "2023-04-21T08:59:52+00:00"
 description: "Distroless images are a solution to reduce your image size and improve its security, by providing neither a package manager nor a shell."
 canonical: "https://blog.frankel.ch/fearless-distroless"
 authors:

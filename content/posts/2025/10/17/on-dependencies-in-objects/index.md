@@ -1,7 +1,6 @@
 ---
 title: "On dependencies in objects"
 date: "2025-10-17T16:58:39+00:00"
-lastmod: "2026-09-21T06:01:22+00:00"
 description: "In OOP, objects collaborate. The initial idea of collaboration, first found in Smalltalk, was for object A to send a message to object B. Languages…"
 canonical: "https://blog.frankel.ch/dependencies-objects/"
 authors:

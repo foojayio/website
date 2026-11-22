@@ -1,7 +1,6 @@
 ---
 title: "Remote Development Made Simple with DevPod"
 date: "2025-02-13T16:06:30+00:00"
-lastmod: "2025-02-13T16:06:32+00:00"
 description: "DevPod is a nice tool around your toolbelt that allows your development team(s) to share the same machine configuration without hassle."
 canonical: "https://www.loft.sh/blog/remote-development-devpod"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Timely Computation of Derived Values"
 date: "2021-09-10T09:22:36+00:00"
-lastmod: "2021-09-10T09:26:14+00:00"
 description: "Learn about adding computed values, as in an eager approach, but only triggering the computation when you need to access its result!"
 canonical: "https://blog.frankel.ch/timely-computation-derived-values/"
 authors:

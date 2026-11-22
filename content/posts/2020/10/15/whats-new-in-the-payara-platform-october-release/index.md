@@ -1,7 +1,6 @@
 ---
 title: "What's New in the Payara Platform October Release?"
 date: "2020-10-15T14:19:00+00:00"
-lastmod: "2020-10-15T17:58:38+00:00"
 description: "We're happy to announce that Payara Platform Community 5.2020.5 and Payara Platform Enterprise 5.22.0 Editions are out!"
 authors:
   - "jadon-ortlepp"

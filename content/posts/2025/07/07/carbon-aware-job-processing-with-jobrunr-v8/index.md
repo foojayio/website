@@ -1,7 +1,6 @@
 ---
 title: "Carbon Aware Job Processing With JobRunr v8"
 date: "2025-07-07T09:00:09+00:00"
-lastmod: "2025-07-07T09:50:58+00:00"
 description: "Discover how JobRunr v8 helps developers cut CO2 emissions without sacrificing performance. Use Carbon Aware Job Processing to run background jobs when your grid is greenest. Make your apps smarter, and the planet a little cleaner, with just a few lines of code."
 authors:
   - "nicholas-dhondt"

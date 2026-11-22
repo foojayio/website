@@ -1,7 +1,6 @@
 ---
 title: "Controlling an LCD Display with Spring and Thymeleaf on the Raspberry Pi"
 date: "2021-05-19T07:10:12+00:00"
-lastmod: "2021-05-19T07:10:16+00:00"
 description: "Igor De Souza shares a lot fun and inspirational experiments with Java on Raspberry Pi. Some of those were already shared here on Foojay.io."
 canonical: "http://www.igfasouza.com/blog/spring-thymeleaf-raspberry-pi-lcd/"
 authors:

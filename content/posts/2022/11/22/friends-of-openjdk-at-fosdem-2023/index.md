@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK at FOSDEM 2023"
 date: "2022-11-22T08:30:07+00:00"
-lastmod: "2022-11-22T10:57:13+00:00"
 description: "The upcoming FOSDEM 2023, 5 February 2023, will be live and everything will be in person, submit to the \"Friends Of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"

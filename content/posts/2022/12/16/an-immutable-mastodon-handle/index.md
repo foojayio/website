@@ -1,7 +1,6 @@
 ---
 title: "An immutable Mastodon handle"
 date: "2022-12-16T13:53:54+00:00"
-lastmod: "2026-09-21T06:05:21+00:00"
 description: "Whether Twitter crumbles remains to be seen, though some signs are telling. Whatever happens, I'm continuing to invest a bit in Mastodon. Last week, I…"
 canonical: "https://blog.frankel.ch/immutable-mastodon-handle/"
 authors:

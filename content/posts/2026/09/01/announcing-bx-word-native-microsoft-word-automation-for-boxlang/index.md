@@ -1,7 +1,6 @@
 ---
 title: "Announcing BX-WORD: Native Microsoft Word Automation for BoxLang"
 date: "2026-09-01T11:31:16+00:00"
-lastmod: "2026-09-01T11:31:19+00:00"
 description: "Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements…"
 authors:
   - "cristobal-escobar"

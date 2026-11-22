@@ -1,7 +1,6 @@
 ---
 title: "MongoDB and WiredTiger: A Journey Through the Storage Engine"
 date: "2025-12-18T20:26:28+00:00"
-lastmod: "2025-12-18T20:26:30+00:00"
 description: "Databases are the backbone of modern applications, and MongoDB stands out with its flexibility and scalability. Central to its functionality is the WiredTiger storage engine. WiredTiger, as MongoDB’s default engine, seamlessly merges document-level concurrency for high throughput, advanced compression techniques for optimized storage, and an in-memory architecture for rapid data access."
 authors:
   - "elie-hannouch"

@@ -1,7 +1,6 @@
 ---
 title: "Book review: Frontend Development with JavaFX and Kotlin"
 date: "2024-06-14T09:06:53+00:00"
-lastmod: "2024-06-14T09:06:55+00:00"
 description: "If you are new to JavaFX+Kotlin, this book is a good starting point and gives enough examples to help you understand how to create an application and benefit from Kotlin's features."
 canonical: "https://webtechie.be/post/2024-05-06-book-review-javafx-kotlin/"
 authors:

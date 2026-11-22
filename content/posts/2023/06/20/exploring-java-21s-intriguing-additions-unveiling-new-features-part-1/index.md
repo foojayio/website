@@ -1,7 +1,6 @@
 ---
 title: "Exploring Java 21's Intriguing Additions (Part 1)"
 date: "2023-06-20T13:40:21+00:00"
-lastmod: "2023-11-13T07:00:15+00:00"
 description: "Learn about a few notable features that stand out in the upcoming Java 21, in an overview of their functionalities and potential use cases."
 authors:
   - "bazlur-rahman"

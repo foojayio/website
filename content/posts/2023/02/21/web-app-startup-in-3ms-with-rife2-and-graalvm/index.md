@@ -1,7 +1,6 @@
 ---
 title: "Web App Startup in 3ms with RIFE2 and GraalVM"
 date: "2023-02-21T09:12:55+00:00"
-lastmod: "2023-04-10T20:40:06+00:00"
 description: "RIFE2 v1.3.0 has experimental support for GraalVM Ahead-Of-Time compilation with native-image, reducing startup time to an incredible 3ms!"
 authors:
   - "geert-bevin"

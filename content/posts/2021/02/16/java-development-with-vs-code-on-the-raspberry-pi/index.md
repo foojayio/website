@@ -1,7 +1,6 @@
 ---
 title: "Java Development with VS Code on the Raspberry Pi"
 date: "2021-02-16T11:09:39+00:00"
-lastmod: "2021-02-16T12:38:37+00:00"
 description: "Did you know you can use VS Code on ARM-processor-powered Raspberry Pis? Microsoft has released versions for 32-bit and 64-bit Raspberry Pis."
 canonical: "https://webtechie.be/post/2020-10-15-visual-studio-code-on-raspberry-pi/"
 authors:

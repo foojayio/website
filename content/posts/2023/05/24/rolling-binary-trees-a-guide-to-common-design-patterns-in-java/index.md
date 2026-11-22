@@ -1,7 +1,6 @@
 ---
 title: "Rolling Binary Trees: A Guide to Common Design Patterns in Java"
 date: "2023-05-24T12:55:14+00:00"
-lastmod: "2023-06-04T18:02:23+00:00"
 description: "We introduce a linear algorithm for rolling binary trees and implement it in Java, by demonstrating the use of common design patterns."
 authors:
   - "george-tanev"

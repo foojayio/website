@@ -1,7 +1,6 @@
 ---
 title: "Announcement: JReleaser 0.6.0 Released!"
 date: "2021-08-03T18:15:49+00:00"
-lastmod: "2021-08-03T18:15:51+00:00"
 description: "JReleaser is a tool that streamlines creating releases for [Java] projects. It can create a GitHub/GitLab/Gitea release, and much much more!"
 authors:
   - "andres-almiray"

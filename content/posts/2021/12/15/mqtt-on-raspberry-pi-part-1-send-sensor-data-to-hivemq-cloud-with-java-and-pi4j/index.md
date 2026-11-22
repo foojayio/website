@@ -1,7 +1,6 @@
 ---
 title: "MQTT on Raspberry Pi: Sensor Data to HiveMQ Cloud with Java and Pi4J"
 date: "2021-12-15T09:54:37+00:00"
-lastmod: "2021-12-20T21:32:16+00:00"
 description: "Get started with HiveMQ and publish the data of up to 100 devices to an always-on, maintenance-free message broker for free."
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part01-sensor-data-hivemqcloud-java-pi4j/"
 authors:

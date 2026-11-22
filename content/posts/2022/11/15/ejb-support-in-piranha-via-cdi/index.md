@@ -1,7 +1,6 @@
 ---
 title: "EJB support in Piranha via CDI"
 date: "2022-11-15T14:14:42+00:00"
-lastmod: "2022-11-15T14:15:30+00:00"
 description: "Piranha Cloud takes a novel approach and maps Enterprise Beans annotations to equivalent functionality in CDI or other Jakarta EE APIs."
 authors:
   - "ondro-mihalyi"

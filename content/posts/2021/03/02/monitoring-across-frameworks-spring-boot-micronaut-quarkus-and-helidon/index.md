@@ -1,7 +1,6 @@
 ---
 title: "Monitoring Across Frameworks: Spring Boot, Quarkus, Micronaut, Helidon"
 date: "2021-03-02T18:44:07+00:00"
-lastmod: "2021-08-23T12:45:15+00:00"
 description: "Gone are the times when developers' jobs ended with the release of the application and Spring Boot, Quarkus, Micronaut, Helidon can help!"
 canonical: "https://blog.frankel.ch/monitoring-across-frameworks/"
 authors:

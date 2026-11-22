@@ -1,7 +1,6 @@
 ---
 title: "Windsurf AI and SonarQube The Dream Team for AI Code Quality"
 date: "2026-02-16T09:34:00+00:00"
-lastmod: "2026-02-16T09:35:10+00:00"
 description: "Boost your Windsurf AI Java coding! 🚀 Learn how to use Skills and MCP to connect SonarQube directly to your IDE for high quality code. 💻✨"
 authors:
   - "jonathan-vila"

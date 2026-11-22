@@ -1,7 +1,6 @@
 ---
 title: "Why You Should Upgrade to Maven Version 3.8.1 Today or Very Soon"
 date: "2021-08-11T08:06:09+00:00"
-lastmod: "2021-11-23T09:53:10+00:00"
 description: "If you are still running on an old Maven version like 3.6.3 or below, you need to upgrade to version 3.8.1 because of security reasons."
 canonical: "https://snyk.io/blog/why-you-should-upgrade-to-maven-version-3-8-1/"
 authors:

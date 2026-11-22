@@ -1,7 +1,6 @@
 ---
 title: "Migrating Browser-Based Java Applets to IcedTea-Web using JNLP"
 date: "2021-02-02T07:55:53+00:00"
-lastmod: "2023-05-16T13:40:49+00:00"
 description: "Let's use a 20 year old JAR, once created for a Java Applet to be run in the Java 1.1 Browser Plugin... and run it on JDK 11!"
 authors:
   - "holger-isenberg"

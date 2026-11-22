@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 11)"
 date: "2022-01-26T07:58:30+00:00"
-lastmod: "2023-02-20T11:22:17+00:00"
 description: "Learn how to ask the executor framework at startup to provision threads for us and they will be reused as long as the application runs."
 authors:
   - "bazlur-rahman"

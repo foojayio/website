@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #37: J-Fall Report, Part 4 (final)"
 date: "2023-12-18T10:34:22+00:00"
-lastmod: "2025-11-13T08:51:27+00:00"
 description: "Check the previous Foojay Podcasts for the first three parts of our J-Fall report. In this episode, you’ll get the remaining interviews we made that day."
 authors:
   - "frankdelporte"

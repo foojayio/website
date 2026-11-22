@@ -1,7 +1,6 @@
 ---
 title: "Authenticate with OpenID Connect and Apache APISIX"
 date: "2023-03-09T07:51:47+00:00"
-lastmod: "2023-03-09T07:54:58+00:00"
 description: "Externalizing your authentication process to a third party may be sensible, but avoid binding your infrastructure to its proprietary process."
 canonical: "https://blog.frankel.ch/authenticate-openid-connect/"
 authors:

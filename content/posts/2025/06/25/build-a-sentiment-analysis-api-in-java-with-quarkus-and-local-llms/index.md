@@ -1,7 +1,6 @@
 ---
 title: "Sentiment Analysis with Java, Quarkus, LangChain4j, and Local LLMs"
 date: "2025-06-25T12:20:26+00:00"
-lastmod: "2025-06-25T12:24:15+00:00"
 description: "Let’s get in and build a Quarkus REST API that classifies text sentiment using a local LLM model (like Phi-3 Mini) pulled in via Ollama."
 canonical: "https://myfear.substack.com/p/sentiment-analysis-java-quarkus-langchain4j-local-llm"
 authors:

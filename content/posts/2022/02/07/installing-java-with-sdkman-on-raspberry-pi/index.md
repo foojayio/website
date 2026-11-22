@@ -1,7 +1,6 @@
 ---
 title: "Installing Java with SDKMAN on Raspberry Pi"
 date: "2022-02-07T12:23:15+00:00"
-lastmod: "2022-02-07T12:23:17+00:00"
 description: "Java on Raspberry Pi has always been possible, but SDKMAN makes the getting-started process a lot easier. It's as easy as pi..."
 authors:
   - "frankdelporte"

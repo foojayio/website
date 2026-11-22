@@ -1,7 +1,6 @@
 ---
 title: "Release with JReleaser to Maven Central with GitHub Actions"
 date: "2023-01-18T08:55:48+00:00"
-lastmod: "2025-12-12T12:03:48+00:00"
 description: "Learn from scratch about how to get started releasing a Java module with JReleaser to Maven Central with Github Actions."
 authors:
   - "jago-de-vreede"

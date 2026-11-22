@@ -1,7 +1,6 @@
 ---
 title: "Thoughts on object creation"
 date: "2025-08-30T17:30:29+00:00"
-lastmod: "2026-09-21T06:01:39+00:00"
 description: "Creational patterns were first described in the famous Gang of Four's Design Patterns. The book presents each pattern in a dedicated chapter and follows a…"
 canonical: "https://blog.frankel.ch/thoughts-object-creation/"
 authors:

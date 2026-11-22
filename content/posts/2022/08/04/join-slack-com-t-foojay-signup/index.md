@@ -1,7 +1,7 @@
 ---
 title: "Join the Friends Of OpenJDK Community on Slack"
 date: "2022-08-04"
-lastmod: "2026-09-24"
+updated: "2026-09-24"
 description: "On Slack, the Foojay.io community discusses articles, insights, tips, tricks, events, and more."
 authors:
   - "geertjan-wielenga"

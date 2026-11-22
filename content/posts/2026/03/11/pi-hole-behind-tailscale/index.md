@@ -1,7 +1,6 @@
 ---
 title: "Pi-hole behind Tailscale"
 date: "2026-03-11T18:20:08+00:00"
-lastmod: "2026-09-21T05:56:54+00:00"
 description: "As I age, I become increasingly cautious about my privacy. The slope the world is sliding on is also a big, unfortunate incentive. I have been eying…"
 canonical: "https://blog.frankel.ch/pi-hole-tailscale/"
 authors:

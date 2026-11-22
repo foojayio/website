@@ -1,7 +1,6 @@
 ---
 title: "Getting my feet wet with Crossplane"
 date: "2025-05-05T09:47:57+00:00"
-lastmod: "2026-09-21T06:02:45+00:00"
 description: "In the early days of IT, we manually configured servers–each one a precious snowflake, lovingly maintained and documented. But the size of the…"
 canonical: "https://blog.frankel.ch/feet-wet-crossplane/"
 authors:

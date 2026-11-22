@@ -1,7 +1,6 @@
 ---
 title: "Fast JMS for Apache Pulsar: Blazing Performance"
 date: "2021-12-10T08:54:44+00:00"
-lastmod: "2021-12-10T08:54:46+00:00"
 description: "Learn today how you can modernize and reduce costs with blazing performance with fast JMS for Apache Pulsar."
 canonical: "https://www.datastax.com/blog/fast-jms-apache-pulsar"
 authors:

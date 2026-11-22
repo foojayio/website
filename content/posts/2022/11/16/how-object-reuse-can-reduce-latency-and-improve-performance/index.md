@@ -1,7 +1,6 @@
 ---
 title: "How Object Reuse Can Reduce Latency and Improve Performance"
 date: "2022-11-16T15:33:41+00:00"
-lastmod: "2022-11-16T15:34:00+00:00"
 description: "Write more performant code with less latency by becoming familiar with the art of object reuse in multi-threaded Java applications."
 authors:
   - "per-minborg"

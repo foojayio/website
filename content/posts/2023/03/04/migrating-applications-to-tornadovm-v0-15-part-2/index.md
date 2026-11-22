@@ -1,7 +1,6 @@
 ---
 title: "Migrating Applications to TornadoVM v0.15 (Part 2)"
 date: "2023-03-04T18:38:41+00:00"
-lastmod: "2023-03-04T18:54:54+00:00"
 description: "In this article, we will spotlight all the TornadoVM configurations/operations that regard the execution on the hardware device."
 authors:
   - "thanos-stratikopoulos"

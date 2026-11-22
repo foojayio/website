@@ -1,7 +1,6 @@
 ---
 title: "Top 7 Features in Jakarta EE 10 Release"
 date: "2022-06-28T08:33:31+00:00"
-lastmod: "2022-06-28T08:36:13+00:00"
 description: "Jakarta EE is a dominant force behind all enterprise development in Java. Check out my favorite top 7 features, what are yours?"
 authors:
   - "bazlur-rahman"

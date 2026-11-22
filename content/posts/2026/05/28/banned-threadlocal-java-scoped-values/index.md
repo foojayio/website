@@ -1,7 +1,6 @@
 ---
 title: "Scoped Values: Why I Banned ThreadLocal in Exeris"
 date: "2026-05-28T09:36:00+00:00"
-lastmod: "2026-06-03T07:06:38+00:00"
 description: "Why ThreadLocal kills performance under Project Loom and how the Exeris Kernel uses Scoped Values for true zero-copy architecture."
 canonical: "https://blog.arkstack.dev/en/blog/why-i-banned-threadlocal-from-the-exeris-kernel"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "64-bit Raspbian OS on Raspberry Pi 4 with USB Boot"
 date: "2020-10-12T11:14:26+00:00"
-lastmod: "2020-10-12T13:26:44+00:00"
 description: "Switching from SD to USB Boot is very easy if you have a Flash Drive which is supported and the read speed is a lot higher!"
 canonical: "https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/"
 authors:

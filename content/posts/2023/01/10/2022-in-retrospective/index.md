@@ -1,7 +1,6 @@
 ---
 title: "2022 in Retrospective"
 date: "2023-01-10T08:19:43+00:00"
-lastmod: "2023-01-10T08:19:44+00:00"
 description: "Years when one changes jobs are always challenging but very interesting; 2022 was no different. What are your insights into last/this year?"
 canonical: "https://blog.frankel.ch/2022-retrospective/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Neo4j's Online Conference Is Coming In October..."
 date: "2023-06-07T08:46:15+00:00"
-lastmod: "2023-06-07T08:46:17+00:00"
 description: "Join the biggest graph community gathering dedicated to learning how to integrate graph technologies into ML and dev projects."
 authors:
   - "jennifer-reif"

@@ -1,7 +1,6 @@
 ---
 title: "Download OpenJDK Today!"
 date: "2021-03-09T10:35:00+00:00"
-lastmod: "2022-08-30T10:52:19+00:00"
 description: "Multiple different vendors provide the OpenJDK and Foojay.io gives you access to them all."
 authors:
   - "geertjan-wielenga"

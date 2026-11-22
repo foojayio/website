@@ -1,7 +1,6 @@
 ---
 title: "Build and Run TornadoVM with IntelliJ IDEA"
 date: "2024-11-20T19:08:13+00:00"
-lastmod: "2024-11-20T19:08:15+00:00"
 description: "Learn how to build TornadoVM with IntelliJ, and run the unit-tests or other Java programs from the IDE."
 authors:
   - "thanos-stratikopoulos"

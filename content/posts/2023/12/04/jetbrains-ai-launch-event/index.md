@@ -1,7 +1,6 @@
 ---
 title: "Virtual Event: JetBrains AI Launch Event"
 date: "2023-12-04T11:32:32+00:00"
-lastmod: "2023-12-04T11:32:34+00:00"
 description: "Don’t miss the online JetBrains AI launch event, where we'll release our AI-powered coding companion, JetBrains AI Assistant."
 authors:
   - "marit-van-dijk"

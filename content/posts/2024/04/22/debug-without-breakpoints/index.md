@@ -1,7 +1,6 @@
 ---
 title: "Debug Without Breakpoints – Guide to IntelliJ IDEA's Pause"
 date: "2024-04-22T06:59:28+00:00"
-lastmod: "2024-07-29T18:14:26+00:00"
 description: "Learn how to use IntelliJ IDEA's Pause – a lesser known feature that will help you diagnose UI freezes, deadlocks, livelocks, and more"
 canonical: "https://flounder.dev/posts/debug-without-breakpoints/"
 authors:

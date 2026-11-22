@@ -1,7 +1,6 @@
 ---
 title: "Introducing Teeing: A Hidden Gem in the Java API"
 date: "2021-05-12T07:15:07+00:00"
-lastmod: "2021-08-23T13:05:39+00:00"
 description: "teeing() method returns a Collector, a composite of two downstream collectors. There will be a single Collector and a single pass in the end."
 canonical: "https://blog.frankel.ch/teeing-java-api/"
 authors:

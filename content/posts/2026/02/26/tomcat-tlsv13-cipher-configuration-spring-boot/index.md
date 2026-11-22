@@ -1,7 +1,6 @@
 ---
 title: "Tomcat TLSv1.3 cipher configuration"
 date: "2026-02-26T18:02:34+00:00"
-lastmod: "2026-02-27T09:55:49+00:00"
 description: "A Tomcat update splits TLSv1.3 cipher configuration into a new attribute, silently dropping your Spring Boot cipher restrictions. Here's how to fix it."
 canonical: "https://www.herodevs.com/blog-posts/tomcats-tls-cipher-change-and-what-it-means-for-spring-boot-apps"
 authors:

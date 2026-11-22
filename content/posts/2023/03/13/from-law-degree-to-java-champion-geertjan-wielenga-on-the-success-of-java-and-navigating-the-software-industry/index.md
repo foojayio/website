@@ -1,7 +1,6 @@
 ---
 title: "From Law Degree to Java Champion: Geertjan Wielenga on the Success of Java and Navigating the Software Industry"
 date: "2023-03-13T11:07:54+00:00"
-lastmod: "2023-03-13T17:13:57+00:00"
 description: "Discover insights from Geertjan Wielenga, a Java Champion and developer advocate, on how to succeed in the software industry and the importance of community involvement in the Java ecosystem."
 authors:
   - "bazlur-rahman"

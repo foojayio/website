@@ -1,7 +1,6 @@
 ---
 title: "Azul Brings Java from Edge to Cloud"
 date: "2024-09-27T11:30:22+00:00"
-lastmod: "2024-09-27T11:32:13+00:00"
 description: "Azul is your one-stop partner for all questions related to using Java, from edge devices over client applications to cloud services."
 canonical: "https://www.azul.com/blog/azul-brings-java-from-edge-to-cloud/"
 authors:

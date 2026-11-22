@@ -1,7 +1,6 @@
 ---
 title: "Hidden and Not-So-Hidden Gems In Java 20"
 date: "2023-05-03T14:32:45+00:00"
-lastmod: "2023-05-03T14:34:21+00:00"
 description: "Let's see the preview and incubator JEPs in Java 20, as well as many smaller enhancements, bug fixes, and deprecations."
 canonical: "https://blogs.oracle.com/javamagazine/post/java-20-gems-jdks"
 authors:

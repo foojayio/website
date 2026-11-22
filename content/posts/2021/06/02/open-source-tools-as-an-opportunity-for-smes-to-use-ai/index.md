@@ -1,7 +1,6 @@
 ---
 title: "Open Source Tools as an Opportunity for SMEs to Use AI?"
 date: "2021-06-02T14:36:04+00:00"
-lastmod: "2023-02-03T13:41:27+00:00"
 description: "The goal of this research is to sensitize small and medium-sized enterprises (SMEs) to the topic of AI with the help of Open Source Tools."
 authors:
   - "phamnguy"

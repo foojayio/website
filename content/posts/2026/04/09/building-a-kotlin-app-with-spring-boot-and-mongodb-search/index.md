@@ -1,7 +1,6 @@
 ---
 title: "Building a Kotlin App with Spring Boot and MongoDB Search"
 date: "2026-04-09T15:21:05+00:00"
-lastmod: "2026-04-15T19:31:48+00:00"
 description: "In this tutorial, we will learn to build an application in Kotlin that utilizes full-text search in a database containing thousands of Airbnb listings. We'll explore how we can find the perfect accommodation that meets our specific needs."
 authors:
   - "ricardo-mello"

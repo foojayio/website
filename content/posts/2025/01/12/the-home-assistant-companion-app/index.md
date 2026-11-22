@@ -1,7 +1,6 @@
 ---
 title: "The Home Assistant companion app"
 date: "2025-01-12T15:52:14+00:00"
-lastmod: "2026-09-21T06:03:17+00:00"
 description: "Besides a regular webapp and a Mac app, which uses the same endpoints as the webapp, Home Assistant also provides mobile apps. In this post, I want to…"
 canonical: "https://blog.frankel.ch/https://blog.frankel.ch/home-assistant/5/"
 authors:

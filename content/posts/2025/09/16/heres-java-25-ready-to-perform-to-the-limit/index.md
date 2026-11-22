@@ -1,7 +1,6 @@
 ---
 title: "Here's Java 25, Ready to Perform to the Limit"
 date: "2025-09-16T06:05:00+00:00"
-lastmod: "2025-09-18T07:13:37+00:00"
 description: "Here's Java 25, ready to perform to the limit. It introduces stable values, and intensifies its focus on performance as more JEPs emerge from Project Leyden. On top of that, the Java Flight Recorder is now more equipped than ever to tackle performance issues. This post has all the info!"
 canonical: "https://hanno.codes/2025/09/16/heres-java-25"
 authors:

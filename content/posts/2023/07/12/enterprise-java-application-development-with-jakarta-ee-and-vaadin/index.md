@@ -1,7 +1,6 @@
 ---
 title: "Enterprise Java Applications With Jakarta EE and Vaadin"
 date: "2023-07-12T09:26:07+00:00"
-lastmod: "2023-07-12T09:26:53+00:00"
 description: "Get an overview of the Vaadin framework and learn how to use it to build modern web applications on the Jakarta EE Platform in pure Java."
 canonical: "https://blog.payara.fish/watch-the-recording-enterprise-java-app-development-with-jakartaee-vaadin"
 authors:

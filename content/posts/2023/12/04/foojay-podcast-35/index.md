@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #35: Dublin JUG"
 date: "2023-12-04T14:37:10+00:00"
-lastmod: "2025-11-13T08:52:04+00:00"
 description: "Today, we are traveling to Dublin to learn more about its Java community!"
 authors:
   - "frankdelporte"

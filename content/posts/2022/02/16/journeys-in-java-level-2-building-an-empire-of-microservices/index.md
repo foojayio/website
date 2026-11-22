@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 2: Building an Empire of Microservices"
 date: "2022-02-16T15:29:33+00:00"
-lastmod: "2022-06-01T20:08:48+00:00"
 description: "Let's dive into the world of microservices find out the complexities, best practices, and troubles. I will share all my learnings, as well!"
 authors:
   - "jennifer-reif"

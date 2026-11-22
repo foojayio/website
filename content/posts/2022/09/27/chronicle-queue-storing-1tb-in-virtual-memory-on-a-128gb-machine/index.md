@@ -1,7 +1,6 @@
 ---
 title: "Storing 1TB in Virtual Memory on a 128GB Machine"
 date: "2022-09-27T09:10:43+00:00"
-lastmod: "2022-09-27T09:46:54+00:00"
 description: "Chronicle Queue and Chronicle Map allows you to have a persisted store which can be embedded into multiple JVMs on the same server."
 authors:
   - "peter-lawrey"

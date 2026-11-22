@@ -1,7 +1,7 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
 date: "2026-06-10T19:02:58+00:00"
-lastmod: "2026-11-21T19:02:38+00:00"
+updated: "2026-11-21T19:02:38+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"

@@ -1,7 +1,6 @@
 ---
 title: "Can You Explain the Diff Your AI Agent Just Wrote?"
 date: "2026-09-15T14:12:01+00:00"
-lastmod: "2026-09-16T06:30:16+00:00"
 description: "Every Java developer has been in a code review where the question is simple: What does this method do? The answer used to tell you something."
 authors:
   - "viktoria-evdokimova"

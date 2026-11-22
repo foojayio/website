@@ -1,7 +1,6 @@
 ---
 title: "JUG PH: 1H 2024 Meetups"
 date: "2024-08-02T07:59:11+00:00"
-lastmod: "2024-08-02T07:59:13+00:00"
 description: "A report on JUG PH: 1H 2024 Meetups. Topics covered were Angular Framework, Java Best Practices, GitHub Copilot and API Development."
 authors:
   - "tristan-mahinay"

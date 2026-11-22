@@ -1,7 +1,6 @@
 ---
 title: "Java: Demystifying The Stream API"
 date: "2024-07-05T06:57:34+00:00"
-lastmod: "2024-07-05T06:57:35+00:00"
 description: "Dive into the world of Stream API in Java using Lambda Expressions, Method References, and Functional Interfaces."
 authors:
   - "mahendra1413"

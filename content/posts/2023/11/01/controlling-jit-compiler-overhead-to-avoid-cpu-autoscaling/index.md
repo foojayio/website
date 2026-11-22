@@ -1,7 +1,6 @@
 ---
 title: "Controlling JIT Compiler Overhead to Avoid CPU Autoscaling"
 date: "2023-11-01T07:54:33+00:00"
-lastmod: "2023-11-03T13:51:23+00:00"
 description: "Using the latest features available in Azul Platform Prime, we explore advanced methods for shaping CPU utilization."
 canonical: "https://www.azul.com/blog/how-to-optimize-cpu-utilization-to-avoid-cpu-autoscaling/"
 authors:

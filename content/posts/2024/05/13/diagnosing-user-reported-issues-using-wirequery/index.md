@@ -1,7 +1,6 @@
 ---
 title: "Diagnosing user-reported issues using WireQuery"
 date: "2024-05-13T07:11:04+00:00"
-lastmod: "2024-05-14T12:20:53+00:00"
 description: "WireQuery is a tool that helps you solve user-reported issues by combining session replay with capturing API calls. In this article, I will explain how it works, how to use it and how it can be integrated into your projects."
 authors:
   - "wouter-nederhof"

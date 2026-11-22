@@ -1,7 +1,6 @@
 ---
 title: "Johannes Bechberger's Tour d'Europe"
 date: "2023-06-16T17:08:53+00:00"
-lastmod: "2023-06-16T17:16:25+00:00"
 description: "I spoke in two weeks in 3 countries, 4 cities and 5 different venues. This is my report on the trip. Check it out!"
 authors:
   - "johannes-bechberger"

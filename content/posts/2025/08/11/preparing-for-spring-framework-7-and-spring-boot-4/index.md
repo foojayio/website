@@ -1,7 +1,6 @@
 ---
 title: "Preparing for Spring Boot 4 and Spring Framework 7: What’s New?"
 date: "2025-08-11T14:42:40+00:00"
-lastmod: "2025-08-17T00:07:21+00:00"
 description: "Spring Boot 4 and Spring 7 bring API changes, native threads, and resilience. Prepare your codebase for the upgrade."
 authors:
   - "mahendra1413"

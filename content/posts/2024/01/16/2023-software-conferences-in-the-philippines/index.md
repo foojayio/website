@@ -1,7 +1,6 @@
 ---
 title: "2023 Software Conferences in the Philippines"
 date: "2024-01-16T07:47:06+00:00"
-lastmod: "2024-01-16T07:53:57+00:00"
 description: "A Report of 2023 Software Conferences in the Philippines for the Java Community and Java User Groups. Sharing the details of the events."
 authors:
   - "tristan-mahinay"

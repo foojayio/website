@@ -1,7 +1,6 @@
 ---
 title: "Revolutionize JSON Parsing in Java with Manifold"
 date: "2023-05-26T17:39:19+00:00"
-lastmod: "2023-05-26T17:39:20+00:00"
 description: "Parsing JSON in Java (and other formats) can be as easy as in JS. It can do much more while keeping the type-safety and deep IDE integration."
 canonical: "https://debugagent.com/revolutionize-json-parsing-in-java-with-manifold"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Transactions and ThreadLocal in Spring"
 date: "2025-10-21T13:27:00+00:00"
-lastmod: "2025-10-21T13:27:02+00:00"
 description: "Though I used Spring transactions a lot via the @Transactional annotation, I never opened thought about looking at their implementation."
 canonical: "https://blog.frankel.ch/transactions-threadlocal-spring/"
 authors:

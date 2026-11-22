@@ -1,7 +1,6 @@
 ---
 title: "Lights, Camera, Action: GitHub Actions with Java (Part 2)"
 date: "2021-11-15T14:35:43+00:00"
-lastmod: "2021-11-15T16:17:13+00:00"
 description: "When picking a build distribution with the current version of GitHub Actions setup-java@v2 you really only have two choices: zulu or temurin."
 authors:
   - "carldea"

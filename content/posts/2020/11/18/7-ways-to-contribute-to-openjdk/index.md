@@ -1,7 +1,6 @@
 ---
 title: "Seven Ways to Contribute to the OpenJDK"
 date: "2020-11-18T08:49:32+00:00"
-lastmod: "2025-01-24T10:42:32+00:00"
 description: "If OpenJDK is the background source for your livelihood, you might want to contribute to future development of the OpenJDK. Find out how!"
 authors:
   - "kevinfarnham"

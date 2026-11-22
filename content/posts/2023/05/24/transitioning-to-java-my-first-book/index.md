@@ -1,7 +1,6 @@
 ---
 title: "\"Transitioning to Java\": My First Book!"
 date: "2023-05-24T08:01:58+00:00"
-lastmod: "2023-05-24T08:01:59+00:00"
 description: "I like to describe this book as a beginner's book for experts. Anyone who needs to get up to speed quickly using Java is my primary audience."
 authors:
   - "kfogel"

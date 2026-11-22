@@ -1,7 +1,6 @@
 ---
 title: "My Final Take on Gradle (vs. Maven)"
 date: "2023-08-15T08:37:24+00:00"
-lastmod: "2023-08-15T08:38:49+00:00"
 description: "Software development is a fast-changing field, and much of our understanding is based on personal experience. So here's mine."
 canonical: "https://blog.frankel.ch/final-take-gradle/"
 authors:

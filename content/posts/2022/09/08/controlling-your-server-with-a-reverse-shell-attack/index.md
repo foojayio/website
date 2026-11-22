@@ -1,7 +1,6 @@
 ---
 title: "Controlling your Server with a Reverse Shell Attack"
 date: "2022-09-08T13:00:22+00:00"
-lastmod: "2022-09-08T13:07:15+00:00"
 description: "The last thing you need for your happily deployed application is someone to take over your system and fully control it!"
 canonical: "https://snyk.io/blog/reverse-shell-attack/"
 authors:

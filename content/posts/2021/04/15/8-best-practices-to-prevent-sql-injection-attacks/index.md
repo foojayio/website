@@ -1,7 +1,6 @@
 ---
 title: "8 Best Practices to Prevent SQL Injection Attacks"
 date: "2021-04-15T08:33:39+00:00"
-lastmod: "2025-05-19T08:34:52+00:00"
 description: "SQL injection, when a user adds untrusted data to a database query, is one of the most dangerous vulnerabilities for online applications."
 canonical: "https://snyk.io/blog/sql-injection-cheat-sheet/"
 authors:

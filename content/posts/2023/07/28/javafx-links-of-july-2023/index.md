@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of July 2023"
 date: "2023-07-28T07:50:36+00:00"
-lastmod: "2023-07-28T07:54:07+00:00"
 description: "Changes to the JavaFX core, new and enhanced applications, games, component libraries, tools, podcasts, videos, tutorials, and books!"
 canonical: "https://webtechie.be/post/2023-07-28-javafx-links-of-july-2023/"
 authors:

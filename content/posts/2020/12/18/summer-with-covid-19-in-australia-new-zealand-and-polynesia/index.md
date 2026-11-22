@@ -1,7 +1,6 @@
 ---
 title: "Summer with Covid-19 in Australia, New Zealand and Polynesia"
 date: "2020-12-18T08:57:46+00:00"
-lastmod: "2020-12-18T08:57:48+00:00"
 description: "\"Oceania\" as a collective term for Australia, New Zealand, and Polynesia. In this part, we use Software-ECG to analyze Covid-19 there."
 authors:
   - "johannes-weigend"

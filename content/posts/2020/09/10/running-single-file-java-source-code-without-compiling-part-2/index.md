@@ -1,7 +1,6 @@
 ---
 title: "Running Single-File Java Source Code Without Compiling (Part 2)"
 date: "2020-09-10T15:54:17+00:00"
-lastmod: "2020-09-10T15:59:38+00:00"
 description: "Let's continue this series, by looking at JEP 330, Launch Single-File Source-Code Programs, which is a new features introduced in OpenJDK 11."
 canonical: "https://www.infoq.com/articles/single-file-execution-java11/"
 authors:

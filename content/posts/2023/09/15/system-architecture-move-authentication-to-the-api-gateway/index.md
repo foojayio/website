@@ -1,7 +1,6 @@
 ---
 title: "System Architecture: Move Authentication to the API Gateway"
 date: "2023-09-15T07:47:04+00:00"
-lastmod: "2023-09-15T07:47:07+00:00"
 description: "When exposing an application to the outside world, consider a Reverse-Proxy or an API Gateway to protect it from attacks."
 canonical: "https://blog.frankel.ch/authentication-api-gateway/"
 authors:

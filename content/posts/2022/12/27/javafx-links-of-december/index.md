@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of December"
 date: "2022-12-27T07:55:52+00:00"
-lastmod: "2022-12-27T07:55:53+00:00"
 description: "If anyone needs a reminder Java and JavaFX are \"alive and kicking\", you can not only check out jfx-central.com, but also the list below."
 authors:
   - "frankdelporte"

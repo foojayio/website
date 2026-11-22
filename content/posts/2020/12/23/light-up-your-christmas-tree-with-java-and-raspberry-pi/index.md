@@ -1,7 +1,6 @@
 ---
 title: "Light Up your Christmas Tree with Java and Raspberry Pi"
 date: "2020-12-23T09:38:17+00:00"
-lastmod: "2021-12-10T13:01:51+00:00"
 description: "Here we go with this small project to get you introduced to the world of electronics programming. Get started with Java and the Raspberry Pi!"
 canonical: "https://www.javaadvent.com/2020/12/light-up-your-christmas-lights-with-java-and-raspberry-pi.html"
 authors:

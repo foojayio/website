@@ -1,7 +1,6 @@
 ---
 title: "JReleaser 0.9.0 Released!"
 date: "2021-11-30T10:29:17+00:00"
-lastmod: "2021-11-30T10:30:24+00:00"
 description: "JReleaser streamlines releases, creating GitHub/GitLab/Gitea releases and packaging binaries for Homebrew, Snapcraft, Docker, and more!"
 authors:
   - "gerrit-grunwald"

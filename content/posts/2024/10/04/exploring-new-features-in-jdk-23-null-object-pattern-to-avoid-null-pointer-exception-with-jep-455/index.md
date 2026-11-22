@@ -1,7 +1,6 @@
 ---
 title: "Null object pattern to avoid null pointer exception with JEP-455"
 date: "2024-10-04T06:19:18+00:00"
-lastmod: "2024-10-04T06:19:19+00:00"
 description: "A null object pattern, in our case a NULL_SENSOR instance, can easily contribute to the process flow of a running program while remaining consistent and type-safe."
 authors:
   - "miro-wengner"

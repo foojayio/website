@@ -1,7 +1,6 @@
 ---
 title: "Taking VSCodium for a Spin"
 date: "2022-07-12T08:10:30+00:00"
-lastmod: "2022-07-12T08:10:32+00:00"
 description: "The VSCode ecosystem has matured, and lots of plugins are available. I decided to give it a shot. Let's see how and why to get started!"
 canonical: "https://blog.frankel.ch/take-vscode-spin/"
 authors:

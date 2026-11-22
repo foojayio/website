@@ -1,7 +1,6 @@
 ---
 title: "BlockHound and Blocking Calls: How It Works"
 date: "2021-06-22T17:09:13+00:00"
-lastmod: "2021-06-22T17:09:15+00:00"
 description: "BlockHound lets you check if a blocking call occurs in a thread where it shouldn't happen and throws an exception at runtime when it does."
 canonical: "https://blog.frankel.ch/blockhound-how-it-works/"
 authors:

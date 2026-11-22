@@ -1,7 +1,6 @@
 ---
 title: "Debugging Kubernetes - Troubleshooting Guide"
 date: "2024-08-26T16:45:45+00:00"
-lastmod: "2024-08-26T16:51:26+00:00"
 description: "Discover effective solutions to common Kubernetes errors. Learn troubleshooting tips for configuration issues, image pull errors and more..."
 canonical: "https://debugagent.com/debugging-kubernetes-troubleshooting-guide"
 authors:

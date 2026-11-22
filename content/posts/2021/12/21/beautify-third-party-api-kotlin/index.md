@@ -1,7 +1,6 @@
 ---
 title: "Beautify Third-Party APIs with Kotlin"
 date: "2021-12-21T08:15:42+00:00"
-lastmod: "2021-12-21T08:16:19+00:00"
 description: "Learn how to improve the API provided by third-party libraries by combining Kotlin extension functions and delegation."
 canonical: "https://blog.frankel.ch/beautify-third-party-api-kotlin/"
 authors:

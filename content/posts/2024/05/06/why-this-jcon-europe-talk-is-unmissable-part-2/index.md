@@ -1,7 +1,6 @@
 ---
 title: "Why This JCON Europe Talk Is Unmissable (Part 2)"
 date: "2024-05-06T08:22:31+00:00"
-lastmod: "2024-05-06T08:25:45+00:00"
 description: "My talk titled \"Jakarta EE 11 - Performance and Developer Productivity\" will give you a full overview of what to expect from the upcoming Jakarta EE 11 release."
 authors:
   - "r-fichtner"

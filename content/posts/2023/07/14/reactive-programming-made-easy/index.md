@@ -1,7 +1,6 @@
 ---
 title: "Reactive Programming Made Easy"
 date: "2023-07-14T08:47:11+00:00"
-lastmod: "2023-07-14T09:10:16+00:00"
 description: "Learn about all the essential features and tools needed for Reactor developers who do their coding in IntelliJ IDEA."
 canonical: "https://blog.jetbrains.com/idea/2023/06/reactive-programming-made-easy/"
 authors:

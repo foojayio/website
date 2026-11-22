@@ -1,7 +1,6 @@
 ---
 title: "Securely Authenticate to Google Cloud from GitHub"
 date: "2022-05-02T08:57:00+00:00"
-lastmod: "2022-05-02T08:57:22+00:00"
 description: "Did you know GitHub and Google Cloud have all the infrastructure available to get short-lived tokens securely? Handy for Java devs and more!"
 canonical: "https://blog.frankel.ch/authenticate-google-cloud-github/"
 authors:

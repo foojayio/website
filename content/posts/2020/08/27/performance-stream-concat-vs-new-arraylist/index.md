@@ -1,7 +1,6 @@
 ---
 title: "Stream.concat vs. New ArrayList Performance"
 date: "2020-08-27T05:34:58+00:00"
-lastmod: "2020-09-01T08:34:13+00:00"
 description: "What happened when the Java Stream API met the ArrayList? Which is faster and more performant? Read on to find out about some initial results."
 authors:
   - "karl-heinz-marbaise"

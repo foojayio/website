@@ -1,7 +1,6 @@
 ---
 title: "AI Applications with LangChain4j Guardrails and Spring Boot"
 date: "2025-07-29T11:16:31+00:00"
-lastmod: "2025-08-11T07:12:42+00:00"
 description: "Learn how to build secure AI applications using LangChain4j guardrails in Spring Boot. Implement input/output validation, prevent prompt injection & more."
 canonical: "https://bazlur.ca/2025/06/21/building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #56: Vectors in Java Code, Databases, and LLMs"
 date: "2024-07-08T07:33:28+00:00"
-lastmod: "2025-11-13T08:43:29+00:00"
 description: "In this Foojay podcast, we enter the world of mathematics by discussing Vectors and how they are crucial for AI and machine learning. "
 authors:
   - "frankdelporte"

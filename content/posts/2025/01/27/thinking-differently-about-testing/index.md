@@ -1,7 +1,6 @@
 ---
 title: "Thinking differently about testing"
 date: "2025-01-27T07:26:34+00:00"
-lastmod: "2025-01-28T14:53:09+00:00"
 description: "The takeaways of moving to a data-driven and test portability approach are more than a quality improvement."
 authors:
   - "steve-poole"

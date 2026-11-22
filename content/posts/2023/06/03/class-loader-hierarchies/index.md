@@ -1,7 +1,6 @@
 ---
 title: "Class Loader Hierarchies"
 date: "2023-06-03T08:56:55+00:00"
-lastmod: "2023-06-03T08:56:56+00:00"
 description: "Understanding class loader hierarchies is essential when developing instrumenting Java agents. So I wrote an article about it."
 authors:
   - "johannes-bechberger"

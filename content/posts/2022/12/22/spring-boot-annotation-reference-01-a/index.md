@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Annotation Reference - 01/a"
 date: "2022-12-22T09:57:33+00:00"
-lastmod: "2023-01-06T09:56:40+00:00"
 description: "Spring Boot Annotation Guide, providing an easy reference for daily development and provides code samples."
 authors:
   - "sumith-puri"

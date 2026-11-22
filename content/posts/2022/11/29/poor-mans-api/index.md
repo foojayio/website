@@ -1,7 +1,6 @@
 ---
 title: "A Poor Man's API"
 date: "2022-11-29T09:13:38+00:00"
-lastmod: "2022-11-29T09:17:12+00:00"
 description: "Creating a full-fledged API requires resources, both time and money. Let's achieve it without writing a single line of code!"
 canonical: "https://blog.frankel.ch/poor-man-api/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "JDKMon 17.0.23 Released"
 date: "2022-03-11T09:52:39+00:00"
-lastmod: "2022-03-11T10:01:02+00:00"
 description: "JDKMon is a little tool written in JavaFX that tries to detect all OpenJDK distros installed while keeping track of updates for them."
 authors:
   - "gerrit-grunwald"

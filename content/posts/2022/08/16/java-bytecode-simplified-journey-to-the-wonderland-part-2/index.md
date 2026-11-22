@@ -1,7 +1,6 @@
 ---
 title: "Java Bytecode Simplified: Journey to the Wonderland (Part 2)"
 date: "2022-08-16T15:15:22+00:00"
-lastmod: "2022-08-16T15:15:24+00:00"
 description: "Let’s appreciate the Java Virtual Machine (JVM) even more. Today we'll discuss Constant Pool in quite some detail."
 authors:
   - "bazlur-rahman"

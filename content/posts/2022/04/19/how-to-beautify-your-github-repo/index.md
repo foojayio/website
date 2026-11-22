@@ -1,7 +1,6 @@
 ---
 title: "How To Beautify Your GitHub Repo"
 date: "2022-04-19T08:16:37+00:00"
-lastmod: "2022-04-19T08:26:14+00:00"
 description: "Time to spruce up your GitHub! In this article, I want to highlight some files that you can use to beautify your GitHub repository."
 canonical: "https://blog.frankel.ch/beautify-github-repo/"
 authors:

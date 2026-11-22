@@ -1,7 +1,6 @@
 ---
 title: "Detect, Track, Verify Security Issues & 0-Days"
 date: "2022-03-10T12:25:09+00:00"
-lastmod: "2022-03-10T12:25:10+00:00"
 description: "Learn about major milestones in app security: finding the issue, evaluating a breach, proving it, and validating the fix!"
 canonical: "https://lightrun.com/security/lightrun-for-application-security-detecting-investigating-and-verifying-fixes-for-security-incidents-using-lightrun/"
 authors:

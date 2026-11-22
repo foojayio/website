@@ -1,7 +1,6 @@
 ---
 title: "JDK 15 Sealed Classes: Fine-Grained Mechanism for Inheritance"
 date: "2020-10-09T10:43:54+00:00"
-lastmod: "2021-07-12T05:09:33+00:00"
 description: "The most significant new feature in JDK 15, and the only change to the language, is the introduction of sealed classes as a preview feature."
 canonical: "https://www.azul.com/jdk-15-release-64-new-features-and-apis/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Remote Debugging and Developer Observability"
 date: "2022-06-10T10:12:26+00:00"
-lastmod: "2023-07-18T07:08:08+00:00"
 description: "Connect to remote processes to solve bugs using remote debugging and observability. Learn how to securely scale debugging to match growth!"
 authors:
   - "shai-almog"

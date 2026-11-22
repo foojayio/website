@@ -1,7 +1,6 @@
 ---
 title: "Book review: \"Persistence Best Practices for Java Applications\""
 date: "2023-10-27T08:56:21+00:00"
-lastmod: "2023-10-27T08:56:22+00:00"
 description: "I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience."
 authors:
   - "simon-verhoeven"

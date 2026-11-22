@@ -1,7 +1,6 @@
 ---
 title: "World geography gotchas"
 date: "2026-09-20T05:51:17+00:00"
-lastmod: "2026-09-21T05:57:20+00:00"
 description: "Years ago, a colleague of mine told me about two pockets of foreign land surrounded by Switzerland: Campione d'Italia and Büsingen am Hochrhein,…"
 canonical: "https://blog.frankel.ch/world-geography-gotchas/"
 authors:

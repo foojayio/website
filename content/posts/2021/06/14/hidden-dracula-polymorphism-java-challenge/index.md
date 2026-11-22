@@ -1,7 +1,6 @@
 ---
 title: "Hidden Dracula Polymorphism Java Challenge"
 date: "2021-06-14T11:26:37+00:00"
-lastmod: "2021-08-23T12:29:05+00:00"
 description: "Polymorphism, the ability of an object to take on forms, one of the important Java concepts, decouples responsibilities, adding flexibility."
 authors:
   - "rafael-del-nero"

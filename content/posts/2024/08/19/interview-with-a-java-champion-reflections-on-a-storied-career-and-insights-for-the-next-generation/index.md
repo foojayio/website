@@ -1,7 +1,6 @@
 ---
 title: "Interview with a Java Champion: Reflections on a Storied Career and Insights for the Next Generation"
 date: "2024-08-19T07:52:18+00:00"
-lastmod: "2024-08-19T07:52:20+00:00"
 description: "Java Champion Ben Evans shares his journey, insights on Java's evolution, and advice for developers in this insightful interview."
 authors:
   - "bazlur-rahman"

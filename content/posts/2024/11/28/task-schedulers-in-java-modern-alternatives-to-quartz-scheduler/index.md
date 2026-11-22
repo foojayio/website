@@ -1,7 +1,6 @@
 ---
 title: "Task schedulers in Java: modern alternatives to Quartz Scheduler"
 date: "2024-11-28T18:04:32+00:00"
-lastmod: "2024-11-29T12:11:10+00:00"
 description: "Quartz is often considered the standard job scheduling library in Java, which can lead developers to overlook more modern alternatives."
 authors:
   - "ismaila-adamou"

@@ -1,7 +1,6 @@
 ---
 title: "No-Cost IBM Semeru Runtimes for Java"
 date: "2021-08-09T10:57:06+00:00"
-lastmod: "2021-09-14T13:22:31+00:00"
 description: "IBM makes it easier than ever to develop and run Java more cost-effectively in hybrid cloud environments, from public cloud to data centers!"
 canonical: "https://developer.ibm.com/blogs/introducing-the-ibm-semeru-runtimes/"
 authors:

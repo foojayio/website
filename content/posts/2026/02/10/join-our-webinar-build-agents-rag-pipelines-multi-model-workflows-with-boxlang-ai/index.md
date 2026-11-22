@@ -1,7 +1,6 @@
 ---
 title: "Join Our Webinar: Build Agents, RAG Pipelines and More"
 date: "2026-02-10T12:18:17+00:00"
-lastmod: "2026-02-10T12:26:34+00:00"
 description: "Unlock Enterprise AI on the JVM with BoxLang AI Build Agents, RAG Pipelines & Multi-Model Workflows — One API, Zero Lock-In Modern enterprises want to…"
 authors:
   - "cristobal-escobar"

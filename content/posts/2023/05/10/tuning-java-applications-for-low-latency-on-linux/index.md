@@ -1,7 +1,6 @@
 ---
 title: "Tuning Java Applications for Low Latency on Linux"
 date: "2023-05-10T13:34:13+00:00"
-lastmod: "2023-05-10T15:07:28+00:00"
 description: "An introduction to some approaches that can be taken when we want to have our applications utilise system resources most effectively."
 canonical: "https://chronicle.software/tuning-for-low-latency/"
 authors:

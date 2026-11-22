@@ -1,7 +1,6 @@
 ---
 title: "Hello eBPF: Ring buffers in libbpf (6)"
 date: "2024-03-19T17:54:22+00:00"
-lastmod: "2024-03-19T17:54:23+00:00"
 description: "This week I'll implement ring buffer support in my eBPF library and explain how ring buffers are used in eBPF."
 authors:
   - "johannes-bechberger"

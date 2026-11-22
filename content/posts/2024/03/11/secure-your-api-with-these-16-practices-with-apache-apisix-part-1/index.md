@@ -1,7 +1,6 @@
 ---
 title: "Secure your API with these 16 Practices with Apache APISIX - part 1"
 date: "2024-03-11T09:35:51+00:00"
-lastmod: "2024-03-11T09:42:39+00:00"
 description: "See how to configure Apache APISIX to secure your APIs against 7 of the 16 rules in the \"16 practices to secure your API\" list."
 canonical: "https://blog.frankel.ch/secure-api-practices-apisix/1/"
 authors:

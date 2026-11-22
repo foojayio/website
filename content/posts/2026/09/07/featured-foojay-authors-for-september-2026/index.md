@@ -1,7 +1,6 @@
 ---
 title: "Featured Foojay Authors for September 2026: Marit van Dijk and Graeme Robinson"
 date: "2026-09-07T08:38:56+00:00"
-lastmod: "2026-09-07T08:47:59+00:00"
 description: "Our Featured Authors for September are Marit van Dijk and Graeme Robinson. Here is what they write about, and where to start reading."
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "The SolarWinds Hack for Java Developers"
 date: "2021-02-09T07:39:53+00:00"
-lastmod: "2021-02-09T12:40:16+00:00"
 description: "For Java developers and architects who design, build, and run applications, there are two core take-aways to the SolarWinds hack..."
 authors:
   - "erikcostlow"

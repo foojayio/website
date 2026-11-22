@@ -1,7 +1,6 @@
 ---
 title: "Feedback on checked exceptions and lambdas"
 date: "2026-02-02T18:29:03+00:00"
-lastmod: "2026-09-21T05:59:11+00:00"
 description: "I got a lot of interesting feedback on Checked exceptions and lambdas. Let's start with my own: after writing the post, I realized I had written a similar…"
 canonical: "https://blog.frankel.ch/feedback-checked-exceptions-lambdas/"
 authors:

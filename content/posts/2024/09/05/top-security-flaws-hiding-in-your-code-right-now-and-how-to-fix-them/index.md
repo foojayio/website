@@ -1,7 +1,6 @@
 ---
 title: "Top Security Flaws hiding in your code right now"
 date: "2024-09-05T16:41:02+00:00"
-lastmod: "2024-09-09T15:03:08+00:00"
 description: "Let's examine the three most common injection attack types—SQL injection, Deserialization Injection, and Logging Injection—and discuss ways to prevent them."
 authors:
   - "jonathan-vila"

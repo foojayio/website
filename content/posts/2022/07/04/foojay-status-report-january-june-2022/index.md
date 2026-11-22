@@ -1,7 +1,6 @@
 ---
 title: "Foojay Status Report: January – June 2022"
 date: "2022-07-04T07:01:20+00:00"
-lastmod: "2022-07-04T07:03:48+00:00"
 description: "The latest analysis and statistics show that Foojay had as much traffic over the past half year as over the whole of 2021."
 authors:
   - "geertjan-wielenga"

@@ -1,7 +1,6 @@
 ---
 title: "A GitHub agentic workflow"
 date: "2026-04-14T14:31:26+00:00"
-lastmod: "2026-09-21T05:56:30+00:00"
 description: "Last month, I became aware of GitHub agentic workflows. I read the site carefully, but the use cases weren't very exciting to me. I tried the continuous…"
 canonical: "https://blog.frankel.ch/agentic-github-workflows/"
 authors:

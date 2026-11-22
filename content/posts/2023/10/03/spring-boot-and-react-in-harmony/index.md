@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot and React in Harmony"
 date: "2023-10-03T09:14:40+00:00"
-lastmod: "2023-10-03T09:25:44+00:00"
 description: "Navigating the complexities of full-stack development in Spring Boot and React can be complex. This article highlighted how Hilla can alleviate many of these challenges."
 canonical: "https://dzone.com/articles/spring-boot-react-harmony-with-hilla"
 authors:

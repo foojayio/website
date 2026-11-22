@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part VII): JDK Butler"
 date: "2021-03-12T09:10:43+00:00"
-lastmod: "2021-03-12T10:40:11+00:00"
 description: "I have created an application that makes use of JavaFX custom controls. Here I'll go through the custom controls that I've created for it."
 authors:
   - "gerrit-grunwald"

@@ -1,7 +1,6 @@
 ---
 title: "Reflections on 2024: OmniFish, GlassFish, Piranha, Jakarta EE"
 date: "2025-01-16T08:43:09+00:00"
-lastmod: "2025-01-16T08:43:10+00:00"
 description: "As we look to the future, our momentum only grows stronger!"
 canonical: "https://omnifish.ee/reflections-on-2024/"
 authors:

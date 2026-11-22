@@ -1,7 +1,6 @@
 ---
 title: "Effortless updates requires a zero-migration policy"
 date: "2024-11-05T12:19:43+00:00"
-lastmod: "2024-11-06T15:10:32+00:00"
 description: "In today’s production environments, it is not only expected, but critical to keep your technology stack as up to date as possible."
 canonical: "https://openliberty.io/blog/2024/10/09/zero-migration.html"
 authors:

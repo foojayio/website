@@ -1,7 +1,6 @@
 ---
 title: "The DiscoAPI Helps You To Find Any OpenJDK Distribution"
 date: "2023-09-12T03:42:44+00:00"
-lastmod: "2023-09-12T03:45:38+00:00"
 description: "Foojay is not only a human-readable OpenJDK knowledge base but also provides the Disco API that lets you search all OpenJDK distributions?"
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part IV): Control & Skin Classes"
 date: "2021-02-19T08:22:35+00:00"
-lastmod: "2021-02-19T08:22:37+00:00"
 description: "Continuing the JavaFX custom control series, next I will show you how to create a custom control in JavaFX by using Control and Skin classes."
 authors:
   - "gerrit-grunwald"

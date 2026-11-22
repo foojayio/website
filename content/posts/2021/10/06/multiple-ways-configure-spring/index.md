@@ -1,7 +1,6 @@
 ---
 title: "Multiple Ways to Configure Spring"
 date: "2021-10-06T08:55:34+00:00"
-lastmod: "2021-10-06T08:55:35+00:00"
 description: "Alternatives are available to configure your Spring app. I'd like to list them, leaving Spring Boot out of the picture on purpose."
 canonical: "https://blog.frankel.ch/multiple-ways-configure-spring/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Java in Education: Combining Java with Raspberry Pi and the Pi4J Library"
 date: "2021-06-29T07:40:55+00:00"
-lastmod: "2021-12-10T12:59:17+00:00"
 description: "At the University of Applied Sciences and Arts Northwestern in Switzerland, theoretical subjects are combined with programming assignments."
 authors:
   - "frankdelporte"

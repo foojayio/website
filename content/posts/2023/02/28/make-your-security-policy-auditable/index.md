@@ -1,7 +1,6 @@
 ---
 title: "Make Your Security Policy Auditable"
 date: "2023-02-28T11:14:22+00:00"
-lastmod: "2023-02-28T11:14:24+00:00"
 description: "Learn how you can leverage OPA and Apache APISIX to move your authentication and authorization logic from the code to the infrastructure."
 canonical: "https://blog.frankel.ch/security-policy-auditable/"
 authors:

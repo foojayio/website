@@ -1,7 +1,6 @@
 ---
 title: "Book Review: \"Effortless Cloud-Native App Development Using Skaffold\""
 date: "2021-10-15T08:19:17+00:00"
-lastmod: "2021-10-15T08:19:20+00:00"
 description: "Quickly and thoroughly learn how to simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes."
 authors:
   - "geertjan-wielenga"

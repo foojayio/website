@@ -1,7 +1,6 @@
 ---
 title: "Querying Your In-Memory-Data-Grid: Why and How?"
 date: "2021-05-21T07:11:28+00:00"
-lastmod: "2021-05-21T07:11:31+00:00"
 description: "In this article, I'd like to describe how you can take advantage of Hazelcast to query your cached data in different ways and still be fast."
 canonical: "https://hazelcast.com/blog/querying-your-imdg-why-and-how/"
 authors:

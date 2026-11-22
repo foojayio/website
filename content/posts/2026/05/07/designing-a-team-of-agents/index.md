@@ -1,7 +1,6 @@
 ---
 title: "Designing a team of agents"
 date: "2026-05-07T20:00:48+00:00"
-lastmod: "2026-09-21T05:56:15+00:00"
 description: "I continue to experiment with AI in the context of software engineering. I'm fortunate that my team supports me in exploring different ways to improve our…"
 canonical: "https://blog.frankel.ch/design-team-agents/"
 authors:

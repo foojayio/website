@@ -1,7 +1,6 @@
 ---
 title: "2023 in Retrospective"
 date: "2024-01-16T07:44:39+00:00"
-lastmod: "2024-01-16T07:44:40+00:00"
 description: "Last year, I wrote my first yearly retrospective. I liked the experience, so I'm trying one more time. Let the future decide if it will become a trend or not."
 canonical: "https://blog.frankel.ch/2023-retrospective/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Building Reactive Java Applications with Spring Framework"
 date: "2022-02-15T14:09:28+00:00"
-lastmod: "2022-05-30T15:36:37+00:00"
 description: "Pretty much all Java developers are familiar with Spring Pet Clinic. Let's get to know the reactive implementation of it."
 canonical: "https://medium.com/building-the-open-data-stack/building-a-reactive-implementation-of-spring-petclinic-in-apache-cassandra-7cd42c383291"
 authors:

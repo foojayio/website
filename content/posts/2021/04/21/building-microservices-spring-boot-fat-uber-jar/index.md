@@ -1,7 +1,6 @@
 ---
 title: "Building Microservices with Spring Boot Fat (Uber) Jar"
 date: "2021-04-21T09:28:43+00:00"
-lastmod: "2023-08-28T12:47:43+00:00"
 description: "Explore the simple steps of building Spring Boot Fat (Uber) Jars of your own project and running it as microservices."
 authors:
   - "tetiana-fydorenchyk"

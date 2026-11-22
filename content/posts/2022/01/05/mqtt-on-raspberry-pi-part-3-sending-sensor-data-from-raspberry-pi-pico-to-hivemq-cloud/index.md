@@ -1,7 +1,6 @@
 ---
 title: "Sending sensor data from Raspberry Pi Pico to HiveMQ Cloud"
 date: "2022-01-05T11:42:42+00:00"
-lastmod: "2022-01-05T12:06:07+00:00"
 description: "Let's learn about adding some more data to our messaging system with another member of the Raspberry Pi family: the Pico."
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part03-sending-sensor-data-hivemqcloud-pico/"
 authors:

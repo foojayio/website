@@ -1,7 +1,6 @@
 ---
 title: "Why Mirroring Production in Dev Helps You Avoid Costly Mistakes"
 date: "2025-07-28T13:31:10+00:00"
-lastmod: "2025-12-12T21:22:10+00:00"
 description: "It’s not enough for your application or queries to just “work.” They need to be observable and validated in environments that reflect production."
 canonical: "https://medium.com/@MongoDB/why-mirroring-production-in-dev-helps-you-avoid-costly-mistakes-7e2c4595c2a1"
 authors:

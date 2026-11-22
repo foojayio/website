@@ -1,7 +1,6 @@
 ---
 title: "How Does Kafka Perform When You Need Low Latency?"
 date: "2023-01-18T10:12:24+00:00"
-lastmod: "2023-06-29T06:47:46+00:00"
 description: "Kafka benchmarks aim to discuss low latency characteristics of Kafka. Instead, they appear to be configured for throughput rather than low latency."
 authors:
   - "peter-lawrey"

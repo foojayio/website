@@ -1,7 +1,6 @@
 ---
 title: "Minimize costs utilizing the cloud with Spring-Data-Eclipse-Store"
 date: "2024-02-13T15:26:37+00:00"
-lastmod: "2024-02-13T15:36:11+00:00"
 description: "How to save money storing data in Cloud blob-stores instead of expensive databases through the use of the open-source Spring-Data-Eclipse-Store library."
 authors:
   - "johannes-rabauer"

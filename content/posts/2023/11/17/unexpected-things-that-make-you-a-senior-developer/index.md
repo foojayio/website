@@ -1,7 +1,6 @@
 ---
 title: "Unexpected Things That Make You a Senior Developer"
 date: "2023-11-17T09:33:36+00:00"
-lastmod: "2023-11-17T09:58:07+00:00"
 description: "In the end, it’s essential to keep in mind that people will mostly remember how you reacted to a disaster."
 authors:
   - "frankdelporte"

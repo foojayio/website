@@ -1,7 +1,6 @@
 ---
 title: "Loosely coupled configuration for Home Assistant"
 date: "2025-07-14T12:18:55+00:00"
-lastmod: "2026-09-21T06:01:45+00:00"
 description: "This post will be short, but I hope it prove to be useful. My home is getting more and more connected, and the number of my automations grows each passing…"
 canonical: "https://blog.frankel.ch/home-assistant/8/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Lights, Camera, Action: GitHub Actions with Java (Part 1)"
 date: "2021-10-28T12:36:19+00:00"
-lastmod: "2021-10-28T12:53:46+00:00"
 description: "Learn how to create a GitHub Action job that will build and test a Java-based project using Maven or Gradle."
 authors:
   - "carldea"

@@ -1,7 +1,6 @@
 ---
 title: "Native Memory in Java: Arenas, Malloc, and Pools"
 date: "2026-03-20T10:20:04+00:00"
-lastmod: "2026-03-23T10:45:17+00:00"
 description: "Managing native memory in Java using the Foreign Function & Memory API, covering Arenas, manual allocation, pooling, and slicing"
 canonical: "https://davidvlijmincx.com/posts/java-native-memory-allocation-ffm-api/"
 authors:

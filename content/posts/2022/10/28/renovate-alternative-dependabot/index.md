@@ -1,7 +1,6 @@
 ---
 title: "Renovate: Dependabot Alternative"
 date: "2022-10-28T07:17:55+00:00"
-lastmod: "2023-03-27T15:25:07+00:00"
 description: "Compared to Dependabot, I love Renovate's capability to update Docker, Docker Compose, and Kubernetes files. I'll use it from now on!"
 canonical: "https://blog.frankel.ch/renovate-alternative-dependabot/"
 authors:

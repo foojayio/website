@@ -1,7 +1,6 @@
 ---
 title: "Explaining Java Deserialization Vulnerabilities (Part 1)"
 date: "2021-01-21T10:12:19+00:00"
-lastmod: "2021-01-28T09:00:13+00:00"
 description: "Java serialization—and specifically deserialization—is “the gift that keeps on giving” for the security issues produced over the years."
 canonical: "https://snyk.io/blog/serialization-and-deserialization-in-java/"
 authors:

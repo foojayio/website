@@ -1,7 +1,6 @@
 ---
 title: "Apache Cassandra 4.0: Taming Tail Latencies with Java 16 ZGC"
 date: "2021-06-22T07:45:40+00:00"
-lastmod: "2021-11-03T13:32:36+00:00"
 description: "Learn about improvements in Java garbage collection that Cassandra 4.0 coupled with Java 16 offers over Cassandra 3.11 on Java 8!"
 canonical: "https://jaxenter.com/apache-cassandra-java-174575.html"
 authors:

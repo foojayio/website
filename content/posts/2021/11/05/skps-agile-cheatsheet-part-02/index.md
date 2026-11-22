@@ -1,7 +1,6 @@
 ---
 title: "SKP's Agile Cheatsheet: Part 02"
 date: "2021-11-05T07:58:00+00:00"
-lastmod: "2021-11-17T21:21:14+00:00"
 description: "SKP's Agile Cheat - Sheet that Lists the Most Important Terminologies in Agile, Scrum, Lean, Kanban and SAFe."
 authors:
   - "sumith-puri"

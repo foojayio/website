@@ -1,7 +1,6 @@
 ---
 title: "Aggregation Optimization in MongoDB: A Case Study From the Field (Part 1)"
 date: "2026-06-23T13:17:32+00:00"
-lastmod: "2026-06-24T07:10:03+00:00"
 description: "MongoDB, by virtue of its use of the document data model rather than the rows and columns of tabular RDBMSs, provides ways of modeling relationships that can offer significant performance benefits when querying that data. However, to realize those benefits, data must be modeled in MongoDB using schema design patterns that are optimized for the document data model, and frequently, those are not the same as would be appropriate in a RDBMS"
 authors:
   - "graeme-robinson"

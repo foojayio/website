@@ -1,7 +1,6 @@
 ---
 title: "How to Do Device Monitoring with JavaFX and FXGL"
 date: "2021-01-11T10:09:21+00:00"
-lastmod: "2021-01-13T10:47:48+00:00"
 description: "In this article, we will be building a system monitoring dashboard, with Java and JavaFX, which can run on a Raspberry Pi."
 authors:
   - "almasbaimagambetov"

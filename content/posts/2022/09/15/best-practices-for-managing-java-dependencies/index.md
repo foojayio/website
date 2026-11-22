@@ -1,7 +1,6 @@
 ---
 title: "Best Practices for Managing Java Dependencies"
 date: "2022-09-15T08:21:10+00:00"
-lastmod: "2022-09-15T08:22:01+00:00"
 description: "Knowing how to select, update, and remove Java dependencies from our application is essential for security."
 canonical: "https://snyk.io/blog/best-practices-for-managing-java-dependencies/"
 authors:

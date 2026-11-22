@@ -1,7 +1,6 @@
 ---
 title: "Offline Crypto Address Validation in Java"
 date: "2026-08-22T08:43:04+00:00"
-lastmod: "2026-08-24T07:22:52+00:00"
 description: "Backend validation often starts with simple questions. Is the input empty? Does it have the expected shape? Can it be parsed? Does it belong to the…"
 authors:
   - "oleksandr-dendeberia"

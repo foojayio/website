@@ -1,7 +1,6 @@
 ---
 title: "Starting Apache Kafka v3.4 on Win 10"
 date: "2023-07-29T07:43:32+00:00"
-lastmod: "2023-07-30T07:47:48+00:00"
 description: "Part one of a two part series on Running Apache Kafka Server, Configuring Kafka Topics, and Creating a Kafka Consumer and Kafka Producer."
 authors:
   - "sumith-puri"

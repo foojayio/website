@@ -1,7 +1,6 @@
 ---
 title: "Quick Security Wins and Getting Started with DevSecOps"
 date: "2021-02-03T17:41:45+00:00"
-lastmod: "2021-03-09T08:19:15+00:00"
 description: "What are the quick wins or low hanging fruits if you want to deal more with the topic of security in software development?"
 authors:
   - "sven-ruppert"

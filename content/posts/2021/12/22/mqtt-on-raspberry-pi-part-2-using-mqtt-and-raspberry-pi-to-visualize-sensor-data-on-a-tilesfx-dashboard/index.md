@@ -1,7 +1,6 @@
 ---
 title: "MQTT on Raspberry Pi (Part 2)"
 date: "2021-12-22T14:58:21+00:00"
-lastmod: "2021-12-22T14:58:23+00:00"
 description: "In the 2nd part of the series, learn how to use MQTT and the Raspberry Pi to visualize sensor data on a TilesFX dashboard!"
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part02-visualizing-sensor-data-on-a-tilesfx-dashboard/"
 authors:

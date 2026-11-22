@@ -1,7 +1,6 @@
 ---
 title: "9 Outdated Ideas About Java"
 date: "2023-03-11T08:56:17+00:00"
-lastmod: "2023-07-28T08:01:17+00:00"
 description: "In this article, we want to look into some false assumptions and outdated ideas about Java based on early versions."
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "Null Safety: Kotlin vs. Java"
 date: "2023-02-13T12:12:35+00:00"
-lastmod: "2023-02-13T12:13:54+00:00"
 description: "Following on from FOSDEM discussions, let's expand on the problem of nullability and how it's solved in Kotlin and Java."
 canonical: "https://blog.frankel.ch/null-safety-java-vs-kotlin/"
 authors:

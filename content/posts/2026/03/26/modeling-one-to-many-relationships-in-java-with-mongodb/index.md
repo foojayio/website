@@ -1,7 +1,6 @@
 ---
 title: "Modeling One-to-Many Relationships in Java with MongoDB"
 date: "2026-03-26T15:50:30+00:00"
-lastmod: "2026-03-26T15:50:32+00:00"
 description: "This tutorial walks you through both approaches — embedded documents and references — using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the Subset Pattern that combines the best of both worlds."
 authors:
   - "arthur_rib"

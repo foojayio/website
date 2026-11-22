@@ -1,7 +1,6 @@
 ---
 title: "Running a CRaC Java application on Raspberry Pi"
 date: "2023-07-05T12:23:19+00:00"
-lastmod: "2023-07-05T12:23:20+00:00"
 description: "Did you know that CRaC on embedded / Raspberry Pi is definitely possible and dramatically improves startup time?"
 canonical: "https://webtechie.be/post/2023-06-15-crac-on-raspberry-pi/"
 authors:

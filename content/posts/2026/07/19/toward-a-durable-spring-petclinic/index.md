@@ -1,7 +1,6 @@
 ---
 title: "Toward a Durable Spring PetClinic"
 date: "2026-07-19T18:06:06+00:00"
-lastmod: "2026-07-22T21:31:56+00:00"
 description: "What makes a process a good candidate for durability? To answer this, we'll take the canonical Spring PetClinic and interrogate its sources."
 authors:
   - "geertjan-wielenga"

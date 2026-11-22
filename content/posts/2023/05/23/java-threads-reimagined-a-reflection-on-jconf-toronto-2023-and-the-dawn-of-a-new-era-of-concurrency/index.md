@@ -1,7 +1,6 @@
 ---
 title: "JConf Toronto 2023 and the Dawn of a New Era of Concurrency"
 date: "2023-05-23T16:52:41+00:00"
-lastmod: "2023-05-23T17:02:36+00:00"
 description: "Experience the intersection of expertise, innovation, and camaraderie at JConf Toronto 2023, a unique platform."
 authors:
   - "bazlur-rahman"

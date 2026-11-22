@@ -1,7 +1,6 @@
 ---
 title: "Speed up your Spring Batch with Native Image and GraalVM"
 date: "2024-12-10T15:47:53+00:00"
-lastmod: "2025-04-02T06:55:24+00:00"
 description: "Learn how to speed up your Spring Batch jobs using GraalVM Native Image! Discover how to compile batch apps into native executables and more!"
 authors:
   - "vincent-vauban"

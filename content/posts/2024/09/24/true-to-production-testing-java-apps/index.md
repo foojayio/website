@@ -1,7 +1,6 @@
 ---
 title: "Run true-to-production tests on your Java applications"
 date: "2024-09-24T11:48:46+00:00"
-lastmod: "2024-10-07T09:13:43+00:00"
 description: "TestContainers helps improves true-to-production testing, see how you could make use of it for your MicroProfile and Jakarta EE apps."
 canonical: "https://developer.ibm.com/articles/true-to-production-testing-microprofile-testcontainers/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Reaper 3.0 for Apache Cassandra is available"
 date: "2022-03-18T14:55:43+00:00"
-lastmod: "2022-09-29T15:21:03+00:00"
 description: "The K8ssandra team announced the release of Reaper 3.1. Let’s dive into the features and improvements that 3.0 recently introduced"
 canonical: "https://k8ssandra.io/blog/announcements/announcing-the-release-of-reaper-3-1-for-apache-cassandra/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Let's Compile Java Code in the Cloud!"
 date: "2022-05-18T12:03:34+00:00"
-lastmod: "2022-05-18T12:10:49+00:00"
 description: "Antiquated features of the JVM make it hard to utilize resources on your Cloud instances. Is it time for Java compilation in the Cloud?"
 canonical: "https://www.azul.com/blog/cloud-native-compilation-bringing-jvms-into-the-modern-cloud-world/"
 authors:

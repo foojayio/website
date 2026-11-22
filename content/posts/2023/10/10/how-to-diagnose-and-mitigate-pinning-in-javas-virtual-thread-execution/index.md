@@ -1,7 +1,6 @@
 ---
 title: "Diagnose and Mitigate Pinning in Java's Virtual Thread Execution"
 date: "2023-10-10T09:08:10+00:00"
-lastmod: "2023-10-10T09:08:51+00:00"
 description: "In the context of virtual threads, pinning refers to the condition where a virtual thread is \"stuck\" to its carrier thread (the platform thread on which it runs)."
 authors:
   - "bazlur-rahman"

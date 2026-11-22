@@ -1,7 +1,6 @@
 ---
 title: "Learning by doing: An HTTP API with Rust"
 date: "2023-01-29T16:24:21+00:00"
-lastmod: "2026-09-21T06:05:17+00:00"
 description: "When I started working on this post, I had another idea in mind: I wanted to compare the developer experience and performance of Spring Boot and GraalVM…"
 canonical: "https://blog.frankel.ch/http-api-rust/"
 authors:

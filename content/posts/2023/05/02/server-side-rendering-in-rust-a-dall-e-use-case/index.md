@@ -1,7 +1,6 @@
 ---
 title: "Server-side rendering in Rust - a Dall.E use-case"
 date: "2023-05-02T11:03:06+00:00"
-lastmod: "2026-09-21T06:04:55+00:00"
 description: "Last week, I decided to see the capabilities of OpenAI's image generation. However, I noticed that one has to pay to use the web interface, while the API…"
 canonical: "https://blog.frankel.ch/server-side-rendering-rust/"
 authors:

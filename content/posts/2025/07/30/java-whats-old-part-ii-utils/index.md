@@ -1,7 +1,6 @@
 ---
 title: "Java, What's Old? Part II: Utils"
 date: "2025-07-30T08:48:29+00:00"
-lastmod: "2025-07-30T08:52:09+00:00"
 description: "What are the old utility classes less known in Java?"
 authors:
   - "anthony-goubard"

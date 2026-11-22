@@ -1,7 +1,6 @@
 ---
 title: "Code Reviews with AI a developer guide"
 date: "2025-03-07T12:10:37+00:00"
-lastmod: "2025-05-06T10:49:20+00:00"
 description: "Code reviews can be time-consuming and tedious. Let's explore their common pitfalls and how AI tools can revolutionize each phase of the development lifecycle."
 authors:
   - "jonathan-vila"

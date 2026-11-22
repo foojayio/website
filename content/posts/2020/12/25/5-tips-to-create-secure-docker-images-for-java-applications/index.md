@@ -1,7 +1,6 @@
 ---
 title: "5 Tips to Create Secure Docker Images for Java Applications"
 date: "2020-12-25T10:41:54+00:00"
-lastmod: "2025-12-12T08:47:11+00:00"
 description: "Naively creating custom Docker images for Java apps comes with security concerns. How do we make security an essential part of Docker images?"
 canonical: "https://snyk.io/blog/docker-for-java-developers/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Building High-Performance Java Microservices with EDA"
 date: "2023-08-16T21:34:18+00:00"
-lastmod: "2023-08-17T10:01:03+00:00"
 description: "Renowned for its resilience and low latency, EDA is a reliable choice for developing robust, high-performing microservices."
 authors:
   - "rob-austin"

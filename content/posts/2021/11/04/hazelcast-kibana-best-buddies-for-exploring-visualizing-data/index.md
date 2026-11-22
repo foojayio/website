@@ -1,7 +1,6 @@
 ---
 title: "Hazelcast + Kibana: Best Buddies for Exploring & Visualizing Data"
 date: "2021-11-04T14:22:15+00:00"
-lastmod: "2023-02-01T09:12:21+00:00"
 description: "In this article I will describe how you can benefit from such a data visualization front-end without writing a single line of code."
 canonical: "https://hazelcast.com/blog/hazelcast-kibana-best-buddies-for-exploring-and-visualizing-data/"
 authors:

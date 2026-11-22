@@ -1,7 +1,6 @@
 ---
 title: "What Does The JVM Look Like, How Does It Work?"
 date: "2022-09-29T05:29:00+00:00"
-lastmod: "2022-09-30T05:31:07+00:00"
 description: "In this article, the internal workings of the JVM are discussed, e.g., interpreter, JIT compiler, and how it optimizes code."
 authors:
   - "bazlur-rahman"

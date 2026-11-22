@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 8): Maven Plugins"
 date: "2021-11-12T13:34:48+00:00"
-lastmod: "2021-11-20T11:36:10+00:00"
 description: "Maven is a plugin-execution framework: plugins are an assembly of goals, code written as MOJOs (Maven’s plain Old Java Objects)."
 authors:
   - "c-guntur"

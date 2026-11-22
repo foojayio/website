@@ -1,7 +1,6 @@
 ---
 title: "Jakarta Agentic AI Hits Its First Milestone"
 date: "2026-08-05T10:43:12+00:00"
-lastmod: "2026-08-07T08:11:13+00:00"
 description: "Jakarta Agentic AI hits its first milestone - 1.0.0-M1 is live on Maven Central, with a draft spec defining annotation-driven AI agents for Jakarta EE."
 authors:
   - "dominika-tasarz"

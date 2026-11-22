@@ -1,7 +1,6 @@
 ---
 title: "DevIgnition with Foojay.io at Washington DC JUG"
 date: "2024-08-14T13:06:50+00:00"
-lastmod: "2024-08-14T13:30:06+00:00"
 description: "This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends Of OpenJDK, in addition to our normal schedule of diverse technical talks."
 authors:
   - "cullen-gray"

@@ -1,7 +1,6 @@
 ---
 title: "Augmenting the client with Vue.js"
 date: "2024-10-14T10:53:42+00:00"
-lastmod: "2024-10-14T10:53:44+00:00"
 description: "In this article, I take my first steps in augmenting an SSR app with Vue."
 canonical: "https://blog.frankel.ch/ajax-ssr/3/"
 authors:

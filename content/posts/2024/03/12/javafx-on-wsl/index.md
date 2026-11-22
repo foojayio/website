@@ -1,7 +1,6 @@
 ---
 title: "Run JavaFX on the Windows Subsystem for Linux and More!"
 date: "2024-03-12T16:11:56+00:00"
-lastmod: "2024-03-14T17:46:26+00:00"
 description: "What does it take to run JavaFX applications on exotic Linux systems like the Windows Subsystem for Linux or some embedded systems?"
 authors:
   - "christopher-schnick"

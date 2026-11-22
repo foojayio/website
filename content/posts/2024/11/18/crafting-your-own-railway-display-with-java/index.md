@@ -1,7 +1,6 @@
 ---
 title: "Crafting Your Own Railway Display with Java!"
 date: "2024-11-18T08:46:31+00:00"
-lastmod: "2024-11-18T09:08:55+00:00"
 description: "Learn how to design your own railway display using Java, SpringBoot, Vaadin and Raspberry Pi."
 authors:
   - "ancy-thomas"

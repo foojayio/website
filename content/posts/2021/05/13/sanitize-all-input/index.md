@@ -1,7 +1,6 @@
 ---
 title: "Sanitize All Input! Sanitize All Input! Sanitize All Input!"
 date: "2021-05-13T07:23:33+00:00"
-lastmod: "2021-05-13T07:23:35+00:00"
 description: "Cross-site scripting (XSS) is a well-known issue and mostly utilized in JavaScript applications. However, Java is not immune to this!"
 canonical: "https://snyk.io/blog/10-java-security-best-practices/"
 authors:

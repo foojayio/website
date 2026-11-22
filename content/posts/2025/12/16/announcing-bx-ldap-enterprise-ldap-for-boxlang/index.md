@@ -1,7 +1,6 @@
 ---
 title: "Announcing bx-ldap: Enterprise LDAP for BoxLang"
 date: "2025-12-16T17:01:13+00:00"
-lastmod: "2025-12-16T17:01:15+00:00"
 description: "We're excited to announce the release of bx-ldap, a comprehensive LDAP module that brings enterprise-grade directory access to BoxLang! This module goes…"
 authors:
   - "cristobal-escobar"

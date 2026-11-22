@@ -1,7 +1,6 @@
 ---
 title: "Timing Compiling .java Code Files and Executing .class Bytecode"
 date: "2020-09-28T04:37:39+00:00"
-lastmod: "2020-09-28T07:31:25+00:00"
 description: "See that the time to execute the bytecode for a simple program is a small fraction of the time to compile it using javac."
 authors:
   - "kevinfarnham"

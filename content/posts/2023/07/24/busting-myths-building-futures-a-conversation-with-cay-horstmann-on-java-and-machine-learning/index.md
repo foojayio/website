@@ -1,7 +1,6 @@
 ---
 title: "Busting Myths, Building Futures: A Conversation with Cay Horstmann on Java and Machine Learning"
 date: "2023-07-24T15:12:00+00:00"
-lastmod: "2023-07-24T15:37:44+00:00"
 description: "Cay Horstmann shares his experiences with Java, his writing process for technical books, the challenges of teaching Java, and discusses its role in education."
 authors:
   - "bazlur-rahman"

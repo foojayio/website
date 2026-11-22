@@ -1,7 +1,6 @@
 ---
 title: "Exploring the Depths of Java: A Comprehensive Conversation with Jakob Jenkov, Part-I"
 date: "2023-06-29T13:33:58+00:00"
-lastmod: "2023-07-05T19:59:18+00:00"
 description: "Explore the first part of our in-depth interview with Jakob Jenkov, an experienced Java developer and AWS solution architect, as he shares his insights on the past, present, and future of Java."
 authors:
   - "bazlur-rahman"

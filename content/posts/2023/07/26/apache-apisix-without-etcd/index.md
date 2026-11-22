@@ -1,7 +1,6 @@
 ---
 title: "Apache APISIX without etcd"
 date: "2023-07-26T07:50:33+00:00"
-lastmod: "2026-09-21T06:04:50+00:00"
 description: "etcd is an excellent key-value distributed database used internally by Kubernetes and managed by the CNCF. It's a great option, and that's the reason why…"
 canonical: "https://blog.frankel.ch/apisix-without-etcd/"
 authors:

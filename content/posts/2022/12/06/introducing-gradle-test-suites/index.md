@@ -1,7 +1,6 @@
 ---
 title: "Introducing Gradle Test Suites"
 date: "2022-12-06T13:28:26+00:00"
-lastmod: "2022-12-06T16:40:51+00:00"
 description: "Did you know? In Gradle 7.3, released November 2021, the Gradle team introduced a new feature called Declarative Test Suites."
 canonical: "https://blog.gradle.org/introducing-test-suites"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Book Review: \"Help Your Boss Help You\""
 date: "2021-08-13T12:19:00+00:00"
-lastmod: "2021-09-03T08:40:14+00:00"
 description: "Here's a book to be read thoroughly several times and then to be placed behind glass to be broken in case of emergency!"
 authors:
   - "geertjan-wielenga"

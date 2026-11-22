@@ -1,7 +1,6 @@
 ---
 title: "Resilience in Coding: Miro Wengner on Thriving in the Software Industry"
 date: "2023-05-31T16:24:55+00:00"
-lastmod: "2023-06-01T20:52:21+00:00"
 description: "Dive into our interview with software engineer Miro Wengner as he discusses his career, software challenges, and insights from his experience in the industry."
 authors:
   - "bazlur-rahman"

@@ -1,7 +1,6 @@
 ---
 title: "My Evaluation of the Scaleway Cloud Provider"
 date: "2023-03-31T09:54:20+00:00"
-lastmod: "2023-03-31T10:21:37+00:00"
 description: "Heroku's owner, Salesforce, announced it would stop the free plan, I found a new provider, Scaleway, and here are my experiences."
 canonical: "https://blog.frankel.ch/evaluation-scaleway/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Building an Agentic Warehouse Management System — Part 3: Tools, Decisions, and Actions"
 date: "2026-09-03T16:50:36+00:00"
-lastmod: "2026-09-04T15:26:41+00:00"
 description: "In this third and final part, we will build on the execution plan created in Part 2 and focus on the remaining stages of the agent workflow. We will see how each task is executed using controlled tools, how operational and business context is gathered, how the replenishment decision is made, and how the agent acts on that decision when necessary."
 authors:
   - "ricardo-mello"

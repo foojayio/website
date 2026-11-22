@@ -1,7 +1,6 @@
 ---
 title: "Let's Replace the synchronized Keyword"
 date: "2024-05-07T04:26:29+00:00"
-lastmod: "2024-05-07T04:27:09+00:00"
 description: "Let's replace the synchronized keyword to be more virtual threads friendly in a code readable way."
 authors:
   - "anthony-goubard"

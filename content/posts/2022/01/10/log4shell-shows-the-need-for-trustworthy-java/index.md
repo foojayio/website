@@ -1,7 +1,6 @@
 ---
 title: "Log4Shell Shows The Need for \"Trustworthy Java\""
 date: "2022-01-10T10:03:24+00:00"
-lastmod: "2022-01-11T11:05:09+00:00"
 description: "I think the Java community handled this crisis poorly and needs to do much better next time. What do you think?"
 canonical: "https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-editorial"
 authors:

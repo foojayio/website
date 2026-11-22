@@ -1,7 +1,6 @@
 ---
 title: "Connecting Resilience to Performance in Relation to OpenJDK"
 date: "2024-08-22T08:22:37+00:00"
-lastmod: "2025-02-03T16:51:56+00:00"
 description: "Given the requirements of the DORA Act, which mandates strong operational resilience for financial institutions in the EU, leveraging a JVM like Azul Platform Prime can help ensure compliance and protect critical financial operations from ICT-related disruptions."
 authors:
   - "geertjan-wielenga"

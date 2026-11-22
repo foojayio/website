@@ -1,7 +1,6 @@
 ---
 title: "Troubleshooting Java Processes Running on Your Machine"
 date: "2021-07-02T09:27:12+00:00"
-lastmod: "2021-07-06T22:23:59+00:00"
 description: "When your Java application has problems, check the running processes on the machine. For Java processes, the JDK provides the jps tool."
 canonical: "https://jfeatures.com/blog/jps"
 authors:

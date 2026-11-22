@@ -1,7 +1,6 @@
 ---
 title: "Native Applications from a JavaFX Project for Multiple Devices"
 date: "2020-11-25T08:58:00+00:00"
-lastmod: "2021-02-05T12:58:26+00:00"
 description: "How to build native applications for multiple devices from a single JavaFX project with Gluon Mobile and GitHub Actions."
 canonical: "https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/"
 authors:

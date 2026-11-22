@@ -1,7 +1,6 @@
 ---
 title: "DevOps For Developers: Continuous Integration, GitHub Actions"
 date: "2023-04-04T07:35:12+00:00"
-lastmod: "2023-04-04T07:40:32+00:00"
 description: "When it is done badly, the CI process can turn this amazing tool into a nightmare. CI should make our lives easier, not the other way around."
 canonical: "https://debugagent.com/continuous-integration-github-actions-sonar-cloud"
 authors:

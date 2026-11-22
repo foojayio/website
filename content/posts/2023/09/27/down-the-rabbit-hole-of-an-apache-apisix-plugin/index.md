@@ -1,7 +1,6 @@
 ---
 title: "Down the Rabbit Hole of an Apache APISIX Plugin"
 date: "2023-09-27T08:43:49+00:00"
-lastmod: "2023-09-27T08:43:50+00:00"
 description: "Let's check the parameters of the _M.access(conf, ctx) function in an Apache APISIX plugin, especially the ctx one."
 canonical: "https://blog.frankel.ch/rabbit-hole-apisix-plugin/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "How to choose your LLM without ruining your Java code"
 date: "2026-01-09T19:49:47+00:00"
-lastmod: "2026-01-22T14:54:28+00:00"
 description: "In the AI LLM ecosystem (Anthropic, OpenAI, Google, ...), if the code compiles and does what we asked is just level 1. I have been analyzing the latest Sonar Leaderboard (with fresh data from late 2025/2026 on 4,444 Java tasks) and there are big surprises."
 authors:
   - "jonathan-vila"

@@ -1,7 +1,6 @@
 ---
 title: "How to Create Self-Contained Executable JARs"
 date: "2021-02-01T08:40:08+00:00"
-lastmod: "2021-08-23T13:03:51+00:00"
 description: "This article aims to describe ways to create self-contained executable JARs, also known as uber-JARs or fat JARs."
 canonical: "https://blog.frankel.ch/creating-self-contained-executable-jars/"
 authors:

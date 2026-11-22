@@ -1,7 +1,6 @@
 ---
 title: "Beginning JavaFX Applications with IntelliJ IDE"
 date: "2021-04-28T19:33:58+00:00"
-lastmod: "2024-02-06T12:19:48+00:00"
 description: "For the beginner to developing JavaFX applications with IntelliJ IDE, this article can help to avoid pitfalls and hit the ground running."
 authors:
   - "carldea"

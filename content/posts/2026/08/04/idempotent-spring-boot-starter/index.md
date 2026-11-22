@@ -1,7 +1,6 @@
 ---
 title: "Idempotent Spring Boot: Safe REST with One Annotation"
 date: "2026-08-04T22:11:22+00:00"
-lastmod: "2026-08-05T10:44:27+00:00"
 description: "An idempotent Spring Boot starter that replays duplicate requests instead of re-executing them. One annotation, Redis or JDBC, atomic claims."
 authors:
   - "youssef"

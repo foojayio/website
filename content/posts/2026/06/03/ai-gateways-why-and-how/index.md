@@ -1,7 +1,6 @@
 ---
 title: "AI gateways: why and how"
 date: "2026-06-03T08:38:19+00:00"
-lastmod: "2026-09-21T05:55:39+00:00"
 description: "Before working for 2 years on the Apache APISIX API gateway, I was mainly oblivious to API gateways. It's only by working with them that I understood…"
 canonical: "https://blog.frankel.ch/ai-gateways/"
 authors:

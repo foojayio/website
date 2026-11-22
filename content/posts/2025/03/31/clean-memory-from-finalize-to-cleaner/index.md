@@ -1,7 +1,6 @@
 ---
 title: "Clean your Memory: From Finalize to Cleaner"
 date: "2025-03-31T12:30:08+00:00"
-lastmod: "2025-03-31T12:30:10+00:00"
 description: "Clean your Memory: exploring approaches for cleaning native resources, starting from finalize() method to the Cleaner API"
 canonical: "https://blog.frankel.ch/java-cleaner/"
 authors:

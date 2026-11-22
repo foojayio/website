@@ -1,7 +1,6 @@
 ---
 title: "What the Heck Is Project Loom for Java?"
 date: "2022-08-30T15:13:55+00:00"
-lastmod: "2022-09-19T09:51:37+00:00"
 description: "Project Loom aims to fix issues in the current concurrency model by introducing two new features: virtual threads and structured concurrency."
 canonical: "https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom"
 authors:

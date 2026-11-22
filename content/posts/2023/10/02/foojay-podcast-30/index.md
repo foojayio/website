@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #30: UtrechtJUG"
 date: "2023-10-02T07:48:48+00:00"
-lastmod: "2025-11-13T08:56:28+00:00"
 description: "Not just mic, but also camera, in the 30th Foojay podcast, focused on Utrecht JUG!"
 authors:
   - "frankdelporte"

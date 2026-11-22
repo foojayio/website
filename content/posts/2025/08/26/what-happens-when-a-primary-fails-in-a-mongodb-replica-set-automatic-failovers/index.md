@@ -1,7 +1,6 @@
 ---
 title: "What happens when a Primary fails in a MongoDB replica set?"
 date: "2025-08-26T15:14:03+00:00"
-lastmod: "2025-08-26T15:16:01+00:00"
 description: "Whether you're designing scalable backend systems or just dividing your database into distributed databases, understanding how automatic failover works is key."
 authors:
   - "shrey-batra"

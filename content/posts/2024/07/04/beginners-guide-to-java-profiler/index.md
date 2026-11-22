@@ -1,7 +1,6 @@
 ---
 title: "A Beginner's Guide to IntelliJ Profiler"
 date: "2024-07-04T06:26:35+00:00"
-lastmod: "2024-11-12T16:10:09+00:00"
 description: "Learn how to troubleshoot and optimize Java code with IntelliJ Profiler – using createDirectories() as an example."
 canonical: "https://flounder.dev/posts/get-started-with-profiling/"
 authors:

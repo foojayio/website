@@ -1,7 +1,6 @@
 ---
 title: "SonarQube for IDE in IntelliJ: The Ultimate Java Developer’s Guide"
 date: "2025-12-12T15:43:00+00:00"
-lastmod: "2025-12-12T15:48:42+00:00"
 description: "Stop fixing bugs on weekends. Learn how to use SonarQube for IDE (formerly SonarLint) in IntelliJ to catch Java errors and security risks in real-time. Install, configure, and code with confidence."
 authors:
   - "jonathan-vila"
