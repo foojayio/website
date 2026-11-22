@@ -72,7 +72,16 @@ grep -o -w -E 'avx512f|avx512bw|avx512vbmi|bmi2' /proc/cpuinfo | sort -u
 
 If all four flags come back, the JVM can select the vulnerable code. If any is missing, it can't.
 
-**The runtime.** `java -version` inside the container tells you the build.
+**The runtime.** Ask the running process, not the `java` on the path. If the JDK was updated
+without a restart, `java -version` reports the new build while the service is still running the old
+one. Inside the container:
+
+```bash
+jcmd 1 VM.version
+```
+
+That prints the build the process actually loaded, for example `JDK 21.0.13.1`. After updating the
+runtime, restart the service before you trust the answer.
 
 **Don't use the JVM flag as a test.** It is tempting to check whether intrinsics are on:
 
