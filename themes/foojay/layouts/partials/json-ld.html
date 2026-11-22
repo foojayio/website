@@ -34,6 +34,7 @@
       {{- with $author.Params.gitlab }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.mastodon }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with $author.Params.reddit }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.youtube }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- with $author.Params.website }}{{ $sameAs = $sameAs | append . }}{{ end -}}
       {{- $person := dict "@type" "Person" "name" $author.Title "url" $author.Permalink -}}

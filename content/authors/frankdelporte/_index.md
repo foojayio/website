@@ -6,6 +6,7 @@ bio: "Frank Delporte is a Java Champion, Java Developer, Senior Technical Writer
 description: "Frank Delporte is Java Champion and Senior Technical Writer at Azul. He maintains Foojay, Pi4J, and the JavaFX projects Lottie4J, Sheetmusic4J, MelodyMatrix."
 bluesky: "https://bsky.app/profile/frankdelporte.be"
 mastodon: "https://foojay.social/@FrankDelporte"
+reddit: "https://www.reddit.com/user/FrankCodeWriter/"
 linkedin: "https://www.linkedin.com/in/frankdelporte/"
 github: "https://github.com/FDelporte/"
 gitlab: "https://gitlab.com/fdelporte"

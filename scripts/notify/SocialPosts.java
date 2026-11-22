@@ -71,7 +71,7 @@ public class SocialPosts {
 
     record Post(String title, String link, String description) {}
 
-    record Author(String name, String bluesky, String mastodon) {}
+    record Author(String name, String bluesky, String mastodon, String reddit) {}
 
     record Platform(String id, String label, int max, String extra) {}
 
@@ -103,7 +103,7 @@ public class SocialPosts {
             new Platform("reddit", "Reddit", REDDIT_MAX,
                     "The first line is the post title (max 150 characters, no hashtags), then an empty line, then the body: "
                             + "a short plain summary of what the article covers, ending with the link.\n"
-                            + "No hashtags, no @mentions (give the author's plain name), no markdown headings and no emoji.\n"
+                            + "No hashtags, no @mentions, no markdown headings and no emoji. Mention an author by the `u/name` handle when one is provided, otherwise by plain name.\n"
                             + "Don't open with a hook or rhetorical question. Keep a plain, factual tone."));
 
     static final Set<String> MANUAL = Set.of("linkedin", "reddit");
@@ -490,7 +490,7 @@ public class SocialPosts {
                 String handle = switch (pl.id()) {
                     case "bluesky" -> blueskyMention(au.bluesky());
                     case "mastodon" -> mastodonMention(au.mastodon());
-                    case "reddit" -> au.name();
+                    case "reddit" -> redditMention(au.reddit(), au.name());
                     default -> "@" + au.name(); // LinkedIn has no text handles
                 };
                 who.append("Author: ").append(au.name()).append("\n    ").append(pl.label())
@@ -569,15 +569,16 @@ public class SocialPosts {
                     for (JsonNode n : an.isArray() ? an : List.of(an)) {
                         String name = n.path("name").asText("").trim();
                         if (name.isEmpty()) continue;
-                        String bluesky = "", mastodon = "";
+                        String bluesky = "", mastodon = "", reddit = "";
                         for (JsonNode same : n.path("sameAs")) {
                             String href = same.asText("");
                             String host = host(href);
                             if (host.endsWith("bsky.app")) bluesky = href;
+                            else if (host.equals("reddit.com") || host.endsWith(".reddit.com")) reddit = href;
                             else if (isMastodon(href, host)
                                     && (mastodon.isEmpty() || host.contains("social") || host.contains("mastodon"))) mastodon = href;
                         }
-                        out.add(new Author(name, bluesky, mastodon));
+                        out.add(new Author(name, bluesky, mastodon, reddit));
                     }
                 }
             } catch (Exception ignored) {
@@ -609,6 +610,13 @@ public class SocialPosts {
         if (url == null || url.isBlank()) return "";
         String handle = url.replaceFirst("^https?://(www\\.)?bsky\\.app/profile/", "").replaceAll("/.*$", "");
         return handle.isEmpty() ? url : "@" + handle.replaceFirst("^@", "");
+    }
+
+    /** Reddit's own mention syntax is u/name; without a profile the plain name is all there is. */
+    static String redditMention(String url, String name) {
+        if (url == null || url.isBlank()) return name;
+        String user = url.replaceFirst("^https?://(www\\.|old\\.)?reddit\\.com/(user|u)/", "").replaceAll("[/?#].*$", "");
+        return user.isEmpty() || user.equals(url) ? name : "u/" + user;
     }
 
     static String mastodonMention(String url) {

@@ -87,4 +87,4 @@ My guess, reading silence as a form of response: people don't think of quarterly
 
 4. **Keep up with quarterly updates.** They fix security issues and bugs on the version you already run, so check that they actually reach your systems, whichever version that is.
 
-Thanks to everyone who answered in the Foojay Slack. If you want to add your own answer, join us there and tell us which JDK you run and what holds you back. We will keep asking and we will keep sharing what we learn.
+Thanks to everyone who answered in the Foojay Slack. If you want to add your own answer, [join us there](/today/join-slack-com-t-foojay-signup/) and tell us which JDK you run and what holds you back. We will keep asking and we will keep sharing what we learn.
