@@ -5,7 +5,7 @@ description: Schedule several drafts from /draft over the coming days and weeks,
 
 # Schedule multiple draft posts
 
-Batch version of `schedule-posts`: that skill dates and moves ONE draft and
+Batch version of `schedule-posts-single`: that skill dates and moves ONE draft and
 holds the per-post steps (frontmatter, images, galleries, validation). This one
 decides the calendar, runs those steps for each draft, then tells the authors.
 
@@ -54,7 +54,7 @@ Fill the earliest free weekday slots, then apply the spacing rules:
 Show the table (date, post, author, PR) in your reply. The user's request is the
 authorisation, so proceed unless something is ambiguous.
 
-## 3. Per draft: apply `schedule-posts`
+## 3. Per draft: apply `schedule-posts-single`
 
 Follow its steps for each draft, with these batch notes:
 
@@ -66,13 +66,13 @@ Follow its steps for each draft, with these batch notes:
   slug is not a folder under `content/posts`, and when it is missing add posts, so the
   list holds 3 to 6 existing, genuinely related ones. Take as many as are really good
   (aim for 4) and never pad to reach six; say in the PR comment when slugs were replaced.
-* No `image:` in the frontmatter: run `generate_header.py` from `schedule-posts`
+* No `image:` in the frontmatter: run `generate_header.py` from `schedule-posts-single`
   (reuses a suitable bundle image, else renders a card) and say so in that PR's comment.
 * Remove a body image that duplicates the hero.
 * A hotlinked image is stored locally as `<stem>-<8 hex of sha1(url)>.<ext>`;
   `raw.githubusercontent.com` needs `allowed_domains` in the sandbox.
 * Run `resize_images.py --path <new path>` per bundle, then gallery-ify body images
-  and write the missing alt text ("Describe every image" in `schedule-posts`).
+  and write the missing alt text ("Describe every image" in `schedule-posts-single`).
 * The folder date and the frontmatter `date` must agree: both come from the table.
 
 ## 4. Verify once
@@ -90,7 +90,7 @@ unless you did.
 
 ## 5. Commit and push
 
-Remove empty `.claude` dirs in subfolders (command in `schedule-posts`), then one
+Remove empty `.claude` dirs in subfolders (command in `schedule-posts-single`), then one
 commit: `New posts from draft: schedule N posts for <range>`. Commit signing and
 `git push` need the sandbox disabled (GPG key access).
 
