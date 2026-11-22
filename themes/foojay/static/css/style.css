@@ -2297,7 +2297,11 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 }
 
 .post-categories--top { margin-bottom: .9rem; }
-.reading-time, .updated { color: var(--ink-muted); }
+.reading-time { color: var(--ink-muted); }
+.updated {
+  background: var(--surface-tinted); color: var(--brand-accent-strong);
+  font-weight: 600; padding: .1em .6em; border-radius: 999px;
+}
 /* The read counter. tabular-nums so a column of cards doesn't jitter as the
    digit widths change, nowrap so "11,459 views" never breaks across lines. */
 .views {
