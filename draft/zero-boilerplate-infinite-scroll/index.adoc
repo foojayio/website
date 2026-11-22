@@ -1,0 +1,87 @@
+---
+title: "Zero-boilerplate PrimeFaces infinite scroll with cursor pagination, JPA and FlowLogix"
+date: "2026-01-01"
+description: "Add infinite scrolling to a JPA-backed PrimeFaces table with one injected FlowLogix model, then enable cursor pagination with a small configuration."
+authors:
+  - "lenny-primak"
+image: "jpa-cursor-pagination.jpg"
+categories:
+  - "Jakarta EE"
+  - "Databases"
+  - "Tutorials"
+related_posts:
+  - "paging-dto-projections-spring-data-jpa"
+  - "the-12-labours-of-primefaces-15-0-15-release"
+  - "spring-boot-jpa-vs-jdbc"
+---
+
+_This work was sponsored by https://flowlogix.com[Flow Logix]. Generate a ready-to-run Jakarta EE project at https://start.flowlogix.com[start.flowlogix.com]._
+
+Infinite scrolling is easy to recognize in the browser. The work is behind it: loading just the requested rows, counting matches, applying PrimeFaces sorting and filtering, and keeping row keys working with JPA.
+
+FlowLogix makes that work feel small. In a CDI view bean, inject one `JPALazyDataModel` for your entity:
+
+.CustomerView.java
+[source,java]
+----
+@Inject
+JPALazyDataModel<Customer> customers;
+----
+
+Expose it as a bean property, then use the normal PrimeFaces table:
+
+.customers.xhtml
+[source,xhtml]
+----
+<p:dataTable value="#{customerView.customers}" var="customer"
+             lazy="true" scrollable="true" virtualScroll="true"
+             rows="40" scrollRows="20">
+    <p:column headerText="Name"
+              sortBy="#{customer.name}"
+              filterBy="#{customer.name}">
+        <h:outputText value="#{customer.name}" />
+    </p:column>
+</p:dataTable>
+----
+
+That is the Java-side starting point. CDI derives the entity type from the injection point and supplies the model with the right `EntityManager`. There is no custom `LazyDataModel` subclass, no `EntityManager` plumbing, no count query and no hand-written conversion of PrimeFaces sort and filter metadata into JPA queries. FlowLogix supplies a CDI-injectable, JPA-backed model that handles those pieces for you.
+
+The https://start.flowlogix.com[FlowLogix starter] already includes the data-model dependency, and the FlowLogix BOM supplies its version.
+
+== Keep scrolling fast as the list grows
+
+Ordinary lazy loading often uses offsets. To get a row far down the list, the database may have to walk past all the earlier rows. Cursor pagination asks for rows after the last row the user saw instead.
+
+FlowLogix adds cursor pagination to the same model with a small builder configuration. Here the primary key is the default cursor and tie-breaker, and `name` is also allowed as a sort field:
+
+.UserViewer.java - cursor pagination
+[source,java]
+----
+@PostConstruct
+void initialize() {
+    customers.initialize(builder -> builder
+        .cursor(CursorPagination.create(config -> config
+            .supportedFields(List.of(
+                new CursorPagination.Field<>(() -> "id", Customer::getId),
+                new CursorPagination.Field<>(() -> "name", Customer::getName)
+            ))
+            .build()))
+        .build());
+}
+----
+
+The unique `id` keeps the order stable when multiple customers have the same name. Index the fields you enable for cursor sorting. If the table requests a sort field that is not configured for cursor use, the model falls back to offset pagination.
+
+That combination is the point: cursor pagination, ordinary PrimeFaces sorting and filtering, and JPA row handling all work through the same injected model. It is also serializable for clustered sessions, even when the JPA entities themselves are not.
+
+== Try it
+
+The https://docs.flowlogix.com/#section-jpa-lazymodel[FlowLogix documentation] includes examples of filtering, sorting, cursor pagination and customization. The https://github.com/flowlogix/flowlogix/blob/main/jee-examples/src/main/java/com/flowlogix/examples/data/UserViewer.java[UserViewer example] shows the Java side, and https://github.com/flowlogix/flowlogix/blob/main/jee-examples/src/main/webapp/view-users.xhtml[view-users.xhtml] shows the PrimeFaces table.
+
+== About the author
+
+Lenny Primak is an open source maintainer, the https://shiro.apache.org[Apache Shiro] PMC Chair, and a contributor to Jakarta EE, Jersey, Weld, Grizzly and Arquillian. Find him on https://github.com/lprimak[GitHub] and https://linkedin.com/in/lprimak[LinkedIn].
+
+His Jakarta EE work is sponsored by https://flowlogix.com[Flow Logix], which builds open source components for Jakarta EE applications. See the projects at https://github.com/flowlogix[github.com/flowlogix].
+
+This work is unpaid. If it was useful to you, you can support it through https://github.com/sponsors/flowlogix[GitHub Sponsors: Flow Logix].
