@@ -1,7 +1,7 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
 date: "2026-06-10T19:02:58+00:00"
-lastmod: "2026-06-14T22:05:20+00:00"
+lastmod: "2026-11-21T19:02:38+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
 authors:
   - "ahmed-sekka"
@@ -115,22 +115,65 @@ Three agents, dynamic routing, typed state shared across nodes. Each agent is a 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
 ```
-AgentGraph graph = AgentGraph.builder()
-    .addNode("analyse",  analyst)
-    .addNode("process",  processor)
-    .addEdge("analyse",  "process")
-    // analyst can only call crm.lookup and order.fetch, not payment.refund
+// the policy governs the tools registered on the agent:
+// analyst can call crm.lookup and order.fetch, and nothing else
+Agent analyst = ExecutorAgent.builder()
+    .chatClient(chatClient)
+    .systemPrompt("Analyse this refund request.")
+    .tools(crmLookup, orderFetch)
     .toolPolicy(ToolPolicy.allowList("crm.lookup", "order.fetch"))
-    // cap total spend per run at $0.50
-    .budgetPolicy(BudgetPolicy.perRun(0.50, tokenEstimator, meter))
-    // pause before process, a human must approve
-    .approvalGate(ApprovalGate.requireFor("process"))
-    // checkpoint after every node on the existing datasource
-    .checkpointStore(new JdbcCheckpointStore(dataSource))
     .build();
+
+// on the existing datasource: the agent_checkpoint table comes from your own migrations
+JdbcCheckpointStore checkpoints = new JdbcCheckpointStore(jdbcTemplate, txManager, codec);
+
+// one graph per run: the budget counters live on the policy instance
+AgentGraph refundGraph() {
+    return AgentGraph.builder()
+        .addNode("analyse",  analyst)
+        .addNode("process",  processor)
+        .addEdge("analyse",  "process")
+        // refuse a node once the spend recorded so far plus its estimate passes $0.50
+        .budgetPolicy(BudgetPolicy.hierarchical(BudgetLimits.run(0.50), estimator, meter))
+        // pause before process, a human must approve
+        .approvalGate(ApprovalGate.requireFor("process"))
+        // checkpoint after every node
+        .checkpointStore(checkpoints)
+        .build();
+}
+
+// the run id is what makes the run checkpointed: this call stops at the approval gate
+AgentGraph graph = refundGraph();
+AgentResult paused = graph.invoke(
+    AgentContext.of("Refund order 4521"), RunOptions.ofRunId("refund-4521"));
+
+// later, once a human has approved: the same graph keeps the spend counted so far
+AgentResult done = graph.resume("refund-4521", ResumeOptions.ofApproval("process"));
 ```
 
-The `processor` agent cannot run until a human approves. The graph cannot spend more than $0.50 per run. If the server restarts mid-execution, the next run picks up from the last completed node. No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
+The `processor` agent cannot run until a human approves: the first call returns an interrupt, and `resume` continues from the last checkpoint. After a restart, the same `resume` call on a newly built graph does the same. A run is only checkpointed when it is started with a run id, so a plain `invoke(ctx)` leaves nothing to resume from.
+
+The store does not create its table. Add it to your Flyway or Liquibase migrations, like any other table of the application. On PostgreSQL:
+
+```
+CREATE TABLE agent_checkpoint (
+    run_id             VARCHAR(128) PRIMARY KEY,
+    payload            TEXT NOT NULL,
+    checkpoint_version INT NOT NULL,
+    created_at         TIMESTAMP NOT NULL,
+    updated_at         TIMESTAMP NOT NULL
+);
+```
+
+`JdbcCheckpointStore.createTableIfMissing()` creates the same table for you, with a `CLOB` payload: it works on H2 and on the other databases that have that type, and fails on PostgreSQL, which does not.
+
+The tool policy covers the tools registered on the agent. Tools registered on the `ChatClient` itself, for example with `defaultToolCallbacks`, bypass it, so a sensitive tool such as `payment.refund` must stay off a client the analyst shares.
+
+The budget is checked before each node attempt, against an estimate: once the spend recorded so far plus the next estimate passes $0.50, the run is interrupted. Three limits follow. A node that calls the model several times, for example through tools, is checked once, before its first call. A node that costs more than its estimate is recorded after the fact, so a run can end above the limit, and it is the next attempt that is refused. And the spend of a failed attempt is not recorded, so the cost of a retried node is undercounted.
+
+The counters are held in memory on the policy instance, not in the checkpoint. That is why the graph is built once per run, and why the resume above goes through the same graph. After a restart, the run resumes on a new graph that counts from zero again: a limit that must hold across restarts needs a `BudgetPolicy` implementation that stores its counters.
+
+No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
 
 ## OPERATE: Observe, recover and run safely
 
@@ -141,14 +184,17 @@ One common failure mode: a retry policy that cannot tell the difference between 
 AgentFlow4J's `FailureClassifier` solves this with three outcomes:
 
 ```
+// Your own rule first; anything it does not recognise falls through to the defaults
+FailureClassifier domain = cause ->
+    cause instanceof InvalidOrderException
+        ? FailureClassification.permanent("order rejected by a business rule")
+        : null;
+
 RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
-    .withClassifier(FailureClassifier.defaults()
-        .orElse((ex, ctx) -> ex instanceof BudgetExceededException
-            ? FailureClassification.OVER_BUDGET
-            : FailureClassification.TRANSIENT));
+    .withClassifier(domain.orElse(FailureClassifier.defaults()));
 ```
 
-`TRANSIENT` means retry. `PERMANENT` means fail fast. `OVER_BUDGET` means route to a cheaper fallback agent instead of retrying. The retry policy is no longer blind to cost.
+`TRANSIENT` means retry with backoff. `PERMANENT` means fail fast. `OVER_BUDGET` means stop and hand the run back as an interrupt, so the caller can pause, raise the limit and resume instead of paying for another attempt. The defaults already treat I/O errors, timeouts, HTTP 5xx and 429 as transient, and a `BudgetExceededException` as over budget. The retry policy is no longer blind to cost.
 
 ### Operational sovereignty
 
@@ -176,25 +222,25 @@ If you are an architect or open-source contributor interested in what a producti
 
 ## Getting started
 
-AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
+AgentFlow4J is available on Maven Central, for Java 17+, tested against Spring AI 1.0, 1.1 and 2.1:
 
 ```
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-
 <dependency>
-    <groupId>com.github.datallmhub.agentflow4j</groupId>
+    <groupId>io.github.datallmhub</groupId>
     <artifactId>agentflow4j-starter</artifactId>
-    <version>v0.7.0</version>
+    <version>1.0.1</version>
+</dependency>
+<!-- JdbcCheckpointStore, used in the GOVERN example, is not part of the starter -->
+<dependency>
+    <groupId>io.github.datallmhub</groupId>
+    <artifactId>agentflow4j-checkpoint</artifactId>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 * **[GitHub](https://github.com/datallmhub/agentflow4j)**: source, docs, samples
-* **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: six self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing
+* **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: eleven self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing, governed MCP agent, self-correcting writer, LLM as a judge, parallel research squad, governed OpenHands workflow
 * **[Tutorial](https://datallmhub.github.io/agentflow4j/tutorials/stop-your-agent-burning-money/)**: end-to-end walkthrough of the four governance gates
+* **[Validation](https://datallmhub.github.io/agentflow4j/validation/)**: every guarantee, the test behind it, and what that test does not prove
 
 Apache 2.0 (not an official Spring project).
