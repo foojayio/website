@@ -101,6 +101,21 @@
     "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k_YqpG6_Rrq2y48p7UlLkPQMKp1LCJ_5roQV7mVXuF2tQ=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "yMg5tPmWJ98",
+    "channel" : "coffeesoftware",
+    "title" : "Dr. Venkat Subramaniam, live from Voxxed Days Thessaloniki",
+    "published" : "2026-11-22T02:07:14+00:00"
+  }, {
+    "id" : "dSh5O-_r8p0",
+    "channel" : "coffeesoftware",
+    "title" : "Dr. Heinz Kabutz, live from Voxxed Day Thessaloniki",
+    "published" : "2026-11-22T01:34:04+00:00"
+  }, {
+    "id" : "fJP3s1A5jGY",
+    "channel" : "java",
+    "title" : "Evolving the Java Language: An Inside Perspective",
+    "published" : "2026-11-21T10:00:08+00:00"
+  }, {
     "id" : "4U3LP_HYmQs",
     "channel" : "coffeesoftware",
     "title" : "Brian Sam-Bodden on a Bootiful Podcast",
@@ -115,11 +130,6 @@
     "channel" : "hszanowski",
     "title" : "IntelliJ Platform Hack Session: Tools, Plugins, and Workflow Tweaks",
     "published" : "2026-11-21T03:15:14+00:00"
-  }, {
-    "id" : "fJP3s1A5jGY",
-    "channel" : "java",
-    "title" : "Evolving the Java Language: An Inside Perspective",
-    "published" : "2026-11-20T12:01:47+00:00"
   }, {
     "id" : "AdO-NdzR_z8",
     "channel" : "JetBrainsTV",
@@ -1526,5 +1536,5 @@
     "title" : "Volcano Airtour",
     "published" : "2008-12-06T22:37:13+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "M0Wha6RdIPY", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "iv_-3yw-cGA", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "M0Wha6RdIPY", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "iv_-3yw-cGA", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }
