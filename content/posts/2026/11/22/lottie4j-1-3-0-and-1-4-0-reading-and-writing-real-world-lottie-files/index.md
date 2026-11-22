@@ -96,4 +96,4 @@ An audio layer (`ty` 6) stores its levels in `au.lv`: the left and right channel
 
 * Full changelog: [lottie4j.com/releases](https://lottie4j.com/releases/)
 * GitHub diffs: [1.2.8 to 1.3.0](https://github.com/lottie4j/lottie4j/compare/v1.2.8...v1.3.0) and [1.3.0 to 1.4.0](https://github.com/lottie4j/lottie4j/compare/v1.3.0...v1.4.0)
-* [AnimatorFX](https://github.com/dlsc-software-consulting-gmbh/AnimatorFX/) and the [Lottie importer PR](https://github.com/dlsc-software-consulting-gmbh/AnimatorFX/pull/1)
+* [AnimatorFX](https://github.com/dlsc-software-consulting-gmbh/AnimatorFX/) and the [Lottie importer PR](https://github.com/dlsc-software-consulting-gmbh/AnimatorFX/pull/2)
