@@ -20,8 +20,6 @@ aliases:
   - "/today/why-spring-teams-dont-need-a-second-runtime-for-ai-agents/"
 ---
 
-![AgentFlow4J flow diagram: Build (create AI agent teams), Govern (budget, approval, permissions, checkpoint), Run (safely in production)](hero-700x350.jpg)
-
 *A JVM-native runtime for building, governing and operating AI agents on existing Spring infrastructure.*
 
 Every time a Spring team decides to add AI agents to a production system, the story tends to follow the same arc. A few prototypes are built, several frameworks are evaluated, and then a new reality emerges: the project is no longer just about adding agents. It is about operating a new platform.
