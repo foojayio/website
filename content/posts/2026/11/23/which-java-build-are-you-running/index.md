@@ -152,6 +152,8 @@ Start with a simple spreadsheet. A script that runs `java -version` over SSH is 
 
 Install the CPU line quickly, after a short test, because it only contains security fixes and carries little regression risk. Test the PSU line over a longer period and move to it before the next quarterly release. That way a zero-day like the eMudhra case becomes a rebuild and a redeploy, not a regression test campaign.
 
+In the house analogy from yesterday's post by [Dominika Tasarz](/today/author/dominika-tasarz/) [Which JDK are you on & what stops you upgrading?](/today/which-jdk-are-you-on-and-what-stops-you-upgrading/), the JDK is the house and your frameworks and libraries are the furniture. Moving to a new major version is moving house, and that is where the old sofa gets stuck on the staircase. A monthly update within your current version is repairing the house you already live in: the furniture stays where it is. That is why you can install it quickly.
+
 ## Check your build today
 
 Pick one of your Java applications right now and do two things:
