@@ -19,7 +19,7 @@ _This work was sponsored by https://flowlogix.com[Flow Logix]. Generate a ready-
 
 Maven 4 GA is close. The final release is expected in 2026, or so they say. It is time to prepare.
 
-This article covers what changes in your daily work with Maven 4, and how a base POM gives you builds with no warnings, no boilerplate and the same result every time.
+This article covers what changes in your daily work with Maven 4, and how a base POM gives you builds with no warnings, no boilerplate and truly reproducible builds.
 
 == Maven 4 warns about plugin versions
 
@@ -31,9 +31,9 @@ maven-compiler-plugin, maven-surefire-plugin, maven-jar-plugin], you should defi
 versions in pluginManagement section of your pom.xml or parent
 ----
 
-Maven 3 builds the same project without a word.
+Maven 3 builds the same project without any warnings.
 
-The warning is fair. If you do not say which plugin versions to use, Maven picks its own defaults, and those defaults change from one Maven version to the next. The same source code can then build differently on two machines. The https://maven.apache.org/whatsnewinmaven4.html[Maven 4 notes] say: always define fixed versions of all the plugins you use.
+The warning is legit. If you do not say which plugin versions to use, Maven picks its own defaults, and those defaults change from one Maven version to the next. The same source code can then build differently on two machines. The https://maven.apache.org/whatsnewinmaven4.html[Maven 4 notes] say: always define fixed versions of all the plugins you use.
 
 To make the warning go away, you have to lock the version of every standard plugin. That is a block like this for each one, in every project you own:
 
@@ -48,7 +48,7 @@ To make the warning go away, you have to lock the version of every standard plug
 
 Nobody wants to copy that into every project and keep the versions current by hand. The practical answer is a base POM: one parent that locks the versions for you.
 
-== The fix: a base POM
+== The solution: a base POM
 
 Here is the same small project with the https://docs.flowlogix.com/base-pom[FlowLogix Base POM] as its parent:
 
@@ -90,7 +90,7 @@ Your projects keep the parent they have today. Every one of them gets the locked
 
 A parent POM has one known limit. A project can have only one parent.
 
-Maven's answer is https://maven.apache.org/guides/mini/guide-mixins.html[mixins], which let a project pull in shared build configuration from several places. According to the Maven guide, mixins come with Maven 4.2.0 and a new model version. My guess is that they will not be usable in everyday projects before 2028.
+Maven's answer is https://maven.apache.org/guides/mini/guide-mixins.html[mixins], which let a project pull in shared build configuration from several places. According to the Maven guide, mixins come with Maven 4.2 and a new model version. My guess is that they will not be usable in everyday projects before 2028.
 
 When mixins are available, FlowLogix will move from a base POM to mixins. Until then, a parent is the only way to get a warning-free build without copying plugin versions around.
 
@@ -149,7 +149,9 @@ Maven 4 removes both. I tested this with a project that has two modules, where `
 | Passes
 |===
 
-Maven 4 keeps the modules it has built in a repository inside the project itself. Nothing is written to `~/.m2`. Build the project once with `mvn verify`, and from then on you can run tests from inside any module.
+Maven 4 keeps the modules it has built in a repository inside the project itself. Build the project once with `mvn verify`, and from then on you can run tests from inside any module.
+
+This also keeps `~/.m2` clean. With `install`, every local build leaves a snapshot of your modules in the local repository, and every other project and branch on your machine can pick it up. A stale or half-finished snapshot there is how a build passes on your machine and fails everywhere else. With Maven 4, none of your own modules go into `~/.m2`, and `mvn clean` removes what was built.
 
 The Maven team's own advice is the same: do not use `mvn clean install` for your regular builds. Use `mvn verify`.
 
@@ -163,7 +165,7 @@ We measured a sample run with eight modules, each with one slow test. These are 
 
 * Building modules in parallel with `mvn -T 8` was 4 times faster than building them one after another.
 * https://maven.apache.org/mvnd.html[mvnd], the Maven daemon, was 6 times faster. It builds modules in parallel by default and keeps a warm JVM between builds.
-* With the https://maven.apache.org/extensions/maven-build-cache-extension/[Maven build cache], a repeated `mvn clean verify` was 6 times faster. With mvnd and the cache together, it finished in half a second.
+* With the https://maven.apache.org/extensions/maven-build-cache-extension/[Maven build cache], a repeated `mvn verify` was 6 times faster. With mvnd and the cache together, it finished in half a second.
 
 The cache is one small file in your project, `.mvn/extensions.xml`. The starter project from https://start.flowlogix.com[start.flowlogix.com] comes with it already set up.
 
@@ -208,7 +210,7 @@ Here is what you get:
 
 The https://docs.flowlogix.com/base-pom[Base POM documentation] lists every property and how to change it.
 
-NOTE: `infra-pom` loads Mockito as a Java agent for tests, the way current JDKs require, so your project needs Mockito as a test dependency. The `unit-test` https://docs.flowlogix.com/depchains[dependency chain] brings Mockito, JUnit and AssertJ in one dependency. If you do not use Mockito, set the `mockito.agentOptions` property to empty.
+NOTE: `infra-pom` loads Mockito as a Java agent for tests, the way current JDKs require, so your project needs Mockito as a test dependency. The `unit-test` https://docs.flowlogix.com/depchains[dependency chain] brings Mockito, JUnit or TestNG and AssertJ in one dependency. If you do not use Mockito, set the `mockito.agentOptions` property to empty.
 
 === A demo directory
 
@@ -261,12 +263,14 @@ Every source file is then checked against your header. The starter project from 
 
 == What this buys you
 
-Add the four pieces together:
+Add the pieces together:
 
 * A base POM locks plugin versions, so Maven 4 builds with no warnings.
 * Settings are properties, so your POM stays boilerplate-free.
-* Maven 4 lets you build and test from inside any module, with no `install`.
+* Maven 4 lets you build and test from inside any module, with no `install` and no half-finished artifacts polluting `~/.m2`.
 * Parallel builds, mvnd and the build cache keep it fast.
+* `infra-pom` adds reproducible archives, build checks, releases and tests, with nothing to configure.
+* Demo code is compiled and tested, so the examples in your javadoc cannot go stale.
 
 The POM of a project built this way contains its name, its parent and its dependencies. That is all.
 
