@@ -4,7 +4,6 @@ Findings from a review of foojay.io (2026-11-19). The live-site observations cam
 
 | # | File | Priority |
 |---|------|----------|
-| 1 | [beginner-path.md](beginner-path.md) | Medium |
-| 2 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
+| 1 | [analytics-and-consent.md](analytics-and-consent.md) | Low |
 
 Rule for every task: follow the order in `AGENTS.md` (derive, default, ask) so publishing stays effortless for authors.
