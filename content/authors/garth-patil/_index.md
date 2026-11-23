@@ -2,7 +2,7 @@
 title: "Garth Patil"
 avatar: "garth-patil.jpg"
 avatarFull: "garth-patil-full.jpg"
-bio: "Co-founder and CEO of Phase Two, which runs managed Keycloak and maintains open-source Keycloak extensions. Writes about identity, Keycloak and running Java services in production."
+bio: "Co-founder and CEO of Phase Two, which provides managed Keycloak hosting and support, and builds the most popular Keycloak extensions."
 description: ""
 bluesky: ""
 mastodon: ""
