@@ -151,8 +151,10 @@
        once per pager. $pageNum is 0 exactly on the pages worth a result.
 
        WEEK REVIEWS ARE NOT INDEXED: they re-list posts that are already
-       results, so a search would show each article twice. */}}
-  <main class="site-main" id="main" tabindex="-1"{{ if and (not $pageNum) (ne .Type "week-review") }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
+       results, so a search would show each article twice.
+
+       /ad-stats/ is unlisted (see its frontmatter), so it is not searchable. */}}
+  <main class="site-main" id="main" tabindex="-1"{{ if and (not $pageNum) (ne .Type "week-review") (ne .Type "ad-stats") }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 
