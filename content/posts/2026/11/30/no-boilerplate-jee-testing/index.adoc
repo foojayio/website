@@ -1,6 +1,6 @@
 ---
 title: "Zero-Boilerplate Tests of Database and UI, with TestContainers, FlowLogix and Jakarta EE"
-date: "2026-01-01"
+date: "2026-11-30"
 description: "Arquillian tests used to be hard to set up and slow. Now a Jakarta EE test, UI tests included, is two annotations. No deployment method and no setup, and quick execution."
 authors:
   - "lenny-primak"

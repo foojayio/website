@@ -1,6 +1,6 @@
 ---
 title: "Java4Shell From the JVM Side: Is Your Service Running the Vulnerable Base64 Intrinsic?"
-date: "2026-01-01"
+date: "2026-11-24"
 description: "Java4Shell (CVE-2026-114938) lives in a HotSpot intrinsic, not a library, so the same jar can be safe on one machine and exploitable on the next. How to tell which one you have, apply the mitigation so it actually takes effect, and confirm the patched runtime."
 authors:
   - "garth-patil"
@@ -8,7 +8,11 @@ image: "java4shell-jvm.jpg"
 categories:
   - "Security"
   - "Java Core"
-related_posts: []
+related_posts:
+  - "java4shell-cve-2026-114938-what-it-is-who-is-affected-and-what-to-do-now"
+  - "which-java-build-are-you-running"
+  - "java-patching-at-incident-speed-lessons-from-the-emudhra-ca-compromise"
+  - "free-java-real-risk-why-unsupported-openjdk-is-now-a-security-gamble"
 ---
 
 Java4Shell (CVE-2026-114938), disclosed on November 17, is an unusual Java vulnerability. There is no
