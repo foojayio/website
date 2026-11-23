@@ -21,25 +21,6 @@ Most teams solve that with three or four stacks. C or C++ on the device for size
 
 Codename One now runs on embedded Linux, and it covers every one of those pieces with one Java or Kotlin codebase. On our benchmark, the UI drew an animated gauge in **18 MB of memory with no GPU**, about a twentieth of what a Chromium kiosk needed to draw the same thing. The headless backend served **379,900 requests per second on two cores, 1.3 times Rust's `axum`**. And we don't charge royalties.
 
-## Coming This Week
-
-Today is the embedded story. Then one post a day:
-
-- **Saturday, November 7:** [Dash: An Endless Runner That Races Through Your City](https://www.codenameone.com/blog/build-an-endless-runner-in-java/). A game template that turns from 2D into 3D mid-run, builds levels from real streets, and lets friends race with voice chat.
-- **Sunday, November 8:** [Pulse: Heart Rate Zones From the Watch to the Trainer's Screen](https://www.codenameone.com/blog/launch-your-own-gym-app/). A gym and studio template built around HealthKit, Health Connect and Bluetooth heart rate straps.
-- **Monday, November 9:** [Real-Time Java: Control Loops the Garbage Collector Never Stops](https://www.codenameone.com/blog/real-time-java-control-loops/). What real time means, why it's hard for a managed language, and how we do it.
-- **Tuesday, November 10:** [Packaging Java Apps for Xbox Developer Mode, and Why Consoles Need Help](https://www.codenameone.com/blog/codename-one-on-xbox/). One build hint today. Shipping to consoles needs help we can't get alone.
-- **Wednesday, November 11:** [Port Your Spring Code With Fewer Edits, and Libraries That Bring Their Own Server](https://www.codenameone.com/blog/cn1libs-with-a-server-side/). Logging, typed JSON, CORS, content negotiation and more of the JDK in the backend, plus cn1libs with a server half.
-- **Thursday, November 12:** [Debug Your Dart in a Java Debugger, and JFX Central on a Phone](https://www.codenameone.com/blog/debug-dart-in-a-java-debugger/). Dart call stacks, Flutter fixes from a real port, a faster web port and a real JavaFX app on an iPhone.
-
-
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/build-an-endless-runner-in-java/"><img width="420" height="908" src="dash-promo-tour-poster-3c4d8552b1.jpg" alt="Dash running in 3D on a neon track" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Dash, mid-run in 3D.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/launch-your-own-gym-app/"><img width="420" height="746" src="pulse-phone-trainer-poster-1a2cdb5139.jpg" alt="Pulse showing live heart rate zones for a class" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Pulse's live class view.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/debug-dart-in-a-java-debugger/"><img width="420" height="913" src="JFXCentral-demo-poster-38b6ea7cac.jpg" alt="JFX Central running on an iPhone" loading="lazy" style="width:100%;height:auto" /></a><figcaption>JFX Central on an iPhone.</figcaption></figure>
-</div>
-
-
 ## Two flavors, two kinds of product
 
 The port comes in two flavors. The easiest way to explain them is with two products.

@@ -83,3 +83,28 @@ dispatches the deploy, so nothing further is needed. A scheduled post shows
 under "Coming soon" on the home page until its day. If one does not appear on
 its date, look at that workflow's run before touching the post: its log says
 whether anything was due.
+
+## 4. Publish the LinkedIn and Reddit posts from Slack
+
+When a post goes live, the deploy writes a text for each platform and posts a
+message in `#foojay-social-posts`. Mastodon and Bluesky are posted
+automatically; **LinkedIn and Reddit have no usable API, so a moderator
+publishes those two by hand** from that message.
+
+For each new post in the channel:
+
+- **LinkedIn:** open the *Open in LinkedIn* link, which opens the Foojay
+  page's composer with the text prefilled. The `@Full Name` author mentions
+  are plain text there; replace each by picking the person from LinkedIn's
+  suggestion list, then publish.
+- **Reddit:** open the *Open in Reddit* link, which opens a prefilled text post
+  in r/foojay (first line is the title). Check it, then submit.
+- **Check the text first.** It was written by a model from the article: fix a
+  wrong claim or tone before publishing, and don't add a hook or hashtags.
+- **Mark it done** with a reaction on the Slack message, so two moderators
+  don't both post it.
+
+If a message says a platform was *not posted*, or no message arrived, run the
+*Retry social posts* workflow with the post's URL. It reposts to every
+platform, so check Mastodon and Bluesky first. A message with a platform
+already *posted* needs nothing from you for that platform.
