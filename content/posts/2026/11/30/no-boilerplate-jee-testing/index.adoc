@@ -296,6 +296,7 @@ static WebArchive deploy() {
 * *Modern Java.* The build targets Java 25 by default. With `-Pserver-docker` it also runs on Java 27, because the server lives in the container.
 * *Maven 3 and Maven 4.*
 * *Modern application servers.* Payara 7 and GlassFish 8, both Jakarta EE 11.
+* *JUnit 5/6 or TestNG* is supported using FlowLogix dependency chains.
 
 == Common objections
 
@@ -312,6 +313,17 @@ Removing boilerplate is the number one motto of https://flowlogix.com[Flow Logix
 ----
 
 You get a Jakarta EE application with a passing integration test, and a place to add your first UI test in a few lines.
+
+=== Example on GitHub
+
+A complete, runnable example  is at https://github.com/flowlogix/test-arq-suite[flowlogix/test-arq-suite] on GitHub.
+It has an extension that checks that only a single deployment is made for the whole suite, and runs a few simple tests.
+It comes in both flavors:
+
+* *JUnit:* the https://github.com/flowlogix/test-arq-suite/tree/main[`main` branch]
+* *TestNG:* the https://github.com/flowlogix/test-arq-suite/tree/TestNG[`TestNG` branch]
+
+Run either one with `mvn verify`. It uses Testcontainers by default.
 
 == About the author
 
