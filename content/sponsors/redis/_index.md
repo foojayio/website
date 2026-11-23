@@ -1,5 +1,6 @@
 ---
 title: "Redis"
+draft: true  # sponsorship expired; remove this line to restore
 tier: "gold"
 tagline: "The world's fastest data platform."
 description: ""

@@ -1,5 +1,6 @@
 ---
 title: "Reo"
+draft: true  # sponsorship expired; remove this line to restore
 tier: "silver"
 tagline: "Revenue Intelligence for Developer Focused Companies"
 description: ""

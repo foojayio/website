@@ -1,5 +1,6 @@
 ---
 title: "CodeRabbit"
+draft: true  # sponsorship expired; remove this line to restore
 tier: "gold"
 tagline: "Cut Code Review Time & Bugs in Half. Instantly."
 description: ""

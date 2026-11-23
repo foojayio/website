@@ -6,4 +6,5 @@ cta: "Get Started!"
 image: "coderabbit.png"
 background: "#EEEEE3"
 sponsor: "coderabbit"
+expiryDate: "2026-11-23"
 ---

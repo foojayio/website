@@ -1,5 +1,6 @@
 ---
 title: "Zencoder"
+draft: true  # sponsorship expired; remove this line to restore
 tier: "silver"
 tagline: "Your Mindful AI Coding Agent"
 description: ""
