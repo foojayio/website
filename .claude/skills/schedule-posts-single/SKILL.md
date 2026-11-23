@@ -177,6 +177,53 @@ already uses. Publishing needs nothing further from you.
 whether a post has come due, and asks `build-deploy.yml` to deploy when one
 has.
 
+### Comment on the pull request
+
+After the push, tell the author with one comment on the PR that delivered the
+draft, holding the scheduled date and their profile link
+`https://foojay.io/today/author/<author-slug>/` (the `/today/author/` pattern
+comes from `hugo.toml` permalinks).
+
+Find the PR first. `gh` may fail inside the sandbox; the number is also in the
+merge commit:
+
+```
+c=$(git log --diff-filter=A --format=%H -- draft/SLUG | tail -1)
+git log --merges --ancestry-path --format='%s' $c..HEAD | tail -1
+```
+
+A "Merge branch ..." subject is not the PR: look the number up in the recent
+`Merge pull request #N from ...` history by branch name. Verify before commenting.
+
+```
+gh pr comment N --repo foojayio/website --body "Thanks NAME! Your article is scheduled for publication on **Thursday 19 November 2026**.
+
+Your author profile: https://foojay.io/today/author/SLUG/"
+```
+
+Also mention here anything you changed beyond the date (generated header,
+replaced `related_posts` slugs, categories added).
+
+For a **new or recent author**, add this paragraph after the profile link:
+
+```
+Please join our Foojay community on Slack if you haven't done this yet. We announce new posts on it once they are published, have chats about all-things-java, and more. https://foojay.io/today/join-slack-com-t-foojay-signup/
+```
+
+New or recent = no published post by them before the one being scheduled, or
+their first post is under 6 months old. Check by author slug, excluding the
+draft itself:
+
+```
+grep -rl --include=index.md --include=index.adoc -E '^\s*-\s*"?SLUG"?\s*$|authors: \[.*"SLUG"' content/posts | sort | head -3
+```
+
+The oldest folder date is their first post. Longstanding authors get no Slack paragraph.
+
+`gh` needs the sandbox disabled (TLS). Take the first name from the author's
+`content/authors/SLUG/_index.md` title. For a co-written post, comment once and
+link every author.
+
 ### Clean up
 
 Delete empty `.claude` directories the tooling left in subfolders, never the one at the repo root:

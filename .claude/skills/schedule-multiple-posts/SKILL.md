@@ -12,7 +12,7 @@ decides the calendar, runs those steps for each draft, then tells the authors.
 ## Ask first, if the request does not say
 
 * Which drafts to leave out (the request usually names them; skip them).
-* Limits: max posts per day, which weekdays are allowed. Defaults: 3 and Mon-Fri.
+* Limits: max posts per day, which weekdays are allowed. Defaults: 4 and Mon-Fri.
   A date the user names explicitly always wins, weekends included (Saturday and
   Sunday posts already exist); the weekday default only applies to dates you choose.
 * Where the schedule starts. Default: the first weekday with a free slot after today.
@@ -23,16 +23,8 @@ For every folder in `draft/` (ignore `README.md` and excluded ones) read the
 frontmatter: `title`, `authors`, `categories`, `image`, `related_posts`.
 Drafts missing `index.md` are not ready: report them, do not schedule them.
 
-Find each draft's pull request. `gh` may fail inside the sandbox; the number is
-also in the merge commit:
-
-```
-c=$(git log --diff-filter=A --format=%H -- draft/SLUG | tail -1)
-git log --merges --ancestry-path --format='%s' $c..HEAD | tail -1
-```
-
-A "Merge branch ..." subject is not the PR: look the number up in the recent
-`Merge pull request #N from ...` history by branch name. Verify before commenting.
+Find each draft's pull request, using the lookup in "Comment on the pull request"
+in `schedule-posts-single`.
 
 ## 2. Build the calendar
 
@@ -96,35 +88,10 @@ commit: `New posts from draft: schedule N posts for <range>`. Commit signing and
 
 ## 6. Comment on each pull request
 
-After the push, one comment per PR, with the scheduled date and the author profile
-link `https://foojay.io/today/author/<author-slug>/` (the `/today/author/` pattern
-comes from `hugo.toml` permalinks):
-
-```
-gh pr comment N --repo foojayio/website --body "Thanks NAME! Your article is scheduled for publication on **Thursday 19 November 2026**.
-
-Your author profile: https://foojay.io/today/author/SLUG/"
-```
-
-For a **new or recent author**, add this paragraph after the profile link:
-
-```
-Please join our Foojay community on Slack if you haven't done this yet. We announce new posts on it once they are published, have chats about all-things-java, and more. https://foojay.io/today/join-slack-com-t-foojay-signup/
-```
-
-New or recent = no published post by them before the ones being scheduled, or
-their first post is under 6 months old. Check by author slug, excluding the
-drafts of this batch:
-
-```
-grep -rl --include=index.md --include=index.adoc -E '^\s*-\s*"?SLUG"?\s*$|authors: \[.*"SLUG"' content/posts | sort | head -3
-```
-
-The oldest folder date is their first post. Longstanding authors get no Slack paragraph.
-
-`gh` needs the sandbox disabled (TLS). Take the first name from the author's
-`content/authors/SLUG/_index.md` title. For a co-written post, comment once and
-link every author.
+After the push, post one comment per PR as described in "Comment on the pull
+request" in `schedule-posts-single` (comment text, new-author Slack paragraph,
+co-written posts). In a batch, exclude the drafts of this batch when checking
+whether an author is new.
 
 ## 7. Report
 
