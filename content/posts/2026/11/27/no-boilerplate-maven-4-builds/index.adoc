@@ -307,7 +307,7 @@ https://basepom.org[BasePOM.org] has been around since 2010, and it is also a go
 
 Here is what the FlowLogix Base POM does differently:
 
-* *FlowLogix keeps the maven build light.* It runs Checkstyle and your tests. It is built with the assumption that CI and cloud services already do the heavy scanning, so the local build does not repeat it. BasePOM.org runs SpotBugs, PMD, dependency analysis and code coverage on every build.
+* *FlowLogix keeps the maven build light.* It runs Checkstyle and your tests. It is built with the assumption that CI and cloud services already do the heavy scanning, so the local build does not repeat it. BasePOM.org runs SpotBugs, dependency analysis and code coverage on every `mvn verify`, and its larger parents add PMD and Checkstyle.
 * *FlowLogix starts with nothing.* Its smallest parent locks versions and does nothing else. Each level above it adds more, up to the parents for Payara, GlassFish and Quarkus. Even the smallest BasePOM.org parent runs checks.
 * *FlowLogix adds new ideas.* The demo directory and compiled javadoc snippets are FlowLogix features. So is Mockito loaded as a Java agent, with nothing for you to set up. BasePOM.org has none of the three.
 * *FlowLogix targets modern Java and Maven.* It defaults to Java 25 and works on Maven 4 today. BasePOM.org starts at Java 17 and targets Maven 3, with Maven 4 support planned.
