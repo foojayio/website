@@ -4,6 +4,7 @@ date: "2026-11-24"
 description: "A preview of CommandBox Docker Images v4, with Java 21 across all bases, FHS-aligned paths, non-root runtime conventions, a BoxLang-backed CLI, smaller images, and faster container startup."
 authors:
   - "luis-majano"
+  - "jon-clausen"
 image: "cover.jpg"
 categories:
   - "Java"
@@ -52,12 +53,11 @@ Runtime paths now follow the FHS: application data lives in `/srv`, and image-ma
 | Purpose | v3 (3.x) | v4 |
 | --- | --- | --- |
 | Application root (`APP_DIR`) | `/app` | `/srv/app` |
-| CommandBox home (`COMMANDBOX_HOME`) | `/usr/local/lib/commandbox` | `/opt/commandbox` |
+| CommandBox home (`COMMANDBOX_HOME`) | `/usr/local/lib/CommandBox` | `/opt/commandbox` |
 | BoxLang home (`BOXLANG_HOME`) | `/usr/local/boxlang` | `/opt/boxlang` |
 | Binaries (`BIN_DIR`) | `/usr/local/bin` | `/opt/bin` |
 | Build scripts (`BUILD_DIR`) | `/usr/local/lib/build` | `/opt/build` |
-| Server home (default) | `$COMMANDBOX_HOME/server` (CommandBox-managed) | `/opt/lib/serverHome` |
-| Generated startup (`STARTUP_DIR`) | `/usr/local/bin` | `/opt/commandbox/run` |
+| Server home (default) | `/usr/local/lib/serverHome` (most builds); `/usr/lib/serverHome` on Alpine | `/opt/lib/serverHome` || Generated startup (`STARTUP_DIR`) | `/usr/local/bin` | `/opt/commandbox/run` |
 
 There are no compatibility aliases for the old paths. Update your volume mounts and any derived-image `COPY`/`WORKDIR` paths before upgrading.  Examples of the differences in simple `docker run` commands are shown below:
 
@@ -66,7 +66,7 @@ There are no compatibility aliases for the old paths. Update your volume mounts 
 docker run -p 8080:8080 -v "/path/to/app:/app" ortussolutions/commandbox
 
 # v4
-docker run -p 8080:8080 -v "/path/to/app:/srv/app" ortussolutions/commandbox
+docker run -p 8080:8080 -v "/path/to/app:/srv/app" ortussolutions/commandbox:boxlang-snapshot 
 ```
 
 ## 2. Runtime user updates: say goodbye to the `$USER` environment variables, and adopt the Docker `USER` convention
@@ -132,7 +132,7 @@ Generated and finalized startup scripts now live in `/opt/commandbox/run` (`STAR
 
 This represents a change from v3 where finalized startup scripts included all of the environment variables as JVM arguments.
 
-If you build finalized or multi-stage images, rebuild them against v4 and copy **both** files when you assemble the final stage. Single-stage users don't need to change anything.
+If you build finalized or multi-stage images, rebuild them against v4 and copy **both** files when you assemble the final stage. In a standalone final stage, source `startup-final.env` before running `startup-final.sh` so the baked server-home metadata is loaded correctly. Single-stage users don't need to change anything.
 
 ## 4. Java 21 is now the only OS JVM/JRE
 
@@ -143,8 +143,10 @@ If you use an engine that needs an older Java, pin it in `server.json`:
 ```json
 {
   "app": {
-    "cfengine": "adobe@2023.0.26+331018",
-    "jvm": { "javaVersion": "17" }
+    "cfengine": "adobe@2023.0.26+331018"
+  },
+  "jvm": {
+    "javaVersion": "17"
   }
 }
 ```
