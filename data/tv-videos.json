@@ -101,6 +101,111 @@
     "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k_YqpG6_Rrq2y48p7UlLkPQMKp1LCJ_5roQV7mVXuF2tQ=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "fSFnxPmCrV4",
+    "channel" : "JetBrainsTV",
+    "title" : "From Design to Shipped: React Meetup | JetBrains, Callstack, Expo, Chromatic",
+    "published" : "2026-11-24T09:08:48+00:00"
+  }, {
+    "id" : "KkNdFy9omTI",
+    "channel" : "hszanowski",
+    "title" : "Gradle 10 Drops Ant. Is Java for IntelliJ Plugins Cooked?",
+    "published" : "2026-11-24T04:37:56+00:00"
+  }, {
+    "id" : "txsovWcrRSM",
+    "channel" : "hszanowski",
+    "title" : "Gradle 10 Drops Ant. Is Java for IntelliJ Plugins Cooked?",
+    "published" : "2026-11-24T04:37:45+00:00"
+  }, {
+    "id" : "PKPii_ZcO6g",
+    "channel" : "NLJUG1",
+    "title" : "From specification to production  engineering in the age of ai",
+    "published" : "2026-11-23T16:34:34+00:00"
+  }, {
+    "id" : "B3todZ0H4x4",
+    "channel" : "NLJUG1",
+    "title" : "Opening",
+    "published" : "2026-11-23T16:34:33+00:00"
+  }, {
+    "id" : "obri3dRCuMI",
+    "channel" : "NLJUG1",
+    "title" : "Java citizens in the world of mainframe",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "v0W6lwncJvQ",
+    "channel" : "NLJUG1",
+    "title" : "Teaching a new dog old tricks  give the agent a debugger",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "wB53dhAs6_U",
+    "channel" : "NLJUG1",
+    "title" : "Context is a budget — spend it wisely",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "jb-y1l9u56Y",
+    "channel" : "NLJUG1",
+    "title" : "Evolving language defaults in kotlin and other languages",
+    "published" : "2026-11-23T16:33:30+00:00"
+  }, {
+    "id" : "iYLSNdRXeDI",
+    "channel" : "NLJUG1",
+    "title" : "Level up your java streams with gatherers",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "isxqCcxaFa0",
+    "channel" : "NLJUG1",
+    "title" : "Hack your brain  smarter learning for devs",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "kYRxM1uoMJc",
+    "channel" : "NLJUG1",
+    "title" : "Back to the future  building a rag powered vr time machine",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "lLdF5B4g_KA",
+    "channel" : "NLJUG1",
+    "title" : "Why am i here",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "nKHE6BimQ6M",
+    "channel" : "NLJUG1",
+    "title" : "6000 tests, 25 times a day, 365 days a year   all for quality v2 720p",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "ZPhTTHGCWTA",
+    "channel" : "NLJUG1",
+    "title" : "How can java applications leverage ahead of  time caching",
+    "published" : "2026-11-23T16:33:26+00:00"
+  }, {
+    "id" : "_PK2Et7Jsy0",
+    "channel" : "NLJUG1",
+    "title" : "Spring cleaning  what boot 4 lets you delete",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "ccDguMjvEeA",
+    "channel" : "NLJUG1",
+    "title" : "How ai lost the thread  the strange path from neurons to llms",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "gKH_3XdWIaI",
+    "channel" : "NLJUG1",
+    "title" : "Modernizing a 2m+ loc java monolith with agentic ai  what worked, what failed, and how we recovered",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "8uTjEPTWi4M",
+    "channel" : "bienadam",
+    "title" : "Episode 6: Skills on a Server, One Prompt, Three Layers #java #llm #bce",
+    "published" : "2026-11-23T16:30:04+00:00"
+  }, {
+    "id" : "EBfUYxwk2-4",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Every Level of AI Coding Explained in 5 Minutes",
+    "published" : "2026-11-23T16:11:23+00:00"
+  }, {
+    "id" : "-rT_zhVNfpY",
+    "channel" : "JetBrainsTV",
+    "title" : "The Dev Floor · Ep 1 – “The Issue With New Hires”",
+    "published" : "2026-11-23T14:05:14+00:00"
+  }, {
     "id" : "PdIPHYCBVOs",
     "channel" : "bienadam",
     "title" : "📺🎙️Architectures, Clouds, Java, Agents, Web, LLMs 👉 153rd airhacks.tv Q & A #live #airhacks",
@@ -656,11 +761,6 @@
     "title" : "Inside Gradle: Build Scans, Flaky Tests, and AI Agents - Stefan Wolf | IntelliJ IDEA Tech Talks",
     "published" : "2026-10-21T15:00:37+00:00"
   }, {
-    "id" : "AHFGMkzrfwM",
-    "channel" : "JetBrainsTV",
-    "title" : "Do You Still Need an IDE If Agents Write Your Code?",
-    "published" : "2026-10-20T11:51:03+00:00"
-  }, {
     "id" : "jXpGFIt7AgQ",
     "channel" : "Kotlin",
     "title" : "Inside Airbnb's UI Motion Architecture | KotlinConfersations",
@@ -680,11 +780,6 @@
     "channel" : "hszanowski",
     "title" : "Give Your JetBrains IDE Some Atmosphere | IDE Atmosphere",
     "published" : "2026-10-19T15:13:38+00:00"
-  }, {
-    "id" : "CrajfBaOdV0",
-    "channel" : "JetBrainsTV",
-    "title" : "Pass the Controller? Communities, Data, and AI in Game Development | GameDev Day 2026",
-    "published" : "2026-10-19T14:47:42+00:00"
   }, {
     "id" : "SmNeCg94LGY",
     "channel" : "jakartaee",
@@ -1211,36 +1306,6 @@
     "title" : "Guus de Wit - Snake in 10 Lines: Learning More by Coding Less",
     "published" : "2026-07-02T12:44:00+00:00"
   }, {
-    "id" : "x9lCCdIxvO8",
-    "channel" : "NLJUG1",
-    "title" : "Venkateshwaran Kumarasamy - Unleashing Java Magic With Databricks: a Developer’s Journey",
-    "published" : "2026-07-02T12:44:00+00:00"
-  }, {
-    "id" : "yvfgWKDe_1Q",
-    "channel" : "NLJUG1",
-    "title" : "Willem Meints - Scaling Code Reviews When You’re Using ai To Write Your Code",
-    "published" : "2026-07-02T12:44:00+00:00"
-  }, {
-    "id" : "bl1rthyJrds",
-    "channel" : "NLJUG1",
-    "title" : "Daniel Garnier-Moiroux - Spring Security: The Good Parts™",
-    "published" : "2026-07-02T12:43:59+00:00"
-  }, {
-    "id" : "l30BJZ7joCI",
-    "channel" : "NLJUG1",
-    "title" : "Holly Cummins - When benchmarks go bad - what I learned from measuring performance wrong",
-    "published" : "2026-07-02T12:43:59+00:00"
-  }, {
-    "id" : "r0UcuAoZHgk",
-    "channel" : "NLJUG1",
-    "title" : "Nicolai Parlog - Java 26: Better Language, Better APIs, Better Runtime",
-    "published" : "2026-07-02T12:43:59+00:00"
-  }, {
-    "id" : "teiR67T_l8c",
-    "channel" : "NLJUG1",
-    "title" : "Alejandro Serrano Mena - Smart Acting: Kotlin’s Hidden Weapon",
-    "published" : "2026-07-02T12:43:59+00:00"
-  }, {
     "id" : "q7SGdxQnMVc",
     "channel" : "FrankDelporte",
     "title" : "From Breadboard Chaos to My First Custom PCB: Testing Java with Raspberry Pi GPIOs and Pi4J",
@@ -1546,5 +1611,5 @@
     "title" : "Volcano Airtour",
     "published" : "2008-12-06T22:37:13+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "M0Wha6RdIPY", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "_pjajf-5eJg", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "3KYWHdHfs5E", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "M0Wha6RdIPY", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "_pjajf-5eJg", "bUIrCAHPFFQ", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "hFQFBLYdeZI", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }
