@@ -1,0 +1,162 @@
+---
+title: "Zero-boilerplate PrimeFaces infinite scroll with cursor pagination, JPA and FlowLogix"
+date: "2026-01-01"
+description: "Add infinite scrolling to a JPA-backed PrimeFaces table with one injected field, then enable cursor pagination with a small configuration."
+authors:
+  - "lenny-primak"
+image: "jpa-cursor-pagination.jpg"
+categories:
+  - "Jakarta EE"
+  - "Databases"
+  - "Tutorials"
+related_posts:
+  - "paging-dto-projections-spring-data-jpa"
+  - "the-12-labours-of-primefaces-15-0-15-release"
+  - "spring-boot-jpa-vs-jdbc"
+---
+
+_This work was sponsored by https://flowlogix.com[Flow Logix]. Generate a ready-to-run Jakarta EE project at https://start.flowlogix.com[start.flowlogix.com]._
+
+Infinite scrolling is easy to recognize in the browser. The work is behind it: loading just the requested rows, counting matches, applying UI sorting and filtering, and keeping row keys working with JPA.
+
+FlowLogix makes that work minimal. In a CDI view bean, inject one `JPALazyDataModel` for your entity:
+
+.CustomerView.java
+[source,java]
+----
+@Inject
+JPALazyDataModel<Customer> customers;
+----
+
+Expose it as a bean property, then use the normal PrimeFaces table:
+
+.customers.xhtml
+[source,xhtml]
+----
+<p:dataTable value="#{customerView.customers}" var="customer"
+             lazy="true" scrollable="true" virtualScroll="true"
+             rows="40" scrollRows="20">
+    <p:column headerText="Name"
+              sortBy="#{customer.name}"
+              filterBy="#{customer.name}">
+        <h:outputText value="#{customer.name}" />
+    </p:column>
+</p:dataTable>
+----
+
+That is the Java-side starting point. CDI derives the entity type from the injection point and supplies the model with the right `EntityManager`. There is no custom `LazyDataModel` subclass, no `EntityManager` plumbing, no count query and no hand-written conversion of PrimeFaces sort and filter metadata into JPA queries. FlowLogix supplies a CDI-injectable, JPA-backed model that handles those pieces for you.
+
+The https://start.flowlogix.com[FlowLogix starter] already includes the data-model dependency, and the FlowLogix BOM supplies its version.
+
+== Keep scrolling fast as the list grows
+
+Ordinary lazy loading often uses offsets. To get a row far down the list, the database may have to walk past all the earlier rows. Cursor pagination asks for rows after the last row the user saw instead.
+
+FlowLogix adds cursor pagination to the same model with a small builder configuration. Here the primary key is the default cursor and tie-breaker, and `name` is also allowed as a sort field:
+
+.UserViewer.java - cursor pagination
+[source,java]
+----
+@PostConstruct
+void initialize() {
+    customers.initialize(builder -> builder
+        .cursor(CursorPagination.create(config -> config
+            .supportedFields(List.of(
+                new CursorPagination.Field<>(() -> "id", Customer::getId),
+                new CursorPagination.Field<>(() -> "name", Customer::getName)
+            ))
+            .build()))
+        .build());
+}
+----
+
+The unique `id` keeps the order stable when multiple customers have the same name. Index the fields you enable for cursor sorting. If the table requests a sort field that is not configured for cursor use, the model falls back to offset pagination.
+
+That combination is the point: cursor pagination, ordinary PrimeFaces sorting and filtering, and JPA row handling all work through the same injected model. It is also serializable for clustered sessions, even when the JPA entities themselves are not.
+
+== What makes FlowLogix model different
+
+Ease of use comes first, and five design choices are behind it:
+
+* **The model is injected, not constructed.** CDI reads the entity type from the injection point and finds the `EntityManager`, so the basic case needs no setup code at all.
+* **Configuration is an annotation, and a lambda only when that is not enough.** Most settings go on the injection point itself: `@LazyModelConfig(caseInsensitive = true)` makes filters case-insensitive, and the same annotation turns on wildcard filters or selects a different `EntityManager`. For anything beyond that, such as cursor pagination or custom filters and sorting, `initialize(builder -> builder...build())` hands you a builder that already knows the entity and the `EntityManager`, so you state only what differs from the defaults. Either way there is no subclass, no service class and no extra method to write.
+* **Entities do not have to be `Serializable`.** The model itself is serializable and survives session replication and failover, but the loaded rows are not part of its serialized state.
+* **Cursor pagination works with the stock `<p:dataTable>`.** It is opt-in per sort field and falls back to offset pagination for any other field.
+* **The implementation is small and simple.** The model does not build its own query machinery. It composes its count and page queries from the composable Criteria API finders in `flowlogix-jee`, and adds only filtering, sorting and the cursor on top. The result is similar in scale to the PrimeFaces stock model but does a lot more: injection, annotation config, cursor pagination and non-serializable entities. It is a fraction of the size of the OptimusFaces and OmniPersistence pair.
+
+== Try it
+
+The https://docs.flowlogix.com/#section-jpa-lazymodel[FlowLogix documentation] includes examples of filtering, sorting, cursor pagination and customization. The https://github.com/flowlogix/flowlogix/blob/main/jee-examples/src/main/java/com/flowlogix/examples/data/UserViewer.java[UserViewer example] shows the Java side, and https://github.com/flowlogix/flowlogix/blob/main/jee-examples/src/main/webapp/view-users.xhtml[view-users.xhtml] shows the PrimeFaces table.
+
+=== Why non-serializable entities matter
+
+Adding `implements Serializable` to an entity is a promise the compiler does not check. Every field has to be serializable too, and so does every object those fields reach: embedded types, related entities, and the collections behind lazy associations.
+
+A broken promise stays hidden for a long time. Nothing fails at compile time, and nothing fails on a developer's machine, because a single server rarely serializes a session at all. The `NotSerializableException` appears only when a session is actually replicated or passivated, which usually means a clustered deployment. That is how the bug gets found in production, during a failover, on the one page whose table held the wrong row.
+
+A model that never serializes its rows removes the whole class of problem. Entities stay plain JPA entities, and the table still works after a failover because the rows are simply loaded again, probably from the cache.
+
+=== Why the builder is a lambda
+
+Most other data models are configured by calling a builder in `@PostConstruct` and keeping the result. PrimeFaces stock model works this way, and so does OptimusFaces:
+
+[source,java]
+----
+@PostConstruct
+void initialize() {
+    customers = JPALazyDataModel.<Customer>builder()
+        .entityClass(Customer.class)
+        .entityManager(() -> entityManager)
+        .rowKeyConverter(customerConverter)
+        .filterEnricher(this::onlyActive)
+        .build();
+}
+----
+
+Everything passed to that builder is stored in the model and serialized with the view, so it is easy to mistakenly include something that is not serializable. It is also evaluated once, in `@PostConstruct`, when some of the state it reads may not exist yet.
+
+FlowLogix takes a lambda instead and calls it itself. What the lambda builds is never serialized, and after a failover the model simply runs the lambda again.
+
+== How it compares
+
+PrimeFaces ships its own `JPALazyDataModel`, and OptimusFaces offers a `PagedDataModel` on top of OmniPersistence. Both are great libraries. They make different trade-offs:
+
+[cols="1,1,1,1"]
+|===
+| |FlowLogix |PrimeFaces `JPALazyDataModel` |OptimusFaces with OmniPersistence
+
+|Getting a model
+|`@Inject`
+|Static builder in `@PostConstruct`, given the entity class and an `EntityManager` supplier
+|`PagedDataModel.lazy(service).build()` in `@PostConstruct`
+
+|Extra classes
+|None
+|None
+|A service extending `BaseEntityService` for each entity, and entities extending `BaseEntity`
+
+|Serializable entities
+|Not required
+|Required whenever the view bean is serialized, because the loaded page is part of the model state
+|Required, because every entity implements the serializable `Identifiable`
+
+|Cursor pagination
+|Yes, per configured field
+|No, offset only
+|Yes, automatic for the next or previous page
+
+|Table tag
+|`<p:dataTable>`
+|`<p:dataTable>`
+|`<op:dataTable>`
+|===
+
+OmniPersistence is a complete persistence layer, with its own base entities, services and criteria types. It detects the JPA provider and the database and carries workarounds for several of them, and the OptimusFaces README lists cases where a filtered row count can be inaccurate as a result. FlowLogix JPALazyDataModel takes the narrower route: it is a data model and nothing more, written against the standard JPA Criteria API with no provider-specific code, so your entities and services stay exactly as they are.
+
+== About the author
+
+Lenny Primak is an open source maintainer, the https://shiro.apache.org[Apache Shiro] PMC Chair, and a contributor to Jakarta EE, Jersey, Weld, Grizzly and Arquillian. Find him on https://github.com/lprimak[GitHub] and https://linkedin.com/in/lprimak[LinkedIn].
+
+His Jakarta EE work is sponsored by https://flowlogix.com[Flow Logix], which builds open source components for Jakarta EE applications. See the projects at https://github.com/flowlogix[github.com/flowlogix].
+
+This work is unpaid. If it was useful to you, you can support it through https://github.com/sponsors/flowlogix[GitHub Sponsors: Flow Logix].
