@@ -198,15 +198,16 @@ Here is what you get:
 
 * *Reproducible builds.* Every archive gets the same fixed timestamp. I built a project twice from clean, and the JAR, the sources JAR and the javadoc JAR had identical checksums both times.
 * *Build checks.* The build stops early if Maven or the JDK is too old, if dependency versions disagree with each other, or if JUnit 4 sneaks in.
-* *Useful compiler settings.* Warnings are shown, deprecated and unchecked code is reported, and parameter names are kept for Jakarta EE and other libraries.
-* *Fast, useful tests.* Unit tests run in parallel and in random order, so tests that depend on each other show up early. Output goes to files, and the console stays quiet.
+* *Useful compiler settings.* Warnings are shown, deprecated and unchecked code is reported, and parameter names are kept for Jakarta EE and other libraries. Annotation processing is turned on, which newer JDKs no longer do on their own, so Lombok and other processors keep working.
+* *Fast, useful tests.* Unit tests run in parallel and in random order, so tests that depend on each other show up early. JUnit's parallel settings come from the POM, so there is no `junit-platform.properties` file to add to each module. Output goes to files, and the console stays quiet.
 * *Integration tests wired in.* Any class named `*IT` runs in the integration test phase, and the build stops if one of them fails.
 * *A demo directory facilitates clean documentation and compiled javadoc snippets.* See below.
+* *JPA static metamodel.* Generated classes such as `Customer_` are picked up as source, so your IDE and javadoc see them. The server POMs add the processor that generates them.
 * *Code style checks.* Checkstyle runs at the start of the build. See below for how to use your own license header.
 * *API compatibility checks.* The build can compare your public API with the last release and fail on a breaking change. This is off until you turn it on.
 * *Code coverage.* JaCoCo combines unit and integration tests across modules, including on application servers. It does nothing until you add the JaCoCo plugin to your project and run with `-Pcoverage`.
 * *Versions of common libraries.* The Jakarta EE API, Lombok, Mockito and ShrinkWrap have versions set. Nothing is added to your project. A version applies only if you declare the dependency yourself.
-* *Releases.* Artifacts are signed, uploaded together at the end, and published with a software bill of materials. None of it runs during a normal build.
+* *Releases.* Artifacts are signed, uploaded together at the end of the build, and published with a software bill of materials. Only the release tag is pushed to git. None of it runs during a normal build.
 
 The https://docs.flowlogix.com/base-pom[Base POM documentation] lists every property and how to change it.
 
@@ -244,7 +245,7 @@ Then point to it from the javadoc of the class it documents:
 public class Greeter {
 ----
 
-The generated documentation shows the two lines of code from the demo. The example in your javadoc is code that compiled and passed a test.
+The generated documentation shows the two lines of code from the demo. The example in your javadoc is code that compiled and passed a test. On JDK 25 and later, it is syntax highlighted as well. Jakarta EE other types in your javadoc link to their own API documentation, for the Jakarta EE version you build with.
 
 Javadoc is kept in a separate profile, so it does not slow down your regular development builds. Run `mvn verify -Pdocs` when you want the documentation built.
 
@@ -261,6 +262,23 @@ Checkstyle is the most opinionated part of the POM. The default header is the Fl
 
 Every source file is then checked against your header. The starter project from https://start.flowlogix.com[start.flowlogix.com] is set up this way.
 
+== Server POMs: Payara, GlassFish and Quarkus
+
+Above `infra-pom` there is one more level, for projects that run on a server.
+
+[source,xml]
+----
+<parent>
+    <groupId>com.flowlogix</groupId>
+    <artifactId>payara-pom</artifactId>
+    <version>150</version>
+</parent>
+----
+
+With `payara-pom` or `glassfish-pom` as the parent, `mvn verify` downloads the server, starts it before the integration tests and stops it when they finish. Arquillian is already set up to deploy to it. There is no server to install. Supports Docker and TestContainers.
+
+`quarkus-pom` is the parent for Quarkus applications. It adds the Quarkus Maven plugin and the Jakarta EE APIs, and `mvn verify -Dnative` builds a native executable.
+
 == What this buys you
 
 Add the pieces together:
@@ -271,6 +289,7 @@ Add the pieces together:
 * Parallel builds, mvnd and the build cache keep it fast.
 * `infra-pom` adds reproducible archives, build checks, releases and tests, with nothing to configure.
 * Demo code is compiled and tested, so the examples in your javadoc cannot go stale.
+* The server POMs download, start and stop Payara or GlassFish for your integration tests, and set up Quarkus builds.
 
 The POM of a project built this way contains its name, its parent and its dependencies. That is all.
 
@@ -281,6 +300,21 @@ Removing boilerplate is the number one motto of https://flowlogix.com[Flow Logix
 ----
 ./mvnw verify
 ----
+
+== How it compares to BasePOM.org
+
+https://basepom.org[BasePOM.org] has been around since 2010, and it is also a good choice. Both projects do the same basic job. They lock plugin versions, check your Maven and JDK, and let you change settings with properties. Each makes its own tradeoffs.
+
+Here is what the FlowLogix Base POM does differently:
+
+* *FlowLogix keeps the maven build light.* It runs Checkstyle and your tests. It is built with the assumption that CI and cloud services already do the heavy scanning, so the local build does not repeat it. BasePOM.org runs SpotBugs, dependency analysis and code coverage on every `mvn verify`, and its larger parents add PMD and Checkstyle.
+* *FlowLogix starts with nothing.* Its smallest parent locks versions and does nothing else. Each level above it adds more, up to the parents for Payara, GlassFish and Quarkus. Even the smallest BasePOM.org parent runs checks.
+* *FlowLogix adds new ideas.* The demo directory and compiled javadoc snippets are FlowLogix features. So is Mockito loaded as a Java agent, with nothing for you to set up. BasePOM.org has none of the three.
+* *FlowLogix targets modern Java and Maven.* It defaults to Java 25 and works on Maven 4 today. BasePOM.org starts at Java 17 and targets Maven 3, with Maven 4 support planned.
+* *FlowLogix is released more often.* A release comes out about once a week, so plugin versions stay fresh. BasePOM.org is released a few times a year.
+* *FlowLogix has a smaller release setup.* It only signs and writes the bill of materials, and leaves the upload to https://github.com/maveniverse/njord[Njord]. BasePOM.org signs and uploads to Maven Central from its release profile.
+
+BasePOM.org gives you more out of the box: more checks, executable JAR packaging and a longer track record. If you want the build itself to enforce everything, it is the better fit. If you want a small, fast build on modern Java and Maven, use the FlowLogix Base POM.
 
 == About the author
 
