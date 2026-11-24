@@ -1,13 +1,13 @@
 ---
 title: "No-Boilerplate, Warning-Free and Reproducible Builds on Maven 4"
-date: "2026-01-01"
+date: "2026-11-27"
 description: "Maven 4 warns when plugin versions are not locked. A base POM fixes that and removes build boilerplate. Here is how, with the FlowLogix one."
 authors:
   - "lenny-primak"
 image: "maven-4-warning-free-builds.jpg"
 categories:
   - "Maven"
-  - "Java"
+  - "Java Core"
   - "Developer Tools"
 related_posts:
   - "beyond-mvn-install-maven-practices"

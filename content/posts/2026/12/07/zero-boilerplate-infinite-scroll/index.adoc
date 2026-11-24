@@ -1,6 +1,6 @@
 ---
 title: "Zero-boilerplate PrimeFaces infinite scroll with cursor pagination, JPA and FlowLogix"
-date: "2026-01-01"
+date: "2026-12-07"
 description: "Add infinite scrolling to a JPA-backed PrimeFaces table with one injected field, then enable cursor pagination with a small configuration."
 authors:
   - "lenny-primak"

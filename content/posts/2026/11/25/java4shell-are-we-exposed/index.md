@@ -1,28 +1,19 @@
 ---
-# Foojay article frontmatter. The folder name (java4shell-are-we-exposed) is the URL slug.
-# Author profile already exists upstream at content/authors/steve-poole/, so it is not part of the PR.
 title: "Java4Shell: Are We Exposed? And What It Tells Us About What's Coming"
-
-# Timely security piece. A maintainer may re-date on publish; a plain future date schedules it for that
-# morning's 07:00 UTC build. No time component (the PR check rejects a time on a future date).
-date: "2026-11-24"
-
+date: "2026-11-25"
 description: "Trace Java4Shell from container image to running host, see where scanners stop, and what it says about AI-scale discovery, EOL, NVD and SBOMs."
-
 authors:
   - "steve-poole"
-
-# Required 16:9 hero image (1600x900, JPEG, under 300 KB). Drop the file in THIS folder as hero.jpg.
-# The Foojay PR check fails without it.
 image: "hero.jpg"
-
-# From Foojay's template/categories.md. "Java" is not an existing category; closest are below.
 categories:
   - "Security"
   - "DevOps"
   - "AI"
-
-related_posts: []
+related_posts:
+  - "log4shell-shows-the-need-for-trustworthy-java"
+  - "the-lifecycle-of-a-security-vulnerability"
+  - "java4shell-jvm-base64-intrinsic"
+  - "what-makes-java-containers-secure"
 ---
 
 Java4Shell went public on 17 November 2026. It's a timely, if unwanted, example of things to come.
