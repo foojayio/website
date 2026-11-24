@@ -29,7 +29,7 @@
   <section class="nf-fallback" id="nf-fallback">
     <h2>Latest articles</h2>
     <div class="post-grid">
-      {{ range first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse }}{{ partial "post-card.html" . }}{{ end }}
+      {{ range first 6 (where site.RegularPages "Section" "posts").ByDate.Reverse }}{{ partial "post-card.html" . }}{{ end }}
     </div>
 
     <h2>Popular topics</h2>
