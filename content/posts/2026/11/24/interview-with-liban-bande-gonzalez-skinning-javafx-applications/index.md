@@ -18,15 +18,11 @@ related_posts:
 
 Most JavaFX developers style their applications with CSS and never look at skins. [Libán Bande González](/authors/liban-bande-gonzalez/) did, and he wrote a book about it: *Skinning JavaFX Applications*. He also built two libraries on top of that knowledge, [Vitra](https://www.jfx-central.com/libraries/vitra) and [Celestia](https://www.jfx-central.com/libraries/celestia). I asked him about the book, the libraries, and building business applications with JavaFX from Cuba.
 
-{{< gallery cols="1" >}}
-cover.jpg | The cover of Skinning JavaFX Applications
-{{< /gallery >}}
-
 ## Who are you?
 
-{{< img src="liban.jpg" alt="Portrait of Libán Bande González" class="alignright" width="240" >}}
-
 My name is [Libán Bande González](https://www.jfx-central.com/people/l.bande-gonzalez) and I live in Cuba. I have a university degree in Computer Science. When I studied, it was a five-year program: programming is taught from the first year. After graduating, I worked in software development (desktop and web applications) and UX/UI design.
+
+{{< img src="liban.jpg" alt="Portrait of Libán Bande González" class="alignright" width="150" >}}
 
 ## What kind of apps do you build, and why JavaFX?
 
@@ -35,6 +31,8 @@ The desktop applications I build are for business management, aimed at small and
 I chose JavaFX because it is a very versatile framework for building graphical interfaces, and because any developer can install and use the framework in an offline environment.
 
 ## What is the book about, and who is it for?
+
+{{< img src="cover.jpg" alt="The cover of Skinning JavaFX Applications" class="alignleft" width="150" >}}
 
 The book is about going beyond CSS in JavaFX. It teaches the Control-Skin architecture and uses it both to restyle existing controls and to build new ones from scratch.
 
@@ -72,8 +70,7 @@ Once readers finish the book, they will be able to create their own controls and
 
 The most laborious chapter, I'd say, was the one on Fluent. The difficulty was writing the code and testing it. At the same time, it's the chapter I'm proudest of, because it brings everything together. It's the decisive chapter that integrates the whole body of knowledge.
 
-{{< gallery cols="1" cols="2" caption="The Fluent materials demo: an Acrylic panel blurring the shapes behind it on the left, Mica and reveal borders on the right" >}}
-fluent-materials-demo.jpg | A JavaFX window with a blurred, translucent Acrylic panel over colored shapes and the word FLUENT, next to a Mica pane with Home, Library and Settings buttons
+{{< gallery cols="2" caption="The Fluent materials demo: an Acrylic panel blurring the shapes behind it on the left, Mica and reveal borders on the right" >}}
 fluent.jpg | A JavaFX application using the Fluent design system
 {{< /gallery >}}
 

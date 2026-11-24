@@ -2938,6 +2938,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   display: grid;
   gap: var(--gallery-gap);
   margin: 1.5rem 0;
+  clear: both;  /* a floated image above must not squeeze the grid beside it */
   /* Each cell is at least its exact 1/cols share, so the grid never exceeds
      --gallery-cols columns; the 180px floor makes auto-fit drop to fewer
      columns on a narrow screen instead of squashing. */
@@ -2947,7 +2948,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose .gallery__item { margin: 0; }
 .prose .gallery__item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 /* One caption for the whole gallery, under the grid rather than in a cell. */
-.prose .gallery__caption { margin-top: 0.6rem; }
+.prose .gallery__caption { grid-column: 1 / -1; margin-top: 0.6rem; }
 .prose figure::after { content: ""; display: block; clear: both; }
 
 /* ---------------------------------------------------------------- search --
