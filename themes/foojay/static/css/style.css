@@ -2948,7 +2948,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose .gallery__item { margin: 0; }
 .prose .gallery__item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 /* One caption for the whole gallery, under the grid rather than in a cell. */
-.prose .gallery__caption { grid-column: 1 / -1; margin-top: 0.6rem; }
+.prose .gallery__caption { grid-column: 1 / -1; margin-top: 0.6rem; font-size: 0.95rem; font-weight: 600; color: var(--ink); }
 .prose figure::after { content: ""; display: block; clear: both; }
 
 /* ---------------------------------------------------------------- search --
