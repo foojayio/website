@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with TornadoVM 8.2.0: SDKMAN!, Maven and JBang"
-date: ""
+date: "2026-12-02"
 description: "TornadoVM 8.2.0 three ways: SDKMAN!, now with a HIP backend for AMD GPUs; Maven Central with no SDK; and one Java file run with JBang."
 authors:
   - "thanos-stratikopoulos"
