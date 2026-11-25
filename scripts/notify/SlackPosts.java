@@ -100,7 +100,7 @@ public class SlackPosts {
             StringBuilder text = new StringBuilder("The following new post just got published:\n*<" + p.link() + "|" + esc(p.title()) + ">*");
             if (!p.authors().isEmpty()) text.append("\nby ").append(esc(p.authors()));
             if (!p.description().isEmpty()) text.append("\n").append(esc(p.description()));
-            send(webhook, dryRun, text.toString());
+            send(webhook, dryRun, text.toString(), true);
         }
     }
 
@@ -125,7 +125,7 @@ public class SlackPosts {
         JsonNode data = reviewData(review + "review.json");
         newAuthors(data).ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
         scheduled(data).ifPresent(n -> text.append("\n\n").append(n));
-        send(webhook, dryRun, text.toString());
+        send(webhook, dryRun, text.toString(), false);
     }
 
     // The week page works out who published a first article; the feed cannot.
@@ -220,12 +220,13 @@ public class SlackPosts {
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
-    static void send(String webhook, boolean dryRun, String text) throws Exception {
+    // Unfurl shows the page's og:image preview; the weekly list would be a wall of cards.
+    static void send(String webhook, boolean dryRun, String text, boolean unfurl) throws Exception {
         if (dryRun) {
             System.out.println("---\n" + text);
             return;
         }
-        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false}";
+        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":" + unfurl + "}";
         HttpResponse<String> r = HttpClient.newHttpClient().send(
                 HttpRequest.newBuilder(URI.create(webhook)).timeout(Duration.ofSeconds(30))
                         .header("Content-Type", "application/json; charset=utf-8")
