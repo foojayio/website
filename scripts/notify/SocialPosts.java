@@ -229,8 +229,10 @@ public class SocialPosts {
                             .append(URLEncoder.encode(text, StandardCharsets.UTF_8).replace("+", "%20")).append("|Open in LinkedIn>");
                 }
                 if (pl.id().equals("reddit")) {
+                    // A LINK post, so Reddit builds the og:image card; `text` fills its optional body.
                     String[] parts = text.split("\\R\\s*\\R", 2);
-                    message.append(" <https://www.reddit.com/r/foojay/submit/?type=TEXT&selftext=true&title=")
+                    message.append(" <https://www.reddit.com/r/foojay/submit/?type=LINK&url=")
+                            .append(encode(p.link())).append("&title=")
                             .append(encode(parts[0].strip())).append("&text=")
                             .append(encode(parts.length > 1 ? parts[1].strip() : "")).append("|Open in Reddit>");
                 }

@@ -97,8 +97,9 @@ For each new post in the channel:
   page's composer with the text prefilled. The `@Full Name` author mentions
   are plain text there; replace each by picking the person from LinkedIn's
   suggestion list, then publish.
-- **Reddit:** open the *Open in Reddit* link, which opens a prefilled text post
-  in r/foojay (first line is the title). Check it, then submit.
+- **Reddit:** open the *Open in Reddit* link, which opens a prefilled link post
+  in r/foojay (title, URL and body text, with the article's image). Check it,
+  then submit.
 - **Check the text first.** It was written by a model from the article: fix a
   wrong claim or tone before publishing, and don't add a hook or hashtags.
 - **Mark it done** with a reaction on the Slack message, so two moderators
