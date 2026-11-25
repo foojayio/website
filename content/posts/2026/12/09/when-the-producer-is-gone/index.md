@@ -1,13 +1,18 @@
 ---
 title: "When the Producer Is Gone: Designing Key Recovery for Asynchronous Java File Exchange"
-date: "2026-01-01"
+date: "2026-12-09"
 description: "How CANIS separates encrypted file storage from key custody so asynchronous Java consumers can recover files after the producer exits."
 authors:
   - "tiago-souza"
 image: "cover.jpg"
 categories:
-  - "Java"
+  - "Java Core"
   - "Security"
+related_posts:
+  - "an-introduction-to-openid-authzen-and-authzen-enforcer"
+  - "eudi-wallets-openid4vp-pac4j"
+  - "openid-federation-with-pac4j-and-cas"
+  - "arcana-pure-java-archive-library"
 ---
 
 *How we separated encrypted files from key custody so a later consumer can recover data without depending on the original producer.*
@@ -58,9 +63,9 @@ Why build this instead of calling an existing KMS directly? The problem represen
 
 The central design decision is to separate the producer application, consumer application, shared storage, and CANIS key service. Each application uses its own instance of the CANIS Java client. The two applications can run at different times; the diagram shows the producer finishing before the consumer begins.
 
-![CANIS asynchronous Java file exchange architecture showing producer encryption, shared storage, and later consumer key recovery](canis-file-exchange.png)
-
-*Figure 1. The client library handles cryptography and service calls inside each Java application. The applications decide when and where to publish or retrieve the envelope.*
+{{< gallery cols="1" >}}
+canis-file-exchange.jpg | The client library handles cryptography and service calls inside each Java application. The applications decide when and where to publish or retrieve the envelope. | Diagram of CANIS: a producer encrypts a file into shared storage and a later consumer recovers the key from the CANIS service
+{{< /gallery >}}
 
 The **producer application** supplies the input and output paths to the Java client. The client retrieves a public key from CANIS, generates a fresh AES file key, encrypts locally with AES-GCM, and wraps that key with RSA-OAEP. It writes a versioned `CANISHYB1` envelope containing the wrapped key, nonce, ciphertext, and authentication tag. The application publishes the completed envelope to shared storage and can then finish its job.
 
