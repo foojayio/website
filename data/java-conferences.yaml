@@ -218,8 +218,8 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8588897
-  longitude: 2.320041
+  latitude: 48.8534951
+  longitude: 2.3483915
   cfp_url: https://devoxxfr2026.cfp.dev/
   cfp_closes: '2026-01-11'
 - slug: devoxx-greece-2026
@@ -999,8 +999,10 @@
   hybrid: false
   city: Paris
   country: France
-  latitude: 48.8588897
-  longitude: 2.320041
+  latitude: 48.8534951
+  longitude: 2.3483915
+  cfp_url: https://devoxxfr2027.cfp.dev/
+  cfp_closes: '2027-01-10'
 - slug: devjvm-2027-2027
   name: DEVJVM 2027
   url: https://devjvm.com/
@@ -1103,6 +1105,8 @@
   country: Spain
   latitude: 39.4697065
   longitude: -0.3763353
+  cfp_url: https://sessionize.com/spring-io-2027/
+  cfp_closes: '2027-02-05'
 - slug: re-build-2027
   name: Re:Build
   url: https://rebuildcon.uk/
@@ -1114,6 +1118,7 @@
   country: United Kingdom
   latitude: 51.5074456
   longitude: -0.1277653
+  cfp_url: https://participate.rebuildcon.uk/apply
 - slug: jax-2027
   name: JAX
   url: https://jax.de/mainz/

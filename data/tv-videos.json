@@ -101,6 +101,26 @@
     "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k_YqpG6_Rrq2y48p7UlLkPQMKp1LCJ_5roQV7mVXuF2tQ=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "DvNxXmwHprM",
+    "channel" : "coffeesoftware",
+    "title" : "JetBrains CEO Kirill Skrygan",
+    "published" : "2026-11-25T01:16:04+00:00"
+  }, {
+    "id" : "u4dEuX9wdV4",
+    "channel" : "bienadam",
+    "title" : "153rd airhacks tv: Writing Code, IntelliJ in VS Code, UC-Driven Dev, LLM-Native BCE #airhacks #live",
+    "published" : "2026-11-24T17:15:54+00:00"
+  }, {
+    "id" : "T_YQSV8P8l4",
+    "channel" : "JetBrainsTV",
+    "title" : "Python 2026: AI Rant, $6M YouTube, Junior Dev Jobs & Is the CS Degree Over? — Tech With Tim Explains",
+    "published" : "2026-11-24T15:00:08+00:00"
+  }, {
+    "id" : "OXk3r95m4nI",
+    "channel" : "cbrjar",
+    "title" : "Face Recognition in Java: Python, ONNX and GPU in One App",
+    "published" : "2026-11-24T14:33:25+00:00"
+  }, {
     "id" : "fSFnxPmCrV4",
     "channel" : "JetBrainsTV",
     "title" : "From Design to Shipped: React Meetup | JetBrains, Callstack, Expo, Chromatic",
@@ -198,7 +218,7 @@
   }, {
     "id" : "EBfUYxwk2-4",
     "channel" : "JetBrainsWDYT",
-    "title" : "Every Level of AI Coding Explained in 5 Minutes",
+    "title" : "We Asked Developers How Much Work AI Agents Do | Survey Results",
     "published" : "2026-11-23T16:11:23+00:00"
   }, {
     "id" : "-rT_zhVNfpY",
@@ -725,11 +745,6 @@
     "channel" : "FrankDelporte",
     "title" : "Click Any Note and Fly Through the Score in 3D: Sheet Music and LilyPond in Java (Sheetmusic4J)",
     "published" : "2026-10-22T14:27:04+00:00"
-  }, {
-    "id" : "tRWMbwnl1ec",
-    "channel" : "JetBrainsTV",
-    "title" : "Air Governance: Manage AI Agents, Access, and Spend Throughout Your Organization",
-    "published" : "2026-10-22T12:28:14+00:00"
   }, {
     "id" : "eKgy_1bdoRk",
     "channel" : "hszanowski",
@@ -1611,5 +1626,5 @@
     "title" : "Volcano Airtour",
     "published" : "2008-12-06T22:37:13+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "3KYWHdHfs5E", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "FDjIcUdpT8U", "FdulTWCQfTQ", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "M0Wha6RdIPY", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "Zvv5pu2OeZA", "_pjajf-5eJg", "bUIrCAHPFFQ", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "hFQFBLYdeZI", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "2udyOpSIOpw", "3AyOI_DjymM", "3KYWHdHfs5E", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4RFBnffdqTk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "EZqaeauSSYw", "FDjIcUdpT8U", "FdulTWCQfTQ", "GWtUXkUXezY", "H5-JUndlPW8", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "M0Wha6RdIPY", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "OAaOcs4rC1s", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "X_Z2sYRtEQw", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "YljdZUBvs9Y", "Zvv5pu2OeZA", "_pjajf-5eJg", "bUIrCAHPFFQ", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fKYWemlL9rc", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "hFQFBLYdeZI", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "mIAmR7iGAKA", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "pXPywSj7pdI", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
 }

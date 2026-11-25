@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-24T11:06:41Z",
+  "generatedAt" : "2026-11-25T09:56:45Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -30,14 +30,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG Meetup at Metafactory",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048407/",
-      "startTime" : "2026-11-24T18:00:00+01:00",
-      "endTime" : "2026-11-24T21:00:00+01:00",
-      "venue" : "MetaFactory BV",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
       "title" : "Amsterdam JUG Meetup at ABN AMRO",
       "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317451849/",
       "startTime" : "2026-12-03T18:00:00+01:00",
@@ -241,14 +233,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-bb/",
     "events" : [ {
-      "title" : "Thoughts on (Modern?) Software Development - Observations From a 22-Year Journey",
-      "url" : "https://www.meetup.com/jug-bb/events/317282165/",
-      "startTime" : "2026-11-24T18:00:00+01:00",
-      "endTime" : "2026-11-24T21:00:00+01:00",
-      "venue" : "adesso SE",
-      "city" : "Berlin",
-      "online" : false
-    }, {
       "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
       "url" : "https://www.meetup.com/jug-bb/events/316084512/",
       "startTime" : "2026-12-01T18:30:00+01:00",
@@ -317,6 +301,14 @@
       "url" : "https://www.meetup.com/jug-bb/events/kvnqltykclbfb/",
       "startTime" : "2027-08-03T18:30:00+02:00",
       "endTime" : "2027-08-03T21:00:00+02:00",
+      "venue" : "Da Vinci",
+      "city" : "Berlin",
+      "online" : false
+    }, {
+      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+      "url" : "https://www.meetup.com/jug-bb/events/kvnqltykcmbkb/",
+      "startTime" : "2027-09-07T18:30:00+02:00",
+      "endTime" : "2027-09-07T21:00:00+02:00",
       "venue" : "Da Vinci",
       "city" : "Berlin",
       "online" : false
@@ -480,14 +472,6 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcqbhc/",
-      "startTime" : "2026-12-25T19:00:00+01:00",
-      "endTime" : "2027-01-01T22:00:00+01:00",
-      "venue" : "Pizza Unica",
-      "city" : "Hannover",
-      "online" : false
-    }, {
-      "title" : "Java Stammtisch",
       "url" : "https://www.meetup.com/java-user-group-hannover/events/317202138/",
       "startTime" : "2027-01-29T19:00:00+01:00",
       "endTime" : "2027-02-05T22:00:00+01:00",
@@ -547,6 +531,14 @@
       "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykclbkc/",
       "startTime" : "2027-08-27T19:00:00+02:00",
       "endTime" : "2027-09-03T22:00:00+02:00",
+      "venue" : "Pizza Unica",
+      "city" : "Hannover",
+      "online" : false
+    }, {
+      "title" : "Java Stammtisch",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcmbgc/",
+      "startTime" : "2027-09-24T19:00:00+02:00",
+      "endTime" : "2027-10-01T22:00:00+02:00",
       "venue" : "Pizza Unica",
       "city" : "Hannover",
       "online" : false
