@@ -1,6 +1,6 @@
 ---
 title: "Spring Boot 4.2 Is Out. What Will Change If You Just Bump the Version?"
-date: "2026-11-30"
+date: "2026-12-01"
 description: "What can break when you move from Spring Boot 4.1 to 4.2: AMQP starters, forwarded headers, and Paketo images, plus RestTemplate and OTLP changes."
 authors:
   - "mikhail-polivakha"
