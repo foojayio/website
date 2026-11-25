@@ -45,6 +45,16 @@
          partials/paginator.html, the same definition baseof.html uses for the
          canonical. */}}
     {{ $pager := partial "paginator.html" . }}
+    {{ $podcasts := partial "podcast-episodes.html" $written }}
+    {{ if $written }}
+    <div class="sponsor-stats">
+      <a class="sponsor-stat" href="#articles"><strong>{{ lang.FormatNumberCustom 0 (len $written) }}</strong><span>Article{{ if ne (len $written) 1 }}s{{ end }}</span></a>
+      {{ with len $podcasts }}<a class="sponsor-stat" href="#podcasts"><strong>{{ . }}</strong><span>Podcast{{ if ne . 1 }}s{{ end }}</span></a>{{ end }}
+      {{ with partial "views-total.html" $written }}<div class="sponsor-stat"><strong>{{ lang.FormatNumberCustom 0 . }}</strong><span>Views</span></div>{{ end }}
+      {{ $cats := slice }}{{ range $written }}{{ $cats = $cats | append .Params.categories }}{{ end }}
+      {{ with len ($cats | uniq) }}<div class="sponsor-stat"><strong>{{ . }}</strong><span>Topic{{ if ne . 1 }}s{{ end }}</span></div>{{ end }}
+    </div>
+    {{ end }}
     <div class="section-head">
       {{/* id + the pager's `anchor` below: paging returns the reader to the
            grid rather than to the top of the profile. */}}
@@ -67,6 +77,10 @@
       {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
     </div>
     {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" "articles") }}
+    {{ end }}
+    {{ if and $podcasts (not .Paginator.HasPrev) }}
+    <div class="section-head section-head--spaced"><h2 id="podcasts">{{ len $podcasts }} podcast episode{{ if ne (len $podcasts) 1 }}s{{ end }}</h2></div>
+    {{ partial "post-grid-more.html" $podcasts }}
     {{ end }}
   </div>
   {{ partial "sidebar.html" . }}

@@ -42,8 +42,11 @@
 {{ if .Content }}{{ $sections = $sections | append (dict "id" "about" "label" (printf "About %s" .Title)) }}{{ end }}
 {{ if $topics }}{{ $sections = $sections | append (dict "id" "topics" "label" "Topics covered") }}{{ end }}
 {{ $sections = $sections | append (dict "id" "articles" "label" (printf "Articles from %s" .Title)) }}
+{{ if $podcasts }}{{ $sections = $sections | append (dict "id" "podcasts" "label" "Podcast episodes") }}{{ end }}
+{{ if and $posts $authorEntries }}{{ $sections = $sections | append (dict "id" "authors" "label" "Authors") }}{{ end }}
 {{ $about := index (where $sections "id" "about") 0 | default dict }}
 {{ $topicsSec := index (where $sections "id" "topics") 0 | default dict }}
+{{ $podcastsSec := index (where $sections "id" "podcasts") 0 | default dict }}
 {{ $articlesSec := index (where $sections "id" "articles") 0 | default dict }}
 
 <div class="layout-with-sidebar">
@@ -85,11 +88,12 @@
 
     {{ if $posts }}
     <div class="sponsor-stats">
-      <div class="sponsor-stat"><strong>{{ len $posts }}</strong><span>Article{{ if ne (len $posts) 1 }}s{{ end }}</span></div>
-      {{ with len $podcasts }}<div class="sponsor-stat"><strong>{{ . }}</strong><span>Podcast{{ if ne . 1 }}s{{ end }}</span></div>{{ end }}
+      <a class="sponsor-stat" href="#{{ $articlesSec.id }}"><strong>{{ len $posts }}</strong><span>Article{{ if ne (len $posts) 1 }}s{{ end }}</span></a>
+      {{ with len $podcasts }}<a class="sponsor-stat" href="#{{ $podcastsSec.id }}"><strong>{{ . }}</strong><span>Podcast{{ if ne . 1 }}s{{ end }}</span></a>{{ end }}
       {{/* Everyone credited, departed colleagues included -- their earlier articles are
            still in the count beside this one, so excluding them would not add up. */}}
-      <div class="sponsor-stat"><strong>{{ len $authorEntries }}</strong><span>Author{{ if ne (len $authorEntries) 1 }}s{{ end }}</span></div>
+      <a class="sponsor-stat" href="#authors"><strong>{{ len $authorEntries }}</strong><span>Author{{ if ne (len $authorEntries) 1 }}s{{ end }}</span></a>
+      {{ with partial "views-total.html" $posts }}<div class="sponsor-stat"><strong>{{ lang.FormatNumberCustom 0 . }}</strong><span>Views</span></div>{{ end }}
     </div>
     {{ end }}
 
@@ -160,9 +164,6 @@
         {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
       </div>
       {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" $articlesSec.id) }}
-      <p class="sponsor-authors-note">
-        All articles by {{ $names }}.
-      </p>
       {{ else if $named }}
       {{/* AUTHORS BUT NO ARTICLES YET -- a new sponsor, which is exactly when
            someone checks the page. The profiles already exist, so naming them
@@ -176,6 +177,28 @@
       <p>No articles are linked to this sponsor yet.</p>
       {{ end }}
     </section>
+
+    {{ with $podcasts }}
+    <section class="sponsor-section">
+      <h2 id="{{ $podcastsSec.id }}">{{ $podcastsSec.label }}</h2>
+      {{ partial "post-grid-more.html" . }}
+    </section>
+    {{ end }}
+
+    {{ if and $posts $named }}
+    <section class="sponsor-section">
+      <h2 id="authors">Authors</h2>
+      {{ $cards := slice }}
+      {{ range sort $named "key" }}{{ $cards = $cards | append . }}{{ end }}
+      <div class="author-grid">{{ range first 4 $cards }}{{ template "author-tile" . }}{{ end }}</div>
+      {{ with after 4 $cards }}
+      <details class="grid-more">
+        <summary>Show {{ len . }} more</summary>
+        <div class="author-grid">{{ range . }}{{ template "author-tile" . }}{{ end }}</div>
+      </details>
+      {{ end }}
+    </section>
+    {{ end }}
 
     <section class="sponsors-cta">
       <h2>Want your company featured here?</h2>
@@ -214,4 +237,16 @@
     {{ partial "sidebar-sponsors.html" . }}
   </aside>
 </div>
+{{ end }}
+
+{{ define "author-tile" }}
+{{- $page := .page -}}
+{{- if $page -}}
+<a class="author-card" href="{{ $page.RelPermalink }}">
+  {{ with $page.Params.avatar }}<img src="{{ partial "resource-url.html" (dict "page" $page "src" .) }}" alt="" loading="lazy">{{ end }}
+  <span>{{ $page.Title }}</span>
+</a>
+{{- else -}}
+<span class="author-card sponsor-authors-note__missing" title="No author page found for &quot;{{ .slug }}&quot;"><span>{{ .slug }}</span></span>
+{{- end -}}
 {{ end }}
