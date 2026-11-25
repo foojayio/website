@@ -1,23 +1,25 @@
 ---
 title: "A Modern Java Developer's Guide for Google Cloud Databases"
-date: "2026-01-01"
+date: "2026-12-02"
 description: "A practical guide for modern Java developers working with Google Cloud databases: AlloyDB, Cloud SQL, Spanner, and Firestore."
 authors:
   - "alexis-moussine-pouchkine"
 image: "part1.jpg"
 categories:
-  - "Java"
+  - "Java Core"
   - "Cloud"
   - "Databases"
-related_posts: []
+related_posts:
+  - "optimizing-distributed-joins-the-case-of-google-cloud-spanner-and-datastax-astra-db"
+  - "sql-best-practices-every-java-engineer-must-know"
+  - "one-database-two-models-mysql-json-duality-views-java"
+  - "cloud-agnostic-microservices-with-halyx"
 canonical: "https://medium.com/google-cloud/a-modern-java-developers-guide-for-google-cloud-databases-22e6c8b2f8d3"
 ---
 
 As a Java developer I’ve learned to rely on JDBC, on the efficiency of connection pools, and on my favorite ORM or frameworks (Spring, Quarkus, or Micronaut). These are stable, predictable technologies that I can count on for building enterprise apps.
 
 This short intro and upcoming detailed posts are meant to serve as a guide for **Java developers in their Google Cloud Database journey**, including when moving from conventional on-premises databases to a cloud-native approach. We’ll cover configuration, security, performance, monitoring, and overall developer experience.
-
-![Diagram titled "A Modern Java Developer's Compass for Google Cloud Databases", illustrating how a Java developer's stack (JDBC, HikariCP connection pools, and ORMs/frameworks like Spring) connects to AlloyDB, Cloud Spanner, Firestore, and Cloud SQL with purpose-built connectors, architectural patterns, and cloud-native mTLS and IAM security.](part1.jpg)
 
 ## Google Cloud Databases for Java Developers
 
@@ -50,7 +52,9 @@ Upcoming Java-focused blogs here will cover:
 * **Cloud SQL** (focusing on **MySQL** though the same connector patterns apply to PostgreSQL and SQL Server)
 * **Spanner** and **Firestore** (focusing on their native Google Cloud APIs).
 
-![Overview sketchnote titled "A Java Developer's Tour of Google Cloud Databases (Parts 1–11)", mapping out all 11 parts of the series across AlloyDB (Parts 2–4), Cloud SQL (Parts 5–6), Spanner (Part 7), Firestore (Part 8), AlloyDB AI and MCP Toolbox (Parts 9–10), and the Architect's Cheat Sheet (Part 11).](collage.jpg)
+{{< gallery cols="1" >}}
+collage.jpg | A Java Developer's Tour of Google Cloud Databases, parts 1 to 11 | Sketchnote mapping the 11 parts of the series across AlloyDB, Cloud SQL, Spanner, Firestore, AlloyDB AI, MCP Toolbox and the cheat sheet
+{{< /gallery >}}
 
 We’ll use **Spring Boot** as the primary framework but also show how these building blocks apply to **Quarkus and Micronaut** developers.
 
