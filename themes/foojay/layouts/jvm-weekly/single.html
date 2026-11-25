@@ -51,10 +51,19 @@
        here), and `index` on a nil key is a build ERROR, not an empty value. */}}
   {{ $main := "" }}
   {{ with .main }}{{ $main = index $index . }}{{ end }}
+  {{ $t := time .date }}
+  {{/* Same day card and row as /today/coming-soon/. */}}
+  <section class="coming-soon-day" aria-label="{{ $t.Format "2 January 2006" }}">
+    <time class="coming-soon-strip__day coming-soon-day__card" datetime="{{ .date }}" aria-hidden="true">
+      <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+      <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+      <span class="coming-soon-strip__month">{{ $t.Format "Jan 2006" }}</span>
+    </time>
+    <div class="coming-soon-day__list">
   <article class="review-edition">
 
     <header class="review-edition__head">
-      <time datetime="{{ .date }}">{{ (time .date).Format "2 January 2006" }}</time>
+      <time datetime="{{ .date }}">{{ $t.Format "2 January 2006" }}</time>
       {{ with .volume }}<span class="review-edition__vol">JVM Weekly vol. {{ . }}</span>{{ end }}
     </header>
 
@@ -115,6 +124,8 @@
       <a href="{{ .url }}" target="_blank" rel="noopener">Read the full edition on JVM Weekly</a>
     </p>
   </article>
+    </div>
+  </section>
   {{ end }}
 
   {{ if not $editions }}

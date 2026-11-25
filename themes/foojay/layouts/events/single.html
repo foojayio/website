@@ -104,15 +104,22 @@
                between those rather than through empty ones. */}}
           <section class="cal-month" data-month="{{ $mk }}">
             <h2 class="cal-month__head">{{ index $monthLabels $mk }}</h2>
-            <ul class="cal-month__list">
-              {{ range $e := (where $events "monthKey" $mk) }}
-                {{/* The colour goes on the ROW, not only on the dot, so the
-                     type pill on a conference row can use it too. */}}
+            {{/* One row per day with the same day card as /today/coming-soon/. */}}
+            {{ $monthEvents := where $events "monthKey" $mk }}
+            {{ $days := slice }}
+            {{ range $monthEvents }}{{ if not (in $days .date) }}{{ $days = $days | append .date }}{{ end }}{{ end }}
+            {{ range $d := $days }}
+            {{ $day := where $monthEvents "date" $d }}
+            {{ $first := index $day 0 }}
+            <section class="coming-soon-day">
+              <span class="coming-soon-strip__day coming-soon-day__card" aria-hidden="true">
+                <span class="coming-soon-strip__dow">{{ $first.weekday }}</span>
+                <span class="coming-soon-strip__num">{{ $first.day }}</span>
+                <span class="coming-soon-strip__month">{{ dateFormat "Jan" $d }}</span>
+              </span>
+              <ul class="coming-soon-day__list cal-month__list">
+              {{ range $e := $day }}
                 <li class="cal-row{{ if ne $e.kind "meetup" }} cal-row--event{{ end }}" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)">
-                  <div class="cal-row__date">
-                    <span class="cal-row__day">{{ $e.day }}</span>
-                    <span class="cal-row__weekday">{{ $e.weekday }}</span>
-                  </div>
                   <div class="cal-row__body">
                     {{/* Not every feed carries a URL -- a Google Calendar
                          entry has no event page to link to -- so the title is
@@ -142,7 +149,9 @@
                   </div>
                 </li>
               {{ end }}
-            </ul>
+              </ul>
+            </section>
+            {{ end }}
           </section>
         {{ end }}
       </div>

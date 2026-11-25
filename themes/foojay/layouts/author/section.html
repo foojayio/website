@@ -27,12 +27,20 @@
     {{ end }}
     {{ if and $upcoming (not .Paginator.HasPrev) }}
     <div class="section-head"><h2>Coming soon</h2></div>
-    <div class="coming-soon-day__list author-upcoming">
-      {{ range $upcoming }}
-      <div>
-        <p class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "2 January 2006" }}</time></p>
-        {{ partial "scheduled-card.html" . }}
-      </div>
+    <div class="author-upcoming">
+      {{ range $d := (apply $upcoming "index" "." "date" | uniq) }}
+      {{ $day := where $upcoming "date" $d }}
+      {{ $t := time.AsTime (printf "%sT00:00:00Z" $d) }}
+      <section class="coming-soon-day" aria-label="{{ $t.Format "Monday, 2 January 2006" }}">
+        <span class="coming-soon-strip__day coming-soon-day__card" aria-hidden="true">
+          <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+          <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+          <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
+        </span>
+        <div class="coming-soon-day__list">
+          {{ range $day }}{{ partial "scheduled-card.html" . }}{{ end }}
+        </div>
+      </section>
       {{ end }}
     </div>
     {{ end }}

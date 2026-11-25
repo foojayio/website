@@ -25,9 +25,21 @@
 
   <section class="week-review__section">
     <h2>Published this week</h2>
-    <div class="week-review__posts">
-      {{ range $posts }}{{ partial "post-card.html" . }}{{ else }}<p>Nothing was published this week.</p>{{ end }}
-    </div>
+    {{/* One row per day that has posts, with the /today/coming-soon/ day card. */}}
+    {{ range $posts.GroupByDate "2006-01-02" }}
+    {{ $t := time.AsTime (printf "%sT00:00:00Z" .Key) }}
+    <section class="coming-soon-day" aria-label="{{ $t.Format "Monday, 2 January 2006" }}">
+      <span class="coming-soon-strip__day coming-soon-day__card" aria-hidden="true">
+        <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+        <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+        <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
+        <span class="coming-soon-strip__count">{{ len .Pages }} {{ cond (eq (len .Pages) 1) "post" "posts" }}</span>
+      </span>
+      <div class="coming-soon-day__list week-review__posts">
+        {{ range .Pages }}{{ partial "post-card.html" . }}{{ end }}
+      </div>
+    </section>
+    {{ else }}<p>Nothing was published this week.</p>{{ end }}
   </section>
 
   {{ partial "week-review-pager.html" (dict "page" $page "position" "bottom") }}

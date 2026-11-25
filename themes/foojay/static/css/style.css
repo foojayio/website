@@ -1867,7 +1867,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-nav__btn:disabled { opacity: .35; cursor: default; }
 .cal-nav__label {
   font-family: var(--font-body); font-size: 1.05rem; font-weight: 700; color: var(--ink);
-  min-width: 10.5ch; text-align: center;
+  width: 16ch; flex: none; text-align: center; white-space: nowrap;
 }
 .cal-nav__today { margin-left: .35rem; cursor: pointer; }
 
@@ -1970,17 +1970,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   padding-bottom: .5rem; border-bottom: 1px solid var(--border);
 }
 .cal-month__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.cal-month .coming-soon-day + .coming-soon-day { margin-top: 1rem; }
+.cal-month .coming-soon-day__list { gap: .6rem; }
+/* Stick below the sticky toolbar, not under it. */
+.cal-month .coming-soon-day__card { top: calc(var(--header-h) + 4.75rem); }
 .cal-row {
-  display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1rem; align-items: center;
   padding: .8rem .95rem; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius);
 }
-.cal-row__date { text-align: center; line-height: 1.1; }
-.cal-row__day {
-  display: block; font-family: var(--font-display); font-size: 1.45rem; font-weight: 800;
-  color: var(--ink); font-variant-numeric: tabular-nums;
-}
-.cal-row__weekday { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
 .cal-row__title { font-family: var(--font-display); font-weight: 700; color: var(--ink); }
 .cal-row__title:hover { color: var(--brand-accent-strong); }
 .cal-row__meta {
@@ -4603,6 +4600,7 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 /* /today/week-review/ */
 .week-review__section + .week-review__section { margin-top: 2.25rem; }
 .week-review__posts { display: grid; gap: 1.25rem; }
+.week-review__section .coming-soon-day + .coming-soon-day { margin-top: 1.5rem; }
 .week-review__posts .post-card {
   display: grid; grid-template-columns: 9rem 1fr; column-gap: 1rem; row-gap: .3rem;
   align-items: start; grid-auto-flow: row;
@@ -4713,3 +4711,6 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .inline-more[open] summary { display: none; }
 .inline-more[open]::before { content: ", "; }
 .section-head--spaced { margin-top: 3rem; }
+
+/* /month-overview/ reuses the coming-soon row; the edition panel is its own card. */
+.coming-soon-day__list .review-edition { margin: 0; }
