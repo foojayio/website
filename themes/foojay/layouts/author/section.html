@@ -53,6 +53,8 @@
       {{ with partial "views-total.html" $written }}<div class="sponsor-stat"><strong>{{ lang.FormatNumberCustom 0 . }}</strong><span>Views</span></div>{{ end }}
       {{ $cats := slice }}{{ range $written }}{{ $cats = $cats | append .Params.categories }}{{ end }}
       {{ with len ($cats | uniq) }}<div class="sponsor-stat"><strong>{{ . }}</strong><span>Topic{{ if ne . 1 }}s{{ end }}</span></div>{{ end }}
+      {{/* Fills the slot Podcasts leaves empty, so the row is always four. */}}
+      {{ if not $podcasts }}<div class="sponsor-stat"><strong>{{ (index $written (sub (len $written) 1)).Date.Format "2006" }}</strong><span>Writing since</span></div>{{ end }}
     </div>
     {{ end }}
     <div class="section-head">
