@@ -100,8 +100,26 @@ public class SlackPosts {
             StringBuilder text = new StringBuilder("The following new post just got published:\n*<" + p.link() + "|" + esc(p.title()) + ">*");
             if (!p.authors().isEmpty()) text.append("\nby ").append(esc(p.authors()));
             if (!p.description().isEmpty()) text.append("\n").append(esc(p.description()));
-            send(webhook, dryRun, text.toString(), true);
+            send(webhook, dryRun, text.toString(), dryRun ? null : ogImage(p.link()));
         }
+    }
+
+    // Slack's own unfurl never fired for webhook posts, so the preview is an explicit image block.
+    static String ogImage(String page) {
+        for (int i = 0; i < 3; i++) {
+            try {
+                HttpResponse<String> r = HttpClient.newHttpClient().send(
+                        HttpRequest.newBuilder(URI.create(page)).timeout(Duration.ofSeconds(20)).build(),
+                        HttpResponse.BodyHandlers.ofString());
+                var m = java.util.regex.Pattern
+                        .compile("<meta property=\"og:image\" content=\"([^\"]+)\"").matcher(r.body());
+                if (r.statusCode() == 200 && m.find()) return m.group(1);
+                Thread.sleep(5000);
+            } catch (Exception e) {
+                System.out.println("og:image lookup failed for " + page + ": " + e);
+            }
+        }
+        return null;
     }
 
     static void announceWeekly(String webhook, boolean dryRun, String feed) throws Exception {
@@ -125,7 +143,7 @@ public class SlackPosts {
         JsonNode data = reviewData(review + "review.json");
         newAuthors(data).ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
         scheduled(data).ifPresent(n -> text.append("\n\n").append(n));
-        send(webhook, dryRun, text.toString(), false);
+        send(webhook, dryRun, text.toString(), null);
     }
 
     // The week page works out who published a first article; the feed cannot.
@@ -220,13 +238,15 @@ public class SlackPosts {
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
-    // Unfurl shows the page's og:image preview; the weekly list would be a wall of cards.
-    static void send(String webhook, boolean dryRun, String text, boolean unfurl) throws Exception {
+    // imageUrl is null for the weekly list, which would otherwise be a wall of cards.
+    static void send(String webhook, boolean dryRun, String text, String imageUrl) throws Exception {
         if (dryRun) {
             System.out.println("---\n" + text);
             return;
         }
-        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":" + unfurl + "}";
+        String blocks = imageUrl == null ? "" : ",\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":"
+                + json(text) + "}},{\"type\":\"image\",\"image_url\":" + json(imageUrl) + ",\"alt_text\":\"Cover image\"}]";
+        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false" + blocks + "}";
         HttpResponse<String> r = HttpClient.newHttpClient().send(
                 HttpRequest.newBuilder(URI.create(webhook)).timeout(Duration.ofSeconds(30))
                         .header("Content-Type", "application/json; charset=utf-8")
