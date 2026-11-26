@@ -31,16 +31,24 @@ Start with an inventory. Most organisations run more Java versions than they thi
 # the Java on the PATH (prints version and vendor)
 java -version
 
-# every running JVM, then the exact version of one of them
+# every JVM your user can attach to, then the exact version of one of them
 jcmd -l
 jcmd <pid> VM.version
+
+# every Java process on the host, whoever owns it (includes containers' processes)
+ps -eo pid,user,args | grep '[j]ava'
+
+# vendor and runtime name, when the version banner does not name the vendor
+java -XshowSettings:properties -version 2>&1 | grep -E 'java\.(vendor|runtime\.name) ='
 
 # installed runtimes on Debian/Ubuntu and RHEL-family systems
 update-alternatives --list java
 rpm -qa | grep -i -E 'openjdk|java'
 ```
 
-The vendor line in the `java -version` output matters as much as the number: "Temurin", "Corretto", "Zulu", "Red_Hat", "Microsoft" or "Oracle Corporation" tells you which column of the support table below applies.
+The vendor line in the `java -version` output matters as much as the number: "Temurin", "Corretto", "Zulu", "Red_Hat", "Microsoft" or "Oracle Corporation" tells you which column of the support table below applies. Some builds do not name the vendor in that output. An Oracle JDK prints "Java(TM) SE Runtime Environment" and Oracle's OpenJDK build prints "OpenJDK Runtime Environment", and both report `java.vendor` as "Oracle Corporation", so read the runtime name as well as the vendor property.
+
+`jcmd` only lists JVMs it can attach to: those running as the same user, and not those inside containers. On a container host, use the process list as well, then check each image with the commands below.
 
 ### In container images
 
@@ -56,6 +64,9 @@ syft <image> | grep -i -E 'jdk|jre|java'
 
 # list the images running in a Kubernetes cluster, to feed the commands above
 kubectl get pods -A -o jsonpath='{range .items[*].spec.containers[*]}{.image}{"\n"}{end}' | sort -u
+
+# the same for init containers, which is also where sidecar containers are declared
+kubectl get pods -A -o jsonpath='{range .items[*].spec.initContainers[*]}{.image}{"\n"}{end}' | sort -u
 ```
 
 ### In the build
@@ -96,7 +107,7 @@ The vendors use similar words for different things. The main split is between fr
 | Vendor | What the date means | Cost |
 |--------|---------------------|------|
 | Eclipse Temurin (Adoptium) | The minimum date Adoptium will keep publishing builds. The page says the dates are minimums and that LTS builds continue for as long as the upstream OpenJDK source is maintained. | Free. Commercial support is available from third parties, not from Adoptium. |
-| Amazon Corretto | Amazon provides updates "at no cost until at least the specified date", released quarterly. | Free, open source licence. |
+| Amazon Corretto | Amazon provides updates "at no cost until at least the specified date", released quarterly. The date in the table is Amazon's end-of-life date; the last planned update comes earlier: October 2030 for Corretto 8, October 2031 for 11, July 2029 for 17, July 2030 for 21 and July 2032 for 25. | Free, open source licence. |
 | Microsoft Build of OpenJDK | The "earliest end-of-support date"; Microsoft says it may extend it. Quarterly updates in January, April, July and October. Java 8 is not built by Microsoft; it points Java 8 users to Temurin, and to its own Temurin-based Java 8 container images for Azure. | Updates are free to anyone. Commercial support is only for Azure customers with an Azure support plan, for workloads on Azure, Azure Stack and Azure Arc. |
 | Red Hat build of OpenJDK | Two phases: full support, then ELS-1. The table on Red Hat's page covers OpenJDK on RHEL. | Part of a Red Hat subscription; ELS needs a separate entitlement. |
 | Azul | The end of the Production Support term for Azul Core and Azul Prime. Azul's page says LTS releases then get two more years beyond that date. The roadmap page does not cover the free Zulu community builds. | Paid support. |
@@ -200,7 +211,7 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:6.75.0:run \
   --define rewrite.activeRecipes=org.openrewrite.java.migrate.UpgradeToJava17
 ```
 
-Swap the recipe name in the last line for another step. To keep the recipe in the build instead, the same guide configures the plugin in `pom.xml` and runs `mvn rewrite:run`:
+Swap the recipe name in the last line for another step. The `run` goal changes your source files and can change `pom.xml` too (the recipe updates the Java version and build plugin settings), so run it on a clean branch. To see the changes first, use the `dryRun` goal in place of `run`: it writes a patch to `target/rewrite/rewrite.patch` and changes nothing. To keep the recipe in the build instead, the same guide configures the plugin in `pom.xml` and runs `mvn rewrite:run`:
 
 ```xml
 <plugin>
@@ -252,6 +263,7 @@ For a small number of services this is a few days of work per step. For a large,
 - [Spring Boot support](https://spring.io/projects/spring-boot#support) and [Spring Framework support](https://spring.io/projects/spring-framework#support) (OSS and commercial support dates)
 - [Spring Boot system requirements](https://docs.spring.io/spring-boot/system-requirements.html) (minimum Java versions)
 - [Apache Tomcat: which version do I want?](https://tomcat.apache.org/whichversion.html) (Java requirements and Tomcat 9 end of support)
+- Framework and library support pages, for the second table: [Quarkus releases](https://quarkus.io/releases/), [Micronaut support](https://micronaut.io/support/), [Vert.x 4.5.36 release notes](https://vertx.io/blog/eclipse-vert-x-4-5-36/), [Apache Camel downloads](https://camel.apache.org/download/), [Hibernate ORM releases](https://hibernate.org/orm/releases/), [Jetty downloads and version history](https://jetty.org/download.html), [Netty 4.1 end-of-life announcement](https://netty.io/news/2026/09/09/4-1-EOL-announcement.html), [Jackson releases](https://github.com/FasterXML/jackson/wiki/Jackson-Releases), [Log4j downloads](https://logging.apache.org/log4j/2.x/download.html), [JUnit](https://docs.junit.org/current/overview.html), [Apache Kafka](https://github.com/apache/kafka), [Gradle compatibility matrix](https://docs.gradle.org/current/userguide/compatibility.html), [Maven release history](https://maven.apache.org/docs/history.html)
 - OpenRewrite guides: [migrate to Java 17](https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-java-17), [migrate to Java 21](https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-java-21) and [migrate to Java 25](https://docs.openrewrite.org/running-recipes/popular-recipe-guides/migrate-to-java-25)
 
 *This article was first published on [oreonit.com](https://www.oreonit.com/java-version-support-calendar-end-of-life-dates/), where I keep the calendar up to date as vendors change their dates.*
