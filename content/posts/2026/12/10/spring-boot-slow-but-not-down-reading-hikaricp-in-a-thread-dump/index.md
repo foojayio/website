@@ -1,6 +1,6 @@
 ---
 title: "Spring Boot slow but not down: reading HikariCP in a thread dump"
-date: "2026-12-08"
+date: "2026-12-10"
 description: "A Spring Boot service that runs out of database connections stays up and times out. How to read the HikariCP queue and the connection holders in a thread dump."
 authors:
   - "felipe-maschio"
