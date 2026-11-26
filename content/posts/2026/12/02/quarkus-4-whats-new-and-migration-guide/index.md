@@ -1,6 +1,6 @@
 ---
 title: "Quarkus 4 Is Here: What Changes, What Breaks, and Why You Should Care"
-date: "2026-01-01"
+date: "2026-12-02"
 description: "A hands-on tour of Quarkus 4.0, tested on 4.0.1: what changes, what breaks, and a practical migration checklist."
 authors:
   - "loic-magnette"
@@ -10,6 +10,9 @@ categories:
   - "Release Notes"
 related_posts:
   - "reactive-messaging-on-quarkus"
+  - "spring-quarkus-jooby-vertx-java-framework-comparison"
+  - "quarkus-unpacked-insights-from-the-foojay-podcast"
+  - "optimizing-java-for-the-cloud-native-era-with-quarkus"
 canonical: "https://lomagnette.github.io/posts/quarkus-4-is-here-what-changes-what-breaks-and-why-you-should-care/"
 ---
 
@@ -408,11 +411,12 @@ public class Things {
 
 The Dev UI gets a built-in Observability page in dev mode. You pick the cards you want (metrics, OpenTelemetry traces...) from everything your app exposes, grouped by source:
 
-![The Dev UI Observability page on Quarkus 4.0.0.CR1: a picker listing OpenTelemetry Traces and the available metrics grouped by source (an @Observed getBooks timer, http, jvm and kafka), with five selected](quarkus-observability-1.webp)
+{{< gallery cols="2" >}}
+quarkus-observability-1.webp | Picking cards in the Dev UI | The Dev UI Observability page on Quarkus 4.0.0.CR1 listing OpenTelemetry Traces and metrics grouped by source, with five selected
+quarkus-observability-2.webp | The resulting dashboard | Dev UI dashboard with an OpenTelemetry Traces card and live charts for otel.sdk.log.created, otel.sdk.span.live and process.cpu.time
+{{< /gallery >}}
 
-Then you arrange them, and you get live charts without wiring anything:
-
-![The resulting Dev UI dashboard: an OpenTelemetry Traces card listing recent books requests, and live charts for otel.sdk.log.created, otel.sdk.span.live and process.cpu.time, under Clear history, Export CSV, Export Grafana and Edit dashboard buttons](quarkus-observability-2.webp)
+You pick the cards, arrange them, and get live charts without wiring anything.
 
 There's even an Export Grafana button that downloads a dashboard you can import into Grafana, next to the CSV export.
 
