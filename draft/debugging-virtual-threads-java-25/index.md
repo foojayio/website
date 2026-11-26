@@ -210,6 +210,29 @@ Server running at http://localhost:8080
 
 No build file, dependency manager, or application framework is required.
 
+### JDK 21 reproduction: avoiding carrier starvation
+
+When reproducing the contention experiment on JDK 21, virtual-thread pinning requires additional care. A virtual thread that sleeps inside a `synchronized` block remains pinned to its carrier. If only one carrier is available, the `/block` handler can occupy it and delay the virtual-thread `/dump` handler until after the intended capture time.
+
+To reduce this risk for the ten-request experiment, start the application on JDK 21 with increased scheduler parallelism:
+
+```bash
+java -Djdk.virtualThreadScheduler.parallelism=16 \
+     --add-modules jdk.httpserver,jdk.management \
+     JvmDiagnosticsApp.java
+```
+
+This provides additional carrier capacity for the concurrent `/block` requests and the `/dump` request. It reduces the risk of starvation but does not eliminate monitor contention or guarantee the precise timing of a dump.
+
+Alternatively, capture the JSON thread dump externally with `jcmd`, without relying on the `/dump` HTTP handler to be scheduled:
+
+```bash
+jcmd
+jcmd 12345 Thread.dump_to_file -format=json thread-dump-jdk21.json
+```
+
+Use the first command to find the Java process ID and replace `12345` with that ID. Run the second command while the `/block` requests are still in flight, using a filename that does not already exist. For this alternative, replace the concurrent workload's `/dump` curl command with the `jcmd` command.
+
 ## Call all three endpoints with curl
 
 With the server running, open a second Linux terminal. We can exercise every endpoint from the original Java class without installing a framework or HTTP client library.
