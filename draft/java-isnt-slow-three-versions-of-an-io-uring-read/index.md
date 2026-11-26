@@ -4,7 +4,7 @@ date: ""
 description: "Virtual threads pinned on file I/O, so I went to io_uring through liburing, then to the ring itself. Java ends up level with fio and Seastar."
 authors: ["david-vlijmincx"]
 categories:
-  - "Java"
+  - "Java Core"
   - "Performance"
   - "Project Panama"
 image: "featured.jpg"
