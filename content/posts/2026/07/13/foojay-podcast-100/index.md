@@ -8,6 +8,7 @@ authors:
   - "kadi-grigg"
   - "oumaima-zerouali"
   - "steve-poole"
+  - "adam-bien"
 image: "episode-100-podcast-of-podcasts-1024x576.jpg"
 categories:
   - "Foojay"

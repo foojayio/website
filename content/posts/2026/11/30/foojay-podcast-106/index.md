@@ -7,6 +7,7 @@ authors:
   - "maaike-vanputten"
   - "anton-arhipov"
   - "stephane-philippart"
+  - "adam-bien"
 image: "episode-106-future-of-coding.jpg"
 categories:
   - "AI"
