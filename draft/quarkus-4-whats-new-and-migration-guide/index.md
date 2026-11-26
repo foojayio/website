@@ -10,11 +10,12 @@ categories:
   - "Release Notes"
 related_posts:
   - "reactive-messaging-on-quarkus"
+canonical: "https://lomagnette.github.io/posts/quarkus-4-is-here-what-changes-what-breaks-and-why-you-should-care/"
 ---
 
 ## A New Major, Finally
 
-You probably know by now that I'm a Quarkus fan (this very blog runs on Quarkus and Roq), so take my enthusiasm as it may. I first heard Quarkus 4 was coming almost a year ago, in a Quarkus community call, before the roadmap was even published. I've been looking forward to it since, and yesterday was finally the day: [Quarkus 4.0 is released](https://quarkus.io/blog/quarkus-4-0-released/).
+You probably know by now that I'm a Quarkus fan (this very blog runs on Quarkus and Roq), so take my enthusiasm as it may. I first heard Quarkus 4 was coming almost a year ago, in a Quarkus community call, before the roadmap was even published. I've been looking forward to it since, and on November 25th it was finally the day: [Quarkus 4.0 is released](https://quarkus.io/blog/quarkus-4-0-released/).
 
 Quarkus 3 shipped in April 2023. Since then we got forty feature releases, a handful of LTS versions, and a framework that kept getting better without ever really breaking anything. That's great when you maintain an app. It's less great when you maintain the framework, because every "we'll clean this up later" piles up somewhere.
 
