@@ -347,6 +347,14 @@ enableGitInfo = true
   [menu.main.params]
     desc = "Foojay content listed per week, with new authors highlighted"
 
+[[menu.main]]
+  name = "Coming Soon"
+  parent = "newsletters-overviews"
+  url = "/today/coming-soon/"
+  weight = 3
+  [menu.main.params]
+    desc = "Foojay content already scheduled for publication in the following weeks"
+
 # ---------------------------------------------------------------------------
 
 [[menu.main]]
