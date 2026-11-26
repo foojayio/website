@@ -351,7 +351,7 @@ enableGitInfo = true
   name = "Coming Soon"
   parent = "newsletters-overviews"
   url = "/today/coming-soon/"
-  weight = 3
+  weight = 4
   [menu.main.params]
     desc = "Foojay content already scheduled for publication in the following weeks"
 
