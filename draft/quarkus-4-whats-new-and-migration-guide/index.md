@@ -108,11 +108,16 @@ With that, all my tests passed again. If you'd rather test over TLS, the generat
 
 ### gRPC Moves In With HTTP
 
-One more change on the networking front, and this one *will* bite you if you use gRPC: **the separate gRPC server is gone**. gRPC now runs on the main HTTP server, so port 9000 no longer exists. Update your clients:
+One more change on the networking front, and this one *will* bite you if you use gRPC: **the separate gRPC server is gone**. gRPC now runs on the main HTTP server, so port 9000 no longer exists. Update your clients. `${quarkus.http.port}` only fits a client that calls a gRPC server in the same application. A client of a remote server needs that server's own host and port instead, and its HTTPS port if TLS is enabled there:
 
 ```properties
 # Before: quarkus.grpc.server.port=9000
+# Same application:
 quarkus.grpc.clients.hello.port=${quarkus.http.port}
+
+# Remote server (HTTPS port when TLS is enabled):
+quarkus.grpc.clients.hello.host=hello.example.com
+quarkus.grpc.clients.hello.port=8443
 ```
 
 The server-side TLS properties move too (`quarkus.grpc.server.ssl.*` becomes the regular `quarkus.http.ssl.*`), and certificate files must now be filesystem paths, not classpath resources. Your ops team will probably thank you for having one port less to open.
