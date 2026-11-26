@@ -455,7 +455,7 @@ public class OrderProcessor {
 }
 ```
 
-The result is sent within a Kafka transaction, and the offset of the incoming record is committed as part of the same transaction. Quarkus configures what's needed for you: a `transactional.id` derived from your application name and channel, idempotence, `acks=all`, and `read_committed` on the consumer side. You can even combine it with `@Transactional` to write to the database in the same method.
+The result is sent within a Kafka transaction, and the offset of the incoming record is committed as part of the same transaction. Quarkus configures what's needed for you: a `transactional.id` derived from your application name and channel, idempotence, `acks=all`, and `read_committed` on the consumer side. You can combine it with `@Transactional` to write to the database in the same method, but keep in mind that the database and Kafka transactions are two separate commits, not one atomic operation. If the database commits and the Kafka transaction then fails, the record is processed again and the database write runs twice. Make those writes idempotent, or use an outbox, where it matters.
 
 Current limitations: it works on methods that take and return payloads (not `Message`), and not yet with Kotlin suspend functions. For more advanced cases, `KafkaTransactions` is still there.
 
