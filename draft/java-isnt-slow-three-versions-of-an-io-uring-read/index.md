@@ -45,7 +45,7 @@ That version carried me for a while. Then I wanted the numbers to be good, not j
 
 In hindsight, It's pretty clear, but the code was simply doing too much work for each request.
 
-The first issue was allocations. A call needed an `Arena`, an aligned `MemorySegment` for the buffer, a result instance, and a `CompletableFuture` to park on. The FFM API makes that easy to write, all while feeling very Java-like. The price is that managing things yourself 
+The first issue was allocations. A call needed an `Arena`, an aligned `MemorySegment` for the buffer, a result instance, and a `CompletableFuture` to park on. The FFM API makes that easy to write, all while feeling very Java-like. The price is that you end up managing all of it yourself.
 
 | Allocation               | Time per call |
 |--------------------------|---------------|
@@ -90,9 +90,9 @@ That was the biggest performance improvement. From asking C to prepare a request
 
 ## Making it correct was harder than making it fast
 
-Now owned the rings, which meant I now own the ordering too. The kernel reads memory that I write, so every write has to be visible before the tail that publishes it, and every completion has to be read before I hand the slot back. The publish side uses a release store on the tail. The completion side does an acquire on the tail, reads `user_data` and `res`, then a release store on the head. Get the order wrong and the kernel reads a half-written request. On x86 that might work for weeks. On ARM less so.
+Now I owned the rings, which meant I now owned the ordering too. The kernel reads memory that I write, so every write has to be visible before the tail that publishes it, and every completion has to be read before I hand the slot back. The publish side uses a release store on the tail. The completion side does an acquire on the tail, reads `user_data` and `res`, then a release store on the head. Get the order wrong and the kernel reads a half-written request. On x86 that might work for weeks. On ARM less so.
 
-That's where jcstress comes in. A separate profile drives the real `MpscQueue` through concurrent offers and a single consumer. It checks the store/load orderings the wake path depends on, along with publish/consume fences and slot handoff. It doesn't prove the whole library correct. But it should prove that the memory ordering for the hand off is correct.
+That's where jcstress comes in. A separate profile drives the real `MpscQueue` through concurrent offers and a single consumer. It checks the store/load orderings the wake path depends on, along with publish/consume fences and slot handoff. It doesn't prove the whole library correct. But it should give confidence that the memory ordering for the handoff is correct.
 
 ## Making sure the numbers were real
 
