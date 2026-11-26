@@ -112,7 +112,7 @@ One more change on the networking front, and this one *will* bite you if you use
 
 ```properties
 # Before: quarkus.grpc.server.port=9000
-quarkus.grpc.clients.hello.port=$\{quarkus.http.port}
+quarkus.grpc.clients.hello.port=${quarkus.http.port}
 ```
 
 The server-side TLS properties move too (`quarkus.grpc.server.ssl.*` becomes the regular `quarkus.http.ssl.*`), and certificate files must now be filesystem paths, not classpath resources. Your ops team will probably thank you for having one port less to open.
@@ -286,11 +286,11 @@ I tried the first two with a simple `record Person(String name, int age)` endpoi
 
 ```bash
 # trailing garbage after the JSON document
-curl -H 'Content-Type: application/json' -d '\{"name":"Duke","age":30} \{}' localhost:8080/echo
+curl -H 'Content-Type: application/json' -d '{"name":"Duke","age":30} {}' localhost:8080/echo
 # → 400
 
 # null for a primitive int
-curl -H 'Content-Type: application/json' -d '\{"name":"Duke","age":null}' localhost:8080/echo
+curl -H 'Content-Type: application/json' -d '{"name":"Duke","age":null}' localhost:8080/echo
 # → 400
 ```
 
@@ -302,7 +302,7 @@ Jakarta REST 4 adds a `MediaType.APPLICATION_MERGE_PATCH_JSON` constant. It's ju
 
 ```java
 @PATCH
-@Path("/\{id}")
+@Path("/{id}")
 @Transactional
 @Consumes(MediaType.APPLICATION_MERGE_PATCH_JSON)
 public Book patch(@PathParam("id") long id, String mergePatch) {
@@ -313,7 +313,7 @@ public Book patch(@PathParam("id") long id, String mergePatch) {
 }
 ```
 
-Sending `\{"price": 7.5}` updates the price and leaves the title alone. (Beta2 had a bug where the unpatched fields were nulled; it's fixed in Beta3.)
+Sending `{"price": 7.5}` updates the price and leaves the title alone. (Beta2 had a bug where the unpatched fields were nulled; it's fixed in Beta3.)
 
 ## CDI 5: Quarkus Concepts Become Standard
 
