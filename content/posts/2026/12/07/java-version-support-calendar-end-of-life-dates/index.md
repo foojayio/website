@@ -1,6 +1,6 @@
 ---
 title: "Java Version Support Calendar: End-of-Support Dates for Java 8, 11, 17, 21 and 25 by Vendor"
-date: "2026-01-01"
+date: "2026-12-07"
 description: "End-of-support dates for Java 8, 11, 17, 21 and 25 from Temurin, Corretto, Microsoft, Red Hat, Azul and Oracle, and commands to find which build you run."
 authors:
   - "fahri-cap"
@@ -14,6 +14,9 @@ related_posts:
   - "should-you-update-java-or-upgrade-and-which-version-should-you-use"
   - "java-patching-at-incident-speed-lessons-from-the-emudhra-ca-compromise"
   - "java4shell-cve-2026-114938-what-it-is-who-is-affected-and-what-to-do-now"
+  - "which-java-runtime-should-you-use-in-production-comparing-openjdk-distributions"
+  - "free-java-real-risk-why-unsupported-openjdk-is-now-a-security-gamble"
+  - "the-java-21-doomsday-clock-countdown"
 canonical: "https://www.oreonit.com/java-version-support-calendar-end-of-life-dates/"
 ---
 
