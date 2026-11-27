@@ -44,13 +44,13 @@ So the budget has to be in tokens or dollars, and it has to be checked per model
 
 ## What using it looks like
 
-Version 0.3.1 requires Java 17 or later, Spring Boot 4.1, and Spring AI 2.0. Add the starter next to your Spring AI model starter:
+Version 0.3.2 requires Java 17 or later, Spring Boot 4.1, and Spring AI 2.0. Add the starter next to your Spring AI model starter:
 
 ```xml
 <dependency>
     <groupId>io.github.ultron03</groupId>
     <artifactId>token-allowance-spring-boot-starter</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
 </dependency>
 ```
 
@@ -197,7 +197,7 @@ On Gemini's free tier, priced at Google's published rates, those five calls came
 Things you should know before you rely on it:
 
 - **Costs are estimates, not invoices.** They're your configured prices times the provider's reported usage. Compare them with your bill, and start in `observe` mode for that reason.
-- **You type the prices in.** No provider has an API that returns prices. A bundled price list is the thing I most want to add next.
+- **You type the prices in.** No provider has an API that returns prices, and a bundled list would go stale every time a provider changes its pricing, so copy them from the provider's pricing page.
 - **One price per model.** Long-context surcharges aren't applied, and a call is priced by the model it asked for, so a router that picks another model is priced wrong.
 - **Only `ChatClient` calls built from Spring AI's auto-configured `ChatClient.Builder` are counted.** Calling a `ChatModel` directly, using embeddings, or building a client with `ChatClient.builder(chatModel)` skips the starter's advisors unless you add them explicitly.
 - **Windows are fixed.** A minute cap can be spent at 10:00:59 and again at 10:01:00.
