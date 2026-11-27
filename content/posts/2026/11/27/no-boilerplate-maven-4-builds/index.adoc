@@ -10,6 +10,7 @@ categories:
   - "Java Core"
   - "Developer Tools"
 related_posts:
+  - "foojay-podcast-81"
   - "beyond-mvn-install-maven-practices"
   - "why-jakartaee-2027"
   - "jakarta-ee-11-umbrella-jar"
