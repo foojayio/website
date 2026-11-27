@@ -199,7 +199,7 @@ A "Merge branch ..." subject is not the PR: look the number up in the recent
 gh pr comment N --repo foojayio/website --body "Thanks NAME! Your article is scheduled for publication on **Thursday 19 November 2026**.
 
 Your author profile: https://foojay.io/today/author/SLUG/
-You may need to wait a few minutes for the profile to appear, as it takes up to 10 minutes to appear after the commit."
+You may need to wait a few minutes for the profile with the scheduled post to appear, as it takes up to 10 minutes to publish after the commit."
 ```
 
 Also mention here anything you changed beyond the date (generated header,
