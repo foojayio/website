@@ -70,7 +70,7 @@ Note that the order in which guardrails fire matters. The earlier a problem is c
 
 * **Instructions**: Before the agent writes anything, it reads my instructions: coding conventions, forbidden patterns, project layout, etc. I described how I package them [as skills](https://blog.frankel.ch/writing-agent-skill/). This is the only guardrail that fires before generation.
 * **Language and ecosystem**: I have favored using statically and strongly typed languages. On top of that, I add a linter. If I can, I add static analysis tools.
-* **Testing**: Unit tests and [integration tests](https://blog.frankel.ch/pr-testing-kubernetes-testing-github-workflow/) check the behavior. With property-based testing, I state the property, the runtime verifies it. Mutation testing checks that [the tests are sensitive to changes](https://blog.frankel.ch/your-code-coverage-metric-is-not-meaningful/). I generally finish with a healthy dose of integration testing.
+* **Testing**: Unit tests and [integration tests](https://blog.frankel.ch/pr-testing-kubernetes/1/) check the behavior. With property-based testing, I state the property, the runtime verifies it. Mutation testing checks that [the tests are sensitive to changes](https://blog.frankel.ch/your-code-coverage-metric-is-not-meaningful/). I generally finish with a healthy dose of integration testing.
 * **Post verification**: I believe this one is overlooked by most developers. For plans, I use my own `/challenger` [subagent](https://blog.frankel.ch/design-team-agents/), and for code, the regular `/code-review`.
 
 ## Conclusion
