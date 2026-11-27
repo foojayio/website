@@ -1,13 +1,18 @@
 ---
 title: "Java Isn't a Slow Language: Three Versions of an io_uring Read"
-date: ""
+date: "2026-12-04"
 description: "Virtual threads pinned on file I/O, so I went to io_uring through liburing, then to the ring itself. Java ends up level with fio and Seastar."
 authors: ["david-vlijmincx"]
+image: "featured.jpg"
 categories:
   - "Java Core"
   - "Performance"
   - "Project Panama"
-image: "featured.jpg"
+related_posts:
+  - "virtual-thread-pinning-field-guide"
+  - "java-native-memory-allocation-ffm-api"
+  - "the-ffm-api-how-openjdk-changed-the-game-for-native-interactions-and-made-pi4j-better"
+  - "project-panama-for-newbies-part-1"
 ---
 <!--more-->
 

@@ -1,12 +1,18 @@
 ---
 title: "Debugging Virtual Threads in Java 25: A Hands-On Guide to JSON Thread Dumps"
-date: "2026-12-16"
+date: "2026-12-14"
 description: "Diagnose virtual thread contention in Java 25 using JSON thread dumps, built-in JVM diagnostics, and a lightweight HTTP server."
 authors:
   - "tiago-souza"
 image: "cover.jpg"
 categories:
   - "Java Core"
+  - "Debugging"
+related_posts:
+  - "what-jstack-misses-when-your-java-service-uses-virtual-threads"
+  - "virtual-thread-pinning-field-guide"
+  - "how-i-got-a-thread-dump-from-a-timed-out-github-actions-test"
+  - "masking-a-jvm-thread-dump-without-breaking-the-analysis"
 ---
 
 *How a small, framework-free HTTP server exposes thread contention using built-in JVM diagnostics.*

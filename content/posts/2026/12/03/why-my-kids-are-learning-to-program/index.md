@@ -1,14 +1,20 @@
 ---
 title: "Why My Kids are Learning to Program - The New Baseline"
-date: "2026-11-27"
+date: "2026-12-03"
 description: "An AI agent can now build a Codename One app and submit it to the App Store and Google Play for someone who has never written a line of Java. I'm teaching..."
 authors: ["shai-almog"]
 image: "why-my-kids-are-learning-to-program-23532b0cf6.jpg"
-categories: ["Java"]
 canonical: "https://www.codenameone.com/blog/why-my-kids-are-learning-to-program/"
+categories:
+  - "Java"
+  - "Codename One"
+  - "AI"
+related_posts:
+  - "create-an-uber-clone-in-1-minute"
+  - "rewrite-everything-in-java-not-rust"
+  - "who-decides-your-app-redesign"
+  - "best-practices-for-working-with-ai-agents-subagents-skills-and-mcp"
 ---
-
-![Why my kids are learning to program: the new baseline](why-my-kids-are-learning-to-program-23532b0cf6.jpg)
 
 Type one paragraph into Claude Code or Codex and an agent builds a Codename One app, taps through every screen, draws the icon, signs it, and submits it to TestFlight and Google Play. This week we wired our build cloud straight into that loop, so the whole trip from prompt to store is one conversation. You approve screenshots. You never see a line of Java. You don't need a Mac.
 
@@ -29,7 +35,9 @@ Agents moved the baseline so far up that the people who understand what's under 
 - **[Your enterprise features, behind your firewall.](#enterprises-have-to-move-like-startups)** Corporate Server is back.
 - **[A spreadsheet engine, PDFs, flowcharts, a SaaS backend and a game studio.](#more-this-week)** All in this week's release, all free.
 
-## Coming This Week
+## Last Week on the Codename One Blog
+
+Each of these articles went out on the Codename One blog over the past week:
 
 - **Saturday, November 21:** [A Million Rows and Live Excel Formulas, Inside Your Own App](https://www.codenameone.com/blog/a-million-rows-and-live-excel-formulas/). DataGrid, and spreadsheets with XLSX files and 402 live functions.
 - **Sunday, November 22:** [Build a Multi-Tenant SaaS Backend That Can't Leak One Customer Into Another](https://www.codenameone.com/blog/multi-tenant-saas-backend-in-java/). Tenant isolation, GraphQL, SAML and LDAP, object storage on four clouds, MongoDB, DynamoDB and search.
@@ -39,12 +47,12 @@ Agents moved the baseline so far up that the people who understand what's under 
 - **Thursday, November 26:** [Brickyard: Launch Your Own Game Platform, With the Studio Inside the App](https://www.codenameone.com/blog/build-a-game-platform-with-luau-scripting/). Plus portable shaders and 3D audio.
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/a-million-rows-and-live-excel-formulas/"><img src="datagrid-sheet-formula-complete-422316cfbf.png" alt="Formula completion in a spreadsheet" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Live formulas.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/field-service-scheduling-template/"><img src="fieldline-gantt-5fd572aa4d.png" alt="Fieldline's dispatch Gantt chart" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Fieldline dispatch.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/diagrams-flowcharts-and-kanban-boards/"><img src="graph-flowchart-969aa44bda.png" alt="A flowchart with swim lanes" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Flowcharts.</figcaption></figure>
-<figure style="margin:0"><a href="https://www.codenameone.com/blog/build-a-game-platform-with-luau-scripting/"><img src="brickyard-desktop-studio-7997860885.png" alt="The Brickyard studio" loading="lazy" style="width:100%;height:auto" /></a><figcaption>Brickyard's studio.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+datagrid-sheet-formula-complete-422316cfbf.png | Live formulas. | Formula completion in a spreadsheet
+fieldline-gantt-5fd572aa4d.png | Fieldline dispatch. | Fieldline's dispatch Gantt chart
+graph-flowchart-969aa44bda.png | Flowcharts. | A flowchart with swim lanes
+brickyard-desktop-studio-7997860885.jpg | Brickyard's studio. | The Brickyard studio
+{{< /gallery >}}
 
 
 ## Hello world is now a complete app
@@ -154,11 +162,11 @@ DataGrid grid = new DataGrid(sheet);
 ```
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img src="datagrid-million-8a4bd9b764.png" alt="A DataGrid scrolled deep into a million rows" loading="lazy" style="width:100%;height:auto" /><figcaption>A million rows.</figcaption></figure>
-<figure style="margin:0"><img src="datagrid-grouped-4f59e2cc92.png" alt="A DataGrid grouped by region with aggregates" loading="lazy" style="width:100%;height:auto" /><figcaption>Grouping and aggregates.</figcaption></figure>
-<figure style="margin:0"><img src="datagrid-sheet-formula-hint-a063a2cd94.png" alt="Typing a formula with argument hints and colored references" loading="lazy" style="width:100%;height:auto" /><figcaption>Formulas that feel like Excel.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+datagrid-million-8a4bd9b764.png | A million rows. | A DataGrid scrolled deep into a million rows
+datagrid-grouped-4f59e2cc92.png | Grouping and aggregates. | A DataGrid grouped by region with aggregates
+datagrid-sheet-formula-hint-a063a2cd94.png | Formulas that feel like Excel. | Typing a formula with argument hints and colored references
+{{< /gallery >}}
 
 
 My high school finishing exams included a test in Lotus 1-2-3. Lotus didn't invent the spreadsheet, VisiCalc did. Lotus put charts next to the numbers, and two great ideas combined made one of the first iconic software startups. That's my theme for this week: here are the components, remix them into something wonderful. Saturday's [article](https://www.codenameone.com/blog/a-million-rows-and-live-excel-formulas/) has the details.
@@ -182,7 +190,9 @@ The backend also gained a Spring-style GraphQL server, SAML 2.0 single sign-on, 
 
 `com.codename1.pdf` writes documents with a canvas or a flowing layout of paragraphs and tables, and the same classes run in the app and on the backend. `PdfViewer` renders in pure Java, so a file looks identical on every platform. It opens encrypted documents and prints them.
 
-![The PDF viewer showing a generated invoice](pdf-viewer-invoice-88e11f8750.png)
+{{< gallery cols="1" >}}
+pdf-viewer-invoice-88e11f8750.png | | The PDF viewer showing a generated invoice
+{{< /gallery >}}
 
 Monday's [PDF article](https://www.codenameone.com/blog/generate-and-view-pdfs-in-java/) walks through invoices, tickets, and printing.
 
@@ -210,11 +220,11 @@ graph.arrange(new LayeredArrangement(), false);
 ```
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img src="graph-flowchart-969aa44bda.png" alt="A flowchart with swim lanes" loading="lazy" style="width:100%;height:auto" /><figcaption>Flowcharts with swim lanes.</figcaption></figure>
-<figure style="margin:0"><img src="graph-editor-61596ecbcd.png" alt="A node editor with typed ports" loading="lazy" style="width:100%;height:auto" /><figcaption>Node editors.</figcaption></figure>
-<figure style="margin:0"><img src="kanban-lanes-506a2e778e.png" alt="A Kanban board with swim lanes and a WIP limit" loading="lazy" style="width:100%;height:auto" /><figcaption>Kanban with WIP limits.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+graph-flowchart-969aa44bda.png | Flowcharts with swim lanes. | A flowchart with swim lanes
+graph-editor-61596ecbcd.png | Node editors. | A node editor with typed ports
+kanban-lanes-506a2e778e.png | Kanban with WIP limits. | A Kanban board with swim lanes and a WIP limit
+{{< /gallery >}}
 
 
 Wednesday's [article](https://www.codenameone.com/blog/diagrams-flowcharts-and-kanban-boards/) shows flowcharts, editors, and boards.
@@ -226,11 +236,11 @@ Brickyard is a real game development studio, and it ships as a template. Games a
 The studio has an explorer, a properties panel, a Luau editor with syntax checking and completion, lighting, models, undo, play test with several players, and publish, on a phone, a tablet or a desktop. Multiplayer runs on an authoritative server. An AI agent can drive the whole studio through MCP and play test its own game to see what broke.
 
 
-<div class="release-screenshots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;align-items:start;margin:24px 0">
-<figure style="margin:0"><img src="brickyard-desktop-code-8c36eb4276.png" alt="Editing a Luau script in the Brickyard studio on the desktop" loading="lazy" style="width:100%;height:auto" /><figcaption>Luau, with completion and syntax checks.</figcaption></figure>
-<figure style="margin:0"><img src="brickyard-desktop-studio-7997860885.png" alt="The Brickyard studio with the explorer, viewport and properties" loading="lazy" style="width:100%;height:auto" /><figcaption>The studio on the desktop.</figcaption></figure>
-<figure style="margin:0"><img src="brickyard-playtest-5303ecf8d5.png" alt="A Brickyard play test with several players" loading="lazy" style="width:100%;height:auto" /><figcaption>Play test before you publish.</figcaption></figure>
-</div>
+{{< gallery cols="3" >}}
+brickyard-desktop-code-8c36eb4276.jpg | Luau, with completion and syntax checks. | Editing a Luau script in the Brickyard studio on the desktop
+brickyard-desktop-studio-7997860885.jpg | The studio on the desktop. | The Brickyard studio with the explorer, viewport and properties
+brickyard-playtest-5303ecf8d5.jpg | Play test before you publish. | A Brickyard play test with several players
+{{< /gallery >}}
 
 
 
