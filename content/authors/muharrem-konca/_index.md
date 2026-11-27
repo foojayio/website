@@ -9,7 +9,7 @@ description: "Java developer and software architect sharing practical insights o
 bluesky: ""
 mastodon: ""
 reddit: ""
-linkedin: ""
+linkedin: "https://www.linkedin.com/in/muharremkonca/"
 github: ""
 gitlab: ""
 youtube: ""
