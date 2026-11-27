@@ -1,6 +1,6 @@
 ---
 title: "Building a Swing LookAndFeel Without Extending BasicLookAndFeel"
-date: "2026-12-01"
+date: "2026-11-29"
 description: "Explore custom Swing visuals and interactions by implementing a LookAndFeel directly, using NebulaSoftwareLookAndFeel as an example."
 authors:
   - "boyd-edmondson"
