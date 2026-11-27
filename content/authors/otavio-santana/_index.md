@@ -6,7 +6,7 @@ bio: "Software Engineer | Software Architect | Speaker | Writer| Book Author | C
 bluesky: ""
 mastodon: ""
 linkedin: "https://www.linkedin.com/in/otaviojava/"
-github: ""
-youtube: ""
-website: ""
+github: "https://github.com/otaviojava"
+youtube: "https://www.youtube.com/@otaviojava"
+website: "https://otaviojava.com/"
 ---
