@@ -317,14 +317,14 @@ For predictable memory use, allocate reusable objects and buffers during startup
 
 ## What can you build with Juno's APIs?
 
-Once `Blink` works, combine Java logic with one of Juno's API categories. The project includes APIs for hardware control, storage, networking, observability, application structure, and even small AI models:
+Once `Blink` is working, combine Java logic with one of Juno's API categories. The project includes APIs for hardware control, storage, networking, observability, application structure, and even small AI models:
 
 | Category | APIs | Project ideas |
 |---|---|---|
 | AI | `JEV` decision models, `JLM` language models | Use a compact decision model to select a legal action from the device's current state, or run a small language model linked into the firmware to generate text on the board. |
 | Observability | `Serial`, `Syslog` | Print diagnostics over USB, or send allocation-free RFC 5424 log messages over UDP and follow them remotely over Wi-Fi with `juno:monitor`. |
 | Storage | `SdCard`, `SecretStore` | Read configuration from a microSD card, or keep Wi-Fi credentials and other secrets outside the firmware image. |
-| Internet | `Wifi`, `Time`, `HttpClient`, `HttpServer`, `Email` | Read an HTTP API, serve a dashboard from the board, synchronize time, or send and receive email. |
+| Internet | `Wifi`, `Time`, `HttpClient`, `HttpServer`, `Email` | Call an HTTP API, serve a dashboard from the board, synchronize time, or send and receive email. |
 | Application structure | `MVC` | Organize a multi-screen application with separate models, views, navigation, and routing. |
 | Hardware | `Gpio`, `Delay`, `Clock` | Read and drive pins, measure intervals, and coordinate actions with precise delays. |
 
