@@ -1,7 +1,6 @@
 ---
 title: "Tokensparsamkeit for coding assistants"
 date: "2026-05-13T08:24:31+00:00"
-lastmod: "2026-09-21T05:56:10+00:00"
 description: "You make decisions with data. Most businesses assumed that the most data, the better the decision. Then, several factors put a halt to the hoarding of…"
 canonical: "https://blog.frankel.ch/tokensparsamkeit-coding-assistants/"
 authors:

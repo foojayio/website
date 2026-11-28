@@ -1,7 +1,6 @@
 ---
 title: "Seasons time-lapse - the video"
 date: "2026-06-09T12:45:51+00:00"
-lastmod: "2026-09-21T05:55:28+00:00"
 description: "In the first post of this series, I focused on the project foundations: what should I do to create a video from photos taken from the same position year…"
 canonical: "https://blog.frankel.ch/seasons-time-lapse/3/"
 authors:

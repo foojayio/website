@@ -1,7 +1,6 @@
 ---
 title: "Kicking the Tires of Docker Scout"
 date: "2024-02-08T08:47:20+00:00"
-lastmod: "2024-02-08T08:47:22+00:00"
 description: "Let's try Docker Scout, the Docker image vulnerability detection tool."
 canonical: "https://blog.frankel.ch/kicking-tires-docker-scout/"
 authors:

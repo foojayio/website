@@ -1,7 +1,6 @@
 ---
 title: "WebAssembly on Kubernetes"
 date: "2025-03-25T10:32:31+00:00"
-lastmod: "2025-03-25T10:32:33+00:00"
 description: "Like a couple of innovative technologies, different people have different viewpoints on where WebAssembly fits the technology landscape. WebAssembly (also…"
 canonical: "https://www.loft.sh/blog/webassembly-on-kubernetes"
 authors:
@@ -233,7 +232,7 @@ Now comes the fun part: your favorite Cloud provider(s) isn't using Docker Deskt
 
 The latter executes a process; in our case, it's `containerd`. Yet, `containerd` is only an orchestrator of other container processes. It detects the "flavor" of the container and calls the relevant executable. For example, for "regular" containers, it calls `runc` via a *shim* . The good thing is that we can install other shims dedicated to other container types, such as Wasm. The following illustration, taken from the [Wasmedge website](https://wasmedge.org/docs/develop/deploy/intro/), summarizes the flow:
 
-![](wasmedge.png)
+![Diagram: Docker and Kubernetes call containerd, which uses containerd-shim with runc for containers, or containerd-wasm-shim with WasmEdge for Wasm](wasmedge.png)
 
 Despite some of the [mainstream](https://learn.microsoft.com/en-us/azure/aks/use-wasi-node-pools) [Cloud providers](https://www.spinkube.dev/docs/install/azure-kubernetes-service/) offering Wasm integration, none of them provide such a low-level one. I'll continue on my laptop, but Docker Desktop doesn't offer a direct integration either: it's time to be creative. For example, [minikube](https://minikube.sigs.k8s.io/) is a full-fledged Kubernetes distribution that creates an intermediate Linux virtual machine within a Docker environment. We can SSH into the VM and configure it to our heart's content. Let's start by installing `minikube`.
 
@@ -480,7 +479,7 @@ We do the same with the `embed` and the `native` pods, barring the `runtimeClass
 
 The final deployment diagram is the following:
 
-{{< img src="deployment-diagram-600x510.png" class="aligncenter size-medium" width="600" height="510" >}}
+{{< img src="deployment-diagram-600x510.png" alt="UML deployment diagram: minikube ingress-controller routes /embed and /native to runc vclusters and /runtime to a wasmedge vcluster" class="aligncenter size-medium" width="600" height="510" >}}
 
 The final touch is to tunnel to expose services:
 

@@ -1,7 +1,6 @@
 ---
 title: "How to Create a Kubernetes Operator in Java"
 date: "2021-01-27T08:46:27+00:00"
-lastmod: "2021-07-05T20:02:49+00:00"
 description: "Kubernetes is much more than a runtime platform -- through its API you can not only create custom clients, but also extend Kubernetes itself."
 canonical: "https://blog.payara.fish/creating-a-kubernetes-operator-in-java"
 authors:

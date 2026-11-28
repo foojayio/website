@@ -1,13 +1,11 @@
 ---
 title: "Spring Framework – Internals of RestClient"
 date: "2024-03-25T11:32:54+00:00"
-lastmod: "2024-03-31T01:37:12+00:00"
 description: "Experience the ease and efficiency of Spring Framework RestClient. Simplify your RESTful API integration and unlock the full potential of your applications."
 authors:
   - "mahendra1413"
 image: "RestClient_1-700x394-1.jpg"
 categories:
-  - "Java"
   - "Microservices"
   - "reactive"
   - "Spring"

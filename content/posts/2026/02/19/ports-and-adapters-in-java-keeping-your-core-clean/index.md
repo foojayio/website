@@ -1,14 +1,12 @@
 ---
 title: "Ports and Adapters in Java: Keeping Your Core Clean"
 date: "2026-02-19T16:13:59+00:00"
-lastmod: "2026-02-19T16:14:01+00:00"
 description: "In this article, we focus on a concrete, real-world scenario: using a database, specifically MongoDB, without contaminating the main domain. The goal is not theoretical elegance, but long-term maintainability and testability of the solution."
 authors:
   - "matteo-rossi"
 image: "Screenshot-2026-02-11-at-3.13.47-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -41,7 +39,7 @@ At its core, hexagonal architecture is very simple:
 * The outside world interacts with the core through ports.
 * Adapters implement those ports for specific technologies.
 
-![](Screenshot-2026-02-11-at-3.13.47-PM.png)
+![Ports and adapters hexagonal diagram: domain entities at the core, use cases and ports around them, adapters on the outside](Screenshot-2026-02-11-at-3.13.47-PM.png)
 
 What makes this architecture powerful is the directional dependency: the core depends on the abstractions, while the infrastructure depends on the core. Not the other way around.
 

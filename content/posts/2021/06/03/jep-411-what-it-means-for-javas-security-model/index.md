@@ -1,7 +1,6 @@
 ---
 title: "JEP 411: Java's Security Model and the Principle of Least Privilege"
 date: "2021-06-03T07:47:51+00:00"
-lastmod: "2021-06-03T08:02:30+00:00"
 description: "Java, like most platforms or languages has layers of security, this article lookS at the Authorization layer and how JEP 411 relates to it."
 authors:
   - "peter-firmstone"
@@ -11,8 +10,6 @@ categories:
   - "Security"
 related_posts:
 ---
-
-![](Swiss_cheese_model-47912861.svg)
 
 ## Java's Existing Layers of Security
 

@@ -1,7 +1,6 @@
 ---
 title: "From OpenTelemetry to DuckDB"
 date: "2026-09-08T08:29:37+00:00"
-lastmod: "2026-09-08T08:38:34+00:00"
 description: "Observability platforms generally expect you to do your analysis inside them, using their query language and their dashboards. That works for the…"
 authors:
   - "geertjan-wielenga"

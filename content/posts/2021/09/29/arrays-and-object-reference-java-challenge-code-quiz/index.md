@@ -1,7 +1,6 @@
 ---
 title: "Arrays and Object Reference Java Challenge Code Quiz"
 date: "2021-09-29T11:18:13+00:00"
-lastmod: "2021-09-29T11:18:14+00:00"
 description: "When we pass an object reference to a method, we are changing the object that is in the heap of the memory. Find out more in this challenge!"
 authors:
   - "rafael-del-nero"

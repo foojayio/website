@@ -1,7 +1,6 @@
 ---
 title: "Payara Services Wins Prestigious Queen’s Award!"
 date: "2021-05-06T08:07:23+00:00"
-lastmod: "2021-09-08T15:20:12+00:00"
 description: "Payara commended for its achievements within global trading and exporting with the Queen’s Award for Enterprise for International Trade!"
 authors:
   - "jadon-ortlepp"
@@ -13,7 +12,7 @@ related_posts:
 
 Micro-multinational open source software company, Payara Services, has been commended for its achievements within global trading and exporting with the Queen's Award for Enterprise for International Trade.  
 
-{{< img src="4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png" class="alignright size-large is-resized" width="259" height="448" >}}
+{{< img src="4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png" alt="Queen's Awards for Enterprise: International Trade 2021 logo" class="alignright size-large is-resized" width="259" height="448" >}}
 
 Now in its 55th year, the Queen's Award for Enterprise: International Trade is the UK's most prestigious business award, honouring organisations that have excelled in overseas exports whilst maintaining the highest standards in social, economic, and environmental activity.
 
@@ -21,7 +20,7 @@ Payara's win attests to the growing success of the open source software business
 
 As one of just 205 businesses across the country to have received this accolade personally approved by Her Majesty The Queen, often called the 'knighthood for businesses', Payara can utilise the esteemed Queen's Award emblem within its marketing and promotional activity for the next five years.  
 
-{{< img src="3.-Payara-Services-Steve-Millidge-1-1024x683.jpg" class="alignleft size-large is-resized" width="419" height="279" >}}
+{{< img src="3.-Payara-Services-Steve-Millidge-1-1024x683.jpg" alt="Steve Millidge in a black Payara hoodie in front of a colourful wall" class="alignleft size-large is-resized" width="419" height="279" >}}
 
 **Steve Millidge, Founder and CEO of Payara Services Ltd,** commented:
 > "We're thrilled to win a Queen's Award for International Trade. Payara was born global and has team members in many countries. This award recognises their commitment to the mission of delivering trusted, supported, enterprise software to customers worldwide."
@@ -33,7 +32,7 @@ Since it was founded in 2016, Payara has implemented a strategy for overseas tra
 
 Headquartered in Worcestershire, with a secondary EU office in Funchal, Portugal, Payara Services is recognised for its creation of innovative infrastructure software including the delivery of 24/7 production, development and migration support to customers around the world, including BMW Group, Hermes, and Rakuten Card.  
 
-{{< img src="2.-Payara-Services-Group-Photo-2-1024x683.jpg" class="alignright size-large is-resized" width="466" height="310" >}}
+{{< img src="2.-Payara-Services-Group-Photo-2-1024x683.jpg" alt="Group photo of the Payara Services team in Payara t-shirts in front of a green abstract mural" class="alignright size-large is-resized" width="466" height="310" >}}
 
 The firm's leading team of tech experts – or 'Payarans' – have worked incredibly hard to increase annual revenue by 107% over the last three years, with export sales more than doubling from 33% to 75%. The Payara Server has now become one of the fastest-growing open source platforms globally, with a community of over 320,000 users.
 

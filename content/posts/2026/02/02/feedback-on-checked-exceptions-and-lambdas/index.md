@@ -1,14 +1,13 @@
 ---
 title: "Feedback on checked exceptions and lambdas"
 date: "2026-02-02T18:29:03+00:00"
-lastmod: "2026-09-21T05:59:11+00:00"
 description: "I got a lot of interesting feedback on Checked exceptions and lambdas. Let's start with my own: after writing the post, I realized I had written a similar…"
 canonical: "https://blog.frankel.ch/feedback-checked-exceptions-lambdas/"
 authors:
   - "nicolas-frankel"
 image: "cover_large.jpg"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "checked-exceptions-and-lambdas"
 ---
@@ -44,7 +43,7 @@ On Mastodon, Oliver Drotbohm pointed out that the Spring Framework has wrapping 
 > Post by @[odrotbohm@chaos.social](mailto:odrotbohm@chaos.social)  
 > View on Mastodon
 
-![](spring-wrap-exceptions-1024x874.png)
+![UML class diagram of Spring's ThrowingConsumer, ThrowingFunction, ThrowingRunnable, ThrowingSupplier and ThrowingBiFunction interfaces](spring-wrap-exceptions-1024x874.png)
 
 ## Things I learned
 

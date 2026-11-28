@@ -1,7 +1,6 @@
 ---
 title: "Why This JCON Europe Talk Is Unmissable (Part 1)"
 date: "2024-04-29T07:29:25+00:00"
-lastmod: "2024-04-29T07:33:07+00:00"
 description: "JCON Europe in Cologne is around the corner (and here are your free Foojay JCON tickets). Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!"
 authors:
   - "r-fichtner"
@@ -16,7 +15,7 @@ related_posts:
 ---
 
 **[JCON Europe](https://2024.europe.jcon.one/) in Cologne is around the corner ([and here are your free Foojay JCON tickets](https://bit.ly/3xv9yfT)), May 13 to 16. Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!**
-![](image-2.jpg)
+![Portrait of a bearded man with glasses wearing a black top hat with steampunk goggles](image-2.jpg)
 
 ## **DevOps for Java Developers (Or Maybe Against Them?!) - Baruch Sadogursky**
 

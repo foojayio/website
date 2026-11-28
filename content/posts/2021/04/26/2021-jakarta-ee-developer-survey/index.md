@@ -1,7 +1,6 @@
 ---
 title: "Take the 2021 Jakarta EE Developer Survey"
 date: "2021-04-26T07:47:29+00:00"
-lastmod: "2021-08-23T15:33:35+00:00"
 description: "Help to provide valuable insight into the state of the community ti better understand the top priorities for future Jakarta EE releases!"
 authors:
   - "ivar-grimstad"
@@ -18,7 +17,7 @@ related_posts:
 ---
 
 The annual [2021Jakarta EE Developer Survey](https://www.surveymonkey.com/r/F9SWSDF) is out. Make sure to use this opportunity to make your voice heard!
-[![](JakartaEESurvey2021-1024x574-89696f30.jpg)](https://www.surveymonkey.com/r/F9SWSDF)
+[![Banner reading 'Jakarta EE Developer Survey 2021: Take the survey today!' with a developer typing on a laptop](JakartaEESurvey2021-1024x574-89696f30.jpg)](https://www.surveymonkey.com/r/F9SWSDF)
 
 This is the fourth Jakarta EE Developer Survey, so it is safe to say that it has become an annual tradition and is your chance to influence the direction of the Jakarta EE working group.
 

@@ -1,7 +1,6 @@
 ---
 title: "Why the Fastest Way of Serializing a Java Field is not Serializing it at All"
 date: "2022-10-25T12:54:49+00:00"
-lastmod: "2022-10-25T12:54:51+00:00"
 description: "Let's dive into detail about the different ways to serialize Java objects and compare how well they work."
 authors:
   - "per-minborg"
@@ -233,10 +232,10 @@ public class BenchmarkRunner {
 
 This produced the following output on a MacBook Pro (16-inch, 2019) with a 2.3 GHz 8-Core Intel Core i9 CPU under JDK 1.8.0_312, OpenJDK 64-Bit Server VM, 25.312-b07:
 
-![](Screen-Shot-2022-10-17-at-3.32.03-PM-1024x250.png)
+![JMH benchmark results: default serialization about 89-91 ns/op, explicit about 32-38, trivially copyable about 7-8](Screen-Shot-2022-10-17-at-3.32.03-PM-1024x250.png)
 
 Using the various MarketData variants, explicit serialization is more than two times faster than default serialization. Trivially copyable serialization is four times faster than explicit serialization and more than ten times faster than default serialization, as illustrated in the graph below (lower is better):  
-![](Screen-Shot-2022-10-17-at-3.32.37-PM-1024x612.png)  
+![Bar chart of read and write serialization time: default is slowest, explicit about 2.5 times faster, trivially copyable fastest](Screen-Shot-2022-10-17-at-3.32.37-PM-1024x612.png)  
 
 More fields generally favour trivially copyable serialization over explicit serialization. Experience shows break-even is reached at around six fields in many cases.
 

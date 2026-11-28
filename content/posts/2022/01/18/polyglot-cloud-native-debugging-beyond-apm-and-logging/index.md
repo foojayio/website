@@ -1,7 +1,6 @@
 ---
 title: "Polyglot Cloud Native Debugging: Beyond Logs/APM"
 date: "2022-01-18T07:55:51+00:00"
-lastmod: "2022-01-18T08:02:40+00:00"
 description: "Continuous observability can facilitate a new generation of applications that will change the customer experience and yours."
 authors:
   - "shai-almog"

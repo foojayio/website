@@ -1,7 +1,6 @@
 ---
 title: "JC-AI Newsletter #15"
 date: "2026-03-20T07:56:01+00:00"
-lastmod: "2026-03-20T07:56:03+00:00"
 description: "Over the past two weeks, the field of artificial intelligence has continued its remarkable pace of advancement. As AI becomes increasingly woven into the…"
 authors:
   - "miro-wengner"

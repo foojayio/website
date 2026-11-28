@@ -1,7 +1,6 @@
 ---
 title: "Payara Platform Roadmap 2024"
 date: "2024-01-17T10:39:43+00:00"
-lastmod: "2024-02-09T09:41:21+00:00"
 description: "Read on to find out more about Payara Rodmap in the coming months -  Java 21 compatibility, the upcoming Jakarta EE 11 and our plan for support, and more!"
 canonical: "https://blog.payara.fish/payara-platform-roadmap-2024"
 authors:
@@ -50,7 +49,7 @@ Then at the end of the year, [MicroProfile 6.1](https://blog.payara.fish/whats-n
 ### Payara Starter​
 
 At the end of 2023, we launched [our new Payara Starter](https://start.payara.fish/) application which simplifies the process of starting new projects on the Payara Platform with a user friendly interface to generate Payara Server or Micro Sample projects, and we continued to provide new functionality for Payara Cloud.​
-![](image-2-1024x576.jpg)
+![Payara slide 2023 Recap: a monthly timeline of releases from Payara 6 in March to JDK 21 support in December](image-2-1024x576.jpg)
 
 [](https://info.payara.fish/hubfs/Slide4.jpg)
 
@@ -92,7 +91,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 
 ### Payara Platform Vision
 
-![](image-3-1024x576.jpg)
+![Payara Vision Overview slide: developer tools feed Payara Core, which leads to Payara Server, Payara K8S and Payara Cloud](image-3-1024x576.jpg)
 
 ### [](https://info.payara.fish/hubfs/Slide9.jpg)Payara Core
 
@@ -107,7 +106,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 * Performance both raw speed and resource usage
 * Application instrumentation and core telemetry
 
-![](image-4.jpg)
+![Diagram of Payara Core: a Jakarta EE and MicroProfile application on the JVM, connecting to systems, security, message queues and databases](image-4.jpg)
 
 ### [](https://info.payara.fish/hubfs/payara%20Core.png)Payara Server
 
@@ -160,7 +159,7 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ## ​Payara Developer Tools​
 
-![](image-5-1024x576.jpg)
+![Payara Developer Tools Roadmap slide with planned items per quarter of 2024 and for 2025 and 2026](image-5-1024x576.jpg)
 
 ## [](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​
 
@@ -175,7 +174,7 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ## Payara Cloud PaaS and Project Aquarium​
 
-![](image-6-1024x576.jpg)
+![Payara Cloud Roadmap slide: Payara Cloud API and regions in 2024, more frameworks in 2025 and a service mesh in 2026](image-6-1024x576.jpg)
 
 ## [](https://info.payara.fish/hubfs/Slide18.jpg)
 

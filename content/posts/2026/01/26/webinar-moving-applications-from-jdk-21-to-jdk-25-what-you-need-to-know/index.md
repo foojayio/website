@@ -1,7 +1,6 @@
 ---
 title: "Webinar: \"Moving Applications From JDK 21 to JDK 25: What You Need to Know\""
 date: "2026-01-26T14:14:32+00:00"
-lastmod: "2026-01-26T14:27:10+00:00"
 description: "JDK 25 has arrived as the latest long-term support (LTS) release for Java, bringing performance improvements and enhanced stability for modern…"
 authors:
   - "geertjan-wielenga"
@@ -25,7 +24,7 @@ Each new LTS release represents years of refinements, optimizations, and new cap
 ## Upcoming Webinar: Your Migration Guide
 
 Azul is hosting a live session, led by Java Champion Simon Ritter, covering everything you need to know about moving from JDK 21 to JDK 25. The webinar will cover key differences between the two releases, new features and compatibility considerations, and best practices for a seamless migration.
-[![](sritter-1024x553.png)](https://www.azul.com/events/moving-applications-from-jdk-21-to-jdk-25/)
+[![Azul webinar banner: Moving Applications From JDK 21 to JDK 25, hosted by Simon Ritter, with a Reserve Your Spot button](sritter-1024x553.png)](https://www.azul.com/events/moving-applications-from-jdk-21-to-jdk-25/)
 
 Attendees will also see a live demo of an example application migration, along with alternative approaches for upgrading to Azul's Zulu build of JDK 25.
 

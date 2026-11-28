@@ -1,22 +1,19 @@
 ---
 title: "We Will Not Sabotage Your Code"
 date: "2026-06-20T15:37:22+00:00"
-lastmod: "2026-06-22T10:59:45+00:00"
 description: "A maintainer recently hid a destructive prompt-injection payload aimed at AI agents inside his own framework. That is a betrayal of the trust open source r"
 canonical: "https://www.codenameone.com/blog/we-will-not-sabotage-your-code/"
 authors:
   - "shai-almog"
 image: "we-will-not-sabotage-your-code.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
-
-![We Will Not Sabotage Your Code](we-will-not-sabotage-your-code.jpg)
 
 This is a very low bar. I am genuinely saddened that I need to write it down at all, because until last week it seemed too obvious to say out loud.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

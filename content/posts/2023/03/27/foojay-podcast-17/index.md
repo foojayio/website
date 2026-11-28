@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #17: Execute Java Code with TornadoVM"
 date: "2023-03-27T08:45:20+00:00"
-lastmod: "2025-11-13T09:11:38+00:00"
 description: "TornadoVM is a programming and execution framework for offloading and running JVM applications on multi-core CPUs, GPUs, and FPGAs."
 authors:
   - "erikcostlow"
@@ -62,7 +61,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-tornadovm-1024x384.jpg)
+![Video call grid of the six participants in the Foojay podcast episode about TornadoVM](podcast-guests-tornadovm-1024x384.jpg)
 
 ## **Content**
 

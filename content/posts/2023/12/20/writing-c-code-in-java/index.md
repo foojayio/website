@@ -1,13 +1,11 @@
 ---
 title: "Writing C Code in Java"
 date: "2023-12-20T09:21:56+00:00"
-lastmod: "2023-12-20T09:21:57+00:00"
 description: "The Foreign Function & Memory API (also called Project Panama) has come a long way since it started."
 authors:
   - "johannes-bechberger"
 image: "panama-2000x981-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "java-panama-polyglot-part1"
@@ -16,7 +14,7 @@ related_posts:
   - "java-native-memory-allocation-ffm-api"
 ---
 
-![](panama-2000x981-0ceeab3a.jpg)
+![Diagram showing a C program reading a file line with fopen and fgets translated through Panama into equivalent Java code](panama-2000x981-0ceeab3a.jpg)
 
 **The Foreign Function \& Memory API (also called Project Panama) has come a long way since it started. You can find the latest version implemented in JDK 21 as a preview feature (use `--enable-preview` to enable it) which is specified by the [JEP 454](https://openjdk.org/jeps/454):**
 > By efficiently invoking foreign functions (i.e., code outside the JVM), and by safely accessing foreign memory (i.e., memory not managed by the JVM), the API enables Java programs to call native libraries and process native data without the brittleness and danger of JNI.

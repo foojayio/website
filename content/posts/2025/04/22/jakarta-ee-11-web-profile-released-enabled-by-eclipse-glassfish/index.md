@@ -1,7 +1,6 @@
 ---
 title: "Jakarta EE 11 Web Profile Released, Enabled by Eclipse GlassFish"
 date: "2025-04-22T11:06:19+00:00"
-lastmod: "2026-03-23T15:13:53+00:00"
 description: "A cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications."
 authors:
   - "ondro-mihalyi"
@@ -35,7 +34,7 @@ Jakarta EE 11 Web Profile delivers an updated and streamlined set of specificati
   * And many others, with bigger or smaller changes (see the table below)
 * **Deprecation cleanup**: Removal of some EJB features, JAXB support, and Jakarta Faces Managed Beans
 
-![](jakarta-ee-11-web.jpg) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
+![Jakarta EE 11 Web Profile specifications, with updated, not updated and new (Data 1.0) specs color-coded](jakarta-ee-11-web.jpg) [Full specification list for Jakarta EE 11 Web Profile](https://jakarta.ee/specifications/webprofile/11/jakarta-webprofile-spec-11.0#web-profile-definition)
 
 ### GlassFish: The first compatible implementation for Jakarta EE 11 Web Profile
 
@@ -83,7 +82,7 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to the OmniFish blog here: [https://omnifish.ee/blog/](https://omnifish.ee/jakarta-ee-11-web-profile-released-enabled-by-eclipse-glassfish/).
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: a stylised fish skeleton in yellow-green on a teal circle" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 ## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 

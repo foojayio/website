@@ -1,7 +1,6 @@
 ---
 title: "Stream.concat vs. New ArrayList Performance"
 date: "2020-08-27T05:34:58+00:00"
-lastmod: "2020-09-01T08:34:13+00:00"
 description: "What happened when the Java Stream API met the ArrayList? Which is faster and more performant? Read on to find out about some initial results."
 authors:
   - "karl-heinz-marbaise"
@@ -129,7 +128,7 @@ So I began very simple only with the first two solutions (1+2):
 * [The detailed measurement result](https://github.com/khmarbaise/performance-concat/blob/8a666ee61cf117b96ab374dc402df996ff188b7c/docs/result-i.txt)
 
 The following is only an excerpt of the above [detailed measurement result](https://github.com/khmarbaise/performance-concat/blob/8a666ee61cf117b96ab374dc402df996ff188b7c/docs/result-i.txt) (I have remove the prefix `BenchmarkStreamConcat` from all results here in the post).
-![](Screenshot-2020-08-26-at-22.23.26-1024x125.png)
+![JMH results: stream concat averages 15.7 us/op versus 22.4 us/op for a new ArrayList](Screenshot-2020-08-26-at-22.23.26-1024x125.png)
 
 So, if you take a look at the results above, you can already see that for a small amount of elements (49 getElements, 50 FanceStuff instances) the one with `stream_concat` is faster. Hmmm... is this really true? Not a measuring error or coincidence?
 
@@ -141,7 +140,7 @@ To reduce the likelihood of stumbling over a coincidence or a measuring error, I
 * [The detailed measurement result](https://github.com/khmarbaise/performance-concat/blob/52480c0648a97e89d0e5007db01212baf7c80536/docs/result-ii.text)
 
 The `getElements()` results always in 49 elements whereas the number of `FancyStuff` elements varies (see `count`). The following result shows that the version with `stream_concat` is always faster.
-![](Screenshot-2020-08-26-at-22.24.23-1024x320.jpg)
+![JMH results for 50 to 5000 elements where stream concat is consistently faster than a new ArrayList](Screenshot-2020-08-26-at-22.24.23-1024x320.jpg)
 
 Interestingly, this is not only the case for larger number of elements. It is also for a small number of elements the case.
 
@@ -153,7 +152,7 @@ So, finally, I ran all solutions (1+2+3+4) with different numbers (count, elemen
 * [The Code](https://github.com/khmarbaise/performance-concat/blob/e5dd257660a93670b203016fddb9a3ac2975f399/src/main/java/com/soebes/performance/streams/BenchmarkStreamConcat.java)
 
 I just picked up some examples of the measured times here:
-![](Screenshot-2020-08-26-at-22.25.43-1024x300.jpg)
+![JMH results with ArrayList constructor variants and stream concat, where stream concat is slightly faster](Screenshot-2020-08-26-at-22.25.43-1024x300.jpg)
 
 #### Another run
 
@@ -162,7 +161,7 @@ So I ran also a solution with all possible options im JMH which took very long (
 * [The detailed measurement result](https://raw.githubusercontent.com/khmarbaise/performance-concat/master/docs/result-v.text)
 
 So I will pick up some examples of the measured times here:
-![](Screenshot-2020-08-26-at-22.26.48-1024x306.jpg)
+![JMH single-shot results with large variance, so no clear winner between ArrayList variants and stream concat](Screenshot-2020-08-26-at-22.26.48-1024x306.jpg)
 
 So finally the question comes — what do the numbers actually mean?
 

@@ -1,7 +1,6 @@
 ---
 title: "OSS Debugging Toolkits for Kubernetes"
 date: "2022-02-28T12:27:18+00:00"
-lastmod: "2022-02-28T12:59:18+00:00"
 description: "New OSS approach for debugging live applications - right from inside your IDE or terminal window, and without stopping the live application."
 canonical: "https://lightrun.com/debugging/koolkits-debugging-toolkits-for-kubernetes/"
 authors:

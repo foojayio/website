@@ -1,7 +1,6 @@
 ---
 title: "MicroProfile Config for Java SE"
 date: "2022-10-13T16:10:31+00:00"
-lastmod: "2022-10-13T16:10:32+00:00"
 description: "How can you use MicroProfile Config in a pure Java SE environment? What libraries support this, what are the supported features, etc?"
 authors:
   - "rudy-de-busscher"

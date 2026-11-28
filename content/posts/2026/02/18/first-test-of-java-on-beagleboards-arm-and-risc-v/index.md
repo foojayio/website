@@ -81,8 +81,8 @@ I received the following boards.
 * [PocketBeagle TechLab](https://www.beagleboard.org/boards/techlab): *Designed from lessons-learned in teaching hundreds of individuals getting their first introduction to programming, Linux, and ultimately hacking the kernel itself.*
 
 {{< gallery >}}
-beagleboards-boxes-856x1024.jpg
-beagleboards-1024x608.jpg
+beagleboards-boxes-856x1024.jpg | | Beagleboard boxes and boards on a table: BeagleV-Fire, BeagleV-Ahead, BeagleY-AI and PocketBeagle 2
+beagleboards-1024x608.jpg | | Four bare Beagleboard boards: red BeagleV-Fire, blue BeagleV-Ahead, black BeagleY-AI and small PocketBeagle 2
 {{< /gallery >}}
 
 ## First Tests

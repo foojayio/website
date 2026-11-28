@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 9)"
 date: "2021-12-14T11:14:33+00:00"
-lastmod: "2021-12-14T11:23:04+00:00"
 description: "Let's continue the discussion and share a few more thread-safe classes that we can use in our day-to-day coding!"
 authors:
   - "bazlur-rahman"

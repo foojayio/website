@@ -1,7 +1,6 @@
 ---
 title: "Writing a Profiler from Scratch: Introduction"
 date: "2022-12-21T15:26:44+00:00"
-lastmod: "2022-12-21T15:31:47+00:00"
 description: "How do profilers like async-profiler work? How to write your own? This series tries to write a tiny sampling-based profiler from scratch!"
 authors:
   - "johannes-bechberger"
@@ -92,7 +91,7 @@ public class BasicSample {
 ```
 
 During profiling, we call AsyncGetCallTrace often, but let's visualize a trace when the JVM runs one of the `println` lines.
-[![](asgct-1024x576.png)](https://github.com/parttimenerd/asgct2-demo) AsyncGetCallTrace on a small example, using [the demo code for JEP 435](https://github.com/parttimenerd/asgct2-demo)
+[![Diagram of AsyncGetCallTrace: the thread's stack of Java and C/C++ frames is walked into a frames array with num_frames 16](asgct-1024x576.png)](https://github.com/parttimenerd/asgct2-demo) AsyncGetCallTrace on a small example, using [the demo code for JEP 435](https://github.com/parttimenerd/asgct2-demo)
 
 *Interrupting a thread at any point and running some code can have stability implications. If you're interested in these when using AsyncGetCallTrace, head over to the [async-profiler manual](https://krzysztofslusarski.github.io/2022/12/12/async-manual.html#stability), where I co-wrote the section on this topic. This small sample tool seems to be quite good at triggering a specific fault in JDK 19+36, run the tool of this blog post yourself to find it.*
 

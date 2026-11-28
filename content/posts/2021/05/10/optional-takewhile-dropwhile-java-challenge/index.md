@@ -1,7 +1,6 @@
 ---
 title: "Optional takeWhile dropWhile Java Challenge"
 date: "2021-05-10T08:05:57+00:00"
-lastmod: "2021-08-23T12:46:45+00:00"
 description: "Main goal of the Optional class is to avoid NullPointerException. It’s much easier to deal with null when we use the concept of Optional."
 authors:
   - "rafael-del-nero"

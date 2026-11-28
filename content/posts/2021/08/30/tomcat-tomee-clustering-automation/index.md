@@ -1,7 +1,6 @@
 ---
 title: "Tomcat and TomEE Clustering Automation in the Cloud"
 date: "2021-08-30T07:18:36+00:00"
-lastmod: "2021-09-16T14:46:22+00:00"
 description: "Find out about Tomcat and TomEE auto-clustering in Jelastic PaaS, as well as how to get these scalable clusters up and running!"
 authors:
   - "tetiana-fydorenchyk"

@@ -1,7 +1,6 @@
 ---
 title: "JUG PH Meetup 4 and 5 Report"
 date: "2024-01-14T13:26:26+00:00"
-lastmod: "2024-01-14T13:26:27+00:00"
 description: "The JUG PH Meetup 4 and 5 Report. This report focuses on the meetups that happened in September and November 2023."
 authors:
   - "tristan-mahinay"
@@ -26,15 +25,15 @@ The 4th meetup discusess the Microservice and Event-driven Architecture. The Ban
 
 ## Microservices vs Event-driven Architecture
 
-![](jugph-meetup-4-presentation-680x510.jpg)
+![Speaker presenting a slide 'because Assumptions are deadly' to the JUG PH meetup audience](jugph-meetup-4-presentation-680x510.jpg)
 
 Presentation of the JUG PH Leaders to ING Hubs Philippines by Tristan Mahinay
 
-![](jugph-meetup-4-leaders-383x510.jpg)
+![Audience at the JUG PH meetup watching a slide introducing the JUG PH leaders](jugph-meetup-4-leaders-383x510.jpg)
 
 The Java attendees in the event!
 
-![](jugph-meetup-4-attendees-680x510.jpg)
+![Large group photo of JUG PH meetup attendees at ING Hubs Philippines](jugph-meetup-4-attendees-680x510.jpg)
 
 ## Meetup #5
 
@@ -46,21 +45,21 @@ The presentation of the talks can be accessed here: [Spring Certification and Ge
 
 Kenneth discussed the contents and expectation in taking the Spring Certification.
 
-![](jugph-meetup-5-spring-cert-680x510.jpg)
+![Attendees watching a presentation at JUG PH meetup #5 about the Spring Certification](jugph-meetup-5-spring-cert-680x510.jpg)
 
 ## Generative AI in Java
 
 Jansen introduced to the community the LangChain4j library that is used to extend the capability of LLMs in the Java language.
 
-![](jugph-meetup-5-langchain4j-680x510.jpg)
+![Speaker presenting a LangChain4j slide at JUG PH meetup #5](jugph-meetup-5-langchain4j-680x510.jpg)
 
 Jansen had a live demonstration in using LangChain4j
 
-![](jugph-meetup-5-langchain4j-demo-680x510.jpg)
+![Speaker giving a live LangChain4j demo at JUG PH meetup #5, with cameras recording and code on screens](jugph-meetup-5-langchain4j-demo-680x510.jpg)
 
 The Java attendees in the event!
 
-![](jugph-meetup-5-attendees-700x347.jpg)
+![Group photo of Java attendees at JUG PH meetup #5](jugph-meetup-5-attendees-700x347.jpg)
 
 ## Continuing the initiative
 

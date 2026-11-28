@@ -1,7 +1,6 @@
 ---
 title: "Error Handling in Java and Across Different Languages"
 date: "2022-03-21T11:23:46+00:00"
-lastmod: "2022-03-21T11:23:47+00:00"
 description: "In this post, I'd like to describe how a couple of popular languages cope with errors. Get started here for an overview of errors everywhere!"
 canonical: "https://blog.frankel.ch/error-handling/"
 authors:
@@ -90,7 +89,7 @@ try {
 
 Java exceptions are baked in its type system.
 
-{{< img src="java-exception-700x474.png" class="size-medium aligncenter" width="700" height="474" >}}
+{{< img src="java-exception-700x474.png" alt="UML class diagram: Throwable holds a cause and stack trace elements; Exception and RuntimeException extend it, the latter unchecked" class="size-medium aligncenter" width="700" height="474" >}}
 
 Java provides two types of exceptions: *checked* and *unchecked*. Checked exceptions need:
 
@@ -137,7 +136,7 @@ While the above snippet might appeal to your FP-side, our programming-side is pr
 
 It would be better to have a dedicated structure to store either the regular result or the exception. It's the goal of the `Either` type.
 
-{{< img src="vavr-either-700x399.png" class="size-medium aligncenter" width="700" height="399" >}}
+{{< img src="vavr-either-700x399.png" alt="UML diagram of Vavr's Either interface with its Left and Right subclasses and methods such as getOrElseGet and swap" class="size-medium aligncenter" width="700" height="399" >}}
 
 By convention, the left side holds the failure, and the right the success. We can rewrite the above snippet as:
 

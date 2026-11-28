@@ -1,7 +1,6 @@
 ---
 title: "Exploring the Depths of Java: A Comprehensive Conversation with Jakob Jenkov, Part-I"
 date: "2023-06-29T13:33:58+00:00"
-lastmod: "2023-07-05T19:59:18+00:00"
 description: "Explore the first part of our in-depth interview with Jakob Jenkov, an experienced Java developer and AWS solution architect, as he shares his insights on the past, present, and future of Java."
 authors:
   - "bazlur-rahman"
@@ -15,7 +14,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="jekov.jpeg" class="alignright size-full is-resized" width="400" height="400" >}}
+{{< img src="jekov.jpeg" alt="Portrait photo of Jakob Jenkov, smiling, in an office" class="alignright size-full is-resized" width="400" height="400" >}}
 
 Welcome to the first part of our deep dive with Jakob Jenkov, a seasoned software developer and AWS solution architect, whose love for coding began with a Commodore 128 in the late '80s. Over the past decades, Jenkov has navigated the world of programming, with a particular emphasis on Java, making significant contributions to the community through his professional work and informative content on jenkov.com.
 

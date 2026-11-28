@@ -1,7 +1,6 @@
 ---
 title: "Trash Pandas Love Enterprise Java Garbage Code"
 date: "2024-08-13T08:16:55+00:00"
-lastmod: "2024-08-13T08:19:02+00:00"
 description: "If raccoons were software engineers, they would feel at home inside many enterprise systems. These systems are often full of unused and dead code that was written, fully tested, then altered in a way that prevents teams from ever running it."
 canonical: "https://www.azul.com/blog/trash-pandas-love-enterprise-java-garbage-code/"
 authors:
@@ -56,6 +55,6 @@ Dead code detection improves developer productivity and developer happiness. It'
 ## Free Live Demo
 
 [Join in with a free live demo](https://azul.com/ic-demo/) at your convenience and with an expert who'll happily go much further into these topics.  
-[![](barcode-1024x1022.png)](https://azul.com/ic-demo)
+[![QR code linking to the free live demo](barcode-1024x1022.png)](https://azul.com/ic-demo)
 
 **Note:** This is an edited version of an article that [originally ran on The New Stack on May 23, 2024](https://thenewstack.io/does-garbage-collection-logging-affect-app-performance/).

@@ -1,7 +1,6 @@
 ---
 title: "It's all IntelliJ IDEA's Fault: IntelliJ IDEA Made Me Lazy"
 date: "2020-11-24T08:58:42+00:00"
-lastmod: "2020-11-24T08:59:42+00:00"
 description: "Being lazy isn't a bad thing, it's an efficiency gain for focusing on the things that matter, which isn't checking my parentheses are correct!"
 canonical: "https://www.helenjoscott.com/posts/intellij-idea-made-me-lazy"
 authors:

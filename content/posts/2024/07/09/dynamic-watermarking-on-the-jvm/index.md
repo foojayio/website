@@ -1,14 +1,12 @@
 ---
 title: "Dynamic watermarking on the JVM"
 date: "2024-07-09T07:59:29+00:00"
-lastmod: "2024-07-10T13:51:22+00:00"
 description: "Displaying images on your website makes for an interesting problem: on one side, you want to make them publicly available; on the other, you want to protect them against undue use."
 canonical: "https://blog.frankel.ch/dynamic-watermarking/1/"
 authors:
   - "nicolas-frankel"
 image: "faucet-1684902.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Kotlin"
 related_posts:
@@ -28,7 +26,7 @@ However, if there are too many images on a site, it can be a burden to watermark
 
 The Java 2D API has been part of the JDK since 1.0, and it shows.
 
-![](java2d-class-diagram.png)
+![UML class diagram of Java 2D: ImageIO reads a BufferedImage, which creates a Graphics2D extending Graphics](java2d-class-diagram.png)
 
 It translates into the following code:
 

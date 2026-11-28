@@ -1,7 +1,6 @@
 ---
 title: "State of Open (Source?!) and Free AI"
 date: "2024-02-15T13:04:44+00:00"
-lastmod: "2024-02-15T13:17:27+00:00"
 description: "Recap of spending the day in AI and Machine Learning Developer Room at FOSDEM’24!"
 authors:
   - "soham-dasgupta"
@@ -81,7 +80,7 @@ A (current possible) identified components of an AI system:(Reference #7)
    b. Binary data it comprises of.  
    c. Tasks or results it generates.
 
-![](componentsAI-700x347.png)
+![Slide listing what a machine learning task involves: data, code, other stuff (hardware, duration, evaluation) and output (model, interface)](componentsAI-700x347.png)
 
 This also implies, that the definition of FREE and OPEN might be different for each component or a sub-set of a component. For example, a model which identifies early-stage cancer based on X-Ray or MRI images might want to shield the data it is trained on due to privacy regulations, but at the same time can have the rest of the components FREE and/or OPEN. Modification to this model by the community would be defined differently.
 
@@ -91,11 +90,11 @@ Currently there is no proper definition of open-ness for AI systems, and they fa
 
 And for reasons mainly of ethical consideration and on how to engage with whole or parts of AI system, a definitive guide is needed.
 
-![](open-spectrum-700x216.png)
+![Chart of the AI release spectrum from fully closed (PaLM, Gopher) to fully open (BLOOM, GPT-J), with considerations at each end](open-spectrum-700x216.png)
 
 Mostly now, the access and usage of an AI systems is managed by individual or additional license restriction.
 
-![](llama-2-700x458.jpg)
+![Meta Llama 2 prohibited uses page with clauses on violence, criminal activity, sensitive data and malware highlighted](llama-2-700x458.jpg)
 
 But this imposes barriers against use, difficulties to adopt and improve, problem in control over the technology and weak oversight and transparency.
 
@@ -110,7 +109,7 @@ What we need is:
 
 Open-Source shows that when you eliminate the obstacles to learning, using, sharing and enhancing software systems, everyone benefits. These benefits come from using licenses that follow the Open-Source Definition. The benefits can be expressed as autonomy, transparency, and cooperative improvement. They are necessary for everyone in AI. We need basic freedoms to help users create and use AI systems that are trustworthy and clear.(Reference #4)
 
-![](ai-spec-700x492.jpg)
+![Open Source AI Definition draft with sections: AI system definition, preamble, out of scope issues, 4 freedoms and license checklist](ai-spec-700x492.jpg)
 
 The current draft version is here \> [The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative](https://opensource.org/deepdive/drafts/the-open-source-ai-definition-draft-v-0-0-5/ "The Open Source AI Definition – draft v. 0.0.5 – Open Source Initiative") and it follows the definition of AI system adopted by the Organization for Economic and Co-operation Development (OECD).  
 
@@ -124,11 +123,11 @@ For each AI systems (such as Pythia, Llama, BLOOM, Mistral, Phi2, Olmo etc.) the
 
 The plan and schedule of Open Initiative about this spec is to have a release candidate (RC) at the end of October'24.
 
-![](timeline-700x390.jpg)
+![Open Source Initiative 2024 timeline from February to October: town halls, system reviews, drafts 0.0.5 to RC1 and release v1.0](timeline-700x390.jpg)
 
 Stakeholders engaged in this varies from system and license creators, regulators, end users and the subject.
 
-![](stakeholders-700x392.jpg)
+![Slide of six stakeholder groups the Open Source AI definition engages: creators, regulator, licensee, end user and subject](stakeholders-700x392.jpg)
 
 Ongoing and following tasks of this spec for Open-Source Initiative are:
 

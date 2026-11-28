@@ -1,14 +1,12 @@
 ---
 title: "Language Learning Flashcard System - Part 1"
 date: "2026-03-17T16:39:58+00:00"
-lastmod: "2026-03-24T17:17:50+00:00"
 description: "In this post, we'll write a Java Spring Boot REST API backend application without any frontend, that will store flash cards and decks in MongoDB. In a second post, we'll add the SRS part and a functional React frontend to use our cards."
 authors:
   - "diego-freniche"
 image: "Screenshot-2026-03-10-at-2.22.35-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Tutorials"
 related_posts:

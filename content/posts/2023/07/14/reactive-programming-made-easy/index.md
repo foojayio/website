@@ -1,7 +1,6 @@
 ---
 title: "Reactive Programming Made Easy"
 date: "2023-07-14T08:47:11+00:00"
-lastmod: "2023-07-14T09:10:16+00:00"
 description: "Learn about all the essential features and tools needed for Reactor developers who do their coding in IntelliJ IDEA."
 canonical: "https://blog.jetbrains.com/idea/2023/06/reactive-programming-made-easy/"
 authors:
@@ -55,7 +54,7 @@ It's now possible to evaluate these types. To do so, click the get or collectLis
 
 You can also perform more complex evaluations.
 
-![](image2.gif)
+![Animated IntelliJ debugger showing the reactive stack of DemoController and the expression evaluation field](image2.gif)
 
 By default, the debugger fetches the first 100 items of Flux. You can configure this number in *File \| Settings \| Languages \& Frameworks \| Reactive Streams*. Each time you trigger a computation, the IDE subscribes to a Publisher value and assumes the operation is safe to retry.
 
@@ -67,16 +66,16 @@ Our helpful inspections are always ready to highlight inconsistencies in your co
 
 To use an operator that produces a new Publisher instance, you must subscribe to the created Publisher via *subscribe()* or return a value from a method. If you don't do this, the created reactive stream is never used – in reactive programming terminology, "The value is never used as the Publisher type". Here is where our first inspection comes in handy by reporting unused Publisher instances.
 
-![](image4.png)
+![IntelliJ IDEA warning 'Value is never used as Publisher' on a getAll() call returning a Flux](image4.png)
 
 ### Blocking call in non-blocking context
 
 You can use code that might cause a delay or pause in a program where it's not supposed to. IntelliJ IDEA provides the *Possibly blocking call in non-blocking context* inspection that looks for situations like this.
 
-![](image1.jpg)
+![IntelliJ IDEA inspection warning about a possibly blocking restTemplate.delete call in a non-blocking context](image1.jpg)
 
 It is convenient to annotate code blocks with @Blocking and @NonBlocking annotations﻿ from the JetBrains annotations collection. This helps IntelliJ IDEA detect blocking calls in non-blocking contexts. To get the annotations, add org.jetbrains:annotations version 22.0.0 or later to your project's dependencies.
 
-![](image7.png)
+![IntelliJ IDEA warning on a call to a method annotated with @Blocking in a non-blocking context](image7.png)
 
 That is it! In this article, I've shown the most helpful features IntelliJ IDEA has for developers who work with Reactive Streams. Let's hope they will help you work faster and more productively in IntelliJ IDEA. Stay tuned for more tips and tricks.

@@ -1,7 +1,6 @@
 ---
 title: "Payara Launches Jakarta EE 10 Platform Compatible Product"
 date: "2022-09-22T16:05:19+00:00"
-lastmod: "2022-09-22T16:05:21+00:00"
 description: "With the launch of Jakarta EE 10 today, Payara releases Payara 6 Community Alpha 4 immediately, bringing new features!"
 authors:
   - "jadon-ortlepp"
@@ -21,7 +20,7 @@ related_posts:
 
 [Payara is one of the few vendors to have a product certified against the Jakarta EE 10 Platform on the launch day.](https://jakarta.ee/compatibility/certification/10/) Payara 6 Enterprise will follow in Q1, 2023, bringing the future of Jakarta EE to those using Payara's enterprise product.  
 
-{{< img src="MicrosoftTeams-image-57-1-300x260.jpg" class="alignright size-thumbnail" width="300" height="260" >}}
+{{< img src="MicrosoftTeams-image-57-1-300x260.jpg" alt="Portrait of a smiling bald man in a black Payara hoodie against a pastel green background" class="alignright size-thumbnail" width="300" height="260" >}}
 
 ***"With the release of Jakarta EE 10, Jakarta EE - formerly Java EE - continues to lead the way in application development for enterprise, cloud native Java applications. Payara Server is proud to support reliable and secure deployments of Jakarta EE apps in any environment. Being a member of the Eclipse Foundation, and a Strategic Member of the Jakarta EE Working Group, Payara continuously contributes to the Jakarta EE initiative and is pleased to welcome this next stage",*emphasized Payara CEO and Founder Steve Millidge.**
 
@@ -42,7 +41,7 @@ By supporting Jakarta EE 10 as soon as possible, Payara Server continues to be e
 **About Payara**:
 
 A global open source company, Payara creates innovative infrastructure software. We proudly nurture and grow an open, collaborative community to advance our software and services by being innovative and flexible while providing first-class support, stability, and security. We actively contribute to Jakarta EE as one of the main Eclipse Foundation Solutions members and members of the Project Management Committee to shape the future of the industry. Payara is one of 205 organizations nationally recognized with the prestigious Queen's Award for Enterprise: International Trade 2021.
-![](orange_fish-white_text-blue_background-small-1.png)
+![Payara logo: an orange fish beside white 'payara' text on a dark blue background](orange_fish-white_text-blue_background-small-1.png)
 
 For more information, please visit:
 

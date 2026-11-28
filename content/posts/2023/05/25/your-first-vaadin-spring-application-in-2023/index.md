@@ -1,7 +1,6 @@
 ---
 title: "Your First Vaadin Spring Application in 2023"
 date: "2023-05-25T12:08:30+00:00"
-lastmod: "2023-05-25T12:08:31+00:00"
 description: "Create new Vaadin Java web application projects using start.spring.io. Configure the dependencies and choose your Maven or Gradle."
 authors:
   - "sami-ekblad"
@@ -23,7 +22,7 @@ By following these steps, you'll have a basic Vaadin-Spring Boot application up 
 Recently I noticed that it is 8 years since Vaadin was first released in [start.spring.io](https://start.spring.io/ "start.spring.io"). Since then, there have been many additions to both Spring boot and Vaadin.
 
 Recent upgrade to[Java 17 and Jakarta EE 9](https://spring.io/blog/2021/09/02/a-java-17-and-jakarta-ee-9-baseline-for-spring-framework-6 " Java 17 and Jakarta EE 9") baseline. Vaadin 24 added a new [pre-compiled frontend mod](https://vaadin.com/docs/latest/configuration/development-mode#pre-compiled-front-end-bundle-for-faster-start-up "pre-compiled frontend mod")e making the initial startup matter of seconds (native compilation using GraalVM would make that even faster). And many many more. Time to grow a new project.  
-![](plant-lines2-691x510.png)
+![Line drawing of a young plant sprouting from soil](plant-lines2-691x510.png)
 
 ## Step 1: Set Up Project
 
@@ -82,4 +81,4 @@ The sample application above didn't do too much, and you are likely to want to a
 * [Vaadin with JOOQ](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.6&packaging=jar&jvmVersion=17&groupId=org.vaadin.example&artifactId=springapp&name=springapp&description=Demo%20project%20for%20Vaadin%20on%20Spring%20Boot&packageName=org.vaadin.example.spring-app&dependencies=vaadin,jooq). Make sure to add also the[jOOQ for Vaadin add-on](https://vaadin.com/directory/component/jooq-for-vaadin " jOOQ for Vaadin add-on") to get most out of it.
 
 That's a-may-zing! You have just set up and run your first Vaadin application with Spring Boot. Enjoy exploring more features and functionalities of Vaadin and Spring Boot.  
-![](reindeer-lines-474x510.png)
+![Line drawing of a reindeer with antlers](reindeer-lines-474x510.png)

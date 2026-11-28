@@ -1,7 +1,6 @@
 ---
 title: "JManc 2024 Trip Report"
 date: "2024-07-31T06:01:49+00:00"
-lastmod: "2024-08-02T08:06:12+00:00"
 description: "Great day, great people, great discussions and great team of dis-organisers!"
 canonical: "https://www.nickebbitt.com/blog/2024/07/20/jmanc-2024/"
 authors:

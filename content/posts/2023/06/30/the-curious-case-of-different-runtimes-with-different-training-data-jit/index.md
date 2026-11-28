@@ -1,7 +1,6 @@
 ---
 title: "The Curious Case of Different Runtimes"
 date: "2023-06-30T08:12:09+00:00"
-lastmod: "2023-06-30T08:12:45+00:00"
 description: "Strange runtime behavior when presenting different training data to the JIT. We show how we diagnosed and condense down to a few test cases."
 authors:
   - "rene-schwietzke"

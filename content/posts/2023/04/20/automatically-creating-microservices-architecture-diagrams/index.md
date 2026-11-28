@@ -1,7 +1,6 @@
 ---
 title: "How to Automatically Create Microservices Architecture Diagrams"
 date: "2023-04-20T08:01:21+00:00"
-lastmod: "2023-06-29T06:38:44+00:00"
 description: "Upload a JAR, search for YAML, create a DOT, convert this to a PNG, all taking place behind the scenes, with just a click of a button."
 authors:
   - "jasmine-taylor"
@@ -54,7 +53,7 @@ Usually, GraphViz is run via the terminal, but we use Java to execute it directl
 
 There are several options for how to output the PNG (or other file types). In this case, "Tpng:cairo" was chosen for its higher image quality. Depending on your use case, PNG or file output alternatives can be seen here. A simple example of a rendered image can be seen in Figure 1, and below that I will walk through an example of the steps mentioned.
 
-![](Screenshot-2023-04-11-at-11.12.04-AM-e1681208092356.png)
+![Generated diagram of a simple Chronicle service: an input queue feeds a service that writes OutputData to an output queue](Screenshot-2023-04-11-at-11.12.04-AM-e1681208092356.png)
 
 *Figure 1. Rendered services.yaml file*
 
@@ -123,7 +122,7 @@ The example above was simple but real-world examples of applications can contain
 
 Figure 2. depicts a sample of a slightly more complex application:
 
-![](Screenshot-2023-04-11-at-11.41.52-AM.png)  
+![Generated diagram: Binance spot and futures queues feed two book services that both write BookUpdate and TradeUpdate to one book-out queue](Screenshot-2023-04-11-at-11.41.52-AM.png)  
 *Figure 2. Binance-spot-and-futures.yaml*
 
 #### Additional Framework: Undertow

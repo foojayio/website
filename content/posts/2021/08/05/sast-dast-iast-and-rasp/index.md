@@ -1,7 +1,6 @@
 ---
 title: "Introducing SAST, DAST, IAST and RASP"
 date: "2021-08-05T08:28:52+00:00"
-lastmod: "2021-08-05T08:29:47+00:00"
 description: "In this article, we're going to look at the differences between the various cybersecurity defence techniques!"
 authors:
   - "sven-ruppert"

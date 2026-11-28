@@ -1,7 +1,6 @@
 ---
 title: "Instrumenting Java Code to Find and Handle Unused Classes"
 date: "2023-04-08T13:26:34+00:00"
-lastmod: "2023-04-08T13:27:21+00:00"
 description: "Ever wondered how to find classes and dependencies that you don't actually use? Here I describe how to implement an instrumenting Java agent."
 authors:
   - "johannes-bechberger"
@@ -93,7 +92,7 @@ The tool consists of two main parts:
 * Instrumenting Agent: This agent is similar to the Instrumenter but is implemented as an instrumenting Java agent. Both instrumentation methods have advantages and disadvantages, which I will explain later.
 
 This leads us to the following workflow:
-![](dead-code-workflow-f1b005fb.png) Workflow of the dead-code analyzer
+![Workflow diagram: a JAR goes through an agent or an instrumented JVM, and the Instrumenter outputs a reduced JAR or one with error messages](dead-code-workflow-f1b005fb.png) Workflow of the dead-code analyzer
 
 ## Usage
 

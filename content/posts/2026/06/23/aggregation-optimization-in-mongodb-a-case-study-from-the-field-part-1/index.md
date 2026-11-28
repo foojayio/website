@@ -1,7 +1,6 @@
 ---
 title: "Aggregation Optimization in MongoDB: A Case Study From the Field (Part 1)"
 date: "2026-06-23T13:17:32+00:00"
-lastmod: "2026-06-24T07:10:03+00:00"
 description: "MongoDB, by virtue of its use of the document data model rather than the rows and columns of tabular RDBMSs, provides ways of modeling relationships that can offer significant performance benefits when querying that data. However, to realize those benefits, data must be modeled in MongoDB using schema design patterns that are optimized for the document data model, and frequently, those are not the same as would be appropriate in a RDBMS"
 authors:
   - "graeme-robinson"
@@ -17,7 +16,7 @@ related_posts:
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="width:840px;height:auto" >}}
+{{< img src="tue11.png" alt="MongoDB banner reading 'Love Your Developers' with the MongoDB logo and floating document icons" class="size-full is-resized" width="700" height="307" style="width:840px;height:auto" >}}
 
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 
@@ -44,7 +43,7 @@ User "profiles" represented individual users accessing the streaming service. Ea
 A many-to-many relationship existed between devices and profiles — some devices, like smart TVs, tended to be used by all profiles associated with an account, while others, like smartphones, tended to be used by a single profile. Typically, each profile would access the service through more than one device.
 
 To map profiles to devices, an intermediate (or "associative") "mappings" collection was used. Documents in this collection contained the profile ID of a profile at one side of the relationship and the device serial number of a device at the other side of the relationship, effectively turning the many-to-many relationship between profiles and devices into a one-to-many relationship between profiles and mappings, and a many-to-one relationship between mappings and devices.
-![](tue12-1024x269.png)
+![Schema diagram of the StreamingService database: Profiles and Devices collections linked through a Mappings collection](tue12-1024x269.png)
 
 This approach to modeling many-to-many relationships is common when working with relational databases and works around the limitation that, with a tabular data model, there is no great way to store an arbitrary number of reference field values—in this case, profile IDs within devices, or device IDs within profiles.
 
@@ -84,7 +83,7 @@ Using this data model, the query that we were trying to perform was designed to 
 To carry out the query, a MongoDB aggregation pipeline was used. Aggregation pipelines are used in MongoDB to perform a sequence of query, manipulation, and transformation steps on documents and are defined as an array of "stages." Each stage receives an input set of documents, performs an operation on those documents, then passes its output to the next stage in the "pipeline."
 
 In this case, the initial pipeline was run against the profiles collection and included 10 stages:
-![](tue13.png)
+![Aggregation pipeline stages in order: $match, $lookup, $unwind, $lookup, $unwind, $group, $set, $sort, $skip, $limit](tue13.png)
 
 [**$match**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-match--aggregation-):
 

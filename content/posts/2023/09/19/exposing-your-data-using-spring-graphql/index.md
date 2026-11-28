@@ -1,13 +1,11 @@
 ---
 title: "Exposing your data using Spring GraphQL"
 date: "2023-09-19T05:25:46+00:00"
-lastmod: "2023-09-19T08:34:54+00:00"
 description: "An introductory look at how we can use Spring GraphQL in our Java applications."
 authors:
   - "simon-verhoeven"
 image: "1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"

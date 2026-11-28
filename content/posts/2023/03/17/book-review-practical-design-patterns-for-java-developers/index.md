@@ -1,7 +1,6 @@
 ---
 title: "Book review - Practical Design Patterns for Java Developers"
 date: "2023-03-17T08:27:08+00:00"
-lastmod: "2023-03-17T08:38:05+00:00"
 description: "Ever wondered why you need design patterns and how to apply them? Miroslav Wengner's book has you covered."
 canonical: "https://webtechie.be/post/2023-03-08-book-review-practical-design-patterns/"
 authors:
@@ -24,9 +23,9 @@ related_posts:
 This book is for sale on [Amazon in Kindle and Paperback editions](https://www.amazon.de/dp/180461467X).
 
 {{< gallery >}}
-practical-cover-830x1024.jpg
-practical-backside.jpg
-miro.jpg
+practical-cover-830x1024.jpg | | Cover of the book Practical Design Patterns for Java Developers by Miroslav Wengner, published by Packt
+practical-backside.jpg | | Back cover of Practical Design Patterns for Java Developers with the description and what you will learn
+miro.jpg | | Portrait of Miroslav Wengner, author of the book, smiling and wearing glasses
 {{< /gallery >}}
 
 We'll start this post with the personal verdict of two avid readers of this book:

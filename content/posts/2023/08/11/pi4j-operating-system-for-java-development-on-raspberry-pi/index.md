@@ -1,7 +1,6 @@
 ---
 title: "Pi4J Operating System for Java development on Raspberry Pi"
 date: "2023-08-11T10:19:50+00:00"
-lastmod: "2023-08-11T10:21:37+00:00"
 description: "Pi4J is an ideal way to introduce the Java language into experiments with electronic components. And Pi4J OS makes this even easier."
 canonical: "https://pi4j.com/blog/2023/20230731_pi4j_os/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "desktop-with-ip-info-1024x577-1.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"
@@ -37,9 +35,9 @@ As the FHNW University uses this OS in different courses, and the Pi4J project p
 For all the info about what's included in each version, check the overview on [pi4j.com/pi4j-os](https://pi4j.com/pi4j-os/).
 
 {{< gallery >}}
-desktop-with-ip-info-1024x577.jpg
-pure-javafx-example-1024x396.jpg
-pure-javafx-kiosk-1024x768.jpg
+desktop-with-ip-info-1024x577.jpg | | Pi4J OS desktop with the Pi4J logo and the Ethernet and WLAN IP addresses and hostname pi4j
+pure-javafx-example-1024x396.jpg | | Pi4J OS desktop with a terminal starting a JavaFX app and a Plain JavaFX App window showing Duke and a Say Hello button
+pure-javafx-kiosk-1024x768.jpg | | Raspberry Pi touchscreen in kiosk mode showing a full-screen JavaFX app with Duke and a Say Hello button
 {{< /gallery >}}
 
 ## History of the project

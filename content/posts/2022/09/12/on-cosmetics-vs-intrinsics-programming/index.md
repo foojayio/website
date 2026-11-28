@@ -1,7 +1,6 @@
 ---
 title: "On Cosmetics vs. Intrinsics in Programming"
 date: "2022-09-12T09:39:56+00:00"
-lastmod: "2022-09-12T09:43:40+00:00"
 description: "Instead of arguing about cosmetics, e.g., annotations vs. \"functional\", we need to spend time on intrinsics more: actors, asynchronous, etc."
 canonical: "https://blog.frankel.ch/on-cosmetics-vs-intrinsics-programming/"
 authors:

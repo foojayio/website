@@ -1,7 +1,6 @@
 ---
 title: "Starting a JavaFX Project with Gluon Tools"
 date: "2020-11-17T08:38:06+00:00"
-lastmod: "2021-08-23T13:01:07+00:00"
 description: "Here on foojay.io you can already find two posts by Carl Dea to get you started with JavaFX. In this post, I want to show you yet another approach that uses the tools provided by Gluon, who are the maintainers, and the driving force behind OpenJFX. The Gluon start website and the plugin allow you to get started with a new JavaFX project in a few clicks. Thanks to the amazing work done by the Gluon team this also gives you a quick-start for the creation of a mobile application which can be built for both Android and iOS."
 authors:
   - "frankdelporte"
@@ -91,13 +90,13 @@ In that case you'll need to follow these steps:
 3. In the "Project structure" dialog in IntelliJ IDEA add the location including the "lib" in the "Modules \> Dependencies" screen, e.g. `/opt/javafx-sdk-16/lib`. By doing this, your IDE will be able to provide you the correct syntax highlighting.
 4. To run your application, we also need to add the startup arguments to point to the javafx-modules. Open the Configurations dialog and provide the "VM options", including all the modules required for your project, e.g. `--module-path /opt/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml`.
 
-![](Screenshot-from-2020-11-16-08-33-50-1024x434.jpg) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
+![IntelliJ IDEA Project Structure dialog, Dependencies tab, with JavaFX libraries and the /opt/javafx-sdk-16/lib folder added](Screenshot-from-2020-11-16-08-33-50-1024x434.jpg) Adding openjfx as a dependency ![IntelliJ IDEA Run/Debug Configurations with VM options setting --module-path to the JavaFX SDK and adding javafx.controls and javafx.fxml](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
 
 ### Create a New Project with start.gluon.io
 
 Gluon has created the website [start.gluon.io](https://start.gluon.io/) to start a new JavaFX project, the same way you can also do for Spring with [start.spring.io](https://start.spring.io/), or Quarkus with [code.quarkus.io](https://code.quarkus.io/).
 
-{{< img src="start-gluon-io-minimal-675x510.png" class="size-medium" width="675" height="510" caption="Minimal selections for a JavaFX application on start.gluon.io" >}}
+{{< img src="start-gluon-io-minimal-675x510.png" alt="start.gluon.io form with name, group and artifact fields, JavaFX 15 with base, graphics and controls modules, and Gluon features" class="size-medium" width="675" height="510" caption="Minimal selections for a JavaFX application on start.gluon.io" >}}
 
 For a minimal JavaFX project, you only need to define the "Application Details" and select the version and modules you are going to need.
 
@@ -105,11 +104,11 @@ As Gluon also offers additional features and you can use their tools to build mo
 
 A nice feature of this site is the "Preview Project" button which will show you the structure of your project before you download it.
 
-{{< img src="start-gluon-io-preview-700x496.png" class="size-medium" width="700" height="496" caption="Preview of the project before downloading" >}}
+{{< img src="start-gluon-io-preview-700x496.png" alt="Project preview dialog on start.gluon.io showing the generated file tree with Main.java, README.md and pom.xml" class="size-medium" width="700" height="496" caption="Preview of the project before downloading" >}}
 
 By clicking the "Generate Project" button, you will get a ZIP with the full project you can open in your IDE and run immediately with `mvn javafx:run`.
 
-{{< img src="start-gluon-io-running-700x372.png" class="size-medium" width="700" height="372" caption="The created application running in IntelliJ IDEA" >}}
+{{< img src="start-gluon-io-running-700x372.png" alt="Generated JavaFX app running beside IntelliJ IDEA, showing the Duke mascot and the text 'Hello, JavaFX 15, running on Java 11.0.7.'" class="size-medium" width="700" height="372" caption="The created application running in IntelliJ IDEA" >}}
 
 ### Create a New Mobile Project with the Gluon Plugin in IntelliJ IDEA
 
@@ -118,19 +117,19 @@ Gluon also created a [plugin for IntelliJ IDEA](https://plugins.jetbrains.com/pl
 In your IntelliJ IDEA, double click the SHIFT key to open the universal search box and type "Plugins" and select the first option. Now you can search in the marketplace and install the Gluon plugin.
 
 {{< gallery cols="2" >}}
-intellij-plugins-300x260.png
-intellij-plugins-marketplace-300x260.png
+intellij-plugins-300x260.png | | IntelliJ IDEA search popup showing the Manage IDE Settings sync plugins action
+intellij-plugins-marketplace-300x260.png | | IntelliJ IDEA Plugins marketplace showing the Gluon plugin
 {{< /gallery >}}
 
 Starting a new mobile JavaFX project now has become a very easy process. From the main menu select File \> New \> Project. In the left list, you will now find "Gluon" and four different options for a new project.
-![](intellij-new-project.png)
+![IntelliJ IDEA New Project dialog with the Gluon category selected and 'Gluon Mobile - Multi View Project' highlighted](intellij-new-project.png)
 
 In the next windows, you can select different options, Maven or Gradle, names of the pre-created first and second view,... Once the project is created and opened in IntelliJ IDEA, you can run it with `mvn javafx:run`.
 
 {{< gallery cols="3" >}}
-intellij-new-project-1.png
-intellij-new-project-run-1024x666.jpg
-intellij-new-project-views.png
+intellij-new-project-1.png | | IntelliJ IDEA New Project dialog with the Gluon Mobile - Multi View Project template selected
+intellij-new-project-run-1024x666.jpg | | IntelliJ IDEA running the generated Gluon application, showing a mobile-style window with a 'Change the World!' button
+intellij-new-project-views.png | | IntelliJ IDEA New Project dialog with primary and secondary view names and CSS file options
 {{< /gallery >}}
 
 As you can see in this video, within 30 seconds you have a new JavaFX project opened in IntelliJ IDEA which you can immediately run and test.

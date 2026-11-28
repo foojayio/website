@@ -1,7 +1,6 @@
 ---
 title: "Couch to fully-observed code with Spring Boot 3.2, Micrometer Tracing, and Digma"
 date: "2023-12-06T10:42:46+00:00"
-lastmod: "2024-01-03T20:23:49+00:00"
 description: "Collecting important data about your code in dev and test has become trivial, it's now also getting easier to put that data to use."
 authors:
   - "jonatan-ivanov"
@@ -9,7 +8,6 @@ authors:
 image: "Digma-white-260.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Observability"
   - "Spring"
 related_posts:
@@ -43,23 +41,23 @@ Here is how to get started:
 
 1. Install the [Digma](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback) plugin from the Jetbrains marketplace.
 
-![](install-digma.png)
+![IntelliJ Settings plugin marketplace showing the Digma Continuous Feedback plugin installed](install-digma.png)
 
 2. Set the instrumentation strategy to "Micrometer" in the Digma Settings (Settings/Preferences -\> Digma).
 
-![](digma-settings.png)
+![Digma plugin settings in IntelliJ with the Spring Boot observability mode dropdown set to choose Micrometer](digma-settings.png)
 
 Digma can work either with the OTel agent (which is downloaded and configured automatically) or with Micrometer Tracing. Both are alternative ways to enable OTel in your project with Micrometer being more production-ready.
 
 3. A link will appear in the UI a few seconds later, suggesting to apply the required configuration changes to enable tracing. This includes adding some dependencies and system properties. We've reduced all of that to a single click.
 
-![](digma-apply-changes.png)
+![IntelliJ editor with Digma panel prompting to configure Spring Boot with Micrometer, showing No Data Yet](digma-apply-changes.png)
 
 Behind the scenes, the plugin will add the required dependencies to the build.gradle/pom.xml file.
 
 4. Finally, make sure "Observability" is turned on in the Digma side panel:
 
-![](digma-enable-o11y.png)
+![Digma panel menu with the Observability toggle switched on](digma-enable-o11y.png)
 
 That's it! All that remains now is to launch your application and run some traffic through it, you should be seeing data appear almost immediately.
 
@@ -67,7 +65,7 @@ That's it! All that remains now is to launch your application and run some traff
 
 It is tempting to look at the ability to quickly navigate from the code to the relevant trace as the holy grail of leveraging tracing and observability while coding. However, if you try to go down that path you'll soon find that the individual trace is just not that important.
 
-![](digma-trace.jpg)
+![Jaeger trace for GET /owners/{ownerId} opened in IntelliJ next to Digma insights on request breakdown and duration](digma-trace.jpg)
 
 Traces are a great way to understand code behavior and provide a good "request handling anatomy" as a reference or guide for any developer working on a piece of code. However, the granularity level of the individual trace runs a serious risk of spamming and cluttering our view with irrelevant data. More importantly, we may end up missing critical data such as errors, bad performance, or issues with the flow of control simply because that specific chosen trace does not contain them.
 
@@ -77,19 +75,19 @@ Taking that a step further, one can find that the truly important things we need
 
 What we're trying to do with [digma.ai](https://digma.ai/) is just that, create a platform that takes tracing beyond anecdotal data points into knowledge you need to have as you work on code. You'll be able to see that as you work with Digma.
 
-![](digma-latency-graph.png)
+![Digma duration histogram showing a last call of 7.9 ms and a median of 7.2 ms](digma-latency-graph.png)
 
 In that vein, we've (Digma) reversed the pyramid so to speak — instead of sifting through logs and traces to find issues — Digma analyzes that data to find issues and then allows you to navigate to the relevant logs and traces that represent good examples.
 
 In this sense, the first and most important priority is to actually find these important aspects related to our code we would like to know and understand, and only then to drill down into the lower-level graphs, traces, and metrics. We can ask questions such as "What does an average request look like" vs. "What does it look like when it's slow" and save a lot of time by letting the toolings discern the root causes for us.
 
-![](digma-insights.png)
+![Digma flagging an N+1 suspected query and span bottleneck in OwnerController, with a latency chart below](digma-insights.png)
 
 ## Adding more observability
 
 Beyond automated instrumentation available for Spring Boot, JDBC, and other libraries, you may want to inspect the behavior of specific functions in your code. Micrometer provides some great ways to do that (with the DSL syntax or annotations). With the plugin implementation, we wanted to make that extra easy from the context of any function.
 
-![](digma-add-annotation.png)
+![Digma panel showing 'No Observability' for a method with an Add annotation button](digma-add-annotation.png)
 
 Clicking the button will take care of adding the `@Observe` annotation to start recording useful information about the function invocations. In this manner, we can gradually evolve the project observability coverage from the extremities of the API and clients to the care of the domain logic.
 

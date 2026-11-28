@@ -1,7 +1,6 @@
 ---
 title: "Reduce Java Application Startup and Warmup Times with CRaC"
 date: "2023-05-16T11:21:12+00:00"
-lastmod: "2023-06-04T08:05:13+00:00"
 description: "Today Azul announces the general availability of Azul Zulu Builds of OpenJDK for Java 17 with CRaC support in x86, 64-bit configurations."
 canonical: "https://www.azul.com/blog/reduce-java-application-startup-and-warmup-times-with-crac/"
 authors:
@@ -51,7 +50,7 @@ The OpenJDK CRaC Project defines public Java APIs that allow for coordinating ap
 **[For discussions and questions on this topic, see the CRaC Discussion Forum.](https://forums.foojay.io/forums/forum/coordinated-restore-at-checkpoint-crac/)**
 
 CRaC allows a running application to pause, snapshot its state, and store it for later use – even on a different machine. It saves the full context of the application process as an image, including its state and memory.
-[![](image-3-1024x268.png)](https://docs.azul.com/core/crac/crac-guideline)
+[![Banner reading 'Read CRaC Use Guidelines' with a Learn More button](image-3-1024x268.png)](https://docs.azul.com/core/crac/crac-guideline)
 
 When the application restarts later, it skips startup and warmup and jumps right to that stored profile. It rapidly reloads the entire application and its state so it can continue from the point where the checkpoint was created. This approach reduces Java application startup and warmup times by several orders of magnitude, meaning milliseconds instead of seconds or minutes.
 
@@ -72,6 +71,6 @@ OpenJDK builds with and without CRaC
 To use CRaC with the Azul Zulu Build of OpenJDK for Java 17, [visit our Downloads page](https://www.azul.com/downloads/?package=jdk#zulu) and select your build. You can also learn more about Azul Platform Core from our website.
 
 **[For discussions and questions on this topic, see the CRaC Discussion Forum.](https://forums.foojay.io/forums/forum/coordinated-restore-at-checkpoint-crac/)**
-[![](image-4-1024x270.png)](https://www.azul.com/downloads/?package=jdk-crac#zulu)
+[![Banner reading 'Java 17 with JDK CRaC' with a Download Now button](image-4-1024x270.png)](https://www.azul.com/downloads/?package=jdk-crac#zulu)
 
 **[For discussions and questions on this topic, see the CRaC Discussion Forum.](https://forums.foojay.io/forums/forum/coordinated-restore-at-checkpoint-crac/)**

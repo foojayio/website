@@ -1,7 +1,6 @@
 ---
 title: "Released: OpenJDK 18.0.2, 17.0.4, 15.0.8, 13.0.12, 11.0.16, 8u342"
 date: "2022-07-20T12:32:00+00:00"
-lastmod: "2022-07-25T13:06:00+00:00"
 description: "The next quarterly release of the OpenJDK has been made available, as scheduled, for July 2022, impacting a number of OpenJDK releases."
 authors:
   - "geertjan-wielenga"
@@ -31,4 +30,4 @@ All the fixes provided for each updated OpenJDK release are found here:
 Some of the security issues addressed are important enough to get a CVE (Common Vulnerabilities and Exposures), which means it is included in a list of publicly available computer security flaws. When the term "CVE" is referred to, what is meant is a security flaw that's been assigned a CVE ID number.
 
 These too, with their details, [are listed on Foojay.io](https://javaalmanac.io/jdk/17/):
-[![](image-2-1024x671.png)](https://javaalmanac.io/jdk/17/)
+[![OpenJDK update details page for 17.0.4 listing four CVE fixes with CVSS scores from 5.3 to 7.5](image-2-1024x671.png)](https://javaalmanac.io/jdk/17/)

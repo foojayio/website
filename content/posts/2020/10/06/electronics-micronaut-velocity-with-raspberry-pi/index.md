@@ -1,7 +1,6 @@
 ---
 title: "Electronics & Micronaut Velocity with Raspberry Pi"
 date: "2020-10-06T08:35:45+00:00"
-lastmod: "2021-12-10T13:02:04+00:00"
 description: "we present you with another great example of Java on Raspberry Pi. It shows how to create a Micronaut Velocity demo using an 8×8 LED matrix display."
 canonical: "http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/"
 authors:
@@ -22,7 +21,7 @@ related_posts:
 In a previous post, we looked at the project "[Electronics \& Quarkus Qute on Raspberry Pi](https://foojay.io/today/electronics-quarkus-qute-on-raspberry-pi/)" by [Igor De Souza](https://twitter.com/Igfasouza).
 
 In this article, we present you another great example of Java on Raspberry Pi created by Igor. It shows how to create a Micronaut Velocity demo using an 8x8 LED matrix display.
-![](raspberry_micronaut.jpg)
+![Micronaut logo beside the Raspberry Pi logo](raspberry_micronaut.jpg)
 
 ## Micronaut
 
@@ -42,7 +41,7 @@ More info on: <http://velocity.apache.org/>
 
 ## Sense HAT
 
-{{< img src="sensehat-300x218-1.jpg" class="alignleft size-large" width="300" height="218" >}}
+{{< img src="sensehat-300x218-1.jpg" alt="Raspberry Pi Sense HAT add-on board with an 8x8 RGB LED matrix and a joystick" class="alignleft size-large" width="300" height="218" >}}
 
 The Sense HAT is an add-on board for Raspberry Pi, made especially for the Astro Pi mission – which launched to the International Space Station in December 2015 – and is now [available to buy.](https://shop.pimoroni.com/products/raspberry-pi-sense-hat) The Sense HAT has an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors: Gyroscope, Accelerometer, Magnetometer, Barometer, Temperature sensor, and Relative Humidity sensor.
 
@@ -50,7 +49,7 @@ HAT stands for "Hardware Attached on Top" which is a new hardware specification 
 
 You can check Igor's blog post with additional info on the Sense HAT [here](http://www.igfasouza.com/blog/sense-hat/).  
 
-{{< img src="IMG-20200928-WA0001-85334a8a.jpg" class="alignleft is-resized" width="150" height="200" >}}
+{{< img src="IMG-20200928-WA0001-85334a8a.jpg" alt="Raspberry Pi with Sense HAT showing a smiley on its LED matrix, mirrored by the web page on the laptop above" class="alignleft is-resized" width="150" height="200" >}}
 
 ## Idea
 
@@ -219,7 +218,7 @@ Using Java and Pi4J you can build an application to control the LED matrix as sh
 The characters and images are created by converting the bit series to byte values inside enums. The number of definitions in the code is limited as this example is only a demonstration of what you can do, not a fully finished project. So some fun work left for you!
 
 By using the "Find" function in the IDE for value "1" it becomes pretty clear how the defined columns and rows will end up on the matrix display.
-![](width-b-versus-t.jpg)
+![Code defining the pixel bit patterns for the letters B and T as binary strings in the Java source](width-b-versus-t.jpg)
 
 ## Conclusion
 

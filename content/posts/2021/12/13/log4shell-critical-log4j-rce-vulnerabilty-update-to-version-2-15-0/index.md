@@ -1,7 +1,6 @@
 ---
 title: "Log4Shell: Critical Log4j RCE Vulnerabilty -- Update to Version 2.15.0"
 date: "2021-12-13T07:16:56+00:00"
-lastmod: "2021-12-13T11:47:09+00:00"
 description: "On Dec.10, 2021, a new, critical Log4j vulnerability was disclosed: Log4Shell. All current versions of log4j2 up to 2.14.1 are vulnerable."
 canonical: "https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-4428/"
 authors:

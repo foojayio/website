@@ -1,0 +1,689 @@
+#!/usr/bin/env python3
+"""
+Shrinks the WordPress-era media in content/ so the built site fits GitHub Pages.
+
+WHY THIS EXISTS. The deploy artifact reached 1.26 GB against a hard 1 GB limit
+("Deployment might fail" -- a warning that appears on a run which otherwise goes
+GREEN, so the site sails past the limit invisibly). It is not the HTML: 4100 pages
+are 148 MB. It is the images -- 1229 MB across 5952 files, 78% of it in the 1214
+files over 200 KB. Three post bundles each carried the SAME 52 MB animated GIF,
+and all three used it as their `image:` hero.
+
+WHAT IT DOES
+
+  1. Animated GIF -> animated WebP, for GIFs over --gif-min. 41 files held 301 of
+     the 316 MB of GIF. These are screen recordings: the container is the problem,
+     not the content. WebP animates too, so the markup keeps its shape -- but the
+     FILENAME changes, so references are rewritten (see convert_gif).
+  2. An animated `image:` hero gets a STILL poster, and `image:` is repointed at
+     it. A hero is the card thumbnail, the og:image and the JSON-LD image, none of
+     which animate: a link preview shows frame one, a grid of animating cards is
+     unreadable, and the whole file downloads to draw a thumbnail.
+     validate/Frontmatter.checkHeroImageStill enforces this at PR time.
+  3. An over-budget WebP re-encoded down the ladder, IN PLACE, keeping its name.
+     Needed because the first version of this script had no budget ladder and left
+     three 10.23 MB files behind that nothing revisited.
+
+  4. Large PNG -> JPEG, over --png-min. 518 files (504 in posts, 14 in author
+     bundles). JPEG has no alpha, so the files that genuinely use transparency stay
+     PNG -- which is not the same as HAVING an alpha channel, since many of these
+     WordPress PNGs are RGBA with every pixel opaque, hence the check on the
+     channel's actual minimum. The FILENAME changes, so references are rewritten.
+
+  5. PNG/JPEG resized when the long edge exceeds --cap. 833 files were wider,
+     holding 545 MB, while the article column is ~880px -- so 1600 still covers a
+     2x display. Format and filename are unchanged, so nothing references these
+     by a name that moves.
+
+TARGETS THE BUDGET, NOT A FIXED QUALITY. A single quality setting is not good
+enough: converting the 52 MB OpenRewrite.gif at q78 still left 10.2 MB, over the
+3 MB per-file budget the validator enforces. So each GIF is retried with
+progressively harder settings until it fits, and the first result that does is
+kept (see LADDER).
+
+A RE-SCRAPE NO LONGER UNDOES THIS. Passes 1 and 4 rename ~580 files, and
+transfer/Posts.java rebuilds a post from the live WordPress page -- so it used to
+look for foo.gif, not find it, download the 52 MB original back and repoint the
+body at foo.gif, orphaning the WebP and putting the whole 570 MB saving back.
+HtmlToMarkdown.localizeImage now recognises a file already re-encoded here
+(convertedSibling: .gif -> .webp, .png -> .jpg, both exactly the with_suffix()
+calls below) and Posts.stillPoster does the same for pass 2's posters, so the
+scraper keeps what this script produced and fetches nothing. Keep the two
+substitutions in step with the two with_suffix() calls -- adding a pass that
+renames a file means adding it there as well, or the next re-scrape silently
+reverts that pass and nothing reports it.
+
+Passes 3 and 5 keep the filename, so they were never at risk: the scraper skips a
+file that is already on disk, whatever its dimensions.
+
+DELIBERATELY NOT DONE: converting the remaining PNGs to WebP. It is the biggest
+single win left (measured 6.4 MB -> 0.5 MB on the worst offender) but the JPEG pass
+above already takes the large ones, at a measured 81% against WebP's 89% over a
+40-file sample, and JPEG is what the other 1400 images already are. Revisit after
+cutover if the artifact needs the headroom.
+
+TWO SAFETY RULES, both learned the hard way on the first run:
+
+  * EVERY BUNDLE IS FINISHED BEFORE THE NEXT ONE STARTS. The first version
+    converted every GIF and rewrote the references at the END. A commit landed
+    while it was running and captured the state in between -- converted files,
+    references still pointing at the deleted .gif -- and put 4 broken images on
+    the live site. Nothing is deleted now until its references are rewritten, so
+    the tree is consistent at every instant and killing the run is safe.
+  * IT NEVER WRITES OVER, OR DELETES, A FILE IT DID NOT CREATE. One bundle holds
+    both projectexplorer.gif and a hand-made projectexplorer.webp; the first
+    version destroyed the latter. A destination that already exists is now a SKIP
+    with a report, and the only file ever unlinked is the source that was just
+    converted and verified.
+
+WHY PYTHON, in a scripts/ tree that is otherwise jbang Java. Writing an ANIMATED
+WebP is the point of step 1, and Pillow is the only writer available: Java's
+ImageIO has no WebP encoder, and the usual add-on (org.sejda.imageio:webp-imageio)
+does static WebP only. This runs by hand, locally, and its OUTPUT is committed --
+CI needs neither Python nor Pillow, the same posture as transfer/Sponsors.java.
+
+UNLIKE ITS cleanup/ SIBLINGS, THIS ONE OUTLIVES CUTOVER. The others repair a
+WordPress conversion artefact and are then dead. Contributors keep adding images
+forever, so this stays useful -- and the validator's message names it.
+
+IDEMPOTENT. A file already inside the caps is untouched, and a second run reports
+nothing to do. Still re-run after any late re-scrape -- not to undo a reverted
+rename (see above, that is handled) but because a re-scrape can bring in images
+this has never seen, which is what validate/Frontmatter.checkImageWeight fails a
+PR on.
+
+NOTE ON THE GIT REPO. This shrinks the build output and the working tree, not
+.git, which keeps every old blob. A fresh clone stays large until history is
+rewritten -- a separate and much riskier job. The 1 GB limit is on the artifact,
+so this fixes the actual failure.
+
+Usage:
+  python3 .claude/skills/schedule-posts/resize_images.py --dry-run
+  python3 .claude/skills/schedule-posts/resize_images.py
+  python3 .claude/skills/schedule-posts/resize_images.py --path content/posts/2024
+"""
+
+import argparse
+import os
+import re
+import sys
+from pathlib import Path
+
+try:
+    from PIL import Image, ImageSequence
+except ImportError:
+    sys.exit("needs Pillow (Homebrew Python refuses pip --user):\n"
+             "  python3 -m venv ~/.venvs/foojay-images && ~/.venvs/foojay-images/bin/pip install Pillow\n"
+             "then run this script with ~/.venvs/foojay-images/bin/python")
+
+Image.MAX_IMAGE_PIXELS = None
+
+RASTER = {".png", ".jpg", ".jpeg"}
+# index.adoc BELONGS HERE, and leaving it out was a silent data loss rather than
+# a missing feature. An AsciiDoc post is the same page bundle with the same YAML
+# frontmatter (template/post.adoc, draft/README.md) -- so passes 1 and 4 happily
+# renamed its foo.png to foo.jpg and unlinked the original, then rewrote the
+# references in an index.md that does not exist. The result is a broken image
+# with a green build, which is the one outcome this script is written to avoid.
+# The reference regex needs nothing: it matches on the filename, so AsciiDoc's
+# `image::foo.png[]` is caught by the same pattern as Markdown's `](foo.png)`.
+INDEX_NAMES = ("index.md", "_index.md", "index.adoc")
+
+# (long-edge cap, WebP quality). Tried in order until the result fits the budget;
+# the last rung is deliberately aggressive, because a screencast that still will
+# not fit is better small than over the limit.
+LADDER = [(1600, 78), (1600, 70), (1400, 62), (1200, 55), (1000, 48)]
+
+# Pillow will not write an arbitrarily long animation -- projectexplorer.gif's 805
+# frames come back short and the verification rejects them -- and decoding 800
+# frames five times over is minutes per file. So the frame STEP is derived once,
+# from the frame count, rather than being another rung to try: 805 frames at
+# step 4 is 202, which encodes correctly and quickly. Each kept frame absorbs the
+# duration of the ones it replaces, so playback speed is unchanged; it is choppier,
+# which for a screen recording is the right thing to trade for fitting the budget.
+MAX_FRAMES = 250
+
+
+def human(n):
+    return f"{n / 1e6:.2f} MB" if n >= 1e5 else f"{n / 1e3:.0f} KB"
+
+
+def index_files(folder):
+    return [Path(folder) / n for n in INDEX_NAMES if (Path(folder) / n).is_file()]
+
+
+# --------------------------------------------------------------- GIF -> WebP
+
+def decode_frames(src):
+    """Decode a GIF once into (frames, durations, loop), thinned to MAX_FRAMES.
+
+    Decoding is the expensive half for a long animation, so it happens ONCE and the
+    result is re-encoded at each quality rung, rather than re-reading the file five
+    times.
+    """
+    with Image.open(src) as im:
+        total = getattr(im, "n_frames", 1)
+        fast = []
+        for fr in ImageSequence.Iterator(im):
+            fast.append(fr.info.get("duration", 80) or 80)
+        avg = (sum(fast) / len(fast)) if fast else 80
+        step = 2 if (total > 40 and avg < 60) else 1
+        step = max(step, -(-total // MAX_FRAMES))  # ceil division
+
+        im.seek(0)
+        frames, durations, carried = [], [], 0
+        for i, fr in enumerate(ImageSequence.Iterator(im)):
+            carried += fr.info.get("duration", 80) or 80
+            if i % step:
+                continue
+            frames.append(fr.convert("RGB"))
+            durations.append(carried)
+            carried = 0
+        return frames, durations, im.info.get("loop", 0)
+
+
+def encode_webp(frames, durations, loop, dst, cap, quality):
+    """Encode already-decoded frames to dst. Returns the frame count written."""
+    out = []
+    for f in frames:
+        w, h = f.size
+        if max(w, h) > cap:  # never upscale
+            k = cap / max(w, h)
+            f = f.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+        out.append(f)
+    out[0].save(dst, "WEBP", save_all=True, append_images=out[1:],
+                duration=durations, loop=loop, quality=quality, method=4)
+    return len(out)
+
+
+def rewrite_in_bundle(folder, old, new):
+    """Repoint every reference to `old` at `new`, in this bundle's index only.
+
+    Bundle images are referenced by BARE FILENAME (resource-url.html resolves a
+    name against the page's own folder), so a text replacement is the right
+    shape -- the name appears in exactly these four ways, all live in content/:
+
+        ![alt](shot.gif)          markdown image
+        image: "shot.gif"         the hero in frontmatter
+        shot.gif | caption        a line inside {{< gallery >}}
+        <img src="shot.gif">      raw HTML in a preserved block
+
+    Scoped to this bundle, so a same-named image in another post is never touched.
+
+    WHOLE FILENAMES ONLY, and this is not defensive tidiness -- a plain
+    text.replace() corrupted two posts. One bundle holds both `dummies.png` and
+    `image-764x1024-dummies.png`; converting the first rewrote the SUFFIX of the
+    second, so its hero pointed at `image-764x1024-dummies.jpg`, a file nothing
+    ever wrote. `add-mnemonic-bookmark.png` went the same way. Nothing reported
+    it either: Hugo publishes a bundle resource that no longer matches a
+    reference without a word, and the hero is a card thumbnail and og:image on
+    every listing page -- validate/BuiltSite.java is what caught it, from eight
+    pages at once.
+
+    The lookbehind blocks a match preceded by another filename character, which
+    is exactly the `-dummies.png` case, while still matching every shape a real
+    reference takes: `](name.png)`, `image: "name.png"`, `name.png | caption`
+    and `src="name.png"`. The lookahead blocks `name.png2` without blocking a
+    filename at the end of a sentence.
+    """
+    pattern = re.compile(r"(?<![A-Za-z0-9_.-])" + re.escape(old) + r"(?![A-Za-z0-9_-])")
+    n = 0
+    for md in index_files(folder):
+        text = md.read_text(encoding="utf-8")
+        replaced = pattern.sub(new, text)
+        if replaced == text:
+            continue
+        md.write_text(replaced, encoding="utf-8")
+        n += 1
+    return n
+
+
+def convert_gif(gif, budget, dry_run):
+    """One GIF -> WebP, references rewritten, original removed. Returns (before, after)."""
+    before = gif.stat().st_size
+    dst = gif.with_suffix(".webp")
+    if dst.exists():
+        # Never clobber a file we did not create -- one bundle ships both
+        # projectexplorer.gif and a hand-made projectexplorer.webp.
+        print(f"  SKIP {gif} -- {dst.name} already exists")
+        return None
+    if dry_run:
+        return (before, None)
+
+    frames, durations, loop = decode_frames(gif)
+    if not frames:
+        print(f"  SKIP {gif.name} -- no frames decoded")
+        return None
+
+    # Encode to a TEMP path and rename only once the result is verified. Writing
+    # straight to dst meant an interrupted run left a 0-byte .webp behind -- which
+    # the "destination exists" guard above then treated as a real file, so the GIF
+    # could never be converted again and the junk got committed. A partial temp file
+    # is cleaned up in the finally below and blocks nothing.
+    tmp = dst.with_name(dst.name + ".tmp")
+    keep = dst.with_name(dst.name + ".best")   # smallest result so far
+    best = None
+    try:
+        for cap, q in LADDER:
+            written = encode_webp(frames, durations, loop, tmp, cap, q)
+            size = tmp.stat().st_size
+            # Verify the animation survived -- but NOT by frame equality. libwebp
+            # merges duplicate consecutive frames as an optimisation (221 in, 198
+            # out on the TestBox recording), which is correct and desirable. An
+            # equality check rejected 23 of 65 GIFs, leaving the biggest offenders
+            # in place; reading durations back is no help either, since Pillow
+            # reports 0 ms for a WebP it just wrote. So the test is: still animated,
+            # and not truncated to a fraction of its length.
+            with Image.open(tmp) as check:
+                got = getattr(check, "n_frames", 1)
+            # Same loose floor as shrink_webp, and for the same reason: libwebp
+            # merges duplicate frames legitimately, so only gross truncation is a
+            # failure. A 50% floor here rejected 23 of 65 GIFs.
+            if written > 1 and (got < 2 or got < written * 0.2):
+                print(f"  SKIP {gif.name} -- animation truncated ({written} -> {got} frames)")
+                return None
+            # Keep the SMALLEST result, and only stop early once it both fits the
+            # budget and is a real improvement. Stopping at "fits the budget" alone
+            # was wrong for the 45 GIFs already under 3 MB: rung 1 was accepted
+            # without ever trying a lower quality, came back BIGGER than the GIF
+            # (these are flat-colour UI recordings, where GIF's palette+LZW is
+            # genuinely efficient), and was then discarded silently.
+            if best is None or size < best:
+                best = size
+                if keep.exists():
+                    keep.unlink()
+                tmp.replace(keep)
+            else:
+                tmp.unlink()
+            if best <= budget and best <= before * 0.8:
+                break
+        if best is not None and best < before * 0.9:
+            keep.replace(dst)
+    finally:
+        for leftover in (tmp, keep):
+            if leftover.exists():
+                leftover.unlink()
+
+    # This threshold MUST match the one the file was written under, above. It said
+    # `best >= before` while the write required `best < before * 0.9`, so a result
+    # landing in that 10% gap was never saved -- and the code fell straight through
+    # to rewriting the references and DELETING the GIF. Two images (image3.gif,
+    # codeactions.gif) were lost that way and had to be recovered from git.
+    if best is None or best >= before * 0.9:
+        return None
+
+    # Order matters: references first, THEN delete. A run killed between the two
+    # would otherwise leave the tree pointing at a file that no longer exists.
+    rewrite_in_bundle(gif.parent, gif.name, dst.name)
+    gif.unlink()
+    return (before, best)
+
+
+# ------------------------------------------------------------ animated hero
+
+def poster_for(img, cap, dry_run):
+    """A still poster next to an animated image. Returns the new Path, or None.
+
+    PNG when the frame has 256 colours or fewer -- a GIF frame always does, so the
+    poster is LOSSLESS and crisp for UI screenshots -- otherwise JPEG, which is
+    what an og:image wants for a photo or a rendered graphic.
+    """
+    with Image.open(img) as im:
+        im.seek(0)
+        frame = im.convert("RGB")
+    w, h = frame.size
+    if max(w, h) > cap:
+        k = cap / max(w, h)
+        frame = frame.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+    palette = frame.getcolors(maxcolors=256) is not None
+    dst = img.with_name(img.stem + "-poster" + (".png" if palette else ".jpg"))
+    if dst.exists():
+        print(f"  SKIP poster for {img.name} -- {dst.name} already exists")
+        return None
+    if dry_run:
+        return dst
+    if palette:
+        frame.convert("P", palette=Image.ADAPTIVE, colors=256).save(dst, "PNG", optimize=True)
+    else:
+        frame.save(dst, "JPEG", quality=88, optimize=True, progressive=True)
+    return dst
+
+
+def is_animated(path):
+    try:
+        with Image.open(path) as im:
+            return getattr(im, "n_frames", 1) > 1
+    except Exception:
+        return False
+
+
+def fix_animated_heroes(root, cap, dry_run):
+    """Repoint an animated `image:` at a still poster. Returns (fixed, orphaned)."""
+    fixed, orphaned = [], []
+    indexes = []
+    for name in INDEX_NAMES:
+        indexes.extend(root.rglob(name))
+    for md in sorted(indexes):
+        text = md.read_text(encoding="utf-8", errors="replace")
+        end = text.find("\n---", 3)
+        if end < 0:
+            continue
+        fm, body = text[:end], text[end:]
+        m = re.search(r'^image:\s*"?([^"\n]+)"?\s*$', fm, re.M)
+        if not m:
+            continue
+        hero = m.group(1).strip()
+        if not hero or "://" in hero or hero.startswith("/"):
+            continue
+        img = md.parent / hero
+        if not img.is_file() or not is_animated(img):
+            continue
+        dst = poster_for(img, cap, dry_run)
+        if dst is None:
+            continue
+        if not dry_run:
+            md.write_text(text.replace(f'image: "{hero}"', f'image: "{dst.name}"'), encoding="utf-8")
+        fixed.append((md, hero, dst.name))
+        # The animation itself is NOT moved into the body -- editing someone's
+        # article text is not this script's call. Where the body does not already
+        # show it, that is reported so a human can decide.
+        #
+        # Remote URLs are stripped first: java-on-visual-studio-code-may-2023 links
+        # the SAME image on Microsoft's blog, so the bare substring "projectexplorer.gif"
+        # appears in the body while no LOCAL reference to it exists -- which read as
+        # "still shown" and hid the orphan.
+        if hero not in re.sub(r"https?://\S+", "", body):
+            orphaned.append((md, hero))
+    return fixed, orphaned
+
+
+# ------------------------------------------------- over-budget WebP, in place
+
+def shrink_webp(webp, budget, cap, dry_run):
+    """Re-encode an over-budget WebP down the ladder, keeping its NAME.
+
+    Needed because the first version of this script had no budget ladder: it
+    converted the three 52 MB OpenRewrite.gif copies at a fixed quality and left
+    10.23 MB each, and shrink_raster skips .webp entirely, so nothing ever revisited
+    them. 30 MB in four files.
+
+    The extension does not change, so unlike every other conversion here this one
+    rewrites no references at all.
+    """
+    before = webp.stat().st_size
+    if before <= budget:
+        return None
+    if dry_run:
+        return (before, None)
+
+    try:
+        frames, durations, loop = decode_frames(webp)
+    except Exception:
+        return None
+    if not frames:
+        return None
+
+    # A DIFFERENT ladder from the GIF path, because the input is different: this
+    # file is ALREADY lossy WebP, so re-encoding at a lower quality barely helps
+    # and can make it bigger (decompile_debugging.webp went 3.35 -> 3.65 MB at
+    # q70). Measured, the only two levers that work are frame count and
+    # dimensions -- and for a screen recording, FRAMES go first: a choppier demo
+    # is readable, a shrunken one is not. Dropping every 2nd/3rd frame takes
+    # moveRefactoring.webp from 6.20 to 3.70 MB with its 1000px width intact.
+    #
+    # Frames are thinned with their durations carried over, so playback speed is
+    # unchanged -- the same rule encode_webp's own thinning follows.
+    steps = ((1, 78), (2, 72), (3, 72), (3, 65))
+    tmp = webp.with_name(webp.name + ".tmp")
+    keep = webp.with_name(webp.name + ".best")
+    best = None
+    try:
+        for step, q in steps:
+            fr, dd, carried = [], [], 0
+            for i, (frame, dur) in enumerate(zip(frames, durations)):
+                carried += dur
+                if i % step:
+                    continue
+                fr.append(frame)
+                dd.append(carried)
+                carried = 0
+            written = encode_webp(fr, dd, loop, tmp, cap, q)
+            size = tmp.stat().st_size
+            with Image.open(tmp) as check:
+                got = getattr(check, "n_frames", 1)
+            # A LOOSE floor on purpose. libwebp merges duplicate consecutive
+            # frames, and re-encoding an already-lossy animation at lower quality
+            # makes many more frames identical -- moveRefactoring.webp went from
+            # 228 frames to under half, so a 50% floor rejected every rung and the
+            # file was silently left at 6.2 MB. What actually matters is that the
+            # animation still exists and was not truncated to a handful; the merged
+            # frames keep their summed durations, so its length is unchanged.
+            if written > 1 and (got < 2 or got < written * 0.2):
+                continue
+            if best is None or size < best:
+                best = size
+                if keep.exists():
+                    keep.unlink()
+                tmp.replace(keep)
+            else:
+                tmp.unlink()
+            if best <= budget:
+                break
+        if best is not None and best < before * 0.9:
+            keep.replace(webp)
+            return (before, best)
+        return None
+    finally:
+        for leftover in (tmp, keep):
+            if leftover.exists():
+                leftover.unlink()
+
+
+# ---------------------------------------------------------- large PNG -> JPEG
+
+def has_real_transparency(im):
+    """True when the image ACTUALLY uses its alpha channel.
+
+    Carrying an alpha channel is not the same as using it -- plenty of WordPress
+    PNGs are RGBA with every pixel opaque. Checking the channel's minimum tells
+    them apart, which keeps 500-odd fully opaque screenshots eligible for JPEG
+    while protecting the 22 that really are transparent.
+    """
+    if im.mode not in ("RGBA", "LA", "PA") and not (im.mode == "P" and "transparency" in im.info):
+        return False
+    return im.convert("RGBA").getchannel("A").getextrema()[0] < 255
+
+
+def png_to_jpeg(png, quality, cap, dry_run):
+    """A large opaque PNG -> JPEG, references rewritten. Returns (before, after).
+
+    JPEG rather than WebP by preference, and the cost of that choice is small:
+    measured over a 40-file sample, JPEG q85 saves 81% against WebP q82's 89% --
+    297 MB vs 327 MB projected across all 541 large PNGs. Either clears the 1 GB
+    artifact limit, and JPEG is what the other 1400 images on the site already are.
+
+    Transparency is the one hard limit: JPEG has no alpha, so a transparent PNG
+    would be silently flattened onto black. Those keep their PNG.
+    """
+    before = png.stat().st_size
+    with Image.open(png) as im:
+        if has_real_transparency(im):
+            return None
+        out = im.convert("RGB")
+        w, h = out.size
+        if max(w, h) > cap:
+            k = cap / max(w, h)
+            out = out.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+
+    dst = png.with_suffix(".jpg")
+    if dst.exists():
+        print(f"  SKIP {png.name} -- {dst.name} already exists")
+        return None
+    if dry_run:
+        return (before, None)
+
+    tmp = dst.with_name(dst.name + ".tmp")
+    try:
+        out.save(tmp, "JPEG", quality=quality, optimize=True, progressive=True)
+        after = tmp.stat().st_size
+        if after >= before * 0.9:
+            return None
+        tmp.replace(dst)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+    # References first, THEN delete -- same ordering rule as the GIFs.
+    rewrite_in_bundle(png.parent, png.name, dst.name)
+    png.unlink()
+    return (before, after)
+
+
+# ------------------------------------------------------------------ PNG / JPEG
+
+def shrink_raster(src, cap, jpeg_quality, dry_run):
+    """Resize in place when oversized; re-encode JPEG. Returns the new size or None.
+
+    Writes only when the result is MEANINGFULLY smaller (>10%), which does two
+    jobs. It stops a re-encode from GROWING a file -- a well-optimised PNG often
+    comes back bigger, and inflating images while claiming to shrink the site is
+    worse than doing nothing. And it makes repeated runs safe: a JPEG re-encoded at
+    the same quality loses a little each time, so without a floor this would
+    quietly degrade every photo on every run.
+    """
+    ext = src.suffix.lower()
+    before = src.stat().st_size
+    with Image.open(src) as im:
+        w, h = im.size
+        icc = im.info.get("icc_profile")
+        oversized = max(w, h) > cap
+        if ext == ".png" and not oversized:
+            return None
+        out = im.copy()
+        if oversized:
+            k = cap / max(w, h)
+            out = out.resize((max(1, round(w * k)), max(1, round(h * k))), Image.LANCZOS)
+
+    if dry_run:
+        return -1
+
+    tmp = src.with_suffix(src.suffix + ".tmp")
+    try:
+        if ext == ".png":
+            out.save(tmp, "PNG", optimize=True)
+        else:
+            if out.mode in ("RGBA", "P", "LA"):
+                out = out.convert("RGB")
+            out.save(tmp, "JPEG", quality=jpeg_quality, optimize=True,
+                     progressive=True, **({"icc_profile": icc} if icc else {}))
+        after = tmp.stat().st_size
+        if after >= before * 0.9:
+            tmp.unlink()
+            return None
+        tmp.replace(src)
+        return after
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+
+# ------------------------------------------------------------------------ main
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--path", default="content")
+    ap.add_argument("--cap", type=int, default=1600, help="max long edge in px")
+    ap.add_argument("--gif-min", type=int, default=200_000)
+    ap.add_argument("--budget", type=int, default=3_000_000,
+                    help="per-file target; matches Frontmatter.MAX_IMAGE_BYTES")
+    ap.add_argument("--jpeg-quality", type=int, default=82,
+                    help="re-encode quality for images that are ALREADY jpeg")
+    ap.add_argument("--png-min", type=int, default=100_000,
+                    help="convert PNGs above this to JPEG")
+    ap.add_argument("--png-jpeg-quality", type=int, default=85)
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+
+    root = Path(args.path)
+    if not root.is_dir():
+        sys.exit(f"not a directory: {root}")
+
+    saved = 0
+
+    gifs = sorted((p for p in root.rglob("*")
+                   if p.suffix.lower() == ".gif" and p.stat().st_size > args.gif_min),
+                  key=lambda p: -p.stat().st_size)
+    print(f"GIF -> WebP ({len(gifs)} candidates)")
+    converted = 0
+    for gif in gifs:
+        r = convert_gif(gif, args.budget, args.dry_run)
+        if r is None:
+            continue
+        before, after = r
+        converted += 1
+        if after is not None:
+            saved += before - after
+            print(f"  {human(before):>9} -> {human(after):>9}  {gif.name[:50]}")
+        else:
+            print(f"  {human(before):>9} -> {'?':>9}  {gif.name[:50]}")
+
+    print(f"\nanimated hero -> still poster")
+    fixed, orphaned = fix_animated_heroes(root, args.cap, args.dry_run)
+    for md, hero, poster in fixed:
+        print(f"  {hero} -> {poster}   {md.parent.name[:46]}")
+
+    print(f"\nover-budget WebP re-encoded in place")
+    for w in sorted((p for p in root.rglob("*.webp") if p.stat().st_size > args.budget),
+                    key=lambda p: -p.stat().st_size):
+        r = shrink_webp(w, args.budget, args.cap, args.dry_run)
+        if r is None:
+            continue
+        before, after = r
+        if after is not None:
+            saved += before - after
+            print(f"  {human(before):>9} -> {human(after):>9}  {w.name[:50]}")
+
+    print(f"\nlarge PNG -> JPEG (over {args.png_min // 1000} KB)")
+    pngs = sorted((p for p in root.rglob("*")
+                   if p.suffix.lower() == ".png" and p.stat().st_size > args.png_min),
+                  key=lambda p: -p.stat().st_size)
+    to_jpeg = 0
+    for png in pngs:
+        r = png_to_jpeg(png, args.png_jpeg_quality, args.cap, args.dry_run)
+        if r is None:
+            continue
+        to_jpeg += 1
+        before, after = r
+        if after is not None:
+            saved += before - after
+            if to_jpeg <= 10:
+                print(f"  {human(before):>9} -> {human(after):>9}  {png.name[:50]}")
+    print(f"  {'would convert' if args.dry_run else 'converted'} {to_jpeg} of {len(pngs)}")
+
+    print(f"\nresizing PNG/JPEG over {args.cap}px")
+    touched = 0
+    for p in root.rglob("*"):
+        if p.suffix.lower() not in RASTER:
+            continue
+        before = p.stat().st_size
+        after = shrink_raster(p, args.cap, args.jpeg_quality, args.dry_run)
+        if after is None:
+            continue
+        touched += 1
+        if not args.dry_run:
+            saved += before - after
+
+    print(f"\n{'would convert' if args.dry_run else 'converted'} {converted} GIF(s)"
+          f", {'would repoint' if args.dry_run else 'repointed'} {len(fixed)} hero(es)"
+          f", {'would resize' if args.dry_run else 'resized'} {touched} raster(s)")
+    if not args.dry_run:
+        print(f"TOTAL SAVED: {saved / 1e6:.0f} MB")
+    if orphaned:
+        print(f"\nNeeds a human -- {len(orphaned)} post(s) whose animation was ONLY the hero,"
+              f"\nso it now appears nowhere. Add it to the body if it was carrying the point:")
+        for md, hero in orphaned:
+            print(f"  {hero}  in {md}")
+
+
+if __name__ == "__main__":
+    main()

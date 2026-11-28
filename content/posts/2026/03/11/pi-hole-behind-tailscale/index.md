@@ -1,14 +1,13 @@
 ---
 title: "Pi-hole behind Tailscale"
 date: "2026-03-11T18:20:08+00:00"
-lastmod: "2026-09-21T05:56:54+00:00"
 description: "As I age, I become increasingly cautious about my privacy. The slope the world is sliding on is also a big, unfortunate incentive. I have been eying…"
 canonical: "https://blog.frankel.ch/pi-hole-tailscale/"
 authors:
   - "nicolas-frankel"
 image: "cover_large.jpg"
 categories:
-  - "Java"
+  - "DevOps"
 related_posts:
 ---
 
@@ -20,7 +19,7 @@ Privacy, or more specifically *digital privacy*, is the ability to protect onese
 
 Other countries range from the bad to the none. Worse, most companies located in non-regulated countries either don't know, don't care, or don't risk much.
 
-I have been using ad blockers for ages, but they represent only a tiny bit of a larger picture. First, marketers have been using techniques that allow profiling people without cookies, using hardware and software data that browsers leak. Second, in this day and age, not all requests go through your browser. I'm using Claude Code and a couple of other coding assistants a lot. I'm working on [Home Assistant](/focus/home-assistant/) as well.
+I have been using ad blockers for ages, but they represent only a tiny bit of a larger picture. First, marketers have been using techniques that allow profiling people without cookies, using hardware and software data that browsers leak. Second, in this day and age, not all requests go through your browser. I'm using Claude Code and a couple of other coding assistants a lot. I'm working on [Home Assistant](https://www.home-assistant.io/) as well.
 
 Let's face some hard truths: it would require near-infinite effort to benefit from 100% privacy. My objective is much more limited. I only want to increase my overall privacy settings, making the task of data hoarders more complicated.
 

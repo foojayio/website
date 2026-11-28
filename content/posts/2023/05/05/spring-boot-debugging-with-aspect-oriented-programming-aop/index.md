@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Debugging with Aspect-Oriented Programming (AOP)"
 date: "2023-05-05T08:19:18+00:00"
-lastmod: "2023-05-05T08:19:19+00:00"
 description: "Does your app fail CI tests \"sometimes\"? Does it display flaky behavior? Did you add many logs trying to solve it? There's a better way: AOP!"
 canonical: "https://debugagent.com/spring-boot-debugging-with-aspect-oriented-programming-aop"
 authors:
@@ -37,7 +36,7 @@ Before diving into debugging with AOP, it is essential to understand the core co
 * **Advice:** The action taken by an aspect at a specific join point is called advice. There are different types of advice, such as before, after, around, and after throwing.
 * **Pointcut:** A pointcut is a set of join points where an aspect should be applied.
 
-![](Untitled.001-700x289.jpeg)
+![Diagram: an aspect containing advice connects through pointcuts to join points along an execution](Untitled.001-700x289.jpeg)
 
 I will skip the discussion on weaving since there's a lot of nuance related to that and I want to focus on the debugging aspects. I don't want to make this into an AOP tutorial. However, there's one general aspect of AOP I want to discuss.
 

@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #29: How will AI and ML Influence the Role of Developers?"
 date: "2023-09-25T07:24:33+00:00"
-lastmod: "2025-11-13T08:57:30+00:00"
 description: "Every conference has several talks about these technologies, and on Foojay, you can find multiple posts about it. Let's take a look at it from the Java point of view."
 authors:
   - "frankdelporte"
@@ -61,7 +60,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode_29_guests-1024x574.jpg)
+![Foojay Podcast video call with guests Roni Dover, Zoran Sevarac and a NYJavaSIG representative, and host Frank Delporte](episode_29_guests-1024x574.jpg)
 
 ## Content
 

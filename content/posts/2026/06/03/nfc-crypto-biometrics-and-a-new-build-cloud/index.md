@@ -7,7 +7,7 @@ authors:
   - "shai-almog"
 image: "nfc-crypto-biometrics-and-build-cloud.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
   - "skills-java-17-and-theme-accents-with-codename-one"
@@ -22,7 +22,7 @@ Last week was about defaults. This week is about device APIs moving into the fra
 ## A new Build Cloud UI — preview
 
 The single most visible change this week sits behind the Build Cloud login. The console we have been serving for years is being replaced. The new UI is **live now** [here](https://cloud.codenameone.com/console/index.html), alongside the current console you can still find [here](https://cloud.codenameone.com/secure/index.html). We want eyes and feedback on it before we flip the default.
-![](build-cloud-preview-ecf80f16.jpg)
+![Codename One Build Cloud preview: dark Builds page listing successful SkinDesigner and CN1Playground builds with a download link](build-cloud-preview-ecf80f16.jpg)
 
 The whole console is written in Java 17 against the Codename One UI framework, then compiled to JavaScript via our JavaScript port and served as static assets from inside the Build Cloud. Same `Form`, `Container`, `BoxLayout`, `Toolbar`, `theme.css` you would write for a phone build.
 

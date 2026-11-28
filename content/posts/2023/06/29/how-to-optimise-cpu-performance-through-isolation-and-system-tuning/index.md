@@ -1,7 +1,6 @@
 ---
 title: "Optimise CPU Performance Through Isolation and System Tuning"
 date: "2023-06-29T06:36:39+00:00"
-lastmod: "2023-06-29T06:37:51+00:00"
 description: "Standard solutions for controlling CPU isolation for low-latency Linux applications are isolcpus and cgroups/csets. Each have their downsides"
 authors:
   - "peter-lawrey"
@@ -44,7 +43,7 @@ csets is a utility that is used specifically to manage CPU affinity and placemen
 
 This can be especially useful in high-performance computing environments, where minimising contention and maximising performance is critical. Both cgroups and csets enable specific cpuset groupings to be defined, with processes confined to run within one particular group.
 
-![](Screenshot-2023-06-20-at-2.12.53-PM-1024x632.jpg)
+![Diagram comparing isolcpus, which pins each thread to its own core, with cgroups, where threads share a set of cores](Screenshot-2023-06-20-at-2.12.53-PM-1024x632.jpg)
 
 *Figure 1. A comparison of how threads can be managed with isolcpus and cgroups. isolcpus allows the management of individual threads but prevents the use of flexible CPU groups.*
 
@@ -62,7 +61,7 @@ Chronicle Tune blends features from isolcpus and cgroups/csets together with bes
 
 [Chronicle Tune](https://chronicle.software/tune/?utm_source=foojay&utm_medium=article&utm_campaign=chronicle-tune "Chronicle Tune") can be especially useful for Java applications where careful separation and control of application and background threads is essential for achieving best performance. Chronicle Tune facilitates optimal process placement and control, helping to ensure fewer and shorter interrupts and allowing threads to be dynamically migrated.
 
-![](Screenshot-2023-06-20-at-2.22.25-PM-1024x532.png)  
+![Table comparing Chronicle Tune, isolcpus and cgroups: Tune is the only one with IRQ management, kernel controls and all-in-one config](Screenshot-2023-06-20-at-2.22.25-PM-1024x532.png)  
 *Figure 2. Comparison of Chronicle Tune, isolcpus and cgroups*
 
 #### How Much Could Tuning Improve Performance?
@@ -71,7 +70,7 @@ For businesses seeking to improve their performance down to the nanosecond, it's
 
 Our testing shows that while Chronicle Tune had an effect even at lower percentiles, from around the 99.9th percentile onwards the benefits of significantly reduced jitter became increasingly apparent, showing the machine running in a much cleaner, more optimal configuration.
 
-![](Screenshot-2023-06-20-at-2.24.05-PM-1024x570.png)  
+![Line chart: after tuning, write-to-read latency stays near 500 ns at the 99.999th percentile versus about 1,400 ns before](Screenshot-2023-06-20-at-2.24.05-PM-1024x570.png)  
 *Figure 3 Write-to-read latency of Chronicle Queue exchanging 256 byte messages @ 100k msgs/s.*
 
 #### Can Shrink Wrapped Software be as Efficient as Manual Tuning?
@@ -80,7 +79,7 @@ Using ready-made software is certainly more convenient than tuning manually. So 
 
 This plot shows that while the total number of jitter events is slightly lower for isolcpus (as might be expected given isolcpus integrates directly with the scheduler), the worst outliers are in fact slightly lower with Chronicle Tune (6us vs 14us) on account of the additional system tuning with Chronicle Tune beyond just CPU isolation. Chronicle Tune achieves this with simple, transparent configuration, which can be adjusted without the need for reboots.
 
-![](Screenshot-2023-06-20-at-2.25.00-PM-1024x550.png)  
+![Bar chart of delays per hour: isolcpus has many more 2 us and 14 us delays than Chronicle Tune, which has more 3 to 6 us delays](Screenshot-2023-06-20-at-2.25.00-PM-1024x550.png)  
 *Figure 4. Average number of delays per hour, grouped by length of the delay. The statistics were gathered during a 91 second jitter test run.*
 
 ### Conclusion

@@ -1,14 +1,12 @@
 ---
 title: "CQRS in Java: Separating Reads and Writes Cleanly"
 date: "2026-04-16T20:25:28+00:00"
-lastmod: "2026-04-17T18:38:14+00:00"
 description: "The Command Query Responsibility Segregation (CQRS) pattern is a design method that segregates data access into separate services for reading and writing data. This allows a higher level of maintainability in your applications, especially if the schema or requirements change frequently. This pattern was originally developed with separate read and write sources in mind. However, implementing CQRS for a single data source is an effective way to abstract data from the application and make maintenance easier in the future. In this blog, we will use Spring Boot with MongoDB in order to create a CQRS pattern-based application."
 authors:
   - "mike-laspina"
 image: "Screenshot-2026-04-10-at-12.56.48-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"

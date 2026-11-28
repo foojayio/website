@@ -1,7 +1,6 @@
 ---
 title: "Java Performance: Ahead-Of-Time versus Just-In-Time"
 date: "2023-03-09T08:00:18+00:00"
-lastmod: "2023-05-10T05:35:57+00:00"
 description: "The impact of the Just-In-Time (JIT) compiler should not be underestimated to achieve the best performing code during runtime."
 canonical: "https://www.azul.com/blog/jit-performance-ahead-of-time-versus-just-in-time/"
 authors:
@@ -34,7 +33,7 @@ During execution, frequently used methods (**hotspots** ) are identified and com
 The disadvantage of this approach is that at startup, the virtual machine executes the (slow) bytecode during a "warmup time" until it identifies the hotspots and reaches the perfect native compiled code. This process repeats at every startup.
 
 In this graph, you can see this process of using bytecode (yellow), C1 native code (green), up to C2 optimal compiled native code (blue).
-![](chart-speed-optimization-level-1024x538.png) Code speed comparison during different cycles of startup of an application
+![Chart of JVM speed over time: interpreted and profiling code give way to optimized code, reaching full speed after about 70 seconds](chart-speed-optimization-level-1024x538.png) Code speed comparison during different cycles of startup of an application
 
 ## What is Ahead-Of-Time?
 

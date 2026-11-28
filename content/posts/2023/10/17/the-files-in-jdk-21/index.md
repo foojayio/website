@@ -1,13 +1,11 @@
 ---
 title: "The Files in JDK 21"
 date: "2023-10-17T07:21:32+00:00"
-lastmod: "2023-10-17T07:22:29+00:00"
 description: "As Java developers, we all have it installed on our computer: the Java Development Kit, also known as the JDK. In this article, we'll explore the files of the JDK."
 authors:
   - "anthony-goubard"
 image: "jdk21-files-feature-image.png"
 categories:
-  - "Java"
   - "JDK21"
 related_posts:
   - "foojay-podcast-28"
@@ -31,7 +29,7 @@ For this article, Eclipse Temurin [JDK 21](https://foojay.io/today/java-21-is-av
 * Number of class files: 27,929 (was 27,064 in JDK 20)
 * Number of Java files (in src.zip): 15,404 (was 15,044 in JDK 20)
 
-![](jdk21-all-files.jpg)
+![Ant Commander file manager showing the JDK 21 folder at 325 MB and 572 files in the File infos dialog](jdk21-all-files.jpg)
 
 ### Modules
 
@@ -55,7 +53,7 @@ The class files in *lib/modules* are less compressed than in the *jmod* files th
 * 26 are more than 100 KB
 * All files are using the same timestamp of 2023-09-19 00:00
 
-![](jdk-21-largest-classes.png)
+![Ant Commander listing the largest JDK 21 class files, topped by a charset class at 291.5 KB](jdk-21-largest-classes.png)
 
 Most of the largest class files are related to the internationalization with charsets and time zones but *javac* and the new vector API also have large class files.
 
@@ -64,7 +62,7 @@ Most of the largest class files are related to the internationalization with cha
 Contrary to what I said in the introduction, even if the JDK has grown size since 1.0, this hasn't been the case in the recent years. Post JDK 8, the largest JDK was JDK 9 (JavaFX, Nashorn) with 500 MB and the smallest was JDK 17 with 297 MB.
 
 When comparing new files in the *java.base* module with JDK 20, you see that a lot of new files are related to a new *jdk.internal.classfile* package.
-![](jdk-21-diff-base-1024x649.jpg)
+![Ant Commander directory diff of java.base between JDK 20 and 21, listing new files such as foreign and classfile packages](jdk-21-diff-base-1024x649.jpg)
 
 ## Conclusion
 

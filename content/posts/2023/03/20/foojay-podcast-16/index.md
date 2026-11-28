@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #16: Welcome to Java 20!"
 date: "2023-03-20T08:00:14+00:00"
-lastmod: "2025-11-13T09:12:40+00:00"
 description: "What new features does Java 20 bring? And why should we use it? And what can we expect from the next LTS version, 21, in September?"
 authors:
   - "frankdelporte"

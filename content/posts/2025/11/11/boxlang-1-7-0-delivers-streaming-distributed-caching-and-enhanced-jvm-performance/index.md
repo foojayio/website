@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.7 Released!"
 date: "2025-11-11T12:59:50+00:00"
-lastmod: "2025-11-11T13:01:47+00:00"
 description: "Ortus Solutions announced the release of **BoxLang 1.7.0**, a major update to its modern dynamic language for the JVM that delivers enterprise-grade capabilities for building real-time, horizontally scalable, and AI-driven applications."
 authors:
   - "luis-majano"

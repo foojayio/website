@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot and React in Harmony"
 date: "2023-10-03T09:14:40+00:00"
-lastmod: "2023-10-03T09:25:44+00:00"
 description: "Navigating the complexities of full-stack development in Spring Boot and React can be complex. This article highlighted how Hilla can alleviate many of these challenges."
 canonical: "https://dzone.com/articles/spring-boot-react-harmony-with-hilla"
 authors:
@@ -36,7 +35,7 @@ However, while both Java and TypeScript offer individual type-safe havens, there
 
 Hilla takes type safety a step further by ensuring it spans the entire development spectrum. Developers spend less time perusing API documentation and more time coding. With automatically generated TypeScript services and data types, [Hilla](https://hilla.dev/ "Hilla") allows developers to explore APIs directly within their IDE. This seamless integration means that if any code is altered, whether on the frontend or backend, any inconsistencies will trigger a compile-time error, ensuring that issues are caught early and rectified.
 
-![](auto-complete-700x215.jpg)
+![Code editor showing TypeScript autocomplete suggesting the 'name' property while typing model.n in a Hilla form field](auto-complete-700x215.jpg)
 
 ## Direct Communication Between React and Spring Services
 

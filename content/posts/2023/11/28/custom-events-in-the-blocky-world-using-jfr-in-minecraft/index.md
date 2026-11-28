@@ -1,7 +1,6 @@
 ---
 title: "Custom Events in the Blocky World: Using JFR in Minecraft"
 date: "2023-11-28T19:12:50+00:00"
-lastmod: "2023-11-28T19:12:51+00:00"
 description: "I was searching for some JFR-related settings on the internet when I stumbled upon the /jfr command that exists in Minecraft..."
 authors:
   - "johannes-bechberger"
@@ -18,21 +17,21 @@ related_posts:
 
 I was searching for some JFR-related settings on the internet when I stumbled upon the [`/jfr` command](https://minecraft.fandom.com/wiki/Commands/jfr) that exists in [Minecraft](https://www.minecraft.net):  
 
-{{< img src="image-2-636eafaf.jpg" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
+{{< img src="image-2-636eafaf.jpg" alt="Minecraft Wiki page for the /jfr command, which starts and stops profiling with Java Flight Recorder" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 This, of course, intrigued me, especially as Minecraft apparently adds some custom JFR events:
-[![](image-3-b9708eb4.png)](https://minecraft.fandom.com/wiki/Commands/jfr)
+[![Documentation list of custom Minecraft JFR events: ServerTickTime, ChunkGeneration, PacketRead, PacketSent and WorldLoadFinishedEvent](image-3-b9708eb4.png)](https://minecraft.fandom.com/wiki/Commands/jfr)
 
 So I had to check it out. I downloaded and started the [Java server](https://www.minecraft.net/en-us/download/server), got a demo account, and connected to my local instance. *This works with a demo account when you launch the demo world, enable the cheat mode in the settings, kick yourself via "/kick @p," and then select your own server. I found this via [this bug report](https://bugs.mojang.com/browse/MC-138478).*
 
 You then must ensure that you have OP privileges and add them, if not via the Minecraft server shell. Then, you can type `/jfr start` in the chat (launch it by typing <kbd>T</kbd>) to start the recording and `/jfr stop` to stop it.  
 
-{{< img src="Screenshot-from-2023-11-17-15-47-07-b4d3289b.jpg" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
+{{< img src="Screenshot-from-2023-11-17-15-47-07-b4d3289b.jpg" alt="Minecraft game window at night with '/jfr start' typed in the chat bar" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 *You see that it's my first time "playing" Minecraft, and I'm great at getting attacked. It's probably also my last time.*
 
 Minecraft stores the JFR file in the `debug` folder in the working directory of your server, both as a JFR file and as a JSON file. You can view the JFR file in a JFR viewer of your choice, like JMC or my [IntelliJ JFR plugin](https://plugins.jetbrains.com/plugin/20937-java-jfr-profiler) ([web view of the file](https://share.firefox.dev/3G5dfKr), [JFR file itself](https://mostlynerdless.de/files/blog/server-2023-11-17-155349.jfr)), and explore the custom JFR events:  
-[![](Screenshot-from-2023-11-20-12-16-59-3e626721.png)](https://share.firefox.dev/3G5dfKr)
+[![Firefox Profiler marker chart of a Minecraft JFR recording with a minecraft.ChunkGeneration event tooltip showing a 1,000 ms duration](Screenshot-from-2023-11-20-12-16-59-3e626721.png)](https://share.firefox.dev/3G5dfKr)
 
 This lets you get insights into the chunk generation and specific traffic patterns of the Minecraft server.
 
@@ -89,7 +88,7 @@ class ChunkGeneration extends jdk.jfr.Event {
 You can find all defined events [here](https://gist.github.com/parttimenerd/a3b0c74eea0c1da89fec533ebd468479). The actual implementation of these events is only slightly larger because some events accumulate data over a period of time.
 
 I'm, of course, not the first OpenJDK developer who stumbled upon these custom events. Erik Gahlin even found them shortly after their addition in 2021 and promptly created an issue to recommend improvements (see [MC-236873](https://bugs.mojang.com/browse/MC-236873)):
-[![](image-5-2d43b3f2.jpg)](https://bugs.mojang.com/browse/MC-236873)
+[![Mojang bug report MC-236873, 'Problems with JFR event metadata', marked resolved and fixed in 21w38a](image-5-2d43b3f2.jpg)](https://bugs.mojang.com/browse/MC-236873)
 
 ## Conclusion
 

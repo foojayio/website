@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #4: Why Are There So Many JDKs?"
 date: "2021-10-19T15:38:35+00:00"
-lastmod: "2025-11-13T09:24:31+00:00"
 description: "In this podcast, we explore the topic of why there are so many JDKs, how are they the same, and how they are different!"
 authors:
   - "erikcostlow"

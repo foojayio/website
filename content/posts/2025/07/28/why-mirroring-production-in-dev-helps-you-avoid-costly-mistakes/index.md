@@ -1,7 +1,6 @@
 ---
 title: "Why Mirroring Production in Dev Helps You Avoid Costly Mistakes"
 date: "2025-07-28T13:31:10+00:00"
-lastmod: "2025-12-12T21:22:10+00:00"
 description: "It’s not enough for your application or queries to just “work.” They need to be observable and validated in environments that reflect production."
 canonical: "https://medium.com/@MongoDB/why-mirroring-production-in-dev-helps-you-avoid-costly-mistakes-7e2c4595c2a1"
 authors:
@@ -172,7 +171,7 @@ What could be causing this? One of the first clues is the significant difference
 ## Real-time metrics: Detecting the bottleneck
 
 To better understand the system's behavior, the /movies/enriched-details endpoint was executed again, but this time, with MongoDB Atlas's[Real-Time Performance](https://www.mongodb.com/docs/atlas/real-time-performance-panel/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello) panel open. That's when a red flag appeared: CPU usage spiked to 100% during the request.
-![](AD_4nXdw4TLmNXlUjXjCmX7Fi6n0Qt3PZVZkVMzm-aad0cac8.png)
+![MongoDB Atlas real-time panel showing 100% CPU, rising operations and slow sample_mflix.movies commands](AD_4nXdw4TLmNXlUjXjCmX7Fi6n0Qt3PZVZkVMzm-aad0cac8.png)
 
 *Atlas real-time metrics*
 
@@ -181,17 +180,17 @@ On the bottom-right, we also see the slowest operations pointing to the movies c
 ## Query insights: The detective tool
 
 Following the clues, the next logical step is to open [Query Insights](https://www.mongodb.com/blog/post/elevating-database-performance-introducing-query-insights-mongodb-atlas%20/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello), a tool that helps investigate performance issues in more detail. During the same time window, we can access the **Query Profiler** tab to view which operations took the longest to execute. There, we can often identify the query responsible for the high resource usage.
-![](AD_4nXdmFSw89x4qIEwTxmdBEdpj8T8YZz1DHHAZ-3f5a9b62.jpg)
+![Atlas Query Profiler scatter plot with operation execution times spiking to over a minute around 18:00](AD_4nXdmFSw89x4qIEwTxmdBEdpj8T8YZz1DHHAZ-3f5a9b62.jpg)
 
 *Query Profiler*
 
 As we can observe, between 18:00 and 19:00, the chart shows a clear spike in operation execution time. During this window, the duration of read operations on the movies collection increased quickly, starting from just a few milliseconds and reaching up to one minute.
-![](AD_4nXfiplRuE2wftZUml8Vt1awoHPvW4JiNwGRO-6ab93fb9.png)
+![Atlas Query Insights for sample_mflix.movies showing a read taking 1.03 minutes and returning 101 docs](AD_4nXfiplRuE2wftZUml8Vt1awoHPvW4JiNwGRO-6ab93fb9.png)
 
 *Query Profiler*
 
 This sudden escalation confirms that the query began consuming significantly more resources, which aligns with the symptoms we observed earlier in the real-time metrics. The Query Profiler provided more concrete details: It shows the exact aggregation that was running, the total execution time (1.03min), and the number of documents examined:
-![](AD_4nXdIPEJxYYZqyukpAJinuiDnsvFG9uevT3LS-8eff7327.jpg)
+![Atlas Query Details: 574,464 docs examined for 101 returned, no index coverage, with a $lookup aggregation in the log](AD_4nXdIPEJxYYZqyukpAJinuiDnsvFG9uevT3LS-8eff7327.jpg)
 
 *Query Profiler*
 
@@ -201,12 +200,12 @@ With this information in hand, we can move toward a proper optimization solution
 
 Continuing our analysis, we have the /by-title-year endpoint, which returns movies filtered by title and year. Once the application is live in production, this endpoint starts receiving several requests to look up specific movies. That's when we notice the query isn't optimized, and we might not even know exactly how to improve it.
 
-This is where the [Performance Advisor](https://www.mongodb.com/docs/atlas/performance-advisor/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello) comes in. M10+ clusters offer this feature under the **Performance** menu, providing valuable suggestions based on real-world usage. Select your cluster and click on the **Performance Advisor** tab:![](AD_4nXf_7PUY7wOFl6C8408vhtXiVnBRmI9_1hwz-09191d20.png)
+This is where the [Performance Advisor](https://www.mongodb.com/docs/atlas/performance-advisor/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=why_your_dev_environment_should_mirror_production&utm_term=ricardo.mello) comes in. M10+ clusters offer this feature under the **Performance** menu, providing valuable suggestions based on real-world usage. Select your cluster and click on the **Performance Advisor** tab:![Atlas Performance Advisor card: 'Create Indexes' with 1 recommendation and a View Recommendations button](AD_4nXf_7PUY7wOFl6C8408vhtXiVnBRmI9_1hwz-09191d20.png)
 
 *Performance Advisor recommendations*
 
 In our scenario, the Performance Advisor is suggesting the creation of an index for our cluster. By selecting *View Recommendations*, we can view the specific index suggestion that may help improve query performance:
-![](AD_4nXfDezzE0jUR1QGLWki4cZuKmTWBDOuOVBZv-6d9f497d.png)
+![Atlas Performance Advisor suggesting an index on title and year for sample_mflix.movies, with 495 ms average execution time](AD_4nXfDezzE0jUR1QGLWki4cZuKmTWBDOuOVBZv-6d9f497d.png)
 
 *Performance Advisor index suggestion*
 
@@ -217,7 +216,7 @@ The query is quite simple, and the need for an index might be easy to spot manua
 ## Resilience under pressure: Testing primary failover
 
 A cluster configured in MongoDB Atlas operates as a replica set with three nodes. By default, there are two secondary nodes and one primary node, as shown in the image below:
-![](AD_4nXd3vk7tQ-oCw-eD57JSOJc_DY65JoyxYFQE-a15be1ea.png)
+![Atlas diagram of a replica set: client application writes and reads via the primary, which replicates to two secondaries](AD_4nXd3vk7tQ-oCw-eD57JSOJc_DY65JoyxYFQE-a15be1ea.png)
 
 *MongoDB replica set*
 
@@ -268,12 +267,12 @@ This loop runs continuously, inserting and reading documents until the applicati
 ### Triggering the test in Atlas
 
 While the loop is running, open your MongoDB Atlas dashboard. Find the cluster you want to test, click the ⋮ (three dots) menu, and select **Test Resilience**. This will initiate the failover process and let you observe how your application behaves in real time.
-![](AD_4nXdP0ScEHyncW7h8ep-P8ZCQOXNbEV3X09F5-bc11c02f.png)
+![Atlas 'Test Resilience' dialog explaining a primary failover in three steps, with a Restart Primary button](AD_4nXdP0ScEHyncW7h8ep-P8ZCQOXNbEV3X09F5-bc11c02f.png)
 
 *MongoDB Test Primary Failover*
 
 Once activated, simplyobserve your application logs to check for any anomalies or unexpected failures during the process.
-![](AD_4nXeBKyEirFkCHi-9ewcIIVxy8TkRm3PHqlM4-63840a6a.png)
+![IntelliJ debug console of MongoDBFailoverTest where attempt #24 takes 7510 ms, slower than the usual 810 ms](AD_4nXeBKyEirFkCHi-9ewcIIVxy8TkRm3PHqlM4-63840a6a.png)
 
 *Application log*
 

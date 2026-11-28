@@ -1,7 +1,6 @@
 ---
 title: "Is it Time to go Back to the Monolith?"
 date: "2023-03-03T15:58:20+00:00"
-lastmod: "2023-03-03T15:58:22+00:00"
 description: "Modern modular monoliths (and Moduliths) are redefining the monolithic architecture. Pick the best of both worlds with the hybrid approach."
 canonical: "https://debugagent.com/is-it-time-to-go-back-to-the-monolith"
 authors:
@@ -76,7 +75,7 @@ Every dependency in a module system is mapped out and documented in code. The Sp
 
 An Infrastructure as Code (IaC) solution like Terraform could still exist for a Modulith deployment. But they would be much simpler. The problem is the division of responsibilities. The complexity of the monolith doesn't go away with microservices as you can see in the following image (taken from [this thread](https://twitter.com/JackKleeman/status/1190354757308862468)). We just kicked that can of worms down to the DevOps team and made their lives harder. Worse, we didn't give them the right tools to understand that complexity so they have to manage this from the outside.
 
-{{< img src="monzo-microservices-529x510.jpg" class="size-medium" width="529" height="510" >}}
+{{< img src="monzo-microservices-529x510.jpg" alt="Dense network graph of colored nodes and edges, illustrating the tangled web of Monzo's microservices" class="size-medium" width="529" height="510" >}}
 
 That's why infrastructure costs are rising in our industry, where traditionally prices should trend downwards… When the DevOps team runs into a problem they throw resources at it. This isn't the right thing to do in all cases.
 

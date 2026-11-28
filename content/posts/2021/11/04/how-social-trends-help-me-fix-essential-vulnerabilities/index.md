@@ -1,7 +1,6 @@
 ---
 title: "How Social Trends Help Me Fix Essential Vulnerabilities"
 date: "2021-11-04T14:14:55+00:00"
-lastmod: "2021-11-04T14:16:21+00:00"
 description: "Our research team found a correlation between socially trending vulnerabilities and the existence of exploits that can harm your application."
 canonical: "https://snyk.io/blog/snyk-social-trends-fix-security-vulnerabilities/"
 authors:
@@ -24,7 +23,7 @@ Let's take a look at vulnerability social trends (sentiment analysis) in action.
 ## A trending example in Java
 
 I created a small Java application based on an outdated Spring Boot version, `2.2.0-RELEASE`. After [connecting the GitHub repo to my Snyk account](https://snyk.io/login), I found the following vulnerability on top of my list because it is currently trending on social media.
-![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-vuln-1240x363.png)
+![Snyk entry for tomcat-embed-core remote code execution (CVE-2020-9484, high) marked as trending on Twitter](blog-social-trends-usage-vuln-1240x363-0517e5f0.jpg)
 
 It is a remote code execution (RCE) vulnerability in the embedded Apache Tomcat version that ships with the specific Spring Boot starter package I use. By clicking on the trending button, I found many tweets referring to this specific vulnerability and a working exploit that is published. I will come back to this later, but first, let me explain the vulnerability.
 
@@ -56,6 +55,6 @@ So, if for some reason someone in my team decides to use the `PersistentManger` 
 
 More importantly, if a vuln is trending, this means a lot of people know and talk about it — including people with bad intentions. For me, it is a marker that I have to investigate such a vuln even more closely than I already do to see if I am vulnerable now or will be in the future.
 
-Including the trending marker in the Snyk UI not only puts a spotlight on the vuln but also increases the priority score for that reason. Therefore, we believe that searching social media to determine the popularity of a specific vulnerability is a powerful tool so I will not get caught by obvious and well-known security mistakes. So when you see ![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-trending.png), we encourage you to take a second look at a vuln you may have ignored before.
+Including the trending marker in the Snyk UI not only puts a spotlight on the vuln but also increases the priority score for that reason. Therefore, we believe that searching social media to determine the popularity of a specific vulnerability is a powerful tool so I will not get caught by obvious and well-known security mistakes. So when you see ![Blue 'Trending' badge with a Twitter bird next to a 'View tweets' link](blog-social-trends-usage-trending-5cee6150.png), we encourage you to take a second look at a vuln you may have ignored before.
 
 This article was originally posted on the Snyk.io blog: [https://snyk.io/blog/snyk-social-trends-fix-security-vulnerabilities/](https://snyk.io/blog/docker-for-java-developers/) and is used with permission.

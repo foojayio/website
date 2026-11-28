@@ -1,6 +1,9 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 17+
+//DEPS com.fasterxml.jackson.core:jackson-databind:2.17.1
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -21,10 +24,9 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -46,6 +48,7 @@ public class SlackPosts {
 
     record Post(String title, String link, String authors, String categories, String description, ZonedDateTime date) {}
 
+    static final String SITE = "https://foojay.io";
     static final int MAX_NEW = 10;
     static final int DESCRIPTION_LIMIT = 300;
 
@@ -97,8 +100,26 @@ public class SlackPosts {
             StringBuilder text = new StringBuilder("The following new post just got published:\n*<" + p.link() + "|" + esc(p.title()) + ">*");
             if (!p.authors().isEmpty()) text.append("\nby ").append(esc(p.authors()));
             if (!p.description().isEmpty()) text.append("\n").append(esc(p.description()));
-            send(webhook, dryRun, text.toString());
+            send(webhook, dryRun, text.toString(), dryRun ? null : ogImage(p.link()));
         }
+    }
+
+    // Slack's own unfurl never fired for webhook posts, so the preview is an explicit image block.
+    static String ogImage(String page) {
+        for (int i = 0; i < 3; i++) {
+            try {
+                HttpResponse<String> r = HttpClient.newHttpClient().send(
+                        HttpRequest.newBuilder(URI.create(page)).timeout(Duration.ofSeconds(20)).build(),
+                        HttpResponse.BodyHandlers.ofString());
+                var m = java.util.regex.Pattern
+                        .compile("<meta property=\"og:image\" content=\"([^\"]+)\"").matcher(r.body());
+                if (r.statusCode() == 200 && m.find()) return m.group(1);
+                Thread.sleep(5000);
+            } catch (Exception e) {
+                System.out.println("og:image lookup failed for " + page + ": " + e);
+            }
+        }
+        return null;
     }
 
     static void announceWeekly(String webhook, boolean dryRun, String feed) throws Exception {
@@ -112,37 +133,58 @@ public class SlackPosts {
             System.out.println("Nothing was published last week.");
             return;
         }
-        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size() + ")\n");
+        String review = SITE + "/today/week-review/" + start.toLocalDate() + "/";
+        StringBuilder text = new StringBuilder("*Published on Foojay.io the past week* (" + posts.size()
+                + "), see the overview on <" + review + "|the weekly review>");
         for (Post p : posts) {
-            text.append("• <").append(p.link()).append("|").append(esc(p.title())).append(">");
-            if (!p.authors().isEmpty()) text.append(" — ").append(esc(p.authors()));
-            text.append("\n");
+            text.append("\n• <").append(p.link()).append("|").append(esc(p.title())).append(">");
+            if (!p.authors().isEmpty()) text.append(" by ").append(esc(p.authors()));
         }
-        send(webhook, dryRun, text.toString().stripTrailing(), weeklyBlocks(posts));
+        JsonNode data = reviewData(review + "review.json");
+        newAuthors(data).ifPresent(n -> text.append("\n\n*New authors*\n").append(n));
+        scheduled(data).ifPresent(n -> text.append("\n\n").append(n));
+        send(webhook, dryRun, text.toString(), null);
     }
 
-    // Slack allows one table block per message; cells take rich text, so titles stay links.
-    static String weeklyBlocks(List<Post> posts) {
-        StringBuilder rows = new StringBuilder("[" + rawRow("Date", "Author(s)", "Title", "Category"));
-        for (Post p : posts) {
-            rows.append(",[").append(raw(p.date().format(DateTimeFormatter.ofPattern("EEE d MMM", Locale.ENGLISH)))).append(",")
-                    .append(raw(p.authors().isEmpty() ? "-" : p.authors())).append(",")
-                    .append("{\"type\":\"rich_text\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[")
-                    .append("{\"type\":\"link\",\"url\":").append(json(p.link())).append(",\"text\":").append(json(p.title()))
-                    .append("}]}]},").append(raw(p.categories().isEmpty() ? "-" : p.categories())).append("]");
+    // The week page works out who published a first article; the feed cannot.
+    // Any failure drops the section rather than the whole announcement.
+    static JsonNode reviewData(String url) {
+        try {
+            HttpResponse<String> r = HttpClient.newHttpClient().send(
+                    HttpRequest.newBuilder(URI.create(url)).timeout(Duration.ofSeconds(30))
+                            .header("User-Agent", "foojay.io").build(),
+                    HttpResponse.BodyHandlers.ofString());
+            if (r.statusCode() != 200) throw new IllegalStateException(url + " answered " + r.statusCode());
+            return new ObjectMapper().readTree(r.body());
+        } catch (Exception e) {
+            System.out.println("No review data: " + e.getMessage());
+            return new ObjectMapper().createObjectNode();
         }
-        rows.append("]");
-        return "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":"
-                + json("*Published on Foojay.io the past week* (" + posts.size() + ")")
-                + "}},{\"type\":\"table\",\"rows\":" + rows + "}]";
     }
 
-    static String raw(String s) {
-        return "{\"type\":\"raw_text\",\"text\":" + json(s) + "}";
+    static Optional<String> scheduled(JsonNode data) {
+        int posts = data.path("scheduled").path("posts").asInt();
+        if (posts == 0) return Optional.empty();
+        int days = data.path("scheduled").path("days").asInt();
+        return Optional.of(posts + (posts == 1 ? " post is" : " posts are") + " already <" + SITE + "/today/coming-soon/|scheduled for> the next "
+                + days + (days == 1 ? " day" : " days") + ".");
     }
 
-    static String rawRow(String... cells) {
-        return "[" + String.join(",", Arrays.stream(cells).map(SlackPosts::raw).toList()) + "]";
+    static Optional<String> newAuthors(JsonNode data) {
+        try {
+            List<String> links = new ArrayList<>();
+            for (JsonNode a : data.path("newAuthors")) {
+                links.add("<" + a.path("url").asText() + "|" + esc(a.path("name").asText()) + ">");
+            }
+            if (links.isEmpty()) return Optional.empty();
+            String names = links.size() == 1 ? links.get(0)
+                    : String.join(", ", links.subList(0, links.size() - 1)) + " and " + links.get(links.size() - 1);
+            return Optional.of("Welcome to " + names + ", who published " + (links.size() == 1 ? "a" : "their")
+                    + " first article on foojay.io this week.");
+        } catch (Exception e) {
+            System.out.println("No new-authors section: " + e.getMessage());
+            return Optional.empty();
+        }
     }
 
     static List<Post> readFeed(String source) throws Exception {
@@ -196,35 +238,24 @@ public class SlackPosts {
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
-    static void send(String webhook, boolean dryRun, String text) throws Exception {
-        send(webhook, dryRun, text, null);
-    }
-
-    // `text` is the notification and the fallback when Slack rejects `blocksJson`.
-    static void send(String webhook, boolean dryRun, String text, String blocksJson) throws Exception {
+    // imageUrl is null for the weekly list, which would otherwise be a wall of cards.
+    static void send(String webhook, boolean dryRun, String text, String imageUrl) throws Exception {
         if (dryRun) {
             System.out.println("---\n" + text);
             return;
         }
-        HttpResponse<String> r = post(webhook, text, blocksJson);
-        if (r.statusCode() != 200 && blocksJson != null) {
-            System.out.println("Slack rejected the blocks (" + r.statusCode() + ": " + r.body() + "); posting plain text.");
-            r = post(webhook, text, null);
-        }
-        if (r.statusCode() != 200) {
-            throw new IllegalStateException("Slack answered " + r.statusCode() + ": " + r.body());
-        }
-        System.out.println("Posted: " + text.lines().findFirst().orElse(""));
-    }
-
-    static HttpResponse<String> post(String webhook, String text, String blocksJson) throws Exception {
-        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false"
-                + (blocksJson == null ? "" : ",\"blocks\":" + blocksJson) + "}";
-        return HttpClient.newHttpClient().send(
+        String blocks = imageUrl == null ? "" : ",\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":"
+                + json(text) + "}},{\"type\":\"image\",\"image_url\":" + json(imageUrl) + ",\"alt_text\":\"Cover image\"}]";
+        String body = "{\"text\":" + json(text) + ",\"unfurl_links\":false" + blocks + "}";
+        HttpResponse<String> r = HttpClient.newHttpClient().send(
                 HttpRequest.newBuilder(URI.create(webhook)).timeout(Duration.ofSeconds(30))
                         .header("Content-Type", "application/json; charset=utf-8")
                         .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8)).build(),
                 HttpResponse.BodyHandlers.ofString());
+        if (r.statusCode() != 200) {
+            throw new IllegalStateException("Slack answered " + r.statusCode() + ": " + r.body());
+        }
+        System.out.println("Posted: " + text.lines().findFirst().orElse(""));
     }
 
     static String json(String s) {

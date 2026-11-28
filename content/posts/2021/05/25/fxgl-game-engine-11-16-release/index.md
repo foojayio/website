@@ -1,7 +1,6 @@
 ---
 title: "Welcome to the FXGL Game Engine 11.16 Release"
 date: "2021-05-25T12:10:16+00:00"
-lastmod: "2021-05-25T12:10:18+00:00"
 description: "Changelog and release notes. Learn More."
 authors:
   - "almasbaimagambetov"

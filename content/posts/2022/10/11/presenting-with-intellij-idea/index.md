@@ -1,7 +1,6 @@
 ---
 title: "Presenting with IntelliJ IDEA"
 date: "2022-10-11T07:14:30+00:00"
-lastmod: "2022-10-11T07:14:32+00:00"
 description: "Let's learn a lot of different tips and tricks that will level up your presentation skills with IntelliJ IDEA!"
 authors:
   - "marit-van-dijk"
@@ -29,7 +28,7 @@ To install the plugin, open Preferences using **⌘,** (on Mac) or **Ctrl+Alt+S*
 
 To configure the Presentation Assistant plugin, go back to **Preferences** and go to **Appearance \& Behavior \> Presentation Assistant**.
 
-![](presentation-assistant-config-700x508.png)
+![Preferences dialog in IntelliJ IDEA showing Presentation Assistant settings for font size, duration, alignment and keymaps](presentation-assistant-config-700x508.png)
 
 Here we can configure font size, duration, alignment, and which keymaps to show. We are using macOS, with Windows as the alternative keymap. We have also configured the Presentation Assistant plugin to show the shortcuts at the top of the screen.
 

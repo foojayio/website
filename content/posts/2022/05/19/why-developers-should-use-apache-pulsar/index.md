@@ -1,7 +1,6 @@
 ---
 title: "Why Developers Should Use Apache Pulsar"
 date: "2022-05-19T15:10:49+00:00"
-lastmod: "2022-05-19T15:11:52+00:00"
 description: "Apache Pulsar is an open source streaming platform that addresses important limitations in Kafka, particularly for cloud-native applications."
 canonical: "https://www.infoworld.com/article/3619272/why-developers-should-use-apache-pulsar.html"
 authors:
@@ -20,7 +19,7 @@ related_posts:
 ---
 
 Apache Pulsar is an open source streaming platform that addresses some important limitations in Kafka, particularly for cloud-native applications.  
-![](data_explosion_proliferation_transmission_data_streams_volume_velocity_by_spainter_vfx_gettyimages-896319676_cso_2400x1600-100852889-large-1024x683.jpg) SPainter VFX / Getty Images   
+![Abstract blue streams of light and floating numbers converging on a bright point, illustrating a flood of data streams](data_explosion_proliferation_transmission_data_streams_volume_velocity_by_spainter_vfx_gettyimages-896319676_cso_2400x1600-100852889-large-1024x683.jpg) SPainter VFX / Getty Images   
 
 If you are building applications today, you are probably familiar with the microservices model: Rather than building big monolithic applications, we break services down into isolated components that we can independently update or change over time.
 

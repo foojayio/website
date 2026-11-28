@@ -1,7 +1,6 @@
 ---
 title: "Virtual Tour Is Biggest Project Yet For Java Community Platform Foojay"
 date: "2021-03-03T18:27:05+00:00"
-lastmod: "2021-08-24T11:45:52+00:00"
 description: "Fifteen events are already confirmed in an ambitious virtual tour of JUGS across the globe, a strong start for Java community platform Foojay."
 authors:
   - "geertjan-wielenga"

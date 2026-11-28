@@ -1,0 +1,3 @@
+{{- /* The combined read count of every article, for the listing pages' headers.
+       Cached: it is the same number wherever it is asked for. */ -}}
+{{- return partialCached "views-total.html" (where site.RegularPages "Section" "posts") "all-posts" -}}

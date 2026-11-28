@@ -1,14 +1,12 @@
 ---
 title: "JUG Munich hosts the JCP Executive Committee meeting to 25th anniversary of JCP"
 date: "2024-04-14T19:40:41+00:00"
-lastmod: "2024-04-14T19:42:59+00:00"
 description: "This year, the first meeting of the JCP Executive Committee will take place in Munich with the support of MicroDoc."
 authors:
   - "miro-wengner"
 image: "duke-welcome-1.jpg"
 categories:
   - "Events"
-  - "Java"
   - "JEPs"
 related_posts:
   - "7-ways-to-contribute-to-openjdk"

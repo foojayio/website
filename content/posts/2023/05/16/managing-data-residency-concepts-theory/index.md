@@ -1,7 +1,6 @@
 ---
 title: "Managing Data Residency: Concepts & Theory"
 date: "2023-05-16T09:18:20+00:00"
-lastmod: "2023-05-16T09:18:39+00:00"
 description: "Take a look at data residency and design a draft architecture to implement it. In the next article, we will delve into the technical details."
 canonical: "https://blog.frankel.ch/data-residency/1/"
 authors:
@@ -35,7 +34,7 @@ Most Cloud providers offer this capability, *e.g.* , [Google](https://cloud.goog
 
 I want to offer a couple of options to handle this requirement in this post.
 
-![](initial-system-1024x309.png)
+![Diagram of a system in Location X: an API gateway forwards requests to a multi-instance server that talks to a database](initial-system-1024x309.png)
 
 ## Where to compute the location?
 
@@ -54,7 +53,7 @@ Specifics depend on your tech stack, but it goes like this:
 
 Here's what it looks like:
 
-![](decide-code-system-1024x744.png)
+![Diagram where the application code decides the data location, sending the request to Location Y's database when it differs from X](decide-code-system-1024x744.png)
 
 X and Y correspond to different countries.
 
@@ -80,7 +79,7 @@ For example, the Apache ShardingSphere project provides a JVM database driver wi
 
 The proxy approach is similar to the library/framework approach above; the difference comes from the former running inside the application, while the latter is a dedicated component.
 
-![](decide-proxy-system-1024x744.jpg)
+![Diagram where a proxy in front of the database decides the location and forwards the call to Location Y's database](decide-proxy-system-1024x744.jpg)
 
 The responsibility of keeping track of the databases falls now on the proxy's shoulders.
 
@@ -90,7 +89,7 @@ Apache ShardingSphere provides both alternatives, a JDBC driver and a proxy.
 
 Another approach is to compute the location in the API Gateway.
 
-![](decide-gateway-system-1024x744.png)
+![Diagram where the API gateway computes the location and routes the request to Location Y's server and database](decide-gateway-system-1024x744.png)
 
 Interestingly enough, part of a Gateway's regular responsibilities is to keep part of the upstreams.
 
@@ -120,7 +119,7 @@ In the latter case, we incur a performance penalty. However, our design makes it
 
 Here's the sequence diagram of the second call, with location metadata already added:
 
-![](flow-across-location.png)
+![Sequence diagram: gateway and app both compute the location, hitting the local DB with low latency or the other location's DB with high latency](flow-across-location.png)
 
 ## Conclusion
 

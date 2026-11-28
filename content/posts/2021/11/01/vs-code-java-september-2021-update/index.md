@@ -1,7 +1,6 @@
 ---
 title: "VS Code Java September 2021 Update"
 date: "2021-11-01T08:49:12+00:00"
-lastmod: "2021-11-01T08:51:57+00:00"
 description: "Covering the new release of Gradle extension, more convenient Code Actions and the recent 1.0 language server release!"
 authors:
   - "nick-zhu"
@@ -55,23 +54,23 @@ Gradle file authoring experience in Groovy is also greatly improved! There are a
 
 The Gradle language server supports basic auto completions for a Gradle file, when you're trying to type a Gradle closures or properties in a Gradle script, the extension will automatically suggest available Gradle closures for you.
 
-![](autocomplete.gif)
+![VS Code showing a Gradle build file where the language server offers completions as the user types in the file](autocomplete.gif)
 
 When you're typing a dependency in "dependencies" closure, the extension will automatically search in the Maven central and suggest result for you.
 
-![](autosuggestdependency.gif)
+![VS Code Gradle file where typing a dependency triggers suggestions from Maven Central](autosuggestdependency.gif)
 
 #### Syntax Highlighting
 
 When opening a Groovy Gradle file, the Gradle language server will start and provide language features for you. Basically, we offer Groovy syntax highlighting (using VS Code default style) in Gradle files. After language server starts, it will analyze the opened Gradle file and provide semantic tokens information, providing more precise highlighting results.
 
-![](syntax.webp)
+![VS Code showing syntax highlighting for a Groovy build.gradle file with plugins, java and dependencies blocks](syntax.webp)
 
 #### Document outline
 
 The Gradle language server will provide the document outline for the current Gradle file. This type of view will help you to navigate to any part of the Gradle file easily
 
-![](documentoutline.webp)
+![VS Code Gradle file with the Outline view in the sidebar listing plugins, dependencies and other build file elements](documentoutline.webp)
 
 #### Error reporting
 
@@ -92,7 +91,7 @@ Now, developers can simply use the lightbulb icon (Quick Fix) to generate common
 * Generate toString()
 
 Here is a quick demo:  
-![](codeactions.gif)
+![VS Code editing Person.java with a code action to generate methods for the private fields firstName, lastName and age](codeactions.gif)
 
 ### Feedback and Suggestions
 

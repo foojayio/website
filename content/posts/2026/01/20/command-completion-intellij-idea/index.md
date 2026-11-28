@@ -1,7 +1,6 @@
 ---
 title: "Command completion (..) in IntelliJ IDEA"
 date: "2026-01-20T07:31:35+00:00"
-lastmod: "2026-01-20T09:51:08+00:00"
 description: "Command completion (..) extends regular completion. It lets you discover and use IntelliJ IDEA features without having to remember shortcuts."
 canonical: "https://maritvandijk.com/command-completion/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "command.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
@@ -34,7 +32,7 @@ To filter the list to show commands only, type two dots `..`. As the list can be
 *Command completion extends regular completion*
 
 By default, the commands are shown in a separate section of the list. If you prefer *Commands* to be part of the regular completion list, you can adjust this in the *Settings* . Use *Search Everywhere* (Shift Shift) and look for "command completion" to go straight to the relevant settings and uncheck the option *Show command completion as a separate group*.
-![](https://maritvandijk.com/wp-content/uploads/2026/01/CommandCompletion_Settings_Group-1024x743.png) *Command Completion Settings: Show command completion as a separate group*
+![IntelliJ IDEA settings page for Command Completion, with the option to show commands in the regular completion list](https://maritvandijk.com/wp-content/uploads/2026/01/CommandCompletion_Settings_Group-1024x743.png) *Command Completion Settings: Show command completion as a separate group*
 
 ## **Fix errors and warnings** with command completion
 
@@ -61,7 +59,7 @@ You can transform your code as you go, for example to make use of modern Java la
 You can use it for navigation. For example, we can navigate to the `String` class declaration. You'll notice that this file is read only! How will we use completion here? Don't worry, you can change your settings to be able to use command completion in read-only files!
 
 Open the *Settings* for *Command Completion* , by using *Search Everywhere* (Shift Shift) and searching for "command completion". Select the option *Enable command completion for read only files*. Now, you can use command completion in read-only files, for example to navigate back to where you were.
-![](https://maritvandijk.com/wp-content/uploads/2026/01/CommandCompletion_Settings_ReadOnly-1024x743.png) *Command Completion Settings: Enable command completion for read only files.*
+![IntelliJ IDEA settings page for Command Completion showing the option for read-only files](https://maritvandijk.com/wp-content/uploads/2026/01/CommandCompletion_Settings_ReadOnly-1024x743.png) *Command Completion Settings: Enable command completion for read only files.*
 
 If you want to rename your class, you can use a shortcut to do so, but you need to know this shortcut (*⇧F6* on macOS / *Shift+F6* on Windows/Linux). Now, you can use command completion instead. Go to the end of the class or method name you want to rename and type `..rename`.
 

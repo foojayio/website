@@ -25,7 +25,7 @@ authors:
 # "Documentation", "Open Source" -- none of which are categories here) is a dead
 # link that validate/BuiltSite.java blocks the deploy on.
 topics:
-  - "Java"
+  - "Java Core"
   - "Library"
   - "Tools"
   - "Maven"

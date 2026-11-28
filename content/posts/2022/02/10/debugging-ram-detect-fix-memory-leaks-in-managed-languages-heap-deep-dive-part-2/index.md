@@ -1,7 +1,6 @@
 ---
 title: "Detect and Fix Memory Leaks in Managed Languages"
 date: "2022-02-10T08:45:27+00:00"
-lastmod: "2022-02-10T08:47:28+00:00"
 description: "Java and JavaScript are garbage collected languages. But memory leaks can still plague them. How to avoid, detect, and fix heap problems?"
 authors:
   - "shai-almog"

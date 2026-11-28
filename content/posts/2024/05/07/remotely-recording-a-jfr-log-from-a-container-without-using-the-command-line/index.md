@@ -1,13 +1,11 @@
 ---
 title: "Remotely Recording a JFR Log from a Container (Without Using the Command Line)"
 date: "2024-05-07T04:32:29+00:00"
-lastmod: "2024-05-07T04:33:47+00:00"
 description: "JFR logs are easily obtained by simply going into the command line. But what if you don't have access to the command line or terminal directly on the system where the JVM is running?"
 authors:
   - "matt-van-order"
 image: "RecordingProgress-1.png"
 categories:
-  - "Java"
   - "JDK Flight Recorder"
 related_posts:
   - "a-closer-look-at-jfr-streaming"
@@ -59,7 +57,7 @@ If you don't have Azul Mission Control yet, head over to the [Azul Mission Contr
 
 In Azul Mission Control, go to the JVM Browser and click the **Add JVM Connection** button to create a new custom JVM connection.
 
-![](JVMBrowserConnectButton.png)
+![Azul Mission Control JVM Browser with the Add JVM Connection button highlighted in red](JVMBrowserConnectButton.png)
 
 Specify the host name/IP address of the remote system and the JMX port number.
 
@@ -67,11 +65,11 @@ If JMX authentication is enabled, enter User and Password.
 
 Click **Test Connection** to make sure your remote JVM is reachable and click Finish.
 
-![](NewConnection.png)
+![Azul Mission Control New Connection dialog with host 192.168.0.166, port 7091 and status OK](NewConnection.png)
 
 Your remote JVM now appears in the JVM Browser.
 
-![](JVMBrowserConnectionSuccess.png)
+![JVM Browser listing the new remote JVM connection 192.168.0.166 next to local JVMs](JVMBrowserConnectionSuccess.png)
 
 *Depending on your network and container setup, port forwarding may need to be set up. Contact your network's administrator if you need help with port forwarding.*
 
@@ -81,17 +79,17 @@ Now that you're connected to your JVM remotely, it's time to make a JFR recordin
 
 In Azul Mission Control, go to the JDK Browser, right-click your remote JVM connection and select **Start Flight Recording...**
 
-![](StartNewFRDropBox.png)
+![Context menu on the remote JVM connection in Azul Mission Control with 'Start Flight Recording...' highlighted](StartNewFRDropBox.png)
 
 Select your preferred options and time intervals (either a fixed time recording or continuous recording based on the JFR log's size and/or age), and click **Finish**.
 
-![](StartNewFR.png)
+![Start Flight Recording dialog set to a one-minute time fixed recording using the 'Profiling - on server' template](StartNewFR.png)
 
 Your remote JFR recording has begun. You're almost there!
 
 Check the progress of the recording by expanding the remote JVM connection in the JVM Browser.
 
-![](RecordingProgress.png)
+![JVM Browser showing a running 'My Recording' (44 s) under Flight Recorder of the remote JVM](RecordingProgress.png)
 
 Once your recording has finished, your JFR log opens automatically in Azul Mission Control.
 

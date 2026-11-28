@@ -7,7 +7,6 @@ authors:
 image: "sbc-java-benchmarks.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "JBang"
   - "Performance"
@@ -145,9 +144,9 @@ The "[Vanilla JavaScript](http://vanilla-js.com/)" (= no libraries, just HTML/CS
 The dashboard pulls the latest summary and other data files from the repository, so it's a living comparison that grows as more test reports become available.
 
 {{< gallery >}}
-sbc-benchmarks-filters-1024x555.jpg
-sbc-benchmarks-overall-1024x612.jpg
-sbc-benchmarks-tests-1024x789.jpg
+sbc-benchmarks-filters-1024x555.jpg | | Benchmark page filter buttons for processor, brand, benchmark and platform, including Apple M2 Max and Raspberry Pi 4 and 5
+sbc-benchmarks-overall-1024x612.jpg | | Bar chart of overall performance: RK3588 OPi 5 Ultra at 100%, Raspberry Pi 5 at 93.3%, Raspberry Pi 4 at 37.1%, others lower
+sbc-benchmarks-tests-1024x789.jpg | | Bar charts for akka-uct and db-shootout in milliseconds; the RK3588 and Raspberry Pi 5 are fastest, BeagleV-Fire slowest
 {{< /gallery >}}
 
 These are screenshots from a first test round. Check the [actual last status at webtechie.be/sbc/](https://webtechie.be/sbc/).

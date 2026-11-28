@@ -1,7 +1,6 @@
 ---
 title: "Challenges when Developing a GUI for FIX"
 date: "2022-12-21T08:06:18+00:00"
-lastmod: "2022-12-21T10:36:50+00:00"
 description: "In this article, we explore the challenges in developing a Graphical User Interface (GUI) for Financial Information Exchange (FIX) data."
 authors:
   - "rob-austin"
@@ -30,7 +29,7 @@ It could be said that the FIX format balances the compactness of data with its r
 Taking inspiration from targetcompid.com we realised that before we create a commercial FIX GUI, we could first offer a free-to-use [FIX parser](https://fixparser.chronicle.software/ "FIX parser"), which can display any FIX message in a human readable form.
 
 Let's start with the FIX Parser:  
-![](Screen-Shot-2022-12-13-at-2.36.08-PM-1024x765.png)
+![FIX Parser web tool with a pasted FIX message, a timeline of messages and a details panel for the selected one](Screen-Shot-2022-12-13-at-2.36.08-PM-1024x765.png)
 
 *The user can paste in a FIX message, click parse, and it will be translated below.*
 
@@ -48,7 +47,7 @@ We selected JSON as it could be easily parsed by JavaScript, using open-source [
 
 This was initially meant as a temporary feature to assist us with debugging, but we realised how useful this may be to users, who are often developers themselves and would like access to the underlying JSON data.
 
-![](Screen-Shot-2022-12-13-at-2.38.52-PM-1024x263.png)
+![FIX parser results with the 'Copy as JSON' button and a Reject row for an unsupported message type](Screen-Shot-2022-12-13-at-2.38.52-PM-1024x263.png)
 
 #### Enums
 
@@ -66,7 +65,7 @@ Or if the value is a "2" then it is a SELL, hence 54=2,There are other variants 
 
 we display both in the browser like this:
 
-![](Screen-Shot-2022-12-13-at-2.42.05-PM-1024x215.png)
+![FIX message detail with the Side field (54) highlighted, showing value 1 meaning BUY](Screen-Shot-2022-12-13-at-2.42.05-PM-1024x215.png)
 
 #### Repeating Groups
 
@@ -74,7 +73,7 @@ Another challenge was repeating groups, without going into the FIX message forma
 
 Repeating groups can repeat inside other repeating groups.
 
-![](Screen-Shot-2022-12-13-at-2.42.46-PM-873x1024.png)
+![FIX market data message with repeating groups, a BID and an OFFER entry for EUR/USD, each outlined in red](Screen-Shot-2022-12-13-at-2.42.46-PM-873x1024.png)
 
 One of the reasons we selected JSON is it can handle this type of hierarchical data structure with ease.
 

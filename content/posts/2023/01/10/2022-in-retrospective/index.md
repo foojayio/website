@@ -1,7 +1,6 @@
 ---
 title: "2022 in Retrospective"
 date: "2023-01-10T08:19:43+00:00"
-lastmod: "2023-01-10T08:19:44+00:00"
 description: "Years when one changes jobs are always challenging but very interesting; 2022 was no different. What are your insights into last/this year?"
 canonical: "https://blog.frankel.ch/2022-retrospective/"
 authors:
@@ -22,7 +21,7 @@ On the personal and technical side, here's a summary of the past year from my pe
 
 ## Job change
 
-{{< img src="apache-apisix.jpeg" class="alignright size-full" width="300" height="300" >}}
+{{< img src="apache-apisix.jpeg" alt="Badge reading 'Powered by Apache' with the Apache APISIX logo" class="alignright size-full" width="300" height="300" >}}
 
 First and foremost, I changed jobs. I worked for [Hazelcast](https://hazelcast.com/) for 3½ years.
 
@@ -96,11 +95,11 @@ It's interesting to see that though I thought dev.to focused on web and front-en
 
 ## Public speaking
 
-[![](Screenshot-2023-01-02-at-15.32.08-752x1024.jpg)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
+[![Tweet by Nicolas Frankel with a photo of his 2022 conference speaker badges](Screenshot-2023-01-02-at-15.32.08-752x1024.jpg)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
 
 Indeed, 2022 was not my best year in terms of conference attendance. Here's a comparison of the previous years:
 
-{{< img src="public-speaking-700x438.png" class="aligncenter size-medium" width="700" height="438" >}}
+{{< img src="public-speaking-700x438.png" alt="Bar chart of events and talks per year: 26 and 30 in 2018, rising to 111 and 119 in 2021, then 54 and 59 in 2022" class="aligncenter size-medium" width="700" height="438" >}}
 
 Raw numbers are a bit misleading: Because of Covid, I spoke at many events online in 2020 and 2021. It's **much** easier to do so than traveling to another country (or continent!); on the other hand, engagement is much lower, not to mention the lack of social interactions.
 
@@ -117,7 +116,7 @@ It's below the number of talks I usually try to achieve, but they were pretty po
 
 As a Developer Advocate, my [GitHub contributions](https://github.com/nfrankel/) are different from the ones of a regular software developer, especially one working on Open Source.
 
-{{< img src="github-analytics-700x480.png" class="size-medium aligncenter" width="700" height="480" >}}
+{{< img src="github-analytics-700x480.png" alt="GitHub profile showing 687 contributions in the last year, mostly commits (88%), with a contribution calendar" class="size-medium aligncenter" width="700" height="480" >}}
 
 Most of my contributions are commits because I'm the only one working on my demos. Furthermore, I regularly update them with the latest version of whatever dependency I use. I'm trying to open issues on Apache APISIX since I'm a huge user. Eating one's dog food is a great way to uncover either bugs or usability improvements. Finally, pull requests are for blog posts and reviews for my colleagues' blog posts.
 

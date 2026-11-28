@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 9: Docker compose all the things"
 date: "2023-02-26T10:02:15+00:00"
-lastmod: "2023-02-26T10:08:04+00:00"
 description: "In part 9 of this series, learn how to successfully create an orchestrated microservices system with Docker Compose!"
 authors:
   - "jennifer-reif"
@@ -14,6 +13,7 @@ categories:
   - "Microservices"
   - "Neo4J"
   - "Spring"
+  - "Mongo"
 related_posts:
   - "journeys-in-java-level-8-add-mongodb-to-spring-cloud-config"
   - "journeys-in-java-level-7-externalize-microservice-configuration"

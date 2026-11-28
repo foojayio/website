@@ -1,7 +1,6 @@
 ---
 title: "Reaper 3.0 for Apache Cassandra is available"
 date: "2022-03-18T14:55:43+00:00"
-lastmod: "2022-09-29T15:21:03+00:00"
 description: "The K8ssandra team announced the release of Reaper 3.1. Let’s dive into the features and improvements that 3.0 recently introduced"
 canonical: "https://k8ssandra.io/blog/announcements/announcing-the-release-of-reaper-3-1-for-apache-cassandra/"
 authors:
@@ -52,7 +51,7 @@ Reaper did a poor job at dealing with this for mainly two reasons:
 We fixed the former by using a longer timeout on subsequent retries, which is a simple trick to make repairs more "adaptive". If the segments are too big, they'll eventually pass after a few retries. It's a good first step to improve the experience, but it's not enough for scheduled repairs as they could end up with the same repeated failures for each run.
 
 This is where we introduce adaptive schedules, which use feedback from past repair runs to adjust either the number of segments or the timeout for the next repair run.
-![](reaper-3_0-adaptive-schedules.png "Adaptive Schedules") Figure 1: Example of how to use adaptive schedules in Reaper.
+![Reaper Schedules form with the Adaptive field set to true, highlighted in red](reaper-3_0-adaptive-schedules.png "Adaptive Schedules") Figure 1: Example of how to use adaptive schedules in Reaper.
 
 Adaptive schedules will be updated at the end of each repair if the run metrics justify it. The schedule can get a different number of segments or a higher segment timeout depending on the latest run.
 
@@ -73,7 +72,7 @@ The best practice is to run it on a regular basis so that the amount of unrepair
 Reaper 3.0 introduced a new trigger for the incremental schedules, which is a threshold of unrepaired data. This allows creating schedules that will start a new run as soon as, for example, 10% of the data for at least one table from the keyspace is unrepaired.
 
 Those triggers are complementary to the interval in days, which could still be necessary for low traffic keyspaces that need to be repaired to secure tombstones.
-![](reaper-3_0-percent-unrepaired-1024x201.png "Percent unrepaired triggers") Figure 2: Setting interval for incremental repairs.
+![Reaper schedules table showing an incremental schedule with interval '7 days or 10% unrepaired', highlighted](reaper-3_0-percent-unrepaired-1024x201.png "Percent unrepaired triggers") Figure 2: Setting interval for incremental repairs.
 
 These new features will allow you to securely optimize tombstone deletions by enabling the `only_purge_repaired_tombstones `compaction subproperty in Cassandra, permitting it to reduce `gc_grace_seconds` [down to three hours](https://thelastpickle.com/blog/2018/03/21/hinted-handoff-gc-grace-demystified.html) without the concern that deleted data will reappear.
 
@@ -82,7 +81,7 @@ These new features will allow you to securely optimize tombstone deletions by en
 That may sound like an obvious feature but previous versions of Reaper didn't allow for editing of an existing schedule. This led to an annoying procedure where you had to delete the schedule (which isn't made easy by Reaper either) and recreate it with the new settings.
 
 Version 3.0 fixed that embarrassing situation and adds an edit button to schedules, which allows you to change the mutable settings of schedules:
-![](reaper-3_0-edit-schedule-1024x847.png "Edit Repair Schedule") Figure 3: Reaper now has the ability to edit the settings for scheduled actions.
+![Reaper 'Edit Schedule' dialog with interval, 10% unrepaired threshold and Adaptive fields for an existing schedule](reaper-3_0-edit-schedule-1024x847.png "Edit Repair Schedule") Figure 3: Reaper now has the ability to edit the settings for scheduled actions.
 
 ## CVE fixes
 
@@ -103,7 +102,7 @@ This allows Reaper to be more secure and future proof as it now enables us to mi
 In order to protect clusters from running mixed incremental and full repairs in older versions of Cassandra, Reaper would disallow the creation of an incremental repair run/schedule if a full repair had been created on the same set of tables in the past (and vice versa).
 
 Now that incremental repair is safe for production use, it is necessary to allow such mixed repair types. In case of conflict, Reaper 3.0 displays a pop-up informing you and allowing you to force create the schedule/run:
-![](reaper-3_0-schedule-conflict-1024x397.png "Force bypass schedule conflict") Figure 4: Reaper now shows a pop-up to inform you of a conflict and allowing to force create the schedule/run.
+![Reaper 'Scheduling conflict detected' dialog warning of an overlapping repair schedule, with Cancel and Force buttons](reaper-3_0-schedule-conflict-1024x397.png "Force bypass schedule conflict") Figure 4: Reaper now shows a pop-up to inform you of a conflict and allowing to force create the schedule/run.
 
 We've also added a special "schema migration mode" for Reaper, which will exit after the schema was created/upgraded. We use this mode in K8ssandra to prevent schema conflicts and allow the schema creation to be executed in an init container that won't be subject to liveness probes that could trigger the premature termination of the Reaper pod:
 

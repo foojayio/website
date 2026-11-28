@@ -6,7 +6,7 @@ bio: "Systems Engineer | High-Performance Java (Zero-Copy / Panama / Loom) | Fou
 bluesky: ""
 mastodon: ""
 linkedin: "https://www.linkedin.com/in/arkstack/"
-github: ""
+github: "https://github.com/arkstack-dev"
 youtube: ""
-website: ""
+website: "https://arkstack.dev"
 ---

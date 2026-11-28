@@ -1,7 +1,6 @@
 ---
 title: "Even More Opentelemetry!"
 date: "2024-06-20T06:40:47+00:00"
-lastmod: "2024-06-20T06:40:48+00:00"
 description: "I continue to work on my Opentelemetry demo. Its main idea is to showcase traces across various technology stacks, including asynchronous communication via an MQTT queue."
 canonical: "https://blog.frankel.ch/even-more-opentelemetry/"
 authors:
@@ -20,11 +19,11 @@ related_posts:
 
 Here's an updated diagram. New components appear in violet, and updated components appear in green.
 
-[![](otel-component-model.jpg)](otel-component-model.jpg) I want to be able to add more components. Thus, I decided that instead of directly querying the database, the `inventory` component would query warehouses, which are supposed to be located in different regions. Each warehouse can be implemented in a different stack, and you can have as many as you want—PRs are welcome. I miss Elixir and .Net at the moment. The contract, which I need to write down, is easy:
+[![Component diagram of the demo architecture: API gateways, catalog, inventory, pricing, analytics and warehouse services, with new components in violet and updated ones in green](otel-component-model.jpg)](otel-component-model.jpg) I want to be able to add more components. Thus, I decided that instead of directly querying the database, the `inventory` component would query warehouses, which are supposed to be located in different regions. Each warehouse can be implemented in a different stack, and you can have as many as you want—PRs are welcome. I miss Elixir and .Net at the moment. The contract, which I need to write down, is easy:
 
 * An endpoint `/stocks/${productId}`
 * The ability to query PostgreSQL
-* Return the stock in the form:![](stock-class-model.png)
+* Return the stock in the form:![Class diagram: a StockLevel (product_id, quantity) refers to one Warehouse (id, state, city, country)](stock-class-model.png)
 
 I've written about the changes in the inventory to account for the new configuration. Let's talk about the warehouse components.
 
@@ -105,15 +104,15 @@ const userProperties: Record<string, any> = {}
 
 So far, my services have used only PostgreSQL as a data store. Datastores don't implement OpenTelemetry by themselves, but the correct instrumentation of an app can show the trace going to the datastore. Here, you can see the trace created by the OpenTelemetry agent on a Kotlin/Spring Boot app that uses the PostgreSQL driver.
 
-![](postrgres-otel-agent-trace.png)
+![Trace span for SELECT postgres.product from the catalog service, with tags showing the PostgreSQL connection, table and statement](postrgres-otel-agent-trace.png)
 
 Here's the one from the Gorm framework, instrumented manually.
 
-![](postgres-gorm-trace.png)
+![Trace span for gorm.Query in the stocks USA service, showing the SQL statement and database tags](postgres-gorm-trace.png)
 
 Both traces display the system, the statement, and a couple of other data. The Redis instrumentation shows the same information under the same structure!
 
-![](redis-lettuce-trace.png)
+![Trace span for a Redis GET from the catalog service via Lettuce, showing the statement and Redis tags](redis-lettuce-trace.png)
 
 Icing on the cake, if you use the Lettuce client, which is the default for Spring, you don't need additional changes. The OpenTelemetry agent already takes care of everything.
 

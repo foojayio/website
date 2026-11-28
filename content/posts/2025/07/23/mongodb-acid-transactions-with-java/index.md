@@ -1,14 +1,12 @@
 ---
 title: "MongoDB ACID Transactions With Java"
 date: "2025-07-23T14:39:45+00:00"
-lastmod: "2025-07-23T14:43:58+00:00"
 description: "MongoDB’s support for multi-document ACID transactions gives you flexibility when single-document atomicity isn’t enough."
 authors:
   - "tim-kelly"
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"

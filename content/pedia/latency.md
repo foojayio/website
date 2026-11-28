@@ -1,7 +1,9 @@
 ---
 title: "Latency"
 description: "Latency is the time between the initiation of a procedure and the completion of the procedure; in other words, how long it takes for something to happen. In the realm of software, there are many types of latency. No application ..."
-url: "/pedia/latency/"
+url: "/java-terms-explained/latency/"
+aliases:
+  - "/pedia/latency/"
 ---
 
 Latency is the time between the initiation of a procedure and the completion of the procedure; in other words, how long it takes for something to happen.
@@ -54,6 +56,6 @@ Low latency is critical for any application to succeed in the marketplace. Howev
 
 ## See Also
 
-* [GC Algorithms: G1, ZGC, and Shenandoah](/pedia/gc-algorithms-g1-zgc-and-shenandoah/)
-* [Stop-the-World Pause](/pedia/stop-the-world-pause/)
-* [Garbage Collection](/pedia/garbage-collection/)
+* [GC Algorithms: G1, ZGC, and Shenandoah](/java-terms-explained/gc-algorithms-g1-zgc-and-shenandoah/)
+* [Stop-the-World Pause](/java-terms-explained/stop-the-world-pause/)
+* [Garbage Collection](/java-terms-explained/garbage-collection/)

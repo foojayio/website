@@ -1,13 +1,11 @@
 ---
 title: "Autopo: An open source tool to automate.po file translation with AI."
 date: "2025-05-12T07:12:39+00:00"
-lastmod: "2025-05-12T07:12:42+00:00"
 description: "Autopo is a free and open source JavaFX application that automates .po file translation and validation with AI."
 authors:
   - "andrea-vacondio"
 image: "autopo-6x.png"
 categories:
-  - "Desktop"
   - "JavaFX"
   - "LangChain4j"
 related_posts:

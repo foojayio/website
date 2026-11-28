@@ -1,7 +1,6 @@
 ---
 title: "More Java From Azul!"
 date: "2025-12-10T17:14:23+00:00"
-lastmod: "2025-12-11T09:50:58+00:00"
 description: "Strategic acquisition bolsters Azul’s Java platform with complementary products, deep Java expertise and accelerated go-to-market capabilities!"
 authors:
   - "simonritter"
@@ -50,7 +49,7 @@ We see many synergies between how Payara supports Jakarta EE applications and ho
 We also see opportunities to help customers optimise the performance of their Jakarta EE applications through Azul's Platform Prime. As such, Azul has announced that it is acquiring Payara to extend our Java support offerings.
 
 The diagram below shows how the various components fit together in a broader enterprise Java market.
-![](payara-1024x599.jpg)
+![Azul stack diagram: Platform Core and Platform Prime runtimes under Payara, Spring and other frameworks, with Intelligence Cloud alongside](payara-1024x599.jpg)
 
 These are exciting times, so stay tuned for more updates as we move forward!
 

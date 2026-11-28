@@ -1,13 +1,11 @@
 ---
 title: "When NOT TO USE Event-Driven Architecture (EDA)"
 date: "2026-07-11T00:34:03+00:00"
-lastmod: "2026-07-11T00:34:05+00:00"
 description: "Learn when not to use Event-Driven Architecture (EDA), from simple CRUD apps to strong consistency, immediate responses, and operational complexity."
 authors:
   - "vincent-vauban"
 image: "4coverNoEDA-1024x576.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Streaming"
 related_posts:

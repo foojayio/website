@@ -1,7 +1,6 @@
 ---
 title: "Web App Startup in 3ms with RIFE2 and GraalVM"
 date: "2023-02-21T09:12:55+00:00"
-lastmod: "2023-04-10T20:40:06+00:00"
 description: "RIFE2 v1.3.0 has experimental support for GraalVM Ahead-Of-Time compilation with native-image, reducing startup time to an incredible 3ms!"
 authors:
   - "geert-bevin"
@@ -57,7 +56,7 @@ Starting that one up is even easier with the single executable that now contains
 
 I ran the previous instructions on my AMD Ryzen 9 5950X 16 Core 128GB dedicated Ubuntu Linux server and then called `siege -c 10 -r 2000 -b http://localhost:8080/hello` to measure the performance:
 
-![](og-aot-compilation-1015x1024.png)
+![Terminal output of the RIFE2 native image starting in 3ms and serving 33,898 requests/sec, above a bar chart comparing GraalVM JIT and Native Image startup, speed and memory](og-aot-compilation-1015x1024.png)
 
 These were the key points:
 

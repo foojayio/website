@@ -1,7 +1,6 @@
 ---
 title: "Let's Start a Java Mastodon Community for Friends Of OpenJDK!"
 date: "2022-11-14T13:41:06+00:00"
-lastmod: "2022-11-14T13:41:07+00:00"
 description: "Let's investigate if the Java community is interested in joining a dedicated Mastodon instance."
 authors:
   - "frankdelporte"
@@ -50,10 +49,10 @@ Want to learn more? [Jeroen Baert has written this very nice overview](https://w
 
 Since the last weeks, Mastodon has seen an enormous growth as you can see in the hourly generated graph on [@mastodonusercount@bitcoinhackers.org](https://mastodon.social/@mastodonusercount@bitcoinhackers.org).
 
-{{< img src="Screenshot-2022-11-14-at-13.47.07-700x490.png" class="size-medium is-resized" width="600" caption="Mastodon user count at 20221114 13:00CET" >}}
+{{< img src="Screenshot-2022-11-14-at-13.47.07-700x490.png" alt="Mastodon user count graphs: 6.7 million accounts, 54,316 new in the last day and 635,421 in the last week" class="size-medium is-resized" width="600" caption="Mastodon user count at 20221114 13:00CET" >}}
 
 This is an other graph shared by [Mike Masnik](https://twitter.com/mmasnick/status/1589400288712359936), that gives you a similar idea related to what is happening at Twitter:
-![](new-mastodon-users.jpg)
+![Line chart of new daily Mastodon users, spiking after Musk's Twitter purchase and layoffs, far above Twitter's 2022 average](new-mastodon-users.jpg)
 
 ## Community on Twitter and Mastodon
 

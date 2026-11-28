@@ -1,7 +1,6 @@
 ---
 title: "Resizing images on-the-fly"
 date: "2023-10-23T18:01:05+00:00"
-lastmod: "2023-10-23T18:01:06+00:00"
 description: "How to use Apache APISIX with imgproxy to reduce the storage cost of images in multiple resolutions."
 canonical: "https://blog.frankel.ch/resize-images-on-the-fly/"
 authors:
@@ -111,7 +110,7 @@ With this approach, the above HTML becomes much more straightforward:
 
 Apache APISIX intercepts requests starting with `/resize`, rewrites the URL for `imgproxy`, and forwards the rewritten URL to `imgproxy`. Here's the overall flow:
 
-[![](imgproxy-flow-1024x479.png)](imgproxy-flow.png) The corresponding Apache APISIX configuration looks like the following:
+[![Sequence diagram: a client request to Apache APISIX is rewritten and forwarded to imgproxy, which returns a WebP image](imgproxy-flow-1024x479.png)](imgproxy-flow.png) The corresponding Apache APISIX configuration looks like the following:
 
 ```yaml
 routes:
@@ -154,7 +153,7 @@ services:
 
 1. Simple web server hosting the HTML and the main image
 
-We can now test the above setup with the browser's Developer Tools, emulating small screen devices, *i.e.* , iPhone SE. The result is the following: [![](test-set-up-result.jpg)](test-set-up-result.jpg)
+We can now test the above setup with the browser's Developer Tools, emulating small screen devices, *i.e.* , iPhone SE. The result is the following: [![Chrome DevTools on localhost:9080 showing a resized image request returned as image/webp via APISIX](test-set-up-result.jpg)](test-set-up-result.jpg)
 
 * Because of the screen resolution, the image requested is the 400px width, not the original one. You can see it in the request's URL
 * The returned image is in WebP format; its weight is 14.4kb

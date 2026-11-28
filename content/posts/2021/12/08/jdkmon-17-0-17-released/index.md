@@ -1,7 +1,6 @@
 ---
 title: "JDKMon 17.0.17 Released"
 date: "2021-12-08T09:11:22+00:00"
-lastmod: "2021-12-08T09:11:23+00:00"
 description: "Point JDKMon to the folder where all your JavaFX SDK's are installed and it will check if there are any updates available."
 authors:
   - "gerrit-grunwald"

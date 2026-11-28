@@ -1,7 +1,6 @@
 ---
 title: "Microservices Architecture: Navigating the Buzz"
 date: "2024-01-24T20:05:53+00:00"
-lastmod: "2024-01-24T20:05:54+00:00"
 description: "If flexibility and resilience are priorities, embracing the distributed future of software development is worth considering."
 authors:
   - "jasmine-taylor"
@@ -25,7 +24,7 @@ In this article I'm here to break it down for you as I outline the benefits, som
 If you are not already familiar with monolithic vs microservices architecture, you could imagine your software application as a structure made of lego bricks. With monolithic architecture you have one large lego brick encompassing your entire application and all of its functionality.
 
 On the other hand, microservices architecture would be comparable to having a collection of smaller, specialised lego bricks, each serving as individual components with specific tasks.  
-![](Screenshot-2024-01-19-at-17.17.07-1024x390.png)
+![Two Lego-style bricks: one large block for a monolith, a pyramid of small bricks for microservices](Screenshot-2024-01-19-at-17.17.07-1024x390.png)
 
 *Image 1. Monolith vs Microservices architecture*
 
@@ -46,7 +45,7 @@ In a nutshell, [microservices architecture](https://en.wikipedia.org/wiki/Micros
 * Services are independent of each other and interact through well defined interfaces, allowing them to be developed in different languages
 * Services are organised around business capabilities
 
-![](Screenshot-2024-01-19-at-17.18.11-1024x585.png)
+![Six colored cubes connected by lines, representing independent services that interact through defined interfaces](Screenshot-2024-01-19-at-17.18.11-1024x585.png)
 
 *Image 2. Visual representation of microservices*
 
@@ -94,7 +93,7 @@ More specifically, it is key that a microservice remains simple in terms of its 
 
 Below we can see how this approach affects the release process for example, whereby in the case of failure, with microservices, only one microservice needs to be retested and redeployed.
 
-![](Screenshot-2024-01-19-at-17.19.42-1024x372.png)  
+![Release flow diagram: in a monolith a failing team blocks the shared release candidate, while each microservice releases independently](Screenshot-2024-01-19-at-17.19.42-1024x372.png)  
 *Image 3. Comparing the release process for monolithic vs microservices architecture*
 
 While there are a few design approaches to building microservices, one that is recommended is that of [Event-Driven Architecture](https://aws.amazon.com/event-driven-architecture/#:~:text=An%20event%2Ddriven%20architecture%20uses,on%20an%20e%2Dcommerce%20website. "Event-Driven Architecture") (EDA). This design pattern supports the loosely coupled, asynchronised communication and decentralised control that is necessary in microservices architecture.

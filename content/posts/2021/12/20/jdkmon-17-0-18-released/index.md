@@ -1,7 +1,6 @@
 ---
 title: "JDKMon 17.0.18 Released"
 date: "2021-12-20T09:06:26+00:00"
-lastmod: "2021-12-20T09:09:32+00:00"
 description: "Vulnerability information and TCK test status details are available and easily detectable with JDKMon 17.0.18."
 authors:
   - "gerrit-grunwald"
@@ -54,7 +53,7 @@ At the moment the following distributions are supported:
 * Zulu Prime
 
 JDKMon **17.0.18** has just been released!  
-![](JDKMon-2021-12-19-05-08-12-700x385.png)
+![JDKMon window showing version 17.0.18 for Mac OS ARM64 with the message 'Latest version installed'](JDKMon-2021-12-19-05-08-12-700x385.png)
 
 This versions brings two new features, described below.
 
@@ -65,10 +64,10 @@ JDKMon will check for all version numbers of the OpenJDK distributions it finds 
 There is NO guarantee that the distribution you use is affected but at least you will be aware that there might be a CVE (Common Vulnerability and Exposure).
 
 The yellow circle in the screenshot below indicates that there are known vulnerabilities for OpenJDK 16.0.1.  
-![](Vulnerability-c84d23ab.jpg)  
+![JDKMon list of installed Zulu and JavaFX SDK distributions, with info icons and a yellow warning icon on Zulu 16.0.1](Vulnerability-c84d23ab.jpg)  
 
 When you click on the yellow circle another window will pop up which shows you the related CVE's.  
-![](Vulnerabilities-found-1e936394.png)  
+![JDKMon 'Vulnerabilities found' window listing CVE-2021-2341 (severity low) and CVE-2021-2388 (severity high)](Vulnerabilities-found-1e936394.png)  
 
 The CVE entries in that window are links that when clicked will open the clicked CVE in your standard browser with a more detailed description.
 
@@ -79,7 +78,7 @@ If an OpenJDK distribution is TCK tested and provides information about that (e.
 You will find a little blue TCK tag besides the download button. If you click on that tag it will lead you to the link that is provided by the vendor of the distribution.
 
 At the moment this info is only available from Azul but others will follow.  
-![](Monosnap-2021-12-19-05-11-38-384x510.png)
+![JDKMon 'Download a JDK' dialog with Zulu 17.0.1 for Mac OS AARCH64 as tar.gz and a blue TCK tag next to Download](Monosnap-2021-12-19-05-11-38-384x510.png)
 
 JDKMon is available for the following platforms:
 

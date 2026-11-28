@@ -1,7 +1,6 @@
 ---
 title: "Timely Computation of Derived Values"
 date: "2021-09-10T09:22:36+00:00"
-lastmod: "2021-09-10T09:26:14+00:00"
 description: "Learn about adding computed values, as in an eager approach, but only triggering the computation when you need to access its result!"
 canonical: "https://blog.frankel.ch/timely-computation-derived-values/"
 authors:
@@ -52,7 +51,7 @@ The flow is the following. When the cart is updated, set `dirty` to `true`.
 
 When you need to display the cost:
 
-{{< img src="flow-319x510.png" class="aligncenter size-medium" width="319" height="510" >}}
+{{< img src="flow-319x510.png" alt="Sequence diagram: displaying a price computes, stores and clears the dirty flag only when the cart is dirty, then returns the price" class="aligncenter size-medium" width="319" height="510" >}}
 
 The only con is more complex logic.
 

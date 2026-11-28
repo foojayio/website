@@ -1,7 +1,6 @@
 ---
 title: "Looking Back on One Year of Speaking and Blogging"
 date: "2024-01-05T17:49:04+00:00"
-lastmod: "2024-01-05T17:49:05+00:00"
 description: "2023 was an adventurous year for me: I came into my blogging rhythm, blogging every one to two weeks, resulting in 39 articles, many of them on Foojay.io."
 authors:
   - "johannes-bechberger"
@@ -19,72 +18,72 @@ related_posts:
 This article is a recollection of the year's highlights. If you want a complete list of my presentations, visit my [Talks](https://mostlynerdless.de/talks/) page or the [Presentations](https://github.com/SAP/SapMachine/wiki/Presentations) page in the SapMachine Wiki.
 
 Before this year, I only gave a few presentations at my local hacker conference, [Gulaschprogrammiernacht](https://entropia.de/GPN), and two at local user groups. But then, at the end of December 2022, [Abby Bangser](https://www.infoq.com/profile/Abby-Bangser/) asked me whether I wanted to give a talk at [QCon London](https://qconlondon.com/) 2023. She apparently noticed me because I started blogging on performance topics, which only a few people do. This resulted in my first proper conference talk with the title "[Is Your Java Application Slow? Check out These Open-Source Profilers](https://www.infoq.com/presentations/profilers-open-source/)" and my InfoQ article [Unleash the Power of Open Source Java Profilers: Comparing VisualVM, JMC, and async-profiler](https://www.infoq.com/presentations/profilers-open-source/). I gave a version of this talk at almost every conference I attended.
-![](image-15-2000x1333-82151179.jpg)
+![Speaker presenting on a conference stage in front of a profiler flame graph projected on the screen](image-15-2000x1333-82151179.jpg)
 
 QCon London was a great experience, albeit I traveled via TGV and Eurostar on my birthday. It was only the second time that I'd been to London, so it was great to explore the city (and have my first article, [Writing a Profiler in 240 Lines of Pure Java](https://mostlynerdless.de/blog/2023/03/27/writing-a-profiler-in-240-lines-of-pure-java/), on the top of the hacker news front page), visiting the [British Museum](https://www.britishmuseum.org/) and walking along the Themes:  
-[![](IMG_1059-2000x1500-ebefba4c.jpeg)](IMG_1059-2000x1500-ebefba4c.jpeg)  
-[![](IMG_1070-1500x2000-147344e3.jpeg)](IMG_1070-1500x2000-147344e3.jpeg)  
-[![](IMG_1146-1500x2000-99a6fe77.jpeg)](IMG_1146-1500x2000-99a6fe77.jpeg)  
-[![](IMG_1138-2000x1500-a75b15f0.jpg)](IMG_1138-2000x1500-a75b15f0.jpg)  
-[![](IMG_1164-2000x1500-1d70e47b.jpg)](IMG_1164-2000x1500-1d70e47b.jpg)  
-![](IMG_1059-2000x1500-ebefba4c.jpeg)  
-![](IMG_1070-1500x2000-147344e3.jpeg)  
-![](IMG_1146-1500x2000-99a6fe77.jpeg)  
-![](IMG_1138-2000x1500-a75b15f0.jpg)  
-![](IMG_1164-2000x1500-1d70e47b.jpg)
+[![The River Thames in London with skyscrapers on the left bank under a blue sky with scattered clouds](IMG_1059-2000x1500-ebefba4c.jpeg)](IMG_1059-2000x1500-ebefba4c.jpeg)  
+[![The London Eye lit in pink at night, reflected in the Thames, next to a green-lit building](IMG_1070-1500x2000-147344e3.jpeg)](IMG_1070-1500x2000-147344e3.jpeg)  
+[![Tall fluted stone columns and a coffered ceiling at the entrance of the British Museum](IMG_1146-1500x2000-99a6fe77.jpeg)](IMG_1146-1500x2000-99a6fe77.jpeg)  
+[![Stone lion statue in the British Museum Great Court, with the glass roof visible above](IMG_1138-2000x1500-a75b15f0.jpg)](IMG_1138-2000x1500-a75b15f0.jpg)  
+[![Close-up of a pizza with tomato sauce, melted mozzarella and fresh basil leaves](IMG_1164-2000x1500-1d70e47b.jpg)](IMG_1164-2000x1500-1d70e47b.jpg)  
+![The River Thames in London with skyscrapers on the left bank under a blue sky with scattered clouds](IMG_1059-2000x1500-ebefba4c.jpeg)  
+![The London Eye lit in pink at night, reflected in the Thames, next to a green-lit building](IMG_1070-1500x2000-147344e3.jpeg)  
+![Tall fluted stone columns and a coffered ceiling at the entrance of the British Museum](IMG_1146-1500x2000-99a6fe77.jpeg)  
+![Stone lion statue in the British Museum Great Court, with the glass roof visible above](IMG_1138-2000x1500-a75b15f0.jpg)  
+![Close-up of a pizza with tomato sauce, melted mozzarella and fresh basil leaves](IMG_1164-2000x1500-1d70e47b.jpg)
 
 But this wasn't actually my first conference talk if you include my two 15-minute talks at [FOSDEM 2023](https://archive.fosdem.org/2023/) in February, one of which was based on my work on Firefox Profiler:
 
 {{< youtube HWPnzbCvua0 >}}
 
 FOSDEM is an open-source conference where a lot of different open-source communities meet:
-![](IMG_1012-2000x1475-e8466b47.jpeg)
+![Two 'Stop doing Rust' parody posters pinned on brown paper, spotted at FOSDEM](IMG_1012-2000x1475-e8466b47.jpeg)
 
 The best thing about FOSDEM was meeting all the lovely [Foojay](https://foojay.io/) people at the Foojay dinner, many of whom I met again at countless other conferences, like [JavaZone](https://2023.javazone.no/) in September:
-![](IMG_2100-44c46405.jpg) In a bar with my fellow speakers
+![Group of conference speakers smiling around a table in a bar after FOSDEM](IMG_2100-44c46405.jpg) In a bar with my fellow speakers
 
 But more on Oslo later. Speaking at QCon London and FOSDEM was frightening, but I learned a lot in the process, so I started submitting my talks to a few conferences and user groups, resulting in my first [Tour](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/) d'Europe in May/June this year:
-![](image-6-40b237b8.jpg)
+![Map of the trip route from Nieuwegein through Germany, Munich and Milan, and back via Switzerland to Karlsruhe](image-6-40b237b8.jpg)
 
 I originally just wanted to give a talk at the JUG Milano while I was there any way on holiday with two friends. Sadly, the vacation fell through due to medical reasons, but Mario Fusco offered me a stay at his place in beautiful Gorgonzola/Milan so I could visit Milan and give my talk:  
-[![](IMG_1306-2-2000x1500-9045fbca.jpeg)](IMG_1306-2-2000x1500-9045fbca.jpeg)  
-[![](IMG_1288-1-1500x2000-298b5442.jpeg)](IMG_1288-1-1500x2000-298b5442.jpeg)  
-[![](IMG_1240-1500x2000-5db7da70.jpeg)](IMG_1240-1500x2000-5db7da70.jpeg)  
-[![](IMG_1288-1500x2000-94709ce0.jpeg)](IMG_1288-1500x2000-94709ce0.jpeg)  
-[![](IMG_1344-3-2000x1500-43d9a713.jpg)](IMG_1344-3-2000x1500-43d9a713.jpg)  
-![](IMG_1306-2-2000x1500-9045fbca.jpeg)  
-![](IMG_1288-1-1500x2000-298b5442.jpeg)  
-![](IMG_1240-1500x2000-5db7da70.jpeg)  
-![](IMG_1288-1500x2000-94709ce0.jpeg)  
-![](IMG_1344-3-2000x1500-43d9a713.jpg)
+[![Looking up through the decorated triumphal arch Arco della Pace in Milan against a blue sky](IMG_1306-2-2000x1500-9045fbca.jpeg)](IMG_1306-2-2000x1500-9045fbca.jpeg)  
+[![Interior of Milan Cathedral with tall pillars, stained glass windows and rows of pews](IMG_1288-1-1500x2000-298b5442.jpeg)](IMG_1288-1-1500x2000-298b5442.jpeg)  
+[![Narrow stone passage on the roof level of Milan Cathedral](IMG_1240-1500x2000-5db7da70.jpeg)](IMG_1240-1500x2000-5db7da70.jpeg)  
+[![Milan Cathedral nave with pillars, stained glass and visitors seated in the pews](IMG_1288-1500x2000-94709ce0.jpeg)](IMG_1288-1500x2000-94709ce0.jpeg)  
+[![Audience seated in the eDreams ODIGEO TechLab in Milan during the JUG Milano talk](IMG_1344-3-2000x1500-43d9a713.jpg)](IMG_1344-3-2000x1500-43d9a713.jpg)  
+![Looking up through the decorated triumphal arch Arco della Pace in Milan against a blue sky](IMG_1306-2-2000x1500-9045fbca.jpeg)  
+![Interior of Milan Cathedral with tall pillars, stained glass windows and rows of pews](IMG_1288-1-1500x2000-298b5442.jpeg)  
+![Narrow stone passage on the roof level of Milan Cathedral](IMG_1240-1500x2000-5db7da70.jpeg)  
+![Milan Cathedral nave with pillars, stained glass and visitors seated in the pews](IMG_1288-1500x2000-94709ce0.jpeg)  
+![Audience seated in the eDreams ODIGEO TechLab in Milan during the JUG Milano talk](IMG_1344-3-2000x1500-43d9a713.jpg)
 
 It was where I gave my first presentation in Italy. It was the first time I've ever been to Italy, but I hope to return with a new talk next year.
 
 After my stop in Italy, I spoke at a [meet-up in Munich](https://www.meetup.com/openvaluemuenchen/events/293736106/), [a small conference in the Netherlands](https://jdriven.com/full-stack-conference-2023), and gave three new talks at two small conferences in Karlsruhe. All in all, I gave eight talks in around two weeks. You can read more about this endeavor in my [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/). This was quite exhausting, so I only gave a single talk at a user group until September. But I met someone at one of the Karlsruhe conferences who told me at a dinner a month later that I should look into a new topic...
 
 In the meantime, I used August to go on a sailing vacation in Croatia (couch sailing with [Zelimir Cernelic](https://tupko.wordpress.com/)c) and had a great time despite some rumblings regarding my JEP:  
-[![](IMG_1938-2000x1500-25678d3b.jpeg)](IMG_1938-2000x1500-25678d3b.jpeg)  
-[![](IMG_1660-2000x1500-84e6b33c.jpeg)](IMG_1660-2000x1500-84e6b33c.jpeg)  
-[![](IMG_1928-2000x1500-aaa97499.jpeg)](IMG_1928-2000x1500-aaa97499.jpeg)  
-[![](image-16-2000x1500-00cd8d98.jpg)](image-16-2000x1500-00cd8d98.jpg)  
-![](IMG_1938-2000x1500-25678d3b.jpeg)  
-![](IMG_1660-2000x1500-84e6b33c.jpeg)  
-![](IMG_1928-2000x1500-aaa97499.jpeg)  
-![](image-16-2000x1500-00cd8d98.jpg)
+[![Small harbour in Zadar, Croatia, with moored boats, a red house and old fortress walls](IMG_1938-2000x1500-25678d3b.jpeg)](IMG_1938-2000x1500-25678d3b.jpeg)  
+[![Sailboat and boat lights reflecting on calm water at night in a Croatian bay](IMG_1660-2000x1500-84e6b33c.jpeg)](IMG_1660-2000x1500-84e6b33c.jpeg)  
+[![Black and white cat lying on a stone pavement covering its face with a paw](IMG_1928-2000x1500-aaa97499.jpeg)](IMG_1928-2000x1500-aaa97499.jpeg)  
+[![Small waterfall cascading over moss-covered rocks in a sunlit forest stream](image-16-2000x1500-00cd8d98.jpg)](image-16-2000x1500-00cd8d98.jpg)  
+![Small harbour in Zadar, Croatia, with moored boats, a red house and old fortress walls](IMG_1938-2000x1500-25678d3b.jpeg)  
+![Sailboat and boat lights reflecting on calm water at night in a Croatian bay](IMG_1660-2000x1500-84e6b33c.jpeg)  
+![Black and white cat lying on a stone pavement covering its face with a paw](IMG_1928-2000x1500-aaa97499.jpeg)  
+![Small waterfall cascading over moss-covered rocks in a sunlit forest stream](image-16-2000x1500-00cd8d98.jpg)
 
 Before the vacation, I carelessly applied to a few conferences in the fall, including [JavaZone](https://2023.javazone.no/) in Oslo and [Devoxx Belgium](https://devoxx.be/). Still, I would have never dreamed of being a speaker at both in my first year as a proper speaker. Being at JavaZone in September, followed by two smaller conferences in northern Germany, was excellent, especially with all the gorgeous food and getting my first duke:
-![](IMG_2091-2000x1500-3d1b7439.jpeg)
+![Java Duke figurine wearing a Viking helmet, with the Oslo waterfront blurred behind it](IMG_2091-2000x1500-3d1b7439.jpeg)
 
 You can read more on this journey in my [Report of my trip to JavaZone and northern Germany](https://mostlynerdless.de/blog/2023/09/29/report-of-my-trip-to-javazone-and-northern-germany/).
 
 Then, in October, I went to Devoxx Belgium, meeting people like Alexsey Shipilev
-![](F7hNsheWUAA0Y46-2000x1500-fdc8d4e3.jpg) Fixing a bug with Alexsey at Devoxx Belgium; see my article [JDWP, onthrow and a mysterious error](https://mostlynerdless.de/blog/2023/10/11/jdwp-onthrow-and-a-mysterious-error/)
+![Two smiling developers take a selfie at a Devoxx booth showing 'CodeWhisperer' on the wall](F7hNsheWUAA0Y46-2000x1500-fdc8d4e3.jpg) Fixing a bug with Alexsey at Devoxx Belgium; see my article [JDWP, onthrow and a mysterious error](https://mostlynerdless.de/blog/2023/10/11/jdwp-onthrow-and-a-mysterious-error/)
 
 and eating lunch with four of the Java architects, including Brian Goetz and Alan Bateman:
-![](image-17-2000x1500-735fd208.jpg)
+![Group of Java community members smiling over lunch at an outdoor restaurant terrace](image-17-2000x1500-735fd208.jpg)
 
 Giving a talk at such a well-known conference was a real highlight of my year:
-![](image-19-2000x1334-c2d532e9.jpg)
+![Speaker in a black T-shirt with a headset microphone giving a thumbs up on stage at Devoxx](image-19-2000x1334-c2d532e9.jpg)
 
 You can see a recording here:
 
@@ -99,23 +98,23 @@ After Devoxx, I gave my newly created talk on Debugger internals in JUG Darmstad
 </figure>
 
 After these two JUGs, I went to Basel to give a talk at [Basel One](https://baselone.ch/speech.html?id=771854C5-8D91-4397-8F2D-BDC421D3CD61). After five conferences, two user groups, and eight articles, I needed a break, so I went on vacation to Bratislava, visiting a good friend there and hiking together for two days in the Tatra mountains:  
-[![](IMG_2406-2000x1500-5e943dcb.jpeg)](IMG_2406-2000x1500-5e943dcb.jpeg)  
-[![](IMG_2468-2000x1500-d402b1f3.jpeg)](IMG_2468-2000x1500-d402b1f3.jpeg)  
-[![](IMG_2451-2000x1500-af3eea12.jpeg)](IMG_2451-2000x1500-af3eea12.jpeg)  
-[![](IMG_2506-2000x1500-9a4b5f84.jpeg)](IMG_2506-2000x1500-9a4b5f84.jpeg)  
-[![](IMG_2482-2000x1500-5aff6315.jpeg)](IMG_2482-2000x1500-5aff6315.jpeg)  
-[![](IMG_2392-2000x1500-b7d264ec.jpeg)](IMG_2392-2000x1500-b7d264ec.jpeg)  
-[![](IMG_2557-2000x1500-d2bffc70.jpeg)](IMG_2557-2000x1500-d2bffc70.jpeg)  
-![](IMG_2406-2000x1500-5e943dcb.jpeg)  
-![](IMG_2468-2000x1500-d402b1f3.jpeg)  
-![](IMG_2451-2000x1500-af3eea12.jpeg)  
-![](IMG_2506-2000x1500-9a4b5f84.jpeg)  
-![](IMG_2482-2000x1500-5aff6315.jpeg)  
-![](IMG_2392-2000x1500-b7d264ec.jpeg)  
-![](IMG_2557-2000x1500-d2bffc70.jpeg)
+[![Rocky mountain path through spruce trees and bare dead trunks under a blue sky](IMG_2406-2000x1500-5e943dcb.jpeg)](IMG_2406-2000x1500-5e943dcb.jpeg)  
+[![Snow-lit mountain peaks silhouetted against a dark night sky](IMG_2468-2000x1500-d402b1f3.jpeg)](IMG_2468-2000x1500-d402b1f3.jpeg)  
+[![Clear mountain lake reflecting the surrounding slopes, with stones visible beneath the surface](IMG_2451-2000x1500-af3eea12.jpeg)](IMG_2451-2000x1500-af3eea12.jpeg)  
+[![Cloud rolling over a grassy mountain ridge under a blue sky](IMG_2506-2000x1500-9a4b5f84.jpeg)](IMG_2506-2000x1500-9a4b5f84.jpeg)  
+[![Small mountain pond reflecting clouds, with dwarf pines in front and rocky peaks behind](IMG_2482-2000x1500-5aff6315.jpeg)](IMG_2482-2000x1500-5aff6315.jpeg)  
+[![Fast-flowing mountain stream over dark boulders in an autumn forest](IMG_2392-2000x1500-b7d264ec.jpeg)](IMG_2392-2000x1500-b7d264ec.jpeg)  
+[![Person walking along a road lit by a single street lamp in a dark forest at dusk](IMG_2557-2000x1500-d2bffc70.jpeg)](IMG_2557-2000x1500-d2bffc70.jpeg)  
+![Rocky mountain path through spruce trees and bare dead trunks under a blue sky](IMG_2406-2000x1500-5e943dcb.jpeg)  
+![Snow-lit mountain peaks silhouetted against a dark night sky](IMG_2468-2000x1500-d402b1f3.jpeg)  
+![Clear mountain lake reflecting the surrounding slopes, with stones visible beneath the surface](IMG_2451-2000x1500-af3eea12.jpeg)  
+![Cloud rolling over a grassy mountain ridge under a blue sky](IMG_2506-2000x1500-9a4b5f84.jpeg)  
+![Small mountain pond reflecting clouds, with dwarf pines in front and rocky peaks behind](IMG_2482-2000x1500-5aff6315.jpeg)  
+![Fast-flowing mountain stream over dark boulders in an autumn forest](IMG_2392-2000x1500-b7d264ec.jpeg)  
+![Person walking along a road lit by a single street lamp in a dark forest at dusk](IMG_2557-2000x1500-d2bffc70.jpeg)
 
 Then, at the beginning of November, I gave a talk at [J-Fall](https://jfall.nl) in the Netherlands, the biggest one-day conference in Europe:
-![](image-18-2000x1500-b40712c3.jpg)
+![Audience seated in a dark cinema-style hall at J-Fall, with bright lens flares from the lights](image-18-2000x1500-b40712c3.jpg)
 
 While there, I stayed with Ties van de Ven, a speaker I first met at FOSDEM. At my first conferences, I knew no other speaker; later speaker dinners felt more like reunions:
 ![A](IMG_2583-2000x1500-d74b3f01.jpg) At the speakers' dinner at J-Fall with Simon Martinelli and Tim te Beek

@@ -4,7 +4,7 @@ date: "2026-09-30"
 description: "Codename One tackles GC, maps, startup, and JavaScript overhead, and adds native drag and drop plus cross-device continuity. Javadoc joins website search..."
 authors: ["shai-almog"]
 image: "performance-work-between-benchmarks-add0d8fe44.jpg"
-categories: ["Java"]
+categories: ["Codename One"]
 canonical: "https://www.codenameone.com/blog/performance-work-between-benchmarks/"
 related_posts:
   - "voip-vpn-builders"
@@ -12,8 +12,6 @@ related_posts:
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "sqlite-across-every-port-one-contract-one-encrypted-file-format"
 ---
-
-![Lies, Damn Lies And Benchmarks](performance-work-between-benchmarks-add0d8fe44.jpg)
 
 There's an old joke about three kinds of lies: [lies, damn lies, and benchmarks](https://www.spec.org/osg/news/articles/news9412/lies.html). Codename One did very well in our benchmarks. But were they accurate? Were they representative?
 

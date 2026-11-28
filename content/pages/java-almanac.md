@@ -4,7 +4,7 @@ description: "Compare any two Java versions side by side, browse the API diffs, 
 url: "/java-almanac/"
 ---
 
-![](/images/pages/java-almanac/almanac-java-25.png)  
+![javaalmanac.io page for Java 25: a long-term-support release dated 2025-09-16 with end of life 2030-09 and latest version 25.0.3](/images/pages/java-almanac/almanac-java-25.png)  
 
 **Ever needed to quickly check what changed between Java 17 and Java 21?**
 

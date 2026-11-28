@@ -1,7 +1,6 @@
 ---
 title: "Announcing the Digma Beta: First Runtime Linter for Java Code"
 date: "2023-05-22T13:52:34+00:00"
-lastmod: "2023-07-18T07:06:00+00:00"
 description: "Looking for senior Java developers to participate in the beta program of a new free runtime linter that provides Continuous code Feedback."
 authors:
   - "roni-dover"
@@ -17,7 +16,7 @@ related_posts:
   - "beginning-javafx-with-intellij"
 ---
 
-![](doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1-1024x512.jpg)
+![Illustration of a bearded developer in a yellow beanie at a laptop, tangled in a large knot of colorful yarn](doppleware_a_hipster_developer_following_a_yarn_thread_connecte_0aadda36-bf51-4283-90c5-54ff5f976af7-1-1024x512.jpg)
 
 ## Call for Developers
 
@@ -38,7 +37,7 @@ We have 20 slots currently open for the beta.
 4. Help create a tool that will improve developer happiness
 5. Some cool swag... (TShirt, stressballs and more )🦇
 
-{{< img src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" class="aligncenter size-large is-resized" width="155" height="206" >}}
+{{< img src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" alt="Two blue bat-shaped stress toys with big round eyes on a desk, Digma swag" class="aligncenter size-large is-resized" width="155" height="206" >}}
 
 ## Requirements to apply ✅
 

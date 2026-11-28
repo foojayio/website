@@ -1,15 +1,14 @@
 ---
 title: "Introducing the BoxLang IDE Plugin for IntelliJ"
 date: "2026-03-10T14:25:33+00:00"
-lastmod: "2026-03-17T15:47:36+00:00"
 description: "The IntelliJ ecosystem is one of the most powerful development environments for JVM developers. Today, we’re excited to introduce the official BoxLang IDE…"
 authors:
   - "cristobal-escobar"
 image: "1773053085130-700x467-1.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Tools"
+  - "BoxLang"
 related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
@@ -17,13 +16,13 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](1773053085130-700x467.jpg)
+![BoxLang announcement banner: the IntelliJ IDEA logo beside the BoxLang logo, with 'Intellij Plugin release now available'](1773053085130-700x467.jpg)
 
 The IntelliJ ecosystem is one of the most powerful development environments for JVM developers. Today, we're excited to introduce [the official BoxLang IDE plugin for IntelliJ](http://https://plugins.jetbrains.com/plugin/30311-boxlang-ide "the official BoxLang IDE plugin for IntelliJ"), bringing modern BoxLang development directly into the JetBrains IDE family.
 
 Whether you're building new BoxLang applications or maintaining existing CFML codebases, this plugin gives you first-class tooling inside IntelliJ.
 
-![](testbox-integration-700x438.png)
+![IntelliJ run panel showing a passing TestBox spec for BoxLang with final stats of 1 passed and 0 failed](testbox-integration-700x438.png)
 
 ## Installing the Plugin
 
@@ -38,7 +37,7 @@ Or install directly from the marketplace:
 
 👉 <https://plugins.jetbrains.com/plugin/30311-boxlang-ide>
 
-![](plugin-web-view-695x510.jpg)
+![BoxLang IDE plugin page on the JetBrains Marketplace with its feature list and two IDE previews](plugin-web-view-695x510.jpg)
 
 ## Key Features
 
@@ -54,7 +53,7 @@ Features include:
 * Language-aware formatting
 * Support for modern BoxLang syntax
 
-![](hyper-in-intellij-700x439.jpg)
+![IntelliJ editor showing a BoxLang HyperRequestSpec test file with syntax highlighting and the project tree](hyper-in-intellij-700x439.jpg)
 
 ### 🧰 BoxLang Project Creation
 
@@ -66,7 +65,7 @@ This allows you to:
 * Configure runtimes quickly
 * Start coding immediately
 
-![](boxlang-new-project-700x438.png)
+![IntelliJ New Project dialog with the BoxLang generator selected and a BoxLang Starter project type](boxlang-new-project-700x438.png)
 
 ### 🧠 Language Server (LSP) Support
 
@@ -78,7 +77,7 @@ The plugin integrates with the BoxLang Language Server, enabling advanced develo
 * Find references
 * Inline diagnostics and errors
 
-![](symbol-search-700x439.png)
+![IntelliJ search popup in the Symbols tab listing post and postAsync methods of HyperRequest](symbol-search-700x439.png)
 
 ### 🐞 Debugging Support
 
@@ -91,7 +90,7 @@ The plugin supports:
 * Variable inspection
 * Call stack navigation
 
-![](debugging-700x439.png)
+![IntelliJ debugger paused on a breakpoint in a BoxLang script, with the variables panel showing i equals 1](debugging-700x439.png)
 
 ### 🧪 TestBox Integration
 
@@ -103,7 +102,7 @@ Benefits include:
 * Viewing results inline
 * Faster test-driven development workflows
 
-![](testbox-integration-1-700x438.png)
+![IntelliJ run panel showing a passing TestBox spec for BoxLang with final stats of 1 passed and 0 failed](testbox-integration-1-700x438.png)
 
 ### 🔵 CFML Syntax Highlighting
 

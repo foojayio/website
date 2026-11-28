@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #18: Atlanta JUG and DevNexus"
 date: "2023-04-03T05:48:34+00:00"
-lastmod: "2025-11-13T09:10:57+00:00"
 description: "Today we travel back to the US to learn more about the Atlanta JUG, mainly because this week, they are organizing the DevNexus conference!"
 authors:
   - "frankdelporte"
@@ -48,7 +47,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](atlantajug-screenshot-zoom-1024x577.jpg)
+![Video call with Pratik Patel, Frank Delporte and Vincent Mayers recording the Foojay podcast about the Atlanta JUG](atlantajug-screenshot-zoom-1024x577.jpg)
 
 ## Links
 

@@ -1,7 +1,6 @@
 ---
 title: "Java Security Starts with the JVM"
 date: "2025-11-10T12:37:20+00:00"
-lastmod: "2025-11-10T12:39:51+00:00"
 description: "When it comes to Java security, the first thing that comes to mind should be the JVM. If you’re relying on outdated, unpatched, or unsupported Java runtimes, you’re taking unnecessary risks."
 canonical: "https://www.azul.com/blog/java-security-starts-with-the-jvm/"
 authors:

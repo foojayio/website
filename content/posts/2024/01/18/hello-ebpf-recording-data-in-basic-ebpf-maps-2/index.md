@@ -1,7 +1,6 @@
 ---
 title: "Hello eBPF: Recording data in basic eBPF maps (2)"
 date: "2024-01-18T15:50:44+00:00"
-lastmod: "2024-01-30T00:11:32+00:00"
 description: "This week we'll add support eBPF maps to hello-ebpf to communicate between eBPF program and userland Java programs."
 authors:
   - "johannes-bechberger"
@@ -55,7 +54,7 @@ This is what this week's article is all about.
 ## Communication
 
 When two regular programs want to share information, they either send data via sockets or use shared memory that both programs can access:
-![](sockets_and_shared_mem-2000x865-db368419.jpg)
+![Diagram: two programs exchange Data(uid, gid, counter) via sockets with sendMessage, or via shared memory with set and get](sockets_and_shared_mem-2000x865-db368419.jpg)
 
 eBPF uses none of the above two approaches: Working with sockets makes a shared state hard to maintain, and using shared memory is difficult because the eBPF program lives in the kernel and the Java program in userland.
 
@@ -69,7 +68,7 @@ Accessing any userland memory from eBPF at all is deemed to be experimental, acc
 > [BPF Design Q\&A](https://www.kernel.org/doc/html/v6.6-rc5/bpf/bpf_design_QA.html#q-can-bpf-overwrite-arbitrary-user-memory)[](https://www.kernel.org/doc/html/v6.6-rc5/bpf/bpf_design_QA.html#bpf-design-q-a)
 
 But how can we then communicate? This is where eBPF maps come in:
-![](ebpf_maps-2000x425-9d972575.png) BPF 'maps' provide generic storage of different types for sharing data between kernel and user space. There are several storage types available, including hash, array, bloom filter and radix-tree. Several of the map types exist to support specific BPF helpers that perform actions based on the map contents.
+![Diagram: an eBPF program sets an entry in a BPF map and a userland program gets that entry](ebpf_maps-2000x425-9d972575.png) BPF 'maps' provide generic storage of different types for sharing data between kernel and user space. There are several storage types available, including hash, array, bloom filter and radix-tree. Several of the map types exist to support specific BPF helpers that perform actions based on the map contents.
 >
 > BPF maps are accessed from user space via the `bpf` syscall, which provides commands to create maps, lookup elements, update elements and delete elements.
 > [LINUX Kernel Documentation](https://www.kernel.org/doc/html/latest/bpf/maps.html)

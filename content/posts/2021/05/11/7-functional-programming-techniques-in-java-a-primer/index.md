@@ -1,7 +1,6 @@
 ---
 title: "7 Functional Programming Techniques in Java: A Primer"
 date: "2021-05-11T07:34:52+00:00"
-lastmod: "2021-08-23T12:22:16+00:00"
 description: "In this article I'm going to focus on things that you can do in Java which are in line with functional programming concepts."
 canonical: "https://deepu.tech/functional-programming-in-java-for-beginners/"
 authors:
@@ -15,8 +14,6 @@ related_posts:
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "whats-new-in-the-june-2026-azul-payara-release"
 ---
-
-![header image](zf8mvgix8icaz64mgj89-61fb2317.jpg)
 
 There is a lot of hype around functional programming (FP) and a lot of cool kids are doing it but it is not a silver bullet. Like other programming paradigms/styles, functional programming also has its pros and cons and one may prefer one paradigm over the other. If you are a Java developer and wants to venture into functional programming, do not worry, you don't have to learn functional programming oriented languages like Haskell or Clojure(or even Scala or JavaScript though they are not pure functional programming languages) since Java has you covered and this post is for you.
 

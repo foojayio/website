@@ -3,11 +3,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    {{ $views := partial "views.html" . }}
-    {{ $feed := partial "feed-link.html" . }}
-    {{ if or $views $feed }}
-    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
-    {{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> Java User Groups" (len hugo.Data.jugs))
+      "feed" . "views" .) }}
   </div>
 </div>
 
@@ -115,7 +113,7 @@
               {{ $links := slice }}
               {{ with .meetup_url }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Meetup</a>` .) }}{{ end }}
               {{ with .twitter }}{{ $links = $links | append (printf `<a href="https://twitter.com/%s" target="_blank" rel="noopener">Twitter</a>` (. | strings.TrimPrefix "@")) }}{{ end }}
-              {{ with .mastodon }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` .) }}{{ end }}
+              {{ with .mastodon }}{{ $m := . }}{{ if not (hasPrefix $m "http") }}{{ $p := split (strings.TrimPrefix "@" $m) "@" }}{{ $m = printf "https://%s/@%s" (index $p 1) (index $p 0) }}{{ end }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Mastodon</a>` $m) }}{{ end }}
               {{ with .calendar }}{{ $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener">Calendar</a>` .) }}{{ end }}
               {{ with .email }}{{ $links = $links | append (printf `<a href="mailto:%s">Email</a>` .) }}{{ end }}
               {{ if and .latitude .longitude }}{{ $links = $links | append (printf `<a href="https://www.google.com/maps?q=%v,%v" target="_blank" rel="noopener">Map</a>` .latitude .longitude) }}{{ end }}

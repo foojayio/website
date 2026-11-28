@@ -1,7 +1,6 @@
 ---
 title: "Announcing BX-WORD: Native Microsoft Word Automation for BoxLang"
 date: "2026-09-01T11:31:16+00:00"
-lastmod: "2026-09-01T11:31:19+00:00"
 description: "Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements…"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "Imagen2-1024x978.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Library"
   - "Tools"
 related_posts:
@@ -19,7 +17,7 @@ related_posts:
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
 ---
 
-![](bx-word-1-700x373.jpg)
+![bx-word promotional graphic for BoxLang Word automation: template population, tables, images and import/export, with a sample code snippet](bx-word-1-700x373.jpg)
 
 Every enterprise runs on Word documents. Contracts. RFPs. Proposals. Board reports. Offer letters. HR handbooks. Compliance policies. Invoices. Statements of work. Legal memos. Today, we are incredibly proud to announce **bx-word 1.0.0**, a first-class, fluent, production-ready module for creating, populating, and transforming Microsoft Word documents natively in BoxLang. This is not a wrapper. This is not a converter. This is a real document builder designed for the way enterprise teams actually work.
 

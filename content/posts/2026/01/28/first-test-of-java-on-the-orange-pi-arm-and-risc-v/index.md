@@ -1,7 +1,6 @@
 ---
 title: "First Test of Java on the Orange Pi (ARM and RISC-V)"
 date: "2026-01-28T06:52:00+00:00"
-lastmod: "2026-01-28T10:51:49+00:00"
 description: "As part of my 2026 learning goals around Java on Single Board Computers and RISC-V (see this post about x86 versus ARM versus RISC-V), I've been asking…"
 canonical: "https://webtechie.be/post/2026-01-12-first-test-orangepi-java/"
 authors:
@@ -30,7 +29,7 @@ OrangePi offers a diverse range of single board computers at various price point
 | [OrangePi RV2](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-RV2.html)         | Ky X1   | RISC-V |            |   8   | 2.0GHz (?) |                                          [53$ (4GB)](https://www.amazon.com/dp/B0DZ6W7XD5?th=1) |
 
 The OrangePi 5 Ultra is a high-end board with the powerful RK3588 SOC (same chip used in many Android TV boxes and mini PCs), while the OrangePi RV2 is their budget RISC-V with a Kylin X1 processor.
-![](rpi5-orangepi5-orangepirv2-1024x540.jpg)
+![Raspberry Pi 5, Orange Pi 5 Ultra and Orange Pi RV2 boards side by side, seen from above](rpi5-orangepi5-orangepirv2-1024x540.jpg)
 
 ## Test Boards
 
@@ -63,7 +62,7 @@ I used the image: `Orangepirv2_1.0.0_ubuntu_noble_desktop_gnome_linux6.6.63`.
 ### Hardware Setup
 
 Both boards arrived well-packaged. The OrangePi 5 Ultra looks almost identical as a Raspberry Pi 5. It has an excellent build quality with very similar connecters, except it has a full HDMI in and out, compared to two micro HDMI out on the Raspberry Pi 5. The RV2 has again the same size as a Raspberry Pi, but with a completely different port layout and only 26 GPIO pins compared to 40 on the Raspberry Pi 5 and OrangePi 5 Ultra. Both boards have a detachable Wi-Fi antenna-cable.
-![](orangepi-connections-1024x429.jpg)
+![Side view of the Orange Pi 5 Ultra and Orange Pi RV2 showing their USB, Ethernet and HDMI ports](orangepi-connections-1024x429.jpg)
 
 Installation for both followed a similar pattern: download the Ubuntu image from OrangePi's Google Drive, flash to microSD, and boot.
 
@@ -108,7 +107,7 @@ The RV2 was more challenging, as expected with RISC-V hardware.
 #### Java Installation
 
 SDKMAN doesn't yet have RISC-V support to install Java. I made a [GitHub issue](https://github.com/sdkman/sdkman-cli-native/issues/367) and [first pull request](https://github.com/sdkman/sdkman-candidates/pull/74#event-21926242644), and will try to get this moving. I hope this will help more Java developers to experiment with RISC-V.
-![SDKMAN exotic architectures](sdkman-exotic.png) ![](sdkman-exotic.png)
+![SDKMAN exotic architectures](sdkman-exotic.png) ![Terminal output of SDKMAN listing Java versions for Exotic: 'No versions available for your platform at this time.'](sdkman-exotic.png)
 
 For now, the Ubuntu repositories are the way to go:
 

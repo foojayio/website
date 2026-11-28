@@ -1,7 +1,6 @@
 ---
 title: "Hardening Apache APISIX with the OWASP's Coraza and Core Ruleset"
 date: "2024-02-20T08:01:56+00:00"
-lastmod: "2024-02-20T08:01:58+00:00"
 description: "Most organizations don't incentivize for security. Hence, we need to be smart about it and use existing components as much as possible."
 canonical: "https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/"
 authors:

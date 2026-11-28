@@ -1,7 +1,6 @@
 ---
 title: "Introducing the BoxLang Spring Boot Starter: Dynamic JVM Templating for Spring"
 date: "2026-03-19T14:20:02+00:00"
-lastmod: "2026-03-20T06:51:26+00:00"
 description: "Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful —…"
 authors:
   - "cristobal-escobar"
@@ -11,7 +10,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Spring"
 related_posts:
@@ -21,7 +19,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](boxlang-spring-boot-release-700x467.jpg)
+![BoxLang Spring Boot Starter banner with the BoxLang and Spring Boot logos on a glowing green-blue background](boxlang-spring-boot-release-700x467.jpg)
 
 Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — until the syntax fights you. What if you could write templates in a dynamic JVM language that gives you the full power of the platform, feels natural, and requires zero setup to integrate?
 

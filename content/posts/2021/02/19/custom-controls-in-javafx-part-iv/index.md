@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part IV): Control & Skin Classes"
 date: "2021-02-19T08:22:35+00:00"
-lastmod: "2021-02-19T08:22:37+00:00"
 description: "Continuing the JavaFX custom control series, next I will show you how to create a custom control in JavaFX by using Control and Skin classes."
 authors:
   - "gerrit-grunwald"
@@ -35,7 +34,7 @@ I worked more than 10 years in a company doing research and development in the N
 
 One day one of our product managers went to one of our developers and told him that we need a gauge in our software that should visualize a numeric value and handed the developer a simple sketch. Well the developer just took the sketch and transformed it into a control which looked close to this:
 
-![](gauge-510x510.png)
+![Round gauge with a red needle pointing at 50, with scale marks 0, 25, 50, 75 and 100](gauge-510x510.png)
 
 Awesome isn't it...
 
@@ -45,11 +44,11 @@ My advice...use a vector drawing program, in this case this is like visual codin
 
 After that little advice let's go back to our LED control, here is a drawing that shows the LED in it's final state:
 
-![](Affinity-Designer-LED-Modified-110.0-2021-01-29-13-50-29-636x510.jpg)
+![Affinity Designer showing the final LED design: a green glowing sphere with highlight inside a gray ring](Affinity-Designer-LED-Modified-110.0-2021-01-29-13-50-29-636x510.jpg)
 
 In principle the whole LED is just made from three circles, filled with different gradients. Here is a little drawing that hopefully explains it better:
 
-![](LED_PARTS-170x510.png)
+![Three stacked circles forming the LED parts: a gray ring, a dark green disc and the disc with a highlight](LED_PARTS-170x510.png)
 
 The first circle is filled with a semitransparent gradient from a darker gray to a lighter gray and defines the frame or background of the LED. The second circle is filled with a gradient from green to dark green and back to green and defines the main LED which will also change it's color dependent on the status (on/off). The third circle is just for the light effect and is filled with a radial gradient from white to transparent. That's all we need to draw to get a nice looking green LED.
 
@@ -128,7 +127,7 @@ Because this time we create a custom control using a Control and Skins I would l
 
 But first let me show you the final result to keep you going...
 
-![](Control-Skin-based-Control-2021-01-29-14-27-27.png)
+![JavaFX demo window with a glowing green LED control above a green toggle switch that is turned on](Control-Skin-based-Control-2021-01-29-14-27-27.png)
 
 The fun thing here is that we will use the Switch to toggle the LED 🙂
 
@@ -384,7 +383,7 @@ So that's it for the LED, now let's take a look at the switch. This Control even
 
 Again... first we draw the control which might look similar to this:
 
-![](Affinity-Designer-Untitled-Modified-191.1-2021-01-29-16-02-50-636x510.png)
+![Affinity Designer showing the switch design: a green rounded track with a light gray round thumb with drop shadow](Affinity-Designer-Untitled-Modified-191.1-2021-01-29-16-02-50-636x510.png)
 
 To give the thumb a bit more depth we simply add a dropshadow to it. Because this post is already long enough I won't add resizing logic to the SwitchSkin but will simply define a fixed size for it in CSS.
 
@@ -527,7 +526,7 @@ If you uncomment this line it will load the styles.css which looks like this:
 
 And if you then start the demo it will look like this:
 
-![](Control-Skin-based-Control-2021-01-29-16-24-52.png)
+![Same JavaFX demo window restyled with CSS so the LED and the switch are magenta](Control-Skin-based-Control-2021-01-29-16-24-52.png)
 
 This shows the power of CSS, we simply can overwrite one property in our CSS file and the controls will look different without changing one line of code.
 

@@ -1,13 +1,12 @@
 ---
 title: "Scripting in small apps: you don't need a container for a macro"
 date: "2026-08-25T07:46:06+00:00"
-lastmod: "2026-08-25T07:46:07+00:00"
 description: "Disclosure: I maintain Aussom, an Apache 2.0 interpreted language for the JVM. It's the approach I argue for here, and I have tried to be clear about…"
 authors:
   - "austin-lehman"
 image: "aussom-logo-atom.png"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "java-for-scripting"
   - "six-jdk-24-features-you-should-know-about"

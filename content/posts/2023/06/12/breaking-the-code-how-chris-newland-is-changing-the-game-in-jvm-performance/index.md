@@ -1,7 +1,6 @@
 ---
 title: "Breaking the Code: How Chris Newland is Changing the Game in JVM Performance!"
 date: "2023-06-12T08:44:27+00:00"
-lastmod: "2023-06-12T22:08:02+00:00"
 description: "Dive into an exclusive interview with Chris Newland, the creator of JITWatch. Explore JVM performance optimization, and gain expert advice."
 authors:
   - "bazlur-rahman"
@@ -17,7 +16,7 @@ related_posts:
   - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 ---
 
-{{< img src="chris.jpg" class="alignright size-full is-resized" width="384" height="384" >}}
+{{< img src="chris.jpg" alt="Portrait of Chris Newland, smiling with glasses, in front of a garden" class="alignright size-full is-resized" width="384" height="384" >}}
 
 We're excited to introduce you to Chris Newland, an industry veteran and dedicated JVM performance specialist.
 

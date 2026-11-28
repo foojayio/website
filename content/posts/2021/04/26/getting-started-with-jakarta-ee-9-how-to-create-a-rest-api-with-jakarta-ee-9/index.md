@@ -1,7 +1,6 @@
 ---
 title: "How to Create a REST API with Jakarta EE 9"
 date: "2021-04-26T07:18:39+00:00"
-lastmod: "2021-04-26T07:30:59+00:00"
 description: "For those who are not familiar with Jakarta EE, this article should give you an indication how to create such a REST API with Jakarta EE 9."
 canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-how-to-create-a-rest-api-with-jakarta-ee-9"
 authors:

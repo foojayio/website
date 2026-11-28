@@ -1,13 +1,11 @@
 ---
 title: "Take the State of Java 2025 Survey"
 date: "2025-10-06T12:23:17+00:00"
-lastmod: "2025-10-07T05:30:45+00:00"
 description: "Take the State of Java 2025 Survey and learn what's being used where and how in the Java ecosystem."
 authors:
   - "geertjan-wielenga"
 image: "which.png"
 categories:
-  - "Java"
   - "Performance"
   - "Surveys"
 related_posts:
@@ -22,7 +20,7 @@ Do you want to know which Java JDK distribution is used where for what and when?
 All those participating will get the complete research, which can be of great benefit in your technology choices in the Java ecosystem.
 
 Click the image below to get started:
-[![](which-1024x387.png)](https://survey.alchemer.com/s3/8466906/Azul-State-of-Java-Survey)
+[![State of Java 2025 survey question asking how much of your job involves responsibility for Java, with five radio-button options](which-1024x387.png)](https://survey.alchemer.com/s3/8466906/Azul-State-of-Java-Survey)
 
 Or simply click this link:
 

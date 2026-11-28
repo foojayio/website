@@ -1,7 +1,6 @@
 ---
 title: "My Final Take on Gradle (vs. Maven)"
 date: "2023-08-15T08:37:24+00:00"
-lastmod: "2023-08-15T08:38:49+00:00"
 description: "Software development is a fast-changing field, and much of our understanding is based on personal experience. So here's mine."
 canonical: "https://blog.frankel.ch/final-take-gradle/"
 authors:
@@ -21,7 +20,7 @@ related_posts:
 
 I attended the JavaLand conference in March, stumbled upon the Gradle booth, and found this gem:
 
-[![](Screenshot-2023-08-05-at-10.03.59-754x1024.jpg)](https://twitter.com/nicolas_frankel/status/1638549568957861889)
+[![Tweet by Nicolas Frankel showing a Gradle-loves-Maven light box at a Gradle booth: 'When you can't beat them, join them'](Screenshot-2023-08-05-at-10.03.59-754x1024.jpg)](https://twitter.com/nicolas_frankel/status/1638549568957861889)
 
 Of course, at some point, a fanboy hijacked the thread and claimed the so-called superiority of Gradle. In this post, I'd like to shed some light on my stance, so I can direct people to it instead of debunking the same "reasoning" repeatedly.
 
@@ -29,7 +28,7 @@ To manage this, I need to get back in time. Software development is a fast-chang
 
 ## My first build tool: Ant
 
-{{< img src="ant-300x260.jpg" class="size-thumbnail alignright" width="300" height="260" >}}
+{{< img src="ant-300x260.jpg" alt="Apache Ant logo with an ant on a purple triangle" class="size-thumbnail alignright" width="300" height="260" >}}
 
 I started developing in Java in 2002. At the time, there were no build tools: we compiled and built through the IDE. For the record, I first used Visual Age for Java; then, I moved to Borland JBuilder.
 
@@ -54,7 +53,7 @@ I remember once a generic build file that tried accommodating the whole of an or
 
 ## My second build tool: Maven
 
-{{< img src="maven-700x189.jpg" class="aligncenter size-medium" width="700" height="189" >}}
+{{< img src="maven-700x189.jpg" alt="Maven logo with a feather in place of the letter v" class="aligncenter size-medium" width="700" height="189" >}}
 
 The above project got me thinking a lot. I wanted to improve the situation as the maintainers had already pushed Ant's limits. At the time, I was working with my friend [Freddy Mallet](https://twitter.com/FreddyMallet) (of Sonar fame). We talked, and he pointed me to Maven. I had once built a project with Maven but had no other prior experience. I studied the documentation for hours, and through trial-and-error attempts, under the tutelage of Freddy, migrated the whole Ant build file to a simple parent POM.
 
@@ -70,7 +69,7 @@ Maven had a profound influence on all later build tools: they defined themselves
 
 ## No build tool of mine: Gradle
 
-{{< img src="gradle.jpg" class="size-full alignright" width="375" height="187" >}}
+{{< img src="gradle.jpg" alt="Gradle logo with an elephant head and green text" class="size-full alignright" width="375" height="187" >}}
 
 Gradle's primary claim was to fix Maven's shortcomings, or at least what it perceived as such. While Maven is not exempt from reproach, Gradle assumed the most significant issue was its lack of flexibility. It's a surprising assumption because that was precisely what Maven improved over Ant. Maven projects have similar structures and use the same lifecycle: the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment) in effect. Conversely, Gradle allows customizing nearly every build aspect, including the lifecycle.
 

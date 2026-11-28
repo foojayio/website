@@ -1,14 +1,12 @@
 ---
 title: "Scoped Values: Why I Banned ThreadLocal in Exeris"
 date: "2026-05-28T09:36:00+00:00"
-lastmod: "2026-06-03T07:06:38+00:00"
 description: "Why ThreadLocal kills performance under Project Loom and how the Exeris Kernel uses Scoped Values for true zero-copy architecture."
 canonical: "https://blog.arkstack.dev/en/blog/why-i-banned-threadlocal-from-the-exeris-kernel"
 authors:
   - "arkadiusz-przychocki"
 image: "Screenshot-2026-06-03-at-09.05.15.jpg"
 categories:
-  - "Java"
   - "JavaPro"
   - "JEPs"
 related_posts:
@@ -26,7 +24,7 @@ In a system designed to handle extreme density by mapping exactly one Virtual Th
 
 But very quickly, I hit a **legacy wall**.
 
-In the standard Enterprise Java ecosystem, when you need to pass a `SecurityContext`, a `TenantId`, or a `TransactionID` down to the database layer without polluting dozens of method signatures, you reach for a trusted tool: `ThreadLocal`. For over two decades, `ThreadLocal` was the backbone of Java framework magic. But in the era of [Project Loom](/pedia/project-loom/ "Project Loom") (JEP 444) and Structured Concurrency, this old friend becomes a **performance serial killer**.
+In the standard Enterprise Java ecosystem, when you need to pass a `SecurityContext`, a `TenantId`, or a `TransactionID` down to the database layer without polluting dozens of method signatures, you reach for a trusted tool: `ThreadLocal`. For over two decades, `ThreadLocal` was the backbone of Java framework magic. But in the era of [Project Loom](/java-terms-explained/project-loom/ "Project Loom") (JEP 444) and Structured Concurrency, this old friend becomes a **performance serial killer**.
 
 Here is why I enforced a strict, kernel-wide ban on `ThreadLocal` in Exeris, and how adopting [**JEP 506 (Scoped Values)**](https://openjdk.org/jeps/506 "**JEP 506 (Scoped Values)**") completely changed the game for high-performance architecture.
 

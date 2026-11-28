@@ -1,14 +1,12 @@
 ---
 title: "Foojay Podcast #82: OpenJDK Projects (Leyden, Babylon, Panama) and TornadoVM"
 date: "2025-11-17T07:35:00+00:00"
-lastmod: "2025-11-18T09:04:47+00:00"
 description: "In this Foojay Podcast, we're diving deep into some of the most exciting developments happening within the OpenJDK and TornadoVM projects. At the Devoxx…"
 authors:
   - "frankdelporte"
   - "john-ceccarelli"
 image: "episode-82-openjdk-projects.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
   - "TornadoVM"

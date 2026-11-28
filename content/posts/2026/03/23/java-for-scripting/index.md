@@ -1,14 +1,12 @@
 ---
 title: "How to Use Java as a Scripting Language"
 date: "2026-03-23T10:00:19+00:00"
-lastmod: "2026-03-23T10:48:35+00:00"
 description: "Discover how Java has evolved into a powerful scripting language, eliminating boilerplate and enabling instant execution for automation tasks"
 canonical: "https://lomagnette.github.io/posts/javascript-no-not-that-one-modern-automation-with-java/"
 authors:
   - "loic-magnette"
 image: "java-script-cover-700x467-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "JDK21"
@@ -20,7 +18,7 @@ related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 ---
 
-![](java-script-cover-700x467.jpg)
+![Duke, the Java mascot, typing at a desk with two monitors full of code and a cup of coffee](java-script-cover-700x467.jpg)
 
 ## The Scripting Dilemma
 

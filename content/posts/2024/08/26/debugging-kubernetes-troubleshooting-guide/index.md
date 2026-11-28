@@ -1,7 +1,6 @@
 ---
 title: "Debugging Kubernetes - Troubleshooting Guide"
 date: "2024-08-26T16:45:45+00:00"
-lastmod: "2024-08-26T16:51:26+00:00"
 description: "Discover effective solutions to common Kubernetes errors. Learn troubleshooting tips for configuration issues, image pull errors and more..."
 canonical: "https://debugagent.com/debugging-kubernetes-troubleshooting-guide"
 authors:
@@ -161,7 +160,7 @@ Buildg lets us inspect container state at each stage of the build process to ide
 
 To install buildg follow the instructions on the [Buildg GitHub page](https://github.com/ktock/buildg).
 
-![](vscode-dap-9d93542e.png)
+![VS Code debugging a Dockerfile with buildg, paused at the figlet RUN step with 'Hello, World!' ASCII art in the terminal](vscode-dap-9d93542e.png)
 
 ## Conclusion
 

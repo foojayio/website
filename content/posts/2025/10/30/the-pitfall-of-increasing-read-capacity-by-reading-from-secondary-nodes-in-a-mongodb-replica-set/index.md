@@ -1,7 +1,6 @@
 ---
 title: "The Pitfall of Increasing Read Capacity by Reading From Secondary Nodes in a MongoDB Replica Set"
 date: "2025-10-30T15:23:31+00:00"
-lastmod: "2025-10-30T15:23:33+00:00"
 description: "Imagine we are responsible for managing the MongoDB cluster that supports our country's national financial payment system, similar to Pix in Brazil. Our application was designed to be read-heavy, with one write operation for every 20 read operations. With Black Friday approaching, a critical period for our national financial payment system, we have been entrusted with the crucial task of creating a scaling plan for our cluster to handle the increased demand during this shopping spree. Given that our system is read-heavy, we are exploring ways to enhance the read performance and capacity of our cluster. We're in charge of the national financial payment system that powers a staggering 60% of all transactions across the nation. That's why ensuring the highest availability of this MongoDB cluster is absolutely critical—it's the backbone of our economy!"
 canonical: "https://delbridge.solutions/read-capacity-mongodb-replica-set/"
 authors:
@@ -36,16 +35,16 @@ An interesting observation is that nearly all AI models correctly warned that re
 ## The pitfall of scaling capacity by reading from secondary nodes
 
 Let's imagine we have a replica set cluster consisting of three nodes: one[primary](https://www.mongodb.com/docs/manual/core/replica-set-primary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=pitfall-mongodb-foojay&utm_term=megan.grant) node and two[secondaries](https://www.mongodb.com/docs/manual/core/replica-set-secondary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=pitfall-mongodb-foojay&utm_term=megan.grant). **Each node can handle up to 100 read operations per second** . If we distribute the read operations equally among the nodes, the **entire replica set cluster should be able to accommodate a total of 300 read operations per second**.  
-![](Screenshot-2025-10-29-at-11.47.54-AM.png)
+![Diagram of an application sending reads to a primary and two secondary MongoDB nodes, each limited to 100 reads per second](Screenshot-2025-10-29-at-11.47.54-AM.png)
 
 Our **application requires 240 read operations per second** . Since we have configured it to balance the operations across the replica set nodes, **each node will handle 80 read operations per second**, which is below its capacity of 100 reads per second.  
-![](Screenshot-2025-10-29-at-11.48.26-AM.png)
+![Diagram of 240 reads per second split evenly, 80 reads per second to each of the three replica set nodes](Screenshot-2025-10-29-at-11.48.26-AM.png)
 
 However, a potential risk lurks in the shadows. Imagine a network outage in one of the availability zones where one of our replica set nodes is deployed, **causing this primary or secondary node to go down** . Now, our application is **still requesting its 240 read operations per second** , but with only two nodes remaining, **each node needs to process 120 read operations per second**.  
-![](Screenshot-2025-10-29-at-11.48.52-AM.png)
+![Diagram where one secondary is cut off, so the primary and the remaining secondary each receive 120 reads per second, over their 100 limit](Screenshot-2025-10-29-at-11.48.52-AM.png)
 
 Since **each node can only handle 100 read operations per second**, this overloads their hardware, which may lead to further failures. As a result, the remaining nodes may go down, taking down the entire MongoDB cluster along with the application.  
-![](Screenshot-2025-10-29-at-11.49.16-AM.png)
+![Diagram where all three replica set nodes are overloaded and failing, leaving 0 reads per second served](Screenshot-2025-10-29-at-11.49.16-AM.png)
 
 ## Increasing read capacity vs increasing read performance
 

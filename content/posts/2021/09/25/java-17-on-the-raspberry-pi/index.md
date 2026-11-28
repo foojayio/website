@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java 17 on the Raspberry Pi"
 date: "2021-09-25T13:56:53+00:00"
-lastmod: "2024-02-06T12:18:16+00:00"
 description: "As part of the Foojay Virtual OpenJDK 17+ JUG Tour, I was asked to present the state of Java and JavaFX 17 on the Raspberry Pi!"
 authors:
   - "frankdelporte"
@@ -208,12 +207,12 @@ $ java HelloWorld.java
 Hello World, greeting you with Java version: 17
 ```
 
-![](Screenshot-2021-08-21-at-15.40.18.png) Hello World Java code running on Raspberry Pi with JDK 17
+![Raspberry Pi desktop with VS Code showing HelloWorld.java and the terminal printing 'Hello World, greeting you with Java version: 17'](Screenshot-2021-08-21-at-15.40.18.png) Hello World Java code running on Raspberry Pi with JDK 17
 
 ## Run a Pi4J project
 
 Now let's see if we can run the minimal example project of the Pi4J project to control a LED and read a button state with some basic electronic components.
-![](led-button_bb-1024x378.png) Minimal electronic setup for a Pi4J demo project
+![Fritzing breadboard diagram of a Raspberry Pi wired to a push button and an LED with resistors](led-button_bb-1024x378.png) Minimal electronic setup for a Pi4J demo project
 
 This is fully described on "[Minimal example application](https://pi4j.com/getting-started/minimal-example-application/)", but this is the *TL;DR;* version, open a terminal and run the following commands to install Maven, get the demo code, build and run:
 

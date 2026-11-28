@@ -1,7 +1,6 @@
 ---
 title: "Is OpenJDK Just a Drop-In Replacement?"
 date: "2023-08-18T07:58:02+00:00"
-lastmod: "2024-06-30T11:20:57+00:00"
 description: "What are the pitfalls in replacing OracleJDK with OpenJDK? Simon Ritter has some interesting observations in his free new book."
 canonical: "https://debugagent.com/is-openjdk-just-a-drop-in-replacement"
 authors:
@@ -48,7 +47,7 @@ This is an important list for anyone considering a migration of this type. One s
 
 I am missing the Microsoft VM in the comparison but I guess it's a bit too new to be registered as a major vendor.
 
-![](Screenshot-2023-08-07-at-14.54.36-411x510.png)
+![Comparison matrix of OpenJDK distributions (Azul, Oracle, Corretto, Red Hat, Temurin) across features such as support, platforms and updates](Screenshot-2023-08-07-at-14.54.36-411x510.png)
 
 ## Business Related Aspects
 

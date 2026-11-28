@@ -1,7 +1,6 @@
 ---
 title: "Free tier API with Apache APISIX"
 date: "2024-08-05T13:50:08+00:00"
-lastmod: "2024-08-09T08:49:11+00:00"
 description: "Lots of service providers offer a free tier of their service. The idea is to let you kick their service's tires freely. If you need to go above the free tier at any point, you'll likely stay on the service and pay."
 canonical: "https://blog.frankel.ch/free-tier-api-apisix/"
 authors:

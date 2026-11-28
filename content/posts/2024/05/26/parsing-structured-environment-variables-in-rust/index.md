@@ -1,7 +1,6 @@
 ---
 title: "Parsing structured environment variables in Rust"
 date: "2024-05-26T18:34:33+00:00"
-lastmod: "2026-09-21T06:03:41+00:00"
 description: "I'm in the process of adding more components to my OpenTelemetry demo (again!). The new design deploys several warehouse services behind the inventory…"
 canonical: "https://blog.frankel.ch/structured-env-vars-rust/"
 authors:

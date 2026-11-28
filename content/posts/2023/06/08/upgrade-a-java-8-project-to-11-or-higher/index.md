@@ -1,7 +1,6 @@
 ---
 title: "Upgrade a Java 8 Project to 11 or Higher"
 date: "2023-06-08T15:12:27+00:00"
-lastmod: "2023-06-08T15:40:31+00:00"
 description: "Keeping a project on Java 8 will eventually lead to running it on a non-maintained runtime. Aim for the stars and go for Java 17!"
 canonical: "https://www.azul.com/blog/upgrade-a-java-8-project-to-11-or-higher/"
 authors:
@@ -17,7 +16,7 @@ related_posts:
 ---
 
 **Java 8 is a Long Term Supported (LTS) version, and [Azul](https://www.azul.com/) will maintain it until 2030 for customers with a support license. You can continue to run Java 8 applications until then on updated and secure Java runtimes. But by staying on Java 8, you miss many other improvements in runtime performance and language enhancements for your developers.**
-![](6-1-23-java-8-11-higher-1024x400.jpg)
+![Illustration of the numbers 8, 11 and 17 on a wavy-line background, the Java versions to upgrade between](6-1-23-java-8-11-higher-1024x400.jpg)
 
 Keeping a project on Java 8 will eventually lead to running it on a non-maintained runtime.
 
@@ -25,14 +24,14 @@ In an earlier article, [Unsupported Versions of Java Are Dangerous](https://www.
 
 Azul still supports Java 7 until 2027, but other distributions do not support it. You can find the complete [support lifecycle for existing and planned JDK releases](https://www.azul.com/products/azul-support-roadmap/) on the Azul website.
 > "***The adage 'if it ain't broke, don't fix it' is often applied to deployed applications. As a result, almost all production enterprise applications, including mission-critical ones, are still running on older versions of Java. Sometimes very old… and sometimes unsupported versions of Java*** ." — **Simon Ritter, Deputy CTO, Azul**
-![](10-11-unsupported-java-1024x400-1.jpeg)
+![Slide titled 'Unsupported Versions of Java Are Dangerous'](10-11-unsupported-java-1024x400-1.jpeg)
 
 ## What are you Missing in Java 8?
 
 Since Java moved to a 6-month release cycle in 2018, each new version brings new features and performance improvements. In most enterprise environments, organizations decide to stick to the LTS versions (11 in 2018, 17 in 2021, 21 in September 2023), which is a reasonable option as it prevents going through significant test cycles every six months.
 
 But by sticking to an older version, your DevOps and developer teams are missing a lot of tools that would allow them to make more performant and better-written applications. The article [9 Outdated Ideas About Java](https://www.azul.com/blog/9-outdated-ideas-about-java) gives an overview of several Java evolutions between versions 8 and 19.
-![](9-Things-1024x410.jpg)
+![Decorative illustration of the word 'nine' with a large swirling 9](9-Things-1024x410.jpg)
 
 ## Running applications on a newer JDK
 

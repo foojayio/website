@@ -1,7 +1,6 @@
 ---
 title: "Getting More Mileage Out of Kafka: OpenJDK vs. Azul Prime"
 date: "2022-05-11T06:47:07+00:00"
-lastmod: "2025-07-15T14:20:08+00:00"
 description: "Kafka is horizontally scalable, fault-tolerant, runs in production for thousands of companies – let's figure out how to get more out of it!"
 canonical: "https://www.azul.com/blog/the-practical-roi-of-running-kafka-on-azul-platform-prime/"
 authors:
@@ -16,7 +15,7 @@ related_posts:
   - "are-java-security-updates-important"
 ---
 
-![](image-1024x560.png)
+![OpenJDK needs a five-node cluster while Azul Platform Prime uses only three nodes](image-1024x560.png)
 
 Building real-time data pipelines and streaming applications just got more cost-effective.
 
@@ -33,7 +32,7 @@ We looked at the maximum throughput that we could achieve with a 5 node Kafka cl
 ## Less Nodes and More Throughput
 
 We found that a 5-node cluster on OpenJDK could reach a max throughput of 333,879 transactions per second (TPS), while Azul Platform Prime was able to **reach 346,058 TPS on only 3 nodes, for a 40% reduction in infrastructure costs.**
-![](image-1-1024x560.png)
+![OpenJDK needs a five-node cluster while Azul Platform Prime uses only three nodes](image-1-1024x560.png)
 
 If you run your cluster on AWS r4x machines, your cost and ROI breakdown looks like this:
 

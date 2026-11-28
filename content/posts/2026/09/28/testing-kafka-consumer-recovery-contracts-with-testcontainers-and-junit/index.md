@@ -6,7 +6,6 @@ authors:
   - "ishan-shah"
 image: "kafka-consumer-recovery-contracts.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Testcontainers"
   - "Testing"

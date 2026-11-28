@@ -6,7 +6,6 @@ authors:
   - "mauro-mura"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "AI"
   - "Testing"
 related_posts:

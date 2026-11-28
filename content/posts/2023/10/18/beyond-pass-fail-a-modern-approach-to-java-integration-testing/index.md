@@ -1,7 +1,6 @@
 ---
 title: "Beyond Pass/Fail- a Modern Approach to Java Integration Testing"
 date: "2023-10-18T15:15:14+00:00"
-lastmod: "2023-10-18T15:15:15+00:00"
 description: "Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!"
 canonical: "https://www.atomicjar.com/2023/10/beyond-pass-fail-a-modern-approach-to-java-integration-testing/"
 authors:
@@ -18,7 +17,7 @@ related_posts:
 
 ## Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
 
-![](1_JAiQsj-ez608WsovCheXVQ-1024x512.jpg)
+![Illustration of a developer sitting at a laptop surrounded by long looping ribbons of data](1_JAiQsj-ez608WsovCheXVQ-1024x512.jpg)
 
 Automated testing will assuredly go down in the annals of software development history as one of these industry-changing trends. Although few actually adhere to full-metal, OCD mode, TDD discipline (I am in awe of those that do, just to be clear), most developers make sure to prioritize and include testing in their dev cycle.
 
@@ -34,7 +33,7 @@ However, the extra punch these tests packed came at a cost. The more realistic t
 
 Unit tests were an easy alternative and a cheap substitute. Fast, better suited for creating tests en-mass, especially efficient in testing isolated pieces of logic or data-driven testing use cases, leveraging the quick execution time to cover numerous input permutations. Trying to balance the faster easier-to-write unit tests with the heavy wielder test types resulted in the concept of the 'testing pyramid'. Today it is widely accepted as a best practice in testing your code.  
 
-{{< img src="0_h3w4QyATz5z8k25E.png" class="aligncenter size-full is-resized" width="466" height="246" style="width:466px;height:246px" caption="source: https://martinfowler.com/articles/practical-test-pyramid.html" >}}
+{{< img src="0_h3w4QyATz5z8k25E.png" alt="Test pyramid: UI tests at the top are slower with more integration, unit tests at the base are faster with more isolation" class="aligncenter size-full is-resized" width="466" height="246" style="width:466px;height:246px" caption="source: https://martinfowler.com/articles/practical-test-pyramid.html" >}}
 
 #### Continuous Integration is not Continuous Unit Testing
 
@@ -42,7 +41,7 @@ Unfortunately, over-investing in unit tests has its downturns. I have seen huge,
 
 The fact that it was easy to produce so many unit tests turned out to be a two-edged sword. The tests often induced a 'false sense of confidence' that did not take into account the many biases that these tests fall into. Each test would look at a very narrow scope and validate only one happy path in a complex distributed system. A developer, reviewing thousands of green tests in the build would assume that his code change is well tested, often being surprised when real-world issues started occurring soon after merging the code.  
 
-{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.jpg" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
+{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.jpg" alt="Four-panel comic: tests show OK for the developer, a warning for QA, a blue screen for the project manager, and a disaster for the customer" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
 
 To complicate matters, in some programming languages, injecting dependencies to allow mocking at every level, as unit tests require, entails complex changes, which do not necessarily lead to better design. The practice of 'refactoring for better testability', once vaunted as advantageous in producing less closely coupled components, soon became an obstacle as the cost of that abstraction became clear. Modern dev practices often favor simplicity over multi-layered modular designs and unit tests unfortunately strictly require the latter.
 
@@ -153,7 +152,7 @@ With the test setup out of the way, we can start focusing on what we want to tes
 ```
 
 This, with a simple request and basic validation we have black-boxed some server logic, creating an integration test. But how fast does it run?
-![](1_z0UWlO2DNYgKCO2sPZl2Lg.png)
+![IntelliJ test results: OwnerControllerTests passes shouldSaveNewOwner() in 6.5 seconds and shouldGetAllOwners() in 31 ms](1_z0UWlO2DNYgKCO2sPZl2Lg.png)
 
 I created two tests so that I could measure the one-time setup time vs. the marginal cost for any additional test. We see a one-time cost of 6.5 seconds for the test run, with almost no penalty at all for each consecutive test.
 
@@ -166,18 +165,18 @@ One of the tragedies of integration tests is that they produce a wealth of usefu
 Thankfully, this too is an area where the technology landscape is different today. [OpenTelemetry](https://opentelemetry.io/docs/instrumentation/java/automatic/) has made it easy to collect data produced by testing, even without making any code changes. To make that raw data into something more practical that we can use to assess our code changes, we can use tools that can digest and analyze that data.
 
 One such project that I am personally involved in is [Digma](https://digma.ai/), a free tool for developers, which focuses on analyzing the code by studying this type of observability data. It is a simple IDE plugin that runs locally on your machine and completely abstracts the logistics around OTEL and collecting and analyzing metrics and traces. We can set Digma up by installing it into the IDE via the [plugin marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback):
-![](1_G1pamm4hBqnJwPshTp-N_A-1024x638.jpg)
+![IntelliJ plugin settings showing the Digma Continuous Feedback plugin found in the Marketplace](1_G1pamm4hBqnJwPshTp-N_A-1024x638.jpg)
 
 #### Trace-based testing, continuously
 
 We complete the plugin setup and… well that's it really! 😁 We are now collecting information about our code locally which we'll be able to see in a second once we run our tests. This time, instead of looking at simply the functional aspects of the code, we can learn more about what it does. More bluntly put, the integration tests we wrote before are all passing — but does that mean we can go ahead and check in our code? We can run our test again to find out.
-![](1_75g-ZTNsdEt6hjw-DOo3aw-1024x312.png)
+![Digma in IntelliJ flagging N+1 queries, excessive HTTP calls and a 37 second duration on the pets creation endpoint](1_75g-ZTNsdEt6hjw-DOo3aw-1024x312.png)
 
 The test passed, but looking at the code we see the test result analysis already revealed some issues in the code. I've previously discussed this specific change and the type of issues it can cause in a [blog post](https://foojay.io/today/effective-coding-with-java-observability/) focusing on improving code using observability. This time, though, this feedback arrives automatically simply by merit of running our test. We can click the 'Live' button to actually see the graph, which in this example shows a very clear picture of the regression.
-![](1_ZxlVxN3FZws-361kp-ltag-1024x555.png)
+![Digma chart for HTTP POST /owners/{ownerId}/pets/new: duration jumps from near 0 to about 20 seconds, flagged as a slowdown](1_ZxlVxN3FZws-361kp-ltag-1024x555.png)
 
 If I am interested in learning more about exactly what is going on, the tracing integration allows me to to drill into the anatomy of the requests simulated by the tests to understand exactly what is going on and what could be wrong:
-![](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.jpg)
+![Trace view of shouldSaveNewOwnerPet with spans and timings next to Digma insights on request breakdown and duration](1_ax_VIStcYPD9ouT6r5n5VQ-1024x832.jpg)
 
 #### Enter Continuous Feedback
 
@@ -191,7 +190,7 @@ Given the changes in both the cost and value of integration tests, we can certai
 
 We'll be looking for high-value tests with minimal cost. As such, single service integration tests such as the one we just created seem to represent an optimal balance.  
 
-{{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
+{{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" alt="Chart of test value versus cost: unit tests are cheap and low value, service integration tests give high value at moderate cost" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
 
 This means that we can invest in more tests that will be both easier to code, relatively fast to run, and still provide great coverage and real-world scenario validation. In addition, the data produced by these tests can be leveraged for more than simple functional validation — we can give our code some exercise and see the shape just by running our tests.
 

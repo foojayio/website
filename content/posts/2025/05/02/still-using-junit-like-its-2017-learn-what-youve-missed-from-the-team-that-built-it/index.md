@@ -1,7 +1,6 @@
 ---
 title: "Still Using JUnit Like It’s 2017? Learn What You’ve Missed—from the Team That Built It"
 date: "2025-05-02T08:11:51+00:00"
-lastmod: "2025-05-02T08:27:50+00:00"
 description: "(And finally catch up on 8 years of updates you might have missed) Let's be honest: When was the last time you really looked at what's new in JUnit? If…"
 authors:
   - "r-fichtner"
@@ -26,7 +25,7 @@ That's exactly what you'll get in this hands-on 2-hour workshop at [JCON EUROPE 
 
 "Catching up with JUnit 5" is your opportunity to finally catch up—with guidance from the very people who built it.
 
-![](53726451134_a501889f5f_o-700x239.jpg)
+![Attendees seated in a classroom watching a presenter in front of a projector screen at a JUnit workshop](53726451134_a501889f5f_o-700x239.jpg)
 
 ### Meet Your Guides:
 

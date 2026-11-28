@@ -1,7 +1,6 @@
 ---
 title: "Your Complete Guide to Diagnose Slow Queries in MongoDB"
 date: "2025-06-17T04:06:04+00:00"
-lastmod: "2025-06-17T04:29:35+00:00"
 description: "MongoDB is built to be fast. The real win comes from knowing how to keep it that way, even as your app grows and your data gets more complex."
 authors:
   - "tim-kelly"

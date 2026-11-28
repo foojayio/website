@@ -1,7 +1,6 @@
 ---
 title: "AWS Nitro and CPU Graviton Meets Unikernels"
 date: "2026-04-10T16:26:25+00:00"
-lastmod: "2026-07-14T15:17:31+00:00"
 description: "AWS Nitro and CPU Graviton Meets Unikernels: Java and Quarkus on ARM64 AWS Graviton with Nanos Unikernel Java and Jakarta EE Truly Meet Unikernels The key…"
 authors:
   - "angelo-rubini"
@@ -12,7 +11,6 @@ categories:
   - "DevOps"
   - "FinOps"
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Performance"
 related_posts:

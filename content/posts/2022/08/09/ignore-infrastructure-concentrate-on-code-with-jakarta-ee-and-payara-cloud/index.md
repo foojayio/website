@@ -1,7 +1,6 @@
 ---
 title: "Ignore Infrastructure, Focus on Code, with Jakarta EE and Payara"
 date: "2022-08-09T09:59:12+00:00"
-lastmod: "2022-08-09T10:07:14+00:00"
 description: "What used to take days or weeks of frustration getting the infrastructure set up to run an application in the Cloud is now automated when you use Payara Cloud."
 canonical: "https://blog.payara.fish/payara-cloud-and-jakarta-ee"
 authors:
@@ -49,7 +48,6 @@ Another way that Jakarta EE lets you focus on application logic is the integrate
 With the Web Profile, providing Web-based clients like REST endpoints and UI-based interfaces with Jakarta Faces, and in the Full Profile, which also supports other communications like the usage of Messaging protocols, Jakarta EE offers a set of functionalities from different areas that are ready-to-use.
 
 Developers don't need to add more libraries to provide some functionality and then deal with the difficulties of integrating them since everything is already in place - so the developer can simply focus on solving the business challenges.
-![](https://blog.payara.fish/hubfs/Benefits%20of%20jakarta%20EE%20model%20(2)-png.png)
 
 ## Easing the Pressure on the "Plate-Spinning" DevOps Engineer
 
@@ -85,7 +83,7 @@ The provisioning of the Kubernetes resources, setting up the routing, networking
 
 Some other Platform As a Service solutions come close to this concept, but with Payara Cloud, the entire infrastructure is shielded away from the user:
 
-## ![](https://blog.payara.fish/hubfs/Benefits%20of%20Payara%20Cloud-png.png) Jakarta EE + Payara Cloud Lets You Focus on Functionality
+## ![Diagram comparing deployment with Kubernetes, where most steps are manual, to Payara Cloud, which handles them automatically](Benefits-of-Payara-Cloud-png-8b9b4e61.png) Jakarta EE + Payara Cloud Lets You Focus on Functionality
 
 For an end-user, the provided functionality of an application is the most important aspect. Traditionally, Jakarta EE developers could focus on the most important aspect of development, which is the business logic that supplies the functionality of the finished application, while keeping the operations and deployments separated from the development task.
 

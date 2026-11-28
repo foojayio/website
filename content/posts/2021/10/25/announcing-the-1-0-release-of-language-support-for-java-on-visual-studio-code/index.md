@@ -1,7 +1,6 @@
 ---
 title: "1.0 Release of Language Support for Java on Visual Studio Code"
 date: "2021-10-25T07:53:21+00:00"
-lastmod: "2021-10-25T08:30:55+00:00"
 description: "We are excited to announce the 1.0 release of Language Support for Java™ by Red Hat on Visual Studio Code."
 authors:
   - "nick-zhu"
@@ -29,7 +28,7 @@ In this 1.0 release, we want to highlight several improvements:
 
 Our focus has always been to support the latest technology provided by the Java language whenever possible. In our 1.0 release, Java 17 is now officially supported on our Java extensions.
 
-![](java17.png)
+![VS Code with a Java Main.java using a switch expression with type patterns, running on JavaSE-17](java17.png)
 
 ### Performance Improvements
 
@@ -39,7 +38,7 @@ In addition, default JVM options are used to improve the user experience of larg
 
 ### Type Hierarchy
 
-![](typehierachy.gif)
+![Animation of VS Code showing the type hierarchy of the ICodeActionParticipant interface in a Java project](typehierachy.gif)
 
 Type hierarchy can now be easily accessed in Visual Studio Code! This is a feature that was introduced recently and has been one of the top asks in the Java community.
 
@@ -47,7 +46,7 @@ Type hierarchy can now be easily accessed in Visual Studio Code! This is a featu
 
 Currently, developers can quickly locate the source code of a library. Now we have expanded this support to unmanaged projects. As long as the library comes from Maven Central repo, we can resolve its sources.
 
-![](sourcelookup.webp)
+![Animated VS Code editor opening library source for an unmanaged project using Gson, with Main.java in a JSON example](sourcelookup.webp)
 
 More advanced configurations are supported as well.
 
@@ -55,13 +54,13 @@ More advanced configurations are supported as well.
 
 Usability is another area we continue to improve. We have adopted more code actions to provide an easier development experience.
 
-![](morecodeactions.gif)
+![Animation of VS Code offering code actions to fix errors on method references in a Java stream example](morecodeactions.gif)
 
 ### Gradle Kotlin (.kts) support
 
 We already support Gradle projects using Groovy scripts, but we heard the need for Kotlin support from the community and now provide basic support for this.
 
-![](gradlekotlin.png)
+![VS Code Explorer showing a Gradle Kotlin project with build.gradle.kts and its dependencies in Java Projects](gradlekotlin.png)
 
 Our hope is that we can continue to expand upon this and deliver a great experience for Kotlin in the future.
 

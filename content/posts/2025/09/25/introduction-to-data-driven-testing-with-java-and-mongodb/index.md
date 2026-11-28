@@ -1,14 +1,12 @@
 ---
 title: "Introduction to Data-Driven Testing with Java and MongoDB"
 date: "2025-09-25T13:53:57+00:00"
-lastmod: "2025-09-25T13:53:59+00:00"
 description: "Data-driven testing (DDT) is important because it enables you to validate business behavior across various scenarios without having to duplicate test logic. When used in conjunction with a document database like MongoDB, it becomes a powerful tool to ensure that your queries align not only with the data structure but also with the intended business outcomes. For Java applications where persistence logic goes beyond basic CRUD operations, data-driven testing helps you safeguard what matters most: correctness, clarity, and confidence."
 authors:
   - "otavio-santana"
 image: "java.jpeg"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "java-virtual-threads-in-action-optimizing-mongodb-operation"

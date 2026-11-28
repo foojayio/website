@@ -1,7 +1,6 @@
 ---
 title: "Payara Server Maven Plugin + AI Agent"
 date: "2025-09-30T08:43:20+00:00"
-lastmod: "2025-09-30T09:29:28+00:00"
 description: "Imagine managing your Jakarta EE applications not just with Maven goals, but by asking natural questions."
 canonical: "https://blog.payara.fish/payara-server-maven-plugin-ai-agent"
 authors:
@@ -10,7 +9,6 @@ image: "see-it-in-action-screenshot-AI-Maven-Blog.jpg"
 categories:
   - "AI"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Maven"
   - "Tutorials"
@@ -66,8 +64,6 @@ See it in action:
 
 No need to dig through JMX or logs manually. The AI Agent fetches and summarizes it instantly.
 
-{{< img src="https://blog.payara.fish/hs-fs/hubfs/AIAgent2.gif?width=2067&height=1119&name=AIAgent2.gif" class="size-medium" width="1378" height="746" >}}
-
 ## Demo #2 – JDBC, JMX, and JMS Made Easy
 
 In the second demo, I explored resource management features:
@@ -83,8 +79,6 @@ In the second demo, I explored resource management features:
 See it in action:  
 
 Instead of navigating the admin console or writing XML config, AI does the heavy lifting.
-
-{{< img src="https://blog.payara.fish/hs-fs/hubfs/AIAgent1.gif?width=2067&height=1119&name=AIAgent1.gif" class="size-medium" width="1378" height="746" >}}
 
 ### Configuring the AI Agent
 

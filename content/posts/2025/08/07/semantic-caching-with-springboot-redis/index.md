@@ -1,14 +1,12 @@
 ---
 title: "Semantic Caching with SpringBoot & Redis"
 date: "2025-08-07T06:58:07+00:00"
-lastmod: "2025-08-07T07:02:22+00:00"
 description: "Build semantic caching with Spring AI & Redis to cut LLM costs 80%. Cache by meaning, not exact text. Full tutorial with working demo."
 authors:
   - "raphael-delio"
 image: "Copia-de-Blue---WIP-2.png"
 categories:
   - "AI"
-  - "Java"
   - "nosql"
   - "Redis"
   - "Tutorials"
@@ -25,7 +23,7 @@ related_posts:
 >
 > It works by storing query-response pairs as vector embeddings in Redis, allowing your application to retrieve cached answers for similar questions without calling the expensive LLM, reducing both latency and costs.
 
-![](1-f0R9gBDSJQk8872lh2QMDQ-4762b875.png)
+![Title graphic reading 'Semantic Caching Spring AI & Redis' with the Redis logo](1-f0R9gBDSJQk8872lh2QMDQ-4762b875.png)
 
 ## The Problem with Traditional LLM Applications
 
@@ -303,19 +301,19 @@ This will start:
 
 When all services are running, go to `localhost:8080` to access the demo. You'll see a beer recommendation interface:
 
-![](0-Fiq0hLEwAAh-Raij-d086f912.png)
+![Semantic Caching with Spring AI demo in a browser showing the empty Beer Knowledge Assistant chat](0-Fiq0hLEwAAh-Raij-d086f912.png)
 
 If you click on `Start Chat`, it may be that the embeddings are still being created, and you get a message asking for this operation to complete. This is the operation where the documents we'll search through will be turned into vectors and then stored in the database. It is done only the first time the app starts up and is required regardless of the vector database you use.
 
-![](0-Q31EboPeCOEkT8hB-15ceba35.png)
+![Dialog saying embeddings are still being created (14472 of 20000) and to try again in about three minutes](0-Q31EboPeCOEkT8hB-15ceba35.png)
 
 Once all the embeddings have been created, you can start asking your chatbot questions. It will semantically search through the documents we have stored, try to find the best answer for your questions, and cache the responses semantically in Redis:
 
-![](0-6H8Qyn7gZW-fI-dE-3fe94eb0.webp)
+![Beer Knowledge Assistant with the question 'What kind of beer goes well with smoked meat?' typed in the input box](0-6H8Qyn7gZW-fI-dE-3fe94eb0.webp)
 
 If you ask something similar to a question had already been asked, your chatbot will retrieve it from the cache instead of sending the query to the LLM. Retrieving an answer much faster now.
 
-![](0-qe0eDWFW6VoJHQvM-6ac57570.webp)
+![Chatbot answer recommending beers for smoked meat with processing times, while a similar follow-up question is typed](0-qe0eDWFW6VoJHQvM-6ac57570.webp)
 
 ## Exploring the Data in Redis Insight
 

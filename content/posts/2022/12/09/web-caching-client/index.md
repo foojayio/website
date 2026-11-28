@@ -1,7 +1,6 @@
 ---
 title: "Web resource caching: Client-side"
 date: "2022-12-09T15:27:44+00:00"
-lastmod: "2022-12-09T15:42:06+00:00"
 description: "Learn about several alternatives to cache web resources: Expiry and Cache-Control, Last-Modified and ETag, and the Cache API and web workers."
 canonical: "https://blog.frankel.ch/web-caching/client/"
 authors:
@@ -71,7 +70,7 @@ All in all, `Cache-Control` is quite complex. It might be well the subject of a 
 
 However, here's a visual help on how to configure `Cache-Control` response headers.
 
-![](cache-control-flow-1024x985.png)
+![Flowchart for choosing Cache-Control headers: no-store, immutable, max-age, no-cache, must-revalidate, ETag, public, private, s-maxage](cache-control-flow-1024x985.png)
 
 The [Cache Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#use_cases) page of Mozilla Developer Network has some significant use cases of `Cache-Control`, complete with configuration.
 
@@ -86,7 +85,7 @@ To avoid the risk of serving an out-of-date resource, the browser **must** send 
 
 Let's use a diagram to make clear how they interact:
 
-{{< img src="last-modified-sequence-498x510.png" class="size-medium aligncenter" width="498" height="510" >}}
+{{< img src="last-modified-sequence-498x510.png" alt="Sequence diagram: browser sends If-Modified-Since, server replies 200 with new data or 304 from cache" class="size-medium aligncenter" width="498" height="510" >}}
 
 Note: the `If-Unmodified-Since` has the opposite function for `POST` and other non-idempotent methods. It returns a `412 Precondition Failed` HTTP error to avoid overwriting resources that have changed.
 

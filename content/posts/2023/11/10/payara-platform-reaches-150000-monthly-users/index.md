@@ -1,7 +1,6 @@
 ---
 title: "Payara Platform Surpasses 150,000 Monthly Users"
 date: "2023-11-10T11:42:38+00:00"
-lastmod: "2023-11-10T11:48:54+00:00"
 description: "Jakarta EE application server Payara Platform reaches 150,000 monthly users, a key global milestone!"
 authors:
   - "jadon-ortlepp"
@@ -10,7 +9,6 @@ authors:
 image: "150000-downloads.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "are-java-jakarta-ee-application-servers-heavy"

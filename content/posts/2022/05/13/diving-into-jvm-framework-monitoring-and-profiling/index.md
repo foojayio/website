@@ -1,7 +1,6 @@
 ---
 title: "Diving into JVM Framework Monitoring and Profiling"
 date: "2022-05-13T06:36:05+00:00"
-lastmod: "2022-05-13T12:59:16+00:00"
 description: "Let's look at how frameworks work under the hood, namely Quarkus and Spring Boot, and how many threads they initiate to serve up results."
 authors:
   - "miro-wengner"

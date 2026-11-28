@@ -1,13 +1,11 @@
 ---
 title: "Your AI Assistant Is Choosing Your Dependencies"
 date: "2026-08-18T14:01:20+00:00"
-lastmod: "2026-08-18T14:16:48+00:00"
 description: "AI code generation doesn't just write your Java. It picks your suppliers, edits your build and pulls in ecosystems you don't know. What Maven developers should check."
 authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_l6kj3gl6kj3gl6kj-scaled.jpeg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"

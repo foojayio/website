@@ -1,7 +1,6 @@
 ---
 title: "Workflow, From Stateless To Stateful"
 date: "2024-06-05T06:11:38+00:00"
-lastmod: "2024-06-05T06:11:39+00:00"
 description: "How I first limited my usage of BPMN and then unlocked its true power when I benefited from persistent storage."
 canonical: "https://blog.frankel.ch/worfklow-stateless-stateful/"
 authors:
@@ -19,7 +18,7 @@ related_posts:
 
 Here's a sample workflow:
 
-![](procurement.png)
+![BPMN diagram of a purchase process across Requester, Purchase Department and Accounting lanes, from request to closing the order](procurement.png)
 
 The above diagram uses [Business Process Model and Notation](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation). You can now design your workflow using and run it with compatible workflow engines.
 
@@ -41,7 +40,7 @@ At the time, Heroku didn't provide free storage *dyno* . However, I had to desig
 
 Here is my initial workflow in all its glory:
 
-![](initial.png)
+![Initial workflow: a Trello card's computed event status routes to Accepted, Submitted or Refused flows updating Google Calendar and the Talks page](initial.png)
 
 As a reminder, everything starts from Trello. When I move a card from one lane to another, Trello sends a request to a previously registered webhook. As you can expect, the hook is part of my app and starts the above workflow.
 
@@ -70,7 +69,7 @@ Note that if the engine finds no matching instance, it creates a new one. Messag
 
 Here's my workflow design:
 
-![](final.png)
+![Final workflow design: Submitted, Accepted, Refused, Backlog and Abandoned messages trigger parallel calendar, Talks page and Trello tasks](final.png)
 
 For example, imagine a Trello hook that translates to an Abandoned message. If there's no instance associated with the card, the engine creates a new instance and sends the Abandoned message, which:
 

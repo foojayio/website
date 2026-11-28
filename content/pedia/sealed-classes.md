@@ -1,7 +1,9 @@
 ---
 title: "Sealed Classes"
 description: "Sealed classes, introduced as a preview in Java 15 and finalised in Java 17, let you explicitly control which classes or interfaces are permitted to extend or implement a given type. The sealed modifier on a class is paired with ..."
-url: "/pedia/sealed-classes/"
+url: "/java-terms-explained/sealed-classes/"
+aliases:
+  - "/pedia/sealed-classes/"
 ---
 
 Sealed classes, introduced as a preview in Java 15 and finalised in Java 17, let you explicitly control which classes or interfaces are permitted to extend or implement a given type. The `sealed` modifier on a class is paired with a `permits` clause listing the allowed subtypes.  
@@ -18,7 +20,7 @@ Sealed classes work best in combination with records (for the leaf types) and pa
 
 ## See Also
 
-* [Switch Expressions](/pedia/switch-expressions/)
-* [Records](/pedia/records/)
-* [Pattern Matching](/pedia/pattern-matching/)
-* [Project Amber](/pedia/project-amber/)
+* [Switch Expressions](/java-terms-explained/switch-expressions/)
+* [Records](/java-terms-explained/records/)
+* [Pattern Matching](/java-terms-explained/pattern-matching/)
+* [Project Amber](/java-terms-explained/project-amber/)

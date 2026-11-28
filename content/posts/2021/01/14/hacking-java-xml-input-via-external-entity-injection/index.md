@@ -1,7 +1,6 @@
 ---
 title: "Hacking Java XML Input via External Entity Injection"
 date: "2021-01-14T08:37:10+00:00"
-lastmod: "2021-01-14T08:45:42+00:00"
 description: "In this video, I explain and demonstrate how an XXE injection attack works by extracting system data that should not be exposed."
 authors:
   - "bmvermeer"

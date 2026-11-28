@@ -1,13 +1,11 @@
 ---
 title: "Make the life of your developer client's easier with smart builders"
 date: "2025-01-09T11:49:51+00:00"
-lastmod: "2025-01-16T08:35:27+00:00"
 description: "We often hear the phrase \"Make the life of your client easier\". But, what about the developers? Make the life of your developer client's easier with smart builders."
 authors:
   - "maximillian-arruda"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"

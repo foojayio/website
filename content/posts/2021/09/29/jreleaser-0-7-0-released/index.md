@@ -1,7 +1,6 @@
 ---
 title: "This Just In: JReleaser 0.7.0 Released!"
 date: "2021-09-29T12:12:24+00:00"
-lastmod: "2021-09-29T12:13:32+00:00"
 description: "JReleaser is a tool that streamlines creating releases for [Java] projects. 0.7.0 is a small release as core features is mostly complete."
 authors:
   - "gerrit-grunwald"

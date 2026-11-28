@@ -1,7 +1,6 @@
 ---
 title: "Spring Modulith: Have We Reached Modularity Maturity?"
 date: "2022-12-29T07:07:29+00:00"
-lastmod: "2023-01-21T09:19:12+00:00"
 description: "Spring Modulith is the successor of Oliver Drotbohm's Moduliths project (with a trailing S). It uses both ArchUnit and jMolecules."
 canonical: "https://blog.frankel.ch/spring-modulith-modularity-maturity/"
 authors:
@@ -136,11 +135,11 @@ I've created a [sample app](https://github.com/ajavageek/spring-modulith-sample)
 
 Each feature - page, catalog, newsfeed, and pricing - sits in a package, which is viewed as a Spring module. Spring Modulith's documenting feature generates the following:
 
-{{< img src="architecture-480x510.png" class="size-medium aligncenter" width="480" height="510" >}}
+{{< img src="architecture-480x510.png" alt="Module diagram: the home module uses the news, catalog and pricing modules inside the Application container" class="size-medium aligncenter" width="480" height="510" >}}
 
 Let's check the design of the pricing feature:
 
-{{< img src="pricing-original-576x510.png" class="size-medium aligncenter" width="576" height="510" >}}
+{{< img src="pricing-original-576x510.png" alt="UML diagram: HomeController in home depends on PricingService and the Pricing entity, exposing pricing internals" class="size-medium aligncenter" width="576" height="510" >}}
 
 The current design has two issues:
 
@@ -149,7 +148,7 @@ The current design has two issues:
 
 We shall fix the design by encapsulating types that shouldn't be exposed. We move the `Pricing` and `PricingRepository` types into an `internal` subfolder of the `pricing` module:
 
-{{< img src="pricing-improved-526x510.png" class="size-medium aligncenter" width="526" height="510" >}}
+{{< img src="pricing-improved-526x510.png" alt="UML diagram: Pricing and PricingRepository moved into an internal subpackage, but HomeController still reaches Pricing" class="size-medium aligncenter" width="526" height="510" >}}
 
 If we call the `verify()` method, it throws and breaks the build because `Pricing` is not accessible from outside the `pricing` module:
 
@@ -157,7 +156,7 @@ If we call the `verify()` method, it throws and breaks the build because `Pricin
 
 Let's fix the violations with the following changes:
 
-{{< img src="pricing-final-700x422.png" class="size-medium aligncenter" width="700" height="422" >}}
+{{< img src="pricing-final-700x422.png" alt="UML diagram: HomeController uses PricingService and a PricingDTO, while Pricing stays in the internal package" class="size-medium aligncenter" width="700" height="422" >}}
 
 ## Conclusion
 

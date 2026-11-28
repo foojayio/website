@@ -1,31 +1,44 @@
-# A conference, community day, workshop or online event on foojay.io/calendar/
+# A community day, workshop, webinar or other online event on foojay.io/calendar/
 #
+# FIRST, CHECK THIS IS THE RIGHT PLACE. Two kinds of event are NOT added here,
+# because a community project already keeps them and foojay.io copies its list
+# every day:
+#
+#   A Java CONFERENCE -> send a pull request to the javaconferences list
+#     (edit README.md, one table row per conference):
+#     https://github.com/javaconferences/javaconferences.github.io
+#     It then appears on /calendar/ and /java-conferences/ by itself.
+#
+#   A JUG MEETUP -> add or fix your group's file in the World Wide JUGs
+#     directory, with a `calendar:` (any iCal URL) or a `meetup:` entry:
+#     https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs
+#     Its meetups then appear on /calendar/ by themselves.
+#
+# Do NOT add either kind to data/events/ or data/jug-events.json: a conference
+# file here is a duplicate of the list, and data/jug-events.json is regenerated
+# and committed every day, so a hand-written entry in it is gone within 24 hours.
+#
+# Everything else -- a workshop, webinar, hackathon, community day -- goes here.
 # Copy this file to data/events/<event-slug>.yaml, fill it in, open a pull
 # request. Name the file after the event INCLUDING its year -- lowercase
 # letters, digits and dashes only:
 #
-#     data/events/devoxx-belgium-2026.yaml
-#     data/events/jfokus-2027.yaml
+#     data/events/ai-coding-workshop-berlin-2026.yaml
+#     data/events/ocx-webinar-week-2026.yaml
 #
-# One file per event, so two people adding two conferences in the same week
-# never touch the same file and never get a merge conflict. Next year's edition
-# is a new file, not an edit of this one.
-#
-# Do NOT add an event to data/jug-events.json: that file is regenerated from the
-# JUGs' calendar feeds and committed every day, so a hand-written entry in it is
-# gone within 24 hours. Recurring JUG meetups belong in the JUG's own calendar,
-# which foojay picks up automatically once the group is listed at
-# https://github.com/World-Wide-JUGs/GlobalWWJugs
+# One file per event, so two people adding two events in the same week never
+# touch the same file and never get a merge conflict. Next year's edition is a
+# new file, not an edit of this one.
 #
 # Delete the comments and the optional lines you don't need.
 
 # --- Required -------------------------------------------------------------
 
 # Shown on the calendar. Include the year, like the filename does.
-name: "Devoxx Belgium 2026"
+name: "My Event 2026"
 
 # The event's own site -- where the calendar sends a reader.
-url: "https://devoxx.be/"
+url: ""
 
 # First day, YYYY-MM-DD.
 #
@@ -40,22 +53,21 @@ url: "https://devoxx.be/"
 start: "2026-10-05"
 
 # Where it is. Both required unless `online: true` below.
-city: "Antwerp"
-country: "Belgium"
+city: ""
+country: ""
 
 # --- Optional -------------------------------------------------------------
 
 # What kind of event this is. Shown next to it on the calendar. Defaults to
-# "Conference"; other sensible values are "Workshop", "Community Day",
-# "Hackathon", "Webinar", "Unconference".
-type: "Conference"
+# "Conference", "Workshop", "Community Day", "Hackathon", "Webinar", "Unconference",...
+type: "Workshop"
 
 # LAST day, inclusive, YYYY-MM-DD. Leave it out for a one-day event -- a
 # multi-day conference is drawn as a band across those days in the month view.
 end: "2026-10-09"
 
 # The building, if it is worth naming.
-venue: "Kinepolis Antwerpen"
+venue: ""
 
 # true for an online-only event; then city/country can be left out.
 online: false

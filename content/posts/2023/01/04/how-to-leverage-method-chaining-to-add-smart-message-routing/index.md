@@ -1,7 +1,6 @@
 ---
 title: "How to Leverage Method Chaining to Add Smart Message Routing"
 date: "2023-01-04T08:33:43+00:00"
-lastmod: "2023-01-04T08:36:30+00:00"
 description: "Learn how to use method chaining to add routing information to serialised data structures in a lightweight fashion!"
 authors:
   - "rob-austin"

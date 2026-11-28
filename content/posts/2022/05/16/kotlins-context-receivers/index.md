@@ -1,7 +1,6 @@
 ---
 title: "Toying with Kotlin's Context Receivers"
 date: "2022-05-16T10:39:04+00:00"
-lastmod: "2022-05-16T10:39:06+00:00"
 description: "Learn about Kotlin context receivers to be able to pass additional parameters to a function without having to do it explicitly."
 canonical: "https://blog.frankel.ch/kotlin-context-receivers/"
 authors:
@@ -30,7 +29,7 @@ Let's start with a simple example to show how it works. We want to model a simpl
 
 Accounts balance is stored in a database, and respective credit/debut operations must be transactional.
 
-![](simple-transfer-model.png)
+![UML class diagram: AccountService.transfer takes a Transaction, while AccountRepo credits and debits Account entities](simple-transfer-model.png)
 
 Let's focus on the `AccountService.transfer()` function. It requires a `Transaction` instance that wraps several of operations:
 

@@ -1,0 +1,1730 @@
+{
+  "channels" : [ {
+    "handle" : "intellijidea",
+    "id" : "UC4ogdcPcIAOOMJktgBMhQnQ",
+    "title" : "IntelliJ IDEA, a JetBrains IDE",
+    "avatar" : "https://yt3.googleusercontent.com/sbknt7hweoIpYAqf_KyTjlDpe3DFdmG4MSd6mLITqhgVykim_cTf-4Tokamrw3X0iJ3a9h334g=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "FrankDelporte",
+    "id" : "UCS32z_JbHEmXJAuk2X9yeow",
+    "title" : "Frank Delporte",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k-EsTr2dwQqxyY-GUMd1QjmaXjdM8-25YYsbjDMrfO1rIq=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "coffeesoftware",
+    "id" : "UCjcceQmjS4DKBW_J_1UANow",
+    "title" : "Coffee + Software",
+    "avatar" : "https://yt3.googleusercontent.com/RPKamO5BEijs_xKi1pE7Z1ZiQINgvrJSn1ux3oqb1jOITSsUloSc_FOo-YToRtMpNojVw2DD=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "hszanowski",
+    "id" : "UCkfmVnwE2YKBA1-f5oLun2A",
+    "title" : "Jakub Chrzanowski",
+    "avatar" : "https://yt3.googleusercontent.com/PQQCnKFGexxPOWISVz5ffQ41T_akaL1D5UQdLepWLrJidVQPLUgkzd2QkQF7n_QZnnpxqDCl=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "JetBrainsWDYT",
+    "id" : "UCrtdvARKEUquypZZOSr7VaA",
+    "title" : "JetBrains WDYT",
+    "avatar" : "https://yt3.googleusercontent.com/yiXNCg2KgCk_ia_SGm0Vq0N5GoBwFoIl80vvjO2-i2pIWhdssD6VEZp8uhxY2YQJs8xoh4YhWVs=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "JetBrainsTV",
+    "id" : "UCGp4UBwpTNegd_4nCpuBcow",
+    "title" : "JetBrains",
+    "avatar" : "https://yt3.googleusercontent.com/wBPpTj2jbdy-ouAuowvSatAxW01MoFxm8mJB0YCljWkoEhw_UV4hjgziTzprMeFYWRUr4uNMrQ=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "sivalabs",
+    "id" : "UC7yMHBNLA1AnVfy_beGJGqg",
+    "title" : "SivaLabs",
+    "avatar" : "https://yt3.googleusercontent.com/WrKTxDo24yal_kRZZamLmpxUKVLAcvZnaz00fPfG3_Lpe0_3Luf6j5a3HTiLuTO_Pqpq3N8h=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "DevoxxForever",
+    "id" : "UCCBVCTuk6uJrN3iFV_3vurg",
+    "title" : "Devoxx",
+    "avatar" : "https://yt3.googleusercontent.com/6PX1a15kVh5GP-VenJha4diDKlSMu1JdIwsyWx97u56Uy8Y913rig7-q6SALxGvRDoZdhscFHA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "NLJUG1",
+    "id" : "UCZKSQ4GtkKD1Wb6Ti53febQ",
+    "title" : "NLJUG",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_lNw8F6O_DNsO4SPHjlnsK-JDRB-rcEs8AGpnrQ56P1jg=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "java",
+    "id" : "UCmRtPmgnQ04CMUpSUqPfhxQ",
+    "title" : "Java",
+    "avatar" : "https://yt3.googleusercontent.com/8dbNCW4w2iiqcWJBRh15Bob2nmZd-j9bTxPm5vfIocplepKKA7a_qRRUC_f9VdHUZYL-t1xyuAM=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "cbrjar",
+    "id" : "UCUCyBfJ6jOiQsAc1jCxGABQ",
+    "title" : "CyberJAR",
+    "avatar" : "https://yt3.googleusercontent.com/JmgFSxNz180T6o5kol2XvYkZPRLMZR9djlggLQM-aJ_hSCgpplUdU3IebvbTaKQWOvF8_lEu=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "azulsystems",
+    "id" : "UCSoJZa--HhjV9iXtbHUmm8A",
+    "title" : "Azul",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_l_nTrmmQVCrbBpcuLy8iC2of2T9cTIgojCD-AOuceVCoY=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "MarcoCodes",
+    "id" : "UCf4tsZfSZlBx2QusJg3HJew",
+    "title" : "Marco Codes",
+    "avatar" : "https://yt3.googleusercontent.com/OshoNWlodIBxCzHFz66-a5j07zfj5KzIyXGfX8Rm1r4nWJ811bYBTMfXA-_ZFBeoHHougZP9aA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "virtualJUG",
+    "id" : "UCBxVkwrVRo8BnQ1g96MHZ0Q",
+    "title" : "v JUG",
+    "avatar" : "https://yt3.googleusercontent.com/qjuCOx5VCHdXoIXvR8zO8OrqH4lOVzIwEiQ3-l0U8pKaq2pZgJxLpxNpEsgUrg0LPOhGwbheDfA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "Kotlin",
+    "id" : "UCP7uiEZIqci43m22KDl0sNw",
+    "title" : "Kotlin by JetBrains",
+    "avatar" : "https://yt3.googleusercontent.com/TTzoNteRV1ZPudFs4BMuSsfgIW4qZm9z3k7qI9hXdeKPShb5e57823NQcJFL9kKfxesb0mkXEWA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "anahata108",
+    "id" : "UC0WXH03OU-RJeUQ2CuMFU9g",
+    "title" : "Anahata TV - Java AI, AGI, ASI",
+    "avatar" : "https://yt3.googleusercontent.com/lBBGPlk8vAWzHrZnLSdLptAvZi4N6rR3UYMwrFD62vQ5XdG-qkYtVDLyWETTrId7Dn_CqDeJUw=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "jjohannes",
+    "id" : "UCxACdAdoVVimgPoFwbdHUkQ",
+    "title" : "onepiece.Software by Jendrik Johannes",
+    "avatar" : "https://yt3.googleusercontent.com/U5rB3j8qX8xlqRvLYPOvqB-MmXf6Uw08HNs1pvn4hMkQEi7esLk8rhFzxQWk7EWco_hdKwrGrg=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "lprimak",
+    "id" : "UCV1k8Zl-GWeppTVoCUcYfGg",
+    "title" : "Lenny Primak",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_ntdSlDvwuIUr8nsysUiaeMi8VLPUysCQAuRDHh9ZWTiNA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "jakartaee",
+    "id" : "UC4M7h5b6elu9VlzjLfzuXyg",
+    "title" : "Jakarta EE",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_nK1vILNmbLZYXwUUwjzuohTcUs368iz0aypl1yUedStA=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "bienadam",
+    "id" : "UCksTNgiRyQGwi2ODBie8HdA",
+    "title" : "Adam Bien",
+    "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k_YqpG6_Rrq2y48p7UlLkPQMKp1LCJ_5roQV7mVXuF2tQ=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "otaviojava",
+    "id" : "UCLDPIwax_ntXrHZZb6HfFqw",
+    "title" : "Otavio Santana",
+    "avatar" : "https://yt3.googleusercontent.com/iH4giAy9isKM3VR-2TFzpcFcnUGGbk7-nAfyTjDReXYFO69SJ7g5xvieqEaM9v79JYk9ChM4=s176-c-k-c0x00ffffff-no-rj"
+  } ],
+  "videos" : [ {
+    "id" : "HRzE71LQxFM",
+    "channel" : "bienadam",
+    "title" : "Java on AWS Lambda Without Modifications",
+    "published" : "2026-11-27T15:43:06+00:00"
+  }, {
+    "id" : "wOzSFTa5htU",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talk: Spec-Driven Development with Kiro – Building AI-Aligned Software",
+    "published" : "2026-11-27T13:13:16+00:00"
+  }, {
+    "id" : "IpHvTXXPwJQ",
+    "channel" : "hszanowski",
+    "title" : "How should you test JetBrains IDEs UI?",
+    "published" : "2026-11-27T11:51:47+00:00"
+  }, {
+    "id" : "lcMjGZRFD4k",
+    "channel" : "hszanowski",
+    "title" : "How should you test JetBrains IDEs UI?",
+    "published" : "2026-11-27T11:36:25+00:00"
+  }, {
+    "id" : "m2Z6fchF1zQ",
+    "channel" : "coffeesoftware",
+    "title" : "Thankful Coffee+Software",
+    "published" : "2026-11-27T08:17:13+00:00"
+  }, {
+    "id" : "RwKQd_QViZo",
+    "channel" : "coffeesoftware",
+    "title" : "JetBrains' 2027 Roadmap: a Polyglot IDE, Air, and Headless AI Agents | JetBrains CEO Kirill Skrygan",
+    "published" : "2026-11-26T21:00:17+00:00"
+  }, {
+    "id" : "O_MOmxJ4k8k",
+    "channel" : "bienadam",
+    "title" : "Episode 8: Semantic Compression, Three Words, Three Layers #java #llm #bce",
+    "published" : "2026-11-26T16:36:10+00:00"
+  }, {
+    "id" : "Lb0OzjzcmFU",
+    "channel" : "NLJUG1",
+    "title" : "7 Ways you can build an amazing dev career in the ai era",
+    "published" : "2026-11-26T15:43:05+00:00"
+  }, {
+    "id" : "kX3ZBh0J_Qc",
+    "channel" : "NLJUG1",
+    "title" : "Your coding agent is a while loop!",
+    "published" : "2026-11-26T15:40:50+00:00"
+  }, {
+    "id" : "zlDB56IOThY",
+    "channel" : "FrankDelporte",
+    "title" : "Fixed Slow Lottie Animations in JavaFX: from 3 FPS to 60 FPS with Lottie4J 1.5.0",
+    "published" : "2026-11-26T13:57:10+00:00"
+  }, {
+    "id" : "MwuXJ1tVeR4",
+    "channel" : "NLJUG1",
+    "title" : "State of Confusion: Data Ownership in Event-Driven Systems",
+    "published" : "2026-11-26T13:30:43+00:00"
+  }, {
+    "id" : "qcU4dMa_GHM",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Livestream 2026 | The Largest Global Jakarta EE Event",
+    "published" : "2026-11-26T12:37:37+00:00"
+  }, {
+    "id" : "FNM5HeI9QmM",
+    "channel" : "java",
+    "title" : "Java in the Age of AI [AtA] Inside Java Podcast 76",
+    "published" : "2026-11-26T10:49:32+00:00"
+  }, {
+    "id" : "CBc1n0VpYwM",
+    "channel" : "bienadam",
+    "title" : "Episode 7: Composable Skills, One Concern per Skill #java #llm #bce",
+    "published" : "2026-11-25T14:01:21+00:00"
+  }, {
+    "id" : "rlvYkfwZUIQ",
+    "channel" : "Kotlin",
+    "title" : "Advent of Code in Kotlin 2026. Day 4",
+    "published" : "2026-11-25T13:16:37+00:00"
+  }, {
+    "id" : "JBHUL0N5zRY",
+    "channel" : "Kotlin",
+    "title" : "Advent of Code in Kotlin 2026. Day 3",
+    "published" : "2026-11-25T13:16:05+00:00"
+  }, {
+    "id" : "BtJq-EU25Eg",
+    "channel" : "Kotlin",
+    "title" : "Advent of Code in Kotlin 2026. Day 2",
+    "published" : "2026-11-25T13:14:58+00:00"
+  }, {
+    "id" : "Z2kajEnLf3k",
+    "channel" : "Kotlin",
+    "title" : "Advent of Code in Kotlin 2026. Day 1",
+    "published" : "2026-11-25T13:14:11+00:00"
+  }, {
+    "id" : "HCuR-JEDs6Q",
+    "channel" : "intellijidea",
+    "title" : "JetBrains Air in IntelliJ IDEA",
+    "published" : "2026-11-25T09:52:50+00:00"
+  }, {
+    "id" : "DvNxXmwHprM",
+    "channel" : "coffeesoftware",
+    "title" : "JetBrains CEO Kirill Skrygan",
+    "published" : "2026-11-25T01:16:04+00:00"
+  }, {
+    "id" : "u4dEuX9wdV4",
+    "channel" : "bienadam",
+    "title" : "153rd airhacks tv: Writing Code, IntelliJ in VS Code, UC-Driven Dev, LLM-Native BCE #airhacks #live",
+    "published" : "2026-11-24T17:15:54+00:00"
+  }, {
+    "id" : "T_YQSV8P8l4",
+    "channel" : "JetBrainsTV",
+    "title" : "Python 2026: AI Rant, $6M YouTube, Junior Dev Jobs & Is the CS Degree Over? — Tech With Tim Explains",
+    "published" : "2026-11-24T15:00:08+00:00"
+  }, {
+    "id" : "OXk3r95m4nI",
+    "channel" : "cbrjar",
+    "title" : "Face Recognition in Java: Python, ONNX and GPU in One App",
+    "published" : "2026-11-24T14:33:25+00:00"
+  }, {
+    "id" : "fSFnxPmCrV4",
+    "channel" : "JetBrainsTV",
+    "title" : "From Design to Shipped: React Meetup | JetBrains, Callstack, Expo, Chromatic",
+    "published" : "2026-11-24T09:08:48+00:00"
+  }, {
+    "id" : "KkNdFy9omTI",
+    "channel" : "hszanowski",
+    "title" : "Gradle 10 Drops Ant. Is Java for IntelliJ Plugins Cooked?",
+    "published" : "2026-11-24T04:37:56+00:00"
+  }, {
+    "id" : "txsovWcrRSM",
+    "channel" : "hszanowski",
+    "title" : "Gradle 10 Drops Ant. Is Java for IntelliJ Plugins Cooked?",
+    "published" : "2026-11-24T04:37:45+00:00"
+  }, {
+    "id" : "PKPii_ZcO6g",
+    "channel" : "NLJUG1",
+    "title" : "From specification to production  engineering in the age of ai",
+    "published" : "2026-11-23T16:34:34+00:00"
+  }, {
+    "id" : "B3todZ0H4x4",
+    "channel" : "NLJUG1",
+    "title" : "Opening",
+    "published" : "2026-11-23T16:34:33+00:00"
+  }, {
+    "id" : "obri3dRCuMI",
+    "channel" : "NLJUG1",
+    "title" : "Java citizens in the world of mainframe",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "v0W6lwncJvQ",
+    "channel" : "NLJUG1",
+    "title" : "Teaching a new dog old tricks  give the agent a debugger",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "wB53dhAs6_U",
+    "channel" : "NLJUG1",
+    "title" : "Context is a budget — spend it wisely",
+    "published" : "2026-11-23T16:33:33+00:00"
+  }, {
+    "id" : "jb-y1l9u56Y",
+    "channel" : "NLJUG1",
+    "title" : "Evolving language defaults in kotlin and other languages",
+    "published" : "2026-11-23T16:33:30+00:00"
+  }, {
+    "id" : "iYLSNdRXeDI",
+    "channel" : "NLJUG1",
+    "title" : "Level up your java streams with gatherers",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "isxqCcxaFa0",
+    "channel" : "NLJUG1",
+    "title" : "Hack your brain  smarter learning for devs",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "kYRxM1uoMJc",
+    "channel" : "NLJUG1",
+    "title" : "Back to the future  building a rag powered vr time machine",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "lLdF5B4g_KA",
+    "channel" : "NLJUG1",
+    "title" : "Why am i here",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "nKHE6BimQ6M",
+    "channel" : "NLJUG1",
+    "title" : "6000 tests, 25 times a day, 365 days a year   all for quality v2 720p",
+    "published" : "2026-11-23T16:33:29+00:00"
+  }, {
+    "id" : "ZPhTTHGCWTA",
+    "channel" : "NLJUG1",
+    "title" : "How can java applications leverage ahead of  time caching",
+    "published" : "2026-11-23T16:33:26+00:00"
+  }, {
+    "id" : "_PK2Et7Jsy0",
+    "channel" : "NLJUG1",
+    "title" : "Spring cleaning  what boot 4 lets you delete",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "ccDguMjvEeA",
+    "channel" : "NLJUG1",
+    "title" : "How ai lost the thread  the strange path from neurons to llms",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "gKH_3XdWIaI",
+    "channel" : "NLJUG1",
+    "title" : "Modernizing a 2m+ loc java monolith with agentic ai  what worked, what failed, and how we recovered",
+    "published" : "2026-11-23T16:33:25+00:00"
+  }, {
+    "id" : "8uTjEPTWi4M",
+    "channel" : "bienadam",
+    "title" : "Episode 6: Skills on a Server, One Prompt, Three Layers #java #llm #bce",
+    "published" : "2026-11-23T16:30:04+00:00"
+  }, {
+    "id" : "EBfUYxwk2-4",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Programming Heading Into 2027: The Levels of AI Agent Use",
+    "published" : "2026-11-23T16:11:23+00:00"
+  }, {
+    "id" : "-rT_zhVNfpY",
+    "channel" : "JetBrainsTV",
+    "title" : "The Dev Floor · Ep 1 – “The Issue With New Hires”",
+    "published" : "2026-11-23T14:05:14+00:00"
+  }, {
+    "id" : "PdIPHYCBVOs",
+    "channel" : "bienadam",
+    "title" : "📺🎙️Architectures, Clouds, Java, Agents, Web, LLMs 👉 153rd airhacks.tv Q & A #live #airhacks",
+    "published" : "2026-11-22T15:35:57+00:00"
+  }, {
+    "id" : "Xl8A6dTUbIE",
+    "channel" : "bienadam",
+    "title" : "About Event Sourcing",
+    "published" : "2026-11-22T15:02:19+00:00"
+  }, {
+    "id" : "yMg5tPmWJ98",
+    "channel" : "coffeesoftware",
+    "title" : "Dr. Venkat Subramaniam, live from Voxxed Days Thessaloniki",
+    "published" : "2026-11-22T02:07:14+00:00"
+  }, {
+    "id" : "dSh5O-_r8p0",
+    "channel" : "coffeesoftware",
+    "title" : "Dr. Heinz Kabutz, live from Voxxed Day Thessaloniki",
+    "published" : "2026-11-22T01:34:04+00:00"
+  }, {
+    "id" : "fJP3s1A5jGY",
+    "channel" : "java",
+    "title" : "Evolving the Java Language: An Inside Perspective",
+    "published" : "2026-11-21T10:00:08+00:00"
+  }, {
+    "id" : "4U3LP_HYmQs",
+    "channel" : "coffeesoftware",
+    "title" : "Brian Sam-Bodden on a Bootiful Podcast",
+    "published" : "2026-11-21T07:38:07+00:00"
+  }, {
+    "id" : "-ykW9dMHQGU",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session: Tools, Plugins, and Workflow Tweaks",
+    "published" : "2026-11-21T03:19:38+00:00"
+  }, {
+    "id" : "pme1eKkL_E4",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session: Tools, Plugins, and Workflow Tweaks",
+    "published" : "2026-11-21T03:15:14+00:00"
+  }, {
+    "id" : "AdO-NdzR_z8",
+    "channel" : "JetBrainsTV",
+    "title" : "The Last Software Engineer: Who Actually Makes It Out Alive? | Kent C. Dodds",
+    "published" : "2026-11-20T10:55:19+00:00"
+  }, {
+    "id" : "b5NKlwNUHXk",
+    "channel" : "JetBrainsTV",
+    "title" : "Engineering an AI-Native Frontend Workflow | Chrome, Figma, Storybook, MUI, Callstack, WebStorm",
+    "published" : "2026-11-20T10:51:00+00:00"
+  }, {
+    "id" : "buzyCem_kM0",
+    "channel" : "JetBrainsTV",
+    "title" : "How to Become an AI Engineer and Build a Career That Lasts| Marina Wyss",
+    "published" : "2026-11-20T10:46:23+00:00"
+  }, {
+    "id" : "VD1jaEAu9_8",
+    "channel" : "JetBrainsTV",
+    "title" : "Choose Wisely: Engineering the Branches Between Prompt and Outcome | Danny Thompson",
+    "published" : "2026-11-20T10:44:38+00:00"
+  }, {
+    "id" : "zv7IDjz62Dw",
+    "channel" : "JetBrainsTV",
+    "title" : "Rust & AI: Keeping Humans in the Loop",
+    "published" : "2026-11-20T05:23:37+00:00"
+  }, {
+    "id" : "TyO7mCgkvOU",
+    "channel" : "jakartaee",
+    "title" : "Contributing and onboarding | Why contribute to Jakarta EE and how to get started",
+    "published" : "2026-11-19T18:13:49+00:00"
+  }, {
+    "id" : "Q2mCXKsqOp8",
+    "channel" : "jakartaee",
+    "title" : "Technologies powered by Jakarta EE | How does Jakarta EE power the enterprise Java ecosystem",
+    "published" : "2026-11-19T18:11:07+00:00"
+  }, {
+    "id" : "pculEtkkYpw",
+    "channel" : "jakartaee",
+    "title" : "Jakarta EE compatibility | Why does Jakarta EE compatibility matter",
+    "published" : "2026-11-19T15:32:54+00:00"
+  }, {
+    "id" : "ppXgQx3OVg4",
+    "channel" : "jakartaee",
+    "title" : "Become a member | Why should your organisation join the Jakarta EE Working Group",
+    "published" : "2026-11-19T15:05:49+00:00"
+  }, {
+    "id" : "Wy4pfglazFg",
+    "channel" : "sivalabs",
+    "title" : "mise: One Tool To Rule Them All",
+    "published" : "2026-11-19T09:41:17+00:00"
+  }, {
+    "id" : "xE7EfRg5z8M",
+    "channel" : "azulsystems",
+    "title" : "Azul Account Executive Steven Piper Shares Security Insights",
+    "published" : "2026-11-18T16:19:35+00:00"
+  }, {
+    "id" : "EijreHWhQ8E",
+    "channel" : "intellijidea",
+    "title" : "MCP & Agent Skills Security: How Agents Get Hacked - Brian Vermeer | IntelliJ IDEA Tech Talks",
+    "published" : "2026-11-18T16:00:38+00:00"
+  }, {
+    "id" : "wkQCb3FbVRI",
+    "channel" : "bienadam",
+    "title" : "Episode 5: Skills as Rails, Steering What the Model Knows #java #llm #bce",
+    "published" : "2026-11-18T13:23:04+00:00"
+  }, {
+    "id" : "jRBscOi1RUk",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session with Jakub and Patrick",
+    "published" : "2026-11-18T12:18:05+00:00"
+  }, {
+    "id" : "9YTaCRS2X7s",
+    "channel" : "hszanowski",
+    "title" : "IntelliJ Platform Hack Session with Jakub and Patrick",
+    "published" : "2026-11-18T12:02:09+00:00"
+  }, {
+    "id" : "2kkvXR-J45E",
+    "channel" : "Kotlin",
+    "title" : "Kotlin Coroutines: Full 4-Hour Course",
+    "published" : "2026-11-18T10:28:40+00:00"
+  }, {
+    "id" : "kjc19Z9aN-E",
+    "channel" : "JetBrainsTV",
+    "title" : "Cross-Database Queries in DataGrip",
+    "published" : "2026-11-18T03:51:46+00:00"
+  }, {
+    "id" : "zuXWzeFxBlw",
+    "channel" : "JetBrainsTV",
+    "title" : "Opening Keynote",
+    "published" : "2026-11-17T22:10:17+00:00"
+  }, {
+    "id" : "b0iCLZyGsOU",
+    "channel" : "JetBrainsTV",
+    "title" : "Dependency Assistant: An IntelliJ Plugin That Started With a Prompt",
+    "published" : "2026-11-17T22:10:14+00:00"
+  }, {
+    "id" : "8u0Wk-gm2DQ",
+    "channel" : "JetBrainsTV",
+    "title" : "Building Language Plugins With the Native LSP API",
+    "published" : "2026-11-17T22:10:10+00:00"
+  }, {
+    "id" : "iYQdxxK4BAc",
+    "channel" : "JetBrainsTV",
+    "title" : "Integrating a Web-Based Profiler Into IntelliJ IDEA",
+    "published" : "2026-11-17T22:10:07+00:00"
+  }, {
+    "id" : "kN64x0pMjZc",
+    "channel" : "JetBrainsTV",
+    "title" : "Your Plugin's Second Service: Architecture for Integrations That Grow",
+    "published" : "2026-11-17T22:10:04+00:00"
+  }, {
+    "id" : "0q7mBIqjj_4",
+    "channel" : "JetBrainsTV",
+    "title" : "EelApi: Taking Your Plugin From Local to WSL and Dev Containers",
+    "published" : "2026-11-17T22:10:00+00:00"
+  }, {
+    "id" : "vhb9bzJ-aRA",
+    "channel" : "anahata108",
+    "title" : "Tracking Real Asteroid Orbits in Pure JavaFX with NetBeans",
+    "published" : "2026-11-17T18:21:59+00:00"
+  }, {
+    "id" : "zsnSF5vqFr8",
+    "channel" : "Kotlin",
+    "title" : "Build your app idea with Kotlin Toolchain and Multiplatform",
+    "published" : "2026-11-17T14:51:48+00:00"
+  }, {
+    "id" : "fHl9OMLe7Lg",
+    "channel" : "virtualJUG",
+    "title" : "Solving the challenges of Java ecosystems in the AI world by Mikhail Polivakha",
+    "published" : "2026-11-16T18:34:46+00:00"
+  }, {
+    "id" : "a7X2fs0ixaM",
+    "channel" : "bienadam",
+    "title" : "Episode 4: AGENTS.md, The File the Agent Reads First #java #llm #bce",
+    "published" : "2026-11-16T17:00:37+00:00"
+  }, {
+    "id" : "iLsLhqUOOPw",
+    "channel" : "java",
+    "title" : "Why It Takes 3000 Commits to Bring Valhalla’s Value Objects to the JDK",
+    "published" : "2026-11-16T10:45:10+00:00"
+  }, {
+    "id" : "s2ITSa-RKR8",
+    "channel" : "anahata108",
+    "title" : "Pure-JavaFX 3D Planetary Engine - Continuous Horizon LOD & 3D Topographic Wireframe Relief",
+    "published" : "2026-11-14T13:34:34+00:00"
+  }, {
+    "id" : "Q9EIBoek2zc",
+    "channel" : "FrankDelporte",
+    "title" : "Security Is Your Job: OWASP, AI and Safer Java Dependencies with Jim Manico (Foojay Podcast #105)",
+    "published" : "2026-11-14T10:17:36+00:00"
+  }, {
+    "id" : "44sLqD-0Sxk",
+    "channel" : "java",
+    "title" : "Adaptive Heap Sizing + Numeric Conversion + Primitive Patterns - Inside Java Newscast #117",
+    "published" : "2026-11-14T09:00:34+00:00"
+  }, {
+    "id" : "1yw6urMoLf0",
+    "channel" : "coffeesoftware",
+    "title" : "CloudFoundry on your Laptop!",
+    "published" : "2026-11-14T08:19:50+00:00"
+  }, {
+    "id" : "Cg-EYddICMs",
+    "channel" : "coffeesoftware",
+    "title" : "Microsoft's Patrick Chanezon on a Bootiful Podcast",
+    "published" : "2026-11-14T06:21:06+00:00"
+  }, {
+    "id" : "HF9044iI1XQ",
+    "channel" : "JetBrainsTV",
+    "title" : "JetBrains AI.JS Day 2026",
+    "published" : "2026-11-13T18:02:27+00:00"
+  }, {
+    "id" : "CKlYhzEE_Ao",
+    "channel" : "hszanowski",
+    "title" : "JetBrains co-working stream",
+    "published" : "2026-11-13T13:35:07+00:00"
+  }, {
+    "id" : "yQ22bZcSTmU",
+    "channel" : "hszanowski",
+    "title" : "Let’s Replace the JetBrains IDEs Splash Screen | Live Coding",
+    "published" : "2026-11-13T01:14:52+00:00"
+  }, {
+    "id" : "f3oODzMvaIY",
+    "channel" : "JetBrainsTV",
+    "title" : "Live coding Rust with Air in RustRover",
+    "published" : "2026-11-12T21:10:24+00:00"
+  }, {
+    "id" : "Py9cXHtg0N0",
+    "channel" : "bienadam",
+    "title" : "How Behaviour-Driven Development (BDD) Happened",
+    "published" : "2026-11-12T18:08:28+00:00"
+  }, {
+    "id" : "ooYkI7FHrSc",
+    "channel" : "sivalabs",
+    "title" : "AI Agentic Development : Use AI as an Amplifier",
+    "published" : "2026-11-12T04:15:19+00:00"
+  }, {
+    "id" : "n8-jccBvF_I",
+    "channel" : "coffeesoftware",
+    "title" : "Agent Client Protocol with Mark Pollack",
+    "published" : "2026-11-11T17:48:37+00:00"
+  }, {
+    "id" : "cnXMqAlst1Y",
+    "channel" : "coffeesoftware",
+    "title" : "AGNTCon 2026 - Alexander Ioffe",
+    "published" : "2026-11-11T16:19:00+00:00"
+  }, {
+    "id" : "n6PFNJBol70",
+    "channel" : "coffeesoftware",
+    "title" : "AGNTCon 2026 - Ben Hale",
+    "published" : "2026-11-11T16:18:56+00:00"
+  }, {
+    "id" : "H5MokJlWdWg",
+    "channel" : "coffeesoftware",
+    "title" : "AGNTCon 2026 - Shadaj Laddad",
+    "published" : "2026-11-11T16:18:52+00:00"
+  }, {
+    "id" : "K929Nyop64c",
+    "channel" : "bienadam",
+    "title" : "Episode 3: BCE from Memory, Refactoring Without a Skill #java #llm #bce",
+    "published" : "2026-11-11T15:45:19+00:00"
+  }, {
+    "id" : "_AB0U7g0nsY",
+    "channel" : "JetBrainsTV",
+    "title" : "Run agents and verify their work right inside WebStorm, with JetBrains Air",
+    "published" : "2026-11-11T11:22:32+00:00"
+  }, {
+    "id" : "7rZYf3FcS0g",
+    "channel" : "JetBrainsTV",
+    "title" : "Air Is Now in Every JetBrains IDE. Here’s Why.",
+    "published" : "2026-11-11T09:36:57+00:00"
+  }, {
+    "id" : "ur4r12eBnUY",
+    "channel" : "bienadam",
+    "title" : "Episode 2: Brownfield Templates, The Model Imitates What It Finds #java #llm #bce",
+    "published" : "2026-11-10T20:50:57+00:00"
+  }, {
+    "id" : "Wq4TrsyD8Jo",
+    "channel" : "JetBrainsTV",
+    "title" : "JetBrains Plugin Developer Conf 2026",
+    "published" : "2026-11-10T18:09:40+00:00"
+  }, {
+    "id" : "g_uTkX6eYdA",
+    "channel" : "cbrjar",
+    "title" : "Lombok in Modern Java: What Records Replace and What They Don't",
+    "published" : "2026-11-10T17:09:49+00:00"
+  }, {
+    "id" : "fjlS_-BPpmc",
+    "channel" : "cbrjar",
+    "title" : "Beyond the JVM: A New Approach to Building and Running Code with Elide",
+    "published" : "2026-11-10T13:42:11+00:00"
+  }, {
+    "id" : "DKgJRHRo26I",
+    "channel" : "anahata108",
+    "title" : "Tracking Every Live Flight on a 3D JavaFX Earth",
+    "published" : "2026-11-10T10:03:42+00:00"
+  }, {
+    "id" : "4XwahOuKBFU",
+    "channel" : "virtualJUG",
+    "title" : "From JDBC to Database Control Planes: 30 Years of Java Database Connectivity by Rogerio Robetti",
+    "published" : "2026-11-10T09:12:26+00:00"
+  }, {
+    "id" : "X47e9LPvb0E",
+    "channel" : "bienadam",
+    "title" : "152nd airhacks tv: Expertise vs LLMs, BCE Boundaries, Transactions, Spec-Driven BCE #airhacks #live",
+    "published" : "2026-11-09T15:55:48+00:00"
+  }, {
+    "id" : "U0HJBXSLHLY",
+    "channel" : "Kotlin",
+    "title" : "Spring WebFlux | Add Kotlin Coroutines to an Existing Java App | Hands-On Demo",
+    "published" : "2026-11-09T12:50:17+00:00"
+  }, {
+    "id" : "Z2ZyqJ3aanQ",
+    "channel" : "JetBrainsWDYT",
+    "title" : "We don't need IDEs anymore?",
+    "published" : "2026-11-09T10:30:15+00:00"
+  }, {
+    "id" : "8dgnng27kMo",
+    "channel" : "java",
+    "title" : "Java and the Next Generation of Programming Models",
+    "published" : "2026-11-08T10:45:10+00:00"
+  }, {
+    "id" : "ioR5aE9uEbc",
+    "channel" : "anahata108",
+    "title" : "WW3 Simulator - Live C4ISR 3D Globe & London Traffic CCTV Video Grid",
+    "published" : "2026-11-07T20:16:54+00:00"
+  }, {
+    "id" : "s0amssv6BcM",
+    "channel" : "sivalabs",
+    "title" : "Working with Latest Technologies using AI Coding Agents",
+    "published" : "2026-11-07T11:03:33+00:00"
+  }, {
+    "id" : "thoZfH03MYs",
+    "channel" : "bienadam",
+    "title" : "CDI Boot Before Quarkus",
+    "published" : "2026-11-06T18:58:04+00:00"
+  }, {
+    "id" : "QUZM_Jm4ZZo",
+    "channel" : "anahata108",
+    "title" : "JavaFX WW3 Simulator - Live Global Strategic C4ISR & Nuclear Defcon Simulation",
+    "published" : "2026-11-06T11:42:22+00:00"
+  }, {
+    "id" : "hVvNZq7MTdU",
+    "channel" : "bienadam",
+    "title" : "Episode 1: LLM Native Knowledge, Two Billion Parameters, Four Questions #java #llm #bce",
+    "published" : "2026-11-05T14:00:37+00:00"
+  }, {
+    "id" : "OL4GWogRDMc",
+    "channel" : "JetBrainsTV",
+    "title" : "What’s New in WebStorm 2026.3: New Frontend Workflow, JetBrains Air in WebStorm, and More",
+    "published" : "2026-11-05T13:22:44+00:00"
+  }, {
+    "id" : "Ujlz_8xGJlE",
+    "channel" : "coffeesoftware",
+    "title" : "Zoran Sevarac and Deep Netts on a Bootiful Podcast",
+    "published" : "2026-11-05T12:55:01+00:00"
+  }, {
+    "id" : "c_8ElIjbstk",
+    "channel" : "java",
+    "title" : "Valhalla? AI? Better Modules? String Templates? - Ask the Architects at Devoxx 2026",
+    "published" : "2026-11-05T09:00:08+00:00"
+  }, {
+    "id" : "MRLYxerW5nI",
+    "channel" : "intellijidea",
+    "title" : "What's new in IntelliJ IDEA 2026.3",
+    "published" : "2026-11-05T08:45:36+00:00"
+  }, {
+    "id" : "A5PDHt5XXZ0",
+    "channel" : "intellijidea",
+    "title" : "Reliable Background Jobs in Java with JobRunr - Ronald Dehuysser | IntelliJ IDEA Tech Talks",
+    "published" : "2026-11-04T16:00:27+00:00"
+  }, {
+    "id" : "hY6w-_IqDaE",
+    "channel" : "hszanowski",
+    "title" : "Something something Gradle plugins, co-stream",
+    "published" : "2026-11-03T11:32:59+00:00"
+  }, {
+    "id" : "JJhhbkXkDUo",
+    "channel" : "coffeesoftware",
+    "title" : "CloudFoundry: the Fastest Inner-Loop and the Fastest Path to Production",
+    "published" : "2026-11-03T11:05:32+00:00"
+  }, {
+    "id" : "01uRM3je12Y",
+    "channel" : "java",
+    "title" : "Project Detroit: From Foreign Libraries to Foreign Language Runtimes",
+    "published" : "2026-11-03T11:00:26+00:00"
+  }, {
+    "id" : "Sw5-c8-lmy0",
+    "channel" : "java",
+    "title" : "Java Modernization @ LinkedIn",
+    "published" : "2026-11-01T11:00:34+00:00"
+  }, {
+    "id" : "fHkVkF3Pkv0",
+    "channel" : "sivalabs",
+    "title" : "Spec Driven Development - Don't Make Your AI Agent Guess What's In Your Mind",
+    "published" : "2026-11-01T04:33:26+00:00"
+  }, {
+    "id" : "Ss3mZMgNaZE",
+    "channel" : "FrankDelporte",
+    "title" : "53 CVEs and Two Emergency Releases: Why Java Security Holds Up (Foojay Podcast #104)",
+    "published" : "2026-10-31T08:04:10+00:00"
+  }, {
+    "id" : "3KxfvBWL1OY",
+    "channel" : "cbrjar",
+    "title" : "JVM vs JDK vs JRE: What's the Difference?",
+    "published" : "2026-10-30T09:17:28+00:00"
+  }, {
+    "id" : "mQqwAmQBkss",
+    "channel" : "Kotlin",
+    "title" : "Inside Kotlin's Language Design | KotlinConfersations",
+    "published" : "2026-10-29T14:55:44+00:00"
+  }, {
+    "id" : "LEBdgYS0Lc4",
+    "channel" : "java",
+    "title" : "Immutable Data Beyond Value Classes [AtA] Inside Java Podcast 73",
+    "published" : "2026-10-29T09:38:31+00:00"
+  }, {
+    "id" : "FwniUR6j32w",
+    "channel" : "coffeesoftware",
+    "title" : "Vaadin's Leif Åstrand and Marcus Hellberg",
+    "published" : "2026-10-29T06:16:48+00:00"
+  }, {
+    "id" : "Aw-WpSlxzHU",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talk  Live Coding  Sub second live reload without IDE plugins",
+    "published" : "2026-10-28T13:14:21+00:00"
+  }, {
+    "id" : "r2VkVftW7OE",
+    "channel" : "intellijidea",
+    "title" : "RoboCoders: Judgment Day: AI Agents Face Off by Baruch Sadogursky and Viktor Gamov",
+    "published" : "2026-10-28T12:00:06+00:00"
+  }, {
+    "id" : "l7fRDT5TuyE",
+    "channel" : "JetBrainsTV",
+    "title" : "Air in IDEs – Part 1 | Create a Session and Track Your Agents' Work",
+    "published" : "2026-10-28T11:11:18+00:00"
+  }, {
+    "id" : "jn3_LokDyCw",
+    "channel" : "azulsystems",
+    "title" : "JDK 27: Post-Quantum Java Arrives - Webinar",
+    "published" : "2026-10-27T15:30:24+00:00"
+  }, {
+    "id" : "1KC5MEM2-U4",
+    "channel" : "Kotlin",
+    "title" : "Can Kotlin Handle Low-Latency Audio? | Phil Burk",
+    "published" : "2026-10-27T14:45:43+00:00"
+  }, {
+    "id" : "-AjYEYmRLmQ",
+    "channel" : "java",
+    "title" : "Java Secure Coding Guidelines",
+    "published" : "2026-10-27T11:00:37+00:00"
+  }, {
+    "id" : "OUvxqt3GlcA",
+    "channel" : "JetBrainsTV",
+    "title" : "Air Teams Walkthrough: Automations, Shared Cloud Environments, and Tasks",
+    "published" : "2026-10-26T20:37:44+00:00"
+  }, {
+    "id" : "5pKFt0l1Tjs",
+    "channel" : "JetBrainsTV",
+    "title" : "Scaling Rust in the Enterprise: What Changes When Rust Gets Big",
+    "published" : "2026-10-26T16:35:36+00:00"
+  }, {
+    "id" : "OkDjxJsSi64",
+    "channel" : "intellijidea",
+    "title" : "SDD With AI Agents From High-Level Requirements to Working Software by Anton Arhipov",
+    "published" : "2026-10-26T12:00:13+00:00"
+  }, {
+    "id" : "H-Xtukxd1ao",
+    "channel" : "sivalabs",
+    "title" : "Harness Engineering for Java and Spring Boot Applications",
+    "published" : "2026-10-26T03:45:17+00:00"
+  }, {
+    "id" : "1d9t8R20V10",
+    "channel" : "java",
+    "title" : "Java Performance Update - 2026",
+    "published" : "2026-10-25T11:45:09+00:00"
+  }, {
+    "id" : "UWTrIgsxAaE",
+    "channel" : "hszanowski",
+    "title" : "My AI Agents Have Pets Now 🐾 | Air Pets for JetBrains IDEs",
+    "published" : "2026-10-23T13:57:40+00:00"
+  }, {
+    "id" : "TB2Xn9zPkuY",
+    "channel" : "azulsystems",
+    "title" : "Webinar: Modernizing Enterprise Java Applications: Jakarta EE, Spring Boot, and AI Integration",
+    "published" : "2026-10-23T12:13:31+00:00"
+  }, {
+    "id" : "zfDR7N8a9nA",
+    "channel" : "azulsystems",
+    "title" : "Payara Customer Stories | Virtual Payara Conference December 2024",
+    "published" : "2026-10-23T12:11:38+00:00"
+  }, {
+    "id" : "xeHgmKTt_TA",
+    "channel" : "azulsystems",
+    "title" : "Webinar: Insights on Enterprise Java: Current Trends, Challenges and Strategies",
+    "published" : "2026-10-23T12:05:59+00:00"
+  }, {
+    "id" : "kZbVqMCpvMA",
+    "channel" : "azulsystems",
+    "title" : "Webinar: High-Frequency Trading on Jakarta EE: GC Stress Testing with Azul C4 & Payara Micro",
+    "published" : "2026-10-23T12:03:45+00:00"
+  }, {
+    "id" : "B0scu01InUI",
+    "channel" : "azulsystems",
+    "title" : "Customer Roundtable Discussion | Virtual Payara Conference 2023",
+    "published" : "2026-10-23T12:00:35+00:00"
+  }, {
+    "id" : "O9blqgaMmCI",
+    "channel" : "azulsystems",
+    "title" : "Customer Success Story: Migrating from WebLogic to Payara Server | Virtual Payara Conference 2023",
+    "published" : "2026-10-23T11:57:48+00:00"
+  }, {
+    "id" : "_9NiyuaOJ64",
+    "channel" : "intellijidea",
+    "title" : "Accelerating Maven Builds From a Snail's Pace snail to Rocket Speed rocket by Maarten Mulders",
+    "published" : "2026-10-23T11:00:23+00:00"
+  }, {
+    "id" : "8n7WONyX0yk",
+    "channel" : "FrankDelporte",
+    "title" : "Click Any Note and Fly Through the Score in 3D: Sheet Music and LilyPond in Java (Sheetmusic4J)",
+    "published" : "2026-10-22T14:27:04+00:00"
+  }, {
+    "id" : "eKgy_1bdoRk",
+    "channel" : "hszanowski",
+    "title" : "Coding live: open source, JetBrains, plugins & Gradle — bring your questions | DISTURB ME | Oct 21st",
+    "published" : "2026-10-22T10:48:22+00:00"
+  }, {
+    "id" : "tx4K7RjBvmU",
+    "channel" : "java",
+    "title" : "What's Going Wrong with My JVM?! A Guide to First-Time Failure Diagnosis",
+    "published" : "2026-10-22T10:45:16+00:00"
+  }, {
+    "id" : "4sD6KatvrsY",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talk - Agentic AI: Transforming High-Velocity Data Workflow Performance",
+    "published" : "2026-10-22T09:45:25+00:00"
+  }, {
+    "id" : "Rf2U1tubj6E",
+    "channel" : "sivalabs",
+    "title" : "Agent Skills - Give Guidelines & Additional Capabilities to AI Agents",
+    "published" : "2026-10-22T03:45:00+00:00"
+  }, {
+    "id" : "FaNxoP41fIM",
+    "channel" : "cbrjar",
+    "title" : "Spring Boot in Docker: 11 Steps to a Production Image",
+    "published" : "2026-10-21T16:03:27+00:00"
+  }, {
+    "id" : "xBNBjYH-foE",
+    "channel" : "intellijidea",
+    "title" : "Inside Gradle: Build Scans, Flaky Tests, and AI Agents - Stefan Wolf | IntelliJ IDEA Tech Talks",
+    "published" : "2026-10-21T15:00:37+00:00"
+  }, {
+    "id" : "dvikFeZZOxI",
+    "channel" : "otaviojava",
+    "title" : "☕ Stop Comparing Programming Languages with Hello World!",
+    "published" : "2026-10-20T15:03:13+00:00"
+  }, {
+    "id" : "jXpGFIt7AgQ",
+    "channel" : "Kotlin",
+    "title" : "Inside Airbnb's UI Motion Architecture | KotlinConfersations",
+    "published" : "2026-10-20T11:00:20+00:00"
+  }, {
+    "id" : "_1fi5GaWXxY",
+    "channel" : "java",
+    "title" : "Reflect, Transform, Accelerate: Bringing GPU Computing to Java",
+    "published" : "2026-10-20T10:53:47+00:00"
+  }, {
+    "id" : "_cgW1UoVzwA",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talk - An AgTech application with JAKARTA EE 10",
+    "published" : "2026-10-19T20:02:51+00:00"
+  }, {
+    "id" : "Td_lzqDSGIE",
+    "channel" : "hszanowski",
+    "title" : "Give Your JetBrains IDE Some Atmosphere | IDE Atmosphere",
+    "published" : "2026-10-19T15:13:38+00:00"
+  }, {
+    "id" : "SmNeCg94LGY",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Livestream Spanish 2026 — Closing Remarks",
+    "published" : "2026-10-19T13:29:03+00:00"
+  }, {
+    "id" : "BMdPrymhWKA",
+    "channel" : "jakartaee",
+    "title" : "Otávio Santana — Java Enterprise in the Data Age: Simplifying Persistence inside Complex Systems",
+    "published" : "2026-10-19T13:28:03+00:00"
+  }, {
+    "id" : "hkV8jcX-iyY",
+    "channel" : "jakartaee",
+    "title" : "Emerson Castaneda — Community Observability",
+    "published" : "2026-10-19T13:27:13+00:00"
+  }, {
+    "id" : "QnDVYSd2-Tw",
+    "channel" : "jakartaee",
+    "title" : "Alfonso Valdez Altamirano — Jakarta Agentic AI with Payara Server",
+    "published" : "2026-10-19T13:25:50+00:00"
+  }, {
+    "id" : "pDtg645qbp8",
+    "channel" : "jakartaee",
+    "title" : "Diego Silva Límaco — Construyendo aplicaciones Jakarta EE de forma incremental con Coffee Builder",
+    "published" : "2026-10-19T13:25:02+00:00"
+  }, {
+    "id" : "9VMe-CdyGPI",
+    "channel" : "jakartaee",
+    "title" : "Louise Castens — Vendor session",
+    "published" : "2026-10-19T13:24:07+00:00"
+  }, {
+    "id" : "ZwiS995c-Jo",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Livestream Spanish 2026 — Warm up session",
+    "published" : "2026-10-19T13:23:01+00:00"
+  }, {
+    "id" : "y8HtFI5JNlE",
+    "channel" : "intellijidea",
+    "title" : "Sandboxing AI Agents With GraalVM by Thomas Wuerthinger | IntelliJ IDEA Conf 2026",
+    "published" : "2026-10-19T11:00:14+00:00"
+  }, {
+    "id" : "uzsz4qdTiOY",
+    "channel" : "sivalabs",
+    "title" : "Vibe Coding Application Mockup using Playwright MCP",
+    "published" : "2026-10-19T04:00:20+00:00"
+  }, {
+    "id" : "smHzWWNOyMU",
+    "channel" : "FrankDelporte",
+    "title" : "Killing Reflection at Build Time: Avro, Codename One and Java Code Generation (Foojay Podcast #103)",
+    "published" : "2026-10-17T10:34:00+00:00"
+  }, {
+    "id" : "tn2lsyvzMvE",
+    "channel" : "java",
+    "title" : "OpenJDK Bug Fixing, JavaOne, and JDK 28 - Inside Java Newscast #116",
+    "published" : "2026-10-17T08:00:35+00:00"
+  }, {
+    "id" : "jfHdEAy-QWk",
+    "channel" : "intellijidea",
+    "title" : "Six and a Half Ridiculous Things to Do With Quarkus by Holly Cummins | IntelliJ IDEA Conf 2026",
+    "published" : "2026-10-16T11:00:00+00:00"
+  }, {
+    "id" : "2f0LUg5_GvQ",
+    "channel" : "cbrjar",
+    "title" : "Java Docker Images in 2026: From 331 MB to 28 MB",
+    "published" : "2026-10-15T15:13:04+00:00"
+  }, {
+    "id" : "hb91v5a1VlU",
+    "channel" : "intellijidea",
+    "title" : "IntelliJ IDEA's Java and Kotlin for Cursor and VS Code Hits 1.0",
+    "published" : "2026-10-15T13:01:51+00:00"
+  }, {
+    "id" : "rL3sWS_8b-g",
+    "channel" : "java",
+    "title" : "How does Java fit into the world of AI—and how can it become an even better fit?",
+    "published" : "2026-10-15T10:45:10+00:00"
+  }, {
+    "id" : "e7Nmx0ao8bI",
+    "channel" : "NLJUG1",
+    "title" : "Teachers Unconference Pim Tegelaar Hanno Embregts",
+    "published" : "2026-10-14T11:13:21+00:00"
+  }, {
+    "id" : "Ko9VEOHhzoE",
+    "channel" : "intellijidea",
+    "title" : "From Chat to Goals Practical Autonomous Agents for Java Development by Mark Pollack",
+    "published" : "2026-10-14T11:00:23+00:00"
+  }, {
+    "id" : "UplE4SLsHxg",
+    "channel" : "sivalabs",
+    "title" : "IntelliJ IDEA + JetBrains Air = IDE and ADE (Agentic Development Environment)",
+    "published" : "2026-10-14T05:23:28+00:00"
+  }, {
+    "id" : "TB45qqp-OxM",
+    "channel" : "DevoxxForever",
+    "title" : "10 Billion Records vs The Regulator: An Architectural Post Mortem of an 11TB Exadata Failure",
+    "published" : "2026-10-13T16:51:18+00:00"
+  }, {
+    "id" : "jhvT8hVYSvQ",
+    "channel" : "DevoxxForever",
+    "title" : "In the loop , not in the dark: Staying in controlling the era dark software factories   By Alex Gavr",
+    "published" : "2026-10-13T16:45:25+00:00"
+  }, {
+    "id" : "lUB15M3mMLs",
+    "channel" : "DevoxxForever",
+    "title" : "Escaping Java's Allocation Gravity with Value Classes By Clément de Tastes, Remi Forax",
+    "published" : "2026-10-13T16:45:25+00:00"
+  }, {
+    "id" : "niBYuCuViGw",
+    "channel" : "DevoxxForever",
+    "title" : "We created our own AI orchestrator and it became so much more!  by Ricky van Rijn",
+    "published" : "2026-10-13T16:45:25+00:00"
+  }, {
+    "id" : "ufhs9THbYZI",
+    "channel" : "DevoxxForever",
+    "title" : "Java Next   From Valhalla to Leyden, from Babylon to Panama, from Amber to Detroit By Nicolai Parlog",
+    "published" : "2026-10-13T16:45:25+00:00"
+  }, {
+    "id" : "wrV4f83UMWI",
+    "channel" : "DevoxxForever",
+    "title" : "Is AI killing XP practices? Or are we letting it? By Nacho Cougil",
+    "published" : "2026-10-13T16:45:25+00:00"
+  }, {
+    "id" : "AmL_OCs5F4E",
+    "channel" : "DevoxxForever",
+    "title" : "Strangling the dragon: modernizing legacy systems with the Strangler Fig pattern   by Daniel Ranela",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "D_AmK8-UnZg",
+    "channel" : "DevoxxForever",
+    "title" : "Why it takes 3000 commits to bring Valhalla's value objects to the JDK by David Simms",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "DniA37kVfvI",
+    "channel" : "DevoxxForever",
+    "title" : "Embabel Agent v1 5 By Rod Johnson",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "Go76-9Q51wU",
+    "channel" : "DevoxxForever",
+    "title" : "What’s happening with Project Amber? By Gavin Bierman",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "LIGVpEuIrrY",
+    "channel" : "DevoxxForever",
+    "title" : "My old trains have a second life, with TinyGo! By Florian FORESTIER, Justine Bachelard",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "Qg7Uu_XBvpI",
+    "channel" : "DevoxxForever",
+    "title" : "10 boring reasons why Java is the best ecosystem for agentic development By Ed Burns",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "SoWgxHeAPGU",
+    "channel" : "DevoxxForever",
+    "title" : "You thought technical debt was bad? Meet design debt!  by Julien Topçu, Josian Chevalier",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "Spxl1eDQJKs",
+    "channel" : "DevoxxForever",
+    "title" : "The Quantum Tech Lead: Hands On and Abstract at the Same Time  by Cristian Schuszter",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "TgkY2UmWtBo",
+    "channel" : "DevoxxForever",
+    "title" : "All you need to know about Maven 4!  by Matthias Bünger",
+    "published" : "2026-10-13T16:45:20+00:00"
+  }, {
+    "id" : "5Pdkj4lbTuc",
+    "channel" : "hszanowski",
+    "title" : "Investigate UI Freezes in Your JetBrains Plugin",
+    "published" : "2026-10-13T15:19:14+00:00"
+  }, {
+    "id" : "Ws_t0rxnv4Y",
+    "channel" : "java",
+    "title" : "Everyday JSON in Java",
+    "published" : "2026-10-13T10:45:02+00:00"
+  }, {
+    "id" : "yv7xywZVd8I",
+    "channel" : "cbrjar",
+    "title" : "Axelix: Controlling the Quality of Spring Boot Apps in the AI Era",
+    "published" : "2026-10-13T05:47:02+00:00"
+  }, {
+    "id" : "N9oRJj7516M",
+    "channel" : "Kotlin",
+    "title" : "KMP Contest Winners | KotlinConfersations 2026",
+    "published" : "2026-10-12T13:00:27+00:00"
+  }, {
+    "id" : "Ijdk06qjtdo",
+    "channel" : "intellijidea",
+    "title" : "Bootiful IntelliJ IDEA by Josh Long | IntelliJ IDEA Conf 2026",
+    "published" : "2026-10-12T11:00:06+00:00"
+  }, {
+    "id" : "P5E1nSYNfq0",
+    "channel" : "sivalabs",
+    "title" : "Scaffolding Spring Boot Application using Progen CLI",
+    "published" : "2026-10-12T04:00:24+00:00"
+  }, {
+    "id" : "C6J-bYqScDE",
+    "channel" : "hszanowski",
+    "title" : "Foldable Project View demo",
+    "published" : "2026-10-11T19:36:32+00:00"
+  }, {
+    "id" : "OFkF30sJfrw",
+    "channel" : "intellijidea",
+    "title" : "Codepocalypse Now LangChain4j vs JetBrains Koog by Baruch Sadogursky and Viktor Gamov",
+    "published" : "2026-10-09T10:00:24+00:00"
+  }, {
+    "id" : "Ymx4hwCsia4",
+    "channel" : "cbrjar",
+    "title" : "JSpecify Explained: 10 Questions About Null Safety in Java",
+    "published" : "2026-10-08T16:49:55+00:00"
+  }, {
+    "id" : "VuZaEk5hlg4",
+    "channel" : "sivalabs",
+    "title" : "Brainstorming the Idea and Create PRD with AI",
+    "published" : "2026-10-08T04:30:15+00:00"
+  }, {
+    "id" : "hEnSy8vlK10",
+    "channel" : "intellijidea",
+    "title" : "Unit Test Your Java Architecture With ArchUnit - Roland Weisleder | IntelliJ IDEA Tech Talks",
+    "published" : "2026-10-07T15:00:22+00:00"
+  }, {
+    "id" : "5xgQ8yQBfag",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talks - Expect the Unexpected: Handling Exceptions in Enterprise Applications",
+    "published" : "2026-10-06T16:01:38+00:00"
+  }, {
+    "id" : "1m1ySWWFcZ8",
+    "channel" : "intellijidea",
+    "title" : "Safeguarding YOLO Developer Workflows With Docker by Oleg Šelajev | IntelliJ IDEA Conf 2026",
+    "published" : "2026-10-05T11:00:08+00:00"
+  }, {
+    "id" : "tmMwM1c8PAc",
+    "channel" : "sivalabs",
+    "title" : "Building with AI Agents From Idea to Production -  Course Announcement",
+    "published" : "2026-10-05T03:34:41+00:00"
+  }, {
+    "id" : "0rQ2_UF7N1I",
+    "channel" : "FrankDelporte",
+    "title" : "We Left WordPress: CMS vs Static Sites, Hugo vs Jekyll vs Roq (Foojay Podcast #102)",
+    "published" : "2026-10-03T15:00:11+00:00"
+  }, {
+    "id" : "jaLJ-uEHC6I",
+    "channel" : "intellijidea",
+    "title" : "The Past, Present, and Future of Enterprise Java by Ivar Grimstad | IntelliJ IDEA Conf 2026",
+    "published" : "2026-10-02T11:00:09+00:00"
+  }, {
+    "id" : "pdjn2y2vF10",
+    "channel" : "anahata108",
+    "title" : "Pure JavaFX Minecraft running on NetBeans - Anahata ASI",
+    "published" : "2026-10-01T19:57:14+00:00"
+  }, {
+    "id" : "GkvnkCxA-nk",
+    "channel" : "azulsystems",
+    "title" : "Your GPU Bill Isn't the Whole Story: The Hidden JVM Drag on AI Infrastructure.",
+    "published" : "2026-09-30T22:29:32+00:00"
+  }, {
+    "id" : "6o4_uHlmLZ0",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Can skills actually save tokens?",
+    "published" : "2026-09-30T11:00:29+00:00"
+  }, {
+    "id" : "nw6C6WNZO54",
+    "channel" : "cbrjar",
+    "title" : "JRush Ep 8 - Java in the Age of AI",
+    "published" : "2026-09-29T18:43:56+00:00"
+  }, {
+    "id" : "ZSWy4ZIE9Ho",
+    "channel" : "anahata108",
+    "title" : "IntelliJ Smoke Test - Anahata ASI",
+    "published" : "2026-09-27T18:00:27+00:00"
+  }, {
+    "id" : "O-ZWYKnJMN8",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Commander Keen 1990 Cyber-Arcade | Episode 1: Marooned on Mars! Anahata ASI",
+    "published" : "2026-09-27T17:24:45+00:00"
+  }, {
+    "id" : "g1clUPLLH9s",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade | Level 3: Blockers & Builders! Anahata ASI",
+    "published" : "2026-09-27T16:24:42+00:00"
+  }, {
+    "id" : "M0PQoCZSDdo",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade | Level 3: Blockers & Builders! Anahata ASI",
+    "published" : "2026-09-27T16:06:12+00:00"
+  }, {
+    "id" : "KGwyurC06m0",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade Edition | Level 2: Only Floaters Can Survive This! Anahata ASI",
+    "published" : "2026-09-27T12:57:26+00:00"
+  }, {
+    "id" : "1jmHhGQDs9o",
+    "channel" : "anahata108",
+    "title" : "⚡ Pure JavaFX Lemmings Cyber-Arcade Edition | 60 FPS Recreation (Level 1: Just Dig!) Anahata ASI",
+    "published" : "2026-09-25T08:18:59+00:00"
+  }, {
+    "id" : "dm_Lgy90ixY",
+    "channel" : "cbrjar",
+    "title" : "Java NullPointerException: Why the Compiler Can't Stop It",
+    "published" : "2026-09-24T14:53:34+00:00"
+  }, {
+    "id" : "gHxvCWA5mtY",
+    "channel" : "Kotlin",
+    "title" : "Swift Export: Where We Stand |  Pamela Hill-Galloway",
+    "published" : "2026-09-24T12:30:00+00:00"
+  }, {
+    "id" : "SxFgUxWxGKI",
+    "channel" : "anahata108",
+    "title" : "Pure Java Lemmings (1991) Recreation - Level 1: Just Dig!",
+    "published" : "2026-09-24T09:53:04+00:00"
+  }, {
+    "id" : "QqTdGg2wYxY",
+    "channel" : "Kotlin",
+    "title" : "Building AI‑Powered Web Apps in Kotlin/Wasm | Zalim Bashorov",
+    "published" : "2026-09-23T14:31:51+00:00"
+  }, {
+    "id" : "kwUK7s6oN3g",
+    "channel" : "cbrjar",
+    "title" : "Scaling Java Without Overloading Your Database: Meet Open J Proxy 1.0",
+    "published" : "2026-09-22T18:18:29+00:00"
+  }, {
+    "id" : "B11taLdZHtw",
+    "channel" : "FrankDelporte",
+    "title" : "Announcing the new Foojay website for the Friends Of OpenJDK",
+    "published" : "2026-09-22T13:07:49+00:00"
+  }, {
+    "id" : "He8J34KHEY4",
+    "channel" : "Kotlin",
+    "title" : "Kotlin's Name-Based Destructuring",
+    "published" : "2026-09-21T13:00:05+00:00"
+  }, {
+    "id" : "6ClwvhCKbo0",
+    "channel" : "hszanowski",
+    "title" : "Hacking IntelliJ IDEA — Day 7: Talking to Gradle",
+    "published" : "2026-09-18T23:12:38+00:00"
+  }, {
+    "id" : "QcwQvUUJX0c",
+    "channel" : "hszanowski",
+    "title" : "Automating My Studio Lights with Stream Deck+ — No Apps Required",
+    "published" : "2026-09-18T11:39:25+00:00"
+  }, {
+    "id" : "UxabcPrBJFw",
+    "channel" : "hszanowski",
+    "title" : "Stream title: Hacking IntelliJ IDEA — Day 6: Gradle Knows Your Plugin Is Outdated",
+    "published" : "2026-09-18T00:05:02+00:00"
+  }, {
+    "id" : "jY0mmMcMwCA",
+    "channel" : "cbrjar",
+    "title" : "Spring Data JPA Crash Course: Entities to N+1 in 23 Minutes",
+    "published" : "2026-09-17T14:31:27+00:00"
+  }, {
+    "id" : "UhRfN7fx5rs",
+    "channel" : "Kotlin",
+    "title" : "What's New in Kotlin 2.4.20",
+    "published" : "2026-09-14T13:12:00+00:00"
+  }, {
+    "id" : "k3aA0AtY4U8",
+    "channel" : "FrankDelporte",
+    "title" : "Java 27 in Practice: Smaller Heaps, Smarter Defaults, and Valhalla for Java 28 (Foojay Podcast #101)",
+    "published" : "2026-09-12T10:13:06+00:00"
+  }, {
+    "id" : "h-O9D0PZ97s",
+    "channel" : "anahata108",
+    "title" : "⚡ Anahata-AGI-1: deepseek-ai/deepseek-v4-pro-0813 on JAVA-ARKANOID-1 (Retro Arcade Game Execution)",
+    "published" : "2026-09-11T21:52:42+00:00"
+  }, {
+    "id" : "AKVALoefC_o",
+    "channel" : "anahata108",
+    "title" : "⚡ Anahata-AGI-1: poolside/laguna-s-2.1 on JAVA-ARKANOID-1 (Retro Arcade Game Execution)",
+    "published" : "2026-09-11T19:02:35+00:00"
+  }, {
+    "id" : "IQkzg7quc58",
+    "channel" : "cbrjar",
+    "title" : "Cyber Resilience Act for Software Vendors: What to Do Now",
+    "published" : "2026-09-11T12:12:38+00:00"
+  }, {
+    "id" : "76pWS0WFu_U",
+    "channel" : "anahata108",
+    "title" : "Second test of Java-EARTH-GLOBE-1",
+    "published" : "2026-09-10T11:37:41+00:00"
+  }, {
+    "id" : "d2W0QYYPhlQ",
+    "channel" : "anahata108",
+    "title" : "First test of JAVA-EARTH-GLOBE-1 - gemini 3.8 flash",
+    "published" : "2026-09-10T08:35:09+00:00"
+  }, {
+    "id" : "iHLBVt5VP9Y",
+    "channel" : "anahata108",
+    "title" : "⚡ gemini-3.8-flash goes JavaFX for 3D Photorealistic Earth & Satellite C4ISR Tracker",
+    "published" : "2026-09-09T10:22:55+00:00"
+  }, {
+    "id" : "MJQye7v7GLk",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Dark Coding Secrets: 7 Programming Conspiracies, Explained",
+    "published" : "2026-09-08T22:30:37+00:00"
+  }, {
+    "id" : "waI6Z4cmWHk",
+    "channel" : "NLJUG1",
+    "title" : "Clean architecture for serverless business logic you can take anywhere -Elena van Engelen",
+    "published" : "2026-09-03T15:37:37+00:00"
+  }, {
+    "id" : "0kxm0Acrl4U",
+    "channel" : "NLJUG1",
+    "title" : "Steel for Vulnerabilities, Silver for Zombies: Hunting the Unseen Monsters in Java Stack Steve Poole",
+    "published" : "2026-09-03T15:37:36+00:00"
+  }, {
+    "id" : "Xbz87dH2XvI",
+    "channel" : "NLJUG1",
+    "title" : "Spring Magic Explained - Ties van de Ven",
+    "published" : "2026-09-03T15:37:36+00:00"
+  }, {
+    "id" : "iyksnw_2C_s",
+    "channel" : "NLJUG1",
+    "title" : "AI agents won’t save you productivity – human agent collaboration will -Sven Peters",
+    "published" : "2026-09-03T15:37:36+00:00"
+  }, {
+    "id" : "jOW0WBBB5Pc",
+    "channel" : "NLJUG1",
+    "title" : "The Agentic shift  From Isolated Prompting to Autonomous Software factories - Maik Kingma",
+    "published" : "2026-09-03T15:37:36+00:00"
+  }, {
+    "id" : "qMQgCMe0kh0",
+    "channel" : "cbrjar",
+    "title" : "Spring Boot 4 Migration Guide: What You Need to Know",
+    "published" : "2026-09-02T13:31:25+00:00"
+  }, {
+    "id" : "bpQJpFXLFBk",
+    "channel" : "sivalabs",
+    "title" : "Spring Boot Tips: Easiest Way To Provide Environment Variables",
+    "published" : "2026-09-02T04:10:28+00:00"
+  }, {
+    "id" : "3ElGTo5hlzE",
+    "channel" : "cbrjar",
+    "title" : "How Do You Know It’s Hardened? Anatomy of a Hardened Builder",
+    "published" : "2026-08-29T02:16:15+00:00"
+  }, {
+    "id" : "wPAMfLIpfZc",
+    "channel" : "virtualJUG",
+    "title" : "Did AI Just Break Software Security Forever?",
+    "published" : "2026-08-27T18:32:56+00:00"
+  }, {
+    "id" : "PL3OxkmjeMM",
+    "channel" : "hszanowski",
+    "title" : "Hacking IntelliJ IDEA — Day 5: Adding version availability check",
+    "published" : "2026-08-27T01:46:44+00:00"
+  }, {
+    "id" : "RLuknIY2rUo",
+    "channel" : "cbrjar",
+    "title" : "Fixing Java Cold Starts: A Deep Dive",
+    "published" : "2026-08-26T15:08:38+00:00"
+  }, {
+    "id" : "5CzDhaG1oEg",
+    "channel" : "cbrjar",
+    "title" : "Why Your Pipeline Needs Zero Trust (And How to Build It)",
+    "published" : "2026-08-21T15:11:52+00:00"
+  }, {
+    "id" : "Cst2u7e-MS0",
+    "channel" : "otaviojava",
+    "title" : "🚀Software Engineering is More Than Coding: Why AI Can't Replace Us 🤖☕",
+    "published" : "2026-08-13T15:03:16+00:00"
+  }, {
+    "id" : "zyrGN6_0Tn4",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #37 – CI: GitHub Actions & TestLens",
+    "published" : "2026-08-12T20:27:29+00:00"
+  }, {
+    "id" : "Z5jJQz1YM3U",
+    "channel" : "cbrjar",
+    "title" : "How to Apply Zero Trust to Open Source Dependencies",
+    "published" : "2026-08-12T14:15:45+00:00"
+  }, {
+    "id" : "9V5IeBmGI14",
+    "channel" : "sivalabs",
+    "title" : "BootUI - Inspect, Analyze and Improve your Spring Boot and Quarkus Applications",
+    "published" : "2026-08-10T04:30:11+00:00"
+  }, {
+    "id" : "TQGv9pB_OPw",
+    "channel" : "otaviojava",
+    "title" : "Beat AI Hallucinations: Sharpen Hard & Soft Skills with Open Source ☕",
+    "published" : "2026-08-06T15:03:28+00:00"
+  }, {
+    "id" : "u1BjNHNpbGI",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Why the Binary System is NOT the Best for Computers?",
+    "published" : "2026-08-05T16:57:53+00:00"
+  }, {
+    "id" : "b9dP2HHtKkQ",
+    "channel" : "FrankDelporte",
+    "title" : "Show Guitar Pro and ABC Sheet Music in Your Java/JavaFX App (Sheetmusic4J)",
+    "published" : "2026-07-30T08:30:23+00:00"
+  }, {
+    "id" : "hKs1l3uEH34",
+    "channel" : "FrankDelporte",
+    "title" : "Sheetmusic4J V0.0.2",
+    "published" : "2026-07-29T18:30:44+00:00"
+  }, {
+    "id" : "e83S58DG2SU",
+    "channel" : "JetBrainsWDYT",
+    "title" : "Is the Caveman Skill actually good?",
+    "published" : "2026-07-29T13:56:22+00:00"
+  }, {
+    "id" : "D2uaHpvC9ao",
+    "channel" : "FrankDelporte",
+    "title" : "Show Interactive Sheet Music in a Java and JavaFX App (MusicXML - Sheetmusic4J)",
+    "published" : "2026-07-24T11:31:22+00:00"
+  }, {
+    "id" : "78Jm2sR33fI",
+    "channel" : "FrankDelporte",
+    "title" : "Java on BananaPi SBC: ARM (BPI-M4 Zero) vs RISC-V (BPI-F3) - And we have a Blinking LED with Pi4J!",
+    "published" : "2026-07-16T14:33:04+00:00"
+  }, {
+    "id" : "PID--srP0_U",
+    "channel" : "FrankDelporte",
+    "title" : "Foojay Podcast 100: Java Podcasters on What Developers Can Learn from Podcasts (#100)",
+    "published" : "2026-07-11T18:53:39+00:00"
+  }, {
+    "id" : "f6Txm8IRr_E",
+    "channel" : "virtualJUG",
+    "title" : "Top 10 Event-Driven Architecture Pitfalls by  Victor Rentea",
+    "published" : "2026-07-10T05:46:48+00:00"
+  }, {
+    "id" : "q7SGdxQnMVc",
+    "channel" : "FrankDelporte",
+    "title" : "From Breadboard Chaos to My First Custom PCB: Testing Java with Raspberry Pi GPIOs and Pi4J",
+    "published" : "2026-06-25T08:35:38+00:00"
+  }, {
+    "id" : "pb54youm6AM",
+    "channel" : "FrankDelporte",
+    "title" : "JMathAnim: Create Mathematical Animations in Java Like 3Blue1Brown | JavaFX In Action #27",
+    "published" : "2026-06-25T07:49:50+00:00"
+  }, {
+    "id" : "rJRJ-Zd8NXU",
+    "channel" : "azulsystems",
+    "title" : "Webinar: AI Tools for Jakarta EE",
+    "published" : "2026-06-24T21:19:12+00:00"
+  }, {
+    "id" : "Tg0i8Anc1X8",
+    "channel" : "azulsystems",
+    "title" : "Webinar: Modern Java Security: Zero Trust Architectures with Jakarta EE 11",
+    "published" : "2026-06-24T20:08:10+00:00"
+  }, {
+    "id" : "7z7WbrwD1oQ",
+    "channel" : "azulsystems",
+    "title" : "Webinar: JBoss EAP 7 Is in ELS-1: Keep Your Java EE Stack Secure & Supported",
+    "published" : "2026-06-24T19:57:12+00:00"
+  }, {
+    "id" : "7bBcTzeevEo",
+    "channel" : "FrankDelporte",
+    "title" : "Testing the Untestable: LLM Security for Java Developers with Tiberius (Foojay Podcast #99)",
+    "published" : "2026-06-20T08:34:16+00:00"
+  }, {
+    "id" : "BCbJwLphhsU",
+    "channel" : "FrankDelporte",
+    "title" : "The End of JNI Pain: WebAssembly Is Quietly Replacing Native Libraries in Java (Foojay Podcast #98)",
+    "published" : "2026-06-13T06:32:32+00:00"
+  }, {
+    "id" : "Y8M70rOo2P0",
+    "channel" : "sivalabs",
+    "title" : "Kubernetes Made Easy. Deploy. Monitor. Debug. All from IntelliJ IDEA",
+    "published" : "2026-05-22T06:57:06+00:00"
+  }, {
+    "id" : "nrNY0h4jHVo",
+    "channel" : "virtualJUG",
+    "title" : "The best way to fetch multiple to-many relationships with Java by Vlad Mihalcea",
+    "published" : "2026-05-14T18:10:46+00:00"
+  }, {
+    "id" : "RDNrCz4EiFI",
+    "channel" : "virtualJUG",
+    "title" : "Java and Gen AI: JVM Agents With Embabel by Rod Johnson (Spring Creator)",
+    "published" : "2026-04-10T07:29:09+00:00"
+  }, {
+    "id" : "2Y0eCAEbAV4",
+    "channel" : "sivalabs",
+    "title" : "Spring Data JPA : Pagination While Loading Child Collection",
+    "published" : "2026-03-16T04:15:01+00:00"
+  }, {
+    "id" : "Ox4UrcjhSsk",
+    "channel" : "virtualJUG",
+    "title" : "From Legacy to Cloud-Native: Effective & Scalable Java Modernization with Automation by Emily Jiang",
+    "published" : "2026-03-12T07:08:24+00:00"
+  }, {
+    "id" : "a0mzCZNEvLk",
+    "channel" : "sivalabs",
+    "title" : "How to Fix Hibernate LazyInitializationException?",
+    "published" : "2026-03-12T03:58:40+00:00"
+  }, {
+    "id" : "W6ZpB1ckCgQ",
+    "channel" : "sivalabs",
+    "title" : "IntelliJ IDEA Spring Debugger with H2 Database",
+    "published" : "2026-03-11T11:00:55+00:00"
+  }, {
+    "id" : "PbKYRYgqS4U",
+    "channel" : "virtualJUG",
+    "title" : "Method Handles - An Overlooked Gem in the Java Platform by Ben Evans",
+    "published" : "2026-02-25T07:50:14+00:00"
+  }, {
+    "id" : "hYHUxVZ7n2Q",
+    "channel" : "virtualJUG",
+    "title" : "Spring AI to AI-Native Java Architectures with Josh Long & Pratik Patel",
+    "published" : "2026-02-09T20:50:00+00:00"
+  }, {
+    "id" : "BdUSjhXHfuI",
+    "channel" : "MarcoCodes",
+    "title" : "The End Of Java's 1-Billion-Row Challenge (Ep. 5) | With @caseymuratori ​",
+    "published" : "2025-12-05T14:00:23+00:00"
+  }, {
+    "id" : "HGNEcidxaXg",
+    "channel" : "lprimak",
+    "title" : "LiveCode: Testing database interactions with Jakarta EE is easy",
+    "published" : "2025-11-03T01:16:57+00:00"
+  }, {
+    "id" : "EVoSwk6W_hI",
+    "channel" : "lprimak",
+    "title" : "LiveCode: Testing Jakarta EE with Dependency Injection",
+    "published" : "2025-11-03T01:12:27+00:00"
+  }, {
+    "id" : "XRUMbGweHsY",
+    "channel" : "MarcoCodes",
+    "title" : "From Java to Assembly in Java's 1-Billion-Row Challenge (Ep. 4) | With @caseymuratori ​",
+    "published" : "2025-10-16T15:00:55+00:00"
+  }, {
+    "id" : "vPwnISaWjNs",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde: Carefree Dependency Management in Java Projects",
+    "published" : "2025-10-16T07:10:39+00:00"
+  }, {
+    "id" : "8l1obGG_6jQ",
+    "channel" : "virtualJUG",
+    "title" : "[vJUG CONNECT] AI & Java: From Structured Prompts to Smarter Apps",
+    "published" : "2025-10-15T07:21:53+00:00"
+  }, {
+    "id" : "kg8TpiYZvvU",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #6 – Update Dependencies in Java Projects",
+    "published" : "2025-10-11T09:56:36+00:00"
+  }, {
+    "id" : "dvA5TfN1EQ8",
+    "channel" : "MarcoCodes",
+    "title" : "Slow For-Loops in Java's 1-Billion-Row Challenge (Ep. 3) | With @caseymuratori ​",
+    "published" : "2025-10-03T13:47:20+00:00"
+  }, {
+    "id" : "i9Vf39vme_w",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #5 – Analyze Dependencies in Java Projects",
+    "published" : "2025-10-03T08:03:15+00:00"
+  }, {
+    "id" : "0eMjPI9th18",
+    "channel" : "azulsystems",
+    "title" : "azul bids short",
+    "published" : "2025-09-30T16:14:35+00:00"
+  }, {
+    "id" : "2tJxmci4VCg",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #4 – Dependency Conflict Management in Java Projects",
+    "published" : "2025-09-26T05:32:13+00:00"
+  }, {
+    "id" : "uV1in4xaWVg",
+    "channel" : "azulsystems",
+    "title" : "Azul & RapidFort Webinar 9 2025",
+    "published" : "2025-09-25T17:42:05+00:00"
+  }, {
+    "id" : "Miy0-euhIRY",
+    "channel" : "virtualJUG",
+    "title" : "Spring Debugger: A New Way To Demystify Spring Boot's Magic by Marco Behler",
+    "published" : "2025-09-24T05:57:55+00:00"
+  }, {
+    "id" : "1KjEmAieIMo",
+    "channel" : "azulsystems",
+    "title" : "JDK25 OnDemand Webinar",
+    "published" : "2025-09-22T04:30:02+00:00"
+  }, {
+    "id" : "CWgFD0bO6-8",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #3 – Separate build tool configuration from dependency management",
+    "published" : "2025-09-19T10:48:56+00:00"
+  }, {
+    "id" : "1scdo1RGepY",
+    "channel" : "azulsystems",
+    "title" : "How to Boost JVM Scalability and Performance With Kotlin and Azul Runtime",
+    "published" : "2025-09-13T17:23:00+00:00"
+  }, {
+    "id" : "0mpw4edHFrg",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #2 – Version Management in Java Projects",
+    "published" : "2025-09-12T08:56:09+00:00"
+  }, {
+    "id" : "rEA-QfhdSPo",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #1 – Dependency Definition in Java projects",
+    "published" : "2025-09-05T10:47:56+00:00"
+  }, {
+    "id" : "rzLcVq8xm1Y",
+    "channel" : "MarcoCodes",
+    "title" : "Setting Performance Baselines for Java's 1-Billion-Row Challenge (Ep. 2) | With @caseymuratori",
+    "published" : "2025-09-04T14:28:53+00:00"
+  }, {
+    "id" : "MUeJeiNRFFA",
+    "channel" : "jjohannes",
+    "title" : "JavaRCAde #0 – Modules in Java Development",
+    "published" : "2025-08-28T15:43:29+00:00"
+  }, {
+    "id" : "n-YK3B4_xPA",
+    "channel" : "MarcoCodes",
+    "title" : "Solving Java’s 1 Billion Row Challenge (Ep. 1) | With @caseymuratori",
+    "published" : "2025-08-28T15:00:50+00:00"
+  }, {
+    "id" : "V03wKwcegxg",
+    "channel" : "virtualJUG",
+    "title" : "Simpler Java build tooling with Object Oriented Programming",
+    "published" : "2025-08-27T06:21:43+00:00"
+  }, {
+    "id" : "q6DM_sfRhpE",
+    "channel" : "virtualJUG",
+    "title" : "Building Sustainable Software with Java: Tips & Techniques with Aicha Laafia",
+    "published" : "2025-06-12T06:22:46+00:00"
+  }, {
+    "id" : "dxVDiJsyu3Y",
+    "channel" : "virtualJUG",
+    "title" : "Extending Functional Pipelines with Gatherers with Dr Venkat Subramaniam",
+    "published" : "2025-05-28T18:16:52+00:00"
+  }, {
+    "id" : "kwzPkgVLcFI",
+    "channel" : "virtualJUG",
+    "title" : "LLMs can't optimize schedules, but AI can! with Tom Cools",
+    "published" : "2025-04-24T06:07:37+00:00"
+  }, {
+    "id" : "l6r06Q3tfIc",
+    "channel" : "virtualJUG",
+    "title" : "[vJUG CONNECT] LJC meetup Exploring Reactive Programming & Infra From Code",
+    "published" : "2025-03-26T08:08:38+00:00"
+  }, {
+    "id" : "WE1EFDXw-sk",
+    "channel" : "lprimak",
+    "title" : "PrimeFaces bug 2/1/2025",
+    "published" : "2025-02-01T06:45:49+00:00"
+  }, {
+    "id" : "sahuZMMXNpI",
+    "channel" : "MarcoCodes",
+    "title" : "Model Context Protocol (MCP) - Explained",
+    "published" : "2025-01-23T10:45:58+00:00"
+  }, {
+    "id" : "NO7eeQJIU3Y",
+    "channel" : "MarcoCodes",
+    "title" : "Prompt Engineering - Basic Concepts For Developers",
+    "published" : "2024-07-17T11:00:51+00:00"
+  }, {
+    "id" : "JcGwgNMZc_E",
+    "channel" : "MarcoCodes",
+    "title" : "Building Docker Images - Best Practices",
+    "published" : "2024-06-20T11:16:06+00:00"
+  }, {
+    "id" : "HsWjDJ47Ecg",
+    "channel" : "lprimak",
+    "title" : "PrimeFaces Bug: https://github.com/primefaces/primefaces/issues/11101",
+    "published" : "2023-12-11T20:11:03+00:00"
+  }, {
+    "id" : "7ueAnM7ADm4",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #36 – Task Actions",
+    "published" : "2023-11-20T09:20:41+00:00"
+  }, {
+    "id" : "soqw1cPHMEE",
+    "channel" : "MarcoCodes",
+    "title" : "GraalVM & Spring Boot: Building a Native Executable | Marco Reacts",
+    "published" : "2023-11-08T13:44:31+00:00"
+  }, {
+    "id" : "LhVhC86FVIY",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #35 – Working with Files",
+    "published" : "2023-11-06T15:03:51+00:00"
+  }, {
+    "id" : "uLUMM1Y-dd8",
+    "channel" : "MarcoCodes",
+    "title" : "htmx Tutorial - 2 Real-Life Use Cases",
+    "published" : "2023-10-16T14:20:06+00:00"
+  }, {
+    "id" : "cgnrB5PkaBo",
+    "channel" : "MarcoCodes",
+    "title" : "Why JUnit's Dynamic Tests ARE SO GOOD",
+    "published" : "2023-10-11T14:36:50+00:00"
+  }, {
+    "id" : "yA5_xp2nlgk",
+    "channel" : "MarcoCodes",
+    "title" : "Spring Boot & Kotlin Tutorial - Crash Course",
+    "published" : "2023-09-21T10:36:01+00:00"
+  }, {
+    "id" : "TSOngNiLZSY",
+    "channel" : "MarcoCodes",
+    "title" : "MCL #002: Gavin King & Hibernate 6.3",
+    "published" : "2023-09-08T04:11:53+00:00"
+  }, {
+    "id" : "n8Tgr4aLB18",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #34 – Properties and Providers",
+    "published" : "2023-08-31T04:56:30+00:00"
+  }, {
+    "id" : "6rFEDcP8Noc",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #33 – Classpath and Module Path in Testing",
+    "published" : "2023-06-19T13:38:43+00:00"
+  }, {
+    "id" : "T9U0BOlVc-c",
+    "channel" : "jjohannes",
+    "title" : "Understanding Gradle #32 – Artifact Transforms",
+    "published" : "2023-04-28T08:11:15+00:00"
+  }, {
+    "id" : "40k3JGlkQRs",
+    "channel" : "lprimak",
+    "title" : "PrimeFaces issue - screencast",
+    "published" : "2022-10-06T21:20:11+00:00"
+  }, {
+    "id" : "iLOwk5uJuqY",
+    "channel" : "lprimak",
+    "title" : "Tivo not tuning in sound on some channels - bug demo",
+    "published" : "2019-11-25T06:59:35+00:00"
+  }, {
+    "id" : "RGhpSFN0T-o",
+    "channel" : "lprimak",
+    "title" : "Testing-DirectNic-SMTP",
+    "published" : "2019-10-15T20:05:48+00:00"
+  }, {
+    "id" : "oZtoeGxLC78",
+    "channel" : "lprimak",
+    "title" : "Volcano Airtour",
+    "published" : "2008-12-06T22:37:13+00:00"
+  } ],
+  "shorts" : [ "-KxB_z5HEUY", "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "2udyOpSIOpw", "3AyOI_DjymM", "3KYWHdHfs5E", "3L78Fn4L-KQ", "3VBWQ6e9NpM", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4RFBnffdqTk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "9aBbgZyhErk", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "EZqaeauSSYw", "FDjIcUdpT8U", "FdulTWCQfTQ", "GWtUXkUXezY", "H3QoqwGU2_E", "H5-JUndlPW8", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "JpO1xa0NN5k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "LniA--xQUvE", "LqjuQQMHVJw", "LuVFCPV3AVE", "LviLcfX_qWM", "M0Wha6RdIPY", "NHQ1plrPB5c", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "Nj-Kw9FZ-Vs", "OAaOcs4rC1s", "OyraC_WwubA", "P0mkJY4DIzo", "PdS6RBMfBCk", "Pjt59ulIaGg", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "RJrYJ70uZkE", "Ro8btyplk7U", "S9IEOyHPOc0", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "X_Z2sYRtEQw", "XcA2hqil034", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "YcbjNnylTm8", "YljdZUBvs9Y", "Zvv5pu2OeZA", "_pjajf-5eJg", "a792mHg66mI", "bUIrCAHPFFQ", "bZvE9XrTLD4", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "eTZMVXvq1yA", "etp_3ntK23o", "fKYWemlL9rc", "fNGMDUcJv1E", "g3PMDDdPLJc", "gBuwkNsnQoI", "gNfCER2cAnc", "hFQFBLYdeZI", "hJ4VjlMWhrg", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "mIAmR7iGAKA", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "pXPywSj7pdI", "pZwOqnTIrhc", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "raWUwKT6Rh4", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vWCPN_qvGh4", "vcbFO6c68xY", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "wq28DQiVO-8", "x8sqcgjqtBQ", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yf5DVtg-vjU", "yjvTmiJlTJE", "ziRbJg4w3W8", "zmTVH8A6lZY" ]
+}

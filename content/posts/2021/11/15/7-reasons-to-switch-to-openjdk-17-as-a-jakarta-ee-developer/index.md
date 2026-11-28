@@ -1,7 +1,6 @@
 ---
 title: "7 Reasons to Switch to OpenJDK 17 as a Jakarta EE Developer"
 date: "2021-11-15T08:19:03+00:00"
-lastmod: "2025-01-24T10:41:17+00:00"
 description: "If you are using enterprise-orientated specifications should you make the switch to OpenJDK 17 ? Payara's Rudy De Busscher thinks you should!"
 canonical: "https://blog.payara.fish/switch-to-open-jdk-as-a-jakarta-ee-developer"
 authors:

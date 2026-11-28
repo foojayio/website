@@ -1,7 +1,6 @@
 ---
 title: "Update or Upgrade Java... and Which Version Should You Use?"
 date: "2023-02-23T09:12:39+00:00"
-lastmod: "2023-02-23T09:15:21+00:00"
 description: "Keeping your Java environment stable requires discerning which updates to install and then installing them appropriately."
 canonical: "https://www.azul.com/blog/should-you-update-java-or-upgrade/"
 authors:
@@ -30,7 +29,7 @@ So what's the difference between a Java upgrade and an update?
 
 **Updates are security fixes and improvements to existing Java versions**.
 
-![](LTS-versus-STS-1024x410.jpg)
+![Balance scale weighing LTS against STS Java releases](LTS-versus-STS-1024x410.jpg)
 
 ## Upgrades are New Versions of OpenJDK
 
@@ -163,7 +162,7 @@ There are several criteria for choosing which version:
 * **Features**: if the development team requires a specific feature only available from a particular version.
 * **Experimental**: many developers use the latest version on their work PC. This allows experimenting with new features while being able to build and compile applications with backward compatibility with the runtime used in the production environment.
 
-![](option-a-b-c-1024x410.png)
+![Person looking at a signpost with Option A, Option B and Option C, illustrating the choice of Java version](option-a-b-c-1024x410.png)
 
 ## A Real-life Example of the Impact of Upgrading or Updating
 

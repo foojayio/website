@@ -1,14 +1,12 @@
 ---
 title: "Writing a Data Orchestrator in Java"
 date: "2024-05-02T19:43:32+00:00"
-lastmod: "2024-05-03T08:37:28+00:00"
 description: "What makes Kestra unique amongst all the data orchestrators and how to leverage the power of the Java platform and its ecosystem to build a performant, scalable, and feature-rich data orchestrator."
 authors:
   - "loic-mathieu"
 image: "kestra-software-architecture-700x394-1.jpg"
 categories:
   - "DataEngineering"
-  - "Java"
   - "Kafka"
 related_posts:
   - "effective-coding-with-java-observability"
@@ -39,7 +37,7 @@ Let's discover what makes Kestra unique amongst all the data orchestrators and h
 
 Kestra's architecture is built on a distributed system, where various components interact asynchronously, primarily through messaging queues. Below is an overview of the key components that make up Kestra's architecture:
 
-![](kestra-software-architecture-700x394.jpg)
+![Kestra architecture: executor, scheduler and worker feed a queue, then an indexer and repository, with a webserver for users.](kestra-software-architecture-700x394.jpg)
 
 ### Core Components of Kestra:
 

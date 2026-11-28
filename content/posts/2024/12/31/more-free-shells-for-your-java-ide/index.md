@@ -1,13 +1,11 @@
 ---
 title: "More Free Shells for your Java IDE"
 date: "2024-12-31T14:30:57+00:00"
-lastmod: "2025-01-02T22:59:52+00:00"
 description: "How to have less terminal windows opened and stay in the flow while working in your IDE."
 authors:
   - "anthony-goubard"
 image: "shell-prompt-java2-1.png"
 categories:
-  - "Desktop"
   - "Eclipse"
   - "IntelliJ IDEA"
   - "NetBeans"

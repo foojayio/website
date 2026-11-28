@@ -1,7 +1,6 @@
 ---
 title: "Java on Azure Tooling Update – July 2022"
 date: "2022-07-11T07:21:16+00:00"
-lastmod: "2023-02-03T13:40:05+00:00"
 description: "In this update, we will introduce the brand new getting started experience with the Azure toolkit for IntelliJ... and more!"
 authors:
   - "jialuo-gan"
@@ -40,11 +39,11 @@ In [April's blog](https://devblogs.microsoft.com/java/azure-toolkit-for-intellij
 
 Now let's take a look at our getting started experience to address these problems. There are three ways to open this feature:
 
-* Click the ![](icon-open.png) on the toolbar in Azure Explorer
+* Click the ![Rocket icon used for the Getting Started button in the Azure toolkit](icon-open.png) on the toolbar in Azure Explorer
 * Right-click the Azure node and select the "Getting started" option in Azure Explorer
 * Select "Tools \> Azure \> Getting Started" in the main menu
 
-![](EntranceforGuide.png)
+![Azure Explorer in IntelliJ with the rocket toolbar button and 'Getting Started' context-menu item highlighted](EntranceforGuide.png)
 
 With this new getting experience, you will be able to finish your first deployment to Azure within several minutes, even if you have no experience.
 
@@ -52,15 +51,15 @@ During this process, you will get familiar with Azure Toolkit features and Azure
 
 After you have upgraded or installed the latest of the toolkit, it will automatically open the getting started experience on the right side for the first time.
 
-![](overview-samples-guide.png)
+!['Getting Started with Azure' panel offering sample projects: deploy a first web app or a first function app](overview-samples-guide.png)
 
 Once your click one of these two samples, our plugin will guide you to finish an end-to-end process. You can have an overview of all steps (as the screenshot shows below).
 
-![](overview2.jpg)
+![Getting Started panel overview listing the steps of the sample tutorial](overview2.jpg)
 
 When you're done, you will have your first application successfully running on Azure. Next, you could click the button "View in Azure Explorer" to focus on your app resources in Azure Explorer. Here is a short demonstration for it.
 
-![](Overview-end5.webp)
+![IntelliJ IDEA with the Azure Explorer tree and the Getting Started with Azure panel, pointing at 'Deploy Your First Web App to Azure'](Overview-end5.webp)
 
 ### EAP and Snapshot Version Support
 
@@ -74,7 +73,7 @@ The managed identities for Azure resources help you safely access Azure resource
 
 To use it, you can simply configure your system-assigned or user-assigned managed identity in the portal at first. Next, it could be used to authenticate services when you deploy the application with Maven/Gradle Plugin. The following demonstration shows how you can use system-assigned managed identity when you deploy Azure Functions on a virtual machine.
 
-![](managed-identity-full.webp)
+![Windows command prompt in the demo-function folder with 'mvn clean package' typed, ready to build the Azure Function](managed-identity-full.webp)
 
 ## Feedback and Suggestions
 
@@ -84,7 +83,7 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new "Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-![](feedback-new.png)
+![Azure Explorer in IntelliJ with an arrow pointing to the heart button for providing feedback](feedback-new.png)
 
 ## Resources
 

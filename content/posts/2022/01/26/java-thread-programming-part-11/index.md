@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 11)"
 date: "2022-01-26T07:58:30+00:00"
-lastmod: "2023-02-20T11:22:17+00:00"
 description: "Learn how to ask the executor framework at startup to provision threads for us and they will be reused as long as the application runs."
 authors:
   - "bazlur-rahman"
@@ -63,7 +62,7 @@ As a result, the thread scheduler has to be super busy to provide a time slice t
 
 To solve all of the problems above, Java introduced a technique called, ThreadPool. In a ThreadPool, we will create several threads when the application starts (we can create on-demand as well), and they will be waiting in Queue; when a request comes into the server, a thread will be picked from the pool, and given the task to the thread, once the thread is done with the job, the thread will return to the pool. The idea is that we will have a limited number of threads, and we will reuse them.
 
-![](Thread-Pool-700x370.png)
+![Diagram: a job queue (Job-0 to Job-5) feeding jobs to four threads in a thread pool](Thread-Pool-700x370.png)
 
 In our [7th article of the series](https://foojay.io/today/java-thread-programming-part-7/ "7th article of the series"), we created a thread pool of our own, that wasn't production-ready. However, in JDK, we have classes that help us to instantiate a production-ready thread pool. Let's discuss that.
 

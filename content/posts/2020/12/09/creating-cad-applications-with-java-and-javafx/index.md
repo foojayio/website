@@ -1,7 +1,6 @@
 ---
 title: "Creating CAD Applications with Java and JavaFX"
 date: "2020-12-09T11:26:19+00:00"
-lastmod: "2021-01-21T12:02:33+00:00"
 description: "Some days ago I finished a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment. I believe, having a good UX, features users have been dying to have, good, well structured code that lets you continuously evolve and better maintain what you already have and finally topping all that with a nice looking user interface, are the markers to a successful application. I think we’ve been able to score high in all those markers."
 authors:
   - "pedro-vieira"
@@ -15,7 +14,7 @@ related_posts:
 I'm a [Java (JavaFX) freelance consultant, Software Engineer and Software Designer](http://www.pixelduke.com/) and a few months ago I finished a CAD application for a client.
 
 This is a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment.
-![](showcase-model-view-1024x555.jpg)
+![HERO application Model view with a floor plan on the left and a data grid of window and door openings on the right](showcase-model-view-1024x555.jpg)
 
 After about one year of development, my client (he himself an energy rater) and I were able to finish the project within a much smaller time frame and a much smaller budget than other similar projects from competing companies. It wouldn't be an exaggeration to say that its cost was about 30 times less and it took at least less than half the time.
 
@@ -31,14 +30,14 @@ The purpose of the tool, called HERO, is to do the energy efficiency assessment 
 
 ### High Level View
 
-![](showcase-model-view2-1024x555.jpg)
+![HERO application showing a floor plan beside a data grid of floor constructions, insulation and adjacency](showcase-model-view2-1024x555.jpg)
 
 If you follow my [blog](http://www.pixelduke.com), you've probably noticed from the picture that the application is using [JMetro](https://www.pixelduke.com/java-javafx-theme-jmetro/).
 
 The picture above is from the Model view. In this view you create the project and enter all its data. The pane to the left is where you can view the visuals, and create the floor plan (visually). The pane to the right is the Datagrid where you see and enter data for all the objects of the project (walls, windows, floors, top lights, etc) in a table like format. All these views are inside a Dockpane like container that allows you to resize, restore and maximize each pane.
 
 There are also other views, inside the Model view, not shown in the picture. Like the library where you can create and manage the materials that you can use throughout your project, your custom assemblies for walls, the different types of windows, etc.
-![](showcase-results-view-1024x555.jpg)
+![HERO Results view with a 3.9 star rating, heating and cooling totals and pie charts of energy use by zone](showcase-results-view-1024x555.jpg)
 
 After you run the simulation, you can also see the results of your energy efficiency modelling (picture above). The Results View shows a dashboard, with charts, tables, etc, that lets the user view at a glance how efficient the dwelling or dwellings are and quickly notice what might need to be readjusted.
 
@@ -58,13 +57,13 @@ The calculations for the energy rating can get really complex. They can depend o
 All the items mentioned are modeled and calculated in HERO.
 
 All the geometry, intersections, etc are also computed by the application. For instance, if you create a Zone in a level – a Zone can be a living room, kitchen, bedroom, etc – and then another smaller Zone in the level above, there will be an intersection. This intersection will produce a "hole" in the ceiling of the level below, like a donut. Hero will realize automatically that the 2 zones are connected and will create a new Ceiling in the zone below (in the place of the donut) adjacent to the zone above.
-![](donut-step1-1024x555.jpg) 1 - Create zone ![](donut-step2-1024x555.jpg) 2- Create another Zone on level above ![](donut-step3-1024x555.jpg) 3 - Geometry automatically split (new Ceiling created)
+![HERO floor plan with a single rectangular zone enclosed by walls, the first step of the example](donut-step1-1024x555.jpg) 1 - Create zone ![HERO in zone drawing mode, with a smaller rectangular zone drawn inside the first one](donut-step2-1024x555.jpg) 2- Create another Zone on level above ![HERO ceiling view with the inner zone's ceiling highlighted and a ceilings data grid on the right](donut-step3-1024x555.jpg) 3 - Geometry automatically split (new Ceiling created)
 
 Shading objects are also calculated automatically, one Zone can cast a shade on another Zone placed elsewhere.
-![](auto-wingwall-step-1-1024x555.png) 1 – Create Zone ![](auto-wingwall-step-2-1024x555.png) 2 – Create second Zone to the right ![](auto-wingwall-step-3-1024x555.png) 3- Shading object automatically calculated and created
+![HERO floor plan with one rectangular zone and no wing walls yet](auto-wingwall-step-1-1024x555.png) 1 – Create Zone ![HERO floor plan with a second zone placed diagonally above and to the right of the first](auto-wingwall-step-2-1024x555.png) 2 – Create second Zone to the right ![HERO wing walls: a dashed line from the lower zone's wall to the upper zone, with a Wing Walls data grid](auto-wingwall-step-3-1024x555.png) 3- Shading object automatically calculated and created
 
 Another thing that HERO automatically computes are adjacencies between Walls and Zones. If you create a Zone right next to another, instead of creating 2 Walls between the Zones, the application will automatically figure out that the Zones are connected. It will connect the 2 zones by creating 1 internal Wall between them, which is different from an outside facing Wall.
-![](Internal-Wall-step-1-1024x555.png) 1 – Create Zone ![](Internal-Wall-step-2-1024x555.png) 2- Create another overlapping Zone
+![HERO floor plan with a single square zone before an internal wall is added](Internal-Wall-step-1-1024x555.png) 1 – Create Zone ![HERO floor plan with two adjacent zones sharing an internal wall, listed as internal in the walls data grid](Internal-Wall-step-2-1024x555.png) 2- Create another overlapping Zone
 
 For this post not to get too long, too tedious, and too technical I just pointed out some of the features of Hero, there are a lot more. I think you can get a general idea of Hero's features from what was mentioned above.
 
@@ -73,7 +72,7 @@ For this post not to get too long, too tedious, and too technical I just pointed
 My client and I were surprised with the reception the application got. Given that, at the time this article was first written (and at the time the application got its first release), the application was still in Beta and that there were already 3 applications in the market, 2 of them well established, we were expecting a much more moderate reaction.
 
 Before 24 hours had passed since the first release, we had already 50 registered users and 1 certificate issued. In our issue tracker, which has the purpose of only storing bug reports from our users, we were getting thanks messages.
-![](comentario-1-1.jpg) ![](comentario-2-2.jpg)
+![Customer support ticket thanking the team for fantastic software they plan to use exclusively](comentario-1-1.jpg) ![Customer support email praising the software's multi-dwelling analysis and visualisations, with names blurred](comentario-2-2.jpg)
 
 ### Technology and Form Factor
 

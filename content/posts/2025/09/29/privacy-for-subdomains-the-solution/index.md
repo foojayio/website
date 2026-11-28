@@ -1,14 +1,13 @@
 ---
 title: "Privacy for subdomains: the solution"
 date: "2025-09-29T09:28:32+00:00"
-lastmod: "2026-09-21T06:01:28+00:00"
 description: "Last week, I described a gloomy situation: all public TLS certificate providers log your requests. By browsing through the subdomains, one can get their…"
 canonical: "https://blog.frankel.ch/privacy-subdomains/2/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
+  - "Security"
 related_posts:
   - "privacy-for-subdomains-the-problem"
 ---

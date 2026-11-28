@@ -1,7 +1,6 @@
 ---
 title: "First Experiments with Java on the LattePanda IOTA: An Alternative to Raspberry Pi?"
 date: "2025-12-11T09:13:14+00:00"
-lastmod: "2025-12-11T16:25:58+00:00"
 description: "After years of experimenting with Raspberry Pi boards, Java, JavaFX, and Pi4J to control electronics, I wanted to explore whether my knowledge and…"
 canonical: "https://webtechie.be/post/2025-11-25-first-test-lattepanda-iota-with-ubuntu-and-java/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "lattepanda-iota-first-impressions.jpg"
 categories:
   - "Embedded"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"
@@ -49,7 +47,7 @@ In the same box, I also received:
 4. **Power over Ethernet shield**: handy, will test later
 5. **4G LTE module** with SIM card support
 
-![](unboxed-1024x573.jpg)
+![Unboxed LattePanda IOTA kit on a table: the board, cooling plate, manuals, cables and small parts](unboxed-1024x573.jpg)
 
 The cooling fan has a nice logo and excellent build quality. The PoE shield connects directly to a new network connector on the board, unlike Raspberry Pi expansion boards that use the Pi's existing network connection.
 
@@ -62,7 +60,7 @@ Following the documentation, I applied thermal paste to the processor, attached 
 ### First Boot: Windows Pre-installed
 
 After finding the power button, the LattePanda logo appeared on screen, and... Windows started booting. Windows was pre-installed, though I'm not sure if this is default or just for evaluation units. Either way, I immediately noticed 100% CPU usage, the exact reason I left Windows long ago, as I never understood that it's an ongoing problem with Windows... Memory usage was also pretty high.
-![](windows-cpu.jpg)
+![Windows Task Manager on the LattePanda IOTA screen showing an Intel N150 CPU at 100% utilization](windows-cpu.jpg)
 
 This thing definitely works with Windows, but I don't use Windows myself. Time to turn this into a Linux device.
 
@@ -112,7 +110,7 @@ The simple "Hello World" example ran perfectly. There's also an extended example
 Since I installed the Java version from Azul with JavaFX included, I could also run a JavaFX demo application. It uses Pi4J to detect the board type, though this only contains methods to detect Raspberry Pi board versions at this moment, so it didn't recognize the LattePanda.
 
 But the application **ran smoothly**! It showed we're running on a Linux 64-bit system with Java 25. The board wasn't recognized yet as expected, maybe we can in the future add detection tools in the Pi4J library to show the brand or manufacturer information.
-![](javafx-demo-1024x576.jpg)
+![VS Code on the LattePanda running Linux with a JavaFX Demo window showing OS, Java (Azul Zulu 25) and board info](javafx-demo-1024x576.jpg)
 
 Without any extra work, we have a JavaFX application running very smoothly on this board!
 

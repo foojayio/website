@@ -1,7 +1,6 @@
 ---
 title: "Token Bucket Rate Limiter (Redis & Java) - Raphael De Lio"
 date: "2025-01-28T07:07:08+00:00"
-lastmod: "2025-05-02T12:52:08+00:00"
 description: "Learn how to implement the Token Bucket rate-limiting algorithm using Redis and Java. Discover step-by-step guidance, testing with Redis TestContainers, and..."
 canonical: "https://raphaeldelio.com/2025/01/13/token-bucket-rate-limiter-redis-java/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "Redis_Video_RateLimiterImplementations_Part3_YoutubeThumbnail.png"
 categories:
   - "Databases"
-  - "Java"
   - "Redis"
 related_posts:
   - "rate-limiting-with-redis-an-essential-guide"
@@ -31,7 +29,7 @@ The bucket has a maximum capacity, so it can handle bursts of traffic as long as
 
 ## How It Works
 
-![](1-7cDKq5yh5RD0ygvb3mVwfQ-384353f7.webp)
+![Token bucket diagram: a bucket refilled at 1 token per minute with capacity of 5 requests, plotted over time](1-7cDKq5yh5RD0ygvb3mVwfQ-384353f7.webp)
 
 ### 1. **Define a Token Refill Rate**
 

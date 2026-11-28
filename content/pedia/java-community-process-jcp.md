@@ -1,7 +1,9 @@
 ---
 title: "Java Community Process (JCP)"
 description: "The Java Community Process (JCP) is the formal mechanism through which the Java platform specifications are created and evolved. Established in 1998, it allows Java community members — companies, organisations, and individuals — to participate in defining the future of ..."
-url: "/pedia/java-community-process-jcp/"
+url: "/java-terms-explained/java-community-process-jcp/"
+aliases:
+  - "/pedia/java-community-process-jcp/"
 ---
 
 The Java Community Process (JCP) is the formal mechanism through which the Java platform specifications are created and evolved. Established in 1998, it allows Java community members — companies, organisations, and individuals — to participate in defining the future of Java SE, Jakarta EE, and related specifications.
@@ -10,12 +12,12 @@ Changes to the Java platform specification are proposed as **Java Specification 
 
 The JCP is managed by a **Program Management Office (PMO)** at Oracle and governed by an **Executive Committee (EC)** of elected and appointed members from the Java community. The EC votes on JSR approval and on process changes.
 
-In practice, day-to-day evolution of the OpenJDK codebase (JVM improvements, library additions, language features) is primarily driven by [JEPs (JDK Enhancement Proposals)](https://foojay.io/pedia/jep-jdk-enhancement-proposal/) within the OpenJDK project, with the JCP serving as the formal standardisation layer. A significant language or API change will typically have both a JEP (for the implementation) and a JSR (for the specification), though these processes have become more tightly coupled in recent years.
+In practice, day-to-day evolution of the OpenJDK codebase (JVM improvements, library additions, language features) is primarily driven by [JEPs (JDK Enhancement Proposals)](https://foojay.io/java-terms-explained/jep-jdk-enhancement-proposal/) within the OpenJDK project, with the JCP serving as the formal standardisation layer. A significant language or API change will typically have both a JEP (for the implementation) and a JSR (for the specification), though these processes have become more tightly coupled in recent years.
 
 More information: [jcp.org](https://jcp.org)
 
 ## See Also
 
-* [JEP (JDK Enhancement Proposal)](/pedia/jep-jdk-enhancement-proposal/)
-* [OpenJDK](/pedia/openjdk/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
+* [JEP (JDK Enhancement Proposal)](/java-terms-explained/jep-jdk-enhancement-proposal/)
+* [OpenJDK](/java-terms-explained/openjdk/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)

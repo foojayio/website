@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Exposed: Kotlin ORM Made Simple"
 date: "2026-07-06T03:39:00+00:00"
-lastmod: "2026-07-10T08:54:25+00:00"
 description: "Learn how to use Exposed, a lightweight SQL ORM for Kotlin. Discover DSL and DAO APIs, database support, and setup your first project."
 authors:
   - "mahendra1413"

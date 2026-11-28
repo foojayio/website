@@ -1,14 +1,12 @@
 ---
 title: "FEPCOS-J (2) – Declaratively compose networked systems in Java"
 date: "2023-10-13T06:07:00+00:00"
-lastmod: "2023-10-13T06:07:01+00:00"
 description: "Compose networked systems like building blocks. An example illustrates how a Java developer can do this by using FEPCOS-J. Read more."
 authors:
   - "gerhard-fuchs"
 image: "fuchs2023-fepcos-j-example-use-case-510x510-1.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
 related_posts:
   - "fuchs-2023-fepcos-j-01"
@@ -469,7 +467,7 @@ Executed in the project directory *calculator*, the command `fjx tgt calculator.
 The system user is executed in the project directory *app*. Thus, the module path for the execution `MP=build:mlib:${FEPCOS_HOME}/mlib` contains the the *app's* compiled Java classes in the directory *build* , the system import module of *calculator* in the directory *mlib* and the modules FEPCOS-J provides in the directory *${FEPCOS_HOME}/mlib*.
 
 The execution of app by using the command `java -p ${MP} -m app/app.Main` returns the output as depicted in **Fig .7**.  
-![](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
+![Terminal running java with a module path and app.Main, printing 5 + 7 = 12 and 5 * 7 = 35](fuchs2023-fepcos-j-example-screenshot-execution-app.png) **Fig. 7) Screenshot of the execution of the example:** After setting the module path MP, the execution of the system user *app* using Java returns the expected output.
 
 ## Conclusion
 

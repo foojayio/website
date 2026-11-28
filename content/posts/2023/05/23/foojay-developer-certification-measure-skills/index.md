@@ -1,7 +1,6 @@
 ---
 title: "Foojay Developer Certification: Measure Skills!"
 date: "2023-05-23T16:32:31+00:00"
-lastmod: "2023-05-23T16:46:43+00:00"
 description: "Learn the why and how of a group of enthusiastic people implementing a new sort of developer certification that objectively measures dev skills on Foojay."
 authors:
   - "roy-wasse"
@@ -58,9 +57,9 @@ With this idea in mind, we had several brainstorms with many members of Foojay a
 This with the goal to create an industry standard for Java developer certification that measures coding skills based on the aforementioned platform by using IntelliJ or Eclipse (at the moment).
 
 This committee has reviewed the platform and indicated what kind of tasks the platform should have. Currently, two tasks have been implemented, one for concurrency and one about stream processing (thanks Jan Hendrik Kuperus and all others). The following two images give an impression of the test taking experience and the feedback afterwards.  
-![](task-screenshot-700x471.png)  
+![IntelliJ IDEA project with a LabOrderTest class and the context menu to run the test](task-screenshot-700x471.png)  
 *Figure 1: Screenshot of a task in IntelliJ*   
-![](skill-view-423x510.png)  
+![Java skill score results with test taker versus norm groups, and a radar chart of strengths and weaknesses](skill-view-423x510.png)  
 *Figure 2: Sample of feedback and score from a test result*
 
 These have been demoed recently by a spin-off workgroup to the certification committee and there's a lot of enthusiasm now about the progress and new goals and steps have been defined to make it a success.

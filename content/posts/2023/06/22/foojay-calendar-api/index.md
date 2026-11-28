@@ -1,7 +1,6 @@
 ---
 title: "Introducing the Foojay.io Calendar API"
 date: "2023-06-22T06:40:22+00:00"
-lastmod: "2023-07-25T14:22:55+00:00"
 description: "We are excited to share that Foojay is growing and offering additional resources to bring the OpenJDK community together on a global scale."
 authors:
   - "slava_yelk"
@@ -21,7 +20,7 @@ We are excited to share that Foojay is growing and offering additional resources
 Several months ago, we launched the [Foojay Calendar](https://foojay.io/calendar/), an interactive platform that allows individuals to propose Java-related and Kotlin-related and any other OpenJDK-related events and add them to the calendar.
 
 All Foojay members are welcome to submit their events. Once reviewed, the event will be included in the calendar.
-![](calendar_preview-1024x535.jpeg)
+![Promotional graphic for the Foojay Event Calendar showing a month grid of events and an event card for Elastic Community Conference](calendar_preview-1024x535.jpeg)
 
 Although many users loved the idea, several organizations that provide their own event platforms reached out to us and asked if they could integrate their own events database into our calendar directly.
 

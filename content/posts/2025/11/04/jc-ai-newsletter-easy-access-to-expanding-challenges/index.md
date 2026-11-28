@@ -1,7 +1,6 @@
 ---
 title: "JC-AI Newsletter: Easy Access to Expanding Challenges"
 date: "2025-11-04T18:13:33+00:00"
-lastmod: "2025-11-10T12:56:42+00:00"
 description: "A few months ago, I launched the AI Newsletter to provide a minimally biased perspective on the growing challenges surrounding artificial intelligence."
 authors:
   - "miro-wengner"

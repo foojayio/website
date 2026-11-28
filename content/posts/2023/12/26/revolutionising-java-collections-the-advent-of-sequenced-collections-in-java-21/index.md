@@ -1,7 +1,6 @@
 ---
 title: "Revolutionising Java Collections: The Advent of Sequenced Collections in Java 21"
 date: "2023-12-26T14:07:42+00:00"
-lastmod: "2023-12-26T14:10:27+00:00"
 description: "Addressing a long-standing gap in the collections framework, JEP 431 not only enhances the language's capabilities but also simplifies our development experience with the language."
 canonical: "https://blog.payara.fish/revolutionising-java-collections-the-advent-of-sequenced-collections-in-java-21"
 authors:

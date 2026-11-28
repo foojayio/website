@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven: Maven Coordinates & POM Inheritance"
 date: "2021-10-01T10:05:15+00:00"
-lastmod: "2021-10-01T10:11:42+00:00"
 description: "An explanation of dependency coordinates and \"distinguishers\" as well as a more detailed look at POM hierarchies are covered."
 canonical: "https://cguntur.me/2020/05/26/understanding-apache-maven-part-3/"
 authors:
@@ -87,7 +86,7 @@ A combination of GAV coordinates and distinguishers can be used to locate the ex
 ## POM Hierarchies
 
 This section describes the hierarchy in Maven POMs.
-![](mavenhierarchies-8c37200a.png)
+![Three Maven POM relationships: parent inheritance, aggregation of modules, and bill-of-materials, with who knows whom](mavenhierarchies-8c37200a.png)
 
 ### Parent POM
 

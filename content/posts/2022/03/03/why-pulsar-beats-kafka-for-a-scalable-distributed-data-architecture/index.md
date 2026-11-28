@@ -1,7 +1,6 @@
 ---
 title: "Why Pulsar Beats Kafka for a Scalable, Distributed Data Architecture"
 date: "2022-03-03T14:10:45+00:00"
-lastmod: "2022-07-22T03:31:07+00:00"
 description: "This article argues why Apache Pulser is better than Apache Kafka when it comes to using cloud and microservices and how it fits the open-source mindset."
 canonical: "https://jaxenter.com/pulsar-kafka-175830.html"
 authors:
@@ -20,7 +19,7 @@ related_posts:
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
 ---
 
-![](shutterstock_1009002379-350x233-1.jpg) © Shutterstock / Jurik Peter   
+![Glowing star in a purple space nebula, a decorative header for the Pulsar versus Kafka article](shutterstock_1009002379-350x233-1.jpg) © Shutterstock / Jurik Peter   
 
 The leading open source event streaming platforms are Apache Kafka and Apache Pulsar. For enterprise architects and application developers, choosing the right event streaming approach is critical, as these technologies will help their apps scale up around data to support operations in production.
 

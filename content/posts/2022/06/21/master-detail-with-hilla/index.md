@@ -1,7 +1,6 @@
 ---
 title: "Master-Detail with Hilla"
 date: "2022-06-21T12:13:24+00:00"
-lastmod: "2022-06-21T12:20:09+00:00"
 description: "Learn how to use the web application framework Hilla to create a master-detail view with a Grid to display data and a Form to edit the data."
 authors:
   - "simon-martinelli"
@@ -37,7 +36,7 @@ npx @vaadin/cli init --hilla my-hilla-app
 ```
 
 Or use [start.vaadin.com](https://start.vaadin.com). Make sure that you delete all views and add one of those
-![](image-1754a3fb.png)
+![Sidebar menu items 'Hello World using Hilla' and 'Master-Detail using Hilla'](image-1754a3fb.png)
 
 ## The Endpoint
 

@@ -1,13 +1,13 @@
 ---
 title: "Top 7 Java Microservices Frameworks"
 date: "2024-05-29T08:58:16+00:00"
-lastmod: "2024-06-13T14:54:27+00:00"
 description: "It's crucial to understand the trade-offs and ensure they are the right fit for your specific context before moving ahead with a microservices architecture"
 authors:
   - "rob-austin"
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
-  - "Java"
+  - "Microservices"
+  - "Quarkus"
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "book-review-quarkus-for-spring-developers"
@@ -37,7 +37,7 @@ Java is one of the most popular languages used for building microservices due to
 
 ### 1. **Quarkus**
 
-![](Screenshot-2024-05-24-at-11.34.34.png)
+![Quarkus logo on a black background](Screenshot-2024-05-24-at-11.34.34.png)
 
 Quarkus is a full-stack, Kubernetes-native Java framework tailored for GraalVM and HotSpot, and crafted from leading Java libraries and standards. Its key promise is to make Java a leading platform in Kubernetes and serverless environments, offering developers a unified reactive and imperative programming model.
 
@@ -59,7 +59,7 @@ Quarkus is a full-stack, Kubernetes-native Java framework tailored for GraalVM a
 
 ### 2. **Spring Boot**
 
-![](Screenshot-2024-05-24-at-11.34.52.png)
+![Spring Boot logo, a green hexagon with a leaf](Screenshot-2024-05-24-at-11.34.52.png)
 
 Spring Boot is a project built on top of the Spring Framework. It provides a simpler and faster way to set up, configure, and run both simple and web-based applications. It's a very popular choice for creating microservices in Java.
 
@@ -88,7 +88,7 @@ However, like any technology choice, its suitability will depend on your specifi
 
 ### 3.**Micronaut**
 
-![](Screenshot-2024-05-24-at-11.34.59.png)
+![Micronaut Foundation logo on a black background](Screenshot-2024-05-24-at-11.34.59.png)
 
 Micronaut is a modern framework that advertises itself as an alternative to Spring Boot. Lead developers were involved in the development of Graal, and Micronaut uses this knowledge to deliver performance advantages over Spring Boot. It uses ahead-of-time compilation combined with an approach to IoC that is not based on reflection to offer extremely low memory usage and fast startup times.
 
@@ -102,7 +102,7 @@ Micronaut is a modern framework that advertises itself as an alternative to Spri
 
 ### 4. **Helidon**
 
-![](Screenshot-2024-05-24-at-11.35.08.png)
+![Helidon.io logo on a blue background](Screenshot-2024-05-24-at-11.35.08.png)
 
 Helidon is a set of Java libraries for writing microservices, presented by Oracle. It offers two programming models: Helidon SE, a reactive, non-blocking API style; and Helidon MP, which implements MicroProfile for developers familiar with Java EE.
 
@@ -128,7 +128,7 @@ As with any technology choice, its suitability will depend on your specific use 
 
 ### 5. **Chronicle Services**
 
-![](Screenshot-2024-05-24-at-11.35.14.png)
+![Chronicle Software logo](Screenshot-2024-05-24-at-11.35.14.png)
 
 Chronicle Software's microservice framework, called Chronicle Services, is a low latency Java framework designed to build high-performance, distributed applications.
 
@@ -158,7 +158,7 @@ For organizations requiring high performance and the capability to manage the co
 
 ### 6. **Vert.x**
 
-![](Screenshot-2024-05-24-at-11.35.21.png)
+![Vert.x logo](Screenshot-2024-05-24-at-11.35.21.png)
 
 Vert.x is an event-driven, non-blocking, reactive toolkit for developing applications on the Java Virtual Machine (JVM). It's designed to handle high concurrency with ease, making it well-suited for microservices architecture.
 
@@ -175,7 +175,7 @@ There are numerous choices available for creating microservices in Java. It's im
 
 ### 7. **Kalix.io**
 
-![](Screenshot-2024-05-24-at-11.35.28.png)
+![Kalix logo in white on a green-orange gradient](Screenshot-2024-05-24-at-11.35.28.png)
 
 A newcomer to the marketplace, from Lightbend. Can be seen as an evolution of their previous microservice platform Lagom, and Web application platform Play. Built on Akka, an actor based model for fast communications between processing units, which has been widely used in other areas.
 

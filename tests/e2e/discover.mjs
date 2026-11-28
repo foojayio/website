@@ -26,9 +26,6 @@ const FEATURES = {
   gallery: /<figure class=["']?gallery["' >]/i,
   // An embedded video. 438 posts carry one; none of them is self-hosted.
   video: /<iframe[^>]+src=["']?https:\/\/www\.youtube\.com\/embed\//i,
-  // The WordPress comment archive (partials/legacy-comments.html), on the 269
-  // posts whose bundle carries a comments.json.
-  legacyComments: /<section id=["']?legacy-comments/i,
 };
 
 /** Fixed pages -- these have a URL because of what they ARE, not what is on them. */
@@ -39,6 +36,7 @@ const FIXED = {
   calendar: 'calendar/',
   jugs: 'jugs/',
   champions: 'java-champions/',
+  conferences: 'java-conferences/',
   sitemap: 'sitemap/',
   sponsors: 'our-sponsors/',
   board: 'board/',
@@ -117,7 +115,7 @@ export function discover() {
   pages.author = firstUnder('today/author/');
   pages.category = firstUnder('today/category/');
   pages.sponsor = firstUnder('sponsor/');
-  pages.pedia = firstUnder('pedia/');
+  pages.pedia = firstUnder('java-terms-explained/');
   pages.pager = 'today/page/2/';
   // Self-hosted media is found on DISK, not by looking for a link to it: the
   // one .mp4 in the build is a bundle resource whose post still links to the

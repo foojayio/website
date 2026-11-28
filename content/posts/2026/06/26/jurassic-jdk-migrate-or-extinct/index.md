@@ -7,7 +7,6 @@ authors:
 image: "1_wul-KqE6vXk4ynnh_IljSQ.webp"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "JDK21"
   - "Maven"
   - "Performance"
@@ -19,7 +18,7 @@ related_posts:
   - "are-java-security-updates-important"
 ---
 
-![](1_wul-KqE6vXk4ynnh_IljSQ-1-1024x562.webp)
+![Illustration of a T-Rex in a Java hoodie pointing smaller dinosaurs toward a JDK 17+ portal, away from a volcano and an extinct sign](1_wul-KqE6vXk4ynnh_IljSQ-1-1024x562.webp)
 
 65 million years ago, dinosaurs didn't adapt. They're gone. Your JDK 7 app is giving the same energy. 🫠
 

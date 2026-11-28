@@ -1,7 +1,6 @@
 ---
 title: "Azure Active Directory, OpenID Connect, Open Liberty, and Java"
 date: "2020-07-31T20:31:00+00:00"
-lastmod: "2021-08-23T12:30:34+00:00"
 description: "Let's look at an example of how to configure the Liberty social login feature as OpenID Connect client to secure Java apps with Azure Active Directory."
 authors:
   - "m-reza-rahman"
@@ -99,7 +98,7 @@ The relevant configuration in `web.xml`:
 ```
 
 This is just standard Java EE security. The authentication and authorization workflow is shown in the following diagram.
-![](dzone-com-afac1be9.png)
+![Sequence diagram of OpenID Connect between browser, web server, Microsoft identity platform and web API with token exchange](dzone-com-afac1be9.png)
 
 *Picture 1: OpenID Connect sign-in and token acquisition flow, from* [*Microsoft identity platform and OpenID Connect protocol*](https://docs.microsoft.com/azure/active-directory/develop/v2-protocols-oidc#protocol-diagram-access-token-acquisition)
 

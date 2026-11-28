@@ -1,7 +1,6 @@
 ---
 title: "7 Reasons Why, After 26 Years, Java Still Makes Sense!"
 date: "2022-03-15T08:02:48+00:00"
-lastmod: "2025-01-24T10:39:56+00:00"
 description: "After many discussions with Java developers, combined with my personal experiences with the Java community and platform, here are the key reasons why Java developers love Java after all these years!"
 authors:
   - "bazlur-rahman"
@@ -27,7 +26,7 @@ Now, the question is, still, should we be concerned about any apparent decline? 
 
 I asked these questions to many Java developers and there were many and varied answers. For example, Brazilian Java champion [Bruno Souza](https://twitter.com/brjavaman) states that the main reasons for him to stick with Java are:
 
-{{< img src="Screen-Shot-2022-03-10-at-9.07.04-AM-679x510.png" class="size-medium" width="679" height="510" >}}
+{{< img src="Screen-Shot-2022-03-10-at-9.07.04-AM-679x510.png" alt="Tweet from Bruno Souza (@brjavaman) listing his favorite reasons to stick with Java: community, improving technology, reliable tools" class="size-medium" width="679" height="510" >}}
 
 While many others mentioned similar ideas, Java Champion [Geertjan Wielenga](https://twitter.com/GeertjanW) has shared that he's stayed with Java, amongst other reasons, because that's where his friends are found. Indeed, that's an excellent reason for sticking with a community and thus with Java itself.
 
@@ -73,7 +72,7 @@ Here is the list of the Quality Outreach program of free and open source Java li
 
 Besides these standards and libraries, many open source frameworks, such as [Spring](https://spring.io/), and particularly, [Spring Boot](https://spring.io/projects/spring-boot), has made our lives super easy when writing web services. Similarly, many other frameworks, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/) and [Helidon](https://helidon.io/) are getting traction, too. There is an immense amount of content on the Web, and books are available on all of these frameworks, making learning easy.
 
-Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no means the only provides of the OpenJDK. Although every OpenJDK provider has its own implementation and unique sauces, if they're doing things right, they're complying with the shared [Technology Compatibility Kit (TCK)](https://foojay.io/pedia/tck/).
+Furthermore, the OpenJDK itself has multiple implementations. Oracle is by no means the only provides of the OpenJDK. Although every OpenJDK provider has its own implementation and unique sauces, if they're doing things right, they're complying with the shared [Technology Compatibility Kit (TCK)](https://foojay.io/java-terms-explained/tck/).
 
 Performance may differ from OpenJDK vendor to OpenJDK vendor, but the output remains the same. For example, the default GC of [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) is G1, which is highly performant. However, if we want to use a commercial GC, such as [Azul C4,](https://www.azul.com/products/components/pgc/) that's also fine. We can do that without changing our application code. That's a tremendous freedom.
 

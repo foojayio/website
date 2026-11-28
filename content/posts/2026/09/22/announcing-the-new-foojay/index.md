@@ -60,7 +60,7 @@ automatically with GitHub Actions to GitHub Pages whenever something lands on th
 | Podcast episodes | Press play and listen | Idem plus a transcript on the page as well |
 | All content | In a database | Markdown files you can read on GitHub |
 
-Everything came across: [2250+ articles](/today/), [350+ author profiles](/today/author/), [50+ JVM Terms Explained](/pedia/), the [JUG (Java User Group) directory](/jugs/), the [calendar](/calendar/), the [sponsors](/our-sponsors/),... Every legacy path
+Everything came across: [2250+ articles](/today/), [350+ author profiles](/today/author/), [50+ JVM Terms Explained](/java-terms-explained/), the [JUG (Java User Group) directory](/jugs/), the [calendar](/calendar/), the [sponsors](/our-sponsors/),... Every legacy path
 still resolves, including the ones nobody would think to check: the old `/blog/`
 scheme, the retired slugs, and the URLs that changed when an article got a new
 name years ago.
@@ -251,6 +251,10 @@ So the old comments now live in the repository instead. Each article carries a s
 JSON file next to its text, and the page renders it under the live discussion as
 **Discussions on the previous Foojay site**. 
 
+> **Update 9 November 2026:** this is now fixed! The old comments have been imported into
+> the GitHub Discussions, slowly enough this time to stay under GitHub's spam limits, so they
+> appear in the same thread as new comments instead of in a separate archive.
+
 ## Accessibility
 
 No law seems to oblige Foojay to be accessible. The [European Accessibility
@@ -277,13 +281,12 @@ where it actually stands. What went in:
 - The mobile menu moved off-screen but stayed in the tab order, so a keyboard walked you through a menu you could not see. 
 - The image viewer bound its click handler to the `<img>`, so click-to-enlarge did not exist for a keyboard at all. 
 
-One thing which could not be easily fixed: **roughly 3,000 images in the archive have no alt text.** They arrived that way, and no
-script can or should invent a description. The check reads
+One thing which could not be fixed by hand: **roughly 3,000 images in the archive arrived without alt text.** Every one now has a description, written by a model from the picture itself, and no person has reviewed them yet. Some will be wrong or too generic. The check reads
 new articles when you open the pull request and raises a *warning* rather than a
 failure, because whether an image carries meaning is a judgement call. The
 predictable response to a hard failure is `alt="image"`, which serves a screen
 reader worse than nothing at all. If you
-wrote one of those articles on WordPress, you are the best person alive to describe its screenshots.
+wrote one of those articles on WordPress, you are the best person alive to correct its descriptions: open a pull request on the file.
 
 ## Visitor Counting and Privacy
 

@@ -1,7 +1,6 @@
 ---
 title: "Debugging Race Conditions in Production"
 date: "2022-03-23T07:45:15+00:00"
-lastmod: "2022-03-23T07:45:17+00:00"
 description: "Debugging race conditions is hard, unfortunately production environments are especially problematic for these kinds of problems!"
 canonical: "https://lightrun.com/tutorials/debug-race-condition-production/"
 authors:

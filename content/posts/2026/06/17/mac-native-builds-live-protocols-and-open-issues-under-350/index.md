@@ -1,22 +1,19 @@
 ---
 title: "Mac Native Builds, Live Protocols, And Open Issues Under 350"
 date: "2026-06-17T15:03:06+00:00"
-lastmod: "2026-06-18T13:39:39+00:00"
 description: "The open issue count dropped below 350 after a push through the oldest reports, and the same week brought native Mac builds, WebSockets in the core, gRPC a"
 canonical: "https://www.codenameone.com/blog/mac-native-grpc-graphql-and-fewer-open-issues/"
 authors:
   - "shai-almog"
 image: "weekly.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
-
-![Mac Native Builds, Live Protocols, And Open Issues Under 350](weekly.jpg)
 
 Our focus was all over the place this week with work that targeted many different directions: desktop, monetization, communication, media, and more. This fits with our roadmap of one platform that delivers the promise Java never delivered: WORA for Everything Everywhere.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

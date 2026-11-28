@@ -1,14 +1,12 @@
 ---
 title: "Getting Started With Hibernate ORM and MongoDB"
 date: "2025-11-04T17:06:26+00:00"
-lastmod: "2026-09-01T21:50:19+00:00"
 description: "For years, Hibernate ORM has been one of the most popular frameworks in the Java ecosystem. It was built to simplify data persistence by letting developers work with Java objects instead of SQL statements, a technique known as object-relational mapping (ORM).Traditionally, Hibernate ORM has been tightly associated with relational databases like PostgreSQL, MySQL, and Oracle. It manages connections, transactions, and entity state behind the scenes, and even provides Hibernate Query Language (HQL) so you can query your data using Java entity names rather than table names. Now, that same simplicity is available in the document-oriented world. With the MongoDB Extension for Hibernate ORM, developers can use familiar annotations such as @Entity and @Id, and the same Session.persist() and HQL queries they already know, but backed by MongoDB’s flexible schema architecture. This integration introduces a new MongoDB extension that allows Hibernate to translate entity operations and HQL queries into MongoDB commands, combining the ease of JPA with the scalability of MongoDB.In this article, we’ll walk through the setup and first steps to get Hibernate ORM running with MongoDB, from configuration to a simple CRUD example."
 authors:
   - "ricardo-mello"
 image: "546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -110,7 +108,7 @@ If you'd like to follow along or check the complete code, it's all available on 
 ## Setting up the project
 
 For this example, I'm using **IntelliJ IDEA** as my IDE. To create the project, go to *File* **→** *New* **→** *Project* , select *Java* , choose **Maven** as the build system, and click **Create**, as shown in the image below:  
-![](Screenshot-2025-10-27-at-2.52.17-PM.png)
+![IntelliJ IDEA New Project dialog with a Maven project named mongodb-hibernate-crud using Corretto 21](Screenshot-2025-10-27-at-2.52.17-PM.png)
 
 This will generate a simple Maven-based Java project with the standard structure (src/main/java and src/main/resources).
 

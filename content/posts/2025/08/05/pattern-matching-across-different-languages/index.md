@@ -1,14 +1,12 @@
 ---
 title: "Pattern-matching across different languages"
 date: "2025-08-05T07:40:40+00:00"
-lastmod: "2025-08-05T07:40:41+00:00"
 description: "With destructuring, pattern matching is a huge help to developers who want to write readable and maintainable code."
 canonical: "https://blog.frankel.ch/pattern-matching-different-languages/"
 authors:
   - "nicolas-frankel"
 image: "cover-1024x683.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Research"
   - "Scala"

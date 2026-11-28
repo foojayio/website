@@ -132,10 +132,10 @@ so no pattern derives them and each needs its own rule. Both columns are under
 | `uncategorized/` | `/today/` |
 
 `ai-ml` is WordPress's **"Machine Learning"** category, so the literal
-equivalent is `/today/category/machine-learning/`. It points at `/ai/` because
-that page renders exactly that category (`list_category: "Machine Learning"`,
-the same 66 articles) with an editorial introduction on top — the same post set
-on the better page.
+equivalent is `/today/category/machine-learning/`. The live rule still
+targets `/ai/`, which is now a Hugo alias of `/today/category/ai/`
+(`content/categories/ai/_index.md`), so it lands there in two hops. Point the
+rule at `/today/category/ai/` directly when someone with Cloudflare access can.
 
 #### Rule 4b, the renames
 
@@ -175,9 +175,9 @@ matter, with one exception noted below.
   or end-of-string and finds `s`. The same holds for `interview` and
   `tutorial`. Loosen those anchors and the chain eats its own output.
 - **`ai-ml` gets two lines, and they are the one ordered pair.** The bare
-  category goes to `/ai/`, the editorial page chosen above. Anything deeper goes
-  to `/today/category/machine-learning/`, the literal term page, because `/ai/`
-  has no `page/2/` and no feed. The bare-path line runs first so the subtree
+  category goes to `/ai/`, see above. Anything deeper goes
+  to `/today/category/machine-learning/`, the literal term page, because the AI
+  term's `page/2/` and feed hold different posts. The bare-path line runs first so the subtree
   line cannot claim it.
 
 ### Verifying

@@ -59,16 +59,20 @@ falls short today rather than claiming a conformance we have not audited.
 - **The dark colour scheme follows your system setting** and can be overridden
   per visit.
 - **Podcast episodes have a transcript on the page**, so an episode is readable
-  without listening to it — see the caveat below on where those come from.
+  without listening to it — see the caveat below on where those come from. An
+  episode without one says so.
+- **Logos and thumbnails that only repeat the name next to them are hidden from
+  screen readers**, so an organisation or an article card is announced once.
 - **No time limits, no flashing content, no audio that plays by itself.**
 
 ## What is not there yet
 
-- **Images in older articles are missing alt text.** foojay.io's archive was
-  imported from a previous system that stored most images with an empty
-  description, and roughly 3,000 images across the archive are still in that
-  state. New articles are checked for this when they are submitted, and the
-  archive is being worked through. This is the site's biggest gap.
+- **Image descriptions in older articles are machine-written.** foojay.io's
+  archive was imported from a previous system that stored most images with an
+  empty description. Every image has since been given one, written by an AI
+  model that looked at the picture rather than by the author, and not each one
+  has been checked by a person, so some will be vague or wrong. New articles
+  are checked for a missing description when they are submitted.
 - **Podcast transcripts are machine-generated.** Every episode page carries a
   transcript you can read, search and skip through, but it comes from automatic
   speech recognition: it is tidied up, not checked against the audio, so names

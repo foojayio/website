@@ -1,7 +1,6 @@
 ---
 title: "The Evolution of Java: Challenging Stereotypes and Embracing Modernity"
 date: "2023-07-07T16:15:56+00:00"
-lastmod: "2023-07-10T04:00:31+00:00"
 description: "Dive into the modern evolution of Java, challenging stereotypes and showcasing its transformative features."
 authors:
   - "bazlur-rahman"

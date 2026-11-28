@@ -1,7 +1,6 @@
 ---
 title: "9 Best Java Profilers to Use in 2024"
 date: "2024-07-10T13:46:51+00:00"
-lastmod: "2024-07-10T14:37:48+00:00"
 description: "In this article, I will share why my team decided to start a Java profiler, the list of profilers we found that are suited for profiling Java apps, and how to analyze the data from the profiler to draw conclusions faster."
 authors:
   - "lee-sheinberg"
@@ -24,7 +23,7 @@ As we started looking for Java profilers to help us, we realized there was a who
 
 We started the profiler to find out which application was slowing down our app, and realized that the tool had really good potential but it's very hard and takes a very long time to actually pinpoint where the problem is. Once I got the data, it was hard to analyze it because I needed to actually look at the call tree and manually come to a conclusion.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-24-1024x426.png)
+![Digma profiler view in the IDE highlighting which code slows down the application](https://digma.ai/wp-content/uploads/2024/03/image-24-1024x426.png)
 
 YourKit Profiler
 
@@ -108,7 +107,7 @@ jstat -gc 98132 17527
 
 ```
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-11-768x121.png)
+![Terminal output of the jmap command listing Java heap memory details](https://digma.ai/wp-content/uploads/2024/03/image-11-768x121.png)
 
 ### b. jmap
 
@@ -165,13 +164,13 @@ a. Finding which code/[qureies](https://digma.ai/how-to-optimize-slow-sql-querie
 
 You can find the most performance-impactful code in the Assets tab and sort them by Performance Impact:
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-9-2.png)
+![Digma Assets tab listing endpoints sorted by Performance Impact](https://digma.ai/wp-content/uploads/2024/03/image-9-2.png)
 
 This view is valuable for developers as it provides a quick overview of which endpoints might need optimization due to performance issues. The combination of execution time and performance impact allows for prioritized troubleshooting and development focus, helping to improve the application's overall performance and reliability.
 
 Or open the Dashboard and use the Client Spans Performance Impact Widget:
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-16.png)
+![Digma dashboard Client Spans Performance Impact widget highlighting slow endpoints](https://digma.ai/wp-content/uploads/2024/03/image-16.png)
 
 This widget helps developers quickly identify which part of their application might be contributing to performance issues. They can prioritize their debugging and optimization efforts, starting with the endpoints marked with a high impact on performance.
 
@@ -179,7 +178,7 @@ b. Identifying performance degradations in a recent commit (Duration Change)
 
 Another way to track the recent changes in code performance is the [Duration insight](https://docs.digma.ai/digma-developer-guide/digma-features/analytics/duration "Duration insight"). It provides a visual representation of the distribution of call durations for a particular span.
 
-![](https://digma.ai/wp-content/uploads/2024/03/Duration-change.png)
+![Digma Duration insight showing the distribution of call durations for a span](https://digma.ai/wp-content/uploads/2024/03/Duration-change.png)
 
 **Last Call Performance:** The widget shows the duration of the most recent call (91.95 milliseconds), which can be immediately compared to typical performance to determine if it's within an expected range or an outlier.
 
@@ -195,7 +194,7 @@ c. Profiling to find scaling issues [Scaling insight](https://docs.digma.ai/digm
 
 Digma offers insights into the code's scalability, identifying potential issues that could hinder the application's ability to scale.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-17-768x345.png)
+![Digma Scaling issue insight pointing to concurrency bottlenecks in request processing](https://digma.ai/wp-content/uploads/2024/03/image-17-768x345.png)
 
 For example, with Scaling issue insight, developers can quickly spot performance bottlenecks related to concurrency handling and request processing times.
 
@@ -219,7 +218,7 @@ VisualVM allows for snapshots of profiling sessions to be taken for later analys
 
 VisualVM relies on other standalone tools that come with the JDK, such as JConsole, jstat, jinfo, jstack, and jmap.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-19.png)
+![VisualVM window showing monitoring of a running Java application](https://digma.ai/wp-content/uploads/2024/03/image-19.png)
 
 Here are three ways you can use VisualVM:
 
@@ -243,7 +242,7 @@ YourKit Java Profiler is compatible with various platforms and offers distinct i
 
 Like JProfiler, YourKit also includes essential functions for displaying threads, garbage collections, memory usage, and memory leaks. It supports both local and remote profiling through SSH tunneling.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-18.png)
+![YourKit profiler window showing threads, garbage collection and memory usage](https://digma.ai/wp-content/uploads/2024/03/image-18.png)
 
 YourKit provides paid licenses for business purposes, including a no-cost trial and discounted or no-cost permits for personal use.
 
@@ -262,7 +261,7 @@ With this information, we can readily identify optimization, removal, or modific
 JProfiler is a profiling tool for Java applications created by ej-technologies. JProfiler provides interfaces for monitoring memory usage, system performance, potential memory leaks, and thread profiling with a friendly user interface.
 
 With this information, we can readily identify optimization, removal, or modification areas in the system's foundation.  
-![](https://digma.ai/wp-content/uploads/2024/03/image-21.png)
+![JProfiler interface showing memory usage and thread profiling of a Java application](https://digma.ai/wp-content/uploads/2024/03/image-21.png)
 
 This Java Profiler requires the purchase of a license, but it offers a free trial. The main focus is on tackling four crucial areas:
 
@@ -279,7 +278,7 @@ JProfiler can be integrated with well-known IDEs like IntelliJ IDEA, Eclipse, an
 ## 6. NetBeans Profiler
 
 Although NetBeans is primarily recognized for its exceptional debugging capabilities, it also surprisingly stands out as one of the top Java profilers. Apache NetBeans IDE includes the NetBeans Profiler as part of its bundle. It is also an excellent option for easy development and profiling.  
-![](https://digma.ai/wp-content/uploads/2024/03/image-20.png)
+![NetBeans Profiler view inside the Apache NetBeans IDE](https://digma.ai/wp-content/uploads/2024/03/image-20.png)
 
 Combining the features of a profiler and a debugger allows for monitoring code execution time and runtime behavior and improving efficiency in debugging methods such as multi-threading. The Netbeans profiler boosts the application's speed, leading to improved memory efficiency. It's great that you can download it from their website for free.
 
@@ -291,7 +290,7 @@ The IntelliJ Profiler is an uncomplicated yet robust tool for profiling CPU and 
 
 Although a few advanced functions are available, the primary emphasis is on simplicity. IntelliJ Profiler offers a simple way to begin without setup and offers valuable tools for our daily development tasks.
 
-![](https://digma.ai/wp-content/uploads/2024/03/image-22.png)
+![IntelliJ Profiler results inside IntelliJ IDEA Ultimate](https://digma.ai/wp-content/uploads/2024/03/image-22.png)
 
 Within IntelliJ IDEA Ultimate, IntelliJ Profiler can be easily connected to a Java process, allowing seamless navigation between a snapshot and the source code. Other aspects, such as distinct flame graphs, enable us to evaluate the effectiveness of various methods visually and understand the runtime processes promptly and effectively.
 
@@ -314,13 +313,13 @@ At the time of writing, Async Profiler only supports Linux and Mac operating sys
 
 * *Initiating and terminating profiling session*
 * Connecting to a process that is already in progress
-* Examining the profile assessment.![](https://digma.ai/wp-content/uploads/2024/03/image-23.png)
+* Examining the profile assessment.![IntelliJ Profiler menu options to start and stop a profiling session or attach to a running process](https://digma.ai/wp-content/uploads/2024/03/image-23.png)
 
 ## 9. Arthas
 
 Alibaba Arthas is a tool for diagnosing Java applications, providing the ability to track, analyze, and resolve issues. A major advantage of utilizing Arthas is that there is no need to modify your code or reboot the Java services being monitored.
 
-![](https://lh7-us.googleusercontent.com/OZqLdXeqlhxj6juSB_F6JFlWqou_gHP_1cSnuunPPZeceBez7rCBT8tCFflOI6YtfAwCIGkT33PnoyLESiYjJablxY2qg2XPcBUolKQV5uDbRARadjASoMrE5YaKu76URnYW-ejXgWWg5CHFfVPdnNU)
+![Arthas command-line console diagnosing a running Java application](https://lh7-us.googleusercontent.com/OZqLdXeqlhxj6juSB_F6JFlWqou_gHP_1cSnuunPPZeceBez7rCBT8tCFflOI6YtfAwCIGkT33PnoyLESiYjJablxY2qg2XPcBUolKQV5uDbRARadjASoMrE5YaKu76URnYW-ejXgWWg5CHFfVPdnNU)
 
 If you encounter issues in production, it is not possible to use IDEs to debug the application remotely. Also, debugging in a production environment is bad practice, as it will suspend all the threads, which will, in turn, suspend business services.
 

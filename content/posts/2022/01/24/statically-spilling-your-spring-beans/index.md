@@ -1,7 +1,6 @@
 ---
 title: "Statically Spilling Your (Spring) Beans"
 date: "2022-01-24T11:25:13+00:00"
-lastmod: "2022-01-24T19:05:22+00:00"
 description: "There are some edge cases where you want to access Spring Beans in a static method, while you should always try to avoid this."
 authors:
   - "tom-cools"

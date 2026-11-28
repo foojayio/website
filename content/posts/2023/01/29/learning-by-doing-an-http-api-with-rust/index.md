@@ -1,7 +1,6 @@
 ---
 title: "Learning by doing: An HTTP API with Rust"
 date: "2023-01-29T16:24:21+00:00"
-lastmod: "2026-09-21T06:05:17+00:00"
 description: "When I started working on this post, I had another idea in mind: I wanted to compare the developer experience and performance of Spring Boot and GraalVM…"
 canonical: "https://blog.frankel.ch/http-api-rust/"
 authors:
@@ -22,7 +21,7 @@ When I started working on this post, I had another idea in mind: I wanted to com
 
 [
 
-{{< img src="Screenshot-2023-01-28-at-16.43.21-530x510.png" class="aligncenter size-medium" width="530" height="510" >}}
+{{< img src="Screenshot-2023-01-28-at-16.43.21-530x510.png" alt="Tweet from Nicolas Frankel asking for help with a stuck Spring Boot Kotlin GraalVM native image build in Docker on an M1 Mac" class="aligncenter size-medium" width="530" height="510" >}}
 
 ](https://twitter.com/nicolas_frankel/status/1608847301103214593)
 

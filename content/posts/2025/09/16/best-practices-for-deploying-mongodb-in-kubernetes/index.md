@@ -1,7 +1,6 @@
 ---
 title: "Best Practices for Deploying MongoDB in Kubernetes"
 date: "2025-09-16T19:01:34+00:00"
-lastmod: "2025-09-16T19:01:35+00:00"
 description: "Running MongoDB in Kubernetes introduces challenges that don’t exist with stateless applications. By default, Kubernetes doesn’t understand MongoDB’s replica set topology, quorum requirements, or data durability constraints. The MongoDB Kubernetes Operator bridges that gap, enabling you to declaratively deploy and manage replica sets and sharded clusters using familiar Kubernetes patterns."
 authors:
   - "tim-kelly"

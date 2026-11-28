@@ -1,7 +1,6 @@
 ---
 title: "Starting Docker Desktop with Spring Boot"
 date: "2022-09-30T05:37:53+00:00"
-lastmod: "2022-09-30T05:38:25+00:00"
 description: "In this article, we discuss Docker Desktop, including the Docker file, creating/pushing Docker images, creating/running Docker containers."
 authors:
   - "sumith-puri"

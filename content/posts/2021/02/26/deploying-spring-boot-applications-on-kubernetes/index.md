@@ -1,7 +1,6 @@
 ---
 title: "Deploying Spring Boot Application on Kubernetes"
 date: "2021-02-26T17:51:44+00:00"
-lastmod: "2021-07-05T20:03:09+00:00"
 description: "Learn how you can create a pod, deploy a Spring Boot application, and manage the single node cluster with Lens IDE on Docker Desktop."
 canonical: "https://ashishtechmill.com/deploying-spring-boot-application-on-kubernetes"
 authors:
@@ -34,9 +33,9 @@ You can follow the official Docker Desktop [installation](http://https://hub.doc
 
 ### How to Enable Kubernetes With Docker Desktop for Mac
 
-* Go to Preferences in the Docker menu bar. Then click the Kubernetes tab. Click the checkbox to enable Kubernetes and switch the default orchestrator to Kubernetes. It will take some time to enable Kubernetes.![](Screenshot-2020-12-07-at-7.29.06-PM-700x219.png)
-* Once it is enabled you will see something like below on your Docker menu bar.![](Screenshot-2020-12-06-at-9.45.07-PM.png)
-* Next, You should also set the Kubernetes context to docker-desktop if you have multiple clusters or environments running locally.![](Screenshot-2020-12-07-at-5.41.16-PM.png)
+* Go to Preferences in the Docker menu bar. Then click the Kubernetes tab. Click the checkbox to enable Kubernetes and switch the default orchestrator to Kubernetes. It will take some time to enable Kubernetes.![Docker Desktop settings with the Kubernetes tab open and 'Enable Kubernetes' checked](Screenshot-2020-12-07-at-7.29.06-PM-700x219.png)
+* Once it is enabled you will see something like below on your Docker menu bar.![Docker Desktop menu showing that Docker Desktop and Kubernetes are running](Screenshot-2020-12-06-at-9.45.07-PM.png)
+* Next, You should also set the Kubernetes context to docker-desktop if you have multiple clusters or environments running locally.![Docker Desktop Kubernetes menu with the docker-desktop context selected](Screenshot-2020-12-07-at-5.41.16-PM.png)
 
 As per official [documentation](https://docs.docker.com/docker-for-mac/kubernetes/) the mac Kubernetes integration provides the Kubernetes CLI command at `/usr/local/bin/kubectl`. This location may not be in your shell's `PATH` variable, so you may need to type the full path of the command or add it to the `PATH`.
 

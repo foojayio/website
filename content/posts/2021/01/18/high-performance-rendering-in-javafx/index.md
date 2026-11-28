@@ -1,7 +1,6 @@
 ---
 title: "Tips on High Performance Rendering in JavaFX"
 date: "2021-01-18T09:07:52+00:00"
-lastmod: "2021-01-26T13:30:59+00:00"
 description: "Different rendering techniques in JavaFX using Canvas API, AWT Graphics2D, PixelBuffer and PixelBuffer GPU."
 authors:
   - "almasbaimagambetov"

@@ -1,7 +1,6 @@
 ---
 title: "Are Java Security Updates Important?"
 date: "2024-08-03T14:56:00+00:00"
-lastmod: "2024-10-03T16:34:30+00:00"
 description: "Equifax had numerous firewalls in place that would have done all the things a firewall should, but did not prevent the attack. Find out why!"
 canonical: "https://www.azul.com/blog/the-importance-of-java-security-updates/"
 authors:
@@ -60,7 +59,7 @@ Firstly, here is a list of the highest-scoring CVSS in updates since April 2019.
 | April 2019    | 9.0             | 8                     |
 
 For a full view on CVEs per update of the JDK, see [Foojay.io](https://javaalmanac.io/jdk/16/):
-[![](image-1024x679.jpg)](https://javaalmanac.io/jdk/16/)
+[![foojay.io OpenJDK Update & Release Details page, Security / CVE view for Java 16.0.1 listing two CVE fixes with their CVSS scores](image-1024x679.jpg)](https://javaalmanac.io/jdk/16/)
 
 As you can see, recently, things have been relatively quiet with only medium-level vulnerabilities being addressed, but there have been some high and one critical.
 

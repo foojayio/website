@@ -1,7 +1,6 @@
 ---
 title: "Building an AI-Powered Operations Assistant with Spring AI and MongoDB Atlas — Part 2: Conversational Memory"
 date: "2026-06-10T19:23:46+00:00"
-lastmod: "2026-06-10T19:23:48+00:00"
 description: "This is the second article in a three-part series. Part 1 covered the RAG foundation — loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume."
 authors:
   - "matteo-rossi"
@@ -60,7 +59,7 @@ After performing this first operation, we need to recall the latest messages exc
 All these parts, combined, form the final request: it contains the long-term personal context, the short-term conversation history, the runbooks retrieved from the RAG, the system prompt defining the role, and the current question, all encapsulated within the current context window.
 
 Let's try to visualize all of this within a sequence diagram:  
-![](Screenshot-2026-06-10-at-2.20.56-PM.png)
+![Sequence diagram: advisors add long-term memories and chat history to a request, then the model answers using runbook chunks from Atlas](Screenshot-2026-06-10-at-2.20.56-PM.png)
 
 In addition to all this, we must also consider the existence of a separate workflow, which can be triggered on demand or at scheduled intervals, not with every single request, and is responsible for consolidating the information exchanged into long-term memory. This stream reads the entire conversation from the chat memory, calls the LLM to extract the relevant facts from the conversation, and writes them to the memories collection for later retrieval.
 
@@ -121,7 +120,7 @@ Upon receiving a request, the *LongTermMemoryAdvisor* retrieves this information
 When a request arrives with a user ID, the advisor extracts the content from the message, calls the *MemoryService.findRelevant* method for the specified user, formats the retrieved memories as an unordered list, and injects it into the context along with the other information. The model reads these memories as part of the instruction context rather than as ordinary conversation turns. This makes them available as persistent background about the user, previous decisions, preferences, and unresolved situations. By contrast, the RAG context retrieved from the knowledge base remains closer to the user question, where it acts as immediate evidence for the current answer.
 
 Below is a representative sequence diagram.  
-![](Screenshot-2026-06-10-at-2.21.41-PM.png)
+![Sequence diagram: LongTermMemoryAdvisor looks up the top-5 relevant user memories via vector search and injects them into the system message](Screenshot-2026-06-10-at-2.21.41-PM.png)
 
 ## Memory Consolidation: From Conversation to Durable Fact
 
@@ -154,7 +153,7 @@ The response from the model is parsed, and each record is validated before being
 An unclear conversation, full of imprecise intermediate commands and inaccurate assumptions, will produce a significantly less useful output. As usual, the quality and attention paid to this type of activity is directly proportional to the future quality of the assistant's responses.
 
 Below is a sequence diagram summarizing the interaction just presented:
-![](Screenshot-2026-06-10-at-2.22.17-PM.jpg)
+![Sequence diagram: consolidation sends a conversation to the LLM to extract memories, which are saved with embeddings in MongoDB Atlas](Screenshot-2026-06-10-at-2.22.17-PM.jpg)
 
 ## The Advisor Chain and Why Order Matters
 

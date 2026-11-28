@@ -8,7 +8,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Interviews"
-  - "Java"
   - "Spring"
   - "Tools"
 related_posts:

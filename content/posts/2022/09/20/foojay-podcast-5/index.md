@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #5: OpenJDK Discussion Panel"
 date: "2022-09-20T15:56:27+00:00"
-lastmod: "2025-11-13T09:23:36+00:00"
 description: "It's September 20th, OpenJDK 19 has been released. In this podcast, we discuss the new features and the changes that this release brings."
 authors:
   - "deepu-sasidharan"
@@ -89,4 +88,4 @@ You can listen and subscribe to the Foojay Podcast on:
 43'30 About Java modules  
 
 45'45 Outro
-![](FdCZjrTXEAUlyb7-1024x404.jpg)
+![Video call grid showing the five participants of the Foojay Podcast episode 5](FdCZjrTXEAUlyb7-1024x404.jpg)

@@ -1,15 +1,13 @@
 ---
 title: "SolarWinds Hack: What Does This Mean For Us?"
 date: "2021-08-19T08:19:56+00:00"
-lastmod: "2021-08-19T08:19:58+00:00"
 description: "New attack vectors are becoming more and more sophisticated and are directed more and more against the value chain in general!"
 authors:
   - "sven-ruppert"
 image: "mqdefault-f6be976c.jpg"
 categories:
   - "DevOps"
-  - "JFrog Artifactory"
-  - "JFrog Xray"
+  - "JFrog"
   - "Security"
   - "Videos"
 related_posts:

@@ -1,7 +1,6 @@
 ---
 title: "The Vary HTTP Header"
 date: "2024-05-15T07:46:26+00:00"
-lastmod: "2024-05-15T07:46:28+00:00"
 description: "Recently, I stumbled upon the list of all registered HTTP Headers. This post is dedicated to the Vary HTTP Header."
 canonical: "https://blog.frankel.ch/vary-http-header"
 authors:

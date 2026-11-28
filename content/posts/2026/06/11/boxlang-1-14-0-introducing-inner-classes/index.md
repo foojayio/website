@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.14.0: Introducing Inner Classes"
 date: "2026-06-11T10:29:32+00:00"
-lastmod: "2026-06-11T10:29:34+00:00"
 description: "BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper…"
 authors:
   - "cristobal-escobar"
@@ -10,7 +9,6 @@ categories:
   - "BoxLang"
   - "Design Patterns"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
 related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
@@ -19,7 +17,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](BoxLang-release-1.14.0-700x394.jpg)
+![BoxLang release 1.14.0 banner: Introducing Inner Classes](BoxLang-release-1.14.0-700x394.jpg)
 
 BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper class, you needed a file. One class, one `.bx` file, no exceptions. This also stemmed from the CFML days. That's clean and predictable, but it creates real friction when a class is tightly coupled to exactly one caller and has no business existing anywhere else.
 

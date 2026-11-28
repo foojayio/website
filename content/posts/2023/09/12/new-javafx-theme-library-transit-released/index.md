@@ -1,13 +1,11 @@
 ---
 title: "New JavaFX theme library \"Transit\" released"
 date: "2023-09-12T02:56:13+00:00"
-lastmod: "2023-09-12T07:24:45+00:00"
 description: "A new Java (JavaFX) theme has been released. This is a new theme called \"Transit\" and it builds upon JMetro."
 authors:
   - "pedro-vieira"
 image: "Councious-ScrollPane-Transit-2-poster.jpg"
 categories:
-  - "Java"
   - "JavaFX"
   - "Release Notes"
 related_posts:
@@ -51,7 +49,7 @@ The benefits of this approach are:
 
 ## High level architecture
 
-![](image-1.png)
+![Diagram: arrow from the Transit Theme box to the FXSkins box showing Transit builds on FXSkins](image-1.png)
 
 ### **FXSkins**
 
@@ -69,7 +67,7 @@ If you want the whole package, add Transit Theme as a dependency and you'll get 
 
 * **Conscious ScrollPane Skin and style.**This new Skin for the ScrollPane will show the scrollbars in a minimal style with just the thumb showing. When the user mouses over the thumb the scrollbars transform to show their full UI. All of this is styleable through CSS: the minimal scrollbar visuals, the full scrollbar visuals, etc.
 
-![](Councious-ScrollPane-Transit-2.webp)
+![JavaFX ScrollPane sample window with Code and Name fields and a text area, using Transit's minimal scrollbar](Councious-ScrollPane-Transit-2.webp)
 
 * **Compatible with latest Java LTS release and JavaFX (Java 17 and JavaFX 20).** At the moment of the writing of this post it is being built using Java 17 and JavaFX 20
 

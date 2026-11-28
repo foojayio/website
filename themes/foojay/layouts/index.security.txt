@@ -1,0 +1,4 @@
+Contact: mailto:hello@foojay.io
+Expires: {{ now.AddDate 1 0 0 | time.Format "2006-01-02T15:04:05Z" }}
+Preferred-Languages: en
+Canonical: {{ "/.well-known/security.txt" | absURL }}

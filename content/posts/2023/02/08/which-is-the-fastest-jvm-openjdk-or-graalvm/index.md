@@ -1,7 +1,6 @@
 ---
 title: "Which is the Fastest JVM: OpenJDK or GraalVM?"
 date: "2023-02-08T10:51:58+00:00"
-lastmod: "2023-02-08T10:55:11+00:00"
 description: "How is a high-performance, low-latency Java application affected by the JVM version used? Find out more on Foojay!"
 authors:
   - "per-minborg"
@@ -104,7 +103,7 @@ As can be seen, the consumer thread will read each nano timestamp and record the
 
 [Chronicle Queue](https://bit.ly/3wWnXy8) officially supports all the recent LTS versions: Java 8, Java 11, and Java 17, and so these will be used in the benchmarks. We will also use the GraalVM community and enterprise edition. Here is a list of the specific JVM variants used:
 
-![](Screen-Shot-2023-01-31-at-9.41.15-AM-1024x361.png)
+![Table listing the five JVM variants benchmarked: OpenJDK 8, 11 and 17, GraalVM CE 17 and GraalVM EE 17 with versions and vendors](Screen-Shot-2023-01-31-at-9.41.15-AM-1024x361.png)
 
 *Table 1. Shows the specific JVM variants used.*
 
@@ -112,7 +111,7 @@ As can be seen, the consumer thread will read each nano timestamp and record the
 
 As 100,000 messages per second are produced, and the benchmarks run for 100 seconds, there will be 100,000 \* 100 = 10 million messages sampled during each benchmark. The histogram used places each sample in a certain percentile: 50% (median), 90%, 99%, 99.9% etc. Here is a table showing the total number of messages received for some percentiles:
 
-![](Screen-Shot-2023-01-31-at-9.42.08-AM-1024x424.png)
+![Table of latency percentiles (50%, 99%, 99.99%) and how many of the 10 million messages fall at each](Screen-Shot-2023-01-31-at-9.42.08-AM-1024x424.png)
 
 *Table 2. Shows the number of messages for each percentile.*
 
@@ -145,7 +144,7 @@ Many other latency measurements are made in microseconds (= 1,000 ns) or even mi
 
 Here is the result of the benchmarks where all values are given in ns:
 
-![](Screen-Shot-2023-01-31-at-9.44.08-AM-1024x360.png)
+![Table of median and 99.99% latency in ns for each JDK variant; GraalVM EE 17 is lowest at 270 and 3,800](Screen-Shot-2023-01-31-at-9.44.08-AM-1024x360.png)
 
 *Table 3. Shows the latency figures for the various JDKs used.*   
 
@@ -159,7 +158,7 @@ The fastest of them all is GraalVM EE 17, but the difference compared to OpenJDK
 
 Here is a graph with the typical 256-byte message latency for the various JDK variants used (lower is better):
 
-![](Screen-Shot-2023-01-31-at-9.45.13-AM-1024x602.png)
+![Bar chart of median latency per JDK: OpenJDK 11 is slowest at about 370 ns, GraalVM EE 17 fastest at about 270 ns](Screen-Shot-2023-01-31-at-9.45.13-AM-1024x602.png)
 
 *Graph 1. Shows the median (typical) latency in ns for the various JDK variants.*
 
@@ -171,7 +170,7 @@ Looking at the higher percentiles, there is not much difference between the supp
 
 Here is another graph showing latencies for the 99.99% percentile for the various JDK variants (lower is better):
 
-![](Screen-Shot-2023-01-31-at-9.46.04-AM-1024x609.png)
+![Bar chart of 99.99th percentile latency per JDK: all about 3,800 to 4,200 ns, with GraalVM EE 17 slightly lowest](Screen-Shot-2023-01-31-at-9.46.04-AM-1024x609.png)
 
 *Graph 2. Shows the 99.99% percentile latency \[ns\] for the various JDK variants.*
 

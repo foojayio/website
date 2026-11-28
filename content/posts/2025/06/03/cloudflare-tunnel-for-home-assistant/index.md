@@ -1,7 +1,6 @@
 ---
 title: "Cloudflare Tunnel for Home Assistant"
 date: "2025-06-03T11:29:18+00:00"
-lastmod: "2025-06-04T12:32:27+00:00"
 description: "I continue to take care of my Home Assistant. This week, I replaced my original setup with Cloudflare Tunnel. This is the 6th post in the My journey with…"
 canonical: "https://blog.frankel.ch/home-assistant/6/"
 authors:
@@ -70,7 +69,7 @@ I stumbled upon the [Cloudflare Tunnel](https://developers.cloudflare.com/cloudf
 >
 > Cloudflared establishes outbound connections (tunnels) between your resources and Cloudflare's global network. Tunnels are persistent objects that route traffic to DNS records. Within the same tunnel, you can run as many 'cloudflared' processes (connectors) as needed. These processes will establish connections to Cloudflare and send traffic to the nearest Cloudflare data center.
 >
-> ![](handshake.eh3a-Ml1_1IcAgC-1024x638.webp)
+> ![Sequence diagram: browser request to Cloudflare's edge, which maps the hostname to a tunnel, then cloudflared forwards it to the local service on port 8080](handshake.eh3a-Ml1_1IcAgC-1024x638.webp)
 >
 > -- [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
 

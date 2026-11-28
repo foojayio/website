@@ -1,7 +1,6 @@
 ---
 title: "VSCode Java: Roadmap Update and New Features"
 date: "2021-07-19T07:24:03+00:00"
-lastmod: "2021-07-19T07:43:31+00:00"
 description: "Welcome to the special mid-year edition for Visual Studio Code Java updates, where we look at our product roadmap for the next few months!"
 authors:
   - "nick-zhu"
@@ -57,7 +56,7 @@ Visual Studio Code takes security seriously and we do our best to ensure that yo
 
 For Java projects, we already started to work on supporting those new security features. As a start, when you open Java projects in untrusted workspaces, the Java language server will run in a restricted mode and provide limited support. We will show this in the later section of this post.
 
-![](vscoderoadmap.png)
+![Slide with the VS Code Java July to December 2021 roadmap: build tools, security, testing, remote development and debugging](vscoderoadmap.png)
 
 The picture above summarizes our focus for July to December. Please let us know if you have any further comments or suggestions.
 
@@ -69,13 +68,13 @@ In addition to our roadmap, we also have several new features to showcase for th
 
 In our roadmap sharing above, we have emphasized how important security is for our developers. With the latest Visual Studio Code update, developers can choose whether or not to trust the workspace. For Java developers, this means when you work in an untrusted workspace, all our Java tools will be in restricted mode and certain capabilities will be disabled. To manage workspace trust, simply open command palette (Ctrl+Shift+P) and run "Workspaces: Manage Workspace Trust" command
 
-![](untrustedspace.webp)
+![VS Code Java project opened in Restricted Mode for an untrusted workspace, with the Workspace Trust tab visible](untrustedspace.webp)
 
 ## Java 16 Enabled in Dev Container for Remote Development
 
 We have now enabled Java 16 in our dev container for remote development. To use this feature, simply bring up Command Palette (Ctrl+Shift+P) and run "\>remote-containers: Add Development Container Configuration Files", then select "Java" and "16" in order.
 
-![](Java16_devcontainer.gif)<https://docs.github.com/en/codespaces/about-codespaces>
+![Animation of VS Code with a Java project where the Remote-Containers command 'Add Development Container Configuration Files' is run to enable Java 16](Java16_devcontainer.gif)<https://docs.github.com/en/codespaces/about-codespaces>
 
 ## Feedback and Suggestions
 

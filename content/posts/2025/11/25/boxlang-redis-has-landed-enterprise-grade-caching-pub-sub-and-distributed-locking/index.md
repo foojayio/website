@@ -1,7 +1,6 @@
 ---
 title: "BoxLang Redis Has Landed: Enterprise-Grade Caching, Pub/Sub, and Distributed Locking"
 date: "2025-11-25T09:33:34+00:00"
-lastmod: "2025-11-25T09:35:45+00:00"
 description: "We're thrilled to announce the release of the BoxLang Redis Module (bx-redis) - a powerful addition to BoxLang that brings enterprise-grade Redis…"
 authors:
   - "cristobal-escobar"
@@ -16,7 +15,7 @@ related_posts:
   - "foojay-podcast-76"
 ---
 
-![](bx-redis-700x467.jpg)
+![BoxLang BX-REDIS banner: the Redis module connects to Redis instances, clusters or sentinel setups for caching and messaging](bx-redis-700x467.jpg)
 
 We're thrilled to announce the release of the **BoxLang Redis Module** (`bx-redis`) - a powerful addition to BoxLang that brings enterprise-grade Redis functionality directly into your applications. Whether you're building distributed systems, implementing real-time messaging, or need high-performance caching, this module has you covered.
 

@@ -1,7 +1,6 @@
 ---
 title: "Vert.x Example on the Raspberry Pi with a Virtual Potentiometer"
 date: "2021-01-20T08:35:52+00:00"
-lastmod: "2021-01-20T09:01:59+00:00"
 description: "Vert.x is open-source reactive polyglot software toolkit from the developers of Eclipse. Let's use it to play with a virtual potentiometer!"
 canonical: "http://www.igfasouza.com/blog/raspberry-pi-vert-x-web-potentiometer/"
 authors:
@@ -20,7 +19,7 @@ The Raspberry Pi allows us to do a lot of electronic projects without having to 
 
 You can go ahead and use this idea to start your project without wasting more time and without buying anything. Today, I want to show a way to play with a potentiometer:
 
-{{< img src="Electronic-Component-Potentiometer-624x631-1.jpg" class="size-large is-resized" width="280" height="282" >}}
+{{< img src="Electronic-Component-Potentiometer-624x631-1.jpg" alt="A potentiometer: a metal-shafted rotary component with three solder lugs" class="size-large is-resized" width="280" height="282" >}}
 
 **From Wikipedia**: "A potentiometer is a three-terminal resistor with a sliding or rotating contact that forms an adjustable voltage divider. If only two terminals are used, one end and the wiper, it acts as a variable resistor or rheostat."
 
@@ -33,7 +32,7 @@ More details here: [potentiometers basic principles](https://passive-components.
 ## The Idea
 
 The idea is to create a simple web application that I can use as a potentiometer:
-![](20210115_121231-1024x1024-1-1024x1024.jpg)
+![Photo of an LED lit on a breadboard above a browser showing a Vert.x web app with a range slider acting as potentiometer](20210115_121231-1024x1024-1-1024x1024.jpg)
 
 This time I decided to do it with [Vert.X](https://github.com/eclipse-vertx/vert.x).
 
@@ -52,7 +51,7 @@ I can combine this with my [Duke robot](http://www.igfasouza.com/blog/raspberry-
 I can combine it with my [Christmas hats](http://www.igfasouza.com/blog/raspberry-christmas-hat/) and create a nice fade effect.
 
 I can do a simple Led example:
-![](01_Blinking-LED_bb-1024x777-1.jpg)
+![Fritzing diagram of a Raspberry Pi 3 wired to a breadboard with a red LED and a resistor](01_Blinking-LED_bb-1024x777-1.jpg)
 
 ## Code
 

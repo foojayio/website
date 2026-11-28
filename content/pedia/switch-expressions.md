@@ -1,7 +1,9 @@
 ---
 title: "Switch Expressions"
 description: "Switch expressions, finalised in Java 14 (JEP 361), extend the traditional switch statement to work as an expression — producing a value — and introduce a cleaner arrow-case syntax that eliminates fall-through. The new arrow form uses -> instead of ..."
-url: "/pedia/switch-expressions/"
+url: "/java-terms-explained/switch-expressions/"
+aliases:
+  - "/pedia/switch-expressions/"
 ---
 
 Switch expressions, finalised in Java 14 (JEP 361), extend the traditional `switch` statement to work as an expression — producing a value — and introduce a cleaner arrow-case syntax that eliminates fall-through.
@@ -31,11 +33,11 @@ int result = switch (input) {
 
 Switch expressions require exhaustiveness: the compiler verifies that all possible input values are handled. For `enum` types and (in Java 21+) sealed class hierarchies, the compiler enforces that every case is covered without a default, catching missing cases at compile time.
 
-Switch expressions laid the groundwork for [pattern matching in switch](https://foojay.io/pedia/pattern-matching/) (finalised in Java 21), which allows patterns — not just constants — to appear in case labels.
+Switch expressions laid the groundwork for [pattern matching in switch](https://foojay.io/java-terms-explained/pattern-matching/) (finalised in Java 21), which allows patterns — not just constants — to appear in case labels.
 
 ## See Also
 
-* [Pattern Matching](/pedia/pattern-matching/)
-* [Sealed Classes](/pedia/sealed-classes/)
-* [Records](/pedia/records/)
-* [Project Amber](/pedia/project-amber/)
+* [Pattern Matching](/java-terms-explained/pattern-matching/)
+* [Sealed Classes](/java-terms-explained/sealed-classes/)
+* [Records](/java-terms-explained/records/)
+* [Project Amber](/java-terms-explained/project-amber/)

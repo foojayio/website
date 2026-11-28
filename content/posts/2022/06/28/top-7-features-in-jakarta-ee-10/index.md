@@ -1,7 +1,6 @@
 ---
 title: "Top 7 Features in Jakarta EE 10 Release"
 date: "2022-06-28T08:33:31+00:00"
-lastmod: "2022-06-28T08:36:13+00:00"
 description: "Jakarta EE is a dominant force behind all enterprise development in Java. Check out my favorite top 7 features, what are yours?"
 authors:
   - "bazlur-rahman"
@@ -23,7 +22,7 @@ This transition opened the door to open governance, open compatibility testing (
 Jakarta EE is an integral part of the Java ecosystem. 25-35% of Java application runs on JakartaEE application servers. WildFly, JBoss EAP, Payara, WebSphere/Liberty, WebLogic etc., are some examples of these application servers. These application servers are developed and maintained by different vendors. However, as a technology, Jakarta EE remains vendor-neutral, meaning that the same application code should be able to be run by means of any of the application servers since all vendors adhere to [Jakarta EE specifications](https://jakarta.ee/specifications/).
 
 70-80% of Java applications use Jakarta EE APIs one way or another, such as Tomcat, Hibernate, ActiveMQ, Jetty, CXF, Jersey, RESTEasy, Quarkus, Microprofile, and Spring. If we dig a little deeper, we will find Jakarta EE APIs behind Java applications.   
-![](image-10-1024x416.png)
+![Bar chart from the 2021 Jakarta EE survey: Spring 60%, Jakarta EE 35%, MicroProfile 29%, Quarkus 16%](image-10-1024x416.png)
 
 Jakarta EE is a lively ecosystem. We have Jakarta EE, [MicroProfile](https://microprofile.io/), and [Helidon](https://helidon.io/). [Quarkus](https://quarkus.io/), introduced after [Micronaut](https://micronaut.io/) and Helidon, remain a popular framework. Many applications are yet to migrate and that's why Java EE 8 is still around. However, Jakarta EE 9 may be considered to be a foundation for innovation to drive new features in Jakarta EE 10, which will be released soon.
 
@@ -137,7 +136,7 @@ If you are invoking a REST service outside of a Jakarta EE environment, e.g., un
 
 With this, you don't need to run the entire container. Thus, it becomes very convenient.
 
-![](image-9-1024x497.png)
+![Jakarta EE 10 code that starts a server with SeBootstrap, calls the greeting resource with a JAX-RS client, then stops it](image-9-1024x497.png)
 
 ## 4. Multipart/Form-Data
 
@@ -238,7 +237,7 @@ Besides, it brings several functions to the query language and Criteria API. The
 [Jakarta Faces 4.0](https://jakarta.ee/specifications/faces/4.0/) brings a new API to define the full view (HTML Pages) using only Java Code.
 
 If you are particularly not interested in writing any kind of tagging language whatsoever, you can now write your UI code entirely in Java with the pure Java Faces view. I love it.
-![](image-8-1024x440.png)
+![Jakarta Faces 4.0 code defining a view entirely in Java, creating a form, message and button with an action listener](image-8-1024x440.png)
 
 ## Conclusion
 

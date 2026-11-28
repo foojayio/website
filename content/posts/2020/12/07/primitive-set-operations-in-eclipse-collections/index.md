@@ -1,7 +1,6 @@
 ---
 title: "Primitive Set Operations in Eclipse Collections"
 date: "2020-12-07T11:14:46+00:00"
-lastmod: "2020-12-07T14:11:45+00:00"
 description: "Recently, I worked on an issue to implement union, intersect, and difference operations in Sets for primitive types in Eclipse Collections."
 authors:
   - "sirisha-pratha"
@@ -27,7 +26,7 @@ Method signature: `setA.union(setB)`
 
 Union as the name indicates, it takes elements from two sets and combines them into one.
 
-{{< img src="foojay-prim-union.png" class="size-full alignleft" width="250" height="125" >}}
+{{< img src="foojay-prim-union.png" alt="Venn diagram of two overlapping green circles A and B showing the union (A U B)" class="size-full alignleft" width="250" height="125" >}}
 
 Set A — 1, 2, 3, 4.
 

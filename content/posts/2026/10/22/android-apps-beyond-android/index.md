@@ -4,11 +4,9 @@ date: "2026-10-22"
 description: "Compile Android apps for iOS, web and desktop with a free, open-source compatibility layer. Try the browser demo, see the iOS binary size and migrate one..."
 authors: ["shai-almog"]
 image: "android-apps-beyond-android-d1d17778d9.jpg"
-categories: ["Java"]
+categories: ["Codename One"]
 canonical: "https://www.codenameone.com/blog/android-apps-beyond-android/"
 ---
-
-![Android application screens reach phones, desktop and the browser](android-apps-beyond-android-d1d17778d9.jpg)
 
 We are not the first to bring Android to iOS. Earlier projects brought Android's runtime along with the application. Dalvik was built for Android, including a just-in-time compiler (JIT) that ordinary iOS apps are [not permitted to use](https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web). Disabling it removes an important source of [Dalvik's performance](https://android-developers.googleblog.com/2010/05/android-22-and-developers-goodies.html). Dalvik was designed around interpretation and JIT compilation, not ahead-of-time compilation (AOT), so taking away the JIT leaves an interpreter rather than an optimized native app.
 

@@ -1,7 +1,6 @@
 ---
 title: "Shaping Jakarta Agentic AI Together"
 date: "2026-03-02T11:15:46+00:00"
-lastmod: "2026-03-02T11:15:48+00:00"
 description: "Watch the Jakarta Agentic AI open conversation recording and learn how the community is shaping early thinking on agent-based AI in the Jakarta ecosystem."
 canonical: "https://payara.fish/blog/jakarta-agentic-ai-open-conversation-recording/"
 authors:
@@ -10,7 +9,6 @@ image: "Blog-Image_Community-Jakarta-Agentic-AI-square-scaled.jpg"
 categories:
   - "AI"
   - "Jakarta EE"
-  - "Java"
   - "Payara"
   - "Videos"
 related_posts:

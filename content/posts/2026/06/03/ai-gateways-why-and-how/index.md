@@ -1,7 +1,6 @@
 ---
 title: "AI gateways: why and how"
 date: "2026-06-03T08:38:19+00:00"
-lastmod: "2026-09-21T05:55:39+00:00"
 description: "Before working for 2 years on the Apache APISIX API gateway, I was mainly oblivious to API gateways. It's only by working with them that I understood…"
 canonical: "https://blog.frankel.ch/ai-gateways/"
 authors:
@@ -16,7 +15,7 @@ related_posts:
   - "experimenting-with-ai-subagents"
 ---
 
-Before working for 2 years on the Apache APISIX API gateway, I was mainly oblivious to API gateways. It's only by working with them that I understood their value. Decoupling the client and the server unlocks a lot of options: [moving authentication to the API Gateway](/authentication-api-gateway/), [securing](/secure-api-practices-apisix/1/) [APIs](/secure-api-practices-apisix/2/), [deduplicating API requests](/implement-idempotency-key-apisix/), etc.
+Before working for 2 years on the Apache APISIX API gateway, I was mainly oblivious to API gateways. It's only by working with them that I understood their value. Decoupling the client and the server unlocks a lot of options: [moving authentication to the API Gateway](/today/system-architecture-move-authentication-to-the-api-gateway/), [securing](/today/secure-your-api-with-these-16-practices-with-apache-apisix-part-1/) [APIs](/today/secure-your-api-with-these-16-practices-with-apache-apisix-part-2/), [deduplicating API requests](/today/implementing-the-idempotency-key-specification-on-apache-apisix/), etc.
 
 In this post, I want to describe how the same pattern applies to AI.
 

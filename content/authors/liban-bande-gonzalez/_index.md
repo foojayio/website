@@ -1,6 +1,6 @@
 ---
 title: "Libán Bande González"
-avatar: "liban-bande-gonzalez.jpg"
+avatar: "liban.jpg"
 linkedin: "https://www.linkedin.com/in/liban-bande-gonzalez"
 instagram: "https://www.instagram.com/ux.ui.designer.developer"
 website: "https://skinning-javafx-applications.netlify.app"

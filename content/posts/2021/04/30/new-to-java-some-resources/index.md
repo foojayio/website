@@ -1,14 +1,13 @@
 ---
 title: "Are You New Yo Java? Here Are Some Resources"
 date: "2021-04-30T07:16:16+00:00"
-lastmod: "2022-01-12T13:48:16+00:00"
 description: "These are resources I've used and still use to re-learn Java. If you're new to Java or looking to pick it up again, this article is for you."
 canonical: "https://www.helenjoscott.com/posts/new-to-java-resources"
 authors:
   - "helenjoscott"
 image: "java.png"
 categories:
-  - "Java"
+  - "Java Beginner"
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"

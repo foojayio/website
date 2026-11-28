@@ -1,7 +1,6 @@
 ---
 title: "Structured Error Messages for HTTP APIs"
 date: "2022-11-01T11:01:18+00:00"
-lastmod: "2022-11-01T11:01:20+00:00"
 description: "RFC 7807 helps API implementors as it provides quick guidelines to avoid reinventing the wheel on every project."
 canonical: "https://blog.frankel.ch/structured-errors-http-apis/"
 authors:
@@ -58,7 +57,7 @@ Hence, a standardized error reporting structure:
 
 The structure is the following:
 
-![](problemdetails.png)
+![UML class diagram of the Problem Details object with type, title, status, detail and instance fields](problemdetails.png)
 
 The RFC describes the fields:
 > * `"type"` (`string`) - A URI reference [\[RFC3986\]](https://www.rfc-editor.org/rfc/rfc3986) that identifies the problem type. This specification encourages that, when dereferenced, it provide human-readable documentation for the problem type (*e.g.* , using HTML [\[W3C.REC-html5-20141028\]](https://www.rfc-editor.org/rfc/rfc7807#ref-W3C.REC-html5-20141028)). When this member is not present, its value is assumed to be `"about:blank"`.
@@ -71,7 +70,7 @@ The RFC describes the fields:
 
 The RFC offers the following sample when there needs to be more funds to make a banking transfer.
 
-![](problemdetails-json-sample.png)
+![Sample RFC 7807 problem details for an out-of-credit error, with type, title, detail, instance, balance and accounts](problemdetails-json-sample.png)
 
 ## An example
 
@@ -94,7 +93,7 @@ Server: APISIX/2.15.0
 
 Let's structure the message as per RFC 7807.
 
-![](problemdetails-json-register.png)
+![Problem details response telling an unregistered user they are rate limited, with limit, calls and register-url fields](problemdetails-json-register.png)
 
 ## Conclusion
 

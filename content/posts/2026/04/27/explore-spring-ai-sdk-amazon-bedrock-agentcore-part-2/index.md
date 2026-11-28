@@ -1,7 +1,6 @@
 ---
 title: "Explore Spring AI SDK – Amazon Bedrock AgentCore – Part 2"
 date: "2026-04-27T09:09:00+00:00"
-lastmod: "2026-04-27T15:56:38+00:00"
 description: "Explore how to integrate AgentCore Memory in the Spring AI SDK with Amazon Bedrock. Learn how to add short-term to AI agents for improved context awareness, conversation continuity, and smarter responses in real-world applications."
 authors:
   - "mahendra1413"
@@ -10,7 +9,6 @@ categories:
   - "AI"
   - "GenAI"
   - "IntelliJ IDEA"
-  - "Java"
   - "Maven"
   - "Spring"
 related_posts:
@@ -20,7 +18,7 @@ related_posts:
 *Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/)*
 
 In this article, we explore one of the AgentCore capabilities i.e., ***memory***
-![](ac_overviewchart_04_07-7f591d25.png) ***Source: Amazon***
+![AgentCore services overview: tools, gateway, identity, memory, policy, registry and runtime, plus observability and evaluations](ac_overviewchart_04_07-7f591d25.png) ***Source: Amazon***
 
 To begin, enable **AgentCore memory** for the agent you built earlier.  
 ![SpringAI SDK](SpringAISDK.jpg)

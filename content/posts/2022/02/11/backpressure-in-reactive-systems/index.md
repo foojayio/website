@@ -1,7 +1,6 @@
 ---
 title: "Backpressure in Reactive Systems"
 date: "2022-02-11T10:07:46+00:00"
-lastmod: "2022-02-11T10:08:56+00:00"
 description: "Considering a fast data producer and a slow data consumer, backpressure \"pushes back\" on the producer, not to be overwhelmed by data."
 canonical: "https://blog.frankel.ch/backpressure-reactive-systems/"
 authors:
@@ -67,8 +66,8 @@ Among these classes, `Flowable` is the only class that implements Reactive Strea
 
 To cope with that, RxJava offers two main strategies to handle "overproduced" items:
 
-1. Store items in a buffer![](bp.obp.buffer.v3-00de21c7.jpg) Note that if you set no upper bound to the buffer, it might cause `OutOfMemoryError`.
-2. Drop items![](bp.obp.drop.v3-4fb967a4.jpg)
+1. Store items in a buffer![Marble diagram: onBackpressureBuffer() queues all items and emits them one by one as downstream requests 1](bp.obp.buffer.v3-00de21c7.jpg) Note that if you set no upper bound to the buffer, it might cause `OutOfMemoryError`.
+2. Drop items![Marble diagram: onBackpressureDrop() discards items arriving while downstream has not requested, emitting only some](bp.obp.drop.v3-4fb967a4.jpg)
 
 The following diagram summarizes the different methods that implement those strategies:
 
@@ -76,7 +75,7 @@ The following diagram summarizes the different methods that implement those stra
 
 Note that `onBackPressureLatest` operator is similar to using `onBackpressureBuffer(1)`:
 
-![](bp.obp.latest.v3-7389fae0.jpg)
+![Marble diagram: onBackpressureLatest() keeps only the most recent item for each downstream request](bp.obp.latest.v3-7389fae0.jpg)
 
 Note that I took the above Marble diagrams from RxJava's wiki.
 

@@ -6,28 +6,48 @@
 
 <div class="page-head">
   <div class="page-head__inner">
-    <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
+    {{ $stats := "" }}
+    {{ with $posts }}
+    {{/* Days run to the last scheduled date, counted from today's midnight UTC. */}}
+    {{ $last := time.AsTime (printf "%sT00:00:00Z" (index . (sub (len .) 1)).date) }}
+    {{ $days := int (div ($last.Sub (time.AsTime (printf "%sT00:00:00Z" (now.UTC.Format "2006-01-02")))).Hours 24) }}
+    {{ $stats = printf "<strong>%d</strong> %s scheduled in the next <strong>%d</strong> %s"
+      (len .) (cond (eq (len .) 1) "post" "posts") $days (cond (eq $days 1) "day" "days") }}
+    {{ end }}
+    {{ partial "page-head-meta.html" (dict "stats" $stats "views" .) }}
   </div>
 </div>
 
 <div class="content-col full-width">
   {{ if $posts }}
-  {{/* Sorted by date, so a day's posts are adjacent: open a section on the
-       first of each date. */}}
-  {{ $day := "" }}
-  {{ range $posts }}
-    {{ if ne .date $day }}
-      {{ if $day }}</div></section>{{ end }}
-      {{ $day = .date }}
-  <section class="coming-soon-day">
-    <h2 class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "Monday, 2 January 2006" }}</time></h2>
+  {{/* Every day from the first to the last scheduled one, so gaps show. */}}
+  {{ $first := time.AsTime (printf "%sT00:00:00Z" (index $posts 0).date) }}
+  {{ $last := time.AsTime (printf "%sT00:00:00Z" (index $posts (sub (len $posts) 1)).date) }}
+  {{ range $i := seq 0 (int (div ($last.Sub $first).Hours 24)) }}
+    {{ $t := $first.AddDate 0 0 $i }}
+    {{ $date := $t.Format "2006-01-02" }}
+    {{ $day := where $posts "date" $date }}
+    {{ $n := len $day }}
+    {{ $cls := cond (in (slice "Saturday" "Sunday") ($t.Format "Monday")) " is-weekend" "" }}
+  <section class="coming-soon-day{{ if not $n }} is-empty{{ end }}{{ $cls }}" id="d-{{ $date }}" aria-labelledby="h-{{ $date }}">
+    <h2 class="visually-hidden" id="h-{{ $date }}">{{ $t.Format "Monday, 2 January 2006" }}, {{ if $n }}{{ $n }} {{ cond (eq $n 1) "post" "posts" }}{{ else }}no posts{{ end }}</h2>
+    <span class="coming-soon-strip__day coming-soon-day__card{{ if not $n }} is-empty{{ end }}{{ $cls }}" aria-hidden="true">
+      <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+      <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+      <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
+      {{ if $n }}<span class="coming-soon-strip__count">{{ $n }} {{ cond (eq $n 1) "post" "posts" }}</span>{{ end }}
+    </span>
+    {{ if $n }}
     <div class="coming-soon-day__list">
+      {{ range $day }}{{ partial "scheduled-card.html" . }}{{ end }}
+    </div>
+    {{ else }}
+    <p class="coming-soon-day__none">No posts scheduled</p>
     {{ end }}
-      {{ partial "scheduled-card.html" . }}
+  </section>
   {{ end }}
-    </div></section>
   {{ else }}
   <p>Nothing is scheduled right now. Check back soon, or browse <a href="{{ "today/" | relURL }}">the latest articles</a>.</p>
   {{ end }}

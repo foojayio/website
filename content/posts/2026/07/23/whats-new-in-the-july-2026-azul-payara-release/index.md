@@ -1,7 +1,6 @@
 ---
 title: "What's New In The July 2026 Azul Payara Release?"
 date: "2026-07-23T10:28:58+00:00"
-lastmod: "2026-07-23T10:28:59+00:00"
 description: "Azul Payara's July 2026 release: Server and Micro 7.2.0, Jakarta EE 11, and a brute force security fix across every supported line."
 authors:
   - "luqman-saeed"
@@ -17,15 +16,15 @@ related_posts:
   - "payara-cloud-hackathon-is-open-for-sign-ups"
 ---
 
-The July 2026 release brings Azul Payara 7.2.0, Azul Payara Community 7.2026.7, Azul Payara 6.40.0, Azul Payara 5.89.0, and Azul Payara 4.1.2.191.57. A single security fix runs through every release, backported from the 7 line down to Payara 4: brute force attack prevention for authentication. Enterprise 6.40.0 additionally closes two Jackson CVEs that apply to the 6 line.
+The July 2026 release brings Azul Payara 7.2.0, Payara Community 7.2026.7, Azul Payara 6.40.0, Azul Payara 5.89.0, and Azul Payara 4.1.2.191.57. A single security fix runs through every release, backported from the 7 line down to Payara 4: brute force attack prevention for authentication. Enterprise 6.40.0 additionally closes two Jackson CVEs that apply to the 6 line.
 
 ## Downloads \& Release Notes
 
-* [Azul Payara Community (free version) - download](https://payara.fish/downloads/payara-platform-community-edition/)
+* [Payara Community (free version) - download](https://payara.fish/downloads/payara-platform-community-edition/)
 
 <!-- -->
 
-* [Azul Payara Community 7.2026.7 - release notes](https://docs.azul.com/payara/release-notes/release-notes-7.2.0.html)
+* [Payara Community 7.2026.7 - release notes](https://docs.azul.com/payara/release-notes/release-notes-7.2.0.html)
 
 <!-- -->
 
@@ -37,7 +36,7 @@ The July 2026 release brings Azul Payara 7.2.0, Azul Payara Community 7.2026.7, 
 
 ## A Security Fix, Patched Across Every Branch
 
-Brute force attack prevention has been added across Azul Payara Server and Micro 7.2.0, 6.40.0, 5.89.0, and 4.1.2.191.57, and Azul Payara Community 7.2026.7. The fix protects authentication against repeated credential guessing.
+Brute force attack prevention has been added across Azul Payara Server and Micro 7.2.0, 6.40.0, 5.89.0, and 4.1.2.191.57, and Payara Community 7.2026.7. The fix protects authentication against repeated credential guessing.
 
 This change originated in Eclipse GlassFish (eclipse-ee4j/glassfish#26026) and was ported back into the Payara codebase. Payara and GlassFish share a common ancestry, and upstream fixes like this continue to flow between the two projects.
 
@@ -65,9 +64,9 @@ The 7 line picks up Grizzly 5.0.2 this cycle, the Jakarta EE 11 era transport. T
 
 Beyond Grizzly 5.0.2, the 7 line moves Woodstox to 7.2.1, the Jakarta MVC API to 3.0.1, JNA to 5.19.1, Reactor Core to 3.8.6, SmallRye Common to 2.19.0, JLine to 3.30.15, SmallRye Config to 3.18.0, and the Jackson BOM to 2.22.1. The full list is in the release notes.
 
-## Azul Payara Community 7.2026.7
+## Payara Community 7.2026.7
 
-Azul Payara Community 7.2026.7 is the open-source distribution that tracks the Payara 7 development line. It carries the same security fix, bug fixes, and component upgrades as Server and Micro 7.2.0, plus three community-track items of its own.
+Payara Community 7.2026.7 is the open-source distribution that tracks the Payara 7 development line. It carries the same security fix, bug fixes, and component upgrades as Server and Micro 7.2.0, plus three community-track items of its own.
 
 SSH nodes no longer require elevated permissions. Combined with the Apache SSHD upgrade to 2.18.0, this simplifies cluster node setup and removes a common operational hurdle on hardened hosts. EclipseLink MoXY has been removed, continuing the streamlining of the XML binding stack that began earlier this cycle. SLF4J NOP instantiation errors have also been resolved.
 

@@ -1,7 +1,6 @@
 ---
 title: "Send Your Logs To Loki"
 date: "2023-10-12T08:00:12+00:00"
-lastmod: "2023-10-12T08:00:14+00:00"
 description: "Loki, a storage engine, provides a RESTful API to store and read logs. Let's push a log from a Java app."
 canonical: "https://blog.frankel.ch/logs-loki/"
 authors:
@@ -30,7 +29,7 @@ At its core, Loki is a log storage engine:
 
 Loki provides a [RESTful API](https://grafana.com/docs/loki/latest/api/) to store and read logs. Let's push a log from a Java app. Loki expects the following payload structure:
 
-![](stream-structure.png)
+![JSON structure of a Loki push request: streams with labels (application, system) and timestamped values 'Hello' and 'World'](stream-structure.png)
 
 I'll use Java, but you can achieve the same result with a different stack. The most straightforward code is the following:
 
@@ -55,7 +54,7 @@ public static void main(String[] args) throws URISyntaxException, IOException, I
 
 The prototype works, as seen in Grafana:
 
-![](direct-call.png)
+![Grafana log entry 'Hello from Java App' with fields panel showing label app = demo](direct-call.png)
 
 However, the code has many limitations:
 
@@ -139,7 +138,7 @@ logger.info("Hello from {}!", who);
 
 Grafana displays the following:
 
-![](logback-1024x328.png)
+![Grafana log line from a Logback-formatted Java app with labels app, host and level (INFO)](logback-1024x328.png)
 
 ## Docker logging
 
@@ -172,7 +171,7 @@ services:
 
 The result is the following. Note the default labels.
 
-![](docker-1024x273.png)
+![Grafana log entry from a Docker container showing default labels such as compose_project, container_name and source](docker-1024x273.png)
 
 ## Conclusion
 

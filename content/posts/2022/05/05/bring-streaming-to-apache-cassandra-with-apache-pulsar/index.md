@@ -1,7 +1,6 @@
 ---
 title: "Bring Streaming to Apache Cassandra with Apache Pulsar"
 date: "2022-05-05T18:10:42+00:00"
-lastmod: "2022-05-30T15:13:36+00:00"
 description: "How can you stream from Pulsar to Apache Cassandra, the powerful NoSQL database designed to support data-heavy applications in the cloud?"
 canonical: "https://medium.com/building-the-open-data-stack/bring-streaming-to-apache-cassandra-with-apache-pulsar-e4f54f52767f"
 authors:
@@ -20,7 +19,7 @@ related_posts:
   - "why-developers-should-use-apache-pulsar"
 ---
 
-![](1_4VRCkVXi6RRfK4pwrJkPjw-1024x506.jpeg)
+![Abstract streams of glowing blue data particles flowing into a beam of light, illustrating live data streaming](1_4VRCkVXi6RRfK4pwrJkPjw-1024x506.jpeg)
 
 Twitch, YouTube, Instagram, Facebook — virtually every major brand nowadays uses live streaming to connect and engage their audience.
 
@@ -64,7 +63,7 @@ Pulsar is a tiered, distributed system comprised of three components:
 * [Apache ZooKeeper](https://zookeeper.apache.org/)[®](https://cassandra.apache.org/_/index.html): An open-source server that handles coordination tasks between distributed clusters.
 * [Brokers](https://pulsar.apache.org/docs/en/concepts-architecture-overview/#brokers):A stateless component that mainly handles and load balances messages between producers and consumers, as well as store messages in BookKeeper instances (bookies).
 
-![](0_Cb4L9G4DeJu0Qjwp.png) Figure 1: Architecture of a Pulsar cluster.
+![Apache Pulsar architecture: producers and consumers talk to brokers, which store data segments on bookies coordinated by ZooKeeper](0_Cb4L9G4DeJu0Qjwp.png) Figure 1: Architecture of a Pulsar cluster.
 
 In the upper right of Figure 1, Zookeeper manages the metadata and you can use it to track where the data lives in your storage system. This system is at the bottom of the diagram and is known as BookKeeper. Each BookKeeper node is called a "bookie". The data is broken into ledgers and segments written to multiple bookies, so no single bookie holds it all.
 
@@ -102,7 +101,7 @@ For now, you will simply use Kesque itself to:
 * Create a message schema using the Kesque UI
 
 To give you a better understanding, here's a simple diagram with how all these technologies will work together.
-![](0_wMFmcu-HCAGwP940.png) Figure 2: Diagram showing how we'll use GitPod and Kesque for Lab 2.
+![Diagram of a Java producer sending messages to the 'astra' topic in Kesque, read by a Java consumer and a WebSocket test client](0_wMFmcu-HCAGwP940.png) Figure 2: Diagram showing how we'll use GitPod and Kesque for Lab 2.
 
 Go ahead and follow the instructions for [Lab 2 on GitHub](https://github.com/datastaxdevs/workshop-pulsar/wiki/LAB2_Kesque).
 
@@ -121,7 +120,7 @@ Follow the instructions for [Lab 3 on GitHub](https://github.com/datastaxdevs/wo
 ## Lab 4: Stream from Pulsar to Cassandra
 
 In this fourth lab, you'll finally start streaming. Here's the big picture of what you've set up so far and what's next.
-![](0_NBRezxcuPV3uHivQ.png) Figure 3: Diagram showing how the topic connects to GitPod and Astra DB.
+![Diagram of a Pulsar sink streaming the 'astra' topic from Kesque into a Products table in DataStax Astra DB (Cassandra)](0_NBRezxcuPV3uHivQ.png) Figure 3: Diagram showing how the topic connects to GitPod and Astra DB.
 
 In Lab 3, you set up your Astra DB database and created a table to store the data from Pulsar. Now you will connect Pulsar to Cassandra using a *sink*, which for the unfamiliar is a class or function designed to receive events and funnel them into external systems.
 

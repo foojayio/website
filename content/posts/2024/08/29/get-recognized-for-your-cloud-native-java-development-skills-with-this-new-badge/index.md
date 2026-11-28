@@ -1,7 +1,6 @@
 ---
 title: "Get recognized for your cloud-native Java development skills"
 date: "2024-08-29T16:08:34+00:00"
-lastmod: "2024-09-05T07:45:54+00:00"
 description: "Earn this brand-new badge, recognizing your ability to effectively develop basic cloud-native Java applications ready for the cloud."
 canonical: "https://openliberty.io/blog/2024/08/06/liberty-developer-essentials-badge.html"
 authors:
@@ -10,7 +9,6 @@ image: "LibertyBadge1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
   - "Maven"
   - "Microservices"

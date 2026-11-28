@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Annotation Reference - 01/a"
 date: "2022-12-22T09:57:33+00:00"
-lastmod: "2023-01-06T09:56:40+00:00"
 description: "Spring Boot Annotation Guide, providing an easy reference for daily development and provides code samples."
 authors:
   - "sumith-puri"
@@ -23,7 +22,7 @@ Though I had worked on a 'similar architecture' way back in 2007-'08 while worki
 
 This includes building 'executable applications' for windows much easier!
 
-![](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
+![Spring Boot properties file setting application name, context path and mode=false](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
 
 Anyways, the topic of our discussion is Spring Boot Annotations. Recently, in August 2022 while training a team of 10, I realized that though even though I know most of the Spring Boot Annotations, I may not be aware of all of them. So, I decided to write this article.
 
@@ -166,7 +165,7 @@ package xyz.sumithpuri.spring.boot.annotation.configuration;
 
 With Spring DevTools Enabled, you will see one such log on the console that are the debug statements showing the matches or evaluations against the conditions.
 
-![](AVvXsEh_YHALIvRTyRrUibkYVbv4T6wajr7lTequ-b49c69f3.png)
+![Spring Boot condition evaluation report: SBASampleConfiguration matched on @ConditionalOnClass, no negative matches](AVvXsEh_YHALIvRTyRrUibkYVbv4T6wajr7lTequ-b49c69f3.png)
 
 **@ConditionalOnProperty**
 
@@ -205,7 +204,7 @@ Please go ahead and add the property 'mode=false' in your application.properties
 
 If this property is not present or has a different value, your server will refuse to start as there will be not property present to inject for an autowired bean. (Refer to the code in the GitHub Repository).
 
-![](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
+![Spring Boot properties file setting application name, context path and mode=false](AVvXsEghRn9_AnCnub4H-xJJZ3IDGxtXEzayfXKV-07a05395.png)
 
 **@ConfigurationProperties**   
 **@ConfigurationPropertiesScan**
@@ -247,10 +246,6 @@ public void setName(String name) {
 
 **Typical Properties File to be Read By ConfigurationProperties**
 
-![](https://drive.google.com/uc?export=view&id=1v987XfEFVZndvJGJOvwOC1f7LuWlsq7j)
-
 **Debug Print Messages on Invocation of a Controller Endpoint**
-
-![](https://drive.google.com/uc?export=view&id=1iwbWi0rSKdMpzDxP3Zi33kgYvZq8VfG1)
 
 My next article in this series wil be named as the [Spring Boot-Annotation Reference-01/b](https://foojay.io/today/spring-boot-annotation-reference-01-b/) I will be focussing on REST/Web/MVC and Stereotype Annotations.

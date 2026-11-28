@@ -1,14 +1,12 @@
 ---
 title: "JavaFX Links of July 2024"
 date: "2024-07-31T17:54:43+00:00"
-lastmod: "2024-07-31T17:57:04+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of July 2024, published on jfx-central.com during this month."
 canonical: "https://webtechie.be/post/2024-07-26-javafx-links-of-july-2024/"
 authors:
   - "frankdelporte"
 image: "jfxcentral.jpg"
 categories:
-  - "Desktop"
   - "Game Development"
   - "JavaFX"
   - "JBang"

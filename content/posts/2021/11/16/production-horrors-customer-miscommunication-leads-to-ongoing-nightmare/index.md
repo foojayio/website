@@ -1,7 +1,6 @@
 ---
 title: "Customer Miscommunication Leads to Ongoing Nightmare"
 date: "2021-11-16T08:28:01+00:00"
-lastmod: "2021-11-16T08:31:18+00:00"
 description: "We can see production disasters from miles away. Bad communication, missing skills, immature technological choices create ongoing disasters."
 authors:
   - "shai-almog"

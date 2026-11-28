@@ -1,14 +1,12 @@
 ---
 title: "Improve Your Java Applications’ Startup and Compilation Speed with Optimizer Hub"
 date: "2025-06-27T09:35:31+00:00"
-lastmod: "2025-07-07T08:11:49+00:00"
 description: "This is the fourth blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to the first…"
 canonical: "https://www.azul.com/blog/improve-your-java-applications-startup-and-compilation-speed-with-optimizer-hub/"
 authors:
   - "frankdelporte"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "faster-java-warmup-crac-versus-readynow"

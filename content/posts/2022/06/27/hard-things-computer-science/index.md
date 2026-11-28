@@ -1,7 +1,6 @@
 ---
 title: "Hard Things in Computer Science"
 date: "2022-06-27T08:13:01+00:00"
-lastmod: "2022-06-27T08:13:57+00:00"
 description: "Here I list several hard things I've been exposed to. I believe there are many others: I'll be interested in the ones you've encountered!"
 canonical: "https://blog.frankel.ch/hard-things-computer-science/"
 authors:
@@ -20,7 +19,7 @@ If you've more than a couple of years of experience in IT, you probably have stu
 
 Then, because it's such a great quote, it evolved:
 
-[![](Screenshot-2022-06-26-at-10.28.24.png)](https://twitter.com/codinghorror/status/506010907021828096) However, I think that the initial quote is misleading. A lot of things are hard in computer science. This post aims to describe some of them.
+[![Tweet by Jeff Atwood: two hard things in computer science are cache invalidation, naming things and off-by-one errors](Screenshot-2022-06-26-at-10.28.24.png)](https://twitter.com/codinghorror/status/506010907021828096) However, I think that the initial quote is misleading. A lot of things are hard in computer science. This post aims to describe some of them.
 
 ## Cache invalidation
 

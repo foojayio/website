@@ -1,7 +1,6 @@
 ---
 title: "Java Strings and confusion with Unicode"
 date: "2022-08-23T10:29:58+00:00"
-lastmod: "2022-08-23T10:30:00+00:00"
 description: "How to avoid trouble and confusion with Java String and Unicode characters. Learn more and find out all the details here!"
 authors:
   - "jonatan-ivanov"

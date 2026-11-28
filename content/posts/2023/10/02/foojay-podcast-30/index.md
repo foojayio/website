@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #30: UtrechtJUG"
 date: "2023-10-02T07:48:48+00:00"
-lastmod: "2025-11-13T08:56:28+00:00"
 description: "Not just mic, but also camera, in the 30th Foojay podcast, focused on Utrecht JUG!"
 authors:
   - "frankdelporte"
@@ -74,7 +73,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](utrechtjug-819x1024.jpg)
+![Photo collage of the Utrecht JUG meetup at InTraffic: attendees, a talk, speakers posing together, and catered food](utrechtjug-819x1024.jpg)
 
 ## Links
 

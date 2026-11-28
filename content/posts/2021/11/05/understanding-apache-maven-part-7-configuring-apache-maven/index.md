@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 7): Configuring Apache Maven"
 date: "2021-11-05T16:51:36+00:00"
-lastmod: "2021-11-05T16:55:55+00:00"
 description: "Maven can depend on constraints external to what is packaged. Examples include the JDK to use (assuming there are several JDKs on the device)."
 canonical: "https://cguntur.me/2020/06/27/understanding-apache-maven-part-7/"
 authors:

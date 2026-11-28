@@ -1,14 +1,12 @@
 ---
 title: "Optimizing the MongoDB Java Driver"
 date: "2026-02-17T15:33:56+00:00"
-lastmod: "2026-02-18T14:52:52+00:00"
 description: "In this blog, we share how the Java developer experience team optimized the MongoDB Java Driver by strictly adhering to this principle. We discovered that performance issues were rarely where we thought they were. This post explains how we achieved throughput improvements between 20% to over 90% in specific workloads. We’ll cover specific techniques, including using SWAR (SIMD Within A Register) for null-terminator detection, caching BSON array indexes, and eliminating redundant invariant checks."
 authors:
   - "nasir-qureshi"
 image: "Screenshot-2026-02-10-at-11.40.40-AM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
@@ -95,7 +93,7 @@ private static final byte[] PRE_ENCODED_INDICES;
 The flat byte\[\] layout remains the preferred choice because it uses fewer heap objects and scales more efficiently as the cache grows due to spatial locality. Our benchmarks showed no significant throughput difference compared to jagged byte\[\]\[\] structures in smaller caches; this parity stems from the HotSpot's [Thread-Local Allocation Buffer (TLAB)](https://shipilev.net/jvm/anatomy-quarks/4-tlab-allocation/) allocator, which places small rows close together in memory. Even with [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) (GC) settings that forced frequent promotion into the old generation, we often observed the same effect. Because that behaviour is JVM- and GC-specific rather than guaranteed, we use the flat array as the more robust solution. To quantify the impact of caching itself, we adapted the "**Small Doc** **insertOne"** workload from our performance specification for array-heavy documents. Instead of the original shape, each document now contained A arrays of B length (that is, 100×100, and 100×1000), so the total number of encoded array indexes per document was A × B. The larger the arrays we use per document, the more significant the difference is, as the array encoding fraction in the "**insertOne"** operation is larger for larger arrays.
 
 **Figure 1.** The figure below shows the before-and-after results of performance tests on 100x100 and 100x1000 array documents. The larger arrays saw the greatest improvement in performance.  
-![](Screenshot-2026-02-10-at-11.40.40-AM.png)
+![Bar chart: insertOne throughput improves 12.13% (100x100) and 20.62% (100x1000) after the optimizations](Screenshot-2026-02-10-at-11.40.40-AM.png)
 
 ## 2. Java Virtual Machine (JVM) intrinsics
 
@@ -125,7 +123,7 @@ The JVM can replace these helper methods with a very small sequence of machine i
 After implementing our changes and testing them, we realized thata simple change affecting **less than 0.03% of the codebase resulted in a nearly 39% improvement** in throughput for large document bulk inserts.
 
 **Figure 2.**The figure below shows throughput improvements for each insert command. 'Large Doc Bulk Insert' saw the most significant gain because processing larger payloads maximizes the impact of optimizing the hottest execution paths.  
-![](Screenshot-2026-02-10-at-11.41.20-AM.png)
+![Bar chart: throughput gains of 38.81% for large doc bulk insert, 33.39% for insertOne, 19.98% for small doc bulk insert](Screenshot-2026-02-10-at-11.41.20-AM.png)
 
 ## 3. Check and check again
 
@@ -381,6 +379,6 @@ You can see the particular test conditions in the [Performance Benchmarking spec
 * **Removing method indirection and redundant checks:** Optimizing low-level operations required removing write(...)/put(...) wrappers to eliminate an extra layer of method indirection and the repeated invariant checks. By writing directly to the underlying ByteBuffer array for ASCII and caching position values in hot paths for multi-byte code points, we bypassed repeated validation calls, such as ensureOpen() and hasRemaining(). This resulted in a 33% improvement in bulk write insert throughput for ASCII.
 
 **Figure 3.** The figure below shows the final results for throughput improvements (measured in MB/s) after optimizing the driver, as explained above, based on [this](https://github.com/mongodb/specifications/blob/master/source/benchmarking/benchmarking.md#large-doc-bulk-insert) performance benchmarking specification. The 'Large doc Collection BulkWrite insert' saw the highest performance improvement +96.46%.  
-![](Screenshot-2026-02-10-at-11.44.20-AM.png)
+![Bar chart: throughput gains from 25% (find) up to 94% (large doc BulkWrite insert) after optimizations](Screenshot-2026-02-10-at-11.44.20-AM.png)
 
 Check out our [developer blog](https://www.mongodb.com/company/blog/channel/developer-blog) to learn how we are solving different engineering problems, or consider joining our [engineering team](https://www.mongodb.com/company/careers/teams/engineering).

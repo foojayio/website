@@ -1,7 +1,6 @@
 ---
 title: "Much Ado About Nothing (Also Known As \"Null\") In Java"
 date: "2021-02-23T15:19:02+00:00"
-lastmod: "2023-02-13T12:18:59+00:00"
 description: "Did you know \"var\" won’t work with a null assignment because no specific type can be inferred and we cannot declare a variable of null type?"
 authors:
   - "simonritter"

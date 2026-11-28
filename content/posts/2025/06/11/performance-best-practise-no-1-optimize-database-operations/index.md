@@ -1,7 +1,6 @@
 ---
 title: "Performance Best Practise No. 1: Optimize Database Operations"
 date: "2025-06-11T13:24:32+00:00"
-lastmod: "2025-06-11T13:24:35+00:00"
 description: "Boost Jakarta EE database performance by leveraging the following best practices."
 canonical: "https://omnifish.ee/performance-best-practice-no-1-optimize-database-operations/"
 authors:
@@ -10,7 +9,6 @@ image: "pool.png"
 categories:
   - "Databases"
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "a-dissection-of-java-jdbc-to-postgresql-connections"
@@ -47,7 +45,7 @@ JDBC statement caching involves storing frequently executed SQL statements, such
 ### Connection pool configuration
 
 You can configure connection pools in the Admin Console as follows:
-![](blog-conn-pool-size-idle.png) ![](image-1.jpg)
+![GlassFish connection pool settings with arrows on Maximum Pool Size (32) and Idle Timeout (300 seconds)](blog-conn-pool-size-idle.png) ![GlassFish JDBC connection pool advanced attributes with an arrow on Statement Cache Size set to 0](image-1.jpg)
 
 Or set the following properties (using the `set` admin command or as Embedded GlassFish properties):
 

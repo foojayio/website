@@ -1,7 +1,6 @@
 ---
 title: "Observing Apache NetBeans with OpenTelemetry and Dash0"
 date: "2026-06-14T22:03:09+00:00"
-lastmod: "2026-06-14T22:30:57+00:00"
 description: "What happens when you point an observability agent at your IDE rather than your application?"
 authors:
   - "geertjan-wielenga"

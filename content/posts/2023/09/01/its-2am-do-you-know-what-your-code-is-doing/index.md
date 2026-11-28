@@ -1,7 +1,6 @@
 ---
 title: "It's 2AM Do you Know What Your Code is Doing?"
 date: "2023-09-01T06:53:54+00:00"
-lastmod: "2023-09-01T06:56:49+00:00"
 description: "There's a newer approach to developer observability that helps with deeper understanding. Learn how code works in production, not in theory."
 canonical: "https://debugagent.com/its-2am-do-you-know-what-your-code-is-doing"
 authors:

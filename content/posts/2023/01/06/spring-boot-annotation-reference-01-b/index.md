@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Annotation Reference-01/b"
 date: "2023-01-06T09:54:05+00:00"
-lastmod: "2023-01-06T09:55:03+00:00"
 description: "In part #2 of my article series on Spring Boot Annotations, we focus on the REST and Spring Stereotype Annotations."
 authors:
   - "sumith-puri"

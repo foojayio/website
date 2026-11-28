@@ -10,26 +10,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
  * Tells a post's authors that a reader started a discussion on it.
  *
- *   <slug> <discussion-url> [<discussion-node-id>]
+ *   <slug> <discussion-url>
  *
  * giscus creates the discussion with the first comment and titles it with the
- * post slug, so that is all it takes to find the post, its `authors:` and their
- * author files. An author with a `github:` handle is @mentioned in a comment
- * on the discussion ($GITHUB_TOKEN, `discussions: write`); the rest are named
- * in a Slack message ($SLACK_WEBHOOK_URL) so the thread is not left unseen.
- * Either secret unset, and that half prints instead, as does `--dry-run`.
+ * post slug, so that is all it takes to find the post and its `authors:`. The
+ * authors are named in a Slack message ($SLACK_WEBHOOK_URL), never in a comment
+ * on the discussion: giscus shows that thread under the article to every reader.
+ * Secret unset, or `--dry-run`, and the message is printed instead.
  * Only posts are handled: other sections' terms are `<section>/<slug>`.
  */
 public class DiscussionAuthors {
 
-    record Author(String slug, String name, String github) {}
+    record Author(String slug, String name) {}
 
     static final HttpClient HTTP = HttpClient.newHttpClient();
 
@@ -37,10 +34,10 @@ public class DiscussionAuthors {
         List<String> a = new ArrayList<>(List.of(args));
         boolean dryRun = a.remove("--dry-run");
         if (a.size() < 2) {
-            System.err.println("usage: DiscussionAuthors.java [--dry-run] <slug> <discussion-url> [<node-id>]");
+            System.err.println("usage: DiscussionAuthors.java [--dry-run] <slug> <discussion-url>");
             System.exit(2);
         }
-        String slug = a.get(0), url = a.get(1), nodeId = a.size() > 2 ? a.get(2) : "";
+        String slug = a.get(0), url = a.get(1);
 
         if (slug.contains("/")) {
             System.out.println("'" + slug + "' is not a post; nothing to do.");
@@ -58,38 +55,8 @@ public class DiscussionAuthors {
             return;
         }
 
-        List<Author> mentionable = authors.stream().filter(x -> !x.github().isEmpty()).toList();
-        List<Author> unreachable = authors.stream().filter(x -> x.github().isEmpty()).toList();
-
-        if (!mentionable.isEmpty()) {
-            String body = String.join(" ", mentionable.stream().map(x -> "@" + x.github()).toList())
-                    + " a reader started a discussion on your article. Replies here are emailed to you.";
-            comment(nodeId, body, dryRun);
-        }
-        if (!unreachable.isEmpty()) {
-            String names = String.join(", ", unreachable.stream().map(Author::name).toList());
-            slack("*New discussion on " + slug + "*\n" + url
-                    + "\nNo GitHub handle on file for: " + names, dryRun);
-        }
-    }
-
-    static void comment(String nodeId, String body, boolean dryRun) throws Exception {
-        String token = System.getenv("GITHUB_TOKEN");
-        if (dryRun || token == null || token.isBlank() || nodeId.isBlank()) {
-            System.out.println("Would comment: " + body);
-            return;
-        }
-        String query = "mutation($id:ID!,$body:String!){addDiscussionComment(input:{discussionId:$id,body:$body})"
-                + "{comment{id}}}";
-        String json = "{\"query\":" + quote(query) + ",\"variables\":{\"id\":" + quote(nodeId)
-                + ",\"body\":" + quote(body) + "}}";
-        HttpResponse<String> r = HTTP.send(HttpRequest.newBuilder(URI.create("https://api.github.com/graphql"))
-                .header("Authorization", "Bearer " + token).header("User-Agent", "foojay.io")
-                .POST(HttpRequest.BodyPublishers.ofString(json)).build(), HttpResponse.BodyHandlers.ofString());
-        if (r.statusCode() != 200 || r.body().contains("\"errors\"")) {
-            throw new IOException("GitHub answered " + r.statusCode() + ": " + r.body());
-        }
-        System.out.println("Commented on the discussion.");
+        String names = String.join(", ", authors.stream().map(Author::name).toList());
+        slack("*New discussion on " + slug + "*\n" + url + "\nAuthor(s): " + names, dryRun);
     }
 
     static void slack(String text, boolean dryRun) throws Exception {
@@ -116,12 +83,9 @@ public class DiscussionAuthors {
 
     static Author readAuthor(String slug) throws IOException {
         Path file = Path.of("content/authors", slug, "_index.md");
-        if (!Files.exists(file)) return new Author(slug, slug, "");
+        if (!Files.exists(file)) return new Author(slug, slug);
         String name = frontmatterValue(file, "title");
-        String github = frontmatterValue(file, "github");
-        // Only a profile URL can be mentioned; github.com/org/repo cannot.
-        Matcher m = Pattern.compile("github\\.com/([A-Za-z0-9-]+)/?$").matcher(github);
-        return new Author(slug, name.isEmpty() ? slug : name, m.find() ? m.group(1) : "");
+        return new Author(slug, name.isEmpty() ? slug : name);
     }
 
     /** Frontmatter lines only: stops at the closing `---`, since bodies can repeat a key at column 0. */

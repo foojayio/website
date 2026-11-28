@@ -1,7 +1,6 @@
 ---
 title: "Billions of Messages Per Minute Over TCP/IP"
 date: "2023-07-05T21:05:08+00:00"
-lastmod: "2023-07-05T21:05:09+00:00"
 description: "Chronicle Wire has had new features added to permit communication with other components across a TCP/IP network."
 authors:
   - "george-ball"
@@ -307,7 +306,7 @@ public class Channel1ReadWrite {
 1. Critical to the setup of the channel is a URL string. Currently  
    only TCP/IP is available as a transport but more can and will be supported in due course. The semantics of this string as understood by Chronicle Channel setup is summarised in the following table:
 
-![](Screenshot-2023-06-27-at-10.11.53-AM-1024x339.png)
+![Table of channel URL formats: internal://, tcp://:{port} for accepting channels and tcp://{hostname}:{port} for clients](Screenshot-2023-06-27-at-10.11.53-AM-1024x339.png)
 
 2. We use `try-with-resources` to ensure that all necessary components we create are closed appropriately when we are done. First, we create the Context, which will manage the lifecycle and configuration of the channels.
 

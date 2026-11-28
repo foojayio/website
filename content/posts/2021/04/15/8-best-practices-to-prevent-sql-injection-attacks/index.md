@@ -1,7 +1,6 @@
 ---
 title: "8 Best Practices to Prevent SQL Injection Attacks"
 date: "2021-04-15T08:33:39+00:00"
-lastmod: "2025-05-19T08:34:52+00:00"
 description: "SQL injection, when a user adds untrusted data to a database query, is one of the most dangerous vulnerabilities for online applications."
 canonical: "https://snyk.io/blog/sql-injection-cheat-sheet/"
 authors:
@@ -28,4 +27,4 @@ These are the 8 best practices we discuss in [this article](https://snyk.io/blog
 8. Be careful with stored procedures
 
 [Read the full article](https://snyk.io/blog/sql-injection-cheat-sheet/).
-[![](8-best-practices-to-prevent-SQL-injection-attacks-1-1024x724.jpg)](https://snyk.io/blog/sql-injection-cheat-sheet/)
+[![Snyk cheatsheet listing 8 best practices to prevent SQL injection attacks, from server-side validation to stored procedures](8-best-practices-to-prevent-SQL-injection-attacks-1-1024x724.jpg)](https://snyk.io/blog/sql-injection-cheat-sheet/)

@@ -1,7 +1,6 @@
 ---
 title: "Building Stateful Microservices in the Cloud Native World"
 date: "2022-01-04T09:34:13+00:00"
-lastmod: "2022-01-04T09:35:42+00:00"
 description: "How can systems be able to manage and track the flow of data in a coherent fashion and in a stateless world?"
 canonical: "https://www.javaadvent.com/2021/12/different-approaches-to-building-stateful-microservices-in-the-cloud-native-world.html"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Storing 1TB in Virtual Memory on a 128GB Machine"
 date: "2022-09-27T09:10:43+00:00"
-lastmod: "2022-09-27T09:46:54+00:00"
 description: "Chronicle Queue and Chronicle Map allows you to have a persisted store which can be embedded into multiple JVMs on the same server."
 authors:
   - "peter-lawrey"
@@ -38,7 +37,7 @@ In this article, we look at Chronicle Queue with favouring for sequential access
 
 #### What does a JVM which is over 1 TB in virtualize look like?
 
-![](Screen-Shot-2022-09-20-at-10.59.01-AM-700x189.png)  
+![Linux top output showing a java process with 1.281 TB of virtual memory but only 0.111 TB resident on a 128 GB machine](Screen-Shot-2022-09-20-at-10.59.01-AM-700x189.png)  
 
 Figure 1. top on a machine with 128 GB of memory, and a JVM with 1 TB of queue data
 
@@ -51,7 +50,7 @@ If you attempted to create and use a 1 TB heap on a machine with 128 GB of memor
 How much does using Chronicle Queue to store the data slow down?
 
 In this test, it writes a burst of 2 million 512 bytes message (1024\^3 bytes of data), it then reads the data and waits 8 seconds to let the disk catch up. While the burst rate is about 1 GB/s, the underlying disk doesn't have the write speed and for this test, it averages about 100 MB/s. It takes about 2.5 hours to write 1 TB.  
-![](Screen-Shot-2022-09-20-at-11.00.18-AM-1024x717.png)  
+![Scatter chart of the time to read 1 GB of queue data, comparing untuned reads with reads using pretouch; both mostly sit near 0.2 s](Screen-Shot-2022-09-20-at-11.00.18-AM-1024x717.png)  
 
 Figure 2. The read time is fairly consistent for this test
 
@@ -62,7 +61,7 @@ While the machine has 128 GB of memory, it has two NUMA regions of 64 GB. This s
 The write performance is more dramatic. There is also significant variation as it has to find new memory to write to.
 
 This can be mitigated by using a pretouch() call to pre-allocate memory to write to. Normally, this would be run in a background thread, but for the purposes of this test, it was run in the same thread but not timed.  
-![](Screen-Shot-2022-09-20-at-11.01.13-AM-1024x720.png)  
+![Scatter plot of time to write 1 GB: untuned writes take 1.2 to 3.9 seconds with spikes, writes with pretouch stay steady near 1 second](Screen-Shot-2022-09-20-at-11.01.13-AM-1024x720.png)  
 
 Figure 3. The write time is fairly consistent beyond 192 GB
 

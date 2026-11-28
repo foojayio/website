@@ -1,7 +1,6 @@
 ---
 title: "Building for Failure: Best Practices for Easy Production Debugging"
 date: "2023-07-21T15:29:09+00:00"
-lastmod: "2023-07-21T15:29:11+00:00"
 description: "Applications fail, that's inevitable. Testing, QA, CI and defensive programming can make this a rare occurrence, but can't eliminate failure."
 canonical: "https://debugagent.com/building-for-failure-best-practices-for-easy-production-debugging"
 authors:

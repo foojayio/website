@@ -1,13 +1,11 @@
 ---
 title: "Carbon Aware Job Processing With JobRunr v8"
 date: "2025-07-07T09:00:09+00:00"
-lastmod: "2025-07-07T09:50:58+00:00"
 description: "Discover how JobRunr v8 helps developers cut CO2 emissions without sacrificing performance. Use Carbon Aware Job Processing to run background jobs when your grid is greenest. Make your apps smarter, and the planet a little cleaner, with just a few lines of code."
 authors:
   - "nicholas-dhondt"
 image: "jobrunr-carbon-foojay.jpg"
 categories:
-  - "Java"
   - "Tutorials"
 related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
@@ -142,7 +140,7 @@ Sometimes the figurative forecast is not all rainbows and sunshine. Sometimes, t
 
 In case something like that happens, the specific reason will be recorded and can be consulted in the dashboard when opening the job details. As explained in the [Getting Started with JobRunr: Powerful Background Job Processing Library](https://foojay.io/today/getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja/) article, JobRunr has a UI dashboard where you can follow up on all your scheduled, running, and failed/succeeded jobs. The same is true for Carbon Aware jobs, as you can see in the following screenshot, were we inspect the job that fired off `surveyController.calculateAndSend()` from our example:
 
-![](jobrunr-carbon-foojay-700x431.png)  
+![JobRunr dashboard job details: a Carbon Aware job pending, with a bar of low-carbon hours and the best hour marked](jobrunr-carbon-foojay-700x431.png)  
 
 In the screenshot above, our example job is initially planned to run between 17h and 22h. The screenshot was taken at around 15h. The Carbon Intensity data returned by the API is visualised by the colours, with the best hour to schedule this job being at the beginning of the interval: 15h. Forecast data not relevant is marked with the red line, as this is data outside of the configured execution window of `[17, 22]`.
 

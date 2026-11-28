@@ -1,7 +1,9 @@
 ---
 title: "Records"
 description: "Records, introduced as a preview in Java 14 and finalised in Java 16, are a concise way to declare classes whose primary purpose is to hold immutable data. Declaring record Point(int x, int y) {} gives you a class with ..."
-url: "/pedia/records/"
+url: "/java-terms-explained/records/"
+aliases:
+  - "/pedia/records/"
 ---
 
 Records, introduced as a preview in Java 14 and finalised in Java 16, are a concise way to declare classes whose primary purpose is to hold immutable data. Declaring `record Point(int x, int y) {}` gives you a class with a constructor, `x()` and `y()` accessor methods, `equals()`, `hashCode()`, and `toString()` — all generated automatically by the compiler.
@@ -12,7 +14,7 @@ Records pair naturally with sealed classes and pattern matching. Together, these
 
 ## See Also
 
-* [Text Blocks](/pedia/text-blocks/)
-* [Value Objects (Project Valhalla)](/pedia/value-objects-project-valhalla/)
-* [Sealed Classes](/pedia/sealed-classes/)
-* [Project Amber](/pedia/project-amber/)
+* [Text Blocks](/java-terms-explained/text-blocks/)
+* [Value Objects (Project Valhalla)](/java-terms-explained/value-objects-project-valhalla/)
+* [Sealed Classes](/java-terms-explained/sealed-classes/)
+* [Project Amber](/java-terms-explained/project-amber/)

@@ -1,13 +1,11 @@
 ---
 title: "AsyncGetCallTrace Reworked: Frame by Frame Iterative Touch!"
 date: "2023-08-10T09:43:33+00:00"
-lastmod: "2023-08-10T09:44:03+00:00"
 description: "This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling."
 authors:
   - "johannes-bechberger"
 image: "asgct_asgst-2000x1125-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
   - "Performance"
@@ -23,7 +21,7 @@ related_posts:
 This API is widely used but has its problems, see JEP 435 [and my various articles on Foojay.io](https://foojay.io/today/author/johannes-bechberger/).
 
 My original approach with my JEP proposal was to build a replacement of the API, which could be used as a drop-in for AsyncGetCallTrace. Still a single method that populates a preallocated frame list:  
-![](asgct_asgst-2000x1125-6c596253.jpg)
+![Diagram: AsyncGetCallTrace turns a stack of Java and C/C++ frames into a fixed frame array, the proposal adds frame types](asgct_asgst-2000x1125-6c596253.jpg)
 
 No doubt this solves a few of the problems, the new API would be officially supported, return more information, and could return the program counter for C/C++ frames. But it eventually felt more like a band-aid, hindered by trying to mimic AsyncGetCallTrace. In recent months, I had a few discussions with Erik Österlund and Jaroslav Bachorik in which we concluded that what we really need is a completely redesigned profiling API that isn't just an AsyncGetCallTrace v2.
 
@@ -38,7 +36,7 @@ AsyncGetCallTrace fills a preallocated list of frames, which has the most profou
 This limits the amount the data we can give for each frame.
 
 We don't have this problem with an iterator-based API, where we first create an iterator for the current stack and then walk from frame to frame:  
-![](iterators-2000x1127-fedb1a1c.jpg)
+![Diagram: an iterator API walks the stack with NextFrame, returning each frame's type, compilation level, bci and method](iterators-2000x1127-fedb1a1c.jpg)
 
 The API can offer all the valuable information the JVM has, and the profiler developer can pick the relevant information. This API is, therefore, much more flexible; it allows the profiler writer to ...
 
@@ -327,7 +325,7 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
 ```
 
 This assumes that you use the modified OpenJDK. MathParser is a demo program that generates and evaluates simple mathematical expressions. I wrote this for a compiler lab while I was still a student. The resulting flame graph should look something like this:  
-![](image-2000x953-1903166a.jpg)
+![Flame graph of the MathParser demo program, with time split between MathGenerator.generate and Parser.parse](image-2000x953-1903166a.jpg)
 
 ## Conclusion
 

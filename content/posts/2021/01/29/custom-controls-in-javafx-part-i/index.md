@@ -1,7 +1,6 @@
 ---
 title: "How to Use Custom Controls in JavaFX (Part I)"
 date: "2021-01-29T08:22:15+00:00"
-lastmod: "2021-09-03T09:28:33+00:00"
 description: "In this part, we create a custom JavaFX control by changing the style of an existing control, for example, using a JavaFX CheckBox control."
 authors:
   - "gerrit-grunwald"
@@ -48,7 +47,7 @@ In this part, we will create a custom JavaFX control by changing the style of an
 
 The default JavaFX CheckBox looks as follows:
 
-![](Restyled-Control-2021-01-15-12-58-55.png)
+![Default JavaFX CheckBox window showing a checked box with the label CheckBox](Restyled-Control-2021-01-15-12-58-55.png)
 
 So what if we would like to change the design to a more MaterialDesign-like look?
 
@@ -160,13 +159,13 @@ As you can see it defines the `.mark`````````````inside the `````````````.box```
 
 If you take the text that is defined in `-fx-shape`and create an SVG file from it, you will see the following shape in your vector drawing program.
 
-![](Affinity-Designer-Untitled-Modified-1562.5-2021-01-15-15-50-25-623x510.png)
+![Affinity Designer showing a checkmark vector shape drawn from the SVG path of the checkbox](Affinity-Designer-Untitled-Modified-1562.5-2021-01-15-15-50-25-623x510.png)
 
 And voilá here is the checkmark that you find in a JavaFX CheckBox control. But this also means that if you have a vector drawing program that is capable of creating SVG paths you can simply create a SVG path of your choice and paste it in the CSS file.
 
 So in our case the new shape for the path should look as follows.
 
-![](Affinity-Designer-Untitled-Modified-3051.8-2021-01-15-16-45-35-630x510.jpg)
+![Affinity Designer showing the resized outlined checkmark shape that will be used as the new CSS path](Affinity-Designer-Untitled-Modified-3051.8-2021-01-15-16-45-35-630x510.jpg)
 
 And the CSS with the SVG path will look like follows:
 
@@ -227,7 +226,7 @@ There is one thing which is a bit special and that is the fact that the circle i
 
 Now with these modifications our JavaFX checkbox looks as follows...
 
-![](Restyled-Control-2021-01-18-10-42-42.png)
+![Restyled JavaFX checkbox: an unchecked square box with a grey circle highlight, next to a Focus button](Restyled-Control-2021-01-18-10-42-42.png)
 
 Let me try to give you a short explanation on how the CSS properties -fx-background-insets and -fx-background-color do their work in JavaFX.
 
@@ -237,7 +236,7 @@ But that's not all, because you can not only define the inset for all four sides
 
 The order of the four sides is defined as follows: top, right, bottom and left. Here is a little drawing that shows the example above and also the CSS style of the box in the CheckBox for the standard and "selected:focused" state:
 
-![](css-1-705x1024.jpg)
+![Diagram showing -fx-background-insets examples: layered blue, red and green boxes, and the check box outline and selected focus styles with their CSS](css-1-705x1024.jpg)
 
 Now, with the insets in place, you can define a paint ("color" or "gradient") for each layer that was defined in the insets and put these paints in the -fx-background-color variable, separated by commas.
 
@@ -258,7 +257,7 @@ And so, the only thing that is now missing is to add this circle with the right 
 
 And the result of this change will look like this...
 
-![](Restyled-Control-2021-01-18-10-41-51.png)
+![Restyled JavaFX checkbox with a blue checked box and a light blue focus circle, above a Focus button](Restyled-Control-2021-01-18-10-41-51.png)
 
 As you can see, by simply using CSS you can easily re-style an existing control to look totally different.
 
@@ -266,7 +265,7 @@ That was the CheckBox!
 
 Next, if you take a look into MaterialDesign, you will also find a so-called [Switch](https://material.io/components/switches#behavior "Switch") control. The interesting part is that the Switch control is more or less the same as the CheckBox, just with the difference of having a different design. I don't want to go through all the details here, but you will find the code in the repository over at [github](https://github.com/HanSolo/JavaFXCustomControls "github"). Here is the result of a MaterialDesign-Switch control by pure CSS modification based on the JavaFX CheckBox:
 
-![](Restyled-Control-2021-01-18-11-19-35.png)
+![Restyled JavaFX window with a Material Design checkbox and a Material Design toggle switch](Restyled-Control-2021-01-18-11-19-35.png)
 
 So, the main idea is to copy all the .check-box related CSS entries and modify them in the way it's needed to create the Switch control.
 

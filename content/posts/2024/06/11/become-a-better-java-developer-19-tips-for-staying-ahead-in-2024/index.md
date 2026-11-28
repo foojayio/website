@@ -1,13 +1,11 @@
 ---
 title: "Be a Better Java Developer: 19 Tips for Staying Ahead in 2024"
 date: "2024-06-11T12:31:30+00:00"
-lastmod: "2024-06-11T12:44:19+00:00"
 description: "I reached out to one of my fellow Java developers who is very experienced and has been working in the industry forever and asked for his thoughts about the observability improvements in JDK 21 and Spring Boot 3.2."
 authors:
   - "lee-sheinberg"
 image: "Digmo-and-Java-.png"
 categories:
-  - "Java"
   - "Observability"
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
@@ -28,7 +26,7 @@ After talking with my friend, I decided to reach out to the folks on r/Experienc
 
 After posting my question and receiving so much solidarity, I shared it with my friend. He was very happy to know that he was not alone. We both felt that I should compile all the tips I received and create a post for developers who feel they are falling behind in staying current.
 
-![](https://digma.ai/wp-content/uploads/2024/05/image-461x1024.png)  
+![Illustration from the Digma post about a developer sharing a problem with a friend; based on surrounding article text.](https://digma.ai/wp-content/uploads/2024/05/image-461x1024.png)  
 
 Sorce; Reddit
 

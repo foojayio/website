@@ -1,14 +1,12 @@
 ---
 title: "When ReadyNow Can Only Compile on Traffic Loads"
 date: "2025-07-04T19:36:00+00:00"
-lastmod: "2025-07-07T08:11:27+00:00"
 description: "This is the fifth and final blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to…"
 canonical: "https://www.azul.com/blog/when-readynow-can-only-compile-on-traffic-loads/"
 authors:
   - "frankdelporte"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Performance"
 related_posts:
   - "how-readynow-improves-java-warmup-time"
@@ -30,7 +28,7 @@ In some cases, ReadyNow does not achieve the expected warmup improvements, and m
 The first chart below shows a perfect example of a first set of compilations shortly after startup, plus a spike in the compiler queues at the start of the traffic \[Figure 1\]. There was time left before that event, during which the compiler had time to pre-compile the code and have it ready when needed, but couldn't execute this process fully.
 
 The second chart shows an example where most of the compilations are handled after startup, and only a minimal number need to happen when traffic loads \[Figure 2\].
-![](readynow-compile-queus.jpg)
+![Two compiler queue charts: without ReadyNow the queue peaks near 2,800 methods at startup and again when traffic starts](readynow-compile-queus.jpg)
 
 ## ReadyNow waits for class loading
 
@@ -89,12 +87,12 @@ In this example, the application is started, after a fixed time, the JMeter test
 In this first run, we don't provide a ReadyNow profile. This means the Zing runtime has no compilation info available, and can't perform any compilation upfront. As you can see in the chart, there is a little spike in compiler queues at the start of the application as the "basic" classes get loaded. When the first JMeter test starts, simulating the start of the traffic load on the application, a significant spike occurs in the number of compiler queues. When the second test gets executed, the spike is a lot smaller.
 
 This shows that, when we use the JMeter test as a "dummy" load, we can already prepare the application to handle traffic \[Figure 3\].
-![](readynow-compile-queus-no-profile-1024x536.jpg)
+![Compiler queue chart without a ReadyNow profile: a large queue of about 2,800 methods peaks during the first JMeter test](readynow-compile-queus-no-profile-1024x536.jpg)
 
 ### Run with a ReadyNow profile
 
 When executing the test above, I instructed the application to generate a ReadyNow profile with `-XX:ProfileLogOut=readynow.log` and used it as input for a second test. As expected, we get the desired effect of a larger spike of compiler queues immediately after the application's startup, making most of the code available in its native format thanks to ReadyNow. With the first JMeter test, we can trigger the compilation of the remaining methods as an improved warmup step and prepare the application for the real traffic. As you can see, the number of compiler queues was further reduced at the second test run, indicating the application was fully prepared to handle real traffic \[Figure 4\].
-![](readynow-compile-queus-with-profile.avif)
+![Compiler queue chart with a ReadyNow profile, showing a much smaller compilation queue when traffic starts](readynow-compile-queus-with-profile.avif)
 
 ## Generational ReadyNow profiles
 
@@ -103,9 +101,9 @@ As explained in an earlier blog post, "How to Train ReadyNow to Achieve Optimal 
 The chart you see above is the result of the third-generation profile. Below are the results with the first, second, and third profiles. As you can see, the initial compiler queues spike immediately after startup, increasing as ReadyNow has more information about the code to be compiled. More importantly, the spike gets even smaller when the traffic starts with the second run of the JMeter test.
 
 {{< gallery >}}
-gc-with-readynow-gen-1-1024x508.png
-gc-with-readynow-gen-2-1024x508.png
-gc-with-readynow-gen-3-1024x508.png
+gc-with-readynow-gen-1-1024x508.png | | Compiler queues chart: first run with long initial compile queue spikes at startup and a smaller one under JMeter test 1
+gc-with-readynow-gen-2-1024x508.png | | Compiler queues chart: second run with a higher startup spike and smaller queues during the JMeter tests
+gc-with-readynow-gen-3-1024x508.png | | Compiler queues chart: third run, similar to the second, with startup queue peaking near 4,700 methods
 {{< /gallery >}}
 
 ## Result

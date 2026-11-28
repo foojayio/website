@@ -1,7 +1,6 @@
 ---
 title: "Azul, Datadog, DataStax, JFrog, Payara, Snyk on Foojay Advisory Board"
 date: "2021-01-28T13:56:10+00:00"
-lastmod: "2021-11-03T13:31:01+00:00"
 description: "Foojay.io today named the companies who will make up its advisory board—Azul, Datadog, DataStax, JFrog, Payara, and Snyk."
 authors:
   - "geertjan-wielenga"

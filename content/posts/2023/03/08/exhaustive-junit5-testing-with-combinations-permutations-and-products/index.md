@@ -1,7 +1,6 @@
 ---
 title: "Exhaustive JUnit5 Testing: Combinations, Permutations, Products"
 date: "2023-03-08T10:08:21+00:00"
-lastmod: "2023-03-09T09:12:53+00:00"
 description: "Read this article and learn how to use JUnit5 in conjunction with combinations, permutations, and products."
 authors:
   - "per-minborg"
@@ -237,7 +236,7 @@ Stream<DynamicTest> validate() {
 
 This is the entire solution, and when run under IntelliJ (or other similar tools), the following tests will be performed (only the first 16 of the 326 tests are shown for brevity):
 
-![](Screen-Shot-2023-02-27-at-9.52.42-AM.png)
+![IntelliJ test results listing ListDemoTest validate() passing for many combinations of list operations such as clear(), add(1) and remove(1)](Screen-Shot-2023-02-27-at-9.52.42-AM.png)
 
 *Image 1, Shows the first 16 test runs of the 326 tests.*
 
@@ -314,7 +313,7 @@ Combinations, permutations, and products are potent tools that can increase test
 
 For example, here is a list of the number of permutations of all combinations for some given sets S of size s:
 
-![](Screen-Shot-2023-02-27-at-9.54.03-AM-1024x884.png)  
+![Table showing permutations of combinations growing from 1 for set size 0 to 108,505,112 for set size 11](Screen-Shot-2023-02-27-at-9.54.03-AM-1024x884.png)  
 *Table 1, shows the number of permutations of combinations for some set sizes 's'.*
 
 More generally, it can be shown that: poc(s) = poc(s – 1) \* s + 1.

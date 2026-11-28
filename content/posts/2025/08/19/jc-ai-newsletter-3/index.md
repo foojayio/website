@@ -1,7 +1,6 @@
 ---
 title: "JC-AI Newsletter #3"
 date: "2025-08-19T08:06:34+00:00"
-lastmod: "2025-10-14T05:40:57+00:00"
 description: "The current newsletter vol.3, brings a collection of valuable articles focusing on challenges that are commonly reported through reported breakthroughs in the field of artificial intelligence."
 authors:
   - "miro-wengner"
@@ -10,7 +9,6 @@ categories:
   - "AI"
   - "Cloud"
   - "GenAI"
-  - "Java"
   - "JC-AI Newsletter"
   - "Machine Learning"
   - "Opinion"

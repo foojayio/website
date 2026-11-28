@@ -1,7 +1,6 @@
 ---
 title: "How to Debug Java on the Command Line"
 date: "2021-06-24T16:51:14+00:00"
-lastmod: "2021-06-24T16:51:16+00:00"
 description: "Some bugs are hard to replicate on your personal computer but easily replicated on production or test machines!"
 canonical: "https://jfeatures.com/blog/jdb"
 authors:
@@ -308,4 +307,4 @@ Knowing features like this helps you get the best java jobs, that's why to help 
 
 Download this step-by-step guide for free!
 
-![](ebook_upd.png)
+![Cover of the free ebook 5 Steps to Best Java Jobs by Vipin Sharma, showing hands typing on a laptop](ebook_upd.png)

@@ -1,14 +1,12 @@
 ---
 title: "What 2,000+ Professionals Told Us About the State of Java, AI, Cloud Costs, and the Future of the Java Ecosystem"
 date: "2026-02-17T08:58:26+00:00"
-lastmod: "2026-02-17T08:58:51+00:00"
 description: "Every year, I look forward to our State of Java Survey & Report because it gives us a view into how organizations are using Java…"
 canonical: "https://www.azul.com/blog/what-2000-professionals-told-us-about-the-state-of-java-ai-cloud-costs-and-the-future-of-the-java-ecosystem/"
 authors:
   - "scott-sellers"
 image: "SoJ26-Download.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-78"
@@ -21,7 +19,7 @@ Every year, I look forward to our [State of Java Survey \& Report](https://www.a
 > ***Java is evolving faster than ever. AI is accelerating that shift. And the pressure to optimize cloud spending and avoid unpredictable Java licensing costs is now shaping strategic decisions across the enterprise.***
 
 As the only company 100% focused on Java, we get to see these changes up close.
-![](SofJ26-Infographic-1024x576.jpg)
+![State of Java 2026 infographic summarizing survey stats, e.g. 62% use Java to code AI and 92% worry about Oracle Java pricing](SofJ26-Infographic-1024x576.jpg)
 
 Here are the key takeaways and what they mean for your business.
 
@@ -30,7 +28,7 @@ Here are the key takeaways and what they mean for your business.
 One of the most significant trends we've watched over the past few years is AI's shift from an area of research to a core part of enterprise systems. And for the first time, the majority of organizations that participated in this survey are now using Java to build or run AI functionality.
 
 **62% of survey respondents say they're using Java to code AI features**, up sharply from 50% a year ago.
-![](CHART-2026-SoJ-AI-language.png)
+![Bar chart: Java is the top language for coding AI functionality at 62%, ahead of JavaScript (57%) and Python (45%)](CHART-2026-SoJ-AI-language.png)
 
 While Python continues to be quite popular for prototyping AI, enterprises are betting on Java to run AI in real‑world production environments where stability, security, determinism, and performance matter.
 
@@ -73,7 +71,7 @@ Cost optimization in the cloud is no longer a "nice to have." It's a strategic i
 * **97% of organizations have taken action to cut public cloud spend** \[Figure 2\]**.**
 * **41% use a high‑performance Java platform specifically to reduce cloud compute costs.**
 
-![](CHART-2026-SoJ-Steps-CCO.png)
+![Bar chart of actions taken to cut public cloud costs: using a high-performance Java platform leads at 41%, only 3% did nothing](CHART-2026-SoJ-Steps-CCO.png)
 
 Why Java? Because faster runtimes, better start-up behavior, and lower warm‑up overhead translate directly to fewer cores, smaller instances, shorter execution times, and ultimately save cloud spend.
 
@@ -94,7 +92,7 @@ The survey puts numbers behind that pain:
 * **56% deal with Java‑related CVEs every week.**
 * **30% say more than half their vulnerability triage time is wasted on false positives.**
 
-![](CHART-2026-SoJ-Unused-DevOps.png)
+![Donut chart: 63% say dead or unused Java code affects DevOps productivity (22% greatly, 41% somewhat)](CHART-2026-SoJ-Unused-DevOps.png)
 
 This is an enormous drain on both productivity and morale.
 
@@ -134,4 +132,4 @@ Today, 36% of the Fortune 100 and many of the world's most respected brands rely
 And we're just getting started.
 
 I invite you to [dive deeper into the full report](https://www.azul.com/state-of-java-2026/) and join the conversation about where Java is heading next.
-[![](SoJ26-Download.jpg)](https://www.azul.com/state-of-java-2026/)
+[![Azul banner 'Java's Future Is Accelerating' with the State of Java 2026 report cover and a Download Now button](SoJ26-Download.jpg)](https://www.azul.com/state-of-java-2026/)

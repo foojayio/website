@@ -1,7 +1,6 @@
 ---
 title: "The Software Architect Elevator"
 date: "2026-03-24T20:28:33+00:00"
-lastmod: "2026-09-21T05:56:45+00:00"
 description: "I don't think it's necessary to introduce Gregor Hohpe. I'm a big fan, having read Enterprise Integration Patterns, and I've recommended the book ever…"
 canonical: "https://blog.frankel.ch/software-architect-elevator/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "How Does Kafka Perform When You Need Low Latency?"
 date: "2023-01-18T10:12:24+00:00"
-lastmod: "2023-06-29T06:47:46+00:00"
 description: "Kafka benchmarks aim to discuss low latency characteristics of Kafka. Instead, they appear to be configured for throughput rather than low latency."
 authors:
   - "peter-lawrey"
@@ -56,7 +55,7 @@ However, Kafka is configured for lower latencies and multiple producers are used
 
 In this configuration, Kafka has a fraction of the latencies reported in the benchmarks above.
 
-![](Screen-Shot-2023-01-09-at-11.12.26-AM-1024x687.png)
+![Line chart of end-to-end latency at 25k msg/s: Chronicle Queue stays near 10 microseconds while Kafka climbs past 3000 at high percentiles](Screen-Shot-2023-01-09-at-11.12.26-AM-1024x687.png)
 
 One producer doesn't handle this throughput well, but 2 and above producers (I tested up to 10) produce good results. Increasing the number of partitions only increased the overhead (albeit slightly). Increasing the number of consumers saw a small variation in latencies.
 

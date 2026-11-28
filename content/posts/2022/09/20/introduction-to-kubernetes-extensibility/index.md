@@ -1,7 +1,6 @@
 ---
 title: "Introduction to Kubernetes Extensibility"
 date: "2022-09-20T09:44:43+00:00"
-lastmod: "2022-09-20T09:44:44+00:00"
 description: "Let's browser through several extension points in Kubernetes: the data model, admission controllers, and client-side."
 canonical: "https://blog.frankel.ch/kubernetes-extensibility/"
 authors:
@@ -124,7 +123,7 @@ In short, two kinds of admission controllers are available:
 
 They run in turn as per the following diagram:
 
-![](admission-controller-phases.png)
+![Kubernetes admission flow: API request, authentication, mutating webhooks, schema validation, validating webhooks, then etcd](admission-controller-phases.png)
 
 *From [A Guide to Kubernetes Admission Controllers](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers)*
 

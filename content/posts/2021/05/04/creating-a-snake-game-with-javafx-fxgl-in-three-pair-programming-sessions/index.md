@@ -1,7 +1,6 @@
 ---
 title: "Snake Game with JavaFX FXGL in Three Pair-Programming Sessions"
 date: "2021-05-04T07:00:00+00:00"
-lastmod: "2021-12-10T13:00:49+00:00"
 description: "Start with an idea for a game, bring it to life in a prototype, modify the application to run on Raspberry Pi and on mobile device."
 authors:
   - "almasbaimagambetov"
@@ -38,9 +37,9 @@ For the first video, we started from a minimal project I prepared, containing th
 Wouldn't it be fun to control the game with a real joystick? That was the challenge in our second video where we used the sources of the first one to extend them and make them run them on a Raspberry Pi with a physical controller.
 
 {{< gallery cols="3" >}}
-picade_hat_pin_numbers-915x1024.jpg
-assembled-1024x768.jpg
-arcade_parts_kit-1024x683.jpg
+picade_hat_pin_numbers-915x1024.jpg | | Raspberry Pi pinout diagram with GPIO numbers labeled for arcade buttons and joystick directions
+assembled-1024x768.jpg | | Picade HAT on a Raspberry Pi wired to an arcade joystick and colored buttons
+arcade_parts_kit-1024x683.jpg | | Arcade parts kit with colored buttons, a joystick with black ball top and connector cables
 {{< /gallery >}}
 
 The Pi4J project provides a **friendly object-oriented I/O API and implementation libraries for Java Programmers** to access the **full I/O capabilities of the Raspberry Pi platform**. This makes it the ideal starting point to integrate it into our Snake game.
@@ -105,4 +104,4 @@ Check out these links for more information:
   * [https://github.com/AlmasB/FXGL](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbER2eTg2bzRvZDNjam11ZVNlTVhpcDRNR3pGZ3xBQ3Jtc0trM29HOV93S01HeVdrUGg2X2RBU090LVdCLUtXZjdWVXMwcTBuMzYtRzlGaDc2LUMzbGxpWG4zUGw0M0NFMWdScHZoRkh4WWE5Z1prOElTNWxzTzlJckVBdDY5akVvRzY1Y2F4aC00SHkzMGp5bHpzOA&q=https%3A%2F%2Fgithub.com%2FAlmasB%2FFXGL)
 
 That's all from us folks! Stay tuned for our future game development adventures!
-![](fxgl_promo-1024x635.jpg)
+![Collage of many small games made with JavaFX and FXGL, including platformers, shooters, card games and RPGs](fxgl_promo-1024x635.jpg)

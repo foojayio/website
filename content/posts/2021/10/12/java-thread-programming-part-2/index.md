@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 2)"
 date: "2021-10-12T09:07:05+00:00"
-lastmod: "2021-11-16T15:08:22+00:00"
 description: "Let's see an example of where we can use Threads. Let's assume we are building a web server that returns the most used words in a website."
 authors:
   - "bazlur-rahman"
@@ -93,7 +92,7 @@ Let's walk through the code first. In the above code, a `ServerSocket` starts at
 
 We can use telnet to connect the server and use this server.
 
-![](Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png)
+![IntelliJ with a single-threaded server's accept loop and a terminal where a telnet client queries word counts](Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png)
 
 The only problem with this is it can handle only one client at a time. So if we try to connect another client, it will respond only when the other connected client gets disconnected.
 
@@ -123,7 +122,7 @@ public class MultiThreadedServer {
 
 Now, we can connect multiple clients at once, and serve them all simultaneously:
 
-![](Screen-Shot-2021-09-30-at-10.06.47-PM-700x289.png)
+![Two telnet terminals connected to the Java server at once, each receiving its own word counts](Screen-Shot-2021-09-30-at-10.06.47-PM-700x289.png)
 
 Now that we understand the benefits of using threads in Java, we will dig a bit deeper into using threads in the following articles in this series.
 

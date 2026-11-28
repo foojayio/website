@@ -1,7 +1,6 @@
 ---
 title: "API Versioning"
 date: "2024-01-22T09:00:23+00:00"
-lastmod: "2024-01-22T09:00:25+00:00"
 description: "In this short article, we detail the three options for versioning HTTP APIs: path-based, query-based, and header-based."
 canonical: "https://blog.frankel.ch/api-versioning/"
 authors:

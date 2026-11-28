@@ -1,7 +1,9 @@
 ---
 title: "Class Loading"
 description: "Before the JVM can execute any code it must load the corresponding .class file into memory. This process is handled by class loaders, which locate, read, and define classes at runtime. Class loading is lazy by default: a class is ..."
-url: "/pedia/class-loading/"
+url: "/java-terms-explained/class-loading/"
+aliases:
+  - "/pedia/class-loading/"
 ---
 
 Before the JVM can execute any code it must load the corresponding `.class` file into memory. This process is handled by **class loaders**, which locate, read, and define classes at runtime. Class loading is lazy by default: a class is not loaded until it is first referenced.
@@ -14,6 +16,6 @@ The JPMS (Java Module System, introduced in Java 9) added a layer of explicit co
 
 ## See Also
 
-* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
-* [Bytecode](/pedia/bytecode/)
-* [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)
+* [Java Module System (JPMS)](/java-terms-explained/java-module-system-jpms/)
+* [Bytecode](/java-terms-explained/bytecode/)
+* [Java Native Interface (JNI)](/java-terms-explained/java-native-interface-jni/)

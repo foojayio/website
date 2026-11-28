@@ -1,7 +1,9 @@
 ---
 title: "AOT Compilation (Ahead-of-Time)"
 description: "Ahead-of-time (AOT) compilation converts Java source code or bytecode into native machine code before the application runs, rather than during execution. The result is a self-contained native binary that starts nearly instantly, without the warm-up phase that a JIT-compiled JVM ..."
-url: "/pedia/aot-compilation-ahead-of-time/"
+url: "/java-terms-explained/aot-compilation-ahead-of-time/"
+aliases:
+  - "/pedia/aot-compilation-ahead-of-time/"
 ---
 
 Ahead-of-time (AOT) compilation converts Java source code or bytecode into native machine code before the application runs, rather than during execution. The result is a self-contained native binary that starts nearly instantly, without the warm-up phase that a JIT-compiled JVM requires.
@@ -16,8 +18,8 @@ A simpler built-in mechanism is **AppCDS (Application Class Data Sharing)**, ava
 
 ## See Also
 
-* [JIT Compilation (Just-in-Time)](/pedia/jit-compilation-just-in-time/)
-* [CRaC (Coordinated Restore at Checkpoint)](/pedia/crac-coordinated-restore-at-checkpoint/)
-* [GraalVM and Native Image](/pedia/graalvm-and-native-image/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
-* [Project Leyden](/pedia/project-leyden/)
+* [JIT Compilation (Just-in-Time)](/java-terms-explained/jit-compilation-just-in-time/)
+* [CRaC (Coordinated Restore at Checkpoint)](/java-terms-explained/crac-coordinated-restore-at-checkpoint/)
+* [GraalVM and Native Image](/java-terms-explained/graalvm-and-native-image/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)
+* [Project Leyden](/java-terms-explained/project-leyden/)

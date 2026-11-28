@@ -1,7 +1,6 @@
 ---
 title: "Building Command Line Interfaces with Kotlin using picoCLI"
 date: "2021-09-23T07:05:12+00:00"
-lastmod: "2021-09-23T07:08:55+00:00"
 description: "Use cases where CLIs are a great idea, best practises, and discover one of the most used library for CLIs in the JVM world: picoCLI."
 canonical: "https://lengrand.fr/building-command-line-interfaces-with-kotlin-using-picocli/"
 authors:

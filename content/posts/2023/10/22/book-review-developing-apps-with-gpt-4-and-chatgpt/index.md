@@ -1,7 +1,6 @@
 ---
 title: "Book review: “Developing Apps with GPT-4 and ChatGPT”"
 date: "2023-10-22T06:05:28+00:00"
-lastmod: "2023-12-23T14:39:33+00:00"
 description: "Thorough, practical examples using a new & rapidly evolving tool. Pro or contra, it's a very worthwhile read."
 authors:
   - "simon-verhoeven"
@@ -23,7 +22,7 @@ Now, given the rapid shift in this field, a lot of us are left with a lot of que
 
 That's where this useful book by [Olivier Caelen](https://www.linkedin.com/in/oliviercaelen) and [Marie-Alice Blete](https://www.linkedin.com/in/mblete) comes in particularly handy. It offers us some interesting insights into the various models, and how to make use of these using the ChatGPT Python library.  
 
-{{< img src="910nFKaAHeL._SL1500_.jpg" class="aligncenter is-resized" style="width:320px;height:420px" >}}
+{{< img src="910nFKaAHeL._SL1500_.jpg" alt="Cover of O'Reilly's Developing Apps with GPT-4 and ChatGPT by Olivier Caelen and Marie-Alice Blete, with a brittle star illustration" class="aligncenter is-resized" style="width:320px;height:420px" >}}
 
 **price** : €59.99 for the eBook  
 **publication date** : September 2023  

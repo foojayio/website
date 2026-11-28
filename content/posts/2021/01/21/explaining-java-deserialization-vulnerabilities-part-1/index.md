@@ -1,7 +1,6 @@
 ---
 title: "Explaining Java Deserialization Vulnerabilities (Part 1)"
 date: "2021-01-21T10:12:19+00:00"
-lastmod: "2021-01-28T09:00:13+00:00"
 description: "Java serialization—and specifically deserialization—is “the gift that keeps on giving” for the security issues produced over the years."
 canonical: "https://snyk.io/blog/serialization-and-deserialization-in-java/"
 authors:
@@ -61,10 +60,10 @@ fileOut.close();
 ```
 
 When reading the file `ValueObject.ser` containing the serialized object with a hex-editor the output is this:
-![](image-7-1024x433.jpg)
+![Hex dump of the serialized ValueObject file with the string value 'Hi' highlighted at the end](image-7-1024x433.jpg)
 
 Now I can easily manipulate the string value. Below I change it from `Hi` to `Hallo`:
-![](image-8-1024x411.jpg)
+![Hex dump of the serialized file after editing, with the string value changed to 'Hallo'](image-8-1024x411.jpg)
 
 ```java
 FileInputStream fileIn = new FileInputStream("ValueObject2.ser");

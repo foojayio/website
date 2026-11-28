@@ -1,7 +1,6 @@
 ---
 title: "Hilla 1.0 - A new reactive frontend framework for Spring Boot backends"
 date: "2022-03-09T08:20:42+00:00"
-lastmod: "2022-03-09T08:21:32+00:00"
 description: "Hilla enables type-safe communication between SpringBoot backends and TS frontend. Integrated tooling and components help you build apps fast!"
 canonical: "https://hilla.dev/docs/"
 authors:
@@ -17,8 +16,6 @@ related_posts:
   - "delegation-vs-inheritance-in-graphical-user-interfaces"
   - "crafting-your-own-railway-display-with-java"
 ---
-
-![Hilla Framework](og-image-github-700x350.png)
 
 [Hilla](https://hilla.dev/) is a new framework for building reactive web apps on Java backends. It seamlessly integrates a reactive [Lit](https://lit.dev) TypeScript frontend with a [Spring Boot](https://spring.io/projects/spring-boot) backend. Hilla is built and supported by [Vaadin](https://vaadin.com).
 

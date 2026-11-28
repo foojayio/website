@@ -1,14 +1,12 @@
 ---
 title: "Checked exceptions and lambdas"
 date: "2026-01-19T09:00:29+00:00"
-lastmod: "2026-09-21T05:59:21+00:00"
 description: "Java's checked exceptions were a massive improvement over C's error-handling mechanism. As time passed and experience accumulated, we collectively…"
 canonical: "https://blog.frankel.ch/checked-exceptions-lambdas/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "feedback-on-checked-exceptions-and-lambdas"

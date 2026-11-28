@@ -1,7 +1,6 @@
 ---
 title: "Gluon is focused on end-to-end Java solutions"
 date: "2020-10-14T17:59:00+00:00"
-lastmod: "2021-08-23T12:59:49+00:00"
 description: "Gluon is a company that enables Java on desktop, embedded, and mobile with a rich, full-featured, JavaFX user interface."
 authors:
   - "bruno-lowagie"
@@ -18,7 +17,7 @@ related_posts:
 [Gluon](https://gluonhq.com/) is a company that enables Java on desktop, embedded, and mobile with a rich, full-featured, JavaFX user interface. Gluon embeds GraalVM and brings GraalVM to an audience hungry for performance and full-featured user experiences. Gluon enables seamless cloud integration of mobile and embedded experiences, driving increased cloud consumption.
 
 In short: Gluon is the company you're looking for if you want an end-to-end Java solution. Gluon offers products that fit right into your company's architecture.
-![](gluon-bruno-overview.png)
+![Gluon architecture diagram: JavaFX, Java libraries, 3rd-party libs and GraalVM feed Gluon Mobile, which targets iOS, Android, desktop and embedded, with CloudLink to cloud back ends](gluon-bruno-overview.png)
 
 Before we look at the different products mentioned in this overview, let's find out what GraalVM is about.
 
@@ -37,10 +36,10 @@ GraalVM is the holy grail in software development. *"What keeps developers from 
 ## Developing mobile apps using Gluon Tools
 
 Developers use the Integrated Development Environment (IDE) of their choice to write code. C# developers use MS Visual Studio; Java developers typically use IntelliJ IDEA, Eclipse, or NetBeans IDE. Additionally, they can use Gluon's [Scene Builder](https://github.com/gluonhq/scenebuilder) as a WYSIWYG to create the User Interface.
-![](gluon-bruno-figure05-1.png)
+![Gluon diagram with the developer and IDE highlighted as the starting point of the toolchain feeding Gluon Mobile](gluon-bruno-figure05-1.png)
 
 While writing code, Java developers will use a series of tools, most of which are freely available:
-![](gluon-bruno-figure06.png)
+![Gluon diagram with the JavaFX, Java libraries, 3rd-party libraries and GraalVM Native Image inputs highlighted](gluon-bruno-figure06.png)
 
 * To compile and execute their code, Java developers need a Java Development Kit (JDK) and a Java Runtime Environment (JRE). [OpenJDK](http://openjdk.java.net/) is a free and open source implementation of the Java Platform.
 * JavaFX can be used for the UI of the application. [OpenJFX](https://openjfx.io/) is a free and open source implementation of JavaFX; [ControlsFX](https://github.com/controlsfx/controlsfx) is a project developed by Gluon founders that extends the functionality of JavaFX with a series of extra controls.
@@ -48,7 +47,7 @@ While writing code, Java developers will use a series of tools, most of which ar
 * Finally, they'll need [GraalVM Native Image](https://www.graalvm.org/reference-manual/native-image/) to create the applications.
 
 While it's certainly possible to use all these components separately, using Gluon Mobile as the SDK for cross-platform development will save plenty of time, increasing the productivity of developers.
-![](gluon-bruno-figure07.png)
+![Gluon diagram with the Gluon Mobile block (Substrate, Cloud Build and IDE plugins) highlighted](gluon-bruno-figure07.png)
 
 Gluon offers different components:
 
@@ -76,7 +75,7 @@ Support for these products is only available for customers who engage in a busin
 ## Protecting the back end using Gluon CloudLink
 
 Exposing the back end directly to such an application isn't a good idea in terms of security. It's good practice to introduce an extra layer between the front end and the back end.
-![](gluon-bruno-figure08-1.png)
+![Diagram of front-end apps on iOS, Android, desktop and embedded connecting through Gluon CloudLink to public or private cloud services](gluon-bruno-figure08-1.png)
 
 In a Gluon-based architecture, [Gluon CloudLink](https://gluonhq.com/products/cloudlink/) serves as an such a layer that allows companies to:
 

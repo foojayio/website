@@ -1,7 +1,6 @@
 ---
 title: "Fail-Fast Reliable Software Strategy. Debug Failures Effectively"
 date: "2021-12-14T15:30:46+00:00"
-lastmod: "2021-12-14T15:30:47+00:00"
 description: "A broken kitchen appliance leads me down the path of intelligent failure, downside risk, exponential growth and Cloud computing!"
 authors:
   - "shai-almog"

@@ -1,7 +1,6 @@
 ---
 title: "Elastic JVM: Configuring G1 GC for Automatic Vertical Memory Scaling"
 date: "2021-05-05T13:45:22+00:00"
-lastmod: "2021-09-16T14:48:32+00:00"
 description: "Details on OpenJDK patch that improves elasticity & enables automatic vertical memory scaling of Java applications with G1 garbage collector!"
 authors:
   - "tetiana-fydorenchyk"

@@ -1,7 +1,6 @@
 ---
 title: "Using Java Flight Recorder and Mission Control (Part 1)"
 date: "2020-11-02T09:49:11+00:00"
-lastmod: "2020-12-07T13:24:05+00:00"
 description: "Java Flight Recorder is the profiler you can use in production, continuously, it is a feature in the JVM that traces the JVM with events."
 canonical: "https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/"
 authors:

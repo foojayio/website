@@ -1,7 +1,6 @@
 ---
 title: "Event-Driven Architecture and Change Data Capture Made Easy"
 date: "2025-02-18T16:44:14+00:00"
-lastmod: "2025-02-18T16:44:16+00:00"
 description: "Learn about Event-Driven Architecture (EDA) and Change Data Capture (CDC), their use cases, and how they can work together. learn more"
 authors:
   - "abo-saad-muaath"
@@ -80,7 +79,7 @@ In some cases, EDA and CDC can complement each other. For example:
 * **Scenario:** Your e-commerce system emits an **OrderPlaced** event when an order is created. However, for reporting purposes, you also need to track changes to the **Orders** database table.
 * **Solution:** Use EDA to orchestrate workflows (like payment processing and inventory updates) and CDC to feed data into your reporting or analytics system.
 
-![](https://mezocode.com/wp-content/uploads/2024/12/Screenshot-1446-06-01-at-4.15.47 PM.png)
+![Screenshot of a mezocode.com image illustrating the OrderPlaced event scenario](https://mezocode.com/wp-content/uploads/2024/12/Screenshot-1446-06-01-at-4.15.47 PM.png)
 
 **Explanation**:
 

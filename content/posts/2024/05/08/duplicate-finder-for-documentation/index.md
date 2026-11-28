@@ -1,14 +1,12 @@
 ---
 title: "Duplicate Finder for Documentation"
 date: "2024-05-08T22:08:04+00:00"
-lastmod: "2024-12-08T21:40:59+00:00"
 description: "Let's make a duplicate finder for documentation together – a tool to quickly detect non-exact, or fuzzy, matches in large text repositories."
 canonical: "https://flounder.dev/posts/duplicate-finder-intro/"
 authors:
   - "igor-kulakov"
 image: "duplicate-finder-banner.jpg"
 categories:
-  - "Java"
   - "Kotlin"
 related_posts:
   - "debug-without-breakpoints"

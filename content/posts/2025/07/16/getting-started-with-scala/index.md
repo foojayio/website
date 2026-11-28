@@ -1,7 +1,6 @@
 ---
 title: "Getting Started With Scala"
 date: "2025-07-16T06:41:05+00:00"
-lastmod: "2025-07-16T06:42:21+00:00"
 description: "At Quantexa, we love Scala. This may be the first dedicated article on Foojay.io about Scala. I hope my colleagues and I can add more in due course."
 authors:
   - "steve-wilcockson"
@@ -25,7 +24,7 @@ Scala is built on the Java Virtual Machine (JVM). For foojay.io readers, this is
 Scala is extremely popular in data engineering (e.g., Apache Spark), concurrent systems (e.g., Akka), and functional programming. It is a first class citizen for operating with Spark, while tools like Spark MLlib, Akka Streams, and Scala-based ETL frameworks make Scala a solid choice for end-to-end data engineering workflows. Through the JVM, it can interoperate with Hadoop, Kafka, Flink, Elasticsearch, Solr and more, those classics of the OpenJDK and JVM-based big data ecosystem.   
 
 At Quantexa, we extensively use Spark for batch processing. We also deploy Elasticsearch and OpenSearch for dynamic in-memory processing. Elsewhere, we use Python, e.g. for innovation and data science capabilities, but Scala is our production language of choice. It is the glue which binds our stack, and provides the foundation for our key capabilities. If you are enthusiastic about Scala, data engineering and/or Spark, [Quantexa is a great place to work](https://www.quantexa.com/careers/vacancies/).
-![](PlatformArchitecture-1024x516.png) ***Fig 1:**Scala is the glue for the Quantexa Platform and helps integrate with customer ecosystems*.
+![Quantexa platform architecture: batch and dynamic processing tiers, data stores and Quantexa UI, with data science tools and warehouse outputs](PlatformArchitecture-1024x516.png) ***Fig 1:**Scala is the glue for the Quantexa Platform and helps integrate with customer ecosystems*.
 
 Quantexa's application layer is predicated on entity resolution, graphs and scoring capabilities. They underpin highly contextualized and accurate data and analytics products that service human-in-the-loop ["Decision Intelligence"](https://www.linkedin.com/pulse/must-read-books-decision-intelligence-david-pidsley-zcdke/) use cases. Quantexa's customers apply them for tangible outcomes, for example to detect financial and non-financial crimes, to perform know your customer (KYC) and to sharpen customer intelligence. They also deploy it in their enterprise layer to improve data management (through entity quality) upstream and populate AI pipelines with [AI-ready data](https://www.quantexa.com/discover/ai/) downstream.  
 

@@ -6,7 +6,8 @@ authors:
   - "markus-westergren"
 image: "image.jpg"
 categories:
-  - "Java"
+  - "AI"
+  - "Opinion"
 related_posts:
 ---
 

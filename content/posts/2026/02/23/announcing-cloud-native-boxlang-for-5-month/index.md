@@ -1,7 +1,6 @@
 ---
 title: "Announcing Cloud-Native BoxLang for $5/Month"
 date: "2026-02-23T16:39:44+00:00"
-lastmod: "2026-02-25T12:38:06+00:00"
 description: "TL;DR: We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5…"
 authors:
   - "cristobal-escobar"
@@ -18,7 +17,7 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 ---
 
-![](boxlang-digitalocean-wave-700x467.jpg)
+![BoxLang and DigitalOcean logos on a blue banner reading 'DigitalOcean App Platform Starter Kit'](boxlang-digitalocean-wave-700x467.jpg)
 
 **TL;DR:** We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 minutes—starting at just **$5/month.** One-click deployment, auto-scaling, automatic redeployments, and zero downtime included.
 
@@ -55,7 +54,7 @@ Let's talk numbers. For the price of a fancy coffee, you get:
 
 The starter template includes everything you need for a modern web application:
 
-![](Captura-de-pantalla-2026-02-23-170711-700x149.png)
+![Starter project folder tree with app, boxlang.json, miniserver.json, Dockerfile and .do app spec](Captura-de-pantalla-2026-02-23-170711-700x149.png)
 
 **Powered by BoxLang MiniServer**, our lightweight embedded web server designed specifically for containerized deployments. It auto-compiles BoxLang files, handles URL rewrites, includes built-in health checks, and starts in milliseconds.
 

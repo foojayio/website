@@ -1,7 +1,6 @@
 ---
 title: "How does it feel to test a compiler?"
 date: "2024-08-08T06:47:59+00:00"
-lastmod: "2024-08-09T08:47:15+00:00"
 description: "My experience testing compilers, focusing on the Kotlin/Native compiler and how I got into compiler testing, the tasks involved, the tools I use, and the knowledge required for this work."
 canonical: "https://medium.com/@zakharenko/how-does-it-feel-to-test-a-compiler-fa1ff5d86065"
 authors:

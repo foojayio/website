@@ -7,7 +7,6 @@ authors:
   - "simonritter"
 image: "free-java-real-risk-banner.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "azul-zulu-october-2026-quarterly-update-and-out-of-cycle-release"

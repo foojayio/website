@@ -1,7 +1,6 @@
 ---
 title: "How to Choose a Cache: Capabilities"
 date: "2021-10-26T13:20:11+00:00"
-lastmod: "2023-02-03T13:39:33+00:00"
 description: "Like in many design decisions, a cache is a trade-off. Caching is a trade-off where you accept stale data to have them available/fast."
 canonical: "https://blog.frankel.ch/choose-cache/1/"
 authors:

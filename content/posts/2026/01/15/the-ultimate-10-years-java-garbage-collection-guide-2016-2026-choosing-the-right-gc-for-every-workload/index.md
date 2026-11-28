@@ -6,7 +6,6 @@ authors:
   - "alexius-diakogiannis"
 image: "Gemini_Generated_Image_pa4tufpa4tufpa4t-1024x559.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
@@ -78,7 +77,7 @@ Parallel GC (the "throughput collector") remains the champion. It utilizes all a
 **Mathematical Tuning Model: GC Threads**   
 
 To optimize Parallel GC, explicitly set the thread count (Threads~GC~*) based on your available CPU cores (N* ~cpu~).
-![](gc-math-1.png)
+![Formula: GC threads equal the CPU count up to 8 CPUs, and above 8 add 5/8 of each extra CPU](gc-math-1.png)
 
 This formula ensures the GC utilizes resources efficiently without overwhelming the operating system scheduler on massive batch servers.
 
@@ -95,7 +94,7 @@ ZGC maintains pause times under 1 millisecond for heaps ranging from 8 GB to 16 
 **Mathematical Tuning Model: Allocation Rate**   
 
 You must calculate the Allocation Rate (R~alloc~) over a time period (*t*) to determine if your heap headroom is sufficient.
-![](gc-math-2.png)
+![Formula: allocation rate equals the change in heap usage divided by elapsed time](gc-math-2.png)
 
 If R~alloc~ consistently approaches the concurrent collection speed of ZGC, you must either increase the heap size or optimize the code. For modern stacks on JDK 21 or later, Generational ZGC is the superior choice as it handles high allocation rates by frequently clearing the Young Generation, preventing stalls.
 

@@ -1,7 +1,6 @@
 ---
 title: "Demystifying Memory Management in Modern Programming Languages"
 date: "2021-09-07T08:13:38+00:00"
-lastmod: "2021-09-07T08:37:07+00:00"
 description: "Let's demystify the concepts behind memory management, taking a deeper look at memory management in some of the modern programming languages."
 canonical: "https://deepu.tech/memory-management-in-programming/"
 authors:
@@ -14,8 +13,6 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
 ---
-
-![Cover](R0mdaId-c5de449a.png "Cover")
 
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages.
 

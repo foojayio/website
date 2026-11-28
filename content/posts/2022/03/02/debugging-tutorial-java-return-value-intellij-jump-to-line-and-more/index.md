@@ -1,7 +1,6 @@
 ---
 title: "Java Return Value, IntelliJ Jump to Line"
 date: "2022-03-02T15:33:39+00:00"
-lastmod: "2022-03-03T09:14:55+00:00"
 description: "Posted two new videos in the \"140 Second Duckling\" series. They cover some basic and some little-known features of debuggers. Such as Marking"
 authors:
   - "shai-almog"

@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part V): Region Class"
 date: "2021-02-26T08:31:08+00:00"
-lastmod: "2021-02-26T08:31:10+00:00"
 description: "Learn how to create a custom Control based on the JavaFX Region class. The Region class is the class that all JavaFX controls are based on."
 authors:
   - "gerrit-grunwald"
@@ -31,7 +30,7 @@ In such a case, you can completely switch out of the window frame and create you
 
 For those of you that have no idea what I'm talking about... here is a screenshot of the buttons:
 
-![](buttons.png)
+![Close-up of three macOS-style window buttons in red, yellow and green on a dark title bar](buttons.png)
 
 Not really fancy, right... well, they also show some symbols when you hover over them, but we will come to that later.
 
@@ -39,7 +38,7 @@ So, we need to create a control that shows a colored circle and, if the mouse mo
 
 And as always... first thing to do is to open our vector drawing program and create the circles with their colors to get a better idea on how to implement them correctly:
 
-![](Affinity-Designer-buttons.png-Modified-400.0-2021-02-01-08-11-53-700x474.png)
+![Affinity Designer with a red circle selected among rows of red, yellow and green circles used to draw the buttons](Affinity-Designer-buttons.png-Modified-400.0-2021-02-01-08-11-53-700x474.png)
 
 If I copy an existing control I usually load the screen shot of the control as a background image into my vector drawing program and draw the copy over the screen shot. With this approach you directly get the correct screen size, placement and colors.
 
@@ -286,10 +285,10 @@ Here are two screenshots of the Region based control that shows the normal and t
 
 Normal state:
 
-![](Region-based-Control-2021-02-01-12-14-52.png)
+![Window titled 'Region based Control' with plain red, yellow and green buttons in the normal state](Region-based-Control-2021-02-01-12-14-52.png)
 
 Hovered state:
 
-![](Region-based-Control-2021-02-01-12-15-06.png)
+![Same window in hover state: the buttons now show close, minimise and zoom icons](Region-based-Control-2021-02-01-12-15-06.png)
 
 And that's it for today... so, keep coding!

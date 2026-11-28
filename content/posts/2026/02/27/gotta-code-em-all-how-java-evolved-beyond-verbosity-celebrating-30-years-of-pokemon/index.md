@@ -6,14 +6,13 @@ authors:
   - "igor-de-souza"
 image: "pokemon01.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JEPs"
 related_posts:
 ---
 
-![](pokemon01-1024x640.jpg)
+![Java mascot Duke with a cape and lightning, captioned 'Duke Evolved' in Pokemon-style lettering](pokemon01-1024x640.jpg)
 
 Happy 30th Anniversary to **Pokémon**! 🎉
 
@@ -45,7 +44,7 @@ A key element here is constructor chaining: when a class inherits from a supercl
 
 The enhancement addresses limitations by permitting specific statements to come before super() or this() invocations, which results in more flexible and clearer constructors.
 
-![](pokemon02-1024x640.jpg)
+![Duke in his base form next to 'Dukemon', an armored Pokemon-style evolved Duke at level 36](pokemon02-1024x640.jpg)
 
 Keep in mind this isn't a complete rundown, I highly recommend checking out the links and experimenting with some samples yourself to fully appreciate the advantages.
 

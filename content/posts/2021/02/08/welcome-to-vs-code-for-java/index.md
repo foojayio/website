@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with VS Code for Java Developers"
 date: "2021-02-08T08:10:07+00:00"
-lastmod: "2023-04-11T07:05:42+00:00"
 description: "VS Code has been used by more and more Java developers to edit, build, run, debug, test and deploy their code and manage their projects."
 authors:
   - "yaojin-yang"
@@ -42,11 +41,11 @@ Regardless of a new project or an existing project, it's easy to get started wit
 * To create a new project, launch the Command Palette by using **Ctrl+Shift+P** on Windows or Linux or **⌘+Shift+P** on macOS, type "**create java project**" to execute creation command, and then follow the command's steps.
 * To open an existing project, open project root folder via menu item **File \> Open Folder** on Windows or **Code \> Open Folder** on macOS. For project using build tool such as Maven or Gradle, you will be prompted to import dependencies by a pop-up message as below. Just accept it and wait till importing completes.
 
-![](Importing-project-notification.png)
+![VS Code notification asking whether to import the workspace's Java projects, with Yes, Always and Later buttons](Importing-project-notification.png)
 
 One thing a new user may find a bit tricky in the beginning is JDK configuration. On VS Code, there are two related settings, **JDK used by your project** and **JDK used by VS Code** for Java language support. While we support JDK version 1.5 or above for the former setting, we require JDK version 11 or above for the latter setting. To help you easily get the settings right, we offer a Java Runtime Configuration wizard. You can open the wizard by launching the Command Palette using **Ctrl+Shift+P** on Windows or Linux or **⌘+Shift+P** on macOS, and then type "**configure java runtime**". Yes, you have used Command Palette again. Remember, it's a tool that can give you access to all the functionality of VS Code.
 
-![](JDK-configuration.png)
+![VS Code 'Configure Java Runtime' page showing project JDKs, the default JDK and an option to install OpenJDK](JDK-configuration.png)
 
 ### Run and Debugging
 
@@ -72,13 +71,13 @@ VS Code supports many languages, so it relies on file extension to determine wha
 
 Both Terminal and Debug Console can be used to monitor application launch status. They are in the bottom of VS Code window. By default, status is printed in Terminal. You can change to use Debug Console via setting option "**java.debug.settings.console**".
 
-![](Panel.png)
+![VS Code editing PetClinicApplication.java with the Terminal, Problems, Output and Debug Console panel tabs highlighted](Panel.png)
 
 #### Status bar
 
 On the bottom of your VS Code window, there is a blue bar called status bar. It's a place to know the status of your project environment. For beginner, I found three icons on the right side of the bar are very useful.
 
-![](Status-bar.png)
+![VS Code status bar showing Java language mode and JavaSE-11 highlighted](Status-bar.png)
 
 * Java: indicate currently activated file in editor window is a Java file.
 * Thumb up: your project has been imported; if you see a rocket icon here, it means your project is pending for importing.

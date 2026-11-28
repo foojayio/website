@@ -1,14 +1,12 @@
 ---
 title: "Patterns For The Design Of Microservices – Part 2"
 date: "2023-10-30T08:58:06+00:00"
-lastmod: "2023-10-30T08:58:08+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."
 authors:
   - "mahendra1413"
 image: "MSPatterns.png"
 categories:
   - "Databases"
-  - "Java"
   - "Microservices"
   - "nosql"
   - "Spring"

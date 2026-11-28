@@ -1,14 +1,12 @@
 ---
 title: "The Visitor Pattern - 'Revisited' using Data Oriented Programming techniques"
 date: "2025-11-26T10:38:43+00:00"
-lastmod: "2025-11-26T11:05:08+00:00"
 description: "Java Language improvements culminating in java 21 obviate the need for the verbose visitor pattern as we know it, instead elevating it into a first class language feature."
 canonical: "https://wimdetroyer.com/blog/visitor-pattern-in-dop"
 authors:
   - "wim-de-troyer"
 image: "domain-oop.png"
 categories:
-  - "Java"
   - "JDK21"
   - "Records"
   - "Sealed Classes"

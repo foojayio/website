@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java Testing with VS Code"
 date: "2021-03-15T12:24:02+00:00"
-lastmod: "2021-10-25T07:57:11+00:00"
 description: "To run Java tests on VS Code, we recommend using the Java Test Runner extension or the Java Extension Pack, which includes the extension."
 authors:
   - "yaojin-yang"
@@ -29,13 +28,13 @@ There are a couple of options to run them, as demonstrated below.
 
 Test Explorer offers the most comprehensive support for testing. In addition to running cases individually, you can Run All Tests, as shown below.
 
-![](test-explorer-running-test2.gif)
+![VS Code Test Explorer running all Java tests of the spring-petclinic project](test-explorer-running-test2.gif)
 
 #### Running from Java Project Explorer
 
 Java Project Explorer provides access to all project-related functionality, including testing. You can run tests at project level or at individual package or class level, as demonstrated below.
 
-![](project-manager-running-test2.gif)
+![VS Code Java Projects view with buttons to run tests at project level](project-manager-running-test2.gif)
 
 #### Running from CodeLens
 
@@ -45,7 +44,7 @@ When VS Code detects testing annotations in code, it will provide a link of "Run
 
 It's a handy feature that allows you to focus on coding by minimizing context switching.
 
-![](code-lens-running-test.gif)
+![VS Code editor with Run Test and Debug Test code lenses above Java test methods](code-lens-running-test.gif)
 
 ### Accessing Testing Reports
 

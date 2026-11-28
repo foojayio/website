@@ -1,7 +1,6 @@
 ---
 title: "TornadoInsight - Compatibility with TornadoVM SDK 2.0+ & Configuration Guide"
 date: "2025-12-30T09:00:00+00:00"
-lastmod: "2025-12-30T15:18:44+00:00"
 description: "This blog updates the previously published TornadoInsight configuration guidelines and explains how to configure the required environment variable to…"
 authors:
   - "thanos-stratikopoulos"
@@ -17,7 +16,7 @@ related_posts:
   - "foojay-podcast-91"
 ---
 
-{{< img src="tornado-insight.webp" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
+{{< img src="tornado-insight.webp" alt="Magnifying glass over a monitor of code with a purple swirl, illustrating TornadoInsight code inspection" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
 
 This blog updates the previously published **TornadoInsight** configuration [**++guidelines++**](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea) and explains how to configure the required environment variable to ensure that TornadoInsight correctly detects the TornadoVM SDK when IntelliJ IDEA is launched from a graphical environment.
 
@@ -43,7 +42,7 @@ TornadoInsight supports using the JDK defined in the IntelliJ project settings.
 
 When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.
 
-{{< img src="screenshot_bd38c017-be77-49d6-a5b0-f9ca5-628e5f31.jpg" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
+{{< img src="screenshot_bd38c017-be77-49d6-a5b0-f9ca5-628e5f31.jpg" alt="IntelliJ Project Structure dialog with JDK 21 selected as the project SDK, which TornadoInsight uses for dynamic inspection" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
 
 ## TornadoVM SDK Configuration (Recommended)
 
@@ -125,7 +124,7 @@ If the variable is present, TornadoInsight will automatically detect the Tornado
 ## **Summary**
 
 If **TORNADOVM_HOME** is not recognized by the IntelliJ process, a warning is shown in the settings of the plugin, as shown in the picture below.
-![](screenshot_aa1940fc-c2d6-4120-95fc-2df46-bb9c5e73.jpg)
+![TornadoInsight settings in IntelliJ IDEA with a warning that the TORNADOVM_HOME environment variable is not set](screenshot_aa1940fc-c2d6-4120-95fc-2df46-bb9c5e73.jpg)
 
 Some common issues are listed here:
 

@@ -1,7 +1,6 @@
 ---
 title: "Dive into the OpenJDK: Top 10 Reads on Foojay.io"
 date: "2023-07-19T07:45:04+00:00"
-lastmod: "2023-07-19T07:45:05+00:00"
 description: "Foojay.io is a community platform dedicated to the needs of developers who use the OpenJDK and related technologies."
 authors:
   - "bazlur-rahman"

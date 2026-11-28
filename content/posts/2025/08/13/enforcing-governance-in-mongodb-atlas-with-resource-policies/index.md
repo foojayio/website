@@ -1,14 +1,12 @@
 ---
 title: "Enforcing Governance in MongoDB Atlas with Resource Policies"
 date: "2025-08-13T12:52:05+00:00"
-lastmod: "2025-08-13T12:58:29+00:00"
 description: "The growing adoption of MongoDB Atlas as a managed database platform increasingly demands mechanisms that align security, compliance, and governance."
 authors:
   - "samuel-molling"
 image: "mongologo.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
@@ -130,12 +128,12 @@ These policies can be organized in multiple .tf files and integrated into CI pip
 Once Resource Policies are applied via Terraform, it's possible to validate their enforcement using the Atlas UI or the administration API.
 
 Below is an example of a Terraform plan applying several policies to the organization:
-![](AD_4nXeNb5LNgWiKsljTH10PIxaBJqNFg2eFq7m7-5fcc0b13.jpg)
+![Terraform plan output creating three MongoDB Atlas resource policies: restrict wildcard IP, allow only AWS clusters, require TLS 1.2](AD_4nXeNb5LNgWiKsljTH10PIxaBJqNFg2eFq7m7-5fcc0b13.jpg)
 
 Resource Policies plan
 
 Once applied, the policies become visible in the MongoDB Atlas UI:
-![](AD_4nXd3-33_1s0eUd8ZiqnKDJIlw7m23iGaylNH-0edfa94b.jpg)
+![MongoDB Atlas Resource Policies page listing the three policies Restrict Wildcard IP, Enforce Minimum TLS 1.2 and Allow Only AWS Clusters](AD_4nXd3-33_1s0eUd8ZiqnKDJIlw7m23iGaylNH-0edfa94b.jpg)
 
 Resource Policies in Atlas UI
 
@@ -154,10 +152,10 @@ This endpoint returns a list of projects, clusters, or networks that violate cur
 *⚠️ Important: MongoDB Atlas does not automatically fix or block existing resources. If a resource is out of compliance, it will remain unchanged — the system only reports the violation, enabling visibility without disruption.*
 
 In the example below, a public IP was already configured in the project. After applying the policy that blocks 0.0.0.0/0, the resource was not removed, but it was flagged as non-compliant:
-![](AD_4nXeU1lUV71qq91DLAL39ZWmISnJR0xV7DClH-717da03a.png)
+![Atlas Network Access page with the 0.0.0.0/0 entry in the IP access list, which the policy flags as non-compliant](AD_4nXeU1lUV71qq91DLAL39ZWmISnJR0xV7DClH-717da03a.png)
 
 Network Access List in Atlas UI
-![](AD_4nXdujOcrNYgocscIEtbLBPYjwE6VJ7Y4Ieb9-ae9145f1.png)
+![curl call to the Atlas nonCompliantResources API returning JSON that names the 'Restrict Wildcard IP' policy](AD_4nXdujOcrNYgocscIEtbLBPYjwE6VJ7Y4Ieb9-ae9145f1.png)
 
 Non-compliant resources in Atlas
 
@@ -166,14 +164,14 @@ Below are some visual examples of tests performed:
 ### **🚫 Attempt to create a cluster on Google Cloud Platform (GCP)**
 
 The policy allowed only AWS clusters. The operation was blocked as expected:
-![](AD_4nXcq2s-go-k5tgvDUQ6HPSTLjtUNUEzQhYS0-48b1937c.jpg)
+![Atlas cluster creation with Google Cloud selected, blocked by an error saying only AWS clusters are allowed](AD_4nXcq2s-go-k5tgvDUQ6HPSTLjtUNUEzQhYS0-48b1937c.jpg)
 
 Cluster creation blocked by policy
 
 ### **🔒 Attempt to add a public IP (0.0.0.0/0)**
 
 The policy prevented the addition of a wildcard IP to the access list:
-![](AD_4nXcPPLQVyrfCrA2YBUDLgj_MDv7hQa1gpTpE-b9cfe036.png)
+![Atlas 'Add IP Access List Entry' dialog for 0.0.0.0/0 denied with an error citing the Restrict Wildcard IP policy](AD_4nXcPPLQVyrfCrA2YBUDLgj_MDv7hQa1gpTpE-b9cfe036.png)
 
 Blocked: 0.0.0.0/0 not allowed
 

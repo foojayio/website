@@ -1,7 +1,6 @@
 ---
 title: "Null Safety: Kotlin vs. Java"
 date: "2023-02-13T12:12:35+00:00"
-lastmod: "2023-02-13T12:13:54+00:00"
 description: "Following on from FOSDEM discussions, let's expand on the problem of nullability and how it's solved in Kotlin and Java."
 canonical: "https://blog.frankel.ch/null-safety-java-vs-kotlin/"
 authors:
@@ -27,7 +26,7 @@ The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-k
 
 [
 
-{{< img src="Screenshot-2023-02-11-at-13.11.04-485x510.png" class="aligncenter size-medium" width="485" height="510" >}}
+{{< img src="Screenshot-2023-02-11-at-13.11.04-485x510.png" alt="Tweet by Martin Bonnin asking how many nullability annotations exist in Java, with a photo of a speaker pointing at a slide listing them" class="aligncenter size-medium" width="485" height="510" >}}
 
 ](https://twitter.com/martinbonnin/status/1622197657534857220)
 

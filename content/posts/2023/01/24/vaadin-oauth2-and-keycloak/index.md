@@ -1,7 +1,6 @@
 ---
 title: "Vaadin, OAuth2, and Keycloak"
 date: "2023-01-24T09:34:41+00:00"
-lastmod: "2023-01-24T09:34:42+00:00"
 description: "Security matters! Learn how to configure Vaadin and Spring Security to use OAuth2 with Keycloak on Foojay.io Today!"
 authors:
   - "simon-martinelli"
@@ -79,7 +78,7 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
 5. Disable "Add to ID token"
 
 The configuration must look like this:
-![](image-1024x723-ac6f6f14.png)
+![Keycloak User Realm Role mapper settings with token claim name realm_access.roles, added to access token and userinfo but not ID token](image-1024x723-ac6f6f14.png)
 
 ## Vaadin Application with Security Configuration
 
@@ -138,15 +137,15 @@ spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_us
 ```
 
 Now you can start the application and open <http://localhost:8080>.
-![](image-1-8a4d5e94.png)
+![Vaadin app in a browser at localhost:8080 showing an Index page, with only Index in the menu and a Sign in button](image-1-8a4d5e94.png)
 
 As you can see in the menu on the left, there is only one entry, "Index".
 
 Click on the "Sign in" button in the lower left corner. This will direct you to the Keycloak login screen.
-![](image-2-1dce7fe8.png)
+![Keycloak sign-in page for the vaadin realm with username and password fields](image-2-1dce7fe8.png)
 
 Sign in with admin/admin, and you'll be redirected to the app:
-![](image-3-975eafca.png)
+![Vaadin app after login as admin, showing the User page with Index, User and Admin menu entries](image-3-975eafca.png)
 
 Now you have access to all views.
 

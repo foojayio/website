@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AI Deep Dive — Part 6 of 7: Memory Systems & RAG — Building AI That Remembers"
 date: "2026-05-05T15:10:15+00:00"
-lastmod: "2026-05-07T22:03:10+00:00"
 description: "BoxLang AI 3.0 Series · Part 6 of 7 A chatbot with no memory isn't a conversation — it's a series of isolated queries. Every message starts from scratch."
 authors:
   - "cristobal-escobar"
@@ -20,7 +19,7 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 ---
 
-![](bxai-series-cover-06-700x368.png)
+![Cover for part 6 of the BoxLang AI 3.0 Deep Dive series: Memory & RAG, building AI that remembers](bxai-series-cover-06-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 6 of 7*
 

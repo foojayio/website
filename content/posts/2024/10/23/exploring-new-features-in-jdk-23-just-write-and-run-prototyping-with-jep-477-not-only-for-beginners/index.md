@@ -1,13 +1,11 @@
 ---
 title: "Just-Write-And-Run prototyping with JEP-477"
 date: "2024-10-23T09:37:04+00:00"
-lastmod: "2024-10-23T09:45:14+00:00"
 description: "JEP-477 can be considered an example of the symbiotic development of multiple JEPs together, similar to the result of the development of the Java platform."
 authors:
   - "miro-wengner"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "JDK 23"
 related_posts:

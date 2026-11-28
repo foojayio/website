@@ -1,7 +1,6 @@
 ---
 title: "Observing Java on Docker Compose Using OpenTelemetry"
 date: "2023-08-09T21:51:43+00:00"
-lastmod: "2023-08-09T21:55:39+00:00"
 description: "An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files."
 authors:
   - "roni-dover"
@@ -72,7 +71,7 @@ Start your application with the `docker-composer.override.otel.yml` file.
 
 After running a few actions on your application, open the Jaeger interface to see the traces at [http://localhost:166868](http://localhost:16686/)
 
-![](1_cIrJepyqUHnnTxbhc5TFfw-1024x558.jpg)
+![Jaeger UI trace timeline for spring-petclinic GET /owners/{ownerId} with 34 spans and many repeated SELECT queries](1_cIrJepyqUHnnTxbhc5TFfw-1024x558.jpg)
 
 Traces provide a good means to see into the working of your app and services and understand exactly what the code is doing, without having to actively debug it.
 
@@ -119,9 +118,9 @@ After running our application and triggering some actions, we'll be able to see 
 
 The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) between code and observability so that you're always aware of how your changes affect the application.
 
-![](0_RpOJWYz_jV1P4y0V-1024x677.jpg)
+![Digma in IntelliJ showing a trace for HTTP GET /owners/new with insights on a slow span bottleneck and a latency graph](0_RpOJWYz_jV1P4y0V-1024x677.jpg)
 
-![](0_2fYOaC2TR6hdT6cd.jpg)
+![Digma insights in IntelliJ flagging a suspected N+1 query and excessive API calls next to the Java controller code](0_2fYOaC2TR6hdT6cd.jpg)
 
 ### Now what?
 

@@ -1,7 +1,6 @@
 ---
 title: "SKP's Agile Cheatsheet: Part 01 | On Foojay.io Today"
 date: "2021-10-28T17:39:31+00:00"
-lastmod: "2021-10-28T17:39:34+00:00"
 description: "SKP's Agile Cheatsheet listing the most important terms in agile, devops, scrum, lean, kanban, and more."
 authors:
   - "sumith-puri"
@@ -20,13 +19,13 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Affinity Diagram.**An affinity diagram is a method used to organize many ideas into groups with common themes or relationships. Affinity diagrams are tools for analysing large amounts of data and discovering relationships that allow a design direction to be established based on the associations. \[Type – Brainstorming, Agile Process, Sprint Retrospective\]
 
-![](KOcCE7t-169e5eab.png)
+![Affinity diagram grouping sticky notes under Good, Meh and Bad columns with labels like short week, teamwork and pipeline](KOcCE7t-169e5eab.png)
 
 **Fig.1**: Real-World Affinity Diagram (Affinity Mapping) from a Sprint Retrospective (kbp.media)
 
 **Agile C4Model.** C4 Model documents the architecture of a software system, by showing multiple points of view that explain the decomposition of a system into containers and components, the relationship between these elements, and, where appropriate, the relation with its users. The viewpoints are organized according to their hierarchical level: Context Diagrams, Container Diagrams, Component Diagrams, Code Diagrams. \[Type – Agile Modelling, Agile Architecture, System Design\]  
 
-![](ju06Cnr-5e4d91b7.jpg)
+![C4 model diagram showing a software system decomposed into containers, components and code](ju06Cnr-5e4d91b7.jpg)
 
 **Fig.2**: Hierarchical C4 Model for Viewpoints of a Software System (c4model.com)
 
@@ -38,13 +37,13 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Burn Down Charts** . The team displays, somewhere on a wall of the project room, a large graph relating the quantity of work remaining (on the vertical axis) and the time elapsed since the start of the project (on the horizontal, showing future as well as past). This constitutes an "Information Radiator", provided it is updated regularly. Two variants exist, depending on whether the amount graphed is for the work remaining in the iteration ("Sprint Burndown") or more commonly the entire project ("Product Burndown"). \[Type – Agile Project Management\]  
 
-![](r7weLIB-3775d037.jpg)
+![Burn-down chart with ideal and actual effort remaining, next to a burn-up chart showing total work and actual progress](r7weLIB-3775d037.jpg)
 
 **Fig.3**: Burn Down vs. Burn Up Charts (publications.axelos.com)
 
 **Capacity**. Capacity is how much availability the team has for the sprint. This may vary based on team members being on vacation, ill, etc. The team should consider capacity in determining how many product backlog items to plan for a sprint. \[Type – Agile Project Management / Agile Estimation\]
 
-![](9pE63Es-2e5efa3b.jpg)
+![Team capacity formula: team members times work days times productive hours, minus holidays or vacations](9pE63Es-2e5efa3b.jpg)
 
 **Fig.4**: Typical Capacity Calculation (targetprocess.com)
 
@@ -58,7 +57,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Cumulative Flow Diagram**. The Cumulative Flow Diagram (also known as CFD) is one of the most advanced Kanban and Agile analytics charts. It provides a concise visualization of the three most important metrics of your flow: Cycle Time, Throughput, Work in Progress. Its main purpose is to show you how stable your flow is and help you understand where you need to focus on making your process more predictable. It gives you quantitative and qualitative insight into past and existing problems and can visualize massive amounts of data. \[Type – Agile Project Management\]
 
-![](qyOgC5w-4f14c250.jpg)
+![Cumulative flow diagram of work items per workflow stage from September to October 2018, with average cycle time and tasks in progress](qyOgC5w-4f14c250.jpg)
 
 **Fig.5**: Typical Cumulative Flow Diagram in Agile (kanbanize.com)
 
@@ -72,7 +71,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 **Earned Value Management** . Earned Value Management (EVM) is a project management technique that measures the technical performance, cost and schedule of a project against planned objectives. The result is a simple set of metrics that provides early warnings of performance issues, allowing for timely and appropriate adjustments. EVM also improves the definition of project scope and provides valuable metrics for communicating progress to stakeholders. To implement EVM, you need to measure some basic metrics like a valuation of planned work, called planned value (PV). Agile EVM is a lightweight and easy to use adaptation of the traditional Earned Value Management technique which provides the benefits of traditional Earned Value Management for Scrum. \[Type – Agile Project Management / Agile Analysis\]
 
-![](KmKpZfO-6c0e7723.jpg)  
+![Earned value management chart of planned value, actual cost and earned value curves over five iterations, with variances at a status date](KmKpZfO-6c0e7723.jpg)  
 **Fig.6**: Typical S-Curve showing EV, AC, PV, SV, CV in Agile (mpug.com)
 
 More coming soon!

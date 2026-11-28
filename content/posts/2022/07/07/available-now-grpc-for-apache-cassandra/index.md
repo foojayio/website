@@ -1,7 +1,6 @@
 ---
 title: "Available Now - gRPC for Apache Cassandra"
 date: "2022-07-07T07:38:47+00:00"
-lastmod: "2022-07-07T07:39:32+00:00"
 description: "General availability of a gRPC API for Apache Cassandra to leverage a powerful database in combination with a microservices-oriented API."
 canonical: "https://www.datastax.com/blog/available-now-grpc-apache-cassandra"
 authors:

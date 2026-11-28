@@ -1,7 +1,6 @@
 ---
 title: "Monitoring Spring Boot Applications (Part 1)"
 date: "2022-01-12T16:34:53+00:00"
-lastmod: "2022-01-12T16:44:44+00:00"
 description: "In part 1 of this new Foojay series, learn about JDK Flight Recorder and how we can use it to monitor a Spring Boot application."
 canonical: "https://ashishtechmill.com/monitoring-spring-boot-applications-part-1"
 authors:
@@ -98,7 +97,7 @@ JDK Mission Control aka JMC is a GUI tool for examining the recording created by
 
 In the next window, you can go with default options or tweak them as per your needs. Then click on **Finish** to start the recording of events for the Spring Boot application.
 
-![](1-ch1rdvwiz4slOBij7uuLnQ-7f6b6fe5.png)
+![Start Flight Recording dialog in Java Mission Control with a 1 minute fixed recording and the 'Profiling - on server' setting](1-ch1rdvwiz4slOBij7uuLnQ-7f6b6fe5.png)
 
 Once the recording is finished automated analysis results are shown.
 

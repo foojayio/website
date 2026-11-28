@@ -1,7 +1,6 @@
 ---
 title: "Interview on Machine Learning and Disruptive Data Science"
 date: "2021-03-26T13:15:29+00:00"
-lastmod: "2023-01-08T07:39:57+00:00"
 description: "I spoke with Fabiane recently about Tail Target, its objectives, the theory behind it, and the underlying technology. Read on!"
 authors:
   - "kevinfarnham"
@@ -14,7 +13,7 @@ related_posts:
 
 I attended sessions and spoke with Java Champion Fabiane Bizinella Nardon at many JavaOne conferences over the past years. I remember, in our conversations in the hallways, discussing various entrepreneurial ventures she was working on. One of the ideas was [Tail Target](https://www.tail.digital "Tail Target"). Fast forward almost a decade, and Tail Target has truly come to fruition.
 
-![](fabiane-tailtarget.com_8314_small-2-700x467.jpg)
+![Portrait of Java Champion Fabiane Bizinella Nardon, smiling, in a dark cardigan](fabiane-tailtarget.com_8314_small-2-700x467.jpg)
 
 Fabiane Bizinella Nardon has an MSc in Computer Science and a PhD in Electronic Engineering. She is an expert in Data Engineering and Machine Language Engineering. She is the program committee leader for the Machine Learning Engineering track of QCon São Paulo, a frequent speaker on the subject, and author of several articles.
 

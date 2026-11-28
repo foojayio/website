@@ -1,14 +1,12 @@
 ---
 title: "Aggregation Optimization in MongoDB: Unnecessary Unwinds (Part 2)"
 date: "2026-06-25T10:01:00+00:00"
-lastmod: "2026-06-25T12:01:22+00:00"
 description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice…"
 authors:
   - "graeme-robinson"
 image: "tue11.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
@@ -19,7 +17,7 @@ related_posts:
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="aspect-ratio:2.2802192518511397;width:840px;height:auto" >}}
+{{< img src="tue11.png" alt="MongoDB banner reading 'Love Your Developers' with floating document and chart icons on a dark background" class="size-full is-resized" width="700" height="307" style="aspect-ratio:2.2802192518511397;width:840px;height:auto" >}}
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
@@ -36,14 +34,14 @@ Based on the use case presented by the customer team during their design review,
 This was a classic many-to-many relationship: Each user profile was associated with one or more devices and each device associated with one or more profiles. Each device was categorized by device model name, e.g., "iPhone 12," "Samsung TV," "Apple TV," etc.
 
 The many-to-many relationship between profiles and devices was being modeled using an intermediate, or "associative," mapping collection using the classic RDBMS approach:
-![](tue12-1024x269.png)
+![Data model diagram of a StreamingService with Profiles and Devices linked many-to-many through a Mappings collection](tue12-1024x269.png)
 
 To test the data model and query designs, we had built out a test system in MongoDB Atlas with one million profile documents, 3.4 million device documents, and over five million mapping documents representing links between profiles and devices.
 
 Using this data model, the query that we were attempting to support was to find all profiles associated with a contact address in a given city, and that had used a given device type to access the service—for example, all profiles registered in Austin, TX, which had accessed the service using an iPhone 12. The query was required to return matching profiles with an embedded list of each matching device, in pages of 10 profiles ordered by profileID.
 
 To perform this query, an [aggregation pipeline](https://www.mongodb.com/docs/manual/aggregation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#aggregation-operations) had been built with 10 stages:
-![](tue13.png)
+![Pipeline of ten aggregation stages: match, lookup, unwind, lookup, unwind, group, set, sort, skip and limit](tue13.png)
 
 In Part 1 of this series, we broke down what each stage of the pipeline was designed to do. If you are unfamiliar or need a refresher on MongoDB aggregation pipelines, I'd suggest you refer back to that before continuing.
 

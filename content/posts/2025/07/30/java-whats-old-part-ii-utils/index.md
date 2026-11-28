@@ -1,13 +1,11 @@
 ---
 title: "Java, What's Old? Part II: Utils"
 date: "2025-07-30T08:48:29+00:00"
-lastmod: "2025-07-30T08:52:09+00:00"
 description: "What are the old utility classes less known in Java?"
 authors:
   - "anthony-goubard"
 image: "old-coffee.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "java-whats-old-part-i-collections"

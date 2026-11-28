@@ -1,7 +1,6 @@
 ---
 title: "Gluon Update, Dual Screen Raspberry Pi, IntelliJ JavaFX Project Wizard"
 date: "2021-06-04T07:27:41+00:00"
-lastmod: "2021-12-10T13:00:24+00:00"
 description: "In this post we are going to take a deeper look into some of the recent JavaFX announcements, e.g., dual screen support on Raspberry Pi!"
 authors:
   - "frankdelporte"
@@ -93,7 +92,7 @@ And that wasn't the only JavaFX announcement last week! JetBrains showed a great
 *To save you time configuring settings after project creation, we've reworked the new project wizard for JavaFX. It only takes two steps. First, you add a project SDK and the language you will use, the desired build system, and the test framework.*
 
 *Then you will have the opportunity to choose from a list of the most frequently used libraries, which come with short descriptions on the right. Once you create your new JavaFX project, your IDE will generate a fully configured sample application.*
-![](UX_JavaFXWizard-3c47029c.webp)
+![IntelliJ IDEA New Project wizard with JavaFX selected, showing name, build system Maven, JUnit, group, artifact and Java 16 SDK](UX_JavaFXWizard-3c47029c.webp)
 
 ## Conclusion
 

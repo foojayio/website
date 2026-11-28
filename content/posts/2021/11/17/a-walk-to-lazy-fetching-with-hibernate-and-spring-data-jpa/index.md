@@ -1,7 +1,6 @@
 ---
 title: "A Walk to Lazy Fetching With Hibernate and Spring Data JPA"
 date: "2021-11-17T11:47:30+00:00"
-lastmod: "2023-08-28T12:40:10+00:00"
 description: "Using FetchType.EAGER is a very bad practice, since our services may not require all the data of the mapped entities in all cases."
 authors:
   - "mainuls18"
@@ -14,7 +13,7 @@ related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
 ---
 
-{{< img src="oie_koKWLHXsUxuL.jpg" class="is-resized" width="452" height="226" style="width:452px;height:226px" >}}
+{{< img src="oie_koKWLHXsUxuL.jpg" alt="Hibernate logo with the text Lazy Fetching" class="is-resized" width="452" height="226" style="width:452px;height:226px" >}}
 
 ### Background
 
@@ -62,12 +61,12 @@ To call this named entity graph in our query, we have added the following additi
 ## **Using Spring Data JPA Provided @EntityGraph Annotation**
 
 Let's see the entity first.
-![](1_Tr3xvq9hSvqoK3LHNaib6g-5-455x510.png)
+![Java entity class with an @ElementCollection roles list using FetchType.LAZY highlighted](1_Tr3xvq9hSvqoK3LHNaib6g-5-455x510.png)
 
 We have an entity which has a List of String Roles, mapped as @ElementCollection. Its fetch type is FetchType.LAZY.
 
 Now let's see our UserRepository interface.
-![](1_Tr3xvq9hSvqoK3LHNaib6g-6-700x158.png)
+![Spring Data JPA repository method findByUsername annotated with @EntityGraph on the roles attribute to handle lazy loading](1_Tr3xvq9hSvqoK3LHNaib6g-6-700x158.png)
 
 Here we have used the @EntityGraph annotation and provided the attribute name which we want to fetch, in attributePaths parameter. And it is that simple to do the whole stuff.
 

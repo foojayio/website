@@ -1,13 +1,13 @@
 ---
 title: "DPoP: What It Is, How It Works, and Why Bearer Tokens Aren't Enough"
 date: "2026-03-09T08:08:06+00:00"
-lastmod: "2026-03-09T08:08:08+00:00"
 description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have…"
 authors:
   - "huseyin-akdogan"
 image: "Screenshot-2026-03-09-at-09.33.06-scaled.jpg"
 categories:
   - "Security"
+  - "Quarkus"
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
@@ -76,7 +76,7 @@ However, if you want to **enforce** DPoP for a specific client, meaning Bearer t
 
 **Step 3:** Enable the **Require DPoP bound tokens** switch.
 
-{{< img src="image1-700x370.png" class="size-medium" width="700" height="370" >}}
+{{< img src="image1-700x370.png" alt="Keycloak client capability config with the 'Require DPoP bound tokens' switch highlighted and still off" class="size-medium" width="700" height="370" >}}
 
 With this option enabled, the client must include a DPoP proof with every token request. Requests without valid proof will be rejected, and Bearer tokens will not be accepted to access this client's resources.
 

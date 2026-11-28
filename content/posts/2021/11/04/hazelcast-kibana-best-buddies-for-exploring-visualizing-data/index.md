@@ -1,7 +1,6 @@
 ---
 title: "Hazelcast + Kibana: Best Buddies for Exploring & Visualizing Data"
 date: "2021-11-04T14:22:15+00:00"
-lastmod: "2023-02-01T09:12:21+00:00"
 description: "In this article I will describe how you can benefit from such a data visualization front-end without writing a single line of code."
 canonical: "https://hazelcast.com/blog/hazelcast-kibana-best-buddies-for-exploring-and-visualizing-data/"
 authors:
@@ -520,7 +519,7 @@ Click on the Add layer button on the bottom right corner. You can already enjoy 
 
 Data points are excellent, but not enough. Suppose that we want to understand the entries by their location. For that, we need to add fields, *i.e.* , `meta.uri` and `comment`. Don't forget to name the layer and save it. It's now possible to click on a data point to display the related data:
 
-![](Screenshot-2021-10-21-at-16-700x419.png)
+![Kibana map with pop-ups of Wikipedia entries, showing meta.uri and an empty comment field at various locations](Screenshot-2021-10-21-at-16-700x419.png)
 
 Wikipedia is a source of information for millions of users around the world. Because contributions can be anonymous (and remember those are geo-located), a malicious user can update an article not to benefit the community but to further a geopolitical agenda. We could ask the data whether the triplet article-language-location seems ok and does it raise some red flags. We already have the article via the `meta.uri` and the location, we need to add the language.
 
@@ -598,7 +597,7 @@ On the Kibana map, you can now add any language related fields, *e.g.* , `langua
 
 On the map, go to the Filtering section and add a KQL filter that filters out data points with no value: `language.name : *`. The result is something like the following:
 
-![](Screenshot-2021-10-22-at-09-700x312.png)
+![Kibana map pop-ups of Wikipedia entries now including language.name values such as Dutch, Mongolian, Spanish and Italian](Screenshot-2021-10-22-at-09-700x312.png)
 
 ## Refining data
 
@@ -643,7 +642,7 @@ Note that depending on the first data point of the pipeline, you might end up wi
 
 At this point, you can display the language confidence and update the filter to filter out data points with low confidence, *e.g.* , `language.name : * and language.confidence > 0.2`. Here's the result:
 
-![](Screenshot-2021-10-22-at-10-700x313.png)
+![Kibana map pop-ups with language.name and language.confidence fields for Bulgarian, Arabic and Korean entries](Screenshot-2021-10-22-at-10-700x313.png)
 
 ## Conclusion
 

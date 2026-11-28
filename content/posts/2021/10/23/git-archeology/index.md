@@ -1,7 +1,6 @@
 ---
 title: "Git Archeology: Removing the Sands of Time from Code"
 date: "2021-10-23T06:55:03+00:00"
-lastmod: "2021-10-23T06:55:05+00:00"
 description: "How to use Git to carefully remove layer by layer of sand and dirt that has been swept over the code changes over time to unearth them!"
 authors:
   - "bmuskalla"

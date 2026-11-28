@@ -1,7 +1,6 @@
 ---
 title: "The State of Pattern Matching in Java 17"
 date: "2022-01-03T10:35:42+00:00"
-lastmod: "2022-01-03T10:35:43+00:00"
 description: "Pattern matching is a language feature where you can test for a specific pattern on a character sequence or a data structure."
 canonical: "https://deepu.tech/state-of-pattern-matching-java/"
 authors:

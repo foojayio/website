@@ -33,6 +33,9 @@ A few things worth knowing before you start:
 - **Already published it on your own blog? Post it here too.** Set `canonical:`
   to your original and search engines keep crediting your site, while your
   article reaches foojay's readers. Around 800 articles here are cross-posts.
+- **Send the article and its images only.** Code and scripts go in a repository
+  of your own, linked from the article, not into the pull request. Videos go on
+  YouTube or another external service, to keep our storage within limits.
 - **No paywall, no ads inside your article, no sign-up wall for readers.**
 - **You write Markdown or AsciiDoc, not Hugo.** If you can write a `README`, you can publish
   here. Nothing in the build needs to be understood or configured by you.
@@ -67,13 +70,17 @@ all, the guide below covers sending a zip instead.
 
 ## Other ways to contribute
 
-- **Add a conference or workshop to [the calendar](https://foojay.io/calendar/)** —
+- **Add a workshop or webinar to [the calendar](https://foojay.io/calendar/)** —
   one small YAML file, copied from [`template/event.yaml`](template/event.yaml).
   See [`CONTRIBUTING.md`](CONTRIBUTING.md).
   *(A JUG's own meetups need nothing here — they sync automatically from the
   calendar your group already publishes.)*
+- **Missing or wrong Java conference?** Send a pull request to
+  [javaconferences.org's repository](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md);
+  it reaches [/java-conferences/](https://foojay.io/java-conferences/) and the
+  calendar at the next daily sync.
 - **Missing or wrong JUG?** That data is community-run and lives
-  [upstream in the World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs).
+  [upstream in the World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs).
   Fix it there and it flows into foojay — and into every other site reading the
   directory — at the next daily sync.
 - **Spotted a typo in an article?** Every page's source is a file in

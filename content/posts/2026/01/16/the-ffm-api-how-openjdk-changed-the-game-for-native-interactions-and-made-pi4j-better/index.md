@@ -1,14 +1,12 @@
 ---
 title: "The FFM API: How OpenJDK Changed the Game for Native Interactions (And Made Pi4J Better!)"
 date: "2026-01-16T08:18:00+00:00"
-lastmod: "2026-01-16T12:15:52+00:00"
 description: "The Pi4J project is a Java library that allows you to control the GPIO pins and electronic components connected to a Raspberry Pi with pure Java code. It…"
 canonical: "https://www.javaadvent.com/2025/12/ffm-api-for-java-on-raspberry-pi.html"
 authors:
   - "frankdelporte"
 image: "pi4j-overview-scaled.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "foojay-podcast-83"
@@ -20,7 +18,7 @@ related_posts:
 The [Pi4J project](https://www.pi4j.com/) is a Java library that allows you to control the GPIO pins and electronic components connected to a Raspberry Pi with pure Java code. It removes the complexity of using native libraries and the [Java Native Interface (JNI)](https://www.baeldung.com/jni), allowing you to focus on your application logic.
 
 ***This is a crosspost from the article I contributed to [this year's JVM Advent](https://www.javaadvent.com/2025/12/ffm-api-for-java-on-raspberry-pi.html).***
-![](pi4j-overview-1024x427.jpg)
+![Diagram: your Java app runs on the JVM, calls the Pi4J library, then native libraries and hardware interfaces to a Raspberry Pi](pi4j-overview-1024x427.jpg)
 
 In the Java Advent of 2020, I published "[Light up your Christmas lights with Java and Raspberry Pi](https://www.javaadvent.com/2020/12/light-up-your-christmas-lights-with-java-and-raspberry-pi.html)", using Java 11 and Pi4J V1.2. Wow, things have changed a lot: this article uses Java 25 and a snapshot of the soon-to-be-released Pi4J V4!
 
@@ -68,7 +66,7 @@ JNI has been around since Java 1.1, and while it works, it has a few critical dr
 * **Complex implementation** requiring C headers and compilation steps.
 * **Hard to use by design**: As I learned from Simon Ritter, a Sun engineer once said JNI was deliberately made difficult to discourage people from using it!
 
-![](ffm-quote-simon-ritter-1024x390.jpg)
+![Quote card with a photo of Simon Ritter, Deputy CTO of Azul, saying JNI was made hard to use on purpose to discourage it](ffm-quote-simon-ritter-1024x390.jpg)
 
 There were attempts to improve this situation with libraries such as JNA and [Java Native Runtime (JNR)](https://github.com/jnr), but they came with their own overhead and limitations.
 
@@ -215,7 +213,7 @@ Also, for this example, you can find a more extended example [here in `FFMNative
 #### Performance Comparison Example
 
 I like demos that have a visual output. So I created a simple benchmark that generates moving gradients, which involves many memory writes. In both Java 11 and 25, I try to refresh the gradient every 5 milliseconds.
-![](ffm-gradient-demo.jpg)
+![Pixel buffer demo window showing a moving rainbow gradient, next to console output of 250000 pixels generated every few ms](ffm-gradient-demo.jpg)
 
 The results speak for themselves (tested on a MacOS M2 with Azul Zulu 25):
 
@@ -250,7 +248,7 @@ This is where the Pi4J project comes in: it's a Java library that lets you contr
 * Cryptic JNI header generation and wizard-like C code.
 
 These plugins get loaded dynamically at runtime, in the "black bar" in this architecture diagram:
-![](pi4j-architecture-1024x668.jpg)
+![Pi4J 2.0 architecture diagram showing the runtime context, platforms, I/O providers and I/O types such as GPIO, I2C and SPI](pi4j-architecture-1024x668.jpg)
 
 ### The FFM Transformation
 

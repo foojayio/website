@@ -1,7 +1,6 @@
 ---
 title: "Namespace Shadowing (a.k.a. “Dependency Confusion”) Attack"
 date: "2021-04-22T06:31:08+00:00"
-lastmod: "2021-04-22T06:31:55+00:00"
 description: "The npm Registry is vulnerable to supply chain namespace shadowing, also known as “Dependency Confusion” attacks!"
 authors:
   - "jbaruch"

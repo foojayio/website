@@ -6,7 +6,6 @@ authors:
   - "jim-manico"
 image: "owasp-java-security-libraries.png"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"

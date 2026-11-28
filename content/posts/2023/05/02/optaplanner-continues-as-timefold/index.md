@@ -1,7 +1,6 @@
 ---
 title: "Timefold is the fork of OptaPlanner"
 date: "2023-05-02T15:12:53+00:00"
-lastmod: "2023-05-02T15:24:37+00:00"
 description: "Timefold continues OptaPlanner, open source project optimizing operational planning, saving thousands of organizations time, money, resources."
 authors:
   - "geoffrey-de-smet"

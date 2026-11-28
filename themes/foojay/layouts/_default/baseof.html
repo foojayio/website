@@ -148,8 +148,16 @@
 
        PAGERS ARE NOT INDEXED: every pager renders the same page with a
        different slice of cards, so tagging them makes one author a result
-       once per pager. $pageNum is 0 exactly on the pages worth a result. */}}
-  <main class="site-main" id="main" tabindex="-1"{{ if not $pageNum }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
+       once per pager. $pageNum is 0 exactly on the pages worth a result.
+
+       WEEK REVIEWS ARE NOT INDEXED: they re-list posts that are already
+       results, so a search would show each article twice.
+
+       /ad-stats/ is unlisted (see its frontmatter), so it is not searchable.
+
+       THE 404 IS NOT INDEXED: its latest-articles list would make it a
+       result for every title in it. */}}
+  <main class="site-main" id="main" tabindex="-1"{{ if and (not $pageNum) (ne .Type "week-review") (ne .Type "ad-stats") (ne .Kind "404") }} data-pagefind-body{{ with .Type }} data-pagefind-filter="section:{{ . }}"{{ end }}{{ end }}>
     {{ block "main" . }}{{ end }}
   </main>
 
@@ -157,6 +165,7 @@
 
   <script src="{{ "js/nav.js" | relURL }}" defer></script>
   <script src="{{ "js/lightbox.js" | relURL }}" defer></script>
+  <script src="{{ "js/search-clear.js" | relURL }}" defer></script>
   <script src="{{ "js/toc.js" | relURL }}" defer></script>
   {{/* No-ops on a page with no share row -- the same rule as toc.js above,
        rather than a fifth condition in this list for a 2KB script. */}}

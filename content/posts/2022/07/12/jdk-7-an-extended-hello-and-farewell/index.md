@@ -1,7 +1,6 @@
 ---
 title: "JDK 7: An Extended Hello and Farewell"
 date: "2022-07-12T11:03:39+00:00"
-lastmod: "2022-07-12T11:09:28+00:00"
 description: "Did you know? Azul continues to provide updates to the Zulu builds of OpenJDK 7 until at least December 2027."
 canonical: "https://www.azul.com/blog/jdk-7-the-long-hello-and-the-long-goodbye/"
 authors:

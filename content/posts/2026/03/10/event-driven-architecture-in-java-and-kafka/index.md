@@ -1,13 +1,11 @@
 ---
 title: "Event-Driven Architecture in Java and Kafka"
 date: "2026-03-10T18:35:42+00:00"
-lastmod: "2026-03-10T18:35:45+00:00"
 description: "Reactive Java is well suited to modern streaming, event driven applications. In this article, we'll walk through an example of such an application using Reactive Java with MongoDB. Specifically, we're going to cover: Why Reactive Java was introduced and how it differs from more traditional Java programming. Details of some of the key elements of Reactive Java - Mono, Flux and flatMap. A walk through of a sample application, comparing a Reactive version of the code using the Reactive Streams MongoDB driver, with a more traditional version of the code using the synchronous MongoDB driver."
 authors:
   - "graeme-robinson"
 image: "Screenshot-2026-03-06-at-12.25.26-PM.png"
 categories:
-  - "Java"
   - "Kafka"
   - "Mongo"
 related_posts:
@@ -147,7 +145,7 @@ With the Java applications added, the overall application flow is:
 4. For each received message, the Java applications do a lookup of the aircraft's registration (tail) number against registration data downloaded from the Federal Aviation Authority and saved in a second MongoDB collection. Where a matching registration is found, the Java applications enrich the original ADS-B message by adding the aircraft manufacturer and model from the FAA data.
 5. Finally, the Java applications save the updated/enriched ADS-B message into a new MongoDB collection.
 
-![](Screenshot-2026-03-06-at-12.25.26-PM.png)
+![Diagram: replayer sends MongoDB raw data to Kafka, a Java app enriches it with FAA registrations and stores enriched ADSB data](Screenshot-2026-03-06-at-12.25.26-PM.png)
 
 ### Blocking Code Version
 

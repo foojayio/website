@@ -1,7 +1,6 @@
 ---
 title: "Book Review: “Effortless Cloud-Native App Development Using Skaffold”"
 date: "2021-11-25T12:52:08+00:00"
-lastmod: "2021-11-25T12:53:06+00:00"
 description: "Skaffold is a cloud native open source framework from Google that lets SpringBoot devs build Kubernetes apps easily and deploy effortlessly!"
 authors:
   - "shai-almog"

@@ -1,7 +1,6 @@
 ---
 title: "Participate in the Java Ecosystem Survey 2021"
 date: "2021-04-01T16:03:13+00:00"
-lastmod: "2021-04-01T16:04:41+00:00"
 description: "Just like last year, and together with our partner Azul, we would like your input on how you use Java and the JVM ecosystem."
 canonical: "https://snyk.io/blog/java-ecosystem-survey-2021/"
 authors:
@@ -20,7 +19,7 @@ Just like in 2020, [Snyk](https://snyk.io) is creating a comprehensive Java 2021
 
 Here's the summary of the [JVM Ecosystem 2020](https://snyk.io/blog/jvm-ecosystem-report-2020) report:  
 
-{{< img src="pE3ECVjEXTzDVr3fus4nGAzSoY7288RU21Vb-KQ5-4bb1e610.png" class="aligncenter is-resized" width="800" height="435" >}}
+{{< img src="pE3ECVjEXTzDVr3fus4nGAzSoY7288RU21Vb-KQ5-4bb1e610.png" alt="Grid of 2020 JVM Ecosystem stats: 2 in 3 use Java 8, 1 in 4 Java 11, 50% OpenJDK, 50% Spring Boot, 2 in 3 Maven" class="aligncenter is-resized" width="800" height="435" >}}
 
 As always, we couldn't have done this without you! So, once again, we ask for your help with the 2021 edition of the JVM Ecosystem Report.  
 [Go to the Java 2021 survey](https://snykteam.typeform.com/to/ZHuh7NzJ)
@@ -29,7 +28,7 @@ Just like last year, we put together a comprehensive survey. Together with our p
 
 It takes less than 3 minutes to voice your preferences in this year's Java and JVM report!  
 
-{{< img src="Java-Ecosystem-2021-Survey-1-1024x576.jpg" class="aligncenter size-large is-resized" width="768" height="432" >}}
+{{< img src="Java-Ecosystem-2021-Survey-1-1024x576.jpg" alt="Snyk banner: Java Ecosystem Survey 2021 with a Duke checklist and a Take the Survey button" class="aligncenter size-large is-resized" width="768" height="432" >}}
 
 Our final report this year will embed multiple data points, on top of the survey results, so this will be extra interesting! Besides data that we already have at Snyk, we will look at GitHub projects, Google searches, and other available data. Combined with the survey results, we aim to create the most comprehensive overview of the JVM 2021 landscape.
 

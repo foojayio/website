@@ -1,14 +1,12 @@
 ---
 title: "Distributed Cache Invalidation Patterns"
 date: "2026-04-21T13:52:03+00:00"
-lastmod: "2026-04-21T13:52:05+00:00"
 description: "Caching is one of the most powerful tools developers have at their disposal for optimizing application performance. Caching systems can significantly reduce latency and reduce the load on databases or external systems by storing frequently accessed data as close as possible to the application layer. The result? Improved responsiveness and overall system usability."
 authors:
   - "matteo-rossi"
 image: "Screenshot-2026-04-10-at-1.03.56-PM.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
@@ -49,7 +47,7 @@ Now, let's suppose that another request updates the product information. If the 
 The result? When the load balancer routes requests across instances, users might receive different responses depending on which node handles the request.
 
 The following diagram shows and explains the current situation:  
-![](Screenshot-2026-04-10-at-1.05.00-PM.png)
+![Sequence diagram: a cache update on Instance B leaves Instance A's local cache stale, so a later request returns outdated product data](Screenshot-2026-04-10-at-1.05.00-PM.png)
 
 This problem becomes even more complex when the architecture includes multiple cache levels, such as:
 

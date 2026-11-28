@@ -1,7 +1,6 @@
 ---
 title: "Stateless, Secretless Multi-cluster Monitoring in Azure Kubernetes"
 date: "2022-07-27T08:36:46+00:00"
-lastmod: "2022-07-27T08:36:47+00:00"
 description: "For cloud native engineers facing the challenge of observing multiple Azure Kubernetes Clusters and needing a flexible, stateless solution!"
 authors:
   - "alessandro-vozza"

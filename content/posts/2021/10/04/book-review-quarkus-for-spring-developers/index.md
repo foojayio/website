@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Quarkus for Spring Developers"
 date: "2021-10-04T08:25:37+00:00"
-lastmod: "2021-10-14T09:23:37+00:00"
 description: "Shift your Spring skills to leverage the “supersonic subatomic” Quarkus framework, opportunity for developers to learn two frameworks at once."
 authors:
   - "erikcostlow"
@@ -15,7 +14,7 @@ related_posts:
   - "book-review-seriously-good-software"
 ---
 
-## [![](quarkus-book-340x510.png)](https://developers.redhat.com/e-books/quarkus-spring-developers)
+## [![Cover of the book 'Quarkus for Spring Developers' by Eric Deandrea, published by Red Hat Developer](quarkus-book-340x510.png)](https://developers.redhat.com/e-books/quarkus-spring-developers)
 
 ## Key Take-Aways
 
@@ -37,7 +36,7 @@ The book provides many annotated and numbered examples of how common development
 
 Where applicable, the authors make side-by-side tables that can steer developers towards where to look for certain capabilities:
 
-![](FEvZPayj2pPNSZjXu6QMGef4AEQnnLT04_UGZ_rT-a8e9081b.jpg)
+![Table 2.2 mapping common Quarkus extensions to their equivalent Spring Boot Starters](FEvZPayj2pPNSZjXu6QMGef4AEQnnLT04_UGZ_rT-a8e9081b.jpg)
 
 The book additionally explains how developers can use [an optional automated migration tool](https://developers.redhat.com/products/mta/overview) that analyzes existing Spring applications, using analysis techniques that narrow down specifically which Quarkus features can help in which components.
 
@@ -55,7 +54,7 @@ The chapter articulates the way that Quarkus' support for reactive programming s
 
 Chapter 5 on Event Driven Services discusses the role of libraries like Spring Event Handling (with **@ServiceActivator)** compared against Quarkus Event Handler (with **@ConsumeEvent**).
 
-![](vyTdejqa7k2ElQKEvjm6iVZCDrnTx4QzcLR8DbVa-5f09bbec.jpg)
+![Code listings comparing a Spring GreetingService using ServiceActivator with a Quarkus one using ConsumeEvent](vyTdejqa7k2ElQKEvjm6iVZCDrnTx4QzcLR8DbVa-5f09bbec.jpg)
 
 ## Focus on Details and Testing
 

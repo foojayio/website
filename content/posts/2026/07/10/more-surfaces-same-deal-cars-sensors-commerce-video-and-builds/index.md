@@ -7,15 +7,13 @@ authors:
   - "shai-almog"
 image: "one-codebase-more-surfaces.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
-
-![More Surfaces, Same Deal: Cars, Sensors, Commerce, Video And Builds](one-codebase-more-surfaces.jpg)
 
 Last week's release post was about funding open source without the bait and switch. This week's release tests that idea again, because two of the new features touch paid infrastructure directly: Commerce and versioned builds.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

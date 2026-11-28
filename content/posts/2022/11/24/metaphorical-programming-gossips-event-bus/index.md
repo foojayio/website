@@ -1,7 +1,6 @@
 ---
 title: "Gossips: An Event-Bus in a Chatty Neighbourhood"
 date: "2022-11-24T08:35:32+00:00"
-lastmod: "2022-11-24T08:35:33+00:00"
 description: "Using Metaphorical Programming to create an Event-Bus, a global pub-sub component to enable cross-component communication."
 authors:
   - "mhashim6"

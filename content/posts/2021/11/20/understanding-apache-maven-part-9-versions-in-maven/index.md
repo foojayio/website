@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 9): Versions in Maven"
 date: "2021-11-20T11:40:35+00:00"
-lastmod: "2021-11-20T11:41:04+00:00"
 description: "Maven uses the version as a coordinate in identifying an artifact, which are covered in \"Understanding Apache Maven (Part 9)\"."
 canonical: "https://cguntur.me/2020/07/05/understanding-apache-maven-part-9/"
 authors:

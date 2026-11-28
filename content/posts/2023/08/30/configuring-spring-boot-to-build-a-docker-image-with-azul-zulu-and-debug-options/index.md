@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Configuration for Docker Images with Azul Zulu"
 date: "2023-08-30T16:14:52+00:00"
-lastmod: "2023-08-30T16:14:54+00:00"
 description: "The Spring Boot Maven Plugin makes creating a Docker image from your app very easy! Let's see how define the Java runtime used and more."
 canonical: "https://www.azul.com/blog/configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options/"
 authors:
@@ -18,7 +17,7 @@ related_posts:
 ---
 
 *The Spring Boot Maven Plugin makes creating a Docker image from your application very easy! In this article, we give you some extra tips and examples for configuring Spring Boot to define the Java runtime used in such a Spring Boot Docker image and explain how to add additional environmental options to ease debugging.*
-![](azul-zulu-springboot-docker-1024x400.jpg)
+![Spring Boot and Maven logos on a white background with colored wave lines](azul-zulu-springboot-docker-1024x400.jpg)
 >
 > ### For this post, I got the help of [DaShaun Carter](https://twitter.com/dashaun), Spring Developer Advocate, who immediately jumped in when I raised some questions about these configuration options. Thanks, DaShaun!
 >
@@ -294,8 +293,8 @@ Connected to the target VM, address: 'localhost:8000', transport: 'socket'
 ```
 
 {{< gallery >}}
-debug-config-1024x663.png
-debug-breakpoint.jpg
+debug-config-1024x663.png | | IntelliJ IDEA Run/Debug Configurations dialog with a Remote JVM Debug entry for Petclinic in Docker on port 8000
+debug-breakpoint.jpg | | IntelliJ IDEA debugging VetController in Spring Petclinic, stopped at a breakpoint with variables shown
 {{< /gallery >}}
 
 ### Connecting to JMX
@@ -305,9 +304,9 @@ The JMX connection configured on port 5000 allows you to connect to the running 
 Click on any of the three images below for a larger image.
 
 {{< gallery >}}
-springboot-jmx-config.png
-springboot-jmx-jfr-recording.png
-springboot-jmx-result-1024x662.png
+springboot-jmx-config.png | | Azul Mission Control New Connection dialog for localhost port 5000 with status OK
+springboot-jmx-jfr-recording.png | | Azul Mission Control Start Flight Recording dialog with a time-fixed one-minute recording
+springboot-jmx-result-1024x662.png | | Azul Mission Control Threads view of a flight recording, listing Tomcat and HikariPool threads running
 {{< /gallery >}}
 
 ## Conclusion

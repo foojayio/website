@@ -1,13 +1,11 @@
 ---
 title: "Java on Visual Studio Code May 2024 Update - New AI Feature, Spring Updates"
 date: "2024-06-18T10:42:26+00:00"
-lastmod: "2024-06-18T10:42:28+00:00"
 description: "An exciting new AI related feature for Java developers on Visual Studio Code."
 authors:
   - "nick-zhu"
 image: "pack.jpg"
 categories:
-  - "Java"
   - "Tools"
   - "VS Code"
 related_posts:
@@ -30,7 +28,7 @@ With the [release of various AI products](https://blogs.microsoft.com/blog/2024/
 
 Here's how the feature works, on your Java class, a new CodeLens text will appear above the name of the class: "Rewrite with new Java syntax". Once the user clicks on this, it will trigger an inspection on the current Java class. Once the inspection is complete, Visual Studio Code will show several improvement suggestions and point users to the location.
 
-![](trigger-8ce33757.gif)
+![Animated VS Code view of Main.java where a 'Rewrite with new Java syntax' CodeLens appears above the class declaration](trigger-8ce33757.gif)
 
 For each suggestion, additional CodeLens will appear and shows what the solution is (and what needs to be improved).
 

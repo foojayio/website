@@ -1,7 +1,9 @@
 ---
 title: "Technology Compatibility Kit"
 description: "Technology Compatibility Kit is the official Java SE test suite used to test compatibility and performance of the JRE/JDK against Java SE specifications."
-url: "/pedia/tck/"
+url: "/java-terms-explained/tck/"
+aliases:
+  - "/pedia/tck/"
 ---
 
 The TCK (Technology Compatibility Kit) is the official Java SE test suite, originally developed by Sun Microsystems and now maintained by Oracle. Any JDK binary that claims to be "Java SE compatible" must pass the TCK for its target release.
@@ -31,11 +33,11 @@ Below are major OpenJDK distributions and their TCK compliance status:
 
 ## TCK Licence and Access
 
-The TCK is Oracle intellectual property and is not open source. It is licensed to certain third parties under a separate agreement. Details on access conditions and current licensees are available at [openjdk.org/groups/conformance/JckAccess/](https://openjdk.org/groups/conformance/JckAccess/). An alternative open-source compatibility test suite, [jtreg](https://foojay.io/pedia/jtreg-test-suites/), is run in addition to the TCK by many distributors.
+The TCK is Oracle intellectual property and is not open source. It is licensed to certain third parties under a separate agreement. Details on access conditions and current licensees are available at [openjdk.org/groups/conformance/JckAccess/](https://openjdk.org/groups/conformance/JckAccess/). An alternative open-source compatibility test suite, [jtreg](https://foojay.io/java-terms-explained/jtreg-test-suites/), is run in addition to the TCK by many distributors.
 
 ## See Also
 
-* [jtreg Test Suites](/pedia/jtreg-test-suites/)
-* [JDK Distributions](/pedia/jdk-distributions/)
-* [OpenJDK](/pedia/openjdk/)
-* [OpenJDK Coding Guidelines and Code Reviews](/pedia/openjdk-coding-guidelines/)
+* [jtreg Test Suites](/java-terms-explained/jtreg-test-suites/)
+* [JDK Distributions](/java-terms-explained/jdk-distributions/)
+* [OpenJDK](/java-terms-explained/openjdk/)
+* [OpenJDK Coding Guidelines and Code Reviews](/java-terms-explained/openjdk-coding-guidelines/)

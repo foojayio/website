@@ -1,7 +1,6 @@
 ---
 title: "High-cardinality values for build flags in Rust"
 date: "2025-04-14T19:24:47+00:00"
-lastmod: "2026-09-21T06:03:04+00:00"
 description: "While working on my demo on WebAssembly and Kubernetes, I wanted to create three different binaries based on the same code: Native: compile the Rust code…"
 canonical: "https://blog.frankel.ch/high-cardinality-values-build-flags-rust/"
 authors:

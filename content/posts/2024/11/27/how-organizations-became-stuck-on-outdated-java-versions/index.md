@@ -1,13 +1,11 @@
 ---
 title: "How Organizations Became Stuck on Outdated Java Versions"
 date: "2024-11-27T15:46:16+00:00"
-lastmod: "2024-11-27T15:46:17+00:00"
 description: "Why is your company still on Java 8 (or older)? And why did you never move to 9, 10,... and got stuck on this outdated version?"
 authors:
   - "frankdelporte"
 image: "java-discussions.webp"
 categories:
-  - "Java"
   - "Java Core"
   - "Opinion"
   - "Performance"

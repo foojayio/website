@@ -1,14 +1,12 @@
 ---
 title: "Copy of Queryable Encryption with Spring Data MongoDB: How to Query Encrypted Fields"
 date: "2025-09-02T19:00:24+00:00"
-lastmod: "2025-12-12T21:22:43+00:00"
 description: "Information is one of the most valuable assets in computing and keeping it protected is even more critical. When we talk about data protection, it’s not just about preventing breaches or leaks; it’s also about complying with privacy regulations and protecting user data. MongoDB provides strong encryption capabilities, including in transit, at rest, and in use. The Queryable Encryption feature falls into the in use category. It allows data to be encrypted on the client side, so that even with access to the database and its credentials, no one can read the protected fields without the proper encryption key. At the same time, it supports querying over encrypted fields, making it possible to filter, match, or retrieve data without compromising confidentiality. In this tutorial, we’ll implement this feature using Spring Data MongoDB, applying encryption to sensitive fields in a sample human resources (HR) system."
 authors:
   - "ricardo-mello"
 image: "Favicon-3-2.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:
@@ -98,7 +96,7 @@ For this demo, we'll add the following dependencies:
 * Spring Web, to expose our REST endpoints  
 * Spring Data MongoDB, to interact with our MongoDB database  
 
-![](Screenshot-2025-08-29-at-8.48.43-AM.png)
+![Spring Initializr with Maven, Java 21 and Spring Boot 3.5.4 selected, adding the Spring Web and Spring Data MongoDB dependencies](Screenshot-2025-08-29-at-8.48.43-AM.png)
 
 Configure the project properties as shown in the image, then generate and unzip the project to get started.
 
@@ -764,7 +762,7 @@ CRYPT_PATH='/path/to/mongo_crypt_shared/lib/mongo_crypt.dylib' mvn spring-boot:r
 Note: The CRYPT_PATH should point to the full path of the native library you downloaded.
 
 Once the application is running, if everything goes well, you can check the cluster specified in your connection string. Inside the hrsystem database, look for the employees collection—it should already contain six documents with encrypted fields, ready to be queried:
-![](Screenshot-2025-08-29-at-9.00.08-AM-1024x414.png)
+![MongoDB Compass showing the hrsystem employees collection with Queryable Encryption, where pin, ssn, age and salary are masked](Screenshot-2025-08-29-at-9.00.08-AM-1024x414.png)
 
 ## Testing the endpoints
 

@@ -1,7 +1,6 @@
 ---
 title: "SQL Query Optimization: How to Identify and Optimize Slow SQL Queries"
 date: "2024-05-09T21:44:39+00:00"
-lastmod: "2024-05-13T09:45:59+00:00"
 description: "In this article, we want to share our experience using real-life examples on how to identify and optimize slow SQL queries, especially when working with relational database management systems like PostgreSQL, MySQL, MSSQL, Oracle, etc."
 authors:
   - "oleksandr-hrebeniuk"
@@ -45,7 +44,7 @@ Fortunately, OTEL makes it extremely easy to get that data out without making an
 In our case, we've been using our own CF tool, the [Digma Continuous Feedback plugin](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "Digma Continuous Feedback plugin") during the development process, which saved us the need to look for problematic queries – Digma found them for us!
 
 To make it more in-context with the work rather than a dashboard or external tool you need to consult, Digma's runtime analysis is embedded right into the IDE:  
-![](https://lh7-us.googleusercontent.com/4c-RI1KV7cR1PCUPqbUILafSSpR97GJs-oMA_CTxFdNhGbnGq5XoN12USFrYs2mdv3kP8ayvqNIMEcC2R_UDT60iL3Tio5M9mQ0J8NuvBJ049sKl0Yw8LnaFiVK1UbNSRSs0om9e_u7KJcTEFrhwU84)  
+![Digma Continuous Feedback plugin in the IDE highlighting a problematic database query](https://lh7-us.googleusercontent.com/4c-RI1KV7cR1PCUPqbUILafSSpR97GJs-oMA_CTxFdNhGbnGq5XoN12USFrYs2mdv3kP8ayvqNIMEcC2R_UDT60iL3Tio5M9mQ0J8NuvBJ049sKl0Yw8LnaFiVK1UbNSRSs0om9e_u7KJcTEFrhwU84)  
 
 To follow along and [try for yourself](https://docs.digma.ai/digma-developer-guide "try for yourself") – just install the Digma IDE plugin from the [marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "marketplace") and run your code as you usually do.
 
@@ -53,7 +52,7 @@ To follow along and [try for yourself](https://docs.digma.ai/digma-developer-gui
 
 Upon inspecting our code with Digma, I discovered that one particular new query I added a few days ago took about 28 seconds to execute in staging, which of course significantly slower than anything else.
 
-![](https://lh7-us.googleusercontent.com/yAv2fbCtwUZ0-zYgYmfvKEl3GOlLy6lD5HhO2fIeuJ9KPqJFd7mKU2i3M5ocb9WsZ76oLO0mURZjGGXtwmR2sZpd44c5uMkdK03G6X8cLYJYUD86TYCcMHtrt2DvCAXCK6Q3oZaOuvahSjqLpialeYk)  
+![Digma insight showing a new SQL query that takes about 28 seconds to execute in staging](https://lh7-us.googleusercontent.com/yAv2fbCtwUZ0-zYgYmfvKEl3GOlLy6lD5HhO2fIeuJ9KPqJFd7mKU2i3M5ocb9WsZ76oLO0mURZjGGXtwmR2sZpd44c5uMkdK03G6X8cLYJYUD86TYCcMHtrt2DvCAXCK6Q3oZaOuvahSjqLpialeYk)  
 
 Continuous Feedback doesn't acquire any new data – it just listens to the observability data stream to detect anything I should notice, this was definitely something you want to catch early on. The most important thing for me as a developer is finding out a not-optimized query before it goes to production.
 
@@ -67,11 +66,11 @@ SELECT name FROM task.todo WHERE name = "Install Digma"
 
 If the name column is not indexed, what will happen is that the query will have to go through the table task.todo row by row, looking for the data that matches the specified name, which in our case is "Install Digma". You are not likely to see any significant impact on the performance of your application until your table starts growing into having thousands and millions of records.
 
-![](https://lh7-us.googleusercontent.com/3rFQ_uS4OA4bRgqVLEcjy1H7PDm-iSECKMX9shGFtRTyWR7tBL8z-JXpR6DJDanBjE_YtniC8LLBKrp7KCLNljg2K8dkVw_BUDpzmCfZ-o5zaXfkOCIylnNtsHGROZCddfmm60lI8KRk3wM7C1LkahE)  
+![Digma insight explaining that an unindexed name column forces a row-by-row table scan](https://lh7-us.googleusercontent.com/3rFQ_uS4OA4bRgqVLEcjy1H7PDm-iSECKMX9shGFtRTyWR7tBL8z-JXpR6DJDanBjE_YtniC8LLBKrp7KCLNljg2K8dkVw_BUDpzmCfZ-o5zaXfkOCIylnNtsHGROZCddfmm60lI8KRk3wM7C1LkahE)  
 
 Fortunately for me, I don't have to wait for my application to go live to notice that it is becoming less performant as users start using it. By using Digma, I can easily spot this potential issue ou.
 
-![](https://lh7-us.googleusercontent.com/H1XB8zLbukgksy9g-G2DstdhOmHgskrezjj_ljyEqbmdgsBvddPe4-cVjLhMi_yLoF8Vt7IyeH2iV3nUi8O-WxqjevfyuoNaWF54X_yevCTJKRcj70S--ovM3TB7AksBSi1INAf8o1MS41TSuripxCo)  
+![Digma suggestion to fix the slow query by creating an index on the name column](https://lh7-us.googleusercontent.com/H1XB8zLbukgksy9g-G2DstdhOmHgskrezjj_ljyEqbmdgsBvddPe4-cVjLhMi_yLoF8Vt7IyeH2iV3nUi8O-WxqjevfyuoNaWF54X_yevCTJKRcj70S--ovM3TB7AksBSi1INAf8o1MS41TSuripxCo)  
 
 So, how do I solve this issue? It is simple: create an index on the name column.CREATE INDEX task_names ON task.todo (name)
 
@@ -107,16 +106,16 @@ After a brief investigation, I realized that adding the right index to the relev
 
 Consequently, after adding the index, the query's execution time decreased from 28 seconds to 32 milliseconds, which I could also validate easily amazingly!
 
-![](https://lh7-us.googleusercontent.com/w7J0NspRmvxmLPNVKx4g_a8QV3UZ_h2j3pStQd9HklfVj9fuuv-FJtsYQD2aHMOngNi2Bygz_YRCmlIxQUEzvPHBT3aluqfua68a3ioOul-mL8jtdjBP-MzJKhDCfr-QWVkCm5CjLTH11yfgJTx7KnA)
+![Digma view showing the query time dropping from 28 seconds to 32 milliseconds after adding the index](https://lh7-us.googleusercontent.com/w7J0NspRmvxmLPNVKx4g_a8QV3UZ_h2j3pStQd9HklfVj9fuuv-FJtsYQD2aHMOngNi2Bygz_YRCmlIxQUEzvPHBT3aluqfua68a3ioOul-mL8jtdjBP-MzJKhDCfr-QWVkCm5CjLTH11yfgJTx7KnA)
 
 ## Finding other opportunities for SQL query optimization
 
 As we continue to work on our code, Digma will analyze the data in the backend and continue to look for opportunities for improvement. One example is searching for SQL queries that are significantly slower than other queries of the same type, running on the same DB, which makes them great candidates for optimization.
 
-![](https://lh7-us.googleusercontent.com/IhywRIvA5RPir8kkUYy_CNRqdcJm1Q18Djni7do-RiAwo_Ll3889XHwxUk7yDxU9Vq_KMy0qbWIyxz7jO2IlGHQAGjoRJwTkk_1bcBvkNHAT_WMJltD3rQBceIkANozPYumDeO0ySZUTU_DP5WNQgw4)  
+![Digma view listing SQL queries that are much slower than similar queries on the same database](https://lh7-us.googleusercontent.com/IhywRIvA5RPir8kkUYy_CNRqdcJm1Q18Djni7do-RiAwo_Ll3889XHwxUk7yDxU9Vq_KMy0qbWIyxz7jO2IlGHQAGjoRJwTkk_1bcBvkNHAT_WMJltD3rQBceIkANozPYumDeO0ySZUTU_DP5WNQgw4)  
 
 This data can be readily accessed during development or code reviews along with other types of suggested improvements and detected issues such as an unusually high number of queries, N+1 selects, the "open session in view" antipattern, and other insights.  
-![](https://lh7-us.googleusercontent.com/i4jubvVwAe_cXABhTOalt2I00IqCZc8OvBFZ-2OVRmqFGom9TD9FH27DM2gmxjAaf-RVZEeIJ7Cs-3hX7aMNd3LjVGW9QQ8FDXbzUNwpMDbHR0_mzozmprRuG30ExWdwRO4vAwHGyQCE9ebxNZ5JX38)
+![Digma view of suggested improvements and detected issues, accessible during development and code review](https://lh7-us.googleusercontent.com/i4jubvVwAe_cXABhTOalt2I00IqCZc8OvBFZ-2OVRmqFGom9TD9FH27DM2gmxjAaf-RVZEeIJ7Cs-3hX7aMNd3LjVGW9QQ8FDXbzUNwpMDbHR0_mzozmprRuG30ExWdwRO4vAwHGyQCE9ebxNZ5JX38)
 
 ## Where to spend your efforts?
 
@@ -126,7 +125,7 @@ Consider, for example, a slow query that is used only rarely. Will that be a goo
 
 To help solve these problems, Digma provides performance impact scoring for each query. In this manner, we can look at our optimization candidates not just from a problem severity perspective but also looking at how they are used and how they are impacting flows within the system.
 
-![](https://lh7-us.googleusercontent.com/VGgf4MbSloj_N8y1RWy3d1wtjNttR3m66-jEn4pQXVSF4paRhH7DBJjb9Rl8NArvKkenMojsFJg-XwqOUEjAVnj7CgCDM7PmEbHg4QQTvZOteIOVlMM2Y4GIFOG8Bn_YA69JGfDVUF9Xr_joLHNFce4)  
+![Digma performance impact score for each query, ranking optimization candidates by usage and impact](https://lh7-us.googleusercontent.com/VGgf4MbSloj_N8y1RWy3d1wtjNttR3m66-jEn4pQXVSF4paRhH7DBJjb9Rl8NArvKkenMojsFJg-XwqOUEjAVnj7CgCDM7PmEbHg4QQTvZOteIOVlMM2Y4GIFOG8Bn_YA69JGfDVUF9Xr_joLHNFce4)  
 
 In the screen above we can see how sorting by performance impact actually allowed me to find the best candidates to focus my efforts on and that eventually also yielded the most effect on our application.
 

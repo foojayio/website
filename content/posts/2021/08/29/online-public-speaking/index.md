@@ -1,7 +1,6 @@
 ---
 title: "On online public speaking"
 date: "2021-08-29T07:33:51+00:00"
-lastmod: "2026-09-21T06:05:37+00:00"
 description: "On March 14th, 2020, I landed home. I had planned the week before to be productive: one talk in Pasadena, two talks in San Francisco, one in Bucharest,…"
 authors:
   - "nicolas-frankel"

@@ -1,7 +1,6 @@
 ---
 title: "Learn how to debug unresponsive Java/JVM applications, then reload the fix on the fly, using a hands-on example"
 date: "2024-05-23T07:14:31+00:00"
-lastmod: "2024-08-01T07:36:11+00:00"
 description: "Learn how to debug unresponsive Java/JVM applications, then reload the fix on the fly, using a hands-on example."
 canonical: "https://flounder.dev/posts/debug-unresponsive-apps/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "debug-unresponsive-apps-banner.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
   - "Kotlin"
   - "Tutorials"
 related_posts:
@@ -36,7 +34,7 @@ Suppose you have a complex application that hangs when you perform some action. 
 
 In our example app, the hanging happens when you click **Button N**. However, it is not so easy to find the code that is responsible for this action:
 
-{{< img src="https://flounder.dev/img/find-in-files-dark.png" class="size-large is-resized" style="width:649px" >}}
+{{< img src="find-in-files-dark-076a6ca7.png" alt="IntelliJ IDEA Find in Files dialog searching for 'Button N' in the project and showing 'Nothing found'" class="size-large is-resized" style="width:649px" >}}
 
 Let's see how we can use the debugger to find it.
 

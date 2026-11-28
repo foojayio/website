@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #7: Security in Java -- what do we need to know?"
 date: "2022-11-21T10:22:14+00:00"
-lastmod: "2025-11-13T09:22:00+00:00"
 description: "We invited Java security experts to dive into the fascinating world of secure coding and detecting vulnerabilities in your Java applications!"
 authors:
   - "bmvermeer"

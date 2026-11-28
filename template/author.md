@@ -56,6 +56,7 @@ description: ""
 # Full URLs, not handles.
 bluesky: ""
 mastodon: ""
+reddit: ""
 linkedin: ""
 github: ""
 gitlab: ""

@@ -1,7 +1,6 @@
 ---
 title: "Java on Azure Tooling Update – June 2022"
 date: "2022-06-13T07:40:38+00:00"
-lastmod: "2022-06-13T07:45:13+00:00"
 description: "Introducing the new application-centric view on Azure toolkit for IntelliJ that will make the interface more user-friendly!"
 authors:
   - "jialuo-gan"
@@ -107,7 +106,7 @@ To learn more about Gradle plugin, you can find more details with [how to deploy
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
-![](ProvideFeedback.png)
+![Azure Explorer in IntelliJ with the heart feedback button highlighted by a red box](ProvideFeedback.png)
 
 * Leave your comment on this post
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new "Create a feature request or submit a bug") on our official GitHub Issues page

@@ -1,7 +1,6 @@
 ---
 title: "Predicting Secure Java Projects on Maven Central"
 date: "2023-03-23T14:10:02+00:00"
-lastmod: "2023-03-23T14:12:58+00:00"
 description: "Next time you’re considering a new Java library, look for the Sonatype Safety Rating on Maven Central to aid in your decision making."
 authors:
   - "theresa-mammarella"
@@ -54,7 +53,7 @@ This is a question Maven Central attempts to provide insight into through the So
 
 The rating ranges from 1 to 10, where 1 means a project is very likely to have future vulnerabilities and 10 is unlikely to have future vulnerabilities.  
 
-{{< img src="foojay-safetyrating-700x265.png" class="size-medium" width="700" height="265" >}}
+{{< img src="foojay-safetyrating-700x265.png" alt="Maven Central page for commons-math 2.2 showing a Sonatype Safety Rating of 10 out of 10" class="size-medium" width="700" height="265" >}}
 
 ***Screenshot from central.sonatype.com***
 
@@ -74,7 +73,7 @@ Machine learning nerds can read more details about the rating in the [State of t
 
 A key conclusion that came out of analyzing the OpenSSF Scorecard data is that code review is the single most important thing projects can do to reduce the chance of future vulnerabilities.
 
-![](Screenshot-2023-03-13-at-3.16.16-PM-700x459.png)
+![Bar chart of OpenSSF Scorecard checks by predictive value, with Code Review highest at about 0.21, then Binaries and Dependencies Pinned](Screenshot-2023-03-13-at-3.16.16-PM-700x459.png)
 
 ***OpenSSF Health Checks Most Useful For Identifying Vulnerable Projects***
 

@@ -1,7 +1,6 @@
 ---
 title: "Highlights of Changes to the Core Java Platform"
 date: "2020-07-02T14:12:00+00:00"
-lastmod: "2021-08-23T12:58:38+00:00"
 description: "As a language, Java has evolved over the last 25 years in a way that has provided excellent backwards compatibility. Here's an overview of the highlights!"
 authors:
   - "simonritter"

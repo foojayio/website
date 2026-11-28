@@ -1,13 +1,11 @@
 ---
 title: "Navigating Behaviour with Events"
 date: "2023-10-25T15:04:35+00:00"
-lastmod: "2024-01-09T12:58:51+00:00"
 description: "The practices of Event-Driven Architecture and Behaviour-Driven Development have more in common than may at first be apparent."
 authors:
   - "george-ball"
 image: "Screenshot-2023-10-17-at-4.04.33-PM.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:
@@ -27,7 +25,7 @@ Event-driven approaches refine and extend these ideas of basic messaging interac
 
 Semantically, an event is an indication that something has happened. This could be at the business level, or at the infrastructure level. Either way, an event is intended to be an immutable record of the fact that something has happened, and in a fully Event-Driven Architecture approach, this "fact" will never be lost.
 
-![](Screenshot-2023-10-17-at-4.04.33-PM-1024x261.png)
+![Flow diagram: input data passes through an input gateway, a function adding an exclamation mark, and an output gateway](Screenshot-2023-10-17-at-4.04.33-PM-1024x261.png)
 
 There are numerous advantages to following an Event-Driven Architecture:
 
@@ -90,7 +88,7 @@ Of course, not every component is necessarily going to follow these guidelines. 
 
 ### Putting it into Practice
 
-![](Screenshot-2023-10-17-at-4.15.21-PM-1024x230.png)
+![Dark diagram of connected event-driven components (random-walk, mdbb, position, pricer, passive-hedge) linked by event streams](Screenshot-2023-10-17-at-4.15.21-PM-1024x230.png)
 
 At [Chronicle](https://chronicle.software/ "Chronicle"), we have many years of experience in building low-latency Java applications using our world-beating libraries. Distilled from this experience, we have developed [Chronicle Services](https://chronicle.software/services/ "Chronicle Services"), a framework that supports the development of high performance Java microservices, following the guidelines of Event Driven Architecture and Behaviour Driven Development, to build applications that perform with world beating latency performance.
 

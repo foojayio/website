@@ -1,13 +1,11 @@
 ---
 title: "ArchUnit - test your architecture"
 date: "2023-09-14T14:09:56+00:00"
-lastmod: "2023-09-14T14:09:58+00:00"
 description: "How to test your application architecture, and make life easier for those joining the team later on."
 authors:
   - "simon-verhoeven"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Testing"
   - "Tutorials"
 related_posts:
@@ -269,7 +267,7 @@ ArchUnit also allows us to import [PlantUML](https://plantuml.com/component-diag
 
 One has to use component diagrams, where the classes are associated with components through stereotypes.
 
-[![](diagram.svg)](diagram.svg)
+[![UML component diagram: Author and Reader both depend on Book, each component defined by a package stereotype](diagram.svg)](diagram.svg)
 
 ```
 @startuml

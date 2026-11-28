@@ -7,15 +7,13 @@ authors:
   - "shai-almog"
 image: "third-generation-gui-builder.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 ---
-
-![A visual editor connecting project forms, CSS, Java source, and a live Codename One canvas](third-generation-gui-builder.jpg)
 
 We have rebuilt the Codename One GUI Builder again. This is its third generation. The interesting part is not another drag-and-drop surface. It is what we kept, what Maven broke, and why a visual editor must understand the whole project instead of opening one generated form at a time.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

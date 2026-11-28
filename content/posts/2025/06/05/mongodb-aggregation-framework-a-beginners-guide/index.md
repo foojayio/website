@@ -1,7 +1,6 @@
 ---
 title: "MongoDB Aggregation Framework: A Beginner’s Guide"
 date: "2025-06-05T06:20:02+00:00"
-lastmod: "2025-11-14T15:53:23+00:00"
 description: "The MongoDB Aggregation Framework works like a pipeline—a series of stages where each step processes the data in some way."
 authors:
   - "ricardo-mello"

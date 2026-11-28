@@ -1,7 +1,6 @@
 ---
 title: "Baeldung Series Part 2: Build a Dashboard With Cassandra, Astra and CQL – Mapping Event Data"
 date: "2022-09-13T17:46:02+00:00"
-lastmod: "2022-09-13T17:46:04+00:00"
 description: "1. Introduction In our previous article, we looked at augmenting our dashboard to store and display individual events from the Avengers…"
 canonical: "https://www.baeldung.com/cassandra-astra-rest-dashboard-map"
 authors:
@@ -32,14 +31,14 @@ In order to follow along with this article, it is assumed that you have already 
 **In order to connect to the Cassandra database hosted by DataStax Astra via CQL, we need to download the "Secure Connect Bundle".** This is a zip file containing SSL certificates and connection details for this exact database, allowing the connection to be made securely.
 
 This is available from the Astra dashboard, found under the "Connect" tab for our exact database, and then the "Java" option under "Connect using a driver":
-![](astra-secure-connect-1024x560.jpg)
+![Astra DB Connect tab for baeldung-avengers with the Download Bundle button for the Secure Connect Bundle](astra-secure-connect-1024x560.jpg)
 
 For pragmatic reasons, we're going to put this file into *src/main/resources* so that we can access it from the classpath. In a normal deployment situation, you would need to be able to provide different files to connect to different databases – for example, to have different databases for development and production environments.
 
 ### **2.2. Creating Client Credentials**
 
 **We also need to have some client credentials in order to connect to our database.** Unlike the APIs that we've used in previous articles, which use an access token, the CQL API requires a "username" and "password". These are actually a Client ID and Client Secret that we generate from the "Manage Tokens" section under "Organizations":
-![](astra-client-credentials-1024x610.jpg)
+![Astra Token Management page with the Read Only User role selected and its permissions listed](astra-client-credentials-1024x610.jpg)
 
 Once this is done, we need to add the generated Client ID and Client Secret to our *application.properties*:
 
@@ -53,13 +52,13 @@ ASTRA_DB_CLIENT_SECRET=clientSecretHere
 **In order to render our map, we are going to use Google Maps. This will then need a Google API key to be able to use this API.**
 
 After signing up for a Google account, we need to visit the [Google Cloud Platform Dashboard](https://console.cloud.google.com/). Here we can create a new project:
-![](maps-api-key-768x482-1.png)
+![Google Cloud Platform New Project form with project name Avengers Dashboard under the Baeldung organisation](maps-api-key-768x482-1.png)
 
 We then need to enable the Google Maps JavaScript API for this project. Search for this and enable this:
-![](map-js-api-768x482-1.png)
+![Google Cloud page for the Maps JavaScript API with an Enable button](map-js-api-768x482-1.png)
 
 Finally, we need an API key to be able to use this. For this, we need to navigate to the "Credentials" pane on the sidebar, click on "Create Credentials" at the top and select API Key:
-![](maps-key-created-768x623-1.png)
+![Google Cloud dialog 'API key created' showing a placeholder key with Close and Restrict Key buttons](maps-key-created-768x623-1.png)
 
 We now need to add this key to our *application.properties*file:
 
@@ -384,7 +383,7 @@ Once we've written our controller, we need a template to actually render the HTM
 We are injecting the data retrieved from Cassandra, as well as some other details. Thymeleaf automatically handles converting the objects within the *script* block into valid JSON. Once this is done, our JavaScript then renders a map using the Google Maps API and adds some routes and markers onto it to show our selected data.
 
 **At this point, we have a fully working application. Into this we can select some avengers to display, date and time ranges of interest, and see what was happening with our data:**
-![](avengers-map-1024x519-1.jpg)
+![Avengers Status Map web app: a Google map of New York with markers and a popup showing hawkeye's status of 71.67%](avengers-map-1024x519-1.jpg)
 
 ## **6. Conclusion**
 

@@ -1,7 +1,6 @@
 ---
 title: "The IKEA Effect"
 date: "2023-07-26T13:00:04+00:00"
-lastmod: "2023-07-26T13:00:06+00:00"
 description: "On placing a higher value on things that you've either made yourself, or to which you’ve contributed towards making!"
 authors:
   - "peter-lawrey"

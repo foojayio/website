@@ -32,19 +32,14 @@
          src="{{ partial "resource-url.html" (dict "page" . "src" "/images/pages/jvm-weekly/jvm-weekly-logo.png") }}"
          alt="" width="88" height="88" decoding="async">
     <div class="jvmw-head__text">
-    <span class="page-back"><a href="{{ "today/" | relURL }}">News</a></span>
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>
-        {{ len $editions }} edition{{ if ne (len $editions) 1 }}s{{ end }}, written by
-        {{/* The profile is the site's own page about Artur; the newsletter is
-             his. Both are offered, because a reader here wants one or the
-             other and neither substitutes for the other. */}}
-        <a href="{{ "today/author/artur-skowronski/" | relURL }}">Artur Skowronski</a>.
-      </p>
-      {{ with partial "views.html" . }}{{ . | safeHTML }}{{ end }}
-    </div>
+    {{/* The profile is the site's own page about Artur; the newsletter is
+         his. Both are offered, because a reader here wants one or the other
+         and neither substitutes for the other. */}}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf `<strong>%d</strong> edition%s, written by <a href="%s">Artur Skowronski</a>` (len $editions) (cond (eq (len $editions) 1) "" "s") ("today/author/artur-skowronski/" | relURL))
+      "views" .) }}
     </div>
   </div>
 </div>
@@ -56,10 +51,19 @@
        here), and `index` on a nil key is a build ERROR, not an empty value. */}}
   {{ $main := "" }}
   {{ with .main }}{{ $main = index $index . }}{{ end }}
+  {{ $t := time .date }}
+  {{/* Same day card and row as /today/coming-soon/. */}}
+  <section class="coming-soon-day" aria-label="{{ $t.Format "2 January 2006" }}">
+    <time class="coming-soon-strip__day coming-soon-day__card" datetime="{{ .date }}" aria-hidden="true">
+      <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+      <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+      <span class="coming-soon-strip__month">{{ $t.Format "Jan 2006" }}</span>
+    </time>
+    <div class="coming-soon-day__list">
   <article class="review-edition">
 
     <header class="review-edition__head">
-      <time datetime="{{ .date }}">{{ (time .date).Format "2 January 2006" }}</time>
+      <time datetime="{{ .date }}">{{ $t.Format "2 January 2006" }}</time>
       {{ with .volume }}<span class="review-edition__vol">JVM Weekly vol. {{ . }}</span>{{ end }}
     </header>
 
@@ -120,6 +124,8 @@
       <a href="{{ .url }}" target="_blank" rel="noopener">Read the full edition on JVM Weekly</a>
     </p>
   </article>
+    </div>
+  </section>
   {{ end }}
 
   {{ if not $editions }}

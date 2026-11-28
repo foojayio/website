@@ -1,7 +1,6 @@
 ---
 title: "Using the Raspberry Pi Sense HAT with Pi4J Drivers"
 date: "2026-07-01T08:38:00+00:00"
-lastmod: "2026-07-01T11:32:34+00:00"
 description: "One of the biggest advantages of the Pi4J Drivers project is the ability to interact with complex hardware through simple and intuitive Java APIs. A great…"
 canonical: "https://dev.to/igoriot/introduction-to-the-raspberry-pi-sense-hat-4lfg"
 authors:
@@ -18,7 +17,7 @@ related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
 ---
 
-{{< img src="duke_sensehat-819x1024.jpg" class="alignleft is-resized" style="width:250px" >}}
+{{< img src="duke_sensehat-819x1024.jpg" alt="Duke mascot in a Raspberry Pi t-shirt wiring a Sense HAT, breadboard with LEDs and a Raspberry Pi board" class="alignleft is-resized" style="width:250px" >}}
 
 One of the biggest advantages of the Pi4J Drivers project is the ability to interact with complex hardware through simple and intuitive Java APIs. A great example of this is the Raspberry Pi Sense HAT, one of the most popular Raspberry Pi add-on boards and the hardware platform used in the Astro Pi program aboard the International Space Station.
 
@@ -40,7 +39,7 @@ The board includes several built-in components:
 * Magnetometer (Compass)
 
 With all these features available on a single board, the Sense HAT is an excellent platform for learning IoT, environmental monitoring, robotics, and hardware programming.
-![](sensehat.webp)
+![Raspberry Pi Sense HAT board with its 8x8 LED matrix, sensor chips and joystick](sensehat.webp)
 
 ## Why is the Sense HAT So Popular?
 

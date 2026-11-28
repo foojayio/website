@@ -1,7 +1,6 @@
 ---
 title: "Azul Brings Java from Edge to Cloud"
 date: "2024-09-27T11:30:22+00:00"
-lastmod: "2024-09-27T11:32:13+00:00"
 description: "Azul is your one-stop partner for all questions related to using Java, from edge devices over client applications to cloud services."
 canonical: "https://www.azul.com/blog/azul-brings-java-from-edge-to-cloud/"
 authors:
@@ -9,9 +8,7 @@ authors:
 image: "edge-cover.png"
 categories:
   - "Cloud"
-  - "Desktop"
   - "Embedded"
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:
@@ -26,7 +23,7 @@ In Part 1 of this series, "[A Fresh Look at Embedded Java](https://foojay.io/tod
 Azul and its Zulu Build of OpenJDK (Zulu) are the ideal partners in this part of the software world.
 
 Let's expand and look at the cloud part of a typical end-to-end solution with sensors, edge devices, client applications, and cloud services.
-![](edge-diagram.png)
+![Edge-to-cloud architecture: sensors feed an edge gateway and desktop and server apps on Azul Core, linked to the cloud on Azul Prime](edge-diagram.png)
 
 ## Azul Platform Core for edge devices and client applications
 
@@ -61,7 +58,7 @@ Where Zulu shines on edge, desktop, and multiple platforms, Azul Zing Builds of 
 Quote **Jiří Holuša,**Sr. Product Manager – Platform Prime
 
 *"Zing JVM has gone a long way from the original sweet spot of low-latency use cases where every millisecond matters," says Azul Senior Product Manager Jiří Holuša. "In the modern world of high cloud bills due to the waste of resources, Zing JVM also helps bring back efficiency and save tons of money as it allows you to compute more with the same resources. Success stories of customers getting 200%+ ROI on their investment into Azul Platform Prime and saving hundreds of thousands of dollars prove that improving resource utilization through the right JVM choice makes a lot of sense."*
-![](azul-edge-quote.jpg)
+![Quote from Jiri Holusa: Zing JVM brings efficiency and saves money by computing more with the same resources](azul-edge-quote.jpg)
 
 To learn more about Azul Platform Prime, check these documentation sources:
 

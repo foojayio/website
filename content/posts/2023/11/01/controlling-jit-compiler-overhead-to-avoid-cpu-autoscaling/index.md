@@ -1,7 +1,6 @@
 ---
 title: "Controlling JIT Compiler Overhead to Avoid CPU Autoscaling"
 date: "2023-11-01T07:54:33+00:00"
-lastmod: "2023-11-03T13:51:23+00:00"
 description: "Using the latest features available in Azul Platform Prime, we explore advanced methods for shaping CPU utilization."
 canonical: "https://www.azul.com/blog/how-to-optimize-cpu-utilization-to-avoid-cpu-autoscaling/"
 authors:
@@ -10,7 +9,6 @@ authors:
 image: "before_after.png"
 categories:
   - "DevOps"
-  - "Java"
   - "Performance"
 related_posts:
   - "changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk"
@@ -29,7 +27,7 @@ In this article, we examine Azul Platform Prime's strategies for balancing JIT c
 
 Here's a teaser of what the before and after looks like. Let's check it out step-by-step.
 
-![](before_after-700x323.png)
+![Line chart of JIT compiler cores used over time: the tuned run uses up to 4 cores early, then drops to near zero sooner than baseline](before_after-700x323.png)
 > Disclaimer: This blog post explores advanced JVM JIT tuning techniques. While these methods are not necessary for most users, they are intended to showcase how to achieve optimal hardware utilization. Default settings usually provide excellent performance for common use cases. Proceed with caution; these techniques are intended for advanced users familiar with their implications.
 
 ## Step 1: Starting the Journey
@@ -38,7 +36,7 @@ Let's use the previously mentioned scenario: Start the Java workload, set 1 minu
 
 Consider the following chart that depicts the CPU utilization by the compiler for a Java workload.
 
-![](step1-700x323.png)
+![Line chart of baseline JIT compiler CPU use: about 2 cores for the first 150 seconds, then dropping below 1](step1-700x323.png)
 
 We can see from the chart that the compiler is still very active after our 1 minute (60 seconds) mark. This is because there are possible methods that had not yet reached the compile threshold or because the compiler queue was backed up by the initial burst of activity.
 
@@ -67,7 +65,7 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-![](step2-700x323.png)
+![Line chart comparing baseline with ReadyNow: JIT compiler CPU use stays near 2 cores but drops to zero sooner after warmup](step2-700x323.png)
 
 After applying ReadyNow, we see two things:
 
@@ -115,7 +113,7 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-![](step3-700x323.png)
+![Line chart of extra warmup resources: JIT compiler uses 3 to 4 cores during warmup, then falls to near zero after about 90 seconds](step3-700x323.png)
 
 Using `-XX:CompilerTier2BudgetingWarmupCPUPercent=100` , the Falcon compiler uses all the available CPU for the duration of the warmup period. This is in contrast with the default behavior where the heuristics wouldn't assign that much CPU dedication to the Falcon compiler.
 
@@ -136,7 +134,7 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-![](step4-700x323.png)
+![Line chart of limiting post-warmup resources: JIT compiler CPU use drops to about 1.3 cores after warmup, then to zero](step4-700x323.png)
 
 Once the warmup period is over, the compiler's available CPU is limited by `-XX:CompilerTier2BudgetingCPUPercent=33` which turns into much lower CPU utilization after the 60 second mark.
 
@@ -151,7 +149,7 @@ We argue that, most of the time, it's actually beneficial to avoid autoscaling, 
 1. We must not forget that autoscaling typically includes a non-trivial performance hit due to e.g. rebalancing of data, establishing connections, etc. Not to mention increased infrastructure cost.
 2. It's possible that the lower performance is actually "good enough" for some time and it only gets better. As you can see from the chart below, by the time of 60 seconds, we're done with \~75% of compilations. It's reasonable to believe that you eventually get to "good enough for start" performance. Just to be clear, 75% of compilations done doesn't mean 75% of the best performance, but this is another conversation.
 
-![](step4_compilations_done-700x323.png)
+![Line chart of cumulative Falcon compilations rising to about 2,800 methods and flattening after roughly 135 seconds](step4_compilations_done-700x323.png)
 
 These aspects need to be tested and assessed for the specific applications. However, the big takeaway here is that with Azul Platform Prime, unlike any other JVM, you actually have the tools to choose. And from our experience, when used correctly, you can achieve drastically better behavior that not only saves you money, but also reduces unwanted effects of autoscaling (e.g. errors due to breaching SLAs).
 
@@ -182,7 +180,7 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-![](step5-700x323.png)
+![Line chart of filtering unnecessary compiles: JIT CPU use closely tracks step 4 and reaches zero around 140 seconds](step5-700x323.png)
 
 The effect of setting `-XX:TopTierCompileThresholdTriggerMillis` can be seen especially in reduction of CPU utilization of the JIT compiler later in the run. In the chart above, compare the number of spikes after \~140 seconds. This is most likely due to all of the important methods having been compiled by then and, by filtering out the not-so-hot methods, the compiler is doing less work.
 
@@ -192,7 +190,7 @@ It goes without saying that using this option is fine-tuning. If you set the tim
 
 To summarize, let's look at the before and after pictures side by side.
 
-![](before_after-700x323.png)
+![Final before-and-after line chart: tuned JIT compiler CPU use peaks at 4 cores early but ends at zero, while baseline holds near 2 cores](before_after-700x323.png)
 
 We can clearly see that after applying all of the tuning methods outlined here, we were able to closely control the compiler's CPU utilization and optimize CPU load towards our goal of lowering it after 60 seconds. While trying to get away from unwanted scaling, we also improved the total warmup time, getting to the best performance sooner.
 

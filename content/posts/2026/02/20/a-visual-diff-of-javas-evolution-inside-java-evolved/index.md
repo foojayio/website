@@ -1,7 +1,6 @@
 ---
 title: "A Visual Diff of Java’s Evolution: Inside java.evolved"
 date: "2026-02-20T17:48:21+00:00"
-lastmod: "2026-02-23T08:31:58+00:00"
 description: "A community site showcasing legacy Java patterns alongside modern equivalents to help developers understand how everyday Java code has evolved."
 authors:
   - "bazlur-rahman"
@@ -17,7 +16,7 @@ related_posts:
 A community project called [**java.evolved**](https://javaevolved.github.io/) was recently launched to document how common Java coding patterns have changed across releases. Instead of explaining features in isolation, the site presents "before and after" examples: traditional idioms next to modern alternatives.
 
 The approach targets a practical problem. Most developers work in mixed-era codebases where Java 6, 8, and 17 styles coexist. Rather than memorizing new language features, the site shows what existing code would look like if written today.
-![](Screenshot-2026-02-20-at-6.28.07-AM-700x446.png)
+![The java.evolved website showing an old verbose Java Point class next to its modern record replacement](Screenshot-2026-02-20-at-6.28.07-AM-700x446.png)
 
 ## Less Boilerplate, More Intent
 

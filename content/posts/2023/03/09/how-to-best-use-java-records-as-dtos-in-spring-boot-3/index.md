@@ -1,7 +1,6 @@
 ---
 title: "How to Best Use Java Records as DTOs in Spring Boot 3"
 date: "2023-03-09T17:06:46+00:00"
-lastmod: "2023-03-09T17:06:47+00:00"
 description: "Explore how to best use compact Java Records as Data Transfer Objects (DTOs) for database and API calls in Spring Boot 3 with Hibernate 6."
 canonical: "https://dzone.com/articles/how-to-best-use-java-records-as-dtos-in-spring-boo"
 authors:

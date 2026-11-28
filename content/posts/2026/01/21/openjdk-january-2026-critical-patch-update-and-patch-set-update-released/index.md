@@ -7,7 +7,6 @@ authors:
 image: "openjdk_january_2026.png"
 categories:
   - "CRaC"
-  - "Java"
   - "Java Core"
   - "Release Notes"
 related_posts:

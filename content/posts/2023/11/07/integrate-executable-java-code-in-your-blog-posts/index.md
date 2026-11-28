@@ -1,7 +1,6 @@
 ---
 title: "Integrate executable Java code in your blog posts"
 date: "2023-11-07T14:49:57+00:00"
-lastmod: "2023-11-08T09:05:17+00:00"
 description: "Thanks to JDoodle you can now also add executable code to your Foojay content!"
 authors:
   - "frankdelporte"
@@ -68,9 +67,9 @@ public class MainArguments {
 {{< /jdoodle >}}
 
  <p class="wp-block-paragraph">As you can see, the reader of your Foojay post can modify the code, execute it, and even add CommandLine Arguments to change the behavior of the code as you can see in this screenshot:</p>
- <figure class="wp-block-image size-medium">
-  <img fetchpriority="high" decoding="async" width="629" height="510" src="jdoodle-example-629x510.png" alt="" class="wp-image-102637">
- </figure>
+
+![JDoodle editor with the MainArguments code, 'Hello Foojay World' typed as command-line arguments and the three printed arguments in the result](jdoodle-example-629x510.png)
+
  <h3 class="wp-block-heading" id="h3-2-code-with-external-data-files">Code with external data files</h3>
  <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle. Put the data file itself in
 <code>assets/jdoodle/</code> in the Foojay repository, name it in the shortcode's

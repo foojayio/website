@@ -1,7 +1,6 @@
 ---
 title: "Register for Foojay Webinar: \"Java's Place in the AI Revolution\""
 date: "2025-04-09T13:15:20+00:00"
-lastmod: "2025-04-15T06:38:00+00:00"
 description: "This first online Foojay Webinar will highlight Java's place in the AI Revolution, focusing on Exploring AI/ML Using Pure Java Tools."
 authors:
   - "frankdelporte"
@@ -45,4 +44,4 @@ Zoran Sevarac, CEO of @Deep Netts, Full Professor at University of Belgrade, Jav
 ### Moderator
 
 Pratik Patel, VP Developer Advocacy at Azul, Java Champion
-![](20250428_Java_AI-1024x576.jpg)
+![Webinar banner 'Java's Place in the AI Revolution' with speakers Zoran Sevarac, Frank Greco and Pratik Patel, Monday April 28](20250428_Java_AI-1024x576.jpg)

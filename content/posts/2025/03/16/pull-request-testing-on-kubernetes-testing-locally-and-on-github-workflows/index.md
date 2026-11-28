@@ -1,7 +1,6 @@
 ---
 title: "Pull request testing on Kubernetes: testing locally and on GitHub workflows"
 date: "2025-03-16T17:32:27+00:00"
-lastmod: "2025-03-17T08:47:16+00:00"
 description: "In this post, we'll lay the ground for a simple app's unit- and integration-testing, leveraging Testcontainers in the local environment."
 canonical: "https://blog.frankel.ch/pr-testing-kubernetes/1/"
 authors:

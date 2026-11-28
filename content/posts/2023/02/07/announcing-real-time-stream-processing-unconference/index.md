@@ -1,7 +1,6 @@
 ---
 title: "Announcing Real-time Stream Processing Unconference"
 date: "2023-02-07T07:20:06+00:00"
-lastmod: "2023-02-07T07:23:57+00:00"
 description: "Hazelcast kicks off 2023 to connect with community members and industry experts on the Future of Real-Time Stream Processing."
 authors:
   - "fawaz-ghali"
@@ -41,4 +40,4 @@ Participants will have the end-to-end experience of developing a solution on the
 
 Receive a Stream Processing Fundamentals Workshop digital badge, which you can add to your CV or LinkedIn upon completing our 90 minutes training.
 
-[![](hz-unconf-social-2-510x510.jpg)](https://hazelcast.com/lp/unconference/)
+[![Banner for the Real-Time Stream Processing unconference by Hazelcast, March 9, 2023, hybrid in London, with a Register for Free button](hz-unconf-social-2-510x510.jpg)](https://hazelcast.com/lp/unconference/)

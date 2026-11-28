@@ -1,7 +1,6 @@
 ---
 title: "How Deep Netts and Java AI Transformed Particle Physics"
 date: "2025-05-19T10:58:34+00:00"
-lastmod: "2025-05-19T12:15:16+00:00"
 description: "Jefferson Lab is leveraging Java-based AI to overcome one of the most computationally intense challenges in modern science."
 authors:
   - "zoran-sevarac"

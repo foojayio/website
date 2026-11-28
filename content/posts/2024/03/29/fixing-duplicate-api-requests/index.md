@@ -1,7 +1,6 @@
 ---
 title: "Fixing duplicate API requests"
 date: "2024-03-29T09:37:34+00:00"
-lastmod: "2026-09-21T06:03:45+00:00"
 description: "The first rule of distributed systems is \"Don’t distribute your system\". Designing distributed systems right is infamously hard for multiple reasons. The…"
 canonical: "https://blog.frankel.ch/fix-duplicate-api-requests/"
 authors:
@@ -46,7 +45,7 @@ The spec describes the following flow:
 
 [
 
-{{< img src="idempotency-key-sequence-448x510.png" class="aligncenter size-medium" width="448" height="510" >}}
+{{< img src="idempotency-key-sequence-448x510.png" alt="Sequence diagram: client sends a unique key, the server stores the request and returns the stored response if one exists, else computes and stores one" class="aligncenter size-medium" width="448" height="510" >}}
 
 ](idempotency-key-sequence.png)
 

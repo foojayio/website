@@ -67,6 +67,13 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   **length-guarded at 200 characters** on a word boundary; the stored text is
   untouched.
 
+- **Machine-readable copies are derived, never authored.** Posts and glossary
+  entries also publish `<page>/index.md` (the MARKDOWN output, switched on by a
+  cascade in the two `_index.md` files), and `/llms-full.txt` carries the
+  glossary and Quick Start in full. The sitemap is our own template so a page
+  whose `canonical:` names another URL is left out; glossary entries and Quick
+  Start steps get `DefinedTerm` and `TechArticle` JSON-LD from `json-ld.html`.
+
 - **`/search/` and the 404 are out of the index, and `/search/` is out of the
   sitemap** — it has no server-rendered content to rank on, so listing it and
   then telling it `noindex` was two contradictory instructions. The 404 also
@@ -152,6 +159,10 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   it is a rule, not a list: a page gets the link when what you are reading IS
   its file, so the derived pages deliberately don't. It carries
   `data-pagefind-ignore`, or 2246 pages are a result for "edit".
+
+- **A link to another site opens in a new tab (`target="_blank"
+  rel="noopener"`); a link within foojay.io stays in the same tab.** Applies
+  to templates and widgets as it does to article bodies.
 
 - **Internal links are `.RelPermalink`; only absolute-by-contract URLs are
   `.Permalink`.** `.Permalink` is built from the CONFIGURED baseURL, which is
@@ -415,13 +426,6 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   alphabetically with a filter box, since the top categories are already shown
   elsewhere and the only reason to open a list of 123 is to find one.
 
-- **The AI portal is a derived category landing page.** `/ai/` is what
-  WordPress serves as the "Machine Learning" category with an editorial intro,
-  so the page file holds the intro plus `list_category:` and the layout derives
-  the rest. Don't turn it into a hand-picked `posts:` list. Its grid is **not**
-  paginated (`.Paginate` doesn't work on a page kind), and its cards pass
-  `maxCategories: 0`, because on a portal the chips are the navigation.
-
 - **`/search/` gives each SECTION its own quota, never a global top-N.**
   Pagefind returns one relevance-ordered list, so a global `slice(0, 30)` is
   spent on whichever section matches most: on "pi4j", 328 pages matched and the
@@ -435,6 +439,11 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   can't interleave. Two guards for silent failures: a `runId` per query, and a
   fallback to one ungrouped list if the counts don't add up.
 
+  **Category and year are Pagefind filters stamped on posts only**, derived in
+  `posts/single.html`; choosing one narrows the page to Posts. A selected value
+  zeroes its siblings in the same key, so each key's chips are counted with the
+  OTHER key's selection. Zero results shows `#search-page-empty`.
+
 - **A post's comment thread is keyed on its slug, never its pathname.** giscus
   is configured `data-mapping="specific"` with the slug as the term — pathname
   mapping was the tempting default and a trap, since the trial served a
@@ -444,7 +453,7 @@ Read the root `AGENTS.md` first; this file holds the detail for this folder.
   of mapping, term or strict and a mismatch shows up as an empty comment
   section, not an error.
 
-  **The legacy WordPress comments are NOT in Discussions and must not be put
-  there** — importing them got the posting account **banned by GitHub** a few
-  posts in. They are `content/posts/**/comments.json`, rendered under the
-  widget. Only a handful of real discussions exist, which is correct.
+  **The legacy WordPress comments were imported into Discussions** — slowly,
+  because a fast first run got the posting account **banned by GitHub** as spam.
+  Don't bulk-post to Discussions again. The archive, its template and the import
+  script are deleted; git history has them.

@@ -7,7 +7,6 @@ authors:
 image: "preview.jpg"
 categories:
   - "Security"
-  - "Java"
   - "Research"
 related_posts: []
 ---

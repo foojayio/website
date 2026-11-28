@@ -1,7 +1,6 @@
 ---
 title: "Designing a team of agents"
 date: "2026-05-07T20:00:48+00:00"
-lastmod: "2026-09-21T05:56:15+00:00"
 description: "I continue to experiment with AI in the context of software engineering. I'm fortunate that my team supports me in exploring different ways to improve our…"
 canonical: "https://blog.frankel.ch/design-team-agents/"
 authors:
@@ -75,7 +74,7 @@ I asked Claude Code to come up with the team design. He created a plan that incl
 
 "Regular" subagents do their tasks autonomously, but then come back to the main agent. Subagents in teams communicate with each other directly.
 
-![](subagents-vs-agent-teams-light-57829694.png)
+![Diagram contrasting subagents that report back to a main agent with agent teams that share a task list and communicate directly](subagents-vs-agent-teams-light-57829694.png)
 
 After defining agents, you need to specify how subagents communicate with each other toward the accomplishment of a task. You describe such interactions in [a skill](https://blog.frankel.ch/writing-agent-skill/), which Claude also created for me. Here's a very simplified model.
 

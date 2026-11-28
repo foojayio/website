@@ -1,7 +1,6 @@
 ---
 title: "64-bit Raspbian OS on Raspberry Pi 4 with USB Boot"
 date: "2020-10-12T11:14:26+00:00"
-lastmod: "2020-10-12T13:26:44+00:00"
 description: "Switching from SD to USB Boot is very easy if you have a Flash Drive which is supported and the read speed is a lot higher!"
 canonical: "https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/"
 authors:
@@ -32,7 +31,7 @@ The full process is described in ["USB mass storage boot"](https://www.raspberry
 * On PC, Apple or Raspberry Pi, download the ["Imager" tool](https://www.raspberrypi.org/downloads/) from the Raspberry Pi website
 * With the "Imager" write the latest bootloader to an SD card (note: this is not really a bootloader but replaces the on-board bootloader)
 
-![](imager_eeprom.png)
+![Raspberry Pi Imager menu offering the 'Raspberry Pi 4 EEPROM boot recovery' image](imager_eeprom.png)
 
 As described in the "README.txt" file:
 
@@ -58,12 +57,12 @@ As described in the "README.txt" file:
 Raspbian OS (which recently was ["re-branded" to "Raspberry Pi OS"](https://unix.stackexchange.com/questions/602587/why-has-raspbian-apparently-been-renamed-into-raspberry-pi-os)) is the operating system provided by Raspberry Pi and is based on Debian. As only the latest Raspberry Pi-boards have a 64-bit chip, the official release of Raspbian OS is 32-bit only. But there is a work-in-progress-version of an OS-version which is fully 64-bit! Let's use that one…
 
 For this post, I wrote this 64-bit beta-version to three different discs to compare the results.
-![](discs.jpg)
+![Three storage options for booting a Raspberry Pi: a microSD card, a Transcend USB flash drive and a WD Black SSD](discs.jpg)
 
 * Download the OS-img file [from the Raspberry Pi forum](https://www.raspberrypi.org/forums/viewtopic.php?f=117&t=275370)
 * Again use the "Imager" tool and select the file you just downloaded with the "Use custom" option
 
-![](imager_custom.png)
+![Raspberry Pi Imager operating system list with the 'Use custom' option to select a custom .img file](imager_custom.png)
 
 This 64-bit OS version is still in development and not fully finished. In case you have questions and remarks about it, you can check out this forum post ["STICKY: Raspberry Pi OS (64 bit) beta test version feedback"](https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=275372).
 
@@ -80,7 +79,7 @@ For the second test, the SD card is removed, and the ["32GB Transcend JetFlash 7
 Pushing the limits now… How cool would it be to have a 500Gb drive which is about the same size as the Raspberry Pi itself? Let's try out with a ["WD BLACK P50 Game Drive SSD 500GB"](https://www.coolblue.be/nl/product/853658/wd-black-p50-game-drive-ssd-500gb.html).
 
 But no luck… Connected to USB 3 the Pi can't boot. It works when connected to USB 2 but the speed is a lot lower than expected. And after a few reboots, I seem to have messed up the disc, as I end up with the same error screen again…
-![](usb-boot-error.jpg)
+![Photo of a monitor with the Raspberry Pi 4 boot screen showing USB boot messages and an 'sdcard' open failure](usb-boot-error.jpg)
 
 Apparently, **not all SSD drives are supported (yet) with USB Boot on the Raspberry Pi** , so I need to investigate this further…**If you have an idea on how to fix this issue, please let me know!**
 

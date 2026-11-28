@@ -1,7 +1,6 @@
 ---
 title: "Unlocking Java Wisdom: A Conversation with Oracle ACE Simon Martinelli"
 date: "2023-09-01T16:00:01+00:00"
-lastmod: "2023-09-01T16:00:04+00:00"
 description: "Explore insights from Simon Martinelli, Oracle ACE Associate, as he discusses his journey in Java development, the importance of simplicity in software architecture, and the value of mentoring."
 authors:
   - "bazlur-rahman"
@@ -15,7 +14,7 @@ related_posts:
   - "resilience-in-coding-miro-wengner-on-thriving-in-the-software-industry"
 ---
 
-{{< img src="image-2.jpg" class="alignright size-full" width="460" height="460" >}}
+{{< img src="image-2.jpg" alt="Portrait of Simon Martinelli, bald with glasses, against a blue sky" class="alignright size-full" width="460" height="460" >}}
 
 In a recent insightful interview, Simon Martinelli, an Oracle ACE associate and veteran Java developer, shares his career experiences, software development philosophies, and views on mentoring. With over two decades in the industry, Martinelli offers a perspective that combines the wisdom of experience with a focus on simplicity and constant learning.
 

@@ -1,7 +1,6 @@
 ---
 title: "Using Pausers in Event Loops"
 date: "2023-05-17T09:25:23+00:00"
-lastmod: "2023-05-17T09:27:20+00:00"
 description: "Techniques that help maximise hardware utilisation, while also reducing power consumption, helping reduce costs to your organisation."
 authors:
   - "peter-lawrey"
@@ -73,7 +72,7 @@ while (running) {
 
 This table illustrates several different Pauser modes, as well as the benefits and downsides to using each of them.
 
-![](Screenshot-2023-05-09-at-10.58.37-AM-1024x877.png)  
+![Table of Pauser modes (busy, timedBusy, yielding, balanced, milli, sleepy) with benefits, downsides, monitoring and CPU isolation needs](Screenshot-2023-05-09-at-10.58.37-AM-1024x877.png)  
 *Table 1. Pauser Modes*
 
 [Chronicle](https://chronicle.software/ "Chronicle") Pausers allow for optimising the CPU load for a given level of responsiveness and latency. This trade-off can be configured with high accuracy, without needing to make significant changes to your application code. For instance, if you realise that a particular thread needs to be more responsive, you can change its Pauser from a back-off Pauser to a busy Pauser and vice versa.
@@ -88,7 +87,7 @@ The `Busy`, `TimedBusy`, `Yielding` and `Millis` Pausers show flat response time
 
 The `Sleepy` and `Balanced` strategies show step changes and steady growth in response times reflecting the incremental back-off the longer the thread waits to receive an event.
 
-![](Screenshot-2023-05-09-at-11.00.15-AM-1024x813.png)  
+![Log-scale chart of pause time per Pauser mode: milli is constant at 10 ms, sleepy and balanced back off, busy and timedBusy stay tiny](Screenshot-2023-05-09-at-11.00.15-AM-1024x813.png)  
 *Figure 1. Pauser Mode Performance*
 
 ### Conclusion

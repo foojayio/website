@@ -1,7 +1,6 @@
 ---
 title: "Stream Limit Filter Java Challenge"
 date: "2021-08-17T07:00:03+00:00"
-lastmod: "2021-09-03T09:38:47+00:00"
 description: "When you learn how to use streams, your Java code will be much better, and knowing how to limit and filter data with streams is crucial!"
 authors:
   - "rafael-del-nero"

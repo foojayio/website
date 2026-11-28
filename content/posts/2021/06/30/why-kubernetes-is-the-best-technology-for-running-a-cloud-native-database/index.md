@@ -1,7 +1,6 @@
 ---
 title: "Kubernetes Is The Best Technology For Running A Cloud-Native Database"
 date: "2021-06-30T09:13:19+00:00"
-lastmod: "2021-11-10T23:19:15+00:00"
 description: "A truly cloud-native approach means adopting key elements of the Kubernetes design paradigm. Let’s explore a few that point the way!"
 canonical: "https://hackernoon.com/why-kubernetes-is-the-best-technology-for-running-a-cloud-native-database-hz1234ld"
 authors:
@@ -59,7 +58,7 @@ The remainder of the control plane consists of logic that leverages the Manageme
 The K8ssandra project uses [cass-operator](https://github.com/datastax/cass-operator?ref=hackernoon.com) to automate Cassandra operations. Cass-operator defines a "CassandraDatatcenter" custom resource (CRD) to represent each top-level failure domain of a Cassandra cluster. This builds a higher-level abstraction based on Stateful Sets and Persistent Volumes.
 
 A sample K8ssandra deployment including Apache Cassandra and cass-operator:
-![](image.jpg)
+![Diagram of a Cassandra deployment on Kubernetes: three data centers, each with a service, pod and Management API, managed by Cass Operator](image.jpg)
 
 **Principle 3: Make observability easy**
 

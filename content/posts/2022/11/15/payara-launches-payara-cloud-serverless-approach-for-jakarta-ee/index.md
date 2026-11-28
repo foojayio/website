@@ -1,7 +1,6 @@
 ---
 title: "Payara Launches Payara Cloud – Serverless for Jakarta EE"
 date: "2022-11-15T16:31:30+00:00"
-lastmod: "2022-11-15T16:33:26+00:00"
 description: "Payara has launched a new product Payara Cloud, designed to run Jakarta EE apps easily and quickly on the cloud."
 authors:
   - "jadon-ortlepp"

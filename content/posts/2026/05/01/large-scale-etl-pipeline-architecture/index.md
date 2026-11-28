@@ -1,14 +1,12 @@
 ---
 title: "Large-Scale ETL Pipeline Architecture"
 date: "2026-05-01T19:23:04+00:00"
-lastmod: "2026-05-01T19:23:06+00:00"
 description: "In this article, we will explore how to design a high-throughput ETL pipeline architecture using Java, focusing on concurrency models, error recovery strategies, and practical implementation techniques. To do this, we will leverage tools such as Project Reactor to build scalable, non-blocking pipelines. In the loading stage, we will consider MongoDB as the sink for transformed data."
 authors:
   - "matteo-rossi"
 image: "Screenshot-2026-04-21-at-1.37.53-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"

@@ -1,7 +1,6 @@
 ---
 title: "The Basis of Virtual Threads: Continuations"
 date: "2023-04-28T13:38:05+00:00"
-lastmod: "2023-04-28T13:45:23+00:00"
 description: "In Project Loom, \"continuation\" is delimited, a \"coroutine\", sequential code suspends or yields execution by itself, resumed by a caller."
 authors:
   - "huseyin-akdogan"

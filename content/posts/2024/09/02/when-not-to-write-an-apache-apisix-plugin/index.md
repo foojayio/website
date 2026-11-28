@@ -1,7 +1,6 @@
 ---
 title: "When (not) to write an Apache APISIX plugin"
 date: "2024-09-02T20:50:43+00:00"
-lastmod: "2024-09-02T20:50:44+00:00"
 description: "Practical alternatives to writing a custom plugin, offering solutions you can quickly implement in your projects."
 canonical: "https://blog.frankel.ch/when-write-apisix-plugin/"
 authors:

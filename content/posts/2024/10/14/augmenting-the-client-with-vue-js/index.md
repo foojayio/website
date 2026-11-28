@@ -1,7 +1,6 @@
 ---
 title: "Augmenting the client with Vue.js"
 date: "2024-10-14T10:53:42+00:00"
-lastmod: "2024-10-14T10:53:44+00:00"
 description: "In this article, I take my first steps in augmenting an SSR app with Vue."
 canonical: "https://blog.frankel.ch/ajax-ssr/3/"
 authors:
@@ -102,7 +101,7 @@ Here's the code on the HTML side:
 
 As explained in last week's article, one of Thymeleaf's benefits is that it allows both static file rendering and server-side rendering. To make the magic work, I specify a client-side path, *i.e.* , `src`, and a server-side path, *i.e.* , `th:src`.
 
-![](vue-static-display.webp)
+![Simple task list web page with one 'Take out the trash' row, a Cleanup button and a New task field with an Add button](vue-static-display.webp)
 
 ## The Vue code
 

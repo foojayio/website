@@ -1,6 +1,6 @@
 # View counter (Cloudflare Worker + D1)
 
-The read counter behind the `12,345 views` line on posts, pages, `/pedia/`
+The read counter behind the `12,345 views` line on posts, pages, `/java-terms-explained/`
 entries and author profiles. A Worker on `foojay.io/api/views/*` in front of a
 D1 table of `<section>/<slug> -> (legacy, live)`.
 

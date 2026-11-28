@@ -1,7 +1,6 @@
 ---
 title: "How Gradle Works: Startup"
 date: "2023-02-09T08:45:57+00:00"
-lastmod: "2023-03-14T11:34:13+00:00"
 description: "This is the first of a series on how Gradle works! For example, how does Gradle start up and how many JVMs are involved in a Gradle build?"
 canonical: "https://blog.gradle.org/how-gradle-works-1"
 authors:
@@ -54,7 +53,7 @@ So the script's job is simple: it finds the `java` command, determines the param
 
 `exec` executes a command in the same process, i.e. replaces the current process with a JVM process.
 
-![](local-distribution-startup.jpg)
+![Diagram of the gradle script: it finds the java command, builds its parameters and execs the JVM running GradleMain](local-distribution-startup.jpg)
 
 The entry point of `Gradle Client JVM` is [`org.gradle.launcher.GradleMain` class](https://github.com/gradle/gradle/blob/acc6044325b11874e9626d98dec976a0e495cb62/subprojects/bootstrap/src/main/java/org/gradle/launcher/GradleMain.java).
 
@@ -70,17 +69,17 @@ Later,
 2. The `Gradle Daemon JVM` runs the build, and sends output (stdout/stderr) back to the `Gradle Client JVM`.
 3. After the build finishes, the `Gradle Client JVM` will exit, but the `Gradle Daemon JVM` may stay running for some time.
 
-![](client-daemon-3d484e1a.png)
+![Diagram of the user CLI talking to the Gradle client JVM, which forwards input and output to the Gradle daemon JVM running the build](client-daemon-3d484e1a.png)
 
 However, there is one exception for this workflow. If you pass `--no-daemon` to the Gradle build, the client JVM may convert itself into a daemon JVM if it is [compatible with build requirements](https://docs.gradle.org/current/userguide/gradle_daemon.html#compatibility).
 
 In this case, there is no daemon, no communication, no input/output forwarding at all - the build happens inside the single JVM:
 
-![](no-daemon-51ddc5f4.png)
+![Diagram of --no-daemon where a compatible Gradle client JVM runs the build logic itself](no-daemon-51ddc5f4.png)
 
 But if `--no-daemon` is present and the client JVM is not compatible with build requirements, a new disposable JVM will still be started for the build and exit at the end of the build:
 
-![](no-daemon-not-compatible-f89eb7bc.png)
+![Diagram of --no-daemon where an incompatible client JVM starts a disposable build JVM that exits when the build ends](no-daemon-not-compatible-f89eb7bc.png)
 
 This is how local Gradle distribution starts up on UNIX OSes. On Windows, the mechanism is very similar - the only difference is that we invoke `/path/to/distribution/bin/gradle.bat` instead of `/path/to/distribution/bin/gradle`.
 
@@ -94,7 +93,7 @@ If you open `gradlew` in a text editor, you'll find it very similar to what we h
 
 This JVM will locate or download a specific version of Gradle distribution declared in `gradle/wrapper/gradle-wrapper.properties`, then it will start Gradle inside the same JVM via Java reflection. After that, this tiny JVM acts as the `Gradle Client JVM `in the way explained in the last section.
 
-![](wrapper-daemon-19584a15.png)
+![Diagram of gradlew: the wrapper JVM downloads or finds the Gradle distribution, then becomes the client JVM talking to the daemon](wrapper-daemon-19584a15.png)
 
 The entry point of `Gradle Wrapper JVM` is the [`org.gradle.wrapper.GradleWrapperMain` class](https://github.com/gradle/gradle/blob/acc6044325b11874e9626d98dec976a0e495cb62/subprojects/wrapper/src/main/java/org/gradle/wrapper/GradleWrapperMain.java).
 
@@ -108,7 +107,7 @@ Gradle client can be a part of another JVM, i.e. a JVM that loads some Gradle ja
 
 This programmatic API is called [Tooling API](https://docs.gradle.org/current/userguide/third_party_integration.html#embedding).
 
-![](ide-tapi-daemon-5ca5f9cc.png)
+![Diagram of an IDE JVM using gradle-tooling-api.jar to run a Gradle build programmatically through the Gradle daemon JVM](ide-tapi-daemon-5ca5f9cc.png)
 
 For example, when you click `Gradle Sync` button in IntelliJ IDEA, IDEA will start a special Gradle build to fetch necessary information (project structure, dependencies, tasks, etc.) of the project via the Tooling API.
 

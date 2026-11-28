@@ -1,7 +1,6 @@
 ---
 title: "Why Home Assistant"
 date: "2024-12-09T15:54:20+00:00"
-lastmod: "2024-12-09T15:55:06+00:00"
 description: "I have many different \"smart\" devices at home and no centralized system to manage them all. Plus, I'm concerned about privacy and am an ardent Open Source proponent. I immediately decided to invest in Home Assistant."
 canonical: "https://blog.frankel.ch/home-assistant/1/"
 authors:

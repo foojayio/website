@@ -1,7 +1,6 @@
 ---
 title: "What Are Your Java Predictions for 2021: Jakarta EE"
 date: "2020-12-28T09:30:18+00:00"
-lastmod: "2021-08-23T15:34:44+00:00"
 description: "Java developers may stop having to worry about Kubernetes as it is abstracted away as 'just infrastructure'. Payara's 2021 Java predictions!"
 authors:
   - "jadon-ortlepp"
@@ -14,7 +13,7 @@ related_posts:
 
 **To celebrate the world of Java and predict our highlights for 2021, several key Foojay participants will share their thoughts and hopes during the coming days on Foojay, [starting with Frank Delporte, Foojay Community Manager for the Raspberry Pi](https://foojay.io/today/java-predictions-for-2021-raspberry-pi/), and now continuing with Jadon Ortlepp, Foojay Community Manager for Microservices, who here provides the predictions of his Payara colleagues on Jakarta EE in 2021**.
 
-{{< img src="image.png" class="size-large is-resized" width="133" height="143" >}}
+{{< img src="image.png" alt="Portrait of a smiling bald man with a colorful green and orange background" class="size-large is-resized" width="133" height="143" >}}
 
 ### "Jakarta EE will start driving improvements in APIs and Project Loom will drive new releases of many frameworks.
 
@@ -24,7 +23,7 @@ related_posts:
 
 *Steve Millidge, Payara CEO and Founder*
 
-{{< img src="image-1.jpg" class="size-large is-resized" width="133" height="143" >}}
+{{< img src="image-1.jpg" alt="Close-up portrait of a man with gray hair and rimless glasses in front of an orange banner" class="size-large is-resized" width="133" height="143" >}}
 
 ### "I'm very interested in Fibers (part of Project Loom) which will revolutionise the way we use multithreading in Java.
 
@@ -32,7 +31,7 @@ related_posts:
 
 *Rudy De Busscher, Payara Pre-Sales Consultant*
 
-{{< img src="image-2.png" class="size-large is-resized" width="133" height="143" >}}
+{{< img src="image-2.png" alt="Portrait of a smiling man with brown hair and stubble against a light green background" class="size-large is-resized" width="133" height="143" >}}
 
 ### "One thing to look for is Jakarta EE 9.1, which should support Java 11 and align with it.
 

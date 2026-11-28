@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Java 17 and IntelliJ IDEA"
 date: "2021-09-14T09:20:56+00:00"
-lastmod: "2021-09-14T10:23:35+00:00"
 description: "In this article, I will limit the coverage of Java 17 to its language features – Sealed Classes and Pattern Matching for switch."
 canonical: "https://blog.jetbrains.com/idea/2021/09/java-17-and-intellij-idea/"
 authors:
@@ -29,7 +28,7 @@ In this article, I will limit the coverage of Java 17 to its language features �
 * **Pattern matching for switch statements** . Pattern matching for switch is introduced as a [preview feature](https://openjdk.java.net/jeps/12). As the name suggests, it adds patterns to the case labels in the switch statements *and* switch expressions. The type of the *selector expression* that can be used with a switch is expanded to any reference value. Also, case labels are no longer limited to constant values. It also helps replace if-else statement chains with switch, improving code readability.
 
 Let's start with pattern matching.
-![](Java17_blog_Blog_1280x720-c0d423fa.jpg)
+![Illustration of a person with a mug and laptop under the title Java 17 and IntelliJ IDEA, with a JetBrains logo](Java17_blog_Blog_1280x720-c0d423fa.jpg)
 
 Before we dive into pattern matching for switch, let's ensure we have the basic IntelliJ IDEA configuration set up.
 
@@ -38,15 +37,15 @@ Before we dive into pattern matching for switch, let's ensure we have the basic 
 Basic support for Java 17 is available in [IntelliJ IDEA 2021.2.1](https://blog.jetbrains.com/idea/2021/08/intellij-idea-2021-2-1/). More support is on the way in future IntelliJ IDEA releases.
 
 To use pattern matching for switch with Java 17, go to *ProjectSettings \| Project* , set the *Project SDK* to 17 and set *Project language level* to '*17 (Preview) - Pattern matching for switch*':
-![](java17-img1-b43409f2.png)
+![IntelliJ Project Structure with Project SDK 17 and language level 17 (Preview) - Pattern matching for switch](java17-img1-b43409f2.png)
 
 You can use any version of the JDK that has already been downloaded on your system, or download another version by clicking on '*Edit* ' and then selecting '*Add SDK \>* ', followed by '*Download JDK…*'. You can choose the JDK version to download from a list of vendors.
 
 On the modules tab, ensure the same language level is selected for the modules - *17 (Preview) - Pattern matching for switch*:
-![](java17-img2-14a696a4.png)
+![IntelliJ Project Structure Modules tab with language level set to Project default 17 (Preview)](java17-img2-14a696a4.png)
 
 Once you select this, you might see the following pop-up which informs you that IntelliJ IDEA might discontinue the support for the Java preview language features in its next versions. Since a preview feature is not permanent (yet), and it is possible that it could change (or even be dropped) in a future Java release.
-![](java17-img3-95384406.png)
+![IntelliJ warning that support for the 17 (Preview) language level might be dropped when Java 18 is released](java17-img3-95384406.png)
 
 Ok, now we are ready to start with the Java 17 language features.
 
@@ -91,12 +90,12 @@ void outputValueInUppercase(Object obj) {
 ```
 
 In IntelliJ IDEA, you can invoke context-sensitive actions on the variable s (by using Alt+Enter or by clicking the light bulb icon) and selecting *Replace 's' with pattern variable* to use pattern matching for instanceof:
-![](java17-1-9d24984d.gif)
+![IntelliJ IDEA code with an if instanceof String check and a cast, where the cursor is on the if](java17-1-9d24984d.gif)
 
 The scope of the pattern variable (a local variable) is limited to the `if`-block because it makes no sense to be able to access the pattern variable if the test fails.
 
 The simplicity of pattern matching of instanceof might be deceptive. If you are thinking it doesn't matter much since it only removes one line of code, think again. Removal of just one line of code can open up a number of possibilities in which you can modify your code. For example, aside from using pattern matching for instanceof, the following code merges `if` statements, introduces a pattern variable, and replaces a for loop with `Collection.removeIf()`:
-![](java17-2-c3872a8c.webp)
+![Java code using instanceof with a cast to LetterNode inside a loop, with the editor suggesting a conversion](java17-2-c3872a8c.webp)
 
 Now, let me brief you on the enhancements to the switch statement with the switch expressions (covered in detail [here](https://blog.jetbrains.com/idea/2019/02/java-12-and-intellij-idea), with Java 12, and [here](https://blog.jetbrains.com/idea/2019/11/java-13-and-intellij-idea/) with changes in Java 13). As I mentioned before, if you are already familiar with switch expressions, please feel free to jump to the section 'Welcome to pattern matching for switch'.
 
@@ -134,7 +133,7 @@ public class Planet {
 ```
 
 Let's see how switch expressions can help. The following gif demonstrates some of the benefits of switch expressions such as concise code, improved code semantics, no redundant break statements, exhaustive iteration, and more:
-![](java17-3-8c636578.webp)
+![Java enum SingleUsePlastic and a classic switch statement with break statements to compute damage](java17-3-8c636578.webp)
 
 With a basic understanding of pattern matching, pattern matching for instanceof, and switch expressions, let's look at what pattern matching is and why you need it?
 
@@ -198,7 +197,7 @@ public class MyEarth {
 ```
 
 Let's look at how we can use switch expressions and IntelliJ IDEA to make this code more concise:
-![](java17-4-757733ff.webp)
+![Java method using an if-else chain with instanceof checks and casts for AirPollution, Discrimination and Deforestation](java17-4-757733ff.webp)
 
 Here's the final (concise) code for reference:
 
@@ -220,10 +219,10 @@ The power of this construct lies in how often it helps to reduce the cognitive c
 ### **Reducing cognitive complexity with pattern matching for switch**
 
 An if-else statement chain *seems* complex to read and understand – each condition should be *carefully* read together with its then-and-else code blocks. If we consider the if statement chain from the preceding section, it can be represented roughly as follows:
-![](java17-img4-a009ddb2.png)
+![Java instanceof chain being simplified in IntelliJ by removing the first branch](java17-img4-a009ddb2.png)
 
 Now let me represent the switch construct from the preceding section:
-![](java17-img5-477031a4.png)
+![Java getDamage method with the same logic rewritten as a switch with pattern labels and a case null, default branch](java17-img5-477031a4.png)
 
 Even by looking at both these images, the switch logic (though similar) looks simpler to read and understand. An if statement chain *seems* to represent a *long* , *complex* path, in which the next turn *seems* to be unknown. But this isn't the case with the switch construct.
 
@@ -238,12 +237,12 @@ One approach has been to add a `@NotNull` annotation to the variable accepted by
 Of course, if you do not explicitly check for null values and the selector expression is null, it throws a `NullPointerExpression`. For backward compatibility, `null` selector expression won't match the default label.
 
 Now, you can define null as one of the valid case labels – so that you can define what to do if the selector expression is null.
-![](java17-5-5971849a.gif)
+![IntelliJ editor shortly after the conversion, showing getDamage as a switch with pattern labels](java17-5-5971849a.gif)
 
 ### **Does IntelliJ IDEA convert your if-statement to a switch expression or a switch statement?**
 
 In the preceding example, the if-else construct was converted to a switch expression. However, if you'd have selected this conversion, *before* using pattern matching for instanceof, you would have got a switch statement, as shown in the following gif:
-![](java17-6-5b920d1e.gif)
+![IntelliJ showing an if-else instanceof chain being converted to a switch with case null, default](java17-6-5b920d1e.gif)
 
 Since the code block for if-else in the original code snippet defined multiple lines of code, it made sense to convert it to a switch statement rather than a switch expression.
 
@@ -254,7 +253,7 @@ This brings us to another interesting question – what is the relation between 
 A switch is classified as a statement or an expression depending on whether it returns a value or not. If it returns a value, it is a switch expression, otherwise a statement. Switch can also use either a colon or an arrow syntax.
 
 Interestingly, the switch style (statement or expression) and arrow/colon syntax are orthogonally related, as shown in the following image:
-![](java17-img6-65957ef9.png)
+![Java getDamage switch with pattern labels Discrimination and Deforestation and a case null, default arrow branch](java17-img6-65957ef9.png)
 
 The preceding matrix is not just limited or specific to switch statements or expressions that define a pattern in their case labels. It applies to switch statements and expressions that define constants too.
 
@@ -280,7 +279,7 @@ Pattern variables are local variables, which are casted and initialized when a t
 ### **When do missing break statements in a switch statement become a compilation error?**
 
 In the following example, the pattern variable `d` is limited to the case label `Discrimination`. When patterns, instead of constants, are used in case labels for switch statements or expressions, missing `break` statements is a compilation error because it can result in a default fall-through to a case label that did not pass the test:
-![](java17-7-1-449e6d3b.gif)
+![Java if-else chain with instanceof Pollution before instanceof AirPollution, a case where converting to switch matters](java17-7-1-449e6d3b.gif)
 
 ### **Guarded patterns – conditions that follow test patterns**
 
@@ -364,12 +363,12 @@ So far, the necessity of parenthesized patterns is very low. It's only to distin
 What happens if the types being checked in switch case labels have an inheritance relationship? You should check for the most specific case, prior to checking for the general type.
 
 Failing to do so would be a compilation error – as shown in the following image, when the code in method `getDamageForDifferentPollutionTypes` compares its method parameter `obj` with class `AirPollution` and `Pollution` (class `AirPollution` extends `Pollution`).
-![](java17-img7-5835c7c1.png)
+![IntelliJ error 'Label is dominated by a preceding case label Pollution p' on a switch case for AirPollution](java17-img7-5835c7c1.png)
 
 An interesting observation is that with a similar logic it isn't a compilation error for an if-else statement.
 
 However, in such cases, IntelliJ IDEA would not offer you the option to convert it to a switch. You get the option, when you remove checking a superclass before its subclass, or, perhaps checking for unrelated types:
-![](java17-8-a0834340.webp)
+![Java if-else instanceof chain, with Pollution tested before the more specific AirPollution](java17-8-a0834340.webp)
 
 ### **Should you care about handling all possible values for the selector expression in switch?**
 
@@ -509,7 +508,7 @@ It can be time-consuming to look for if-else constructs in your code and check i
 With this inspection, you can convert *most* of the if-statements to switch. I stated 'most' of the if-statements and not 'all', for a reason. As demonstrated using a lot of examples in the preceding section, you'll notice that at times IntelliJ IDEA won't offer you an option to convert an if-else statement to switch, or it might not convert it the way you have assumed it would. This is due to missing adherence to the multiple rules we talked about in this blog.
 
 To run the inspection 'if can be replaced with switch', you can use the feature – Run inspection by name, using the shortcut Ctrl+Alt+Shift+I or ⌥⇧⌘I. Enter the inspection name, followed by selecting the scope and other options. The Problems Tool window will show you where you can apply this inspection. You can choose to apply or ignore the suggested changes as you browse the list in the Problems View Window.
-![](java17-9-4944cd40.webp)
+![Java sealed interface Expandable with Circle and Square records and a getArea switch expression without a default](java17-9-4944cd40.webp)
 
 We have talked a lot about the pattern matching for switch. Now let's cover sealed classes and interfaces. Added as a standard language feature in Java 17, they haven't changed from Java 16.
 
@@ -564,7 +563,7 @@ The problem code is the assumption that a developer has to deal with in the last
 With the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) sealed, you can **declare** a class as a sealed class. A sealed class uses the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) permits to list the classes that can extend it directly. Its subclasses can either be final, non-sealed*,* or sealed.
 
 The following gif shows how you can use IntelliJ IDEA to change the declaration of a regular class to a sealed class (by using the context action 'Seal class'). By default, IntelliJ IDEA declares all derived classes as non-sealed. You can modify it to be `final` or `sealed`:
-![](https://lh3.googleusercontent.com/wO_grmMXfKLDbfW4olxIRkrdPJRYDhyoWOcoUM-JTZUnlF5D000JrE6vD08gbNAFwabDdZFHVIC9-KPh4GfFCex57Pm2oorXjqZt8gRJEmhTOONJMgsgreeBN5ReK-KGQXlf-Q3D=s0)
+![IntelliJ IDEA editor showing a new empty class Plant in package com.jetbrains.java16.sealedtypes.plants](wO_grmMXfKLDbfW4olxIRkrdPJRYDhyoWOcoUM-JTZUnlF5D000JrE6vD08g-e2d2ee35.gif)
 
 Here's the modified code for reference:
 
@@ -586,7 +585,7 @@ In the past, to prevent classes from being extended, developers created package-
 This is no longer the case if you use sealed classes. The goal of the Sealed types is to model your business domain, so that you process it in a definitive manner.
 
 You can't create another class, say, `AquaticPlant`, that tries to extend the sealed class Plant, without adding it to the permits clause of the class `Plant`. As shown in the following gif, this is a compilation error:
-![](https://lh5.googleusercontent.com/DL4Yi0XavZK8P5ZER2TlX8v-r5CIzBMVjOmmN69bCmRG-Cmq7PS4DBSwoqDKXCZiRv5n2fGvnfnvXTPLzG9VnREFX8sBvA_XCpH6dpmOsLTcIUyOVnr5H0uEC-Reij2g48pHosJW=s0)
+![IntelliJ IDEA editor with a Cucumber class extending Climber and the New Java Class popup listing Class, Interface, Record, Enum and Annotation](DL4Yi0XavZK8P5ZER2TlX8v-r5CIzBMVjOmmN69bCmRG-Cmq7PS4DBSwoqDK-9d03ec08.gif)
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
@@ -648,7 +647,7 @@ final class Cucumber extends Climber {}
 ## **Implicit subclasses**
 
 If you define a sealed class and its derived classes in the same source file, you can omit the contextual keyword permits and the name of the derived classes that are included in the declaration of a sealed class. In this case, the compiler can infer the hierarchy.
-![](https://lh4.googleusercontent.com/xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-pyVH_nQbbOQy-DChZRHSxnuz6_pRZJbug8dPzyiKen4uyILnQg4eSN4Ml_JocWKKQ-9WczN8yy9=s0)
+![IntelliJ IDEA editor with class Shape and Circle and Quadrilateral classes extending it in the same file](xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-dfe99273.gif)
 
 ## **Sealed interfaces**
 
@@ -657,7 +656,7 @@ Unlike classes, interfaces can not define constructors. Before the introduction 
 A sealed interface allows you to explicitly specify the interfaces that can extend it and the classes that can implement it. It follows rules similar to sealed classes.
 
 However, since you can't declare an interface using the modifier final – because doing so would clash with its purpose, as interfaces are meant to be implemented – an inheriting interface can be declared using either sealed or non-sealed modifiers. The permits clause of an interface declaration lists the classes that can directly implement a sealed interface and interfaces that can extend it. An implementing class can be either final, sealed, or non-sealed:
-![](https://lh6.googleusercontent.com/XFTePwAnaj8L5idDHi-mbdAlwluK-guL9z-nVOpCd2y9RIVQc8IxtYH_KZ3jzFMPu82XsAd6mG-gEsWkkrKJzlY8o_7zmjQX9GCp-biUhl5C7kbMo2DvuPyb6wiX7Dmrr_0LSSbO=s0)
+![IntelliJ IDEA editor showing interface Move with Athlete, Jump, Kick and Karate types that a sealed interface would restrict](XFTePwAnaj8L5idDHi-mbdAlwluK-guL9z-nVOpCd2y9RIVQc8IxtYH_KZ3j-20362ff8.gif)
 
 Here's the code for reference:
 
@@ -700,7 +699,7 @@ class UseWritingDevice {
 ```
 
 The following gif demonstrates it in IntelliJ IDEA:
-![](https://lh6.googleusercontent.com/tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcFI_QbXIpKUpDcW15_1Ib0J4eFdtE87btbBakLOrPa2iYeyB96xe26QbMgf2pq0eBAbkje7bF-S887=s0)
+![IntelliJ IDEA code with a sealed class WritingDevice permitting Pen and Pencil, and Pen permitting Marker](tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcF-e55ffb63.gif)
 
 I mentioned that Pattern Matching for switch is introduced as a preview language feature in Java 17. Just in case you are unaware of what preview features mean, I've covered it in the next section.
 

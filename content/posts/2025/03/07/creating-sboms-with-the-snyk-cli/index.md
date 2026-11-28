@@ -1,7 +1,6 @@
 ---
 title: "Creating SBOMs with the Snyk CLI"
 date: "2025-03-07T12:25:36+00:00"
-lastmod: "2025-03-10T15:17:53+00:00"
 description: "The software bill of materials (SBOM) is quickly becoming an essential aspect of open source security and compliance. In this post, we'll delve into what…"
 canonical: "https://snyk.io/blog/creating-sboms-snyk-cli/"
 authors:
@@ -132,7 +131,7 @@ At the time of writing, this is still an experimental feature hence the \`--expe
 * SPDX: JSON version 2.3
 
 Please take a look at the [++Snyk CLI SBOM Test Documentation++](https://docs.snyk.io/snyk-cli/commands/sbom-test) for the latest updates on this feature and other available options.
-![](Creating_SBOMs_with_the_SNyk_CLI_-_origi-928c6946.png)
+![Terminal output of snyk sbom test listing high and critical vulnerabilities in snakeyaml, h2, log4j, Tomcat and Spring dependencies](Creating_SBOMs_with_the_SNyk_CLI_-_origi-928c6946.png)
 
 #### Bomber
 

@@ -1,7 +1,6 @@
 ---
 title: "MicroStream: High-Performance Java-Native-Persistence framework"
 date: "2022-06-06T08:03:02+00:00"
-lastmod: "2022-06-06T08:06:10+00:00"
 description: "MicroStream is the high-performance Java-Native-Persistence framework to overcome database impedance mismatches."
 authors:
   - "rudy-de-busscher"

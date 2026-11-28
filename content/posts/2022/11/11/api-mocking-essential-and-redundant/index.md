@@ -1,7 +1,6 @@
 ---
 title: "API Mocking: Essential and Redundant"
 date: "2022-11-11T08:13:23+00:00"
-lastmod: "2022-11-11T08:13:25+00:00"
 description: "Is API mocking in unit tests important or does it do nothing? The answer is nuanced but we do need such tests to reduce daily churn."
 canonical: "https://debugagent.com/api-mocking-essential-and-redundant"
 authors:
@@ -19,12 +18,12 @@ I love contradictions where both states of truth can work at the same time.
 
 Case in point is this tweet about mocking from the other week:
 
-![](Screen-Shot-2022-10-25-at-14.53.38-700x263.png)
+![Tweet by Maxi Contieri: 'If you use mocks, you are not testing.'](Screen-Shot-2022-10-25-at-14.53.38-700x263.png)
 > [If you use mocks, you are not testing](https://twitter.com/mcsee1/status/1582762075289374720)
 
 My answer was:
 
-![](Screen-Shot-2022-10-25-at-14.55.58-700x457.png)
+![Tweet reply by Shai Almog arguing mocks are a fast, essential part of a wider quality strategy, though not enough alone](Screen-Shot-2022-10-25-at-14.55.58-700x457.png)
 > \[Mocks help assert limited fixed functionality and they do it FAST.
 >
 > Which is what unit tests are about. Mocks are an essential part of a wider quality strategy. Otherwise you will spend your time in integration test churn.

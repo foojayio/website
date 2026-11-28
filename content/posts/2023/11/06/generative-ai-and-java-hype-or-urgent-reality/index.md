@@ -1,7 +1,6 @@
 ---
 title: "Generative AI and Java - hype or urgent reality?"
 date: "2023-11-06T07:59:04+00:00"
-lastmod: "2023-11-06T11:17:35+00:00"
 description: "AI and Java what is there?, what can it do?, what do we want it to do?, Asking for your input readers. Share your thoughts at Foojay.io"
 authors:
   - "steve-poole"
@@ -19,7 +18,7 @@ related_posts:
   - "foojay-io-at-fosdem-2023-trip-report"
 ---
 
-![](image1-700x272.jpg)
+![AI-generated illustration of a robot face split between warm orange and cool blue halves](image1-700x272.jpg)
 
 It's hard to grasp that it's been about a year since Chat GPT and other generative AI tools burst onto the scene. We're all still grappling with, well, everything about them. Whatever equilibrium we eventually find, it's clear that the world is changing. The whole world mind, not just the IT industry.
 

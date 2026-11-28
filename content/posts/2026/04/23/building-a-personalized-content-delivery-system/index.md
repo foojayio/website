@@ -1,7 +1,6 @@
 ---
 title: "Building a Personalized Content Delivery System"
 date: "2026-04-23T15:10:45+00:00"
-lastmod: "2026-04-23T15:10:47+00:00"
 description: "Recommendation engines have a reputation for requiring specialized ML infrastructure: matrix factorization pipelines, training jobs, and model serving layers. That is one way to do it, but not the only way. If your data already lives in MongoDB and your application runs on Spring Boot, you can build a practical recommendation system using tools you already have. MongoDB aggregation pipelines handle the scoring math server-side, and Atlas Vector Search adds semantic matching without a separate vector database."
 authors:
   - "farhan-chowdhury"
@@ -9,7 +8,6 @@ image: "Screenshot-2026-04-17-at-1.21.56-PM.png"
 categories:
   - "AI"
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
@@ -275,7 +273,7 @@ You could pull every game into the application and compute scores in Java, but t
 3. Use `$filter` on the key-value pair array to keep only entries whose key appeared in the intersection, then use `$reduce` to sum their values into a single score.
 4. Add the computed score as a new field with `$addFields` and sort by score descending.
 
-![](Screenshot-2026-04-17-at-1.25.13-PM.png)
+![Flowchart of the scoring pipeline: convert preferences, intersect genres, filter and reduce to a score, then sort](Screenshot-2026-04-17-at-1.25.13-PM.png)
 
 Since the pipeline references the user's preferences as literal values (not fields from the games collection), you need to build it dynamically in Java. Here is the `RecommendationService`:
 
@@ -439,7 +437,7 @@ That gives it a total score of 3.1. Compare that to *Hollow Knight*, which score
 ## 4. User ratings and affinity adjustment
 
 The recommendation engine works, but the preference weights are static. A user sets their initial preferences once, and the system never learns from their behavior. You need a ratings endpoint that lets users score games they have played, and adjustment logic that updates preference weights based on those ratings.  
-![](Screenshot-2026-04-17-at-1.26.02-PM.png)
+![Flowchart of rating adjustment: 4-5 stars raise a preference weight, 1-2 lower it, 3 changes nothing, then recommendations recalculate](Screenshot-2026-04-17-at-1.26.02-PM.png)
 
 ### Ratings endpoint
 
@@ -943,7 +941,7 @@ The response now includes all three scores for each game:
 
 ### Recommendation flow
 
-![](Screenshot-2026-04-17-at-1.26.35-PM.png)
+![Diagram merging content-based scoring and vector similarity into a 0.6/0.4 weighted, ranked recommendation list](Screenshot-2026-04-17-at-1.26.35-PM.png)
 
 The combined system follows this flow: user preferences and ratings feed into the content-based scoring pipeline, which computes a score for each game using MongoDB aggregation. In parallel, the user's top preferences are converted to a text summary and passed through the embedding model to produce a query vector. MongoDB Atlas Vector Search uses that vector to find semantically similar games. Both sets of scores are normalized and merged using the weighted formula, and the final output is a single ranked list of recommendations sorted by combined score.
 

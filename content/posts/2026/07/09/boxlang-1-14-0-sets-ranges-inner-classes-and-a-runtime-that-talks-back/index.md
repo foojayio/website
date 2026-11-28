@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.14.0: Sets, Ranges, Inner Classes, and a Runtime That Talks Back"
 date: "2026-07-09T18:02:59+00:00"
-lastmod: "2026-07-10T13:46:44+00:00"
 description: "BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a…"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "BoxLang-release-1.14.0-1701-x-1701-px-4-1024x1024.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Release Notes"
 related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
@@ -18,7 +16,7 @@ related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 ---
 
-![](BoxLang-release-1.14.0-4-700x394.jpg)
+![BoxLang Release 1.14.0 banner with the title 'Sets, Ranges, Inner Classes, and a Runtime That Talks Back'](BoxLang-release-1.14.0-4-700x394.jpg)
 
 BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a modern dynamic JVM language looks like on its own terms. Sixty-five issues closed. Four innovative language features. A formatter that has grown up. And a companion module - `bx-mcp` - that fundamentally changes how you operate a running BoxLang application with AI.
 

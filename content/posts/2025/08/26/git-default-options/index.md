@@ -1,7 +1,6 @@
 ---
 title: "Git default options"
 date: "2025-08-26T11:59:57+00:00"
-lastmod: "2025-08-26T12:01:52+00:00"
 description: "In this post, we describe the default of two of the most common Git commands. I hope it sheds some light on them."
 canonical: "https://blog.frankel.ch/git-default-options/"
 authors:

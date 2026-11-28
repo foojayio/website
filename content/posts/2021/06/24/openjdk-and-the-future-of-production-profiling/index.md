@@ -1,7 +1,6 @@
 ---
 title: "OpenJDK and the Future of Production Profiling"
 date: "2021-06-24T08:46:28+00:00"
-lastmod: "2021-06-24T08:49:34+00:00"
 description: "With changes in the Java (and the computing) ecosystem, JFR has some loom-ing challenges to remain relevant for the future!"
 canonical: "http://hirt.se/blog/?p=1318"
 authors:

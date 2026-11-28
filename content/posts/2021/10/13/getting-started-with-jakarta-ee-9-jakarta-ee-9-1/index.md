@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Jakarta EE 9: Jakarta EE 9.1"
 date: "2021-10-13T08:02:33+00:00"
-lastmod: "2021-10-13T08:13:14+00:00"
 description: "Jakarta EE 9.1 was released at the end of May 2021 with the goal to provide certification on Java SE 11 and not to deliver new features."
 canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-jakarta-ee-9.1"
 authors:

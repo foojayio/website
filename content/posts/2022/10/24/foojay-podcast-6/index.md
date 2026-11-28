@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #6: Welcome to Foojay!"
 date: "2022-10-24T15:50:35+00:00"
-lastmod: "2025-11-13T09:22:43+00:00"
 description: "Let's look back and what has happened on Foojay during the last 2,5 years and talk to some of the people behind the project."
 authors:
   - "bazlur-rahman"

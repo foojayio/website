@@ -8,7 +8,6 @@ image: "fj_art1_results_5.jpg"
 categories:
   - "Debugging"
   - "Design Patterns"
-  - "Java"
   - "Kafka"
   - "Performance"
   - "Profiler"
@@ -39,7 +38,7 @@ That's the real art of performance tuning — not chasing milliseconds, but seei
 
 A remarkable study comparing the [energy efficiency of 27 programming languages](https://appdevelopermagazine.com/how-27-programming-languages-differ-in-energy-consumption/ "energy efficiency of 27 programming languages") quantified what many of us intuitively know: language choice matters — not just for speed, but for environmental impact.
 
-![](fj_art1_table1-700x283.png)
+![Table comparing languages' energy use relative to C: Java about 1.5-2x, Python about 50x, Ruby/PHP about 40x](fj_art1_table1-700x283.png)
 
 That's not a typo — for the exact same algorithm, Python can consume 50× more energy than C. Java sits somewhere in between — but that's only when we write efficient code. Badly written Java can easily behave like a scripting language on a caffeine overdose.
 
@@ -82,7 +81,7 @@ A colleague once told me, "Our validation layer runs slower than our database qu
 *Using exceptions for logic is like calling an ambulance to check if you have a pulse — technically correct, but grossly inefficient.*
 
 This is where the journey begins — three datasets, each one messier than the last, with more incorrect or malformed entries.
-![](fj_art1_results_1-700x247.png)
+![Bar chart of the original code in Kirk Pepperdine's challenge: 832, 2177 and 3580 ms across three datasets](fj_art1_results_1-700x247.png)
 
 ### Step Two – The RegExp Trap
 
@@ -103,7 +102,7 @@ public static boolean checkIntegerRegExp(String testInteger) {
 ```
 
 It looked elegant and safe. And it was slower. Much slower.
-![](fj_art1_results_2-700x273.png)
+![Bar chart: the RegExp version of CheckInteger is slower than the original on datasets 1 and 3 (2775 vs 832 ms, 3670 vs 3580 ms)](fj_art1_results_2-700x273.png)
 
 **Why RegExp Can Be a Trojan Horse**
 
@@ -135,7 +134,7 @@ public static boolean checkIntegerIsDigit(String testInteger) {
 ```
 
 Performance immediately improved — **by an order of magnitude.**
-![](fj_art1_results_3-700x345.png)
+![Bar chart: the isDigit version cuts times to 235, 109 and 223 ms, far below the original and RegExp versions](fj_art1_results_3-700x345.png)
 
 Why? Because the CPU loves predictability.
 
@@ -178,7 +177,7 @@ public static int fastParseInt(String s) {
 ```
 
 This handcrafted version was roughly 2× faster than Character.isDigit(). Why? No method calls, no Unicode overhead, no irrelevant checks.
-![](fj_art1_results_4-700x368.png)
+![Bar chart: the CustomIsDigit version is faster still, at 149, 107 and 88 ms](fj_art1_results_4-700x368.png)
 
 But that improvement came with a trade-off. The code was less general, less future-proof, and slightly harder to read. I've seen similar patterns in production. In one low-latency financial system, we replaced Integer.parseInt() in a critical path that processed millions of messages per second. The gain was 300 ms per million messages. Trivial in isolation, transformative at global scale.
 
@@ -212,7 +211,7 @@ public static boolean checkIntegerFinal(String testInteger) {
 ```
 
 This version delivered 10× to 50× better performance than the original — nearly matching Kirk's own unrolled switch-case variant (labeled as Best on a chart below).
-![](fj_art1_results_5-700x411.png)
+![Bar chart: the Final version reaches 101, 84 and 71 ms, close to the Best version at 96, 64 and 64 ms](fj_art1_results_5-700x411.png)
 
 At that point, I realized something: The process of optimization itself teaches more than the final result. Each step — exception removal, regex replacement, loop simplification — peeled away layers of waste. The outcome wasn't just faster code. It was clearer thinking.
 

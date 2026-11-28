@@ -32,31 +32,21 @@
      Google penalises. Every other layout has a real, visible <h1>. */}}
 <h1 class="visually-hidden">{{ site.Title }}</h1>
 
-{{/* The one-line masthead strapline, and the only prose on the home page.
-
-     Above the fold rather than in a band at the foot, because the reader it
-     exists for has never been here before and decides what this site is
-     within a screen.
-
-     ONE LINE and not a hero, because the header already carries "Friends Of
-     OpenJDK" and the "Write for Foojay" CTA -- so this owes the reader only
-     what neither gives, and must not spend the lead article's fold space. The
-     header tag is `display: none` below 1120px, so on a phone this is the only
-     thing that expands "foojay.io" at all.
-
-     THE SENTENCE IS DERIVED from /what-is-foojay/'s own description, so the
-     home page cannot describe Foojay differently from the page it sends you
-     to for the long version. `with` on the lookup, so removing that page
-     gives no strip rather than an empty bar. */}}
-{{ with site.GetPage "/pages/what-is-foojay" }}
+{{/* Above the fold because a first-time visitor decides what this is within a
+     screen. Kept to one strip, since the lead article must not lose its fold
+     space; the header's "Friends Of OpenJDK" tag is hidden below 1120px, so on
+     a phone this line is what says what the site is. */}}
 <div class="home-intro">
   <div class="shell home-intro__row">
-    <p>{{ partial "meta-description.html" . }} <a href="{{ .RelPermalink }}">What is Foojay? &rarr;</a></p>
-    {{/* Beside the strapline, above the fold, where a subscriber looks. */}}
-    {{ partial "feed-link.html" site.Home }}
+    <p>Daily Java news, OpenJDK release data and hands-on tutorials, free from the Java community.</p>
+    <div class="home-intro__actions">
+        {{ partial "feed-link.html" site.Home }}
+        <a class="btn btn--ghost btn--sm" href="{{ "java-quick-start/install-java/" | relURL }}">Install Java</a>
+        <a class="btn btn--ghost btn--sm" href="{{ "java-quick-start/quick-start-tutorial/" | relURL }}">New to Java?</a>
+        <a class="btn btn--accent btn--sm" href="{{ "today/" | relURL }}">Read the news</a>
+    </div>
   </div>
 </div>
-{{ end }}
 
 <div class="layout-with-sidebar">
   <div class="content-col">

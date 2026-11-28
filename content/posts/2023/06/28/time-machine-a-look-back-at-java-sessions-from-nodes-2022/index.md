@@ -1,7 +1,6 @@
 ---
 title: "Time Machine: A Look-Back at Java Sessions from NODES 2022"
 date: "2023-06-28T07:53:07+00:00"
-lastmod: "2024-01-09T12:59:25+00:00"
 description: "As we prepare for NODES 2023, let's pull out the time machine and review the Java sessions from NODES 2022."
 authors:
   - "jennifer-reif"
@@ -18,8 +17,6 @@ related_posts:
   - "journeys-in-java-level-6-build-a-neo4j-microservice"
   - "ai4devs-schedule-published"
 ---
-
-![Base Photo by Compare Fibre on Unsplash](nodes2023-java-scaled.jpg)
 
 Figure 1. Base Photo by Compare Fibre on Unsplash
 

@@ -1,7 +1,6 @@
 ---
 title: "Building Project Panama's jextract tool by yourself"
 date: "2022-06-09T14:22:47+00:00"
-lastmod: "2022-07-09T19:42:01+00:00"
 description: "Learn about jextract, which can generate Java binding code that represents native functions or variables (symbols) from C libraries."
 authors:
   - "carldea"
@@ -74,7 +73,7 @@ Note: If you have installed the JDK using SDKMan than you can skip to the **jext
 If you want to do install the JDK the old fashioned way follow the instructions below:
 
 Head over to the early access release of **JDK 19** site to [download the latest build](https://jdk.java.net/19/) for your operating system as shown below.
-![](Screen-Shot-2022-07-09-at-3.24.37-PM.png) OpenJDK JDK 19 Early-Access Builds Download Page
+![OpenJDK JDK 19 early-access builds page listing build 30 tar.gz and zip downloads for each platform](Screen-Shot-2022-07-09-at-3.24.37-PM.png) OpenJDK JDK 19 Early-Access Builds Download Page
 
 After [downloading JDK 19](https://jdk.java.net/19/) decompress the file into a directory and set the `JAVA_HOME` and `PATH` environment variables as follows:
 
@@ -104,7 +103,7 @@ cd jextract
 ```
 
 **Note:** It is preferable that you fork the project and then clone your fork of the project. That way you can provide pull requests whenever you find a bug to fix or a proposed enhancement to the project. But if you just want to build from master branch or a previous branch you can simply clone `jextract`'s main repo as shown below:
-![](Screen-Shot-2022-06-06-at-3.03.47-PM.png)
+![GitHub Code menu on the jextract repository with the SSH clone URL git@github.com:openjdk/jextract.git](Screen-Shot-2022-06-06-at-3.03.47-PM.png)
 
 Assuming your still in the directory of the repository you've just cloned (`./jextract`) next you'll download and install LLVM before building the `jextract` project.
 
@@ -133,7 +132,7 @@ build/jextract/lib
 ```
 
 The JDK with `jextract` build directory should look like the following:
-![](Screen-Shot-2022-06-06-at-3.26.33-PM.png)
+![Finder window of the jextract build folder, with the jextract directory containing bin, conf, include, legal and lib](Screen-Shot-2022-06-06-at-3.26.33-PM.png)
 
 ## Re-setting the `JAVA_HOME` and `PATH` environment variables
 

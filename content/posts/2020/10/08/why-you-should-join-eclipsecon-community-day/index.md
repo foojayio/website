@@ -1,7 +1,6 @@
 ---
 title: "Why You Should Join EclipseCon Community Day"
 date: "2020-10-08T06:46:57+00:00"
-lastmod: "2020-11-25T09:23:51+00:00"
 description: "EclipseCon Community Day is on Monday, October 19 14:00 to 18:00 CET (the day before the start of the main EclipseCon conference)."
 canonical: "https://reza-rahman.me/2020/10/06/why-you-should-join-eclipsecon-community-day"
 authors:
@@ -16,7 +15,7 @@ related_posts:
 EclipseCon Community Day is on Monday, October 19 14:00 to 18:00 CET (the day before the start of the main EclipseCon conference). Community Day at EclipseCon has always been a great event for Eclipse working groups and project teams. This year both EclipseCon and Community Day is virtual and free. Space for Community Day is limited, so please [register](https://www.eclipsecon.org/2020/registration) and save your spot soon.
 
 We have a packed agenda centered on the Jakarta EE, MicroProfile and Cloud Native Java communities. If there is a set of very focused sessions you should attend on these topics, the agenda offers the one place this year to do so. The sessions are intended not only for learning, but also for the community to actively engage with some key leaders. Note, after you register for EclipseCon, you will need to reserve your spot for Community Day through the Swapcard platform (let me know if you run into any issues).
-![](jakartaee_logo-1024x308.jpg) ![](microprofile.jpg)
+![Jakarta EE logo with a stylised yellow and blue sailboat](jakartaee_logo-1024x308.jpg) ![MicroProfile logo with the tagline 'Optimizing Enterprise Java'](microprofile.jpg)
 
 Myself, Werner Keil and Thodoris Bais are organizing on behalf of the community. We are grateful to have a very strong line-up both in terms of speakers and content. Below is a very good snapshot. Please note that all times are Central European Time (CET).
 

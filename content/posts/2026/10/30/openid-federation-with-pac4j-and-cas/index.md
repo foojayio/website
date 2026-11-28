@@ -6,7 +6,6 @@ authors:
   - "jerome-leleu"
 image: "openid-federation-pac4j-cas.jpg"
 categories:
-  - "Java"
   - "Security"
   - "Tutorials"
 canonical: "https://www.pac4j.org/blog/openid_federation_with_pac4j_and_cas.html"
@@ -568,29 +567,21 @@ Package each CAS overlay with `mvn clean package`, then start `java -jar target/
 
 With the RP, OP and TA started, we call `http://localhost:8081` in the browser:
 
-<p align="center">
-  <img src="https://www.pac4j.org/img/blog/2026_10/pac4j_before.png" alt="pac4j home page" width="360" />
-</p>
+![pac4j home page](https://www.pac4j.org/img/blog/2026_10/pac4j_before.png)
 
 Then, we click on the "Protected area" link.
 
 On the CAS server login page, we use the pre-defined user: `casuser` / `Mellon` to log in:
 
-<p align="center">
-  <img src="https://www.pac4j.org/img/blog/2026_10/cas_login.jpg" alt="CAS login page" width="675" />
-</p>
+![CAS login page](https://www.pac4j.org/img/blog/2026_10/cas_login.jpg)
 
 and we validate the authorizations:
 
-<p align="center">
-  <img src="https://www.pac4j.org/img/blog/2026_10/cas_authorize.jpg" alt="CAS authorization page" width="675" />
-</p>
+![CAS authorization page](https://www.pac4j.org/img/blog/2026_10/cas_authorize.jpg)
 
 And it works:
 
-<p align="center">
-  <img src="https://www.pac4j.org/img/blog/2026_10/pac4j_after.jpg" alt="pac4j authenticated page" width="675" />
-</p>
+![pac4j authenticated page](https://www.pac4j.org/img/blog/2026_10/pac4j_after.jpg)
 
 We are finally logged in to the pac4j application thanks to the OpenID Federation protocol and the two CAS server nodes.
 

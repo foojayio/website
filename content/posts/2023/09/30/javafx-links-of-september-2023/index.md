@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of September 2023"
 date: "2023-09-30T15:21:12+00:00"
-lastmod: "2023-10-01T15:21:26+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheWeek that got published on jfx-central.com during September."
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "Hidden Beauties of Java Enums"
 date: "2023-04-11T07:02:08+00:00"
-lastmod: "2023-07-28T08:00:40+00:00"
 description: "Java enums can contain much more than just a list of definitions, but also data and extended functionality!"
 canonical: "https://webtechie.be/post/2023-03-22-hidden-beauties-of-java-enums/"
 authors:
@@ -45,9 +44,9 @@ A few of my "pet projects" make extensive use of Java enums, and while working o
 Let's take a look at a few of these use cases.
 
 {{< gallery >}}
-pi4j-940x1024.png
-lottie4j-1024x638.png
-4drums-1024x832.jpg
+pi4j-940x1024.png | | Pi4J web app showing Raspberry Pi board information for the Pi 4 Model B, with its specs and 40-pin header
+lottie4j-1024x638.png | | IntelliJ IDEA showing the Composite enum in the lottie4j core module, with values ABOVE and BELOW
+4drums-1024x832.jpg | | 4Drums web app listing drum videos, with the category dropdown open showing Spectacular, Tutorial and Newbie
 {{< /gallery >}}
 
 ### Raspberry Pi Boards in an Enum Database

@@ -1,7 +1,6 @@
 ---
 title: "Building JavaFX with Gradle"
 date: "2023-01-05T11:32:24+00:00"
-lastmod: "2023-01-05T21:20:18+00:00"
 description: "I decided to create two Gradle build scripts that apply to modular and non-modular Java projects. Take a look -- what do you think?"
 authors:
   - "michael-gasche"

@@ -1,7 +1,6 @@
 ---
 title: "Community Spotlight: BoxLang Express Brings Node-Style HTTP to the JVM"
 date: "2026-09-08T11:25:18+00:00"
-lastmod: "2026-09-08T11:25:22+00:00"
 description: "If you've spent years in Spring Boot, Micronaut, or Jakarta EE, \"web framework\" usually means a servlet container, an embedded Tomcat or Netty, a build…"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "Captura-de-pantalla-2026-09-08-132152.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Microservices"
   - "Tools"
@@ -20,7 +18,7 @@ related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 ---
 
-![](boxlang-express-700x373.jpg)
+![BoxLang Express promotional graphic: fast, minimal, powerful web framework for BoxLang inspired by Express.js, with its feature highlights](boxlang-express-700x373.jpg)
 
 If you've spent years in Spring Boot, Micronaut, or Jakarta EE, "web framework" usually means a servlet container, an embedded Tomcat or Netty, a build step, and a fat jar before anything answers a request. What if you could skip all of that and still be on the JVM?
 

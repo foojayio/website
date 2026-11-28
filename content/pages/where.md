@@ -3,11 +3,6 @@ title: "Where to Find Friends Of OpenJDK"
 description: "Every place the Foojay community lives: articles, podcasts, videos, Slack, newsletters and events."
 url: "/where/"
 aliases:
-  # WordPress serves an empty /forum/ page -- a stub with no body, the
-  # placeholder Yoast title, and no entry in data/legacy-views.json, but it is
-  # in the page sitemap and its own counter shows 618 visits since 2023. There
-  # is no forum to rebuild, so this page -- every place the community actually
-  # is, Slack included -- is where those visitors were looking to end up.
   - "/forum/"
 ---
 

@@ -13,12 +13,11 @@ for (const scheme of ['light', 'dark']) {
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect(panel).toBeVisible();
     expect(await panel.getByRole('link').evaluateAll(links => links.map(a => new URL(a.href).pathname))).toEqual([
-      '/pedia/', '/java-quick-start/other-tutorials/',
       '/java-quick-start/install-java/',
       ...['install-java-on-windows', 'install-java-on-macos', 'install-java-on-linux', 'check-your-java-installation', 'find-another-java-version'].map(slug => `/java-quick-start/install-java/${slug}/`),
       '/java-quick-start/quick-start-tutorial/',
       ...['choosing-an-editor', 'hello-world', 'using-the-arguments', 'working-with-numbers', 'if-then-else', 'enum-and-switch', 'using-methods', 'using-objects', 'reading-a-text-file', 'using-streams', 'whats-next'].map(slug => `/java-quick-start/quick-start-tutorial/${slug}/`),
-      '/java-quick-start/',
+      '/java-terms-explained/', '/java-quick-start/other-tutorials/',
     ]);
     await page.keyboard.press('Tab');
     await expect(panel.getByRole('link').first()).toBeFocused();

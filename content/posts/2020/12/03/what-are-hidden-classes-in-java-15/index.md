@@ -1,7 +1,6 @@
 ---
 title: "What are Hidden Classes in Java 15 And How Are They Used?"
 date: "2020-12-03T10:15:18+00:00"
-lastmod: "2021-08-23T15:16:10+00:00"
 description: "Hidden classes allow frameworks to define classes as non-discoverable implementation details, so that they cannot be linked against. Read on!"
 canonical: "https://jfeatures.com/blog/HiddenClass"
 authors:
@@ -149,7 +148,7 @@ Knowing language features like this helps you get the best java jobs, that's why
 
 Download this step by step guide for free!
 
-[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
+[![Ebook cover '5 Steps to Best Java Jobs' by Vipin Sharma, showing hands typing on a laptop with green binary code](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

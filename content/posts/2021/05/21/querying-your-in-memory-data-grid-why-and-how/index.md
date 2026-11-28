@@ -1,7 +1,6 @@
 ---
 title: "Querying Your In-Memory-Data-Grid: Why and How?"
 date: "2021-05-21T07:11:28+00:00"
-lastmod: "2021-05-21T07:11:31+00:00"
 description: "In this article, I'd like to describe how you can take advantage of Hazelcast to query your cached data in different ways and still be fast."
 canonical: "https://hazelcast.com/blog/querying-your-imdg-why-and-how/"
 authors:
@@ -167,11 +166,11 @@ Indexing data is not (only!) related to databases and how one stores data on dis
 
 While it's faster to execute the flow in-memory than reading from a disk, it's not optimal. The solution is to create a dedicated data structure that stores additional information: an index. You can imagine an index as a sort of Key-Value store. The key is the value of the attribute, and the value the collection of keys from entries whose attribute's value matches the value.
 
-![](index-800x649-1-629x510.png)
+![Hand-drawn diagram of a key-value table of seven rows next to an inverted index mapping foo, bar and baz to their keys](index-800x649-1-629x510.png)
 
 Now, when we query for entries whose value match "foo", the engine will look at the index, locate the key "foo", read the value, and look for entries whose keys are "a", "c" and "e". Of course, this is a pretty simple example. Since Hazelcast allows you to store complex values such as JSON and `Portable`, you can set an index on any attribute (or nested attribute).
 
-![](complex-structure-800x572-1-700x501.png)
+![Hand-drawn table of five entries with JSON values such as comp button, range and text, used as the data to index](complex-structure-800x572-1-700x501.png)
 
 Here, you'd be able to set an index on the "comp" attribute or the "t" attribute. You should carefully evaluate on which attribute to set an index, though, as indexes have two main downsides:
 

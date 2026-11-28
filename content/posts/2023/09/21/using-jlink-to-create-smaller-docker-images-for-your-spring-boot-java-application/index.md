@@ -1,14 +1,12 @@
 ---
 title: "Using JLink to create smaller Docker images for Spring Boot apps"
 date: "2023-09-21T11:33:05+00:00"
-lastmod: "2023-09-21T11:50:01+00:00"
 description: "An in-depth exploration of utilizing JLink to optimize Docker image sizes, enhancing application security and performance."
 canonical: "https://snyk.io/blog/jlink-create-docker-images-spring-boot-java/"
 authors:
   - "bmvermeer"
 image: "snyk-logo.png"
 categories:
-  - "Java"
   - "Security"
   - "Snyk"
 related_posts:

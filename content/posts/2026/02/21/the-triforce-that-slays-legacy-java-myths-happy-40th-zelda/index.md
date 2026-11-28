@@ -1,7 +1,6 @@
 ---
 title: "The Triforce That Slays Legacy Java Myths – Happy 40th Zelda!"
 date: "2026-02-21T18:13:03+00:00"
-lastmod: "2026-02-21T18:17:57+00:00"
 description: "Happy 40th Anniversary to The Legend of Zelda! 🎉🗡️ Today, February 21, 2026, marks exactly 40 years since the original game launched in Japan on February…"
 authors:
   - "igor-de-souza"
@@ -11,7 +10,7 @@ categories:
 related_posts:
 ---
 
-![](zelda01-1024x683.png)
+![Java mascot Duke dressed as Link from Zelda, holding a sword and Hylian shield](zelda01-1024x683.png)
 
 #### Happy 40th Anniversary to **The Legend of Zelda**! 🎉🗡️
 
@@ -51,7 +50,7 @@ By reducing object header size from between 96 and 128 bits to only 64-bit, comp
 
 The payoff is especially clear in object-heavy workloads and memory-constrained environments, such as those found in containers and cloud-native deployments.
 
-![](zelda02.jpg)
+![Duke in a Link-style green hat and tunic against a parchment map background](zelda02.jpg)
 
 ### From 8-Bit to Open World – A Parallel Journey Java Has Leveled Up (Evolved)
 
@@ -61,7 +60,7 @@ A community project called [java.evolved](https://javaevolved.github.io/ "java.e
 
 So like Zelda and Java evolved, you and your code can evolve as well.
 
-![](zelda03-1024x640.jpg)
+![Duke wearing a Zelda-style cap with hands on hips, standing in a grassy Hyrule landscape with a castle behind](zelda03-1024x640.jpg)
 
 So next time someone says: "Java is slow", you can answer: That was the 8-bit era and we're in the open-world era now.
 

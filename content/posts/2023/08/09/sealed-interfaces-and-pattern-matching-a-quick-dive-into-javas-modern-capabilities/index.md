@@ -1,7 +1,6 @@
 ---
 title: "Sealed Interfaces & Pattern Matching: Java's Modern Capabilities"
 date: "2023-08-09T07:01:51+00:00"
-lastmod: "2023-08-09T07:08:11+00:00"
 description: "Sealed classes and interfaces with pattern matching provide powerful new tools for more explicit, controlled, and flexible design in Java."
 authors:
   - "bazlur-rahman"

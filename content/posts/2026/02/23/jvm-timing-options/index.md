@@ -1,14 +1,12 @@
 ---
 title: "JVM timing options"
 date: "2026-02-23T16:45:39+00:00"
-lastmod: "2026-09-21T05:58:59+00:00"
 description: "For as long as I have been coding in Java, we have had requirements to measure the execution time of blocks of code. While the current good practice is to…"
 canonical: "https://blog.frankel.ch/jvm-timing-options/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
 ---

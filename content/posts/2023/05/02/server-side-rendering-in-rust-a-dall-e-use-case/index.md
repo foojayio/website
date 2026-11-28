@@ -1,7 +1,6 @@
 ---
 title: "Server-side rendering in Rust - a Dall.E use-case"
 date: "2023-05-02T11:03:06+00:00"
-lastmod: "2026-09-21T06:04:55+00:00"
 description: "Last week, I decided to see the capabilities of OpenAI's image generation. However, I noticed that one has to pay to use the web interface, while the API…"
 canonical: "https://blog.frankel.ch/server-side-rendering-rust/"
 authors:
@@ -79,7 +78,7 @@ async fn main() {
 
 Here are the base items:
 
-{{< img src="axum-template-api-700x310.png" class="aligncenter size-medium" width="700" height="310" >}}
+{{< img src="axum-template-api-700x310.png" alt="UML class diagram of the axum_template crate with Engine, Key and RenderHtml, where RenderHtml implements IntoResponse" class="aligncenter size-medium" width="700" height="310" >}}
 
 * `Engine` is a facade over the templating library
 * Templates are stored in a hashtable-like structure. With the MiniJinja implementation, according to the configuration above, `Key` is simply the filename, *e.g.* , `home.html`
@@ -130,7 +129,7 @@ docker run -it --rm -p 3000:3000 -e OPENAI_TOKEN=... nfrankel/rust-dalle:0.1.0
 
 Enjoy!
 
-![](rust-dalle.jpg)
+![Rust Dall-E web app with a prompt about a hacker in a hoodie and four generated images](rust-dalle.jpg)
 
 ## Conclusion
 

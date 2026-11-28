@@ -1,7 +1,6 @@
 ---
 title: "Gear Up for NODES 2024: What to Know"
 date: "2024-10-03T17:00:46+00:00"
-lastmod: "2024-10-03T17:02:26+00:00"
 description: "NODES is a free, virtual conference run by Neo4j for developers, data scientists, and other technical roles who want to learn more about graph databases and how they can be used to solve complex problems."
 authors:
   - "jennifer-reif"

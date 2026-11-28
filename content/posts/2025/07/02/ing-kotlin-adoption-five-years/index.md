@@ -1,14 +1,12 @@
 ---
 title: "Kotlin adoption inside ING, five years later"
 date: "2025-07-02T06:21:47+00:00"
-lastmod: "2025-07-02T06:24:15+00:00"
 description: "TL;DR : 5 years after its introduction Kotlin adoption inside ING keeps growing year after year, with a current adoption rate of just over 11%."
 canonical: "https://medium.com/ing-blog/kotlin-adoption-inside-ing-5-years-later-df6421b14dc4"
 authors:
   - "jlengrand"
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
-  - "Java"
   - "Kotlin"
   - "Opinion"
   - "Use Cases"
@@ -137,10 +135,10 @@ Using this dataset, I find that **just over 11% of inner-source repositories tha
 
 Before closing this blog, I want to finish with a few testimonials from our internal engineers. While preparing for the Keynote video and this blog, I've been asking around _why_ people were choosing for Kotlin over another JVM language. What made the language so compelling. Here are a few of their answers (please get ready for dry and nerdy developer humor!).
 
-![](11-700x80.webp)  
-![](12-700x78.webp)  
-![](13-700x70.webp)  
-![](14-700x136.webp)
+![Colleague's comment praising Kotlin coroutines as cleaner and faster than old Scala code](11-700x80.webp)  
+![Colleague's comment on writing a backend API in Kotlin, praising syntactic sugar and explicit null handling](12-700x78.webp)  
+![Colleague's comment comparing the move from Java Futures to Kotlin Coroutines to Morrowind versus Skyrim](13-700x70.webp)  
+![Engineer's comment that Kotlin reduced boilerplate and maintenance and its SDK sped up development with collections and coroutines](14-700x136.webp)
 
 ## A word of conclusion
 

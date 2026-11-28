@@ -6,7 +6,6 @@ authors:
   - "loic-mathieu"
 image: "Flaky-test.jpg"
 categories:
-  - "Java"
   - "Testing"
 related_posts:
   - "offline-crypto-address-validation-in-java"

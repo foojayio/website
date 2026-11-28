@@ -1,7 +1,6 @@
 ---
 title: "Payara Cloud Hackathon is Open for Sign-ups!"
 date: "2024-03-07T13:53:56+00:00"
-lastmod: "2024-03-07T13:55:37+00:00"
 description: "We're excited to announce that the 2nd edition of Payara Hackathon is now open for sign ups!"
 canonical: "https://www.payara.fish/page/payara-hackathon-2024/"
 authors:
@@ -54,4 +53,4 @@ Winners will be spotlighted across our platforms, earn money prizes, and present
 5. You have up to 31 March midnight GMT to deploy your app to Payara Cloud and submit your entry details – all final submission info will be emailed to you on Day 1 of the Hackathon.
 6. Winners will be notified via email and publically announced by the end of April 2024.
 
-[![](image-1024x576.jpg)](https://www.payara.fish/page/payara-hackathon-2024/)
+[![Pixel-art poster for the Payara Hackathon: a glowing light bulb between stage curtains, 11th-31st March, win up to £3000](image-1024x576.jpg)](https://www.payara.fish/page/payara-hackathon-2024/)

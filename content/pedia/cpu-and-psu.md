@@ -1,7 +1,9 @@
 ---
 title: "CPU and PSU"
 description: "From Java 9 onward, Oracle moved to a six-month release cadence, releasing a new JDK version every March and September. Security patches, bug fixes, and critical updates are delivered in three ways: CPU (Critical Patch Update) — Oracle's quarterly security ..."
-url: "/pedia/cpu-and-psu/"
+url: "/java-terms-explained/cpu-and-psu/"
+aliases:
+  - "/pedia/cpu-and-psu/"
 ---
 
 From Java 9 onward, Oracle moved to a **six-month release cadence**, releasing a new JDK version every March and September. Security patches, bug fixes, and critical updates are delivered in three ways:
@@ -16,7 +18,7 @@ These terms originated in the Java 8 / Java 11 support era when Oracle published
 
 Since Java 17, Oracle JDK is free to use in production under the Oracle No-Fee Terms and Conditions (NFTC). Free updates are provided for Oracle JDK only until the next LTS release ships. After that, continued Oracle JDK updates require a commercial Java SE subscription.
 
-Distributions from Adoptium (Temurin), Azul, Amazon Corretto, Red Hat, BellSoft, and others provide free LTS updates under open-source licences (GPLv2+CE) for longer periods — often the full lifetime of a major Java version and beyond. See [LTS and Non-LTS Releases](https://foojay.io/pedia/lts-and-non-lts-releases/) and [JDK Distributions](https://foojay.io/pedia/jdk-distributions/) for details.
+Distributions from Adoptium (Temurin), Azul, Amazon Corretto, Red Hat, BellSoft, and others provide free LTS updates under open-source licences (GPLv2+CE) for longer periods — often the full lifetime of a major Java version and beyond. See [LTS and Non-LTS Releases](https://foojay.io/java-terms-explained/lts-and-non-lts-releases/) and [JDK Distributions](https://foojay.io/java-terms-explained/jdk-distributions/) for details.
 
 ## Java 8 Legacy Note
 
@@ -24,6 +26,6 @@ During the Java 8 era (2014--2019), Oracle published CPU and PSU updates as dist
 
 ## See Also
 
-* [LTS and Non-LTS Releases](/pedia/lts-and-non-lts-releases/)
-* [JDK Distributions](/pedia/jdk-distributions/)
-* [Security and Vulnerability Management](/pedia/security-vulnerability-management/)
+* [LTS and Non-LTS Releases](/java-terms-explained/lts-and-non-lts-releases/)
+* [JDK Distributions](/java-terms-explained/jdk-distributions/)
+* [Security and Vulnerability Management](/java-terms-explained/security-vulnerability-management/)

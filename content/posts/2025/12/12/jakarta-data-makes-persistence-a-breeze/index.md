@@ -9,7 +9,6 @@ authors:
 image: "Blog_Jakarta-Data.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Java Beginner"
 related_posts:
   - "whats-new-in-the-january-2026-payara-platform-release"

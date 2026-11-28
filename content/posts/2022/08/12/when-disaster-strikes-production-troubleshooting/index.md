@@ -1,7 +1,6 @@
 ---
 title: "When Disaster Strikes: Production Troubleshooting"
 date: "2022-08-12T11:03:08+00:00"
-lastmod: "2022-08-12T11:06:37+00:00"
 description: "Production is failing and everything is lost? That used to be the case. Fail whale, hysteria and panic. Developer observability fixes this!"
 authors:
   - "shai-almog"
@@ -28,7 +27,7 @@ Production doesn't go down in flames as much. Thanks to staging, QA, CI/CD and D
 
 So we have all of these things in place. We passed QA, staging and everything's perfect. Right?
 
-![](5m9Wd26e.jpg)
+![Meme: 'Production is live', 'We passed QA so all's good, right?' followed by a worried 'Right???'](5m9Wd26e.jpg)
 
 Well… Not exactly.
 

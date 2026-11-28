@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AI Deep Dive — Part 7 of 7: MCP — The Protocol That Connects Everything"
 date: "2026-05-07T21:51:08+00:00"
-lastmod: "2026-05-14T09:59:03+00:00"
 description: "BoxLang AI 3.0 Series · Part 7 of 7 The AI ecosystem has a tool problem. Every framework has its own way of defining tools, every agent has its own way of…"
 authors:
   - "cristobal-escobar"
@@ -12,6 +11,7 @@ categories:
   - "GenAI"
   - "LLM"
   - "Tutorials"
+  - "BoxLang"
 related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
@@ -19,7 +19,7 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 ---
 
-![](bxai-series-cover-07-700x368.png)
+![Cover slide: BoxLang AI 3.0 Deep Dive, Part 7 of 7, MCP: The Protocol That Connects Everything](bxai-series-cover-07-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 7 of 7*
 

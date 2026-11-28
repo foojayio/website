@@ -1,7 +1,6 @@
 ---
 title: "JC-AI Newsletter #14"
 date: "2026-03-03T15:11:53+00:00"
-lastmod: "2026-03-03T15:11:55+00:00"
 description: "Two weeks have passed and a lot have been happening on the field of artificial-intelligence. Two weeks have passed and a lot has been silently yet visibly…"
 authors:
   - "miro-wengner"
@@ -11,7 +10,6 @@ categories:
   - "Cloud"
   - "Data Engineering"
   - "DevOps"
-  - "Java"
   - "JC-AI Newsletter"
   - "LLM"
   - "Machine Learning"

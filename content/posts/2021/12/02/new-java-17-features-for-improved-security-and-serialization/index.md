@@ -1,7 +1,6 @@
 ---
 title: "New Java 17 Features for Improved Security and Serialization"
 date: "2021-12-02T08:06:36+00:00"
-lastmod: "2021-12-02T08:09:22+00:00"
 description: "The Java 17 LTS release brings you significant improvements to prevent malicious deserialization in your java applications."
 canonical: "https://snyk.io/blog/new-java-17-features-for-improved-security-and-serialization/"
 authors:
@@ -128,7 +127,7 @@ All the information is handy to see if there is deserialization somewhere in you
 ```
 
 Let use the previous code example, but now deserializing the Gadget class. I get the following result when I execute the code in my IntelliJ IDEA with the Java Flight Recorder and the custom configuration.
-![](https://snyk.io/wp-content/uploads/blog-java-17-deserialization-1240x827.jpg)
+![IntelliJ Profiler Events view showing a deserialization event for the Gadget class with filter status REJECTED](blog-java-17-deserialization-1240x827-1c4c2cd5.jpg)
 
 You see the event captures the actual object type when deserializing and that the filter rejects this object. If you want to know more in-depth how to use this specific Deserialisation event for the JFR, take a look at the blog post: [Monitoring Deserialization to Improve Application Security](https://inside.java/2021/03/02/monitoring-deserialization-activity-in-the-jdk/) by Chris Hegarty
 

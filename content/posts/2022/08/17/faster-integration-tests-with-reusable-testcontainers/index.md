@@ -1,7 +1,6 @@
 ---
 title: "Faster Integration Tests with Reusable Testcontainers"
 date: "2022-08-17T11:05:05+00:00"
-lastmod: "2022-08-17T11:21:15+00:00"
 description: "Learn how to improve your test performance against container-based resources by magnitudes in a couple of easy steps!"
 authors:
   - "michael-simons"

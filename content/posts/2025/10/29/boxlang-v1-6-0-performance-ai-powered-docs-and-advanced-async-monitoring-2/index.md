@@ -1,7 +1,6 @@
 ---
 title: "BoxLang v1.6.0 - Performance, AI-Powered Docs, and Advanced Async Monitoring"
 date: "2025-10-29T06:48:07+00:00"
-lastmod: "2025-10-29T06:48:10+00:00"
 description: "We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities."
 authors:
   - "cristobal-escobar"
@@ -15,7 +14,7 @@ related_posts:
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
 ---
 
-{{< img src="boxlang-v1.6.0-1-700x467.jpg" class="size-medium aligncenter" width="700" height="467" >}}
+{{< img src="boxlang-v1.6.0-1-700x467.jpg" alt="BoxLang release v1.6.0 banner with the BoxLang logo over a glowing blue and purple galaxy with futuristic city outlines" class="size-medium aligncenter" width="700" height="467" >}}
 
 We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities. This release focuses on making BoxLang faster, smarter, and more observable than ever before.
 
@@ -23,7 +22,7 @@ We're thrilled to announce BoxLang 1.6.0, a release that delivers massive perfor
 
 ### 🤖 BoxLang Documentation Meets AI: MCP Server Integration
 
-![](BoxLang_docs-531x510.png)  
+![BoxLang documentation page with its Edit menu open, offering Copy page, Connect with MCP and Connect to VSCode options](BoxLang_docs-531x510.png)  
 
 BoxLang documentation is now accessible via the Model Context Protocol (MCP)! Connect AI assistants like Claude, GitHub Copilot, and other MCP-compatible tools directly to comprehensive BoxLang documentation for instant access to language references, framework features, and best practices.
 

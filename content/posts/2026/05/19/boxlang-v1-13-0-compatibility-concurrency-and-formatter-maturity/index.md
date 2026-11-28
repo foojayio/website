@@ -1,7 +1,6 @@
 ---
 title: "BoxLang v1.13.0: Compatibility, Concurrency, and Formatter Maturity"
 date: "2026-05-19T12:11:19+00:00"
-lastmod: "2026-05-19T12:15:47+00:00"
 description: "BoxLang 1.13.0 is a stability-first release with deep compatibility work and runtime hardening. This build closes 48 issues, with the majority focused on…"
 authors:
   - "cristobal-escobar"
@@ -10,7 +9,6 @@ categories:
   - "BoxLang"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Performance"
   - "Release Notes"
   - "Security"
@@ -21,7 +19,7 @@ related_posts:
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 ---
 
-![](boxlang-v1.13.0-700x467.jpg)
+![BoxLang RELEASE 1.13.0 banner with the BoxLang logo over a blue and green wave background](boxlang-v1.13.0-700x467.jpg)
 
 **BoxLang 1.13.0** is a stability-first release with deep compatibility work and runtime hardening. This build closes 48 issues, with the majority focused on CFML compatibility edge cases, concurrency correctness, formatting parity, and miniserver/runtime reliability under real production loads.
 

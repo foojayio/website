@@ -1,14 +1,12 @@
 ---
 title: "Building Reactive Data Streams with Project Reactor"
 date: "2026-03-19T15:13:31+00:00"
-lastmod: "2026-04-15T21:09:34+00:00"
 description: "Creating Non-Blocking Streaming Endpoints for High-Throughput Applications"
 authors:
   - "matteo-rossi"
 image: "Screenshot-2026-03-12-at-10.15.08-AM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"

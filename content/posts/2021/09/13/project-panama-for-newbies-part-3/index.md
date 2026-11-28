@@ -1,7 +1,6 @@
 ---
 title: "Project Panama for Newbies (Part 3)"
 date: "2021-09-13T08:53:47+00:00"
-lastmod: "2026-01-01T14:49:45+00:00"
 description: "Dig a little deeper in our exploration of Project Panama and learn how to talk to third party libraries such as SDL & OpenGL."
 authors:
   - "brice-dutheil"
@@ -254,7 +253,7 @@ $ jextract \
    foo.h
 ```
 
-{{< img src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" class="size-full is-resized" width="397" height="243" style="width:425px;height:260px" caption="Generated class files from jextract" >}}
+{{< img src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" alt="Folder tree of generated classes under org/unix, such as __darwin_pthread_mutex_t.class, produced by jextract" class="size-full is-resized" width="397" height="243" style="width:425px;height:260px" caption="Generated class files from jextract" >}}
 
 Now that you have generated the classes you can use the available convenience methods.
 
@@ -810,7 +809,7 @@ env JAVA_LIBRARY_PATH=:/usr/local/lib java \
 
 This should display a window like this:
 
-{{< img src="sdlfoo-panama.gif" class="size-full is-resized" width="650" height="504" style="width:420px;height:326px" >}}
+{{< img src="sdlfoo-panama.gif" alt="Window titled 'SDL for Panama' showing a tilted green rectangle on black, rendered from Java through Project Panama" class="size-full is-resized" width="650" height="504" style="width:420px;height:326px" >}}
 
 This example shows that porting a complete C or C++ program to Java using Panama is possible. However, this requires a sizeable effort to understand the API of a native library, in particular what comes to mind in this regard is pointer or reference passing.
 

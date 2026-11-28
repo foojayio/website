@@ -1,14 +1,12 @@
 ---
 title: "Micrometer & Prometheus in Spring Boot: Kafka Burger Orders"
 date: "2025-11-14T10:13:03+00:00"
-lastmod: "2025-11-14T10:13:04+00:00"
 description: "Learn Micrometer and Prometheus in Spring Boot by building a Kafka Burger Orders app that emits metrics. Step-by-step guide with code and takeaways."
 authors:
   - "vincent-vauban"
 image: "Untitled-1024x683.jpg"
 categories:
   - "DevOps"
-  - "Java"
   - "JDK Flight Recorder"
   - "Kafka"
   - "Microservices"

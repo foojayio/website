@@ -1,7 +1,6 @@
 ---
 title: "How to Release a Java Module to Maven Central with JReleaser and GitHub Actions (2025 Guide)"
 date: "2025-12-12T07:42:00+00:00"
-lastmod: "2025-12-12T08:46:01+00:00"
 description: "Complete step-by-step guide to publishing Java modules to Maven Central using JReleaser and GitHub Actions. Learn GPG signing, automation, and CI/CD best practices for Maven releases in 2025."
 authors:
   - "jago-de-vreede"
@@ -9,7 +8,6 @@ image: "Screenshot-2025-12-08-at-14.20.55-1.png"
 categories:
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Maven"
 related_posts:
   - "7-habits-of-highly-effective-java-coding"
@@ -295,7 +293,7 @@ jreleaser full-release
 
 You can login in to the [Maven Central repository](https://central.sonatype.com/publishing) to see the progress.
 
-{{< img src="Screenshot-2025-12-08-at-14.20.55-700x402.png" class="size-medium" width="700" height="402" >}}
+{{< img src="Screenshot-2025-12-08-at-14.20.55-700x402.png" alt="Maven Central publishing page showing the semver-check 1.0.0 bundle with status Published and its three components" class="size-medium" width="700" height="402" >}}
 
 ## GitHub action
 
@@ -308,7 +306,7 @@ Before we can run JReleaser on GitHub, we first need to set our secrets in the s
 To keep things simple just copy all the key values from the JReleaser config file that was used locally.
 
 And you will end up with something like this:
-![](Screenshot-2025-12-08-at-14.07.59.png) Note that in this example `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME`  
+![GitHub repository settings page, Actions secrets, listing the JReleaser GPG and Maven Central Sonatype username and password secrets](Screenshot-2025-12-08-at-14.07.59.png) Note that in this example `JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME`  
 has been shortened to `JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME`
 
 ### Workflow
@@ -332,7 +330,7 @@ on:
 
 This will look something like this when you start the release workflow
 
-{{< img src="Screenshot-2025-12-08-at-14.08.23-653x510.png" class="size-medium" width="653" height="510" >}}
+{{< img src="Screenshot-2025-12-08-at-14.08.23-653x510.png" alt="GitHub Actions Release workflow with the Run workflow dialog asking for release version 1.0.0 and next version 1.0.1" class="size-medium" width="653" height="510" >}}
 
 Next up is just your default build setup, in this example, java 11 is used, but this is the same as for your normal build. Except `fetch-depth` as JReleaser will use the git log to create the changelog it will need the full history, and thus we set the `fetch-depth` to `0`. As it defaults to `1`.
 

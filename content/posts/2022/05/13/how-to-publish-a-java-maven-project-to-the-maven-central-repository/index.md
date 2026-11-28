@@ -1,7 +1,6 @@
 ---
 title: "Publish a Java Project to the Maven Central Repository"
 date: "2022-05-13T06:22:58+00:00"
-lastmod: "2022-05-13T16:46:17+00:00"
 description: "Get started and follow along whenever you need to publish a Java Maven-based library or artifact to Maven!"
 authors:
   - "tobias-briones"

@@ -1,7 +1,6 @@
 ---
 title: "Java Modules in the Pi4J Project?"
 date: "2021-12-23T15:28:39+00:00"
-lastmod: "2021-12-24T08:31:26+00:00"
 description: "Java modules have been a big discussion point before in many places. And this is now also causing some headaches in the Pi4J project..."
 authors:
   - "frankdelporte"
@@ -30,7 +29,7 @@ Pi4J V.2 is a complete rewrite and **does not maintain API compatibility** with 
 To have a fully "open" architecture that is extendable with providers for specific GPIO-functions, boards,... a modular architecture was introduced in Pi4J V2. More information is available on [the Pi4J website](https://pi4j.com/architecture/).
 
 The code of Pi4J is based on a layered approach, visualized in the picture below ([high-res version on pi4j.com](https://pi4j.com/architecture/)).
-![](pi4j-v2-architecture-1024x667.jpg) Pi4J modular architecture
+![Pi4J version 2.0 architecture diagram showing the modular structure of platforms, providers, I/O types, configs and builders](pi4j-v2-architecture-1024x667.jpg) Pi4J modular architecture
 
 ## Auto detection of modules
 

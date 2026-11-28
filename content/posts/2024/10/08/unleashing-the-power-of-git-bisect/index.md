@@ -1,7 +1,6 @@
 ---
 title: "Unleashing the Power of Git Bisect"
 date: "2024-10-08T08:15:50+00:00"
-lastmod: "2024-10-08T08:21:36+00:00"
 description: "Explore how to use git bisect for efficient debugging, including tips on automating the process and handling skipped commits in your projects"
 canonical: "https://debugagent.com/unleashing-the-power-of-git-bisect"
 authors:

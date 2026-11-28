@@ -1,7 +1,6 @@
 ---
 title: "Master Your Journey in the School of OpenJDK Migration"
 date: "2024-06-30T09:46:03+00:00"
-lastmod: "2024-06-30T11:16:00+00:00"
 description: "The School of OpenJDK Migration is totally free and self-paced. Do yourself a favor and start preparing about OpenJDK migration today. "
 authors:
   - "simonritter"
@@ -25,7 +24,7 @@ Azul has led so many OpenJDK migrations, we could write a book. Like, seriously,
 
 For many smaller organizations with less complex infrastructures, an OpenJDK migration can be very straightforward. **"In fact, migrating to certified builds of OpenJDK can be very straightforward and simple for the vast majority of enterprises,"** I wrote in [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/). **"If you're migrating server applications, you're not likely to encounter any challenges."**
 
-![](dummies.jpg)
+![Cover of 'OpenJDK Migration for Dummies, Azul Special Edition', with a cartoon character and three topic bullets](dummies.jpg)
 
 But as anyone with experience in big software projects knows, things rarely go as simply as teams hope they will. It's good to know what to expect before starting a migration.
 

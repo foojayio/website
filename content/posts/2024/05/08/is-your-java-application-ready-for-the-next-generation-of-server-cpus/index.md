@@ -1,7 +1,6 @@
 ---
 title: "Is your Java application ready for the next generation of server CPUs?"
 date: "2024-05-08T08:03:53+00:00"
-lastmod: "2024-05-08T08:03:54+00:00"
 description: "With every major cloud provider now offering Arm-based instances, it’s time to start looking at what you need to do to migrate your Java applications to Aarch64."
 authors:
   - "michael-hall"

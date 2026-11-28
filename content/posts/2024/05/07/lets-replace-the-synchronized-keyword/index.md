@@ -1,13 +1,11 @@
 ---
 title: "Let's Replace the synchronized Keyword"
 date: "2024-05-07T04:26:29+00:00"
-lastmod: "2024-05-07T04:27:09+00:00"
 description: "Let's replace the synchronized keyword to be more virtual threads friendly in a code readable way."
 authors:
   - "anthony-goubard"
 image: "synchronized-feature.png"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
 related_posts:
@@ -18,7 +16,7 @@ related_posts:
 ---
 
 **Let's see in this article different ways to replace the synchronized keyword to make our code more virtual threads friendly.**  
-![](synchronized-loc.png) Lines of code of the different solutions discussed in this article
+![Bar chart of lines of code per approach to replace synchronized: ReentrantLock needs the most (6), annotation-based ones the fewest](synchronized-loc.png) Lines of code of the different solutions discussed in this article
 
 ## Synchronized and pinning threads
 

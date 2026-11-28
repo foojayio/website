@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 1: Building an Empire of Microservices"
 date: "2022-01-28T14:21:37+00:00"
-lastmod: "2024-02-09T09:40:04+00:00"
 description: "Let's dive into the world of microservices find out the complexities, best practices, and troubles. I will share all my learnings, as well!"
 authors:
   - "jennifer-reif"
@@ -48,7 +47,7 @@ I like to think of this architecture like a bridge connecting two bits of land. 
 
 Our architecture diagram will, therefore, will look like the following:
 
-![](microservices-level1-700x202.png)
+![Diagram of service1 calling service2 and service2 returning a response](microservices-level1-700x202.png)
 
 There are several technologies we could use to build our two services and the channel between them, but there were a few things that went into my decision. First, since I want to tack on skills slowly and not take on too many new things at once, I wanted to stick with some things I'm already familiar with. I can always change or expand things once I have a working system.
 
@@ -62,7 +61,7 @@ I'll leave the first three fields as defaults (Maven project, Java language, Spr
 
 In the `Dependencies` area, we need to add two things - `Spring Reactive Web` and `Lombok`. The use of Lombok is personal preference, as well, but I wanted to use it here to trim some code. Next, click the `Generate` button at the bottom of the screen and pick a location to save it.
 
-![](springio-svc1-700x446.png)
+![Spring Initializr configured for service1 with Maven, Java 11, Spring Reactive Web and Lombok dependencies](springio-svc1-700x446.png)
 
 **Note:* the Spring Initializr displays in dark mode or light mode via the moon or sun icons in the right column of the page. The image above is in dark mode.*
 
@@ -94,7 +93,7 @@ So short and sweet, right? Let's charge on to Service 2!
 
 Now that we have completed our backend service, we need to build the second service on the front to call it. Time to head back to the Spring Initializr! Our fields will look very similar to those in our last project, which makes this one faster. The only change is our artifact name. We will keep the same dependencies of `Spring Reactive Web` and `Lombok`. Click the `Generate` button, pick a place to save, unzip, and open the project in your IDE.
 
-![](springio-svc2-700x439.png)
+![Spring Initializr configured for service2 with Maven, Java 11, Spring Reactive Web and Lombok dependencies](springio-svc2-700x439.png)
 
 Let's add some code!
 
@@ -158,7 +157,7 @@ Start each of the applications, either through your IDE or via the command line.
 
 And here should be the output!
 
-![](microservices-lvl1-results-1.png)
+![Browser at localhost:8080/hello showing the text 'Hello, World!'](microservices-lvl1-results-1.png)
 
 ## Wrapping up!
 

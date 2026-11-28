@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Links of May 2023"
 date: "2023-05-31T06:48:43+00:00"
-lastmod: "2023-05-31T06:51:37+00:00"
 description: "Again a busy month in JavaFX-world! Here is a nice list with links for your reading and clicking pleasure!"
 canonical: "https://webtechie.be/post/2023-05-30-javafx-links-of-may-2023"
 authors:

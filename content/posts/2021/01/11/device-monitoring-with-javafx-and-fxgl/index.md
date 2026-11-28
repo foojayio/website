@@ -1,7 +1,6 @@
 ---
 title: "How to Do Device Monitoring with JavaFX and FXGL"
 date: "2021-01-11T10:09:21+00:00"
-lastmod: "2021-01-13T10:47:48+00:00"
 description: "In this article, we will be building a system monitoring dashboard, with Java and JavaFX, which can run on a Raspberry Pi."
 authors:
   - "almasbaimagambetov"
@@ -27,7 +26,7 @@ But, this game engine can also be used for other use cases. In this post, we wil
 A proof-of-concept has been set up using one Raspberry Pi as the "central system" to host the queue (Mosquitto). On this Raspberry Pi and others, a Python script runs to send the device state every second to the queue.  
 
 For every new device (determined by the IP address) that appears in the list, a new dashboard "tile" is created to show some of the data. By clicking on this tile, we can enlarge the tile view to incorporate all of the data being received.
-![](diagram.png)
+![Architecture diagram: several Raspberry Pi devices send data to a Mosquitto queue on a central Raspberry Pi running the FXGL app](diagram.png)
 
 When the application starts, you can choose between "Mock Data", or an IP address of the board with the queue. This video shows the mocked result:
 
@@ -85,7 +84,7 @@ $ mosquitto_pub -t 'testing/TestTopic' -m 'jieha it works'
 ```
 
 Every "publish" from the second terminal window will appear in the first one as you can see in these screenshots:
-![](mosquitto_testing.png)
+![Two Raspberry Pi terminals: mosquitto_pub publishes messages to a topic and mosquitto_sub receives them](mosquitto_testing.png)
 
 ## Send State from Raspberry Pi
 
@@ -259,9 +258,9 @@ animationBuilder()
 When the application starts, you have the choice to select between an IP address of the Raspberry Pi with the Mosquitto queue and "Mock Data". After selecting this second option, 16 devices will be created inside the application, where each device is driven by the randomly generated data. This is ideal for testing all of the application functions.
 
 {{< gallery cols="3" caption=`Screenshots of the application with "Mock Data"` >}}
-mock-selection-1024x462.png
-mock-overview-1024x599.jpg
-mock-cpu-graph-1024x659.png
+mock-selection-1024x462.png | | FXGL System Monitor dialog 'Select mode' with a dropdown offering an IP address or Mock Data
+mock-overview-1024x599.jpg | | FXGL System Monitor showing 16 devices in a grid, each with CPU and RAM bars and percentages
+mock-cpu-graph-1024x659.png | | Red line graph of mock CPU usage over time, fluctuating between about 10 and 95 percent
 {{< /gallery >}}
 
 ### Running the Application with Real Data

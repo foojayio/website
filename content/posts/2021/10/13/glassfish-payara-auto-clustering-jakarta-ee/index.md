@@ -1,7 +1,6 @@
 ---
 title: "GlassFish & Payara Auto-Clustering for Jakarta EE Applications"
 date: "2021-10-13T13:27:30+00:00"
-lastmod: "2021-10-13T13:29:34+00:00"
 description: "Check out out-of-box GlassFish & Payara auto-clustering implementation details and infrastructure topology specifics!"
 authors:
   - "tetiana-fydorenchyk"
@@ -18,7 +17,7 @@ related_posts:
   - "jakarta-ee-application-deployment-kubernetes-cluster-jelastic-paas"
 ---
 
-{{< img src="GlassFish-and-Payara-clustering-e10299b3.png" class="alignleft is-resized" width="400" height="216" >}}
+{{< img src="GlassFish-and-Payara-clustering-e10299b3.png" alt="Diagram of a GlassFish cluster: a load balancer feeds worker instances, all managed by a DAS node, with scaling arrows" class="alignleft is-resized" width="400" height="216" >}}
 
 Ensuring trouble-proof 24/7 service delivery is among one of the most discussed areas in cloud hosting for the last few years. And the very obvious and commonly used solution here is building a clustered infrastructure for your project.
 
@@ -37,7 +36,7 @@ Starting with the Jelastic 5.5.3 version, a new **Auto-Clustering** feature is i
 
 Choose either *GlassFish* or *Payara* application server on the **Java** tab of the wizard. Then, in the central part, locate and enable the appropriate ***Auto-Clustering*** switcher. Configure the remaining settings up to your need including [horizontal scaling](https://docs.jelastic.com/horizontal-scaling) to get a reliable solution from the start.  
 
-{{< img src="01-415x1024-37302437.png" class="aligncenter is-resized" width="179" height="442" >}}
+{{< img src="01-415x1024-37302437.png" alt="Diagram: load balancers route to GlassFish workers 1 to N, which receive replication from the DAS" class="aligncenter is-resized" width="179" height="442" >}}
 
 **Tip:** The ***Auto-Clustering*** feature is also available for some other software templates (e.g. [*MySQL*](https://jelastic.com/blog/mysql-mariadb-database-auto-clustering-cloud-hosting/), [*MariaDB*](https://jelastic.com/blog/mysql-mariadb-database-auto-clustering-cloud-hosting/)*,* [PostgreSQL](https://jelastic.com/blog/postgresql-auto-clustering-master-slave-replication/), [Tomcat/TomEE](https://jelastic.com/blog/tomcat-tomee-clustering-automation/), [WildFly](https://jelastic.com/blog/wildfly-managed-domain-automatic-clustering-scaling/), [Shared Storage](https://docs.jelastic.com/shared-storage-container/), [MongoDB](https://jelastic.com/blog/mongodb-auto-clustering/) and [*Couchbase*](https://docs.jelastic.com/auto-clustering/#couchbase)).
 

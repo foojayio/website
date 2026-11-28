@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.10.0: Functional Arrays, Elegant Loops & Distributed Locking"
 date: "2026-02-04T10:46:22+00:00"
-lastmod: "2026-02-05T10:14:07+00:00"
 description: "We're excited to announce BoxLang 1.10.0, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and…"
 authors:
   - "cristobal-escobar"
@@ -9,12 +8,11 @@ image: "BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Design Patterns"
-  - "Java"
   - "Microservices"
 related_posts:
 ---
 
-![](boxlang-v1.10.0-700x467.jpg)
+![BoxLang release banner announcing version 1.10.0](boxlang-v1.10.0-700x467.jpg)
 
 We're excited to announce **BoxLang 1.10.0**, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and enterprise-grade distributed locking to the BoxLang runtime. This release represents a significant leap forward in developer productivity and application scalability.
 

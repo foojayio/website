@@ -1,7 +1,6 @@
 ---
 title: "Pitest: Do You Test Your Tests?"
 date: "2023-08-15T14:32:55+00:00"
-lastmod: "2023-08-15T14:53:37+00:00"
 description: "A brief introduction with code to mutation testing using Pitest. Now you too can get started testing your tests!"
 authors:
   - "simon-verhoeven"
@@ -103,7 +102,7 @@ void decays() {
 
 If we then run Pitest again, we'll already see some improvements:
 
-{{< img src="report3-700x414.png" class="size-medium" width="700" height="414" >}}
+{{< img src="report3-700x414.png" alt="Pitest HTML report: source code lines highlighted green when mutations are killed and red where mutations survive" class="size-medium" width="700" height="414" >}}
 
 However, we'll notice there are still a couple of surviving mutations.  
 

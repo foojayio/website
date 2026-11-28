@@ -1,7 +1,6 @@
 ---
 title: "Java Panama Polyglot (Swift) Part 2"
 date: "2022-04-13T15:34:59+00:00"
-lastmod: "2022-06-01T20:08:13+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages! Today we'll see swift!"
 authors:
   - "carldea"

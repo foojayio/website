@@ -1,7 +1,6 @@
 ---
 title: "Playing with WASM on Docker"
 date: "2024-01-03T07:48:29+00:00"
-lastmod: "2024-01-03T07:48:30+00:00"
 description: "While the ecosystem has room for improvement, it's already possible to benefit from Docker's WASM support."
 canonical: "https://blog.frankel.ch/wasm-docker/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Sticky sessions with Apache APISIX"
 date: "2023-07-07T16:51:01+00:00"
-lastmod: "2023-07-07T16:58:45+00:00"
 description: "Learn about sticky sessions, that you should always use session replication with them, and how to implement sticky sessions on Apache APISIX."
 canonical: "https://blog.frankel.ch/sticky-sessions-apache-apisix/"
 authors:
@@ -26,11 +25,11 @@ Sticky sessions became popular when we stored the state on the upstream node, no
 
 The basic foundations of a small e-commerce site can consist of a web application and a database.
 
-![](foundation-ecommerce.png)
+![Diagram of a Web App component connected through an interface to a database](foundation-ecommerce.png)
 
 If the business is successful, it will grow, and you'll need to scale this architecture at some point.Once you cannot scale vertically (bigger machines), you must scale horizontally (more nodes).With additional apps node, you'll also need a load balancer mechanism in front of the web app nodes to distribute the load among them.
 
-![](load-balancer-ecommerce.png)
+![Diagram of a load balancer routing to two WebApp nodes that share one database](load-balancer-ecommerce.png)
 
 Going to the database every time is an expensive operation. It's ok for data that is accessed infrequently.However, we want to display the cart's content for every request.A couple of alternatives are available to speed things up.If we assume that the web app uses Server-Side Rendering, the classical solution is to keep cart-related data in memory on the web app node.
 

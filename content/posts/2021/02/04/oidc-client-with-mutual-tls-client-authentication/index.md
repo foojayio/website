@@ -1,7 +1,6 @@
 ---
 title: "OIDC Client with Mutual TLS Client Authentication"
 date: "2021-02-04T08:48:06+00:00"
-lastmod: "2021-02-04T08:48:46+00:00"
 description: "Learn how to set up an OpenID Connect (OIDC) client with Spring Security using mutual TLS as a method for authenticating the client."
 authors:
   - "michal-trojanowski"
@@ -344,10 +343,10 @@ Take into account that there is another implementation for when refresh tokens a
 Start the demo application with mvn spring-boot:run if you use maven or ./gradlew bootRun for a gradle project.
 
 Navigate to https://localhost:9443 to access the index site and trigger a login.
-![](image-9.png)
+![Curity login page with username and password fields and a Login button](image-9.png)
 
 After successful login, you will be presented with details retrieved from the ID token.
-![](image-10.png)
+![Browser at localhost:9443 listing the login details, access token scopes and ID token claims for user Tester](image-10.png)
 
 ## **Conclusion**
 

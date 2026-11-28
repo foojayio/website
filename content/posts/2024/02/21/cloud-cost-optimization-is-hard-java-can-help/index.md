@@ -1,7 +1,6 @@
 ---
 title: "Cloud Cost Optimization Is Hard, Java Can Help"
 date: "2024-02-21T12:07:37+00:00"
-lastmod: "2024-02-22T10:49:48+00:00"
 description: "Did you know switching your Java runtime helps reduce Cloud waste?"
 canonical: "https://www.azul.com/blog/cloud-cost-optimization-is-hard/"
 authors:

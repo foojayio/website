@@ -47,7 +47,7 @@
                   {{ if gt $plain 0 }}
                   <ul class="nav-panel__list">
                     {{ range .Children }}{{ if not .HasChildren }}
-                      <li><a href="{{ .URL | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a></li>
+                      <li>{{ if .URL }}<a href="{{ .URL | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a>{{ else }}<span>{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</span>{{ end }}</li>
                     {{ end }}{{ end }}
                   </ul>
                   {{ end }}
@@ -56,10 +56,10 @@
                        nested hover flyout — the main fix vs. the WordPress nav. */}}
                   {{ range .Children }}{{ if .HasChildren }}
                     <div class="nav-group">
-                      <a class="nav-group__title" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                      {{ if .URL }}<a class="nav-group__title" href="{{ .URL | relURL }}">{{ .Name }}</a>{{ else }}<span class="nav-group__title">{{ .Name }}</span>{{ end }}
                       <ul class="nav-panel__list">
                         {{ range .Children }}
-                          <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+                          <li>{{ if .URL }}<a href="{{ .URL | relURL }}">{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</a>{{ else }}<span>{{ .Name }}{{ with .Params.desc }}<span class="nav-panel__desc">{{ . }}</span>{{ end }}</span>{{ end }}</li>
                         {{ end }}
                       </ul>
                     </div>

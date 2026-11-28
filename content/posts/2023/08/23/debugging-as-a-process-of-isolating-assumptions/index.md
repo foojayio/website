@@ -1,7 +1,6 @@
 ---
 title: "Debugging as a Process of Isolating Assumptions"
 date: "2023-08-23T08:16:22+00:00"
-lastmod: "2023-08-23T08:16:23+00:00"
 description: "When looking at a vast project, how do we know the direction to narrow assumptions during debugging? When should we backtrack and rethink?"
 authors:
   - "shai-almog"
@@ -34,7 +33,7 @@ Often, debugging sessions fail or take longer than anticipated due to incorrect 
 
 Think of it in terms of the popular TV show Dr. House. It's a Sherlock Holmes version of a medical drama where the lead character, a grumpy misanthrope, often faces challenges due to the incomplete or incorrect information provided by his patients. This is akin to debugging where we often spend most of our time on a wild goose chase due to incorrect assumptions or missing information.
 
-![](house-700x394.jpeg)
+![Slide quoting Dr. House about wrong assumptions when something doesn't make sense, next to a close-up of the character](house-700x394.jpeg)
 
 ## The Solution to Wrong Assumptions: Double Verification
 
@@ -68,7 +67,7 @@ This is illustrated by the following diagram. We rush to narrow down the search 
 
 The downside is that the wide perimeter search is so much bigger, but it is sometimes a preferable scope of search.
 
-![](diagram-700x369.jpeg)
+![Diagram of a narrow perimeter around a symptom inside a wider perimeter that also contains the root cause and the bug](diagram-700x369.jpeg)
 
 ## Final Word
 

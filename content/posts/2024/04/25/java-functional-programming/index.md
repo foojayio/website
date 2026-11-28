@@ -1,13 +1,11 @@
 ---
 title: "Functional Programming: Revolutionizing Software Development"
 date: "2024-04-25T17:43:17+00:00"
-lastmod: "2024-04-25T17:43:58+00:00"
 description: "Dive into the world of functional programming in Java and through declarative programming we can able write a better and concise code"
 authors:
   - "mahendra1413"
 image: "FunctionalProgramming-700x394-1.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "Kotlin"

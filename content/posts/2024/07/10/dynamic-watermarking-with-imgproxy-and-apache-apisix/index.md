@@ -1,7 +1,6 @@
 ---
 title: "Dynamic watermarking with imgproxy and Apache APISIX"
 date: "2024-07-10T13:38:07+00:00"
-lastmod: "2024-07-10T13:52:21+00:00"
 description: "Let's implement a watermarking feature with the help of imgproxy. The more I think about it, the more I think they make a match made in Heaven."
 canonical: "https://blog.frankel.ch/dynamic-watermarking/2/"
 authors:
@@ -24,7 +23,7 @@ Another alternative is to use ready-made components, namely [imgproxy](https://i
 
 Here's the general sequence flow of the process:
 
-![](watermark_sequence_diagram.png)
+![Sequence diagram: APISIX forwards a watermark request to imgproxy, which fetches the image and logo, watermarks it and returns it.](watermark_sequence_diagram.png)
 
 * When APISIX receives a specific pattern, it calls `imgproxy` with the relevant parameters
 * `imgproxy` fetches the original image and the watermark to apply

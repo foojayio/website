@@ -1,7 +1,6 @@
 ---
 title: "Context Is Code: A Tour of APM and AgentRC"
 date: "2026-06-05T08:35:05+00:00"
-lastmod: "2026-06-05T10:00:58+00:00"
 description: "Why agent context needs a package manager, what APM gives you, and how AgentRC closes the loop on generation and evals."
 authors:
   - "soham-dasgupta"

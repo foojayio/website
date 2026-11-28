@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK at FOSDEM 2023"
 date: "2022-11-22T08:30:07+00:00"
-lastmod: "2022-11-22T10:57:13+00:00"
 description: "The upcoming FOSDEM 2023, 5 February 2023, will be live and everything will be in person, submit to the \"Friends Of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"
@@ -56,7 +55,7 @@ Please submit through Pentabarf here:
 
 When submitting your talk in Pentabarf, make sure to select "Friends Of OpenJDK devroom" as the Track, as shown below.
 
-{{< img src="image-1024x1013.jpg" class="size-large is-resized" width="554" height="547" >}}
+{{< img src="image-1024x1013.jpg" alt="Pentabarf event form with the Track drop-down open and 'Friends of OpenJDK devroom' highlighted" class="size-large is-resized" width="554" height="547" >}}
 
 Create a Pentabarf account if, and only if, you don't already have one from a previous year. Please double check if you have an account you can reuse!
 

@@ -1,7 +1,6 @@
 ---
 title: "Thorntail Fat, Thin and Skinny Approach for Java Microservices"
 date: "2021-09-22T16:25:45+00:00"
-lastmod: "2021-09-22T16:33:44+00:00"
 description: "Guide on how to build and deploy Thorntail (WildFly Swarm) based applications packaged as JAR and War files using Fat/Skinny/Thin approach!"
 authors:
   - "tetiana-fydorenchyk"

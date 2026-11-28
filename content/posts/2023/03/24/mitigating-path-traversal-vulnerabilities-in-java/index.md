@@ -1,7 +1,6 @@
 ---
 title: "Mitigating Path Traversal Vulnerabilities in Java"
 date: "2023-03-24T07:57:06+00:00"
-lastmod: "2023-03-31T15:24:02+00:00"
 description: "Path traversal vulnerabilities are a serious threat to Java web applications, amongst the top security issues Snyk finds in Java code."
 canonical: "https://snyk.io/blog/mitigating-path-traversal-java-snyk-code/"
 authors:
@@ -68,7 +67,7 @@ Regarding path traversal, [++Snyk Code++](https://docs.snyk.io/scan-application-
 Next, I'm using the [++Snyk plugin for IntelliJ IDEA++](https://docs.snyk.io/ide-tools/jetbrains-plugins) with Snyk Code enabled. Scanning on my local machine during development already pinpointed the path traversal problem in my file upload.
 
 Additionally, it also gave me some suggestions for possible mitigation actions.
-![](normalize-1024x419.png)
+![Snyk plugin in IntelliJ IDEA flagging a Path Traversal vulnerability in UploadController.java with data flow and an example fix](normalize-1024x419.png)
 
 By using Snyk Code, you can proactively identify and fix these path traversal vulnerabilities before they are exploited, helping to ensure the security of your application and the data it handles.
 

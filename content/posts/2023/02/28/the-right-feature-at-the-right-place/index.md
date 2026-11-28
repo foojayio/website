@@ -1,7 +1,6 @@
 ---
 title: "The Right Feature at the Right Place"
 date: "2023-02-28T11:08:14+00:00"
-lastmod: "2023-02-28T11:08:15+00:00"
 description: "Discussion extrapoliating from per-user rate limiting showing how one can implement it in a library and an infrastructure component."
 canonical: "https://blog.frankel.ch/right-feature-right-place/"
 authors:

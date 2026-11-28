@@ -1,7 +1,6 @@
 ---
 title: "Unlocking Java Secrets with Frank Delporte Foojay.io Today"
 date: "2023-04-10T13:48:51+00:00"
-lastmod: "2023-04-10T17:13:08+00:00"
 description: "Learn about Frank Delporte, Java Champion and Azul technical writer at Azul, on Java, resources for beginners, insights into in the industry."
 authors:
   - "bazlur-rahman"
@@ -15,7 +14,7 @@ related_posts:
   - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 ---
 
-{{< img src="Frank-7-XS.jpg" class="alignright size-full is-resized" width="450" height="413" >}}
+{{< img src="Frank-7-XS.jpg" alt="Portrait of Frank Delporte, smiling, with dark-framed glasses and a dark sweater" class="alignright size-full is-resized" width="450" height="413" >}}
 
 Welcome to our exclusive interview with [Frank Delporte](https://www.linkedin.com/in/frankdelporte/), a Senior Technical Writer at Azul, Java Champion, and a passionate advocate for all things related to Java and Java on [Raspberry Pi](https://www.raspberrypi.org/).
 
@@ -120,9 +119,9 @@ I was one of the first users in Belgium of the Media 100, such a computer-based 
 Going from analog copies with quality loss, to lossless digital video, was only one of the significant improvements.
 
 {{< gallery >}}
-editing-film.jpg
-editing-video-analogue.jpg
-editing-video-media100.jpg
+editing-film.jpg | | Analog film editing table with reels, a small monitor and speakers
+editing-video-analogue.jpg | | Person operating an older video editing suite with three monitors showing color bars and tape decks
+editing-video-media100.jpg | | Media 100 digital video editing system with two monitors, speakers and a Power Mac tower
 {{< /gallery >}}
 
 Soon after, my clients wanted to distribute their company movie to (potential) customers easily and attractively. That's when Macromedia Director and Flash became my new working tools as they allowed me to combine slides, video, and coding on DVD and CD-Rom. The logical next step was to put the same content online. You may remember the annoying "Skip Intro" Flash animations that were used on many websites for some years, and yes, I have to admit, I also created those… Everyone sought new ways to convert static boring text pages into more appealing content. We probably made a lot of wrong decisions at that time, but don't we still? Anyhow, soon I needed a database to create dynamic and easily updatable websites and started using Access Database for it - bad idea - and SQL Server.

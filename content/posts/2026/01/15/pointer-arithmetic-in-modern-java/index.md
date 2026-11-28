@@ -1,14 +1,13 @@
 ---
 title: "Pointer Arithmetic in Modern Java"
 date: "2026-01-15T09:00:12+00:00"
-lastmod: "2026-01-19T10:06:59+00:00"
 description: "How to perform pointer arithmetic using the Foreign Function & Memory API to achieve zero-GC memory access."
 canonical: "https://davidvlijmincx.com/posts/pointer-arithmetic-in-java/"
 authors:
   - "david-vlijmincx"
 image: "jmh.png"
 categories:
-  - "Java"
+  - "Java Core"
 related_posts:
   - "everything-bad-in-java-is-good-for-you"
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"

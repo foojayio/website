@@ -1,14 +1,11 @@
 ---
 title: "Run JavaFX on the Windows Subsystem for Linux and More!"
 date: "2024-03-12T16:11:56+00:00"
-lastmod: "2024-03-14T17:46:26+00:00"
 description: "What does it take to run JavaFX applications on exotic Linux systems like the Windows Subsystem for Linux or some embedded systems?"
 authors:
   - "christopher-schnick"
 image: "Screen-Shot-2021-05-17-at-12.15.51-AM.jpg"
 categories:
-  - "Desktop"
-  - "Java"
   - "JavaFX"
   - "Tutorials"
 related_posts:
@@ -164,4 +161,4 @@ If you're looking for a quick demo, you can attempt to install and run our appli
 
 And that's all for today! Here is how a JavaFX applications looks like in an Oracle Linux WSL instance:
 
-{{< img src="wsl-700x450.png" class="size-medium aligncenter" width="700" height="450" >}}
+{{< img src="wsl-700x450.png" alt="XPipe Desktop Connection Hub running in an Oracle Linux WSL instance on Windows 10" class="size-medium aligncenter" width="700" height="450" >}}

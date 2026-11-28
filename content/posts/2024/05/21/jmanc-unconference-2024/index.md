@@ -1,7 +1,6 @@
 ---
 title: "JManc Unconference 2024"
 date: "2024-05-21T14:08:14+00:00"
-lastmod: "2024-05-22T10:58:36+00:00"
 description: "The Manchester Java Community are delighted to announce the return of JManc Unconference on Friday 28th June 2024!"
 authors:
   - "nick-ebbitt"
@@ -9,7 +8,6 @@ image: "jmanc-logo-9875160f.png"
 categories:
   - "Conference"
   - "Events"
-  - "Java"
   - "JUGs"
 related_posts:
   - "the-story-of-a-java-17-native-memory-leak"

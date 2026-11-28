@@ -1,14 +1,12 @@
 ---
 title: "AI-Powered Code Review Assistant: Automated Code Analysis with Spring AI and MongoDB"
 date: "2026-05-14T17:09:39+00:00"
-lastmod: "2026-05-14T17:09:41+00:00"
 description: "In this article, you will build a code review assistant API. Developers submit code snippets through a REST endpoint. The system embeds the submitted code with Spring AI and searches a library of known anti-patterns stored as vectors in MongoDB Atlas. It then sends the code along with matched patterns to an LLM for structured review feedback. Every submission and its findings are stored in MongoDB, and aggregation pipelines surface trends over time."
 authors:
   - "farhan-chowdhury"
 image: "Screenshot-2026-05-08-at-3.02.20-PM.png"
 categories:
   - "AI"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:
@@ -539,7 +537,7 @@ The `@Transient` annotation tells Spring Data MongoDB not to persist this field 
 ## 4. Building the code review engine
 
 The `ReviewService` is where the pieces connect. It accepts a code submission, finds matching patterns via vector search, sends both to an LLM, and parses the structured response into findings. The following diagram shows the complete flow from submission to response:  
-![](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
+![Flowchart of the review flow: submit code, save it, embed it, vector search review patterns, prompt the LLM, parse findings and return the response](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
 
 Figure 1: Review flow diagram showing the steps from code submission through embedding, vector search, LLM analysis, and saving findings to MongoDB
 
@@ -826,7 +824,7 @@ public List<SeverityCount> getSeverityDistribution() {
 If most findings are `CRITICAL`, the team may need to focus on fundamental practices. If the distribution skews toward `INFO`, the codebase is generally healthy.
 
 The third pipeline is more involved. It identifies which specific patterns keep recurring across reviews by joining data from two collections. The following diagram shows how documents flow through each stage:  
-![](Screenshot-2026-05-08-at-3.10.37-PM-312x1024.png)
+![Flowchart of the MongoDB aggregation pipeline: match, group by pattern, sort, limit, lookup, unwind and project](Screenshot-2026-05-08-at-3.10.37-PM-312x1024.png)
 
 Aggregation pipeline diagram showing the stages from match through group, sort, limit, lookup, unwind, and project
 

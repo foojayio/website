@@ -32,7 +32,7 @@
   <tbody>
     {{- range $rows }}
     <tr>
-      <th scope="row"><a href="{{ .url }}"><code>{{ .url }}</code></a></th>
+      <th scope="row"><a href="{{ .url }}"{{ if not (hasPrefix .url site.BaseURL) }} target="_blank" rel="noopener"{{ end }}><code>{{ .url }}</code></a></th>
       <td>{{ .what }}</td>
     </tr>
     {{- end }}

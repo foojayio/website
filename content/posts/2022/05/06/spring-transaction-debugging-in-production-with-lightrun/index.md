@@ -1,7 +1,6 @@
 ---
 title: "Spring Transaction Debugging in Production with Lightrun"
 date: "2022-05-06T15:00:53+00:00"
-lastmod: "2022-05-06T15:00:54+00:00"
 description: "We use annotations to denote transactional behavior in modern Spring, so we have no code, no failure, no debugging... But is this true?"
 canonical: "https://lightrun.com/tutorials/spring-transaction-debugging-in-production-with-lightrun/"
 authors:

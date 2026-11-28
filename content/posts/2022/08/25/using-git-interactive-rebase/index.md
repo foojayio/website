@@ -1,7 +1,6 @@
 ---
 title: "Using Git Interactive Rebase"
 date: "2022-08-25T09:32:22+00:00"
-lastmod: "2023-08-03T08:24:38+00:00"
 description: "This tutorial shows you how to use Git interactive rebase from the IntelliJ IDEA UI as well as the command line."
 authors:
   - "marit-van-dijk"
@@ -32,11 +31,11 @@ In the Git history, identify the commit from where you want to clean up your his
 
 Right-click on the commit from where you want to clean up your history and select "**Interactively Rebase from Here...**".
 
-![](interactively-rebase-from-here-700x265.png)
+![IntelliJ Git log context menu with 'Interactively Rebase from Here...' highlighted](interactively-rebase-from-here-700x265.png)
 
 This will open the "**Rebasing Commits**" popup window with a list of the commits that were done on top of the selected commit.
 
-![](rebasing-commits-popup-700x440.png)
+![IntelliJ 'Rebasing Commits' window listing the commits to rebase, with Reword, Squash and Drop buttons](rebasing-commits-popup-700x440.png)
 
 Notice there are several options at the top of this popup, that become active when we select one or more of the commits:
 
@@ -48,9 +47,9 @@ Notice there are several options at the top of this popup, that become active wh
 
 Let's say we want to change the order of the commits; we want to keep the unrelated change, but separately from the changes for the new feature. We can select this commit and use the up and down buttons on the top left to change where in the order this commit will be.
 
-![](unrelated-changes-568x510.png)
+![Rebasing Commits window with the 'Unrelated changes' commit selected, ready to move down with the Down button](unrelated-changes-568x510.png)
 
-![](changed-order-574x510.png)
+![Rebasing Commits window after moving 'Unrelated changes' to the end of the commit list](changed-order-574x510.png)
 
 Once we're sure about the order, select "**Start Rebasing**". We see in the Git log that the order of the commits has changed.
 
@@ -58,13 +57,13 @@ Once we're sure about the order, select "**Start Rebasing**". We see in the Git 
 
 Next, we want to combine multiple commits where we added the tests and implemented the new feature. Let's reopen the "**Rebasing Commits**" window and select those commits.
 
-![](select-commits-628x510.png)
+![Rebasing Commits window with a long run of test, feature and refactor commits selected to be combined](select-commits-628x510.png)
 
 Now, because we want to combine those commits into one commit with one commit message we select "**Fixup** ", and then select "**Start Rebasing**".
 
-![](fixup-1-628x510.png)
+![Squash dropdown in the Rebasing Commits window showing the 'Fixup' option for the selected commits](fixup-1-628x510.png)
 
-![](fixup-commits-628x510.png)
+![Rebasing Commits window where the selected commits are folded into one 'Implement feature' commit](fixup-commits-628x510.png)
 
 In the Git log, we can see that multiple individual commits are now combined into one commit with one commit message.
 
@@ -72,9 +71,9 @@ In the Git log, we can see that multiple individual commits are now combined int
 
 Finally, we want to drop the commit with a mistake that we made. Let's reopen the "**Rebasing Commits** " window, select the mistaken commit, select "**Drop** " and select "**Start Rebasing**".
 
-![](select-mistake-700x254.png)
+![Rebasing Commits window with the 'Mistake' commit selected, about to be dropped](select-mistake-700x254.png)
 
-![](drop-mistake-700x282.png)
+![Rebasing Commits window with the 'Mistake' commit shown struck through to mark it as dropped](drop-mistake-700x282.png)
 
 We see in the Git log that the commit is dropped.
 
@@ -84,15 +83,15 @@ Now that we have cleaned up our commit history, we might want to rename the comm
 
 We can do so using Git interactive rebase, in the "**Rebasing Commits** " popup, by selecting the commit you want to rename and clicking the "**Reword** " button at the top of the popup. This will open a small editor pane where you can reword the commit message for this commit, apply the change to the message and select "**Start Rebasing**".
 
-![](reword-700x278.png)
+![Rebasing Commits window with the first commit message opened for editing after clicking Reword](reword-700x278.png)
 
 You can also edit the commit message directly in the Git log window. Right-click the commit you want to rename and select "**Edit Commit Message** " or press **F2** on macOS, Windows or Linux.
 
-![](edit-commit-message-700x346.png)
+![IntelliJ Git log context menu with 'Edit Commit Message...' (F2) highlighted on the 'Add failing test' commit](edit-commit-message-700x346.png)
 
 This will open a "**Edit Commit Message** " popup, where you can edit the commit message and click "**Ok** " (or "**Cancel**") when you are done.
 
-![](edit-commit-message-popup.png)
+![IntelliJ 'Edit Commit Message' dialog showing the message 'Add failing test' with OK and Cancel buttons](edit-commit-message-popup.png)
 
 ### See which Git commands were executed
 
@@ -106,15 +105,15 @@ In the Git history, identify the commit *just before* the commit from where you 
 
 Find the commit hash for this commit in the "**Commit Details** " to the right of the Git history in the Git window and copy this commit hash. (Spoiler: the commit hash in this example is `34bb0f99`.)
 
-![](commit-hash-700x110.png)
+![Git log with the 'Add README' commit selected and its hash 34bb0f99 highlighted in the commit details](commit-hash-700x110.png)
 
 Open the Terminal window, using **⌥F12** on Mac (or **Alt+F12** on Windows \& Linux) and type `git rebase -i 34bb0f99` (where `34bb0f99` is the commit hash we copied above).
 
-![](git-rebase-i-700x92.png)
+![Terminal command 'git rebase -i 34bb0f99' typed in IntelliJ's terminal](git-rebase-i-700x92.png)
 
 This will open an editor in the terminal with the list of commits that were done on top of the selected commit. Each line in this file is an individual commit.
 
-![](commits-in-editor-667x510.png)
+![Terminal editor listing 14 commits as 'pick' lines, the todo list for the interactive rebase](commits-in-editor-667x510.png)
 
 By default, Git will use whatever you have set as your default text editor. If you haven't set one, it will fall back to the vi editor, which is what we will use in this tutorial.
 
@@ -132,7 +131,7 @@ In vi, we can do so as follows:
 * Move the cursor to the line where you want to reinsert this commit (in this example, the end of the file) and type `p`.
 * Note: you do **not** need to switch to edit mode to do so.
 
-![](change-order-700x483.jpg)
+![Terminal rebase todo list with the 'Unrelated changes' line moved to the end of the file](change-order-700x483.jpg)
 
 Once we're sure about the order, we need to save the file. Press `esc` to exit edit mode and type `:wq` to save the file.  
 
@@ -152,7 +151,7 @@ For each of the commits we want to combine, replace "pick" with "fixup".
 
 Note that we use "fixup" because we want to use one commit message for the combination of the commits. Alternatively, we could use "squash" to combine the individual commit messages into the new commit message.
 
-![](fixup-657x510.png)
+![Terminal rebase todo list where most commits changed from 'pick' to 'fixup' under the first 'Add failing test' commit](fixup-657x510.png)
 
 Once we have correctly edited all the commits we want to combine, save the file.  
 
@@ -168,7 +167,7 @@ To drop a commit, remove that commit from the list of commits. In this example, 
 
 In vi, we can remove a line by placing the cursor anywhere on the line we want to remove and typing `dd`. Alternatively, we can switch to edit mode by pressing `I` and removing the line manually. Press `esc`to exit edit mode.
 
-![](drop-commit-700x177.png)
+![Terminal rebase todo list reduced to four pick lines after removing the unwanted commit line](drop-commit-700x177.png)
 
 Save the file by typing `:wq` and the interactive rebase will be applied. We see in the Git log that the commit is dropped.
 

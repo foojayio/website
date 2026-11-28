@@ -1,7 +1,6 @@
 ---
 title: "Free Foojay.io Tickets for JCON EUROPE 2025, Cologne!"
 date: "2025-04-26T08:16:44+00:00"
-lastmod: "2025-04-28T07:42:32+00:00"
 description: "As proud members of the Java ecosystem, Foojay collaborators of all shapes and sizes can join JCON EUROPE 2025 at no cost."
 authors:
   - "r-fichtner"
@@ -23,7 +22,7 @@ Welcome to JCON EUROPE 2025, the international Java conference where the heart o
 
 And we're doing it in style: JCON EUROPE is hosted in a multiplex movie theater, where Java code, insights, and live demos unfold on massive cinema screens. It's an immersive learning experience like no other—where you're not just watching talks, you're living them.
 
-![](53721494882_6f31f6da3b_k-700x422.jpg)
+![Large curved LED screen in the JCON EUROPE 2024 venue welcoming visitors, listing partner Java user groups](53721494882_6f31f6da3b_k-700x422.jpg)
 
 ### 🧡 2025 marks a double milestone
 
@@ -46,7 +45,7 @@ As proud members of the Java ecosystem, Foojay collaborators of all shapes and s
 
 🌐 Whether you're a backend veteran, JVM tinkerer, JavaFX enthusiast, or just exploring how Java meets AI, cloud, or microservices—JCON is your home base for real-world learning, shared passion, and serious fun.
 
-![](53726446409_97af25b8e2_k-700x385.jpg)
+![Black-and-white photo of three JCON attendees laughing and talking at a table during the conference](53726446409_97af25b8e2_k-700x385.jpg)
 
 🚀 JCON EUROPE 2025 – Where Community and Code Converge  
 

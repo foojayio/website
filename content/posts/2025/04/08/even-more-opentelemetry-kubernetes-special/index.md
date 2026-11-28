@@ -1,7 +1,6 @@
 ---
 title: "Even more OpenTelemetry - Kubernetes special"
 date: "2025-04-08T17:39:31+00:00"
-lastmod: "2026-09-21T06:03:08+00:00"
 description: "I have presented my OpenTelemetry demo many times, and I still do. Each time, the audience is different. To make no two presentations the same, I always…"
 canonical: "https://blog.frankel.ch/even-more-opentelemetry-kubernetes/"
 authors:
@@ -245,7 +244,7 @@ spec:
 
 Here's a screenshot of the resulting traces:
 
-![](kubernetes-instrumented-app-1024x464.jpeg)
+![Distributed trace of the instrumented Kubernetes app showing database SELECT spans and HTTP send spans for the recommendations service](kubernetes-instrumented-app-1024x464.jpeg)
 
 What's impressive is that it's all based on Kubernetes. Neither the app developer nor the container build had to do anything related to OpenTelemetry.
 
@@ -292,7 +291,7 @@ public class StockLevelResource {
 1. Add a new span whose value is the method's name
 2. Add a new `id` attribute whose value is the `id`'s value at runtime
 
-![](quarkus-app-1024x480.jpeg)
+![Trace of the Quarkus stocks service showing spans for the stockLevels method, getConnection and Postgres SELECT queries with durations](quarkus-app-1024x480.jpeg)
 
 ## Summary
 

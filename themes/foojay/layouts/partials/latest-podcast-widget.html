@@ -1,0 +1,8 @@
+{{/* Home page aside widget: the newest Foojay Podcast episode, as the same card the bands use. */}}
+{{ with partial "podcast-episodes.html" (where site.RegularPages "Section" "posts") }}
+<section class="widget widget-podcast">
+  <h2>Latest podcast</h2>
+  {{ partial "post-card.html" (dict "page" (index . 0) "maxCategories" 1) }}
+  <a class="view-all" href="{{ "today/category/podcast/" | relURL }}">All podcasts &rarr;</a>
+</section>
+{{ end }}

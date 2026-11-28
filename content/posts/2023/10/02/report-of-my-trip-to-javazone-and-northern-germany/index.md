@@ -1,7 +1,6 @@
 ---
 title: "Report of My Trip to JavaZone and Northern Germany"
 date: "2023-10-02T08:44:28+00:00"
-lastmod: "2023-10-02T08:44:29+00:00"
 description: "Between 2nd and 17th September, I gave three talks in three different cities!"
 authors:
   - "johannes-bechberger"
@@ -22,29 +21,29 @@ Between 2nd and 17th September, I gave three talks in three different cities:
 
 I traveled from Karlsruhe to Oslo (via Stuttgart Airport) and from Oslo to Hanover via plane, then to Hamburg, Hanover, back to Hamburg, and the end via Bonn back to Karlsruhe via train:  
 
-{{< img src="image-14.jpg" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
+{{< img src="image-14.jpg" alt="Map route from Oslo via Hamburg, Hanover and Bonn back to Karlsruhe, showing the trip by plane and train" class="aligncenter size-full is-resized" width="422" height="675" style="width:422px;height:675px" caption="This was my first time traveling to a conference by plane because traveling to Oslo by train takes far longer (20 hours or more)." >}}
 
 This was my second two-week-long tour giving talks, after my tour d'Europe in May/June this year (see [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/)), but this time it consisted solely of talks at conferences. The following is a short report of my trip that saw me brewing beer, giving a talk at one of my favorite conferences, and visiting Hamburg for the first time.
 
 ## Oslo
 
 I started by traveling to Oslo on Saturday before the conference, which began on Tuesday with workshops. My journey started with the 2:30 am bus from Karlsruhe to Stuttgart, where I took the 6:30 am flight to Paris and from there to Oslo. Flying in the early hours of the morning is something extraordinary:  
-![](IMG_1940-2000x1500-0b6626a2.jpeg)  
-![](paris_airport-2000x1500-8a5c5edc.jpeg)
+![Sunrise over the Stuttgart airport apron seen through an airplane window, with a plane wing in view](IMG_1940-2000x1500-0b6626a2.jpeg)  
+![Dramatic red sky over Paris airport, with parked planes and an airstair on the apron](paris_airport-2000x1500-8a5c5edc.jpeg)
 
 I've never really been to Oslo before, except as a toddler, according to my parents, so I wanted to explore the city. I arrived in Oslo Saturday afternoon and stayed till Tuesday morning at the home of a friendly expat that I met via the couch-surfing platform [BeBelcome.org](https://bewelcome.org), staying there till Tuesday morning. It was great: I had the opportunity to visit the famous [Fram Polar Exploration Museum](https://frammuseum.no/), hike around the Vettakollen, and brew beer with my host:  
-![](IMG_2012-2000x1500-052e0f64.jpeg)  
-![](IMG_2022-2000x1500-df2dfd6e.jpeg)  
-![](IMG_2003-1500x2000-93f308e8.jpeg)  
-![](IMG_1985-1500x2000-cc8ce7aa.jpeg)  
-![](IMG_1956-2000x1500-fd00bf48.jpeg)  
-![](IMG_1951-1500x2000-1e6b85d2.jpeg)  
-![](IMG_2012-2000x1500-052e0f64.jpeg)  
-![](IMG_2022-2000x1500-df2dfd6e.jpeg)  
-![](IMG_2003-1500x2000-93f308e8.jpeg)  
-![](IMG_1985-1500x2000-cc8ce7aa.jpeg)  
-![](IMG_1956-2000x1500-fd00bf48.jpeg)  
-![](IMG_1951-1500x2000-1e6b85d2.jpeg)
+![View over the Oslo fjord and city from a forested hilltop](IMG_2012-2000x1500-052e0f64.jpeg)  
+![Close-up of bright green moss and fallen leaves on a forest floor near Oslo](IMG_2022-2000x1500-df2dfd6e.jpeg)  
+![Wooden sailing ships and small boats moored in Oslo harbour under a blue sky](IMG_2003-1500x2000-93f308e8.jpeg)  
+![Bow and rigging of the polar ship Fram inside its tent-shaped museum in Oslo](IMG_1985-1500x2000-cc8ce7aa.jpeg)  
+![The illuminated Storting parliament building in Oslo at night](IMG_1956-2000x1500-fd00bf48.jpeg)  
+![Cluttered home brewing corner with fermenting flasks, a mash kettle, a bottle capper and shelves of bottles](IMG_1951-1500x2000-1e6b85d2.jpeg)  
+![View over the Oslo fjord and city from a forested hilltop](IMG_2012-2000x1500-052e0f64.jpeg)  
+![Close-up of bright green moss and fallen leaves on a forest floor near Oslo](IMG_2022-2000x1500-df2dfd6e.jpeg)  
+![Wooden sailing ships and small boats moored in Oslo harbour under a blue sky](IMG_2003-1500x2000-93f308e8.jpeg)  
+![Bow and rigging of the polar ship Fram inside its tent-shaped museum in Oslo](IMG_1985-1500x2000-cc8ce7aa.jpeg)  
+![The illuminated Storting parliament building in Oslo at night](IMG_1956-2000x1500-fd00bf48.jpeg)  
+![Cluttered home brewing corner with fermenting flasks, a mash kettle, a bottle capper and shelves of bottles](IMG_1951-1500x2000-1e6b85d2.jpeg)
 
 ## JavaZone
 
@@ -55,12 +54,12 @@ Then, on Tuesday, it was time for the workshop day of JavaZone. I've been drawn 
 So, speaking, there was a great honor; I can recommend this experience to anyone. It is a lovely venue with good food and great organizers who care about their speakers (shout out to [Felix Rabe](https://www.linkedin.com/in/felixrabe/), [Rafael Winterhalter](https://rafael.codes/), and [Marek Machnik](https://www.linkedin.com/in/marekmachnik/)).
 
 I started the conference by attending the "A little taste of testing the Java compiler" workshop by [Hasnae Rehioui](https://viqueen.org/):
-![](IMG_2042-d10a96e6.jpg) Hasnae Rehioui, in her workshop
+![Speaker at a laptop in a small conference room, with a GitHub jdk-workshop repository projected on the screen](IMG_2042-d10a96e6.jpg) Hasnae Rehioui, in her workshop
 
 *If you want to start with building the OpenJDK and running JTREG tests, her [accompanying website](https://viqueen.org/notes/workshop:-testing-OpenJDK/) is an excellent place to start.*
 
 At the end of the day, I went to the speaker dinner, where I met the organizers and people like [Fabian Stäber](https://www.linkedin.com/in/fstab/) and [Gunnar Morling](https://www.morling.dev/). The view from the restaurant was majestic:
-![](IMG_2047-2000x1500-67cc6979.jpeg)
+![Oslo city lights at night seen from a hillside viewpoint](IMG_2047-2000x1500-67cc6979.jpeg)
 
 Then, the next day, the conference began. The conference paid for the hotel during the week. I met [Pasha Finkelshtein](https://www.linkedin.com/in/asm0dey/) and [Marit van Dijk](https://maritvandijk.com/) from [JetBrains](https://www.jetbrains.com/) at the breakfast buffet. I was that day in many talks, including the [Maven Puzzlers](https://2023.javazone.no/program/ca873dbe-7389-4ee7-a71f-7327860106c7) talk by Andres Almiray and Ixchel Ruiz:
 
@@ -103,31 +102,31 @@ Later in the day, I went to [Theresa](https://www.linkedin.com/in/tmammarella/) 
 I was introduced to her the evening before, and it was great to see the only other young JDK developer (in her case, [OpenJ9](https://eclipse.dev/openj9/)) on stage.
 
 In the evening, I ate dinner with a couple of my fellow speakers, including [Marit van Dijk](https://www.linkedin.com/in/maritvandijk/), [Rustam Mehmandarov](https://www.linkedin.com/in/mehmandarov/), [Gerrit Grunwald](https://www.linkedin.com/in/gerritgrunwald/), [Raquel Pau](https://www.linkedin.com/in/raquel-pau-4010069/), [Tim te Beek](https://www.linkedin.com/in/timtebeek/), [Steve Poole](https://www.linkedin.com/in/noregressions/), [Alina Yurenko](https://www.linkedin.com/in/alinayurenko/), [Theresa Mammarella](https://www.linkedin.com/in/tmammarella/), [Mads Opheim](https://www.linkedin.com/in/madsopheim/) and [Ko Turk](https://www.linkedin.com/in/ko-turk-b271b929/). Afterward, we went to Himkok bar to relax after two days at the conference:  
-![](IMG_2100-44c46405.jpg)  
-![](IMG_2084-2-1500x2000-ff8e5163.jpeg)
+![Group of conference speakers smiling around a table in an Oslo pub](IMG_2100-44c46405.jpg)  
+![Looking up at a brick courtyard in Oslo at night, with string lights between the buildings](IMG_2084-2-1500x2000-ff8e5163.jpeg)
 
 The next day was my last in Oslo before moving to northern Germany. So I took the chance to explore the city center once more and made a photograph of the speaker's gift:  
 
-{{< img src="IMG_2091-2000x1500-3d1b7439.jpeg" class="aligncenter size-large is-resized" width="614" height="454" style="width:614px;height:454px" caption="A Viking duke in front of the Oslo Stock Exchange" >}}
+{{< img src="IMG_2091-2000x1500-3d1b7439.jpeg" alt="Java Duke mascot figurine wearing a Viking helmet on a stone quay, with Oslo buildings and water behind" class="aligncenter size-large is-resized" width="614" height="454" style="width:614px;height:454px" caption="A Viking duke in front of the Oslo Stock Exchange" >}}
 
 I had to say goodbye to Oslo and then traveled to Hamburg via Hanover Airport to stay with a friend in Hamburg.
 
 ## Hamburg
 
 The problem was that JavaZone pays the hotel till Friday, and the speaker dinner for Java Forum Nord is Monday evening. I knew someone in Hamburg, so I stayed in Hamburg from Friday night till Monday afternoon. I used the time to look into Python debugging, which eventually resulted in my [Let's create a Python Debugger together: Part 1](https://mostlynerdless.de/blog/2023/09/20/lets-create-a-python-debugger-together-part-1/) blog post, went sightseeing, watched the dark comedy [Sophia, der Tod und Ich](//www.polyfilm.at/film/sophia-der-tod-und-ich/), and visited the [Hamburger Miniaturwunderland](https://www.miniatur-wunderland.de/):  
-![](IMG_2125-2-2000x1500-cdcc41c5.jpeg)  
-![](IMG_2134-2000x1500-42d47cf4.jpeg)  
-![](IMG_2140-2000x1500-f65d1513.jpeg)  
-![](IMG_2125-2-2000x1500-cdcc41c5.jpeg)  
-![](IMG_2134-2000x1500-42d47cf4.jpeg)  
-![](IMG_2140-2000x1500-f65d1513.jpeg)
+![Historic sailboats moored in Hamburg harbour with container cranes in the background](IMG_2125-2-2000x1500-cdcc41c5.jpeg)  
+![Breakfast bowl with fruit, jars and a peach on a sunny Hamburg balcony with flowers and a brick wall](IMG_2134-2000x1500-42d47cf4.jpeg)  
+![Miniature fairground at night with a lit Ferris wheel and crowds, in Miniatur Wunderland Hamburg](IMG_2140-2000x1500-f65d1513.jpeg)  
+![Historic sailboats moored in Hamburg harbour with container cranes in the background](IMG_2125-2-2000x1500-cdcc41c5.jpeg)  
+![Breakfast bowl with fruit, jars and a peach on a sunny Hamburg balcony with flowers and a brick wall](IMG_2134-2000x1500-42d47cf4.jpeg)  
+![Miniature fairground at night with a lit Ferris wheel and crowds, in Miniatur Wunderland Hamburg](IMG_2140-2000x1500-f65d1513.jpeg)
 
 While there, I had the pleasure of traveling with light luggage, as my luggage didn't arrive in Hamburg till Wednesday because it was somehow stuck in Amsterdam airport, where I had a stopover.
 
 ## Java Forum Nord
 
 The second conference on my journey was the [Java Forum Nord](https://javaforumnord.de/2023/) in Hanover on Tuesday. This conference is a small community-run event, without many sponsors and many talks in German. It was my first German Java conference, so there were many German-only speakers that I hadn't seen at a conference before. I met a few of them at the speaker's dinner on Monday and at the after-party on Tuesday:
-![](IMG_2157-2000x1125-599a2c5c.jpg) Speakers' dinner with alcohol-free beer and Spätzle in Hanover
+![Beers and a glowing paper-bag candle on a table at the Java Forum Nord speaker dinner](IMG_2157-2000x1125-599a2c5c.jpg) Speakers' dinner with alcohol-free beer and Spätzle in Hanover
 
 I enjoyed meeting Marit van Dijk again and getting to know [Sandra Parsick](https://www.sandra-parsick.de/) and [Karl Heinz Marbaise](https://www.linkedin.com/in/khmarbaise/).
 
@@ -136,14 +135,14 @@ The day after, I traveled back to Hamburg for the [code.talks](https://codetalks
 ## Code.Talks
 
 This was the third conference in a row and the only one without a focus on Java. The talks were on various technologies, from NFTs to creativity. The most memorable of the conference was by far the speaker's dinner at the open kitchen restaurant [Hensslers Küche](https://www.hensslerskueche.de/) and visiting the [Heavens Bar \& Kitchen](https://www.clouds-hamburg.de/startseite) rooftop bar in St. Pauli with [Jacqueline Franßen](https://www.linkedin.com/in/jacqueline-franssen-0422341b1/), [Hannes Drittler](https://www.linkedin.com/in/hannes-drittler-06b57b151/), and [Samir Ar](https://www.linkedin.com/in/samir-ar-548599b0/) after the second day of the conference:  
-![](IMG_2211-2000x1500-c07bda2b.jpeg)  
-![](IMG_2190-2000x1500-2eca2c2d.jpeg)  
-![](IMG_2187-2000x1500-01c523df.jpeg)  
-![](IMG_2190-4-2000x1500-ee149f13.jpeg)  
-![](IMG_2211-2000x1500-c07bda2b.jpeg)  
-![](IMG_2190-2000x1500-2eca2c2d.jpeg)  
-![](IMG_2187-2000x1500-01c523df.jpeg)  
-![](IMG_2190-4-2000x1500-ee149f13.jpeg)
+![Hamburg skyline at night with the lit St. Michael's church tower and the harbour on the right](IMG_2211-2000x1500-c07bda2b.jpeg)  
+![Speaker presenting an 'Inspiration' slide with quotes and portraits of Leonardo da Vinci, Einstein and Steve Jobs](IMG_2190-2000x1500-2eca2c2d.jpeg)  
+![Plate of salmon-topped sushi rolls with avocado and black sesame seeds](IMG_2187-2000x1500-01c523df.jpeg)  
+![Chefs in an open kitchen plating rows of steak dishes on a wooden counter](IMG_2190-4-2000x1500-ee149f13.jpeg)  
+![Hamburg skyline at night with the lit St. Michael's church tower and the harbour on the right](IMG_2211-2000x1500-c07bda2b.jpeg)  
+![Speaker presenting an 'Inspiration' slide with quotes and portraits of Leonardo da Vinci, Einstein and Steve Jobs](IMG_2190-2000x1500-2eca2c2d.jpeg)  
+![Plate of salmon-topped sushi rolls with avocado and black sesame seeds](IMG_2187-2000x1500-01c523df.jpeg)  
+![Chefs in an open kitchen plating rows of steak dishes on a wooden counter](IMG_2190-4-2000x1500-ee149f13.jpeg)
 
 While there, I also started preparing an upcoming talk for JCon World with Marit van Dijk and had an online meeting with Jaroslav Bachorik and Erik Österlund on the future of my JEP, so stay tuned.
 

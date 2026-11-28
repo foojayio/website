@@ -1,7 +1,6 @@
 ---
 title: "JUG PH Continuation Report 2023"
 date: "2023-09-05T06:11:57+00:00"
-lastmod: "2023-11-01T14:31:05+00:00"
 description: "A JUG PH Continuation Report for the June and August Meetups. This report focuses on the meetups that happened in June and August 2023."
 authors:
   - "tristan-mahinay"
@@ -30,12 +29,12 @@ Every meetup the JUG PH Leaders will introduce its sponsors. The sponsors for th
 
 The JUG PH is very thankful for these sponsors as they are vital to the continuation of the meetups at Makati City.
 
-![](sponsor-presentation-1024x768.jpg)  
-![](azul_food_sponsor-1024x768.jpg)
+![Presenter next to a screen thanking sponsors Azul, JetBrains, Pinoy JUG, Orange and Bronze and JUG Philippines](sponsor-presentation-1024x768.jpg)  
+![Presenter at the JUG PH meetup beside a screen showing Azul as food sponsor](azul_food_sponsor-1024x768.jpg)
 
 The meetup announced the availability of [Incub8 Space](https://incub8space.com/ "Incub8 Space") by [Kerby Martino](https://www.linkedin.com/in/kerbymartino/ "Kerby Martino") as a meetup place in the Souther Luzon Area. The coworking space is headquartered at Kawit, Cavite, Philippines. In the future, the user group will have events in this area catering in-person or online
 
-![](incub8_space_introduction-1024x768.jpg)
+![Meetup screen introducing Incub8 Space in Kawit, Cavite, with a presenter watching](incub8_space_introduction-1024x768.jpg)
 
 ## Meetup #2 and #3
 
@@ -43,15 +42,15 @@ The meetup announced the availability of [Incub8 Space](https://incub8space.com/
 
 This meetup is all about Quarkus and OpenShift Development. The speaker did an introduction on what is Quarkus and had a live demonstration on how to code the fundamentals of the framework and the seamless experience in deploying to RedHat OpenShift.
 
-![](image_d1eac8f0-31d2-4d7e-bdd6-a4b54ad0752820230629_201712-1024x768.jpg)
+![Speaker at a laptop in front of a screen showing the Quarkus project configuration page](image_d1eac8f0-31d2-4d7e-bdd6-a4b54ad0752820230629_201712-1024x768.jpg)
 
 The audience were very curious on how Quarkus works and the benefits they can get if it will be used on their organization. In this session, they were familiarized with creation of a simple Quarkus service, the Dev UI, the Dev Services and the connection of the application as a pod to the database inside RedHat OpenShift.
 
-![](quarkuks_audiences-382x510.jpg)
+![Audience members seated and watching a Quarkus session at the JUG PH meetup](quarkuks_audiences-382x510.jpg)
 
 Below is the official speaker poster for this event.
 
-![](jugph_2_tristan_mahinay_speaker-423x510.jpg)
+![Speaker poster for the Quarkus and OpenShift Development meetup with Tristan Mahinay on June 29, 2023](jugph_2_tristan_mahinay_speaker-423x510.jpg)
 
 You can check the presentation of this meetup here: [Quarkus and OpenShift Development](https://github.com/JUGPH/java-presentations/tree/main/event-2 "Quarkus and OpenShift Development")
 
@@ -61,15 +60,15 @@ The presentation was formally called *Cloud-native Java innovations that matter 
 
 Some of its notable features were the JIT-as-a-Service in Semeru, Liberty InstantOn and Liberty Operators.
 
-![](back_photo-1024x768.jpg)
+![Audience seated in the O&B meeting room watching a presentation on a wall screen](back_photo-1024x768.jpg)
 
 At the end of the session, we had a group photo together with Yee Kang and the folks onsite.
 
-![](jugph_3_group_photo-680x510.jpg)
+![Group photo of JUG PH attendees in front of a screen showing the remote speaker on video](jugph_3_group_photo-680x510.jpg)
 
 Below is the official speaker poster for this event.
 
-![](jugph_3_YK-Chang-469x510.jpeg)
+![Speaker poster for the Open Liberty session with Yee-Kang Chang, IBM architect, on August 29, 2023](jugph_3_YK-Chang-469x510.jpeg)
 
 You can check the presentation of this meetup here: [Cloud-native Java innovations that matter with Open Liberty](https://github.com/JUGPH/java-presentations/tree/main/event-3 "Cloud-native Java innovations that matter with Open Liberty")
 

@@ -1,7 +1,6 @@
 ---
 title: "JDK14 - New Features and Enhancements"
 date: "2020-05-19T23:29:37+00:00"
-lastmod: "2020-08-26T10:17:39+00:00"
 description: "Java 14 (Java SE 14) and its Java Development Kit 14 (JDK 14) is now available! Know more about new features and enhancements in JDK14."
 canonical: "https://www.azul.com/blog/whats-new-in-jdk14-latest-release/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AI Series: Complete Guide to Building AI Agents"
 date: "2026-05-14T09:26:48+00:00"
-lastmod: "2026-05-18T09:04:50+00:00"
 description: "The world of AI development is moving fast, but building real, production-ready AI agents doesn’t have to be complex. This series walks you step by step…"
 authors:
   - "cristobal-escobar"
@@ -19,7 +18,7 @@ related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
 ---
 
-![](Guide-to-Building-AI-Agents-2-700x365.jpg)
+![BoxLang AI logo with the title Complete Guide to Building AI Agents on a green and blue network background](Guide-to-Building-AI-Agents-2-700x365.jpg)
 
 The world of AI development is moving fast, but building real, production-ready AI agents doesn't have to be complex.
 

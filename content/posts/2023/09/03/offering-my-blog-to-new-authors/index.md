@@ -1,14 +1,13 @@
 ---
 title: "Offering my blog to new authors"
 date: "2023-09-03T06:47:27+00:00"
-lastmod: "2026-09-21T06:04:45+00:00"
 description: "Regular readers of this blog know that I started it a long time ago, namely in April 2008. I soon found my cruising speed: a post a week. It requires time…"
 canonical: "https://blog.frankel.ch/my-blog-new-authors/"
 authors:
   - "nicolas-frankel"
 image: "wordpress-gdf893a2fd.jpg"
 categories:
-  - "Java"
+  - "Foojay"
 related_posts:
 ---
 

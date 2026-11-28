@@ -1,14 +1,12 @@
 ---
 title: "How to Build a Search Service in Java with MongoDB"
 date: "2026-02-27T18:28:09+00:00"
-lastmod: "2026-07-23T19:20:44+00:00"
 description: "We need to code our way from the search box to our search index. Performing a search and rendering the results in a presentable fashion, itself, is not a tricky endeavor: Send the user’s query to the search server, and translate the response data into some user interface technology. However, there are some important issues that need to be addressed, such as security, error handling, performance, and other concerns that deserve isolation and control."
 authors:
   - "erik-hatcher"
 image: "Screenshot-2025-12-30-at-10.40.42-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -20,7 +18,7 @@ related_posts:
 We need to code our way from the search box to our search index. Performing a search and rendering the results in a presentable fashion, itself, is not a tricky endeavor: Send the user's query to the search server, and translate the response data into some user interface technology. However, there are some important issues that need to be addressed, such as security, error handling, performance, and other concerns that deserve isolation and control.
 
 A typical [three-tier system](https://www.mongodb.com/basics/database-architecture?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=search-service-foojay&utm_term=erik.hatcher) has a presentation layer that sends user requests to a middle layer, or application server, which interfaces with backend data services. These tiers separate concerns so that each can focus on its own responsibilities.  
-![](Screenshot-2025-12-30-at-10.40.42-PM.png)
+![Architecture diagram: a database server and a back-end server using MongoDB drivers serve three client applications](Screenshot-2025-12-30-at-10.40.42-PM.png)
 
 If you've built an application to manage a database collection, you've no doubt implemented Create-Read-Update-Delete (CRUD) facilities that isolate the business logic in a middle application tier.
 

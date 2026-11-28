@@ -1,13 +1,11 @@
 ---
 title: "Spring Boot documentation with Redocusaurus"
 date: "2025-07-16T06:45:38+00:00"
-lastmod: "2025-07-16T06:45:40+00:00"
 description: "Spring Boot API documentation with Redocusaurus: from exporting your OpenAPI spec to setting up a beautiful developer portal in minutes."
 authors:
   - "vincent-vauban"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Spring"
 related_posts:
   - "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"

@@ -1,7 +1,6 @@
 ---
 title: "Chronicle Wire: Object Marshalling"
 date: "2023-03-29T13:35:43+00:00"
-lastmod: "2023-03-29T13:36:37+00:00"
 description: "About the efficiencies of using Chronicle Wire to encode small Strings into long primitives and how this improves serialisation performance."
 authors:
   - "jasmine-taylor"
@@ -259,7 +258,7 @@ We then take this decimal 72 and use an [ASCII character chart](https://ascii.cl
 
 If we see look in the blue section, which is the 'ASCI IOS-8859', we see that this corresponds to the 3rd character in – 'H'.
 
-![](Screen-Shot-2023-03-20-at-11.22.58-AM-1024x273.png)  
+![Hex dump of a Chronicle Wire message with the string fields highlighted by color and the decoded text 'House 82 St John Street, Clerkenwell, London' below](Screen-Shot-2023-03-20-at-11.22.58-AM-1024x273.png)  
 *Figure 1. toHexString( ) output*
 
 #### @Base64
@@ -278,7 +277,7 @@ It should be noted that this can be simplified to just:
 
 An example of this being implemented can be seen in the snippet below, whereby the section in green is replaced by an alias (in red):
 
-![](Screen-Shot-2023-03-20-at-11.27.53-AM-969x1024.png)
+![Java example defining two classes that store a long as Base64, one using @LongConversion and one using the @Base64 annotation, then printing JSON](Screen-Shot-2023-03-20-at-11.27.53-AM-969x1024.png)
 
 #### Creating your own annotations
 
@@ -348,7 +347,7 @@ Important to note is that trivially copyable objects were used in order to impro
 
 For further understanding on trivially copyable objects, refer to [this article](https://dzone.com/articles/how-to-get-c-speed-in-java-serialisation "this article"). This shows that we can serialise and then de-serialise 100,000 messages a second. The Trivially Copyable version is even faster, especially at the higher percentiles.
 
-![](Screen-Shot-2023-03-20-at-11.34.03-AM-1024x616.png)
+![Line chart: TriviallyCopyable latency stays near 0.2 microseconds across percentiles, while BinaryWire jumps above 1 microsecond at the 99.99th percentile](Screen-Shot-2023-03-20-at-11.34.03-AM-1024x616.png)
 
 *Figure 2. Benchmark Performance Between TriviallyCopyable and BinaryWire*
 

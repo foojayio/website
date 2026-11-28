@@ -1,7 +1,6 @@
 ---
 title: "General Build Distribution: A Game-Changer or a Gimmick?"
 date: "2022-07-20T21:09:29+00:00"
-lastmod: "2022-07-28T17:34:17+00:00"
 description: "Understand the performance potential of remote and distributed builds and explore how to improve build feedback times."
 authors:
   - "kyle-moore"

@@ -1,13 +1,11 @@
 ---
 title: "Announcing the Build Server for Gradle Open-Source Repository"
 date: "2023-11-21T10:08:33+00:00"
-lastmod: "2023-11-21T10:09:01+00:00"
 description: "We are excited to announce our decision to officially open-source the Build Server for Gradle project!"
 authors:
   - "nick-zhu"
 image: "gradleext.png"
 categories:
-  - "Java"
   - "Java Core"
   - "Tools"
   - "VS Code"
@@ -43,7 +41,7 @@ Using Build Server for Gradle is straightforward. You can follow these simple st
 
 #### Step 2 -- Install the "Gradle for Java" extension. (Currently, Build Server for Gradle is integrated into [Gradle for Java extension](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle))
 
-[![](gradleext.png)](gradleext.png)
+[![VS Code Marketplace listing for the Microsoft 'Gradle for Java' extension with an Install Pre-Release button](gradleext.png)](gradleext.png)
 
 After installing this extension, you can enable Build Server for Gradle for import your Gradle projects.
 

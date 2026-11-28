@@ -1,7 +1,6 @@
 ---
 title: "Open Source Tools as an Opportunity for SMEs to Use AI?"
 date: "2021-06-02T14:36:04+00:00"
-lastmod: "2023-02-03T13:41:27+00:00"
 description: "The goal of this research is to sensitize small and medium-sized enterprises (SMEs) to the topic of AI with the help of Open Source Tools."
 authors:
   - "phamnguy"
@@ -34,7 +33,7 @@ Small and medium-sized enterprises play a key role in the German economy. More t
 Definition of SME ^\[3\]^
 
 However, SMEs are generally not up to date with digitalization compared to large companies. A study by Sames and Diener shows a significant correlation between company size and the degree of digitalization. They determined an average value to all questions about business processes in a company. In general, a maximum average of 4 can be achieved on their scale. For companies with more than 1,000 employees, the average value is at 2.31. Companies with fewer than 500 employees cannot exceed an average value of 1.83. Nonetheless, the degree of digitalization for both average values is still too low. ^\[4\]^
-![](image-5-1024x303.png) Degree of Digitalization by size class in Germany ^\[4\]^
+![Timeline of the degree of digitalization in Germany from 0 to 4, with SMEs scoring lower than large enterprises](image-5-1024x303.png) Degree of Digitalization by size class in Germany ^\[4\]^
 
 ### Artificial Intelligence from an Economic Perspective
 
@@ -48,12 +47,12 @@ One way to increase the level of digitalization is to use a future key technolog
 * the reduction of costs. ^\[5\]^
 
 However, AI should not be treated exclusively as a growth potential. It can also serve as a profitable business model for companies. In 2016, the market research company Tractica forecast an expected global turnover of 4.8 billion US-Dollar for the year 2020 in the field of AI. They also determined an increase in sales up to 31.2 billion US-Dollar by the year 2025. ^\[6\]^
-![](image-6-1024x371.png) Revenue from business applications in the field of AI worldwide by 2025 ^\[6\]^
+![Bar chart of forecast AI software revenue in millions of US dollars, growing from 358 in 2016 to 31,237 in 2025](image-6-1024x371.png) Revenue from business applications in the field of AI worldwide by 2025 ^\[6\]^
 
 ### Uses of Artificial Intelligence
 
 Both SMEs and large corporations are aware of the potential of AI. Yet, SMEs have difficulties transferring the potential to their own business model. That is why only about 9% of all SMEs use AI, despite the significant benefits. For large companies, the percentage is almost twice as high in comparison. \[1\] Nevertheless, AI is only used by around 10% of all German companies. In addition, only 6% of German companies procure AI services from third-party providers. \[1\] These services are also called AI-as-a-Service. ^\[7\]^ However, these services are mainly used by large companies while SMEs only use them sporadically. ^\[8\]^
-![](image-7.png) Use of AI in German companies ^\[1\]^
+![Pie chart of AI use in companies: 70% have no plans, 19% are planning, and 11% already use AI](image-7.png) Use of AI in German companies ^\[1\]^
 
 For an efficient use of AI, companies need a good management of their data. An enormous amount of data is processed in a company every day. However, this is only 20% of the total data collected. The remaining 80% of the data usually remains unused and is therefore also referred to as dark data. ^\[9\]^
 

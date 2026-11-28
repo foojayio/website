@@ -13,13 +13,12 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "Events"
-  - "Java"
 related_posts:
 ---
 
 ## Why Your Codebase Is Forcing AI to Underperform, and What to Do About It
 
-{{< img src="ai-assisted-dead-code-removal-1024x576.avif" class="alignleft size-large is-resized" width="1024" height="576" style="width:250px" >}}
+{{< img src="ai-assisted-dead-code-removal-1024x576.avif" alt="Cleanup icon of a trash can inside a chip, with the AI4J logo, for AI-assisted dead code removal" class="alignleft size-large is-resized" width="1024" height="576" style="width:250px" >}}
 
 Your AI coding assistant is only as good as the codebase it works on. If your Java application carries years of dead \& unused code, and most do, the AI spends its reasoning budget on code that nobody runs. The result is more hallucinations, worse suggestions, and higher token costs. Here's what to do about it.
 

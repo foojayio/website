@@ -1,13 +1,11 @@
 ---
 title: "Java: Functional Programming f(x) – Part2"
 date: "2024-06-03T17:05:56+00:00"
-lastmod: "2024-06-03T17:06:34+00:00"
 description: "Dive into the world of functional programming in Java using Lambda Expressions, Method References, and Functional Interfaces."
 authors:
   - "mahendra1413"
 image: "FunctionalProgramming-700x394-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "Kotlin"

@@ -1,7 +1,6 @@
 ---
 title: "Improve DevOps Productivity with Azul Intelligence Cloud for Any JVM"
 date: "2024-05-24T09:46:34+00:00"
-lastmod: "2024-05-24T09:54:53+00:00"
 description: "Intelligence Cloud works with any JVM from any vendor or distribution to slash time from tasks across an enterprise’s entire Java estate."
 authors:
   - "erikcostlow"
@@ -34,7 +33,7 @@ Two primary challenges to DevOps productivity are alert fatigue due to out-of-co
 
 ### Benefits of Azul Intelligence Cloud
 
-![](image-2-1024x578.jpg)
+![Four benefit boxes: solve alert fatigue, focus not fire drills, get out of tech debt, and historical analysis](image-2-1024x578.jpg)
 
 Intelligence Cloud is designed to help engineering managers effectively deal with the challenges of technical debt and security maintenance with the Code Inventory and Vulnerability Detection features.
 
@@ -89,4 +88,4 @@ Intelligence Cloud works with any JVM from any vendor or distribution including 
 It frees up developers for more important business initiatives and improves DevOps productivity.
 
 Try Intelligence Cloud, including Vulnerability Detection and Code Inventory, and see if it's right for your business.  
-[![](image-4-1024x242.jpg)](https://www.azul.com/products/intelligence-cloud/)
+[![Banner reading 'Get Started - DevOps productivity awaits' with a 'Try Azul Intelligence Cloud' button](image-4-1024x242.jpg)](https://www.azul.com/products/intelligence-cloud/)

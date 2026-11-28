@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part II) -- Combining Existing Controls"
 date: "2021-02-05T08:23:32+00:00"
-lastmod: "2021-02-05T08:49:42+00:00"
 description: "Last time you saw how to create JavaFX controls by playing around with CSS, today how to create a control by combining existing controls."
 authors:
   - "gerrit-grunwald"
@@ -98,7 +97,7 @@ public class CombinedControl extends HBox {
 
 If we would use this control without applying a CSS file it would look as follows:
 
-![](Combined-Control-2021-01-26-15-13-25.png)
+![JavaFX window titled Combined Control with a text field and a degree Celsius button, unstyled and separated](Combined-Control-2021-01-26-15-13-25.png)
 
 Well that's in principle fine, but I would prefer a more integrated look. Now it still looks like we have two controls, while it should more look like a single control.
 
@@ -139,7 +138,7 @@ For the `Button`, the CSS styles now look as follows:
 
 With these CSS styles in place, our control looks as follows:
 
-![](Combined-Control-2021-01-26-15-16-31.png)
+![JavaFX Combined Control window after CSS styling, where the text field and Celsius button look like one control](Combined-Control-2021-01-26-15-16-31.png)
 
 Now we have the effect that we have been looking for, it looks like one control instead of two combined controls.
 
@@ -163,7 +162,7 @@ Now the hard part is to style the focus correctly, to be honest I was lazy and j
 
 If we focus now on our new control it will look as follows:
 
-![](Combined-Control-2021-01-26-16-17-16.png)
+![JavaFX Combined Control window with the text field highlighted by a blue focus border, above a Focus button](Combined-Control-2021-01-26-16-17-16.png)
 
 Still not perfect, but good enough, I guess. The tricky part with the focus is that the left side of the button should still show the `-fx-outer-border` color but the rest of the button not.
 

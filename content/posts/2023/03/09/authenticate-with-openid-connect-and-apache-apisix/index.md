@@ -1,7 +1,6 @@
 ---
 title: "Authenticate with OpenID Connect and Apache APISIX"
 date: "2023-03-09T07:51:47+00:00"
-lastmod: "2023-03-09T07:54:58+00:00"
 description: "Externalizing your authentication process to a third party may be sensible, but avoid binding your infrastructure to its proprietary process."
 canonical: "https://blog.frankel.ch/authenticate-openid-connect/"
 authors:
@@ -138,15 +137,15 @@ If you didn't do it already, customize the [OAuth Consent Screen](https://consol
 
 In the project context, navigate *APIs \& Services \| Credentials*.
 
-{{< img src="google-cloud-credentials-526x510.jpg" class="aligncenter size-medium" width="526" height="510" >}}
+{{< img src="google-cloud-credentials-526x510.jpg" alt="Google Cloud console menu with APIs & Services expanded and the Credentials entry highlighted, in project openid-connect-demo" class="aligncenter size-medium" width="526" height="510" >}}
 
 Then, press the *+ CREATE CREDENTIALS* button in the upper menu bar.
 
-{{< img src="google-cloud-create-credentials-700x72.jpg" class="aligncenter size-medium" width="700" height="72" >}}
+{{< img src="google-cloud-create-credentials-700x72.jpg" alt="Google Cloud Credentials page toolbar with the '+ CREATE CREDENTIALS' button" class="aligncenter size-medium" width="700" height="72" >}}
 
 Select *OAuth Client Id* in the scrolling menu.
 
-{{< img src="google-cloud-choose-credentials-700x447.jpg" class="aligncenter size-medium" width="700" height="447" >}}
+{{< img src="google-cloud-choose-credentials-700x447.jpg" alt="Google Cloud 'Create credentials' menu with options API key, OAuth client ID, Service account and Help me choose" class="aligncenter size-medium" width="700" height="447" >}}
 
 Fill in the fields:
 
@@ -154,11 +153,11 @@ Fill in the fields:
 * Name: whatever you want
 * Authorized redirect URIs: `/callback`, *e.g.* , `http://localhost:9080/callback`
 
-![](google-cloud-create-oauth-client-id-626x1024.jpg)
+![Google Cloud 'Create OAuth client ID' form with Web application type and http://localhost:9080/callback as redirect URI](google-cloud-create-oauth-client-id-626x1024.jpg)
 
 `URL` should be the URL of the web application. Likewise, `/callback` should match the `openid-connect` plugin configuration above. Note that Google doesn't allow relative URLs, so if you need to reuse the application in different environments, you need to add the URL of each environment. Click the *Create* button.
 
-![](google-cloud-oauth-client-created-957x1024.jpg)
+![Google Cloud 'OAuth client created' dialog showing the client ID and secret (redacted) with status Enabled](google-cloud-oauth-client-created-957x1024.jpg)
 
 In the Docker Compose configuration above, use the Client ID and Client Secret as `OIDC_CLIENTID` and `OIDC_SECRET`. I wrote them down as environment variables in a `.env` file.
 
@@ -166,7 +165,7 @@ The last missing variable is `OIDC_ISSUER`: it's `accounts.google.com`. If you n
 
 At this point, we can start our setup with `docker compose up`. When we navigate to , the browser redirects us to the Google authentication page. Since I'm already authenticated, I can choose my ID - and I need one bound to the organization of the project I created above.
 
-{{< img src="google-auth-choose-account-457x510.jpg" class="aligncenter size-medium" width="457" height="510" >}}
+{{< img src="google-auth-choose-account-457x510.jpg" alt="Google 'Choose an account' sign-in screen for Openid Connect Demo listing two accounts" class="aligncenter size-medium" width="457" height="510" >}}
 
 Then, I can freely access the resource.
 

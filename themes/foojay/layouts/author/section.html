@@ -9,6 +9,7 @@
            automatic detection scans the whole page, post grid included. */}}
       {{ with (or .Params.avatarFull .Params.avatar) }}<img class="author-avatar" data-pagefind-meta="image[src]" src="{{ partial "resource-url.html" (dict "page" $ "src" .) }}" alt="{{ $.Title }}">{{ end }}
       <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="author-description">{{ . }}</p>{{ end }}
       {{ with .Params.bio }}<p class="author-bio">{{ . }}</p>{{ end }}
       {{/* Author pages start from zero -- there was no per-author count
            upstream to import -- so this renders nothing until the counter has
@@ -26,12 +27,20 @@
     {{ end }}
     {{ if and $upcoming (not .Paginator.HasPrev) }}
     <div class="section-head"><h2>Coming soon</h2></div>
-    <div class="coming-soon-day__list author-upcoming">
-      {{ range $upcoming }}
-      <div>
-        <p class="coming-soon-day__title"><time datetime="{{ .date }}">{{ (time.AsTime (printf "%sT00:00:00Z" .date)).Format "2 January 2006" }}</time></p>
-        {{ partial "scheduled-card.html" . }}
-      </div>
+    <div class="author-upcoming">
+      {{ range $d := (apply $upcoming "index" "." "date" | uniq) }}
+      {{ $day := where $upcoming "date" $d }}
+      {{ $t := time.AsTime (printf "%sT00:00:00Z" $d) }}
+      <section class="coming-soon-day" aria-label="{{ $t.Format "Monday, 2 January 2006" }}">
+        <span class="coming-soon-strip__day coming-soon-day__card" aria-hidden="true">
+          <span class="coming-soon-strip__dow">{{ $t.Format "Mon" }}</span>
+          <span class="coming-soon-strip__num">{{ $t.Format "2" }}</span>
+          <span class="coming-soon-strip__month">{{ $t.Format "Jan" }}</span>
+        </span>
+        <div class="coming-soon-day__list">
+          {{ range $day }}{{ partial "scheduled-card.html" . }}{{ end }}
+        </div>
+      </section>
       {{ end }}
     </div>
     {{ end }}
@@ -44,6 +53,18 @@
          partials/paginator.html, the same definition baseof.html uses for the
          canonical. */}}
     {{ $pager := partial "paginator.html" . }}
+    {{ $podcasts := partial "podcast-episodes.html" $written }}
+    {{ if $written }}
+    <div class="sponsor-stats">
+      <a class="sponsor-stat" href="#articles"><strong>{{ lang.FormatNumberCustom 0 (len $written) }}</strong><span>Article{{ if ne (len $written) 1 }}s{{ end }}</span></a>
+      {{ with len $podcasts }}<a class="sponsor-stat" href="#podcasts"><strong>{{ . }}</strong><span>Podcast{{ if ne . 1 }}s{{ end }}</span></a>{{ end }}
+      {{ with partial "views-total.html" $written }}<div class="sponsor-stat"><strong>{{ lang.FormatNumberCustom 0 . }}</strong><span>Views</span></div>{{ end }}
+      {{ $cats := slice }}{{ range $written }}{{ $cats = $cats | append .Params.categories }}{{ end }}
+      {{ with len ($cats | uniq) }}<div class="sponsor-stat"><strong>{{ . }}</strong><span>Topic{{ if ne . 1 }}s{{ end }}</span></div>{{ end }}
+      {{/* Fills the slot Podcasts leaves empty, so the row is always four. */}}
+      {{ if not $podcasts }}<div class="sponsor-stat"><strong>{{ (index $written (sub (len $written) 1)).Date.Format "2006" }}</strong><span>Writing since</span></div>{{ end }}
+    </div>
+    {{ end }}
     <div class="section-head">
       {{/* id + the pager's `anchor` below: paging returns the reader to the
            grid rather than to the top of the profile. */}}
@@ -66,6 +87,10 @@
       {{ range $pager.Pages }}{{ partial "post-card.html" . }}{{ end }}
     </div>
     {{ partial "pagination.html" (dict "page" . "position" "bottom" "anchor" "articles") }}
+    {{ end }}
+    {{ if and $podcasts (not .Paginator.HasPrev) }}
+    <div class="section-head section-head--spaced"><h2 id="podcasts">{{ len $podcasts }} podcast episode{{ if ne (len $podcasts) 1 }}s{{ end }}</h2></div>
+    {{ partial "post-grid-more.html" $podcasts }}
     {{ end }}
   </div>
   {{ partial "sidebar.html" . }}

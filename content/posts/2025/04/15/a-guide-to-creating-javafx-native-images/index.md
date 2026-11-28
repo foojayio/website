@@ -1,7 +1,6 @@
 ---
 title: "Building JavaFX Native Images"
 date: "2025-04-15T09:57:48+00:00"
-lastmod: "2025-06-10T08:57:32+00:00"
 description: "Discover how to turn JavaFX applications into native executables with GraalVM. Build native images locally or with GitHub Actions."
 authors:
   - "catherine-edelveis"

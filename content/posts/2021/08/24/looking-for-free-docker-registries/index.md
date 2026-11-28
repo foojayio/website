@@ -1,7 +1,6 @@
 ---
 title: "Looking For Free Docker Registries"
 date: "2021-08-24T07:19:37+00:00"
-lastmod: "2021-08-24T07:19:40+00:00"
 description: "Since Docker announced that it would remove unused images from Docker Hub, I've been interested in listing places where I could host mine!"
 canonical: "https://blog.frankel.ch/free-docker-registries/"
 authors:

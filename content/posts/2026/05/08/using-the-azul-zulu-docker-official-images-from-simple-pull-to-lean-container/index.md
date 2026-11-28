@@ -1,7 +1,6 @@
 ---
 title: "Using the Azul Zulu Docker Official Images: From Simple Pull to Lean Container"
 date: "2026-05-08T09:05:22+00:00"
-lastmod: "2026-05-08T12:32:12+00:00"
 description: "Previously in this series: Trusted Java Containers: Azul Zulu OpenJDK Joins Docker’s Official Images The Road to Docker Official Images for Java: The Azul…"
 canonical: "https://www.azul.com/blog/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "zulu-lean-container.avif"
 categories:
   - "Cloud"
-  - "Java"
   - "Java Core"
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
@@ -24,7 +22,7 @@ related_posts:
 * *[The Road to Docker Official Images for Java: The Azul Zulu Story](https://www.azul.com/blog/the-road-to-docker-official-images-for-java-the-azul-zulu-story/)*
 
 [Azul Zulu is now a Docker Official Image](https://hub.docker.com/_/azul-zulu), so getting a trusted, secure Java base image is now just a `FROM azul-zulu` line in your Dockerfile. But pulling the right image is just the beginning. This post shows you how to use these images in practice, and how a few extra steps can seriously cut the size of what you ship.
-![](azul-docker-official-1024x576.avif)
+![Azul Zulu OpenJDK Docker Official Images card with a checkmark badge on a dark blue background](azul-docker-official-1024x576.avif)
 
 ## How to Use Azul Zulu as Docker Official Images
 

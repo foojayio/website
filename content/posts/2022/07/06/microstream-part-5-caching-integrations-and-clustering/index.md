@@ -1,7 +1,6 @@
 ---
 title: "MicroStream - Part 5: Caching, Integrations and Clustering"
 date: "2022-07-06T07:11:38+00:00"
-lastmod: "2022-07-06T07:13:35+00:00"
 description: "In this article, we discuss MicroStream caching and clustering functionality. We also indicate the available integrations."
 authors:
   - "rudy-de-busscher"

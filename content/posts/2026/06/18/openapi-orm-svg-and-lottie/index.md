@@ -1,22 +1,19 @@
 ---
 title: "OpenAPI, ORM, SVG and Lottie"
 date: "2026-06-18T00:52:45+00:00"
-lastmod: "2026-06-18T13:38:40+00:00"
 description: "An OpenAPI 3.x client generator that turns a spec into typed Codename One code, a JPA-shaped SQLite ORM, JAXB-shaped JSON / XML mappers, build-time SVG and"
 canonical: "https://www.codenameone.com/blog/build-time-codegen/"
 authors:
   - "shai-almog"
 image: "build-time-codegen.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
 ---
-
-![OpenAPI, ORM, SVG and Lottie](build-time-codegen.jpg)
 
 This is the third follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). Saturday's was about how you iterate; yesterday's was about new platform APIs in the core; today's is about a run of pieces that change how you write the structural parts of an app.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).

@@ -1,7 +1,6 @@
 ---
 title: "What Can We Expect In OpenJDK 19?"
 date: "2022-06-01T19:00:37+00:00"
-lastmod: "2022-06-02T08:42:36+00:00"
 description: "Although the Java 19 release is coming in September (2022-09-20), we already know what will happen in that release!"
 authors:
   - "miro-wengner"

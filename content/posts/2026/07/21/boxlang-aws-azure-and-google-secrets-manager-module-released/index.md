@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AWS, Azure, and Google Secrets Manager Module Released"
 date: "2026-07-21T11:38:18+00:00"
-lastmod: "2026-07-21T11:52:14+00:00"
 description: "Every production application carries secrets: database passwords, API tokens, encryption keys. The question is never whether to manage them - it's how…"
 authors:
   - "cristobal-escobar"
@@ -11,7 +10,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Security"
   - "Tools"
 related_posts:
@@ -21,7 +19,7 @@ related_posts:
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
 ---
 
-![](boxlang-secrets-700x467.jpg)
+![BoxLang Secrets Provider graphic: one API to read secrets from AWS, Google and Azure through bx-aws-secrets, bx-google-secrets and bx-azure-secrets](boxlang-secrets-700x467.jpg)
 
 Every production application carries secrets: database passwords, API tokens, encryption keys. The question is never whether to manage them -- it's how badly the current approach is going to hurt you.
 

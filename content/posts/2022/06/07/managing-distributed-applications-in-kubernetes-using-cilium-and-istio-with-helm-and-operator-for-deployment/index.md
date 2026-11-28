@@ -1,7 +1,6 @@
 ---
 title: "Managing Distributed Applications in Kubernetes Using Cilium and Istio with Helm and Operator for Deployment"
 date: "2022-06-07T14:51:03+00:00"
-lastmod: "2022-06-07T14:51:06+00:00"
 description: "This post will show you the benefits of managing your distributed applications with Kubernetes in cross-cloud, multi-cloud, and hybrid cloud scenarios…"
 canonical: "https://medium.com/building-the-open-data-stack/managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-9652d71d6432"
 authors:
@@ -17,7 +16,7 @@ categories:
 related_posts:
 ---
 
-![](1_i26lEM7Wl5JA7FIMlhtKNA-1024x576.jpeg)
+![Abstract blue network of glowing connected dots](1_i26lEM7Wl5JA7FIMlhtKNA-1024x576.jpeg)
 
 *This post will show you the benefits of managing your distributed applications with Kubernetes in cross-cloud, multi-cloud, and hybrid cloud scenarios using Cilium and Istio with Helm and Operator for deployment.*
 
@@ -37,7 +36,7 @@ In [our first post](https://thenewstack.io/taking-your-database-beyond-a-single-
 Cilium provides a single zone of connectivity (a control plane) that facilitates the management and orchestration of applications across the cloud environment. Istio is an open-source, language-independent service networking layer (a service mesh) that supports communication and data sharing between different microservices within a cloud environment.
 
 Cilium's global services are reachable from all Istio managed services as they can be discovered via DNS just like regular services. The pod IP routing is the foundation of the multi-cluster ability. It allows pods across clusters to reach each other via their pod IPs. Cilium can operate in several modes to perform pod IP routing. All of them are capable of performing multi-cluster pod IP routing.
-![](0_s-rjc3P9xLd4T4XO.jpg) *Figure 1: Cilium control plane for managing and orchestrating applications across the cloud environment.* ![](0_YSBqFcNCrr19Tuin.jpg) *Figure 2: Istio service networking layer (service mesh) to support communication and data sharing between different microservices within the cloud environment.*
+![Diagram of Cilium providing service discovery, network policy and encryption across clusters, and VXLAN network headers](0_s-rjc3P9xLd4T4XO.jpg) *Figure 1: Cilium control plane for managing and orchestrating applications across the cloud environment.* ![Diagram of an Istio mesh with Services A and B across two networks, each reached through a gateway](0_YSBqFcNCrr19Tuin.jpg) *Figure 2: Istio service networking layer (service mesh) to support communication and data sharing between different microservices within the cloud environment.*
 
 You may already be using one of these tools. If you are, you can add one on top of the other to extend their benefits. For example, if you already have Istio deployed, you can add Cilium on top of it. Pod IP routing is the foundation of multi-cluster capabilities, and both of these tools provide that functionality today. The goal here is to streamline pod-to-pod connectivity and ensure that they're able to perform multi-cluster IP routing.
 
@@ -70,7 +69,7 @@ Of course, the ability to instrument all this isn't new. We've probably all been
 So how do we get from all the great things we've talked about in these slides to actually deploying your applications into a cloud, multi-cloud or hybrid cloud environment?
 
 Since you're no longer working in a single region or cluster anymore, there's going to be a bit of juggling involved. You might be pushing manifest and resources to each cluster one by one. Or maybe you're templating things out and using tools like Helm or perhaps some GitOps or other pipeline tools to make sure that you are staging appropriately and you're working through different environments. But really, there's still a lot more that is required when you're working on multi-cluster deployments.
-![](0_eNGcNGs-1qrlHfOE.png)
+![Helm and Operator Framework logos](0_eNGcNGs-1qrlHfOE.png)
 
 So one example here is [Helm](https://helm.sh/). If you're using Helm, you're going to have a release per cluster, which means you're going to have to maintain and manage to switch between those various contacts and make sure you're upgrading the right way. And in case things go sideways, you'll also need to know how to stage a change or roll back a change before you switch over and do operations in the other cluster or the other region. And when you go beyond two regions, there's even a bit more complexity.
 
@@ -92,7 +91,7 @@ When you think through the application of these technologies and how you might b
 Having the right people together to hash out your approach before you wade in will help you identify any limits in your system and other important factors that need to be considered. For example, maybe you have a scarcity of IP addresses. Maybe you're running one big cluster, and now you're talking about many small clusters. Or maybe you run clusters more along business lines or for certain Ops teams.
 
 How are you going to start to venture into this multi-cluster multi-region space and ultimately, how are you going to build the plumbing and the pipes between those systems so they can communicate with each other?
-![](0_H8-xQlbhx0kxOwA_.jpg)
+!['This is fine' meme of a dog sitting calmly in a burning room](0_H8-xQlbhx0kxOwA_.jpg)
 
 Theoretically, a single team could do this planning. But, that's probably not going to turn out well. It's far more likely that you'll need to involve several teams, including people from operations and people that run the cloud accounts. If you're operating in a hybrid or multi-cloud environment, you'll probably also have some network people involved, too. For example, there may be some firewalls that need to be adjusted in certain ways.
 

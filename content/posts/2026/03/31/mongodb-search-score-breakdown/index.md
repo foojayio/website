@@ -1,14 +1,12 @@
 ---
 title: "MongoDB Search Score Breakdown"
 date: "2026-03-31T15:05:08+00:00"
-lastmod: "2026-04-13T15:50:35+00:00"
 description: "Full-text search powers all of our digital lives — googling for this and that; asking Siri where to find a tasty, nearby dinner; shopping at Amazon; and so on. We receive relevant results, often even in spite of our typos, voice transcription mistakes, or vaguely formed queries. We have grown accustomed to expecting the best results for our searching intentions, right there, at the top."
 authors:
   - "erik-hatcher"
 image: "Screenshot-2026-02-27-at-12.56.01-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "inside-the-engine-the-sub-millisecond-performance-relay-of-mongodb-8-0"

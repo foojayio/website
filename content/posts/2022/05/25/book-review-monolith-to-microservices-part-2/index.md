@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Monolith to Microservices (Part 2)"
 date: "2022-05-25T09:09:08+00:00"
-lastmod: "2023-03-16T10:45:19+00:00"
 description: "In many cases, microservices are probably not ideal, but if we are to do it, we should take baby steps. Let's find out the what alternatives we have on the table."
 authors:
   - "bazlur-rahman"
@@ -21,7 +20,7 @@ This is the second article [of the first one I wrote the other day](https://fooj
 
 In this article, I will summarize chapter two.
 
-![](monolith-to-microservice.jpeg)
+![Cover of the O'Reilly book 'Monolith to Microservices' by Sam Newman](monolith-to-microservice.jpeg)
 
 ## **Chapter #2: Planning to Migration**
 

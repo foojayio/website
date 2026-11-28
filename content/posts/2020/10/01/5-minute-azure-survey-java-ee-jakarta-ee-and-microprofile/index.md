@@ -1,7 +1,6 @@
 ---
 title: "5 Minute Azure Survey: Java EE, Jakarta EE, and MicroProfile"
 date: "2020-10-01T12:55:57+00:00"
-lastmod: "2021-08-23T12:37:38+00:00"
 description: "Azure team at Microsoft is strengthening its commitment to Jakarta EE, Java EE, and MicroProfile communities. Please provide feedback via a quick survey."
 authors:
   - "m-reza-rahman"
@@ -30,7 +29,7 @@ Customers will work closely with the Microsoft Program Manager responsible for d
 ### Quick Survey
 
 If this sounds interesting, please fill out the survey below, by clicking on the image below, [or click here to go straight to the survey](https://aka.ms/migration-survey).
-[![](Screenshot-2020-10-01-at-14.51.02-1024x336.png)](https://aka.ms/migration-survey)
+[![Survey question asking how you plan to run your Java EE, Jakarta EE or MicroProfile application on Azure, with checkbox options](Screenshot-2020-10-01-at-14.51.02-1024x336.png)](https://aka.ms/migration-survey)
 
 <https://aka.ms/migration-survey>
 

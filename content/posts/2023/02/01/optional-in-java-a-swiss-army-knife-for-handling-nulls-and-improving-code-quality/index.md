@@ -1,7 +1,6 @@
 ---
 title: "Optional in Java: A Swiss Army Knife for Handling Nulls and Improving Code Quality"
 date: "2023-02-01T05:29:38+00:00"
-lastmod: "2023-02-20T12:49:55+00:00"
 description: "Optional is a Java class that provides a way to handle null values in a type-safe and efficient manner. This tutorial will cover the features and use cases of Optional in Java, with practical examples."
 authors:
   - "bazlur-rahman"

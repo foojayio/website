@@ -1,7 +1,6 @@
 ---
 title: "Super Early Bird Tickets: Voxxed Days Amsterdam"
 date: "2025-10-06T12:37:44+00:00"
-lastmod: "2025-10-06T12:42:16+00:00"
 description: "The first batch of Super Early Bird tickets will go on sale on October 8, 2026 at 09:30 CET."
 authors:
   - "geertjan-wielenga"

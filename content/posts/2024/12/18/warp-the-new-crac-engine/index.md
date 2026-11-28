@@ -1,7 +1,6 @@
 ---
 title: "Warp: the new CRaC engine"
 date: "2024-12-18T16:04:48+00:00"
-lastmod: "2024-12-19T13:15:57+00:00"
 description: "Warp is a new engine available in Azul Zulu builds that can fully replace CRIU, and does not require any extra priviledges."
 authors:
   - "rvansa"
@@ -35,7 +34,7 @@ java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/path/to/image_dir
 ```
 
 and that's it. Of course you can check more options [in the documentation](https://docs.azul.com/core/crac/crac-vm-options).
-![](lcars-1.png)
+![Star Trek LCARS-style panel showing CRaC features: high performance, no privileges needed, compression, Zulu 17, 21 and 23.](lcars-1.png)
 
 ## Warp enters Docker
 

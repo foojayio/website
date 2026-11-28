@@ -1,7 +1,9 @@
 ---
 title: "Virtual Threads"
 description: "Virtual threads, introduced as a preview in Java 19–20 and finalised in Java 21 (JEP 444), are lightweight threads managed by the JVM rather than the operating system. They make it practical to have hundreds of thousands — or even ..."
-url: "/pedia/virtual-threads/"
+url: "/java-terms-explained/virtual-threads/"
+aliases:
+  - "/pedia/virtual-threads/"
 ---
 
 Virtual threads, introduced as a preview in Java 19–20 and **finalised in Java 21** (JEP 444), are lightweight threads managed by the JVM rather than the operating system. They make it practical to have hundreds of thousands — or even millions — of concurrent threads in a single JVM, something that is impossible with traditional OS-backed threads.
@@ -43,10 +45,10 @@ More reading on Foojay:
 
 ## See Also
 
-* [Structured Concurrency](/pedia/structured-concurrency/)
-* [Scoped Values](/pedia/scoped-values/)
-* [Thread Dump](/pedia/thread-dump/)
-* [Heap Dump](/pedia/heap-dump/)
-* [JFR (Java Flight Recorder)](/pedia/jfr-java-flight-recorder/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
-* [Project Loom](/pedia/project-loom/)
+* [Structured Concurrency](/java-terms-explained/structured-concurrency/)
+* [Scoped Values](/java-terms-explained/scoped-values/)
+* [Thread Dump](/java-terms-explained/thread-dump/)
+* [Heap Dump](/java-terms-explained/heap-dump/)
+* [JFR (Java Flight Recorder)](/java-terms-explained/jfr-java-flight-recorder/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)
+* [Project Loom](/java-terms-explained/project-loom/)

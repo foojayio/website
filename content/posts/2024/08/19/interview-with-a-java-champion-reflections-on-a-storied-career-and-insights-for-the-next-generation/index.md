@@ -1,12 +1,12 @@
 ---
 title: "Interview with a Java Champion: Reflections on a Storied Career and Insights for the Next Generation"
 date: "2024-08-19T07:52:18+00:00"
-lastmod: "2024-08-19T07:52:20+00:00"
 description: "Java Champion Ben Evans shares his journey, insights on Java's evolution, and advice for developers in this insightful interview."
 authors:
   - "bazlur-rahman"
 image: "Ben-Evans-.jpg"
 categories:
+  - "Career"
   - "Interviews"
 related_posts:
   - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
@@ -16,8 +16,6 @@ related_posts:
 ---
 
 ### **Introduction:**
-
-{{< img src="https://media.licdn.com/dms/image/v2/C4E03AQHOSJQsBSmS3A/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517742324318?e=1729123200&v=beta&t=jVizFMHohUoyR_Jp1Cgi5UO-0lVIMQO2fRu3ivz1LHk" class="alignleft" >}}
 
 In the fast-paced world of software development, a few individuals leave a lasting impact through their dedication and contributions. Our guest today is a seasoned developer, a respected author, and a cornerstone of the Java community.   
 

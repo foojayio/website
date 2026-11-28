@@ -1,14 +1,13 @@
 ---
 title: "Replace Philips Hue automation with Home Assistant's"
 date: "2024-12-08T15:25:19+00:00"
-lastmod: "2026-09-21T06:03:22+00:00"
 description: "I've been the happy owner of several Philips Hue-connected lights for a few years. Some of them are coloured, some of them regular. In addition, I bought…"
 canonical: "https://blog.frankel.ch/home-assistant/3/"
 authors:
   - "nicolas-frankel"
 image: "sparkler-4629347.jpg"
 categories:
-  - "Java"
+  - "Tools"
 related_posts:
 ---
 

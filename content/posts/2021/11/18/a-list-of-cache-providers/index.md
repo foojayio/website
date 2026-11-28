@@ -1,7 +1,6 @@
 ---
 title: "A List of Cache Providers"
 date: "2021-11-18T08:01:25+00:00"
-lastmod: "2021-11-18T08:03:07+00:00"
 description: "Recently, we described several criteria to look at to choose a cache. Now it’s time to list Java cache providers based on these criteria."
 canonical: "https://blog.frankel.ch/choose-cache/2/"
 authors:

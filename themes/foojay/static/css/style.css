@@ -372,6 +372,14 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
    instead of wrapping -- the gap that showed up at 200% text zoom. */
 .primary-nav__list { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
 
+/* Items span the header's full height, so `top: 100%` is the same line whether a
+   panel hangs off its item (1 column) or off the header (2+). */
+@media (min-width: 64.0625rem) {
+  .primary-nav { align-self: stretch; }
+  .primary-nav__list { height: 100%; align-items: stretch; }
+  .nav-item { display: flex; align-items: center; }
+}
+
 .nav-link {
   appearance: none; background: none; border: 0; cursor: pointer;
   display: inline-flex; align-items: center; gap: .4rem;
@@ -444,13 +452,14 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   align-content: start; grid-auto-rows: min-content;
 }
 
-.nav-panel a {
+.nav-panel a,
+.nav-panel li > span {
   display: block; padding: .55rem .7rem; border-radius: var(--radius-sm);
-  color: var(--ink); font-size: .96rem; line-height: 1.35;
+  color: var(--ink); font-size: 1rem; line-height: 1.35;
 }
 .nav-panel a:hover { background: var(--brand-accent-soft); color: var(--brand-accent-strong); text-decoration: none; }
-.nav-panel a .nav-panel__desc {
-  display: block; font-size: .82rem; color: var(--ink-muted); margin-top: .1rem;
+.nav-panel .nav-panel__desc {
+  display: block; font-size: .8rem; color: var(--ink-muted); margin-top: .1rem;
 }
 .nav-panel a:hover .nav-panel__desc { color: var(--ink-soft); }
 
@@ -465,7 +474,6 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   padding: .3rem .7rem .45rem;
 }
 a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); text-decoration: underline; }
-.nav-group .nav-panel__list a { font-size: .9rem; padding-block: .38rem; color: var(--ink-soft); }
 .nav-group + .nav-group { border-top: 1px solid var(--border); margin-top: .3rem; }
 .nav-panel__inner--cols-2 .nav-group + .nav-group,
 .nav-panel__inner--cols-3 .nav-group + .nav-group { border-top: 0; margin-top: 0; }
@@ -610,9 +618,8 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .page-head__meta { display: flex; align-items: center; flex-wrap: wrap; gap: .9rem; }
 .page-head__meta p { margin: 0; }
 
-/* AI portal: its editorial intro lives in the page head, so its paragraphs need
-   the spacing `.page-head p` deliberately removes for the single-line meta text
-   every other page head holds. */
+/* An editorial intro in the page head needs the paragraph spacing
+   `.page-head p` removes for the single-line meta text. */
 .page-head__intro { margin: 0 0 1.1rem; }
 .page-head__intro p { margin: 0; }
 .page-head__intro p + p { margin-top: .75rem; }
@@ -627,9 +634,6 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .section-head .chip-row { margin-top: .75rem; }
 .btn--sm { padding: .3rem .75rem; font-size: .82rem; }
 
-/* Back links remain navigation, without a decorative label treatment. */
-.page-back { display: block; margin-bottom: .75rem; font-size: .95rem; }
-.page-back a { text-decoration: underline; text-underline-offset: .15em; }
 .author-callout__label { font-size: .9rem; color: var(--ink-muted); }
 
 .section-head {
@@ -670,8 +674,10 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   flex-wrap: wrap; column-gap: 1.5rem;
 }
 .home-intro__row p { flex: 1 1 24rem; }
-/* nowrap so the link never breaks across lines away from its arrow. */
-.home-intro a { font-weight: 600; white-space: nowrap; }
+.home-intro__actions {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .75rem;
+  padding: .5rem 0;
+}
 /* --------------------------------------------------- home: events strip -- */
 /* The "next two weeks" band (partials/upcoming-events.html). One row that
    scrolls sideways, not a grid that wraps: the band is a glance at what is
@@ -1235,7 +1241,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 
 /* ------------------------------------------------------------- sidebar --- */
 
-.sidebar { display: grid; gap: 1.5rem; align-content: start; }
+/* minmax(0, 1fr), not the implicit `auto` column: auto sizes to the widest
+   widget's min-content, so one unbreakable byline at 200% text stretched the
+   whole aside past its 330px track and the viewport. */
+.sidebar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; align-content: start; }
 .sidebar .widget {
   padding: 1.25rem; margin: 0; background: var(--surface-tinted);
   border: 1px solid var(--border); border-radius: 12px;
@@ -1247,7 +1256,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .sidebar h2 {
   margin: 0 0 .8rem; font-size: 1rem; color: var(--ink);
 }
-.sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
+.sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: .1rem; }
 .sidebar li a {
   display: block; padding: .3rem 0; font-size: .95rem; color: var(--ink-soft);
 }
@@ -1356,6 +1365,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   margin: 0;
   font-family: var(--font-display); font-weight: 700;
   font-size: .95rem; line-height: 1.3; color: var(--ink);
+  /* Titles are authors' words: "EnvironmentPostProcessor" is ~370px at 200%
+     text in a 248px box, and an unbreakable word spills out of it, widening
+     the page's scrollWidth without any element's own box showing it. */
+  overflow-wrap: anywhere;
 }
 /* A flex row with a gap, like .event-strip__meta and .post-card-meta -- the
    site's other meta lines -- rather than relying on template whitespace for the
@@ -1385,6 +1398,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 /* ...but a byline WITH a face has to stay inline-flex, or that `display: inline`
    lets the line break between the portrait and the name. (0,3,1) to outrank it. */
 .sidebar .coming-soon-side__meta a.byline { display: inline-flex; align-items: center; gap: .3rem; }
+/* The author's name may wrap rather than hold the widget open at its
+   one-line width -- at 200% text that is wider than the 330px aside. */
+.coming-soon-side__by, .sidebar .coming-soon-side__meta a.byline { min-width: 0; max-width: 100%; }
+.coming-soon-side__by .byline-name { min-width: 0; overflow-wrap: anywhere; }
 
 /* "On this page" table of contents + scroll-spy (partials/toc.html,
    static/js/toc.js). Nested for h2 > h3 (Hugo's default TOC levels). */
@@ -1550,70 +1567,6 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .giscus-section__title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
 .giscus-section .giscus, .giscus-section .giscus-frame { width: 100%; }
 
-/* The WordPress comment archive, under the giscus widget (partials/legacy-comments.html).
-   Rule off and heading match .giscus-section above, because they are two
-   sections of one conversation and a second visual language would read as a
-   second kind of thing.
-
-   THE BODY IS NOT INSIDE .prose, so the rules that make running text readable
-   there do not reach it. Only two are actually missing: the paragraph rhythm,
-   and the LINK UNDERLINE -- which is not a style preference. --brand-secondary
-   on --ink-soft is 1.2:1 and colour alone needs 3:1 (WCAG 1.4.1), exactly the
-   measurement that put `.prose a { text-decoration: underline }` in this file.
-   A comment is running text written by a stranger, full of links to their repo.
-   Everything else (code, pre, blockquote) comes from the base rules near the
-   top, so nothing is restated here. */
-.legacy-comments {
-  margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
-  scroll-margin-top: 1.5rem;
-}
-.legacy-comments__title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; }
-.legacy-comments__note {
-  font-size: .9rem; color: var(--ink-muted); max-width: 62ch; margin-top: .35rem;
-}
-.legacy-comments__list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
-
-/* Indent by nesting depth, as a custom property so one rule covers every level
-   and the fallback is depth 0. data-depth is clamped in the template (see there
-   for why not math.Min). The step is small on purpose: at 3 levels a 2rem step
-   would leave the deepest reply in a column half the width of the first. */
-.legacy-comment { --legacy-indent: 0rem; margin-top: 1.25rem; }
-.legacy-comment[data-depth="1"] { --legacy-indent: 1.25rem; }
-.legacy-comment[data-depth="2"] { --legacy-indent: 2.5rem; }
-.legacy-comment[data-depth="3"] { --legacy-indent: 3.75rem; }
-.legacy-comment > article {
-  margin-left: var(--legacy-indent);
-  padding: .9rem 1.1rem;
-  background: var(--surface-sunken);
-  border-radius: var(--radius);
-  /* The one cue that a reply is a reply and not just an indented card -- the
-     indent alone is ambiguous once a body wraps. */
-  border-left: 1px solid transparent;
-}
-.legacy-comment:not([data-depth="0"]) > article { border-left-color: var(--brand-accent); }
-
-.legacy-comment__meta {
-  display: flex; flex-wrap: wrap; gap: .25rem .6rem; align-items: baseline;
-  margin-bottom: .4rem;
-}
-.legacy-comment__author { font-family: var(--font-display); font-weight: 600; }
-.legacy-comment__date { font-size: .85rem; color: var(--ink-muted); }
-
-.legacy-comment__body > *:first-child { margin-top: 0; }
-.legacy-comment__body > *:last-child { margin-bottom: 0; }
-.legacy-comment__body p { margin: .6rem 0; }
-.legacy-comment__body a { text-decoration: underline; text-underline-offset: 2px; }
-/* A commenter pasting a 90-character stack trace line must not widen the page
-   (1.4.10); a bare URL as link text is the common case here. */
-.legacy-comment__body { overflow-wrap: break-word; }
-
-/* On a phone the indent competes with the text for a 390px viewport, so the
-   nesting collapses to the border alone -- which is the cue that carries the
-   meaning anyway. */
-@media (max-width: 34rem) {
-  .legacy-comment[data-depth] { --legacy-indent: 0rem; }
-}
-
 /* -------------------------------------------------------------- authors -- */
 
 .author-profile {
@@ -1623,9 +1576,10 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
 }
 .author-profile h1 { grid-column: 2; margin: 0 0 .35rem; font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); }
-.author-profile .author-bio, .author-profile .author-social { grid-column: 2; }
+.author-profile .author-bio, .author-profile .author-description, .author-profile .author-social { grid-column: 2; }
 .author-avatar { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; grid-row: 1 / span 3; }
 .author-bio { margin: 0 0 .8rem; color: var(--ink-soft); }
+.author-description { margin: 0 0 0.1rem; color: var(--ink-soft); font-size: .9rem; font-style: italic; }
 /* One control row everywhere; link geometry belongs to icon-button/feed-link. */
 .author-social, .sidebar .author-social {
   display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
@@ -1680,7 +1634,28 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .featured-author__name a:hover { color: var(--brand-accent-strong); }
 .featured-author__count { margin: .15rem 0 .7rem; font-size: .88rem; }
 .featured-author__count a { color: var(--ink-muted); }
-.featured-author .author-bio { font-size: .95rem; }
+/* A long bio scrolls inside the card; tabindex="0" in the template keeps it
+   reachable by keyboard. Same scroll-shadow trick as .cal-legend__scroll (see
+   there), covered with the panel's own ground instead of the page's. */
+.featured-author .author-bio {
+  --bio-shadow: rgb(0 0 0 / .26);
+  --bio-ground: var(--brand-accent-soft);
+  font-size: .95rem; max-height: 9rem; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent;
+  padding-right: .25rem;
+  background:
+    linear-gradient(var(--bio-ground) 30%, transparent) top / 100% 1.5rem no-repeat,
+    linear-gradient(transparent, var(--bio-ground) 70%) bottom / 100% 1.5rem no-repeat,
+    radial-gradient(farthest-side at 50% 0, var(--bio-shadow), transparent) top / 100% 1.1rem no-repeat,
+    radial-gradient(farthest-side at 50% 100%, var(--bio-shadow), transparent) bottom / 100% 1.1rem no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+/* Dark: the panel's tint is translucent, and a translucent cover lets the
+   shadow show through at the end already reached -- so flatten it onto the page. */
+:root[data-theme="dark"] .featured-author .author-bio {
+  --bio-shadow: rgb(255 255 255 / .34);
+  --bio-ground: color-mix(in srgb, var(--brand-accent) 14%, var(--page-bg));
+}
 .featured-author .author-social { margin-top: .9rem; margin-bottom: 1rem; }
 /* Latest article: a whole-block link, so the title reads as the target and the
    label/date are supporting text rather than three separate link targets. */
@@ -1739,11 +1714,11 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .calendar__aside .widget-sponsors h2 { margin: 0 0 1rem; font-size: 1rem; }
 
 .cal-intro { max-width: 70ch; margin-bottom: 1.75rem; }
-.cal-stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
-.cal-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+.page-head__stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+.page-head__stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
 
-/* Two ways onto the calendar, so two buttons: an event by a pull request here,
-   a JUG upstream in the World Wide JUGs directory. Wrapped so they sit together
+/* Three ways onto the calendar, so three buttons: an event by a pull request
+   here, a conference or a JUG upstream. Wrapped so they sit together
    rather than inheriting the aside's 1.5rem section gap. */
 .cal-ctas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: .5rem; }
 /* Side by side in a 300px rail, so they need to be narrower than a default
@@ -1753,6 +1728,9 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   justify-self: stretch; justify-content: center; text-align: center;
   padding: .5rem .6rem; font-size: .85rem; white-space: normal;
 }
+
+/* The add-to-this-list button under a legend: full width, a step clear of the list. */
+.cal-legend__cta { display: flex; margin-top: .75rem; }
 
 /* The group legend doubles as the key to the grid's dots and as the list of
    which JUGs actually have something coming up. */
@@ -1851,7 +1829,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
    and prose in a 300px column is a stack of four-word lines that crowds out
    the legends the rail is actually for. */
 .cal-source {
-  max-width: 75ch; margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border);
   color: var(--ink-muted); font-size: .85rem; line-height: 1.55;
 }
 .cal-source__synced { display: inline-block; margin-top: .35rem; }
@@ -1889,7 +1867,7 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
 .cal-nav__btn:disabled { opacity: .35; cursor: default; }
 .cal-nav__label {
   font-family: var(--font-body); font-size: 1.05rem; font-weight: 700; color: var(--ink);
-  min-width: 10.5ch; text-align: center;
+  width: 16ch; flex: none; text-align: center; white-space: nowrap;
 }
 .cal-nav__today { margin-left: .35rem; cursor: pointer; }
 
@@ -1992,17 +1970,14 @@ a.event-strip__title:hover { color: var(--brand-accent-strong); text-decoration:
   padding-bottom: .5rem; border-bottom: 1px solid var(--border);
 }
 .cal-month__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.cal-month .coming-soon-day + .coming-soon-day { margin-top: 1rem; }
+.cal-month .coming-soon-day__list { gap: .6rem; }
+/* Stick below the sticky toolbar, not under it. */
+.cal-month .coming-soon-day__card { top: calc(var(--header-h) + 4.75rem); }
 .cal-row {
-  display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1rem; align-items: center;
   padding: .8rem .95rem; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius);
 }
-.cal-row__date { text-align: center; line-height: 1.1; }
-.cal-row__day {
-  display: block; font-family: var(--font-display); font-size: 1.45rem; font-weight: 800;
-  color: var(--ink); font-variant-numeric: tabular-nums;
-}
-.cal-row__weekday { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
 .cal-row__title { font-family: var(--font-display); font-weight: 700; color: var(--ink); }
 .cal-row__title:hover { color: var(--brand-accent-strong); }
 .cal-row__meta {
@@ -2293,7 +2268,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 @media (max-width: 560px) {
   .author-profile { grid-template-columns: minmax(0, 1fr); }
   .author-avatar { grid-row: auto; }
-  .author-profile h1, .author-profile .author-bio, .author-profile .author-social { grid-column: 1; }
+  .author-profile h1, .author-profile .author-bio, .author-profile .author-description, .author-profile .author-social { grid-column: 1; }
   .post-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -2320,6 +2295,10 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 
 .post-categories--top { margin-bottom: .9rem; }
 .reading-time { color: var(--ink-muted); }
+.updated {
+  background: var(--surface-tinted); color: var(--brand-accent-strong);
+  font-weight: 600; padding: .1em .6em; border-radius: 999px;
+}
 /* The read counter. tabular-nums so a column of cards doesn't jitter as the
    digit widths change, nowrap so "11,459 views" never breaks across lines. */
 .views {
@@ -2334,6 +2313,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    baseline, which is what /calendar/ shipped. Cheap guard, because the symptom
    is a small vertical offset that is easy to miss in review. */
 .page-head__meta .page-head__views { margin-top: 0; }
+.page-head__meta .views { font-size: .95rem; }
 /* THE FEED LINK (partials/feed-link.html) -- one look, wherever a feed is
    offered. Typographically it is the read count's sibling: same .9rem, same
    --ink-soft, so it sits on a meta line beside "52,391 views" without shouting.
@@ -2423,6 +2403,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    nothing said why. Measured in the browser, not reasoned about. */
 .prose .champions-table a,
 .prose .jugs-table a,
+.prose .conferences-table a,
 .prose .cluster-map a,
 .prose .leaflet-container a,
 .prose .gallery a,
@@ -2444,8 +2425,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose > .series-nav,
 .prose > .page-share,
 .prose > .page-source,
-.prose > .giscus-section,
-.prose > .legacy-comments { clear: both; }
+.prose > .giscus-section { clear: both; }
 .prose > * + * { margin-top: 1.1em; }
 .prose h2 { margin-top: 2.25rem; }
 .prose h3 { margin-top: 1.75rem; }
@@ -2465,7 +2445,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    moment it gets its id; there is nowhere else to notice. (#transcript needs
    nothing: it is an <h2> inside .prose.) */
 .prose h2, .prose h3,
-.author-callout[id], .related-posts[id], .giscus-section[id], .legacy-comments[id] {
+.author-callout[id], .related-posts[id], .giscus-section[id] {
   scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem);
 }
 .prose ul, .prose ol { padding-left: 1.4rem; }
@@ -2693,6 +2673,13 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .jugs-table__links { font-size: .9rem; white-space: nowrap; }
 .jugs-table__edit { text-decoration: none; opacity: .55; }
 .jugs-table__edit:hover { opacity: 1; }
+
+/* /java-conferences/ page: data/java-conferences.yaml
+   (themes/foojay/layouts/conferences/single.html) */
+.conferences-source-note { font-size: .92rem; color: var(--ink-muted); }
+.conferences-table__when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.conferences-table__tag { font-size: .78rem; color: var(--ink-muted); }
+.conferences-table td:first-child a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* /java-champions/ page: data/java-champions.yaml source note + table
    (themes/foojay/layouts/champions/single.html) */
@@ -2948,6 +2935,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
   display: grid;
   gap: var(--gallery-gap);
   margin: 1.5rem 0;
+  clear: both;  /* a floated image above must not squeeze the grid beside it */
   /* Each cell is at least its exact 1/cols share, so the grid never exceeds
      --gallery-cols columns; the 180px floor makes auto-fit drop to fewer
      columns on a narrow screen instead of squashing. */
@@ -2957,7 +2945,7 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .prose .gallery__item { margin: 0; }
 .prose .gallery__item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 /* One caption for the whole gallery, under the grid rather than in a cell. */
-.prose .gallery__caption { margin-top: 0.6rem; }
+.prose .gallery__caption { grid-column: 1 / -1; margin-top: 0.6rem; font-size: 0.95rem; font-weight: 600; color: var(--ink); }
 .prose figure::after { content: ""; display: block; clear: both; }
 
 /* ---------------------------------------------------------------- search --
@@ -3029,6 +3017,16 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
    border and the text colour, which is enough for the <a>s it was written for.
    justify-self keeps it at its own width instead of stretching across the
    grid column the results sit in. */
+.search-page__filters { display: grid; gap: .6rem; margin: .5rem 0 1.5rem; max-width: 62rem; }
+.search-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.search-filter__label { font-weight: 600; font-size: .85rem; color: var(--ink-muted); margin-right: .25rem; }
+.search-filter__chip {
+  font: inherit; font-size: .85rem; padding: .2rem .7rem; cursor: pointer;
+  border: 1px solid var(--control-border); border-radius: 999px; background: none; color: var(--ink);
+}
+.search-filter__chip[aria-pressed="true"] { background: var(--brand-accent); border-color: var(--brand-accent); color: #fff; }
+.search-filter__n { opacity: .7; font-size: .78rem; }
+.search-page__suggest { display: flex; flex-wrap: wrap; gap: .5rem 1rem; list-style: none; padding: 0; }
 .search-page__more { margin-top: 1.25rem; justify-self: start; background: none; }
 
 @media (max-width: 560px) {
@@ -3075,38 +3073,21 @@ a.pagination__btn:hover { border-color: var(--ink); text-decoration: none; }
 .lightbox__nav[hidden] { display: none; }
 body.lightbox-open { overflow: hidden; }
 
-/* --- Post header: circular hero thumbnail floated left of the title.
-   Floated (not flex) so a long title wraps to the right AND continues below the
-   image, instead of leaving empty space under it. --- */
-.post-header { margin-bottom: 1.75rem; }
-.post-header::after { content: ""; display: block; clear: both; } /* contain the float */
-/* BALANCED, so a title does not end on one orphan word. "Come for Java. Get a
-   Whole Lot More." broke as "...Get a Whole / Lot More." at every window width
-   from 660px to 1550px; balanced it breaks at the full stop instead, which is
-   where a reader would break it.
-
-   The inherited `text-wrap: pretty` on body does not cover this. Pretty only
-   pulls a word down to lengthen a short last line when it can do so without
-   changing any earlier break -- and it cannot here, because the FLOATED HERO
-   shortens the first line: every line above the last is already as full as it
-   goes. Balance is allowed to re-break the whole block, so it can trade the
-   first line's width for a last line that carries its weight.
-
-   Measured on the longest titles in the archive (three and four lines, 100 to
-   127 characters) before turning it on: balance either left them exactly as
-   they were or moved a word down onto the last line. Chrome stops balancing
-   past six lines, and no title in the archive reaches that even on a phone.
-
-   Same reason and same property as .post-card--lead .post-card-title, which
-   has carried this since the card grid was built -- a post's title and that
-   post's own card were breaking by different rules. */
-.post-header h1 { margin-top: 0; text-wrap: balance; }
+/* --- Article opening: title and byline, then the image at reading width. --- */
+.post-header { display: grid; gap: 1rem; margin-bottom: 1.75rem; }
+.post-header h1 { margin: 0; text-wrap: balance; }
+.post-single .post-header .post-categories--top,
+.post-single .post-header .post-meta { margin: 0; }
 .post-single .post-header .post-hero {
-  float: left; width: 120px; height: auto; margin: .15rem 1.25rem .5rem 0;
+  display: block; width: 100%; height: auto; margin: .5rem 0 0;
+  max-height: 26rem; object-fit: contain; /* capped so the text stays in view; click to zoom */
   border-radius: var(--radius);
 }
 @media (max-width: 560px) {
-  .post-single .post-header .post-hero { width: 88px; margin-right: 1rem; }
+  .post-single .post-header .post-meta { gap: .5rem 1rem; }
+  .post-header .post-meta .byline-group { flex-basis: 100%; }
+  /* Separate groups with space, so wrapped metadata never starts with a dot. */
+  .post-single .post-header .post-meta > * + *::before { content: none; }
 }
 
 /* --- Pedia (Java Terms Explained) glossary --- */
@@ -3144,6 +3125,7 @@ body.lightbox-open { overflow: hidden; }
    stylesheet, but `display: table-row` from the table's own layout wins over
    it, so a hidden <tr> stays visible without the override. */
 .jugs-table tbody tr[hidden] { display: none !important; }
+.conferences-table tbody tr[hidden] { display: none !important; }
 .champions-table tbody tr[hidden] { display: none !important; }
 .sitemap-table tbody tr[hidden] { display: none !important; }
 .list-filter__empty { color: var(--ink-muted); margin: 0; }
@@ -3416,6 +3398,7 @@ body.lightbox-open { overflow: hidden; }
 .sponsor-profile__head { display: flex; gap: 1.5rem; align-items: center; }
 .sponsor-profile__intro h1 { margin: .5rem 0 0; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
 .sponsor-profile__tagline { margin: .4rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+.sponsor-profile__views { margin: .3rem 0 0; color: var(--ink-muted); font-size: .9rem; }
 .sponsor-profile__links {
   display: flex; flex-wrap: wrap; gap: .5rem;
   margin-top: 1.25rem; padding-top: 1.25rem;
@@ -3427,12 +3410,16 @@ body.lightbox-open { overflow: hidden; }
 }
 .sponsor-profile__links a:hover { color: var(--brand-accent-strong); border-color: var(--border-strong); }
 
-.sponsor-stats { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+.sponsor-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 1rem; margin: 1.5rem 0; }
 .sponsor-stat {
-  flex: 1 1 120px; padding: .75rem 0; border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: .2rem; padding: 1rem;
+  color: inherit; text-decoration: none;
+  background: var(--surface-tinted); border: 1px solid var(--border);
+  border-top: 4px solid var(--brand-accent-strong); border-radius: 12px;
 }
-.sponsor-stat strong { display: block; font-family: var(--font-display); font-size: 1.75rem; line-height: 1.1; }
-.sponsor-stat span { color: var(--ink-muted); font-size: .85rem; }
+.sponsor-stat strong { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.sponsor-stat span { order: -1; font-size: 1rem; font-weight: 600; color: var(--ink-soft); }
+a.sponsor-stat:hover { border-color: var(--border-strong); border-top-color: var(--brand-accent-strong); }
 
 .sponsor-section { margin: 2.5rem 0; }
 /* scroll-margin so an "On this page" jump doesn't park the heading under the
@@ -3515,6 +3502,41 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .sponsors-cta__links { margin-bottom: 0; }
+
+/* Class-on-class for the same reason as .sponsors-cta__stats above. */
+.prose .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.prose .stats-grid li {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  background: var(--surface-tinted);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.prose .stats-grid--content li { border-top: 4px solid var(--brand-accent-strong); }
+.prose .stats-grid--reads li { border-top: 4px solid var(--feed); }
+.prose .stats-grid--community li { border-top: 4px solid var(--tier-community-partner); }
+.prose .stats-grid strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.prose .stats-chart { margin: 1rem 0 2rem; max-width: 44rem; position: relative; }
+.stats-chart__controls { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin-bottom: .75rem; color: var(--ink-soft); }
+.stats-chart__controls select { margin-left: .25rem; font: inherit; color: var(--ink); }
+.prose .stats-grid small { font-size: .85rem; color: var(--ink-muted); }
+.prose .stats-grid span { order: -1; font-size: 1rem; font-weight: 600; color: var(--ink-soft); }
 
 @media (max-width: 560px) {
   .sponsor-profile__head { flex-direction: column; align-items: flex-start; }
@@ -3992,6 +4014,7 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   color: inherit; opacity: .75; white-space: nowrap;
 }
 .ad__label svg { flex: none; }
+.ad__label a { color: inherit; text-decoration: underline; }
 
 /* --- Home page carousel (partials/ads-carousel.html) --------------------- */
 
@@ -4274,6 +4297,13 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
   text-decoration: underline; text-underline-offset: .15em;
 }
 
+/* "Originally published on" line under the hero of a cross-posted article. */
+.post-origin {
+  font-size: .95rem; color: var(--ink); margin: 0 0 1.5rem; padding: .75rem 1rem;
+  background: var(--surface-sunken); border-block: 1px solid var(--border);
+}
+.post-origin a { color: var(--brand-accent-strong); text-decoration: underline; text-underline-offset: .15em; }
+
 /* ------------------------------------------------- episode transcript ----
    The machine transcript under a podcast episode (posts/single.html, written
    by scripts/fetch/PodcastTranscripts.java).
@@ -4523,14 +4553,164 @@ th[aria-sort="descending"] .sort-btn::after { content: "\2193"; opacity: 1; }
 .review-also__by .byline { display: inline-flex; align-items: center; min-height: 24px; }
 
 /* /today/coming-soon/: one heading per publish day, over that day's cards. */
-.coming-soon-day + .coming-soon-day { margin-top: 2.25rem; }
-.coming-soon-day__title {
-  margin: 0 0 1rem; padding-bottom: .4rem;
-  border-bottom: 1px solid var(--border, currentColor);
-  font-size: 1.15rem;
+.coming-soon-day + .coming-soon-day { margin-top: 1.5rem; }
+.coming-soon-day {
+  display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 1.5rem; align-items: start;
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+}
+.coming-soon-day__card { position: sticky; top: calc(var(--header-offset, var(--header-h)) + 1rem); }
+@media (max-width: 40rem) {
+  .coming-soon-day { grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; }
+  .coming-soon-day__card { min-width: 0; padding-inline: .25rem; }
 }
 .coming-soon-day__list { display: grid; gap: 1.5rem; }
 .content-col .author-upcoming { margin-bottom: 3rem; padding-bottom: 1rem; }
 .coming-soon-day__list .post-card-excerpt { max-width: none; }
 .coming-soon-day__list .post-card-meta { align-items: center; }
 .coming-soon-day__list .post-card-categories { margin-left: auto; justify-content: flex-end; }
+.widget-featured-authors__subhead {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline;
+  column-gap: .6rem; margin: .9rem 0 .8rem;
+}
+.widget-featured-authors__note { font-size: .75rem; color: var(--ink-muted); }
+.widget-featured-authors__subhead .view-all { margin-top: 0; }
+.widget-featured-authors__sub {
+  margin: 0; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--ink-muted);
+}
+
+/* 404: suggestions from the dead URL, and the fallback lists -------- */
+/* Opens by animating from 0 height, so the fixed content below is pushed down
+   rather than replaced. visibility keeps the closed state out of the tab order. */
+.nf-suggest, .nf-fallback { max-width: 62rem; }
+.nf-suggest {
+  display: grid; grid-template-rows: 0fr; visibility: hidden; opacity: 0;
+  transition: grid-template-rows .45s ease, opacity .45s ease, visibility 0s .45s;
+}
+.nf-suggest.is-open { grid-template-rows: 1fr; visibility: visible; opacity: 1; transition-delay: 0s; }
+.nf-suggest__inner { overflow: hidden; min-height: 0; }
+.nf-suggest.is-open .nf-suggest__inner { padding: 1rem 0 .5rem; }
+@media (prefers-reduced-motion: reduce) { .nf-suggest { transition: none; } }
+.nf-fallback { margin-top: 1rem; }
+.nf-suggest h2, .nf-fallback h2 { font-size: 1.15rem; margin: 1.75rem 0 .75rem; }
+.nf-suggest h2 { margin-top: 0; }
+.nf-suggest ul { padding-left: 1.25rem; display: grid; gap: .5rem; }
+.nf-topics { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+
+/* /today/week-review/ */
+.week-review__section + .week-review__section { margin-top: 2.25rem; }
+.week-review__posts { display: grid; gap: 1.25rem; }
+.week-review__section .coming-soon-day + .coming-soon-day { margin-top: 1.5rem; }
+.week-review__posts .post-card {
+  display: grid; grid-template-columns: 9rem 1fr; column-gap: 1rem; row-gap: .3rem;
+  align-items: start; grid-auto-flow: row;
+}
+.week-review__posts .post-card-image { grid-row: 1 / span 4; }
+.week-review__posts .post-card > :not(.post-card-image) { grid-column: 2; }
+@media (max-width: 480px) { .week-review__posts .post-card { grid-template-columns: 6rem 1fr; } }
+.week-review__posts .post-card-excerpt { max-width: none; }
+
+/* /tv/ ---------------------------------------------------------------- */
+.tv-layout { display: grid; grid-template-columns: 18rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+.tv-channels { position: sticky; top: 1rem; }
+.tv-channels__search {
+  width: 100%; padding: .55rem .8rem; margin-bottom: .75rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--ink); font: inherit;
+}
+.tv-channels__list { list-style: none; margin: 0; padding: 0; max-height: calc(100vh - 9rem); overflow-y: auto; }
+.tv-filter {
+  display: flex; align-items: center; gap: .6rem; width: 100%; cursor: pointer; text-align: left;
+  padding: .45rem .6rem; border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--ink); font: 600 .9rem var(--font-body);
+}
+.tv-filter:hover { background: var(--surface-sunken); }
+.tv-filter img, .tv-filter__all { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; }
+.tv-filter__all { display: grid; place-items: center; background: var(--surface-sunken); font-size: .75rem; }
+.tv-filter__name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tv-filter__count { flex: 0 0 auto; color: var(--ink-muted); font-size: .8rem; font-weight: 500; }
+.tv-filter[aria-pressed="true"] { background: var(--brand-accent); color: var(--on-accent); }
+.tv-filter[aria-pressed="true"] .tv-filter__count { color: inherit; }
+.tv-channels__list [hidden], .tv-grid [hidden] { display: none; }
+.tv-channels__empty { color: var(--ink-muted); margin: .5rem .6rem; }
+
+.tv-stage { margin-bottom: 2rem; }
+.tv-player {
+  position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden;
+  background: var(--surface-navy); border-radius: var(--radius);
+}
+.tv-player img, .tv-player__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.tv-player__play {
+  position: absolute; top: 50%; left: 50%; width: 4.5rem; height: 4.5rem; translate: -50% -50%;
+  background: var(--brand-accent); border-radius: 50%;
+}
+.tv-player__play::after {
+  content: ""; position: absolute; top: 50%; left: 52%; translate: -50% -50%;
+  border-style: solid; border-width: .8rem 0 .8rem 1.3rem; border-color: transparent transparent transparent var(--on-accent);
+}
+.tv-now__title { margin: .9rem 0 .25rem; font-size: 1.4rem; line-height: 1.3; }
+.tv-now__meta { margin: 0; color: var(--ink-soft); }
+
+.tv-results { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; margin: 0 0 1rem; }
+.tv-results__title { margin: 0; font-size: 1.25rem; }
+.tv-results__count { color: var(--ink-muted); font-weight: 500; font-size: .9rem; }
+.tv-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1.25rem; }
+.tv-card { display: flex; flex-direction: column; gap: .4rem; height: 100%; color: var(--ink); }
+.tv-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); background: var(--surface-sunken); }
+.tv-card__title { font-family: var(--font-display); font-weight: 700; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tv-card:hover .tv-card__title { color: var(--brand-accent-strong); }
+.tv-card__meta { color: var(--ink-muted); font-size: .85rem; }
+.tv-more { display: block; margin: 1.75rem auto 0; }
+.tv-more[hidden] { display: none; }
+.tv-missing { margin: 2.5rem 0 0; color: var(--ink-soft); }
+.tv-missing a { text-decoration: underline; }
+@media (max-width: 52rem) {
+  .tv-layout { grid-template-columns: 1fr; }
+  .tv-channels { position: static; }
+  .tv-channels__list { max-height: 14rem; }
+}
+
+/* Clear button on filter boxes (static/js/search-clear.js) */
+.clearable { position: relative; display: block; max-width: 420px; flex: 0 1 420px; }
+.tv-channels .clearable { max-width: none; }
+.clearable > input { padding-right: 2.2rem; }
+.clearable > input::-webkit-search-cancel-button { appearance: none; display: none; }
+.clearable__button {
+  position: absolute; top: 50%; right: .35rem; transform: translateY(-50%);
+  width: 1.7rem; height: 1.7rem; padding: 0; border: 0; border-radius: 50%;
+  background: none; color: var(--ink-muted); font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.clearable__button:hover { background: var(--surface-sunken); color: var(--ink); }
+.clearable__button[hidden] { display: none; }
+.tv-channels__search { margin-bottom: 0; }
+.tv-channels .clearable { margin-bottom: .75rem; }
+
+/* The day card, in the left column of each /today/coming-soon/ section. */
+.coming-soon-strip__day {
+  display: grid; justify-items: center; gap: .1rem; min-width: 5.2rem; padding: .6rem .5rem;
+  border: 1px solid var(--border-strong); border-radius: .5rem;
+  background: var(--surface); color: var(--ink); text-decoration: none; line-height: 1.2;
+}
+.coming-soon-strip__dow, .coming-soon-strip__month { font-size: .8rem; color: var(--ink-soft); text-transform: uppercase; }
+.coming-soon-strip__num { font-size: 1.6rem; font-weight: 700; }
+.coming-soon-strip__count { margin-top: .2rem; font-size: .8rem; font-weight: 600; color: var(--brand-accent-strong); white-space: nowrap; }
+.coming-soon-day { scroll-margin-top: calc(var(--header-offset, var(--header-h)) + 1rem); }
+.coming-soon-strip__day.is-weekend { background: var(--surface-sunken); }
+.coming-soon-strip__day.is-empty { border-style: dashed; color: var(--ink-muted); background: transparent; }
+.coming-soon-strip__day.is-empty.is-weekend { background: var(--surface-sunken); }
+.coming-soon-strip__day.is-empty .coming-soon-strip__num { font-weight: 400; }
+.coming-soon-day.is-empty { align-items: center; padding-bottom: 1rem; color: var(--ink-muted); }
+.coming-soon-day.is-empty .coming-soon-day__card { position: static; }
+.coming-soon-day__none { margin: 0; }
+
+.grid-more { margin-top: 1rem; }
+.grid-more summary { cursor: pointer; font-weight: 600; color: var(--brand-secondary); margin-bottom: 1rem; }
+.grid-more[open] summary { display: none; }
+.inline-more { display: inline; }
+.inline-more summary { display: inline; cursor: pointer; color: var(--brand-secondary); }
+.inline-more[open] summary { display: none; }
+.inline-more[open]::before { content: ", "; }
+.section-head--spaced { margin-top: 3rem; }
+
+/* /month-overview/ reuses the coming-soon row; the edition panel is its own card. */
+.coming-soon-day__list .review-edition { margin: 0; }

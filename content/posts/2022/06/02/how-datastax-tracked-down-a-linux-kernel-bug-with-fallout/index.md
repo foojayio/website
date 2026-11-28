@@ -1,7 +1,6 @@
 ---
 title: "How DataStax Tracked Down a Linux Kernel Bug with Fallout"
 date: "2022-06-02T15:32:08+00:00"
-lastmod: "2022-06-02T15:32:10+00:00"
 description: "Sometimes as a developer, you run into a bug buried deep within the layers of your software stack. Chasing down the root cause requires not only…"
 canonical: "https://medium.com/building-the-open-data-stack/how-datastax-tracked-down-a-linux-kernel-bug-with-fallout-3ca10ec1fde4"
 authors:
@@ -18,7 +17,7 @@ related_posts:
   - "k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices"
 ---
 
-![](1_N_gqb3PrkKgMbJHSmYeOaw-1024x750.jpeg)
+![Watercolor illustration of many colorful beetles and bugs, used as a header for the bug-hunting article](1_N_gqb3PrkKgMbJHSmYeOaw-1024x750.jpeg)
 
 *Sometimes as a developer, you run into a bug buried deep within the layers of your software stack. Chasing down the root cause requires not only curiosity, patience, and a healthy dose of tenacity but a willingness to try different tools and approaches. This post describes our challenges and ultimate success in tracking down a Linux kernel bug using Fallout.*
 

@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AI 3.2.0 — Image Generation, Web Search, Fluent Audio, Agent Registry & MCP Observability"
 date: "2026-06-02T12:27:07+00:00"
-lastmod: "2026-06-02T12:33:49+00:00"
 description: "BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a…"
 authors:
   - "cristobal-escobar"
@@ -11,7 +10,6 @@ categories:
   - "BoxLang"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Observability"
   - "Tools"
@@ -22,7 +20,7 @@ related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 ---
 
-![](BoxLangAI-3.2-700x394.jpg)
+![BX-AI v3.2 release graphic listing image generation, fluent audio, web search, agent registry and MCP observability features](BoxLangAI-3.2-700x394.jpg)
 
 BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a centralized agent registry, and deep MCP observability along with a suite of analytics improvements and a critical bug fix. Let's dig in. 🎉
 

@@ -1,14 +1,13 @@
 ---
 title: "Native Java Win32, 3D Gaming, Printing and Wallet"
 date: "2026-06-19T15:45:42+00:00"
-lastmod: "2026-06-22T10:59:58+00:00"
 description: "This week brings native Windows executables with no JVM, a portable 3D graphics API, a gaming API with Box2D physics, cross-platform printing, and Apple Wa"
 canonical: "https://www.codenameone.com/blog/native-java-win32-3d-gaming-printing-and-wallet/"
 authors:
   - "shai-almog"
 image: "weekly-1.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "the-third-generation-gui-builder-one-workspace-for-every-form"
   - "push-v3-one-message-from-your-server-to-every-surface"

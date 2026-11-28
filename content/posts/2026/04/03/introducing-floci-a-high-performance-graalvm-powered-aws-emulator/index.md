@@ -1,7 +1,6 @@
 ---
 title: "Introducing Floci: A High-Performance, GraalVM-Powered AWS Emulator"
 date: "2026-04-03T19:00:53+00:00"
-lastmod: "2026-04-04T14:26:12+00:00"
 description: "The Motivation: Why Another AWS Emulator? As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become…"
 authors:
   - "hector-ventura"
@@ -10,14 +9,13 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "DevOps"
-  - "Java"
   - "Testcontainers"
 related_posts:
 ---
 
 ## The Motivation: Why Another AWS Emulator?
 
-![](perf-chart-light-700x394.png)
+![Bar charts comparing Floci Native, Floci JVM and LocalStack: Floci starts faster and uses less memory, disk and fails fewer tests](perf-chart-light-700x394.png)
 
 As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become essential for keeping feedback loops tight and costs at zero. However, the ecosystem has shifted. Many of us have felt the friction of:
 

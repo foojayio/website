@@ -8,7 +8,6 @@ image: "Screenshot-2025-11-07-at-17.57.47-1024x709.jpg"
 categories:
   - "AI"
   - "GenAI"
-  - "Java"
   - "LLM"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
@@ -39,9 +38,9 @@ Here's how to set it up:
 
 1. Open GitHub Copilot Chat
 2. Set the mode to "Agent" and click on the Tools icon **🛠️**   
-   **![](Screenshot-2025-11-07-at-16.52.48.png)**
+   **![IntelliJ Copilot chat panel in Agent mode with GPT-5 mini selected and an mcp.json file attached and switched on](Screenshot-2025-11-07-at-16.52.48.png)**
 3. Click on "+ Add More tools"  
-   ![](Screenshot-2025-11-07-at-16.52.53.png)
+   ![Configure Tools dialog in IntelliJ listing built-in tools, a greetings server with sayHello, and sonarqube, with an 'Add More Tools' link](Screenshot-2025-11-07-at-16.52.53.png)
 
 Add the configuration of the MCP Server (remove the comments after setting your values)
 
@@ -70,7 +69,7 @@ Add the configuration of the MCP Server (remove the comments after setting your 
 Remember to use only `user` tokens not Project or Global Analysis ones in order to allow the MCP Server to properly work with all the endpoints.
 
 For other IDEs like VS Code, it's even easier … just clicking 👇 a button and you are done 🎉  
-![](Screenshot-2025-11-07-at-16.53.02.png)
+![SonarQube for IDE panel with a 'Configure SonarQube MCP Server' button under AI Agents Configuration](Screenshot-2025-11-07-at-16.53.02.png)
 
 ### **Supercharge Your Daily Tasks with SonarQube MCP Server ⚡**
 
@@ -82,14 +81,14 @@ Let's see how our AI-powered buddy can help with your daily tasks:
 
 You're asking AI for a new method, and you're not sure if what the AI returns is the most secure way to do it. Instead of waiting for the CI/CD pipeline to run, you can get instant feedback.
 
-![](Screenshot-2025-11-07-at-16.53.09.png)
+![Copilot prompt in Agent mode asking to create a method averaging 1000 integers and analyze it with the SonarQube MCP tool](Screenshot-2025-11-07-at-16.53.09.png)
 
 The Agent will follow a series of steps in order to create the code but also to validate it with SonarQube through the SonarQube MCP server :
 
-![](Screenshot-2025-11-07-at-16.53.16.png)
+![Agent log showing SimpleTool.java edited, then get_errors and the SonarQube analyze_code_snippet MCP tool run successfully](Screenshot-2025-11-07-at-16.53.16.png)
 
 At the end, the Agent will show (using the model GTP5-mini) a list of tasks done, and we see the result of the SonarQube analysis to specifically the snippet created :  
-![](Screenshot-2025-11-07-at-16.53.24.jpg)
+![Agent summary of generated JUnit 5 tests and the contract, and a SonarQube snippet analysis reporting no issues found](Screenshot-2025-11-07-at-16.53.24.jpg)
 
 Yes, I know, you are thinking 🤔 `Do I have to explicitly tell the agent to use SonarQube every time?` And I totally understand you…. Well, the answer is no 🥳
 
@@ -137,11 +136,11 @@ So, you go to your maven file and add a new JSON parsing library to your `pom.xm
 
 But before you continue with your work, let's analyze the code and dependencies, and then you can use the **Search Dependency Risks** feature to check for any known vulnerabilities in this version of the library. The MCP server will ask SonarQube for vulnerabilities in the dependencies for this project and let you know if you should use a different version or a different library altogether.
 
-![](Screenshot-2025-11-07-at-16.53.34.png)
+![Chat showing the 'search dependency risks with Sonar' request and the search_dependency_risks MCP tool call marked with an error](Screenshot-2025-11-07-at-16.53.34.png)
 
 We will get a summarized answer with the dependencies in our project and the vulnerabilities included, with a reference to the CVEs and the rate for each vulnerability.
 
-![](Screenshot-2025-11-07-at-16.53.43.jpg)
+![Agent answer listing 23 dependency vulnerabilities in java-security-demo, led by jackson-databind 2.9.10.7 with CVEs up to CVSS 8.1](Screenshot-2025-11-07-at-16.53.43.jpg)
 
 Eyy ‼️Do you see that our new Jackson dependency that we added above appears here and includes several HIGH and MEDIUM vulnerabilities in multiple CVEs 😱?. Well, fortunately enough we have our friend SonarQube MCP server that is warning us 🙏
 
@@ -153,11 +152,11 @@ Eyy ‼️Do you see that our new Jackson dependency that we added above appears
 
 SonarQube for IDE flags an issue in your code, but sometimes you are not ready to fix it, or you consider you can live with it and won't fix it ever and in other situations you could disagree with Sonar's criteria and not consider that use case an issue. For that we can simply change the status of that issue to one of the following possible states : `Accept` or `False Positive` 🤯. Instead of going to the dashboard and changing it, now with the **Change Sonar Issue Status** feature, you can ask the MCP server to change its status.
 
-![](Screenshot-2025-11-07-at-16.53.50.png)
+![Chat asking to accept a SonarQube issue, showing the change_sonar_issue_status MCP call with status 'accept' and a success message](Screenshot-2025-11-07-at-16.53.50.png)
 
 The change status would look like this in the SonarQube UI :
 
-![](Screenshot-2025-11-07-at-16.53.57.png)
+![SonarQube UI showing the issue 'Move this file to a named package' (Maintainability, Low) now with status Accepted](Screenshot-2025-11-07-at-16.53.57.png)
 
 This issue will no longer break our Quality Gate and we can focus on those issues that we realistically are going to tackle.
 
@@ -167,7 +166,7 @@ This issue will no longer break our Quality Gate and we can focus on those issue
 
 You're about to start working on a bug in the `PaymentService.java` file. Before you dive in, you can use the **Search Project Issues** feature to get a list of all known SonarQube issues in that file. This gives you a great overview of the code's health and helps you identify other potential problems to fix while you're there.
 
-![](Screenshot-2025-11-07-at-16.54.04.png)
+![Agent reports one minor issue in SimpleToolTest.java and none in SimpleTool.java after searching SonarQube issues in the project](Screenshot-2025-11-07-at-16.54.04.png)
 
 The MCP server will know in which project and file we are working on, and will check the issues for the whole project or more specifically, for the current file. In this case it's even giving extra information about the issue we changed the status minutes ago.
 
@@ -177,11 +176,11 @@ The MCP server will know in which project and file we are working on, and will c
 
 Want to know the overall health of your project? Use the **Project Status** feature to get a quick summary of key metrics like code coverage, duplications, and the number of open issues. It's a great way to track your progress and see the impact of your team's efforts.
 
-![](Screenshot-2025-11-07-at-16.54.10.png)
+![Chat asking for the Sonar project status, showing the MCP tools called (project search, quality gate status, component measures)](Screenshot-2025-11-07-at-16.54.10.png)
 
 The Agent will use different tools to get to the result showing a very concise and easy to read status of the project without the need to go to the SonarQube dashboard.
 
-![](Screenshot-2025-11-07-at-16.54.19.png)
+![SonarQube project status for java-security-demo: quality gate OK, 15 bugs, 19 vulnerabilities, 57 code smells, 0% coverage](Screenshot-2025-11-07-at-16.54.19.png)
 
 6.
 
@@ -190,14 +189,14 @@ The Agent will use different tools to get to the result showing a very concise a
 Working on a pull request and want to see its status? The SonarQube MCP server has your back! Quickly retrieve all issues related to your current PR, no need to leave your IDE for the SonarQube dashboard.
 
 First you need to get the ID of the current pull request to ensure the Assistant is really constraining the issues to the current pull request. In this case it's the number 6 :  
-![](Screenshot-2025-11-07-at-16.54.26.png)
+![SonarQube header with the java-security-demo project and the pull request '#6 on changes' selector](Screenshot-2025-11-07-at-16.54.26.png)
 
 And in a very natural way, we will ask the Assistant to do whatever is needed to get the results for that PR :
 
-![](Screenshot-2025-11-07-at-16.54.34.png)
+![Prompt asking for the Sonar issues of pull request 6 in an easy-to-read table, with SampleBean.java attached](Screenshot-2025-11-07-at-16.54.34.png)
 
 And the Assistant with the help of the MCP Server will bring a nice table to reflect the issues we have in the Pull Request :  
-![](Screenshot-2025-11-07-at-16.54.39.jpg)![](Screenshot-2025-11-07-at-16.54.45.png)
+![Table of six open SonarQube issues in SampleBean.java for pull request 6, all about unused or useless local variable assignments](Screenshot-2025-11-07-at-16.54.39.jpg)![SonarQube pull request page with a failed quality gate: 6 new issues and 12.5% coverage, below the required 80%](Screenshot-2025-11-07-at-16.54.45.png)
 
 **Tips and tricks : how to get the best out of Agent-MCP relationship 🤝**
 

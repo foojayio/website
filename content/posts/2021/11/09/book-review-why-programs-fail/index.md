@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Why Programs Fail by Andreas Zeller"
 date: "2021-11-09T10:18:25+00:00"
-lastmod: "2021-11-09T10:29:36+00:00"
 description: "The book provides the theoretical infrastructure needed for the quality process. Viewed as a tutorial it’s pretty good for students!"
 authors:
   - "shai-almog"
@@ -16,7 +15,7 @@ related_posts:
   - "foojay-podcast-67"
 ---
 
-![](wpf3-415x510.jpeg)
+![Cover of 'Why Programs Fail: A Guide to Systematic Debugging, Second Edition' by Andreas Zeller, with colourful toy blocks](wpf3-415x510.jpeg)
 
 When I got my new job as developer advocate at Lightrun, one of the first things I asked for was books. Lots of books. Some of them cover my new job and others talk about debugging. I've been debugging for decades, but I feel like the theory around debugging is a bit vague. My goal was to bolster my terminology used by academics and peers. A secondary goal is to see how others teach ideas related to debugging.
 

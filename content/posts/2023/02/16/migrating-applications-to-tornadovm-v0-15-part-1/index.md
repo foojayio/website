@@ -1,7 +1,6 @@
 ---
 title: "Migrating Applications to TornadoVM v0.15 (Part 1)"
 date: "2023-02-16T07:58:43+00:00"
-lastmod: "2023-02-16T08:00:37+00:00"
 description: "TornadoVM 0.15 introduced changes at the API level with the aim of making the exposed operations more comprehensive to the programmers."
 authors:
   - "thanos-stratikopoulos"
@@ -34,7 +33,7 @@ TornadoVM uses a programming model that derives from the state-of-the-art progra
 * the **host code**, which includes the core software part of the application and it is typically executed on the CPU.
 * the **accelerated code**, which corresponds to the method that will perform data processing on a hardware accelerator device.
 
-![](programming-model-2.png)
+![Java program split into host code running on the CPU and accelerated code (method or kernel) running on an accelerator](programming-model-2.png)
 
 **Note:** This article focuses on the changes that are required to migrate applications that use the TornadoVM API (prior to v0.15). All changes concern only the host code. Therefore for the accelerated code we point you to the [documentation](https://tornadovm.readthedocs.io/en/latest/programming.html#expressing-parallelism-within-java-methods) that shows how to express parallelism within a method.
 
@@ -44,7 +43,7 @@ The execution model of TornadoVM includes three main steps:
 2. Parallel data **processing on the accelerator**.
 3. **Transfer the result data** from the accelerator to the host.
 
-![](execution-model-2.png)
+![TornadoVM execution model: transfer data to the device, process it, then transfer the result data back to the host](execution-model-2.png)
 
 To follow the TornadoVM execution model, a programmer needs to use:
 
@@ -88,7 +87,7 @@ A task can be defined as follows:
 
     taskGraph.task("sample", Class::methodA, input, output);
 
-{{< img src="task-graph-1024x163.png" class="aligncenter size-large is-resized" width="559" height="88" >}}
+{{< img src="task-graph-1024x163.png" alt="Diagram of a method with input and output next to a task with input and output data, wrapped in a TaskGraph" class="aligncenter size-large is-resized" width="559" height="88" >}}
 
 **Note:** The data in the **transferToHost** and **transferToDevice** methods, define the data flow between one or multiple tasks in a **TaskGraph**. In case data from one task is going to be consumed by another task, then it will be persisted into the device's memory and no copy will be involved.
 
@@ -113,7 +112,7 @@ The following code snippet sets one output array (output) to be transferred from
 
 Once a TaskGraph is defined, and the programmer is confident that the shape of the TaskGraph will not be altered, then it is necessary to capture a snapshot of the TaskGraph which will return an object of type **ImmutableTaskGraph**.  
 
-{{< img src="taskgraph-snapshot-1024x79.png" class="aligncenter size-large is-resized" width="644" height="49" >}}
+{{< img src="taskgraph-snapshot-1024x79.png" alt="Flow showing a TaskGraph being snapshotted into an immutable TaskGraph" class="aligncenter size-large is-resized" width="644" height="49" >}}
 
 This is a very simple process:
 

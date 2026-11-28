@@ -7,7 +7,6 @@ authors:
 image: "eliya.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "OpenJDK Migration"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
@@ -17,7 +16,7 @@ related_posts:
 ---
 
 This is an argument about where production intent belongs in a managed runtime, and the OpenJDK distribution we built to act on it - Eliya, an opinionated, compliance-conscious OpenJDK distribution. This is the first article in a series. The later parts are engineering: reproducible builds, the glibc floor, release signing, the one source patch we shipped. This part is the thesis they all serve.
-![](jvm-behaviour-space-8d14d74a.png)
+![Diagram of JVM behaviour space: controllers select behaviours, split into selectable and implementation-owned behaviours](jvm-behaviour-space-8d14d74a.png)
 
 Every configurable system has two spaces. The configuration space: every behaviour you can reach by setting the knobs the system already exposes. And there's the implementation space: behaviour that only exists if someone goes in and changes the internals.
 

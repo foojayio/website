@@ -1,7 +1,6 @@
 ---
 title: "Duplicate finder – Tests"
 date: "2024-12-18T16:00:44+00:00"
-lastmod: "2024-12-18T17:51:06+00:00"
 description: "Coding a duplicate content finder that quickly detects exact and fuzzy-matching text in large text repositories and numerous files."
 canonical: "https://flounder.dev/posts/duplicate-finder-requirements/"
 authors:

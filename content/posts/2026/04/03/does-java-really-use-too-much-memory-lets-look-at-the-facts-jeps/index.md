@@ -6,7 +6,6 @@ authors:
   - "igor-de-souza"
 image: "duke_Pinocchio01.jpg"
 categories:
-  - "Java"
   - "Student"
 related_posts:
   - "foojay-podcast-92"
@@ -15,7 +14,7 @@ related_posts:
   - "foojay-podcast-28"
 ---
 
-![](duke_Pinocchio01-1024x640.jpg)
+![Duke the Java mascot with a Pinocchio nose says 'I swear... Java doesn't use that much memory anymore!'](duke_Pinocchio01-1024x640.jpg)
 
 Breaking news: Java has been confirmed to consume all available RAM. Developers worldwide shocked.  
 
@@ -48,7 +47,7 @@ But that was then.
 
 *Disclaimer: No wooden noses were harmed in the writing of this article. (But Duke's might have grown a few centimeters while we were testing -Xmx flags.)*
 
-![](duke_Pinocchio02-1024x640.jpg)  
+![Duke with a long wooden nose surrounded by green check marks, memory chips and JEP 519 labels](duke_Pinocchio02-1024x640.jpg)  
 *Image 01: Pinocchio Duke on April 1st: "I swear… Java doesn't use that much memory anymore!*
 
 ## Modern Java: What Actually Changed?

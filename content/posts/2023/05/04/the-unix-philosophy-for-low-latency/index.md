@@ -1,7 +1,6 @@
 ---
 title: "The Unix Philosophy for Low Latency"
 date: "2023-05-04T08:03:40+00:00"
-lastmod: "2023-05-04T08:03:41+00:00"
 description: "How to realize the Unix Philosophy in Enterprise IT using Java, microservices, and Chronicle Queue & Wire."
 canonical: "https://chronicle.software/unix-philosophy-for-low-latency/"
 authors:
@@ -50,7 +49,7 @@ These open source technologies not only provide the benefits of Unix tools plus 
 ### Example
 
 Below is some example code that is a super-simplified version of a workflow that is common in the world of financial markets (most of Chronicle's users are in this space):
-![](https://chronicle.software/wp-content/uploads/2022/08/Screen-Shot-2022-08-24-at-11.13.09-AM.png)
+![Screenshot of a Chronicle Queue code example from an earlier Chronicle blog post](https://chronicle.software/wp-content/uploads/2022/08/Screen-Shot-2022-08-24-at-11.13.09-AM.png)
 
 In this example
 

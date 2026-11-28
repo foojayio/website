@@ -1,14 +1,12 @@
 ---
 title: "Calling Gemma with Ollama, TestContainers, and LangChain4j"
 date: "2024-04-12T13:55:38+00:00"
-lastmod: "2024-04-12T13:55:40+00:00"
 description: "Lately, for my Generative AI powered Java apps, I've used the Gemini multimodal large language model from Google. But there's also Gemma, its little sister model."
 canonical: "https://glaforge.dev/posts/2024/04/04/calling-gemma-with-ollama-and-testcontainers/"
 authors:
   - "guillaume-laforge"
 image: "gemma-ollama-testcontainers-langchain4j-700x360-1.png"
 categories:
-  - "Java"
   - "Machine Learning"
 related_posts:
   - "quick-start-with-machine-learning-in-java"
@@ -48,7 +46,7 @@ TestContainers is not only useful for testing, but you can also use it for drivi
 
 So here's the whole picture:
 
-![](gemma-ollama-testcontainers-langchain4j-700x360.png)
+![Diagram: a user asks 'Why is the sky blue?', a chatbot app sends it to Gemma in an Ollama container under Testcontainers, answer 'Rayleigh scattering'](gemma-ollama-testcontainers-langchain4j-700x360.png)
 
 ## Time to implement this approach!
 

@@ -1,7 +1,6 @@
 ---
 title: "Announcing New Book Review: \"Java by Comparison\""
 date: "2021-06-02T08:13:15+00:00"
-lastmod: "2021-09-04T07:46:46+00:00"
 description: "“Java by Comparison”, Simon Harrer, Jörg Lenhard, and Linus Dietz, promises the reader to become a “Java Craftsman” by studying 70 examples."
 authors:
   - "cay-horstmann"
@@ -15,7 +14,7 @@ related_posts:
   - "openjdk-vs-openjfx-release-cycles"
 ---
 
-{{< img src="book-java-by-comparison-423x510.png" class="size-medium" width="423" height="510" >}}
+{{< img src="book-java-by-comparison-423x510.png" alt="Cover of Java by Comparison: Become a Java Craftsman in 70 Examples, by Harrer, Lenhard and Dietz" class="size-medium" width="423" height="510" >}}
 
 The book ["Java by Comparison" by Simon Harrer, Jörg Lenhard, and Linus Dietz](https://pragprog.com/titles/javacomp/java-by-comparison/), promises the reader to become a "Java Craftsman" through the study of 70 examples. The book is published by The Pragmatic Bookshelf.
 

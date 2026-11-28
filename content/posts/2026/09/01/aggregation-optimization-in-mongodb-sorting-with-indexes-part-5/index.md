@@ -1,7 +1,6 @@
 ---
 title: "Aggregation Optimization in MongoDB: Sorting With Indexes (Part 5)"
 date: "2026-09-01T14:07:36+00:00"
-lastmod: "2026-09-02T08:23:09+00:00"
 description: "Part 5 of our aggregation optimization series: swapping an explicit $sort for an index-backed sort cut MongoDB query time from 51ms to 14ms"
 authors:
   - "graeme-robinson"
@@ -20,7 +19,7 @@ related_posts:
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part5-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-![](fri1-2.png)
+![MongoDB banner reading 'Love Your Developers' with floating document and chart icons](fri1-2.png)
 
 In this series, we've described our steps to improve the performance of a slow running MongoDB [aggregation pipeline](https://www.mongodb.com/docs/manual/aggregation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part5-foojay&utm_term=tony.kim#aggregation-operations). The pipeline was part of a fictional video streaming service application, mapping user profiles to the devices those users were using to access the service, and was based on a real use case I'd encountered during a recent design review.
 

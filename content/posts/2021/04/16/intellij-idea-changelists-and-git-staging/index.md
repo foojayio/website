@@ -1,7 +1,6 @@
 ---
 title: "About IntelliJ IDEA Changelists and Git Staging"
 date: "2021-04-16T07:13:37+00:00"
-lastmod: "2021-04-16T07:18:31+00:00"
 description: "Did you know? Since the release of IntelliJ IDEA 2020.3, there are now two ways to manage your commits to Git."
 authors:
   - "helenjoscott"

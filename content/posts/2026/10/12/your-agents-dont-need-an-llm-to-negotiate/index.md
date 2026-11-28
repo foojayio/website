@@ -6,7 +6,6 @@ authors:
   - "mauro-mura"
 image: "cover.jpg"
 categories:
-  - "Java"
   - "AI"
   - "Design Patterns"
 canonical: "https://bitautonomi.substack.com/p/your-agents-dont-need-an-llm-to-negotiate"

@@ -1,7 +1,6 @@
 ---
 title: "SpringOne TLV World Tour Trip Report"
 date: "2022-12-09T22:00:00+00:00"
-lastmod: "2022-12-12T08:44:18+00:00"
 description: "Got a chance to meet & talk to many interesting members of the Spring team and hear about updates to Spring 6 & Spring Boot 3 in my home city."
 canonical: "https://debugagent.com/springone-tlv-world-tour-trip-report"
 authors:

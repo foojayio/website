@@ -1,7 +1,6 @@
 ---
 title: "Demo Application with CRaC and Loading Data in Memory"
 date: "2025-03-13T08:11:19+00:00"
-lastmod: "2025-03-13T08:11:21+00:00"
 description: "Take a look at a nice illustration of how time-consuming processes can be stored in a checkpoint in CRaC."
 canonical: "https://webtechie.be/post/2025-02-19-demo-application-with-crac-and-loading-data-in-memory/"
 authors:

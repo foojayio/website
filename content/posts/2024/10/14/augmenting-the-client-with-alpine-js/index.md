@@ -1,7 +1,6 @@
 ---
 title: "Augmenting the client with Alpine.js"
 date: "2024-10-14T10:59:44+00:00"
-lastmod: "2024-10-14T10:59:45+00:00"
 description: "Alpine is very similar to Vue, with the notable difference of the lack of templating; components are only available via a price. All other features have an equivalent."
 canonical: "https://blog.frankel.ch/ajax-ssr/4/"
 authors:

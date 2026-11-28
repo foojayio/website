@@ -2,6 +2,19 @@
 
 Two things arrive here by pull request: **articles** and **calendar events**.
 
+Some lists on the site are **not edited here at all**, because a community
+project already maintains them and foojay.io refreshes its copy every day. A
+fix made in this repo is overwritten at the next sync, so send it to the
+source instead:
+
+| What | Where it is maintained | Shown on foojay.io at |
+|------|------------------------|-----------------------|
+| Java User Groups (and their meetup calendars) | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs) — one small file per JUG | [/jugs/](https://foojay.io/jugs/), [/calendar/](https://foojay.io/calendar/) |
+| Java Champions | [aalmiray/java-champions](https://github.com/aalmiray/java-champions/blob/main/java-champions.yml) — `java-champions.yml` | [/java-champions/](https://foojay.io/java-champions/) |
+| Java conferences, dates and CFPs | [javaconferences/javaconferences.github.io](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md) — `README.md` | [/java-conferences/](https://foojay.io/java-conferences/), [/calendar/](https://foojay.io/calendar/) |
+
+Everything under `data/` that these produce is generated. Never edit it by hand.
+
 ## Code of Conduct
 
 Everyone who contributes here agrees to follow our
@@ -21,17 +34,27 @@ images, and delivering it (pull request, fork, or zip).
 ### In short
 
 - Posts are contributed via pull request (fork the repo if you don't have write access).
+  **You don't have to clone the whole repository** (about 2 GB with history):
+  see [Submitting without a full clone](#submitting-without-a-full-clone).
 - Create your post in a folder under **`draft/<your-slug>/`** with the text in
   `index.md` (or `index.adoc`) and its images in the same folder. Copy `template/post.md` (or `template/post.adoc`) as your
   starting point. A maintainer moves the folder into
   `content/posts/<year>/<month>/<day>/<your-slug>/` when it's published — you
   never need to pick that path yourself unless you want the post to be published on a specific date. In that case, clearly specify the preferred date in your pull request.
+- **Updating a published post?** Add `updated: "YYYY-MM-DD"` to its frontmatter.
+  The header then shows "Updated <date>", but only when that date is at least
+  a week after `date`, so a small typo fix needs nothing. Leave `date` alone.
 - **Markdown or AsciiDoc.** Name the file `index.adoc` and write AsciiDoc
   instead, starting from `template/post.adoc`. Everything else is the same —
   same folder shape, same frontmatter, same checks. Markdown is shorter for
   ordinary prose and what most articles use; AsciiDoc is worth it for captions
   on code blocks, numbered callouts inside a snippet, admonitions, and tables
   that span cells.
+- **Only the article and its images go in the PR**: `index.md` or `index.adoc`,
+  plus images. Example code, scripts and project files don't belong in this
+  repository: publish them in a repository of your own and link to it from the
+  article. Videos too: host them on YouTube or another external service and
+  embed or link them (`{{< youtube VIDEO_ID >}}`), so the repository stays small.
 - **Company-based and commercial articles are welcome if they are Java/OpenJDK/JVM-oriented**
   — they need real, working Java example code or developer tooling, not just a product description.
   Marketing-only submissions are declined.
@@ -66,10 +89,70 @@ images, and delivering it (pull request, fork, or zip).
 
 See the guide linked above for the details.
 
+### Submitting without a full clone
+
+The repository is around 2 GB with history, and an article only adds a few
+files. Two lighter routes, both ending in a pull request from your own fork:
+
+**In the browser**
+
+1. Open the `draft` folder on [github.com/foojayio/website](https://github.com/foojayio/website)
+   and choose **Add file → Create new file**. GitHub offers to fork the
+   repository for you.
+2. Name the file `your-slug/index.md` (the `/` creates the folder) and paste your
+   article in, starting from `template/post.md`.
+3. **Commit changes… → Propose changes → Create pull request.**
+4. Add images by opening your branch in your fork, going to `draft/your-slug/`
+   and choosing **Add file → Upload files**. They join the same pull request.
+   A new author profile goes in the same way, under `content/authors/<your-slug>/`.
+
+If you already have an old fork, use **Sync fork** first.
+
+**With a shallow, sparse clone** (your own editor, a few MB instead of 2 GB)
+
+*No write access:* [fork the repository](https://github.com/foojayio/website/fork)
+and clone your fork.
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/<you>/website.git
+cd website
+git sparse-checkout set draft template content/authors
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit, add images, then:
+git add draft/your-slug
+git commit -m "Add article: <title>"
+git push -u origin my-article
+```
+
+*Invited as a writer on `foojayio/website`:* no fork needed, clone the
+repository itself and push your branch to it.
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/foojayio/website.git
+cd website
+git sparse-checkout set draft template
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit, add images, then:
+git add draft/your-slug
+git commit -m "Add article: <title>"
+git push -u origin my-article
+```
+
+In both cases open the pull request from the link `git push` prints. Add
+`content/authors` to the `sparse-checkout set` line if you are also creating
+an author profile.
+
+Only part of the tree is checked out, so `hugo server` won't work from this
+clone; the PR check builds the site for you. To preview, use a full clone.
+
 ## Adding an event to the calendar
 
-[foojay.io/calendar/](https://foojay.io/calendar/) carries two kinds of event,
-and they arrive by two different routes. Pick the right one:
+[foojay.io/calendar/](https://foojay.io/calendar/) carries three kinds of event,
+and they arrive by different routes. Pick the right one:
 
 ### A Java User Group meetup — nothing to do here
 
@@ -78,31 +161,41 @@ already publishes (its own `.ics`, a Google Calendar, or Meetup's export).
 Nothing in this repo is hand-edited for them.
 
 If your JUG's events are missing, the fix belongs **upstream**, in the
-community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs):
+community-run [World Wide JUGs directory](https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs):
 add or correct your group's file there, giving it a `calendar:` (any iCal URL)
 or a `meetup:` entry. It shows up on foojay's calendar at the next daily sync,
 and on every other site that reads the directory too.
 
-### A conference, workshop or other one-off — one small file
+### A Java conference — add it to javaconferences.org
 
-Conferences publish no feed anyone can subscribe to, so they are added by hand:
+Conferences are pulled in daily from [javaconferences.org](https://javaconferences.org/),
+the community list of upcoming Java conferences. If yours is missing, or a date,
+location or call for papers is wrong, send a pull request to the
+[`README.md` of that repository](https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md)
+(one table row per conference). It appears on foojay.io's
+[/java-conferences/](https://foojay.io/java-conferences/) map and on the calendar
+at the next daily sync, and on javaconferences.org itself. **Don't add a file to
+`data/events/` for a conference that belongs on that list.**
+
+### A workshop, webinar or other one-off — one small file
+
+These have no list or feed to join, so they are added by hand:
 
 1. Copy [`template/event.yaml`](template/event.yaml) to
    `data/events/<event-slug>.yaml`.
 2. Name the file after the event **including its year** —
-   `devoxx-belgium-2026.yaml`, `jfokus-2027.yaml`. Lowercase letters, digits
+   `ai-coding-workshop-berlin-2026.yaml`, `ocx-webinar-week-2026.yaml`. Lowercase letters, digits
    and dashes only. Next year's edition is a new file, not an edit of this one.
 3. Fill it in and open a pull request. Nothing else needs touching.
 
 ```yaml
-name: "Devoxx Belgium 2026"
-type: "Conference"
-url: "https://devoxx.be/"
-start: "2026-10-05"
-end: "2026-10-09"
-venue: "Kinepolis Antwerpen"
-city: "Antwerp"
-country: "Belgium"
+name: "AI Coding Workshop Berlin 2026"
+type: "Workshop"
+url: "https://example.org/ai-coding-workshop/"
+start: "2026-09-15"
+venue: "Example Venue"
+city: "Berlin"
+country: "Germany"
 ```
 
 | Field | Required | Notes |

@@ -1,7 +1,6 @@
 ---
 title: "Do we understand the value of AI knowledge?"
 date: "2025-08-12T11:26:49+00:00"
-lastmod: "2025-08-12T11:26:51+00:00"
 description: "The future is not yet written and every moment is important."
 authors:
   - "miro-wengner"
@@ -20,7 +19,7 @@ related_posts:
 
 ### I remember the first time I saw a diagram of a neuron (*Img.1.*). I was a school kid, and among other hobbies, I was interested in the human brain, it fascinated me. I borrowed a book from the bookstore to find out how it all worked, because these cells are responsible for more than just the functioning of the human species.
 
-{{< img src="20250810_Neuron_wiki-700x451.png" class="size-medium" width="700" height="451" >}}
+{{< img src="20250810_Neuron_wiki-700x451.png" alt="Labeled diagram of a neuron showing dendrites, cell body, axon, axon hillock and synaptic terminals" class="size-medium" width="700" height="451" >}}
 
 *Img.1.: Anatomy of multipolar neuron*
 

@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Running in Kiosk Mode on the Raspberry Pi"
 date: "2021-04-27T14:39:50+00:00"
-lastmod: "2021-12-10T13:01:02+00:00"
 description: "Combined with an inexpensive touch screen, the Raspberry Pi makes for a perfect controller for a machine or game console."
 canonical: "https://webtechie.be/post/2021-04-23-javafx-kiosk-raspberry-pi/"
 authors:
@@ -33,7 +32,7 @@ This demo will work with any Raspberry Pi with an ARMv7 or ARMv8: Raspberry Pi A
 #### SD with Operating System
 
 Download the [Raspberry Pi Imager tool](https://www.raspberrypi.org/software/) and burn the "Raspberry Pi OS (32-bit)" (with Desktop) to an SD card. When finished, put it in your Raspberry Pi, start the board, and follow the steps to configure Wifi, language... to fit your needs.
-![](imager-1024x675.png)
+![Raspberry Pi Imager v1.6 operating system list with Raspberry Pi OS (32-bit) recommended at the top](imager-1024x675.png)
 
 *Remark: in the Imager tool you can also select "Raspberry Pi OS (Other)" \> "Raspberry Pi OS Full (32-bit)" which includes extra software and has Java 11 pre-installed. If you only need Java, you can select this version. The steps below will provide additional other tools which are not included in any of the Raspberry Pi OS versions.*
 
@@ -126,7 +125,7 @@ slf4j-api-2.0.0-alpha0.jar
 slf4j-simple-2.0.0-alpha0.jar
 ```
 
-![](maven-build-finished-1024x675.jpg)
+![Raspberry Pi desktop showing a terminal with Maven BUILD SUCCESS and a file manager listing the target/distribution jars and run scripts](maven-build-finished-1024x675.jpg)
 
 ## Run Modes
 
@@ -159,7 +158,7 @@ $ sudo bash run.sh
 </figure>
 
 As you can see in the video, because we are using an example application from the Pi4J project, we are able to control a LED with the button in the application.
-![](running-application-1024x626.jpg)
+![Pi4J and JavaFX demo window on the Pi showing Java 11 and JavaFX 17, a 'Toggle LED for 2 seconds' button, and console logs behind it](running-application-1024x626.jpg)
 
 ### Kiosk Mode
 

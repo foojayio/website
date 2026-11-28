@@ -1,14 +1,12 @@
 ---
 title: "From Zero to Full Observability with Dash0"
 date: "2026-04-04T06:35:47+00:00"
-lastmod: "2026-04-12T12:35:16+00:00"
 description: "This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the Dash0 operator — without making any changes to the application code."
 authors:
   - "geertjan-wielenga"
 image: "og-image.jpg"
 categories:
   - "Cloud"
-  - "Java"
   - "Kubernetes"
   - "OpenTelemetry"
 related_posts:
@@ -17,7 +15,7 @@ related_posts:
 This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the [Dash0 Kubernetes Operator](https://www.dash0.com/docs/dash0/monitoring/kubernetes/about-kubernetes) — without making any changes to the application code.
 
 [Dash0](https://www.dash0.com/docs/dash0) is an OpenTelemetry-native observability platform that collects and correlates traces, metrics, and logs, and provides infrastructure monitoring across Kubernetes resources — pods, nodes, namespaces, deployments, daemonsets, statefulsets, jobs, and cronjobs — as well as cloud infrastructure such as AWS. Its Kubernetes operator can automatically instrument workloads at the pod level, with no changes required to application code or container images.
-![](kubernetes-dash0-1024x581.jpg)
+![Dash0 Kubernetes overview: one running pod, workload counts, and pod status and count charts over time](kubernetes-dash0-1024x581.jpg)
 
 The setup is divided into two distinct phases. The first phase establishes the "before" state: a service running in Kubernetes with no instrumentation, generating traffic that is completely invisible to any observability tool. The second phase adds the Dash0 operator to the cluster, which automatically instruments the workload and begins sending traces, metrics, and logs to Dash0 — again, with no changes to the application itself.
 
@@ -338,16 +336,16 @@ The curl loop in terminal 2 will resume automatically.
 Check the following:
 
 **Monitoring → Services** — `order-service` with live request rate, error rate, and latency
-![](dash0-services-1024x298.png)
+![Dash0 Services catalog listing order-service with 916 requests, no errors and low latency](dash0-services-1024x298.png)
 
 **Telemetry → Tracing** — individual traces for each `/orders` request
-![](dash0-tracing-1024x465.png)
+![Dash0 Tracing view with GET /orders spans from order-service and a span detail panel open](dash0-tracing-1024x465.png)
 
 **Telemetry → Logging** — structured logs
-![](dash0-pod-logs-1024x545.png)
+![Dash0 Pod Logs view with a chart of warning logs over time and a table of gRPC log records](dash0-pod-logs-1024x545.png)
 
 **Monitoring → Resources** — pod and node resource usage
-![](kubernetes-dash0-1024x581.jpg)
+![Dash0 Kubernetes overview: one running pod, workload counts, and pod status and count charts over time](kubernetes-dash0-1024x581.jpg)
 
 **Further Reading:**
 

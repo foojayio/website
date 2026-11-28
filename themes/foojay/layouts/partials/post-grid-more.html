@@ -1,0 +1,11 @@
+{{- /* Input: a slice of Pages. The first two cards, the rest behind a native
+       <details>. Not .Paginate: a page may call it once and the article grid
+       already does. */ -}}
+{{- $rest := after 2 . -}}
+<div class="post-grid">{{ range first 2 . }}{{ partial "post-card.html" . }}{{ end }}</div>
+{{- with $rest }}
+<details class="grid-more">
+  <summary>Show {{ len . }} more</summary>
+  <div class="post-grid">{{ range . }}{{ partial "post-card.html" . }}{{ end }}</div>
+</details>
+{{- end -}}

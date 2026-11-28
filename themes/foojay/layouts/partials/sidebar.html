@@ -2,6 +2,10 @@
   {{/* Repeated on every page -- excluded from the search index so results
        aren't dominated by sidebar widget text. */}}
 
+  {{/* Home page only, and first: the newest episode is what a returning
+       visitor looks for. */}}
+  {{ if .IsHome }}{{ partial "latest-podcast-widget.html" . }}{{ end }}
+
   {{ partial "toc.html" . }}
 
   {{/* One paid banner, above the sponsor tiers. Like them it survives the
@@ -18,28 +22,15 @@
        a home-page thing, and the partial SCANS THE FILESYSTEM -- four
        directory listings on one page, four thousand across the site. If it is
        ever wanted site-wide, wrap it in partialCached; the result does not
-       depend on the page.
-
-       Above Categories because it EXPIRES: what is out tomorrow is worth a
-       glance before a list that is the same every day. */}}
+       depend on the page. */}}
   {{ if .IsHome }}{{ partial "coming-soon.html" . }}{{ end }}
-
-  <section class="widget widget-categories">
-    <h2>Categories</h2>
-    <ul>
-      {{/* Shuffled for the same reason as Authors below: a fixed top-N is
-           the same names on every page. */}}
-      {{ range first 5 (shuffle .Site.Taxonomies.categories.ByCount) }}
-        <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="count">{{ .Count }}</span></a></li>
-      {{ end }}
-    </ul>
-    <a class="view-all" href="{{ "today/category/" | relURL }}">All categories</a>
-  </section>
 
   {{/* Authors + JUGs are dropped whenever a TOC is showing: the aside is one
        sticky block, so past a certain height the TOC (listed first) scrolls
        out of view instead of staying visible, which defeats it. */}}
   {{ if not (partial "has-toc.html" .) }}
+  {{/* On the home page the featured-authors widget carries this list too. */}}
+  {{ if not (and .IsHome (partial "featured-authors.html" .)) }}
   <section class="widget widget-authors">
     <h2>Authors</h2>
     <ul>
@@ -52,8 +43,9 @@
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "today/author/" | relURL }}">All authors</a>
+    <a class="view-all" href="{{ "today/author/" | relURL }}">All {{ len (partialCached "authors-all.html" "authors") }} authors &rarr;</a>
   </section>
+  {{ end }}
 
   <section class="widget widget-jugs">
     <h2>Java User Groups</h2>
@@ -66,10 +58,10 @@
            no website would leave a short list on some pages. */}}
       {{ $linked := where hugo.Data.jugs "website" "!=" nil }}
       {{ range first 5 (shuffle $linked) }}
-        <li><a href="{{ .website }}">{{ .name }}</a></li>
+        <li><a href="{{ .website }}" target="_blank" rel="noopener">{{ .name }}</a></li>
       {{ end }}
     </ul>
-    <a class="view-all" href="{{ "jugs/" | relURL }}">All Java User Groups</a>
+    <a class="view-all" href="{{ "jugs/" | relURL }}">All {{ len hugo.Data.jugs }} Java User Groups &rarr;</a>
   </section>
   {{ end }}
 

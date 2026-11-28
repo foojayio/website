@@ -1,7 +1,6 @@
 ---
 title: "Demystifying Google Container Tool, Jib: Java Image Builder"
 date: "2021-02-18T18:42:44+00:00"
-lastmod: "2021-08-23T13:05:22+00:00"
 description: "Learn about the internals of image layering created by container image builder Jib and explore what distroless images are and their benefits."
 canonical: "https://ashishtechmill.com/demystifying-google-container-tool-jib-java-image-builder"
 authors:
@@ -38,7 +37,7 @@ When you do any code changes, only your changes are rebuilt, not your entire app
 
 [
 
-{{< img src="jib-ashish-700x400.png" class="size-medium" width="700" height="400" >}}
+{{< img src="jib-ashish-700x400.png" alt="IntelliJ editor with a Spring Boot Controller whose /hello endpoint returns 'Hello from Jib!!!!!!!!!!!!'" class="size-medium" width="700" height="400" >}}
 
 ](https://www.youtube.com/watch?v=vizfV2opkfU)
 

@@ -1,7 +1,6 @@
 ---
 title: "Reducing Tail Latencies with Chronicle Queue Enterprise"
 date: "2022-11-09T15:07:36+00:00"
-lastmod: "2022-11-09T15:08:08+00:00"
 description: "Fed up with pauses at the high percentiles in your application? You may want to consider Chronicle Queue Enterprise!"
 authors:
   - "jerry-shea"
@@ -39,7 +38,7 @@ Here we are running a benchmark with 4 runs, each of 3M messages of size 140 byt
 
 The below graph shows latencies at various percentiles in microseconds and we can see that latencies – while impressive – climb at the higher percentiles to around 50μs.
 
-![](Screen-Shot-2022-10-31-at-11.05.35-AM-1024x432.png)
+![Line chart of Chronicle Queue latencies in microseconds: flat up to the 99th percentile, then rising to about 50-55 µs at 99.99](Screen-Shot-2022-10-31-at-11.05.35-AM-1024x432.png)
 
 *All timings in this article make use of the following benchmarking methodology: using [JLBH](https://github.com/OpenHFT/JLBH "JLBH") we send a sustained number of 140 byte messages per second (accounting for [coordination omission](https://medium.com/@siddontang/the-coordinated-omission-problem-in-the-benchmark-tools-5d9abef79279 "coordination omission")) and these messages are timestamped then written into a Chronicle Queue.*
 
@@ -64,7 +63,7 @@ which configures Chronicle Queue Enterprise in asynchronous mode to absorb any l
 
 Below we see results with the same workload and asynchronous mode configured (qe1 – 4) overlaid on the same graph. We can see that latencies are slightly worse at low percentiles but are very well contained at the higher percentiles – even at 99.99 all latencies are less than 4μs.
 
-![](Screen-Shot-2022-10-31-at-11.20.54-AM-1024x478.png)
+![Latency chart with async-mode lines (qe1-4) staying near 2-4 µs while the cq1-4 lines climb to about 50-55 µs at high percentiles](Screen-Shot-2022-10-31-at-11.20.54-AM-1024x478.png)
 
 ### Conclusion
 

@@ -1,7 +1,6 @@
 ---
 title: "Interview with Paul Kocian aka Orango_Mango"
 date: "2023-05-08T07:49:40+00:00"
-lastmod: "2023-05-22T08:24:14+00:00"
 description: "Learn about an impressive list of JavaFX and Raspberry Pi projects and beyond worked on by a 16 year old in Italy!"
 canonical: "https://webtechie.be/post/2023-05-02-interview-paul-kocian-orangomango/"
 authors:
@@ -23,9 +22,9 @@ aliases:
 ***Some time ago on Twitter, I discovered [@Orango_Mango](https://twitter.com/orango_mango), who shared his progress in creating a 3D engine with JavaFX. The shared videos started with a [Rubik's cube in January '23](https://twitter.com/orango_mango/status/1610894079654563843), over a [basic tumbling car in February](https://twitter.com/orango_mango/status/1620493609287172096), to a [full Minecraft-like world in April](https://twitter.com/orango_mango/status/1646218237535813639). Who is this @OrangoMango? And why did he take up the challenge to create a 3D engine with Java and JavaFX? Let's find out...***
 
 {{< gallery >}}
-rubikscube-319x510.png
-3dcar-415x510.png
-minecraft-645x510.jpg
+rubikscube-319x510.png | | Tweet by OrangoMango showing a Rubik's cube made in Java, solved with custom moves, with a rotating cube animation
+3dcar-415x510.png | | Tweet by OrangoMango showing a 3D red voxel car rendered on a 2D canvas using only matrices and vectors
+minecraft-645x510.jpg | | Tweet by OrangoMango with a video of a Minecraft-like house with window frames in JavaFX
 {{< /gallery >}}
 
 ***Let's start with the first mystery... Who is behind the @Orango_Mango account? Can you introduce yourself?***
@@ -55,9 +54,9 @@ I know that Java is an old language, but I think it's still the best for making 
 For example, Minecraft is made in Java, and was my inspiration for a 3D engine. And the JavaFX canvas API is really impressive, it has everything a game needs (drawing images, shapes, and even pixels). As Android and Java are so related, it will also allow me to port my code to mobile.
 
 {{< gallery >}}
-minecraft-trees.png
-minecraft-water.png
-3dgraphics-970x1024.jpg
+minecraft-trees.png | | BlockWorld window showing a Minecraft-like terrain of grass blocks and trees in JavaFX
+minecraft-water.png | | BlockWorld window on a Raspberry Pi showing blocky sand and water with trees
+3dgraphics-970x1024.jpg | | Wireframe 3D mesh of a cartoon animal figure rendered in a JavaFX window at 102 FPS
 {{< /gallery >}}
 
 ***Java and JavaFX on mobile is indeed a very nice approach and doesn't get the amount of attention it deserves. I guess you know the work Gluon is doing on this topic? If not, please take a look at [their docs](https://docs.gluonhq.com/#platforms_android).***
@@ -85,8 +84,8 @@ Although Java uses a lot of memory, those 2GB are somehow fine for my 3D engine.
 I actually have a laptop with Windows but I don't like it for coding. For that task, I prefer Linux and a Raspberry Pi isn't that expensive... So my setup is very simple, a Raspberry Pi and one screen.
 
 {{< gallery >}}
-desk-rpi-1024x768.jpg
-desk-monitor-1024x768.jpg
+desk-rpi-1024x768.jpg | | Raspberry Pi in a white and red case with its power LED lit, on a dark desk
+desk-monitor-1024x768.jpg | | Monitor showing a code editor and the BlockWorld game running on a Raspberry Pi, with keyboard and mouse
 {{< /gallery >}}
 
 ***As you learned all this on your own, can you share what was the most challenging part of getting started with Java and JavaFX?***

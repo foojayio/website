@@ -1,5 +1,5 @@
 {{- /* Sticky "On this page" + scroll-spy, built from Hugo's h2/h3 extraction
-       (.TableOfContents). Renders nothing when a page has no headings. Paired
+       (.TableOfContents). A post with no headings still gets the end-matter links. Paired
        with static/js/toc.js and the .toc rules in style.css. */ -}}
 {{/* .TableOfContents already renders its own <nav id="TableOfContents">
      wrapper around the <ul>, so this outer element is a plain <div> rather
@@ -33,15 +33,8 @@
      sections: three near-constant entries reading like chapters would make a
      five-heading post look like an eight-heading one. */}}
 {{ $tail := slice }}
-{{/* share.html has no `with`-able return value to guard on -- it always
-     renders when called. Of every caller of THIS partial, ai/single.html
-     (type "ai", the curated AI portal) is the one exception that reaches toc.html
-     via sidebar.html but never calls share.html, so #post-share would not
-     exist there. Guarded on that instead of on a partial result. Ordered
-     first to match where single.html renders it, ahead of post-authors.html. */}}
-{{ if ne .Type "ai" }}
-  {{ $tail = $tail | append `<li class="toc__tail"><a href="#post-share">Share this page</a></li>` }}
-{{ end }}
+{{/* Ordered first to match where single.html renders it, ahead of post-authors.html. */}}
+{{ $tail = $tail | append `<li class="toc__tail"><a href="#post-share">Share this page</a></li>` }}
 {{ with partial "post-authors.html" . }}
   {{/* Plural derived from the count, not written twice: foojay-podcast-94
        credits twelve people and most posts credit one. */}}
@@ -57,19 +50,14 @@
        heading labelled another reads as the wrong link. */}}
   {{ $tail = $tail | append `<li class="toc__tail"><a href="#giscus-comments">Join the discussion</a></li>` }}
 {{ end }}
-{{/* After the giscus entry, matching the order the page renders them in.
-     Keyed on the same bundle resource the section is derived from. */}}
-{{ if .Resources.GetMatch "comments.json" }}
-  {{ $tail = $tail | append `<li class="toc__tail"><a href="#legacy-comments">Discussions on the previous Foojay site</a></li>` }}
-{{ end }}
 
-{{/* End matter NEVER brings the panel into existence on its own: the same
-     three lines on every post map nothing about the article. It is appended
-     to a panel that already has a reason to exist. */}}
+{{/* A post (not the /today/ list) always gets the panel, even with no headings: the end-matter
+     links are what a reader jumps to. Other pages keep it to real content. */}}
+{{ $show := or $hasToc $items (and .IsPage (eq .Section "posts") $tail) }}
 {{ $extras := $items }}
-{{ if or $hasToc $items }}{{ $extras = $items | append $tail }}{{ end }}
+{{ if $show }}{{ $extras = $items | append $tail }}{{ end }}
 
-{{ if or $hasToc $items }}
+{{ if $show }}
 {{ $toc := printf "%s" .TableOfContents }}
 {{ with delimit $extras "" }}
   {{ if $hasToc }}

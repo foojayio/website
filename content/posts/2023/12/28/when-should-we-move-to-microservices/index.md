@@ -1,7 +1,6 @@
 ---
 title: "When Should we Move to Microservices?"
 date: "2023-12-28T14:08:28+00:00"
-lastmod: "2023-12-28T14:08:29+00:00"
 description: "Avoid the small monolith antipattern. When do Microservices make sense? Avoid a solution worse than the problem, understand the tradeoffs."
 authors:
   - "shai-almog"

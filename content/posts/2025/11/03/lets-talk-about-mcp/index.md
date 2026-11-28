@@ -1,14 +1,12 @@
 ---
 title: "Let's create an AI MCP server with Quarkus"
 date: "2025-11-03T10:15:45+00:00"
-lastmod: "2025-11-03T17:30:09+00:00"
 description: "MCP overview, benefits and challenges and a concrete example of creation of an MCP server using Quarkus and using it from the IDE."
 authors:
   - "jonathan-vila"
 image: "Screenshot-2025-11-03-at-15.07.27-1024x484.jpg"
 categories:
   - "AI"
-  - "Java"
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "the-5-knights-of-the-mcp-apocalypse"
@@ -119,7 +117,7 @@ Also IntelliJ, through the Github Copilot plugin with a very similar installatio
 
 And the way to use it couldn't be easier, just ask your question in natural language and the assistant will decide which tool to use and answer to your request :
 
-![](Screenshot-2025-11-03-at-14.51.47-300x167.png)
+![AI assistant chat using the GitHub MCP server to list Java projects on GitHub](Screenshot-2025-11-03-at-14.51.47-300x167.png)
 
 ### **A Cool MCP on the Block: The SonarQube MCP Server**
 

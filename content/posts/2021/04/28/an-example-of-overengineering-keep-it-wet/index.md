@@ -1,7 +1,6 @@
 ---
 title: "An Example of Overengineering - Keep it WET"
 date: "2021-04-28T09:20:52+00:00"
-lastmod: "2021-08-23T12:54:26+00:00"
 description: "This week's post is pretty short. I've already written about overengineering, but this adds a personal touch."
 canonical: "https://blog.frankel.ch/example-overengineering/"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #47: Artificial Intelligence and Machine Learning with Java"
 date: "2024-04-15T09:59:42+00:00"
-lastmod: "2025-11-13T08:47:49+00:00"
 description: "The way we search for information and develop software has changed a lot since then as the use of Artificial Intelligence suddenly became a lot easier. What can we expect in the near future, and how can we program AI ourselves with Java? Let's find out…"
 authors:
   - "frankdelporte"

@@ -1,14 +1,12 @@
 ---
 title: "Clean Architecture with Spring Boot and MongoDB"
 date: "2026-03-24T16:43:14+00:00"
-lastmod: "2026-03-24T16:43:15+00:00"
 description: "In this article, you will build a product catalog with orders. Products have names, prices, and stock quantities. Orders reference products and enforce rules like \"you can't order more than what's in stock.\" The domain is small enough to follow in one sitting, but it has real business rules that benefit from the architecture. The tech stack is Java 17+, Spring Boot 3.x, and Spring Data MongoDB. By the end, you will have a project structure where the domain and application layers compile without Spring or MongoDB on the classpath."
 authors:
   - "farhan-chowdhury"
 image: "Screenshot-2026-03-18-at-8.36.30-AM.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
 ---
@@ -34,7 +32,7 @@ Robert C. Martin introduced Clean Architecture to keep business rules independen
 
 The architecture is usually drawn as four concentric rings. Each ring is a layer. Dependencies always point inward, from the outermost frameworks ring toward the innermost domain ring:  
 
-{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.jpg" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
+{{< img src="Screenshot-2026-03-18-at-8.36.30-AM.jpg" alt="Clean architecture rings: Domain at the center, then Application, Interface Adapters and Frameworks, with dependencies pointing inward" class="aligncenter size-full is-resized" width="756" height="758" style="width:579px;height:auto" >}}
 
 Starting from the inside:
 
@@ -538,7 +536,7 @@ You might wonder why the adapter repositories use `@Component` while the service
 This also makes the wiring visible in one place. You can see exactly which implementations back which interfaces. The `ProductRepository` and `OrderRepository` parameters are resolved by Spring from the `@Component`-annotated adapter classes (`MongoProductRepository` and `MongoOrderRepository`).
 
 To see how all of this connects, trace a `POST /orders` request through the layers:  
-![](Screenshot-2026-03-18-at-8.36.36-AM.png)
+![Request flow from Client through OrderController, CreateOrderUseCase and CreateOrderService to the Mongo repositories and MongoDB](Screenshot-2026-03-18-at-8.36.36-AM.png)
 
 Each layer depends only on the layer inside it. The controller knows about use case interfaces but not about services. The services know about domain objects and repository interfaces, but not about MongoDB documents. The MongoDB adapters implement the repository interfaces and handle all the database-specific details.
 

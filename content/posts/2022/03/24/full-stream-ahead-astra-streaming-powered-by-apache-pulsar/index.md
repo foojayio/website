@@ -1,7 +1,6 @@
 ---
 title: "Full Stream Ahead: Astra Streaming, Powered by Apache Pulsar"
 date: "2022-03-24T09:22:15+00:00"
-lastmod: "2022-03-24T09:23:08+00:00"
 description: "Astra Streaming is a scalable highly performant event streaming cloud messaging platform for data in motion in modern data applications."
 canonical: "https://www.datastax.com/blog/full-stream-ahead-astra-streaming-powered-apache-pulsar-here"
 authors:
@@ -38,7 +37,7 @@ These capabilities provide a foundational platform to rapidly build data-driven,
 Astra Streaming isn't only a tool for developers to increase their productivity and help them build high performance data driven applications. Data in motion is becoming an increasing priority for modern enterprises. According to Forrester Research, more than three-quarters of modern enterprises use real-time, actionable data for at least some of their applications.
 
 If you look at the aggregate total of data within an enterprise, you are likely to find something that looks like this:
-![](iceberg-1024x705.jpg)
+![Iceberg with only its tip above water, labeled enterprise data at rest, and the large submerged part labeled data in motion](iceberg-1024x705.jpg)
 
 The vast amount of data in motion that's present within a given enterprise is often trapped in aging message-oriented middleware systems like MQ and JMS. These systems generally treat data as transient and discard it immediately after delivering it to consuming applications that have subscribed to a given message topic.
 

@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 3: Building an Empire of Microservices"
 date: "2022-03-04T16:23:40+00:00"
-lastmod: "2022-04-21T16:24:17+00:00"
 description: "Let’s continue our journey to learn microservice. Today we will learn to use a full-fledged MongoDB database running in a Docker container."
 authors:
   - "jennifer-reif"
@@ -10,6 +9,7 @@ categories:
   - "Databases"
   - "Microservices"
   - "Neo4J"
+  - "Mongo"
 related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
@@ -201,7 +201,7 @@ Next, we can start the service1 and service2 applications, either through an IDE
 
 And here is the resulting output!
 
-{{< img src="microservices-lvl3-results-554x510.png" class="size-medium" width="554" height="510" >}}
+{{< img src="microservices-lvl3-results-554x510.png" alt="Browser showing JSON from localhost:8080/goodreads listing books with bookID, title and authors, mostly Harry Potter titles" class="size-medium" width="554" height="510" >}}
 
 ## Wrapping up!
 

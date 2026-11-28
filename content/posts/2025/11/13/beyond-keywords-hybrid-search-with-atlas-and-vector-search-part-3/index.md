@@ -1,7 +1,6 @@
 ---
 title: "Beyond Keywords: Hybrid Search With Atlas and Vector Search (Part 3)"
 date: "2025-11-13T13:56:23+00:00"
-lastmod: "2025-12-12T21:19:43+00:00"
 description: "Bringing together semantic vectors and exact keyword matching with $rankFusionIf you’ve been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in Part 1: Implementing Semantic Search in Java With Spring Data. Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in Part 2: Optimizing Vector Search With Filters and Caching.Now, in this final installment, we’re taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search. Welcome to hybrid search."
 authors:
   - "ricardo-mello"
@@ -9,7 +8,6 @@ image: "Screenshot-2025-11-11-at-1.58.35-PM.jpg"
 categories:
   - "AI"
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -540,7 +538,7 @@ Open your browser at[**http://localhost:8080**](http://localhost:8080), and appl
 * **Genres** = (Drama, Action)
 
 Just like in the screenshot below:  
-![](Screenshot-2025-11-11-at-1.58.35-PM.jpg)
+![Movie search app results for 'a ship that sinks at night after hitting an iceberg' with genre filters, where some results do not match the genres](Screenshot-2025-11-11-at-1.58.35-PM.jpg)
 
 If we look closely at the results, we notice that some movies don't satisfy the pre-filters—for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980–2003.
 
@@ -706,19 +704,19 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 #### Case 1: Including genres
 
 Let's run the same query again with our new pipeline.  
-![](Screenshot-2025-11-11-at-2.01.23-PM.jpg)
+![Movie search results for the same query after the pipeline change, with posters now matching the selected genre filters](Screenshot-2025-11-11-at-2.01.23-PM.jpg)
 
 As you can see in the results, the filters look correct.
 
 #### Case 2: Excluding genres
 
 Now, suppose the user clicks **Exclude selected genres** while keeping the same filter.  
-![](Screenshot-2025-11-11-at-2.01.53-PM.png)
+![Movie Search app with the 'Exclude selected genres' toggle switched on and an arrow pointing to it](Screenshot-2025-11-11-at-2.01.53-PM.png)
 
 In this case, instead of asking for movies that include *Drama* or *Action* , we want the opposite: Only return movies **that do not belong** to these genres.
 
 If we run the application right now, you'll notice that movies with *Action/Drama* still appear in the results:  
-![](Screenshot-2025-11-11-at-2.02.17-PM.png)
+![Movie search results with genre tags highlighted, showing films that still carry the excluded Action or Drama genres](Screenshot-2025-11-11-at-2.02.17-PM.png)
 
 This happens because our query doesn't yet apply any exclusion logic. What we really want to tell MongoDB Atlas Search is:
 
@@ -804,7 +802,7 @@ private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
 ```
 
 Once that adjustment is made, we can restart the app and run the same query again. This time, you'll see that movies tagged with **Drama** or **Action** are no longer returned, ensuring the results respect the exclusion filter.  
-![](Screenshot-2025-11-11-at-2.04.10-PM.png)
+![Movie search results with 'Exclude selected genres' on, returning films like The Night Flier and What Women Want outside Action and Drama](Screenshot-2025-11-11-at-2.04.10-PM.png)
 
 ## Prioritizing the vector pipeline
 
@@ -842,7 +840,7 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 ```
 
 Then, run the search again with the same inputs:  
-![](Screenshot-2025-11-11-at-2.05.52-PM.jpg)
+![Hybrid search results for the iceberg query showing Titanic, After the Storm and The Perfect Storm among the top hits](Screenshot-2025-11-11-at-2.05.52-PM.jpg)
 
 Now, we can see that the top results make more sense for this descriptive query. Try yourself by changing the weights and boost, and see the results.
 

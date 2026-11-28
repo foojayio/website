@@ -1,7 +1,6 @@
 ---
 title: "Release with JReleaser to Maven Central with GitHub Actions"
 date: "2023-01-18T08:55:48+00:00"
-lastmod: "2025-12-12T12:03:48+00:00"
 description: "Learn from scratch about how to get started releasing a Java module with JReleaser to Maven Central with Github Actions."
 authors:
   - "jago-de-vreede"
@@ -301,7 +300,7 @@ jreleaser full-release
 ### Finalize in nexus
 
 You will need to log in to [nexus and go to staging repositories](https://s01.oss.sonatype.org/#stagingRepositories) after JReleaser is done. This is your final stop, after this, there is no turning back or removing it.
-![](Screenshot-2023-01-11-at-20.07.34-1024x319.png) Example of staged release, ready to be released
+![Nexus Repository Manager staging repositories page with a repository selected and the Release button highlighted](Screenshot-2023-01-11-at-20.07.34-1024x319.png) Example of staged release, ready to be released
 
 Even this step can be automated by setting the `releaseRepository` property to `true` in the `jrelease.yml`. You can do that when you trust the process and have done some successful releases.
 
@@ -316,7 +315,7 @@ Before we can run JReleaser on GitHub, we first need to set our secrets in the s
 To keep things simple just copy all the key values from the JReleaser config file that was used locally.
 
 And you will end up with something like this:
-![](Screenshot-2023-01-13-at-21.21.28-1024x922.png)
+![GitHub repository settings page listing Actions secrets for JReleaser, including GPG keys and Maven Central credentials](Screenshot-2023-01-13-at-21.21.28-1024x922.png)
 
 ### Workflow
 
@@ -339,7 +338,7 @@ on:
 ```
 
 This will look something like this when you start the release workflow
-![](Screenshot-2023-01-11-at-19.54.23-1024x729.png)
+![GitHub Actions Release workflow with the Run workflow dialog asking for release version 0.0.3 and next version 0.0.4](Screenshot-2023-01-11-at-19.54.23-1024x729.png)
 
 Next up is just your default build setup, in this example, java 11 is used, but this is the same as for your normal build. Except `fetch-depth` as JReleaser will use the git log to create the changelog it will need the full history, and thus we set the `fetch-depth` to `0`. As it defaults to `1`.
 

@@ -1,7 +1,6 @@
 ---
 title: "Event-Driven Order Processing Program"
 date: "2023-03-23T09:27:37+00:00"
-lastmod: "2023-03-23T09:36:41+00:00"
 description: "Following the Hello World example, this article looks at an Order Processor with a New Order Single in and an Execution Report out."
 authors:
   - "peter-lawrey"
@@ -66,11 +65,11 @@ As in previous examples, if the output is incorrect, we can quickly see this in 
 
 Say we don't override the time and use the wall clock instead. We might see something like this.
 
-![](Screen-Shot-2023-03-13-at-2.51.18-PM-1024x229.png)
+![JUnit test failure output with a 'Click to see difference' link and stack trace lines pointing into OMSImplTest](Screen-Shot-2023-03-13-at-2.51.18-PM-1024x229.png)
 
 And if we "Click to see difference", we can see the orderID, which contains a timestamp that has changed. There are many ways to handle this, but we override the system clock to ensure we also get the same time in this example.
 
-![](Screen-Shot-2023-03-13-at-2.52.09-PM-1024x585.png)
+![IntelliJ side-by-side diff where the expected and actual orderID differ only in timestamp (2019 versus 2022)](Screen-Shot-2023-03-13-at-2.52.09-PM-1024x585.png)
 
 The component doesn't need to log anything as all results, including errors, are written to the output queue.
 
@@ -84,7 +83,7 @@ Using the queues in an asynchronous mode achieves similar latencies to in memory
 
 *Comparing using tmpfs as in-memory and ext4 on an M.2 NVMe drive.*
 
-![](Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651.jpg)
+![Line chart: end-to-end latency for two hops at 100K orders/sec stays under 7 microseconds in-memory but reaches 26.4 when stored to NVMe](Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651.jpg)
 
 ### Chronicle Enterprise Extensions
 

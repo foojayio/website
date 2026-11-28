@@ -6,6 +6,6 @@ cta: "Register Now"
 image: "azul-logo.png"
 background: "#0d2846"
 publishDate: "2026-10-21"
-expiryDate: "2026-10-28"
+expiryDate: "2026-10-27"
 sponsor: "azul"
 ---

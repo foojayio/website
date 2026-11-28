@@ -1,7 +1,6 @@
 ---
 title: "How Java Litters Beyond the Heap: Distributed Databases"
 date: "2022-12-20T11:40:43+00:00"
-lastmod: "2023-01-27T10:56:29+00:00"
 description: "Let’s create a Java application with YugabyteDB distributed database to see if garbage is generated in response to application requests."
 authors:
   - "denis-magda"
@@ -213,7 +212,7 @@ yugabyte=# select * from pizza_order;
 
 Does that mean that the previous status values (`Ordered` and `Baking`) are gone from the database? Nope! They are still there, sitting in the memtable.
 
-![](image2-518x510.png)
+![Diagram: three CQL updates to pizza_order (Ordered, Baking, Delivering) each appended as new status entries in the memtable](image2-518x510.png)
 
 * If the app updates a column of an existing record, the new column value is stored alongside the old ones. YugabyteDB keeps both the actual and old column values (even in the memtable) to ensure concurrent and consistent data access with its [multi-version concurrency control (MVCC)](https://docs.yugabyte.com/preview/architecture/transactions/transactions-overview/#mvcc) implementation.
 * Each column value is assigned a unique version. YugabyteDB uses the [hybrid time (ht)](https://docs.yugabyte.com/preview/architecture/transactions/transactions-overview/#mvcc-using-hybrid-time) for that. The higher the hybrid time, the newer the column's version. The status column with `Delivering` has `ht=3`, so, this value is visible to all future application requests such as `select * from pizza_order`.

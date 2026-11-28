@@ -4,11 +4,9 @@ date: "2026-10-24"
 description: "Own a full-stack Java ride-hailing application: rider, driver and admin apps, payments, live tracking and push."
 authors: ["shai-almog"]
 image: "create-an-uber-clone-in-1-minute-0a72804819.jpg"
-categories: ["Java"]
+categories: ["Codename One"]
 canonical: "https://www.codenameone.com/blog/create-an-uber-clone-in-1-minute/"
 ---
-
-![Create your own ride-hailing app from the Wayline starting project](create-an-uber-clone-in-1-minute-0a72804819.jpg)
 
 A lot has changed since 2018, both in programming and in Codename One. Back then I wrote [Create an Uber Clone in 7 Days: Build a real world full stack mobile app in Java](https://www.amazon.com/Create-Uber-Clone-Days-mobile/dp/1983258784). Today you can start with the application those seven days were meant to teach you to build, then spend your time making it yours.
 

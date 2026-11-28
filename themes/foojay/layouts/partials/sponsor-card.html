@@ -5,7 +5,7 @@
 {{ $posts := partialCached "sponsor-posts.html" . .RelPermalink }}
 <article class="sponsor-card sponsor-card--{{ .Params.tier | default "other" }}">
   <a class="sponsor-card__link" href="{{ .RelPermalink }}">
-    {{ partial "sponsor-logo.html" (dict "page" .) }}
+    {{ partial "sponsor-logo.html" (dict "page" . "decorative" true) }}
     <h3 class="sponsor-card__title">{{ .Title }}</h3>
   </a>
   {{ with .Params.tagline }}<p class="sponsor-card__tagline">{{ . }}</p>{{ end }}

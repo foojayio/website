@@ -1,13 +1,13 @@
 ---
 title: "Building an AI-Powered Operations Assistant with Spring AI and MongoDB Atlas — Part 3: Stateful Workflows and Human-in-the-Loop"
 date: "2026-06-29T09:40:40+00:00"
-lastmod: "2026-06-29T09:40:43+00:00"
 description: "This is the third and final article in the series. Part 1 covered the RAG foundation — loading runbooks into a vector store and grounding model answers in real documentation. Part 2 added short-term and long-term conversational memory. This article introduces stateful workflow checkpointing, tool calls, and a pause/resume mechanism that lets multi-step investigations survive session boundaries."
 authors:
   - "matteo-rossi"
 image: "fri1.jpg"
 categories:
   - "AI"
+  - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -65,7 +65,7 @@ The checkpoint lifecycle is managed entirely by the *CheckpointService*class. Th
 The key method that enables this transition is the *updateStep* method: this method loads the latest checkpoint for the current conversation into memory, sets the new step by assigning it a name and a status, merges all data in the *stateData* map with the current map, and increases the expiration time in the *expiresAt*field. Every change is made to the current state document, which represents the current state of the investigation.
 
 Let's now see how the state machine governing this model works.
-![](fri1-1024x475.png)
+![State diagram of the conversation checkpoint lifecycle: RUNNING, WAITING_INPUT, WAITING_APPROVAL, COMPLETED and FAILED](fri1-1024x475.png)
 
 The checkpoint is created when the first message is received in the conversation. The *ChatController* calls the method *checkpointService.loadLatest(conversationId)* before processing each request; if the result of this call is empty, a new checkpoint is created in the *RUNNING* state at the *INIT* step. All subsequent messages will find the existing checkpoint, advance it to *PROCESSING,* and then to *WAITING_APPROVAL*after the model's response.
 

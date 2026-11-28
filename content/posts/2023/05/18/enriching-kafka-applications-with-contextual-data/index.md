@@ -1,7 +1,6 @@
 ---
 title: "Enriching Kafka Applications with Contextual Data"
 date: "2023-05-18T15:11:22+00:00"
-lastmod: "2023-05-18T15:55:42+00:00"
 description: "Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka apps."
 authors:
   - "fawaz-ghali"
@@ -42,7 +41,7 @@ This article aims to take your Kafka applications to the next level.
 
 Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka applications with "context."
 
-![](1683707203791-700x289.png)
+![Diagram: Kafka real-time trades and a companies map in a Hazelcast cluster are joined into ingest_trades, feeding a web server and web client](1683707203791-700x289.png)
 
 ## Prerequisites
 
@@ -269,7 +268,7 @@ SELECT * FROM trade_map;
 
 The following diagram explains our demo setup; we have a Kafka topic called trades which contains a collection of trades that will be ingested into a Hazelcast cluster.
 
-{{< img src="Hazelcast-Kafka-700x289.png" class="size-medium" width="700" height="289" >}}
+{{< img src="Hazelcast-Kafka-700x289.png" alt="Architecture diagram: Kafka trades topic feeds a Hazelcast cluster that enriches it with a companies map, then a web server and client" class="size-medium" width="700" height="289" >}}
 
 Additionally, a companies map represents companies' data stored in the Hazelcast cluster.
 

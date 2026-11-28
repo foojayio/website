@@ -1,7 +1,6 @@
 ---
 title: "Timing Compiling .java Code Files and Executing .class Bytecode"
 date: "2020-09-28T04:37:39+00:00"
-lastmod: "2020-09-28T07:31:25+00:00"
 description: "See that the time to execute the bytecode for a simple program is a small fraction of the time to compile it using javac."
 authors:
   - "kevinfarnham"
@@ -71,7 +70,7 @@ javap -c SumNumbers
 
 Here's what we see:
 
-![](SumNumbers.class.png)
+![Terminal showing java -version, javac and javap output with the bytecode of the SumNumbers class](SumNumbers.class.png)
 
 As a matter of fact, though, understanding how Java bytecode works is critical if you are developing high-performance low-latency applications. It's actually possible to edit Java bytecode in order to improve performance. That is, your compiler produced a good first version of Java bytecode, but you have some ideas about how to further optimize the bytecode to increase the performance of your application.
 

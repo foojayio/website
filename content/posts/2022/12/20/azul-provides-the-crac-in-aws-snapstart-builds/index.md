@@ -1,7 +1,6 @@
 ---
 title: "Azul Provides the CRaC in AWS SnapStart Builds"
 date: "2022-12-20T07:45:54+00:00"
-lastmod: "2023-05-10T05:32:03+00:00"
 description: "Now, with a major Cloud platform providing built-in support for the CRaC API, it’s truly off to the races for CRaC."
 canonical: "https://www.azul.com/blog/aws-snapstart-builds-momentum-for-the-crac-api/"
 authors:
@@ -32,7 +31,7 @@ And Lambda, with its underlying use of the [Firecracker MicroVM](https://firecra
 
 ## Momentum for the CRaC API is Building
 
-![](crac-momentum-blog-hero-1024x576.jpg)
+![Banner reading 'Momentum for the OpenJDK CRaC Project' over a night view of Earth with city lights](crac-momentum-blog-hero-1024x576.jpg)
 
 CRaC has been gaining momentum by supporting a range of microservices frameworks. This is another huge step toward widespread acceptance and adoption of CRaC as a viable way of addressing warmup issues in Java while retaining all the benefits of the platform's dynamic class ecosystem and proven speed and optimization.
 

@@ -6,7 +6,6 @@ authors:
   - "mikhail-polivakha"
 image: "preview.jpg"
 categories:
-  - "Java"
   - "Spring"
 related_posts:
   - "no-database-operations-found-what-writing-a-spring-boot-analyzer-taught-me-about-spring"

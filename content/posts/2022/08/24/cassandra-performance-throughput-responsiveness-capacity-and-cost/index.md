@@ -1,7 +1,6 @@
 ---
 title: "Cassandra: Throughput, Responsiveness, Capacity and Cost"
 date: "2022-08-24T10:43:51+00:00"
-lastmod: "2022-08-24T12:42:00+00:00"
 description: "Azul’s Platform Prime is by far the highest throughput JVM for powering Cassandra, also exhibiting better response times and latencies."
 canonical: "https://www.azul.com/blog/cassandra-performance-throughout-responsiveness-capacity-and-cost/"
 authors:
@@ -135,7 +134,7 @@ Altogether, these tests represent a total of 275 separate cluster runs (5 JVM co
 While not directly indicative of a configuration's ability to carry load while maintaining service levels, observing actual achieved throughputs under various attempted throughput levels (without considering service levels) can be informative.
 
 We found the following behavior for the JVM configurations tested:
-![](cassandra-throughput-2-2048x1287-1-1024x644.png) ![](image-3-1024x445.png)
+![Line chart: Prime (C4) sustains the highest achieved throughput as load rises, while CMS, G1, Shenandoah and ZGC level off lower](cassandra-throughput-2-2048x1287-1-1024x644.png) ![Table of highest achieved throughput: Azul Platform Prime 11 reaches 115,865 ops/sec, ahead of CMS, G1, Shenandoah and ZGC](image-3-1024x445.png)
 
 While most of the tested JVM configurations were able to consistently sustain the requested throughput all the way to their highest achieved throughout levels, the next set of results shows that the same cannot be said for sustaining the required service levels.
 
@@ -148,10 +147,10 @@ The point at which this failure occurs varied widely between JVM configurations,
 Low pause collectors (C4, Shenandoah, and ZGC) were all able to maintain the required service levels at non-trivial throughputs, but the throughputs to which they could be driven while doing so varied dramatically.
 
 The following chart and table detail these results.
-![](image-4-1024x1024.png)
+![Table of P99.9 max response times under load: Prime stays low until about 90K ops/sec while other collectors degrade earlier](image-4-1024x1024.png)
 
 This is best depicted in a chart:
-![](Screen-Shot-2022-05-25-at-10.49.17-AM-1024x669.png)
+![Line chart: Prime (C4) keeps P99.9 response time under the 100 ms service level up to 90K ops/sec, other collectors exceed it far sooner](Screen-Shot-2022-05-25-at-10.49.17-AM-1024x669.png)
 
 Additional results detailing the client-experienced P50 Max, P90 Max, and P99 Max on queries performed under these same set of load levels, collected during the same set of test runs, [can be found here](https://www.azul.com/wp-content/uploads/CassandraBenchmarkDetails.pdf).
 

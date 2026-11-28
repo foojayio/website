@@ -43,8 +43,9 @@ title: "Your Article Title Here"
 # "Coming soon" on the home page, by title, date and author.
 date: "2026-01-01"
 
-# Optional: last-updated date, if you revise the article later.
-# lastmod: "2026-01-02"
+# Optional: set when you substantially revise the article later. Shown as
+# "Updated <date>" in the header once it is a week or more after `date`.
+# updated: "2026-01-02"
 
 # One or two sentences (keep it below 160 characters). 
 # Shown on cards/listings and used for SEO and social previews. 
@@ -90,6 +91,7 @@ categories:
   - "Java"
 
 # Slugs (folder names) of related foojay articles to show at the bottom. 
+# They are grouped per 3 on the page, so 3 or 6 is best. But this isn't a hard limit.
 # Optional.
 related_posts: []
 

@@ -1,14 +1,12 @@
 ---
 title: "Java 26: What’s New?"
 date: "2026-03-03T10:00:28+00:00"
-lastmod: "2026-03-11T10:52:20+00:00"
 description: "This article was first published in my personal blog: Java 26: What's new? and is part of a serie on what’s new on the last versions of Java). Now that…"
 canonical: "https://www.loicmathieu.fr/wordpress/informatique/java-26-whats-new/"
 authors:
   - "loic-mathieu"
 image: "uuidv7-700x404-1.webp"
 categories:
-  - "Java"
   - "JEPs"
   - "Release Notes"
 related_posts:
@@ -98,7 +96,7 @@ More information can be found in [JEP 522](https://openjdk.org/jeps/522).
 ## UUIDv7 support
 
 The new `UUID.ofEpochMillis(long)` method allows you to create a **type 7 UUID** (UUIDv7) from a Unix Epoch timestamp.
-![](uuidv7-700x404.webp)
+![Diagram of a UUIDv7 split into 48 bits of timestamp, 4 version bits, 2 variant bits and the remaining random bits](uuidv7-700x404.webp)
 
 UUIDv7s are created by assigning a Unix timestamp in milliseconds to the most significant 48 bits, assigning the required version (4 bits) and variant (2 bits), and filling the remaining 74 bits with random bits.
 

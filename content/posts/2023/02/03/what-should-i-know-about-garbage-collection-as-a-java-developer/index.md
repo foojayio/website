@@ -1,7 +1,6 @@
 ---
 title: "What to Know About Garbage Collection as a Java Developer!"
 date: "2023-02-03T13:20:28+00:00"
-lastmod: "2023-02-03T13:25:10+00:00"
 description: "Check out this overview of the functionality of the Garbage Collector and the things a developer should know."
 canonical: "https://www.azul.com/blog/what-should-i-know-about-garbage-collection-as-a-java-developer/"
 authors:
@@ -42,7 +41,7 @@ So it is clear the GC is at the center of memory management for Java application
 
 ## How Does a Garbage Collector Work?
 
-{{< img src="john-cuthbertson.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+{{< img src="john-cuthbertson.png" alt="Portrait of John Cuthbertson, Principal Engineer on the C4 GC team" class="alignleft quote-portrait" width="96" height="96" >}}
 
 **A managed language like Java hides the complexity for you**  
 **John Cuthbertson, Principal Engineer, C4 GC team**
@@ -118,9 +117,9 @@ You can take advantage of the young generation system by focusing on local varia
 ## Types of Java Garbage Collectors
 
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
-![](garbage-collectors-table-a4b7857b.png) Table overview of the different Garbage Collectors in Java
+![Table comparing Java garbage collectors (Serial, Parallel, CMS, G1, C4, ZGC, Shenandoah) by parallelism, concurrency, generations, Java version and JVM option](garbage-collectors-table-a4b7857b.png) Table overview of the different Garbage Collectors in Java
 
-{{< img src="deepak-sreedhar.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+{{< img src="deepak-sreedhar.png" alt="Portrait of Deepak Sreedhar, Principal Software Engineer and GC specialist" class="alignleft quote-portrait" width="96" height="96" >}}
 
 **Some tips for older GC generations are no longer applicable**  
 **Deepak Sreedhar, Principal Software Engineer, GC Specialist**
@@ -141,7 +140,7 @@ As should be clear by now, "The Garbage Collector" doesn't exist; but depending 
 
 Do you just go for the default option, or do you want to use another one? The specialists at Azul are always available to guide new customers when they want to evaluate Azul Zulu Prime versus OpenJDK or other distributions, and they have a lot of experience in comparing different use cases.
 
-{{< img src="michael-roeschter.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+{{< img src="michael-roeschter.png" alt="Portrait of Michael Roeschter" class="alignleft quote-portrait" width="96" height="96" >}}
 
 ***Certain coding practices can have an impact on how Java uses memory***  
 ***Michael Roeschter, Sales Engineer***
@@ -163,7 +162,7 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 Azul also has other technologies on top of OpenJDK that improve the performance of Java applications as this is not always only related to the behavior of the application itself but can also be impacted by the environment, cluster, or resources used within the organization.
 
-{{< img src="daniel-witkowski.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+{{< img src="daniel-witkowski.png" alt="Portrait of Daniel Witkowski" class="alignleft quote-portrait" width="96" height="96" >}}
 
 **Always consider the most urgent problem to solve**  
 **Daniel Witkowski, Sales Engineer**
@@ -213,7 +212,7 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 * [Analyze live data with Java Flight Recorder](https://docs.azul.com/prime/Java-Flight-Recorder)
 * [Analyze log files (post-mortem) with GC Log Analyzer](https://docs.azul.com/prime/diagnosing-java-performance-problems-with-gc-log-analyzer)
 
-{{< img src="john-cuthbertson.png" alt="" class="alignleft quote-portrait" width="96" height="96" >}}
+{{< img src="john-cuthbertson.png" alt="Portrait of John Cuthbertson, Principal Engineer on the C4 GC team" class="alignleft quote-portrait" width="96" height="96" >}}
 
 **There is still much to learn**  
 **John Cuthbertson (Principal Engineer, C4 GC team)**

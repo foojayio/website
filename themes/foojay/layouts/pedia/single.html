@@ -5,7 +5,7 @@
 {{ $hasToc := partial "has-toc.html" . }}
 <div class="{{ if $hasToc }}layout-with-sidebar{{ else }}content-col full-width{{ end }}">
   <article class="{{ if $hasToc }}content-col {{ end }}post-single pedia-single">
-    <p class="pedia-back"><a href="{{ "pedia/" | relURL }}">&larr; Java Terms Explained</a></p>
+    <p class="pedia-back"><a href="{{ (site.GetPage "/pedia").RelPermalink }}">&larr; Java Terms Explained</a></p>
 
     <h1>{{ .Title }}</h1>
 
@@ -25,7 +25,7 @@
          slug the same would share one thread. */}}
     {{ partial "comments.html" . }}
 
-    <p class="pedia-back pedia-back--foot"><a href="{{ "pedia/" | relURL }}">&larr; Back to all terms</a></p>
+    <p class="pedia-back pedia-back--foot"><a href="{{ (site.GetPage "/pedia").RelPermalink }}">&larr; Back to all terms</a></p>
   </article>
   {{ if $hasToc }}
   <aside class="sidebar" data-pagefind-ignore>

@@ -1,7 +1,6 @@
 ---
 title: "Sliding Window Counter Rate Limiter (Redis & Java)"
 date: "2025-02-25T21:21:11+00:00"
-lastmod: "2025-05-02T12:50:43+00:00"
 description: "Learn how to implement a Sliding Window Counter Rate Limiter using Redis and Java. Discover an efficient way to manage API request limits."
 canonical: "https://medium.com/redis-with-raphael-de-lio/sliding-window-counter-rate-limiter-redis-java-1ba8901c02e5"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "Redis_Video_RateLimiterImplementations_Part5_YoutubeThumbnail.jpg"
 categories:
   - "Databases"
-  - "Java"
   - "Redis"
   - "Tools"
 related_posts:
@@ -37,7 +35,7 @@ Though not as precise as the Sliding Window Log, the Sliding Window Counter requ
 
 ## How It Works
 
-![](1-XLeoFFYwU1uzvLuMFu-tAw-8ccca08f.gif)
+![Sliding window counter diagram: a 1-minute window split into 20-second subwindows, limit of 5 requests, current window highlighted](1-XLeoFFYwU1uzvLuMFu-tAw-8ccca08f.gif)
 
 ### 1. Define a Time Window
 

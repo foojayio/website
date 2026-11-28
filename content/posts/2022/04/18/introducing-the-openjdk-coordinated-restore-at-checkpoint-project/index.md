@@ -1,7 +1,6 @@
 ---
 title: "Introducing the \"Coordinated Restore at Checkpoint\" Project"
 date: "2022-04-18T08:13:55+00:00"
-lastmod: "2024-02-07T21:59:53+00:00"
 description: "Do you want to dramatically decrease JVM startup time, from hundreds of seconds to tenths of milliseconds? Find out about Java on CRaC."
 authors:
   - "gerrit-grunwald"
@@ -74,7 +73,7 @@ The team around Anton Kozlov has tested this approach using different well known
 
 The results look more than promising:
 
-{{< img src="https://i.ibb.co/pLg3WCb/Time-To-First-Operation.png" class="size-medium" width="1680" height="1042" >}}
+{{< img src="Time-To-First-Operation-96d1786f.jpg" alt="Bar chart: time to first operation drops from about 1-4 seconds on OpenJDK to 33-53 ms on OpenJDK with CRaC" class="size-medium" width="1680" height="1042" >}}
 
 As you can see, the startup times can be reduced dramatically by using the Coordinated Restore at Checkpoint proposal with the benefit of still having a JVM running with all its abilities to further optimise the running code.
 

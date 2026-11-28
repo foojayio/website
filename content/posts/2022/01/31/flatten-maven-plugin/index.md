@@ -1,7 +1,6 @@
 ---
 title: "The Flatten Maven plugin - fooay.io"
 date: "2022-01-31T14:06:05+00:00"
-lastmod: "2022-01-31T14:24:35+00:00"
 description: "Don’t wait until the release of Maven 5, if you are a library developer, consider using Maven Flatter Plugin. It’s a freebie.  "
 canonical: "https://blog.frankel.ch/maven-flatten-plugin/"
 authors:

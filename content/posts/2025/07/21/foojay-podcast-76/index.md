@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #76: DevBcn Report, Part 1 – Learn from the Community"
 date: "2025-07-21T06:41:00+00:00"
-lastmod: "2025-11-13T08:34:42+00:00"
 description: "In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan…"
 authors:
   - "frankdelporte"
@@ -10,7 +9,6 @@ authors:
 image: "episode-76-decbcn-part-1.jpg"
 categories:
   - "Conference"
-  - "Java"
   - "Podcast"
 related_posts:
   - "foojay-podcast-75"

@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 3)"
 date: "2021-10-21T13:20:17+00:00"
-lastmod: "2021-11-16T15:09:12+00:00"
 description: "Tip: We can only ask the Java thread to execute a piece of code, but we cannot guarantee the execution order of multiple threads!"
 authors:
   - "bazlur-rahman"
@@ -96,7 +95,7 @@ We know the modern computer has multiple CPUs in it. Nonetheless, we cannot guar
 
 When a CPU executes a code, it reads data from the main memory. However, modern CPUs have various caches for faster access to memory. There are three types of cache associated with each CPU. They are L1 Cache, L2 Cache, and L3 Cache.
 
-![](Cache-678x510.png)
+![Diagram of CPU architecture: each core has its own L1 and L2 cache, all sharing an L3 cache that connects to main memory](Cache-678x510.png)
 
 When starting the first thread, the CPU it runs may cache the running variable and keeps it running. But, on the other hand, when the second thread runs and changes the variable on a different CPU, it won't be visible to the first thread. Thus the problem of the third case would occur.
 

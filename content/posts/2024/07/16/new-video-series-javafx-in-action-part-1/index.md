@@ -1,7 +1,6 @@
 ---
 title: "New video series \"JavaFX In Action\", Part 1"
 date: "2024-07-16T07:35:29+00:00"
-lastmod: "2024-11-19T08:01:28+00:00"
 description: "With this new series of video interviews, I want to take you behind-the-scenes of some applications built using JavaFX."
 authors:
   - "frankdelporte"
@@ -73,4 +72,4 @@ Another supporter is [Oliver Loeffler](https://x.com/Raumzeitfalle) who also pro
 ## Videos on JFX Central
 
 These videos are also added to the [video section of JFX Central](https://www.jfx-central.com/videos), select "JFX In Action" in the "Type" filter. More to come after the summer break...
-![](jfxcentral-videos-940x1024.jpg)
+![JFX Central videos page filtered on 'JFX In Action', showing four interview cards with Daniel Zimmermann, Robert Ladstatter, Duke and Christopher Schnick](jfxcentral-videos-940x1024.jpg)

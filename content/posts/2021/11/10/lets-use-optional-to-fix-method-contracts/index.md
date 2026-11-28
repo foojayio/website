@@ -1,7 +1,6 @@
 ---
 title: "Let’s Use Optional to Fix Method Contracts"
 date: "2021-11-10T11:56:19+00:00"
-lastmod: "2021-11-10T11:56:20+00:00"
 description: "Optional is a mystery box, a wrapping paper: it may not contain value. When we specify that in a signature, we assume the box might be empty."
 authors:
   - "bazlur-rahman"

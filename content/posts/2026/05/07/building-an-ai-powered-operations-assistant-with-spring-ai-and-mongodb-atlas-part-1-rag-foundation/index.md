@@ -1,7 +1,6 @@
 ---
 title: "Building an AI-Powered Operations Assistant with Spring AI and MongoDB Atlas — Part 1: RAG Foundation"
 date: "2026-05-07T19:22:11+00:00"
-lastmod: "2026-05-07T19:22:13+00:00"
 description: "This is the first article in a three-part series. Part 2 covers short-term and long-term memory; Part 3 introduces stateful workflow checkpointing with pause/resume."
 authors:
   - "matteo-rossi"
@@ -9,7 +8,6 @@ image: "Screenshot-2026-05-01-at-2.28.13-PM.png"
 categories:
   - "AI"
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:
@@ -68,7 +66,7 @@ At this point, we have three components that are sent to the model: the system p
 From an ingestion perspective, whenever a new runbook, procedure, postmortem, or version of the documentation is produced, it must be split into overlapping chunks (to preserve context) of approximately 800 tokens by the TokenTextSplitter. Each chunk is then embedded and saved within the *knowledge_chunks* collection along with all associated metadata. All of this is possible with the *VectorStore.add()* method, which handles making the request to the embedding API and writing to MongoDB in a single operation.
 
 The pipeline is shown below:  
-![](Screenshot-2026-05-01-at-2.28.13-PM.png)
+![RAG architecture diagram: documents are chunked, embedded and stored in MongoDB; queries are embedded, matched by similarity search, and the context goes to the LLM](Screenshot-2026-05-01-at-2.28.13-PM.png)
 
 The true strength of Spring AI lies in its abstraction, which allows the controller and service to remain unaware of which model is being used—whether it's GPT-5.4 or Sonnet 4.6—or whether the database is MongoDB Atlas or PostgreSQL. Changing the model or database is a matter of configuration, not a new development task. A game changer.
 

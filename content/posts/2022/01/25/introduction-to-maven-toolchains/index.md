@@ -1,7 +1,6 @@
 ---
 title: "Introduction to Maven Toolchains"
 date: "2022-01-25T08:20:47+00:00"
-lastmod: "2022-01-25T14:32:30+00:00"
 description: "How to make sure I can build projects projects on Java 8, 11, and 17 without having to constantly switch Java runtimes?"
 authors:
   - "mthmulders"

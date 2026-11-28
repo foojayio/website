@@ -1,7 +1,6 @@
 ---
 title: "Running Jekyll on a Mac"
 date: "2022-06-06T17:41:49+00:00"
-lastmod: "2022-06-06T17:41:50+00:00"
 description: "Here is the complete process for setting up Jekyll on a Mac to help other developers who want to do the same and my future self."
 canonical: "https://blog.frankel.ch/running-jekyll-mac/"
 authors:

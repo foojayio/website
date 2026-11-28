@@ -1,7 +1,6 @@
 ---
 title: "Relearning Java Thread Primitives"
 date: "2023-04-25T05:26:16+00:00"
-lastmod: "2023-04-25T05:27:03+00:00"
 description: "\"Synchronized\" was revolutionary and still has great uses. But it's time to move to newer thread primitives and rethink our core logic."
 authors:
   - "shai-almog"
@@ -122,15 +121,15 @@ A much better approach is the `ReadWriteReentrantLock`. Most resources follow th
 
 Assuming this is your use case, you can create much faster code. When working with a read-write lock we have two locks, a read lock as we can see in the following image. It lets multiple threads through and is effectively a "free for all".
 
-![](thread-read-only-700x398.png)
+![Diagram: three threads reading a variable through a read lock while the write lock is idle](thread-read-only-700x398.png)
 
 Once we need to write to the variable, we need to obtain a write lock as we can see in the following image. We try to request the write lock but there are threads still reading from the variable so we must wait.
 
-![](thread-requesting-write-700x398.png)
+![Diagram: thread 3 requests the write lock while threads 1 and 2 still read the variable through the read lock](thread-requesting-write-700x398.png)
 
 Once the threads finished reading all reading will block and the write operation can happen from a single thread only as seen in the following image. Once we release the write lock, we will go back to the "free for all" situation in the first image.
 
-![](thread-in-write-mode-700x391.png)
+![Diagram: thread 3 holds the write lock and writes the variable while the read lock blocks threads 1 and 2](thread-in-write-mode-700x391.png)
 
 This is a powerful pattern that we can leverage to make collections much faster. A typical synchronized list is remarkably slow. It synchronizes over all operations, read or write. We have a CopyOnWriteArrayList which is fast for reading, but any write is very slow.
 

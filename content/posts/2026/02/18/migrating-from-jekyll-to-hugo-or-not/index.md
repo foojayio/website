@@ -1,14 +1,13 @@
 ---
 title: "Migrating from Jekyll to Hugo... or not"
 date: "2026-02-18T19:29:45+00:00"
-lastmod: "2026-09-21T05:59:06+00:00"
 description: "Most of my blog posts are lessons learned. I'm trying to achieve something, and I document the process I used to do it. This one is one of the few where,…"
 canonical: "https://blog.frankel.ch/migrating-jekyll-hugo/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog"
 ---

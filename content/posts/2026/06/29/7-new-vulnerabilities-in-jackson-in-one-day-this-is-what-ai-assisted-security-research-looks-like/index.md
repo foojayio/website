@@ -6,7 +6,6 @@ authors:
   - "steve-poole"
 image: "ChatGPT-Image-Jun-29-2026-12_44_59-PM.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"

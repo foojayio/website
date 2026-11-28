@@ -1,7 +1,6 @@
 ---
 title: "Chopping the Monolith: Foojay.io Today"
 date: "2022-04-25T19:06:50+00:00"
-lastmod: "2022-04-25T19:06:52+00:00"
 description: "In this article, I highlight that microservices, as presented at conferences, are doomed to fail in most organizations."
 canonical: "https://blog.frankel.ch/chopping-monolith/"
 authors:
@@ -61,7 +60,7 @@ Hence, they cannot claim to do microservices (unless they want to prove that Fow
 Before microservices became a hype, writers and speakers were careful to explain Conway's Law:
 > Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure. -- [Melvin E. Conway](https://en.wikipedia.org/wiki/Conway%27s_law)
 
-{{< img src="conway-and-nicolas-680x510.jpg" class="aligncenter size-medium" width="680" height="510" >}}
+{{< img src="conway-and-nicolas-680x510.jpg" alt="Selfie of the author smiling next to Melvin Conway at a conference" class="aligncenter size-medium" width="680" height="510" >}}
 
 *Unrelated but fun, I took a selfie with M. Conway*
 
@@ -170,7 +169,7 @@ The biggest issue is regarding clients. Migrating an HTTP endpoint to a differen
 
 Just route the request to the new endpoint location, and you're done.
 
-{{< img src="chop-monolith-700x246.jpg" class="size-medium aligncenter" width="700" height="246" >}}
+{{< img src="chop-monolith-700x246.jpg" alt="Diagram: API gateway routes the wildcard URL to the monolith and the /xyz URL to the chopped-off part" class="size-medium aligncenter" width="700" height="246" >}}
 
 ## Conclusion
 

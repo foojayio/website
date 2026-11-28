@@ -1,7 +1,6 @@
 ---
 title: "Daemon Thread Java Code Quiz"
 date: "2021-09-08T07:29:56+00:00"
-lastmod: "2021-10-07T10:23:18+00:00"
 description: "In your Java applications, do you know if the main Thread is a daemon or not? And do you know what a daemon Thread is?"
 authors:
   - "rafael-del-nero"

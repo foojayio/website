@@ -1,7 +1,6 @@
 ---
 title: "Let's Create Mappers Without Creating Underlying Objects in Java"
 date: "2022-09-20T09:16:35+00:00"
-lastmod: "2022-09-20T09:19:07+00:00"
 description: "Learn how to devise a way of creating an object-creation-free, light-weighted mapper with rudimentary lookup capability."
 authors:
   - "per-minborg"
@@ -173,7 +172,7 @@ Looking at various properties of the two alternatives, we see the following:
 
 #### Execution Performance
 
-![](Screen-Shot-2022-09-15-at-10.19.38-AM-700x146.png)
+![Table comparing HashMap and IntMapper complexity: IntMapper put/add is O(1) and get is O(log(N)), HashMap varies](Screen-Shot-2022-09-15-at-10.19.38-AM-700x146.png)
 
 (\*) Depending on key distribution, size, load factor and associations made.
 
@@ -181,13 +180,13 @@ Looking at various properties of the two alternatives, we see the following:
 
 #### Memory usage in Bytes
 
-![](Screen-Shot-2022-09-15-at-10.19.46-AM-700x140.png)
+![Table of memory usage: HashMap uses 48N bytes for put/add and 16N for get, while IntMapper uses 0](Screen-Shot-2022-09-15-at-10.19.46-AM-700x140.png)
 
 (\*\*\*): The figures above are under typical JVM use, excluding the Security objects themselves and excluding any backing array, both of which can be recycled between use.
 
 #### Object Allocation in objects
 
-![](Screen-Shot-2022-09-15-at-10.19.53-AM-700x143.png)
+![Table of object allocation: HashMap allocates 2*N objects on put/add and N on get, IntMapper allocates none](Screen-Shot-2022-09-15-at-10.19.53-AM-700x143.png)
 
 All the figures above are excluding the Security objects themselves and excluding any backing array.
 

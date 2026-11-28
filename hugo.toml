@@ -25,7 +25,7 @@ enableGitInfo = true
 # is the last resort, which is exactly the dateless pages it was added for.
 [frontmatter]
   date = ["date", "publishDate", "lastmod", ":git"]
-  lastmod = ["lastmod", "date", ":git", "publishDate"]
+  lastmod = ["updated", "date", ":git", "publishDate"]
 
 # Caps every feed the site emits. Hugo's default is -1 (unbounded), which made
 # /index.xml a 3.85 MB document of 2584 items -- a feed that size is slow for
@@ -141,11 +141,8 @@ enableGitInfo = true
 # https://giscus.app.
 # The comment section renders only when all four values are filled in, so it stays
 # invisible until the "Blog Comments" category exists and its id is pasted here.
-# All four are set, so it renders. NOTE these Discussions hold NEW comments only:
-# the 580 legacy WordPress ones are an archive in the repo
-# (content/posts/**/comments.json, rendered by partials/legacy-comments.html),
-# because importing them got the posting account banned by GitHub. See
-# scripts/transfer/Comments.java.
+# All four are set, so it renders. The legacy WordPress comments were imported
+# into these Discussions (see MAINTAINERS.md).
 [params.giscus]
   repo = "foojayio/website"
   repoId = "R_kgDOTog_lQ"
@@ -164,6 +161,10 @@ enableGitInfo = true
 # data/views.json, which the build refreshes via scripts/fetch/ViewCounts.java.
 [params.views]
   endpoint = "https://foojay.io/api/views"
+  # A count below this is not shown: a small number reads as "nobody cares".
+  minimum = 100
+  # Nor on a post younger than this many days.
+  minAgeDays = 2
 
 # The third-party tags foojay.io runs; partials/analytics.html renders nothing
 # unless these are set. `gtm` is the container WordPress used, which reaches
@@ -214,8 +215,43 @@ enableGitInfo = true
   isPlainText = true
   notAlternative = true
 
+# <week>/review.json beside each week-review page: its counts and new authors,
+# for the Slack announcement.
+[outputFormats.REVIEW]
+  mediaType = "application/json"
+  baseName = "review"
+  isPlainText = true
+  notAlternative = true
+
+# The same article as plain Markdown, at <page>/index.md beside the HTML, for a
+# reader that would rather not parse the theme. Switched on per section by a
+# cascade in content/posts/_index.md and content/pedia/_index.md. Not
+# notAlternative: baseof.html then advertises it as <link rel="alternate">.
+[outputFormats.MARKDOWN]
+  mediaType = "text/markdown"
+  baseName = "index"
+  isPlainText = true
+
+# /llms-full.txt -- the reference material in full (glossary and Quick Start),
+# the sibling of /llms.txt, which only links. Articles stay out: 2300 of them
+# are far too long for one file and each has its own index.md.
+[outputFormats.LLMSFULL]
+  mediaType = "text/plain"
+  baseName = "llms-full"
+  isPlainText = true
+  notAlternative = true
+
+# /.well-known/security.txt (RFC 9116). A template rather than a static file
+# because the spec requires an Expires date, and a fixed one silently goes stale.
+[outputFormats.SECURITY]
+  mediaType = "text/plain"
+  baseName = "security"
+  path = ".well-known"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS", "LLMS", "STATS"]
+  home = ["HTML", "RSS", "LLMS", "LLMSFULL", "SECURITY", "STATS"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
@@ -239,88 +275,98 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "News"
+  identifier = "news"
   weight = 10
   [menu.main.params]
-    cols = 1
-    [menu.main.params.footlink]
-      label = "View all articles"
-      url = "/today/"
+    cols = 2
+
+[[menu.main]]
+  name = "Foojay News"
+  parent = "news"
+  weight = 11
 
 [[menu.main]]
   name = "Daily News"
-  parent = "News"
+  parent = "Foojay News"
   url = "/today/"
-  weight = 11
+  weight = 1
   [menu.main.params]
     desc = "Everything the community published, newest first"
 
 [[menu.main]]
   name = "Podcast"
-  parent = "News"
+  parent = "Foojay News"
   url = "/today/category/podcast/"
-  weight = 12
+  weight = 2
   [menu.main.params]
     desc = "Conversations with the people building and using Java"
 
 [[menu.main]]
   name = "Event Calendar"
-  parent = "News"
+  parent = "Foojay News"
   url = "/calendar/"
-  weight = 13
+  weight = 3
   [menu.main.params]
     desc = "JUG meetups, conferences, and other events"
 
 [[menu.main]]
-  name = "JC-AI Newsletter"
-  parent = "News"
-  url = "/today/category/jc-ai-newsletter/"
-  weight = 14
-  [menu.main.params]
-    desc = "AI Newsletter curated by Miro Wengner"
-
-[[menu.main]]
-  name = "Foojay Monthly Review"
-  parent = "News"
-  url = "/jvm-weekly/"
-  weight = 15
-  [menu.main.params]
-    desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
-
-[[menu.main]]
-  name = "Foojay.io AI Portal"
-  parent = "News"
-  url = "/ai/"
-  weight = 16
-  [menu.main.params]
-    desc = "Java and AI: guides, tutorials and machine learning on the JVM"
-
-[[menu.main]]
   name = "All Categories"
-  parent = "News"
+  parent = "Foojay News"
   url = "/today/category/"
-  weight = 17
+  weight = 4
   [menu.main.params]
     desc = "Every topic the community writes about, A-Z"
 
 [[menu.main]]
-  name = "Coming soon..."
-  parent = "News"
-  url = "/today/coming-soon/"
-  weight = 18
+  name = "Newsletters and Overviews"
+  identifier = "newsletters-overviews"
+  parent = "news"
+  weight = 12
+
+[[menu.main]]
+  name = "JC-AI Newsletter"
+  parent = "newsletters-overviews"
+  url = "/today/category/jc-ai-newsletter/"
+  weight = 1
   [menu.main.params]
-    desc = "Scheduled content that will appear on foojay.io in the future"
+    desc = "AI Newsletter curated by Miro Wengner"
+
+[[menu.main]]
+  name = "Monthly Review"
+  parent = "newsletters-overviews"
+  url = "/month-overview/"
+  weight = 2
+  [menu.main.params]
+    desc = "Artur Skowronski's monthly Foojay roundup in JVM Weekly"
+
+[[menu.main]]
+  name = "Week in Review"
+  parent = "newsletters-overviews"
+  url = "/today/week-review/"
+  weight = 3
+  [menu.main.params]
+    desc = "Foojay content listed per week, with new authors highlighted"
+
+[[menu.main]]
+  name = "Coming Soon"
+  parent = "newsletters-overviews"
+  url = "/today/coming-soon/"
+  weight = 4
+  [menu.main.params]
+    desc = "Foojay content already scheduled for publication in the following weeks"
 
 # ---------------------------------------------------------------------------
 
 [[menu.main]]
   name = "Resources"
+  identifier = "resources"
   weight = 20
   [menu.main.params]
     cols = 1
 
 [[menu.main]]
   name = "Sustainability for Java Developers"
-  parent = "Resources"
+  parent = "resources"
   url = "/sustainability-for-java-developers/"
   weight = 21
   [menu.main.params]
@@ -328,7 +374,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java Almanac"
-  parent = "Resources"
+  parent = "resources"
   url = "/java-almanac/"
   weight = 22
   [menu.main.params]
@@ -336,7 +382,7 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "JVM Options"
-  parent = "Resources"
+  parent = "resources"
   url = "/jvm-options/"
   weight = 23
   [menu.main.params]
@@ -344,19 +390,35 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Java User Groups"
-  parent = "Resources"
+  parent = "resources"
   url = "/jugs/"
   weight = 24
   [menu.main.params]
     desc = "Find a JUG near you on the world map"
 
 [[menu.main]]
-  name = "Java Champions"
-  parent = "Resources"
-  url = "/java-champions/"
+  name = "Java Conferences"
+  parent = "resources"
+  url = "/java-conferences/"
   weight = 25
   [menu.main.params]
+    desc = "Upcoming Java conferences and their calls for papers, on a map"
+
+[[menu.main]]
+  name = "Java Champions"
+  parent = "resources"
+  url = "/java-champions/"
+  weight = 26
+  [menu.main.params]
     desc = "The community members recognized by the Java Champions program"
+
+[[menu.main]]
+  name = "Foojay Television"
+  parent = "resources"
+  url = "/tv/"
+  weight = 27
+  [menu.main.params]
+    desc = "Videos from the Java community's YouTube channels"
 
 # ---------------------------------------------------------------------------
 # Java Basics: the deep Quick Start tree. Third level renders as columns, so
@@ -367,27 +429,6 @@ enableGitInfo = true
   weight = 30
   [menu.main.params]
     cols = 3
-    [menu.main.params.footlink]
-      label = "Open the full Java Quick Start guide"
-      url = "/java-quick-start/"
-
-[[menu.main]]
-  name = "Java Terms Explained"
-  parent = "Java Basics"
-  # Trailing slash, like every other menu entry: without it the nav link cost a
-  # 301 to /pedia/ on every click, from a menu that renders on all 2712 pages.
-  url = "/pedia/"
-  weight = 31
-  [menu.main.params]
-    desc = "The Java and OpenJDK jargon dictionary"
-
-[[menu.main]]
-  name = "Other Tutorials"
-  parent = "Java Basics"
-  url = "/java-quick-start/other-tutorials/"
-  weight = 32
-  [menu.main.params]
-    desc = "Many more places where you can learn more about Java"
 
 # -- column: Install Java -------------------------------------------------
 [[menu.main]]
@@ -501,6 +542,32 @@ enableGitInfo = true
   url = "/java-quick-start/quick-start-tutorial/whats-next/"
   weight = 11
 
+# -- column: Learn more -------------------------------------------------
+
+[[menu.main]]
+  name = "Learn More"
+  identifier = "learn-more"
+  parent = "Java Basics"
+  weight = 35
+
+[[menu.main]]
+  name = "Java Terms Explained"
+  parent = "learn-more"
+  # Trailing slash, like every other menu entry: without it the nav link cost a
+  # 301 on every click, from a menu that renders on all 2712 pages.
+  url = "/java-terms-explained/"
+  weight = 1
+  [menu.main.params]
+    desc = "The Java and OpenJDK jargon dictionary"
+
+[[menu.main]]
+  name = "External Tutorials"
+  parent = "learn-more"
+  url = "/java-quick-start/other-tutorials/"
+  weight = 2
+  [menu.main.params]
+    desc = "Many more places where you can learn more about Java"
+
 # ---------------------------------------------------------------------------
 
 [[menu.main]]
@@ -557,6 +624,14 @@ enableGitInfo = true
   [menu.main.params]
     desc = "Organizations deciding on Foojay’s roadmap and direction"
 
+[[menu.main]]
+  name = "Foojay Statistics"
+  parent = "About"
+  url = "/statistics/"
+  weight = 47
+  [menu.main.params]
+    desc = "Articles, authors, reads and community in numbers"
+
 # ---------------------------------------------------------------------------
 # Footer navigation
 #
@@ -570,7 +645,7 @@ enableGitInfo = true
 # definition does: three labels disagreed with the header ("Meet The Team" vs
 # "Meet the Team", "Where to Find Foojay" vs the long form), the podcast sat in
 # the resources column while the nav filed it under News, and four pages the
-# nav offers (Java Champions, the Sustainability eBook, the AI portal, Write
+# nav offers (Java Champions, the Sustainability eBook, Write
 # for Foojay) were reachable from the hover panel and nowhere else. One
 # convention for both menus means a mismatch is now something you can see.
 #
@@ -591,6 +666,12 @@ enableGitInfo = true
 [[menu.footer]]
   name = "Java Resources"
   identifier = "footer-resources"
+  weight = 20
+
+[[menu.footer]]
+  name = "Sustainability eBook"
+  parent = "footer-resources"
+  url = "/sustainability-for-java-developers/"
   weight = 10
 
 [[menu.footer]]
@@ -602,7 +683,7 @@ enableGitInfo = true
 [[menu.footer]]
   name = "Java Terms Explained"
   parent = "footer-resources"
-  url = "/pedia/"
+  url = "/java-terms-explained/"
   weight = 12
 
 [[menu.footer]]
@@ -624,9 +705,9 @@ enableGitInfo = true
   weight = 15
 
 [[menu.footer]]
-  name = "Sustainability eBook"
+  name = "Foojay Television"
   parent = "footer-resources"
-  url = "/sustainability-for-java-developers/"
+  url = "/tv/"
   weight = 16
 
 # ---------------------------------------------------------------------------
@@ -634,7 +715,7 @@ enableGitInfo = true
 [[menu.footer]]
   name = "Content Hub"
   identifier = "footer-community"
-  weight = 20
+  weight = 10
 
 [[menu.footer]]
   name = "Friends Of OpenJDK Today"
@@ -649,9 +730,9 @@ enableGitInfo = true
   weight = 22
 
 [[menu.footer]]
-  name = "Foojay.io AI Portal"
+  name = "Week in Review"
   parent = "footer-community"
-  url = "/ai/"
+  url = "/today/week-review/"
   weight = 23
 
 [[menu.footer]]
@@ -717,6 +798,12 @@ enableGitInfo = true
   parent = "footer-about"
   url = "/our-sponsors/"
   weight = 35
+
+[[menu.footer]]
+  name = "Foojay Statistics"
+  parent = "footer-about"
+  url = "/statistics/"
+  weight = 36
 
 # ---------------------------------------------------------------------------
 

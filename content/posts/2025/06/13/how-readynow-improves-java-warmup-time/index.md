@@ -1,7 +1,6 @@
 ---
 title: "How ReadyNow Improves Java Warmup Time"
 date: "2025-06-13T07:55:38+00:00"
-lastmod: "2025-06-27T09:39:25+00:00"
 description: "This is the second article in a series on faster Java application warmup. The first blog post, Faster Java Warmup: CRaC versus ReadyNow, explained how…"
 canonical: "https://www.azul.com/blog/how-readynow-improves-java-warmup-time/"
 authors:
@@ -21,7 +20,7 @@ related_posts:
 ReadyNow in Azul Zing Builds of OpenJDK (Zing) helps Java applications reach their optimal performance much faster after the startup of the JVM. Using a text file containing the history of compiler decisions from a previous run, it can reduce the application's total Java warmup time.
 
 In this post, we'll take a deeper look into this process and explain how ReadyNow can improve the speed of the application from the start and reduce latency \[Figure 1\].
-![](readynow-warmup-1024x585.jpg)
+![Line chart of latency over 25 minutes: high spikes up to 120 ms without ReadyNow, flat near zero with ReadyNow](readynow-warmup-1024x585.jpg)
 
 ## How ReadyNow achieves faster compilations
 
@@ -104,8 +103,8 @@ Let's compare gc.log files generated during the two runs with [GC Log Analyzer](
 In the first run, we can see the number of compiles gradually grows over time and reaches the maximum after about 40 seconds. Thanks to the information in the profile log file, in the second run, the compiler already has all the required information to move these Tier 1 compilations to the very start of the application and finish all these compilations in one second.
 
 {{< gallery >}}
-understanding_readynow_tier1_no_readynow-1024x547.png
-understanding_readynow_tier1_with_readynow-1-1024x547.png
+understanding_readynow_tier1_no_readynow-1024x547.png | | Tier 1 compile counts without ReadyNow: the count climbs in steps to about 2,040 methods over 50 seconds
+understanding_readynow_tier1_with_readynow-1-1024x547.png | | Tier 1 compile counts with ReadyNow: about 2,170 methods are compiled within the first second and stay flat
 {{< /gallery >}}
 
 ### Tier 2 Compile Counts
@@ -113,8 +112,8 @@ understanding_readynow_tier1_with_readynow-1-1024x547.png
 The charts for the Tier 2 compilation reveal that we reduced a significant part of the compilations from 40 seconds to 17 seconds. Although this is already a significant improvement, it also helps us to define that the generated profile log file is still not perfectly trained for this use case. In one of the next parts of this blog series, we'll explore the topic of generational profile logs further.
 
 {{< gallery >}}
-understanding_readynow_tier2_no_readynow-1024x547.png
-understanding_readynow_tier2_with_readynow-1024x547.png
+understanding_readynow_tier2_no_readynow-1024x547.png | | Tier 2 compile counts without ReadyNow: a gradual climb to about 1,090 methods over 50 seconds
+understanding_readynow_tier2_with_readynow-1024x547.png | | Tier 2 compile counts with ReadyNow: a faster climb that levels off near 1,040 methods after about 17 seconds
 {{< /gallery >}}
 
 ### Compiler queue run
@@ -122,8 +121,8 @@ understanding_readynow_tier2_with_readynow-1024x547.png
 The chart with the code waiting in a queue to be compiled also shows a big difference. In the first run, we can see a huge spike starting at around second 26, when the actual Dacapo-test starts, which causes a lot of load on the application. Thanks to the profile log, this queue is moved to the start of the application. As described before, ReadyNow uses the decisions of the previous run to immediately compile most of the native code and have it available when needed. As a result, we only see a small peak at 26 seconds.
 
 {{< gallery >}}
-understanding_readynow_compiler_queu_no_readynow-1-1024x547.jpg
-understanding_readynow_compiler_queu_with_readynow-1-1024x547.jpg
+understanding_readynow_compiler_queu_no_readynow-1-1024x547.jpg | | Compiler queues without ReadyNow: a small early peak, then a large spike of about 350 queued methods at second 26
+understanding_readynow_compiler_queu_with_readynow-1-1024x547.jpg | | Compiler queues with ReadyNow: the queue peaks at the very start at about 800 methods and drains by second 20
 {{< /gallery >}}
 
 ## Conclusion

@@ -1,7 +1,9 @@
 ---
 title: "Foreign Function & Memory API"
 description: "The Foreign Function & Memory (FFM) API, finalised in Java 22 (JEP 454), provides a safe, efficient, and pure-Java way to interact with native code and off-heap memory — replacing the older, error-prone Java Native Interface (JNI). Foreign memory access ..."
-url: "/pedia/foreign-function-memory-api/"
+url: "/java-terms-explained/foreign-function-memory-api/"
+aliases:
+  - "/pedia/foreign-function-memory-api/"
 ---
 
 The Foreign Function \& Memory (FFM) API, finalised in Java 22 (JEP 454), provides a safe, efficient, and pure-Java way to interact with native code and off-heap memory — replacing the older, error-prone Java Native Interface (JNI).
@@ -25,8 +27,8 @@ The FFM API supersedes both JNI (for calling native functions) and the older `su
 
 ## See Also
 
-* [Bytecode](/pedia/bytecode/)
-* [Java Module System (JPMS)](/pedia/java-module-system-jpms/)
-* [Java Native Interface (JNI)](/pedia/java-native-interface-jni/)
-* [OpenJDK Projects](/pedia/openjdk-projects/)
-* [Project Panama](/pedia/project-panama/)
+* [Bytecode](/java-terms-explained/bytecode/)
+* [Java Module System (JPMS)](/java-terms-explained/java-module-system-jpms/)
+* [Java Native Interface (JNI)](/java-terms-explained/java-native-interface-jni/)
+* [OpenJDK Projects](/java-terms-explained/openjdk-projects/)
+* [Project Panama](/java-terms-explained/project-panama/)

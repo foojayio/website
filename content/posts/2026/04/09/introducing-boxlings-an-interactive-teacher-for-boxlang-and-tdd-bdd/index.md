@@ -19,7 +19,7 @@ Oh, and the whole thing is written in BoxLang itself. 🥊 Dogfooding at its fin
 
 ## What Is BoxLings?
 
-![](boxlings-intro-77fe84fb.png)
+![BoxLings terminal welcome screen with the BoxLang banner, how it works tips and keyboard shortcuts for navigating exercises](boxlings-intro-77fe84fb.png)
 
 BoxLings gives you **129 progressive exercises across 28 topics** — from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development.
 

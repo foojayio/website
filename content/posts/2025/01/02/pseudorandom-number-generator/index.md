@@ -1,13 +1,11 @@
 ---
 title: "Pseudorandom Number Generators - The Secret Behind Santa’s Gift Bag"
 date: "2025-01-02T14:51:10+00:00"
-lastmod: "2025-01-02T14:51:11+00:00"
 description: "Discover the importance of random number generators and their crucial role in cryptography and data security."
 authors:
   - "rijo-sam"
 image: "Santa-Claus-1.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "securing-symmetric-encryption-algorithms-in-java"

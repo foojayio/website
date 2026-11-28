@@ -1,7 +1,6 @@
 ---
 title: "What is GitOps? What are its benefits?"
 date: "2021-12-17T16:19:17+00:00"
-lastmod: "2021-12-17T16:19:20+00:00"
 description: "Let's understand what GitOps is and its benefits and learn how ArgoCD can help with the continuous delivery of Kubernetes-based applications."
 canonical: "https://ashishtechmill.com/what-is-gitops-and-what-are-its-benefits"
 authors:

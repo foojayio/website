@@ -1,14 +1,12 @@
 ---
 title: "Taking Java Arrays to Another Dimension"
 date: "2025-08-29T12:53:09+00:00"
-lastmod: "2025-08-29T12:55:41+00:00"
 description: "Explore the intricacies of Java’s multidimensional arrays with this in-depth guide. Learn how to declare, initialize, and utilize arrays of Java arrays to…"
 canonical: "https://thenewstack.io/multi-dimensional-array-java/"
 authors:
   - "simonritter"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:
@@ -97,7 +95,7 @@ int[][] aiv = {{1, 2}, {3, 4}};
 ```
 
 This array is implemented as an array of references to arrays, as shown in the diagram.
-![](jagged-array-1.jpg)
+![Diagram of a jagged array: variable aiv points to an array of two references, to arrays holding 1, 2 and 3, 4](jagged-array-1.jpg)
 
 In effect, there are three arrays: one to hold the values 1 and 2, one to hold the values 3 and 4, and one to hold the references to those two arrays. Since the array references are independent, we are not required to make them the same size.
 
@@ -108,7 +106,7 @@ int[][] aiv = {{1, 2}, {3, 4, 5}};
 ```
 
 The array storage now looks like this:
-![](jagged-array-2.jpg)
+![Diagram of a jagged array whose second row has three elements (3, 4, 5) while the first row has two (1, 2)](jagged-array-2.jpg)
 
 If we had a three-dimensional array, each element in the second dimension would become an array reference. For example:
 

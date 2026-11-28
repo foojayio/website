@@ -1,7 +1,6 @@
 ---
 title: "Hardware Acceleration For Java? TornadoVM Can Do It!"
 date: "2022-04-01T07:37:03+00:00"
-lastmod: "2023-02-16T08:01:19+00:00"
 description: "In this article, learn about TornadoVM, hardware acceleration, and get a thorough overview of the TornadoVM software architecture."
 authors:
   - "thanos-stratikopoulos"
@@ -29,7 +28,7 @@ This article focuses on TornadoVM and aims to introduce the TornadoVM software a
 
 Figure 1 shows the conventional execution of Java applications on CPUs via the JVM (top), as well as the execution of Java applications through TornadoVM on heterogeneous accelerators.
 
-![](workflow-700x346.png)  
+![Java applications compile straight to CPU assembly, while with TornadoVM an API call compiles them to OpenCL, PTX or SPIR-V for CPUs, GPUs and FPGAs](workflow-700x346.png)  
 
 Figure 1: Execution of Java applications through JVM (top) and TornadoVM (bottom).
 
@@ -55,7 +54,7 @@ Currently, the JVM runs with various JIT compilers (e.g., C1, C2, Graal). The To
 
 The software architecture of TornadoVM is designed to be oblivious of the specific JDK version that it co-operates with, and it includes three layers (**API** , **Runtime** , **Execution Engine**), as shown in Figure 2.
 
-![](TornadoVM-stack-665x510.png)  
+![TornadoVM layers: an API with LoopParallel and Kernel, a runtime generating bytecodes, and an execution engine with a JIT compiler for OpenCL, PTX and SPIR-V](TornadoVM-stack-665x510.png)  
 
 Figure 2: TornadoVM Software Stack.
 
@@ -100,7 +99,7 @@ Regardless of the hardware type, there is a common denominator that can impact p
 
 Accelerators can be also integrated on the same silicon and share memory with the CPU. Figure 3 presents some [application domains](https://www.tornadovm.org/use-cases) that have been accelerated with TornadoVM, including [Kinect Fusion](https://github.com/beehive-lab/kfusion-tornadovm), [Viola Jones Face Detection](https://github.com/E2Data/iproov-violajones-usecase), [Ray Tracing](https://github.com/beehive-lab/TornadoVM-Ray-Tracer), [Natural Language Processing](https://e2data.eu/blog/flexible-and-efficient-acceleration-of-natural-language-processing-in-e2data), Machine Learning, and [Analytics of data from IoT sensors](https://github.com/E2Data/green-buildings-kernels).
 
-![](Use-cases.png)  
+![Application domains for accelerators: computer vision, face detection, ray tracing, NLP, machine learning, data analytics and IoT](Use-cases.png)  
 
 Figure 3: TornadoVM Use Cases.
 

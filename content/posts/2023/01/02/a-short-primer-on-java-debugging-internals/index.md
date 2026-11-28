@@ -1,7 +1,6 @@
 ---
 title: "A Short Primer on Java Debugging Internals"
 date: "2023-01-02T08:14:17+00:00"
-lastmod: "2023-01-02T08:22:48+00:00"
 description: "How does debugging work under the hood? This article explains the basics of JDI and JDWP and gives the JDWP packets for an example program."
 authors:
   - "johannes-bechberger"
@@ -21,7 +20,7 @@ The following is an hors d'oeuvre, a small post in between my series on profilin
 All Java debuggers use the [Java Debug Wire Protocol (JDWP)](https://docs.oracle.com/en/java/javase/17/docs/specs/jdwp/jdwp-spec.html "Java Debug Wire Protocol (JDWP)") to communicate with the JVM, usually using the Java Debug Interface (JDI) abstraction Layer. The protocol can be used to remote debug, but the JVM and the debugger are commonly on the same machine.
 
 Therefore, the design did not take latency into account, and it requires sending many small messages, but this is a topic for another article. The actual architecture of debuggers differs slightly:
-![](diagrams2-2-1024x247.png) The architecture of the IntelliJ and the VSCode Java debuggers
+![Diagram of the debugger stack: IntelliJ and VSCode (via the Java Debug Server) reach the JDI, which uses JDWP to talk to the JDWP agent and the JVM](diagrams2-2-1024x247.png) The architecture of the IntelliJ and the VSCode Java debuggers
 
 The IntelliJ debugger calls the JDI interface directly. The [VSCode debugger](https://github.com/microsoft/vscode-java-debug), in contrast, uses its own protocol called [Debug Adapter Protocol](https://microsoft.github.io/debug-adapter-protocol/), which is for debugging what the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) is for code editing, to quote the DAP page:
 > The idea behind the *Debug Adapter Protocol* (DAP) is to abstract the way how the debugging support of development tools communicates with debuggers or runtimes into a protocol. Since it is unrealistic to assume that existing debuggers or runtimes adopt this protocol any time soon, we rather assume that an intermediary component - a so called *Debug Adapter* - adapts an existing debugger or runtime to the Debug Adapter Protocol.
@@ -39,10 +38,10 @@ Back to the JDWP protocol: JDWP knows four different types of packets.
 I wrote a small logger which intercepts the JDWP requests, replies, and events, synthesizing them into JDWP programs in a small language. These programs may start with a cause, which probably started the sequence of requests. This allows us to understand better how the debugger interacts with the JVM.
 
 For the purpose of this article, we only consider a small hello world program:
-![](image-1024x189.png)
+![Java SmallProgram class in IntelliJ with a breakpoint on the line that prints a greeting](image-1024x189.png)
 
 We put a break-point on line 4 using the IntelliJ debugger and run this debugging session with my logger. I'll go into all the sent and received packets in this post, but just to give you the gist of the communication, here is the simplified sequence diagram:
-![](image-3-552x1024.png)
+![Sequence diagram of the JDWP messages between debugger and JVM, from handshake through breakpoint hit to resume and VM death](image-3-552x1024.png)
 
 The debugging session starts with the JVM informing the debugger of the start and the debugger then requesting the sizes of the different IDs used in this session (e.g., that a method ID is 8 bytes wide, ...):
 
@@ -159,7 +158,7 @@ The debugger then sets the break-point using the mappings obtained before...
 ```
 
 This allows the debugger to show us the following:
-![](image-1-1024x189.png)
+![IntelliJ stopped at the breakpoint in SmallProgram, showing args and name both as 'my dear reader'](image-1-1024x189.png)
 
 We then press the "Resume Program" button in the IDE. This causes the debugger to send a resume request. This is the last significant communication between the debugger and JVM that we see in our logs, there should at least be a VM death event, but our Java agent-based logger cannot record this.
 

@@ -1,7 +1,6 @@
 ---
 title: "Kotlin on the RaspberryPi (Pi4J-Kotlin)"
 date: "2022-11-17T13:37:18+00:00"
-lastmod: "2022-11-17T13:37:19+00:00"
 description: "Learn about Pi4J-Kotlin, providing a Kotlin DSL for the already-mature Pi4J V2 API and take full advantage of Kotlin on the RaspberryPi!"
 authors:
   - "mhashim6"

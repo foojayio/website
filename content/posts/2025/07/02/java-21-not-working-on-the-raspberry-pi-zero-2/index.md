@@ -1,7 +1,6 @@
 ---
 title: "Java 21+ Not Working on the Raspberry Pi Zero 2"
 date: "2025-07-02T07:46:09+00:00"
-lastmod: "2025-07-02T19:30:04+00:00"
 description: "This story is about how \"Write Once, Run Anywhere\" got broken in a specific use case. It reveals the complexity of maintaining this \"Run Anywhere\""
 canonical: "https://www.pi4j.com/blog/2025/20250625-java-21-not-working-on-zero-2/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "compare-boards.png"
 categories:
   - "Embedded"
-  - "Java"
   - "Raspberry Pi"
 related_posts:
   - "controlling-a-led-strip-with-pi4j-and-jbang"
@@ -99,4 +97,4 @@ Hello World
 ## Compare Boards
 
 To help identify these kinds of issues that behave differently on different types of Raspberry Pi boards, the Board Info Service has been extended with a [Compare view](https://api.pi4j.com/board-compare?board2=MODEL_4_B&board1=ZERO_V2) where you can easily see the differences between two boards.
-![](compare-boards-1024x600.jpg)
+![Pi4J web app 'Compare Boards' page comparing a Raspberry Pi Zero V2 and a Pi 4 Model B by CPU, memory and release date](compare-boards-1024x600.jpg)

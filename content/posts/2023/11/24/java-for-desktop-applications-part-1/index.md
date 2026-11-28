@@ -1,14 +1,11 @@
 ---
 title: "Java for desktop applications: Tips and Tricks (Part 1)"
 date: "2023-11-24T09:18:15+00:00"
-lastmod: "2023-11-24T09:21:13+00:00"
 description: "Improve your desktop applications with easy-to-apply tips!"
 authors:
   - "christopher-schnick"
 image: "permission.jpg"
 categories:
-  - "Desktop"
-  - "Java"
   - "JavaFX"
   - "Use Cases"
 related_posts:

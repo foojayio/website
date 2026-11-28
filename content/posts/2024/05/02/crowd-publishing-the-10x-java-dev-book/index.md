@@ -1,7 +1,6 @@
 ---
 title: "Crowd-Publishing the 10x Java Dev Book"
 date: "2024-05-02T07:17:58+00:00"
-lastmod: "2024-05-02T07:17:59+00:00"
 description: "The “enlightenment roadmap” of a Java developer can be scary. How do you become the 10x Java Developer you always dreamed of becoming?"
 authors:
   - "olimpiu-pop"
@@ -10,7 +9,6 @@ image: "10xdev.jpg"
 categories:
   - "Book Announcement"
   - "Books"
-  - "Java"
   - "Tutorials"
 related_posts:
   - "book-review-practical-design-patterns-for-java-developers"
@@ -26,7 +24,7 @@ That's the question Steve Poole and Olimpiu Pop embarked on to respond. And, wha
 
 [
 
-{{< img src="10xdev-700x465.jpg" class="size-medium" width="700" height="465" >}}
+{{< img src="10xdev-700x465.jpg" alt="10xJava.dev web page: hub for contributing to the 10x Java Developer book, with royalties going to Foojay.io" class="size-medium" width="700" height="465" >}}
 
 ](https://10xjava.dev/)
 

@@ -1,13 +1,11 @@
 ---
 title: "Java's Unsafe is Finally Going Away"
 date: "2024-07-11T07:52:32+00:00"
-lastmod: "2024-07-11T07:52:33+00:00"
 description: "Java's sun.misc.Unsafe is being phased out. Learn safer memory access using VarHandle and Foreign Function & Memory API to keep your applications secure and up-to-date."
 authors:
   - "bazlur-rahman"
 image: "Gemini_Generated_Image_9cppb89cppb89cpp.jpeg"
 categories:
-  - "Java"
   - "JDK 23"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"

@@ -1,7 +1,6 @@
 ---
 title: "Deep Learning in Java Using Deep Netts (Part 2)"
 date: "2022-08-03T09:48:18+00:00"
-lastmod: "2023-07-11T09:37:04+00:00"
 description: "For more complex deep learning challenges, more data, and need better performance, take a look at Deep Netts Professional Edition."
 authors:
   - "zoran-sevarac"
@@ -37,7 +36,7 @@ This example shows how to build a deep learning model in Java that can learn how
 
 The data set consists of 60000 images of handwritten digits. Each image is size of 28x28 pixels. Few sample images are shown in the image below.
 
-![](0-hQYNvxeSBRnr062z-b632bff3.png)
+![Grid of handwritten digits 0 to 9 samples showing the variation in the dataset](0-hQYNvxeSBRnr062z-b632bff3.png)
 
 As you can see, there is a lot of variation in each digit, and it would be impossible to come out with some set of rules to recognize these digits - that's why we want to build a model which will be capable to extract and learn patterns from these examples.
 
@@ -54,7 +53,7 @@ Convolutional neural networks are type of deep learning models which are capable
 
 The image bellow shows the architecture of a typical convolutional neural network which consists of a few blocks of convolutional and pooling operations which perform feature detection/extraction, followed by the fully connected layers that perform classification.
 
-![](0-oNCO_BeAyzirc2s3-669cdb8a.png)
+![Diagram of a convolutional neural network: convolution and pooling layers for feature extraction, then fully connected and output layers](0-oNCO_BeAyzirc2s3-669cdb8a.png)
 
 The convolutional neural network can be created using the following Java code snippet in Deep Netts, using [ConvolutionalNetwork](https://www.deepnetts.com/apidocs/deepnetts/net/ConvolutionalNetwork.html) class and it's corresponding [builder](https://www.deepnetts.com/apidocs/deepnetts/net/ConvolutionalNetwork.Builder.html).
 
@@ -82,7 +81,7 @@ Not only does it increases productivity in AI development, but it also helps dev
 
 It is built on top of [Apache NetBeans](https://netbeans.apache.org/), following proven practices in UX and architecture.
 
-![](0-ilQdE60YGfg6BUBd-6b6db3cb.jpg)
+![DeepNetts Platform IDE showing a falling error graph, network architecture layers, workflow and test accuracy output](0-ilQdE60YGfg6BUBd-6b6db3cb.jpg)
 
 ## Differences Compared to Community Edition
 

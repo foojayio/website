@@ -1,7 +1,6 @@
 ---
 title: "Changes Included in Release 24.08 of Azul Zing Builds of OpenJDK"
 date: "2024-10-18T13:53:56+00:00"
-lastmod: "2024-10-18T13:53:57+00:00"
 description: "Azul Zing Builds of OpenJDK, the optimized Java runtime within Azul Platform Prime, has reached the release of the 24.08 Stable Release line. Zing builds…"
 canonical: "https://www.azul.com/blog/changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk/"
 authors:
@@ -10,7 +9,6 @@ authors:
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
   - "Cloud"
-  - "Java"
   - "Release Notes"
 related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"
@@ -25,7 +23,7 @@ Azul Zing Builds of OpenJDK, the optimized Java runtime within [Azul Platform Pr
 * **Stable Builds** : Builds that incorporate only CPUs, PSUs, and Azul Zing critical fixes and do not uptake new features and non-critical enhancements from Stream Builds. Stable Builds are our primary vehicle for delivering time-sensitive bug fixes to customers and are **only available to Azul customers**. Their version number is based on the Stream Build they originated from. For instance, "23.08.500.0" was derived from the August Stream Build of 2023 but already had multiple updates, as the 500 number indicates.
 
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a Stream build becomes the new Stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the 24.08 Stable Line.
-![](Azul-Prime-Stable-2308-1024x400.jpg)
+![Duke, the Java mascot, giving a thumbs up while riding a rocket.](Azul-Prime-Stable-2308-1024x400.jpg)
 
 ## Changes Included in the 24.08 Stable Line
 

@@ -1,7 +1,6 @@
 ---
 title: "Native Applications from a JavaFX Project for Multiple Devices"
 date: "2020-11-25T08:58:00+00:00"
-lastmod: "2021-02-05T12:58:26+00:00"
 description: "How to build native applications for multiple devices from a single JavaFX project with Gluon Mobile and GitHub Actions."
 canonical: "https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/"
 authors:
@@ -26,15 +25,15 @@ In this post, we will use such a project and build it with GitHub Actions as a n
 > Yes, that's right!  
 >
 > True "Write Once, Run Everywhere"!!!
-![](github_actions_gluon_diagram.jpg)
+![Diagram of a developer push to GitHub triggering Windows, macOS, Linux, iOS and Android builds, with iOS and Android going to app stores](github_actions_gluon_diagram.jpg)
 
 ## The Application
 
 This application is built around a Java library I created last year for my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/) which helps you to calculate the value of a resistor from its color rings. This library is further described on ["Resistor color codes and calculations as a Java Maven library"](https://webtechie.be/post/2019-11-25-resistor-color-codes-and-calculations-a-java-maven-library/).
 
 {{< gallery cols="2" >}}
-javafx-table.png
-resistorcalculator-maven.png
+javafx-table.png | | JavaFX table titled 'Resistor color coding' listing colors with their value, multiplier, tolerance and temperature coefficient
+resistorcalculator-maven.png | | Maven Central page for the be.webtechie resistor-calculator library, Apache 2.0, versions 0.0.1, 0.0.4 and 0.1.1
 {{< /gallery >}}
 
 ### Based on "Gluon Mobile Multiview"
@@ -42,12 +41,12 @@ resistorcalculator-maven.png
 Based on a "Gluon Mobile Multiview" project, it was only a matter of hours to create a working application with two calculation views and one "About" view. Many thanks to [José Pereda](https://twitter.com/JPeredaDnr) of Gluon who was so kind to improve my ugly proof-of-concept to a much better-looking layout with some clever tweaks and CSS improvements.
 
 {{< gallery cols="6" >}}
-app-about.jpg
-app-colors.png
-app-led.png
-app-menu.png
-github-project-1-1024x672.jpg
-intellij-app.png
+app-about.jpg | | About screen of the resistor calculator app, with links to the Getting Started with Java on Raspberry Pi book
+app-colors.png | | Resistor color calculator app with six color band selectors and a drawn resistor showing 330 ohm with 5.0% tolerance
+app-led.png | | LED resistor calculator app with input voltage 3.3 V, LED voltage 2.2 V and current 0.02 A, giving a 55 ohm resistor
+app-menu.png | | Navigation drawer of the Resistor calculator app with color calculator, LED calculator, About and Quit entries
+github-project-1-1024x672.jpg | | GitHub repository FDelporte/ResistorCalculatorApp with file list, README title and passing build badges
+intellij-app.png | | IntelliJ project tree of ResistorCalculatorApp showing the be.webtechie package with element, event and view packages
 {{< /gallery >}}
 
 ### **It's Not Finished Yet...**
@@ -102,7 +101,7 @@ Gluon created such a build action which you can integrate into the build process
 
 **This license-step is optional!** If you don't have one, a popup will be shown at startup of your application. You can request a free license to Gluon if you are working on a student or open-source project, as described on ["Free Gluon Licenses"](https://gluonhq.com/programs/free-gluon-licenses/).
 
-{{< img src="github-secret-gluon-license-700x220.png" class="size-medium" width="700" height="220" >}}
+{{< img src="github-secret-gluon-license-700x220.png" alt="GitHub repository secrets page for ResistorCalculatorApp showing a GLUON_LICENSE secret just added" class="size-medium" width="700" height="220" >}}
 
 ### **Build as a Native Application with GraalVM**
 
@@ -126,7 +125,7 @@ The .yml-structure is pretty similar for all build types and has this structure:
 * Apps: upload to Apple TestFlight or Google Play
 
 Based on the name, you can get a badge which you can add to the README of your project or... this post.
-![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20JAR%20and%20Native/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/MacOS/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Windows/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20Android/badge.svg) ![](https://github.com/FDelporte/ResistorCalculatorApp/workflows/iOS/badge.svg)
+![Build status of the Linux JAR and Native workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20JAR%20and%20Native/badge.svg) ![Build status of the MacOS workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/MacOS/badge.svg) ![Build status of the Windows workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Windows/badge.svg) ![Build status of the Linux Android workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/Linux%20Android/badge.svg) ![Build status of the iOS workflow](https://github.com/FDelporte/ResistorCalculatorApp/workflows/iOS/badge.svg)
 
 Depending on the OS some additional steps are settings are required as described further.
 
@@ -197,9 +196,9 @@ And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copi
 When I started working on this post and project, I just wanted to reach successful native builds for all platforms. But then Gluon stepped in and pushed this a lot further and guess what? This application is now on both "[Google Play](https://play.google.com/store/apps/details?id=be.webtechie.resistorcalculatorapp)" and the "[Apple App Store](https://apps.apple.com/us/app/gluon-resistor-calculator/id1540638756)" thanks to the work of [Erwin Morrhey](https://twitter.com/erwin1).
 
 {{< gallery cols="3" caption="The app in the stores and a QR code to install on your phone" >}}
-apple-app-store.jpg
-google-play-1024x849.jpg
-onlink_to_resistorcalc_small.png
+apple-app-store.jpg | | Apple App Store preview page for the free Gluon Resistor Calculator with iPhone screenshots
+google-play-1024x849.jpg | | Google Play page for Resistor Calculator (Beta) by Gluon, with screenshots and an Installed button
+onlink_to_resistorcalc_small.png | | QR code linking to the resistor calculator app
 {{< /gallery >}}
 
 All the required steps to build AND upload to both the stores are included in the GitHub Actions!!!
@@ -213,8 +212,8 @@ Action file: [maven-ios.yml](https://github.com/FDelporte/ResistorCalculatorApp/
 Additional settings are required which you can hide from your script by defining them in the secrets-section of your GitHub project, just like we already did with the Gluon license key.
 
 {{< gallery cols="2" >}}
-ios-setting-new-secret-1024x410.jpg
-ios-succeeded.png
+ios-setting-new-secret-1024x410.jpg | | GitHub new secret form with name CERTIFICATES_FILE_BASE64 and a long base64-encoded value
+ios-succeeded.png | | GitHub Actions run 'ios update' with the iOS build job completed successfully in 12 minutes
 {{< /gallery >}}
 
 Again we can use existing GitHub Actions to extend our previous "MacOS native" build file:

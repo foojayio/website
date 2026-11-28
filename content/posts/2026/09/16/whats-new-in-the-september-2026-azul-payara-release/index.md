@@ -1,7 +1,6 @@
 ---
 title: "What's New In The September 2026 Azul Payara Release?"
 date: "2026-09-16T16:46:54+00:00"
-lastmod: "2026-09-17T08:40:00+00:00"
 description: "MicroProfile 7.1 lands on the commercial lines, OpenTracing is removed, and Jakarta Agentic AI reaches Payara Micro in the September Azul Payara release."
 authors:
   - "dominika-tasarz"
@@ -45,7 +44,7 @@ Shipping the patch across the full supported lifecycle, not only the latest majo
 
 ## **What's New In Payara Community 7.2026.9**
 
-![](Email-Header-Payara-Community-September-2026-1024x341.jpg)
+![Azul Payara Community September 2026 Release banner with white fish logo on an orange-brown background](Email-Header-Payara-Community-September-2026-1024x341.jpg)
 
 Payara Community 7.2026.9 ([download here](https://www.azul.com/downloads/azul-payara-community-edition)) is the open-source distribution that tracks the Payara 7 development line, shipping Jakarta EE 11 and MicroProfile 7.1.
 
@@ -69,7 +68,7 @@ Every fix in the Community release links to its pull request [in the release not
 
 ## **What's New In Azul Payara Server and Micro**
 
-![](Email-Header-Azul-Payara-September-2026-1024x341.jpg)
+![Azul Payara September 2026 Release banner with the orange fish logo on a light background](Email-Header-Azul-Payara-September-2026-1024x341.jpg)
 
 ### **Before You Upgrade: MicroProfile OpenTracing Has Been Removed**
 

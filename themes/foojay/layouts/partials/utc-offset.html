@@ -9,7 +9,8 @@
        Nepal, Chatham) a naive "UTC+N" would round away. */ -}}
 {{- $raw := .Format "-0700" -}}
 {{- $sign := substr $raw 0 1 -}}
-{{- $h := int (substr $raw 1 2) -}}
+{{- /* Strip a leading zero first: Hugo's int reads "08"/"09" as invalid octal. */ -}}
+{{- $h := int (strings.TrimPrefix "0" (substr $raw 1 2)) -}}
 {{- $m := int (substr $raw 3 2) -}}
 {{- $out := "UTC" -}}
 {{- if or (gt $h 0) (gt $m 0) -}}

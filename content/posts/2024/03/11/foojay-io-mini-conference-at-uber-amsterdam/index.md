@@ -1,7 +1,6 @@
 ---
 title: "Foojay.io Mini Conference at Uber, Amsterdam"
 date: "2024-03-11T16:59:56+00:00"
-lastmod: "2024-03-11T17:01:47+00:00"
 description: "Uber Tech is partnering with Java User Group Amsterdam to host their first mini conference with Foojay.io."
 authors:
   - "geertjan-wielenga"

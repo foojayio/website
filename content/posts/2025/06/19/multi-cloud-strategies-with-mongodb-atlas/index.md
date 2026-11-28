@@ -1,7 +1,6 @@
 ---
 title: "Multi-cloud Strategies With MongoDB Atlas"
 date: "2025-06-19T11:49:29+00:00"
-lastmod: "2025-06-19T11:50:11+00:00"
 description: "In the technological world, the cloud has become more prevalent. It brings many benefits, including flexibility, scalability, faster innovation, and…"
 authors:
   - "luce-carter"
@@ -44,11 +43,11 @@ Setting up a new cluster in MongoDB Atlas to be multi-cloud is very simple but l
 1. Inside MongoDB Atlas, click the button to create a new cluster.
 2. In the new cluster wizard, ensure you toggle the switch to enable multi-cloud.
 
-![](AD_4nXeNRKpE7oevY6xtrhkRhfIsizzDXqyPkdWw-75c32b1c.png)
+![MongoDB Atlas Create New Cluster page with the Dedicated tier, AWS Ireland and the multi-cloud toggle enabled](AD_4nXeNRKpE7oevY6xtrhkRhfIsizzDXqyPkdWw-75c32b1c.png)
 
 3. The next selections in the wizard allow you to add cloud providers and regions for extra write, read, and analytic nodes.
 
-![](AD_4nXdVG2u0jyq6NHuZlKPDTKhpvSLBGnx-OlZc-223683ca.png)
+![Atlas multi-cloud setup: electable nodes spread over AWS Ireland (3 nodes) and GCP Sydney (2 nodes), totaling 5](AD_4nXdVG2u0jyq6NHuZlKPDTKhpvSLBGnx-OlZc-223683ca.png)
 
 4. You can then pick what cluster tier you want to use, give it a name, and then click \`Create Cluster\`, and it will go ahead and deploy a multi-cloud cluster.
 

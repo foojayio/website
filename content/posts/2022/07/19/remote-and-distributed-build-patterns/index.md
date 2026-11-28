@@ -1,7 +1,6 @@
 ---
 title: "Remote and Distributed Build Patterns"
 date: "2022-07-19T10:48:48+00:00"
-lastmod: "2022-07-28T17:34:40+00:00"
 description: "Let's review build patterns leveraging remote machines, clarify the definition of remote and distributed builds, and discuss their variations."
 authors:
   - "kyle-moore"

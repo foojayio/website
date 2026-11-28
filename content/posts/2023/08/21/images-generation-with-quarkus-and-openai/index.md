@@ -1,14 +1,12 @@
 ---
 title: "AI-based Images generation with Quarkus and OpenAI DALL.E"
 date: "2023-08-21T07:38:07+00:00"
-lastmod: "2023-08-21T07:39:49+00:00"
 description: "We explore image generation with Quarkus and OpenAI using the new REST Client Reactive to invoke the OpenAI DALL.E API."
 authors:
   - "anto_perrone"
 image: "pic01-1.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Machine Learning"
   - "Tutorials"
 related_posts:
@@ -264,7 +262,7 @@ and point the browser to this example url passing our prompt as the value of *de
 [http://localhost:8080/quarkus-openai/generate-image?description=a%20photo%20of%20a%20happy%20corgi%20puppy%20sitting%20in%20front%20of%20sea](http://localhost:8080/quarkus-openai/generate-image?description=a%20photo%20of%20a%20happy%20corgi%20puppy%20sitting%20and%20facing%20forward,%20studio%20light,%20longshot)
 
 and the output will be:
-![](pic01.jpg)
+![AI-generated photo of a happy corgi puppy sitting on a rock in front of the sea](pic01.jpg)
 
 Try with other prompts and enjoy the results.
 

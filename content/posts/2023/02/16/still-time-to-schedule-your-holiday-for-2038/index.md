@@ -1,7 +1,6 @@
 ---
 title: "Schedule your 2038 holiday and experiment with dates in jshell!"
 date: "2023-02-16T15:54:51+00:00"
-lastmod: "2023-02-16T15:54:52+00:00"
 description: "A new Y2K-bug seems to be approaching and we still have time to prevent it! Or you can already schedule a long holiday for the year 2038..."
 canonical: "https://webtechie.be/post/2022-12-01-schedule-holiday-2038/"
 authors:
@@ -42,7 +41,7 @@ October 23st of 1982    -->     821023
 January 1st of 2000     -->     000101
 ```
 
-{{< img src="y2k-454x510.jpg" class="size-medium" width="454" height="510" caption="News paper cover announcing the end of the world because of the Y2K bug" >}}
+{{< img src="y2k-454x510.jpg" alt="Weekly World News cover predicting banks failing and the Earth standing still on January 1, 2000 because of Y2K" class="size-medium" width="454" height="510" caption="News paper cover announcing the end of the world because of the Y2K bug" >}}
 
 Luckily, most systems were patched before the world was able to collapse and the Y2K-bug disappeared very quickly.
 

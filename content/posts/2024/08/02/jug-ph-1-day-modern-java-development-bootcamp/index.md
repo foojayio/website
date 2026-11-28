@@ -1,13 +1,11 @@
 ---
 title: "JUG PH: 1-Day Modern Java Development Bootcamp"
 date: "2024-08-02T07:53:16+00:00"
-lastmod: "2024-09-18T06:29:46+00:00"
 description: "A 1-Day Modern Java Bootcamp for IT students, early professionals, and career shifters with minimal Java or general programming experience."
 authors:
   - "tristan-mahinay"
 image: "java-bootcamp-2024-1.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "JUGs"
@@ -27,7 +25,7 @@ The Java User Group Philippines (JUG PH) in partnership with Developer Connect (
 
 The bootcamp was organized by the JUG Leaders and Volunteers and DEVCON Volunteers.
 
-![](java-bootcamp-2024-1-510x510.jpg)
+![Group photo of attendees at the JUG PH Java in Education bootcamp, many giving thumbs up](java-bootcamp-2024-1-510x510.jpg)
 
 ## Registration
 
@@ -49,7 +47,7 @@ For more information about JCP - Java in Education, check out: [JCP - Java in Ed
 
 Before the Java sessions start, the community partners introduced themselves and their initiative for the Philippines!
 
-![](java-bootcamp-2024-2-510x510.jpg)
+![Participants seated with laptops in a classroom while organizers speak at the front of the bootcamp](java-bootcamp-2024-2-510x510.jpg)
 
 The bootcamp was splitted into 2 sessions, morning and afternoon. It was hosted by Tristan Mahinay, one of the JUG PH Leader
 
@@ -64,7 +62,7 @@ Before attending the event, the participants were tasked to download and install
 
 The morning session will tackle different features of Java starting from Java 8 to Java 13. Including in the discussion are some Java Best Practices needed in the IT industry.
 
-![](java-bootcamp-2024-3-680x510.jpg)
+![Classroom of attendees with laptops watching the morning Java session on a large screen](java-bootcamp-2024-3-680x510.jpg)
 
 **Key topics discussed:**
 
@@ -78,7 +76,7 @@ The morning session will tackle different features of Java starting from Java 8 
 
 The afternoon session will tackle different features of Java starting from Java 14 to Java 21.
 
-![](java-bootcamp-2024-4-680x510.jpg)
+![Speaker presenting a 'Switch Expressions' slide to attendees in the bootcamp afternoon session](java-bootcamp-2024-4-680x510.jpg)
 
 **Key topics discussed:**
 
@@ -97,7 +95,7 @@ The bootcamp will not be possible without the help of our community partner.
 
 * **DEVCON Philippines/Manila** - Our community partner is a well-known non-profit organziation in the Philippines. They are empowering IT enthusiasts by creating developer conferences, campus summits and bootcamps. For more information, check out: <https://devcon.ph/>
 
-![](java-bootcamp-2024-5-510x510.jpg)
+![Group photo of bootcamp volunteers and participants in front of an AWS sign](java-bootcamp-2024-5-510x510.jpg)
 
 ## Sponsors
 

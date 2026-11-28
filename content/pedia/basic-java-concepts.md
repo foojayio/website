@@ -1,7 +1,9 @@
 ---
 title: "Basic Java Concepts"
 description: "The Java programming language and Java virtual machine (also known as Java runtime environment) provide the tools to write operating system independent applications. A Java application employs the JVM (Java Virtual Machine) on the target system to run its code. ..."
-url: "/pedia/basic-java-concepts/"
+url: "/java-terms-explained/basic-java-concepts/"
+aliases:
+  - "/pedia/basic-java-concepts/"
 ---
 
 The Java programming language and Java virtual machine (also known as Java runtime environment) provide the tools to write operating system independent applications. A Java application employs the JVM (Java Virtual Machine) on the target system to run its code. Java applications are therefore independent from the JVM and one can be updated/patched independent from the other.
@@ -21,7 +23,7 @@ As Java is fully standardized, the JVM (within a major version) is interchangeab
 * **JRE (Java Runtime environment).** The smallest type of JVM bundle. Used to run Java applications.
 * **JVM (Java virtual machine).** A runtime environment to execute Java applications shipped in ".jar" files. The smallest Java SE compliant JVM bundle is the JRE.
 
-{{< img src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" class="size-medium" width="700" height="359" >}}
+{{< img src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" alt="Nested circles: the JVM inside the Java API libraries, the JRE, the JDK, open-source libraries and finally the application" class="size-medium" width="700" height="359" >}}
 
 ## JDK
 
@@ -43,6 +45,6 @@ More reading on Foojay:
 
 ## See Also
 
-* [JDK Distributions](/pedia/jdk-distributions/)
-* [Bytecode](/pedia/bytecode/)
-* [Text Blocks](/pedia/text-blocks/)
+* [JDK Distributions](/java-terms-explained/jdk-distributions/)
+* [Bytecode](/java-terms-explained/bytecode/)
+* [Text Blocks](/java-terms-explained/text-blocks/)

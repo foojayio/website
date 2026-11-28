@@ -1,7 +1,6 @@
 ---
 title: "IntelliJ IDEA and Open Liberty - Effective Java app development"
 date: "2024-04-12T13:36:25+00:00"
-lastmod: "2024-04-12T13:38:09+00:00"
 description: "How to use Liberty Tools for IntelliJ IDEA to enable rapid, easy, and efficient development of cloud-native Java applications with Liberty."
 canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-intellij-idea/"
 authors:
@@ -13,7 +12,6 @@ categories:
   - "Gradle"
   - "IntelliJ IDEA"
   - "Jakarta EE"
-  - "Java"
   - "Maven"
   - "Tools"
 related_posts:
@@ -37,7 +35,7 @@ The open source [Liberty Tools for IntelliJ IDEA](https://ibm.biz/LibertyToolsIn
 
 The Liberty Tools for IntelliJ IDEA plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you in developing, building, testing, deploying, and managing your applications – all within your favorite IDE, IntelliJ!
 
-![](Screenshot-2024-04-03-at-13.21.37-700x437.jpg)
+![Liberty Tools plugin page on the JetBrains Marketplace for IntelliJ IDEA, with two preview screenshots](Screenshot-2024-04-03-at-13.21.37-700x437.jpg)
 
 ## Key Capabilities of Liberty Tools
 

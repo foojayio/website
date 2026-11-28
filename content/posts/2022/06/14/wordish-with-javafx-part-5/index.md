@@ -1,7 +1,6 @@
 ---
 title: "Wordish with JavaFX - Part 5"
 date: "2022-06-14T07:25:37+00:00"
-lastmod: "2022-06-14T07:25:40+00:00"
 description: "Let's turn to JavaFX charts, showing how to customize charts with orientation and colors and how to add nodes to the chart scene graph!"
 authors:
   - "gail-anderson"
@@ -45,7 +44,7 @@ To do this, we collect the game statistics in a singleton object, GameStats, whi
 
 Similar to the Wordle game, we display the number of games played, win percentage, current streak, and maximum streak, as shown in Figure 2.
 
-{{< img src="chart-stats-1-619x1024.png" class="size-large is-resized" width="350" height="579" caption="Figure 2. Wordish Statistics View" >}}
+{{< img src="chart-stats-1-619x1024.png" alt="Wordish statistics window: 6 played, 100% wins, streak of 6, and a guess distribution bar chart peaking at 3 guesses" class="size-large is-resized" width="350" height="579" caption="Figure 2. Wordish Statistics View" >}}
 
 Below the statistics data, we display the Guess Distribution as a horizontal bar chart. Here you see the left Y axis shows the number of guesses it took the user for a correct answer (1 through 6). Likewise, the corresponding X axis value reflects the number of games at each guess level.
 
@@ -293,7 +292,7 @@ Wordish uses a PopUp control to display messages to users who play the game. We 
 
 Figure 3 shows the popup control after guessing the word in one try. (Spoiler alert, I did cheat!)
 
-{{< img src="popup1.png" class="size-full is-resized" width="346" height="269" caption="Figure 3. The Wordish Popup" >}}
+{{< img src="popup1.png" alt="Wordish game with the word ETHEL solved in green and a popup reading 'WOW... Did you cheat?'" class="size-full is-resized" width="346" height="269" caption="Figure 3. The Wordish Popup" >}}
 
 We style the popup with CSS as shown here.
 

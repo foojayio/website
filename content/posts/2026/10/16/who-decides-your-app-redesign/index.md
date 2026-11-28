@@ -4,11 +4,9 @@ date: "2026-10-16"
 description: "Adopt Xcode 27 without moving your redesign schedule. This week: Liquid Glass, a JPA inspired ORM, OpenTelemetry, WebSockets and push callbacks."
 authors: ["shai-almog"]
 image: "who-decides-your-app-redesign-e9b18f15b8.jpg"
-categories: ["Java"]
+categories: ["Codename One"]
 canonical: "https://www.codenameone.com/blog/who-decides-your-app-redesign/"
 ---
-
-![Apple designs iOS; you choose your redesign schedule](who-decides-your-app-redesign-e9b18f15b8.jpg)
 
 Apple's design team doesn't know what's on your backlog. A new iOS appearance might be exactly what you want for your next release. It might also arrive halfway through a customer rollout, when changing the navigation is the last thing you need.
 

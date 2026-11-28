@@ -1,7 +1,6 @@
 ---
 title: "CI/CD Workflow for Spring Boot Applications on Kubernetes via Skaffold"
 date: "2021-01-19T07:37:03+00:00"
-lastmod: "2021-07-05T20:04:51+00:00"
 description: "Skaffold eases development and deployment of applications running on Kubernetes, managing the entire workflow, giving instant feedback."
 canonical: "https://ashishtechmill.com/cicd-workflow-for-spring-boot-application-on-kubernetes-via-skaffold"
 authors:
@@ -14,7 +13,7 @@ related_posts:
 ---
 
 In this post, we will create a Local CI/CD workflow for a Spring Boot Application and deploy it to Kubernetes using Skaffold.  
-![](Screenshot-2020-12-08-at-8.26.16-AM.png)
+![Skaffold logo](Screenshot-2020-12-08-at-8.26.16-AM.png)
 
 It is a known fact that developing applications with Kubernetes is cumbersome. That is the reason there is an ecosystem being developed around it so that developers can focus on what matters most to them i.e. writing code. On that note, in this article, I will be covering another tool Skaffold developed by [Google](https://skaffold.dev/).
 

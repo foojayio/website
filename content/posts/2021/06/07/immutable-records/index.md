@@ -1,7 +1,6 @@
 ---
 title: "Avoid Multithreading Bugs Using Immutable Java Records"
 date: "2021-06-07T07:52:44+00:00"
-lastmod: "2021-07-12T04:59:40+00:00"
 description: "Records help remove repetitive error-prone code, increasing developer productivity, with immutability keeping it away from concurrency bugs."
 canonical: "https://jfeatures.com/blog/immutable_records"
 authors:
@@ -69,7 +68,7 @@ Records help you remove repetitive and error-prone code, and increases developer
 
 If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Jobs](https://jfeatures.com/). You can download this step-by-step guide for free!
 
-[![](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
+[![Cover of the ebook '5 Steps to Best Java Jobs' by Vipin Sharma](ebook_upd-ee1842a7.png)](https://jfeatures.com/)
 
 ### Resources
 

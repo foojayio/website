@@ -1,7 +1,6 @@
 ---
 title: "Boosting Kafka Latency Performance by 3x with Zing JVM and AutoMQ"
 date: "2025-08-29T12:57:48+00:00"
-lastmod: "2025-08-29T12:57:50+00:00"
 description: "Why is Latency so Important to Kafka? The importance of low latency in Kafka stems from the use cases it enables. Many applications that rely on Kafka are…"
 canonical: "https://www.automq.com/blog/automq-zing-boost-latency-performance"
 authors:
@@ -9,7 +8,6 @@ authors:
   - "kaiming-wan"
 image: "kafka-with-zing-and-automq.jpg"
 categories:
-  - "Java"
   - "Kafka"
   - "Performance"
 related_posts:
@@ -18,8 +16,6 @@ related_posts:
   - "azul-august-2026-release-javas-first-monthly-cspu"
   - "new-between-quarters-security-updates-for-java-what-cspus-mean-for-your-release-pipeline"
 ---
-
-![](kafka-with-zing-and-automq.jpg)
 
 ## Why is Latency so Important to Kafka?
 
@@ -34,7 +30,7 @@ Maintaining low latency in the cloud with traditional Kafka is challenging. Its 
 ## Introduction of AutoMQ
 
 AutoMQ is a next-generation, open-source [Kafka solution](https://automq.com?utm_source=seo_inner_link), available on [GitHub](https://github.com/AutoMQ/automq?utm_source=seo_inner_link) under the Apache 2.0 license. It is engineered to run efficiently and cost-effectively in the cloud by fundamentally re-architecting its design. The core innovation of AutoMQ is the complete separation of compute (the brokers) and storage. Unlike traditional Kafka, which ties data to broker disks, AutoMQ uses cloud object storage, such as Amazon S3, as its primary and durable data store. This allows compute and storage resources to scale independently of one another.
-![](kafka-versus-automq-share-1024x453.png)
+![Diagram: Kafka replicates partitions between brokers on local disks, while AutoMQ brokers share object storage with no replication](kafka-versus-automq-share-1024x453.png)
 
 This modern architecture provides [several key advantages](https://www.automq.com/automq-vs-kafka?utm_source=seo_inner_link) for cloud deployments:
 
@@ -43,7 +39,7 @@ This modern architecture provides [several key advantages](https://www.automq.co
 * **Self-Balancing and Healing:** The stateless nature of the brokers means the cluster can automatically balance workloads and recover from node failures without requiring manual intervention.
 * **100% Kafka Compatibility:** AutoMQ is a drop-in replacement for Kafka. You can migrate existing applications and connect your tools using the same familiar protocol and APIs without any code changes.
 
-![](kafka-versus-automq-provisioning.png)
+![Left: AutoMQ tracks demand closely while fixed provisioning over- or under-provisions. Right: AutoMQ nodes at 60% vs Kafka at 99% and 5%](kafka-versus-automq-provisioning.png)
 
 ## Introducing Azul Zing Builds of OpenJDK
 
@@ -56,7 +52,7 @@ Azul Zing improves Java application performance in multiple, orthogonal ways:
 * **Improving JVM warmup and eliminating pauses caused by deoptimizations**: Zing's ReadyNow technology dramatically enhances the warm-up behavior of Java applications by persisting profiling information from previous runs so subsequent runs don't have to learn optimization patterns from scratch. This solves Java's warm-up problem and ensures peak application performance is available immediately without long warm-up periods or latency outliers due to invalid optimizations.
 
 For the Kafka ecosystem, where brokers and client applications are built on Java, Azul Zing provides a direct path to superior performance. By ensuring the underlying JVM doesn't introduce random pauses and further improving the overall performance, it allows the entire data pipeline to run smoothly, predictably, and with low latency, as modern services demand.
-![](azul-zing-jvm.png)
+![Diagram: Zing JVM, based on OpenJDK, adds Falcon JIT, C4 garbage collector and ReadyNow, giving speed, consistency and faster warmup](azul-zing-jvm.png)
 
 ## Performance Test \& Explanation
 
@@ -64,14 +60,14 @@ To understand the real-world impact of the JVM on our Kafka workload, we conduct
 
 ### Test Environment Configuration
 
-![](https://static-file-demo.automq.com/6809c9c3aaa66b13a5498262/68a6e15a4014a18f7bfdfa41_67480fef30f9df5f84f31d36%252F68a6e156f8f19b6c42fd19da_m8ab.png)
+![Chart from the AutoMQ benchmark showing latency test results for Kafka versus AutoMQ](https://static-file-demo.automq.com/6809c9c3aaa66b13a5498262/68a6e15a4014a18f7bfdfa41_67480fef30f9df5f84f31d36%252F68a6e156f8f19b6c42fd19da_m8ab.png)
 
 ### Latency: Taming the Tail
 
 For systems like Kafka, average latency only tells part of the story. It's the outliers—the highest latency requests—that can disrupt service stability and impact user experience. This is where **tail latency** (p99 and beyond) becomes a crucial metric.
 
 Our results showed a clear advantage for Azul Zing in this area.
-![](kafka-versus-automq-latency.png)
+![Bar chart: average end-to-end latency by percentile, Zing stays far lower than HotSpot at the tail, max about 35 ms vs 118 ms](kafka-versus-automq-latency.png)
 
 While average latencies were comparable, the difference became pronounced at the higher percentiles. When running on OpenJDK HotSpot, the 99.99th percentile latency averaged **48.9 ms** , with maximum spikes exceeding **118 ms**.
 
@@ -86,7 +82,7 @@ The numbers from our consecutive test runs highlight efficiency gains. On a 2-co
 * **OpenJDK HotSpot:** 92.4%
 * **Azul Zing:** 59.1%
 
-![](kafka-versus-automq-cpu.png)
+![Line chart: CPU usage over samples, Zing averages 59.1% versus 92.4% for HotSpot](kafka-versus-automq-cpu.png)
 
 Once fully optimized, **Azul Zing reduced CPU usage by approximately one-third compared to OpenJDK HotSpot, while handling the**same workload.
 

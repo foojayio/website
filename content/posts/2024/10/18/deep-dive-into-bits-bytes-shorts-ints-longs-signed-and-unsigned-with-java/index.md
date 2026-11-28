@@ -1,14 +1,12 @@
 ---
 title: "Deep dive into bits, bytes, shorts, ints, longs, signed, and unsigned with Java"
 date: "2024-10-18T13:54:09+00:00"
-lastmod: "2024-10-18T13:54:10+00:00"
 description: "On the Pi4J discussion list, someone recently asked what the best and easiest way is in Java to convert a byte value. In Java, there is no distinction…"
 canonical: "https://webtechie.be/post/2024-09-26-java-bits-bytes-short-int-long-signed-unsigned/"
 authors:
   - "frankdelporte"
 image: "thumbnail.jpg"
 categories:
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "Pi4J"
@@ -301,9 +299,9 @@ Short value 1111111111111111 to unsigned: 65535
 A nice example of the use of bits and bytes, is included in my book. A LED number display is a typical component used in a lot of experiments with electronics and is also used in e.g. alarm clocks. Such a display has 7 segments to for the number, and one for the dot. So a total of 8 true/false values to define what must be displayed. This makes it the perfect example of how 8 booleans can be combined into one byte.
 
 {{< gallery >}}
-led_segment_app.png
-segment_display_fully_wired-1024x498.jpg
-demo-application.png
+led_segment_app.png | | JavaFX LED Segment display app showing the digit five in red segments, with checkboxes for each segment and value 0x6D = 109
+segment_display_fully_wired-1024x498.jpg | | Breadboard with jumper wires and resistors wiring a 7-segment display that shows the digit 5
+demo-application.png | | JavaFX demo app with a single red 4-segment digit and large green LED displays for a date and a time
 {{< /gallery >}}
 
 In 2019, I even published a JavaFX library with a component to visualize such a display, as you can [read here: "LED number display JavaFX library published on Maven"](https://webtechie.be/post/2019-10-02-led-number-display-javafx-library-published-to-maven/).

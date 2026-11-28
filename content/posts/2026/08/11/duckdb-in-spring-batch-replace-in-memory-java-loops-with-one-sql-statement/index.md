@@ -1,7 +1,6 @@
 ---
 title: "DuckDB in Spring Batch: Replace In-Memory Java Loops with One SQL Statement"
 date: "2026-08-11T13:34:43+00:00"
-lastmod: "2026-08-31T06:27:03+00:00"
 description: "Spring Batch jobs usually follow the same pattern: an ItemReader streams rows, an ItemProcessor transforms each one, and an ItemWriter writes them out,…"
 authors:
   - "geertjan-wielenga"

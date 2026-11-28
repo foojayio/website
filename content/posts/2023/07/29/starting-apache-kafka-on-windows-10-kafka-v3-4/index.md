@@ -1,7 +1,6 @@
 ---
 title: "Starting Apache Kafka v3.4 on Win 10"
 date: "2023-07-29T07:43:32+00:00"
-lastmod: "2023-07-30T07:47:48+00:00"
 description: "Part one of a two part series on Running Apache Kafka Server, Configuring Kafka Topics, and Creating a Kafka Consumer and Kafka Producer."
 authors:
   - "sumith-puri"
@@ -32,7 +31,7 @@ All of this is for Apache Kafka v3.4 on Windows 10.
 4. UnZIP/UnTAR Apache Kafka Downloaded in (2)
 5. Use a Text Editor like \[ Notepad++ \] for Editing
 
-![](AVvXsEhDK7xTGu-H4ZyFHWetkwEfKxIEjdMZuqYw-d703d080.png)
+![Diagram of Apache Kafka at the center connecting databases, SaaS systems such as Oracle, Salesforce and SAP, and applications](AVvXsEhDK7xTGu-H4ZyFHWetkwEfKxIEjdMZuqYw-d703d080.png)
 
 ### Version 3.4.0
 
@@ -44,13 +43,13 @@ Apache Kafka Version 3.4.0 was Released on Feb 7, 2023, This article specificall
 
 Create a folder to hold Zookeeper Data by modifying the file zookeper.properties (File is Located under {KAFKA_HOME}/config/). Create a Folder named zk-data (or as per your wish). In my case, I created this under {KAFKA_HOME}. You may then modify your properties file as show in the image below. Modify your dataDir to point to the newly created folder.
 
-![](AVvXsEgzsc5xL2Lk86WYnajF_5MxDpZhWzg3g4fg-b9d7201e.jpg)
+![Text editor showing zookeeper.properties with the dataDir line changed to a folder under the Kafka directory](AVvXsEgzsc5xL2Lk86WYnajF_5MxDpZhWzg3g4fg-b9d7201e.jpg)
 
 #### 0. Configure Kafka (Kafka Logs)
 
 For the purpose of kafka logs, you can create a folder with the name kafka-logs. In my case, I created this under {KAFKA_HOME}. You may then modify your properties file as show in the image below. The property to be modified is log.dirs in server.properties that should now point to the newly created folder.
 
-![](AVvXsEj9NXAyXlj-enEDvFT75mgGDcZaEmGb5hwB-1af520ce.jpg)
+![Text editor showing server.properties with the log.dirs line pointing to a kafka-logs folder](AVvXsEj9NXAyXlj-enEDvFT75mgGDcZaEmGb5hwB-1af520ce.jpg)
 
 #### 1. Starting Zookeeper
 
@@ -60,7 +59,7 @@ First, Zookeeper has to be started using the following command.
 zookeeper-server-start.bat ..\..\config\zookeeper.properties
 ```
 
-![](AVvXsEgN6T9mXaYRzYuRSC76JIVveE6aF3qO49HQ-fdb08c5f.jpg)
+![Command prompt output of Zookeeper starting up with its ASCII-art banner](AVvXsEgN6T9mXaYRzYuRSC76JIVveE6aF3qO49HQ-fdb08c5f.jpg)
 
 #### 2. Starting Kafka Server
 
@@ -70,7 +69,7 @@ Next, we will start the Kafka Server using the following command.
 kafka-server-start.bat ..\..\config\server.properties
 ```
 
-![](AVvXsEgtQI7iKLLbbqtLjhsxDjKVhT-C9wYjkVIy-eaa364f3.jpg)
+![Command prompt output of the Kafka server starting up](AVvXsEgtQI7iKLLbbqtLjhsxDjKVhT-C9wYjkVIy-eaa364f3.jpg)
 
 #### 3. Creating a Test Topic
 
@@ -80,7 +79,7 @@ Create a Kafka Topic to test out the Kafka Installation using the following comm
 kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
 ```
 
-![](AVvXsEjjiMOt1XyY3YkmDdyfZsg5_7CcUCp7-6jH-55df2f1e.png)
+![Command prompt running kafka-topics.bat and reporting 'Created topic test'](AVvXsEjjiMOt1XyY3YkmDdyfZsg5_7CcUCp7-6jH-55df2f1e.png)
 
 The above is an updated way to create topics in Kafka. In earlier versions of Kafka (Kafka v2), the suggested way to create topics was directly via Zookeeper. From v3, It has changed to create topics via Brokers.
 
@@ -98,7 +97,7 @@ For the version 3.\* the zookeeper is not any more a parameter, you should use -
 kafka-console-producer.bat --broker-list localhost:9092 --topic test
 ```
 
-![](AVvXsEixfqIFVylNlbpptv-p8Y-ksVmCnHmxsPzc-6c7bc0ef.png)
+![Command prompt running the Kafka console producer and sending a test message](AVvXsEixfqIFVylNlbpptv-p8Y-ksVmCnHmxsPzc-6c7bc0ef.png)
 
 #### 5. Create Kafka Consumer
 
@@ -106,6 +105,6 @@ kafka-console-producer.bat --broker-list localhost:9092 --topic test
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
-![](AVvXsEgKCyhyDTcZdiQZzlKthGwXauQFBgndg3OB-92df97e8.png)
+![Command prompt running the Kafka console consumer and receiving the test message from the beginning](AVvXsEgKCyhyDTcZdiQZzlKthGwXauQFBgndg3OB-92df97e8.png)
 
 Next in this series of articles will be the demonstration of a Core Java Kafka Producer and Consumer followed by an article on Spring Boot based Kafka Integration.

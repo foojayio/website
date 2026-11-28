@@ -1,13 +1,12 @@
 ---
 title: "Java, C, and Python: Today's Most Used Program Languages?"
 date: "2020-08-21T04:41:57+00:00"
-lastmod: "2021-08-23T12:59:10+00:00"
 description: "Looking at the latest TIOBE Programming Community Index, we see Java has surpassed C in the TIOBE ratings index, with Python holding steady in third."
 authors:
   - "kevinfarnham"
 image: "tiobe_20200820.png"
 categories:
-  - "Java"
+  - "Research"
 related_posts:
   - "aggregation-optimization-in-mongodb-optimizing-many-to-many-relationships-part-3"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
@@ -16,7 +15,7 @@ related_posts:
 ---
 
 Looking at the latest [TIOBE Programming Community Index](https://www.tiobe.com/tiobe-index/), we see that Java has recently surpassed C in the TIOBE ratings index, while Python is holding steady in the third position:
-![](tiobe_20200820.png)
+![TIOBE index line chart from 2002 to 2020 with Java falling just below C at the latest reading](tiobe_20200820.png)
 
 Back in 2014, I wrote an analysis of the TIOBE data at that time period, claiming that: [TIOBE Is (Unintentionally) Misleading; in Truth, Interest in Java Is Surging](https://community.oracle.com/blogs/editor/2014/04/23/tiobes-unintentionally-misleading-truth-interest-java-surging).
 

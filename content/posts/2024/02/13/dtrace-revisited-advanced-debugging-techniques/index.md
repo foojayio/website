@@ -1,7 +1,6 @@
 ---
 title: "DTrace Revisited: Advanced Debugging Techniques"
 date: "2024-02-13T07:46:04+00:00"
-lastmod: "2024-02-13T07:50:14+00:00"
 description: "Explore the power of DTrace for system debugging and optimization: a comprehensive guide on its capabilities, performance, and applications."
 canonical: "https://debugagent.com/dtrace-revisited-advanced-debugging-techniques"
 authors:

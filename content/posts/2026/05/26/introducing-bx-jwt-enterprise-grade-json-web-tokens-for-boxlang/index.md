@@ -1,7 +1,6 @@
 ---
 title: "Introducing bx-jwt: Enterprise-Grade JSON Web Tokens for BoxLang"
 date: "2026-05-26T10:14:00+00:00"
-lastmod: "2026-05-26T10:19:43+00:00"
 description: "JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and…"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "bx-jwt.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Library"
   - "Security"
   - "Tools"
@@ -20,7 +18,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](bx-jwt-700x467.jpg)
+![Infographic for the bx-jwt BoxLang module: JWT and JWE support, multiple algorithms, named key registry, token refresh and secure defaults](bx-jwt-700x467.jpg)
 
 JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and zero security footguns — is anything but trivial. Today, we're shipping **bx-jwt**, a production-ready JWT/JWE module for BoxLang that handles all of it out of the box, so you can focus on building, not fighting cryptography.
 

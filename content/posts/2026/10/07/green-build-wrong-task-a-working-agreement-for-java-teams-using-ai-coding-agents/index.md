@@ -7,7 +7,6 @@ authors:
 image: "cover.jpg"
 categories:
   - "AI"
-  - "Java"
   - "Testing"
   - "Developer Tools"
 related_posts:

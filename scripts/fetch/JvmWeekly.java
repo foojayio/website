@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 
 /**
  * Writes data/jvm-weekly.yaml -- every edition of Artur Skowronski's JVM Weekly
- * newsletter that is a Foojay roundup, rendered at /jvm-weekly/ ("Foojay
+ * newsletter that is a Foojay roundup, rendered at /month-overview/ ("Foojay
  * Monthly Review") and linked from the News menu. Runs once a day from
  * .github/workflows/sync-external-content.yml.
  *
@@ -176,7 +176,7 @@ public class JvmWeekly {
 
     /** Attributable rather than disguised: who this is, and where to complain. */
     static final String USER_AGENT =
-            "foojay.io-jvm-weekly/1.0 (+https://foojay.io/jvm-weekly/; monthly Foojay roundup index, refreshed daily)";
+            "foojay.io-jvm-weekly/1.0 (+https://foojay.io/month-overview/; monthly Foojay roundup index, refreshed daily)";
 
     /** Pause between per-post body fetches. Generous, because this endpoint
      *  rate-limits and a run that trips it learns nothing. */

@@ -1,7 +1,6 @@
 ---
 title: "Have you upgraded to Cassandra 4.0 yet?"
 date: "2022-03-11T08:35:20+00:00"
-lastmod: "2022-03-11T09:00:38+00:00"
 description: "If you’re a current Cassandra user, upgrading to the latest releases can be fairly simple and requires no downtime."
 canonical: "https://jaxenter.com/cassandra-4-0-175016.html"
 authors:
@@ -18,7 +17,7 @@ related_posts:
   - "announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes"
 ---
 
-![](shutterstock_140530141-350x233-1.jpg) © Shutterstock / Phototribe   
+![Number 4 painted in red and blue on a paving stone, a nod to Cassandra 4.0](shutterstock_140530141-350x233-1.jpg) © Shutterstock / Phototribe   
 
 Alongside stability, Apache Cassandra 4.0 stands out for its ability to scale operations faster, its new auditing capabilities, and the way it embraces privacy by design. In this article, we'll cover the new features and walk you through the steps required to upgrade to Cassandra 4.0.
 
@@ -45,7 +44,7 @@ Zero Copy Streaming is used in scaling operations. This is where Cassandra nodes
 ### **Incremental repair improvements**
 
 Many of the fundamentals of the algorithm for incremental anti-entropy repair were rewritten in 4.0. This is a background process where Cassandra keeps data replicas in sync. As well as being hardened, repair has been optimized, for example, a full repair doesn't require a costly anti-compaction during the preparation phase anymore. These changes have meant that maintaining consistency across data replicas is less resource-intensive and makes incremental repair faster.
-![](incremental-repair-light-2x-768x332-1.png)
+![Diagram of incremental repair: SSTables move from unrepaired through pending repair to repaired across three phases](incremental-repair-light-2x-768x332-1.png)
 
 ### Visibility through virtual tables
 
@@ -56,12 +55,12 @@ For years, the primary way to observe Cassandra clusters and ensure your deploym
 Understanding who is accessing data (and when) is critical to making sure companies comply with regulatory and security requirements, such as GDPR, PCI, and SOX. This is where the new audit logging features come in. Operators can now track DML, DDL, and DCL activity with a minimal performance hit. There is also a new FQL tool that enables the capture and replay of live traffic data from production workloads for analysis.
 
 Thanks to the work of Blake Eggleston, Cassandra 4.0 also has new controls that enable enterprises to create authorization for data access on a per data center basis. This lets an operator restrict the access of a Cassandra role to specific data centers, for example, where you might have data centers in both Europe and the US.
-![](audit-logging-light-2x-768x1090-1-721x1024.png)
+![Flow diagram of Cassandra audit logging: requests pass the AuditLogManager to loggers and on to a custom implementation](audit-logging-light-2x-768x1090-1-721x1024.png)
 
 ### Java 11 support
 
 This an exciting feature that enables 4.0 to take advantage of the new garbage collection algorithm, [ZGC](https://jaxenter.com/apache-cassandra-java-174575.html). This will help teams with optimization processes, as it reduces garbage collection pause times when working on large heap sizes. This will reduce collection to a few milliseconds with no latency degradation as heap sizes increase. (Note: ZGC is considered experimental at time of writing).
-![](throughput-results-light-2x-768x491-1.png)
+![Bar chart: Cassandra 4.0 with ZGC achieves the highest throughput for key/value and tabular workloads, ahead of 3.11](throughput-results-light-2x-768x491-1.png)
 
 ### Better compression
 

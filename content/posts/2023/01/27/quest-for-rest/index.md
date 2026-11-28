@@ -1,7 +1,6 @@
 ---
 title: "Quest for REST"
 date: "2023-01-27T14:48:38+00:00"
-lastmod: "2023-01-27T14:49:15+00:00"
 description: "SOAP's biggest flaw was its complexity and its focus on big companies, but it at least provided a shared set of standard specifications."
 canonical: "https://blog.frankel.ch/quest-for-rest/"
 authors:
@@ -20,7 +19,7 @@ Since I started working for [Apache APISIX](https://apisix.apache.org/), I have 
 
 In the current literature, REST is generally promoted as the best thing since sliced bread. Yet, it comes with lots of challenges. In 2010(!), Martin Fowler wrote a post on the [glory of REST](https://martinfowler.com/articles/richardsonMaturityModel.html). He lists three steps for an API to become *truly* REST:
 
-![](https://res.cloudinary.com/practicaldev/image/fetch/s--4ts2fq1T--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png)
+![Richardson Maturity Model diagram showing the levels of REST adoption](https://res.cloudinary.com/practicaldev/image/fetch/s--4ts2fq1T--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://martinfowler.com/articles/images/richardsonMaturityModel/overview.png)
 
 In each of these steps, issues lurk. This blog post focuses on listing some of them and providing hints at ways to solve them.
 
@@ -113,7 +112,7 @@ A common issue with REST is the lack of standards; HATEOAS is no different. The 
 
 Here's a quick diagram that summarizes the proposal:
 
-{{< img src="hal-700x291.png" class="size-medium aligncenter" width="700" height="291" >}}
+{{< img src="hal-700x291.png" alt="UML diagram of HAL: a Resource Object holds _links to Resource Links with href, type and title, and _embedded objects" class="size-medium aligncenter" width="700" height="291" >}}
 
 We can rework the above with HAL as the following:
 
@@ -152,7 +151,7 @@ Content-Type: application/hal+json
 
 Another attempt at standardization is [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288.html), *aka* Web Linking. It describes the format and contains a [link relationship registry](https://www.rfc-editor.org/rfc/rfc5988#section-6.2.2), *e.g.* , `alternate` and `copyright`. The most significant difference with HAL is that RFC 8288 communicates links via HTTP response headers.
 
-![](web-linking.png)
+![UML class diagram: a Link with target, context and rel attributes is associated with many Attributes holding name and value](web-linking.png)
 
 ```json
 HTTP/2 200 OK

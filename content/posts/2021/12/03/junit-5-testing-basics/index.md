@@ -1,7 +1,6 @@
 ---
 title: "JUnit 5 Testing Basics"
 date: "2021-12-03T12:29:06+00:00"
-lastmod: "2022-06-01T20:13:05+00:00"
 description: "Continuing the series on JUnit 5, this artcle shows examples of a JUnit test which makes use of a few of the annotations from Part 1!"
 canonical: "https://cguntur.me/2019/07/13/using-junit5-part-2/"
 authors:

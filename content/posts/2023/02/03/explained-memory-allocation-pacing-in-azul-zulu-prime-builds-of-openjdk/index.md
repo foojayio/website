@@ -1,7 +1,6 @@
 ---
 title: "Memory Allocation Pacing in Azul Zulu Prime builds of OpenJDK"
 date: "2023-02-03T13:29:09+00:00"
-lastmod: "2025-07-15T14:25:48+00:00"
 description: "Allocation Pacing (AP) is a technique within the JVM of Azul Zulu Prime builds of OpenJDK to prevent long memory allocation delays."
 canonical: "https://www.azul.com/blog/memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk-explained/"
 authors:
@@ -42,7 +41,7 @@ ZST coordinates memory use between Azul Platform Prime and the Linux operating s
 Let's explain Allocation Pacing based on this example graph. The command-line argument Xmx defines the memory limit assigned to the JVM (**grey line**).
 
 Based on a configured value, a target is defined for the GC to keep the total used memory below a specific percentage of Xmx (**green line** ). Depending on the rate of how memory gets allocated (climbing **black line** ), a prediction is made to **start the GC cycle** (**green point**) at the right time not to exceed the target.
-![](allocation-pacing-graph.png) Graph of Allocation Pacing
+![Graph of heap usage over time showing xmx, pacing threshold, GC target, and predicted versus real GC length](allocation-pacing-graph.png) Graph of Allocation Pacing
 
 The application may surprise the GC with a higher allocation rate or live set than predicted. This may lead the heap usage to go over the GC target (**green line** ). If the heap usage keeps growing and reaches the pacing threshold (**red line**), the AP becomes active. AP enforces the maximum allocation rate to reach a better match with the GC cycle length.
 
@@ -81,7 +80,7 @@ Starting early brings the risk of doing unneeded disturbance, as the GC may rele
 To simulate allocation delays and illustrate the abilities of AP, we used EHCachePounder based benchmark that exercises [EHCache](https://www.ehcache.org/). We added a Java agent that periodically consumes a lot of heap. This makes both the allocation rate and live set suddenly jump up. The GC gets surprised, which leads to heap exhaustion before the GC can reclaim any memory. As a result, the benchmark threads start experiencing allocation delays.
 
 If we enable AP, the allocation rate becomes controllable and no longer outruns the GC cycle. All threads, including the benchmark and Java agent, get paced proportionally to their allocations after the heap usage crosses the threshold. In the "GC and Safepoint: Pause Duration," we see a significant decrease in the maximum magnitude of allocation delays (**blue line**).
-![](ap-pause-duration-compared-1024x295.png) Comparison of "GC and Safepoint: Pause Duration"
+![Pause duration charts: frequent pauses up to 0.25 s without Allocation Pacing, nearly none with it](ap-pause-duration-compared-1024x295.png) Comparison of "GC and Safepoint: Pause Duration"
 
 The improvement happens not only in the GC logs but also in the benchmark metrics themselves. The benchmark reports the duration per iteration in microseconds, with one iteration taking \~0.5 ms on average. Without pacing, we see huge outliers at p99.9+.
 
@@ -95,7 +94,7 @@ Once AP has been enabled, the peaks go down a lot while keeping lower percentile
 The following chart shows the difference in the number of allocation delays happening per GC cycle. Without AP, the threads, once they run into a delay, have to wait till the GC releases some memory (**red line** – "Allocation Failed Delays Count").
 
 Oppositely, with AP enabled, there are thousands of small delays (**violet line** – "Allocation Paced Delays Count"). GC Log Analyzer provides distinct legends depending on the allocation delay origin to make them easy to differentiate. This chart is the best option to answer whether AP gets engaged.
-![](ap-delays-compared-1024x295.png) Comparison of "Allocation Failed Delays Count" versus "Allocation Paced Delays Count"
+![Delay count charts: few failed allocation delays without Allocation Pacing versus thousands of paced delays with it](ap-delays-compared-1024x295.png) Comparison of "Allocation Failed Delays Count" versus "Allocation Paced Delays Count"
 
 ## Troubleshooting
 
@@ -104,7 +103,7 @@ Oppositely, with AP enabled, there are thousands of small delays (**violet line*
 As illustrated in the benchmark, with [Azul GC Log Analyzer](https://docs.azul.com/prime/GC-Log-Analyzer) and a log file of your application, you can detect if the AP has been active.
 
 The "Allocation Paced Delays Count" (**violet line**) in the "GC and Safepoint/GC and Safepoint: Application Thread Delays Count" chart shows the number of small delays introduced by AP during each GC cycle.
-![](allocation-paced-delays-count-smaller-1024x426-1.png) Allocation Paced Delays Count
+![Azul GC Log Analyzer showing the Application Thread Delays Count chart with allocation paced delays](allocation-paced-delays-count-smaller-1024x426-1.png) Allocation Paced Delays Count
 
 ### Is AP indicating a problem?
 

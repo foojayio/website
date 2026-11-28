@@ -1,7 +1,6 @@
 ---
 title: "Journey of a Java Champion: Bert Jan Schrijver's Path to Mastery and Community Leadership"
 date: "2024-01-10T15:50:26+00:00"
-lastmod: "2024-01-10T16:05:43+00:00"
 description: "Explore the insightful journey of Bert Jan Schrijver, a Java Champion, as he discusses his path in software development, the role of community, and the evolution of Java in this enlightening interview."
 authors:
   - "bazlur-rahman"
@@ -15,7 +14,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="image.jpg" class="alignright size-full" width="400" height="400" >}}
+{{< img src="image.jpg" alt="Portrait of Bert Jan Schrijvers, smiling, in a dark top" class="alignright size-full" width="400" height="400" >}}
 
 Bert Jan is CTO at [OpenValue](https://www.openvalue.eu/) and focuses on Java, software architecture, Continuous Delivery and DevOps.   
 
@@ -99,7 +98,7 @@ And for attendees to give feedback to the speaker or the organization when this 
 The first one was by Jago de Vreede, who wanted to play a guitar. But instead of learning to play the guitar himself, he automated it using a Raspberry Pi, servo motors and a bit of Java 😉
 
 Here's a picture of Jago and his automatic guitar:
-![](image-1.jpg)
+![Guitar-playing robot: a guitar fitted with servo motors and a Raspberry Pi, with a monitor showing sheet music for 'Slow down brother'](image-1.jpg)
 
 <https://x.com/JagoVreede/status/1192378065516683264?s=20>.
 

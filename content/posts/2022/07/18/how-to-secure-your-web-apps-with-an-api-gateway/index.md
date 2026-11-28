@@ -1,7 +1,6 @@
 ---
 title: "How to Secure Your Web Apps With An API Gateway"
 date: "2022-07-18T18:50:10+00:00"
-lastmod: "2022-07-18T19:13:51+00:00"
 description: "When header values depend on the web app, we need to reload the configuration without downtime and Continuous Deployment pipeline integration"
 canonical: "https://blog.frankel.ch/secure-webapps-api-gateway/"
 authors:

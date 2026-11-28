@@ -23,10 +23,8 @@
   foojay slugs are substrings of another slug. Strict matches on a hash of the
   term, which is exact.
 
-  THE IMPORTED WORDPRESS COMMENTS ARE NOT IN HERE. They live in the repo, one
-  comments.json per post bundle, rendered as its own section below this one by
-  partials/legacy-comments.html -- posting them into Discussions got the
-  posting account banned as spam. This partial owns NEW comments only.
+  The legacy WordPress comments were imported into these Discussions once,
+  slowly (see MAINTAINERS.md), not rendered from the repo.
 -->
 {{ $term := partial "comments-term.html" . }}
 {{ with $term }}

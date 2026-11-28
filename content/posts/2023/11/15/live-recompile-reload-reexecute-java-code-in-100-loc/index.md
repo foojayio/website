@@ -1,13 +1,11 @@
 ---
 title: "Live (re)compile, (re)load, (re)execute Java code in 100 LoC"
 date: "2023-11-15T16:22:05+00:00"
-lastmod: "2024-01-09T12:58:25+00:00"
 description: "A way to automatically (re)compile, (re)load and (re)execute code on file changed!"
 authors:
   - "anthony-goubard"
 image: "hot-reload-code-ant-commander-pro-1024x391-1.png"
 categories:
-  - "Java"
   - "JShell"
 related_posts:
   - "java-21-jep-445-unnamed-classes-and-instance-main-methods"
@@ -29,7 +27,7 @@ Here are some changes that simplify your first Java program:
 In this article, we'll write a program (**The Reloader**) to easily play with Java code without the need to know how to compile or run the code or print the result.
 
 The code will be automatically (re)compiled, (re)loaded, (re)executed and (re)printed to the output when the .java file is saved.  
-![](hot-reload-code-ant-commander-pro-1024x391.jpg) On the left side, the Java file that I edited and saved. On the right side, the code re-executed.
+![Ant Commander Pro with PlayWithNumbers.java in the editor and Reloader output of sorted random numbers in the console](hot-reload-code-ant-commander-pro-1024x391.jpg) On the left side, the Java file that I edited and saved. On the right side, the code re-executed.
 
 |                              |            |              |                                |              |
 |------------------------------|------------|--------------|--------------------------------|--------------|
@@ -169,7 +167,7 @@ public class Reloader {
 ```
 
 Now start it with ***java Reloader.java PlayWithNumbers.java*** and edit the *PlayWithNumbers.java* file as you wish.  
-[![](hot-reload-code-netbeans2-1024x576.jpg)](hot-reload-code-netbeans2.png) Playing with numbers and stream.
+[![NetBeans with Reloader.java and PlayWithNumbers.java open and a terminal showing the program re-run after each edit](hot-reload-code-netbeans2-1024x576.jpg)](hot-reload-code-netbeans2.png) Playing with numbers and stream.
 
 ## Going further
 

@@ -1,7 +1,6 @@
 ---
 title: "Johannes Bechberger's Tour d'Europe"
 date: "2023-06-16T17:08:53+00:00"
-lastmod: "2023-06-16T17:16:25+00:00"
 description: "I spoke in two weeks in 3 countries, 4 cities and 5 different venues. This is my report on the trip. Check it out!"
 authors:
   - "johannes-bechberger"
@@ -22,7 +21,7 @@ Between 31st May and 14th June, I was on tour, giving seven talks in 4 cities in
 * 10th and 11th of June: [Gulasch Programmier Nacht Karlsruhe](https://cfp.gulas.ch/gpn21/speaker/9ZMNT9/)
 * 14th of June: [Karlsruher Entwicklertag](https://www.entwicklertag.de/2023/conference_day.html)
 
-{{< img src="image-7.jpg" class="size-full is-resized" width="372" height="507" caption="A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla)." >}}
+{{< img src="image-7.jpg" alt="Google Maps route of the 2,483 km European tour by train through Arnhem, Karlsruhe, Munich, Zurich and Milan" class="size-full is-resized" width="372" height="507" caption="A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla)." >}}
 
 It was an exciting trip, and I had the pleasure of visiting friends in Zurich and Augsburg and a [grain mill shop](https://www.muehlen-kaiser.de/) in Munich.
 
@@ -41,15 +40,15 @@ Being in Milan for the first time was fantastic. I was able to stay with Mario F
 ## [OpenValue Munich Meetup: Writing a Profiler in 240 Lines of Pure Java](https://www.meetup.com/openvaluemuenchen/events/293736106/)
 
 I then went on to give a talk at the OpenValue Munich Meetup, based on the previous talk and my [Writing a Profiler in 240 Lines of Pure Java](https://mostlynerdless.de/blog/2023/03/27/writing-a-profiler-in-240-lines-of-pure-java/) article:  
-![](image-4-c544d5c1.jpg)
+![Speaker presenting the Sap Machine profiler talk at the OpenValue Munich meetup, with a laptop and a screen behind](image-4-c544d5c1.jpg)
 
 But before this, I stayed with friends in Augsburg and Zurich:  
-![](IMG_1398-2-1500x2000-9496534d.jpeg) Wooden tower near Oerlikon, nearby Zurich
+![A twisting wooden observation tower in a forest](IMG_1398-2-1500x2000-9496534d.jpeg) Wooden tower near Oerlikon, nearby Zurich
 
 ## [JDriven Full Stack Conference](https://jdriven.com/full-stack-conference-2023)
 
 I gave a similar talk, only with a little more information on why you shouldn't trust profilers ([see](https://mostlynerdless.de/blog/2023/02/20/do-you-trust-profilers-i-once-did-too/)), in [Nieuwegein](https://jdriven.com/full-stack-conference-2023):
-![](image-5-78e9bb32.jpg)
+![Speaker presenting to a seated audience in a meetup room at the JDriven conference](image-5-78e9bb32.jpg)
 
 This concluded my three talks outside of Karlsruhe.
 

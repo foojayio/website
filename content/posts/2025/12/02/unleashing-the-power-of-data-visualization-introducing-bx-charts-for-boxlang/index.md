@@ -14,7 +14,7 @@ related_posts:
   - "javafx-links-of-september-2025"
 ---
 
-![](bx-chart-release-700x467.jpg)
+![BoxLang BX-Charts release banner: a charting module for the BoxLang JVM language, over a dark blue chart background](bx-chart-release-700x467.jpg)
 
 In the world of modern web applications, data is king—but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, transforming complex datasets into intuitive, compelling narratives. Today, we're thrilled to introduce BX-Charts, a game-changing charting module that brings professional-grade data visualization directly into the BoxLang ecosystem. 🌟
 
@@ -40,7 +40,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 ## Code Samples: Bringing Data to Life
 
 1. Multi-Series Performance Analysis with Per-Series Border Styling  
-   ![](bx-charts-1-700x324.png)
+   ![BoxLang bar chart 'Quarterly Performance Analysis' showing revenue, expenses and net profit per quarter with styled borders](bx-charts-1-700x324.png)
 
 ```java
 <bx:chart title="Quarterly Performance Analysis"
@@ -75,7 +75,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 ```
 
 2. Line Chart with Variable Border Widths  
-   ![](bx-charts-2-700x316.png)
+   ![BoxLang line chart 'Website Traffic Trends' where total visitors rise steadily above thinner returning-visitor and bounce-rate lines](bx-charts-2-700x316.png)
 
 ```java
 <bx:chart title="Website Traffic Trends"
@@ -109,7 +109,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 ```
 
 3. Responsive Dashboard Layout  
-   ![](bx-charts-3-700x449.png)
+   ![BoxLang dashboard of four charts in a 2x2 grid: sales pie, traffic bars, performance radar and growth trend line](bx-charts-3-700x449.png)
 
 ```java
 <div class="row g-3">
@@ -141,7 +141,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 ```
 
 4. Background and Font Styling  
-   ![](bx-charts-4-700x296.png)
+   ![BoxLang bar chart 'Font Styling Demo' with three colored bars for Item A, B and C and custom axis fonts](bx-charts-4-700x296.png)
 
 ```java
 <bx:chart format="canvas" title="Font Styling Demo" 
@@ -165,7 +165,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 ```
 
 5. Bubble Chart for Multi-Dimensional Analysis  
-   ![](bx-charts-5-700x349.png)
+   ![BoxLang bubble chart 'Product Portfolio Analysis' plotting revenue against market share with differently sized bubbles](bx-charts-5-700x349.png)
 
 ```java
 <bx:chart title="Product Portfolio Analysis"
@@ -187,7 +187,7 @@ If you have one of our +/++ licenses, you will get personalized support and impl
 
 ## Exploring the Possibilities 🔍
 
-![](boxlang-charts-explorer-700x372.png)  
+![BoxLang Charts Explorer home page promoting 10 chart types, custom colors and responsive design, with Get Started and GitHub buttons](boxlang-charts-explorer-700x372.png)  
 
 We've built an interactive Chart Explorer at **[charts.boxlang.io](https://charts.boxlang.io "charts.boxlang.io")**, where you can:
 

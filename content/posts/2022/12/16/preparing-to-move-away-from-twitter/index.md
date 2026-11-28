@@ -1,7 +1,6 @@
 ---
 title: "Preparing to Move Away from Twitter"
 date: "2022-12-16T06:42:40+00:00"
-lastmod: "2022-12-16T07:36:16+00:00"
 description: "I opened my Twitter account more than 13 years ago, in August 2009. For 12 years, I kept focusing on professional-related content: Java, the JVM,…"
 canonical: "https://blog.frankel.ch/move-away-twitter/"
 authors:
@@ -24,7 +23,7 @@ Of course, I wanted to support them and started to use my Twitter account to fig
 
 With the acquisition of Twitter by Elon Musk, I'm afraid it's going to get much worse - case in point:
 
-[![](Screenshot-2022-12-11-at-17.59.21-782x1024.jpg)](https://twitter.com/SarahKSilverman/status/1589418271308386304)
+[![Tweet by Sarah Silverman mocking Elon Musk's Twitter, showing his 'Comedy is now legal' post and her account being locked](Screenshot-2022-12-11-at-17.59.21-782x1024.jpg)](https://twitter.com/SarahKSilverman/status/1589418271308386304)
 
 Some (most?) people I know planned or already had moved away. The target seems to be Mastodon, an alternate decentralized Open Source using the [ActivityPub](https://en.wikipedia.org/wiki/ActivityPub) protocol:
 > Mastodon is free and open-source software for running self-hosted social networking services. It has microblogging features similar to the Twitter service, which are offered by a large number of independently run Mastodon nodes (technically known as instances), each with its own code of conduct, terms of service, privacy options, and moderation policies.

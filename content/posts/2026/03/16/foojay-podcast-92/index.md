@@ -8,7 +8,6 @@ authors:
   - "simonritter"
 image: "episode-92-java-26.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
 related_posts:

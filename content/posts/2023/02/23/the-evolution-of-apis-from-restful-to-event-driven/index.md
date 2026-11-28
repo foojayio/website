@@ -1,7 +1,6 @@
 ---
 title: "The evolution of APIs: From RESTful to Event-Driven"
 date: "2023-02-23T08:23:25+00:00"
-lastmod: "2023-02-23T08:45:55+00:00"
 description: "Transitioning from synchronous to event-driven APIs modernizes the enterprise and unlocks real-time events and information."
 authors:
   - "hari-rangarajan"

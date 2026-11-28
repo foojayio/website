@@ -1,13 +1,14 @@
 ---
 title: "Azul Zulu OpenJDK 15 on the Raspberry Pi"
 date: "2020-09-21T07:54:30+00:00"
-lastmod: "2020-09-21T08:34:45+00:00"
 description: "For this post I did some experiments with Java 15, reusing the Ubuntu 64bit SD card, which was also used for my earlier post on startup speed."
 authors:
   - "frankdelporte"
 image: "Screenshot-2020-09-21-at-10.21.40-1024x264.png"
 categories:
   - "Raspberry Pi"
+  - "Quarkus"
+  - "Spring"
 related_posts:
   - "startup-spring-quarkus-raspberry-pi"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
@@ -31,7 +32,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode)
 OpenJDK Java 15 was released on 2020-09-15, check out the [Java Version Almanac](https://javaalmanac.io/jdk/15/) for more details.
 
 Immediately after that, Azul released [Azul Zulu OpenJDK 15](https://www.azul.com/downloads/zulu-community/?architecture=x86-64-bit&package=jdk), including a new version of their free [Zulu Embedded JDK, including a version for ARM 64-bit](https://www.azul.com/downloads/zulu-community/?version=java-15-mts&os=linux&architecture=arm-64-bit&package=jdk), which is ideal for the latest Raspberry Pi boards!
-![](Screenshot-2020-09-21-at-10.21.40-1024x264.png)
+![Zulu download page filtered to Java 15, Linux, ARM 64-bit, JDK, showing the Zulu 15.27.17 .tar.gz download](Screenshot-2020-09-21-at-10.21.40-1024x264.png)
 
 With the [SDKMAN tool](https://sdkman.io/), you can get a list of available JDKs on your Raspberry Pi and switch to Java 15 with a single command: `sdk install java 15.0.0-zulu`.
 
@@ -136,6 +137,6 @@ Quarkus seems to need less memory on Java 15 and both Spring and Quarkus have a 
 Do you need to switch from OpenJDK 11 to 15? No, not really, based on these results.
 
 But each new version has bug and security fixes, new features, and generic improvements:
-![](Screenshot-2020-09-21-at-09.32.17-1024x557.jpg)
+![foojay OpenJDK Update & Release Details for Java 15.0.0 listing highlights such as ZGC, biased locking removal and text blocks](Screenshot-2020-09-21-at-09.32.17-1024x557.jpg)
 
 [Click here](https://javaalmanac.io/jdk/15/) to see all the details and vote on your favorite new features and fixes!

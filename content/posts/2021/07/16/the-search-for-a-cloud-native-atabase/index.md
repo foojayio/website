@@ -1,7 +1,6 @@
 ---
 title: "The Search for a Cloud-Native Database"
 date: "2021-07-16T07:40:06+00:00"
-lastmod: "2021-11-10T22:59:33+00:00"
 description: "Automation is often the final milestone to be achieved, but running databases in Kubernetes can actually help us progress toward this goal."
 canonical: "https://k8ssandra.io/blog/articles/the-search-for-a-cloud-native-database/"
 authors:
@@ -30,7 +29,7 @@ Here's how the Cloud Native Computing Foundation (CNCF) [defines the term](https
 > These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil."
 
 This is a rich definition, but it can be a challenge to use this to define what a cloud-native database is, as evidenced by the **Database** section of the CNCF Landscape Map:
-![](cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.jpg)
+![CNCF cloud native landscape of database projects, with TiKV and Vitess highlighted as graduated, among dozens of logos](cncf-landscape-db_hu725d4d7b3d105a5db9f2db4c635f96d6_353693_800x0_resize_catmullrom_2.jpg)
 
 Databases are just a small portion of a crowded cloud computing landscape
 

@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 4): Maven Lifecycle"
 date: "2021-10-08T09:00:35+00:00"
-lastmod: "2021-10-08T09:00:36+00:00"
 description: "In Part 4 of the series, a walkthrough of the Apache Maven lifecycles and executions is covered in quite some detail!"
 canonical: "https://cguntur.me/2020/05/29/understanding-apache-maven-part-4/"
 authors:

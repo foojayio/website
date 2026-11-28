@@ -1,7 +1,6 @@
 ---
 title: "How To Modernize Legacy Code in Production"
 date: "2022-05-09T15:58:36+00:00"
-lastmod: "2022-05-09T16:07:02+00:00"
 description: "Rewriting applications is easy. Doing it while preserving compatibility... that's a bit hard. Doing it live in prod. That's the big challenge!"
 canonical: "https://lightrun.com/best-practices/modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing/"
 authors:

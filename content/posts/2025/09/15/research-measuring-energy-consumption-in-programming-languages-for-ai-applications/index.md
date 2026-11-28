@@ -1,7 +1,6 @@
 ---
 title: "Research: Measuring Energy Consumption in Programming Languages for AI Applications"
 date: "2025-09-15T07:03:00+00:00"
-lastmod: "2025-09-15T14:24:46+00:00"
 description: "I hope my research paper helps the community understand not only the importance of proper language platform selection, but also hardware choice considerations."
 authors:
   - "miro-wengner"
@@ -9,7 +8,6 @@ image: "20250915_ArticleLogo.png"
 categories:
   - "AI"
   - "Arm"
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Pi4J"

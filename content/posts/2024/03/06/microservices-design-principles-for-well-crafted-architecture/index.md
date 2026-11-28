@@ -1,7 +1,6 @@
 ---
 title: "Microservices Design Principles"
 date: "2024-03-06T10:48:38+00:00"
-lastmod: "2024-03-06T13:01:42+00:00"
 description: "Dive into the Microservices Design Principles with our in-depth guide to creating modular, scalable, and resilient software systems."
 authors:
   - "abo-saad-muaath"
@@ -135,7 +134,7 @@ Tools like Spring Boot and Netflix Eureka can help create microservices that sca
 
 ## Evolutionary Design and Continuous Improvement
 
-![](microservices-part2-5-700x280.jpg)
+![Seedlings at five growth stages, from a sprouting seed to a leafy plant, illustrating evolutionary growth](microservices-part2-5-700x280.jpg)
 
 In a rapidly evolving technological landscape, systems must adapt and improve continuously.
 

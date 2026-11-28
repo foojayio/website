@@ -1,7 +1,6 @@
 ---
 title: "Controlling an LCD Display with Spring and Thymeleaf on the Raspberry Pi"
 date: "2021-05-19T07:10:12+00:00"
-lastmod: "2021-05-19T07:10:16+00:00"
 description: "Igor De Souza shares a lot fun and inspirational experiments with Java on Raspberry Pi. Some of those were already shared here on Foojay.io."
 canonical: "http://www.igfasouza.com/blog/spring-thymeleaf-raspberry-pi-lcd/"
 authors:
@@ -24,7 +23,7 @@ related_posts:
 3. [Vert.x Example on the Raspberry Pi with a Virtual Potentiometer](https://foojay.io/today/vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer/)
 
 This time we want to highlight his work which combines a web app made with Spring and Thymeleaf, to control an LCD display connected to a Raspberry PI.
-![](spring_lcd.jpg)
+![Blue-backlit LCD display module next to the Spring, Raspberry Pi and Thymeleaf logos](spring_lcd.jpg)
 
 ## Frameworks and components
 
@@ -33,22 +32,22 @@ This time we want to highlight his work which combines a web app made with Sprin
 3. The **LCD display is an [ST7920 model](https://www.benl.ebay.be/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=St7920&_sacat=0)** (or 12864ZW), which is probably the cheapest 128×64 graphic LCD that you can find.
 4. This [**"Universal Character/Graphics LCD Library for Java"**](https://github.com/ribasco/ucgdisplay) by Rafael Ibasco is used to control the display.
 
-![](lcd_example01-1024x365.jpg)
+![Two photos of the LCD showing a pixel-art Star Wars logo and a Pikachu drawing](lcd_example01-1024x365.jpg)
 
 ## Wiring
 
-{{< img src="glcd-pinout-683x1024.jpg" class="size-large is-resized" width="683" height="1024" >}}
+{{< img src="glcd-pinout-683x1024.jpg" alt="Photo of a graphic LCD board with red labels marking pins: GND, 5V, SCK (13), MOSI (11) and CS (10)" class="size-large is-resized" width="683" height="1024" >}}
 
 The display is connected according to this table indicating the physical PIN number and its according BCM number used in the code:
-![](LCD_raspberry_map.png)
+![Table of Raspberry Pi pin connections for the LCD: pin 33 GPIO 13 SCK, pin 35 GPIO 19 MOSI, pin 37 GPIO 26 CS](LCD_raspberry_map.png)
 
 ## Project idea
 
 Goal of this project, is to setup a simple Spring Boot Thymeleaf application, which shows a form with a 128×64 table. Each table position is the representation of a pixel of the LCD graphic display. This is achieved by using an array of bits with all the positions of this table.
-![](spring_thymeleaf_app01-1024x713.png)
+![Sketch of a Spring and Thymeleaf app on a Raspberry Pi driving the LCD, with a browser grid and Clear, Array and preview buttons](spring_thymeleaf_app01-1024x713.png)
 
 The user interface is limited with a button to convert the table to an array, and one to create a preview picture of the result.
-![](PXL_20210502_193343880-scaled-1-1024x768.jpg)
+![Photo of the web app on a monitor: a 128x64 pixel grid with Clear all, Convert to the array and Preview the array buttons](PXL_20210502_193343880-scaled-1-1024x768.jpg)
 
 The LCD graphic Display expects an Array of Bytes in the XBM format. [XBM is a monochrome bitmap format](https://en.wikipedia.org/wiki/X_BitMap) in which data is stored as a C language data array. It is primarily used for the storage of cursor and icon bitmaps for use in X graphical user interfaces.
 
@@ -94,8 +93,8 @@ You can get the full code from [this GitHub repository](https://github.com/igfas
 There are some XBM files inside the resources folder and you can follow up on the API example to display these images.
 
 {{< gallery cols="2" >}}
-lcd_example02-1024x404.jpg
-lcd_example03-1024x364.jpg
+lcd_example02-1024x404.jpg | | Blue graphic LCD connected to a Raspberry Pi showing the Java logo, next to another showing the Raspberry Pi logo
+lcd_example03-1024x364.jpg | | Two LCD screens showing the Sepultura and Slayer band logos
 {{< /gallery >}}
 
 Some additional work is still needed to finish the logic for a combobox to show all XMB files inside resources and once selected, display that image on the LCD. But as you can see in this video, the Thymeleaf table can already be used to draw an image, which can be displayed on the screen.

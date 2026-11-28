@@ -1,7 +1,6 @@
 ---
 title: "A Quick Look At Faces (JSF) 4.0 In Jakarta EE 10"
 date: "2023-02-17T09:07:05+00:00"
-lastmod: "2023-02-17T09:07:07+00:00"
 description: "Learn why Jakarta Faces is a great choice especially as a Java developer when you need a UI framework for your application!"
 canonical: "https://blog.payara.fish/a-quick-look-at-faces-jsf-4.0-in-jakarta-ee-10"
 authors:

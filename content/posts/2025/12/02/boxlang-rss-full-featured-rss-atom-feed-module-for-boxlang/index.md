@@ -1,7 +1,6 @@
 ---
 title: "BoxLang RSS: Full-Featured RSS/Atom Feed Module for BoxLang"
 date: "2025-12-02T11:19:11+00:00"
-lastmod: "2025-12-02T11:44:24+00:00"
 description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang!"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Release Notes"
   - "Tools"
   - "Tutorials"
@@ -21,7 +19,7 @@ related_posts:
   - "idempotent-spring-boot-starter"
 ---
 
-![](bx-rss-700x467.jpg)
+![BX-RSS banner for BoxLang's RSS/Atom feed module, with the BoxLang logo and an orange RSS icon](bx-rss-700x467.jpg)
 
 We're thrilled to announce the release of `bx-rss`, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to [BoxLang](https://www.boxlang.io/# "BoxLang")! Whether you're building a content aggregator, publishing a podcast, or exposing your application's data as feeds, `bx-rss` makes it incredibly simple.
 

@@ -1,7 +1,6 @@
 ---
 title: "Example Java Application with Embedded Jetty and a htmx Website"
 date: "2024-06-21T08:59:42+00:00"
-lastmod: "2024-06-21T08:59:43+00:00"
 description: "I was experimenting with a Java application that can act as a web server and includes the user interface HTML-files that get modified with htmx, to replace certain parts of the HTML with other ones created in Java."
 canonical: "https://webtechie.be/post/2024-03-28-java-jetty-htmx-websocket-example/"
 authors:
@@ -192,7 +191,7 @@ private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollecti
 
 I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/en-US/firefox/addon/simple-websocket-client/) to test WebSocket communication to make sure it works, before diving into the HTML client implementation... As you can see in the screenshot, the server sends a timestamp every second and answers when you send a message starting with "echo".
 
-{{< img src="websocket-test-300x260.png" class="size-thumbnail" width="300" height="260" >}}
+{{< img src="websocket-test-300x260.png" alt="Firefox WebSocket client connected to ws://localhost:9999/websocket/ws, with an echo test request and a log of timestamp messages" class="size-thumbnail" width="300" height="260" >}}
 
 ### htmx web requests
 
@@ -216,8 +215,8 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
 ```
 
 {{< gallery >}}
-index-before-1024x539.png
-index-after-1024x567.jpg
+index-before-1024x539.png | | Demo web page with buttons to request random text and add list items, a name form and a Duke image, before interaction
+index-after-1024x567.jpg | | The same demo page after interaction: random text, new timestamped list items and a greeting from the server
 {{< /gallery >}}
 
 ### htmx with websocket
@@ -241,8 +240,8 @@ By adding `ws-send` in any HTML-element, you instruct htmx to replace it's defau
 In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp from the server back to the client every second so it can display it's still connected.
 
 {{< gallery >}}
-websocket-before-1024x302.png
-websocket-after-1024x366.jpg
+websocket-before-1024x302.png | | Demo page with Request text and Replace paragraph buttons and a server-pushed timestamp, before interaction
+websocket-after-1024x366.jpg | | The same demo page after interaction: random text, a replaced paragraph and an updated server timestamp
 {{< /gallery >}}
 
 ## Running the Application

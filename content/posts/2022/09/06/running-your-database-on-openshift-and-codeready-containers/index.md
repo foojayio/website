@@ -1,7 +1,6 @@
 ---
 title: "Running your Database on OpenShift and CodeReady Containers"
 date: "2022-09-06T09:43:57+00:00"
-lastmod: "2022-09-06T09:43:59+00:00"
 description: "An introductory run-through of setting up your database on OpenShift, using your own hardware and RedHat's CodeReady Containers."
 canonical: "https://dev.to/datastax/running-your-database-on-openshift-and-codeready-containers-5f94"
 authors:
@@ -69,7 +68,7 @@ Open in a browser the URL [https://console-openshift-console.apps-crc.testing](h
 Log in using the `kubeadmin` username and password, as used above with the `oc login …` command. You might need to try a few times because of the self-signed certificate used.
 
 Once OpenShift has started and is running you should see the following webpage
-![](14977909-65ps3ym4omipxy6bypbo-c96ef485.png)
+![Red Hat OpenShift Container Platform web console Overview page of a local CodeReady Containers cluster, version 4.7.11](14977909-65ps3ym4omipxy6bypbo-c96ef485.png)
 
 Some commands to help check status and the startup process are
 
@@ -85,7 +84,7 @@ View details with 'oc describe <resource>/<name>' or list resources with 'oc get
 ```
 
 Before continuing, go to the CodeReady Containers Preferences dialog. Increase CPUs and Memory to \>12 and \>14GB correspondingly.
-![](14977914-xfya19mfue6tcsuyuvl4-4273405b.png)
+![CodeReady Containers preferences dialog with CPUs set to 12 and memory set to 14511 MB](14977914-xfya19mfue6tcsuyuvl4-4273405b.png)
 
 ## Create the OpenShift Local Volumes
 

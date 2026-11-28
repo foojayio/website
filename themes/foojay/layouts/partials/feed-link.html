@@ -1,12 +1,12 @@
 {{- /* A VISIBLE "subscribe by RSS" link -- the single definition of how a
-       feed is offered, so the home page, /today/, a category, /pedia/,
+       feed is offered, so the home page, /today/, a category, /java-terms-explained/,
        /calendar/ and a sponsor profile cannot each invent their own wording,
        icon or placement. A <link rel="alternate"> in <head> is not an offer:
        browsers stopped showing a button for it years ago.
 
        Context (.) is the page whose `rss` output format to link, or a dict
        with `page` set to it -- for a caller linking a feed other than its
-       own. /ai/ is a portal over one category, so it links THAT term's feed.
+       own.
 
        THE LABEL IS NOT A PARAMETER. It was, and one caller promptly said
        "Machine Learning RSS feed" while every other said "RSS feed", so the

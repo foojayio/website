@@ -1,7 +1,6 @@
 ---
 title: "Azul and JetBrains Collaborate to Enhance Runtime Performance for Kotlin Workloads"
 date: "2025-05-26T08:23:56+00:00"
-lastmod: "2025-08-14T12:33:35+00:00"
 description: "This strategic collaboration empowers Kotlin teams to accelerate development cycles and optimize application performance."
 authors:
   - "geertjan-wielenga"

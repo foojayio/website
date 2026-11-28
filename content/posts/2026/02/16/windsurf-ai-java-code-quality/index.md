@@ -1,7 +1,6 @@
 ---
 title: "Windsurf AI and SonarQube The Dream Team for AI Code Quality"
 date: "2026-02-16T09:34:00+00:00"
-lastmod: "2026-02-16T09:35:10+00:00"
 description: "Boost your Windsurf AI Java coding! 🚀 Learn how to use Skills and MCP to connect SonarQube directly to your IDE for high quality code. 💻✨"
 authors:
   - "jonathan-vila"
@@ -71,7 +70,7 @@ Instructions:
 ```
 
 **How skills look like in Windsurf:**
-![](Screenshot-2026-02-16-at-08.52.23.png)
+![Windsurf file explorer showing a code-quality-verifier SKILL.md in the .windsurf/skills folder of a Java project](Screenshot-2026-02-16-at-08.52.23.png)
 
 ## **The Problem: Local Skills vs. The Cloud ☁️**
 
@@ -121,19 +120,19 @@ To bring **Code Quality** checks into Windsurf via MCP, you can use Docker:
 2. **Manual vs Automatic installation**
 
 **Automatic:** In Windsurf, go to *Settings \> Cascade \> MCP Servers*.
-![](Screenshot-2026-02-16-at-09.02.05.png) ![](Screenshot-2026-02-16-at-09.02.13.png) ![](Screenshot-2026-02-16-at-09.02.23.png)
+![Windsurf settings, Cascade section, showing the MCP Servers entry and an Open MCP Marketplace link](Screenshot-2026-02-16-at-09.02.05.png) ![Windsurf MCP Marketplace searching for 'Sonarqube' with the official SonarQube MCP server listed](Screenshot-2026-02-16-at-09.02.13.png) ![SonarQube MCP server setup dialog asking for a token, organization key and optional server URL](Screenshot-2026-02-16-at-09.02.23.png)
 
 **Manual:** Add this to your \~/.codeium/windsurf/mcp_config.json file.
 
-{{< img src="Screenshot-2026-02-16-at-09.40.51.png" class="size-full is-resized" width="849" height="607" style="aspect-ratio:1.398688729316266;width:487px;height:auto" >}}
+{{< img src="Screenshot-2026-02-16-at-09.40.51.png" alt="JSON MCP server configuration for sonarqube that runs the mcp/sonarqube Docker image with token and org environment variables" class="size-full is-resized" width="849" height="607" style="aspect-ratio:1.398688729316266;width:487px;height:auto" >}}
 
 Or even easier, using the free extension [SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-intellij/), that you can install in major IDEs like VSCode or IntelliJ, you will have live analysis results on your IDE, plus a very convenient way to install SonarQube MCP server or even Windsurf Hooks to guarantee that all responses from the Agent go through a SonarQube analysis.
-![](Screenshot-2026-02-16-at-08.54.42.png) ![](Screenshot-2026-02-16-at-09.05.28.png)
+![SonarQube for IDE 'AI Agents Configuration' panel with steps to configure the MCP server, create instructions and install a hook](Screenshot-2026-02-16-at-08.54.42.png) ![Notification that the SonarQube hook script was installed for Windsurf so code is analyzed automatically after AI generation](Screenshot-2026-02-16-at-09.05.28.png)
 
 ## **Example: Analyzing a snippet with** **analyze_code_snippet** **tool**
 
 Once the SonarQube MCP server is active, Windsurf has a new "tool" called analyze_code_snippet, among other 24 tools to interact with SonarQube.You can highlight a Java method and tell Cascade: *"@Utils.java#L22-31 Analyze this with Sonar and fix it."*
-![](Screenshot-2026-02-16-at-09.06.32-1024x381.jpg)
+![Windsurf diff of Utils.generateKey changing the RSA key size from 512 to a 2048-bit constant, with the agent's SonarQube MCP analysis steps](Screenshot-2026-02-16-at-09.06.32-1024x381.jpg)
 
 **The Agent does the following:**
 

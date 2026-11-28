@@ -1,14 +1,14 @@
 ---
 title: "Improving my previous OpenRewrite recipe"
 date: "2025-06-15T07:48:37+00:00"
-lastmod: "2026-09-21T06:02:36+00:00"
 description: "I started discovering OpenRewrite last week by writing a Kotlin recipe that moves Kotlin files according to the official directory structure…"
 canonical: "https://blog.frankel.ch/openrewrite-recipes/2/"
 authors:
   - "nicolas-frankel"
 image: "cover-improving-1024x683.jpg"
 categories:
-  - "Java"
+  - "OpenRewrite"
+  - "Developer Tools"
 related_posts:
 ---
 

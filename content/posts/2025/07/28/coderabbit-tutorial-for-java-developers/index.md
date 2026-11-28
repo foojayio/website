@@ -1,7 +1,6 @@
 ---
 title: "CodeRabbit Tutorial for Java Developers"
 date: "2025-07-28T12:43:19+00:00"
-lastmod: "2025-07-29T04:20:09+00:00"
 description: "For Java developers, CodeRabbit offers specialized analysis that understands Java syntax, best practices, and common patterns."
 authors:
   - "aravind-putrevu"
@@ -9,7 +8,6 @@ authors:
 image: "Cr_icon_632e505ce3-1.png"
 categories:
   - "AI"
-  - "CodeRabbit"
   - "Machine Learning"
 related_posts:
   - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"
@@ -64,7 +62,7 @@ public class DemoApplication{  // Missing space before {
 
 For example, when you ask CodeRabbit to check the style above, you'll get a response comparable to this:
 
-{{< img src="coderabbitai-1-548x510.png" class="size-medium" width="548" height="510" >}}
+{{< img src="coderabbitai-1-548x510.png" alt="GitHub pull request thread where CodeRabbit confirms the spacing in a Java class is correct and offers two brace-style options" class="size-medium" width="548" height="510" >}}
 
 **Best Practices**
 
@@ -90,7 +88,7 @@ public void unsafeMethod(String userInput) {
 
 The above is analyzed in several ways, including this, by CodeRabbit:
 
-{{< img src="coderabbit-2-575x510.png" class="size-medium" width="575" height="510" >}}
+{{< img src="coderabbit-2-575x510.png" alt="CodeRabbit review comment on a pull request flagging a critical SQL injection and suggesting a parameterized query" class="size-medium" width="575" height="510" >}}
 
 ### **3. Performance Optimization Suggestions**
 

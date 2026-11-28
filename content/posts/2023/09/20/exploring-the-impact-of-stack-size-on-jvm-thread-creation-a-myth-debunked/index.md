@@ -1,13 +1,13 @@
 ---
 title: "Exploring the Impact of Stack Size on JVM Thread Creation: A Myth Debunked"
 date: "2023-09-20T06:59:31+00:00"
-lastmod: "2023-09-20T07:28:45+00:00"
 description: "This article debunks the commonly held belief that stack size influences the number of native threads that can be created in a JVM environment."
 authors:
   - "bazlur-rahman"
 image: "ajda-atz-Dz4iJ3v4-X4-unsplash-scaled.jpg"
 categories:
-  - "Java"
+  - "Java Core"
+  - "Performance"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
@@ -88,7 +88,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: unable to create native t
 ```
 
 In case you want to use IntelliJ IDEA, you can configure the stack size, check the following image:   
-![](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
+![IntelliJ IDEA Run/Debug Configurations dialog with the -XX:ThreadStackSize=1048576 VM option highlighted](Screenshot-2023-09-10-at-10.48.08-PM-1-1024x700.png)
 
 ### **1 GB Stack Size**
 

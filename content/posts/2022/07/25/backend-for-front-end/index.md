@@ -1,7 +1,6 @@
 ---
 title: "Discussing Backend For Front-end"
 date: "2022-07-25T14:49:18+00:00"
-lastmod: "2022-07-25T14:49:54+00:00"
 description: "The idea behind Backend For Front-end is to move logic from each microservice to a dedicated deployable endpoint."
 canonical: "https://blog.frankel.ch/backend-for-frontend/"
 authors:
@@ -24,7 +23,7 @@ The rise of mobile clients and integrations with other apps upset this simplicit
 
 Let's first model the above simple architecture.
 
-![](webapp.png)
+![Diagram of a browser sending requests to a single web app](webapp.png)
 
 Mobile clients changed this approach. The display area of mobile clients is smaller: just smaller for tablets and much smaller for phones.
 
@@ -32,7 +31,7 @@ A possible solution would be to return all data and let each client filter out t
 
 Hence, over-fetching is not an option. Each client requires a different subset of the data. With monoliths, it's manageable to offer multiple endpoints depending on each client.
 
-![](webapp-multiple-clients.png)
+![Diagram of Android, browser and iOS clients all calling the same web app](webapp-multiple-clients.png)
 
 One could design a web app with a specific layer at the forefront. Such a layer detects the client from which the request originated and filters out irrelevant data in the response. Over-fetching in the web app is not an issue.
 
@@ -40,7 +39,7 @@ Nowadays, microservices are all the rage. Everybody and their neighbours want to
 
 Behind microservices lies the idea of two-pizzas teams. Each team is autonomous and is responsible for a single microservice - or a single front-end application. To avoid coupling between the development effort, each microservice team publishes its API contract and handles changes **very carefully**.
 
-![](microservices.png)
+![Diagram of browser, Android and iOS clients each calling Service 1, 2 and 3 directly, producing a tangle of connections](microservices.png)
 
 Each microservice needs to serve the data strictly necessary for each kind of client to avoid the over-fetching issue above. With a small number of microservices, it's unwieldy to make each one filter out data depending on the client; with a large number, it's plain impossible. *Ergo*, the cartesian factor between the number of microservices and the number of different clients makes dedicated data endpoints on each microservice exponentially expensive.
 
@@ -55,7 +54,7 @@ The idea behind is to move logic from each microservice to a dedicated deployabl
 
 The same team develops the client **and** its associated BFF. BFF offers the same trade-off as microservices: improving the development velocity by increasing the system complexity.
 
-![](bff.png)
+![Diagram of a BFF per client (browser, Android, iOS) between the clients and Services 1 to 3, with browser and its BFF in a single team scope](bff.png)
 
 ## Separate deployment unit vs. API Gateways
 
@@ -63,7 +62,7 @@ The literature about BFF implies dedicated deployment units, as in the diagram a
 
 Like in many areas, people should focus more on the organizational side of things and less on the technical side. In this case, the most critical point is that the team responsible for the front-end is also accountable for the BFF. Whether it's a separate deployment unit or part of the API Gateway configuration is an implementation detail.
 
-![](bff-gateway.png)
+![Diagram of the BFFs for browser, Android and iOS placed inside an API Gateway in front of Services 1 to 3](bff-gateway.png)
 
 For example, with Apache APISIX, each team could deploy their BFF code independently as a separate plugin.
 

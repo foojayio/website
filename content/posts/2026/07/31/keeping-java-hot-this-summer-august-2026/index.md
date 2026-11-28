@@ -1,14 +1,12 @@
 ---
 title: "Keeping Java Hot This Summer"
 date: "2026-07-31T09:50:18+00:00"
-lastmod: "2026-07-31T16:16:40+00:00"
 description: "Simon Ritter tours US & Canada JUGs in August 2026 with a deep technical talk on JVM startup and warmup. Find your city and register."
 authors:
   - "dominika-tasarz"
 image: "Azul-Payara-Community-New-Release-2.jpg"
 categories:
   - "CRaC"
-  - "Java"
   - "Java Beginner"
   - "JUGs"
 related_posts:

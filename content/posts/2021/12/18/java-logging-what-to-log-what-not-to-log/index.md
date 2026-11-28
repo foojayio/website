@@ -1,7 +1,6 @@
 ---
 title: "Java Logging: What To Log & What Not To Log?"
 date: "2021-12-18T11:29:33+00:00"
-lastmod: "2021-12-18T11:29:34+00:00"
 description: "A pragmatic guide to Java logging—what should we log, what shouldn’t we log, and how to implement Java logging properly."
 canonical: "https://snyk.io/blog/java-logging-what-should-you-log-and-what-not/"
 authors:

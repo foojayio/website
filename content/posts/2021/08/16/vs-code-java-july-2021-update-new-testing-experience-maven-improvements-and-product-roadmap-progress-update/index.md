@@ -1,7 +1,6 @@
 ---
 title: "Announcing VS Code Java July 2021 Update"
 date: "2021-08-16T07:23:34+00:00"
-lastmod: "2021-08-16T07:28:45+00:00"
 description: "Product roadmap progress, with improved user experiences of features for testing, Maven dependency management, and project management."
 authors:
   - "nick-zhu"
@@ -29,23 +28,23 @@ Developers now can access a new layout of buttons (Testing Decoration) in the le
 
 More options can also be seen by right clicking in the area. Different from Code Lens in the past, the new UI has less interference and noise to developers in the editor area.
 
-![](Testing-Decoration.gif)
+![VS Code editing ValidatorTests.java with a context menu on a breakpoint offering Run Test, Debug Test and Reveal in Test Explorer](Testing-Decoration.gif)
 
 ## More Powerful Test Explorer
 
 The Test Explorer has been completely revamped. Developers can now customize the display mode and sorting order of the testing explorer for different scenarios and habits. Tests can also be directly kicked off from the test explorer.
 
-![](Test-Explorer.webp)
+![VS Code Test Explorer with a tree of Spring PetClinic tests, packages and classes with run buttons shown on hover](Test-Explorer.webp)
 
 In addition, the new Testing Explorer has built-in search bar support to help users quickly find target test cases and accelerate development efficiency.
 
-![](Test-Search-Filter.gif)
+![VS Code Testing view with the search box filtering Spring PetClinic tests, all 23 passing](Test-Search-Filter.gif)
 
 ## Richer Test Message and Output
 
 By adopting the new Testing API, the developer can now directly see the test execution result directly in the editor area, making it easer to see the errors and stack trace information.
 
-![](Test-Error-Message.webp)
+![VS Code running tests with the Testing view, test results in the tree and a failing test marked in the editor gutter](Test-Error-Message.webp)
 
 For more detailed information on what Java Test Runner has to offer, please refer to the [official documentation here](https://code.visualstudio.com/docs/java/java-testing "official documentation here")
 

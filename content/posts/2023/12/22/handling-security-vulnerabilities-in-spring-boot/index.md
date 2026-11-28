@@ -1,7 +1,6 @@
 ---
 title: "Handling security vulnerabilities in Spring Boot"
 date: "2023-12-22T14:59:10+00:00"
-lastmod: "2023-12-22T14:59:11+00:00"
 description: "Keeping your dependencies in check is crucial to ensure that your Spring Boot projects run smoothly and remain resilient in the face of ever-evolving threats."
 canonical: "https://snyk.io/blog/security-vulnerabilities-spring-boot/"
 authors:

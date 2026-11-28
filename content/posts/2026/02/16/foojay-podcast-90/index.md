@@ -1,14 +1,12 @@
 ---
 title: "Foojay Podcast #90: Highlights of the Java Features Between LTS 21 and 25"
 date: "2026-02-16T07:32:52+00:00"
-lastmod: "2026-07-28T13:24:18+00:00"
 description: "Every six months, we get a new version of Java. Java 26 is just around the corner and will be released soon. But most companies stick to LTS (Long-Term…"
 authors:
   - "frankdelporte"
   - "jakob-jenkov"
 image: "episode-90-java-21-to-25.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Podcast"
 related_posts:

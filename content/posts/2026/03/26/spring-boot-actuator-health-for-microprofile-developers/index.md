@@ -8,7 +8,6 @@ authors:
 image: "Blog-Image_SpringBoot-Actuator-Health-for-Microprofile-Developers-scaled-1.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Payara"
   - "Spring"

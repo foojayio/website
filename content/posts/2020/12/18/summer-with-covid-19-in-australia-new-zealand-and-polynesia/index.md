@@ -1,7 +1,6 @@
 ---
 title: "Summer with Covid-19 in Australia, New Zealand and Polynesia"
 date: "2020-12-18T08:57:46+00:00"
-lastmod: "2020-12-18T08:57:48+00:00"
 description: "\"Oceania\" as a collective term for Australia, New Zealand, and Polynesia. In this part, we use Software-ECG to analyze Covid-19 there."
 authors:
   - "johannes-weigend"
@@ -46,7 +45,7 @@ You can use this feature to look at the number of deaths in all countries with t
 
 You can stack different countries by choosing a sum chart instead of a standard line chart.
 
-[![](CW51-software-ecg-deaths-oceania.jpg)](CW51-software-ecg-deaths-oceania.jpg)  
+[![Software EKG screenshot charting daily new COVID-19 deaths in Oceania, with a large peak around August 2020](CW51-software-ecg-deaths-oceania.jpg)](CW51-software-ecg-deaths-oceania.jpg)  
 *Daily Covid-19 related deaths in Oceania as stacked graph*
 
 The curve shows the daily death counts associated with COVID-19 as a stacked graph. The highest value is still very low at 59. Since the curve is almost entirely made up of a yellow area, you can see that essentially only Australia was really affected.
@@ -57,7 +56,7 @@ This curve looks today very good and it shows what you would actually expect dur
 
 Looking at the testing situation, it is noticeable that Australia and New Zealand dominate the graph with regard to the daily number of tests performed. Also, the number of tests is relatively constant. This is good because it allows us to estimate the true prevalence of the virus from the graph of the current number of cases, since the number of tests correlates with the number of cases.
 
-[![](CW51-software-ecg-tests-oceania.jpg)](CW51-software-ecg-tests-oceania.jpg)  
+[![Software EKG line chart of daily new COVID-19 tests in Oceania, where Australia far exceeds New Zealand](CW51-software-ecg-tests-oceania.jpg)](CW51-software-ecg-tests-oceania.jpg)  
 *Number of executed PCR tests per day over all countries in Oceania*
 
 The cumulative view of the case numbers also shows very well that COVID-19 in Oceania has currently subsided to a background activity.
@@ -66,7 +65,7 @@ We have too little information about the political decisions and actions that ma
 
 In sum, however, you can see that fear of COVID-19 in these countries does not seem to be appropriate:
 
-[![](CW51-software-ecg-oceania-aggregated.jpg)](CW51-software-ecg-oceania-aggregated.jpg)  
+[![Software EKG area chart of daily new COVID-19 cases in Oceania, with a first peak in March 2020 and a larger one in August](CW51-software-ecg-oceania-aggregated.jpg)](CW51-software-ecg-oceania-aggregated.jpg)  
 *Number of positive PCR test cases in Oceania*
 
 As Europeans, you might become envious, but let us not forget we also had a nice summer and were able to let some normality return to our lives. With this in mind, the people in Oceania should also be granted some normality.

@@ -1,7 +1,6 @@
 ---
 title: "Monitoring REST APIs with Custom Java Flight Recorder Events"
 date: "2020-08-26T08:36:57+00:00"
-lastmod: "2020-12-07T13:24:52+00:00"
 description: "Let's explore how custom, application-specific JFR events are used to monitor a REST API, to track request counts, identify long-running requests, and more."
 canonical: "https://www.morling.dev/blog/rest-api-monitoring-with-custom-jdk-flight-recorder-events"
 authors:

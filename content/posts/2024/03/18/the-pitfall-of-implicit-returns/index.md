@@ -1,7 +1,6 @@
 ---
 title: "The pitfall of implicit returns"
 date: "2024-03-18T10:47:02+00:00"
-lastmod: "2026-09-21T06:03:50+00:00"
 description: "Implicit returns are a feature in some languages. They have recently bitten me, so here's my opinion. Statements, expressions, and returns Before diving…"
 canonical: "https://blog.frankel.ch/pitfall-implicit-returns/"
 authors:

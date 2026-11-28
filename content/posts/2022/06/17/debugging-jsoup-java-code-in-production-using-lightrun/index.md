@@ -1,7 +1,6 @@
 ---
 title: "Debugging jsoup Java Code in Production Using Lightrun"
 date: "2022-06-17T09:35:06+00:00"
-lastmod: "2022-06-17T09:35:07+00:00"
 description: "Scraping is a fragile discipline. As a workaround, we often use a server. Debugging these issues is remarkably difficult. Or at least it was!"
 canonical: "https://lightrun.com/tutorials/debugging-jsoup-java-code-in-production-using-lightrun/"
 authors:

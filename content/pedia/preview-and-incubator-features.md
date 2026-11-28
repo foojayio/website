@@ -1,7 +1,9 @@
 ---
 title: "Preview and Incubator Features"
 description: "Java ships new language features and APIs in two provisional states before they are finalised: Preview features (for language changes and JVM features) and Incubator modules (for new APIs). Both mechanisms exist to gather real-world feedback before a feature is ..."
-url: "/pedia/preview-and-incubator-features/"
+url: "/java-terms-explained/preview-and-incubator-features/"
+aliases:
+  - "/pedia/preview-and-incubator-features/"
 ---
 
 Java ships new language features and APIs in two provisional states before they are finalised: **Preview features** (for language changes and JVM features) and **Incubator modules** (for new APIs). Both mechanisms exist to gather real-world feedback before a feature is locked in.
@@ -29,6 +31,6 @@ The Vector API (for SIMD-style operations using Java) has been in incubation sin
 
 ## See Also
 
-* [Records](/pedia/records/)
-* [Sealed Classes](/pedia/sealed-classes/)
-* [Pattern Matching](/pedia/pattern-matching/)
+* [Records](/java-terms-explained/records/)
+* [Sealed Classes](/java-terms-explained/sealed-classes/)
+* [Pattern Matching](/java-terms-explained/pattern-matching/)

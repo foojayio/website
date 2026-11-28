@@ -11,7 +11,20 @@
 {{- $announcement := partial "featured-authors-announcement.html" . -}}
 {{- with $featured }}
 <section class="widget widget-featured-authors">
-  <h2>Featured authors</h2>
+  <h2>Authors</h2>
+  <ul>
+    {{/* Shuffled per page, as the plain Authors widget on other pages is. */}}
+    {{ range first 5 (shuffle (partialCached "authors-all.html" "authors")) }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+  <div class="widget-featured-authors__actions">
+    <a class="view-all" href="{{ "today/author/" | relURL }}">All {{ len (partialCached "authors-all.html" "authors") }} authors &rarr;</a>
+  </div>
+  <div class="widget-featured-authors__subhead">
+    <h3 class="widget-featured-authors__sub">Featured Authors</h3>
+    <span class="widget-featured-authors__note">Rotated monthly by the editors</span>
+  </div>
   <div class="featured-side-list">
     {{ range . }}
     {{ $author := . }}
@@ -33,9 +46,6 @@
     </div>
     {{ end }}
   </div>
-  <div class="widget-featured-authors__actions">
-    <a class="view-all" href="{{ "today/author/" | relURL }}">All authors</a>
-    {{ with $announcement }}<a class="view-all" href="{{ . | strings.TrimPrefix "/" | relURL }}">Read more</a>{{ end }}
-  </div>
+  {{ with $announcement }}<a class="view-all" href="{{ . | strings.TrimPrefix "/" | relURL }}">Read more about featured authors &rarr;</a>{{ end }}
 </section>
 {{ end -}}

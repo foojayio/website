@@ -1,7 +1,6 @@
 ---
 title: "Learn JShell with JavaFX in Only 60 Seconds"
 date: "2021-07-12T10:54:56+00:00"
-lastmod: "2021-07-12T11:01:43+00:00"
 description: "Learn the basics of using jshell. Next, combine that with learning how to run a JavaFX application file from a terminal command prompt!"
 authors:
   - "carldea"

@@ -1,14 +1,13 @@
 ---
 title: "The importance of rel=canonical for content writers"
 date: "2023-04-10T16:22:20+00:00"
-lastmod: "2026-09-21T06:05:00+00:00"
 description: "The subject of canonical reference has been touched thousand times. But since some content writers are still making the same mistake over and over, I…"
 canonical: "https://blog.frankel.ch/rel-canonical-content-writers/"
 authors:
   - "nicolas-frankel"
 image: "poppy-capsules-g8d0f5a9fa.jpg"
 categories:
-  - "Java"
+  - "Foojay"
 related_posts:
 ---
 

@@ -3,7 +3,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    {{ with partial "feed-link.html" . }}<div class="page-head__views">{{ . }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> terms explained" (len .Pages))
+      "feed" .) }}
   </div>
 </div>
 <div class="content-col full-width">

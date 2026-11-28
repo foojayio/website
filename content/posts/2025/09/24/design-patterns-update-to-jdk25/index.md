@@ -1,14 +1,12 @@
 ---
 title: "Design Patterns Update to JDK25"
 date: "2025-09-24T11:29:34+00:00"
-lastmod: "2025-09-24T11:30:10+00:00"
 description: "Java 25 represents a notable milestone, empowering developers to leverage enhanced switch statements to effectively address implementation challenges across Creational, Structural, and Behavioral design patterns."
 authors:
   - "miro-wengner"
 image: "116749_image_676x380.webp"
 categories:
   - "Agile"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
 related_posts:

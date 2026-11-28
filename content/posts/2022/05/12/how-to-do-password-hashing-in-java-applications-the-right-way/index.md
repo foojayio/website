@@ -1,7 +1,6 @@
 ---
 title: "How to do password hashing in Java applications the right way"
 date: "2022-05-12T15:04:55+00:00"
-lastmod: "2022-05-12T15:04:57+00:00"
 description: "The first rule of password hashing algorithms is: Don't write your own password hashing algorithm! Let's learn how we do password hashing."
 canonical: "https://snyk.io/blog/password-hashing-java-applications/"
 authors:

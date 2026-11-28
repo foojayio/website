@@ -1,7 +1,6 @@
 ---
 title: "Interview: Frank Delporte, Foojay Raspberry Pi Community Manager"
 date: "2020-09-07T13:20:38+00:00"
-lastmod: "2025-02-20T10:53:16+00:00"
 description: "Today we introduce a community manager for all things Raspberry Pi on foojay, Frank Delporte. He'd love to publish your Java/Raspberry Pi content on foojay!"
 authors:
   - "geertjan-wielenga"
@@ -19,7 +18,7 @@ related_posts:
 
 **Welcome, Frank!** **Tell us about yourself. 🙂**  
 
-{{< img src="pasfoto-2.jpg" class="alignleft size-large is-resized" width="173" height="208" >}}
+{{< img src="pasfoto-2.jpg" alt="Portrait of Frank Delporte, wearing glasses and a black sweater" class="alignleft size-large is-resized" width="173" height="208" >}}
 
 Hi, I'm Frank Delporte, living in Belgium. I started programming when I was 10 on my Commodore 64.
 

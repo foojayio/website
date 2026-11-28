@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #63: How do we keep your Java applications up to date and secure?"
 date: "2024-12-16T12:41:10+00:00"
-lastmod: "2025-11-13T08:40:32+00:00"
 description: "Do you want to bring your system from Java 8 to 23? Did you know that Java 17 already has 13 security releases? And that you can use tools like OpenRewrite to help you update your code?"
 authors:
   - "charl-fasching"
@@ -10,7 +9,6 @@ authors:
   - "johan-janssen"
 image: "podcast-63-up-to-date-java.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JEPs"
   - "OpenJDK Migration"

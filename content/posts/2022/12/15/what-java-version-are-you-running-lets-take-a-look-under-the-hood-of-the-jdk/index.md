@@ -1,7 +1,6 @@
 ---
 title: "What Java Version Are You Running?"
 date: "2022-12-15T08:59:05+00:00"
-lastmod: "2022-12-15T11:06:02+00:00"
 description: "Did you know there are multiple ways you check your Java version and even get much more information than you might think, very quickly?"
 authors:
   - "frankdelporte"
@@ -76,7 +75,7 @@ SOURCE="git:f4b2b4c5882e"
 ## Getting More Information With showSettings
 
 In 2010, an experimental flag (indicated with the `X`) was added to OpenJDK to provide more configuration information: `-XshowSettings`.
-![](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
+![Tweet from OpenJDK announcing that Kumar Srinivasan added the -XshowSettings flag to print Java configuration](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
 
 This flag can be called with different arguments, each producing an other information output.
 

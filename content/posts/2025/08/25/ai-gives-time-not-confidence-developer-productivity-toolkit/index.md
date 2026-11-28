@@ -1,14 +1,12 @@
 ---
 title: "AI Gives Time, Not Confidence: Developer Productivity Toolkit"
 date: "2025-08-25T07:07:56+00:00"
-lastmod: "2025-08-25T07:08:59+00:00"
 description: "By offloading some of that work to AI, you get more time and energy to focus on the truly challenging and rewarding parts of software development."
 authors:
   - "jonathan-vila"
 image: "https___dev-to-uploads.s3.amazonaws.com_uploads_articles_9a39wkc2svq2rm6x9nym.webp"
 categories:
   - "Developer Tools"
-  - "Java"
 related_posts:
   - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
   - "my-final-take-on-gradle-vs-maven"

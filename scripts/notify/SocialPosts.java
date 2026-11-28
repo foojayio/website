@@ -39,13 +39,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Writes a Mastodon, Bluesky and LinkedIn text for every post that went live,
+ * Writes a Mastodon, Bluesky, LinkedIn and Reddit text for every post that went live,
  * with Claude working from the article itself. Mastodon and Bluesky are posted
- * directly; LinkedIn has no usable API, so its text goes to Slack in a code
- * block plus a link that opens LinkedIn's composer prefilled, with links to what was posted. A platform that fails or has no
+ * directly; LinkedIn and Reddit have no usable API, so their text goes to Slack in a code
+ * block plus a link that opens the composer prefilled, with links to what was posted. A platform that fails or has no
  * credentials falls back to its own text in that Slack message.
  *
  *   new <previous.xml> <current.xml>   posts in current that previous lacks
+ *   post <feed.xml> <url>              one post by its URL, to retry after a failure;
+ *                                      anything already posted is posted again
  *
  * Same contract as SlackPosts.java: the previous feed is from BEFORE the
  * deploy, so no state is kept, and an empty previous feed aborts instead of
@@ -69,7 +71,7 @@ public class SocialPosts {
 
     record Post(String title, String link, String description) {}
 
-    record Author(String name, String bluesky, String mastodon) {}
+    record Author(String name, String bluesky, String mastodon, String reddit) {}
 
     record Platform(String id, String label, int max, String extra) {}
 
@@ -78,6 +80,12 @@ public class SocialPosts {
     static final int BLUESKY_IMAGE_LIMIT = 900_000;
     static final int MAX_NEW = 5;
     static final int MAX_ARTICLE_CHARS = 8000;
+    // The whole text travels in the "Open in Reddit" URL, and Slack cut a ~1750-character one short.
+    static final int REDDIT_MAX = 900;
+    static final int SLACK_CHUNK = 2500;
+    static final String DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+    static final int PAGE_FETCH_ATTEMPTS = 8;
+    static final long PAGE_FETCH_WAIT_MS = 30_000;
     static final String MODEL = "claude-sonnet-5-5";
 
     static final List<Platform> PLATFORMS = List.of(
@@ -91,13 +99,21 @@ public class SocialPosts {
                             + "Use plain text only: no bold, no italic, no markdown (no `**`, no `*`, no `_`) and no unicode bold/italic characters.\n"
                             + "Don't open with a hook or rhetorical question like `If you've ever wondered...`, `Ever wondered...`, "
                             + "`Have you ever...` or `Imagine...`. Start directly with what the article is about, in a plain and "
-                            + "factual tone, like a colleague sharing a link."));
+                            + "factual tone, like a colleague sharing a link."),
+            new Platform("reddit", "Reddit", REDDIT_MAX,
+                    "The first line is the post title (max 150 characters, no hashtags), then an empty line, then the body: "
+                            + "a short plain summary of what the article covers, ending with the link.\n"
+                            + "No hashtags, no @mentions, no markdown headings and no emoji. Mention an author by the `u/name` handle when one is provided, otherwise by plain name.\n"
+                            + "Don't open with a hook or rhetorical question. Keep a plain, factual tone."));
+
+    static final Set<String> MANUAL = Set.of("linkedin", "reddit");
 
     public static void main(String[] args) throws Exception {
         List<String> a = new ArrayList<>(List.of(args));
         boolean dryRun = a.remove("--dry-run");
-        if (a.size() != 3 || !a.get(0).equals("new")) {
-            System.err.println("usage: SocialPosts.java [--dry-run] new <previous.xml> <current.xml>");
+        boolean one = a.size() == 3 && a.get(0).equals("post");
+        if (a.size() != 3 || !(one || a.get(0).equals("new"))) {
+            System.err.println("usage: SocialPosts.java [--dry-run] new <previous.xml> <current.xml> | post <feed.xml> <url>");
             System.exit(2);
         }
         String claude = env("ANTHROPIC_API_KEY");
@@ -109,14 +125,24 @@ public class SocialPosts {
             dryRun = true;
         }
 
-        List<Post> previous = readFeed(a.get(1));
-        if (previous.isEmpty()) {
-            System.out.println("Previous feed has no posts; skipping rather than writing texts for everything.");
-            return;
+        List<Post> fresh;
+        if (one) {
+            String url = a.get(2).trim().replaceAll("/+$", "") + "/";
+            fresh = readFeed(a.get(1)).stream().filter(p -> p.link().equals(url)).toList();
+            if (fresh.isEmpty()) {
+                System.err.println(url + " is not in the live feed, so it is not published yet or the URL is wrong.");
+                System.exit(1);
+            }
+        } else {
+            List<Post> previous = readFeed(a.get(1));
+            if (previous.isEmpty()) {
+                System.out.println("Previous feed has no posts; skipping rather than writing texts for everything.");
+                return;
+            }
+            Set<String> known = new LinkedHashSet<>();
+            previous.forEach(p -> known.add(p.link()));
+            fresh = new ArrayList<>(readFeed(a.get(2)).stream().filter(p -> !known.contains(p.link())).toList());
         }
-        Set<String> known = new LinkedHashSet<>();
-        previous.forEach(p -> known.add(p.link()));
-        List<Post> fresh = new ArrayList<>(readFeed(a.get(2)).stream().filter(p -> !known.contains(p.link())).toList());
         if (fresh.isEmpty()) {
             System.out.println("No new posts.");
             return;
@@ -136,7 +162,7 @@ public class SocialPosts {
                 System.out.println("::warning title=Social post failed::" + p.link() + ": " + e.getMessage());
                 if (!dryRun && token != null && user != null) {
                     try {
-                        post(token, user, "*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\nSocial texts failed: " + esc(String.valueOf(e.getMessage())));
+                        post(token, user, "*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\nSocial texts failed: " + esc(String.valueOf(e.getMessage())) + retryHint());
                     } catch (Exception ignored) {
                         // the warning above is all that is left
                     }
@@ -146,16 +172,29 @@ public class SocialPosts {
         if (failures > 0) System.exit(1);
     }
 
+    /** The deploy job finishes before the edge and Cloudflare serve the new page, so a 404 is retried. */
+    static Document fetchPage(String url) throws Exception {
+        for (int attempt = 1; ; attempt++) {
+            try {
+                return Jsoup.connect(attempt == 1 ? url : url + "?retry=" + attempt).userAgent("foojay.io").timeout(15000).get();
+            } catch (org.jsoup.HttpStatusException e) {
+                if (e.getStatusCode() != 404 || attempt == PAGE_FETCH_ATTEMPTS) throw e;
+                Thread.sleep(PAGE_FETCH_WAIT_MS);
+            }
+        }
+    }
+
     static void send(Post p, String claudeKey, String token, String user, boolean dryRun) throws Exception {
-        Document page = Jsoup.connect(p.link()).userAgent("foojay.io").timeout(15000).get();
+        Document page = fetchPage(p.link());
         List<Author> authors = authors(page);
         String article = articleText(page, p);
 
-        StringBuilder message = new StringBuilder("*New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\n");
+        StringBuilder message = new StringBuilder(DIVIDER + "\n:newspaper: *New on Foojay.io:* <" + p.link() + "|" + esc(p.title()) + ">\n");
         if (!authors.isEmpty()) {
             message.append("by ").append(esc(String.join(", ", authors.stream().map(Author::name).toList()))).append("\n");
         }
         int failed = 0;
+        boolean retry = false;
         for (Platform pl : PLATFORMS) {
             String text, posted = null, problem = "";
             try {
@@ -164,16 +203,18 @@ public class SocialPosts {
             } catch (Exception e) {
                 // One platform's text must not cost the other platforms or the Slack message.
                 failed++;
+                retry = true;
                 System.err.println(pl.label() + " text failed for " + p.link() + ": " + e.getMessage());
                 message.append("\n*").append(pl.label()).append("* - no text written, ").append(esc(String.valueOf(e.getMessage()))).append("\n");
                 continue;
             }
-            if (!dryRun && !pl.id().equals("linkedin")) {
+            if (!dryRun && !MANUAL.contains(pl.id())) {
                 try {
                     posted = pl.id().equals("bluesky") ? postBluesky(text, p, page) : postMastodon(text, p);
                     if (posted == null) problem = " - not posted, no credentials set";
                 } catch (Exception e) {
                     problem = " - not posted, " + esc(String.valueOf(e.getMessage()));
+                    retry = true;
                     System.err.println(pl.label() + " failed for " + p.link() + ": " + e.getMessage());
                 }
             }
@@ -187,19 +228,57 @@ public class SocialPosts {
                     message.append(" <https://www.linkedin.com/company/98327419/admin/page-posts/published/?share=true&text=")
                             .append(URLEncoder.encode(text, StandardCharsets.UTF_8).replace("+", "%20")).append("|Open in LinkedIn>");
                 }
-                message.append("\n```\n").append(text.replace("```", "'''")).append("\n```\n");
+                if (pl.id().equals("reddit")) {
+                    // A LINK post, so Reddit builds the og:image card; `text` fills its optional body.
+                    String[] parts = text.split("\\R\\s*\\R", 2);
+                    message.append(" <https://www.reddit.com/r/foojay/submit/?type=LINK&url=")
+                            .append(encode(p.link())).append("&title=")
+                            .append(encode(parts[0].strip())).append("&text=")
+                            .append(encode(parts.length > 1 ? parts[1].strip() : "")).append("|Open in Reddit>");
+                }
+                message.append("\n");
             }
         }
 
+        if (retry) message.append(retryHint());
         System.out.println("=== " + p.link() + "\n" + message);
         if (dryRun) return;
         if (token == null || user == null) {
             System.out.println("SLACK_BOT_TOKEN or SLACK_CHANNEL_ID is not set; not sent to Slack.");
             return;
         }
-        post(token, user, message.toString());
+        List<String> parts = chunks(message.toString());
+        for (int i = 0; i < parts.size(); i++) {
+            post(token, user, i == 0 ? parts.get(i) : "_" + esc(p.title()) + " (continued)_\n" + parts.get(i));
+        }
         System.out.println("Sent to Slack.");
         if (failed > 0) throw new IllegalStateException(failed + " platform text(s) failed for " + p.link());
+    }
+
+    /** Slack cut the end off a long message, which was the Reddit link, so each platform's block travels separately. */
+    static List<String> chunks(String message) {
+        List<String> out = new ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        for (String block : message.split("(?=\\n\\*)")) {
+            if (cur.length() > 0 && cur.length() + block.length() > SLACK_CHUNK) {
+                out.add(cur.toString());
+                cur.setLength(0);
+            }
+            cur.append(block);
+        }
+        out.add(cur.toString());
+        return out;
+    }
+
+    static String encode(String s) {
+        return URLEncoder.encode(s, StandardCharsets.UTF_8).replace("+", "%20");
+    }
+
+    /** Points at the manual workflow (social-post.yml) that reruns one post. */
+    static String retryHint() {
+        String repo = env("GITHUB_REPOSITORY") == null ? "foojayio/website" : env("GITHUB_REPOSITORY");
+        return "\nTo retry, run the manual GitHub action \"Retry social posts\" via <https://github.com/" + repo
+                + "/actions/workflows/social-post.yml|this link> and enter the post URL.";
     }
 
     /** Returns the URL of the new post, or null when there are no credentials. */
@@ -413,6 +492,7 @@ public class SocialPosts {
                 String handle = switch (pl.id()) {
                     case "bluesky" -> blueskyMention(au.bluesky());
                     case "mastodon" -> mastodonMention(au.mastodon());
+                    case "reddit" -> redditMention(au.reddit(), au.name());
                     default -> "@" + au.name(); // LinkedIn has no text handles
                 };
                 who.append("Author: ").append(au.name()).append("\n    ").append(pl.label())
@@ -491,15 +571,16 @@ public class SocialPosts {
                     for (JsonNode n : an.isArray() ? an : List.of(an)) {
                         String name = n.path("name").asText("").trim();
                         if (name.isEmpty()) continue;
-                        String bluesky = "", mastodon = "";
+                        String bluesky = "", mastodon = "", reddit = "";
                         for (JsonNode same : n.path("sameAs")) {
                             String href = same.asText("");
                             String host = host(href);
                             if (host.endsWith("bsky.app")) bluesky = href;
+                            else if (host.equals("reddit.com") || host.endsWith(".reddit.com")) reddit = href;
                             else if (isMastodon(href, host)
                                     && (mastodon.isEmpty() || host.contains("social") || host.contains("mastodon"))) mastodon = href;
                         }
-                        out.add(new Author(name, bluesky, mastodon));
+                        out.add(new Author(name, bluesky, mastodon, reddit));
                     }
                 }
             } catch (Exception ignored) {
@@ -531,6 +612,13 @@ public class SocialPosts {
         if (url == null || url.isBlank()) return "";
         String handle = url.replaceFirst("^https?://(www\\.)?bsky\\.app/profile/", "").replaceAll("/.*$", "");
         return handle.isEmpty() ? url : "@" + handle.replaceFirst("^@", "");
+    }
+
+    /** Reddit's own mention syntax is u/name; without a profile the plain name is all there is. */
+    static String redditMention(String url, String name) {
+        if (url == null || url.isBlank()) return name;
+        String user = url.replaceFirst("^https?://(www\\.|old\\.)?reddit\\.com/(user|u)/", "").replaceAll("[/?#].*$", "");
+        return user.isEmpty() || user.equals(url) ? name : "u/" + user;
     }
 
     static String mastodonMention(String url) {

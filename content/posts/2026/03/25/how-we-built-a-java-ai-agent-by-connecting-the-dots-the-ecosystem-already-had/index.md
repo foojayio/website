@@ -7,7 +7,6 @@ authors:
 image: "ThumbClawRunr.jpg"
 categories:
   - "AI"
-  - "Java"
 related_posts:
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
@@ -20,7 +19,7 @@ Everyone assumes you need Python to build AI agents. But the Java ecosystem alre
 The result is [ClawRunr](https://ClawRunr.io) (everyone calls it JavaClaw, and we've stopped correcting them). An open-source AI agent runtime, written in pure Java. You can chat with it on Telegram or in the browser, ask it to summarize your emails every morning, schedule reminders, browse websites, run shell commands, connect external tools via MCP, and teach it new skills at runtime by dropping a Markdown file into a folder.
 
 In this article I'll walk you through how each part of the Spring ecosystem maps to what an AI agent actually needs.  
-![](ClawRunr-Onboarding-5fb1be1e.jpg) *ClawRunr Onboarding Wizard*
+![ClawRunr setup wizard, step 1 of 9, welcoming the user and listing the onboarding steps](ClawRunr-Onboarding-5fb1be1e.jpg) *ClawRunr Onboarding Wizard*
 
 ## What does an AI agent need?
 
@@ -139,7 +138,7 @@ public class ChannelRegistry {
 ```
 
 The agent itself doesn't know or care where a message came from. It processes the request, returns a response, and the runtime routes it back through the same channel. Want to add Discord? Implement the `Channel` interface. The agent code stays untouched.
-![](ClawRunr-Telegram-Schedule-Job-73bd3648.jpg)
+![Telegram chat where the agent confirms a recurring task to check Gmail and summarize the last 4 emails every minute](ClawRunr-Telegram-Schedule-Job-73bd3648.jpg)
 
 ## JobRunr: the piece nobody thinks about
 
@@ -150,7 +149,7 @@ Most agent frameworks don't have a good answer. Maybe you wire up a cron job sep
 This is what surprised us most when building ClawRunr. The hardest problem in an AI agent isn't the LLM part. It's reliable task execution. Agents need to schedule recurring checks, run delayed tasks, process things in the background, retry when something fails, and give you full visibility into what happened.
 
 That's not an AI problem. That's a background job problem. And [JobRunr](https://www.jobrunr.io) has been solving it since 2020.
-![](clawRunr-RecuringJob-677a1380.jpg)
+![JobRunr dashboard Recurring Jobs page listing the hourly-hln-news-summary job running every hour](clawRunr-RecuringJob-677a1380.jpg)
 
 Here's how task execution looks in ClawRunr. The `TaskHandler` is annotated with `@Job(retries = 3)`:
 

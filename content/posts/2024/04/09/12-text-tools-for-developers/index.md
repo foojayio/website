@@ -1,13 +1,11 @@
 ---
 title: "12 Text Tools For Developers"
 date: "2024-04-09T07:31:13+00:00"
-lastmod: "2024-04-12T13:39:52+00:00"
 description: "Text data and text manipulation of it is also part of a developer job. Let's see a few free text tools to simplify your job."
 authors:
   - "anthony-goubard"
 image: "Toolbox.png"
 categories:
-  - "Desktop"
   - "Developer Tools"
   - "DevOps"
 related_posts:
@@ -26,38 +24,38 @@ All my applications are written in Java (Swing), so everything below will work o
 ## 1️⃣ URL Encoding and Decoding
 
 If you analyze logs or are writing integration tests or are trying to test SQL injection or path traversal, you're most like need to use url parameters and their values that are URL encoded.  
-[![](toolbox-url-encode.png)](https://www.japplis.com/toolbox/) *Japplis Toolbox URL Encoding tool in dark mode*
+[![Japplis Toolbox Codec tab encoding 'Café Street'-- or 1=1' into a URL-encoded string with percent escapes](toolbox-url-encode.png)](https://www.japplis.com/toolbox/) *Japplis Toolbox URL Encoding tool in dark mode*
 
 ## 2️⃣ Query Parameters
 
 In the same scenario, most likely URLs will use more than one query parameter, so instead of doing per value URL encoding and decoding, you can use query parameters.  
-![](toolbox-query-parameters-decoding.png) *Japplis Toolbox Query Parameters decoding tool in always on top mode (Shift F12) and translucent (Ctrl Shift F12 \& Shift Alt Mouse Wheel)*
+![Japplis Toolbox decoding a long Google search URL into a readable list of query parameters, shown over the search page](toolbox-query-parameters-decoding.png) *Japplis Toolbox Query Parameters decoding tool in always on top mode (Shift F12) and translucent (Ctrl Shift F12 \& Shift Alt Mouse Wheel)*
 
 ## 3️⃣ Match Regular Expression
 
 Regular expressions are a powerful tool to validate text. You may want to test your regular expression with some different text before adding it to your code.
 
 Japplis Toolbox contains such tool that use the Java regular expression library. If the regular expression is invalid, it will appear in red with a tool tip containing the error message.  
-[![](toolbox-find-regexp.png)](https://plugins.jetbrains.com/plugin/16682-applet-runner/) *Japplis Toolbox Contains regexp tool running inside JetBrains Intellij IDEA using the [Applet Runner plugin](https://plugins.jetbrains.com/plugin/16682-applet-runner/)*
+[![Japplis Toolbox Pattern tab inside IntelliJ IDEA testing the regex \b(A-Z)(a-z)*\b, with true/false results per line](toolbox-find-regexp.png)](https://plugins.jetbrains.com/plugin/16682-applet-runner/) *Japplis Toolbox Contains regexp tool running inside JetBrains Intellij IDEA using the [Applet Runner plugin](https://plugins.jetbrains.com/plugin/16682-applet-runner/)*
 
 In this example removing the '*\\b*' would find more matches.
 
 ## 4️⃣ Find Regular Expression
 
 Regular expressions are also useful to extract text. Japplis Toolbox has tools to keep lines containing the regular expression or just to extract the regular expression from the lines.  
-[![](toolbox-extract-regexp-netbeans-1024x576.jpg)](toolbox-extract-regexp-netbeans.png) *Japplis Toolbox Keep regexp tool running inside Apache NetBeans using the [NetBeans Applet Runner plugin](https://plugins.netbeans.apache.org/catalogue/?id=57)*
+[![NetBeans with the Japplis Toolbox applet runner open and its Text Utilities menu listing pattern operations like keep, remove and split](toolbox-extract-regexp-netbeans-1024x576.jpg)](toolbox-extract-regexp-netbeans.png) *Japplis Toolbox Keep regexp tool running inside Apache NetBeans using the [NetBeans Applet Runner plugin](https://plugins.netbeans.apache.org/catalogue/?id=57)*
 
 Note that it can also run embedded in Eclipse using the [Eclipse Applet Runner plugin](https://marketplace.eclipse.org/content/applet-runner-eclipse/) and that all tools mentioned in this article are available in the bookmarks of Applet Runner.
 
 ## 5️⃣ Unicode Encoding and Decoding
 
 Unicode format is used in Java for text. You sometimes may need to convert like `\u20AC <-> €`. For example you may need to put the values in a *.properties* file.  
-![](toolbox-unicode-encode.png) *Japplis Toolbox converting Japanese text to unicode for a user_ja.properties file*
+![Japplis Toolbox encoding Japanese text lines into Unicode escape sequences such as \u30d5 for use in a properties file](toolbox-unicode-encode.png) *Japplis Toolbox converting Japanese text to unicode for a user_ja.properties file*
 
 ## 6️⃣ UTF-8
 
 Let's say you want to use the Greek alphabet but you don't have a Greek keyboard and you don't know the Unicode numbers for the alphabet.  
-![](toolbox-characters-greek.png) *Japplis Toolbox Characters tool with Font, Charset, Block and type choices*
+![Japplis Toolbox Characters tab listing Greek letters with hex codes, with the 'Greek' Unicode block selected in a dropdown](toolbox-characters-greek.png) *Japplis Toolbox Characters tool with Font, Charset, Block and type choices*
 
 Note that you can copy the character to the clipboard.
 
@@ -66,29 +64,29 @@ Note that you can copy the character to the clipboard.
 If you see this number in log files, some of you may now what it means: the number of milliseconds since UNIX epoch (January 1, 1970 00:00:00 UTC).
 
 You may be more interested to know the date/time from this number. Japplis Toolbox has a tool to convert it to a date/time using pattern as defined in the [DateTimeFormatter](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html).  
-![](toolbox-long-to-date.png) *Japplis Toolbox converting epoch time to a more human readable date/time (Zoomed UI 1.5)*
+![Japplis Toolbox converting the millisecond timestamp 1710942147063 to the date 2024-03-20 14:42.27 with 'Long to date'](toolbox-long-to-date.png) *Japplis Toolbox converting epoch time to a more human readable date/time (Zoomed UI 1.5)*
 
 ## 8️⃣ JSON and XML Formatter
 
 When testing a web service, you may receive an unformatted answer. Japplis Toolbox includes an XML and JSON formatter.  
-![](toolbox-format-json.png) *Japplis Toolbox doing JSON formatting*
+![Japplis Toolbox Lines tab formatting a compact one-line JSON bookmark document into indented, readable JSON](toolbox-format-json.png) *Japplis Toolbox doing JSON formatting*
 
 ## 9️⃣ JSON and XML Explorer
 
 Is it a lot of XML or JSON and you would like to navigate it easier? I've also released another freeware called [Tree Data Explorer](https://www.japplis.com/tree-data-explorer/) to help you visualize tree data structures.  
-[![](tree-data-explorer.png)](https://www.japplis.com/tree-data-explorer/) *Screenshot of Tree Data Explorer exploring a JSON*
+[![Tree Data Explorer showing the same JSON as a navigable tree, with the openSUSE Project node selected and its fields displayed](tree-data-explorer.png)](https://www.japplis.com/tree-data-explorer/) *Screenshot of Tree Data Explorer exploring a JSON*
 
 Note that Tree Data Explorer is also available in the bookmarks of [Applet Runner IDE plug-in](https://www.japplis.com/applet-runner/).
 
 ## 🔟 Characters Count
 
 Data needs to fit in the database. Often there could be a limitation in the number of characters. Japplis Toolbox includes a tool for it. If you have the '**Live**' checkbox checked, the value will be updated while you type.  
-![](toolbox-characters-count.png) *Japplis Toolbox Text Characterics tools*
+![Japplis Toolbox Text Characteristics tab with live character count showing 50 for the text entered](toolbox-characters-count.png) *Japplis Toolbox Text Characterics tools*
 
 ## 1️⃣1️⃣ Number Lines
 
 You may need to explain code or data and to reference the line numbers.  
-![](toolbox-number-lines.png) *Japplis Toolbox adding line numbers*
+![Japplis Toolbox Lines tab using 'Number' to prefix each line of a JSON document with its line number](toolbox-number-lines.png) *Japplis Toolbox adding line numbers*
 
 For example to specify '*description at line 14 is empty* '. Or maybe a tool is reporting '*missing value at line 15*' and you're wondering which line it is.
 
@@ -105,12 +103,12 @@ I used the following combinaison:
 * Lines -\> Join
 
 And since I wanted the list of a YouTube thumbnail, I used another of my tool [Poster Font](https://www.japplis.com/poster-font/) (Freemium) to make the text more beautiful.  
-![](toolbox-combine-1.png)  
-![](toolbox-combine-2.png)  
-![](toolbox-combine-3.png)  
-![](toolbox-combine-4.png)  
-![](toolbox-combine-5.png)  
-[![](poster-font-extensions.png)](https://www.japplis.com/poster-font/) *[Poster Font](https://www.japplis.com/poster-font/) for text to image*
+![Japplis Toolbox using 'Remove regexp' with pattern =.* to strip the URLs from key=url lines, leaving pdf, docx, xlsx, xls, csv](toolbox-combine-1.png)  
+![Japplis Toolbox using 'Remove lines' with pattern # to delete comment lines from a list of file extensions](toolbox-combine-2.png)  
+![Japplis Toolbox Lines tab using 'Remove empty' to delete blank lines from the list of file extensions](toolbox-combine-3.png)  
+![Japplis Toolbox using 'Suffix' to append a comma to each line of the file extension list](toolbox-combine-4.png)  
+![Japplis Toolbox Lines tab using 'Join' to merge the lines into one comma-separated line: pdf, docx, xlsx, xls, csv, m3u, pls, wav](toolbox-combine-5.png)  
+[![Poster Font app turning the text 'pdf, docx, xlsx, xls,' into large styled pink-and-yellow lettering with border and drop shadow](poster-font-extensions.png)](https://www.japplis.com/poster-font/) *[Poster Font](https://www.japplis.com/poster-font/) for text to image*
 
 ## Going Further
 

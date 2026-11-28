@@ -1,7 +1,6 @@
 ---
 title: "Understand the Root Cause of Regressions with Git Bisect"
 date: "2022-07-29T13:18:07+00:00"
-lastmod: "2022-08-26T14:48:58+00:00"
 description: "Your git fairy godmother will test and locate bugs for you with a swish of her magic wand. All you need are the magic words: \"git bisect\"."
 authors:
   - "shai-almog"
@@ -30,7 +29,7 @@ At this point you might wonder, why didn't you automate these things?
 
 We sometimes did but since no versioning system was as dominant as git these automations didn't last and I'm not aware of such an automation that made it into any version control system. But git bisect made it in and is the automation of this heuristic.
 
-![](FUSGSqAX0A4FnFe.jpg)
+![Meme of two door-to-door preachers asking 'Do you have a moment to talk about our Lord and savior, git bisect'](FUSGSqAX0A4FnFe.jpg)
 
 ## Git Bisect: Find the Bug. Automatically!
 
@@ -56,13 +55,13 @@ Once this is done, we can move between revisions by redefining the good or bad r
 
 Here we ran these commands on the Codename One repo and got this output:
 
-![](Screen-Shot-2022-07-10-at-12.20.22-700x101.png)
+![Terminal running git bisect start, good and bad, reporting 8 revisions left to test](Screen-Shot-2022-07-10-at-12.20.22-700x101.png)
 
 Notice the value `68dabb4f70c8295887d2da5c466dbe89fc910408` at the bottom. This is the current revision we "jumped" to. We can now mark this revision as good or bad based on our manual testing.
 
 I marked it as bad, could have marked it as "good" and that would have worked fine. This moved bisect to the next revision we need to test:
 
-![](Screen-Shot-2022-07-10-at-12.20.22-1-700x101.png)
+![Terminal running git bisect start, good and bad, reporting 8 revisions left to test](Screen-Shot-2022-07-10-at-12.20.22-1-700x101.png)
 
 ## This Sucks! Or Does It?
 

@@ -1,7 +1,6 @@
 ---
 title: "Certified for the Future: Jakarta EE 11 with Payara Platform"
 date: "2025-10-24T06:39:56+00:00"
-lastmod: "2025-10-24T06:39:58+00:00"
 description: "Payara Platform Community 7 Beta is Jakarta EE 11 certified across all profiles. Try it now, with Enterprise certification coming soon."
 canonical: "https://blog.payara.fish/leading-the-way-payara-platform-community-7-beta-now-fully-jakarta-ee-11-certified"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "Community_Announcement.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "can-java-jakarta-ee-do-microservices"

@@ -1,13 +1,11 @@
 ---
 title: "Trip Report: Dubai JUG 2nd Meetup"
 date: "2022-10-27T07:28:22+00:00"
-lastmod: "2022-10-27T08:11:30+00:00"
 description: "The second meetup, yet also the first real one. The first one was more of a practice team building version."
 authors:
   - "pacovan"
 image: "dubai-jug-2nd-meetup-1024x768.jpg"
 categories:
-  - "Dubai JUG"
   - "JUGs"
   - "Trip Reports"
 related_posts:
@@ -25,7 +23,7 @@ This was my second time in Dubai. I had visited most of the landmarks the first 
 
 Initially we planned the speaker dinner on Thursday, but Friday was a better fit so I had a free day in Dubai. During the day, I worked for a client from the hotel, with a beautiful and quite distracting view of the skyline. The second day I promised myself to start the day with a run. Not outside, of course, because it was way too hot, but inside the hotel at the comfort of the air conditioning with a nice view.
 
-![](dubai-jug-running.jpg)
+![Runner on a hotel gym treadmill in a blue 'Open Value' shirt, looking out at Dubai skyscrapers](dubai-jug-running.jpg)
 
 ## Meetup day
 
@@ -38,4 +36,4 @@ Dubai is a place with many expats but no real developer community, a gap that Ja
 
 After everybody left it was time for the speaker dinner in the Marina area where you can get some good food and enjoy the view of the Dubai skyline. All by all a great (first) meetup! With many more to come. Are you interested in joining the Dubai JUG? [Keep an eye out and join the meetup group for future events!](https://www.meetup.com/meetup-group-otgagdwa/)
 
-![](dubai-jug-speakers.jpg)
+![Three smiling men posing together in a modern office corridor in Dubai](dubai-jug-speakers.jpg)

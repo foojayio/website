@@ -13,7 +13,7 @@ They are grouped by **lifetime and job**, not by what they happen to be called:
 | --- | --- | --- |
 | `fetch/` | pulls data from community-run upstreams into `data/*` | CI, and by hand |
 | `validate/` | PR-time content checks | CI |
-| `notify/` | tells Slack what was published (`SlackPosts.java`); tells an article's authors a reader started a discussion (`DiscussionAuthors.java`) | CI, after a deploy, every Monday, and when a discussion is created |
+| `notify/` | tells Slack what was published (`SlackPosts.java`); tells Slack that a reader started a discussion on an article, naming its authors (`DiscussionAuthors.java`) | CI, after a deploy, every Monday, and when a discussion is created |
 
 **`transfer/`, `cleanup/` and `shared/` are gone**, deleted at cutover.
 `transfer/` scraped the live WordPress site
@@ -35,9 +35,11 @@ never hand-edit them**, fix the entry upstream.
 | --- | --- | --- |
 | `Jugs.java` | `data/jugs.yaml` | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs) |
 | `JavaChampions.java` | `data/java-champions.yaml`, `data/geocode-cache.yaml` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions), plus [geocode.maps.co](https://geocode.maps.co) for the map coordinates |
+| `JavaConferences.java` | `data/java-conferences.yaml` | [javaconferences.org](https://javaconferences.org/) ([repo](https://github.com/javaconferences/javaconferences.github.io)), for `/java-conferences/` and the calendar |
 | `JugEvents.java` | `data/jug-events.json` | the iCal feed each JUG publishes (its own site, Google Calendar, Meetup) |
 | `ViewCounts.java` | `data/views.json` | our own read counter (`worker/views/`) |
-| `JvmWeekly.java` | `data/jvm-weekly.yaml` | the public RSS feed of [JVM Weekly](https://www.jvm-weekly.com/), for the monthly Foojay roundup shown at `/jvm-weekly/` |
+| `TvVideos.java` | `data/tv-videos.json` | the public RSS feeds of the YouTube channels in `data/tv-channels.yaml`, shown at `/tv/` without Shorts |
+| `JvmWeekly.java` | `data/jvm-weekly.yaml` | the public RSS feed of [JVM Weekly](https://www.jvm-weekly.com/), for the monthly Foojay roundup shown at `/month-overview/` |
 | `DiscoverJugCalendars.java` | nothing — it reports | JUG websites; finds calendars missing from GlobalWWJugs, to be fixed **upstream** |
 | `PodcastTranscripts.java` | `transcript.md` in each podcast episode's bundle | the automatic captions on foojay's own YouTube channel, via `yt-dlp` |
 

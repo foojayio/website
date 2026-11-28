@@ -1,7 +1,6 @@
 ---
 title: "Domain-Deadline-Dog-Driven Development"
 date: "2023-10-21T10:06:53+00:00"
-lastmod: "2023-10-23T06:04:22+00:00"
 description: "Many Something-Driven Developments are available nowadays! Which are your favorites and are you going to introduce to your company or team?"
 canonical: "https://webtechie.be/post/2023-07-25-domain-deadline-dog-driven-development/"
 authors:

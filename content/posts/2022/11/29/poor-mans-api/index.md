@@ -1,7 +1,6 @@
 ---
 title: "A Poor Man's API"
 date: "2022-11-29T09:13:38+00:00"
-lastmod: "2022-11-29T09:17:12+00:00"
 description: "Creating a full-fledged API requires resources, both time and money. Let's achieve it without writing a single line of code!"
 canonical: "https://blog.frankel.ch/poor-man-api/"
 authors:
@@ -38,7 +37,7 @@ Instead of writing our REST API, we use the PostgREST component:
 
 Let's apply it to a simple use case. Here's a `product` table that I want to expose via a CRUD API:
 
-![](table.png)
+![Entity diagram of the product table: id, name, description, price and hero columns](table.png)
 
 Note that you can find the whole source code on [GitHub](https://github.com/ajavageek/poor-man-api) to follow along.
 
@@ -354,7 +353,7 @@ curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PU
 
 Send a couple of queries and open the Grafana dashboard. It should look similar to this:
 
-{{< img src="grafana-700x288.jpg" class="size-medium aligncenter" width="700" height="288" >}}
+{{< img src="grafana-700x288.jpg" alt="Grafana dashboard with Nginx connection counts (20 accepted and handled) and a bandwidth graph with two small traffic spikes" class="size-medium aligncenter" width="700" height="288" >}}
 
 ## Conclusion
 

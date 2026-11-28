@@ -1,7 +1,6 @@
 ---
 title: "Browserless Testing of Vaadin Applications with Karibu Testing"
 date: "2024-09-09T06:27:41+00:00"
-lastmod: "2024-09-09T06:27:42+00:00"
 description: "About a testing framework that stands out for its ability to run browserless testing, offering several advantages over traditional end-to-end testing approaches, such as Selenium, Playwright, or Cypress."
 authors:
   - "simon-martinelli"

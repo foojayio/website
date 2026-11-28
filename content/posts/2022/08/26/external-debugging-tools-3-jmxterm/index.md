@@ -1,7 +1,6 @@
 ---
 title: "External Debugging Tools 3: JMXTerm"
 date: "2022-08-26T14:52:23+00:00"
-lastmod: "2022-08-26T15:09:32+00:00"
 description: "Monitor your application in production and locally. Understand what's going on under the hood while debugging & changing settings on the fly."
 authors:
   - "shai-almog"
@@ -36,7 +35,7 @@ Spring also supports exposing a lot of server details as management beans via ac
 
 Usually one controls and reads JMX via web interface tools or dedicated administration tooling. If you have access to any of them I suggest you pick one of them up and use them as it would work pretty well. I've used some of those in some companies and I actually prefer them in some cases. I also enjoy using IntelliJ/IDEA Ultimates support for Actuator which is a pretty powerful visualization tool:
 
-![](Screen-Shot-2022-07-17-at-10.38.24-700x418.png)
+![IntelliJ debug Actuator Health tab showing healthy db (H2), diskSpace and ping checks in a Spring Boot app](Screen-Shot-2022-07-17-at-10.38.24-700x418.png)
 
 `JMXTerm` is just as powerful but doesn't include the visualization aspect, in that sense it's exceptionally convenient when we need to understand something quickly on a server that might be alien. It's also pretty useful for getting high level insights from the server internals. We can get started by downloading `JMXTerm` from [here](https://docs.cyclopsgroup.org/jmxterm).
 

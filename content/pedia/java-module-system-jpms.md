@@ -1,7 +1,9 @@
 ---
 title: "Java Module System (JPMS)"
 description: "The Java Platform Module System (JPMS), introduced in Java 9 as part of Project Jigsaw, brings a formal module concept to the Java platform. A module is a named, self-describing collection of packages. Each module declares what it exports (makes ..."
-url: "/pedia/java-module-system-jpms/"
+url: "/java-terms-explained/java-module-system-jpms/"
+aliases:
+  - "/pedia/java-module-system-jpms/"
 ---
 
 The Java Platform Module System (JPMS), introduced in Java 9 as part of Project Jigsaw, brings a formal module concept to the Java platform. A module is a named, self-describing collection of packages. Each module declares what it exports (makes available to other modules) and what it requires (depends on), in a `module-info.java` file at the root of the source tree.
@@ -14,6 +16,6 @@ Adoption in the wider ecosystem has been gradual. Many libraries ship unnamed (c
 
 ## See Also
 
-* [Class Loading](/pedia/class-loading/)
-* [Compact Profiles](/pedia/compactprofiles/)
-* [Foreign Function & Memory API](/pedia/foreign-function-memory-api/)
+* [Class Loading](/java-terms-explained/class-loading/)
+* [Compact Profiles](/java-terms-explained/compactprofiles/)
+* [Foreign Function & Memory API](/java-terms-explained/foreign-function-memory-api/)

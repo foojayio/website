@@ -1,13 +1,13 @@
 ---
 title: "Implementing Soft Deletes in Java"
 date: "2026-05-21T10:09:00+00:00"
-lastmod: "2026-05-22T07:06:23+00:00"
 description: "Usually, when deleting documents from a database, the entry is permanently gone and can not be recovered or accessed again. Sometimes data needs to be made unavailable for regular access without actually being removed from a database. A common example is a user deleting their account on a platform, but retention policies require you to keep all data related to that user for a certain period of time. At the same time, no data regarding that user is accessible on the platform. A soft delete is a treatment for a piece of data that ensures it is ignored by your application while actually still being stored in the database."
 authors:
   - "daniel-hartmann"
 image: "Technical_STORAGE_Archive2_Thumbnail_BS_Lavender.png"
 categories:
   - "Databases"
+  - "Mongo"
 related_posts:
   - "contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news"
   - "foojay-all-about-java-and-the-openjdk-i-programmer"

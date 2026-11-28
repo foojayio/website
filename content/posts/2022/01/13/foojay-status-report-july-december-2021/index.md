@@ -1,7 +1,6 @@
 ---
 title: "Foojay Status Report: July – December 2021"
 date: "2022-01-13T14:21:20+00:00"
-lastmod: "2022-01-13T14:58:08+00:00"
 description: "Foojay doubled in usage from the first half to the second half of the year."
 authors:
   - "geertjan-wielenga"
@@ -19,12 +18,12 @@ Another 6 months are behind us... and let's take a look at some stats on Foojay,
 
 In the back of my mind, in the first full year of Foojay, **it would have been great to have had 50K unique visitors and 100K sessions** , in terms of Google Analytics. Below is the actual result over the whole of last year, i.e., significantly more unique visitors and sessions than anticipated: **84K unique visitors and 131K sessions**.
 
-{{< img src="whole-year-2021-a-1024x845.png" class="size-large is-resized" width="482" height="398" >}}
+{{< img src="whole-year-2021-a-1024x845.png" alt="Google Analytics for 2021: 84K users and 131K sessions, with daily traffic spikes and a steady rise through the year" class="size-large is-resized" width="482" height="398" >}}
 
 The chart shows steady growth over the year, with some significant spikes, the first being around the announcement of the [Foojay Board](https://foojay.io/board/) and the [Foojay room at FOSDEM 2021](https://foojay.io/today/friends-of-openjdk-at-fosdem-2021/), the second an article by Wim, [Better Error Handling for Your Spring Boot REST APIs](https://foojay.io/today/better-error-handling-for-your-spring-boot-rest-apis/), the third (the biggest spike) is Deepu's [Demystifying JVM Memory Management](https://foojay.io/today/demystifying-jvm-memory-management/), Bazlur's great [Java threading series starting here](https://foojay.io/today/java-thread-programming-part-1/), and the last big spike is around [articles connected to log4j](https://foojay.io/log4j-cve).
 
 How does the first half of the year compare to the second half of the year? Well, take a look, the first image shows the first half of the year and the second shows the second half of the year:
-![](first-half-second-half-1024x422.png)
+![Google Analytics Home for Foojay: 28K users in Jan-Jun 2021 versus 57K users in Jul-Dec 2021, with steady growth and spikes](first-half-second-half-1024x422.png)
 
 In other words, Foojay doubled in usage from the first half to the second half of the year.
 

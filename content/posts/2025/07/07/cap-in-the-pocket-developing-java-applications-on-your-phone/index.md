@@ -1,13 +1,12 @@
 ---
 title: "CAP in the Pocket"
 date: "2025-07-07T15:27:26+00:00"
-lastmod: "2025-07-07T15:27:28+00:00"
 description: "Learn you how develop and run a CAP Spring-Boot Java app locally on your Android phone using Termux and VSCode."
 authors:
   - "johannes-bechberger"
 image: "cap-1024x767.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
@@ -18,7 +17,7 @@ related_posts:
 Smartphones are more powerful then ever, with processors rivaling old laptops. So let's try to use them like a laptop to develop web-applications on the go.
 
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
-![](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
+![VS Code on a phone showing DeductDiscountHandler.java in the cap-sflight project with the divisor changed to 10](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
 
 ## Termux
 
@@ -53,7 +52,7 @@ apt install openjdk-21
 
 Now we have a proper OpenJDK JVM running on our phone:  
 
-{{< img src="Screenshot-May-7-2025-12_40_05-PM-900x20-303d0ba6.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-7-2025-12_40_05-PM-900x20-303d0ba6.png" alt="Android terminal running java -version, reporting OpenJDK 21.0.7 on the phone" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 But developing code in shell tools like VIM is cumbersome, so we let's install VSCode. The cool part about VSCode is that it consists of two parts, a backend and a front-end. We can run the backend in Termux and the front-end in the browser.
 
@@ -76,10 +75,10 @@ This launches a local version and ignores the shell output. Code-server is by de
 
 Go to [localhost:8080](http://localhost:8080) to access it. Now we have a IDE, running locally directly on our device:  
 
-{{< img src="Screenshot-May-7-2025-1_11_41-PM-900x200-58cbd86a.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-7-2025-1_11_41-PM-900x200-58cbd86a.png" alt="VS Code served in a phone browser at localhost:8080, showing an empty editor window" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 That was simple, wasn't it? The only Problem: The official VSCode extensions and accessing the official VSCode market place is not supported, as code-server is a fork of VSCode:  
-![](Screenshot-May-7-2025-1_19_15-PM-2000x90-52303f50.png)
+![VS Code on a phone showing the Red Hat Language Support for Java extension, flagged as unavailable in code-server](Screenshot-May-7-2025-1_19_15-PM-2000x90-52303f50.png)
 
 You can still install the Java extensions from file by downloading the latest Linux arm64 release via wget from [GitHub](https://github.com/redhat-developer/vscode-java/releases/tag/v1.41.1) and then use "Install from VSIX" in the front-end, but this is cumbersome.
 
@@ -131,7 +130,7 @@ apt install sapmachine-21-jdk
 
 Resulting in a proper JVM:  
 
-{{< img src="Screenshot-May-8-2025-12_37_53-PM-900x20-c0fcfea4.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-12_37_53-PM-900x20-c0fcfea4.png" alt="Android terminal where java -version reports SapMachine 21.0.7 LTS" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 After that, we can install the official VSCode distribution:
 
@@ -153,7 +152,7 @@ nohup code serve-web --port 8080 --without-connection-token &
 
 Now we have a proper official VSCode and can view it in the browser at [localhost:8080](http://localhost:8080):  
 
-{{< img src="Screenshot-May-8-2025-1_14_40-PM-900x200-339ddbf8.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-1_14_40-PM-900x200-339ddbf8.png" alt="Official VS Code welcome page in a phone browser at 127.0.0.1:8080" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 In this we can install all the extensions we want and can start developing applications.
 
@@ -212,11 +211,11 @@ mvn spring-boot:run
 
 But the CAP tools run into a problem:  
 
-{{< img src="Screenshot-May-7-2025-4_53_38-PM-900x200-680767c1.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-7-2025-4_53_38-PM-900x200-680767c1.png" alt="Terminal error from npm ci: no prebuilt Secrets SDK keyring module for android-arm64" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Seems like nobody prebuilt their npm packages from the Android arm64 target. And no, self-building all packages doesn't work and even if. `mvn spring-boot:run`, which uses the CAP's NodeJS tools internally, crashes with a double free:  
 
-{{< img src="image-1-900x2000-acb2d67b.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="image-1-900x2000-acb2d67b.png" alt="Maven build output ending in 'double free or corruption' and BUILD FAILURE after about ten minutes" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Because I still want to build SFlight on my phone, I need to get creative. The problem here are solely the CAP tools, not anything written in Java. So yes, you might call the following hacky, but this would be no problem in standard Spring Boot applications. It only means that you should be aware of the dependencies that your project needs, especially of natively compiled dependencies.
 
@@ -250,20 +249,20 @@ You might want to add this to your `.zshrc` to make it permament.
 
 To access the most basic page of the app, visit [localhost:4004](http://localhost:4004)  
 
-{{< img src="Screenshot-May-7-2025-5_03_35-PM1-900x20-27485845.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-7-2025-5_03_35-PM1-900x20-27485845.png" alt="CAP Java welcome page at localhost:4004 listing web applications and OData endpoints for analytics and processor services" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Or visit <http://localhost:4004/travel_processor/dist/index.html> to a proper page with which we can easily interact. When the website wants you to sign in, choose "privileged" as a user and an empty password.  
 
-{{< img src="Screenshot-May-8-2025-12_53_04-PM-900x20-7254269d.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-12_53_04-PM-900x20-7254269d.png" alt="Browser sign-in dialog at localhost:4004 with the username 'privileged' filled in" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Leading you to:  
 
-{{< img src="Screenshot-May-8-2025-12_55_39-PM-1-900x-466ad6af.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-12_55_39-PM-1-900x-466ad6af.png" alt="Travel Processor Fiori app on the phone showing filters and a list of 4,133 travels with their status" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 ## Modifying the Application via VSCode
 
 We can use the VSCode instance that we launched before to access our SFlight project (`nohup code serve-web --port 8080 --without-connection-token &` to start it again if you stopped yours) and work with the code:
-![](Screenshot-May-8-2025-1_27_10-PM-2000x90-19c25adb.png)
+![VS Code on a phone with the cap-sflight project tree and DeductDiscountHandler.java open](Screenshot-May-8-2025-1_27_10-PM-2000x90-19c25adb.png)
 
 Now let's have some fun: The SFlight admin screens allows the privileged user to application deductions to the cost of a flight. We now introduce a small bug in the code that computes the discount in the `DeductDiscountHandler` class to always calculate a ten times higher discount than requested. This might not make any sense, but the reverse (fixing this bug) is a nice demo of how one can use VSCode on their phone to fix a serious bug on the go.
 
@@ -281,13 +280,13 @@ BigDecimal deductedTotalPrice = travel.totalPrice()
 ```
 
 We can now introduce the bug by dividing `context.percent()` in the first two lines not by 100, but by 10.
-![](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
+![VS Code on a phone showing the deliberate bug: the discount calculation now divides by 10 instead of 100](Screenshot-May-8-2025-1_28_58-PM-2000x90-26d30ae3.png)
 
 When we rebuild and run the application via `mvn spring-boot:run`, deducting 10% of the travel costs:
-![](Screenshot_20250508-133128-2000x900-de10d14b.png)
+![Phone browser showing the app's Deduct Discount dialog with 10 entered as the percent](Screenshot_20250508-133128-2000x900-de10d14b.png)
 
 Decreases the price to 0 USD:
-![](Screenshot_20250508-133150-2000x900-621a8336.png)
+![Phone browser showing the Vacation travel record with booking fee and total price both at 0.00 USD after the discount](Screenshot_20250508-133150-2000x900-621a8336.png)
 
 Nothing prevents us from using git to commit our change to some repo. This shows how we can easily modify our CAP/Spring-Boot application locally on our phone.
 
@@ -331,7 +330,7 @@ And of course you should set `JAVA_HOME` as before to prevent maven from complai
 
 We now have a SapMachine:  
 
-{{< img src="Screenshot-May-8-2025-2_05_45-PM-1-900x2-93245a6d.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-2_05_45-PM-1-900x2-93245a6d.png" alt="Android terminal where java -version reports SapMachine 21.0.7 LTS after installing it" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 *There are now technically two SapMachines and one OpenJDK installed on my tiny phone. Maybe I should install an OpenJ9 build just for good measure...*
 
@@ -347,11 +346,11 @@ rm code.deb
 
 During the installation I got asked whether I want to add the Microsoft apt repository, having this prompt on my phone just looks funny:  
 
-{{< img src="Screenshot-May-8-2025-2_19_39-PM-900x200-59b98a9a.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-2_19_39-PM-900x200-59b98a9a.png" alt="Terminal prompt asking whether to add the Microsoft apt repository for Visual Studio Code, with Yes selected" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Unsuprisingly, launching VSCode via `nohup code serve-web --port 8080 --without-connection-token &` and then accessing the front-end via [localhost:8080](http://localhost:8080) works:  
 
-{{< img src="Screenshot-May-8-2025-2_25_43-PM-1-900x2-bca9f115.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-2_25_43-PM-1-900x2-bca9f115.png" alt="VS Code welcome page in a phone browser at localhost:8080 with cap-sflight listed as a recent folder" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Now the thing you're all waiting for: How long does a git clone take and do the CAP Java tools work in building the SFlight CAP app on this system?
 
@@ -389,7 +388,7 @@ And well, it worked... Which I find surprising. The UI of the new Linux Terminal
 
 Well it worked till I opened the browser and then the Linux Terminal App crashed. I'm happy that I documented everything. I tried it two times more. But this means that despite it's apparent benefits, it's basically unusuable for this specific use case for now.  
 
-{{< img src="Screenshot-May-8-2025-4_27_18-PM-1-900x2-c2653c79.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-8-2025-4_27_18-PM-1-900x2-c2653c79.png" alt="Android 'Unrecoverable error' screen: java.lang.RuntimeException, Connection to terminal timedout" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Hopefully I can revisit this in a few months and it's fixed.
 
@@ -399,7 +398,7 @@ Hopefully I can revisit this in a few months and it's fixed.
 
 Switching between VSCode for editing and the shell for killing the previous SFlight server instance is too cumbersome for my demo. So I created the [CAP-in-the-Pocket](https://github.com/parttimenerd/cap-in-the-pocket-extension) extension for VSCode:  
 
-{{< img src="Screenshot-May-9-2025-12_42_33-PM-900x20-fa5a4d3e.png" class="aligncenter size-large is-resized" style="width:300px" >}}
+{{< img src="Screenshot-May-9-2025-12_42_33-PM-900x20-fa5a4d3e.png" alt="VS Code on the phone with the CAP-in-the-Pocket extension sidebar, build log and Java source file open" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 To install it, download the extension from [GitHub](https://github.com/parttimenerd/cap-in-the-pocket-extension/releases/download/snapshot/cap-in-the-pocket-0.0.1.vsix) and open with the Termux app to make it available to VSCode. Then open the Extensions view in VSCode, click the "..." at the top of the Extensions view, select "Install from VSIX..." and select the downloaded file.
 

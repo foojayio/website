@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #19: Working Free For Fun Brings Fame & Fortune"
 date: "2023-04-17T12:35:51+00:00"
-lastmod: "2025-11-13T09:09:17+00:00"
 description: "Many devs spend their time on side projects: an opportunity to learn and get involved in communities, sometimes leading to a new job!"
 authors:
   - "frankdelporte"
@@ -59,7 +58,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-![](podcast-guests-rich-and-famous-1024x577.jpg)
+![Video call grid of the four participants in the Foojay podcast episode: Maarten Mulders, Frank Delporte, Tim te Beek and Lukas](podcast-guests-rich-and-famous-1024x577.jpg)
 
 ## Content
 

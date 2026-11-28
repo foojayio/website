@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #41: Web Development with Java"
 date: "2024-01-29T08:23:10+00:00"
-lastmod: "2025-11-13T08:50:13+00:00"
 description: "Do you really need JavaScript frameworks? Why would you not just stick to Java and use one of the many great libraries that are available for it?"
 authors:
   - "frankdelporte"
@@ -56,7 +55,7 @@ Host: Frank Delporte
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-![](podcast-guests-web-development-1024x576.jpg)
+![Video call with three participants: Martijn Dashorst, Frank Delporte and Marcus, recording the Foojay podcast](podcast-guests-web-development-1024x576.jpg)
 
 ## Links
 

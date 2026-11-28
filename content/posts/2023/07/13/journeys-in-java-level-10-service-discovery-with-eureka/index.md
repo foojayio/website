@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 10: Service Discovery with Eureka"
 date: "2023-07-13T06:39:06+00:00"
-lastmod: "2023-07-13T10:35:34+00:00"
 description: "Eureka: service discovery to help services interact with one another without hardwiring in instance-specific or environment-dependent details."
 authors:
   - "jennifer-reif"

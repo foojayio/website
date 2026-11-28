@@ -1,7 +1,6 @@
 ---
 title: "Managing Dependencies in IntelliJ IDEA"
 date: "2023-01-10T15:13:39+00:00"
-lastmod: "2023-08-03T08:27:15+00:00"
 description: "Learn the different ways in which we can view our project's dependencies in IntelliJ IDEA, and the different focus for each view."
 canonical: "https://maritvandijk.com/managing-dependencies-in-intellij-idea/"
 authors:

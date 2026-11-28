@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Deep Learning in Java using Deep Netts"
 date: "2022-07-05T07:22:18+00:00"
-lastmod: "2023-07-11T09:37:36+00:00"
 description: "Learn how to make it easy to quickly start using deep learning and to integrate deep learning into existing Java applications."
 authors:
   - "zoran-sevarac"

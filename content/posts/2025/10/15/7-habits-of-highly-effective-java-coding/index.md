@@ -1,7 +1,6 @@
 ---
 title: "7 habits of Highly Effective Java Coding"
 date: "2025-10-15T11:25:03+00:00"
-lastmod: "2025-10-15T12:37:10+00:00"
 description: "Habits to work with the AI to write code that's actually good—solid, secure, and won't give the next person on your team a headache or your company a serious problem."
 authors:
   - "jonathan-vila"
@@ -10,7 +9,6 @@ categories:
   - "AI"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
 related_posts:
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "foojay-podcast-49"

@@ -1,7 +1,6 @@
 ---
 title: "New Features in Jakarta EE 11, with Examples"
 date: "2025-08-11T06:40:56+00:00"
-lastmod: "2025-08-11T06:42:31+00:00"
 description: "Launched on June 26, 2025, Jakarta EE 11 introduces one brand-new specification and updates 16 existing ones."
 canonical: "https://omnifish.ee/new-features-in-jakarta-ee-11-with-examples/"
 authors:
@@ -217,7 +216,7 @@ Virtual Threads enhance scalability and efficiency in cloud-native and serverles
 ## **Enhancements in the current APIs**
 
 Here's the full list of APIs that received updates:
-![](image-4-1024x707-1.jpg)
+![Jakarta EE 11 platform diagram of Web and Core profile specifications, colored as updated, not updated, or new (Data 1.0)](image-4-1024x707-1.jpg)
 
 We'll quickly go through some of the most interesting enhancements.
 

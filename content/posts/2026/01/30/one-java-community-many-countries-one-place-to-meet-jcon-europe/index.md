@@ -1,7 +1,6 @@
 ---
 title: "One Java community. Many countries. One place to meet: JCON EUROPE"
 date: "2026-01-30T14:50:01+00:00"
-lastmod: "2026-01-30T14:55:07+00:00"
 description: "At JCON EUROPE, developers, speakers, and contributors from across the globe come together to exchange ideas, share experiences, and connect around Java."
 authors:
   - "r-fichtner"
@@ -13,7 +12,7 @@ related_posts:
 
 At [JCON EUROPE](https://2026.europe.jcon.one/), developers, speakers, and contributors from across the globe come together to exchange ideas, share experiences, and connect around Java.
 
-![](54518501956_8d8431b49d_o-700x403.jpg)
+![Crowd of attendees standing under a large curved screen reading 'Welcome to JCON EUROPE 2025' in the conference hall](54518501956_8d8431b49d_o-700x403.jpg)
 
 What makes our Java community special isn't just new frameworks, AI, or shiny tooling — it's the people.
 
@@ -21,7 +20,7 @@ JCON EUROPE 2025 brought together a truly international community: participants 
 
 Throughout the conference, one theme kept coming up: connection. People met old friends, made new ones, and had deep conversations in hallways, mentoring sessions, and after talks. Many of you told us that having direct access to speakers and fellow developers, and the openness of those discussions, was where the real value happened.
 
-![](54521451118_839e4e684e_o-694x510.jpg)
+![Black and white photo of conference attendees with lanyards laughing and talking in a small group at JCON Europe](54521451118_839e4e684e_o-694x510.jpg)
 
 For many, a highlight was meeting the people who build the frameworks and libraries you use every day. Being able to ask questions, challenge ideas, and talk about real-world problems directly with maintainers and contributors turned talks into conversations, and those conversations into learning.
 
@@ -29,7 +28,7 @@ You showed just how vibrant the Java ecosystem really is. Through countless conv
 
 We heard how much you valued practical tips, deep dives, and the chance to bring new ideas back to your teams. For some, it was their first conference since Covid, and they left feeling energized, inspired, and ready to return with colleagues next time.
 
-![](54517640742_a58ce1aa5e_o-700x403.jpg)
+![Rows of dark JCON 10th edition t-shirts printed with Java mascot artwork and '30 Years of Java'](54517640742_a58ce1aa5e_o-700x403.jpg)
 
 Now we're taking everything we learned and actively shaping the JCON EUROPE 2026 experience — refining the program, deepening the technical content, and creating even more space for meaningful exchange. If you care about Java, build with it every day, and want to learn from—and contribute to—the people shaping its future, we want you to be part of it. Join us at JCON EUROPE 2026, bring your ideas, your questions, and your experience — and help us continue to prove, together, that Java is alive through its community.
 

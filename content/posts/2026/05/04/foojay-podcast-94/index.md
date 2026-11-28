@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #94: More Than a Blog: How Foojay Connects, Sustains, and Evolves the Java Community"
 date: "2026-05-04T06:26:00+00:00"
-lastmod: "2026-06-11T18:04:03+00:00"
 description: "Foojay.io, the website for the Friends Of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down…"
 authors:
   - "frankdelporte"
@@ -19,7 +18,6 @@ authors:
 image: "edit-94-jcon-foojay-6years.jpg"
 categories:
   - "Conference"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JavaPro"

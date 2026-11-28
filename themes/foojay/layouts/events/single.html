@@ -52,33 +52,21 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    <div class="page-head__meta">
-      {{ if $events }}
-      <p class="cal-stats">
-        <strong>{{ len $events }}</strong> events &middot;
-        <strong>{{ len $groupNames }}</strong> Java User Groups &middot;
-        {{/* "conferences" while they all are; the moment a workshop or a
-             community day is added, the label widens on its own rather than
-             counting a workshop as a conference. */}}
-        {{ with $conferences }}
-          {{ $types := slice }}
-          {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
-          <strong>{{ len . }}</strong> {{ if and (eq (len $types) 1) (eq (index $types 0) "Conference") }}conferences{{ else }}conferences &amp; workshops{{ end }} &middot;
-        {{ end }}
-        <strong>{{ len $countries }}</strong> countries
-      </p>
+    {{ if $events }}
+      {{/* "conferences" while they all are; the moment a workshop or a
+           community day is added, the label widens on its own rather than
+           counting a workshop as a conference. */}}
+      {{ $stats := slice (printf "<strong>%d</strong> events" (len $events)) (printf "<strong>%d</strong> Java User Groups" (len $groupNames)) }}
+      {{ with $conferences }}
+        {{ $types := slice }}
+        {{ range . }}{{ if not (in $types .type) }}{{ $types = $types | append .type }}{{ end }}{{ end }}
+        {{ $label := cond (and (eq (len $types) 1) (eq (index $types 0) "Conference")) "conferences" "conferences &amp; workshops" }}
+        {{ $stats = $stats | append (printf "<strong>%d</strong> %s" (len .) $label) }}
       {{ end }}
-    </div>
-    {{/* OUTSIDE .page-head__meta, like every other page head: that is a flex
-         row, and .page-head__views has a margin-top meant for sitting below
-         it. The count is also a different KIND of number -- the ones above
-         describe the calendar, this describes the page. */}}
-    {{/* The feed sits with the read count, not on the stats row: both are about
-         this PAGE, where the numbers above describe the calendar. */}}
-    {{ $views := partial "views.html" . }}
-    {{ $feed := partial "feed-link.html" . }}
-    {{ if or $views $feed }}
-    <div class="page-head__views">{{ $views | safeHTML }}{{ $feed }}</div>
+      {{ $stats = $stats | append (printf "<strong>%d</strong> countries" (len $countries)) }}
+      {{ partial "page-head-meta.html" (dict "stats" (delimit $stats " &middot; ") "feed" . "views" .) }}
+    {{ else }}
+      {{ partial "page-head-meta.html" (dict "feed" . "views" .) }}
     {{ end }}
   </div>
 </div>
@@ -116,15 +104,22 @@
                between those rather than through empty ones. */}}
           <section class="cal-month" data-month="{{ $mk }}">
             <h2 class="cal-month__head">{{ index $monthLabels $mk }}</h2>
-            <ul class="cal-month__list">
-              {{ range $e := (where $events "monthKey" $mk) }}
-                {{/* The colour goes on the ROW, not only on the dot, so the
-                     type pill on a conference row can use it too. */}}
+            {{/* One row per day with the same day card as /today/coming-soon/. */}}
+            {{ $monthEvents := where $events "monthKey" $mk }}
+            {{ $days := slice }}
+            {{ range $monthEvents }}{{ if not (in $days .date) }}{{ $days = $days | append .date }}{{ end }}{{ end }}
+            {{ range $d := $days }}
+            {{ $day := where $monthEvents "date" $d }}
+            {{ $first := index $day 0 }}
+            <section class="coming-soon-day">
+              <span class="coming-soon-strip__day coming-soon-day__card" aria-hidden="true">
+                <span class="coming-soon-strip__dow">{{ $first.weekday }}</span>
+                <span class="coming-soon-strip__num">{{ $first.day }}</span>
+                <span class="coming-soon-strip__month">{{ dateFormat "Jan" $d }}</span>
+              </span>
+              <ul class="coming-soon-day__list cal-month__list">
+              {{ range $e := $day }}
                 <li class="cal-row{{ if ne $e.kind "meetup" }} cal-row--event{{ end }}" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)">
-                  <div class="cal-row__date">
-                    <span class="cal-row__day">{{ $e.day }}</span>
-                    <span class="cal-row__weekday">{{ $e.weekday }}</span>
-                  </div>
                   <div class="cal-row__body">
                     {{/* Not every feed carries a URL -- a Google Calendar
                          entry has no event page to link to -- so the title is
@@ -154,19 +149,20 @@
                   </div>
                 </li>
               {{ end }}
-            </ul>
+              </ul>
+            </section>
+            {{ end }}
           </section>
         {{ end }}
       </div>
     </div>
     <aside class="calendar__aside">
-      {{/* Two buttons because they are genuinely different jobs: an event is a
-           pull request here, a JUG's meetups sync from its own feed once its
-           entry exists upstream. Adding an event leads, as the one a reader
-           of this page can act on today. */}}
+      {{/* Three buttons because they are genuinely different jobs: an event is
+           a pull request here, while a conference and a JUG's meetups sync
+           from their own upstream lists. The event one leads, as the one a
+           reader can act on today; the other two sit under the list they add to. */}}
       <div class="cal-ctas">
         <a class="btn btn--accent cal-cta" href="{{ $repoEvents }}" target="_blank" rel="noopener">+ Add an event</a>
-        <a class="btn btn--ghost cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
       </div>
 
       {{ with $conferences }}
@@ -190,6 +186,7 @@
           {{ end }}
         </ul>
         </div>
+        <a class="btn btn--ghost cal-cta cal-legend__cta" href="https://github.com/javaconferences/javaconferences.github.io/blob/main/README.md" target="_blank" rel="noopener">+ Add your conference</a>
       </section>
       {{ end }}
 
@@ -211,6 +208,7 @@
           {{ end }}
         </ul>
         </div>
+        <a class="btn btn--ghost cal-cta cal-legend__cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/content/jugs" target="_blank" rel="noopener">+ Add your JUG</a>
       </section>
 
       {{/* This page builds its own rail, so it never goes through
@@ -229,8 +227,10 @@
     <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
     directory, and refreshed daily. If your JUG is missing or its events
     aren't showing up, add or fix its entry there &mdash; it appears here automatically.
-    Conferences, workshops and other one-offs have no such feed, so they are added by
-    pull request: one small
+    Conferences come from <a href="{{ "java-conferences/" | relURL }}">javaconferences.org</a>,
+    where a missing one is added by
+    <a href="https://github.com/javaconferences/javaconferences.github.io" target="_blank" rel="noopener">pull request</a>.
+    Workshops, webinars and anything else without a feed are added here by pull request: one small
     <a href="{{ $repoEvents }}" target="_blank" rel="noopener">YAML file per event</a>.
     {{ with $cal.generatedAt }}<br><span class="cal-source__synced">Last synced {{ dateFormat "2 January 2006, 15:04 MST" . }}.</span>{{ end }}
     {{ with $errored }}<br><span class="cal-source__errors">{{ len . }} group{{ if gt (len .) 1 }}s{{ end }} could not be synced last time: {{ delimit . ", " }}.</span>{{ end }}
@@ -288,7 +288,17 @@
 
       var today = new Date();
       var todayKey = keyOf(today);
-      var cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+      /* The month the grid opens on. When today's week holds the month's last
+         day, the current month would be a single row, so open on the next one;
+         its grid starts on the Monday holding the 1st, so this week still shows. */
+      function homeMonth() {
+        var lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        var weekEnd = new Date(today.getFullYear(), today.getMonth(),
+                               today.getDate() + 6 - ((today.getDay() + 6) % 7));
+        var m = weekEnd >= lastDay ? 1 : 0;
+        return new Date(today.getFullYear(), today.getMonth() + m, 1);
+      }
+      var cursor = homeMonth();
 
       /* THE CALENDAR HAS NO PAST, so neither does the grid.
          Nothing here can start before today -- JugEvents.java drops a meetup
@@ -555,7 +565,7 @@
       prevBtn.addEventListener('click', function () { step(-1); });
       nextBtn.addEventListener('click', function () { step(1); });
       root.querySelector('[data-cal-today]').addEventListener('click', function () {
-        cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+        cursor = homeMonth();
         renderGrid();
         /* Stay in the view the reader chose -- forcing the grid here dropped a
            phone, which opens on the agenda, into the one view that does not fit

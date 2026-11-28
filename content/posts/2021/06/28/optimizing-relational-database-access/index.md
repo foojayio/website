@@ -1,7 +1,6 @@
 ---
 title: "Let's Optimize Relational Database Access"
 date: "2021-06-28T07:42:54+00:00"
-lastmod: "2021-07-08T09:42:37+00:00"
 description: "Most database protocols have not followed the HTTP path yet and remain in the stone age of connection pooling."
 authors:
   - "clement-escoffier"
@@ -48,7 +47,7 @@ In 1996, HTTP/1.0 was officially released. It introduced *persistent connections
 
 [
 
-{{< img src="connection-pool-sequence-1-700x477.png" class="aligncenter size-medium" width="700" height="477" >}}
+{{< img src="connection-pool-sequence-1-700x477.png" alt="Sequence diagram: the client acquires a connection from the pool, which connects to the remote service, then GET, 200 OK and release()" class="aligncenter size-medium" width="700" height="477" >}}
 
 ](connection-pool-sequence-1.png)
 

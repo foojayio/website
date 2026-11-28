@@ -1,13 +1,11 @@
 ---
 title: "Java 23 Has Arrived, And It Brings a Truckload of Changes"
 date: "2024-09-17T06:45:11+00:00"
-lastmod: "2024-09-18T10:03:36+00:00"
 description: "Java 23 has arrived! It's been six months since Java 22 was released, so it's time for a fresh truckload of JEPs."
 authors:
   - "hanno-embregts"
 image: "road-train.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK 23"
   - "JEPs"

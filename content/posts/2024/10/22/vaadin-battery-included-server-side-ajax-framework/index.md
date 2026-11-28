@@ -1,7 +1,6 @@
 ---
 title: "Vaadin: Battery-Included Server-Side AJAX Framework"
 date: "2024-10-22T09:39:11+00:00"
-lastmod: "2024-10-22T09:39:12+00:00"
 description: "The beauty of Vaadin lies in its simplicity - you only write backend code."
 canonical: "https://blog.frankel.ch/ajax-ssr/6/"
 authors:

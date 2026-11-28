@@ -4,7 +4,7 @@ date: "2026-10-06"
 description: "Build an editable Java example with TeaVM, React, and Vite, then explore the environment available to Java in the browser."
 authors: ["petr-pravda"]
 image: "teavm-browser-hero.jpg"
-categories: ["Java", "Developer Tools"]
+categories: ["Developer Tools"]
 ---
 
 There’s something satisfying about editing a line of Java on a web page, clicking **Run**, and seeing the result appear right there in the browser. I use this approach for the live Java snippets at [nablatensor.com/learn](https://nablatensor.com/learn) and for source code used to bootstrap [nablatensor.com/quantlab](https://nablatensor.com/quantlab). In this article, I’ll explain how the pieces fit together and walk you through a React app you can run yourself.

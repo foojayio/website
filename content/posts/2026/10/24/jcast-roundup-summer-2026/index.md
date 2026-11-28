@@ -7,7 +7,6 @@ authors:
 image: "jcast-roundup-summer-2026.jpg"
 categories:
   - "Podcast"
-  - "Java"
   - "AI"
   - "Cloud"
   - "Interviews"

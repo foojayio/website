@@ -1,13 +1,12 @@
 ---
 title: "Comparing transitive dependency version resolution in Rust and Java"
 date: "2025-11-07T05:58:39+00:00"
-lastmod: "2026-09-21T06:00:59+00:00"
 description: "You learn by comparing to what you already know. I was recently bitten by assuming Rust worked as Java regarding transitive dependency version resolution."
 authors:
   - "nicolas-frankel"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
+  - "Dependency Management"
 related_posts:
 ---
 

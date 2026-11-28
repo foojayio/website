@@ -1,7 +1,6 @@
 ---
 title: "What's New In The June 2026 Azul Payara Release?"
 date: "2026-06-24T11:28:52+00:00"
-lastmod: "2026-06-24T14:38:27+00:00"
 description: "The June 2026 Azul Payara release ships a critical security fix across every supported branch, Jakarta EE 11 GA libraries, and key updates for Payara 7, 6, 5, and 4."
 authors:
   - "dominika-tasarz"
@@ -9,7 +8,6 @@ authors:
 image: "Whats-New-in-the-Payara-Platform-April-2026-Release-2.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Microservices"
   - "Payara"
   - "Release Notes"

@@ -1,13 +1,11 @@
 ---
 title: "Calling Microservices in Java: Part 1"
 date: "2024-05-17T19:41:44+00:00"
-lastmod: "2024-05-17T19:48:22+00:00"
 description: "This article explores various approaches to calling microservices in Java, from simple RESTful APIs to advanced. Learn more!"
 authors:
   - "abo-saad-muaath"
 image: "Screenshot-1445-10-05-at-7.23.37-AM.png"
 categories:
-  - "Java"
   - "Microservices"
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"

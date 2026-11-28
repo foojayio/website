@@ -1,14 +1,13 @@
 ---
 title: "My first real Rust project"
 date: "2025-11-25T17:03:42+00:00"
-lastmod: "2026-09-21T05:59:45+00:00"
 description: "I have been learning Rust for a couple of years, and using it for pet projects and demos alike. Working for a JVM-heavy company, I thought it would be my…"
 canonical: "https://blog.frankel.ch/first-real-rust-project/"
 authors:
   - "nicolas-frankel"
 image: "cover.jpg"
 categories:
-  - "Java"
+  - "Developer Tools"
 related_posts:
   - "runtime-initialized-variables-in-rust"
   - "error-management-in-rust-and-libs-that-support-it"

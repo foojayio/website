@@ -1,7 +1,6 @@
 ---
 title: "Thinking differently about testing"
 date: "2025-01-27T07:26:34+00:00"
-lastmod: "2025-01-28T14:53:09+00:00"
 description: "The takeaways of moving to a data-driven and test portability approach are more than a quality improvement."
 authors:
   - "steve-poole"
@@ -27,7 +26,7 @@ The idea is to find and share more of the 10x thinking that often makes a differ
 
 I thought I'd share a personal example...
 
-![](Picture-1-700x422.png)
+![Bar chart of relative cost: design and implementation are tiny, testing about 15, and maintenance dominates at 100](Picture-1-700x422.png)
 
 ### Bugs cost
 
@@ -93,7 +92,7 @@ There are four essential dimensions. How quickly a test runs and how much domain
 
 With those dimensions, we can organise our tests into a few groups.
 
-![](Picture-2-700x268.png)
+![Two-way arrows for test traits: fast to slow, easy to hard to run, always to never finds bugs, always to never accurate](Picture-2-700x268.png)
 
 ### Tortoise and the Hare vs the Feather and the Boulder
 
@@ -111,7 +110,7 @@ Axis Three and Four: Usefulness and Accuracy can be considered filters over test
 
 What moves us into more 10x territory is to consider the other axes.
 
-![](Picture-3-700x472.png)
+![Two axes for classifying tests: speed (slower to faster) vertically and ease of running (easy to hard) horizontally](Picture-3-700x472.png)
 
 These two dimensions allow us to think about how we organise testing differently. Forget the typical linear process and organisation groupings and look at tests through this lens.
 
@@ -123,7 +122,7 @@ Tests at the other end, which are slow to run and require significant setup and 
 
 Tests that have other combinations can be part of other organisations or may suggest using different strategies. Slow-running but easy-to-run tests might still be given to developers, but they get to run on the build server, which is not part of a developer's personal unit test activity. Slow tests might be run less often.
 
-![](Picture-4-700x397.png)
+![Test groups plotted by difficulty and speed: IDE is fast and easy, integration is mid, deployment tests are slow and hard](Picture-4-700x397.png)
 
 ### Changing Behavior
 

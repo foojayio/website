@@ -1,16 +1,14 @@
 ---
 title: "Using Bots to Keep Dependencies Updated"
 date: "2023-03-27T15:18:33+00:00"
-lastmod: "2023-03-27T15:53:26+00:00"
 description: "Did you know bots can automatically create pull requests to keep dependencies secure and up to date? Find out here!"
 canonical: "https://maritvandijk.com/using-bots-to-keep-our-dependencies-up-to-date/"
 authors:
   - "marit-van-dijk"
 image: "Snyk-PR-1.png"
 categories:
-  - "Dependabot"
+  - "Dependency Management"
   - "Developer Tools"
-  - "Renovate"
   - "Security"
   - "Snyk"
 related_posts:

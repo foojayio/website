@@ -1,7 +1,6 @@
 ---
 title: "Experimenting with AI subagents"
 date: "2026-04-07T11:58:05+00:00"
-lastmod: "2026-09-21T05:56:34+00:00"
 description: "I like to analyze codebases I start working on, or that I left for months. I ask my coding assistant, case in point, Copilot CLI: \"analyze the following…"
 canonical: "https://blog.frankel.ch/experimenting-ai-subagents/"
 authors:

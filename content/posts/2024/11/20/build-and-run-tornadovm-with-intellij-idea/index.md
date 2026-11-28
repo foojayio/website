@@ -1,7 +1,6 @@
 ---
 title: "Build and Run TornadoVM with IntelliJ IDEA"
 date: "2024-11-20T19:08:13+00:00"
-lastmod: "2024-11-20T19:08:15+00:00"
 description: "Learn how to build TornadoVM with IntelliJ, and run the unit-tests or other Java programs from the IDE."
 authors:
   - "thanos-stratikopoulos"
@@ -142,17 +141,17 @@ At first, you need to launch the IntelliJ application and open TornadoVM as a pr
 
 **Run \> Edit Configurations \> Python \> TornadoVM-Build**  
 
-{{< img src="Run-EditConfigurations-1024x656.png" class="aligncenter size-large is-resized" width="1024" height="656" style="width:560px;height:auto" >}}
+{{< img src="Run-EditConfigurations-1024x656.png" alt="IntelliJ IDEA Run menu with Edit Configurations highlighted in the TornadoVM project" class="aligncenter size-large is-resized" width="1024" height="656" style="width:560px;height:auto" >}}
 
 At this point all fields must have been automatically populated with the correct directories and attributes. You must ensure that the Use specified interpreter points to a valid Python interpreter from your system. If not, select one and click Apply.  
 
-{{< img src="Configure-Build-1024x782.png" class="aligncenter size-large is-resized" width="1024" height="782" style="width:560px;height:auto" >}}
+{{< img src="Configure-Build-1024x782.png" alt="IntelliJ Run/Debug Configurations for the Python TornadoVM-Build entry, with the Python 3.10 interpreter dropdown open" class="aligncenter size-large is-resized" width="1024" height="782" style="width:560px;height:auto" >}}
 
 Similarly you can update the selected interpreter for the Python configuration file that is used to run the TornadoVM unit-tests:
 
 **Run \> Edit Configurations \> Python \> TornadoVM-Tests**  
 
-{{< img src="Configure-Tests-1024x784.png" class="aligncenter size-large is-resized" width="1024" height="784" style="width:566px;height:auto" >}}
+{{< img src="Configure-Tests-1024x784.png" alt="IntelliJ Run/Debug Configurations for the Python TornadoVM-Tests entry, with the script parameters --ea --verbose --quickPass" class="aligncenter size-large is-resized" width="1024" height="784" style="width:566px;height:auto" >}}
 
 ## 4. Build TornadoVM from IntelliJ
 
@@ -164,7 +163,7 @@ You can select the TornadoVM-Tests configuration file and run. This should run a
 
 The outcome of running the unit-tests should be similar to this image:  
 
-{{< img src="Run-Tests-1024x943.jpg" class="aligncenter size-large is-resized" width="1024" height="943" style="width:604px;height:auto" >}}
+{{< img src="Run-Tests-1024x943.jpg" alt="IntelliJ Run window with TornadoVM-Tests output: 559 passed, 8 failed, 166 unsupported, 98.59% coverage" class="aligncenter size-large is-resized" width="1024" height="943" style="width:604px;height:auto" >}}
 
 ## 6. Run TornadoVM Examples/Applications from IntelliJ
 
@@ -238,11 +237,11 @@ You can add any values that will be selected as arguments for your class. In our
 
 You can click Apply and Run your application.  
 
-{{< img src="Configure-Application-1024x787.jpg" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
+{{< img src="Configure-Application-1024x787.jpg" alt="IntelliJ Application run configuration for MatrixMultiplication2D on GraalVM CE 21 with argument 256" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
 
 The output should be similar to the following image, which is executed on Apple M1 silicon.  
 
-{{< img src="Run-Application-1024x502.jpg" class="aligncenter size-large is-resized" width="1024" height="502" style="width:628px;height:auto" >}}
+{{< img src="Run-Application-1024x502.jpg" alt="IntelliJ run output of TornadoVM matrix multiplication, where GPU execution reaches a 28x speedup over single-threaded CPU" class="aligncenter size-large is-resized" width="1024" height="502" style="width:628px;height:auto" >}}
 
 ## *Summary*
 

@@ -11,7 +11,6 @@ categories:
   - "Podcast"
   - "Developer Tools"
   - "Security"
-  - "Java"
 related_posts:
   - "announcing-the-new-foojay"
   - "keep-wordpress-if-youre-looking-for-trouble"

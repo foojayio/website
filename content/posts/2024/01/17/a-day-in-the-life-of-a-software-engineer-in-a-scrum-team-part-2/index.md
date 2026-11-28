@@ -1,7 +1,6 @@
 ---
 title: "A Day in the Life of a Software Engineer in a Scrum Team Part-2"
 date: "2024-01-17T13:52:41+00:00"
-lastmod: "2024-01-17T13:54:04+00:00"
 description: "Let's dive deeper and explore a day in the life of Alex, a software engineer in a Payment Scrum Team."
 authors:
   - "abo-saad-muaath"

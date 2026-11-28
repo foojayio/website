@@ -46,7 +46,7 @@
        useful snippet, so a description that IS the fallback is dropped. */ -}}
 {{- $boiler := site.Params.description -}}
 {{- /* A menu entry carries a URL, not a page reference, and site.GetPage takes
-       a CONTENT path -- so it resolves /pedia/ (a real section) and misses every
+       a CONTENT path -- so it resolves the glossary (a real section) and misses every
        one of the 15 pages that override their path with `url:` frontmatter, i.e.
        almost the whole footer. Indexing the site by RelPermalink once is what
        lets a menu entry find its page, and therefore its real description. */ -}}
@@ -74,10 +74,12 @@ Content is copyright its respective authors and is published under the terms at
 
 Everything not listed below is one link away. Use these rather than crawling:
 
-- [XML sitemap]({{ "sitemap.xml" | absURL }}): every published URL on the site, each with a last-modified date. This is the authoritative, complete list.
+- [XML sitemap]({{ "sitemap.xml" | absURL }}): every canonical URL on the site, each with a last-modified date. Cross-posts whose original lives elsewhere are left out. This is the authoritative, complete list.
 - [HTML sitemap]({{ "sitemap/" | absURL }}): the same tree rendered for people, with sortable tables of all {{ len $posts }} articles and all {{ len $authors }} authors.
 - [RSS feed]({{ with site.Home.OutputFormats.Get "rss" }}{{ .Permalink }}{{ end }}): the 30 most recent articles. Every category and every author profile has a feed of its own, linked from its page.
 - [Search]({{ "search/" | absURL }}): full-text search across the site.
+- [Full reference text]({{ "llms-full.txt" | absURL }}): the glossary and the Java Quick Start, complete, in one file.
+- Markdown versions: every article and glossary entry is also served as Markdown at its own URL plus `index.md`, for example {{ with index $posts 0 }}{{ .Permalink }}index.md{{ end }} .
 {{ range site.Menus.footer }}
 ## {{ .Name }}
 {{ range .Children -}}
@@ -145,5 +147,6 @@ The 50 most recent of {{ len $posts }}. The complete list is in the sitemaps abo
 - [Authors]({{ "today/author/" | absURL }}): profiles for all {{ len $authors }} contributors, each with their own article list and feed.
 - [Java User Groups]({{ "jugs/" | absURL }}): the community-run World Wide JUGs directory, on a map.
 - [Java Champions]({{ "java-champions/" | absURL }}): the Java Champions programme membership, on a map.
+- [Java conferences]({{ "java-conferences/" | absURL }}): upcoming Java conferences and their calls for papers, on a map.
 - [Events calendar]({{ "calendar/" | absURL }}): upcoming JUG meetups and Java conferences.
 - [Write for Foojay]({{ "today/how-to-submit-your-next-article-on-foojay-io/" | absURL }}): how to contribute an article.

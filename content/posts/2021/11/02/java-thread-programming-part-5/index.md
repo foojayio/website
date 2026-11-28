@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 5)"
 date: "2021-11-02T08:29:36+00:00"
-lastmod: "2021-11-16T15:04:06+00:00"
 description: "When a thread acquires a lock object, no other thread will be able to use it. Once a thread unlocks the lock, other threads acquire it again."
 authors:
   - "bazlur-rahman"
@@ -92,7 +91,7 @@ If a thread reads before another thread finishes its writing, that's where thing
 
 It starts with 1.1, after exacuting this line, the local variable becomes 100 + 100, which is 200. 2.1 starts immediately after it, so the first thread doesn't get a chance to update the value to the balance variable yet. Line 2.1, the thread read the value from the balance variable, subtract 100 from it and keep the result in the local variable, which is now 0. 2.2 update the value to the balance variable. And then, when 1.2 executes, the local variable here is 200, and it updates the balance variable with it.
 
-![](Threading-432x510.png)
+![Flow diagram of two threads updating the same balance: one subtracts 100, the other adds 100, then each writes back](Threading-432x510.png)
 
 And this is how it produces an incorrect result.
 

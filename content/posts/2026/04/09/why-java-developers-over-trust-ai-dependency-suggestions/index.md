@@ -1,13 +1,11 @@
 ---
 title: "Why Java Developers Over-Trust AI-Generated Code"
 date: "2026-04-09T10:45:36+00:00"
-lastmod: "2026-04-09T18:22:21+00:00"
 description: "AI coding tools sound confident even when they're wrong. Here's the psychology behind why Java developers accept bad suggestions — and habits that help."
 authors:
   - "steve-poole"
 image: "Gemini_Generated_Image_zu1ebzu1ebzu1ebz-1024x559.jpg"
 categories:
-  - "Java"
   - "Security"
 related_posts:
   - "vibe-coding-maven-and-the-dependencies-you-didnt-choose"

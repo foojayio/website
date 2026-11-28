@@ -1,7 +1,6 @@
 ---
 title: "What Does The JVM Look Like, How Does It Work?"
 date: "2022-09-29T05:29:00+00:00"
-lastmod: "2022-09-30T05:31:07+00:00"
 description: "In this article, the internal workings of the JVM are discussed, e.g., interpreter, JIT compiler, and how it optimizes code."
 authors:
   - "bazlur-rahman"
@@ -27,7 +26,7 @@ Java code is compiled into bytecode, which is then executed by Java's virtual ma
 
 The class loader is where the JVM begins and where all of the verification processes begin. Any Java class must pass through the classloader. The JVM just won't run any arbitrary bytecode. Thanks to this, the JVM will be able to avoid any runtime checking in the future. After that, it uses all of the code that is contained within the method cache area.
 
-{{< img src="Screen-Shot-2022-09-12-at-5.26.11-PM-700x332.png" class="size-medium" width="700" height="332" >}}
+{{< img src="Screen-Shot-2022-09-12-at-5.26.11-PM-700x332.png" alt="Diagram of JVM: javac compiles source to a .class file, loaded by the classloader, then interpreted and JIT-compiled" class="size-medium" width="700" height="332" >}}
 
 Then, the method cache feeds bytecodes into the interpreter. The Java interpreter converts or translates the bytecode into the machine-understandable format, i.e., machine code; after that, the machine code interacts with the operating system. The interpreter basically executes the byte code, and it keeps doing it. Our Java program can run indefinitely here. Java code does not necessarily require JIT compilation. The interpreter itself is quite capable of running our Java code.
 

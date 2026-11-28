@@ -1,14 +1,12 @@
 ---
 title: "How we almost missed a plane, but OpenJDK could have saved us."
 date: "2024-11-03T08:01:44+00:00"
-lastmod: "2024-11-03T08:01:46+00:00"
 description: "A family vacation as a topic for a Foojay blog post? Really? Yes, because, very unexpectedly, it was influenced by a change in the OpenJDK project..."
 canonical: "https://webtechie.be/post/2024-09-04-timezone-change-kazakstan/"
 authors:
   - "frankdelporte"
 image: "kstan.jpg"
 categories:
-  - "Java"
   - "Trip Reports"
 related_posts:
   - "time-zone-and-currency-database-in-jdk"
@@ -25,9 +23,9 @@ In August, our family vacation brought us to Kazakhstan. An important trip, as i
 So finally, early this year, we decided to start organizing our trip. And it was amazing, visited different cities and national parks, and had a fantastic time.
 
 {{< gallery >}}
-foto-02-1024x768.jpg
-foto-07-1024x578.jpg
-foto-01-1024x768.jpg
+foto-02-1024x768.jpg | | Two people sitting beside a mountain stream in Kazakhstan, one wearing a JVM cap and a foojay T-shirt
+foto-07-1024x578.jpg | | Kaindy Lake in Kazakhstan with turquoise water and bare tree trunks rising from it, surrounded by forested mountains
+foto-01-1024x768.jpg | | Fast turquoise river with large boulders in a mountain valley under a blue sky in Kazakhstan
 {{< /gallery >}}
 
 *(yes, I may have walked around in a Foojay T-shirt and JVM cap)*
@@ -39,7 +37,7 @@ But why am I telling this story here on a technical, Java blog? Because we almos
 In 2023, I wrote the blog post "[Time Zone and Currency Database in JDK](https://www.azul.com/blog/time-zone-and-currency-database-in-jdk/)" for the Azul website. In that post, I explained how the OpenJDK sources contain a full database with information and the full history of timezones, daylight savings, and currencies. I even gave the example of the change in January 2023 with the currency of Croatia changing from the Kuna to the Euro.
 
 Apparently, something similar happened when [IANA database 2024a](https://www.iana.org/time-zones) got integrated into OpenJDK with JDK-8325150: "(tz) Update Timezone Data to 2024a". That ticket contains several changes, including: "Kazakhstan unifies on UTC+5 beginning 2024-03-01." Indeed, Kazakhstan changed their timezone on March 1st of this year! You can find the [changed data here](https://github.com/openjdk/jdk/blame/master/src/java.base/share/data/tzdata/asia#L2507), modified by [commit 917838e](https://github.com/openjdk/jdk/commit/917838e0a564b1f2cbfb6cc214ccbfd1a237019f).
-![](commit-change.jpg)
+![OpenJDK tzdata source with the Asia/Almaty entry changed in a 2024 commit to move Kazakhstan to a single +06 time zone](commit-change.jpg)
 
 Because we wanted to be sure of a good price for our plane tickets, we bought them well in advance, in January. For our flight back, we had a departure time of **05:20** . But because of the time zone change, that flight actually departed at **04:20**, an hour earlier. Because of delays, we didn't notice that change in the arriving flight...
 

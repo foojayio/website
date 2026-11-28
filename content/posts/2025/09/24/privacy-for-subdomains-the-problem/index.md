@@ -1,14 +1,13 @@
 ---
 title: "Privacy for subdomains: the problem"
 date: "2025-09-24T18:43:15+00:00"
-lastmod: "2026-09-21T06:01:33+00:00"
 description: "I recently learned about a new way to leak your privacy, and it's a scary one. Before going further, know that I'm not a network engineer: perhaps if you…"
 canonical: "https://blog.frankel.ch/privacy-subdomains/1/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-1.jpg"
 categories:
-  - "Java"
+  - "Security"
 related_posts:
   - "privacy-for-subdomains-the-solution"
 ---

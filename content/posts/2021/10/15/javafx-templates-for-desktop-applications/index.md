@@ -1,7 +1,6 @@
 ---
 title: "JavaFX Templates for Desktop Applications"
 date: "2021-10-15T08:48:16+00:00"
-lastmod: "2021-10-18T06:43:51+00:00"
 description: "Both for Maven and Gradle lovers there are different possibilities to build Java executables and GitHub provides the free tools to do so!"
 authors:
   - "frankdelporte"
@@ -27,7 +26,7 @@ In this post, we are going to take a look at other different approaches.
 
 [This is a little project on GitHub](https://github.com/HanSolo/fxmodules) that can be used as a template for modularized JavaFX projects, based on JDK17. You can import the `build.gradle` file as a project into your IDE and start the application by using `gradlew Main` from the command line or from within the IDE.
 
-{{< img src="Screenshot-2021-10-10-at-22.08.21.png" class="size-full is-resized" width="401" height="183" caption="The running template application" >}}
+{{< img src="Screenshot-2021-10-10-at-22.08.21.png" alt="Small JavaFX window titled 'Version: 17.0.0' showing a single 'Click Me' button" class="size-full is-resized" width="401" height="183" caption="The running template application" >}}
 
 You will find three script files
 

@@ -1,7 +1,6 @@
 ---
 title: "Vaadin and jOOQ: Match Made in Heaven"
 date: "2022-03-09T08:25:52+00:00"
-lastmod: "2022-03-10T10:03:41+00:00"
 description: "Quickly learn how easy it is to create data-centric web applications with the combination of Vaadin and jOOQ!"
 authors:
   - "simon-martinelli"
@@ -83,7 +82,7 @@ As you see in the example the code looks like SQL but due to the generated code 
 
 And finally this is how the grid looks like. There are many more features in the grid like filtering and sorting. You can find more information about theese featrues and also about all other Vaadin components in the [components directory](https://vaadin.com/docs/latest/ds/components/grid).
 
-![](grid-1-1024x381.png)
+![Vaadin grid titled 'Customer Revenue jOOQ' listing customer IDs, names and revenue, sorted by last name](grid-1-1024x381.png)
 
 ## Conclusion
 

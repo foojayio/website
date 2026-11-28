@@ -52,9 +52,9 @@ I received a VisionFive 2 Lite for testing:
   * Used: `ubuntu-24.04.3-preinstalled-desktop-riscv64+vf2-lite.img`
 
 {{< gallery >}}
-visionfive-1024x578.jpg
-visionfive-back-763x1024.jpg
-visionfive-front-842x1024.jpg
+visionfive-1024x578.jpg | | VisionFive 2 Lite RISC-V board in a stacking case next to Raspberry Pi boards
+visionfive-back-763x1024.jpg | | Back of the VisionFive 2 Lite board in its case above the retail box
+visionfive-front-842x1024.jpg | | Front of the VisionFive 2 Lite board in its case above the retail box
 {{< /gallery >}}
 
 I burned the Ubuntu image to an SD card, but if you want to use eMMC, you can follow these instructions: [Flashing OS to Onboard eMMC (eMMC Version)](https://doc-en.rvspace.org/VisionFive2Lite/VisionFive2LiteQSG/VisionFive2_QSGLite/flashing_os_to_onboard_emmc_emmc_version.html). This OS has the pre-configured account `user` with password `starfive`.

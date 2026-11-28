@@ -9,7 +9,6 @@ categories:
   - "Events"
   - "IntelliJ IDEA"
   - "Interviews"
-  - "Java"
   - "JUGs"
   - "Spring"
 related_posts:

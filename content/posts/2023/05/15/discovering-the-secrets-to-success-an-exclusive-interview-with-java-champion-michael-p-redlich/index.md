@@ -1,7 +1,6 @@
 ---
 title: "Discovering the Secrets to Success: An Exclusive Interview with Michael"
 date: "2023-05-15T17:35:04+00:00"
-lastmod: "2023-05-15T19:49:30+00:00"
 description: "Discover valuable insights from Java Champion Michael P. Redlich and learn about continuous learning, open-source contributions, and adapting to new technologies in software development."
 authors:
   - "bazlur-rahman"
@@ -15,7 +14,7 @@ related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
 ---
 
-{{< img src="michael-redlich.jpg" class="alignright size-full is-resized" width="480" height="480" >}}
+{{< img src="michael-redlich.jpg" alt="Portrait of Michael Redlich smiling in sunglasses at an outdoor table with a flight of cider samples" class="alignright size-full is-resized" width="480" height="480" >}}
 
 In this interview, we had the pleasure of speaking with Michael P. Redlich, a seasoned software developer with over 30 years of experience in the field.
 

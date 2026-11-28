@@ -1,14 +1,12 @@
 ---
 title: "Atlas Online Archive: Efficiently Manage the Data Lifecycle"
 date: "2026-03-12T14:55:00+00:00"
-lastmod: "2026-03-12T14:55:02+00:00"
 description: "In the production environment, in a MongoDB Atlas database, a collection contains massive amounts of data stored, including aged and current data. However, aged data is not frequently accessed through applications, and the data piles up daily in the collection, leading to performance degradation and cost consumption. This results in needing to upgrade the cluster tier size to maintain sufficient resources according to workload, as it would be difficult to continue with the existing tier size. Overall, this negatively impacts application performance and equates to higher resource utilization and increased costs for business."
 authors:
   - "ravindar-karampuri"
 image: "Screenshot-2026-03-10-at-1.57.52-PM.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
 related_posts:
 ---

@@ -7,7 +7,6 @@ authors:
 image: "cover.jpg"
 categories:
   - "BoxLang"
-  - "Java"
   - "Testing"
   - "AI"
   - "Developer Tools"

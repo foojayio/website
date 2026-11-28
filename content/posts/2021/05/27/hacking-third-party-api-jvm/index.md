@@ -1,7 +1,6 @@
 ---
 title: "Getting Started Hacking Third-Party APIs on the JVM"
 date: "2021-05-27T06:27:58+00:00"
-lastmod: "2021-05-27T06:28:00+00:00"
 description: "Some alternatives that allow you to make third-party APIs behave in a way that their designers didn't intend to!"
 canonical: "https://blog.frankel.ch/hacking-third-party-api-jvm/"
 authors:
@@ -88,7 +87,7 @@ A long post could be dedicated solely to Java's class loading mechanism. For thi
 
 Let's start with the following architecture:
 
-![](classes-in-jar.png)
+![UML component diagram: Main depends on class A in thirdparty.jar, which depends on class B](classes-in-jar.png)
 
 The simplest command to launch the application is the following:
 

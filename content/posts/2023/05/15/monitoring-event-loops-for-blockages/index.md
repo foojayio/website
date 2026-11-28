@@ -1,7 +1,6 @@
 ---
 title: "Monitoring Event Loops for Blockages"
 date: "2023-05-15T16:42:18+00:00"
-lastmod: "2023-06-15T00:40:53+00:00"
 description: "Chronicle Threads provides high performance event loop implementations and utility functions to help with threading and concurrency."
 authors:
   - "jerry-shea"
@@ -35,7 +34,7 @@ It works by checking to see if event handler latency remains within acceptable b
 
 This can be explained using pseudo code:
 
-![](Screenshot-2023-05-15-at-5.37.56-PM-1024x214.png)
+![Pseudo code of a fast event loop thread recording its start time, and a monitor thread that grabs a stack trace when a threshold is exceeded](Screenshot-2023-05-15-at-5.37.56-PM-1024x214.png)
 
 ### Best practice
 

@@ -1,7 +1,6 @@
 ---
 title: "Effective cloud-native Java dev in Eclipse IDE with Open Liberty"
 date: "2024-01-09T12:50:12+00:00"
-lastmod: "2024-01-09T12:50:13+00:00"
 description: "Use Liberty Tools for the Eclipse IDE to enable fast, easy, and efficient development of cloud native Java applications with Open Liberty"
 canonical: "https://developer.ibm.com/articles/awb-effective-cloud-native-development-open-liberty-eclipse-ide/"
 authors:
@@ -28,7 +27,7 @@ The open source [Liberty Tools for Eclipse IDE](https://ibm.biz/LibertyToolsEc
 
 The Liberty Tools for Eclipse IDE plugin can help with all stages of the extended development lifecycle now expected from cloud-native development teams, including helping you to develop, build, test, deploy, and manage your applications – all within your favorite IDE, Eclipse!
 
-{{< img src="EclipseLibertyTools1-700x397.png" class="size-medium aligncenter" width="700" height="397" >}}
+{{< img src="EclipseLibertyTools1-700x397.png" alt="Eclipse Marketplace page for the Liberty Tools plugin for Eclipse IDE, listing details and supported Eclipse versions" class="size-medium aligncenter" width="700" height="397" >}}
 
 ## Key capabilities of Liberty Tools
 

@@ -1,7 +1,6 @@
 ---
 title: "How to Create Self-Contained Executable JARs"
 date: "2021-02-01T08:40:08+00:00"
-lastmod: "2021-08-23T13:03:51+00:00"
 description: "This article aims to describe ways to create self-contained executable JARs, also known as uber-JARs or fat JARs."
 canonical: "https://blog.frankel.ch/creating-self-contained-executable-jars/"
 authors:
@@ -257,7 +256,7 @@ Configuring the Spring Boot plugin is straightforward:
 </plugin>
 ```
 
-{{< img src="image-12.png" class="size-large is-resized" width="269" height="233" >}}
+{{< img src="image-12.png" alt="Directory tree of an executable Spring Boot jar with BOOT-INF classes and lib, META-INF/MANIFEST.MF and the org/springframework/loader folder" class="size-large is-resized" width="269" height="233" >}}
 
 1. Project compiled classes
 2. JAR dependencies

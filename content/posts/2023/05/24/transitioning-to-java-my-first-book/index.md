@@ -1,7 +1,6 @@
 ---
 title: "\"Transitioning to Java\": My First Book!"
 date: "2023-05-24T08:01:58+00:00"
-lastmod: "2023-05-24T08:01:59+00:00"
 description: "I like to describe this book as a beginner's book for experts. Anyone who needs to get up to speed quickly using Java is my primary audience."
 authors:
   - "kfogel"
@@ -20,7 +19,7 @@ related_posts:
   - "offline-crypto-address-validation-in-java"
 ---
 
-![](BookCover-407x510.jpg)
+![Cover of the book 'Transitioning to Java' by Ken Fogel, published by Packt](BookCover-407x510.jpg)
 
 When I retired from the classroom in 2021, I had no intention of sitting on a rocking chair on my front porch.
 

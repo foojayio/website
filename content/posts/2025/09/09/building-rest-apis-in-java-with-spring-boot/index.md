@@ -1,14 +1,12 @@
 ---
 title: "Building REST APIs in Java with Spring Boot"
 date: "2025-09-09T14:51:10+00:00"
-lastmod: "2025-10-23T18:19:26+00:00"
 description: "REST has become the default choice for building web services, and for good reason. It’s straightforward to implement, easy for clients to consume, and built directly on top of the same principles of the web itself. HTTP already gives us well-defined methods (GET, POST, PUT, DELETE), built-in caching, redirect support, secure transport via TLS, and widespread tooling support across platforms. REST doesn’t reinvent the web—it uses it. REST is not a protocol or a rigid standard. It’s a lightweight architectural approach that encourages scalable, evolvable, and interoperable services. Its creator, Roy Fielding, helped define many of the specs that underpin the web today."
 authors:
   - "tim-kelly"
 image: "546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
-  - "Java"
   - "Mongo"
   - "Spring"
 related_posts:
@@ -54,7 +52,7 @@ We'll use [Spring Initializr](https://start.spring.io/) to generate the basic st
 * Spring Web
 * Validation
 
-![](Screenshot-2025-09-02-at-10.29.32-AM-1024x534.png)
+![Spring Initializr set to Maven, Java 21, Spring Boot 3.5.5 with Spring Web, Spring Data MongoDB and Validation](Screenshot-2025-09-02-at-10.29.32-AM-1024x534.png)
 
 This gives us everything we need to expose REST endpoints and talk to MongoDB. Now, we can open it up in the IDE of our choosing.
 

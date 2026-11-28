@@ -1,7 +1,6 @@
 ---
 title: "Light Up your Christmas Tree with Java and Raspberry Pi"
 date: "2020-12-23T09:38:17+00:00"
-lastmod: "2021-12-10T13:01:51+00:00"
 description: "Here we go with this small project to get you introduced to the world of electronics programming. Get started with Java and the Raspberry Pi!"
 canonical: "https://www.javaadvent.com/2020/12/light-up-your-christmas-lights-with-java-and-raspberry-pi.html"
 authors:
@@ -45,9 +44,9 @@ The Raspberry Pi is a full-PC-on-a-small-board. There are different types, but w
 If you buy a new Raspberry Pi, make sure you also have a mini-SD card with minimum 16Gb of space. With the [Imager tool](https://www.raspberrypi.org/software/), you can burn the "Raspberry Pi OS (Full)" to this card. This is a full operating system, based on Debian 32bit, containing a lot of tools, and most importantly OpenJDK 11!
 
 {{< gallery cols="3" caption="Raspberry Pi Imager tool" >}}
-imager-start.png
-imager-os.png
-imager-os-full.png
+imager-start.png | | Raspberry Pi Imager v1.2 start screen with Choose OS, Choose SD card and Write buttons
+imager-os.png | | Raspberry Pi Imager operating system list with Raspberry Pi OS (32-bit) recommended at the top
+imager-os-full.png | | Raspberry Pi Imager submenu with Raspberry Pi OS Lite and Full (32-bit) options
 {{< /gallery >}}
 
 When you start your board for the first time, you'll need to configure the Wifi, and some additional settings. When done, open a terminal and run `java -version` to make sure you used to correct OS.
@@ -72,9 +71,9 @@ So, it isn't aimed at simple DIY, but as a base-computer to be integrated in pro
 This new version 4 is based on the Raspberry Pi 4 and is [available in 32 variants](https://www.raspberrypi.org/products/compute-module-4), with a range of RAM and eMMC Flash options, and with or without wireless connectivity.
 
 {{< gallery cols="3" caption="Raspberry Pi Compute Module" >}}
-compute.jpg
-compute_back.jpg
-compute_io_board.jpg
+compute.jpg | | Raspberry Pi Compute Module 4, a small green board with a processor and wireless chip
+compute_back.jpg | | Underside of the Raspberry Pi Compute Module showing its two connectors
+compute_io_board.jpg | | Raspberry Pi Compute Module 4 plugged into its IO board with ports and connectors
 {{< /gallery >}}
 
 #### **Raspberry Pi 400**
@@ -82,9 +81,9 @@ compute_io_board.jpg
 This product reminded me of my very first computer 35 years ago, the Commodore 64... It's a keyboard with an integrated computer! The Raspberry Pi 4 with 4Gb of memory has been redesigned to fit in the official, already-existing Raspberry Pi keyboard. All you need is an SD card, power supply, monitor, and mouse. For 75€ this is truly an amazing machine bringing a lot of computer-power to everyone for a low budget.
 
 {{< gallery cols="3" caption="Raspberry Pi 400 versus Commodore 64" >}}
-pi_400_front.jpg
-pi_400_back.jpg
-commodore64.jpg
+pi_400_front.jpg | | Raspberry Pi 400, a computer built into a white and red keyboard, seen from the front
+pi_400_back.jpg | | Raspberry Pi 400 seen from behind, showing its GPIO header and ports along the back edge
+commodore64.jpg | | Commodore 64 computer with built-in keyboard, seen from behind with its ports
 {{< /gallery >}}
 
 ### **Install additional tools**
@@ -112,7 +111,7 @@ Maven home: /usr/share/maven
 
 To control the LED-lights, we are going to use the Pi4J-library, which makes the bridge between our Java-code and the GPIO-pins on the Raspberry Pi. These General-Purpose Input/Output-pins allow us to connect and control electronic components. There are 40 of those pins on the Raspberry Pi and can be used for different purposes. In this post, we are only using them as output-pins to control the LEDs but there are countless other possibilities.
 
-{{< img src="headerpins_in_header.png" class="size-full is-resized" width="293" height="449" >}}
+{{< img src="headerpins_in_header.png" alt="Raspberry Pi GPIO header table mapping each of the 40 pins to its function, color-coded as power, ground or digital" class="size-full is-resized" width="293" height="449" >}}
 
 For full support of the Pi4J-library, we need to install some extra software on the board. Again we only need a single command to do this:
 
@@ -138,10 +137,10 @@ This is an electronics project, so we need to connect some components to our Ras
 You can calculate the exact resistor value for each LED-type, but we use the same one here for all LEDs. Maybe they will not give full brightness, but at least we will not burn them 🙂 By the way, there is even a JavaFX mobile application in the Google and Apple app store for this calculation, see "[Building native applications for all PC and mobile platforms from a single JavaFX project with Gluon Mobile and GitHub Actions](https://foojay.io/today/native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions/)"\].
 
 {{< gallery cols="4" caption="Wiring scheme and pictures for this project" >}}
-jvm-advent-leds-1024x844.png
-wiring-1-1024x498.jpg
-wiring-2-1024x498.jpg
-wiring-3-498x1024.jpg
+jvm-advent-leds-1024x844.png | | Fritzing diagram of a Raspberry Pi wired to seven colored LEDs with resistors on a breadboard
+wiring-1-1024x498.jpg | | Breadboard with colored LEDs and wires arranged around a green paper Christmas tree
+wiring-2-1024x498.jpg | | Jumper wires plugged into the GPIO pins of a Raspberry Pi with a heat sink
+wiring-3-498x1024.jpg | | Side view of the breadboard with LEDs around the paper Christmas tree and wires to the Raspberry Pi
 {{< /gallery >}}
 
 ### **The Application**
@@ -176,7 +175,7 @@ The simplest use of a LED is on or off, but we are going to use them with a PWM 
 * Period: on-time + off-time
 * Duty cycle: percentage of the time the output is high
 
-![](pwm_chart.png) PWM signals in a chart
+![PWM signal charts showing high and low pulses at 25%, 50% and 75% duty cycle](pwm_chart.png) PWM signals in a chart
 
 The Raspberry Pi has a few GPIOs that provide hardware-controlled PWM which you need to use for accurate signals. But in our case we will be using software-controlled PWM as we want to use more LEDs.
 
@@ -284,4 +283,4 @@ If you create something, please share it. Use [the hashtag #JavaOnRaspberryPi on
 This year I published my book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)" to inspire more Java developers to start experimenting with electronics components.
 
 It's a great and fun way to learn new stuff when you combine your software knowledge with hardware! Available as [an ebook on Leanpub](https://leanpub.com/gettingstartedwithjavaontheraspberrypi/) and [a paper book on Elektor](https://www.elektor.com/getting-started-with-java-on-the-raspberry-pi). A perfect Christmas gift... 😉
-![](ebook-paperbook.jpg)
+![Covers of the ebook and paperback editions of 'Getting Started with Java on the Raspberry Pi' by Frank Delporte](ebook-paperbook.jpg)

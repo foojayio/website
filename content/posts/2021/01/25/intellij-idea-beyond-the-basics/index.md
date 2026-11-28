@@ -1,7 +1,6 @@
 ---
 title: "IntelliJ IDEA: Let's Go Beyond The Basics!"
 date: "2021-01-25T08:32:47+00:00"
-lastmod: "2021-01-25T08:41:17+00:00"
 description: "In this article, I’ll talk about some tricks that I use in my day to day job and show some best practices that can boost your productivity."
 authors:
   - "hamza-belmellouki"
@@ -26,12 +25,12 @@ In this article, I'll talk about some tricks I use in my day to day job. And sho
 Jetbrains developer advocates recommend working with IntelliJ without using the UI (tool window buttons, toolbar, etc.). Always remember that all shortcuts are configurable. So make sure to take your time to customize the IDE according to your needs and preferences.
 
 Up till now, most developers I've met are using IntelliJ with UI enabled.
-![](G9gx6EM-2e3d394b.jpg)
+![IntelliJ IDEA editing application-dev.yml, with arrows pointing at the project tool window button, toolbar and file tabs](G9gx6EM-2e3d394b.jpg)
 
 However, it isn't recommended to do it that way! If you want to take your IDEA's skills to the next level, you have to get rid of those UIs. They represent distraction to the developer, preventing you from focusing on what matters: Your code!
 
 Now you can remove these distractions by going into your **Main Menu \| View \| Appearance** and uncheck toolbar, tool window bar, navigation bar. What's left are tabs. Please get rid of them by right-click into the tab and choose **Configure Editor Tabs…** and on the appearance section, set **tab placement** to **None**. The resulting IDEA's UI would be:
-![](kpltSyQ-2b5b9d27.jpg)
+![IntelliJ IDEA editor showing the application-dev.yml file with no toolbar, tool windows or tabs, only code](kpltSyQ-2b5b9d27.jpg)
 
 Fantastic! I've been working with IDEA for almost two years in this mode. At first, it may sound overwhelming the number of shortcuts/actions you'll have to learn. Learning IDEA's shortcuts is like driving. When you know how to drive a car, you don't think about the process of driving. It comes naturally. But when driving for the first time, you do. So be patient with yourself.
 
@@ -82,7 +81,7 @@ Beware using shelves in the IDE may limit the portability of your patches becaus
 ### Learn More
 
 If you want to measure your productivity and see usage statistics for IntelliJ IDEA features, make sure to check out **Productivity Guide** by going to the main menu -\> help -\> **Productivity Guide**. It should display a popup containing all usage statistics of IDEA's features:
-![](dgdo7L3-737c0c98.jpg)
+![IntelliJ IDEA Productivity Guide dialog showing feature usage statistics and the tip to delete a line with Command-Backspace](dgdo7L3-737c0c98.jpg)
 
 Also, Checkout [Key Promoter X](https://plugins.jetbrains.com/plugin/9792-key-promoter-x) plugin if you want to avoid using the mouse.
 

@@ -1,7 +1,6 @@
 ---
 title: "Digma, Apache APISIX, and OpenValue: Foojay.io at JFall 2023"
 date: "2023-11-13T22:19:48+00:00"
-lastmod: "2023-11-13T22:31:11+00:00"
 description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for Friends Of OpenJDK."
 authors:
   - "geertjan-wielenga"
@@ -20,10 +19,10 @@ related_posts:
 We had a very big booth right by the entrance to the venue, consisting of a large rollout banner featuring all the organizations involved in Foojay.io, a table totally covered in stickers (hundreds, maybe thousands, of Foojay.io stickers, as well as sponsor stickers, such as Digma), and a podcast zone, where Frank spent most of the day recording short podcast interviews with a very wide range of Java enthusiasts attending the event.
 
 Below you see the above described setup, featuring Paco and Johannes in the middle, certainly the most actively involved and engaged Foojay.io collaborators at the booth, constantly handing out stickers to promote Foojay.io and the OpenJDK user community at large, showing the website, and talking about how to get involved.
-![](booth-1-jfall-2023-1024x768.jpg)
+![Two people at the Foojay.io booth at JFall 2023 next to a rollout banner listing the sponsoring organizations](booth-1-jfall-2023-1024x768.jpg)
 
 Also, it was very cool to join Frank in a short talk about Foojay.io, which was attended by several people involved in Foojay.io, plus many that heard about it for the first time.
-![](F-gPzDGWUAAm7if-1024x578.jpeg)
+![Presenters on stage in front of a projected foojay.io home page titled 'Friends of OpenJDK Today'](F-gPzDGWUAAm7if-1024x578.jpeg)
 
 ## Many thanks to [Digma](https://digma.ai/) for sponsoring the t-shirts, [Apache APISIX](https://apisix.apache.org/) for sponsoring the stickers, and [OpenValue](https://www.openvalue.eu/) for sponsoring the rental of the booth equipment!
 

@@ -1,7 +1,6 @@
 ---
 title: "Writing a Profiler in 240 Lines of Pure Java"
 date: "2023-03-30T07:14:46+00:00"
-lastmod: "2023-03-30T07:14:47+00:00"
 description: "How to develop a tiny Java profiler, that can output flame graphs, in just 240 lines of pure Java, making it easy for anyone to understand."
 authors:
   - "johannes-bechberger"
@@ -323,7 +322,7 @@ The interesting part is the trace tree modeled by the Node class.
 The idea is that every trace `A -> B -> C` (`A` calls `B`, `B` calls `C`, `[C, B, A]`) when returned by the JVM) can be represented as a root node with a child node `A` with child `B` with child `C`, so that every captured trace is a path from the root node to a leaf. We count how many times a node is part of the trace.
 
 This can then be used to output the tree data structure for [d3-flame-graph](https://github.com/spiermar/d3-flame-graph) which we use to create nice flamegraphs like:
-![](flame-2048x1504-1-1024x752.png) Flame graph produced by the profiler for the renaissance dotty benchmark
+![Flame graph of a Scala compiler benchmark run, showing stacked JVM call frames from Launcher.main up to dotty compiler phases](flame-2048x1504-1-1024x752.png) Flame graph produced by the profiler for the renaissance dotty benchmark
 
 Keep in my mind that the actual Node class is as follows:
 

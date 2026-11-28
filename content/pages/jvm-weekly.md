@@ -1,7 +1,9 @@
 ---
 title: "Foojay Monthly Review"
 description: "Once a month, Artur Skowronski devotes an edition of his JVM Weekly newsletter to Foojay — a roundup of what the community published here. Every edition since May 2024, with the articles it covered."
-url: "/jvm-weekly/"
+url: "/month-overview/"
+aliases:
+  - "/jvm-weekly/"
 type: "jvm-weekly"
 ---
 

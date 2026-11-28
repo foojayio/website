@@ -1,7 +1,6 @@
 ---
 title: "Profiling Maven Projects with my IntelliJ Profiler Plugin"
 date: "2023-12-14T10:41:34+00:00"
-lastmod: "2023-12-14T10:41:35+00:00"
 description: "Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about..."
 authors:
   - "johannes-bechberger"
@@ -10,6 +9,7 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Performance"
+  - "Quarkus"
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
@@ -20,24 +20,24 @@ related_posts:
 ### Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about...
 
 According to the recent [JetBrains survey](https://www.jetbrains.com/lp/devecosystem-2023/java/), most people use Maven as their build system and build Spring Boot applications with Java. Yet my profiling plugin for IntelliJ only supports profiling pure Java run configurations. Configurations where the JVM gets passed the main class to run. This is great for tiny examples where you directly right-click on the `main` method and profile the whole application using the context menu:
-![](image-2-a3dd1d7e.jpg)
+![IntelliJ run menu on Main.main() with the highlighted option 'Profile with JFR'](image-2-a3dd1d7e.jpg)
 
 But this is not great when you're using the Maven build system and usually run your application using the `exec` goal, or, god forbid, use [Spring Boot](https://spring.io/projects/spring-boot) or [Quarkus](https://quarkus.io/)-related goals. Support for these goals has been requested multiple times, and last week, I came around to implementing it (while also two other bugs). So now you can profile your Spring Boot, like the Spring[pet-clinic](https://github.com/spring-projects/spring-petclinic), application running with `spring-boot:run`:
-![](image-6-7c4163f1.jpg)
+![IntelliJ menu for the spring-petclinic (spring-boot:run) Maven configuration offering Profile with JFR and async-profiler](image-6-7c4163f1.jpg)
 
 Giving you a profile like:
-![](image-9-2000x1279-14d111bf.jpg)
+![Firefox Profiler inside IntelliJ showing a JFR profile of the Spring PetClinic application with its call tree](image-9-2000x1279-14d111bf.jpg)
 
 Or your Quarkus application running with `quarkus:dev`:
-![](image-7-bd046ec9.jpg)
+![IntelliJ menu for the getting-started (quarkus:dev) Maven configuration offering Profile with JFR and async-profiler](image-7-bd046ec9.jpg)
 
 Giving you a profile like:
-![](image-8-2000x1279-ea8a4bb4.jpg)
+![Firefox Profiler inside IntelliJ showing a JFR profile of a Quarkus application running quarkus:dev](image-8-2000x1279-ea8a4bb4.jpg)
 
 This works specifically by using the options of these goals, which allows the profiler plugin to pass profiling-specific JVM options. If the plugin doesn't detect a directly supported plugin, it passes the JVM options via the `MAVEN_OPTS` environment variable. This should work with the `exec` goals and others.
 
 Gradle script support has also been requested, but despite searching the whole internet till the night, I didn't find any way to add JVM options to the JVM that Gradle runs for the Spring Boot or run tasks without modifying the `build.gradle` file itself (see [Baeldung](https://www.baeldung.com/java-gradle-bootrun-pass-jvm-options)).  
-![](IMG_2632-2000x1500-4975ea10.jpeg) I left when it was dark and rode out into the night with my bike. Visiting other lost souls in the pursuit of sweet potato curry.
+![Dimly lit empty office with desks, monitors and chairs by a window at night](IMG_2632-2000x1500-4975ea10.jpeg) I left when it was dark and rode out into the night with my bike. Visiting other lost souls in the pursuit of sweet potato curry.
 
 Only [Quarku's `quarkusDev`](https://quarkus.io/guides/gradle-tooling) task has the proper options so that I can pass the JVM options. So, for now, I only have basic Quarkus support but nothing else. Maybe one of my readers knows how I could still provide profiling support for non-Quarkus projects.
 

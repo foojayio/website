@@ -1,7 +1,6 @@
 ---
 title: "Jakarta Faces, Java Web Framework, Stateless Edition: Marketplace AliFaces"
 date: "2026-08-29T19:22:52+00:00"
-lastmod: "2026-08-31T12:20:55+00:00"
 description: "A Fully Stateless Jakarta Faces Marketplace with Server-Side Rendering — No HttpSession, No Saved ViewState, No Sticky Sessions (see the poc on: AliFaces…"
 authors:
   - "angelo-rubini"
@@ -12,7 +11,6 @@ categories:
   - "Cloud"
   - "Design Patterns"
   - "Jakarta EE"
-  - "Java"
   - "Performance"
   - "Tutorials"
   - "Use Cases"
@@ -36,7 +34,7 @@ The stack is deliberately mainstream: **Jakarta Faces 4.1, Mojarra 4.1.14, Prime
 
 The goal is simple: **any web node should be able to serve the next request, regardless of which node served the previous one.**
 
-[![](alifaces-overview.jpg)](alifaces-overview.jpg)
+[![Infographic summarizing the stateless AliFaces marketplace built with Jakarta Faces, covering SSR flow, stateless sessions and catalog facts](alifaces-overview.jpg)](alifaces-overview.jpg)
 
 ## Stateless Faces: an old idea, revisited
 
@@ -79,7 +77,7 @@ This is not a return to an obsolete architecture. Large e-commerce experiences s
 SSR remains useful for meaningful initial HTML, public content, SEO, reduced mandatory client-side work and caching. Jakarta Faces already starts from the server-rendered side; AliFaces combines it with stateless web nodes, CDN-delivered assets, potential edge caching and selective PrimeFaces Ajax.
 > **Server-Side Rendering is not the opposite of a modern frontend. It is one of the tools modern frontends use.**
 
-[![](alifaces-ssr-flow.jpg)](alifaces-ssr-flow.jpg)
+[![Flow diagram of Jakarta Faces server-side rendering: request, CDN/edge cache, Faces, HTML response and selective PrimeFaces Ajax](alifaces-ssr-flow.jpg)](alifaces-ssr-flow.jpg)
 
 ## Modern UI is independent of the rendering model
 
@@ -109,7 +107,7 @@ One boundary is intentionally visible: with `InMemorySharedStore`, the cart can 
 
 Replace that adapter with Redis, a database or a data grid and both nodes use shared, persistent and atomic state. Faces pages and application services do not change.
 
-[![](alifaces-architecture-poster.jpg)](alifaces-architecture-poster.jpg)
+[![Architecture poster of the stateless Jakarta Faces AliFaces marketplace: SSR flow, shared state store and two-node setup](alifaces-architecture-poster.jpg)](alifaces-architecture-poster.jpg)
 
 ## Takeaway
 

@@ -1,7 +1,6 @@
 ---
 title: "How to get a JavaFX App on ZuluFX in 60 Seconds"
 date: "2020-08-23T06:57:41+00:00"
-lastmod: "2021-09-03T09:27:33+00:00"
 description: "Here I show you how to use a popular distribution from Azul Zulu OpenJDK to build a JavaFX Hello World Application in 60 seconds."
 authors:
   - "carldea"
@@ -99,7 +98,7 @@ On your mark, get set, **GO!**
 
 ***Step 1:*** Create the **`helloworld`** project directory structure
 
-{{< img src="initial-proj-directory.png" class="size-large is-resized" width="381" height="64" caption="Figure 1. Initial project and source code directories created." >}}
+{{< img src="initial-proj-directory.png" alt="Finder view of a helloworld folder containing an empty src folder" class="size-large is-resized" width="381" height="64" caption="Figure 1. Initial project and source code directories created." >}}
 
 The following commands create the project and src directories.
 
@@ -126,7 +125,7 @@ $ cd ~/helloworld
 ```
 
 ***Step 2:*** Create a module directory that will later contain the **module-info.java** file.
-![](initial-proj-directory2.png) The module directory named using the reverse domain convention.
+![Finder view of a helloworld folder containing src and a com.mycompany.helloworld module folder](initial-proj-directory2.png) The module directory named using the reverse domain convention.
 
 Create a directory using a preferred *naming convention* based on Java Module System's new way to organize source code and modules ([reverse domain name scheme](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html)).
 
@@ -135,7 +134,7 @@ mkdir src/com.mycompany.helloworld
 ```
 
 ***Step 3:*** Create the directory structure **com/mycompany/helloworld** that follows a package namespaces for ***`HelloWorld.java`***
-![](project_directories-89c468ff.png) Figure 2. Project Directory structure for HelloWorld.java file.
+![Finder view with the com/mycompany/helloworld package folders nested inside the com.mycompany.helloworld module folder](project_directories-89c468ff.png) Figure 2. Project Directory structure for HelloWorld.java file.
 
 Under the directory **com.mycompany.helloworld** you will create the following directory structure **com/mycompany/helloworld**. This directory will later contain the **Helloworld.java** file created in Step 5.
 
@@ -146,7 +145,7 @@ mkdir -p src/com.mycompany.helloworld/com/mycompany/helloworld
 ***Step 4:*** Create a ***module-info.java*** file.
 
 Create a file named ***module-info.java*** under the directory ***src/com.mycompany.helloworld*** as shown below.
-![](module-info-file2.png) Figure 3. Module-info.java file
+![Finder view showing a module-info.java file beside the com folder inside the com.mycompany.helloworld module directory](module-info-file2.png) Figure 3. Module-info.java file
 
 Copy and paste the code from Listing 1 into the **module-info.java** file. Use vi, nano or notepad. For example:
 
@@ -173,7 +172,7 @@ The **exports** keyword exposes the **com.mycompany.helloworld** module to the r
 
 The file will be created in the directory **src/com.mycompany.helloworld/com/mycompany/helloworld** as shown in figure 4 below.
 
-{{< img src="helloworld.java_-31cfb833.png" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
+{{< img src="helloworld.java_-31cfb833.png" alt="Finder tree showing HelloWorld.java and module-info.java under src/com.mycompany.helloworld" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
 
 Use **[vim](https://www.vim.org/)** for those who despise those other wimpy editors 😉
 
@@ -236,7 +235,7 @@ javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.
 
 After compiling your code the class files the mods directory should look like the following:
 
-{{< img src="compiled-classes-5076aa43.png" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
+{{< img src="compiled-classes-5076aa43.png" alt="Finder tree where the new mods directory holds the compiled HelloWorld.class and module-info.class beside src" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
 
 ***Step 7:***Execute the JavaFX HelloWorld application!
 

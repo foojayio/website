@@ -1,7 +1,6 @@
 ---
 title: "Kubernetes and the Data Centre: Is Full Scale Migration Possible?"
 date: "2022-07-21T13:48:13+00:00"
-lastmod: "2022-07-21T13:48:15+00:00"
 description: "Using Kubernetes as a standard layer will help everyone to control how and where applications run and data gets created."
 authors:
   - "patrick-mcfadin"
@@ -18,8 +17,6 @@ related_posts:
   - "book-review-effortless-cloud-native-app-development-using-skaffold"
   - "building-reactive-java-applications-with-spring-framework"
 ---
-
-![](kubernetes-genric-169jpeg_51633.jpg)
 
 Data centres used to be exactly that - the centres of our data worlds, where all information, files and records would be kept and controlled.
 

@@ -1,7 +1,6 @@
 ---
 title: "Exploring File Storage Solutions in Spring Boot"
 date: "2023-08-23T08:07:19+00:00"
-lastmod: "2023-08-23T08:13:32+00:00"
 description: "In this article, we will cover how to store files in a database using Spring Boot and discuss some alternatives."
 authors:
   - "bazlur-rahman"

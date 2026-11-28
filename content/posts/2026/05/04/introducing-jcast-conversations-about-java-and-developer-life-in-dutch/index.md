@@ -8,7 +8,6 @@ image: "coole_jcast.jpg"
 categories:
   - "Foojay"
   - "Interviews"
-  - "Java"
   - "Podcast"
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"

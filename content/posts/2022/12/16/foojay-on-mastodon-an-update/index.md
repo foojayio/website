@@ -1,7 +1,6 @@
 ---
 title: "Foojay on Mastodon: An Update"
 date: "2022-12-16T06:45:03+00:00"
-lastmod: "2022-12-16T07:34:59+00:00"
 description: "We started with an instance to host foojay.social via toot.io that provides us 200Gb of storage space to handle 250 active users."
 authors:
   - "frankdelporte"
@@ -37,7 +36,7 @@ It has been one month since we announced [foojay.social](https://foojay.social).
 
 On our own account [foojay.social/@foojay](https://foojay.social/@foojay) we share the same content as we do on Twitter, mainly links to new articles. We don't use a cross-posting tool, but try to link to the Mastodon account of the writer, or other references, whenever possible. This account is also one month old, and already gained nearly 250 followers.
 
-{{< img src="mastodon-foojay-20221215.png" class="size-full is-resized" width="316" height="591" >}}
+{{< img src="mastodon-foojay-20221215.png" alt="Foojay.io profile on foojay.social with 86 posts, 364 following and 240 followers" class="size-full is-resized" width="316" height="591" >}}
 
 The administration dashboard shows we have a total of 118 active users on the foojay.social-server, who interacted more than 4000 times. Two spam-like messages got reported during this month and those account are blocked, and are no longer able to interact with this Mastodon instance.
 
@@ -50,10 +49,10 @@ Most of the user-accounts are personal accounts, but we are happy that some Java
 * acme4j ([@acme4j](https://foojay.social/@acme4j)): open source Java client for the ACME protocol (RFC 8555).
 
 In this overview you can also see the list of Mastodon instances that were most involved in the interactions, and some other statistics.
-![](20221212-mastodon-stats.png)
+![Mastodon admin dashboard for Nov 13 to Dec 12, 2022: 110 new users, 118 active users, 4,033 interactions, top servers listed](20221212-mastodon-stats.png)
 
 In the administrator UI, the used space storage is also shown. The media storage contains the timeline for all the members of this instance and has been "fluctuating" between 12 and 20GB as this data gets cleaned and updated continuously.
-![](20221212-mastodon-info.png)
+![Mastodon admin panel showing software versions (Mastodon 4.0.2, PostgreSQL 13.9) and space usage with 15.2 GB of media storage](20221212-mastodon-info.png)
 
 ## Conclusion
 

@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 1): The Basics"
 date: "2021-08-27T09:52:13+00:00"
-lastmod: "2021-09-03T09:03:14+00:00"
 description: "Apache Maven (commonly referred to as “Maven”) is a Build Management tool. Maven is primarily used to build Java projects."
 canonical: "https://cguntur.me/2020/05/23/understanding-apache-maven-part-1/"
 authors:
@@ -47,7 +46,7 @@ In addition, maven provides capabilities for a project to :
 Apache Maven provides sensible defaults for a project's build management. A developer can then choose to override any preset defaults.
 
 An **example of such** is clear in the conventional directory structure of a Maven project:
-![](image-10-1024x463.png)
+![Directory tree of a Maven project: src/main and src/test with java and resources folders, plus pom.xml](image-10-1024x463.png)
 
 In this directory structure, the source code is, by convention located under the project root directory in a `src` directory.
 

@@ -1,7 +1,6 @@
 ---
 title: "Data Modeling in Cassandra and Astra DB"
 date: "2022-06-16T19:22:05+00:00"
-lastmod: "2022-06-16T19:22:06+00:00"
 description: "What does it take to build an efficient and sound data model for Apache Cassandra® and DataStax Astra DB? Where would one start? Are there any…"
 canonical: "https://medium.com/building-the-open-data-stack/data-modeling-in-cassandra-and-datastax-astra-db-3f89b9c133c9"
 authors:
@@ -18,7 +17,7 @@ related_posts:
   - "k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices"
 ---
 
-![](0_90M63PeIIyDG3hj9-1024x581.png)
+![Cassandra data model for a shopping cart: carts_by_user and items_by_cart tables, CQL statements and query workflow](0_90M63PeIIyDG3hj9-1024x581.png)
 
 What does it take to build an efficient and sound data model for [Apache Cassandra](https://cassandra.apache.org/)® and [DataStax Astra DB](https://astra.dev/3z6AFNd)? Where would one start? Are there any data modeling rules to follow? Can it be done consistently time and time again? The answers to these and many other questions can be found in the Cassandra data modeling methodology.
 
@@ -40,7 +39,7 @@ As a side note, if you are new to Cassandra or if the terms [single-row partitio
 Data modeling can have a profound effect on data quality and data access. For data quality, think about data completeness, consistency, and accuracy. With respect to data access, think about queryability, efficiency, and scalability. An efficient and sound data model is crucial for both data and applications.
 
 Our *methodology* defines how the data modeling process can be carried out in a well-organized and repeatable fashion. In particular, the Cassandra data modeling methodology is based on four objectives, four models, and two transitions; along with specific modeling, visualization, mapping, and optimization techniques and methods.
-![](0_7aGP73Y0HgnSV_76.png) Figure 1: Cassandra data modeling methodology.
+![Data modeling flow: conceptual and application workflow models map to a logical model, then optimize into a physical data model](0_7aGP73Y0HgnSV_76.png) Figure 1: Cassandra data modeling methodology.
 
 ## **Four objectives**
 
@@ -76,7 +75,7 @@ You can find more information about the Cassandra data modeling methodology in t
 One of the best ways to become skilled in data modeling is to explore concrete examples. We maintain [this growing collection of data modeling examples](https://www.datastax.com/learn/data-modeling-by-example) from various domains to help you get started with Cassandra and Astra DB data modeling. Each example applies the Cassandra data modeling methodology to produce and visualize four important artifacts: conceptual data model, application workflow model, logical data model, and physical data model.
 
 Moreover, each example has a hands-on portion with practice questions and solutions. The hands-on scenarios make it straightforward to implement a data model in Cassandra, express data access patterns as CQL queries and run the queries against our sample datasets.
-![](0_ifwNif_dnkbErko6.png) Figure 2: Example hands-on scenario with schema, data, and queries.
+![Interactive Cassandra tutorial with query design Q3.2 for an investment portfolio and its results in a CQL terminal](0_ifwNif_dnkbErko6.png) Figure 2: Example hands-on scenario with schema, data, and queries.
 
 Go ahead and explore these data models, and execute real queries against them in your browser:
 

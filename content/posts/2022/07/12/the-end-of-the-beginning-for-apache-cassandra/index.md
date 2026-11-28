@@ -1,7 +1,6 @@
 ---
 title: "The End of the Beginning for Apache Cassandra"
 date: "2022-07-12T17:43:39+00:00"
-lastmod: "2022-07-13T13:23:48+00:00"
 description: "Image: Pixabay Editor’s note: This story originally ran on July 27, 2021, the day that Apache Cassandra 4.0 was released. Today is a big day for…"
 canonical: "https://datastax.medium.com/the-end-of-the-beginning-for-apache-cassandra-f58b5b4b7504"
 authors:
@@ -17,7 +16,7 @@ categories:
 related_posts:
 ---
 
-![](1_xslbFHC3hRapwGV_wj17vg-1024x663.jpeg) Image: [Pixabay](https://pixabay.com/photos/prairie-river-stream-curved-sunset-679014/)
+![Winding river reflecting a golden sunset, an illustrative image for the Apache Cassandra 4.0 release story](1_xslbFHC3hRapwGV_wj17vg-1024x663.jpeg) Image: [Pixabay](https://pixabay.com/photos/prairie-river-stream-curved-sunset-679014/)
 
 *Editor's note: This story originally ran on July 27, 2021, the day that Apache Cassandra 4.0 was released.*
 

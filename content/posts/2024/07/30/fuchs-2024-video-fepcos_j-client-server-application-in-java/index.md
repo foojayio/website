@@ -1,14 +1,12 @@
 ---
 title: "Client-server application in Java: Easy with FEPCOS-J – Video."
 date: "2024-07-30T11:51:04+00:00"
-lastmod: "2024-07-31T10:39:07+00:00"
 description: "See how FEPCOS-J relieves developers of the network programming required to implement a client-server application in Java."
 authors:
   - "gerhard-fuchs"
 image: "fepcos.jpg"
 categories:
   - "Developer Tools"
-  - "Java"
   - "Use Cases"
   - "Videos"
 related_posts:

@@ -1,7 +1,6 @@
 ---
 title: "Feedback from calling Rust from Python"
 date: "2023-11-22T10:32:55+00:00"
-lastmod: "2023-11-22T10:32:56+00:00"
 description: "Improving low-level integration with ctypes to the generic ready-to-use pyo3 library."
 canonical: "https://blog.frankel.ch/feedback-rust-from-python/"
 authors:

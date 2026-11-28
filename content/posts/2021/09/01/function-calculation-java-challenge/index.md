@@ -1,7 +1,6 @@
 ---
 title: "Function Calculation Java Challenge"
 date: "2021-09-01T10:10:19+00:00"
-lastmod: "2021-09-01T10:10:21+00:00"
 description: "The \"Function\" functional interface is a first-class citizen function, so we can pass a function to a method and declare it as a variable."
 authors:
   - "rafael-del-nero"

@@ -1,7 +1,6 @@
 ---
 title: "Building High-Performance Java Microservices with EDA"
 date: "2023-08-16T21:34:18+00:00"
-lastmod: "2023-08-17T10:01:03+00:00"
 description: "Renowned for its resilience and low latency, EDA is a reliable choice for developing robust, high-performing microservices."
 authors:
   - "rob-austin"
@@ -9,7 +8,6 @@ image: "Screenshot-2023-08-10-at-5.13.36-PM-1024x607-1.jpg"
 categories:
   - "Chronicle Software"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "JavaFX"
 related_posts:
@@ -25,7 +23,7 @@ Renowned for its resilience and low latency, EDA is a reliable choice for develo
 
 Moreover, this method can be helpful in improving productivity and making the process of cloud migration smoother.
 
-![](Screenshot-2023-08-10-at-5.13.36-PM-1024x607.jpg)
+![Diagram of a microservices network with four benefits: performance, productivity, robustness and cloud migration](Screenshot-2023-08-10-at-5.13.36-PM-1024x607.jpg)
 
 In this article we will outline 6 key considerations and tactics for developing such services.
 

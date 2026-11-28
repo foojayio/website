@@ -1,7 +1,6 @@
 ---
 title: "Analyzing & Tuning Warm-up: Azul Zulu Prime Builds of OpenJDK"
 date: "2023-04-01T16:35:31+00:00"
-lastmod: "2025-07-15T14:23:32+00:00"
 description: "Get a basic understanding of how JIT compilation works and how to optimize warm-up using Azul Zulu Prime Builds of OpenJDK."
 canonical: "https://docs.azul.com/prime/analyzing-tuning-warmup"
 authors:
@@ -29,7 +28,7 @@ It is the task of the Just-in-Time (JIT) compiler to deliver optimal performance
 When people think of Java compilers, they usually think about `javac`, which turns your Java source code into Java bytecode. But equally important is JIT compilation, which turns your Java bytecode into optimized machine code for the specific hardware on which your Java program is running.
 
 When you first start your Java program, the JVM takes the platform-independent bytecode and runs it in the interpreter, which takes more CPU resources and is slower to execute. After a certain number of invocations (default 1K), the method is promoted to a profiling tier, known as the Tier 1 compiler or C1. Here the JVM monitors the method to build a profile of how many times each method is called, with which code paths, and how they are executed in the profiled method. After the compile threshold is reached (default 10K), the JVM promotes the method to the Tier 2 compiler by putting it in the Tier 2 compile queue. The Tier 2 compiler uses the Tier 1 profile to compile methods into highly optimized machine code.
-![](chart-speed-optimization-level-1024x538.png) Speed of the application through the different phases of interpreted bytecode, Tier 1 profiling, and Tier 2 optimized code.
+![Chart of JVM speed over time: interpreted and profiling code give way to optimized code, reaching full speed after about 70 seconds](chart-speed-optimization-level-1024x538.png) Speed of the application through the different phases of interpreted bytecode, Tier 1 profiling, and Tier 2 optimized code.
 
 Because JIT compilation needs to use the same resources that your program runs, JIT compilers are usually very conservative in their operations. The performance of your application is lower and less stable during the warm-up phase when the JVM is identifying and compiling all hot methods. Eventually, compilation activity settles down and your code achieves its optimum stable performance.
 > **NOTE**: JIT optimization is often only one part of what is commonly seen as "warm-up". Other parts of warm-up include initializing resources needed by the application, rehydrating data from caches, etc. If you are experiencing long warm-up times, make sure to analyze everything that is happening during warm-up.
@@ -121,11 +120,11 @@ This test application is run on a small machine to see the impact of threads on 
 
 ### System Information
 
-Let's look at an example GC log. Open the log by running `java -jar GCLogAnalyzer2.jar gc.log`. Click the ![](button-information-d15fa965.png) button to see the overall information about the process:
-![](screenshot-system-info-1024x242.png) System information of an application without additional flags.
+Let's look at an example GC log. Open the log by running `java -jar GCLogAnalyzer2.jar gc.log`. Click the ![Round 'i' information button from the Zing tool interface](button-information-d15fa965.png) button to see the overall information about the process:
+![System Info table: host solr-0, 1 Xeon CPU, Linux, Zing 11.0.12, 32 GB RAM, 6 of 8 hardware threads available to the process](screenshot-system-info-1024x242.png) System information of an application without additional flags.
 
 You can see that the process is running on 6 threads overall. Scrolling down to the bottom, you see the following for the test without additional parameters:
-![](screenshot-jit-threads-1024x108.png)
+![JIT Compiler Information listing one C1 thread for Tier 1 and one Falcon thread for Tier 2](screenshot-jit-threads-1024x108.png)
 
 So there is only one thread for JIT compilation, which is generally not recommended for on-JVM JIT compilation on Azul Zulu Prime JDK.
 > **NOTE** : If you need to run on resource-constrained machines, consider off-loading JIT compilation to [Cloud Native Compiler](https://docs.azul.com/prime/analyzing-tuning-warmup#use-cloud-native-compiler).
@@ -133,22 +132,22 @@ So there is only one thread for JIT compilation, which is generally not recommen
 ### Compiler Queues
 
 Click "Compiler Statistics" \> "Compiler Queues" to see the backlog of methods in the Tier 2 Falcon compile queue. The left image shows a large backlog. In the second run a much smaller amount of compile queues is being handled, much more quickly.
-![](chart-compiler-queues-compare-1024x277.png) Compiler queues without parameters, versus extra threads and lower compile threshold.
+![Two compiler queue charts: the default run peaks near 1,400 queued methods while the tuned run peaks around 900 and drains quicker](chart-compiler-queues-compare-1024x277.png) Compiler queues without parameters, versus extra threads and lower compile threshold.
 
 ### Compiler Threads
 
 Clicking "Compiler Statistics" \> "Compiler Threads" shows there is just one Tier 2 thread which is getting maxed out. With the same additional flags for extra threads and lower compiler threshold, there is a more reasonable use of the three compiler threads over time rather than one thread being constantly maxed out.
-![](chart-compiler-threads-compare-1024x276.png) Compiler threads without parameters, versus extra threads and lower compile threshold.
+![Two compiler thread charts comparing a run with one compiler thread to a tuned run with up to three threads](chart-compiler-threads-compare-1024x276.png) Compiler threads without parameters, versus extra threads and lower compile threshold.
 
 ### Compile Counts
 
 Clicking "Compiler Statistics" \> "Tier 2 Compile Counts" shows a large number of the methods being evicted from the queue before they can be compiled. In the second run, the Compile Counts shows a much smaller number of methods getting evicted from the queue.
-![](chart-tier-2-compile-counts-compare-1024x277.png) Compile counts without parameters, versus extra threads and lower compile treshold. **NOTE**: A lot of evicted methods is not always a bad thing. It just demonstrates that the application has phases and some methods are not used within some period of time. For example: Falcon didn't compile the incoming requests in time and the application just switched to another phase and certain methods are no longer needed. If methods are executed by the application later again they would be enqueued again, so no worries.
+![Two Tier 2 compile count charts: the default run evicts about 8,000 methods before compiling, the tuned run far fewer](chart-tier-2-compile-counts-compare-1024x277.png) Compile counts without parameters, versus extra threads and lower compile treshold. **NOTE**: A lot of evicted methods is not always a bad thing. It just demonstrates that the application has phases and some methods are not used within some period of time. For example: Falcon didn't compile the incoming requests in time and the application just switched to another phase and certain methods are no longer needed. If methods are executed by the application later again they would be enqueued again, so no worries.
 
 ### Wait Distribution Time
 
 Clicking "Tier 2 Wait Time Distribution" shows our JVM is experiencing long wait times for compiled methods in the first run, while the second run shows much better times to respond with compiled methods.
-![](chart-tier-2-wait-time-distribution-compare-1024x278.png) Wait distribution time without parameters, versus extra threads and lower compile treshold.
+![Two Tier 2 wait time distribution charts showing methods waiting longer for compilation in the default run than in the tuned run](chart-tier-2-wait-time-distribution-compare-1024x278.png) Wait distribution time without parameters, versus extra threads and lower compile treshold.
 
 ## Eviction From the Compiler Queue
 

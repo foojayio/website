@@ -1,13 +1,11 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 4)"
 date: "2021-04-09T07:51:05+00:00"
-lastmod: "2022-04-30T03:32:25+00:00"
 description: "In this part, I will fast forward my progress of the JFX World Clock and jump into building and creating an installer that you can distribute."
 authors:
   - "carldea"
 image: "Screen-Shot-2021-03-28-at-4.05.45-PM.png"
 categories:
-  - "Bach"
   - "JavaFX"
 related_posts:
   - "transitioning-to-java-my-first-book"

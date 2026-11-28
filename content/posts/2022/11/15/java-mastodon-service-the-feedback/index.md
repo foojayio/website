@@ -1,7 +1,6 @@
 ---
 title: "Java Mastodon Service: The Feedback"
 date: "2022-11-15T08:40:14+00:00"
-lastmod: "2022-11-15T08:40:16+00:00"
 description: "To Mastodon or not to Mastodon... Frank asked the question and let's take a look at the initial responses from around the Java community!"
 authors:
   - "frankdelporte"

@@ -1,7 +1,6 @@
 ---
 title: "Learn About How Your Peers Use Java!"
 date: "2024-10-24T12:44:16+00:00"
-lastmod: "2024-10-24T12:50:36+00:00"
 description: "Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? Java-based infrastructures and languages? How Java workloads are affecting cloud compute costs?"
 authors:
   - "geertjan-wielenga"
@@ -18,7 +17,7 @@ related_posts:
 **Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? Java-based infrastructures and languages? How many are using Java to code AI functionality? How Java workloads are affecting cloud compute costs?**
 
 [Azul](https://www.azul.com/) has been gathering all that data from a survey of Java users, running until 6:30pm CT on October 31, 2024. If you want to participate, the survey is short, and we'll hook you up with the report after the survey is complete in January 2025.
-[![](dimresearch-1024x557.png)](https://survey.alchemer.com/s3/8032225/Foo)
+[![Dimensional Research survey start page asking where you live and how many people your company employs, at 0% progress](dimresearch-1024x557.png)](https://survey.alchemer.com/s3/8032225/Foo)
 
 Plus you'll be helping to add to our collective knowledge.
 

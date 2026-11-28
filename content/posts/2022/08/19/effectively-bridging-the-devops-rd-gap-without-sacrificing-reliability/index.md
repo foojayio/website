@@ -1,7 +1,6 @@
 ---
 title: "Bridge the DevOps/Dev Gap without Sacrificing Reliability"
 date: "2022-08-19T09:16:00+00:00"
-lastmod: "2022-08-22T07:17:12+00:00"
 description: "DevOps revolutionized our industry. CI & CD made six sigma common. Still bugs make it to production past our tests. Fixing them is harder now!"
 canonical: "https://lightrun.com/best-practices/bridge-devops-dev-gap-without-sacrificing-reliability/"
 authors:

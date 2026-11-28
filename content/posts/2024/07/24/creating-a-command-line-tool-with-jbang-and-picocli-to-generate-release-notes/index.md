@@ -1,13 +1,13 @@
 ---
 title: "Creating a Command Line Tool with JBang and PicoCLI to Generate Release Notes"
 date: "2024-07-24T09:44:36+00:00"
-lastmod: "2024-07-24T13:56:35+00:00"
 description: "Learn how to create a Java command-line tool with JBang and PicoCLI to automate generating release notes from GitHub."
 authors:
   - "bazlur-rahman"
 image: "DALL-E-2024-07-18-21.31.00-A-clean-and-simple-illustration-featuring-a-command-line-interface-with-Java-code-on-the-screen.-The-background-shows-small-minimalist-logos-of-JBang.webp"
 categories:
-  - "Java"
+  - "JBang"
+  - "Developer Tools"
 related_posts:
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"
@@ -61,7 +61,7 @@ jbang edit --sandbox release-notes.java
 
 This creates a sandbox environment and sets up a Gradle project for you. You can then open it on your favourite IDE.
 
-![](Screenshot-2024-07-18-at-10.18.19-PM-1024x733.png)
+![IntelliJ IDEA with the release_notes JBang project open, showing a picocli command class with options for GitHub user, repo and commits](Screenshot-2024-07-18-at-10.18.19-PM-1024x733.png)
 
 ### **Step 3: Add Dependencies**
 
@@ -371,7 +371,7 @@ Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
 
 It will print on the terminal if we don't want to save it in any file.
 
-{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.jpg" class="size-medium" width="700" height="290" >}}
+{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.jpg" alt="Terminal output of the generated release notes in Markdown, listing commits of the cargotracker project" class="size-medium" width="700" height="290" >}}
 
 That's it.
 

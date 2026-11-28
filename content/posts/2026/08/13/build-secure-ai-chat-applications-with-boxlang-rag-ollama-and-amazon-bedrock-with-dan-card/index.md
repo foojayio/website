@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "LLM"
   - "Security"
 related_posts:
@@ -21,7 +20,7 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 ---
 
-![](dancardWorkshop-700x394.jpg)
+![Promo banner for Dan Card's hands-on BoxLang AI chat applications workshop on Friday, August 28, 2026](dancardWorkshop-700x394.jpg)
 
 ## Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock
 

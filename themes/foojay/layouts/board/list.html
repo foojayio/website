@@ -2,7 +2,7 @@
 {{/* /board/ -- the board overview. content/pages/board.md holds the intro and
      nothing else: the grid, the count and every card below are derived from
      the member pages in content/pages/board/, the same derive-don't-store
-     idiom the AI portal and the sponsor pages use. Adding a member is one new
+     idiom the sponsor pages use. Adding a member is one new
      markdown file plus a logo; there is no list here to keep in step. */}}
 {{ $members := partial "board-members.html" . }}
 
@@ -10,10 +10,9 @@
   <div class="page-head__inner">
     <h1>{{ .Title }}</h1>
     {{ with .Content }}<div class="page-head__intro prose">{{ . }}</div>{{ end }}
-    <div class="page-head__meta">
-      <p>{{ len $members }} organization{{ if ne (len $members) 1 }}s{{ end }} on the board.</p>
-    </div>
-    {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    {{ partial "page-head-meta.html" (dict
+      "stats" (printf "<strong>%d</strong> organization%s on the board" (len $members) (cond (eq (len $members) 1) "" "s"))
+      "views" .) }}
   </div>
 </div>
 
@@ -23,7 +22,7 @@
     {{ $m := . }}
     <article class="board-card">
       <a class="board-card__link" href="{{ .RelPermalink }}">
-        {{ partial "board-logo.html" (dict "page" .) }}
+        {{ partial "board-logo.html" (dict "page" . "decorative" true) }}
         <h2 class="board-card__title">{{ .Title }}</h2>
       </a>
       {{ with .Params.description }}<p class="board-card__desc">{{ . }}</p>{{ end }}

@@ -1,13 +1,11 @@
 ---
 title: "Patterns For The Design Of Microservices – Part 3"
 date: "2023-11-16T04:35:02+00:00"
-lastmod: "2023-11-19T21:31:57+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."
 authors:
   - "mahendra1413"
 image: "MSPatternsOne.png"
 categories:
-  - "Java"
   - "Kotlin"
   - "Microservices"
   - "Observability"

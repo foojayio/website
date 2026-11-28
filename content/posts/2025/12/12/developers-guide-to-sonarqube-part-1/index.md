@@ -1,14 +1,12 @@
 ---
 title: "SonarQube for IDE in IntelliJ: The Ultimate Java Developer’s Guide"
 date: "2025-12-12T15:43:00+00:00"
-lastmod: "2025-12-12T15:48:42+00:00"
 description: "Stop fixing bugs on weekends. Learn how to use SonarQube for IDE (formerly SonarLint) in IntelliJ to catch Java errors and security risks in real-time. Install, configure, and code with confidence."
 authors:
   - "jonathan-vila"
 image: "Gemini_Generated_Image_p9ar60p9ar60p9ar-scaled.jpg"
 categories:
   - "IntelliJ IDEA"
-  - "Java"
 related_posts:
   - "developers-guide-to-sonarqube-part-2"
   - "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij"
@@ -37,7 +35,7 @@ This is **Part 1** of our series. Today, we focus on the **Standalone Mode** —
 We are busy. We don't want to spend 2 hours configuring a linter script or messing with XML files.
 
 **The Solution:** [SonarQube for IDE](https://www.sonarsource.com/products/sonarqube/ide/) is plug-and-play. It works locally, analyzing your code *as you type*.
-![](Screenshot-2025-12-12-at-15.52.44.jpg)
+![IntelliJ Settings > Plugins marketplace search for 'sonarqube' showing the SonarQube for IDE plugin with an Install button](Screenshot-2025-12-12-at-15.52.44.jpg)
 
 1. Open **IntelliJ IDEA**.
 2. Go to **Settings** -\> **Plugins**.
@@ -58,7 +56,7 @@ You don't need to run a command. As soon as you write a bad line, the SonarQube 
 * **Red squiggly line:** It's broken (Bug) or dangerous (Vulnerability).
 
 It catches the things our eyes miss because we have been staring at the screen for too long.
-![](Screenshot-2025-12-12-at-15.52.52.png)
+![IDE editor with Java code and highlighted issues, and a SonarQube rule popup about replacing generic exceptions](Screenshot-2025-12-12-at-15.52.52.png)
 
 ## **Problem #3: "Is this urgent, or can it wait?"**
 
@@ -72,7 +70,7 @@ If you look at the **SonarQube for IDE Tool Window** (usually at the bottom), it
 2. **Type:** Is it a **Bug** (fix now), a **Vulnerability** (fix now), or a **Code Smell** (fix when you can)?
 
 You can sort the list by severity and tackle the fires first.
-![](Screenshot-2025-12-12-at-15.52.59.png)
+![SonarQube for IDE report listing 57 issues in DBUtils.java, such as unclosed statements and compromised passwords](Screenshot-2025-12-12-at-15.52.59.png)
 
 ## **Problem #4: "I'm not just writing Java anymore..."**
 
@@ -89,7 +87,7 @@ SonarQube for IDE covers [**over 20 languages**](https://docs.sonarsource.com/so
 * **Infrastructure as Code (IaC):** Docker, Kubernetes, Terraform, CloudFormation.
 
 It ensures that your deployment scripts are just as secure as your Java classes. It is really satisfying to see the tool catching a security issue in a Dockerfile that you would have completely ignored otherwise.
-![](Screenshot-2025-12-12-at-15.53.06.png)
+![Dockerfile in the editor with a SonarQube warning to surround the PASSWORD variable with double quotes](Screenshot-2025-12-12-at-15.53.06.png)
 
 ## **Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."**
 
@@ -100,7 +98,7 @@ This is the main reason developers uninstall quality tools. You open a class wri
 In the tool settings window, enable the setting **"Focus on New Code"**. This is a mental health saver. It ignores technical debt older than 30 days (this is the default time window when not using the Connected Mode).
 
 Then in the analysis
-![](Screenshot-2025-12-12-at-15.53.14.jpg)
+![SonarQube for IDE settings with 'Focus on new code' enabled, next to a report of 3 new issues in the last 30 days](Screenshot-2025-12-12-at-15.53.14.jpg)
 
 ## **Problem #6: "I know it's bad, but how do I fix it?"**
 
@@ -123,7 +121,7 @@ String name = user.get().getName();
 ```
 
 **The Educational Fix:** When you select an issue, SonarQube for IDE opens a **Rule Description** tab. This is my favorite part. It doesn't just say "fix this." It gives you a mini-article explaining **why** this is an issue and provides clear "Non-Compliant" vs "Compliant" code examples. It effectively trains you to be a better developer while you work.
-![](Screenshot-2025-12-12-at-15.53.22.jpg)
+![IntelliJ with the SonarQube for IDE Findings panel listing issues and a rule explanation on utility classes needing private constructors](Screenshot-2025-12-12-at-15.53.22.jpg)
 
 **The Quick Fix:** Once you understand the issue, you can often (applicable to a subgroup of rules) just hit Alt + Enter (or Option + Enter) and let the tool rewrite the code for you.
 
@@ -170,7 +168,7 @@ You can go to **Settings** -\> **Tools** -\> **SonarQube for IDE** -\> **Rules**
 * **Disable** rules that don't make sense for you.
 * **Configure thresholds** (e.g., allow 15 lines instead of 10).
 
-![](Screenshot-2025-12-12-at-15.53.31.jpg)
+![SonarQube for IDE rules settings: the Java cognitive complexity rule with its threshold set to 15](Screenshot-2025-12-12-at-15.53.31.jpg)
 
 ## **Summary**
 

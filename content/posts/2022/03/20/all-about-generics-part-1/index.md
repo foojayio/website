@@ -1,7 +1,6 @@
 ---
 title: "All about Generics: Part 1"
 date: "2022-03-20T22:54:03+00:00"
-lastmod: "2022-03-21T07:05:00+00:00"
 description: "Java requires to specify types in all aspects of its code, methods, fields, interface etc, however, still, with generics a piece of code can be written generically enough so that we can fit a variety of types in it."
 authors:
   - "mainuls18"

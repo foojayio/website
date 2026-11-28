@@ -1,7 +1,6 @@
 ---
 title: "Beautify Third-Party APIs with Kotlin"
 date: "2021-12-21T08:15:42+00:00"
-lastmod: "2021-12-21T08:16:19+00:00"
 description: "Learn how to improve the API provided by third-party libraries by combining Kotlin extension functions and delegation."
 canonical: "https://blog.frankel.ch/beautify-third-party-api-kotlin/"
 authors:
@@ -52,7 +51,7 @@ try (Component component = new Component()) {
 
 However, `Component` must implement `AutoCloseable`.
 
-{{< img src="auto-closeable-api-278x510.png" class="aligncenter size-medium" width="278" height="510" >}}
+{{< img src="auto-closeable-api-278x510.png" alt="UML class diagram: Component in my.package has close(), while Closeable extends AutoCloseable but Component does not implement it" class="aligncenter size-medium" width="278" height="510" >}}
 
 Kotlin provides the `use()` extension function on `Closeable`.  
 

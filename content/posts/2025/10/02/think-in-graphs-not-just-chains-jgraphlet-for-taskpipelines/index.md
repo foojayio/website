@@ -1,14 +1,12 @@
 ---
 title: "Think in Graphs, Not Just Chains: JGraphlet for TaskPipelines"
 date: "2025-10-02T13:24:28+00:00"
-lastmod: "2025-10-02T13:24:29+00:00"
 description: "JGraphlet is a tiny, zero-dependency library for building task pipelines in Java. Its power comes not from a long list of features, but from a small set of core design principles that work together in harmony."
 canonical: "https://shaaf.dev/post/2025-08-25-think-in-graphs-not-just-chains-jgraphlet-for-taskpipelines/"
 authors:
   - "shaaf"
 image: "jgraphlets.jpg"
 categories:
-  - "Java"
   - "Library"
 related_posts:
   - "semantic-versioning-your-java-libraries"

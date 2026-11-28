@@ -1,7 +1,6 @@
 ---
 title: "JmFrX: A Bridge From JMX to Java Flight Recorder"
 date: "2020-09-03T09:24:29+00:00"
-lastmod: "2020-12-07T13:25:30+00:00"
 description: "Announcement of a new open-source utility: JmFrX, a tool for capturing JMX data with Java Flight Recorder, making it available for offline investigation."
 canonical: "https://www.morling.dev/blog/introducing-jmfrx-a-bridge-from-jmx-to-jdk-flight-recorder"
 authors:

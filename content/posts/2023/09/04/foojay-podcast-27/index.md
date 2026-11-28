@@ -1,14 +1,12 @@
 ---
 title: "Foojay Podcast #27: Chicago JUG and KUG"
 date: "2023-09-04T09:24:32+00:00"
-lastmod: "2025-11-13T08:59:04+00:00"
 description: "Since December last year, the Foojay podcast visited a Java User Group monthly, now in Chicago to learn from the Java and Kotlin user groups."
 authors:
   - "frankdelporte"
   - "mgrygles"
 image: "foojay-podcast-guests-chicago.jpg"
 categories:
-  - "Java"
   - "JUGs"
   - "Kotlin"
   - "Podcast"
@@ -54,7 +52,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](foojay-podcast-guests-chicago-1024x576.jpg)
+![Foojay Podcast video call with guests Mary Grygleski and John Burns and host Frank Delporte](foojay-podcast-guests-chicago-1024x576.jpg)
 
 ## Links
 

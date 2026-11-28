@@ -1,7 +1,6 @@
 ---
 title: "Apache APISIX Loves Rust! (And Me Too)"
 date: "2022-09-26T09:23:23+00:00"
-lastmod: "2022-09-26T09:23:25+00:00"
 description: "Context and more surrounding the Rust integration in Apache APISIX, a good story because it highlights the power of Open Source."
 canonical: "https://blog.frankel.ch/rust-apisix/1/"
 authors:

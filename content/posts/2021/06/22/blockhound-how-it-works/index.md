@@ -1,7 +1,6 @@
 ---
 title: "BlockHound and Blocking Calls: How It Works"
 date: "2021-06-22T17:09:13+00:00"
-lastmod: "2021-06-22T17:09:15+00:00"
 description: "BlockHound lets you check if a blocking call occurs in a thread where it shouldn't happen and throws an exception at runtime when it does."
 canonical: "https://blog.frankel.ch/blockhound-how-it-works/"
 authors:
@@ -150,7 +149,7 @@ Though its artifact's `groupId` is `io.projectreactor`, BlockHound is generic:
 
 With that, it's time to check the BlockHound API a bit.
 
-![](blockhound-api-1024x514.png)
+![UML class diagram of the BlockHound API, with Builder, BlockHound and the BlockHoundIntegration implementations for Reactor, RxJava2 and standard output](blockhound-api-1024x514.png)
 
 For example, the `RxJava2Integration` integration configures BlockHound for RxJava 2:
 
@@ -164,7 +163,7 @@ It's time to get back to our original question, how does BlockHound work?
 
 Here's what happens when you call `BlockHound.install()`:
 
-![](blockhound-sequence-1024x664.png)
+![Sequence diagram of BlockHound.install() loading integrations, then instrumenting with ByteBuddy and testing the instrumentation](blockhound-sequence-1024x664.png)
 
 The magic happens in the `instrument()` method. There, BlockHound uses bytecode instrumentation to inject a code snippet in front of every method marked as blocking. A method is blocking if:
 
@@ -173,7 +172,7 @@ The magic happens in the `instrument()` method. There, BlockHound uses bytecode 
 
 The snippet's code flow looks like this:
 
-![](blocking-method-1024x616.png)
+![Sequence diagram of BlockHoundRuntime.checkBlocking() returning when allowed or dynamic, and otherwise throwing BlockingOperationError](blocking-method-1024x616.png)
 
 1. If the call is allowed, the flow continues normally.
 2. If the call is dynamic, it also continues normally.

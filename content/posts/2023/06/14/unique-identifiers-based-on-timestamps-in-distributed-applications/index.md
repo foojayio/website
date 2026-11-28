@@ -1,7 +1,6 @@
 ---
 title: "Unique Identifiers Based on Timestamps in Distributed Applications"
 date: "2023-06-14T11:22:03+00:00"
-lastmod: "2023-06-29T06:40:30+00:00"
 description: "Generate a highly efficient approach to generating an 8-byte lightweight identifier that is unique across many hosts."
 authors:
   - "peter-lawrey"
@@ -69,11 +68,11 @@ Should the machine fail and the information as to the last identifier be lost, t
 
 NOTE: This used the MappedFile in shared memory supported by Chronicle Bytes, which is open source.
 
-![](Screenshot-2023-06-06-at-1.16.22-PM-1024x380.png)
+![Java code for currentTimeNanos(): derive a host-unique timestamp and set it with compare-and-swap, else fall back to a loop](Screenshot-2023-06-06-at-1.16.22-PM-1024x380.png)
 
 If the time hasn't progressed, either due to high contention, or the wall clock going backwards e.g. due to a correction, a loop is called to find the next available identifier.
 
-![](Screenshot-2023-06-06-at-1.18.44-PM.png)
+![Java code for currentTimeNanosLoop(): retry compare-and-swap on the last ID, adding a step if needed, pausing between attempts](Screenshot-2023-06-06-at-1.18.44-PM.png)
 
 This loop looks for the next possible timestamp (with the hostId) and attempts to update it.
 
@@ -81,7 +80,7 @@ This loop looks for the next possible timestamp (with the hostId) and attempts t
 
 With JMH, benchmarking this utility in a single-threaded manner is pretty easy.
 
-![](Screenshot-2023-06-06-at-1.19.15-PM-1013x1024.jpg)
+![Java JMH benchmark class for DistributedUniqueTimeProvider with warmup, measurement and fork settings and a currentTimeNanos benchmark](Screenshot-2023-06-06-at-1.19.15-PM-1013x1024.jpg)
 
 After less than five minutes, we get the following result on a windows laptop. You can get better results on a high-end server or desktop.
 
@@ -89,7 +88,7 @@ The average time is around 37.4 nanoseconds. While this is single-threaded, this
 
 UUID.randomUUID() is also very fast, only six times longer, however, if you need a timestamp and a source identifier for your event anyway, this is additional work/data.
 
-![](Screenshot-2023-06-06-at-1.19.51-PM-1024x268.png)
+![JMH results: currentTimeNanos takes about 37-44 ns per operation, versus 208-265 ns for UUID.randomUUID, on two CPUs](Screenshot-2023-06-06-at-1.19.51-PM-1024x268.png)
 
 ### Disadvantages of This Approach
 

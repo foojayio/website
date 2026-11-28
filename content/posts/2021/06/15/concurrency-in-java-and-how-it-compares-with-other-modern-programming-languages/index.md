@@ -1,7 +1,6 @@
 ---
 title: "Concurrency in Java (Compared with Other Programming Languages)"
 date: "2021-06-15T08:05:50+00:00"
-lastmod: "2021-06-15T10:58:10+00:00"
 description: "Learn about concurrency in modern programming languages and how to build and benchmark a concurrent web server in Java."
 canonical: "https://deepu.tech/concurrency-in-modern-languages-java/"
 authors:
@@ -15,8 +14,6 @@ related_posts:
   - "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
   - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
 ---
-
-![cover image](evgeniya-litovchenko-3whkjP9a9ZI-unsplash-700x467.jpg)
 
 This is a multi-part series where I talk about concurrency in modern programming languages and build and benchmark a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Java, Rust, Go, JavaScript (NodeJS), TypeScript (Deno) and Kotlin to compare concurrency and its performance between these languages/platforms.
 

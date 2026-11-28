@@ -1,7 +1,6 @@
 ---
 title: "Kotlin and FaaS: An Impossible Union?"
 date: "2021-11-02T08:40:48+00:00"
-lastmod: "2021-11-02T08:44:34+00:00"
 description: "I'd like to first explain why the JVM platform is a bad idea for FaaS. Then, I'll proceed to propose alternatives to use Kotlin nonetheless."
 canonical: "https://blog.frankel.ch/kotlin-faas-impossible-union/"
 authors:

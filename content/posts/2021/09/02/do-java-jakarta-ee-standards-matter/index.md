@@ -1,7 +1,6 @@
 ---
 title: "Do Java/Jakarta EE Standards Matter?"
 date: "2021-09-02T14:43:05+00:00"
-lastmod: "2021-09-03T08:30:24+00:00"
 description: "Among other highlights, this video shows you how having standards gives you the opportunity to develop future proof applications!"
 canonical: "https://www.payara.fish/dismiss-the-myths/"
 authors:

@@ -1,14 +1,12 @@
 ---
 title: "Ensuring the right usage of the Java 21 new features"
 date: "2024-04-14T16:16:13+00:00"
-lastmod: "2024-04-14T16:16:14+00:00"
 description: "How to ensure the right usage of the new version of Java 21, and improve performance and clarity in our code base."
 authors:
   - "jonathan-vila"
 image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
-  - "Java"
   - "JDK21"
 related_posts:
   - "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"

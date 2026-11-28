@@ -1,7 +1,6 @@
 ---
 title: "2023 in Retrospective"
 date: "2024-01-16T07:44:39+00:00"
-lastmod: "2024-01-16T07:44:40+00:00"
 description: "Last year, I wrote my first yearly retrospective. I liked the experience, so I'm trying one more time. Let the future decide if it will become a trend or not."
 canonical: "https://blog.frankel.ch/2023-retrospective/"
 authors:
@@ -58,7 +57,7 @@ Absolute numbers are not that interesting, but comparing them is. Interestingly,
 
 Besides, I created a script to track daily metrics across sites and social media, just as I did for Apache APISIX. It displays interesting results:
 
-![](social-metrics-1024x768.webp)
+![Line chart of follower counts across social channels from October 2023 to January 2024: Twitter flat near 14K, Dev.to growing past 8K](social-metrics-1024x768.webp)
 
 As above, numbers are much less important than the trend. Growth visibly happens mainly on dev.to and Bluesky for reasons I cannot fathom (yet?).
 
@@ -76,7 +75,7 @@ Here's the GitHub summary:
 
 [
 
-{{< img src="github-contribs-700x482.webp" class="aligncenter size-medium" width="700" height="482" >}}
+{{< img src="github-contribs-700x482.webp" alt="GitHub profile showing 1,275 contributions in the last year, 94% commits, 2% code review, 1% issues, 3% pull requests" class="aligncenter size-medium" width="700" height="482" >}}
 
 ](https://github.com/nfrankel/)
 

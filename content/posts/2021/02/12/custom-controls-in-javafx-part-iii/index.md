@@ -1,7 +1,6 @@
 ---
 title: "Custom Controls in JavaFX (Part III) -- Extend an Existing Control"
 date: "2021-02-12T08:22:02+00:00"
-lastmod: "2021-02-12T10:07:33+00:00"
 description: "In the ongoing series on custom JavaFX controls, learn how to create a custom JavaFX control by extending an existing control."
 authors:
   - "gerrit-grunwald"
@@ -270,15 +269,15 @@ Then we adjust some of these styles for the different states like :readonly, :fo
 
 The final result of our control will then look like this...
 
-![](Extended-Control-2021-01-27-12-52-07.png)
+![JavaFX 'Extended Control' window showing an empty 'Name' text field and a Focus button](Extended-Control-2021-01-27-12-52-07.png)
 
 Above: Standard design without focus.
 
-![](Extended-Control-2021-01-27-12-52-35.png)
+![JavaFX 'Extended Control' window with the field focused: small blue 'Name' label above 'Han Solo' and a blue underline](Extended-Control-2021-01-27-12-52-35.png)
 
 Above: Focused with content.
 
-![](Extended-Control-2021-01-27-12-52-47.png)
+![JavaFX 'Extended Control' window unfocused: grey 'Name' label above 'Han Solo' and a grey underline](Extended-Control-2021-01-27-12-52-47.png)
 
 Above: Not focused with content.
 

@@ -4,10 +4,11 @@ Operational notes for people who run the site, rather than write for it. If you
 came here to publish an article, you want [`README.md`](README.md) and
 [`CONTRIBUTING.md`](CONTRIBUTING.md) instead.
 
-Four other documents carry the detail this one only points at:
+Five other documents carry the detail this one only points at:
 
 | Document | What it covers |
 |---|---|
+| [`MODERATORS.md`](MODERATORS.md) | Reviewing and merging article PRs, then scheduling the drafts with the skills |
 | [`scripts/README.md`](scripts/README.md) | Every script, grouped by whether it survives cutover |
 | [`worker/views/README.md`](worker/views/README.md) | The read counter: Worker + D1 setup and deploy |
 | [`REDIRECTS.md`](REDIRECTS.md) | The live Cloudflare redirect rules carrying old URLs to their Hugo equivalents |
@@ -29,6 +30,11 @@ Four other documents carry the detail this one only points at:
 | `scripts/` | jbang/Java tooling, grouped by lifetime. | maintainers |
 | `worker/views/` | The read counter (Cloudflare Worker + D1). | maintainers |
 
+## Moderating and publishing articles
+
+Reviewing author pull requests and scheduling merged drafts is covered in
+[`MODERATORS.md`](MODERATORS.md), including how to use the `schedule-*` skills.
+
 ## Generated files — never hand-edit these
 
 Each is overwritten on a schedule, so a hand edit survives at most a day. Fix
@@ -38,6 +44,7 @@ the **source** instead.
 |------|----------------|-------------|
 | `data/jugs.yaml` | `fetch/Jugs.java` | [World-Wide-JUGs/GlobalWWJugs](https://github.com/World-Wide-JUGs/GlobalWWJugs) |
 | `data/java-champions.yaml` | `fetch/JavaChampions.java` | [aalmiray/java-champions](https://github.com/aalmiray/java-champions) |
+| `data/java-conferences.yaml` | `fetch/JavaConferences.java` | [javaconferences.org](https://javaconferences.org/) |
 | `data/jug-events.json` | `fetch/JugEvents.java` | the JUG's own calendar feed, via GlobalWWJugs |
 | `data/views.json` | `fetch/ViewCounts.java` | the counter itself |
 | `data/legacy-views.json` | `transfer/LegacyViews.java` | — kept in the repo because it is the **only** copy; the numbers vanish with WordPress |
@@ -75,7 +82,7 @@ Pagefind.
 | Workflow | Trigger | Does |
 |---|---|---|
 | `build-deploy.yml` | push to `main` | refreshes the generated `data/*`, commits them back with `[skip ci]`, builds, runs Pagefind, deploys to Pages |
-| `sync-external-content.yml` | daily | JUG list, Java Champions, JUG events |
+| `sync-external-content.yml` | daily | JUG list, Java Champions, Java conferences, JUG events |
 | `sync-view-counts.yml` | 4×/day | read counts — the one thing that moves continuously |
 | `pr-check.yml` | pull requests | `validate/Frontmatter.java` + a full build (GitHub Pages has no per-PR preview URL, so this is the review signal) |
 
@@ -100,18 +107,20 @@ re-reading.
 A thread is keyed on the **post slug**, never the pathname, because the site
 serves `/website/today/<slug>/` today and `/today/<slug>/` after cutover — every
 pathname-keyed thread would be orphaned that day. Same reasoning and same key
-shape as the read counter. Change the mapping and you must change
-`transfer/Comments.java` with it; they agree by construction, and a mismatch
-shows up as an empty comment section rather than an error.
+shape as the read counter. Change the mapping and existing threads
+are orphaned: a mismatch shows up as an empty comment section, not an error.
 
-The 580 legacy WordPress comments are **not** in these Discussions, and must not
-be put there: importing them got the posting account **banned by GitHub** a few
-posts in. `transfer/Comments.java` archives them into the repo instead — one
-`content/posts/**/comments.json` per post, rendered under the giscus widget by
-`partials/legacy-comments.html` as "Discussions on the previous Foojay site".
-It needs no credential, and it is safe (and worth) re-running until cutover to
-pick up comments left on WordPress in the meantime. See
-[`scripts/README.md`](scripts/README.md).
+The 580 legacy WordPress comments were **imported into these Discussions** once,
+in the shape giscus expects, so they appear in the widget like any other
+thread. Don't re-import them: a fast first run got the posting account
+**banned by GitHub** as spam, and the slow rerun only succeeded because it
+waited between writes. The script is deleted; read it from git history
+(`scripts/migrate/Discussions.java`) if you ever need to repeat the approach.
+
+Imported text must not contain a live `@`: that script escaped Markdown but not
+`@`, so `@Mihai` and even `@NotNull` pinged real GitHub accounts, and 17
+comments had to be edited by hand afterwards. A WordPress commenter's name
+matches no GitHub user, so escape every `@`.
 
 ## Read counter
 

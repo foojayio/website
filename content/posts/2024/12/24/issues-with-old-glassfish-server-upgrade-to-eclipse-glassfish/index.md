@@ -1,7 +1,6 @@
 ---
 title: "Issues with old GlassFish server? Upgrade to Eclipse GlassFish!"
 date: "2024-12-24T09:05:26+00:00"
-lastmod: "2024-12-24T09:05:28+00:00"
 description: "If you haven’t explored Eclipse GlassFish since it joined the Eclipse Foundation, now’s the time to see how its new capabilities can modernize and future-proof your Jakarta EE applications."
 canonical: "https://omnifish.ee/2024/12/11/issues-with-old-glassfish/"
 authors:
@@ -9,7 +8,6 @@ authors:
 image: "GlassFish-embedded-e1698251860666.png"
 categories:
   - "Jakarta EE"
-  - "Java"
 related_posts:
   - "glassfish-is-rolling-forward-whats-new"
   - "ejb-support-in-piranha-via-cdi"

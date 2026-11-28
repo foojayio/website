@@ -1,13 +1,11 @@
 ---
 title: "OpenRewrite: Automatic Code Refactoring and More - Part 2"
 date: "2023-09-14T06:56:36+00:00"
-lastmod: "2023-09-14T06:56:37+00:00"
 description: "Discover OpenRewrite Library, the ultimate solution for code refactoring and maintenance. Optimize your code with ease and efficiency."
 authors:
   - "mahendra1413"
 image: "OpenRewrite-poster.png"
 categories:
-  - "Java"
   - "OpenRewrite"
 related_posts:
   - "openrewrite-automatic-code-refactoring-and-maintenance"

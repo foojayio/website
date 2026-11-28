@@ -1,7 +1,6 @@
 ---
 title: "Understanding Apache Maven (Part 8): Maven Plugins"
 date: "2021-11-12T13:34:48+00:00"
-lastmod: "2021-11-20T11:36:10+00:00"
 description: "Maven is a plugin-execution framework: plugins are an assembly of goals, code written as MOJOs (Maven’s plain Old Java Objects)."
 authors:
   - "c-guntur"
@@ -91,7 +90,7 @@ The **dependencies** is a complex element and contains a set of **dependency** e
 ### Configuration
 
 The **configuration** is a complex element which allows for a free-form DOM configuration used by the plugin. The configuration specifics are typically listed (*and recommended, in case of custom plugins*) in the Usage page for a given plugin.
-![](mavenpomplugins-1-6d5482ba.png) A visual of the plugin element
+![Diagram of the Maven POM plugins element: groupId, artifactId, version, executions with goals, dependencies and configuration](mavenpomplugins-1-6d5482ba.png) A visual of the plugin element
 
 ## Plugin Inheritance
 

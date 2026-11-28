@@ -1,7 +1,6 @@
 ---
 title: "BoxLang AI Deep Dive — Part 5 of 7: One API, 17 Providers — The Provider Architecture Deep Dive"
 date: "2026-04-29T16:38:08+00:00"
-lastmod: "2026-05-05T15:23:49+00:00"
 description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then…"
 authors:
   - "cristobal-escobar"
@@ -10,8 +9,8 @@ categories:
   - "AI"
   - "Developer Tools"
   - "GenAI"
-  - "Java"
   - "Tutorials"
+  - "BoxLang"
 related_posts:
   - "introducing-boxlang-ai-explorer-a-local-catalog-for-every-ai-pattern"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
@@ -21,7 +20,7 @@ aliases:
   - "/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive-🛡️/"
 ---
 
-![](bxai-series-cover-05-700x368.png)
+![Cover for BoxLang AI 3.0 deep dive part 5: One API, 17 Providers - Zero Vendor Lock-In by Design](bxai-series-cover-05-700x368.png)
 
 *BoxLang AI 3.0 Series · Part 5 of 7*
 

@@ -8,7 +8,6 @@ authors:
 image: "azul-zulu-ca-sa-chainguard.avif"
 categories:
   - "Cloud"
-  - "Java"
 related_posts:
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
   - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
@@ -23,7 +22,7 @@ related_posts:
 * *[Using the Azul Zulu Docker Official Images: From Simple Pull to Lean Container](https://www.azul.com/blog/using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container/)*
 
 The launch of [Azul Zulu as Docker Official Images](https://hub.docker.com/_/azul-zulu) was a milestone, but it's just one of several ways to get Azul Zulu Builds of OpenJDK in a container. Depending on whether you're evaluating Azul Zulu, running it in production under a support contract, or operating in a high-security environment, the right image source will vary. In this post, I'll show you all the possibilities.
-![](azul-zulu-ca-sa-chainguard-1024x576.avif)
+![Three Azul polaroid cards labelled Chainguard, CA and SA hanging from a crane hook above a stack of blocks](azul-zulu-ca-sa-chainguard-1024x576.avif)
 
 ## First: Understanding Community vs. Subscriber Availability
 

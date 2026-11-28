@@ -1,7 +1,6 @@
 ---
 title: "Multi-cluster Cassandra with Google Kubernetes Engine (Pt. 2)"
 date: "2022-09-08T17:20:08+00:00"
-lastmod: "2022-09-09T07:56:52+00:00"
 description: "This is the second in a series of posts examining patterns for using K8ssandra to create Cassandra clusters."
 canonical: "https://k8ssandra.io/blog/tutorials/multi-cluster-cassandra-deployment-with-google-kubernetes-engine/"
 authors:
@@ -263,7 +262,7 @@ UN  10.24.1.214  398.22 KiB  256          ?       76c0d2ba-a9a8-46c0-87e5-311f7e
 ```
 
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes and networking:
-![](k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png)
+![Diagram of two GKE clusters, each with a Cassandra datacenter and K8ssandra pods, connected through a VPC network](k8ssandra-multi-cluster-Multiple-GKE-Clusters-no-DNS.png)
 
 ## What's next
 

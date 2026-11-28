@@ -1,7 +1,6 @@
 ---
 title: "You're Running Untrusted Code!"
 date: "2022-01-17T08:28:24+00:00"
-lastmod: "2026-03-07T20:13:55+00:00"
 description: "I'm afraid the deprecation of the Security Manager just added several lines to that risk, all linked to running untrusted code."
 canonical: "https://blog.frankel.ch/running-untrusted-code/"
 authors:
@@ -25,7 +24,7 @@ I immediately made the connection between Log4Shell and the Security Manager. At
 
 [
 
-{{< img src="johannes-rab-700x119.png" class="size-medium" width="700" height="119" >}}
+{{< img src="johannes-rab-700x119.png" alt="Tweet from Johannes Rabauer asking if the Log4j exploit is the perfect argument against deprecating the Java SecurityManager" class="size-medium" width="700" height="119" >}}
 
 ](https://twitter.com/nicolas_frankel/status/1471140080366632968)
 

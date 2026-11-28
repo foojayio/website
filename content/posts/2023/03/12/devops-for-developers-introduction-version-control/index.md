@@ -1,7 +1,6 @@
 ---
 title: "DevOps for Developers - Introduction and Version Control"
 date: "2023-03-12T09:13:33+00:00"
-lastmod: "2023-03-12T09:16:01+00:00"
 description: "Improving our DevOps skills can help us become better developers, team mates, and managers. Learn DevOps principles and advanced git!"
 canonical: "https://debugagent.com/devops-for-developers-introduction-and-version-control"
 authors:

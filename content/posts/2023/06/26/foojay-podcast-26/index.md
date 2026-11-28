@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #26: The Future of Source Control and CI/CD"
 date: "2023-06-26T08:35:21+00:00"
-lastmod: "2025-11-13T09:01:28+00:00"
 description: "We have seen evolutions from CVS to Subversion to Git. Is this the endpoint? Did we find the holy grail? What evolutions are waiting for us?"
 authors:
   - "frankdelporte"
@@ -13,7 +12,7 @@ categories:
   - "DevOps"
   - "GitLab"
   - "IntelliJ IDEA"
-  - "JFrog Artifactory"
+  - "JFrog"
   - "Maven"
   - "Microservices"
   - "Podcast"
@@ -68,7 +67,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [@FrankDelporte](https://twitter.com/FrankDelporte)
   * [foojay.social/@frankdelporte](https://foojay.social/@frankdelporte)
 
-![](podcast-versioncontrol-guests-1024x383.jpg)
+![Video call grid showing podcast host Frank Delporte with guests Ixchel Ruiz, Pierre-Etienne Meunier, Trisha Gee and Hanno Embregts](podcast-versioncontrol-guests-1024x383.jpg)
 
 ## Content
 

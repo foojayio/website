@@ -1,14 +1,12 @@
 ---
 title: "SQL Best Practices Every Java Engineer Must Know"
 date: "2024-10-01T17:52:46+00:00"
-lastmod: "2024-10-09T09:33:23+00:00"
 description: "This comprehensive guide dives into the best practices for SQL query optimization, tailored specifically for Java engineers."
 authors:
   - "abo-saad-muaath"
 image: "1.jpg"
 categories:
   - "Databases"
-  - "Java"
 related_posts:
   - "effective-java-logging"
   - "calling-microservices-in-java"

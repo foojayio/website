@@ -1,7 +1,6 @@
 ---
 title: "Closing the Visual Gap Between the Official Lottie Webplayer and Lottie4J"
 date: "2026-07-07T08:25:55+00:00"
-lastmod: "2026-08-18T07:22:25+00:00"
 description: "A Lottie library is only as good as its output looks. If an animation renders differently in Lottie4J than it does in the official web player, that's a…"
 canonical: "https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/"
 authors:
@@ -21,7 +20,7 @@ A Lottie library is only as good as its output looks. If an animation renders di
 Within the `fxfileviewer`, there is an app to visually compare the result of the JavaFX player and a webview using the official JavaScript player. Problem is that I was using the JavaFX Web component for this and this doesn't fully support the latest/best version of this player. Based on this app for manual checks, I also created a unit test which is able to loop over a set of files and compare the differences to make sure changes in the code don't break the existing renderer. But I kept struggling with the same test file [interactive_mood_selector_ui.json](https://github.com/lottie4j/lottie4j/tree/main/fxfileviewer/src/test/resources/json/interactive_mood_selector_ui.json) which didn't render correctly, both in the JavaFX view and my web-based view to compare it with.
 
 Over the last weeks the focus has been exactly there: **making the JavaFX output match the reference renderer, pixel for pixel** (if possible).
-![](20260702-lottie4j-after.jpg)
+![JavaFX Lottie player and HTML JS Lottie player rendering the same emoji mood selector, now visually near-identical](20260702-lottie4j-after.jpg)
 
 ## Improved Comparison Workflow
 
@@ -82,15 +81,15 @@ Where are we now? Check the images below.
 3. The third screenshot is the **"after"** which shows a lot of improvements. First and most important, the comparison images from the webview are now pixel-perfect as they get rendered based on the latest version of the official Lottie web player. And you can also see that the JavaFX result is now a really close match! The background gradients are not pixel-perfect yet, and I still see small differences in the text, which confirms the 95% similarity score. But overall, I'm very happy with the improvements!
 
 {{< gallery >}}
-20260702-lottie4j-previewer.jpg
-20260702-lottie4j-before.jpg
-20260702-lottie4j-after.jpg
+20260702-lottie4j-previewer.jpg | | Lottie preview page showing an animated 'How are you feeling today' emoji selector with animation details and file size
+20260702-lottie4j-before.jpg | | Before: JavaFX Lottie player (left) differs from the HTML JS player (right), with red text and a square glow
+20260702-lottie4j-after.jpg | | After: JavaFX Lottie player (left) matches the HTML JS player (right) with white text and soft glows
 {{< /gallery >}}
 
 ## The Cost
 
 Of course, the AI coding process is not free. Theia IDE luckily is free, but it needs one or more API keys to call AI services. As you can see, I burned a lot of tokens, and budget. But to be honest, I would not have achieved these improvements by myself in such a short time. Actually, I could do my "real work", and have the tools work in the background!
-![](20260702-lottie4j-cost-ai-assisted-coding-1024x403.png)
+![Bar chart of daily AI token cost from Jun 25 to Jul 1, peaking near 60 dollars on Jun 29, mostly Claude Opus](20260702-lottie4j-cost-ai-assisted-coding-1024x403.png)
 
 ## What's Next
 

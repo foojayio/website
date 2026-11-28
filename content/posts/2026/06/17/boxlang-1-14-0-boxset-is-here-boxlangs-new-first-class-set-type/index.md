@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.14.0: BoxSet is Here, BoxLang's New First-Class Set Type"
 date: "2026-06-17T10:36:28+00:00"
-lastmod: "2026-06-17T13:09:37+00:00"
 description: "BoxLang 1.14.0 ships BoxSet: a native Set type with literal syntax, union/intersection operators, functional pipeline, and deep Java interop."
 authors:
   - "cristobal-escobar"
@@ -10,7 +9,6 @@ categories:
   - "BoxLang"
   - "Design Patterns"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Tools"
 related_posts:
@@ -20,7 +18,7 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 ---
 
-![](BoxLang-release-1.14.0-1-700x394.jpg)
+![BoxLang Release 1.14.0 banner: BoxSet is here, BoxLang's new first-class Set type](BoxLang-release-1.14.0-1-700x394.jpg)
 
 BoxLang 1.14.0 ships with a new **dynamic first-class Set type** baked directly into the language. Not a wrapper you reach for manually, not a `createObject( "java", "java.util.HashSet" )` incantation you paste from a Stack Overflow answer years ago. A real `BoxSet` with literal syntax, operator overloads, a full functional pipeline, change listeners, JSON serialization, and deep Java interop.
 

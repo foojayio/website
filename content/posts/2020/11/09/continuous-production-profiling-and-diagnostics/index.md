@@ -1,7 +1,6 @@
 ---
 title: "Continuous Production Profiling and Diagnostics"
 date: "2020-11-09T15:57:38+00:00"
-lastmod: "2023-07-18T07:06:53+00:00"
 description: "I’ve gotten a lot of questions about continuous production profiling. Why to profile in production and why the heck leave it on continuously?"
 canonical: "http://hirt.se/blog/?p=1288"
 authors:
@@ -184,17 +183,17 @@ All that detailed data that has been collected can, of course, be used to derive
 Key performance metrics are simple scalar metrics, you typically derive a value, periodically, per runtime. For example CPU utilization or allocation rate.
 
 Here's an example showing a typical key performance metric (note that all pictures are clickable for a better look):
-[![](kpm-1.png)](kpm-1.png)
+[![Datadog chart ranking services by memory allocation rate per second, with logs-metrics highest at 2.19 GiB](kpm-1.png)](kpm-1.png)
 
 The graph above shows the allocation rate. It's a simple number per runtime that can change over time. In this case the chart is an aggregate over the service, but it could just as well be a simple metric plotted for an individual runtime.
 
 High Cardinality Metrics are metrics that can have an enormous amount of different buckets with which the values are associated with. An example would be the cpu time per method.
 
 We use these kinds of metrics to support many different use cases, such as allowing you to see the hottest methods in your entire datacenter. The picture below shows the hottest allocation sites across a bunch of processes.
-[![](hcm2-1.png)](hcm2-1.png)
+[![Datadog chart ranking methods by allocation byte rate, with java.lang.StringUTF16.compress highest](hcm2-1.png)](hcm2-1.png)
 
 Here are some contended methods. Yep, one is a demo…
-[![](locks-1.png)](locks-1.png)
+[![Datadog chart of lock wait time by method, where only the Logger.log method shows significant contention](locks-1.png)](locks-1.png)
 
 Metrics also allow you to monitor for certain conditions, like having alerts / watchdogs when certain conditions or changes in conditions occur. That said, they aren't worth that much unless you can, if you find something funny, go see what was going on – for example see how that contended method was reached when under contention.
 
@@ -203,30 +202,30 @@ Metrics also allow you to monitor for certain conditions, like having alerts / w
 Another use case is when you simply don't care about a specific use case. You just want to look at the big picture in your datacenter. You may perhaps want to see, on average, across all your hosts and for a certain time range, what the CPU profiling information looks like? This would be a great place to start if, for example, looking for ways to lower the CPU usage for Friday nights, 7 to 10 p.m.
 
 Here, for example, is an aggregation flame graph for the profiling data collected for a certain service (prof-analyzer), where there is some load (I set it to a range to filter out the profiles with very little load).
-[![](aggregation-1.png)](aggregation-1.png)
+[![Datadog Continuous Profiler aggregation view showing a large CPU flame graph across all prof-analyzer instances](aggregation-1.png)](aggregation-1.png)
 
 A specific method can be selected to show how that specific method ended up being called:
-[![](methodselect.png)](methodselect.png)
+[![Aggregated CPU flame graph with one method selected and highlighted to show how it is called](methodselect.png)](methodselect.png)
 
 ### Searching
 
 What if you just want to get to an example of the worst possible examples of using a butt-load of CPU? Or if you want to find the worst example of a spike in allocation rate? Having indexed key performance metrics for the profiling data makes it possible to quickly search for profiling information matching certain criteria.
 
 Here is an example of using the monitor enter wait time to filter out an atypically high lock contention:
-[![](atypicallock.png)](atypicallock.png)
+[![Datadog lock profile flame graph for one service, showing where threads wait on locks](atypicallock.png)](atypicallock.png)
 
 ### Association by Context
 
 Of course, if we can associate the profiling data with individual traces, it would be possible to see what went on for an individual long lasting span. If using information from the runtime, even things that are normally hidden from user applications (including profilers purely written in Java), like stop-the-world pauses, would be visible.
-[![](breakdown.png)](breakdown.png)
+[![Datadog trace for processRecording with a span profiling breakdown showing thread park and CPU time](breakdown.png)](breakdown.png)
 
 ### Analysis
 
 When having access to all that yummy, per thread and time, detailed, profiling data, it would be a shame to not go looking for some interesting patterns to highlight. The result of that analysis can provide a means to focus on the most important parts of the profiling data.
-[![](analysis1.png)](analysis1.png)
+[![Datadog profiler Analysis tab reporting no significant problem areas and a few minor ones such as GC Locker](analysis1.png)](analysis1.png)
 
 So, nothing terribly interesting going on in our services right now. The one below is from a silly demo app.
-[![](analysis2-1024x137.png)](analysis2.png)
+[![Datadog profiler Analysis tab warning that threads were blocked on locks for 16 minutes, mostly on the 'Logger' monitor](analysis2-1024x137.png)](analysis2.png)
 
 That said, if you're interested in the kind of patterns we can detect, check out the JDK Mission Control rules. The ones at Datadog are a superset, and work similarly.
 

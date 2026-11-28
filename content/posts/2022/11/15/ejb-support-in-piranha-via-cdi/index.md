@@ -1,7 +1,6 @@
 ---
 title: "EJB support in Piranha via CDI"
 date: "2022-11-15T14:14:42+00:00"
-lastmod: "2022-11-15T14:15:30+00:00"
 description: "Piranha Cloud takes a novel approach and maps Enterprise Beans annotations to equivalent functionality in CDI or other Jakarta EE APIs."
 authors:
   - "ondro-mihalyi"
@@ -27,7 +26,7 @@ Enterprise Beans features not currently present in Jakarta EE, such as the poole
 
 An overview of the mappings is depicted in the following diagram:
 
-![](omnibeans-1024x363-1.png) OmniBeans primarily consists out of a CDI extension, that observes the `ProcessAnnotatedType` event. When it encounters say the `@Stateless` annotation on a bean it adds `@Pooled` from OmniServices, and depending on any `@jakarta.ejb.TransactionAttribute` and/or `@jakarta.ejb.TransactionManagement` annotation the `@jakarta.transaction.Transactional` annotation from Jakarta Transactions.
+![OmniBeans annotations (@Stateless, @Asynchronous, @Singleton) mapped to Jakarta Transactions, Concurrency, CDI and OmniServices](omnibeans-1024x363-1.png) OmniBeans primarily consists out of a CDI extension, that observes the `ProcessAnnotatedType` event. When it encounters say the `@Stateless` annotation on a bean it adds `@Pooled` from OmniServices, and depending on any `@jakarta.ejb.TransactionAttribute` and/or `@jakarta.ejb.TransactionManagement` annotation the `@jakarta.transaction.Transactional` annotation from Jakarta Transactions.
 
 Piranha Cloud uses the standalone and pluggable Jakarta Transactions implementation [Tr](https://github.com/OmniFish-EE/omni-transact)[a](https://github.com/OmniFish-EE/omni-transact)[nsact](https://github.com/OmniFish-EE/omni-transact) (which originates from GlassFish) for the code behind the `@Transactional` annotation. For the `@Asynchronous` annotation OmniServices is currently used, but in the future a pluggable Jakarta Concurrency implementation should be used for this. The "[Concurrency RI](https://github.com/eclipse-ee4j/concurrency-ri)" project is a likely candidate to base such an implementation on (with the proposed name Concurro).
 
@@ -105,7 +104,7 @@ More information:
 
 [This article was originally published on the](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) [OmniFish blog. For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here:](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) <https://omnifish.ee/blog/>.  
 
-{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
+{{< img src="omnifish-logo-transparent-400px-margin.png" alt="OmniFish logo: stylised fish skeleton in yellow-green on a teal circle" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

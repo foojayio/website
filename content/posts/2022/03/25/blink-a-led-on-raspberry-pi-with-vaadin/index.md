@@ -1,7 +1,6 @@
 ---
 title: "Blink a LED on Raspberry Pi with Vaadin"
 date: "2022-03-25T14:44:02+00:00"
-lastmod: "2022-03-25T14:54:49+00:00"
 description: "Thanks to Vaadin, you can get a fully running application with a few clicks. And Adding GPIO-interaction is easy with the Pi4J library."
 canonical: "https://dzone.com/articles/blink-a-led-on-a-raspberry-pi-with-vaadin"
 authors:
@@ -35,7 +34,7 @@ But JavaFX has one missing piece: running it in the browser... Yes, [**JPRO**](h
 And yes, there are some projects ongoing to bring JavaFX fully to the browser, but they are ongoing and not mature yet...
 
 Let's look at another approach: Vaadin Flow and run it on a Raspberry Pi to control a LED and show the state of a button.
-![](15731206-screenshot-2022-03-17-at-164350-5d31f992.jpg)
+![Pi4J demo web app beside a Raspberry Pi with breadboard, LED and button, and a terminal running the Spring Boot jar](15731206-screenshot-2022-03-17-at-164350-5d31f992.jpg)
 
 ## About Vaadin
 
@@ -220,7 +219,7 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 }
 ```
 
-![](15731191-ui-led-8303d034.png)
+![Pi4J Demo web UI on the LED page with the 'Turn the LED on' checkbox ticked](15731191-ui-led-8303d034.png)
 
 ### UI to see the state of the button
 
@@ -254,7 +253,7 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 }
 ```
 
-![](15731192-ui-button-13d3157f.png)
+![Pi4J Demo web UI on the Button page showing the text 'Button is pressed'](15731192-ui-button-13d3157f.png)
 
 An additional change is needed in the main class. Because we want to send changes from the `backend` to the `user interface` we need to add the [@Push attribute](https://vaadin.com/docs/latest/flow/advanced/server-push). This tiny change, allows you to update the UI from the server, without the user explicitly requesting updates. This is based on a client-server connection (WebSocket if supported, or alternative) which the client establishes and the server can then use to send updates to the client.
 
@@ -289,7 +288,7 @@ public class AboutView extends VerticalLayout {
 }
 ```
 
-![](15731197-ui-about-34c99337.jpg)
+![Pi4J Demo About page listing Java 17.0.2, Pi4J platform and providers, and the LED and button registry](15731197-ui-about-34c99337.jpg)
 
 ## Build and upload to Raspberry Pi
 

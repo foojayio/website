@@ -8,7 +8,6 @@ image: "cover-context-budget-foojay.jpg"
 categories:
   - "AI"
   - "Developer Tools"
-  - "Java"
   - "Testing"
 related_posts:
   - "green-build-wrong-task-a-working-agreement-for-java-teams-using-ai-coding-agents"

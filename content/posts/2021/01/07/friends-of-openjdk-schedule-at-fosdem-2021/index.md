@@ -1,7 +1,6 @@
 ---
 title: "Friends Of OpenJDK Schedule at FOSDEM 2021"
 date: "2021-01-07T16:49:23+00:00"
-lastmod: "2021-02-22T11:09:11+00:00"
 description: "Subject to change, here's the schedule for FOSDEM 2021, a virtual event this year on 6 and 7 February, for the Friends Of OpenJDK devroom!"
 authors:
   - "geertjan-wielenga"
@@ -13,7 +12,7 @@ related_posts:
 
 Subject to change, here's the schedule for FOSDEM 2021, which will be a virtual event this year on 6 and 7 February, for the Friends Of OpenJDK devroom, featuring a range of great speakers on a variety of interesting topics related to the usage of Java in the real world.
 
-{{< img src="image-3-1024x813.png" class="size-large is-resized" width="914" height="725" >}}
+{{< img src="image-3-1024x813.png" alt="FOSDEM 2021 Friends of OpenJDK devroom schedule table of Saturday and Sunday talks with speakers and times" class="size-large is-resized" width="914" height="725" >}}
 
 Link to the program is here:
 

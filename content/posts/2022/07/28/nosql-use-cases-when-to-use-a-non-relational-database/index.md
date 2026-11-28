@@ -1,7 +1,6 @@
 ---
 title: "NoSQL Use Cases: When to Use a Non-Relational Database"
 date: "2022-07-28T07:32:07+00:00"
-lastmod: "2022-09-20T17:04:39+00:00"
 description: "There are many things to consider before making the move to NoSQL. In this article, we’ll explore when NoSQL use cases make sense."
 canonical: "https://datastax.medium.com/nosql-use-cases-when-to-use-a-non-relational-database-c05025aabd30"
 authors:
@@ -60,7 +59,7 @@ NoSQL comes with many benefits, including:
 ## Comparing NoSQL to SQL
 
 While NoSQL databases have many advantages, they're not the right choice for every situation. Sometimes sticking with a tried-and-true SQL database is the way to go. Let's compare SQL and NoSQL databases across several factors. Think about how each would apply to your data profile and use cases.
-![](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![](1_tJO9HgZyaAjFSseYzjG1Og.png)
+![Comparison table of SQL and NoSQL databases on data structure, scalability, availability, query ability and speed](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![Continued SQL versus NoSQL table covering developer speed, data integrity, dataset size and community](1_tJO9HgZyaAjFSseYzjG1Og.png)
 
 ## NoSQL use cases
 

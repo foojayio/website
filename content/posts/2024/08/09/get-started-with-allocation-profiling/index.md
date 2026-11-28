@@ -1,7 +1,6 @@
 ---
 title: "Allocation Profiling in Java"
 date: "2024-08-09T08:44:59+00:00"
-lastmod: "2024-11-12T16:25:52+00:00"
 description: "Trouble finding memory leaks in a Java program? Learn how allocation profiling can reveal bugs and help you troubleshoot Java performance."
 canonical: "https://flounder.dev/posts/allocation-profiling/"
 authors:
@@ -10,7 +9,6 @@ image: "banner.jpg"
 categories:
   - "Debugging"
   - "IntelliJ IDEA"
-  - "Java"
   - "Tools"
   - "Tutorials"
   - "Use Cases"

@@ -1,7 +1,6 @@
 ---
 title: "Deep Learning in Java for Nuclear Physics using Deep Netts"
 date: "2022-06-16T09:01:44+00:00"
-lastmod: "2023-07-11T09:38:24+00:00"
 description: "We use the Deep Netts library to implement our neural networks to do track classification, using Multi-Layer Perceptron (MLP) Neural Network."
 authors:
   - "gagik-gavalian"
@@ -17,8 +16,6 @@ related_posts:
   - "deep-learning-in-java-for-drug-discovery"
   - "foojay-podcast-56"
 ---
-
-![](CLAS12-side.jpg)
 
 ## Background
 
@@ -36,7 +33,7 @@ The full research paper is available [here](https://arxiv.org/abs/2202.06869 "he
 
 The figure below shows two reactions where missing nucleon was identified through the missing mass of detected particles, and shows significant increase in statistics (solid line) when using AI to identify tracks through their segments in the drift chambers.
 
-![](physics_scan-a970e559.png)
+![Two histograms of missing mass with ratio plots, showing more events when AI identifies tracks than the standard method](physics_scan-a970e559.png)
 
 ## Implementation
 
@@ -46,7 +43,7 @@ We also implemented MLP based auto-encoder to reconstruct missing segments from 
 
 The reconstruction software infrastructure for CLAS12 detector is a Service Oriented Architecture (SOA) written in Java.
 
-![](FeedForwardNeuralNetwork-e8f7a4a5.png)
+![Feed-forward neural network with inputs, hidden layers and outputs, with a forward pass for prediction and backward pass for training](FeedForwardNeuralNetwork-e8f7a4a5.png)
 
 We searched for Java machine learning libraries that can be easily integrated into our software infrastructure.
 

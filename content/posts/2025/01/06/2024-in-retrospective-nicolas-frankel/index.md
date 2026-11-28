@@ -1,7 +1,6 @@
 ---
 title: "2024 in Retrospective: Nicolas Frankel"
 date: "2025-01-06T08:59:26+00:00"
-lastmod: "2025-01-06T08:59:27+00:00"
 description: "For the first article of 2025, I'm continuing my retrospective series!"
 authors:
   - "nicolas-frankel"
@@ -77,7 +76,7 @@ The trend I noticed last year is confirmed: wild growth on dev.to and close to p
 
 My metrics tracking script is still working nicely.
 
-{{< img src="social-metrics-532x510.jpeg" class="aligncenter size-medium" width="532" height="510" >}}
+{{< img src="social-metrics-532x510.jpeg" alt="Line chart of follower counts per social network in 2024, with Bluesky rising sharply late in the year" class="aligncenter size-medium" width="532" height="510" >}}
 
 Do I need to mention the crazy [Bluesky](https://bsky.app/profile/frankel.ch) growth? Note that I moved my handle from `@nfrankel.bsky.social` to `@frankel.ch`.
 

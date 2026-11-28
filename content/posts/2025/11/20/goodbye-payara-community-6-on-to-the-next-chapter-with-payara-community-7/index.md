@@ -8,7 +8,6 @@ authors:
 image: "Blog-Images-_Moving-forward-with-Payara-Platform-Community-7.jpg"
 categories:
   - "Jakarta EE"
-  - "Java"
   - "Payara"
 related_posts:
   - "whats-new-in-the-january-2026-payara-platform-release"

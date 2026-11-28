@@ -1,7 +1,6 @@
 ---
 title: "Working with GitLab Merge Requests in IntelliJ IDEA"
 date: "2023-08-10T09:57:10+00:00"
-lastmod: "2023-08-10T09:57:12+00:00"
 description: "IntelliJ IDEA supports working with GitLab Merge Requests. See Merge Requests, perform code reviews and merge them from inside IntelliJ IDEA."
 canonical: "https://maritvandijk.com/gitlab-merge-requests/"
 authors:

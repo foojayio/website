@@ -1,7 +1,6 @@
 ---
 title: "Save Hours on your Setup of K8ssandra with the New Config Builder"
 date: "2022-02-24T19:36:47+00:00"
-lastmod: "2022-02-27T12:20:42+00:00"
 description: "Setting up K8ssandra in your workflow just got a whole lot easier. With the new Config Builder you can be running Apache Cassandra® on Kubernetes in a…"
 canonical: "https://k8ssandra.io/blog/announcements/release/save-hours-on-your-setup-of-k8ssandra-with-the-new-config-builder/"
 authors:
@@ -45,7 +44,7 @@ When writing your own YAML file you need to know the right values and sane limit
 The config builder adjusts your settings to keep you within the limits that make sense. So you can't request 32 GB of Heap for Cassandra if you only have 16 GB of RAM available due to your quotas.
 
 When you are finished (or even at a stopping point), you can click copy or share to get going yourself or to share the configuration with a colleague to collaborate.
-![](K17.jpeg) Figure 1. A single click in the K8ssandra Config Builder will give you the 52 line YAML file for the setup of three nodes in Amazon EKS.
+![K8ssandra Config Builder web page with a Configurations form on the left and generated YAML output on the right](K17.jpeg) Figure 1. A single click in the K8ssandra Config Builder will give you the 52 line YAML file for the setup of three nodes in Amazon EKS.
 
 Sure, there might still be instances where you want to write the YAML file yourself. But if you get stuck on something, the config builder is the fastest way for you to find the solution.
 

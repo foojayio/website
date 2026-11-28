@@ -1,7 +1,6 @@
 ---
 title: "Building a Real-Time AI Fraud Detection System with Spring Kafka and MongoDB"
 date: "2025-05-14T14:30:08+00:00"
-lastmod: "2025-05-16T11:50:17+00:00"
 description: "Create a Spring app that can stream in financial transactions from Apache Kafka, and upon insertion into the database, can use Atlas Vector Search to indicate whether they appear to be fraudulent."
 authors:
   - "tim-kelly"

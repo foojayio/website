@@ -1,7 +1,6 @@
 ---
 title: "Boosting Similarity Search with Real-time Stream Processing"
 date: "2023-05-30T12:42:35+00:00"
-lastmod: "2023-05-30T12:42:36+00:00"
 description: "Combining the strengths of vector databases and real-time stream processing is an efficient way of processing data in real-time at scale."
 authors:
   - "fawaz-ghali"
@@ -23,7 +22,7 @@ Here we present a hybrid approach by taking the strengths of vector databases an
 
 **Qdrant** is a vector similarity search engine and vector database. It provides a production-ready service with a convenient API to store, search, and manage points—vectors with an additional payload Qdrant is tailored to extended filtering support. It makes it useful for all sorts of neural network or semantic-based matching, faceted search, and other applications.
 
-![](Hazelcast_Qdrant-700x394.png)
+![Architecture diagram: Qdrant handles movie description embeddings and similarity search, while Hazelcast joins casts and actors with predicates](Hazelcast_Qdrant-700x394.png)
 
 ### Step 1: run Hazelcast and install the client
 

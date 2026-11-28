@@ -1,13 +1,11 @@
 ---
 title: "Save Time and Money by Reducing False Positives"
 date: "2025-06-23T08:35:27+00:00"
-lastmod: "2025-08-14T12:38:44+00:00"
 description: "Recently Azul announced that AVD makes it possible to identify vulnerable components on a jar file level but also on class file level."
 authors:
   - "gerrit-grunwald"
 image: "avdazul.png"
 categories:
-  - "Java"
   - "Security"
   - "Tools"
 related_posts:
@@ -33,7 +31,7 @@ Given the dynamic nature of Java, it is a good idea to scan your application, al
 
 The diagram below shows a possible scenario of using AVD:
 
-![](AVD_Diagram-2-700x268.png)
+![Diagram: JVMs running applications report through agents and a forwarder to Intelligence Cloud, which feeds an API and a web interface with a vulnerability checklist](AVD_Diagram-2-700x268.png)
 
 You run your application on one or multiple JVM's (Java Virtual Machine), which can be any build of OpenJDK (e.g., Amazon Corretto, Adoptium Temurin, Azul Zulu, etc.). Now a Java Agent will be attached to each JVM you would like to monitor in production.
 

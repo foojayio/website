@@ -1,7 +1,6 @@
 ---
 title: "The Serverless Database You Really Want"
 date: "2022-03-03T20:43:05+00:00"
-lastmod: "2022-05-24T15:16:26+00:00"
 description: "This article argues how Apache Cassandra is the Serverless database that is open and free as in freedom in the modern cloud era."
 canonical: "https://thenewstack.io/the-serverless-database-you-really-want/"
 authors:

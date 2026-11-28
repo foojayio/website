@@ -1,7 +1,6 @@
 ---
 title: "Java on Azure Tooling Update – October 2022"
 date: "2022-11-07T22:04:16+00:00"
-lastmod: "2022-11-07T22:04:18+00:00"
 description: "In this update, we will introduce our new roadmap in the next few months, plus learn about Azure Functions Deployment Slot Support."
 authors:
   - "jialuo-gan"
@@ -33,7 +32,7 @@ Let's talk about our investments for the next few months of Java on Azure Toolin
 
 To achieve this, we will continue to make sure that Java developers can easily manage and deploy Azure Services. In addition, we will invest in integration with micro-services and container-based services for cloud-native developers.
 
-![](Zinc-Roadmap.png)
+![Slide 'Java on Azure Tooling Zinc Roadmap' listing planned work: cloud native, Azure services, user experience and CLI support](Zinc-Roadmap.png)
 
 ### Cloud Native Scenario Support
 

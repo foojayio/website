@@ -1,7 +1,6 @@
 ---
 title: "Switch Statement and the Factory Pattern in Three JVM Languages"
 date: "2022-04-06T09:10:08+00:00"
-lastmod: "2022-04-06T11:01:05+00:00"
 description: "Let's examine a program selection control mechanism, for a value, expression or variable type to influence program flow execution, for Switch."
 authors:
   - "miro-wengner"
@@ -25,7 +24,7 @@ A good example for this is a widely used design pattern. A design pattern that b
 A careful reader may already have identified which pattern. Yes, it's the Factory design pattern and it will be used in the example code.
 
 Let us consider a simple factory that produces different vehicle types. The used types are "*Car* ", "*Bus* " and "*Truck* ". Each inherits from the interface "*Vehicle*" (Figure 1.)
-![](factory_pattern-700x446.png)
+![UML diagram: VehicleFactory creates Vehicle objects; Car, Bus and Truck implement the Vehicle interface](factory_pattern-700x446.png)
 
 Figure 1. Creating desired Vehicle instances with naive vehicle factory example
 

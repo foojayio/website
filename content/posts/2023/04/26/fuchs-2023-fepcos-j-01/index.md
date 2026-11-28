@@ -1,7 +1,6 @@
 ---
 title: "FEPCOS-J (1) – Description, Impression of Usage, Current State"
 date: "2023-04-26T06:09:41+00:00"
-lastmod: "2023-04-26T08:29:52+00:00"
 description: "FEPCOS-J implements a Java-language extension that frees a Java-developer from network programming and supports cross-system concurrency."
 authors:
   - "gerhard-fuchs"

@@ -1,7 +1,6 @@
 ---
 title: "Writing an agent skill"
 date: "2026-03-17T15:36:30+00:00"
-lastmod: "2026-09-21T05:56:51+00:00"
 description: "Most developers now use coding assistants. I do too—Copilot at work, Claude Code at home. As a developer, I prefer not to repeat myself. This post…"
 canonical: "https://blog.frankel.ch/writing-agent-skill/"
 authors:

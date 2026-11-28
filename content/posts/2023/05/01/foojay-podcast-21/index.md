@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #21: Brazil SouJava"
 date: "2023-05-01T08:08:19+00:00"
-lastmod: "2025-11-13T09:07:48+00:00"
 description: "SouJava, the Brazil JUG, was founded in 1999, is recognized as the world’s largest Java User Group with 40,000 members."
 authors:
   - "frankdelporte"
@@ -53,7 +52,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [@frankdelporte@foojay.social](https://foojay.social/@frankdelporte)
   * <https://twitter.com/FrankDelporte>
 
-![](podcast-guests-brazil-jug-1024x577.jpg)
+![Video call grid with the host Frank Delporte and three guests from the Brazilian JUG recording the podcast](podcast-guests-brazil-jug-1024x577.jpg)
 
 ## Links
 

@@ -1,7 +1,6 @@
 ---
 title: "Foojay Podcast #28: Java 21 Has Arrived!"
 date: "2023-09-19T05:27:07+00:00"
-lastmod: "2025-11-13T08:58:16+00:00"
 description: "Since 2018, we get a new version of Java every 6 months. And version 21, released during today, is a long-term support version that can be used for many years."
 authors:
   - "frankdelporte"
@@ -9,7 +8,6 @@ authors:
   - "simonritter"
 image: "episode-28-guests.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "JDK21"
   - "Podcast"
@@ -69,7 +67,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-![](episode-28-guests-1024x578.jpg)
+![Video call with host Frank Delporte and guests Mohamed Taman, Piotr and Simon Ritter in an Azul Tech Talks background](episode-28-guests-1024x578.jpg)
 
 ## Content
 

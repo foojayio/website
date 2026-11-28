@@ -1,7 +1,6 @@
 ---
 title: "Java Flight Recording and Analysis with Azul Mission Control"
 date: "2024-01-25T07:59:42+00:00"
-lastmod: "2024-01-25T08:00:21+00:00"
 description: "With Azul Mission Control, you can delve deep into JFR recordings to optimize your code and ensure it runs smoothly and error-free."
 authors:
   - "frankdelporte"
@@ -24,7 +23,7 @@ related_posts:
 By utilizing JFR, you gain valuable insights into the runtime behavior of your Java applications. It helps you to optimize performance, identify and troubleshoot issues, and ensure better overall reliability. JFR is designed with very low overhead, allowing its use in production environments with minimal impact on the performance of your application.
 
 You can use a JFR recording to examine your application with various tools, such as Azul Mission Control.
-![](azul-mission-control-screenshot-1024x534.jpg)
+![Azul Mission Control showing a Spring PetClinic flight recording with thread activity, method profiling and a stack trace table](azul-mission-control-screenshot-1024x534.jpg)
 
 ## Azul Mission Control
 
@@ -75,7 +74,7 @@ More information: <https://docs.azul.com/azul-mission-control/recording/jfr-reco
 ## Analyze a Recording with Azul Mission Control
 
 When a recording is finished in Azul Mission Control, or a pre-recorded file is opened, an automated analysis result is shown:
-![](azul-mission-control-automated-analysis-results-1024x346.png)
+![Azul Mission Control Automated Analysis Results grouped by Java Application, JVM Internals and Environment, with rule scores such as G1 Full Collection 75](azul-mission-control-automated-analysis-results-1024x346.png)
 
 The overview screen displays recorded data split into categories. Click a node to investigate the corresponding category details.
 

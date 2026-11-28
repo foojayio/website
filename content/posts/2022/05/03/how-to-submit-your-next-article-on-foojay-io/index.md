@@ -1,7 +1,7 @@
 ---
 title: "How To Submit Your Next Article On Foojay.io"
 date: "2022-05-03T18:32:09+00:00"
-lastmod: "2026-10-08T00:00:00+00:00"
+updated: "2026-10-29T00:00:00+00:00"
 description: "The complete guide to publishing your article on Foojay.io: prepare a content folder from the template, add your images, and submit it by pull request or email."
 authors:
   - "bazlur-rahman"
@@ -39,6 +39,13 @@ Foojay is about Java, not about who pays for the keyboard. **Articles about a co
 
 The same goes for who is behind an article. **Every author profile is a real person**, with a real photo of themselves and links we can use to verify them: at least one of GitHub, LinkedIn, Bluesky, Mastodon or a personal website. Company, brand and team accounts (with a logo as the avatar) are not accepted. If you write for your employer, say so in your bio. Profiles we can't verify as a person are not merged.
 
+## What we decline
+
+- **Marketing-only submissions.** A product description without working Java code or developer tooling a reader can use.
+- **Company, brand or team profiles** as the author. Every author is a real person (see above).
+- **Example code, scripts and project files inside the pull request.** Publish them in a repository of your own and link to it from the article.
+- **Videos stored in the repository.** Host them on YouTube or another external service and embed or link them.
+
 ## 1. Make sure you have an author profile
 
 Every article needs at least one author, and each author has a profile folder named with the author **slug**: `content/authors/<slug>/`. Your post's `authors:` frontmatter uses that slug. For example the profile `content/authors/frankdelporte/` is referenced as `authors: ["frankdelporte"]`.
@@ -60,6 +67,8 @@ The `avatarFull:` field next to it is **optional**: set it only if you have a la
 
 Each article lives in its own folder that holds an `index.md` file (your article) and any images it uses, all together.
 
+**Only the article and its images go in the folder.** Example code, scripts and project files belong in a repository of your own, linked from the article. Videos go on YouTube or another external service, embedded or linked, so the repository's storage stays within limits.
+
 1. **Create a folder** named with the URL "slug" you want for your article — lowercase, words separated by dashes. For example a folder called `my-first-java-record` becomes the URL `/today/my-first-java-record/`.
 2. **Copy a starter template** (from the repository's `template/` folder) into your new folder. Either format works: copy `template/post.md` and rename it to `index.md` to write in Markdown, or copy `template/post.adoc` and rename it to `index.adoc` to write in AsciiDoc. Both contain every frontmatter field with comments explaining how to fill it in. Markdown is the shorter of the two and what most articles use; AsciiDoc is worth it when you want captions on code blocks, numbered callouts inside a snippet, admonitions, or tables that span cells.
 3. **Fill in the frontmatter** at the top of the file: `title`, `description`, your `authors` slug(s), and `categories`. This part is identical in both formats — same fields, same `---` fences, whether the file is `index.md` or `index.adoc`. The `template/categories.md` file lists the categories already in use — please reuse an existing one where it fits. **Leave `date:` as it is in the template** — a maintainer sets it and moves your folder to match when the article is published, so you never have to pick a day or a folder yourself. Only change it if you need the article out on a specific day. In that case, clearly specify the preferred date in your pull request.
@@ -80,9 +89,62 @@ In order of preference:
 
 If you have write access to the repository, create your folder under **`draft/your-slug/`**, commit it, and open a pull request. A maintainer reviews it and moves it into place. If you'd like this access, just ask — mention it in your first pull request or in an email to us.
 
+You don't need the full 2 GB clone either. Download only the folders an article touches, and push your branch straight to the repository:
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/foojayio/website.git
+cd website
+git sparse-checkout set draft template
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit index.md, add your images to the same folder
+git add draft/your-slug
+git commit -m "Add article: <your title>"
+git push -u origin my-article
+```
+
+GitHub prints a link in the output of the push to open the pull request. If you are also adding an author profile, add `content/authors` to the `sparse-checkout set` line and `git add content/authors/<your-slug>` as well.
+
 ### Option 2 — Pull request (from a fork)
 
-No access yet? [Fork the repository](https://github.com/foojayio/website/fork), add your **`draft/your-slug/`** folder to your fork exactly as in Option 1, and open a pull request from your fork back to the main repository.
+No access yet? Add your **`draft/your-slug/`** folder to your own fork of the repository and open a pull request from there back to the main repository. You need a free GitHub account, but you do **not** need to clone the whole repository: with its history and years of images it is around 2 GB, and you only need to add a few files. Pick whichever of these fits you:
+
+#### In the browser, without installing anything
+
+This is the quickest route for a text article.
+
+1. Open [github.com/foojayio/website](https://github.com/foojayio/website) and go to the `draft` folder.
+2. Choose **Add file → Create new file**. GitHub tells you that you need to fork the repository to propose changes, and does that for you.
+3. In the file name box type `your-slug/index.md`. Typing the `/` creates the folder. Paste your article, including the frontmatter from `template/post.md`, into the editor.
+4. Choose **Commit changes…**, then **Propose changes**, and on the next screen **Create pull request**.
+5. Now add your images. On the pull request page, follow the link to your branch in your fork, open `draft/your-slug/`, and choose **Add file → Upload files**. Every upload is added to the same pull request. A new author profile (`content/authors/<your-slug>/`) is added the same way.
+
+If you already have an old fork, use **Sync fork** on its page first, or your pull request will carry commits that are not yours.
+
+#### On your computer, with a small clone
+
+If you prefer your own editor, [fork the repository](https://github.com/foojayio/website/fork) and download only what you need: a shallow clone of your fork without history, restricted to the few folders an article touches. (If you have write access, see Option 1 for the same commands against the main repository.)
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/<your-github-name>/website.git
+cd website
+git sparse-checkout set draft template content/authors
+```
+
+That fetches a fraction of the full size. Then create your article and push it:
+
+```bash
+git checkout -b my-article
+mkdir draft/your-slug
+cp template/post.md draft/your-slug/index.md
+# edit index.md, add your images to the same folder
+git add draft/your-slug
+git commit -m "Add article: <your title>"
+git push -u origin my-article
+```
+
+GitHub prints a link in the output of the push to open the pull request. If you are adding an author profile, `git add content/authors/<your-slug>` as well. Because only some folders are checked out, you cannot run `hugo server` from this clone, which is fine since the pull request check builds the site for you.
 
 ### Option 3 — Email us a zip
 
@@ -94,4 +156,17 @@ By submitting an article or a pull request you agree to follow our [Code of Cond
 
 ## What happens next
 
-We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the Friends Of OpenJDK!
+1. **Automatic reviews run on your pull request.** A validation script checks the frontmatter and builds the site, so a wrong author slug or a missing image is reported within minutes. [CodeRabbit](https://www.coderabbit.ai/) also reviews the pull request automatically. Fix what they report by pushing to the same branch.
+2. **The Foojay team reviews the article** for a good fit and light editing, and may leave comments on the pull request. Pull requests are handled almost daily, and at least once a week. Reply there or push changes; nothing else is needed from you.
+3. **The article is scheduled, published and shared** with the community. A maintainer moves your folder into place, so you never choose the final path.
+
+### Choosing a publication day
+
+Leave `date:` as it is and the article goes out when a maintainer publishes it. If it must appear on a specific day, set `date:` to a plain future day (`date: "2026-12-01"`) and say so in your pull request. **Don't add a time**: the site is rebuilt once a day at 07:00 UTC, so the article goes out with that build, and a time can only make it later, never earlier. A future-dated article stays unlisted until its day and shows under "Coming soon" on the home page.
+
+### Starting points
+
+- [`template/post.md`](https://github.com/foojayio/website/blob/main/template/post.md), or [`template/post.adoc`](https://github.com/foojayio/website/blob/main/template/post.adoc) for AsciiDoc.
+- [`CONTRIBUTING.md`](https://github.com/foojayio/website/blob/main/CONTRIBUTING.md) for the short version of everything on this page.
+
+Thanks for writing for the Friends Of OpenJDK!

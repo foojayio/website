@@ -3,7 +3,7 @@ title: "Building a Code Editor Control in JavaFX"
 date: "2026-10-06"
 description: "Inside a custom JavaFX Control/Skin for a code editor: virtualized line numbers, keyword highlighting, bracket matching, multi-cursor editing, undo/redo and autocomplete."
 authors: ["liban-bande-gonzalez"]
-categories: ["JavaFX", "Java"]
+categories: ["JavaFX"]
 image: "editor.jpg"
 related_posts:
   - "announcing-skinning-javafx-applications"

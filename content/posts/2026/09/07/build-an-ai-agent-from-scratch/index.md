@@ -1,7 +1,6 @@
 ---
 title: "Build an AI Agent (From Scratch)"
 date: "2026-09-07T05:52:13+00:00"
-lastmod: "2026-09-21T05:52:59+00:00"
 description: "This review is about Build an AI Agent (From Scratch) by Jungjun Hur and Younghee Song from Manning. Facts 10 chapters $29.29 (at the time of this…"
 canonical: "https://blog.frankel.ch/building-ai-agent-from-scratch/"
 authors:

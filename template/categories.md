@@ -12,15 +12,15 @@ frontmatter.
 - Apache Tomcat
 - Arm
 - Azure
-- Bach
 - Book Announcement
 - Book Review
 - Books
 - BoxLang
 - Campaigns
+- Career
 - Chronicle Software
 - Cloud
-- CodeRabbit
+- Codename One
 - Conference
 - CRaC
 - Data Engineering
@@ -29,13 +29,10 @@ frontmatter.
 - DataStax
 - Debugging
 - Deep Netts
-- Dependabot
+- Dependency Management
 - Design Patterns
-- Desktop
 - Developer Tools
 - DevOps
-- Dubai JUG
-- Durability
 - Eclipse
 - Elastic
 - Embedded
@@ -54,7 +51,6 @@ frontmatter.
 - IntelliJ IDEA
 - Interviews
 - Jakarta EE
-- Java
 - Java Beginner
 - Java Core
 - JavaFX
@@ -66,8 +62,7 @@ frontmatter.
 - JDK21
 - Jelastic
 - JEPs
-- JFrog Artifactory
-- JFrog Xray
+- JFrog
 - JMS
 - jOOQ
 - JShell
@@ -105,7 +100,6 @@ frontmatter.
 - Records
 - Redis
 - Release Notes
-- Renovate
 - Research
 - RIFE2
 - Scala

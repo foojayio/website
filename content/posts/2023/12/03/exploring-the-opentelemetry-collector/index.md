@@ -1,7 +1,6 @@
 ---
 title: "Exploring the OpenTelemetry Collector"
 date: "2023-12-03T12:57:06+00:00"
-lastmod: "2023-12-03T12:57:07+00:00"
 description: "Let's explore aspects of the OpenTelemetry Collector that sits at the center of the OpenTelemetry architecture."
 canonical: "https://blog.frankel.ch/opentelemetry-collector/"
 authors:
@@ -172,7 +171,7 @@ service:
 
 With the Prometheus exporter configured, we can visualize metrics in Grafana.
 
-[![](raw-metrics-1024x437.jpg)](raw-metrics.jpg) Note that receivers and exporters specify their type **and** every one of them must be unique. To comply with the last requirement, we can append a qualifier to distinguish between them, *i.e.* , `prometheus/foo` and `prometheus/bar.`
+[![Grafana line graph of raw fake metrics with many series fluctuating between 0 and 100](raw-metrics-1024x437.jpg)](raw-metrics.jpg) Note that receivers and exporters specify their type **and** every one of them must be unique. To comply with the last requirement, we can append a qualifier to distinguish between them, *i.e.* , `prometheus/foo` and `prometheus/bar.`
 
 ## Intermediary data processing
 
@@ -237,7 +236,7 @@ service:
 
 Here are the results:
 
-## [![](labeled-metrics-1024x385.jpg)](labeled-metrics.jpg)
+## [![Grafana line graph of labeled metrics, warning that only 20 of 1575 time series are shown](labeled-metrics-1024x385.jpg)](labeled-metrics.jpg)
 
 ## Connecting receivers and exporters
 

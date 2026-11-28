@@ -1,17 +1,15 @@
 ---
 title: "Renovate: Dependabot Alternative"
 date: "2022-10-28T07:17:55+00:00"
-lastmod: "2023-03-27T15:25:07+00:00"
 description: "Compared to Dependabot, I love Renovate's capability to update Docker, Docker Compose, and Kubernetes files. I'll use it from now on!"
 canonical: "https://blog.frankel.ch/renovate-alternative-dependabot/"
 authors:
   - "nicolas-frankel"
 image: "painter-g72d10f286.jpg"
 categories:
-  - "Dependabot"
+  - "Dependency Management"
   - "Developer Tools"
   - "DevOps"
-  - "Renovate"
   - "Tools"
 related_posts:
   - "blockhound-how-it-works"
@@ -169,7 +167,7 @@ From that point on, Renovate will monitor the configured repositories and send P
 
 Even better, Renovate Bot limits the number of PRs to abide by [GitHub rate limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting). For convenience, it sends a [dedicated issue](https://github.com/nfrankel/opentelemetry-tracing/issues/4) titled "Dependency Dashboard", where you can see *all* available dependencies updates.
 
-![](renovate-dashboard.jpg)
+![Renovate bot's Dependency Dashboard issue on GitHub listing open dependency updates and detected dependencies](renovate-dashboard.jpg)
 
 How to interact with the dashboard is pretty self-explanatory. Just check the relevant checkbox, and it opens a PR regarding the dependency. Renovate will also open PRs if below the rate limit.
 

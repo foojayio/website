@@ -1,7 +1,6 @@
 ---
 title: "Book Review: \"Java Basics\", by Shai Almog"
 date: "2023-09-16T08:43:09+00:00"
-lastmod: "2023-09-16T08:50:17+00:00"
 description: "Shai Almog's \"Java Basics\" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author"
 authors:
   - "geertjan-wielenga"
@@ -17,7 +16,7 @@ related_posts:
 
 Shai Almog's "[Java Basics: A Practical Introduction to Full Stack Java](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack/dp/B0CCCJ38WH)" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author having a track record going back to leading Java mobile efforts all the way back to Sun Microsystems.
 
-{{< img src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" class="size-full is-resized" width="290" height="362" style="width:290px;height:362px" >}}
+{{< img src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" alt="Cover of Java Basics: A Practical Introduction to Full-Stack Java by Shai Almog, yellow with binary digits" class="size-full is-resized" width="290" height="362" style="width:290px;height:362px" >}}
 
 **Thoroughness and Ambition**
 
@@ -50,7 +49,7 @@ The thoroughness and ambition of the book is clear from its table of contents, e
 **Pragmatic and Helpful**
 
 The book is very clearly, and more than anything else, a very pragmatic workbook. It marries theory and practical application extremely well, and has barcodes throughout pointing to supporting video content on YouTube.
-![](IMG_6968-1-1024x768.jpg)
+![Open copy of the book Java Basics showing a section on Java's var keyword with code listings](IMG_6968-1-1024x768.jpg)
 
 In between the numerous tutorial-like step-by-step instructions, you'll learn about a lot of context particular to Java and typical points of confusion to newbies, i.e., Shai understands what the newbie is likely to be confused about and helpfully explains all of these aspects common to the Java language:
 

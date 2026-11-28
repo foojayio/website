@@ -1,7 +1,6 @@
 ---
 title: "Debugging OpenJDK Tests in VSCode (Without Losing Your Mind)"
 date: "2023-06-26T11:27:55+00:00"
-lastmod: "2023-07-10T12:46:48+00:00"
 description: "jtreg is the test harness used by the JDK test framework. Attaching a debugger cumbersome to enable debugging in VSCode. But worry no more!"
 authors:
   - "johannes-bechberger"
@@ -46,19 +45,19 @@ Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses
 
 You're now able to select "ASGCT debug" in "Run and Debug":  
 
-{{< img src="Screenshot-from-2023-06-21-15-04-38-927eb7df.png" class="aligncenter size-full is-resized" width="767" height="218" >}}
+{{< img src="Screenshot-from-2023-06-21-15-04-38-927eb7df.png" alt="VS Code Run and Debug panel with the 'ASGCT debug (Source root)' launch configuration being selected from a dropdown" class="aligncenter size-full is-resized" width="767" height="218" >}}
 
 You can choose the launch config and run the jtreg test with a debugger:  
 
-{{< img src="Screenshot-from-2023-06-21-15-07-40-db962b16.jpg" class="aligncenter size-full is-resized" width="765" height="544" >}}
+{{< img src="Screenshot-from-2023-06-21-15-07-40-db962b16.jpg" alt="VS Code debugger paused on a segfault with a breakpoint at line 202 of libAsyncGetCallTraceTest.cpp and the call stack shown" class="aligncenter size-full is-resized" width="765" height="544" >}}
 
 The debugger pauses on a segfault, but there are always a few at the beginning of the execution that can safely be ignored. We can use the program's pause to add a break-point at an interesting line. After hitting the break-point, we're able to inspect the local variables...  
 
-{{< img src="Screenshot-from-2023-06-21-15-11-51-c8e1dd69.jpg" class="aligncenter size-full is-resized" width="767" height="545" >}}
+{{< img src="Screenshot-from-2023-06-21-15-11-51-c8e1dd69.jpg" alt="VS Code debugger showing local variables, with trace.num_frames at 0 before the AsyncGetCallTrace call at line 202" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ... and do things like stepping over a line:  
 
-{{< img src="Screenshot-from-2023-06-21-15-13-18.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
+{{< img src="Screenshot-from-2023-06-21-15-13-18.png" alt="VS Code debugger stepped over to line 205, where trace.num_frames now shows 11" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ## Recompilation
 

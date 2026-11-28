@@ -1,7 +1,6 @@
 ---
 title: "Overview of JVM Vendors and Choosing the Right One"
 date: "2020-07-22T13:07:29+00:00"
-lastmod: "2021-08-23T12:53:50+00:00"
 description: "Everything about JVM vendors & OpenJDK distributions, upgrading from one Java release to the next, and information on where to get the JDK Flight Recorder."
 authors:
   - "hirt"

@@ -1,7 +1,6 @@
 ---
 title: "Apache Cassandra 4.0: Taming Tail Latencies with Java 16 ZGC"
 date: "2021-06-22T07:45:40+00:00"
-lastmod: "2021-11-03T13:32:36+00:00"
 description: "Learn about improvements in Java garbage collection that Cassandra 4.0 coupled with Java 16 offers over Cassandra 3.11 on Java 8!"
 canonical: "https://jaxenter.com/apache-cassandra-java-174575.html"
 authors:
@@ -26,7 +25,7 @@ Here, I'd like to focus on improvements in Java garbage collection that Cassandr
 
 In 2012, I gave a talk titled, "Dealing with JVM Limitations in Apache Cassandra." Here is the first slide from that presentation:
 
-{{< img src="paintpointsforjavadatabases.jpg" class="size-full is-resized" width="734" >}}
+{{< img src="paintpointsforjavadatabases.jpg" alt="Opening slide from a 2012 talk titled 'Pain points for Java databases' listing GC three times" class="size-full is-resized" width="734" >}}
 
 On the one hand, garbage collection is a primary reason that Java is so much more productive than traditional systems languages like C++. As JVM architect Cliff Click once wrote, "Many concurrent algorithms are very easy to write with a GC and totally hard to downright impossible using explicit free." Cassandra takes full advantage of this power.
 
@@ -40,7 +39,7 @@ The Z Garbage Collector (ZGC) was created to address this situation, and specifi
 
 To show how well ZGC improves Cassandra performance, we compared both throughput and latency in three environments: Cassandra 3.11 running on JDK 8 with its default CMS GC settings, Cassandra 4.0 running on JDK 8 with the same settings, and Cassandra 4.0 running on JDK 16 with ZGC. I'm pleased to report that ZGC convincingly achieves its design goals, allowing Cassandra to deliver nearly-constant latencies through the 99th percentile, with only a modest uptick at the 99.9th percentile!
 
-{{< img src="JAX_LDN21_728x90_61392_v1.jpg" class="size-large is-resized" width="716" >}}
+{{< img src="JAX_LDN21_728x90_61392_v1.jpg" alt="Banner for JAX London, 4 to 7 October 2021, in London or online" class="size-large is-resized" width="716" >}}
 
 ## ZGC performance results
 
@@ -48,7 +47,7 @@ My colleague Jonathan Shook benchmarked the performance characteristics of Cassa
 
 ### Throughput results
 
-![](graph.png)
+![Bar chart of throughput in requests/s: Cassandra 4.0 with ZGC leads on key/value and time series, and matches CMS on tabular](graph.png)
 
 Here we are looking at Cassandra running at 70% of maximum throughput. This leaves 30% operational headroom to absorb compaction, repair, or load spikes for the purposes of realistic measurements.
 
@@ -57,11 +56,11 @@ Cassandra 4.0 running with the same configuration as Cassandra 3.11 is 30% faste
 ### Latency results
 
 I've split the latency results into one chart per workload so it's easier to see the trends across the different percentiles:
-![](workloadlatencies.png)
+![Line chart of key/value latencies: 3.11 and 4.0 CMS reach about 42 ms at p999 while ZGC stays around 6 ms](workloadlatencies.png)
 
-{{< img src="timeseries-768x475-1.png" class="size-large is-resized" width="512" >}}
+{{< img src="timeseries-768x475-1.png" alt="Line chart of timeseries latencies: ZGC stays at 12 ms at p999, while Cassandra 3.11 and 4.0b4 CMS reach 86 ms and above" class="size-large is-resized" width="512" >}}
 
-![](tabular.png)
+![Line chart of tabular workload latencies: 3.11 and 4.0 CMS reach 40-42 ms at p999, ZGC about 11 ms](tabular.png)
 
 For these results, we limited each test scenario to the slowest system's throughput, i.e., we used 30,000, 44,000, and 54,000 requests per second for the key/value, time series, and tabular workloads, respectively.
 

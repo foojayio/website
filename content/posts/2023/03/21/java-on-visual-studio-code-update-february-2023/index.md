@@ -1,7 +1,6 @@
 ---
 title: "Java on Visual Studio Code Update"
 date: "2023-03-21T15:47:04+00:00"
-lastmod: "2023-03-21T15:48:43+00:00"
 description: "In this article, we will bring you new features related to JUnit 5 parallel testing as well as new filter widget for Spring Boot dashboard."
 authors:
   - "nick-zhu"

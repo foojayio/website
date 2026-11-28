@@ -1,7 +1,6 @@
 ---
 title: "Asciidoc over Markdown"
 date: "2025-11-03T08:26:13+00:00"
-lastmod: "2026-09-21T06:01:12+00:00"
 description: "I taught myself HTML a long time ago, on a software called HotDog (Pro?). There wasn't such a thing as WYSIWYG capabilities at the time. However, HotDog…"
 canonical: "https://blog.frankel.ch/asciidoc-over-markdown/"
 authors:
@@ -38,7 +37,7 @@ Yet, Markdown doesn't allow the inclusion of external files. I had to copy and p
 
 Another widespread limitation is wanting to draw attention to an item. Here's a styling option:
 
-![](Screenshot-2025-10-25-at-16.19.26-1024x248.png)
+![AsciiDoc-rendered tip box listing security-related plugins: URI Blocker, IP Restriction, CORS and CSRF](Screenshot-2025-10-25-at-16.19.26-1024x248.png)
 
 Markdown doesn't offer anything similar. For this reason, [Python Markdown](https://python-markdown.github.io/extensions/admonition/) does. What about other languages? I don't know; I wish it were part of Markdown.
 

@@ -1,7 +1,6 @@
 ---
 title: "JDK Safari: How To Find Hidden Tools in the JDK"
 date: "2023-07-19T08:25:23+00:00"
-lastmod: "2023-07-19T08:25:24+00:00"
 description: "Guess what? One of my hobbies is regularly searching the JDK for new Java classes with executable main methods."
 authors:
   - "thomas-darimont"

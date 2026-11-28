@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-10-27T06:25:19Z",
+  "generatedAt" : "2026-11-28T08:58:52Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -15,11 +15,11 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/alpesjug/",
     "events" : [ {
-      "title" : "Un outil pour les gouverner tous",
-      "url" : "https://www.meetup.com/alpesjug/events/317009119/",
-      "startTime" : "2026-10-27T19:00:00+01:00",
-      "endTime" : "2026-10-27T21:00:00+01:00",
-      "venue" : "29 Boulevard des Alpes",
+      "title" : "Wrap, Reshape, or Redesign : adapter vos APIs existantes à un monde d’agents",
+      "url" : "https://www.meetup.com/alpesjug/events/317468244/",
+      "startTime" : "2026-12-01T19:00:00+01:00",
+      "endTime" : "2026-12-01T21:00:00+01:00",
+      "venue" : "Salesforce",
       "city" : "Meylan",
       "online" : false
     } ]
@@ -30,27 +30,11 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/amsterdam-java-user-group/",
     "events" : [ {
-      "title" : "Amsterdam JUG Meetup at Atlassian",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048044/",
-      "startTime" : "2026-11-05T18:00:00+01:00",
-      "endTime" : "2026-11-05T21:00:00+01:00",
-      "venue" : "Atlassian B.V.",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
-      "title" : "Amsterdam JUG Meetup at Flagsmith",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048165/",
-      "startTime" : "2026-11-17T18:00:00+01:00",
-      "endTime" : "2026-11-17T21:00:00+01:00",
-      "venue" : "Plantage Kerklaan 35",
-      "city" : "Amsterdam",
-      "online" : false
-    }, {
-      "title" : "Amsterdam JUG Meetup at Metafactory",
-      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317048407/",
-      "startTime" : "2026-11-24T18:00:00+01:00",
-      "endTime" : "2026-11-24T21:00:00+01:00",
-      "venue" : "MetaFactory BV",
+      "title" : "Amsterdam JUG Meetup at ABN AMRO",
+      "url" : "https://www.meetup.com/amsterdam-java-user-group/events/317451849/",
+      "startTime" : "2026-12-03T18:00:00+01:00",
+      "endTime" : "2026-12-03T21:00:00+01:00",
+      "venue" : "ABN AMRO",
       "city" : "Amsterdam",
       "online" : false
     } ]
@@ -60,22 +44,30 @@
     "jug" : "ApeldoornJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/apeldoornjug/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "ApeldoornJUG @ Kadaster",
+      "url" : "https://www.meetup.com/apeldoornjug/events/317411492/",
+      "startTime" : "2026-12-03T17:00:00+01:00",
+      "endTime" : "2026-12-03T21:00:00+01:00",
+      "venue" : "Laan van Westenenk 701",
+      "city" : "Apeldoorn",
+      "online" : false
+    }, {
+      "title" : "Apeldoorn JUG @ Kadaster / Craftsmen with Venkat Subramaniam and Victor Rentea",
+      "url" : "https://www.meetup.com/apeldoornjug/events/317312395/",
+      "startTime" : "2027-03-31T19:00:00+02:00",
+      "endTime" : "2027-03-31T21:00:00+02:00",
+      "venue" : "Laan van Westenenk 701",
+      "city" : "Apeldoorn",
+      "online" : false
+    } ]
   }, {
     "slug" : "arnhemjug",
     "name" : "ArnhemJUG",
     "jug" : "ArnhemJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/arnhemjug/",
-    "events" : [ {
-      "title" : "ArnhemJUG - October meetup",
-      "url" : "https://www.meetup.com/arnhemjug/events/314385055/",
-      "startTime" : "2026-10-29T17:00:00+01:00",
-      "endTime" : "2026-10-29T19:00:00+01:00",
-      "venue" : "Alliander",
-      "city" : "Arnhem",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "Athens-Java-User-Group",
     "name" : "Athens Java User Group",
@@ -89,14 +81,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/atlantajug/",
     "events" : [ {
-      "title" : "Knowns and Unknowns: Testing AI-Generated Code",
-      "url" : "https://www.meetup.com/atlantajug/events/316430418/",
-      "startTime" : "2026-11-17T18:30:00-05:00",
-      "endTime" : "2026-11-17T20:30:00-05:00",
-      "venue" : "Roam",
-      "city" : "Atlanta",
-      "online" : false
-    }, {
       "title" : "Refactoring to Modernize Java Applications Using AI.",
       "url" : "https://www.meetup.com/atlantajug/events/316436426/",
       "startTime" : "2026-12-15T18:30:00-05:00",
@@ -111,15 +95,7 @@
     "jug" : "BelgianJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/belgian-java-user-group/",
-    "events" : [ {
-      "title" : "Open Space with Kotlin User Group",
-      "url" : "https://www.meetup.com/belgian-java-user-group/events/317062424/",
-      "startTime" : "2026-10-27T18:30:00+01:00",
-      "endTime" : "2026-10-27T21:30:00+01:00",
-      "venue" : "Da Vincilaan 11",
-      "city" : "Zaventem",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "BordeauxJUG",
     "name" : "BordeauxJUG",
@@ -134,14 +110,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/nejug1/",
     "events" : [ {
-      "title" : "Java 26 and 27 in the Trenches: New Features and the Art of Staying Current",
-      "url" : "https://www.meetup.com/nejug1/events/316973537/",
-      "startTime" : "2026-11-12T18:00:00-05:00",
-      "endTime" : "2026-11-12T20:30:00-05:00",
-      "venue" : "RJ Kelly",
-      "city" : "Burlington",
-      "online" : false
-    }, {
       "title" : "Test Driving Code with the Help of AI by Dr. Venkat S",
       "url" : "https://www.meetup.com/nejug1/events/316908989/",
       "startTime" : "2026-12-14T18:00:00-05:00",
@@ -157,12 +125,12 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/brabant-jug/",
     "events" : [ {
-      "title" : "BrabantJUG @ the/experts",
-      "url" : "https://www.meetup.com/brabant-jug/events/316812291/",
-      "startTime" : "2026-10-29T17:30:00+01:00",
-      "endTime" : "2026-10-29T21:00:00+01:00",
-      "venue" : "the/experts.",
-      "city" : "Breda",
+      "title" : "BrabantJUG @ TomTom",
+      "url" : "https://www.meetup.com/brabant-jug/events/317410935/",
+      "startTime" : "2026-12-08T17:00:00+01:00",
+      "endTime" : "2026-12-08T21:00:00+01:00",
+      "venue" : "TomTom Eindhoven",
+      "city" : "Eindhoven",
       "online" : false
     } ]
   }, {
@@ -197,7 +165,15 @@
     "jug" : "DubJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/dublinjavausergroup/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "DubJUG 2611: Software Architect Dr. Mirko Ebert",
+      "url" : "https://www.meetup.com/dublinjavausergroup/events/317504950/",
+      "startTime" : "2026-12-10T18:15:00Z",
+      "endTime" : "2026-12-10T21:15:00Z",
+      "venue" : "tcube workspaces",
+      "city" : "Dublin",
+      "online" : false
+    } ]
   }, {
     "slug" : "gdljug",
     "name" : "Guadalajara Java User Group",
@@ -212,31 +188,15 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/java-vienna/",
     "events" : [ {
-      "title" : "Going to DevFest Vienna",
-      "url" : "https://www.meetup.com/java-vienna/events/316166128/",
-      "startTime" : "2026-11-07T09:00:00+01:00",
-      "endTime" : "2026-11-07T17:00:00+01:00",
-      "venue" : null,
-      "city" : "Vienna",
-      "online" : false
-    }, {
-      "title" : "November Meetup",
-      "url" : "https://www.meetup.com/java-vienna/events/316166123/",
-      "startTime" : "2026-11-16T18:00:00+01:00",
-      "endTime" : "2026-11-16T21:00:00+01:00",
-      "venue" : null,
-      "city" : "Vienna",
-      "online" : false
-    }, {
-      "title" : "December Meetup",
+      "title" : "\"TornadoVM: GPU Accelerated Java\" +\"Drive your UI with AI\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166142/",
-      "startTime" : "2026-11-30T18:00:00+01:00",
-      "endTime" : "2026-11-30T21:00:00+01:00",
-      "venue" : null,
-      "city" : "Vienna",
+      "startTime" : "2026-12-03T18:00:00+01:00",
+      "endTime" : "2026-12-03T21:00:00+01:00",
+      "venue" : "Posedio GmbH",
+      "city" : "Wien",
       "online" : false
     }, {
-      "title" : "January Meetup",
+      "title" : "\"Java 28 - Better Language, APIs, and Runtime\" + \"Operaton (Camunda Fork)\"",
       "url" : "https://www.meetup.com/java-vienna/events/316166147/",
       "startTime" : "2027-01-18T18:00:00+01:00",
       "endTime" : "2027-01-18T21:00:00+01:00",
@@ -244,7 +204,7 @@
       "city" : "Vienna",
       "online" : false
     }, {
-      "title" : "maybe february meetup",
+      "title" : "february meetup with Ed Burns",
       "url" : "https://www.meetup.com/java-vienna/events/316693695/",
       "startTime" : "2027-02-22T18:00:00+01:00",
       "endTime" : "2027-02-22T20:00:00+01:00",
@@ -256,6 +216,14 @@
       "url" : "https://www.meetup.com/java-vienna/events/316693696/",
       "startTime" : "2027-03-08T18:00:00+01:00",
       "endTime" : "2027-03-08T20:00:00+01:00",
+      "venue" : null,
+      "city" : "Vienna",
+      "online" : false
+    }, {
+      "title" : "April Meetup",
+      "url" : "https://www.meetup.com/java-vienna/events/317445273/",
+      "startTime" : "2027-04-12T18:00:00+02:00",
+      "endTime" : "2027-04-12T20:00:00+02:00",
       "venue" : null,
       "city" : "Vienna",
       "online" : false
@@ -273,22 +241,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-bb/",
     "events" : [ {
-      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
-      "url" : "https://www.meetup.com/jug-bb/events/316084510/",
-      "startTime" : "2026-11-03T18:30:00+01:00",
-      "endTime" : "2026-11-03T21:00:00+01:00",
-      "venue" : "Da Vinci",
-      "city" : "Berlin",
-      "online" : false
-    }, {
-      "title" : "JUG BB: Pre-SAG Special @ JetBrains with Chris Richardson",
-      "url" : "https://www.meetup.com/jug-bb/events/317058007/",
-      "startTime" : "2026-11-16T18:30:00+01:00",
-      "endTime" : "2026-11-16T22:00:00+01:00",
-      "venue" : "JetBrains GmbH",
-      "city" : "Berlin",
-      "online" : false
-    }, {
       "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
       "url" : "https://www.meetup.com/jug-bb/events/316084512/",
       "startTime" : "2026-12-01T18:30:00+01:00",
@@ -352,6 +304,22 @@
       "venue" : "Da Vinci",
       "city" : "Berlin",
       "online" : false
+    }, {
+      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+      "url" : "https://www.meetup.com/jug-bb/events/kvnqltykclbfb/",
+      "startTime" : "2027-08-03T18:30:00+02:00",
+      "endTime" : "2027-08-03T21:00:00+02:00",
+      "venue" : "Da Vinci",
+      "city" : "Berlin",
+      "online" : false
+    }, {
+      "title" : "Monatlicher Stammtisch der JUG Berlin-Brandenburg",
+      "url" : "https://www.meetup.com/jug-bb/events/kvnqltykcmbkb/",
+      "startTime" : "2027-09-07T18:30:00+02:00",
+      "endTime" : "2027-09-07T21:00:00+02:00",
+      "venue" : "Da Vinci",
+      "city" : "Berlin",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Bielefeld",
@@ -380,7 +348,15 @@
     "jug" : "BremenOldenburgJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jugbremen/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "JUG Bremen-Oldenburg auf dem Lambertimarkt Oldenburg",
+      "url" : "https://www.meetup.com/jugbremen/events/317563433/",
+      "startTime" : "2026-12-22T18:30:00+01:00",
+      "endTime" : "2026-12-22T22:00:00+01:00",
+      "venue" : "Achternstraße 34",
+      "city" : "Oldenburg (Oldb)",
+      "online" : false
+    } ]
   }, {
     "slug" : "DarmstadtJUG",
     "name" : "Java User Group Darmstadt",
@@ -388,30 +364,6 @@
     "source" : "calendar",
     "url" : "http://www.jug-da.de/",
     "events" : [ {
-      "title" : "JUG DA: Zwei Vorträge: Datenorientierte Programmierung mit Java und Speed Dating Java Secrets (Birgit Kratz, Bernd Müller)",
-      "url" : "https://www.jug-da.de/2026/10/Data-Oriented-Programming-und-Java-Secrets/",
-      "startTime" : "2026-10-29T18:30:00+01:00",
-      "endTime" : "2026-10-29T20:30:00+01:00",
-      "venue" : "h_da (Hochschule Darmstadt)",
-      "city" : "Darmstadt",
-      "online" : null
-    }, {
-      "title" : "JUG DA: Global Day of Code Retreat Frankfurt",
-      "url" : "https://www.jug-da.de/2026/11/global-day-of-code-retreat/",
-      "startTime" : "2026-11-07T09:00:00+01:00",
-      "endTime" : "2026-11-07T17:00:00+01:00",
-      "venue" : "ING",
-      "city" : "Frankfurt am Main",
-      "online" : null
-    }, {
-      "title" : "JUG DA: ADHS in der IT: Vom Chaos zum Code (Joshua Töpfer)",
-      "url" : "https://www.jug-da.de/2026/11/ADHS/",
-      "startTime" : "2026-11-19T18:30:00+01:00",
-      "endTime" : "2026-11-19T20:30:00+01:00",
-      "venue" : "andrena objects",
-      "city" : "Darmstadt",
-      "online" : null
-    }, {
       "title" : "JUG DA: Eine Architektur, viele Sichten - Mit Bausteinsicht vom Modell zum Diagramm und wieder zurück (Gerd Aschemann, Falk Sippach)",
       "url" : "https://www.jug-da.de/2026/12/Bausteinsicht/",
       "startTime" : "2026-12-10T18:30:00+01:00",
@@ -426,15 +378,7 @@
     "jug" : "DortmundJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Dortmund/",
-    "events" : [ {
-      "title" : "Neuerungen in Java und Open Source Finanzierung",
-      "url" : "https://www.meetup.com/jug-dortmund/events/316869289/",
-      "startTime" : "2026-11-11T18:00:00+01:00",
-      "endTime" : "2026-11-11T21:00:00+01:00",
-      "venue" : "SIGNAL IDUNA Gruppe Hauptverwaltung Dortmund",
-      "city" : "Dortmund",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "rheinJUG",
     "name" : "Java User Group Duesseldorf Rhein",
@@ -454,15 +398,7 @@
     "jug" : "FrankfurtMainJUG",
     "source" : "calendar",
     "url" : "http://jugf.de/",
-    "events" : [ {
-      "title" : "Agentic Coding - die JUGF probiert's aus (Alexander Culum)",
-      "url" : "",
-      "startTime" : "2026-10-28T18:30:00+01:00",
-      "endTime" : "2026-10-28T20:00:00+01:00",
-      "venue" : null,
-      "city" : null,
-      "online" : null
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "Java-User-Group-Freiburg",
     "name" : "Java User Group Freiburg",
@@ -496,19 +432,11 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-hamburg/",
     "events" : [ {
-      "title" : "Java auf Diät: Schlankere Spring Boot Container für mehr Sicherheit",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316580306/",
-      "startTime" : "2026-10-29T19:00:00+01:00",
-      "endTime" : "2026-10-29T20:30:00+01:00",
-      "venue" : "Kühne + Nagel",
-      "city" : "Hamburg",
-      "online" : false
-    }, {
-      "title" : "Mit Java, ohne kommerzielle LLMs, KI Aufgaben erkennen und lösen",
-      "url" : "https://www.meetup.com/jug-hamburg/events/316782036/",
-      "startTime" : "2026-11-12T19:00:00+01:00",
-      "endTime" : "2026-11-12T20:30:00+01:00",
-      "venue" : "Consid GmbH",
+      "title" : "Special Day: Software Entwicklung",
+      "url" : "https://www.meetup.com/jug-hamburg/events/317484039/",
+      "startTime" : "2026-12-04T13:00:00+01:00",
+      "endTime" : "2026-12-04T18:00:00+01:00",
+      "venue" : "WPS - Workplace Solutions GmbH",
       "city" : "Hamburg",
       "online" : false
     } ]
@@ -520,15 +448,7 @@
     "url" : "https://www.meetup.com/Java-User-Group-Hannover/",
     "events" : [ {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/316925848/",
-      "startTime" : "2026-10-30T19:00:00+01:00",
-      "endTime" : "2026-11-06T22:00:00+01:00",
-      "venue" : "Pizza Unica",
-      "city" : "Hannover",
-      "online" : false
-    }, {
-      "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcpbkc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202130/",
       "startTime" : "2026-11-27T19:00:00+01:00",
       "endTime" : "2026-12-04T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -536,15 +456,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtyjcqbhc/",
-      "startTime" : "2026-12-25T19:00:00+01:00",
-      "endTime" : "2027-01-01T22:00:00+01:00",
-      "venue" : "Pizza Unica",
-      "city" : "Hannover",
-      "online" : false
-    }, {
-      "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykccbmc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202138/",
       "startTime" : "2027-01-29T19:00:00+01:00",
       "endTime" : "2027-02-05T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -552,7 +464,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcdbjc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317202140/",
       "startTime" : "2027-02-26T19:00:00+01:00",
       "endTime" : "2027-03-05T22:00:00+01:00",
       "venue" : "Pizza Unica",
@@ -560,7 +472,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcfbjc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317615397/",
       "startTime" : "2027-03-26T19:00:00+01:00",
       "endTime" : "2027-04-02T23:00:00+02:00",
       "venue" : "Pizza Unica",
@@ -598,6 +510,22 @@
       "venue" : "Pizza Unica",
       "city" : "Hannover",
       "online" : false
+    }, {
+      "title" : "Java Stammtisch",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykclbkc/",
+      "startTime" : "2027-08-27T19:00:00+02:00",
+      "endTime" : "2027-09-03T22:00:00+02:00",
+      "venue" : "Pizza Unica",
+      "city" : "Hannover",
+      "online" : false
+    }, {
+      "title" : "Java Stammtisch",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcmbgc/",
+      "startTime" : "2027-09-24T19:00:00+02:00",
+      "endTime" : "2027-10-01T22:00:00+02:00",
+      "venue" : "Pizza Unica",
+      "city" : "Hannover",
+      "online" : false
     } ]
   }, {
     "slug" : "Java-User-Group-Hessen-JUGH",
@@ -625,23 +553,7 @@
     "jug" : "KarlsruheJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Karlsruhe/",
-    "events" : [ {
-      "title" : "You Are Running the Wrong Tests First",
-      "url" : "https://www.meetup.com/java-user-group-karlsruhe/events/316976002/",
-      "startTime" : "2026-10-28T19:15:00+01:00",
-      "endTime" : "2026-10-28T21:15:00+01:00",
-      "venue" : "synyx event location",
-      "city" : "Karlsruhe",
-      "online" : false
-    }, {
-      "title" : "From Code to Context – Wie KI Softwaresysteme wirklich verstehen kann",
-      "url" : "https://www.meetup.com/java-user-group-karlsruhe/events/316709983/",
-      "startTime" : "2026-11-11T18:30:00+01:00",
-      "endTime" : "2026-11-11T20:30:00+01:00",
-      "venue" : "1000 Satellites Karlsruhe-Malzwerk",
-      "city" : "Karlsruhe",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "JUG-Mainz",
     "name" : "Java User Group Mainz",
@@ -661,15 +573,7 @@
     "jug" : "MuenchenJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/Java-User-Group-Munchen-JUGM/",
-    "events" : [ {
-      "title" : "Technical documentation in the times of AI Agents: is it still needed?",
-      "url" : "https://www.meetup.com/java-user-group-munchen-jugm/events/317060711/",
-      "startTime" : "2026-11-02T19:00:00+01:00",
-      "endTime" : "2026-11-02T21:00:00+01:00",
-      "venue" : "Eden Hotel Wolff",
-      "city" : "München",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "java-usergroup-munster",
     "name" : "Java Usergroup Münster",
@@ -683,15 +587,7 @@
     "jug" : "NuernbergJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/JUG-Nurnberg/",
-    "events" : [ {
-      "title" : "Von algebraischen Datentypen zu Pattern Matching überall",
-      "url" : "https://www.meetup.com/jug-nurnberg/events/317006791/",
-      "startTime" : "2026-10-28T18:00:00+01:00",
-      "endTime" : "2026-10-28T21:00:00+01:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "jug-oberpfalz",
     "name" : "JUG Oberpfalz",
@@ -699,26 +595,18 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
-      "title" : "JCON USA 2026 at IBM TechXchange",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316383834/",
-      "startTime" : "2026-10-26T09:00:00+01:00",
-      "endTime" : "2026-10-29T18:00:00+01:00",
-      "venue" : "Georgia World Congress Center",
-      "city" : "Atlanta",
-      "online" : false
+      "title" : "Can AI Write Real jOOQ Code? Its Creator Lukas Eder Reviews It Live",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/317615214/",
+      "startTime" : "2026-11-30T15:00:00+01:00",
+      "endTime" : "2026-11-30T17:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
     }, {
-      "title" : "AI Trends That Actually Matter: Lessons from 100+ Hours of AI Live Coding",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/316514677/",
-      "startTime" : "2026-10-27T17:30:00+01:00",
-      "endTime" : "2026-10-27T19:00:00+01:00",
-      "venue" : "IHK-Akademie in Ostbayern GmbH",
-      "city" : "Weiden in der Oberpfalz",
-      "online" : false
-    }, {
-      "title" : "JUGO - TBD - save the date",
-      "url" : "https://www.meetup.com/jug-oberpfalz/events/313226995/",
-      "startTime" : "2026-11-11T18:00:00+01:00",
-      "endTime" : "2026-11-11T21:00:00+01:00",
+      "title" : "Local AI Is 'a Curiosity at Best'. We Make It Read Invoices in Micronaut",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/317557062/",
+      "startTime" : "2026-12-23T20:00:00+01:00",
+      "endTime" : "2026-12-23T22:00:00+01:00",
       "venue" : null,
       "city" : null,
       "online" : true
@@ -758,7 +646,15 @@
     "jug" : "SaxonyJUG",
     "source" : "calendar",
     "url" : "https://jugsaxony.org",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Vom Code zum Dashboard: Praktische Metriken mit Micrometer (Raynhold Schapp)",
+      "url" : "https://jugsaxony.org/timeline/2027/1/21/Micrometer",
+      "startTime" : "2027-01-21T18:00:00+01:00",
+      "endTime" : "2027-01-21T20:00:00+01:00",
+      "venue" : "Avantgarde Labs GmbH",
+      "city" : "Dresden",
+      "online" : null
+    } ]
   }, {
     "slug" : "jugstuttgart",
     "name" : "Java User Group Stuttgart",
@@ -836,15 +732,7 @@
     "jug" : "JUGNoord",
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-noord/",
-    "events" : [ {
-      "title" : "November 2026: Kotlin-Powered Spring Boot and the Security of LLMs",
-      "url" : "https://www.meetup.com/jug-noord/events/317057241/",
-      "startTime" : "2026-11-10T17:00:00+01:00",
-      "endTime" : "2026-11-10T20:00:00+01:00",
-      "venue" : "Dienst Uitvoering Onderwijs (DUO)-IB-Groep",
-      "city" : "Groningen",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "KnoxJava",
     "name" : "KnoxJava",
@@ -866,14 +754,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/londonjavacommunity/",
     "events" : [ {
-      "title" : "LJC Meetup at Capital One",
-      "url" : "https://www.meetup.com/londonjavacommunity/events/317143136/",
-      "startTime" : "2026-11-12T18:00:00Z",
-      "endTime" : "2026-11-12T21:00:00Z",
-      "venue" : "Capital One",
-      "city" : "London",
-      "online" : false
-    }, {
       "title" : "LJC Winter Unconference 2026",
       "url" : "https://www.meetup.com/londonjavacommunity/events/315973600/",
       "startTime" : "2026-12-04T09:00:00Z",
@@ -896,11 +776,11 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/ManchesterUK-Java-Community/",
     "events" : [ {
-      "title" : "Production-Grade Kubernetes: Performance-Driven Scaling and SBOM Security",
-      "url" : "https://www.meetup.com/manchesteruk-java-community/events/317050281/",
-      "startTime" : "2026-10-28T17:00:00Z",
-      "endTime" : "2026-10-28T20:00:00Z",
-      "venue" : "Department Bonded Warehouse",
+      "title" : "MJC / Cloud Festive December",
+      "url" : "https://www.meetup.com/manchesteruk-java-community/events/317515258/",
+      "startTime" : "2026-12-03T19:00:00Z",
+      "endTime" : "2026-12-03T22:00:00Z",
+      "venue" : "Steelfish Brewing Co. - Brewery and Taproom",
       "city" : "Manchester",
       "online" : false
     } ]
@@ -917,15 +797,7 @@
     "jug" : "MontrealJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/montreal-jug/",
-    "events" : [ {
-      "title" : "⚡️Présentations éclairs de la communauté / Lightning Talks",
-      "url" : "https://www.meetup.com/montreal-jug/events/316679816/",
-      "startTime" : "2026-11-05T17:30:00-05:00",
-      "endTime" : "2026-11-05T20:30:00-05:00",
-      "venue" : "Maplr",
-      "city" : "Montréal",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "nairobi-jvm",
     "name" : "Nairobi Java User Group",
@@ -934,11 +806,10 @@
     "error" : "Meetup group not found (404) -- the entry in GlobalWWJugs is out of date"
   }, {
     "slug" : "nashvillejug",
-    "name" : "Nashville (Not Just) Java Users Group",
+    "name" : "Nashville JUG",
     "jug" : "NashvilleJUG",
     "source" : "meetup",
-    "url" : "https://www.meetup.com/nashvillejug/",
-    "events" : [ ]
+    "error" : "Meetup group not found (404) -- the entry in GlobalWWJugs is out of date"
   }, {
     "slug" : "nijmegen-java-user-group",
     "name" : "Nijmegen Java User Group",
@@ -966,15 +837,7 @@
     "jug" : "OrlandoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/orlando-jug-java-user-group/",
-    "events" : [ {
-      "title" : "Next-level AI Concepts for Devs: Agents, Tools, and MCP",
-      "url" : "https://www.meetup.com/orlando-jug-java-user-group/events/316905301/",
-      "startTime" : "2026-11-03T18:30:00-05:00",
-      "endTime" : "2026-11-03T20:30:00-05:00",
-      "venue" : "DPAC 108",
-      "city" : "Orlando",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "ottawa-java-user-group",
     "name" : "Ottawa Java User Group",
@@ -1024,14 +887,6 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/GatewayJUG/",
     "events" : [ {
-      "title" : "Bootiful Spring Security",
-      "url" : "https://www.meetup.com/gatewayjug/events/317096138/",
-      "startTime" : "2026-11-09T18:30:00-06:00",
-      "endTime" : "2026-11-09T20:00:00-06:00",
-      "venue" : null,
-      "city" : null,
-      "online" : false
-    }, {
       "title" : "Testing the Untestable: Reliably testing AI-Infused Applications",
       "url" : "https://www.meetup.com/gatewayjug/events/315805152/",
       "startTime" : "2027-01-14T18:30:00-06:00",
@@ -1054,11 +909,19 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/tampa-jug/",
     "events" : [ {
-      "title" : "Next-level AI: Upgrade your skills with agents, MCP, and more",
-      "url" : "https://www.meetup.com/tampa-jug/events/316982906/",
-      "startTime" : "2026-11-04T17:30:00-05:00",
-      "endTime" : "2026-11-04T20:00:00-05:00",
-      "venue" : "Kforce",
+      "title" : "Spec Driven Development with Java & AI",
+      "url" : "https://www.meetup.com/tampa-jug/events/317461969/",
+      "startTime" : "2026-12-10T17:30:00-05:00",
+      "endTime" : "2026-12-10T19:30:00-05:00",
+      "venue" : "Entrepreneur Collaborative Center",
+      "city" : "Tampa",
+      "online" : false
+    }, {
+      "title" : "6th Annual End Of Year Tech Meetup Extravaganza",
+      "url" : "https://www.meetup.com/tampa-jug/events/317553553/",
+      "startTime" : "2026-12-14T17:00:00-05:00",
+      "endTime" : "2026-12-14T20:00:00-05:00",
+      "venue" : "Embarc Collective",
       "city" : "Tampa",
       "online" : false
     } ]
@@ -1068,15 +931,7 @@
     "jug" : "TorontoJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/toronto-java-users-group/",
-    "events" : [ {
-      "title" : "Legacy Code Doesn't Have to Suck",
-      "url" : "https://www.meetup.com/toronto-java-users-group/events/316878883/",
-      "startTime" : "2026-10-29T18:30:00-04:00",
-      "endTime" : "2026-10-29T20:30:00-04:00",
-      "venue" : "Free Times Cafe",
-      "city" : "Toronto",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "triangle-java-users-group",
     "name" : "Triangle Java Users Group (TriJUG)",
@@ -1090,22 +945,22 @@
     "jug" : "UtrechtJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/utrecht-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Utrecht JUG, Dec 9: Db2 Performance, Framework-Agnostic Java & Capability Mesh",
+      "url" : "https://www.meetup.com/utrecht-java-user-group/events/317596057/",
+      "startTime" : "2026-12-09T17:30:00+01:00",
+      "endTime" : "2026-12-09T21:30:00+01:00",
+      "venue" : "SVB",
+      "city" : "Utrecht",
+      "online" : false
+    } ]
   }, {
     "slug" : "ValenciaJUG",
     "name" : "ValenciaJUG",
     "jug" : "ValenciaJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/ValenciaJUG/",
-    "events" : [ {
-      "title" : "Lightning Talks ⚡⚡",
-      "url" : "https://www.meetup.com/valenciajug/events/317024529/",
-      "startTime" : "2026-11-17T18:30:00+01:00",
-      "endTime" : "2026-11-17T21:30:00+01:00",
-      "venue" : null,
-      "city" : "Valencia",
-      "online" : false
-    } ]
+    "events" : [ ]
   }, {
     "slug" : "VirtualJUG",
     "name" : "Virtual Java User Group",
@@ -1113,21 +968,21 @@
     "source" : "calendar",
     "url" : "https://luma.com/vjug",
     "events" : [ {
-      "title" : "AI DevCon NYC",
-      "url" : "https://luma.com/aidevcon-nyc2026",
-      "startTime" : "2026-11-02T00:00:00Z",
-      "endTime" : "2026-11-05T00:00:00Z",
-      "venue" : "5-2-A at Industry City",
-      "city" : "USA",
-      "online" : null
-    }, {
-      "title" : "From JDBC to Database Control Planes: 30 Years of Java Database Connectivity by Rogerio Robetti",
-      "url" : "https://luma.com/event/evt-yAEwk4JK5p9nzOR",
-      "startTime" : "2026-11-09T20:00:00Z",
-      "endTime" : "2026-11-09T21:00:00Z",
+      "title" : "Solving the challenges of Java ecosystems in the AI world by Mikhail Polivakha",
+      "url" : "https://luma.com/event/evt-GsJbRwpBMX8XLQk",
+      "startTime" : "2026-12-09T17:00:00Z",
+      "endTime" : "2026-12-09T18:00:00Z",
       "venue" : "Online Event",
       "city" : null,
       "online" : true
+    }, {
+      "title" : "Re:Build Conference 2027",
+      "url" : "https://luma.com/9xkxbofp",
+      "startTime" : "2027-05-05T07:00:00Z",
+      "endTime" : "2027-05-06T17:00:00Z",
+      "venue" : "Business Design Centre Ltd",
+      "city" : "UK",
+      "online" : null
     } ]
   }, {
     "slug" : "Warszawa-JUG",

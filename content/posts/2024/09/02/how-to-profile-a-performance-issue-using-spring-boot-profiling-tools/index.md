@@ -1,7 +1,6 @@
 ---
 title: "How to profile a performance issue using Spring Boot profiling tools"
 date: "2024-09-02T09:56:13+00:00"
-lastmod: "2024-09-02T10:03:50+00:00"
 description: "Profiling performance issues and establishing robust monitoring and observability are critical for maintaining the health and efficiency of your Spring Boot application."
 authors:
   - "nasim-salmany"

@@ -1,0 +1,39 @@
+name: Retry social posts
+
+# Manual retry for one post whose "Post to social media" step failed, for
+# instance a 404 because the page was not live yet. Reposts to every platform,
+# so check Mastodon and Bluesky first if one of them succeeded the first time.
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Post URL, e.g. https://foojay.io/today/my-post/"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  social:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: scripts/notify
+      - uses: jbangdev/setup-jbang@v0.1.1
+      - name: Fetch the live feed
+        run: curl -fsS --max-time 30 https://foojay.io/index.xml -o feed.xml
+      - name: Post to social media
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_SOCIAL_POSTS_CHANNEL_ID }}
+          SLACK_MENTION_ID: ${{ secrets.SLACK_MENTION_ID }}
+          POST_URL: ${{ inputs.url }}
+        run: jbang scripts/notify/SocialPosts.java post feed.xml "$POST_URL"

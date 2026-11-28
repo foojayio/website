@@ -1,7 +1,6 @@
 ---
 title: "Journeys in Java, Level 2: Building an Empire of Microservices"
 date: "2022-02-16T15:29:33+00:00"
-lastmod: "2022-06-01T20:08:48+00:00"
 description: "Let's dive into the world of microservices find out the complexities, best practices, and troubles. I will share all my learnings, as well!"
 authors:
   - "jennifer-reif"
@@ -10,6 +9,7 @@ categories:
   - "Databases"
   - "Microservices"
   - "Neo4J"
+  - "Mongo"
 related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "book-review-quarkus-for-spring-developers"
@@ -188,7 +188,7 @@ Start each of the applications, either through your IDE or via the command line.
 
 And here is the resulting output!
 
-{{< img src="microservices-lvl2-results-1-611x510.png" class="size-medium" width="611" height="510" >}}
+{{< img src="microservices-lvl2-results-1-611x510.png" alt="Browser at localhost:8080/hello showing a JSON list of four books with bookId, title and author" class="size-medium" width="611" height="510" >}}
 
 ## Wrapping up!
 

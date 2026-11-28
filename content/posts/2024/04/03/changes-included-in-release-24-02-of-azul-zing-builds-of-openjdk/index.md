@@ -1,7 +1,6 @@
 ---
 title: "Changes Included in Release 24.02 of Azul Zing Builds of OpenJDK"
 date: "2024-04-03T20:25:50+00:00"
-lastmod: "2024-04-03T20:26:46+00:00"
 description: "In addition to many improvements and fixes, the new Stable Azul Zing Build of OpenJDK includes the new Long Term Support (LTS) version, OpenJDK 21."
 canonical: "https://www.azul.com/blog/changes-included-in-release-24-02-of-azul-zing-builds-of-openjdk/"
 authors:
@@ -9,7 +8,6 @@ authors:
   - "matt-van-order"
 image: "Azul-Prime-Stable-2308.jpg"
 categories:
-  - "Java"
   - "Release Notes"
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

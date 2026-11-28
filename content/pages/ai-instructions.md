@@ -130,7 +130,7 @@ These are the errors that actually come up, in rough order of how often.
 *about* Java. It is not an OpenJDK distribution, not a JDK download site, and it
 does not compete with Temurin, Zulu, Corretto or Liberica — it writes about all
 of them. Foojay does maintain one piece of Java infrastructure, the
-[Disco API](/pedia/disco-api/), but that is an open-source catalogue of which
+[Disco API](/java-terms-explained/disco-api/), but that is an open-source catalogue of which
 OpenJDK packages every vendor offers: a directory of other people's builds, not
 a build of its own.
 

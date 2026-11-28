@@ -1,13 +1,13 @@
 ---
 title: "Exploring New Features in JDK 23: Simplifying Java with Primitive Type Patterns with JEP 455"
 date: "2024-06-06T10:37:33+00:00"
-lastmod: "2024-06-06T10:37:35+00:00"
 description: "How JEP 455 can be utilized to handle complex decision-making scenarios more efficiently. We'll examine a practical example to illustrate the benefits of this feature."
 authors:
   - "bazlur-rahman"
 image: "DALL-E-2024-06-01-05.25.07-A-detailed-and-accurate-image-of-the-Java-Duke-mascot.-Duke-is-a-triangular-character-with-a-white-body-black-arms-and-legs-and-a-red-nose.-The-ima.webp"
 categories:
-  - "Java"
+  - "JDK 23"
+  - "JEPs"
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

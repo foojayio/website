@@ -1,7 +1,6 @@
 ---
 title: "Getting Started with Jakarta EE 9: Context & Dependency Injection"
 date: "2021-05-26T06:56:27+00:00"
-lastmod: "2021-08-23T15:32:06+00:00"
 description: "Next in the \"Getting Started with Jakarta EE\" series, we look at various specifications and how you can use them in your next application."
 canonical: "https://blog.payara.fish/getting-started-with-jakarta-ee-9-context-and-dependency-injection-cdi"
 authors:

@@ -1,7 +1,6 @@
 ---
 title: "Securing Vaadin Applications with Microsoft Entra"
 date: "2025-02-26T12:55:43+00:00"
-lastmod: "2025-02-26T12:57:16+00:00"
 description: "Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin…"
 canonical: "https://martinelli.ch/securing-vaadin-applications-with-microsoft-entra/"
 authors:
@@ -27,31 +26,31 @@ The first step is to create an application, configure roles, assign users, and s
 To create an application, log in to http://entra.microsoft.com and select "Applications" -\> "Enterprise applications." There, you can create a new application. Select "Register an application to integrate with Microsoft Entra ID (App you're developing)."
 
 Set a name and add a Redirect URI like in the screenshot. Choose Web and set `http://localhost:8080/login/oauth2/code/` as the URI. As you can see, this URI is application-environment-specific, and you will need to create an app registration per stage (dev, test, production, etc.).
-![](image-9-1536x1000-1-1024x667.png)
+![Microsoft Entra 'Register an application' form with name Test, single-tenant account type and a localhost redirect URI](image-9-1536x1000-1-1024x667.png)
 
 ### Create App Role
 
 We want to use role-based security in our application. To create an app role, go to "App registrations" and select the application. Click on "App roles":
-![](image-7-1536x705-1-1024x470.png)
+![Microsoft Entra 'App roles' page listing the Administrator, User and msiam_access roles of the Test application](image-7-1536x705-1-1024x470.png)
 
 And create the app role. In this case, we will create an Administrator account. The value will be what you will get in the JWT token. I prefer to have the role names in uppercase.
-![](image-2-768x618-1.png)
+![Microsoft Entra 'Create app role' form with display name Administrator, value ADMIN and the role enabled](image-2-768x618-1.png)
 
 ### Assign Users
 
 Once you've created your application role, return to "Enterprise applications" and click "Users and groups." You can assign existing users or groups to the application roles:
-![](image-3-1024x483.png)
+![Microsoft Entra 'Add Assignment' page assigning one user to the Administrator role](image-3-1024x483.png)
 
 ### Create Client Secret
 
 To be able to connect to Entra from the application, we must create a client secret that allows our application to connect to Entra:
-![](image-4-1536x656-1-1024x437.png)
+![Microsoft Entra 'Certificates & secrets' page with no client secrets created yet and a 'New client secret' button](image-4-1536x656-1-1024x437.png)
 
 Make sure to copy the value of the client secret; we'll need that in the application configuration.
-![](image-5-1024x76.png)
+![Client secrets list showing the new secret 'Test' with its expiry date, truncated value and secret ID](image-5-1024x76.png)
 
 We also need to copy the ClientId and the TenantId. The ClientId (Application (client) ID) can be found on the App registration overview page (below), and the TenantId is located on the Entra overview page.
-![](image-6-1024x380.png)
+![Entra app registration overview showing the Application (client) ID and Directory (tenant) ID to copy](image-6-1024x380.png)
 
 ## Step 2: Configure OAuth2 with Entra in our Application
 

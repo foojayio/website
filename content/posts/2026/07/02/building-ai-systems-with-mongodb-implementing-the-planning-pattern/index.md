@@ -7,6 +7,7 @@ authors:
 image: "Technical_ACTION_Build1_Spot.jpg"
 categories:
   - "AI"
+  - "Mongo"
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"
@@ -52,22 +53,22 @@ The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-
 
 Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason–Act–Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
 
-{{< img src="foojay1.png" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
+{{< img src="foojay1.png" alt="Flowchart: a Planner LLM turns a complex goal into a JSON plan that a deterministic executor runs via two tools to produce output" class="size-full is-resized" width="394" height="465" style="width:432px;height:auto" >}}
 
 To illustrate this pattern, we will develop a travel itinerary assistant. Users may ask questions such as "Show me available cities to travel" or "Create a historical itinerary in Portugal." Rather than relying only on training data, the AI agent will access a MongoDB database of cities and attractions that reflects the offerings available at the travel agency. Based on the user's goal, the agent will select suitable tools, retrieve relevant information, and generate recommendations using real application data.
 
 The implementation uses [Jakarta EE](https://jakarta.ee/) as the application platform, [JSF](https://jakarta.ee/specifications/faces/) and [PrimeFaces](https://www.primefaces.org/) for the user interface, [LangChain4j](https://github.com/langchain4j/langchain4j) for AI integration and tool invocation, and MongoDB for data persistence. [Jakarta Data](https://github.com/jakartaee/data) and [Jakarta NoSQL](https://github.com/jakartaee/nosql) simplify database access by supporting repositories and domain models with minimal boilerplate. Together, these technologies create a practical environment for exploring AI agent collaboration with enterprise applications using the Planning Pattern.
-![](foojay2-1024x135.png)
+![Architecture diagram: JSF and PrimeFaces UI, AI layer with planning pattern, tool layer, application layer and MongoDB data layer](foojay2-1024x135.png)
 
 For example, when a user executes any question, this will be the flow that the application will follow:
-![](foojay3-1024x691.png)
+![Sequence diagram of the planning pattern: the AI travel agent plans, calls city and attraction tools backed by MongoDB, then builds a Portugal itinerary](foojay3-1024x691.png)
 
 ## Step 1: Generate the Project
 
 Begin by generating a new Jakarta EE project using the [Jakarta EE starter](https://start.jakarta.ee/). For this example, we will use Glassfish version 8.0.3.
 
 Select Jakarta EE 11 as the version, Platform as the profile, and Java 21 as the Java version. Refer to the image below for these options. After selecting them, click "Generate Project" to download your project.
-![](foojay4-1024x741.jpg)
+![Jakarta EE Starter form with Jakarta EE 11, Platform profile, Java SE 21, no runtime and a Generate Project button](foojay4-1024x741.jpg)
 
 Next, add the required libraries. Jakarta Data streamlines MongoDB integration with Java and supports the Java Enterprise standard. For AI integration, we will use langchain4j with CDI.
 

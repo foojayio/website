@@ -1,7 +1,6 @@
 ---
 title: "YOW! 2025"
 date: "2025-12-17T08:59:55+00:00"
-lastmod: "2026-09-21T05:59:35+00:00"
 description: "I have been eyeing the YOW! conferences for probably more than a decade. They occur in Australia, and feature top industry experts. I was thus overjoyed…"
 canonical: "https://blog.frankel.ch/yow-2025/"
 authors:

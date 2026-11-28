@@ -1,7 +1,6 @@
 ---
 title: "Java in Education: Combining Java with Raspberry Pi and the Pi4J Library"
 date: "2021-06-29T07:40:55+00:00"
-lastmod: "2021-12-10T12:59:17+00:00"
 description: "At the University of Applied Sciences and Arts Northwestern in Switzerland, theoretical subjects are combined with programming assignments."
 authors:
   - "frankdelporte"
@@ -34,9 +33,9 @@ This year two projects focused on the integration of Pi4J V2:
 The CrowPi is a platform that allows taking first steps in programming combined with hardware. The main goal of this project was to implement a library with examples and documentation which allows beginners to take their first steps in Java in a fun new way.
 
 {{< gallery cols="3" >}}
-crowpi-cables-1024x768.jpg
-crowpi1-1024x1024.jpg
-crowpi2-1024x890.jpg
+crowpi-cables-1024x768.jpg | | CrowPi kit opened, showing a Raspberry Pi with red circles marking the HDMI, ribbon cable and USB connections
+crowpi1-1024x1024.jpg | | Open CrowPi suitcase kit with Raspberry Pi logo on the display and sensor board with buttons and LCD
+crowpi2-1024x890.jpg | | Two CrowPi laptop-style kits, one with a keyboard detached to show the electronics board and a 'Learning' screen
 {{< /gallery >}}
 
 The full documentation and example code is provided [on the Pi4J website](https://pi4j.com/getting-started/crowpi/).
@@ -46,9 +45,9 @@ The full documentation and example code is provided [on the Pi4J website](https:
 The second project started from [the Snake FXLG game which was already handled here on Foojay](https://foojay.io/today/creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions/) and got further extended and was used to compare the rendering speed with different JavaFX versions and startup arguments.
 
 {{< gallery cols="3" >}}
-arcade_parts_kit-1024x683.jpg
-assembled_closeup-1024x567.jpg
-assembled-1024x768.jpg
+arcade_parts_kit-1024x683.jpg | | Arcade parts kit with colored push buttons, a joystick and connecting cables
+assembled_closeup-1024x567.jpg | | Close-up of a Picade board attached to a Raspberry Pi, with button cables plugged into labeled pins
+assembled-1024x768.jpg | | Assembled arcade controller: joystick, colored buttons and cables connected to a Picade board on a Raspberry Pi
 {{< /gallery >}}
 
 ## Interviews with Barbara Scheuner and Dieter Holz
@@ -60,8 +59,8 @@ To me, it seems obvious that Java is also a perfect language when you start lear
 **Dr. Dieter Holz** is Lecturer and a software developer with more than 40 years of experience. He co-founded Canoo, a Software-Boutique based in Basel, Switzerland (now known as Karakun) where he was the colleague of several Java-Champions. For 9 years he teaches at FHNW Java and JavaFX in the context of real-world business applications, and - since last year - Kotlin and Jetpack Compose for native Android-Apps.
 
 {{< gallery cols="2" >}}
-Scheuner-Barbara-27.07.2020-02-2-1024x1024.jpg
-dieter-holz.jpg
+Scheuner-Barbara-27.07.2020-02-2-1024x1024.jpg | | Portrait of Barbara Scheuner, smiling with shoulder-length hair and a dark blazer
+dieter-holz.jpg | | Dieter Holz in a face mask, holding a mug with a JavaFX logo
 {{< /gallery >}}
 
 ***Thanks for sharing your story with us! Can you describe the FHNW University and the IT-related programs?***
@@ -87,10 +86,10 @@ In 2019 we started to do projects around Java and the Raspberry Pi, as Java is t
 **B. Scheuner:**The new customers are lecturers of our school that wanted to have a physical representation of a non-physical theory or a game to learn about a certain theory. In the first year, we had a lot of projects on theoretical computer science problems as shortest path, knapsack, and touring machine. The shortest path project was the only one that has been finished as we had to stop due to Corona. There the students have connected about 20 RGB-LEDs and magnetic switches to illustrate the problem with a map and a fire station. The user then had to find the shortest path between his fire station and a fire, represented by a red led-light. The main pity for us was that they finished it with Python. So we had to improve on the connection of Java and the Pi.
 
 {{< gallery cols="3" >}}
-20200226_130723-1024x498.jpg
-20210112_110652-1024x498.jpg
-20210112_110706-1024x498.jpg
-20210112_110716-1024x498.jpg
+20200226_130723-1024x498.jpg | | Wooden 'Turing Machine' game box with a screen, LED strips and colored buttons
+20210112_110652-1024x498.jpg | | Wooden game board with laser-cut paths and holes, with small black and red parts and a USB cable beside it
+20210112_110706-1024x498.jpg | | Underside of the wooden game board showing holes with sensor parts mounted behind them
+20210112_110716-1024x498.jpg | | Tangle of colored servo cables connected to a Raspberry Pi with an expansion board inside a wooden frame
 {{< /gallery >}}
 
 **D. Holz:** Another example project is ["GPIOSimulator" (2020)](https://github.com/FHNW-IP5-IP6/GPIOSimulator) which contains component classes for using sensors and actuators in Java with the Raspberry Pi. Additionally, it has a rich tutorial to support new developers to try Java for their [GPIO Raspberry Pi projects](https://github.com/FHNW-IP5-IP6/GPIOSimulator/blob/dev/docs/Tutorial.adoc). It supports full compatibility with the [Grove Base Hat, Sensors,](https://wiki.seeedstudio.com/Grove/) and Actuators and contains a sample project that shows how the components can work together.  

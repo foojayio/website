@@ -44,7 +44,7 @@ For this tutorial, you'll need:
 Retrieval-Augmented Generation (RAG) is an architectural approach that merges a sizable Language Model with external information retrieved at runtime. Rather than depending solely on static knowledge from model training, the application searches organizational documents and data sources for relevant information and incorporates it into the prompt before generating a response. This approach is valuable for businesses that have extensive internal knowledge but struggle to make it accessible, up to date, and useful across applications and teams.
 
 Vector databases aid this process by storing text as numerical representations known as embeddings. Unlike classic lexical indexes that search for exact words or phrases, vector indexes retrieve information based on semantic context and meaning. For example, a query about "working from home" can locate documents mentioning "remote work," even if the exact words differ. MongoDB Atlas supports this architecture by allowing application data, document content, metadata, and embeddings to remain on a single platform. This enables Java applications to combine operational queries, contextual filtering, and semantic retrieval when building effective RAG solutions.
-![](fri1.png)
+![Sequence diagram of RAG: the user's question goes to the app, MongoDB Atlas vector search returns context, and the LLM generates a grounded answer](fri1.png)
 
 ## Step 1: Generate the Project
 

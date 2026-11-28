@@ -1,7 +1,6 @@
 ---
 title: "Tips for reading code"
 date: "2024-03-26T11:46:58+00:00"
-lastmod: "2024-03-26T11:46:59+00:00"
 description: "As developers, we read code more than we write it. When reading code inside the IDE, IntelliJ IDEA helps us to read and understand code by providing helpful features."
 canonical: "https://maritvandijk.com/tips-reading-code/"
 authors:
@@ -11,7 +10,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "IntelliJ IDEA"
-  - "Java"
   - "Testing"
 related_posts:
   - "explore-project-structure-with-intellij-ideas-dependency-matrix"
@@ -43,10 +41,10 @@ Note that we can still search the code when it is collapsed, and if needed the r
 *Search Collapsed Code*
 
 Alternatively, we can look at the **File Structure** for a file using **⌘ F12** on macOS or **Ctrl+F12** on Windows/Linux. We can navigate to the section of the code we're interested in from here.
-![](FileStructure-1024x576.jpg) *File Structure*
+![IntelliJ IDEA 'File Structure' popup listing the methods and fields of OrderService.java, opened with Cmd/Ctrl+F12](FileStructure-1024x576.jpg) *File Structure*
 
 We can get the same information by opening the **Structure** tool window, using **⌘ 7** on macOS or **Alt+7** on Windows/Linux.
-![](StructureToolWindow-1024x576.jpg) *Structure tool window*
+![IntelliJ IDEA Structure tool window showing OrderService's members beside the editor, opened with Cmd+7 or Alt+7](StructureToolWindow-1024x576.jpg) *Structure tool window*
 
 ## **Searching**
 
@@ -79,7 +77,7 @@ To understand intended behavior of the code, we can look at the tests in the cod
 We can run a test (or our application) through the debugger to actually see how the code is executed. First, we need to place a breakpoint at the location in the code we're interested in. Click the gutter next to the line of code where you want to place the breakpoint, or use **⌘ F8** on macOS or **Ctrl+F8** on Windows/Linux to toggle the breakpoint.
 
 Next, we run our test (or application) using the **Debug** option. Execution will stop at the breakpoint, so we can investigate the state of our application. Once code execution stops at the breakpoint, we can see current values of variables and objects.
-![](Debug-1024x576.jpg) *Debug information*
+![IntelliJ IDEA debugger paused at a breakpoint in registerOrder, with the test open alongside and variables listed below](Debug-1024x576.jpg) *Debug information*
 
 We can also evaluate an expression, to see its current value and look at more details. We can even change the expressions to evaluate different results.
 *Evaluate Expression*

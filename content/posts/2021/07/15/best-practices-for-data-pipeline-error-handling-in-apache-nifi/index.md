@@ -1,7 +1,6 @@
 ---
 title: "Best Practices for Data Pipeline Error Handling in Apache NiFi"
 date: "2021-07-15T05:25:32+00:00"
-lastmod: "2021-11-14T19:22:22+00:00"
 description: "Actionable strategies for error management modeling in Apache NiFi data pipelines, and understand the benefits of planning for error handling."
 canonical: "https://dzone.com/articles/best-practices-for-data-pipeline-error-handling-in"
 authors:
@@ -64,7 +63,7 @@ Most problems become a bit more manageable (and far less stressful) by applying 
 2. **Internal:** these problems originate within our NiFi model and thus have the potential of being predicted and controlled.
 
 Each NiFi sub-process consists of incoming and outgoing data and the intermediate processes.
-![](14772497-data-process.png)
+![Simple diagram of a process box with data going in and data coming out](14772497-data-process.png)
 
 Considering the inbound data for a moment, we can immediately identify two potential realms where issues can arise:
 
@@ -84,7 +83,7 @@ To see how to do this analysis, we will consider four possible strategies: one e
 External sources are outside our control. Therefore, we neither know the root cause of the problem nor can we try to solve it. As a result, the best approach is to ask the source if it is back to normal or not. We will call this the retry approach.
 
 An example would be when our model receives information from a database or data API service located on the cloud, such as [DataStax Astra DB](https://dtsx.io/3wcjyor) (which is powered by Cassandra), and suddenly we face an interrupted Internet connection. A self-solving strategy could involve using a retry, such as it is shown in the figure below:
-![](14772500-querycassandra-1024x487.jpg)
+![Apache NiFi QueryCassandra processor with success, retry and failure connections, each with an empty queue](14772500-querycassandra-1024x487.jpg)
 
 *Simple retry in Apache NiFi.*
 
@@ -95,17 +94,17 @@ Another way could be to create a counter, initialize it to one and then try the 
 Apache NiFi provides a mechanism to manage data flow named back pressure. It consists of two thresholds, which define the maximum amount of data allowed to queue in the connector. This allows Apache NiFi to avoid data and memory overload.
 
 Back pressure is defined through two different values namely, "Back Pressure Object Threshold" and "Size Threshold". The first indicates the maximum number of FlowFiles that can be in the queue before back pressure activates. The second specifies the maximum amount of data (size) that can be queued before back pressure is applied. Both values can be set from the connector's settings section. The default values are 10000 objects and 1 GB respectively and are defined in the nifi.properties configuration file.
-![](14772502-configure-connection-1024x705.png)
+![NiFi Configure Connection dialog with the back pressure object threshold of 10000 and size threshold of 1 GB highlighted](14772502-configure-connection-1024x705.png)
 
 *Configuring back pressure in nifi.properties visual editor.*
 
 However, the back pressure threshold is a flexible setting. This means that, for example, if we defined the object threshold as 10000, and the queue has 9000 objects and receives 2000; it will accept these objects reaching a value of 11000 and activate the back pressure mechanism. Once the queue releases enough messages to be below the object threshold, the connector will continue to accept more FlowFiles from the source processor.
 
 Another tool complementing back pressure is "Back Pressure Prediction". This function allows the system administrator to monitor the queue manually. By default, this function is not activated. To do so, we must set up to "true" the [analytics framework](https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#analytics_framework) in the [nifi.properties](https://docs.cloudera.com/HDPDocuments/HDF3/HDF-3.5.2/nifi-system-properties/content/analytics_properties.html) configuration file.
-![](14772503-back-pressure-prediction-1024x138.png)
+![NiFi properties file with analytics prediction enabled and the OrdinaryLeastSquares model implementation highlighted](14772503-back-pressure-prediction-1024x138.png)
 
 In order to monitor the queue, we must hover over the scroll line on the connector. We will see two important values: predicted queue and estimated time to back pressure. The first value gives the estimated percentage use of the queue and the second the predicted time to back pressure activation. The figure below shows an example where random files are generated and the queue reaches the object threshold of 10000.
-![](14772514-queue.jpg)
+![NiFi flow GenerateFlowFile to LogAttribute with a full queue of 10,003 and a tooltip showing 100% full and back pressure now](14772514-queue.jpg)
 
 *Back pressure queue monitoring in Apache NiFi.*
 
@@ -126,7 +125,7 @@ In this case, we can design a strategy that takes a different decision according
 * **Incomplete:** data is not allowed to continue the normal process and it is requested again.
 
 In Apache NiFi, this could be modeled using a set of components similar to the ones shown in the figure below. JSON data is evaluated according to certain criteria (e.g. is not null) defined using [Apache NiFi Expression Language](https://nifi.apache.org/docs/nifi-docs/html/expression-language-guide.html), and then diverted to different actions (LogAttribute in the example in the figure below) according to the result of the evaluation.
-![](14772521-evaluate-json-path.png)
+![NiFi flow with EvaluateJsonPath routing matched, unmatched and failure relationships to separate LogAttribute processors](14772521-evaluate-json-path.png)
 
 *Filtering JSON data with Apache NiFi.*
 
@@ -135,7 +134,7 @@ In Apache NiFi, this could be modeled using a set of components similar to the o
 ### Error Handling Strategy 4: Manual Intervention Required!
 
 Some problems just need our intervention, no way around it. An example would be an outdated setting in one of the Apache NiFi pipeline's processors. As such, the best solution is to alert your team and store the error information and data involved in a log, so you can proceed to solve the problem immediately. Issue tracking workflow automation via an issue tracker using [NiFi HTTP processors](https://ddewaele.github.io/http-communication-with-apache-nifi/) can be very helpful here, as can considering integration to Slack or PagerDuty for critical escalations.
-![](14774005-screen-shot-2021-05-19-at-34942-pm-min.png)
+![NiFi canvas with a QueryCassandra processor showing error bulletins that no Cassandra host could be reached](14774005-screen-shot-2021-05-19-at-34942-pm-min.png)
 
 Logging errors for manual intervention with Apache Nifi
 

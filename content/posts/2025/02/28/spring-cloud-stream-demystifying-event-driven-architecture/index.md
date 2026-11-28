@@ -8,7 +8,6 @@ image: "spring-cloud-stream-event-driven.webp"
 categories:
   - "Apache Pulsar"
   - "Cloud"
-  - "Java"
   - "Kafka"
   - "Microservices"
   - "Spring"

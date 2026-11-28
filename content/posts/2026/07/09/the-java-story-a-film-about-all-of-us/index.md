@@ -1,7 +1,6 @@
 ---
 title: "The Java Story: A Film About All of Us"
 date: "2026-07-09T08:43:59+00:00"
-lastmod: "2026-07-09T13:32:00+00:00"
 description: "The official Java documentary premieres July 17 on YouTube. Watch the trailer, meet the guests, and join the live chat with James Gosling."
 authors:
   - "dominika-tasarz"
@@ -9,7 +8,6 @@ image: "Java-Documentary-snap.jpg"
 categories:
   - "Apache Tomcat"
   - "Jakarta EE"
-  - "Java"
   - "JUGs"
   - "Videos"
 related_posts:
@@ -42,4 +40,4 @@ If you have time to take part in the live online premiere, here are a few practi
 
 If Java, OpenJDK or Jakarta EE has been part of your career (as you're reading this on Foojay, it probably has 😉 ) - take some time on July 17th if you're around, to watch this with the rest of us. Set your reminder, show up for the live chat and share it with the developers who came up through this same community. Stories like this don't get told very often and - as Java Community - this one's about all of us.  
 
-[![](Java-Documentary-snap-1024x615.jpg)](https://www.youtube.com/watch?v=ZqGSg4b_cZA)
+[![Video still from The Java Story documentary trailer: a smiling bearded man with crossed arms in a home office, with the live premiere title below](Java-Documentary-snap-1024x615.jpg)](https://www.youtube.com/watch?v=ZqGSg4b_cZA)

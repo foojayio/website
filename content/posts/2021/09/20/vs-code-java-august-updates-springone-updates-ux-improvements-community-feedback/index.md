@@ -1,7 +1,6 @@
 ---
 title: "VS Code: SpringOne Updates, UX Improvements, Community Feedback"
 date: "2021-09-20T06:46:49+00:00"
-lastmod: "2021-09-23T07:02:45+00:00"
 description: "Let's share some exciting updates from the SpringOne 2021 conference, as well as various user experience improvements!"
 authors:
   - "nick-zhu"
@@ -28,7 +27,7 @@ When it comes to Java development, we always keep Spring developers in mind. In 
 
 We are excited to share that Spring framework is fully supported on [GitHub Codespaces](https://aka.ms/Bootiful-Tools "GitHub Codespaces") via partnership with VMWare. This means developers can develop a Spring application seamlessly in a browser-based environment without installing anything on the local machine. Here is a quick demo of starting a Spring Boot application on Codespaces.
 
-![](Spring-Boot.webp)
+![VS Code in a GitHub Codespace showing the Spring PetClinic project, with PetClinicApplication.java open and a terminal below](Spring-Boot.webp)
 
 We had a full demo-focused session at SpringOne to talk about Spring on GitHub Codespaces. If you are interested in this session, [follow the link](https://aka.ms/Bootiful-Tools "follow the link") here to watch the whole recording.
 
@@ -52,7 +51,7 @@ To address this, we have added a new setting that allows developer to customize 
 * Open - Visual Studio Code will directly open the newly created project
 * Add to Workspace - Visual Studio Code will add this project to the current workspace
 
-![](mavenprojectopen.png)
+![VS Code settings page for 'Maven: Project Open Behavior', with a dropdown offering Interactive, Open and Add to Workspace](mavenprojectopen.png)
 
 ## New Java File Creation
 
@@ -60,7 +59,7 @@ To address this, we have added a new setting that allows developer to customize 
 
 In the "File" menu of Visual Studio Code, you will see a new option called "New File..." (Note the extra dots at the end). When you click on this, Visual Studio Code will prompt you to select the type of file to add. If you select "New Java class" from the dropdown, Visual Studio Code will generate the basic Java class snippet for you and you can then also pick type of Java file (Class/Interface/Enum/etc). Here is a quick demonstration of the feature.
 
-![](New-File.webp)
+![VS Code showing a Maven demo project with App.java open and the Explorer, Maven and Java Projects views](New-File.webp)
 
 ## Community Feedback
 

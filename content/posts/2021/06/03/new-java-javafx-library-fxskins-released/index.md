@@ -1,7 +1,6 @@
 ---
 title: "New Java/JavaFX Library FXSkins Released"
 date: "2021-06-03T14:02:47+00:00"
-lastmod: "2021-06-03T14:02:48+00:00"
 description: "FXSkins is a collection of new Skins for existing JavaFX controls, adding more functionality to the controls used in your applications."
 authors:
   - "pedro-vieira"

@@ -1,7 +1,6 @@
 ---
 title: "OpenTelemetry Tracing on Spring Boot, Java Agent vs. Micrometer Tracing"
 date: "2024-08-22T08:34:57+00:00"
-lastmod: "2024-08-22T08:34:58+00:00"
 description: "Let's compare three different ways to do OpenTelemtry Tracing: Java agent v1, Java agent v2, and Micrometer Tracing."
 canonical: "https://blog.frankel.ch/opentelemetry-tracing-spring-boot/"
 authors:
@@ -211,7 +210,7 @@ fun intermediate() {
 
 It yields the expected new `intermediate()` trace:
 
-![](trace-agent-1x-custom.png)
+![Jaeger trace for the agent-1x app with nested spans, including the custom intermediate() span, taking about 270 ms in total.](trace-agent-1x-custom.png)
 
 ## OpenTelemetry Agent v2
 

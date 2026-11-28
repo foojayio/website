@@ -1,7 +1,6 @@
 ---
 title: "JTest: Roll Out Your Own JUnit-Like Testing Framework"
 date: "2023-01-17T16:11:50+00:00"
-lastmod: "2023-01-17T16:12:45+00:00"
 description: "In this interactive tutorial and educational project, you'll learn about JUnit internals and the usage of Java annotations and reflection."
 authors:
   - "wei-lin"

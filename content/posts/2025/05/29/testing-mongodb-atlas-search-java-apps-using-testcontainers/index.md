@@ -1,7 +1,6 @@
 ---
 title: "Testing MongoDB Atlas Search Java Apps Using TestContainers"
 date: "2025-05-29T18:07:27+00:00"
-lastmod: "2025-05-29T18:08:18+00:00"
 description: "A few examples of how you can use the awesome TestContainers projects to enhance testing of your MongoDB Atlas Search Java apps."
 authors:
   - "luke-thompson"
@@ -36,7 +35,7 @@ Mongot has two responsibilities:
 * First, it follows the change stream of any collection you choose to index and builds Lucene indexes asynchronously.
 * Second, when you run the $search aggregation stage in a MongoDB query, mongot will be invoked to perform a Lucene query on the index and return a stream of document ids for further processing and data retrieval.
 
-![](AD_4nXdH3ab-XATCrN5-LLJCvpbECaU-yIa91oAv-b11f2b07.jpg)
+![Diagram: MongoD forwards queries to MongoT, which follows changes and builds the Apache Lucene index](AD_4nXdH3ab-XATCrN5-LLJCvpbECaU-yIa91oAv-b11f2b07.jpg)
 
 Lucene and MongoDB Atlas Search support many index types which are very different to the excellent, efficient, and super-fast [b-tree based MongoDB indexes](https://www.mongodb.com/docs/manual/indexes/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant#details).
 
@@ -582,7 +581,7 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
 ### Loading a *mongodump* BSON database and index
 
 Let's create some seed data and MongoDB Atlas Search indexes, which we'll store in a resource directory /seed-data.
-![](AD_4nXdlQGT-Gx9KjXh62fBIazUC4WwMXa3Ti-NV-6b33b0f0.png)
+![IDE project tree: resources/seed-data/dump/examples holding person.bson.gz, person.metadata.json.gz and person_search.json](AD_4nXdlQGT-Gx9KjXh62fBIazUC4WwMXa3Ti-NV-6b33b0f0.png)
 
 I've built a little test dataset of 15,000 Person documents in MongoDB and used mongodump to export it. Just for fun, I used a [local LLM](https://github.com/luketn/generate-person-data) to generate it.
 

@@ -1,13 +1,11 @@
 ---
 title: "Hot Class Reload in Java: A Webpack HMR-Like Experience"
 date: "2024-11-19T15:57:59+00:00"
-lastmod: "2024-11-19T15:58:02+00:00"
 description: "Hot Class Reload in Java offers a powerful way to enhance development productivity by reducing the need for full application restarts."
 authors:
   - "mohibul-chowdhury"
 image: "image_2024-10-03_111134341_fwi3rh.png"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"

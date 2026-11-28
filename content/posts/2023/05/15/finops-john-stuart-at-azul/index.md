@@ -1,7 +1,6 @@
 ---
 title: "FinOps: John Stuart at Azul"
 date: "2023-05-15T06:11:11+00:00"
-lastmod: "2023-05-22T14:04:36+00:00"
 description: "\"Wouldn’t it be great to use a Java Virtual Machine (JVM) to be 30% more performant? That is a win for both Engineering and Finance.\""
 authors:
   - "geertjan-wielenga"

@@ -1,7 +1,6 @@
 ---
 title: "Deep Learning in Java for Drug Discovery"
 date: "2021-08-20T09:28:10+00:00"
-lastmod: "2023-07-11T09:40:33+00:00"
 description: "Tremendous potential for Deep Netts in the drug discovery pipeline and it is necessary to share its existence with the scientific community!"
 canonical: "https://www.linkedin.com/pulse/deep-learning-drug-discovery-new-frontier-oscar-bastidas/"
 authors:
@@ -40,12 +39,12 @@ Presently, I am doing ongoing work analyzing such data for an HTS screen that se
 ## Java and Deep Netts as Data-Analytics Engine
 
 The data-analytics engine that has proven extremely useful for this endeavour is [Deep Netts](https://www.deepnetts.com/)®, a deep learning suite written in Java, with the help of Apache NetBeans for its infrastructure and JFreeChart for graphing, which has the benefit of running purely off of the Java Virtual Machine (JVM) without the hassle of relying on native libraries, which can make obtaining deep learning software for unique hardware architectures and operating systems next to impossible, a consideration rendered moot by Deep Nett's® complete harmony with the JVM:
-![](DeepNettsManyWindows-1024x550.png)
+![DeepNetts platform window with a falling total network error graph, a network architecture of layers and a training log](DeepNettsManyWindows-1024x550.png)
 
 In addition to architecture independence, Deep Netts® has also afforded my research the flexibility of finetuning the hyperparameters that best suit the nature of the data in order to maximize model prediction accuracy.
 
 This is especially useful since documenting hyperparameter values can provide valuable insight into the computational conditions most appropriate for a given experimental method, in this case, HTS. A tantalizing research question would be to investigate if hyperparameter values depend on the experimental phenomena probed for a given protein if the specific experimental physics that yields the data changes, while the protein and molecular candidates don't.
-![](Code_screen_shot-1-1024x640.jpg)
+![Java code of a Deep Netts classifier viewed in a text editor on a phone, loading CSV data and building a neural network](Code_screen_shot-1-1024x640.jpg)
 
 ## Freedom from Quantitative Structure Activity Relationship Input
 

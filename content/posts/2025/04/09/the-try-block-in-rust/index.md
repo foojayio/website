@@ -1,7 +1,6 @@
 ---
 title: "The try block in Rust"
 date: "2025-04-09T12:37:58+00:00"
-lastmod: "2025-04-09T12:37:59+00:00"
 description: "I wrote previously about libs for error management in Rust. This week, I want to write about the try block, an experimental feature."
 canonical: "https://blog.frankel.ch/try-block-rust/"
 authors:
@@ -117,7 +116,7 @@ fn add(str1: &str, str2: &str) -> i8 {
 1. The compiler cannot infer the type
 2. Using `?` on `Result` inside the `try` block is now allowed
 
-![](try-api.png)
+![UML diagram: the Try trait extends FromResidual and is implemented by Result and Option, returning ControlFlow](try-api.png)
 
 ## Conclusion
 

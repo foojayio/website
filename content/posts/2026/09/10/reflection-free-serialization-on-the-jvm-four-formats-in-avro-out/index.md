@@ -7,7 +7,6 @@ authors:
 image: "avro-out.jpg"
 categories:
   - "Data Engineering"
-  - "Java"
   - "Kotlin"
 related_posts:
   - "writing-a-data-orchestrator-in-java"

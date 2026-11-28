@@ -1,7 +1,6 @@
 ---
 title: "SQL vs. NoSQL: Pros & Cons"
 date: "2022-04-21T09:28:50+00:00"
-lastmod: "2022-05-29T10:46:39+00:00"
 description: "What’s the best way to store, protect and access your data? This is a fundamental, yet critical decision. Let's look at the key criteria."
 canonical: "https://datastax.medium.com/sql-versus-nosql-the-pros-and-cons-488d4a7ba92f"
 authors:
@@ -36,7 +35,7 @@ For most companies, the choice comes down to SQL and NoSQL databases. Each has u
 They're extremely flexible and easy for developers to work with and modify. [Learn more about SQL and NoSQL databases and their basic differences](https://www.datastax.com/what-is/nosql).
 
 The best choice? Well, it depends on a whole slew of factors, including your querying, availability, and compliance needs, along with your variety of data types and expected growth.
-![](1_OkGvKyO6khIijmQzh-c8xQ.png) SQL vs. NoSQL comparison chart
+![Table comparing pros and cons of SQL and NoSQL databases](1_OkGvKyO6khIijmQzh-c8xQ.png) SQL vs. NoSQL comparison chart
 
 Let's take a close look at the pros and cons of SQL vs. NoSQL to help you make the right choice.
 

@@ -1,7 +1,6 @@
 ---
 title: "DevOps 101 Part II: Introduction to Container Registries"
 date: "2021-03-17T08:58:35+00:00"
-lastmod: "2021-03-17T08:59:33+00:00"
 description: "I’m covering tools and terminology common to DevOps, plus the occasional newbie-friendly tutorial for emerging or established technologies."
 authors:
   - "kat-cosgrove"

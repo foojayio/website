@@ -1,7 +1,6 @@
 ---
 title: "FP in Kotlin: Defining a Pipe Operator"
 date: "2023-06-02T15:18:13+00:00"
-lastmod: "2023-06-02T15:18:50+00:00"
 description: "There's no support for the pipe operator |> in Kotlin, so we have to come up with a custom and clean implementation for this function."
 authors:
   - "tobias-briones"

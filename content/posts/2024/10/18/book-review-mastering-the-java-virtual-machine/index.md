@@ -1,7 +1,6 @@
 ---
 title: "Book Review: Mastering the Java Virtual Machine"
 date: "2024-10-18T13:54:49+00:00"
-lastmod: "2024-10-18T13:54:50+00:00"
 description: "Discover the bleak of beauty of Java Virtual Machine (JVM) which provides greater insights for Java Developers, packed with intriguing topics."
 authors:
   - "mahendra1413"
@@ -11,7 +10,6 @@ categories:
   - "Books"
   - "Eclipse"
   - "IntelliJ IDEA"
-  - "Java"
   - "Java Beginner"
   - "Java Core"
   - "JDK21"

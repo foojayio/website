@@ -1,7 +1,6 @@
 ---
 title: "New Book Review: Seriously Good Software"
 date: "2021-07-22T07:17:33+00:00"
-lastmod: "2021-09-04T07:45:39+00:00"
 description: "This is another book that I can warmly recommend to Java programmers who have learned to code and strive to code well!"
 authors:
   - "cay-horstmann"
@@ -14,8 +13,6 @@ related_posts:
   - "book-review-java-by-comparison"
   - "new-to-java-some-resources"
 ---
-
-![Cover](Faella-SGS-HI-8fd9184e.jpeg)
 
 I recently [reviewed the book "Java by Comparison"](/today/book-review-java-by-comparison/) by Simon Harrer, Jörg Lenhard, and Linus Dietz. That book is intended for programmers who know the basics of the Java language, perhaps from a university curriculum. The book teaches programmers to improve their Java language and library usage through seventy "before and after" examples, covering topics such as coding style, naming, exceptions, streams, and class design.
 

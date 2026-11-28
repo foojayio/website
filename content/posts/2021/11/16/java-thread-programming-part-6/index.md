@@ -1,7 +1,6 @@
 ---
 title: "Java Thread Programming (Part 6)"
 date: "2021-11-16T15:02:53+00:00"
-lastmod: "2021-11-16T15:11:51+00:00"
 description: "Have you ever wondered what is the purpose of the \"wait()\", \"notify()\", \"notifyAll()\" methods that come with each Java object?"
 authors:
   - "bazlur-rahman"
@@ -61,7 +60,7 @@ So the takeaway is, a thread goes through a multiple-stage of its life.
 * **Timed waiting state**: this is the same as the waiting state, only it waits for a given period. And then it goes to runnel state again. Usually, when put a thread in sleep, it goes to the timed waiting state. However, there is a difference between sleep and waiting. In the sleeping state, the thread doesn't release the lock but the waiting state does. We can discuss this sort of difference later.
 * **Terminated state**: When a thread is done with its work, mainly work leaves from the run method, the thread goes to the terminated state.
 
-![](thread-lifecycle-700x379.png)
+![Thread lifecycle state diagram: new thread, runnable, and not-runnable states (sleeping, waiting, blocked) until the thread dies](thread-lifecycle-700x379.png)
 
 Now that we know the lifecycle of a thread, we can put a thread into a waiting state. In java, any object can be used as a lock, and each object has a wait method associated with it.
 

@@ -7,15 +7,13 @@ authors:
   - "shai-almog"
 image: "skills-java17-and-theme-accents.jpg"
 categories:
-  - "Java"
+  - "Codename One"
 related_posts:
   - "liquid-glass-material-3-and-a-lot-of-plumbing"
   - "metal-and-skins"
   - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
   - "production-horrors-handling-disasters-public-debrief"
 ---
-
-![Skills, Java 17, And Theme Accents](skills-java17-and-theme-accents.jpg)
 
 Last week was about Metal and the Skin Designer. This week the headline items are about what a brand new project looks like when you generate it: the default JDK is Java 17, and every generated project ships with an `AGENTS.md` authoring skill that lets any modern AI agent work on the project intelligently. There are also some other things worth covering: a runtime accent palette on the new native themes, three Metal follow-ups (one of which introduces a new matrix-correct translate API), the JDK 11+ String API gap closed, and iOS push permission that no longer fires at app launch.
 

@@ -8,7 +8,7 @@
 # overwritten the next time either runs.
 #
 # To add, fix, or remove a Java Champion, edit java-champions.yml directly
-# upstream instead: https://github.com/aalmiray/java-champions/edit/main/java-champions.yml
+# upstream instead: https://github.com/aalmiray/java-champions/blob/main/java-champions.yml
 #
 # latitude/longitude drive the world map on /java-champions/. They are the
 # champion's CITY (or country, for the ones recording no city) -- not an

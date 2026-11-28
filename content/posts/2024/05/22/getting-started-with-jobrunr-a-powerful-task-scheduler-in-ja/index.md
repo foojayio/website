@@ -1,7 +1,6 @@
 ---
 title: "Task scheduler in Java: background job processing with JobRunr"
 date: "2024-05-22T11:05:04+00:00"
-lastmod: "2026-04-20T10:32:30+00:00"
 description: "Task scheduler in Java - JobRunr, a powerful java background job processing library. Learn how to enqueue tasks and schedule recurring tasks."
 authors:
   - "donata-petkeviciute"
@@ -9,7 +8,6 @@ authors:
   - "ronald-dehuysser"
 image: "2020-04-23-jobrunr-gets-jobs-done.webp"
 categories:
-  - "Java"
   - "Spring"
   - "Tools"
   - "Tutorials"

@@ -1,7 +1,6 @@
 ---
 title: "Build a Status Dashboard Using Spring Boot and Astra DB"
 date: "2021-12-17T09:28:19+00:00"
-lastmod: "2022-09-22T17:21:14+00:00"
 description: "Learn how to leverage the Astra Document API on top of Cassandra to build a dashboard of statuses, with Spring Boot for rendering. …"
 canonical: "https://www.baeldung.com/cassandra-astra-stargate-dashboard"
 authors:
@@ -83,14 +82,14 @@ This article is focused on the *statuses* collection, and accessing it using the
 ## **How to Set Up DataStax Astra**
 
 Before we can start our application, we need a store for our data. We are going to use the Cassandra offering from DataStax Astra. **To get started, we need to [register a free account with Astra](https://astra.dev/3BJ1lmW) and create a new database.** This needs to be given a reasonable name for both the database and the keyspace within:
-![](db-setup-1024x582.jpg)
+![DataStax Astra 'Create a Database' form with database name baeldung-avengers, keyspace avengers and AWS US East region](db-setup-1024x582.jpg)
 
 (Note – screens are accurate at the time of publication but might have changed since)
 
 **This will take a few minutes to set up. Once this is done, we will need to create an access token.**
 
 In order to do this, we need to visit the "Settings" tab for the newly created database and generate a token:
-![](db-token.png)
+![DataStax Astra database Settings tab with the Application Tokens section and a 'Generate Token' button for the API R/W User role](db-token.png)
 
 Once all of this is done, we will also need our database details. This includes:
 
@@ -107,7 +106,7 @@ Finally, we need some data. For the purposes of this article, we are using some 
 We are going to create our new application using [Spring Initializr](https://start.spring.io/); **we're also going to use Java 16 – allowing us to use [Records](https://www.baeldung.com/java-record-keyword).** This in turn means we need Spring Boot 2.5 – currently this means 2.5.0-M3.
 
 In addition, we need Spring Web and Thymeleaf as dependencies:
-![](spring-initaliz-avengers.png)
+![Spring Initializr with Maven, Java 16, Spring Boot 2.5.0 and Spring Web and Thymeleaf dependencies for the avengers-dashboard](spring-initaliz-avengers.png)
 
 Once this is ready, we can download and unzip it somewhere and we are ready to build our application.
 
@@ -299,7 +298,7 @@ And this makes use of another nested template, under "common/status.html", to di
 ```
 
 This makes use of [Bootstrap](https://getbootstrap.com/) to format up our page, and displays one card for each Avenger, coloured based on the status and displaying the current details of that Avenger:
-![](avengers-dashboard.png)
+![Avengers Status Dashboard web page with colored cards for each Avenger showing name, location and status](avengers-dashboard.png)
 
 ## Status Updates**via the Document API**
 

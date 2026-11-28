@@ -1,7 +1,6 @@
 ---
 title: "Containerizing Spring Boot Applications with Jib"
 date: "2020-12-29T19:29:08+00:00"
-lastmod: "2021-08-23T12:44:39+00:00"
 description: "How to create Docker or OCI compliant images, without installing Docker clients and without using Dockerfiles, for Spring Boot applications."
 canonical: "https://ashishtechmill.com/containerizing-spring-boot-application-with-jib"
 authors:
@@ -195,7 +194,7 @@ mvn compile jib:build
 
 We have successfully pushed the image(image name:spring-boot-jib-image) to a docker registry. Now we can run the image using docker.  
 
-{{< img src="Screenshot-2020-12-28-at-11.41.02-PM-700x147.png" class="size-medium" width="700" height="147" >}}
+{{< img src="Screenshot-2020-12-28-at-11.41.02-PM-700x147.png" alt="Terminal output of docker run for spring-boot-jib-image showing the Spring Boot banner and Tomcat starting on port 8080" class="size-medium" width="700" height="147" >}}
 
 As you can see that our application is running inside a container. Now just run the curl command, and you can see that we got a hello message from our containerized spring-boot application.
 

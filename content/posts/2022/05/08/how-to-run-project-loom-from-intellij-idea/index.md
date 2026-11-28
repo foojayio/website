@@ -1,7 +1,6 @@
 ---
 title: "How to enable java preview feature and run code from IntelliJ IDEA"
 date: "2022-05-08T10:07:50+00:00"
-lastmod: "2022-05-10T16:46:57+00:00"
 description: "JEP 425: Virtual Threads (Preview) has been proposed recently. I wanted to give it a try on my favourite IDE, this article shows you how to do that in IntelliJ IDEA"
 authors:
   - "bazlur-rahman"
@@ -40,13 +39,13 @@ However, it needed a bit of [yak shaving](https://en.wiktionary.org/wiki/yak_sha
 
 Then I figured, maybe, perhaps an IDE could help me here. So I opened my favourite IDE, which happens to be [IntelliJ IDEA](https://www.jetbrains.com/idea/). I created a project and set up the JDK using the following window-
 
-![](Screen-Shot-2022-05-08-at-4.59.40-AM.png)
+![IntelliJ IDEA Project Structure dialog with SDK set to 19 Project Loom and language level 'X - Experimental features'](Screen-Shot-2022-05-08-at-4.59.40-AM.png)
 
 Then when I tried to run, it didn't allow me to run the code since the virtual thread was still in preview. Here are the steps I had to go through in IntelliJ IDEA.
 
 First, you need to go preference, and then **Build, Execution, Deployment** and then Select Java Compiler.
 
-![](Screen-Shot-2022-05-08-at-5.03.41-AM.png)
+![IntelliJ Preferences, Java Compiler page, with '--enable-preview' entered in the additional command line parameters](Screen-Shot-2022-05-08-at-5.03.41-AM.png)
 
 At the bottom, there is a box named the additional command line parameter. Add the following line there-
 
@@ -56,11 +55,11 @@ At the bottom, there is a box named the additional command line parameter. Add t
 
 And then go to the run configuration. Select the modify options and Mark the Add VM options.
 
-![](Screen-Shot-2022-05-08-at-5.04.39-AM.png)
+![IntelliJ Run/Debug Configurations with the Modify options menu open and 'Add VM options' ticked](Screen-Shot-2022-05-08-at-5.04.39-AM.png)
 
 You need to add `--enable-preview `there as well.
 
-![](Screen-Shot-2022-05-08-at-5.11.43-AM.png)
+![IntelliJ Run/Debug Configuration for Main using Java 19, with '--enable-preview' in the VM options field](Screen-Shot-2022-05-08-at-5.11.43-AM.png)
 
 That's it.
 

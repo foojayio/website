@@ -1,7 +1,6 @@
 ---
 title: "Evaluating Apache APISIX vs. Spring Cloud Gateway"
 date: "2023-07-27T06:29:55+00:00"
-lastmod: "2023-07-27T06:29:56+00:00"
 description: "In this article, I'd like to share my understanding of Spring Cloud Gateway and how it compares to Apache APISIX."
 canonical: "https://blog.frankel.ch/spring-cloud-gateway-apache-apisix/"
 authors:
@@ -22,7 +21,7 @@ related_posts:
 
 I'm cautious when comparing products because most comparisons I read are heavily biased. That's a risk, especially when working on one of the products one is comparing. I'll also avoid "benchmarketing" - when you benchmark products in a context that favors your own; I'll focus on the so-called Developer Experience.
 
-![](blind-men-g35dae97dc_640.png)
+![Cartoon of blind men each touching a different part of an elephant, illustrating partial views of a whole](blind-men-g35dae97dc_640.png)
 
 As a safeguard, I've asked my friend Iván López, a Spring Cloud Gateway user, to proofread the post. Iván reviewed the post as my friend, not as a VMWare developer. Despite all my best efforts, I may appear not as objective as I'd like. I accept it, and that's fine.
 
@@ -46,11 +45,11 @@ You can leverage all standard ways to create the project, including the popular 
 
 Apache APISIX features a rich model:
 
-![](apisix-model.png)
+![UML class diagram of the Apache APISIX model: routes link to services, plugin configs, plugins and upstreams](apisix-model.png)
 
 In particular, you can create an `Upstream` abstraction and share it across different routes. Likewise, `Plugin Config` allows you to create a reusable combination of plugins.
 
-Here's the Spring Cloud Gateway model![](spring-gateway-model.png)
+Here's the Spring Cloud Gateway model![UML class diagram of the Spring Cloud Gateway model: routes have predicates and filters, plus global filters](spring-gateway-model.png)
 
 The APISIX model is richer, with abstractions and the possibility of reuse.
 
@@ -192,7 +191,7 @@ I won't comment on [Apache APISIX's documentation](https://apisix.apache.org/doc
 
 Usability is quite subjective, but I didn't notice significant differences in my sample demo. Here's the general design, pretending to mimic a microservices architecture.
 
-![](sample-architecture-overview.png)
+![Component diagram of the demo: Gateway calls Catalog, which calls Pricing and Stocks over HTTP, with Prometheus monitoring](sample-architecture-overview.png)
 
 I've slightly changed the implementation, though, to leverage the gateway. Instead of the catalog calling the pricing/stocks components, I call the gateway to forward the call. Additionally, I want to prevent external callers from accessing pricing and stocks: only the catalog should be allowed.
 

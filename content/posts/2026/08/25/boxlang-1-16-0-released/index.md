@@ -1,7 +1,6 @@
 ---
 title: "BoxLang 1.16.0 Released!"
 date: "2026-08-25T13:57:47+00:00"
-lastmod: "2026-08-25T13:57:49+00:00"
 description: "BoxLang 1.16.0 is here, closing 50 issues across new features, improvements, and bug fixes. The theme running through this release is control: control…"
 authors:
   - "cristobal-escobar"
@@ -9,7 +8,6 @@ image: "boxlang-v1.16.0-700x467.jpg"
 categories:
   - "BoxLang"
   - "Developer Tools"
-  - "Java"
   - "Java Core"
   - "Release Notes"
 related_posts:
@@ -18,8 +16,6 @@ related_posts:
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
 ---
-
-![](boxlang-v1.16.0-700x467.jpg)
 
 BoxLang 1.16.0 is here, closing **50 issues** across new features, improvements, and bug fixes. The theme running through this release is control: control over how HTTP clients are created and reused, control over what happens when a request fails, control over how much data a response is allowed to buffer, control over when Java classpaths reload, and tighter alignment with CFML behavior in the edge cases when doing migrations.
 

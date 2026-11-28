@@ -20,8 +20,8 @@ post:
   keep feedback constructive and kind.
 - Keep it on topic — no spam, no pure advertising.
 
-This applies to this repository, comments on foojay.io, and any foojay-run
-podcast or event.
+This applies to this repository, comments on foojay.io, the Foojay Slack
+workspace, and any foojay-run podcast or event.
 
 To report a problem, email **[hello@foojay.io](mailto:hello@foojay.io)** or
 contact any member of the [editorial team](https://foojay.io/meet-the-team/)

@@ -1,13 +1,11 @@
 ---
 title: "Java 22 Is Here, And It's Ready To Rock"
 date: "2024-03-19T13:56:23+00:00"
-lastmod: "2024-03-19T13:57:48+00:00"
 description: "Java 22 is here, and it's ready to rock! Boasting a set of 12 JEPs, it finalizes features and previews new ones. This article has all the info!"
 authors:
   - "hanno-embregts"
 image: "guitar-pedals.jpg"
 categories:
-  - "Java"
   - "Java Core"
   - "Project Panama"
   - "Records"

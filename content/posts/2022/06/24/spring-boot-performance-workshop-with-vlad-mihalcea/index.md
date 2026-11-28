@@ -1,7 +1,6 @@
 ---
 title: "Spring Boot Performance Workshop with Vlad Mihalcea"
 date: "2022-06-24T07:43:52+00:00"
-lastmod: "2022-06-24T07:53:09+00:00"
 description: "Learn how to improve the performance of a Spring application and diagnose production problems. Lessons from our live workshop covering JPA!"
 canonical: "https://lightrun.com/tutorials/spring-boot-performance-workshop-with-vlad-mihalcea/"
 authors:
@@ -65,7 +64,7 @@ Another problem here is the question marks in the SQL. There's a very limited co
 
 Lightrun lets you add a new log to a production application without changing the source code. We can just open the Hibernate file "Loader.java" and add a new log to `executeQueryStatement`.
 
-![](vlad1-add-log-700x410.png)
+![IDE context menu with the Lightrun submenu open and the Log option highlighted on a Hibernate source line](vlad1-add-log-700x410.png)
 
 We can fill out the log statements in the dialog that prompts us. Notice we can use curly braces to write Java expressions, e.g. variable names, method calls, etc.
 
@@ -73,11 +72,11 @@ These expressions execute in a sandbox which **guarantees** that they will not a
 
 Once we click OK, we can see the log appear in the IDE. Notice that no code changed, but this will act as if you wrote a logger statement in that line. So logs will be integrated with other logs.
 
-![](vlad3-log-statement-700x106.png)
+![Lightrun log line inserted above a Hibernate call, with a format string printing the SQL statement and named parameters](vlad3-log-statement-700x106.png)
 
 Notice that we print both the statement and the arguments so the log output will include everything we need. You might be concerned that this weighs too heavily on the CPU and you would be right. Lightrun detects overuse of the CPU and suspends expensive operations temporarily to keep execution time in check. This prevents you from accidentally performing an overly expensive operation.
 
-![](vlad4-print-and-quota-700x166.png)
+![Lightrun console showing the logged Hibernate SQL query, with a tooltip showing the full select statement and its parameters](vlad4-print-and-quota-700x166.png)
 
 You can see the log was printed with the full content on top but then suspended to prevent CPU overhead. This means you won't have a performance problem when investigating performance issues…
 
@@ -95,7 +94,7 @@ Log piping lets us determine where we want the log to go. We can choose to pipe 
 
 ## Spring Boot Connection Acquisition
 
-![](vlad5-spring-boot-connection-acquisition-700x322.png)
+![Sequence diagram of Hibernate beginning a transaction: getConnection goes through ConnectionProvider and DataSource, then getAutoCommit is called on the Connection](vlad5-spring-boot-connection-acquisition-700x322.png)
 
 Ideally, we should establish the relational database connection at the very last moment. You should release it as soon as possible to increase database throughput. In JDBC, the transaction is on auto-commit by default and this doesn't work well with the JPA transactions in Spring Boot.
 
@@ -103,27 +102,27 @@ Unfortunately, we're at a Chicken and Egg problem. Spring Boot needs to disable 
 
 This can seriously affect performance and throughput, as some requests might be blocked waiting for a database connection from the pool.
 
-![](vlad6-eager-connection-700x350.png)
+![Lightrun Create Log dialog adding a log message that Hibernate acquired the DB connection eagerly, above the setAutoCommit code](vlad6-eager-connection-700x350.png)
 
 If this log is printed, we have a problem in our auto-commit configuration. Once we know that the rest is pretty easy. We need to add these two fields that both disable auto-commit and tell Hibernate that we disabled it. Once those are set, performance should be improved.
 
-![](vlad7-disable-auto-commit-700x116.png)
+![Configuration lines setting hikari auto-commit to false and Hibernate provider_disables_autocommit to true to acquire connections lazily](vlad7-disable-auto-commit-700x116.png)
 
 ## Query Plan Cache
 
-![](vlad8-query-plan-cache-700x311.png)
+![Slide explaining Hibernate query plan cache: queries are compiled first, default size is 2048, and plan_cache_max_size can be set to 8192](vlad8-query-plan-cache-700x311.png)
 
 Compiling JPQL to native SQL code takes time. Hibernate caches the results to save CPU time.
 
 A cache miss in this case has an enormous impact on performance, as evidenced by the chart below:
 
-![](vlad9-cache-hit-vs-miss-700x402.png)
+![Bar chart: query time of 315.5 microseconds with a query plan cache size of 1 versus 5.2 with a size of 100](vlad9-cache-hit-vs-miss-700x402.png)
 
 This can seriously affect the query execution time and the response time of the whole service.
 
 Hibernate has a statistics class which collects all of this information. We can use it to detect problematic areas and, in this case, add a snapshot into the class.
 
-![](vlad10-snapshot-700x125.png)
+![IDE editor on Hibernate StatisticsImpl.queryCompiled, where the query plan cache miss counter is incremented, for adding a snapshot](vlad10-snapshot-700x125.png)
 
 ### Snapshots
 
@@ -133,31 +132,31 @@ We can traverse the source code by clicking the stack frames and see the variabl
 
 Conditional snapshots let us trigger the snapshot only if a particular condition is met. A common problem is when a bug in a system is experienced by a specific user only. We can use a conditional snapshot to get stack information only for that specific user.
 
-![](vlad11-snapshot-view-700x192.png)
+![Lightrun snapshot view with call stack frames from queryCompiled and the Hibernate statistics variables](vlad11-snapshot-view-700x192.png)
 
 ## Eager Fetch
 
 When we look at logs for SQL queries, we can often see that the database fetches a lot more than what we initially asked for. That's because of the default setting of JPA relations which is EAGER. This is a problem in the specification itself. We can achieve significant performance improvement by explicitly defining the fetch type to LAZY.
 
-![](vlad12-eager-700x306.png)
+![Slide showing that the default fetch type for ManyToOne associations is FetchType.EAGER in Hibernate source](vlad12-eager-700x306.png)
 
 We can detect these problems by placing a snapshot in the `loadFromDatasource()` method of `DefaultLoadEventListener`.
 
 In this case, we use a conditional snapshot with the condition: `event.isAssociationFetch()`.
 
-![](vlad13-eager-snap-condition.png)
+![Lightrun Create Snapshot dialog with the condition event.isAssociationFetch() and a max hit count of 1](vlad13-eager-snap-condition.png)
 
 As a result, the snapshot will only trigger when we have an eager association, which is usually a bug. It means we forgot to include the LAZY argument to the annotation.
 
 As you can see, this got triggered with a full stack trace and the information about the entity that has such a relation.
 
-![](vlad14-eager-detection-700x339.png)
+![Lightrun snapshot triggered in DefaultLoadEventListener, showing the stack trace and the entity that has the eager association](vlad14-eager-detection-700x339.png)
 
 You can use this approach to detect incorrect lazy fetches as well. Multiple lazy fetches can be worse than a single eager fetch, so we need to be vigilant.
 
 ## Open Session in View Anti-Pattern
 
-![](vlad15-session-in-view-700x324.png)
+![Sequence diagram of Open Session in View: a filter opens the session, the request reaches controller, service and DAO, and the session closes after render](vlad15-session-in-view-700x324.png)
 
 On the surface, it doesn't seem like we're doing anything wrong. We're just fetching data from the database and returning it to the client. But the transaction context finished when the post controller returned and as a result we're fetching from the database all over again. We need to do an additional query as data might be stale. Isolation level might be broken and many bugs other than performance might arise.
 
@@ -165,7 +164,7 @@ This creates an N+1 problem of unnecessary queries!
 
 We can detect this problem by placing a snapshot on the `onInitializeCollection` call and seeing the open session:
 
-![](vlad16-detect-session-700x378.png)
+![Lightrun snapshot on onInitializeCollection showing the stack trace of a lazy collection initialised while the session is open](vlad16-detect-session-700x378.png)
 
 Now that we see the problem is happening we can solve the problem by defining `spring.jpa.open-in-view=false`
 
@@ -283,11 +282,11 @@ This is something our team helps you set up.
 
 This is minimal. Running the petclinic demo on my Mac with no agent produces this in the system monitor:
 
-![](vlad17-memory-no-agent-700x50.png)
+![macOS Activity Monitor showing the java process using 731.0 MB of memory without the agent](vlad17-memory-no-agent-700x50.png)
 
 With the agent, we have this:
 
-![](vlad18-memory-with-agent-700x51.png)
+![macOS Activity Monitor showing the java process using 748.0 MB of memory with the agent attached](vlad18-memory-with-agent-700x51.png)
 
 At these scales, a difference of 17mb is practically within the margin of error. It's unclear what overhead the agent has, if at all.
 

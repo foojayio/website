@@ -1,14 +1,13 @@
 ---
 title: "On programming languages, targets, and platforms"
 date: "2026-06-24T17:22:32+00:00"
-lastmod: "2026-09-21T05:55:12+00:00"
 description: "I started as a Java developer, but for some time now, I have broadened my horizons. Recently, I thought about how early languages were dedicated to a…"
 canonical: "https://blog.frankel.ch/programming-languages-targets-platforms/"
 authors:
   - "nicolas-frankel"
 image: "cover_large-2.jpg"
 categories:
-  - "Java"
+  - "Opinion"
 related_posts:
   - "making-illegal-state-unrepresentable"
   - "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"

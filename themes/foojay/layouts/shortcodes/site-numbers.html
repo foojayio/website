@@ -42,7 +42,7 @@
      (dict "n" (len $posts)    "label" "Articles"            "url" (relURL "today/")           "note" "Every article is written by a named author and credited to them.")
      (dict "n" (len $authors)  "label" "Authors"             "url" (relURL "today/author/")    "note" "Each has a profile page, an article list and a feed of their own.")
      (dict "n" (len $podcast)  "label" "Podcast episodes"    "url" (relURL "today/category/podcast/") "note" (printf "The Foojay Podcast. %d of them carry a machine-generated transcript, marked as such on the page." $transcripts))
-     (dict "n" (len $pedia)    "label" "Glossary entries"    "url" (relURL "pedia/")           "note" "Plain-language definitions of Java and OpenJDK terms.")
+     (dict "n" (len $pedia)    "label" "Glossary entries"    "url" (site.GetPage "/pedia").RelPermalink           "note" "Plain-language definitions of Java and OpenJDK terms.")
      (dict "n" (len site.Taxonomies.categories) "label" "Categories" "url" (relURL "today/category/") "note" "The site's only taxonomy. There are no tags.")
      (dict "n" (len $steps)    "label" "Java Quick Start steps" "url" (relURL "java-quick-start/") "note" "An ordered tutorial for developers new to Java.")
      (dict "n" (len $jugs)     "label" "Java User Groups"    "url" (relURL "jugs/")            "note" "Mirrored from the community-run World Wide JUGs directory, not maintained here.")

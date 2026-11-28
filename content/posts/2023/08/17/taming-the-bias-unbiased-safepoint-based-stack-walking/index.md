@@ -1,13 +1,11 @@
 ---
 title: "Taming the Bias: Unbiased Safepoint-Based Stack Walking"
 date: "2023-08-17T14:00:34+00:00"
-lastmod: "2023-08-17T14:07:06+00:00"
 description: "Erik Österlund summed up the problems with my previous JEP proposal quite nicely, and here are my responses!"
 authors:
   - "johannes-bechberger"
 image: "Favicon-3-2.png"
 categories:
-  - "Java"
   - "Java Core"
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
@@ -36,17 +34,17 @@ He proposed that walking Java threads only at safepoints while obtaining some in
 ## Idea
 
 The current interaction between a sampler of the profiler and the Java Threads looks like the following:  
-![](wall-clock-sampling-sequence.drawio-6a31e77e.svg)
+![Sequence diagram of the profiler's sampler thread sleeping, then signaling each Java thread, which walks its own stack](wall-clock-sampling-sequence.drawio-6a31e77e.svg)
 
 The sampler thread signals every Java thread using POSIX signals and then obtains the full trace directly in the signal handler while the thread is paused at an arbitrary location. I explored variations of this approach in my post [Couldn't we just Use AsyncGetCallTrace in a Separate Thread?](https://mostlynerdless.de/blog/2023/04/21/couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread/)
 
 My new approach, on the contrary, walks the Java thread in a signal handler till we find the first bytecode-backed Java frame, stores this in the thread-local queue, triggers a safepoint, and then walks the full Java stack at these safepoints for all enqueued top-frames.
 
 We, therefore, have a two-step process:
-![](sig_safe-2000x1176-9fba9b01.jpg)
+![Diagram of the new approach: the signal handler queues the first Java frame, then the safepoint walks the remaining stack frames](sig_safe-2000x1176-9fba9b01.jpg)
 
 Instead of just walking the stack in the signal handler:
-![](iterators2-2000x1100-fbbdfe02.jpg)
+![Diagram of the iterator API walking a stack with NextFrame calls, returning frame details such as type, compilation level and method](iterators2-2000x1100-fbbdfe02.jpg)
 
 The new API exploits a few implementation details of the OpenJDK:
 
@@ -296,7 +294,7 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
 ```
 
 This assumes that you use the [modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). [MathParser](https://github.com/parttimenerd/writing-a-profiler/blob/iterative_safepoint_profiler/samples/math/MathParser.java) is a demo program that generates and evaluates simple mathematical expressions. The resulting flame graph should look something like this:
-![](Screenshot-2023-08-10-at-02.54.56-2000x9-6129bbc3.jpg)
+![Flame graph of a math parser and generator program, with most time spent under MathParser.parse and MathGenerator.generate](Screenshot-2023-08-10-at-02.54.56-2000x9-6129bbc3.jpg)
 
 ## Conclusion
 
@@ -324,6 +322,6 @@ I want to come back to the quote from Erik that I wrote in the beginning, answer
 Thank you for joining me on my API journey; I'm open to any suggestions; please reach me using the typical channels.
 
 Just keep in mind:  
-![](no2-f2143aa8.png)
+![Poster-style meme of a man refusing a drink: 'No to walking Java stacks outside safepoints ... and keep away from jmethodIDs'](no2-f2143aa8.png)
 
 *This project is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com), making profiling easier for everyone.* *This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de).* *Thanks to Erik Österlund for the basic idea, and to Jaroslav Bachorik for all the feedback and help on the JEP.*

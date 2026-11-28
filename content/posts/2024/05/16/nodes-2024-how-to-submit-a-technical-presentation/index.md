@@ -1,7 +1,6 @@
 ---
 title: "How to Submit a Technical Presentation"
 date: "2024-05-16T09:06:05+00:00"
-lastmod: "2024-05-16T09:06:07+00:00"
 description: "Technical events are a great way to learn new things, connect with people, and share knowledge with others."
 authors:
   - "jennifer-reif"

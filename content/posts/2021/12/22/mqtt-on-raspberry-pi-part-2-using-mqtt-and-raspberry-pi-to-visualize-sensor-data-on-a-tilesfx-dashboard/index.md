@@ -1,7 +1,6 @@
 ---
 title: "MQTT on Raspberry Pi (Part 2)"
 date: "2021-12-22T14:58:21+00:00"
-lastmod: "2021-12-22T14:58:23+00:00"
 description: "In the 2nd part of the series, learn how to use MQTT and the Raspberry Pi to visualize sensor data on a TilesFX dashboard!"
 canonical: "https://www.hivemq.com/blog/mqtt-raspberrypi-part02-visualizing-sensor-data-on-a-tilesfx-dashboard/"
 authors:
@@ -30,7 +29,7 @@ Now we will take the next step and subscribe to these topics to receive the data
 JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich client applications that operate consistently across diverse platforms.
 
 JavaFX was created by Sun Microsystems, later became part of Oracle Corporation and is now an open-source project on [openjfx.io](https://openjfx.io/). Commercial support is available via [GluonHQ](https://gluonhq.com/), which is also the main maintainer of the project, with the support of many contributors (including Oracle). The sources are [available on GitHub](https://github.com/openjdk/jfx). Since version 11, the JavaFX module moved out of the Oracle JDK. With a similar 6-month release cycle of Java, JavaFX development speed has increased, pushing new features forward.
-![](history_javafx-1024x515.png)
+![Timeline of JavaFX releases from 2008 (JavaFX 1.0) to 2021 (JavaFX 16 and 17) with key features per version](history_javafx-1024x515.png)
 
 JavaFX allows to quickly build a user interface while using the language and tools you already know as a Java developer. This can be styled with a CSS syntax and is very flexible and extendable and even allows you to draw your own layout elements as you can see in the history graph above, available on [GitHub as part of the sources](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_04_Java/javafx-timeline) of my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/).
 
@@ -48,7 +47,7 @@ Personally, I prefer the second approach as you are sure to be using the latest 
 This great library is developed by [Gerrit Grunwald](https://twitter.com/hansolo_) and provides tiles to build dashboards. Check [his blog](https://harmoniccode.blogspot.com/) for many more JavaFX examples!
 
 You can find [the sources of TilesFX on GitHub](https://github.com/HanSolo/tilesfx) and it is available as a [Maven dependency](https://mvnrepository.com/artifact/eu.hansolo/tilesfx). As part of the sources of TilesFX, a Demo application is provided to show how to use all the available Tiles.
-![](tilesfx-1024x589.png)
+![TilesFX demo window showing dozens of dashboard tiles such as gauges, clocks, charts, maps and switches on a dark background](tilesfx-1024x589.png)
 
 ## Java Project
 
@@ -324,7 +323,7 @@ On the other hand, when starting from IntelliJ IDEA, the Maven dependencies will
 #### On Raspberry Pi
 
 To run this application on a Raspberry Pi 4, I started with a new SD card with the standard Raspberry Pi OS (32-bit).
-![](imager-raspberry-pi-os-1024x301.png)
+![Raspberry Pi Imager v1.6 listing Raspberry Pi OS (32-bit), based on Debian Bullseye, as the recommended operating system](imager-raspberry-pi-os-1024x301.png)
 
 This is a "minimal" version of the Raspberry Pi OS, and doesn't include Java, but this can be quickly fixed by running `sudo apt install openjdk-11-jdk` in the terminal.
 

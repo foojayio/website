@@ -1,7 +1,6 @@
 ---
 title: "Renovate for everything"
 date: "2024-06-27T08:18:20+00:00"
-lastmod: "2024-06-27T08:18:21+00:00"
 description: "You can configure Renovate for every package manager you can think of. Even better, Renovate allows the contribution of new package managers, contrary to Dependabot."
 canonical: "https://blog.frankel.ch/renovate-for-everything/"
 authors:
@@ -28,7 +27,7 @@ First things first, Renovate does indeed [manages Kotlin Scripting](https://docs
 
 Even better, Renovate can manage *any* type of file. Thanks to Max Andersen for the tip:
 
-[![](Screenshot-2024-06-22-at-19.10.07.jpg)](https://x.com/maxandersen/status/1764379149177630827)
+[![Tweet from Max Rydahl Andersen saying Renovate can be configured to update dependencies in JBang scripts, as he did for jbang](Screenshot-2024-06-22-at-19.10.07.jpg)](https://x.com/maxandersen/status/1764379149177630827)
 
 You can create your configuration for package managers, which must still be added to Renovate's scope!
 > With `customManagers` using `regex` you can configure Renovate so it finds dependencies that are not detected by its other built-in package managers.

@@ -1,7 +1,6 @@
 ---
 title: "Systematic AI Coding: My Takeaways from the Eclipse Foundation Workshop in Brussels"
 date: "2026-06-23T19:48:42+00:00"
-lastmod: "2026-08-17T05:40:40+00:00"
 description: "Most developers using AI tools are still guessing. The Eclipse Foundation's first AI Coding Workshop in Brussels was built to change that. It's a brand…"
 authors:
   - "frankdelporte"
@@ -19,11 +18,11 @@ related_posts:
 Most developers using AI tools are still guessing. The Eclipse Foundation's first [AI Coding Workshop](https://aieclipse.org/ai-workshop/) in Brussels was built to change that. It's a brand new format they launched in Brussels, which makes sense: most of the Eclipse event team is based there. They plan to bring it to more cities from here, so keep an eye out if you want to attend such a workshop in the future. They offered 10 free tickets to share with the BeJUG and Foojay community. And in all honesty, I used one for myself. [Jonas Helming](https://www.linkedin.com/in/jonas-helming-76303b28/) from [EclipseSource](https://eclipsesource.com/) led the workshop, with a fun quiz hosted by [Thomas Froment](https://www.linkedin.com/in/tfroment/) in the afternoon. Here's what I took away.
 
 {{< gallery >}}
-eclipse-ai-brussels-jonas-1024x578.jpg
-eclipse-ai-brussels-food-578x1024.jpg
-eclipse-ai-brussels-thankyou-1024x578.jpg
-eclipse-ai-brussels-request-model-1024x578.jpg
-eclipse-ai-brussels-sponsors-578x1024.jpg
+eclipse-ai-brussels-jonas-1024x578.jpg | | Speaker presenting a 'Vibe Coding' slide at the Eclipse AI Coding Workshop in Brussels
+eclipse-ai-brussels-food-578x1024.jpg | | Lunch buffet table in Brussels with sandwiches, cakes, tarts and small pastries
+eclipse-ai-brussels-thankyou-1024x578.jpg | | Banner thanking partners including bejug, DevIT, Women4Cyber, foojay.io and WomenTech Network
+eclipse-ai-brussels-request-model-1024x578.jpg | | Speaker pointing at a 'Request Model' slide showing messages, tools and context injection in an AI coding agent
+eclipse-ai-brussels-sponsors-578x1024.jpg | | Roll-up banner thanking sponsor Open VSX and the workshop partners at the AI Coding Workshop
 {{< /gallery >}}
 
 ## From Vibe to Systematic

@@ -1,7 +1,6 @@
 ---
 title: "Native-image with Micronaut"
 date: "2021-11-22T10:18:53+00:00"
-lastmod: "2021-11-22T10:18:55+00:00"
 description: "Last week, I wrote a native web app that queried the Marvel API using Spring Boot. This week, let's do the same with the Micronaut framework."
 canonical: "https://blog.frankel.ch/native/micronaut/"
 authors:
