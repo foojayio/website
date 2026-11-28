@@ -99,12 +99,77 @@
     "id" : "UCksTNgiRyQGwi2ODBie8HdA",
     "title" : "Adam Bien",
     "avatar" : "https://yt3.googleusercontent.com/ytc/AIdro_k_YqpG6_Rrq2y48p7UlLkPQMKp1LCJ_5roQV7mVXuF2tQ=s176-c-k-c0x00ffffff-no-rj"
+  }, {
+    "handle" : "otaviojava",
+    "id" : "UCLDPIwax_ntXrHZZb6HfFqw",
+    "title" : "Otavio Santana",
+    "avatar" : "https://yt3.googleusercontent.com/iH4giAy9isKM3VR-2TFzpcFcnUGGbk7-nAfyTjDReXYFO69SJ7g5xvieqEaM9v79JYk9ChM4=s176-c-k-c0x00ffffff-no-rj"
   } ],
   "videos" : [ {
+    "id" : "HRzE71LQxFM",
+    "channel" : "bienadam",
+    "title" : "Java on AWS Lambda Without Modifications",
+    "published" : "2026-11-27T15:43:06+00:00"
+  }, {
+    "id" : "wOzSFTa5htU",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Tech Talk: Spec-Driven Development with Kiro – Building AI-Aligned Software",
+    "published" : "2026-11-27T13:13:16+00:00"
+  }, {
+    "id" : "IpHvTXXPwJQ",
+    "channel" : "hszanowski",
+    "title" : "How should you test JetBrains IDEs UI?",
+    "published" : "2026-11-27T11:51:47+00:00"
+  }, {
     "id" : "lcMjGZRFD4k",
     "channel" : "hszanowski",
     "title" : "How should you test JetBrains IDEs UI?",
-    "published" : "2026-11-25T20:34:34+00:00"
+    "published" : "2026-11-27T11:36:25+00:00"
+  }, {
+    "id" : "m2Z6fchF1zQ",
+    "channel" : "coffeesoftware",
+    "title" : "Thankful Coffee+Software",
+    "published" : "2026-11-27T08:17:13+00:00"
+  }, {
+    "id" : "RwKQd_QViZo",
+    "channel" : "coffeesoftware",
+    "title" : "JetBrains' 2027 Roadmap: a Polyglot IDE, Air, and Headless AI Agents | JetBrains CEO Kirill Skrygan",
+    "published" : "2026-11-26T21:00:17+00:00"
+  }, {
+    "id" : "O_MOmxJ4k8k",
+    "channel" : "bienadam",
+    "title" : "Episode 8: Semantic Compression, Three Words, Three Layers #java #llm #bce",
+    "published" : "2026-11-26T16:36:10+00:00"
+  }, {
+    "id" : "Lb0OzjzcmFU",
+    "channel" : "NLJUG1",
+    "title" : "7 Ways you can build an amazing dev career in the ai era",
+    "published" : "2026-11-26T15:43:05+00:00"
+  }, {
+    "id" : "kX3ZBh0J_Qc",
+    "channel" : "NLJUG1",
+    "title" : "Your coding agent is a while loop!",
+    "published" : "2026-11-26T15:40:50+00:00"
+  }, {
+    "id" : "zlDB56IOThY",
+    "channel" : "FrankDelporte",
+    "title" : "Fixed Slow Lottie Animations in JavaFX: from 3 FPS to 60 FPS with Lottie4J 1.5.0",
+    "published" : "2026-11-26T13:57:10+00:00"
+  }, {
+    "id" : "MwuXJ1tVeR4",
+    "channel" : "NLJUG1",
+    "title" : "State of Confusion: Data Ownership in Event-Driven Systems",
+    "published" : "2026-11-26T13:30:43+00:00"
+  }, {
+    "id" : "qcU4dMa_GHM",
+    "channel" : "jakartaee",
+    "title" : "JakartaOne Livestream 2026 | The Largest Global Jakarta EE Event",
+    "published" : "2026-11-26T12:37:37+00:00"
+  }, {
+    "id" : "FNM5HeI9QmM",
+    "channel" : "java",
+    "title" : "Java in the Age of AI [AtA] Inside Java Podcast 76",
+    "published" : "2026-11-26T10:49:32+00:00"
   }, {
     "id" : "CBc1n0VpYwM",
     "channel" : "bienadam",
@@ -811,6 +876,11 @@
     "title" : "Inside Gradle: Build Scans, Flaky Tests, and AI Agents - Stefan Wolf | IntelliJ IDEA Tech Talks",
     "published" : "2026-10-21T15:00:37+00:00"
   }, {
+    "id" : "dvikFeZZOxI",
+    "channel" : "otaviojava",
+    "title" : "☕ Stop Comparing Programming Languages with Hello World!",
+    "published" : "2026-10-20T15:03:13+00:00"
+  }, {
     "id" : "jXpGFIt7AgQ",
     "channel" : "Kotlin",
     "title" : "Inside Airbnb's UI Motion Architecture | KotlinConfersations",
@@ -1286,6 +1356,11 @@
     "title" : "Why Your Pipeline Needs Zero Trust (And How to Build It)",
     "published" : "2026-08-21T15:11:52+00:00"
   }, {
+    "id" : "Cst2u7e-MS0",
+    "channel" : "otaviojava",
+    "title" : "🚀Software Engineering is More Than Coding: Why AI Can't Replace Us 🤖☕",
+    "published" : "2026-08-13T15:03:16+00:00"
+  }, {
     "id" : "zyrGN6_0Tn4",
     "channel" : "jjohannes",
     "title" : "Understanding Gradle #37 – CI: GitHub Actions & TestLens",
@@ -1300,6 +1375,11 @@
     "channel" : "sivalabs",
     "title" : "BootUI - Inspect, Analyze and Improve your Spring Boot and Quarkus Applications",
     "published" : "2026-08-10T04:30:11+00:00"
+  }, {
+    "id" : "TQGv9pB_OPw",
+    "channel" : "otaviojava",
+    "title" : "Beat AI Hallucinations: Sharpen Hard & Soft Skills with Open Source ☕",
+    "published" : "2026-08-06T15:03:28+00:00"
   }, {
     "id" : "u1BjNHNpbGI",
     "channel" : "JetBrainsWDYT",
@@ -1340,21 +1420,6 @@
     "channel" : "virtualJUG",
     "title" : "Top 10 Event-Driven Architecture Pitfalls by  Victor Rentea",
     "published" : "2026-07-10T05:46:48+00:00"
-  }, {
-    "id" : "FK4UIHD_IM0",
-    "channel" : "NLJUG1",
-    "title" : "Baruch & Viktor - Robocoders: Judgment Day: AI-assisted engineering applied - The Battle of Agents",
-    "published" : "2026-07-02T12:44:49+00:00"
-  }, {
-    "id" : "aqG8coLe7D8",
-    "channel" : "NLJUG1",
-    "title" : "Michaël Hompus - The Art of Simple Software Architecture Documentation",
-    "published" : "2026-07-02T12:44:49+00:00"
-  }, {
-    "id" : "wOQYySiFvBQ",
-    "channel" : "NLJUG1",
-    "title" : "Guus de Wit - Snake in 10 Lines: Learning More by Coding Less",
-    "published" : "2026-07-02T12:44:00+00:00"
   }, {
     "id" : "q7SGdxQnMVc",
     "channel" : "FrankDelporte",
@@ -1661,5 +1726,5 @@
     "title" : "Volcano Airtour",
     "published" : "2008-12-06T22:37:13+00:00"
   } ],
-  "shorts" : [ "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "2udyOpSIOpw", "3AyOI_DjymM", "3KYWHdHfs5E", "3VBWQ6e9NpM", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4RFBnffdqTk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "EZqaeauSSYw", "FDjIcUdpT8U", "FdulTWCQfTQ", "GWtUXkUXezY", "H3QoqwGU2_E", "H5-JUndlPW8", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "JpO1xa0NN5k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "M0Wha6RdIPY", "NHQ1plrPB5c", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "OAaOcs4rC1s", "OyraC_WwubA", "P0mkJY4DIzo", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "Ro8btyplk7U", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "X_Z2sYRtEQw", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "YljdZUBvs9Y", "Zvv5pu2OeZA", "_pjajf-5eJg", "a792mHg66mI", "bUIrCAHPFFQ", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "fKYWemlL9rc", "fNGMDUcJv1E", "g3PMDDdPLJc", "gNfCER2cAnc", "hFQFBLYdeZI", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "mIAmR7iGAKA", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "pXPywSj7pdI", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yjvTmiJlTJE" ]
+  "shorts" : [ "-KxB_z5HEUY", "0PaX1ZEJkXE", "0WmtbS_ZgGg", "0ZqvxvecXEM", "21M2E7Ugqrw", "25p0SDaiDmI", "2B1N8j5ZO2g", "2NS7YOIT20M", "2Wm9OM6kHWY", "2udyOpSIOpw", "3AyOI_DjymM", "3KYWHdHfs5E", "3L78Fn4L-KQ", "3VBWQ6e9NpM", "45fVUuD9owU", "47owZK_H6ZY", "4CBp35oIEco", "4IDbT7v34jk", "4RFBnffdqTk", "4_O2OBqQSUA", "73h12ueZ9P4", "7jpKk_VpZRA", "8B09y3sIHcA", "8uN-7kAUpTk", "90t1XSZXI2U", "9S9UNVME4tQ", "9aBbgZyhErk", "A2ZlLpGeYF0", "A_BuSmy7hvk", "C23h92PuJdY", "ChNwHH1Slyk", "DPDtoczO1cE", "DZbMIfk3wM8", "DhT8RPkRYe4", "ETugI1_TKr0", "EZqaeauSSYw", "FDjIcUdpT8U", "FdulTWCQfTQ", "GWtUXkUXezY", "H3QoqwGU2_E", "H5-JUndlPW8", "Hb-gca46_bg", "HdMSqgtD3yE", "Ixu8ZK8ENio", "J1ugbLGIjT0", "J9bXhsZMG9k", "JpO1xa0NN5k", "KHW61Pw3vn8", "KJBBI5SkLgQ", "KQBygmRGtTM", "KbMfm62U4G4", "LniA--xQUvE", "LqjuQQMHVJw", "LuVFCPV3AVE", "LviLcfX_qWM", "M0Wha6RdIPY", "NHQ1plrPB5c", "NOvx9jRmZME", "NRGlFwlzw30", "N_djt-XsdZs", "Nj-Kw9FZ-Vs", "OAaOcs4rC1s", "OyraC_WwubA", "P0mkJY4DIzo", "PdS6RBMfBCk", "Pjt59ulIaGg", "PuiM2awGqHo", "Pxb0PDKMbJo", "QXXxXIfr610", "QkbpRZ5jFo8", "Qp5JMH5aBl4", "RBqm-_HZckI", "RH5vUC9KlOs", "RJrYJ70uZkE", "Ro8btyplk7U", "S9IEOyHPOc0", "SsP25dSp6Gs", "Sz-rSzL2pGM", "TBDJX9M0AfM", "TFQakAJH6HE", "V6QDeG9iD5k", "V89NJidQs1Y", "W8Ypm3MS50c", "WRL8lZnw9tA", "XA5M6alBlYc", "X_Z2sYRtEQw", "XcA2hqil034", "XsbLyD3ZBcs", "Y0Qc8WpY4tM", "YcbjNnylTm8", "YljdZUBvs9Y", "Zvv5pu2OeZA", "_pjajf-5eJg", "a792mHg66mI", "bUIrCAHPFFQ", "bZvE9XrTLD4", "boC8-3tqdb8", "bxG6ifY0cik", "dKQLbWmM7Jw", "dUlEECmrveI", "djH8eWBTlCE", "dnDlZW3Jcdk", "dzJLnx0nl1o", "e3D1FHlwfwc", "eDcrmX7TNDc", "eFevIfscMVc", "eHcph5zC-SQ", "eTZMVXvq1yA", "etp_3ntK23o", "fKYWemlL9rc", "fNGMDUcJv1E", "g3PMDDdPLJc", "gBuwkNsnQoI", "gNfCER2cAnc", "hFQFBLYdeZI", "hJ4VjlMWhrg", "iv_-3yw-cGA", "jX7F7Kh-qkM", "jd9709mCtk0", "jpWqkgomt7M", "k7H-9eZTnyY", "kzq9Tx8-xfE", "lQ_Crk2egQQ", "lRneS3XyVTo", "lzedPyhUueg", "mCS5EvRYE2s", "mIAmR7iGAKA", "nF-fbILi_q8", "oE8HegdLjKc", "o_3fKlij9Zo", "obIiJgMzxR8", "pXPywSj7pdI", "pZwOqnTIrhc", "p_ZJnGwcTtY", "piTR9wKwDnQ", "pk3nsX3HglI", "q3_9wgmL4kU", "qY-3gqnh92s", "raWUwKT6Rh4", "rasIV4YYW20", "sdm8-0hN5QA", "sphT6eY3nP4", "sxgBRsBVhPo", "tJCZCw2I1Lk", "uuMKKmi-haw", "vWCPN_qvGh4", "vcbFO6c68xY", "vzCsYFnE2OM", "wbzv4Iy_bGQ", "wpKTaVUYFUA", "wq28DQiVO-8", "x8sqcgjqtBQ", "xJgXvjk6Wa4", "y2S4umRR5oc", "yHLONags7Ps", "yahutvKx6vQ", "yf5DVtg-vjU", "yjvTmiJlTJE", "ziRbJg4w3W8", "zmTVH8A6lZY" ]
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt" : "2026-11-27T09:45:42Z",
+  "generatedAt" : "2026-11-28T08:58:52Z",
   "source" : "iCal feeds published by the JUGs themselves (data/jugs.yaml `calendar`) and Meetup's iCal export for the groups that use it; venues from the feed's LOCATION or the schema.org JSON-LD on the event page -- see scripts/fetch/JugEvents.java",
   "groups" : [ {
     "slug" : "almaty-java-user-group",
@@ -472,7 +472,7 @@
       "online" : false
     }, {
       "title" : "Java Stammtisch",
-      "url" : "https://www.meetup.com/java-user-group-hannover/events/hrhcxtykcfbjc/",
+      "url" : "https://www.meetup.com/java-user-group-hannover/events/317615397/",
       "startTime" : "2027-03-26T19:00:00+01:00",
       "endTime" : "2027-04-02T23:00:00+02:00",
       "venue" : "Pizza Unica",
@@ -595,6 +595,14 @@
     "source" : "meetup",
     "url" : "https://www.meetup.com/jug-oberpfalz/",
     "events" : [ {
+      "title" : "Can AI Write Real jOOQ Code? Its Creator Lukas Eder Reviews It Live",
+      "url" : "https://www.meetup.com/jug-oberpfalz/events/317615214/",
+      "startTime" : "2026-11-30T15:00:00+01:00",
+      "endTime" : "2026-11-30T17:00:00+01:00",
+      "venue" : null,
+      "city" : null,
+      "online" : true
+    }, {
       "title" : "Local AI Is 'a Curiosity at Best'. We Make It Read Invoices in Micronaut",
       "url" : "https://www.meetup.com/jug-oberpfalz/events/317557062/",
       "startTime" : "2026-12-23T20:00:00+01:00",
@@ -937,7 +945,15 @@
     "jug" : "UtrechtJUG",
     "source" : "meetup",
     "url" : "https://www.meetup.com/utrecht-java-user-group/",
-    "events" : [ ]
+    "events" : [ {
+      "title" : "Utrecht JUG, Dec 9: Db2 Performance, Framework-Agnostic Java & Capability Mesh",
+      "url" : "https://www.meetup.com/utrecht-java-user-group/events/317596057/",
+      "startTime" : "2026-12-09T17:30:00+01:00",
+      "endTime" : "2026-12-09T21:30:00+01:00",
+      "venue" : "SVB",
+      "city" : "Utrecht",
+      "online" : false
+    } ]
   }, {
     "slug" : "ValenciaJUG",
     "name" : "ValenciaJUG",
@@ -952,14 +968,6 @@
     "source" : "calendar",
     "url" : "https://luma.com/vjug",
     "events" : [ {
-      "title" : "London Software Guild #4",
-      "url" : "https://luma.com/8j5cyvm3",
-      "startTime" : "2026-11-26T18:00:00Z",
-      "endTime" : "2026-11-26T20:00:00Z",
-      "venue" : "Civo Tech Junction",
-      "city" : "UK",
-      "online" : null
-    }, {
       "title" : "Solving the challenges of Java ecosystems in the AI world by Mikhail Polivakha",
       "url" : "https://luma.com/event/evt-GsJbRwpBMX8XLQk",
       "startTime" : "2026-12-09T17:00:00Z",
