@@ -1,6 +1,6 @@
 ---
 title: "Verifying Local AI-Generated Java Security Fixes with Regression Tests"
-date: "2026-01-01"
+date: "2026-12-09"
 description: "Verify local AI-generated Java security fixes with JUnit and Maven. See how Hushavyr, Ollama, and offline Docker fit into the workflow."
 authors:
   - "matthaios-stavrou"
@@ -10,6 +10,12 @@ categories:
   - "Security"
   - "Testing"
   - "AI"
+related_posts:
+  - "what-java4shell-teaches-about-patching-java-at-ai-speed"
+  - "java4shell-are-we-exposed"
+  - "did-ai-just-break-software-security-for-ever"
+  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "testcontainers-integration-testing-running-your-real-war-in-docker"
 ---
 
 A local model suggests a Java patch and explains why it should work. Before I apply it, I want to answer a narrower question. Can the same test detect the missing behavior before the change and confirm it afterward?
