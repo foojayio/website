@@ -1,18 +1,19 @@
 ---
 title: "Getting Started with Juno: Running Java on Arduino & M5Stack"
-date: "2026-11-02"
+date: "2026-12-08"
 description: "Learn how Juno compiles a practical subset of Java into native code for Arduino and M5Stack boards."
 authors:
   - "jabrena"
-image: "juno.png"
+image: "juno.jpg"
 categories:
-  - "Java"
-  - "Ahead-of-time compiler"
-  - "Assembly"
+  - "Java Core"
   - "Embedded"
-  - "Arduino"
-  - "M5Stack"
-related_posts: []
+  - "Tutorials"
+related_posts:
+  - "java-benchmarks-on-single-board-computers"
+  - "bringing-raspberry-pico-to-quarkus-with-firmata"
+  - "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
+  - "pi4j-v5-work-in-progress"
 ---
 
 What if you could write a small Java program and run it directly on an Arduino board without putting a JVM on the device? This is the idea behind [Juno](https://github.com/jabrena/juno), an ahead-of-time compiler created by [Juan Antonio Brena Moral](https://foojay.io/today/author/jabrena/).
@@ -20,8 +21,6 @@ What if you could write a small Java program and run it directly on an Arduino b
 Juno uses `javac` as its Java front end, follows the code reachable from `main`, and translates it into native assembly plus a `C++` shim. The Arduino toolchain then turns that output into firmware for the selected board.
 
 In the past, there were other initiatives for developing Java programs for physical devices, such as [Sun SPOT](https://en.wikipedia.org/wiki/Sun_SPOT) and [LeJOS](https://en.wikipedia.org/wiki/LeJOS), but Juno offers a new opportunity for modern Java.
-
-![Juno project and Java for Arduino illustration](juno.png)
 
 In this article, you will learn how to use the project, compile a simple blinking-LED program, and verify and upload it to an `Arduino UNO R4 WiFi`.
 
@@ -228,7 +227,9 @@ Use `-Djuno.board=<board-id>` when the program supports more than one board. The
 
 The default project targets the Arduino UNO R4 WiFi. After `juno:flash` finishes, the board resets and its built-in LED should blink repeatedly: on for 500 milliseconds, then off for 500 milliseconds.
 
-![Arduino UNO R4 WiFi board](arduino-uno-r4-wifi-led.jpg)
+{{< gallery cols="1" >}}
+arduino-uno-r4-wifi-led.jpg | Arduino UNO R4 WiFi board | Top view of the Arduino UNO R4 WiFi with an arrow marking the built-in LED labelled L
+{{< /gallery >}}
 
 **Note:** The `Blink` example intentionally produces no serial output, so a quiet serial monitor is expected. If the LED does not blink, check the selected `juno.board`, the USB serial `juno.port`, and that the flash command completed without errors.
 
@@ -237,7 +238,9 @@ The default project targets the Arduino UNO R4 WiFi. After `juno:flash` finishes
 
 Juno 0.2.0 supports seven boards through three native backends: AVR for the UNO R3; Thumb-2 for the UNO R4 WiFi, Raspberry Pi Pico 2 W, and Portenta H7; and Xtensa for the Nano ESP32, M5Stack Cardputer, and AI Thinker ESP32-CAM.
 
-![Juno 0.2.0 supported boards](juno-020-boards-supported.png)
+{{< gallery cols="1" >}}
+juno-020-boards-supported.jpg | Juno 0.2.0 supported boards | Seven supported boards in a yellow tray: Arduino UNO R3 and R4 WiFi, M5Stack Cardputer, Pico 2 W, Portenta H7, Nano ESP32 and ESP32-CAM
+{{< /gallery >}}
 
 Each board has different capabilities, and all boards except the `Arduino UNO R3` support internet connectivity.
 
