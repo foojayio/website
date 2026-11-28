@@ -1,7 +1,7 @@
 ---
 title: "Verifying Local AI-Generated Java Security Fixes with Regression Tests"
 date: "2026-01-01"
-description: "Use JUnit and Maven to verify that a Java patch keeps SQL and input separate, then rerun the same test in an offline Docker container."
+description: "Verify local AI-generated Java security fixes with JUnit and Maven. See how Hushavyr, Ollama, and offline Docker fit into the workflow."
 authors:
   - "matthaios-stavrou"
 image: "cover.jpg"
@@ -14,13 +14,13 @@ categories:
 
 A local model suggests a Java patch and explains why it should work. Before I apply it, I want to answer a narrower question. Can the same test detect the missing behavior before the change and confirm it afterward?
 
-Consider a JDBC lookup by display name. I want a fixed SQL statement with a placeholder, and I want each caller's name bound through the JDBC driver. That gives the reviewer something concrete to check in a diff and something deterministic to assert in a test.
+Consider a JDBC lookup by display name. I want a fixed SQL statement with a placeholder, and I want each caller's name bound through the JDBC driver. That gives the reviewer something concrete to check in a diff and something deterministic to assert in a test. I'll walk through the regression test first, then show where Hushavyr and Ollama fit in the review.
 
 ## Write down the JDBC contract
 
-In the example below, `CustomerLookup.prepare` receives a connection, prepares a lookup and returns a statement to its caller. The caller owns the returned statement. The test checks that both `Alex` and `Taylor` reach JDBC through `setString`, with the SQL template held constant. It uses Mockito to observe the JDBC calls, so Maven can run it without a database.
+In the example below, `CustomerLookup.prepare` receives a connection, prepares a lookup and returns a statement to its caller. The caller owns the returned statement. The test checks that both `Alex` and `Taylor` reach JDBC through a single `setString` call, with the SQL template held constant. It uses Mockito to observe the JDBC calls, so Maven can run it without a database.
 
-Put these classes in the same package, with the test under `src/test/java`. The example uses JDK 21, JUnit Jupiter 5.12.2 and Mockito Core 5.18.0. With Maven, include `junit-jupiter` and `mockito-core` as test dependencies and use a JUnit Platform-aware version of Maven Surefire, such as 3.5.3.
+Put `CustomerLookup.java` under `src/main/java` and `CustomerLookupTest.java` under `src/test/java`, using the same package for both. Build with JDK 21. In `pom.xml`, use `maven-compiler-plugin` 3.14.1 and set `<maven.compiler.release>21</maven.compiler.release>` under `<properties>`. Add `org.junit.jupiter:junit-jupiter` 5.12.2 and `org.mockito:mockito-core` 5.18.0 with test scope, and use `maven-surefire-plugin` 3.5.3.
 
 ```java
 import java.sql.Connection;
@@ -31,6 +31,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 class CustomerLookupTest {
@@ -46,6 +47,7 @@ class CustomerLookupTest {
             var calls = inOrder(connection, statement);
             calls.verify(connection).prepareStatement(expectedSql);
             calls.verify(statement).setString(1, displayName);
+            verifyNoMoreInteractions(connection, statement);
             assertSame(statement, prepared);
         }
     }
@@ -73,11 +75,13 @@ final class CustomerLookup {
         try {
             statement.setString(1, displayName);
             return statement;
-        } catch (SQLException bindingFailure) {
+        } catch (SQLException | RuntimeException | Error bindingFailure) {
             try {
                 statement.close();
-            } catch (SQLException closeFailure) {
-                bindingFailure.addSuppressed(closeFailure);
+            } catch (SQLException | RuntimeException | Error closeFailure) {
+                if (closeFailure != bindingFailure) {
+                    bindingFailure.addSuppressed(closeFailure);
+                }
             }
             throw bindingFailure;
         }
