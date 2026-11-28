@@ -119,3 +119,7 @@ Docker's [none network driver](https://docs.docker.com/engine/network/drivers/no
 I maintain [Hushavyr](https://github.com/mathias82/Hushavyr), an open-source extension available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mathias82.hushavyr). I use it with Ollama for local code review. After reviewing a finding from `/security`, I can use `/prove` with its finding number to request a test and a patch. I read the proposed assertions and the patch before approving either. Hushavyr runs the verification in Docker. The Java example above is a minimal fixture you can run with a manually written test and patch to see what the check measures.
 
 Hushavyr's [public Java benchmark notes](https://github.com/mathias82/Hushavyr/blob/main/docs/owasp-benchmark.md) report scanner behavior on OWASP's test suite. That's a measure of detection across a corpus. The two JUnit runs here provide evidence about one contract in one patch. When I review an AI-generated change, I want the reviewer to be able to identify that contract, inspect both outcomes and explain what the assertions cover.
+
+## About the author
+
+I also contribute to [Quarkus Multitenancy](https://docs.quarkiverse.io/quarkus-multitenancy/dev/) and write about Java and Kafka. My Confluent Developer article [Catching Schema Drift at Service Startup](https://developer.confluent.io/blog/schema-registry-startup-validation/) covers Schema Registry validation.
