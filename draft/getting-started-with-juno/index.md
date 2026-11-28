@@ -228,7 +228,7 @@ Use `-Djuno.board=<board-id>` when the program supports more than one board. The
 
 The default project targets the Arduino UNO R4 WiFi. After `juno:flash` finishes, the board resets and its built-in LED should blink repeatedly: on for 500 milliseconds, then off for 500 milliseconds.
 
-![Arduino UNO R4 WiFi board](arduino-uno-r4-wifi.png)
+![Arduino UNO R4 WiFi board](arduino-uno-r4-wifi-led.jpg)
 
 **Note:** The `Blink` example intentionally produces no serial output, so a quiet serial monitor is expected. If the LED does not blink, check the selected `juno.board`, the USB serial `juno.port`, and that the flash command completed without errors.
 
