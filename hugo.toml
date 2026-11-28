@@ -833,6 +833,16 @@ enableGitInfo = true
   parent = "footer-social"
   url = "https://www.linkedin.com/company/foojayio/"
   weight = 43
+  [menu.footer.params]
+    rel = "me"
+
+[[menu.footer]]
+  name = "Reddit"
+  parent = "footer-social"
+  url = "https://www.reddit.com/r/foojay/"
+  weight = 44
+  [menu.footer.params]
+    rel = "me"
 
 [[menu.footer]]
   name = "Slack"
